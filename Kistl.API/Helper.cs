@@ -215,7 +215,7 @@ namespace Kistl.API
         {
             PropertyInfo pi = obj.GetType().GetProperty(propName);
             if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-            
+
             Type collectionType = obj.GetPropertyType(propName);
             Type collectionItemType = collectionType.GetGenericArguments()[0];
             object collection = pi.GetValue(obj, null);
@@ -229,7 +229,7 @@ namespace Kistl.API
                 if (result) return;
             }
 
-            MethodInfo add = collectionType.FindMethod("Add", new Type[] { collectionItemType } );
+            MethodInfo add = collectionType.FindMethod("Add", new Type[] { collectionItemType });
             if (add == null) throw new ArgumentException("Cound not find \"Add\" method of the given Collection");
             add.Invoke(collection, new object[] { val });
         }
@@ -238,16 +238,16 @@ namespace Kistl.API
         {
             PropertyInfo pi = obj.GetType().GetProperty(propName);
             if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-            
+
             Type collectionType = obj.GetPropertyType(propName);
             Type collectionItemType = collectionType.GetGenericArguments()[0];
             object collection = pi.GetValue(obj, null);
             if (collection == null) throw new ArgumentException("Collection cannot be null");
 
-            MethodInfo add = collectionType.FindMethod("Remove", new Type[] { collectionItemType } );
+            MethodInfo add = collectionType.FindMethod("Remove", new Type[] { collectionItemType });
             if (add == null) throw new ArgumentException("Cound not find \"Remove\" method of the given Collection");
             add.Invoke(collection, new object[] { val });
-        }        
+        }
 
         /// <summary>
         /// returns the Type of the named property's values
@@ -346,7 +346,8 @@ namespace Kistl.API
             {
                 if (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
                 {
-                    type = Type.GetType(type.FullName.Substring(0, type.FullName.Length - Helper.ImplementationSuffix.Length) + ", " + ApplicationContext.Current.InterfaceAssembly, true);
+                    var parts = type.FullName.Split(new string[] { Helper.ImplementationSuffix }, StringSplitOptions.RemoveEmptyEntries);
+                    type = Type.GetType(parts[0] + ", " + ApplicationContext.Current.InterfaceAssembly, true);
                 }
             }
             return type;

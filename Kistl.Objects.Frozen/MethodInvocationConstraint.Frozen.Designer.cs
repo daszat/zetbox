@@ -86,8 +86,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<MethodInvocationConstraint> OnPostSave_MethodInvocationConstraint;
 
 
-        internal MethodInvocationConstraint__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal MethodInvocationConstraint__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -95,7 +95,7 @@ namespace Kistl.App.Base
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[193] = 
-			DataStore[193] = new MethodInvocationConstraint__Implementation__Frozen(null, 193);
+			DataStore[193] = new MethodInvocationConstraint__Implementation__Frozen(193);
 
 		}
 

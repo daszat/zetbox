@@ -103,8 +103,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<DateTimeProperty> OnPostSave_DateTimeProperty;
 
 
-        internal DateTimeProperty__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal DateTimeProperty__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -114,27 +114,27 @@ namespace Kistl.App.Base
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[16] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[16] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[16] = 
-			DataStore[16] = new DateTimeProperty__Implementation__Frozen(null, 16);
+			DataStore[16] = new DateTimeProperty__Implementation__Frozen(16);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[17] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[17] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[17] = 
-			DataStore[17] = new DateTimeProperty__Implementation__Frozen(null, 17);
+			DataStore[17] = new DateTimeProperty__Implementation__Frozen(17);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[38] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[38] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[38] = 
-			DataStore[38] = new DateTimeProperty__Implementation__Frozen(null, 38);
+			DataStore[38] = new DateTimeProperty__Implementation__Frozen(38);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[56] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[56] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[56] = 
-			DataStore[56] = new DateTimeProperty__Implementation__Frozen(null, 56);
+			DataStore[56] = new DateTimeProperty__Implementation__Frozen(56);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[133] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[133] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[133] = 
-			DataStore[133] = new DateTimeProperty__Implementation__Frozen(null, 133);
+			DataStore[133] = new DateTimeProperty__Implementation__Frozen(133);
 
 		}
 

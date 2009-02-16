@@ -149,8 +149,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<BackReferenceProperty> OnPostSave_BackReferenceProperty;
 
 
-        internal BackReferenceProperty__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal BackReferenceProperty__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 

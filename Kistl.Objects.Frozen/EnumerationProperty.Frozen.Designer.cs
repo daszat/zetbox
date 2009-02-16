@@ -126,8 +126,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<EnumerationProperty> OnPostSave_EnumerationProperty;
 
 
-        internal EnumerationProperty__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal EnumerationProperty__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -137,47 +137,47 @@ namespace Kistl.App.Base
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[110] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[110] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[110] = 
-			DataStore[110] = new EnumerationProperty__Implementation__Frozen(null, 110);
+			DataStore[110] = new EnumerationProperty__Implementation__Frozen(110);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[111] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[111] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[111] = 
-			DataStore[111] = new EnumerationProperty__Implementation__Frozen(null, 111);
+			DataStore[111] = new EnumerationProperty__Implementation__Frozen(111);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[113] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[113] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[113] = 
-			DataStore[113] = new EnumerationProperty__Implementation__Frozen(null, 113);
+			DataStore[113] = new EnumerationProperty__Implementation__Frozen(113);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[117] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[117] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[117] = 
-			DataStore[117] = new EnumerationProperty__Implementation__Frozen(null, 117);
+			DataStore[117] = new EnumerationProperty__Implementation__Frozen(117);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[118] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[118] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[118] = 
-			DataStore[118] = new EnumerationProperty__Implementation__Frozen(null, 118);
+			DataStore[118] = new EnumerationProperty__Implementation__Frozen(118);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[137] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[137] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[137] = 
-			DataStore[137] = new EnumerationProperty__Implementation__Frozen(null, 137);
+			DataStore[137] = new EnumerationProperty__Implementation__Frozen(137);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[150] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[150] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[150] = 
-			DataStore[150] = new EnumerationProperty__Implementation__Frozen(null, 150);
+			DataStore[150] = new EnumerationProperty__Implementation__Frozen(150);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[183] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[183] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[183] = 
-			DataStore[183] = new EnumerationProperty__Implementation__Frozen(null, 183);
+			DataStore[183] = new EnumerationProperty__Implementation__Frozen(183);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[210] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[210] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[210] = 
-			DataStore[210] = new EnumerationProperty__Implementation__Frozen(null, 210);
+			DataStore[210] = new EnumerationProperty__Implementation__Frozen(210);
 
 		}
 

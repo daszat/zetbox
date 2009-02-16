@@ -86,8 +86,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<BoolParameter> OnPostSave_BoolParameter;
 
 
-        internal BoolParameter__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal BoolParameter__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -95,13 +95,13 @@ namespace Kistl.App.Base
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[7] = 
-			DataStore[7] = new BoolParameter__Implementation__Frozen(null, 7);
+			DataStore[7] = new BoolParameter__Implementation__Frozen(7);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[29] = 
-			DataStore[29] = new BoolParameter__Implementation__Frozen(null, 29);
+			DataStore[29] = new BoolParameter__Implementation__Frozen(29);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[38] = 
-			DataStore[38] = new BoolParameter__Implementation__Frozen(null, 38);
+			DataStore[38] = new BoolParameter__Implementation__Frozen(38);
 
 		}
 

@@ -132,8 +132,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<CLRObjectParameter> OnPostSave_CLRObjectParameter;
 
 
-        internal CLRObjectParameter__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal CLRObjectParameter__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -141,43 +141,43 @@ namespace Kistl.App.Base
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[11] = 
-			DataStore[11] = new CLRObjectParameter__Implementation__Frozen(null, 11);
+			DataStore[11] = new CLRObjectParameter__Implementation__Frozen(11);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[16] = 
-			DataStore[16] = new CLRObjectParameter__Implementation__Frozen(null, 16);
+			DataStore[16] = new CLRObjectParameter__Implementation__Frozen(16);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[18] = 
-			DataStore[18] = new CLRObjectParameter__Implementation__Frozen(null, 18);
+			DataStore[18] = new CLRObjectParameter__Implementation__Frozen(18);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[19] = 
-			DataStore[19] = new CLRObjectParameter__Implementation__Frozen(null, 19);
+			DataStore[19] = new CLRObjectParameter__Implementation__Frozen(19);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[20] = 
-			DataStore[20] = new CLRObjectParameter__Implementation__Frozen(null, 20);
+			DataStore[20] = new CLRObjectParameter__Implementation__Frozen(20);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[21] = 
-			DataStore[21] = new CLRObjectParameter__Implementation__Frozen(null, 21);
+			DataStore[21] = new CLRObjectParameter__Implementation__Frozen(21);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[24] = 
-			DataStore[24] = new CLRObjectParameter__Implementation__Frozen(null, 24);
+			DataStore[24] = new CLRObjectParameter__Implementation__Frozen(24);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[25] = 
-			DataStore[25] = new CLRObjectParameter__Implementation__Frozen(null, 25);
+			DataStore[25] = new CLRObjectParameter__Implementation__Frozen(25);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[28] = 
-			DataStore[28] = new CLRObjectParameter__Implementation__Frozen(null, 28);
+			DataStore[28] = new CLRObjectParameter__Implementation__Frozen(28);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[31] = 
-			DataStore[31] = new CLRObjectParameter__Implementation__Frozen(null, 31);
+			DataStore[31] = new CLRObjectParameter__Implementation__Frozen(31);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[34] = 
-			DataStore[34] = new CLRObjectParameter__Implementation__Frozen(null, 34);
+			DataStore[34] = new CLRObjectParameter__Implementation__Frozen(34);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[35] = 
-			DataStore[35] = new CLRObjectParameter__Implementation__Frozen(null, 35);
+			DataStore[35] = new CLRObjectParameter__Implementation__Frozen(35);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[37] = 
-			DataStore[37] = new CLRObjectParameter__Implementation__Frozen(null, 37);
+			DataStore[37] = new CLRObjectParameter__Implementation__Frozen(37);
 
 		}
 

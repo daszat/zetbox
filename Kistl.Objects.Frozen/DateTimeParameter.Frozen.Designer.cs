@@ -86,8 +86,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<DateTimeParameter> OnPostSave_DateTimeParameter;
 
 
-        internal DateTimeParameter__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal DateTimeParameter__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -95,16 +95,16 @@ namespace Kistl.App.Base
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[8] = 
-			DataStore[8] = new DateTimeParameter__Implementation__Frozen(null, 8);
+			DataStore[8] = new DateTimeParameter__Implementation__Frozen(8);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[9] = 
-			DataStore[9] = new DateTimeParameter__Implementation__Frozen(null, 9);
+			DataStore[9] = new DateTimeParameter__Implementation__Frozen(9);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[12] = 
-			DataStore[12] = new DateTimeParameter__Implementation__Frozen(null, 12);
+			DataStore[12] = new DateTimeParameter__Implementation__Frozen(12);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[13] = 
-			DataStore[13] = new DateTimeParameter__Implementation__Frozen(null, 13);
+			DataStore[13] = new DateTimeParameter__Implementation__Frozen(13);
 
 		}
 

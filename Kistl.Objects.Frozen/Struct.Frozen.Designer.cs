@@ -86,8 +86,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Struct> OnPostSave_Struct;
 
 
-        internal Struct__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal Struct__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -95,7 +95,7 @@ namespace Kistl.App.Base
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63] = 
-			DataStore[63] = new Struct__Implementation__Frozen(null, 63);
+			DataStore[63] = new Struct__Implementation__Frozen(63);
 
 		}
 

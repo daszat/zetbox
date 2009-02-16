@@ -139,225 +139,225 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<TypeRef> OnPostSave_TypeRef;
 
 
-        internal TypeRef__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal TypeRef__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
 		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(106);
 		internal static void CreateInstances()
 		{
-			DataStore[1] = new TypeRef__Implementation__Frozen(null, 1);
+			DataStore[1] = new TypeRef__Implementation__Frozen(1);
 
-			DataStore[2] = new TypeRef__Implementation__Frozen(null, 2);
+			DataStore[2] = new TypeRef__Implementation__Frozen(2);
 
-			DataStore[3] = new TypeRef__Implementation__Frozen(null, 3);
+			DataStore[3] = new TypeRef__Implementation__Frozen(3);
 
-			DataStore[4] = new TypeRef__Implementation__Frozen(null, 4);
+			DataStore[4] = new TypeRef__Implementation__Frozen(4);
 
-			DataStore[5] = new TypeRef__Implementation__Frozen(null, 5);
+			DataStore[5] = new TypeRef__Implementation__Frozen(5);
 
-			DataStore[6] = new TypeRef__Implementation__Frozen(null, 6);
+			DataStore[6] = new TypeRef__Implementation__Frozen(6);
 
-			DataStore[7] = new TypeRef__Implementation__Frozen(null, 7);
+			DataStore[7] = new TypeRef__Implementation__Frozen(7);
 
-			DataStore[8] = new TypeRef__Implementation__Frozen(null, 8);
+			DataStore[8] = new TypeRef__Implementation__Frozen(8);
 
-			DataStore[9] = new TypeRef__Implementation__Frozen(null, 9);
+			DataStore[9] = new TypeRef__Implementation__Frozen(9);
 
-			DataStore[10] = new TypeRef__Implementation__Frozen(null, 10);
+			DataStore[10] = new TypeRef__Implementation__Frozen(10);
 
-			DataStore[11] = new TypeRef__Implementation__Frozen(null, 11);
+			DataStore[11] = new TypeRef__Implementation__Frozen(11);
 
-			DataStore[12] = new TypeRef__Implementation__Frozen(null, 12);
+			DataStore[12] = new TypeRef__Implementation__Frozen(12);
 
-			DataStore[13] = new TypeRef__Implementation__Frozen(null, 13);
+			DataStore[13] = new TypeRef__Implementation__Frozen(13);
 
-			DataStore[14] = new TypeRef__Implementation__Frozen(null, 14);
+			DataStore[14] = new TypeRef__Implementation__Frozen(14);
 
-			DataStore[15] = new TypeRef__Implementation__Frozen(null, 15);
+			DataStore[15] = new TypeRef__Implementation__Frozen(15);
 
-			DataStore[16] = new TypeRef__Implementation__Frozen(null, 16);
+			DataStore[16] = new TypeRef__Implementation__Frozen(16);
 
-			DataStore[17] = new TypeRef__Implementation__Frozen(null, 17);
+			DataStore[17] = new TypeRef__Implementation__Frozen(17);
 
-			DataStore[18] = new TypeRef__Implementation__Frozen(null, 18);
+			DataStore[18] = new TypeRef__Implementation__Frozen(18);
 
-			DataStore[19] = new TypeRef__Implementation__Frozen(null, 19);
+			DataStore[19] = new TypeRef__Implementation__Frozen(19);
 
-			DataStore[20] = new TypeRef__Implementation__Frozen(null, 20);
+			DataStore[20] = new TypeRef__Implementation__Frozen(20);
 
-			DataStore[21] = new TypeRef__Implementation__Frozen(null, 21);
+			DataStore[21] = new TypeRef__Implementation__Frozen(21);
 
-			DataStore[22] = new TypeRef__Implementation__Frozen(null, 22);
+			DataStore[22] = new TypeRef__Implementation__Frozen(22);
 
-			DataStore[23] = new TypeRef__Implementation__Frozen(null, 23);
+			DataStore[23] = new TypeRef__Implementation__Frozen(23);
 
-			DataStore[24] = new TypeRef__Implementation__Frozen(null, 24);
+			DataStore[24] = new TypeRef__Implementation__Frozen(24);
 
-			DataStore[25] = new TypeRef__Implementation__Frozen(null, 25);
+			DataStore[25] = new TypeRef__Implementation__Frozen(25);
 
-			DataStore[26] = new TypeRef__Implementation__Frozen(null, 26);
+			DataStore[26] = new TypeRef__Implementation__Frozen(26);
 
-			DataStore[27] = new TypeRef__Implementation__Frozen(null, 27);
+			DataStore[27] = new TypeRef__Implementation__Frozen(27);
 
-			DataStore[28] = new TypeRef__Implementation__Frozen(null, 28);
+			DataStore[28] = new TypeRef__Implementation__Frozen(28);
 
-			DataStore[29] = new TypeRef__Implementation__Frozen(null, 29);
+			DataStore[29] = new TypeRef__Implementation__Frozen(29);
 
-			DataStore[30] = new TypeRef__Implementation__Frozen(null, 30);
+			DataStore[30] = new TypeRef__Implementation__Frozen(30);
 
-			DataStore[31] = new TypeRef__Implementation__Frozen(null, 31);
+			DataStore[31] = new TypeRef__Implementation__Frozen(31);
 
-			DataStore[32] = new TypeRef__Implementation__Frozen(null, 32);
+			DataStore[32] = new TypeRef__Implementation__Frozen(32);
 
-			DataStore[33] = new TypeRef__Implementation__Frozen(null, 33);
+			DataStore[33] = new TypeRef__Implementation__Frozen(33);
 
-			DataStore[34] = new TypeRef__Implementation__Frozen(null, 34);
+			DataStore[34] = new TypeRef__Implementation__Frozen(34);
 
-			DataStore[35] = new TypeRef__Implementation__Frozen(null, 35);
+			DataStore[35] = new TypeRef__Implementation__Frozen(35);
 
-			DataStore[36] = new TypeRef__Implementation__Frozen(null, 36);
+			DataStore[36] = new TypeRef__Implementation__Frozen(36);
 
-			DataStore[37] = new TypeRef__Implementation__Frozen(null, 37);
+			DataStore[37] = new TypeRef__Implementation__Frozen(37);
 
-			DataStore[38] = new TypeRef__Implementation__Frozen(null, 38);
+			DataStore[38] = new TypeRef__Implementation__Frozen(38);
 
-			DataStore[39] = new TypeRef__Implementation__Frozen(null, 39);
+			DataStore[39] = new TypeRef__Implementation__Frozen(39);
 
-			DataStore[40] = new TypeRef__Implementation__Frozen(null, 40);
+			DataStore[40] = new TypeRef__Implementation__Frozen(40);
 
-			DataStore[41] = new TypeRef__Implementation__Frozen(null, 41);
+			DataStore[41] = new TypeRef__Implementation__Frozen(41);
 
-			DataStore[42] = new TypeRef__Implementation__Frozen(null, 42);
+			DataStore[42] = new TypeRef__Implementation__Frozen(42);
 
-			DataStore[43] = new TypeRef__Implementation__Frozen(null, 43);
+			DataStore[43] = new TypeRef__Implementation__Frozen(43);
 
-			DataStore[44] = new TypeRef__Implementation__Frozen(null, 44);
+			DataStore[44] = new TypeRef__Implementation__Frozen(44);
 
-			DataStore[45] = new TypeRef__Implementation__Frozen(null, 45);
+			DataStore[45] = new TypeRef__Implementation__Frozen(45);
 
-			DataStore[46] = new TypeRef__Implementation__Frozen(null, 46);
+			DataStore[46] = new TypeRef__Implementation__Frozen(46);
 
-			DataStore[47] = new TypeRef__Implementation__Frozen(null, 47);
+			DataStore[47] = new TypeRef__Implementation__Frozen(47);
 
-			DataStore[48] = new TypeRef__Implementation__Frozen(null, 48);
+			DataStore[48] = new TypeRef__Implementation__Frozen(48);
 
-			DataStore[49] = new TypeRef__Implementation__Frozen(null, 49);
+			DataStore[49] = new TypeRef__Implementation__Frozen(49);
 
-			DataStore[50] = new TypeRef__Implementation__Frozen(null, 50);
+			DataStore[50] = new TypeRef__Implementation__Frozen(50);
 
-			DataStore[51] = new TypeRef__Implementation__Frozen(null, 51);
+			DataStore[51] = new TypeRef__Implementation__Frozen(51);
 
-			DataStore[52] = new TypeRef__Implementation__Frozen(null, 52);
+			DataStore[52] = new TypeRef__Implementation__Frozen(52);
 
-			DataStore[53] = new TypeRef__Implementation__Frozen(null, 53);
+			DataStore[53] = new TypeRef__Implementation__Frozen(53);
 
-			DataStore[54] = new TypeRef__Implementation__Frozen(null, 54);
+			DataStore[54] = new TypeRef__Implementation__Frozen(54);
 
-			DataStore[55] = new TypeRef__Implementation__Frozen(null, 55);
+			DataStore[55] = new TypeRef__Implementation__Frozen(55);
 
-			DataStore[56] = new TypeRef__Implementation__Frozen(null, 56);
+			DataStore[56] = new TypeRef__Implementation__Frozen(56);
 
-			DataStore[57] = new TypeRef__Implementation__Frozen(null, 57);
+			DataStore[57] = new TypeRef__Implementation__Frozen(57);
 
-			DataStore[58] = new TypeRef__Implementation__Frozen(null, 58);
+			DataStore[58] = new TypeRef__Implementation__Frozen(58);
 
-			DataStore[59] = new TypeRef__Implementation__Frozen(null, 59);
+			DataStore[59] = new TypeRef__Implementation__Frozen(59);
 
-			DataStore[60] = new TypeRef__Implementation__Frozen(null, 60);
+			DataStore[60] = new TypeRef__Implementation__Frozen(60);
 
-			DataStore[61] = new TypeRef__Implementation__Frozen(null, 61);
+			DataStore[61] = new TypeRef__Implementation__Frozen(61);
 
-			DataStore[62] = new TypeRef__Implementation__Frozen(null, 62);
+			DataStore[62] = new TypeRef__Implementation__Frozen(62);
 
-			DataStore[63] = new TypeRef__Implementation__Frozen(null, 63);
+			DataStore[63] = new TypeRef__Implementation__Frozen(63);
 
-			DataStore[64] = new TypeRef__Implementation__Frozen(null, 64);
+			DataStore[64] = new TypeRef__Implementation__Frozen(64);
 
-			DataStore[65] = new TypeRef__Implementation__Frozen(null, 65);
+			DataStore[65] = new TypeRef__Implementation__Frozen(65);
 
-			DataStore[66] = new TypeRef__Implementation__Frozen(null, 66);
+			DataStore[66] = new TypeRef__Implementation__Frozen(66);
 
-			DataStore[67] = new TypeRef__Implementation__Frozen(null, 67);
+			DataStore[67] = new TypeRef__Implementation__Frozen(67);
 
-			DataStore[68] = new TypeRef__Implementation__Frozen(null, 68);
+			DataStore[68] = new TypeRef__Implementation__Frozen(68);
 
-			DataStore[69] = new TypeRef__Implementation__Frozen(null, 69);
+			DataStore[69] = new TypeRef__Implementation__Frozen(69);
 
-			DataStore[70] = new TypeRef__Implementation__Frozen(null, 70);
+			DataStore[70] = new TypeRef__Implementation__Frozen(70);
 
-			DataStore[71] = new TypeRef__Implementation__Frozen(null, 71);
+			DataStore[71] = new TypeRef__Implementation__Frozen(71);
 
-			DataStore[72] = new TypeRef__Implementation__Frozen(null, 72);
+			DataStore[72] = new TypeRef__Implementation__Frozen(72);
 
-			DataStore[73] = new TypeRef__Implementation__Frozen(null, 73);
+			DataStore[73] = new TypeRef__Implementation__Frozen(73);
 
-			DataStore[74] = new TypeRef__Implementation__Frozen(null, 74);
+			DataStore[74] = new TypeRef__Implementation__Frozen(74);
 
-			DataStore[75] = new TypeRef__Implementation__Frozen(null, 75);
+			DataStore[75] = new TypeRef__Implementation__Frozen(75);
 
-			DataStore[76] = new TypeRef__Implementation__Frozen(null, 76);
+			DataStore[76] = new TypeRef__Implementation__Frozen(76);
 
-			DataStore[77] = new TypeRef__Implementation__Frozen(null, 77);
+			DataStore[77] = new TypeRef__Implementation__Frozen(77);
 
-			DataStore[78] = new TypeRef__Implementation__Frozen(null, 78);
+			DataStore[78] = new TypeRef__Implementation__Frozen(78);
 
-			DataStore[79] = new TypeRef__Implementation__Frozen(null, 79);
+			DataStore[79] = new TypeRef__Implementation__Frozen(79);
 
-			DataStore[80] = new TypeRef__Implementation__Frozen(null, 80);
+			DataStore[80] = new TypeRef__Implementation__Frozen(80);
 
-			DataStore[81] = new TypeRef__Implementation__Frozen(null, 81);
+			DataStore[81] = new TypeRef__Implementation__Frozen(81);
 
-			DataStore[82] = new TypeRef__Implementation__Frozen(null, 82);
+			DataStore[82] = new TypeRef__Implementation__Frozen(82);
 
-			DataStore[83] = new TypeRef__Implementation__Frozen(null, 83);
+			DataStore[83] = new TypeRef__Implementation__Frozen(83);
 
-			DataStore[84] = new TypeRef__Implementation__Frozen(null, 84);
+			DataStore[84] = new TypeRef__Implementation__Frozen(84);
 
-			DataStore[85] = new TypeRef__Implementation__Frozen(null, 85);
+			DataStore[85] = new TypeRef__Implementation__Frozen(85);
 
-			DataStore[86] = new TypeRef__Implementation__Frozen(null, 86);
+			DataStore[86] = new TypeRef__Implementation__Frozen(86);
 
-			DataStore[87] = new TypeRef__Implementation__Frozen(null, 87);
+			DataStore[87] = new TypeRef__Implementation__Frozen(87);
 
-			DataStore[88] = new TypeRef__Implementation__Frozen(null, 88);
+			DataStore[88] = new TypeRef__Implementation__Frozen(88);
 
-			DataStore[89] = new TypeRef__Implementation__Frozen(null, 89);
+			DataStore[89] = new TypeRef__Implementation__Frozen(89);
 
-			DataStore[90] = new TypeRef__Implementation__Frozen(null, 90);
+			DataStore[90] = new TypeRef__Implementation__Frozen(90);
 
-			DataStore[91] = new TypeRef__Implementation__Frozen(null, 91);
+			DataStore[91] = new TypeRef__Implementation__Frozen(91);
 
-			DataStore[92] = new TypeRef__Implementation__Frozen(null, 92);
+			DataStore[92] = new TypeRef__Implementation__Frozen(92);
 
-			DataStore[93] = new TypeRef__Implementation__Frozen(null, 93);
+			DataStore[93] = new TypeRef__Implementation__Frozen(93);
 
-			DataStore[94] = new TypeRef__Implementation__Frozen(null, 94);
+			DataStore[94] = new TypeRef__Implementation__Frozen(94);
 
-			DataStore[95] = new TypeRef__Implementation__Frozen(null, 95);
+			DataStore[95] = new TypeRef__Implementation__Frozen(95);
 
-			DataStore[96] = new TypeRef__Implementation__Frozen(null, 96);
+			DataStore[96] = new TypeRef__Implementation__Frozen(96);
 
-			DataStore[97] = new TypeRef__Implementation__Frozen(null, 97);
+			DataStore[97] = new TypeRef__Implementation__Frozen(97);
 
-			DataStore[98] = new TypeRef__Implementation__Frozen(null, 98);
+			DataStore[98] = new TypeRef__Implementation__Frozen(98);
 
-			DataStore[99] = new TypeRef__Implementation__Frozen(null, 99);
+			DataStore[99] = new TypeRef__Implementation__Frozen(99);
 
-			DataStore[100] = new TypeRef__Implementation__Frozen(null, 100);
+			DataStore[100] = new TypeRef__Implementation__Frozen(100);
 
-			DataStore[101] = new TypeRef__Implementation__Frozen(null, 101);
+			DataStore[101] = new TypeRef__Implementation__Frozen(101);
 
-			DataStore[102] = new TypeRef__Implementation__Frozen(null, 102);
+			DataStore[102] = new TypeRef__Implementation__Frozen(102);
 
-			DataStore[103] = new TypeRef__Implementation__Frozen(null, 103);
+			DataStore[103] = new TypeRef__Implementation__Frozen(103);
 
-			DataStore[104] = new TypeRef__Implementation__Frozen(null, 104);
+			DataStore[104] = new TypeRef__Implementation__Frozen(104);
 
-			DataStore[105] = new TypeRef__Implementation__Frozen(null, 105);
+			DataStore[105] = new TypeRef__Implementation__Frozen(105);
 
-			DataStore[106] = new TypeRef__Implementation__Frozen(null, 106);
+			DataStore[106] = new TypeRef__Implementation__Frozen(106);
 
 		}
 

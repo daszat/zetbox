@@ -11,9 +11,8 @@ namespace Kistl.DalProvider.Frozen
     public abstract class BaseFrozenObject : IPersistenceObject
     {
 
-        protected BaseFrozenObject(FrozenContext ctx, int id)
+        protected BaseFrozenObject(int id)
         {
-            this.Context = ctx;
             this.ID = id;
             this.IsSealed = false;
         }
@@ -51,7 +50,7 @@ namespace Kistl.DalProvider.Frozen
 
         public void NotifyPropertyChanged(string property) { }
 
-        public IKistlContext Context { get; private set; }
+        public IKistlContext Context { get { return FrozenContext.Single; } }
 
         public void AttachToContext(IKistlContext ctx)
         {
@@ -86,8 +85,8 @@ namespace Kistl.DalProvider.Frozen
     public abstract class BaseFrozenDataObject : BaseFrozenObject, IDataObject
     {
 
-        protected BaseFrozenDataObject(FrozenContext ctx, int id)
-            : base(ctx, id)
+        protected BaseFrozenDataObject(int id)
+            : base(id)
         {
         }
 
@@ -114,8 +113,8 @@ namespace Kistl.DalProvider.Frozen
         : BaseFrozenObject, IStruct
     {
 
-        protected BaseFrozenStruct(FrozenContext ctx, int id)
-            : base(ctx, id)
+        protected BaseFrozenStruct(int id)
+            : base(id)
         {
         }
 

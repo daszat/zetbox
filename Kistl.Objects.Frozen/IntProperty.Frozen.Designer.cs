@@ -103,8 +103,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<IntProperty> OnPostSave_IntProperty;
 
 
-        internal IntProperty__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal IntProperty__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -114,37 +114,37 @@ namespace Kistl.App.Base
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[28] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[28] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[28] = 
-			DataStore[28] = new IntProperty__Implementation__Frozen(null, 28);
+			DataStore[28] = new IntProperty__Implementation__Frozen(28);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[126] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[126] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[126] = 
-			DataStore[126] = new IntProperty__Implementation__Frozen(null, 126);
+			DataStore[126] = new IntProperty__Implementation__Frozen(126);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[135] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[135] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[135] = 
-			DataStore[135] = new IntProperty__Implementation__Frozen(null, 135);
+			DataStore[135] = new IntProperty__Implementation__Frozen(135);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[168] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[168] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[168] = 
-			DataStore[168] = new IntProperty__Implementation__Frozen(null, 168);
+			DataStore[168] = new IntProperty__Implementation__Frozen(168);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[169] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[169] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[169] = 
-			DataStore[169] = new IntProperty__Implementation__Frozen(null, 169);
+			DataStore[169] = new IntProperty__Implementation__Frozen(169);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[172] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[172] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[172] = 
-			DataStore[172] = new IntProperty__Implementation__Frozen(null, 172);
+			DataStore[172] = new IntProperty__Implementation__Frozen(172);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[173] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[173] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[173] = 
-			DataStore[173] = new IntProperty__Implementation__Frozen(null, 173);
+			DataStore[173] = new IntProperty__Implementation__Frozen(173);
 
 		}
 

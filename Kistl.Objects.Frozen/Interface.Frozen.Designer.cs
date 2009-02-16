@@ -86,8 +86,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Interface> OnPostSave_Interface;
 
 
-        internal Interface__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal Interface__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -95,10 +95,10 @@ namespace Kistl.App.Base
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48] = 
-			DataStore[48] = new Interface__Implementation__Frozen(null, 48);
+			DataStore[48] = new Interface__Implementation__Frozen(48);
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52] = 
-			DataStore[52] = new Interface__Implementation__Frozen(null, 52);
+			DataStore[52] = new Interface__Implementation__Frozen(52);
 
 		}
 

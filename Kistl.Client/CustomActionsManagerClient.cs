@@ -42,14 +42,20 @@ namespace Kistl.Client
         {
             if (!initialized) return;
 
+            var key = obj.GetType();
+
             // New Method
-            if (customAction.ContainsKey(obj.GetType()))
+            if (customAction.ContainsKey(key))
             {
-                foreach (InvokeInfo ii in customAction[obj.GetType()])
+                foreach (InvokeInfo ii in customAction[key])
                 {
                     // TODO: Fix Case 316
-                    ii.CLREvent.AddEventHandler(obj, Delegate.CreateDelegate(
-                        ii.CLREvent.EventHandlerType, ii.Instance, ii.CLRMethod));
+                    Delegate newDelegate = Delegate.CreateDelegate(
+                        ii.CLREvent.EventHandlerType,
+                        ii.Instance,
+                        ii.CLRMethod);
+
+                    ii.CLREvent.AddEventHandler(obj, newDelegate);
                 }
             }
         }
@@ -67,84 +73,23 @@ namespace Kistl.Client
                     using (IKistlContext ctx = Kistl.API.FrozenContext.Single)
                     //using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        // Prepare Modules
-                        List<Kistl.App.Base.Module> moduleList = ctx.GetQuery<Kistl.App.Base.Module>().ToList();
 
-                        // Prepare ObjectClasses
-                        List<Kistl.App.Base.ObjectClass> classList = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
-
-                        // Prepare Methods
-                        List<Method> mList = ctx.GetQuery<Method>().ToList();
-
-                        // Prepare Assemblies
-                        List<Kistl.App.Base.Assembly> aList = ctx.GetQuery<Kistl.App.Base.Assembly>().ToList();
+                        // some shortcuts
+                        var modules = ctx.GetQuery<Kistl.App.Base.Module>();
+                        var classes = ctx.GetQuery<ObjectClass>();
+                        var methods = ctx.GetQuery<Method>();
+                        var assemblies = ctx.GetQuery<Kistl.App.Base.Assembly>();
 
                         StringBuilder warnings = new StringBuilder();
 
-                        foreach (ObjectClass baseObjClass in classList)
+                        foreach (ObjectClass baseObjClass in classes)
                         {
                             try
                             {
                                 // baseObjClass.GetDataType(); is not possible here, because this
                                 // Method is currently attaching
-                                Type objType = Type.GetType(baseObjClass.Module.Namespace + "." + baseObjClass.ClassName + Kistl.API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly);
-                                if (objType == null)
-                                {
-                                    warnings.AppendLine(string.Format("DataType '{0}, Kistl.Objects.Client' not found", baseObjClass.Module.Namespace + "." + baseObjClass.ClassName));
-                                    continue;
-                                }
-                                foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie())
-                                {
-                                    foreach (MethodInvocation mi in objClass.MethodInvocations)
-                                    {
-                                        try
-                                        {
-                                            if (!mi.Implementor.Assembly.IsClientAssembly) continue;
-
-                                            // as noted above, no methods are 
-                                            // attached yet, so TypeRef.AsType() 
-                                            // and TypeRef.ToString() would be 
-                                            // nice, but aren't available yet.
-                                            Type t = Type.GetType(mi.Implementor.FullName + ", " + mi.Implementor.Assembly.AssemblyName);
-                                            if (t == null)
-                                            {
-                                                warnings.AppendLine(string.Format("Warning: Type {0}, {1} not found", mi.Implementor.FullName, mi.Implementor.Assembly.AssemblyName));
-                                                continue;
-                                            }
-
-                                            MethodInfo clrMethod = t.GetMethod(mi.MemberName);
-                                            if (clrMethod == null)
-                                            {
-                                                warnings.AppendLine(string.Format("Warning: CLR Method {0} not found", mi.MemberName));
-                                                continue;
-                                            }
-
-                                            EventInfo ei = objType.GetEvent(
-                                                "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
-
-                                            if (ei == null)
-                                            {
-                                                warnings.AppendLine(string.Format("Warning: CLR Event On{0}_{1} not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
-                                                continue;
-                                            }
-
-                                            InvokeInfo ii = new InvokeInfo();
-                                            ii.CLRMethod = clrMethod;
-                                            ii.Instance = Activator.CreateInstance(t);
-                                            ii.CLREvent = ei;
-
-                                            if (!customAction.ContainsKey(objType))
-                                            {
-                                                customAction.Add(objType, new List<InvokeInfo>());
-                                            }
-                                            customAction[objType].Add(ii);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            warnings.AppendLine(ex.Message);
-                                        }
-                                    }
-                                }
+                                CreateInvokeInfos(warnings, baseObjClass, Type.GetType(baseObjClass.Module.Namespace + "." + baseObjClass.ClassName + Kistl.API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly));
+                                CreateInvokeInfos(warnings, baseObjClass, Type.GetType(baseObjClass.Module.Namespace + "." + baseObjClass.ClassName + Kistl.API.Helper.ImplementationSuffix + "Frozen, Kistl.Objects.Frozen"));
                             }
                             catch (Exception ex)
                             {
@@ -175,6 +120,70 @@ namespace Kistl.Client
             foreach (IDataObject obj in FrozenContext.Single.AttachedObjects.OfType<IDataObject>())
             {
                 AttachEvents(obj);
+            }
+        }
+
+        private void CreateInvokeInfos(StringBuilder warnings, ObjectClass baseObjClass, Type objType)
+        {
+            if (objType == null)
+            {
+                warnings.AppendLine(string.Format("DataType '{0}, Kistl.Objects.Client' not found", baseObjClass.Module.Namespace + "." + baseObjClass.ClassName));
+                return;
+            }
+
+            foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie())
+            {
+                foreach (MethodInvocation mi in objClass.MethodInvocations)
+                {
+                    try
+                    {
+                        if (!mi.Implementor.Assembly.IsClientAssembly) continue;
+
+                        // as noted above, no methods are 
+                        // attached yet, so TypeRef.AsType() 
+                        // and TypeRef.ToString() would be 
+                        // nice, but aren't available yet.
+                        Type t = Type.GetType(mi.Implementor.FullName + ", " + mi.Implementor.Assembly.AssemblyName);
+                        if (t == null)
+                        {
+                            warnings.AppendLine(string.Format("Warning: Type {0}, {1} not found", mi.Implementor.FullName, mi.Implementor.Assembly.AssemblyName));
+                            return;
+                        }
+
+                        MethodInfo clrMethod = t.GetMethod(mi.MemberName);
+                        if (clrMethod == null)
+                        {
+                            warnings.AppendLine(string.Format("Warning: CLR Method {0} not found", mi.MemberName));
+                            return;
+                        }
+
+                        EventInfo ei = objType.GetEvent(
+                            "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
+
+                        if (ei == null)
+                        {
+                            warnings.AppendLine(string.Format("Warning: CLR Event On{0}_{1} not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
+                            return;
+                        }
+
+                        InvokeInfo ii = new InvokeInfo()
+                        {
+                            CLRMethod = clrMethod,
+                            Instance = Activator.CreateInstance(t),
+                            CLREvent = ei
+                        };
+
+                        if (!customAction.ContainsKey(objType))
+                        {
+                            customAction.Add(objType, new List<InvokeInfo>());
+                        }
+                        customAction[objType].Add(ii);
+                    }
+                    catch (Exception ex)
+                    {
+                        warnings.AppendLine(ex.Message);
+                    }
+                }
             }
         }
     }

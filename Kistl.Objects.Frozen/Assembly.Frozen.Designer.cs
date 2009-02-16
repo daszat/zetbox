@@ -138,27 +138,27 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Assembly> OnPostSave_Assembly;
 
 
-        internal Assembly__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal Assembly__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
 		internal static Dictionary<int, Assembly__Implementation__Frozen> DataStore = new Dictionary<int, Assembly__Implementation__Frozen>(7);
 		internal static void CreateInstances()
 		{
-			DataStore[1] = new Assembly__Implementation__Frozen(null, 1);
+			DataStore[1] = new Assembly__Implementation__Frozen(1);
 
-			DataStore[2] = new Assembly__Implementation__Frozen(null, 2);
+			DataStore[2] = new Assembly__Implementation__Frozen(2);
 
-			DataStore[3] = new Assembly__Implementation__Frozen(null, 3);
+			DataStore[3] = new Assembly__Implementation__Frozen(3);
 
-			DataStore[4] = new Assembly__Implementation__Frozen(null, 4);
+			DataStore[4] = new Assembly__Implementation__Frozen(4);
 
-			DataStore[13] = new Assembly__Implementation__Frozen(null, 13);
+			DataStore[13] = new Assembly__Implementation__Frozen(13);
 
-			DataStore[14] = new Assembly__Implementation__Frozen(null, 14);
+			DataStore[14] = new Assembly__Implementation__Frozen(14);
 
-			DataStore[15] = new Assembly__Implementation__Frozen(null, 15);
+			DataStore[15] = new Assembly__Implementation__Frozen(15);
 
 		}
 

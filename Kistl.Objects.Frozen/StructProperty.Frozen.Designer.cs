@@ -126,8 +126,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<StructProperty> OnPostSave_StructProperty;
 
 
-        internal StructProperty__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal StructProperty__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -136,11 +136,11 @@ namespace Kistl.App.Base
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[131] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[131] = 
-			DataStore[131] = new StructProperty__Implementation__Frozen(null, 131);
+			DataStore[131] = new StructProperty__Implementation__Frozen(131);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[132] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[132] = 
-			DataStore[132] = new StructProperty__Implementation__Frozen(null, 132);
+			DataStore[132] = new StructProperty__Implementation__Frozen(132);
 
 		}
 

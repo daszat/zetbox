@@ -86,8 +86,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<StringParameter> OnPostSave_StringParameter;
 
 
-        internal StringParameter__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal StringParameter__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -95,28 +95,28 @@ namespace Kistl.App.Base
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[1] = 
-			DataStore[1] = new StringParameter__Implementation__Frozen(null, 1);
+			DataStore[1] = new StringParameter__Implementation__Frozen(1);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[3] = 
-			DataStore[3] = new StringParameter__Implementation__Frozen(null, 3);
+			DataStore[3] = new StringParameter__Implementation__Frozen(3);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[4] = 
-			DataStore[4] = new StringParameter__Implementation__Frozen(null, 4);
+			DataStore[4] = new StringParameter__Implementation__Frozen(4);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[5] = 
-			DataStore[5] = new StringParameter__Implementation__Frozen(null, 5);
+			DataStore[5] = new StringParameter__Implementation__Frozen(5);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[14] = 
-			DataStore[14] = new StringParameter__Implementation__Frozen(null, 14);
+			DataStore[14] = new StringParameter__Implementation__Frozen(14);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[23] = 
-			DataStore[23] = new StringParameter__Implementation__Frozen(null, 23);
+			DataStore[23] = new StringParameter__Implementation__Frozen(23);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[30] = 
-			DataStore[30] = new StringParameter__Implementation__Frozen(null, 30);
+			DataStore[30] = new StringParameter__Implementation__Frozen(30);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[33] = 
-			DataStore[33] = new StringParameter__Implementation__Frozen(null, 33);
+			DataStore[33] = new StringParameter__Implementation__Frozen(33);
 
 		}
 

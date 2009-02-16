@@ -75,39 +75,39 @@ namespace Kistl.App.GUI
         public event ObjectEventHandler<Icon> OnPostSave_Icon;
 
 
-        internal Icon__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal Icon__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
 		internal static Dictionary<int, Icon__Implementation__Frozen> DataStore = new Dictionary<int, Icon__Implementation__Frozen>(13);
 		internal static void CreateInstances()
 		{
-			DataStore[1] = new Icon__Implementation__Frozen(null, 1);
+			DataStore[1] = new Icon__Implementation__Frozen(1);
 
-			DataStore[2] = new Icon__Implementation__Frozen(null, 2);
+			DataStore[2] = new Icon__Implementation__Frozen(2);
 
-			DataStore[3] = new Icon__Implementation__Frozen(null, 3);
+			DataStore[3] = new Icon__Implementation__Frozen(3);
 
-			DataStore[4] = new Icon__Implementation__Frozen(null, 4);
+			DataStore[4] = new Icon__Implementation__Frozen(4);
 
-			DataStore[5] = new Icon__Implementation__Frozen(null, 5);
+			DataStore[5] = new Icon__Implementation__Frozen(5);
 
-			DataStore[6] = new Icon__Implementation__Frozen(null, 6);
+			DataStore[6] = new Icon__Implementation__Frozen(6);
 
-			DataStore[7] = new Icon__Implementation__Frozen(null, 7);
+			DataStore[7] = new Icon__Implementation__Frozen(7);
 
-			DataStore[8] = new Icon__Implementation__Frozen(null, 8);
+			DataStore[8] = new Icon__Implementation__Frozen(8);
 
-			DataStore[9] = new Icon__Implementation__Frozen(null, 9);
+			DataStore[9] = new Icon__Implementation__Frozen(9);
 
-			DataStore[10] = new Icon__Implementation__Frozen(null, 10);
+			DataStore[10] = new Icon__Implementation__Frozen(10);
 
-			DataStore[11] = new Icon__Implementation__Frozen(null, 11);
+			DataStore[11] = new Icon__Implementation__Frozen(11);
 
-			DataStore[12] = new Icon__Implementation__Frozen(null, 12);
+			DataStore[12] = new Icon__Implementation__Frozen(12);
 
-			DataStore[13] = new Icon__Implementation__Frozen(null, 13);
+			DataStore[13] = new Icon__Implementation__Frozen(13);
 
 		}
 

@@ -86,8 +86,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<IntParameter> OnPostSave_IntParameter;
 
 
-        internal IntParameter__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal IntParameter__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -95,7 +95,7 @@ namespace Kistl.App.Base
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[2] = 
-			DataStore[2] = new IntParameter__Implementation__Frozen(null, 2);
+			DataStore[2] = new IntParameter__Implementation__Frozen(2);
 
 		}
 

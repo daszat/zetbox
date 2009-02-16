@@ -172,8 +172,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<ObjectReferenceProperty> OnPostSave_ObjectReferenceProperty;
 
 
-        internal ObjectReferenceProperty__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal ObjectReferenceProperty__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -182,275 +182,275 @@ namespace Kistl.App.Base
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[7] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
-			DataStore[7] = new ObjectReferenceProperty__Implementation__Frozen(null, 7);
+			DataStore[7] = new ObjectReferenceProperty__Implementation__Frozen(7);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[8] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[8] = 
-			DataStore[8] = new ObjectReferenceProperty__Implementation__Frozen(null, 8);
+			DataStore[8] = new ObjectReferenceProperty__Implementation__Frozen(8);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[14] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[14] = 
-			DataStore[14] = new ObjectReferenceProperty__Implementation__Frozen(null, 14);
+			DataStore[14] = new ObjectReferenceProperty__Implementation__Frozen(14);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[19] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[19] = 
-			DataStore[19] = new ObjectReferenceProperty__Implementation__Frozen(null, 19);
+			DataStore[19] = new ObjectReferenceProperty__Implementation__Frozen(19);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[21] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[21] = 
-			DataStore[21] = new ObjectReferenceProperty__Implementation__Frozen(null, 21);
+			DataStore[21] = new ObjectReferenceProperty__Implementation__Frozen(21);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[22] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[22] = 
-			DataStore[22] = new ObjectReferenceProperty__Implementation__Frozen(null, 22);
+			DataStore[22] = new ObjectReferenceProperty__Implementation__Frozen(22);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[25] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[25] = 
-			DataStore[25] = new ObjectReferenceProperty__Implementation__Frozen(null, 25);
+			DataStore[25] = new ObjectReferenceProperty__Implementation__Frozen(25);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[27] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[27] = 
-			DataStore[27] = new ObjectReferenceProperty__Implementation__Frozen(null, 27);
+			DataStore[27] = new ObjectReferenceProperty__Implementation__Frozen(27);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[29] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[29] = 
-			DataStore[29] = new ObjectReferenceProperty__Implementation__Frozen(null, 29);
+			DataStore[29] = new ObjectReferenceProperty__Implementation__Frozen(29);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[31] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[31] = 
-			DataStore[31] = new ObjectReferenceProperty__Implementation__Frozen(null, 31);
+			DataStore[31] = new ObjectReferenceProperty__Implementation__Frozen(31);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[44] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[44] = 
-			DataStore[44] = new ObjectReferenceProperty__Implementation__Frozen(null, 44);
+			DataStore[44] = new ObjectReferenceProperty__Implementation__Frozen(44);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[45] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[45] = 
-			DataStore[45] = new ObjectReferenceProperty__Implementation__Frozen(null, 45);
+			DataStore[45] = new ObjectReferenceProperty__Implementation__Frozen(45);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[46] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[46] = 
-			DataStore[46] = new ObjectReferenceProperty__Implementation__Frozen(null, 46);
+			DataStore[46] = new ObjectReferenceProperty__Implementation__Frozen(46);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[47] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[47] = 
-			DataStore[47] = new ObjectReferenceProperty__Implementation__Frozen(null, 47);
+			DataStore[47] = new ObjectReferenceProperty__Implementation__Frozen(47);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[49] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[49] = 
-			DataStore[49] = new ObjectReferenceProperty__Implementation__Frozen(null, 49);
+			DataStore[49] = new ObjectReferenceProperty__Implementation__Frozen(49);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[51] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[51] = 
-			DataStore[51] = new ObjectReferenceProperty__Implementation__Frozen(null, 51);
+			DataStore[51] = new ObjectReferenceProperty__Implementation__Frozen(51);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[53] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[53] = 
-			DataStore[53] = new ObjectReferenceProperty__Implementation__Frozen(null, 53);
+			DataStore[53] = new ObjectReferenceProperty__Implementation__Frozen(53);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[54] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[54] = 
-			DataStore[54] = new ObjectReferenceProperty__Implementation__Frozen(null, 54);
+			DataStore[54] = new ObjectReferenceProperty__Implementation__Frozen(54);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[55] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[55] = 
-			DataStore[55] = new ObjectReferenceProperty__Implementation__Frozen(null, 55);
+			DataStore[55] = new ObjectReferenceProperty__Implementation__Frozen(55);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[58] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[58] = 
-			DataStore[58] = new ObjectReferenceProperty__Implementation__Frozen(null, 58);
+			DataStore[58] = new ObjectReferenceProperty__Implementation__Frozen(58);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[64] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[64] = 
-			DataStore[64] = new ObjectReferenceProperty__Implementation__Frozen(null, 64);
+			DataStore[64] = new ObjectReferenceProperty__Implementation__Frozen(64);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[66] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[66] = 
-			DataStore[66] = new ObjectReferenceProperty__Implementation__Frozen(null, 66);
+			DataStore[66] = new ObjectReferenceProperty__Implementation__Frozen(66);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[67] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[67] = 
-			DataStore[67] = new ObjectReferenceProperty__Implementation__Frozen(null, 67);
+			DataStore[67] = new ObjectReferenceProperty__Implementation__Frozen(67);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[69] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[69] = 
-			DataStore[69] = new ObjectReferenceProperty__Implementation__Frozen(null, 69);
+			DataStore[69] = new ObjectReferenceProperty__Implementation__Frozen(69);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[70] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[70] = 
-			DataStore[70] = new ObjectReferenceProperty__Implementation__Frozen(null, 70);
+			DataStore[70] = new ObjectReferenceProperty__Implementation__Frozen(70);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[72] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[72] = 
-			DataStore[72] = new ObjectReferenceProperty__Implementation__Frozen(null, 72);
+			DataStore[72] = new ObjectReferenceProperty__Implementation__Frozen(72);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[73] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[73] = 
-			DataStore[73] = new ObjectReferenceProperty__Implementation__Frozen(null, 73);
+			DataStore[73] = new ObjectReferenceProperty__Implementation__Frozen(73);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[74] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[74] = 
-			DataStore[74] = new ObjectReferenceProperty__Implementation__Frozen(null, 74);
+			DataStore[74] = new ObjectReferenceProperty__Implementation__Frozen(74);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[78] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[78] = 
-			DataStore[78] = new ObjectReferenceProperty__Implementation__Frozen(null, 78);
+			DataStore[78] = new ObjectReferenceProperty__Implementation__Frozen(78);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[79] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[79] = 
-			DataStore[79] = new ObjectReferenceProperty__Implementation__Frozen(null, 79);
+			DataStore[79] = new ObjectReferenceProperty__Implementation__Frozen(79);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[80] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[80] = 
-			DataStore[80] = new ObjectReferenceProperty__Implementation__Frozen(null, 80);
+			DataStore[80] = new ObjectReferenceProperty__Implementation__Frozen(80);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[81] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[81] = 
-			DataStore[81] = new ObjectReferenceProperty__Implementation__Frozen(null, 81);
+			DataStore[81] = new ObjectReferenceProperty__Implementation__Frozen(81);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[82] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[82] = 
-			DataStore[82] = new ObjectReferenceProperty__Implementation__Frozen(null, 82);
+			DataStore[82] = new ObjectReferenceProperty__Implementation__Frozen(82);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[86] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[86] = 
-			DataStore[86] = new ObjectReferenceProperty__Implementation__Frozen(null, 86);
+			DataStore[86] = new ObjectReferenceProperty__Implementation__Frozen(86);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[88] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[88] = 
-			DataStore[88] = new ObjectReferenceProperty__Implementation__Frozen(null, 88);
+			DataStore[88] = new ObjectReferenceProperty__Implementation__Frozen(88);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[92] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[92] = 
-			DataStore[92] = new ObjectReferenceProperty__Implementation__Frozen(null, 92);
+			DataStore[92] = new ObjectReferenceProperty__Implementation__Frozen(92);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[96] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[96] = 
-			DataStore[96] = new ObjectReferenceProperty__Implementation__Frozen(null, 96);
+			DataStore[96] = new ObjectReferenceProperty__Implementation__Frozen(96);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[97] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[97] = 
-			DataStore[97] = new ObjectReferenceProperty__Implementation__Frozen(null, 97);
+			DataStore[97] = new ObjectReferenceProperty__Implementation__Frozen(97);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[98] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[98] = 
-			DataStore[98] = new ObjectReferenceProperty__Implementation__Frozen(null, 98);
+			DataStore[98] = new ObjectReferenceProperty__Implementation__Frozen(98);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[100] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[100] = 
-			DataStore[100] = new ObjectReferenceProperty__Implementation__Frozen(null, 100);
+			DataStore[100] = new ObjectReferenceProperty__Implementation__Frozen(100);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[103] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[103] = 
-			DataStore[103] = new ObjectReferenceProperty__Implementation__Frozen(null, 103);
+			DataStore[103] = new ObjectReferenceProperty__Implementation__Frozen(103);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[104] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[104] = 
-			DataStore[104] = new ObjectReferenceProperty__Implementation__Frozen(null, 104);
+			DataStore[104] = new ObjectReferenceProperty__Implementation__Frozen(104);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[105] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[105] = 
-			DataStore[105] = new ObjectReferenceProperty__Implementation__Frozen(null, 105);
+			DataStore[105] = new ObjectReferenceProperty__Implementation__Frozen(105);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[108] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[108] = 
-			DataStore[108] = new ObjectReferenceProperty__Implementation__Frozen(null, 108);
+			DataStore[108] = new ObjectReferenceProperty__Implementation__Frozen(108);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[112] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[112] = 
-			DataStore[112] = new ObjectReferenceProperty__Implementation__Frozen(null, 112);
+			DataStore[112] = new ObjectReferenceProperty__Implementation__Frozen(112);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[114] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[114] = 
-			DataStore[114] = new ObjectReferenceProperty__Implementation__Frozen(null, 114);
+			DataStore[114] = new ObjectReferenceProperty__Implementation__Frozen(114);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[129] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[129] = 
-			DataStore[129] = new ObjectReferenceProperty__Implementation__Frozen(null, 129);
+			DataStore[129] = new ObjectReferenceProperty__Implementation__Frozen(129);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[138] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[138] = 
-			DataStore[138] = new ObjectReferenceProperty__Implementation__Frozen(null, 138);
+			DataStore[138] = new ObjectReferenceProperty__Implementation__Frozen(138);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[147] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[147] = 
-			DataStore[147] = new ObjectReferenceProperty__Implementation__Frozen(null, 147);
+			DataStore[147] = new ObjectReferenceProperty__Implementation__Frozen(147);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[151] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[151] = 
-			DataStore[151] = new ObjectReferenceProperty__Implementation__Frozen(null, 151);
+			DataStore[151] = new ObjectReferenceProperty__Implementation__Frozen(151);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[152] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[152] = 
-			DataStore[152] = new ObjectReferenceProperty__Implementation__Frozen(null, 152);
+			DataStore[152] = new ObjectReferenceProperty__Implementation__Frozen(152);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[153] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[153] = 
-			DataStore[153] = new ObjectReferenceProperty__Implementation__Frozen(null, 153);
+			DataStore[153] = new ObjectReferenceProperty__Implementation__Frozen(153);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[155] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[155] = 
-			DataStore[155] = new ObjectReferenceProperty__Implementation__Frozen(null, 155);
+			DataStore[155] = new ObjectReferenceProperty__Implementation__Frozen(155);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[163] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[163] = 
-			DataStore[163] = new ObjectReferenceProperty__Implementation__Frozen(null, 163);
+			DataStore[163] = new ObjectReferenceProperty__Implementation__Frozen(163);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[164] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[164] = 
-			DataStore[164] = new ObjectReferenceProperty__Implementation__Frozen(null, 164);
+			DataStore[164] = new ObjectReferenceProperty__Implementation__Frozen(164);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[165] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[165] = 
-			DataStore[165] = new ObjectReferenceProperty__Implementation__Frozen(null, 165);
+			DataStore[165] = new ObjectReferenceProperty__Implementation__Frozen(165);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[170] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[170] = 
-			DataStore[170] = new ObjectReferenceProperty__Implementation__Frozen(null, 170);
+			DataStore[170] = new ObjectReferenceProperty__Implementation__Frozen(170);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[171] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[171] = 
-			DataStore[171] = new ObjectReferenceProperty__Implementation__Frozen(null, 171);
+			DataStore[171] = new ObjectReferenceProperty__Implementation__Frozen(171);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[181] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[181] = 
-			DataStore[181] = new ObjectReferenceProperty__Implementation__Frozen(null, 181);
+			DataStore[181] = new ObjectReferenceProperty__Implementation__Frozen(181);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[182] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[182] = 
-			DataStore[182] = new ObjectReferenceProperty__Implementation__Frozen(null, 182);
+			DataStore[182] = new ObjectReferenceProperty__Implementation__Frozen(182);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[185] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[185] = 
-			DataStore[185] = new ObjectReferenceProperty__Implementation__Frozen(null, 185);
+			DataStore[185] = new ObjectReferenceProperty__Implementation__Frozen(185);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[186] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[186] = 
-			DataStore[186] = new ObjectReferenceProperty__Implementation__Frozen(null, 186);
+			DataStore[186] = new ObjectReferenceProperty__Implementation__Frozen(186);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[206] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[206] = 
-			DataStore[206] = new ObjectReferenceProperty__Implementation__Frozen(null, 206);
+			DataStore[206] = new ObjectReferenceProperty__Implementation__Frozen(206);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[207] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[207] = 
-			DataStore[207] = new ObjectReferenceProperty__Implementation__Frozen(null, 207);
+			DataStore[207] = new ObjectReferenceProperty__Implementation__Frozen(207);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[208] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[208] = 
-			DataStore[208] = new ObjectReferenceProperty__Implementation__Frozen(null, 208);
+			DataStore[208] = new ObjectReferenceProperty__Implementation__Frozen(208);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[209] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[209] = 
-			DataStore[209] = new ObjectReferenceProperty__Implementation__Frozen(null, 209);
+			DataStore[209] = new ObjectReferenceProperty__Implementation__Frozen(209);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[211] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[211] = 
-			DataStore[211] = new ObjectReferenceProperty__Implementation__Frozen(null, 211);
+			DataStore[211] = new ObjectReferenceProperty__Implementation__Frozen(211);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[212] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[212] = 
-			DataStore[212] = new ObjectReferenceProperty__Implementation__Frozen(null, 212);
+			DataStore[212] = new ObjectReferenceProperty__Implementation__Frozen(212);
 
 		}
 

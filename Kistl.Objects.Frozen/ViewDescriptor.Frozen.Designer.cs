@@ -121,8 +121,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<ViewDescriptor> OnPostSave_ViewDescriptor;
 
 
-        internal ViewDescriptor__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal ViewDescriptor__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 

@@ -144,69 +144,69 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<EnumerationEntry> OnPostSave_EnumerationEntry;
 
 
-        internal EnumerationEntry__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal EnumerationEntry__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
 		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(28);
 		internal static void CreateInstances()
 		{
-			DataStore[2] = new EnumerationEntry__Implementation__Frozen(null, 2);
+			DataStore[2] = new EnumerationEntry__Implementation__Frozen(2);
 
-			DataStore[3] = new EnumerationEntry__Implementation__Frozen(null, 3);
+			DataStore[3] = new EnumerationEntry__Implementation__Frozen(3);
 
-			DataStore[5] = new EnumerationEntry__Implementation__Frozen(null, 5);
+			DataStore[5] = new EnumerationEntry__Implementation__Frozen(5);
 
-			DataStore[6] = new EnumerationEntry__Implementation__Frozen(null, 6);
+			DataStore[6] = new EnumerationEntry__Implementation__Frozen(6);
 
-			DataStore[7] = new EnumerationEntry__Implementation__Frozen(null, 7);
+			DataStore[7] = new EnumerationEntry__Implementation__Frozen(7);
 
-			DataStore[40] = new EnumerationEntry__Implementation__Frozen(null, 40);
+			DataStore[40] = new EnumerationEntry__Implementation__Frozen(40);
 
-			DataStore[41] = new EnumerationEntry__Implementation__Frozen(null, 41);
+			DataStore[41] = new EnumerationEntry__Implementation__Frozen(41);
 
-			DataStore[42] = new EnumerationEntry__Implementation__Frozen(null, 42);
+			DataStore[42] = new EnumerationEntry__Implementation__Frozen(42);
 
-			DataStore[43] = new EnumerationEntry__Implementation__Frozen(null, 43);
+			DataStore[43] = new EnumerationEntry__Implementation__Frozen(43);
 
-			DataStore[44] = new EnumerationEntry__Implementation__Frozen(null, 44);
+			DataStore[44] = new EnumerationEntry__Implementation__Frozen(44);
 
-			DataStore[45] = new EnumerationEntry__Implementation__Frozen(null, 45);
+			DataStore[45] = new EnumerationEntry__Implementation__Frozen(45);
 
-			DataStore[46] = new EnumerationEntry__Implementation__Frozen(null, 46);
+			DataStore[46] = new EnumerationEntry__Implementation__Frozen(46);
 
-			DataStore[47] = new EnumerationEntry__Implementation__Frozen(null, 47);
+			DataStore[47] = new EnumerationEntry__Implementation__Frozen(47);
 
-			DataStore[48] = new EnumerationEntry__Implementation__Frozen(null, 48);
+			DataStore[48] = new EnumerationEntry__Implementation__Frozen(48);
 
-			DataStore[49] = new EnumerationEntry__Implementation__Frozen(null, 49);
+			DataStore[49] = new EnumerationEntry__Implementation__Frozen(49);
 
-			DataStore[50] = new EnumerationEntry__Implementation__Frozen(null, 50);
+			DataStore[50] = new EnumerationEntry__Implementation__Frozen(50);
 
-			DataStore[51] = new EnumerationEntry__Implementation__Frozen(null, 51);
+			DataStore[51] = new EnumerationEntry__Implementation__Frozen(51);
 
-			DataStore[52] = new EnumerationEntry__Implementation__Frozen(null, 52);
+			DataStore[52] = new EnumerationEntry__Implementation__Frozen(52);
 
-			DataStore[53] = new EnumerationEntry__Implementation__Frozen(null, 53);
+			DataStore[53] = new EnumerationEntry__Implementation__Frozen(53);
 
-			DataStore[54] = new EnumerationEntry__Implementation__Frozen(null, 54);
+			DataStore[54] = new EnumerationEntry__Implementation__Frozen(54);
 
-			DataStore[55] = new EnumerationEntry__Implementation__Frozen(null, 55);
+			DataStore[55] = new EnumerationEntry__Implementation__Frozen(55);
 
-			DataStore[56] = new EnumerationEntry__Implementation__Frozen(null, 56);
+			DataStore[56] = new EnumerationEntry__Implementation__Frozen(56);
 
-			DataStore[57] = new EnumerationEntry__Implementation__Frozen(null, 57);
+			DataStore[57] = new EnumerationEntry__Implementation__Frozen(57);
 
-			DataStore[58] = new EnumerationEntry__Implementation__Frozen(null, 58);
+			DataStore[58] = new EnumerationEntry__Implementation__Frozen(58);
 
-			DataStore[59] = new EnumerationEntry__Implementation__Frozen(null, 59);
+			DataStore[59] = new EnumerationEntry__Implementation__Frozen(59);
 
-			DataStore[60] = new EnumerationEntry__Implementation__Frozen(null, 60);
+			DataStore[60] = new EnumerationEntry__Implementation__Frozen(60);
 
-			DataStore[61] = new EnumerationEntry__Implementation__Frozen(null, 61);
+			DataStore[61] = new EnumerationEntry__Implementation__Frozen(61);
 
-			DataStore[62] = new EnumerationEntry__Implementation__Frozen(null, 62);
+			DataStore[62] = new EnumerationEntry__Implementation__Frozen(62);
 
 		}
 

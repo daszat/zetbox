@@ -134,8 +134,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Constraint> OnPostSave_Constraint;
 
 
-        internal Constraint__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal Constraint__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 

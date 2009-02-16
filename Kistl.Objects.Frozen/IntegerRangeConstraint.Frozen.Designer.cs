@@ -132,8 +132,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<IntegerRangeConstraint> OnPostSave_IntegerRangeConstraint;
 
 
-        internal IntegerRangeConstraint__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal IntegerRangeConstraint__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -141,13 +141,13 @@ namespace Kistl.App.Base
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[147] = 
-			DataStore[147] = new IntegerRangeConstraint__Implementation__Frozen(null, 147);
+			DataStore[147] = new IntegerRangeConstraint__Implementation__Frozen(147);
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[148] = 
-			DataStore[148] = new IntegerRangeConstraint__Implementation__Frozen(null, 148);
+			DataStore[148] = new IntegerRangeConstraint__Implementation__Frozen(148);
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[149] = 
-			DataStore[149] = new IntegerRangeConstraint__Implementation__Frozen(null, 149);
+			DataStore[149] = new IntegerRangeConstraint__Implementation__Frozen(149);
 
 		}
 

@@ -172,8 +172,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Property> OnPostSave_Property;
 
 
-        internal Property__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal Property__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 

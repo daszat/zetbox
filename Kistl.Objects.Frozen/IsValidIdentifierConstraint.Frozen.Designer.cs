@@ -86,8 +86,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<IsValidIdentifierConstraint> OnPostSave_IsValidIdentifierConstraint;
 
 
-        internal IsValidIdentifierConstraint__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal IsValidIdentifierConstraint__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -95,22 +95,22 @@ namespace Kistl.App.Base
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[194] = 
-			DataStore[194] = new IsValidIdentifierConstraint__Implementation__Frozen(null, 194);
+			DataStore[194] = new IsValidIdentifierConstraint__Implementation__Frozen(194);
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[195] = 
-			DataStore[195] = new IsValidIdentifierConstraint__Implementation__Frozen(null, 195);
+			DataStore[195] = new IsValidIdentifierConstraint__Implementation__Frozen(195);
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[196] = 
-			DataStore[196] = new IsValidIdentifierConstraint__Implementation__Frozen(null, 196);
+			DataStore[196] = new IsValidIdentifierConstraint__Implementation__Frozen(196);
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[199] = 
-			DataStore[199] = new IsValidIdentifierConstraint__Implementation__Frozen(null, 199);
+			DataStore[199] = new IsValidIdentifierConstraint__Implementation__Frozen(199);
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[200] = 
-			DataStore[200] = new IsValidIdentifierConstraint__Implementation__Frozen(null, 200);
+			DataStore[200] = new IsValidIdentifierConstraint__Implementation__Frozen(200);
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[201] = 
-			DataStore[201] = new IsValidIdentifierConstraint__Implementation__Frozen(null, 201);
+			DataStore[201] = new IsValidIdentifierConstraint__Implementation__Frozen(201);
 
 		}
 

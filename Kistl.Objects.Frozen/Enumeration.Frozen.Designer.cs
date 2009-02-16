@@ -109,8 +109,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Enumeration> OnPostSave_Enumeration;
 
 
-        internal Enumeration__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal Enumeration__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -118,16 +118,16 @@ namespace Kistl.App.Base
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50] = 
-			DataStore[50] = new Enumeration__Implementation__Frozen(null, 50);
+			DataStore[50] = new Enumeration__Implementation__Frozen(50);
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[53] = 
-			DataStore[53] = new Enumeration__Implementation__Frozen(null, 53);
+			DataStore[53] = new Enumeration__Implementation__Frozen(53);
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55] = 
-			DataStore[55] = new Enumeration__Implementation__Frozen(null, 55);
+			DataStore[55] = new Enumeration__Implementation__Frozen(55);
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[78] = 
-			DataStore[78] = new Enumeration__Implementation__Frozen(null, 78);
+			DataStore[78] = new Enumeration__Implementation__Frozen(78);
 
 		}
 

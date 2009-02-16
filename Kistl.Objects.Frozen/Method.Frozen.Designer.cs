@@ -231,249 +231,249 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Method> OnPostSave_Method;
 
 
-        internal Method__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal Method__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
 		internal static Dictionary<int, Method__Implementation__Frozen> DataStore = new Dictionary<int, Method__Implementation__Frozen>(118);
 		internal static void CreateInstances()
 		{
-			DataStore[1] = new Method__Implementation__Frozen(null, 1);
+			DataStore[1] = new Method__Implementation__Frozen(1);
 
-			DataStore[3] = new Method__Implementation__Frozen(null, 3);
+			DataStore[3] = new Method__Implementation__Frozen(3);
 
-			DataStore[4] = new Method__Implementation__Frozen(null, 4);
+			DataStore[4] = new Method__Implementation__Frozen(4);
 
-			DataStore[5] = new Method__Implementation__Frozen(null, 5);
+			DataStore[5] = new Method__Implementation__Frozen(5);
 
-			DataStore[6] = new Method__Implementation__Frozen(null, 6);
+			DataStore[6] = new Method__Implementation__Frozen(6);
 
-			DataStore[7] = new Method__Implementation__Frozen(null, 7);
+			DataStore[7] = new Method__Implementation__Frozen(7);
 
-			DataStore[8] = new Method__Implementation__Frozen(null, 8);
+			DataStore[8] = new Method__Implementation__Frozen(8);
 
-			DataStore[9] = new Method__Implementation__Frozen(null, 9);
+			DataStore[9] = new Method__Implementation__Frozen(9);
 
-			DataStore[10] = new Method__Implementation__Frozen(null, 10);
+			DataStore[10] = new Method__Implementation__Frozen(10);
 
-			DataStore[11] = new Method__Implementation__Frozen(null, 11);
+			DataStore[11] = new Method__Implementation__Frozen(11);
 
-			DataStore[12] = new Method__Implementation__Frozen(null, 12);
+			DataStore[12] = new Method__Implementation__Frozen(12);
 
-			DataStore[13] = new Method__Implementation__Frozen(null, 13);
+			DataStore[13] = new Method__Implementation__Frozen(13);
 
-			DataStore[14] = new Method__Implementation__Frozen(null, 14);
+			DataStore[14] = new Method__Implementation__Frozen(14);
 
-			DataStore[15] = new Method__Implementation__Frozen(null, 15);
+			DataStore[15] = new Method__Implementation__Frozen(15);
 
-			DataStore[16] = new Method__Implementation__Frozen(null, 16);
+			DataStore[16] = new Method__Implementation__Frozen(16);
 
-			DataStore[17] = new Method__Implementation__Frozen(null, 17);
+			DataStore[17] = new Method__Implementation__Frozen(17);
 
-			DataStore[18] = new Method__Implementation__Frozen(null, 18);
+			DataStore[18] = new Method__Implementation__Frozen(18);
 
-			DataStore[19] = new Method__Implementation__Frozen(null, 19);
+			DataStore[19] = new Method__Implementation__Frozen(19);
 
-			DataStore[20] = new Method__Implementation__Frozen(null, 20);
+			DataStore[20] = new Method__Implementation__Frozen(20);
 
-			DataStore[21] = new Method__Implementation__Frozen(null, 21);
+			DataStore[21] = new Method__Implementation__Frozen(21);
 
-			DataStore[22] = new Method__Implementation__Frozen(null, 22);
+			DataStore[22] = new Method__Implementation__Frozen(22);
 
-			DataStore[23] = new Method__Implementation__Frozen(null, 23);
+			DataStore[23] = new Method__Implementation__Frozen(23);
 
-			DataStore[24] = new Method__Implementation__Frozen(null, 24);
+			DataStore[24] = new Method__Implementation__Frozen(24);
 
-			DataStore[25] = new Method__Implementation__Frozen(null, 25);
+			DataStore[25] = new Method__Implementation__Frozen(25);
 
-			DataStore[26] = new Method__Implementation__Frozen(null, 26);
+			DataStore[26] = new Method__Implementation__Frozen(26);
 
-			DataStore[27] = new Method__Implementation__Frozen(null, 27);
+			DataStore[27] = new Method__Implementation__Frozen(27);
 
-			DataStore[28] = new Method__Implementation__Frozen(null, 28);
+			DataStore[28] = new Method__Implementation__Frozen(28);
 
-			DataStore[29] = new Method__Implementation__Frozen(null, 29);
+			DataStore[29] = new Method__Implementation__Frozen(29);
 
-			DataStore[30] = new Method__Implementation__Frozen(null, 30);
+			DataStore[30] = new Method__Implementation__Frozen(30);
 
-			DataStore[31] = new Method__Implementation__Frozen(null, 31);
+			DataStore[31] = new Method__Implementation__Frozen(31);
 
-			DataStore[32] = new Method__Implementation__Frozen(null, 32);
+			DataStore[32] = new Method__Implementation__Frozen(32);
 
-			DataStore[33] = new Method__Implementation__Frozen(null, 33);
+			DataStore[33] = new Method__Implementation__Frozen(33);
 
-			DataStore[34] = new Method__Implementation__Frozen(null, 34);
+			DataStore[34] = new Method__Implementation__Frozen(34);
 
-			DataStore[35] = new Method__Implementation__Frozen(null, 35);
+			DataStore[35] = new Method__Implementation__Frozen(35);
 
-			DataStore[36] = new Method__Implementation__Frozen(null, 36);
+			DataStore[36] = new Method__Implementation__Frozen(36);
 
-			DataStore[37] = new Method__Implementation__Frozen(null, 37);
+			DataStore[37] = new Method__Implementation__Frozen(37);
 
-			DataStore[38] = new Method__Implementation__Frozen(null, 38);
+			DataStore[38] = new Method__Implementation__Frozen(38);
 
-			DataStore[39] = new Method__Implementation__Frozen(null, 39);
+			DataStore[39] = new Method__Implementation__Frozen(39);
 
-			DataStore[40] = new Method__Implementation__Frozen(null, 40);
+			DataStore[40] = new Method__Implementation__Frozen(40);
 
-			DataStore[41] = new Method__Implementation__Frozen(null, 41);
+			DataStore[41] = new Method__Implementation__Frozen(41);
 
-			DataStore[42] = new Method__Implementation__Frozen(null, 42);
+			DataStore[42] = new Method__Implementation__Frozen(42);
 
-			DataStore[43] = new Method__Implementation__Frozen(null, 43);
+			DataStore[43] = new Method__Implementation__Frozen(43);
 
-			DataStore[44] = new Method__Implementation__Frozen(null, 44);
+			DataStore[44] = new Method__Implementation__Frozen(44);
 
-			DataStore[45] = new Method__Implementation__Frozen(null, 45);
+			DataStore[45] = new Method__Implementation__Frozen(45);
 
-			DataStore[46] = new Method__Implementation__Frozen(null, 46);
+			DataStore[46] = new Method__Implementation__Frozen(46);
 
-			DataStore[71] = new Method__Implementation__Frozen(null, 71);
+			DataStore[71] = new Method__Implementation__Frozen(71);
 
-			DataStore[72] = new Method__Implementation__Frozen(null, 72);
+			DataStore[72] = new Method__Implementation__Frozen(72);
 
-			DataStore[73] = new Method__Implementation__Frozen(null, 73);
+			DataStore[73] = new Method__Implementation__Frozen(73);
 
-			DataStore[74] = new Method__Implementation__Frozen(null, 74);
+			DataStore[74] = new Method__Implementation__Frozen(74);
 
-			DataStore[75] = new Method__Implementation__Frozen(null, 75);
+			DataStore[75] = new Method__Implementation__Frozen(75);
 
-			DataStore[76] = new Method__Implementation__Frozen(null, 76);
+			DataStore[76] = new Method__Implementation__Frozen(76);
 
-			DataStore[79] = new Method__Implementation__Frozen(null, 79);
+			DataStore[79] = new Method__Implementation__Frozen(79);
 
-			DataStore[80] = new Method__Implementation__Frozen(null, 80);
+			DataStore[80] = new Method__Implementation__Frozen(80);
 
-			DataStore[81] = new Method__Implementation__Frozen(null, 81);
+			DataStore[81] = new Method__Implementation__Frozen(81);
 
-			DataStore[82] = new Method__Implementation__Frozen(null, 82);
+			DataStore[82] = new Method__Implementation__Frozen(82);
 
-			DataStore[83] = new Method__Implementation__Frozen(null, 83);
+			DataStore[83] = new Method__Implementation__Frozen(83);
 
-			DataStore[84] = new Method__Implementation__Frozen(null, 84);
+			DataStore[84] = new Method__Implementation__Frozen(84);
 
-			DataStore[85] = new Method__Implementation__Frozen(null, 85);
+			DataStore[85] = new Method__Implementation__Frozen(85);
 
-			DataStore[86] = new Method__Implementation__Frozen(null, 86);
+			DataStore[86] = new Method__Implementation__Frozen(86);
 
-			DataStore[87] = new Method__Implementation__Frozen(null, 87);
+			DataStore[87] = new Method__Implementation__Frozen(87);
 
-			DataStore[88] = new Method__Implementation__Frozen(null, 88);
+			DataStore[88] = new Method__Implementation__Frozen(88);
 
-			DataStore[89] = new Method__Implementation__Frozen(null, 89);
+			DataStore[89] = new Method__Implementation__Frozen(89);
 
-			DataStore[90] = new Method__Implementation__Frozen(null, 90);
+			DataStore[90] = new Method__Implementation__Frozen(90);
 
-			DataStore[91] = new Method__Implementation__Frozen(null, 91);
+			DataStore[91] = new Method__Implementation__Frozen(91);
 
-			DataStore[92] = new Method__Implementation__Frozen(null, 92);
+			DataStore[92] = new Method__Implementation__Frozen(92);
 
-			DataStore[93] = new Method__Implementation__Frozen(null, 93);
+			DataStore[93] = new Method__Implementation__Frozen(93);
 
-			DataStore[95] = new Method__Implementation__Frozen(null, 95);
+			DataStore[95] = new Method__Implementation__Frozen(95);
 
-			DataStore[96] = new Method__Implementation__Frozen(null, 96);
+			DataStore[96] = new Method__Implementation__Frozen(96);
 
-			DataStore[97] = new Method__Implementation__Frozen(null, 97);
+			DataStore[97] = new Method__Implementation__Frozen(97);
 
-			DataStore[98] = new Method__Implementation__Frozen(null, 98);
+			DataStore[98] = new Method__Implementation__Frozen(98);
 
-			DataStore[106] = new Method__Implementation__Frozen(null, 106);
+			DataStore[106] = new Method__Implementation__Frozen(106);
 
-			DataStore[107] = new Method__Implementation__Frozen(null, 107);
+			DataStore[107] = new Method__Implementation__Frozen(107);
 
-			DataStore[108] = new Method__Implementation__Frozen(null, 108);
+			DataStore[108] = new Method__Implementation__Frozen(108);
 
-			DataStore[109] = new Method__Implementation__Frozen(null, 109);
+			DataStore[109] = new Method__Implementation__Frozen(109);
 
-			DataStore[110] = new Method__Implementation__Frozen(null, 110);
+			DataStore[110] = new Method__Implementation__Frozen(110);
 
-			DataStore[111] = new Method__Implementation__Frozen(null, 111);
+			DataStore[111] = new Method__Implementation__Frozen(111);
 
-			DataStore[112] = new Method__Implementation__Frozen(null, 112);
+			DataStore[112] = new Method__Implementation__Frozen(112);
 
-			DataStore[113] = new Method__Implementation__Frozen(null, 113);
+			DataStore[113] = new Method__Implementation__Frozen(113);
 
-			DataStore[114] = new Method__Implementation__Frozen(null, 114);
+			DataStore[114] = new Method__Implementation__Frozen(114);
 
-			DataStore[115] = new Method__Implementation__Frozen(null, 115);
+			DataStore[115] = new Method__Implementation__Frozen(115);
 
-			DataStore[116] = new Method__Implementation__Frozen(null, 116);
+			DataStore[116] = new Method__Implementation__Frozen(116);
 
-			DataStore[117] = new Method__Implementation__Frozen(null, 117);
+			DataStore[117] = new Method__Implementation__Frozen(117);
 
-			DataStore[118] = new Method__Implementation__Frozen(null, 118);
+			DataStore[118] = new Method__Implementation__Frozen(118);
 
-			DataStore[120] = new Method__Implementation__Frozen(null, 120);
+			DataStore[120] = new Method__Implementation__Frozen(120);
 
-			DataStore[121] = new Method__Implementation__Frozen(null, 121);
+			DataStore[121] = new Method__Implementation__Frozen(121);
 
-			DataStore[123] = new Method__Implementation__Frozen(null, 123);
+			DataStore[123] = new Method__Implementation__Frozen(123);
 
-			DataStore[124] = new Method__Implementation__Frozen(null, 124);
+			DataStore[124] = new Method__Implementation__Frozen(124);
 
-			DataStore[125] = new Method__Implementation__Frozen(null, 125);
+			DataStore[125] = new Method__Implementation__Frozen(125);
 
-			DataStore[126] = new Method__Implementation__Frozen(null, 126);
+			DataStore[126] = new Method__Implementation__Frozen(126);
 
-			DataStore[127] = new Method__Implementation__Frozen(null, 127);
+			DataStore[127] = new Method__Implementation__Frozen(127);
 
-			DataStore[128] = new Method__Implementation__Frozen(null, 128);
+			DataStore[128] = new Method__Implementation__Frozen(128);
 
-			DataStore[129] = new Method__Implementation__Frozen(null, 129);
+			DataStore[129] = new Method__Implementation__Frozen(129);
 
-			DataStore[130] = new Method__Implementation__Frozen(null, 130);
+			DataStore[130] = new Method__Implementation__Frozen(130);
 
-			DataStore[131] = new Method__Implementation__Frozen(null, 131);
+			DataStore[131] = new Method__Implementation__Frozen(131);
 
-			DataStore[132] = new Method__Implementation__Frozen(null, 132);
+			DataStore[132] = new Method__Implementation__Frozen(132);
 
-			DataStore[133] = new Method__Implementation__Frozen(null, 133);
+			DataStore[133] = new Method__Implementation__Frozen(133);
 
-			DataStore[134] = new Method__Implementation__Frozen(null, 134);
+			DataStore[134] = new Method__Implementation__Frozen(134);
 
-			DataStore[135] = new Method__Implementation__Frozen(null, 135);
+			DataStore[135] = new Method__Implementation__Frozen(135);
 
-			DataStore[136] = new Method__Implementation__Frozen(null, 136);
+			DataStore[136] = new Method__Implementation__Frozen(136);
 
-			DataStore[137] = new Method__Implementation__Frozen(null, 137);
+			DataStore[137] = new Method__Implementation__Frozen(137);
 
-			DataStore[138] = new Method__Implementation__Frozen(null, 138);
+			DataStore[138] = new Method__Implementation__Frozen(138);
 
-			DataStore[139] = new Method__Implementation__Frozen(null, 139);
+			DataStore[139] = new Method__Implementation__Frozen(139);
 
-			DataStore[141] = new Method__Implementation__Frozen(null, 141);
+			DataStore[141] = new Method__Implementation__Frozen(141);
 
-			DataStore[142] = new Method__Implementation__Frozen(null, 142);
+			DataStore[142] = new Method__Implementation__Frozen(142);
 
-			DataStore[143] = new Method__Implementation__Frozen(null, 143);
+			DataStore[143] = new Method__Implementation__Frozen(143);
 
-			DataStore[144] = new Method__Implementation__Frozen(null, 144);
+			DataStore[144] = new Method__Implementation__Frozen(144);
 
-			DataStore[145] = new Method__Implementation__Frozen(null, 145);
+			DataStore[145] = new Method__Implementation__Frozen(145);
 
-			DataStore[146] = new Method__Implementation__Frozen(null, 146);
+			DataStore[146] = new Method__Implementation__Frozen(146);
 
-			DataStore[147] = new Method__Implementation__Frozen(null, 147);
+			DataStore[147] = new Method__Implementation__Frozen(147);
 
-			DataStore[148] = new Method__Implementation__Frozen(null, 148);
+			DataStore[148] = new Method__Implementation__Frozen(148);
 
-			DataStore[149] = new Method__Implementation__Frozen(null, 149);
+			DataStore[149] = new Method__Implementation__Frozen(149);
 
-			DataStore[150] = new Method__Implementation__Frozen(null, 150);
+			DataStore[150] = new Method__Implementation__Frozen(150);
 
-			DataStore[151] = new Method__Implementation__Frozen(null, 151);
+			DataStore[151] = new Method__Implementation__Frozen(151);
 
-			DataStore[152] = new Method__Implementation__Frozen(null, 152);
+			DataStore[152] = new Method__Implementation__Frozen(152);
 
-			DataStore[153] = new Method__Implementation__Frozen(null, 153);
+			DataStore[153] = new Method__Implementation__Frozen(153);
 
-			DataStore[154] = new Method__Implementation__Frozen(null, 154);
+			DataStore[154] = new Method__Implementation__Frozen(154);
 
-			DataStore[155] = new Method__Implementation__Frozen(null, 155);
+			DataStore[155] = new Method__Implementation__Frozen(155);
 
-			DataStore[156] = new Method__Implementation__Frozen(null, 156);
+			DataStore[156] = new Method__Implementation__Frozen(156);
 
 		}
 

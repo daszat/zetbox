@@ -203,8 +203,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<BaseParameter> OnPostSave_BaseParameter;
 
 
-        internal BaseParameter__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal BaseParameter__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 

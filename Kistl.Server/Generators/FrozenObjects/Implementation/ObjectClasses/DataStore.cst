@@ -49,7 +49,7 @@
 <%
 		}
 %>
-			DataStore[<%= obj.ID %>] = new <%= classname %>(null, <%= obj.ID %>);
+			DataStore[<%= obj.ID %>] = new <%= classname %>(<%= obj.ID %>);
 
 <%
 	}

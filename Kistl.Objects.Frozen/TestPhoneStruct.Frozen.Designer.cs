@@ -67,8 +67,8 @@ namespace Kistl.App.Test
             }
         }
         private string _Number;
-        internal TestPhoneStruct__Implementation__(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal TestPhoneStruct__Implementation__(int id)
+            : base(id)
         { }
 
 

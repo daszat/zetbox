@@ -144,47 +144,47 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Relation> OnPostSave_Relation;
 
 
-        internal Relation__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal Relation__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
 		internal static Dictionary<int, Relation__Implementation__Frozen> DataStore = new Dictionary<int, Relation__Implementation__Frozen>(17);
 		internal static void CreateInstances()
 		{
-			DataStore[1] = new Relation__Implementation__Frozen(null, 1);
+			DataStore[1] = new Relation__Implementation__Frozen(1);
 
-			DataStore[2] = new Relation__Implementation__Frozen(null, 2);
+			DataStore[2] = new Relation__Implementation__Frozen(2);
 
-			DataStore[3] = new Relation__Implementation__Frozen(null, 3);
+			DataStore[3] = new Relation__Implementation__Frozen(3);
 
-			DataStore[4] = new Relation__Implementation__Frozen(null, 4);
+			DataStore[4] = new Relation__Implementation__Frozen(4);
 
-			DataStore[5] = new Relation__Implementation__Frozen(null, 5);
+			DataStore[5] = new Relation__Implementation__Frozen(5);
 
-			DataStore[6] = new Relation__Implementation__Frozen(null, 6);
+			DataStore[6] = new Relation__Implementation__Frozen(6);
 
-			DataStore[8] = new Relation__Implementation__Frozen(null, 8);
+			DataStore[8] = new Relation__Implementation__Frozen(8);
 
-			DataStore[9] = new Relation__Implementation__Frozen(null, 9);
+			DataStore[9] = new Relation__Implementation__Frozen(9);
 
-			DataStore[10] = new Relation__Implementation__Frozen(null, 10);
+			DataStore[10] = new Relation__Implementation__Frozen(10);
 
-			DataStore[11] = new Relation__Implementation__Frozen(null, 11);
+			DataStore[11] = new Relation__Implementation__Frozen(11);
 
-			DataStore[12] = new Relation__Implementation__Frozen(null, 12);
+			DataStore[12] = new Relation__Implementation__Frozen(12);
 
-			DataStore[13] = new Relation__Implementation__Frozen(null, 13);
+			DataStore[13] = new Relation__Implementation__Frozen(13);
 
-			DataStore[14] = new Relation__Implementation__Frozen(null, 14);
+			DataStore[14] = new Relation__Implementation__Frozen(14);
 
-			DataStore[15] = new Relation__Implementation__Frozen(null, 15);
+			DataStore[15] = new Relation__Implementation__Frozen(15);
 
-			DataStore[16] = new Relation__Implementation__Frozen(null, 16);
+			DataStore[16] = new Relation__Implementation__Frozen(16);
 
-			DataStore[17] = new Relation__Implementation__Frozen(null, 17);
+			DataStore[17] = new Relation__Implementation__Frozen(17);
 
-			DataStore[18] = new Relation__Implementation__Frozen(null, 18);
+			DataStore[18] = new Relation__Implementation__Frozen(18);
 
 		}
 

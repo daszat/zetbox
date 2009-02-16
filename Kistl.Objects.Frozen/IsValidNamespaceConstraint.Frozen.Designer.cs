@@ -86,8 +86,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<IsValidNamespaceConstraint> OnPostSave_IsValidNamespaceConstraint;
 
 
-        internal IsValidNamespaceConstraint__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal IsValidNamespaceConstraint__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
@@ -96,7 +96,7 @@ namespace Kistl.App.Base
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[198] = 
 			Kistl.App.Base.IsValidIdentifierConstraint__Implementation__Frozen.DataStore[198] = 
-			DataStore[198] = new IsValidNamespaceConstraint__Implementation__Frozen(null, 198);
+			DataStore[198] = new IsValidNamespaceConstraint__Implementation__Frozen(198);
 
 		}
 

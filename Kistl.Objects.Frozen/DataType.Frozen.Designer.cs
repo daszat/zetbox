@@ -249,8 +249,8 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<DataType> OnPostSave_DataType;
 
 
-        internal DataType__Implementation__Frozen(FrozenContext ctx, int id)
-            : base(ctx, id)
+        internal DataType__Implementation__Frozen(int id)
+            : base(id)
         { }
 
 
