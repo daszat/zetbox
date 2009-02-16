@@ -35,7 +35,7 @@ namespace Kistl.App
 
 		void IKistlContext.Delete(IPersistenceObject obj)
 		{
-			throw new ReadOnlyObjectException();
+			throw new ReadOnlyContextException();
 		}
 
 		public IQueryable<T> GetQuery<T>()
@@ -202,11 +202,11 @@ namespace Kistl.App
 
         bool IKistlContext.IsReadonly { get { return true; } }
 
-        IDataObject IKistlContext.Create(Type type) { throw new ReadOnlyObjectException(); }
-        T IKistlContext.Create<T>() { throw new ReadOnlyObjectException(); }
+        IDataObject IKistlContext.Create(Type type) { throw new ReadOnlyContextException(); }
+        T IKistlContext.Create<T>() { throw new ReadOnlyContextException(); }
 
-        IStruct IKistlContext.CreateStruct(Type type) { throw new ReadOnlyObjectException(); }
-        T IKistlContext.CreateStruct<T>() { throw new ReadOnlyObjectException(); }
+        IStruct IKistlContext.CreateStruct(Type type) { throw new ReadOnlyContextException(); }
+        T IKistlContext.CreateStruct<T>() { throw new ReadOnlyContextException(); }
 
         public IDataObject Find(Type t, int ID)
 		{
@@ -306,8 +306,8 @@ namespace Kistl.App
 
         event GenericEventHandler<IPersistenceObject> IKistlContext.ObjectCreated
         {
-			add { throw new ReadOnlyObjectException(); }
-			remove { throw new ReadOnlyObjectException(); }
+			add { throw new ReadOnlyContextException(); }
+			remove { throw new ReadOnlyContextException(); }
 		}
 
         /// <summary>
@@ -316,8 +316,8 @@ namespace Kistl.App
         /// </summary>
         event GenericEventHandler<IPersistenceObject> IKistlContext.ObjectDeleted
         {
-			add { throw new ReadOnlyObjectException(); }
-			remove { throw new ReadOnlyObjectException(); }
+			add { throw new ReadOnlyContextException(); }
+			remove { throw new ReadOnlyContextException(); }
 		}
 		
 		public virtual void Dispose() {}
