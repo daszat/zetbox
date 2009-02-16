@@ -255,7 +255,7 @@ namespace Kistl.App.Base
 
 
 		internal static Dictionary<int, DataType__Implementation__Frozen> DataStore = new Dictionary<int, DataType__Implementation__Frozen>(0);
-		static DataType__Implementation__Frozen()
+		internal static void CreateInstances()
 		{
 		}
 

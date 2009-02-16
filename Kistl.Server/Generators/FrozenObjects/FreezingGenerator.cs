@@ -33,7 +33,7 @@ namespace Kistl.Server.Generators.FrozenObjects
                 .OrderBy(m => m.ModuleName)
                 .ToList();
 
-            //otherFileNames.Add(RunTemplateWithExtension(ctx, "Repositories.FrozenModuleRepository", "FrozenModuleRepository", "Designer.cs", modulesWithFrozenClasses));
+            otherFileNames.Add(RunTemplateWithExtension(ctx, "Repositories.FrozenContextImplementation", "FrozenContextImplementation", "Designer.cs", modulesWithFrozenClasses));
             foreach (var m in modulesWithFrozenClasses)
             {
                 otherFileNames.Add(RunTemplateWithExtension(ctx, "Repositories.FrozenRepository", "Frozen" + m.ModuleName + "Repository", "Designer.cs", m));

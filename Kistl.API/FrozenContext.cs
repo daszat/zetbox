@@ -31,15 +31,15 @@ namespace Kistl.API
 
         protected bool _initialized = false;
 
-        private static FrozenContext _Single = null;
-        public static FrozenContext Single 
+        private static IKistlContext _Single = null;
+        public static IKistlContext Single 
         { 
             get 
             {
                 if (_Single == null)
                 {
-                    Type t = Type.GetType(ApplicationContext.Current.ImplementationAssembly + ".FrozenContextImplementation, " + ApplicationContext.Current.ImplementationAssembly, true);
-                    _Single = (FrozenContext)Activator.CreateInstance(t);
+                    Type t = Type.GetType("Kistl.App.FrozenContextImplementation, Kistl.Objects.Frozen", true);
+                    _Single = (IKistlContext)Activator.CreateInstance(t);
 
                     if (_Single == null) throw new InvalidOperationException("Unable to create frozen context");
                 }

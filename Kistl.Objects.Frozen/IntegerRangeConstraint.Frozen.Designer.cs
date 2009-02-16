@@ -138,7 +138,7 @@ namespace Kistl.App.Base
 
 
 		internal new static Dictionary<int, IntegerRangeConstraint__Implementation__Frozen> DataStore = new Dictionary<int, IntegerRangeConstraint__Implementation__Frozen>(3);
-		static IntegerRangeConstraint__Implementation__Frozen()
+		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[147] = 
 			DataStore[147] = new IntegerRangeConstraint__Implementation__Frozen(null, 147);

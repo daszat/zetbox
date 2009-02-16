@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
+
 using Kistl.API;
 using Kistl.API.Client;
-using System.ServiceModel;
+using Kistl.App.Base;
 
 namespace Kistl.Client
 {
@@ -68,7 +70,7 @@ namespace Kistl.Client
                         //_ObjectClasses = _fetchContext.GetQuery<Kistl.App.Base.ObjectClass>()
                         //    .ToDictionary(o => o.GetDataCLRType());
                         _ObjectClasses = new Dictionary<Type, Kistl.App.Base.ObjectClass>();
-                        foreach (var o in Kistl.API.FrozenContext.Single.GetQuery<Kistl.App.Base.ObjectClass>())
+                        foreach (var o in FrozenContext.Single.GetQuery<ObjectClass>())
                         {
                             try
                             {

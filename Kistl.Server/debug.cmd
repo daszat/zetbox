@@ -1,4 +1,4 @@
 @echo off
-cd bin\debug
+cd ..\bin\debug
 
 Kistl.Server.exe

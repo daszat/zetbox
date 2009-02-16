@@ -1,0 +1,178 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Repositories.FrozenContextImplementation"
+	ClassName="Kistl.Server.Generators.FrozenObjects.Repositories.FrozenContextImplementation" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
+<%@ Parameter Name="modulesWithFrozenClasses" Type="List<Module>" %>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using Kistl.API;
+
+namespace Kistl.App
+{
+
+	public class FrozenContextImplementation : IKistlContext
+	{
+		public FrozenContextImplementation()
+		{
+		}
+
+		static FrozenContextImplementation()
+		{
+<%
+	foreach(var module in modulesWithFrozenClasses)
+	{
+%>
+				<%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository.CreateInstances();
+<%
+	}
+%>
+
+<%
+	foreach(var module in modulesWithFrozenClasses)
+	{
+%>
+				<%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository.FillDataStore();
+<%
+	}
+%>
+		}
+		
+
+		IPersistenceObject IKistlContext.Attach(IPersistenceObject obj)
+		{
+			throw new NotImplementedException();
+		}
+		
+		void IKistlContext.Detach(IPersistenceObject obj)
+		{
+			throw new NotImplementedException();
+		}
+
+		void IKistlContext.Delete(IPersistenceObject obj)
+		{
+			throw new ReadOnlyObjectException();
+		}
+
+		public IQueryable<T> GetQuery<T>()
+			where T : IDataObject
+		{
+			return GetQuery(typeof(T)).Cast<T>();
+		}
+
+		public IQueryable<IDataObject> GetQuery(Type t)
+		{
+<%
+	foreach(var module in modulesWithFrozenClasses)
+	{
+		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().Where(cls => cls.IsFrozenObject || cls.GetRootClass().IsFrozenObject))
+		{
+%>
+			if (t == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>))
+				return <%= frozenCls.Module.Namespace %>.<%= Implementation.ObjectClasses.Template.GetClassName(frozenCls) %>.DataStore.Values.AsQueryable().Cast<IDataObject>();
+<%
+		}
+	}
+%>
+			throw new NotImplementedException();
+		}
+
+		List<T> IKistlContext.GetListOf<T>(IDataObject obj, string propertyName)
+		{
+			throw new NotImplementedException();
+		}
+		
+        List<T> IKistlContext.GetListOf<T>(Type type, int ID, string propertyName)
+		{
+			throw new NotImplementedException();
+		}
+
+        IPersistenceObject IKistlContext.ContainsObject(Type type, int ID)
+        {
+			return Find(type, ID);
+        }
+
+        public IEnumerable<IPersistenceObject> AttachedObjects
+        {
+			get
+			{
+				return new List<IPersistenceObject>(0)
+<%
+	foreach(var module in modulesWithFrozenClasses)
+	{
+		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().Where(cls => cls.IsFrozenObject || cls.GetRootClass().IsFrozenObject))
+		{
+%>
+					.Concat(GetQuery<<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>>().Cast<IPersistenceObject>())
+<%
+		}
+	}
+%>;
+			}
+		}
+
+        int IKistlContext.SubmitChanges() { throw new NotImplementedException(); }
+
+        bool IKistlContext.IsDisposed { get { return false; } }
+
+        bool IKistlContext.IsReadonly { get { return true; } }
+
+        IDataObject IKistlContext.Create(Type type) { throw new ReadOnlyObjectException(); }
+        T IKistlContext.Create<T>() { throw new ReadOnlyObjectException(); }
+
+        IStruct IKistlContext.CreateStruct(Type type) { throw new ReadOnlyObjectException(); }
+        T IKistlContext.CreateStruct<T>() { throw new ReadOnlyObjectException(); }
+
+        public IDataObject Find(Type t, int ID)
+		{
+<%
+	foreach(var module in modulesWithFrozenClasses)
+	{
+		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().Where(cls => cls.IsFrozenObject || cls.GetRootClass().IsFrozenObject))
+		{
+%>
+			if (t == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>))
+				return <%= frozenCls.Module.Namespace %>.<%= Implementation.ObjectClasses.Template.GetClassName(frozenCls) %>.DataStore[ID];
+<%
+		}
+	}
+%>
+			throw new NotImplementedException();
+		}
+
+        public T Find<T>(int ID)
+			where T : IDataObject
+        {
+			return (T)Find(typeof(T), ID);
+        }
+
+
+        IKistlContext IKistlContext.GetReadonlyContext() { throw new NotImplementedException(); }
+
+        event GenericEventHandler<IPersistenceObject> IKistlContext.ObjectCreated
+        {
+			add { throw new ReadOnlyObjectException(); }
+			remove { throw new ReadOnlyObjectException(); }
+		}
+
+        /// <summary>
+        /// Is fired when an object is deleted in this Context.
+        /// The delted object is passed as Data.
+        /// </summary>
+        event GenericEventHandler<IPersistenceObject> IKistlContext.ObjectDeleted
+        {
+			add { throw new ReadOnlyObjectException(); }
+			remove { throw new ReadOnlyObjectException(); }
+		}
+		
+		public virtual void Dispose() {}
+	
+	}
+	
+}

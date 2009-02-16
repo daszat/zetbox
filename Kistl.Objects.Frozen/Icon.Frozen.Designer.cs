@@ -81,7 +81,7 @@ namespace Kistl.App.GUI
 
 
 		internal static Dictionary<int, Icon__Implementation__Frozen> DataStore = new Dictionary<int, Icon__Implementation__Frozen>(13);
-		static Icon__Implementation__Frozen()
+		internal static void CreateInstances()
 		{
 			DataStore[1] = new Icon__Implementation__Frozen(null, 1);
 

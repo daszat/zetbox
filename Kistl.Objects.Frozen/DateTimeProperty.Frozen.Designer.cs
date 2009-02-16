@@ -109,7 +109,7 @@ namespace Kistl.App.Base
 
 
 		internal new static Dictionary<int, DateTimeProperty__Implementation__Frozen> DataStore = new Dictionary<int, DateTimeProperty__Implementation__Frozen>(5);
-		static DateTimeProperty__Implementation__Frozen()
+		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[16] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[16] = 

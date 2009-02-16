@@ -9,7 +9,7 @@
 <%@ Parameter Name="module" Type="Module" %>
 <%
 	string classname = "Frozen" + module.ModuleName + "Repository";
-	var frozenClasses = module.DataTypes.OfType<ObjectClass>().Where(cls => cls.IsFrozenObject);
+	var frozenClasses = module.DataTypes.OfType<ObjectClass>().Where(cls => cls.IsFrozenObject || cls.GetRootClass().IsFrozenObject);
 %>
 using System;
 using System.Collections.Generic;
@@ -41,6 +41,20 @@ namespace <%= module.Namespace %>
 <%
 	}
 %>
+
+		internal static void CreateInstances()
+		{
+<%
+	foreach(var cls in frozenClasses)
+	{
+		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
+%>
+				<%= implementationName %>.CreateInstances();
+<%
+	}
+%>
+		}
+
 
 		internal static void FillDataStore()
 		{

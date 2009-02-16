@@ -36,7 +36,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Kistl.Client.ASPNET", "Kistl.Client.ASPNET\", "{CBE35A83-01BB-4F10-93E3-241784A22620}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
-		ProjectReferences = "{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}|Kistl.API.dll;{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}|Kistl.API.Client.dll;{A736E13F-D349-4CE5-A397-8438F58D0B9D}|Kistl.Client.dll;{04656394-60EA-4675-95EE-3DA6D07BAB89}|Kistl.Client.ASPNET.Toolkit.dll;{80F37FB5-66C6-45F2-9E2A-F787B141D66C}|Kistl.Objects.Client.dll;{0C9E6E69-309F-46F7-A936-D5762229DEB9}|Kistl.Objects.dll;"
+		ProjectReferences = "{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}|Kistl.API.dll;{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}|Kistl.API.Client.dll;{A736E13F-D349-4CE5-A397-8438F58D0B9D}|Kistl.Client.dll;{04656394-60EA-4675-95EE-3DA6D07BAB89}|Kistl.Client.ASPNET.Toolkit.dll;{80F37FB5-66C6-45F2-9E2A-F787B141D66C}|Kistl.Objects.Client.dll;{0C9E6E69-309F-46F7-A936-D5762229DEB9}|Kistl.Objects.dll;{CA615374-AEA3-4187-BF73-584CCD082766}|Kistl.Objects.Frozen.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/Kistl.Client.ASPNET"
 		Debug.AspNetCompiler.PhysicalPath = "Kistl.Client.ASPNET\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Kistl.Client.ASPNET\"

@@ -138,7 +138,7 @@ namespace Kistl.App.Base
 
 
 		internal new static Dictionary<int, CLRObjectParameter__Implementation__Frozen> DataStore = new Dictionary<int, CLRObjectParameter__Implementation__Frozen>(13);
-		static CLRObjectParameter__Implementation__Frozen()
+		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[11] = 
 			DataStore[11] = new CLRObjectParameter__Implementation__Frozen(null, 11);

@@ -21,6 +21,12 @@ namespace Kistl.App.GUI
 		}
 		
 
+		internal static void CreateInstances()
+		{
+				Icon__Implementation__Frozen.CreateInstances();
+		}
+
+
 		internal static void FillDataStore()
 		{
 				Icon__Implementation__Frozen.FillDataStore();

@@ -92,7 +92,7 @@ namespace Kistl.App.Base
 
 
 		internal new static Dictionary<int, BoolParameter__Implementation__Frozen> DataStore = new Dictionary<int, BoolParameter__Implementation__Frozen>(3);
-		static BoolParameter__Implementation__Frozen()
+		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[7] = 
 			DataStore[7] = new BoolParameter__Implementation__Frozen(null, 7);

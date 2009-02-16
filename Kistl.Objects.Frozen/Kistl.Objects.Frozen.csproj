@@ -97,6 +97,7 @@
     <Compile Include="CollectionEntries.Frozen.Designer.cs" />
     <Compile Include="TestPhoneStruct.Frozen.Designer.cs" />
     <Compile Include="AssemblyInfo.Frozen.cs" />
+    <Compile Include="FrozenContextImplementation.Frozen.Designer.cs" />
     <Compile Include="FrozenGUIRepository.Frozen.Designer.cs" />
     <Compile Include="FrozenKistlBaseRepository.Frozen.Designer.cs" />
   </ItemGroup>

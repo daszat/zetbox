@@ -531,6 +531,11 @@
     <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\Template.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\ProjectFile.cs" />
     <Compile Include="Generators\FrozenObjects\Implementation\Structs\Template.cs" />
+    <Compile Include="Generators\FrozenObjects\Repositories\FrozenContextImplementation.Designer.cs">
+      <DependentUpon>FrozenContextImplementation.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Generators\FrozenObjects\Repositories\FrozenModuleRepository.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -686,10 +691,13 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertyTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Generators\FrozenObjects\Implementation\FrozenContextImplementation.cst" />
     <None Include="Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>DataStore.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\FrozenObjects\Repositories\FrozenContextImplementation.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>FrozenContextImplementation.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst">
       <Generator>Arebis Template Processor</Generator>

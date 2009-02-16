@@ -127,7 +127,7 @@ namespace Kistl.App.Base
 
 
 		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(0);
-		static ViewDescriptor__Implementation__Frozen()
+		internal static void CreateInstances()
 		{
 		}
 

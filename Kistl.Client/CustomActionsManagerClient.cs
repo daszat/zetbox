@@ -64,7 +64,8 @@ namespace Kistl.Client
             {
                 using (TraceClient.TraceHelper.TraceMethodCall())
                 {
-                    using (IKistlContext ctx = Kistl.API.FrozenContext.Single) //KistlContext.GetContext())
+                    using (IKistlContext ctx = Kistl.API.FrozenContext.Single)
+                    //using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         // Prepare Modules
                         List<Kistl.App.Base.Module> moduleList = ctx.GetQuery<Kistl.App.Base.Module>().ToList();

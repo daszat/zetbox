@@ -92,7 +92,7 @@ namespace Kistl.App.Base
 
 
 		internal new static Dictionary<int, MethodInvocationConstraint__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocationConstraint__Implementation__Frozen>(1);
-		static MethodInvocationConstraint__Implementation__Frozen()
+		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[193] = 
 			DataStore[193] = new MethodInvocationConstraint__Implementation__Frozen(null, 193);

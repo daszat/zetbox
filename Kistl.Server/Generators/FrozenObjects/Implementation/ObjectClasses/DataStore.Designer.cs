@@ -40,7 +40,7 @@ Type t = Type.GetType(cls.Module.Namespace + "." + cls.ClassName + ", Kistl.Obje
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		internal ",  cls.BaseObjectClass == null ? "" : "new " , "static Dictionary<int, ",  Template.GetClassName(cls) , "> DataStore = new Dictionary<int, ",  Template.GetClassName(cls) , ">(",  instanceList.Count() , ");\r\n");
-this.WriteObjects("		static ",  Template.GetClassName(cls) , "()\r\n");
+this.WriteObjects("		internal ",  cls.BaseObjectClass == null ? "" : "new " , "static void CreateInstances()\r\n");
 this.WriteObjects("		{\r\n");
 #line 32 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cst"
 string classname = Template.GetClassName(cls);

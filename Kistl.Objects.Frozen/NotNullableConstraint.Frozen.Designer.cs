@@ -92,7 +92,7 @@ namespace Kistl.App.Base
 
 
 		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(79);
-		static NotNullableConstraint__Implementation__Frozen()
+		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74] = 
 			DataStore[74] = new NotNullableConstraint__Implementation__Frozen(null, 74);

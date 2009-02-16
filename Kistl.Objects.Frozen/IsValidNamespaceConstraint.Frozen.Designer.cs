@@ -92,7 +92,7 @@ namespace Kistl.App.Base
 
 
 		internal new static Dictionary<int, IsValidNamespaceConstraint__Implementation__Frozen> DataStore = new Dictionary<int, IsValidNamespaceConstraint__Implementation__Frozen>(1);
-		static IsValidNamespaceConstraint__Implementation__Frozen()
+		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[198] = 
 			Kistl.App.Base.IsValidIdentifierConstraint__Implementation__Frozen.DataStore[198] = 
