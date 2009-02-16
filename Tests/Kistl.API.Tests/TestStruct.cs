@@ -12,13 +12,13 @@ namespace Kistl.API
 
         public void ToStream(System.IO.BinaryWriter sw)
         {
-            BinarySerializer.ToBinary(ID, sw);
+            BinarySerializer.ToStream(ID, sw);
         }
 
         public void FromStream(System.IO.BinaryReader sr)
         {
             int _tmp;
-            BinarySerializer.FromBinary(out _tmp, sr);
+            BinarySerializer.FromStream(out _tmp, sr);
             ID = _tmp;
         }
 

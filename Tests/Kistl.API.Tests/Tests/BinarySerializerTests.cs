@@ -38,10 +38,10 @@ namespace Kistl.API.Tests
         {
             bool toval, fromval;
             toval = true;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -51,10 +51,10 @@ namespace Kistl.API.Tests
             bool? toval, fromval;
             toval = null;
 
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -63,10 +63,10 @@ namespace Kistl.API.Tests
         {
             bool? toval, fromval;
             toval = true;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -75,7 +75,7 @@ namespace Kistl.API.Tests
         [Ignore("This needs quite a bit of these tests yet")]
         public void BoolNullStream()
         {
-            BinarySerializer.ToBinary(true, null);
+            BinarySerializer.ToStream(true, null);
         }
 
         [Test]
@@ -83,10 +83,10 @@ namespace Kistl.API.Tests
         {
             DateTime toval, fromval;
             toval = System.DateTime.Now;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -95,10 +95,10 @@ namespace Kistl.API.Tests
         {
             DateTime? toval, fromval;
             toval = null;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -107,10 +107,10 @@ namespace Kistl.API.Tests
         {
             DateTime? toval, fromval;
             toval = System.DateTime.Now;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -119,10 +119,10 @@ namespace Kistl.API.Tests
         {
             int toval, fromval;
             toval = 23;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -131,10 +131,10 @@ namespace Kistl.API.Tests
         {
             int? toval, fromval;
             toval = null;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -143,10 +143,10 @@ namespace Kistl.API.Tests
         {
             int? toval, fromval;
             toval = 24;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -156,11 +156,11 @@ namespace Kistl.API.Tests
         {
             TestEnum toval, fromval;
             toval = TestEnum.First;
-            BinarySerializer.ToBinary((int)toval, sw);
+            BinarySerializer.ToStream((int)toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
             int tmp;
-            BinarySerializer.FromBinary(out tmp, sr);
+            BinarySerializer.FromStream(out tmp, sr);
             fromval = (TestEnum)tmp;
             Assert.That(fromval, Is.EqualTo(toval));
         }
@@ -170,10 +170,10 @@ namespace Kistl.API.Tests
         {
             float toval, fromval;
             toval = 23.0f;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -182,10 +182,10 @@ namespace Kistl.API.Tests
         {
             float? toval, fromval;
             toval = null;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -194,10 +194,10 @@ namespace Kistl.API.Tests
         {
             float? toval, fromval;
             toval = 24.0f;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -207,10 +207,10 @@ namespace Kistl.API.Tests
         {
             double toval, fromval;
             toval = 23.0;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -219,10 +219,10 @@ namespace Kistl.API.Tests
         {
             double? toval, fromval;
             toval = null;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -231,10 +231,10 @@ namespace Kistl.API.Tests
         {
             double? toval, fromval;
             toval = 24.0;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -244,10 +244,10 @@ namespace Kistl.API.Tests
         {
             string toval, fromval;
             toval = "Hello World!";
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -256,10 +256,10 @@ namespace Kistl.API.Tests
         {
             string toval, fromval;
             toval = null;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -268,10 +268,10 @@ namespace Kistl.API.Tests
         {
             SerializableType toval, fromval;
             toval = new SerializableType(typeof(TestDataObject));
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -281,15 +281,15 @@ namespace Kistl.API.Tests
         {
             SerializableType toval;
             toval = null;
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void SerializableType_FromBinary_NullStream()
+        public void SerializableType_FromStream_NullStream()
         {
             SerializableType fromval;
-            BinarySerializer.FromBinary(out fromval, null);
+            BinarySerializer.FromStream(out fromval, null);
         }
 
         [Test]
@@ -299,10 +299,10 @@ namespace Kistl.API.Tests
             toval = new List<TestDataObject>();
             toval.Add(new TestDataObject__Implementation__());
 
-            BinarySerializer.ToBinary(toval.Cast<IDataObject>(), sw);
+            BinarySerializer.ToStream(toval.Cast<IDataObject>(), sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -313,11 +313,11 @@ namespace Kistl.API.Tests
             toval = new List<TestDataObject>();
             toval.Add(new TestDataObject__Implementation__());
 
-            BinarySerializer.ToBinary(toval.Cast<IDataObject>(), sw);
+            BinarySerializer.ToStream(toval.Cast<IDataObject>(), sw);
             ms.Seek(0, SeekOrigin.Begin);
 
             fromval = new List<TestDataObject>();
-            BinarySerializer.FromBinary(fromval, sr);
+            BinarySerializer.FromStream(fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -328,11 +328,11 @@ namespace Kistl.API.Tests
             toval = new List<TestCollectionEntry>();
             toval.Add(new TestCollectionEntry() { ID = 10, TestName = "Test" });
 
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStreamCollectionEntries(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
             fromval = new List<TestCollectionEntry>();
-            BinarySerializer.FromBinaryCollectionEntries(fromval, sr);
+            BinarySerializer.FromStreamCollectionEntries(fromval, sr);
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
@@ -340,7 +340,7 @@ namespace Kistl.API.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void ICollection_ICollectionEntryNull()
         {
-            BinarySerializer.FromBinaryCollectionEntries<TestCollectionEntry>(null, sr);
+            BinarySerializer.FromStreamCollectionEntries<TestCollectionEntry>(null, sr);
         }
 
         [Test]
@@ -350,11 +350,11 @@ namespace Kistl.API.Tests
             toval = new List<TestCollectionEntry>();
             toval.Add(new TestCollectionEntry() { ID = 20, TestName = "Hello" });
 
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStreamCollectionEntries(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
             ObservableCollection<TestCollectionEntry> fromvalobserbable = new ObservableCollection<TestCollectionEntry>();
-            BinarySerializer.FromBinaryCollectionEntries(fromvalobserbable, sr);
+            BinarySerializer.FromStreamCollectionEntries(fromvalobserbable, sr);
             Assert.That(fromvalobserbable[0].ID, Is.EqualTo(toval[0].ID));
         }
 
@@ -363,11 +363,11 @@ namespace Kistl.API.Tests
         {
             TestStruct toval = new TestStruct() { ID = 1 };
 
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
             TestStruct fromval;
-            BinarySerializer.FromBinary<TestStruct>(out fromval, sr);
+            BinarySerializer.FromStream<TestStruct>(out fromval, sr);
             Assert.That(fromval.ID, Is.EqualTo(fromval.ID));
         }
 
@@ -376,11 +376,11 @@ namespace Kistl.API.Tests
         {
             TestStruct toval = null;
 
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
             TestStruct fromval;
-            BinarySerializer.FromBinary<TestStruct>(out fromval, sr);
+            BinarySerializer.FromStream<TestStruct>(out fromval, sr);
             Assert.That(fromval, Is.Null);
         }
 
@@ -408,10 +408,10 @@ namespace Kistl.API.Tests
 
             SerializableExpression toval, fromval;
             toval = Kistl.API.SerializableExpression.FromExpression(list.Expression);
-            BinarySerializer.ToBinary(toval, sw);
+            BinarySerializer.ToStream(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromBinary(out fromval, sr);
+            BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval.NodeType, Is.EqualTo(toval.NodeType));
             Assert.That(list.Expression.NodeType, Is.EqualTo(fromval.ToExpression().NodeType));
         }

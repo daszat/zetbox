@@ -174,9 +174,9 @@ namespace Kistl.API.Server
             if (sw == null) throw new ArgumentNullException("sw");
             base.ToStream(sw);
 
-            BinarySerializer.ToBinary(new SerializableType(this.GetType()), sw);
-            BinarySerializer.ToBinary(ID, sw);
-            BinarySerializer.ToBinary((int)ObjectState, sw);
+            BinarySerializer.ToStream(new SerializableType(this.GetType()), sw);
+            BinarySerializer.ToStream(ID, sw);
+            BinarySerializer.ToStream((int)ObjectState, sw);
         }
 
         /// <summary>
@@ -189,16 +189,16 @@ namespace Kistl.API.Server
             base.FromStream(sr);
 
             SerializableType t;
-            BinarySerializer.FromBinary(out t, sr);
+            BinarySerializer.FromStream(out t, sr);
 
             if (this.GetType() != t.GetSerializedType())
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
 
             int tmp;
-            BinarySerializer.FromBinary(out tmp, sr);
+            BinarySerializer.FromStream(out tmp, sr);
             ID = tmp;
 
-            BinarySerializer.FromBinary(out tmp, sr);
+            BinarySerializer.FromStream(out tmp, sr);
             ObjectState = (DataObjectState)tmp;
         }
 
@@ -242,8 +242,8 @@ namespace Kistl.API.Server
             if (sw == null) throw new ArgumentNullException("sw", "No BinaryWriter specified");
             base.ToStream(sw);
 
-            BinarySerializer.ToBinary(ID, sw);
-            BinarySerializer.ToBinary((int)ObjectState, sw);
+            BinarySerializer.ToStream(ID, sw);
+            BinarySerializer.ToStream((int)ObjectState, sw);
         }
 
         /// <summary>
@@ -256,10 +256,10 @@ namespace Kistl.API.Server
             base.FromStream(sr);
 
             int tmp;
-            BinarySerializer.FromBinary(out tmp, sr);
+            BinarySerializer.FromStream(out tmp, sr);
             ID = tmp;
 
-            BinarySerializer.FromBinary(out tmp, sr);
+            BinarySerializer.FromStream(out tmp, sr);
             ObjectState = (DataObjectState)tmp;
         }
 

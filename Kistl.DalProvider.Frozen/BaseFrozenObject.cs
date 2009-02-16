@@ -36,9 +36,9 @@ namespace Kistl.DalProvider.Frozen
 
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
-            BinarySerializer.ToBinary(new SerializableType(this.GetType()), sw);
-            BinarySerializer.ToBinary(ID, sw);
-            BinarySerializer.ToBinary((int)ObjectState, sw);
+            BinarySerializer.ToStream(new SerializableType(this.GetType()), sw);
+            BinarySerializer.ToStream(ID, sw);
+            BinarySerializer.ToStream((int)ObjectState, sw);
         }
 
         public virtual void FromStream(System.IO.BinaryReader sr)

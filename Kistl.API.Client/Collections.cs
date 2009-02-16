@@ -471,16 +471,16 @@ namespace Kistl.API.Client
                         se.ParentIndex = Kistl.API.Helper.LASTINDEXPOSITION;
                 }
 
-                BinarySerializer.ToBinary(true, sw);
+                BinarySerializer.ToStream(true, sw);
                 obj.ToStream(sw);
             }
             foreach (ICollectionEntry obj in deletedCollection)
             {
-                BinarySerializer.ToBinary(true, sw);
+                BinarySerializer.ToStream(true, sw);
                 obj.ToStream(sw);
             }
 
-            BinarySerializer.ToBinary(false, sw);
+            BinarySerializer.ToStream(false, sw);
         }
 
         public void FromStream(System.IO.BinaryReader sr)

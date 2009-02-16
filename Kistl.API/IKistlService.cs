@@ -68,13 +68,13 @@ namespace Kistl.API
         {
             System.IO.BinaryWriter sw = new System.IO.BinaryWriter(msg);
 
-            BinarySerializer.ToBinary(Type, sw);
+            BinarySerializer.ToStream(Type, sw);
             sw.Write(ID);
             sw.Write(Property ?? "");
 
             sw.Write(MaxListCount);
-            BinarySerializer.ToBinary(Filter, sw);
-            BinarySerializer.ToBinary(OrderBy, sw);
+            BinarySerializer.ToStream(Filter, sw);
+            BinarySerializer.ToStream(OrderBy, sw);
         }
 
         /// <summary>
@@ -97,16 +97,16 @@ namespace Kistl.API
             System.IO.BinaryReader sr = new System.IO.BinaryReader(msg);
 
             SerializableType tmpType;
-            BinarySerializer.FromBinary(out tmpType, sr); Type = tmpType;
+            BinarySerializer.FromStream(out tmpType, sr); Type = tmpType;
             ID = sr.ReadInt32();
             Property = sr.ReadString();
 
             MaxListCount = sr.ReadInt32();
             SerializableExpression tmp;
-            BinarySerializer.FromBinary(out tmp, sr);
+            BinarySerializer.FromStream(out tmp, sr);
             Filter = tmp;
 
-            BinarySerializer.FromBinary(out tmp, sr);
+            BinarySerializer.FromStream(out tmp, sr);
             OrderBy = tmp;
         }
     }

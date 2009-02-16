@@ -44,14 +44,14 @@ namespace Kistl.API.Tests
 
         public void FromStream(System.IO.BinaryReader sr)
         {
-            BinarySerializer.FromBinary(out _ID, sr);
-            BinarySerializer.FromBinary(out _TestName, sr);
+            BinarySerializer.FromStream(out _ID, sr);
+            BinarySerializer.FromStream(out _TestName, sr);
         }
 
         public void ToStream(System.IO.BinaryWriter sw)
         {
-            BinarySerializer.ToBinary(ID, sw);
-            BinarySerializer.ToBinary(TestName, sw);
+            BinarySerializer.ToStream(ID, sw);
+            BinarySerializer.ToStream(TestName, sw);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

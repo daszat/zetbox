@@ -58,20 +58,20 @@ namespace Kistl.Server
                         System.IO.BinaryReader sr = new System.IO.BinaryReader(msg);
                         List<IDataObject> objects = new List<IDataObject>();
                         bool @continue;
-                        BinarySerializer.FromBinary(out @continue, sr);
+                        BinarySerializer.FromStream(out @continue, sr);
                         while (@continue)
                         {
                             // Deserialize
                             long pos = msg.Position;
                             SerializableType objType;
-                            BinarySerializer.FromBinary(out objType, sr);
+                            BinarySerializer.FromStream(out objType, sr);
 
                             msg.Seek(pos, System.IO.SeekOrigin.Begin);
 
                             IDataObject obj = (IDataObject)objType.NewObject();
                             obj.FromStream(sr);
                             objects.Add(obj);
-                            BinarySerializer.FromBinary(out @continue, sr);
+                            BinarySerializer.FromStream(out @continue, sr);
                         }
 
                         // Set Operation
@@ -83,10 +83,10 @@ namespace Kistl.Server
 
                         foreach (IDataObject obj in changedObjects)
                         {
-                            BinarySerializer.ToBinary(true, sw);
+                            BinarySerializer.ToStream(true, sw);
                             obj.ToStream(sw);
                         }
-                        BinarySerializer.ToBinary(false, sw);
+                        BinarySerializer.ToStream(false, sw);
 
                         result.Seek(0, SeekOrigin.Begin);
                         return result;

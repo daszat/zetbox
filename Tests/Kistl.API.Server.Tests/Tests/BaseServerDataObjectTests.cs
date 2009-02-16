@@ -141,7 +141,7 @@ namespace Kistl.API.Server.Tests
             BinaryReader sr = new BinaryReader(ms);
 
             SerializableType wrongType = new SerializableType(typeof(string));
-            BinarySerializer.ToBinary(wrongType, sw);
+            BinarySerializer.ToStream(wrongType, sw);
 
             using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {

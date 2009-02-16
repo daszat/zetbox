@@ -60,15 +60,15 @@ namespace Kistl.API.Client.Tests
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this.Value, sw);
-            BinarySerializer.ToBinary(this.fk_Parent, sw);
+            BinarySerializer.ToStream(this.Value, sw);
+            BinarySerializer.ToStream(this.fk_Parent, sw);
         }
 
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
-            BinarySerializer.FromBinary(out this._Value, sr);
-            BinarySerializer.FromBinary(out this._fk_Parent, sr);
+            BinarySerializer.FromStream(out this._Value, sr);
+            BinarySerializer.FromStream(out this._fk_Parent, sr);
         }
 
         public override void ApplyChanges(Kistl.API.ICollectionEntry obj)

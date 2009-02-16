@@ -173,7 +173,7 @@ namespace Kistl.API.Client
                 {
                     long pos = s.Position;
                     SerializableType objType;
-                    BinarySerializer.FromBinary(out objType, sr);
+                    BinarySerializer.FromStream(out objType, sr);
 
                     s.Seek(pos, System.IO.SeekOrigin.Begin);
 
@@ -216,7 +216,7 @@ namespace Kistl.API.Client
                 {
                     long pos = s.Position;
                     SerializableType objType;
-                    BinarySerializer.FromBinary(out objType, sr);
+                    BinarySerializer.FromStream(out objType, sr);
 
                     s.Seek(pos, System.IO.SeekOrigin.Begin);
 
@@ -252,7 +252,7 @@ namespace Kistl.API.Client
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
 
                 SerializableType objType;
-                BinarySerializer.FromBinary(out objType, sr);
+                BinarySerializer.FromStream(out objType, sr);
 
                 s.Seek(0, System.IO.SeekOrigin.Begin);
 
@@ -277,10 +277,10 @@ namespace Kistl.API.Client
                 BinaryWriter sw = new BinaryWriter(ms);
                 foreach (IDataObject obj in objects)
                 {
-                    BinarySerializer.ToBinary(true, sw);
+                    BinarySerializer.ToStream(true, sw);
                     obj.ToStream(sw);
                 }
-                BinarySerializer.ToBinary(false, sw);
+                BinarySerializer.ToStream(false, sw);
 
                 // Set Operation
                 System.IO.MemoryStream s = serviceStreams.SetObjects(ms);
@@ -290,19 +290,19 @@ namespace Kistl.API.Client
 
                 List<IDataObject> result = new List<IDataObject>();
                 bool @continue;
-                BinarySerializer.FromBinary(out @continue, sr);
+                BinarySerializer.FromStream(out @continue, sr);
                 while (@continue)
                 {
                     long pos = s.Position;
                     SerializableType objType;
-                    BinarySerializer.FromBinary(out objType, sr);
+                    BinarySerializer.FromStream(out objType, sr);
 
                     s.Seek(pos, System.IO.SeekOrigin.Begin);
 
                     IDataObject obj = (IDataObject)objType.NewObject();
                     obj.FromStream(sr);
                     result.Add(obj);
-                    BinarySerializer.FromBinary(out @continue, sr);
+                    BinarySerializer.FromStream(out @continue, sr);
                 }
 
                 return result;

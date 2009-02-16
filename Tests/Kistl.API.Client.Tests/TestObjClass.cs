@@ -183,15 +183,15 @@ namespace Kistl.API.Client.Tests
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToBinary(this._StringProp, sw);
-            BinarySerializer.ToBinary(this._TestEnumProp, sw);
+            BinarySerializer.ToStream(this._StringProp, sw);
+            BinarySerializer.ToStream(this._TestEnumProp, sw);
         }
 
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
-            BinarySerializer.FromBinary(out this._StringProp, sr);
-            BinarySerializer.FromBinary(out this._TestEnumProp, sr);
+            BinarySerializer.FromStream(out this._StringProp, sr);
+            BinarySerializer.FromStream(out this._TestEnumProp, sr);
         }
 
         public delegate void TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);

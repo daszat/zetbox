@@ -62,21 +62,21 @@ namespace Kistl.API.Tests
 
         public void ToStream(System.IO.BinaryWriter sw)
         {
-            BinarySerializer.ToBinary(new SerializableType(this.GetType()), sw);
-            BinarySerializer.ToBinary(ID, sw);
-            BinarySerializer.ToBinary(StringProperty, sw);
-            BinarySerializer.ToBinary(IntProperty, sw);
-            BinarySerializer.ToBinary(BoolProperty, sw);
+            BinarySerializer.ToStream(new SerializableType(this.GetType()), sw);
+            BinarySerializer.ToStream(ID, sw);
+            BinarySerializer.ToStream(StringProperty, sw);
+            BinarySerializer.ToStream(IntProperty, sw);
+            BinarySerializer.ToStream(BoolProperty, sw);
         }
 
         public void FromStream(System.IO.BinaryReader sr)
         {
             SerializableType type;
-            BinarySerializer.FromBinary(out type, sr);
-            BinarySerializer.FromBinary(out _ID, sr);
-            BinarySerializer.FromBinary(out _StringProperty, sr);
-            BinarySerializer.FromBinary(out _IntProperty, sr);
-            BinarySerializer.FromBinary(out _BoolProperty, sr);
+            BinarySerializer.FromStream(out type, sr);
+            BinarySerializer.FromStream(out _ID, sr);
+            BinarySerializer.FromStream(out _StringProperty, sr);
+            BinarySerializer.FromStream(out _IntProperty, sr);
+            BinarySerializer.FromStream(out _BoolProperty, sr);
         }
 
         public override int GetHashCode()
