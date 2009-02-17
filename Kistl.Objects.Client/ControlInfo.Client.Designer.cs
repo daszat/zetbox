@@ -202,9 +202,9 @@ namespace Kistl.App.GUI
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_Assembly, binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
-            BinarySerializer.ToStream((int)this.ControlType, binStream);
+            BinarySerializer.ToStream((int)((ControlInfo)this).ControlType, binStream);
             BinarySerializer.ToStream(this._IsContainer, binStream);
-            BinarySerializer.ToStream((int)this.Platform, binStream);
+            BinarySerializer.ToStream((int)((ControlInfo)this).Platform, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -212,9 +212,9 @@ namespace Kistl.App.GUI
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Assembly, binStream);
             BinarySerializer.FromStream(out this._ClassName, binStream);
-            BinarySerializer.FromStreamConverter(v => this.ControlType = (Kistl.App.GUI.VisualType)v, binStream);
+            BinarySerializer.FromStreamConverter(v => ((ControlInfo)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._IsContainer, binStream);
-            BinarySerializer.FromStreamConverter(v => this.Platform = (Kistl.App.GUI.Toolkit)v, binStream);
+            BinarySerializer.FromStreamConverter(v => ((ControlInfo)this).Platform = (Kistl.App.GUI.Toolkit)v, binStream);
         }
 
 #endregion

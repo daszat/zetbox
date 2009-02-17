@@ -175,7 +175,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_LayoutRef, binStream);
-            BinarySerializer.ToStream((int)this.Toolkit, binStream);
+            BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
             BinarySerializer.ToStream(this._fk_ViewRef, binStream);
         }
 
@@ -183,7 +183,7 @@ namespace Kistl.App.Base
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_LayoutRef, binStream);
-            BinarySerializer.FromStreamConverter(v => this.Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
+            BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
             BinarySerializer.FromStream(out this._fk_ViewRef, binStream);
         }
 

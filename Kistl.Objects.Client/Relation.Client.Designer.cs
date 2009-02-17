@@ -224,7 +224,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._fk_LeftPart, binStream);
             BinarySerializer.ToStream(this._fk_RightPart, binStream);
-            BinarySerializer.ToStream((int)this.Storage, binStream);
+            BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -233,7 +233,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._fk_LeftPart, binStream);
             BinarySerializer.FromStream(out this._fk_RightPart, binStream);
-            BinarySerializer.FromStreamConverter(v => this.Storage = (Kistl.App.Base.StorageType)v, binStream);
+            BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
         }
 
 #endregion

@@ -130,7 +130,7 @@ namespace Kistl.App.Base
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        public Kistl.App.GUI.Toolkit Toolkit
+        Kistl.App.GUI.Toolkit ViewDescriptor.Toolkit
         {
             get
             {
@@ -154,15 +154,15 @@ namespace Kistl.App.Base
         /// <summary>EF sees only this property, for Toolkit</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int Toolkit__Implementation__
+        public int Toolkit
         {
             get
             {
-                return (int)Toolkit;
+                return (int)((ViewDescriptor)this).Toolkit;
             }
             set
             {
-                Toolkit = (Kistl.App.GUI.Toolkit)value;
+                ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)value;
             }
         }
         
@@ -291,7 +291,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_LayoutRef, binStream);
-            BinarySerializer.ToStream((int)this.Toolkit, binStream);
+            BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
             BinarySerializer.ToStream(this._fk_ViewRef, binStream);
         }
 
@@ -299,7 +299,7 @@ namespace Kistl.App.Base
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_LayoutRef, binStream);
-            BinarySerializer.FromStreamConverter(v => this.Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
+            BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
             BinarySerializer.FromStream(out this._fk_ViewRef, binStream);
         }
 

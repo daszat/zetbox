@@ -156,7 +156,7 @@ namespace Kistl.App.GUI
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        public Kistl.App.GUI.VisualType ControlType
+        Kistl.App.GUI.VisualType ControlInfo.ControlType
         {
             get
             {
@@ -180,15 +180,15 @@ namespace Kistl.App.GUI
         /// <summary>EF sees only this property, for ControlType</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int ControlType__Implementation__
+        public int ControlType
         {
             get
             {
-                return (int)ControlType;
+                return (int)((ControlInfo)this).ControlType;
             }
             set
             {
-                ControlType = (Kistl.App.GUI.VisualType)value;
+                ((ControlInfo)this).ControlType = (Kistl.App.GUI.VisualType)value;
             }
         }
         
@@ -224,7 +224,7 @@ namespace Kistl.App.GUI
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        public Kistl.App.GUI.Toolkit Platform
+        Kistl.App.GUI.Toolkit ControlInfo.Platform
         {
             get
             {
@@ -248,15 +248,15 @@ namespace Kistl.App.GUI
         /// <summary>EF sees only this property, for Platform</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int Platform__Implementation__
+        public int Platform
         {
             get
             {
-                return (int)Platform;
+                return (int)((ControlInfo)this).Platform;
             }
             set
             {
-                Platform = (Kistl.App.GUI.Toolkit)value;
+                ((ControlInfo)this).Platform = (Kistl.App.GUI.Toolkit)value;
             }
         }
         
@@ -306,9 +306,9 @@ namespace Kistl.App.GUI
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_Assembly, binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
-            BinarySerializer.ToStream((int)this.ControlType, binStream);
+            BinarySerializer.ToStream((int)((ControlInfo)this).ControlType, binStream);
             BinarySerializer.ToStream(this._IsContainer, binStream);
-            BinarySerializer.ToStream((int)this.Platform, binStream);
+            BinarySerializer.ToStream((int)((ControlInfo)this).Platform, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -316,9 +316,9 @@ namespace Kistl.App.GUI
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Assembly, binStream);
             BinarySerializer.FromStream(out this._ClassName, binStream);
-            BinarySerializer.FromStreamConverter(v => this.ControlType = (Kistl.App.GUI.VisualType)v, binStream);
+            BinarySerializer.FromStreamConverter(v => ((ControlInfo)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._IsContainer, binStream);
-            BinarySerializer.FromStreamConverter(v => this.Platform = (Kistl.App.GUI.Toolkit)v, binStream);
+            BinarySerializer.FromStreamConverter(v => ((ControlInfo)this).Platform = (Kistl.App.GUI.Toolkit)v, binStream);
         }
 
 #endregion

@@ -144,7 +144,7 @@ namespace Kistl.App.GUI
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        public Kistl.App.GUI.VisualType ControlType
+        Kistl.App.GUI.VisualType Visual.ControlType
         {
             get
             {
@@ -168,15 +168,15 @@ namespace Kistl.App.GUI
         /// <summary>EF sees only this property, for ControlType</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int ControlType__Implementation__
+        public int ControlType
         {
             get
             {
-                return (int)ControlType;
+                return (int)((Visual)this).ControlType;
             }
             set
             {
-                ControlType = (Kistl.App.GUI.VisualType)value;
+                ((Visual)this).ControlType = (Kistl.App.GUI.VisualType)value;
             }
         }
         
@@ -412,7 +412,7 @@ namespace Kistl.App.GUI
             base.ToStream(binStream);
             BinarySerializer.ToStreamCollectionEntries(this.Children__Implementation__, binStream);
             BinarySerializer.ToStreamCollectionEntries(this.ContextMenu__Implementation__, binStream);
-            BinarySerializer.ToStream((int)this.ControlType, binStream);
+            BinarySerializer.ToStream((int)((Visual)this).ControlType, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._fk_Method, binStream);
             BinarySerializer.ToStream(this._fk_Property, binStream);
@@ -423,7 +423,7 @@ namespace Kistl.App.GUI
             base.FromStream(binStream);
             BinarySerializer.FromStreamCollectionEntries(this.Children__Implementation__, binStream);
             BinarySerializer.FromStreamCollectionEntries(this.ContextMenu__Implementation__, binStream);
-            BinarySerializer.FromStreamConverter(v => this.ControlType = (Kistl.App.GUI.VisualType)v, binStream);
+            BinarySerializer.FromStreamConverter(v => ((Visual)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._fk_Method, binStream);
             BinarySerializer.FromStream(out this._fk_Property, binStream);

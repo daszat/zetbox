@@ -17,22 +17,20 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 
         protected virtual void ApplyScalarProperty(Property prop, string parentName)
         {
-            string propertyName;
+            string propertyName = prop.PropertyName;
             string columnName;
 
             if (prop is EnumerationProperty)
             {
-                propertyName = prop.PropertyName + Kistl.API.Helper.ImplementationSuffix;
                 columnName = Construct.NestedColumnName(prop, parentName);
             }
             else if (prop is ValueTypeProperty)
             {
-                propertyName = prop.PropertyName;
                 columnName = Construct.NestedColumnName(prop, parentName);
             }
             else if (prop is ObjectReferenceProperty && prop.NeedsPositionColumn())
             {
-                propertyName = prop.PropertyName + Kistl.API.Helper.PositionSuffix;
+                propertyName += Kistl.API.Helper.PositionSuffix;
                 columnName = Construct.ListPositionColumnName(prop, parentName);
             }
             else

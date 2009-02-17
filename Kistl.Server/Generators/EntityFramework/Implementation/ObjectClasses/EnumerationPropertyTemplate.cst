@@ -14,15 +14,18 @@
 <%@ Parameter Name="prop" Type="EnumerationProperty" %>
 <%
 
+	string interfaceName = prop.ObjectClass.ClassName;
+
 	string name = prop.PropertyName;
-	string efName = name + Kistl.API.Helper.ImplementationSuffix;
+	// efName needs to be == name so that member change tracking works
+	string efName = name; // + Kistl.API.Helper.ImplementationSuffix;
 	string backingName = "_" + name;
 
 	string enumType = prop.ReferencedTypeAsCSharp();
 
 %>
         // implement the user-visible interface
-        public <%= enumType %> <%= name %>
+        <%= enumType %> <%= interfaceName %>.<%= name %>
         {
             get
             {
@@ -50,11 +53,11 @@
         {
             get
             {
-                return (int)<%= name %>;
+                return (int)((<%= interfaceName %>)this).<%= name %>;
             }
             set
             {
-                <%= name %> = (<%= enumType %>)value;
+                ((<%= interfaceName %>)this).<%= name %> = (<%= enumType %>)value;
             }
         }
         

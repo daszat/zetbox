@@ -32,22 +32,24 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         public override void Generate()
         {
 #line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
-string memberName = prop.PropertyName;
+// always use the interface to get the "right" property
+	string interfaceName = prop.ObjectClass.ClassName;
+    string memberName = prop.PropertyName;
     string enumName =  prop.Enumeration.Module.Namespace + "." +  prop.Enumeration.ClassName;
 	string methodName = direction.ToString();
 	
 	switch(direction){
 		case SerializerDirection.ToStream:
 
-#line 25 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
-this.WriteObjects("            BinarySerializer.",  methodName , "((int)this.",  memberName , ", ",  streamName , ");\r\n");
 #line 27 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+this.WriteObjects("            BinarySerializer.",  methodName , "((int)((",  interfaceName , ")this).",  memberName , ", ",  streamName , ");\r\n");
+#line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
 break;
 		case SerializerDirection.FromStream:
 
-#line 30 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
-this.WriteObjects("            BinarySerializer.",  methodName , "Converter(v => this.",  memberName , " = (",  enumName , ")v, ",  streamName , ");\r\n");
 #line 32 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+this.WriteObjects("            BinarySerializer.",  methodName , "Converter(v => ((",  interfaceName , ")this).",  memberName , " = (",  enumName , ")v, ",  streamName , ");\r\n");
+#line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
 break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");

@@ -236,7 +236,7 @@ namespace Kistl.App.Base
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        public Kistl.App.Base.StorageType? Storage
+        Kistl.App.Base.StorageType? Relation.Storage
         {
             get
             {
@@ -260,15 +260,15 @@ namespace Kistl.App.Base
         /// <summary>EF sees only this property, for Storage</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int Storage__Implementation__
+        public int Storage
         {
             get
             {
-                return (int)Storage;
+                return (int)((Relation)this).Storage;
             }
             set
             {
-                Storage = (Kistl.App.Base.StorageType?)value;
+                ((Relation)this).Storage = (Kistl.App.Base.StorageType?)value;
             }
         }
         
@@ -319,7 +319,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._fk_LeftPart, binStream);
             BinarySerializer.ToStream(this._fk_RightPart, binStream);
-            BinarySerializer.ToStream((int)this.Storage, binStream);
+            BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -328,7 +328,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._fk_LeftPart, binStream);
             BinarySerializer.FromStream(out this._fk_RightPart, binStream);
-            BinarySerializer.FromStreamConverter(v => this.Storage = (Kistl.App.Base.StorageType)v, binStream);
+            BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
         }
 
 #endregion

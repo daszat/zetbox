@@ -197,7 +197,7 @@ namespace Kistl.App.Test
             BinarySerializer.ToStream(this._MyIntProperty, binStream);
             BinarySerializer.ToStream(this._fk_ObjectProp, binStream);
             BinarySerializer.ToStream(this._StringProp, binStream);
-            BinarySerializer.ToStream((int)this.TestEnumProp, binStream);
+            BinarySerializer.ToStream((int)((TestObjClass)this).TestEnumProp, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -206,7 +206,7 @@ namespace Kistl.App.Test
             BinarySerializer.FromStream(out this._MyIntProperty, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
             BinarySerializer.FromStream(out this._StringProp, binStream);
-            BinarySerializer.FromStreamConverter(v => this.TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
+            BinarySerializer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
         }
 
 #endregion

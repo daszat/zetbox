@@ -30,8 +30,8 @@ namespace Kistl.DalProvider.EF.Tests
                 list[0].StringProp = "First";
                 list[0].TestEnumProp = TestEnum.First;
 
-                list[1].StringProp = "Second";
-                list[1].TestEnumProp = TestEnum.Second;
+                //list[1].StringProp = "Second";
+                //list[1].TestEnumProp = TestEnum.Second;
 
                 ctx.SubmitChanges();
             }

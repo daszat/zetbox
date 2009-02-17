@@ -303,7 +303,7 @@
 	    <MappingFragment StoreEntitySet="TestObjClass">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="StringProp" ColumnName="StringProp" />
-<ScalarProperty Name="TestEnumProp__Implementation__" ColumnName="TestEnumProp" />
+<ScalarProperty Name="TestEnumProp" ColumnName="TestEnumProp" />
 <ScalarProperty Name="MyIntProperty" ColumnName="MyIntProperty" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -314,8 +314,8 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
 <ScalarProperty Name="IsContainer" ColumnName="IsContainer" />
-<ScalarProperty Name="Platform__Implementation__" ColumnName="Platform" />
-<ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
+<ScalarProperty Name="Platform" ColumnName="Platform" />
+<ScalarProperty Name="ControlType" ColumnName="ControlType" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -361,7 +361,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.PresenterInfo)">
 	    <MappingFragment StoreEntitySet="PresenterInfo">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
+<ScalarProperty Name="ControlType" ColumnName="ControlType" />
 <ScalarProperty Name="PresenterTypeName" ColumnName="PresenterTypeName" />
 <ScalarProperty Name="DataTypeName" ColumnName="DataTypeName" />
 	    </MappingFragment>
@@ -372,7 +372,7 @@
 	    <MappingFragment StoreEntitySet="Visual">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Description" ColumnName="Description" />
-<ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
+<ScalarProperty Name="ControlType" ColumnName="ControlType" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -431,7 +431,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Relation)">
 	    <MappingFragment StoreEntitySet="Relation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Storage__Implementation__" ColumnName="Storage" />
+<ScalarProperty Name="Storage" ColumnName="Storage" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -448,7 +448,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor)">
 	    <MappingFragment StoreEntitySet="ViewDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Toolkit__Implementation__" ColumnName="Toolkit" />
+<ScalarProperty Name="Toolkit" ColumnName="Toolkit" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
