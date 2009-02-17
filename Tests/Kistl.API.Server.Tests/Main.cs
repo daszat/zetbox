@@ -9,8 +9,17 @@ namespace Kistl.API.Server.Tests
     {
         public static void Main(string[] args)
         {
-            new SetUp().Init();
-            KistlDataContextTests();
+            var setup = new SetUp();
+            setup.Init();
+            BaseServerDataObjectTests();
+            //KistlDataContextTests();
+        }
+
+        private static void BaseServerDataObjectTests()
+        {
+            var bsdot = new BaseServerDataObjectTests();
+            bsdot.SetUp();
+            bsdot.FromStream_Attached();
         }
 
         private static void KistlDataContextTests()

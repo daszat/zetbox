@@ -104,6 +104,10 @@ namespace Kistl.API.Server.Tests
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
+            obj.StringProp = "some string";
+            obj.TestEnumProp = 23;
+            obj.TestNames.Add("string 1");
+            obj.TestNames.Add("string 2");
             obj.ToStream(sw);
 
             Assert.That(ms.Length, Is.GreaterThan(0));
@@ -118,6 +122,10 @@ namespace Kistl.API.Server.Tests
                 Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
                 Assert.That(result.ID, Is.EqualTo(obj.ID));
                 Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
+                Assert.That(result.StringProp, Is.EqualTo(obj.StringProp));
+                Assert.That(result.TestEnumProp, Is.EqualTo(obj.TestEnumProp));
+                Assert.That(result.TestNames, Is.EqualTo(obj.TestNames));
+                Assert.That(ms.Position, Is.EqualTo(ms.Length), "Has not consumed the complete stream");
             }
         }
 

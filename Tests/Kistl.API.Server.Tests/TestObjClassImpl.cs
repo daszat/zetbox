@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Text;
-using System.ComponentModel;
+using System.Xml.Serialization;
+
 using Kistl.API;
 using Kistl.API.Server;
-using System.Data.Objects.DataClasses;
-using System.Xml.Serialization;
 using Kistl.DALProvider.EF;
 
 [assembly: System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_TestObjClass_TestObjClass", "A_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.API.Server.Tests.TestObjClass__Implementation__), "B_TestObjClass", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Kistl.API.Server.Tests.TestObjClass__Implementation__))]
@@ -181,6 +182,7 @@ namespace Kistl.API.Server.Tests
             base.ToStream(sw);
             BinarySerializer.ToStream(this._StringProp, sw);
             BinarySerializer.ToStream(this._TestEnumProp, sw);
+            BinarySerializer.ToStreamCollectionEntries(this.TestNames__Implementation__, sw);
         }
 
         public override void FromStream(System.IO.BinaryReader sr)
@@ -188,6 +190,7 @@ namespace Kistl.API.Server.Tests
             base.FromStream(sr);
             BinarySerializer.FromStream(out this._StringProp, sr);
             BinarySerializer.FromStream(out this._TestEnumProp, sr);
+            BinarySerializer.FromStreamCollectionEntries(this.TestNames__Implementation__, sr);
         }
 
         public delegate void TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);

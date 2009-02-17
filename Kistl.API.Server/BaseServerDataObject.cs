@@ -84,32 +84,56 @@ namespace Kistl.API.Server
         public abstract bool IsAttached { get; }
 
         /// <summary>
-        /// Abstract Method for Serializing this Object.
+        /// Base method for serializing this Object.
         /// </summary>
         /// <param name="sw">Stream to serialize to</param>
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
+
+            BinarySerializer.ToStream(new SerializableType(this.GetType()), sw);
+            BinarySerializer.ToStream(ID, sw);
+            BinarySerializer.ToStream((int)ObjectState, sw);
         }
+
         /// <summary>
-        /// Abstract Method for Deserializing this Object.
+        /// Base method for deserializing this Object.
         /// </summary>
         /// <param name="sr">Stream to serialize from</param>
         public virtual void FromStream(System.IO.BinaryReader sr)
         {
-            // TODO: ....
             if (this.IsAttached) throw new InvalidOperationException("Deserializing attached objects is not allowed");
+            if (sr == null) throw new ArgumentNullException("sw");
+
+            SerializableType t;
+            BinarySerializer.FromStream(out t, sr);
+
+            if (this.GetType() != t.GetSerializedType())
+                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
+
+            BinarySerializer.FromStreamConverter(i => ID = i, sr);
+            BinarySerializer.FromStreamConverter(i => ObjectState = (DataObjectState)i, sr);
         }
 
         /// <summary>
         /// Notifies that a Property is changing
         /// </summary>
-        /// <param name="property">Property that is changing or empty, if the Object is changing</param>
-        public abstract void NotifyPropertyChanging(string property);
+        /// <param name="propertyName">Property that is changing or empty, if the Object is changing</param>
+        public virtual void NotifyPropertyChanging(string propertyName)
+        {
+            if (PropertyChanging != null)
+                PropertyChanging(this, new PropertyChangingEventArgs(propertyName));
+        }
+
         /// <summary>
         /// Notifies that a Property has changed
         /// </summary>
-        /// <param name="property">Property that has changed or empty, if the Object has changed</param>
-        public abstract void NotifyPropertyChanged(string property);
+        /// <param name="propertyName">Property that has changed or empty, if the Object has changed</param>
+        public virtual void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -147,61 +171,6 @@ namespace Kistl.API.Server
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Fires an Event before an Property is changed.
-        /// </summary>
-        /// <param name="property">Propertyname</param>
-        public override void NotifyPropertyChanging(string property)
-        {
-            // base.ReportPropertyChanging(property);
-        }
-
-        /// <summary>
-        /// Fires an Event after an Property is changed.
-        /// </summary>
-        /// <param name="property">Propertyname</param>
-        public override void NotifyPropertyChanged(string property)
-        {
-            // base.ReportPropertyChanged(property);
-        }
-
-        /// <summary>
-        /// Serialize this Object to a BinaryWriter
-        /// </summary>
-        /// <param name="sw">BinaryWriter to serialize to</param>
-        public override void ToStream(System.IO.BinaryWriter sw)
-        {
-            if (sw == null) throw new ArgumentNullException("sw");
-            base.ToStream(sw);
-
-            BinarySerializer.ToStream(new SerializableType(this.GetType()), sw);
-            BinarySerializer.ToStream(ID, sw);
-            BinarySerializer.ToStream((int)ObjectState, sw);
-        }
-
-        /// <summary>
-        /// Deserialize this Object from a BinaryReader
-        /// </summary>
-        /// <param name="sr">BinaryReader to deserialize to.</param>
-        public override void FromStream(System.IO.BinaryReader sr)
-        {
-            if (sr == null) throw new ArgumentNullException("sr");
-            base.FromStream(sr);
-
-            SerializableType t;
-            BinarySerializer.FromStream(out t, sr);
-
-            if (this.GetType() != t.GetSerializedType())
-                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
-
-            int tmp;
-            BinarySerializer.FromStream(out tmp, sr);
-            ID = tmp;
-
-            BinarySerializer.FromStream(out tmp, sr);
-            ObjectState = (DataObjectState)tmp;
-        }
-
         #region IDataErrorInfo Members
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -233,66 +202,10 @@ namespace Kistl.API.Server
     /// </summary>
     public abstract class BaseServerCollectionEntry : BaseServerPersistenceObject, ICollectionEntry
     {
-        /// <summary>
-        /// Serialize this Object to a BinaryWriter
-        /// </summary>
-        /// <param name="sw">BinaryWriter to serialize to</param>
-        public override void ToStream(System.IO.BinaryWriter sw)
-        {
-            if (sw == null) throw new ArgumentNullException("sw", "No BinaryWriter specified");
-            base.ToStream(sw);
-
-            BinarySerializer.ToStream(ID, sw);
-            BinarySerializer.ToStream((int)ObjectState, sw);
-        }
-
-        /// <summary>
-        /// Deserialize this Object from a BinaryReader
-        /// </summary>
-        /// <param name="sr">BinaryReader to deserialize to.</param>
-        public override void FromStream(System.IO.BinaryReader sr)
-        {
-            if (sr == null) throw new ArgumentNullException("sr");
-            base.FromStream(sr);
-
-            int tmp;
-            BinarySerializer.FromStream(out tmp, sr);
-            ID = tmp;
-
-            BinarySerializer.FromStream(out tmp, sr);
-            ObjectState = (DataObjectState)tmp;
-        }
-
-        /// <summary>
-        /// Fires an Event before an Property is changed.
-        /// </summary>
-        /// <param name="property">Propertyname</param>
-        public override void NotifyPropertyChanging(string property)
-        {
-            // base.ReportPropertyChanging(property);
-        }
-
-        /// <summary>
-        /// Fires an Event after an Property is changed.
-        /// </summary>
-        /// <param name="property">Propertyname</param>
-        public override void NotifyPropertyChanged(string property)
-        {
-            // base.ReportPropertyChanged(property);
-        }
     }
 
     public abstract class BaseServerStructObject : /*ComplexObject, */ IStruct, INotifyPropertyChanged, INotifyPropertyChanging
     {
-        public virtual void ToStream(System.IO.BinaryWriter sw)
-        {
-            if (sw == null) throw new ArgumentNullException("sw", "No BinaryWriter specified");
-        }
-
-        public virtual void FromStream(System.IO.BinaryReader sr)
-        {
-            if (sr == null) throw new ArgumentNullException("sr");
-        }
 
         public object Clone()
         {
@@ -346,5 +259,34 @@ namespace Kistl.API.Server
             _attachedObject = null;
             _attachedObjectProperty = "";
         }
+
+        #region IStruct Members
+
+        /// <summary>
+        /// Base method for serializing this Object.
+        /// </summary>
+        /// <param name="sw">Stream to serialize to</param>
+        public virtual void ToStream(System.IO.BinaryWriter sw)
+        {
+            if (sw == null) throw new ArgumentNullException("sw");
+
+            BinarySerializer.ToStream(new SerializableType(this.GetType()), sw);
+        }
+        /// <summary>
+        /// Base method for deserializing this Object.
+        /// </summary>
+        /// <param name="sr">Stream to serialize from</param>
+        public virtual void FromStream(System.IO.BinaryReader sr)
+        {
+            if (sr == null) throw new ArgumentNullException("sw");
+
+            SerializableType t;
+            BinarySerializer.FromStream(out t, sr);
+
+            if (this.GetType() != t.GetSerializedType())
+                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
+        }
+
+        #endregion
     }
 }
