@@ -84,17 +84,18 @@ namespace Kistl.API
         /// called before an entry is removed from the list
         /// </summary>
         /// <param name="entry">the removed entry</param>
-        protected virtual void OnEntryRemoving(ENTRYTYPE entry) { }
+        protected virtual void OnEntryRemoving(ENTRYTYPE entry)
+        {
+            // TODO: explain why we need to clear the fields when removing an entry
+            entry.A = default(ATYPE);
+            entry.B = default(BTYPE);
+        }
 
         /// <summary>
         /// called after an entry is removed from the list
         /// </summary>
         /// <param name="entry">the removed entry</param>
-        protected virtual void OnEntryRemoved(ENTRYTYPE entry)
-        {
-            entry.A = default(ATYPE);
-            entry.B = default(BTYPE);
-        }
+        protected virtual void OnEntryRemoved(ENTRYTYPE entry) { }
 
         #endregion
 

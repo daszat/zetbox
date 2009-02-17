@@ -42,9 +42,9 @@ namespace Kistl.API.Server.Tests
             }
             set
             {
-                base.NotifyPropertyChanging("Value");
+                base.NotifyPropertyChanging("B");
                 _Value = value;
-                base.NotifyPropertyChanged("Value"); ;
+                base.NotifyPropertyChanged("B"); ;
             }
         }
 

@@ -14,7 +14,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.TestObjClass_TestNameCollectionEntry)">
         <MappingFragment StoreEntitySet="TestObjClass_TestNameCollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Value" ColumnName="TestName" />
+          <ScalarProperty Name="B" ColumnName="TestName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
