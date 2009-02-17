@@ -222,12 +222,26 @@ namespace Kistl.API
             bf.Serialize(sw.BaseStream, type);
         }
 
+        /// <summary>
+        /// Serializes a Reference to this obj
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="sw"></param>
+        /// See Case 805
         public static void ToStream(IPersistenceObject obj, System.IO.BinaryWriter sw)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (sw == null) throw new ArgumentNullException("sw");
 
+            //if (obj == null)
+            //{
+            //    sw.Write(false);
+            //}
+            //else
+            //{
+            //    sw.Write(true);
             sw.Write(obj.ID);
+            //}
         }
 
         #endregion
@@ -272,6 +286,7 @@ namespace Kistl.API
         {
             val = sr.ReadInt32();
         }
+
         public static void FromStreamConverter(Action<int> conv, System.IO.BinaryReader sr)
         {
             conv(sr.ReadInt32());
