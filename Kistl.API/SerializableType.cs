@@ -15,14 +15,11 @@ namespace Kistl.API
     public class SerializableType
     {
         /// <summary>
-        /// Creates a SerializableType.
-        /// <remarks>This class takes in account of the HostType Property. Strings in AssemblyQualifiedName {.Server, .Client} will be translated.</remarks>
+        /// This class is used to place type information on the wire. Usually this is used to wrap the interface type information of the following IPersistenceObject.
         /// </summary>
         /// <param name="type">System.Type to serialize</param>
         public SerializableType(Type type)
         {
-            type = type.ToInterfaceType();
-
             GenericTypeParameter = new List<SerializableType>();
 
             if (type.IsGenericParameter)
@@ -89,8 +86,7 @@ namespace Kistl.API
                     GenericTypeParameter.Count > 0 ? "<" + string.Join(", ", GenericTypeParameter.Select(t => t.TypeName).ToArray()) + ">" : ""));
             }
 
-            // Lets test...
-            return result.ToImplementationType();
+            return result;
         }
 
         /// <summary>

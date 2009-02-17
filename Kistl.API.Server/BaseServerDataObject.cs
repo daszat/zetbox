@@ -91,7 +91,7 @@ namespace Kistl.API.Server
         {
             if (sw == null) throw new ArgumentNullException("sw");
 
-            BinarySerializer.ToStream(new SerializableType(this.GetType()), sw);
+            BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
             BinarySerializer.ToStream(ID, sw);
             BinarySerializer.ToStream((int)ObjectState, sw);
         }
@@ -103,12 +103,12 @@ namespace Kistl.API.Server
         public virtual void FromStream(System.IO.BinaryReader sr)
         {
             if (this.IsAttached) throw new InvalidOperationException("Deserializing attached objects is not allowed");
-            if (sr == null) throw new ArgumentNullException("sw");
+            if (sr == null) throw new ArgumentNullException("sr");
 
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
 
-            if (this.GetType() != t.GetSerializedType())
+            if (this.GetInterfaceType() != t.GetSerializedType())
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
 
             BinarySerializer.FromStreamConverter(i => ID = i, sr);

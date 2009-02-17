@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{980874F0-D9C1-4EDB-8143-AD51C1E2666E}</ProjectGuid>
+    <ProjectGuid>{980874F0-D9C1-4EDB-8143-AD51C1E2666F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.API.Server</RootNamespace>
-    <AssemblyName>Kistl.API.Server.Tests</AssemblyName>
+    <RootNamespace>Kistl.DalProvider.EF.Tests</RootNamespace>
+    <AssemblyName>Kistl.DalProvider.EF.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -53,15 +53,23 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mocks\CustomActionsManagerAPITest.cs" />
-    <Compile Include="Mocks\KistlContextMock.cs" />
     <Compile Include="Mocks\ServerApiContextMock.cs" />
     <Compile Include="TestObjClass.cs" />
     <Compile Include="Main.cs" />
@@ -73,15 +81,22 @@
     <Compile Include="Tests\BaseServerCollectionEntryTests.cs" />
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />
     <Compile Include="Tests\BaseServerStructObjectTests.cs" />
+    <Compile Include="Tests\KistlDataContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database1.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="DefaultConfig_API.Server.Tests.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Kistl.API.ServerTests.PartCoverSettings.xml" />
+    <None Include="Kistl.DalProvider.EF.Tests.nunit" />
+    <None Include="Kistl.DalProvider.EF.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.API.ServerTests.nunit" />
+    <EmbeddedResource Include="Model.csdl" />
+    <EmbeddedResource Include="Model.msl" />
+    <EmbeddedResource Include="Model.ssdl" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -118,6 +133,10 @@
     <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj">
+      <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>
+      <Name>Kistl.DALProvider.EF</Name>
     </ProjectReference>
     <ProjectReference Include="..\Kistl.API.Tests\Kistl.API.Tests.csproj">
       <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>

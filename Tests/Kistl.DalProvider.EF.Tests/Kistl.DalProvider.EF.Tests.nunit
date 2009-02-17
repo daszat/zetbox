@@ -1,0 +1,9 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" appbase="bin\Debug" configfile="Kistl.DalProvider.EF.Tests.exe.config" binpathtype="Auto">
+    <assembly path="Kistl.DalProvider.EF.Tests.exe" />
+  </Config>
+  <Config name="Release" appbase="bin\Release" configfile="Kistl.DalProvider.EF.Tests.exe.config" binpathtype="Auto">
+    <assembly path="Kistl.DalProvider.EF.Tests.exe" />
+  </Config>
+</NUnitProject>

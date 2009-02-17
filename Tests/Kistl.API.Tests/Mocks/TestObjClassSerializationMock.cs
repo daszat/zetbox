@@ -18,8 +18,9 @@ namespace Kistl.API.Mocks
         string StringProp { get; set; }
         ICollection<LOCALINTERFACE> SubClasses { get; }
         ENUMTYPE TestEnumProp { get; set; }
-        void TestMethod(DateTime DateTimeParamForTestMethod);
         ICollection<string> TestNames { get; }
+
+        void TestMethod(DateTime DateTimeParamForTestMethod);
     }
 
     public enum TestEnum
@@ -183,7 +184,7 @@ namespace Kistl.API.Mocks
 
         }
 
-        public static void AssertCorrectContents<LOCALINTERFACE, ENUMTYPE>(LOCALINTERFACE obj)
+        private static void AssertCorrectContents<LOCALINTERFACE, ENUMTYPE>(LOCALINTERFACE obj)
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {
@@ -191,10 +192,24 @@ namespace Kistl.API.Mocks
             Assert.That(obj.ObjectState, Is.EqualTo(TestObjectState), "wrong ObjectState");
             Assert.That(obj.BaseTestObjClass.ID, Is.EqualTo(TestBaseClassId), "wrong BaseTestObjClass.ID");
             Assert.That(obj.StringProp, Is.EqualTo(TestStringPropValue), "wrong StringProp");
+            // not serialized
             //Assert.That(obj.SubClasses.Select(sc => sc.ID).ToArray(), Is.EqualTo(TestSubClassesIds), "wrong SubClasses");
-            Assert.That(obj.TestEnumProp, Is.EqualTo((int)TestEnum.TestSerializationValue), "wrong TestEnumProp");
             // TODO: test IDs too?
             Assert.That(obj.TestNames, Is.EqualTo(TestTestNamesValues), "wrong testnames");
+        }
+
+        public static void AssertCorrectContentsInt<LOCALINTERFACE>(LOCALINTERFACE obj)
+            where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, int>
+        {
+            AssertCorrectContents<LOCALINTERFACE, int>(obj);
+            Assert.That(obj.TestEnumProp, Is.EqualTo((int)TestEnum.TestSerializationValue), "wrong TestEnumProp");
+        }
+
+        public static void AssertCorrectContentsEnum<LOCALINTERFACE>(LOCALINTERFACE obj)
+            where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, TestEnum>
+        {
+            AssertCorrectContents<LOCALINTERFACE, TestEnum>(obj);
+            Assert.That(obj.TestEnumProp, Is.EqualTo(TestEnum.TestSerializationValue), "wrong TestEnumProp");
         }
     }
 }

@@ -28,23 +28,9 @@ namespace Kistl.API.Server.Tests
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void fails_on_serializing_to_null_stream()
+        public void ToStream_Null()
         {
             obj.ToStream(null);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void fails_on_serializing_from_null_stream()
-        {
-            obj.FromStream(null);
-        }
-
-        
-        [Test]
-        public void should_not_be_attached_after_init()
-        {
-            Assert.That(obj.IsAttached, Is.False);
         }
 
         [Test]
