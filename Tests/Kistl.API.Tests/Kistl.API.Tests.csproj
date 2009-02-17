@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="Mocks\TestApplicationContext.cs" />
+    <Compile Include="Mocks\TestObjClassSerializationMock.cs" />
     <Compile Include="TestCollectionEntry.cs" />
     <Compile Include="TestEnum.cs" />
     <Compile Include="TestKistlContext.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Tests\LinqExtensionsTests.cs" />
     <Compile Include="Tests\NotifyingObservableCollectionTests.cs" />
     <Compile Include="Tests\SerializableExpressionTests.cs" />
+    <Compile Include="Tests\SerializerMockTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DefaultConfig.xml">

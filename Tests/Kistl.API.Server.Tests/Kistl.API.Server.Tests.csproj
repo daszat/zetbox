@@ -138,6 +138,10 @@
       <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>
       <Name>Kistl.DALProvider.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.Tests\Kistl.API.Tests.csproj">
+      <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
+      <Name>Kistl.API.Tests</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
