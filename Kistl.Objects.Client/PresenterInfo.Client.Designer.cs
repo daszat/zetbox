@@ -177,6 +177,11 @@ namespace Kistl.App.GUI
         }
         private string _PresenterTypeName;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(PresenterInfo);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

@@ -156,6 +156,11 @@ namespace Kistl.App.Projekte
         }
         private string _PLZ;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Kunde);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

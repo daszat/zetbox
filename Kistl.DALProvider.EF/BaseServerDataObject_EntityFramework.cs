@@ -182,6 +182,7 @@ namespace Kistl.DALProvider.EF
         #endregion
 
         #region Notify
+
         public override void NotifyPropertyChanging(string property)
         {
             base.NotifyPropertyChanging(property);

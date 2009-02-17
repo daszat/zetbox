@@ -151,6 +151,11 @@ namespace Kistl.App.Zeiterfassung
         
         private BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit> _TaetigkeitenWrapper;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Zeitkonto);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

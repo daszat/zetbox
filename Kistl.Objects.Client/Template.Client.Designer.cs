@@ -201,6 +201,11 @@ namespace Kistl.App.GUI
 
 
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Template);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

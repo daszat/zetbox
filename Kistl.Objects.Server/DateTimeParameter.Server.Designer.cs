@@ -60,6 +60,11 @@ namespace Kistl.App.Base
 
 
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(DateTimeParameter);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

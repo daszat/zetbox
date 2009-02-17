@@ -30,8 +30,8 @@ namespace Kistl.API.Mocks
     public static class TestObjClassSerializationMock
     {
         public readonly static int TestObjClassId = 23;
-        public readonly static DataObjectState TestObjectState = DataObjectState.Modified;
-        public readonly static int TestBaseClassId = 22;
+        public readonly static DataObjectState TestObjectState = DataObjectState.Unmodified;
+        public readonly static int? TestBaseClassId = 22;
         public readonly static string TestStringPropValue = "stringprop testvalue";
         public readonly static int[] TestSubClassesIds = new[] { 3, 4, 5 };
         public readonly static int[] TestTestNamesIds = new[] { 20, 30, 40 };
@@ -49,7 +49,7 @@ namespace Kistl.API.Mocks
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {
-            return new SerializableType(typeof(ICollectionEntry<LOCALINTERFACE, string>));
+            return new SerializableType(typeof(INewCollectionEntry<LOCALINTERFACE, string>));
         }
 
         /// <summary>
@@ -75,13 +75,13 @@ namespace Kistl.API.Mocks
             // StringProp
             BinarySerializer.ToStream(TestStringPropValue, sw);
 
-            // SubClasses
-            foreach (int subClassID in TestSubClassesIds)
-            {
-                BinarySerializer.ToStream(true, sw);
-                BinarySerializer.ToStream(subClassID, sw);
-            }
-            BinarySerializer.ToStream(false, sw);
+            //// SubClasses are not serialized, but fetched lazily
+            //foreach (int subClassID in TestSubClassesIds)
+            //{
+            //    BinarySerializer.ToStream(true, sw);
+            //    BinarySerializer.ToStream(subClassID, sw);
+            //}
+            //BinarySerializer.ToStream(false, sw);
 
             // TestEnumProp
             BinarySerializer.ToStream((int)TestEnum.TestSerializationValue, sw);
@@ -122,7 +122,7 @@ namespace Kistl.API.Mocks
             // TestObjClass
 
             // BaseTestObjClass Reference
-            int testObjRefId;
+            int? testObjRefId;
             BinarySerializer.FromStream(out testObjRefId, sr);
             Assert.That(testObjRefId, Is.EqualTo(TestBaseClassId), "wrong BaseObjClass ID found");
 
@@ -131,21 +131,21 @@ namespace Kistl.API.Mocks
             BinarySerializer.FromStream(out testStringProp, sr);
             Assert.That(testStringProp, Is.EqualTo(TestStringPropValue), "wrong StringProp Value found");
 
-            // SubClasses
-            foreach (int subClassID in TestSubClassesIds)
-            {
-                bool continuationMarkerForSubClasses = false;
-                BinarySerializer.FromStream(out continuationMarkerForSubClasses, sr);
-                Assert.That(continuationMarkerForSubClasses, Is.True, "wrong continuation marker for subClassId {0}", subClassID);
+            //// SubClasses are not serialized, but fetched lazily
+            //foreach (int subClassID in TestSubClassesIds)
+            //{
+            //    bool continuationMarkerForSubClasses = false;
+            //    BinarySerializer.FromStream(out continuationMarkerForSubClasses, sr);
+            //    Assert.That(continuationMarkerForSubClasses, Is.True, "wrong continuation marker for subClassId {0}", subClassID);
 
-                int readSubClassId;
-                BinarySerializer.FromStream(out readSubClassId, sr);
-                Assert.That(readSubClassId, Is.EqualTo(readSubClassId), "wrong subClassId read", subClassID);
-            }
+            //    int readSubClassId;
+            //    BinarySerializer.FromStream(out readSubClassId, sr);
+            //    Assert.That(readSubClassId, Is.EqualTo(readSubClassId), "wrong subClassId read", subClassID);
+            //}
 
-            bool continuationMarkerAfterSubClasses = false;
-            BinarySerializer.FromStream(out continuationMarkerAfterSubClasses, sr);
-            Assert.That(continuationMarkerAfterSubClasses, Is.False, "wrong continuation marker after subClassIds");
+            //bool continuationMarkerAfterSubClasses = false;
+            //BinarySerializer.FromStream(out continuationMarkerAfterSubClasses, sr);
+            //Assert.That(continuationMarkerAfterSubClasses, Is.False, "wrong continuation marker after subClassIds");
 
             // TestEnumProp
             int testEnum;
@@ -181,6 +181,20 @@ namespace Kistl.API.Mocks
             BinarySerializer.FromStream(out continuationMarkerAfterCes, sr);
             Assert.That(continuationMarkerAfterCes, Is.False, "wrong continuation marker after testNames collection entries");
 
+        }
+
+        public static void AssertCorrectContents<LOCALINTERFACE, ENUMTYPE>(LOCALINTERFACE obj)
+            where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
+            where ENUMTYPE : struct
+        {
+            Assert.That(obj.ID, Is.EqualTo(TestObjClassId), "wrong ID");
+            Assert.That(obj.ObjectState, Is.EqualTo(TestObjectState), "wrong ObjectState");
+            Assert.That(obj.BaseTestObjClass.ID, Is.EqualTo(TestBaseClassId), "wrong BaseTestObjClass.ID");
+            Assert.That(obj.StringProp, Is.EqualTo(TestStringPropValue), "wrong StringProp");
+            //Assert.That(obj.SubClasses.Select(sc => sc.ID).ToArray(), Is.EqualTo(TestSubClassesIds), "wrong SubClasses");
+            Assert.That(obj.TestEnumProp, Is.EqualTo((int)TestEnum.TestSerializationValue), "wrong TestEnumProp");
+            // TODO: test IDs too?
+            Assert.That(obj.TestNames, Is.EqualTo(TestTestNamesValues), "wrong testnames");
         }
     }
 }

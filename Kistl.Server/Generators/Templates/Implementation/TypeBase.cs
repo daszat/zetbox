@@ -60,7 +60,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// <returns>The interfaces this class implements</returns>
         protected virtual string[] GetInterfaces()
         {
-            return new string[] { };
+            return new string[] { this.DataType.ClassName };
         }
 
         /// <returns>a string defining the inheritance relations of this class</returns>

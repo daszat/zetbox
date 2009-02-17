@@ -273,6 +273,11 @@ namespace Kistl.App.Base
         }
         
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Relation);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

@@ -23,7 +23,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.Structs
 
         protected override string[] GetInterfaces()
         {
-            return base.GetInterfaces().Concat(new string[] { this.StructType.ClassName, "IStruct" }).ToArray();
+            return base.GetInterfaces().Concat(new string[] { "IStruct" }).ToArray();
         }
     }
 }

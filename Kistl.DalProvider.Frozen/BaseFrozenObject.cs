@@ -66,6 +66,8 @@ namespace Kistl.DalProvider.Frozen
 
         public bool IsReadonly { get { return IsSealed; } }
 
+        public abstract Type GetInterfaceType();
+
         #endregion
 
         #region INotifyPropertyChanged Members

@@ -102,6 +102,11 @@ namespace Kistl.API.Tests
             get { throw new NotImplementedException(); }
         }
 
+        public Type GetInterfaceType()
+        {
+            return typeof(ICollectionEntry);
+        }
+
         #endregion
     }
 }

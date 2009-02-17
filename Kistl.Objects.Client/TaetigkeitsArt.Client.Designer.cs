@@ -45,6 +45,11 @@ namespace Kistl.App.Zeiterfassung
         }
         private string _Name;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(TaetigkeitsArt);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

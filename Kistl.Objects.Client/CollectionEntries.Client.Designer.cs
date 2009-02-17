@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
@@ -120,6 +121,11 @@ namespace Kistl.App.Projekte
         }
 
 #endregion
+
+	public override Type GetInterfaceType()
+	{
+		return typeof(INewCollectionEntry<Kunde, System.String>);
+	}
 
 
     }

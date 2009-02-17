@@ -89,10 +89,15 @@ CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
 this.WriteObjects("\r\n");
 this.WriteObjects("#endregion\r\n");
 this.WriteObjects("\r\n");
-#line 72 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+this.WriteObjects("	public override Type GetInterfaceType()\r\n");
+this.WriteObjects("	{\r\n");
+this.WriteObjects("		return typeof(",  GetCeInterface() , ");\r\n");
+this.WriteObjects("	}\r\n");
+this.WriteObjects("\r\n");
+#line 77 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyClassTailTemplate();
 
-#line 74 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 79 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 

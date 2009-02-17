@@ -22,6 +22,11 @@ namespace Kistl.App.Test
     {
 
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(LastTest);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

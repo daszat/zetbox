@@ -90,6 +90,11 @@ namespace Kistl.App.Test
             set;
         }
   
+		public override Type GetInterfaceType()
+		{
+			return typeof(TestCustomObject);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

@@ -114,6 +114,11 @@ namespace Kistl.App.Base
         }
         private Kistl.App.Base.StorageType? _Storage;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Relation);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

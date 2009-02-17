@@ -180,6 +180,7 @@ namespace Kistl.API.Server.Tests
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
+            BinarySerializer.ToStream(this.fk_BaseTestObjClass, sw);
             BinarySerializer.ToStream(this._StringProp, sw);
             BinarySerializer.ToStream(this._TestEnumProp, sw);
             BinarySerializer.ToStreamCollectionEntries(this.TestNames__Implementation__, sw);
@@ -188,6 +189,7 @@ namespace Kistl.API.Server.Tests
         public override void FromStream(System.IO.BinaryReader sr)
         {
             base.FromStream(sr);
+            BinarySerializer.FromStream(out this._fk_BaseTestObjClass, sr);
             BinarySerializer.FromStream(out this._StringProp, sr);
             BinarySerializer.FromStream(out this._TestEnumProp, sr);
             BinarySerializer.FromStreamCollectionEntries(this.TestNames__Implementation__, sr);
@@ -206,6 +208,14 @@ namespace Kistl.API.Server.Tests
             set
             {
                 BaseTestObjClass__Implementation__ = (TestObjClass__Implementation__)value;
+                if (value == null)
+                {
+                    _fk_BaseTestObjClass = null;
+                }
+                else
+                {
+                    _fk_BaseTestObjClass = value.ID;
+                }
             }
         }
 
@@ -230,6 +240,11 @@ namespace Kistl.API.Server.Tests
         }
 
         #endregion
+
+        public override Type GetInterfaceType()
+        {
+            return typeof(Kistl.API.Server.Tests.TestObjClass);
+        }
     }
 
 }

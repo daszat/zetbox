@@ -229,6 +229,11 @@ namespace Kistl.App.Projekte
         
         
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Task);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

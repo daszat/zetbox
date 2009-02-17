@@ -157,6 +157,11 @@ namespace Kistl.App.GUI
         }
         private Kistl.App.GUI.Toolkit _Platform;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(ControlInfo);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
@@ -199,6 +200,11 @@ namespace Kistl.App.Base
         }
 
 #endregion
+
+	public override Type GetInterfaceType()
+	{
+		return typeof(INewCollectionEntry<ObjectClass, Interface>);
+	}
 
 
     }
@@ -431,6 +437,11 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
+	public override Type GetInterfaceType()
+	{
+		return typeof(INewListEntry<TypeRef, TypeRef>);
+	}
+
 
     }
 }
@@ -625,6 +636,11 @@ namespace Kistl.App.GUI
         }
 
 #endregion
+
+	public override Type GetInterfaceType()
+	{
+		return typeof(INewCollectionEntry<Template, Visual>);
+	}
 
 
     }
@@ -821,6 +837,11 @@ namespace Kistl.App.GUI
 
 #endregion
 
+	public override Type GetInterfaceType()
+	{
+		return typeof(INewCollectionEntry<Visual, Visual>);
+	}
+
 
     }
 }
@@ -1015,6 +1036,11 @@ namespace Kistl.App.GUI
         }
 
 #endregion
+
+	public override Type GetInterfaceType()
+	{
+		return typeof(INewCollectionEntry<Visual, Visual>);
+	}
 
 
     }
@@ -1271,6 +1297,11 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
+	public override Type GetInterfaceType()
+	{
+		return typeof(INewListEntry<Projekt, Mitarbeiter>);
+	}
+
 
     }
 }
@@ -1467,6 +1498,11 @@ namespace Kistl.App.Zeiterfassung
 
 #endregion
 
+	public override Type GetInterfaceType()
+	{
+		return typeof(INewCollectionEntry<Zeitkonto, Mitarbeiter>);
+	}
+
 
     }
 }
@@ -1611,6 +1647,11 @@ namespace Kistl.App.Projekte
         }
 
 #endregion
+
+	public override Type GetInterfaceType()
+	{
+		return typeof(INewCollectionEntry<Kunde, System.String>);
+	}
 
 
     }

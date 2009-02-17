@@ -22,6 +22,11 @@ namespace Kistl.App.Zeiterfassung
     {
 
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Kostenstelle);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

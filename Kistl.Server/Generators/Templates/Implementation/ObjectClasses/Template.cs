@@ -37,12 +37,6 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             }
         }
 
-        /// <returns>The interfaces this class implements</returns>
-        protected override string[] GetInterfaces()
-        {
-            return base.GetInterfaces().Concat(new string[] { this.ObjectClass.ClassName }).ToArray();
-        }
-
         // HACK: workaround the fact this is missing on the server
         // TODO: remove this and move the client action "OnGetInheritedMethods_ObjectClass" into a common action assembly
         private static void GetMethods(ObjectClass obj, List<Kistl.App.Base.Method> e)

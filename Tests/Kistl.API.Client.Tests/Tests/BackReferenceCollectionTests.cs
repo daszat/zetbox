@@ -46,7 +46,7 @@ namespace Kistl.API.Client.Tests
 
             #endregion
 
-            #region IPersistenceObject Member
+            #region IPersistenceObject Members
 
             public int ID { get; set; }
             public bool IsReadonly { get; private set; }
@@ -98,6 +98,16 @@ namespace Kistl.API.Client.Tests
                 throw new NotImplementedException();
             }
 
+            public bool IsAttached
+            {
+                get { throw new NotImplementedException(); }
+            }
+
+            public Type GetInterfaceType()
+            {
+                return typeof(IDataObject);
+            }
+
             #endregion
 
             public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
@@ -108,16 +118,6 @@ namespace Kistl.API.Client.Tests
             public object Clone()
             {
                 throw new NotImplementedException();
-            }
-
-            #endregion
-
-            #region IPersistenceObject Members
-
-
-            public bool IsAttached
-            {
-                get { throw new NotImplementedException(); }
             }
 
             #endregion
@@ -142,7 +142,8 @@ namespace Kistl.API.Client.Tests
         }
 
         [Test]
-        public void AddRemoveTest() {
+        public void AddRemoveTest()
+        {
             TestObject obj = new TestObject();
             TestNewTestObject(obj);
 

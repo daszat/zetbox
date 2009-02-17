@@ -68,6 +68,11 @@
 
 #endregion
 
+	public override Type GetInterfaceType()
+	{
+		return typeof(<%= GetCeInterface() %>);
+	}
+
 <%
     ApplyClassTailTemplate();
 %>

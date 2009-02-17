@@ -170,6 +170,11 @@ namespace Kistl.App.Projekte
         }
         private int? _fk_Projekt;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Task);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

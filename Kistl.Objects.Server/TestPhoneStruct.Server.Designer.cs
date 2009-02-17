@@ -77,6 +77,11 @@ namespace Kistl.App.Test
             }
         }
         private string _Number;
+
+		public override Type GetInterfaceType()
+		{
+			return typeof(TestPhoneStruct);
+		}
 /// <summary>A special value denoting an empty struct</summary>
 public static TestPhoneStruct__Implementation__ NoValue { get { return null; } }
 

@@ -36,7 +36,7 @@ namespace Kistl.API.Tests
         public void SerializableType_GetHashCode()
         {
             SerializableType t = new SerializableType(typeof(TestDataObject));
-            Assert.That(t.GetHashCode(), Is.EqualTo(t.TypeName.GetHashCode()));
+            Assert.That(t.GetHashCode(), Is.EqualTo(t.TypeName.GetHashCode() ^ t.AssemblyQualifiedName.GetHashCode()));
         }
 
         [Test]

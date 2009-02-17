@@ -100,31 +100,37 @@ this.WriteObjects("        /// </summary>\r\n");
 ApplyMethodTemplate(m);
         }
 
+#line 84 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("		public override Type GetInterfaceType()\r\n");
+this.WriteObjects("		{\r\n");
+this.WriteObjects("			return typeof(",  DataType.ClassName , ");\r\n");
+this.WriteObjects("		}\r\n");
+#line 90 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+ApplyClassTailTemplate();
 
-        ApplyClassTailTemplate();
-
-#line 87 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 92 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("#region Serializer\r\n");
 this.WriteObjects("\r\n");
-#line 92 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 97 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
 			SerializerDirection.ToStream, this.MembersToSerialize);
 		
 		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
 			SerializerDirection.FromStream, this.MembersToSerialize);
 
-#line 98 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 103 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("#endregion\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");
-#line 104 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 109 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyNamespaceTailTemplate();
 
-#line 106 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 111 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("}");
 

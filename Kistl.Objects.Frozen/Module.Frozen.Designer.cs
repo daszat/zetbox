@@ -137,6 +137,11 @@ namespace Kistl.App.Base
         }
         private string _Namespace;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Module);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

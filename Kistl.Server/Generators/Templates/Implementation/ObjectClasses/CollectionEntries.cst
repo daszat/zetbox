@@ -14,6 +14,7 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;

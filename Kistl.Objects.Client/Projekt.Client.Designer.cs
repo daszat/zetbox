@@ -211,6 +211,11 @@ namespace Kistl.App.Projekte
         
         private BackReferenceCollection<Kistl.App.Projekte.Task> _TasksWrapper;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Projekt);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

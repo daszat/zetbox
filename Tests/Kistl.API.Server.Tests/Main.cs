@@ -19,7 +19,10 @@ namespace Kistl.API.Server.Tests
         {
             var bsdot = new BaseServerDataObjectTests();
             bsdot.SetUp();
-            bsdot.FromStream_Attached();
+            bsdot.FromStream_creates_correct_Object();
+
+            //bsdot.SetUp();
+            //bsdot.ToStream_creates_correct_Stream();
         }
 
         private static void KistlDataContextTests()

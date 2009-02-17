@@ -322,16 +322,6 @@ namespace Kistl.API
             return (TReturn)mi.Invoke(obj, new object[] { });
         }
 
-        /// <summary>
-        /// TODO: move to generated function returning a constant
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public static Type GetInterfaceType(this IPersistenceObject obj)
-        {
-            return ToInterfaceType(obj.GetType());
-        }
-
         public static Type ToInterfaceType(this Type type)
         {
             if (type.IsGenericType)

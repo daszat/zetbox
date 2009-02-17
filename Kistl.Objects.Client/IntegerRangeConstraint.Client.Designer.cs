@@ -102,6 +102,11 @@ namespace Kistl.App.Base
 
 
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(IntegerRangeConstraint);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

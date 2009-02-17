@@ -120,7 +120,12 @@ namespace Kistl.API
         /// <returns>Dont know ;-)</returns>
         public override int GetHashCode()
         {
-            return TypeName.GetHashCode();
+            return TypeName.GetHashCode() ^ this.AssemblyQualifiedName.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return String.Format(@"Type {{ TypeName=""{0}"", AssemblyQualifiedName=""{1}"" }}", TypeName, AssemblyQualifiedName);
         }
     }
 }

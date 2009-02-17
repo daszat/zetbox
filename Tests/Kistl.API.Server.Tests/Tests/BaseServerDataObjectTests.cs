@@ -10,12 +10,14 @@ using Kistl.API.Server.Mocks;
 
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
+using Kistl.API.Mocks;
 
 namespace Kistl.API.Server.Tests
 {
     [TestFixture]
     public class BaseServerDataObjectTests
     {
+        private TestObjClass__Implementation__ objImpl;
         private TestObjClass obj;
         private CustomActionsManagerAPITest currentCustomActionsManager;
 
@@ -27,7 +29,42 @@ namespace Kistl.API.Server.Tests
             currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
             currentCustomActionsManager.Reset();
 
-            obj = new TestObjClass__Implementation__();
+            obj = objImpl = new TestObjClass__Implementation__();
+        }
+
+        public void InitialiseObject(TestObjClass__Implementation__ objImpl)
+        {
+
+            objImpl.ID = TestObjClassSerializationMock.TestObjClassId;
+
+            //objImpl.ObjectState = TestObjClassSerializationMock.TestObjectState;
+
+            var baseClass = new TestObjClass__Implementation__();
+            baseClass.ID = TestObjClassSerializationMock.TestBaseClassId.Value;
+            objImpl.BaseTestObjClass = baseClass;
+
+            objImpl.StringProp = TestObjClassSerializationMock.TestStringPropValue;
+
+            objImpl.SubClasses.Clear();
+            foreach (var subClassId in TestObjClassSerializationMock.TestSubClassesIds)
+            {
+                var subClass = new TestObjClass__Implementation__();
+                subClass.ID = subClassId;
+                objImpl.SubClasses.Add(subClass);
+            }
+
+            objImpl.TestEnumProp = (int)TestEnum.TestSerializationValue;
+
+            objImpl.TestNames__Implementation__.Clear();
+            for (int i = 0; i < TestObjClassSerializationMock.TestTestNamesIds.Length; i++)
+            {
+                var ce = new TestObjClass_TestNameCollectionEntry__Implementation__();
+                ce.ID = TestObjClassSerializationMock.TestTestNamesIds[i];
+                ce.A = objImpl;
+                ce.B = TestObjClassSerializationMock.TestTestNamesValues[i];
+
+                objImpl.TestNames__Implementation__.Add(ce);
+            }
         }
 
         [Test]
@@ -98,35 +135,37 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
-        public void Stream()
+        public void ToStream_creates_correct_Stream()
         {
             MemoryStream ms = new MemoryStream();
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
-            obj.StringProp = "some string";
-            obj.TestEnumProp = 23;
-            obj.TestNames.Add("string 1");
-            obj.TestNames.Add("string 2");
-            obj.ToStream(sw);
+            InitialiseObject(objImpl);
+            objImpl.ToStream(sw);
 
             Assert.That(ms.Length, Is.GreaterThan(0));
-
             ms.Seek(0, SeekOrigin.Begin);
 
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
-            {
-                TestObjClass result = new TestObjClass__Implementation__();
-                result.FromStream(sr);
+            TestObjClassSerializationMock.AssertCorrectContents<TestObjClass, int>(sr);
+        }
 
-                Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
-                Assert.That(result.ID, Is.EqualTo(obj.ID));
-                Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
-                Assert.That(result.StringProp, Is.EqualTo(obj.StringProp));
-                Assert.That(result.TestEnumProp, Is.EqualTo(obj.TestEnumProp));
-                Assert.That(result.TestNames, Is.EqualTo(obj.TestNames));
-                Assert.That(ms.Position, Is.EqualTo(ms.Length), "Has not consumed the complete stream");
-            }
+        [Test]
+        public void FromStream_creates_correct_Object()
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryWriter sw = new BinaryWriter(ms, UTF8Encoding.UTF8);
+            BinaryReader sr = new BinaryReader(ms, UTF8Encoding.UTF8);
+
+            TestObjClassSerializationMock.ToStream<TestObjClass, int>(sw);
+            sw.Flush();
+
+            Assert.That(ms.Length, Is.GreaterThan(0));
+            ms.Seek(0, SeekOrigin.Begin);
+
+            objImpl.FromStream(sr);
+
+            TestObjClassSerializationMock.AssertCorrectContents<TestObjClass, int>(objImpl);
         }
 
         [Test]

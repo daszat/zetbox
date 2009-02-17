@@ -217,6 +217,11 @@ namespace Kistl.App.Zeiterfassung
 
 
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Zeitkonto);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

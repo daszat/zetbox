@@ -203,6 +203,11 @@ namespace Kistl.App.Base
         }
         private int _Value;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(EnumerationEntry);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

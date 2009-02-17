@@ -96,6 +96,12 @@ namespace Kistl.API
         /// Returns true if this Object is readonly
         /// </summary>
         bool IsReadonly { get; }
+
+        /// <summary>
+        /// Returns the most specific implemented IDataObject interface
+        /// </summary>
+        /// <returns></returns>
+        Type GetInterfaceType();
     }
 
     /// <summary>

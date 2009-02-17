@@ -210,6 +210,11 @@ namespace Kistl.App.Zeiterfassung
         }
         private int? _fk_Zeitkonto;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Taetigkeit);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

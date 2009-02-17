@@ -80,8 +80,13 @@ namespace <%= DataType.Module.Namespace %>
 <%
             ApplyMethodTemplate(m);
         }
+%>
 
-
+		public override Type GetInterfaceType()
+		{
+			return typeof(<%= DataType.ClassName %>);
+		}
+<%
         ApplyClassTailTemplate();
 %>
 

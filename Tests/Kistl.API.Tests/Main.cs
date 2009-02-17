@@ -14,7 +14,7 @@ namespace Kistl.API.Tests
 
             //AssemblyLoaderTests();
 
-            // BinarySerializerTests();
+            BinarySerializerTests();
             
         }
 
@@ -42,13 +42,10 @@ namespace Kistl.API.Tests
             BinarySerializerTests test = new BinarySerializerTests();
             
             test.SetUp();
-            test.ICollection_ICollectionEntry();
-
-            test.SetUp();
-            test.ICollection_IDataObject();
-
-            test.SetUp();
             test.SerializableExpression();
+
+            test.SetUp();
+            test.null_String_roundtrips_correctly();
         }
     }
 }

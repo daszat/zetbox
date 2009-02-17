@@ -37,7 +37,6 @@ namespace Kistl.Server
 
         public static ObjectClass GetObjectClass(this IDataObject obj, Kistl.API.IKistlContext ctx)
         {
-            // TODO: GetType() makes troubles -> returns Implementation and not the Interface
             Type type = obj.GetInterfaceType();
             return ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
         }

@@ -177,6 +177,8 @@ namespace Kistl.API.Client
                 localCopy.ForEach(p => OnPropertyChanged(p));
             }
         }
+
+        public abstract Type GetInterfaceType();
     }
 
     public abstract class BaseClientDataObject : BaseClientPersistenceObject, IDataObject
@@ -283,6 +285,7 @@ namespace Kistl.API.Client
                 ((ICollectionEntrySorted)obj).ParentIndex = ((ICollectionEntrySorted)this).ParentIndex;
             }
         }
+
     }
 
     public abstract class BaseClientStructObject : IStruct, INotifyPropertyChanged, INotifyPropertyChanging
@@ -345,5 +348,7 @@ namespace Kistl.API.Client
             _attachedObject = null;
             _attachedObjectProperty = "";
         }
+
+        public abstract Type GetInterfaceType();
     }
 }

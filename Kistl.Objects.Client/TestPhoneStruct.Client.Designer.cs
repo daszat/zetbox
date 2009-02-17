@@ -68,6 +68,11 @@ namespace Kistl.App.Test
         }
         private string _Number;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(TestPhoneStruct);
+		}
+
 
 #region Serializer
 

@@ -97,5 +97,14 @@ namespace Kistl.API.Server.Tests
             BinarySerializer.FromStream(out this._Value, sr);
             BinarySerializer.FromStream(out this._fk_Parent, sr);
         }
+
+        /// <summary>
+        /// returns the most specific implemented data object interface
+        /// </summary>
+        /// <returns></returns>
+        public override Type GetInterfaceType()
+        {
+            return typeof(INewCollectionEntry<TestObjClass, string>);
+        }
     }
 }

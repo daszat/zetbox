@@ -45,6 +45,11 @@ namespace Kistl.App.GUI
         }
         private string _IconFile;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Icon);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

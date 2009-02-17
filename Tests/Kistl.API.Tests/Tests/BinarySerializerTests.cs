@@ -240,19 +240,33 @@ namespace Kistl.API.Tests
 
 
         [Test]
-        public void String()
+        public void Strings_roundtrip_correctly()
         {
-            string toval, fromval;
-            toval = "Hello World!";
+            foreach (var testValue in new[] { "Hello World!", "stringprop testvalue" })
+            {
+                TestStringValue(testValue);
+                // reset streams
+                SetUp();
+            }
+        }
+
+        private void TestStringValue(string toval)
+        {
+            uint guardValue = 0xdeadbeef;
+            sw.Write(guardValue);
             BinarySerializer.ToStream(toval, sw);
+            sw.Write(guardValue);
             ms.Seek(0, SeekOrigin.Begin);
 
+            string fromval;
+            Assert.That(sr.ReadUInt32(), Is.EqualTo(guardValue), "inital guard wrong");
             BinarySerializer.FromStream(out fromval, sr);
+            Assert.That(sr.ReadUInt32(), Is.EqualTo(guardValue), "final guard wrong");
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
         [Test]
-        public void StringNull()
+        public void null_String_roundtrips_correctly()
         {
             string toval, fromval;
             toval = null;
@@ -264,15 +278,26 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        public void SerializableType()
+        public void SerializableType_roundtrips_correctly()
         {
+            uint guardValue = 0xdeadbeef;
+
             SerializableType toval, fromval;
             toval = new SerializableType(typeof(TestDataObject));
+
+            sw.Write(guardValue);
             BinarySerializer.ToStream(toval, sw);
+            sw.Write(guardValue);
+            sw.Flush();
+
             ms.Seek(0, SeekOrigin.Begin);
 
+            Assert.That(sr.ReadUInt32(), Is.EqualTo(guardValue), "inital guard wrong");
             BinarySerializer.FromStream(out fromval, sr);
+            Assert.That(sr.ReadUInt32(), Is.EqualTo(guardValue), "final guard wrong");
+
             Assert.That(fromval, Is.EqualTo(toval));
+            Assert.That(ms.Position, Is.EqualTo(ms.Length), "stream not read completely");
         }
 
         [Test]
@@ -292,42 +317,51 @@ namespace Kistl.API.Tests
             BinarySerializer.FromStream(out fromval, null);
         }
 
+        #region Collection Entries
+
         [Test]
-        public void IEnumerable_IDataObject()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void cannot_deserialize_collection_entries_to_null_collection()
         {
-            List<TestDataObject> toval, fromval;
-            toval = new List<TestDataObject>();
-            toval.Add(new TestDataObject__Implementation__());
-
-            BinarySerializer.ToStream(toval.Cast<IDataObject>(), sw);
-            ms.Seek(0, SeekOrigin.Begin);
-
-            BinarySerializer.FromStream(out fromval, sr);
-            Assert.That(fromval, Is.EqualTo(toval));
+            BinarySerializer.FromStreamCollectionEntries<TestCollectionEntry>(null, sr);
         }
 
         [Test]
-        public void ICollection_IDataObject()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void cannot_deserialize_collection_entries_from_null_stream()
         {
-            List<TestDataObject> toval, fromval;
-            toval = new List<TestDataObject>();
-            toval.Add(new TestDataObject__Implementation__());
-
-            BinarySerializer.ToStream(toval.Cast<IDataObject>(), sw);
-            ms.Seek(0, SeekOrigin.Begin);
-
-            fromval = new List<TestDataObject>();
-            BinarySerializer.FromStream(fromval, sr);
-            Assert.That(fromval, Is.EqualTo(toval));
+            var collection = new List<TestCollectionEntry>();
+            BinarySerializer.FromStreamCollectionEntries(collection, null);
         }
 
         [Test]
-        public void ICollection_ICollectionEntry()
+        public void can_roundtrip_list_with_no_entry()
         {
-            List<TestCollectionEntry> toval, fromval;
-            toval = new List<TestCollectionEntry>();
-            toval.Add(new TestCollectionEntry() { ID = 10, TestName = "Test" });
+            TestToFromStreamCollectionEntries(new List<TestCollectionEntry>());
+        }
 
+        [Test]
+        public void can_roundtrip_list_with_single_entry()
+        {
+            TestToFromStreamCollectionEntries(new List<TestCollectionEntry>(){
+                new TestCollectionEntry() { ID = 10, TestName = "Test" }
+            });
+        }
+
+        [Test]
+        public void can_roundtrip_list_with_multiple_entries()
+        {
+            TestToFromStreamCollectionEntries(new List<TestCollectionEntry>(){
+                new TestCollectionEntry() { ID = 10, TestName = "Test1" },
+                new TestCollectionEntry() { ID = 20, TestName = "Test2" },
+                new TestCollectionEntry() { ID = 30, TestName = "Test3" },
+                new TestCollectionEntry() { ID = 40, TestName = "Test4" }
+            });
+        }
+
+        private void TestToFromStreamCollectionEntries(List<TestCollectionEntry> toval)
+        {
+            List<TestCollectionEntry> fromval;
             BinarySerializer.ToStreamCollectionEntries(toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
@@ -336,15 +370,9 @@ namespace Kistl.API.Tests
             Assert.That(fromval, Is.EqualTo(toval));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ICollection_ICollectionEntryNull()
-        {
-            BinarySerializer.FromStreamCollectionEntries<TestCollectionEntry>(null, sr);
-        }
 
         [Test]
-        public void ICollection_ObservableCollection_ICollectionEntry()
+        public void can_roundtrip_observablelist()
         {
             List<TestCollectionEntry> toval;
             toval = new List<TestCollectionEntry>();
@@ -355,8 +383,10 @@ namespace Kistl.API.Tests
 
             ObservableCollection<TestCollectionEntry> fromvalobserbable = new ObservableCollection<TestCollectionEntry>();
             BinarySerializer.FromStreamCollectionEntries(fromvalobserbable, sr);
-            Assert.That(fromvalobserbable[0].ID, Is.EqualTo(toval[0].ID));
+            Assert.That(toval, Is.EqualTo(fromvalobserbable));
         }
+
+        #endregion
 
         [Test]
         public void IStruct()

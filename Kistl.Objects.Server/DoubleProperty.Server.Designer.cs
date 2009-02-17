@@ -77,6 +77,11 @@ namespace Kistl.App.Base
 
 
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(DoubleProperty);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

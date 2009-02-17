@@ -137,6 +137,11 @@ namespace Kistl.App.Base
         }
         private Kistl.App.Base.Module _Module;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(MethodInvocation);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

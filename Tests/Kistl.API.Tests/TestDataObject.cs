@@ -142,17 +142,12 @@ namespace Kistl.API.Tests
         }
 
 
-        #region IPersistenceObject Members
-
-
         public bool IsAttached
         {
             get { throw new NotImplementedException(); }
         }
 
         public bool IsReadonly { get; private set; }
-
-        #endregion
 
         #region IDataErrorInfo Members
 
@@ -170,5 +165,10 @@ namespace Kistl.API.Tests
         }
 
         #endregion
+
+        public Type GetInterfaceType()
+        {
+            return typeof(TestDataObject);
+        }
     }
 }

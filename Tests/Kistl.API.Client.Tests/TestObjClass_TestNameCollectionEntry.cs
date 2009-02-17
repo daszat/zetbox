@@ -77,5 +77,10 @@ namespace Kistl.API.Client.Tests
             ((TestObjClass_TestNameCollectionEntry)obj)._Value = this._Value;
             ((TestObjClass_TestNameCollectionEntry)obj)._fk_Parent = this._fk_Parent;
         }
+
+        public override Type GetInterfaceType()
+        {
+            return typeof(ICollectionEntry<string, TestObjClass>);
+        }
     }
 }

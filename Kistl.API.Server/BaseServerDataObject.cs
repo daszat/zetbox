@@ -48,7 +48,7 @@ namespace Kistl.API.Server
                 }
                 return _ObjectState;
             }
-            internal set
+            private set
             {
                 // Objectstate from Serializer
                 _ObjectState = value;
@@ -138,6 +138,8 @@ namespace Kistl.API.Server
         public event PropertyChangedEventHandler PropertyChanged;
 
         public event PropertyChangingEventHandler PropertyChanging;
+
+        public abstract Type GetInterfaceType();
     }
 
     /// <summary>
@@ -288,5 +290,7 @@ namespace Kistl.API.Server
         }
 
         #endregion
+
+        public abstract Type GetInterfaceType();
     }
 }

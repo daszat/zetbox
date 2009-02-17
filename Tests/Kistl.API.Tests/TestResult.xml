@@ -1,16 +1,180 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.API.Tests\Kistl.API.Tests.nunit" total="1" failures="0" not-run="0" date="2009-02-17" time="10:41:04">
+<test-results name="P:\Kistl\Tests\Kistl.API.Tests\Kistl.API.Tests.nunit" total="94" failures="1" not-run="1" date="2009-02-17" time="15:34:21">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.API.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.API.Tests\Kistl.API.Tests.nunit" success="True" time="0.058" asserts="0">
+  <test-suite name="P:\Kistl\Tests\Kistl.API.Tests\Kistl.API.Tests.nunit" success="False" time="1.731" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.API.Tests\bin\Debug\Kistl.API.Tests.exe" success="True" time="0.054" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.API.Tests\bin\Debug\Kistl.API.Tests.exe" success="False" time="1.728" asserts="0">
         <results>
-          <test-suite name="SerializerMockTests" success="True" time="0.044" asserts="0">
+          <test-suite name="ApplicationContextTests" success="True" time="0.551" asserts="0">
             <results>
-              <test-case name="Kistl.API.Tests.SerializerMockTests.AssertCorrectContents_correctly_identifies_ToStream_result" executed="True" success="True" time="0.040" asserts="31" />
+              <test-case name="Kistl.API.Tests.ApplicationContextTests.IDisposable_Dispose" executed="True" success="True" time="0.460" asserts="2" />
+              <test-case name="Kistl.API.Tests.ApplicationContextTests.IDisposable_Finalizer" executed="True" success="True" time="0.010" asserts="1" />
+              <test-case name="Kistl.API.Tests.ApplicationContextTests.InitDefaultConfig" executed="True" success="True" time="0.004" asserts="2" />
+              <test-case name="Kistl.API.Tests.ApplicationContextTests.PersistsTypes" executed="True" success="True" time="0.002" asserts="4" />
+              <test-case name="Kistl.API.Tests.ApplicationContextTests.SetCustomActionsManagerCallsInit" executed="True" success="True" time="0.060" asserts="1" />
+              <test-case name="Kistl.API.Tests.ApplicationContextTests.SetCustomActionsManagerNull" executed="True" success="True" time="0.002" asserts="0" />
+              <test-case name="Kistl.API.Tests.ApplicationContextTests.SetCustomActionsManagerTwice" executed="True" success="True" time="0.004" asserts="0" />
             </results>
+          </test-suite>
+          <test-suite name="AssemblyLoaderTests" success="True" time="0.006" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.AssemblyLoaderTests.AssemblyResolve" executed="True" success="True" time="0.002" asserts="0" />
+              <test-case name="Kistl.API.Tests.AssemblyLoaderTests.AssemblyResolveReflection" executed="True" success="True" time="0.001" asserts="0" />
+            </results>
+          </test-suite>
+          <test-suite name="BinarySerializerTests" success="True" time="0.395" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.Bool" executed="True" success="True" time="0.012" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.BoolNull" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.BoolNullStream" executed="False">
+                <reason>
+                  <message><![CDATA[This needs quite a bit of these tests yet]]></message>
+                </reason>
+              </test-case>
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.BoolNullValue" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.can_roundtrip_list_with_multiple_entries" executed="True" success="True" time="0.063" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.can_roundtrip_list_with_no_entry" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.can_roundtrip_list_with_single_entry" executed="True" success="True" time="0.020" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.can_roundtrip_observablelist" executed="True" success="True" time="0.028" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.cannot_deserialize_collection_entries_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.cannot_deserialize_collection_entries_to_null_collection" executed="True" success="True" time="0.001" asserts="0" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.DateTime" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.DateTimeNull" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.DateTimeNullValue" executed="True" success="True" time="0.005" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.Double" executed="True" success="True" time="0.005" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.DoubleNull" executed="True" success="True" time="0.006" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.DoubleNullValue" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.Enum" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.Float" executed="True" success="True" time="0.005" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.FloatNull" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.FloatNullValue" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.Int" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.IntNull" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.IntNullValue" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.IStruct" executed="True" success="True" time="0.008" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.IStructNull" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.null_String_roundtrips_correctly" executed="True" success="True" time="0.004" asserts="1" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.SerializableExpression" executed="True" success="True" time="0.119" asserts="2" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.SerializableType_FromStream_NullStream" executed="True" success="True" time="0.001" asserts="0" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.SerializableType_roundtrips_correctly" executed="True" success="True" time="0.007" asserts="4" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.SerializableTypeNull" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.API.Tests.BinarySerializerTests.Strings_roundtrip_correctly" executed="True" success="True" time="0.009" asserts="6" />
+            </results>
+          </test-suite>
+          <test-suite name="ExpressionFilterTest" success="True" time="0.018" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.ExpressionFilterTest.IllegalExpression" executed="True" success="True" time="0.013" asserts="1" />
+              <test-case name="Kistl.API.Tests.ExpressionFilterTest.IllegalExpressionClass_UnknownToString" executed="True" success="True" time="0.001" asserts="0" />
+              <test-case name="Kistl.API.Tests.ExpressionFilterTest.LegalExpression" executed="True" success="True" time="0.001" asserts="1" />
+            </results>
+          </test-suite>
+          <test-suite name="ExpressionTreeVisitorTests" success="True" time="0.066" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.ExpressionTreeVisitorTests.Visit" executed="True" success="True" time="0.066" asserts="1" />
+            </results>
+          </test-suite>
+          <test-suite name="ExtensionHelpersTest" success="False" time="0.312" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.ForEach_IEnumerable" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.ForEach_List" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.ForEach_ObservableCollection" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPrivateFieldValue" executed="True" success="True" time="0.004" asserts="3" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPrivateFieldValue_InvalidPropertyName" executed="True" success="True" time="0.001" asserts="0" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPrivatePropertyValue" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPrivatePropertyValue_InvalidPropertyName" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPropertyValue" executed="True" success="True" time="0.003" asserts="3" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPropertyValue_InvalidPropertyName" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.In" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.InFalse" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPrivateFieldValue" executed="True" success="True" time="0.004" asserts="3" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPrivateFieldValue_InvalidPropertyName" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPrivatePropertyValue" executed="True" success="True" time="0.002" asserts="0" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPrivatePropertyValue_InvalidPropertyName" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPropertyValue" executed="True" success="True" time="0.003" asserts="3" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPropertyValue_InvalidPropertyName" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.API.Tests.ExtensionHelpersTest.XmlString" executed="True" success="False" time="0.264" asserts="0">
+                <failure>
+                  <message><![CDATA[System.InvalidOperationException : Temporäre Klasse kann nicht generiert werden (result=1).
+error CS0200: Für die Eigenschaft oder den Indexer Kistl.API.Tests.TestDataObject__Implementation__.IsReadonly kann keine Zuweisung ausgeführt werden. Sie sind schreibgeschützt.
+]]></message>
+                  <stack-trace><![CDATA[bei System.Xml.Serialization.Compiler.Compile(Assembly parent, String ns, XmlSerializerCompilerParameters xmlParameters, Evidence evidence)
+bei System.Xml.Serialization.TempAssembly.GenerateAssembly(XmlMapping[] xmlMappings, Type[] types, String defaultNamespace, Evidence evidence, XmlSerializerCompilerParameters parameters, Assembly assembly, Hashtable assemblies)
+bei System.Xml.Serialization.TempAssembly..ctor(XmlMapping[] xmlMappings, Type[] types, String defaultNamespace, String location, Evidence evidence)
+bei System.Xml.Serialization.XmlSerializer.GenerateTempAssembly(XmlMapping xmlMapping, Type type, String defaultNamespace)
+bei System.Xml.Serialization.XmlSerializer..ctor(Type type, String defaultNamespace)
+bei System.Xml.Serialization.XmlSerializer..ctor(Type type)
+bei Kistl.API.ExtensionHelpers.ToXmlString(Object obj) in P:\Kistl\Kistl.API\Helper.cs:Zeile 95.
+bei Kistl.API.Tests.ExtensionHelpersTest.XmlString() in P:\Kistl\Tests\Kistl.API.Tests\Tests\ExtensionHelpersTest.cs:Zeile 30.
+]]></stack-trace>
+                </failure>
+              </test-case>
+            </results>
+          </test-suite>
+          <test-suite name="HelperTest" success="True" time="0.002" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.HelperTest.IsFloatingObjectTest" executed="True" success="True" time="0.001" asserts="2" />
+              <test-case name="Kistl.API.Tests.HelperTest.IsPersistedObject" executed="True" success="True" time="0.000" asserts="2" />
+            </results>
+          </test-suite>
+          <test-suite name="KistlConfigTests" success="True" time="0.050" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.KistlConfigTests.ConfigurationExceptionWithMessage" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="Kistl.API.Tests.KistlConfigTests.ConfigurationExceptionWithoutMessage" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="Kistl.API.Tests.KistlConfigTests.DefaultLoading" executed="True" success="True" time="0.001" asserts="3" />
+              <test-case name="Kistl.API.Tests.KistlConfigTests.FromStream" executed="True" success="True" time="0.002" asserts="9" />
+              <test-case name="Kistl.API.Tests.KistlConfigTests.FromTextReader" executed="True" success="True" time="0.002" asserts="9" />
+              <test-case name="Kistl.API.Tests.KistlConfigTests.LoadFile" executed="True" success="True" time="0.001" asserts="3" />
+              <test-case name="Kistl.API.Tests.KistlConfigTests.ToFile" executed="True" success="True" time="0.034" asserts="2" />
+              <test-case name="Kistl.API.Tests.KistlConfigTests.ToStream" executed="True" success="True" time="0.001" asserts="1" />
+            </results>
+          </test-suite>
+          <test-suite name="KistlServiceStreamsMessageTests" success="True" time="0.011" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.KistlServiceStreamsMessageTests.Stream" executed="True" success="True" time="0.010" asserts="3" />
+            </results>
+          </test-suite>
+          <test-suite name="LinqExtensionsTests" success="True" time="0.154" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddEqualityCondition" executed="True" success="True" time="0.058" asserts="1" />
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddEqualityCondition_InvalidProperty" executed="True" success="True" time="0.001" asserts="0" />
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddEqualityCondition_InvalidType" executed="True" success="True" time="0.042" asserts="0" />
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddFilter" executed="True" success="True" time="0.012" asserts="1" />
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddFilter_IllegalExpression" executed="True" success="True" time="0.001" asserts="0" />
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddOrderBy" executed="True" success="True" time="0.013" asserts="2" />
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddOrderBy_WithQuote" executed="True" success="True" time="0.002" asserts="2" />
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddSelector" executed="True" success="True" time="0.010" asserts="1" />
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.GetExpressionValue_Constant" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.GetExpressionValue_LambdaExpression" executed="True" success="True" time="0.002" asserts="0" />
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.GetExpressionValue_MemberExpression_Field" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="Kistl.API.Tests.LinqExtensionsTests.GetExpressionValue_MemberExpression_Property" executed="True" success="True" time="0.001" asserts="1" />
+            </results>
+          </test-suite>
+          <test-suite name="NotifyingObservableCollectionTests" success="True" time="0.011" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.NotifyingObservableCollectionTests.Event" executed="True" success="True" time="0.003" asserts="1" />
+              <test-case name="Kistl.API.Tests.NotifyingObservableCollectionTests.List" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="Kistl.API.Tests.NotifyingObservableCollectionTests.Property" executed="True" success="True" time="0.001" asserts="1" />
+              <test-case name="Kistl.API.Tests.NotifyingObservableCollectionTests.SetItem" executed="True" success="True" time="0.002" asserts="1" />
+              <test-case name="Kistl.API.Tests.NotifyingObservableCollectionTests.SetItem_WithBeginUpdate" executed="True" success="True" time="0.001" asserts="2" />
+            </results>
+          </test-suite>
+          <test-suite name="SerializableExpressionTests" success="True" time="0.007" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.SerializableExpressionTests.FromExpression_Null" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.API.Tests.SerializableExpressionTests.SerializableType_GetHashCode" executed="True" success="True" time="0.000" asserts="1" />
+              <test-case name="Kistl.API.Tests.SerializableExpressionTests.SerializableType_Invalid" executed="True" success="True" time="0.000" asserts="0" />
+              <test-case name="Kistl.API.Tests.SerializableExpressionTests.SerializableType_Valid" executed="True" success="True" time="0.000" asserts="1" />
+            </results>
+          </test-suite>
+          <test-suite name="SerializerMockTests" success="True" time="0.100" asserts="0">
+            <results>
+              <test-case name="Kistl.API.Tests.SerializerMockTests.AssertCorrectContents_correctly_identifies_ToStream_result" executed="True" success="True" time="0.099" asserts="24" />
+            </results>
+          </test-suite>
+          <test-suite name="Tests" success="True" time="0.000" asserts="0">
+            <results />
           </test-suite>
         </results>
       </test-suite>

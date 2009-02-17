@@ -214,6 +214,11 @@ namespace Kistl.App.GUI
         }
         private int? _fk_Property;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Visual);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

@@ -79,6 +79,11 @@ namespace Kistl.App.Base
 
 
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(Enumeration);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

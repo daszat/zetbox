@@ -195,6 +195,11 @@ namespace Kistl.API.Client.Tests
         }
 
         public delegate void TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);
+
+        public override Type GetInterfaceType()
+        {
+            return typeof(Kistl.API.Client.Tests.TestObjClass);
+        }
     }
 
 }

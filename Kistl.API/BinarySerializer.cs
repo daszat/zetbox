@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Diagnostics;
 
 namespace Kistl.API
 {
@@ -13,7 +14,9 @@ namespace Kistl.API
     /// </summary>
     public static class BinarySerializer
     {
-        #region ToStream
+
+        #region bool
+
         /// <summary>
         /// Serialize a bool
         /// </summary>
@@ -21,68 +24,23 @@ namespace Kistl.API
         /// <param name="sw">BinaryWrite to serialize to.</param>
         public static void ToStream(bool val, System.IO.BinaryWriter sw)
         {
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing bool {0} (1 byte)", val);
             sw.Write(val);
         }
 
         /// <summary>
-        /// Serialize a DateTime
+        /// Deserialize a bool
         /// </summary>
-        /// <param name="val">Value to serialize,</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(DateTime val, System.IO.BinaryWriter sw)
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out bool val, System.IO.BinaryReader sr)
         {
-            sw.Write(val.ToBinary());
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadBoolean();
+            Trace.TraceInformation("read bool {0}", val);
         }
 
-        /// <summary>
-        /// Serialize a int
-        /// </summary>
-        /// <param name="val">Value to serialize,</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(int val, System.IO.BinaryWriter sw)
-        {
-            sw.Write(val);
-        }
-
-        /*/// <summary>
-        /// Serialize a Enum
-        /// </summary>
-        /// <param name="val">Value to serialize,</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(Enum val, System.IO.BinaryWriter sw)
-        {
-            if (val != null) { sw.Write(true); sw.Write(Convert.ToInt32(val)); } else sw.Write(false);
-        }*/
-
-        /// <summary>
-        /// Serialize a float
-        /// </summary>
-        /// <param name="val">Value to serialize,</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(float val, System.IO.BinaryWriter sw)
-        {
-            sw.Write(val);
-        }
-
-        /// <summary>
-        /// Serialize a double
-        /// </summary>
-        /// <param name="val">Value to serialize,</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(double val, System.IO.BinaryWriter sw)
-        {
-            sw.Write(val);
-        }
-
-        /// <summary>
-        /// Serialize a string. Format is: NULL (true/false), Value (if not null).
-        /// </summary>
-        /// <param name="val">Value to serialize,</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(string val, System.IO.BinaryWriter sw)
-        {
-            if (val != null) { sw.Write(true); sw.Write(val); } else sw.Write(false);
-        }
 
         /// <summary>
         /// Serialize a nullable bool. Format is: NULL (true/false), Value (if not null).
@@ -91,7 +49,49 @@ namespace Kistl.API
         /// <param name="sw">BinaryWrite to serialize to.</param>
         public static void ToStream(bool? val, System.IO.BinaryWriter sw)
         {
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing bool? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
+        }
+
+        /// <summary>
+        /// Deserialize a nullable bool, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out bool? val, System.IO.BinaryReader sr)
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadBoolean() ? (bool?)sr.ReadBoolean() : null;
+            Trace.TraceInformation("read bool? {0}", val);
+        }
+
+        #endregion
+
+        #region DateTime
+
+        /// <summary>
+        /// Serialize a DateTime
+        /// </summary>
+        /// <param name="val">Value to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStream(DateTime val, System.IO.BinaryWriter sw)
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing DateTime {0} (8 bytes)", val);
+            sw.Write(val.ToBinary());
+        }
+
+        /// <summary>
+        /// Deserialize a DateTime
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out DateTime val, System.IO.BinaryReader sr)
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            val = DateTime.FromBinary(sr.ReadInt64());
+            Trace.TraceInformation("read DateTime {0}", val);
         }
 
         /// <summary>
@@ -101,27 +101,49 @@ namespace Kistl.API
         /// <param name="sw">BinaryWrite to serialize to.</param>
         public static void ToStream(DateTime? val, System.IO.BinaryWriter sw)
         {
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing DateTime? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value.ToBinary()); } else sw.Write(false);
         }
 
         /// <summary>
-        /// Serialize a nullable int. Format is: NULL (true/false), Value (if not null).
+        /// Deserialize a nullable DateTime, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out DateTime? val, System.IO.BinaryReader sr)
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadBoolean() ? (DateTime?)DateTime.FromBinary(sr.ReadInt64()) : null;
+            Trace.TraceInformation("read DateTime? {0}", val);
+        }
+
+        #endregion
+
+        #region double
+
+        /// <summary>
+        /// Serialize a double
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(int? val, System.IO.BinaryWriter sw)
+        public static void ToStream(double val, System.IO.BinaryWriter sw)
         {
-            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing double {0}", val);
+            sw.Write(val);
         }
 
         /// <summary>
-        /// Serialize a nullable float. Format is: NULL (true/false), Value (if not null).
+        /// Deserialize a double
         /// </summary>
-        /// <param name="val">Value to serialize,</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(float? val, System.IO.BinaryWriter sw)
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out double val, System.IO.BinaryReader sr)
         {
-            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadDouble();
+            Trace.TraceInformation("read double {0}", val);
         }
 
         /// <summary>
@@ -131,107 +153,155 @@ namespace Kistl.API
         /// <param name="sw">BinaryWrite to serialize to.</param>
         public static void ToStream(double? val, System.IO.BinaryWriter sw)
         {
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing double? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
         }
 
         /// <summary>
-        /// Serialize a nullable double. Format is: NULL (true/false), Value (if not null).
+        /// Deserialize a nullable double, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out double? val, System.IO.BinaryReader sr)
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadBoolean() ? (double?)sr.ReadDouble() : null;
+            Trace.TraceInformation("read double? {0}", val);
+        }
+
+        #endregion
+
+        #region float
+
+        /// <summary>
+        /// Serialize a float
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(IStruct val, System.IO.BinaryWriter sw)
+        public static void ToStream(float val, System.IO.BinaryWriter sw)
         {
-            if (val != null) { sw.Write(true); val.ToStream(sw); } else sw.Write(false);
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing float {0}", val);
+            sw.Write(val);
         }
 
         /// <summary>
-        /// Serialize a IDataObject Collection. Format is: CONTINUE (true/false), IDataObject (if Object is present).
+        /// Deserialize a float
         /// </summary>
-        /// <param name="val">Collection to serialize,</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream<T>(IEnumerable<T> val, System.IO.BinaryWriter sw)// where T : IDataObject
-            where T : IDataObject
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out float val, System.IO.BinaryReader sr)
         {
-            foreach (T obj in val)
-            {
-                ToStream(true, sw);
-                obj.ToStream(sw);
-            }
-
-            ToStream(false, sw);
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadSingle();
+            Trace.TraceInformation("read float {0}", val);
         }
 
         /// <summary>
-        /// Serialize a ICollectionEntry Collection. Format is: CONTINUE (true/false), ICollectionEntry (if Object is present).
+        /// Serialize a nullable float. Format is: NULL (true/false), Value (if not null).
         /// </summary>
-        /// <param name="val">Collection to serialize,</param>
+        /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, System.IO.BinaryWriter sw)
-            where T : ICollectionEntry
+        public static void ToStream(float? val, System.IO.BinaryWriter sw)
         {
-            foreach (ICollectionEntry obj in val)
-            {
-                ToStream(true, sw);
-                obj.ToStream(sw);
-            }
-
-            ToStream(false, sw);
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing float? {0}", val);
+            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
         }
 
         /// <summary>
-        /// Serialize a IDataObject Collection. Format is: WRONG
+        /// Deserialize a nullable float, expected format: NULL (true/false), Value (if not null).
         /// </summary>
-        /// <param name="val">Collection to serialize,</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStreamCollection<T>(ICollection<T> val, System.IO.BinaryWriter sw)
-            where T : IDataObject
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out float? val, System.IO.BinaryReader sr)
         {
-            throw new NotImplementedException();
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadBoolean() ? (float?)sr.ReadSingle() : null;
+            Trace.TraceInformation("read float? {0}", val);
+        }
+
+        #endregion
+
+        #region int
+
+        /// <summary>
+        /// Serialize a int
+        /// </summary>
+        /// <param name="val">Value to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStream(int val, System.IO.BinaryWriter sw)
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing int {0} (four bytes)", val);
+            sw.Write(val);
         }
 
         /// <summary>
-        /// Serialize a SerializableExpression
+        /// Deserialize a int
         /// </summary>
-        /// <param name="e">SerializableExpression to serialize.</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(SerializableExpression e, System.IO.BinaryWriter sw)
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out int val, System.IO.BinaryReader sr)
         {
-            if (e != null)
-            {
-                sw.Write(true);
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(sw.BaseStream, e);
-            }
-            else
-            {
-                sw.Write(false);
-            }
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadInt32();
+            Trace.TraceInformation("read int {0} (4 bytes)", val);
         }
 
         /// <summary>
-        /// Serialize a SerializableType
+        /// Deserialize an int and call a converter action on it
         /// </summary>
-        /// <param name="type">SerializableType to serialize.</param>
-        /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(SerializableType type, System.IO.BinaryWriter sw)
+        /// <param name="conv"></param>
+        /// <param name="sr"></param>
+        public static void FromStreamConverter(Action<int> conv, System.IO.BinaryReader sr)
         {
-            if (type == null) throw new ArgumentNullException("type");
-            if (sw == null) throw new ArgumentNullException("sw");
-
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(sw.BaseStream, type);
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            int val = sr.ReadInt32();
+            conv(val);
+            Trace.TraceInformation("read and converted int {0} (4 bytes)", val);
         }
+
+        /// <summary>
+        /// Serialize a nullable int. Format is: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Value to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStream(int? val, System.IO.BinaryWriter sw)
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing int? {0}", val);
+            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
+        }
+        /// <summary>
+        /// Deserialize a nullable int, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out int? val, System.IO.BinaryReader sr)
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadBoolean() ? (int?)sr.ReadInt32() : null;
+            Trace.TraceInformation("read int? {0}", val);
+        }
+
+        #endregion
+
+        #region IPersistenceObject
 
         /// <summary>
         /// Serializes a Reference to this obj
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="sw"></param>
-        /// See Case 805
+        /// TODO: See Case 805
         public static void ToStream(IPersistenceObject obj, System.IO.BinaryWriter sw)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (sw == null) throw new ArgumentNullException("sw");
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing IPersistenceObject #{0}", obj.ID);
 
             //if (obj == null)
             //{
@@ -246,249 +316,59 @@ namespace Kistl.API
 
         #endregion
 
-        #region FromStream
-        /// <summary>
-        /// Deserialize a bool
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out bool val, System.IO.BinaryReader sr)
-        {
-            val = sr.ReadBoolean();
-        }
-
-        //public static void FromStreamConverter(Action<bool> conv, System.IO.BinaryReader sr)
-        //{
-        //    conv(sr.ReadBoolean());
-        //}
+        #region IStruct
 
         /// <summary>
-        /// Deserialize a DateTime
+        /// Serialize a struct. Format is: NULL (true/false), Value (if not null).
         /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out DateTime val, System.IO.BinaryReader sr)
+        /// <param name="val">Value to serialize,</param>
+        /// <param name="sw">BinaryWriter to serialize to.</param>
+        public static void ToStream(IStruct val, System.IO.BinaryWriter sw)
         {
-            val = DateTime.FromBinary(sr.ReadInt64());
-        }
-
-        //public static void FromStreamConverter(Action<DateTime> conv, System.IO.BinaryReader sr)
-        //{
-        //    conv(DateTime.FromBinary(sr.ReadInt64()));
-        //}
-
-        /// <summary>
-        /// Deserialize a int
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out int val, System.IO.BinaryReader sr)
-        {
-            val = sr.ReadInt32();
-        }
-
-        public static void FromStreamConverter(Action<int> conv, System.IO.BinaryReader sr)
-        {
-            conv(sr.ReadInt32());
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing IStruct {0}", val);
+            if (val != null) { sw.Write(true); val.ToStream(sw); } else sw.Write(false);
         }
 
         /// <summary>
-        /// Deserialize a float
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out float val, System.IO.BinaryReader sr)
-        {
-            val = sr.ReadSingle();
-        }
-        //public static void FromStreamConverter(Action<float> conv, System.IO.BinaryReader sr)
-        //{
-        //    conv(sr.ReadSingle());
-        //}
-
-
-        /// <summary>
-        /// Deserialize a double
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out double val, System.IO.BinaryReader sr)
-        {
-            val = sr.ReadDouble();
-        }
-        //public static void FromStreamConverter(Action<double> conv, System.IO.BinaryReader sr)
-        //{
-        //    conv(sr.ReadDouble());
-        //}
-
-        /// <summary>
-        /// Deserialize a string, expected format: NULL (true/false), Value (if not null).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out string val, System.IO.BinaryReader sr)
-        {
-            val = sr.ReadBoolean() ? sr.ReadString() : null;
-        }
-
-        public static void FromStreamConverter(Action<string> conv, System.IO.BinaryReader sr)
-        {
-            conv(sr.ReadBoolean() ? sr.ReadString() : null);
-        }
-
-        /// <summary>
-        /// Deserialize a nullable bool, expected format: NULL (true/false), Value (if not null).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out bool? val, System.IO.BinaryReader sr)
-        {
-            val = sr.ReadBoolean() ? (bool?)sr.ReadBoolean() : null;
-        }
-        //public static void FromStreamConverter(Action<bool?> conv, System.IO.BinaryReader sr)
-        //{
-        //    conv(sr.ReadBoolean() ? (bool?)sr.ReadBoolean() : null);
-        //}
-        /// <summary>
-        /// Deserialize a nullable DateTime, expected format: NULL (true/false), Value (if not null).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out DateTime? val, System.IO.BinaryReader sr)
-        {
-            val = sr.ReadBoolean() ? (DateTime?)DateTime.FromBinary(sr.ReadInt64()) : null;
-        }
-        //public static void FromStreamConverter(Action<DateTime?> conv, System.IO.BinaryReader sr)
-        //{
-        //    conv(sr.ReadBoolean() ? (DateTime?)DateTime.FromBinary(sr.ReadInt64()) : null);
-        //}
-        /// <summary>
-        /// Deserialize a nullable int, expected format: NULL (true/false), Value (if not null).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out int? val, System.IO.BinaryReader sr)
-        {
-            val = sr.ReadBoolean() ? (int?)sr.ReadInt32() : null;
-        }
-        //public static void FromStreamConverter(Action<int?> conv, System.IO.BinaryReader sr)
-        //{
-        //    conv(sr.ReadBoolean() ? (int?)sr.ReadInt32() : null);
-        //}
-        /// <summary>
-        /// Deserialize a nullable float, expected format: NULL (true/false), Value (if not null).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out float? val, System.IO.BinaryReader sr)
-        {
-            val = sr.ReadBoolean() ? (float?)sr.ReadSingle() : null;
-        }
-        //public static void FromStreamConverter(Action<float?> conv, System.IO.BinaryReader sr)
-        //{
-        //    conv(sr.ReadBoolean() ? (float?)sr.ReadSingle() : null);
-        //}
-        /// <summary>
-        /// Deserialize a nullable double, expected format: NULL (true/false), Value (if not null).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out double? val, System.IO.BinaryReader sr)
-        {
-            val = sr.ReadBoolean() ? (double?)sr.ReadDouble() : null;
-        }
-        //public static void FromStreamConverter(Action<double?> conv, System.IO.BinaryReader sr)
-        //{
-        //    conv(sr.ReadBoolean() ? (double?)sr.ReadDouble() : null);
-        //}
-        /// <summary>
-        /// Deserialize a nullable double, expected format: NULL (true/false), Value (if not null).
+        /// Deserialize a struct, expected format: NULL (true/false), Value (if not null).
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
         public static void FromStream<T>(out T val, System.IO.BinaryReader sr)
             where T : class, IStruct, new()
         {
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
             val = null;
             if (sr.ReadBoolean())
             {
                 val = new T();
                 val.FromStream(sr);
             }
+            Trace.TraceInformation("read {0} value: {1}", typeof(T), val);
         }
-        public static void FromStreamConverter<T>(Action<T> conv, System.IO.BinaryReader sr)
-            where T : class, IStruct, new()
+
+        #endregion
+
+        #region SerializableExpression
+
+        /// <summary>
+        /// Serialize a SerializableExpression
+        /// </summary>
+        /// <param name="e">SerializableExpression to serialize.</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStream(SerializableExpression e, System.IO.BinaryWriter sw)
         {
-            if (sr.ReadBoolean())
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            if (e != null)
             {
-                var val = new T();
-                val.FromStream(sr);
-                conv(val);
+                sw.Write(true);
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(sw.BaseStream, e);
             }
             else
             {
-                conv(null);
-            }
-        }
-        /// <summary>
-        /// Deserialize a IDataObject Collection, expected format: CONTINUE (true/false), IDataObject (if Object is present).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream<T>(out List<T> val, System.IO.BinaryReader sr) where T : IDataObject
-        {
-            val = new List<T>();
-            while (sr.ReadBoolean())
-            {
-                long pos = sr.BaseStream.Position;
-                SerializableType objType;
-                BinarySerializer.FromStream(out objType, sr);
-
-                sr.BaseStream.Seek(pos, System.IO.SeekOrigin.Begin);
-
-                IDataObject obj = (IDataObject)objType.NewObject();
-                obj.FromStream(sr);
-
-                val.Add((T)obj);
-            }
-        }
-
-        /// <summary>
-        /// Deserialize a IDataObject Collection, expected format: CONTINUE (true/false), IDataObject (if Object is present).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream<T>(ICollection<T> val, System.IO.BinaryReader sr) where T : IDataObject
-        {
-            while (sr.ReadBoolean())
-            {
-                long pos = sr.BaseStream.Position;
-                SerializableType objType;
-                BinarySerializer.FromStream(out objType, sr);
-
-                sr.BaseStream.Seek(pos, System.IO.SeekOrigin.Begin);
-
-                IDataObject obj = (IDataObject)objType.NewObject();
-                obj.FromStream(sr);
-
-                val.Add((T)obj);
-            }
-        }
-
-        /// <summary>
-        /// Deserialize a ICollectionEntry Collection, expected format: CONTINUE (true/false), IDataObject (if Object is present).
-        /// </summary>
-        /// <param name="val">Destination Value.</param>
-        /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStreamCollectionEntries<T>(ICollection<T> val, System.IO.BinaryReader sr) where T : ICollectionEntry, new()
-        {
-            if (val == null) throw new ArgumentNullException("val");
-
-            while (sr.ReadBoolean())
-            {
-                T obj = new T();
-                obj.FromStream(sr);
-                val.Add(obj);
+                sw.Write(false);
             }
         }
 
@@ -499,12 +379,39 @@ namespace Kistl.API
         /// <param name="sr">BinaryReader to deserialize from.</param>
         public static void FromStream(out SerializableExpression e, System.IO.BinaryReader sr)
         {
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
             e = null;
             if (sr.ReadBoolean())
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 e = (SerializableExpression)bf.Deserialize(sr.BaseStream);
             }
+        }
+
+        #endregion
+
+        #region SerializableType
+
+        /// <summary>
+        /// Serialize a SerializableType
+        /// </summary>
+        /// <param name="type">SerializableType to serialize.</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStream(SerializableType type, System.IO.BinaryWriter sw)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+            if (sw == null) throw new ArgumentNullException("sw");
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            Trace.TraceInformation("Writing SerializableType {0}", type);
+
+            long beginPos = sw.BaseStream.Position;
+
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(sw.BaseStream, type);
+
+            long endPos = sw.BaseStream.Position;
+            Trace.TraceInformation("({0} bytes)", endPos - beginPos);
+
         }
 
         /// <summary>
@@ -515,11 +422,130 @@ namespace Kistl.API
         public static void FromStream(out SerializableType type, System.IO.BinaryReader sr)
         {
             if (sr == null) throw new ArgumentNullException("sr");
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
 
+            long beginPos = sr.BaseStream.Position;
             BinaryFormatter bf = new BinaryFormatter();
             type = (SerializableType)bf.Deserialize(sr.BaseStream);
+            long endPos = sr.BaseStream.Position;
+            Trace.TraceInformation("read SerializableType {0} ({1} bytes)", type, endPos - beginPos);
         }
 
         #endregion
+
+        #region string
+
+        /// <summary>
+        /// Serialize a string. Format is: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Value to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStream(string val, System.IO.BinaryWriter sw)
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            long beginPos = sw.BaseStream.Position;
+            if (val != null) { sw.Write(true); sw.Write(val); } else sw.Write(false);
+            long endPos = sw.BaseStream.Position;
+            if (val == null)
+            {
+                Trace.TraceInformation("Wrote null string ({0} bytes)", endPos - beginPos);
+            }
+            else
+            {
+                Trace.TraceInformation("Wrote string ({0} chars, {1} bytes)", val.Length, endPos - beginPos);
+            }
+        }
+
+        /// <summary>
+        /// Deserialize a string, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out string val, System.IO.BinaryReader sr)
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            long beginPos = sr.BaseStream.Position;
+            val = sr.ReadBoolean() ? sr.ReadString() : null;
+            long endPos = sr.BaseStream.Position;
+            if (val == null)
+            {
+                Trace.TraceInformation("read null string ({0} bytes)", endPos - beginPos);
+            }
+            else
+            {
+                Trace.TraceInformation("read string ({0} chars, {1} bytes)", val.Length, endPos - beginPos);
+            }
+        }
+
+        /// <summary>
+        /// Deserialize a string and call a converter action on it
+        /// </summary>
+        /// <param name="conv"></param>
+        /// <param name="sr"></param>
+        public static void FromStreamConverter(Action<string> conv, System.IO.BinaryReader sr)
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            bool hasValue = sr.ReadBoolean();
+            if (hasValue)
+            {
+                string val = sr.ReadString();
+                conv(val);
+                Trace.TraceInformation("read and converted string \"{0}\"", val);
+            }
+            else
+            {
+                conv(null);
+                Trace.TraceInformation("read and converted null string");
+            }
+        }
+
+        #endregion
+
+        #region Collection Entries
+
+        /// <summary>
+        /// Serialize a ICollectionEntry Collection. Format is: CONTINUE (true/false), ICollectionEntry (if Object is present).
+        /// </summary>
+        /// <param name="val">Collection to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, System.IO.BinaryWriter sw)
+            where T : ICollectionEntry
+        {
+            Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+            foreach (ICollectionEntry obj in val)
+            {
+                ToStream(true, sw);
+                Trace.TraceInformation("CurrentPos: {0}", sw.BaseStream.Position);
+                Trace.TraceInformation("Writing CollectionEntry {0}", val.ToString());
+                obj.ToStream(sw);
+            }
+
+            ToStream(false, sw);
+        }
+
+        /// <summary>
+        /// Deserialize a ICollectionEntry Collection, expected format: CONTINUE (true/false), IDataObject (if Object is present).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStreamCollectionEntries<T>(ICollection<T> val, System.IO.BinaryReader sr)
+            where T : ICollectionEntry, new()
+        {
+            if (val == null) throw new ArgumentNullException("val");
+            if (sr == null) throw new ArgumentNullException("sr");
+
+            Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+            while (sr.ReadBoolean())
+            {
+                Trace.TraceInformation("CurrentPos: {0}", sr.BaseStream.Position);
+                T obj = new T();
+                obj.FromStream(sr);
+                val.Add(obj);
+                Trace.TraceInformation("read {0} value: {1}", typeof(T), val);
+            }
+        }
+
+        #endregion
+
     }
 }

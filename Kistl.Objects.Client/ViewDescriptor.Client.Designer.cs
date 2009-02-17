@@ -131,6 +131,11 @@ namespace Kistl.App.Base
         }
         private int? _fk_ViewRef;
 
+		public override Type GetInterfaceType()
+		{
+			return typeof(ViewDescriptor);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
