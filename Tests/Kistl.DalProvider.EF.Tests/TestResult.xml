@@ -1,116 +1,339 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" total="63" failures="2" not-run="2" date="2009-02-17" time="17:29:13">
+<test-results name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" total="30" failures="26" not-run="1" date="2009-02-17" time="18:44:55">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" success="False" time="10.407" asserts="0">
+  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" success="False" time="7.635" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\bin\Debug\Kistl.DalProvider.EF.Tests.exe" success="False" time="10.406" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\bin\Debug\Kistl.DalProvider.EF.Tests.exe" success="False" time="7.632" asserts="0">
         <results>
-          <test-suite name="BaseServerCollectionEntryTests" success="True" time="1.923" asserts="0">
+          <test-suite name="BaseServerCollectionEntryTests" success="True" time="0.548" asserts="0">
             <results>
-              <test-case name="Kistl.API.Server.Tests.BaseServerCollectionEntryTests.FromStream_Null_StreamReader" executed="True" success="True" time="1.850" asserts="0" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerCollectionEntryTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.002" asserts="0" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerCollectionEntryTests.Stream" executed="True" success="True" time="0.058" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerCollectionEntryTests.ToStream_Null" executed="True" success="True" time="0.001" asserts="0" />
+              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.fails_on_serializing_from_null_stream" executed="True" success="True" time="0.484" asserts="0" />
+              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.fails_on_serializing_to_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.should_not_be_attached_after_init" executed="True" success="True" time="0.005" asserts="1" />
+              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.should_roundtrip_correctly" executed="True" success="True" time="0.049" asserts="2" />
             </results>
           </test-suite>
-          <test-suite name="BaseServerDataObjectTests" success="False" time="3.961" asserts="0">
+          <test-suite name="KistlDataContextTests" success="False" time="7.059" asserts="0">
             <results>
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.AttachToContext" executed="True" success="True" time="0.114" asserts="3" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.AttachToContext_Other" executed="True" success="True" time="0.006" asserts="3" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.DetachFromContext" executed="True" success="True" time="3.503" asserts="4" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.DetachFromContext_Other" executed="True" success="True" time="0.022" asserts="4" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.EventAttached" executed="True" success="True" time="0.001" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.FromStream_Attached" executed="True" success="True" time="0.028" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.FromStream_creates_correct_Object" executed="True" success="False" time="0.109" asserts="3">
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing" executed="True" success="False" time="6.732" asserts="0">
                 <failure>
-                  <message><![CDATA[System.NullReferenceException : Der Objektverweis wurde nicht auf eine Objektinstanz festgelegt.]]></message>
-                  <stack-trace><![CDATA[bei Kistl.API.Mocks.TestObjClassSerializationMock.AssertCorrectContents[LOCALINTERFACE,ENUMTYPE](LOCALINTERFACE obj) in P:\Kistl\Tests\Kistl.API.Tests\Mocks\TestObjClassSerializationMock.cs:Zeile 193.
-bei Kistl.API.Server.Tests.BaseServerDataObjectTests.FromStream_creates_correct_Object() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\BaseServerDataObjectTests.cs:Zeile 168.
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
 ]]></stack-trace>
                 </failure>
               </test-case>
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.FromStream_Null_StreamReader" executed="True" success="True" time="0.005" asserts="0" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.FromStream_WrongType" executed="True" success="True" time="0.020" asserts="0" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.NotifyChange" executed="True" success="True" time="0.002" asserts="0" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.001" asserts="0" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.ObjectState_CreatedObject" executed="True" success="True" time="0.000" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.ObjectState_CreatedObject_Modified" executed="True" success="True" time="0.000" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.ObjectState_New_then_UnModified" executed="True" success="True" time="0.001" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.ObjectState_ObjectWithID" executed="True" success="True" time="0.001" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.ObjectState_ObjectWithID_Modified" executed="True" success="True" time="0.001" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.ToStream_creates_correct_Stream" executed="True" success="False" time="0.110" asserts="14">
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice" executed="True" success="False" time="0.009" asserts="0">
                 <failure>
-                  <message><![CDATA[  wrong continuation marker for testName #1
-  Expected: True
-  But was:  False
-]]></message>
-                  <stack-trace><![CDATA[bei Kistl.API.Mocks.TestObjClassSerializationMock.AssertCorrectContents[LOCALINTERFACE,ENUMTYPE](BinaryReader sr) in P:\Kistl\Tests\Kistl.API.Tests\Mocks\TestObjClassSerializationMock.cs:Zeile 161.
-bei Kistl.API.Server.Tests.BaseServerDataObjectTests.ToStream_creates_correct_Stream() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\BaseServerDataObjectTests.cs:Zeile 150.
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
 ]]></stack-trace>
                 </failure>
               </test-case>
-              <test-case name="Kistl.API.Server.Tests.BaseServerDataObjectTests.ToStream_Null" executed="True" success="True" time="0.001" asserts="0" />
-            </results>
-          </test-suite>
-          <test-suite name="BaseServerStructObjectTests" success="True" time="0.032" asserts="0">
-            <results>
-              <test-case name="Kistl.API.Server.Tests.BaseServerStructObjectTests.Clone" executed="True" success="True" time="0.001" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerStructObjectTests.FromStream_Null_StreamReader" executed="True" success="True" time="0.006" asserts="0" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerStructObjectTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.002" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerStructObjectTests.Stream" executed="True" success="True" time="0.017" asserts="3" />
-              <test-case name="Kistl.API.Server.Tests.BaseServerStructObjectTests.ToStream_Null" executed="True" success="True" time="0.001" asserts="0" />
-            </results>
-          </test-suite>
-          <test-suite name="KistlDataContextTests" success="True" time="4.467" asserts="0">
-            <results>
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Attach_ICollectionEntry_Existing" executed="True" success="True" time="0.920" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Attach_ICollectionEntry_Existing_Twice" executed="True" success="True" time="0.079" asserts="3" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Attach_ICollectionEntry_Existing_Twice_But_Different" executed="True" success="True" time="0.084" asserts="3" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Attach_ICollectionEntry_New" executed="True" success="True" time="0.089" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Attach_IDataObject_Existing" executed="True" success="True" time="0.096" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice" executed="True" success="True" time="0.088" asserts="3" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice_But_Different" executed="True" success="True" time="0.099" asserts="3" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Attach_IDataObject_New" executed="True" success="True" time="0.086" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Attach_IDataObject_New_WithGraph" executed="True" success="True" time="0.092" asserts="3" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.AttachedObjects" executed="True" success="True" time="0.080" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.CleanUpSession" executed="True" success="True" time="0.079" asserts="0" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.ContainsObject" executed="True" success="True" time="0.099" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.ContainsObject_Not" executed="True" success="True" time="0.085" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Create_Generic" executed="True" success="True" time="0.082" asserts="3" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Create_ObjectType" executed="True" success="True" time="0.091" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Create_Type" executed="True" success="True" time="0.080" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Delete_ICollectionEntry" executed="True" success="True" time="0.130" asserts="5" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Delete_IDataObject" executed="True" success="True" time="0.113" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Detach_ICollectionEntry" executed="True" success="True" time="0.205" asserts="4" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Detach_IDataObject" executed="True" success="True" time="0.104" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Detach_IDataObject_Failed" executed="True" success="True" time="0.080" asserts="0" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Find_ObjectType" executed="True" success="True" time="0.107" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.Find_T" executed="True" success="True" time="0.106" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.GetContext" executed="True" success="True" time="0.090" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.GetListOf" executed="True" success="True" time="0.128" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.GetListOf_ObjType" executed="True" success="True" time="0.131" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.GetListOf_WrongPropertyName" executed="True" success="True" time="0.103" asserts="0" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.GetQuery" executed="True" success="True" time="0.077" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.GetQuery_ObjType" executed="False">
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice_But_Different" executed="True" success="False" time="0.006" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_New" executed="True" success="False" time="0.010" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.AttachedObjects" executed="True" success="False" time="0.005" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.CleanUpSession" executed="True" success="False" time="0.007" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject" executed="True" success="False" time="0.008" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject_Not" executed="True" success="False" time="0.005" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Generic" executed="True" success="False" time="0.009" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_ObjectType" executed="True" success="False" time="0.007" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Type" executed="True" success="False" time="0.005" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Delete_IDataObject" executed="True" success="False" time="0.009" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject" executed="True" success="False" time="0.006" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject_Failed" executed="True" success="False" time="0.009" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_ObjectType" executed="True" success="False" time="0.005" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_T" executed="True" success="False" time="0.005" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetContext" executed="True" success="False" time="0.009" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf" executed="True" success="False" time="0.005" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_ObjType" executed="True" success="False" time="0.008" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_WrongPropertyName" executed="True" success="False" time="0.006" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetQuery" executed="True" success="False" time="0.006" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetQuery_ObjType" executed="False">
                 <reason>
                   <message><![CDATA[]]></message>
                 </reason>
               </test-case>
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.InitSession" executed="True" success="True" time="0.079" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.InitSessionTwice" executed="True" success="True" time="0.075" asserts="2" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.NoSession" executed="True" success="True" time="0.079" asserts="0" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.SelectSomeData" executed="True" success="True" time="0.090" asserts="1" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.SelectSomeData_Children" executed="True" success="True" time="0.108" asserts="4" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.SelectSomeData_Collection" executed="True" success="True" time="0.110" asserts="3" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.SelectSomeData_Parent" executed="True" success="True" time="0.094" asserts="3" />
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.UpdateLists_SubmitChanges" executed="False">
-                <reason>
-                  <message><![CDATA[Implement IsSorted on TestObjClass.TestName]]></message>
-                </reason>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.InitSession" executed="True" success="False" time="0.009" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
               </test-case>
-              <test-case name="Kistl.API.Server.Tests.KistlDataContextTests.UpdateSomeData_SubmitChanges" executed="True" success="True" time="0.188" asserts="4" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.InitSessionTwice" executed="True" success="False" time="0.005" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.NoSession" executed="True" success="False" time="0.009" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.SelectSomeData" executed="True" success="False" time="0.006" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.UpdateSomeData_SubmitChanges" executed="True" success="False" time="0.006" asserts="0">
+                <failure>
+                  <message><![CDATA[System.ArgumentException : Die Eigenschaft 'TestEnumProp' weist keine gültige Entitätszuordnung für das Entitätsobjekt auf. Weitere Informationen finden Sie in der Dokumentation zu Entity Framework.]]></message>
+                  <stack-trace><![CDATA[bei System.Data.Objects.ObjectStateEntry.GetAndValidateChangeMemberInfo(String entityMemberName, Object complexObject, String complexObjectMemberName, StateManagerTypeMetadata& typeMetadata, String& changingMemberName, Object& changingObject)
+bei System.Data.Objects.ObjectStateEntry.EntityValueChanging(String entityMemberName, Object complexObject, String complexObjectMemberName)
+bei System.Data.Objects.ObjectStateEntry.System.Data.Objects.DataClasses.IEntityChangeTracker.EntityMemberChanging(String entityMemberName)
+bei Kistl.DALProvider.EF.BaseServerDataObject_EntityFramework.NotifyPropertyChanging(String property) in P:\Kistl\Kistl.DALProvider.EF\BaseServerDataObject_EntityFramework.cs:Zeile 96.
+bei Kistl.App.Test.TestObjClass__Implementation__.set_TestEnumProp(TestEnum value) in P:\Kistl\Kistl.Objects.Server\TestObjClass.Server.Designer.cs:Zeile 196.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SetUp() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 31.
+]]></stack-trace>
+                </failure>
+              </test-case>
             </results>
           </test-suite>
           <test-suite name="Tests" success="True" time="0.001" asserts="0">

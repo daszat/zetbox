@@ -152,7 +152,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>)">
         <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="<%= prop.PropertyName %>" ColumnName="<%= prop.PropertyName %>" />
+          <ScalarProperty Name="B" ColumnName="<%= prop.PropertyName %>" />
 <%
 	if (prop.IsIndexed)
 	{

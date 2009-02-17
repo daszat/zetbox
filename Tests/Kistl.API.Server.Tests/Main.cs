@@ -20,7 +20,7 @@ namespace Kistl.API.Server.Tests
             var test = new BaseServerCollectionEntryTests();
 
             test.SetUp();
-            test.Stream();
+            test.should_roundtrip_correctly();
         }
 
         private static void BaseServerDataObjectTests()

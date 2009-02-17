@@ -239,18 +239,18 @@ this.WriteObjects("    </Key>\r\n");
 this.WriteObjects("    <Property Name=\"ID\" Type=\"Int32\" Nullable=\"false\" />\r\n");
 this.WriteObjects("    \r\n");
 this.WriteObjects("    <!-- A -->\r\n");
-this.WriteObjects("    <NavigationProperty Name=\"A\"\r\n");
+this.WriteObjects("    <NavigationProperty Name=\"A",  Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"CollectionEntry\"\r\n");
 this.WriteObjects("                        ToRole=\"",  prop.ObjectClass.ClassName , "\" />\r\n");
 this.WriteObjects("    <!-- B -->\r\n");
-this.WriteObjects("    ",  PlainPropertyDefinitionFromValueType(prop) , "\r\n");
+this.WriteObjects("    ",  PlainPropertyDefinitionFromValueType(prop, "B") , "\r\n");
 #line 210 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 if (prop.IsIndexed)
 		{
 
 #line 213 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("    <Property Name=\"",  prop.PropertyName , "Index\" Type=\"Int32\" Nullable=\"false\" />\r\n");
+this.WriteObjects("    <Property Name=\"B",  Kistl.API.Helper.PositionSuffix , "\" Type=\"Int32\" Nullable=\"false\" />\r\n");
 #line 215 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 }
 

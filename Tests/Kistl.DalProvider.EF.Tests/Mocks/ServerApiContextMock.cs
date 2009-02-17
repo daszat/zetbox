@@ -14,7 +14,7 @@ namespace Kistl.API.Server.Mocks
             : base(KistlConfig.FromFile("DefaultConfig_API.Server.Tests.xml"))
         {
             SetCustomActionsManager(new CustomActionsManagerAPITest());
-            ImplementationAssembly = InterfaceAssembly = Assembly.GetAssembly(this.GetType()).FullName;
+            ImplementationAssembly = InterfaceAssembly = Assembly.GetAssembly(typeof(Kistl.App.Base.Assembly__Implementation__)).FullName;
         }
     }
 }

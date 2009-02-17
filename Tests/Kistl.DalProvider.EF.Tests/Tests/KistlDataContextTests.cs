@@ -7,11 +7,12 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.API.Server.Mocks;
+using Kistl.App.Test;
 
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 
-namespace Kistl.API.Server.Tests
+namespace Kistl.DalProvider.EF.Tests
 {
     [TestFixture]
     public class KistlDataContextTests
@@ -27,10 +28,10 @@ namespace Kistl.API.Server.Tests
                 var list = result.ToList();
 
                 list[0].StringProp = "First";
-                list[0].TestEnumProp = 1;
+                list[0].TestEnumProp = TestEnum.First;
 
                 list[1].StringProp = "Second";
-                list[1].TestEnumProp = 2;
+                list[1].TestEnumProp = TestEnum.Second;
 
                 ctx.SubmitChanges();
             }
@@ -177,47 +178,6 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
-        public void SelectSomeData_Collection()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                var result = ctx.GetQuery<TestObjClass>();
-                Assert.That(result.ToList().Count, Is.EqualTo(4));
-
-                Assert.That(result.ToList()[0].TestNames.Count, Is.EqualTo(2));
-                Assert.That(result.ToList()[1].TestNames.Count, Is.EqualTo(2));
-            }
-        }
-
-        [Test]
-        public void SelectSomeData_Parent()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                var result = ctx.GetQuery<TestObjClass>().ToList();
-                Assert.That(result.Count, Is.EqualTo(4));
-
-                Assert.That(result[2].BaseTestObjClass.ID, Is.EqualTo(1));
-                Assert.That(result[3].BaseTestObjClass.ID, Is.EqualTo(1));
-            }
-        }
-
-        [Test]
-        public void SelectSomeData_Children()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                var result = ctx.GetQuery<TestObjClass>().ToList();
-                Assert.That(result.Count, Is.EqualTo(4));
-
-                Assert.That(result[0].SubClasses.Count, Is.EqualTo(2));
-                Assert.That(result[0].SubClasses.ToList()[0].ID, Is.EqualTo(3));
-                Assert.That(result[0].SubClasses.ToList()[1].ID, Is.EqualTo(4));
-            }
-        }
-
-
-        [Test]
         public void UpdateSomeData_SubmitChanges()
         {
             using (IKistlContext ctx = KistlContext.InitSession())
@@ -238,28 +198,28 @@ namespace Kistl.API.Server.Tests
             }
         }
 
-        [Test]
-        [Ignore("Implement IsSorted on TestObjClass.TestName")]
-        public void UpdateLists_SubmitChanges()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
-                Assert.That(obj.TestNames.Count, Is.EqualTo(2));
+        //[Test]
+        //[Ignore("Implement IsSorted on TestObjClass.TestName")]
+        //public void UpdateLists_SubmitChanges()
+        //{
+        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    {
+        //        TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
+        //        Assert.That(obj.TestNames.Count, Is.EqualTo(2));
 
-                //obj.TestNames[1] = "MuhBlah";
+        //        //obj.TestNames[1] = "MuhBlah";
 
-                ctx.SubmitChanges();
-            }
-            
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
-                Assert.That(obj.TestNames.Count, Is.EqualTo(2));
+        //        ctx.SubmitChanges();
+        //    }
 
-                //Assert.That(obj.TestNames[1], Is.EqualTo("MuhBlah"));
-            }
-        }
+        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    {
+        //        TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
+        //        Assert.That(obj.TestNames.Count, Is.EqualTo(2));
+
+        //        //Assert.That(obj.TestNames[1], Is.EqualTo("MuhBlah"));
+        //    }
+        //}
 
         [Test]
         public void Attach_IDataObject_New()
@@ -273,20 +233,20 @@ namespace Kistl.API.Server.Tests
             }
         }
 
-        [Test]
-        public void Attach_IDataObject_New_WithGraph()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                TestObjClass obj = new TestObjClass__Implementation__();
-                obj.TestNames.Add("Test");
-                obj.TestNames.Add("Test2");
-                Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Detached));
-                ctx.Attach(obj);
-                Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Added));
-                Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(3));
-            }
-        }
+        //[Test]
+        //public void Attach_IDataObject_New_WithGraph()
+        //{
+        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    {
+        //        TestObjClass obj = new TestObjClass__Implementation__();
+        //        obj.TestNames.Add("Test");
+        //        obj.TestNames.Add("Test2");
+        //        Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Detached));
+        //        ctx.Attach(obj);
+        //        Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Added));
+        //        Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(3));
+        //    }
+        //}
 
         [Test]
         public void Attach_IDataObject_Existing()
@@ -332,61 +292,61 @@ namespace Kistl.API.Server.Tests
             }
         }
 
-        [Test]
-        public void Attach_ICollectionEntry_New()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                TestObjClass_TestNameCollectionEntry__Implementation__ obj = new TestObjClass_TestNameCollectionEntry__Implementation__();
-                Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
-                ctx.Attach(obj);
-                Assert.That(obj.EntityState, Is.EqualTo(EntityState.Added));
-            }
-        }
+        //[Test]
+        //public void Attach_ICollectionEntry_New()
+        //{
+        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    {
+        //        TestObjClass_TestNameCollectionEntry__Implementation__ obj = new TestObjClass_TestNameCollectionEntry__Implementation__();
+        //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
+        //        ctx.Attach(obj);
+        //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Added));
+        //    }
+        //}
 
-        [Test]
-        public void Attach_ICollectionEntry_Existing()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                TestObjClass_TestNameCollectionEntry__Implementation__ obj = new TestObjClass_TestNameCollectionEntry__Implementation__() { ID = 15 };
-                Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
-                ctx.Attach(obj);
-                Assert.That(obj.EntityState, Is.EqualTo(EntityState.Unchanged));
-            }
-        }
+        //[Test]
+        //public void Attach_ICollectionEntry_Existing()
+        //{
+        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    {
+        //        TestObjClass_TestNameCollectionEntry__Implementation__ obj = new TestObjClass_TestNameCollectionEntry__Implementation__() { ID = 15 };
+        //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
+        //        ctx.Attach(obj);
+        //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Unchanged));
+        //    }
+        //}
 
-        [Test]
-        public void Attach_ICollectionEntry_Existing_Twice()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                TestObjClass_TestNameCollectionEntry__Implementation__ obj = new TestObjClass_TestNameCollectionEntry__Implementation__() { ID = 3 };
-                Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
-                ctx.Attach(obj);
-                Assert.That(obj.EntityState, Is.EqualTo(EntityState.Unchanged));
-                ctx.Attach(obj);
-                Assert.That(obj.EntityState, Is.EqualTo(EntityState.Unchanged));
-            }
-        }
+        //[Test]
+        //public void Attach_ICollectionEntry_Existing_Twice()
+        //{
+        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    {
+        //        TestObjClass_TestNameCollectionEntry__Implementation__ obj = new TestObjClass_TestNameCollectionEntry__Implementation__() { ID = 3 };
+        //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
+        //        ctx.Attach(obj);
+        //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Unchanged));
+        //        ctx.Attach(obj);
+        //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Unchanged));
+        //    }
+        //}
 
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void Attach_ICollectionEntry_Existing_Twice_But_Different()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                TestObjClass_TestNameCollectionEntry__Implementation__ obj1 = new TestObjClass_TestNameCollectionEntry__Implementation__() { ID = 3 };
-                Assert.That(obj1.EntityState, Is.EqualTo(EntityState.Detached));
-                ctx.Attach(obj1);
-                Assert.That(obj1.EntityState, Is.EqualTo(EntityState.Unchanged));
+        //[Test]
+        //[ExpectedException(typeof(InvalidOperationException))]
+        //public void Attach_ICollectionEntry_Existing_Twice_But_Different()
+        //{
+        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    {
+        //        TestObjClass_TestNameCollectionEntry__Implementation__ obj1 = new TestObjClass_TestNameCollectionEntry__Implementation__() { ID = 3 };
+        //        Assert.That(obj1.EntityState, Is.EqualTo(EntityState.Detached));
+        //        ctx.Attach(obj1);
+        //        Assert.That(obj1.EntityState, Is.EqualTo(EntityState.Unchanged));
 
-                TestObjClass_TestNameCollectionEntry__Implementation__ obj2 = new TestObjClass_TestNameCollectionEntry__Implementation__() { ID = 3 };
-                Assert.That(obj2.EntityState, Is.EqualTo(EntityState.Detached));
-                ctx.Attach(obj2);
-                Assert.That(obj2.EntityState, Is.EqualTo(EntityState.Unchanged));
-            }
-        }
+        //        TestObjClass_TestNameCollectionEntry__Implementation__ obj2 = new TestObjClass_TestNameCollectionEntry__Implementation__() { ID = 3 };
+        //        Assert.That(obj2.EntityState, Is.EqualTo(EntityState.Detached));
+        //        ctx.Attach(obj2);
+        //        Assert.That(obj2.EntityState, Is.EqualTo(EntityState.Unchanged));
+        //    }
+        //}
 
         [Test]
         public void AttachedObjects()
@@ -490,21 +450,21 @@ namespace Kistl.API.Server.Tests
             }
         }
 
-        [Test]
-        public void Delete_ICollectionEntry()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                var result = ctx.GetQuery<TestObjClass>();
-                Assert.That(result.ToList().Count, Is.EqualTo(4));
+        //[Test]
+        //public void Delete_ICollectionEntry()
+        //{
+        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    {
+        //        var result = ctx.GetQuery<TestObjClass>();
+        //        Assert.That(result.ToList().Count, Is.EqualTo(4));
 
-                foreach (TestObjClass obj in result)
-                {
-                    obj.TestNames.Clear();
-                    Assert.That(obj.TestNames.Count, Is.EqualTo(0));
-                }
-            }
-        }
+        //        foreach (TestObjClass obj in result)
+        //        {
+        //            obj.TestNames.Clear();
+        //            Assert.That(obj.TestNames.Count, Is.EqualTo(0));
+        //        }
+        //    }
+        //}
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]
@@ -528,21 +488,21 @@ namespace Kistl.API.Server.Tests
         }
 
 
-        [Test]
-        public void Detach_ICollectionEntry()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                var obj = ctx.Find<TestObjClass>(1);
-                Assert.That(obj, Is.Not.Null);
-                Assert.That(obj.TestNames.Count, Is.EqualTo(2));
+        //[Test]
+        //public void Detach_ICollectionEntry()
+        //{
+        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    {
+        //        var obj = ctx.Find<TestObjClass>(1);
+        //        Assert.That(obj, Is.Not.Null);
+        //        Assert.That(obj.TestNames.Count, Is.EqualTo(2));
 
-                TestObjClass_TestNameCollectionEntry__Implementation__ c = ((TestObjClass__Implementation__)obj).TestNames__Implementation__.First();
-                ctx.Detach(c);
-                Assert.That(c.EntityState, Is.EqualTo(EntityState.Detached));
-                Assert.That(obj.TestNames.Count, Is.EqualTo(1));
-            }
-        }
+        //        TestObjClass_TestNameCollectionEntry__Implementation__ c = ((TestObjClass__Implementation__)obj).TestNames__Implementation__.First();
+        //        ctx.Detach(c);
+        //        Assert.That(c.EntityState, Is.EqualTo(EntityState.Detached));
+        //        Assert.That(obj.TestNames.Count, Is.EqualTo(1));
+        //    }
+        //}
 
     }
 }

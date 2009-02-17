@@ -65,6 +65,7 @@
     <Compile Include="TestEnum.cs" />
     <Compile Include="TestKistlContext.cs" />
     <Compile Include="TestQueryProvider.cs" />
+    <Compile Include="Tests.Skeletons\CollectionEntryTests.cs" />
     <Compile Include="TestStruct.cs" />
     <Compile Include="Tests\ApplicationContextTests.cs" />
     <Compile Include="Tests\AssemblyLoaderTests.cs" />

@@ -1186,12 +1186,12 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     
     <!-- A -->
-    <NavigationProperty Name="A"
+    <NavigationProperty Name="A__Implementation__"
                         Relationship="Model.FK_Kunde_String_EMails"
                         FromRole="CollectionEntry"
                         ToRole="Kunde" />
     <!-- B -->
-    <Property Name="EMails" Type="String" Nullable="true" MaxLength="200" />
+    <Property Name="B" Type="String" Nullable="true" MaxLength="200" />
   </EntityType>
   <Association Name="FK_Kunde_String_EMails" >
     <End Role="Kunde"

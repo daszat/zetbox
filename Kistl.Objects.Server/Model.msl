@@ -1464,7 +1464,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde_EMailsCollectionEntry)">
         <MappingFragment StoreEntitySet="Kunde_EMailsCollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="EMails" ColumnName="EMails" />
+          <ScalarProperty Name="B" ColumnName="EMails" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

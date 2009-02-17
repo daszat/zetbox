@@ -180,7 +180,7 @@ this.WriteObjects("    <EntitySetMapping Name=\"",  prop.GetCollectionEntryClass
 this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  prop.GetCollectionEntryClassName() , ")\">\r\n");
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
-this.WriteObjects("          <ScalarProperty Name=\"",  prop.PropertyName , "\" ColumnName=\"",  prop.PropertyName , "\" />\r\n");
+this.WriteObjects("          <ScalarProperty Name=\"B\" ColumnName=\"",  prop.PropertyName , "\" />\r\n");
 #line 157 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 if (prop.IsIndexed)
 	{

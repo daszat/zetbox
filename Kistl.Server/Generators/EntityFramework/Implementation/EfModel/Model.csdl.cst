@@ -200,17 +200,17 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     
     <!-- A -->
-    <NavigationProperty Name="A"
+    <NavigationProperty Name="A<%= Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= prop.GetAssociationName() %>"
                         FromRole="CollectionEntry"
                         ToRole="<%= prop.ObjectClass.ClassName %>" />
     <!-- B -->
-    <%= PlainPropertyDefinitionFromValueType(prop) %>
+    <%= PlainPropertyDefinitionFromValueType(prop, "B") %>
 <%
 		if (prop.IsIndexed)
 		{
 %>
-    <Property Name="<%= prop.PropertyName %>Index" Type="Int32" Nullable="false" />
+    <Property Name="B<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
 <%
 		}
 %>

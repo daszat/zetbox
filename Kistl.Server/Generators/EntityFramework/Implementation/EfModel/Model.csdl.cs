@@ -19,8 +19,17 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
         /// false) and when defining the CollectionEntry (IsList == true)
         public static string PlainPropertyDefinitionFromValueType(ValueTypeProperty prop)
         {
-            // ValueTypeProperty
-            string name = prop.PropertyName;
+            return PlainPropertyDefinitionFromValueType(prop, prop.PropertyName);
+        }
+
+        /// <summary>
+        /// returns a &lt;Property/&gt; element describing the property 
+        /// without regards for the IsList flag.
+        /// </summary>
+        /// therefore it can be used both when defining a type (IsList == 
+        /// false) and when defining the CollectionEntry (IsList == true)
+        public static string PlainPropertyDefinitionFromValueType(ValueTypeProperty prop, string name)
+        {
             string type = prop.GetPropertyTypeString();
             string maxlength = "";
 

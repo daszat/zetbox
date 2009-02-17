@@ -4,19 +4,17 @@
   <ConfigName>Server.API's Test Configuration</ConfigName>
   <Server StartServer="true">
     <DatabaseProvider>System.Data.SqlServerCe.3.5</DatabaseProvider>
-    <ConnectionString>Data Source=.\Database1.sdf;</ConnectionString>
-    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Server\</DocumentStore>
+    <DocumentStore>P:\Kistl\DocumentStore\Server\</DocumentStore>
     <KistlDataContextType>Kistl.API.Server.Mocks.KistlContextMock, Kistl.API.Server.Tests</KistlDataContextType>
+    <!--
     <ServerObjectHandlerType>Kistl.DALProvider.EF.ServerObjectHandler, Kistl.DALProvider.EF</ServerObjectHandlerType>
     <ServerObjectSetHandlerType>Kistl.DALProvider.EF.ServerObjectSetHandler, Kistl.DALProvider.EF</ServerObjectSetHandlerType>
+    -->
   </Server>
   <Client StartClient="false">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
-    <string>P:\Kistl\Kistl.App.Projekte.Server\bin\Debug</string>
-    <string>P:\Kistl\Kistl.Objects\bin\Debug</string>
-    <string>P:\Kistl\Kistl.Objects.Server\bin\Debug</string>
-    <string>P:\Kistl\Kistl.DALProvider.EF\bin\Debug</string>
+    <string>P:\Kistl\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>
