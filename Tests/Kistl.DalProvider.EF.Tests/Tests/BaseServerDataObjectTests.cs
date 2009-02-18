@@ -1,298 +1,249 @@
-//using System;
-//using System.Collections.Generic;
-//using System.IO;
-//using System.Linq;
-//using System.Text;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 
-//using Kistl.API;
-//using Kistl.API.Server;
-//using Kistl.API.Server.Mocks;
+using Kistl.API;
+using Kistl.API.Server;
+using Kistl.API.Server.Mocks;
+using Kistl.API.Tests.Skeletons;
+using Kistl.App.Base;
 
-//using NUnit.Framework;
-//using NUnit.Framework.SyntaxHelpers;
-//using Kistl.API.Mocks;
+using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
-//namespace Kistl.DalProvider.EF.Tests
-//{
-//    [TestFixture]
-//    public class BaseServerDataObjectTests
-//    {
-//        private TestObjClass__Implementation__ objImpl;
-//        private TestObjClass obj;
-//        private CustomActionsManagerAPITest currentCustomActionsManager;
+namespace Kistl.DalProvider.EF.Tests
+{
+    [TestFixture]
+    public class BaseServerDataObjectTests 
+        : IDataObjectTests<ObjectClass__Implementation__>
+    {
+        private CustomActionsManagerAPITest currentCustomActionsManager;
 
-//        [SetUp]
-//        public void SetUp()
-//        {
-//            var testCtx = new ServerApiContextMock();
+        [SetUp]
+        public override void SetUp()
+        {
+            var testCtx = new ServerApiContextMock();
 
-//            currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
-//            currentCustomActionsManager.Reset();
+            currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
+            currentCustomActionsManager.Reset();
 
-//            obj = objImpl = new TestObjClass__Implementation__();
-//        }
+            base.SetUp();
+        }
 
-//        public void InitialiseObject(TestObjClass__Implementation__ objImpl)
-//        {
+        public void InitialiseObject(IKistlContext ctx, ObjectClass obj)
+        {
+            obj.BaseObjectClass = null;
+            obj.ClassName = "testclassname";
+            obj.DefaultIcon = null;
+            obj.DefaultModel = null;
+            obj.Description = "testclassdescription";
+            obj.ImplementsInterfaces.Clear();
+            obj.IsFrozenObject = false;
+            obj.IsSimpleObject = false;
+            obj.MethodInvocations.Clear();
+            obj.Methods.Clear();
+            obj.Module = ctx.GetQuery<Module>().First();
+            obj.Properties.Clear();
+            obj.SubClasses.Clear();
+            obj.TableName = "testtablename";
+        }
 
-//            objImpl.ID = TestObjClassSerializationMock.TestObjClassId;
+        [Test]
+        public void should_have_events_attached_after_init()
+        {
+            Assert.That(currentCustomActionsManager.IsObjectAttached(obj), Is.True);
+        }
 
-//            //objImpl.ObjectState = TestObjClassSerializationMock.TestObjectState;
+        // TODO: WTF? Please explain
+        [Test]
+        public void ObjectState_should_be_Unmodified_after_setting_ID()
+        {
+            obj.ID = 10;
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+        }
 
-//            var baseClass = new TestObjClass__Implementation__();
-//            baseClass.ID = TestObjClassSerializationMock.TestBaseClassId.Value;
-//            objImpl.BaseTestObjClass = baseClass;
+        [Test]
+        /// ObjectState is just for serialization....
+        public void ObjectState_ObjectWithID_Modified()
+        {
+            obj.ID = 10;
+            obj.NotifyPropertyChanged("test");
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+        }
 
-//            objImpl.StringProp = TestObjClassSerializationMock.TestStringPropValue;
+        [Test]
+        public void NotifyPropertyChanged_ing()
+        {
+            obj.NotifyPropertyChanging("StringProp");
+            obj.ClassName = "test";
+            obj.NotifyPropertyChanged("StringProp");
+        }
 
-//            objImpl.SubClasses.Clear();
-//            foreach (var subClassId in TestObjClassSerializationMock.TestSubClassesIds)
-//            {
-//                var subClass = new TestObjClass__Implementation__();
-//                subClass.ID = subClassId;
-//                objImpl.SubClasses.Add(subClass);
-//            }
+        [Test]
+        public void should_roundtrip_ObjectClass_attributes_correctly()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                MemoryStream ms = new MemoryStream();
+                BinaryWriter sw = new BinaryWriter(ms);
+                BinaryReader sr = new BinaryReader(ms);
 
-//            objImpl.TestEnumProp = (int)TestEnum.TestSerializationValue;
+                InitialiseObject(ctx, obj);
 
-//            objImpl.TestNames__Implementation__.Clear();
-//            for (int i = 0; i < TestObjClassSerializationMock.TestTestNamesIds.Length; i++)
-//            {
-//                var ce = new TestObjClass_TestNameCollectionEntry__Implementation__();
-//                ce.ID = TestObjClassSerializationMock.TestTestNamesIds[i];
-//                ce.A = objImpl;
-//                ce.B = TestObjClassSerializationMock.TestTestNamesValues[i];
+                var result = SerializationRoundtrip(obj);
 
-//                objImpl.TestNames__Implementation__.Add(ce);
-//            }
-//        }
+                Assert.That(result.BaseObjectClass, Is.EqualTo(obj.BaseObjectClass));
+                Assert.That(result.ClassName, Is.EqualTo(obj.ClassName));
+                Assert.That(result.DefaultIcon, Is.EqualTo(obj.DefaultIcon));
+                Assert.That(result.DefaultModel, Is.EqualTo(obj.DefaultModel));
+                Assert.That(result.Description, Is.EqualTo(obj.Description));
+                Assert.That((ICollection)result.ImplementsInterfaces, Is.EquivalentTo((ICollection)obj.ImplementsInterfaces));
+                Assert.That(result.IsFrozenObject, Is.EqualTo(obj.IsFrozenObject));
+                Assert.That(result.IsSimpleObject, Is.EqualTo(obj.IsSimpleObject));
+                Assert.That((ICollection)result.MethodInvocations, Is.EquivalentTo((ICollection)obj.MethodInvocations));
+                Assert.That((ICollection)result.Methods, Is.EquivalentTo((ICollection)obj.Methods));
+                Assert.That(result.Module, Is.EqualTo(obj.Module));
+                Assert.That((ICollection)result.Properties, Is.EquivalentTo((ICollection)obj.Properties));
+                Assert.That((ICollection)result.SubClasses, Is.EquivalentTo((ICollection)obj.SubClasses));
+                Assert.That(result.TableName, Is.EqualTo(obj.TableName));
 
-//        [Test]
-//        public void EventAttached()
-//        {
-//            Assert.That(currentCustomActionsManager.IsObjectAttached(obj), Is.True);
-//        }
+            }
+        }
 
-//        [Test]
-//        public void ObjectState_CreatedObject()
-//        {
-//            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-//        }
+        [Test]
+        public void ToStream_creates_correct_Stream()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                MemoryStream ms = new MemoryStream();
+                BinaryWriter sw = new BinaryWriter(ms);
+                BinaryReader sr = new BinaryReader(ms);
 
-//        [Test]
-//        public void ObjectState_ObjectWithID()
-//        {
-//            ((TestObjClass__Implementation__)obj).ID = 10;
-//            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-//        }
+                InitialiseObject(ctx, obj);
+                obj.ToStream(sw);
 
-//        [Test]
-//        /// ObjectState is just for serialization....
-//        public void ObjectState_CreatedObject_Modified()
-//        {
-//            obj.NotifyPropertyChanged("test");
-//            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-//        }
+                Assert.That(ms.Length, Is.GreaterThan(0));
+                ms.Seek(0, SeekOrigin.Begin);
 
-//        [Test]
-//        /// ObjectState is just for serialization....
-//        public void ObjectState_ObjectWithID_Modified()
-//        {
-//            ((TestObjClass__Implementation__)obj).ID = 10;
-//            obj.NotifyPropertyChanged("test");
-//            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-//        }
+                throw new NotImplementedException();
+                //TestObjClassSerializationMock.AssertCorrectContents<TestObjClass, int>(sr);
+            }
+        }
 
-//        [Test]
-//        /// ObjectState is just for serialization....
-//        public void ObjectState_New_then_UnModified()
-//        {
-//            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-//            ((TestObjClass__Implementation__)obj).ID = 10;
-//            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-//        }
+        [Test]
+        public void FromStream_creates_correct_Object()
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryWriter sw = new BinaryWriter(ms, UTF8Encoding.UTF8);
+            BinaryReader sr = new BinaryReader(ms, UTF8Encoding.UTF8);
 
-//        [Test]
-//        [ExpectedException(typeof(NotImplementedException))]
-//        public void NotifyChange()
-//        {
-//            obj.NotifyChange();
-//        }
+            throw new NotImplementedException();
 
-//        [Test]
-//        public void NotifyPropertyChanged_ing()
-//        {
-//            obj.NotifyPropertyChanging("StringProp");
-//            obj.StringProp = "test";
-//            obj.NotifyPropertyChanged("StringProp");
-//        }
+            //TestObjClassSerializationMock.ToStream<TestObjClass, int>(sw);
+            sw.Flush();
 
-//        [Test]
-//        [ExpectedException(typeof(ArgumentNullException))]
-//        public void ToStream_Null()
-//        {
-//            obj.ToStream(null);
-//        }
+            Assert.That(ms.Length, Is.GreaterThan(0));
+            ms.Seek(0, SeekOrigin.Begin);
 
-//        [Test]
-//        public void ToStream_creates_correct_Stream()
-//        {
-//            MemoryStream ms = new MemoryStream();
-//            BinaryWriter sw = new BinaryWriter(ms);
-//            BinaryReader sr = new BinaryReader(ms);
+            obj.FromStream(sr);
 
-//            InitialiseObject(objImpl);
-//            objImpl.ToStream(sw);
+            //TestObjClassSerializationMock.AssertCorrectContentsInt<TestObjClass>(objImpl);
+        }
 
-//            Assert.That(ms.Length, Is.GreaterThan(0));
-//            ms.Seek(0, SeekOrigin.Begin);
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void FromStream_Attached_fails()
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryWriter sw = new BinaryWriter(ms);
+            BinaryReader sr = new BinaryReader(ms);
 
-//            TestObjClassSerializationMock.AssertCorrectContents<TestObjClass, int>(sr);
-//        }
+            obj.ToStream(sw);
 
-//        [Test]
-//        public void FromStream_creates_correct_Object()
-//        {
-//            MemoryStream ms = new MemoryStream();
-//            BinaryWriter sw = new BinaryWriter(ms, UTF8Encoding.UTF8);
-//            BinaryReader sr = new BinaryReader(ms, UTF8Encoding.UTF8);
+            Assert.That(ms.Length, Is.GreaterThan(0));
 
-//            TestObjClassSerializationMock.ToStream<TestObjClass, int>(sw);
-//            sw.Flush();
+            ms.Seek(0, SeekOrigin.Begin);
 
-//            Assert.That(ms.Length, Is.GreaterThan(0));
-//            ms.Seek(0, SeekOrigin.Begin);
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
+            {
+                var result = ctx.Create<ObjectClass>();
+                result.FromStream(sr);
+            }
+        }
 
-//            objImpl.FromStream(sr);
+        [Test]
+        public void AttachToContext()
+        {
+            Assert.That(obj.Context, Is.Null);
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
+            {
+                obj.AttachToContext(ctx);
+                Assert.That(obj.Context, Is.Not.Null);
+                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+            }
+        }
 
-//            TestObjClassSerializationMock.AssertCorrectContentsInt<TestObjClass>(objImpl);
-//        }
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AttachToContext_Other_fails()
+        {
+            Assert.That(obj.Context, Is.Null);
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
+            {
+                obj.AttachToContext(ctx);
+                Assert.That(obj.Context, Is.Not.Null);
+                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                using (IKistlContext ctx2 = Kistl.API.Server.KistlContext.GetContext())
+                {
+                    obj.AttachToContext(ctx2);
+                    Assert.That(obj.Context, Is.Not.Null);
+                    Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                }
+            }
+        }
 
-//        [Test]
-//        [ExpectedException(typeof(ArgumentNullException))]
-//        public void FromStream_Null_StreamReader()
-//        {
-//            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
-//            {
-//                TestObjClass result = new TestObjClass__Implementation__();
-//                result.FromStream(null);
-//            }
-//        }
+        [Test]
+        public void DetachFromContext()
+        {
+            Assert.That(obj.Context, Is.Null);
+            obj.ID = 10;
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
+            {
+                ctx.Attach(obj);
+                Assert.That(obj.Context, Is.Not.Null);
 
-//        [Test]
-//        [ExpectedException(typeof(InvalidOperationException))]
-//        public void FromStream_WrongType()
-//        {
-//            MemoryStream ms = new MemoryStream();
-//            BinaryWriter sw = new BinaryWriter(ms);
-//            BinaryReader sr = new BinaryReader(ms);
+                obj.DetachFromContext(ctx);
+                Assert.That(obj.Context, Is.Null);
 
-//            SerializableType wrongType = new SerializableType(typeof(string));
-//            BinarySerializer.ToStream(wrongType, sw);
+                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
+            }
+        }
 
-//            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
-//            {
-//                ms.Seek(0, SeekOrigin.Begin);
-//                TestObjClass result = new TestObjClass__Implementation__();
-//                result.FromStream(sr);
-//            }
-//        }
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void DetachFromContext_Other()
+        {
+            Assert.That(obj.Context, Is.Null);
+            obj.ID = 10;
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
+            {
+                ctx.Attach(obj);
+                Assert.That(obj.Context, Is.Not.Null);
 
-//        [Test]
-//        [ExpectedException(typeof(InvalidOperationException))]
-//        public void FromStream_Attached()
-//        {
-//            MemoryStream ms = new MemoryStream();
-//            BinaryWriter sw = new BinaryWriter(ms);
-//            BinaryReader sr = new BinaryReader(ms);
+                obj.DetachFromContext(ctx);
+                Assert.That(obj.Context, Is.Null);
+                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
 
-//            obj.ToStream(sw);
-
-//            Assert.That(ms.Length, Is.GreaterThan(0));
-
-//            ms.Seek(0, SeekOrigin.Begin);
-
-//            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
-//            {
-//                TestObjClass result = ctx.Create<TestObjClass>();
-//                result.FromStream(sr);
-
-//                Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
-//                Assert.That(result.ID, Is.EqualTo(obj.ID));
-//                Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
-//            }
-//        }
-
-//        [Test]
-//        public void AttachToContext()
-//        {
-//            Assert.That(obj.Context, Is.Null);
-//            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
-//            {
-//                obj.AttachToContext(ctx);
-//                Assert.That(obj.Context, Is.Not.Null);
-//                Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Detached));
-//            }
-//        }
-
-//        [Test]
-//        [ExpectedException(typeof(InvalidOperationException))]
-//        public void AttachToContext_Other()
-//        {
-//            Assert.That(obj.Context, Is.Null);
-//            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
-//            {
-//                obj.AttachToContext(ctx);
-//                Assert.That(obj.Context, Is.Not.Null);
-//                Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Detached));
-//                using (IKistlContext ctx2 = Kistl.API.Server.KistlContext.GetContext())
-//                {
-//                    obj.AttachToContext(ctx2);
-//                    Assert.That(obj.Context, Is.Not.Null);
-//                    Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Detached));
-//                }
-//            }
-//        }
-
-//        [Test]
-//        public void DetachFromContext()
-//        {
-//            Assert.That(obj.Context, Is.Null);
-//            ((TestObjClass__Implementation__)obj).ID = 10;
-//            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
-//            {
-//                ctx.Attach(obj);
-//                Assert.That(obj.Context, Is.Not.Null);
-
-//                obj.DetachFromContext(ctx);
-//                Assert.That(obj.Context, Is.Null);
-
-//                Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
-//            }
-//        }
-
-//        [Test]
-//        [ExpectedException(typeof(InvalidOperationException))]
-//        public void DetachFromContext_Other()
-//        {
-//            Assert.That(obj.Context, Is.Null);
-//            ((TestObjClass__Implementation__)obj).ID = 10;
-//            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
-//            {
-//                ctx.Attach(obj);
-//                Assert.That(obj.Context, Is.Not.Null);
-
-//                obj.DetachFromContext(ctx);
-//                Assert.That(obj.Context, Is.Null);
-//                Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
-
-//                using (IKistlContext ctx2 = Kistl.API.Server.KistlContext.GetContext())
-//                {
-//                    obj.DetachFromContext(ctx2);
-//                    Assert.That(obj.Context, Is.Null);
-//                    Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
-//                }
-//            }
-//        }
-//    }
-//}
+                using (IKistlContext ctx2 = Kistl.API.Server.KistlContext.GetContext())
+                {
+                    obj.DetachFromContext(ctx2);
+                    Assert.That(obj.Context, Is.Null);
+                    Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
+                }
+            }
+        }
+    }
+}

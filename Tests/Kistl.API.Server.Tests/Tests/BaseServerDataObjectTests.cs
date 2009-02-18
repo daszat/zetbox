@@ -78,10 +78,11 @@ namespace Kistl.API.Server.Tests
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
         }
 
+        // TODO: WTF? Please explain
         [Test]
         public void ObjectState_should_be_Unmodified_after_setting_ID()
         {
-            ((TestObjClass__Implementation__)obj).ID = 10;
+            obj.ID = 10;
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
         }
 
@@ -128,7 +129,7 @@ namespace Kistl.API.Server.Tests
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void ToStream_Null()
+        public void ToStream_to_null_fails()
         {
             obj.ToStream(null);
         }
@@ -169,7 +170,7 @@ namespace Kistl.API.Server.Tests
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void FromStream_Null_StreamReader()
+        public void FromStream_Null_StreamReader_fails()
         {
             using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
             {

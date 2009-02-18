@@ -13,7 +13,8 @@ namespace Kistl.DalProvider.EF.Tests
             setup.Init();
 
             //BaseServerDataObjectTests();
-            KistlDataContextTests();
+            //KistlDataContextTests();
+            ServerCollectionEntry_EF();
         }
 
         //private static void BaseServerDataObjectTests()
@@ -63,5 +64,13 @@ namespace Kistl.DalProvider.EF.Tests
             //    tests.SetUp();
             //    tests.SelectSomeData_Collection();
         }
+
+        private static void ServerCollectionEntry_EF()
+        {
+            var tests = new Tests.ServerCollectionEntry_EF();
+            tests.SetUp();
+            tests.should_be_attached_after_attaching();
+        }
+
     }
 }

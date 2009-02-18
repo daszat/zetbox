@@ -35,19 +35,10 @@ namespace Kistl.API
     }
 
     /// <summary>
-    /// Interface for a Persitance Object.
+    /// Objects implementing this interface can be streamed over a binary stream.
     /// </summary>
-    public interface IPersistenceObject : INotifyPropertyChanged, INotifyPropertyChanging
+    public interface IStreamable
     {
-        /// <summary>
-        /// Every Object has at least an ID
-        /// </summary>
-        int ID { get; }
-
-        /// <summary>
-        /// State of this Object.
-        /// </summary>
-        DataObjectState ObjectState { get; }
 
         /// <summary>
         /// Serialize this Object to a BinaryWriter
@@ -59,6 +50,23 @@ namespace Kistl.API
         /// </summary>
         /// <param name="sr">BinaryReader to deserialize to.</param>
         void FromStream(System.IO.BinaryReader sr);
+
+    }
+
+    /// <summary>
+    /// Interface for all persistent objects.
+    /// </summary>
+    public interface IPersistenceObject : IStreamable, INotifyPropertyChanged, INotifyPropertyChanging
+    {
+        /// <summary>
+        /// Every Object has at least an ID
+        /// </summary>
+        int ID { get; }
+
+        /// <summary>
+        /// State of this Object.
+        /// </summary>
+        DataObjectState ObjectState { get; }
 
         /// <summary>
         /// Fires an Event before an Property is changed.
@@ -124,19 +132,8 @@ namespace Kistl.API
         void NotifyPostSave();
     }
 
-    public interface IStruct : ICloneable
+    public interface IStruct : IStreamable, ICloneable
     {
-        /// <summary>
-        /// Serialize this Object to a BinaryWriter
-        /// </summary>
-        /// <param name="sw">BinaryWriter to serialize to</param>
-        void ToStream(System.IO.BinaryWriter sw);
-        /// <summary>
-        /// Deserialize this Object from a BinaryReader
-        /// </summary>
-        /// <param name="sr">BinaryReader to deserialize to.</param>
-        void FromStream(System.IO.BinaryReader sr);
-
         void AttachToObject(IPersistenceObject obj, string property);
         void DetachFromObject(IPersistenceObject obj, string property);
 

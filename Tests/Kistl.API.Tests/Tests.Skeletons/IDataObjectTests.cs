@@ -9,11 +9,18 @@ using NUnit.Framework.SyntaxHelpers;
 
 namespace Kistl.API.Tests.Skeletons
 {
-
-    public abstract class CollectionEntryTests<T>
+    [TestFixture]
+    public class IDataObjectTests<T>
         : IPersistenceObjectTests<T>
-        where T : ICollectionEntry, new()
+        where T : IDataObject, new()
     {
-    }
 
+        [Test]
+        [Ignore("not implemented")]
+        public void NotifyChange()
+        {
+            obj.NotifyChange();
+        }
+
+    }
 }

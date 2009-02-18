@@ -66,6 +66,9 @@
     <Compile Include="TestKistlContext.cs" />
     <Compile Include="TestQueryProvider.cs" />
     <Compile Include="Tests.Skeletons\CollectionEntryTests.cs" />
+    <Compile Include="Tests.Skeletons\IDataObjectTests.cs" />
+    <Compile Include="Tests.Skeletons\IPersistenceObjectTests.cs" />
+    <Compile Include="Tests.Skeletons\IStreamableTests.cs" />
     <Compile Include="TestStruct.cs" />
     <Compile Include="Tests\ApplicationContextTests.cs" />
     <Compile Include="Tests\AssemblyLoaderTests.cs" />

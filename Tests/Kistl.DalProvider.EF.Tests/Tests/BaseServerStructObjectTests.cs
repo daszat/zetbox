@@ -1,103 +1,71 @@
-//using System;
-//using System.Collections.Generic;
-//using System.ComponentModel;
-//using System.IO;
-//using System.Linq;
-//using System.Text;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Text;
 
-//using Kistl.API;
-//using Kistl.API.Server;
-//using Kistl.API.Server.Mocks;
+using Kistl.API;
+using Kistl.API.Server;
+using Kistl.API.Server.Mocks;
+using Kistl.API.Tests.Skeletons;
+using Kistl.App.Test;
 
-//using NUnit.Framework;
-//using NUnit.Framework.SyntaxHelpers;
+using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
-//namespace Kistl.DalProvider.EF.Tests
-//{
-//    [TestFixture]
-//    public class BaseServerStructObjectTests
-//    {
-//        private TestStruct obj;
+namespace Kistl.DalProvider.EF.Tests
+{
+    [TestFixture]
+    public class BaseServerStructObjectTests : IStreamableTests<TestPhoneStruct__Implementation__>
+    {
 
-//        [SetUp]
-//        public void SetUp()
-//        {
-//            var testCtx = new ServerApiContextMock();
+        [SetUp]
+        public void SetUp()
+        {
+            var testCtx = new ServerApiContextMock();
 
-//            obj = new TestStruct() { TestInt = 1, TestString = "Hello World" };
-//        }
+            obj = new TestPhoneStruct__Implementation__() { AreaCode = "ABC", Number = "123456" };
+        }
 
-//        [Test]
-//        public void Clone()
-//        {
-//            TestStruct c = (TestStruct)obj.Clone();
-//            Assert.That(c.TestInt, Is.EqualTo(obj.TestInt));
-//            Assert.That(c.TestString, Is.EqualTo(obj.TestString));
-//        }
+        [Test]
+        public void Clone_creates_memberwise_equal_object()
+        {
+            var c = (TestPhoneStruct)obj.Clone();
+            Assert.That(c.AreaCode, Is.EqualTo(obj.AreaCode));
+            Assert.That(c.Number, Is.EqualTo(obj.Number));
+        }
 
+        [Test]
+        public void should_roudtrip_members_correctly()
+        {
+            var result = this.SerializationRoundtrip(obj);
 
-//        [Test]
-//        [ExpectedException(typeof(ArgumentNullException))]
-//        public void ToStream_Null()
-//        {
-//            obj.ToStream(null);
-//        }
+            Assert.That(result.AreaCode, Is.EqualTo(obj.AreaCode));
+            Assert.That(result.Number, Is.EqualTo(obj.Number));
+        }
 
-//        [Test]
-//        public void Stream()
-//        {
-//            MemoryStream ms = new MemoryStream();
-//            BinaryWriter sw = new BinaryWriter(ms);
-//            BinaryReader sr = new BinaryReader(ms);
+        [Test]
+        public void NotifyPropertyChanged_ing()
+        {
+            bool hasChanged = false;
+            bool hasChanging = false;
 
-//            obj.ToStream(sw);
+            PropertyChangedEventHandler changedHandler = new PropertyChangedEventHandler(delegate(object sender, PropertyChangedEventArgs e) { hasChanged = true; });
+            PropertyChangingEventHandler changingHanlder = new PropertyChangingEventHandler(delegate(object sender, PropertyChangingEventArgs e) { hasChanging = true; });
 
-//            Assert.That(ms.Length, Is.GreaterThan(0));
+            obj.PropertyChanged += changedHandler;
+            obj.PropertyChanging += changingHanlder;
 
-//            ms.Seek(0, SeekOrigin.Begin);
+            obj.NotifyPropertyChanging("AreaCode");
+            obj.AreaCode = "test";
+            obj.NotifyPropertyChanged("AreaCode");
 
-//            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
-//            {
-//                TestStruct result = new TestStruct();
-//                result.FromStream(sr);
+            Assert.That(hasChanged, Is.True);
+            Assert.That(hasChanging, Is.True);
 
-//                Assert.That(result.TestInt, Is.EqualTo(obj.TestInt));
-//                Assert.That(result.TestString, Is.EqualTo(obj.TestString));
-//            }
-//        }
-
-//        [Test]
-//        [ExpectedException(typeof(ArgumentNullException))]
-//        public void FromStream_Null_StreamReader()
-//        {
-//            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
-//            {
-//                TestStruct result = new TestStruct();
-//                result.FromStream(null);
-//            }
-//        }
-
-//        [Test]
-//        public void NotifyPropertyChanged_ing()
-//        {
-//            bool hasChanged = false;
-//            bool hasChanging = false;
-
-//            PropertyChangedEventHandler changedHandler = new PropertyChangedEventHandler(delegate(object sender, PropertyChangedEventArgs e) { hasChanged = true; });
-//            PropertyChangingEventHandler changingHanlder = new PropertyChangingEventHandler(delegate(object sender, PropertyChangingEventArgs e) { hasChanging = true; });
-
-//            obj.PropertyChanged += changedHandler;
-//            obj.PropertyChanging += changingHanlder;
-
-//            obj.NotifyPropertyChanging("TestString");
-//            obj.TestString = "test";
-//            obj.NotifyPropertyChanged("TestString");
-
-//            Assert.That(hasChanged, Is.True);
-//            Assert.That(hasChanging, Is.True);
-
-//            obj.PropertyChanged -= changedHandler;
-//            obj.PropertyChanging -= changingHanlder;
-//        }
-//    }
-//}
+            obj.PropertyChanged -= changedHandler;
+            obj.PropertyChanging -= changingHanlder;
+        }
+    }
+}

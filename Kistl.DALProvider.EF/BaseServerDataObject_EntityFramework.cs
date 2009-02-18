@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Objects;
+using System.Data.Objects.DataClasses;
 using System.Linq;
 using System.Text;
+
 using Kistl.API;
 using Kistl.API.Server;
-using System.Data.Objects.DataClasses;
-using System.Data.Objects;
 
 namespace Kistl.DALProvider.EF
 {
@@ -14,8 +15,10 @@ namespace Kistl.DALProvider.EF
         System.Data.EntityState EntityState { get; }
     }
 
-    public abstract class BaseServerDataObject_EntityFramework : BaseServerDataObject, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject
+    public abstract class BaseServerDataObject_EntityFramework
+        : BaseServerDataObject, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject
     {
+
         #region IEntityWithKey Members
         private System.Data.EntityKey _entityKey = null;
         public System.Data.EntityKey EntityKey
@@ -77,7 +80,6 @@ namespace Kistl.DALProvider.EF
         }
         #endregion
 
-        #region IsAttached
         public override bool IsAttached
         {
             get
@@ -85,9 +87,7 @@ namespace Kistl.DALProvider.EF
                 return this.EntityState != System.Data.EntityState.Detached;
             }
         }
-        #endregion
 
-        #region Notify
         public override void NotifyPropertyChanging(string property)
         {
             base.NotifyPropertyChanging(property);
@@ -105,10 +105,10 @@ namespace Kistl.DALProvider.EF
                 _changeTracker.EntityMemberChanged(property);
             }
         }
-        #endregion
     }
 
-    public abstract class BaseServerCollectionEntry_EntityFramework : BaseServerCollectionEntry, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject
+    public abstract class BaseServerCollectionEntry_EntityFramework
+        : BaseServerCollectionEntry, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject
     {
         #region IEntityWithKey Members
         private System.Data.EntityKey _entityKey = null;
@@ -151,6 +151,7 @@ namespace Kistl.DALProvider.EF
         #endregion
 
         #region IEntityChangeTracker
+        
         IEntityChangeTracker _changeTracker = null;
 
         public virtual void SetChangeTracker(IEntityChangeTracker changeTracker)
@@ -158,9 +159,11 @@ namespace Kistl.DALProvider.EF
             _changeTracker = changeTracker;
             // Set struct change tracker
         }
+
         #endregion
 
-        #region EntityState
+        #region IEntityStateObject
+
         public System.Data.EntityState EntityState
         {
             get
@@ -169,9 +172,9 @@ namespace Kistl.DALProvider.EF
                 return _changeTracker.EntityState;
             }
         }
+
         #endregion
 
-        #region IsAttached
         public override bool IsAttached
         {
             get
@@ -179,9 +182,6 @@ namespace Kistl.DALProvider.EF
                 return this.EntityState != System.Data.EntityState.Detached;
             }
         }
-        #endregion
-
-        #region Notify
 
         public override void NotifyPropertyChanging(string property)
         {
@@ -200,7 +200,6 @@ namespace Kistl.DALProvider.EF
                 _changeTracker.EntityMemberChanged(property);
             }
         }
-        #endregion
 
         // Case: 668
         public ObjectContext GetEFContext()
