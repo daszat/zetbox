@@ -1,104 +1,74 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" total="30" failures="4" not-run="1" date="2009-02-17" time="19:11:00">
+<test-results name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" total="32" failures="3" not-run="0" date="2009-02-18" time="09:22:36">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" success="False" time="12.768" asserts="0">
+  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" success="False" time="10.938" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\bin\Debug\Kistl.DalProvider.EF.Tests.exe" success="False" time="12.762" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\bin\Debug\Kistl.DalProvider.EF.Tests.exe" success="False" time="10.932" asserts="0">
         <results>
-          <test-suite name="Kistl" success="False" time="12.758" asserts="0">
+          <test-suite name="KistlDataContextTests" success="False" time="10.924" asserts="0">
             <results>
-              <test-suite name="DalProvider" success="False" time="12.755" asserts="0">
-                <results>
-                  <test-suite name="EF" success="False" time="12.749" asserts="0">
-                    <results>
-                      <test-suite name="Tests" success="False" time="12.740" asserts="0">
-                        <results>
-                          <test-suite name="BaseServerCollectionEntryTests" success="True" time="0.050" asserts="0">
-                            <results>
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.fails_on_serializing_from_null_stream" executed="True" success="True" time="0.008" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.fails_on_serializing_to_null_stream" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.should_not_be_attached_after_init" executed="True" success="True" time="0.005" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.should_roundtrip_correctly" executed="True" success="True" time="0.029" asserts="2" />
-                            </results>
-                          </test-suite>
-                          <test-suite name="KistlDataContextTests" success="False" time="8.515" asserts="0">
-                            <results>
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing" executed="True" success="True" time="8.037" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice" executed="True" success="True" time="0.031" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice_But_Different" executed="True" success="True" time="0.009" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_New" executed="True" success="True" time="0.010" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.AttachedObjects" executed="True" success="True" time="0.010" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.CleanUpSession" executed="True" success="True" time="0.008" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject" executed="True" success="True" time="0.018" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject_Not" executed="True" success="True" time="0.008" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Generic" executed="True" success="True" time="0.012" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_ObjectType" executed="True" success="True" time="0.008" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Type" executed="True" success="True" time="0.011" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Delete_IDataObject" executed="True" success="False" time="0.017" asserts="1">
-                                <failure>
-                                  <message><![CDATA[  Expected: 4
-  But was:  1
-]]></message>
-                                  <stack-trace><![CDATA[bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.Delete_IDataObject() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 442.
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing" executed="True" success="True" time="6.972" asserts="2" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice" executed="True" success="True" time="0.022" asserts="3" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice_But_Different" executed="True" success="True" time="0.013" asserts="3" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_New" executed="True" success="True" time="0.012" asserts="2" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.AttachedObjects" executed="True" success="True" time="0.013" asserts="1" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.CleanUpSession" executed="True" success="True" time="0.007" asserts="0" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject" executed="True" success="True" time="0.029" asserts="2" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject_Not" executed="True" success="True" time="0.012" asserts="2" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Generic" executed="True" success="True" time="0.013" asserts="3" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_ObjectType" executed="True" success="True" time="0.009" asserts="2" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Type" executed="True" success="True" time="0.011" asserts="2" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Delete_deletes_objects" executed="True" success="False" time="2.239" asserts="2">
+                <failure>
+                  <message><![CDATA[System.InvalidCastException : Das Objekt des Typs "System.Int32" kann nicht in Typ "Kistl.API.IDataObject" umgewandelt werden.]]></message>
+                  <stack-trace><![CDATA[bei Kistl.API.Server.QueryTranslatorProvider`1.Execute(Expression expression) in P:\Kistl\Kistl.API.Server\QueryTranslator.cs:Zeile 114.
+bei Kistl.API.Server.QueryTranslatorProvider`1.Execute[TResult](Expression expression) in P:\Kistl\Kistl.API.Server\QueryTranslator.cs:Zeile 104.
+bei System.Linq.Queryable.Count[TSource](IQueryable`1 source)
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.Delete_deletes_objects() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 526.
 ]]></stack-trace>
-                                </failure>
-                              </test-case>
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject" executed="True" success="True" time="0.069" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject_Failed" executed="True" success="True" time="0.009" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_ObjectType" executed="True" success="True" time="0.085" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_T" executed="True" success="True" time="0.014" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetContext" executed="True" success="True" time="0.008" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf" executed="True" success="False" time="0.022" asserts="0">
-                                <failure>
-                                  <message><![CDATA[System.ArgumentOutOfRangeException : Property SubClasses was not found in Type Kistl.App.Test.TestObjClass__Implementation__
-Parametername: propName]]></message>
-                                  <stack-trace><![CDATA[bei Kistl.API.ExtensionHelpers.GetPropertyValue[T](Object obj, String propName) in P:\Kistl\Kistl.API\Helper.cs:Zeile 145.
-bei Kistl.API.Server.BaseKistlDataContext.GetListOf[T](IDataObject obj, String propertyName) in P:\Kistl\Kistl.API.Server\BaseKistlDataContext.cs:Zeile 80.
-bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 142.
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Delete_triggers_ObjectDeleted" executed="True" success="True" time="0.162" asserts="2" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject" executed="True" success="True" time="0.045" asserts="1" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject_Failed" executed="True" success="True" time="0.009" asserts="0" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_ObjectType_fails_on_invalid_ID" executed="True" success="False" time="0.157" asserts="0">
+                <failure>
+                  <message><![CDATA[System.InvalidCastException : Das Objekt des Typs "System.Int32" kann nicht in Typ "Kistl.API.IDataObject" umgewandelt werden.]]></message>
+                  <stack-trace><![CDATA[bei Kistl.DALProvider.EF.KistlDataContext.Find(Type type, Int32 ID) in P:\Kistl\Kistl.DALProvider.EF\KistlDataContext.cs:Zeile 336.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_ObjectType_fails_on_invalid_ID() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 171.
 ]]></stack-trace>
-                                </failure>
-                              </test-case>
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_ObjType" executed="True" success="False" time="0.019" asserts="0">
-                                <failure>
-                                  <message><![CDATA[System.ArgumentOutOfRangeException : Property SubClasses was not found in Type Kistl.App.Test.TestObjClass__Implementation__
-Parametername: propName]]></message>
-                                  <stack-trace><![CDATA[bei Kistl.API.ExtensionHelpers.GetPropertyValue[T](Object obj, String propName) in P:\Kistl\Kistl.API\Helper.cs:Zeile 145.
-bei Kistl.API.Server.BaseKistlDataContext.GetListOf[T](IDataObject obj, String propertyName) in P:\Kistl\Kistl.API.Server\BaseKistlDataContext.cs:Zeile 80.
-bei Kistl.API.Server.BaseKistlDataContext.GetListOf[T](Type type, Int32 ID, String propertyName) in P:\Kistl\Kistl.API.Server\BaseKistlDataContext.cs:Zeile 94.
-bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_ObjType() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 153.
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_ObjectType_returns_right_object" executed="True" success="True" time="0.016" asserts="3" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_T_fails_on_invalid_ID" executed="True" success="False" time="0.020" asserts="0">
+                <failure>
+                  <message><![CDATA[An unexpected exception type was thrown
+Expected: System.ArgumentOutOfRangeException
+ but was: System.InvalidCastException : Das Objekt des Typs "System.Int32" kann nicht in Typ "Kistl.API.IDataObject" umgewandelt werden.]]></message>
+                  <stack-trace><![CDATA[bei Kistl.API.Server.QueryTranslatorProvider`1.Execute(Expression expression) in P:\Kistl\Kistl.API.Server\QueryTranslator.cs:Zeile 114.
+bei Kistl.API.Server.QueryTranslatorProvider`1.Execute[TResult](Expression expression) in P:\Kistl\Kistl.API.Server\QueryTranslator.cs:Zeile 104.
+bei System.Linq.Queryable.Count[TSource](IQueryable`1 source, Expression`1 predicate)
+bei Kistl.DALProvider.EF.KistlDataContext.Find[T](Int32 ID) in P:\Kistl\Kistl.DALProvider.EF\KistlDataContext.cs:Zeile 359.
+bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_T_fails_on_invalid_ID() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 150.
 ]]></stack-trace>
-                                </failure>
-                              </test-case>
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_WrongPropertyName" executed="True" success="True" time="0.013" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetQuery" executed="True" success="True" time="0.009" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetQuery_ObjType" executed="False">
-                                <reason>
-                                  <message><![CDATA[]]></message>
-                                </reason>
-                              </test-case>
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.InitSession" executed="True" success="True" time="0.007" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.InitSessionTwice" executed="True" success="True" time="0.009" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.NoSession" executed="True" success="True" time="0.006" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.SelectSomeData" executed="True" success="False" time="0.012" asserts="1">
-                                <failure>
-                                  <message><![CDATA[  Expected: 4
-  But was:  1
-]]></message>
-                                  <stack-trace><![CDATA[bei Kistl.DalProvider.EF.Tests.KistlDataContextTests.SelectSomeData() in P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Tests\KistlDataContextTests.cs:Zeile 176.
-]]></stack-trace>
-                                </failure>
-                              </test-case>
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.UpdateSomeData_SubmitChanges" executed="True" success="True" time="0.027" asserts="4" />
-                            </results>
-                          </test-suite>
-                        </results>
-                      </test-suite>
-                    </results>
-                  </test-suite>
-                </results>
-              </test-suite>
+                </failure>
+              </test-case>
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_T_returns_right_object" executed="True" success="True" time="0.015" asserts="3" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetContext_returns_a_context" executed="True" success="True" time="0.008" asserts="1" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_ObjType_returns_a_non_empty_list_on_class_DataType" executed="True" success="True" time="0.755" asserts="2" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_ObjType_WrongPropertyName_fails" executed="True" success="True" time="0.015" asserts="0" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_ObjType_WrongType_fails" executed="True" success="True" time="0.045" asserts="0" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_T_SubClasses_returns_a_non_empty_list_on_class_DataType" executed="True" success="True" time="0.042" asserts="2" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_T_WrongPropertyName_fails" executed="True" success="True" time="0.022" asserts="0" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_T_WrongType_fails" executed="True" success="True" time="0.038" asserts="0" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetQuery" executed="True" success="True" time="0.010" asserts="1" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetQuery_ObjType" executed="True" success="True" time="0.059" asserts="3" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.InitSession_returns_a_context_and_inits_Current" executed="True" success="True" time="0.011" asserts="2" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.InitSessionTwice_creates_a_new_context" executed="True" success="True" time="0.009" asserts="2" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.NoSession" executed="True" success="True" time="0.012" asserts="0" />
+              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.UpdateSomeData_SubmitChanges" executed="True" success="True" time="0.046" asserts="4" />
             </results>
           </test-suite>
         </results>

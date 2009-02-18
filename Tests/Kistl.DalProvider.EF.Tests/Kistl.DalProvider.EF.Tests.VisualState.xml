@@ -1,53 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
   <TopNode>[0-1000]P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit</TopNode>
-  <SelectedNode>[0-1000]P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit</SelectedNode>
+  <SelectedNode>[0-1037]Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.should_roundtrip_correctly</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
     <Node UniqueName="[0-1000]P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" Expanded="true">
       <Nodes>
-        <Node UniqueName="[0-1035]P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\bin\Debug\Kistl.DalProvider.EF.Tests.exe" Expanded="true">
+        <Node UniqueName="[0-1041]P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\bin\Debug\Kistl.DalProvider.EF.Tests.exe" Expanded="true">
           <Nodes>
-            <Node UniqueName="[0-1030]Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests" Expanded="true">
+            <Node UniqueName="[0-1033]Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests" Expanded="true">
               <Nodes>
-                <Node UniqueName="[0-1032]Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.fails_on_serializing_from_null_stream" />
-                <Node UniqueName="[0-1031]Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.fails_on_serializing_to_null_stream" />
-                <Node UniqueName="[0-1033]Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.should_not_be_attached_after_init" />
-                <Node UniqueName="[0-1034]Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.should_roundtrip_correctly" />
+                <Node UniqueName="[0-1035]Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.fails_on_serializing_from_null_stream" />
+                <Node UniqueName="[0-1034]Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.fails_on_serializing_to_null_stream" />
+                <Node UniqueName="[0-1036]Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.should_not_be_attached_after_init" />
+                <Node UniqueName="[0-1037]Kistl.DalProvider.EF.Tests.BaseServerCollectionEntryTests.should_roundtrip_correctly" />
               </Nodes>
             </Node>
             <Node UniqueName="[0-1001]Kistl.DalProvider.EF.Tests.KistlDataContextTests" Expanded="true">
               <Nodes>
-                <Node UniqueName="[0-1017]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing" />
-                <Node UniqueName="[0-1018]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice" />
-                <Node UniqueName="[0-1019]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice_But_Different" />
-                <Node UniqueName="[0-1016]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_New" />
-                <Node UniqueName="[0-1020]Kistl.DalProvider.EF.Tests.KistlDataContextTests.AttachedObjects" />
+                <Node UniqueName="[0-1019]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing" />
+                <Node UniqueName="[0-1020]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice" />
+                <Node UniqueName="[0-1021]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice_But_Different" />
+                <Node UniqueName="[0-1018]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_New" />
+                <Node UniqueName="[0-1022]Kistl.DalProvider.EF.Tests.KistlDataContextTests.AttachedObjects" />
                 <Node UniqueName="[0-1006]Kistl.DalProvider.EF.Tests.KistlDataContextTests.CleanUpSession" />
-                <Node UniqueName="[0-1021]Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject" />
-                <Node UniqueName="[0-1022]Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject_Not" />
-                <Node UniqueName="[0-1023]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Generic" />
-                <Node UniqueName="[0-1025]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_ObjectType" />
-                <Node UniqueName="[0-1024]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Type" />
-                <Node UniqueName="[0-1026]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Delete_IDataObject" />
-                <Node UniqueName="[0-1028]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject" />
-                <Node UniqueName="[0-1027]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject_Failed" />
-                <Node UniqueName="[0-1010]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_ObjectType" />
-                <Node UniqueName="[0-1009]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_T" />
-                <Node UniqueName="[0-1002]Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetContext" />
-                <Node UniqueName="[0-1011]Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf" />
-                <Node UniqueName="[0-1012]Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_ObjType" />
-                <Node UniqueName="[0-1013]Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_WrongPropertyName" />
+                <Node UniqueName="[0-1023]Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject" />
+                <Node UniqueName="[0-1024]Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject_Not" />
+                <Node UniqueName="[0-1025]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Generic" />
+                <Node UniqueName="[0-1027]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_ObjectType" />
+                <Node UniqueName="[0-1026]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Type" />
+                <Node UniqueName="[0-1029]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Delete_deletes_objects" />
+                <Node UniqueName="[0-1028]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Delete_triggers_ObjectDeleted" />
+                <Node UniqueName="[0-1031]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject" />
+                <Node UniqueName="[0-1030]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject_Failed" />
+                <Node UniqueName="[0-1012]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_ObjectType_fails_on_invalid_ID" />
+                <Node UniqueName="[0-1011]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_ObjectType_returns_right_object" />
+                <Node UniqueName="[0-1010]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_T_fails_on_invalid_ID" />
+                <Node UniqueName="[0-1009]Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_T_returns_right_object" />
+                <Node UniqueName="[0-1002]Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetContext_returns_a_context" />
+                <Node UniqueName="[0-1013]Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf" />
+                <Node UniqueName="[0-1014]Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_ObjType" />
+                <Node UniqueName="[0-1015]Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_WrongPropertyName" />
                 <Node UniqueName="[0-1007]Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetQuery" />
                 <Node UniqueName="[0-1008]Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetQuery_ObjType" />
-                <Node UniqueName="[0-1003]Kistl.DalProvider.EF.Tests.KistlDataContextTests.InitSession" />
-                <Node UniqueName="[0-1004]Kistl.DalProvider.EF.Tests.KistlDataContextTests.InitSessionTwice" />
+                <Node UniqueName="[0-1003]Kistl.DalProvider.EF.Tests.KistlDataContextTests.InitSession_returns_a_context_and_inits_Current" />
+                <Node UniqueName="[0-1004]Kistl.DalProvider.EF.Tests.KistlDataContextTests.InitSessionTwice_creates_a_new_context" />
                 <Node UniqueName="[0-1005]Kistl.DalProvider.EF.Tests.KistlDataContextTests.NoSession" />
-                <Node UniqueName="[0-1014]Kistl.DalProvider.EF.Tests.KistlDataContextTests.SelectSomeData" />
-                <Node UniqueName="[0-1015]Kistl.DalProvider.EF.Tests.KistlDataContextTests.UpdateSomeData_SubmitChanges" />
+                <Node UniqueName="[0-1016]Kistl.DalProvider.EF.Tests.KistlDataContextTests.SelectSomeData" />
+                <Node UniqueName="[0-1017]Kistl.DalProvider.EF.Tests.KistlDataContextTests.UpdateSomeData_SubmitChanges" />
               </Nodes>
             </Node>
-            <Node UniqueName="[0-1029]Kistl.DalProvider.EF.Tests.SetUp" />
+            <Node UniqueName="[0-1038]Kistl.DalProvider.EF.Tests.Linq" Expanded="true">
+              <Nodes>
+                <Node UniqueName="[0-1040]Kistl.DalProvider.EF.Tests.Linq.Count_returns_correct_count" />
+                <Node UniqueName="[0-1039]Kistl.DalProvider.EF.Tests.Linq.Where_filters_correctly" />
+              </Nodes>
+            </Node>
+            <Node UniqueName="[0-1032]Kistl.DalProvider.EF.Tests.SetUp" />
           </Nodes>
         </Node>
       </Nodes>

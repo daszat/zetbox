@@ -2,7 +2,5 @@
   <Target>E:\Program Files\NUnit 2.4.7\bin\nunit-console.exe</Target>
   <TargetWorkDir>P:\Kistl\Tests\Kistl.DalProvider.EF.Tests</TargetWorkDir>
   <TargetArgs>Kistl.DalProvider.EF.Tests.nunit</TargetArgs>
-  <Rule>+[Kistl.API.Server]*</Rule>
-  <Rule>+[Kistl.DALProvider.EF]*</Rule>
-  <Rule>+[Kistl.DALProvider.EF.*]*</Rule>
+  <Rule>+[Kistl.DALProvider.*]*</Rule>
 </PartCoverSettings>

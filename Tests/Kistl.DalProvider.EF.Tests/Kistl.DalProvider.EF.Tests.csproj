@@ -74,6 +74,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
+    <Compile Include="Tests\Linq.cs" />
     <Compile Include="Tests\ServerCollectionEntry_EF.cs" />
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />
     <Compile Include="Tests\BaseServerStructObjectTests.cs" />

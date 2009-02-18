@@ -325,8 +325,16 @@ namespace Kistl.DALProvider.EF
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override IDataObject Find(Type type, int ID)
         {
-            // See Case 552
-            return (IDataObject)this.GetType().FindGenericMethod("Find", new Type[] { type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
+            try
+            {
+                // See Case 552
+                return (IDataObject)this.GetType().FindGenericMethod("Find", new Type[] { type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
+            }
+            catch (TargetInvocationException tiex)
+            {
+                // unwrap "business" exception
+                throw tiex.InnerException;
+            }
         }
 
         /// <summary>
@@ -340,7 +348,23 @@ namespace Kistl.DALProvider.EF
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override T Find<T>(int ID)
         {
-            return GetQuery<T>().First(o => o.ID == ID);
+            try
+            {
+                return GetQuery<T>().First(o => o.ID == ID);
+            }
+            catch (InvalidOperationException)
+            {
+                // Since we do not want to rely on the exception string, 
+                // we have to check whether there is _any_ object with that ID
+                if (GetQuery<T>().Count(o => o.ID == ID) == 0)
+                {
+                    throw new ArgumentOutOfRangeException("ID", ID, "No such object");
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
     }
 }

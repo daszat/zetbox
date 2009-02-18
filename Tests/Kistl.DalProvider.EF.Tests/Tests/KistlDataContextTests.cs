@@ -7,6 +7,8 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.API.Server.Mocks;
+using Kistl.App.Base;
+using Kistl.App.Projekte;
 using Kistl.App.Test;
 
 using NUnit.Framework;
@@ -17,6 +19,10 @@ namespace Kistl.DalProvider.EF.Tests
     [TestFixture]
     public class KistlDataContextTests
     {
+
+        int firstId;
+        int secondId;
+
         [SetUp]
         public void SetUp()
         {
@@ -27,25 +33,34 @@ namespace Kistl.DalProvider.EF.Tests
                 var result = ctx.GetQuery<TestObjClass>();
                 var list = result.ToList();
 
+                while (list.Count < 2)
+                {
+                    var newObj = ctx.Create<TestObjClass>();
+                    newObj.ObjectProp = ctx.GetQuery<Kunde>().First();
+                    list.Add(newObj);
+                }
+
+                firstId = list[0].ID;
                 list[0].StringProp = "First";
                 list[0].TestEnumProp = TestEnum.First;
 
-                //list[1].StringProp = "Second";
-                //list[1].TestEnumProp = TestEnum.Second;
+                secondId = list[1].ID;
+                list[1].StringProp = "Second";
+                list[1].TestEnumProp = TestEnum.Second;
 
                 ctx.SubmitChanges();
             }
         }
 
         [Test]
-        public void GetContext()
+        public void GetContext_returns_a_context()
         {
             IKistlContext ctx = KistlContext.GetContext();
             Assert.That(ctx, Is.Not.Null);
         }
 
         [Test]
-        public void InitSession()
+        public void InitSession_returns_a_context_and_inits_Current()
         {
             using (IKistlContext ctx = KistlContext.InitSession())
             {
@@ -56,7 +71,7 @@ namespace Kistl.DalProvider.EF.Tests
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void InitSessionTwice()
+        public void InitSessionTwice_creates_a_new_context()
         {
             using (IKistlContext ctx = KistlContext.InitSession())
             {
@@ -65,6 +80,7 @@ namespace Kistl.DalProvider.EF.Tests
                 using (IKistlContext ctx2 = KistlContext.InitSession())
                 {
                     Assert.That(ctx2, Is.Not.Null);
+                    Assert.That(ctx2, Is.Not.EqualTo(ctx));
                     Assert.That(KistlContext.Current, Is.Not.Null);
                 }
             }
@@ -101,79 +117,125 @@ namespace Kistl.DalProvider.EF.Tests
         }
 
         [Test]
-        [Ignore]
         public void GetQuery_ObjType()
         {
             using (IKistlContext ctx = KistlContext.InitSession())
             {
                 var result = ctx.GetQuery(typeof(TestObjClass));
                 Assert.That(result, Is.Not.Null);
-                var testObj = result.First(o => o.ID == 1);
+                var testObj = result.First(o => o.ID == firstId);
                 Assert.That(testObj, Is.Not.Null);
+                Assert.That(testObj, Is.InstanceOfType(typeof(TestObjClass)));
             }
         }
 
         [Test]
-        public void Find_T()
+        public void Find_T_returns_right_object()
         {
             using (IKistlContext ctx = KistlContext.InitSession())
             {
-                TestObjClass obj = ctx.Find<TestObjClass>(1);
+                TestObjClass obj = ctx.Find<TestObjClass>(firstId);
                 Assert.That(obj, Is.Not.Null);
-            }
-        }
-
-        [Test]
-        public void Find_ObjectType()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                TestObjClass obj = (TestObjClass)ctx.Find(typeof(TestObjClass), 1);
-                Assert.That(obj, Is.Not.Null);
-            }
-        }
-
-        [Test]
-        public void GetListOf()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                var obj = ctx.GetQuery<TestObjClass>().First(o => o.ID == 1);
-                var result = ctx.GetListOf<TestObjClass>(obj, "SubClasses").ToList();
-                Assert.That(result, Is.Not.Null);
-                Assert.That(result.Count, Is.EqualTo(2));
-            }
-        }
-
-        [Test]
-        public void GetListOf_ObjType()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                var result = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "SubClasses").ToList();
-                Assert.That(result, Is.Not.Null);
-                Assert.That(result.Count, Is.EqualTo(2));
+                Assert.That(obj.ID, Is.EqualTo(firstId));
+                Assert.That(obj.TestEnumProp, Is.EqualTo(TestEnum.First));
             }
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void GetListOf_WrongPropertyName()
+        public void Find_T_fails_on_invalid_ID()
         {
             using (IKistlContext ctx = KistlContext.InitSession())
             {
-                var obj = ctx.GetQuery<TestObjClass>().First(o => o.ID == 1);
+                TestObjClass obj = ctx.Find<TestObjClass>(Kistl.API.Helper.INVALIDID);
+            }
+        }
+
+        [Test]
+        public void Find_ObjectType_returns_right_object()
+        {
+            using (IKistlContext ctx = KistlContext.InitSession())
+            {
+                TestObjClass obj = (TestObjClass)ctx.Find(typeof(TestObjClass), firstId);
+                Assert.That(obj, Is.Not.Null);
+                Assert.That(obj.ID, Is.EqualTo(firstId));
+                Assert.That(obj.TestEnumProp, Is.EqualTo(TestEnum.First));
+            }
+        }
+
+        [Test]
+        public void Find_ObjectType_fails_on_invalid_ID()
+        {
+            using (IKistlContext ctx = KistlContext.InitSession())
+            {
+                TestObjClass obj = (TestObjClass)ctx.Find(typeof(TestObjClass), Kistl.API.Helper.INVALIDID);
+            }
+        }
+
+        [Test]
+        public void GetListOf_T_SubClasses_returns_a_non_empty_list_on_class_DataType()
+        {
+            using (IKistlContext ctx = KistlContext.InitSession())
+            {
+                var obj = ctx.GetQuery<ObjectClass>().First(o => o.ClassName == "DataType");
+                List<ObjectClass> result = ctx.GetListOf<ObjectClass>(obj, "SubClasses").ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
+
+        [Test]
+        public void GetListOf_ObjType_returns_a_non_empty_list_on_class_DataType()
+        {
+            using (IKistlContext ctx = KistlContext.InitSession())
+            {
+                var obj = ctx.GetQuery<ObjectClass>().First(o => o.ClassName == "DataType");
+                List<ObjectClass> result = ctx.GetListOf<ObjectClass>(typeof(ObjectClass), obj.ID, "SubClasses").ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GetListOf_T_WrongPropertyName_fails()
+        {
+            using (IKistlContext ctx = KistlContext.InitSession())
+            {
+                var obj = ctx.GetQuery<TestObjClass>().First(o => o.ID == firstId);
                 var result = ctx.GetListOf<TestObjClass>(obj, "NotAProperty");
             }
         }
 
         [Test]
-        public void SelectSomeData()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void GetListOf_ObjType_WrongPropertyName_fails()
         {
             using (IKistlContext ctx = KistlContext.InitSession())
             {
-                var result = ctx.GetQuery<TestObjClass>();
-                Assert.That(result.ToList().Count, Is.EqualTo(4));
+                var result = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), firstId, "NotAProperty");
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void GetListOf_T_WrongType_fails()
+        {
+            using (IKistlContext ctx = KistlContext.InitSession())
+            {
+                var obj = ctx.GetQuery<ObjectClass>().First(o => o.ClassName == "DataType");
+                var result = ctx.GetListOf<TestObjClass>(obj, "SubClasses").ToList();
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void GetListOf_ObjType_WrongType_fails()
+        {
+            using (IKistlContext ctx = KistlContext.InitSession())
+            {
+                var obj = ctx.GetQuery<ObjectClass>().First(o => o.ClassName == "DataType");
+                var result = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), obj.ID, "SubClasses").ToList();
             }
         }
 
@@ -182,7 +244,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = KistlContext.InitSession())
             {
-                TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
+                TestObjClass obj = ctx.Find<TestObjClass>(firstId);
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.StringProp, Is.EqualTo("First"));
 
@@ -192,7 +254,7 @@ namespace Kistl.DalProvider.EF.Tests
 
             using (IKistlContext ctx = KistlContext.InitSession())
             {
-                TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
+                TestObjClass obj = ctx.Find<TestObjClass>(firstId);
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.StringProp, Is.EqualTo("Test"));
             }
@@ -430,16 +492,20 @@ namespace Kistl.DalProvider.EF.Tests
 
 
         [Test]
-        public void Delete_IDataObject()
+        public void Delete_triggers_ObjectDeleted()
         {
             using (IKistlContext ctx = KistlContext.InitSession())
             {
                 bool hasDeleted = false;
-                GenericEventHandler<IPersistenceObject> deletedHandler = new GenericEventHandler<IPersistenceObject>(delegate(object obj, GenericEventArgs<IPersistenceObject> e) { hasDeleted = true; });
+                GenericEventHandler<IPersistenceObject> deletedHandler = new GenericEventHandler<IPersistenceObject>(
+                    delegate(object obj, GenericEventArgs<IPersistenceObject> e)
+                    {
+                        hasDeleted = true;
+                    });
                 ctx.ObjectDeleted += deletedHandler;
 
                 var result = ctx.GetQuery<TestObjClass>();
-                Assert.That(result.ToList().Count, Is.EqualTo(4));
+                Assert.That(result.ToList().Count, Is.GreaterThan(0));
 
                 result.ForEach<TestObjClass>(
                     o => ctx.Delete(o));
@@ -447,8 +513,20 @@ namespace Kistl.DalProvider.EF.Tests
                 Assert.That(hasDeleted, Is.True);
 
                 ctx.ObjectDeleted -= deletedHandler;
+                ctx.SubmitChanges();
             }
         }
+
+        [Test]
+        public void Delete_deletes_objects()
+        {
+            Delete_triggers_ObjectDeleted();
+            using (IKistlContext ctx = KistlContext.InitSession())
+            {
+                Assert.That(ctx.GetQuery<TestObjClass>().Count(), Is.EqualTo(0));
+            }
+        }
+
 
         //[Test]
         //public void Delete_ICollectionEntry()
