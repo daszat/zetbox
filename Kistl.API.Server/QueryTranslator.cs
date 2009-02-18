@@ -111,10 +111,10 @@ namespace Kistl.API.Server
 
             Expression translated = this.Visit(expression);
 
-            IDataObject result = (IDataObject)_source.Provider.Execute(translated);
-            if (result != null)
+            object result = _source.Provider.Execute(translated);
+            if (result != null && result is IPersistenceObject)
             {
-                result.AttachToContext(_ctx);
+                ((IPersistenceObject)result).AttachToContext(_ctx);
             }
             return result;
         }
