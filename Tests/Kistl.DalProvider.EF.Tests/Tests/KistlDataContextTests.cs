@@ -164,6 +164,7 @@ namespace Kistl.DalProvider.EF.Tests
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Find_ObjectType_fails_on_invalid_ID()
         {
             using (IKistlContext ctx = KistlContext.InitSession())
@@ -219,7 +220,7 @@ namespace Kistl.DalProvider.EF.Tests
 
         [Test]
         [ExpectedException(typeof(InvalidCastException))]
-        public void GetListOf_T_WrongType_fails()
+        public void GetListOf_T_WrongItemType_fails()
         {
             using (IKistlContext ctx = KistlContext.InitSession())
             {
@@ -230,12 +231,12 @@ namespace Kistl.DalProvider.EF.Tests
 
         [Test]
         [ExpectedException(typeof(InvalidCastException))]
-        public void GetListOf_ObjType_WrongType_fails()
+        public void GetListOf_ObjType_WrongItemType_fails()
         {
             using (IKistlContext ctx = KistlContext.InitSession())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.ClassName == "DataType");
-                var result = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), obj.ID, "SubClasses").ToList();
+                var result = ctx.GetListOf<TestObjClass>(typeof(ObjectClass), obj.ID, "SubClasses").ToList();
             }
         }
 

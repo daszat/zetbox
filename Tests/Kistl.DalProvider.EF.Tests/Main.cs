@@ -32,7 +32,7 @@ namespace Kistl.DalProvider.EF.Tests
             var tests = new Tests.KistlDataContextTests();
 
             tests.SetUp();
-            tests.GetListOf_ObjType_WrongType_fails();
+            tests.GetListOf_ObjType_WrongItemType_fails();
 
             //    tests.SetUp();
             //    tests.Delete_ICollectionEntry();
