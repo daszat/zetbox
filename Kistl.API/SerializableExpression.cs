@@ -7,65 +7,12 @@ using System.Reflection;
 
 namespace Kistl.API
 {
-    #region Expression
     /// <summary>
     /// Abstract Base Class for a serializable Expression
     /// </summary>
     [Serializable]
     public abstract class SerializableExpression
     {
-        /// <summary>
-        /// Serialization Context.
-        /// </summary>
-        internal class SerializationContext
-        {
-            private Dictionary<string, Expression> _Parameter = new Dictionary<string, Expression>();
-            /// <summary>
-            /// Collection of LINQ Parameter
-            /// </summary>
-            public Dictionary<string, Expression> Parameter
-            {
-                get
-                {
-                    return _Parameter;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Creates a SerializableExpression from an Expression
-        /// </summary>
-        /// <param name="e">Linq Expression</param>
-        /// <param name="ctx">Serialization Context</param>
-        internal SerializableExpression(Expression e, SerializationContext ctx)
-        {
-            _Type = new SerializableType(e.Type);
-            _NodeType = e.NodeType;
-        }
-
-        private ExpressionType _NodeType;
-        /// <summary>
-        /// Expression Node Type
-        /// </summary>
-        public ExpressionType NodeType
-        {
-            get
-            {
-                return _NodeType;
-            }
-        }
-
-        private SerializableType _Type;
-        /// <summary>
-        /// CLR Type of this Expression
-        /// </summary>
-        public Type Type
-        {
-            get
-            {
-                return _Type.GetSerializedType();
-            }
-        }
 
         /// <summary>
         /// Creates a serializable Expression from a Expression
@@ -140,10 +87,59 @@ namespace Kistl.API
         /// Converts a SerializableExpression to a Linq Expression
         /// </summary>
         /// <returns>Linq Expression</returns>
-        public virtual Expression ToExpression()
+        public static Expression ToExpression(SerializableExpression e)
         {
+            if (e == null)
+                throw new ArgumentNullException("e");
             SerializationContext ctx = new SerializationContext();
-            return ToExpressionInternal(ctx);
+            return e.ToExpressionInternal(ctx);
+        }
+
+
+        /// <summary>
+        /// Serialization Context
+        /// </summary>
+        internal class SerializationContext
+        {
+            private Dictionary<string, Expression> _Parameter = new Dictionary<string, Expression>();
+            /// <summary>
+            /// Collection of LINQ Parameter
+            /// </summary>
+            public Dictionary<string, Expression> Parameter
+            {
+                get
+                {
+                    return _Parameter;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Creates a SerializableExpression from an Expression
+        /// </summary>
+        /// <param name="e">Linq Expression</param>
+        /// <param name="ctx">Serialization Context</param>
+        internal SerializableExpression(Expression e, SerializationContext ctx)
+        {
+            _Type = new SerializableType(e.Type);
+            NodeType = e.NodeType;
+        }
+
+        /// <summary>
+        /// Expression Node Type
+        /// </summary>
+        public ExpressionType NodeType { get; private set; }
+
+        private SerializableType _Type;
+        /// <summary>
+        /// CLR Type of this Expression
+        /// </summary>
+        public Type Type
+        {
+            get
+            {
+                return _Type.GetSerializedType();
+            }
         }
 
         /// <summary>
@@ -153,7 +149,6 @@ namespace Kistl.API
         /// <returns>Linq Expression</returns>
         internal abstract Expression ToExpressionInternal(SerializationContext ctx);
     }
-    #endregion
 
     #region CompoundExpression
     /// <summary>
@@ -302,8 +297,8 @@ namespace Kistl.API
     {
         internal SerializableMethodCallExpression(MethodCallExpression e, SerializationContext ctx)
             : base(e, ctx)
-        {            
-            if(e.Object != null) ObjectExpression = SerializableExpression.FromExpression(e.Object, ctx);
+        {
+            if (e.Object != null) ObjectExpression = SerializableExpression.FromExpression(e.Object, ctx);
 
             MethodName = e.Method.Name;
             _Type = new SerializableType(e.Method.DeclaringType);
@@ -319,7 +314,7 @@ namespace Kistl.API
         /// <summary>
         /// Method Name
         /// </summary>
-        public string MethodName {get; private set; }
+        public string MethodName { get; private set; }
 
         /// <summary>
         /// Parameter Types
@@ -329,7 +324,7 @@ namespace Kistl.API
         /// <summary>
         /// Generic Arguments
         /// </summary>
-        public List<SerializableType> GenericArguments {get; private set; }
+        public List<SerializableType> GenericArguments { get; private set; }
 
         private SerializableType _Type;
         /// <summary>
@@ -374,7 +369,7 @@ namespace Kistl.API
                                 }
                             }
 
-                            if(paramSame) return mi;
+                            if (paramSame) return mi;
                         }
                     }
                 }
@@ -415,12 +410,12 @@ namespace Kistl.API
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
             return Expression.Call(
-                ObjectExpression == null ? null : ObjectExpression.ToExpressionInternal(ctx), 
+                ObjectExpression == null ? null : ObjectExpression.ToExpressionInternal(ctx),
                 GetMethodInfo(),
                 Children.Select(e => e.ToExpressionInternal(ctx)));
         }
     }
-    #endregion 
+    #endregion
 
     #region LambdaExpression
     /// <summary>
@@ -500,7 +495,7 @@ namespace Kistl.API
             : base(source, ctx)
         {
             constructor = source.Constructor;
-            if(source.Members != null)
+            if (source.Members != null)
             {
                 members = source.Members.ToList();
             }

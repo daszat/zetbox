@@ -418,7 +418,7 @@ namespace Kistl.API.Tests
         /// Test just serialization, not handling interfaces!
         /// </summary>
         [Test]
-        public void SerializableExpression()
+        public void SerializableExpressionTest()
         {
             TestDataObject obj = new TestDataObject__Implementation__();
             TestObj obj2 = new TestObj();
@@ -443,7 +443,7 @@ namespace Kistl.API.Tests
 
             BinarySerializer.FromStream(out fromval, sr);
             Assert.That(fromval.NodeType, Is.EqualTo(toval.NodeType));
-            Assert.That(list.Expression.NodeType, Is.EqualTo(fromval.ToExpression().NodeType));
+            Assert.That(list.Expression.NodeType, Is.EqualTo(SerializableExpression.ToExpression(fromval).NodeType));
         }
     }
 }

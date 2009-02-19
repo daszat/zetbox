@@ -17,12 +17,21 @@ namespace Kistl.API.Tests
     [TestFixture]
     public class SerializableExpressionTests
     {
+
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void FromExpression_Null_fails()
+        public void FromExpression_null_fails()
         {
             SerializableExpression.FromExpression(null);
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ToExpression_null_fails()
+        {
+            SerializableExpression.ToExpression(null);
+        }
+
 
        
     }

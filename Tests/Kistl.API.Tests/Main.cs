@@ -43,7 +43,7 @@ namespace Kistl.API.Tests
             BinarySerializerTests test = new BinarySerializerTests();
             
             test.SetUp();
-            test.SerializableExpression();
+            test.SerializableExpressionTest();
 
             test.SetUp();
             test.null_String_roundtrips_correctly();

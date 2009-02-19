@@ -89,9 +89,9 @@ namespace Kistl.Server
                     using (IKistlContext ctx = KistlContext.InitSession())
                     {
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType())
-                            .GetList(maxListCount, 
-                            filter != null ? filter.ToExpression() : null, 
-                            orderBy != null ? orderBy.ToExpression() : null);
+                            .GetList(maxListCount,
+                            filter != null ? SerializableExpression.ToExpression(filter) : null,
+                            orderBy != null ? SerializableExpression.ToExpression(orderBy) : null);
                         return CurrentSerializer.XmlFromList(lst);
                     }
                 }
