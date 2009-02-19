@@ -12,20 +12,23 @@ namespace Kistl.DalProvider.EF.Tests
             var setup = new SetUp();
             setup.Init();
 
-            //BaseServerDataObjectTests();
+            BaseServerDataObjectTests();
             //KistlDataContextTests();
-            ServerCollectionEntry_EF();
+            //ServerCollectionEntry_EF();
         }
 
-        //private static void BaseServerDataObjectTests()
-        //{
-        //    var bsdot = new BaseServerDataObjectTests();
-        //    bsdot.SetUp();
-        //    bsdot.FromStream_creates_correct_Object();
+        private static void BaseServerDataObjectTests()
+        {
+            var bsdot = new BaseServerDataObjectTests();
+            bsdot.SetUp();
+            bsdot.should_roundtrip_ObjectClass_attributes_correctly();
 
-        //    //bsdot.SetUp();
-        //    //bsdot.ToStream_creates_correct_Stream();
-        //}
+            //bsdot.SetUp();
+            //bsdot.FromStream_creates_correct_Object();
+
+            //bsdot.SetUp();
+            //bsdot.ToStream_creates_correct_Stream();
+        }
 
         private static void KistlDataContextTests()
         {

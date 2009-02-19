@@ -9,7 +9,6 @@ using NUnit.Framework.SyntaxHelpers;
 
 namespace Kistl.API.Tests.Skeletons
 {
-    [TestFixture]
     public class IDataObjectTests<T>
         : IPersistenceObjectTests<T>
         where T : IDataObject, new()

@@ -10,7 +10,6 @@ using NUnit.Framework.SyntaxHelpers;
 namespace Kistl.API.Tests.Skeletons
 {
 
-    [TestFixture]
     public class IStreamableTests<T>
         where T : IStreamable, new()
     {

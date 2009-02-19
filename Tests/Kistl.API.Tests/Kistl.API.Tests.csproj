@@ -87,6 +87,7 @@
     <Compile Include="Tests\LinqExtensionsTests.cs" />
     <Compile Include="Tests\NotifyingObservableCollectionTests.cs" />
     <Compile Include="Tests\SerializableExpressionTests.cs" />
+    <Compile Include="Tests\SerializableTypeTests.cs" />
     <Compile Include="Tests\SerializerMockTests.cs" />
   </ItemGroup>
   <ItemGroup>

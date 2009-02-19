@@ -15,6 +15,7 @@ namespace Kistl.API.Tests
             //AssemblyLoaderTests();
 
             BinarySerializerTests();
+            SerializableTypeTests();
             
         }
 
@@ -47,5 +48,15 @@ namespace Kistl.API.Tests
             test.SetUp();
             test.null_String_roundtrips_correctly();
         }
+
+        private static void SerializableTypeTests()
+        {
+            var tests = new SerializableTypeTests();
+            //tests.GetHashCode_returns_right_value();
+            //tests.GetSerializableType_fails_on_invalid_AssemblyQualifiedName();
+            tests.GetSerializableType_fails_on_invalid_TypeName();
+            //tests.GetSerializedType_returns_right_type();
+        }
+
     }
 }

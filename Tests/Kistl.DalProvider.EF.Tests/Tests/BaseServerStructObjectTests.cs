@@ -17,7 +17,8 @@ using NUnit.Framework.SyntaxHelpers;
 namespace Kistl.DalProvider.EF.Tests
 {
     [TestFixture]
-    public class BaseServerStructObjectTests : IStreamableTests<TestPhoneStruct__Implementation__>
+    public class BaseServerStructObjectTests
+        : IStreamableTests<TestPhoneStruct__Implementation__>
     {
 
         [SetUp]

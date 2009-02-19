@@ -68,6 +68,10 @@ namespace Kistl.API
         /// <returns></returns>
         public Type GetSerializedType()
         {
+            if (!this.AssemblyQualifiedName.StartsWith(TypeName))
+            {
+                throw new InvalidOperationException("FullName doesn't match AssemblyQualifiedName");
+            }
             Type result = null;
             if (GenericTypeParameter.Count > 0)
             {
