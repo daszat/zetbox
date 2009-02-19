@@ -88,7 +88,7 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlContext.InitSession())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType())
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType())
                             .GetList(maxListCount,
                             filter != null ? SerializableExpression.ToExpression(filter) : null,
                             orderBy != null ? SerializableExpression.ToExpression(orderBy) : null);
@@ -125,7 +125,7 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlContext.InitSession())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType()).GetListOf(ID, property);
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType()).GetListOf(ID, property);
                         return CurrentSerializer.XmlFromList(lst);
                     }
                 }
@@ -157,7 +157,7 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlContext.InitSession())
                     {
-                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType()).GetObject(ID);
+                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType()).GetObject(ID);
                         return CurrentSerializer.XmlFromObject(obj);
                     }
                 }
@@ -191,7 +191,7 @@ namespace Kistl.Server
                     {
                         IDataObject obj = CurrentSerializer.ObjectFromXml(xmlObj);
                         throw new NotImplementedException();
-                        //ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSerializedType()).SetObjects(obj);
+                        //ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType()).SetObjects(obj);
                         // return CurrentSerializer.XmlFromObject(obj);
                     }
                 }

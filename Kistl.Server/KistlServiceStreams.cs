@@ -26,7 +26,7 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlContext.InitSession())
                     {
-                        IDataObject obj  = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSerializedType()).GetObject(m.ID);
+                        IDataObject obj  = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType()).GetObject(m.ID);
                         if (obj == null) throw new ArgumentOutOfRangeException("ID", string.Format("Object with ID {0} not found", m.ID));
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
@@ -111,7 +111,7 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlContext.InitSession())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSerializedType())
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType())
                             .GetList(m.MaxListCount,
                                 m.Filter != null ? SerializableExpression.ToExpression(m.Filter) : null,
                                 m.OrderBy != null ? SerializableExpression.ToExpression(m.OrderBy) : null);
@@ -145,7 +145,7 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlContext.InitSession())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSerializedType()).GetListOf(m.ID, m.Property);
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType()).GetListOf(m.ID, m.Property);
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
                         foreach (IDataObject obj in lst)

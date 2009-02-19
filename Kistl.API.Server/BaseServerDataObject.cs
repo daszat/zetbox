@@ -108,7 +108,7 @@ namespace Kistl.API.Server
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
 
-            if (this.GetInterfaceType() != t.GetSerializedType())
+            if (this.GetInterfaceType() != t.GetSystemType())
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
 
             BinarySerializer.FromStreamConverter(i => ID = i, sr);
@@ -285,7 +285,7 @@ namespace Kistl.API.Server
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
 
-            if (this.GetType() != t.GetSerializedType())
+            if (this.GetType() != t.GetSystemType())
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
         }
 

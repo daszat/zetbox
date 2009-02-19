@@ -20,7 +20,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                return ctx.GetQuery(type.GetSerializedType())
+                return ctx.GetQuery(type.GetSystemType())
                     .Select(i => new JavaScriptObjectMoniker(ctx, i)).ToList();
             }
         }

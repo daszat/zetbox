@@ -53,9 +53,9 @@ namespace Kistl.API.Tests
         {
             var tests = new SerializableTypeTests();
             //tests.GetHashCode_returns_right_value();
-            //tests.GetSerializableType_fails_on_invalid_AssemblyQualifiedName();
-            tests.GetSerializableType_fails_on_invalid_TypeName();
-            //tests.GetSerializedType_returns_right_type();
+            //tests.GetSystemType_fails_on_invalid_AssemblyQualifiedName();
+            tests.GetSystemType_fails_on_invalid_TypeName();
+            //tests.GetSystemType_returns_right_type();
         }
 
     }

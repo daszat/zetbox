@@ -51,12 +51,12 @@ namespace Kistl.Client.ASPNET.Toolkit
             
             if (ID <= Helper.INVALIDID)
             {
-                obj = ctx.Create(Type.GetSerializedType());
+                obj = ctx.Create(Type.GetSystemType());
                 ID = obj.ID;
             }
             else
             {
-                obj = ctx.Find(Type.GetSerializedType(), ID);
+                obj = ctx.Find(Type.GetSystemType(), ID);
             }
 
             return GuiApplicationContext.Current.Factory.CreateSpecificModel<DataObjectModel>(ctx, obj);

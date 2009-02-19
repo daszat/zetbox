@@ -138,7 +138,7 @@ namespace Kistl.API
         {
             get
             {
-                return _Type.GetSerializedType();
+                return _Type.GetSystemType();
             }
         }
 
@@ -334,7 +334,7 @@ namespace Kistl.API
         {
             get
             {
-                return _Type.GetSerializedType();
+                return _Type.GetSystemType();
             }
         }
 
@@ -386,12 +386,12 @@ namespace Kistl.API
             if (GenericArguments != null && GenericArguments.Count > 0)
             {
                 mi = FindGenericMethod(MethodType, MethodName,
-                        GenericArguments.Select(p => p.GetSerializedType()).ToArray(),
-                        ParameterTypes.Select(p => p.GetSerializedType()).ToArray());
+                        GenericArguments.Select(p => p.GetSystemType()).ToArray(),
+                        ParameterTypes.Select(p => p.GetSystemType()).ToArray());
             }
             else
             {
-                mi = MethodType.GetMethod(MethodName, ParameterTypes.Select(p => p.GetSerializedType()).ToArray());
+                mi = MethodType.GetMethod(MethodName, ParameterTypes.Select(p => p.GetSystemType()).ToArray());
             }
 
             if (mi == null)

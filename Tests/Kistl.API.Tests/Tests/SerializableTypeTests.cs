@@ -22,29 +22,29 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        public void GetSerializedType_returns_right_type()
+        public void GetSystemType_returns_right_type()
         {
             SerializableType t = new SerializableType(typeof(TestDataObject));
-            Type result = t.GetSerializedType();
+            Type result = t.GetSystemType();
             Assert.That(result, Is.EqualTo(typeof(TestDataObject)));
         }
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void GetSerializableType_fails_on_invalid_AssemblyQualifiedName()
+        public void GetSystemType_fails_on_invalid_AssemblyQualifiedName()
         {
             SerializableType t = new SerializableType(typeof(TestDataObject));
             t.AssemblyQualifiedName = "Test";
-            Type result = t.GetSerializedType();
+            Type result = t.GetSystemType();
         }
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void GetSerializableType_fails_on_invalid_TypeName()
+        public void GetSystemType_fails_on_invalid_TypeName()
         {
             SerializableType t = new SerializableType(typeof(TestDataObject));
             t.TypeName = "Invalid Test Class Name";
-            Type result = t.GetSerializedType();
+            Type result = t.GetSystemType();
         }
 
     }

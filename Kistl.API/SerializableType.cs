@@ -66,7 +66,7 @@ namespace Kistl.API
         /// Returns the serialized System.Type
         /// </summary>
         /// <returns></returns>
-        public Type GetSerializedType()
+        public Type GetSystemType()
         {
             if (!this.AssemblyQualifiedName.StartsWith(TypeName))
             {
@@ -76,7 +76,7 @@ namespace Kistl.API
             if (GenericTypeParameter.Count > 0)
             {
                 Type type = Type.GetType(AssemblyQualifiedName);
-                if (type != null) result = type.MakeGenericType(GenericTypeParameter.Select(t => t.GetSerializedType()).ToArray());
+                if (type != null) result = type.MakeGenericType(GenericTypeParameter.Select(t => t.GetSystemType()).ToArray());
             }
             else
             {
@@ -99,7 +99,7 @@ namespace Kistl.API
         /// <returns></returns>
         public object NewObject()
         {
-            return Activator.CreateInstance(GetSerializedType());
+            return Activator.CreateInstance(GetSystemType());
         }
 
         /// <summary>
