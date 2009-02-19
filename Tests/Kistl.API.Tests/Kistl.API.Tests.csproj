@@ -65,6 +65,9 @@
     <Compile Include="TestEnum.cs" />
     <Compile Include="TestKistlContext.cs" />
     <Compile Include="TestQueryProvider.cs" />
+    <Compile Include="Tests.Serializables\ConstantExpressions.cs" />
+    <Compile Include="Tests.Serializables\AssertExpressions.cs" />
+    <Compile Include="Tests.Serializables\MemberExpressions.cs" />
     <Compile Include="Tests.Skeletons\CollectionEntryTests.cs" />
     <Compile Include="Tests.Skeletons\IDataObjectTests.cs" />
     <Compile Include="Tests.Skeletons\IPersistenceObjectTests.cs" />
@@ -86,9 +89,9 @@
     <Compile Include="TestDataObject.cs" />
     <Compile Include="Tests\LinqExtensionsTests.cs" />
     <Compile Include="Tests\NotifyingObservableCollectionTests.cs" />
-    <Compile Include="Tests\SerializableExpressionTests.cs" />
-    <Compile Include="Tests\SerializableTypeTests.cs" />
-    <Compile Include="Tests\SerializerMockTests.cs" />
+    <Compile Include="Tests.Serializables\SerializableExpressionTests.cs" />
+    <Compile Include="Tests.Serializables\SerializableTypeTests.cs" />
+    <Compile Include="Tests.Serializables\SerializerMockTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DefaultConfig.xml">

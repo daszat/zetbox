@@ -11,7 +11,7 @@ namespace Kistl.API
     /// Abstract Base Class for a serializable Expression
     /// </summary>
     [Serializable]
-    public abstract class SerializableExpression
+    public abstract partial class SerializableExpression
     {
 
         /// <summary>
@@ -94,7 +94,6 @@ namespace Kistl.API
             SerializationContext ctx = new SerializationContext();
             return e.ToExpressionInternal(ctx);
         }
-
 
         /// <summary>
         /// Serialization Context
@@ -544,4 +543,5 @@ namespace Kistl.API
                 ifFalse.ToExpressionInternal(ctx));
         }
     }
+
 }

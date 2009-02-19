@@ -8,7 +8,7 @@ using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
 
 
-namespace Kistl.API.Tests
+namespace Kistl.API.Tests.Serializables
 {
     [TestFixture]
     public class SerializableTypeTests
