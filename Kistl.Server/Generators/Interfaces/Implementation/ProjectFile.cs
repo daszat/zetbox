@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Kistl.Server.Generators.Interfaces.Implementation
 {
+    /// <summary>
+    /// blank inheritance to have template at the right place
+    /// </summary>
     public class ProjectFile
         : Templates.Interface.ProjectFile
     {
