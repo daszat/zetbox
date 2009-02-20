@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Implementor");
                     _Implementor = value;
-                    NotifyPropertyChanged("Implementor");;
+                    NotifyPropertyChanged("Implementor");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("InvokeOnObjectClass");
                     _InvokeOnObjectClass = value;
-                    NotifyPropertyChanged("InvokeOnObjectClass");;
+                    NotifyPropertyChanged("InvokeOnObjectClass");
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("MemberName");
                     _MemberName = value;
-                    NotifyPropertyChanged("MemberName");;
+                    NotifyPropertyChanged("MemberName");
                 }
             }
         }
@@ -108,7 +108,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Method");
                     _Method = value;
-                    NotifyPropertyChanged("Method");;
+                    NotifyPropertyChanged("Method");
                 }
             }
         }
@@ -131,7 +131,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Module");
                     _Module = value;
-                    NotifyPropertyChanged("Module");;
+                    NotifyPropertyChanged("Module");
                 }
             }
         }

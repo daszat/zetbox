@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Enumeration");
                     _Enumeration = value;
-                    NotifyPropertyChanged("Enumeration");;
+                    NotifyPropertyChanged("Enumeration");
                 }
             }
         }

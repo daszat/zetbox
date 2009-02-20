@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("MaxLength");
                     _MaxLength = value;
-                    NotifyPropertyChanged("MaxLength");;
+                    NotifyPropertyChanged("MaxLength");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("MinLength");
                     _MinLength = value;
-                    NotifyPropertyChanged("MinLength");;
+                    NotifyPropertyChanged("MinLength");
                 }
             }
         }

@@ -138,7 +138,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("MemberName");
                     _MemberName = value;
-                    NotifyPropertyChanged("MemberName");;
+                    NotifyPropertyChanged("MemberName");
                 }
             }
         }

@@ -19,10 +19,11 @@ namespace Kistl.Server.Generators.Templates.Implementation
             base.ApplyAdditionalReferences();
 
             // local project references
-            this.WriteLine(@"    <Reference Include=""Kistl.Objects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"">");
-            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(OutputPath)\Kistl.Objects.dll</HintPath>");
-            this.WriteLine(@"    </Reference>");
+            this.WriteLine(@"    <ProjectReference Include=""..\Kistl.Objects\Kistl.Objects.csproj"">");
+            this.WriteLine(@"      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>");
+            this.WriteLine(@"      <Name>Kistl.Objects</Name>");
+            this.WriteLine(@"      <Private>True</Private>");
+            this.WriteLine(@"    </ProjectReference>");
 
         }
 

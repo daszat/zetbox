@@ -39,7 +39,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Aufwand");
                     _Aufwand = value;
-                    NotifyPropertyChanged("Aufwand");;
+                    NotifyPropertyChanged("Aufwand");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("DatumBis");
                     _DatumBis = value;
-                    NotifyPropertyChanged("DatumBis");;
+                    NotifyPropertyChanged("DatumBis");
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("DatumVon");
                     _DatumVon = value;
-                    NotifyPropertyChanged("DatumVon");;
+                    NotifyPropertyChanged("DatumVon");
                 }
             }
         }
@@ -108,7 +108,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Name");
                     _Name = value;
-                    NotifyPropertyChanged("Name");;
+                    NotifyPropertyChanged("Name");
                 }
             }
         }

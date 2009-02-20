@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("ClassName");
                     _ClassName = value;
-                    NotifyPropertyChanged("ClassName");;
+                    NotifyPropertyChanged("ClassName");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("DefaultIcon");
                     _DefaultIcon = value;
-                    NotifyPropertyChanged("DefaultIcon");;
+                    NotifyPropertyChanged("DefaultIcon");
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Description");
                     _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    NotifyPropertyChanged("Description");
                 }
             }
         }
@@ -154,7 +154,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Module");
                     _Module = value;
-                    NotifyPropertyChanged("Module");;
+                    NotifyPropertyChanged("Module");
                 }
             }
         }

@@ -39,7 +39,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -201,7 +201,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("Description");
                     _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    NotifyPropertyChanged("Description");
                 }
             }
         }

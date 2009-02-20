@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("PreFetchToClient");
                     _PreFetchToClient = value;
-                    NotifyPropertyChanged("PreFetchToClient");;
+                    NotifyPropertyChanged("PreFetchToClient");
                 }
             }
         }

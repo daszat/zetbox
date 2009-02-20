@@ -39,7 +39,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("IconFile");
                     _IconFile = value;
-                    NotifyPropertyChanged("IconFile");;
+                    NotifyPropertyChanged("IconFile");
                 }
             }
         }

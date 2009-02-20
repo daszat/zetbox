@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("ConstrainedProperty");
                     _ConstrainedProperty = value;
-                    NotifyPropertyChanged("ConstrainedProperty");;
+                    NotifyPropertyChanged("ConstrainedProperty");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Reason");
                     _Reason = value;
-                    NotifyPropertyChanged("Reason");;
+                    NotifyPropertyChanged("Reason");
                 }
             }
         }

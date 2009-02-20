@@ -95,7 +95,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Reason");
                     _Reason = value;
-                    NotifyPropertyChanged("Reason");;
+                    NotifyPropertyChanged("Reason");
                 }
             }
         }

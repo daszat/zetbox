@@ -46,7 +46,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("IsIndexed");
                     _IsIndexed = value;
-                    NotifyPropertyChanged("IsIndexed");;
+                    NotifyPropertyChanged("IsIndexed");
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("IsList");
                     _IsList = value;
-                    NotifyPropertyChanged("IsList");;
+                    NotifyPropertyChanged("IsList");
                 }
             }
         }
@@ -98,7 +98,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("IsNullable");
                     _IsNullable = value;
-                    NotifyPropertyChanged("IsNullable");;
+                    NotifyPropertyChanged("IsNullable");
                 }
             }
         }

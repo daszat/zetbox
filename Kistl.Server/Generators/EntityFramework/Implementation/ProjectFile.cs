@@ -43,16 +43,18 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             //this.WriteLine(@"    </Reference>");
 
             // EF Provider infrastructure
-            this.WriteLine(@"    <Reference Include=""Kistl.DALProvider.EF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"">");
-            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(OutputPath)\Kistl.DALProvider.EF.dll</HintPath>");
-            this.WriteLine(@"    </Reference>");
+            this.WriteLine(@"    <ProjectReference Include=""$(SourcePath)\Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj"">");
+            this.WriteLine(@"      <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>");
+            this.WriteLine(@"      <Name>Kistl.DALProvider.EF</Name>");
+            this.WriteLine(@"      <Private>True</Private>");
+            this.WriteLine(@"    </ProjectReference>");
 
             // Server API
-            this.WriteLine(@"    <Reference Include=""Kistl.API.Server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"">");
-            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(OutputPath)\Kistl.API.Server.dll</HintPath>");
-            this.WriteLine(@"    </Reference>");
+            this.WriteLine(@"    <ProjectReference Include=""$(SourcePath)\Kistl.API.Server\Kistl.API.Server.csproj"">");
+            this.WriteLine(@"      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>");
+            this.WriteLine(@"      <Name>Kistl.API.Server</Name>");
+            this.WriteLine(@"      <Private>True</Private>");
+            this.WriteLine(@"    </ProjectReference>");
         }
 
         protected override void ApplyAdditionalItemGroups()

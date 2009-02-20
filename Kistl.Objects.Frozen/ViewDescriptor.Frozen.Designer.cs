@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("LayoutRef");
                     _LayoutRef = value;
-                    NotifyPropertyChanged("LayoutRef");;
+                    NotifyPropertyChanged("LayoutRef");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Toolkit");
                     _Toolkit = value;
-                    NotifyPropertyChanged("Toolkit");;
+                    NotifyPropertyChanged("Toolkit");
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("ViewRef");
                     _ViewRef = value;
-                    NotifyPropertyChanged("ViewRef");;
+                    NotifyPropertyChanged("ViewRef");
                 }
             }
         }

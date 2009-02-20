@@ -39,7 +39,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("ControlType");
                     _ControlType = value;
-                    NotifyPropertyChanged("ControlType");;
+                    NotifyPropertyChanged("ControlType");
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("DataTypeName");
                     _DataTypeName = value;
-                    NotifyPropertyChanged("DataTypeName");;
+                    NotifyPropertyChanged("DataTypeName");
                 }
             }
         }
@@ -171,7 +171,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("PresenterTypeName");
                     _PresenterTypeName = value;
-                    NotifyPropertyChanged("PresenterTypeName");;
+                    NotifyPropertyChanged("PresenterTypeName");
                 }
             }
         }

@@ -82,7 +82,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("ClassName");
                     _ClassName = value;
-                    NotifyPropertyChanged("ClassName");;
+                    NotifyPropertyChanged("ClassName");
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("ControlType");
                     _ControlType = value;
-                    NotifyPropertyChanged("ControlType");;
+                    NotifyPropertyChanged("ControlType");
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("IsContainer");
                     _IsContainer = value;
-                    NotifyPropertyChanged("IsContainer");;
+                    NotifyPropertyChanged("IsContainer");
                 }
             }
         }
@@ -151,7 +151,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("Platform");
                     _Platform = value;
-                    NotifyPropertyChanged("Platform");;
+                    NotifyPropertyChanged("Platform");
                 }
             }
         }

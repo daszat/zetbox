@@ -34,7 +34,7 @@
                 {
                     NotifyPropertyChanging("<%= name %>");
                     <%= backingName %> = value;
-                    NotifyPropertyChanged("<%= name %>");;
+                    NotifyPropertyChanged("<%= name %>");
                 }
             }
         }

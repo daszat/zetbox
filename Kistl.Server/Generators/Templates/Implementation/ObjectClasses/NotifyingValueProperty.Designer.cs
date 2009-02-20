@@ -11,10 +11,10 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst")]
     public partial class NotifyingValueProperty : Kistl.Server.Generators.KistlCodeTemplate
     {
-		private IKistlContext ctx;
-		private SerializationMembersList serializationList;
-		private string type;
-		private String name;
+		protected IKistlContext ctx;
+		protected SerializationMembersList serializationList;
+		protected string type;
+		protected String name;
 
 
         public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializationMembersList serializationList, string type, String name)
@@ -51,7 +51,7 @@ this.WriteObjects("                if (",  backingName , " != value)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\");\r\n");
 this.WriteObjects("                    ",  backingName , " = value;\r\n");
-this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\");;\r\n");
+this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\");\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");

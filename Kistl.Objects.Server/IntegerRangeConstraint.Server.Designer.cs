@@ -46,7 +46,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Max");
                     _Max = value;
-                    NotifyPropertyChanged("Max");;
+                    NotifyPropertyChanged("Max");
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Min");
                     _Min = value;
-                    NotifyPropertyChanged("Min");;
+                    NotifyPropertyChanged("Min");
                 }
             }
         }

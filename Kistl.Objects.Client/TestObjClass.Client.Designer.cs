@@ -39,7 +39,7 @@ namespace Kistl.App.Test
                 {
                     NotifyPropertyChanging("MyIntProperty");
                     _MyIntProperty = value;
-                    NotifyPropertyChanged("MyIntProperty");;
+                    NotifyPropertyChanged("MyIntProperty");
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace Kistl.App.Test
                 {
                     NotifyPropertyChanging("StringProp");
                     _StringProp = value;
-                    NotifyPropertyChanged("StringProp");;
+                    NotifyPropertyChanged("StringProp");
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace Kistl.App.Test
                 {
                     NotifyPropertyChanging("TestEnumProp");
                     _TestEnumProp = value;
-                    NotifyPropertyChanged("TestEnumProp");;
+                    NotifyPropertyChanged("TestEnumProp");
                 }
             }
         }

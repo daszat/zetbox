@@ -82,7 +82,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("DisplayedTypeFullName");
                     _DisplayedTypeFullName = value;
-                    NotifyPropertyChanged("DisplayedTypeFullName");;
+                    NotifyPropertyChanged("DisplayedTypeFullName");
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("DisplayName");
                     _DisplayName = value;
-                    NotifyPropertyChanged("DisplayName");;
+                    NotifyPropertyChanged("DisplayName");
                 }
             }
         }

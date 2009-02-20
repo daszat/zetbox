@@ -82,7 +82,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Toolkit");
                     _Toolkit = value;
-                    NotifyPropertyChanged("Toolkit");;
+                    NotifyPropertyChanged("Toolkit");
                 }
             }
         }

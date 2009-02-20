@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Description");
                     _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    NotifyPropertyChanged("Description");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("IsDisplayable");
                     _IsDisplayable = value;
-                    NotifyPropertyChanged("IsDisplayable");;
+                    NotifyPropertyChanged("IsDisplayable");
                 }
             }
         }
@@ -115,7 +115,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("MethodName");
                     _MethodName = value;
-                    NotifyPropertyChanged("MethodName");;
+                    NotifyPropertyChanged("MethodName");
                 }
             }
         }

@@ -99,7 +99,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Description");
                     _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    NotifyPropertyChanged("Description");
                 }
             }
         }
@@ -122,7 +122,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("ModuleName");
                     _ModuleName = value;
-                    NotifyPropertyChanged("ModuleName");;
+                    NotifyPropertyChanged("ModuleName");
                 }
             }
         }
@@ -145,7 +145,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Namespace");
                     _Namespace = value;
-                    NotifyPropertyChanged("Namespace");;
+                    NotifyPropertyChanged("Namespace");
                 }
             }
         }

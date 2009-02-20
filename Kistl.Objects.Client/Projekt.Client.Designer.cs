@@ -69,7 +69,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("AufwandGes");
                     _AufwandGes = value;
-                    NotifyPropertyChanged("AufwandGes");;
+                    NotifyPropertyChanged("AufwandGes");
                 }
             }
         }
@@ -122,7 +122,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Kundenname");
                     _Kundenname = value;
-                    NotifyPropertyChanged("Kundenname");;
+                    NotifyPropertyChanged("Kundenname");
                 }
             }
         }
@@ -175,7 +175,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Name");
                     _Name = value;
-                    NotifyPropertyChanged("Name");;
+                    NotifyPropertyChanged("Name");
                 }
             }
         }

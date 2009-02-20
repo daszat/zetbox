@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("StructDefinition");
                     _StructDefinition = value;
-                    NotifyPropertyChanged("StructDefinition");;
+                    NotifyPropertyChanged("StructDefinition");
                 }
             }
         }

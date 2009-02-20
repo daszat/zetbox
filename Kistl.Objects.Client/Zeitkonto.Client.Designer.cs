@@ -39,7 +39,7 @@ namespace Kistl.App.Zeiterfassung
                 {
                     NotifyPropertyChanging("AktuelleStunden");
                     _AktuelleStunden = value;
-                    NotifyPropertyChanged("AktuelleStunden");;
+                    NotifyPropertyChanged("AktuelleStunden");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Zeiterfassung
                 {
                     NotifyPropertyChanging("Kontoname");
                     _Kontoname = value;
-                    NotifyPropertyChanged("Kontoname");;
+                    NotifyPropertyChanged("Kontoname");
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace Kistl.App.Zeiterfassung
                 {
                     NotifyPropertyChanging("MaxStunden");
                     _MaxStunden = value;
-                    NotifyPropertyChanged("MaxStunden");;
+                    NotifyPropertyChanged("MaxStunden");
                 }
             }
         }

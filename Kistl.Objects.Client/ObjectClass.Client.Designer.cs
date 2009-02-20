@@ -168,7 +168,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("IsFrozenObject");
                     _IsFrozenObject = value;
-                    NotifyPropertyChanged("IsFrozenObject");;
+                    NotifyPropertyChanged("IsFrozenObject");
                 }
             }
         }
@@ -191,7 +191,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("IsSimpleObject");
                     _IsSimpleObject = value;
-                    NotifyPropertyChanged("IsSimpleObject");;
+                    NotifyPropertyChanged("IsSimpleObject");
                 }
             }
         }
@@ -244,7 +244,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("TableName");
                     _TableName = value;
-                    NotifyPropertyChanged("TableName");;
+                    NotifyPropertyChanged("TableName");
                 }
             }
         }

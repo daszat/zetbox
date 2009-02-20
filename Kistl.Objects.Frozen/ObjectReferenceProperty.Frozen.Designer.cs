@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("LeftOf");
                     _LeftOf = value;
-                    NotifyPropertyChanged("LeftOf");;
+                    NotifyPropertyChanged("LeftOf");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("ReferenceObjectClass");
                     _ReferenceObjectClass = value;
-                    NotifyPropertyChanged("ReferenceObjectClass");;
+                    NotifyPropertyChanged("ReferenceObjectClass");
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("RightOf");
                     _RightOf = value;
-                    NotifyPropertyChanged("RightOf");;
+                    NotifyPropertyChanged("RightOf");
                 }
             }
         }

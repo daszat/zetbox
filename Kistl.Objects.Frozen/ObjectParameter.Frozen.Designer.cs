@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("DataType");
                     _DataType = value;
-                    NotifyPropertyChanged("DataType");;
+                    NotifyPropertyChanged("DataType");
                 }
             }
         }

@@ -39,7 +39,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Adresse");
                     _Adresse = value;
-                    NotifyPropertyChanged("Adresse");;
+                    NotifyPropertyChanged("Adresse");
                 }
             }
         }
@@ -131,7 +131,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Kundenname");
                     _Kundenname = value;
-                    NotifyPropertyChanged("Kundenname");;
+                    NotifyPropertyChanged("Kundenname");
                 }
             }
         }
@@ -157,7 +157,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Land");
                     _Land = value;
-                    NotifyPropertyChanged("Land");;
+                    NotifyPropertyChanged("Land");
                 }
             }
         }
@@ -183,7 +183,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Ort");
                     _Ort = value;
-                    NotifyPropertyChanged("Ort");;
+                    NotifyPropertyChanged("Ort");
                 }
             }
         }
@@ -209,7 +209,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("PLZ");
                     _PLZ = value;
-                    NotifyPropertyChanged("PLZ");;
+                    NotifyPropertyChanged("PLZ");
                 }
             }
         }

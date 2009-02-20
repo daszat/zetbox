@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Length");
                     _Length = value;
-                    NotifyPropertyChanged("Length");;
+                    NotifyPropertyChanged("Length");
                 }
             }
         }

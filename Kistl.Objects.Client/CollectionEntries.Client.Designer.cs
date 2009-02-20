@@ -68,7 +68,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("A");
                     _A = value;
-                    NotifyPropertyChanged("A");;
+                    NotifyPropertyChanged("A");
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("B");
                     _B = value;
-                    NotifyPropertyChanged("B");;
+                    NotifyPropertyChanged("B");
                 }
             }
         }

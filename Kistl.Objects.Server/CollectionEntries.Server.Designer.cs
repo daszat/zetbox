@@ -31,7 +31,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -231,7 +231,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -396,7 +396,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("B_pos");
                     _B_pos = value;
-                    NotifyPropertyChanged("B_pos");;
+                    NotifyPropertyChanged("B_pos");
                 }
             }
         }
@@ -467,7 +467,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -667,7 +667,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -867,7 +867,7 @@ namespace Kistl.App.GUI
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -1067,7 +1067,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -1160,7 +1160,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("A_pos");
                     _A_pos = value;
-                    NotifyPropertyChanged("A_pos");;
+                    NotifyPropertyChanged("A_pos");
                 }
             }
         }
@@ -1253,7 +1253,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("B_pos");
                     _B_pos = value;
-                    NotifyPropertyChanged("B_pos");;
+                    NotifyPropertyChanged("B_pos");
                 }
             }
         }
@@ -1328,7 +1328,7 @@ namespace Kistl.App.Zeiterfassung
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -1527,7 +1527,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -1625,7 +1625,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("B");
                     _B = value;
-                    NotifyPropertyChanged("B");;
+                    NotifyPropertyChanged("B");
                 }
             }
         }

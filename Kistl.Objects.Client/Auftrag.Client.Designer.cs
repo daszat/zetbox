@@ -39,7 +39,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Auftragsname");
                     _Auftragsname = value;
-                    NotifyPropertyChanged("Auftragsname");;
+                    NotifyPropertyChanged("Auftragsname");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Auftragswert");
                     _Auftragswert = value;
-                    NotifyPropertyChanged("Auftragswert");;
+                    NotifyPropertyChanged("Auftragswert");
                 }
             }
         }

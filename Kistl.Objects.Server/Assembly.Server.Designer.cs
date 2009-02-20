@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("AssemblyName");
                     _AssemblyName = value;
-                    NotifyPropertyChanged("AssemblyName");;
+                    NotifyPropertyChanged("AssemblyName");
                 }
             }
         }
@@ -91,7 +91,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("IsClientAssembly");
                     _IsClientAssembly = value;
-                    NotifyPropertyChanged("IsClientAssembly");;
+                    NotifyPropertyChanged("IsClientAssembly");
                 }
             }
         }

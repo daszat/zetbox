@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("AltText");
                     _AltText = value;
-                    NotifyPropertyChanged("AltText");;
+                    NotifyPropertyChanged("AltText");
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Description");
                     _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    NotifyPropertyChanged("Description");
                 }
             }
         }
@@ -214,7 +214,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("PropertyName");
                     _PropertyName = value;
-                    NotifyPropertyChanged("PropertyName");;
+                    NotifyPropertyChanged("PropertyName");
                 }
             }
         }

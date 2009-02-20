@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("ClassName");
                     _ClassName = value;
-                    NotifyPropertyChanged("ClassName");;
+                    NotifyPropertyChanged("ClassName");
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Description");
                     _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    NotifyPropertyChanged("Description");
                 }
             }
         }

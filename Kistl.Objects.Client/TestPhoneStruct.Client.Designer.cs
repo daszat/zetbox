@@ -39,7 +39,7 @@ namespace Kistl.App.Test
                 {
                     NotifyPropertyChanging("AreaCode");
                     _AreaCode = value;
-                    NotifyPropertyChanged("AreaCode");;
+                    NotifyPropertyChanged("AreaCode");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Test
                 {
                     NotifyPropertyChanging("Number");
                     _Number = value;
-                    NotifyPropertyChanged("Number");;
+                    NotifyPropertyChanged("Number");
                 }
             }
         }

@@ -39,7 +39,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Geburtstag");
                     _Geburtstag = value;
-                    NotifyPropertyChanged("Geburtstag");;
+                    NotifyPropertyChanged("Geburtstag");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("Name");
                     _Name = value;
-                    NotifyPropertyChanged("Name");;
+                    NotifyPropertyChanged("Name");
                 }
             }
         }
@@ -115,7 +115,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("SVNr");
                     _SVNr = value;
-                    NotifyPropertyChanged("SVNr");;
+                    NotifyPropertyChanged("SVNr");
                 }
             }
         }
@@ -138,7 +138,7 @@ namespace Kistl.App.Projekte
                 {
                     NotifyPropertyChanging("TelefonNummer");
                     _TelefonNummer = value;
-                    NotifyPropertyChanged("TelefonNummer");;
+                    NotifyPropertyChanged("TelefonNummer");
                 }
             }
         }

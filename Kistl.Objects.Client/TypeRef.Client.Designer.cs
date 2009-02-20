@@ -82,7 +82,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("FullName");
                     _FullName = value;
-                    NotifyPropertyChanged("FullName");;
+                    NotifyPropertyChanged("FullName");
                 }
             }
         }

@@ -39,7 +39,7 @@ namespace Kistl.App.Zeiterfassung
                 {
                     NotifyPropertyChanging("Name");
                     _Name = value;
-                    NotifyPropertyChanged("Name");;
+                    NotifyPropertyChanged("Name");
                 }
             }
         }

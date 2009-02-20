@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("ID");
                     _ID = value;
-                    NotifyPropertyChanged("ID");;
+                    NotifyPropertyChanged("ID");
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Description");
                     _Description = value;
-                    NotifyPropertyChanged("Description");;
+                    NotifyPropertyChanged("Description");
                 }
             }
         }
@@ -91,7 +91,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("IsList");
                     _IsList = value;
-                    NotifyPropertyChanged("IsList");;
+                    NotifyPropertyChanged("IsList");
                 }
             }
         }
@@ -117,7 +117,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("IsReturnParameter");
                     _IsReturnParameter = value;
-                    NotifyPropertyChanged("IsReturnParameter");;
+                    NotifyPropertyChanged("IsReturnParameter");
                 }
             }
         }
@@ -217,7 +217,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Method_pos");
                     _Method_pos = value;
-                    NotifyPropertyChanged("Method_pos");;
+                    NotifyPropertyChanged("Method_pos");
                 }
             }
         }
@@ -244,7 +244,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("ParameterName");
                     _ParameterName = value;
-                    NotifyPropertyChanged("ParameterName");;
+                    NotifyPropertyChanged("ParameterName");
                 }
             }
         }

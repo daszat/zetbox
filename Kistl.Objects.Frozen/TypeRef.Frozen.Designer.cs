@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("Assembly");
                     _Assembly = value;
-                    NotifyPropertyChanged("Assembly");;
+                    NotifyPropertyChanged("Assembly");
                 }
             }
         }
@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                 {
                     NotifyPropertyChanging("FullName");
                     _FullName = value;
-                    NotifyPropertyChanged("FullName");;
+                    NotifyPropertyChanged("FullName");
                 }
             }
         }
