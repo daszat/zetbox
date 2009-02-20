@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+
 using Kistl.API.Configuration;
-using System.Diagnostics;
 
 namespace Kistl.API
 {
@@ -48,7 +49,7 @@ namespace Kistl.API
 
                 // Start resolving Assemblies
                 AppDomain.CurrentDomain.AssemblyResolve += AssemblyLoader.AssemblyResolve;
-                AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += AssemblyLoader.AssemblyResolve;
+                AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += AssemblyLoader.ReflectionOnlyAssemblyResolve;
             }
         }
 
@@ -103,7 +104,16 @@ namespace Kistl.API
             // Do not call Trace.WriteLine! A TraceListener might want to load XML Serializers.dll and
             // this would lead to a StackOverflow due to recursion.
             Trace.TraceInformation("Resolving Assembly {0}", args.Name);
-            return Load(args.Name);
+            return LoadAssemblyByName(args.Name, false);
+        }
+
+        internal static Assembly ReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            if (AssemblyLoader.SearchPath.Count <= 0) return null;
+            // Do not call Trace.WriteLine! A TraceListener might want to load XML Serializers.dll and
+            // this would lead to a StackOverflow due to recursion.
+            Trace.TraceInformation("Resolving Assembly {0} for reflection", args.Name);
+            return LoadAssemblyByName(args.Name, true);
         }
 
         /// <summary>
@@ -115,71 +125,7 @@ namespace Kistl.API
         /// </returns>
         public static Assembly Load(string name)
         {
-            // Be nice & Thread Save
-            lock (typeof(AssemblyLoader))
-            {
-                foreach (string path in AssemblyLoader.SearchPath)
-                {
-                    string targetPath = TargetAssemblyFolder;
-
-                    // Create a AssemblyName Object & set the CodeBase.
-                    AssemblyName n = new AssemblyName(name);
-                    n.CodeBase = targetPath;
-                    string fullName = "";
-
-                    // Resolve .dll or .exe
-                    if (File.Exists(Path.Combine(path, n.Name) + ".dll"))
-                    {
-                        fullName = n.Name + ".dll";
-
-                    }
-                    else if (File.Exists(Path.Combine(path, n.Name) + ".exe"))
-                    {
-                        fullName = n.Name + ".exe";
-                    }
-
-                    // If found, continue...
-                    if (!string.IsNullOrEmpty(fullName))
-                    {
-                        // If found in cache, then return the cached Assembly
-                        if (_Assemblies.ContainsKey(fullName)) return _Assemblies[fullName];
-
-                        n.CodeBase += fullName;
-                        // Copy files to destination folder, override existing files
-                        string sourceDll = Path.Combine(path, fullName);
-                        Trace.TraceInformation("Loading from {0}", sourceDll);
-                        try
-                        {
-                            File.Copy(sourceDll, n.CodeBase, true);
-                            // Also copy .PDB Files.
-                            string sourcePDBFile = sourceDll + ".pdb";
-                            if (File.Exists(sourcePDBFile))
-                            {
-                                File.Copy(sourcePDBFile, Path.Combine(targetPath, n.Name) + ".pdb", true);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Trace.TraceError(ex.ToString());
-                        }
-
-                        // Finally load the Assembly
-                        Assembly result = Assembly.LoadFrom(n.CodeBase);
-
-                        // If the assembly could not be loaded, do nothing! Return null. 
-                        // See http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1
-                        if (result != null)
-                        {
-                            // Add to cache.
-                            _Assemblies[fullName] = result;
-                        }
-
-                        return result;
-                    }
-                }
-
-                return null;
-            }
+            return LoadAssemblyByName(name, false);
         }
 
         /// <summary>
@@ -189,52 +135,115 @@ namespace Kistl.API
         /// <returns>Returns the requested Assembly or null if not found. see http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&amp;SiteID=1</returns>
         public static Assembly ReflectionOnlyLoadFrom(string name)
         {
+            return LoadAssemblyByName(name, true);
+        }
+
+        /// <summary>
+        /// Returns the actual filename of a DLL or EXE matching a given base assembly name. Uses the SearchPath.
+        /// </summary>
+        /// <returns>null if the assembly cannot be located in the SearchPath. Otherwise, the full path.</returns>
+        private static string LocateAssembly(string baseName)
+        {
+            foreach (string path in AssemblyLoader.SearchPath)
+            {
+                string basePath = Path.Combine(path, baseName);
+                // Resolve .dll or .exe
+                if (File.Exists(basePath + ".dll"))
+                {
+                    return basePath + ".dll";
+                }
+                else if (File.Exists(basePath + ".exe"))
+                {
+                    return basePath + ".exe";
+                }
+            }
+            return null;
+        }
+
+
+        private static string PdbFromDll(string dllFile)
+        {
+            var parts = dllFile.Split('.');
+            var extension = parts.Last();
+            if (extension == "exe" || extension == "dll")
+            {
+                return String.Join(".", parts.Take(parts.Length - 1).Concat(new[] { "pdb" }).ToArray());
+            }
+            else
+            {
+                return dllFile;
+            }
+        }
+
+        private static Assembly LoadAssemblyByName(string name, bool reflectOnly)
+        {
             // Be nice & Thread Save
             lock (typeof(AssemblyLoader))
             {
-                foreach (string path in AssemblyLoader.SearchPath)
+                AssemblyName assemblyName = new AssemblyName(name);
+                string baseName = assemblyName.Name;
+
+                //// If not only for reflection and found in cache, then return the cached Assembly
+                //if (_Assemblies.ContainsKey(baseName) && !reflectOnly)
+                //    return _Assemblies[baseName];
+
+                // search for file to load
+                string sourceDll = LocateAssembly(baseName);
+
+                // assembly could not be found?
+                if (String.IsNullOrEmpty(sourceDll))
+                    return null;
+
+                // Copy files to destination folder, unless the target file exists
+                // the folder should have been cleared on initialisation and once
+                // an assembly is loaded, we cannot re-load the assembly anyways.
+                string targetDll = Path.Combine(TargetAssemblyFolder, baseName + ".dll");
+                Trace.TraceInformation("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : "");
+                try
                 {
-                    string targetPath = TargetAssemblyFolder;
-
-                    string fullName = "";
-
-                    // Resolve .dll or .exe
-                    if (System.IO.File.Exists(Path.Combine(path, name) + ".dll"))
+                    if (!File.Exists(targetDll))
                     {
-                        fullName = name + ".dll";
-
-                    }
-                    else if (System.IO.File.Exists(Path.Combine(path, name) + ".exe"))
-                    {
-                        fullName = name + ".exe";
-                    }
-
-                    if (!string.IsNullOrEmpty(fullName))
-                    {
-                        string sourceDll = Path.Combine(path, fullName);
-                        Trace.TraceInformation("Loading for reflection from {0}", sourceDll);
-
-                        // If the Assembly is already loaded -> do not try to copy! It's locked.
-                        if (!_Assemblies.ContainsKey(fullName))
+                        File.Copy(sourceDll, targetDll, true);
+                        // Also copy .PDB Files.
+                        string sourcePDBFile = PdbFromDll(sourceDll);
+                        string targetPDBFile = PdbFromDll(targetDll);
+                        if (File.Exists(sourcePDBFile))
                         {
-                            // Copy files to destination folder, override existing files
-                            try
-                            {
-                                File.Copy(sourceDll, Path.Combine(targetPath, fullName), true);
-                            }
-                            catch (Exception ex)
-                            {
-                                Trace.TraceError(ex.ToString());
-                            }
+                            File.Copy(sourcePDBFile, targetPDBFile, true);
                         }
-                        // Load, but do not cache
-                        return Assembly.ReflectionOnlyLoadFrom(Path.Combine(targetPath, fullName));
                     }
                 }
+                catch (Exception ex)
+                {
+                    Trace.TraceError(ex.ToString());
+                }
+                Assembly result = null;
 
-                return null;
+                // Finally load the Assembly
+                if (reflectOnly)
+                {
+                    result = Assembly.ReflectionOnlyLoadFrom(targetDll);
+                }
+                else
+                {
+                    assemblyName.CodeBase = targetDll;
+                    result = Assembly.Load(assemblyName);
+
+                    // If the assembly could not be loaded, do nothing! Return null. 
+                    // See http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1
+                    //if (result != null)
+                    //{
+                    //    // Add to cache.
+                    //    _Assemblies[baseName] = result;
+                    //}
+                }
+                if (result == null)
+                    Trace.TraceError(String.Format("Cannot load {0}", baseName));
+                return result;
             }
         }
+
+
     }
 
     public class AssemblyLoaderInitializer : MarshalByRefObject
