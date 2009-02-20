@@ -67,6 +67,7 @@ namespace Kistl.API
 
             // Delete stale Assemblies
             Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
+            Trace.TraceInformation("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
         }
 
         /// <summary>
@@ -101,7 +102,7 @@ namespace Kistl.API
             if (AssemblyLoader.SearchPath.Count <= 0) return null;
             // Do not call Trace.WriteLine! A TraceListener might want to load XML Serializers.dll and
             // this would lead to a StackOverflow due to recursion.
-            System.Diagnostics.Trace.TraceInformation("Resolving Assembly {0}", args.Name);
+            Trace.TraceInformation("Resolving Assembly {0}", args.Name);
             return Load(args.Name);
         }
 
@@ -145,11 +146,13 @@ namespace Kistl.API
 
                         n.CodeBase += fullName;
                         // Copy files to destination folder, override existing files
+                        string sourceDll = Path.Combine(path, fullName);
+                        Trace.TraceInformation("Loading from {0}", sourceDll);
                         try
                         {
-                            File.Copy(Path.Combine(path, fullName), n.CodeBase, true);
+                            File.Copy(sourceDll, n.CodeBase, true);
                             // Also copy .PDB Files.
-                            string sourcePDBFile = Path.Combine(path, n.Name) + ".pdb";
+                            string sourcePDBFile = sourceDll + ".pdb";
                             if (File.Exists(sourcePDBFile))
                             {
                                 File.Copy(sourcePDBFile, Path.Combine(targetPath, n.Name) + ".pdb", true);
@@ -157,11 +160,10 @@ namespace Kistl.API
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex.ToString());
+                            Trace.TraceError(ex.ToString());
                         }
 
                         // Finally load the Assembly
-                        Trace.TraceInformation("Loading from {0}", n.CodeBase);
                         Assembly result = Assembly.LoadFrom(n.CodeBase);
 
                         // If the assembly could not be loaded, do nothing! Return null. 
@@ -209,20 +211,22 @@ namespace Kistl.API
 
                     if (!string.IsNullOrEmpty(fullName))
                     {
+                        string sourceDll = Path.Combine(path, fullName);
+                        Trace.TraceInformation("Loading for reflection from {0}", sourceDll);
+
                         // If the Assembly is already loaded -> do not try to copy! It's locked.
                         if (!_Assemblies.ContainsKey(fullName))
                         {
                             // Copy files to destination folder, override existing files
                             try
                             {
-                                File.Copy(Path.Combine(path, fullName), Path.Combine(targetPath, fullName), true);
+                                File.Copy(sourceDll, Path.Combine(targetPath, fullName), true);
                             }
                             catch (Exception ex)
                             {
-                                Console.WriteLine(ex.ToString());
+                                Trace.TraceError(ex.ToString());
                             }
                         }
-                        Trace.TraceInformation("Loading for reflection from {0}", Path.Combine(targetPath, fullName));
                         // Load, but do not cache
                         return Assembly.ReflectionOnlyLoadFrom(Path.Combine(targetPath, fullName));
                     }
