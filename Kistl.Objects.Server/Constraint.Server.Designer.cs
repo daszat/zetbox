@@ -74,7 +74,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_ConstrainedProperty
+        public int? fk_ConstrainedProperty
         {
             get
             {
@@ -90,7 +90,7 @@ namespace Kistl.App.Base
                 _fk_ConstrainedProperty = value;
             }
         }
-        private int _fk_ConstrainedProperty;
+        private int? _fk_ConstrainedProperty;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_BaseProperty_Constraint_ConstrainedProperty_42", "ConstrainedProperty")]
         public Kistl.App.Base.BaseProperty__Implementation__ ConstrainedProperty__Implementation__

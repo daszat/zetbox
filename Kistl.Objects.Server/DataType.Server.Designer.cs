@@ -100,7 +100,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_DefaultIcon
+        public int? fk_DefaultIcon
         {
             get
             {
@@ -116,7 +116,7 @@ namespace Kistl.App.Base
                 _fk_DefaultIcon = value;
             }
         }
-        private int _fk_DefaultIcon;
+        private int? _fk_DefaultIcon;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_DataType_Icon_DataType_15", "DefaultIcon")]
         public Kistl.App.GUI.Icon__Implementation__ DefaultIcon__Implementation__
@@ -300,7 +300,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Module
+        public int? fk_Module
         {
             get
             {
@@ -316,7 +316,7 @@ namespace Kistl.App.Base
                 _fk_Module = value;
             }
         }
-        private int _fk_Module;
+        private int? _fk_Module;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Module_DataType_Module_6", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__

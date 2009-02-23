@@ -74,7 +74,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_LayoutRef
+        public int? fk_LayoutRef
         {
             get
             {
@@ -90,7 +90,7 @@ namespace Kistl.App.Base
                 _fk_LayoutRef = value;
             }
         }
-        private int _fk_LayoutRef;
+        private int? _fk_LayoutRef;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_TypeRef_ViewDescriptor_48", "LayoutRef")]
         public Kistl.App.Base.TypeRef__Implementation__ LayoutRef__Implementation__
@@ -196,7 +196,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_ViewRef
+        public int? fk_ViewRef
         {
             get
             {
@@ -212,7 +212,7 @@ namespace Kistl.App.Base
                 _fk_ViewRef = value;
             }
         }
-        private int _fk_ViewRef;
+        private int? _fk_ViewRef;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_TypeRef_ViewDescriptor_49", "ViewRef")]
         public Kistl.App.Base.TypeRef__Implementation__ ViewRef__Implementation__

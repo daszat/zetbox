@@ -55,7 +55,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_StructDefinition
+        public int? fk_StructDefinition
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
                 _fk_StructDefinition = value;
             }
         }
-        private int _fk_StructDefinition;
+        private int? _fk_StructDefinition;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_StructProperty_Struct_StructProperty_32", "StructDefinition")]
         public Kistl.App.Base.Struct__Implementation__ StructDefinition__Implementation__

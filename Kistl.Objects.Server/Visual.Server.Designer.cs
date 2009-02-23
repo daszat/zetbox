@@ -236,7 +236,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Method
+        public int? fk_Method
         {
             get
             {
@@ -252,7 +252,7 @@ namespace Kistl.App.GUI
                 _fk_Method = value;
             }
         }
-        private int _fk_Method;
+        private int? _fk_Method;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Method_Visual_37", "Method")]
         public Kistl.App.Base.Method__Implementation__ Method__Implementation__
@@ -316,7 +316,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Property
+        public int? fk_Property
         {
             get
             {
@@ -332,7 +332,7 @@ namespace Kistl.App.GUI
                 _fk_Property = value;
             }
         }
-        private int _fk_Property;
+        private int? _fk_Property;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_BaseProperty_Visual_36", "Property")]
         public Kistl.App.Base.BaseProperty__Implementation__ Property__Implementation__

@@ -55,7 +55,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_LeftOf
+        public int? fk_LeftOf
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
                 _fk_LeftOf = value;
             }
         }
-        private int _fk_LeftOf;
+        private int? _fk_LeftOf;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_LeftOf_43", "LeftOf")]
         public Kistl.App.Base.Relation__Implementation__ LeftOf__Implementation__
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_ReferenceObjectClass
+        public int? fk_ReferenceObjectClass
         {
             get
             {
@@ -151,7 +151,7 @@ namespace Kistl.App.Base
                 _fk_ReferenceObjectClass = value;
             }
         }
-        private int _fk_ReferenceObjectClass;
+        private int? _fk_ReferenceObjectClass;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_7", "ReferenceObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ ReferenceObjectClass__Implementation__
@@ -215,7 +215,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_RightOf
+        public int? fk_RightOf
         {
             get
             {
@@ -231,7 +231,7 @@ namespace Kistl.App.Base
                 _fk_RightOf = value;
             }
         }
-        private int _fk_RightOf;
+        private int? _fk_RightOf;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_RightOf_44", "RightOf")]
         public Kistl.App.Base.Relation__Implementation__ RightOf__Implementation__

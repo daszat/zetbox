@@ -59,7 +59,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_A
+        public int? fk_A
         {
             get
             {
@@ -75,7 +75,7 @@ namespace Kistl.App.Base
                 _fk_A = value;
             }
         }
-        private int _fk_A;
+        private int? _fk_A;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_Interface_ObjectClass_29", "ObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ A__Implementation__
@@ -131,7 +131,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_B
+        public int? fk_B
         {
             get
             {
@@ -147,7 +147,7 @@ namespace Kistl.App.Base
                 _fk_B = value;
             }
         }
-        private int _fk_B;
+        private int? _fk_B;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_Interface_ImplementsInterfaces_29", "ImplementsInterfaces")]
         public Kistl.App.Base.Interface__Implementation__ B__Implementation__
@@ -259,7 +259,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_A
+        public int? fk_A
         {
             get
             {
@@ -275,7 +275,7 @@ namespace Kistl.App.Base
                 _fk_A = value;
             }
         }
-        private int _fk_A;
+        private int? _fk_A;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_TypeRef_46", "TypeRef")]
         public Kistl.App.Base.TypeRef__Implementation__ A__Implementation__
@@ -331,7 +331,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_B
+        public int? fk_B
         {
             get
             {
@@ -347,7 +347,7 @@ namespace Kistl.App.Base
                 _fk_B = value;
             }
         }
-        private int _fk_B;
+        private int? _fk_B;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_GenericArguments_46", "GenericArguments")]
         public Kistl.App.Base.TypeRef__Implementation__ B__Implementation__
@@ -495,7 +495,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_A
+        public int? fk_A
         {
             get
             {
@@ -511,7 +511,7 @@ namespace Kistl.App.GUI
                 _fk_A = value;
             }
         }
-        private int _fk_A;
+        private int? _fk_A;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_41", "Template")]
         public Kistl.App.GUI.Template__Implementation__ A__Implementation__
@@ -567,7 +567,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_B
+        public int? fk_B
         {
             get
             {
@@ -583,7 +583,7 @@ namespace Kistl.App.GUI
                 _fk_B = value;
             }
         }
-        private int _fk_B;
+        private int? _fk_B;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Menu_41", "Menu")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
@@ -695,7 +695,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_A
+        public int? fk_A
         {
             get
             {
@@ -711,7 +711,7 @@ namespace Kistl.App.GUI
                 _fk_A = value;
             }
         }
-        private int _fk_A;
+        private int? _fk_A;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Visual_35", "Visual")]
         public Kistl.App.GUI.Visual__Implementation__ A__Implementation__
@@ -767,7 +767,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_B
+        public int? fk_B
         {
             get
             {
@@ -783,7 +783,7 @@ namespace Kistl.App.GUI
                 _fk_B = value;
             }
         }
-        private int _fk_B;
+        private int? _fk_B;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Children_35", "Children")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
@@ -895,7 +895,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_A
+        public int? fk_A
         {
             get
             {
@@ -911,7 +911,7 @@ namespace Kistl.App.GUI
                 _fk_A = value;
             }
         }
-        private int _fk_A;
+        private int? _fk_A;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Visual_40", "Visual")]
         public Kistl.App.GUI.Visual__Implementation__ A__Implementation__
@@ -967,7 +967,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_B
+        public int? fk_B
         {
             get
             {
@@ -983,7 +983,7 @@ namespace Kistl.App.GUI
                 _fk_B = value;
             }
         }
-        private int _fk_B;
+        private int? _fk_B;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_ContextMenu_40", "ContextMenu")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
@@ -1095,7 +1095,7 @@ namespace Kistl.App.Projekte
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_A
+        public int? fk_A
         {
             get
             {
@@ -1111,7 +1111,7 @@ namespace Kistl.App.Projekte
                 _fk_A = value;
             }
         }
-        private int _fk_A;
+        private int? _fk_A;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Mitarbeiter_Projekte_3", "Projekte")]
         public Kistl.App.Projekte.Projekt__Implementation__ A__Implementation__
@@ -1188,7 +1188,7 @@ namespace Kistl.App.Projekte
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_B
+        public int? fk_B
         {
             get
             {
@@ -1204,7 +1204,7 @@ namespace Kistl.App.Projekte
                 _fk_B = value;
             }
         }
-        private int _fk_B;
+        private int? _fk_B;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Mitarbeiter_Mitarbeiter_3", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ B__Implementation__
@@ -1356,7 +1356,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_A
+        public int? fk_A
         {
             get
             {
@@ -1372,7 +1372,7 @@ namespace Kistl.App.Zeiterfassung
                 _fk_A = value;
             }
         }
-        private int _fk_A;
+        private int? _fk_A;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Mitarbeiter_Zeitkonto_22", "Zeitkonto")]
         public Kistl.App.Zeiterfassung.Zeitkonto__Implementation__ A__Implementation__
@@ -1428,7 +1428,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_B
+        public int? fk_B
         {
             get
             {
@@ -1444,7 +1444,7 @@ namespace Kistl.App.Zeiterfassung
                 _fk_B = value;
             }
         }
-        private int _fk_B;
+        private int? _fk_B;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Mitarbeiter_Mitarbeiter_22", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ B__Implementation__
@@ -1555,7 +1555,7 @@ namespace Kistl.App.Projekte
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_A
+        public int? fk_A
         {
             get
             {
@@ -1571,7 +1571,7 @@ namespace Kistl.App.Projekte
                 _fk_A = value;
             }
         }
-        private int _fk_A;
+        private int? _fk_A;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Kunde_String_EMails", "Kunde")]
         public Kunde__Implementation__ A__Implementation__

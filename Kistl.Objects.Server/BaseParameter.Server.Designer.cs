@@ -152,7 +152,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Method
+        public int? fk_Method
         {
             get
             {
@@ -168,7 +168,7 @@ namespace Kistl.App.Base
                 _fk_Method = value;
             }
         }
-        private int _fk_Method;
+        private int? _fk_Method;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Method_BaseParameter_Method_24", "Method")]
         public Kistl.App.Base.Method__Implementation__ Method__Implementation__

@@ -55,7 +55,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Enumeration
+        public int? fk_Enumeration
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
                 _fk_Enumeration = value;
             }
         }
-        private int _fk_Enumeration;
+        private int? _fk_Enumeration;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_EnumerationProperty_Enumeration_EnumerationProperty_28", "Enumeration")]
         public Kistl.App.Base.Enumeration__Implementation__ Enumeration__Implementation__

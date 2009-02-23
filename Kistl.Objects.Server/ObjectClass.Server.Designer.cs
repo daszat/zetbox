@@ -55,7 +55,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_BaseObjectClass
+        public int? fk_BaseObjectClass
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
                 _fk_BaseObjectClass = value;
             }
         }
-        private int _fk_BaseObjectClass;
+        private int? _fk_BaseObjectClass;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_ObjectClass_BaseObjectClass_4", "BaseObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ BaseObjectClass__Implementation__
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_DefaultModel
+        public int? fk_DefaultModel
         {
             get
             {
@@ -151,7 +151,7 @@ namespace Kistl.App.Base
                 _fk_DefaultModel = value;
             }
         }
-        private int _fk_DefaultModel;
+        private int? _fk_DefaultModel;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_TypeRef_ObjectClass_50", "DefaultModel")]
         public Kistl.App.Base.TypeRef__Implementation__ DefaultModel__Implementation__

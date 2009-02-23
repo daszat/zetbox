@@ -43,7 +43,7 @@
         }
         
         // provide a way to directly access the foreign key int
-        public int <%= fkName %>
+        public int? <%= fkName %>
         {
             get
             {
@@ -59,7 +59,7 @@
                 <%= fkBackingName %> = value;
             }
         }
-        private int <%= fkBackingName %>;
+        private int? <%= fkBackingName %>;
 <%
         AddSerialization(serializationList, fkBackingName);
 %>

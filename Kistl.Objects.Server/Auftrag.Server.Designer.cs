@@ -126,7 +126,7 @@ namespace Kistl.App.Projekte
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Kunde
+        public int? fk_Kunde
         {
             get
             {
@@ -142,7 +142,7 @@ namespace Kistl.App.Projekte
                 _fk_Kunde = value;
             }
         }
-        private int _fk_Kunde;
+        private int? _fk_Kunde;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_Kunde_Auftrag_14", "Kunde")]
         public Kistl.App.Projekte.Kunde__Implementation__ Kunde__Implementation__
@@ -206,7 +206,7 @@ namespace Kistl.App.Projekte
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Mitarbeiter
+        public int? fk_Mitarbeiter
         {
             get
             {
@@ -222,7 +222,7 @@ namespace Kistl.App.Projekte
                 _fk_Mitarbeiter = value;
             }
         }
-        private int _fk_Mitarbeiter;
+        private int? _fk_Mitarbeiter;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_Mitarbeiter_Auftrag_9", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ Mitarbeiter__Implementation__
@@ -286,7 +286,7 @@ namespace Kistl.App.Projekte
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Projekt
+        public int? fk_Projekt
         {
             get
             {
@@ -302,7 +302,7 @@ namespace Kistl.App.Projekte
                 _fk_Projekt = value;
             }
         }
-        private int _fk_Projekt;
+        private int? _fk_Projekt;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Auftrag_Projekt_10", "Projekt")]
         public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__

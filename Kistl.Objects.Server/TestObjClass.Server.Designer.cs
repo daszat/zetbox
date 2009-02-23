@@ -100,7 +100,7 @@ namespace Kistl.App.Test
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_ObjectProp
+        public int? fk_ObjectProp
         {
             get
             {
@@ -116,7 +116,7 @@ namespace Kistl.App.Test
                 _fk_ObjectProp = value;
             }
         }
-        private int _fk_ObjectProp;
+        private int? _fk_ObjectProp;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TestObjClass_Kunde_TestObjClass_30", "ObjectProp")]
         public Kistl.App.Projekte.Kunde__Implementation__ ObjectProp__Implementation__

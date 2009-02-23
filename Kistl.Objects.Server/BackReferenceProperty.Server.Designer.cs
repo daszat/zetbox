@@ -81,7 +81,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_ReferenceProperty
+        public int? fk_ReferenceProperty
         {
             get
             {
@@ -97,7 +97,7 @@ namespace Kistl.App.Base
                 _fk_ReferenceProperty = value;
             }
         }
-        private int _fk_ReferenceProperty;
+        private int? _fk_ReferenceProperty;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_8", "ReferenceProperty")]
         public Kistl.App.Base.ObjectReferenceProperty__Implementation__ ReferenceProperty__Implementation__

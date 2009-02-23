@@ -74,7 +74,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_DisplayedTypeAssembly
+        public int? fk_DisplayedTypeAssembly
         {
             get
             {
@@ -90,7 +90,7 @@ namespace Kistl.App.GUI
                 _fk_DisplayedTypeAssembly = value;
             }
         }
-        private int _fk_DisplayedTypeAssembly;
+        private int? _fk_DisplayedTypeAssembly;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_Assembly_Template_39", "DisplayedTypeAssembly")]
         public Kistl.App.Base.Assembly__Implementation__ DisplayedTypeAssembly__Implementation__
@@ -253,7 +253,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_VisualTree
+        public int? fk_VisualTree
         {
             get
             {
@@ -269,7 +269,7 @@ namespace Kistl.App.GUI
                 _fk_VisualTree = value;
             }
         }
-        private int _fk_VisualTree;
+        private int? _fk_VisualTree;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_38", "VisualTree")]
         public Kistl.App.GUI.Visual__Implementation__ VisualTree__Implementation__

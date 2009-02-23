@@ -126,7 +126,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Mitarbeiter
+        public int? fk_Mitarbeiter
         {
             get
             {
@@ -142,7 +142,7 @@ namespace Kistl.App.Zeiterfassung
                 _fk_Mitarbeiter = value;
             }
         }
-        private int _fk_Mitarbeiter;
+        private int? _fk_Mitarbeiter;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Taetigkeit_Mitarbeiter_Taetigkeit_12", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ Mitarbeiter__Implementation__
@@ -206,7 +206,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_TaetigkeitsArt
+        public int? fk_TaetigkeitsArt
         {
             get
             {
@@ -222,7 +222,7 @@ namespace Kistl.App.Zeiterfassung
                 _fk_TaetigkeitsArt = value;
             }
         }
-        private int _fk_TaetigkeitsArt;
+        private int? _fk_TaetigkeitsArt;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23", "TaetigkeitsArt")]
         public Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__ TaetigkeitsArt__Implementation__
@@ -286,7 +286,7 @@ namespace Kistl.App.Zeiterfassung
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Zeitkonto
+        public int? fk_Zeitkonto
         {
             get
             {
@@ -302,7 +302,7 @@ namespace Kistl.App.Zeiterfassung
                 _fk_Zeitkonto = value;
             }
         }
-        private int _fk_Zeitkonto;
+        private int? _fk_Zeitkonto;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Taetigkeit_Zeitkonto_13", "Zeitkonto")]
         public Kistl.App.Zeiterfassung.Zeitkonto__Implementation__ Zeitkonto__Implementation__

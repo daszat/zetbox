@@ -74,7 +74,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Implementor
+        public int? fk_Implementor
         {
             get
             {
@@ -90,7 +90,7 @@ namespace Kistl.App.Base
                 _fk_Implementor = value;
             }
         }
-        private int _fk_Implementor;
+        private int? _fk_Implementor;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_TypeRef_MethodInvocation_47", "Implementor")]
         public Kistl.App.Base.TypeRef__Implementation__ Implementor__Implementation__
@@ -154,7 +154,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_InvokeOnObjectClass
+        public int? fk_InvokeOnObjectClass
         {
             get
             {
@@ -170,7 +170,7 @@ namespace Kistl.App.Base
                 _fk_InvokeOnObjectClass = value;
             }
         }
-        private int _fk_InvokeOnObjectClass;
+        private int? _fk_InvokeOnObjectClass;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_DataType_MethodInvocation_InvokeOnObjectClass_21", "InvokeOnObjectClass")]
         public Kistl.App.Base.DataType__Implementation__ InvokeOnObjectClass__Implementation__
@@ -260,7 +260,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Method
+        public int? fk_Method
         {
             get
             {
@@ -276,7 +276,7 @@ namespace Kistl.App.Base
                 _fk_Method = value;
             }
         }
-        private int _fk_Method;
+        private int? _fk_Method;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Method_MethodInvocation_Method_19", "Method")]
         public Kistl.App.Base.Method__Implementation__ Method__Implementation__
@@ -340,7 +340,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Module
+        public int? fk_Module
         {
             get
             {
@@ -356,7 +356,7 @@ namespace Kistl.App.Base
                 _fk_Module = value;
             }
         }
-        private int _fk_Module;
+        private int? _fk_Module;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_Module_MethodInvocation_20", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__

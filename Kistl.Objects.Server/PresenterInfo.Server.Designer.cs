@@ -116,7 +116,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_DataAssembly
+        public int? fk_DataAssembly
         {
             get
             {
@@ -132,7 +132,7 @@ namespace Kistl.App.GUI
                 _fk_DataAssembly = value;
             }
         }
-        private int _fk_DataAssembly;
+        private int? _fk_DataAssembly;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_Assembly_PresenterInfo_34", "DataAssembly")]
         public Kistl.App.Base.Assembly__Implementation__ DataAssembly__Implementation__
@@ -222,7 +222,7 @@ namespace Kistl.App.GUI
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_PresenterAssembly
+        public int? fk_PresenterAssembly
         {
             get
             {
@@ -238,7 +238,7 @@ namespace Kistl.App.GUI
                 _fk_PresenterAssembly = value;
             }
         }
-        private int _fk_PresenterAssembly;
+        private int? _fk_PresenterAssembly;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_Assembly_PresenterInfo_33", "PresenterAssembly")]
         public Kistl.App.Base.Assembly__Implementation__ PresenterAssembly__Implementation__

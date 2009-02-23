@@ -178,7 +178,7 @@ namespace Kistl.App.Projekte
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Projekt
+        public int? fk_Projekt
         {
             get
             {
@@ -194,7 +194,7 @@ namespace Kistl.App.Projekte
                 _fk_Projekt = value;
             }
         }
-        private int _fk_Projekt;
+        private int? _fk_Projekt;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Task_Projekt_2", "Projekt")]
         public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__

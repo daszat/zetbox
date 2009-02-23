@@ -55,7 +55,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_DataType
+        public int? fk_DataType
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
                 _fk_DataType = value;
             }
         }
-        private int _fk_DataType;
+        private int? _fk_DataType;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectParameter_DataType_ObjectParameter_25", "DataType")]
         public Kistl.App.Base.DataType__Implementation__ DataType__Implementation__

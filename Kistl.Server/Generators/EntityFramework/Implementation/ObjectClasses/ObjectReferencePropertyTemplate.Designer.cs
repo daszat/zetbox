@@ -64,7 +64,7 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("        // provide a way to directly access the foreign key int\r\n");
-this.WriteObjects("        public int ",  fkName , "\r\n");
+this.WriteObjects("        public int? ",  fkName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
@@ -80,7 +80,7 @@ this.WriteObjects("            {\r\n");
 this.WriteObjects("                ",  fkBackingName , " = value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        private int ",  fkBackingName , ";\r\n");
+this.WriteObjects("        private int? ",  fkBackingName , ";\r\n");
 #line 64 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 AddSerialization(serializationList, fkBackingName);
 

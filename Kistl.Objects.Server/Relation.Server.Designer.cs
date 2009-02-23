@@ -100,7 +100,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_LeftPart
+        public int? fk_LeftPart
         {
             get
             {
@@ -116,7 +116,7 @@ namespace Kistl.App.Base
                 _fk_LeftPart = value;
             }
         }
-        private int _fk_LeftPart;
+        private int? _fk_LeftPart;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_LeftOf_43", "LeftPart")]
         public Kistl.App.Base.ObjectReferenceProperty__Implementation__ LeftPart__Implementation__
@@ -180,7 +180,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_RightPart
+        public int? fk_RightPart
         {
             get
             {
@@ -196,7 +196,7 @@ namespace Kistl.App.Base
                 _fk_RightPart = value;
             }
         }
-        private int _fk_RightPart;
+        private int? _fk_RightPart;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_RightOf_44", "RightPart")]
         public Kistl.App.Base.ObjectReferenceProperty__Implementation__ RightPart__Implementation__

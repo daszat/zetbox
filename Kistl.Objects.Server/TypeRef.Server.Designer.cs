@@ -74,7 +74,7 @@ namespace Kistl.App.Base
         }
         
         // provide a way to directly access the foreign key int
-        public int fk_Assembly
+        public int? fk_Assembly
         {
             get
             {
@@ -90,7 +90,7 @@ namespace Kistl.App.Base
                 _fk_Assembly = value;
             }
         }
-        private int _fk_Assembly;
+        private int? _fk_Assembly;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_Assembly_TypeRef_45", "Assembly")]
         public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
