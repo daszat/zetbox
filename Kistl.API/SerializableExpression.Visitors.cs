@@ -68,6 +68,7 @@ namespace Kistl.API
 
     }
 
+    // TODO use ExpressionTreeVisitor/Translator
     public abstract class ExpressionVisitor<TResult>
     {
 

@@ -26,11 +26,11 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlContext.InitSession())
                     {
-                        IDataObject obj  = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType()).GetObject(m.ID);
+                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType()).GetObject(m.ID);
                         if (obj == null) throw new ArgumentOutOfRangeException("ID", string.Format("Object with ID {0} not found", m.ID));
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
-                        
+
                         obj.ToStream(sw);
 
                         result.Seek(0, SeekOrigin.Begin);
@@ -53,27 +53,28 @@ namespace Kistl.Server
                 msg.Seek(0, SeekOrigin.Begin);
                 using (TraceClient.TraceHelper.TraceMethodCall())
                 {
+
+                    System.IO.BinaryReader sr = new System.IO.BinaryReader(msg);
+                    List<IDataObject> objects = new List<IDataObject>();
+                    bool @continue;
+                    BinarySerializer.FromStream(out @continue, sr);
+                    while (@continue)
+                    {
+                        // Deserialize
+                        long pos = msg.Position;
+                        SerializableType objType;
+                        BinarySerializer.FromStream(out objType, sr);
+
+                        msg.Seek(pos, System.IO.SeekOrigin.Begin);
+
+                        IDataObject obj = (IDataObject)objType.NewObject();
+                        obj.FromStream(sr);
+                        objects.Add(obj);
+                        BinarySerializer.FromStream(out @continue, sr);
+                    }
+
                     using (IKistlContext ctx = KistlContext.InitSession())
                     {
-                        System.IO.BinaryReader sr = new System.IO.BinaryReader(msg);
-                        List<IDataObject> objects = new List<IDataObject>();
-                        bool @continue;
-                        BinarySerializer.FromStream(out @continue, sr);
-                        while (@continue)
-                        {
-                            // Deserialize
-                            long pos = msg.Position;
-                            SerializableType objType;
-                            BinarySerializer.FromStream(out objType, sr);
-
-                            msg.Seek(pos, System.IO.SeekOrigin.Begin);
-
-                            IDataObject obj = (IDataObject)objType.NewObject();
-                            obj.FromStream(sr);
-                            objects.Add(obj);
-                            BinarySerializer.FromStream(out @continue, sr);
-                        }
-
                         // Set Operation
                         var changedObjects = ServerObjectHandlerFactory.GetServerObjectSetHandler().SetObjects(objects);
 

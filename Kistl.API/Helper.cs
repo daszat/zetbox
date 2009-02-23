@@ -184,6 +184,24 @@ namespace Kistl.API
             return (T)fi.GetValue(obj);
         }
 
+        public static MemberInfo FindFirstOrDefaultMember(this Type t, string memberName)
+        {
+            if (t == null) throw new ArgumentNullException("t");
+            MemberInfo mi = t.GetMember(memberName).FirstOrDefault();
+            if (mi != null) return mi;
+            if (t.BaseType != null)
+            {
+                mi = FindFirstOrDefaultMember(t.BaseType, memberName);
+                if (mi != null) return mi;
+            }
+            foreach (var iface in t.GetInterfaces())
+            {
+                mi = FindFirstOrDefaultMember(iface, memberName);
+                if (mi != null) return mi;
+            }
+            return null;
+        }
+
         /// <summary>
         /// Sets a Property Value from a given Object. Uses Reflection.
         /// Throws a ArgumentOutOfRangeException if the Property is not found.

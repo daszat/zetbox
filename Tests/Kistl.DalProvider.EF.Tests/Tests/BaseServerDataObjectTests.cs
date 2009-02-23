@@ -105,7 +105,7 @@ namespace Kistl.DalProvider.EF.Tests
                 Assert.That(result.IsSimpleObject, Is.EqualTo(obj.IsSimpleObject));
                 Assert.That((ICollection)result.MethodInvocations, Is.EquivalentTo((ICollection)obj.MethodInvocations));
                 Assert.That((ICollection)result.Methods, Is.EquivalentTo((ICollection)obj.Methods));
-                Assert.That(result.Module, Is.EqualTo(obj.Module));
+                Assert.That(result.fk_Module, Is.EqualTo(obj.fk_Module));
                 Assert.That((ICollection)result.Properties, Is.EquivalentTo((ICollection)obj.Properties));
                 Assert.That((ICollection)result.SubClasses, Is.EquivalentTo((ICollection)obj.SubClasses));
                 Assert.That(result.TableName, Is.EqualTo(obj.TableName));

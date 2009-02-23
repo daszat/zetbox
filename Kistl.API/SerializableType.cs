@@ -99,7 +99,7 @@ namespace Kistl.API
         /// <returns></returns>
         public object NewObject()
         {
-            return Activator.CreateInstance(GetSystemType());
+            return Activator.CreateInstance(GetSystemType().ToImplementationType());
         }
 
         /// <summary>

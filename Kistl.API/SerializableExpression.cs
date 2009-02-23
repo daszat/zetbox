@@ -30,6 +30,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="e">Linq Expression</param>
         /// <param name="ctx">Serialization Context</param>
+        // TODO: use ExpressionTreeVisitor/Translator
         internal static SerializableExpression FromExpression(Expression e, SerializationContext ctx)
         {
             if (e == null) throw new ArgumentNullException("e");
@@ -264,20 +265,8 @@ namespace Kistl.API
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
             Expression e = Children[0].ToExpressionInternal(ctx);
-
-            // TODO: Not enough information on SerializationStream to directly access member on correct type.
-            // Need to create Expression.CastExpression(e, TARGETTYPE) to the specific type implementing MEMBERNAME
-
-            // See if the MemberAccess Expression has an implementation type
-            Type declaringType = e.Type.ToImplementationType();
-            if (declaringType.GetMember(MemberName).Length > 0 && declaringType.GetMember(MemberName + Kistl.API.Helper.ImplementationSuffix).Length > 0)
-            {
-                return Expression.PropertyOrField(e, MemberName);// + Kistl.API.Helper.ImplementationSuffix);
-            }
-            else
-            {
-                return Expression.PropertyOrField(e, MemberName);
-            }
+            MemberInfo mi = e.Type.FindFirstOrDefaultMember(MemberName);
+            return Expression.MakeMemberAccess(e, mi);
         }
 
         /// <summary>
