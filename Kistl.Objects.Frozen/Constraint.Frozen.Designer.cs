@@ -78,7 +78,11 @@ namespace Kistl.App.Base
             if (OnGetErrorText_Constraint != null)
             {
                 OnGetErrorText_Constraint(this, e, constrainedValue, constrainedObject);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Constraint.GetErrorText");
+            }
             return e.Result;
         }
 		public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.Object constrainedValue, System.Object constrainedObject);
@@ -96,7 +100,11 @@ namespace Kistl.App.Base
             if (OnIsValid_Constraint != null)
             {
                 OnIsValid_Constraint(this, e, constrainedValue, constrainedObj);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Constraint.IsValid");
+            }
             return e.Result;
         }
 		public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object constrainedValue, System.Object constrainedObj);

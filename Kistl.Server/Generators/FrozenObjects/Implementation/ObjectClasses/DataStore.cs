@@ -58,7 +58,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                 else if (prop is ObjectReferenceProperty)
                 {
                     var orp = (ObjectReferenceProperty)prop;
-                    if (orp.ReferenceObjectClass.IsFrozenObject)
+                    if (orp.ReferenceObjectClass.IsFrozen())
                     {
                         string referencedType = String.Format("{0}.{1}", orp.ReferenceObjectClass.Module.Namespace, Template.GetClassName(orp.ReferenceObjectClass));
                         string referencedInterface = String.Format("{0}.{1}", orp.ReferenceObjectClass.Module.Namespace, orp.ReferenceObjectClass.ClassName);

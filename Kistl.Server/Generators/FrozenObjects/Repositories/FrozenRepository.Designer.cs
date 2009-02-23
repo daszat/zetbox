@@ -24,9 +24,10 @@ namespace Kistl.Server.Generators.FrozenObjects.Repositories
         {
 #line 11 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 string classname = "Frozen" + module.ModuleName + "Repository";
-	var frozenClasses = module.DataTypes.OfType<ObjectClass>().Where(cls => cls.IsFrozenObject || cls.GetRootClass().IsFrozenObject);
+    // TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
+	var frozenClasses = module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen());
 
-#line 14 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 15 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 this.WriteObjects("using System;\r\n");
 this.WriteObjects("using System.Collections.Generic;\r\n");
 this.WriteObjects("using System.Linq;\r\n");
@@ -39,12 +40,12 @@ this.WriteObjects("\r\n");
 this.WriteObjects("	public static class ",  classname , "\r\n");
 this.WriteObjects("	{\r\n");
 this.WriteObjects("		\r\n");
-#line 27 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 28 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 foreach(var cls in frozenClasses)
 	{
 		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
 
-#line 31 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 32 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 this.WriteObjects("		/// <summary>Frozen List of all ",  cls.ClassName , "</summary>\r\n");
 this.WriteObjects("		/// ",  cls.Description , "\r\n");
 this.WriteObjects("		public static IQueryable<",  cls.ClassName , "> ",  cls.TableName , "\r\n");
@@ -55,40 +56,40 @@ this.WriteObjects("				return ",  implementationName , ".DataStore.Values.AsQuer
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
-#line 42 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 43 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 }
 
-#line 44 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 45 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("		internal static void CreateInstances()\r\n");
 this.WriteObjects("		{\r\n");
-#line 48 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 49 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 foreach(var cls in frozenClasses)
 	{
 		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
 
-#line 52 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 53 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 this.WriteObjects("				",  implementationName , ".CreateInstances();\r\n");
-#line 54 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 55 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 }
 
-#line 56 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 57 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		internal static void FillDataStore()\r\n");
 this.WriteObjects("		{\r\n");
-#line 62 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 63 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 foreach(var cls in frozenClasses)
 	{
 		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
 
-#line 66 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 67 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 this.WriteObjects("				",  implementationName , ".FillDataStore();\r\n");
-#line 68 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 69 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 }
 
-#line 70 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
+#line 71 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 this.WriteObjects("		}\r\n");
 this.WriteObjects("	}\r\n");
 this.WriteObjects("	\r\n");

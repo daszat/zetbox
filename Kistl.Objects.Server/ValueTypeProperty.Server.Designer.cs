@@ -36,7 +36,11 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_ValueTypeProperty != null)
             {
                 OnGetGUIRepresentation_ValueTypeProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetGUIRepresentation();
+            }
             return e.Result;
         }
 		public event GetGUIRepresentation_Handler<ValueTypeProperty> OnGetGUIRepresentation_ValueTypeProperty;
@@ -53,7 +57,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyType_ValueTypeProperty != null)
             {
                 OnGetPropertyType_ValueTypeProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyType();
+            }
             return e.Result;
         }
 		public event GetPropertyType_Handler<ValueTypeProperty> OnGetPropertyType_ValueTypeProperty;
@@ -70,7 +78,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyTypeString_ValueTypeProperty != null)
             {
                 OnGetPropertyTypeString_ValueTypeProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyTypeString();
+            }
             return e.Result;
         }
 		public event GetPropertyTypeString_Handler<ValueTypeProperty> OnGetPropertyTypeString_ValueTypeProperty;

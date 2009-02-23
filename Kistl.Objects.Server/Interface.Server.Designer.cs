@@ -36,7 +36,11 @@ namespace Kistl.App.Base
             if (OnGetDataType_Interface != null)
             {
                 OnGetDataType_Interface(this, e);
-            };
+            }
+            else
+            {
+                base.GetDataType();
+            }
             return e.Result;
         }
 		public event GetDataType_Handler<Interface> OnGetDataType_Interface;
@@ -53,7 +57,11 @@ namespace Kistl.App.Base
             if (OnGetDataTypeString_Interface != null)
             {
                 OnGetDataTypeString_Interface(this, e);
-            };
+            }
+            else
+            {
+                base.GetDataTypeString();
+            }
             return e.Result;
         }
 		public event GetDataTypeString_Handler<Interface> OnGetDataTypeString_Interface;

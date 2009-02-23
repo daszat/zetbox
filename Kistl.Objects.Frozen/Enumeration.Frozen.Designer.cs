@@ -55,7 +55,11 @@ namespace Kistl.App.Base
             if (OnGetDataType_Enumeration != null)
             {
                 OnGetDataType_Enumeration(this, e);
-            };
+            }
+            else
+            {
+                base.GetDataType();
+            }
             return e.Result;
         }
 		public event GetDataType_Handler<Enumeration> OnGetDataType_Enumeration;
@@ -72,7 +76,11 @@ namespace Kistl.App.Base
             if (OnGetDataTypeString_Enumeration != null)
             {
                 OnGetDataTypeString_Enumeration(this, e);
-            };
+            }
+            else
+            {
+                base.GetDataTypeString();
+            }
             return e.Result;
         }
 		public event GetDataTypeString_Handler<Enumeration> OnGetDataTypeString_Enumeration;

@@ -67,7 +67,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             this.WriteLine("        { }");
 
             // TODO: IsFrozen should be set if BaseClass.IsFrozen is set
-            if (this.ObjectClass.IsFrozenObject || this.ObjectClass.GetRootClass().IsFrozenObject)
+            if (this.ObjectClass.IsFrozen())
             {
                 this.Host.CallTemplate("Implementation.ObjectClasses.DataStore", ctx, this.ObjectClass);
             }

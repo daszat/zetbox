@@ -55,7 +55,11 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_StructProperty != null)
             {
                 OnGetGUIRepresentation_StructProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetGUIRepresentation();
+            }
             return e.Result;
         }
 		public event GetGUIRepresentation_Handler<StructProperty> OnGetGUIRepresentation_StructProperty;
@@ -72,7 +76,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyType_StructProperty != null)
             {
                 OnGetPropertyType_StructProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyType();
+            }
             return e.Result;
         }
 		public event GetPropertyType_Handler<StructProperty> OnGetPropertyType_StructProperty;
@@ -89,7 +97,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyTypeString_StructProperty != null)
             {
                 OnGetPropertyTypeString_StructProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyTypeString();
+            }
             return e.Result;
         }
 		public event GetPropertyTypeString_Handler<StructProperty> OnGetPropertyTypeString_StructProperty;
@@ -160,6 +172,7 @@ namespace Kistl.App.Base
 			DataStore[131].IsList = false;
 			DataStore[131].IsNullable = true;
 			DataStore[131].IsIndexed = false;
+			DataStore[131].StructDefinition = Kistl.App.Base.Struct__Implementation__Frozen.DataStore[63];
 			DataStore[131].Seal();
 			DataStore[132].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
 			DataStore[132].PropertyName = @"PhoneNumberOffice";
@@ -171,6 +184,7 @@ namespace Kistl.App.Base
 			DataStore[132].IsList = false;
 			DataStore[132].IsNullable = true;
 			DataStore[132].IsIndexed = false;
+			DataStore[132].StructDefinition = Kistl.App.Base.Struct__Implementation__Frozen.DataStore[63];
 			DataStore[132].Seal();
 	
 		}

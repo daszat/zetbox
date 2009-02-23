@@ -78,7 +78,11 @@ namespace Kistl.App.Base
             if (OnGetErrorText_StringRangeConstraint != null)
             {
                 OnGetErrorText_StringRangeConstraint(this, e, constrainedValue, constrainedObject);
-            };
+            }
+            else
+            {
+                base.GetErrorText(constrainedValue, constrainedObject);
+            }
             return e.Result;
         }
 		public event GetErrorText_Handler<StringRangeConstraint> OnGetErrorText_StringRangeConstraint;
@@ -95,7 +99,11 @@ namespace Kistl.App.Base
             if (OnIsValid_StringRangeConstraint != null)
             {
                 OnIsValid_StringRangeConstraint(this, e, constrainedValue, constrainedObj);
-            };
+            }
+            else
+            {
+                base.IsValid(constrainedValue, constrainedObj);
+            }
             return e.Result;
         }
 		public event IsValid_Handler<StringRangeConstraint> OnIsValid_StringRangeConstraint;

@@ -42,6 +42,23 @@
             {
 				<%= eventName %>(this<%= argumentDefs %>);
 			}
+			else
+			{
+<%
+        if (m.ObjectClass == dt || !(dt is ObjectClass))
+        {
+%>
+                throw new NotImplementedException("No handler registered on <%= m.ObjectClass.ClassName %>.<%= m.MethodName %>");
+<%
+        }
+        else
+        {
+%>
+			    base.<%= m.MethodName %>(<%= m.GetArguments() %>);
+<%
+        }
+%>
+			}
         }
 <%
 		// define delegate type only on base class
@@ -62,7 +79,24 @@
             if (<%= eventName %> != null)
             {
                 <%= eventName %>(this, e<%= argumentDefs %>);
-            };
+            }
+            else
+            {
+<%
+        if (m.ObjectClass == dt || !(dt is ObjectClass))
+        {
+%>
+                throw new NotImplementedException("No handler registered on <%= m.ObjectClass.ClassName %>.<%= m.MethodName %>");
+<%
+        }
+        else
+        {
+%>
+                base.<%= m.MethodName %>(<%= m.GetArguments() %>);
+<%
+        }
+%>
+            }
             return e.Result;
         }
 <%

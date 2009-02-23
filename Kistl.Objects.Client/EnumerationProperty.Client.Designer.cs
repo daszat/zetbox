@@ -76,7 +76,11 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_EnumerationProperty != null)
             {
                 OnGetGUIRepresentation_EnumerationProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetGUIRepresentation();
+            }
             return e.Result;
         }
 		public event GetGUIRepresentation_Handler<EnumerationProperty> OnGetGUIRepresentation_EnumerationProperty;
@@ -93,7 +97,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyType_EnumerationProperty != null)
             {
                 OnGetPropertyType_EnumerationProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyType();
+            }
             return e.Result;
         }
 		public event GetPropertyType_Handler<EnumerationProperty> OnGetPropertyType_EnumerationProperty;
@@ -110,7 +118,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyTypeString_EnumerationProperty != null)
             {
                 OnGetPropertyTypeString_EnumerationProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyTypeString();
+            }
             return e.Result;
         }
 		public event GetPropertyTypeString_Handler<EnumerationProperty> OnGetPropertyTypeString_EnumerationProperty;

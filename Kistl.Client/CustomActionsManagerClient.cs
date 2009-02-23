@@ -89,7 +89,7 @@ namespace Kistl.Client
                                 // baseObjClass.GetDataType(); is not possible here, because this
                                 // Method is currently attaching
                                 CreateInvokeInfosForAssembly(warnings, baseObjClass, "", ApplicationContext.Current.ImplementationAssembly);
-                                if (baseObjClass.IsFrozenObject)
+                                if (baseObjClass.IsFrozen())
                                     CreateInvokeInfosForAssembly(warnings, baseObjClass, "Frozen", "Kistl.Objects.Frozen");
                             }
                             catch (Exception ex)

@@ -193,7 +193,11 @@ namespace Kistl.App.Base
             if (OnGetReturnParameter_Method != null)
             {
                 OnGetReturnParameter_Method(this, e);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Method.GetReturnParameter");
+            }
             return e.Result;
         }
 		public delegate void GetReturnParameter_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.BaseParameter> ret);

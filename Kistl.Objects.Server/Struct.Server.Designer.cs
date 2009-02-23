@@ -36,7 +36,11 @@ namespace Kistl.App.Base
             if (OnGetDataType_Struct != null)
             {
                 OnGetDataType_Struct(this, e);
-            };
+            }
+            else
+            {
+                base.GetDataType();
+            }
             return e.Result;
         }
 		public event GetDataType_Handler<Struct> OnGetDataType_Struct;
@@ -53,7 +57,11 @@ namespace Kistl.App.Base
             if (OnGetDataTypeString_Struct != null)
             {
                 OnGetDataTypeString_Struct(this, e);
-            };
+            }
+            else
+            {
+                base.GetDataTypeString();
+            }
             return e.Result;
         }
 		public event GetDataTypeString_Handler<Struct> OnGetDataTypeString_Struct;

@@ -408,7 +408,11 @@ namespace Kistl.App.Base
             if (OnGetDataType_DataType != null)
             {
                 OnGetDataType_DataType(this, e);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on DataType.GetDataType");
+            }
             return e.Result;
         }
 		public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
@@ -426,7 +430,11 @@ namespace Kistl.App.Base
             if (OnGetDataTypeString_DataType != null)
             {
                 OnGetDataTypeString_DataType(this, e);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on DataType.GetDataTypeString");
+            }
             return e.Result;
         }
 		public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);

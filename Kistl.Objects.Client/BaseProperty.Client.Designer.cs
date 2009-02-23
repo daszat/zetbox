@@ -231,7 +231,11 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_BaseProperty != null)
             {
                 OnGetGUIRepresentation_BaseProperty(this, e);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on BaseProperty.GetGUIRepresentation");
+            }
             return e.Result;
         }
 		public delegate void GetGUIRepresentation_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
@@ -249,7 +253,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyType_BaseProperty != null)
             {
                 OnGetPropertyType_BaseProperty(this, e);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on BaseProperty.GetPropertyType");
+            }
             return e.Result;
         }
 		public delegate void GetPropertyType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
@@ -267,7 +275,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyTypeString_BaseProperty != null)
             {
                 OnGetPropertyTypeString_BaseProperty(this, e);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on BaseProperty.GetPropertyTypeString");
+            }
             return e.Result;
         }
 		public delegate void GetPropertyTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);

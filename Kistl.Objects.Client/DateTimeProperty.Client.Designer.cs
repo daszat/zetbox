@@ -32,7 +32,11 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_DateTimeProperty != null)
             {
                 OnGetGUIRepresentation_DateTimeProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetGUIRepresentation();
+            }
             return e.Result;
         }
 		public event GetGUIRepresentation_Handler<DateTimeProperty> OnGetGUIRepresentation_DateTimeProperty;
@@ -49,7 +53,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyType_DateTimeProperty != null)
             {
                 OnGetPropertyType_DateTimeProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyType();
+            }
             return e.Result;
         }
 		public event GetPropertyType_Handler<DateTimeProperty> OnGetPropertyType_DateTimeProperty;
@@ -66,7 +74,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyTypeString_DateTimeProperty != null)
             {
                 OnGetPropertyTypeString_DateTimeProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyTypeString();
+            }
             return e.Result;
         }
 		public event GetPropertyTypeString_Handler<DateTimeProperty> OnGetPropertyTypeString_DateTimeProperty;

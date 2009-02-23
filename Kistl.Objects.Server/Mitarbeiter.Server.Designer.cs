@@ -206,7 +206,11 @@ namespace Kistl.App.Projekte
             if (OnTestMethodForParameter_Mitarbeiter != null)
             {
                 OnTestMethodForParameter_Mitarbeiter(this, e, TestString, TestInt, TestDouble, TestBool, TestDateTime, TestObjectParameter, TestCLRObjectParameter);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Mitarbeiter.TestMethodForParameter");
+            }
             return e.Result;
         }
 		public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, System.String TestString, System.Int32 TestInt, System.Double TestDouble, System.Boolean TestBool, System.DateTime TestDateTime, Kistl.App.Projekte.Auftrag TestObjectParameter, System.Guid TestCLRObjectParameter);

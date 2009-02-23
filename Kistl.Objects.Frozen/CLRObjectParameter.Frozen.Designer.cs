@@ -78,7 +78,11 @@ namespace Kistl.App.Base
             if (OnGetParameterType_CLRObjectParameter != null)
             {
                 OnGetParameterType_CLRObjectParameter(this, e);
-            };
+            }
+            else
+            {
+                base.GetParameterType();
+            }
             return e.Result;
         }
 		public event GetParameterType_Handler<CLRObjectParameter> OnGetParameterType_CLRObjectParameter;
@@ -95,7 +99,11 @@ namespace Kistl.App.Base
             if (OnGetParameterTypeString_CLRObjectParameter != null)
             {
                 OnGetParameterTypeString_CLRObjectParameter(this, e);
-            };
+            }
+            else
+            {
+                base.GetParameterTypeString();
+            }
             return e.Result;
         }
 		public event GetParameterTypeString_Handler<CLRObjectParameter> OnGetParameterTypeString_CLRObjectParameter;

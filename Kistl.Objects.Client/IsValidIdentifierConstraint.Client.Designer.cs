@@ -32,7 +32,11 @@ namespace Kistl.App.Base
             if (OnGetErrorText_IsValidIdentifierConstraint != null)
             {
                 OnGetErrorText_IsValidIdentifierConstraint(this, e, constrainedValue, constrainedObject);
-            };
+            }
+            else
+            {
+                base.GetErrorText(constrainedValue, constrainedObject);
+            }
             return e.Result;
         }
 		public event GetErrorText_Handler<IsValidIdentifierConstraint> OnGetErrorText_IsValidIdentifierConstraint;
@@ -49,7 +53,11 @@ namespace Kistl.App.Base
             if (OnIsValid_IsValidIdentifierConstraint != null)
             {
                 OnIsValid_IsValidIdentifierConstraint(this, e, constrainedValue, constrainedObj);
-            };
+            }
+            else
+            {
+                base.IsValid(constrainedValue, constrainedObj);
+            }
             return e.Result;
         }
 		public event IsValid_Handler<IsValidIdentifierConstraint> OnIsValid_IsValidIdentifierConstraint;

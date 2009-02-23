@@ -276,7 +276,11 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_ObjectReferenceProperty != null)
             {
                 OnGetGUIRepresentation_ObjectReferenceProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetGUIRepresentation();
+            }
             return e.Result;
         }
 		public event GetGUIRepresentation_Handler<ObjectReferenceProperty> OnGetGUIRepresentation_ObjectReferenceProperty;
@@ -293,7 +297,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyType_ObjectReferenceProperty != null)
             {
                 OnGetPropertyType_ObjectReferenceProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyType();
+            }
             return e.Result;
         }
 		public event GetPropertyType_Handler<ObjectReferenceProperty> OnGetPropertyType_ObjectReferenceProperty;
@@ -310,7 +318,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyTypeString_ObjectReferenceProperty != null)
             {
                 OnGetPropertyTypeString_ObjectReferenceProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyTypeString();
+            }
             return e.Result;
         }
 		public event GetPropertyTypeString_Handler<ObjectReferenceProperty> OnGetPropertyTypeString_ObjectReferenceProperty;

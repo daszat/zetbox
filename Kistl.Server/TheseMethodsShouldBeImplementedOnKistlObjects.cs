@@ -118,6 +118,15 @@ namespace Kistl.Server
                 // TODO: n:m darf nicht an eine Seite gebunden sein
                 (type == RelationType.n_m && rel.LeftPart == p);
         }
-
+        public static bool IsFrozen(this ObjectClass cls)
+        {
+            while (cls != null)
+            {
+                if (cls.IsFrozenObject)
+                    return true;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
+        }
     }
 }

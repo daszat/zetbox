@@ -260,7 +260,11 @@ namespace Kistl.App.Base
             if (OnGetParameterType_BaseParameter != null)
             {
                 OnGetParameterType_BaseParameter(this, e);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on BaseParameter.GetParameterType");
+            }
             return e.Result;
         }
 		public delegate void GetParameterType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
@@ -278,7 +282,11 @@ namespace Kistl.App.Base
             if (OnGetParameterTypeString_BaseParameter != null)
             {
                 OnGetParameterTypeString_BaseParameter(this, e);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on BaseParameter.GetParameterTypeString");
+            }
             return e.Result;
         }
 		public delegate void GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);

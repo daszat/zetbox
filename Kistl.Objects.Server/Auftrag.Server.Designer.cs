@@ -348,6 +348,10 @@ namespace Kistl.App.Projekte
             {
 				OnRechnungErstellen_Auftrag(this);
 			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on Auftrag.RechnungErstellen");
+			}
         }
 		public delegate void RechnungErstellen_Handler<T>(T obj);
 		public event RechnungErstellen_Handler<Auftrag> OnRechnungErstellen_Auftrag;

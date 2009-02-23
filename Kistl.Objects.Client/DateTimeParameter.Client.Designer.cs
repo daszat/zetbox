@@ -32,7 +32,11 @@ namespace Kistl.App.Base
             if (OnGetParameterType_DateTimeParameter != null)
             {
                 OnGetParameterType_DateTimeParameter(this, e);
-            };
+            }
+            else
+            {
+                base.GetParameterType();
+            }
             return e.Result;
         }
 		public event GetParameterType_Handler<DateTimeParameter> OnGetParameterType_DateTimeParameter;
@@ -49,7 +53,11 @@ namespace Kistl.App.Base
             if (OnGetParameterTypeString_DateTimeParameter != null)
             {
                 OnGetParameterTypeString_DateTimeParameter(this, e);
-            };
+            }
+            else
+            {
+                base.GetParameterTypeString();
+            }
             return e.Result;
         }
 		public event GetParameterTypeString_Handler<DateTimeParameter> OnGetParameterTypeString_DateTimeParameter;

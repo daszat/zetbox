@@ -197,6 +197,10 @@ namespace Kistl.App.GUI
             {
 				OnPrepareDefault_Template(this, cls);
 			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on Template.PrepareDefault");
+			}
         }
 		public delegate void PrepareDefault_Handler<T>(T obj, Kistl.App.Base.ObjectClass cls);
 		public event PrepareDefault_Handler<Template> OnPrepareDefault_Template;

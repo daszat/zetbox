@@ -208,7 +208,11 @@ namespace Kistl.App.Base
             if (OnAsType_TypeRef != null)
             {
                 OnAsType_TypeRef(this, e, throwOnError);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on TypeRef.AsType");
+            }
             return e.Result;
         }
 		public delegate void AsType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret, System.Boolean throwOnError);

@@ -55,7 +55,11 @@ namespace Kistl.App.Base
             if (OnGetGUIRepresentation_EnumerationProperty != null)
             {
                 OnGetGUIRepresentation_EnumerationProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetGUIRepresentation();
+            }
             return e.Result;
         }
 		public event GetGUIRepresentation_Handler<EnumerationProperty> OnGetGUIRepresentation_EnumerationProperty;
@@ -72,7 +76,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyType_EnumerationProperty != null)
             {
                 OnGetPropertyType_EnumerationProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyType();
+            }
             return e.Result;
         }
 		public event GetPropertyType_Handler<EnumerationProperty> OnGetPropertyType_EnumerationProperty;
@@ -89,7 +97,11 @@ namespace Kistl.App.Base
             if (OnGetPropertyTypeString_EnumerationProperty != null)
             {
                 OnGetPropertyTypeString_EnumerationProperty(this, e);
-            };
+            }
+            else
+            {
+                base.GetPropertyTypeString();
+            }
             return e.Result;
         }
 		public event GetPropertyTypeString_Handler<EnumerationProperty> OnGetPropertyTypeString_EnumerationProperty;
@@ -198,6 +210,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[102],
 			DataStore[110].IsList = false;
 			DataStore[110].IsNullable = false;
 			DataStore[110].IsIndexed = false;
+			DataStore[110].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[50];
 			DataStore[110].Seal();
 			DataStore[111].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48];
 			DataStore[111].PropertyName = @"TestEnumProp";
@@ -210,6 +223,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[101],
 			DataStore[111].IsList = false;
 			DataStore[111].IsNullable = false;
 			DataStore[111].IsIndexed = false;
+			DataStore[111].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[50];
 			DataStore[111].Seal();
 			DataStore[113].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52];
 			DataStore[113].PropertyName = @"Platform";
@@ -222,6 +236,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[99],
 			DataStore[113].IsList = false;
 			DataStore[113].IsNullable = false;
 			DataStore[113].IsIndexed = false;
+			DataStore[113].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
 			DataStore[113].Seal();
 			DataStore[117].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
 			DataStore[117].PropertyName = @"Platform";
@@ -234,6 +249,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[95],
 			DataStore[117].IsList = false;
 			DataStore[117].IsNullable = false;
 			DataStore[117].IsIndexed = false;
+			DataStore[117].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
 			DataStore[117].Seal();
 			DataStore[118].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
 			DataStore[118].PropertyName = @"ControlType";
@@ -246,6 +262,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[94],
 			DataStore[118].IsList = false;
 			DataStore[118].IsNullable = false;
 			DataStore[118].IsIndexed = false;
+			DataStore[118].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[118].Seal();
 			DataStore[137].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
 			DataStore[137].PropertyName = @"ControlType";
@@ -258,6 +275,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[87],
 			DataStore[137].IsList = false;
 			DataStore[137].IsNullable = false;
 			DataStore[137].IsIndexed = false;
+			DataStore[137].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[137].Seal();
 			DataStore[150].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
 			DataStore[150].PropertyName = @"ControlType";
@@ -270,6 +288,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 			DataStore[150].IsList = false;
 			DataStore[150].IsNullable = false;
 			DataStore[150].IsIndexed = false;
+			DataStore[150].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[150].Seal();
 			DataStore[183].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
 			DataStore[183].PropertyName = @"Storage";
@@ -281,6 +300,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 			DataStore[183].IsList = false;
 			DataStore[183].IsNullable = true;
 			DataStore[183].IsIndexed = false;
+			DataStore[183].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
 			DataStore[183].Seal();
 			DataStore[210].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[80];
 			DataStore[210].PropertyName = @"Toolkit";
@@ -293,6 +313,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 			DataStore[210].IsList = false;
 			DataStore[210].IsNullable = false;
 			DataStore[210].IsIndexed = false;
+			DataStore[210].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
 			DataStore[210].Seal();
 	
 		}

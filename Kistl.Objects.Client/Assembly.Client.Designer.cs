@@ -135,6 +135,10 @@ namespace Kistl.App.Base
             {
 				OnRegenerateTypeRefs_Assembly(this);
 			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on Assembly.RegenerateTypeRefs");
+			}
         }
 		public delegate void RegenerateTypeRefs_Handler<T>(T obj);
 		public event RegenerateTypeRefs_Handler<Assembly> OnRegenerateTypeRefs_Assembly;

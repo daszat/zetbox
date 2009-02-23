@@ -32,7 +32,11 @@ namespace Kistl.App.Base
             if (OnGetParameterType_BoolParameter != null)
             {
                 OnGetParameterType_BoolParameter(this, e);
-            };
+            }
+            else
+            {
+                base.GetParameterType();
+            }
             return e.Result;
         }
 		public event GetParameterType_Handler<BoolParameter> OnGetParameterType_BoolParameter;
@@ -49,7 +53,11 @@ namespace Kistl.App.Base
             if (OnGetParameterTypeString_BoolParameter != null)
             {
                 OnGetParameterTypeString_BoolParameter(this, e);
-            };
+            }
+            else
+            {
+                base.GetParameterTypeString();
+            }
             return e.Result;
         }
 		public event GetParameterTypeString_Handler<BoolParameter> OnGetParameterTypeString_BoolParameter;

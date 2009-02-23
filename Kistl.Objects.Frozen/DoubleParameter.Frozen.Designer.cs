@@ -32,7 +32,11 @@ namespace Kistl.App.Base
             if (OnGetParameterType_DoubleParameter != null)
             {
                 OnGetParameterType_DoubleParameter(this, e);
-            };
+            }
+            else
+            {
+                base.GetParameterType();
+            }
             return e.Result;
         }
 		public event GetParameterType_Handler<DoubleParameter> OnGetParameterType_DoubleParameter;
@@ -49,7 +53,11 @@ namespace Kistl.App.Base
             if (OnGetParameterTypeString_DoubleParameter != null)
             {
                 OnGetParameterTypeString_DoubleParameter(this, e);
-            };
+            }
+            else
+            {
+                base.GetParameterTypeString();
+            }
             return e.Result;
         }
 		public event GetParameterTypeString_Handler<DoubleParameter> OnGetParameterTypeString_DoubleParameter;

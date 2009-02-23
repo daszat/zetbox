@@ -36,7 +36,11 @@ namespace Kistl.App.Base
             if (OnGetErrorText_NotNullableConstraint != null)
             {
                 OnGetErrorText_NotNullableConstraint(this, e, constrainedValue, constrainedObject);
-            };
+            }
+            else
+            {
+                base.GetErrorText(constrainedValue, constrainedObject);
+            }
             return e.Result;
         }
 		public event GetErrorText_Handler<NotNullableConstraint> OnGetErrorText_NotNullableConstraint;
@@ -53,7 +57,11 @@ namespace Kistl.App.Base
             if (OnIsValid_NotNullableConstraint != null)
             {
                 OnIsValid_NotNullableConstraint(this, e, constrainedValue, constrainedObj);
-            };
+            }
+            else
+            {
+                base.IsValid(constrainedValue, constrainedObj);
+            }
             return e.Result;
         }
 		public event IsValid_Handler<NotNullableConstraint> OnIsValid_NotNullableConstraint;

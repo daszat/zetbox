@@ -36,7 +36,11 @@ namespace Kistl.App.Base
             if (OnGetErrorText_IsValidNamespaceConstraint != null)
             {
                 OnGetErrorText_IsValidNamespaceConstraint(this, e, constrainedValue, constrainedObject);
-            };
+            }
+            else
+            {
+                base.GetErrorText(constrainedValue, constrainedObject);
+            }
             return e.Result;
         }
 		public event GetErrorText_Handler<IsValidNamespaceConstraint> OnGetErrorText_IsValidNamespaceConstraint;
@@ -53,7 +57,11 @@ namespace Kistl.App.Base
             if (OnIsValid_IsValidNamespaceConstraint != null)
             {
                 OnIsValid_IsValidNamespaceConstraint(this, e, constrainedValue, constrainedObj);
-            };
+            }
+            else
+            {
+                base.IsValid(constrainedValue, constrainedObj);
+            }
             return e.Result;
         }
 		public event IsValid_Handler<IsValidNamespaceConstraint> OnIsValid_IsValidNamespaceConstraint;

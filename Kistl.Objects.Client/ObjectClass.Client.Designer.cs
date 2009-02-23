@@ -261,7 +261,11 @@ namespace Kistl.App.Base
             if (OnGetDataType_ObjectClass != null)
             {
                 OnGetDataType_ObjectClass(this, e);
-            };
+            }
+            else
+            {
+                base.GetDataType();
+            }
             return e.Result;
         }
 		public event GetDataType_Handler<ObjectClass> OnGetDataType_ObjectClass;
@@ -278,7 +282,11 @@ namespace Kistl.App.Base
             if (OnGetDataTypeString_ObjectClass != null)
             {
                 OnGetDataTypeString_ObjectClass(this, e);
-            };
+            }
+            else
+            {
+                base.GetDataTypeString();
+            }
             return e.Result;
         }
 		public event GetDataTypeString_Handler<ObjectClass> OnGetDataTypeString_ObjectClass;
@@ -295,7 +303,11 @@ namespace Kistl.App.Base
             if (OnGetDefaultModelRef_ObjectClass != null)
             {
                 OnGetDefaultModelRef_ObjectClass(this, e);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on ObjectClass.GetDefaultModelRef");
+            }
             return e.Result;
         }
 		public delegate void GetDefaultModelRef_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.TypeRef> ret);
@@ -313,7 +325,11 @@ namespace Kistl.App.Base
             if (OnGetInheritedMethods_ObjectClass != null)
             {
                 OnGetInheritedMethods_ObjectClass(this, e);
-            };
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on ObjectClass.GetInheritedMethods");
+            }
             return e.Result;
         }
 		public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> ret);

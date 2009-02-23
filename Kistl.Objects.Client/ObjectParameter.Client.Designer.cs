@@ -76,7 +76,11 @@ namespace Kistl.App.Base
             if (OnGetParameterType_ObjectParameter != null)
             {
                 OnGetParameterType_ObjectParameter(this, e);
-            };
+            }
+            else
+            {
+                base.GetParameterType();
+            }
             return e.Result;
         }
 		public event GetParameterType_Handler<ObjectParameter> OnGetParameterType_ObjectParameter;
@@ -93,7 +97,11 @@ namespace Kistl.App.Base
             if (OnGetParameterTypeString_ObjectParameter != null)
             {
                 OnGetParameterTypeString_ObjectParameter(this, e);
-            };
+            }
+            else
+            {
+                base.GetParameterTypeString();
+            }
             return e.Result;
         }
 		public event GetParameterTypeString_Handler<ObjectParameter> OnGetParameterTypeString_ObjectParameter;

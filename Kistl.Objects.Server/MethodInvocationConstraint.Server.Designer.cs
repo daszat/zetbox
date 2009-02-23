@@ -36,7 +36,11 @@ namespace Kistl.App.Base
             if (OnGetErrorText_MethodInvocationConstraint != null)
             {
                 OnGetErrorText_MethodInvocationConstraint(this, e, constrainedValue, constrainedObject);
-            };
+            }
+            else
+            {
+                base.GetErrorText(constrainedValue, constrainedObject);
+            }
             return e.Result;
         }
 		public event GetErrorText_Handler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint;
@@ -53,7 +57,11 @@ namespace Kistl.App.Base
             if (OnIsValid_MethodInvocationConstraint != null)
             {
                 OnIsValid_MethodInvocationConstraint(this, e, constrainedValue, constrainedObj);
-            };
+            }
+            else
+            {
+                base.IsValid(constrainedValue, constrainedObj);
+            }
             return e.Result;
         }
 		public event IsValid_Handler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint;

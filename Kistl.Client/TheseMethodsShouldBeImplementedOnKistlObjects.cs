@@ -92,12 +92,15 @@ namespace Kistl.Client
         /// <returns>a Kistl TypeRef for a given System.Type</returns>
         public static TypeRef ToRef(this Type t, IKistlContext ctx)
         {
+            if (t == null) throw new ArgumentNullException("t");
+
             var result = ctx.GetQuery<TypeRef>().SingleOrDefault(tRef => tRef.Assembly.AssemblyName == t.Assembly.FullName && tRef.FullName == t.FullName && tRef.GenericArguments.Count == 0);
             if (result == null)
             {
                 result = ctx.Create<TypeRef>();
                 result.FullName = t.FullName;
-                result.Assembly = t.Assembly.ToRefOrDefault(ctx);
+                var a = t.Assembly.ToRefOrDefault(ctx);
+                result.Assembly = a;
             }
             return result;
         }
@@ -108,6 +111,17 @@ namespace Kistl.Client
         public static Assembly ToRefOrDefault(this System.Reflection.Assembly ass, IKistlContext ctx)
         {
             return ctx.GetQuery<Assembly>().SingleOrDefault(a => a.AssemblyName == ass.FullName);
+        }
+
+        public static bool IsFrozen(this ObjectClass cls)
+        {
+            while (cls != null)
+            {
+                if (cls.IsFrozenObject)
+                    return true;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
         }
     }
 }

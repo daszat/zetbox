@@ -17,8 +17,7 @@ namespace Kistl.Server.Generators.FrozenObjects
 
         protected override string Generate_ObjectClass(Kistl.API.IKistlContext ctx, ObjectClass objClass)
         {
-            // TODO: IsFrozen should be set if BaseClass.IsFrozen is set
-            if (objClass.IsFrozenObject || objClass.GetRootClass().IsFrozenObject)
+            if (objClass.IsFrozen())
                 return base.Generate_ObjectClass(ctx, objClass);
             else
                 return null;
@@ -28,6 +27,7 @@ namespace Kistl.Server.Generators.FrozenObjects
         {
             var otherFileNames = new List<string>();
 
+            // TODO: IsFrozenObject doesn't contain enough information, should check parents too
             var modulesWithFrozenClasses = ctx.GetQuery<Module>()
                 .Where(m => m.DataTypes.OfType<ObjectClass>().Any(cls => cls.IsFrozenObject))
                 .OrderBy(m => m.ModuleName)

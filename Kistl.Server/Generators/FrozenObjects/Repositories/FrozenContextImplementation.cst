@@ -71,7 +71,8 @@ namespace Kistl.App
 <%
 	foreach(var module in modulesWithFrozenClasses)
 	{
-		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().Where(cls => cls.IsFrozenObject || cls.GetRootClass().IsFrozenObject))
+	    // TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
+		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()))
 		{
 %>
 			if (t == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>))
@@ -106,7 +107,8 @@ namespace Kistl.App
 <%
 	foreach(var module in modulesWithFrozenClasses)
 	{
-		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().Where(cls => cls.IsFrozenObject || cls.GetRootClass().IsFrozenObject))
+		// TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
+        foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()))
 		{
 %>
 					.Concat(GetQuery<<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>>().Cast<IPersistenceObject>())
@@ -134,7 +136,8 @@ namespace Kistl.App
 <%
 	foreach(var module in modulesWithFrozenClasses)
 	{
-		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().Where(cls => cls.IsFrozenObject || cls.GetRootClass().IsFrozenObject))
+		// TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
+		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()))
 		{
 %>
 			if (t == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>))

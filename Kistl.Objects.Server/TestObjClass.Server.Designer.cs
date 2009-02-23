@@ -230,6 +230,10 @@ namespace Kistl.App.Test
             {
 				OnTestMethod_TestObjClass(this, DateTimeParamForTestMethod);
 			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on TestObjClass.TestMethod");
+			}
         }
 		public delegate void TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);
 		public event TestMethod_Handler<TestObjClass> OnTestMethod_TestObjClass;
