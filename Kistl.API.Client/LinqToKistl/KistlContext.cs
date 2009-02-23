@@ -142,7 +142,7 @@ namespace Kistl.API.Client
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : IDataObject
         {
             CheckDisposed();
-            return this.GetListOf<T>(obj.GetType(), obj.ID, propertyName);
+            return this.GetListOf<T>(obj.GetInterfaceType(), obj.ID, propertyName);
         }
 
         /// <summary>
