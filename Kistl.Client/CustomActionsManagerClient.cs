@@ -88,8 +88,9 @@ namespace Kistl.Client
                             {
                                 // baseObjClass.GetDataType(); is not possible here, because this
                                 // Method is currently attaching
-                                CreateInvokeInfos(warnings, baseObjClass, Type.GetType(baseObjClass.Module.Namespace + "." + baseObjClass.ClassName + Kistl.API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly));
-                                CreateInvokeInfos(warnings, baseObjClass, Type.GetType(baseObjClass.Module.Namespace + "." + baseObjClass.ClassName + Kistl.API.Helper.ImplementationSuffix + "Frozen, Kistl.Objects.Frozen"));
+                                CreateInvokeInfosForAssembly(warnings, baseObjClass, "", ApplicationContext.Current.ImplementationAssembly);
+                                if (baseObjClass.IsFrozenObject)
+                                    CreateInvokeInfosForAssembly(warnings, baseObjClass, "Frozen", "Kistl.Objects.Frozen");
                             }
                             catch (Exception ex)
                             {
@@ -123,13 +124,28 @@ namespace Kistl.Client
             }
         }
 
+        private void CreateInvokeInfosForAssembly(StringBuilder warnings, ObjectClass baseObjClass, string extraSuffix, string assemblyName)
+        {
+            var implTypeName = baseObjClass.Module.Namespace
+                + "." + baseObjClass.ClassName
+                + Kistl.API.Helper.ImplementationSuffix
+                + extraSuffix
+                + ", " + assemblyName;
+            var implType = Type.GetType(implTypeName);
+            if (implType != null)
+            {
+                CreateInvokeInfos(warnings, baseObjClass, implType);
+            }
+            else
+            {
+                warnings.AppendFormat("Cannot find Type {0}\n", implTypeName);
+            }
+        }
+
         private void CreateInvokeInfos(StringBuilder warnings, ObjectClass baseObjClass, Type objType)
         {
             if (objType == null)
-            {
-                warnings.AppendLine(string.Format("DataType '{0}, Kistl.Objects.Client' not found", baseObjClass.Module.Namespace + "." + baseObjClass.ClassName));
-                return;
-            }
+                throw new ArgumentNullException("objType");
 
             foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie())
             {
