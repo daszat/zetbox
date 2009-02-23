@@ -12,23 +12,16 @@
 <%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
-<%@ Parameter Name="prop" Type="ObjectReferenceProperty" %>
-<%
-    Debug.Assert(!prop.IsList);
-
-    string name = prop.PropertyName;
-    string efName = name + Kistl.API.Helper.ImplementationSuffix;
-    string fkName = "fk_" + name;
-    string fkBackingName = "_fk_" + name;
-
-    string referencedInterface = prop.ReferenceObjectClass.Module.Namespace + "." + prop.ReferenceObjectClass.ClassName;
-
-    var rel = NewRelation.Lookup(ctx, prop);
-    var relEnd = rel.GetEnd(prop);
-    var otherEnd = relEnd.Other;
-    bool hasInverseNavigator = otherEnd.Navigator != null;
-    
-%>
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="efName" Type="string" %>
+<%@ Parameter Name="fkName" Type="string" %>
+<%@ Parameter Name="fkBackingName" Type="string" %>
+<%@ Parameter Name="referencedInterface" Type="string" %>
+<%@ Parameter Name="rel" Type="NewRelation" %>
+<%@ Parameter Name="relEnd" Type="RelationEnd" %>
+<%@ Parameter Name="otherEnd" Type="RelationEnd" %>
+<%@ Parameter Name="hasInverseNavigator" Type="bool" %>
+<%@ Parameter Name="hasPositionStorage" Type="bool" %>
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -124,5 +117,15 @@
         }
         private int? <%= fkBackingName %>;
 <%
-        AddSerialization(serializationList, fkBackingName);
+    AddSerialization(serializationList, fkBackingName);
+
+	string posStorageName = name + Kistl.API.Helper.PositionSuffix;
+
+	if (hasPositionStorage)
+	{
+		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+		    serializationList,
+			"int?", posStorageName);
+	}
 %>
+       

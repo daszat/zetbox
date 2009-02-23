@@ -17,7 +17,7 @@ namespace Kistl.API.Client.Tests
         string StringProp { get; set; }
         int TestEnumProp { get; set; }
         System.Collections.Generic.IList<string> TestNames { get; }
-        ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry> UnitTest_TestNames { get; }
+        NewListPropertyCollection<TestObjClass, string, TestObjClass_TestNameCollectionEntry> UnitTest_TestNames { get; }
     }
 
     public class TestObjClass__Implementation__ : BaseClientDataObject, TestObjClass
@@ -33,14 +33,14 @@ namespace Kistl.API.Client.Tests
 
         private int? _fk_Parent;
 
-        private ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry> _TestNames;
+        private NewListPropertyCollection<TestObjClass, string, TestObjClass_TestNameCollectionEntry> _TestNames;
 
         public TestObjClass__Implementation__()
         {
-            _TestNames = new ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry>(this, "TestNames");
+            _TestNames = new NewListPropertyCollection<TestObjClass, string, TestObjClass_TestNameCollectionEntry>(this, "TestNames");
         }
 
-      
+
 
         public string StringProp
         {
@@ -78,7 +78,7 @@ namespace Kistl.API.Client.Tests
             }
         }
 
-        public ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry> UnitTest_TestNames
+        public NewListPropertyCollection<TestObjClass, string, TestObjClass_TestNameCollectionEntry> UnitTest_TestNames
         {
             get
             {

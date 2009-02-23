@@ -116,7 +116,7 @@ this.WriteObjects("                throw new NotImplementedException(\"No handle
         {
 
 #line 95 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\MethodBody.cst"
-this.WriteObjects("                base.",  m.MethodName , "(",  m.GetArguments() , ");\r\n");
+this.WriteObjects("                e.Result = base.",  m.MethodName , "(",  m.GetArguments() , ");\r\n");
 #line 97 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\MethodBody.cst"
 }
 

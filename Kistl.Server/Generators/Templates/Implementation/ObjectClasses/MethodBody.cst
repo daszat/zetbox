@@ -92,7 +92,7 @@
         else
         {
 %>
-                base.<%= m.MethodName %>(<%= m.GetArguments() %>);
+                e.Result = base.<%= m.MethodName %>(<%= m.GetArguments() %>);
 <%
         }
 %>

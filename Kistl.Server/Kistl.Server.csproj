@@ -428,6 +428,7 @@
   <ItemGroup>
     <Compile Include="Generators\ClientObjects\ClientObjectGenerator.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
+    <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionEntries.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\IdProperty.cs" />
@@ -602,6 +603,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SimpleBinarySerialization.cst</DependentUpon>
     </Compile>
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SimplePropertySerialization.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\Tail.Designer.cs">
       <DependentUpon>Tail.cst</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -754,6 +760,10 @@
     <None Include="Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SimpleBinarySerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SimplePropertySerialization.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\Tail.cst">
       <Generator>Arebis Template Processor</Generator>

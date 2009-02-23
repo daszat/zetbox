@@ -50,8 +50,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             var otherEnd = relEnd.Other;
 
             this.WriteLine("        // object reference property");
-            this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-                this.MembersToSerialize,
+            Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(
+                Host, ctx, this.MembersToSerialize,
                 prop);
         }
 

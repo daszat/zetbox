@@ -26,7 +26,7 @@ namespace Kistl.API
 
         protected override ENTRYTYPE GetEntryOrDefault(ATYPE item)
         {
-            return Collection.SingleOrDefault(i => i.B.Equals(item));
+            return Collection.SingleOrDefault(i => Object.Equals(i.B, item));
         }
 
         protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, ATYPE item)

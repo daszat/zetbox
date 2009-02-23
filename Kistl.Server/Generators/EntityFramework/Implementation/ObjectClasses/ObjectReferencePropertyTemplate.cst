@@ -61,7 +61,7 @@
         }
         private int? <%= fkBackingName %>;
 <%
-        AddSerialization(serializationList, fkBackingName);
+        AddSerialization(serializationList, fkName);
 %>
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "<%= associationName %>", "<%= targetRoleName %>")]

@@ -64,7 +64,8 @@
     <Compile Include="BaseClientDataObject.cs" />
     <Compile Include="CacheController.cs" />
     <Compile Include="ClientApiContext.cs" />
-    <Compile Include="Collections.cs" />
+    <Compile Include="BackReferenceCollection.cs" />
+    <Compile Include="CollectionWrapperImplementations.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="LinqToKistl\KistlContext.cs" />
     <Compile Include="LinqToKistl\KistlContextQuery.cs" />

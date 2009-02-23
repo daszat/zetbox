@@ -117,10 +117,12 @@ namespace Kistl.Client.WPF
                         var enumRef = e.GetDataType().ToRef(ctx);
                         var genericRef = typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition().ToRef(ctx);
                         var concreteRef = ctx.GetQuery<Kistl.App.Base.TypeRef>()
-                            .SingleOrDefault(r => r.FullName == genericRef.FullName
+                            .Where(r => r.FullName == genericRef.FullName
                                 && r.Assembly.ID == genericRef.Assembly.ID
-                                && r.GenericArguments.Count == 1
-                                && r.GenericArguments[0].ID == enumRef.ID);
+                                && r.GenericArguments.Count == 1)
+                            .ToList()
+                            .Where(r => r.GenericArguments.Single().ID == enumRef.ID)
+                            .SingleOrDefault();
 
                         if (concreteRef == null)
                         {

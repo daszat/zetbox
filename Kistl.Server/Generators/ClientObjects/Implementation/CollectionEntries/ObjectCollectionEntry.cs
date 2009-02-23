@@ -24,24 +24,9 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
         {
         }
 
-        public override void Generate()
-        {
-            this.WriteLine("// no collection entry needed for {0}", rel.GetCollectionEntryFullName());
-        }
-
-        protected override void ApplyObjectReferenceProperty(RelationEnd relEnd, string propertyName)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void ApplyIndexPropertyTemplate(RelationEnd relEnd, string side)
-        {
-            throw new NotImplementedException();
-        }
-
         protected override string GetCeBaseClassName()
         {
-            throw new NotImplementedException();
+            return "BaseClientCollectionEntry";
         }
     }
 }

@@ -37,8 +37,8 @@ Debug.Assert(prop.IsList);
 	string name = prop.PropertyName;
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
-	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = "NewListPropertyCollection";
+	// the name of the wrapper class for wrapping the CollectionEntries
+	string wrapperClass = (prop.IsIndexed ? "ClientListBSideWrapper" : "ClientCollectionBSideWrapper");
 
 	// which generic interface to use for the collection
 	string exposedListType = prop.IsIndexed ? "IList" : "ICollection";

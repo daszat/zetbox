@@ -19,7 +19,7 @@ namespace Kistl.API.Client.Tests
     [TestFixture]
     public class ListPropertyCollectionTests
     {
-        ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry> list;
+        NewListPropertyCollection<TestObjClass, string, TestObjClass_TestNameCollectionEntry> list;
         TestObjClass parent;
 
         string a;
@@ -29,13 +29,13 @@ namespace Kistl.API.Client.Tests
         public void SetUp()
         {
             parent = new TestObjClass__Implementation__();
-            list = new ListPropertyCollection<string, TestObjClass, TestObjClass_TestNameCollectionEntry>(parent, "TestNames");
+            list = new NewListPropertyCollection<TestObjClass, string, TestObjClass_TestNameCollectionEntry>(parent, "TestNames");
 
             a = "A-String";
             b = "B-String";
 
-            list.UnderlyingCollection.Add(new TestObjClass_TestNameCollectionEntry() { /*ID = 1,*/ Value = a });
-            list.UnderlyingCollection.Add(new TestObjClass_TestNameCollectionEntry() { /*ID = 2,*/ Value = b });
+            list.UnderlyingCollection.Add(new TestObjClass_TestNameCollectionEntry() { /*ID = 1,*/ B = a });
+            list.UnderlyingCollection.Add(new TestObjClass_TestNameCollectionEntry() { /*ID = 2,*/ B = b });
 
             list.UnderlyingCollection[0].SetPrivatePropertyValue<int>("ID", 1);
             list.UnderlyingCollection[1].SetPrivatePropertyValue<int>("ID", 2);

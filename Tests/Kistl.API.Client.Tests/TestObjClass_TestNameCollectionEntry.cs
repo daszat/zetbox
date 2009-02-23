@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Kistl.API.Client.Tests
 {
-    public class TestObjClass_TestNameCollectionEntry : BaseClientCollectionEntry, ICollectionEntry<string, TestObjClass>
+    public class TestObjClass_TestNameCollectionEntry : BaseClientCollectionEntry, INewCollectionEntry<TestObjClass, string>
     {
 
         private int _ID;
@@ -19,7 +19,7 @@ namespace Kistl.API.Client.Tests
 
        
 
-        public string Value
+        public string B
         {
             get
             {
@@ -27,14 +27,14 @@ namespace Kistl.API.Client.Tests
             }
             set
             {
-                base.NotifyPropertyChanging("Value");
+                base.NotifyPropertyChanging("B");
                 _Value = value;
-                base.NotifyPropertyChanged("Value"); ;
+                base.NotifyPropertyChanged("B"); ;
             }
         }
 
         [XmlIgnore()]
-        public TestObjClass Parent
+        public TestObjClass A
         {
             get
             {
@@ -60,7 +60,7 @@ namespace Kistl.API.Client.Tests
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToStream(this.Value, sw);
+            BinarySerializer.ToStream(this.B, sw);
             BinarySerializer.ToStream(this.fk_Parent, sw);
         }
 
