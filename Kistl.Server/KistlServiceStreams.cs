@@ -120,8 +120,10 @@ namespace Kistl.Server
                         BinaryWriter sw = new BinaryWriter(result);
                         foreach (IDataObject obj in lst)
                         {
+                            BinarySerializer.ToStream(true, sw);
                             obj.ToStream(sw);
                         }
+                        BinarySerializer.ToStream(false, sw);
 
                         result.Seek(0, SeekOrigin.Begin);
                         return result;
@@ -151,8 +153,10 @@ namespace Kistl.Server
                         BinaryWriter sw = new BinaryWriter(result);
                         foreach (IDataObject obj in lst)
                         {
+                            BinarySerializer.ToStream(true, sw);
                             obj.ToStream(sw);
                         }
+                        BinarySerializer.ToStream(false, sw);
 
                         result.Seek(0, SeekOrigin.Begin);
                         return result;

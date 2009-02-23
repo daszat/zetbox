@@ -168,8 +168,9 @@ namespace Kistl.API.Client
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
 
                 List<Kistl.API.IDataObject> result = new List<Kistl.API.IDataObject>();
-
-                while (s.Position < s.Length)
+                bool cont = true;
+                BinarySerializer.FromStream(out cont, sr);
+                while (cont)
                 {
                     long pos = s.Position;
                     SerializableType objType;
@@ -181,6 +182,7 @@ namespace Kistl.API.Client
                     obj.FromStream(sr);
 
                     result.Add((Kistl.API.IDataObject)obj);
+                    BinarySerializer.FromStream(out cont, sr);
                 }
 
                 return result;
@@ -212,7 +214,9 @@ namespace Kistl.API.Client
 
                 List<Kistl.API.IDataObject> result = new List<Kistl.API.IDataObject>();
 
-                while (s.Position < s.Length)
+                bool cont;
+                BinarySerializer.FromStream(out cont, sr);
+                while (cont)
                 {
                     long pos = s.Position;
                     SerializableType objType;
@@ -224,6 +228,7 @@ namespace Kistl.API.Client
                     obj.FromStream(sr);
 
                     result.Add((Kistl.API.IDataObject)obj);
+                    BinarySerializer.FromStream(out cont, sr);
                 }
 
                 return result;
