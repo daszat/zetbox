@@ -65,6 +65,7 @@ namespace Kistl.App.Test
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
+                fk_ObjectProp = value == null ? (int?)null : value.ID;
             }
         }
         

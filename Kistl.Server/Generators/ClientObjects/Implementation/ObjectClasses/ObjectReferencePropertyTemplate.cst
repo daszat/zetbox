@@ -94,6 +94,12 @@
                 }
 <%
     }
+    else // has no inverse navigator
+    {
+%>
+                <%= fkName %> = value == null ? (int?)null : value.ID;
+<%
+    }
 %>
             }
         }

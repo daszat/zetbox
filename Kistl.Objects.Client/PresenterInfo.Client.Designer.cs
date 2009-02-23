@@ -65,6 +65,7 @@ namespace Kistl.App.GUI
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
+                fk_DataAssembly = value == null ? (int?)null : value.ID;
             }
         }
         
@@ -131,6 +132,7 @@ namespace Kistl.App.GUI
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
+                fk_PresenterAssembly = value == null ? (int?)null : value.ID;
             }
         }
         

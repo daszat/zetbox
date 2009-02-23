@@ -118,6 +118,7 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
+                fk_Module = value == null ? (int?)null : value.ID;
             }
         }
         

@@ -88,6 +88,7 @@ namespace Kistl.App.Projekte
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
+                fk_Kunde = value == null ? (int?)null : value.ID;
             }
         }
         
@@ -131,6 +132,7 @@ namespace Kistl.App.Projekte
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
+                fk_Mitarbeiter = value == null ? (int?)null : value.ID;
             }
         }
         

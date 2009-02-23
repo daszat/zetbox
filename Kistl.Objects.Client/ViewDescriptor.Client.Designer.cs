@@ -42,6 +42,7 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
+                fk_LayoutRef = value == null ? (int?)null : value.ID;
             }
         }
         
@@ -108,6 +109,7 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
+                fk_ViewRef = value == null ? (int?)null : value.ID;
             }
         }
         
