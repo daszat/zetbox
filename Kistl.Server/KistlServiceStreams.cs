@@ -172,6 +172,8 @@ namespace Kistl.Server
             }
         }
 
+
+        // TODO: korrekte Signatur ist FetchRelation(int relationId, int serializableRole, int parentObjID)
         public System.IO.MemoryStream FetchRelation(SerializableType ceType, int serializableRole, int ID)
         {
             try
