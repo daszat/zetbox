@@ -13,6 +13,7 @@
       <xsd:import schemaLocation="http://localhost:6666/KistlServiceStreams?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:6666/KistlServiceStreams?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
       <xsd:import schemaLocation="http://localhost:6666/KistlServiceStreams?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:6666/KistlServiceStreams?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IKistlServiceStreams_GetObject_InputMessage">
@@ -39,6 +40,15 @@
   <wsdl:message name="IKistlServiceStreams_GetListOf_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetListOfResponse" />
   </wsdl:message>
+  <wsdl:message name="IKistlServiceStreams_FetchRelation_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchRelation" />
+  </wsdl:message>
+  <wsdl:message name="IKistlServiceStreams_FetchRelation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchRelationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKistlServiceStreams_FetchRelation_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="detail" element="q1:Exception" />
+  </wsdl:message>
   <wsdl:portType name="IKistlServiceStreams">
     <wsdl:operation name="GetObject">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetObject" message="tns:IKistlServiceStreams_GetObject_InputMessage" />
@@ -55,6 +65,11 @@
     <wsdl:operation name="GetListOf">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetListOf" message="tns:IKistlServiceStreams_GetListOf_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlServiceStreams/GetListOfResponse" message="tns:IKistlServiceStreams_GetListOf_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchRelation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKistlServiceStreams/FetchRelation" message="tns:IKistlServiceStreams_FetchRelation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKistlServiceStreams/FetchRelationResponse" message="tns:IKistlServiceStreams_FetchRelation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlServiceStreams/FetchRelationExceptionFault" name="ExceptionFault" message="tns:IKistlServiceStreams_FetchRelation_ExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="KistlServiceStreamsEndpoint" type="tns:IKistlServiceStreams">
@@ -95,6 +110,18 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchRelation">
+      <soap:operation soapAction="http://tempuri.org/IKistlServiceStreams/FetchRelation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap:fault use="literal" name="ExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="KistlServiceStreams">

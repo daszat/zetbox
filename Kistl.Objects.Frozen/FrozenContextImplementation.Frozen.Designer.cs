@@ -141,6 +141,11 @@ namespace Kistl.App
 			throw new NotImplementedException();
 		}
 
+        ICollection<T> IKistlContext.FetchRelation<A, B, T>(string collectionEntryClassName, RelationEndRole role, IDataObject parent)
+		{
+			throw new NotImplementedException();
+		}
+
         IPersistenceObject IKistlContext.ContainsObject(Type type, int ID)
         {
 			return Find(type, ID);

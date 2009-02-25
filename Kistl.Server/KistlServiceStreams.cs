@@ -170,5 +170,11 @@ namespace Kistl.Server
                 return null;
             }
         }
+
+        public System.IO.MemoryStream FetchRelation(SerializableType ceType, int role, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

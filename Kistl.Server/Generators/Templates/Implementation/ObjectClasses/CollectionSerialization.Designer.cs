@@ -33,10 +33,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         {
 #line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
 string methodName = direction.ToString();
-
+    
 
 #line 22 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
-this.WriteObjects("            BinarySerializer.",  methodName , "CollectionEntries(this.",  collectionName , ", ",  streamName , ");\r\n");
+this.WriteObjects("			// collections have to be loaded separately for now\r\n");
+this.WriteObjects("            // BinarySerializer.",  methodName , "CollectionEntries(this.",  collectionName , ", ",  streamName , ");\r\n");
 
         }
 

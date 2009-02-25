@@ -37,6 +37,59 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             }
         }
 
+        protected override void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
+        {
+            var rel = NewRelation.Lookup(ctx, prop);
+
+            var relEnd = rel.GetEnd(prop);
+            var otherEnd = relEnd.Other;
+
+            // without navigator, there should be no property
+            if (relEnd.Navigator == null)
+                return;
+
+            switch (rel.GetPreferredStorage())
+            {
+                case StorageHint.MergeA:
+                case StorageHint.MergeB:
+                case StorageHint.Replicate:
+
+                    // simple and direct reference
+                    this.WriteLine("        // object list property");
+                    ApplyObjectListPropertyTemplate(relEnd);
+                    break;
+                case StorageHint.Separate:
+                    this.WriteLine("        // collection reference property");
+                    ApplyCollectionEntryListTemplate(relEnd);
+                    break;
+                default:
+                    throw new NotImplementedException("unknown StorageHint for ObjectReferenceProperty[IsList == true]");
+            }
+        }
+
+        /// <summary>
+        /// Call the ObjectListProperty template for a given RelationEnd
+        /// </summary>
+        /// <param name="relEnd"></param>
+        protected virtual void ApplyObjectListPropertyTemplate(RelationEnd relEnd)
+        {
+            this.Host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty", ctx,
+                this.MembersToSerialize,
+                relEnd);
+        }
+
+        /// <summary>
+        /// Call the CollectionEntryListProperty template for a given RelationEnd
+        /// </summary>
+        /// <param name="relEnd"></param>
+        protected virtual void ApplyCollectionEntryListTemplate(RelationEnd relEnd)
+        {
+            Implementation.ObjectClasses.CollectionEntryListProperty.Call(Host, ctx,
+                this.MembersToSerialize,
+                relEnd);
+        }
+
+
         // HACK: workaround the fact this is missing on the server
         // TODO: remove this and move the client action "OnGetInheritedMethods_ObjectClass" into a common action assembly
         private static void GetMethods(ObjectClass obj, List<Kistl.App.Base.Method> e)

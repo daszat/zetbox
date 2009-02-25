@@ -74,6 +74,9 @@ namespace Kistl.API
         /// <returns>A List of Objects</returns>
         List<T> GetListOf<T>(Type type, int ID, string propertyName) where T : IDataObject;
 
+        ICollection<T> FetchRelation<A, B, T>(string collectionEntryClassName, RelationEndRole role, IDataObject parent)
+            where T : INewCollectionEntry<A, B>;
+
         /// <summary>
         /// Checks if the given Object is already in that Context.
         /// </summary>

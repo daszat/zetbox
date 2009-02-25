@@ -55,18 +55,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 prop);
         }
 
-        protected override void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
+        protected override void ApplyObjectListPropertyTemplate(RelationEnd relEnd)
         {
-            var rel = NewRelation.Lookup(ctx, prop);
-
-            Debug.Assert(rel.A.Navigator == prop || rel.B.Navigator == prop);
-            var relEnd = rel.GetEnd(prop);
-            var otherEnd = relEnd.Other;
-
-            this.WriteLine("        // object list property");
             Implementation.ObjectClasses.ObjectListProperty.Call(Host, ctx,
                  this.MembersToSerialize,
-                 prop);
+                 relEnd.Navigator as ObjectReferenceProperty);
         }
 
         protected override void ApplyStructPropertyTemplate(StructProperty prop)

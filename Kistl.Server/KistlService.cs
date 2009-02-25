@@ -204,6 +204,29 @@ namespace Kistl.Server
             }
         }
 
+        public string FetchRelation(SerializableType ceType, int role, int ID)
+        {
+            try
+            {
+                if (ceType == null) throw new ArgumentNullException("ceType");
+                if (role != 1 && role != 2) throw new ArgumentOutOfRangeException("role");
+
+                using (TraceClient.TraceHelper.TraceMethodCall("{0}", ceType))
+                {
+                    using (IKistlContext ctx = KistlContext.InitSession())
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
+            }
+        }
+
         /// <summary>
         /// Implements the Generate Method
         /// </summary>
@@ -244,5 +267,6 @@ namespace Kistl.Server
                 return null;
             }
         }
+
     }
 }

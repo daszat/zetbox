@@ -17,6 +17,7 @@
 <%
 
     string methodName = direction.ToString();
-
+    
 %>
-            BinarySerializer.<%= methodName %>CollectionEntries(this.<%= collectionName %>, <%= streamName %>);
+			// collections have to be loaded separately for now
+            // BinarySerializer.<%= methodName %>CollectionEntries(this.<%= collectionName %>, <%= streamName %>);

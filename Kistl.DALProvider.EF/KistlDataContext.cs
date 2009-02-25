@@ -182,6 +182,11 @@ namespace Kistl.DALProvider.EF
             //return query.AddOfType<IDataObject>(objType);
         }
 
+        public override ICollection<T> FetchRelation<A, B, T>(string collectionEntryClassName, RelationEndRole role, IDataObject parent)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Checks if the given Object is already in that Context.
         /// </summary>

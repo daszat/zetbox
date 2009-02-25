@@ -1,12 +1,12 @@
 #define USE_STREAMS
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 
 namespace Kistl.API.Client
 {
@@ -15,17 +15,20 @@ namespace Kistl.API.Client
     /// </summary>
     public interface IProxy : IDisposable
     {
-        IEnumerable<Kistl.API.IDataObject> GetList(Type type, int maxListCount, Expression filter, Expression orderBy);
-        IEnumerable<Kistl.API.IDataObject> GetListOf(Type type, int ID, string property);
-        Kistl.API.IDataObject GetObject(Type type, int ID);
-        
-        IEnumerable<Kistl.API.IDataObject> SetObjects(IEnumerable<Kistl.API.IDataObject> objects);
+        IEnumerable<IDataObject> GetList(Type type, int maxListCount, Expression filter, Expression orderBy);
+        IEnumerable<IDataObject> GetListOf(Type type, int ID, string property);
+        IDataObject GetObject(Type type, int ID);
+
+        IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects);
+
+        IEnumerable<T> FetchRelation<A, B, T>(Type ceType, RelationEndRole role, IDataObject parent) 
+            where T : INewCollectionEntry<A, B>;
 
         /// <summary>
         /// Generates Objects &amp; Database. Throws a Exception if failed.
         /// </summary>
         void Generate();
-        
+
         /// <summary>
         /// Hello World.
         /// </summary>
@@ -106,7 +109,7 @@ namespace Kistl.API.Client
             public Kistl.API.IDataObject ObjectFromXml(IKistlContext ctx, string xml)
             {
                 Kistl.API.IDataObject obj = xml.FromXmlString<XMLOBJECT>().Object as Kistl.API.IDataObject;
-                if(ctx != null)
+                if (ctx != null)
                     obj = (Kistl.API.IDataObject)ctx.Attach(obj);
                 return obj;
             }
@@ -320,6 +323,14 @@ namespace Kistl.API.Client
             }
         }
 
+        public IEnumerable<T> FetchRelation<A, B, T>(Type ceType, RelationEndRole role, IDataObject parent)
+            where T : INewCollectionEntry<A, B>
+        {
+            MemoryStream ms = serviceStreams.FetchRelation(new SerializableType(ceType), (int)role, parent.ID);
+
+            return null;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -363,5 +374,7 @@ namespace Kistl.API.Client
             GC.SuppressFinalize(this);
         }
         #endregion
+
+
     }
 }

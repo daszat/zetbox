@@ -160,6 +160,12 @@ namespace Kistl.API.Client
             return ((KistlContextProvider)query.Provider).GetListOf(ID, propertyName).Cast<T>().ToList();
         }
 
+        public ICollection<T> FetchRelation<A, B, T>(string collectionEntryClassName, RelationEndRole role, IDataObject parent)
+            where T : INewCollectionEntry<A, B>
+        {
+            return Proxy.Current.FetchRelation<A, B, T>(typeof(T), role, parent).ToList();
+        }
+
         /// <summary>
         /// Creates a new IDataObject.
         /// </summary>

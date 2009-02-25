@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Kistl.API;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
 
 namespace Kistl.Server.Movables
 {
-
-    /// <summary>
-    /// Arbitrary enum to denote which end a end is.
-    /// </summary>
-    /// Using A and B avoids any legasthenic problems and also collapses natural and semantic ordering.
-    public enum RelationEndRole { A, B };
 
     public class RelationEnd
     {

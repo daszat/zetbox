@@ -558,6 +558,12 @@
       <DependentUpon>Template.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cs" />
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cs" />
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectionEntryListProperty.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -715,6 +721,10 @@
     <None Include="Generators\Templates\Implementation\CollectionEntries\Template.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Template.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CollectionEntryListProperty.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst">
       <Generator>Arebis Template Processor</Generator>

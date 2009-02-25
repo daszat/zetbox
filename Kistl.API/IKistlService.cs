@@ -149,6 +149,18 @@ namespace Kistl.API
         /// <returns></returns>
         [OperationContract]
         System.IO.MemoryStream GetListOf(System.IO.MemoryStream msg);
+
+
+        /// <summary>
+        /// Fetches a list of CollectionEntry objects of the Type <paramref name="ceType"/> which are owned by the object with the ID <paramref name="ID"/> in the role <paramref name="role"/>.
+        /// </summary>
+        /// <param name="ceType">the requested collection entry type</param>
+        /// <param name="role">the parent role (1 == A, 2 == B)</param>
+        /// <param name="ID">the ID of the parent object</param>
+        /// <returns></returns>
+        [OperationContract]
+        [FaultContract(typeof(Exception))]
+        System.IO.MemoryStream FetchRelation(SerializableType ceType, int role, int ID);
     }
 
     /// <summary>
@@ -201,7 +213,18 @@ namespace Kistl.API
         string SetObject(SerializableType type, string xmlObj);
 
         /// <summary>
-        /// Generates Objects &amp; Database. Throws a Exception if failed.
+        /// Fetches a list of CollectionEntry objects of the Type <paramref name="ceType"/> which are owned by the object with the ID <paramref name="ID"/> in the role <paramref name="role"/>.
+        /// </summary>
+        /// <param name="ceType">the requested collection entry type</param>
+        /// <param name="role">the parent role (1 == A, 2 == B)</param>
+        /// <param name="ID">the ID of the parent object</param>
+        /// <returns></returns>
+        [OperationContract]
+        [FaultContract(typeof(Exception))]
+        string FetchRelation(SerializableType ceType, int role, int ID);
+
+        /// <summary>
+        /// Instructs the Server to generate Objects &amp; Database. Throws an Exception on failures.
         /// </summary>
         [OperationContract]
         [FaultContract(typeof(Exception))]

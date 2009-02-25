@@ -130,39 +130,21 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             }
         }
 
+        protected override void ApplyCollectionEntryListTemplate(RelationEnd relEnd)
+        {
+            this.CallTemplate("Implementation.ObjectClasses.CollectionEntryListProperty", ctx,
+                this.MembersToSerialize,
+                relEnd);
+        }
+
         protected override void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
         {
-            var rel = NewRelation.Lookup(ctx, prop);
-
-            Debug.Assert(rel.A.Navigator == prop || rel.B.Navigator == prop);
-            var relEnd = rel.GetEnd(prop);
-            var otherEnd = relEnd.Other;
-
+            // TODO: move debugging output into Templates
             this.WriteLine("    /*");
-            this.CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+            this.CallTemplate("Implementation.RelationDebugTemplate", ctx, NewRelation.Lookup(ctx, prop));
             this.WriteLine("    */");
 
-            switch (rel.GetPreferredStorage())
-            {
-                case StorageHint.MergeA:
-                case StorageHint.MergeB:
-                case StorageHint.Replicate:
-
-                    // simple and direct reference
-                    this.WriteLine("        // object list property");
-                    this.Host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty", ctx,
-                        this.MembersToSerialize,
-                        relEnd);
-                    break;
-                case StorageHint.Separate:
-                    this.WriteLine("        // collection reference property");
-                    this.CallTemplate("Implementation.ObjectClasses.CollectionEntryListProperty", ctx,
-                        this.MembersToSerialize,
-                        relEnd);
-                    break;
-                default:
-                    throw new NotImplementedException("unknown StorageHint for ObjectReferenceProperty[IsList == true]");
-            }
+            base.ApplyObjectReferenceListTemplate(prop);
         }
     }
 }

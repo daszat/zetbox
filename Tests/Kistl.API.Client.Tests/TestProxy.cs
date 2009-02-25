@@ -112,6 +112,11 @@ namespace Kistl.API.Client.Tests
             return result;
         }
 
+        public IEnumerable<T> FetchRelation<A, B, T>(Type ceType, RelationEndRole role, IDataObject parent) where T : INewCollectionEntry<A, B>
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region IDisposable Members
@@ -122,5 +127,6 @@ namespace Kistl.API.Client.Tests
         }
 
         #endregion
+
     }
 }
