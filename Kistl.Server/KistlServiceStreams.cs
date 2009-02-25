@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.ServiceModel.Dispatcher;
 using System.ServiceModel;
 using System.IO;
+using System.Linq.Expressions;
 
 namespace Kistl.Server
 {
@@ -171,9 +172,46 @@ namespace Kistl.Server
             }
         }
 
-        public System.IO.MemoryStream FetchRelation(SerializableType ceType, int role, int ID)
+        public System.IO.MemoryStream FetchRelation(SerializableType ceType, int serializableRole, int ID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (TraceClient.TraceHelper.TraceMethodCall(ceType.ToString()))
+                {
+                    using (IKistlContext ctx = KistlContext.InitSession())
+                    {
+                        RelationEndRole role = (RelationEndRole)serializableRole;
+                        var param = Expression.Parameter(ceType.GetSystemType(), "ce");
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(ceType.GetSystemType())
+                            .GetList(1000, 
+                                Expression.Lambda(
+                                    Expression.Equal(
+                                        Expression.Constant(ID),
+                                        Expression.Property(param, role.ToString())
+                                        ),
+                                param),
+                                null);
+
+                        MemoryStream result = new MemoryStream();
+                        BinaryWriter sw = new BinaryWriter(result);
+                        foreach (IDataObject obj in lst)
+                        {
+                            BinarySerializer.ToStream(true, sw);
+                            obj.ToStream(sw);
+                        }
+                        BinarySerializer.ToStream(false, sw);
+
+                        result.Seek(0, SeekOrigin.Begin);
+                        return result;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
+            }
         }
 
     }

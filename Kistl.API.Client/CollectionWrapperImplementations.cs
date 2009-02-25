@@ -10,12 +10,12 @@ namespace Kistl.API.Client
 {
 
     public sealed class ClientCollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : CollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE, NotifyingObservableCollection<ENTRYTYPE>>
+        : CollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where ENTRYTYPE : BaseClientCollectionEntry, INewCollectionEntry<ATYPE, BTYPE>, new()
     {
-        public ClientCollectionASideWrapper(BTYPE parentObject, NotifyingObservableCollection<ENTRYTYPE> ec)
+        public ClientCollectionASideWrapper(BTYPE parentObject, ICollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
@@ -34,12 +34,12 @@ namespace Kistl.API.Client
     }
 
     public sealed class ClientListASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : ListASideWrapper<ATYPE, BTYPE, ENTRYTYPE, NotifyingObservableCollection<ENTRYTYPE>>
+        : ListASideWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where ENTRYTYPE : BaseClientCollectionEntry,  INewListEntry<ATYPE, BTYPE>, new()
     {
-        public ClientListASideWrapper(BTYPE parentObject, NotifyingObservableCollection<ENTRYTYPE> ec)
+        public ClientListASideWrapper(BTYPE parentObject, ICollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
@@ -57,11 +57,11 @@ namespace Kistl.API.Client
     }
 
     public sealed class ClientCollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : CollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, NotifyingObservableCollection<ENTRYTYPE>>
+        : CollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>
         where ATYPE : class, IDataObject
         where ENTRYTYPE : BaseClientCollectionEntry,  INewCollectionEntry<ATYPE, BTYPE>, new()
     {
-        public ClientCollectionBSideWrapper(ATYPE parentObject, NotifyingObservableCollection<ENTRYTYPE> ec)
+        public ClientCollectionBSideWrapper(ATYPE parentObject, ICollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
@@ -79,11 +79,11 @@ namespace Kistl.API.Client
     }
 
     public sealed class ClientListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : ListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, NotifyingObservableCollection<ENTRYTYPE>>
+        : ListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>
         where ATYPE : class, IDataObject
         where ENTRYTYPE : BaseClientCollectionEntry,  INewListEntry<ATYPE, BTYPE>, new()
     {
-        public ClientListBSideWrapper(ATYPE parentObject, NotifyingObservableCollection<ENTRYTYPE> ec)
+        public ClientListBSideWrapper(ATYPE parentObject, ICollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }

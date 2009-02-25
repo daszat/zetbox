@@ -23,10 +23,10 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected string bSideType;
 		protected string entryType;
 		protected string providerCollectionType;
-		protected string relationName;
+		protected RelationEndRole role;
 
 
-        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, string relationName)
+        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, RelationEndRole role)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -40,7 +40,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.bSideType = bSideType;
 			this.entryType = entryType;
 			this.providerCollectionType = providerCollectionType;
-			this.relationName = relationName;
+			this.role = role;
 
         }
         
@@ -57,7 +57,7 @@ this.WriteObjects("				{\r\n");
 this.WriteObjects("					",  backingName , " \r\n");
 this.WriteObjects("						= new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ">(\r\n");
 this.WriteObjects("							this, \r\n");
-this.WriteObjects("							(",  providerCollectionType , ")Context.FetchRelation(\"",  relationName , "\"));\r\n");
+this.WriteObjects("							(",  providerCollectionType , ")Context.FetchRelation<",  aSideType , ", ",  bSideType , ", ",  entryType , ">(RelationEndRole.",  role , ", this));\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("				return ",  backingName , ";\r\n");
 this.WriteObjects("			}\r\n");

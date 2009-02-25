@@ -27,14 +27,15 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             string bSideType = rel.B.Type.NameDataObject;
             string entryType = rel.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
             string providerCollectionType = "ICollection<" + entryType + ">";
-            string relationName = rel.GetCollectionEntryClassName();
+
+            RelationEndRole role = relEnd.Role;
 
             host.CallTemplate("Implementation.ObjectClasses.CollectionEntryListProperty",
                 ctx, serializationList,
                 name, exposedCollectionInterface, referencedInterface,
                 backingName, backingCollectionType, aSideType, bSideType, entryType,
                 providerCollectionType,
-                relationName);
+                role);
         }
     }
 }

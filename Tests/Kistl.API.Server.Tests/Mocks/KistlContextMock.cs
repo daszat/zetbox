@@ -82,7 +82,7 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public override ICollection<T> FetchRelation<A, B, T>(string collectionEntryClassName, RelationEndRole role, IDataObject parent)
+        public override ICollection<T> FetchRelation<A, B, T>(RelationEndRole role, IDataObject parent)
         {
             throw new NotImplementedException();
         }
