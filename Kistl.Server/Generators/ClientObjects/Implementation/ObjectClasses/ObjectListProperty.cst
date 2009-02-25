@@ -12,31 +12,16 @@
 <%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
-<%@ Parameter Name="prop" Type="ObjectReferenceProperty" %>
-<%
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="wrapperName" Type="string" %>
+<%@ Parameter Name="wrapperClass" Type="string" %>
+<%@ Parameter Name="exposedListType" Type="string" %>
+<%@ Parameter Name="rel" Type="NewRelation" %>
+<%@ Parameter Name="relEnd" Type="RelationEnd" %>
+<%@ Parameter Name="otherEnd" Type="RelationEnd" %>
+<%@ Parameter Name="otherName" Type="string" %>
+<%@ Parameter Name="referencedInterface" Type="string" %>
 
-    Debug.Assert(prop.IsList);
-
-    var rel = NewRelation.Lookup(ctx, prop);
-    var relEnd = rel.GetEnd(prop);
-    var otherEnd = relEnd.Other;
-    var otherName = otherEnd.Navigator == null ? relEnd.RoleName : otherEnd.Navigator.PropertyName;
-
-	// the name of the property to create
-	string name = prop.PropertyName;
-	// the name of the private backing store for the conversion wrapper list
-	string wrapperName = "_" + name + "Wrapper";
-	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = "BackReferenceCollection";
-	
-	// which generic interface to use for the collection
-	string exposedListType = prop.IsIndexed ? "IList" : "ICollection";
-
-	// which Kistl interface this list contains
-	string referencedInterface = otherEnd.Type.NameDataObject;
-
-	
-%>
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

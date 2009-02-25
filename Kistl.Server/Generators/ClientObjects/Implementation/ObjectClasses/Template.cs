@@ -64,9 +64,9 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             var otherEnd = relEnd.Other;
 
             this.WriteLine("        // object list property");
-            this.Host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty", ctx,
-                this.MembersToSerialize,
-                prop);
+            Implementation.ObjectClasses.ObjectListProperty.Call(Host, ctx,
+                 this.MembersToSerialize,
+                 prop);
         }
 
         protected override void ApplyStructPropertyTemplate(StructProperty prop)
