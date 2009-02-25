@@ -382,9 +382,9 @@ namespace Kistl.App.Zeiterfassung
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Datum, binStream);
             BinarySerializer.ToStream(this._Dauer, binStream);
-            BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
-            BinarySerializer.ToStream(this._fk_TaetigkeitsArt, binStream);
-            BinarySerializer.ToStream(this._fk_Zeitkonto, binStream);
+            BinarySerializer.ToStream(this.fk_Mitarbeiter, binStream);
+            BinarySerializer.ToStream(this.fk_TaetigkeitsArt, binStream);
+            BinarySerializer.ToStream(this.fk_Zeitkonto, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -392,9 +392,21 @@ namespace Kistl.App.Zeiterfassung
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Datum, binStream);
             BinarySerializer.FromStream(out this._Dauer, binStream);
-            BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
-            BinarySerializer.FromStream(out this._fk_TaetigkeitsArt, binStream);
-            BinarySerializer.FromStream(out this._fk_Zeitkonto, binStream);
+            {
+                var tmp = this.fk_Mitarbeiter;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Mitarbeiter = tmp;
+            }
+            {
+                var tmp = this.fk_TaetigkeitsArt;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_TaetigkeitsArt = tmp;
+            }
+            {
+                var tmp = this.fk_Zeitkonto;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Zeitkonto = tmp;
+            }
         }
 
 #endregion

@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetParameterType();
+                e.Result = base.GetParameterType();
             }
             return e.Result;
         }
@@ -140,7 +140,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetParameterTypeString();
+                e.Result = base.GetParameterTypeString();
             }
             return e.Result;
         }
@@ -191,13 +191,17 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_DataType, binStream);
+            BinarySerializer.ToStream(this.fk_DataType, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_DataType, binStream);
+            {
+                var tmp = this.fk_DataType;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_DataType = tmp;
+            }
         }
 
 #endregion

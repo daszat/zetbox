@@ -26,6 +26,7 @@ namespace Kistl.App.Base
         /// Einträge der Enumeration
         /// </summary>
         // object list property
+
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -65,7 +66,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataType();
+                e.Result = base.GetDataType();
             }
             return e.Result;
         }
@@ -86,7 +87,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataTypeString();
+                e.Result = base.GetDataTypeString();
             }
             return e.Result;
         }

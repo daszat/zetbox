@@ -304,7 +304,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Assembly, binStream);
+            BinarySerializer.ToStream(this.fk_Assembly, binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
             BinarySerializer.ToStream((int)((ControlInfo)this).ControlType, binStream);
             BinarySerializer.ToStream(this._IsContainer, binStream);
@@ -314,7 +314,11 @@ namespace Kistl.App.GUI
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Assembly, binStream);
+            {
+                var tmp = this.fk_Assembly;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Assembly = tmp;
+            }
             BinarySerializer.FromStream(out this._ClassName, binStream);
             BinarySerializer.FromStreamConverter(v => ((ControlInfo)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._IsContainer, binStream);

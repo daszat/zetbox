@@ -39,7 +39,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetParameterType();
+                e.Result = base.GetParameterType();
             }
             return e.Result;
         }
@@ -60,7 +60,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetParameterTypeString();
+                e.Result = base.GetParameterTypeString();
             }
             return e.Result;
         }

@@ -290,17 +290,25 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_LayoutRef, binStream);
+            BinarySerializer.ToStream(this.fk_LayoutRef, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
-            BinarySerializer.ToStream(this._fk_ViewRef, binStream);
+            BinarySerializer.ToStream(this.fk_ViewRef, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_LayoutRef, binStream);
+            {
+                var tmp = this.fk_LayoutRef;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_LayoutRef = tmp;
+            }
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
-            BinarySerializer.FromStream(out this._fk_ViewRef, binStream);
+            {
+                var tmp = this.fk_ViewRef;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_ViewRef = tmp;
+            }
         }
 
 #endregion

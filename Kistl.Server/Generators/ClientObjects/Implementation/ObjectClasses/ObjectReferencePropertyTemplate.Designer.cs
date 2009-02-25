@@ -163,8 +163,6 @@ AddSerialization(serializationList, fkBackingName);
 			"int?", posStorageName);
 	}
 
-#line 131 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("       ");
 
         }
 

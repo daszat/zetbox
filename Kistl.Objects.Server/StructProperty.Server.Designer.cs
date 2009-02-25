@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetGUIRepresentation();
+                e.Result = base.GetGUIRepresentation();
             }
             return e.Result;
         }
@@ -140,7 +140,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetPropertyType();
+                e.Result = base.GetPropertyType();
             }
             return e.Result;
         }
@@ -161,7 +161,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetPropertyTypeString();
+                e.Result = base.GetPropertyTypeString();
             }
             return e.Result;
         }
@@ -212,13 +212,17 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_StructDefinition, binStream);
+            BinarySerializer.ToStream(this.fk_StructDefinition, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_StructDefinition, binStream);
+            {
+                var tmp = this.fk_StructDefinition;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_StructDefinition = tmp;
+            }
         }
 
 #endregion

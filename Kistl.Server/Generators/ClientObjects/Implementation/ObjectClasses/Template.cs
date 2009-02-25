@@ -55,13 +55,6 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 prop);
         }
 
-        protected override void ApplyObjectListPropertyTemplate(RelationEnd relEnd)
-        {
-            Implementation.ObjectClasses.ObjectListProperty.Call(Host, ctx,
-                 this.MembersToSerialize,
-                 relEnd.Navigator as ObjectReferenceProperty);
-        }
-
         protected override void ApplyStructPropertyTemplate(StructProperty prop)
         {
             this.WriteLine("        // struct property");
@@ -70,12 +63,17 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 prop);
         }
 
+        protected override void ApplyObjectListPropertyTemplate(RelationEnd relEnd)
+        {
+            Implementation.ObjectClasses.ObjectListProperty.Call(Host, ctx,
+                 this.MembersToSerialize,
+                 relEnd.Navigator as ObjectReferenceProperty);
+        }
+
         protected override void ApplyValueTypeListTemplate(ValueTypeProperty prop)
         {
             this.WriteLine("        // value list property");
-            this.Host.CallTemplate("Implementation.ObjectClasses.ValueCollectionProperty", ctx,
-                this.MembersToSerialize,
-                prop);
+            Implementation.ObjectClasses.ValueCollectionProperty.Call(Host, ctx, MembersToSerialize, prop);
         }
 
     }

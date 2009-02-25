@@ -25,7 +25,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Assemblies des Moduls
         /// </summary>
-        // object reference list property
+        // object list property
         public virtual ICollection<Kistl.App.Base.Assembly> Assemblies
         {
             get
@@ -48,7 +48,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Datentypendes Modules
         /// </summary>
-        // object reference list property
+        // object list property
         public virtual ICollection<Kistl.App.Base.DataType> DataTypes
         {
             get

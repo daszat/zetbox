@@ -243,7 +243,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._AssemblyName, binStream);
             BinarySerializer.ToStream(this._IsClientAssembly, binStream);
-            BinarySerializer.ToStream(this._fk_Module, binStream);
+            BinarySerializer.ToStream(this.fk_Module, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -251,7 +251,11 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._AssemblyName, binStream);
             BinarySerializer.FromStream(out this._IsClientAssembly, binStream);
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
+            {
+                var tmp = this.fk_Module;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Module = tmp;
+            }
         }
 
 #endregion

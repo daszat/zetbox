@@ -92,32 +92,24 @@ namespace Kistl.App.Base
         /// <summary>
         /// list of type arguments
         /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public IList<Kistl.App.Base.TypeRef> GenericArguments
-        {
-            get
-            {
-                if (_GenericArgumentsWrapper == null)
-                {
-                    List<Kistl.App.Base.TypeRef> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.TypeRef>(this, "GenericArguments");
-                    else
-                        serverList = new List<Kistl.App.Base.TypeRef>();
-                        
-                    _GenericArgumentsWrapper = new BackReferenceCollection<Kistl.App.Base.TypeRef>(
-                        "TypeRef",
-                        this,
-                        serverList);
-                }
-                return _GenericArgumentsWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.Base.TypeRef> _GenericArgumentsWrapper;
+        // collection reference property
+
+		public IList<Kistl.App.Base.TypeRef> GenericArguments
+		{
+			get
+			{
+				if (_GenericArguments == null)
+				{
+					_GenericArguments 
+						= new ClientListBSideWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments46CollectionEntry__Implementation__>(
+							this, 
+							(ICollection<TypeRef_GenericArguments46CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments46CollectionEntry__Implementation__>(RelationEndRole.A, this));
+				}
+				return _GenericArguments;
+			}
+		}
+
+		private ClientListBSideWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments46CollectionEntry__Implementation__> _GenericArguments;
 
         /// <summary>
         /// get the referenced <see cref="System.Type"/>

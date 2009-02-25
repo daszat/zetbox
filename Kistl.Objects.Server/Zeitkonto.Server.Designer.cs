@@ -263,7 +263,8 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.ToStream(this._AktuelleStunden, binStream);
             BinarySerializer.ToStream(this._Kontoname, binStream);
             BinarySerializer.ToStream(this._MaxStunden, binStream);
-            BinarySerializer.ToStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.ToStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -272,7 +273,8 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.FromStream(out this._AktuelleStunden, binStream);
             BinarySerializer.FromStream(out this._Kontoname, binStream);
             BinarySerializer.FromStream(out this._MaxStunden, binStream);
-            BinarySerializer.FromStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.FromStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
         }
 
 #endregion

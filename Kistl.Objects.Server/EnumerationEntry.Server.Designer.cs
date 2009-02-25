@@ -247,7 +247,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._fk_Enumeration, binStream);
+            BinarySerializer.ToStream(this.fk_Enumeration, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._Value, binStream);
         }
@@ -256,7 +256,11 @@ namespace Kistl.App.Base
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._fk_Enumeration, binStream);
+            {
+                var tmp = this.fk_Enumeration;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Enumeration = tmp;
+            }
             BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._Value, binStream);
         }

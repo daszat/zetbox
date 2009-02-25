@@ -12,17 +12,22 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
     {
         protected override void ApplyObjectReferenceProperty(RelationEnd relEnd, string propertyName)
         {
+            string backingName = propertyName + Kistl.API.Helper.ImplementationSuffix;
+            string fkName = "fk_" + propertyName;
+
             ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx, MembersToSerialize,
-               propertyName, relEnd.Type.NameDataObject, relEnd.Container, relEnd);
+               propertyName, backingName, fkName, "_" + fkName,
+                relEnd.Type.NameDataObject, relEnd.Container, relEnd, relEnd.Other,
+                false, relEnd.Other.HasPersistentOrder);
         }
 
         protected override void ApplyIndexPropertyTemplate(RelationEnd relEnd, string side)
         {
-            if (relEnd.HasPersistentOrder)
+            if (relEnd.Other.HasPersistentOrder)
             {
                 this.MembersToSerialize.Add("_" + side + Kistl.API.Helper.PositionSuffix);
-                this.WriteObjects("public int? ", side, "Index { get { return ", 
-                    side, Kistl.API.Helper.PositionSuffix, "; } set { ", 
+                this.WriteObjects("public int? ", side, "Index { get { return ",
+                    side, Kistl.API.Helper.PositionSuffix, "; } set { ",
                     side, Kistl.API.Helper.PositionSuffix, " = value; } }");
             }
             else if (IsOrdered())

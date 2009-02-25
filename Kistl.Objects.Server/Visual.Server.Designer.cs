@@ -410,23 +410,35 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStreamCollectionEntries(this.Children__Implementation__, binStream);
-            BinarySerializer.ToStreamCollectionEntries(this.ContextMenu__Implementation__, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.ToStreamCollectionEntries(this.Children__Implementation__, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.ToStreamCollectionEntries(this.ContextMenu__Implementation__, binStream);
             BinarySerializer.ToStream((int)((Visual)this).ControlType, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._fk_Method, binStream);
-            BinarySerializer.ToStream(this._fk_Property, binStream);
+            BinarySerializer.ToStream(this.fk_Method, binStream);
+            BinarySerializer.ToStream(this.fk_Property, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStreamCollectionEntries(this.Children__Implementation__, binStream);
-            BinarySerializer.FromStreamCollectionEntries(this.ContextMenu__Implementation__, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.FromStreamCollectionEntries(this.Children__Implementation__, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.FromStreamCollectionEntries(this.ContextMenu__Implementation__, binStream);
             BinarySerializer.FromStreamConverter(v => ((Visual)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._fk_Method, binStream);
-            BinarySerializer.FromStream(out this._fk_Property, binStream);
+            {
+                var tmp = this.fk_Method;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Method = tmp;
+            }
+            {
+                var tmp = this.fk_Property;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Property = tmp;
+            }
         }
 
 #endregion

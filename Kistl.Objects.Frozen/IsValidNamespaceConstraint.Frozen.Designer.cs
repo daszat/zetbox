@@ -35,7 +35,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetErrorText(constrainedValue, constrainedObject);
+                e.Result = base.GetErrorText(constrainedValue, constrainedObject);
             }
             return e.Result;
         }
@@ -56,7 +56,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.IsValid(constrainedValue, constrainedObj);
+                e.Result = base.IsValid(constrainedValue, constrainedObj);
             }
             return e.Result;
         }

@@ -145,7 +145,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetGUIRepresentation();
+                e.Result = base.GetGUIRepresentation();
             }
             return e.Result;
         }
@@ -166,7 +166,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetPropertyType();
+                e.Result = base.GetPropertyType();
             }
             return e.Result;
         }
@@ -187,7 +187,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetPropertyTypeString();
+                e.Result = base.GetPropertyTypeString();
             }
             return e.Result;
         }
@@ -239,14 +239,18 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._PreFetchToClient, binStream);
-            BinarySerializer.ToStream(this._fk_ReferenceProperty, binStream);
+            BinarySerializer.ToStream(this.fk_ReferenceProperty, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._PreFetchToClient, binStream);
-            BinarySerializer.FromStream(out this._fk_ReferenceProperty, binStream);
+            {
+                var tmp = this.fk_ReferenceProperty;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_ReferenceProperty = tmp;
+            }
         }
 
 #endregion

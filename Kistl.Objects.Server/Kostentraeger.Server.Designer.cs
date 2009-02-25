@@ -149,13 +149,17 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Projekt, binStream);
+            BinarySerializer.ToStream(this.fk_Projekt, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Projekt, binStream);
+            {
+                var tmp = this.fk_Projekt;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Projekt = tmp;
+            }
         }
 
 #endregion

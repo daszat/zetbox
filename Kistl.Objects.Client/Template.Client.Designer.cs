@@ -115,32 +115,24 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The main menu for this Template
         /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.GUI.Visual> Menu
-        {
-            get
-            {
-                if (_MenuWrapper == null)
-                {
-                    List<Kistl.App.GUI.Visual> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.GUI.Visual>(this, "Menu");
-                    else
-                        serverList = new List<Kistl.App.GUI.Visual>();
-                        
-                    _MenuWrapper = new BackReferenceCollection<Kistl.App.GUI.Visual>(
-                        "Template",
-                        this,
-                        serverList);
-                }
-                return _MenuWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.GUI.Visual> _MenuWrapper;
+        // collection reference property
+
+		public ICollection<Kistl.App.GUI.Visual> Menu
+		{
+			get
+			{
+				if (_Menu == null)
+				{
+					_Menu 
+						= new ClientCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_Menu41CollectionEntry__Implementation__>(
+							this, 
+							(ICollection<Template_Menu41CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_Menu41CollectionEntry__Implementation__>(RelationEndRole.A, this));
+				}
+				return _Menu;
+			}
+		}
+
+		private ClientCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_Menu41CollectionEntry__Implementation__> _Menu;
 
         /// <summary>
         /// The visual representation of this Template

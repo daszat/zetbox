@@ -71,32 +71,24 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Projekte des Mitarbeiters für die er Verantwortlich ist
         /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public IList<Kistl.App.Projekte.Projekt> Projekte
-        {
-            get
-            {
-                if (_ProjekteWrapper == null)
-                {
-                    List<Kistl.App.Projekte.Projekt> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Projekte.Projekt>(this, "Projekte");
-                    else
-                        serverList = new List<Kistl.App.Projekte.Projekt>();
-                        
-                    _ProjekteWrapper = new BackReferenceCollection<Kistl.App.Projekte.Projekt>(
-                        "Mitarbeiter",
-                        this,
-                        serverList);
-                }
-                return _ProjekteWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.Projekte.Projekt> _ProjekteWrapper;
+        // collection reference property
+
+		public IList<Kistl.App.Projekte.Projekt> Projekte
+		{
+			get
+			{
+				if (_Projekte == null)
+				{
+					_Projekte 
+						= new ClientListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter3CollectionEntry__Implementation__>(
+							this, 
+							(ICollection<Projekt_Mitarbeiter3CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter3CollectionEntry__Implementation__>(RelationEndRole.B, this));
+				}
+				return _Projekte;
+			}
+		}
+
+		private ClientListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter3CollectionEntry__Implementation__> _Projekte;
 
         /// <summary>
         /// NNNN TTMMYY

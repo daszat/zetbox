@@ -368,21 +368,31 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_DisplayedTypeAssembly, binStream);
+            BinarySerializer.ToStream(this.fk_DisplayedTypeAssembly, binStream);
             BinarySerializer.ToStream(this._DisplayedTypeFullName, binStream);
             BinarySerializer.ToStream(this._DisplayName, binStream);
-            BinarySerializer.ToStreamCollectionEntries(this.Menu__Implementation__, binStream);
-            BinarySerializer.ToStream(this._fk_VisualTree, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.ToStreamCollectionEntries(this.Menu__Implementation__, binStream);
+            BinarySerializer.ToStream(this.fk_VisualTree, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_DisplayedTypeAssembly, binStream);
+            {
+                var tmp = this.fk_DisplayedTypeAssembly;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_DisplayedTypeAssembly = tmp;
+            }
             BinarySerializer.FromStream(out this._DisplayedTypeFullName, binStream);
             BinarySerializer.FromStream(out this._DisplayName, binStream);
-            BinarySerializer.FromStreamCollectionEntries(this.Menu__Implementation__, binStream);
-            BinarySerializer.FromStream(out this._fk_VisualTree, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.FromStreamCollectionEntries(this.Menu__Implementation__, binStream);
+            {
+                var tmp = this.fk_VisualTree;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_VisualTree = tmp;
+            }
         }
 
 #endregion

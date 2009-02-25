@@ -486,18 +486,26 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
-            BinarySerializer.ToStream(this._fk_DefaultIcon, binStream);
+            BinarySerializer.ToStream(this.fk_DefaultIcon, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._fk_Module, binStream);
+            BinarySerializer.ToStream(this.fk_Module, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._ClassName, binStream);
-            BinarySerializer.FromStream(out this._fk_DefaultIcon, binStream);
+            {
+                var tmp = this.fk_DefaultIcon;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_DefaultIcon = tmp;
+            }
             BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
+            {
+                var tmp = this.fk_Module;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Module = tmp;
+            }
         }
 
 #endregion

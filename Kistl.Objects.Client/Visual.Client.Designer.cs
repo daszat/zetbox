@@ -25,62 +25,46 @@ namespace Kistl.App.GUI
         /// <summary>
         /// if this is a container, here are the visually contained/controlled children of this Visual
         /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.GUI.Visual> Children
-        {
-            get
-            {
-                if (_ChildrenWrapper == null)
-                {
-                    List<Kistl.App.GUI.Visual> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.GUI.Visual>(this, "Children");
-                    else
-                        serverList = new List<Kistl.App.GUI.Visual>();
-                        
-                    _ChildrenWrapper = new BackReferenceCollection<Kistl.App.GUI.Visual>(
-                        "Visual",
-                        this,
-                        serverList);
-                }
-                return _ChildrenWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.GUI.Visual> _ChildrenWrapper;
+        // collection reference property
+
+		public ICollection<Kistl.App.GUI.Visual> Children
+		{
+			get
+			{
+				if (_Children == null)
+				{
+					_Children 
+						= new ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children35CollectionEntry__Implementation__>(
+							this, 
+							(ICollection<Visual_Children35CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children35CollectionEntry__Implementation__>(RelationEndRole.A, this));
+				}
+				return _Children;
+			}
+		}
+
+		private ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children35CollectionEntry__Implementation__> _Children;
 
         /// <summary>
         /// The context menu for this Visual
         /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.GUI.Visual> ContextMenu
-        {
-            get
-            {
-                if (_ContextMenuWrapper == null)
-                {
-                    List<Kistl.App.GUI.Visual> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.GUI.Visual>(this, "ContextMenu");
-                    else
-                        serverList = new List<Kistl.App.GUI.Visual>();
-                        
-                    _ContextMenuWrapper = new BackReferenceCollection<Kistl.App.GUI.Visual>(
-                        "Visual",
-                        this,
-                        serverList);
-                }
-                return _ContextMenuWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.GUI.Visual> _ContextMenuWrapper;
+        // collection reference property
+
+		public ICollection<Kistl.App.GUI.Visual> ContextMenu
+		{
+			get
+			{
+				if (_ContextMenu == null)
+				{
+					_ContextMenu 
+						= new ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu40CollectionEntry__Implementation__>(
+							this, 
+							(ICollection<Visual_ContextMenu40CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu40CollectionEntry__Implementation__>(RelationEndRole.A, this));
+				}
+				return _ContextMenu;
+			}
+		}
+
+		private ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu40CollectionEntry__Implementation__> _ContextMenu;
 
         /// <summary>
         /// Which visual is represented here

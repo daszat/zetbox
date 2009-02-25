@@ -26,6 +26,7 @@ namespace Kistl.App.Base
         /// Assemblies des Moduls
         /// </summary>
         // object list property
+
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -56,6 +57,7 @@ namespace Kistl.App.Base
         /// Datentypendes Modules
         /// </summary>
         // object list property
+
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

@@ -125,32 +125,24 @@ namespace Kistl.App.Base
         /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
-        {
-            get
-            {
-                if (_ImplementsInterfacesWrapper == null)
-                {
-                    List<Kistl.App.Base.Interface> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.Interface>(this, "ImplementsInterfaces");
-                    else
-                        serverList = new List<Kistl.App.Base.Interface>();
-                        
-                    _ImplementsInterfacesWrapper = new BackReferenceCollection<Kistl.App.Base.Interface>(
-                        "ObjectClass",
-                        this,
-                        serverList);
-                }
-                return _ImplementsInterfacesWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.Base.Interface> _ImplementsInterfacesWrapper;
+        // collection reference property
+
+		public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
+		{
+			get
+			{
+				if (_ImplementsInterfaces == null)
+				{
+					_ImplementsInterfaces 
+						= new ClientCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__>(
+							this, 
+							(ICollection<ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__>(RelationEndRole.A, this));
+				}
+				return _ImplementsInterfaces;
+			}
+		}
+
+		private ClientCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__> _ImplementsInterfaces;
 
         /// <summary>
         /// if true then all Instances appear in FozenContext.
@@ -202,6 +194,7 @@ namespace Kistl.App.Base
         /// Liste der vererbten Klassen
         /// </summary>
         // object list property
+
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -264,7 +257,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataType();
+                e.Result = base.GetDataType();
             }
             return e.Result;
         }
@@ -285,7 +278,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataTypeString();
+                e.Result = base.GetDataTypeString();
             }
             return e.Result;
         }

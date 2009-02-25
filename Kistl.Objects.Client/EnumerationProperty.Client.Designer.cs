@@ -79,7 +79,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetGUIRepresentation();
+                e.Result = base.GetGUIRepresentation();
             }
             return e.Result;
         }
@@ -100,7 +100,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetPropertyType();
+                e.Result = base.GetPropertyType();
             }
             return e.Result;
         }
@@ -121,7 +121,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetPropertyTypeString();
+                e.Result = base.GetPropertyTypeString();
             }
             return e.Result;
         }

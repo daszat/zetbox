@@ -48,7 +48,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The list of constraints applying to this Property
         /// </summary>
-        // object reference list property
+        // object list property
         public virtual ICollection<Kistl.App.Base.Constraint> Constraints
         {
             get

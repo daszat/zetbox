@@ -25,7 +25,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Einträge der Enumeration
         /// </summary>
-        // object reference list property
+        // object list property
         public virtual ICollection<Kistl.App.Base.EnumerationEntry> EnumerationEntries
         {
             get
@@ -58,7 +58,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataType();
+                e.Result = base.GetDataType();
             }
             return e.Result;
         }
@@ -79,7 +79,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataTypeString();
+                e.Result = base.GetDataTypeString();
             }
             return e.Result;
         }

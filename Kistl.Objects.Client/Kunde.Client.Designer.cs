@@ -49,20 +49,23 @@ namespace Kistl.App.Projekte
         /// EMails des Kunden - können mehrere sein
         /// </summary>
         // value list property
-        public ICollection<string> EMails
-        {
-            get
-            {
-                if (_EMailsWrapper == null)
-                {
-                    _EMailsWrapper = new NewListPropertyCollection<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__>(
-                        this,
-                        "EMails");
-                }
-                return _EMailsWrapper;
-            }
-        }
-        private NewListPropertyCollection<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__> _EMailsWrapper;
+
+		public ICollection<string> EMails
+		{
+			get
+			{
+				if (_EMailsWrapper == null)
+				{
+					_EMailsWrapper 
+						= new ClientCollectionBSideWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__>(
+							this, 
+							(ICollection<Kunde_EMailsCollectionEntry__Implementation__>)Context.FetchRelation<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__>(RelationEndRole.B, this));
+				}
+				return _EMailsWrapper;
+			}
+		}
+
+		private ClientCollectionBSideWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__> _EMailsWrapper;
 
         /// <summary>
         /// Name des Kunden
@@ -200,8 +203,10 @@ namespace Kistl.App.Projekte
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Adresse, binStream);
-            BinarySerializer.ToStreamCollectionEntries(this._EMailsWrapper.UnderlyingCollection, binStream);
-            BinarySerializer.ToStreamCollectionEntries(this._EMailsWrapper.DeletedCollection, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.ToStreamCollectionEntries(this._EMailsWrapper.UnderlyingCollection, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.ToStreamCollectionEntries(this._EMailsWrapper.DeletedCollection, binStream);
             BinarySerializer.ToStream(this._Kundenname, binStream);
             BinarySerializer.ToStream(this._Land, binStream);
             BinarySerializer.ToStream(this._Ort, binStream);
@@ -212,8 +217,10 @@ namespace Kistl.App.Projekte
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Adresse, binStream);
-            BinarySerializer.FromStreamCollectionEntries(this._EMailsWrapper.UnderlyingCollection, binStream);
-            BinarySerializer.FromStreamCollectionEntries(this._EMailsWrapper.DeletedCollection, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.FromStreamCollectionEntries(this._EMailsWrapper.UnderlyingCollection, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.FromStreamCollectionEntries(this._EMailsWrapper.DeletedCollection, binStream);
             BinarySerializer.FromStream(out this._Kundenname, binStream);
             BinarySerializer.FromStream(out this._Land, binStream);
             BinarySerializer.FromStream(out this._Ort, binStream);

@@ -145,7 +145,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetParameterType();
+                e.Result = base.GetParameterType();
             }
             return e.Result;
         }
@@ -166,7 +166,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetParameterTypeString();
+                e.Result = base.GetParameterTypeString();
             }
             return e.Result;
         }
@@ -217,14 +217,18 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Assembly, binStream);
+            BinarySerializer.ToStream(this.fk_Assembly, binStream);
             BinarySerializer.ToStream(this._FullTypeName, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Assembly, binStream);
+            {
+                var tmp = this.fk_Assembly;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Assembly = tmp;
+            }
             BinarySerializer.FromStream(out this._FullTypeName, binStream);
         }
 

@@ -434,21 +434,37 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_Implementor, binStream);
-            BinarySerializer.ToStream(this._fk_InvokeOnObjectClass, binStream);
+            BinarySerializer.ToStream(this.fk_Implementor, binStream);
+            BinarySerializer.ToStream(this.fk_InvokeOnObjectClass, binStream);
             BinarySerializer.ToStream(this._MemberName, binStream);
-            BinarySerializer.ToStream(this._fk_Method, binStream);
-            BinarySerializer.ToStream(this._fk_Module, binStream);
+            BinarySerializer.ToStream(this.fk_Method, binStream);
+            BinarySerializer.ToStream(this.fk_Module, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Implementor, binStream);
-            BinarySerializer.FromStream(out this._fk_InvokeOnObjectClass, binStream);
+            {
+                var tmp = this.fk_Implementor;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Implementor = tmp;
+            }
+            {
+                var tmp = this.fk_InvokeOnObjectClass;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_InvokeOnObjectClass = tmp;
+            }
             BinarySerializer.FromStream(out this._MemberName, binStream);
-            BinarySerializer.FromStream(out this._fk_Method, binStream);
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
+            {
+                var tmp = this.fk_Method;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Method = tmp;
+            }
+            {
+                var tmp = this.fk_Module;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Module = tmp;
+            }
         }
 
 #endregion

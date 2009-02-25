@@ -238,14 +238,18 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_ConstrainedProperty, binStream);
+            BinarySerializer.ToStream(this.fk_ConstrainedProperty, binStream);
             BinarySerializer.ToStream(this._Reason, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_ConstrainedProperty, binStream);
+            {
+                var tmp = this.fk_ConstrainedProperty;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_ConstrainedProperty = tmp;
+            }
             BinarySerializer.FromStream(out this._Reason, binStream);
         }
 

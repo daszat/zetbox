@@ -35,7 +35,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataType();
+                e.Result = base.GetDataType();
             }
             return e.Result;
         }
@@ -56,7 +56,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataTypeString();
+                e.Result = base.GetDataTypeString();
             }
             return e.Result;
         }

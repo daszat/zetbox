@@ -441,8 +441,8 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._AltText, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._fk_Module, binStream);
-            BinarySerializer.ToStream(this._fk_ObjectClass, binStream);
+            BinarySerializer.ToStream(this.fk_Module, binStream);
+            BinarySerializer.ToStream(this.fk_ObjectClass, binStream);
             BinarySerializer.ToStream(this._PropertyName, binStream);
         }
 
@@ -451,8 +451,16 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._AltText, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._fk_Module, binStream);
-            BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
+            {
+                var tmp = this.fk_Module;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Module = tmp;
+            }
+            {
+                var tmp = this.fk_ObjectClass;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_ObjectClass = tmp;
+            }
             BinarySerializer.FromStream(out this._PropertyName, binStream);
         }
 

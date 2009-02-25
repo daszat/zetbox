@@ -71,7 +71,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
-        // object reference list property
+        // collection reference property
         public virtual ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
         {
             get
@@ -140,7 +140,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Liste der vererbten Klassen
         /// </summary>
-        // object reference list property
+        // object list property
         public virtual ICollection<Kistl.App.Base.ObjectClass> SubClasses
         {
             get
@@ -196,7 +196,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataType();
+                e.Result = base.GetDataType();
             }
             return e.Result;
         }
@@ -217,7 +217,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataTypeString();
+                e.Result = base.GetDataTypeString();
             }
             return e.Result;
         }

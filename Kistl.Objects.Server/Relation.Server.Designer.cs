@@ -317,8 +317,8 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._fk_LeftPart, binStream);
-            BinarySerializer.ToStream(this._fk_RightPart, binStream);
+            BinarySerializer.ToStream(this.fk_LeftPart, binStream);
+            BinarySerializer.ToStream(this.fk_RightPart, binStream);
             BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
         }
 
@@ -326,8 +326,16 @@ namespace Kistl.App.Base
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._fk_LeftPart, binStream);
-            BinarySerializer.FromStream(out this._fk_RightPart, binStream);
+            {
+                var tmp = this.fk_LeftPart;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_LeftPart = tmp;
+            }
+            {
+                var tmp = this.fk_RightPart;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_RightPart = tmp;
+            }
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
         }
 

@@ -343,9 +343,9 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream((int)((PresenterInfo)this).ControlType, binStream);
-            BinarySerializer.ToStream(this._fk_DataAssembly, binStream);
+            BinarySerializer.ToStream(this.fk_DataAssembly, binStream);
             BinarySerializer.ToStream(this._DataTypeName, binStream);
-            BinarySerializer.ToStream(this._fk_PresenterAssembly, binStream);
+            BinarySerializer.ToStream(this.fk_PresenterAssembly, binStream);
             BinarySerializer.ToStream(this._PresenterTypeName, binStream);
         }
 
@@ -353,9 +353,17 @@ namespace Kistl.App.GUI
         {
             base.FromStream(binStream);
             BinarySerializer.FromStreamConverter(v => ((PresenterInfo)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
-            BinarySerializer.FromStream(out this._fk_DataAssembly, binStream);
+            {
+                var tmp = this.fk_DataAssembly;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_DataAssembly = tmp;
+            }
             BinarySerializer.FromStream(out this._DataTypeName, binStream);
-            BinarySerializer.FromStream(out this._fk_PresenterAssembly, binStream);
+            {
+                var tmp = this.fk_PresenterAssembly;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_PresenterAssembly = tmp;
+            }
             BinarySerializer.FromStream(out this._PresenterTypeName, binStream);
         }
 

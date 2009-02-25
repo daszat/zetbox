@@ -71,7 +71,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// list of type arguments
         /// </summary>
-        // object reference list property
+        // collection reference property
         public virtual IList<Kistl.App.Base.TypeRef> GenericArguments
         {
             get

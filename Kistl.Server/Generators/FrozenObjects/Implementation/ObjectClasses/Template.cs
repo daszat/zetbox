@@ -56,6 +56,16 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                  prop);
         }
 
+        protected override void ApplyObjectListPropertyTemplate(Kistl.Server.Movables.RelationEnd relEnd)
+        {
+            ApplyListProperty(relEnd.Navigator, MembersToSerialize);
+        }
+
+        protected override void ApplyCollectionEntryListTemplate(Kistl.Server.Movables.RelationEnd relEnd)
+        {
+            ApplyListProperty(relEnd.Navigator, MembersToSerialize);
+        }
+
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();

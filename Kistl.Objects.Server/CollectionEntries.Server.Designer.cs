@@ -188,15 +188,23 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_A, binStream);
-            BinarySerializer.ToStream(this._fk_B, binStream);
+            BinarySerializer.ToStream(this.fk_A, binStream);
+            BinarySerializer.ToStream(this.fk_B, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_A, binStream);
-            BinarySerializer.FromStream(out this._fk_B, binStream);
+            {
+                var tmp = this.fk_A;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_A = tmp;
+            }
+            {
+                var tmp = this.fk_B;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_B = tmp;
+            }
         }
 
 #endregion
@@ -420,8 +428,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_A, binStream);
-            BinarySerializer.ToStream(this._fk_B, binStream);
+            BinarySerializer.ToStream(this.fk_A, binStream);
+            BinarySerializer.ToStream(this.fk_B, binStream);
             BinarySerializer.ToStream(this._B_pos, binStream);
             BinarySerializer.ToStream(this._B_pos, binStream);
         }
@@ -429,8 +437,16 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_A, binStream);
-            BinarySerializer.FromStream(out this._fk_B, binStream);
+            {
+                var tmp = this.fk_A;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_A = tmp;
+            }
+            {
+                var tmp = this.fk_B;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_B = tmp;
+            }
             BinarySerializer.FromStream(out this._B_pos, binStream);
             BinarySerializer.FromStream(out this._B_pos, binStream);
         }
@@ -624,15 +640,23 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_A, binStream);
-            BinarySerializer.ToStream(this._fk_B, binStream);
+            BinarySerializer.ToStream(this.fk_A, binStream);
+            BinarySerializer.ToStream(this.fk_B, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_A, binStream);
-            BinarySerializer.FromStream(out this._fk_B, binStream);
+            {
+                var tmp = this.fk_A;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_A = tmp;
+            }
+            {
+                var tmp = this.fk_B;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_B = tmp;
+            }
         }
 
 #endregion
@@ -824,15 +848,23 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_A, binStream);
-            BinarySerializer.ToStream(this._fk_B, binStream);
+            BinarySerializer.ToStream(this.fk_A, binStream);
+            BinarySerializer.ToStream(this.fk_B, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_A, binStream);
-            BinarySerializer.FromStream(out this._fk_B, binStream);
+            {
+                var tmp = this.fk_A;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_A = tmp;
+            }
+            {
+                var tmp = this.fk_B;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_B = tmp;
+            }
         }
 
 #endregion
@@ -1024,15 +1056,23 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_A, binStream);
-            BinarySerializer.ToStream(this._fk_B, binStream);
+            BinarySerializer.ToStream(this.fk_A, binStream);
+            BinarySerializer.ToStream(this.fk_B, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_A, binStream);
-            BinarySerializer.FromStream(out this._fk_B, binStream);
+            {
+                var tmp = this.fk_A;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_A = tmp;
+            }
+            {
+                var tmp = this.fk_B;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_B = tmp;
+            }
         }
 
 #endregion
@@ -1276,9 +1316,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_A, binStream);
+            BinarySerializer.ToStream(this.fk_A, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
-            BinarySerializer.ToStream(this._fk_B, binStream);
+            BinarySerializer.ToStream(this.fk_B, binStream);
             BinarySerializer.ToStream(this._B_pos, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(this._B_pos, binStream);
@@ -1287,9 +1327,17 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_A, binStream);
+            {
+                var tmp = this.fk_A;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_A = tmp;
+            }
             BinarySerializer.FromStream(out this._A_pos, binStream);
-            BinarySerializer.FromStream(out this._fk_B, binStream);
+            {
+                var tmp = this.fk_B;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_B = tmp;
+            }
             BinarySerializer.FromStream(out this._B_pos, binStream);
             BinarySerializer.FromStream(out this._A_pos, binStream);
             BinarySerializer.FromStream(out this._B_pos, binStream);
@@ -1485,15 +1533,23 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_A, binStream);
-            BinarySerializer.ToStream(this._fk_B, binStream);
+            BinarySerializer.ToStream(this.fk_A, binStream);
+            BinarySerializer.ToStream(this.fk_B, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_A, binStream);
-            BinarySerializer.FromStream(out this._fk_B, binStream);
+            {
+                var tmp = this.fk_A;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_A = tmp;
+            }
+            {
+                var tmp = this.fk_B;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_B = tmp;
+            }
         }
 
 #endregion

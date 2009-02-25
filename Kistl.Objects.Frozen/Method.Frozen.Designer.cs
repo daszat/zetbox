@@ -71,7 +71,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Methodenaufrufe implementiert in dieser Objekt Klasse
         /// </summary>
-        // object reference list property
+        // object list property
         public virtual ICollection<Kistl.App.Base.MethodInvocation> MethodInvokations
         {
             get
@@ -163,7 +163,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Parameter der Methode
         /// </summary>
-        // object reference list property
+        // object list property
         public virtual IList<Kistl.App.Base.BaseParameter> Parameter
         {
             get

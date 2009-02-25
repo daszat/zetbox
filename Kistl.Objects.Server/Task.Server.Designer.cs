@@ -276,7 +276,7 @@ namespace Kistl.App.Projekte
             BinarySerializer.ToStream(this._DatumBis, binStream);
             BinarySerializer.ToStream(this._DatumVon, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
-            BinarySerializer.ToStream(this._fk_Projekt, binStream);
+            BinarySerializer.ToStream(this.fk_Projekt, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -286,7 +286,11 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromStream(out this._DatumBis, binStream);
             BinarySerializer.FromStream(out this._DatumVon, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStream(out this._fk_Projekt, binStream);
+            {
+                var tmp = this.fk_Projekt;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Projekt = tmp;
+            }
         }
 
 #endregion

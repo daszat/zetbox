@@ -94,7 +94,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// all implemented Methods in this DataType
         /// </summary>
-        // object reference list property
+        // object list property
         public virtual ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
         {
             get
@@ -117,7 +117,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Liste aller Methoden der Objektklasse.
         /// </summary>
-        // object reference list property
+        // object list property
         public virtual ICollection<Kistl.App.Base.Method> Methods
         {
             get
@@ -163,7 +163,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Eigenschaften der Objektklasse
         /// </summary>
-        // object reference list property
+        // object list property
         public virtual ICollection<Kistl.App.Base.BaseProperty> Properties
         {
             get

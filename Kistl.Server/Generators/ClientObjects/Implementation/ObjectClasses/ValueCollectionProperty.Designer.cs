@@ -15,59 +15,56 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
     {
 		protected IKistlContext ctx;
 		protected Templates.Implementation.SerializationMembersList serializationList;
-		protected ValueTypeProperty prop;
+		protected string name;
+		protected string backingName;
+		protected string backingCollectionType;
+		protected string exposedCollectionInterface;
+		protected string thisInterface;
+		protected string referencedType;
+		protected string entryType;
+		protected string providerCollectionType;
 
 
-        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, ValueTypeProperty prop)
+        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string entryType, string providerCollectionType)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.serializationList = serializationList;
-			this.prop = prop;
+			this.name = name;
+			this.backingName = backingName;
+			this.backingCollectionType = backingCollectionType;
+			this.exposedCollectionInterface = exposedCollectionInterface;
+			this.thisInterface = thisInterface;
+			this.referencedType = referencedType;
+			this.entryType = entryType;
+			this.providerCollectionType = providerCollectionType;
 
         }
         
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
-Debug.Assert(prop.IsList);
+#line 25 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
+AddSerialization(serializationList, backingName);
 
 
-	// the name of the property to create
-	string name = prop.PropertyName;
-	// the name of the private backing store for the conversion wrapper list
-	string wrapperName = "_" + name + "Wrapper";
-	// the name of the wrapper class for wrapping the CollectionEntries
-	string wrapperClass = (prop.IsIndexed ? "ClientListBSideWrapper" : "ClientCollectionBSideWrapper");
-
-	// which generic interface to use for the collection
-	string exposedListType = prop.IsIndexed ? "IList" : "ICollection";
-
-	// which Kistl interface this is 
-	string thisInterface = prop.ObjectClass.ClassName;
-	// which type this list contains
-	string referencedType = prop.ReferencedTypeAsCSharp();
-	// collection entries in this list
-	string referencedCollectionEntry = prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
-
-    AddSerialization(serializationList, wrapperName);
-
-
-#line 41 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
-this.WriteObjects("        public ",  exposedListType , "<",  referencedType , "> ",  name , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (",  wrapperName , " == null)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  thisInterface , ", ",  referencedType , ", ",  referencedCollectionEntry , ">(\r\n");
-this.WriteObjects("                        this,\r\n");
-this.WriteObjects("                        \"",  name , "\");\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("                return ",  wrapperName , ";\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("        private ",  wrapperClass , "<",  thisInterface , ", ",  referencedType , ", ",  referencedCollectionEntry , "> ",  wrapperName , ";\r\n");
+#line 28 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("		public ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
+this.WriteObjects("		{\r\n");
+this.WriteObjects("			get\r\n");
+this.WriteObjects("			{\r\n");
+this.WriteObjects("				if (",  backingName , " == null)\r\n");
+this.WriteObjects("				{\r\n");
+this.WriteObjects("					",  backingName , " \r\n");
+this.WriteObjects("						= new ",  backingCollectionType , "<",  thisInterface , ", ",  referencedType , ", ",  entryType , ">(\r\n");
+this.WriteObjects("							this, \r\n");
+this.WriteObjects("							(",  providerCollectionType , ")Context.FetchRelation<",  thisInterface , ", ",  referencedType , ", ",  entryType , ">(RelationEndRole.B, this));\r\n");
+this.WriteObjects("				}\r\n");
+this.WriteObjects("				return ",  backingName , ";\r\n");
+this.WriteObjects("			}\r\n");
+this.WriteObjects("		}\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("		private ",  backingCollectionType , "<",  thisInterface , ", ",  referencedType , ", ",  entryType , "> ",  backingName , ";\r\n");
 
         }
 

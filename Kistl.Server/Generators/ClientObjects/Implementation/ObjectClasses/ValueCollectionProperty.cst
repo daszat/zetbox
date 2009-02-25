@@ -12,43 +12,33 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
-<%@ Parameter Name="prop" Type="ValueTypeProperty" %>
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="backingName" Type="string" %>
+<%@ Parameter Name="backingCollectionType" Type="string" %>
+<%@ Parameter Name="exposedCollectionInterface" Type="string" %>
+<%@ Parameter Name="thisInterface" Type="string" %>
+<%@ Parameter Name="referencedType" Type="string" %>
+<%@ Parameter Name="entryType" Type="string" %>
+<%@ Parameter Name="providerCollectionType" Type="string" %>
 <%
 
-    Debug.Assert(prop.IsList);
-
-
-	// the name of the property to create
-	string name = prop.PropertyName;
-	// the name of the private backing store for the conversion wrapper list
-	string wrapperName = "_" + name + "Wrapper";
-	// the name of the wrapper class for wrapping the CollectionEntries
-	string wrapperClass = (prop.IsIndexed ? "ClientListBSideWrapper" : "ClientCollectionBSideWrapper");
-
-	// which generic interface to use for the collection
-	string exposedListType = prop.IsIndexed ? "IList" : "ICollection";
-
-	// which Kistl interface this is 
-	string thisInterface = prop.ObjectClass.ClassName;
-	// which type this list contains
-	string referencedType = prop.ReferencedTypeAsCSharp();
-	// collection entries in this list
-	string referencedCollectionEntry = prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
-
-    AddSerialization(serializationList, wrapperName);
+    AddSerialization(serializationList, backingName);
 
 %>
-        public <%= exposedListType %><<%= referencedType %>> <%= name %>
-        {
-            get
-            {
-                if (<%= wrapperName %> == null)
-                {
-                    <%= wrapperName %> = new <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>>(
-                        this,
-                        "<%= name %>");
-                }
-                return <%= wrapperName %>;
-            }
-        }
-        private <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>> <%= wrapperName %>;
+
+		public <%= exposedCollectionInterface %><<%= referencedType %>> <%= name %>
+		{
+			get
+			{
+				if (<%= backingName %> == null)
+				{
+					<%= backingName %> 
+						= new <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>>(
+							this, 
+							(<%= providerCollectionType %>)Context.FetchRelation<<%= thisInterface %>, <%= referencedType %>, <%= entryType %>>(RelationEndRole.B, this));
+				}
+				return <%= backingName %>;
+			}
+		}
+
+		private <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>> <%= backingName %>;

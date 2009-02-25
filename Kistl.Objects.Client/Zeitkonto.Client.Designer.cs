@@ -94,37 +94,30 @@ namespace Kistl.App.Zeiterfassung
         /// <summary>
         /// Zugeordnete Mitarbeiter
         /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
-        {
-            get
-            {
-                if (_MitarbeiterWrapper == null)
-                {
-                    List<Kistl.App.Projekte.Mitarbeiter> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Projekte.Mitarbeiter>(this, "Mitarbeiter");
-                    else
-                        serverList = new List<Kistl.App.Projekte.Mitarbeiter>();
-                        
-                    _MitarbeiterWrapper = new BackReferenceCollection<Kistl.App.Projekte.Mitarbeiter>(
-                        "Zeitkonto",
-                        this,
-                        serverList);
-                }
-                return _MitarbeiterWrapper;
-            }
-        }
-        
-        private BackReferenceCollection<Kistl.App.Projekte.Mitarbeiter> _MitarbeiterWrapper;
+        // collection reference property
+
+		public ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
+		{
+			get
+			{
+				if (_Mitarbeiter == null)
+				{
+					_Mitarbeiter 
+						= new ClientCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__>(
+							this, 
+							(ICollection<Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__>(RelationEndRole.A, this));
+				}
+				return _Mitarbeiter;
+			}
+		}
+
+		private ClientCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__> _Mitarbeiter;
 
         /// <summary>
         /// Tätigkeiten
         /// </summary>
         // object list property
+
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

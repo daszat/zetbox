@@ -371,7 +371,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataType();
+                e.Result = base.GetDataType();
             }
             return e.Result;
         }
@@ -392,7 +392,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                base.GetDataTypeString();
+                e.Result = base.GetDataTypeString();
             }
             return e.Result;
         }
@@ -487,9 +487,10 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_BaseObjectClass, binStream);
-            BinarySerializer.ToStream(this._fk_DefaultModel, binStream);
-            BinarySerializer.ToStreamCollectionEntries(this.ImplementsInterfaces__Implementation__, binStream);
+            BinarySerializer.ToStream(this.fk_BaseObjectClass, binStream);
+            BinarySerializer.ToStream(this.fk_DefaultModel, binStream);
+			// collections have to be loaded separately for now
+            // BinarySerializer.ToStreamCollectionEntries(this.ImplementsInterfaces__Implementation__, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
             BinarySerializer.ToStream(this._TableName, binStream);
@@ -498,9 +499,18 @@ namespace Kistl.App.Base
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
-            BinarySerializer.FromStream(out this._fk_DefaultModel, binStream);
-            BinarySerializer.FromStreamCollectionEntries(this.ImplementsInterfaces__Implementation__, binStream);
+            {
+                var tmp = this.fk_BaseObjectClass;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_BaseObjectClass = tmp;
+            }
+            {
+                var tmp = this.fk_DefaultModel;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_DefaultModel = tmp;
+            }
+			// collections have to be loaded separately for now
+            // BinarySerializer.FromStreamCollectionEntries(this.ImplementsInterfaces__Implementation__, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
             BinarySerializer.FromStream(out this._TableName, binStream);

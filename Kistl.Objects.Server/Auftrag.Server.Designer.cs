@@ -403,9 +403,9 @@ namespace Kistl.App.Projekte
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Auftragsname, binStream);
             BinarySerializer.ToStream(this._Auftragswert, binStream);
-            BinarySerializer.ToStream(this._fk_Kunde, binStream);
-            BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
-            BinarySerializer.ToStream(this._fk_Projekt, binStream);
+            BinarySerializer.ToStream(this.fk_Kunde, binStream);
+            BinarySerializer.ToStream(this.fk_Mitarbeiter, binStream);
+            BinarySerializer.ToStream(this.fk_Projekt, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -413,9 +413,21 @@ namespace Kistl.App.Projekte
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Auftragsname, binStream);
             BinarySerializer.FromStream(out this._Auftragswert, binStream);
-            BinarySerializer.FromStream(out this._fk_Kunde, binStream);
-            BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
-            BinarySerializer.FromStream(out this._fk_Projekt, binStream);
+            {
+                var tmp = this.fk_Kunde;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Kunde = tmp;
+            }
+            {
+                var tmp = this.fk_Mitarbeiter;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Mitarbeiter = tmp;
+            }
+            {
+                var tmp = this.fk_Projekt;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Projekt = tmp;
+            }
         }
 
 #endregion

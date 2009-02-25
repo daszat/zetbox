@@ -340,7 +340,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
             BinarySerializer.ToStream(this._IsReturnParameter, binStream);
-            BinarySerializer.ToStream(this._fk_Method, binStream);
+            BinarySerializer.ToStream(this.fk_Method, binStream);
             BinarySerializer.ToStream(this._Method_pos, binStream);
             BinarySerializer.ToStream(this._ParameterName, binStream);
         }
@@ -351,7 +351,11 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._IsList, binStream);
             BinarySerializer.FromStream(out this._IsReturnParameter, binStream);
-            BinarySerializer.FromStream(out this._fk_Method, binStream);
+            {
+                var tmp = this.fk_Method;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Method = tmp;
+            }
             BinarySerializer.FromStream(out this._Method_pos, binStream);
             BinarySerializer.FromStream(out this._ParameterName, binStream);
         }

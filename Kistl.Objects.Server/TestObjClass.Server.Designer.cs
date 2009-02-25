@@ -284,7 +284,7 @@ namespace Kistl.App.Test
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._MyIntProperty, binStream);
-            BinarySerializer.ToStream(this._fk_ObjectProp, binStream);
+            BinarySerializer.ToStream(this.fk_ObjectProp, binStream);
             BinarySerializer.ToStream(this._StringProp, binStream);
             BinarySerializer.ToStream((int)((TestObjClass)this).TestEnumProp, binStream);
         }
@@ -293,7 +293,11 @@ namespace Kistl.App.Test
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._MyIntProperty, binStream);
-            BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
+            {
+                var tmp = this.fk_ObjectProp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_ObjectProp = tmp;
+            }
             BinarySerializer.FromStream(out this._StringProp, binStream);
             BinarySerializer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
         }
