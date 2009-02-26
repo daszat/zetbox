@@ -134,13 +134,12 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
-        [Ignore("Case 617")]
         public void GetListByTypeWithOrderBy()
         {
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
             {
-                var list = ctx.GetQuery(typeof(Kistl.App.Base.ObjectClass))
-                    .OrderBy<IDataObject, string>(o => ((Kistl.App.Base.ObjectClass)o).ClassName)
+                var list = ctx.GetQuery(typeof(Kistl.App.Base.ObjectClass)).Cast<Kistl.App.Base.ObjectClass>()
+                    .OrderBy(o => o.ClassName)
                     .ToList().Cast<Kistl.App.Base.ObjectClass>();
                 Assert.That(list.Count(), Is.GreaterThan(0));
                 List<Kistl.App.Base.ObjectClass> result = list.ToList();
@@ -179,7 +178,6 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
-        [Ignore("Case 634")]
         public void GetListWithOrderByThenOrderBy()
         {
             using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())

@@ -15,5 +15,6 @@
   <SourceFileLocation>
     <string>C:\temp\KistlCodeGen\bin\Debug</string>
     <string>P:\Kistl\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Server\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>

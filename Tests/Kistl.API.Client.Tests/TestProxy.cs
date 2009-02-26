@@ -19,7 +19,7 @@ namespace Kistl.API.Client.Tests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList(Type type, int maxListCount, System.Linq.Expressions.Expression filter, System.Linq.Expressions.Expression orderBy)
+        public IEnumerable<IDataObject> GetList(Type type, int maxListCount, Expression filter, IEnumerable<Expression> orderBy)
         {
             if (type == null) throw new ArgumentNullException("type");
             if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");

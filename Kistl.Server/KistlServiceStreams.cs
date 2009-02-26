@@ -116,7 +116,7 @@ namespace Kistl.Server
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType())
                             .GetList(ctx, m.MaxListCount,
                                 m.Filter != null ? SerializableExpression.ToExpression(m.Filter) : null,
-                                m.OrderBy != null ? SerializableExpression.ToExpression(m.OrderBy) : null);
+                                m.OrderBy != null ? m.OrderBy.Select(o => SerializableExpression.ToExpression(o)).ToList() : null);
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
                         foreach (IDataObject obj in lst)

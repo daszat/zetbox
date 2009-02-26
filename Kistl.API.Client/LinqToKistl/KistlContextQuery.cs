@@ -18,7 +18,7 @@ namespace Kistl.API.Client
         private IKistlContext _context;
 
         #region Constructor
-        internal KistlContextQuery(IKistlContext ctx, Type type)
+        public KistlContextQuery(IKistlContext ctx, Type type)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (type == null) throw new ArgumentNullException("type");
@@ -29,7 +29,7 @@ namespace Kistl.API.Client
             _provider = new KistlContextProvider(_context, _type);
         }
 
-        internal KistlContextQuery(IKistlContext ctx, Type type, KistlContextProvider provider, Expression expression)
+        public KistlContextQuery(IKistlContext ctx, Type type, KistlContextProvider provider, Expression expression)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (type == null) throw new ArgumentNullException("type");

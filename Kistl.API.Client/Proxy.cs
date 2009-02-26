@@ -15,7 +15,7 @@ namespace Kistl.API.Client
     /// </summary>
     public interface IProxy : IDisposable
     {
-        IEnumerable<IDataObject> GetList(Type type, int maxListCount, Expression filter, Expression orderBy);
+        IEnumerable<IDataObject> GetList(Type type, int maxListCount, Expression filter, IEnumerable<Expression> orderBy);
         IEnumerable<IDataObject> GetListOf(Type type, int ID, string property);
         IDataObject GetObject(Type type, int ID);
 
@@ -156,7 +156,7 @@ namespace Kistl.API.Client
         /// </summary>
         private KistlServiceStreams.KistlServiceStreamsClient serviceStreams = new KistlServiceStreams.KistlServiceStreamsClient();
 
-        public IEnumerable<Kistl.API.IDataObject> GetList(Type type, int maxListCount, Expression filter, Expression orderBy)
+        public IEnumerable<Kistl.API.IDataObject> GetList(Type type, int maxListCount, Expression filter, IEnumerable<Expression> orderBy)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
             {
@@ -165,7 +165,7 @@ namespace Kistl.API.Client
                 msg.Type = new SerializableType(type);
                 msg.MaxListCount = maxListCount;
                 msg.Filter = filter != null ? SerializableExpression.FromExpression(filter) : null;
-                msg.OrderBy = orderBy != null ? SerializableExpression.FromExpression(orderBy) : null;
+                msg.OrderBy = orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o)).ToList() : new List<SerializableExpression>();
 
                 System.IO.MemoryStream s = serviceStreams.GetList(msg.ToStream());
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);

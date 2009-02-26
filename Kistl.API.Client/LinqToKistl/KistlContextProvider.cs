@@ -15,7 +15,7 @@ namespace Kistl.API.Client
     /// <summary>
     /// Provider for Kistl Linq Provider
     /// </summary>
-    internal class KistlContextProvider : ExpressionTreeVisitor, IQueryProvider
+    public class KistlContextProvider : ExpressionTreeVisitor, IQueryProvider
     {
         /// <summary>
         /// 
@@ -38,7 +38,7 @@ namespace Kistl.API.Client
         /// <summary>
         /// OrderBy Expression for GetList SearchType.
         /// </summary>
-        private Expression _orderBy = null;
+        private LinkedList<Expression> _orderBy = null;
 
         internal KistlContextProvider(IKistlContext ctx, Type type)
         {
@@ -312,13 +312,10 @@ namespace Kistl.API.Client
             {
                 _filter = m.Arguments[1];
             }
-            else if (m.IsMethodCallExpression("OrderBy"))
+            else if (m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("ThenBy"))
             {
-                _orderBy = m.Arguments[1];
-                base.Visit(m.Arguments[0]);
-            }
-            else if (m.IsMethodCallExpression("ThenBy"))
-            {
+                if(_orderBy== null) _orderBy = new LinkedList<Expression>();
+                _orderBy.AddFirst(m.Arguments[1]);
                 base.Visit(m.Arguments[0]);
             }
             else if (m.IsMethodCallExpression("Select"))
@@ -341,6 +338,11 @@ namespace Kistl.API.Client
                     _filter = m.Arguments[1];
                 else
                     base.Visit(m.Arguments[0]);
+            }
+            else if (m.IsMethodCallExpression("OfType") || m.IsMethodCallExpression("Cast"))
+            {
+                // OK - just a cast
+                // No special processing needed
             }
             else
             {

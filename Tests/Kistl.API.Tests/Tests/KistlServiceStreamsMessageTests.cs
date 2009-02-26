@@ -25,7 +25,8 @@ namespace Kistl.API.Tests
             msg.Property = "TestProperty";
             msg.Type = new SerializableType(typeof(TestDataObject));
             msg.Filter = SerializableExpression.FromExpression(Expression.Constant(true));
-            msg.OrderBy = SerializableExpression.FromExpression(Expression.Constant("Test"));
+            msg.OrderBy = new List<SerializableExpression>();
+            msg.OrderBy.Add(SerializableExpression.FromExpression(Expression.Constant("Test")));
 
             MemoryStream ms = msg.ToStream();
             ms.Seek(0, SeekOrigin.Begin);

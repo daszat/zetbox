@@ -15,9 +15,9 @@ namespace Kistl.IntegrationTests
             setup.Init();
             try
             {
-                RelationTests();
+                //RelationTests();
                 //FrozenContextTests();
-                //GetListTests();
+                GetListTests();
 
                 //GeneratorTests();
                 //GetListOfTests();
@@ -166,19 +166,17 @@ namespace Kistl.IntegrationTests
         {
             GetListTests test = new GetListTests();
 
-            // doesnt work yet
-            //test.SetUp();
-            //test.GetListByTypeWithOrderBy();
-
             test.SetUp();
             test.GetListWithOrderBy();
 
             test.SetUp();
-            test.GetListWithOrderByAndWhere();
+            test.GetListByTypeWithOrderBy();
 
-            // doesnt work yet
-            //test.SetUp();
-            //test.GetListWithOrderByThenOrderBy();
+            test.SetUp();
+            test.GetListWithOrderByThenOrderBy();
+
+            test.SetUp();
+            test.GetListWithOrderByAndWhere();
 
             test.SetUp();
             test.GetListWithTake();

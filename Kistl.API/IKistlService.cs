@@ -41,7 +41,7 @@ namespace Kistl.API
         /// <summary>
         /// OrderBy of a ResultSet as a Expression Tree
         /// </summary>
-        public SerializableExpression OrderBy { get; set; }
+        public List<SerializableExpression> OrderBy { get; set; }
 
         /// <summary>
         /// Create a new Message
@@ -74,7 +74,12 @@ namespace Kistl.API
 
             sw.Write(MaxListCount);
             BinarySerializer.ToStream(Filter, sw);
-            BinarySerializer.ToStream(OrderBy, sw);
+            foreach (var o in OrderBy)
+            {
+                BinarySerializer.ToStream(true, sw);
+                BinarySerializer.ToStream(o, sw);
+            }
+            BinarySerializer.ToStream(false, sw);
         }
 
         /// <summary>
@@ -106,8 +111,17 @@ namespace Kistl.API
             BinarySerializer.FromStream(out tmp, sr);
             Filter = tmp;
 
-            BinarySerializer.FromStream(out tmp, sr);
-            OrderBy = tmp;
+            OrderBy = new List<SerializableExpression>();
+            bool cont = true;
+            while (cont)
+            {
+                BinarySerializer.FromStream(out cont, sr);
+                if (cont)
+                {
+                    BinarySerializer.FromStream(out tmp, sr);
+                    OrderBy.Add(tmp);
+                }
+            }             
         }
     }
 
@@ -179,7 +193,7 @@ namespace Kistl.API
         /// <returns>A List ob Objects as XML</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        string GetList(SerializableType type, int maxListCount, SerializableExpression filter, SerializableExpression orderBy);
+        string GetList(SerializableType type, int maxListCount, SerializableExpression filter, List<SerializableExpression> orderBy);
 
         /// <summary>
         /// Liste aller Objekte eines Objektes "ID" im Property "property".

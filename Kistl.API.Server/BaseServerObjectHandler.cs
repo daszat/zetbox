@@ -26,7 +26,7 @@ namespace Kistl.API.Server
         /// <param name="filter"></param>
         /// <param name="orderBy"></param>
         /// <returns></returns>
-        IEnumerable GetList(IKistlContext ctx, int maxListCount, Expression filter, Expression orderBy);
+        IEnumerable GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy);
 
         /// <summary>
         /// Implementiert den GetListOf Befehl.
@@ -132,7 +132,7 @@ namespace Kistl.API.Server
         {
         }
 
-        public IEnumerable GetList(IKistlContext ctx, int maxListCount, Expression filter, Expression orderBy)
+        public IEnumerable GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
@@ -150,7 +150,13 @@ namespace Kistl.API.Server
 
                 if (orderBy != null)
                 {
-                    result = result.AddOrderBy<T>(orderBy);
+                    bool first = true;
+                    foreach (var o in orderBy)
+                    {
+                        if(first) result = result.AddOrderBy<T>(o);
+                        else result = result.AddThenBy<T>(o);
+                        first = false;
+                    }
                 }
 
                 return result.Take(maxListCount);
