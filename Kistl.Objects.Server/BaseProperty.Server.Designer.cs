@@ -91,7 +91,7 @@ namespace Kistl.App.Base
                 if (_ConstraintsWrapper == null)
                 {
                     _ConstraintsWrapper = new EntityCollectionWrapper<Kistl.App.Base.Constraint, Kistl.App.Base.Constraint__Implementation__>(
-                            Constraints__Implementation__);
+                            this.Context, Constraints__Implementation__);
                 }
                 return _ConstraintsWrapper;
             }
@@ -204,6 +204,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -284,6 +285,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }

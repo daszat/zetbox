@@ -46,7 +46,7 @@ namespace Kistl.App.Base
                 if (_EnumerationEntriesWrapper == null)
                 {
                     _EnumerationEntriesWrapper = new EntityCollectionWrapper<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.EnumerationEntry__Implementation__>(
-                            EnumerationEntries__Implementation__);
+                            this.Context, EnumerationEntries__Implementation__);
                 }
                 return _EnumerationEntriesWrapper;
             }

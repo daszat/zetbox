@@ -190,7 +190,7 @@ namespace Kistl.App.Zeiterfassung
                 if (_TaetigkeitenWrapper == null)
                 {
                     _TaetigkeitenWrapper = new EntityCollectionWrapper<Kistl.App.Zeiterfassung.Taetigkeit, Kistl.App.Zeiterfassung.Taetigkeit__Implementation__>(
-                            Taetigkeiten__Implementation__);
+                            this.Context, Taetigkeiten__Implementation__);
                 }
                 return _TaetigkeitenWrapper;
             }

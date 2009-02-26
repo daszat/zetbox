@@ -105,6 +105,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -185,6 +186,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -291,6 +293,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -371,6 +374,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }

@@ -26,7 +26,7 @@ namespace Kistl.API.Server
         /// <param name="filter"></param>
         /// <param name="orderBy"></param>
         /// <returns></returns>
-        IEnumerable GetList(int maxListCount, Expression filter, Expression orderBy);
+        IEnumerable GetList(IKistlContext ctx, int maxListCount, Expression filter, Expression orderBy);
 
         /// <summary>
         /// Implementiert den GetListOf Befehl.
@@ -34,14 +34,14 @@ namespace Kistl.API.Server
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns></returns>
-        IEnumerable GetListOf(int ID, string property);
+        IEnumerable GetListOf(IKistlContext ctx, int ID, string property);
 
         /// <summary>
         /// Implementiert den GetObject Befehl.
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        IDataObject GetObject(int ID);
+        IDataObject GetObject(IKistlContext ctx, int ID);
     }
 
     public interface IServerObjectSetHandler
@@ -51,7 +51,7 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="objects"></param>
         /// <returns></returns>
-        IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects);
+        IEnumerable<IDataObject> SetObjects(IKistlContext ctx, IEnumerable<IDataObject> objects);
     }
 
     /// <summary>
@@ -132,7 +132,7 @@ namespace Kistl.API.Server
         {
         }
 
-        public IEnumerable GetList(int maxListCount, Expression filter, Expression orderBy)
+        public IEnumerable GetList(IKistlContext ctx, int maxListCount, Expression filter, Expression orderBy)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
@@ -141,7 +141,7 @@ namespace Kistl.API.Server
                     maxListCount = Kistl.API.Helper.MAXLISTCOUNT;
                 }
 
-                var result = KistlContext.Current.GetQuery<T>();
+                var result = ctx.GetQuery<T>();
 
                 if (filter != null)
                 {
@@ -165,12 +165,12 @@ namespace Kistl.API.Server
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns>the list of values in the property</returns>
-        public IEnumerable GetListOf(int ID, string property)
+        public IEnumerable GetListOf(IKistlContext ctx, int ID, string property)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}, Property = {1}", ID, property)))
             {
                 if (ID <= API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
-                T obj = GetObjectInstance(ID);
+                T obj = GetObjectInstance(ctx, ID);
                 if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
 
                 IEnumerable list = (IEnumerable)obj.GetPropertyValue <IEnumerable>(property);
@@ -183,7 +183,7 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="ID"></param>
         /// <returns>a typed object</returns>
-        protected abstract T GetObjectInstance(int ID);
+        protected abstract T GetObjectInstance(IKistlContext ctx, int ID);
         //{
         //    using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}", ID)))
         //    {
@@ -206,9 +206,9 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public IDataObject GetObject(int ID)
+        public IDataObject GetObject(IKistlContext ctx, int ID)
         {
-            return GetObjectInstance(ID);
+            return GetObjectInstance(ctx, ID);
         }
     }
 
@@ -219,11 +219,11 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="objects"></param>
         /// <returns></returns>
-        public virtual IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects)
+        public virtual IEnumerable<IDataObject> SetObjects(IKistlContext ctx, IEnumerable<IDataObject> objects)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                KistlContext.Current.SubmitChanges();
+                ctx.SubmitChanges();
 
                 // TODO: Detect changes made by server nethod calls
                 return objects.Where(o => o.ObjectState != DataObjectState.Deleted);

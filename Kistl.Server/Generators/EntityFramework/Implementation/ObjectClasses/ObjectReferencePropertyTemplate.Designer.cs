@@ -99,6 +99,7 @@ this.WriteObjects("                if (this.EntityState.In(System.Data.EntitySta
 this.WriteObjects("                    && !r.IsLoaded)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    r.Load(); \r\n");
+this.WriteObjects("                    if(r.Value != null) r.Value.AttachToContext(this.Context);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return r.Value;\r\n");
 this.WriteObjects("            }\r\n");
@@ -117,7 +118,7 @@ this.WriteObjects("                r.Value = (",  referencedImplementation , ")v
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-#line 99 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 100 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 string posStorageName = name + Kistl.API.Helper.PositionSuffix;
 
 	if (hasPositionStorage)
@@ -127,7 +128,7 @@ string posStorageName = name + Kistl.API.Helper.PositionSuffix;
 			"int?", posStorageName);
 	}
 
-#line 108 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 109 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        \r\n");
 
         }

@@ -59,57 +59,11 @@ namespace Kistl.DalProvider.EF.Tests
             Assert.That(ctx, Is.Not.Null);
         }
 
-        [Test]
-        public void InitSession_returns_a_context_and_inits_Current()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                Assert.That(ctx, Is.Not.Null);
-                Assert.That(KistlContext.Current, Is.Not.Null);
-            }
-        }
-
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void InitSessionTwice_creates_a_new_context()
-        {
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                Assert.That(ctx, Is.Not.Null);
-                Assert.That(KistlContext.Current, Is.Not.Null);
-                using (IKistlContext ctx2 = KistlContext.InitSession())
-                {
-                    Assert.That(ctx2, Is.Not.Null);
-                    Assert.That(ctx2, Is.Not.EqualTo(ctx));
-                    Assert.That(KistlContext.Current, Is.Not.Null);
-                }
-            }
-        }
-
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void NoSession()
-        {
-            Assert.That(KistlContext.Current, Is.Null);
-        }
-
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void CleanUpSession()
-        {
-            Assert.That(KistlContext.Current, Is.Null);
-            using (IKistlContext ctx = KistlContext.InitSession())
-            {
-                Assert.That(ctx, Is.Not.Null);
-                Assert.That(KistlContext.Current, Is.Not.Null);
-            }
-            Assert.That(KistlContext.Current, Is.Null);
-        }
 
         [Test]
         public void GetQuery()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var result = ctx.GetQuery<TestObjClass>();
                 Assert.That(result, Is.Not.Null);
@@ -119,7 +73,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void GetQuery_ObjType()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var result = ctx.GetQuery(typeof(TestObjClass));
                 Assert.That(result, Is.Not.Null);
@@ -132,7 +86,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void Find_T_returns_right_object()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = ctx.Find<TestObjClass>(firstId);
                 Assert.That(obj, Is.Not.Null);
@@ -145,7 +99,7 @@ namespace Kistl.DalProvider.EF.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Find_T_fails_on_invalid_ID()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = ctx.Find<TestObjClass>(Kistl.API.Helper.INVALIDID);
             }
@@ -154,7 +108,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void Find_ObjectType_returns_right_object()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = (TestObjClass)ctx.Find(typeof(TestObjClass), firstId);
                 Assert.That(obj, Is.Not.Null);
@@ -167,7 +121,7 @@ namespace Kistl.DalProvider.EF.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Find_ObjectType_fails_on_invalid_ID()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = (TestObjClass)ctx.Find(typeof(TestObjClass), Kistl.API.Helper.INVALIDID);
             }
@@ -176,7 +130,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void GetListOf_T_SubClasses_returns_a_non_empty_list_on_class_DataType()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.ClassName == "DataType");
                 List<ObjectClass> result = ctx.GetListOf<ObjectClass>(obj, "SubClasses").ToList();
@@ -188,7 +142,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void GetListOf_ObjType_returns_a_non_empty_list_on_class_DataType()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.ClassName == "DataType");
                 List<ObjectClass> result = ctx.GetListOf<ObjectClass>(typeof(ObjectClass), obj.ID, "SubClasses").ToList();
@@ -201,7 +155,7 @@ namespace Kistl.DalProvider.EF.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetListOf_T_WrongPropertyName_fails()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var obj = ctx.GetQuery<TestObjClass>().First(o => o.ID == firstId);
                 var result = ctx.GetListOf<TestObjClass>(obj, "NotAProperty");
@@ -212,7 +166,7 @@ namespace Kistl.DalProvider.EF.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetListOf_ObjType_WrongPropertyName_fails()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var result = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), firstId, "NotAProperty");
             }
@@ -222,7 +176,7 @@ namespace Kistl.DalProvider.EF.Tests
         [ExpectedException(typeof(InvalidCastException))]
         public void GetListOf_T_WrongItemType_fails()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.ClassName == "DataType");
                 var result = ctx.GetListOf<TestObjClass>(obj, "SubClasses").ToList();
@@ -233,7 +187,7 @@ namespace Kistl.DalProvider.EF.Tests
         [ExpectedException(typeof(InvalidCastException))]
         public void GetListOf_ObjType_WrongItemType_fails()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.ClassName == "DataType");
                 var result = ctx.GetListOf<TestObjClass>(typeof(ObjectClass), obj.ID, "SubClasses").ToList();
@@ -243,7 +197,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void UpdateSomeData_SubmitChanges()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = ctx.Find<TestObjClass>(firstId);
                 Assert.That(obj, Is.Not.Null);
@@ -253,7 +207,7 @@ namespace Kistl.DalProvider.EF.Tests
                 ctx.SubmitChanges();
             }
 
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = ctx.Find<TestObjClass>(firstId);
                 Assert.That(obj, Is.Not.Null);
@@ -265,7 +219,7 @@ namespace Kistl.DalProvider.EF.Tests
         //[Ignore("Implement IsSorted on TestObjClass.TestName")]
         //public void UpdateLists_SubmitChanges()
         //{
-        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    using (IKistlContext ctx = KistlContext.GetContext())
         //    {
         //        TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
         //        Assert.That(obj.TestNames.Count, Is.EqualTo(2));
@@ -275,7 +229,7 @@ namespace Kistl.DalProvider.EF.Tests
         //        ctx.SubmitChanges();
         //    }
 
-        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    using (IKistlContext ctx = KistlContext.GetContext())
         //    {
         //        TestObjClass obj = ctx.GetQuery<TestObjClass>().Where(o => o.ID == 1).First();
         //        Assert.That(obj.TestNames.Count, Is.EqualTo(2));
@@ -287,7 +241,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void Attach_IDataObject_New()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = new TestObjClass__Implementation__();
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Detached));
@@ -299,7 +253,7 @@ namespace Kistl.DalProvider.EF.Tests
         //[Test]
         //public void Attach_IDataObject_New_WithGraph()
         //{
-        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    using (IKistlContext ctx = KistlContext.GetContext())
         //    {
         //        TestObjClass obj = new TestObjClass__Implementation__();
         //        obj.TestNames.Add("Test");
@@ -314,7 +268,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void Attach_IDataObject_Existing()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = new TestObjClass__Implementation__() { ID = 3 };
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Detached));
@@ -326,7 +280,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void Attach_IDataObject_Existing_Twice()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = new TestObjClass__Implementation__() { ID = 3 };
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Detached));
@@ -341,7 +295,7 @@ namespace Kistl.DalProvider.EF.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void Attach_IDataObject_Existing_Twice_But_Different()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj1 = new TestObjClass__Implementation__() { ID = 3 };
                 Assert.That(((TestObjClass__Implementation__)obj1).EntityState, Is.EqualTo(EntityState.Detached));
@@ -358,7 +312,7 @@ namespace Kistl.DalProvider.EF.Tests
         //[Test]
         //public void Attach_ICollectionEntry_New()
         //{
-        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    using (IKistlContext ctx = KistlContext.GetContext())
         //    {
         //        TestObjClass_TestNameCollectionEntry__Implementation__ obj = new TestObjClass_TestNameCollectionEntry__Implementation__();
         //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
@@ -370,7 +324,7 @@ namespace Kistl.DalProvider.EF.Tests
         //[Test]
         //public void Attach_ICollectionEntry_Existing()
         //{
-        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    using (IKistlContext ctx = KistlContext.GetContext())
         //    {
         //        TestObjClass_TestNameCollectionEntry__Implementation__ obj = new TestObjClass_TestNameCollectionEntry__Implementation__() { ID = 15 };
         //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
@@ -382,7 +336,7 @@ namespace Kistl.DalProvider.EF.Tests
         //[Test]
         //public void Attach_ICollectionEntry_Existing_Twice()
         //{
-        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    using (IKistlContext ctx = KistlContext.GetContext())
         //    {
         //        TestObjClass_TestNameCollectionEntry__Implementation__ obj = new TestObjClass_TestNameCollectionEntry__Implementation__() { ID = 3 };
         //        Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
@@ -397,7 +351,7 @@ namespace Kistl.DalProvider.EF.Tests
         //[ExpectedException(typeof(InvalidOperationException))]
         //public void Attach_ICollectionEntry_Existing_Twice_But_Different()
         //{
-        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    using (IKistlContext ctx = KistlContext.GetContext())
         //    {
         //        TestObjClass_TestNameCollectionEntry__Implementation__ obj1 = new TestObjClass_TestNameCollectionEntry__Implementation__() { ID = 3 };
         //        Assert.That(obj1.EntityState, Is.EqualTo(EntityState.Detached));
@@ -414,7 +368,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void AttachedObjects()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = new TestObjClass__Implementation__();
                 ctx.Attach(obj);
@@ -427,7 +381,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void ContainsObject()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = new TestObjClass__Implementation__() { ID = 10 };
                 ctx.Attach(obj);
@@ -441,7 +395,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void ContainsObject_Not()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = new TestObjClass__Implementation__() { ID = 10 };
                 ctx.Create<TestObjClass>();
@@ -454,7 +408,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void Create_Generic()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 bool hasCreated = false;
                 GenericEventHandler<IPersistenceObject> createdHandler = new GenericEventHandler<IPersistenceObject>(delegate(object obj, GenericEventArgs<IPersistenceObject> e) { hasCreated = true; });
@@ -472,7 +426,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void Create_Type()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass newObj = ctx.Create(typeof(TestObjClass)) as TestObjClass;
                 Assert.That(newObj, Is.Not.Null);
@@ -483,7 +437,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void Create_ObjectType()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass newObj = ctx.Create(typeof(TestObjClass)) as TestObjClass;
                 Assert.That(newObj, Is.Not.Null);
@@ -495,7 +449,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void Delete_triggers_ObjectDeleted()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 bool hasDeleted = false;
                 GenericEventHandler<IPersistenceObject> deletedHandler = new GenericEventHandler<IPersistenceObject>(
@@ -522,7 +476,7 @@ namespace Kistl.DalProvider.EF.Tests
         public void Delete_deletes_objects()
         {
             Delete_triggers_ObjectDeleted();
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 Assert.That(ctx.GetQuery<TestObjClass>().Count(), Is.EqualTo(0));
             }
@@ -532,7 +486,7 @@ namespace Kistl.DalProvider.EF.Tests
         //[Test]
         //public void Delete_ICollectionEntry()
         //{
-        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    using (IKistlContext ctx = KistlContext.GetContext())
         //    {
         //        var result = ctx.GetQuery<TestObjClass>();
         //        Assert.That(result.ToList().Count, Is.EqualTo(4));
@@ -549,7 +503,7 @@ namespace Kistl.DalProvider.EF.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void Detach_IDataObject_Failed()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 ctx.Detach(new TestObjClass__Implementation__());
             }
@@ -558,7 +512,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void Detach_IDataObject()
         {
-            using (IKistlContext ctx = KistlContext.InitSession())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 TestObjClass obj = ctx.GetQuery<TestObjClass>().First();
                 ctx.Detach(obj);
@@ -570,7 +524,7 @@ namespace Kistl.DalProvider.EF.Tests
         //[Test]
         //public void Detach_ICollectionEntry()
         //{
-        //    using (IKistlContext ctx = KistlContext.InitSession())
+        //    using (IKistlContext ctx = KistlContext.GetContext())
         //    {
         //        var obj = ctx.Find<TestObjClass>(1);
         //        Assert.That(obj, Is.Not.Null);

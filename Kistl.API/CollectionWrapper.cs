@@ -30,6 +30,11 @@ namespace Kistl.API
         {
             Collection = baseCollection;
             ParentObject = parentObject;
+
+            foreach (IPersistenceObject obj in Collection)
+            {
+                obj.AttachToContext(parentObject.Context);
+            }
         }
 
         #region provider- and end-specific extension points

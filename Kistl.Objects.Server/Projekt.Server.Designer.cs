@@ -65,7 +65,7 @@ namespace Kistl.App.Projekte
                 if (_AuftraegeWrapper == null)
                 {
                     _AuftraegeWrapper = new EntityCollectionWrapper<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Auftrag__Implementation__>(
-                            Auftraege__Implementation__);
+                            this.Context, Auftraege__Implementation__);
                 }
                 return _AuftraegeWrapper;
             }
@@ -138,7 +138,7 @@ namespace Kistl.App.Projekte
                 if (_KostentraegerWrapper == null)
                 {
                     _KostentraegerWrapper = new EntityCollectionWrapper<Kistl.App.Zeiterfassung.Kostentraeger, Kistl.App.Zeiterfassung.Kostentraeger__Implementation__>(
-                            Kostentraeger__Implementation__);
+                            this.Context, Kostentraeger__Implementation__);
                 }
                 return _KostentraegerWrapper;
             }
@@ -284,7 +284,7 @@ namespace Kistl.App.Projekte
                 if (_TasksWrapper == null)
                 {
                     _TasksWrapper = new EntityCollectionWrapper<Kistl.App.Projekte.Task, Kistl.App.Projekte.Task__Implementation__>(
-                            Tasks__Implementation__);
+                            this.Context, Tasks__Implementation__);
                 }
                 return _TasksWrapper;
             }

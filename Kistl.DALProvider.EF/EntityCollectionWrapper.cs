@@ -19,26 +19,30 @@ namespace Kistl.DALProvider.EF
         where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, INTERFACE, IDataObject
         where INTERFACE : class, IDataObject
     {
-        protected EntityCollection<IMPL> _ec;
+        protected EntityCollection<IMPL> underlyingCollection;
 
-        public EntityCollectionWrapper(EntityCollection<IMPL> ec)
+        public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<IMPL> ec)
         {
-            _ec = ec;
+            underlyingCollection = ec;
+            foreach (IPersistenceObject obj in underlyingCollection)
+            {
+                obj.AttachToContext(ctx);
+            }
         }
 
         public virtual void Add(INTERFACE item)
         {
-            _ec.Add((IMPL)item);
+            underlyingCollection.Add((IMPL)item);
         }
 
         public virtual void Clear()
         {
-            _ec.Clear();
+            underlyingCollection.Clear();
         }
 
         public virtual bool Contains(INTERFACE item)
         {
-            return _ec.Contains((IMPL)item);
+            return underlyingCollection.Contains((IMPL)item);
         }
 
         public virtual void CopyTo(INTERFACE[] array, int arrayIndex)
@@ -51,17 +55,17 @@ namespace Kistl.DALProvider.EF
 
         public virtual int Count
         {
-            get { return _ec.Count; }
+            get { return underlyingCollection.Count; }
         }
 
         public virtual bool IsReadOnly
         {
-            get { return _ec.IsReadOnly; }
+            get { return underlyingCollection.IsReadOnly; }
         }
 
         public virtual bool Remove(INTERFACE item)
         {
-            return _ec.Remove(item as IMPL);
+            return underlyingCollection.Remove(item as IMPL);
         }
 
         public virtual IEnumerator<INTERFACE> GetEnumerator()
@@ -76,7 +80,7 @@ namespace Kistl.DALProvider.EF
 
         protected virtual IEnumerable<INTERFACE> GetEnumerable()
         {
-            return _ec.Cast<INTERFACE>();
+            return underlyingCollection.Cast<INTERFACE>();
         }
 
         #region ICollection Members
@@ -102,8 +106,9 @@ namespace Kistl.DALProvider.EF
         where INTERFACE : class, IDataObject
     {
         private string _pointerProperty = "";
-        public EntityListWrapper(EntityCollection<IMPL> ec, string pointerProperty)
-            : base(ec)
+
+        public EntityListWrapper(IKistlContext ctx, EntityCollection<IMPL> ec, string pointerProperty)
+            : base(ctx, ec)
         {
             _pointerProperty = pointerProperty;
         }
@@ -124,7 +129,7 @@ namespace Kistl.DALProvider.EF
 
         protected INTERFACE GetAt(int index)
         {
-            foreach (INTERFACE i in _ec)
+            foreach (INTERFACE i in underlyingCollection)
             {
                 int? idx = GetIndex(i);
                 if (idx == null) continue;
@@ -141,12 +146,12 @@ namespace Kistl.DALProvider.EF
         public override void Add(INTERFACE item)
         {
             base.Add(item);
-            UpdateIndex(item, _ec.Count - 1);
+            UpdateIndex(item, underlyingCollection.Count - 1);
         }
 
         public override void Clear()
         {
-            foreach (INTERFACE i in _ec)
+            foreach (INTERFACE i in underlyingCollection)
             {
                 UpdateIndex(i, null);
             }
@@ -173,7 +178,7 @@ namespace Kistl.DALProvider.EF
         {
             UpdateIndex(item, index);
             // TODO: Optimize
-            foreach (INTERFACE i in _ec)
+            foreach (INTERFACE i in underlyingCollection)
             {
                 int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
@@ -181,7 +186,7 @@ namespace Kistl.DALProvider.EF
                     UpdateIndex(i, idx + 1);
                 }
             }
-            _ec.Add((IMPL)item);
+            underlyingCollection.Add((IMPL)item);
         }
 
         public void RemoveAt(int index)
@@ -191,7 +196,7 @@ namespace Kistl.DALProvider.EF
             base.Remove(item);
 
             // TODO: Optimize
-            foreach (INTERFACE i in _ec)
+            foreach (INTERFACE i in underlyingCollection)
             {
                 int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)

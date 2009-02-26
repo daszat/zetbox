@@ -25,9 +25,9 @@ namespace Kistl.Server
                 KistlServiceStreamsMessage m = new KistlServiceStreamsMessage(msg);
                 using (TraceClient.TraceHelper.TraceMethodCall(m.Type.ToString()))
                 {
-                    using (IKistlContext ctx = KistlContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType()).GetObject(m.ID);
+                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType()).GetObject(ctx, m.ID);
                         if (obj == null) throw new ArgumentOutOfRangeException("ID", string.Format("Object with ID {0} not found", m.ID));
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
@@ -74,10 +74,10 @@ namespace Kistl.Server
                         BinarySerializer.FromStream(out @continue, sr);
                     }
 
-                    using (IKistlContext ctx = KistlContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         // Set Operation
-                        var changedObjects = ServerObjectHandlerFactory.GetServerObjectSetHandler().SetObjects(objects);
+                        var changedObjects = ServerObjectHandlerFactory.GetServerObjectSetHandler().SetObjects(ctx, objects);
 
                         // Serialize back
                         MemoryStream result = new MemoryStream();
@@ -111,10 +111,10 @@ namespace Kistl.Server
                 KistlServiceStreamsMessage m = new KistlServiceStreamsMessage(msg);
                 using (TraceClient.TraceHelper.TraceMethodCall(m.Type.ToString()))
                 {
-                    using (IKistlContext ctx = KistlContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType())
-                            .GetList(m.MaxListCount,
+                            .GetList(ctx, m.MaxListCount,
                                 m.Filter != null ? SerializableExpression.ToExpression(m.Filter) : null,
                                 m.OrderBy != null ? SerializableExpression.ToExpression(m.OrderBy) : null);
                         MemoryStream result = new MemoryStream();
@@ -147,9 +147,9 @@ namespace Kistl.Server
                 KistlServiceStreamsMessage m = new KistlServiceStreamsMessage(msg);
                 using (TraceClient.TraceHelper.TraceMethodCall(m.Type.ToString()))
                 {
-                    using (IKistlContext ctx = KistlContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType()).GetListOf(m.ID, m.Property);
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType()).GetListOf(ctx, m.ID, m.Property);
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
                         foreach (IDataObject obj in lst)
@@ -180,12 +180,12 @@ namespace Kistl.Server
             {
                 using (TraceClient.TraceHelper.TraceMethodCall(ceType.ToString()))
                 {
-                    using (IKistlContext ctx = KistlContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         RelationEndRole role = (RelationEndRole)serializableRole;
                         var param = Expression.Parameter(ceType.GetSystemType(), "ce");
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(ceType.GetSystemType())
-                            .GetList(1000, 
+                            .GetList(ctx, 1000, 
                                 Expression.Lambda(
                                     Expression.Equal(
                                         Expression.Constant(ID),

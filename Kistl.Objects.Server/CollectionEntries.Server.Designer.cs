@@ -90,6 +90,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -162,6 +163,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -298,6 +300,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -370,6 +373,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -542,6 +546,7 @@ namespace Kistl.App.GUI
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -614,6 +619,7 @@ namespace Kistl.App.GUI
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -750,6 +756,7 @@ namespace Kistl.App.GUI
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -822,6 +829,7 @@ namespace Kistl.App.GUI
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -958,6 +966,7 @@ namespace Kistl.App.GUI
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -1030,6 +1039,7 @@ namespace Kistl.App.GUI
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -1166,6 +1176,7 @@ namespace Kistl.App.Projekte
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -1259,6 +1270,7 @@ namespace Kistl.App.Projekte
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -1435,6 +1447,7 @@ namespace Kistl.App.Zeiterfassung
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -1507,6 +1520,7 @@ namespace Kistl.App.Zeiterfassung
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -1642,6 +1656,7 @@ namespace Kistl.App.Projekte
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }

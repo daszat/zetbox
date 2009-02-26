@@ -51,7 +51,7 @@
                 if (<%= wrapperName %> == null)
                 {
                     <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>>(
-                            <%= efName %><%
+                            this.Context, <%= efName %><%
 	// TODO: improve this!
 	if (relEnd.Other.HasPersistentOrder)
 	{

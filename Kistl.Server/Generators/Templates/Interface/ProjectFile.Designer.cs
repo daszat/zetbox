@@ -28,7 +28,7 @@ this.WriteObjects("<Project ToolsVersion=\"3.5\" DefaultTargets=\"Build\" xmlns=
 this.WriteObjects("  <PropertyGroup>\r\n");
 this.WriteObjects("    <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>\r\n");
 this.WriteObjects("    <Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>\r\n");
-this.WriteObjects("	<SourcePath Condition=\" '$(SourcePath)' == '' \">..</SourcePath>\r\n");
+this.WriteObjects("    <SourcePath Condition=\" '$(SourcePath)' == '' \">..</SourcePath>\r\n");
 this.WriteObjects("    <ProductVersion>9.0.21022</ProductVersion>\r\n");
 this.WriteObjects("    <SchemaVersion>2.0</SchemaVersion>\r\n");
 this.WriteObjects("    <ProjectGuid>",  projectGuid , "</ProjectGuid>\r\n");

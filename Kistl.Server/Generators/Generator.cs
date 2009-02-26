@@ -24,7 +24,7 @@ namespace Kistl.Server.Generators
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
                 Trace.TraceInformation("Generating Code");
-                using (IKistlContext ctx = KistlContext.InitSession())
+                using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     var generators = new[]{
                         new { Caption = "Interface Source Files", Generator = DataObjectGeneratorFactory.GetInterfaceGenerator() },

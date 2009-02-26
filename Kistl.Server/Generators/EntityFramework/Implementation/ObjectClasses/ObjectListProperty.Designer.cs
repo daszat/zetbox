@@ -67,7 +67,7 @@ this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (",  wrapperName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , ">(\r\n");
-this.WriteObjects("                            ",  efName , "");
+this.WriteObjects("                            this.Context, ",  efName , "");
 #line 55 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectListProperty.cst"
 // TODO: improve this!
 	if (relEnd.Other.HasPersistentOrder)

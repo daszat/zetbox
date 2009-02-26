@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-	<SourcePath Condition=" '$(SourcePath)' == '' ">..</SourcePath>
+    <SourcePath Condition=" '$(SourcePath)' == '' ">..</SourcePath>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}</ProjectGuid>

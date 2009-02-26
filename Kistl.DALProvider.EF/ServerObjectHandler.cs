@@ -20,19 +20,18 @@ namespace Kistl.DALProvider.EF
         /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        protected override T GetObjectInstance(int ID)
+        protected override T GetObjectInstance(IKistlContext ctx, int ID)
         {
             if (ID < Kistl.API.Helper.INVALIDID)
             {
                 // new object -> look in current context
-                Kistl.DALProvider.EF.KistlDataContext efCtx = (KistlDataContext)Kistl.API.Server.KistlContext.Current;
-                ObjectContext ctx = efCtx.ObjectContext;
-                return (T)ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
+                ObjectContext efCtx = ((KistlDataContext)ctx).ObjectContext;
+                return (T)efCtx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
                     .FirstOrDefault(e => e.Entity is IDataObject && ((IDataObject)e.Entity).ID == ID).Entity;
             }
             else
             {
-                return Kistl.API.Server.KistlContext.Current.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
+                return ctx.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
             }
         }
     }
@@ -45,26 +44,26 @@ namespace Kistl.DALProvider.EF
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public override IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects)
+        public override IEnumerable<IDataObject> SetObjects(IKistlContext ctx, IEnumerable<IDataObject> objects)
         {
             foreach (IDataObject obj in objects)
             {
                 // Fist of all, Attach Object
-                Kistl.API.Server.KistlContext.Current.Attach(obj);
+                ctx.Attach(obj);
 
                 if (obj.ObjectState != DataObjectState.Deleted)
                 {
-                    MarkEveryPropertyAsModified(obj);
+                    MarkEveryPropertyAsModified(ctx, obj);
                 }
             }
             foreach (IDataObject obj in objects)
             {
                 if (obj.ObjectState != DataObjectState.Deleted)
                 {
-                    UpdateRelationships(obj);
+                    UpdateRelationships(ctx, obj);
                 }
             }
-            return base.SetObjects(objects);
+            return base.SetObjects(ctx, objects);
         }
 
         /// <summary>
@@ -72,11 +71,11 @@ namespace Kistl.DALProvider.EF
         /// Note: Change Tracking is "enabled" by setting every Reference
         /// </summary>
         /// <param name="obj"></param>
-        protected static void UpdateRelationships(IDataObject obj)
+        protected static void UpdateRelationships(IKistlContext ctx, IDataObject obj)
         {
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
+            using (IKistlContext frozenctx = Kistl.API.Server.KistlContext.GetContext())
             {
-                Kistl.App.Base.ObjectClass objClass = obj.GetObjectClass(ctx);
+                Kistl.App.Base.ObjectClass objClass = obj.GetObjectClass(frozenctx);
                 while (objClass != null)
                 {
                     var listProperties = objClass.Properties.OfType<Kistl.App.Base.ObjectReferenceProperty>()
@@ -90,7 +89,7 @@ namespace Kistl.DALProvider.EF
                             if (fk != null)
                             {
                                 IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetPropertyType());
-                                IDataObject other = so.GetObject(fk.Value);
+                                IDataObject other = so.GetObject(ctx, fk.Value);
                                 if (other == null) throw new InvalidOperationException(string.Format("UpdateRelationships: Cannot find Object {0}:{1}", p.GetPropertyType().FullName, fk));
                                 obj.SetPropertyValue<IDataObject>(p.PropertyName, other);
                             }
@@ -107,7 +106,7 @@ namespace Kistl.DALProvider.EF
                                 int fk = ce.GetPrivateFieldValue<int>("_fk_Value");
 
                                 IServerObjectHandler so = ServerObjectHandlerFactory.GetServerObjectHandler(p.GetPropertyType());
-                                IDataObject other = so.GetObject(fk);
+                                IDataObject other = so.GetObject(ctx, fk);
                                 ce.SetPropertyValue<IDataObject>("Value", other);
                             }
                         }
@@ -123,13 +122,13 @@ namespace Kistl.DALProvider.EF
         /// Es gibt angeblich jetzt eine bessere MEthode
         /// </summary>
         /// <param name="obj"></param>
-        private static void MarkEveryPropertyAsModified(IPersistenceObject o)
+        private static void MarkEveryPropertyAsModified(IKistlContext ctx, IPersistenceObject o)
         {
             IEntityStateObject obj = (IEntityStateObject)o;
             // TODO: Bad Hack!!
             if (obj.EntityState.In(EntityState.Modified, EntityState.Unchanged))
             {
-                Kistl.DALProvider.EF.KistlDataContext efCtx = (KistlDataContext)Kistl.API.Server.KistlContext.Current;
+                Kistl.DALProvider.EF.KistlDataContext efCtx = (KistlDataContext)ctx;
                 ObjectStateEntry stateEntry = efCtx.ObjectContext.ObjectStateManager.GetObjectStateEntry(obj.EntityKey);
                 MetadataWorkspace workspace = efCtx.ObjectContext.MetadataWorkspace;
                 string typename;
@@ -153,16 +152,16 @@ namespace Kistl.DALProvider.EF
 
             if (obj is IDataObject)
             {
-                using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
+                using (IKistlContext frozenCtx = Kistl.API.Server.KistlContext.GetContext())
                 {
-                    Kistl.App.Base.ObjectClass objClass = (obj as IDataObject).GetObjectClass(ctx);
+                    Kistl.App.Base.ObjectClass objClass = (obj as IDataObject).GetObjectClass(frozenCtx);
                     while (objClass != null)
                     {
                         foreach (Kistl.App.Base.ValueTypeProperty p in objClass.Properties.OfType<Kistl.App.Base.ValueTypeProperty>().Where(p => p.IsList))
                         {
                             foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName + Kistl.API.Helper.ImplementationSuffix))
                             {
-                                MarkEveryPropertyAsModified(ce);
+                                MarkEveryPropertyAsModified(ctx, ce);
                             }
                         }
                         objClass = objClass.BaseObjectClass;

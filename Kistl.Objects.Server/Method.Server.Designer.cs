@@ -117,7 +117,7 @@ namespace Kistl.App.Base
                 if (_MethodInvokationsWrapper == null)
                 {
                     _MethodInvokationsWrapper = new EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__>(
-                            MethodInvokations__Implementation__);
+                            this.Context, MethodInvokations__Implementation__);
                 }
                 return _MethodInvokationsWrapper;
             }
@@ -230,6 +230,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -310,6 +311,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -350,7 +352,7 @@ namespace Kistl.App.Base
                 if (_ParameterWrapper == null)
                 {
                     _ParameterWrapper = new EntityListWrapper<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameter__Implementation__>(
-                            Parameter__Implementation__, "Method");
+                            this.Context, Parameter__Implementation__, "Method");
                 }
                 return _ParameterWrapper;
             }

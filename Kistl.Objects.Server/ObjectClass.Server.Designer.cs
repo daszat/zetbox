@@ -86,6 +86,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -166,6 +167,7 @@ namespace Kistl.App.Base
                     && !r.IsLoaded)
                 {
                     r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 return r.Value;
             }
@@ -305,7 +307,7 @@ namespace Kistl.App.Base
                 if (_SubClassesWrapper == null)
                 {
                     _SubClassesWrapper = new EntityCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass__Implementation__>(
-                            SubClasses__Implementation__);
+                            this.Context, SubClasses__Implementation__);
                 }
                 return _SubClassesWrapper;
             }

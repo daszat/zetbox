@@ -65,7 +65,7 @@ namespace Kistl.App.Base
                 if (_AssembliesWrapper == null)
                 {
                     _AssembliesWrapper = new EntityCollectionWrapper<Kistl.App.Base.Assembly, Kistl.App.Base.Assembly__Implementation__>(
-                            Assemblies__Implementation__);
+                            this.Context, Assemblies__Implementation__);
                 }
                 return _AssembliesWrapper;
             }
@@ -112,7 +112,7 @@ namespace Kistl.App.Base
                 if (_DataTypesWrapper == null)
                 {
                     _DataTypesWrapper = new EntityCollectionWrapper<Kistl.App.Base.DataType, Kistl.App.Base.DataType__Implementation__>(
-                            DataTypes__Implementation__);
+                            this.Context, DataTypes__Implementation__);
                 }
                 return _DataTypesWrapper;
             }

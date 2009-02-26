@@ -86,10 +86,10 @@ namespace Kistl.Server
             {
                 using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
                 {
-                    using (IKistlContext ctx = KistlContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType())
-                            .GetList(maxListCount,
+                            .GetList(ctx, maxListCount,
                             filter != null ? SerializableExpression.ToExpression(filter) : null,
                             orderBy != null ? SerializableExpression.ToExpression(orderBy) : null);
                         return CurrentSerializer.XmlFromList(lst);
@@ -123,9 +123,9 @@ namespace Kistl.Server
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
                 {
-                    using (IKistlContext ctx = KistlContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType()).GetListOf(ID, property);
+                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType()).GetListOf(ctx, ID, property);
                         return CurrentSerializer.XmlFromList(lst);
                     }
                 }
@@ -155,9 +155,9 @@ namespace Kistl.Server
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
                 {
-                    using (IKistlContext ctx = KistlContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType()).GetObject(ID);
+                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType()).GetObject(ctx, ID);
                         return CurrentSerializer.XmlFromObject(obj);
                     }
                 }
@@ -187,7 +187,7 @@ namespace Kistl.Server
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
                 {
-                    using (IKistlContext ctx = KistlContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         IDataObject obj = CurrentSerializer.ObjectFromXml(xmlObj);
                         throw new NotImplementedException();
@@ -213,7 +213,7 @@ namespace Kistl.Server
 
                 using (TraceClient.TraceHelper.TraceMethodCall("{0}", ceType))
                 {
-                    using (IKistlContext ctx = KistlContext.InitSession())
+                    using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         throw new NotImplementedException();
                     }

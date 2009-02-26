@@ -172,7 +172,7 @@ namespace Kistl.API.Server.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void FromStream_Null_StreamReader_fails()
         {
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
             {
                 TestObjClass result = new TestObjClass__Implementation__();
                 result.FromStream(null);
@@ -190,7 +190,7 @@ namespace Kistl.API.Server.Tests
             SerializableType wrongType = new SerializableType(typeof(string));
             BinarySerializer.ToStream(wrongType, sw);
 
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
             {
                 ms.Seek(0, SeekOrigin.Begin);
                 TestObjClass result = new TestObjClass__Implementation__();
@@ -212,7 +212,7 @@ namespace Kistl.API.Server.Tests
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.InitSession())
+            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
             {
                 TestObjClass result = ctx.Create<TestObjClass>();
                 result.FromStream(sr);
