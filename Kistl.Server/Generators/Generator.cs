@@ -87,6 +87,12 @@ namespace Kistl.Server.Generators
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
+                var dbGenerator = DatabaseGeneratorFactory.GetGenerator();
+
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    dbGenerator.Generate(ctx);
+                }
             }
         }
 
