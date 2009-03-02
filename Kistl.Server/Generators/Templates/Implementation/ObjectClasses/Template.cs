@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
-using Kistl.API.Server;
 using Kistl.App.Base;
-using Kistl.Server.Generators;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
@@ -39,28 +37,27 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 
         protected override void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
         {
-            var rel = NewRelation.Lookup(ctx, prop);
+            var rel = RelationExtensions.Lookup(ctx, prop);
 
             var relEnd = rel.GetEnd(prop);
-            var otherEnd = relEnd.Other;
+            var otherEnd = rel.GetOtherEnd(relEnd);
 
             // without navigator, there should be no property
             if (relEnd.Navigator == null)
                 return;
 
-            switch (rel.GetPreferredStorage())
+            switch ((StorageType)rel.Storage)
             {
-                case StorageHint.MergeA:
-                case StorageHint.MergeB:
-                case StorageHint.Replicate:
-
+                case StorageType.MergeIntoA:
+                case StorageType.MergeIntoB:
+                case StorageType.Replicate:
                     // simple and direct reference
                     this.WriteLine("        // object list property");
-                    ApplyObjectListPropertyTemplate(relEnd);
+                    ApplyObjectListPropertyTemplate(rel, (RelationEndRole)relEnd.Role);
                     break;
-                case StorageHint.Separate:
+                case StorageType.Separate:
                     this.WriteLine("        // collection reference property");
-                    ApplyCollectionEntryListTemplate(relEnd);
+                    ApplyCollectionEntryListTemplate(rel, (RelationEndRole)relEnd.Role);
                     break;
                 default:
                     throw new NotImplementedException("unknown StorageHint for ObjectReferenceProperty[IsList == true]");
@@ -71,22 +68,22 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         /// Call the ObjectListProperty template for a given RelationEnd
         /// </summary>
         /// <param name="relEnd"></param>
-        protected virtual void ApplyObjectListPropertyTemplate(RelationEnd relEnd)
+        protected virtual void ApplyObjectListPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
             this.Host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty", ctx,
                 this.MembersToSerialize,
-                relEnd);
+                rel, endRole);
         }
 
         /// <summary>
         /// Call the CollectionEntryListProperty template for a given RelationEnd
         /// </summary>
         /// <param name="relEnd"></param>
-        protected virtual void ApplyCollectionEntryListTemplate(RelationEnd relEnd)
+        protected virtual void ApplyCollectionEntryListTemplate(Relation rel, RelationEndRole endRole)
         {
             Implementation.ObjectClasses.CollectionEntryListProperty.Call(Host, ctx,
                 this.MembersToSerialize,
-                relEnd);
+                rel, endRole);
         }
 
 

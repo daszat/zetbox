@@ -94,6 +94,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all RelationEnd</summary>
+		/// Describes one end of a relation between two object classes
+		public IQueryable<RelationEnd> RelationEnds
+		{ 
+			get
+			{
+				return Context.GetQuery<RelationEnd>();
+			}
+		}
+		
 		/// <summary>List of all Relation</summary>
 		/// Describes a Relation between two Object Classes
 		public IQueryable<Relation> Relations

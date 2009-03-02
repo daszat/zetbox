@@ -101,10 +101,10 @@ namespace Kistl.App.Zeiterfassung
         /// Mitarbeiter
         /// </summary>
     /*
-    NewRelation: FK_Taetigkeit_Mitarbeiter_Taetigkeit_12 
-    A: ZeroOrMore Taetigkeit as Taetigkeit (site: A, no Relation, prop ID=54)
-    B: ZeroOrOne Mitarbeiter as Mitarbeiter (site: B, no Relation, prop ID=54)
-    Preferred Storage: MergeA
+    Relation: FK_Taetigkeit_Mitarbeiter_Taetigkeit_32
+    A: 3 Taetigkeit as Taetigkeit
+    B: 1 Mitarbeiter as Mitarbeiter
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -144,14 +144,14 @@ namespace Kistl.App.Zeiterfassung
         }
         private int? _fk_Mitarbeiter;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Taetigkeit_Mitarbeiter_Taetigkeit_12", "Mitarbeiter")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Taetigkeit_Mitarbeiter_Taetigkeit_32", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ Mitarbeiter__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_Taetigkeit_Mitarbeiter_Taetigkeit_12",
+                        "Model.FK_Taetigkeit_Mitarbeiter_Taetigkeit_32",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -165,7 +165,7 @@ namespace Kistl.App.Zeiterfassung
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_Taetigkeit_Mitarbeiter_Taetigkeit_12",
+                        "Model.FK_Taetigkeit_Mitarbeiter_Taetigkeit_32",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -176,16 +176,37 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Mitarbeiter_pos
+        {
+            get
+            {
+                return _Mitarbeiter_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Mitarbeiter_pos != value)
+                {
+                    NotifyPropertyChanging("Mitarbeiter_pos");
+                    _Mitarbeiter_pos = value;
+                    NotifyPropertyChanged("Mitarbeiter_pos");
+                }
+            }
+        }
+        private int? _Mitarbeiter_pos;
         
 
         /// <summary>
         /// Art der Tätigkeit
         /// </summary>
     /*
-    NewRelation: FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23 
-    A: ZeroOrMore Taetigkeit as Taetigkeit (site: A, no Relation, prop ID=88)
-    B: ZeroOrOne TaetigkeitsArt as TaetigkeitsArt (site: B, no Relation, prop ID=88)
-    Preferred Storage: MergeA
+    Relation: FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43
+    A: 3 Taetigkeit as Taetigkeit
+    B: 1 TaetigkeitsArt as TaetigkeitsArt
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -225,14 +246,14 @@ namespace Kistl.App.Zeiterfassung
         }
         private int? _fk_TaetigkeitsArt;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23", "TaetigkeitsArt")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43", "TaetigkeitsArt")]
         public Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__ TaetigkeitsArt__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__>(
-                        "Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23",
+                        "Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43",
                         "TaetigkeitsArt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -246,7 +267,7 @@ namespace Kistl.App.Zeiterfassung
             {
                 EntityReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__>(
-                        "Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23",
+                        "Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43",
                         "TaetigkeitsArt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -257,16 +278,37 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? TaetigkeitsArt_pos
+        {
+            get
+            {
+                return _TaetigkeitsArt_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_TaetigkeitsArt_pos != value)
+                {
+                    NotifyPropertyChanging("TaetigkeitsArt_pos");
+                    _TaetigkeitsArt_pos = value;
+                    NotifyPropertyChanged("TaetigkeitsArt_pos");
+                }
+            }
+        }
+        private int? _TaetigkeitsArt_pos;
         
 
         /// <summary>
         /// Zeitkonto
         /// </summary>
     /*
-    NewRelation: FK_Zeitkonto_Taetigkeit_Zeitkonto_13 
-    A: One Zeitkonto as Zeitkonto (site: A, from relation ID = 8)
-    B: ZeroOrMore Taetigkeit as Taetigkeiten (site: B, from relation ID = 8)
-    Preferred Storage: MergeB
+    Relation: FK_Zeitkonto_Taetigkeit_Zeitkonto_33
+    A: 2 Zeitkonto as Zeitkonto
+    B: 3 Taetigkeit as Taetigkeiten
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -306,14 +348,14 @@ namespace Kistl.App.Zeiterfassung
         }
         private int? _fk_Zeitkonto;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Taetigkeit_Zeitkonto_13", "Zeitkonto")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Taetigkeit_Zeitkonto_33", "Zeitkonto")]
         public Kistl.App.Zeiterfassung.Zeitkonto__Implementation__ Zeitkonto__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Zeiterfassung.Zeitkonto__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.Zeitkonto__Implementation__>(
-                        "Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_13",
+                        "Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_33",
                         "Zeitkonto");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -327,7 +369,7 @@ namespace Kistl.App.Zeiterfassung
             {
                 EntityReference<Kistl.App.Zeiterfassung.Zeitkonto__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.Zeitkonto__Implementation__>(
-                        "Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_13",
+                        "Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_33",
                         "Zeitkonto");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -338,6 +380,27 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Zeitkonto_pos
+        {
+            get
+            {
+                return _Zeitkonto_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Zeitkonto_pos != value)
+                {
+                    NotifyPropertyChanging("Zeitkonto_pos");
+                    _Zeitkonto_pos = value;
+                    NotifyPropertyChanged("Zeitkonto_pos");
+                }
+            }
+        }
+        private int? _Zeitkonto_pos;
         
 
 		public override Type GetInterfaceType()
@@ -386,8 +449,11 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.ToStream(this._Datum, binStream);
             BinarySerializer.ToStream(this._Dauer, binStream);
             BinarySerializer.ToStream(this.fk_Mitarbeiter, binStream);
+            BinarySerializer.ToStream(this._Mitarbeiter_pos, binStream);
             BinarySerializer.ToStream(this.fk_TaetigkeitsArt, binStream);
+            BinarySerializer.ToStream(this._TaetigkeitsArt_pos, binStream);
             BinarySerializer.ToStream(this.fk_Zeitkonto, binStream);
+            BinarySerializer.ToStream(this._Zeitkonto_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -400,16 +466,19 @@ namespace Kistl.App.Zeiterfassung
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Mitarbeiter = tmp;
             }
+            BinarySerializer.FromStream(out this._Mitarbeiter_pos, binStream);
             {
                 var tmp = this.fk_TaetigkeitsArt;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_TaetigkeitsArt = tmp;
             }
+            BinarySerializer.FromStream(out this._TaetigkeitsArt_pos, binStream);
             {
                 var tmp = this.fk_Zeitkonto;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Zeitkonto = tmp;
             }
+            BinarySerializer.FromStream(out this._Zeitkonto_pos, binStream);
         }
 
 #endregion

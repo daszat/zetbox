@@ -275,7 +275,6 @@
     </Compile>
     <Compile Include="Server.cs" />
     <Compile Include="ServerApplicationContext.cs" />
-    <Compile Include="TheseMethodsShouldBeImplementedOnKistlObjects.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
@@ -292,6 +291,10 @@
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects</Name>
       <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>TempAppHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -664,7 +667,6 @@
     <Compile Include="Movables\RelationExtensions.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\AssociationInfo.Implementation.cs" />
     <Compile Include="Movables\NewRelation.cs" />
-    <Compile Include="Movables\Multiplicity.cs" />
     <Compile Include="Movables\StorageHint.cs" />
   </ItemGroup>
   <ItemGroup>

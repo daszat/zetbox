@@ -49,10 +49,10 @@ namespace Kistl.App.Base
         /// The Type implementing this invocation
         /// </summary>
     /*
-    NewRelation: FK_MethodInvocation_TypeRef_MethodInvocation_47 
-    A: ZeroOrMore MethodInvocation as MethodInvocation (site: A, no Relation, prop ID=208)
-    B: ZeroOrOne TypeRef as Implementor (site: B, no Relation, prop ID=208)
-    Preferred Storage: MergeA
+    Relation: FK_MethodInvocation_TypeRef_MethodInvocation_67
+    A: 3 MethodInvocation as MethodInvocation
+    B: 1 TypeRef as Implementor
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -92,14 +92,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_Implementor;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_TypeRef_MethodInvocation_47", "Implementor")]
+        [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_TypeRef_MethodInvocation_67", "Implementor")]
         public Kistl.App.Base.TypeRef__Implementation__ Implementor__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_MethodInvocation_TypeRef_MethodInvocation_47",
+                        "Model.FK_MethodInvocation_TypeRef_MethodInvocation_67",
                         "Implementor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -113,7 +113,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_MethodInvocation_TypeRef_MethodInvocation_47",
+                        "Model.FK_MethodInvocation_TypeRef_MethodInvocation_67",
                         "Implementor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -124,16 +124,37 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Implementor_pos
+        {
+            get
+            {
+                return _Implementor_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Implementor_pos != value)
+                {
+                    NotifyPropertyChanging("Implementor_pos");
+                    _Implementor_pos = value;
+                    NotifyPropertyChanged("Implementor_pos");
+                }
+            }
+        }
+        private int? _Implementor_pos;
         
 
         /// <summary>
         /// In dieser Objektklasse implementieren
         /// </summary>
     /*
-    NewRelation: FK_DataType_MethodInvocation_InvokeOnObjectClass_21 
-    A: One DataType as InvokeOnObjectClass (site: A, from relation ID = 11)
-    B: ZeroOrMore MethodInvocation as MethodInvocations (site: B, from relation ID = 11)
-    Preferred Storage: MergeB
+    Relation: FK_DataType_MethodInvocation_InvokeOnObjectClass_41
+    A: 2 DataType as InvokeOnObjectClass
+    B: 3 MethodInvocation as MethodInvocations
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -173,14 +194,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_InvokeOnObjectClass;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_MethodInvocation_InvokeOnObjectClass_21", "InvokeOnObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_MethodInvocation_InvokeOnObjectClass_41", "InvokeOnObjectClass")]
         public Kistl.App.Base.DataType__Implementation__ InvokeOnObjectClass__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_21",
+                        "Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_41",
                         "InvokeOnObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -194,7 +215,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_21",
+                        "Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_41",
                         "InvokeOnObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -205,6 +226,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? InvokeOnObjectClass_pos
+        {
+            get
+            {
+                return _InvokeOnObjectClass_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_InvokeOnObjectClass_pos != value)
+                {
+                    NotifyPropertyChanging("InvokeOnObjectClass_pos");
+                    _InvokeOnObjectClass_pos = value;
+                    NotifyPropertyChanged("InvokeOnObjectClass_pos");
+                }
+            }
+        }
+        private int? _InvokeOnObjectClass_pos;
         
 
         /// <summary>
@@ -237,10 +279,10 @@ namespace Kistl.App.Base
         /// Methode, die Aufgerufen wird
         /// </summary>
     /*
-    NewRelation: FK_Method_MethodInvocation_Method_19 
-    A: One Method as Method (site: A, from relation ID = 12)
-    B: ZeroOrMore MethodInvocation as MethodInvokations (site: B, from relation ID = 12)
-    Preferred Storage: MergeB
+    Relation: FK_Method_MethodInvocation_Method_39
+    A: 2 Method as Method
+    B: 3 MethodInvocation as MethodInvokations
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -280,14 +322,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_Method;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Method_MethodInvocation_Method_19", "Method")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Method_MethodInvocation_Method_39", "Method")]
         public Kistl.App.Base.Method__Implementation__ Method__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Method__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_Method_MethodInvocation_Method_19",
+                        "Model.FK_Method_MethodInvocation_Method_39",
                         "Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -301,7 +343,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Method__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_Method_MethodInvocation_Method_19",
+                        "Model.FK_Method_MethodInvocation_Method_39",
                         "Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -312,16 +354,37 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Method_pos
+        {
+            get
+            {
+                return _Method_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Method_pos != value)
+                {
+                    NotifyPropertyChanging("Method_pos");
+                    _Method_pos = value;
+                    NotifyPropertyChanged("Method_pos");
+                }
+            }
+        }
+        private int? _Method_pos;
         
 
         /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
     /*
-    NewRelation: FK_MethodInvocation_Module_MethodInvocation_20 
-    A: ZeroOrMore MethodInvocation as MethodInvocation (site: A, no Relation, prop ID=78)
-    B: ZeroOrOne Module as Module (site: B, no Relation, prop ID=78)
-    Preferred Storage: MergeA
+    Relation: FK_MethodInvocation_Module_MethodInvocation_40
+    A: 3 MethodInvocation as MethodInvocation
+    B: 1 Module as Module
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -361,14 +424,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_Module;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_Module_MethodInvocation_20", "Module")]
+        [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_Module_MethodInvocation_40", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_MethodInvocation_Module_MethodInvocation_20",
+                        "Model.FK_MethodInvocation_Module_MethodInvocation_40",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -382,7 +445,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_MethodInvocation_Module_MethodInvocation_20",
+                        "Model.FK_MethodInvocation_Module_MethodInvocation_40",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -393,6 +456,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Module_pos
+        {
+            get
+            {
+                return _Module_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Module_pos != value)
+                {
+                    NotifyPropertyChanging("Module_pos");
+                    _Module_pos = value;
+                    NotifyPropertyChanged("Module_pos");
+                }
+            }
+        }
+        private int? _Module_pos;
         
 
 		public override Type GetInterfaceType()
@@ -439,10 +523,14 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_Implementor, binStream);
+            BinarySerializer.ToStream(this._Implementor_pos, binStream);
             BinarySerializer.ToStream(this.fk_InvokeOnObjectClass, binStream);
+            BinarySerializer.ToStream(this._InvokeOnObjectClass_pos, binStream);
             BinarySerializer.ToStream(this._MemberName, binStream);
             BinarySerializer.ToStream(this.fk_Method, binStream);
+            BinarySerializer.ToStream(this._Method_pos, binStream);
             BinarySerializer.ToStream(this.fk_Module, binStream);
+            BinarySerializer.ToStream(this._Module_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -453,22 +541,26 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Implementor = tmp;
             }
+            BinarySerializer.FromStream(out this._Implementor_pos, binStream);
             {
                 var tmp = this.fk_InvokeOnObjectClass;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_InvokeOnObjectClass = tmp;
             }
+            BinarySerializer.FromStream(out this._InvokeOnObjectClass_pos, binStream);
             BinarySerializer.FromStream(out this._MemberName, binStream);
             {
                 var tmp = this.fk_Method;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Method = tmp;
             }
+            BinarySerializer.FromStream(out this._Method_pos, binStream);
             {
                 var tmp = this.fk_Module;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Module = tmp;
             }
+            BinarySerializer.FromStream(out this._Module_pos, binStream);
         }
 
 #endregion

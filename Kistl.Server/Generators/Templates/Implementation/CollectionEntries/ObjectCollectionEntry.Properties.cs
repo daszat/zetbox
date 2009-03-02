@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Kistl.API;
+using Kistl.App.Base;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 {
@@ -12,34 +13,33 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
     {
         protected override void ApplyAPropertyTemplate()
         {
-            ApplyObjectReferenceProperty(rel.A, "A");
+            ApplyObjectReferenceProperty(rel, RelationEndRole.A, "A");
         }
 
         protected override void ApplyBPropertyTemplate()
         {
-            ApplyObjectReferenceProperty(rel.B, "B");
+            ApplyObjectReferenceProperty(rel, RelationEndRole.B, "B");
         }
 
         protected override void ApplyAIndexPropertyTemplate()
         {
-            ApplyIndexPropertyTemplate(rel.A, "A");
+            ApplyIndexPropertyTemplate(rel, RelationEndRole.A);
         }
 
         protected override void ApplyBIndexPropertyTemplate()
         {
-            ApplyIndexPropertyTemplate(rel.B, "B");
+            ApplyIndexPropertyTemplate(rel, RelationEndRole.B);
         }
 
         /// <summary>
         /// Creates a object reference property with the given propertyName for this RelationEnd
         /// </summary>
-        protected abstract void ApplyObjectReferenceProperty(RelationEnd relEnd, string propertyName);
+        protected abstract void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName);
 
 
         /// <summary>
         /// Creates a index property for this RelationEnd
         /// </summary>
-        /// <param name="side">"A" or "B"</param>
-        protected abstract void ApplyIndexPropertyTemplate(RelationEnd relEnd, string side);
+        protected abstract void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole);
     }
 }

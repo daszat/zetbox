@@ -75,10 +75,10 @@ namespace Kistl.App.Base
         /// Übergeordnete Enumeration
         /// </summary>
     /*
-    NewRelation: FK_Enumeration_EnumerationEntry_Enumeration_27 
-    A: One Enumeration as Enumeration (site: A, from relation ID = 15)
-    B: ZeroOrMore EnumerationEntry as EnumerationEntries (site: B, from relation ID = 15)
-    Preferred Storage: MergeB
+    Relation: FK_Enumeration_EnumerationEntry_Enumeration_47
+    A: 2 Enumeration as Enumeration
+    B: 3 EnumerationEntry as EnumerationEntries
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -118,14 +118,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_Enumeration;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Enumeration_EnumerationEntry_Enumeration_27", "Enumeration")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Enumeration_EnumerationEntry_Enumeration_47", "Enumeration")]
         public Kistl.App.Base.Enumeration__Implementation__ Enumeration__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Enumeration__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Enumeration__Implementation__>(
-                        "Model.FK_Enumeration_EnumerationEntry_Enumeration_27",
+                        "Model.FK_Enumeration_EnumerationEntry_Enumeration_47",
                         "Enumeration");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -139,7 +139,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Enumeration__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Enumeration__Implementation__>(
-                        "Model.FK_Enumeration_EnumerationEntry_Enumeration_27",
+                        "Model.FK_Enumeration_EnumerationEntry_Enumeration_47",
                         "Enumeration");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -150,6 +150,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Enumeration_pos
+        {
+            get
+            {
+                return _Enumeration_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Enumeration_pos != value)
+                {
+                    NotifyPropertyChanging("Enumeration_pos");
+                    _Enumeration_pos = value;
+                    NotifyPropertyChanged("Enumeration_pos");
+                }
+            }
+        }
+        private int? _Enumeration_pos;
         
 
         /// <summary>
@@ -249,6 +270,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this.fk_Enumeration, binStream);
+            BinarySerializer.ToStream(this._Enumeration_pos, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._Value, binStream);
         }
@@ -262,6 +284,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Enumeration = tmp;
             }
+            BinarySerializer.FromStream(out this._Enumeration_pos, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._Value, binStream);
         }

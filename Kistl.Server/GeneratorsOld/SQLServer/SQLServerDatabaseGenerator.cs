@@ -9,6 +9,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server;
 using Kistl.Server.Generators.Extensions;
 using Kistl.Server.GeneratorsOld.Helper;
@@ -120,6 +121,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 {
                     bool columnExists = SQLServerHelper.CheckColumnExists(classToCheck, p, parentPropertyName, db, tx);
                     System.Diagnostics.Trace.TraceInformation("  " + (columnExists ? "Checking" : "Creating") + " Column " + classToCheck.TableName + "." + p.PropertyName.CalcColumnName(parentPropertyName));
+
                     if (columnExists)
                     {
                         SQLServerHelper.AlterColumn(classToCheck, p, parentPropertyName, db, tx);

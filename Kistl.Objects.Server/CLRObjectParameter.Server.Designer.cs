@@ -30,10 +30,10 @@ namespace Kistl.App.Base
         /// Assembly des CLR Objektes, NULL für Default Assemblies
         /// </summary>
     /*
-    NewRelation: FK_CLRObjectParameter_Assembly_CLRObjectParameter_26 
-    A: ZeroOrMore CLRObjectParameter as CLRObjectParameter (site: A, no Relation, prop ID=98)
-    B: ZeroOrOne Assembly as Assembly (site: B, no Relation, prop ID=98)
-    Preferred Storage: MergeA
+    Relation: FK_CLRObjectParameter_Assembly_CLRObjectParameter_46
+    A: 3 CLRObjectParameter as CLRObjectParameter
+    B: 1 Assembly as Assembly
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -73,14 +73,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_Assembly;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_CLRObjectParameter_Assembly_CLRObjectParameter_26", "Assembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_CLRObjectParameter_Assembly_CLRObjectParameter_46", "Assembly")]
         public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_CLRObjectParameter_Assembly_CLRObjectParameter_26",
+                        "Model.FK_CLRObjectParameter_Assembly_CLRObjectParameter_46",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -94,7 +94,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_CLRObjectParameter_Assembly_CLRObjectParameter_26",
+                        "Model.FK_CLRObjectParameter_Assembly_CLRObjectParameter_46",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -105,6 +105,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Assembly_pos
+        {
+            get
+            {
+                return _Assembly_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Assembly_pos != value)
+                {
+                    NotifyPropertyChanging("Assembly_pos");
+                    _Assembly_pos = value;
+                    NotifyPropertyChanged("Assembly_pos");
+                }
+            }
+        }
+        private int? _Assembly_pos;
         
 
         /// <summary>
@@ -219,6 +240,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_Assembly, binStream);
+            BinarySerializer.ToStream(this._Assembly_pos, binStream);
             BinarySerializer.ToStream(this._FullTypeName, binStream);
         }
 
@@ -230,6 +252,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Assembly = tmp;
             }
+            BinarySerializer.FromStream(out this._Assembly_pos, binStream);
             BinarySerializer.FromStream(out this._FullTypeName, binStream);
         }
 

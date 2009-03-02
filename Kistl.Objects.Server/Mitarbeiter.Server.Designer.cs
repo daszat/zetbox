@@ -101,10 +101,10 @@ namespace Kistl.App.Projekte
         /// Projekte des Mitarbeiters für die er Verantwortlich ist
         /// </summary>
     /*
-    NewRelation: FK_Projekt_Mitarbeiter_Projekte_3 
-    A: ZeroOrMore Projekt as Projekte (site: A, from relation ID = 3)
-    B: ZeroOrMore Mitarbeiter as Mitarbeiter (site: B, from relation ID = 3)
-    Preferred Storage: Separate
+    Relation: FK_Projekt_Mitarbeiter_Projekte_23
+    A: 3 Projekt as Projekte
+    B: 3 Mitarbeiter as Mitarbeiter
+    Preferred Storage: 4
     */
         // collection reference property
         // implement the user-visible interface
@@ -116,7 +116,7 @@ namespace Kistl.App.Projekte
             {
                 if (_ProjekteWrapper == null)
                 {
-                    _ProjekteWrapper = new EntityListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__>(
+                    _ProjekteWrapper = new EntityListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
                             this,
                             Projekte__Implementation__);
                 }
@@ -124,14 +124,14 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Mitarbeiter_Mitarbeiter_3", "CollectionEntry")]
-        public EntityCollection<Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__> Projekte__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Mitarbeiter_Mitarbeiter_23", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__> Projekte__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__>(
-                        "Model.FK_Projekt_Mitarbeiter_Mitarbeiter_3",
+                    .GetRelatedCollection<Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
+                        "Model.FK_Projekt_Mitarbeiter_Mitarbeiter_23",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -141,7 +141,7 @@ namespace Kistl.App.Projekte
                 return c;
             }
         }
-        private EntityListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter3CollectionEntry__Implementation__> _ProjekteWrapper;
+        private EntityListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__> _ProjekteWrapper;
         
 
         /// <summary>

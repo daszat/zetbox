@@ -4,36 +4,44 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
-using Kistl.Server.Movables;
+using Kistl.API.Server;
+using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 {
     public partial class ObjectCollectionEntry
     {
-        protected override void ApplyObjectReferenceProperty(RelationEnd relEnd, string propertyName)
+        protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
         {
+            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
             string backingName = propertyName + Kistl.API.Helper.ImplementationSuffix;
             string fkName = "fk_" + propertyName;
 
             ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx, MembersToSerialize,
                propertyName, backingName, fkName, "_" + fkName,
-                relEnd.Type.NameDataObject, relEnd.Container, relEnd, relEnd.Other,
-                false, relEnd.Other.HasPersistentOrder);
+                relEnd.Type.GetDataTypeString(), rel, endRole,
+                false, otherEnd.HasPersistentOrder);
         }
 
-        protected override void ApplyIndexPropertyTemplate(RelationEnd relEnd, string side)
+        protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
-            if (relEnd.Other.HasPersistentOrder)
+            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+            if (otherEnd.HasPersistentOrder)
             {
-                this.MembersToSerialize.Add("_" + side + Kistl.API.Helper.PositionSuffix);
-                this.WriteObjects("public int? ", side, "Index { get { return ",
-                    side, Kistl.API.Helper.PositionSuffix, "; } set { ",
-                    side, Kistl.API.Helper.PositionSuffix, " = value; } }");
+                this.MembersToSerialize.Add("_" + endRole + Kistl.API.Helper.PositionSuffix);
+                this.WriteObjects("public int? ", endRole, "Index { get { return ",
+                    endRole, Kistl.API.Helper.PositionSuffix, "; } set { ",
+                    endRole, Kistl.API.Helper.PositionSuffix, " = value; } }");
             }
             else if (IsOrdered())
             {
                 this.WriteLine("/// <summary>ignored implementation for INewListEntry</summary>");
-                this.WriteObjects("public int? ", side, "Index { get { return null; } set { } }");
+                this.WriteObjects("public int? ", endRole, "Index { get { return null; } set { } }");
             }
         }
     }

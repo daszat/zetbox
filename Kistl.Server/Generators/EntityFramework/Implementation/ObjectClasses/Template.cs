@@ -6,8 +6,8 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
@@ -98,50 +98,46 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 
         protected override void ApplyObjectReferencePropertyTemplate(ObjectReferenceProperty prop)
         {
-            var rel = NewRelation.Lookup(ctx, prop);
+            var rel = RelationExtensions.Lookup(ctx, prop);
 
-            Debug.Assert(rel.A.Navigator == prop || rel.B.Navigator == prop);
-            var relEnd = rel.GetEnd(prop);
-            var otherEnd = relEnd.Other;
+            Debug.Assert(rel.A.Navigator.ID == prop.ID || rel.B.Navigator.ID == prop.ID);
+            RelationEnd relEnd = rel.GetEnd(prop);
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+            if (rel.Storage == StorageType.Separate)
+            {
+                throw new InvalidOperationException("Separate Storage not implemented for ObjectReferenceProperty in 1:N");
+            }
 
             this.WriteLine("    /*");
             this.CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
             this.WriteLine("    */");
 
-            switch (rel.GetPreferredStorage())
-            {
-                case StorageHint.MergeA:
-                case StorageHint.MergeB:
-                case StorageHint.Replicate:
+            bool hasPositionStorage = rel.NeedsPositionStorage((RelationEndRole)relEnd.Role);
 
-                    this.WriteLine("        // object reference property");
-                    this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
-                        this.MembersToSerialize,
-                        prop.PropertyName,
-                        rel.GetAssociationName(), otherEnd.RoleName,
-                        otherEnd.Type.NameDataObject,
-                        otherEnd.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix,
-                        (relEnd.Multiplicity.UpperBound() > 1 && relEnd.HasPersistentOrder)
-                        );
-                    break;
-                case StorageHint.Separate:
-                default:
-                    throw new NotImplementedException("unknown StorageHint for ObjectReferenceProperty[IsList == false]");
-            }
+            this.WriteLine("        // object reference property");
+                this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+                    this.MembersToSerialize,
+                    prop.PropertyName,
+                    rel.GetAssociationName(), otherEnd.RoleName,
+                    otherEnd.Type.GetDataTypeString(),
+                    otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
+                    hasPositionStorage
+                    );
         }
 
-        protected override void ApplyCollectionEntryListTemplate(RelationEnd relEnd)
+        protected override void ApplyCollectionEntryListTemplate(Relation rel, RelationEndRole endRole)
         {
             this.CallTemplate("Implementation.ObjectClasses.CollectionEntryListProperty", ctx,
                 this.MembersToSerialize,
-                relEnd);
+                rel, endRole);
         }
 
         protected override void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
         {
             // TODO: move debugging output into Templates
             this.WriteLine("    /*");
-            this.CallTemplate("Implementation.RelationDebugTemplate", ctx, NewRelation.Lookup(ctx, prop));
+            this.CallTemplate("Implementation.RelationDebugTemplate", ctx, RelationExtensions.Lookup(ctx, prop));
             this.WriteLine("    */");
 
             base.ApplyObjectReferenceListTemplate(prop);

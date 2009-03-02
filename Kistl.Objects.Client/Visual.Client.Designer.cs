@@ -34,15 +34,15 @@ namespace Kistl.App.GUI
 				if (_Children == null)
 				{
 					_Children 
-						= new ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children35CollectionEntry__Implementation__>(
+						= new ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children55CollectionEntry__Implementation__>(
 							this, 
-							(ICollection<Visual_Children35CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children35CollectionEntry__Implementation__>(RelationEndRole.A, this));
+							(ICollection<Visual_Children55CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children55CollectionEntry__Implementation__>(RelationEndRole.A, this));
 				}
 				return _Children;
 			}
 		}
 
-		private ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children35CollectionEntry__Implementation__> _Children;
+		private ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children55CollectionEntry__Implementation__> _Children;
 
         /// <summary>
         /// The context menu for this Visual
@@ -56,15 +56,15 @@ namespace Kistl.App.GUI
 				if (_ContextMenu == null)
 				{
 					_ContextMenu 
-						= new ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu40CollectionEntry__Implementation__>(
+						= new ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu60CollectionEntry__Implementation__>(
 							this, 
-							(ICollection<Visual_ContextMenu40CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu40CollectionEntry__Implementation__>(RelationEndRole.A, this));
+							(ICollection<Visual_ContextMenu60CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu60CollectionEntry__Implementation__>(RelationEndRole.A, this));
 				}
 				return _ContextMenu;
 			}
 		}
 
-		private ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu40CollectionEntry__Implementation__> _ContextMenu;
+		private ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu60CollectionEntry__Implementation__> _ContextMenu;
 
         /// <summary>
         /// Which visual is represented here

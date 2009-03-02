@@ -1,8 +1,8 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Implementation.EfModel.ModelMsl"
-	CodeFile="Implementation.EfModel.ModelMsl.cs" 
-	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.EfModel.ModelMsl" 
-	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+    Name="Implementation.EfModel.ModelMsl"
+    CodeFile="Implementation.EfModel.ModelMsl.cs" 
+    ClassName="Kistl.Server.Generators.EntityFramework.Implementation.EfModel.ModelMsl" 
+    Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>
@@ -11,7 +11,6 @@
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
-<%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
@@ -19,29 +18,27 @@
     
     <!-- EntitySetMappings for classes -->
 <%
-	foreach(var cls in ctx.GetBaseClasses())
-	{
+    foreach(var cls in ctx.GetBaseClasses())
+    {
 %>
     <EntitySetMapping Name="<%= cls.ClassName %>">
 <% ApplyEntityTypeMapping(cls); %>
     </EntitySetMapping>
 <%
-	}
+    }
 %>
 
 
     <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->
 <%
-	foreach(var rel in NewRelation.GetAll(ctx)
-        .Where(r => r.GetPreferredStorage() == StorageHint.Separate)
-        .OrderBy(r => r.GetAssociationName()))
-	{
-		string fkAName = rel.GetCollectionEntryFkaColumnName();
-		string fkBName = rel.GetCollectionEntryFkbColumnName();
+    foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
+    {
+        string fkAName = rel.GetCollectionEntryFkaColumnName();
+        string fkBName = rel.GetCollectionEntryFkbColumnName();
 %>
     <!--
 <%
-	CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+    CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
 %>
     -->
     <EntitySetMapping Name="<%= rel.GetCollectionEntryClassName() %>">
@@ -49,26 +46,26 @@
         <MappingFragment StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
 <%
-	if (rel.A.HasPersistentOrder)
-	{
+    if (rel.A.HasPersistentOrder)
+    {
 %>
           <ScalarProperty Name="A<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="<%= fkAName %><%= Kistl.API.Helper.PositionSuffix %>" />
 <%
-	}
+    }
 
-	if (rel.B.HasPersistentOrder)
-	{
+    if (rel.B.HasPersistentOrder)
+    {
 %>
           <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="<%= fkBName %><%= Kistl.API.Helper.PositionSuffix %>" />
 <%
-	}
+    }
 %>
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="<%= rel.GetCollectionEntryAssociationName(rel.A) %>"
-                           TypeName="Model.<%= rel.GetCollectionEntryAssociationName(rel.A) %>"
+    <AssociationSetMapping Name="<%= rel.GetCollectionEntryAssociationName(RelationEndRole.A) %>"
+                           TypeName="Model.<%= rel.GetCollectionEntryAssociationName(RelationEndRole.A) %>"
                            StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= rel.A.RoleName %>">
         <ScalarProperty Name="ID" ColumnName="<%= fkAName %>"/>
@@ -79,8 +76,8 @@
       <Condition ColumnName="<%= fkAName %>" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="<%= rel.GetCollectionEntryAssociationName(rel.B) %>"
-                           TypeName="Model.<%= rel.GetCollectionEntryAssociationName(rel.B) %>"
+    <AssociationSetMapping Name="<%= rel.GetCollectionEntryAssociationName(RelationEndRole.B) %>"
+                           TypeName="Model.<%= rel.GetCollectionEntryAssociationName(RelationEndRole.B) %>"
                            StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>" >
       <EndProperty Name="<%= rel.B.RoleName %>">
         <ScalarProperty Name="ID" ColumnName="<%= fkBName %>"/>
@@ -92,36 +89,34 @@
     </AssociationSetMapping>
 
 <%
-	}
-	
+    }
+    
 %>
 
 
     <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->
 <%
-	foreach(var rel in NewRelation.GetAll(ctx)
-        .Where(r => r.GetPreferredStorage() != StorageHint.Separate)
-        .OrderBy(r => r.GetAssociationName()))
-	{
-		RelationEnd principal, dependent;
-	
-		switch(rel.GetPreferredStorage())
-		{
-			case StorageHint.MergeA:
-				principal = rel.B;
-				dependent = rel.A;
-				break;
-			case StorageHint.MergeB:
-				principal = rel.A;
-				dependent = rel.B;
-				break;
-			default:
-				throw new NotImplementedException();
-		}
+    foreach(var rel in ModelCsdl.GetRelationsWithoutSeparateStorage(ctx))
+    {
+        RelationEnd principal, dependent;
+    
+        switch(rel.Storage)
+        {
+            case StorageType.MergeIntoA:
+                principal = rel.B;
+                dependent = rel.A;
+                break;
+            case StorageType.MergeIntoB:
+                principal = rel.A;
+                dependent = rel.B;
+                break;
+            default:
+                throw new NotImplementedException();
+        }
 %>
     <!--
 <%
-	CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+    CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
 %>
     -->
     <AssociationSetMapping Name="<%= rel.GetAssociationName() %>"
@@ -136,17 +131,17 @@
       <Condition ColumnName="fk_<%= principal.RoleName %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
-	}
-	
+    }
+    
 %>
 
     <!-- EntitySetMappings and AssociationSetMappings for ValueType lists -->
 <%
-	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+    foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
         .OrderBy(p => p.PropertyName))
-	{ 
+    { 
 %>
     <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>">
       <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>)">
@@ -154,12 +149,12 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="B" ColumnName="<%= prop.PropertyName %>" />
 <%
-	if (prop.IsIndexed)
-	{
+    if (prop.IsIndexed)
+    {
 %>
           <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="BIndex" />
 <%
-	}
+    }
 %>
         </MappingFragment>
       </EntityTypeMapping>
@@ -176,8 +171,8 @@
       <Condition ColumnName="fk_<%= prop.ObjectClass.ClassName %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
-	}
-	
+    }
+    
 %>
 
   </EntityContainerMapping>

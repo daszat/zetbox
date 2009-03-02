@@ -30,10 +30,10 @@ namespace Kistl.App.Base
         /// Pointer auf die Basisklasse
         /// </summary>
     /*
-    NewRelation: FK_ObjectClass_ObjectClass_BaseObjectClass_4 
-    A: ZeroOrOne ObjectClass as BaseObjectClass (site: A, from relation ID = 4)
-    B: ZeroOrMore ObjectClass as SubClasses (site: B, from relation ID = 4)
-    Preferred Storage: MergeB
+    Relation: FK_ObjectClass_ObjectClass_BaseObjectClass_24
+    A: 1 ObjectClass as BaseObjectClass
+    B: 3 ObjectClass as SubClasses
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -73,14 +73,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_BaseObjectClass;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_ObjectClass_BaseObjectClass_4", "BaseObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_ObjectClass_BaseObjectClass_24", "BaseObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ BaseObjectClass__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectClass_ObjectClass_BaseObjectClass_4",
+                        "Model.FK_ObjectClass_ObjectClass_BaseObjectClass_24",
                         "BaseObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -94,7 +94,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectClass_ObjectClass_BaseObjectClass_4",
+                        "Model.FK_ObjectClass_ObjectClass_BaseObjectClass_24",
                         "BaseObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -105,16 +105,37 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? BaseObjectClass_pos
+        {
+            get
+            {
+                return _BaseObjectClass_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_BaseObjectClass_pos != value)
+                {
+                    NotifyPropertyChanging("BaseObjectClass_pos");
+                    _BaseObjectClass_pos = value;
+                    NotifyPropertyChanged("BaseObjectClass_pos");
+                }
+            }
+        }
+        private int? _BaseObjectClass_pos;
         
 
         /// <summary>
         /// The default model to use for the UI
         /// </summary>
     /*
-    NewRelation: FK_ObjectClass_TypeRef_ObjectClass_50 
-    A: ZeroOrMore ObjectClass as ObjectClass (site: A, no Relation, prop ID=212)
-    B: ZeroOrOne TypeRef as DefaultModel (site: B, no Relation, prop ID=212)
-    Preferred Storage: MergeA
+    Relation: FK_ObjectClass_TypeRef_ObjectClass_70
+    A: 3 ObjectClass as ObjectClass
+    B: 1 TypeRef as DefaultModel
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -154,14 +175,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_DefaultModel;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_TypeRef_ObjectClass_50", "DefaultModel")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_TypeRef_ObjectClass_70", "DefaultModel")]
         public Kistl.App.Base.TypeRef__Implementation__ DefaultModel__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ObjectClass_TypeRef_ObjectClass_50",
+                        "Model.FK_ObjectClass_TypeRef_ObjectClass_70",
                         "DefaultModel");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -175,7 +196,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ObjectClass_TypeRef_ObjectClass_50",
+                        "Model.FK_ObjectClass_TypeRef_ObjectClass_70",
                         "DefaultModel");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -186,16 +207,37 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? DefaultModel_pos
+        {
+            get
+            {
+                return _DefaultModel_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_DefaultModel_pos != value)
+                {
+                    NotifyPropertyChanging("DefaultModel_pos");
+                    _DefaultModel_pos = value;
+                    NotifyPropertyChanged("DefaultModel_pos");
+                }
+            }
+        }
+        private int? _DefaultModel_pos;
         
 
         /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
     /*
-    NewRelation: FK_ObjectClass_Interface_ObjectClass_29 
-    A: ZeroOrMore ObjectClass as ObjectClass (site: A, no Relation, prop ID=105)
-    B: ZeroOrMore Interface as ImplementsInterfaces (site: B, no Relation, prop ID=105)
-    Preferred Storage: Separate
+    Relation: FK_ObjectClass_Interface_ObjectClass_49
+    A: 3 ObjectClass as ObjectClass
+    B: 3 Interface as ImplementsInterfaces
+    Preferred Storage: 4
     */
         // collection reference property
         // implement the user-visible interface
@@ -207,7 +249,7 @@ namespace Kistl.App.Base
             {
                 if (_ImplementsInterfacesWrapper == null)
                 {
-                    _ImplementsInterfacesWrapper = new EntityCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__>(
+                    _ImplementsInterfacesWrapper = new EntityCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(
                             this,
                             ImplementsInterfaces__Implementation__);
                 }
@@ -215,14 +257,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_Interface_ObjectClass_29", "CollectionEntry")]
-        public EntityCollection<Kistl.App.Base.ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__> ImplementsInterfaces__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_Interface_ObjectClass_49", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Base.ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__> ImplementsInterfaces__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Base.ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__>(
-                        "Model.FK_ObjectClass_Interface_ObjectClass_29",
+                    .GetRelatedCollection<Kistl.App.Base.ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(
+                        "Model.FK_ObjectClass_Interface_ObjectClass_49",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -232,7 +274,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__> _ImplementsInterfacesWrapper;
+        private EntityCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__> _ImplementsInterfacesWrapper;
         
 
         /// <summary>
@@ -291,10 +333,10 @@ namespace Kistl.App.Base
         /// Liste der vererbten Klassen
         /// </summary>
     /*
-    NewRelation: FK_ObjectClass_ObjectClass_BaseObjectClass_4 
-    A: ZeroOrOne ObjectClass as BaseObjectClass (site: A, from relation ID = 4)
-    B: ZeroOrMore ObjectClass as SubClasses (site: B, from relation ID = 4)
-    Preferred Storage: MergeB
+    Relation: FK_ObjectClass_ObjectClass_BaseObjectClass_24
+    A: 1 ObjectClass as BaseObjectClass
+    B: 3 ObjectClass as SubClasses
+    Preferred Storage: 2
     */
         // object list property
         // implement the user-visible interface
@@ -313,14 +355,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_ObjectClass_BaseObjectClass_4", "SubClasses")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_ObjectClass_BaseObjectClass_24", "SubClasses")]
         public EntityCollection<Kistl.App.Base.ObjectClass__Implementation__> SubClasses__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectClass_ObjectClass_BaseObjectClass_4",
+                        "Model.FK_ObjectClass_ObjectClass_BaseObjectClass_24",
                         "SubClasses");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -490,7 +532,9 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_BaseObjectClass, binStream);
+            BinarySerializer.ToStream(this._BaseObjectClass_pos, binStream);
             BinarySerializer.ToStream(this.fk_DefaultModel, binStream);
+            BinarySerializer.ToStream(this._DefaultModel_pos, binStream);
 			// collections have to be loaded separately for now
             // BinarySerializer.ToStreamCollectionEntries(this.ImplementsInterfaces__Implementation__, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
@@ -506,11 +550,13 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_BaseObjectClass = tmp;
             }
+            BinarySerializer.FromStream(out this._BaseObjectClass_pos, binStream);
             {
                 var tmp = this.fk_DefaultModel;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_DefaultModel = tmp;
             }
+            BinarySerializer.FromStream(out this._DefaultModel_pos, binStream);
 			// collections have to be loaded separately for now
             // BinarySerializer.FromStreamCollectionEntries(this.ImplementsInterfaces__Implementation__, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);

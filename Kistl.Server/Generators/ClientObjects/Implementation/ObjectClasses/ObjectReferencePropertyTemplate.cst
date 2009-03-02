@@ -7,9 +7,9 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
-<%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
 <%@ Parameter Name="name" Type="string" %>
@@ -17,11 +17,14 @@
 <%@ Parameter Name="fkName" Type="string" %>
 <%@ Parameter Name="fkBackingName" Type="string" %>
 <%@ Parameter Name="referencedInterface" Type="string" %>
-<%@ Parameter Name="rel" Type="NewRelation" %>
-<%@ Parameter Name="relEnd" Type="RelationEnd" %>
-<%@ Parameter Name="otherEnd" Type="RelationEnd" %>
+<%@ Parameter Name="rel" Type="Relation" %>
+<%@ Parameter Name="endRole" Type="RelationEndRole" %>
 <%@ Parameter Name="hasInverseNavigator" Type="bool" %>
 <%@ Parameter Name="hasPositionStorage" Type="bool" %>
+<%
+    RelationEnd relEnd = rel.GetEnd(endRole);
+    RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+%>
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

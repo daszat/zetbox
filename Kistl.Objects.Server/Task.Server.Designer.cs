@@ -153,10 +153,10 @@ namespace Kistl.App.Projekte
         /// Verknüpfung zum Projekt
         /// </summary>
     /*
-    NewRelation: FK_Projekt_Task_Projekt_2 
-    A: ZeroOrOne Projekt as Projekt (site: A, from relation ID = 2)
-    B: ZeroOrMore Task as Tasks (site: B, from relation ID = 2)
-    Preferred Storage: MergeB
+    Relation: FK_Projekt_Task_Projekt_22
+    A: 1 Projekt as Projekt
+    B: 3 Task as Tasks
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -196,14 +196,14 @@ namespace Kistl.App.Projekte
         }
         private int? _fk_Projekt;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Task_Projekt_2", "Projekt")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Task_Projekt_22", "Projekt")]
         public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_Task_Projekt_2",
+                        "Model.FK_Projekt_Task_Projekt_22",
                         "Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -217,7 +217,7 @@ namespace Kistl.App.Projekte
             {
                 EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_Task_Projekt_2",
+                        "Model.FK_Projekt_Task_Projekt_22",
                         "Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -228,6 +228,27 @@ namespace Kistl.App.Projekte
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Projekt_pos
+        {
+            get
+            {
+                return _Projekt_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Projekt_pos != value)
+                {
+                    NotifyPropertyChanging("Projekt_pos");
+                    _Projekt_pos = value;
+                    NotifyPropertyChanged("Projekt_pos");
+                }
+            }
+        }
+        private int? _Projekt_pos;
         
 
 		public override Type GetInterfaceType()
@@ -278,6 +299,7 @@ namespace Kistl.App.Projekte
             BinarySerializer.ToStream(this._DatumVon, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this.fk_Projekt, binStream);
+            BinarySerializer.ToStream(this._Projekt_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -292,6 +314,7 @@ namespace Kistl.App.Projekte
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Projekt = tmp;
             }
+            BinarySerializer.FromStream(out this._Projekt_pos, binStream);
         }
 
 #endregion

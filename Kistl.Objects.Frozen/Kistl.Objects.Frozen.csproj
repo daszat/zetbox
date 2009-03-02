@@ -89,7 +89,6 @@
     <Compile Include="ObjectParameter.Frozen.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Frozen.Designer.cs" />
     <Compile Include="Property.Frozen.Designer.cs" />
-    <Compile Include="Relation.Frozen.Designer.cs" />
     <Compile Include="StringParameter.Frozen.Designer.cs" />
     <Compile Include="StringProperty.Frozen.Designer.cs" />
     <Compile Include="StringRangeConstraint.Frozen.Designer.cs" />

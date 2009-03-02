@@ -49,10 +49,10 @@ namespace Kistl.App.Base
         /// The assembly containing the referenced Type.
         /// </summary>
     /*
-    NewRelation: FK_TypeRef_Assembly_TypeRef_45 
-    A: ZeroOrMore TypeRef as TypeRef (site: A, no Relation, prop ID=206)
-    B: ZeroOrOne Assembly as Assembly (site: B, no Relation, prop ID=206)
-    Preferred Storage: MergeA
+    Relation: FK_TypeRef_Assembly_TypeRef_65
+    A: 3 TypeRef as TypeRef
+    B: 1 Assembly as Assembly
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -92,14 +92,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_Assembly;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_Assembly_TypeRef_45", "Assembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_Assembly_TypeRef_65", "Assembly")]
         public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_TypeRef_Assembly_TypeRef_45",
+                        "Model.FK_TypeRef_Assembly_TypeRef_65",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -113,7 +113,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_TypeRef_Assembly_TypeRef_45",
+                        "Model.FK_TypeRef_Assembly_TypeRef_65",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -124,6 +124,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Assembly_pos
+        {
+            get
+            {
+                return _Assembly_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Assembly_pos != value)
+                {
+                    NotifyPropertyChanging("Assembly_pos");
+                    _Assembly_pos = value;
+                    NotifyPropertyChanged("Assembly_pos");
+                }
+            }
+        }
+        private int? _Assembly_pos;
         
 
         /// <summary>
@@ -156,10 +177,10 @@ namespace Kistl.App.Base
         /// list of type arguments
         /// </summary>
     /*
-    NewRelation: FK_TypeRef_TypeRef_TypeRef_46 
-    A: ZeroOrMore TypeRef as TypeRef (site: A, no Relation, prop ID=207)
-    B: ZeroOrMore TypeRef as GenericArguments (site: B, no Relation, prop ID=207)
-    Preferred Storage: Separate
+    Relation: FK_TypeRef_TypeRef_TypeRef_66
+    A: 3 TypeRef as TypeRef
+    B: 3 TypeRef as GenericArguments
+    Preferred Storage: 4
     */
         // collection reference property
         // implement the user-visible interface
@@ -171,7 +192,7 @@ namespace Kistl.App.Base
             {
                 if (_GenericArgumentsWrapper == null)
                 {
-                    _GenericArgumentsWrapper = new EntityListBSideWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArguments46CollectionEntry__Implementation__>(
+                    _GenericArgumentsWrapper = new EntityListBSideWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__>(
                             this,
                             GenericArguments__Implementation__);
                 }
@@ -179,14 +200,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_TypeRef_46", "CollectionEntry")]
-        public EntityCollection<Kistl.App.Base.TypeRef_GenericArguments46CollectionEntry__Implementation__> GenericArguments__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_TypeRef_66", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__> GenericArguments__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Base.TypeRef_GenericArguments46CollectionEntry__Implementation__>(
-                        "Model.FK_TypeRef_TypeRef_TypeRef_46",
+                    .GetRelatedCollection<Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__>(
+                        "Model.FK_TypeRef_TypeRef_TypeRef_66",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -196,7 +217,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityListBSideWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArguments46CollectionEntry__Implementation__> _GenericArgumentsWrapper;
+        private EntityListBSideWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__> _GenericArgumentsWrapper;
         
 
         /// <summary>
@@ -265,6 +286,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_Assembly, binStream);
+            BinarySerializer.ToStream(this._Assembly_pos, binStream);
             BinarySerializer.ToStream(this._FullName, binStream);
 			// collections have to be loaded separately for now
             // BinarySerializer.ToStreamCollectionEntries(this.GenericArguments__Implementation__, binStream);
@@ -278,6 +300,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Assembly = tmp;
             }
+            BinarySerializer.FromStream(out this._Assembly_pos, binStream);
             BinarySerializer.FromStream(out this._FullName, binStream);
 			// collections have to be loaded separately for now
             // BinarySerializer.FromStreamCollectionEntries(this.GenericArguments__Implementation__, binStream);

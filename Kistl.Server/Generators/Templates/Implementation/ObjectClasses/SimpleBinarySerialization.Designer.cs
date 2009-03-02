@@ -5,7 +5,6 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
@@ -31,7 +30,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
 string methodName = direction.ToString();
 	string modifier;
 	
@@ -47,7 +46,7 @@ string methodName = direction.ToString();
 	}
 	
 
-#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
+#line 32 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
 this.WriteObjects("            BinarySerializer.",  methodName , "(",  modifier , "this.",  memberName , ", ",  streamName , ");\r\n");
 
         }

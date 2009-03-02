@@ -5,8 +5,8 @@ using System.Text;
 using Kistl.Server.GeneratorsOld;
 
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation
 {
@@ -92,57 +92,60 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
         #endregion
 
-        public static string AssociationChildEntitySetName(Property prop)
-        {
-            TypeMoniker childType = Construct.AssociationChildType(prop);
-            if (!prop.IsList)
-            {
-                return prop.Context.GetQuery<ObjectClass>().First(c => childType.ClassName == c.ClassName).GetRootClass().ClassName;
-            }
-            else
-            {
-                return childType.ClassName;
-            }
-        }
+        //public static string AssociationChildEntitySetName(Property prop)
+        //{
+        //    TypeMoniker childType = Construct.AssociationChildType(prop);
+        //    if (!prop.IsList)
+        //    {
+        //        return prop.Context.GetQuery<ObjectClass>().First(c => childType.ClassName == c.ClassName).GetRootClass().ClassName;
+        //    }
+        //    else
+        //    {
+        //        return childType.ClassName;
+        //    }
+        //}
 
-        #region AssociationChildType
+        //#region AssociationChildType
 
-        public static TypeMoniker AssociationChildType(Property prop)
-        {
-            if (prop.HasStorage())
-            {
-                if (!prop.IsList)
-                {
-                    return prop.ObjectClass.GetTypeMoniker();
-                }
-                else
-                {
-                    return Construct.PropertyCollectionEntryType(prop);
-                }
-            }
-            else if (prop is ObjectReferenceProperty)
-            {
-                return AssociationChildType((ObjectReferenceProperty)prop);
-            }
+        //public static TypeMoniker AssociationChildType(Property prop)
+        //{
+        //    if (prop.HasStorage())
+        //    {
+        //        if (!prop.IsList)
+        //        {
+        //            return prop.ObjectClass.GetTypeMoniker();
+        //        }
+        //        else
+        //        {
+        //            return Construct.PropertyCollectionEntryType(prop);
+        //        }
+        //    }
+        //    else if (prop is ObjectReferenceProperty)
+        //    {
+        //        return AssociationChildType((ObjectReferenceProperty)prop);
+        //    }
 
-            throw new InvalidOperationException("Unable to find out AssociationChildType");
-        }
+        //    throw new InvalidOperationException("Unable to find out AssociationChildType");
+        //}
 
-        public static TypeMoniker AssociationChildType(ObjectReferenceProperty prop)
-        {
-            ObjectReferenceProperty opposite = prop.GetOpposite();
-            if (!opposite.IsList)
-            {
-                return new TypeMoniker(prop.GetPropertyTypeString());
-            }
-            else
-            {
-                return Construct.PropertyCollectionEntryType(opposite);
-            }
-        }
+        //public static TypeMoniker AssociationChildType(ObjectReferenceProperty prop)
+        //{
+        //    Relation rel = RelationExtensions.Lookup(prop.Context, prop);
+        //    RelationEnd relEnd = rel.GetEnd(prop);
+        //    RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+        //    if (!opposite.IsList)
+        //    {
+        //        return new TypeMoniker(prop.GetPropertyTypeString());
+        //    }
+        //    else
+        //    {
+        //        return Construct.PropertyCollectionEntryType(opposite);
+        //    }
+        //}
 
 
-        #endregion
+        //#endregion
 
         #region a collection entry TypeMoniker
 

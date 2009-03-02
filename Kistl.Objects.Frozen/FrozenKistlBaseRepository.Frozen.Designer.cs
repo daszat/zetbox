@@ -90,16 +90,6 @@ namespace Kistl.App.Base
 			}
 		}
 		
-		/// <summary>Frozen List of all Relation</summary>
-		/// Describes a Relation between two Object Classes
-		public static IQueryable<Relation> Relations
-		{ 
-			get
-			{
-				return Relation__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<Relation>();
-			}
-		}
-		
 		/// <summary>Frozen List of all Property</summary>
 		/// Metadefinition Object for Properties. This class is abstract.
 		public static IQueryable<Property> Properties
@@ -421,7 +411,6 @@ namespace Kistl.App.Base
 				StringRangeConstraint__Implementation__Frozen.CreateInstances();
 				StringProperty__Implementation__Frozen.CreateInstances();
 				StringParameter__Implementation__Frozen.CreateInstances();
-				Relation__Implementation__Frozen.CreateInstances();
 				Property__Implementation__Frozen.CreateInstances();
 				ObjectReferenceProperty__Implementation__Frozen.CreateInstances();
 				ObjectParameter__Implementation__Frozen.CreateInstances();
@@ -466,7 +455,6 @@ namespace Kistl.App.Base
 				StringRangeConstraint__Implementation__Frozen.FillDataStore();
 				StringProperty__Implementation__Frozen.FillDataStore();
 				StringParameter__Implementation__Frozen.FillDataStore();
-				Relation__Implementation__Frozen.FillDataStore();
 				Property__Implementation__Frozen.FillDataStore();
 				ObjectReferenceProperty__Implementation__Frozen.FillDataStore();
 				ObjectParameter__Implementation__Frozen.FillDataStore();

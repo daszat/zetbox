@@ -88,6 +88,7 @@
     <Compile Include="Projekt.Interface.Designer.cs" />
     <Compile Include="Property.Interface.Designer.cs" />
     <Compile Include="Relation.Interface.Designer.cs" />
+    <Compile Include="RelationEnd.Interface.Designer.cs" />
     <Compile Include="StringParameter.Interface.Designer.cs" />
     <Compile Include="StringProperty.Interface.Designer.cs" />
     <Compile Include="StringRangeConstraint.Interface.Designer.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Zeitkonto.Interface.Designer.cs" />
     <Compile Include="IRenderer.Interface.Designer.cs" />
     <Compile Include="ITestInterface.Interface.Designer.cs" />
+    <Compile Include="Multiplicity.Interface.Designer.cs" />
     <Compile Include="StorageType.Interface.Designer.cs" />
     <Compile Include="TestEnum.Interface.Designer.cs" />
     <Compile Include="Toolkit.Interface.Designer.cs" />

@@ -30,10 +30,10 @@ namespace Kistl.App.Base
         /// Definition of this Struct
         /// </summary>
     /*
-    NewRelation: FK_StructProperty_Struct_StructProperty_32 
-    A: ZeroOrMore StructProperty as StructProperty (site: A, no Relation, prop ID=129)
-    B: ZeroOrOne Struct as StructDefinition (site: B, no Relation, prop ID=129)
-    Preferred Storage: MergeA
+    Relation: FK_StructProperty_Struct_StructProperty_52
+    A: 3 StructProperty as StructProperty
+    B: 1 Struct as StructDefinition
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -73,14 +73,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_StructDefinition;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_StructProperty_Struct_StructProperty_32", "StructDefinition")]
+        [EdmRelationshipNavigationProperty("Model", "FK_StructProperty_Struct_StructProperty_52", "StructDefinition")]
         public Kistl.App.Base.Struct__Implementation__ StructDefinition__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Struct__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Struct__Implementation__>(
-                        "Model.FK_StructProperty_Struct_StructProperty_32",
+                        "Model.FK_StructProperty_Struct_StructProperty_52",
                         "StructDefinition");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -94,7 +94,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Struct__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Struct__Implementation__>(
-                        "Model.FK_StructProperty_Struct_StructProperty_32",
+                        "Model.FK_StructProperty_Struct_StructProperty_52",
                         "StructDefinition");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -105,6 +105,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? StructDefinition_pos
+        {
+            get
+            {
+                return _StructDefinition_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_StructDefinition_pos != value)
+                {
+                    NotifyPropertyChanging("StructDefinition_pos");
+                    _StructDefinition_pos = value;
+                    NotifyPropertyChanged("StructDefinition_pos");
+                }
+            }
+        }
+        private int? _StructDefinition_pos;
         
 
         /// <summary>
@@ -214,6 +235,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_StructDefinition, binStream);
+            BinarySerializer.ToStream(this._StructDefinition_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -224,6 +246,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_StructDefinition = tmp;
             }
+            BinarySerializer.FromStream(out this._StructDefinition_pos, binStream);
         }
 
 #endregion

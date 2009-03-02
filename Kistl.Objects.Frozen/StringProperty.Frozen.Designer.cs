@@ -148,7 +148,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(48);
+		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(49);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[1] = 
@@ -390,6 +390,11 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[205] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[205] = 
 			DataStore[205] = new StringProperty__Implementation__Frozen(205);
+
+			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[216] = 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[216] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[216] = 
+			DataStore[216] = new StringProperty__Implementation__Frozen(216);
 
 		}
 
@@ -1048,6 +1053,18 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[205].IsIndexed = false;
 			DataStore[205].Length = 200;
 			DataStore[205].Seal();
+			DataStore[216].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
+			DataStore[216].PropertyName = @"RoleName";
+			DataStore[216].AltText = @"This end's role name in the relation";
+			DataStore[216].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[216].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[216].Description = @"This end's role name in the relation";
+			DataStore[216].IsList = false;
+			DataStore[216].IsNullable = false;
+			DataStore[216].IsIndexed = false;
+			DataStore[216].Length = 200;
+			DataStore[216].Seal();
 	
 		}
 

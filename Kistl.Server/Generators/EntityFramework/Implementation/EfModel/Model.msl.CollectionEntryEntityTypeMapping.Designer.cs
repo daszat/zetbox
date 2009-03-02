@@ -42,7 +42,7 @@ if (listProp is ValueTypeProperty)
 this.WriteObjects("	      <ScalarProperty Name=\"Value\" ColumnName=\"",  listProp.PropertyName , "\" />\r\n");
 #line 28 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.CollectionEntryEntityTypeMapping.cst"
 }
-
+	
 	if (listProp.NeedsPositionColumn())
 	{
 

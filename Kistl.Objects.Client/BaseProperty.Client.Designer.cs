@@ -49,7 +49,6 @@ namespace Kistl.App.Base
         /// The list of constraints applying to this Property
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

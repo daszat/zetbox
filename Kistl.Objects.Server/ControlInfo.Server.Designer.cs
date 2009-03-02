@@ -49,10 +49,10 @@ namespace Kistl.App.GUI
         /// The assembly containing the Control
         /// </summary>
     /*
-    NewRelation: FK_ControlInfo_Assembly_ControlInfo_31 
-    A: ZeroOrMore ControlInfo as ControlInfo (site: A, no Relation, prop ID=114)
-    B: ZeroOrOne Assembly as Assembly (site: B, no Relation, prop ID=114)
-    Preferred Storage: MergeA
+    Relation: FK_ControlInfo_Assembly_ControlInfo_51
+    A: 3 ControlInfo as ControlInfo
+    B: 1 Assembly as Assembly
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -92,14 +92,14 @@ namespace Kistl.App.GUI
         }
         private int? _fk_Assembly;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ControlInfo_Assembly_ControlInfo_31", "Assembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ControlInfo_Assembly_ControlInfo_51", "Assembly")]
         public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_ControlInfo_Assembly_ControlInfo_31",
+                        "Model.FK_ControlInfo_Assembly_ControlInfo_51",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -113,7 +113,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_ControlInfo_Assembly_ControlInfo_31",
+                        "Model.FK_ControlInfo_Assembly_ControlInfo_51",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -124,6 +124,27 @@ namespace Kistl.App.GUI
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Assembly_pos
+        {
+            get
+            {
+                return _Assembly_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Assembly_pos != value)
+                {
+                    NotifyPropertyChanging("Assembly_pos");
+                    _Assembly_pos = value;
+                    NotifyPropertyChanged("Assembly_pos");
+                }
+            }
+        }
+        private int? _Assembly_pos;
         
 
         /// <summary>
@@ -306,6 +327,7 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_Assembly, binStream);
+            BinarySerializer.ToStream(this._Assembly_pos, binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
             BinarySerializer.ToStream((int)((ControlInfo)this).ControlType, binStream);
             BinarySerializer.ToStream(this._IsContainer, binStream);
@@ -320,6 +342,7 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Assembly = tmp;
             }
+            BinarySerializer.FromStream(out this._Assembly_pos, binStream);
             BinarySerializer.FromStream(out this._ClassName, binStream);
             BinarySerializer.FromStreamConverter(v => ((ControlInfo)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._IsContainer, binStream);

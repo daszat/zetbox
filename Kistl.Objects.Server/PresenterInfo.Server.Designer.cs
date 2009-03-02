@@ -91,10 +91,10 @@ namespace Kistl.App.GUI
         /// The Assembly of the Data Type
         /// </summary>
     /*
-    NewRelation: FK_PresenterInfo_Assembly_PresenterInfo_34 
-    A: ZeroOrMore PresenterInfo as PresenterInfo (site: A, no Relation, prop ID=147)
-    B: ZeroOrOne Assembly as DataAssembly (site: B, no Relation, prop ID=147)
-    Preferred Storage: MergeA
+    Relation: FK_PresenterInfo_Assembly_PresenterInfo_54
+    A: 3 PresenterInfo as PresenterInfo
+    B: 1 Assembly as DataAssembly
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -134,14 +134,14 @@ namespace Kistl.App.GUI
         }
         private int? _fk_DataAssembly;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_Assembly_PresenterInfo_34", "DataAssembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_Assembly_PresenterInfo_54", "DataAssembly")]
         public Kistl.App.Base.Assembly__Implementation__ DataAssembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_34",
+                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_54",
                         "DataAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -155,7 +155,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_34",
+                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_54",
                         "DataAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -166,6 +166,27 @@ namespace Kistl.App.GUI
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? DataAssembly_pos
+        {
+            get
+            {
+                return _DataAssembly_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_DataAssembly_pos != value)
+                {
+                    NotifyPropertyChanging("DataAssembly_pos");
+                    _DataAssembly_pos = value;
+                    NotifyPropertyChanged("DataAssembly_pos");
+                }
+            }
+        }
+        private int? _DataAssembly_pos;
         
 
         /// <summary>
@@ -198,10 +219,10 @@ namespace Kistl.App.GUI
         /// Where to find the implementation of the Presenter
         /// </summary>
     /*
-    NewRelation: FK_PresenterInfo_Assembly_PresenterInfo_33 
-    A: ZeroOrMore PresenterInfo as PresenterInfo (site: A, no Relation, prop ID=138)
-    B: ZeroOrOne Assembly as PresenterAssembly (site: B, no Relation, prop ID=138)
-    Preferred Storage: MergeA
+    Relation: FK_PresenterInfo_Assembly_PresenterInfo_53
+    A: 3 PresenterInfo as PresenterInfo
+    B: 1 Assembly as PresenterAssembly
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -241,14 +262,14 @@ namespace Kistl.App.GUI
         }
         private int? _fk_PresenterAssembly;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_Assembly_PresenterInfo_33", "PresenterAssembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_Assembly_PresenterInfo_53", "PresenterAssembly")]
         public Kistl.App.Base.Assembly__Implementation__ PresenterAssembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_33",
+                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_53",
                         "PresenterAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -262,7 +283,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_33",
+                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_53",
                         "PresenterAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -273,6 +294,27 @@ namespace Kistl.App.GUI
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? PresenterAssembly_pos
+        {
+            get
+            {
+                return _PresenterAssembly_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_PresenterAssembly_pos != value)
+                {
+                    NotifyPropertyChanging("PresenterAssembly_pos");
+                    _PresenterAssembly_pos = value;
+                    NotifyPropertyChanged("PresenterAssembly_pos");
+                }
+            }
+        }
+        private int? _PresenterAssembly_pos;
         
 
         /// <summary>
@@ -346,8 +388,10 @@ namespace Kistl.App.GUI
             base.ToStream(binStream);
             BinarySerializer.ToStream((int)((PresenterInfo)this).ControlType, binStream);
             BinarySerializer.ToStream(this.fk_DataAssembly, binStream);
+            BinarySerializer.ToStream(this._DataAssembly_pos, binStream);
             BinarySerializer.ToStream(this._DataTypeName, binStream);
             BinarySerializer.ToStream(this.fk_PresenterAssembly, binStream);
+            BinarySerializer.ToStream(this._PresenterAssembly_pos, binStream);
             BinarySerializer.ToStream(this._PresenterTypeName, binStream);
         }
 
@@ -360,12 +404,14 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_DataAssembly = tmp;
             }
+            BinarySerializer.FromStream(out this._DataAssembly_pos, binStream);
             BinarySerializer.FromStream(out this._DataTypeName, binStream);
             {
                 var tmp = this.fk_PresenterAssembly;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_PresenterAssembly = tmp;
             }
+            BinarySerializer.FromStream(out this._PresenterAssembly_pos, binStream);
             BinarySerializer.FromStream(out this._PresenterTypeName, binStream);
         }
 

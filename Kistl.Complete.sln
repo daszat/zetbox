@@ -83,6 +83,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Frozen", "Kis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.EF.Tests", "Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.csproj", "{980874F0-D9C1-4EDB-8143-AD51C1E2666F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempAppHelpers", "TempAppHelpers\TempAppHelpers.csproj", "{9677AE11-CB92-4F0A-A248-87A21586F0DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -353,6 +355,16 @@ Global
 		{980874F0-D9C1-4EDB-8143-AD51C1E2666F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{980874F0-D9C1-4EDB-8143-AD51C1E2666F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{980874F0-D9C1-4EDB-8143-AD51C1E2666F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Release|.NET.ActiveCfg = Release|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9677AE11-CB92-4F0A-A248-87A21586F0DA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

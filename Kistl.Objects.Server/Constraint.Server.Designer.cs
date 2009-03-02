@@ -49,10 +49,10 @@ namespace Kistl.App.Base
         /// The property to be constrained
         /// </summary>
     /*
-    NewRelation: FK_BaseProperty_Constraint_ConstrainedProperty_42 
-    A: One BaseProperty as ConstrainedProperty (site: A, from relation ID = 16)
-    B: ZeroOrMore Constraint as Constraints (site: B, from relation ID = 16)
-    Preferred Storage: MergeB
+    Relation: FK_BaseProperty_Constraint_ConstrainedProperty_62
+    A: 2 BaseProperty as ConstrainedProperty
+    B: 3 Constraint as Constraints
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -92,14 +92,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_ConstrainedProperty;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_BaseProperty_Constraint_ConstrainedProperty_42", "ConstrainedProperty")]
+        [EdmRelationshipNavigationProperty("Model", "FK_BaseProperty_Constraint_ConstrainedProperty_62", "ConstrainedProperty")]
         public Kistl.App.Base.BaseProperty__Implementation__ ConstrainedProperty__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.BaseProperty__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty__Implementation__>(
-                        "Model.FK_BaseProperty_Constraint_ConstrainedProperty_42",
+                        "Model.FK_BaseProperty_Constraint_ConstrainedProperty_62",
                         "ConstrainedProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -113,7 +113,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.BaseProperty__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty__Implementation__>(
-                        "Model.FK_BaseProperty_Constraint_ConstrainedProperty_42",
+                        "Model.FK_BaseProperty_Constraint_ConstrainedProperty_62",
                         "ConstrainedProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -124,6 +124,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? ConstrainedProperty_pos
+        {
+            get
+            {
+                return _ConstrainedProperty_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ConstrainedProperty_pos != value)
+                {
+                    NotifyPropertyChanging("ConstrainedProperty_pos");
+                    _ConstrainedProperty_pos = value;
+                    NotifyPropertyChanged("ConstrainedProperty_pos");
+                }
+            }
+        }
+        private int? _ConstrainedProperty_pos;
         
 
         /// <summary>
@@ -240,6 +261,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_ConstrainedProperty, binStream);
+            BinarySerializer.ToStream(this._ConstrainedProperty_pos, binStream);
             BinarySerializer.ToStream(this._Reason, binStream);
         }
 
@@ -251,6 +273,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_ConstrainedProperty = tmp;
             }
+            BinarySerializer.FromStream(out this._ConstrainedProperty_pos, binStream);
             BinarySerializer.FromStream(out this._Reason, binStream);
         }
 

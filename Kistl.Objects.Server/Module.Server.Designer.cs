@@ -49,10 +49,10 @@ namespace Kistl.App.Base
         /// Assemblies des Moduls
         /// </summary>
     /*
-    NewRelation: FK_Module_Assembly_Module_16 
-    A: One Module as Module (site: A, from relation ID = 13)
-    B: ZeroOrMore Assembly as Assemblies (site: B, from relation ID = 13)
-    Preferred Storage: MergeB
+    Relation: FK_Module_Assembly_Module_36
+    A: 2 Module as Module
+    B: 3 Assembly as Assemblies
+    Preferred Storage: 2
     */
         // object list property
         // implement the user-visible interface
@@ -71,14 +71,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Module_Assembly_Module_16", "Assemblies")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_Assembly_Module_36", "Assemblies")]
         public EntityCollection<Kistl.App.Base.Assembly__Implementation__> Assemblies__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_Module_Assembly_Module_16",
+                        "Model.FK_Module_Assembly_Module_36",
                         "Assemblies");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -96,10 +96,10 @@ namespace Kistl.App.Base
         /// Datentypendes Modules
         /// </summary>
     /*
-    NewRelation: FK_Module_DataType_Module_6 
-    A: One Module as Module (site: A, from relation ID = 6)
-    B: ZeroOrMore DataType as DataTypes (site: B, from relation ID = 6)
-    Preferred Storage: MergeB
+    Relation: FK_Module_DataType_Module_26
+    A: 2 Module as Module
+    B: 3 DataType as DataTypes
+    Preferred Storage: 2
     */
         // object list property
         // implement the user-visible interface
@@ -118,14 +118,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Module_DataType_Module_6", "DataTypes")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_DataType_Module_26", "DataTypes")]
         public EntityCollection<Kistl.App.Base.DataType__Implementation__> DataTypes__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_Module_DataType_Module_6",
+                        "Model.FK_Module_DataType_Module_26",
                         "DataTypes");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

@@ -245,7 +245,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, Method__Implementation__Frozen> DataStore = new Dictionary<int, Method__Implementation__Frozen>(118);
+		internal static Dictionary<int, Method__Implementation__Frozen> DataStore = new Dictionary<int, Method__Implementation__Frozen>(121);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new Method__Implementation__Frozen(1);
@@ -483,6 +483,12 @@ namespace Kistl.App.Base
 			DataStore[155] = new Method__Implementation__Frozen(155);
 
 			DataStore[156] = new Method__Implementation__Frozen(156);
+
+			DataStore[157] = new Method__Implementation__Frozen(157);
+
+			DataStore[158] = new Method__Implementation__Frozen(158);
+
+			DataStore[159] = new Method__Implementation__Frozen(159);
 
 		}
 
@@ -1806,6 +1812,36 @@ Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[39],
 			DataStore[156].IsDisplayable = false;
 			DataStore[156].Description = null;
 			DataStore[156].Seal();
+			DataStore[157].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
+			DataStore[157].MethodName = @"ToString";
+			DataStore[157].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[157].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[157].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[157].IsDisplayable = false;
+			DataStore[157].Description = null;
+			DataStore[157].Seal();
+			DataStore[158].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
+			DataStore[158].MethodName = @"PostSave";
+			DataStore[158].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[158].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[158].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[158].IsDisplayable = false;
+			DataStore[158].Description = null;
+			DataStore[158].Seal();
+			DataStore[159].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
+			DataStore[159].MethodName = @"PreSave";
+			DataStore[159].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[159].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[159].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[159].IsDisplayable = false;
+			DataStore[159].Description = null;
+			DataStore[159].Seal();
 	
 		}
 

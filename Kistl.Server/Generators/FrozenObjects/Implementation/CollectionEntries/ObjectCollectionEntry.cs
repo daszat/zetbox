@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.App.Base;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
 {
@@ -13,7 +13,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
         : Templates.Implementation.CollectionEntries.ObjectCollectionEntry
     {
 
-        public ObjectCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, NewRelation rel)
+        public ObjectCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)
             : base(_host, ctx, rel)
         {
         }

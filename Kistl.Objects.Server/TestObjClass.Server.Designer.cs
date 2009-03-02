@@ -75,10 +75,10 @@ namespace Kistl.App.Test
         /// testtest
         /// </summary>
     /*
-    NewRelation: FK_TestObjClass_Kunde_TestObjClass_30 
-    A: ZeroOrMore TestObjClass as TestObjClass (site: A, no Relation, prop ID=112)
-    B: ZeroOrOne Kunde as ObjectProp (site: B, no Relation, prop ID=112)
-    Preferred Storage: MergeA
+    Relation: FK_TestObjClass_Kunde_TestObjClass_50
+    A: 3 TestObjClass as TestObjClass
+    B: 1 Kunde as ObjectProp
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -118,14 +118,14 @@ namespace Kistl.App.Test
         }
         private int? _fk_ObjectProp;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_TestObjClass_Kunde_TestObjClass_30", "ObjectProp")]
+        [EdmRelationshipNavigationProperty("Model", "FK_TestObjClass_Kunde_TestObjClass_50", "ObjectProp")]
         public Kistl.App.Projekte.Kunde__Implementation__ ObjectProp__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Kunde__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Kunde__Implementation__>(
-                        "Model.FK_TestObjClass_Kunde_TestObjClass_30",
+                        "Model.FK_TestObjClass_Kunde_TestObjClass_50",
                         "ObjectProp");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -139,7 +139,7 @@ namespace Kistl.App.Test
             {
                 EntityReference<Kistl.App.Projekte.Kunde__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Kunde__Implementation__>(
-                        "Model.FK_TestObjClass_Kunde_TestObjClass_30",
+                        "Model.FK_TestObjClass_Kunde_TestObjClass_50",
                         "ObjectProp");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -150,6 +150,27 @@ namespace Kistl.App.Test
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? ObjectProp_pos
+        {
+            get
+            {
+                return _ObjectProp_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ObjectProp_pos != value)
+                {
+                    NotifyPropertyChanging("ObjectProp_pos");
+                    _ObjectProp_pos = value;
+                    NotifyPropertyChanged("ObjectProp_pos");
+                }
+            }
+        }
+        private int? _ObjectProp_pos;
         
 
         /// <summary>
@@ -286,6 +307,7 @@ namespace Kistl.App.Test
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._MyIntProperty, binStream);
             BinarySerializer.ToStream(this.fk_ObjectProp, binStream);
+            BinarySerializer.ToStream(this._ObjectProp_pos, binStream);
             BinarySerializer.ToStream(this._StringProp, binStream);
             BinarySerializer.ToStream((int)((TestObjClass)this).TestEnumProp, binStream);
         }
@@ -299,6 +321,7 @@ namespace Kistl.App.Test
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_ObjectProp = tmp;
             }
+            BinarySerializer.FromStream(out this._ObjectProp_pos, binStream);
             BinarySerializer.FromStream(out this._StringProp, binStream);
             BinarySerializer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
         }

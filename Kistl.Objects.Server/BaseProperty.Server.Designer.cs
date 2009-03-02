@@ -75,10 +75,10 @@ namespace Kistl.App.Base
         /// The list of constraints applying to this Property
         /// </summary>
     /*
-    NewRelation: FK_BaseProperty_Constraint_ConstrainedProperty_42 
-    A: One BaseProperty as ConstrainedProperty (site: A, from relation ID = 16)
-    B: ZeroOrMore Constraint as Constraints (site: B, from relation ID = 16)
-    Preferred Storage: MergeB
+    Relation: FK_BaseProperty_Constraint_ConstrainedProperty_62
+    A: 2 BaseProperty as ConstrainedProperty
+    B: 3 Constraint as Constraints
+    Preferred Storage: 2
     */
         // object list property
         // implement the user-visible interface
@@ -97,14 +97,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_BaseProperty_Constraint_ConstrainedProperty_42", "Constraints")]
+        [EdmRelationshipNavigationProperty("Model", "FK_BaseProperty_Constraint_ConstrainedProperty_62", "Constraints")]
         public EntityCollection<Kistl.App.Base.Constraint__Implementation__> Constraints__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.Constraint__Implementation__>(
-                        "Model.FK_BaseProperty_Constraint_ConstrainedProperty_42",
+                        "Model.FK_BaseProperty_Constraint_ConstrainedProperty_62",
                         "Constraints");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -148,10 +148,10 @@ namespace Kistl.App.Base
         /// Zugehörig zum Modul
         /// </summary>
     /*
-    NewRelation: FK_BaseProperty_Module_BaseProperty_17 
-    A: ZeroOrMore BaseProperty as BaseProperty (site: A, no Relation, prop ID=72)
-    B: ZeroOrOne Module as Module (site: B, no Relation, prop ID=72)
-    Preferred Storage: MergeA
+    Relation: FK_BaseProperty_Module_BaseProperty_37
+    A: 3 BaseProperty as BaseProperty
+    B: 1 Module as Module
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -191,14 +191,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_Module;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_BaseProperty_Module_BaseProperty_17", "Module")]
+        [EdmRelationshipNavigationProperty("Model", "FK_BaseProperty_Module_BaseProperty_37", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_BaseProperty_Module_BaseProperty_17",
+                        "Model.FK_BaseProperty_Module_BaseProperty_37",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -212,7 +212,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_BaseProperty_Module_BaseProperty_17",
+                        "Model.FK_BaseProperty_Module_BaseProperty_37",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -223,16 +223,37 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Module_pos
+        {
+            get
+            {
+                return _Module_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Module_pos != value)
+                {
+                    NotifyPropertyChanging("Module_pos");
+                    _Module_pos = value;
+                    NotifyPropertyChanged("Module_pos");
+                }
+            }
+        }
+        private int? _Module_pos;
         
 
         /// <summary>
         /// 
         /// </summary>
     /*
-    NewRelation: FK_DataType_BaseProperty_ObjectClass_1 
-    A: One DataType as ObjectClass (site: A, from relation ID = 1)
-    B: ZeroOrMore BaseProperty as Properties (site: B, from relation ID = 1)
-    Preferred Storage: MergeB
+    Relation: FK_DataType_BaseProperty_ObjectClass_19
+    A: 2 DataType as ObjectClass
+    B: 3 BaseProperty as Properties
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -272,14 +293,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_ObjectClass;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_BaseProperty_ObjectClass_1", "ObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_BaseProperty_ObjectClass_19", "ObjectClass")]
         public Kistl.App.Base.DataType__Implementation__ ObjectClass__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_DataType_BaseProperty_ObjectClass_1",
+                        "Model.FK_DataType_BaseProperty_ObjectClass_19",
                         "ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -293,7 +314,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_DataType_BaseProperty_ObjectClass_1",
+                        "Model.FK_DataType_BaseProperty_ObjectClass_19",
                         "ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -304,6 +325,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? ObjectClass_pos
+        {
+            get
+            {
+                return _ObjectClass_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ObjectClass_pos != value)
+                {
+                    NotifyPropertyChanging("ObjectClass_pos");
+                    _ObjectClass_pos = value;
+                    NotifyPropertyChanged("ObjectClass_pos");
+                }
+            }
+        }
+        private int? _ObjectClass_pos;
         
 
         /// <summary>
@@ -444,7 +486,9 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._AltText, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this.fk_Module, binStream);
+            BinarySerializer.ToStream(this._Module_pos, binStream);
             BinarySerializer.ToStream(this.fk_ObjectClass, binStream);
+            BinarySerializer.ToStream(this._ObjectClass_pos, binStream);
             BinarySerializer.ToStream(this._PropertyName, binStream);
         }
 
@@ -458,11 +502,13 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Module = tmp;
             }
+            BinarySerializer.FromStream(out this._Module_pos, binStream);
             {
                 var tmp = this.fk_ObjectClass;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_ObjectClass = tmp;
             }
+            BinarySerializer.FromStream(out this._ObjectClass_pos, binStream);
             BinarySerializer.FromStream(out this._PropertyName, binStream);
         }
 

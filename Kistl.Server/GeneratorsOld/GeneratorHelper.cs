@@ -7,6 +7,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
 
@@ -179,13 +180,19 @@ namespace Kistl.Server.GeneratorsOld.Helper
             }
             else if (prop is ObjectReferenceProperty)
             {
-                if (!((ObjectReferenceProperty)prop).GetOpposite().IsList)
+                var orp = (ObjectReferenceProperty)prop;
+                var rel = RelationExtensions.Lookup(prop.Context, orp);
+                RelationEnd relEnd = rel.GetEnd(orp);
+                RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+ 
+                if (relEnd.Multiplicity.UpperBound() == 1)
                 {
                     return new TypeMoniker(prop.GetPropertyTypeString());
                 }
                 else
                 {
-                    return GeneratorHelper.GetPropertyCollectionObjectType(((ObjectReferenceProperty)prop).GetOpposite());
+                    return GeneratorHelper.GetPropertyCollectionObjectType(otherEnd.Navigator);
                 }
             }
 

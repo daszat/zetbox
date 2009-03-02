@@ -23,6 +23,7 @@
     <EntitySet Name="PresenterInfo" EntityType="Model.PresenterInfo" />
     <EntitySet Name="Projekt" EntityType="Model.Projekt" />
     <EntitySet Name="Relation" EntityType="Model.Relation" />
+    <EntitySet Name="RelationEnd" EntityType="Model.RelationEnd" />
     <EntitySet Name="Taetigkeit" EntityType="Model.Taetigkeit" />
     <EntitySet Name="TaetigkeitsArt" EntityType="Model.TaetigkeitsArt" />
     <EntitySet Name="Task" EntityType="Model.Task" />
@@ -34,68 +35,68 @@
     <EntitySet Name="Visual" EntityType="Model.Visual" />
     <EntitySet Name="Zeitkonto" EntityType="Model.Zeitkonto" />
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
-    <EntitySet Name="ObjectClass_ImplementsInterfaces29CollectionEntry" EntityType="Model.ObjectClass_ImplementsInterfaces29CollectionEntry" />
-    <AssociationSet Name="FK_ObjectClass_Interface_ObjectClass_29" Association="Model.FK_ObjectClass_Interface_ObjectClass_29" >
+    <EntitySet Name="ObjectClass_ImplementsInterfaces49CollectionEntry" EntityType="Model.ObjectClass_ImplementsInterfaces49CollectionEntry" />
+    <AssociationSet Name="FK_ObjectClass_Interface_ObjectClass_49" Association="Model.FK_ObjectClass_Interface_ObjectClass_49" >
       <End Role="ObjectClass" EntitySet="DataType" />
-      <End Role="CollectionEntry" EntitySet="ObjectClass_ImplementsInterfaces29CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="ObjectClass_ImplementsInterfaces49CollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_Interface_ImplementsInterfaces_29" Association="Model.FK_ObjectClass_Interface_ImplementsInterfaces_29" >
+    <AssociationSet Name="FK_ObjectClass_Interface_ImplementsInterfaces_49" Association="Model.FK_ObjectClass_Interface_ImplementsInterfaces_49" >
       <End Role="ImplementsInterfaces" EntitySet="DataType" />
-      <End Role="CollectionEntry" EntitySet="ObjectClass_ImplementsInterfaces29CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="ObjectClass_ImplementsInterfaces49CollectionEntry" />
     </AssociationSet>
-    <EntitySet Name="Projekt_Mitarbeiter3CollectionEntry" EntityType="Model.Projekt_Mitarbeiter3CollectionEntry" />
-    <AssociationSet Name="FK_Projekt_Mitarbeiter_Projekte_3" Association="Model.FK_Projekt_Mitarbeiter_Projekte_3" >
+    <EntitySet Name="Projekt_Mitarbeiter23CollectionEntry" EntityType="Model.Projekt_Mitarbeiter23CollectionEntry" />
+    <AssociationSet Name="FK_Projekt_Mitarbeiter_Projekte_23" Association="Model.FK_Projekt_Mitarbeiter_Projekte_23" >
       <End Role="Projekte" EntitySet="Projekt" />
-      <End Role="CollectionEntry" EntitySet="Projekt_Mitarbeiter3CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="Projekt_Mitarbeiter23CollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Projekt_Mitarbeiter_Mitarbeiter_3" Association="Model.FK_Projekt_Mitarbeiter_Mitarbeiter_3" >
+    <AssociationSet Name="FK_Projekt_Mitarbeiter_Mitarbeiter_23" Association="Model.FK_Projekt_Mitarbeiter_Mitarbeiter_23" >
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
-      <End Role="CollectionEntry" EntitySet="Projekt_Mitarbeiter3CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="Projekt_Mitarbeiter23CollectionEntry" />
     </AssociationSet>
-    <EntitySet Name="Template_Menu41CollectionEntry" EntityType="Model.Template_Menu41CollectionEntry" />
-    <AssociationSet Name="FK_Template_Visual_Template_41" Association="Model.FK_Template_Visual_Template_41" >
+    <EntitySet Name="Template_Menu61CollectionEntry" EntityType="Model.Template_Menu61CollectionEntry" />
+    <AssociationSet Name="FK_Template_Visual_Template_61" Association="Model.FK_Template_Visual_Template_61" >
       <End Role="Template" EntitySet="Template" />
-      <End Role="CollectionEntry" EntitySet="Template_Menu41CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="Template_Menu61CollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Template_Visual_Menu_41" Association="Model.FK_Template_Visual_Menu_41" >
+    <AssociationSet Name="FK_Template_Visual_Menu_61" Association="Model.FK_Template_Visual_Menu_61" >
       <End Role="Menu" EntitySet="Visual" />
-      <End Role="CollectionEntry" EntitySet="Template_Menu41CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="Template_Menu61CollectionEntry" />
     </AssociationSet>
-    <EntitySet Name="TypeRef_GenericArguments46CollectionEntry" EntityType="Model.TypeRef_GenericArguments46CollectionEntry" />
-    <AssociationSet Name="FK_TypeRef_TypeRef_TypeRef_46" Association="Model.FK_TypeRef_TypeRef_TypeRef_46" >
+    <EntitySet Name="TypeRef_GenericArguments66CollectionEntry" EntityType="Model.TypeRef_GenericArguments66CollectionEntry" />
+    <AssociationSet Name="FK_TypeRef_TypeRef_TypeRef_66" Association="Model.FK_TypeRef_TypeRef_TypeRef_66" >
       <End Role="TypeRef" EntitySet="TypeRef" />
-      <End Role="CollectionEntry" EntitySet="TypeRef_GenericArguments46CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="TypeRef_GenericArguments66CollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_TypeRef_GenericArguments_46" Association="Model.FK_TypeRef_TypeRef_GenericArguments_46" >
+    <AssociationSet Name="FK_TypeRef_TypeRef_GenericArguments_66" Association="Model.FK_TypeRef_TypeRef_GenericArguments_66" >
       <End Role="GenericArguments" EntitySet="TypeRef" />
-      <End Role="CollectionEntry" EntitySet="TypeRef_GenericArguments46CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="TypeRef_GenericArguments66CollectionEntry" />
     </AssociationSet>
-    <EntitySet Name="Visual_Children35CollectionEntry" EntityType="Model.Visual_Children35CollectionEntry" />
-    <AssociationSet Name="FK_Visual_Visual_Visual_35" Association="Model.FK_Visual_Visual_Visual_35" >
+    <EntitySet Name="Visual_Children55CollectionEntry" EntityType="Model.Visual_Children55CollectionEntry" />
+    <AssociationSet Name="FK_Visual_Visual_Visual_55" Association="Model.FK_Visual_Visual_Visual_55" >
       <End Role="Visual" EntitySet="Visual" />
-      <End Role="CollectionEntry" EntitySet="Visual_Children35CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="Visual_Children55CollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Visual_Visual_Children_35" Association="Model.FK_Visual_Visual_Children_35" >
+    <AssociationSet Name="FK_Visual_Visual_Children_55" Association="Model.FK_Visual_Visual_Children_55" >
       <End Role="Children" EntitySet="Visual" />
-      <End Role="CollectionEntry" EntitySet="Visual_Children35CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="Visual_Children55CollectionEntry" />
     </AssociationSet>
-    <EntitySet Name="Visual_ContextMenu40CollectionEntry" EntityType="Model.Visual_ContextMenu40CollectionEntry" />
-    <AssociationSet Name="FK_Visual_Visual_Visual_40" Association="Model.FK_Visual_Visual_Visual_40" >
+    <EntitySet Name="Visual_ContextMenu60CollectionEntry" EntityType="Model.Visual_ContextMenu60CollectionEntry" />
+    <AssociationSet Name="FK_Visual_Visual_Visual_60" Association="Model.FK_Visual_Visual_Visual_60" >
       <End Role="Visual" EntitySet="Visual" />
-      <End Role="CollectionEntry" EntitySet="Visual_ContextMenu40CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="Visual_ContextMenu60CollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Visual_Visual_ContextMenu_40" Association="Model.FK_Visual_Visual_ContextMenu_40" >
+    <AssociationSet Name="FK_Visual_Visual_ContextMenu_60" Association="Model.FK_Visual_Visual_ContextMenu_60" >
       <End Role="ContextMenu" EntitySet="Visual" />
-      <End Role="CollectionEntry" EntitySet="Visual_ContextMenu40CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="Visual_ContextMenu60CollectionEntry" />
     </AssociationSet>
-    <EntitySet Name="Zeitkonto_Mitarbeiter22CollectionEntry" EntityType="Model.Zeitkonto_Mitarbeiter22CollectionEntry" />
-    <AssociationSet Name="FK_Zeitkonto_Mitarbeiter_Zeitkonto_22" Association="Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_22" >
+    <EntitySet Name="Zeitkonto_Mitarbeiter42CollectionEntry" EntityType="Model.Zeitkonto_Mitarbeiter42CollectionEntry" />
+    <AssociationSet Name="FK_Zeitkonto_Mitarbeiter_Zeitkonto_42" Association="Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42" >
       <End Role="Zeitkonto" EntitySet="Zeitkonto" />
-      <End Role="CollectionEntry" EntitySet="Zeitkonto_Mitarbeiter22CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="Zeitkonto_Mitarbeiter42CollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Zeitkonto_Mitarbeiter_Mitarbeiter_22" Association="Model.FK_Zeitkonto_Mitarbeiter_Mitarbeiter_22" >
+    <AssociationSet Name="FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42" Association="Model.FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42" >
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
-      <End Role="CollectionEntry" EntitySet="Zeitkonto_Mitarbeiter22CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="Zeitkonto_Mitarbeiter42CollectionEntry" />
     </AssociationSet>
 
     <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
@@ -106,175 +107,191 @@
     </AssociationSet>
 
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
-    <AssociationSet Name="FK_Auftrag_Kunde_Auftrag_14" Association="Model.FK_Auftrag_Kunde_Auftrag_14" >
+    <AssociationSet Name="FK_Auftrag_Kunde_Auftrag_34" Association="Model.FK_Auftrag_Kunde_Auftrag_34" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Kunde" EntitySet="Kunde" />
     </AssociationSet>
-    <AssociationSet Name="FK_Auftrag_Mitarbeiter_Auftrag_9" Association="Model.FK_Auftrag_Mitarbeiter_Auftrag_9" >
+    <AssociationSet Name="FK_Auftrag_Mitarbeiter_Auftrag_29" Association="Model.FK_Auftrag_Mitarbeiter_Auftrag_29" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
-    <AssociationSet Name="FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_8" Association="Model.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_8" >
+    <AssociationSet Name="FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28" Association="Model.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28" >
       <End Role="BackReferenceProperty" EntitySet="BaseProperty" />
       <End Role="ReferenceProperty" EntitySet="BaseProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseProperty_Constraint_ConstrainedProperty_42" Association="Model.FK_BaseProperty_Constraint_ConstrainedProperty_42" >
+    <AssociationSet Name="FK_BaseProperty_Constraint_ConstrainedProperty_62" Association="Model.FK_BaseProperty_Constraint_ConstrainedProperty_62" >
       <End Role="ConstrainedProperty" EntitySet="BaseProperty" />
       <End Role="Constraints" EntitySet="Constraint" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseProperty_Module_BaseProperty_17" Association="Model.FK_BaseProperty_Module_BaseProperty_17" >
+    <AssociationSet Name="FK_BaseProperty_Module_BaseProperty_37" Association="Model.FK_BaseProperty_Module_BaseProperty_37" >
       <End Role="BaseProperty" EntitySet="BaseProperty" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
-    <AssociationSet Name="FK_CLRObjectParameter_Assembly_CLRObjectParameter_26" Association="Model.FK_CLRObjectParameter_Assembly_CLRObjectParameter_26" >
+    <AssociationSet Name="FK_CLRObjectParameter_Assembly_CLRObjectParameter_46" Association="Model.FK_CLRObjectParameter_Assembly_CLRObjectParameter_46" >
       <End Role="CLRObjectParameter" EntitySet="BaseParameter" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_ControlInfo_Assembly_ControlInfo_31" Association="Model.FK_ControlInfo_Assembly_ControlInfo_31" >
+    <AssociationSet Name="FK_ControlInfo_Assembly_ControlInfo_51" Association="Model.FK_ControlInfo_Assembly_ControlInfo_51" >
       <End Role="ControlInfo" EntitySet="ControlInfo" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_DataType_BaseProperty_ObjectClass_1" Association="Model.FK_DataType_BaseProperty_ObjectClass_1" >
+    <AssociationSet Name="FK_DataType_BaseProperty_ObjectClass_19" Association="Model.FK_DataType_BaseProperty_ObjectClass_19" >
       <End Role="ObjectClass" EntitySet="DataType" />
       <End Role="Properties" EntitySet="BaseProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_DataType_Icon_DataType_15" Association="Model.FK_DataType_Icon_DataType_15" >
+    <AssociationSet Name="FK_DataType_Icon_DataType_35" Association="Model.FK_DataType_Icon_DataType_35" >
       <End Role="DataType" EntitySet="DataType" />
       <End Role="DefaultIcon" EntitySet="Icon" />
     </AssociationSet>
-    <AssociationSet Name="FK_DataType_Method_ObjectClass_5" Association="Model.FK_DataType_Method_ObjectClass_5" >
+    <AssociationSet Name="FK_DataType_Method_ObjectClass_25" Association="Model.FK_DataType_Method_ObjectClass_25" >
       <End Role="ObjectClass" EntitySet="DataType" />
       <End Role="Methods" EntitySet="Method" />
     </AssociationSet>
-    <AssociationSet Name="FK_DataType_MethodInvocation_InvokeOnObjectClass_21" Association="Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_21" >
+    <AssociationSet Name="FK_DataType_MethodInvocation_InvokeOnObjectClass_41" Association="Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_41" >
       <End Role="InvokeOnObjectClass" EntitySet="DataType" />
       <End Role="MethodInvocations" EntitySet="MethodInvocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_Enumeration_EnumerationEntry_Enumeration_27" Association="Model.FK_Enumeration_EnumerationEntry_Enumeration_27" >
+    <AssociationSet Name="FK_Enumeration_EnumerationEntry_Enumeration_47" Association="Model.FK_Enumeration_EnumerationEntry_Enumeration_47" >
       <End Role="Enumeration" EntitySet="DataType" />
       <End Role="EnumerationEntries" EntitySet="EnumerationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_EnumerationProperty_Enumeration_EnumerationProperty_28" Association="Model.FK_EnumerationProperty_Enumeration_EnumerationProperty_28" >
+    <AssociationSet Name="FK_EnumerationProperty_Enumeration_EnumerationProperty_48" Association="Model.FK_EnumerationProperty_Enumeration_EnumerationProperty_48" >
       <End Role="EnumerationProperty" EntitySet="BaseProperty" />
       <End Role="Enumeration" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_Method_BaseParameter_Method_24" Association="Model.FK_Method_BaseParameter_Method_24" >
+    <AssociationSet Name="FK_Method_BaseParameter_Method_44" Association="Model.FK_Method_BaseParameter_Method_44" >
       <End Role="Method" EntitySet="Method" />
       <End Role="Parameter" EntitySet="BaseParameter" />
     </AssociationSet>
-    <AssociationSet Name="FK_Method_MethodInvocation_Method_19" Association="Model.FK_Method_MethodInvocation_Method_19" >
+    <AssociationSet Name="FK_Method_MethodInvocation_Method_39" Association="Model.FK_Method_MethodInvocation_Method_39" >
       <End Role="Method" EntitySet="Method" />
       <End Role="MethodInvokations" EntitySet="MethodInvocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_Method_Module_Method_18" Association="Model.FK_Method_Module_Method_18" >
+    <AssociationSet Name="FK_Method_Module_Method_38" Association="Model.FK_Method_Module_Method_38" >
       <End Role="Method" EntitySet="Method" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
-    <AssociationSet Name="FK_MethodInvocation_Module_MethodInvocation_20" Association="Model.FK_MethodInvocation_Module_MethodInvocation_20" >
+    <AssociationSet Name="FK_MethodInvocation_Module_MethodInvocation_40" Association="Model.FK_MethodInvocation_Module_MethodInvocation_40" >
       <End Role="MethodInvocation" EntitySet="MethodInvocation" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
-    <AssociationSet Name="FK_MethodInvocation_TypeRef_MethodInvocation_47" Association="Model.FK_MethodInvocation_TypeRef_MethodInvocation_47" >
+    <AssociationSet Name="FK_MethodInvocation_TypeRef_MethodInvocation_67" Association="Model.FK_MethodInvocation_TypeRef_MethodInvocation_67" >
       <End Role="MethodInvocation" EntitySet="MethodInvocation" />
       <End Role="Implementor" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_Module_Assembly_Module_16" Association="Model.FK_Module_Assembly_Module_16" >
+    <AssociationSet Name="FK_Module_Assembly_Module_36" Association="Model.FK_Module_Assembly_Module_36" >
       <End Role="Module" EntitySet="Module" />
       <End Role="Assemblies" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_Module_DataType_Module_6" Association="Model.FK_Module_DataType_Module_6" >
+    <AssociationSet Name="FK_Module_DataType_Module_26" Association="Model.FK_Module_DataType_Module_26" >
       <End Role="Module" EntitySet="Module" />
       <End Role="DataTypes" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_ObjectClass_BaseObjectClass_4" Association="Model.FK_ObjectClass_ObjectClass_BaseObjectClass_4" >
+    <AssociationSet Name="FK_ObjectClass_ObjectClass_BaseObjectClass_24" Association="Model.FK_ObjectClass_ObjectClass_BaseObjectClass_24" >
       <End Role="BaseObjectClass" EntitySet="DataType" />
       <End Role="SubClasses" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_TypeRef_ObjectClass_50" Association="Model.FK_ObjectClass_TypeRef_ObjectClass_50" >
+    <AssociationSet Name="FK_ObjectClass_TypeRef_ObjectClass_70" Association="Model.FK_ObjectClass_TypeRef_ObjectClass_70" >
       <End Role="ObjectClass" EntitySet="DataType" />
       <End Role="DefaultModel" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectParameter_DataType_ObjectParameter_25" Association="Model.FK_ObjectParameter_DataType_ObjectParameter_25" >
+    <AssociationSet Name="FK_ObjectParameter_DataType_ObjectParameter_45" Association="Model.FK_ObjectParameter_DataType_ObjectParameter_45" >
       <End Role="ObjectParameter" EntitySet="BaseParameter" />
       <End Role="DataType" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_7" Association="Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_7" >
+    <AssociationSet Name="FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27" Association="Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27" >
       <End Role="ObjectReferenceProperty" EntitySet="BaseProperty" />
       <End Role="ReferenceObjectClass" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_PresenterInfo_Assembly_PresenterInfo_33" Association="Model.FK_PresenterInfo_Assembly_PresenterInfo_33" >
+    <AssociationSet Name="FK_PresenterInfo_Assembly_PresenterInfo_53" Association="Model.FK_PresenterInfo_Assembly_PresenterInfo_53" >
       <End Role="PresenterInfo" EntitySet="PresenterInfo" />
       <End Role="PresenterAssembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_PresenterInfo_Assembly_PresenterInfo_34" Association="Model.FK_PresenterInfo_Assembly_PresenterInfo_34" >
+    <AssociationSet Name="FK_PresenterInfo_Assembly_PresenterInfo_54" Association="Model.FK_PresenterInfo_Assembly_PresenterInfo_54" >
       <End Role="PresenterInfo" EntitySet="PresenterInfo" />
       <End Role="DataAssembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_Projekt_Auftrag_Projekt_10" Association="Model.FK_Projekt_Auftrag_Projekt_10" >
+    <AssociationSet Name="FK_Projekt_Auftrag_Projekt_30" Association="Model.FK_Projekt_Auftrag_Projekt_30" >
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Auftraege" EntitySet="Auftrag" />
     </AssociationSet>
-    <AssociationSet Name="FK_Projekt_Kostentraeger_Projekt_11" Association="Model.FK_Projekt_Kostentraeger_Projekt_11" >
+    <AssociationSet Name="FK_Projekt_Kostentraeger_Projekt_31" Association="Model.FK_Projekt_Kostentraeger_Projekt_31" >
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Kostentraeger" EntitySet="Zeitkonto" />
     </AssociationSet>
-    <AssociationSet Name="FK_Projekt_Task_Projekt_2" Association="Model.FK_Projekt_Task_Projekt_2" >
+    <AssociationSet Name="FK_Projekt_Task_Projekt_22" Association="Model.FK_Projekt_Task_Projekt_22" >
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Tasks" EntitySet="Task" />
     </AssociationSet>
-    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_LeftOf_43" Association="Model.FK_Relation_ObjectReferenceProperty_LeftOf_43" >
+    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_LeftOf_63" Association="Model.FK_Relation_ObjectReferenceProperty_LeftOf_63" >
       <End Role="LeftOf" EntitySet="Relation" />
       <End Role="LeftPart" EntitySet="BaseProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_RightOf_44" Association="Model.FK_Relation_ObjectReferenceProperty_RightOf_44" >
+    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_RightOf_64" Association="Model.FK_Relation_ObjectReferenceProperty_RightOf_64" >
       <End Role="RightOf" EntitySet="Relation" />
       <End Role="RightPart" EntitySet="BaseProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_StructProperty_Struct_StructProperty_32" Association="Model.FK_StructProperty_Struct_StructProperty_32" >
+    <AssociationSet Name="FK_Relation_RelationEnd_Relation_71" Association="Model.FK_Relation_RelationEnd_Relation_71" >
+      <End Role="Relation" EntitySet="Relation" />
+      <End Role="A" EntitySet="RelationEnd" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Relation_RelationEnd_Relation_72" Association="Model.FK_Relation_RelationEnd_Relation_72" >
+      <End Role="Relation" EntitySet="Relation" />
+      <End Role="B" EntitySet="RelationEnd" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RelationEnd_ObjectClass_RelationEnd_73" Association="Model.FK_RelationEnd_ObjectClass_RelationEnd_73" >
+      <End Role="RelationEnd" EntitySet="RelationEnd" />
+      <End Role="Type" EntitySet="DataType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RelationEnd_Property_RelationEnd_74" Association="Model.FK_RelationEnd_Property_RelationEnd_74" >
+      <End Role="RelationEnd" EntitySet="RelationEnd" />
+      <End Role="Navigator" EntitySet="BaseProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StructProperty_Struct_StructProperty_52" Association="Model.FK_StructProperty_Struct_StructProperty_52" >
       <End Role="StructProperty" EntitySet="BaseProperty" />
       <End Role="StructDefinition" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_Taetigkeit_Mitarbeiter_Taetigkeit_12" Association="Model.FK_Taetigkeit_Mitarbeiter_Taetigkeit_12" >
+    <AssociationSet Name="FK_Taetigkeit_Mitarbeiter_Taetigkeit_32" Association="Model.FK_Taetigkeit_Mitarbeiter_Taetigkeit_32" >
       <End Role="Taetigkeit" EntitySet="Taetigkeit" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
-    <AssociationSet Name="FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23" Association="Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23" >
+    <AssociationSet Name="FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43" Association="Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43" >
       <End Role="Taetigkeit" EntitySet="Taetigkeit" />
       <End Role="TaetigkeitsArt" EntitySet="TaetigkeitsArt" />
     </AssociationSet>
-    <AssociationSet Name="FK_Template_Assembly_Template_39" Association="Model.FK_Template_Assembly_Template_39" >
+    <AssociationSet Name="FK_Template_Assembly_Template_59" Association="Model.FK_Template_Assembly_Template_59" >
       <End Role="Template" EntitySet="Template" />
       <End Role="DisplayedTypeAssembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_Template_Visual_Template_38" Association="Model.FK_Template_Visual_Template_38" >
+    <AssociationSet Name="FK_Template_Visual_Template_58" Association="Model.FK_Template_Visual_Template_58" >
       <End Role="Template" EntitySet="Template" />
       <End Role="VisualTree" EntitySet="Visual" />
     </AssociationSet>
-    <AssociationSet Name="FK_TestObjClass_Kunde_TestObjClass_30" Association="Model.FK_TestObjClass_Kunde_TestObjClass_30" >
+    <AssociationSet Name="FK_TestObjClass_Kunde_TestObjClass_50" Association="Model.FK_TestObjClass_Kunde_TestObjClass_50" >
       <End Role="TestObjClass" EntitySet="TestObjClass" />
       <End Role="ObjectProp" EntitySet="Kunde" />
     </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_Assembly_TypeRef_45" Association="Model.FK_TypeRef_Assembly_TypeRef_45" >
+    <AssociationSet Name="FK_TypeRef_Assembly_TypeRef_65" Association="Model.FK_TypeRef_Assembly_TypeRef_65" >
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_48" Association="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_48" >
+    <AssociationSet Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_68" Association="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_68" >
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
       <End Role="LayoutRef" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_49" Association="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_49" >
+    <AssociationSet Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_69" Association="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_69" >
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
       <End Role="ViewRef" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_Visual_BaseProperty_Visual_36" Association="Model.FK_Visual_BaseProperty_Visual_36" >
+    <AssociationSet Name="FK_Visual_BaseProperty_Visual_56" Association="Model.FK_Visual_BaseProperty_Visual_56" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="Property" EntitySet="BaseProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_Visual_Method_Visual_37" Association="Model.FK_Visual_Method_Visual_37" >
+    <AssociationSet Name="FK_Visual_Method_Visual_57" Association="Model.FK_Visual_Method_Visual_57" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="Method" EntitySet="Method" />
     </AssociationSet>
-    <AssociationSet Name="FK_Zeitkonto_Taetigkeit_Zeitkonto_13" Association="Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_13" >
+    <AssociationSet Name="FK_Zeitkonto_Taetigkeit_Zeitkonto_33" Association="Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_33" >
       <End Role="Zeitkonto" EntitySet="Zeitkonto" />
       <End Role="Taetigkeiten" EntitySet="Taetigkeit" />
     </AssociationSet>
@@ -294,9 +311,10 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Module__Implementation__"
-                        Relationship="Model.FK_Module_Assembly_Module_16"
+                        Relationship="Model.FK_Module_Assembly_Module_36"
                         FromRole="Assemblies"
                         ToRole="Module" />
+    <Property Name="Module_pos" Type="Int32" Nullable="true" />
     <Property Name="AssemblyName" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="IsClientAssembly" Type="Boolean" Nullable="false" />
   </EntityType>
@@ -306,18 +324,21 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Mitarbeiter__Implementation__"
-                        Relationship="Model.FK_Auftrag_Mitarbeiter_Auftrag_9"
+                        Relationship="Model.FK_Auftrag_Mitarbeiter_Auftrag_29"
                         FromRole="Auftrag"
                         ToRole="Mitarbeiter" />
+    <Property Name="Mitarbeiter_pos" Type="Int32" Nullable="true" />
     <Property Name="Auftragsname" Type="String" Nullable="true" MaxLength="200" />
     <NavigationProperty Name="Projekt__Implementation__"
-                        Relationship="Model.FK_Projekt_Auftrag_Projekt_10"
+                        Relationship="Model.FK_Projekt_Auftrag_Projekt_30"
                         FromRole="Auftraege"
                         ToRole="Projekt" />
+    <Property Name="Projekt_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Kunde__Implementation__"
-                        Relationship="Model.FK_Auftrag_Kunde_Auftrag_14"
+                        Relationship="Model.FK_Auftrag_Kunde_Auftrag_34"
                         FromRole="Auftrag"
                         ToRole="Kunde" />
+    <Property Name="Kunde_pos" Type="Int32" Nullable="true" />
     <Property Name="Auftragswert" Type="Double" Nullable="true" />
   </EntityType>
   <EntityType Name="BaseParameter">
@@ -327,7 +348,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="ParameterName" Type="String" Nullable="false" MaxLength="100" />
     <NavigationProperty Name="Method__Implementation__"
-                        Relationship="Model.FK_Method_BaseParameter_Method_24"
+                        Relationship="Model.FK_Method_BaseParameter_Method_44"
                         FromRole="Parameter"
                         ToRole="Method" />
     <Property Name="Method_pos" Type="Int32" Nullable="true" />
@@ -341,17 +362,19 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ObjectClass__Implementation__"
-                        Relationship="Model.FK_DataType_BaseProperty_ObjectClass_1"
+                        Relationship="Model.FK_DataType_BaseProperty_ObjectClass_19"
                         FromRole="Properties"
                         ToRole="ObjectClass" />
+    <Property Name="ObjectClass_pos" Type="Int32" Nullable="true" />
     <Property Name="PropertyName" Type="String" Nullable="true" MaxLength="100" />
     <Property Name="AltText" Type="String" Nullable="true" MaxLength="200" />
     <NavigationProperty Name="Module__Implementation__"
-                        Relationship="Model.FK_BaseProperty_Module_BaseProperty_17"
+                        Relationship="Model.FK_BaseProperty_Module_BaseProperty_37"
                         FromRole="BaseProperty"
                         ToRole="Module" />
+    <Property Name="Module_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Constraints__Implementation__"
-                        Relationship="Model.FK_BaseProperty_Constraint_ConstrainedProperty_42"
+                        Relationship="Model.FK_BaseProperty_Constraint_ConstrainedProperty_62"
                         FromRole="ConstrainedProperty"
                         ToRole="Constraints" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
@@ -363,9 +386,10 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Reason" Type="String" Nullable="true" MaxLength="400" />
     <NavigationProperty Name="ConstrainedProperty__Implementation__"
-                        Relationship="Model.FK_BaseProperty_Constraint_ConstrainedProperty_42"
+                        Relationship="Model.FK_BaseProperty_Constraint_ConstrainedProperty_62"
                         FromRole="Constraints"
                         ToRole="ConstrainedProperty" />
+    <Property Name="ConstrainedProperty_pos" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="ControlInfo">
     <Key>
@@ -373,9 +397,10 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Assembly__Implementation__"
-                        Relationship="Model.FK_ControlInfo_Assembly_ControlInfo_31"
+                        Relationship="Model.FK_ControlInfo_Assembly_ControlInfo_51"
                         FromRole="ControlInfo"
                         ToRole="Assembly" />
+    <Property Name="Assembly_pos" Type="Int32" Nullable="true" />
     <Property Name="ClassName" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="IsContainer" Type="Boolean" Nullable="false" />
     <Property Name="Platform" Type="Int32" Nullable="false" />
@@ -388,23 +413,25 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="ClassName" Type="String" Nullable="false" MaxLength="51" />
     <NavigationProperty Name="Properties__Implementation__"
-                        Relationship="Model.FK_DataType_BaseProperty_ObjectClass_1"
+                        Relationship="Model.FK_DataType_BaseProperty_ObjectClass_19"
                         FromRole="ObjectClass"
                         ToRole="Properties" />
     <NavigationProperty Name="Methods__Implementation__"
-                        Relationship="Model.FK_DataType_Method_ObjectClass_5"
+                        Relationship="Model.FK_DataType_Method_ObjectClass_25"
                         FromRole="ObjectClass"
                         ToRole="Methods" />
     <NavigationProperty Name="Module__Implementation__"
-                        Relationship="Model.FK_Module_DataType_Module_6"
+                        Relationship="Model.FK_Module_DataType_Module_26"
                         FromRole="DataTypes"
                         ToRole="Module" />
+    <Property Name="Module_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="DefaultIcon__Implementation__"
-                        Relationship="Model.FK_DataType_Icon_DataType_15"
+                        Relationship="Model.FK_DataType_Icon_DataType_35"
                         FromRole="DataType"
                         ToRole="DefaultIcon" />
+    <Property Name="DefaultIcon_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="MethodInvocations__Implementation__"
-                        Relationship="Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_21"
+                        Relationship="Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_41"
                         FromRole="InvokeOnObjectClass"
                         ToRole="MethodInvocations" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
@@ -415,9 +442,10 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Enumeration__Implementation__"
-                        Relationship="Model.FK_Enumeration_EnumerationEntry_Enumeration_27"
+                        Relationship="Model.FK_Enumeration_EnumerationEntry_Enumeration_47"
                         FromRole="EnumerationEntries"
                         ToRole="Enumeration" />
+    <Property Name="Enumeration_pos" Type="Int32" Nullable="true" />
     <Property Name="Value" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
@@ -456,20 +484,22 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ObjectClass__Implementation__"
-                        Relationship="Model.FK_DataType_Method_ObjectClass_5"
+                        Relationship="Model.FK_DataType_Method_ObjectClass_25"
                         FromRole="Methods"
                         ToRole="ObjectClass" />
+    <Property Name="ObjectClass_pos" Type="Int32" Nullable="true" />
     <Property Name="MethodName" Type="String" Nullable="false" MaxLength="100" />
     <NavigationProperty Name="Module__Implementation__"
-                        Relationship="Model.FK_Method_Module_Method_18"
+                        Relationship="Model.FK_Method_Module_Method_38"
                         FromRole="Method"
                         ToRole="Module" />
+    <Property Name="Module_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="MethodInvokations__Implementation__"
-                        Relationship="Model.FK_Method_MethodInvocation_Method_19"
+                        Relationship="Model.FK_Method_MethodInvocation_Method_39"
                         FromRole="Method"
                         ToRole="MethodInvokations" />
     <NavigationProperty Name="Parameter__Implementation__"
-                        Relationship="Model.FK_Method_BaseParameter_Method_24"
+                        Relationship="Model.FK_Method_BaseParameter_Method_44"
                         FromRole="Method"
                         ToRole="Parameter" />
     <Property Name="IsDisplayable" Type="Boolean" Nullable="false" />
@@ -481,22 +511,26 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Method__Implementation__"
-                        Relationship="Model.FK_Method_MethodInvocation_Method_19"
+                        Relationship="Model.FK_Method_MethodInvocation_Method_39"
                         FromRole="MethodInvokations"
                         ToRole="Method" />
+    <Property Name="Method_pos" Type="Int32" Nullable="true" />
     <Property Name="MemberName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Module__Implementation__"
-                        Relationship="Model.FK_MethodInvocation_Module_MethodInvocation_20"
+                        Relationship="Model.FK_MethodInvocation_Module_MethodInvocation_40"
                         FromRole="MethodInvocation"
                         ToRole="Module" />
+    <Property Name="Module_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="InvokeOnObjectClass__Implementation__"
-                        Relationship="Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_21"
+                        Relationship="Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_41"
                         FromRole="MethodInvocations"
                         ToRole="InvokeOnObjectClass" />
+    <Property Name="InvokeOnObjectClass_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Implementor__Implementation__"
-                        Relationship="Model.FK_MethodInvocation_TypeRef_MethodInvocation_47"
+                        Relationship="Model.FK_MethodInvocation_TypeRef_MethodInvocation_67"
                         FromRole="MethodInvocation"
                         ToRole="Implementor" />
+    <Property Name="Implementor_pos" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
     <Key>
@@ -505,7 +539,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="100" />
     <NavigationProperty Name="Projekte__Implementation__"
-                        Relationship="Model.FK_Projekt_Mitarbeiter_Mitarbeiter_3"
+                        Relationship="Model.FK_Projekt_Mitarbeiter_Mitarbeiter_23"
                         FromRole="Mitarbeiter"
                         ToRole="CollectionEntry" />
     <Property Name="Geburtstag" Type="DateTime" Nullable="true" />
@@ -520,11 +554,11 @@
     <Property Name="Namespace" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="DataTypes__Implementation__"
-                        Relationship="Model.FK_Module_DataType_Module_6"
+                        Relationship="Model.FK_Module_DataType_Module_26"
                         FromRole="Module"
                         ToRole="DataTypes" />
     <NavigationProperty Name="Assemblies__Implementation__"
-                        Relationship="Model.FK_Module_Assembly_Module_16"
+                        Relationship="Model.FK_Module_Assembly_Module_36"
                         FromRole="Module"
                         ToRole="Assemblies" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
@@ -542,14 +576,16 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="ControlType" Type="Int32" Nullable="false" />
     <NavigationProperty Name="PresenterAssembly__Implementation__"
-                        Relationship="Model.FK_PresenterInfo_Assembly_PresenterInfo_33"
+                        Relationship="Model.FK_PresenterInfo_Assembly_PresenterInfo_53"
                         FromRole="PresenterInfo"
                         ToRole="PresenterAssembly" />
+    <Property Name="PresenterAssembly_pos" Type="Int32" Nullable="true" />
     <Property Name="PresenterTypeName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="DataAssembly__Implementation__"
-                        Relationship="Model.FK_PresenterInfo_Assembly_PresenterInfo_34"
+                        Relationship="Model.FK_PresenterInfo_Assembly_PresenterInfo_54"
                         FromRole="PresenterInfo"
                         ToRole="DataAssembly" />
+    <Property Name="DataAssembly_pos" Type="Int32" Nullable="true" />
     <Property Name="DataTypeName" Type="String" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="Projekt">
@@ -559,21 +595,21 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="100" />
     <NavigationProperty Name="Tasks__Implementation__"
-                        Relationship="Model.FK_Projekt_Task_Projekt_2"
+                        Relationship="Model.FK_Projekt_Task_Projekt_22"
                         FromRole="Projekt"
                         ToRole="Tasks" />
     <NavigationProperty Name="Mitarbeiter__Implementation__"
-                        Relationship="Model.FK_Projekt_Mitarbeiter_Projekte_3"
+                        Relationship="Model.FK_Projekt_Mitarbeiter_Projekte_23"
                         FromRole="Projekte"
                         ToRole="CollectionEntry" />
     <Property Name="AufwandGes" Type="Double" Nullable="true" />
     <Property Name="Kundenname" Type="String" Nullable="true" MaxLength="100" />
     <NavigationProperty Name="Kostentraeger__Implementation__"
-                        Relationship="Model.FK_Projekt_Kostentraeger_Projekt_11"
+                        Relationship="Model.FK_Projekt_Kostentraeger_Projekt_31"
                         FromRole="Projekt"
                         ToRole="Kostentraeger" />
     <NavigationProperty Name="Auftraege__Implementation__"
-                        Relationship="Model.FK_Projekt_Auftrag_Projekt_10"
+                        Relationship="Model.FK_Projekt_Auftrag_Projekt_30"
                         FromRole="Projekt"
                         ToRole="Auftraege" />
   </EntityType>
@@ -583,15 +619,47 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="LeftPart__Implementation__"
-                        Relationship="Model.FK_Relation_ObjectReferenceProperty_LeftOf_43"
+                        Relationship="Model.FK_Relation_ObjectReferenceProperty_LeftOf_63"
                         FromRole="LeftOf"
                         ToRole="LeftPart" />
+    <Property Name="LeftPart_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="RightPart__Implementation__"
-                        Relationship="Model.FK_Relation_ObjectReferenceProperty_RightOf_44"
+                        Relationship="Model.FK_Relation_ObjectReferenceProperty_RightOf_64"
                         FromRole="RightOf"
                         ToRole="RightPart" />
+    <Property Name="RightPart_pos" Type="Int32" Nullable="true" />
     <Property Name="Storage" Type="Int32" Nullable="true" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_Relation_RelationEnd_Relation_71"
+                        FromRole="Relation"
+                        ToRole="A" />
+    <Property Name="A_pos" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_Relation_RelationEnd_Relation_72"
+                        FromRole="Relation"
+                        ToRole="B" />
+    <Property Name="B_pos" Type="Int32" Nullable="true" />
+  </EntityType>
+  <EntityType Name="RelationEnd">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Type__Implementation__"
+                        Relationship="Model.FK_RelationEnd_ObjectClass_RelationEnd_73"
+                        FromRole="RelationEnd"
+                        ToRole="Type" />
+    <Property Name="Type_pos" Type="Int32" Nullable="true" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="Role" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Navigator__Implementation__"
+                        Relationship="Model.FK_RelationEnd_Property_RelationEnd_74"
+                        FromRole="RelationEnd"
+                        ToRole="Navigator" />
+    <Property Name="Navigator_pos" Type="Int32" Nullable="true" />
+    <Property Name="Multiplicity" Type="Int32" Nullable="false" />
+    <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Taetigkeit">
     <Key>
@@ -599,19 +667,22 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Mitarbeiter__Implementation__"
-                        Relationship="Model.FK_Taetigkeit_Mitarbeiter_Taetigkeit_12"
+                        Relationship="Model.FK_Taetigkeit_Mitarbeiter_Taetigkeit_32"
                         FromRole="Taetigkeit"
                         ToRole="Mitarbeiter" />
+    <Property Name="Mitarbeiter_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Zeitkonto__Implementation__"
-                        Relationship="Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_13"
+                        Relationship="Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_33"
                         FromRole="Taetigkeiten"
                         ToRole="Zeitkonto" />
+    <Property Name="Zeitkonto_pos" Type="Int32" Nullable="true" />
     <Property Name="Datum" Type="DateTime" Nullable="false" />
     <Property Name="Dauer" Type="Double" Nullable="false" />
     <NavigationProperty Name="TaetigkeitsArt__Implementation__"
-                        Relationship="Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23"
+                        Relationship="Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43"
                         FromRole="Taetigkeit"
                         ToRole="TaetigkeitsArt" />
+    <Property Name="TaetigkeitsArt_pos" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="TaetigkeitsArt">
     <Key>
@@ -630,9 +701,10 @@
     <Property Name="DatumBis" Type="DateTime" Nullable="true" />
     <Property Name="Aufwand" Type="Double" Nullable="true" />
     <NavigationProperty Name="Projekt__Implementation__"
-                        Relationship="Model.FK_Projekt_Task_Projekt_2"
+                        Relationship="Model.FK_Projekt_Task_Projekt_22"
                         FromRole="Tasks"
                         ToRole="Projekt" />
+    <Property Name="Projekt_pos" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="Template">
     <Key>
@@ -641,16 +713,18 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="VisualTree__Implementation__"
-                        Relationship="Model.FK_Template_Visual_Template_38"
+                        Relationship="Model.FK_Template_Visual_Template_58"
                         FromRole="Template"
                         ToRole="VisualTree" />
+    <Property Name="VisualTree_pos" Type="Int32" Nullable="true" />
     <Property Name="DisplayedTypeFullName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="DisplayedTypeAssembly__Implementation__"
-                        Relationship="Model.FK_Template_Assembly_Template_39"
+                        Relationship="Model.FK_Template_Assembly_Template_59"
                         FromRole="Template"
                         ToRole="DisplayedTypeAssembly" />
+    <Property Name="DisplayedTypeAssembly_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Menu__Implementation__"
-                        Relationship="Model.FK_Template_Visual_Template_41"
+                        Relationship="Model.FK_Template_Visual_Template_61"
                         FromRole="Template"
                         ToRole="CollectionEntry" />
   </EntityType>
@@ -676,9 +750,10 @@
     <Property Name="StringProp" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="TestEnumProp" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ObjectProp__Implementation__"
-                        Relationship="Model.FK_TestObjClass_Kunde_TestObjClass_30"
+                        Relationship="Model.FK_TestObjClass_Kunde_TestObjClass_50"
                         FromRole="TestObjClass"
                         ToRole="ObjectProp" />
+    <Property Name="ObjectProp_pos" Type="Int32" Nullable="true" />
     <Property Name="MyIntProperty" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="TypeRef">
@@ -688,11 +763,12 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Assembly__Implementation__"
-                        Relationship="Model.FK_TypeRef_Assembly_TypeRef_45"
+                        Relationship="Model.FK_TypeRef_Assembly_TypeRef_65"
                         FromRole="TypeRef"
                         ToRole="Assembly" />
+    <Property Name="Assembly_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="GenericArguments__Implementation__"
-                        Relationship="Model.FK_TypeRef_TypeRef_TypeRef_46"
+                        Relationship="Model.FK_TypeRef_TypeRef_TypeRef_66"
                         FromRole="TypeRef"
                         ToRole="CollectionEntry" />
   </EntityType>
@@ -702,14 +778,16 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="LayoutRef__Implementation__"
-                        Relationship="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_48"
+                        Relationship="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_68"
                         FromRole="ViewDescriptor"
                         ToRole="LayoutRef" />
+    <Property Name="LayoutRef_pos" Type="Int32" Nullable="true" />
     <Property Name="Toolkit" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ViewRef__Implementation__"
-                        Relationship="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_49"
+                        Relationship="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_69"
                         FromRole="ViewDescriptor"
                         ToRole="ViewRef" />
+    <Property Name="ViewRef_pos" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="Visual">
     <Key>
@@ -719,19 +797,21 @@
     <Property Name="Description" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="ControlType" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Children__Implementation__"
-                        Relationship="Model.FK_Visual_Visual_Visual_35"
+                        Relationship="Model.FK_Visual_Visual_Visual_55"
                         FromRole="Visual"
                         ToRole="CollectionEntry" />
     <NavigationProperty Name="Property__Implementation__"
-                        Relationship="Model.FK_Visual_BaseProperty_Visual_36"
+                        Relationship="Model.FK_Visual_BaseProperty_Visual_56"
                         FromRole="Visual"
                         ToRole="Property" />
+    <Property Name="Property_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Method__Implementation__"
-                        Relationship="Model.FK_Visual_Method_Visual_37"
+                        Relationship="Model.FK_Visual_Method_Visual_57"
                         FromRole="Visual"
                         ToRole="Method" />
+    <Property Name="Method_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="ContextMenu__Implementation__"
-                        Relationship="Model.FK_Visual_Visual_Visual_40"
+                        Relationship="Model.FK_Visual_Visual_Visual_60"
                         FromRole="Visual"
                         ToRole="CollectionEntry" />
   </EntityType>
@@ -742,11 +822,11 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Kontoname" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Taetigkeiten__Implementation__"
-                        Relationship="Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_13"
+                        Relationship="Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_33"
                         FromRole="Zeitkonto"
                         ToRole="Taetigkeiten" />
     <NavigationProperty Name="Mitarbeiter__Implementation__"
-                        Relationship="Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_22"
+                        Relationship="Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42"
                         FromRole="Zeitkonto"
                         ToRole="CollectionEntry" />
     <Property Name="MaxStunden" Type="Double" Nullable="true" />
@@ -756,9 +836,10 @@
   <!-- EntityTypes for all other classes -->
   <EntityType Name="BackReferenceProperty" BaseType="Model.BaseProperty" >
     <NavigationProperty Name="ReferenceProperty__Implementation__"
-                        Relationship="Model.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_8"
+                        Relationship="Model.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28"
                         FromRole="BackReferenceProperty"
                         ToRole="ReferenceProperty" />
+    <Property Name="ReferenceProperty_pos" Type="Int32" Nullable="true" />
     <Property Name="PreFetchToClient" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="BoolParameter" BaseType="Model.BaseParameter" >
@@ -767,9 +848,10 @@
   </EntityType>
   <EntityType Name="CLRObjectParameter" BaseType="Model.BaseParameter" >
     <NavigationProperty Name="Assembly__Implementation__"
-                        Relationship="Model.FK_CLRObjectParameter_Assembly_CLRObjectParameter_26"
+                        Relationship="Model.FK_CLRObjectParameter_Assembly_CLRObjectParameter_46"
                         FromRole="CLRObjectParameter"
                         ToRole="Assembly" />
+    <Property Name="Assembly_pos" Type="Int32" Nullable="true" />
     <Property Name="FullTypeName" Type="String" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter" >
@@ -782,15 +864,16 @@
   </EntityType>
   <EntityType Name="Enumeration" BaseType="Model.DataType" >
     <NavigationProperty Name="EnumerationEntries__Implementation__"
-                        Relationship="Model.FK_Enumeration_EnumerationEntry_Enumeration_27"
+                        Relationship="Model.FK_Enumeration_EnumerationEntry_Enumeration_47"
                         FromRole="Enumeration"
                         ToRole="EnumerationEntries" />
   </EntityType>
   <EntityType Name="EnumerationProperty" BaseType="Model.ValueTypeProperty" >
     <NavigationProperty Name="Enumeration__Implementation__"
-                        Relationship="Model.FK_EnumerationProperty_Enumeration_EnumerationProperty_28"
+                        Relationship="Model.FK_EnumerationProperty_Enumeration_EnumerationProperty_48"
                         FromRole="EnumerationProperty"
                         ToRole="Enumeration" />
+    <Property Name="Enumeration_pos" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="IntegerRangeConstraint" BaseType="Model.Constraint" >
     <Property Name="Max" Type="Int32" Nullable="false" />
@@ -810,9 +893,10 @@
   </EntityType>
   <EntityType Name="Kostentraeger" BaseType="Model.Zeitkonto" >
     <NavigationProperty Name="Projekt__Implementation__"
-                        Relationship="Model.FK_Projekt_Kostentraeger_Projekt_11"
+                        Relationship="Model.FK_Projekt_Kostentraeger_Projekt_31"
                         FromRole="Kostentraeger"
                         ToRole="Projekt" />
+    <Property Name="Projekt_pos" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint" >
   </EntityType>
@@ -821,41 +905,45 @@
   <EntityType Name="ObjectClass" BaseType="Model.DataType" >
     <Property Name="TableName" Type="String" Nullable="false" MaxLength="100" />
     <NavigationProperty Name="BaseObjectClass__Implementation__"
-                        Relationship="Model.FK_ObjectClass_ObjectClass_BaseObjectClass_4"
+                        Relationship="Model.FK_ObjectClass_ObjectClass_BaseObjectClass_24"
                         FromRole="SubClasses"
                         ToRole="BaseObjectClass" />
+    <Property Name="BaseObjectClass_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="SubClasses__Implementation__"
-                        Relationship="Model.FK_ObjectClass_ObjectClass_BaseObjectClass_4"
+                        Relationship="Model.FK_ObjectClass_ObjectClass_BaseObjectClass_24"
                         FromRole="BaseObjectClass"
                         ToRole="SubClasses" />
     <NavigationProperty Name="ImplementsInterfaces__Implementation__"
-                        Relationship="Model.FK_ObjectClass_Interface_ObjectClass_29"
+                        Relationship="Model.FK_ObjectClass_Interface_ObjectClass_49"
                         FromRole="ObjectClass"
                         ToRole="CollectionEntry" />
     <Property Name="IsSimpleObject" Type="Boolean" Nullable="false" />
     <Property Name="IsFrozenObject" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="DefaultModel__Implementation__"
-                        Relationship="Model.FK_ObjectClass_TypeRef_ObjectClass_50"
+                        Relationship="Model.FK_ObjectClass_TypeRef_ObjectClass_70"
                         FromRole="ObjectClass"
                         ToRole="DefaultModel" />
+    <Property Name="DefaultModel_pos" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="ObjectParameter" BaseType="Model.BaseParameter" >
     <NavigationProperty Name="DataType__Implementation__"
-                        Relationship="Model.FK_ObjectParameter_DataType_ObjectParameter_25"
+                        Relationship="Model.FK_ObjectParameter_DataType_ObjectParameter_45"
                         FromRole="ObjectParameter"
                         ToRole="DataType" />
+    <Property Name="DataType_pos" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property" >
     <NavigationProperty Name="ReferenceObjectClass__Implementation__"
-                        Relationship="Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_7"
+                        Relationship="Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27"
                         FromRole="ObjectReferenceProperty"
                         ToRole="ReferenceObjectClass" />
+    <Property Name="ReferenceObjectClass_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="RightOf__Implementation__"
-                        Relationship="Model.FK_Relation_ObjectReferenceProperty_RightOf_44"
+                        Relationship="Model.FK_Relation_ObjectReferenceProperty_RightOf_64"
                         FromRole="RightPart"
                         ToRole="RightOf" />
     <NavigationProperty Name="LeftOf__Implementation__"
-                        Relationship="Model.FK_Relation_ObjectReferenceProperty_LeftOf_43"
+                        Relationship="Model.FK_Relation_ObjectReferenceProperty_LeftOf_63"
                         FromRole="LeftPart"
                         ToRole="LeftOf" />
   </EntityType>
@@ -877,21 +965,22 @@
   </EntityType>
   <EntityType Name="StructProperty" BaseType="Model.Property" >
     <NavigationProperty Name="StructDefinition__Implementation__"
-                        Relationship="Model.FK_StructProperty_Struct_StructProperty_32"
+                        Relationship="Model.FK_StructProperty_Struct_StructProperty_52"
                         FromRole="StructProperty"
                         ToRole="StructDefinition" />
+    <Property Name="StructDefinition_pos" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" >
   </EntityType>
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
   <!--
-    NewRelation: FK_ObjectClass_Interface_ObjectClass_29 
-    A: ZeroOrMore ObjectClass as ObjectClass (site: A, no Relation, prop ID=105)
-    B: ZeroOrMore Interface as ImplementsInterfaces (site: B, no Relation, prop ID=105)
-    Preferred Storage: Separate
+    Relation: FK_ObjectClass_Interface_ObjectClass_49
+    A: 3 ObjectClass as ObjectClass
+    B: 3 Interface as ImplementsInterfaces
+    Preferred Storage: 4
   -->
-  <EntityType Name="ObjectClass_ImplementsInterfaces29CollectionEntry" >
+  <EntityType Name="ObjectClass_ImplementsInterfaces49CollectionEntry" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -899,40 +988,40 @@
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_ObjectClass_Interface_ObjectClass_29"
+                        Relationship="Model.FK_ObjectClass_Interface_ObjectClass_49"
                         FromRole="CollectionEntry"
                         ToRole="ObjectClass" />
 
     <!-- B -->
     <NavigationProperty Name="B__Implementation__"
-                        Relationship="Model.FK_ObjectClass_Interface_ImplementsInterfaces_29"
+                        Relationship="Model.FK_ObjectClass_Interface_ImplementsInterfaces_49"
                         FromRole="CollectionEntry"
                         ToRole="ImplementsInterfaces" />
   </EntityType>
-  <Association Name="FK_ObjectClass_Interface_ObjectClass_29" >
+  <Association Name="FK_ObjectClass_Interface_ObjectClass_49" >
     <End Role="ObjectClass"
          Type="Model.ObjectClass" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.ObjectClass_ImplementsInterfaces29CollectionEntry"
+         Type="Model.ObjectClass_ImplementsInterfaces49CollectionEntry"
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_ObjectClass_Interface_ImplementsInterfaces_29" >
+  <Association Name="FK_ObjectClass_Interface_ImplementsInterfaces_49" >
     <End Role="ImplementsInterfaces"
          Type="Model.Interface" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.ObjectClass_ImplementsInterfaces29CollectionEntry"
+         Type="Model.ObjectClass_ImplementsInterfaces49CollectionEntry"
          Multiplicity="*" />
   </Association>
   
   <!--
-    NewRelation: FK_Projekt_Mitarbeiter_Projekte_3 
-    A: ZeroOrMore Projekt as Projekte (site: A, from relation ID = 3)
-    B: ZeroOrMore Mitarbeiter as Mitarbeiter (site: B, from relation ID = 3)
-    Preferred Storage: Separate
+    Relation: FK_Projekt_Mitarbeiter_Projekte_23
+    A: 3 Projekt as Projekte
+    B: 3 Mitarbeiter as Mitarbeiter
+    Preferred Storage: 4
   -->
-  <EntityType Name="Projekt_Mitarbeiter3CollectionEntry" >
+  <EntityType Name="Projekt_Mitarbeiter23CollectionEntry" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -940,42 +1029,42 @@
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_Projekt_Mitarbeiter_Projekte_3"
+                        Relationship="Model.FK_Projekt_Mitarbeiter_Projekte_23"
                         FromRole="CollectionEntry"
                         ToRole="Projekte" />
     <Property Name="A_pos" Type="Int32" Nullable="false" />
 
     <!-- B -->
     <NavigationProperty Name="B__Implementation__"
-                        Relationship="Model.FK_Projekt_Mitarbeiter_Mitarbeiter_3"
+                        Relationship="Model.FK_Projekt_Mitarbeiter_Mitarbeiter_23"
                         FromRole="CollectionEntry"
                         ToRole="Mitarbeiter" />
     <Property Name="B_pos" Type="Int32" Nullable="false" />
   </EntityType>
-  <Association Name="FK_Projekt_Mitarbeiter_Projekte_3" >
+  <Association Name="FK_Projekt_Mitarbeiter_Projekte_23" >
     <End Role="Projekte"
          Type="Model.Projekt" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Projekt_Mitarbeiter3CollectionEntry"
+         Type="Model.Projekt_Mitarbeiter23CollectionEntry"
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Projekt_Mitarbeiter_Mitarbeiter_3" >
+  <Association Name="FK_Projekt_Mitarbeiter_Mitarbeiter_23" >
     <End Role="Mitarbeiter"
          Type="Model.Mitarbeiter" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Projekt_Mitarbeiter3CollectionEntry"
+         Type="Model.Projekt_Mitarbeiter23CollectionEntry"
          Multiplicity="*" />
   </Association>
   
   <!--
-    NewRelation: FK_Template_Visual_Template_41 
-    A: ZeroOrMore Template as Template (site: A, no Relation, prop ID=165)
-    B: ZeroOrMore Visual as Menu (site: B, no Relation, prop ID=165)
-    Preferred Storage: Separate
+    Relation: FK_Template_Visual_Template_61
+    A: 3 Template as Template
+    B: 3 Visual as Menu
+    Preferred Storage: 4
   -->
-  <EntityType Name="Template_Menu41CollectionEntry" >
+  <EntityType Name="Template_Menu61CollectionEntry" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -983,40 +1072,40 @@
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_Template_Visual_Template_41"
+                        Relationship="Model.FK_Template_Visual_Template_61"
                         FromRole="CollectionEntry"
                         ToRole="Template" />
 
     <!-- B -->
     <NavigationProperty Name="B__Implementation__"
-                        Relationship="Model.FK_Template_Visual_Menu_41"
+                        Relationship="Model.FK_Template_Visual_Menu_61"
                         FromRole="CollectionEntry"
                         ToRole="Menu" />
   </EntityType>
-  <Association Name="FK_Template_Visual_Template_41" >
+  <Association Name="FK_Template_Visual_Template_61" >
     <End Role="Template"
          Type="Model.Template" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Template_Menu41CollectionEntry"
+         Type="Model.Template_Menu61CollectionEntry"
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Template_Visual_Menu_41" >
+  <Association Name="FK_Template_Visual_Menu_61" >
     <End Role="Menu"
          Type="Model.Visual" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Template_Menu41CollectionEntry"
+         Type="Model.Template_Menu61CollectionEntry"
          Multiplicity="*" />
   </Association>
   
   <!--
-    NewRelation: FK_TypeRef_TypeRef_TypeRef_46 
-    A: ZeroOrMore TypeRef as TypeRef (site: A, no Relation, prop ID=207)
-    B: ZeroOrMore TypeRef as GenericArguments (site: B, no Relation, prop ID=207)
-    Preferred Storage: Separate
+    Relation: FK_TypeRef_TypeRef_TypeRef_66
+    A: 3 TypeRef as TypeRef
+    B: 3 TypeRef as GenericArguments
+    Preferred Storage: 4
   -->
-  <EntityType Name="TypeRef_GenericArguments46CollectionEntry" >
+  <EntityType Name="TypeRef_GenericArguments66CollectionEntry" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1024,41 +1113,41 @@
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_TypeRef_TypeRef_TypeRef_46"
+                        Relationship="Model.FK_TypeRef_TypeRef_TypeRef_66"
                         FromRole="CollectionEntry"
                         ToRole="TypeRef" />
 
     <!-- B -->
     <NavigationProperty Name="B__Implementation__"
-                        Relationship="Model.FK_TypeRef_TypeRef_GenericArguments_46"
+                        Relationship="Model.FK_TypeRef_TypeRef_GenericArguments_66"
                         FromRole="CollectionEntry"
                         ToRole="GenericArguments" />
     <Property Name="B_pos" Type="Int32" Nullable="false" />
   </EntityType>
-  <Association Name="FK_TypeRef_TypeRef_TypeRef_46" >
+  <Association Name="FK_TypeRef_TypeRef_TypeRef_66" >
     <End Role="TypeRef"
          Type="Model.TypeRef" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.TypeRef_GenericArguments46CollectionEntry"
+         Type="Model.TypeRef_GenericArguments66CollectionEntry"
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_TypeRef_TypeRef_GenericArguments_46" >
+  <Association Name="FK_TypeRef_TypeRef_GenericArguments_66" >
     <End Role="GenericArguments"
          Type="Model.TypeRef" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.TypeRef_GenericArguments46CollectionEntry"
+         Type="Model.TypeRef_GenericArguments66CollectionEntry"
          Multiplicity="*" />
   </Association>
   
   <!--
-    NewRelation: FK_Visual_Visual_Visual_35 
-    A: ZeroOrMore Visual as Visual (site: A, no Relation, prop ID=151)
-    B: ZeroOrMore Visual as Children (site: B, no Relation, prop ID=151)
-    Preferred Storage: Separate
+    Relation: FK_Visual_Visual_Visual_55
+    A: 3 Visual as Visual
+    B: 3 Visual as Children
+    Preferred Storage: 4
   -->
-  <EntityType Name="Visual_Children35CollectionEntry" >
+  <EntityType Name="Visual_Children55CollectionEntry" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1066,40 +1155,40 @@
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_Visual_Visual_Visual_35"
+                        Relationship="Model.FK_Visual_Visual_Visual_55"
                         FromRole="CollectionEntry"
                         ToRole="Visual" />
 
     <!-- B -->
     <NavigationProperty Name="B__Implementation__"
-                        Relationship="Model.FK_Visual_Visual_Children_35"
+                        Relationship="Model.FK_Visual_Visual_Children_55"
                         FromRole="CollectionEntry"
                         ToRole="Children" />
   </EntityType>
-  <Association Name="FK_Visual_Visual_Visual_35" >
+  <Association Name="FK_Visual_Visual_Visual_55" >
     <End Role="Visual"
          Type="Model.Visual" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Visual_Children35CollectionEntry"
+         Type="Model.Visual_Children55CollectionEntry"
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Visual_Visual_Children_35" >
+  <Association Name="FK_Visual_Visual_Children_55" >
     <End Role="Children"
          Type="Model.Visual" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Visual_Children35CollectionEntry"
+         Type="Model.Visual_Children55CollectionEntry"
          Multiplicity="*" />
   </Association>
   
   <!--
-    NewRelation: FK_Visual_Visual_Visual_40 
-    A: ZeroOrMore Visual as Visual (site: A, no Relation, prop ID=164)
-    B: ZeroOrMore Visual as ContextMenu (site: B, no Relation, prop ID=164)
-    Preferred Storage: Separate
+    Relation: FK_Visual_Visual_Visual_60
+    A: 3 Visual as Visual
+    B: 3 Visual as ContextMenu
+    Preferred Storage: 4
   -->
-  <EntityType Name="Visual_ContextMenu40CollectionEntry" >
+  <EntityType Name="Visual_ContextMenu60CollectionEntry" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1107,40 +1196,40 @@
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_Visual_Visual_Visual_40"
+                        Relationship="Model.FK_Visual_Visual_Visual_60"
                         FromRole="CollectionEntry"
                         ToRole="Visual" />
 
     <!-- B -->
     <NavigationProperty Name="B__Implementation__"
-                        Relationship="Model.FK_Visual_Visual_ContextMenu_40"
+                        Relationship="Model.FK_Visual_Visual_ContextMenu_60"
                         FromRole="CollectionEntry"
                         ToRole="ContextMenu" />
   </EntityType>
-  <Association Name="FK_Visual_Visual_Visual_40" >
+  <Association Name="FK_Visual_Visual_Visual_60" >
     <End Role="Visual"
          Type="Model.Visual" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Visual_ContextMenu40CollectionEntry"
+         Type="Model.Visual_ContextMenu60CollectionEntry"
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Visual_Visual_ContextMenu_40" >
+  <Association Name="FK_Visual_Visual_ContextMenu_60" >
     <End Role="ContextMenu"
          Type="Model.Visual" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Visual_ContextMenu40CollectionEntry"
+         Type="Model.Visual_ContextMenu60CollectionEntry"
          Multiplicity="*" />
   </Association>
   
   <!--
-    NewRelation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_22 
-    A: ZeroOrMore Zeitkonto as Zeitkonto (site: A, no Relation, prop ID=86)
-    B: ZeroOrMore Mitarbeiter as Mitarbeiter (site: B, no Relation, prop ID=86)
-    Preferred Storage: Separate
+    Relation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_42
+    A: 3 Zeitkonto as Zeitkonto
+    B: 3 Mitarbeiter as Mitarbeiter
+    Preferred Storage: 4
   -->
-  <EntityType Name="Zeitkonto_Mitarbeiter22CollectionEntry" >
+  <EntityType Name="Zeitkonto_Mitarbeiter42CollectionEntry" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1148,30 +1237,30 @@
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_22"
+                        Relationship="Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42"
                         FromRole="CollectionEntry"
                         ToRole="Zeitkonto" />
 
     <!-- B -->
     <NavigationProperty Name="B__Implementation__"
-                        Relationship="Model.FK_Zeitkonto_Mitarbeiter_Mitarbeiter_22"
+                        Relationship="Model.FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42"
                         FromRole="CollectionEntry"
                         ToRole="Mitarbeiter" />
   </EntityType>
-  <Association Name="FK_Zeitkonto_Mitarbeiter_Zeitkonto_22" >
+  <Association Name="FK_Zeitkonto_Mitarbeiter_Zeitkonto_42" >
     <End Role="Zeitkonto"
          Type="Model.Zeitkonto" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Zeitkonto_Mitarbeiter22CollectionEntry"
+         Type="Model.Zeitkonto_Mitarbeiter42CollectionEntry"
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Zeitkonto_Mitarbeiter_Mitarbeiter_22" >
+  <Association Name="FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42" >
     <End Role="Mitarbeiter"
          Type="Model.Mitarbeiter" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Zeitkonto_Mitarbeiter22CollectionEntry"
+         Type="Model.Zeitkonto_Mitarbeiter42CollectionEntry"
          Multiplicity="*" />
   </Association>
   
@@ -1203,7 +1292,7 @@
   </Association>
 
   <!-- Associations for all object-object relations without CollectionEntrys -->
-  <Association Name="FK_Auftrag_Kunde_Auftrag_14" >
+  <Association Name="FK_Auftrag_Kunde_Auftrag_34" >
     <End Role="Auftrag"
          Type="Model.Auftrag" 
          Multiplicity="*" />
@@ -1211,7 +1300,7 @@
          Type="Model.Kunde" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Auftrag_Mitarbeiter_Auftrag_9" >
+  <Association Name="FK_Auftrag_Mitarbeiter_Auftrag_29" >
     <End Role="Auftrag"
          Type="Model.Auftrag" 
          Multiplicity="*" />
@@ -1219,7 +1308,7 @@
          Type="Model.Mitarbeiter" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_8" >
+  <Association Name="FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28" >
     <End Role="BackReferenceProperty"
          Type="Model.BackReferenceProperty" 
          Multiplicity="*" />
@@ -1227,7 +1316,7 @@
          Type="Model.ObjectReferenceProperty" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_BaseProperty_Constraint_ConstrainedProperty_42" >
+  <Association Name="FK_BaseProperty_Constraint_ConstrainedProperty_62" >
     <End Role="ConstrainedProperty"
          Type="Model.BaseProperty" 
          Multiplicity="0..1" />
@@ -1235,7 +1324,7 @@
          Type="Model.Constraint" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_BaseProperty_Module_BaseProperty_17" >
+  <Association Name="FK_BaseProperty_Module_BaseProperty_37" >
     <End Role="BaseProperty"
          Type="Model.BaseProperty" 
          Multiplicity="*" />
@@ -1243,7 +1332,7 @@
          Type="Model.Module" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_CLRObjectParameter_Assembly_CLRObjectParameter_26" >
+  <Association Name="FK_CLRObjectParameter_Assembly_CLRObjectParameter_46" >
     <End Role="CLRObjectParameter"
          Type="Model.CLRObjectParameter" 
          Multiplicity="*" />
@@ -1251,7 +1340,7 @@
          Type="Model.Assembly" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ControlInfo_Assembly_ControlInfo_31" >
+  <Association Name="FK_ControlInfo_Assembly_ControlInfo_51" >
     <End Role="ControlInfo"
          Type="Model.ControlInfo" 
          Multiplicity="*" />
@@ -1259,7 +1348,7 @@
          Type="Model.Assembly" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_DataType_BaseProperty_ObjectClass_1" >
+  <Association Name="FK_DataType_BaseProperty_ObjectClass_19" >
     <End Role="ObjectClass"
          Type="Model.DataType" 
          Multiplicity="0..1" />
@@ -1267,7 +1356,7 @@
          Type="Model.BaseProperty" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_DataType_Icon_DataType_15" >
+  <Association Name="FK_DataType_Icon_DataType_35" >
     <End Role="DataType"
          Type="Model.DataType" 
          Multiplicity="*" />
@@ -1275,7 +1364,7 @@
          Type="Model.Icon" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_DataType_Method_ObjectClass_5" >
+  <Association Name="FK_DataType_Method_ObjectClass_25" >
     <End Role="ObjectClass"
          Type="Model.DataType" 
          Multiplicity="0..1" />
@@ -1283,7 +1372,7 @@
          Type="Model.Method" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_DataType_MethodInvocation_InvokeOnObjectClass_21" >
+  <Association Name="FK_DataType_MethodInvocation_InvokeOnObjectClass_41" >
     <End Role="InvokeOnObjectClass"
          Type="Model.DataType" 
          Multiplicity="0..1" />
@@ -1291,7 +1380,7 @@
          Type="Model.MethodInvocation" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Enumeration_EnumerationEntry_Enumeration_27" >
+  <Association Name="FK_Enumeration_EnumerationEntry_Enumeration_47" >
     <End Role="Enumeration"
          Type="Model.Enumeration" 
          Multiplicity="0..1" />
@@ -1299,7 +1388,7 @@
          Type="Model.EnumerationEntry" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_EnumerationProperty_Enumeration_EnumerationProperty_28" >
+  <Association Name="FK_EnumerationProperty_Enumeration_EnumerationProperty_48" >
     <End Role="EnumerationProperty"
          Type="Model.EnumerationProperty" 
          Multiplicity="*" />
@@ -1307,7 +1396,7 @@
          Type="Model.Enumeration" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Method_BaseParameter_Method_24" >
+  <Association Name="FK_Method_BaseParameter_Method_44" >
     <End Role="Method"
          Type="Model.Method" 
          Multiplicity="0..1" />
@@ -1315,7 +1404,7 @@
          Type="Model.BaseParameter" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Method_MethodInvocation_Method_19" >
+  <Association Name="FK_Method_MethodInvocation_Method_39" >
     <End Role="Method"
          Type="Model.Method" 
          Multiplicity="0..1" />
@@ -1323,7 +1412,7 @@
          Type="Model.MethodInvocation" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Method_Module_Method_18" >
+  <Association Name="FK_Method_Module_Method_38" >
     <End Role="Method"
          Type="Model.Method" 
          Multiplicity="*" />
@@ -1331,7 +1420,7 @@
          Type="Model.Module" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_MethodInvocation_Module_MethodInvocation_20" >
+  <Association Name="FK_MethodInvocation_Module_MethodInvocation_40" >
     <End Role="MethodInvocation"
          Type="Model.MethodInvocation" 
          Multiplicity="*" />
@@ -1339,7 +1428,7 @@
          Type="Model.Module" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_MethodInvocation_TypeRef_MethodInvocation_47" >
+  <Association Name="FK_MethodInvocation_TypeRef_MethodInvocation_67" >
     <End Role="MethodInvocation"
          Type="Model.MethodInvocation" 
          Multiplicity="*" />
@@ -1347,7 +1436,7 @@
          Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Module_Assembly_Module_16" >
+  <Association Name="FK_Module_Assembly_Module_36" >
     <End Role="Module"
          Type="Model.Module" 
          Multiplicity="0..1" />
@@ -1355,7 +1444,7 @@
          Type="Model.Assembly" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Module_DataType_Module_6" >
+  <Association Name="FK_Module_DataType_Module_26" >
     <End Role="Module"
          Type="Model.Module" 
          Multiplicity="0..1" />
@@ -1363,7 +1452,7 @@
          Type="Model.DataType" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_ObjectClass_ObjectClass_BaseObjectClass_4" >
+  <Association Name="FK_ObjectClass_ObjectClass_BaseObjectClass_24" >
     <End Role="BaseObjectClass"
          Type="Model.ObjectClass" 
          Multiplicity="0..1" />
@@ -1371,7 +1460,7 @@
          Type="Model.ObjectClass" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_ObjectClass_TypeRef_ObjectClass_50" >
+  <Association Name="FK_ObjectClass_TypeRef_ObjectClass_70" >
     <End Role="ObjectClass"
          Type="Model.ObjectClass" 
          Multiplicity="*" />
@@ -1379,7 +1468,7 @@
          Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ObjectParameter_DataType_ObjectParameter_25" >
+  <Association Name="FK_ObjectParameter_DataType_ObjectParameter_45" >
     <End Role="ObjectParameter"
          Type="Model.ObjectParameter" 
          Multiplicity="*" />
@@ -1387,7 +1476,7 @@
          Type="Model.DataType" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_7" >
+  <Association Name="FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27" >
     <End Role="ObjectReferenceProperty"
          Type="Model.ObjectReferenceProperty" 
          Multiplicity="*" />
@@ -1395,7 +1484,7 @@
          Type="Model.ObjectClass" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_PresenterInfo_Assembly_PresenterInfo_33" >
+  <Association Name="FK_PresenterInfo_Assembly_PresenterInfo_53" >
     <End Role="PresenterInfo"
          Type="Model.PresenterInfo" 
          Multiplicity="*" />
@@ -1403,7 +1492,7 @@
          Type="Model.Assembly" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_PresenterInfo_Assembly_PresenterInfo_34" >
+  <Association Name="FK_PresenterInfo_Assembly_PresenterInfo_54" >
     <End Role="PresenterInfo"
          Type="Model.PresenterInfo" 
          Multiplicity="*" />
@@ -1411,7 +1500,7 @@
          Type="Model.Assembly" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Projekt_Auftrag_Projekt_10" >
+  <Association Name="FK_Projekt_Auftrag_Projekt_30" >
     <End Role="Projekt"
          Type="Model.Projekt" 
          Multiplicity="0..1" />
@@ -1419,7 +1508,7 @@
          Type="Model.Auftrag" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Projekt_Kostentraeger_Projekt_11" >
+  <Association Name="FK_Projekt_Kostentraeger_Projekt_31" >
     <End Role="Projekt"
          Type="Model.Projekt" 
          Multiplicity="0..1" />
@@ -1427,7 +1516,7 @@
          Type="Model.Kostentraeger" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Projekt_Task_Projekt_2" >
+  <Association Name="FK_Projekt_Task_Projekt_22" >
     <End Role="Projekt"
          Type="Model.Projekt" 
          Multiplicity="0..1" />
@@ -1435,7 +1524,7 @@
          Type="Model.Task" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Relation_ObjectReferenceProperty_LeftOf_43" >
+  <Association Name="FK_Relation_ObjectReferenceProperty_LeftOf_63" >
     <End Role="LeftOf"
          Type="Model.Relation" 
          Multiplicity="0..1" />
@@ -1443,7 +1532,7 @@
          Type="Model.ObjectReferenceProperty" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Relation_ObjectReferenceProperty_RightOf_44" >
+  <Association Name="FK_Relation_ObjectReferenceProperty_RightOf_64" >
     <End Role="RightOf"
          Type="Model.Relation" 
          Multiplicity="0..1" />
@@ -1451,7 +1540,39 @@
          Type="Model.ObjectReferenceProperty" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_StructProperty_Struct_StructProperty_32" >
+  <Association Name="FK_Relation_RelationEnd_Relation_71" >
+    <End Role="Relation"
+         Type="Model.Relation" 
+         Multiplicity="*" />
+    <End Role="A"
+         Type="Model.RelationEnd" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Relation_RelationEnd_Relation_72" >
+    <End Role="Relation"
+         Type="Model.Relation" 
+         Multiplicity="*" />
+    <End Role="B"
+         Type="Model.RelationEnd" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_RelationEnd_ObjectClass_RelationEnd_73" >
+    <End Role="RelationEnd"
+         Type="Model.RelationEnd" 
+         Multiplicity="*" />
+    <End Role="Type"
+         Type="Model.ObjectClass" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_RelationEnd_Property_RelationEnd_74" >
+    <End Role="RelationEnd"
+         Type="Model.RelationEnd" 
+         Multiplicity="*" />
+    <End Role="Navigator"
+         Type="Model.Property" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_StructProperty_Struct_StructProperty_52" >
     <End Role="StructProperty"
          Type="Model.StructProperty" 
          Multiplicity="*" />
@@ -1459,7 +1580,7 @@
          Type="Model.Struct" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Taetigkeit_Mitarbeiter_Taetigkeit_12" >
+  <Association Name="FK_Taetigkeit_Mitarbeiter_Taetigkeit_32" >
     <End Role="Taetigkeit"
          Type="Model.Taetigkeit" 
          Multiplicity="*" />
@@ -1467,7 +1588,7 @@
          Type="Model.Mitarbeiter" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_23" >
+  <Association Name="FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43" >
     <End Role="Taetigkeit"
          Type="Model.Taetigkeit" 
          Multiplicity="*" />
@@ -1475,7 +1596,7 @@
          Type="Model.TaetigkeitsArt" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Template_Assembly_Template_39" >
+  <Association Name="FK_Template_Assembly_Template_59" >
     <End Role="Template"
          Type="Model.Template" 
          Multiplicity="*" />
@@ -1483,7 +1604,7 @@
          Type="Model.Assembly" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Template_Visual_Template_38" >
+  <Association Name="FK_Template_Visual_Template_58" >
     <End Role="Template"
          Type="Model.Template" 
          Multiplicity="*" />
@@ -1491,7 +1612,7 @@
          Type="Model.Visual" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_TestObjClass_Kunde_TestObjClass_30" >
+  <Association Name="FK_TestObjClass_Kunde_TestObjClass_50" >
     <End Role="TestObjClass"
          Type="Model.TestObjClass" 
          Multiplicity="*" />
@@ -1499,7 +1620,7 @@
          Type="Model.Kunde" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_TypeRef_Assembly_TypeRef_45" >
+  <Association Name="FK_TypeRef_Assembly_TypeRef_65" >
     <End Role="TypeRef"
          Type="Model.TypeRef" 
          Multiplicity="*" />
@@ -1507,7 +1628,7 @@
          Type="Model.Assembly" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_48" >
+  <Association Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_68" >
     <End Role="ViewDescriptor"
          Type="Model.ViewDescriptor" 
          Multiplicity="*" />
@@ -1515,7 +1636,7 @@
          Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_49" >
+  <Association Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_69" >
     <End Role="ViewDescriptor"
          Type="Model.ViewDescriptor" 
          Multiplicity="*" />
@@ -1523,7 +1644,7 @@
          Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Visual_BaseProperty_Visual_36" >
+  <Association Name="FK_Visual_BaseProperty_Visual_56" >
     <End Role="Visual"
          Type="Model.Visual" 
          Multiplicity="*" />
@@ -1531,7 +1652,7 @@
          Type="Model.BaseProperty" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Visual_Method_Visual_37" >
+  <Association Name="FK_Visual_Method_Visual_57" >
     <End Role="Visual"
          Type="Model.Visual" 
          Multiplicity="*" />
@@ -1539,7 +1660,7 @@
          Type="Model.Method" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Zeitkonto_Taetigkeit_Zeitkonto_13" >
+  <Association Name="FK_Zeitkonto_Taetigkeit_Zeitkonto_33" >
     <End Role="Zeitkonto"
          Type="Model.Zeitkonto" 
          Multiplicity="0..1" />

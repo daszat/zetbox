@@ -7,44 +7,68 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
-<%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
-<%@ Parameter Name="relEnd" Type="RelationEnd" %>
+<%@ Parameter Name="rel" Type="Relation" %>
+<%@ Parameter Name="endRole" Type="RelationEndRole" %>
 <%
 
-	NewRelation rel = relEnd.Container;
+    RelationEnd relEnd = rel.GetEnd(endRole);
+    RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
 	// the name of the property to create
-	string name = relEnd.Other.RoleName;
+	string name = otherEnd.RoleName;
 	// the ef-visible property's name
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the other end
-	string wrapperClass = "Entity" + (relEnd.Other.HasPersistentOrder ? "List" : "Collection") + relEnd.Other.Role + "SideWrapper";
+	string wrapperClass = "undefined wrapper class";
+	if (otherEnd.HasPersistentOrder)
+	{
+	    if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
+	    {
+	        wrapperClass = "EntityListASideWrapper";
+	    }
+	    else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
+	    {
+	        wrapperClass = "EntityListBSideWrapper";
+	    }
+	}
+	else
+	{
+	    if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
+	    {
+	        wrapperClass = "EntityCollectionASideWrapper";
+	    }
+	    else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
+	    {
+	        wrapperClass = "EntityCollectionBSideWrapper";
+	    }
+	}
 
 	// the name of the CollectionEntry type
 	string ceName = rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix;
 
 	// the name of the EF association to the CollectionEntry
-	string assocName = rel.GetCollectionEntryAssociationName(relEnd);
+	string assocName = rel.GetCollectionEntryAssociationName(endRole);
 	// this class' role name in this association
 	string roleName = relEnd.RoleName;
 	// this targeted role name 
 	string targetRoleName = "CollectionEntry";
 
 	// which generic interface to use for the collection
-	string exposedListType = relEnd.Other.HasPersistentOrder ? "IList" : "ICollection";
+	string exposedListType = otherEnd.HasPersistentOrder ? "IList" : "ICollection";
 
 	// which Kistl interface this is 
-	string thisInterface = relEnd.Type.NameDataObject;
+	string thisInterface = relEnd.Type.GetDataTypeString();
 	// which Kistl interface this list contains
-	string referencedInterface = relEnd.Other.Type.NameDataObject;
+	string referencedInterface = otherEnd.Type.GetDataTypeString();
 	// the actual implementation class of the list's elements
-	string referencedImplementation = relEnd.Other.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix;
+	string referencedImplementation = otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix;
 
 	
 %>
@@ -57,7 +81,7 @@
             {
                 if (<%= wrapperName %> == null)
                 {
-                    <%= wrapperName %> = new <%= wrapperClass %><<%= rel.A.Type.NameDataObject %>, <%= rel.B.Type.NameDataObject %>, <%= ceName %>>(
+                    <%= wrapperName %> = new <%= wrapperClass %><<%= rel.A.Type.GetDataTypeString() %>, <%= rel.B.Type.GetDataTypeString() %>, <%= ceName %>>(
                             this,
                             <%= efName %>);
                 }
@@ -82,7 +106,7 @@
                 return c;
             }
         }
-        private <%= wrapperClass %><<%= rel.A.Type.NameDataObject %>, <%= rel.B.Type.NameDataObject %>, <%= ceName %>> <%= wrapperName %>;
+        private <%= wrapperClass %><<%= rel.A.Type.GetDataTypeString() %>, <%= rel.B.Type.GetDataTypeString() %>, <%= ceName %>> <%= wrapperName %>;
         
 <%
         AddSerialization(serializationList, efName);

@@ -23,6 +23,94 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// The A-side of this Relation.
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.RelationEnd A
+        {
+            get
+            {
+                if (fk_A.HasValue)
+                    return Context.Find<Kistl.App.Base.RelationEnd>(fk_A.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                fk_A = value == null ? (int?)null : value.ID;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_A
+        {
+            get
+            {
+                return _fk_A;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_A != value)
+                {
+                    NotifyPropertyChanging("A");
+                    _fk_A = value;
+                    NotifyPropertyChanging("A");
+                }
+            }
+        }
+        private int? _fk_A;
+
+        /// <summary>
+        /// The B-side of this Relation.
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.RelationEnd B
+        {
+            get
+            {
+                if (fk_B.HasValue)
+                    return Context.Find<Kistl.App.Base.RelationEnd>(fk_B.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                fk_B = value == null ? (int?)null : value.ID;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_B
+        {
+            get
+            {
+                return _fk_B;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_B != value)
+                {
+                    NotifyPropertyChanging("B");
+                    _fk_B = value;
+                    NotifyPropertyChanging("B");
+                }
+            }
+        }
+        private int? _fk_B;
+
+        /// <summary>
         /// Description of this Relation
         /// </summary>
         // value type property
@@ -221,6 +309,8 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._fk_A, binStream);
+            BinarySerializer.ToStream(this._fk_B, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._fk_LeftPart, binStream);
             BinarySerializer.ToStream(this._fk_RightPart, binStream);
@@ -230,6 +320,8 @@ namespace Kistl.App.Base
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._fk_B, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._fk_LeftPart, binStream);
             BinarySerializer.FromStream(out this._fk_RightPart, binStream);

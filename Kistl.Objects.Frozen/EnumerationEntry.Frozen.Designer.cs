@@ -154,7 +154,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(28);
+		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(34);
 		internal static void CreateInstances()
 		{
 			DataStore[2] = new EnumerationEntry__Implementation__Frozen(2);
@@ -212,6 +212,18 @@ namespace Kistl.App.Base
 			DataStore[61] = new EnumerationEntry__Implementation__Frozen(61);
 
 			DataStore[62] = new EnumerationEntry__Implementation__Frozen(62);
+
+			DataStore[63] = new EnumerationEntry__Implementation__Frozen(63);
+
+			DataStore[64] = new EnumerationEntry__Implementation__Frozen(64);
+
+			DataStore[65] = new EnumerationEntry__Implementation__Frozen(65);
+
+			DataStore[66] = new EnumerationEntry__Implementation__Frozen(66);
+
+			DataStore[67] = new EnumerationEntry__Implementation__Frozen(67);
+
+			DataStore[68] = new EnumerationEntry__Implementation__Frozen(68);
 
 		}
 
@@ -344,18 +356,48 @@ namespace Kistl.App.Base
 			DataStore[60].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
 			DataStore[60].Value = 3;
 			DataStore[60].Name = @"Replicate";
-			DataStore[60].Description = null;
+			DataStore[60].Description = @"The relation information is stored on both sides of the Relation";
 			DataStore[60].Seal();
 			DataStore[61].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
 			DataStore[61].Value = 2;
 			DataStore[61].Name = @"Right";
-			DataStore[61].Description = null;
+			DataStore[61].Description = @"Deprecated alias for MergeIntoB";
 			DataStore[61].Seal();
 			DataStore[62].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
 			DataStore[62].Value = 1;
 			DataStore[62].Name = @"Left";
-			DataStore[62].Description = null;
+			DataStore[62].Description = @"Deprecated alias for MergeIntoA";
 			DataStore[62].Seal();
+			DataStore[63].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[81];
+			DataStore[63].Value = 2;
+			DataStore[63].Name = @"One";
+			DataStore[63].Description = @"Required Element (exactly one)";
+			DataStore[63].Seal();
+			DataStore[64].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[81];
+			DataStore[64].Value = 1;
+			DataStore[64].Name = @"ZeroOrOne";
+			DataStore[64].Description = @"Optional Element (zero or one)";
+			DataStore[64].Seal();
+			DataStore[65].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[81];
+			DataStore[65].Value = 3;
+			DataStore[65].Name = @"ZeroOrMore";
+			DataStore[65].Description = @"Optional List Element (zero or more)";
+			DataStore[65].Seal();
+			DataStore[66].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
+			DataStore[66].Value = 1;
+			DataStore[66].Name = @"MergeIntoA";
+			DataStore[66].Description = @"The relation information is stored with the A-side ObjectClass";
+			DataStore[66].Seal();
+			DataStore[67].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
+			DataStore[67].Value = 2;
+			DataStore[67].Name = @"MergeIntoB";
+			DataStore[67].Description = @"The relation information is stored with the B-side ObjectClass";
+			DataStore[67].Seal();
+			DataStore[68].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
+			DataStore[68].Value = 4;
+			DataStore[68].Name = @"Separate";
+			DataStore[68].Description = @"The relation information is stored in a separate entity";
+			DataStore[68].Seal();
 	
 		}
 

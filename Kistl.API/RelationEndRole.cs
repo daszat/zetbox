@@ -7,7 +7,7 @@ namespace Kistl.API
 {
 
     /// <summary>
-    /// Quite arbitrary enum to denote which end a end is.
+    /// Quite arbitrary enum to denote which end an end is. Values are used for serialization
     /// </summary>
     /// Using A and B avoids any legasthenic problems and also collapses natural and semantic ordering.
     /// Contrast this to "right" and "left" which are usually written in the "wrong" (that is "right" on 

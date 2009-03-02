@@ -9,9 +9,9 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
-<%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <?xml version="1.0" encoding="utf-8"?>
 <Schema xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl"
@@ -48,12 +48,10 @@
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
 <%
-	foreach(var rel in NewRelation.GetAll(ctx)
-		.Where(r => r.GetPreferredStorage() == StorageHint.Separate)
-		.OrderBy(r => r.GetAssociationName()))
+	foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
 	{
-		string assocNameA = rel.GetCollectionEntryAssociationName(rel.A);
-		string assocNameB = rel.GetCollectionEntryAssociationName(rel.B);
+		string assocNameA = rel.GetCollectionEntryAssociationName(RelationEndRole.A);
+		string assocNameB = rel.GetCollectionEntryAssociationName(RelationEndRole.B);
 		string esName = rel.GetCollectionEntryClassName();
 		string esTableName = rel.GetCollectionEntryTableName(ctx);
 		
@@ -80,9 +78,7 @@
 
     <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->
 <%
-	foreach(var rel in NewRelation.GetAll(ctx)
-		.Where(r => r.GetPreferredStorage() != StorageHint.Separate)
-		.OrderBy(r => r.GetAssociationName()))
+	foreach(var rel in ModelCsdl.GetRelationsWithoutSeparateStorage(ctx))
 	{
 		string assocName = rel.GetAssociationName();
 		
@@ -137,9 +133,7 @@
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
 <%
-	foreach(var rel in NewRelation.GetAll(ctx)
-		.Where(r => r.GetPreferredStorage() == StorageHint.Separate)
-		.OrderBy(r => r.GetAssociationName()))
+	foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
 	{
 		string ceName = rel.GetCollectionEntryClassName();
 		string fkAName = rel.GetCollectionEntryFkaColumnName();
@@ -171,7 +165,7 @@
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="<%= rel.GetCollectionEntryAssociationName(rel.A) %>">
+  <Association Name="<%= rel.GetCollectionEntryAssociationName(RelationEndRole.A) %>">
     <End Role="<%= rel.A.RoleName %>" Type="Model.Store.<%= rel.A.Type.ClassName %>" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
     <ReferentialConstraint>
@@ -185,7 +179,7 @@
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="<%= rel.GetCollectionEntryAssociationName(rel.B) %>">
+  <Association Name="<%= rel.GetCollectionEntryAssociationName(RelationEndRole.B) %>">
     <End Role="<%= rel.B.RoleName %>" Type="Model.Store.<%= rel.B.Type.ClassName %>" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
     <ReferentialConstraint>
@@ -205,19 +199,17 @@
 
   <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->
 <%
-	foreach(var rel in NewRelation.GetAll(ctx)
-		.Where(r => r.GetPreferredStorage() != StorageHint.Separate)
-		.OrderBy(r => r.GetAssociationName()))
+	foreach(var rel in ModelCsdl.GetRelationsWithoutSeparateStorage(ctx))
 	{
 		RelationEnd principal, dependent;
 	
-		switch(rel.GetPreferredStorage())
+		switch(rel.Storage)
 		{
-			case StorageHint.MergeA:
+			case StorageType.MergeIntoA:
 				principal = rel.B;
 				dependent = rel.A;
 				break;
-			case StorageHint.MergeB:
+			case StorageType.MergeIntoB:
 				principal = rel.A;
 				dependent = rel.B;
 				break;

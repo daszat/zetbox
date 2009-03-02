@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
@@ -27,12 +27,12 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                 // this is 1:N stuff
 
                 var orp = (ObjectReferenceProperty)this.property;
-                var rel = NewRelation.Lookup(ctx, orp);
+                var rel = RelationExtensions.Lookup(ctx, orp);
                 var relEnd = rel.GetEnd(orp);
 
                 CallTemplate("Implementation.ObjectClasses.EfListWrapper", ctx,
                     name + Kistl.API.Helper.ImplementationSuffix,
-                    rel.GetAssociationName(), relEnd.RoleName, relEnd.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix);
+                    rel.GetAssociationName(), relEnd.RoleName, relEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix);
             }
         }
 

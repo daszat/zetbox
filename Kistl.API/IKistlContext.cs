@@ -74,6 +74,19 @@ namespace Kistl.API
         /// <returns>A List of Objects</returns>
         List<T> GetListOf<T>(Type type, int ID, string propertyName) where T : IDataObject;
 
+        /// <summary>
+        /// Fetches all collection entries of a given Relation (specified by <paramref name="ID"/>)
+        /// which reference the given <paramref name="container"/> on the side <paramref name="role"/>
+        /// of the relation. Mostly for internal use.
+        /// </summary>
+        /// <typeparam name="A">A-side type of the relation</typeparam>
+        /// <typeparam name="B">B-side type of the relation</typeparam>
+        /// <param name="relationId">Specifies which relation to fetch</param>
+        /// <param name="role">Specifies how to interpret the container</param>
+        /// <param name="container">The container of the requested collection</param>
+        /// <returns></returns>
+        //ICollection<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject container);
+     
         ICollection<T> FetchRelation<A, B, T>(RelationEndRole role, IDataObject parent)
             where T : INewCollectionEntry<A, B>;
 

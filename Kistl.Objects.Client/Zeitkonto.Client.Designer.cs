@@ -103,21 +103,20 @@ namespace Kistl.App.Zeiterfassung
 				if (_Mitarbeiter == null)
 				{
 					_Mitarbeiter 
-						= new ClientCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__>(
+						= new ClientCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(
 							this, 
-							(ICollection<Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__>(RelationEndRole.A, this));
+							(ICollection<Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(RelationEndRole.A, this));
 				}
 				return _Mitarbeiter;
 			}
 		}
 
-		private ClientCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__> _Mitarbeiter;
+		private ClientCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__> _Mitarbeiter;
 
         /// <summary>
         /// Tätigkeiten
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

@@ -4,9 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
+using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
@@ -43,11 +44,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
         protected override void ApplyObjectReferencePropertyTemplate(ObjectReferenceProperty prop)
         {
-            var rel = NewRelation.Lookup(ctx, prop);
+            //var rel = RelationExtensions.Lookup(ctx, prop);
 
-            Debug.Assert(rel.A.Navigator == prop || rel.B.Navigator == prop);
-            var relEnd = rel.GetEnd(prop);
-            var otherEnd = relEnd.Other;
+            //Debug.Assert(rel.A.Navigator.ID == prop.ID || rel.B.Navigator.ID == prop.ID);
+            //var relEnd = rel.GetEnd(prop);
+            //var otherEnd = rel.GetOtherEnd(relEnd);
 
             this.WriteLine("        // object reference property");
             Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(
@@ -63,11 +64,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 prop);
         }
 
-        protected override void ApplyObjectListPropertyTemplate(RelationEnd relEnd)
+        protected override void ApplyObjectListPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
             Implementation.ObjectClasses.ObjectListProperty.Call(Host, ctx,
                  this.MembersToSerialize,
-                 relEnd.Navigator as ObjectReferenceProperty);
+                 rel.GetEnd(endRole).Navigator as ObjectReferenceProperty);
         }
 
         protected override void ApplyValueTypeListTemplate(ValueTypeProperty prop)

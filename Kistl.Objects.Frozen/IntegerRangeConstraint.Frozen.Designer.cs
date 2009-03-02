@@ -150,7 +150,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, IntegerRangeConstraint__Implementation__Frozen> DataStore = new Dictionary<int, IntegerRangeConstraint__Implementation__Frozen>(3);
+		internal new static Dictionary<int, IntegerRangeConstraint__Implementation__Frozen> DataStore = new Dictionary<int, IntegerRangeConstraint__Implementation__Frozen>(4);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[147] = 
@@ -161,6 +161,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[149] = 
 			DataStore[149] = new IntegerRangeConstraint__Implementation__Frozen(149);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[216] = 
+			DataStore[216] = new IntegerRangeConstraint__Implementation__Frozen(216);
 
 		}
 
@@ -180,6 +183,11 @@ namespace Kistl.App.Base
 			DataStore[149].Max = 4000;
 			DataStore[149].Min = 0;
 			DataStore[149].Seal();
+			DataStore[216].Reason = @"RelationEndRole can only be 1 ('A') or 2 ('B')";
+			DataStore[216].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[217];
+			DataStore[216].Max = 2;
+			DataStore[216].Min = 1;
+			DataStore[216].Seal();
 	
 		}
 

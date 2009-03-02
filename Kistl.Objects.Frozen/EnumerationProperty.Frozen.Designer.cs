@@ -148,7 +148,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, EnumerationProperty__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationProperty__Implementation__Frozen>(9);
+		internal new static Dictionary<int, EnumerationProperty__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationProperty__Implementation__Frozen>(10);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[110] = 
@@ -195,6 +195,11 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[210] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[210] = 
 			DataStore[210] = new EnumerationProperty__Implementation__Frozen(210);
+
+			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[219] = 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[219] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[219] = 
+			DataStore[219] = new EnumerationProperty__Implementation__Frozen(219);
 
 		}
 
@@ -315,6 +320,18 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 			DataStore[210].IsIndexed = false;
 			DataStore[210].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
 			DataStore[210].Seal();
+			DataStore[219].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
+			DataStore[219].PropertyName = @"Multiplicity";
+			DataStore[219].AltText = @"Specifies how many instances may occur on this end of the relation.";
+			DataStore[219].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[219].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[219].Description = @"Specifies how many instances may occur on this end of the relation.";
+			DataStore[219].IsList = false;
+			DataStore[219].IsNullable = false;
+			DataStore[219].IsIndexed = false;
+			DataStore[219].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[81];
+			DataStore[219].Seal();
 	
 		}
 

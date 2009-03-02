@@ -56,10 +56,10 @@ namespace Kistl.App.Base
         /// Das Property, welches auf diese Klasse zeigt
         /// </summary>
     /*
-    NewRelation: FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_8 
-    A: ZeroOrMore BackReferenceProperty as BackReferenceProperty (site: A, no Relation, prop ID=47)
-    B: ZeroOrOne ObjectReferenceProperty as ReferenceProperty (site: B, no Relation, prop ID=47)
-    Preferred Storage: MergeA
+    Relation: FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28
+    A: 3 BackReferenceProperty as BackReferenceProperty
+    B: 1 ObjectReferenceProperty as ReferenceProperty
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -99,14 +99,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_ReferenceProperty;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_8", "ReferenceProperty")]
+        [EdmRelationshipNavigationProperty("Model", "FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28", "ReferenceProperty")]
         public Kistl.App.Base.ObjectReferenceProperty__Implementation__ ReferenceProperty__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__>(
-                        "Model.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_8",
+                        "Model.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28",
                         "ReferenceProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -120,7 +120,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__>(
-                        "Model.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_8",
+                        "Model.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28",
                         "ReferenceProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -131,6 +131,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? ReferenceProperty_pos
+        {
+            get
+            {
+                return _ReferenceProperty_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ReferenceProperty_pos != value)
+                {
+                    NotifyPropertyChanging("ReferenceProperty_pos");
+                    _ReferenceProperty_pos = value;
+                    NotifyPropertyChanged("ReferenceProperty_pos");
+                }
+            }
+        }
+        private int? _ReferenceProperty_pos;
         
 
         /// <summary>
@@ -241,6 +262,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._PreFetchToClient, binStream);
             BinarySerializer.ToStream(this.fk_ReferenceProperty, binStream);
+            BinarySerializer.ToStream(this._ReferenceProperty_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -252,6 +274,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_ReferenceProperty = tmp;
             }
+            BinarySerializer.FromStream(out this._ReferenceProperty_pos, binStream);
         }
 
 #endregion

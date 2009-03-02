@@ -101,10 +101,10 @@ namespace Kistl.App.Base
         /// Module
         /// </summary>
     /*
-    NewRelation: FK_Module_Assembly_Module_16 
-    A: One Module as Module (site: A, from relation ID = 13)
-    B: ZeroOrMore Assembly as Assemblies (site: B, from relation ID = 13)
-    Preferred Storage: MergeB
+    Relation: FK_Module_Assembly_Module_36
+    A: 2 Module as Module
+    B: 3 Assembly as Assemblies
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -144,14 +144,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_Module;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Module_Assembly_Module_16", "Module")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_Assembly_Module_36", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Module_Assembly_Module_16",
+                        "Model.FK_Module_Assembly_Module_36",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -165,7 +165,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Module_Assembly_Module_16",
+                        "Model.FK_Module_Assembly_Module_36",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -176,6 +176,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Module_pos
+        {
+            get
+            {
+                return _Module_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Module_pos != value)
+                {
+                    NotifyPropertyChanging("Module_pos");
+                    _Module_pos = value;
+                    NotifyPropertyChanged("Module_pos");
+                }
+            }
+        }
+        private int? _Module_pos;
         
 
         /// <summary>
@@ -245,6 +266,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._AssemblyName, binStream);
             BinarySerializer.ToStream(this._IsClientAssembly, binStream);
             BinarySerializer.ToStream(this.fk_Module, binStream);
+            BinarySerializer.ToStream(this._Module_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -257,6 +279,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Module = tmp;
             }
+            BinarySerializer.FromStream(out this._Module_pos, binStream);
         }
 
 #endregion

@@ -2,20 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Kistl.App.Base;
 
-namespace Kistl.Server.Movables
+namespace Kistl.App.Extensions
 {
-    /// <summary>
-    /// Defines the Multiplicity of a relation's end
-    /// </summary>
-    public enum Multiplicity
-    {
-        ZeroOrOne,
-        One,
-        ZeroOrMore,
-    }
-
     public static class MultiplicityExtensions
     {
         public static Multiplicity ToMultiplicity(this Property prop)

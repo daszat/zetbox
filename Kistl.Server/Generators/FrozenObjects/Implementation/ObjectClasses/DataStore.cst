@@ -7,6 +7,7 @@
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 <%

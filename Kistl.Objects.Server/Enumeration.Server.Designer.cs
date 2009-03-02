@@ -30,10 +30,10 @@ namespace Kistl.App.Base
         /// Einträge der Enumeration
         /// </summary>
     /*
-    NewRelation: FK_Enumeration_EnumerationEntry_Enumeration_27 
-    A: One Enumeration as Enumeration (site: A, from relation ID = 15)
-    B: ZeroOrMore EnumerationEntry as EnumerationEntries (site: B, from relation ID = 15)
-    Preferred Storage: MergeB
+    Relation: FK_Enumeration_EnumerationEntry_Enumeration_47
+    A: 2 Enumeration as Enumeration
+    B: 3 EnumerationEntry as EnumerationEntries
+    Preferred Storage: 2
     */
         // object list property
         // implement the user-visible interface
@@ -52,14 +52,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Enumeration_EnumerationEntry_Enumeration_27", "EnumerationEntries")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Enumeration_EnumerationEntry_Enumeration_47", "EnumerationEntries")]
         public EntityCollection<Kistl.App.Base.EnumerationEntry__Implementation__> EnumerationEntries__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.EnumerationEntry__Implementation__>(
-                        "Model.FK_Enumeration_EnumerationEntry_Enumeration_27",
+                        "Model.FK_Enumeration_EnumerationEntry_Enumeration_47",
                         "EnumerationEntries");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

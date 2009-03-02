@@ -6,38 +6,40 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
-<%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
-<%@ Parameter Name="relEnd" Type="RelationEnd" %>
+<%@ Parameter Name="rel" Type="Relation" %>
+<%@ Parameter Name="endRole" Type="RelationEndRole" %>
 <%
 
-	NewRelation rel = relEnd.Container;
+    RelationEnd relEnd = rel.GetEnd(endRole);
+    RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
 	// the name of the property to create
-	string name = relEnd.Other.RoleName;
+	string name = otherEnd.RoleName;
 	// the ef-visible property's name
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = relEnd.Other.HasPersistentOrder ? "EntityListWrapper" : "EntityCollectionWrapper";
+	string wrapperClass = otherEnd.HasPersistentOrder ? "EntityListWrapper" : "EntityCollectionWrapper";
 	
 	// the name of the EF association
 	string assocName = rel.GetAssociationName();
-	string targetRoleName = relEnd.Other.RoleName;
+	string targetRoleName = otherEnd.RoleName;
 
 	// which generic interface to use for the collection
-	string exposedListType = relEnd.Other.HasPersistentOrder ? "IList" : "ICollection";
+	string exposedListType = otherEnd.HasPersistentOrder ? "IList" : "ICollection";
 
 	// which Kistl interface this is 
-	string thisInterface = relEnd.Type.NameDataObject;
+	string thisInterface = relEnd.Type.GetDataTypeString();
 	// which Kistl interface this list contains
-	string referencedInterface = relEnd.Other.Type.NameDataObject;
+	string referencedInterface = otherEnd.Type.GetDataTypeString();
 	// the actual implementation class of the list's elements
-	string referencedImplementation = relEnd.Other.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix;
+	string referencedImplementation = otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix;
 
 	
 %>
@@ -53,7 +55,7 @@
                     <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>>(
                             this.Context, <%= efName %><%
 	// TODO: improve this!
-	if (relEnd.Other.HasPersistentOrder)
+	if (otherEnd.HasPersistentOrder)
 	{
 		this.WriteObjects(", \"", relEnd.RoleName, "\"");
 	}

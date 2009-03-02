@@ -127,7 +127,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, Enumeration__Implementation__Frozen> DataStore = new Dictionary<int, Enumeration__Implementation__Frozen>(4);
+		internal new static Dictionary<int, Enumeration__Implementation__Frozen> DataStore = new Dictionary<int, Enumeration__Implementation__Frozen>(5);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50] = 
@@ -141,6 +141,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[78] = 
 			DataStore[78] = new Enumeration__Implementation__Frozen(78);
+
+			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[81] = 
+			DataStore[81] = new Enumeration__Implementation__Frozen(81);
 
 		}
 
@@ -219,12 +222,31 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[59],
 			DataStore[78].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[78].Description = @"Storage Type of a 1:1 Releation.";
-			DataStore[78].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(3) {
+			DataStore[78].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(6) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[60],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[61],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[62],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[66],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[67],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[68],
 });
 			DataStore[78].Seal();
+			DataStore[81].ClassName = @"Multiplicity";
+			DataStore[81].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0) {
+});
+			DataStore[81].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
+});
+			DataStore[81].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[81].DefaultIcon = null;
+			DataStore[81].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[81].Description = @"Describes the multiplicities of objects on RelationEnds";
+			DataStore[81].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(3) {
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[63],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[64],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[65],
+});
+			DataStore[81].Seal();
 	
 		}
 

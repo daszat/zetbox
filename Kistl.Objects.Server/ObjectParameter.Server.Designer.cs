@@ -30,10 +30,10 @@ namespace Kistl.App.Base
         /// Kistl-Typ des Parameters
         /// </summary>
     /*
-    NewRelation: FK_ObjectParameter_DataType_ObjectParameter_25 
-    A: ZeroOrMore ObjectParameter as ObjectParameter (site: A, no Relation, prop ID=97)
-    B: ZeroOrOne DataType as DataType (site: B, no Relation, prop ID=97)
-    Preferred Storage: MergeA
+    Relation: FK_ObjectParameter_DataType_ObjectParameter_45
+    A: 3 ObjectParameter as ObjectParameter
+    B: 1 DataType as DataType
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -73,14 +73,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_DataType;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectParameter_DataType_ObjectParameter_25", "DataType")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectParameter_DataType_ObjectParameter_45", "DataType")]
         public Kistl.App.Base.DataType__Implementation__ DataType__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_ObjectParameter_DataType_ObjectParameter_25",
+                        "Model.FK_ObjectParameter_DataType_ObjectParameter_45",
                         "DataType");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -94,7 +94,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_ObjectParameter_DataType_ObjectParameter_25",
+                        "Model.FK_ObjectParameter_DataType_ObjectParameter_45",
                         "DataType");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -105,6 +105,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? DataType_pos
+        {
+            get
+            {
+                return _DataType_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_DataType_pos != value)
+                {
+                    NotifyPropertyChanging("DataType_pos");
+                    _DataType_pos = value;
+                    NotifyPropertyChanged("DataType_pos");
+                }
+            }
+        }
+        private int? _DataType_pos;
         
 
         /// <summary>
@@ -193,6 +214,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_DataType, binStream);
+            BinarySerializer.ToStream(this._DataType_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -203,6 +225,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_DataType = tmp;
             }
+            BinarySerializer.FromStream(out this._DataType_pos, binStream);
         }
 
 #endregion

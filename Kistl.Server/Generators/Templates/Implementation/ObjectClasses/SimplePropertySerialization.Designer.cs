@@ -5,7 +5,6 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
@@ -31,25 +30,25 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
 switch(direction)
 	{
 		case SerializerDirection.ToStream:
 
-#line 22 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
+#line 21 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
 this.WriteObjects("            BinarySerializer.ToStream(this.",  memberName , ", ",  streamName , ");\r\n");
-#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
+#line 23 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
 break;
 		case SerializerDirection.FromStream:
 		    // use type-inference to get right "tmp" type
 
-#line 28 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
+#line 27 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                var tmp = this.",  memberName , ";\r\n");
 this.WriteObjects("                BinarySerializer.FromStream(out tmp, ",  streamName , ");\r\n");
 this.WriteObjects("                this.",  memberName , " = tmp;\r\n");
 this.WriteObjects("            }\r\n");
-#line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
+#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
 break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");

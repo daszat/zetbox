@@ -116,7 +116,6 @@ namespace Kistl.App.Base
         /// all implemented Methods in this DataType
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -147,7 +146,6 @@ namespace Kistl.App.Base
         /// Liste aller Methoden der Objektklasse.
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -234,7 +232,6 @@ namespace Kistl.App.Base
         /// Eigenschaften der Objektklasse
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

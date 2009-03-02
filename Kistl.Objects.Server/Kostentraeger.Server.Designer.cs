@@ -30,10 +30,10 @@ namespace Kistl.App.Zeiterfassung
         /// Projekt des Kostenträgers
         /// </summary>
     /*
-    NewRelation: FK_Projekt_Kostentraeger_Projekt_11 
-    A: One Projekt as Projekt (site: A, from relation ID = 9)
-    B: ZeroOrMore Kostentraeger as Kostentraeger (site: B, from relation ID = 9)
-    Preferred Storage: MergeB
+    Relation: FK_Projekt_Kostentraeger_Projekt_31
+    A: 2 Projekt as Projekt
+    B: 3 Kostentraeger as Kostentraeger
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -73,14 +73,14 @@ namespace Kistl.App.Zeiterfassung
         }
         private int? _fk_Projekt;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Kostentraeger_Projekt_11", "Projekt")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Kostentraeger_Projekt_31", "Projekt")]
         public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_Kostentraeger_Projekt_11",
+                        "Model.FK_Projekt_Kostentraeger_Projekt_31",
                         "Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -94,7 +94,7 @@ namespace Kistl.App.Zeiterfassung
             {
                 EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_Kostentraeger_Projekt_11",
+                        "Model.FK_Projekt_Kostentraeger_Projekt_31",
                         "Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -105,6 +105,27 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Projekt_pos
+        {
+            get
+            {
+                return _Projekt_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Projekt_pos != value)
+                {
+                    NotifyPropertyChanging("Projekt_pos");
+                    _Projekt_pos = value;
+                    NotifyPropertyChanged("Projekt_pos");
+                }
+            }
+        }
+        private int? _Projekt_pos;
         
 
 		public override Type GetInterfaceType()
@@ -151,6 +172,7 @@ namespace Kistl.App.Zeiterfassung
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_Projekt, binStream);
+            BinarySerializer.ToStream(this._Projekt_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -161,6 +183,7 @@ namespace Kistl.App.Zeiterfassung
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Projekt = tmp;
             }
+            BinarySerializer.FromStream(out this._Projekt_pos, binStream);
         }
 
 #endregion

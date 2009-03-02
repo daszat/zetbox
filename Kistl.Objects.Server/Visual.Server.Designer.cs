@@ -49,10 +49,10 @@ namespace Kistl.App.GUI
         /// if this is a container, here are the visually contained/controlled children of this Visual
         /// </summary>
     /*
-    NewRelation: FK_Visual_Visual_Visual_35 
-    A: ZeroOrMore Visual as Visual (site: A, no Relation, prop ID=151)
-    B: ZeroOrMore Visual as Children (site: B, no Relation, prop ID=151)
-    Preferred Storage: Separate
+    Relation: FK_Visual_Visual_Visual_55
+    A: 3 Visual as Visual
+    B: 3 Visual as Children
+    Preferred Storage: 4
     */
         // collection reference property
         // implement the user-visible interface
@@ -64,7 +64,7 @@ namespace Kistl.App.GUI
             {
                 if (_ChildrenWrapper == null)
                 {
-                    _ChildrenWrapper = new EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_Children35CollectionEntry__Implementation__>(
+                    _ChildrenWrapper = new EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_Children55CollectionEntry__Implementation__>(
                             this,
                             Children__Implementation__);
                 }
@@ -72,14 +72,14 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Visual_35", "CollectionEntry")]
-        public EntityCollection<Kistl.App.GUI.Visual_Children35CollectionEntry__Implementation__> Children__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Visual_55", "CollectionEntry")]
+        public EntityCollection<Kistl.App.GUI.Visual_Children55CollectionEntry__Implementation__> Children__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.GUI.Visual_Children35CollectionEntry__Implementation__>(
-                        "Model.FK_Visual_Visual_Visual_35",
+                    .GetRelatedCollection<Kistl.App.GUI.Visual_Children55CollectionEntry__Implementation__>(
+                        "Model.FK_Visual_Visual_Visual_55",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -89,17 +89,17 @@ namespace Kistl.App.GUI
                 return c;
             }
         }
-        private EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_Children35CollectionEntry__Implementation__> _ChildrenWrapper;
+        private EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_Children55CollectionEntry__Implementation__> _ChildrenWrapper;
         
 
         /// <summary>
         /// The context menu for this Visual
         /// </summary>
     /*
-    NewRelation: FK_Visual_Visual_Visual_40 
-    A: ZeroOrMore Visual as Visual (site: A, no Relation, prop ID=164)
-    B: ZeroOrMore Visual as ContextMenu (site: B, no Relation, prop ID=164)
-    Preferred Storage: Separate
+    Relation: FK_Visual_Visual_Visual_60
+    A: 3 Visual as Visual
+    B: 3 Visual as ContextMenu
+    Preferred Storage: 4
     */
         // collection reference property
         // implement the user-visible interface
@@ -111,7 +111,7 @@ namespace Kistl.App.GUI
             {
                 if (_ContextMenuWrapper == null)
                 {
-                    _ContextMenuWrapper = new EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ContextMenu40CollectionEntry__Implementation__>(
+                    _ContextMenuWrapper = new EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ContextMenu60CollectionEntry__Implementation__>(
                             this,
                             ContextMenu__Implementation__);
                 }
@@ -119,14 +119,14 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Visual_40", "CollectionEntry")]
-        public EntityCollection<Kistl.App.GUI.Visual_ContextMenu40CollectionEntry__Implementation__> ContextMenu__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Visual_60", "CollectionEntry")]
+        public EntityCollection<Kistl.App.GUI.Visual_ContextMenu60CollectionEntry__Implementation__> ContextMenu__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.GUI.Visual_ContextMenu40CollectionEntry__Implementation__>(
-                        "Model.FK_Visual_Visual_Visual_40",
+                    .GetRelatedCollection<Kistl.App.GUI.Visual_ContextMenu60CollectionEntry__Implementation__>(
+                        "Model.FK_Visual_Visual_Visual_60",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -136,7 +136,7 @@ namespace Kistl.App.GUI
                 return c;
             }
         }
-        private EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ContextMenu40CollectionEntry__Implementation__> _ContextMenuWrapper;
+        private EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ContextMenu60CollectionEntry__Implementation__> _ContextMenuWrapper;
         
 
         /// <summary>
@@ -211,10 +211,10 @@ namespace Kistl.App.GUI
         /// The Method whose return value shoud be displayed
         /// </summary>
     /*
-    NewRelation: FK_Visual_Method_Visual_37 
-    A: ZeroOrMore Visual as Visual (site: A, no Relation, prop ID=153)
-    B: ZeroOrOne Method as Method (site: B, no Relation, prop ID=153)
-    Preferred Storage: MergeA
+    Relation: FK_Visual_Method_Visual_57
+    A: 3 Visual as Visual
+    B: 1 Method as Method
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -254,14 +254,14 @@ namespace Kistl.App.GUI
         }
         private int? _fk_Method;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_Method_Visual_37", "Method")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_Method_Visual_57", "Method")]
         public Kistl.App.Base.Method__Implementation__ Method__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Method__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_Visual_Method_Visual_37",
+                        "Model.FK_Visual_Method_Visual_57",
                         "Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -275,7 +275,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.Method__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_Visual_Method_Visual_37",
+                        "Model.FK_Visual_Method_Visual_57",
                         "Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -286,16 +286,37 @@ namespace Kistl.App.GUI
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Method_pos
+        {
+            get
+            {
+                return _Method_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Method_pos != value)
+                {
+                    NotifyPropertyChanging("Method_pos");
+                    _Method_pos = value;
+                    NotifyPropertyChanged("Method_pos");
+                }
+            }
+        }
+        private int? _Method_pos;
         
 
         /// <summary>
         /// The Property to display
         /// </summary>
     /*
-    NewRelation: FK_Visual_BaseProperty_Visual_36 
-    A: ZeroOrMore Visual as Visual (site: A, no Relation, prop ID=152)
-    B: ZeroOrOne BaseProperty as Property (site: B, no Relation, prop ID=152)
-    Preferred Storage: MergeA
+    Relation: FK_Visual_BaseProperty_Visual_56
+    A: 3 Visual as Visual
+    B: 1 BaseProperty as Property
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -335,14 +356,14 @@ namespace Kistl.App.GUI
         }
         private int? _fk_Property;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_BaseProperty_Visual_36", "Property")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_BaseProperty_Visual_56", "Property")]
         public Kistl.App.Base.BaseProperty__Implementation__ Property__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.BaseProperty__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty__Implementation__>(
-                        "Model.FK_Visual_BaseProperty_Visual_36",
+                        "Model.FK_Visual_BaseProperty_Visual_56",
                         "Property");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -356,7 +377,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.BaseProperty__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty__Implementation__>(
-                        "Model.FK_Visual_BaseProperty_Visual_36",
+                        "Model.FK_Visual_BaseProperty_Visual_56",
                         "Property");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -367,6 +388,27 @@ namespace Kistl.App.GUI
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Property_pos
+        {
+            get
+            {
+                return _Property_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Property_pos != value)
+                {
+                    NotifyPropertyChanging("Property_pos");
+                    _Property_pos = value;
+                    NotifyPropertyChanged("Property_pos");
+                }
+            }
+        }
+        private int? _Property_pos;
         
 
 		public override Type GetInterfaceType()
@@ -419,7 +461,9 @@ namespace Kistl.App.GUI
             BinarySerializer.ToStream((int)((Visual)this).ControlType, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this.fk_Method, binStream);
+            BinarySerializer.ToStream(this._Method_pos, binStream);
             BinarySerializer.ToStream(this.fk_Property, binStream);
+            BinarySerializer.ToStream(this._Property_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -436,11 +480,13 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Method = tmp;
             }
+            BinarySerializer.FromStream(out this._Method_pos, binStream);
             {
                 var tmp = this.fk_Property;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Property = tmp;
             }
+            BinarySerializer.FromStream(out this._Property_pos, binStream);
         }
 
 #endregion

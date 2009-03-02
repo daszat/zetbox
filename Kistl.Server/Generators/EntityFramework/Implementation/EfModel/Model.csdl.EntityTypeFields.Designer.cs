@@ -5,9 +5,9 @@ using System.Linq;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
@@ -37,45 +37,41 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 	foreach(var p in properties)
 	{
 		// TODO: implement IsNullable everywhere
-		var rel = NewRelation.Lookup(ctx, p);
-		if (rel != null)
+		if (p is ObjectReferenceProperty)
 		{
-			RelationEnd end = rel.GetEnd(p);
-			RelationEnd otherEnd = rel.GetOtherEnd(p);
+		    var prop = p as ObjectReferenceProperty;
+		    var rel = RelationExtensions.Lookup(ctx, prop);
+			var relEnd = rel.GetEnd(prop);
+			var otherEnd = rel.GetOtherEnd(relEnd);
 			
-			if (rel.GetPreferredStorage() == StorageHint.Separate)
+			if (rel.Storage == StorageType.Separate)
 			{
-				Debug.Assert(end != null);
+				Debug.Assert(relEnd != null);
 
-#line 37 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 38 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  p.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
-this.WriteObjects("                        Relationship=\"Model.",  rel.GetCollectionEntryAssociationName(end) , "\"\r\n");
-this.WriteObjects("                        FromRole=\"",  end.RoleName , "\"\r\n");
+this.WriteObjects("                        Relationship=\"Model.",  rel.GetCollectionEntryAssociationName((RelationEndRole)relEnd.Role) , "\"\r\n");
+this.WriteObjects("                        FromRole=\"",  relEnd.RoleName , "\"\r\n");
 this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
-#line 42 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 43 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 			else
 			{
 
-#line 46 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 47 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  p.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  rel.GetAssociationName() , "\"\r\n");
-this.WriteObjects("                        FromRole=\"",  end.RoleName , "\"\r\n");
+this.WriteObjects("                        FromRole=\"",  relEnd.RoleName , "\"\r\n");
 this.WriteObjects("                        ToRole=\"",  otherEnd.RoleName , "\" />\r\n");
-#line 51 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 52 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 
-			// Only add position column if one is needed AND this is the preferred storage location
-			if (p.NeedsPositionColumn()
-				&&( (rel.GetPreferredStorage() == StorageHint.MergeA && rel.A == end)
-					||(rel.GetPreferredStorage() == StorageHint.MergeB && rel.B == end)
-					||(rel.GetPreferredStorage() == StorageHint.Replicate))
-				)
+			if (rel.NeedsPositionStorage((RelationEndRole)relEnd.Role))
 			{
 
-#line 61 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 57 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.PositionSuffix , "\" Type=\"Int32\" Nullable=\"true\" />\r\n");
-#line 63 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 59 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 		}
 		else if (p is ValueTypeProperty)
@@ -84,30 +80,30 @@ this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.Po
 			if (prop.IsList)
 			{
 
-#line 71 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 67 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  prop.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  prop.ObjectClass.ClassName , "\"\r\n");
 this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
-#line 76 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 72 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 			else
 			{
 
-#line 80 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 76 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    ",  ModelCsdl.PlainPropertyDefinitionFromValueType((ValueTypeProperty)p) , "\r\n");
-#line 82 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 78 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 		}
 		else if (p is StructProperty)
 		{
 			// Nullable Complex types are not supported by EF
 
-#line 88 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 84 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("              Type=\"Model.",  ((StructProperty)p).StructDefinition.ClassName , "\"\r\n");
 this.WriteObjects("              Nullable=\"false\" />\r\n");
-#line 92 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 88 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }	
 	}
 

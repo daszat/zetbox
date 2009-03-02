@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
@@ -14,28 +15,50 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
-            RelationEnd relEnd)
+            Relation rel, RelationEndRole endRole)
         {
-            NewRelation rel = relEnd.Container;
+            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string name = relEnd.Navigator.PropertyName;
-            string exposedCollectionInterface = relEnd.Other.HasPersistentOrder ? "IList" : "ICollection";
-            string referencedInterface = relEnd.Other.Type.NameDataObject;
+            string exposedCollectionInterface = otherEnd.HasPersistentOrder ? "IList" : "ICollection";
+            string referencedInterface = otherEnd.Type.GetDataTypeString();
             string backingName = "_" + name;
-            string backingCollectionType = "Client" + (relEnd.Other.HasPersistentOrder ? "List" : "Collection") + relEnd.Other.Role + "SideWrapper";
-            string aSideType = rel.A.Type.NameDataObject;
-            string bSideType = rel.B.Type.NameDataObject;
+            string backingCollectionType = "undefined wrapper class";
+            if (otherEnd.HasPersistentOrder)
+            {
+                if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
+                {
+                    backingCollectionType = "ClientListASideWrapper";
+                }
+                else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
+                {
+                    backingCollectionType = "ClientListBSideWrapper";
+                }
+            }
+            else
+            {
+                if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
+                {
+                    backingCollectionType = "ClientCollectionASideWrapper";
+                }
+                else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
+                {
+                    backingCollectionType = "ClientCollectionBSideWrapper";
+                }
+            }
+
+            string aSideType = rel.A.Type.GetDataTypeString();
+            string bSideType = rel.B.Type.GetDataTypeString();
             string entryType = rel.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
             string providerCollectionType = "ICollection<" + entryType + ">";
-
-            RelationEndRole role = relEnd.Role;
 
             host.CallTemplate("Implementation.ObjectClasses.CollectionEntryListProperty",
                 ctx, serializationList,
                 name, exposedCollectionInterface, referencedInterface,
                 backingName, backingCollectionType, aSideType, bSideType, entryType,
                 providerCollectionType,
-                role);
+                endRole);
         }
     }
 }

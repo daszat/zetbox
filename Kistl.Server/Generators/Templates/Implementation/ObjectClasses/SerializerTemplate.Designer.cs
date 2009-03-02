@@ -5,7 +5,6 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
@@ -29,9 +28,9 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 this.WriteObjects("\r\n");
-#line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 string methodName = direction.ToString();
 	string argType;
 	
@@ -47,17 +46,17 @@ string methodName = direction.ToString();
 	}
 	
 
-#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 32 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 this.WriteObjects("        public override void ",  methodName , "(",  argType , " binStream)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            base.",  methodName , "(binStream);\r\n");
-#line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 foreach(var serMember in fields)
 	{
 	    ApplySerializer(direction, serMember, "binStream");
 	}
 
-#line 42 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 this.WriteObjects("        }\r\n");
 
         }

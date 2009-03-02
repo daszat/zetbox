@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.API.Server;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Server.Generators.Extensions
 {

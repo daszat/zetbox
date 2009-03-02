@@ -36,28 +36,22 @@ namespace Kistl.Server
             {
                 bool actiondone = false;
 
-                try
+                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-all"))))
                 {
-                    //if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-generate-old"))))
-                    //{
-                    //    actiondone = true;
-                    //    server.GenerateOldCode();
-                    //}else 
-                    if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-generate"))))
-                    {
-                        actiondone = true;
-                        server.GenerateCode();
-                    }
-
-                    if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-database"))))
-                    {
-                        actiondone = true;
-                        server.GenerateDatabase();
-                    }
+                    actiondone = true;
+                    server.GenerateAll();
                 }
-                catch (Exception ex)
+
+                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-generate"))))
                 {
-                    Helper.HandleError(ex);
+                    actiondone = true;
+                    server.GenerateCode();
+                }
+
+                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-database"))))
+                {
+                    actiondone = true;
+                    server.GenerateDatabase();
                 }
 
                 if (actiondone)

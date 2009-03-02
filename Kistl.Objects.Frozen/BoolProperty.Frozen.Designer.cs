@@ -125,7 +125,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, BoolProperty__Implementation__Frozen> DataStore = new Dictionary<int, BoolProperty__Implementation__Frozen>(11);
+		internal new static Dictionary<int, BoolProperty__Implementation__Frozen> DataStore = new Dictionary<int, BoolProperty__Implementation__Frozen>(12);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[11] = 
@@ -182,6 +182,11 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[204] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[204] = 
 			DataStore[204] = new BoolProperty__Implementation__Frozen(204);
+
+			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[220] = 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[220] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[220] = 
+			DataStore[220] = new BoolProperty__Implementation__Frozen(220);
 
 		}
 
@@ -317,6 +322,17 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[202],
 			DataStore[204].IsNullable = false;
 			DataStore[204].IsIndexed = false;
 			DataStore[204].Seal();
+			DataStore[220].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
+			DataStore[220].PropertyName = @"HasPersistentOrder";
+			DataStore[220].AltText = @"Is true, if this RelationEnd persists the order of its elements";
+			DataStore[220].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[220].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[220].Description = @"Is true, if this RelationEnd persists the order of its elements";
+			DataStore[220].IsList = false;
+			DataStore[220].IsNullable = false;
+			DataStore[220].IsIndexed = false;
+			DataStore[220].Seal();
 	
 		}
 

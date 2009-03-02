@@ -32,5 +32,15 @@ namespace Kistl.App.Base
         /// </summary>
 
 		string Description { get; set; }
+        /// <summary>
+        /// The A-side of this Relation.
+        /// </summary>
+
+		Kistl.App.Base.RelationEnd A { get; set; }
+        /// <summary>
+        /// The B-side of this Relation.
+        /// </summary>
+
+		Kistl.App.Base.RelationEnd B { get; set; }
     }
 }

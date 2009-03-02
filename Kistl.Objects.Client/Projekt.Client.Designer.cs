@@ -26,7 +26,6 @@ namespace Kistl.App.Projekte
         /// Aufträge
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -80,7 +79,6 @@ namespace Kistl.App.Projekte
         /// Kostenträger
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -142,15 +140,15 @@ namespace Kistl.App.Projekte
 				if (_Mitarbeiter == null)
 				{
 					_Mitarbeiter 
-						= new ClientListBSideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter3CollectionEntry__Implementation__>(
+						= new ClientListBSideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
 							this, 
-							(ICollection<Projekt_Mitarbeiter3CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter3CollectionEntry__Implementation__>(RelationEndRole.A, this));
+							(ICollection<Projekt_Mitarbeiter23CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__>(RelationEndRole.A, this));
 				}
 				return _Mitarbeiter;
 			}
 		}
 
-		private ClientListBSideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter3CollectionEntry__Implementation__> _Mitarbeiter;
+		private ClientListBSideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__> _Mitarbeiter;
 
         /// <summary>
         /// Projektname
@@ -179,7 +177,6 @@ namespace Kistl.App.Projekte
         /// 
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

@@ -134,15 +134,15 @@ namespace Kistl.App.Base
 				if (_ImplementsInterfaces == null)
 				{
 					_ImplementsInterfaces 
-						= new ClientCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__>(
+						= new ClientCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(
 							this, 
-							(ICollection<ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__>(RelationEndRole.A, this));
+							(ICollection<ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(RelationEndRole.A, this));
 				}
 				return _ImplementsInterfaces;
 			}
 		}
 
-		private ClientCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces29CollectionEntry__Implementation__> _ImplementsInterfaces;
+		private ClientCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__> _ImplementsInterfaces;
 
         /// <summary>
         /// if true then all Instances appear in FozenContext.
@@ -194,7 +194,6 @@ namespace Kistl.App.Base
         /// Liste der vererbten Klassen
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

@@ -2,9 +2,9 @@ using System;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
@@ -14,55 +14,80 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     {
 		protected IKistlContext ctx;
 		protected Templates.Implementation.SerializationMembersList serializationList;
-		protected RelationEnd relEnd;
+		protected Relation rel;
+		protected RelationEndRole endRole;
 
 
-        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, RelationEnd relEnd)
+        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, Relation rel, RelationEndRole endRole)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.serializationList = serializationList;
-			this.relEnd = relEnd;
+			this.rel = rel;
+			this.endRole = endRole;
 
         }
         
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
-NewRelation rel = relEnd.Container;
+#line 19 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+RelationEnd relEnd = rel.GetEnd(endRole);
+    RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
 	// the name of the property to create
-	string name = relEnd.Other.RoleName;
+	string name = otherEnd.RoleName;
 	// the ef-visible property's name
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the other end
-	string wrapperClass = "Entity" + (relEnd.Other.HasPersistentOrder ? "List" : "Collection") + relEnd.Other.Role + "SideWrapper";
+	string wrapperClass = "undefined wrapper class";
+	if (otherEnd.HasPersistentOrder)
+	{
+	    if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
+	    {
+	        wrapperClass = "EntityListASideWrapper";
+	    }
+	    else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
+	    {
+	        wrapperClass = "EntityListBSideWrapper";
+	    }
+	}
+	else
+	{
+	    if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
+	    {
+	        wrapperClass = "EntityCollectionASideWrapper";
+	    }
+	    else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
+	    {
+	        wrapperClass = "EntityCollectionBSideWrapper";
+	    }
+	}
 
 	// the name of the CollectionEntry type
 	string ceName = rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix;
 
 	// the name of the EF association to the CollectionEntry
-	string assocName = rel.GetCollectionEntryAssociationName(relEnd);
+	string assocName = rel.GetCollectionEntryAssociationName(endRole);
 	// this class' role name in this association
 	string roleName = relEnd.RoleName;
 	// this targeted role name 
 	string targetRoleName = "CollectionEntry";
 
 	// which generic interface to use for the collection
-	string exposedListType = relEnd.Other.HasPersistentOrder ? "IList" : "ICollection";
+	string exposedListType = otherEnd.HasPersistentOrder ? "IList" : "ICollection";
 
 	// which Kistl interface this is 
-	string thisInterface = relEnd.Type.NameDataObject;
+	string thisInterface = relEnd.Type.GetDataTypeString();
 	// which Kistl interface this list contains
-	string referencedInterface = relEnd.Other.Type.NameDataObject;
+	string referencedInterface = otherEnd.Type.GetDataTypeString();
 	// the actual implementation class of the list's elements
-	string referencedImplementation = relEnd.Other.Type.NameDataObject + Kistl.API.Helper.ImplementationSuffix;
+	string referencedImplementation = otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix;
 
 	
 
-#line 51 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 75 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
@@ -72,7 +97,7 @@ this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (",  wrapperName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  rel.A.Type.NameDataObject , ", ",  rel.B.Type.NameDataObject , ", ",  ceName , ">(\r\n");
+this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , ">(\r\n");
 this.WriteObjects("                            this,\r\n");
 this.WriteObjects("                            ",  efName , ");\r\n");
 this.WriteObjects("                }\r\n");
@@ -97,9 +122,9 @@ this.WriteObjects("                }\r\n");
 this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.NameDataObject , ", ",  rel.B.Type.NameDataObject , ", ",  ceName , "> ",  wrapperName , ";\r\n");
+this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("        \r\n");
-#line 88 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 112 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, efName);
 
 

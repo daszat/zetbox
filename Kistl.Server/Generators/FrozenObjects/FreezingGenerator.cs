@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Server.Generators.FrozenObjects
 {
@@ -29,6 +31,7 @@ namespace Kistl.Server.Generators.FrozenObjects
 
             // TODO: IsFrozenObject doesn't contain enough information, should check parents too
             var modulesWithFrozenClasses = ctx.GetQuery<Module>()
+                .ToList()
                 .Where(m => m.DataTypes.OfType<ObjectClass>().Any(cls => cls.IsFrozenObject))
                 .OrderBy(m => m.ModuleName)
                 .ToList();

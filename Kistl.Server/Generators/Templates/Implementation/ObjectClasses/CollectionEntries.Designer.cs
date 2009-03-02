@@ -7,7 +7,6 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
@@ -27,7 +26,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
+#line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("using System;\r\n");
 this.WriteObjects("using System.Collections;\r\n");
 this.WriteObjects("using System.Collections.Generic;\r\n");
@@ -35,31 +34,32 @@ this.WriteObjects("using System.Xml;\r\n");
 this.WriteObjects("using System.Xml.Serialization;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("using Kistl.API;\r\n");
-#line 25 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
+#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
 foreach(string ns in GetAdditionalImports())
     {
 
-#line 28 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
+#line 27 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("    using ",  ns , ";\r\n");
-#line 30 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
+#line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
 }
 
-	foreach (var rel in NewRelation.GetAll(ctx)
-		.Where(rel => rel.GetPreferredStorage() == StorageHint.Separate)
-		.OrderBy(rel => rel.GetCollectionEntryFullName()))
+	foreach (var rel in ctx.GetQuery<Relation>()
+	    .Where(r => (int)r.Storage == (int)StorageType.Separate)
+	    .ToList()
+	    .OrderBy(r => r.GetCollectionEntryClassName()))
 	{
 
 
 #line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("namespace ",  rel.A.Type.Namespace , "\r\n");
+this.WriteObjects("namespace ",  rel.A.Type.Module.Namespace , "\r\n");
 this.WriteObjects("{\r\n");
 #line 42 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
-if (rel.A.Type.Namespace != rel.B.Type.Namespace)
+if (rel.A.Type.Module.Namespace != rel.B.Type.Module.Namespace)
 		{
 
 #line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
-this.WriteObjects("	using ",  rel.B.Type.Namespace , ";\r\n");
+this.WriteObjects("	using ",  rel.B.Type.Module.Namespace , ";\r\n");
 #line 47 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
 }
 

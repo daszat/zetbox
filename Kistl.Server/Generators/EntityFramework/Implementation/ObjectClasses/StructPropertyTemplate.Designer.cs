@@ -4,7 +4,6 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
@@ -28,7 +27,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 16 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 string name = prop.PropertyName;
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string backingName = "_" + name;
@@ -37,7 +36,7 @@ string name = prop.PropertyName;
 	string structImplementationType = prop.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix;
 
 
-#line 25 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 24 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        public ",  structType , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -82,10 +81,10 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
-#line 70 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 69 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 // AddSerialization(serializationList, efName);
 
-#line 71 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 70 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 this.WriteObjects("  ");
 
         }

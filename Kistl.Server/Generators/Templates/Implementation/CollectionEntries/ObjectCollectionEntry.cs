@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.App.Base;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 {
     public abstract partial class ObjectCollectionEntry
         : Template
     {
-        protected NewRelation rel { get; private set; }
+        protected Relation rel { get; private set; }
 
-        public ObjectCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, NewRelation rel)
+        public ObjectCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)
             : base(_host, ctx)
         {
             this.rel = rel;

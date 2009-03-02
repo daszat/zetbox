@@ -80,15 +80,15 @@ namespace Kistl.App.Projekte
 				if (_Projekte == null)
 				{
 					_Projekte 
-						= new ClientListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter3CollectionEntry__Implementation__>(
+						= new ClientListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
 							this, 
-							(ICollection<Projekt_Mitarbeiter3CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter3CollectionEntry__Implementation__>(RelationEndRole.B, this));
+							(ICollection<Projekt_Mitarbeiter23CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__>(RelationEndRole.B, this));
 				}
 				return _Projekte;
 			}
 		}
 
-		private ClientListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter3CollectionEntry__Implementation__> _Projekte;
+		private ClientListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__> _Projekte;
 
         /// <summary>
         /// NNNN TTMMYY

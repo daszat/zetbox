@@ -127,10 +127,10 @@ namespace Kistl.App.Zeiterfassung
         /// Zugeordnete Mitarbeiter
         /// </summary>
     /*
-    NewRelation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_22 
-    A: ZeroOrMore Zeitkonto as Zeitkonto (site: A, no Relation, prop ID=86)
-    B: ZeroOrMore Mitarbeiter as Mitarbeiter (site: B, no Relation, prop ID=86)
-    Preferred Storage: Separate
+    Relation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_42
+    A: 3 Zeitkonto as Zeitkonto
+    B: 3 Mitarbeiter as Mitarbeiter
+    Preferred Storage: 4
     */
         // collection reference property
         // implement the user-visible interface
@@ -142,7 +142,7 @@ namespace Kistl.App.Zeiterfassung
             {
                 if (_MitarbeiterWrapper == null)
                 {
-                    _MitarbeiterWrapper = new EntityCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__>(
+                    _MitarbeiterWrapper = new EntityCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(
                             this,
                             Mitarbeiter__Implementation__);
                 }
@@ -150,14 +150,14 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Mitarbeiter_Zeitkonto_22", "CollectionEntry")]
-        public EntityCollection<Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__> Mitarbeiter__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Mitarbeiter_Zeitkonto_42", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__> Mitarbeiter__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__>(
-                        "Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_22",
+                    .GetRelatedCollection<Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(
+                        "Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -167,17 +167,17 @@ namespace Kistl.App.Zeiterfassung
                 return c;
             }
         }
-        private EntityCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter22CollectionEntry__Implementation__> _MitarbeiterWrapper;
+        private EntityCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__> _MitarbeiterWrapper;
         
 
         /// <summary>
         /// Tätigkeiten
         /// </summary>
     /*
-    NewRelation: FK_Zeitkonto_Taetigkeit_Zeitkonto_13 
-    A: One Zeitkonto as Zeitkonto (site: A, from relation ID = 8)
-    B: ZeroOrMore Taetigkeit as Taetigkeiten (site: B, from relation ID = 8)
-    Preferred Storage: MergeB
+    Relation: FK_Zeitkonto_Taetigkeit_Zeitkonto_33
+    A: 2 Zeitkonto as Zeitkonto
+    B: 3 Taetigkeit as Taetigkeiten
+    Preferred Storage: 2
     */
         // object list property
         // implement the user-visible interface
@@ -196,14 +196,14 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Taetigkeit_Zeitkonto_13", "Taetigkeiten")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Taetigkeit_Zeitkonto_33", "Taetigkeiten")]
         public EntityCollection<Kistl.App.Zeiterfassung.Taetigkeit__Implementation__> Taetigkeiten__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Zeiterfassung.Taetigkeit__Implementation__>(
-                        "Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_13",
+                        "Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_33",
                         "Taetigkeiten");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

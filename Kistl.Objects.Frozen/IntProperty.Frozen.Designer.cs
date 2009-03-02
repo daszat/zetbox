@@ -125,7 +125,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, IntProperty__Implementation__Frozen> DataStore = new Dictionary<int, IntProperty__Implementation__Frozen>(7);
+		internal new static Dictionary<int, IntProperty__Implementation__Frozen> DataStore = new Dictionary<int, IntProperty__Implementation__Frozen>(8);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[28] = 
@@ -162,6 +162,11 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[173] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[173] = 
 			DataStore[173] = new IntProperty__Implementation__Frozen(173);
+
+			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[217] = 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[217] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[217] = 
+			DataStore[217] = new IntProperty__Implementation__Frozen(217);
 
 		}
 
@@ -252,6 +257,18 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[150],
 			DataStore[173].IsNullable = false;
 			DataStore[173].IsIndexed = false;
 			DataStore[173].Seal();
+			DataStore[217].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
+			DataStore[217].PropertyName = @"Role";
+			DataStore[217].AltText = @"Which RelationEndRole this End has";
+			DataStore[217].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[217].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[216],
+});
+			DataStore[217].Description = @"Which RelationEndRole this End has";
+			DataStore[217].IsList = false;
+			DataStore[217].IsNullable = false;
+			DataStore[217].IsIndexed = false;
+			DataStore[217].Seal();
 	
 		}
 

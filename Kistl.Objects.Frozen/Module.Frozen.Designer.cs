@@ -195,7 +195,7 @@ namespace Kistl.App.Base
 		internal static void FillDataStore() {
 			DataStore[1].Namespace = @"Kistl.App.Base";
 			DataStore[1].ModuleName = @"KistlBase";
-			DataStore[1].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(41) {
+			DataStore[1].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(43) {
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[80],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[8],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79],
@@ -204,6 +204,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[62],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[73],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[9],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[37],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14],
@@ -237,6 +238,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[16],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[78],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[81],
 });
 			DataStore[1].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(2) {
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[1],

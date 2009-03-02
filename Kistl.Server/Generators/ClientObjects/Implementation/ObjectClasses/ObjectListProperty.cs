@@ -6,7 +6,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
-using Kistl.Server.Movables;
+using Kistl.App.Extensions;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
@@ -22,10 +22,10 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string name = prop.PropertyName;
             string wrapperClass = "BackReferenceCollection";
             string exposedListType = prop.IsIndexed ? "IList" : "ICollection";
-            var rel = NewRelation.Lookup(ctx, prop);
-            var relEnd = rel.GetEnd(prop);
+            var rel = RelationExtensions.Lookup(ctx, prop);
+            var endRole = (RelationEndRole)rel.GetEnd(prop).Role;
 
-            Call(host, ctx, serializationList, name, wrapperClass, exposedListType, rel, relEnd);
+            Call(host, ctx, serializationList, name, wrapperClass, exposedListType, rel, endRole);
         }
 
         /// <summary>
@@ -45,18 +45,19 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string name,
             string wrapperClass,
             string exposedListType,
-            NewRelation rel,
-            RelationEnd relEnd)
+            Relation rel,
+            RelationEndRole endRole)
         {
+            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string wrapperName = "_" + name + "Wrapper";
 
-            var otherEnd = relEnd.Other;
             var otherName = otherEnd.Navigator == null ? relEnd.RoleName : otherEnd.Navigator.PropertyName;
 
-            string referencedInterface = otherEnd.Type.NameDataObject;
+            string referencedInterface = otherEnd.Type.GetDataTypeString();
 
-            Call(host, ctx, serializationList, name, wrapperName, wrapperClass, exposedListType, rel, relEnd, otherEnd, otherName, referencedInterface);
+            Call(host, ctx, serializationList, name, wrapperName, wrapperClass, exposedListType, rel, endRole, otherName, referencedInterface);
         }
 
         /// <summary>
@@ -81,16 +82,15 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string wrapperName,
             string wrapperClass,
             string exposedListType,
-            NewRelation rel,
-            RelationEnd relEnd,
-            RelationEnd otherEnd,
+            Relation rel,
+            RelationEndRole endRole,
             string otherName,
             string referencedInterface)
         {
             host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty",
                 ctx, serializationList,
                 name, wrapperName, wrapperClass, exposedListType,
-                rel, relEnd, otherEnd, otherName,
+                rel, endRole, otherName,
                 referencedInterface);
         }
     }

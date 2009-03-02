@@ -10,9 +10,9 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
-<%@ Import Namespace="Kistl.Server.Movables" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="properties" Type="IEnumerable<Property>" %>
 <%
@@ -24,19 +24,20 @@
 	foreach(var p in properties)
 	{
 		// TODO: implement IsNullable everywhere
-		var rel = NewRelation.Lookup(ctx, p);
-		if (rel != null)
+		if (p is ObjectReferenceProperty)
 		{
-			RelationEnd end = rel.GetEnd(p);
-			RelationEnd otherEnd = rel.GetOtherEnd(p);
+		    var prop = p as ObjectReferenceProperty;
+		    var rel = RelationExtensions.Lookup(ctx, prop);
+			var relEnd = rel.GetEnd(prop);
+			var otherEnd = rel.GetOtherEnd(relEnd);
 			
-			if (rel.GetPreferredStorage() == StorageHint.Separate)
+			if (rel.Storage == StorageType.Separate)
 			{
-				Debug.Assert(end != null);
+				Debug.Assert(relEnd != null);
 %>
     <NavigationProperty Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
-                        Relationship="Model.<%= rel.GetCollectionEntryAssociationName(end) %>"
-                        FromRole="<%= end.RoleName %>"
+                        Relationship="Model.<%= rel.GetCollectionEntryAssociationName((RelationEndRole)relEnd.Role) %>"
+                        FromRole="<%= relEnd.RoleName %>"
                         ToRole="CollectionEntry" />
 <%
 			}
@@ -45,17 +46,12 @@
 %>
     <NavigationProperty Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= rel.GetAssociationName() %>"
-                        FromRole="<%= end.RoleName %>"
+                        FromRole="<%= relEnd.RoleName %>"
                         ToRole="<%= otherEnd.RoleName %>" />
 <%
 			}
 
-			// Only add position column if one is needed AND this is the preferred storage location
-			if (p.NeedsPositionColumn()
-				&&( (rel.GetPreferredStorage() == StorageHint.MergeA && rel.A == end)
-					||(rel.GetPreferredStorage() == StorageHint.MergeB && rel.B == end)
-					||(rel.GetPreferredStorage() == StorageHint.Replicate))
-				)
+			if (rel.NeedsPositionStorage((RelationEndRole)relEnd.Role))
 			{
 %>
     <Property Name="<%= p.PropertyName + Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="true" />

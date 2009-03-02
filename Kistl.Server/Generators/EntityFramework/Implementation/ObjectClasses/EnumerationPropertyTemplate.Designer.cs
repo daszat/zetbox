@@ -4,7 +4,6 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Movables;
 
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
@@ -28,7 +27,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
+#line 16 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
 string interfaceName = prop.ObjectClass.ClassName;
 
 	string name = prop.PropertyName;
@@ -39,7 +38,7 @@ string interfaceName = prop.ObjectClass.ClassName;
 	string enumType = prop.ReferencedTypeAsCSharp();
 
 
-#line 27 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
+#line 26 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        ",  enumType , " ",  interfaceName , ".",  name , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -77,7 +76,7 @@ this.WriteObjects("                ((",  interfaceName , ")this).",  name , " = 
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-#line 65 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
+#line 64 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
 AddSerialization(serializationList);
 
 

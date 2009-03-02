@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
 {
@@ -56,13 +57,15 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                  prop);
         }
 
-        protected override void ApplyObjectListPropertyTemplate(Kistl.Server.Movables.RelationEnd relEnd)
+        protected override void ApplyObjectListPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
+            RelationEnd relEnd = rel.GetEnd(endRole);
             ApplyListProperty(relEnd.Navigator, MembersToSerialize);
         }
 
-        protected override void ApplyCollectionEntryListTemplate(Kistl.Server.Movables.RelationEnd relEnd)
+        protected override void ApplyCollectionEntryListTemplate(Relation rel, RelationEndRole endRole)
         {
+            RelationEnd relEnd = rel.GetEnd(endRole);
             ApplyListProperty(relEnd.Navigator, MembersToSerialize);
         }
 

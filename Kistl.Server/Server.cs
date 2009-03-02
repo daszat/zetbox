@@ -127,8 +127,7 @@ namespace Kistl.Server
 
         internal void GenerateAll()
         {
-            GenerateCode();
-            GenerateDatabase();
+            Generators.Generator.GenerateAll();
         }
 
         #region IDisposable Members

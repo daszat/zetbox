@@ -7,15 +7,19 @@ Entities are created for each class, for each class of collection entry (one per
 
 * Every 1:1 or 1:N ObjectReference: A -> B
 
-    NewRelation.GetAll(ctx)
+    ctx.GetQuery<Relation>()
         .Where(r => r.GetPreferredStorage() != StorageHint.Separate)
         .OrderBy(r => r.GetAssociationName())
 
+    ModelCsdl.GetRelationsWithoutSeparateStorage(ctx)
+
 * N:M relations have two:  A -> Collection Entry, B -> Collection Entry
 
-    NewRelation.GetAll(ctx)
+    ctx.GetQuery<Relation>()
         .Where(r => r.GetPreferredStorage() == StorageHint.Separate)
         .OrderBy(r => r.GetAssociationName())
+
+    ModelCsdl.GetRelationsWithSeparateStorage(ctx)
 
 * ValueType lists: Container (A) -> Value (B)
 

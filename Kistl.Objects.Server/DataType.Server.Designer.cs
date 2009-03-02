@@ -75,10 +75,10 @@ namespace Kistl.App.Base
         /// Standard Icon wenn IIcon nicht implementiert ist
         /// </summary>
     /*
-    NewRelation: FK_DataType_Icon_DataType_15 
-    A: ZeroOrMore DataType as DataType (site: A, no Relation, prop ID=69)
-    B: ZeroOrOne Icon as DefaultIcon (site: B, no Relation, prop ID=69)
-    Preferred Storage: MergeA
+    Relation: FK_DataType_Icon_DataType_35
+    A: 3 DataType as DataType
+    B: 1 Icon as DefaultIcon
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -118,14 +118,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_DefaultIcon;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_Icon_DataType_15", "DefaultIcon")]
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_Icon_DataType_35", "DefaultIcon")]
         public Kistl.App.GUI.Icon__Implementation__ DefaultIcon__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Icon__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Icon__Implementation__>(
-                        "Model.FK_DataType_Icon_DataType_15",
+                        "Model.FK_DataType_Icon_DataType_35",
                         "DefaultIcon");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -139,7 +139,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.GUI.Icon__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Icon__Implementation__>(
-                        "Model.FK_DataType_Icon_DataType_15",
+                        "Model.FK_DataType_Icon_DataType_35",
                         "DefaultIcon");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -150,6 +150,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? DefaultIcon_pos
+        {
+            get
+            {
+                return _DefaultIcon_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_DefaultIcon_pos != value)
+                {
+                    NotifyPropertyChanging("DefaultIcon_pos");
+                    _DefaultIcon_pos = value;
+                    NotifyPropertyChanged("DefaultIcon_pos");
+                }
+            }
+        }
+        private int? _DefaultIcon_pos;
         
 
         /// <summary>
@@ -182,10 +203,10 @@ namespace Kistl.App.Base
         /// all implemented Methods in this DataType
         /// </summary>
     /*
-    NewRelation: FK_DataType_MethodInvocation_InvokeOnObjectClass_21 
-    A: One DataType as InvokeOnObjectClass (site: A, from relation ID = 11)
-    B: ZeroOrMore MethodInvocation as MethodInvocations (site: B, from relation ID = 11)
-    Preferred Storage: MergeB
+    Relation: FK_DataType_MethodInvocation_InvokeOnObjectClass_41
+    A: 2 DataType as InvokeOnObjectClass
+    B: 3 MethodInvocation as MethodInvocations
+    Preferred Storage: 2
     */
         // object list property
         // implement the user-visible interface
@@ -204,14 +225,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_MethodInvocation_InvokeOnObjectClass_21", "MethodInvocations")]
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_MethodInvocation_InvokeOnObjectClass_41", "MethodInvocations")]
         public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodInvocations__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.MethodInvocation__Implementation__>(
-                        "Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_21",
+                        "Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_41",
                         "MethodInvocations");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -229,10 +250,10 @@ namespace Kistl.App.Base
         /// Liste aller Methoden der Objektklasse.
         /// </summary>
     /*
-    NewRelation: FK_DataType_Method_ObjectClass_5 
-    A: One DataType as ObjectClass (site: A, from relation ID = 5)
-    B: ZeroOrMore Method as Methods (site: B, from relation ID = 5)
-    Preferred Storage: MergeB
+    Relation: FK_DataType_Method_ObjectClass_25
+    A: 2 DataType as ObjectClass
+    B: 3 Method as Methods
+    Preferred Storage: 2
     */
         // object list property
         // implement the user-visible interface
@@ -251,14 +272,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_Method_ObjectClass_5", "Methods")]
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_Method_ObjectClass_25", "Methods")]
         public EntityCollection<Kistl.App.Base.Method__Implementation__> Methods__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_DataType_Method_ObjectClass_5",
+                        "Model.FK_DataType_Method_ObjectClass_25",
                         "Methods");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -276,10 +297,10 @@ namespace Kistl.App.Base
         /// Modul der Objektklasse
         /// </summary>
     /*
-    NewRelation: FK_Module_DataType_Module_6 
-    A: One Module as Module (site: A, from relation ID = 6)
-    B: ZeroOrMore DataType as DataTypes (site: B, from relation ID = 6)
-    Preferred Storage: MergeB
+    Relation: FK_Module_DataType_Module_26
+    A: 2 Module as Module
+    B: 3 DataType as DataTypes
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -319,14 +340,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_Module;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Module_DataType_Module_6", "Module")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_DataType_Module_26", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Module_DataType_Module_6",
+                        "Model.FK_Module_DataType_Module_26",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -340,7 +361,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Module_DataType_Module_6",
+                        "Model.FK_Module_DataType_Module_26",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -351,16 +372,37 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? Module_pos
+        {
+            get
+            {
+                return _Module_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Module_pos != value)
+                {
+                    NotifyPropertyChanging("Module_pos");
+                    _Module_pos = value;
+                    NotifyPropertyChanged("Module_pos");
+                }
+            }
+        }
+        private int? _Module_pos;
         
 
         /// <summary>
         /// Eigenschaften der Objektklasse
         /// </summary>
     /*
-    NewRelation: FK_DataType_BaseProperty_ObjectClass_1 
-    A: One DataType as ObjectClass (site: A, from relation ID = 1)
-    B: ZeroOrMore BaseProperty as Properties (site: B, from relation ID = 1)
-    Preferred Storage: MergeB
+    Relation: FK_DataType_BaseProperty_ObjectClass_19
+    A: 2 DataType as ObjectClass
+    B: 3 BaseProperty as Properties
+    Preferred Storage: 2
     */
         // object list property
         // implement the user-visible interface
@@ -379,14 +421,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_BaseProperty_ObjectClass_1", "Properties")]
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_BaseProperty_ObjectClass_19", "Properties")]
         public EntityCollection<Kistl.App.Base.BaseProperty__Implementation__> Properties__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.BaseProperty__Implementation__>(
-                        "Model.FK_DataType_BaseProperty_ObjectClass_1",
+                        "Model.FK_DataType_BaseProperty_ObjectClass_19",
                         "Properties");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -489,8 +531,10 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
             BinarySerializer.ToStream(this.fk_DefaultIcon, binStream);
+            BinarySerializer.ToStream(this._DefaultIcon_pos, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this.fk_Module, binStream);
+            BinarySerializer.ToStream(this._Module_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -502,12 +546,14 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_DefaultIcon = tmp;
             }
+            BinarySerializer.FromStream(out this._DefaultIcon_pos, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             {
                 var tmp = this.fk_Module;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Module = tmp;
             }
+            BinarySerializer.FromStream(out this._Module_pos, binStream);
         }
 
 #endregion

@@ -10,6 +10,14 @@ namespace Kistl.App.Base
 {
 }
 
+namespace Kistl.App.Projekte
+{
+}
+
+namespace Kistl.App.GUI
+{
+}
+
 namespace Kistl.App.Base
 {
 }
@@ -19,14 +27,6 @@ namespace Kistl.App.GUI
 }
 
 namespace Kistl.App.GUI
-{
-}
-
-namespace Kistl.App.GUI
-{
-}
-
-namespace Kistl.App.Projekte
 {
 }
 

@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Metadata.Edm;
 using System.Linq;
 using System.Text;
-using Kistl.Server.Movables;
-using System.Data.Metadata.Edm;
+
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation
 {
@@ -16,7 +17,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         /// <summary>
         /// Returns the association name for the given relation
         /// </summary>
-        public static string GetAssociationName(this NewRelation rel)
+        public static string GetAssociationName(this Relation rel)
         {
             return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.Type.ClassName, rel.B.Type.ClassName, rel.A.RoleName, rel.ID);
         }
@@ -32,13 +33,15 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         /// <summary>
         /// Returns the association name for the association from the given end to the CollectionEntry
         /// </summary>
-        public static string GetCollectionEntryAssociationName(this NewRelation rel, RelationEnd end)
+        public static string GetCollectionEntryAssociationName(this Relation rel, RelationEndRole endRole)
         {
-            return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.Type.ClassName, rel.B.Type.ClassName, end.RoleName, rel.ID);
+            RelationEnd relEnd = rel.GetEnd(endRole);
+
+            return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.Type.ClassName, rel.B.Type.ClassName, relEnd.RoleName, rel.ID);
         }
 
         /// <summary>
-        /// maps from a NewRelationship.Multiplicity to EF's RelationshipMultiplicity as used in the CSDL part of EDMX
+        /// maps from a RelationEnd.Multiplicity to EF's RelationshipMultiplicity as used in the CSDL part of EDMX
         /// </summary>
         /// <param name="m"></param>
         /// <returns></returns>
@@ -58,7 +61,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         }
 
         /// <summary>
-        /// maps from a NewRelationship.Multiplicity to EF's RelationshipMultiplicity as used in the SSDL part of EDMX
+        /// maps from a RelationEnd.Multiplicity to EF's RelationshipMultiplicity as used in the SSDL part of EDMX
         /// </summary>
         /// <param name="m"></param>
         /// <returns></returns>
@@ -76,7 +79,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             }
         }
         /// <summary>
-        /// Calculate how the RelationshipMultiplicity is written as EDMX attribute value
+        /// Calculate how EF's RelationshipMultiplicity is written as EDMX attribute value
         /// </summary>
         /// <param name="m"></param>
         /// <returns></returns>
@@ -95,14 +98,9 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             }
         }
 
-        ///// <summary>
-        ///// Whether or not the given relation will result in two association 
-        ///// sets. Note that this is true exactly if this is a N:M relation.
-        ///// </summary>
-        //public static bool IsTwoProngedAssociation(this NewRelation rel, IKistlContext ctx)
-        //{
-        //    return rel.GetPreferredStorage() == StorageHint.Separate;
-        //}
-
+        internal static Relation Lookup(IKistlContext ctx, ObjectReferenceProperty prop)
+        {
+            return Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
+        }
     }
 }

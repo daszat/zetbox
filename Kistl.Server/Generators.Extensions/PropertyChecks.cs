@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 
 using Kistl.App.Base;
+using Kistl.App.Extensions;
+using Kistl.API;
 
 namespace Kistl.Server.Generators.Extensions
 {
@@ -61,20 +63,37 @@ namespace Kistl.Server.Generators.Extensions
 
         public static bool NeedsPositionColumn(this Property prop)
         {
-            if (prop == null || !prop.HasStorage()) return false;
+            bool result = false;
 
-            if (prop is ObjectReferenceProperty)
+            var p = prop as ObjectReferenceProperty;
+            if (p != null)
             {
-                ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)prop;
-                if (objRefProp.IsList == false &&
-                    objRefProp.GetRelation() != null &&
-                    objRefProp.GetRelationType() == Kistl.API.RelationType.one_n &&
-                    objRefProp.GetOpposite().IsIndexed) return true;
+                var rel = RelationExtensions.Lookup(p.Context, p);
+                var relEnd = rel.GetEnd(p);
+                result = rel.NeedsPositionStorage((RelationEndRole)relEnd.Role);
             }
-            if (prop.IsList == true &&
-                prop.IsIndexed) return true;
-            return false;
+            return result;
         }
+
+        //public static bool NeedsPositionColumn(this Property prop)
+        //{
+        //    if (prop == null || !prop.HasStorage()) return false;
+
+        //    if (prop is ObjectReferenceProperty)
+        //    {
+        //        ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)prop;
+        //        var rel = RelationExtensions.Lookup(prop.Context, objRefProp);
+        //        RelationEnd relEnd = rel.GetEnd(objRefProp);
+        //        RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+        //        if (objRefProp.IsList == false &&
+        //            objRefProp.GetRelationType() == Kistl.API.RelationType.one_n &&
+        //            otherEnd.HasPersistentOrder) return true;
+        //    }
+        //    if (prop.IsList == true &&
+        //        prop.IsIndexed) return true;
+        //    return false;
+        //}
 
         public static string GetCollectionTypeString(this Property prop)
         {

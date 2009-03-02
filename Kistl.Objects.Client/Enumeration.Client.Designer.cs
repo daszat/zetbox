@@ -26,7 +26,6 @@ namespace Kistl.App.Base
         /// Einträge der Enumeration
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

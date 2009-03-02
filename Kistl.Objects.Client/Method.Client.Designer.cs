@@ -72,7 +72,6 @@ namespace Kistl.App.Base
         /// Methodenaufrufe implementiert in dieser Objekt Klasse
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -226,7 +225,6 @@ namespace Kistl.App.Base
         /// Parameter der Methode
         /// </summary>
         // object list property
-
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

@@ -127,10 +127,10 @@ namespace Kistl.App.Base
         /// Methode des Parameters
         /// </summary>
     /*
-    NewRelation: FK_Method_BaseParameter_Method_24 
-    A: One Method as Method (site: A, from relation ID = 14)
-    B: ZeroOrMore BaseParameter as Parameter (site: B, from relation ID = 14)
-    Preferred Storage: MergeB
+    Relation: FK_Method_BaseParameter_Method_44
+    A: 2 Method as Method
+    B: 3 BaseParameter as Parameter
+    Preferred Storage: 2
     */
         // object reference property
         // implement the user-visible interface
@@ -170,14 +170,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_Method;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Method_BaseParameter_Method_24", "Method")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Method_BaseParameter_Method_44", "Method")]
         public Kistl.App.Base.Method__Implementation__ Method__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Method__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_Method_BaseParameter_Method_24",
+                        "Model.FK_Method_BaseParameter_Method_44",
                         "Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -191,7 +191,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Method__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_Method_BaseParameter_Method_24",
+                        "Model.FK_Method_BaseParameter_Method_44",
                         "Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

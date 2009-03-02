@@ -53,8 +53,9 @@
 %>
     <Property Name="<%= propertyName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= nullableAttr %>/>
 <%
-			if (p.NeedsPositionColumn())
-			{
+   			
+		    if (p.NeedsPositionColumn())
+		    {
 %>
     <Property Name="<%= Construct.ListPositionColumnName(p, prefix) %>" Type="int" Nullable="true" />
 <%

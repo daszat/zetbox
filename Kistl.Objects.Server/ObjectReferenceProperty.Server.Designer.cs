@@ -30,10 +30,10 @@ namespace Kistl.App.Base
         /// This Property is the left Part of the selected Relation.
         /// </summary>
     /*
-    NewRelation: FK_Relation_ObjectReferenceProperty_LeftOf_43 
-    A: ZeroOrOne Relation as LeftOf (site: A, from relation ID = 17)
-    B: One ObjectReferenceProperty as LeftPart (site: B, from relation ID = 17)
-    Preferred Storage: MergeA
+    Relation: FK_Relation_ObjectReferenceProperty_LeftOf_63
+    A: 1 Relation as LeftOf
+    B: 2 ObjectReferenceProperty as LeftPart
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -73,14 +73,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_LeftOf;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_LeftOf_43", "LeftOf")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_LeftOf_63", "LeftOf")]
         public Kistl.App.Base.Relation__Implementation__ LeftOf__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Relation__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
-                        "Model.FK_Relation_ObjectReferenceProperty_LeftOf_43",
+                        "Model.FK_Relation_ObjectReferenceProperty_LeftOf_63",
                         "LeftOf");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -94,7 +94,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Relation__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
-                        "Model.FK_Relation_ObjectReferenceProperty_LeftOf_43",
+                        "Model.FK_Relation_ObjectReferenceProperty_LeftOf_63",
                         "LeftOf");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -111,10 +111,10 @@ namespace Kistl.App.Base
         /// Pointer zur Objektklasse
         /// </summary>
     /*
-    NewRelation: FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_7 
-    A: ZeroOrMore ObjectReferenceProperty as ObjectReferenceProperty (site: A, no Relation, prop ID=46)
-    B: ZeroOrOne ObjectClass as ReferenceObjectClass (site: B, no Relation, prop ID=46)
-    Preferred Storage: MergeA
+    Relation: FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27
+    A: 3 ObjectReferenceProperty as ObjectReferenceProperty
+    B: 1 ObjectClass as ReferenceObjectClass
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -154,14 +154,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_ReferenceObjectClass;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_7", "ReferenceObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27", "ReferenceObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ ReferenceObjectClass__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_7",
+                        "Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27",
                         "ReferenceObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -175,7 +175,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_7",
+                        "Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27",
                         "ReferenceObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -186,16 +186,37 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? ReferenceObjectClass_pos
+        {
+            get
+            {
+                return _ReferenceObjectClass_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ReferenceObjectClass_pos != value)
+                {
+                    NotifyPropertyChanging("ReferenceObjectClass_pos");
+                    _ReferenceObjectClass_pos = value;
+                    NotifyPropertyChanged("ReferenceObjectClass_pos");
+                }
+            }
+        }
+        private int? _ReferenceObjectClass_pos;
         
 
         /// <summary>
         /// This Property is the right Part of the selected Relation.
         /// </summary>
     /*
-    NewRelation: FK_Relation_ObjectReferenceProperty_RightOf_44 
-    A: ZeroOrOne Relation as RightOf (site: A, from relation ID = 18)
-    B: One ObjectReferenceProperty as RightPart (site: B, from relation ID = 18)
-    Preferred Storage: MergeA
+    Relation: FK_Relation_ObjectReferenceProperty_RightOf_64
+    A: 1 Relation as RightOf
+    B: 2 ObjectReferenceProperty as RightPart
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -235,14 +256,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_RightOf;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_RightOf_44", "RightOf")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_RightOf_64", "RightOf")]
         public Kistl.App.Base.Relation__Implementation__ RightOf__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Relation__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
-                        "Model.FK_Relation_ObjectReferenceProperty_RightOf_44",
+                        "Model.FK_Relation_ObjectReferenceProperty_RightOf_64",
                         "RightOf");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -256,7 +277,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Relation__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
-                        "Model.FK_Relation_ObjectReferenceProperty_RightOf_44",
+                        "Model.FK_Relation_ObjectReferenceProperty_RightOf_64",
                         "RightOf");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -377,6 +398,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_LeftOf, binStream);
             BinarySerializer.ToStream(this.fk_ReferenceObjectClass, binStream);
+            BinarySerializer.ToStream(this._ReferenceObjectClass_pos, binStream);
             BinarySerializer.ToStream(this.fk_RightOf, binStream);
         }
 
@@ -393,6 +415,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_ReferenceObjectClass = tmp;
             }
+            BinarySerializer.FromStream(out this._ReferenceObjectClass_pos, binStream);
             {
                 var tmp = this.fk_RightOf;
                 BinarySerializer.FromStream(out tmp, binStream);

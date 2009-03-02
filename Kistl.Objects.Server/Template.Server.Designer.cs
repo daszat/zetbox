@@ -49,10 +49,10 @@ namespace Kistl.App.GUI
         /// Assembly of the Type that is displayed with this Template
         /// </summary>
     /*
-    NewRelation: FK_Template_Assembly_Template_39 
-    A: ZeroOrMore Template as Template (site: A, no Relation, prop ID=163)
-    B: ZeroOrOne Assembly as DisplayedTypeAssembly (site: B, no Relation, prop ID=163)
-    Preferred Storage: MergeA
+    Relation: FK_Template_Assembly_Template_59
+    A: 3 Template as Template
+    B: 1 Assembly as DisplayedTypeAssembly
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -92,14 +92,14 @@ namespace Kistl.App.GUI
         }
         private int? _fk_DisplayedTypeAssembly;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_Assembly_Template_39", "DisplayedTypeAssembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_Assembly_Template_59", "DisplayedTypeAssembly")]
         public Kistl.App.Base.Assembly__Implementation__ DisplayedTypeAssembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_Template_Assembly_Template_39",
+                        "Model.FK_Template_Assembly_Template_59",
                         "DisplayedTypeAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -113,7 +113,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_Template_Assembly_Template_39",
+                        "Model.FK_Template_Assembly_Template_59",
                         "DisplayedTypeAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -124,6 +124,27 @@ namespace Kistl.App.GUI
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? DisplayedTypeAssembly_pos
+        {
+            get
+            {
+                return _DisplayedTypeAssembly_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_DisplayedTypeAssembly_pos != value)
+                {
+                    NotifyPropertyChanging("DisplayedTypeAssembly_pos");
+                    _DisplayedTypeAssembly_pos = value;
+                    NotifyPropertyChanged("DisplayedTypeAssembly_pos");
+                }
+            }
+        }
+        private int? _DisplayedTypeAssembly_pos;
         
 
         /// <summary>
@@ -182,10 +203,10 @@ namespace Kistl.App.GUI
         /// The main menu for this Template
         /// </summary>
     /*
-    NewRelation: FK_Template_Visual_Template_41 
-    A: ZeroOrMore Template as Template (site: A, no Relation, prop ID=165)
-    B: ZeroOrMore Visual as Menu (site: B, no Relation, prop ID=165)
-    Preferred Storage: Separate
+    Relation: FK_Template_Visual_Template_61
+    A: 3 Template as Template
+    B: 3 Visual as Menu
+    Preferred Storage: 4
     */
         // collection reference property
         // implement the user-visible interface
@@ -197,7 +218,7 @@ namespace Kistl.App.GUI
             {
                 if (_MenuWrapper == null)
                 {
-                    _MenuWrapper = new EntityCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__>(
+                    _MenuWrapper = new EntityCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__>(
                             this,
                             Menu__Implementation__);
                 }
@@ -205,14 +226,14 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_41", "CollectionEntry")]
-        public EntityCollection<Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__> Menu__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_61", "CollectionEntry")]
+        public EntityCollection<Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__> Menu__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__>(
-                        "Model.FK_Template_Visual_Template_41",
+                    .GetRelatedCollection<Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__>(
+                        "Model.FK_Template_Visual_Template_61",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -222,17 +243,17 @@ namespace Kistl.App.GUI
                 return c;
             }
         }
-        private EntityCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu41CollectionEntry__Implementation__> _MenuWrapper;
+        private EntityCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__> _MenuWrapper;
         
 
         /// <summary>
         /// The visual representation of this Template
         /// </summary>
     /*
-    NewRelation: FK_Template_Visual_Template_38 
-    A: ZeroOrMore Template as Template (site: A, no Relation, prop ID=155)
-    B: ZeroOrOne Visual as VisualTree (site: B, no Relation, prop ID=155)
-    Preferred Storage: MergeA
+    Relation: FK_Template_Visual_Template_58
+    A: 3 Template as Template
+    B: 1 Visual as VisualTree
+    Preferred Storage: 1
     */
         // object reference property
         // implement the user-visible interface
@@ -272,14 +293,14 @@ namespace Kistl.App.GUI
         }
         private int? _fk_VisualTree;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_38", "VisualTree")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_58", "VisualTree")]
         public Kistl.App.GUI.Visual__Implementation__ VisualTree__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Template_Visual_Template_38",
+                        "Model.FK_Template_Visual_Template_58",
                         "VisualTree");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -293,7 +314,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Template_Visual_Template_38",
+                        "Model.FK_Template_Visual_Template_58",
                         "VisualTree");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -304,6 +325,27 @@ namespace Kistl.App.GUI
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? VisualTree_pos
+        {
+            get
+            {
+                return _VisualTree_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_VisualTree_pos != value)
+                {
+                    NotifyPropertyChanging("VisualTree_pos");
+                    _VisualTree_pos = value;
+                    NotifyPropertyChanged("VisualTree_pos");
+                }
+            }
+        }
+        private int? _VisualTree_pos;
         
 
         /// <summary>
@@ -371,11 +413,13 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_DisplayedTypeAssembly, binStream);
+            BinarySerializer.ToStream(this._DisplayedTypeAssembly_pos, binStream);
             BinarySerializer.ToStream(this._DisplayedTypeFullName, binStream);
             BinarySerializer.ToStream(this._DisplayName, binStream);
 			// collections have to be loaded separately for now
             // BinarySerializer.ToStreamCollectionEntries(this.Menu__Implementation__, binStream);
             BinarySerializer.ToStream(this.fk_VisualTree, binStream);
+            BinarySerializer.ToStream(this._VisualTree_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -386,6 +430,7 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_DisplayedTypeAssembly = tmp;
             }
+            BinarySerializer.FromStream(out this._DisplayedTypeAssembly_pos, binStream);
             BinarySerializer.FromStream(out this._DisplayedTypeFullName, binStream);
             BinarySerializer.FromStream(out this._DisplayName, binStream);
 			// collections have to be loaded separately for now
@@ -395,6 +440,7 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_VisualTree = tmp;
             }
+            BinarySerializer.FromStream(out this._VisualTree_pos, binStream);
         }
 
 #endregion

@@ -5,7 +5,6 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
-using Kistl.Server.Movables;
 
 namespace Kistl.Server.Generators.Extensions
 {
@@ -57,7 +56,7 @@ namespace Kistl.Server.Generators.Extensions
 
         #region CollectionEntry naming standards
 
-        public static string GetCollectionEntryClassName(this NewRelation rel)
+        public static string GetCollectionEntryClassName(this Relation rel)
         {
             return String.Format("{0}_{1}{2}CollectionEntry", rel.A.Type.ClassName, rel.A.Navigator.PropertyName, rel.ID);
         }
@@ -65,14 +64,14 @@ namespace Kistl.Server.Generators.Extensions
         /// <summary>
         /// Support "legacy" non-unique naming scheme
         /// </summary>
-        public static string GetCollectionEntryTableName(this NewRelation rel, IKistlContext ctx)
+        public static string GetCollectionEntryTableName(this Relation rel, IKistlContext ctx)
         {
-            return String.Format("{0}_{1}Collection", rel.A.Type.ToObjectClass(ctx).TableName, rel.A.Navigator.PropertyName);
+            return String.Format("{0}_{1}Collection", rel.A.Type.TableName, rel.A.Navigator.PropertyName);
         }
 
-        public static string GetCollectionEntryFullName(this NewRelation rel)
+        public static string GetCollectionEntryFullName(this Relation rel)
         {
-            return String.Format("{0}.{1}", rel.A.Type.Namespace, rel.GetCollectionEntryClassName());
+            return String.Format("{0}.{1}", rel.A.Type.Module.Namespace, rel.GetCollectionEntryClassName());
         }
 
         public static string GetCollectionEntryClassName(this ValueTypeProperty prop)
@@ -85,12 +84,12 @@ namespace Kistl.Server.Generators.Extensions
             return String.Format("{0}.{1}", prop.ObjectClass.Module.Namespace, prop.GetCollectionEntryClassName());
         }
 
-        public static string GetCollectionEntryFkaColumnName(this NewRelation rel)
+        public static string GetCollectionEntryFkaColumnName(this Relation rel)
         {
             return "fk_" + rel.A.RoleName;
         }
 
-        public static string GetCollectionEntryFkbColumnName(this NewRelation rel)
+        public static string GetCollectionEntryFkbColumnName(this Relation rel)
         {
             return "fk_" + rel.B.RoleName;
         }
@@ -98,34 +97,34 @@ namespace Kistl.Server.Generators.Extensions
         #endregion
 
 
-        /// <summary>
-        /// Calculates the preferred storage for a given NewRelation
-        /// </summary>
-        public static StorageHint GetPreferredStorage(this NewRelation rel)
-        {
-            if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() == 1)
-            {
-                // arbitrary 1:1 relations default 
-                return StorageHint.MergeA;
-            }
-            else if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() > 1)
-            {
-                // if multiple Bs can exist, they get the fk
-                return StorageHint.MergeB;
-            }
-            else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() == 1)
-            {
-                // if multiple As ca exist, they get the fk
-                return StorageHint.MergeA;
-            }
-            else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() > 1)
-            {
-                // N:M needs "weak" entity
-                return StorageHint.Separate;
-            }
+        ///// <summary>
+        ///// Calculates the preferred storage for a given Relation
+        ///// </summary>
+        //public static StorageHint GetPreferredStorage(this Relation rel)
+        //{
+        //    if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() == 1)
+        //    {
+        //        // arbitrary 1:1 relations default 
+        //        return StorageHint.MergeA;
+        //    }
+        //    else if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() > 1)
+        //    {
+        //        // if multiple Bs can exist, they get the fk
+        //        return StorageHint.MergeB;
+        //    }
+        //    else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() == 1)
+        //    {
+        //        // if multiple As ca exist, they get the fk
+        //        return StorageHint.MergeA;
+        //    }
+        //    else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() > 1)
+        //    {
+        //        // N:M needs "weak" entity
+        //        return StorageHint.Separate;
+        //    }
 
-            // this means that UpperBound() < 1 for some end
-            throw new NotImplementedException();
-        }
+        //    // this means that UpperBound() < 1 for some end
+        //    throw new NotImplementedException();
+        //}
     }
 }
