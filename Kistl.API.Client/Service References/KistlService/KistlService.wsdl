@@ -22,8 +22,8 @@
   <wsdl:message name="IKistlService_GetList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetListResponse" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_GetList_ApplicationExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="detail" element="q1:ApplicationException" />
+  <wsdl:message name="IKistlService_GetList_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="detail" element="q1:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_GetListOf_InputMessage">
     <wsdl:part name="parameters" element="tns:GetListOf" />
@@ -31,8 +31,8 @@
   <wsdl:message name="IKistlService_GetListOf_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetListOfResponse" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_GetListOf_ApplicationExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/System" name="detail" element="q2:ApplicationException" />
+  <wsdl:message name="IKistlService_GetListOf_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/System" name="detail" element="q2:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_GetObject_InputMessage">
     <wsdl:part name="parameters" element="tns:GetObject" />
@@ -40,8 +40,8 @@
   <wsdl:message name="IKistlService_GetObject_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetObjectResponse" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_GetObject_ApplicationExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/System" name="detail" element="q3:ApplicationException" />
+  <wsdl:message name="IKistlService_GetObject_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/System" name="detail" element="q3:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_SetObject_InputMessage">
     <wsdl:part name="parameters" element="tns:SetObject" />
@@ -49,8 +49,17 @@
   <wsdl:message name="IKistlService_SetObject_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetObjectResponse" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_SetObject_ApplicationExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/System" name="detail" element="q4:ApplicationException" />
+  <wsdl:message name="IKistlService_SetObject_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/System" name="detail" element="q4:Exception" />
+  </wsdl:message>
+  <wsdl:message name="IKistlService_FetchRelation_InputMessage">
+    <wsdl:part name="parameters" element="tns:FetchRelation" />
+  </wsdl:message>
+  <wsdl:message name="IKistlService_FetchRelation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FetchRelationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKistlService_FetchRelation_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/System" name="detail" element="q5:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_Generate_InputMessage">
     <wsdl:part name="parameters" element="tns:Generate" />
@@ -58,8 +67,8 @@
   <wsdl:message name="IKistlService_Generate_OutputMessage">
     <wsdl:part name="parameters" element="tns:GenerateResponse" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_Generate_ApplicationExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/System" name="detail" element="q5:ApplicationException" />
+  <wsdl:message name="IKistlService_Generate_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/System" name="detail" element="q6:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_HelloWorld_InputMessage">
     <wsdl:part name="parameters" element="tns:HelloWorld" />
@@ -67,39 +76,44 @@
   <wsdl:message name="IKistlService_HelloWorld_OutputMessage">
     <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_HelloWorld_ApplicationExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/System" name="detail" element="q6:ApplicationException" />
+  <wsdl:message name="IKistlService_HelloWorld_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/System" name="detail" element="q7:Exception" />
   </wsdl:message>
   <wsdl:portType name="IKistlService">
     <wsdl:operation name="GetList">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/GetList" message="tns:IKistlService_GetList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/GetListResponse" message="tns:IKistlService_GetList_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GetListApplicationExceptionFault" name="ApplicationExceptionFault" message="tns:IKistlService_GetList_ApplicationExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GetListExceptionFault" name="ExceptionFault" message="tns:IKistlService_GetList_ExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetListOf">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/GetListOf" message="tns:IKistlService_GetListOf_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/GetListOfResponse" message="tns:IKistlService_GetListOf_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GetListOfApplicationExceptionFault" name="ApplicationExceptionFault" message="tns:IKistlService_GetListOf_ApplicationExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GetListOfExceptionFault" name="ExceptionFault" message="tns:IKistlService_GetListOf_ExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetObject">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/GetObject" message="tns:IKistlService_GetObject_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/GetObjectResponse" message="tns:IKistlService_GetObject_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GetObjectApplicationExceptionFault" name="ApplicationExceptionFault" message="tns:IKistlService_GetObject_ApplicationExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GetObjectExceptionFault" name="ExceptionFault" message="tns:IKistlService_GetObject_ExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetObject">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/SetObject" message="tns:IKistlService_SetObject_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/SetObjectResponse" message="tns:IKistlService_SetObject_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/SetObjectApplicationExceptionFault" name="ApplicationExceptionFault" message="tns:IKistlService_SetObject_ApplicationExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/SetObjectExceptionFault" name="ExceptionFault" message="tns:IKistlService_SetObject_ExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchRelation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/FetchRelation" message="tns:IKistlService_FetchRelation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/FetchRelationResponse" message="tns:IKistlService_FetchRelation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/FetchRelationExceptionFault" name="ExceptionFault" message="tns:IKistlService_FetchRelation_ExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="Generate">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/Generate" message="tns:IKistlService_Generate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/GenerateResponse" message="tns:IKistlService_Generate_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GenerateApplicationExceptionFault" name="ApplicationExceptionFault" message="tns:IKistlService_Generate_ApplicationExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GenerateExceptionFault" name="ExceptionFault" message="tns:IKistlService_Generate_ExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="HelloWorld">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/HelloWorld" message="tns:IKistlService_HelloWorld_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/HelloWorldResponse" message="tns:IKistlService_HelloWorld_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/HelloWorldApplicationExceptionFault" name="ApplicationExceptionFault" message="tns:IKistlService_HelloWorld_ApplicationExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/HelloWorldExceptionFault" name="ExceptionFault" message="tns:IKistlService_HelloWorld_ExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="KistlServiceEndpoint" type="tns:IKistlService">
@@ -113,8 +127,8 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ApplicationExceptionFault">
-        <soap12:fault use="literal" name="ApplicationExceptionFault" namespace="" />
+      <wsdl:fault name="ExceptionFault">
+        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetListOf">
@@ -125,8 +139,8 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ApplicationExceptionFault">
-        <soap12:fault use="literal" name="ApplicationExceptionFault" namespace="" />
+      <wsdl:fault name="ExceptionFault">
+        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetObject">
@@ -137,8 +151,8 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ApplicationExceptionFault">
-        <soap12:fault use="literal" name="ApplicationExceptionFault" namespace="" />
+      <wsdl:fault name="ExceptionFault">
+        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SetObject">
@@ -149,8 +163,20 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ApplicationExceptionFault">
-        <soap12:fault use="literal" name="ApplicationExceptionFault" namespace="" />
+      <wsdl:fault name="ExceptionFault">
+        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FetchRelation">
+      <soap12:operation soapAction="http://tempuri.org/IKistlService/FetchRelation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="Generate">
@@ -161,8 +187,8 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ApplicationExceptionFault">
-        <soap12:fault use="literal" name="ApplicationExceptionFault" namespace="" />
+      <wsdl:fault name="ExceptionFault">
+        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="HelloWorld">
@@ -173,8 +199,8 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ApplicationExceptionFault">
-        <soap12:fault use="literal" name="ApplicationExceptionFault" namespace="" />
+      <wsdl:fault name="ExceptionFault">
+        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>

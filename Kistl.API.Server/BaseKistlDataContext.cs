@@ -92,8 +92,7 @@ namespace Kistl.API.Server
             return GetListOf<T>(obj, propertyName);
         }
 
-        public abstract ICollection<T> FetchRelation<A, B, T>(RelationEndRole role, IDataObject parent)
-            where T : INewCollectionEntry<A, B>;
+        public abstract ICollection<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent);
 
         /// <summary>
         /// Checks if the given Object is already in that Context.

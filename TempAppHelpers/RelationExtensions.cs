@@ -64,6 +64,17 @@ namespace Kistl.App.Extensions
                 || (rel.Storage == StorageType.MergeIntoB && RelationEndRole.B == endRole)
                 || (rel.Storage == StorageType.Replicate));
         }
+
+
+        /// <summary>
+        /// Returns the association name for the association from the given end to the CollectionEntry
+        /// </summary>
+        public static string GetCollectionEntryAssociationName(this Relation rel, RelationEndRole endRole)
+        {
+            RelationEnd relEnd = rel.GetEnd(endRole);
+
+            return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.Type.ClassName, rel.B.Type.ClassName, relEnd.RoleName, rel.ID);
+        }
     }
 
 }

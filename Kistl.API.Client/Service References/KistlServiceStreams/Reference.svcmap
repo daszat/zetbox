@@ -25,7 +25,6 @@
     <MetadataFile FileName="KistlServiceStreams.disco" MetadataType="Disco" ID="3e98ec21-625a-4b32-ab3f-bed9d685dbd9" SourceId="1" SourceUrl="http://localhost:6666/KistlServiceStreams?disco" />
     <MetadataFile FileName="KistlServiceStreams.wsdl" MetadataType="Wsdl" ID="87029544-ac9f-4c38-bd5c-5256655c533b" SourceId="1" SourceUrl="http://localhost:6666/KistlServiceStreams?wsdl" />
     <MetadataFile FileName="KistlServiceStreams2.xsd" MetadataType="Schema" ID="4791c145-b59e-4c71-a03a-38669ccb929f" SourceId="1" SourceUrl="http://localhost:6666/KistlServiceStreams?xsd=xsd2" />
-    <MetadataFile FileName="KistlServiceStreams4.xsd" MetadataType="Schema" ID="b21bf9c4-f873-4191-ba75-8d54b8b7c197" SourceId="1" SourceUrl="http://localhost:6666/KistlServiceStreams?xsd=xsd4" />
     <MetadataFile FileName="KistlServiceStreams3.xsd" MetadataType="Schema" ID="adf5024f-148e-4e38-a5cf-96011542228d" SourceId="1" SourceUrl="http://localhost:6666/KistlServiceStreams?xsd=xsd3" />
   </Metadata>
   <Extensions>

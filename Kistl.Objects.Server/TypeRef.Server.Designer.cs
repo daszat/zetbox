@@ -288,8 +288,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this.fk_Assembly, binStream);
             BinarySerializer.ToStream(this._Assembly_pos, binStream);
             BinarySerializer.ToStream(this._FullName, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.ToStreamCollectionEntries(this.GenericArguments__Implementation__, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -302,8 +300,6 @@ namespace Kistl.App.Base
             }
             BinarySerializer.FromStream(out this._Assembly_pos, binStream);
             BinarySerializer.FromStream(out this._FullName, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.FromStreamCollectionEntries(this.GenericArguments__Implementation__, binStream);
         }
 
 #endregion

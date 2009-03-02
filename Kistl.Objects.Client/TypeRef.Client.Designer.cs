@@ -103,7 +103,9 @@ namespace Kistl.App.Base
 					_GenericArguments 
 						= new ClientListBSideWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments66CollectionEntry__Implementation__>(
 							this, 
-							(ICollection<TypeRef_GenericArguments66CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments66CollectionEntry__Implementation__>(RelationEndRole.A, this));
+							Context.FetchRelation<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef>(66, RelationEndRole.A, this)
+							    .Cast<TypeRef_GenericArguments66CollectionEntry__Implementation__>()
+							    .ToList());
 				}
 				return _GenericArguments;
 			}

@@ -12,6 +12,7 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel;
 using System.IO;
 using System.Linq.Expressions;
+using Kistl.App.Base;
 
 namespace Kistl.Server
 {
@@ -174,29 +175,27 @@ namespace Kistl.Server
 
 
         // TODO: korrekte Signatur ist FetchRelation(int relationId, int serializableRole, int parentObjID)
-        public System.IO.MemoryStream FetchRelation(SerializableType ceType, int serializableRole, int ID)
+        public System.IO.MemoryStream FetchRelation(int relId, int serializableRole, int ID)
         {
             try
             {
-                using (TraceClient.TraceHelper.TraceMethodCall(ceType.ToString()))
+                using (TraceClient.TraceHelper.TraceMethodCall("relId = {0}, role = {1}, ID = {2}", relId, serializableRole, ID))
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        RelationEndRole role = (RelationEndRole)serializableRole;
-                        var param = Expression.Parameter(ceType.GetSystemType(), "ce");
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(ceType.GetSystemType())
-                            .GetList(ctx, 1000, 
-                                Expression.Lambda(
-                                    Expression.Equal(
-                                        Expression.Constant(ID),
-                                        Expression.Property(param, role.ToString())
-                                        ),
-                                param),
-                                null);
+                        var endRole = (RelationEndRole)serializableRole;
+                        Relation rel = ctx.Find<Relation>(relId);
+
+                        var ifType = typeof(INewCollectionEntry<,>);
+                        var ceType = ifType.MakeGenericType(rel.A.Type.GetDataType(), rel.B.Type.GetDataType());
+
+                        var lst = ServerObjectHandlerFactory
+                            .GetServerCollectionHandler(rel.A.Type.GetDataType(), rel.B.Type.GetDataType(), endRole)
+                            .GetCollectionEntries(ctx, relId, endRole, ID);
 
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
-                        foreach (IDataObject obj in lst)
+                        foreach (var obj in lst)
                         {
                             BinarySerializer.ToStream(true, sw);
                             obj.ToStream(sw);

@@ -535,8 +535,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._BaseObjectClass_pos, binStream);
             BinarySerializer.ToStream(this.fk_DefaultModel, binStream);
             BinarySerializer.ToStream(this._DefaultModel_pos, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.ToStreamCollectionEntries(this.ImplementsInterfaces__Implementation__, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
             BinarySerializer.ToStream(this._TableName, binStream);
@@ -557,8 +555,6 @@ namespace Kistl.App.Base
                 this.fk_DefaultModel = tmp;
             }
             BinarySerializer.FromStream(out this._DefaultModel_pos, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.FromStreamCollectionEntries(this.ImplementsInterfaces__Implementation__, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
             BinarySerializer.FromStream(out this._TableName, binStream);

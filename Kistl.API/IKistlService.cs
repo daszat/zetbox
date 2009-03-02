@@ -166,15 +166,15 @@ namespace Kistl.API
 
 
         /// <summary>
-        /// Fetches a list of CollectionEntry objects of the Type <paramref name="ceType"/> which are owned by the object with the ID <paramref name="ID"/> in the role <paramref name="role"/>.
+        /// Fetches a list of CollectionEntry objects of the Relation <paramref name="relID"/> which are owned by the object with the ID <paramref name="ID"/> in the role <paramref name="role"/>.
         /// </summary>
-        /// <param name="ceType">the requested collection entry type</param>
+        /// <param name="relId">the requested Relation</param>
         /// <param name="role">the parent role (1 == A, 2 == B)</param>
         /// <param name="ID">the ID of the parent object</param>
         /// <returns></returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        System.IO.MemoryStream FetchRelation(SerializableType ceType, int role, int ID);
+        System.IO.MemoryStream FetchRelation(int relId, int role, int ID);
     }
 
     /// <summary>

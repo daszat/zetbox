@@ -3,9 +3,9 @@
   <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Linq.Expressions" />
   <xs:complexType name="SerializableType">
     <xs:sequence>
-      <xs:element name="_AssemblyQualifiedName" nillable="true" type="xs:string" />
-      <xs:element name="_x003C_GenericTypeParameter_x003E_k__BackingField" nillable="true" type="tns:ArrayOfSerializableType" />
-      <xs:element name="_x003C_TypeName_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AssemblyQualifiedName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GenericTypeParameter" nillable="true" type="tns:ArrayOfSerializableType" />
+      <xs:element minOccurs="0" name="TypeName" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SerializableType" nillable="true" type="tns:SerializableType" />
@@ -17,9 +17,15 @@
   <xs:element name="ArrayOfSerializableType" nillable="true" type="tns:ArrayOfSerializableType" />
   <xs:complexType name="SerializableExpression">
     <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Linq.Expressions" name="_NodeType" type="q1:ExpressionType" />
       <xs:element name="_Type" nillable="true" type="tns:SerializableType" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Linq.Expressions" name="_x003C_NodeType_x003E_k__BackingField" type="q1:ExpressionType" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SerializableExpression" nillable="true" type="tns:SerializableExpression" />
+  <xs:complexType name="ArrayOfSerializableExpression">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SerializableExpression" nillable="true" type="tns:SerializableExpression" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSerializableExpression" nillable="true" type="tns:ArrayOfSerializableExpression" />
 </xs:schema>

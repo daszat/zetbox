@@ -32,12 +32,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string referencedCollectionEntry = prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
 
             string providerCollectionType = "ICollection<" + referencedCollectionEntry + ">";
+            string underlyingCollectionName = "_" + name;
 
             Call(
                 host, ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
                 thisInterface, referencedType, referencedCollectionEntry,
-                providerCollectionType);
+                providerCollectionType, underlyingCollectionName);
         }
 
         /// <summary>
@@ -59,20 +60,19 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Templates.Implementation.SerializationMembersList serializationList,
             string name, string backingName, string backingCollectionType, string exposedCollectionInterface,
             string thisInterface, string referencedType, string entryType,
-            string providerCollectionType)
+            string providerCollectionType, string underlyingCollectionName)
         {
             host.CallTemplate("Implementation.ObjectClasses.ValueCollectionProperty",
                 ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
-                thisInterface, referencedType, entryType, providerCollectionType);
+                thisInterface, referencedType, entryType, providerCollectionType, underlyingCollectionName);
         }
 
-        protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string wrapperName)
+        protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string underlyingCollectionName)
         {
             if (list != null)
             {
-                list.Add("Implementation.ObjectClasses.CollectionSerialization", wrapperName + ".UnderlyingCollection");
-                list.Add("Implementation.ObjectClasses.CollectionSerialization", wrapperName + ".DeletedCollection");
+                list.Add("Implementation.ObjectClasses.CollectionSerialization", underlyingCollectionName);
             }
         }
     }

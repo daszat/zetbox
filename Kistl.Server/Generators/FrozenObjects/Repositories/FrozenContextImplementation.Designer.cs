@@ -117,7 +117,7 @@ this.WriteObjects("		{\r\n");
 this.WriteObjects("			throw new NotImplementedException();\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
-this.WriteObjects("		ICollection<T> IKistlContext.FetchRelation<A, B, T>(RelationEndRole role, IDataObject parent)\r\n");
+this.WriteObjects("		ICollection<INewCollectionEntry<A, B>> IKistlContext.FetchRelation<A, B>(int relId, RelationEndRole role, IDataObject parent)\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			throw new NotImplementedException();\r\n");
 this.WriteObjects("		}\r\n");

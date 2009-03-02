@@ -19,6 +19,7 @@
 <%@ Parameter Name="bSideType" Type="string" %>
 <%@ Parameter Name="entryType" Type="string" %>
 <%@ Parameter Name="providerCollectionType" Type="string" %>
+<%@ Parameter Name="relId" Type="int" %>
 <%@ Parameter Name="role" Type="RelationEndRole" %>
 
 		public <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
@@ -30,7 +31,9 @@
 					<%= backingName %> 
 						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>>(
 							this, 
-							(<%= providerCollectionType %>)Context.FetchRelation<<%= aSideType %>, <%= bSideType %>, <%= entryType %>>(RelationEndRole.<%= role %>, this));
+							Context.FetchRelation<<%= aSideType %>, <%= bSideType %>>(<%= relId %>, RelationEndRole.<%= role %>, this)
+							    .Cast<<%= entryType %>>()
+							    .ToList());
 				}
 				return <%= backingName %>;
 			}

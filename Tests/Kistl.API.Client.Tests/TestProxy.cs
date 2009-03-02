@@ -112,7 +112,7 @@ namespace Kistl.API.Client.Tests
             return result;
         }
 
-        public IEnumerable<T> FetchRelation<A, B, T>(Type ceType, RelationEndRole role, IDataObject parent) where T : INewCollectionEntry<A, B>
+        public IEnumerable<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent)
         {
             throw new NotImplementedException();
         }

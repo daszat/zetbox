@@ -130,7 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.Kistl.API.Client.cd" />
-    <None Include="Service References\KistlServiceStreams\KistlServiceStreams4.xsd" />
     <None Include="Service References\KistlServiceStreams\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -139,6 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\KistlServiceStreams\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\KistlService\configuration91.svcinfo" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

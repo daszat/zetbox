@@ -356,8 +356,6 @@ namespace Kistl.App.Projekte
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._AufwandGes, binStream);
             BinarySerializer.ToStream(this._Kundenname, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.ToStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
         }
 
@@ -366,8 +364,6 @@ namespace Kistl.App.Projekte
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._AufwandGes, binStream);
             BinarySerializer.FromStream(out this._Kundenname, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.FromStreamCollectionEntries(this.Mitarbeiter__Implementation__, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
         }
 

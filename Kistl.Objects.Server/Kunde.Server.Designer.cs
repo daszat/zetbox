@@ -259,8 +259,7 @@ namespace Kistl.App.Projekte
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Adresse, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.ToStreamCollectionEntries(this.EMails__Implementation__, binStream);
+            BinarySerializer.ToStreamCollectionEntries(this.EMails__Implementation__, binStream);
             BinarySerializer.ToStream(this._Kundenname, binStream);
             BinarySerializer.ToStream(this._Land, binStream);
             BinarySerializer.ToStream(this._Ort, binStream);
@@ -271,8 +270,7 @@ namespace Kistl.App.Projekte
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Adresse, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.FromStreamCollectionEntries(this.EMails__Implementation__, binStream);
+            BinarySerializer.FromStreamCollectionEntries(this.EMails__Implementation__, binStream);
             BinarySerializer.FromStream(out this._Kundenname, binStream);
             BinarySerializer.FromStream(out this._Land, binStream);
             BinarySerializer.FromStream(out this._Ort, binStream);

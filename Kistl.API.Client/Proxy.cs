@@ -21,8 +21,7 @@ namespace Kistl.API.Client
 
         IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects);
 
-        IEnumerable<T> FetchRelation<A, B, T>(Type ceType, RelationEndRole role, IDataObject parent) 
-            where T : INewCollectionEntry<A, B>;
+        IEnumerable<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent);
 
         /// <summary>
         /// Generates Objects &amp; Database. Throws a Exception if failed.
@@ -323,12 +322,34 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable<T> FetchRelation<A, B, T>(Type ceType, RelationEndRole role, IDataObject parent)
-            where T : INewCollectionEntry<A, B>
+        public IEnumerable<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent)
         {
-            MemoryStream ms = serviceStreams.FetchRelation(new SerializableType(ceType), (int)role, parent.ID);
+            // TODO: could be implemented in generated properties
+            if(parent.ObjectState == DataObjectState.New)
+                return new List<INewCollectionEntry<A, B>>();
 
-            return null;
+            MemoryStream ms = serviceStreams.FetchRelation(relationId, (int)role, parent.ID);
+            System.IO.BinaryReader sr = new System.IO.BinaryReader(ms);
+
+            List<INewCollectionEntry<A, B>> result = new List<INewCollectionEntry<A, B>>();
+            bool cont = true;
+            BinarySerializer.FromStream(out cont, sr);
+            while (cont)
+            {
+                long pos = ms.Position;
+                SerializableType objType;
+                BinarySerializer.FromStream(out objType, sr);
+
+                ms.Seek(pos, System.IO.SeekOrigin.Begin);
+
+                var obj = (INewCollectionEntry<A, B>)objType.NewObject();
+                obj.FromStream(sr);
+
+                result.Add(obj);
+                BinarySerializer.FromStream(out cont, sr);
+            }
+
+            return result;
         }
 
         /// <summary>

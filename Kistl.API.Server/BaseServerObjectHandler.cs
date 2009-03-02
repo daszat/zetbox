@@ -49,9 +49,12 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
-        /// <param name="objects"></param>
-        /// <returns></returns>
         IEnumerable<IDataObject> SetObjects(IKistlContext ctx, IEnumerable<IDataObject> objects);
+    }
+
+    public interface IServerCollectionHandler
+    {
+        IEnumerable<ICollectionEntry> GetCollectionEntries(IKistlContext ctx, int relId, RelationEndRole endRole, int parentId);
     }
 
     /// <summary>
@@ -61,6 +64,7 @@ namespace Kistl.API.Server
     {
         private static Type _ServerObjectHandlerType = null;
         private static Type _ServerObjectSetHandlerType = null;
+        private static Type _ServerCollectionHandlerType = null;
 
         /// <summary>
         /// Returns a Object Handler for the given Type
@@ -109,9 +113,46 @@ namespace Kistl.API.Server
             object obj = Activator.CreateInstance(_ServerObjectSetHandlerType);
             if (!(obj is IServerObjectSetHandler))
             {
-                throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IKistlContext object. Check your Configuration '/Server/ServerObjectSetHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerObjectSetHandlerType));
+                throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IServerObjectSetHandler object. Check your Configuration '/Server/ServerObjectSetHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerObjectSetHandlerType));
             }
             return (IServerObjectSetHandler)obj;
+        }
+
+        public static IServerCollectionHandler GetServerCollectionHandler(Type aType, Type bType, RelationEndRole endRole)
+        {
+            aType = aType.ToImplementationType();
+            bType = bType.ToImplementationType();
+
+            lock (typeof(ServerObjectHandlerFactory))
+            {
+                if (_ServerCollectionHandlerType == null)
+                {
+                    _ServerCollectionHandlerType = Type.GetType(ApplicationContext.Current.Configuration.Server.ServerCollectionHandlerType);
+                    if (_ServerCollectionHandlerType == null)
+                    {
+                        throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerCollectionHandler. Check your Configuration '/Server/ServerCollectionHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerCollectionHandlerType));
+                    }
+                }
+            }
+
+            // dynamically translate generic types into provider-known types
+            Type[] genericArgs;
+            if (endRole == RelationEndRole.A)
+            {
+                genericArgs = new Type[] { aType, bType, aType, bType };
+            }
+            else
+            {
+                genericArgs = new Type[] { aType, bType, bType, aType };
+            }
+
+            Type result = _ServerCollectionHandlerType.MakeGenericType(genericArgs);
+            object obj = Activator.CreateInstance(result);
+            if (!(obj is IServerCollectionHandler))
+            {
+                throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IKistlContext object. Check your Configuration '/Server/ServerCollectionHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerCollectionHandlerType));
+            }
+            return (IServerCollectionHandler)obj;
         }
     }
 
@@ -153,7 +194,7 @@ namespace Kistl.API.Server
                     bool first = true;
                     foreach (var o in orderBy)
                     {
-                        if(first) result = result.AddOrderBy<T>(o);
+                        if (first) result = result.AddOrderBy<T>(o);
                         else result = result.AddThenBy<T>(o);
                         first = false;
                     }
@@ -179,7 +220,7 @@ namespace Kistl.API.Server
                 T obj = GetObjectInstance(ctx, ID);
                 if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
 
-                IEnumerable list = (IEnumerable)obj.GetPropertyValue <IEnumerable>(property);
+                IEnumerable list = (IEnumerable)obj.GetPropertyValue<IEnumerable>(property);
                 return list;
             }
         }

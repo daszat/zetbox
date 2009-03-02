@@ -20,9 +20,10 @@
 <%@ Parameter Name="referencedType" Type="string" %>
 <%@ Parameter Name="entryType" Type="string" %>
 <%@ Parameter Name="providerCollectionType" Type="string" %>
+<%@ Parameter Name="underlyingCollectionName" Type="string" %>
 <%
 
-    AddSerialization(serializationList, backingName);
+    AddSerialization(serializationList, underlyingCollectionName);
 
 %>
 
@@ -32,13 +33,14 @@
 			{
 				if (<%= backingName %> == null)
 				{
-					<%= backingName %> 
-						= new <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>>(
-							this, 
-							(<%= providerCollectionType %>)Context.FetchRelation<<%= thisInterface %>, <%= referencedType %>, <%= entryType %>>(RelationEndRole.B, this));
+				    <%= backingName %> 
+				        = new <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>>(
+				            this, 
+				            <%= underlyingCollectionName %>);
 				}
 				return <%= backingName %>;
 			}
 		}
 
 		private <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>> <%= backingName %>;
+		private <%= providerCollectionType %> <%= underlyingCollectionName %>;

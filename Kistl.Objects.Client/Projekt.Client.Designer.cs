@@ -142,7 +142,9 @@ namespace Kistl.App.Projekte
 					_Mitarbeiter 
 						= new ClientListBSideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
 							this, 
-							(ICollection<Projekt_Mitarbeiter23CollectionEntry__Implementation__>)Context.FetchRelation<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__>(RelationEndRole.A, this));
+							Context.FetchRelation<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter>(23, RelationEndRole.A, this)
+							    .Cast<Projekt_Mitarbeiter23CollectionEntry__Implementation__>()
+							    .ToList());
 				}
 				return _Mitarbeiter;
 			}

@@ -85,10 +85,7 @@ namespace Kistl.API
         /// <param name="role">Specifies how to interpret the container</param>
         /// <param name="container">The container of the requested collection</param>
         /// <returns></returns>
-        //ICollection<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject container);
-     
-        ICollection<T> FetchRelation<A, B, T>(RelationEndRole role, IDataObject parent)
-            where T : INewCollectionEntry<A, B>;
+        ICollection<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject container);
 
         /// <summary>
         /// Checks if the given Object is already in that Context.

@@ -416,8 +416,6 @@ namespace Kistl.App.GUI
             BinarySerializer.ToStream(this._DisplayedTypeAssembly_pos, binStream);
             BinarySerializer.ToStream(this._DisplayedTypeFullName, binStream);
             BinarySerializer.ToStream(this._DisplayName, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.ToStreamCollectionEntries(this.Menu__Implementation__, binStream);
             BinarySerializer.ToStream(this.fk_VisualTree, binStream);
             BinarySerializer.ToStream(this._VisualTree_pos, binStream);
         }
@@ -433,8 +431,6 @@ namespace Kistl.App.GUI
             BinarySerializer.FromStream(out this._DisplayedTypeAssembly_pos, binStream);
             BinarySerializer.FromStream(out this._DisplayedTypeFullName, binStream);
             BinarySerializer.FromStream(out this._DisplayName, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.FromStreamCollectionEntries(this.Menu__Implementation__, binStream);
             {
                 var tmp = this.fk_VisualTree;
                 BinarySerializer.FromStream(out tmp, binStream);

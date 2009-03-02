@@ -35,8 +35,7 @@ string methodName = direction.ToString();
     
 
 #line 21 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
-this.WriteObjects("			// collections have to be loaded separately for now\r\n");
-this.WriteObjects("            // BinarySerializer.",  methodName , "CollectionEntries(this.",  collectionName , ", ",  streamName , ");\r\n");
+this.WriteObjects("            BinarySerializer.",  methodName , "CollectionEntries(this.",  collectionName , ", ",  streamName , ");\r\n");
 
         }
 

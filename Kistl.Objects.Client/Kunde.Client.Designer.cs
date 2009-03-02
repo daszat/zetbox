@@ -56,16 +56,17 @@ namespace Kistl.App.Projekte
 			{
 				if (_EMailsWrapper == null)
 				{
-					_EMailsWrapper 
-						= new ClientCollectionBSideWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__>(
-							this, 
-							(ICollection<Kunde_EMailsCollectionEntry__Implementation__>)Context.FetchRelation<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__>(RelationEndRole.B, this));
+				    _EMailsWrapper 
+				        = new ClientCollectionBSideWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__>(
+				            this, 
+				            _EMails);
 				}
 				return _EMailsWrapper;
 			}
 		}
 
 		private ClientCollectionBSideWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__> _EMailsWrapper;
+		private ICollection<Kunde_EMailsCollectionEntry__Implementation__> _EMails;
 
         /// <summary>
         /// Name des Kunden
@@ -203,10 +204,7 @@ namespace Kistl.App.Projekte
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Adresse, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.ToStreamCollectionEntries(this._EMailsWrapper.UnderlyingCollection, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.ToStreamCollectionEntries(this._EMailsWrapper.DeletedCollection, binStream);
+            BinarySerializer.ToStreamCollectionEntries(this._EMails, binStream);
             BinarySerializer.ToStream(this._Kundenname, binStream);
             BinarySerializer.ToStream(this._Land, binStream);
             BinarySerializer.ToStream(this._Ort, binStream);
@@ -217,10 +215,7 @@ namespace Kistl.App.Projekte
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Adresse, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.FromStreamCollectionEntries(this._EMailsWrapper.UnderlyingCollection, binStream);
-			// collections have to be loaded separately for now
-            // BinarySerializer.FromStreamCollectionEntries(this._EMailsWrapper.DeletedCollection, binStream);
+            BinarySerializer.FromStreamCollectionEntries(this._EMails, binStream);
             BinarySerializer.FromStream(out this._Kundenname, binStream);
             BinarySerializer.FromStream(out this._Land, binStream);
             BinarySerializer.FromStream(out this._Ort, binStream);

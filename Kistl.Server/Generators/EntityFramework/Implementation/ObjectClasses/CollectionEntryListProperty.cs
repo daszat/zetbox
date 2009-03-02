@@ -9,8 +9,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     {
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
         {
-            if (list != null)
-                list.Add("Implementation.ObjectClasses.CollectionSerialization", memberName);
+            //if (list != null)
+            //    list.Add("Implementation.ObjectClasses.CollectionSerialization", memberName);
         }
     }
 }

@@ -116,6 +116,9 @@ namespace Kistl.API.Configuration
 
             [XmlElement(IsNullable = false)]
             public string ServerObjectSetHandlerType { get; set; }
+
+            [XmlElement(IsNullable = false)]
+            public string ServerCollectionHandlerType { get; set; }
         }
 
         /// <summary>

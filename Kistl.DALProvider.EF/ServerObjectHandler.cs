@@ -11,6 +11,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Extensions;
+using Kistl.App.Base;
 
 namespace Kistl.DALProvider.EF
 {
@@ -170,6 +171,36 @@ namespace Kistl.DALProvider.EF
                     }
                 }
             }
+        }
+    }
+
+    public class ServerCollectionHandler<A, B, PARENT, CHILD>
+        : IServerCollectionHandler
+        where A : BaseServerDataObject_EntityFramework
+        where B : BaseServerDataObject_EntityFramework
+        where PARENT : BaseServerDataObject_EntityFramework
+        where CHILD : BaseServerDataObject_EntityFramework
+    {
+
+        public IEnumerable<ICollectionEntry> GetCollectionEntries(
+            IKistlContext ctx,
+            int relId, RelationEndRole endRole,
+            int parentId)
+        {
+            var rel = ctx.Find<Relation>(relId);
+            var relEnd = rel.GetEnd(endRole);
+            var parent = ctx.Find<PARENT>(parentId);
+
+            var c = ((IEntityWithRelationships)(parent)).RelationshipManager
+                    .GetRelatedCollection<CHILD>(
+                        "Model." + rel.GetCollectionEntryAssociationName((RelationEndRole)relEnd.Role),
+                        "CollectionEntry");
+            if (parent.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                && !c.IsLoaded)
+            {
+                c.Load();
+            }
+            return c.Cast<ICollectionEntry>();
         }
     }
 }

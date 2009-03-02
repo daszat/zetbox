@@ -58,7 +58,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
                 name, exposedCollectionInterface, referencedInterface,
                 backingName, backingCollectionType, aSideType, bSideType, entryType,
                 providerCollectionType,
-                endRole);
+                rel.ID, endRole);
         }
     }
 }
