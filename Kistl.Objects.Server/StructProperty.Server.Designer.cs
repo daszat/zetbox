@@ -31,9 +31,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_StructProperty_Struct_StructProperty_52
-    A: 3 StructProperty as StructProperty
-    B: 1 Struct as StructDefinition
-    Preferred Storage: 1
+    A: ZeroOrMore StructProperty as StructProperty
+    B: ZeroOrOne Struct as StructDefinition
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface

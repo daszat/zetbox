@@ -50,9 +50,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Relation_RelationEnd_Relation_71
-    A: 3 Relation as Relation
-    B: 1 RelationEnd as A
-    Preferred Storage: 1
+    A: ZeroOrMore Relation as Relation
+    B: ZeroOrOne RelationEnd as A
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -152,9 +152,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Relation_RelationEnd_Relation_72
-    A: 3 Relation as Relation
-    B: 1 RelationEnd as B
-    Preferred Storage: 1
+    A: ZeroOrMore Relation as Relation
+    B: ZeroOrOne RelationEnd as B
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -276,210 +276,6 @@ namespace Kistl.App.Base
         private string _Description;
 
         /// <summary>
-        /// Left Part of the Relation
-        /// </summary>
-    /*
-    Relation: FK_Relation_ObjectReferenceProperty_LeftOf_63
-    A: 1 Relation as LeftOf
-    B: 2 ObjectReferenceProperty as LeftPart
-    Preferred Storage: 1
-    */
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.ObjectReferenceProperty LeftPart
-        {
-            get
-            {
-                return LeftPart__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                LeftPart__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_LeftPart
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && LeftPart != null)
-                {
-                    _fk_LeftPart = LeftPart.ID;
-                }
-                return _fk_LeftPart;
-            }
-            set
-            {
-                _fk_LeftPart = value;
-            }
-        }
-        private int? _fk_LeftPart;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_LeftOf_63", "LeftPart")]
-        public Kistl.App.Base.ObjectReferenceProperty__Implementation__ LeftPart__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__>(
-                        "Model.FK_Relation_ObjectReferenceProperty_LeftOf_63",
-                        "LeftPart");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
-                }
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__>(
-                        "Model.FK_Relation_ObjectReferenceProperty_LeftOf_63",
-                        "LeftPart");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                r.Value = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
-            }
-        }
-        
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? LeftPart_pos
-        {
-            get
-            {
-                return _LeftPart_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_LeftPart_pos != value)
-                {
-                    NotifyPropertyChanging("LeftPart_pos");
-                    _LeftPart_pos = value;
-                    NotifyPropertyChanged("LeftPart_pos");
-                }
-            }
-        }
-        private int? _LeftPart_pos;
-        
-
-        /// <summary>
-        /// Right Part of the Relation
-        /// </summary>
-    /*
-    Relation: FK_Relation_ObjectReferenceProperty_RightOf_64
-    A: 1 Relation as RightOf
-    B: 2 ObjectReferenceProperty as RightPart
-    Preferred Storage: 1
-    */
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.ObjectReferenceProperty RightPart
-        {
-            get
-            {
-                return RightPart__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                RightPart__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_RightPart
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && RightPart != null)
-                {
-                    _fk_RightPart = RightPart.ID;
-                }
-                return _fk_RightPart;
-            }
-            set
-            {
-                _fk_RightPart = value;
-            }
-        }
-        private int? _fk_RightPart;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Relation_ObjectReferenceProperty_RightOf_64", "RightPart")]
-        public Kistl.App.Base.ObjectReferenceProperty__Implementation__ RightPart__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__>(
-                        "Model.FK_Relation_ObjectReferenceProperty_RightOf_64",
-                        "RightPart");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
-                }
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__>(
-                        "Model.FK_Relation_ObjectReferenceProperty_RightOf_64",
-                        "RightPart");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                r.Value = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
-            }
-        }
-        
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? RightPart_pos
-        {
-            get
-            {
-                return _RightPart_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_RightPart_pos != value)
-                {
-                    NotifyPropertyChanging("RightPart_pos");
-                    _RightPart_pos = value;
-                    NotifyPropertyChanged("RightPart_pos");
-                }
-            }
-        }
-        private int? _RightPart_pos;
-        
-
-        /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
         // enumeration property
@@ -569,10 +365,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this.fk_B, binStream);
             BinarySerializer.ToStream(this._B_pos, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this.fk_LeftPart, binStream);
-            BinarySerializer.ToStream(this._LeftPart_pos, binStream);
-            BinarySerializer.ToStream(this.fk_RightPart, binStream);
-            BinarySerializer.ToStream(this._RightPart_pos, binStream);
             BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
         }
 
@@ -592,18 +384,6 @@ namespace Kistl.App.Base
             }
             BinarySerializer.FromStream(out this._B_pos, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
-            {
-                var tmp = this.fk_LeftPart;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_LeftPart = tmp;
-            }
-            BinarySerializer.FromStream(out this._LeftPart_pos, binStream);
-            {
-                var tmp = this.fk_RightPart;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_RightPart = tmp;
-            }
-            BinarySerializer.FromStream(out this._RightPart_pos, binStream);
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
         }
 

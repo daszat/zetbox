@@ -154,9 +154,9 @@ namespace Kistl.App.Projekte
         /// </summary>
     /*
     Relation: FK_Projekt_Task_Projekt_22
-    A: 1 Projekt as Projekt
-    B: 3 Task as Tasks
-    Preferred Storage: 2
+    A: ZeroOrOne Projekt as Projekt
+    B: ZeroOrMore Task as Tasks
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface

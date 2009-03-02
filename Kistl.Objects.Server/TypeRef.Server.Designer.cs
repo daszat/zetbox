@@ -50,9 +50,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_TypeRef_Assembly_TypeRef_65
-    A: 3 TypeRef as TypeRef
-    B: 1 Assembly as Assembly
-    Preferred Storage: 1
+    A: ZeroOrMore TypeRef as TypeRef
+    B: ZeroOrOne Assembly as Assembly
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -178,9 +178,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_TypeRef_TypeRef_TypeRef_66
-    A: 3 TypeRef as TypeRef
-    B: 3 TypeRef as GenericArguments
-    Preferred Storage: 4
+    A: ZeroOrMore TypeRef as TypeRef
+    B: ZeroOrMore TypeRef as GenericArguments
+    Preferred Storage: Separate
     */
         // collection reference property
         // implement the user-visible interface

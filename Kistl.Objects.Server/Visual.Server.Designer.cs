@@ -50,9 +50,9 @@ namespace Kistl.App.GUI
         /// </summary>
     /*
     Relation: FK_Visual_Visual_Visual_55
-    A: 3 Visual as Visual
-    B: 3 Visual as Children
-    Preferred Storage: 4
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrMore Visual as Children
+    Preferred Storage: Separate
     */
         // collection reference property
         // implement the user-visible interface
@@ -97,9 +97,9 @@ namespace Kistl.App.GUI
         /// </summary>
     /*
     Relation: FK_Visual_Visual_Visual_60
-    A: 3 Visual as Visual
-    B: 3 Visual as ContextMenu
-    Preferred Storage: 4
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrMore Visual as ContextMenu
+    Preferred Storage: Separate
     */
         // collection reference property
         // implement the user-visible interface
@@ -212,9 +212,9 @@ namespace Kistl.App.GUI
         /// </summary>
     /*
     Relation: FK_Visual_Method_Visual_57
-    A: 3 Visual as Visual
-    B: 1 Method as Method
-    Preferred Storage: 1
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrOne Method as Method
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -314,9 +314,9 @@ namespace Kistl.App.GUI
         /// </summary>
     /*
     Relation: FK_Visual_BaseProperty_Visual_56
-    A: 3 Visual as Visual
-    B: 1 BaseProperty as Property
-    Preferred Storage: 1
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrOne BaseProperty as Property
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface

@@ -102,9 +102,9 @@ namespace Kistl.App.Projekte
         /// </summary>
     /*
     Relation: FK_Projekt_Mitarbeiter_Projekte_23
-    A: 3 Projekt as Projekte
-    B: 3 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 4
+    A: ZeroOrMore Projekt as Projekte
+    B: ZeroOrMore Mitarbeiter as Mitarbeiter
+    Preferred Storage: Separate
     */
         // collection reference property
         // implement the user-visible interface

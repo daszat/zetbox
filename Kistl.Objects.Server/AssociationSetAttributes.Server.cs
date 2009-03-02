@@ -9,9 +9,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Auftrag_Kunde_Auftrag_34
-    A: 3 Auftrag as Auftrag
-    B: 1 Kunde as Kunde
-    Preferred Storage: 1
+    A: ZeroOrMore Auftrag as Auftrag
+    B: ZeroOrOne Kunde as Kunde
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -24,9 +24,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Auftrag_Mitarbeiter_Auftrag_29
-    A: 3 Auftrag as Auftrag
-    B: 1 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 1
+    A: ZeroOrMore Auftrag as Auftrag
+    B: ZeroOrOne Mitarbeiter as Mitarbeiter
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -39,9 +39,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28
-    A: 3 BackReferenceProperty as BackReferenceProperty
-    B: 1 ObjectReferenceProperty as ReferenceProperty
-    Preferred Storage: 1
+    A: ZeroOrMore BackReferenceProperty as BackReferenceProperty
+    B: ZeroOrOne ObjectReferenceProperty as ReferenceProperty
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -54,9 +54,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_BaseProperty_Constraint_ConstrainedProperty_62
-    A: 2 BaseProperty as ConstrainedProperty
-    B: 3 Constraint as Constraints
-    Preferred Storage: 2
+    A: One BaseProperty as ConstrainedProperty
+    B: ZeroOrMore Constraint as Constraints
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -69,9 +69,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_BaseProperty_Module_BaseProperty_37
-    A: 3 BaseProperty as BaseProperty
-    B: 1 Module as Module
-    Preferred Storage: 1
+    A: ZeroOrMore BaseProperty as BaseProperty
+    B: ZeroOrOne Module as Module
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -84,9 +84,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_CLRObjectParameter_Assembly_CLRObjectParameter_46
-    A: 3 CLRObjectParameter as CLRObjectParameter
-    B: 1 Assembly as Assembly
-    Preferred Storage: 1
+    A: ZeroOrMore CLRObjectParameter as CLRObjectParameter
+    B: ZeroOrOne Assembly as Assembly
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -99,9 +99,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_ControlInfo_Assembly_ControlInfo_51
-    A: 3 ControlInfo as ControlInfo
-    B: 1 Assembly as Assembly
-    Preferred Storage: 1
+    A: ZeroOrMore ControlInfo as ControlInfo
+    B: ZeroOrOne Assembly as Assembly
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -114,9 +114,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_DataType_BaseProperty_ObjectClass_19
-    A: 2 DataType as ObjectClass
-    B: 3 BaseProperty as Properties
-    Preferred Storage: 2
+    A: One DataType as ObjectClass
+    B: ZeroOrMore BaseProperty as Properties
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -129,9 +129,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_DataType_Icon_DataType_35
-    A: 3 DataType as DataType
-    B: 1 Icon as DefaultIcon
-    Preferred Storage: 1
+    A: ZeroOrMore DataType as DataType
+    B: ZeroOrOne Icon as DefaultIcon
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -144,9 +144,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_DataType_Method_ObjectClass_25
-    A: 2 DataType as ObjectClass
-    B: 3 Method as Methods
-    Preferred Storage: 2
+    A: One DataType as ObjectClass
+    B: ZeroOrMore Method as Methods
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -159,9 +159,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_DataType_MethodInvocation_InvokeOnObjectClass_41
-    A: 2 DataType as InvokeOnObjectClass
-    B: 3 MethodInvocation as MethodInvocations
-    Preferred Storage: 2
+    A: One DataType as InvokeOnObjectClass
+    B: ZeroOrMore MethodInvocation as MethodInvocations
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -174,9 +174,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Enumeration_EnumerationEntry_Enumeration_47
-    A: 2 Enumeration as Enumeration
-    B: 3 EnumerationEntry as EnumerationEntries
-    Preferred Storage: 2
+    A: One Enumeration as Enumeration
+    B: ZeroOrMore EnumerationEntry as EnumerationEntries
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -189,9 +189,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_EnumerationProperty_Enumeration_EnumerationProperty_48
-    A: 3 EnumerationProperty as EnumerationProperty
-    B: 1 Enumeration as Enumeration
-    Preferred Storage: 1
+    A: ZeroOrMore EnumerationProperty as EnumerationProperty
+    B: ZeroOrOne Enumeration as Enumeration
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -204,9 +204,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Method_BaseParameter_Method_44
-    A: 2 Method as Method
-    B: 3 BaseParameter as Parameter
-    Preferred Storage: 2
+    A: One Method as Method
+    B: ZeroOrMore BaseParameter as Parameter
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -219,9 +219,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Method_MethodInvocation_Method_39
-    A: 2 Method as Method
-    B: 3 MethodInvocation as MethodInvokations
-    Preferred Storage: 2
+    A: One Method as Method
+    B: ZeroOrMore MethodInvocation as MethodInvokations
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -234,9 +234,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Method_Module_Method_38
-    A: 3 Method as Method
-    B: 1 Module as Module
-    Preferred Storage: 1
+    A: ZeroOrMore Method as Method
+    B: ZeroOrOne Module as Module
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -249,9 +249,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_MethodInvocation_Module_MethodInvocation_40
-    A: 3 MethodInvocation as MethodInvocation
-    B: 1 Module as Module
-    Preferred Storage: 1
+    A: ZeroOrMore MethodInvocation as MethodInvocation
+    B: ZeroOrOne Module as Module
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -264,9 +264,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_MethodInvocation_TypeRef_MethodInvocation_67
-    A: 3 MethodInvocation as MethodInvocation
-    B: 1 TypeRef as Implementor
-    Preferred Storage: 1
+    A: ZeroOrMore MethodInvocation as MethodInvocation
+    B: ZeroOrOne TypeRef as Implementor
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -279,9 +279,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Module_Assembly_Module_36
-    A: 2 Module as Module
-    B: 3 Assembly as Assemblies
-    Preferred Storage: 2
+    A: One Module as Module
+    B: ZeroOrMore Assembly as Assemblies
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -294,9 +294,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Module_DataType_Module_26
-    A: 2 Module as Module
-    B: 3 DataType as DataTypes
-    Preferred Storage: 2
+    A: One Module as Module
+    B: ZeroOrMore DataType as DataTypes
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -309,9 +309,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_ObjectClass_Interface_ObjectClass_49
-    A: 3 ObjectClass as ObjectClass
-    B: 3 Interface as ImplementsInterfaces
-    Preferred Storage: 4
+    A: ZeroOrMore ObjectClass as ObjectClass
+    B: ZeroOrMore Interface as ImplementsInterfaces
+    Preferred Storage: Separate
 	*/
 
 // The association from A to the CollectionEntry
@@ -327,9 +327,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_ObjectClass_ObjectClass_BaseObjectClass_24
-    A: 1 ObjectClass as BaseObjectClass
-    B: 3 ObjectClass as SubClasses
-    Preferred Storage: 2
+    A: ZeroOrOne ObjectClass as BaseObjectClass
+    B: ZeroOrMore ObjectClass as SubClasses
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -342,9 +342,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_ObjectClass_TypeRef_ObjectClass_70
-    A: 3 ObjectClass as ObjectClass
-    B: 1 TypeRef as DefaultModel
-    Preferred Storage: 1
+    A: ZeroOrMore ObjectClass as ObjectClass
+    B: ZeroOrOne TypeRef as DefaultModel
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -357,9 +357,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_ObjectParameter_DataType_ObjectParameter_45
-    A: 3 ObjectParameter as ObjectParameter
-    B: 1 DataType as DataType
-    Preferred Storage: 1
+    A: ZeroOrMore ObjectParameter as ObjectParameter
+    B: ZeroOrOne DataType as DataType
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -372,9 +372,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27
-    A: 3 ObjectReferenceProperty as ObjectReferenceProperty
-    B: 1 ObjectClass as ReferenceObjectClass
-    Preferred Storage: 1
+    A: ZeroOrMore ObjectReferenceProperty as ObjectReferenceProperty
+    B: ZeroOrOne ObjectClass as ReferenceObjectClass
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -387,9 +387,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_PresenterInfo_Assembly_PresenterInfo_53
-    A: 3 PresenterInfo as PresenterInfo
-    B: 1 Assembly as PresenterAssembly
-    Preferred Storage: 1
+    A: ZeroOrMore PresenterInfo as PresenterInfo
+    B: ZeroOrOne Assembly as PresenterAssembly
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -402,9 +402,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_PresenterInfo_Assembly_PresenterInfo_54
-    A: 3 PresenterInfo as PresenterInfo
-    B: 1 Assembly as DataAssembly
-    Preferred Storage: 1
+    A: ZeroOrMore PresenterInfo as PresenterInfo
+    B: ZeroOrOne Assembly as DataAssembly
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -417,9 +417,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Projekt_Auftrag_Projekt_30
-    A: 1 Projekt as Projekt
-    B: 3 Auftrag as Auftraege
-    Preferred Storage: 2
+    A: ZeroOrOne Projekt as Projekt
+    B: ZeroOrMore Auftrag as Auftraege
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -432,9 +432,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Projekt_Kostentraeger_Projekt_31
-    A: 2 Projekt as Projekt
-    B: 3 Kostentraeger as Kostentraeger
-    Preferred Storage: 2
+    A: One Projekt as Projekt
+    B: ZeroOrMore Kostentraeger as Kostentraeger
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -447,9 +447,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Projekt_Mitarbeiter_Projekte_23
-    A: 3 Projekt as Projekte
-    B: 3 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 4
+    A: ZeroOrMore Projekt as Projekte
+    B: ZeroOrMore Mitarbeiter as Mitarbeiter
+    Preferred Storage: Separate
 	*/
 
 // The association from A to the CollectionEntry
@@ -465,9 +465,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Projekt_Task_Projekt_22
-    A: 1 Projekt as Projekt
-    B: 3 Task as Tasks
-    Preferred Storage: 2
+    A: ZeroOrOne Projekt as Projekt
+    B: ZeroOrMore Task as Tasks
+    Preferred Storage: Right
 	*/
 
 // basic association
@@ -479,40 +479,10 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_Relation_ObjectReferenceProperty_LeftOf_63
-    A: 1 Relation as LeftOf
-    B: 2 ObjectReferenceProperty as LeftPart
-    Preferred Storage: 1
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Relation_ObjectReferenceProperty_LeftOf_63",
-    "LeftOf", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Relation__Implementation__),
-    "LeftPart", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__)
-    )]
-
-
-	/*
-    Relation: FK_Relation_ObjectReferenceProperty_RightOf_64
-    A: 1 Relation as RightOf
-    B: 2 ObjectReferenceProperty as RightPart
-    Preferred Storage: 1
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Relation_ObjectReferenceProperty_RightOf_64",
-    "RightOf", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Relation__Implementation__),
-    "RightPart", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_Relation_RelationEnd_Relation_71
-    A: 3 Relation as Relation
-    B: 1 RelationEnd as A
-    Preferred Storage: 1
+    A: ZeroOrMore Relation as Relation
+    B: ZeroOrOne RelationEnd as A
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -525,9 +495,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Relation_RelationEnd_Relation_72
-    A: 3 Relation as Relation
-    B: 1 RelationEnd as B
-    Preferred Storage: 1
+    A: ZeroOrMore Relation as Relation
+    B: ZeroOrOne RelationEnd as B
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -540,9 +510,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_RelationEnd_ObjectClass_RelationEnd_73
-    A: 3 RelationEnd as RelationEnd
-    B: 1 ObjectClass as Type
-    Preferred Storage: 1
+    A: ZeroOrMore RelationEnd as RelationEnd
+    B: ZeroOrOne ObjectClass as Type
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -555,9 +525,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_RelationEnd_Property_RelationEnd_74
-    A: 3 RelationEnd as RelationEnd
-    B: 1 Property as Navigator
-    Preferred Storage: 1
+    A: ZeroOrMore RelationEnd as RelationEnd
+    B: ZeroOrOne Property as Navigator
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -570,9 +540,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_StructProperty_Struct_StructProperty_52
-    A: 3 StructProperty as StructProperty
-    B: 1 Struct as StructDefinition
-    Preferred Storage: 1
+    A: ZeroOrMore StructProperty as StructProperty
+    B: ZeroOrOne Struct as StructDefinition
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -585,9 +555,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Taetigkeit_Mitarbeiter_Taetigkeit_32
-    A: 3 Taetigkeit as Taetigkeit
-    B: 1 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 1
+    A: ZeroOrMore Taetigkeit as Taetigkeit
+    B: ZeroOrOne Mitarbeiter as Mitarbeiter
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -600,9 +570,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43
-    A: 3 Taetigkeit as Taetigkeit
-    B: 1 TaetigkeitsArt as TaetigkeitsArt
-    Preferred Storage: 1
+    A: ZeroOrMore Taetigkeit as Taetigkeit
+    B: ZeroOrOne TaetigkeitsArt as TaetigkeitsArt
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -615,9 +585,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Template_Assembly_Template_59
-    A: 3 Template as Template
-    B: 1 Assembly as DisplayedTypeAssembly
-    Preferred Storage: 1
+    A: ZeroOrMore Template as Template
+    B: ZeroOrOne Assembly as DisplayedTypeAssembly
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -630,9 +600,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Template_Visual_Template_58
-    A: 3 Template as Template
-    B: 1 Visual as VisualTree
-    Preferred Storage: 1
+    A: ZeroOrMore Template as Template
+    B: ZeroOrOne Visual as VisualTree
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -645,9 +615,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Template_Visual_Template_61
-    A: 3 Template as Template
-    B: 3 Visual as Menu
-    Preferred Storage: 4
+    A: ZeroOrMore Template as Template
+    B: ZeroOrMore Visual as Menu
+    Preferred Storage: Separate
 	*/
 
 // The association from A to the CollectionEntry
@@ -663,9 +633,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_TestObjClass_Kunde_TestObjClass_50
-    A: 3 TestObjClass as TestObjClass
-    B: 1 Kunde as ObjectProp
-    Preferred Storage: 1
+    A: ZeroOrMore TestObjClass as TestObjClass
+    B: ZeroOrOne Kunde as ObjectProp
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -678,9 +648,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_TypeRef_Assembly_TypeRef_65
-    A: 3 TypeRef as TypeRef
-    B: 1 Assembly as Assembly
-    Preferred Storage: 1
+    A: ZeroOrMore TypeRef as TypeRef
+    B: ZeroOrOne Assembly as Assembly
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -693,9 +663,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_TypeRef_TypeRef_TypeRef_66
-    A: 3 TypeRef as TypeRef
-    B: 3 TypeRef as GenericArguments
-    Preferred Storage: 4
+    A: ZeroOrMore TypeRef as TypeRef
+    B: ZeroOrMore TypeRef as GenericArguments
+    Preferred Storage: Separate
 	*/
 
 // The association from A to the CollectionEntry
@@ -711,9 +681,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_ViewDescriptor_TypeRef_ViewDescriptor_68
-    A: 3 ViewDescriptor as ViewDescriptor
-    B: 1 TypeRef as LayoutRef
-    Preferred Storage: 1
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrOne TypeRef as LayoutRef
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -726,9 +696,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_ViewDescriptor_TypeRef_ViewDescriptor_69
-    A: 3 ViewDescriptor as ViewDescriptor
-    B: 1 TypeRef as ViewRef
-    Preferred Storage: 1
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrOne TypeRef as ViewRef
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -741,9 +711,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Visual_BaseProperty_Visual_56
-    A: 3 Visual as Visual
-    B: 1 BaseProperty as Property
-    Preferred Storage: 1
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrOne BaseProperty as Property
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -756,9 +726,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Visual_Method_Visual_57
-    A: 3 Visual as Visual
-    B: 1 Method as Method
-    Preferred Storage: 1
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrOne Method as Method
+    Preferred Storage: Left
 	*/
 
 // basic association
@@ -771,9 +741,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Visual_Visual_Visual_55
-    A: 3 Visual as Visual
-    B: 3 Visual as Children
-    Preferred Storage: 4
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrMore Visual as Children
+    Preferred Storage: Separate
 	*/
 
 // The association from A to the CollectionEntry
@@ -789,9 +759,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Visual_Visual_Visual_60
-    A: 3 Visual as Visual
-    B: 3 Visual as ContextMenu
-    Preferred Storage: 4
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrMore Visual as ContextMenu
+    Preferred Storage: Separate
 	*/
 
 // The association from A to the CollectionEntry
@@ -807,9 +777,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_42
-    A: 3 Zeitkonto as Zeitkonto
-    B: 3 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 4
+    A: ZeroOrMore Zeitkonto as Zeitkonto
+    B: ZeroOrMore Mitarbeiter as Mitarbeiter
+    Preferred Storage: Separate
 	*/
 
 // The association from A to the CollectionEntry
@@ -825,9 +795,9 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Zeitkonto_Taetigkeit_Zeitkonto_33
-    A: 2 Zeitkonto as Zeitkonto
-    B: 3 Taetigkeit as Taetigkeiten
-    Preferred Storage: 2
+    A: One Zeitkonto as Zeitkonto
+    B: ZeroOrMore Taetigkeit as Taetigkeiten
+    Preferred Storage: Right
 	*/
 
 // basic association

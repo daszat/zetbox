@@ -76,9 +76,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_BaseProperty_Constraint_ConstrainedProperty_62
-    A: 2 BaseProperty as ConstrainedProperty
-    B: 3 Constraint as Constraints
-    Preferred Storage: 2
+    A: One BaseProperty as ConstrainedProperty
+    B: ZeroOrMore Constraint as Constraints
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface
@@ -149,9 +149,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_BaseProperty_Module_BaseProperty_37
-    A: 3 BaseProperty as BaseProperty
-    B: 1 Module as Module
-    Preferred Storage: 1
+    A: ZeroOrMore BaseProperty as BaseProperty
+    B: ZeroOrOne Module as Module
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -251,9 +251,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_DataType_BaseProperty_ObjectClass_19
-    A: 2 DataType as ObjectClass
-    B: 3 BaseProperty as Properties
-    Preferred Storage: 2
+    A: One DataType as ObjectClass
+    B: ZeroOrMore BaseProperty as Properties
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface

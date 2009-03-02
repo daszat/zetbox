@@ -31,9 +31,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_EnumerationProperty_Enumeration_EnumerationProperty_48
-    A: 3 EnumerationProperty as EnumerationProperty
-    B: 1 Enumeration as Enumeration
-    Preferred Storage: 1
+    A: ZeroOrMore EnumerationProperty as EnumerationProperty
+    B: ZeroOrOne Enumeration as Enumeration
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface

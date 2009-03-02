@@ -102,9 +102,9 @@ namespace Kistl.App.Projekte
         /// </summary>
     /*
     Relation: FK_Auftrag_Kunde_Auftrag_34
-    A: 3 Auftrag as Auftrag
-    B: 1 Kunde as Kunde
-    Preferred Storage: 1
+    A: ZeroOrMore Auftrag as Auftrag
+    B: ZeroOrOne Kunde as Kunde
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -204,9 +204,9 @@ namespace Kistl.App.Projekte
         /// </summary>
     /*
     Relation: FK_Auftrag_Mitarbeiter_Auftrag_29
-    A: 3 Auftrag as Auftrag
-    B: 1 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 1
+    A: ZeroOrMore Auftrag as Auftrag
+    B: ZeroOrOne Mitarbeiter as Mitarbeiter
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -306,9 +306,9 @@ namespace Kistl.App.Projekte
         /// </summary>
     /*
     Relation: FK_Projekt_Auftrag_Projekt_30
-    A: 1 Projekt as Projekt
-    B: 3 Auftrag as Auftraege
-    Preferred Storage: 2
+    A: ZeroOrOne Projekt as Projekt
+    B: ZeroOrMore Auftrag as Auftraege
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface

@@ -76,9 +76,9 @@ namespace Kistl.App.Test
         /// </summary>
     /*
     Relation: FK_TestObjClass_Kunde_TestObjClass_50
-    A: 3 TestObjClass as TestObjClass
-    B: 1 Kunde as ObjectProp
-    Preferred Storage: 1
+    A: ZeroOrMore TestObjClass as TestObjClass
+    B: ZeroOrOne Kunde as ObjectProp
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface

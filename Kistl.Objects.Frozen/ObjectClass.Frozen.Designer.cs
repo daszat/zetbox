@@ -842,10 +842,8 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[34],
 			DataStore[13].DefaultModel = null;
 			DataStore[13].Seal();
 			DataStore[14].ClassName = @"ObjectReferenceProperty";
-			DataStore[14].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(3) {
+			DataStore[14].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(1) {
 Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[46],
-Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[185],
-Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[186],
 });
 			DataStore[14].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
@@ -2015,9 +2013,7 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[107],
 			DataStore[76].DefaultModel = null;
 			DataStore[76].Seal();
 			DataStore[77].ClassName = @"Relation";
-			DataStore[77].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(6) {
-Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[181],
-Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[182],
+			DataStore[77].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(4) {
 Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[183],
 Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[184],
 Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[213],

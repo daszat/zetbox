@@ -104,7 +104,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(79);
+		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(77);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74] = 
@@ -325,12 +325,6 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[202] = 
 			DataStore[202] = new NotNullableConstraint__Implementation__Frozen(202);
-
-			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[210] = 
-			DataStore[210] = new NotNullableConstraint__Implementation__Frozen(210);
-
-			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[211] = 
-			DataStore[211] = new NotNullableConstraint__Implementation__Frozen(211);
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212] = 
 			DataStore[212] = new NotNullableConstraint__Implementation__Frozen(212);
@@ -566,12 +560,6 @@ namespace Kistl.App.Base
 			DataStore[202].Reason = null;
 			DataStore[202].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[174];
 			DataStore[202].Seal();
-			DataStore[210].Reason = null;
-			DataStore[210].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[182];
-			DataStore[210].Seal();
-			DataStore[211].Reason = null;
-			DataStore[211].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[181];
-			DataStore[211].Seal();
 			DataStore[212].Reason = @"Cannot create legal O/R mapping without length";
 			DataStore[212].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[28];
 			DataStore[212].Seal();

@@ -23,29 +23,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// This Property is the left Part of the selected Relation.
-        /// </summary>
-        // object reference property
-        public virtual Kistl.App.Base.Relation LeftOf
-        {
-            get
-            {
-                return _LeftOf;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_LeftOf != value)
-                {
-                    NotifyPropertyChanging("LeftOf");
-                    _LeftOf = value;
-                    NotifyPropertyChanged("LeftOf");
-                }
-            }
-        }
-        private Kistl.App.Base.Relation _LeftOf;
-
-        /// <summary>
         /// Pointer zur Objektklasse
         /// </summary>
         // object reference property
@@ -67,29 +44,6 @@ namespace Kistl.App.Base
             }
         }
         private Kistl.App.Base.ObjectClass _ReferenceObjectClass;
-
-        /// <summary>
-        /// This Property is the right Part of the selected Relation.
-        /// </summary>
-        // object reference property
-        public virtual Kistl.App.Base.Relation RightOf
-        {
-            get
-            {
-                return _RightOf;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_RightOf != value)
-                {
-                    NotifyPropertyChanging("RightOf");
-                    _RightOf = value;
-                    NotifyPropertyChanged("RightOf");
-                }
-            }
-        }
-        private Kistl.App.Base.Relation _RightOf;
 
         /// <summary>
         /// 
@@ -194,7 +148,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(72);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(68);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[7] = 
@@ -429,22 +383,6 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[171] = 
 			DataStore[171] = new ObjectReferenceProperty__Implementation__Frozen(171);
 
-			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[181] = 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[181] = 
-			DataStore[181] = new ObjectReferenceProperty__Implementation__Frozen(181);
-
-			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[182] = 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[182] = 
-			DataStore[182] = new ObjectReferenceProperty__Implementation__Frozen(182);
-
-			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[185] = 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[185] = 
-			DataStore[185] = new ObjectReferenceProperty__Implementation__Frozen(185);
-
-			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[186] = 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[186] = 
-			DataStore[186] = new ObjectReferenceProperty__Implementation__Frozen(186);
-
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[206] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[206] = 
 			DataStore[206] = new ObjectReferenceProperty__Implementation__Frozen(206);
@@ -499,8 +437,6 @@ namespace Kistl.App.Base
 			DataStore[7].IsNullable = true;
 			DataStore[7].IsIndexed = false;
 			DataStore[7].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[5];
-			DataStore[7].RightOf = null;
-			DataStore[7].LeftOf = null;
 			DataStore[7].Seal();
 			DataStore[8].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[5];
 			DataStore[8].PropertyName = @"ObjectClass";
@@ -514,8 +450,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[8].IsNullable = false;
 			DataStore[8].IsIndexed = false;
 			DataStore[8].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[8].RightOf = null;
-			DataStore[8].LeftOf = null;
 			DataStore[8].Seal();
 			DataStore[14].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[14].PropertyName = @"Tasks";
@@ -528,8 +462,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[14].IsNullable = true;
 			DataStore[14].IsIndexed = false;
 			DataStore[14].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[4];
-			DataStore[14].RightOf = null;
-			DataStore[14].LeftOf = null;
 			DataStore[14].Seal();
 			DataStore[19].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
 			DataStore[19].PropertyName = @"Projekt";
@@ -542,8 +474,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[19].IsNullable = true;
 			DataStore[19].IsIndexed = false;
 			DataStore[19].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
-			DataStore[19].RightOf = null;
-			DataStore[19].LeftOf = null;
 			DataStore[19].Seal();
 			DataStore[21].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
 			DataStore[21].PropertyName = @"Projekte";
@@ -556,8 +486,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[21].IsNullable = true;
 			DataStore[21].IsIndexed = true;
 			DataStore[21].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
-			DataStore[21].RightOf = null;
-			DataStore[21].LeftOf = null;
 			DataStore[21].Seal();
 			DataStore[22].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[22].PropertyName = @"Mitarbeiter";
@@ -570,8 +498,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[22].IsNullable = true;
 			DataStore[22].IsIndexed = true;
 			DataStore[22].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
-			DataStore[22].RightOf = null;
-			DataStore[22].LeftOf = null;
 			DataStore[22].Seal();
 			DataStore[25].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[25].PropertyName = @"BaseObjectClass";
@@ -584,8 +510,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[25].IsNullable = true;
 			DataStore[25].IsIndexed = false;
 			DataStore[25].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
-			DataStore[25].RightOf = null;
-			DataStore[25].LeftOf = null;
 			DataStore[25].Seal();
 			DataStore[27].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[27].PropertyName = @"SubClasses";
@@ -598,8 +522,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[27].IsNullable = true;
 			DataStore[27].IsIndexed = false;
 			DataStore[27].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
-			DataStore[27].RightOf = null;
-			DataStore[27].LeftOf = null;
 			DataStore[27].Seal();
 			DataStore[29].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
 			DataStore[29].PropertyName = @"ObjectClass";
@@ -613,8 +535,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[141],
 			DataStore[29].IsNullable = false;
 			DataStore[29].IsIndexed = false;
 			DataStore[29].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[29].RightOf = null;
-			DataStore[29].LeftOf = null;
 			DataStore[29].Seal();
 			DataStore[31].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
 			DataStore[31].PropertyName = @"Methods";
@@ -627,8 +547,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[141],
 			DataStore[31].IsNullable = true;
 			DataStore[31].IsIndexed = false;
 			DataStore[31].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
-			DataStore[31].RightOf = null;
-			DataStore[31].LeftOf = null;
 			DataStore[31].Seal();
 			DataStore[44].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
 			DataStore[44].PropertyName = @"DataTypes";
@@ -641,8 +559,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[141],
 			DataStore[44].IsNullable = true;
 			DataStore[44].IsIndexed = false;
 			DataStore[44].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[44].RightOf = null;
-			DataStore[44].LeftOf = null;
 			DataStore[44].Seal();
 			DataStore[45].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
 			DataStore[45].PropertyName = @"Module";
@@ -656,8 +572,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[45].IsNullable = false;
 			DataStore[45].IsIndexed = false;
 			DataStore[45].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[45].RightOf = null;
-			DataStore[45].LeftOf = null;
 			DataStore[45].Seal();
 			DataStore[46].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
 			DataStore[46].PropertyName = @"ReferenceObjectClass";
@@ -670,8 +584,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[46].IsNullable = false;
 			DataStore[46].IsIndexed = false;
 			DataStore[46].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
-			DataStore[46].RightOf = null;
-			DataStore[46].LeftOf = null;
 			DataStore[46].Seal();
 			DataStore[47].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[16];
 			DataStore[47].PropertyName = @"ReferenceProperty";
@@ -684,8 +596,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[47].IsNullable = true;
 			DataStore[47].IsIndexed = false;
 			DataStore[47].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[14];
-			DataStore[47].RightOf = null;
-			DataStore[47].LeftOf = null;
 			DataStore[47].Seal();
 			DataStore[49].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
 			DataStore[49].PropertyName = @"Mitarbeiter";
@@ -698,8 +608,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[49].IsNullable = true;
 			DataStore[49].IsIndexed = false;
 			DataStore[49].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
-			DataStore[49].RightOf = null;
-			DataStore[49].LeftOf = null;
 			DataStore[49].Seal();
 			DataStore[51].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
 			DataStore[51].PropertyName = @"Projekt";
@@ -712,8 +620,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[51].IsNullable = true;
 			DataStore[51].IsIndexed = false;
 			DataStore[51].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
-			DataStore[51].RightOf = null;
-			DataStore[51].LeftOf = null;
 			DataStore[51].Seal();
 			DataStore[53].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[23];
 			DataStore[53].PropertyName = @"Projekt";
@@ -727,8 +633,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[135],
 			DataStore[53].IsNullable = false;
 			DataStore[53].IsIndexed = false;
 			DataStore[53].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
-			DataStore[53].RightOf = null;
-			DataStore[53].LeftOf = null;
 			DataStore[53].Seal();
 			DataStore[54].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
 			DataStore[54].PropertyName = @"Mitarbeiter";
@@ -742,8 +646,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[134],
 			DataStore[54].IsNullable = false;
 			DataStore[54].IsIndexed = false;
 			DataStore[54].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
-			DataStore[54].RightOf = null;
-			DataStore[54].LeftOf = null;
 			DataStore[54].Seal();
 			DataStore[55].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
 			DataStore[55].PropertyName = @"Zeitkonto";
@@ -757,8 +659,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[55].IsNullable = false;
 			DataStore[55].IsIndexed = false;
 			DataStore[55].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[20];
-			DataStore[55].RightOf = null;
-			DataStore[55].LeftOf = null;
 			DataStore[55].Seal();
 			DataStore[58].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
 			DataStore[58].PropertyName = @"Taetigkeiten";
@@ -771,8 +671,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[58].IsNullable = true;
 			DataStore[58].IsIndexed = false;
 			DataStore[58].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[25];
-			DataStore[58].RightOf = null;
-			DataStore[58].LeftOf = null;
 			DataStore[58].Seal();
 			DataStore[64].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
 			DataStore[64].PropertyName = @"Kunde";
@@ -785,8 +683,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[64].IsNullable = true;
 			DataStore[64].IsIndexed = false;
 			DataStore[64].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
-			DataStore[64].RightOf = null;
-			DataStore[64].LeftOf = null;
 			DataStore[64].Seal();
 			DataStore[66].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[66].PropertyName = @"Kostentraeger";
@@ -799,8 +695,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[66].IsNullable = true;
 			DataStore[66].IsIndexed = false;
 			DataStore[66].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[23];
-			DataStore[66].RightOf = null;
-			DataStore[66].LeftOf = null;
 			DataStore[66].Seal();
 			DataStore[67].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[67].PropertyName = @"Auftraege";
@@ -813,8 +707,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[67].IsNullable = true;
 			DataStore[67].IsIndexed = false;
 			DataStore[67].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[19];
-			DataStore[67].RightOf = null;
-			DataStore[67].LeftOf = null;
 			DataStore[67].Seal();
 			DataStore[69].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
 			DataStore[69].PropertyName = @"DefaultIcon";
@@ -827,8 +719,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[69].IsNullable = true;
 			DataStore[69].IsIndexed = false;
 			DataStore[69].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[27];
-			DataStore[69].RightOf = null;
-			DataStore[69].LeftOf = null;
 			DataStore[69].Seal();
 			DataStore[70].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
 			DataStore[70].PropertyName = @"Module";
@@ -842,8 +732,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[127],
 			DataStore[70].IsNullable = false;
 			DataStore[70].IsIndexed = false;
 			DataStore[70].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[70].RightOf = null;
-			DataStore[70].LeftOf = null;
 			DataStore[70].Seal();
 			DataStore[72].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[5];
 			DataStore[72].PropertyName = @"Module";
@@ -857,8 +745,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[125],
 			DataStore[72].IsNullable = false;
 			DataStore[72].IsIndexed = false;
 			DataStore[72].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[72].RightOf = null;
-			DataStore[72].LeftOf = null;
 			DataStore[72].Seal();
 			DataStore[73].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
 			DataStore[73].PropertyName = @"Module";
@@ -872,8 +758,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[124],
 			DataStore[73].IsNullable = false;
 			DataStore[73].IsIndexed = false;
 			DataStore[73].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[73].RightOf = null;
-			DataStore[73].LeftOf = null;
 			DataStore[73].Seal();
 			DataStore[74].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[74].PropertyName = @"Method";
@@ -888,8 +772,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[193],
 			DataStore[74].IsNullable = false;
 			DataStore[74].IsIndexed = false;
 			DataStore[74].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
-			DataStore[74].RightOf = null;
-			DataStore[74].LeftOf = null;
 			DataStore[74].Seal();
 			DataStore[78].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[78].PropertyName = @"Module";
@@ -903,8 +785,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[119],
 			DataStore[78].IsNullable = false;
 			DataStore[78].IsIndexed = false;
 			DataStore[78].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[78].RightOf = null;
-			DataStore[78].LeftOf = null;
 			DataStore[78].Seal();
 			DataStore[79].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[79].PropertyName = @"InvokeOnObjectClass";
@@ -918,8 +798,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[79].IsNullable = false;
 			DataStore[79].IsIndexed = false;
 			DataStore[79].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[79].RightOf = null;
-			DataStore[79].LeftOf = null;
 			DataStore[79].Seal();
 			DataStore[80].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
 			DataStore[80].PropertyName = @"MethodInvocations";
@@ -932,8 +810,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[80].IsNullable = true;
 			DataStore[80].IsIndexed = false;
 			DataStore[80].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[30];
-			DataStore[80].RightOf = null;
-			DataStore[80].LeftOf = null;
 			DataStore[80].Seal();
 			DataStore[81].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
 			DataStore[81].PropertyName = @"MethodInvokations";
@@ -946,8 +822,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[81].IsNullable = true;
 			DataStore[81].IsIndexed = false;
 			DataStore[81].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[30];
-			DataStore[81].RightOf = null;
-			DataStore[81].LeftOf = null;
 			DataStore[81].Seal();
 			DataStore[82].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
 			DataStore[82].PropertyName = @"Assemblies";
@@ -960,8 +834,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[82].IsNullable = true;
 			DataStore[82].IsIndexed = false;
 			DataStore[82].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
-			DataStore[82].RightOf = null;
-			DataStore[82].LeftOf = null;
 			DataStore[82].Seal();
 			DataStore[86].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
 			DataStore[86].PropertyName = @"Mitarbeiter";
@@ -974,8 +846,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[86].IsNullable = true;
 			DataStore[86].IsIndexed = false;
 			DataStore[86].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
-			DataStore[86].RightOf = null;
-			DataStore[86].LeftOf = null;
 			DataStore[86].Seal();
 			DataStore[88].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
 			DataStore[88].PropertyName = @"TaetigkeitsArt";
@@ -988,8 +858,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[88].IsNullable = true;
 			DataStore[88].IsIndexed = false;
 			DataStore[88].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[31];
-			DataStore[88].RightOf = null;
-			DataStore[88].LeftOf = null;
 			DataStore[88].Seal();
 			DataStore[92].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
 			DataStore[92].PropertyName = @"Method";
@@ -1003,8 +871,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[113],
 			DataStore[92].IsNullable = false;
 			DataStore[92].IsIndexed = false;
 			DataStore[92].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
-			DataStore[92].RightOf = null;
-			DataStore[92].LeftOf = null;
 			DataStore[92].Seal();
 			DataStore[96].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
 			DataStore[96].PropertyName = @"Parameter";
@@ -1017,8 +883,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[113],
 			DataStore[96].IsNullable = true;
 			DataStore[96].IsIndexed = true;
 			DataStore[96].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
-			DataStore[96].RightOf = null;
-			DataStore[96].LeftOf = null;
 			DataStore[96].Seal();
 			DataStore[97].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[42];
 			DataStore[97].PropertyName = @"DataType";
@@ -1032,8 +896,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[109],
 			DataStore[97].IsNullable = false;
 			DataStore[97].IsIndexed = false;
 			DataStore[97].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[97].RightOf = null;
-			DataStore[97].LeftOf = null;
 			DataStore[97].Seal();
 			DataStore[98].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[43];
 			DataStore[98].PropertyName = @"Assembly";
@@ -1046,8 +908,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[109],
 			DataStore[98].IsNullable = true;
 			DataStore[98].IsIndexed = false;
 			DataStore[98].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
-			DataStore[98].RightOf = null;
-			DataStore[98].LeftOf = null;
 			DataStore[98].Seal();
 			DataStore[100].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
 			DataStore[100].PropertyName = @"Enumeration";
@@ -1061,8 +921,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[107],
 			DataStore[100].IsNullable = false;
 			DataStore[100].IsIndexed = false;
 			DataStore[100].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[45];
-			DataStore[100].RightOf = null;
-			DataStore[100].LeftOf = null;
 			DataStore[100].Seal();
 			DataStore[103].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45];
 			DataStore[103].PropertyName = @"EnumerationEntries";
@@ -1075,8 +933,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[107],
 			DataStore[103].IsNullable = true;
 			DataStore[103].IsIndexed = false;
 			DataStore[103].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[46];
-			DataStore[103].RightOf = null;
-			DataStore[103].LeftOf = null;
 			DataStore[103].Seal();
 			DataStore[104].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47];
 			DataStore[104].PropertyName = @"Enumeration";
@@ -1090,8 +946,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[106],
 			DataStore[104].IsNullable = false;
 			DataStore[104].IsIndexed = false;
 			DataStore[104].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[45];
-			DataStore[104].RightOf = null;
-			DataStore[104].LeftOf = null;
 			DataStore[104].Seal();
 			DataStore[105].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[105].PropertyName = @"ImplementsInterfaces";
@@ -1104,8 +958,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[106],
 			DataStore[105].IsNullable = true;
 			DataStore[105].IsIndexed = false;
 			DataStore[105].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[44];
-			DataStore[105].RightOf = null;
-			DataStore[105].LeftOf = null;
 			DataStore[105].Seal();
 			DataStore[108].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48];
 			DataStore[108].PropertyName = @"ObjectProp";
@@ -1119,8 +971,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[104],
 			DataStore[108].IsNullable = false;
 			DataStore[108].IsIndexed = false;
 			DataStore[108].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
-			DataStore[108].RightOf = null;
-			DataStore[108].LeftOf = null;
 			DataStore[108].Seal();
 			DataStore[112].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
 			DataStore[112].PropertyName = @"ObjectProp";
@@ -1134,8 +984,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[100],
 			DataStore[112].IsNullable = false;
 			DataStore[112].IsIndexed = false;
 			DataStore[112].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
-			DataStore[112].RightOf = null;
-			DataStore[112].LeftOf = null;
 			DataStore[112].Seal();
 			DataStore[114].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
 			DataStore[114].PropertyName = @"Assembly";
@@ -1149,8 +997,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[98],
 			DataStore[114].IsNullable = false;
 			DataStore[114].IsIndexed = false;
 			DataStore[114].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
-			DataStore[114].RightOf = null;
-			DataStore[114].LeftOf = null;
 			DataStore[114].Seal();
 			DataStore[129].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[64];
 			DataStore[129].PropertyName = @"StructDefinition";
@@ -1164,8 +1010,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[91],
 			DataStore[129].IsNullable = false;
 			DataStore[129].IsIndexed = false;
 			DataStore[129].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[62];
-			DataStore[129].RightOf = null;
-			DataStore[129].LeftOf = null;
 			DataStore[129].Seal();
 			DataStore[138].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
 			DataStore[138].PropertyName = @"PresenterAssembly";
@@ -1179,8 +1023,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 			DataStore[138].IsNullable = false;
 			DataStore[138].IsIndexed = false;
 			DataStore[138].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
-			DataStore[138].RightOf = null;
-			DataStore[138].LeftOf = null;
 			DataStore[138].Seal();
 			DataStore[147].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
 			DataStore[147].PropertyName = @"DataAssembly";
@@ -1193,8 +1035,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 			DataStore[147].IsNullable = true;
 			DataStore[147].IsIndexed = false;
 			DataStore[147].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
-			DataStore[147].RightOf = null;
-			DataStore[147].LeftOf = null;
 			DataStore[147].Seal();
 			DataStore[151].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
 			DataStore[151].PropertyName = @"Children";
@@ -1207,8 +1047,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 			DataStore[151].IsNullable = true;
 			DataStore[151].IsIndexed = false;
 			DataStore[151].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
-			DataStore[151].RightOf = null;
-			DataStore[151].LeftOf = null;
 			DataStore[151].Seal();
 			DataStore[152].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
 			DataStore[152].PropertyName = @"Property";
@@ -1221,8 +1059,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 			DataStore[152].IsNullable = true;
 			DataStore[152].IsIndexed = false;
 			DataStore[152].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[5];
-			DataStore[152].RightOf = null;
-			DataStore[152].LeftOf = null;
 			DataStore[152].Seal();
 			DataStore[153].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
 			DataStore[153].PropertyName = @"Method";
@@ -1236,8 +1072,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[81],
 			DataStore[153].IsNullable = false;
 			DataStore[153].IsIndexed = false;
 			DataStore[153].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
-			DataStore[153].RightOf = null;
-			DataStore[153].LeftOf = null;
 			DataStore[153].Seal();
 			DataStore[155].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
 			DataStore[155].PropertyName = @"VisualTree";
@@ -1251,8 +1085,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[79],
 			DataStore[155].IsNullable = false;
 			DataStore[155].IsIndexed = false;
 			DataStore[155].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
-			DataStore[155].RightOf = null;
-			DataStore[155].LeftOf = null;
 			DataStore[155].Seal();
 			DataStore[163].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
 			DataStore[163].PropertyName = @"DisplayedTypeAssembly";
@@ -1266,8 +1098,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 			DataStore[163].IsNullable = false;
 			DataStore[163].IsIndexed = false;
 			DataStore[163].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
-			DataStore[163].RightOf = null;
-			DataStore[163].LeftOf = null;
 			DataStore[163].Seal();
 			DataStore[164].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
 			DataStore[164].PropertyName = @"ContextMenu";
@@ -1280,8 +1110,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 			DataStore[164].IsNullable = true;
 			DataStore[164].IsIndexed = false;
 			DataStore[164].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
-			DataStore[164].RightOf = null;
-			DataStore[164].LeftOf = null;
 			DataStore[164].Seal();
 			DataStore[165].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
 			DataStore[165].PropertyName = @"Menu";
@@ -1294,8 +1122,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 			DataStore[165].IsNullable = true;
 			DataStore[165].IsIndexed = false;
 			DataStore[165].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
-			DataStore[165].RightOf = null;
-			DataStore[165].LeftOf = null;
 			DataStore[165].Seal();
 			DataStore[170].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[5];
 			DataStore[170].PropertyName = @"Constraints";
@@ -1308,8 +1134,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 			DataStore[170].IsNullable = true;
 			DataStore[170].IsIndexed = false;
 			DataStore[170].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[69];
-			DataStore[170].RightOf = null;
-			DataStore[170].LeftOf = null;
 			DataStore[170].Seal();
 			DataStore[171].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[69];
 			DataStore[171].PropertyName = @"ConstrainedProperty";
@@ -1323,67 +1147,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74],
 			DataStore[171].IsNullable = false;
 			DataStore[171].IsIndexed = false;
 			DataStore[171].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[5];
-			DataStore[171].RightOf = null;
-			DataStore[171].LeftOf = null;
 			DataStore[171].Seal();
-			DataStore[181].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
-			DataStore[181].PropertyName = @"LeftPart";
-			DataStore[181].AltText = @"Left Part of the Relation";
-			DataStore[181].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[181].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[211],
-});
-			DataStore[181].Description = @"Left Part of the Relation";
-			DataStore[181].IsList = false;
-			DataStore[181].IsNullable = true;
-			DataStore[181].IsIndexed = false;
-			DataStore[181].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[14];
-			DataStore[181].RightOf = null;
-			DataStore[181].LeftOf = null;
-			DataStore[181].Seal();
-			DataStore[182].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
-			DataStore[182].PropertyName = @"RightPart";
-			DataStore[182].AltText = @"Right Part of the Relation";
-			DataStore[182].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[182].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[210],
-});
-			DataStore[182].Description = @"Right Part of the Relation";
-			DataStore[182].IsList = false;
-			DataStore[182].IsNullable = true;
-			DataStore[182].IsIndexed = false;
-			DataStore[182].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[14];
-			DataStore[182].RightOf = null;
-			DataStore[182].LeftOf = null;
-			DataStore[182].Seal();
-			DataStore[185].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
-			DataStore[185].PropertyName = @"RightOf";
-			DataStore[185].AltText = @"This Property is the right Part of the selected Relation.";
-			DataStore[185].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[185].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[185].Description = @"This Property is the right Part of the selected Relation.";
-			DataStore[185].IsList = false;
-			DataStore[185].IsNullable = true;
-			DataStore[185].IsIndexed = false;
-			DataStore[185].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[77];
-			DataStore[185].RightOf = null;
-			DataStore[185].LeftOf = null;
-			DataStore[185].Seal();
-			DataStore[186].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
-			DataStore[186].PropertyName = @"LeftOf";
-			DataStore[186].AltText = @"This Property is the left Part of the selected Relation.";
-			DataStore[186].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[186].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[186].Description = @"This Property is the left Part of the selected Relation.";
-			DataStore[186].IsList = false;
-			DataStore[186].IsNullable = true;
-			DataStore[186].IsIndexed = false;
-			DataStore[186].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[77];
-			DataStore[186].RightOf = null;
-			DataStore[186].LeftOf = null;
-			DataStore[186].Seal();
 			DataStore[206].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
 			DataStore[206].PropertyName = @"Assembly";
 			DataStore[206].AltText = @"The assembly containing the referenced Type.";
@@ -1395,8 +1159,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[210],
 			DataStore[206].IsNullable = false;
 			DataStore[206].IsIndexed = false;
 			DataStore[206].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
-			DataStore[206].RightOf = null;
-			DataStore[206].LeftOf = null;
 			DataStore[206].Seal();
 			DataStore[207].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
 			DataStore[207].PropertyName = @"GenericArguments";
@@ -1409,8 +1171,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[210],
 			DataStore[207].IsNullable = true;
 			DataStore[207].IsIndexed = true;
 			DataStore[207].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[207].RightOf = null;
-			DataStore[207].LeftOf = null;
 			DataStore[207].Seal();
 			DataStore[208].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[208].PropertyName = @"Implementor";
@@ -1423,8 +1183,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[210],
 			DataStore[208].IsNullable = false;
 			DataStore[208].IsIndexed = false;
 			DataStore[208].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[208].RightOf = null;
-			DataStore[208].LeftOf = null;
 			DataStore[208].Seal();
 			DataStore[209].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[80];
 			DataStore[209].PropertyName = @"LayoutRef";
@@ -1438,8 +1196,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[213],
 			DataStore[209].IsNullable = false;
 			DataStore[209].IsIndexed = false;
 			DataStore[209].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[209].RightOf = null;
-			DataStore[209].LeftOf = null;
 			DataStore[209].Seal();
 			DataStore[211].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[80];
 			DataStore[211].PropertyName = @"ViewRef";
@@ -1453,8 +1209,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[211].IsNullable = false;
 			DataStore[211].IsIndexed = false;
 			DataStore[211].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[211].RightOf = null;
-			DataStore[211].LeftOf = null;
 			DataStore[211].Seal();
 			DataStore[212].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[212].PropertyName = @"DefaultModel";
@@ -1467,8 +1221,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[212].IsNullable = true;
 			DataStore[212].IsIndexed = false;
 			DataStore[212].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[212].RightOf = null;
-			DataStore[212].LeftOf = null;
 			DataStore[212].Seal();
 			DataStore[213].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
 			DataStore[213].PropertyName = @"A";
@@ -1481,8 +1233,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[213].IsNullable = true;
 			DataStore[213].IsIndexed = false;
 			DataStore[213].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[82];
-			DataStore[213].RightOf = null;
-			DataStore[213].LeftOf = null;
 			DataStore[213].Seal();
 			DataStore[214].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
 			DataStore[214].PropertyName = @"B";
@@ -1495,8 +1245,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[214].IsNullable = true;
 			DataStore[214].IsIndexed = false;
 			DataStore[214].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[82];
-			DataStore[214].RightOf = null;
-			DataStore[214].LeftOf = null;
 			DataStore[214].Seal();
 			DataStore[215].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
 			DataStore[215].PropertyName = @"Type";
@@ -1509,8 +1257,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[215].IsNullable = false;
 			DataStore[215].IsIndexed = false;
 			DataStore[215].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
-			DataStore[215].RightOf = null;
-			DataStore[215].LeftOf = null;
 			DataStore[215].Seal();
 			DataStore[218].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
 			DataStore[218].PropertyName = @"Navigator";
@@ -1523,8 +1269,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[218].IsNullable = true;
 			DataStore[218].IsIndexed = false;
 			DataStore[218].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
-			DataStore[218].RightOf = null;
-			DataStore[218].LeftOf = null;
 			DataStore[218].Seal();
 	
 		}

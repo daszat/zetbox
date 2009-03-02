@@ -31,9 +31,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Enumeration_EnumerationEntry_Enumeration_47
-    A: 2 Enumeration as Enumeration
-    B: 3 EnumerationEntry as EnumerationEntries
-    Preferred Storage: 2
+    A: One Enumeration as Enumeration
+    B: ZeroOrMore EnumerationEntry as EnumerationEntries
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface

@@ -50,9 +50,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Module_Assembly_Module_36
-    A: 2 Module as Module
-    B: 3 Assembly as Assemblies
-    Preferred Storage: 2
+    A: One Module as Module
+    B: ZeroOrMore Assembly as Assemblies
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface
@@ -97,9 +97,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Module_DataType_Module_26
-    A: 2 Module as Module
-    B: 3 DataType as DataTypes
-    Preferred Storage: 2
+    A: One Module as Module
+    B: ZeroOrMore DataType as DataTypes
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface

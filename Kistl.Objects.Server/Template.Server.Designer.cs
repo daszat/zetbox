@@ -50,9 +50,9 @@ namespace Kistl.App.GUI
         /// </summary>
     /*
     Relation: FK_Template_Assembly_Template_59
-    A: 3 Template as Template
-    B: 1 Assembly as DisplayedTypeAssembly
-    Preferred Storage: 1
+    A: ZeroOrMore Template as Template
+    B: ZeroOrOne Assembly as DisplayedTypeAssembly
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -204,9 +204,9 @@ namespace Kistl.App.GUI
         /// </summary>
     /*
     Relation: FK_Template_Visual_Template_61
-    A: 3 Template as Template
-    B: 3 Visual as Menu
-    Preferred Storage: 4
+    A: ZeroOrMore Template as Template
+    B: ZeroOrMore Visual as Menu
+    Preferred Storage: Separate
     */
         // collection reference property
         // implement the user-visible interface
@@ -251,9 +251,9 @@ namespace Kistl.App.GUI
         /// </summary>
     /*
     Relation: FK_Template_Visual_Template_58
-    A: 3 Template as Template
-    B: 1 Visual as VisualTree
-    Preferred Storage: 1
+    A: ZeroOrMore Template as Template
+    B: ZeroOrOne Visual as VisualTree
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface

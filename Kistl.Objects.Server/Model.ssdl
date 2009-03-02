@@ -254,9 +254,9 @@
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
     <!-- 
     Relation: FK_ObjectClass_Interface_ObjectClass_49
-    A: 3 ObjectClass as ObjectClass
-    B: 3 Interface as ImplementsInterfaces
-    Preferred Storage: 4
+    A: ZeroOrMore ObjectClass as ObjectClass
+    B: ZeroOrMore Interface as ImplementsInterfaces
+    Preferred Storage: Separate
     -->
     <EntitySet Name="ObjectClass_ImplementsInterfaces49CollectionEntry" EntityType="Model.Store.ObjectClass_ImplementsInterfaces49CollectionEntry" Table="ObjectClasses_ImplementsInterfacesCollection" />
     <AssociationSet Name="FK_ObjectClass_Interface_ObjectClass_49" Association="Model.Store.FK_ObjectClass_Interface_ObjectClass_49" >
@@ -270,9 +270,9 @@
     
     <!-- 
     Relation: FK_Projekt_Mitarbeiter_Projekte_23
-    A: 3 Projekt as Projekte
-    B: 3 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 4
+    A: ZeroOrMore Projekt as Projekte
+    B: ZeroOrMore Mitarbeiter as Mitarbeiter
+    Preferred Storage: Separate
     -->
     <EntitySet Name="Projekt_Mitarbeiter23CollectionEntry" EntityType="Model.Store.Projekt_Mitarbeiter23CollectionEntry" Table="Projekte_MitarbeiterCollection" />
     <AssociationSet Name="FK_Projekt_Mitarbeiter_Projekte_23" Association="Model.Store.FK_Projekt_Mitarbeiter_Projekte_23" >
@@ -286,9 +286,9 @@
     
     <!-- 
     Relation: FK_Template_Visual_Template_61
-    A: 3 Template as Template
-    B: 3 Visual as Menu
-    Preferred Storage: 4
+    A: ZeroOrMore Template as Template
+    B: ZeroOrMore Visual as Menu
+    Preferred Storage: Separate
     -->
     <EntitySet Name="Template_Menu61CollectionEntry" EntityType="Model.Store.Template_Menu61CollectionEntry" Table="Templates_MenuCollection" />
     <AssociationSet Name="FK_Template_Visual_Template_61" Association="Model.Store.FK_Template_Visual_Template_61" >
@@ -302,9 +302,9 @@
     
     <!-- 
     Relation: FK_TypeRef_TypeRef_TypeRef_66
-    A: 3 TypeRef as TypeRef
-    B: 3 TypeRef as GenericArguments
-    Preferred Storage: 4
+    A: ZeroOrMore TypeRef as TypeRef
+    B: ZeroOrMore TypeRef as GenericArguments
+    Preferred Storage: Separate
     -->
     <EntitySet Name="TypeRef_GenericArguments66CollectionEntry" EntityType="Model.Store.TypeRef_GenericArguments66CollectionEntry" Table="TypeRefs_GenericArgumentsCollection" />
     <AssociationSet Name="FK_TypeRef_TypeRef_TypeRef_66" Association="Model.Store.FK_TypeRef_TypeRef_TypeRef_66" >
@@ -318,9 +318,9 @@
     
     <!-- 
     Relation: FK_Visual_Visual_Visual_55
-    A: 3 Visual as Visual
-    B: 3 Visual as Children
-    Preferred Storage: 4
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrMore Visual as Children
+    Preferred Storage: Separate
     -->
     <EntitySet Name="Visual_Children55CollectionEntry" EntityType="Model.Store.Visual_Children55CollectionEntry" Table="Visuals_ChildrenCollection" />
     <AssociationSet Name="FK_Visual_Visual_Visual_55" Association="Model.Store.FK_Visual_Visual_Visual_55" >
@@ -334,9 +334,9 @@
     
     <!-- 
     Relation: FK_Visual_Visual_Visual_60
-    A: 3 Visual as Visual
-    B: 3 Visual as ContextMenu
-    Preferred Storage: 4
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrMore Visual as ContextMenu
+    Preferred Storage: Separate
     -->
     <EntitySet Name="Visual_ContextMenu60CollectionEntry" EntityType="Model.Store.Visual_ContextMenu60CollectionEntry" Table="Visuals_ContextMenuCollection" />
     <AssociationSet Name="FK_Visual_Visual_Visual_60" Association="Model.Store.FK_Visual_Visual_Visual_60" >
@@ -350,9 +350,9 @@
     
     <!-- 
     Relation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_42
-    A: 3 Zeitkonto as Zeitkonto
-    B: 3 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 4
+    A: ZeroOrMore Zeitkonto as Zeitkonto
+    B: ZeroOrMore Mitarbeiter as Mitarbeiter
+    Preferred Storage: Separate
     -->
     <EntitySet Name="Zeitkonto_Mitarbeiter42CollectionEntry" EntityType="Model.Store.Zeitkonto_Mitarbeiter42CollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
     <AssociationSet Name="FK_Zeitkonto_Mitarbeiter_Zeitkonto_42" Association="Model.Store.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42" >
@@ -482,14 +482,6 @@
     <AssociationSet Name="FK_Projekt_Task_Projekt_22" Association="Model.Store.FK_Projekt_Task_Projekt_22" >
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Tasks" EntitySet="Task" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_LeftOf_63" Association="Model.Store.FK_Relation_ObjectReferenceProperty_LeftOf_63" >
-      <End Role="LeftOf" EntitySet="Relation" />
-      <End Role="LeftPart" EntitySet="ObjectReferenceProperty" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_RightOf_64" Association="Model.Store.FK_Relation_ObjectReferenceProperty_RightOf_64" >
-      <End Role="RightOf" EntitySet="Relation" />
-      <End Role="RightPart" EntitySet="ObjectReferenceProperty" />
     </AssociationSet>
     <AssociationSet Name="FK_Relation_RelationEnd_Relation_71" Association="Model.Store.FK_Relation_RelationEnd_Relation_71" >
       <End Role="Relation" EntitySet="Relation" />
@@ -1129,10 +1121,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_LeftPart" Type="int" />
-    <Property Name="fk_LeftPart_pos" Type="int" Nullable="true" />
-    <Property Name="fk_RightPart" Type="int" />
-    <Property Name="fk_RightPart_pos" Type="int" Nullable="true" />
     <Property Name="Storage" Type="int" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="fk_A" Type="int" />
@@ -1882,36 +1870,6 @@
       </Principal>
       <Dependent Role="Tasks">
         <PropertyRef Name="fk_Projekt" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Relation_ObjectReferenceProperty_LeftOf_63">
-    <End Role="LeftPart" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="LeftOf" Type="Model.Store.Relation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="LeftPart">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="LeftOf">
-        <PropertyRef Name="fk_LeftPart" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Relation_ObjectReferenceProperty_RightOf_64">
-    <End Role="RightPart" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="RightOf" Type="Model.Store.Relation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RightPart">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="RightOf">
-        <PropertyRef Name="fk_RightPart" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

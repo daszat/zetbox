@@ -50,9 +50,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_MethodInvocation_TypeRef_MethodInvocation_67
-    A: 3 MethodInvocation as MethodInvocation
-    B: 1 TypeRef as Implementor
-    Preferred Storage: 1
+    A: ZeroOrMore MethodInvocation as MethodInvocation
+    B: ZeroOrOne TypeRef as Implementor
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -152,9 +152,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_DataType_MethodInvocation_InvokeOnObjectClass_41
-    A: 2 DataType as InvokeOnObjectClass
-    B: 3 MethodInvocation as MethodInvocations
-    Preferred Storage: 2
+    A: One DataType as InvokeOnObjectClass
+    B: ZeroOrMore MethodInvocation as MethodInvocations
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface
@@ -280,9 +280,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Method_MethodInvocation_Method_39
-    A: 2 Method as Method
-    B: 3 MethodInvocation as MethodInvokations
-    Preferred Storage: 2
+    A: One Method as Method
+    B: ZeroOrMore MethodInvocation as MethodInvokations
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface
@@ -382,9 +382,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_MethodInvocation_Module_MethodInvocation_40
-    A: 3 MethodInvocation as MethodInvocation
-    B: 1 Module as Module
-    Preferred Storage: 1
+    A: ZeroOrMore MethodInvocation as MethodInvocation
+    B: ZeroOrOne Module as Module
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface

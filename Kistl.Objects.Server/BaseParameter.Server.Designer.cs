@@ -128,9 +128,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Method_BaseParameter_Method_44
-    A: 2 Method as Method
-    B: 3 BaseParameter as Parameter
-    Preferred Storage: 2
+    A: One Method as Method
+    B: ZeroOrMore BaseParameter as Parameter
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface

@@ -102,9 +102,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Method_MethodInvocation_Method_39
-    A: 2 Method as Method
-    B: 3 MethodInvocation as MethodInvokations
-    Preferred Storage: 2
+    A: One Method as Method
+    B: ZeroOrMore MethodInvocation as MethodInvokations
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface
@@ -175,9 +175,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Method_Module_Method_38
-    A: 3 Method as Method
-    B: 1 Module as Module
-    Preferred Storage: 1
+    A: ZeroOrMore Method as Method
+    B: ZeroOrOne Module as Module
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -277,9 +277,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_DataType_Method_ObjectClass_25
-    A: 2 DataType as ObjectClass
-    B: 3 Method as Methods
-    Preferred Storage: 2
+    A: One DataType as ObjectClass
+    B: ZeroOrMore Method as Methods
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface
@@ -379,9 +379,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Method_BaseParameter_Method_44
-    A: 2 Method as Method
-    B: 3 BaseParameter as Parameter
-    Preferred Storage: 2
+    A: One Method as Method
+    B: ZeroOrMore BaseParameter as Parameter
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface

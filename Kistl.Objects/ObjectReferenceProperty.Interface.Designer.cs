@@ -17,15 +17,5 @@ namespace Kistl.App.Base
         /// </summary>
 
 		Kistl.App.Base.ObjectClass ReferenceObjectClass { get; set; }
-        /// <summary>
-        /// This Property is the right Part of the selected Relation.
-        /// </summary>
-
-		Kistl.App.Base.Relation RightOf { get; set; }
-        /// <summary>
-        /// This Property is the left Part of the selected Relation.
-        /// </summary>
-
-		Kistl.App.Base.Relation LeftOf { get; set; }
     }
 }

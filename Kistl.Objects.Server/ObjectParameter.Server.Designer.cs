@@ -31,9 +31,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_ObjectParameter_DataType_ObjectParameter_45
-    A: 3 ObjectParameter as ObjectParameter
-    B: 1 DataType as DataType
-    Preferred Storage: 1
+    A: ZeroOrMore ObjectParameter as ObjectParameter
+    B: ZeroOrOne DataType as DataType
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface

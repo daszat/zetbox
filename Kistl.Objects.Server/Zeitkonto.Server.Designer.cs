@@ -128,9 +128,9 @@ namespace Kistl.App.Zeiterfassung
         /// </summary>
     /*
     Relation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_42
-    A: 3 Zeitkonto as Zeitkonto
-    B: 3 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 4
+    A: ZeroOrMore Zeitkonto as Zeitkonto
+    B: ZeroOrMore Mitarbeiter as Mitarbeiter
+    Preferred Storage: Separate
     */
         // collection reference property
         // implement the user-visible interface
@@ -175,9 +175,9 @@ namespace Kistl.App.Zeiterfassung
         /// </summary>
     /*
     Relation: FK_Zeitkonto_Taetigkeit_Zeitkonto_33
-    A: 2 Zeitkonto as Zeitkonto
-    B: 3 Taetigkeit as Taetigkeiten
-    Preferred Storage: 2
+    A: One Zeitkonto as Zeitkonto
+    B: ZeroOrMore Taetigkeit as Taetigkeiten
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface

@@ -134,116 +134,6 @@ namespace Kistl.App.Base
         private string _Description;
 
         /// <summary>
-        /// Left Part of the Relation
-        /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.ObjectReferenceProperty LeftPart
-        {
-            get
-            {
-                if (fk_LeftPart.HasValue)
-                    return Context.Find<Kistl.App.Base.ObjectReferenceProperty>(fk_LeftPart.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                // fix up inverse reference
-                var oldValue = LeftPart;
-                if (value != null && value.ID != fk_LeftPart)
-                {
-                    fk_LeftPart = value.ID;
-                    value.LeftOf = this;
-                }
-                else
-                {
-                    fk_LeftPart = null;
-                    value.LeftOf = null;
-                }
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_LeftPart
-        {
-            get
-            {
-                return _fk_LeftPart;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_LeftPart != value)
-                {
-                    NotifyPropertyChanging("LeftPart");
-                    _fk_LeftPart = value;
-                    NotifyPropertyChanging("LeftPart");
-                }
-            }
-        }
-        private int? _fk_LeftPart;
-
-        /// <summary>
-        /// Right Part of the Relation
-        /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.ObjectReferenceProperty RightPart
-        {
-            get
-            {
-                if (fk_RightPart.HasValue)
-                    return Context.Find<Kistl.App.Base.ObjectReferenceProperty>(fk_RightPart.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                // fix up inverse reference
-                var oldValue = RightPart;
-                if (value != null && value.ID != fk_RightPart)
-                {
-                    fk_RightPart = value.ID;
-                    value.RightOf = this;
-                }
-                else
-                {
-                    fk_RightPart = null;
-                    value.RightOf = null;
-                }
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_RightPart
-        {
-            get
-            {
-                return _fk_RightPart;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_RightPart != value)
-                {
-                    NotifyPropertyChanging("RightPart");
-                    _fk_RightPart = value;
-                    NotifyPropertyChanging("RightPart");
-                }
-            }
-        }
-        private int? _fk_RightPart;
-
-        /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
         // enumeration property
@@ -312,8 +202,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._fk_LeftPart, binStream);
-            BinarySerializer.ToStream(this._fk_RightPart, binStream);
             BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
         }
 
@@ -323,8 +211,6 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._fk_LeftPart, binStream);
-            BinarySerializer.FromStream(out this._fk_RightPart, binStream);
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
         }
 

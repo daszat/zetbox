@@ -31,9 +31,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_ObjectClass_ObjectClass_BaseObjectClass_24
-    A: 1 ObjectClass as BaseObjectClass
-    B: 3 ObjectClass as SubClasses
-    Preferred Storage: 2
+    A: ZeroOrOne ObjectClass as BaseObjectClass
+    B: ZeroOrMore ObjectClass as SubClasses
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface
@@ -133,9 +133,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_ObjectClass_TypeRef_ObjectClass_70
-    A: 3 ObjectClass as ObjectClass
-    B: 1 TypeRef as DefaultModel
-    Preferred Storage: 1
+    A: ZeroOrMore ObjectClass as ObjectClass
+    B: ZeroOrOne TypeRef as DefaultModel
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -235,9 +235,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_ObjectClass_Interface_ObjectClass_49
-    A: 3 ObjectClass as ObjectClass
-    B: 3 Interface as ImplementsInterfaces
-    Preferred Storage: 4
+    A: ZeroOrMore ObjectClass as ObjectClass
+    B: ZeroOrMore Interface as ImplementsInterfaces
+    Preferred Storage: Separate
     */
         // collection reference property
         // implement the user-visible interface
@@ -334,9 +334,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_ObjectClass_ObjectClass_BaseObjectClass_24
-    A: 1 ObjectClass as BaseObjectClass
-    B: 3 ObjectClass as SubClasses
-    Preferred Storage: 2
+    A: ZeroOrOne ObjectClass as BaseObjectClass
+    B: ZeroOrMore ObjectClass as SubClasses
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface

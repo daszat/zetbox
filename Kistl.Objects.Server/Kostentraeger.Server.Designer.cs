@@ -31,9 +31,9 @@ namespace Kistl.App.Zeiterfassung
         /// </summary>
     /*
     Relation: FK_Projekt_Kostentraeger_Projekt_31
-    A: 2 Projekt as Projekt
-    B: 3 Kostentraeger as Kostentraeger
-    Preferred Storage: 2
+    A: One Projekt as Projekt
+    B: ZeroOrMore Kostentraeger as Kostentraeger
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface

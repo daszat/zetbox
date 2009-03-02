@@ -50,9 +50,9 @@ namespace Kistl.App.GUI
         /// </summary>
     /*
     Relation: FK_ControlInfo_Assembly_ControlInfo_51
-    A: 3 ControlInfo as ControlInfo
-    B: 1 Assembly as Assembly
-    Preferred Storage: 1
+    A: ZeroOrMore ControlInfo as ControlInfo
+    B: ZeroOrOne Assembly as Assembly
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface

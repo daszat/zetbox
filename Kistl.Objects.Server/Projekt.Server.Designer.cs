@@ -50,9 +50,9 @@ namespace Kistl.App.Projekte
         /// </summary>
     /*
     Relation: FK_Projekt_Auftrag_Projekt_30
-    A: 1 Projekt as Projekt
-    B: 3 Auftrag as Auftraege
-    Preferred Storage: 2
+    A: ZeroOrOne Projekt as Projekt
+    B: ZeroOrMore Auftrag as Auftraege
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface
@@ -123,9 +123,9 @@ namespace Kistl.App.Projekte
         /// </summary>
     /*
     Relation: FK_Projekt_Kostentraeger_Projekt_31
-    A: 2 Projekt as Projekt
-    B: 3 Kostentraeger as Kostentraeger
-    Preferred Storage: 2
+    A: One Projekt as Projekt
+    B: ZeroOrMore Kostentraeger as Kostentraeger
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface
@@ -196,9 +196,9 @@ namespace Kistl.App.Projekte
         /// </summary>
     /*
     Relation: FK_Projekt_Mitarbeiter_Projekte_23
-    A: 3 Projekt as Projekte
-    B: 3 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 4
+    A: ZeroOrMore Projekt as Projekte
+    B: ZeroOrMore Mitarbeiter as Mitarbeiter
+    Preferred Storage: Separate
     */
         // collection reference property
         // implement the user-visible interface
@@ -269,9 +269,9 @@ namespace Kistl.App.Projekte
         /// </summary>
     /*
     Relation: FK_Projekt_Task_Projekt_22
-    A: 1 Projekt as Projekt
-    B: 3 Task as Tasks
-    Preferred Storage: 2
+    A: ZeroOrOne Projekt as Projekt
+    B: ZeroOrMore Task as Tasks
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface

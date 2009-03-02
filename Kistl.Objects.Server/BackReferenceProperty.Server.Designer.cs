@@ -57,9 +57,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28
-    A: 3 BackReferenceProperty as BackReferenceProperty
-    B: 1 ObjectReferenceProperty as ReferenceProperty
-    Preferred Storage: 1
+    A: ZeroOrMore BackReferenceProperty as BackReferenceProperty
+    B: ZeroOrOne ObjectReferenceProperty as ReferenceProperty
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface

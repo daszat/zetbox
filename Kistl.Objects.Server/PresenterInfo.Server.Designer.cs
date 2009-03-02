@@ -92,9 +92,9 @@ namespace Kistl.App.GUI
         /// </summary>
     /*
     Relation: FK_PresenterInfo_Assembly_PresenterInfo_54
-    A: 3 PresenterInfo as PresenterInfo
-    B: 1 Assembly as DataAssembly
-    Preferred Storage: 1
+    A: ZeroOrMore PresenterInfo as PresenterInfo
+    B: ZeroOrOne Assembly as DataAssembly
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -220,9 +220,9 @@ namespace Kistl.App.GUI
         /// </summary>
     /*
     Relation: FK_PresenterInfo_Assembly_PresenterInfo_53
-    A: 3 PresenterInfo as PresenterInfo
-    B: 1 Assembly as PresenterAssembly
-    Preferred Storage: 1
+    A: ZeroOrMore PresenterInfo as PresenterInfo
+    B: ZeroOrOne Assembly as PresenterAssembly
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface

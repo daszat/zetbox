@@ -223,14 +223,6 @@
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Tasks" EntitySet="Task" />
     </AssociationSet>
-    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_LeftOf_63" Association="Model.FK_Relation_ObjectReferenceProperty_LeftOf_63" >
-      <End Role="LeftOf" EntitySet="Relation" />
-      <End Role="LeftPart" EntitySet="BaseProperty" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Relation_ObjectReferenceProperty_RightOf_64" Association="Model.FK_Relation_ObjectReferenceProperty_RightOf_64" >
-      <End Role="RightOf" EntitySet="Relation" />
-      <End Role="RightPart" EntitySet="BaseProperty" />
-    </AssociationSet>
     <AssociationSet Name="FK_Relation_RelationEnd_Relation_71" Association="Model.FK_Relation_RelationEnd_Relation_71" >
       <End Role="Relation" EntitySet="Relation" />
       <End Role="A" EntitySet="RelationEnd" />
@@ -618,16 +610,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="LeftPart__Implementation__"
-                        Relationship="Model.FK_Relation_ObjectReferenceProperty_LeftOf_63"
-                        FromRole="LeftOf"
-                        ToRole="LeftPart" />
-    <Property Name="LeftPart_pos" Type="Int32" Nullable="true" />
-    <NavigationProperty Name="RightPart__Implementation__"
-                        Relationship="Model.FK_Relation_ObjectReferenceProperty_RightOf_64"
-                        FromRole="RightOf"
-                        ToRole="RightPart" />
-    <Property Name="RightPart_pos" Type="Int32" Nullable="true" />
     <Property Name="Storage" Type="Int32" Nullable="true" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <NavigationProperty Name="A__Implementation__"
@@ -938,14 +920,6 @@
                         FromRole="ObjectReferenceProperty"
                         ToRole="ReferenceObjectClass" />
     <Property Name="ReferenceObjectClass_pos" Type="Int32" Nullable="true" />
-    <NavigationProperty Name="RightOf__Implementation__"
-                        Relationship="Model.FK_Relation_ObjectReferenceProperty_RightOf_64"
-                        FromRole="RightPart"
-                        ToRole="RightOf" />
-    <NavigationProperty Name="LeftOf__Implementation__"
-                        Relationship="Model.FK_Relation_ObjectReferenceProperty_LeftOf_63"
-                        FromRole="LeftPart"
-                        ToRole="LeftOf" />
   </EntityType>
   <EntityType Name="Property" BaseType="Model.BaseProperty" >
     <Property Name="IsList" Type="Boolean" Nullable="false" />
@@ -976,9 +950,9 @@
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
   <!--
     Relation: FK_ObjectClass_Interface_ObjectClass_49
-    A: 3 ObjectClass as ObjectClass
-    B: 3 Interface as ImplementsInterfaces
-    Preferred Storage: 4
+    A: ZeroOrMore ObjectClass as ObjectClass
+    B: ZeroOrMore Interface as ImplementsInterfaces
+    Preferred Storage: Separate
   -->
   <EntityType Name="ObjectClass_ImplementsInterfaces49CollectionEntry" >
     <Key>
@@ -1017,9 +991,9 @@
   
   <!--
     Relation: FK_Projekt_Mitarbeiter_Projekte_23
-    A: 3 Projekt as Projekte
-    B: 3 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 4
+    A: ZeroOrMore Projekt as Projekte
+    B: ZeroOrMore Mitarbeiter as Mitarbeiter
+    Preferred Storage: Separate
   -->
   <EntityType Name="Projekt_Mitarbeiter23CollectionEntry" >
     <Key>
@@ -1060,9 +1034,9 @@
   
   <!--
     Relation: FK_Template_Visual_Template_61
-    A: 3 Template as Template
-    B: 3 Visual as Menu
-    Preferred Storage: 4
+    A: ZeroOrMore Template as Template
+    B: ZeroOrMore Visual as Menu
+    Preferred Storage: Separate
   -->
   <EntityType Name="Template_Menu61CollectionEntry" >
     <Key>
@@ -1101,9 +1075,9 @@
   
   <!--
     Relation: FK_TypeRef_TypeRef_TypeRef_66
-    A: 3 TypeRef as TypeRef
-    B: 3 TypeRef as GenericArguments
-    Preferred Storage: 4
+    A: ZeroOrMore TypeRef as TypeRef
+    B: ZeroOrMore TypeRef as GenericArguments
+    Preferred Storage: Separate
   -->
   <EntityType Name="TypeRef_GenericArguments66CollectionEntry" >
     <Key>
@@ -1143,9 +1117,9 @@
   
   <!--
     Relation: FK_Visual_Visual_Visual_55
-    A: 3 Visual as Visual
-    B: 3 Visual as Children
-    Preferred Storage: 4
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrMore Visual as Children
+    Preferred Storage: Separate
   -->
   <EntityType Name="Visual_Children55CollectionEntry" >
     <Key>
@@ -1184,9 +1158,9 @@
   
   <!--
     Relation: FK_Visual_Visual_Visual_60
-    A: 3 Visual as Visual
-    B: 3 Visual as ContextMenu
-    Preferred Storage: 4
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrMore Visual as ContextMenu
+    Preferred Storage: Separate
   -->
   <EntityType Name="Visual_ContextMenu60CollectionEntry" >
     <Key>
@@ -1225,9 +1199,9 @@
   
   <!--
     Relation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_42
-    A: 3 Zeitkonto as Zeitkonto
-    B: 3 Mitarbeiter as Mitarbeiter
-    Preferred Storage: 4
+    A: ZeroOrMore Zeitkonto as Zeitkonto
+    B: ZeroOrMore Mitarbeiter as Mitarbeiter
+    Preferred Storage: Separate
   -->
   <EntityType Name="Zeitkonto_Mitarbeiter42CollectionEntry" >
     <Key>
@@ -1523,22 +1497,6 @@
     <End Role="Tasks"
          Type="Model.Task" 
          Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Relation_ObjectReferenceProperty_LeftOf_63" >
-    <End Role="LeftOf"
-         Type="Model.Relation" 
-         Multiplicity="0..1" />
-    <End Role="LeftPart"
-         Type="Model.ObjectReferenceProperty" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Relation_ObjectReferenceProperty_RightOf_64" >
-    <End Role="RightOf"
-         Type="Model.Relation" 
-         Multiplicity="0..1" />
-    <End Role="RightPart"
-         Type="Model.ObjectReferenceProperty" 
-         Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Relation_RelationEnd_Relation_71" >
     <End Role="Relation"

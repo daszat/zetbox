@@ -76,9 +76,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_DataType_Icon_DataType_35
-    A: 3 DataType as DataType
-    B: 1 Icon as DefaultIcon
-    Preferred Storage: 1
+    A: ZeroOrMore DataType as DataType
+    B: ZeroOrOne Icon as DefaultIcon
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -204,9 +204,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_DataType_MethodInvocation_InvokeOnObjectClass_41
-    A: 2 DataType as InvokeOnObjectClass
-    B: 3 MethodInvocation as MethodInvocations
-    Preferred Storage: 2
+    A: One DataType as InvokeOnObjectClass
+    B: ZeroOrMore MethodInvocation as MethodInvocations
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface
@@ -251,9 +251,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_DataType_Method_ObjectClass_25
-    A: 2 DataType as ObjectClass
-    B: 3 Method as Methods
-    Preferred Storage: 2
+    A: One DataType as ObjectClass
+    B: ZeroOrMore Method as Methods
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface
@@ -298,9 +298,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Module_DataType_Module_26
-    A: 2 Module as Module
-    B: 3 DataType as DataTypes
-    Preferred Storage: 2
+    A: One Module as Module
+    B: ZeroOrMore DataType as DataTypes
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface
@@ -400,9 +400,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_DataType_BaseProperty_ObjectClass_19
-    A: 2 DataType as ObjectClass
-    B: 3 BaseProperty as Properties
-    Preferred Storage: 2
+    A: One DataType as ObjectClass
+    B: ZeroOrMore BaseProperty as Properties
+    Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface

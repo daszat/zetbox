@@ -102,9 +102,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Module_Assembly_Module_36
-    A: 2 Module as Module
-    B: 3 Assembly as Assemblies
-    Preferred Storage: 2
+    A: One Module as Module
+    B: ZeroOrMore Assembly as Assemblies
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface

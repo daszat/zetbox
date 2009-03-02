@@ -50,9 +50,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_BaseProperty_Constraint_ConstrainedProperty_62
-    A: 2 BaseProperty as ConstrainedProperty
-    B: 3 Constraint as Constraints
-    Preferred Storage: 2
+    A: One BaseProperty as ConstrainedProperty
+    B: ZeroOrMore Constraint as Constraints
+    Preferred Storage: Right
     */
         // object reference property
         // implement the user-visible interface

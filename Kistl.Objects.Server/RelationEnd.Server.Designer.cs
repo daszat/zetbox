@@ -118,9 +118,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_RelationEnd_Property_RelationEnd_74
-    A: 3 RelationEnd as RelationEnd
-    B: 1 Property as Navigator
-    Preferred Storage: 1
+    A: ZeroOrMore RelationEnd as RelationEnd
+    B: ZeroOrOne Property as Navigator
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -272,9 +272,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_RelationEnd_ObjectClass_RelationEnd_73
-    A: 3 RelationEnd as RelationEnd
-    B: 1 ObjectClass as Type
-    Preferred Storage: 1
+    A: ZeroOrMore RelationEnd as RelationEnd
+    B: ZeroOrOne ObjectClass as Type
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface

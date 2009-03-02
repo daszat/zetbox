@@ -50,9 +50,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_ViewDescriptor_TypeRef_ViewDescriptor_68
-    A: 3 ViewDescriptor as ViewDescriptor
-    B: 1 TypeRef as LayoutRef
-    Preferred Storage: 1
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrOne TypeRef as LayoutRef
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
@@ -194,9 +194,9 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_ViewDescriptor_TypeRef_ViewDescriptor_69
-    A: 3 ViewDescriptor as ViewDescriptor
-    B: 1 TypeRef as ViewRef
-    Preferred Storage: 1
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrOne TypeRef as ViewRef
+    Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
