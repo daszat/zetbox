@@ -63,11 +63,11 @@ namespace Kistl.IntegrationTests
             test.SetUp();
             test.Relation_n_m_Set_m();
 
-            test.SetUp();
-            test.Relation_1_1_Set_Left();
+            //test.SetUp();
+            //test.Relation_1_1_Set_Left();
 
-            test.SetUp();
-            test.Relation_1_1_Set_Right();
+            //test.SetUp();
+            //test.Relation_1_1_Set_Right();
 
             test.SetUp();
             test.Change_Relation_1_n_Set_1();
