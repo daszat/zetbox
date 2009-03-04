@@ -105,27 +105,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Enumeration_pos
-        {
-            get
-            {
-                return _Enumeration_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Enumeration_pos != value)
-                {
-                    NotifyPropertyChanging("Enumeration_pos");
-                    _Enumeration_pos = value;
-                    NotifyPropertyChanged("Enumeration_pos");
-                }
-            }
-        }
-        private int? _Enumeration_pos;
         
 
         /// <summary>
@@ -235,7 +214,6 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_Enumeration, binStream);
-            BinarySerializer.ToStream(this._Enumeration_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -246,7 +224,6 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Enumeration = tmp;
             }
-            BinarySerializer.FromStream(out this._Enumeration_pos, binStream);
         }
 
 #endregion

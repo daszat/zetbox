@@ -150,27 +150,6 @@ namespace Kistl.App.Test
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? ObjectProp_pos
-        {
-            get
-            {
-                return _ObjectProp_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ObjectProp_pos != value)
-                {
-                    NotifyPropertyChanging("ObjectProp_pos");
-                    _ObjectProp_pos = value;
-                    NotifyPropertyChanged("ObjectProp_pos");
-                }
-            }
-        }
-        private int? _ObjectProp_pos;
         
 
         /// <summary>
@@ -307,7 +286,6 @@ namespace Kistl.App.Test
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._MyIntProperty, binStream);
             BinarySerializer.ToStream(this.fk_ObjectProp, binStream);
-            BinarySerializer.ToStream(this._ObjectProp_pos, binStream);
             BinarySerializer.ToStream(this._StringProp, binStream);
             BinarySerializer.ToStream((int)((TestObjClass)this).TestEnumProp, binStream);
         }
@@ -321,7 +299,6 @@ namespace Kistl.App.Test
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_ObjectProp = tmp;
             }
-            BinarySerializer.FromStream(out this._ObjectProp_pos, binStream);
             BinarySerializer.FromStream(out this._StringProp, binStream);
             BinarySerializer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
         }

@@ -166,27 +166,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? DataAssembly_pos
-        {
-            get
-            {
-                return _DataAssembly_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_DataAssembly_pos != value)
-                {
-                    NotifyPropertyChanging("DataAssembly_pos");
-                    _DataAssembly_pos = value;
-                    NotifyPropertyChanged("DataAssembly_pos");
-                }
-            }
-        }
-        private int? _DataAssembly_pos;
         
 
         /// <summary>
@@ -294,27 +273,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? PresenterAssembly_pos
-        {
-            get
-            {
-                return _PresenterAssembly_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_PresenterAssembly_pos != value)
-                {
-                    NotifyPropertyChanging("PresenterAssembly_pos");
-                    _PresenterAssembly_pos = value;
-                    NotifyPropertyChanged("PresenterAssembly_pos");
-                }
-            }
-        }
-        private int? _PresenterAssembly_pos;
         
 
         /// <summary>
@@ -388,10 +346,8 @@ namespace Kistl.App.GUI
             base.ToStream(binStream);
             BinarySerializer.ToStream((int)((PresenterInfo)this).ControlType, binStream);
             BinarySerializer.ToStream(this.fk_DataAssembly, binStream);
-            BinarySerializer.ToStream(this._DataAssembly_pos, binStream);
             BinarySerializer.ToStream(this._DataTypeName, binStream);
             BinarySerializer.ToStream(this.fk_PresenterAssembly, binStream);
-            BinarySerializer.ToStream(this._PresenterAssembly_pos, binStream);
             BinarySerializer.ToStream(this._PresenterTypeName, binStream);
         }
 
@@ -404,14 +360,12 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_DataAssembly = tmp;
             }
-            BinarySerializer.FromStream(out this._DataAssembly_pos, binStream);
             BinarySerializer.FromStream(out this._DataTypeName, binStream);
             {
                 var tmp = this.fk_PresenterAssembly;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_PresenterAssembly = tmp;
             }
-            BinarySerializer.FromStream(out this._PresenterAssembly_pos, binStream);
             BinarySerializer.FromStream(out this._PresenterTypeName, binStream);
         }
 

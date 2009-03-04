@@ -74,10 +74,13 @@ namespace Kistl.API
 
             sw.Write(MaxListCount);
             BinarySerializer.ToStream(Filter, sw);
-            foreach (var o in OrderBy)
+            if (OrderBy != null)
             {
-                BinarySerializer.ToStream(true, sw);
-                BinarySerializer.ToStream(o, sw);
+                foreach (var o in OrderBy)
+                {
+                    BinarySerializer.ToStream(true, sw);
+                    BinarySerializer.ToStream(o, sw);
+                }
             }
             BinarySerializer.ToStream(false, sw);
         }

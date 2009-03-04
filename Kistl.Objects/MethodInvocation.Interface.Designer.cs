@@ -18,11 +18,6 @@ namespace Kistl.App.Base
 
 		Kistl.App.Base.Method Method { get; set; }
         /// <summary>
-        /// Name des implementierenden Members
-        /// </summary>
-
-		string MemberName { get; set; }
-        /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
 
@@ -32,6 +27,11 @@ namespace Kistl.App.Base
         /// </summary>
 
 		Kistl.App.Base.DataType InvokeOnObjectClass { get; set; }
+        /// <summary>
+        /// Name des implementierenden Members
+        /// </summary>
+
+		string MemberName { get; set; }
         /// <summary>
         /// The Type implementing this invocation
         /// </summary>

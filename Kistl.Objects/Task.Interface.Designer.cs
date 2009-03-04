@@ -13,6 +13,11 @@ namespace Kistl.App.Projekte
     {
 
         /// <summary>
+        /// Verknüpfung zum Projekt
+        /// </summary>
+
+		Kistl.App.Projekte.Projekt Projekt { get; set; }
+        /// <summary>
         /// Taskname
         /// </summary>
 
@@ -32,10 +37,5 @@ namespace Kistl.App.Projekte
         /// </summary>
 
 		double? Aufwand { get; set; }
-        /// <summary>
-        /// Verknüpfung zum Projekt
-        /// </summary>
-
-		Kistl.App.Projekte.Projekt Projekt { get; set; }
     }
 }

@@ -534,6 +534,24 @@ namespace Kistl.App.Base
             }
         }
         private int? _fk_B;
+        public virtual int? B_pos
+        {
+            get
+            {
+                return _B_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_B_pos != value)
+                {
+                    NotifyPropertyChanging("B_pos");
+                    _B_pos = value;
+                    NotifyPropertyChanged("B_pos");
+                }
+            }
+        }
+        private int? _B_pos;
 
 
 
@@ -544,8 +562,7 @@ public int? AIndex { get { return A_pos; } set { A_pos = value; } }
         /// <summary>
         /// Index into the B-side list of this relation
         /// </summary>
-/// <summary>ignored implementation for INewListEntry</summary>
-public int? BIndex { get { return null; } set { } }
+public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 #region Serializer
 
 
@@ -555,7 +572,9 @@ public int? BIndex { get { return null; } set { } }
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
+            BinarySerializer.ToStream(this._B_pos, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
+            BinarySerializer.ToStream(this._B_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -564,7 +583,9 @@ public int? BIndex { get { return null; } set { } }
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._A_pos, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
             BinarySerializer.FromStream(out this._A_pos, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
         }
 
 #endregion

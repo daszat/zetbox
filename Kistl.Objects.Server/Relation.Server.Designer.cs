@@ -124,27 +124,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? A_pos
-        {
-            get
-            {
-                return _A_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_A_pos != value)
-                {
-                    NotifyPropertyChanging("A_pos");
-                    _A_pos = value;
-                    NotifyPropertyChanged("A_pos");
-                }
-            }
-        }
-        private int? _A_pos;
         
 
         /// <summary>
@@ -226,27 +205,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? B_pos
-        {
-            get
-            {
-                return _B_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_B_pos != value)
-                {
-                    NotifyPropertyChanging("B_pos");
-                    _B_pos = value;
-                    NotifyPropertyChanged("B_pos");
-                }
-            }
-        }
-        private int? _B_pos;
         
 
         /// <summary>
@@ -361,9 +319,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_A, binStream);
-            BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(this.fk_B, binStream);
-            BinarySerializer.ToStream(this._B_pos, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
         }
@@ -376,13 +332,11 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_A = tmp;
             }
-            BinarySerializer.FromStream(out this._A_pos, binStream);
             {
                 var tmp = this.fk_B;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_B = tmp;
             }
-            BinarySerializer.FromStream(out this._B_pos, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
         }

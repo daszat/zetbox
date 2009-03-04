@@ -176,27 +176,6 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Mitarbeiter_pos
-        {
-            get
-            {
-                return _Mitarbeiter_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Mitarbeiter_pos != value)
-                {
-                    NotifyPropertyChanging("Mitarbeiter_pos");
-                    _Mitarbeiter_pos = value;
-                    NotifyPropertyChanged("Mitarbeiter_pos");
-                }
-            }
-        }
-        private int? _Mitarbeiter_pos;
         
 
         /// <summary>
@@ -278,27 +257,6 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? TaetigkeitsArt_pos
-        {
-            get
-            {
-                return _TaetigkeitsArt_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_TaetigkeitsArt_pos != value)
-                {
-                    NotifyPropertyChanging("TaetigkeitsArt_pos");
-                    _TaetigkeitsArt_pos = value;
-                    NotifyPropertyChanged("TaetigkeitsArt_pos");
-                }
-            }
-        }
-        private int? _TaetigkeitsArt_pos;
         
 
         /// <summary>
@@ -380,27 +338,6 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Zeitkonto_pos
-        {
-            get
-            {
-                return _Zeitkonto_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Zeitkonto_pos != value)
-                {
-                    NotifyPropertyChanging("Zeitkonto_pos");
-                    _Zeitkonto_pos = value;
-                    NotifyPropertyChanged("Zeitkonto_pos");
-                }
-            }
-        }
-        private int? _Zeitkonto_pos;
         
 
 		public override Type GetInterfaceType()
@@ -449,11 +386,8 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.ToStream(this._Datum, binStream);
             BinarySerializer.ToStream(this._Dauer, binStream);
             BinarySerializer.ToStream(this.fk_Mitarbeiter, binStream);
-            BinarySerializer.ToStream(this._Mitarbeiter_pos, binStream);
             BinarySerializer.ToStream(this.fk_TaetigkeitsArt, binStream);
-            BinarySerializer.ToStream(this._TaetigkeitsArt_pos, binStream);
             BinarySerializer.ToStream(this.fk_Zeitkonto, binStream);
-            BinarySerializer.ToStream(this._Zeitkonto_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -466,19 +400,16 @@ namespace Kistl.App.Zeiterfassung
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Mitarbeiter = tmp;
             }
-            BinarySerializer.FromStream(out this._Mitarbeiter_pos, binStream);
             {
                 var tmp = this.fk_TaetigkeitsArt;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_TaetigkeitsArt = tmp;
             }
-            BinarySerializer.FromStream(out this._TaetigkeitsArt_pos, binStream);
             {
                 var tmp = this.fk_Zeitkonto;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Zeitkonto = tmp;
             }
-            BinarySerializer.FromStream(out this._Zeitkonto_pos, binStream);
         }
 
 #endregion

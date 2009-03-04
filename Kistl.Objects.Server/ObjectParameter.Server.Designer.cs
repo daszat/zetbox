@@ -105,27 +105,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? DataType_pos
-        {
-            get
-            {
-                return _DataType_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_DataType_pos != value)
-                {
-                    NotifyPropertyChanging("DataType_pos");
-                    _DataType_pos = value;
-                    NotifyPropertyChanged("DataType_pos");
-                }
-            }
-        }
-        private int? _DataType_pos;
         
 
         /// <summary>
@@ -214,7 +193,6 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_DataType, binStream);
-            BinarySerializer.ToStream(this._DataType_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -225,7 +203,6 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_DataType = tmp;
             }
-            BinarySerializer.FromStream(out this._DataType_pos, binStream);
         }
 
 #endregion

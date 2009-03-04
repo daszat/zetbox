@@ -176,27 +176,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Kunde_pos
-        {
-            get
-            {
-                return _Kunde_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Kunde_pos != value)
-                {
-                    NotifyPropertyChanging("Kunde_pos");
-                    _Kunde_pos = value;
-                    NotifyPropertyChanged("Kunde_pos");
-                }
-            }
-        }
-        private int? _Kunde_pos;
         
 
         /// <summary>
@@ -278,27 +257,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Mitarbeiter_pos
-        {
-            get
-            {
-                return _Mitarbeiter_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Mitarbeiter_pos != value)
-                {
-                    NotifyPropertyChanging("Mitarbeiter_pos");
-                    _Mitarbeiter_pos = value;
-                    NotifyPropertyChanged("Mitarbeiter_pos");
-                }
-            }
-        }
-        private int? _Mitarbeiter_pos;
         
 
         /// <summary>
@@ -380,27 +338,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Projekt_pos
-        {
-            get
-            {
-                return _Projekt_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Projekt_pos != value)
-                {
-                    NotifyPropertyChanging("Projekt_pos");
-                    _Projekt_pos = value;
-                    NotifyPropertyChanged("Projekt_pos");
-                }
-            }
-        }
-        private int? _Projekt_pos;
         
 
         /// <summary>
@@ -470,11 +407,8 @@ namespace Kistl.App.Projekte
             BinarySerializer.ToStream(this._Auftragsname, binStream);
             BinarySerializer.ToStream(this._Auftragswert, binStream);
             BinarySerializer.ToStream(this.fk_Kunde, binStream);
-            BinarySerializer.ToStream(this._Kunde_pos, binStream);
             BinarySerializer.ToStream(this.fk_Mitarbeiter, binStream);
-            BinarySerializer.ToStream(this._Mitarbeiter_pos, binStream);
             BinarySerializer.ToStream(this.fk_Projekt, binStream);
-            BinarySerializer.ToStream(this._Projekt_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -487,19 +421,16 @@ namespace Kistl.App.Projekte
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Kunde = tmp;
             }
-            BinarySerializer.FromStream(out this._Kunde_pos, binStream);
             {
                 var tmp = this.fk_Mitarbeiter;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Mitarbeiter = tmp;
             }
-            BinarySerializer.FromStream(out this._Mitarbeiter_pos, binStream);
             {
                 var tmp = this.fk_Projekt;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Projekt = tmp;
             }
-            BinarySerializer.FromStream(out this._Projekt_pos, binStream);
         }
 
 #endregion

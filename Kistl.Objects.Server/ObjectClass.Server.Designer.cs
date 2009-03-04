@@ -105,27 +105,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? BaseObjectClass_pos
-        {
-            get
-            {
-                return _BaseObjectClass_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_BaseObjectClass_pos != value)
-                {
-                    NotifyPropertyChanging("BaseObjectClass_pos");
-                    _BaseObjectClass_pos = value;
-                    NotifyPropertyChanged("BaseObjectClass_pos");
-                }
-            }
-        }
-        private int? _BaseObjectClass_pos;
         
 
         /// <summary>
@@ -207,27 +186,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? DefaultModel_pos
-        {
-            get
-            {
-                return _DefaultModel_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_DefaultModel_pos != value)
-                {
-                    NotifyPropertyChanging("DefaultModel_pos");
-                    _DefaultModel_pos = value;
-                    NotifyPropertyChanged("DefaultModel_pos");
-                }
-            }
-        }
-        private int? _DefaultModel_pos;
         
 
         /// <summary>
@@ -532,9 +490,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_BaseObjectClass, binStream);
-            BinarySerializer.ToStream(this._BaseObjectClass_pos, binStream);
             BinarySerializer.ToStream(this.fk_DefaultModel, binStream);
-            BinarySerializer.ToStream(this._DefaultModel_pos, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
             BinarySerializer.ToStream(this._TableName, binStream);
@@ -548,13 +504,11 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_BaseObjectClass = tmp;
             }
-            BinarySerializer.FromStream(out this._BaseObjectClass_pos, binStream);
             {
                 var tmp = this.fk_DefaultModel;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_DefaultModel = tmp;
             }
-            BinarySerializer.FromStream(out this._DefaultModel_pos, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
             BinarySerializer.FromStream(out this._TableName, binStream);

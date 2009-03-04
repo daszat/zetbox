@@ -192,27 +192,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Navigator_pos
-        {
-            get
-            {
-                return _Navigator_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Navigator_pos != value)
-                {
-                    NotifyPropertyChanging("Navigator_pos");
-                    _Navigator_pos = value;
-                    NotifyPropertyChanged("Navigator_pos");
-                }
-            }
-        }
-        private int? _Navigator_pos;
         
 
         /// <summary>
@@ -346,27 +325,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Type_pos
-        {
-            get
-            {
-                return _Type_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Type_pos != value)
-                {
-                    NotifyPropertyChanging("Type_pos");
-                    _Type_pos = value;
-                    NotifyPropertyChanged("Type_pos");
-                }
-            }
-        }
-        private int? _Type_pos;
         
 
 		public override Type GetInterfaceType()
@@ -415,11 +373,9 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
             BinarySerializer.ToStream((int)((RelationEnd)this).Multiplicity, binStream);
             BinarySerializer.ToStream(this.fk_Navigator, binStream);
-            BinarySerializer.ToStream(this._Navigator_pos, binStream);
             BinarySerializer.ToStream(this._Role, binStream);
             BinarySerializer.ToStream(this._RoleName, binStream);
             BinarySerializer.ToStream(this.fk_Type, binStream);
-            BinarySerializer.ToStream(this._Type_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -432,7 +388,6 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Navigator = tmp;
             }
-            BinarySerializer.FromStream(out this._Navigator_pos, binStream);
             BinarySerializer.FromStream(out this._Role, binStream);
             BinarySerializer.FromStream(out this._RoleName, binStream);
             {
@@ -440,7 +395,6 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Type = tmp;
             }
-            BinarySerializer.FromStream(out this._Type_pos, binStream);
         }
 
 #endregion

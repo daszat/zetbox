@@ -124,27 +124,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Implementor_pos
-        {
-            get
-            {
-                return _Implementor_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Implementor_pos != value)
-                {
-                    NotifyPropertyChanging("Implementor_pos");
-                    _Implementor_pos = value;
-                    NotifyPropertyChanged("Implementor_pos");
-                }
-            }
-        }
-        private int? _Implementor_pos;
         
 
         /// <summary>
@@ -226,27 +205,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? InvokeOnObjectClass_pos
-        {
-            get
-            {
-                return _InvokeOnObjectClass_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_InvokeOnObjectClass_pos != value)
-                {
-                    NotifyPropertyChanging("InvokeOnObjectClass_pos");
-                    _InvokeOnObjectClass_pos = value;
-                    NotifyPropertyChanged("InvokeOnObjectClass_pos");
-                }
-            }
-        }
-        private int? _InvokeOnObjectClass_pos;
         
 
         /// <summary>
@@ -354,27 +312,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Method_pos
-        {
-            get
-            {
-                return _Method_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Method_pos != value)
-                {
-                    NotifyPropertyChanging("Method_pos");
-                    _Method_pos = value;
-                    NotifyPropertyChanged("Method_pos");
-                }
-            }
-        }
-        private int? _Method_pos;
         
 
         /// <summary>
@@ -456,27 +393,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Module_pos
-        {
-            get
-            {
-                return _Module_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Module_pos != value)
-                {
-                    NotifyPropertyChanging("Module_pos");
-                    _Module_pos = value;
-                    NotifyPropertyChanged("Module_pos");
-                }
-            }
-        }
-        private int? _Module_pos;
         
 
 		public override Type GetInterfaceType()
@@ -523,14 +439,10 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_Implementor, binStream);
-            BinarySerializer.ToStream(this._Implementor_pos, binStream);
             BinarySerializer.ToStream(this.fk_InvokeOnObjectClass, binStream);
-            BinarySerializer.ToStream(this._InvokeOnObjectClass_pos, binStream);
             BinarySerializer.ToStream(this._MemberName, binStream);
             BinarySerializer.ToStream(this.fk_Method, binStream);
-            BinarySerializer.ToStream(this._Method_pos, binStream);
             BinarySerializer.ToStream(this.fk_Module, binStream);
-            BinarySerializer.ToStream(this._Module_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -541,26 +453,22 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Implementor = tmp;
             }
-            BinarySerializer.FromStream(out this._Implementor_pos, binStream);
             {
                 var tmp = this.fk_InvokeOnObjectClass;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_InvokeOnObjectClass = tmp;
             }
-            BinarySerializer.FromStream(out this._InvokeOnObjectClass_pos, binStream);
             BinarySerializer.FromStream(out this._MemberName, binStream);
             {
                 var tmp = this.fk_Method;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Method = tmp;
             }
-            BinarySerializer.FromStream(out this._Method_pos, binStream);
             {
                 var tmp = this.fk_Module;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Module = tmp;
             }
-            BinarySerializer.FromStream(out this._Module_pos, binStream);
         }
 
 #endregion

@@ -124,27 +124,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? DisplayedTypeAssembly_pos
-        {
-            get
-            {
-                return _DisplayedTypeAssembly_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_DisplayedTypeAssembly_pos != value)
-                {
-                    NotifyPropertyChanging("DisplayedTypeAssembly_pos");
-                    _DisplayedTypeAssembly_pos = value;
-                    NotifyPropertyChanged("DisplayedTypeAssembly_pos");
-                }
-            }
-        }
-        private int? _DisplayedTypeAssembly_pos;
         
 
         /// <summary>
@@ -325,27 +304,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? VisualTree_pos
-        {
-            get
-            {
-                return _VisualTree_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_VisualTree_pos != value)
-                {
-                    NotifyPropertyChanging("VisualTree_pos");
-                    _VisualTree_pos = value;
-                    NotifyPropertyChanged("VisualTree_pos");
-                }
-            }
-        }
-        private int? _VisualTree_pos;
         
 
         /// <summary>
@@ -413,11 +371,9 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_DisplayedTypeAssembly, binStream);
-            BinarySerializer.ToStream(this._DisplayedTypeAssembly_pos, binStream);
             BinarySerializer.ToStream(this._DisplayedTypeFullName, binStream);
             BinarySerializer.ToStream(this._DisplayName, binStream);
             BinarySerializer.ToStream(this.fk_VisualTree, binStream);
-            BinarySerializer.ToStream(this._VisualTree_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -428,7 +384,6 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_DisplayedTypeAssembly = tmp;
             }
-            BinarySerializer.FromStream(out this._DisplayedTypeAssembly_pos, binStream);
             BinarySerializer.FromStream(out this._DisplayedTypeFullName, binStream);
             BinarySerializer.FromStream(out this._DisplayName, binStream);
             {
@@ -436,7 +391,6 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_VisualTree = tmp;
             }
-            BinarySerializer.FromStream(out this._VisualTree_pos, binStream);
         }
 
 #endregion

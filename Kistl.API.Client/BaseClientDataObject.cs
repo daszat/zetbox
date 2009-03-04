@@ -239,13 +239,15 @@ namespace Kistl.API.Client
 
         protected virtual string GetPropertyError(string prop)
         {
-            throw new ArgumentOutOfRangeException("columnName", "unknown property " + prop);
+            // TODO: Wieder einbauen oder anders warnen
+            // throw new ArgumentOutOfRangeException("columnName", "unknown property " + prop);
+            return "";
         }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         string IDataErrorInfo.Error
         {
-            get { throw new NotImplementedException(); }
+            get { return ""; /* throw new NotImplementedException();*/ }
         }
 
         #endregion

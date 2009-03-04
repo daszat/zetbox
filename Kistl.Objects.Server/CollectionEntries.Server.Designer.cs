@@ -799,6 +799,27 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual int? A_pos
+        {
+            get
+            {
+                return _A_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_A_pos != value)
+                {
+                    NotifyPropertyChanging("A_pos");
+                    _A_pos = value;
+                    NotifyPropertyChanged("A_pos");
+                }
+            }
+        }
+        private int? _A_pos;
         
         /// <summary>
         /// the B-side value of this CollectionEntry
@@ -900,8 +921,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Index into the A-side list of this relation
         /// </summary>
-/// <summary>ignored implementation for INewListEntry</summary>
-public int? AIndex { get { return null; } set { } }
+public int? AIndex { get { return A_pos; } set { A_pos = value; } }
         /// <summary>
         /// Index into the B-side list of this relation
         /// </summary>
@@ -913,8 +933,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_A, binStream);
+            BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(this.fk_B, binStream);
             BinarySerializer.ToStream(this._B_pos, binStream);
+            BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(this._B_pos, binStream);
         }
 
@@ -926,12 +948,14 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_A = tmp;
             }
+            BinarySerializer.FromStream(out this._A_pos, binStream);
             {
                 var tmp = this.fk_B;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_B = tmp;
             }
             BinarySerializer.FromStream(out this._B_pos, binStream);
+            BinarySerializer.FromStream(out this._A_pos, binStream);
             BinarySerializer.FromStream(out this._B_pos, binStream);
         }
 

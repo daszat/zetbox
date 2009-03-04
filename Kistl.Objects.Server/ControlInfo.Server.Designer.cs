@@ -124,27 +124,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Assembly_pos
-        {
-            get
-            {
-                return _Assembly_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Assembly_pos != value)
-                {
-                    NotifyPropertyChanging("Assembly_pos");
-                    _Assembly_pos = value;
-                    NotifyPropertyChanged("Assembly_pos");
-                }
-            }
-        }
-        private int? _Assembly_pos;
         
 
         /// <summary>
@@ -327,7 +306,6 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_Assembly, binStream);
-            BinarySerializer.ToStream(this._Assembly_pos, binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
             BinarySerializer.ToStream((int)((ControlInfo)this).ControlType, binStream);
             BinarySerializer.ToStream(this._IsContainer, binStream);
@@ -342,7 +320,6 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Assembly = tmp;
             }
-            BinarySerializer.FromStream(out this._Assembly_pos, binStream);
             BinarySerializer.FromStream(out this._ClassName, binStream);
             BinarySerializer.FromStreamConverter(v => ((ControlInfo)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._IsContainer, binStream);

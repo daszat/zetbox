@@ -286,27 +286,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Method_pos
-        {
-            get
-            {
-                return _Method_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Method_pos != value)
-                {
-                    NotifyPropertyChanging("Method_pos");
-                    _Method_pos = value;
-                    NotifyPropertyChanged("Method_pos");
-                }
-            }
-        }
-        private int? _Method_pos;
         
 
         /// <summary>
@@ -388,27 +367,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Property_pos
-        {
-            get
-            {
-                return _Property_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Property_pos != value)
-                {
-                    NotifyPropertyChanging("Property_pos");
-                    _Property_pos = value;
-                    NotifyPropertyChanged("Property_pos");
-                }
-            }
-        }
-        private int? _Property_pos;
         
 
 		public override Type GetInterfaceType()
@@ -457,9 +415,7 @@ namespace Kistl.App.GUI
             BinarySerializer.ToStream((int)((Visual)this).ControlType, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this.fk_Method, binStream);
-            BinarySerializer.ToStream(this._Method_pos, binStream);
             BinarySerializer.ToStream(this.fk_Property, binStream);
-            BinarySerializer.ToStream(this._Property_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -472,13 +428,11 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Method = tmp;
             }
-            BinarySerializer.FromStream(out this._Method_pos, binStream);
             {
                 var tmp = this.fk_Property;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Property = tmp;
             }
-            BinarySerializer.FromStream(out this._Property_pos, binStream);
         }
 
 #endregion

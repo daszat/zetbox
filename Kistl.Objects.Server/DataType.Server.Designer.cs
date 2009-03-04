@@ -150,27 +150,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? DefaultIcon_pos
-        {
-            get
-            {
-                return _DefaultIcon_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_DefaultIcon_pos != value)
-                {
-                    NotifyPropertyChanging("DefaultIcon_pos");
-                    _DefaultIcon_pos = value;
-                    NotifyPropertyChanged("DefaultIcon_pos");
-                }
-            }
-        }
-        private int? _DefaultIcon_pos;
         
 
         /// <summary>
@@ -372,27 +351,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Module_pos
-        {
-            get
-            {
-                return _Module_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Module_pos != value)
-                {
-                    NotifyPropertyChanging("Module_pos");
-                    _Module_pos = value;
-                    NotifyPropertyChanged("Module_pos");
-                }
-            }
-        }
-        private int? _Module_pos;
         
 
         /// <summary>
@@ -531,10 +489,8 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
             BinarySerializer.ToStream(this.fk_DefaultIcon, binStream);
-            BinarySerializer.ToStream(this._DefaultIcon_pos, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this.fk_Module, binStream);
-            BinarySerializer.ToStream(this._Module_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -546,14 +502,12 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_DefaultIcon = tmp;
             }
-            BinarySerializer.FromStream(out this._DefaultIcon_pos, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             {
                 var tmp = this.fk_Module;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Module = tmp;
             }
-            BinarySerializer.FromStream(out this._Module_pos, binStream);
         }
 
 #endregion

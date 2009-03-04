@@ -131,27 +131,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? ReferenceProperty_pos
-        {
-            get
-            {
-                return _ReferenceProperty_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ReferenceProperty_pos != value)
-                {
-                    NotifyPropertyChanging("ReferenceProperty_pos");
-                    _ReferenceProperty_pos = value;
-                    NotifyPropertyChanged("ReferenceProperty_pos");
-                }
-            }
-        }
-        private int? _ReferenceProperty_pos;
         
 
         /// <summary>
@@ -262,7 +241,6 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._PreFetchToClient, binStream);
             BinarySerializer.ToStream(this.fk_ReferenceProperty, binStream);
-            BinarySerializer.ToStream(this._ReferenceProperty_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -274,7 +252,6 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_ReferenceProperty = tmp;
             }
-            BinarySerializer.FromStream(out this._ReferenceProperty_pos, binStream);
         }
 
 #endregion

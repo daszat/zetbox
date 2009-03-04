@@ -13,25 +13,25 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Tabellenname in der Datenbank
+        /// Liste der vererbten Klassen
         /// </summary>
 
-		string TableName { get; set; }
+        ICollection<Kistl.App.Base.ObjectClass> SubClasses { get; }
         /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
 
 		Kistl.App.Base.ObjectClass BaseObjectClass { get; set; }
         /// <summary>
-        /// Liste der vererbten Klassen
-        /// </summary>
-
-        ICollection<Kistl.App.Base.ObjectClass> SubClasses { get; }
-        /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
 
         ICollection<Kistl.App.Base.Interface> ImplementsInterfaces { get; }
+        /// <summary>
+        /// Tabellenname in der Datenbank
+        /// </summary>
+
+		string TableName { get; set; }
         /// <summary>
         /// Setting this to true marks the instances of this class as "simple." At first this will only mean that they'll be displayed inline.
         /// </summary>

@@ -124,27 +124,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? LayoutRef_pos
-        {
-            get
-            {
-                return _LayoutRef_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_LayoutRef_pos != value)
-                {
-                    NotifyPropertyChanging("LayoutRef_pos");
-                    _LayoutRef_pos = value;
-                    NotifyPropertyChanged("LayoutRef_pos");
-                }
-            }
-        }
-        private int? _LayoutRef_pos;
         
 
         /// <summary>
@@ -268,27 +247,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? ViewRef_pos
-        {
-            get
-            {
-                return _ViewRef_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ViewRef_pos != value)
-                {
-                    NotifyPropertyChanging("ViewRef_pos");
-                    _ViewRef_pos = value;
-                    NotifyPropertyChanged("ViewRef_pos");
-                }
-            }
-        }
-        private int? _ViewRef_pos;
         
 
 		public override Type GetInterfaceType()
@@ -335,10 +293,8 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_LayoutRef, binStream);
-            BinarySerializer.ToStream(this._LayoutRef_pos, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
             BinarySerializer.ToStream(this.fk_ViewRef, binStream);
-            BinarySerializer.ToStream(this._ViewRef_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -349,14 +305,12 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_LayoutRef = tmp;
             }
-            BinarySerializer.FromStream(out this._LayoutRef_pos, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
             {
                 var tmp = this.fk_ViewRef;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_ViewRef = tmp;
             }
-            BinarySerializer.FromStream(out this._ViewRef_pos, binStream);
         }
 
 #endregion

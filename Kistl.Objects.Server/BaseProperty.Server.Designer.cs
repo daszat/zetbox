@@ -223,27 +223,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Module_pos
-        {
-            get
-            {
-                return _Module_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Module_pos != value)
-                {
-                    NotifyPropertyChanging("Module_pos");
-                    _Module_pos = value;
-                    NotifyPropertyChanged("Module_pos");
-                }
-            }
-        }
-        private int? _Module_pos;
         
 
         /// <summary>
@@ -325,27 +304,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? ObjectClass_pos
-        {
-            get
-            {
-                return _ObjectClass_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ObjectClass_pos != value)
-                {
-                    NotifyPropertyChanging("ObjectClass_pos");
-                    _ObjectClass_pos = value;
-                    NotifyPropertyChanged("ObjectClass_pos");
-                }
-            }
-        }
-        private int? _ObjectClass_pos;
         
 
         /// <summary>
@@ -486,9 +444,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._AltText, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this.fk_Module, binStream);
-            BinarySerializer.ToStream(this._Module_pos, binStream);
             BinarySerializer.ToStream(this.fk_ObjectClass, binStream);
-            BinarySerializer.ToStream(this._ObjectClass_pos, binStream);
             BinarySerializer.ToStream(this._PropertyName, binStream);
         }
 
@@ -502,13 +458,11 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Module = tmp;
             }
-            BinarySerializer.FromStream(out this._Module_pos, binStream);
             {
                 var tmp = this.fk_ObjectClass;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_ObjectClass = tmp;
             }
-            BinarySerializer.FromStream(out this._ObjectClass_pos, binStream);
             BinarySerializer.FromStream(out this._PropertyName, binStream);
         }
 

@@ -176,27 +176,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Module_pos
-        {
-            get
-            {
-                return _Module_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Module_pos != value)
-                {
-                    NotifyPropertyChanging("Module_pos");
-                    _Module_pos = value;
-                    NotifyPropertyChanged("Module_pos");
-                }
-            }
-        }
-        private int? _Module_pos;
         
 
         /// <summary>
@@ -266,7 +245,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._AssemblyName, binStream);
             BinarySerializer.ToStream(this._IsClientAssembly, binStream);
             BinarySerializer.ToStream(this.fk_Module, binStream);
-            BinarySerializer.ToStream(this._Module_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -279,7 +257,6 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Module = tmp;
             }
-            BinarySerializer.FromStream(out this._Module_pos, binStream);
         }
 
 #endregion

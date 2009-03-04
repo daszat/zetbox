@@ -21,7 +21,6 @@
 <ScalarProperty Name="DatumVon" ColumnName="DatumVon" />
 <ScalarProperty Name="DatumBis" ColumnName="DatumBis" />
 <ScalarProperty Name="Aufwand" ColumnName="Aufwand" />
-<ScalarProperty Name="Projekt_pos" ColumnName="fk_Projekt_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -29,17 +28,14 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.BaseProperty)">
 	    <MappingFragment StoreEntitySet="BaseProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ObjectClass_pos" ColumnName="fk_ObjectClass_pos" />
 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
 <ScalarProperty Name="AltText" ColumnName="AltText" />
-<ScalarProperty Name="Module_pos" ColumnName="fk_Module_pos" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.BackReferenceProperty)">
 	    <MappingFragment StoreEntitySet="BackReferenceProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ReferenceProperty_pos" ColumnName="fk_ReferenceProperty_pos" />
 <ScalarProperty Name="PreFetchToClient" ColumnName="PreFetchToClient" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -54,13 +50,11 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">
 	    <MappingFragment StoreEntitySet="ObjectReferenceProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ReferenceObjectClass_pos" ColumnName="fk_ReferenceObjectClass_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.StructProperty)">
 	    <MappingFragment StoreEntitySet="StructProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="StructDefinition_pos" ColumnName="fk_StructDefinition_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ValueTypeProperty)">
@@ -82,7 +76,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationProperty)">
 	    <MappingFragment StoreEntitySet="EnumerationProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Enumeration_pos" ColumnName="fk_Enumeration_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.DoubleProperty)">
@@ -116,9 +109,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Method)">
 	    <MappingFragment StoreEntitySet="Method">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ObjectClass_pos" ColumnName="fk_ObjectClass_pos" />
 <ScalarProperty Name="MethodName" ColumnName="MethodName" />
-<ScalarProperty Name="Module_pos" ColumnName="fk_Module_pos" />
 <ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 	    </MappingFragment>
@@ -138,10 +129,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Auftrag)">
 	    <MappingFragment StoreEntitySet="Auftrag">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Mitarbeiter_pos" ColumnName="fk_Mitarbeiter_pos" />
 <ScalarProperty Name="Auftragsname" ColumnName="Auftragsname" />
-<ScalarProperty Name="Projekt_pos" ColumnName="fk_Projekt_pos" />
-<ScalarProperty Name="Kunde_pos" ColumnName="fk_Kunde_pos" />
 <ScalarProperty Name="Auftragswert" ColumnName="Auftragswert" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -158,7 +146,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kostentraeger)">
 	    <MappingFragment StoreEntitySet="Kostentraeger">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Projekt_pos" ColumnName="fk_Projekt_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kostenstelle)">
@@ -171,11 +158,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Taetigkeit)">
 	    <MappingFragment StoreEntitySet="Taetigkeit">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Mitarbeiter_pos" ColumnName="fk_Mitarbeiter_pos" />
-<ScalarProperty Name="Zeitkonto_pos" ColumnName="fk_Zeitkonto_pos" />
 <ScalarProperty Name="Datum" ColumnName="Datum" />
 <ScalarProperty Name="Dauer" ColumnName="Dauer" />
-<ScalarProperty Name="TaetigkeitsArt_pos" ColumnName="fk_TaetigkeitsArt_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -203,7 +187,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Assembly)">
 	    <MappingFragment StoreEntitySet="Assembly">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Module_pos" ColumnName="fk_Module_pos" />
 <ScalarProperty Name="AssemblyName" ColumnName="AssemblyName" />
 <ScalarProperty Name="IsClientAssembly" ColumnName="IsClientAssembly" />
 	    </MappingFragment>
@@ -213,11 +196,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.MethodInvocation)">
 	    <MappingFragment StoreEntitySet="MethodInvocation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Method_pos" ColumnName="fk_Method_pos" />
 <ScalarProperty Name="MemberName" ColumnName="MemberName" />
-<ScalarProperty Name="Module_pos" ColumnName="fk_Module_pos" />
-<ScalarProperty Name="InvokeOnObjectClass_pos" ColumnName="fk_InvokeOnObjectClass_pos" />
-<ScalarProperty Name="Implementor_pos" ColumnName="fk_Implementor_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -234,8 +213,6 @@
 	    <MappingFragment StoreEntitySet="DataType">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-<ScalarProperty Name="Module_pos" ColumnName="fk_Module_pos" />
-<ScalarProperty Name="DefaultIcon_pos" ColumnName="fk_DefaultIcon_pos" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -253,10 +230,8 @@
 	    <MappingFragment StoreEntitySet="ObjectClass">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="TableName" ColumnName="TableName" />
-<ScalarProperty Name="BaseObjectClass_pos" ColumnName="fk_BaseObjectClass_pos" />
 <ScalarProperty Name="IsSimpleObject" ColumnName="IsSimpleObject" />
 <ScalarProperty Name="IsFrozenObject" ColumnName="IsFrozenObject" />
-<ScalarProperty Name="DefaultModel_pos" ColumnName="fk_DefaultModel_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Struct)">
@@ -284,7 +259,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.CLRObjectParameter)">
 	    <MappingFragment StoreEntitySet="CLRObjectParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Assembly_pos" ColumnName="fk_Assembly_pos" />
 <ScalarProperty Name="FullTypeName" ColumnName="FullTypeName" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -306,7 +280,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectParameter)">
 	    <MappingFragment StoreEntitySet="ObjectParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="DataType_pos" ColumnName="fk_DataType_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.StringParameter)">
@@ -319,7 +292,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationEntry)">
 	    <MappingFragment StoreEntitySet="EnumerationEntry">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Enumeration_pos" ColumnName="fk_Enumeration_pos" />
 <ScalarProperty Name="Value" ColumnName="Value" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -332,7 +304,6 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="StringProp" ColumnName="StringProp" />
 <ScalarProperty Name="TestEnumProp" ColumnName="TestEnumProp" />
-<ScalarProperty Name="ObjectProp_pos" ColumnName="fk_ObjectProp_pos" />
 <ScalarProperty Name="MyIntProperty" ColumnName="MyIntProperty" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -341,7 +312,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ControlInfo)">
 	    <MappingFragment StoreEntitySet="ControlInfo">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Assembly_pos" ColumnName="fk_Assembly_pos" />
 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
 <ScalarProperty Name="IsContainer" ColumnName="IsContainer" />
 <ScalarProperty Name="Platform" ColumnName="Platform" />
@@ -392,9 +362,7 @@
 	    <MappingFragment StoreEntitySet="PresenterInfo">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ControlType" ColumnName="ControlType" />
-<ScalarProperty Name="PresenterAssembly_pos" ColumnName="fk_PresenterAssembly_pos" />
 <ScalarProperty Name="PresenterTypeName" ColumnName="PresenterTypeName" />
-<ScalarProperty Name="DataAssembly_pos" ColumnName="fk_DataAssembly_pos" />
 <ScalarProperty Name="DataTypeName" ColumnName="DataTypeName" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -405,8 +373,6 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ControlType" ColumnName="ControlType" />
-<ScalarProperty Name="Property_pos" ColumnName="fk_Property_pos" />
-<ScalarProperty Name="Method_pos" ColumnName="fk_Method_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -415,9 +381,7 @@
 	    <MappingFragment StoreEntitySet="Template">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-<ScalarProperty Name="VisualTree_pos" ColumnName="fk_VisualTree_pos" />
 <ScalarProperty Name="DisplayedTypeFullName" ColumnName="DisplayedTypeFullName" />
-<ScalarProperty Name="DisplayedTypeAssembly_pos" ColumnName="fk_DisplayedTypeAssembly_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -426,7 +390,6 @@
 	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Reason" ColumnName="Reason" />
-<ScalarProperty Name="ConstrainedProperty_pos" ColumnName="fk_ConstrainedProperty_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.IntegerRangeConstraint)">
@@ -470,8 +433,6 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Storage" ColumnName="Storage" />
 <ScalarProperty Name="Description" ColumnName="Description" />
-<ScalarProperty Name="A_pos" ColumnName="fk_A_pos" />
-<ScalarProperty Name="B_pos" ColumnName="fk_B_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -480,7 +441,6 @@
 	    <MappingFragment StoreEntitySet="TypeRef">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="FullName" ColumnName="FullName" />
-<ScalarProperty Name="Assembly_pos" ColumnName="fk_Assembly_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -488,9 +448,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor)">
 	    <MappingFragment StoreEntitySet="ViewDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="LayoutRef_pos" ColumnName="fk_LayoutRef_pos" />
 <ScalarProperty Name="Toolkit" ColumnName="Toolkit" />
-<ScalarProperty Name="ViewRef_pos" ColumnName="fk_ViewRef_pos" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -498,10 +456,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEnd)">
 	    <MappingFragment StoreEntitySet="RelationEnd">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Type_pos" ColumnName="fk_Type_pos" />
 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
 <ScalarProperty Name="Role" ColumnName="Role" />
-<ScalarProperty Name="Navigator_pos" ColumnName="fk_Navigator_pos" />
 <ScalarProperty Name="Multiplicity" ColumnName="Multiplicity" />
 <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
 	    </MappingFragment>
@@ -636,6 +592,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef_GenericArguments66CollectionEntry)">
         <MappingFragment StoreEntitySet="TypeRef_GenericArguments66CollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="A_pos" ColumnName="fk_TypeRef_pos" />
           <ScalarProperty Name="B_pos" ColumnName="fk_GenericArguments_pos" />
         </MappingFragment>
       </EntityTypeMapping>

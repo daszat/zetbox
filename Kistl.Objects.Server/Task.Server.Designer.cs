@@ -228,27 +228,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? Projekt_pos
-        {
-            get
-            {
-                return _Projekt_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Projekt_pos != value)
-                {
-                    NotifyPropertyChanging("Projekt_pos");
-                    _Projekt_pos = value;
-                    NotifyPropertyChanged("Projekt_pos");
-                }
-            }
-        }
-        private int? _Projekt_pos;
         
 
 		public override Type GetInterfaceType()
@@ -299,7 +278,6 @@ namespace Kistl.App.Projekte
             BinarySerializer.ToStream(this._DatumVon, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this.fk_Projekt, binStream);
-            BinarySerializer.ToStream(this._Projekt_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -314,7 +292,6 @@ namespace Kistl.App.Projekte
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_Projekt = tmp;
             }
-            BinarySerializer.FromStream(out this._Projekt_pos, binStream);
         }
 
 #endregion

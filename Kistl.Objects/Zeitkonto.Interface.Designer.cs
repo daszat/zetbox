@@ -13,11 +13,6 @@ namespace Kistl.App.Zeiterfassung
     {
 
         /// <summary>
-        /// Name des Zeiterfassungskontos
-        /// </summary>
-
-		string Kontoname { get; set; }
-        /// <summary>
         /// Tätigkeiten
         /// </summary>
 
@@ -27,6 +22,11 @@ namespace Kistl.App.Zeiterfassung
         /// </summary>
 
         ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter { get; }
+        /// <summary>
+        /// Name des Zeiterfassungskontos
+        /// </summary>
+
+		string Kontoname { get; set; }
         /// <summary>
         /// Maximal erlaubte Stundenanzahl
         /// </summary>

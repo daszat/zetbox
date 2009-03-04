@@ -146,6 +146,24 @@ namespace Kistl.App.Base
             }
         }
         private int? _fk_Method;
+        public virtual int? Method_pos
+        {
+            get
+            {
+                return _Method_pos;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Method_pos != value)
+                {
+                    NotifyPropertyChanging("Method_pos");
+                    _Method_pos = value;
+                    NotifyPropertyChanged("Method_pos");
+                }
+            }
+        }
+        private int? _Method_pos;
 
         /// <summary>
         /// Name des Parameter
@@ -261,6 +279,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._IsList, binStream);
             BinarySerializer.ToStream(this._IsReturnParameter, binStream);
             BinarySerializer.ToStream(this._fk_Method, binStream);
+            BinarySerializer.ToStream(this._Method_pos, binStream);
             BinarySerializer.ToStream(this._ParameterName, binStream);
         }
 
@@ -271,6 +290,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._IsList, binStream);
             BinarySerializer.FromStream(out this._IsReturnParameter, binStream);
             BinarySerializer.FromStream(out this._fk_Method, binStream);
+            BinarySerializer.FromStream(out this._Method_pos, binStream);
             BinarySerializer.FromStream(out this._ParameterName, binStream);
         }
 

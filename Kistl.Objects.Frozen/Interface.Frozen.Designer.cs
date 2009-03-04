@@ -116,7 +116,6 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[48].ClassName = @"ITestInterface";
 			DataStore[48].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(3) {
 Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[107],
 Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[108],
@@ -129,9 +128,9 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[90],
 			DataStore[48].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[1];
 			DataStore[48].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
+			DataStore[48].ClassName = @"ITestInterface";
 			DataStore[48].Description = @"A Test Interface";
 			DataStore[48].Seal();
-			DataStore[52].ClassName = @"IRenderer";
 			DataStore[52].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(1) {
 Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[113],
 });
@@ -144,6 +143,7 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[98],
 			DataStore[52].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[2];
 			DataStore[52].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
+			DataStore[52].ClassName = @"IRenderer";
 			DataStore[52].Description = null;
 			DataStore[52].Seal();
 	

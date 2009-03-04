@@ -193,8 +193,6 @@ namespace Kistl.App.Base
 		}
 
 		internal static void FillDataStore() {
-			DataStore[1].Namespace = @"Kistl.App.Base";
-			DataStore[1].ModuleName = @"KistlBase";
 			DataStore[1].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(43) {
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[80],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[8],
@@ -244,10 +242,10 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[81],
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[1],
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[2],
 });
+			DataStore[1].Namespace = @"Kistl.App.Base";
+			DataStore[1].ModuleName = @"KistlBase";
 			DataStore[1].Description = null;
 			DataStore[1].Seal();
-			DataStore[2].Namespace = @"Kistl.App.Projekte";
-			DataStore[2].ModuleName = @"Projekte";
 			DataStore[2].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(5) {
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3],
@@ -257,10 +255,10 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19],
 });
 			DataStore[2].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0) {
 });
+			DataStore[2].Namespace = @"Kistl.App.Projekte";
+			DataStore[2].ModuleName = @"Projekte";
 			DataStore[2].Description = null;
 			DataStore[2].Seal();
-			DataStore[3].Namespace = @"Kistl.App.Zeiterfassung";
-			DataStore[3].ModuleName = @"Zeiterfassung";
 			DataStore[3].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(5) {
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[31],
@@ -270,10 +268,10 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[21],
 });
 			DataStore[3].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0) {
 });
+			DataStore[3].Namespace = @"Kistl.App.Zeiterfassung";
+			DataStore[3].ModuleName = @"Zeiterfassung";
 			DataStore[3].Description = null;
 			DataStore[3].Seal();
-			DataStore[4].Namespace = @"Kistl.App.GUI";
-			DataStore[4].ModuleName = @"GUI";
 			DataStore[4].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(8) {
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68],
@@ -291,10 +289,10 @@ Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13],
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14],
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[15],
 });
+			DataStore[4].Namespace = @"Kistl.App.GUI";
+			DataStore[4].ModuleName = @"GUI";
 			DataStore[4].Description = null;
 			DataStore[4].Seal();
-			DataStore[5].Namespace = @"Kistl.App.Test";
-			DataStore[5].ModuleName = @"TestModule";
 			DataStore[5].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(8) {
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58],
@@ -307,6 +305,8 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48],
 });
 			DataStore[5].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0) {
 });
+			DataStore[5].Namespace = @"Kistl.App.Test";
+			DataStore[5].ModuleName = @"TestModule";
 			DataStore[5].Description = null;
 			DataStore[5].Seal();
 	

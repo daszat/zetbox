@@ -124,27 +124,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? ConstrainedProperty_pos
-        {
-            get
-            {
-                return _ConstrainedProperty_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ConstrainedProperty_pos != value)
-                {
-                    NotifyPropertyChanging("ConstrainedProperty_pos");
-                    _ConstrainedProperty_pos = value;
-                    NotifyPropertyChanged("ConstrainedProperty_pos");
-                }
-            }
-        }
-        private int? _ConstrainedProperty_pos;
         
 
         /// <summary>
@@ -261,7 +240,6 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_ConstrainedProperty, binStream);
-            BinarySerializer.ToStream(this._ConstrainedProperty_pos, binStream);
             BinarySerializer.ToStream(this._Reason, binStream);
         }
 
@@ -273,7 +251,6 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_ConstrainedProperty = tmp;
             }
-            BinarySerializer.FromStream(out this._ConstrainedProperty_pos, binStream);
             BinarySerializer.FromStream(out this._Reason, binStream);
         }
 

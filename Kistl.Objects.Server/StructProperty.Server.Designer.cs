@@ -105,27 +105,6 @@ namespace Kistl.App.Base
             }
         }
         
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual int? StructDefinition_pos
-        {
-            get
-            {
-                return _StructDefinition_pos;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_StructDefinition_pos != value)
-                {
-                    NotifyPropertyChanging("StructDefinition_pos");
-                    _StructDefinition_pos = value;
-                    NotifyPropertyChanged("StructDefinition_pos");
-                }
-            }
-        }
-        private int? _StructDefinition_pos;
         
 
         /// <summary>
@@ -235,7 +214,6 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_StructDefinition, binStream);
-            BinarySerializer.ToStream(this._StructDefinition_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -246,7 +224,6 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_StructDefinition = tmp;
             }
-            BinarySerializer.FromStream(out this._StructDefinition_pos, binStream);
         }
 
 #endregion
