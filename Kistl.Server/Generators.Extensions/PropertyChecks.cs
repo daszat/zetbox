@@ -77,7 +77,25 @@ namespace Kistl.Server.Generators.Extensions
 
         public static string GetCollectionTypeString(this Property prop)
         {
-            if (prop.IsIndexed)
+            bool isIndexed = false;
+
+            if (prop is ObjectReferenceProperty)
+            {
+                var p = (ObjectReferenceProperty)prop;
+                var rel = RelationExtensions.Lookup(p.Context, p);
+                var relEnd = rel.GetEnd(p);
+                var relOtherEnd = rel.GetOtherEnd(relEnd);
+                if (rel.NeedsPositionStorage((RelationEndRole)relOtherEnd.Role))
+                {
+                    isIndexed = true;
+                }
+            }
+            else
+            {
+                isIndexed = prop.IsIndexed;
+            }
+
+            if (isIndexed)
             {
                 return string.Format("IList<{0}>", prop.GetPropertyTypeString());
             }

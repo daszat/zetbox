@@ -21,11 +21,12 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
             string name = prop.PropertyName;
             string wrapperClass = "BackReferenceCollection";
-            string exposedListType = prop.IsIndexed ? "IList" : "ICollection";
             var rel = RelationExtensions.Lookup(ctx, prop);
-            var endRole = (RelationEndRole)rel.GetEnd(prop).Role;
+            var relEnd = rel.GetEnd(prop);
+            var otherEnd = rel.GetOtherEnd(relEnd);
+            string exposedListType = rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "IList" : "ICollection";
 
-            Call(host, ctx, serializationList, name, wrapperClass, exposedListType, rel, endRole);
+            Call(host, ctx, serializationList, name, wrapperClass, exposedListType, rel, (RelationEndRole)relEnd.Role);
         }
 
         /// <summary>

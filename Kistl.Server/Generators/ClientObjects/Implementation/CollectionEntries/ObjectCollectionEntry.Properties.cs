@@ -29,9 +29,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
         protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
             RelationEnd relEnd = rel.GetEnd(endRole);
-            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
-            if (otherEnd.HasPersistentOrder)
+            if (rel.NeedsPositionStorage(endRole))
             {
                 this.MembersToSerialize.Add("_" + endRole + Kistl.API.Helper.PositionSuffix);
                 this.WriteObjects("public int? ", endRole, "Index { get { return ",

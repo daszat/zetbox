@@ -12,6 +12,14 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
     public partial class CollectionEntryListProperty
     {
+        /// <summary>
+        /// TODO: Frage: Rollen schon beim Aufruf tauschen? Es wird primär mit otherEnd gearbeitet.
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="ctx"></param>
+        /// <param name="serializationList"></param>
+        /// <param name="rel"></param>
+        /// <param name="endRole"></param>
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
@@ -21,11 +29,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string name = relEnd.Navigator.PropertyName;
-            string exposedCollectionInterface = otherEnd.HasPersistentOrder ? "IList" : "ICollection";
+            string exposedCollectionInterface = rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "IList" : "ICollection";
             string referencedInterface = otherEnd.Type.GetDataTypeString();
             string backingName = "_" + name;
             string backingCollectionType = "undefined wrapper class";
-            if (otherEnd.HasPersistentOrder)
+            if (rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role))
             {
                 if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
                 {
@@ -47,11 +55,12 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
                     backingCollectionType = "ClientCollectionBSideWrapper";
                 }
             }
-
+            
             string aSideType = rel.A.Type.GetDataTypeString();
             string bSideType = rel.B.Type.GetDataTypeString();
             string entryType = rel.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
-            string providerCollectionType = "ICollection<" + entryType + ">";
+            string providerCollectionType = (rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "IList<" : "ICollection<")
+                + entryType + ">";
 
             host.CallTemplate("Implementation.ObjectClasses.CollectionEntryListProperty",
                 ctx, serializationList,

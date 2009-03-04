@@ -31,7 +31,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string referencedType = prop.ReferencedTypeAsCSharp();
             string referencedCollectionEntry = prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
 
-            string providerCollectionType = "ICollection<" + referencedCollectionEntry + ">";
+            string providerCollectionType = (prop.IsIndexed ? "IList<" : "ICollection<") + referencedCollectionEntry + ">";
             string underlyingCollectionName = "_" + name;
 
             Call(

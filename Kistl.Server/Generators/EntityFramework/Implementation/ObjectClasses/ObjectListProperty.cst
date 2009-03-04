@@ -14,7 +14,6 @@
 <%@ Parameter Name="rel" Type="Relation" %>
 <%@ Parameter Name="endRole" Type="RelationEndRole" %>
 <%
-
     RelationEnd relEnd = rel.GetEnd(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
@@ -25,14 +24,14 @@
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = otherEnd.HasPersistentOrder ? "EntityListWrapper" : "EntityCollectionWrapper";
+	string wrapperClass = rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "EntityListWrapper" : "EntityCollectionWrapper";
 	
 	// the name of the EF association
 	string assocName = rel.GetAssociationName();
 	string targetRoleName = otherEnd.RoleName;
 
 	// which generic interface to use for the collection
-	string exposedListType = otherEnd.HasPersistentOrder ? "IList" : "ICollection";
+	string exposedListType = rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "IList" : "ICollection";
 
 	// which Kistl interface this is 
 	string thisInterface = relEnd.Type.GetDataTypeString();
@@ -55,7 +54,7 @@
                     <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>>(
                             this.Context, <%= efName %><%
 	// TODO: improve this!
-	if (otherEnd.HasPersistentOrder)
+	if (rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role))
 	{
 		this.WriteObjects(", \"", relEnd.RoleName, "\"");
 	}

@@ -42,7 +42,7 @@ RelationEnd relEnd = rel.GetEnd(endRole);
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the other end
 	string wrapperClass = "undefined wrapper class";
-	if (otherEnd.HasPersistentOrder)
+    if (rel.NeedsPositionStorage(endRole))
 	{
 	    if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
 	    {
@@ -76,7 +76,7 @@ RelationEnd relEnd = rel.GetEnd(endRole);
 	string targetRoleName = "CollectionEntry";
 
 	// which generic interface to use for the collection
-	string exposedListType = otherEnd.HasPersistentOrder ? "IList" : "ICollection";
+	string exposedListType = rel.NeedsPositionStorage(endRole) ? "IList" : "ICollection";
 
 	// which Kistl interface this is 
 	string thisInterface = relEnd.Type.GetDataTypeString();

@@ -48,7 +48,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             bool hasInverseNavigator = otherEnd.Navigator != null;
 
             Call(host, ctx, serializationList,
-                name, efName, fkName, fkBackingName, referencedInterface, rel, endRole, hasInverseNavigator, otherEnd.HasPersistentOrder);
+                name, efName, fkName, fkBackingName, referencedInterface, rel, endRole, hasInverseNavigator, rel.NeedsPositionStorage(endRole));
         }
 
 

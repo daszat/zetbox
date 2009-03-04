@@ -30,7 +30,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectListProperty.cst"
 RelationEnd relEnd = rel.GetEnd(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
@@ -41,14 +41,14 @@ RelationEnd relEnd = rel.GetEnd(endRole);
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = otherEnd.HasPersistentOrder ? "EntityListWrapper" : "EntityCollectionWrapper";
+	string wrapperClass = rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "EntityListWrapper" : "EntityCollectionWrapper";
 	
 	// the name of the EF association
 	string assocName = rel.GetAssociationName();
 	string targetRoleName = otherEnd.RoleName;
 
 	// which generic interface to use for the collection
-	string exposedListType = otherEnd.HasPersistentOrder ? "IList" : "ICollection";
+	string exposedListType = rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "IList" : "ICollection";
 
 	// which Kistl interface this is 
 	string thisInterface = relEnd.Type.GetDataTypeString();
@@ -59,7 +59,7 @@ RelationEnd relEnd = rel.GetEnd(endRole);
 
 	
 
-#line 46 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 45 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
@@ -71,14 +71,14 @@ this.WriteObjects("                if (",  wrapperName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , ">(\r\n");
 this.WriteObjects("                            this.Context, ",  efName , "");
-#line 57 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 56 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectListProperty.cst"
 // TODO: improve this!
-	if (otherEnd.HasPersistentOrder)
+	if (rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role))
 	{
 		this.WriteObjects(", \"", relEnd.RoleName, "\"");
 	}
                             
-#line 62 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 61 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects(");\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return ",  wrapperName , ";\r\n");
