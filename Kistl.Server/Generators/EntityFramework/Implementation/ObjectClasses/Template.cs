@@ -113,8 +113,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             this.CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
             this.WriteLine("    */");
 
-            bool hasPositionStorage = rel.NeedsPositionStorage((RelationEndRole)relEnd.Role);
-
             this.WriteLine("        // object reference property");
                 this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
                     this.MembersToSerialize,
@@ -122,7 +120,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                     rel.GetAssociationName(), otherEnd.RoleName,
                     otherEnd.Type.GetDataTypeString(),
                     otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
-                    hasPositionStorage
+                    rel.NeedsPositionStorage((RelationEndRole)relEnd.Role)
                     );
         }
 

@@ -23,7 +23,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
             ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx, MembersToSerialize,
                propertyName, backingName, fkName, "_" + fkName,
                 relEnd.Type.GetDataTypeString(), rel, endRole,
-                false, otherEnd.HasPersistentOrder);
+                false, rel.NeedsPositionStorage(endRole));
         }
 
         protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)

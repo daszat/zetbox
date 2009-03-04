@@ -17,10 +17,10 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
                 null,
                 propertyName, prop.GetAssociationName(), prop.ObjectClass.ClassName,
                 prop.ObjectClass.ClassName, prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix,
-                 false);
-		
+                false);
+
         }
- 
+
 
     }
 }

@@ -60,9 +60,15 @@ namespace Kistl.App.Extensions
 
         public static bool NeedsPositionStorage(this Relation rel, RelationEndRole endRole)
         {
-            return ((rel.Storage == StorageType.MergeIntoA && RelationEndRole.A == endRole)
-                || (rel.Storage == StorageType.MergeIntoB && RelationEndRole.B == endRole)
-                || (rel.Storage == StorageType.Replicate));
+            return ((rel.Storage == StorageType.MergeIntoA && RelationEndRole.A == endRole && rel.B.HasPersistentOrder)
+                || (rel.Storage == StorageType.MergeIntoB && RelationEndRole.B == endRole && rel.A.HasPersistentOrder)
+                || (rel.Storage == StorageType.Replicate 
+                    && (
+                        (rel.A.HasPersistentOrder && RelationEndRole.B == endRole)
+                        || (rel.B.HasPersistentOrder && RelationEndRole.A == endRole))
+                    )
+                || (rel.Storage == StorageType.Separate && (rel.A.HasPersistentOrder || rel.B.HasPersistentOrder))
+                );
         }
 
 

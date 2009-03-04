@@ -5,7 +5,9 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
+
 
 namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 {
@@ -35,7 +37,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override bool IsOrdered()
         {
-            return rel.A.HasPersistentOrder || rel.B.HasPersistentOrder;
+            return rel.NeedsPositionStorage(RelationEndRole.A) || rel.NeedsPositionStorage(RelationEndRole.B);
         }
+
     }
 }
