@@ -158,27 +158,30 @@ this.WriteObjects("        bool IKistlContext.IsReadonly { get { return true; } 
 this.WriteObjects("\r\n");
 this.WriteObjects("        IDataObject IKistlContext.Create(Type type) { throw new ReadOnlyContextException(); }\r\n");
 this.WriteObjects("        T IKistlContext.Create<T>() { throw new ReadOnlyContextException(); }\r\n");
+this.WriteObjects("        \r\n");
+this.WriteObjects("        ICollectionEntry IKistlContext.CreateCollectionEntry(Type type) { throw new ReadOnlyContextException(); }\r\n");
+this.WriteObjects("        T IKistlContext.CreateCollectionEntry<T>() { throw new ReadOnlyContextException(); }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        IStruct IKistlContext.CreateStruct(Type type) { throw new ReadOnlyContextException(); }\r\n");
 this.WriteObjects("        T IKistlContext.CreateStruct<T>() { throw new ReadOnlyContextException(); }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        public IDataObject Find(Type t, int ID)\r\n");
 this.WriteObjects("		{\r\n");
-#line 143 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenContextImplementation.cst"
+#line 146 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenContextImplementation.cst"
 foreach(var module in modulesWithFrozenClasses)
 	{
 		// TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
 		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()))
 		{
 
-#line 149 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenContextImplementation.cst"
+#line 152 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenContextImplementation.cst"
 this.WriteObjects("			if (t == typeof(",  frozenCls.Module.Namespace , ".",  frozenCls.ClassName , "))\r\n");
 this.WriteObjects("				return ",  frozenCls.Module.Namespace , ".",  Implementation.ObjectClasses.Template.GetClassName(frozenCls) , ".DataStore[ID];\r\n");
-#line 152 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenContextImplementation.cst"
+#line 155 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenContextImplementation.cst"
 }
 	}
 
-#line 155 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenContextImplementation.cst"
+#line 158 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenContextImplementation.cst"
 this.WriteObjects("			throw new NotImplementedException();\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");

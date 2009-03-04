@@ -79,6 +79,16 @@ namespace Kistl.API
             throw new NotImplementedException();
         }
 
+        public ICollectionEntry CreateCollectionEntry(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T CreateCollectionEntry<T>() where T : ICollectionEntry
+        {
+            throw new NotImplementedException();
+        }
+
         public IStruct CreateStruct(Type type)
         {
             throw new NotImplementedException();

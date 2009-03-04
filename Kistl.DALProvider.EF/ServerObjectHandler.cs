@@ -12,6 +12,8 @@ using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Extensions;
 using Kistl.App.Base;
+using Kistl.Server.Generators.Extensions;
+using System.Reflection;
 
 namespace Kistl.DALProvider.EF
 {
@@ -189,11 +191,25 @@ namespace Kistl.DALProvider.EF
         {
             var rel = ctx.Find<Relation>(relId);
             var relEnd = rel.GetEnd(endRole);
+            var relOtherEnd = rel.GetOtherEnd(relEnd);
             var parent = ctx.Find<PARENT>(parentId);
+            var ceType = Type.GetType(rel.GetCollectionEntryFullName() + 
+                Kistl.API.Helper.ImplementationSuffix + 
+                ", " + ApplicationContext.Current.ImplementationAssembly);
+            
 
+            var method = this.GetType().GetMethod("GetCollectionEntriesInternal", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            return (IEnumerable<ICollectionEntry>)method
+                .MakeGenericMethod(ceType)
+                .Invoke(this, new object[] { parent, rel, endRole });
+        }
+
+        private IEnumerable<ICollectionEntry> GetCollectionEntriesInternal<IMPL>(PARENT parent, Relation rel, RelationEndRole endRole)
+            where IMPL : class, IEntityWithRelationships
+        {
             var c = ((IEntityWithRelationships)(parent)).RelationshipManager
-                    .GetRelatedCollection<CHILD>(
-                        "Model." + rel.GetCollectionEntryAssociationName((RelationEndRole)relEnd.Role),
+                    .GetRelatedCollection<IMPL>(
+                        "Model." + rel.GetCollectionEntryAssociationName(endRole),
                         "CollectionEntry");
             if (parent.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                 && !c.IsLoaded)

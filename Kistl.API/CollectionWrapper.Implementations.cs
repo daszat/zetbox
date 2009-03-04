@@ -182,7 +182,7 @@ namespace Kistl.API
         protected override void OnEntryAdded(ENTRYTYPE entry)
         {
             base.OnEntryAdded(entry);
-            entry.AIndex = Collection.Count - 1;
+            entry.BIndex = Collection.Count - 1;
         }
 
         protected override int? IndexFromEntry(ENTRYTYPE entry)

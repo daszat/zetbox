@@ -76,6 +76,10 @@
       <Name>Kistl.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.Server\Kistl.Server.csproj">
+      <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
+      <Name>Kistl.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
       <Name>TempAppHelpers</Name>

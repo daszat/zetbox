@@ -23,12 +23,12 @@ namespace Kistl.DALProvider.EF
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return new ENTRYTYPE();
+            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
         {
-            entry.GetEFContext().DeleteObject(entry);
+            ParentObject.Context.Delete(entry);
             base.OnEntryRemoved(entry);
         }
 
@@ -47,12 +47,12 @@ namespace Kistl.DALProvider.EF
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return new ENTRYTYPE();
+            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
         {
-            entry.GetEFContext().DeleteObject(entry);
+            ParentObject.Context.Delete(entry);
             base.OnEntryRemoved(entry);
         }
     }
@@ -69,12 +69,12 @@ namespace Kistl.DALProvider.EF
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return new ENTRYTYPE();
+            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
         {
-            entry.GetEFContext().DeleteObject(entry);
+            ParentObject.Context.Delete(entry);
             base.OnEntryRemoved(entry);
         }
     }
@@ -91,12 +91,12 @@ namespace Kistl.DALProvider.EF
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return new ENTRYTYPE();
+            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
         {
-            entry.GetEFContext().DeleteObject(entry);
+            ParentObject.Context.Delete(entry);
             base.OnEntryRemoved(entry);
         }
     }

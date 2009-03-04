@@ -114,7 +114,7 @@ namespace Kistl.Client.Presentables
             Async.Queue(DataContext, () =>
             {
                 var objClass = (ObjectClass)obj.Object;
-                var created = DataContext.Create(objClass.GetDataType());
+                var created = (IDataObject)DataContext.Create(objClass.GetDataType());
                 UI.Queue(UI, () => SelectedItem = (DataObjectModel)Factory.CreateDefaultModel(DataContext, created));
             });
         }

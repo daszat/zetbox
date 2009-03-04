@@ -182,13 +182,39 @@ namespace Kistl.API.Client
         /// <returns>A new IDataObject</returns>
         public Kistl.API.IDataObject Create(Type type)
         {
+            return (IDataObject)CreateInternal(type);
+        }
+
+        /// <summary>
+        /// Creates a new ICollectionEntry by Type
+        /// </summary>
+        /// <param name="type">Type of the new ICollectionEntry</param>
+        /// <returns>A new ICollectionEntry</returns>
+        public T CreateCollectionEntry<T>() where T : Kistl.API.ICollectionEntry
+        {
+            return (T)CreateCollectionEntry(typeof(T));
+        }
+
+        /// <summary>
+        /// Creates a new ICollectionEntry.
+        /// </summary>
+        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
+        /// <returns>A new ICollectionEntry</returns>
+        public Kistl.API.ICollectionEntry CreateCollectionEntry(Type type)
+        {
+            return (ICollectionEntry)CreateInternal(type);
+        }
+
+        private Kistl.API.IPersistenceObject CreateInternal(Type type)
+        {
             CheckDisposed();
             type = type.ToImplementationType();
-            Kistl.API.IDataObject obj = (Kistl.API.IDataObject)Activator.CreateInstance(type);
+            Kistl.API.IPersistenceObject obj = (Kistl.API.IPersistenceObject)Activator.CreateInstance(type);
             Attach(obj);
             OnObjectCreated(obj);
             return obj;
         }
+
 
         /// <summary>
         /// Creates a new Struct by Type

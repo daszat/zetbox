@@ -20,6 +20,7 @@ namespace Kistl.API
         /// <param name="type">System.Type to serialize</param>
         public SerializableType(Type type)
         {
+            type = type.ToInterfaceType();
             GenericTypeParameter = new List<SerializableType>();
 
             if (type.IsGenericParameter)

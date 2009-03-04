@@ -207,6 +207,9 @@ namespace Kistl.App
         IDataObject IKistlContext.Create(Type type) { throw new ReadOnlyContextException(); }
         T IKistlContext.Create<T>() { throw new ReadOnlyContextException(); }
 
+        ICollectionEntry IKistlContext.CreateCollectionEntry(Type type) { throw new ReadOnlyContextException(); }
+        T IKistlContext.CreateCollectionEntry<T>() { throw new ReadOnlyContextException(); }
+
         IStruct IKistlContext.CreateStruct(Type type) { throw new ReadOnlyContextException(); }
         T IKistlContext.CreateStruct<T>() { throw new ReadOnlyContextException(); }
 

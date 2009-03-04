@@ -95,36 +95,5 @@ namespace Kistl.Server.Generators.Extensions
         }
 
         #endregion
-
-
-        ///// <summary>
-        ///// Calculates the preferred storage for a given Relation
-        ///// </summary>
-        //public static StorageHint GetPreferredStorage(this Relation rel)
-        //{
-        //    if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() == 1)
-        //    {
-        //        // arbitrary 1:1 relations default 
-        //        return StorageHint.MergeA;
-        //    }
-        //    else if (rel.A.Multiplicity.UpperBound() == 1 && rel.B.Multiplicity.UpperBound() > 1)
-        //    {
-        //        // if multiple Bs can exist, they get the fk
-        //        return StorageHint.MergeB;
-        //    }
-        //    else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() == 1)
-        //    {
-        //        // if multiple As ca exist, they get the fk
-        //        return StorageHint.MergeA;
-        //    }
-        //    else if (rel.A.Multiplicity.UpperBound() > 1 && rel.B.Multiplicity.UpperBound() > 1)
-        //    {
-        //        // N:M needs "weak" entity
-        //        return StorageHint.Separate;
-        //    }
-
-        //    // this means that UpperBound() < 1 for some end
-        //    throw new NotImplementedException();
-        //}
     }
 }

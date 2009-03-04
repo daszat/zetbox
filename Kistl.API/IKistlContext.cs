@@ -126,9 +126,22 @@ namespace Kistl.API
         T Create<T>() where T : IDataObject;
 
         /// <summary>
+        /// Creates a new ICollectionEntry by Type
+        /// </summary>
+        /// <param name="type">Type of the new ICollectionEntry</param>
+        /// <returns>A new ICollectionEntry</returns>
+        ICollectionEntry CreateCollectionEntry(Type type);
+        /// <summary>
+        /// Creates a new ICollectionEntry.
+        /// </summary>
+        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
+        /// <returns>A new ICollectionEntry</returns>
+        T CreateCollectionEntry<T>() where T : ICollectionEntry;
+
+        /// <summary>
         /// Creates a new Struct by Type
         /// </summary>
-        /// <param name="type">Type of the new IDataObject</param>
+        /// <param name="type">Type of the new Struct</param>
         /// <returns>A new Struct</returns>
         IStruct CreateStruct(Type type);
         /// <summary>

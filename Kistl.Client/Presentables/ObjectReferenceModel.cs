@@ -118,7 +118,7 @@ namespace Kistl.Client.Presentables
             State = ModelState.Loading;
             Async.Queue(DataContext, () =>
             {
-                IDataObject newObj = DataContext.Create(Property.GetPropertyType());
+                IDataObject newObj = (IDataObject)DataContext.Create(Property.GetPropertyType());
                 Object.SetPropertyValue<IDataObject>(Property.PropertyName, newObj);
                 // State will be reset by PropertyChanged event
             });

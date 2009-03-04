@@ -120,28 +120,53 @@ namespace Kistl.API.Server
         /// <returns>Number of affected Objects</returns>
         public abstract int SubmitChanges();
 
-        /// <summary>
-        /// Creates a new IDataObject by System.Type. Note - this Method is depricated!
-        /// </summary>
-        /// <param name="type">System.Type of the new IDataObject</param>
-        /// <returns>A new IDataObject</returns>
-        public virtual Kistl.API.IDataObject Create(Type type)
+        private Kistl.API.IPersistenceObject CreateInternal(Type type)
         {
             type = type.ToImplementationType();
-            Kistl.API.IDataObject obj = (Kistl.API.IDataObject)Activator.CreateInstance(type);
+            Kistl.API.IPersistenceObject obj = (Kistl.API.IPersistenceObject)Activator.CreateInstance(type);
             Attach(obj);
             OnObjectCreated(obj);
             return obj;
         }
 
         /// <summary>
-        /// Creates a new IDataObject.
+        /// Creates a new IPersistenceObject by System.Type. Note - this Method is depricated!
         /// </summary>
-        /// <typeparam name="T">Type of the new IDataObject</typeparam>
+        /// <param name="type">System.Type of the new IPersistenceObject</param>
+        /// <returns>A new IPersistenceObject</returns>
+        public virtual Kistl.API.IDataObject Create(Type type)
+        {
+            return (IDataObject)CreateInternal(type);
+        }
+
+        /// <summary>
+        /// Creates a new IPersistenceObject.
+        /// </summary>
+        /// <typeparam name="T">Type of the new IPersistenceObject</typeparam>
         /// <returns>A new IDataObject</returns>
         public virtual T Create<T>() where T : Kistl.API.IDataObject
         {
             return (T)Create(typeof(T));
+        }
+
+        /// <summary>
+        /// Creates a new IPersistenceObject by System.Type. Note - this Method is depricated!
+        /// </summary>
+        /// <param name="type">System.Type of the new IPersistenceObject</param>
+        /// <returns>A new IPersistenceObject</returns>
+        public virtual Kistl.API.ICollectionEntry CreateCollectionEntry(Type type)
+        {
+            return (ICollectionEntry)CreateInternal(type);
+        }
+
+        /// <summary>
+        /// Creates a new IPersistenceObject.
+        /// </summary>
+        /// <typeparam name="T">Type of the new IPersistenceObject</typeparam>
+        /// <returns>A new IDataObject</returns>
+        public virtual T CreateCollectionEntry<T>() where T : Kistl.API.ICollectionEntry
+        {
+            return (T)CreateCollectionEntry(typeof(T));
         }
 
         /// <summary>
