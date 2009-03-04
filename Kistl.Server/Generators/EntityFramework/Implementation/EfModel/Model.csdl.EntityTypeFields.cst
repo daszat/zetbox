@@ -49,13 +49,13 @@
                         FromRole="<%= relEnd.RoleName %>"
                         ToRole="<%= otherEnd.RoleName %>" />
 <%
-			}
 
-			if (rel.NeedsPositionStorage((RelationEndRole)relEnd.Role))
-			{
+				if (rel.NeedsPositionStorage((RelationEndRole)relEnd.Role))
+				{
 %>
     <Property Name="<%= p.PropertyName + Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="true" />
 <%
+				}
 			}
 		}
 		else if (p is ValueTypeProperty)

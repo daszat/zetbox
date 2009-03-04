@@ -47,14 +47,14 @@
         <MappingFragment StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
 <%
-    if (rel.A.HasPersistentOrder)
+    if (rel.NeedsPositionStorage(RelationEndRole.A))
     {
 %>
           <ScalarProperty Name="A<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="<%= fkAName %><%= Kistl.API.Helper.PositionSuffix %>" />
 <%
     }
 
-    if (rel.B.HasPersistentOrder)
+    if (rel.NeedsPositionStorage(RelationEndRole.B))
     {
 %>
           <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="<%= fkBName %><%= Kistl.API.Helper.PositionSuffix %>" />

@@ -146,7 +146,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="<%= fkAName %>" Type="int" Nullable="true" />
 <%
-		if (rel.A.HasPersistentOrder)
+		if (rel.NeedsPositionStorage(RelationEndRole.A))
 		{
 %>
     <Property Name="<%= fkAName %><%= Kistl.API.Helper.PositionSuffix %>" Type="int" Nullable="true" />
@@ -155,7 +155,7 @@
 %>
     <Property Name="<%= fkBName %>" Type="int" Nullable="true" />
 <%
-		if (rel.B.HasPersistentOrder)
+		if (rel.NeedsPositionStorage(RelationEndRole.B))
 		{
 %>
     <Property Name="<%= fkBName %><%= Kistl.API.Helper.PositionSuffix %>" Type="int" Nullable="true" />

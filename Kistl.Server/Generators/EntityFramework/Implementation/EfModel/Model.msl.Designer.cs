@@ -67,7 +67,7 @@ this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  rel.Ge
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  rel.GetCollectionEntryClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 #line 50 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
-if (rel.A.HasPersistentOrder)
+if (rel.NeedsPositionStorage(RelationEndRole.A))
     {
 
 #line 53 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
@@ -75,7 +75,7 @@ this.WriteObjects("          <ScalarProperty Name=\"A",  Kistl.API.Helper.Positi
 #line 55 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
 
-    if (rel.B.HasPersistentOrder)
+    if (rel.NeedsPositionStorage(RelationEndRole.B))
     {
 
 #line 60 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"

@@ -63,16 +63,15 @@ this.WriteObjects("    <NavigationProperty Name=\"",  p.PropertyName + Kistl.API
 this.WriteObjects("                        Relationship=\"Model.",  rel.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  relEnd.RoleName , "\"\r\n");
 this.WriteObjects("                        ToRole=\"",  otherEnd.RoleName , "\" />\r\n");
-#line 52 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
-}
+#line 53 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+if (rel.NeedsPositionStorage((RelationEndRole)relEnd.Role))
+				{
 
-			if (rel.NeedsPositionStorage((RelationEndRole)relEnd.Role))
-			{
-
-#line 57 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 56 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.PositionSuffix , "\" Type=\"Int32\" Nullable=\"true\" />\r\n");
-#line 59 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 58 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
+			}
 		}
 		else if (p is ValueTypeProperty)
 		{

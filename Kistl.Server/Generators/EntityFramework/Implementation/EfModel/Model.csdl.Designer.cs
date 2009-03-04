@@ -165,7 +165,7 @@ this.WriteObjects("                        Relationship=\"Model.",  rel.GetColle
 this.WriteObjects("                        FromRole=\"CollectionEntry\"\r\n");
 this.WriteObjects("                        ToRole=\"",  rel.A.RoleName , "\" />\r\n");
 #line 135 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-if (rel.A.HasPersistentOrder)
+if (rel.NeedsPositionStorage(RelationEndRole.A))
         {
 
 #line 138 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
@@ -181,7 +181,7 @@ this.WriteObjects("                        Relationship=\"Model.",  rel.GetColle
 this.WriteObjects("                        FromRole=\"CollectionEntry\"\r\n");
 this.WriteObjects("                        ToRole=\"",  rel.B.RoleName , "\" />\r\n");
 #line 149 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-if (rel.B.HasPersistentOrder)
+if (rel.NeedsPositionStorage(RelationEndRole.B))
         {
 
 #line 152 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"

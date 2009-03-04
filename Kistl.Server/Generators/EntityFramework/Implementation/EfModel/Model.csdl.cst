@@ -132,7 +132,7 @@
                         FromRole="CollectionEntry"
                         ToRole="<%= rel.A.RoleName %>" />
 <%
-        if (rel.A.HasPersistentOrder)
+        if (rel.NeedsPositionStorage(RelationEndRole.A))
         {
 %>
     <Property Name="A<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
@@ -146,7 +146,7 @@
                         FromRole="CollectionEntry"
                         ToRole="<%= rel.B.RoleName %>" />
 <%
-        if (rel.B.HasPersistentOrder)
+        if (rel.NeedsPositionStorage(RelationEndRole.B))
         {
 %>
     <Property Name="B<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />

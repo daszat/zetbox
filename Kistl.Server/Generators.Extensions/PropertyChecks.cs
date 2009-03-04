@@ -75,26 +75,6 @@ namespace Kistl.Server.Generators.Extensions
             return result;
         }
 
-        //public static bool NeedsPositionColumn(this Property prop)
-        //{
-        //    if (prop == null || !prop.HasStorage()) return false;
-
-        //    if (prop is ObjectReferenceProperty)
-        //    {
-        //        ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)prop;
-        //        var rel = RelationExtensions.Lookup(prop.Context, objRefProp);
-        //        RelationEnd relEnd = rel.GetEnd(objRefProp);
-        //        RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
-
-        //        if (objRefProp.IsList == false &&
-        //            objRefProp.GetRelationType() == Kistl.API.RelationType.one_n &&
-        //            otherEnd.HasPersistentOrder) return true;
-        //    }
-        //    if (prop.IsList == true &&
-        //        prop.IsIndexed) return true;
-        //    return false;
-        //}
-
         public static string GetCollectionTypeString(this Property prop)
         {
             if (prop.IsIndexed)
