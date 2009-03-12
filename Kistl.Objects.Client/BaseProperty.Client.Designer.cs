@@ -166,13 +166,15 @@ namespace Kistl.App.Base
                 var oldValue = ObjectClass;
                 if (value != null && value.ID != fk_ObjectClass)
                 {
-                    oldValue.Properties.Remove(this);
+					if (oldValue != null)
+						oldValue.Properties.Remove(this);
                     fk_ObjectClass = value.ID;
                     value.Properties.Add(this);
                 }
                 else
                 {
-                    oldValue.Properties.Remove(this);
+					if (oldValue != null)
+	                    oldValue.Properties.Remove(this);
                     fk_ObjectClass = null;
                 }
             }

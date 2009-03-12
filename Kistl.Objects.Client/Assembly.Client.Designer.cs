@@ -92,13 +92,15 @@ namespace Kistl.App.Base
                 var oldValue = Module;
                 if (value != null && value.ID != fk_Module)
                 {
-                    oldValue.Assemblies.Remove(this);
+					if (oldValue != null)
+						oldValue.Assemblies.Remove(this);
                     fk_Module = value.ID;
                     value.Assemblies.Add(this);
                 }
                 else
                 {
-                    oldValue.Assemblies.Remove(this);
+					if (oldValue != null)
+	                    oldValue.Assemblies.Remove(this);
                     fk_Module = null;
                 }
             }

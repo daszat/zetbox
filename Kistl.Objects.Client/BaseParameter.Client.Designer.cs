@@ -115,13 +115,15 @@ namespace Kistl.App.Base
                 var oldValue = Method;
                 if (value != null && value.ID != fk_Method)
                 {
-                    oldValue.Parameter.Remove(this);
+					if (oldValue != null)
+						oldValue.Parameter.Remove(this);
                     fk_Method = value.ID;
                     value.Parameter.Add(this);
                 }
                 else
                 {
-                    oldValue.Parameter.Remove(this);
+					if (oldValue != null)
+	                    oldValue.Parameter.Remove(this);
                     fk_Method = null;
                 }
             }

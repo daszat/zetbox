@@ -46,13 +46,15 @@ namespace Kistl.App.Base
                 var oldValue = ConstrainedProperty;
                 if (value != null && value.ID != fk_ConstrainedProperty)
                 {
-                    oldValue.Constraints.Remove(this);
+					if (oldValue != null)
+						oldValue.Constraints.Remove(this);
                     fk_ConstrainedProperty = value.ID;
                     value.Constraints.Add(this);
                 }
                 else
                 {
-                    oldValue.Constraints.Remove(this);
+					if (oldValue != null)
+	                    oldValue.Constraints.Remove(this);
                     fk_ConstrainedProperty = null;
                 }
             }

@@ -90,13 +90,15 @@ namespace Kistl.App.Base
                 var oldValue = InvokeOnObjectClass;
                 if (value != null && value.ID != fk_InvokeOnObjectClass)
                 {
-                    oldValue.MethodInvocations.Remove(this);
+					if (oldValue != null)
+						oldValue.MethodInvocations.Remove(this);
                     fk_InvokeOnObjectClass = value.ID;
                     value.MethodInvocations.Add(this);
                 }
                 else
                 {
-                    oldValue.MethodInvocations.Remove(this);
+					if (oldValue != null)
+	                    oldValue.MethodInvocations.Remove(this);
                     fk_InvokeOnObjectClass = null;
                 }
             }
@@ -169,13 +171,15 @@ namespace Kistl.App.Base
                 var oldValue = Method;
                 if (value != null && value.ID != fk_Method)
                 {
-                    oldValue.MethodInvokations.Remove(this);
+					if (oldValue != null)
+						oldValue.MethodInvokations.Remove(this);
                     fk_Method = value.ID;
                     value.MethodInvokations.Add(this);
                 }
                 else
                 {
-                    oldValue.MethodInvokations.Remove(this);
+					if (oldValue != null)
+	                    oldValue.MethodInvokations.Remove(this);
                     fk_Method = null;
                 }
             }

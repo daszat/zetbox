@@ -46,13 +46,15 @@ namespace Kistl.App.Zeiterfassung
                 var oldValue = Projekt;
                 if (value != null && value.ID != fk_Projekt)
                 {
-                    oldValue.Kostentraeger.Remove(this);
+					if (oldValue != null)
+						oldValue.Kostentraeger.Remove(this);
                     fk_Projekt = value.ID;
                     value.Kostentraeger.Add(this);
                 }
                 else
                 {
-                    oldValue.Kostentraeger.Remove(this);
+					if (oldValue != null)
+	                    oldValue.Kostentraeger.Remove(this);
                     fk_Projekt = null;
                 }
             }

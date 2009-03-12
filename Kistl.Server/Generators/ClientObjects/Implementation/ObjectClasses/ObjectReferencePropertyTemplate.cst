@@ -55,7 +55,8 @@
         if (otherProp.IsList)
         {
 %>
-                    oldValue.<%= otherName %>.Remove(this);
+					if (oldValue != null)
+						oldValue.<%= otherName %>.Remove(this);
                     <%= fkName %> = value.ID;
                     value.<%= otherName %>.Add(this);
 <%
@@ -75,7 +76,8 @@
         if (otherProp.IsList)
         {
 %>
-                    oldValue.<%= otherName %>.Remove(this);
+					if (oldValue != null)
+	                    oldValue.<%= otherName %>.Remove(this);
                     <%= fkName %> = null;
 <%
         }

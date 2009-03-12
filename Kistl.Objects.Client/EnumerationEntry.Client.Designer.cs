@@ -69,13 +69,15 @@ namespace Kistl.App.Base
                 var oldValue = Enumeration;
                 if (value != null && value.ID != fk_Enumeration)
                 {
-                    oldValue.EnumerationEntries.Remove(this);
+					if (oldValue != null)
+						oldValue.EnumerationEntries.Remove(this);
                     fk_Enumeration = value.ID;
                     value.EnumerationEntries.Add(this);
                 }
                 else
                 {
-                    oldValue.EnumerationEntries.Remove(this);
+					if (oldValue != null)
+	                    oldValue.EnumerationEntries.Remove(this);
                     fk_Enumeration = null;
                 }
             }

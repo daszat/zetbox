@@ -196,13 +196,15 @@ namespace Kistl.App.Base
                 var oldValue = Module;
                 if (value != null && value.ID != fk_Module)
                 {
-                    oldValue.DataTypes.Remove(this);
+					if (oldValue != null)
+						oldValue.DataTypes.Remove(this);
                     fk_Module = value.ID;
                     value.DataTypes.Add(this);
                 }
                 else
                 {
-                    oldValue.DataTypes.Remove(this);
+					if (oldValue != null)
+	                    oldValue.DataTypes.Remove(this);
                     fk_Module = null;
                 }
             }

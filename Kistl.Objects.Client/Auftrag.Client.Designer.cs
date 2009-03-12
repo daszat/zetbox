@@ -180,13 +180,15 @@ namespace Kistl.App.Projekte
                 var oldValue = Projekt;
                 if (value != null && value.ID != fk_Projekt)
                 {
-                    oldValue.Auftraege.Remove(this);
+					if (oldValue != null)
+						oldValue.Auftraege.Remove(this);
                     fk_Projekt = value.ID;
                     value.Auftraege.Add(this);
                 }
                 else
                 {
-                    oldValue.Auftraege.Remove(this);
+					if (oldValue != null)
+	                    oldValue.Auftraege.Remove(this);
                     fk_Projekt = null;
                 }
             }

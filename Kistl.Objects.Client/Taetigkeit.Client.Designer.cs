@@ -180,13 +180,15 @@ namespace Kistl.App.Zeiterfassung
                 var oldValue = Zeitkonto;
                 if (value != null && value.ID != fk_Zeitkonto)
                 {
-                    oldValue.Taetigkeiten.Remove(this);
+					if (oldValue != null)
+						oldValue.Taetigkeiten.Remove(this);
                     fk_Zeitkonto = value.ID;
                     value.Taetigkeiten.Add(this);
                 }
                 else
                 {
-                    oldValue.Taetigkeiten.Remove(this);
+					if (oldValue != null)
+	                    oldValue.Taetigkeiten.Remove(this);
                     fk_Zeitkonto = null;
                 }
             }

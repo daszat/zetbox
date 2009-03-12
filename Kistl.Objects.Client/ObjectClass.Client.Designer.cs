@@ -46,13 +46,15 @@ namespace Kistl.App.Base
                 var oldValue = BaseObjectClass;
                 if (value != null && value.ID != fk_BaseObjectClass)
                 {
-                    oldValue.SubClasses.Remove(this);
+					if (oldValue != null)
+						oldValue.SubClasses.Remove(this);
                     fk_BaseObjectClass = value.ID;
                     value.SubClasses.Add(this);
                 }
                 else
                 {
-                    oldValue.SubClasses.Remove(this);
+					if (oldValue != null)
+	                    oldValue.SubClasses.Remove(this);
                     fk_BaseObjectClass = null;
                 }
             }
