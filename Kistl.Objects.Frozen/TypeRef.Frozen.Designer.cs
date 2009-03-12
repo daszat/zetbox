@@ -153,7 +153,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(123);
+		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(106);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new TypeRef__Implementation__Frozen(1);
@@ -367,40 +367,6 @@ namespace Kistl.App.Base
 			DataStore[105] = new TypeRef__Implementation__Frozen(105);
 
 			DataStore[106] = new TypeRef__Implementation__Frozen(106);
-
-			DataStore[107] = new TypeRef__Implementation__Frozen(107);
-
-			DataStore[108] = new TypeRef__Implementation__Frozen(108);
-
-			DataStore[109] = new TypeRef__Implementation__Frozen(109);
-
-			DataStore[110] = new TypeRef__Implementation__Frozen(110);
-
-			DataStore[111] = new TypeRef__Implementation__Frozen(111);
-
-			DataStore[112] = new TypeRef__Implementation__Frozen(112);
-
-			DataStore[113] = new TypeRef__Implementation__Frozen(113);
-
-			DataStore[114] = new TypeRef__Implementation__Frozen(114);
-
-			DataStore[115] = new TypeRef__Implementation__Frozen(115);
-
-			DataStore[116] = new TypeRef__Implementation__Frozen(116);
-
-			DataStore[117] = new TypeRef__Implementation__Frozen(117);
-
-			DataStore[118] = new TypeRef__Implementation__Frozen(118);
-
-			DataStore[119] = new TypeRef__Implementation__Frozen(119);
-
-			DataStore[120] = new TypeRef__Implementation__Frozen(120);
-
-			DataStore[121] = new TypeRef__Implementation__Frozen(121);
-
-			DataStore[122] = new TypeRef__Implementation__Frozen(122);
-
-			DataStore[123] = new TypeRef__Implementation__Frozen(123);
 
 		}
 
@@ -935,91 +901,6 @@ namespace Kistl.App.Base
 			DataStore[106].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[106].Seal();
-			DataStore[107].FullName = @"Kistl.Client.Presentables.EnumerationPropertyModel`1";
-			DataStore[107].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[107].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[107].Seal();
-			DataStore[108].FullName = @"Kistl.App.Base.Multiplicity";
-			DataStore[108].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13];
-			DataStore[108].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[108].Seal();
-			DataStore[109].FullName = @"Kistl.Client.Presentables.EnumerationPropertyModel`1";
-			DataStore[109].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[109].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[109].Seal();
-			DataStore[110].FullName = @"Kistl.App.Base.StorageType";
-			DataStore[110].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13];
-			DataStore[110].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[110].Seal();
-			DataStore[111].FullName = @"Kistl.Client.Presentables.EnumerationPropertyModel`1";
-			DataStore[111].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[111].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[111].Seal();
-			DataStore[112].FullName = @"Kistl.App.GUI.VisualType";
-			DataStore[112].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13];
-			DataStore[112].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[112].Seal();
-			DataStore[113].FullName = @"Kistl.Client.Presentables.EnumerationPropertyModel`1";
-			DataStore[113].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[113].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[113].Seal();
-			DataStore[114].FullName = @"Kistl.App.GUI.Toolkit";
-			DataStore[114].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13];
-			DataStore[114].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[114].Seal();
-			DataStore[115].FullName = @"Kistl.Client.Presentables.EnumerationPropertyModel`1";
-			DataStore[115].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[115].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[115].Seal();
-			DataStore[116].FullName = @"Kistl.App.Test.TestEnum";
-			DataStore[116].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13];
-			DataStore[116].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[116].Seal();
-			DataStore[117].FullName = @"Kistl.Client.Presentables.ReferencePropertyModel`1[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]";
-			DataStore[117].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[117].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[117].Seal();
-			DataStore[118].FullName = @"Kistl.Client.Presentables.SimpleReferenceListPropertyModel`1[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]";
-			DataStore[118].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[118].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[118].Seal();
-			DataStore[119].FullName = @"Kistl.Client.Presentables.ChooseReferencePropertyModel`1[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]";
-			DataStore[119].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[119].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[119].Seal();
-			DataStore[120].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1[[System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]";
-			DataStore[120].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[120].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[120].Seal();
-			DataStore[121].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1[[System.Double, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]";
-			DataStore[121].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[121].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[121].Seal();
-			DataStore[122].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1[[System.DateTime, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]";
-			DataStore[122].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[122].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[122].Seal();
-			DataStore[123].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1[[System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]";
-			DataStore[123].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[123].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
-});
-			DataStore[123].Seal();
 	
 		}
 

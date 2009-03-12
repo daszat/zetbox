@@ -136,8 +136,8 @@
 	foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
 	{
 		string ceName = rel.GetCollectionEntryClassName();
-		string fkAName = rel.GetCollectionEntryFkaColumnName();
-		string fkBName = rel.GetCollectionEntryFkbColumnName();
+		string fkAName = rel.GetCollectionEntryFkColumnName(RelationEndRole.A);
+		string fkBName = rel.GetCollectionEntryFkColumnName(RelationEndRole.B);
 %>	
   <EntityType Name="<%= ceName %>">
     <Key>

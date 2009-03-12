@@ -86,8 +86,14 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                // fix up inverse reference
+
                 var oldValue = InvokeOnObjectClass;
+                
+                // shortcut noops
+                if (Object.Equals(oldValue, value))
+					return;
+                
+                // fix up inverse reference
                 if (value != null && value.ID != fk_InvokeOnObjectClass)
                 {
 					if (oldValue != null)
@@ -167,8 +173,14 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                // fix up inverse reference
+
                 var oldValue = Method;
+                
+                // shortcut noops
+                if (Object.Equals(oldValue, value))
+					return;
+                
+                // fix up inverse reference
                 if (value != null && value.ID != fk_Method)
                 {
 					if (oldValue != null)

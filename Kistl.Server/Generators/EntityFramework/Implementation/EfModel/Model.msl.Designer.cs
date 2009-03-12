@@ -52,8 +52,8 @@ this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for obj
 #line 35 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
     {
-        string fkAName = rel.GetCollectionEntryFkaColumnName();
-        string fkBName = rel.GetCollectionEntryFkbColumnName();
+        string fkAName = rel.GetCollectionEntryFkColumnName(RelationEndRole.A);
+        string fkBName = rel.GetCollectionEntryFkColumnName(RelationEndRole.B);
 
 #line 40 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    <!--\r\n");

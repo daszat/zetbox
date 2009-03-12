@@ -22,7 +22,7 @@ namespace Kistl.Server.Tests
                 ////GeneratorTests();
                 //GetListOfTests();
                 //InheritanceTests();
-                //ListPropetiesTests();
+                ListPropertiesTests();
                 //ObjectTests();
                 //StructTests();
             }
@@ -229,24 +229,24 @@ namespace Kistl.Server.Tests
 
         }
 
-        private static void ListPropetiesTests()
+        private static void ListPropertiesTests()
         {
             ListPropetiesTests test = new ListPropetiesTests();
 
             test.SetUp();
-            test.AddStringListPropertyContent();
-
-            test.SetUp();
-            test.DeleteStringListPropertyContent();
-
-            test.SetUp();
-            test.UpdateStringListPropertyContent();
-
-            test.SetUp();
             test.GetPointerListPropertyContent();
 
-            test.SetUp();
-            test.GetStringListPropertyContent();
+            //test.SetUp();
+            //test.AddStringListPropertyContent();
+
+            //test.SetUp();
+            //test.DeleteStringListPropertyContent();
+
+            //test.SetUp();
+            //test.UpdateStringListPropertyContent();
+
+            //test.SetUp();
+            //test.GetStringListPropertyContent();
         }
 
         private static void ObjectTests()

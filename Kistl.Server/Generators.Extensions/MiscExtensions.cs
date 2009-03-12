@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Server.Generators.Extensions
 {
@@ -84,14 +85,20 @@ namespace Kistl.Server.Generators.Extensions
             return String.Format("{0}.{1}", prop.ObjectClass.Module.Namespace, prop.GetCollectionEntryClassName());
         }
 
-        public static string GetCollectionEntryFkaColumnName(this Relation rel)
+        public static string GetCollectionEntryFkColumnName(this Relation rel, RelationEndRole endRole)
         {
-            return "fk_" + rel.A.RoleName;
-        }
-
-        public static string GetCollectionEntryFkbColumnName(this Relation rel)
-        {
-            return "fk_" + rel.B.RoleName;
+            var relEnd = rel.GetEnd(endRole);
+            // legacy condition: if navigator exists, use his objectclass' name
+            // See Kistl.Server.GeneratorsOld.Helper.GeneratorHelper.CalcForeignKeyColumnName()
+            // TODO: remove this after reworking the SQL Generator to use Relations
+            if (relEnd.Navigator != null)
+            {
+                return "fk_" + relEnd.Navigator.ObjectClass.ClassName;
+            }
+            else
+            {
+                return "fk_" + relEnd.RoleName;
+            }
         }
 
         #endregion

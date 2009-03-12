@@ -1,50 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.Server.Tests\Kistl.ServerTests.nunit" total="54" failures="13" not-run="9" date="2009-03-12" time="15:08:59">
+<test-results name="P:\Kistl\Tests\Kistl.Server.Tests\Kistl.ServerTests.nunit" total="54" failures="9" not-run="9" date="2009-03-12" time="16:25:45">
   <environment nunit-version="2.4.7.0" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.Server.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.Server.Tests\Kistl.ServerTests.nunit" success="False" time="18.765" asserts="0">
+  <test-suite name="P:\Kistl\Tests\Kistl.Server.Tests\Kistl.ServerTests.nunit" success="False" time="19.769" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.Server.Tests\bin\Debug\Kistl.Server.Tests.exe" success="False" time="18.755" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.Server.Tests\bin\Debug\Kistl.Server.Tests.exe" success="False" time="19.760" asserts="0">
         <results>
-          <test-suite name="Kistl" success="False" time="18.747" asserts="0">
+          <test-suite name="Kistl" success="False" time="19.752" asserts="0">
             <results>
-              <test-suite name="Server" success="False" time="18.736" asserts="0">
+              <test-suite name="Server" success="False" time="19.743" asserts="0">
                 <results>
-                  <test-suite name="Tests" success="False" time="18.728" asserts="0">
+                  <test-suite name="Tests" success="False" time="19.735" asserts="0">
                     <results>
-                      <test-suite name="FrozenContextTests" success="True" time="1.118" asserts="0">
+                      <test-suite name="FrozenContextTests" success="True" time="1.102" asserts="0">
                         <results>
-                          <test-case name="Kistl.Server.Tests.FrozenContextTests.IsReadonly_Create" executed="True" success="True" time="1.050" asserts="0" />
-                          <test-case name="Kistl.Server.Tests.FrozenContextTests.IsReadonlyFlag" executed="True" success="True" time="0.004" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.FrozenContextTests.IsReadonly_Create" executed="True" success="True" time="1.032" asserts="0" />
+                          <test-case name="Kistl.Server.Tests.FrozenContextTests.IsReadonlyFlag" executed="True" success="True" time="0.005" asserts="1" />
                           <test-case name="Kistl.Server.Tests.FrozenContextTests.IsReadonlyObject" executed="True" success="True" time="0.039" asserts="1" />
                           <test-case name="Kistl.Server.Tests.FrozenContextTests.IsReadonlyObject_Reference" executed="True" success="True" time="0.009" asserts="0" />
                           <test-case name="Kistl.Server.Tests.FrozenContextTests.IsReadonlyObject_String" executed="True" success="True" time="0.001" asserts="0" />
                         </results>
                       </test-suite>
-                      <test-suite name="GetListOfTests" success="True" time="0.251" asserts="0">
+                      <test-suite name="GetListOfTests" success="True" time="0.266" asserts="0">
                         <results>
-                          <test-case name="Kistl.Server.Tests.GetListOfTests.GetListOf" executed="True" success="True" time="0.145" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListOfTests.GetListOf_GetObject" executed="True" success="True" time="0.034" asserts="2" />
-                          <test-case name="Kistl.Server.Tests.GetListOfTests.GetListOf_Twice" executed="True" success="True" time="0.011" asserts="3" />
+                          <test-case name="Kistl.Server.Tests.GetListOfTests.GetListOf" executed="True" success="True" time="0.149" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListOfTests.GetListOf_GetObject" executed="True" success="True" time="0.039" asserts="2" />
+                          <test-case name="Kistl.Server.Tests.GetListOfTests.GetListOf_Twice" executed="True" success="True" time="0.016" asserts="3" />
                           <test-case name="Kistl.Server.Tests.GetListOfTests.GetObject_GetListOf" executed="True" success="True" time="0.058" asserts="3" />
                         </results>
                       </test-suite>
-                      <test-suite name="GetListTests" success="True" time="1.667" asserts="0">
+                      <test-suite name="GetListTests" success="True" time="1.662" asserts="0">
                         <results>
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetList" executed="True" success="True" time="0.035" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetList_GetObject" executed="True" success="True" time="0.932" asserts="3" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetList_Twice" executed="True" success="True" time="0.068" asserts="187" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetList" executed="True" success="True" time="0.045" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetList_GetObject" executed="True" success="True" time="0.907" asserts="3" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetList_Twice" executed="True" success="True" time="0.055" asserts="187" />
                           <test-case name="Kistl.Server.Tests.GetListTests.GetListByTypeWithOrderBy" executed="False">
                             <reason>
                               <message><![CDATA[Case 617]]></message>
                             </reason>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListFirst" executed="True" success="True" time="0.010" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListSingle" executed="True" success="True" time="0.006" asserts="0" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithFirst" executed="True" success="True" time="0.006" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="0.075" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithOrderByAndWhere" executed="True" success="True" time="0.051" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListFirst" executed="True" success="True" time="0.014" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListSingle" executed="True" success="True" time="0.007" asserts="0" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithFirst" executed="True" success="True" time="0.005" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="0.073" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithOrderByAndWhere" executed="True" success="True" time="0.054" asserts="1" />
                           <test-case name="Kistl.Server.Tests.GetListTests.GetListWithOrderByThenOrderBy" executed="False">
                             <reason>
                               <message><![CDATA[Case 634]]></message>
@@ -55,62 +55,28 @@
                               <message><![CDATA[System.InvalidOperationException : The operands for operator 'GreaterThan' do not match the parameters of method 'op_GreaterThan'.]]></message>
                             </reason>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.054" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithProjection" executed="True" success="True" time="0.080" asserts="0" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithPropertyAccessor" executed="True" success="True" time="0.015" asserts="2" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithPropertyObjectAccessor" executed="True" success="True" time="0.045" asserts="2" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.057" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithProjection" executed="True" success="True" time="0.082" asserts="0" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithPropertyAccessor" executed="True" success="True" time="0.016" asserts="2" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithPropertyObjectAccessor" executed="True" success="True" time="0.046" asserts="2" />
                           <test-case name="Kistl.Server.Tests.GetListTests.GetListWithSingle" executed="True" success="True" time="0.005" asserts="0" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithTake" executed="True" success="True" time="0.044" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithTakeAndWhere" executed="True" success="True" time="0.043" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetObject_GetList" executed="True" success="True" time="0.171" asserts="6" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithTake" executed="True" success="True" time="0.043" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithTakeAndWhere" executed="True" success="True" time="0.045" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetObject_GetList" executed="True" success="True" time="0.182" asserts="6" />
                         </results>
                       </test-suite>
-                      <test-suite name="InheritanceTests" success="True" time="2.568" asserts="0">
+                      <test-suite name="InheritanceTests" success="True" time="2.587" asserts="0">
                         <results>
-                          <test-case name="Kistl.Server.Tests.InheritanceTests.GetListOfInheritedObjects" executed="True" success="True" time="0.426" asserts="3" />
-                          <test-case name="Kistl.Server.Tests.InheritanceTests.UpdateInheritedObject" executed="True" success="True" time="2.139" asserts="4" />
+                          <test-case name="Kistl.Server.Tests.InheritanceTests.GetListOfInheritedObjects" executed="True" success="True" time="0.419" asserts="3" />
+                          <test-case name="Kistl.Server.Tests.InheritanceTests.UpdateInheritedObject" executed="True" success="True" time="2.167" asserts="4" />
                         </results>
                       </test-suite>
-                      <test-suite name="ListPropetiesTests" success="False" time="0.286" asserts="0">
+                      <test-suite name="ListPropetiesTests" success="True" time="0.309" asserts="0">
                         <results>
-                          <test-case name="Kistl.Server.Tests.ListPropetiesTests.AddStringListPropertyContent" executed="True" success="True" time="0.160" asserts="4" />
-                          <test-case name="Kistl.Server.Tests.ListPropetiesTests.DeleteStringListPropertyContent" executed="True" success="True" time="0.056" asserts="4" />
-                          <test-case name="Kistl.Server.Tests.ListPropetiesTests.GetPointerListPropertyContent" executed="True" success="False" time="0.053" asserts="0">
-                            <failure>
-                              <message><![CDATA[System.Data.EntityCommandExecutionException : Fehler beim Ausführen der Befehlsdefinition. Details finden Sie in der internen Ausnahme.
-  ----> System.Data.SqlClient.SqlException : Invalid column name 'fk_Projekte'.
-Invalid column name 'fk_Projekte'.
-Invalid column name 'fk_Projekte_pos'.
-Invalid column name 'fk_Projekte'.]]></message>
-                              <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
-bei System.Data.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
-bei System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
-bei System.Data.Objects.ObjectQuery`1.Execute(MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.EntityCollection`1.Load(IEnumerable`1 collection, MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.EntityCollection`1.Load(MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.RelatedEnd.Load()
-bei Kistl.App.Projekte.Projekt__Implementation__.get_Mitarbeiter__Implementation__() in c:\temp\KistlCodeGen\Kistl.Objects.Server\Projekt.Server.Designer.cs:Zeile 233.
-bei Kistl.App.Projekte.Projekt__Implementation__.get_Mitarbeiter() in c:\temp\KistlCodeGen\Kistl.Objects.Server\Projekt.Server.Designer.cs:Zeile 213.
-bei Kistl.Server.Tests.ListPropetiesTests.GetPointerListPropertyContent() in P:\Kistl\Tests\Kistl.Server.Tests\Tests\ListPropetiesTests.cs:Zeile 46.
---SqlException
-bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
-bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
-bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
-bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
-bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
-bei System.Data.SqlClient.SqlDataReader.get_MetaData()
-bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
-bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
-bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
-]]></stack-trace>
-                            </failure>
-                          </test-case>
-                          <test-case name="Kistl.Server.Tests.ListPropetiesTests.GetStringListPropertyContent" executed="True" success="True" time="0.007" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.ListPropetiesTests.AddStringListPropertyContent" executed="True" success="True" time="0.161" asserts="4" />
+                          <test-case name="Kistl.Server.Tests.ListPropetiesTests.DeleteStringListPropertyContent" executed="True" success="True" time="0.049" asserts="4" />
+                          <test-case name="Kistl.Server.Tests.ListPropetiesTests.GetPointerListPropertyContent" executed="True" success="True" time="0.089" asserts="9" />
+                          <test-case name="Kistl.Server.Tests.ListPropetiesTests.GetStringListPropertyContent" executed="True" success="True" time="0.005" asserts="1" />
                           <test-case name="Kistl.Server.Tests.ListPropetiesTests.UpdateStringListPropertyContent" executed="False">
                             <reason>
                               <message><![CDATA[Implement IsSorted on Kunde.EMails]]></message>
@@ -118,55 +84,23 @@ bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(Entity
                           </test-case>
                         </results>
                       </test-suite>
-                      <test-suite name="ObjectTests" success="False" time="0.257" asserts="0">
+                      <test-suite name="ObjectTests" success="True" time="0.208" asserts="0">
                         <results>
-                          <test-case name="Kistl.Server.Tests.ObjectTests.GetListOf" executed="True" success="True" time="0.011" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.ObjectTests.GetListOf_List" executed="True" success="False" time="0.036" asserts="0">
-                            <failure>
-                              <message><![CDATA[System.Data.EntityCommandExecutionException : Fehler beim Ausführen der Befehlsdefinition. Details finden Sie in der internen Ausnahme.
-  ----> System.Data.SqlClient.SqlException : Invalid column name 'fk_Projekte_pos'.
-Invalid column name 'fk_Projekte'.]]></message>
-                              <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
-bei System.Data.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
-bei System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
-bei System.Data.Objects.ObjectQuery`1.Execute(MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.EntityCollection`1.Load(IEnumerable`1 collection, MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.EntityCollection`1.Load(MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.RelatedEnd.Load()
-bei Kistl.App.Projekte.Mitarbeiter__Implementation__.get_Projekte__Implementation__() in c:\temp\KistlCodeGen\Kistl.Objects.Server\Mitarbeiter.Server.Designer.cs:Zeile 139.
-bei Kistl.App.Projekte.Mitarbeiter__Implementation__.get_Projekte() in c:\temp\KistlCodeGen\Kistl.Objects.Server\Mitarbeiter.Server.Designer.cs:Zeile 119.
-bei Kistl.Server.Tests.ObjectTests.GetListOf_List() in P:\Kistl\Tests\Kistl.Server.Tests\Tests\ObjectTests.cs:Zeile 72.
---SqlException
-bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
-bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
-bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
-bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
-bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
-bei System.Data.SqlClient.SqlDataReader.get_MetaData()
-bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
-bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
-bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
-]]></stack-trace>
-                            </failure>
-                          </test-case>
-                          <test-case name="Kistl.Server.Tests.ObjectTests.GetObject" executed="True" success="True" time="0.039" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.ObjectTests.GetObject_Twice" executed="True" success="True" time="0.047" asserts="3" />
-                          <test-case name="Kistl.Server.Tests.ObjectTests.NewObject" executed="True" success="True" time="0.046" asserts="4" />
-                          <test-case name="Kistl.Server.Tests.ObjectTests.SetObject" executed="True" success="True" time="0.072" asserts="3" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.GetListOf" executed="True" success="True" time="0.010" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.GetListOf_List" executed="True" success="True" time="0.014" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.GetObject" executed="True" success="True" time="0.041" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.GetObject_Twice" executed="True" success="True" time="0.042" asserts="3" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.NewObject" executed="True" success="True" time="0.043" asserts="4" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.SetObject" executed="True" success="True" time="0.051" asserts="3" />
                         </results>
                       </test-suite>
-                      <test-suite name="RelationTests" success="False" time="0.566" asserts="0">
+                      <test-suite name="RelationTests" success="False" time="0.660" asserts="0">
                         <results>
                           <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_1" executed="True" success="True" time="0.004" asserts="7" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_By_Index" executed="True" success="True" time="0.017" asserts="7" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_With_Clear" executed="True" success="True" time="0.007" asserts="7" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_With_Remove" executed="True" success="True" time="0.003" asserts="7" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_m_By_Index" executed="True" success="False" time="0.017" asserts="1">
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_By_Index" executed="True" success="True" time="0.019" asserts="7" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_With_Clear" executed="True" success="True" time="0.006" asserts="7" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_With_Remove" executed="True" success="True" time="0.005" asserts="7" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_m_By_Index" executed="True" success="False" time="0.022" asserts="1">
                             <failure>
                               <message><![CDATA[System.ArgumentOutOfRangeException : Das angegebene Argument liegt außerhalb des gültigen Wertebereichs.
 Parametername: Index 0 not found in collection]]></message>
@@ -176,7 +110,7 @@ bei Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_m_By_Index() in P:\
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_m_With_Clear" executed="True" success="False" time="0.005" asserts="1">
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_m_With_Clear" executed="True" success="False" time="0.004" asserts="1">
                             <failure>
                               <message><![CDATA[System.ArgumentOutOfRangeException : Das angegebene Argument liegt außerhalb des gültigen Wertebereichs.
 Parametername: Index 0 not found in collection]]></message>
@@ -206,7 +140,7 @@ bei Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_By_Index() in P:\
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_With_Clear" executed="True" success="False" time="0.004" asserts="3">
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_With_Clear" executed="True" success="False" time="0.006" asserts="3">
                             <failure>
                               <message><![CDATA[System.ArgumentOutOfRangeException : Das angegebene Argument liegt außerhalb des gültigen Wertebereichs.
 Parametername: Index 0 not found in collection]]></message>
@@ -216,7 +150,7 @@ bei Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_With_Clear() in P
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_With_Remove" executed="True" success="False" time="0.004" asserts="3">
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_With_Remove" executed="True" success="False" time="0.005" asserts="3">
                             <failure>
                               <message><![CDATA[System.ArgumentOutOfRangeException : Das angegebene Argument liegt außerhalb des gültigen Wertebereichs.
 Parametername: Index 0 not found in collection]]></message>
@@ -226,7 +160,7 @@ bei Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_With_Remove() in 
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.RelationTests.Relation_1_n_Set_1" executed="True" success="True" time="0.004" asserts="6" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Relation_1_n_Set_1" executed="True" success="True" time="0.003" asserts="6" />
                           <test-case name="Kistl.Server.Tests.RelationTests.Relation_1_n_Set_n" executed="True" success="True" time="0.003" asserts="6" />
                           <test-case name="Kistl.Server.Tests.RelationTests.Relation_n_m_Set_m" executed="True" success="False" time="0.004" asserts="5">
                             <failure>
@@ -248,7 +182,7 @@ bei Kistl.Server.Tests.RelationTests.Relation_n_m_Set_n() in P:\Kistl\Tests\Kist
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_1_n" executed="True" success="False" time="0.441" asserts="1">
+                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_1_n" executed="True" success="False" time="0.385" asserts="1">
                             <failure>
                               <message><![CDATA[  Expected: <Kistl.App.Base.StringParameter__Implementation__>
   But was:  <Kistl.App.Base.BoolParameter__Implementation__>
@@ -257,87 +191,11 @@ bei Kistl.Server.Tests.RelationTests.Relation_n_m_Set_n() in P:\Kistl\Tests\Kist
 ]]></stack-trace>
                             </failure>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_n_m_m" executed="True" success="False" time="0.010" asserts="0">
-                            <failure>
-                              <message><![CDATA[System.Data.EntityCommandExecutionException : Fehler beim Ausführen der Befehlsdefinition. Details finden Sie in der internen Ausnahme.
-  ----> System.Data.SqlClient.SqlException : Invalid column name 'fk_Projekte_pos'.
-Invalid column name 'fk_Projekte'.]]></message>
-                              <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
-bei System.Data.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
-bei System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
-bei System.Data.Objects.ObjectQuery`1.Execute(MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.EntityCollection`1.Load(IEnumerable`1 collection, MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.EntityCollection`1.Load(MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.RelatedEnd.Load()
-bei Kistl.App.Projekte.Mitarbeiter__Implementation__.get_Projekte__Implementation__() in c:\temp\KistlCodeGen\Kistl.Objects.Server\Mitarbeiter.Server.Designer.cs:Zeile 139.
-bei Kistl.App.Projekte.Mitarbeiter__Implementation__.get_Projekte() in c:\temp\KistlCodeGen\Kistl.Objects.Server\Mitarbeiter.Server.Designer.cs:Zeile 119.
-bei Kistl.Server.Tests.RelationTests.<Sort_Relation_n_m_m>b__12(Mitarbeiter p) in P:\Kistl\Tests\Kistl.Server.Tests\Tests\RelationTests.cs:Zeile 494.
-bei System.Linq.EnumerableSorter`2.ComputeKeys(TElement[] elements, Int32 count)
-bei System.Linq.EnumerableSorter`1.Sort(TElement[] elements, Int32 count)
-bei System.Linq.OrderedEnumerable`1.<GetEnumerator>d__0.MoveNext()
-bei System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
-bei Kistl.Server.Tests.RelationTests.Sort_Relation_n_m_m() in P:\Kistl\Tests\Kistl.Server.Tests\Tests\RelationTests.cs:Zeile 493.
---SqlException
-bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
-bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
-bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
-bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
-bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
-bei System.Data.SqlClient.SqlDataReader.get_MetaData()
-bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
-bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
-bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
-]]></stack-trace>
-                            </failure>
-                          </test-case>
-                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_n_m_n" executed="True" success="False" time="0.011" asserts="0">
-                            <failure>
-                              <message><![CDATA[System.Data.EntityCommandExecutionException : Fehler beim Ausführen der Befehlsdefinition. Details finden Sie in der internen Ausnahme.
-  ----> System.Data.SqlClient.SqlException : Invalid column name 'fk_Projekte'.
-Invalid column name 'fk_Projekte'.
-Invalid column name 'fk_Projekte_pos'.
-Invalid column name 'fk_Projekte'.]]></message>
-                              <stack-trace><![CDATA[bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
-bei System.Data.Objects.Internal.ObjectQueryExecutionPlan.Execute[TResultType](ObjectContext context, ObjectParameterCollection parameterValues)
-bei System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
-bei System.Data.Objects.ObjectQuery`1.Execute(MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.EntityCollection`1.Load(IEnumerable`1 collection, MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.EntityCollection`1.Load(MergeOption mergeOption)
-bei System.Data.Objects.DataClasses.RelatedEnd.Load()
-bei Kistl.App.Projekte.Projekt__Implementation__.get_Mitarbeiter__Implementation__() in c:\temp\KistlCodeGen\Kistl.Objects.Server\Projekt.Server.Designer.cs:Zeile 233.
-bei Kistl.App.Projekte.Projekt__Implementation__.get_Mitarbeiter() in c:\temp\KistlCodeGen\Kistl.Objects.Server\Projekt.Server.Designer.cs:Zeile 213.
-bei Kistl.Server.Tests.RelationTests.<Sort_Relation_n_m_n>b__c(Projekt p) in P:\Kistl\Tests\Kistl.Server.Tests\Tests\RelationTests.cs:Zeile 459.
-bei System.Linq.EnumerableSorter`2.ComputeKeys(TElement[] elements, Int32 count)
-bei System.Linq.EnumerableSorter`1.Sort(TElement[] elements, Int32 count)
-bei System.Linq.OrderedEnumerable`1.<GetEnumerator>d__0.MoveNext()
-bei System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
-bei Kistl.Server.Tests.RelationTests.Sort_Relation_n_m_n() in P:\Kistl\Tests\Kistl.Server.Tests\Tests\RelationTests.cs:Zeile 458.
---SqlException
-bei System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
-bei System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
-bei System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
-bei System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
-bei System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
-bei System.Data.SqlClient.SqlDataReader.get_MetaData()
-bei System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
-bei System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-bei System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
-bei System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-bei System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
-bei System.Data.EntityClient.EntityCommandDefinition.ExecuteStoreCommands(EntityCommand entityCommand, CommandBehavior behavior)
-]]></stack-trace>
-                            </failure>
-                          </test-case>
+                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_n_m_m" executed="True" success="True" time="0.059" asserts="3" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_n_m_n" executed="True" success="True" time="0.048" asserts="3" />
                         </results>
                       </test-suite>
-                      <test-suite name="StructTests" success="True" time="0.005" asserts="0">
+                      <test-suite name="StructTests" success="True" time="0.006" asserts="0">
                         <results>
                           <test-case name="Kistl.Server.Tests.StructTests.ChangeObjectWithStruct" executed="False">
                             <reason>

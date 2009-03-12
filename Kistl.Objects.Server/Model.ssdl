@@ -1167,8 +1167,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Projekte" Type="int" Nullable="true" />
-    <Property Name="fk_Projekte_pos" Type="int" Nullable="true" />
+    <Property Name="fk_Projekt" Type="int" Nullable="true" />
+    <Property Name="fk_Projekt_pos" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter_pos" Type="int" Nullable="true" />
   </EntityType>
@@ -1182,7 +1182,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_Projekte" />
+        <PropertyRef Name="fk_Projekt" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

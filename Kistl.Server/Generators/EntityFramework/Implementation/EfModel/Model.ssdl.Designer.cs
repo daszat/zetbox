@@ -168,8 +168,8 @@ this.WriteObjects("  <!-- EntityTypes for all object-object CollectionEntrys wit
 foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
 	{
 		string ceName = rel.GetCollectionEntryClassName();
-		string fkAName = rel.GetCollectionEntryFkaColumnName();
-		string fkBName = rel.GetCollectionEntryFkbColumnName();
+		string fkAName = rel.GetCollectionEntryFkColumnName(RelationEndRole.A);
+		string fkBName = rel.GetCollectionEntryFkColumnName(RelationEndRole.B);
 
 #line 141 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
 this.WriteObjects("	\r\n");

@@ -514,7 +514,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_Mitarbeiter23CollectionEntry)">
         <MappingFragment StoreEntitySet="Projekt_Mitarbeiter23CollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="A_pos" ColumnName="fk_Projekte_pos" />
+          <ScalarProperty Name="A_pos" ColumnName="fk_Projekt_pos" />
           <ScalarProperty Name="B_pos" ColumnName="fk_Mitarbeiter_pos" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -524,12 +524,12 @@
                            TypeName="Model.FK_Projekt_Mitarbeiter_Projekte_23"
                            StoreEntitySet="Projekt_Mitarbeiter23CollectionEntry" >
       <EndProperty Name="Projekte">
-        <ScalarProperty Name="ID" ColumnName="fk_Projekte"/>
+        <ScalarProperty Name="ID" ColumnName="fk_Projekt"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_Projekte" IsNull="false"/>
+      <Condition ColumnName="fk_Projekt" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_Projekt_Mitarbeiter_Mitarbeiter_23"

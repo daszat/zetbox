@@ -176,8 +176,14 @@ namespace Kistl.App.Zeiterfassung
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                // fix up inverse reference
+
                 var oldValue = Zeitkonto;
+                
+                // shortcut noops
+                if (Object.Equals(oldValue, value))
+					return;
+                
+                // fix up inverse reference
                 if (value != null && value.ID != fk_Zeitkonto)
                 {
 					if (oldValue != null)

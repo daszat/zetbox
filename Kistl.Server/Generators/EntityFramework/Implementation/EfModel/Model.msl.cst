@@ -34,8 +34,8 @@
 <%
     foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
     {
-        string fkAName = rel.GetCollectionEntryFkaColumnName();
-        string fkBName = rel.GetCollectionEntryFkbColumnName();
+        string fkAName = rel.GetCollectionEntryFkColumnName(RelationEndRole.A);
+        string fkBName = rel.GetCollectionEntryFkColumnName(RelationEndRole.B);
 %>
     <!--
 <%
