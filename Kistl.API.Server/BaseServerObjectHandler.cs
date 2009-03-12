@@ -73,28 +73,25 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public static IServerObjectHandler GetServerObjectHandler(Type type)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
-            {
-                if (type == null) throw new ArgumentNullException("Type is null");
+            if (type == null) throw new ArgumentNullException("Type is null");
 
-                lock (typeof(ServerObjectHandlerFactory))
+            lock (typeof(ServerObjectHandlerFactory))
+            {
+                if (_ServerObjectHandlerType == null)
                 {
+                    _ServerObjectHandlerType = Type.GetType(ApplicationContext.Current.Configuration.Server.ServerObjectHandlerType);
                     if (_ServerObjectHandlerType == null)
                     {
-                        _ServerObjectHandlerType = Type.GetType(ApplicationContext.Current.Configuration.Server.ServerObjectHandlerType);
-                        if (_ServerObjectHandlerType == null)
-                        {
-                            throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerObjectHandler. Check your Configuration '/Server/ServerObjectHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerObjectHandlerType));
-                        }
+                        throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerObjectHandler. Check your Configuration '/Server/ServerObjectHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerObjectHandlerType));
                     }
                 }
-                Type result = _ServerObjectHandlerType.MakeGenericType(type);
-
-                IServerObjectHandler obj = Activator.CreateInstance(result) as IServerObjectHandler;
-                if (obj == null) throw new ArgumentOutOfRangeException("Cannot create instance of Type " + type.FullName);
-
-                return obj;
             }
+            Type result = _ServerObjectHandlerType.MakeGenericType(type);
+
+            IServerObjectHandler obj = Activator.CreateInstance(result) as IServerObjectHandler;
+            if (obj == null) throw new ArgumentOutOfRangeException("Cannot create instance of Type " + type.FullName);
+
+            return obj;
         }
 
         public static IServerObjectSetHandler GetServerObjectSetHandler()
@@ -175,33 +172,30 @@ namespace Kistl.API.Server
 
         public IEnumerable GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall())
+            if (maxListCount > Kistl.API.Helper.MAXLISTCOUNT)
             {
-                if (maxListCount > Kistl.API.Helper.MAXLISTCOUNT)
-                {
-                    maxListCount = Kistl.API.Helper.MAXLISTCOUNT;
-                }
-
-                var result = ctx.GetQuery<T>();
-
-                if (filter != null)
-                {
-                    result = (IQueryable<T>)result.AddFilter(filter);
-                }
-
-                if (orderBy != null)
-                {
-                    bool first = true;
-                    foreach (var o in orderBy)
-                    {
-                        if (first) result = result.AddOrderBy<T>(o);
-                        else result = result.AddThenBy<T>(o);
-                        first = false;
-                    }
-                }
-
-                return result.Take(maxListCount);
+                maxListCount = Kistl.API.Helper.MAXLISTCOUNT;
             }
+
+            var result = ctx.GetQuery<T>();
+
+            if (filter != null)
+            {
+                result = (IQueryable<T>)result.AddFilter(filter);
+            }
+
+            if (orderBy != null)
+            {
+                bool first = true;
+                foreach (var o in orderBy)
+                {
+                    if (first) result = result.AddOrderBy<T>(o);
+                    else result = result.AddThenBy<T>(o);
+                    first = false;
+                }
+            }
+
+            return result.Take(maxListCount);
         }
 
         /// <summary>
@@ -214,15 +208,12 @@ namespace Kistl.API.Server
         /// <returns>the list of values in the property</returns>
         public IEnumerable GetListOf(IKistlContext ctx, int ID, string property)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}, Property = {1}", ID, property)))
-            {
-                if (ID <= API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
-                T obj = GetObjectInstance(ctx, ID);
-                if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
+            if (ID <= API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
+            T obj = GetObjectInstance(ctx, ID);
+            if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
 
-                IEnumerable list = (IEnumerable)obj.GetPropertyValue<IEnumerable>(property);
-                return list;
-            }
+            IEnumerable list = (IEnumerable)obj.GetPropertyValue<IEnumerable>(property);
+            return list;
         }
 
         /// <summary>
@@ -268,13 +259,10 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public virtual IEnumerable<IDataObject> SetObjects(IKistlContext ctx, IEnumerable<IDataObject> objects)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall())
-            {
-                ctx.SubmitChanges();
+            ctx.SubmitChanges();
 
-                // TODO: Detect changes made by server nethod calls
-                return objects.Where(o => o.ObjectState != DataObjectState.Deleted);
-            }
+            // TODO: Detect changes made by server nethod calls
+            return objects.Where(o => o.ObjectState != DataObjectState.Deleted);
         }
     }
 }

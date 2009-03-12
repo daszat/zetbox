@@ -50,14 +50,11 @@ namespace Kistl.API
 
         protected void SetCustomActionsManager(ICustomActionsManager manager)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("CustomActionsManagerFactory of {0}", manager.GetType().Name))
-            {
-                if (this.CustomActionsManager != null)
-                    throw new InvalidOperationException("CustomActionsManager already initialised");
+            if (this.CustomActionsManager != null)
+                throw new InvalidOperationException("CustomActionsManager already initialised");
 
-                this.CustomActionsManager = manager;
-                this.CustomActionsManager.Init();
-            }
+            this.CustomActionsManager = manager;
+            this.CustomActionsManager.Init();
         }
 
         /// <summary>
