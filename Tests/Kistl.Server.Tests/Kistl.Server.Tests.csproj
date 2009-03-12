@@ -47,6 +47,10 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TraceListener, Version=1.0.0.0, Culture=neutral, PublicKeyToken=85cb9689ce8096ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Tracing\TraceListener.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
