@@ -24,9 +24,9 @@ namespace Kistl.API
             return Collection.Select(e => e.A);
         }
 
-        protected override ENTRYTYPE GetEntryOrDefault(ATYPE item)
+        protected override ATYPE ItemFromEntry(ENTRYTYPE entry)
         {
-            return Collection.SingleOrDefault(i => Object.Equals(i.B, item));
+            return entry.A;
         }
 
         protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, ATYPE item)
@@ -57,12 +57,12 @@ namespace Kistl.API
 
         protected override IEnumerable<ATYPE> GetList()
         {
-            return Collection.OrderBy(e => e.AIndex).Select(e => e.A);
+            return Collection.OrderBy(e => e.AIndex).Select(e => ItemFromEntry(e));
         }
 
-        protected override ENTRYTYPE GetEntryOrDefault(ATYPE item)
+        protected override ATYPE ItemFromEntry(ENTRYTYPE entry)
         {
-            return Collection.SingleOrDefault(i => i.B.Equals(item));
+            return entry.A;
         }
 
         protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, ATYPE item)
@@ -73,10 +73,6 @@ namespace Kistl.API
             return entry;
         }
 
-        protected override ATYPE ItemFromEntry(ENTRYTYPE entry)
-        {
-            return entry.A;
-        }
 
         /// <summary>
         /// Overriden to set the index on the incoming entry
@@ -120,11 +116,10 @@ namespace Kistl.API
             return Collection.Select(e => e.B);
         }
 
-        protected override ENTRYTYPE GetEntryOrDefault(BTYPE item)
+        protected override BTYPE ItemFromEntry(ENTRYTYPE entry)
         {
-            return Collection.SingleOrDefault(i => i.A.Equals(item));
+            return entry.B;
         }
-
 
         protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, BTYPE item)
         {
@@ -157,9 +152,9 @@ namespace Kistl.API
             return Collection.OrderBy(e => e.BIndex).Select(e => e.B);
         }
 
-        protected override ENTRYTYPE GetEntryOrDefault(BTYPE item)
+        protected override BTYPE ItemFromEntry(ENTRYTYPE entry)
         {
-            return Collection.SingleOrDefault(i => i.A.Equals(item));
+            return entry.B;
         }
 
         protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, BTYPE item)
@@ -168,11 +163,6 @@ namespace Kistl.API
             entry.B = item;
             entry.AIndex = Kistl.API.Helper.LASTINDEXPOSITION;
             return entry;
-        }
-
-        protected override BTYPE ItemFromEntry(ENTRYTYPE entry)
-        {
-            return entry.B;
         }
 
         /// <summary>

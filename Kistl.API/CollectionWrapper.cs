@@ -55,9 +55,17 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// maps an item to an entry
+        /// maps an item to an entry, will return a default value if the item is not associated to an entry of this collection
         /// </summary>
-        protected abstract ENTRYTYPE GetEntryOrDefault(ITEMTYPE item);
+        protected virtual ENTRYTYPE GetEntryOrDefault(ITEMTYPE item)
+        {
+            return Collection.SingleOrDefault(e => Object.Equals(ItemFromEntry(e), item));
+        }
+
+        /// <summary>
+        /// Returns the item referenced by a given entry
+        /// </summary>
+        protected abstract ITEMTYPE ItemFromEntry(ENTRYTYPE entry);
 
         /// <summary>
         /// Creates a new entry
@@ -223,11 +231,6 @@ namespace Kistl.API
         }
 
         #region provider- and end-specific extension points
-
-        /// <summary>
-        /// Returns the item referenced by a given entry
-        /// </summary>
-        protected abstract ITEMTYPE ItemFromEntry(ENTRYTYPE entry);
 
         /// <summary>
         /// Returns the index of a given entry
