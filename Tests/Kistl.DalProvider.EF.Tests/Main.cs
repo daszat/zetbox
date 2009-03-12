@@ -12,7 +12,8 @@ namespace Kistl.DalProvider.EF.Tests
             var setup = new SetUp();
             setup.Init();
 
-            BaseServerDataObjectTests();
+            //BaseServerDataObjectTests();
+            BaseServerStructObjectTests();
             //KistlDataContextTests();
             //ServerCollectionEntry_EF();
         }
@@ -28,6 +29,15 @@ namespace Kistl.DalProvider.EF.Tests
 
             //bsdot.SetUp();
             //bsdot.ToStream_creates_correct_Stream();
+        }
+
+        private static void BaseServerStructObjectTests()
+        {
+            var bssot = new BaseServerStructObjectTests();
+            bssot.SetUp();
+            bssot.SetUpTestObject();
+
+            bssot.should_roudtrip_members_correctly();
         }
 
         private static void KistlDataContextTests()

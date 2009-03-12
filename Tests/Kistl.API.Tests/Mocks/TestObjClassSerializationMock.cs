@@ -39,7 +39,7 @@ namespace Kistl.API.Mocks
         public readonly static string[] TestTestNamesValues = new[] { "testname1", "testname2", "testname3" };
         public readonly static DataObjectState TestCollectionEntryState = DataObjectState.Unmodified;
 
-        private static SerializableType GetSerialzableType<LOCALINTERFACE, ENUMTYPE>()
+        private static SerializableType GetSerializableType<LOCALINTERFACE, ENUMTYPE>()
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {
@@ -63,7 +63,7 @@ namespace Kistl.API.Mocks
         {
 
             // BaseServerPersistenceObject
-            BinarySerializer.ToStream(GetSerialzableType<LOCALINTERFACE, ENUMTYPE>(), sw);
+            BinarySerializer.ToStream(GetSerializableType<LOCALINTERFACE, ENUMTYPE>(), sw);
             BinarySerializer.ToStream(TestObjClassId, sw);
             BinarySerializer.ToStream((int)TestObjectState, sw);
 
@@ -110,7 +110,7 @@ namespace Kistl.API.Mocks
 
             SerializableType objType = null;
             BinarySerializer.FromStream(out objType, sr);
-            Assert.That(objType, Is.EqualTo(GetSerialzableType<LOCALINTERFACE, ENUMTYPE>()), "wrong interface type found");
+            Assert.That(objType, Is.EqualTo(GetSerializableType<LOCALINTERFACE, ENUMTYPE>()), "wrong interface type found");
 
             int testObjId;
             BinarySerializer.FromStream(out testObjId, sr);

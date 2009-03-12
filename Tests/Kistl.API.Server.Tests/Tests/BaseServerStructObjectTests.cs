@@ -99,5 +99,22 @@ namespace Kistl.API.Server.Tests
             obj.PropertyChanged -= changedHandler;
             obj.PropertyChanging -= changingHanlder;
         }
+
+        [Test]
+        public void should_use_interfacetype_on_the_stream()
+        {
+            MemoryStream ms = new MemoryStream();
+            BinaryWriter sw = new BinaryWriter(ms);
+            BinaryReader sr = new BinaryReader(ms);
+
+            obj.ToStream(sw);
+            ms.Seek(0, SeekOrigin.Begin);
+
+            SerializableType t;
+            BinarySerializer.FromStream(out t, sr);
+            Assert.That(t, Is.EqualTo(new SerializableType(typeof(IStruct))));
+        }
+	
+
     }
 }
