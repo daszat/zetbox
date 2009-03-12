@@ -15,5 +15,8 @@
   <SourceFileLocation>
     <string>C:\temp\KistlCodeGen\bin\Debug</string>
     <string>P:\Kistl\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Objects\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Objects.Server\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Objects.Frozen\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>

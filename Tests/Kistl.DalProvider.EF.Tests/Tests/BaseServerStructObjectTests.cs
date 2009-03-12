@@ -22,7 +22,7 @@ namespace Kistl.DalProvider.EF.Tests
     {
 
         [SetUp]
-        public void SetUp()
+        public void SetUpTestObject()
         {
             var testCtx = new ServerApiContextMock();
 
