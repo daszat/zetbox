@@ -253,15 +253,22 @@ namespace Kistl.API
 
         protected ENTRYTYPE GetAt(int index)
         {
-            foreach (ENTRYTYPE entry in Collection)
+            RepairIndexes();
+            return Collection.SingleOrDefault(e => { var idx = IndexFromEntry(e); return idx.HasValue && idx.Value == index; });
+        }
+
+        /// <summary>
+        /// Repairs all index values on the entries. This is currently needed sometimes, 
+        /// because entries could have been added/modified/removed by the "other" side, without us knowing.
+        /// Then the IndexFromEntry() is set to LASTINDEXPOSITION or holes exist which confuse the rest.
+        /// </summary>
+        protected void RepairIndexes()
+        {
+            int i = 0;
+            foreach (var entry in Collection.OrderBy(e => IndexFromEntry(e) ?? Kistl.API.Helper.LASTINDEXPOSITION))
             {
-                int? idxEntry = IndexFromEntry(entry);
-                if (idxEntry.HasValue && idxEntry.Value == index)
-                {
-                    return entry;
-                }
+                SetIndex(entry, i++);
             }
-            return null;
         }
 
         #endregion

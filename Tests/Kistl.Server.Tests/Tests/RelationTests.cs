@@ -440,12 +440,14 @@ namespace Kistl.Server.Tests
                 var method = ctx.Find<Kistl.App.Base.Method>(methodID);
 
                 var tmpParameter = method.Parameter.ToList();
-                int i = 0;
-                foreach (Kistl.App.Base.BaseParameter p in tmpParameter
-                    .OrderBy(p => p.IsReturnParameter).ThenBy(p => p.ParameterName))
-                {
-                    Assert.That(p, Is.EqualTo(tmpParameter[i++]));
-                }
+
+                Assert.That(
+                    tmpParameter
+                        .OrderBy(p => p.IsReturnParameter)
+                        .ThenBy(p => p.ParameterName)
+                        .ToList(),
+                    Is.EquivalentTo(tmpParameter)
+                    );
             }
         }
 
