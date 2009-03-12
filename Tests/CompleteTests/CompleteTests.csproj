@@ -87,6 +87,10 @@
       <Project>{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}</Project>
       <Name>Kistl.Client.Tests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.csproj">
+      <Project>{980874F0-D9C1-4EDB-8143-AD51C1E2666F}</Project>
+      <Name>Kistl.DalProvider.EF.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kistl.IntegrationTests\Kistl.IntegrationTests.csproj">
       <Project>{12B58C14-4FE7-4FF6-A03A-5A220571FD5C}</Project>
       <Name>Kistl.IntegrationTests</Name>

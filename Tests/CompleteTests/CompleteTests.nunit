@@ -7,6 +7,7 @@
     <assembly path="Kistl.Client.Tests.exe" />
     <assembly path="Kistl.IntegrationTests.exe" />
     <assembly path="Kistl.Server.Tests.exe" />
+    <assembly path="Kistl.DalProvider.EF.Tests.exe" />
   </Config>
   <Config name="Release" appbase="bin\Release" configfile="CompleteTests.exe.config" binpathtype="Auto">
     <assembly path="Kistl.API.Tests.exe" />
@@ -15,5 +16,6 @@
     <assembly path="Kistl.Client.Tests.exe" />
     <assembly path="Kistl.IntegrationTests.exe" />
     <assembly path="Kistl.Server.Tests.exe" />
+    <assembly path="Kistl.DalProvider.EF.Tests.exe" />
   </Config>
 </NUnitProject>
