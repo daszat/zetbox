@@ -47,8 +47,14 @@
         var otherProp = otherEnd.Navigator;
         string otherName = otherProp.PropertyName;
 %>
-                // fix up inverse reference
+
                 var oldValue = <%= name %>;
+                
+                // shortcut noops
+                if (Object.Equals(oldValue, value))
+					return;
+                
+                // fix up inverse reference
                 if (value != null && value.ID != <%= fkName %>)
                 {
 <%
