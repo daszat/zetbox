@@ -1,0 +1,8 @@
+<PartCoverSettings>
+  <Target>P:\Kistl\Kistl.Client.WPF\bin\Debug\Kistl.Client.WPF.exe</Target>
+  <TargetWorkDir>P:\Kistl\Kistl.Client.WPF\bin\Debug</TargetWorkDir>
+  <TargetArgs>
+  </TargetArgs>
+  <Rule>+[Kistl.Client]*</Rule>
+  <Rule>+[Kistl.Client.WPF]*</Rule>
+</PartCoverSettings>

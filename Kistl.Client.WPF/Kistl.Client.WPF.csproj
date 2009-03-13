@@ -106,58 +106,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindowCtrl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="DesktopTreeView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\EditBoolProperty.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\EditDateTimeProperty.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\EditDoubleProperty.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\EditIntProperty.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\EnumEntryListControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\EnumControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Renderer.WPF\IntegerListControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\DoubleListControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\DateTimeListControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\BooleanListControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\KistlMenuItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ActionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,37 +114,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Renderer.WPF\ObjectReferenceControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\EditSimpleProperty.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\ObjectListControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\StringListControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Renderer.WPF\TemplateEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Renderer.WPF\WPFWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="SplashScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Renderer.WPF\WorkspaceWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DataObjectFullView.xaml">
       <SubType>Designer</SubType>
@@ -274,9 +194,6 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindowCtrl.xaml.cs">
-      <DependentUpon>MainWindowCtrl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -289,44 +206,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="DesktopTreeView.xaml.cs">
-      <DependentUpon>DesktopTreeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\ActionControl.cs" />
-    <Compile Include="Renderer.WPF\EditBoolProperty.xaml.cs">
-      <DependentUpon>EditBoolProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EditDateTimeProperty.xaml.cs">
-      <DependentUpon>EditDateTimeProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EditDoubleProperty.xaml.cs">
-      <DependentUpon>EditDoubleProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EditIntProperty.xaml.cs">
-      <DependentUpon>EditIntProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EnumEntryListControl.xaml.cs">
-      <DependentUpon>EnumEntryListControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EnumControl.xaml.cs">
-      <DependentUpon>EnumControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\IntegerListControl.xaml.cs">
-      <DependentUpon>IntegerListControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\DoubleListControl.xaml.cs">
-      <DependentUpon>DoubleListControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\DateTimeListControl.xaml.cs">
-      <DependentUpon>DateTimeListControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\BooleanListControl.xaml.cs">
-      <DependentUpon>BooleanListControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\ListControl.cs" />
-    <Compile Include="Renderer.WPF\KistlMenuItem.xaml.cs">
-      <DependentUpon>KistlMenuItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ActionView.xaml.cs">
       <DependentUpon>ActionView.xaml</DependentUpon>
@@ -342,36 +221,10 @@
       <DependentUpon>KistlDebuggerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ListItemTemplateSelector.cs" />
-    <Compile Include="Renderer.WPF\ObjectReferenceControl.xaml.cs">
-      <DependentUpon>ObjectReferenceControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\EditSimpleProperty.xaml.cs">
-      <DependentUpon>EditSimpleProperty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\GroupBoxWrapper.cs" />
-    <Compile Include="Renderer.WPF\ObjectListControl.xaml.cs">
-      <DependentUpon>ObjectListControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\ObjectTabItem.cs" />
-    <Compile Include="Renderer.WPF\PropertyControl.cs" />
-    <Compile Include="Renderer.WPF\Renderer.cs" />
-    <Compile Include="Renderer.WPF\StringListControl.xaml.cs">
-      <DependentUpon>StringListControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\TemplateEditor.xaml.cs">
-      <DependentUpon>TemplateEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Renderer.WPF\ToolBarWrapper.cs" />
-    <Compile Include="Renderer.WPF\WPFWindow.xaml.cs">
-      <DependentUpon>WPFWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="UndoRedo.cs" />
-    <Compile Include="Renderer.WPF\WorkspaceWindow.xaml.cs">
-      <DependentUpon>WorkspaceWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\DataObjectFullView.xaml.cs">
       <DependentUpon>DataObjectFullView.xaml</DependentUpon>
     </Compile>

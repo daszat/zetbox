@@ -1,7 +1,0 @@
-﻿<MenuItem x:Class="Kistl.GUI.Renderer.WPF.KistlMenuItem"
-          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-          Header="{Binding ShortLabel, RelativeSource={RelativeSource Self}}"
-          ToolTip="{Binding Description, RelativeSource={RelativeSource Self}}"
-          >
-</MenuItem>

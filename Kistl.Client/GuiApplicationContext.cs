@@ -9,7 +9,6 @@ using Kistl.API.Configuration;
 using Kistl.App.GUI;
 using Kistl.Client.Presentables;
 using Kistl.GUI.DB;
-using Kistl.GUI.Renderer;
 
 namespace Kistl.Client
 {
@@ -77,6 +76,8 @@ namespace Kistl.Client
             switch (tk)
             {
                 case Toolkit.WPF:
+                    //UiThread = new Kistl.Client.Presentables.WPF.UiThreadManager();
+                    //AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
                     UiThread = new SynchronousThreadManager();
                     AsyncThread = new SynchronousThreadManager();
 
@@ -108,7 +109,7 @@ namespace Kistl.Client
             }
         }
 
-        public Kistl.GUI.Renderer.IRenderer Renderer { get; private set; }
+        public IRenderer Renderer { get; private set; }
 
         /// <summary>
         /// A read-only <see cref="IKistlContext"/> to access meta data

@@ -96,13 +96,22 @@ namespace Kistl.Client.WPF
 
         private void CreateTypeRefs()
         {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var muh = (typeof(ObjectListModel).ToRef(ctx));
+                ctx.SubmitChanges();
+            }
+
             using (TraceClient.TraceHelper.TraceMethodCall("Creating TypeRefs for GUI"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     object muh;
                     muh = (typeof(NullableValuePropertyModel<Boolean>).ToRef(ctx));
-                    muh = (typeof(NullableValuePropertyModel<DateTime>).ToRef(ctx));
+                    using (TraceClient.TraceHelper.TraceMethodCall("single ToRef call"))
+                    {
+                        muh = (typeof(NullableValuePropertyModel<DateTime>).ToRef(ctx));
+                    }
                     muh = (typeof(NullableValuePropertyModel<Double>).ToRef(ctx));
                     muh = (typeof(NullableValuePropertyModel<int>).ToRef(ctx));
                     muh = (typeof(ChooseReferencePropertyModel<string>).ToRef(ctx));

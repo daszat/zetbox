@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GUI.DB\DataMocks.cs" />
+    <Compile Include="GUI\IRenderer.cs" />
     <Compile Include="GUI\IView.cs" />
     <Compile Include="Presentables\ActionModel.cs" />
     <Compile Include="Presentables\DataObjectModel.cs" />
@@ -88,15 +89,8 @@
     <Compile Include="Presentables\WorkspaceModel.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
-    <Compile Include="GUI.DB\KistlGUIContext.cs" />
     <Compile Include="GuiApplicationContext.cs" />
-    <Compile Include="GUI\ControlInterfaces.cs" />
-    <Compile Include="GUI\MethodPresenter.cs" />
-    <Compile Include="GUI\Presenter.cs" />
-    <Compile Include="GUI\ReferencePresenters.cs" />
-    <Compile Include="GUI\Renderer.BasicRenderer.cs" />
     <Compile Include="GUI.DB\Template.cs" />
-    <Compile Include="GUI.DB\Visual.cs" />
     <Compile Include="ClientHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
