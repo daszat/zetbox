@@ -7,6 +7,6 @@
         MinWidth="70"
         Loaded="Window_Loaded">
     <DockPanel>
-        <local:MainWindowCtrl />
+        <!--<local:MainWindowCtrl />-->
     </DockPanel>
 </Window>
