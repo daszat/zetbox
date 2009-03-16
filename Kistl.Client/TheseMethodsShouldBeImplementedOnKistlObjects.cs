@@ -26,10 +26,25 @@ namespace Kistl.Client
             return result;
         }
 
+        private static ILookup<string, ObjectClass> _frozenClasses;
         public static ObjectClass GetObjectClass(this IDataObject obj, Kistl.API.IKistlContext ctx)
         {
             Type type = obj.GetInterfaceType();
-            return ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
+            IQueryable<ObjectClass> q;
+            if (ctx == FrozenContext.Single)
+            {
+                if (_frozenClasses == null)
+                {
+                    _frozenClasses = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.ClassName);
+                }
+                q = _frozenClasses[type.Name].AsQueryable();
+            }
+            else
+            {
+                q = ctx.GetQuery<ObjectClass>();
+            }
+
+            return q.First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
         }
 
         public static BaseProperty GetProperty(this ObjectClass c, string property)

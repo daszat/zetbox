@@ -78,8 +78,8 @@ namespace Kistl.Client.WPF
             {
                 HandleCommandline(e.Args);
 
-                var debugger = AppContext.Factory.CreateSpecificModel<KistlDebuggerAsModel>(KistlContext.GetContext());
-                AppContext.Factory.ShowModel(debugger, true);
+                //var debugger = AppContext.Factory.CreateSpecificModel<KistlDebuggerAsModel>(KistlContext.GetContext());
+                //AppContext.Factory.ShowModel(debugger, true);
 
                 FixupDatabase();
 

@@ -324,32 +324,35 @@ namespace Kistl.API.Client
 
         public IEnumerable<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent)
         {
-            // TODO: could be implemented in generated properties
-            if(parent.ObjectState == DataObjectState.New)
-                return new List<INewCollectionEntry<A, B>>();
-
-            MemoryStream ms = serviceStreams.FetchRelation(relationId, (int)role, parent.ID);
-            System.IO.BinaryReader sr = new System.IO.BinaryReader(ms);
-
-            List<INewCollectionEntry<A, B>> result = new List<INewCollectionEntry<A, B>>();
-            bool cont = true;
-            BinarySerializer.FromStream(out cont, sr);
-            while (cont)
+            using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                long pos = ms.Position;
-                SerializableType objType;
-                BinarySerializer.FromStream(out objType, sr);
+                // TODO: could be implemented in generated properties
+                if (parent.ObjectState == DataObjectState.New)
+                    return new List<INewCollectionEntry<A, B>>();
 
-                ms.Seek(pos, System.IO.SeekOrigin.Begin);
+                MemoryStream ms = serviceStreams.FetchRelation(relationId, (int)role, parent.ID);
+                System.IO.BinaryReader sr = new System.IO.BinaryReader(ms);
 
-                var obj = (INewCollectionEntry<A, B>)objType.NewObject();
-                obj.FromStream(sr);
-
-                result.Add(obj);
+                List<INewCollectionEntry<A, B>> result = new List<INewCollectionEntry<A, B>>();
+                bool cont = true;
                 BinarySerializer.FromStream(out cont, sr);
-            }
+                while (cont)
+                {
+                    long pos = ms.Position;
+                    SerializableType objType;
+                    BinarySerializer.FromStream(out objType, sr);
 
-            return result;
+                    ms.Seek(pos, System.IO.SeekOrigin.Begin);
+
+                    var obj = (INewCollectionEntry<A, B>)objType.NewObject();
+                    obj.FromStream(sr);
+
+                    result.Add(obj);
+                    BinarySerializer.FromStream(out cont, sr);
+                }
+
+                return result;
+            }
         }
 
         /// <summary>
