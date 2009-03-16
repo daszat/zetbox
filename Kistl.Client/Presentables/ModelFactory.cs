@@ -92,6 +92,11 @@ namespace Kistl.Client.Presentables
 
         #region Top-Level Views Management
 
+        /// <summary>
+        /// Creates a default View for the given PresentableModel.
+        /// </summary>
+        /// <param name="mdl"></param>
+        /// <returns></returns>
         public IView CreateDefaultView(PresentableModel mdl)
         {
             Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
@@ -134,7 +139,8 @@ namespace Kistl.Client.Presentables
         /// </summary>
         /// uses Type as outer parameter to keep number of second level dictionaries small
         // TODO: memory: investigate using a weakly referencing proxy to object[] as 2nd level key,
-        //               but probably all data params are rooted elsewhere too.
+        //               but probably all data params are rooted elsewhere too. Should clean up
+        //               at least when the IKistlContext of a Workspace is disposed
         private Dictionary<Type, Dictionary<object[], PresentableModel>> _models
                 = new Dictionary<Type, Dictionary<object[], PresentableModel>>();
 
