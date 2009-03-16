@@ -1,11 +1,13 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+
 using Kistl.API;
 using Kistl.API.Client;
-using System.Collections.ObjectModel;
-using System.Collections;
 
 namespace Kistl.API.Client
 {
@@ -27,10 +29,11 @@ namespace Kistl.API.Client
     /// <summary>
     /// Linq to Kistl Context Implementation
     /// </summary>
-    internal class KistlContextImpl : IKistlContext, IDisposable
+    internal class KistlContextImpl : IDebuggingKistlContext, IDisposable
     {
         public KistlContextImpl()
         {
+            CreatedAt = new StackTrace(true);
             KistlContextDebugger.Created(this);
         }
 
@@ -44,11 +47,12 @@ namespace Kistl.API.Client
             {
                 if (!disposed)
                 {
+                    DisposedAt = new StackTrace(true);
                     KistlContextDebugger.Disposed(this);
                 }
                 disposed = true;
             }
-            // TODO: ??? Warum? Wieso? Weshalb?
+            // TODO: use correct Dispose implementation pattern
             GC.SuppressFinalize(this);
         }
 
@@ -457,6 +461,14 @@ namespace Kistl.API.Client
             // return this;
             return Kistl.API.FrozenContext.Single;
         }
+
+        #region IDebuggingKistlContext Members
+
+        public StackTrace CreatedAt { get; private set; }
+
+        public StackTrace DisposedAt{ get; private set; }
+
+        #endregion
     }
 
     /// <summary>

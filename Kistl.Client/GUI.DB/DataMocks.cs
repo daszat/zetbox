@@ -5,78 +5,21 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.API.Client;
 using Kistl.App.Base;
 using Kistl.App.GUI;
 using Kistl.Client.Presentables;
 
 namespace Kistl.Client.GUI.DB
 {
-    public sealed class TypeRef
+
+    public static class TypeRefExtensions
     {
-        public TypeRef(string name, string assembly, params TypeRef[] genericArgs)
+        public static object Create(this TypeRef t, params object[] parameter)
         {
-            FullName = name;
-            Assembly = assembly;
-            GenericArguments = genericArgs;
-        }
-        public TypeRef(Type t, params TypeRef[] genericArgs)
-        {
-            FullName = t.FullName;
-            Assembly = t.Assembly.FullName;
-            GenericArguments = genericArgs;
+            return Activator.CreateInstance(t.AsType(true), parameter);
         }
 
-        public string FullName { get; private set; }
-        public string Assembly { get; private set; }
-        public TypeRef[] GenericArguments { get; private set; }
-
-        public Type AsType()
-        {
-            var result = Type.GetType(String.Format("{0}, {1}", FullName, Assembly), true);
-            if (GenericArguments.Length > 0)
-            {
-                result = result.MakeGenericType(GenericArguments.Select(tRef => tRef.AsType()).ToArray());
-            }
-            return result;
-        }
-
-        public IView Create(params object[] parameter)
-        {
-            return (IView)Activator.CreateInstance(this.AsType(), parameter);
-        }
-
-        public override bool Equals(object obj)
-        {
-            TypeRef other = obj as TypeRef;
-            if (this == other)
-            {
-                return true;
-            }
-            if (other != null)
-            {
-                return other.FullName == this.FullName
-                    && other.Assembly == this.Assembly
-                    && other.GenericArguments.SequenceEqual(this.GenericArguments);
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public override int GetHashCode()
-        {
-            return FullName.GetHashCode() + Assembly.GetHashCode() + GenericArguments.Sum(r => r.GetHashCode());
-        }
-
-        public override string ToString()
-        {
-            return FullName
-                + (GenericArguments.Length > 0
-                    ? "<" + String.Join(", ", GenericArguments.Select(tr => tr.ToString()).ToArray()) + ">"
-                    : "")
-                + Assembly;
-        }
     }
 
     public class ViewDescriptor
@@ -94,28 +37,15 @@ namespace Kistl.Client.GUI.DB
 
         public override string ToString()
         {
-            return String.Format("{0}: Display layout {1} with {2}", Toolkit, LayoutRef.AsType().Name, ViewRef.AsType().Name);
-        }
-    }
-
-    public class ModelDescriptor
-    {
-
-        public ModelDescriptor(Kistl.App.Base.TypeRef presentationType)
-        {
-            Presentation = presentationType;
-        }
-
-        public Kistl.App.Base.TypeRef Presentation { get; private set; }
-
-        public override string ToString()
-        {
-            return "Model: " + Presentation.ToString();
+            return String.Format("{0}: Display layout {1} with {2}", Toolkit, LayoutRef.AsType(true).Name, ViewRef.AsType(true).Name);
         }
     }
 
     public abstract class Layout
     {
+        /// <summary>
+        /// Which Type can be layouted this way
+        /// </summary>
         public virtual Type SourceModelType { get; set; }
     }
 
@@ -290,17 +220,17 @@ namespace Kistl.Client.GUI.DB
         {
             Type layoutType = l.GetType();
 
-            var debug = Views
-                .Where(vd => vd.Toolkit == tk && vd.LayoutRef.AsType().IsAssignableFrom(layoutType))
-                .Select(vd => new { View = vd, Depth = GenerationCount(vd.LayoutRef.AsType(), layoutType) })
-                .OrderBy(p => p.Depth)
-                .ToList();
+            //var debug = Views
+            //    .Where(vd => vd.Toolkit == tk && vd.LayoutRef.AsType(true).IsAssignableFrom(layoutType))
+            //    .Select(vd => new { View = vd, Depth = GenerationCount(vd.LayoutRef.AsType(true), layoutType) })
+            //    .OrderBy(p => p.Depth)
+            //    .ToList();
 
             var result = Views
                 // select matching descriptors
-                .Where(vd => vd.Toolkit == tk && vd.LayoutRef.AsType().IsAssignableFrom(layoutType))
+                .Where(vd => vd.Toolkit == tk && vd.LayoutRef.AsType(true).IsAssignableFrom(layoutType))
                 // sort ViewRefs "near" the layout to the front
-                .OrderBy(vd => GenerationCount(vd.LayoutRef.AsType(), layoutType))
+                .OrderBy(vd => GenerationCount(vd.LayoutRef.AsType(true), layoutType))
                 // use the best match
                 .First();
 
@@ -319,6 +249,30 @@ namespace Kistl.Client.GUI.DB
             return result;
         }
 
+        private static TypeRef FindOrCreateTypeRef(IKistlContext ctx, string fullname, string assembly)
+        {
+            // Adapted from ToRef(Type,IKistlContext)
+            var result = ctx.GetQuery<TypeRef>().SingleOrDefault(tRef => tRef.Assembly.AssemblyName == assembly && tRef.FullName == fullname && tRef.GenericArguments.Count == 0);
+            if (result == null)
+            {
+                result = ctx.Create<TypeRef>();
+                result.FullName = fullname;
+                result.Assembly = ctx.GetQuery<Assembly>().SingleOrDefault(a => a.AssemblyName == assembly);
+                if (result.Assembly == null)
+                {
+                    result.Assembly = ctx.Create<Assembly>();
+                    result.Assembly.AssemblyName = assembly;
+                    result.Assembly.Module = ctx.Find<Module>(4); // GUI Module
+                }
+            }
+            return result;
+        }
+
+        private static TypeRef FindOrCreateTypeRef(IKistlContext ctx, Type t)
+        {
+            return t.ToRef(ctx);
+        }
+
         private static List<ViewDescriptor> _viewsCache;
         public static List<ViewDescriptor> Views
         {
@@ -326,85 +280,90 @@ namespace Kistl.Client.GUI.DB
             {
                 if (_viewsCache == null)
                 {
-                    _viewsCache = new List<ViewDescriptor>()
+                    //using (var ctx = KistlContext.GetContext())
+                    var ctx = FrozenContext.Single;
                     {
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.WorkspaceView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(WorkspaceLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.Forms.View.WorkspaceView", "Kistl.Client.Forms"),
-                            Toolkit.TEST, new TypeRef(typeof(WorkspaceLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.ASPNET.Toolkit.View.WorkspaceViewLoader", "Kistl.Client.ASPNET.Toolkit"),
-                            Toolkit.ASPNET, new TypeRef(typeof(WorkspaceLayout))),
+                        _viewsCache = new List<ViewDescriptor>()
+                        {
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.WorkspaceView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(WorkspaceLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.Forms.View.WorkspaceView", "Kistl.Client.Forms"),
+                                Toolkit.TEST, FindOrCreateTypeRef(ctx, typeof(WorkspaceLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.ASPNET.Toolkit.View.WorkspaceViewLoader", "Kistl.Client.ASPNET.Toolkit"),
+                                Toolkit.ASPNET, FindOrCreateTypeRef(ctx, typeof(WorkspaceLayout))),
 
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.DataObjectFullView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(DataObjectFullLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.Forms.View.DataObjectFullView", "Kistl.Client.Forms"),
-                            Toolkit.TEST, new TypeRef(typeof(DataObjectFullLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.ASPNET.Toolkit.View.DataObjectFullViewLoader", "Kistl.Client.ASPNET.Toolkit"),
-                            Toolkit.ASPNET, new TypeRef(typeof(DataObjectFullLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.DataObjectFullView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(DataObjectFullLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.Forms.View.DataObjectFullView", "Kistl.Client.Forms"),
+                                Toolkit.TEST, FindOrCreateTypeRef(ctx, typeof(DataObjectFullLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.ASPNET.Toolkit.View.DataObjectFullViewLoader", "Kistl.Client.ASPNET.Toolkit"),
+                                Toolkit.ASPNET, FindOrCreateTypeRef(ctx, typeof(DataObjectFullLayout))),
 
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.ObjectReferenceView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(DataObjectReferenceLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.Forms.View.DataObjectReferenceView", "Kistl.Client.Forms"),
-                            Toolkit.TEST, new TypeRef(typeof(DataObjectReferenceLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceViewLoader", "Kistl.Client.ASPNET.Toolkit"),
-                            Toolkit.ASPNET, new TypeRef(typeof(DataObjectReferenceLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.ObjectReferenceView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(DataObjectReferenceLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.Forms.View.DataObjectReferenceView", "Kistl.Client.Forms"),
+                                Toolkit.TEST, FindOrCreateTypeRef(ctx, typeof(DataObjectReferenceLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceViewLoader", "Kistl.Client.ASPNET.Toolkit"),
+                                Toolkit.ASPNET, FindOrCreateTypeRef(ctx, typeof(DataObjectReferenceLayout))),
 
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.DataObjectListView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(DataObjectListLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.Forms.View.DataObjectListView", "Kistl.Client.Forms"),
-                            Toolkit.TEST, new TypeRef(typeof(DataObjectListLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.ASPNET.Toolkit.View.DataObjectListViewLoader", "Kistl.Client.ASPNET.Toolkit"),
-                            Toolkit.ASPNET, new TypeRef(typeof(DataObjectListLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.DataObjectListView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(DataObjectListLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.Forms.View.DataObjectListView", "Kistl.Client.Forms"),
+                                Toolkit.TEST, FindOrCreateTypeRef(ctx, typeof(DataObjectListLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.ASPNET.Toolkit.View.DataObjectListViewLoader", "Kistl.Client.ASPNET.Toolkit"),
+                                Toolkit.ASPNET, FindOrCreateTypeRef(ctx, typeof(DataObjectListLayout))),
 
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.DataObjectView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(DataObjectLineLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.DataObjectView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(DataObjectLineLayout))),
 
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.NullablePropertyTextBoxView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(Layout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.Forms.View.NullablePropertyTextBoxView", "Kistl.Client.Forms"),
-                            Toolkit.TEST, new TypeRef(typeof(Layout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit"),
-                            Toolkit.ASPNET, new TypeRef(typeof(Layout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.NullablePropertyTextBoxView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(Layout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.Forms.View.NullablePropertyTextBoxView", "Kistl.Client.Forms"),
+                                Toolkit.TEST, FindOrCreateTypeRef(ctx, typeof(Layout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit"),
+                                Toolkit.ASPNET, FindOrCreateTypeRef(ctx, typeof(Layout))),
 
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.NullableBoolValueView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(SimpleNullableValueLayout<Boolean>))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.NullableBoolValueView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(SimpleNullableValueLayout<Boolean>))),
 
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.SelectionDialog", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(SelectionTaskLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.ActionView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(ActionLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.TextValueSelectionView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(TextValueSelectionLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.EnumSelectionView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(SimpleEnumValueLayout))),
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.ListValueView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(ListValueLayout))), 
-                        new ViewDescriptor(
-                            new TypeRef("Kistl.Client.WPF.View.KistlDebuggerView", "Kistl.Client.WPF"),
-                            Toolkit.WPF, new TypeRef(typeof(DebuggerLayout))),
-                    };
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.SelectionDialog", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(SelectionTaskLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.ActionView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(ActionLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.TextValueSelectionView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(TextValueSelectionLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.EnumSelectionView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(SimpleEnumValueLayout))),
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.ListValueView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(ListValueLayout))), 
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.KistlDebuggerView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(DebuggerLayout))),
+                        };
+                        //ctx.SubmitChanges();
+                    }
                 }
                 return _viewsCache;
             }

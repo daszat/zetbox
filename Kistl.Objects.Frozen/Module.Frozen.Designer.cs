@@ -282,12 +282,15 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[53],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52],
 });
-			DataStore[4].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(5) {
+			DataStore[4].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(8) {
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[3],
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4],
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13],
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14],
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[15],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[16],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18],
 });
 			DataStore[4].Namespace = @"Kistl.App.GUI";
 			DataStore[4].ModuleName = @"GUI";

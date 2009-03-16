@@ -152,7 +152,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, Assembly__Implementation__Frozen> DataStore = new Dictionary<int, Assembly__Implementation__Frozen>(7);
+		internal static Dictionary<int, Assembly__Implementation__Frozen> DataStore = new Dictionary<int, Assembly__Implementation__Frozen>(10);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new Assembly__Implementation__Frozen(1);
@@ -168,6 +168,12 @@ namespace Kistl.App.Base
 			DataStore[14] = new Assembly__Implementation__Frozen(14);
 
 			DataStore[15] = new Assembly__Implementation__Frozen(15);
+
+			DataStore[16] = new Assembly__Implementation__Frozen(16);
+
+			DataStore[17] = new Assembly__Implementation__Frozen(17);
+
+			DataStore[18] = new Assembly__Implementation__Frozen(18);
 
 		}
 
@@ -200,6 +206,18 @@ namespace Kistl.App.Base
 			DataStore[15].AssemblyName = @"Kistl.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 			DataStore[15].IsClientAssembly = false;
 			DataStore[15].Seal();
+			DataStore[16].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[16].AssemblyName = @"Kistl.Client.ASPNET.Toolkit";
+			DataStore[16].IsClientAssembly = false;
+			DataStore[16].Seal();
+			DataStore[17].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[17].AssemblyName = @"Kistl.Client.Forms";
+			DataStore[17].IsClientAssembly = false;
+			DataStore[17].Seal();
+			DataStore[18].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[18].AssemblyName = @"Kistl.Client.WPF";
+			DataStore[18].IsClientAssembly = false;
+			DataStore[18].Seal();
 	
 		}
 

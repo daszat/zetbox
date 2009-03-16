@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+
 using Kistl.API;
-using System.Collections.ObjectModel;
 
 namespace Kistl.Client.Presentables
 {
@@ -16,7 +18,7 @@ namespace Kistl.Client.Presentables
     public class KistlDebuggerAsModel : PresentableModel, IKistlContextDebugger
     {
 
-        public KistlDebuggerAsModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public KistlDebuggerAsModel(IGuiApplicationContext appCtx, IDebuggingKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             KistlContextDebugger.SetDebugger(this);
@@ -24,18 +26,32 @@ namespace Kistl.Client.Presentables
 
         #region Public Interface
 
-        private ObservableCollection<KistlContextModel> _ctxCache = new ObservableCollection<KistlContextModel>();
-        private ReadOnlyObservableCollection<KistlContextModel> _ctxView;
+        private ObservableCollection<KistlContextModel> _activeCtxCache = new ObservableCollection<KistlContextModel>();
+        private ObservableCollection<KistlContextModel> _disposedCtxCache = new ObservableCollection<KistlContextModel>();
+        private ReadOnlyObservableCollection<KistlContextModel> _activeCtxView;
+        private ReadOnlyObservableCollection<KistlContextModel> _disposedCtxView;
 
-        public ReadOnlyObservableCollection<KistlContextModel> Contexts
+        public ReadOnlyObservableCollection<KistlContextModel> ActiveContexts
         {
             get
             {
-                if (_ctxView == null)
+                if (_activeCtxView == null)
                 {
-                    _ctxView = new ReadOnlyObservableCollection<KistlContextModel>(_ctxCache);
+                    _activeCtxView = new ReadOnlyObservableCollection<KistlContextModel>(_activeCtxCache);
                 }
-                return _ctxView;
+                return _activeCtxView;
+            }
+        }
+
+        public ReadOnlyObservableCollection<KistlContextModel> DisposedContexts
+        {
+            get
+            {
+                if (_disposedCtxView == null)
+                {
+                    _disposedCtxView = new ReadOnlyObservableCollection<KistlContextModel>(_disposedCtxCache);
+                }
+                return _disposedCtxView;
             }
         }
 
@@ -50,12 +66,12 @@ namespace Kistl.Client.Presentables
 
         void IKistlContextDebugger.Created(IKistlContext ctx)
         {
-            UI.Queue(UI, () => _ctxCache.Add(GetModel(ctx)));
+            UI.Queue(UI, () => _activeCtxCache.Add(GetModel(ctx)));
         }
 
         void IKistlContextDebugger.Disposed(IKistlContext ctx)
         {
-            UI.Queue(UI, () => _ctxCache.Remove(GetModel(ctx)));
+            UI.Queue(UI, () => { var mdl = GetModel(ctx); _activeCtxCache.Remove(mdl); _disposedCtxCache.Add(mdl); });
         }
 
         void IKistlContextDebugger.Changed(IKistlContext ctx)
@@ -96,8 +112,8 @@ namespace Kistl.Client.Presentables
         /// </summary>
         protected virtual void DisposeManagedResources()
         {
-            if (_ctxCache != null)
-                _ctxCache.Clear();
+            if (_activeCtxCache != null)
+                _activeCtxCache.Clear();
         }
         /// <summary>
         /// Override this to be called when Native Resources should be disposed
@@ -122,9 +138,13 @@ namespace Kistl.Client.Presentables
     public class KistlContextModel
         : PresentableModel
     {
-        public KistlContextModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+
+        protected IDebuggingKistlContext DebuggingContext { get; private set; }
+
+        public KistlContextModel(IGuiApplicationContext appCtx, IDebuggingKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
+            DebuggingContext = dataCtx;
         }
 
         #region Public Interface
@@ -159,6 +179,32 @@ namespace Kistl.Client.Presentables
                 {
                     _countCache = value;
                     OnPropertyChanged("Count");
+                }
+            }
+        }
+
+        public string CreatedAt
+        {
+            get
+            {
+                UI.Verify();
+                return String.Join("", DebuggingContext.CreatedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
+            }
+        }
+
+        public string DisposedAt
+        {
+            get
+            {
+                UI.Verify();
+                if (DebuggingContext.DisposedAt == null)
+                {
+                    return "still active";
+                }
+                else
+                {
+
+                    return String.Join("", DebuggingContext.DisposedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
                 }
             }
         }

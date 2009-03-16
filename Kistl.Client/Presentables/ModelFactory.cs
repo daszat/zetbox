@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 using Kistl.API;
 using Kistl.App.GUI;
-using Kistl.Client.GUI.DB;
 using Kistl.Client.GUI;
-using System.ComponentModel;
+using Kistl.Client.GUI.DB;
 
 namespace Kistl.Client.Presentables
 {
@@ -96,7 +96,7 @@ namespace Kistl.Client.Presentables
         {
             Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
             ViewDescriptor vDesc = DataMocks.LookupViewDescriptor(Toolkit, lout);
-            IView view = vDesc.ViewRef.Create();
+            IView view = (IView)vDesc.ViewRef.Create();
             view.SetModel(mdl);
             return view;
         }

@@ -24,7 +24,7 @@ namespace Kistl.Client.WPF.View
                 };
                 ViewDescriptor vDesc = DataMocks.LookupViewDescriptor(Toolkit.WPF, lout);
                 DataTemplate result = new DataTemplate();
-                result.VisualTree = new FrameworkElementFactory(vDesc.ViewRef.AsType());
+                result.VisualTree = new FrameworkElementFactory(vDesc.ViewRef.AsType(true));
                 return result;
             }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -196,5 +197,11 @@ namespace Kistl.API
         /// </summary>
         event GenericEventHandler<IPersistenceObject> ObjectDeleted;
 
+    }
+
+    public interface IDebuggingKistlContext : IKistlContext
+    {
+        StackTrace CreatedAt { get; }
+        StackTrace DisposedAt { get; }
     }
 }
