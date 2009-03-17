@@ -42,7 +42,21 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_ReferenceObjectClass = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_ReferenceObjectClass == null)
+					return;
+                else if (value != null && value.ID == _fk_ReferenceObjectClass)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("ReferenceObjectClass");
+				
+				// next, set the local reference
+                _fk_ReferenceObjectClass = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("ReferenceObjectClass");
             }
         }
         
@@ -53,14 +67,14 @@ namespace Kistl.App.Base
             {
                 return _fk_ReferenceObjectClass;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_ReferenceObjectClass != value)
                 {
                     NotifyPropertyChanging("ReferenceObjectClass");
                     _fk_ReferenceObjectClass = value;
-                    NotifyPropertyChanging("ReferenceObjectClass");
+                    NotifyPropertyChanged("ReferenceObjectClass");
                 }
             }
         }

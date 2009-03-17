@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using Kistl.API.Client;
 using System.Xml;
-using System.IO;
+
 using Kistl.API;
+using Kistl.API.Client;
 
 namespace Kistl.App.Base
 {
@@ -25,7 +26,9 @@ namespace Kistl.App.Base
             }
             else
             {
-                e.Result = obj.Module.Namespace + "." + obj.ClassName;
+                e.Result = String.Format("{0}.{1}",
+                    obj.Module == null ? "[no module]" : obj.Module.Namespace,
+                    obj.ClassName);
             }
         }
 
@@ -75,8 +78,10 @@ namespace Kistl.App.Base
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
             {
-                e.Result = (obj.Implementor.Assembly.IsClientAssembly ? "[Client] " : "[Server] ")
-                    + obj.InvokeOnObjectClass.ClassName + "." + obj.Method.MethodName;
+                e.Result = String.Format("{0} {1}.{2}",
+                    obj.Implementor.Assembly.IsClientAssembly ? "[Client]" : "[Server]",
+                    obj.InvokeOnObjectClass == null ? "unattached" : obj.InvokeOnObjectClass.ClassName,
+                    obj.Method == null ? "unattached" : obj.Method.MethodName);
             }
             else
             {
@@ -145,6 +150,22 @@ namespace Kistl.App.Base
                 obj.IsReturnParameter ? "[Return] " : "",
                 obj.GetParameterTypeString(),
                 obj.ParameterName);
+        }
+
+        public void OnToString_Relation(Relation obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            try
+            {
+                e.Result = String.Format("Relation: {0}({1}) : {2}({3})",
+                    obj.A.RoleName,
+                    obj.A.Type.ClassName,
+                    obj.B.RoleName,
+                    obj.B.Type.ClassName);
+            }
+            catch (NullReferenceException)
+            {
+                e.Result = "invalid Relation";
+            }
         }
 
         public void OnToString_TypeRef(Kistl.App.Base.TypeRef obj, Kistl.API.MethodReturnEventArgs<string> e)
@@ -393,7 +414,7 @@ namespace Kistl.App.Base
 
             // a lookup of all TypeRefs currently in the data store
             var refs = ctx.GetQuery<TypeRef>().Where(tr => tr.Assembly.ID == assembly.ID).ToLookup(tr => tr.FullName);
-            
+
             foreach (var t in runtimeAssembly.GetExportedTypes())
             {
                 // lookup the ref to the generic tpye definition

@@ -42,7 +42,21 @@ namespace Kistl.App.GUI
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_DisplayedTypeAssembly = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_DisplayedTypeAssembly == null)
+					return;
+                else if (value != null && value.ID == _fk_DisplayedTypeAssembly)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("DisplayedTypeAssembly");
+				
+				// next, set the local reference
+                _fk_DisplayedTypeAssembly = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("DisplayedTypeAssembly");
             }
         }
         
@@ -53,14 +67,14 @@ namespace Kistl.App.GUI
             {
                 return _fk_DisplayedTypeAssembly;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_DisplayedTypeAssembly != value)
                 {
                     NotifyPropertyChanging("DisplayedTypeAssembly");
                     _fk_DisplayedTypeAssembly = value;
-                    NotifyPropertyChanging("DisplayedTypeAssembly");
+                    NotifyPropertyChanged("DisplayedTypeAssembly");
                 }
             }
         }
@@ -156,7 +170,21 @@ namespace Kistl.App.GUI
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_VisualTree = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_VisualTree == null)
+					return;
+                else if (value != null && value.ID == _fk_VisualTree)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("VisualTree");
+				
+				// next, set the local reference
+                _fk_VisualTree = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("VisualTree");
             }
         }
         
@@ -167,14 +195,14 @@ namespace Kistl.App.GUI
             {
                 return _fk_VisualTree;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_VisualTree != value)
                 {
                     NotifyPropertyChanging("VisualTree");
                     _fk_VisualTree = value;
-                    NotifyPropertyChanging("VisualTree");
+                    NotifyPropertyChanged("VisualTree");
                 }
             }
         }

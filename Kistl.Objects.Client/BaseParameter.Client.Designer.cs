@@ -111,27 +111,38 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-
-                var oldValue = Method;
                 
                 // shortcut noops
-                if (Object.Equals(oldValue, value))
+                if (value == null && _fk_Method == null)
 					return;
-                
-                // fix up inverse reference
-                if (value != null && value.ID != fk_Method)
+                else if (value != null && value.ID == _fk_Method)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Method");
+				
+				// next, set the local reference
+                _fk_Method = value == null ? (int?)null : value.ID;
+				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+                var oldValue = Method;
+				if (oldValue != null)
+				{
+					// remove from old list
+					oldValue.Parameter.Remove(this);
+				}
+
+                if (value != null)
                 {
-					if (oldValue != null)
-						oldValue.Parameter.Remove(this);
-                    fk_Method = value.ID;
+					// add to new list
                     value.Parameter.Add(this);
                 }
-                else
-                {
-					if (oldValue != null)
-	                    oldValue.Parameter.Remove(this);
-                    fk_Method = null;
-                }
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Method");
             }
         }
         
@@ -142,14 +153,14 @@ namespace Kistl.App.Base
             {
                 return _fk_Method;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Method != value)
                 {
                     NotifyPropertyChanging("Method");
                     _fk_Method = value;
-                    NotifyPropertyChanging("Method");
+                    NotifyPropertyChanged("Method");
                 }
             }
         }

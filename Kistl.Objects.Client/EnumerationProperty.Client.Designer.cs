@@ -42,7 +42,21 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_Enumeration = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_Enumeration == null)
+					return;
+                else if (value != null && value.ID == _fk_Enumeration)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Enumeration");
+				
+				// next, set the local reference
+                _fk_Enumeration = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Enumeration");
             }
         }
         
@@ -53,14 +67,14 @@ namespace Kistl.App.Base
             {
                 return _fk_Enumeration;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Enumeration != value)
                 {
                     NotifyPropertyChanging("Enumeration");
                     _fk_Enumeration = value;
-                    NotifyPropertyChanging("Enumeration");
+                    NotifyPropertyChanged("Enumeration");
                 }
             }
         }

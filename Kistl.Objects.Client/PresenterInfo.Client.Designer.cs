@@ -65,7 +65,21 @@ namespace Kistl.App.GUI
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_DataAssembly = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_DataAssembly == null)
+					return;
+                else if (value != null && value.ID == _fk_DataAssembly)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("DataAssembly");
+				
+				// next, set the local reference
+                _fk_DataAssembly = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("DataAssembly");
             }
         }
         
@@ -76,14 +90,14 @@ namespace Kistl.App.GUI
             {
                 return _fk_DataAssembly;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_DataAssembly != value)
                 {
                     NotifyPropertyChanging("DataAssembly");
                     _fk_DataAssembly = value;
-                    NotifyPropertyChanging("DataAssembly");
+                    NotifyPropertyChanged("DataAssembly");
                 }
             }
         }
@@ -132,7 +146,21 @@ namespace Kistl.App.GUI
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_PresenterAssembly = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_PresenterAssembly == null)
+					return;
+                else if (value != null && value.ID == _fk_PresenterAssembly)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("PresenterAssembly");
+				
+				// next, set the local reference
+                _fk_PresenterAssembly = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("PresenterAssembly");
             }
         }
         
@@ -143,14 +171,14 @@ namespace Kistl.App.GUI
             {
                 return _fk_PresenterAssembly;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_PresenterAssembly != value)
                 {
                     NotifyPropertyChanging("PresenterAssembly");
                     _fk_PresenterAssembly = value;
-                    NotifyPropertyChanging("PresenterAssembly");
+                    NotifyPropertyChanged("PresenterAssembly");
                 }
             }
         }

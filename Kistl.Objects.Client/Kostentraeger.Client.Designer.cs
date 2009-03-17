@@ -42,27 +42,38 @@ namespace Kistl.App.Zeiterfassung
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-
-                var oldValue = Projekt;
                 
                 // shortcut noops
-                if (Object.Equals(oldValue, value))
+                if (value == null && _fk_Projekt == null)
 					return;
-                
-                // fix up inverse reference
-                if (value != null && value.ID != fk_Projekt)
+                else if (value != null && value.ID == _fk_Projekt)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Projekt");
+				
+				// next, set the local reference
+                _fk_Projekt = value == null ? (int?)null : value.ID;
+				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+                var oldValue = Projekt;
+				if (oldValue != null)
+				{
+					// remove from old list
+					oldValue.Kostentraeger.Remove(this);
+				}
+
+                if (value != null)
                 {
-					if (oldValue != null)
-						oldValue.Kostentraeger.Remove(this);
-                    fk_Projekt = value.ID;
+					// add to new list
                     value.Kostentraeger.Add(this);
                 }
-                else
-                {
-					if (oldValue != null)
-	                    oldValue.Kostentraeger.Remove(this);
-                    fk_Projekt = null;
-                }
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Projekt");
             }
         }
         
@@ -73,14 +84,14 @@ namespace Kistl.App.Zeiterfassung
             {
                 return _fk_Projekt;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Projekt != value)
                 {
                     NotifyPropertyChanging("Projekt");
                     _fk_Projekt = value;
-                    NotifyPropertyChanging("Projekt");
+                    NotifyPropertyChanged("Projekt");
                 }
             }
         }

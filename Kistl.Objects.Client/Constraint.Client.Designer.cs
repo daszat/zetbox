@@ -42,27 +42,38 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-
-                var oldValue = ConstrainedProperty;
                 
                 // shortcut noops
-                if (Object.Equals(oldValue, value))
+                if (value == null && _fk_ConstrainedProperty == null)
 					return;
-                
-                // fix up inverse reference
-                if (value != null && value.ID != fk_ConstrainedProperty)
+                else if (value != null && value.ID == _fk_ConstrainedProperty)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("ConstrainedProperty");
+				
+				// next, set the local reference
+                _fk_ConstrainedProperty = value == null ? (int?)null : value.ID;
+				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+                var oldValue = ConstrainedProperty;
+				if (oldValue != null)
+				{
+					// remove from old list
+					oldValue.Constraints.Remove(this);
+				}
+
+                if (value != null)
                 {
-					if (oldValue != null)
-						oldValue.Constraints.Remove(this);
-                    fk_ConstrainedProperty = value.ID;
+					// add to new list
                     value.Constraints.Add(this);
                 }
-                else
-                {
-					if (oldValue != null)
-	                    oldValue.Constraints.Remove(this);
-                    fk_ConstrainedProperty = null;
-                }
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("ConstrainedProperty");
             }
         }
         
@@ -73,14 +84,14 @@ namespace Kistl.App.Base
             {
                 return _fk_ConstrainedProperty;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_ConstrainedProperty != value)
                 {
                     NotifyPropertyChanging("ConstrainedProperty");
                     _fk_ConstrainedProperty = value;
-                    NotifyPropertyChanging("ConstrainedProperty");
+                    NotifyPropertyChanged("ConstrainedProperty");
                 }
             }
         }

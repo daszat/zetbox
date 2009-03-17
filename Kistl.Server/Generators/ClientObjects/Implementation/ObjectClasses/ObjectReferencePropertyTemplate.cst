@@ -41,70 +41,77 @@
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
+                
+                // shortcut noops
+                if (value == null && <%= fkBackingName %> == null)
+					return;
+                else if (value != null && value.ID == <%= fkBackingName %>)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("<%= name %>");
+				
+				// next, set the local reference
+                <%= fkBackingName %> = value == null ? (int?)null : value.ID;
+				
 <%
     if (hasInverseNavigator)
     {
         var otherProp = otherEnd.Navigator;
         string otherName = otherProp.PropertyName;
-%>
 
+%>
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
                 var oldValue = <%= name %>;
-                
-                // shortcut noops
-                if (Object.Equals(oldValue, value))
-					return;
-                
-                // fix up inverse reference
-                if (value != null && value.ID != <%= fkName %>)
+				if (oldValue != null)
+				{
+<%
+        if (otherProp.IsList)
+        {
+			// TODO: check whether oldValue is loaded before potentially triggering a DB Call
+%>
+					// remove from old list
+					oldValue.<%= otherName %>.Remove(this);
+<%
+        }
+        else
+        {
+%>
+					// unset old reference
+					oldValue.<%= otherName %> = null;
+<%
+        }
+%>
+				}
+
+                if (value != null)
                 {
 <%
         if (otherProp.IsList)
         {
 %>
-					if (oldValue != null)
-						oldValue.<%= otherName %>.Remove(this);
-                    <%= fkName %> = value.ID;
+					// add to new list
                     value.<%= otherName %>.Add(this);
 <%
         }
         else
         {
 %>
-                    <%= fkName %> = value.ID;
+					// set new reference
                     value.<%= otherName %> = this;
 <%
         }
 %>
                 }
-                else
-                {
-<%
-        if (otherProp.IsList)
-        {
-%>
-					if (oldValue != null)
-	                    oldValue.<%= otherName %>.Remove(this);
-                    <%= fkName %> = null;
-<%
-        }
-        else
-        {
-%>
-                    <%= fkName %> = null;
-                    value.<%= otherName %> = null;
-<%
-        }
-%>
-                }
-<%
-    }
-    else // has no inverse navigator
-    {
-%>
-                <%= fkName %> = value == null ? (int?)null : value.ID;
 <%
     }
 %>
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("<%= name %>");
             }
         }
         
@@ -115,14 +122,14 @@
             {
                 return <%= fkBackingName %>;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (<%= fkBackingName %> != value)
                 {
                     NotifyPropertyChanging("<%= name %>");
                     <%= fkBackingName %> = value;
-                    NotifyPropertyChanging("<%= name %>");
+                    NotifyPropertyChanged("<%= name %>");
                 }
             }
         }

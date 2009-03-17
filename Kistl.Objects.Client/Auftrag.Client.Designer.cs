@@ -88,7 +88,21 @@ namespace Kistl.App.Projekte
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_Kunde = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_Kunde == null)
+					return;
+                else if (value != null && value.ID == _fk_Kunde)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Kunde");
+				
+				// next, set the local reference
+                _fk_Kunde = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Kunde");
             }
         }
         
@@ -99,14 +113,14 @@ namespace Kistl.App.Projekte
             {
                 return _fk_Kunde;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Kunde != value)
                 {
                     NotifyPropertyChanging("Kunde");
                     _fk_Kunde = value;
-                    NotifyPropertyChanging("Kunde");
+                    NotifyPropertyChanged("Kunde");
                 }
             }
         }
@@ -132,7 +146,21 @@ namespace Kistl.App.Projekte
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_Mitarbeiter = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_Mitarbeiter == null)
+					return;
+                else if (value != null && value.ID == _fk_Mitarbeiter)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Mitarbeiter");
+				
+				// next, set the local reference
+                _fk_Mitarbeiter = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Mitarbeiter");
             }
         }
         
@@ -143,14 +171,14 @@ namespace Kistl.App.Projekte
             {
                 return _fk_Mitarbeiter;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Mitarbeiter != value)
                 {
                     NotifyPropertyChanging("Mitarbeiter");
                     _fk_Mitarbeiter = value;
-                    NotifyPropertyChanging("Mitarbeiter");
+                    NotifyPropertyChanged("Mitarbeiter");
                 }
             }
         }
@@ -176,27 +204,38 @@ namespace Kistl.App.Projekte
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-
-                var oldValue = Projekt;
                 
                 // shortcut noops
-                if (Object.Equals(oldValue, value))
+                if (value == null && _fk_Projekt == null)
 					return;
-                
-                // fix up inverse reference
-                if (value != null && value.ID != fk_Projekt)
+                else if (value != null && value.ID == _fk_Projekt)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Projekt");
+				
+				// next, set the local reference
+                _fk_Projekt = value == null ? (int?)null : value.ID;
+				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+                var oldValue = Projekt;
+				if (oldValue != null)
+				{
+					// remove from old list
+					oldValue.Auftraege.Remove(this);
+				}
+
+                if (value != null)
                 {
-					if (oldValue != null)
-						oldValue.Auftraege.Remove(this);
-                    fk_Projekt = value.ID;
+					// add to new list
                     value.Auftraege.Add(this);
                 }
-                else
-                {
-					if (oldValue != null)
-	                    oldValue.Auftraege.Remove(this);
-                    fk_Projekt = null;
-                }
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Projekt");
             }
         }
         
@@ -207,14 +246,14 @@ namespace Kistl.App.Projekte
             {
                 return _fk_Projekt;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Projekt != value)
                 {
                     NotifyPropertyChanging("Projekt");
                     _fk_Projekt = value;
-                    NotifyPropertyChanging("Projekt");
+                    NotifyPropertyChanged("Projekt");
                 }
             }
         }

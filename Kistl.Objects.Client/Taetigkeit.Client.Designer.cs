@@ -88,7 +88,21 @@ namespace Kistl.App.Zeiterfassung
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_Mitarbeiter = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_Mitarbeiter == null)
+					return;
+                else if (value != null && value.ID == _fk_Mitarbeiter)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Mitarbeiter");
+				
+				// next, set the local reference
+                _fk_Mitarbeiter = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Mitarbeiter");
             }
         }
         
@@ -99,14 +113,14 @@ namespace Kistl.App.Zeiterfassung
             {
                 return _fk_Mitarbeiter;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Mitarbeiter != value)
                 {
                     NotifyPropertyChanging("Mitarbeiter");
                     _fk_Mitarbeiter = value;
-                    NotifyPropertyChanging("Mitarbeiter");
+                    NotifyPropertyChanged("Mitarbeiter");
                 }
             }
         }
@@ -132,7 +146,21 @@ namespace Kistl.App.Zeiterfassung
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_TaetigkeitsArt = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_TaetigkeitsArt == null)
+					return;
+                else if (value != null && value.ID == _fk_TaetigkeitsArt)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("TaetigkeitsArt");
+				
+				// next, set the local reference
+                _fk_TaetigkeitsArt = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("TaetigkeitsArt");
             }
         }
         
@@ -143,14 +171,14 @@ namespace Kistl.App.Zeiterfassung
             {
                 return _fk_TaetigkeitsArt;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_TaetigkeitsArt != value)
                 {
                     NotifyPropertyChanging("TaetigkeitsArt");
                     _fk_TaetigkeitsArt = value;
-                    NotifyPropertyChanging("TaetigkeitsArt");
+                    NotifyPropertyChanged("TaetigkeitsArt");
                 }
             }
         }
@@ -176,27 +204,38 @@ namespace Kistl.App.Zeiterfassung
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-
-                var oldValue = Zeitkonto;
                 
                 // shortcut noops
-                if (Object.Equals(oldValue, value))
+                if (value == null && _fk_Zeitkonto == null)
 					return;
-                
-                // fix up inverse reference
-                if (value != null && value.ID != fk_Zeitkonto)
+                else if (value != null && value.ID == _fk_Zeitkonto)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Zeitkonto");
+				
+				// next, set the local reference
+                _fk_Zeitkonto = value == null ? (int?)null : value.ID;
+				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+                var oldValue = Zeitkonto;
+				if (oldValue != null)
+				{
+					// remove from old list
+					oldValue.Taetigkeiten.Remove(this);
+				}
+
+                if (value != null)
                 {
-					if (oldValue != null)
-						oldValue.Taetigkeiten.Remove(this);
-                    fk_Zeitkonto = value.ID;
+					// add to new list
                     value.Taetigkeiten.Add(this);
                 }
-                else
-                {
-					if (oldValue != null)
-	                    oldValue.Taetigkeiten.Remove(this);
-                    fk_Zeitkonto = null;
-                }
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Zeitkonto");
             }
         }
         
@@ -207,14 +246,14 @@ namespace Kistl.App.Zeiterfassung
             {
                 return _fk_Zeitkonto;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Zeitkonto != value)
                 {
                     NotifyPropertyChanging("Zeitkonto");
                     _fk_Zeitkonto = value;
-                    NotifyPropertyChanging("Zeitkonto");
+                    NotifyPropertyChanged("Zeitkonto");
                 }
             }
         }

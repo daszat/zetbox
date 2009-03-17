@@ -197,8 +197,11 @@ namespace Kistl.Client.Presentables
             Async.Queue(DataContext, () =>
             {
                 Object.RemoveFromCollection<IDataObject>(Property.PropertyName, item.Object);
-                item.Delete();
-                UI.Queue(UI, () => State = ModelState.Active);
+                UI.Queue(UI, () =>
+                {
+                    item.Delete();
+                    State = ModelState.Active;
+                });
             });
         }
 

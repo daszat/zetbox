@@ -65,27 +65,38 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-
-                var oldValue = Enumeration;
                 
                 // shortcut noops
-                if (Object.Equals(oldValue, value))
+                if (value == null && _fk_Enumeration == null)
 					return;
-                
-                // fix up inverse reference
-                if (value != null && value.ID != fk_Enumeration)
+                else if (value != null && value.ID == _fk_Enumeration)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Enumeration");
+				
+				// next, set the local reference
+                _fk_Enumeration = value == null ? (int?)null : value.ID;
+				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+                var oldValue = Enumeration;
+				if (oldValue != null)
+				{
+					// remove from old list
+					oldValue.EnumerationEntries.Remove(this);
+				}
+
+                if (value != null)
                 {
-					if (oldValue != null)
-						oldValue.EnumerationEntries.Remove(this);
-                    fk_Enumeration = value.ID;
+					// add to new list
                     value.EnumerationEntries.Add(this);
                 }
-                else
-                {
-					if (oldValue != null)
-	                    oldValue.EnumerationEntries.Remove(this);
-                    fk_Enumeration = null;
-                }
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Enumeration");
             }
         }
         
@@ -96,14 +107,14 @@ namespace Kistl.App.Base
             {
                 return _fk_Enumeration;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Enumeration != value)
                 {
                     NotifyPropertyChanging("Enumeration");
                     _fk_Enumeration = value;
-                    NotifyPropertyChanging("Enumeration");
+                    NotifyPropertyChanged("Enumeration");
                 }
             }
         }

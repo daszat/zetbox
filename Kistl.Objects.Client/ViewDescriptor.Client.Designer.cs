@@ -42,7 +42,21 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_LayoutRef = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_LayoutRef == null)
+					return;
+                else if (value != null && value.ID == _fk_LayoutRef)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("LayoutRef");
+				
+				// next, set the local reference
+                _fk_LayoutRef = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("LayoutRef");
             }
         }
         
@@ -53,14 +67,14 @@ namespace Kistl.App.Base
             {
                 return _fk_LayoutRef;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_LayoutRef != value)
                 {
                     NotifyPropertyChanging("LayoutRef");
                     _fk_LayoutRef = value;
-                    NotifyPropertyChanging("LayoutRef");
+                    NotifyPropertyChanged("LayoutRef");
                 }
             }
         }
@@ -109,7 +123,21 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_ViewRef = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_ViewRef == null)
+					return;
+                else if (value != null && value.ID == _fk_ViewRef)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("ViewRef");
+				
+				// next, set the local reference
+                _fk_ViewRef = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("ViewRef");
             }
         }
         
@@ -120,14 +148,14 @@ namespace Kistl.App.Base
             {
                 return _fk_ViewRef;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_ViewRef != value)
                 {
                     NotifyPropertyChanging("ViewRef");
                     _fk_ViewRef = value;
-                    NotifyPropertyChanging("ViewRef");
+                    NotifyPropertyChanged("ViewRef");
                 }
             }
         }

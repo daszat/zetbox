@@ -136,7 +136,21 @@ namespace Kistl.App.GUI
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_Method = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_Method == null)
+					return;
+                else if (value != null && value.ID == _fk_Method)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Method");
+				
+				// next, set the local reference
+                _fk_Method = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Method");
             }
         }
         
@@ -147,14 +161,14 @@ namespace Kistl.App.GUI
             {
                 return _fk_Method;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Method != value)
                 {
                     NotifyPropertyChanging("Method");
                     _fk_Method = value;
-                    NotifyPropertyChanging("Method");
+                    NotifyPropertyChanged("Method");
                 }
             }
         }
@@ -180,7 +194,21 @@ namespace Kistl.App.GUI
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_Property = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_Property == null)
+					return;
+                else if (value != null && value.ID == _fk_Property)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Property");
+				
+				// next, set the local reference
+                _fk_Property = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Property");
             }
         }
         
@@ -191,14 +219,14 @@ namespace Kistl.App.GUI
             {
                 return _fk_Property;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Property != value)
                 {
                     NotifyPropertyChanging("Property");
                     _fk_Property = value;
-                    NotifyPropertyChanging("Property");
+                    NotifyPropertyChanged("Property");
                 }
             }
         }

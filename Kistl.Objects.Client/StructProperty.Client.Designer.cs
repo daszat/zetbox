@@ -42,7 +42,21 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_StructDefinition = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_StructDefinition == null)
+					return;
+                else if (value != null && value.ID == _fk_StructDefinition)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("StructDefinition");
+				
+				// next, set the local reference
+                _fk_StructDefinition = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("StructDefinition");
             }
         }
         
@@ -53,14 +67,14 @@ namespace Kistl.App.Base
             {
                 return _fk_StructDefinition;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_StructDefinition != value)
                 {
                     NotifyPropertyChanging("StructDefinition");
                     _fk_StructDefinition = value;
-                    NotifyPropertyChanging("StructDefinition");
+                    NotifyPropertyChanged("StructDefinition");
                 }
             }
         }

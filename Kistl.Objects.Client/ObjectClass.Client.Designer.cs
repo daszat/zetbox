@@ -42,27 +42,38 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-
-                var oldValue = BaseObjectClass;
                 
                 // shortcut noops
-                if (Object.Equals(oldValue, value))
+                if (value == null && _fk_BaseObjectClass == null)
 					return;
-                
-                // fix up inverse reference
-                if (value != null && value.ID != fk_BaseObjectClass)
+                else if (value != null && value.ID == _fk_BaseObjectClass)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("BaseObjectClass");
+				
+				// next, set the local reference
+                _fk_BaseObjectClass = value == null ? (int?)null : value.ID;
+				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+                var oldValue = BaseObjectClass;
+				if (oldValue != null)
+				{
+					// remove from old list
+					oldValue.SubClasses.Remove(this);
+				}
+
+                if (value != null)
                 {
-					if (oldValue != null)
-						oldValue.SubClasses.Remove(this);
-                    fk_BaseObjectClass = value.ID;
+					// add to new list
                     value.SubClasses.Add(this);
                 }
-                else
-                {
-					if (oldValue != null)
-	                    oldValue.SubClasses.Remove(this);
-                    fk_BaseObjectClass = null;
-                }
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("BaseObjectClass");
             }
         }
         
@@ -73,14 +84,14 @@ namespace Kistl.App.Base
             {
                 return _fk_BaseObjectClass;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_BaseObjectClass != value)
                 {
                     NotifyPropertyChanging("BaseObjectClass");
                     _fk_BaseObjectClass = value;
-                    NotifyPropertyChanging("BaseObjectClass");
+                    NotifyPropertyChanged("BaseObjectClass");
                 }
             }
         }
@@ -106,7 +117,21 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_DefaultModel = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_DefaultModel == null)
+					return;
+                else if (value != null && value.ID == _fk_DefaultModel)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("DefaultModel");
+				
+				// next, set the local reference
+                _fk_DefaultModel = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("DefaultModel");
             }
         }
         
@@ -117,14 +142,14 @@ namespace Kistl.App.Base
             {
                 return _fk_DefaultModel;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_DefaultModel != value)
                 {
                     NotifyPropertyChanging("DefaultModel");
                     _fk_DefaultModel = value;
-                    NotifyPropertyChanging("DefaultModel");
+                    NotifyPropertyChanged("DefaultModel");
                 }
             }
         }

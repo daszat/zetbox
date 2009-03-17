@@ -65,7 +65,21 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                fk_DefaultIcon = value == null ? (int?)null : value.ID;
+                
+                // shortcut noops
+                if (value == null && _fk_DefaultIcon == null)
+					return;
+                else if (value != null && value.ID == _fk_DefaultIcon)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("DefaultIcon");
+				
+				// next, set the local reference
+                _fk_DefaultIcon = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("DefaultIcon");
             }
         }
         
@@ -76,14 +90,14 @@ namespace Kistl.App.Base
             {
                 return _fk_DefaultIcon;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_DefaultIcon != value)
                 {
                     NotifyPropertyChanging("DefaultIcon");
                     _fk_DefaultIcon = value;
-                    NotifyPropertyChanging("DefaultIcon");
+                    NotifyPropertyChanged("DefaultIcon");
                 }
             }
         }
@@ -192,27 +206,38 @@ namespace Kistl.App.Base
             {
                 // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-
-                var oldValue = Module;
                 
                 // shortcut noops
-                if (Object.Equals(oldValue, value))
+                if (value == null && _fk_Module == null)
 					return;
-                
-                // fix up inverse reference
-                if (value != null && value.ID != fk_Module)
+                else if (value != null && value.ID == _fk_Module)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Module");
+				
+				// next, set the local reference
+                _fk_Module = value == null ? (int?)null : value.ID;
+				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+                var oldValue = Module;
+				if (oldValue != null)
+				{
+					// remove from old list
+					oldValue.DataTypes.Remove(this);
+				}
+
+                if (value != null)
                 {
-					if (oldValue != null)
-						oldValue.DataTypes.Remove(this);
-                    fk_Module = value.ID;
+					// add to new list
                     value.DataTypes.Add(this);
                 }
-                else
-                {
-					if (oldValue != null)
-	                    oldValue.DataTypes.Remove(this);
-                    fk_Module = null;
-                }
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Module");
             }
         }
         
@@ -223,14 +248,14 @@ namespace Kistl.App.Base
             {
                 return _fk_Module;
             }
-            set
+            private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Module != value)
                 {
                     NotifyPropertyChanging("Module");
                     _fk_Module = value;
-                    NotifyPropertyChanging("Module");
+                    NotifyPropertyChanged("Module");
                 }
             }
         }
