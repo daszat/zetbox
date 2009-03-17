@@ -2025,7 +2025,8 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[147],
 });
 			DataStore[77].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[77].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[11];
-			DataStore[77].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[77].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[113],
 });
 			DataStore[77].ClassName = @"Relation";
 			DataStore[77].Description = @"Describes a Relation between two Object Classes";
@@ -2110,7 +2111,8 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[159],
 });
 			DataStore[82].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[82].DefaultIcon = null;
-			DataStore[82].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[82].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[114],
 });
 			DataStore[82].ClassName = @"RelationEnd";
 			DataStore[82].Description = @"Describes one end of a relation between two object classes";

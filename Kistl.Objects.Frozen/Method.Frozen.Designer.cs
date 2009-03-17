@@ -1696,7 +1696,8 @@ Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[36],
 			DataStore[145].Seal();
 			DataStore[146].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
 			DataStore[146].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[146].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[146].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[113],
 });
 			DataStore[146].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
@@ -1814,7 +1815,8 @@ Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[39],
 			DataStore[156].Seal();
 			DataStore[157].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
 			DataStore[157].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[157].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[157].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[114],
 });
 			DataStore[157].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });

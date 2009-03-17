@@ -168,6 +168,20 @@ namespace Kistl.App.Base
             }
         }
 
+        public void OnToString_RelationEnd(RelationEnd obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            try
+            {
+                e.Result = String.Format("RelationEnd {0}({1})",
+                    obj.RoleName,
+                    obj.Type.ClassName);
+            }
+            catch (NullReferenceException)
+            {
+                e.Result = "invalid RelationEnd";
+            }
+        }
+
         public void OnToString_TypeRef(Kistl.App.Base.TypeRef obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0}{1}, {2}",

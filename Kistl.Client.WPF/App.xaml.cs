@@ -91,11 +91,12 @@ namespace Kistl.Client.WPF
         private void FixupDatabase()
         {
             //FixNotNullableConstraints();
-            CreateTypeRefs();
+            //CreateTypeRefs();
         }
 
         private void CreateTypeRefs()
         {
+            throw new InvalidOperationException("CreateTypeRefs creates duplicates");
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var muh = (typeof(ObjectListModel).ToRef(ctx));
