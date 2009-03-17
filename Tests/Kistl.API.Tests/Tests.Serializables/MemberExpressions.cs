@@ -10,6 +10,7 @@ using System.Text;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
+
 using Kistl.API.Utils;
 
 namespace Kistl.API.Tests.Serializables
@@ -20,6 +21,9 @@ namespace Kistl.API.Tests.Serializables
     {
       
         // TODO: Discuss: do we really want to optimize Linq epxressions when serializing?
+        //       currently, this seems to be a side-effect of the ExpressionEvaluator
+        //       in the far future, we might want to extract expression optimisation into a
+        //       (mode) standalone component
         [Test]
         public void roundtrip_MemberAccess_to_string_Length_property_should_optimize_constness()
         {
@@ -31,7 +35,7 @@ namespace Kistl.API.Tests.Serializables
 
             AssertExpressions.AreEqual(result, Expression.Constant(testString.Length));
         }
-	
+
     }
 
 }
