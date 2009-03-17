@@ -20,10 +20,10 @@ namespace Kistl.API.Tests.Serializables
         /// <summary>
         /// Compares two Linq Expressions.
         /// </summary>
-        public static void AreEqual(Expression x, Expression y)
+        public static void AreEqual(Expression result, Expression expected)
         {
-            var xType = x == null ? null : x.GetType();
-            var yType = y == null ? null : y.GetType();
+            var xType = result == null ? null : result.GetType();
+            var yType = expected == null ? null : expected.GetType();
 
             if (xType == null && yType == null)
             {
@@ -31,8 +31,8 @@ namespace Kistl.API.Tests.Serializables
             }
             else if (xType == yType)
             {
-                var assertingVisitor = new AssertingVisitor(y);
-                assertingVisitor.Visit(x);
+                var assertingVisitor = new AssertingVisitor(expected);
+                assertingVisitor.Visit(result);
             }
             else
             {
