@@ -164,9 +164,57 @@ namespace Kistl.API.Client
             return ((KistlContextProvider)query.Provider).GetListOf(ID, propertyName).Cast<T>().ToList();
         }
 
+        /// <summary>
+        /// An immutable key to lookup cache results of FetchRelation
+        /// </summary>
+        internal struct RelationContentKey
+        {
+            internal RelationContentKey(int id, RelationEndRole role, int containerId)
+                : this()
+            {
+                this.ID = id;
+                this.Role = role;
+                this.ContainerId = containerId;
+            }
+
+            internal int ID { get; private set; }
+            internal RelationEndRole Role { get; private set; }
+            internal int ContainerId { get; private set; }
+
+            public override int GetHashCode()
+            {
+                return ID.GetHashCode() ^ Role.GetHashCode() ^ ContainerId.GetHashCode();
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (obj is RelationContentKey)
+                {
+                    var other = (RelationContentKey)obj;
+                    return this.ID == other.ID
+                        && this.Role == other.Role
+                        && this.ContainerId == other.ContainerId;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        private Dictionary<RelationContentKey, object> _fetchRelationCache = new Dictionary<RelationContentKey, object>();
         public ICollection<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject container)
         {
-            return Proxy.Current.FetchRelation<A, B>(relationId, role, container).ToList();
+            var key = new RelationContentKey(relationId, role, container.ID);
+            if (_fetchRelationCache.ContainsKey(key))
+            {
+                return (ICollection<INewCollectionEntry<A, B>>)_fetchRelationCache[key];
+            }
+            else
+            {
+                var result = Proxy.Current.FetchRelation<A, B>(relationId, role, container).ToList();
+                _fetchRelationCache[key] = result;
+                return result;
+            }
         }
 
         /// <summary>
@@ -466,7 +514,7 @@ namespace Kistl.API.Client
 
         public StackTrace CreatedAt { get; private set; }
 
-        public StackTrace DisposedAt{ get; private set; }
+        public StackTrace DisposedAt { get; private set; }
 
         #endregion
     }
