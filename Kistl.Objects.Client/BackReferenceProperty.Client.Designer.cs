@@ -74,7 +74,7 @@ namespace Kistl.App.Base
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("ReferenceProperty");
-				
+				           
 				// next, set the local reference
                 _fk_ReferenceProperty = value == null ? (int?)null : value.ID;
 				

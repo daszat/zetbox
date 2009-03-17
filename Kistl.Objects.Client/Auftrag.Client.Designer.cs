@@ -97,7 +97,7 @@ namespace Kistl.App.Projekte
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("Kunde");
-				
+				           
 				// next, set the local reference
                 _fk_Kunde = value == null ? (int?)null : value.ID;
 				
@@ -155,7 +155,7 @@ namespace Kistl.App.Projekte
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("Mitarbeiter");
-				
+				           
 				// next, set the local reference
                 _fk_Mitarbeiter = value == null ? (int?)null : value.ID;
 				
@@ -213,7 +213,10 @@ namespace Kistl.App.Projekte
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("Projekt");
-				
+				           
+	            // cache old value to remove inverse references later
+                var oldValue = Projekt;
+                
 				// next, set the local reference
                 _fk_Projekt = value == null ? (int?)null : value.ID;
 				
@@ -222,7 +225,6 @@ namespace Kistl.App.Projekte
 				// only be touched after setting the local value above. 
 				// TODO: for complete correctness, the "other" Changing event should also fire 
 				//       before the local value is changed
-                var oldValue = Projekt;
 				if (oldValue != null)
 				{
 					// remove from old list

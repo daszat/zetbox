@@ -74,7 +74,7 @@ namespace Kistl.App.Test
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("ObjectProp");
-				
+				           
 				// next, set the local reference
                 _fk_ObjectProp = value == null ? (int?)null : value.ID;
 				

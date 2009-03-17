@@ -74,7 +74,7 @@ namespace Kistl.App.GUI
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("DataAssembly");
-				
+				           
 				// next, set the local reference
                 _fk_DataAssembly = value == null ? (int?)null : value.ID;
 				
@@ -155,7 +155,7 @@ namespace Kistl.App.GUI
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("PresenterAssembly");
-				
+				           
 				// next, set the local reference
                 _fk_PresenterAssembly = value == null ? (int?)null : value.ID;
 				

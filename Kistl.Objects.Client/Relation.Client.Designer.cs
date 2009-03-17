@@ -51,7 +51,7 @@ namespace Kistl.App.Base
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("A");
-				
+				           
 				// next, set the local reference
                 _fk_A = value == null ? (int?)null : value.ID;
 				
@@ -109,7 +109,7 @@ namespace Kistl.App.Base
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("B");
-				
+				           
 				// next, set the local reference
                 _fk_B = value == null ? (int?)null : value.ID;
 				

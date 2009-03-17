@@ -145,7 +145,7 @@ namespace Kistl.App.GUI
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("Method");
-				
+				           
 				// next, set the local reference
                 _fk_Method = value == null ? (int?)null : value.ID;
 				
@@ -203,7 +203,7 @@ namespace Kistl.App.GUI
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("Property");
-				
+				           
 				// next, set the local reference
                 _fk_Property = value == null ? (int?)null : value.ID;
 				

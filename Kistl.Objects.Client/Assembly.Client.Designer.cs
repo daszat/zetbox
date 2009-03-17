@@ -97,7 +97,10 @@ namespace Kistl.App.Base
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("Module");
-				
+				           
+	            // cache old value to remove inverse references later
+                var oldValue = Module;
+                
 				// next, set the local reference
                 _fk_Module = value == null ? (int?)null : value.ID;
 				
@@ -106,7 +109,6 @@ namespace Kistl.App.Base
 				// only be touched after setting the local value above. 
 				// TODO: for complete correctness, the "other" Changing event should also fire 
 				//       before the local value is changed
-                var oldValue = Module;
 				if (oldValue != null)
 				{
 					// remove from old list

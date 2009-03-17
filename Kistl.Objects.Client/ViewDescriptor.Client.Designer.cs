@@ -51,7 +51,7 @@ namespace Kistl.App.Base
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("LayoutRef");
-				
+				           
 				// next, set the local reference
                 _fk_LayoutRef = value == null ? (int?)null : value.ID;
 				
@@ -132,7 +132,7 @@ namespace Kistl.App.Base
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("ViewRef");
-				
+				           
 				// next, set the local reference
                 _fk_ViewRef = value == null ? (int?)null : value.ID;
 				

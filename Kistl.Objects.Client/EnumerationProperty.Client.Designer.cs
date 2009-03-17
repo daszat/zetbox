@@ -51,7 +51,7 @@ namespace Kistl.App.Base
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("Enumeration");
-				
+				           
 				// next, set the local reference
                 _fk_Enumeration = value == null ? (int?)null : value.ID;
 				

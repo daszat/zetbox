@@ -120,7 +120,10 @@ namespace Kistl.App.Base
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("Method");
-				
+				           
+	            // cache old value to remove inverse references later
+                var oldValue = Method;
+                
 				// next, set the local reference
                 _fk_Method = value == null ? (int?)null : value.ID;
 				
@@ -129,7 +132,6 @@ namespace Kistl.App.Base
 				// only be touched after setting the local value above. 
 				// TODO: for complete correctness, the "other" Changing event should also fire 
 				//       before the local value is changed
-                var oldValue = Method;
 				if (oldValue != null)
 				{
 					// remove from old list

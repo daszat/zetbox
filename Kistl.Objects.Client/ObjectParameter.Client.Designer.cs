@@ -51,7 +51,7 @@ namespace Kistl.App.Base
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("DataType");
-				
+				           
 				// next, set the local reference
                 _fk_DataType = value == null ? (int?)null : value.ID;
 				

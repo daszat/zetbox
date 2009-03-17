@@ -97,7 +97,7 @@ namespace Kistl.App.Base
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("Navigator");
-				
+				           
 				// next, set the local reference
                 _fk_Navigator = value == null ? (int?)null : value.ID;
 				
@@ -201,7 +201,7 @@ namespace Kistl.App.Base
 
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("Type");
-				
+				           
 				// next, set the local reference
                 _fk_Type = value == null ? (int?)null : value.ID;
 				
