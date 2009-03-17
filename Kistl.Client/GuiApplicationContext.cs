@@ -76,10 +76,10 @@ namespace Kistl.Client
             switch (tk)
             {
                 case Toolkit.WPF:
-                    //UiThread = new Kistl.Client.Presentables.WPF.UiThreadManager();
-                    //AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
-                    UiThread = new SynchronousThreadManager();
-                    AsyncThread = new SynchronousThreadManager();
+                    UiThread = new Kistl.Client.Presentables.WPF.UiThreadManager();
+                    AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
+                    //UiThread = new SynchronousThreadManager();
+                    //AsyncThread = new SynchronousThreadManager();
 
                     Factory = (ModelFactory)Activator.CreateInstance(
                         Type.GetType("Kistl.Client.WPF.WpfModelFactory, Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", true),
