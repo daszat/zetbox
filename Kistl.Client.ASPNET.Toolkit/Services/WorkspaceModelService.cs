@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
-using Kistl.Client.Presentables;
+using System.Text;
+
 using Kistl.API;
 using Kistl.API.Client;
+using Kistl.App.Base;
+using Kistl.App.Extensions;
+using Kistl.Client.Presentables;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
@@ -40,8 +43,8 @@ namespace Kistl.Client.ASPNET.Toolkit
             // Jetzt selbst implementieren
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var objClass = ctx.Find<Kistl.App.Base.ObjectClass>(objectClassID);
-                return ctx.GetQuery(objClass.GetDataType())
+                var objClass = ctx.Find<ObjectClass>(objectClassID);
+                return ctx.GetQuery(objClass.GetDescribedInterfaceType())
                     .Select(i => new JavaScriptObjectMoniker(ctx, i)).ToList();
             }
         }

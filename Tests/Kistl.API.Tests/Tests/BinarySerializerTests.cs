@@ -155,7 +155,7 @@ namespace Kistl.API.Tests
         public void Enum()
         {
             TestEnum toval, fromval;
-            toval = TestEnum.First;
+            toval = TestEnum.TestSerializationValue;
             BinarySerializer.ToStream((int)toval, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
@@ -283,7 +283,7 @@ namespace Kistl.API.Tests
             uint guardValue = 0xdeadbeef;
 
             SerializableType toval, fromval;
-            toval = new SerializableType(typeof(TestDataObject));
+            toval = new SerializableType(new InterfaceType(typeof(TestDataObject)));
 
             sw.Write(guardValue);
             BinarySerializer.ToStream(toval, sw);
@@ -422,7 +422,7 @@ namespace Kistl.API.Tests
         {
             TestDataObject obj = new TestDataObject__Implementation__();
             TestObj obj2 = new TestObj();
-            TestQuery<TestDataObject__Implementation__> ctx = new TestQuery<TestDataObject__Implementation__>();
+            TestQuery<TestDataObject> ctx = new TestQuery<TestDataObject>();
             var list = from o in ctx
                        where o.IntProperty == 1
                        && o.IntProperty != 2

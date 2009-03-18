@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
 using Kistl.API.Client.Mocks;
 
 using NUnit.Framework;
@@ -16,7 +14,7 @@ namespace Kistl.API.Client.Tests
     [TestFixture]
     public class BaseClientDataObjectTests
     {
-        private TestObjClass obj;
+        private BaseClientDataObjectMock obj;
         private CustomActionsManagerAPITest currentCustomActionsManager;
         private bool PropertyChangedCalled = false;
 
@@ -30,7 +28,7 @@ namespace Kistl.API.Client.Tests
 
             PropertyChangedCalled = false;
 
-            obj = new TestObjClass__Implementation__();
+            obj = new BaseClientDataObjectMock();
             obj.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(obj_PropertyChanged);
         }
 
@@ -91,20 +89,19 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void NotifyPropertyChanged_ing()
         {
-            obj.NotifyPropertyChanging("StringProp");
-            obj.StringProp = "test";
-            obj.NotifyPropertyChanged("StringProp");
+            obj.NotifyPropertyChanging("ID");
+            obj.NotifyPropertyChanged("ID");
             Assert.That(PropertyChangedCalled, Is.True);
         }
 
         [Test]
         public void ApplyChanges()
         {
-            TestObjClass result = new TestObjClass__Implementation__();
+            BaseClientDataObjectMock result = new BaseClientDataObjectMock();
 
             obj.SetPrivatePropertyValue<int>("ID", 10);
 
-            ((TestObjClass__Implementation__)obj).ApplyChanges(result);
+            obj.ApplyChangesFrom(result);
             Assert.That(result.ID, Is.EqualTo(obj.ID));
             Assert.That(PropertyChangedCalled, Is.True);
         }
@@ -113,8 +110,8 @@ namespace Kistl.API.Client.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void ApplyChanges_Null()
         {
-            TestObjClass__Implementation__ result = null;
-            ((TestObjClass__Implementation__)obj).ApplyChanges(result);
+            BaseClientDataObjectMock result = null;
+            obj.ApplyChangesFrom(result);
         }
 
         [Test]
@@ -139,7 +136,7 @@ namespace Kistl.API.Client.Tests
 
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                TestObjClass result = new TestObjClass__Implementation__();
+                BaseClientDataObjectMock result = new BaseClientDataObjectMock();
                 result.FromStream(sr);
 
                 Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
@@ -155,7 +152,7 @@ namespace Kistl.API.Client.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                TestObjClass result = new TestObjClass__Implementation__();
+                BaseClientDataObjectMock result = new BaseClientDataObjectMock();
                 result.FromStream(null);
             }
         }
@@ -168,13 +165,13 @@ namespace Kistl.API.Client.Tests
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
-            SerializableType wrongType = new SerializableType(typeof(string));
+            SerializableType wrongType = new SerializableType(new InterfaceType(typeof(string)));
             BinarySerializer.ToStream(wrongType, sw);
 
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 ms.Seek(0, SeekOrigin.Begin);
-                TestObjClass result = new TestObjClass__Implementation__();
+                BaseClientDataObjectMock result = new BaseClientDataObjectMock();
                 result.FromStream(sr);
             }
         }

@@ -91,12 +91,11 @@ namespace Kistl.Client.WPF
         private void FixupDatabase()
         {
             //FixNotNullableConstraints();
-            //CreateTypeRefs();
+            CreateTypeRefs();
         }
 
         private void CreateTypeRefs()
         {
-            throw new InvalidOperationException("CreateTypeRefs creates duplicates");
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var muh = (typeof(ObjectListModel).ToRef(ctx));
@@ -109,10 +108,7 @@ namespace Kistl.Client.WPF
                 {
                     object muh;
                     muh = (typeof(NullableValuePropertyModel<Boolean>).ToRef(ctx));
-                    using (TraceClient.TraceHelper.TraceMethodCall("single ToRef call"))
-                    {
-                        muh = (typeof(NullableValuePropertyModel<DateTime>).ToRef(ctx));
-                    }
+                    muh = (typeof(NullableValuePropertyModel<DateTime>).ToRef(ctx));
                     muh = (typeof(NullableValuePropertyModel<Double>).ToRef(ctx));
                     muh = (typeof(NullableValuePropertyModel<int>).ToRef(ctx));
                     muh = (typeof(ChooseReferencePropertyModel<string>).ToRef(ctx));

@@ -172,9 +172,9 @@ namespace Kistl.App.GUI
         }
         private Kistl.App.GUI.Toolkit _Platform;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(ControlInfo);
+			return new InterfaceType(typeof(ControlInfo));
 		}
 
         // tail template

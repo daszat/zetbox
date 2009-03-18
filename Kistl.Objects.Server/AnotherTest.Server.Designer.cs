@@ -45,9 +45,9 @@ namespace Kistl.App.Test
         }
         private int _ID;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(AnotherTest);
+			return new InterfaceType(typeof(AnotherTest));
 		}
 
         // tail template

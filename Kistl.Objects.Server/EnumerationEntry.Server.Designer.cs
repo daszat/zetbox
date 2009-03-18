@@ -204,9 +204,9 @@ namespace Kistl.App.Base
         }
         private int _Value;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(EnumerationEntry);
+			return new InterfaceType(typeof(EnumerationEntry));
 		}
 
         // tail template

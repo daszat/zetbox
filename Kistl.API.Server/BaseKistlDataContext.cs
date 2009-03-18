@@ -8,6 +8,7 @@ namespace Kistl.API.Server
 {
     public abstract class BaseKistlDataContext : IKistlContext, IDisposable
     {
+        // TODO: implement proper IDisposable pattern
         public virtual void Dispose()
         {
             GC.SuppressFinalize(this);
@@ -62,9 +63,9 @@ namespace Kistl.API.Server
         /// <summary>
         /// Returns a Query by System.Type.
         /// </summary>
-        /// <param name="type">the requested type of objects</param>
+        /// <param name="ifType">the requested type of objects</param>
         /// <returns>IQueryable</returns>
-        public abstract IQueryable<IDataObject> GetQuery(Type type);
+        public abstract IQueryable<IDataObject> GetQuery(InterfaceType ifType);
 
         /// <summary>
         /// Returns the List of a BackReferenceProperty by the given PropertyName.
@@ -86,7 +87,7 @@ namespace Kistl.API.Server
         /// <param name="ID">ID of the Object which holds the BackReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        public virtual List<T> GetListOf<T>(Type type, int ID, string propertyName) where T : IDataObject
+        public virtual List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : IDataObject
         {
             IDataObject obj = (IDataObject)this.Find(type, ID);
             return GetListOf<T>(obj, propertyName);
@@ -120,10 +121,9 @@ namespace Kistl.API.Server
         /// <returns>Number of affected Objects</returns>
         public abstract int SubmitChanges();
 
-        private Kistl.API.IPersistenceObject CreateInternal(Type type)
+        private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
-            type = type.ToImplementationType();
-            Kistl.API.IPersistenceObject obj = (Kistl.API.IPersistenceObject)Activator.CreateInstance(type);
+            IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
             Attach(obj);
             OnObjectCreated(obj);
             return obj;
@@ -132,21 +132,21 @@ namespace Kistl.API.Server
         /// <summary>
         /// Creates a new IPersistenceObject by System.Type. Note - this Method is depricated!
         /// </summary>
-        /// <param name="type">System.Type of the new IPersistenceObject</param>
+        /// <param name="ifType">System.Type of the new IPersistenceObject</param>
         /// <returns>A new IPersistenceObject</returns>
-        public virtual Kistl.API.IDataObject Create(Type type)
+        public virtual IDataObject Create(InterfaceType ifType)
         {
-            return (IDataObject)CreateInternal(type);
+            return (IDataObject)CreateInternal(ifType);
         }
 
         /// <summary>
-        /// Creates a new IPersistenceObject.
+        /// Creates a new IDataObject.
         /// </summary>
-        /// <typeparam name="T">Type of the new IPersistenceObject</typeparam>
+        /// <typeparam name="T">Type of the new IDataObject</typeparam>
         /// <returns>A new IDataObject</returns>
-        public virtual T Create<T>() where T : Kistl.API.IDataObject
+        public virtual T Create<T>() where T : IDataObject
         {
-            return (T)Create(typeof(T));
+            return (T)Create(new InterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -154,9 +154,9 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="type">System.Type of the new IPersistenceObject</param>
         /// <returns>A new IPersistenceObject</returns>
-        public virtual Kistl.API.ICollectionEntry CreateCollectionEntry(Type type)
+        public virtual ICollectionEntry CreateCollectionEntry(InterfaceType ifType)
         {
-            return (ICollectionEntry)CreateInternal(type);
+            return (ICollectionEntry)CreateInternal(ifType);
         }
 
         /// <summary>
@@ -164,20 +164,19 @@ namespace Kistl.API.Server
         /// </summary>
         /// <typeparam name="T">Type of the new IPersistenceObject</typeparam>
         /// <returns>A new IDataObject</returns>
-        public virtual T CreateCollectionEntry<T>() where T : Kistl.API.ICollectionEntry
+        public virtual T CreateCollectionEntry<T>() where T : ICollectionEntry
         {
-            return (T)CreateCollectionEntry(typeof(T));
+            return (T)CreateCollectionEntry(new InterfaceType(typeof(T)));
         }
 
         /// <summary>
         /// Creates a new Struct by Type
         /// </summary>
-        /// <param name="type">Type of the new IDataObject</param>
+        /// <param name="ifType">Type of the new IDataObject</param>
         /// <returns>A new Struct</returns>
-        public virtual IStruct CreateStruct(Type type)
+        public virtual IStruct CreateStruct(InterfaceType ifType)
         {
-            type = type.ToImplementationType();
-            Kistl.API.IStruct obj = (Kistl.API.IStruct)Activator.CreateInstance(type);
+            IStruct obj = (IStruct)Activator.CreateInstance(ifType.ToImplementationType().Type);
             return obj;
         }
         /// <summary>
@@ -187,7 +186,7 @@ namespace Kistl.API.Server
         /// <returns>A new Struct</returns>
         public virtual T CreateStruct<T>() where T : IStruct
         {
-            return (T)CreateStruct(typeof(T));
+            return (T)CreateStruct(new InterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -199,13 +198,13 @@ namespace Kistl.API.Server
         /// <param name="type">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public abstract IDataObject Find(Type type, int ID);
+        public abstract IDataObject Find(InterfaceType type, int ID);
 
         public IKistlContext GetReadonlyContext()
         {
             // TODO: actually create a ThreadStatic read-only variant of this to allow for a common cache
             //return this;
-            return Kistl.API.FrozenContext.Single;
+            return FrozenContext.Single;
         }
 
         /// <summary>

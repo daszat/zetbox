@@ -6,6 +6,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Client.GUI.DB;
 
 namespace Kistl.Client.Presentables
@@ -114,7 +115,7 @@ namespace Kistl.Client.Presentables
             Async.Queue(DataContext, () =>
             {
                 var objClass = (ObjectClass)obj.Object;
-                var created = (IDataObject)DataContext.Create(objClass.GetDataType());
+                var created = (IDataObject)DataContext.Create(objClass.GetDescribedInterfaceType());
                 UI.Queue(UI, () => SelectedItem = (DataObjectModel)Factory.CreateDefaultModel(DataContext, created));
             });
         }

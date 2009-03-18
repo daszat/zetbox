@@ -6,9 +6,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Client;
-
 namespace Kistl.API.Client
 {
     /// <summary>
@@ -117,12 +114,12 @@ namespace Kistl.API.Client
         /// <summary>
         /// Returns a Query by System.Type
         /// </summary>
-        /// <param name="type">System.Type</param>
+        /// <param name="ifType">System.Type</param>
         /// <returns>IQueryable</returns>
-        public IQueryable<IDataObject> GetQuery(Type type)
+        public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
             CheckDisposed();
-            return new KistlContextQuery<IDataObject>(this, type);
+            return new KistlContextQuery<IDataObject>(this, ifType);
         }
 
         /// <summary>
@@ -133,7 +130,7 @@ namespace Kistl.API.Client
         public IQueryable<T> GetQuery<T>() where T : IDataObject
         {
             CheckDisposed();
-            return new KistlContextQuery<T>(this, typeof(T));
+            return new KistlContextQuery<T>(this, new InterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -157,7 +154,7 @@ namespace Kistl.API.Client
         /// <param name="ID">ID of the Object which holds the BackReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        public List<T> GetListOf<T>(Type type, int ID, string propertyName) where T : IDataObject
+        public List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : IDataObject
         {
             CheckDisposed();
             KistlContextQuery<T> query = new KistlContextQuery<T>(this, type);
@@ -222,19 +219,19 @@ namespace Kistl.API.Client
         /// </summary>
         /// <typeparam name="T">Type of the new IDataObject</typeparam>
         /// <returns>A new IDataObject</returns>
-        public T Create<T>() where T : Kistl.API.IDataObject
+        public T Create<T>() where T : IDataObject
         {
-            return (T)Create(typeof(T));
+            return (T)Create(new InterfaceType(typeof(T)));
         }
 
         /// <summary>
         /// Creates a new IDataObject by System.Type. Note - this Method is depricated!
         /// </summary>
-        /// <param name="type">System.Type of the new IDataObject</param>
+        /// <param name="ifType">System.Type of the new IDataObject</param>
         /// <returns>A new IDataObject</returns>
-        public Kistl.API.IDataObject Create(Type type)
+        public IDataObject Create(InterfaceType ifType)
         {
-            return (IDataObject)CreateInternal(type);
+            return (IDataObject)CreateInternal(ifType);
         }
 
         /// <summary>
@@ -242,9 +239,9 @@ namespace Kistl.API.Client
         /// </summary>
         /// <param name="type">Type of the new ICollectionEntry</param>
         /// <returns>A new ICollectionEntry</returns>
-        public T CreateCollectionEntry<T>() where T : Kistl.API.ICollectionEntry
+        public T CreateCollectionEntry<T>() where T : ICollectionEntry
         {
-            return (T)CreateCollectionEntry(typeof(T));
+            return (T)CreateCollectionEntry(new InterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -252,16 +249,15 @@ namespace Kistl.API.Client
         /// </summary>
         /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
         /// <returns>A new ICollectionEntry</returns>
-        public Kistl.API.ICollectionEntry CreateCollectionEntry(Type type)
+        public ICollectionEntry CreateCollectionEntry(InterfaceType ifType)
         {
-            return (ICollectionEntry)CreateInternal(type);
+            return (ICollectionEntry)CreateInternal(ifType);
         }
 
-        private Kistl.API.IPersistenceObject CreateInternal(Type type)
+        private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
             CheckDisposed();
-            type = type.ToImplementationType();
-            Kistl.API.IPersistenceObject obj = (Kistl.API.IPersistenceObject)Activator.CreateInstance(type);
+            IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
             Attach(obj);
             OnObjectCreated(obj);
             return obj;
@@ -271,13 +267,12 @@ namespace Kistl.API.Client
         /// <summary>
         /// Creates a new Struct by Type
         /// </summary>
-        /// <param name="type">Type of the new IDataObject</param>
+        /// <param name="ifType">Type of the new IDataObject</param>
         /// <returns>A new Struct</returns>
-        public IStruct CreateStruct(Type type)
+        public IStruct CreateStruct(InterfaceType ifType)
         {
             CheckDisposed();
-            type = type.ToImplementationType();
-            Kistl.API.IStruct obj = (Kistl.API.IStruct)Activator.CreateInstance(type);
+            IStruct obj = (IStruct)Activator.CreateInstance(ifType.ToImplementationType().Type);
             return obj;
         }
         /// <summary>
@@ -287,7 +282,7 @@ namespace Kistl.API.Client
         /// <returns>A new Struct</returns>
         public T CreateStruct<T>() where T : IStruct
         {
-            return (T)CreateStruct(typeof(T));
+            return (T)CreateStruct(new InterfaceType(typeof(T)));
         }
 
 
@@ -374,27 +369,27 @@ namespace Kistl.API.Client
         {
             CheckDisposed();
             // TODO: Add a better Cache Refresh Strategie
-            // CacheController<Kistl.API.IDataObject>.Current.Clear();
+            // CacheController<IDataObject>.Current.Clear();
 
-            List<Kistl.API.IDataObject> objectsToSubmit = new List<Kistl.API.IDataObject>();
-            List<Kistl.API.IDataObject> objectsToAdd = new List<Kistl.API.IDataObject>();
-            List<Kistl.API.IDataObject> objectsToDetach = new List<Kistl.API.IDataObject>();
+            var objectsToSubmit = new List<BaseClientPersistenceObject>();
+            var objectsToAdd = new List<BaseClientPersistenceObject>();
+            var objectsToDetach = new List<BaseClientPersistenceObject>();
 
             // Added Objects
-            foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>()
+            foreach (var obj in _objects.OfType<BaseClientPersistenceObject>()
                 .Where(o => o.ObjectState == DataObjectState.New))
             {
                 objectsToSubmit.Add(obj);
                 objectsToAdd.Add(obj);
             }
             // Changed objects
-            foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>()
+            foreach (var obj in _objects.OfType<BaseClientPersistenceObject>()
                 .Where(o => o.ObjectState == DataObjectState.Modified))
             {
                 objectsToSubmit.Add(obj);
             }
             // Deleted Objects
-            foreach (Kistl.API.IDataObject obj in _objects.OfType<IDataObject>()
+            foreach (var obj in _objects.OfType<BaseClientPersistenceObject>()
                 .Where(o => o.ObjectState == DataObjectState.Deleted))
             {
                 // Submit only persisted objects
@@ -406,14 +401,14 @@ namespace Kistl.API.Client
             }
 
             // Submit to server
-            var newObjects = Proxy.Current.SetObjects(objectsToSubmit);
+            var newObjects = Proxy.Current.SetObjects(objectsToSubmit.Cast<IPersistenceObject>());
 
             // Apply Changes
             int counter = 0;
-            List<Kistl.API.IDataObject> changedObjects = new List<Kistl.API.IDataObject>();
-            foreach (IDataObject newobj in newObjects)
+            var changedObjects = new List<BaseClientPersistenceObject>();
+            foreach (BaseClientPersistenceObject newobj in newObjects)
             {
-                IDataObject obj;
+                BaseClientPersistenceObject obj;
 
                 if (counter < objectsToAdd.Count)
                 {
@@ -421,17 +416,17 @@ namespace Kistl.API.Client
                 }
                 else
                 {
-                    obj = (IDataObject)this.ContainsObject(newobj.GetType(), newobj.ID) ?? newobj;
+                    obj = (BaseClientPersistenceObject)this.ContainsObject(newobj.GetType(), newobj.ID) ?? newobj;
                 }
 
-                ((BaseClientDataObject)obj).RecordNotifications();
+                (obj).RecordNotifications();
                 if (obj != newobj)
                 {
-                    ((BaseClientDataObject)newobj).ApplyChanges(obj);
+                    obj.ApplyChangesFrom(newobj);
                 }
 
-                // Set to unmodified
-                ((BaseClientPersistenceObject)obj).ObjectState = DataObjectState.Unmodified;
+                // reset ObjectState to new truth
+                obj.ObjectState = DataObjectState.Unmodified;
 
                 changedObjects.Add(obj);
             }
@@ -439,7 +434,7 @@ namespace Kistl.API.Client
             objectsToDetach.ForEach(obj => this.Detach(obj));
             changedObjects.ForEach(obj => this.Attach(obj));
 
-            changedObjects.ForEach<BaseClientDataObject>(obj => obj.PlaybackNotifications());
+            changedObjects.ForEach(obj => obj.PlaybackNotifications());
 
             return objectsToSubmit.Count;
         }
@@ -452,7 +447,7 @@ namespace Kistl.API.Client
         /// <param name="type">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public IDataObject Find(Type type, int ID)
+        public IDataObject Find(InterfaceType ifType, int ID)
         {
             // TODO: check "type" for being a IDataObject
             CheckDisposed();
@@ -461,7 +456,10 @@ namespace Kistl.API.Client
             // See Case 552
             //return GetQuery(type).Single(o => o.ID == ID);
 
-            return (IDataObject)this.GetType().FindGenericMethod("Find", new Type[] { type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
+            return (IDataObject)this.GetType().FindGenericMethod("Find", 
+                new Type[] { ifType.Type }, 
+                new Type[] { typeof(int) })
+                .Invoke(this, new object[] { ID });
         }
 
         /// <summary>
@@ -507,7 +505,7 @@ namespace Kistl.API.Client
         {
             // TODO: actually create a ThreadStatic read-only variant of this to allow for a common cache
             // return this;
-            return Kistl.API.FrozenContext.Single;
+            return FrozenContext.Single;
         }
 
         #region IDebuggingKistlContext Members

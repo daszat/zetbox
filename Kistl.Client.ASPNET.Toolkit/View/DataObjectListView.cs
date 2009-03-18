@@ -87,7 +87,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             desc.AddElementProperty("Items", HdItemsControl.ClientID);
             desc.AddElementProperty("LnkAdd", LnkAddControl.ClientID);
             desc.AddElementProperty("LnkNew", LnkNewControl.ClientID);
-            desc.AddProperty("Type", new SerializableType(typeof(IDataObject)));
+            desc.AddProperty("Type", new SerializableType(new InterfaceType(typeof(IDataObject))));
             yield return desc;
         }
 

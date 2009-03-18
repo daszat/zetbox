@@ -9,6 +9,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Utils;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables
 {
@@ -127,7 +128,7 @@ namespace Kistl.Client.Presentables
 
                 if (children.Count == 1)
                 {
-                    Type targetType = baseclass.GetDataType();
+                    var targetType = baseclass.GetDescribedInterfaceType();
                     var item = this.DataContext.Create(targetType);
                     UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
                 }
@@ -153,7 +154,7 @@ namespace Kistl.Client.Presentables
                                     {
                                         if (chosen != null)
                                         {
-                                            Type targetType = ((ObjectClass)chosen.Object).GetDataType();
+                                            var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
                                             var item = this.DataContext.Create(targetType);
                                             UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
                                         }

@@ -133,6 +133,10 @@
       <Name>Kistl.Objects</Name>
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>TempAppHelpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="DefaultConfig.xml" />

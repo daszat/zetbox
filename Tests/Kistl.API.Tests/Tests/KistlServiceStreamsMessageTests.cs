@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
+
+using Kistl.API.Mocks;
+
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
-using Kistl.API;
-using System.Reflection;
-using System.IO;
-using System.Linq.Expressions;
-using System.Collections.ObjectModel;
-
 
 namespace Kistl.API.Tests
 {
@@ -23,7 +24,7 @@ namespace Kistl.API.Tests
             KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
             msg.ID = 10;
             msg.Property = "TestProperty";
-            msg.Type = new SerializableType(typeof(TestDataObject));
+            msg.Type = new SerializableType(new InterfaceType(typeof(TestDataObject)));
             msg.Filter = SerializableExpression.FromExpression(Expression.Constant(true));
             msg.OrderBy = new List<SerializableExpression>();
             msg.OrderBy.Add(SerializableExpression.FromExpression(Expression.Constant("Test")));

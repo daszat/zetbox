@@ -112,7 +112,7 @@ namespace Kistl.API.Server.Tests
 
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
-            Assert.That(t, Is.EqualTo(new SerializableType(typeof(IStruct))));
+            Assert.That(t, Is.EqualTo(new SerializableType(new InterfaceType(typeof(IStruct)))));
         }
 	
 

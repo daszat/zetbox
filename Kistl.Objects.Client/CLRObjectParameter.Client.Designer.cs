@@ -145,9 +145,9 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(CLRObjectParameter);
+			return new InterfaceType(typeof(CLRObjectParameter));
 		}
 
         // tail template

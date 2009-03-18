@@ -311,9 +311,9 @@ namespace Kistl.App.Projekte
 
 
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Projekt);
+			return new InterfaceType(typeof(Projekt));
 		}
 
         // tail template

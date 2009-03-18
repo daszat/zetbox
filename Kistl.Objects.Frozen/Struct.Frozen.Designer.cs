@@ -64,9 +64,9 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Struct);
+			return new InterfaceType(typeof(Struct));
 		}
 
         // tail template

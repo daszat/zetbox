@@ -145,9 +145,9 @@ namespace Kistl.App.Zeiterfassung
         
         private BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit> _TaetigkeitenWrapper;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Zeitkonto);
+			return new InterfaceType(typeof(Zeitkonto));
 		}
 
         // tail template

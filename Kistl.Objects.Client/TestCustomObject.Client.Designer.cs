@@ -90,9 +90,9 @@ namespace Kistl.App.Test
             set;
         }
   
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(TestCustomObject);
+			return new InterfaceType(typeof(TestCustomObject));
 		}
 
         // tail template

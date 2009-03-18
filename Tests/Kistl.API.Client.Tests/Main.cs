@@ -10,7 +10,7 @@ namespace Kistl.API.Client.Tests
         public static void Main(string[] args)
         {
             new SetUp().Init();
-            BaseClientDataObjectTests();
+            //BaseClientDataObjectTests();
             KistlContextTests();
         }
 
@@ -36,28 +36,14 @@ namespace Kistl.API.Client.Tests
             KistlContextTests test = new API.Client.Tests.KistlContextTests();
 
             test.SetUp();
-            test.Find_ObjectType();
+            test.SubmitChanges();
 
-            test.SetUp();
-            test.Delete();
+            //test.SetUp();
+            //test.Delete();
 
-            test.SetUp();
-            test.GetList();
+            //test.SetUp();
+            //test.GetList();
 
-            test.SetUp();
-            test.GetObject();
-
-            test.SetUp();
-            test.Attach_IDataObject_WithList_Add();
-
-            test.SetUp();
-            test.Attach_IDataObject_WithList_Insert();
-
-            test.SetUp();
-            test.Attached_IDataObject_WithList_Add();
-
-            test.SetUp();
-            test.Attached_IDataObject_WithList_Insert();
         }
     }
 }

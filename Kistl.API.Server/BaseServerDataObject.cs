@@ -139,7 +139,7 @@ namespace Kistl.API.Server
 
         public event PropertyChangingEventHandler PropertyChanging;
 
-        public abstract Type GetInterfaceType();
+        public abstract InterfaceType GetInterfaceType();
     }
 
     /// <summary>
@@ -291,6 +291,6 @@ namespace Kistl.API.Server
 
         #endregion
 
-        public abstract Type GetInterfaceType();
+        public abstract InterfaceType GetInterfaceType();
     }
 }

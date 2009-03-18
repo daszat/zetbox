@@ -35,15 +35,15 @@ namespace Kistl.API.Client.Tests
         }
 
         [Test]
-        public void GetQuery_ObjectType()
+        public void GetQuery_ObjectType_should_create_query_with_proper_ElementType()
         {
-            IQueryable<IDataObject> query = ctx.GetQuery(typeof(TestObjClass));
+            IQueryable<IDataObject> query = ctx.GetQuery(new InterfaceType(typeof(TestObjClass)));
             Assert.That(query, Is.Not.Null);
             Assert.That(query.ElementType, Is.EqualTo(typeof(IDataObject)));
         }
 
         [Test]
-        public void GetQuery_T()
+        public void GetQuery_T_should_create_query_with_proper_ElementType()
         {
             IQueryable<TestObjClass> query = ctx.GetQuery<TestObjClass>();
             Assert.That(query, Is.Not.Null);
@@ -51,39 +51,35 @@ namespace Kistl.API.Client.Tests
         }
 
         [Test]
-        public void Find_T()
+        public void Find_T_should_return_correct_item()
         {
-            TestObjClass obj = ctx.Find<TestObjClass>(1);
+            int targetId = 1;
+            TestObjClass obj = ctx.Find<TestObjClass>(targetId);
             Assert.That(obj, Is.Not.Null);
-        }
-
-        [Test]
-        public void Find_ObjectType()
-        {
-            TestObjClass obj = (TestObjClass)ctx.Find(typeof(TestObjClass), 1);
-            Assert.That(obj, Is.Not.Null);
-        }
-
-        [Test]
-        public void GetObject()
-        {
-            TestObjClass obj = ctx.Find<TestObjClass>(1);
-            Assert.That(obj, Is.Not.Null);
-            Assert.That(obj.ID, Is.EqualTo(1));
+            Assert.That(obj, Is.InstanceOfType(typeof(TestObjClass)));
+            Assert.That(obj.ID, Is.EqualTo(targetId));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(obj.Context, Is.EqualTo(ctx));
         }
 
         [Test]
-        public void GetObject_Twice()
+        public void Find_ObjectType_should_return_correct_item()
         {
-            TestObjClass obj1 = ctx.Find<TestObjClass>(1);
-            Assert.That(obj1, Is.Not.Null);
-            Assert.That(obj1.ID, Is.EqualTo(1));
+            int targetId = 1;
+            TestObjClass obj = (TestObjClass)ctx.Find(new InterfaceType(typeof(TestObjClass)), targetId);
+            Assert.That(obj, Is.Not.Null);
+            Assert.That(obj, Is.InstanceOfType(typeof(TestObjClass)));
+            Assert.That(obj.ID, Is.EqualTo(targetId));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(obj.Context, Is.EqualTo(ctx));
+        }
 
-            TestObjClass obj2 = ctx.Find<TestObjClass>(1);
-            Assert.That(obj2, Is.Not.Null);
-            Assert.That(obj2.ID, Is.EqualTo(1));
+        [Test]
+        public void Find_should_return_the_same_object_on_second_call()
+        {
+            int targetId = 1;
+            var obj1 = ctx.Find<TestObjClass>(targetId);
+            var obj2 = ctx.Find<TestObjClass>(targetId);
             Assert.That(object.ReferenceEquals(obj1, obj2), "Obj1 & Obj2 are different Objects");
         }
 
@@ -120,7 +116,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void GetListOf()
         {
-            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "Children");
+            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(TestObjClass)), 1, "Children");
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
             list.ForEach(obj => Assert.That(obj, Is.Not.Null));
@@ -131,12 +127,12 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void GetListOf_Twice()
         {
-            List<TestObjClass> list1 = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "Children");
+            List<TestObjClass> list1 = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(TestObjClass)), 1, "Children");
             Assert.That(list1, Is.Not.Null);
             Assert.That(list1.Count, Is.AtLeast(2));
             list1.ForEach(obj => Assert.That(obj, Is.Not.Null));
 
-            List<TestObjClass> list2 = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "Children");
+            List<TestObjClass> list2 = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(TestObjClass)), 1, "Children");
             Assert.That(list2, Is.Not.Null);
             Assert.That(list2.Count, Is.EqualTo(list1.Count));
             list2.ForEach(obj => Assert.That(obj, Is.Not.Null));
@@ -172,7 +168,7 @@ namespace Kistl.API.Client.Tests
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj.ID, Is.EqualTo(3));
 
-            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "Children");
+            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(TestObjClass)), 1, "Children");
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
 
@@ -190,7 +186,7 @@ namespace Kistl.API.Client.Tests
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
 
-            List<TestObjClass> listOf = ctx.GetListOf<TestObjClass>(typeof(TestObjClass), 1, "Children");
+            List<TestObjClass> listOf = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(TestObjClass)), 1, "Children");
             Assert.That(listOf, Is.Not.Null);
             Assert.That(listOf.Count, Is.AtLeast(2));
 
@@ -219,7 +215,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Create_Type()
         {
-            TestObjClass obj = ctx.Create(typeof(TestObjClass)) as TestObjClass;
+            TestObjClass obj = ctx.Create(new InterfaceType(typeof(TestObjClass))) as TestObjClass;
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj.ID, Is.LessThan(Helper.INVALIDID));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
@@ -229,7 +225,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Create_ObjectType()
         {
-            TestObjClass obj = ctx.Create(typeof(TestObjClass)) as TestObjClass;
+            TestObjClass obj = ctx.Create(new InterfaceType(typeof(TestObjClass))) as TestObjClass;
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj.ID, Is.LessThan(Helper.INVALIDID));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
@@ -310,76 +306,6 @@ namespace Kistl.API.Client.Tests
         {
             ctx.Attach((IDataObject)null);
         }
-
-        [Test]
-        public void Attach_IDataObject_WithList_Add()
-        {
-            TestObjClass obj = new TestObjClass__Implementation__();
-            obj.SetPrivatePropertyValue<int>("ID", 1);
-            obj.TestNames.Add("Arthur");
-            obj.TestNames.Add("David");
-            obj.TestNames.Add("Susi");
-            ctx.Attach(obj);
-
-            Assert.That(obj.Context, Is.EqualTo(ctx));
-
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[0].Context, Is.EqualTo(ctx));
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[1].Context, Is.EqualTo(ctx));
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[2].Context, Is.EqualTo(ctx));
-        }
-
-        [Test]
-        public void Attach_IDataObject_WithList_Insert()
-        {
-            TestObjClass obj = new TestObjClass__Implementation__();
-            obj.SetPrivatePropertyValue<int>("ID", 1);
-            obj.TestNames.Insert(0, "Arthur");
-            obj.TestNames.Insert(1, "David");
-            obj.TestNames.Insert(2, "Susi");
-            ctx.Attach(obj);
-
-            Assert.That(obj.Context, Is.EqualTo(ctx));
-
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[0].Context, Is.EqualTo(ctx));
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[1].Context, Is.EqualTo(ctx));
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[2].Context, Is.EqualTo(ctx));
-        }
-
-        [Test]
-        public void Attached_IDataObject_WithList_Add()
-        {
-            TestObjClass obj = new TestObjClass__Implementation__();
-            obj.SetPrivatePropertyValue<int>("ID", 1);
-            obj.TestNames.Add("Arthur");
-            obj.TestNames.Add("David");
-            ctx.Attach(obj);
-
-            obj.TestNames.Add("Susi");
-
-            Assert.That(obj.Context, Is.EqualTo(ctx));
-
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[0].Context, Is.EqualTo(ctx));
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[1].Context, Is.EqualTo(ctx));
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[2].Context, Is.EqualTo(ctx));
-        }
-
-        [Test]
-        public void Attached_IDataObject_WithList_Insert()
-        {
-            TestObjClass obj = new TestObjClass__Implementation__();
-            obj.SetPrivatePropertyValue<int>("ID", 1);
-            obj.TestNames.Insert(0, "Arthur");
-            obj.TestNames.Insert(1, "David");
-            ctx.Attach(obj);
-            obj.TestNames.Insert(2, "Susi");
-
-            Assert.That(obj.Context, Is.EqualTo(ctx));
-
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[0].Context, Is.EqualTo(ctx));
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[1].Context, Is.EqualTo(ctx));
-            Assert.That(obj.UnitTest_TestNames.UnderlyingCollection[2].Context, Is.EqualTo(ctx));
-        }
-
 
         [Test]
         public void Detach()
@@ -463,14 +389,19 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void SubmitChanges()
         {
-            TestObjClass obj = ctx.Find<TestObjClass>(1);
-            obj.StringProp = "Test";
+            int testId = 1;
+            string testString = "Test";
+
+            TestObjClass obj = ctx.Find<TestObjClass>(testId);
+            obj.StringProp = testString;
+            Assert.That(obj.ID, Is.EqualTo(testId));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
 
             int result = ctx.SubmitChanges();
             Assert.That(result, Is.EqualTo(1));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(obj.Context, Is.EqualTo(ctx));
+            Assert.That(obj.StringProp, Is.EqualTo(testString));
         }
 
         [Test]

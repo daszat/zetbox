@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Client;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Client
 {
@@ -38,7 +40,7 @@ namespace Kistl.Client
         }
 
         // TODO: Das muss in "statische" Objekte, oder auch Immutable Objects genannt, umgewandelt werden.
-        private static Dictionary<Type, Kistl.App.Base.ObjectClass> _ObjectClasses = null;
+        private static Dictionary<InterfaceType, ObjectClass> _ObjectClasses = null;
         //private static Dictionary<string, Kistl.App.Base.Module> _Modules = null;
 
         // TODO: Arthur: Der Context da ist mir ein Dorn im Auge.
@@ -69,16 +71,16 @@ namespace Kistl.Client
                         // Prefetch Modules
                         //_ObjectClasses = _fetchContext.GetQuery<Kistl.App.Base.ObjectClass>()
                         //    .ToDictionary(o => o.GetDataCLRType());
-                        _ObjectClasses = new Dictionary<Type, Kistl.App.Base.ObjectClass>();
+                        _ObjectClasses = new Dictionary<InterfaceType, ObjectClass>();
                         foreach (var o in FrozenContext.Single.GetQuery<ObjectClass>())
                         {
                             try
                             {
-                                _ObjectClasses[o.GetDataType()] = o;
+                                _ObjectClasses[o.GetDescribedInterfaceType()] = o;
                             }
                             catch (Exception ex)
                             {
-                                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                                Debug.WriteLine(ex.ToString());
                             }
                         }
                     }
@@ -86,7 +88,7 @@ namespace Kistl.Client
             }
         }
 
-        public static Dictionary<Type, Kistl.App.Base.ObjectClass> ObjectClasses
+        public static Dictionary<InterfaceType, ObjectClass> ObjectClasses
         {
             get
             {

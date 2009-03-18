@@ -147,9 +147,9 @@ namespace Kistl.API.Server.Tests
 
         public delegate void TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);
 
-        public override Type GetInterfaceType()
+        public override InterfaceType GetInterfaceType()
         {
-            return typeof(Kistl.API.Server.Tests.TestObjClass);
+            return new InterfaceType(typeof(TestObjClass));
         }
 
         public override bool IsAttached { get { return _IsAttached; } }

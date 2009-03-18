@@ -315,9 +315,9 @@ namespace Kistl.App.Base
         }
         private int? _fk_Module;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(MethodInvocation);
+			return new InterfaceType(typeof(MethodInvocation));
 		}
 
         // tail template

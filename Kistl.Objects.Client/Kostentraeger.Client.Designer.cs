@@ -99,9 +99,9 @@ namespace Kistl.App.Zeiterfassung
         }
         private int? _fk_Projekt;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Kostentraeger);
+			return new InterfaceType(typeof(Kostentraeger));
 		}
 
         // tail template

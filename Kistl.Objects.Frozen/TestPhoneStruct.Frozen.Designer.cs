@@ -68,9 +68,9 @@ namespace Kistl.App.Test
         }
         private string _Number;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(TestPhoneStruct);
+			return new InterfaceType(typeof(TestPhoneStruct));
 		}
         internal TestPhoneStruct__Implementation__(int id)
             : base(id)

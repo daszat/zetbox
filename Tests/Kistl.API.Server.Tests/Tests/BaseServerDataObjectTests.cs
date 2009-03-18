@@ -187,7 +187,7 @@ namespace Kistl.API.Server.Tests
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
-            SerializableType wrongType = new SerializableType(typeof(string));
+            SerializableType wrongType = new SerializableType(new InterfaceType(typeof(string)));
             BinarySerializer.ToStream(wrongType, sw);
 
             using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
@@ -235,7 +235,7 @@ namespace Kistl.API.Server.Tests
 
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
-            Assert.That(t, Is.EqualTo(new SerializableType(typeof(TestObjClass))));
+            Assert.That(t, Is.EqualTo(new SerializableType(new InterfaceType(typeof(TestObjClass)))));
         }
 	
     }

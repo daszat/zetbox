@@ -98,11 +98,11 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                         if (!string.IsNullOrEmpty(Request["Type"])
                             && string.IsNullOrEmpty(Request["ID"]))
                         {
-                            Type type = Type.GetType(Request["Type"] + ",Kistl.Objects.Client");
+                            ImplementationType implType = new ImplementationType(Type.GetType(Request["Type"] + ",Kistl.Objects.Client"));
                             IDataObject obj = KistlContextManagerModule.KistlContext
-                                                .Find(type, int.Parse(Request["ID"]));
+                                                .Find(implType.ToInterfaceType(), int.Parse(Request["ID"]));
                             _Objects.Add((DataObjectModel)GuiApplicationContext.Current.Factory.CreateModel(
-                                type, KistlContextManagerModule.KistlContext, new object[] { obj }));
+                                implType.Type, KistlContextManagerModule.KistlContext, new object[] { obj }));
                         }
                     }
                     else

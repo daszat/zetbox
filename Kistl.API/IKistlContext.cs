@@ -51,11 +51,11 @@ namespace Kistl.API
         /// <returns>IQueryable</returns>
         IQueryable<T> GetQuery<T>() where T : IDataObject;
         /// <summary>
-        /// Returns a Query by Type
+        /// Returns a Query by InterfaceType
         /// </summary>
-        /// <param name="type">System.Type</param>
+        /// <param name="ifType">the interface to look for</param>
         /// <returns>IQueryable</returns>
-        IQueryable<IDataObject> GetQuery(Type type);
+        IQueryable<IDataObject> GetQuery(InterfaceType ifType);
 
         /// <summary>
         /// Returns the List of a BackReferenceProperty by the given PropertyName.
@@ -69,11 +69,11 @@ namespace Kistl.API
         /// Returns the List of a BackReferenceProperty by the given Type, ID and PropertyName.
         /// </summary>
         /// <typeparam name="T">List Type of the BackReferenceProperty</typeparam>
-        /// <param name="type">Type of the Object which holds the BackReferenceProperty</param>
+        /// <param name="ifType">Type of the Object which holds the BackReferenceProperty</param>
         /// <param name="ID">ID of the Object which holds the BackReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        List<T> GetListOf<T>(Type type, int ID, string propertyName) where T : IDataObject;
+        List<T> GetListOf<T>(InterfaceType ifType, int ID, string propertyName) where T : IDataObject;
 
         /// <summary>
         /// Fetches all collection entries of a given Relation (specified by <paramref name="ID"/>)
@@ -116,9 +116,9 @@ namespace Kistl.API
         /// <summary>
         /// Creates a new IDataObject by Type
         /// </summary>
-        /// <param name="type">Type of the new IDataObject</param>
+        /// <param name="ifType">Type of the new IDataObject</param>
         /// <returns>A new IDataObject</returns>
-        IDataObject Create(Type type);
+        IDataObject Create(InterfaceType ifType);
         /// <summary>
         /// Creates a new IDataObject.
         /// </summary>
@@ -129,9 +129,9 @@ namespace Kistl.API
         /// <summary>
         /// Creates a new ICollectionEntry by Type
         /// </summary>
-        /// <param name="type">Type of the new ICollectionEntry</param>
+        /// <param name="ifType">Type of the new ICollectionEntry</param>
         /// <returns>A new ICollectionEntry</returns>
-        ICollectionEntry CreateCollectionEntry(Type type);
+        ICollectionEntry CreateCollectionEntry(InterfaceType ifType);
         /// <summary>
         /// Creates a new ICollectionEntry.
         /// </summary>
@@ -142,9 +142,9 @@ namespace Kistl.API
         /// <summary>
         /// Creates a new Struct by Type
         /// </summary>
-        /// <param name="type">Type of the new Struct</param>
+        /// <param name="ifType">Type of the new Struct</param>
         /// <returns>A new Struct</returns>
-        IStruct CreateStruct(Type type);
+        IStruct CreateStruct(InterfaceType ifType);
         /// <summary>
         /// Creates a new Struct.
         /// </summary>
@@ -157,10 +157,10 @@ namespace Kistl.API
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
         /// </summary>
-        /// <param name="type">Object Type of the Object to find.</param>
+        /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        IDataObject Find(Type type, int ID);
+        IDataObject Find(InterfaceType ifType, int ID);
         /// <summary>
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.

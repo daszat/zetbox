@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mocks\BaseClientDataObjectMock.cs" />
     <Compile Include="Mocks\CustomActionsManagerAPITest.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Mocks\ClientApplicationContextMock.cs" />
@@ -60,9 +61,9 @@
     <Compile Include="TestObjClass_TestNameCollectionEntry.cs" />
     <Compile Include="TestProxy.cs" />
     <Compile Include="Tests\BackReferenceCollectionTests.cs" />
+    <Compile Include="Tests\BaseClientCollectionEntryTests.cs" />
     <Compile Include="Tests\BaseClientDataObjectTests.cs" />
     <Compile Include="Tests\KistlContextTests.cs" />
-    <Compile Include="Tests\ListPropertyCollectionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DefaultConfig.xml">
@@ -85,6 +86,10 @@
     <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.Tests\Kistl.API.Tests.csproj">
+      <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
+      <Name>Kistl.API.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

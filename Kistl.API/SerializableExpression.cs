@@ -121,7 +121,7 @@ namespace Kistl.API
         /// <param name="ctx">Serialization Context</param>
         internal SerializableExpression(Expression e, SerializationContext ctx)
         {
-            _Type = new SerializableType(e.Type);
+            _Type = new SerializableType(InterfaceType.Transform(e.Type));
             NodeType = e.NodeType;
         }
 
@@ -289,9 +289,9 @@ namespace Kistl.API
             if (e.Object != null) ObjectExpression = SerializableExpression.FromExpression(e.Object, ctx);
 
             MethodName = e.Method.Name;
-            _Type = new SerializableType(e.Method.DeclaringType);
-            ParameterTypes = e.Method.GetParameters().Select(p => new SerializableType(p.ParameterType)).ToList();
-            GenericArguments = e.Method.GetGenericArguments().Select(p => new SerializableType(p)).ToList();
+            _Type = new SerializableType(new InterfaceType(e.Method.DeclaringType));
+            ParameterTypes = e.Method.GetParameters().Select(p => new SerializableType(new InterfaceType(p.ParameterType))).ToList();
+            GenericArguments = e.Method.GetGenericArguments().Select(p => new SerializableType(new InterfaceType(p))).ToList();
 
             if (e.Arguments != null)
             {

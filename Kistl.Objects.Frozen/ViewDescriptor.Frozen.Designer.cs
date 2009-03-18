@@ -91,9 +91,9 @@ namespace Kistl.App.Base
         }
         private Kistl.App.Base.TypeRef _ViewRef;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(ViewDescriptor);
+			return new InterfaceType(typeof(ViewDescriptor));
 		}
 
         // tail template

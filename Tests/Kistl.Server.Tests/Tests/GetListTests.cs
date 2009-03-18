@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using Kistl.API;
+using Kistl.API.Server;
+using Kistl.App.Base;
+
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
-using Kistl.Server;
-using Kistl.API.Server;
-using Kistl.API;
 
 namespace Kistl.Server.Tests
 {
@@ -139,9 +141,9 @@ namespace Kistl.Server.Tests
         {
             using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery(typeof(Kistl.App.Base.ObjectClass))
-                    .OrderBy<IDataObject, string>(o => ((Kistl.App.Base.ObjectClass)o).ClassName)
-                    .ToList().Cast<Kistl.App.Base.ObjectClass>();
+                var list = ctx.GetQuery(new InterfaceType(typeof(ObjectClass)))
+                    .OrderBy<IDataObject, string>(o => ((ObjectClass)o).ClassName)
+                    .ToList().Cast<ObjectClass>();
                 Assert.That(list.Count(), Is.GreaterThan(0));
                 List<Kistl.App.Base.ObjectClass> result = list.ToList();
                 List<Kistl.App.Base.ObjectClass> sorted = list.ToList().OrderBy(o => o.ClassName).ToList();

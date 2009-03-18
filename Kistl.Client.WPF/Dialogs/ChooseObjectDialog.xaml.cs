@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -13,8 +14,8 @@ using System.Windows.Shapes;
 
 using Kistl.API;
 using Kistl.API.Client;
-using System.ComponentModel;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Client.WPF.Dialogs
 {
@@ -42,15 +43,15 @@ namespace Kistl.Client.WPF.Dialogs
             DependencyProperty.Register("Context", typeof(IKistlContext), typeof(ChooseObjectDialog), new PropertyMetadata());
 
 
-        public Type ObjectType
+        public InterfaceType ObjectType
         {
-            get { return (Type)GetValue(ObjectTypeProperty); }
+            get { return (InterfaceType)GetValue(ObjectTypeProperty); }
             set { SetValue(ObjectTypeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for ObjectType.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObjectTypeProperty =
-            DependencyProperty.Register("ObjectType", typeof(Type), typeof(ChooseObjectDialog), new PropertyMetadata());
+            DependencyProperty.Register("ObjectType", typeof(InterfaceType), typeof(ChooseObjectDialog), new PropertyMetadata());
 
 
         public string FilterString
@@ -107,7 +108,7 @@ namespace Kistl.Client.WPF.Dialogs
                     oc = ((ObjectClass)coc.Result) ?? oc;
             }
 
-            Result = Context.Create(oc.GetDataType());
+            Result = Context.Create(oc.GetDescribedInterfaceType());
             GuiApplicationContext.Current.Renderer.ShowObject(Result);
             DialogResult = true;
             this.Close();

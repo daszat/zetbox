@@ -273,6 +273,10 @@
       <Name>Kistl.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>TempAppHelpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WPFLibrary\WPFSamplesLib.csproj">
       <Project>{E4BBC94F-B837-4668-A127-E36E6DE012F5}</Project>
       <Name>WPFSamplesLib</Name>

@@ -109,7 +109,7 @@ namespace Kistl.API
         /// Returns the most specific implemented IDataObject interface
         /// </summary>
         /// <returns></returns>
-        Type GetInterfaceType();
+        InterfaceType GetInterfaceType();
     }
 
     /// <summary>

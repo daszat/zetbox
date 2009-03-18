@@ -28,9 +28,9 @@ namespace Kistl.API.Server.Tests
             TestString = _tmps;
         }
 
-        public override Type GetInterfaceType()
+        public override InterfaceType GetInterfaceType()
         {
-            return typeof(IStruct);
+            return new InterfaceType(typeof(IStruct));
         }
     }
 }

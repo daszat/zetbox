@@ -68,9 +68,9 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(IsValidNamespaceConstraint);
+			return new InterfaceType(typeof(IsValidNamespaceConstraint));
 		}
 
         // tail template

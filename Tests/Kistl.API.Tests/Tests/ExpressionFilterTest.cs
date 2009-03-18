@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
+
+using Kistl.API.Mocks;
+
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using NUnit.Framework.SyntaxHelpers;
-using Kistl.API;
-using System.Reflection;
-using System.Linq.Expressions;
 
 namespace Kistl.API.Tests
 {

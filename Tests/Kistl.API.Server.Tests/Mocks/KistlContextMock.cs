@@ -47,11 +47,11 @@ namespace Kistl.API.Server.Mocks
             return TestObjClasses.Values.Cast<T>().AsQueryable();
         }
 
-        public override IQueryable<IDataObject> GetQuery(Type type)
+        public override IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
-            if (type != typeof(TestObjClass))
+            if (ifType != typeof(TestObjClass))
             {
-                throw new ArgumentOutOfRangeException("type");
+                throw new ArgumentOutOfRangeException("ifType");
             }
 
             return TestObjClasses.Values.Cast<IDataObject>().AsQueryable();
@@ -72,7 +72,7 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public override IDataObject Find(Type type, int ID)
+        public override IDataObject Find(InterfaceType ifType, int ID)
         {
             throw new NotImplementedException();
         }

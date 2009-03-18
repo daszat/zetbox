@@ -28,7 +28,7 @@ namespace Kistl.DalProvider.EF.Tests
             {
                 db.Open();
                 // TODO: don't hardcode db script here
-                var databaseScript = File.ReadAllText(@"P:\Kistl\Kistl.Server\Database\Database.62.sql");
+                var databaseScript = File.ReadAllText(@"P:\Kistl\Kistl.Server\Database\Database.63.sql");
                 using (var tx = db.BeginTransaction())
                 {
                     foreach (var cmdString in databaseScript.Split(new[] { "GO" }, StringSplitOptions.RemoveEmptyEntries))

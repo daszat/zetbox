@@ -6,18 +6,20 @@ using System.Data.Metadata.Edm;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 using Kistl.API;
 using Kistl.API.Server;
-using Kistl.App.Extensions;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
-using System.Reflection;
 
 namespace Kistl.DALProvider.EF
 {
-    public class ServerObjectHandler<T> : BaseServerObjectHandler<T> where T : IDataObject
+    public class ServerObjectHandler<T>
+        : BaseServerObjectHandler<T>
+        where T : IDataObject
     {
         /// <summary>
         /// Gibt eine typisierte Objektinstanz zurück.
@@ -41,7 +43,8 @@ namespace Kistl.DALProvider.EF
         }
     }
 
-    public class ServerObjectSetHandler : BaseServerObjectSetHandler
+    public class ServerObjectSetHandler
+        : BaseServerObjectSetHandler
     {
         /// <summary>
         /// Implementiert den SetObject Befehl.
@@ -49,9 +52,9 @@ namespace Kistl.DALProvider.EF
         /// <param name="ctx"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public override IEnumerable<IDataObject> SetObjects(IKistlContext ctx, IEnumerable<IDataObject> objects)
+        public override IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects)
         {
-            foreach (IDataObject obj in objects)
+            foreach (var obj in objects)
             {
                 // Fist of all, Attach Object
                 ctx.Attach(obj);
@@ -61,7 +64,7 @@ namespace Kistl.DALProvider.EF
                     MarkEveryPropertyAsModified(ctx, obj);
                 }
             }
-            foreach (IDataObject obj in objects)
+            foreach (var obj in objects.OfType<IDataObject>())
             {
                 if (obj.ObjectState != DataObjectState.Deleted)
                 {
@@ -144,7 +147,7 @@ namespace Kistl.DALProvider.EF
                 }
                 else
                 {
-                    typename = ((IPersistenceObject)obj).GetInterfaceType().Name;
+                    typename = ((IPersistenceObject)obj).GetInterfaceType().Type.Name;
                 }
 
                 EntityType entityType = workspace.GetItem<EntityType>("Model." + typename, DataSpace.CSpace);
@@ -157,12 +160,12 @@ namespace Kistl.DALProvider.EF
 
             if (obj is IDataObject)
             {
-                using (IKistlContext frozenCtx = Kistl.API.Server.KistlContext.GetContext())
+                using (IKistlContext frozenCtx = KistlContext.GetContext())
                 {
                     Kistl.App.Base.ObjectClass objClass = (obj as IDataObject).GetObjectClass(frozenCtx);
                     while (objClass != null)
                     {
-                        foreach (Kistl.App.Base.ValueTypeProperty p in objClass.Properties.OfType<Kistl.App.Base.ValueTypeProperty>().Where(p => p.IsList))
+                        foreach (ValueTypeProperty p in objClass.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList))
                         {
                             foreach (ICollectionEntry ce in obj.GetPropertyValue<IEnumerable>(p.PropertyName + Kistl.API.Helper.ImplementationSuffix))
                             {

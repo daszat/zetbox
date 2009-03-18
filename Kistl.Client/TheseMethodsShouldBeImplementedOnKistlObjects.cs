@@ -29,7 +29,7 @@ namespace Kistl.Client
         private static ILookup<string, ObjectClass> _frozenClasses;
         public static ObjectClass GetObjectClass(this IDataObject obj, Kistl.API.IKistlContext ctx)
         {
-            Type type = obj.GetInterfaceType();
+            Type type = obj.GetInterfaceType().Type;
             IQueryable<ObjectClass> q;
             if (ctx == FrozenContext.Single)
             {

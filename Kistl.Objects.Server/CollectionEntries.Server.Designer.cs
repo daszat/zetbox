@@ -211,9 +211,9 @@ namespace Kistl.App.Base
 
 #endregion
 
-	public override Type GetInterfaceType()
+	public override InterfaceType GetInterfaceType()
 	{
-		return typeof(INewCollectionEntry<ObjectClass, Interface>);
+		return new InterfaceType(typeof(INewCollectionEntry<ObjectClass, Interface>));
 	}
 
 
@@ -481,9 +481,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
-	public override Type GetInterfaceType()
+	public override InterfaceType GetInterfaceType()
 	{
-		return typeof(INewListEntry<Projekt, Mitarbeiter>);
+		return new InterfaceType(typeof(INewListEntry<Projekt, Mitarbeiter>));
 	}
 
 
@@ -691,9 +691,9 @@ namespace Kistl.App.GUI
 
 #endregion
 
-	public override Type GetInterfaceType()
+	public override InterfaceType GetInterfaceType()
 	{
-		return typeof(INewCollectionEntry<Template, Visual>);
+		return new InterfaceType(typeof(INewCollectionEntry<Template, Visual>));
 	}
 
 
@@ -961,9 +961,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
-	public override Type GetInterfaceType()
+	public override InterfaceType GetInterfaceType()
 	{
-		return typeof(INewListEntry<TypeRef, TypeRef>);
+		return new InterfaceType(typeof(INewListEntry<TypeRef, TypeRef>));
 	}
 
 
@@ -1171,9 +1171,9 @@ namespace Kistl.App.GUI
 
 #endregion
 
-	public override Type GetInterfaceType()
+	public override InterfaceType GetInterfaceType()
 	{
-		return typeof(INewCollectionEntry<Visual, Visual>);
+		return new InterfaceType(typeof(INewCollectionEntry<Visual, Visual>));
 	}
 
 
@@ -1381,9 +1381,9 @@ namespace Kistl.App.GUI
 
 #endregion
 
-	public override Type GetInterfaceType()
+	public override InterfaceType GetInterfaceType()
 	{
-		return typeof(INewCollectionEntry<Visual, Visual>);
+		return new InterfaceType(typeof(INewCollectionEntry<Visual, Visual>));
 	}
 
 
@@ -1592,9 +1592,9 @@ namespace Kistl.App.Zeiterfassung
 
 #endregion
 
-	public override Type GetInterfaceType()
+	public override InterfaceType GetInterfaceType()
 	{
-		return typeof(INewCollectionEntry<Zeitkonto, Mitarbeiter>);
+		return new InterfaceType(typeof(INewCollectionEntry<Zeitkonto, Mitarbeiter>));
 	}
 
 
@@ -1743,9 +1743,9 @@ namespace Kistl.App.Projekte
 
 #endregion
 
-	public override Type GetInterfaceType()
+	public override InterfaceType GetInterfaceType()
 	{
-		return typeof(INewCollectionEntry<Kunde, System.String>);
+		return new InterfaceType(typeof(INewCollectionEntry<Kunde, System.String>));
 	}
 
 

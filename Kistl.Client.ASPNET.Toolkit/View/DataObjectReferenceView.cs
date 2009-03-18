@@ -50,7 +50,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                 ContainerControl.ClientID);
             desc.AddElementProperty("List", cbListControl.ClientID);
             desc.AddElementProperty("LnkOpen", btnOpenControl.ClientID);
-            desc.AddProperty("Type", new SerializableType(typeof(IDataObject)));
+            desc.AddProperty("Type", new SerializableType(new InterfaceType(typeof(IDataObject))));
             yield return desc;
         }
 
@@ -75,7 +75,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                 }
                 else
                 {
-                    return KistlContextManagerModule.KistlContext.Find(typeof(IDataObject),
+                    return KistlContextManagerModule.KistlContext.Find(new InterfaceType(typeof(IDataObject)),
                         moniker.FromJSON(KistlContextManagerModule.KistlContext).ID);
                 }
             }            
@@ -100,7 +100,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             cbListControl.SelectedValue = Model.Value != null ? Model.Value.ToJSON() : "";
 
             btnNewControl.Attributes.Add("onclick", string.Format("javascript: Kistl.JavascriptRenderer.showObject(Kistl.JavascriptRenderer.newObject({0}));",
-                typeof(IDataObject).ToJSON()));
+                new InterfaceType(typeof(IDataObject)).ToJSON()));
 
             ScriptManager scriptManager = ScriptManager.GetCurrent(Page);
             if (scriptManager == null)

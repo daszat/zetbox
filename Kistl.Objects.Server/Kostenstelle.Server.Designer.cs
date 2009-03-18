@@ -26,9 +26,9 @@ namespace Kistl.App.Zeiterfassung
     {
 
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Kostenstelle);
+			return new InterfaceType(typeof(Kostenstelle));
 		}
 
         // tail template

@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.API;
-using Kistl.API.Client;
 using System.Xml.Serialization;
 
 namespace Kistl.API.Client.Tests
@@ -71,16 +69,16 @@ namespace Kistl.API.Client.Tests
             BinarySerializer.FromStream(out this._fk_Parent, sr);
         }
 
-        public override void ApplyChanges(Kistl.API.ICollectionEntry obj)
+        public override void ApplyChangesFrom(IPersistenceObject obj)
         {
-            base.ApplyChanges(obj);
-            ((TestObjClass_TestNameCollectionEntry)obj)._Value = this._Value;
-            ((TestObjClass_TestNameCollectionEntry)obj)._fk_Parent = this._fk_Parent;
+            base.ApplyChangesFrom(obj);
+            this._Value = ((TestObjClass_TestNameCollectionEntry)obj)._Value;
+            this._fk_Parent = ((TestObjClass_TestNameCollectionEntry)obj)._fk_Parent;
         }
 
-        public override Type GetInterfaceType()
+        public override InterfaceType GetInterfaceType()
         {
-            return typeof(ICollectionEntry<string, TestObjClass>);
+            return new InterfaceType(typeof(ICollectionEntry<string, TestObjClass>));
         }
     }
 }

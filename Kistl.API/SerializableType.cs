@@ -15,34 +15,34 @@ namespace Kistl.API
     public class SerializableType
     {
         /// <summary>
-        /// This class is used to place type information on the wire. Usually this is used to wrap the interface type information of the following IPersistenceObject.
+        /// This class is used to place type information on the wire. Since the wire protocol is Provider independent, 
+        /// only interface types are stored. Usually this is used to declare the type of the following IPersistenceObject.
         /// </summary>
         /// <param name="type">System.Type to serialize</param>
-        public SerializableType(Type type)
+        public SerializableType(InterfaceType ifType)
         {
-            type = type.ToInterfaceType();
-            GenericTypeParameter = new List<SerializableType>();
+            var type = ifType.Type;
 
-            if (type.IsGenericParameter)
-            {
-                throw new NotSupportedException("Generic Parameter cannot be serialized");
-            }
             if (type.IsGenericType)
             {
                 Type genericType = type.GetGenericTypeDefinition();
                 TypeName = genericType.FullName;
                 AssemblyQualifiedName = genericType.AssemblyQualifiedName;
 
-                type.GetGenericArguments().ForEach<Type>(t => GenericTypeParameter.Add(new SerializableType(t)));
+                GenericTypeParameter = type.GetGenericArguments()
+                    .Select(t => new SerializableType(new InterfaceType(t)))
+                    .ToList();
             }
             else
             {
                 TypeName = type.FullName;
                 AssemblyQualifiedName = type.AssemblyQualifiedName;
+                GenericTypeParameter = new List<SerializableType>();
             }
 
-            // This is null if the Typ is e.g. a Generic Parameter - not supported
-            if (string.IsNullOrEmpty(AssemblyQualifiedName)) throw new NotSupportedException("AssemblyQualifiedName must not be null or empty - maybe this Type is a Generic Parameter or something similar.");
+            // This is null if the Type is e.g. a Generic Parameter - not supported
+            if (string.IsNullOrEmpty(AssemblyQualifiedName))
+                throw new NotSupportedException("AssemblyQualifiedName must not be null or empty - maybe this Type is a Generic Parameter or something similarily strange.");
         }
 
         /// <summary>
@@ -62,6 +62,25 @@ namespace Kistl.API
         /// </summary>
         [DataMember]
         public List<SerializableType> GenericTypeParameter { get; set; }
+
+        public InterfaceType GetInterfaceType()
+        {
+            return new InterfaceType(GetSystemType());
+        }
+
+        public ImplementationType GetImplementationType()
+        {
+            return GetInterfaceType().ToImplementationType();
+        }
+
+        /// <summary>
+        /// Creates a new implementation instance of this Type
+        /// </summary>
+        /// <returns>a freshly constructed instance</returns>
+        public object CreateInstance()
+        {
+            return Activator.CreateInstance(GetImplementationType().Type);
+        }
 
         /// <summary>
         /// Returns the serialized System.Type
@@ -103,11 +122,8 @@ namespace Kistl.API
             return Activator.CreateInstance(GetSystemType().ToImplementationType());
         }
 
-        /// <summary>
-        /// Equals....
-        /// </summary>
-        /// <param name="obj">the other object</param>
-        /// <returns>Dont know ;-)</returns>
+        #region implement value equality over TypeName and AssemblyQualifiedName
+
         public override bool Equals(object obj)
         {
             SerializableType b = obj as SerializableType;
@@ -115,14 +131,12 @@ namespace Kistl.API
             return this.TypeName == b.TypeName && this.AssemblyQualifiedName == b.AssemblyQualifiedName;
         }
 
-        /// <summary>
-        /// HashCode
-        /// </summary>
-        /// <returns>Dont know ;-)</returns>
         public override int GetHashCode()
         {
             return TypeName.GetHashCode() ^ this.AssemblyQualifiedName.GetHashCode();
         }
+
+        #endregion
 
         public override string ToString()
         {

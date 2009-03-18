@@ -184,9 +184,9 @@ namespace Kistl.App.Base
         }
         private Kistl.App.Base.StorageType? _Storage;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Relation);
+			return new InterfaceType(typeof(Relation));
 		}
 
         // tail template

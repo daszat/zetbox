@@ -191,9 +191,9 @@ namespace Kistl.App.Projekte
         }
         private int? _fk_Projekt;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Task);
+			return new InterfaceType(typeof(Task));
 		}
 
         // tail template

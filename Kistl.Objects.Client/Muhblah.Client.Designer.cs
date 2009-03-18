@@ -22,9 +22,9 @@ namespace Kistl.App.Test
     {
 
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Muhblah);
+			return new InterfaceType(typeof(Muhblah));
 		}
 
         // tail template

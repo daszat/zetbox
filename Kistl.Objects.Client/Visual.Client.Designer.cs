@@ -232,9 +232,9 @@ namespace Kistl.App.GUI
         }
         private int? _fk_Property;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Visual);
+			return new InterfaceType(typeof(Visual));
 		}
 
         // tail template

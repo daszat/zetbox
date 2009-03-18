@@ -15,8 +15,8 @@ namespace Kistl.Server.Tests
             setup.Init();
             try
             {
-                RelationTests();
-                //FrozenContextTests();
+                //RelationTests();
+                FrozenContextTests();
                 //GetListTests();
 
                 ////GeneratorTests();
@@ -107,36 +107,36 @@ namespace Kistl.Server.Tests
             test.SetUp();
             test.IsReadonlyFlag();
 
-            test.SetUp();
-            test.IsReadonlyObject();
+            //test.SetUp();
+            //test.IsReadonlyObject();
 
-            test.SetUp();
-            try
-            {
-                test.IsReadonly_Create();
-            }
-            catch (ReadOnlyContextException)
-            {
-            }
+            //test.SetUp();
+            //try
+            //{
+            //    test.IsReadonly_Create();
+            //}
+            //catch (ReadOnlyContextException)
+            //{
+            //}
 
 
-            test.SetUp();
-            try
-            {
-                test.IsReadonlyObject_String();
-            }
-            catch (ReadOnlyObjectException)
-            {
-            }
+            //test.SetUp();
+            //try
+            //{
+            //    test.IsReadonlyObject_String();
+            //}
+            //catch (ReadOnlyObjectException)
+            //{
+            //}
 
-            test.SetUp();
-            try
-            {
-                test.IsReadonlyObject_Reference();
-            }
-            catch (ReadOnlyObjectException)
-            {
-            }
+            //test.SetUp();
+            //try
+            //{
+            //    test.IsReadonlyObject_Reference();
+            //}
+            //catch (ReadOnlyObjectException)
+            //{
+            //}
 
         }
 

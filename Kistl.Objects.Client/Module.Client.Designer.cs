@@ -151,9 +151,9 @@ namespace Kistl.App.Base
         }
         private string _Namespace;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Module);
+			return new InterfaceType(typeof(Module));
 		}
 
         // tail template

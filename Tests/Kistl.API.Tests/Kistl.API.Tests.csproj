@@ -59,12 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="Mocks\TestApplicationContext.cs" />
-    <Compile Include="Mocks\TestObjClassSerializationMock.cs" />
-    <Compile Include="TestCollectionEntry.cs" />
-    <Compile Include="TestEnum.cs" />
-    <Compile Include="TestKistlContext.cs" />
-    <Compile Include="TestQueryProvider.cs" />
     <Compile Include="Tests.Serializables\ConstantExpressions.cs" />
     <Compile Include="Tests.Serializables\AssertExpressions.cs" />
     <Compile Include="Tests.Serializables\MemberExpressions.cs" />
@@ -72,7 +66,6 @@
     <Compile Include="Tests.Skeletons\IDataObjectTests.cs" />
     <Compile Include="Tests.Skeletons\IPersistenceObjectTests.cs" />
     <Compile Include="Tests.Skeletons\IStreamableTests.cs" />
-    <Compile Include="TestStruct.cs" />
     <Compile Include="Tests\ApplicationContextTests.cs" />
     <Compile Include="Tests\AssemblyLoaderTests.cs" />
     <Compile Include="Tests\BinarySerializerTests.cs" />
@@ -86,7 +79,6 @@
     <Compile Include="Tests\KistlServiceStreamsMessageTests.cs" />
     <Compile Include="Tests\ExpressionFilterTest.cs" />
     <Compile Include="Tests\ExtensionHelpersTest.cs" />
-    <Compile Include="TestDataObject.cs" />
     <Compile Include="Tests\LinqExtensionsTests.cs" />
     <Compile Include="Tests\NotifyingObservableCollectionTests.cs" />
     <Compile Include="Tests.Serializables\SerializableExpressionTests.cs" />
@@ -101,12 +93,15 @@
     <Content Include="TestConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestResult.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.Mocks\Kistl.API.Mocks.csproj">
+      <Project>{95E39A40-35BC-4214-86E5-EE451C138EE1}</Project>
+      <Name>Kistl.API.Mocks</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

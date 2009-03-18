@@ -11,17 +11,13 @@
 <%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 <%
-
-	Type t = Type.GetType(cls.Module.Namespace + "." + cls.ClassName + ", Kistl.Objects", true);
 	
-	var testList = ctx.GetQuery(typeof(ObjectClass)).ToList();
+	InterfaceType t = cls.GetDescribedInterfaceType();
 	
-	var dataType = cls.Module.Namespace + "." + cls.ClassName;
-		
 	// list of all instances of exactly this class
 	var instanceList = ctx.GetQuery(t)
 	    .ToList()
-	    .Where(o => o.GetInterfaceType().FullName == dataType);
+	    .Where(o => o.GetInterfaceType() == t);
 %>
 
 

@@ -67,7 +67,7 @@ namespace Kistl.API.Tests.Skeletons
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
-            SerializableType wrongType = new SerializableType(typeof(string));
+            SerializableType wrongType = new SerializableType(new InterfaceType(typeof(string)));
             BinarySerializer.ToStream(wrongType, sw);
 
             Assert.That(ms.Length, Is.GreaterThan(0));

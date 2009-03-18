@@ -41,90 +41,90 @@ namespace Kistl.App
 		public IQueryable<T> GetQuery<T>()
 			where T : IDataObject
 		{
-			return GetQuery(typeof(T)).Cast<T>();
+			return GetQuery(new InterfaceType(typeof(T))).Cast<T>();
 		}
 
-		public IQueryable<IDataObject> GetQuery(Type t)
+		public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
 		{
-			if (t == typeof(Kistl.App.GUI.Icon))
+			if (ifType == typeof(Kistl.App.GUI.Icon))
 				return Kistl.App.GUI.Icon__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.ViewDescriptor))
+			if (ifType == typeof(Kistl.App.Base.ViewDescriptor))
 				return Kistl.App.Base.ViewDescriptor__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.ValueTypeProperty))
+			if (ifType == typeof(Kistl.App.Base.ValueTypeProperty))
 				return Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.TypeRef))
+			if (ifType == typeof(Kistl.App.Base.TypeRef))
 				return Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.StructProperty))
+			if (ifType == typeof(Kistl.App.Base.StructProperty))
 				return Kistl.App.Base.StructProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.Struct))
+			if (ifType == typeof(Kistl.App.Base.Struct))
 				return Kistl.App.Base.Struct__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.StringRangeConstraint))
+			if (ifType == typeof(Kistl.App.Base.StringRangeConstraint))
 				return Kistl.App.Base.StringRangeConstraint__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.StringProperty))
+			if (ifType == typeof(Kistl.App.Base.StringProperty))
 				return Kistl.App.Base.StringProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.StringParameter))
+			if (ifType == typeof(Kistl.App.Base.StringParameter))
 				return Kistl.App.Base.StringParameter__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.Property))
+			if (ifType == typeof(Kistl.App.Base.Property))
 				return Kistl.App.Base.Property__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.ObjectReferenceProperty))
+			if (ifType == typeof(Kistl.App.Base.ObjectReferenceProperty))
 				return Kistl.App.Base.ObjectReferenceProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.ObjectParameter))
+			if (ifType == typeof(Kistl.App.Base.ObjectParameter))
 				return Kistl.App.Base.ObjectParameter__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.ObjectClass))
+			if (ifType == typeof(Kistl.App.Base.ObjectClass))
 				return Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.NotNullableConstraint))
+			if (ifType == typeof(Kistl.App.Base.NotNullableConstraint))
 				return Kistl.App.Base.NotNullableConstraint__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.Module))
+			if (ifType == typeof(Kistl.App.Base.Module))
 				return Kistl.App.Base.Module__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.MethodInvocationConstraint))
+			if (ifType == typeof(Kistl.App.Base.MethodInvocationConstraint))
 				return Kistl.App.Base.MethodInvocationConstraint__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.MethodInvocation))
+			if (ifType == typeof(Kistl.App.Base.MethodInvocation))
 				return Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.Method))
+			if (ifType == typeof(Kistl.App.Base.Method))
 				return Kistl.App.Base.Method__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.IsValidNamespaceConstraint))
+			if (ifType == typeof(Kistl.App.Base.IsValidNamespaceConstraint))
 				return Kistl.App.Base.IsValidNamespaceConstraint__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.IsValidIdentifierConstraint))
+			if (ifType == typeof(Kistl.App.Base.IsValidIdentifierConstraint))
 				return Kistl.App.Base.IsValidIdentifierConstraint__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.IntProperty))
+			if (ifType == typeof(Kistl.App.Base.IntProperty))
 				return Kistl.App.Base.IntProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.IntParameter))
+			if (ifType == typeof(Kistl.App.Base.IntParameter))
 				return Kistl.App.Base.IntParameter__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.Interface))
+			if (ifType == typeof(Kistl.App.Base.Interface))
 				return Kistl.App.Base.Interface__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.IntegerRangeConstraint))
+			if (ifType == typeof(Kistl.App.Base.IntegerRangeConstraint))
 				return Kistl.App.Base.IntegerRangeConstraint__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.EnumerationProperty))
+			if (ifType == typeof(Kistl.App.Base.EnumerationProperty))
 				return Kistl.App.Base.EnumerationProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.EnumerationEntry))
+			if (ifType == typeof(Kistl.App.Base.EnumerationEntry))
 				return Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.Enumeration))
+			if (ifType == typeof(Kistl.App.Base.Enumeration))
 				return Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.DoubleProperty))
+			if (ifType == typeof(Kistl.App.Base.DoubleProperty))
 				return Kistl.App.Base.DoubleProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.DoubleParameter))
+			if (ifType == typeof(Kistl.App.Base.DoubleParameter))
 				return Kistl.App.Base.DoubleParameter__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.DateTimeProperty))
+			if (ifType == typeof(Kistl.App.Base.DateTimeProperty))
 				return Kistl.App.Base.DateTimeProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.DateTimeParameter))
+			if (ifType == typeof(Kistl.App.Base.DateTimeParameter))
 				return Kistl.App.Base.DateTimeParameter__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.DataType))
+			if (ifType == typeof(Kistl.App.Base.DataType))
 				return Kistl.App.Base.DataType__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.Constraint))
+			if (ifType == typeof(Kistl.App.Base.Constraint))
 				return Kistl.App.Base.Constraint__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.CLRObjectParameter))
+			if (ifType == typeof(Kistl.App.Base.CLRObjectParameter))
 				return Kistl.App.Base.CLRObjectParameter__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.BoolProperty))
+			if (ifType == typeof(Kistl.App.Base.BoolProperty))
 				return Kistl.App.Base.BoolProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.BoolParameter))
+			if (ifType == typeof(Kistl.App.Base.BoolParameter))
 				return Kistl.App.Base.BoolParameter__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.BaseProperty))
+			if (ifType == typeof(Kistl.App.Base.BaseProperty))
 				return Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.BaseParameter))
+			if (ifType == typeof(Kistl.App.Base.BaseParameter))
 				return Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.BackReferenceProperty))
+			if (ifType == typeof(Kistl.App.Base.BackReferenceProperty))
 				return Kistl.App.Base.BackReferenceProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (t == typeof(Kistl.App.Base.Assembly))
+			if (ifType == typeof(Kistl.App.Base.Assembly))
 				return Kistl.App.Base.Assembly__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			throw new NotImplementedException();
 		}
@@ -134,7 +134,7 @@ namespace Kistl.App
 			throw new NotImplementedException();
 		}
 		
-        List<T> IKistlContext.GetListOf<T>(Type type, int ID, string propertyName)
+        List<T> IKistlContext.GetListOf<T>(InterfaceType ifType, int ID, string propertyName)
 		{
 			throw new NotImplementedException();
 		}
@@ -146,7 +146,10 @@ namespace Kistl.App
 
         IPersistenceObject IKistlContext.ContainsObject(Type type, int ID)
         {
-			return Find(type, ID);
+			if (!InterfaceType.IsValid(type))
+				return null;
+				
+			return Find(new InterfaceType(type), ID);
         }
 
         public IEnumerable<IPersistenceObject> AttachedObjects
@@ -204,96 +207,96 @@ namespace Kistl.App
 
         bool IKistlContext.IsReadonly { get { return true; } }
 
-        IDataObject IKistlContext.Create(Type type) { throw new ReadOnlyContextException(); }
+        IDataObject IKistlContext.Create(InterfaceType ifType) { throw new ReadOnlyContextException(); }
         T IKistlContext.Create<T>() { throw new ReadOnlyContextException(); }
         
-        ICollectionEntry IKistlContext.CreateCollectionEntry(Type type) { throw new ReadOnlyContextException(); }
+        ICollectionEntry IKistlContext.CreateCollectionEntry(InterfaceType ifType) { throw new ReadOnlyContextException(); }
         T IKistlContext.CreateCollectionEntry<T>() { throw new ReadOnlyContextException(); }
 
-        IStruct IKistlContext.CreateStruct(Type type) { throw new ReadOnlyContextException(); }
+        IStruct IKistlContext.CreateStruct(InterfaceType ifType) { throw new ReadOnlyContextException(); }
         T IKistlContext.CreateStruct<T>() { throw new ReadOnlyContextException(); }
 
-        public IDataObject Find(Type t, int ID)
+        public IDataObject Find(InterfaceType ifType, int ID)
 		{
-			if (t == typeof(Kistl.App.GUI.Icon))
+			if (ifType == typeof(Kistl.App.GUI.Icon))
 				return Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.ViewDescriptor))
+			if (ifType == typeof(Kistl.App.Base.ViewDescriptor))
 				return Kistl.App.Base.ViewDescriptor__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.ValueTypeProperty))
+			if (ifType == typeof(Kistl.App.Base.ValueTypeProperty))
 				return Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.TypeRef))
+			if (ifType == typeof(Kistl.App.Base.TypeRef))
 				return Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.StructProperty))
+			if (ifType == typeof(Kistl.App.Base.StructProperty))
 				return Kistl.App.Base.StructProperty__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.Struct))
+			if (ifType == typeof(Kistl.App.Base.Struct))
 				return Kistl.App.Base.Struct__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.StringRangeConstraint))
+			if (ifType == typeof(Kistl.App.Base.StringRangeConstraint))
 				return Kistl.App.Base.StringRangeConstraint__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.StringProperty))
+			if (ifType == typeof(Kistl.App.Base.StringProperty))
 				return Kistl.App.Base.StringProperty__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.StringParameter))
+			if (ifType == typeof(Kistl.App.Base.StringParameter))
 				return Kistl.App.Base.StringParameter__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.Property))
+			if (ifType == typeof(Kistl.App.Base.Property))
 				return Kistl.App.Base.Property__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.ObjectReferenceProperty))
+			if (ifType == typeof(Kistl.App.Base.ObjectReferenceProperty))
 				return Kistl.App.Base.ObjectReferenceProperty__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.ObjectParameter))
+			if (ifType == typeof(Kistl.App.Base.ObjectParameter))
 				return Kistl.App.Base.ObjectParameter__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.ObjectClass))
+			if (ifType == typeof(Kistl.App.Base.ObjectClass))
 				return Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.NotNullableConstraint))
+			if (ifType == typeof(Kistl.App.Base.NotNullableConstraint))
 				return Kistl.App.Base.NotNullableConstraint__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.Module))
+			if (ifType == typeof(Kistl.App.Base.Module))
 				return Kistl.App.Base.Module__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.MethodInvocationConstraint))
+			if (ifType == typeof(Kistl.App.Base.MethodInvocationConstraint))
 				return Kistl.App.Base.MethodInvocationConstraint__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.MethodInvocation))
+			if (ifType == typeof(Kistl.App.Base.MethodInvocation))
 				return Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.Method))
+			if (ifType == typeof(Kistl.App.Base.Method))
 				return Kistl.App.Base.Method__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.IsValidNamespaceConstraint))
+			if (ifType == typeof(Kistl.App.Base.IsValidNamespaceConstraint))
 				return Kistl.App.Base.IsValidNamespaceConstraint__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.IsValidIdentifierConstraint))
+			if (ifType == typeof(Kistl.App.Base.IsValidIdentifierConstraint))
 				return Kistl.App.Base.IsValidIdentifierConstraint__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.IntProperty))
+			if (ifType == typeof(Kistl.App.Base.IntProperty))
 				return Kistl.App.Base.IntProperty__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.IntParameter))
+			if (ifType == typeof(Kistl.App.Base.IntParameter))
 				return Kistl.App.Base.IntParameter__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.Interface))
+			if (ifType == typeof(Kistl.App.Base.Interface))
 				return Kistl.App.Base.Interface__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.IntegerRangeConstraint))
+			if (ifType == typeof(Kistl.App.Base.IntegerRangeConstraint))
 				return Kistl.App.Base.IntegerRangeConstraint__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.EnumerationProperty))
+			if (ifType == typeof(Kistl.App.Base.EnumerationProperty))
 				return Kistl.App.Base.EnumerationProperty__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.EnumerationEntry))
+			if (ifType == typeof(Kistl.App.Base.EnumerationEntry))
 				return Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.Enumeration))
+			if (ifType == typeof(Kistl.App.Base.Enumeration))
 				return Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.DoubleProperty))
+			if (ifType == typeof(Kistl.App.Base.DoubleProperty))
 				return Kistl.App.Base.DoubleProperty__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.DoubleParameter))
+			if (ifType == typeof(Kistl.App.Base.DoubleParameter))
 				return Kistl.App.Base.DoubleParameter__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.DateTimeProperty))
+			if (ifType == typeof(Kistl.App.Base.DateTimeProperty))
 				return Kistl.App.Base.DateTimeProperty__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.DateTimeParameter))
+			if (ifType == typeof(Kistl.App.Base.DateTimeParameter))
 				return Kistl.App.Base.DateTimeParameter__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.DataType))
+			if (ifType == typeof(Kistl.App.Base.DataType))
 				return Kistl.App.Base.DataType__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.Constraint))
+			if (ifType == typeof(Kistl.App.Base.Constraint))
 				return Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.CLRObjectParameter))
+			if (ifType == typeof(Kistl.App.Base.CLRObjectParameter))
 				return Kistl.App.Base.CLRObjectParameter__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.BoolProperty))
+			if (ifType == typeof(Kistl.App.Base.BoolProperty))
 				return Kistl.App.Base.BoolProperty__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.BoolParameter))
+			if (ifType == typeof(Kistl.App.Base.BoolParameter))
 				return Kistl.App.Base.BoolParameter__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.BaseProperty))
+			if (ifType == typeof(Kistl.App.Base.BaseProperty))
 				return Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.BaseParameter))
+			if (ifType == typeof(Kistl.App.Base.BaseParameter))
 				return Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.BackReferenceProperty))
+			if (ifType == typeof(Kistl.App.Base.BackReferenceProperty))
 				return Kistl.App.Base.BackReferenceProperty__Implementation__Frozen.DataStore[ID];
-			if (t == typeof(Kistl.App.Base.Assembly))
+			if (ifType == typeof(Kistl.App.Base.Assembly))
 				return Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[ID];
 			throw new NotImplementedException();
 		}
@@ -301,7 +304,7 @@ namespace Kistl.App
         public T Find<T>(int ID)
 			where T : IDataObject
         {
-			return (T)Find(typeof(T), ID);
+			return (T)Find(new InterfaceType(typeof(T)), ID);
         }
 
 

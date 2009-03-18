@@ -301,9 +301,9 @@ namespace Kistl.App.GUI
         }
         private string _PresenterTypeName;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(PresenterInfo);
+			return new InterfaceType(typeof(PresenterInfo));
 		}
 
         // tail template

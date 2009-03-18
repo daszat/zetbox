@@ -51,12 +51,12 @@ namespace Kistl.Client.ASPNET.Toolkit
             
             if (ID <= Helper.INVALIDID)
             {
-                obj = ctx.Create(Type.GetSystemType());
+                obj = ctx.Create(Type.GetInterfaceType());
                 ID = obj.ID;
             }
             else
             {
-                obj = ctx.Find(Type.GetSystemType(), ID);
+                obj = ctx.Find(Type.GetInterfaceType(), ID);
             }
 
             return GuiApplicationContext.Current.Factory.CreateSpecificModel<DataObjectModel>(ctx, obj);
@@ -77,11 +77,11 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
 
-        public static string ToJSON(this System.Type type)
+        public static string ToJSON(this InterfaceType ifType)
         {
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(SerializableType));
             MemoryStream ms = new MemoryStream();
-            s.WriteObject(ms, new SerializableType(type));
+            s.WriteObject(ms, new SerializableType(ifType));
             return GetEncoder().GetString(ms.ToArray());
         }
 

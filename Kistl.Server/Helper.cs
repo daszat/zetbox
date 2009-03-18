@@ -23,7 +23,7 @@ namespace Kistl.Server
         /// <summary>
         /// Handles an Error
         /// </summary>
-        /// <param name="ex">Expeption to handle</param>
+        /// <param name="ex">Exception to handle</param>
         public static void HandleError(Exception ex, bool throwFault)
         {
             System.Diagnostics.Trace.TraceError(ex.ToString());
@@ -39,7 +39,7 @@ namespace Kistl.Server
 #if DEBUG
                     throw new FaultException(ex.Message);
 #else
-                    throw new FaultException("Generic Error");
+                    throw new FaultException("An Error ocurred while processing this request.");
 #endif
                 }
             }

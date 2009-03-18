@@ -57,7 +57,7 @@ namespace Kistl.Server
                 {
 
                     System.IO.BinaryReader sr = new System.IO.BinaryReader(msg);
-                    List<IDataObject> objects = new List<IDataObject>();
+                    var objects = new List<IPersistenceObject>();
                     bool @continue;
                     BinarySerializer.FromStream(out @continue, sr);
                     while (@continue)
@@ -69,7 +69,7 @@ namespace Kistl.Server
 
                         msg.Seek(pos, System.IO.SeekOrigin.Begin);
 
-                        IDataObject obj = (IDataObject)objType.NewObject();
+                        var obj = (IPersistenceObject)objType.NewObject();
                         obj.FromStream(sr);
                         objects.Add(obj);
                         BinarySerializer.FromStream(out @continue, sr);

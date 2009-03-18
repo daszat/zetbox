@@ -15,7 +15,7 @@ namespace Kistl.App.Extensions
 
         public static ObjectClass GetObjectClass(this IDataObject obj, Kistl.API.IKistlContext ctx)
         {
-            Type type = obj.GetInterfaceType();
+            Type type = obj.GetInterfaceType().Type;
             return ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
         }
 
@@ -67,6 +67,11 @@ namespace Kistl.App.Extensions
                 cls = cls.BaseObjectClass;
             }
             return false;
+        }
+
+        public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)
+        {
+            return new InterfaceType(cls.GetDataType());
         }
     }
 

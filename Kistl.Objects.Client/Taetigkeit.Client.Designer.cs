@@ -261,9 +261,9 @@ namespace Kistl.App.Zeiterfassung
         }
         private int? _fk_Zeitkonto;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Taetigkeit);
+			return new InterfaceType(typeof(Taetigkeit));
 		}
 
         // tail template

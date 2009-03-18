@@ -14,11 +14,11 @@ namespace Kistl.API.Client
     {
         private Expression _expression = null;
         private KistlContextProvider _provider = null;
-        private Type _type = null;
+        private InterfaceType _type;
         private IKistlContext _context;
 
         #region Constructor
-        public KistlContextQuery(IKistlContext ctx, Type type)
+        public KistlContextQuery(IKistlContext ctx, InterfaceType type)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (type == null) throw new ArgumentNullException("type");
@@ -29,7 +29,7 @@ namespace Kistl.API.Client
             _provider = new KistlContextProvider(_context, _type);
         }
 
-        public KistlContextQuery(IKistlContext ctx, Type type, KistlContextProvider provider, Expression expression)
+        public KistlContextQuery(IKistlContext ctx, InterfaceType type, KistlContextProvider provider, Expression expression)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (type == null) throw new ArgumentNullException("type");

@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+
 using Kistl.API;
 using Kistl.API.Client;
-using System.Linq.Expressions;
 
 namespace Kistl.API.Client.Tests
 {
-    public class TestProxy : Kistl.API.Client.IProxy
+    public class TestProxy 
+        : IProxy
     {
         private int newID = 10;
 
@@ -19,10 +21,10 @@ namespace Kistl.API.Client.Tests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList(Type type, int maxListCount, Expression filter, IEnumerable<Expression> orderBy)
+        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy)
         {
-            if (type == null) throw new ArgumentNullException("type");
-            if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
+            if (ifType == null) throw new ArgumentNullException("ifType");
+            if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("ifType", "Only TestObjClasses are allowed");
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 
             List<TestObjClass> result = new List<TestObjClass>();
@@ -53,10 +55,10 @@ namespace Kistl.API.Client.Tests
             return result.Cast<IDataObject>();
         }
 
-        public IEnumerable<IDataObject> GetListOf(Type type, int ID, string property)
+        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property)
         {
-            if (type == null) throw new ArgumentNullException("type");
-            if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
+            if (ifType == null) throw new ArgumentNullException("ifType");
+            if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
 
             List<TestObjClass> result = new List<TestObjClass>();
             if (ID == 1)
@@ -70,10 +72,10 @@ namespace Kistl.API.Client.Tests
             return result.Cast<IDataObject>();
         }
 
-        public Kistl.API.IDataObject GetObject(Type type, int ID)
+        public IDataObject GetObject(InterfaceType ifType, int ID)
         {
-            if (type == null) throw new ArgumentNullException("type");
-            if (type != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
+            if (ifType == null) throw new ArgumentNullException("ifType");
+            if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("ifType", "Only TestObjClasses are allowed");
 
             TestObjClass obj = new TestObjClass__Implementation__() { StringProp = "String " + ID };
             obj.SetPrivatePropertyValue<int>("ID", ID);
@@ -85,10 +87,10 @@ namespace Kistl.API.Client.Tests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Kistl.API.IDataObject> SetObjects(IEnumerable<Kistl.API.IDataObject> objects)
+        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects)
         {
-            List<IDataObject> result = new List<IDataObject>();
-            foreach (IDataObject obj in objects)
+            var result = new List<IPersistenceObject>();
+            foreach (var obj in objects)
             {
                 Type type = obj.GetType();
                 if (type == null) throw new ArgumentNullException("type");
@@ -96,10 +98,10 @@ namespace Kistl.API.Client.Tests
 
                 if (obj.ObjectState != DataObjectState.Deleted)
                 {
-                    TestObjClass newObj = new TestObjClass__Implementation__();
+                    var newObj = new TestObjClass__Implementation__();
 
                     // Copy old object to new object
-                    ((BaseClientDataObject)obj).ApplyChanges(newObj);
+                    newObj.ApplyChangesFrom(obj);
                     if (newObj.ID < Helper.INVALIDID)
                     {
                         newObj.SetPrivatePropertyValue<int>("ID", ++newID);

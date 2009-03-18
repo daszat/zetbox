@@ -94,13 +94,49 @@ namespace Kistl.API.Client
             }
         }
 
+        /// <summary>
+        /// Applies changes from another IPersistenceObject of the same interface type.
+        /// </summary>
+        /// <param name="obj"></param>
+        public virtual void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+            if (obj.GetType().ToInterfaceType() != this.GetType().ToInterfaceType())
+                throw new ArgumentOutOfRangeException("obj");
+
+            this.ID = obj.ID;
+        }
+
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
+
+            BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
+            BinarySerializer.ToStream(ID, sw);
+            BinarySerializer.ToStream((int)ObjectState, sw);
         }
+
         public virtual void FromStream(System.IO.BinaryReader sr)
         {
-            if (this.Context != null) throw new InvalidOperationException("Deserializing attached objects is not allowed");
+            if (sr == null) throw new ArgumentNullException("sr");
+            if (this.IsAttached) throw new InvalidOperationException("Deserializing into attached objects is not allowed");
+
+            SerializableType t;
+            BinarySerializer.FromStream(out t, sr);
+
+            if (this.GetInterfaceType() != t.GetInterfaceType())
+                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
+
+            int tmp;
+            BinarySerializer.FromStream(out tmp, sr);
+            ID = tmp;
+
+            BinarySerializer.FromStream(out tmp, sr);
+            ObjectState = (DataObjectState)tmp;
         }
+
+        #region Property Change Notification
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangingEventHandler PropertyChanging;
@@ -178,7 +214,9 @@ namespace Kistl.API.Client
             }
         }
 
-        public abstract Type GetInterfaceType();
+        #endregion
+
+        public abstract InterfaceType GetInterfaceType();
     }
 
     public abstract class BaseClientDataObject : BaseClientPersistenceObject, IDataObject
@@ -190,41 +228,6 @@ namespace Kistl.API.Client
 
         public virtual void NotifyPreSave() { }
         public virtual void NotifyPostSave() { }
-
-        public virtual void ApplyChanges(IDataObject obj)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            ((BaseClientPersistenceObject)obj).ID = this.ID;
-        }
-
-        public override void ToStream(System.IO.BinaryWriter sw)
-        {
-            if (sw == null) throw new ArgumentNullException("sw");
-            base.ToStream(sw);
-
-            BinarySerializer.ToStream(new SerializableType(this.GetType()), sw);
-            BinarySerializer.ToStream(ID, sw);
-            BinarySerializer.ToStream((int)ObjectState, sw);
-        }
-
-        public override void FromStream(System.IO.BinaryReader sr)
-        {
-            if (sr == null) throw new ArgumentNullException("sr");
-            base.FromStream(sr);
-
-            SerializableType t;
-            BinarySerializer.FromStream(out t, sr);
-
-            if (this.GetInterfaceType() != t.GetSystemType())
-                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
-
-            int tmp;
-            BinarySerializer.FromStream(out tmp, sr);
-            ID = tmp;
-
-            BinarySerializer.FromStream(out tmp, sr);
-            ObjectState = (DataObjectState)tmp;
-        }
 
         #region IDataErrorInfo Members
 
@@ -255,39 +258,6 @@ namespace Kistl.API.Client
 
     public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject, ICollectionEntry
     {
-        
-        public override void ToStream(System.IO.BinaryWriter sw)
-        {
-            if (sw == null) throw new ArgumentNullException("sw");
-            base.ToStream(sw);
-
-            BinarySerializer.ToStream(ID, sw);
-            BinarySerializer.ToStream((int)ObjectState, sw);
-        }
-
-        public override void FromStream(System.IO.BinaryReader sr)
-        {
-            if (sr == null) throw new ArgumentNullException("sr");
-            base.FromStream(sr);
-
-            int tmp;
-            BinarySerializer.FromStream(out tmp, sr);
-            ID = tmp;
-
-            BinarySerializer.FromStream(out tmp, sr);
-            ObjectState = (DataObjectState)tmp;
-        }
-
-        public virtual void ApplyChanges(ICollectionEntry obj)
-        {
-            ((BaseClientPersistenceObject)obj).ID = this.ID;
-            if (obj is ICollectionEntrySorted)
-            {
-                ((ICollectionEntrySorted)obj).ValueIndex = ((ICollectionEntrySorted)this).ValueIndex;
-                ((ICollectionEntrySorted)obj).ParentIndex = ((ICollectionEntrySorted)this).ParentIndex;
-            }
-        }
-
     }
 
     public abstract class BaseClientStructObject : IStruct, INotifyPropertyChanged, INotifyPropertyChanging
@@ -351,6 +321,6 @@ namespace Kistl.API.Client
             _attachedObjectProperty = "";
         }
 
-        public abstract Type GetInterfaceType();
+        public abstract InterfaceType GetInterfaceType();
     }
 }

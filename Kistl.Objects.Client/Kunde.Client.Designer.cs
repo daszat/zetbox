@@ -160,9 +160,9 @@ namespace Kistl.App.Projekte
         }
         private string _PLZ;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Kunde);
+			return new InterfaceType(typeof(Kunde));
 		}
 
         // tail template

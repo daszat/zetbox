@@ -155,11 +155,11 @@ namespace Kistl.DALProvider.EF
         /// Returns a Query by System.Type.
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;().</remarks>
         /// </summary>
-        /// <param name="objType">System.Type</param>
+        /// <param name="ifType">the interface type to query for</param>
         /// <returns>IQueryable</returns>
-        public override IQueryable<IDataObject> GetQuery(Type interfaceType)
+        public override IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
-            MethodInfo mi = this.GetType().FindGenericMethod("GetListHack", new Type[] { interfaceType }, new Type[] { });
+            MethodInfo mi = this.GetType().FindGenericMethod("GetListHack", new Type[] { ifType.Type }, new Type[] { });
             // See Case 552
             var result = (System.Collections.IList)mi.Invoke(this, new object[] { });
             return result.AsQueryable().Cast<IDataObject>();
@@ -325,15 +325,15 @@ namespace Kistl.DALProvider.EF
         /// This could be moved to a common abstract IKistlContextBase
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
-        /// <param name="type">Object Type of the Object to find.</param>
+        /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public override IDataObject Find(Type type, int ID)
+        public override IDataObject Find(InterfaceType ifType, int ID)
         {
             try
             {
                 // See Case 552
-                return (IDataObject)this.GetType().FindGenericMethod("Find", new Type[] { type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
+                return (IDataObject)this.GetType().FindGenericMethod("Find", new Type[] { ifType.Type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
             }
             catch (TargetInvocationException tiex)
             {
@@ -359,6 +359,9 @@ namespace Kistl.DALProvider.EF
             }
             catch (InvalidOperationException)
             {
+                // if the IOEx happened because there is no such object, we 
+                // want to report this with an ArgumentOutOfRangeException, 
+                // else, we just want to pass the exception on.
                 // Since we do not want to rely on the exception string, 
                 // we have to check whether there is _any_ object with that ID
                 if (GetQuery<T>().Count(o => o.ID == ID) == 0)

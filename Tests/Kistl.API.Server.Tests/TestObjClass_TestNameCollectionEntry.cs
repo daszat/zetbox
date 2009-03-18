@@ -30,9 +30,9 @@ namespace Kistl.API.Server.Tests
         /// returns the most specific implemented data object interface
         /// </summary>
         /// <returns></returns>
-        public override Type GetInterfaceType()
+        public override InterfaceType GetInterfaceType()
         {
-            return typeof(INewCollectionEntry<TestObjClass, string>);
+            return new InterfaceType(typeof(INewCollectionEntry<TestObjClass, string>));
         }
 
         public override int ID { get; set; }

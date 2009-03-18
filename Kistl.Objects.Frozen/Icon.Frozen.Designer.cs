@@ -45,9 +45,9 @@ namespace Kistl.App.GUI
         }
         private string _IconFile;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Icon);
+			return new InterfaceType(typeof(Icon));
 		}
 
         // tail template

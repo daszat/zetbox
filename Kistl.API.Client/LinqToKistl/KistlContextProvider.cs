@@ -18,9 +18,9 @@ namespace Kistl.API.Client
     public class KistlContextProvider : ExpressionTreeVisitor, IQueryProvider
     {
         /// <summary>
-        /// 
+        /// The result type of this provider
         /// </summary>
-        private Type _type;
+        private InterfaceType _type;
         /// <summary>
         /// 
         /// </summary>
@@ -40,10 +40,10 @@ namespace Kistl.API.Client
         /// </summary>
         private LinkedList<Expression> _orderBy = null;
 
-        internal KistlContextProvider(IKistlContext ctx, Type type)
+        internal KistlContextProvider(IKistlContext ctx, InterfaceType ifType)
         {
             _context = ctx;
-            _type = type;
+            _type = ifType;
         }
 
         internal List<IDataObject> GetListOf(int ID, string propertyName)
@@ -170,10 +170,10 @@ namespace Kistl.API.Client
             return Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).ToList();
         }
 
-        private void AddNewLocalObjects(Type type, IList result)
+        private void AddNewLocalObjects(InterfaceType ifType, IList result)
         {
             MethodInfo mi = typeof(KistlContextProvider).GetMethod("AddNewLocalObjectsGeneric", BindingFlags.Instance | BindingFlags.NonPublic)
-                .MakeGenericMethod(type);
+                .MakeGenericMethod(ifType.Type);
             mi.Invoke(this, new object[] { result });
         }
 

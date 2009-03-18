@@ -15,11 +15,11 @@ namespace Kistl.API.Client
     /// </summary>
     public interface IProxy : IDisposable
     {
-        IEnumerable<IDataObject> GetList(Type type, int maxListCount, Expression filter, IEnumerable<Expression> orderBy);
-        IEnumerable<IDataObject> GetListOf(Type type, int ID, string property);
-        IDataObject GetObject(Type type, int ID);
+        IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy);
+        IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property);
+        IDataObject GetObject(InterfaceType ifType, int ID);
 
-        IEnumerable<IDataObject> SetObjects(IEnumerable<IDataObject> objects);
+        IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects);
 
         IEnumerable<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent);
 
@@ -155,13 +155,13 @@ namespace Kistl.API.Client
         /// </summary>
         private KistlServiceStreams.KistlServiceStreamsClient serviceStreams = new KistlServiceStreams.KistlServiceStreamsClient();
 
-        public IEnumerable<Kistl.API.IDataObject> GetList(Type type, int maxListCount, Expression filter, IEnumerable<Expression> orderBy)
+        public IEnumerable<Kistl.API.IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
+            using (TraceClient.TraceHelper.TraceMethodCall(ifType.ToString()))
             {
 #if USE_STREAMS
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
-                msg.Type = new SerializableType(type);
+                msg.Type = new SerializableType(ifType);
                 msg.MaxListCount = maxListCount;
                 msg.Filter = filter != null ? SerializableExpression.FromExpression(filter) : null;
                 msg.OrderBy = orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o)).ToList() : new List<SerializableExpression>();
@@ -195,20 +195,13 @@ namespace Kistl.API.Client
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="ID"></param>
-        /// <param name="property"></param>
-        /// <returns></returns>
-        public IEnumerable<Kistl.API.IDataObject> GetListOf(Type type, int ID, string property)
+        public IEnumerable<Kistl.API.IDataObject> GetListOf(InterfaceType ifType, int ID, string property)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
+            using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", ifType, ID, property))
             {
 #if USE_STREAMS
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
-                msg.Type = new SerializableType(type);
+                msg.Type = new SerializableType(ifType);
                 msg.ID = ID;
                 msg.Property = property;
                 System.IO.MemoryStream s = serviceStreams.GetListOf(msg.ToStream());
@@ -241,19 +234,13 @@ namespace Kistl.API.Client
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="ID"></param>
-        /// <returns></returns>
-        public Kistl.API.IDataObject GetObject(Type type, int ID)
+        public Kistl.API.IDataObject GetObject(InterfaceType ifType, int ID)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
+            using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", ifType, ID))
             {
 #if USE_STREAMS
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
-                msg.Type = new SerializableType(type);
+                msg.Type = new SerializableType(ifType);
                 msg.ID = ID;
                 System.IO.MemoryStream s = serviceStreams.GetObject(msg.ToStream());
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
@@ -274,7 +261,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable<Kistl.API.IDataObject> SetObjects(IEnumerable<Kistl.API.IDataObject> objects)
+        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
@@ -282,7 +269,7 @@ namespace Kistl.API.Client
                 // Serialize
                 MemoryStream ms = new MemoryStream();
                 BinaryWriter sw = new BinaryWriter(ms);
-                foreach (IDataObject obj in objects)
+                foreach (var obj in objects)
                 {
                     BinarySerializer.ToStream(true, sw);
                     obj.ToStream(sw);
@@ -295,7 +282,7 @@ namespace Kistl.API.Client
                 // Deserialize
                 System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
 
-                List<IDataObject> result = new List<IDataObject>();
+                var result = new List<IPersistenceObject>();
                 bool @continue;
                 BinarySerializer.FromStream(out @continue, sr);
                 while (@continue)
@@ -306,7 +293,7 @@ namespace Kistl.API.Client
 
                     s.Seek(pos, System.IO.SeekOrigin.Begin);
 
-                    IDataObject obj = (IDataObject)objType.NewObject();
+                    var obj = (IPersistenceObject)objType.NewObject();
                     obj.FromStream(sr);
                     result.Add(obj);
                     BinarySerializer.FromStream(out @continue, sr);

@@ -45,9 +45,9 @@ namespace Kistl.App.Zeiterfassung
         }
         private string _Name;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(TaetigkeitsArt);
+			return new InterfaceType(typeof(TaetigkeitsArt));
 		}
 
         // tail template

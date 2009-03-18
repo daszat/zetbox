@@ -6,6 +6,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Client.GUI.DB;
 
 namespace Kistl.Client.Presentables
@@ -25,7 +26,7 @@ namespace Kistl.Client.Presentables
         protected override void AsyncQueryHasInstances()
         {
             Async.Verify();
-            var obj = DataContext.GetQuery(_class.GetDataType()).FirstOrDefault();
+            var obj = DataContext.GetQuery(_class.GetDescribedInterfaceType()).FirstOrDefault();
             UI.Queue(UI, () => { HasInstances = (obj != null); State = ModelState.Active; });
         }
 
@@ -33,7 +34,7 @@ namespace Kistl.Client.Presentables
         {
             Async.Verify();
             UI.Queue(UI, () => State = ModelState.Loading);
-            var objs = DataContext.GetQuery(_class.GetDataType()).ToList().OrderBy(obj => obj.ToString()).ToList();
+            var objs = DataContext.GetQuery(_class.GetDescribedInterfaceType()).ToList().OrderBy(obj => obj.ToString()).ToList();
 
             UI.Queue(UI, () =>
             {

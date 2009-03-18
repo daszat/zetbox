@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NUnit.Framework;
+
 using Kistl.API;
+using Kistl.App.Base;
+
+using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 
 namespace Kistl.Server.Tests
@@ -26,14 +29,14 @@ namespace Kistl.Server.Tests
         [ExpectedException(typeof(ReadOnlyContextException))]
         public void IsReadonly_Create()
         {
-            var obj = FrozenContext.Single.Create<Kistl.App.Base.ObjectClass>();
+            var obj = FrozenContext.Single.Create<ObjectClass>();
         }
 
 
         [Test]
         public void IsReadonlyObject()
         {
-            var obj = FrozenContext.Single.GetQuery<Kistl.App.Base.ObjectClass>().First();
+            var obj = FrozenContext.Single.GetQuery<ObjectClass>().First();
             Assert.That(obj.IsReadonly, Is.True);
         }
 
@@ -41,7 +44,7 @@ namespace Kistl.Server.Tests
         [ExpectedException(typeof(ReadOnlyObjectException))]
         public void IsReadonlyObject_String()
         {
-            var obj = FrozenContext.Single.GetQuery<Kistl.App.Base.ObjectClass>().First();
+            var obj = FrozenContext.Single.GetQuery<ObjectClass>().First();
             obj.ClassName = "test";
         }
 
@@ -49,8 +52,8 @@ namespace Kistl.Server.Tests
         [ExpectedException(typeof(ReadOnlyObjectException))]
         public void IsReadonlyObject_Reference()
         {
-            var obj = FrozenContext.Single.GetQuery<Kistl.App.Base.ObjectClass>().First();
-            var baseobj = FrozenContext.Single.GetQuery<Kistl.App.Base.ObjectClass>().Skip(2).First();
+            var obj = FrozenContext.Single.GetQuery<ObjectClass>().First();
+            var baseobj = FrozenContext.Single.GetQuery<ObjectClass>().Skip(2).First();
             obj.BaseObjectClass = baseobj;
         }
     }

@@ -369,9 +369,9 @@ namespace Kistl.App.GUI
         
         
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Visual);
+			return new InterfaceType(typeof(Visual));
 		}
 
         // tail template

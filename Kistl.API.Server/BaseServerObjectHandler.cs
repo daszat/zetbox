@@ -49,7 +49,7 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
-        IEnumerable<IDataObject> SetObjects(IKistlContext ctx, IEnumerable<IDataObject> objects);
+        IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects);
     }
 
     public interface IServerCollectionHandler
@@ -257,7 +257,7 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="objects"></param>
         /// <returns></returns>
-        public virtual IEnumerable<IDataObject> SetObjects(IKistlContext ctx, IEnumerable<IDataObject> objects)
+        public virtual IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects)
         {
             ctx.SubmitChanges();
 

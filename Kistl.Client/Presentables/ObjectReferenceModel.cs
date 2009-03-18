@@ -118,7 +118,7 @@ namespace Kistl.Client.Presentables
             State = ModelState.Loading;
             Async.Queue(DataContext, () =>
             {
-                IDataObject newObj = (IDataObject)DataContext.Create(Property.GetPropertyType());
+                IDataObject newObj = (IDataObject)DataContext.Create(new InterfaceType(Property.GetPropertyType()));
                 Object.SetPropertyValue<IDataObject>(Property.PropertyName, newObj);
                 // State will be reset by PropertyChanged event
             });
@@ -142,7 +142,7 @@ namespace Kistl.Client.Presentables
 
             UI.Queue(UI, () => State = ModelState.Loading);
 
-            var objs = DataContext.GetQuery(Property.GetPropertyType())
+            var objs = DataContext.GetQuery(new InterfaceType(Property.GetPropertyType()))
                 .ToList().OrderBy(obj => obj.ToString()).ToList();
 
             UI.Queue(UI, () =>

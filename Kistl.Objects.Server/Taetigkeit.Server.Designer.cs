@@ -340,9 +340,9 @@ namespace Kistl.App.Zeiterfassung
         
         
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Taetigkeit);
+			return new InterfaceType(typeof(Taetigkeit));
 		}
 
         // tail template

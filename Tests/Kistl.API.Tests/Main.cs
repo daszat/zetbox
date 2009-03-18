@@ -15,8 +15,8 @@ namespace Kistl.API.Tests
             //AssemblyLoaderTests();
 
             BinarySerializerTests();
-            SerializableTypeTests();
-            
+            //SerializableTypeTests();
+
         }
 
         private static void AssemblyLoaderTests()
@@ -41,12 +41,12 @@ namespace Kistl.API.Tests
         private static void BinarySerializerTests()
         {
             BinarySerializerTests test = new BinarySerializerTests();
-            
+
             test.SetUp();
             test.SerializableExpressionTest();
 
-            test.SetUp();
-            test.null_String_roundtrips_correctly();
+            //test.SetUp();
+            //test.null_String_roundtrips_correctly();
         }
 
         private static void SerializableTypeTests()

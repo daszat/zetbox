@@ -205,9 +205,9 @@ namespace Kistl.App.Projekte
         
         private BackReferenceCollection<Kistl.App.Projekte.Task> _TasksWrapper;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(Projekt);
+			return new InterfaceType(typeof(Projekt));
 		}
 
         // tail template

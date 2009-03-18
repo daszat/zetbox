@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 using NUnit.Framework;
-using System.ComponentModel;
 
 namespace Kistl.API.Client.Tests
 {
@@ -103,9 +103,9 @@ namespace Kistl.API.Client.Tests
                 get { throw new NotImplementedException(); }
             }
 
-            public Type GetInterfaceType()
+            public InterfaceType GetInterfaceType()
             {
-                return typeof(IDataObject);
+                return new InterfaceType(typeof(IDataObject));
             }
 
             #endregion

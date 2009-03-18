@@ -425,12 +425,18 @@ namespace Kistl.Client.GUI.DB
                     var genericRef = typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition().ToRef(ctx);
                     var concreteRef = ctx.GetQuery<Kistl.App.Base.TypeRef>()
                         .Where(r => r.FullName == genericRef.FullName
-                            && r.Assembly == genericRef.Assembly
+                            && r.Assembly.ID == genericRef.Assembly.ID
                             && r.GenericArguments.Count == 1)
                         .ToList()
                         .SingleOrDefault(r => r.GenericArguments[0] == enumRef);
-
-                    return (concreteRef);
+                    if (concreteRef == null)
+                    {
+                        concreteRef = ctx.Create<TypeRef>();
+                        concreteRef.FullName = genericRef.FullName;
+                        concreteRef.Assembly = genericRef.Assembly;
+                        concreteRef.GenericArguments.Add(enumRef);
+                    }
+                    return concreteRef;
                 }
                 else
                 {

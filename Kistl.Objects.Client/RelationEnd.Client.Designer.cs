@@ -230,9 +230,9 @@ namespace Kistl.App.Base
         }
         private int? _fk_Type;
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(RelationEnd);
+			return new InterfaceType(typeof(RelationEnd));
 		}
 
         // tail template

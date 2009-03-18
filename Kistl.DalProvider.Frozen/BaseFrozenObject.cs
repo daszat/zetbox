@@ -36,7 +36,7 @@ namespace Kistl.DalProvider.Frozen
 
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
-            BinarySerializer.ToStream(new SerializableType(this.GetType()), sw);
+            BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
             BinarySerializer.ToStream(ID, sw);
             BinarySerializer.ToStream((int)ObjectState, sw);
         }
@@ -66,7 +66,7 @@ namespace Kistl.DalProvider.Frozen
 
         public bool IsReadonly { get { return IsSealed; } }
 
-        public abstract Type GetInterfaceType();
+        public abstract InterfaceType GetInterfaceType();
 
         #endregion
 
