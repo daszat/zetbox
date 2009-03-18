@@ -9,6 +9,7 @@ using System.Reflection;
 using TraceClient;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Kistl.API
 {
@@ -340,67 +341,6 @@ namespace Kistl.API
             return (TReturn)mi.Invoke(obj, new object[] { });
         }
 
-        public static Type ToInterfaceType(this Type type)
-        {
-            if (type.IsGenericType)
-            {
-                Type genericType = type.GetGenericTypeDefinition();
-                List<Type> genericArguments = new List<Type>();
-                genericArguments.AddRange(type.GetGenericArguments().Select(t => t.ToInterfaceType()));
-
-                return genericType.MakeGenericType(genericArguments.ToArray());
-            }
-            else if (!type.IsInterface)
-            {
-                if (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
-                {
-                    var parts = type.FullName.Split(new string[] { Helper.ImplementationSuffix }, StringSplitOptions.RemoveEmptyEntries);
-                    type = Type.GetType(parts[0] + ", " + ApplicationContext.Current.InterfaceAssembly, true);
-                }
-            }
-            return type;
-        }
-
-        public static Type ToImplementationType(this Type type)
-        {
-            if (type.IsGenericType)
-            {
-                Type genericType = type.GetGenericTypeDefinition();
-                List<Type> genericArguments = new List<Type>();
-                genericArguments.AddRange(type.GetGenericArguments().Select(t => t.ToImplementationType()));
-
-                return genericType.MakeGenericType(genericArguments.ToArray());
-            }
-            else
-            {
-                if (type == typeof(IDataObject))
-                {
-                    return ApplicationContext.Current.BaseDataObjectType;
-                }
-                else if (type == typeof(IPersistenceObject))
-                {
-                    return ApplicationContext.Current.BasePersistenceObjectType;
-                }
-                else if (type == typeof(IStruct))
-                {
-                    return ApplicationContext.Current.BaseStructObjectType;
-                }
-                else if (type == typeof(ICollectionEntry))
-                {
-                    return ApplicationContext.Current.BaseCollectionEntryType;
-                }
-                else if (type.IsInterface)
-                {
-                    if (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
-                    {
-                        // add ImplementationSuffix
-                        string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly;
-                        return Type.GetType(newType, true);
-                    }
-                }
-                return type;
-            }
-        }
 
         public static MethodInfo FindMethod(this Type type, string methodName, Type[] parameterTypes)
         {
