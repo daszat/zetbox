@@ -23,8 +23,7 @@ namespace Kistl.Server.Generators.Interfaces
 
         protected override string Generate_CollectionEntries(IKistlContext ctx)
         {
-            // collection entries have no specific interfaces; See Kistl.API.ICollectionEntry and friends
-            return null;
+            return RunTemplateWithExtension(ctx, "Interface.CollectionEntries.CollectionEntries", "CollectionEntries", "Designer.cs");
         }
 
         protected override string Generate_Enumeration(IKistlContext ctx, Enumeration e)

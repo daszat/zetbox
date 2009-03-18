@@ -10,6 +10,7 @@ using Kistl.API;
 using Kistl.API.Server;
 using System.Reflection;
 using System.Diagnostics;
+using System.Data;
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 
@@ -53,7 +54,7 @@ namespace Kistl.DALProvider.EF
     /// Entityframework IKistlContext implementation
     /// </summary>
     public class KistlDataContext : BaseKistlDataContext, IKistlContext, IDisposable
-    {        
+    {
         private EFObjectContext _ctx;
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace Kistl.DALProvider.EF
         {
             while (t != null &&
                 t.BaseType != typeof(BaseServerDataObject) &&
-                t.BaseType != typeof(BaseServerDataObject_EntityFramework) && 
+                t.BaseType != typeof(BaseServerDataObject_EntityFramework) &&
                 t.BaseType != typeof(BaseServerCollectionEntry) &&
                 t.BaseType != typeof(BaseServerCollectionEntry_EntityFramework)
                 )
@@ -168,7 +169,7 @@ namespace Kistl.DALProvider.EF
             //return result.OfType<IDataObject>();
 
             //throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>().");
-            
+
             // Des geht a net...
             //Type type = objType.ToImplementationType();
 
@@ -182,7 +183,7 @@ namespace Kistl.DALProvider.EF
             //return query.AddOfType<IDataObject>(objType);
         }
 
-        public override ICollection<INewCollectionEntry<A,B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent)
+        public override ICollection<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent)
         {
             throw new NotImplementedException();
         }
@@ -222,37 +223,40 @@ namespace Kistl.DALProvider.EF
         /// <returns>Number of affected Objects</returns>
         public override int SubmitChanges()
         {
-            List<IDataObject> saveList = _ctx.ObjectStateManager
+            var saveList = _ctx.ObjectStateManager
                 .GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified)
-                .Select(e => e.Entity).OfType<IDataObject>().ToList();
+                .Select(e => e.Entity)
+                .OfType<IPersistenceObject>()
+                .ToList();
 
 #if DEBUG
-            Debug.WriteLine("************************* >>>> Submit Changes ******************************");
+            Trace.WriteLine("************************* >>>> Submit Changes ******************************");
 
-            var submitList = _ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added);
-            submitList.Select(e => e.Entity).OfType<IPersistenceObject>()
-                .ForEach<object>(i => Debug.WriteLine(string.Format("Insert: {0} -> {1}", i.GetType(), i.ToString())));
+            foreach (var msgPair in new[]{
+                    new{State = EntityState.Added,      Label="Insert" },
+                    new{State = EntityState.Modified,   Label="Update" },
+                    new{State = EntityState.Deleted,    Label="Delete" },
+                    new{State = EntityState.Unchanged,  Label="Unchanged" },
+            })
+            {
+                var debugList = _ctx.ObjectStateManager
+                    .GetObjectStateEntries(msgPair.State)
+                    .Where(e => e.Entity != null)
+                    .Select(e => e.Entity);
+                foreach (var i in debugList)
+                {
+                    Trace.WriteLine(string.Format("{0}: {1} -> {2}", msgPair.Label, i.GetType(), i.ToString()));
+                }
+            }
 
-            submitList = _ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Modified);
-            submitList.Select(e => e.Entity).OfType<IPersistenceObject>()
-                .ForEach<object>(i => Debug.WriteLine(string.Format("Update: {0} -> {1}", i.GetType(), i.ToString())));
-
-            submitList = _ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Deleted);
-            submitList.Select(e => e.Entity).OfType<IPersistenceObject>()
-                .ForEach<object>(i => Debug.WriteLine(string.Format("Delete: {0} -> {1}", i.GetType(), i.ToString())));
-
-            submitList = _ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Unchanged);
-            submitList.Select(e => e.Entity).OfType<IPersistenceObject>()
-                .ForEach<object>(i => Debug.WriteLine(string.Format("Unchanged: {0} -> {1}", i.GetType(), i.ToString())));
-
-            Debug.WriteLine("************************* Submit Changes <<<< ******************************");
+            Trace.WriteLine("************************* Submit Changes <<<< ******************************");
 #endif
 
-            saveList.ForEach(obj => obj.NotifyPreSave());
+            saveList.OfType<IDataObject>().ForEach(obj => obj.NotifyPreSave());
 
             int result = _ctx.SaveChanges();
 
-            saveList.ForEach(obj => obj.NotifyPostSave());
+            saveList.OfType<IDataObject>().ForEach(obj => obj.NotifyPostSave());
 
             return result;
         }

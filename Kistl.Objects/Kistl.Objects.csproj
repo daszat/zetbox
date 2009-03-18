@@ -105,6 +105,7 @@
     <Compile Include="ViewDescriptor.Interface.Designer.cs" />
     <Compile Include="Visual.Interface.Designer.cs" />
     <Compile Include="Zeitkonto.Interface.Designer.cs" />
+    <Compile Include="CollectionEntries.Interface.Designer.cs" />
     <Compile Include="IRenderer.Interface.Designer.cs" />
     <Compile Include="ITestInterface.Interface.Designer.cs" />
     <Compile Include="Multiplicity.Interface.Designer.cs" />

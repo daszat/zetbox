@@ -1,6 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Implementation.ObjectClasses.CollectionEntries"
-	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.CollectionEntries" 
+	Name="Interface.CollectionEntries.CollectionEntries"
+	ClassName="Kistl.Server.Generators.Templates.Interface.CollectionEntries.CollectionEntries" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
@@ -19,36 +19,14 @@ using System.Xml;
 using System.Xml.Serialization;
 
 using Kistl.API;
-<%
-    foreach(string ns in GetAdditionalImports())
-    {
-%>
-    using <%= ns %>;
-<%
-    }
 
+<%
 	foreach (var rel in ctx.GetQuery<Relation>()
 	    .Where(r => (int)r.Storage == (int)StorageType.Separate)
 	    .ToList()
 	    .OrderBy(r => r.GetCollectionEntryClassName()))
 	{
-
-%>
-
-namespace <%= rel.A.Type.Module.Namespace %>
-{
-<%
-		if (rel.A.Type.Module.Namespace != rel.B.Type.Module.Namespace)
-		{
-%>
-	using <%= rel.B.Type.Module.Namespace %>;
-<%
-		}
-
-		this.CallTemplate("Implementation.CollectionEntries.ObjectCollectionEntry", ctx, rel);
-%>
-}
-<%
+		this.CallTemplate("Interface.CollectionEntries.ObjectCollectionEntry", ctx, rel);
 	}
 
 
@@ -58,14 +36,6 @@ namespace <%= rel.A.Type.Module.Namespace %>
         .ThenBy(p => p.PropertyName))
 	{
 
-%>
-
-namespace <%= prop.ObjectClass.Module.Namespace %>
-{
-<%
-		this.CallTemplate("Implementation.CollectionEntries.ValueCollectionEntry", ctx, prop);
-%>
-}
-<%
+		this.CallTemplate("Interface.CollectionEntries.ValueCollectionEntry", ctx, prop);
 	}
 %>

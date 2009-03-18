@@ -213,14 +213,12 @@ namespace Kistl.API
             {
                 // convert args of things like Generic Collections
                 Type genericType = type.GetGenericTypeDefinition();
-                var genericArguments = new List<Type>();
-                genericArguments.AddRange(type.GetGenericArguments().Select(t => t.ToInterfaceType()));
-
-                return genericType.MakeGenericType(genericArguments.ToArray());
+                var genericArguments = type.GetGenericArguments().Select(t => t.ToInterfaceType()).ToArray();
+                return genericType.MakeGenericType(genericArguments);
             }
             else if (!type.IsInterface)
             {
-                if (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
+                if (typeof(IPersistenceObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
                 {
                     var parts = type.FullName.Split(new string[] { Helper.ImplementationSuffix }, StringSplitOptions.RemoveEmptyEntries);
                     type = Type.GetType(parts[0] + ", " + ApplicationContext.Current.InterfaceAssembly, true);
@@ -247,10 +245,8 @@ namespace Kistl.API
             {
                 // convert args of things like Generic Collections
                 Type genericType = type.GetGenericTypeDefinition();
-                var genericArguments = new List<Type>();
-                genericArguments.AddRange(type.GetGenericArguments().Select(t => t.ToImplementationType()));
-
-                return genericType.MakeGenericType(genericArguments.ToArray());
+                var genericArguments = type.GetGenericArguments().Select(t => t.ToImplementationType()).ToArray();
+                return genericType.MakeGenericType(genericArguments);
             }
             else
             {
@@ -272,7 +268,7 @@ namespace Kistl.API
                 }
                 else if (type.IsInterface)
                 {
-                    if (typeof(IDataObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
+                    if (typeof(IPersistenceObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
                     {
                         // add ImplementationSuffix
                         string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly;

@@ -645,6 +645,17 @@
     </Compile>
     <Compile Include="Generators\Templates\Implementation\TypeBase.Properties.cs" />
     <Compile Include="Generators\Interfaces\InterfaceGenerator.cs" />
+    <Compile Include="Generators\Templates\Interface\CollectionEntries\CollectionEntries.Designer.cs">
+      <DependentUpon>CollectionEntries.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generators\Templates\Interface\CollectionEntries\Template.cs" />
+    <Compile Include="Generators\Templates\Interface\CollectionEntries\Template.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Interface\ProjectFile.cs">
       <DependentUpon>ProjectFile.cst</DependentUpon>
     </Compile>
@@ -780,6 +791,14 @@
     <None Include="Generators\Templates\Implementation\TypeBase.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>TypeBase.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Interface\CollectionEntries\CollectionEntries.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CollectionEntries.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Interface\CollectionEntries\Template.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Template.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\Templates\Interface\ProjectFile.cst">
       <Generator>Arebis Template Processor</Generator>

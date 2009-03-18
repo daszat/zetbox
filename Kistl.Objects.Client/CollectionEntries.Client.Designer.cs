@@ -10,7 +10,7 @@ using Kistl.API;
 namespace Kistl.App.Base
 {
     [System.Diagnostics.DebuggerDisplay("ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__")]
-    public class ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__ : BaseClientCollectionEntry, INewCollectionEntry<ObjectClass, Interface>
+    public class ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__ : BaseClientCollectionEntry, ObjectClass_ImplementsInterfaces49CollectionEntry
     {
     
 // ID is inherited
@@ -149,7 +149,7 @@ namespace Kistl.App.Base
 
 	public override InterfaceType GetInterfaceType()
 	{
-		return new InterfaceType(typeof(INewCollectionEntry<ObjectClass, Interface>));
+		return new InterfaceType(typeof(ObjectClass_ImplementsInterfaces49CollectionEntry));
 	}
 
 
@@ -159,7 +159,7 @@ namespace Kistl.App.Base
 namespace Kistl.App.Projekte
 {
     [System.Diagnostics.DebuggerDisplay("Projekt_Mitarbeiter23CollectionEntry__Implementation__")]
-    public class Projekt_Mitarbeiter23CollectionEntry__Implementation__ : BaseClientCollectionEntry, INewListEntry<Projekt, Mitarbeiter>
+    public class Projekt_Mitarbeiter23CollectionEntry__Implementation__ : BaseClientCollectionEntry, Projekt_Mitarbeiter23CollectionEntry
     {
     
 // ID is inherited
@@ -352,7 +352,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 	public override InterfaceType GetInterfaceType()
 	{
-		return new InterfaceType(typeof(INewListEntry<Projekt, Mitarbeiter>));
+		return new InterfaceType(typeof(Projekt_Mitarbeiter23CollectionEntry));
 	}
 
 
@@ -362,7 +362,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 namespace Kistl.App.GUI
 {
     [System.Diagnostics.DebuggerDisplay("Template_Menu61CollectionEntry__Implementation__")]
-    public class Template_Menu61CollectionEntry__Implementation__ : BaseClientCollectionEntry, INewCollectionEntry<Template, Visual>
+    public class Template_Menu61CollectionEntry__Implementation__ : BaseClientCollectionEntry, Template_Menu61CollectionEntry
     {
     
 // ID is inherited
@@ -501,7 +501,7 @@ namespace Kistl.App.GUI
 
 	public override InterfaceType GetInterfaceType()
 	{
-		return new InterfaceType(typeof(INewCollectionEntry<Template, Visual>));
+		return new InterfaceType(typeof(Template_Menu61CollectionEntry));
 	}
 
 
@@ -511,7 +511,7 @@ namespace Kistl.App.GUI
 namespace Kistl.App.Base
 {
     [System.Diagnostics.DebuggerDisplay("TypeRef_GenericArguments66CollectionEntry__Implementation__")]
-    public class TypeRef_GenericArguments66CollectionEntry__Implementation__ : BaseClientCollectionEntry, INewListEntry<TypeRef, TypeRef>
+    public class TypeRef_GenericArguments66CollectionEntry__Implementation__ : BaseClientCollectionEntry, TypeRef_GenericArguments66CollectionEntry
     {
     
 // ID is inherited
@@ -704,7 +704,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 	public override InterfaceType GetInterfaceType()
 	{
-		return new InterfaceType(typeof(INewListEntry<TypeRef, TypeRef>));
+		return new InterfaceType(typeof(TypeRef_GenericArguments66CollectionEntry));
 	}
 
 
@@ -714,7 +714,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 namespace Kistl.App.GUI
 {
     [System.Diagnostics.DebuggerDisplay("Visual_Children55CollectionEntry__Implementation__")]
-    public class Visual_Children55CollectionEntry__Implementation__ : BaseClientCollectionEntry, INewCollectionEntry<Visual, Visual>
+    public class Visual_Children55CollectionEntry__Implementation__ : BaseClientCollectionEntry, Visual_Children55CollectionEntry
     {
     
 // ID is inherited
@@ -853,7 +853,7 @@ namespace Kistl.App.GUI
 
 	public override InterfaceType GetInterfaceType()
 	{
-		return new InterfaceType(typeof(INewCollectionEntry<Visual, Visual>));
+		return new InterfaceType(typeof(Visual_Children55CollectionEntry));
 	}
 
 
@@ -863,7 +863,7 @@ namespace Kistl.App.GUI
 namespace Kistl.App.GUI
 {
     [System.Diagnostics.DebuggerDisplay("Visual_ContextMenu60CollectionEntry__Implementation__")]
-    public class Visual_ContextMenu60CollectionEntry__Implementation__ : BaseClientCollectionEntry, INewCollectionEntry<Visual, Visual>
+    public class Visual_ContextMenu60CollectionEntry__Implementation__ : BaseClientCollectionEntry, Visual_ContextMenu60CollectionEntry
     {
     
 // ID is inherited
@@ -1002,7 +1002,7 @@ namespace Kistl.App.GUI
 
 	public override InterfaceType GetInterfaceType()
 	{
-		return new InterfaceType(typeof(INewCollectionEntry<Visual, Visual>));
+		return new InterfaceType(typeof(Visual_ContextMenu60CollectionEntry));
 	}
 
 
@@ -1013,7 +1013,7 @@ namespace Kistl.App.Zeiterfassung
 {
 	using Kistl.App.Projekte;
     [System.Diagnostics.DebuggerDisplay("Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__")]
-    public class Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__ : BaseClientCollectionEntry, INewCollectionEntry<Zeitkonto, Mitarbeiter>
+    public class Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__ : BaseClientCollectionEntry, Zeitkonto_Mitarbeiter42CollectionEntry
     {
     
 // ID is inherited
@@ -1152,7 +1152,7 @@ namespace Kistl.App.Zeiterfassung
 
 	public override InterfaceType GetInterfaceType()
 	{
-		return new InterfaceType(typeof(INewCollectionEntry<Zeitkonto, Mitarbeiter>));
+		return new InterfaceType(typeof(Zeitkonto_Mitarbeiter42CollectionEntry));
 	}
 
 
@@ -1162,7 +1162,7 @@ namespace Kistl.App.Zeiterfassung
 namespace Kistl.App.Projekte
 {
     [System.Diagnostics.DebuggerDisplay("Kunde_EMailsCollectionEntry__Implementation__")]
-    public class Kunde_EMailsCollectionEntry__Implementation__ : BaseClientCollectionEntry, INewCollectionEntry<Kunde, System.String>
+    public class Kunde_EMailsCollectionEntry__Implementation__ : BaseClientCollectionEntry, Kunde_EMailsCollectionEntry
     {
     
 // ID is inherited
@@ -1240,7 +1240,7 @@ namespace Kistl.App.Projekte
 
 	public override InterfaceType GetInterfaceType()
 	{
-		return new InterfaceType(typeof(INewCollectionEntry<Kunde, System.String>));
+		return new InterfaceType(typeof(Kunde_EMailsCollectionEntry));
 	}
 
 

@@ -1,17 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Linq;
-using System.Xml;
-using Kistl.API.Server;
-using Kistl.API;
-using System.Diagnostics;
-using System.ServiceModel.Dispatcher;
-using System.ServiceModel;
 using System.IO;
-using System.Linq.Expressions;
+using System.Linq;
+
+using Kistl.API;
+using Kistl.API.Server;
 using Kistl.App.Base;
 
 namespace Kistl.Server

@@ -507,6 +507,20 @@ namespace Kistl.API
         }
 
         /// <summary>
+        /// Foreach Extension Method for IEnumerable. This Extension does not check if the Enumeration Entry is NULL!
+        /// </summary>
+        /// <typeparam name="T">Type of the Objects in the Enumeration.</typeparam>
+        /// <param name="lst">Enumeration</param>
+        /// <param name="action">Action to perform on each element.</param>
+        public static void ForEach<T>(this IEnumerable<T> lst, Action<T> action)
+        {
+            foreach (T obj in lst)
+            {
+                action(obj);
+            }
+        }
+
+        /// <summary>
         /// Foreach Extension Method for IList&lt;>. This Extension does not check if the Enumeration Entry is NULL!
         /// </summary>
         /// <typeparam name="T">Type of the Objects in the Enumeration.</typeparam>
