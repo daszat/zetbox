@@ -68,9 +68,9 @@
 
 #endregion
 
-	public override Type GetInterfaceType()
+	public override InterfaceType GetInterfaceType()
 	{
-		return typeof(<%= GetCeInterface() %>);
+		return new InterfaceType(typeof(<%= GetCeInterface() %>));
 	}
 
 <%
