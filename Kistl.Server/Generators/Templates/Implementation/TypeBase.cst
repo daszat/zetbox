@@ -82,9 +82,9 @@ namespace <%= DataType.Module.Namespace %>
         }
 %>
 
-		public override Type GetInterfaceType()
+		public override InterfaceType GetInterfaceType()
 		{
-			return typeof(<%= DataType.ClassName %>);
+			return new InterfaceType(typeof(<%= DataType.ClassName %>));
 		}
 <%
         ApplyClassTailTemplate();
