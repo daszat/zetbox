@@ -64,10 +64,10 @@ namespace Kistl.App
 		public IQueryable<T> GetQuery<T>()
 			where T : IDataObject
 		{
-			return GetQuery(typeof(T)).Cast<T>();
+			return GetQuery(new InterfaceType(typeof(T))).Cast<T>();
 		}
 
-		public IQueryable<IDataObject> GetQuery(Type t)
+		public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
 		{
 <%
 	foreach(var module in modulesWithFrozenClasses)
@@ -76,7 +76,7 @@ namespace Kistl.App
 		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()))
 		{
 %>
-			if (t == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>))
+			if (ifType == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>))
 				return <%= frozenCls.Module.Namespace %>.<%= Implementation.ObjectClasses.Template.GetClassName(frozenCls) %>.DataStore.Values.AsQueryable().Cast<IDataObject>();
 <%
 		}
@@ -90,7 +90,7 @@ namespace Kistl.App
 			throw new NotImplementedException();
 		}
 		
-        List<T> IKistlContext.GetListOf<T>(Type type, int ID, string propertyName)
+        List<T> IKistlContext.GetListOf<T>(InterfaceType ifType, int ID, string propertyName)
 		{
 			throw new NotImplementedException();
 		}
@@ -102,7 +102,10 @@ namespace Kistl.App
 
         IPersistenceObject IKistlContext.ContainsObject(Type type, int ID)
         {
-			return Find(type, ID);
+			if (!InterfaceType.IsValid(type))
+				return null;
+				
+			return Find(new InterfaceType(type), ID);
         }
 
         public IEnumerable<IPersistenceObject> AttachedObjects
@@ -131,16 +134,16 @@ namespace Kistl.App
 
         bool IKistlContext.IsReadonly { get { return true; } }
 
-        IDataObject IKistlContext.Create(Type type) { throw new ReadOnlyContextException(); }
+        IDataObject IKistlContext.Create(InterfaceType ifType) { throw new ReadOnlyContextException(); }
         T IKistlContext.Create<T>() { throw new ReadOnlyContextException(); }
         
-        ICollectionEntry IKistlContext.CreateCollectionEntry(Type type) { throw new ReadOnlyContextException(); }
+        ICollectionEntry IKistlContext.CreateCollectionEntry(InterfaceType ifType) { throw new ReadOnlyContextException(); }
         T IKistlContext.CreateCollectionEntry<T>() { throw new ReadOnlyContextException(); }
 
-        IStruct IKistlContext.CreateStruct(Type type) { throw new ReadOnlyContextException(); }
+        IStruct IKistlContext.CreateStruct(InterfaceType ifType) { throw new ReadOnlyContextException(); }
         T IKistlContext.CreateStruct<T>() { throw new ReadOnlyContextException(); }
 
-        public IDataObject Find(Type t, int ID)
+        public IDataObject Find(InterfaceType ifType, int ID)
 		{
 <%
 	foreach(var module in modulesWithFrozenClasses)
@@ -149,7 +152,7 @@ namespace Kistl.App
 		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()))
 		{
 %>
-			if (t == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>))
+			if (ifType == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>))
 				return <%= frozenCls.Module.Namespace %>.<%= Implementation.ObjectClasses.Template.GetClassName(frozenCls) %>.DataStore[ID];
 <%
 		}
@@ -161,7 +164,7 @@ namespace Kistl.App
         public T Find<T>(int ID)
 			where T : IDataObject
         {
-			return (T)Find(typeof(T), ID);
+			return (T)Find(new InterfaceType(typeof(T)), ID);
         }
 
 
