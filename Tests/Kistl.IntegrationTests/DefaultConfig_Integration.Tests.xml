@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
+  <Address></Address>
   <ConfigName>Integration Test Configuration</ConfigName>
   <Server StartServer="true">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
@@ -8,13 +9,16 @@
     <KistlDataContextType>Kistl.DALProvider.EF.KistlDataContext, Kistl.DALProvider.EF</KistlDataContextType>
     <ServerObjectHandlerType>Kistl.DALProvider.EF.ServerObjectHandler`1, Kistl.DALProvider.EF</ServerObjectHandlerType>
     <ServerObjectSetHandlerType>Kistl.DALProvider.EF.ServerObjectSetHandler, Kistl.DALProvider.EF</ServerObjectSetHandlerType>
+    <ServerCollectionHandlerType>Kistl.DALProvider.EF.ServerCollectionHandler`4, Kistl.DALProvider.EF</ServerCollectionHandlerType>
   </Server>
   <Client StartClient="true" ThrowErrors="true">
-    <DocumentStore>D:\Programmierung\Kistl\DocumentStore\Client\</DocumentStore>
+    <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
     <string>C:\temp\KistlCodeGen\bin\Debug</string>
     <string>P:\Kistl\bin\Debug</string>
-    <string>P:\Kistl\Kistl.Server\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Objects\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Objects.Server\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Objects.Frozen\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>
