@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-using NUnit.Framework.SyntaxHelpers;
-using Kistl.API.Server.Mocks;
-using System.IO;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+using Kistl.API.Server.Mocks;
+
+using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace Kistl.DalProvider.EF.Tests
 {

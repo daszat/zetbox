@@ -9,7 +9,6 @@ using Kistl.App.Base;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace Kistl.Server.Tests
 {

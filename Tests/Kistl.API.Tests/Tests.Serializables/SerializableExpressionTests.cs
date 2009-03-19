@@ -9,8 +9,6 @@ using System.Text;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using NUnit.Framework.SyntaxHelpers;
-
 
 namespace Kistl.API.Tests.Serializables
 {

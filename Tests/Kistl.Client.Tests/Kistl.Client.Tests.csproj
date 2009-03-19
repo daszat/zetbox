@@ -6,7 +6,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Kistl</RootNamespace>
     <AssemblyName>Kistl.Client.Tests</AssemblyName>
@@ -15,6 +15,11 @@
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(NUnitPath)\nunit.exe</StartProgram>
+    <StartArguments>Kistl.Client.Tests.nunit /config:Studio</StartArguments>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,10 +43,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\NMock2\bin\Debug\NMock2.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Programme\NUnit 2.4.8\bin\nunit.framework.dll</HintPath>
-    </Reference>
+    <Reference Include="nunit.framework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -59,7 +61,6 @@
     <Compile Include="Kistl.Client.Tests\PresenterModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\SynchronousThreadManagerTests.cs" />
     <Compile Include="MockeryTestFixture.cs" />
-    <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
   </ItemGroup>
@@ -83,7 +84,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.Client.Tests.nunit" />
+    <None Include="Kistl.Client.Tests.nunit">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="DefaultConfig.xml">

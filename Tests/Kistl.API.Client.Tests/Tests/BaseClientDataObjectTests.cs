@@ -7,7 +7,6 @@ using System.Text;
 using Kistl.API.Client.Mocks;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace Kistl.API.Client.Tests
 {

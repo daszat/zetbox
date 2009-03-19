@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -11,8 +12,6 @@ using Kistl.App.Projekte;
 using Kistl.App.Test;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
-using System.Collections;
 
 namespace Kistl.DalProvider.EF.Tests
 {

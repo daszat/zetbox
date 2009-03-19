@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.API.Server;
 using Kistl.App.Base;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+using NUnit.Framework.Constraints;
 
 namespace Kistl.Server.Tests
 {

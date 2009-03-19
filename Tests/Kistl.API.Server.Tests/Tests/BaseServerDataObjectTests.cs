@@ -4,13 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Kistl.API;
-using Kistl.API.Server;
+using Kistl.API.Mocks;
 using Kistl.API.Server.Mocks;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
-using Kistl.API.Mocks;
 
 namespace Kistl.API.Server.Tests
 {

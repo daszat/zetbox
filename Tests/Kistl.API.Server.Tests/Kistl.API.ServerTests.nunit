@@ -1,9 +1,12 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" />
   <Config name="Debug" appbase="bin\Debug" configfile="Kistl.API.Server.Tests.exe.config" binpathtype="Auto">
-    <assembly path="Kistl.API.Server.Tests.exe" />
+    <assembly path="Kistl.API.Server.Tests.dll" />
   </Config>
   <Config name="Release" appbase="bin\Release" configfile="Kistl.API.Server.Tests.exe.config" binpathtype="Auto">
-    <assembly path="Kistl.API.Server.Tests.exe" />
+    <assembly path="Kistl.API.Server.Tests.dll" />
+  </Config>
+  <Config name="Studio" appbase="" configfile="Kistl.API.Server.Tests.exe.config" binpathtype="Auto">
+    <assembly path="Kistl.API.Server.Tests.dll" />
   </Config>
 </NUnitProject>

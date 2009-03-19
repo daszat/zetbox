@@ -12,7 +12,6 @@ using Kistl.API.Tests.Skeletons;
 using Kistl.App.Base;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace Kistl.DalProvider.EF.Tests
 {

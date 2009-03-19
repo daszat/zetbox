@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Text;
 
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace Kistl.API.Tests.Serializables
 {

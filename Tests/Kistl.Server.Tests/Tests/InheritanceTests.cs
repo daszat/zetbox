@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using Kistl.API.Server;
+
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using NUnit.Framework.SyntaxHelpers;
-using Kistl.Server;
-using Kistl.API.Server;
 
 namespace Kistl.Server.Tests
 {

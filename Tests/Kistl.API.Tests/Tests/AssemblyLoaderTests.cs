@@ -5,12 +5,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-using Kistl.API;
 using Kistl.API.Mocks;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace Kistl.API.Tests
 {
