@@ -253,7 +253,7 @@ namespace Kistl.API.Server
             }
             else
             {
-                result = Expression.PropertyOrField(e, memberName);
+                result = Expression.MakeMemberAccess(e, m.Member);
             }
             return result;
         }
@@ -268,7 +268,7 @@ namespace Kistl.API.Server
             if (newExpression.Members != null)
             {
                 List<MemberInfo> members = new List<MemberInfo>();
-                foreach(MemberInfo mi in newExpression.Members)
+                foreach (MemberInfo mi in newExpression.Members)
                 {
                     declaringType = mi.DeclaringType.ToImplementationType();
                     if (declaringType.GetMember(mi.Name).Length > 0 && declaringType.GetMember(mi.Name + Kistl.API.Helper.ImplementationSuffix).Length > 0)
@@ -277,8 +277,8 @@ namespace Kistl.API.Server
                     }
                     else
                     {
-                        members.Add(declaringType.GetMember(mi.Name)[0]);                        
-                    }                    
+                        members.Add(declaringType.GetMember(mi.Name)[0]);
+                    }
                 }
                 return Expression.New(c, args, members);
             }

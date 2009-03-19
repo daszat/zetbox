@@ -1,130 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" total="67" failures="0" not-run="5" date="2009-03-18" time="12:56:03">
-  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
+<test-results name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" total="3" errors="0" failures="0" not-run="0" ignored="0" skipped="0" invalid="0" date="2009-03-19" time="18:07:23">
+  <environment nunit-version="2.5.0.9015" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" success="True" time="19.362" asserts="0">
+  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" executed="True" success="True" time="11.648" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\bin\Debug\Kistl.DalProvider.EF.Tests.exe" success="True" time="19.352" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\bin\Debug\Kistl.DalProvider.EF.Tests.dll" executed="True" success="True" time="11.573" asserts="0">
         <results>
-          <test-suite name="Kistl" success="True" time="19.344" asserts="0">
+          <test-suite name="Kistl" executed="True" success="True" time="11.569" asserts="0">
             <results>
-              <test-suite name="DalProvider" success="True" time="19.336" asserts="0">
+              <test-suite name="DalProvider" executed="True" success="True" time="11.567" asserts="0">
                 <results>
-                  <test-suite name="EF" success="True" time="19.327" asserts="0">
+                  <test-suite name="EF" executed="True" success="True" time="11.566" asserts="0">
                     <results>
-                      <test-suite name="Tests" success="True" time="19.317" asserts="0">
+                      <test-suite name="Tests" executed="True" success="True" time="11.563" asserts="0">
                         <results>
-                          <test-suite name="BaseServerDataObjectTests" success="True" time="6.767" asserts="0">
+                          <test-suite name="QueryTranslatorTests" executed="True" success="True" time="7.472" asserts="0">
                             <results>
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.AttachToContext" executed="True" success="True" time="1.348" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.AttachToContext_Other_fails" executed="True" success="True" time="0.012" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.DetachFromContext" executed="True" success="True" time="0.246" asserts="4" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.DetachFromContext_Other" executed="True" success="True" time="0.005" asserts="4" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.fails_on_serializing_from_null_stream" executed="True" success="True" time="0.002" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.fails_on_serializing_to_null_stream" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.FromStream_Attached_fails" executed="True" success="True" time="0.018" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.FromStream_creates_correct_Object" executed="False">
-                                <reason>
-                                  <message><![CDATA[need to implement mocked serialization for ObjectClass]]></message>
-                                </reason>
-                              </test-case>
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.FromStream_of_WrongType_fails" executed="True" success="True" time="0.005" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.NotifyChange" executed="False">
-                                <reason>
-                                  <message><![CDATA[not implemented]]></message>
-                                </reason>
-                              </test-case>
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.ObjectState_CreatedObject_Modified" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.ObjectState_ObjectWithID_Modified" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.ObjectState_should_be_New_when_created" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.ObjectState_should_be_Unmodified_after_setting_ID" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.should_be_attached_after_attaching" executed="False">
-                                <reason>
-                                  <message><![CDATA[Cannot get context without Kistl.API.{Client,Server} reference]]></message>
-                                </reason>
-                              </test-case>
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.should_have_events_attached_after_init" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.should_not_be_attached_when_created" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.should_roundtrip_IPersistenceObject_correctly" executed="True" success="True" time="0.004" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.should_roundtrip_ObjectClass_attributes_correctly" executed="True" success="True" time="5.055" asserts="15" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.should_roundtrip_without_errors" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerDataObjectTests.ToStream_creates_correct_Stream" executed="False">
-                                <reason>
-                                  <message><![CDATA[need to implement mocked serialization for ObjectClass]]></message>
-                                </reason>
-                              </test-case>
-                            </results>
-                          </test-suite>
-                          <test-suite name="BaseServerStructObjectTests" success="True" time="0.014" asserts="0">
-                            <results>
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerStructObjectTests.Clone_creates_memberwise_equal_object" executed="True" success="True" time="0.002" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerStructObjectTests.fails_on_serializing_from_null_stream" executed="True" success="True" time="0.002" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerStructObjectTests.fails_on_serializing_to_null_stream" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerStructObjectTests.FromStream_of_WrongType_fails" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerStructObjectTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.002" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerStructObjectTests.should_roudtrip_members_correctly" executed="True" success="True" time="0.001" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.BaseServerStructObjectTests.should_roundtrip_without_errors" executed="True" success="True" time="0.000" asserts="1" />
-                            </results>
-                          </test-suite>
-                          <test-suite name="KistlDataContextTests" success="True" time="4.097" asserts="0">
-                            <results>
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing" executed="True" success="True" time="2.306" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice" executed="True" success="True" time="0.010" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_Existing_Twice_But_Different" executed="True" success="True" time="0.032" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Attach_IDataObject_New" executed="True" success="True" time="0.010" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.AttachedObjects" executed="True" success="True" time="0.010" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject" executed="True" success="True" time="0.012" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.ContainsObject_Not" executed="True" success="True" time="0.008" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Generic" executed="True" success="True" time="0.012" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_ObjectType" executed="True" success="True" time="0.010" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Create_Type" executed="True" success="True" time="0.010" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Delete_deletes_objects" executed="True" success="True" time="0.292" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Delete_triggers_ObjectDeleted" executed="True" success="True" time="0.027" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject" executed="True" success="True" time="0.029" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Detach_IDataObject_Failed" executed="True" success="True" time="0.011" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_ObjectType_fails_on_invalid_ID" executed="True" success="True" time="0.156" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_ObjectType_returns_right_object" executed="True" success="True" time="0.018" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_T_fails_on_invalid_ID" executed="True" success="True" time="0.022" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.Find_T_returns_right_object" executed="True" success="True" time="0.016" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetContext_returns_a_context" executed="True" success="True" time="0.010" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_ObjType_returns_a_non_empty_list_on_class_DataType" executed="True" success="True" time="0.792" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_ObjType_WrongItemType_fails" executed="True" success="True" time="0.071" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_ObjType_WrongPropertyName_fails" executed="True" success="True" time="0.016" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_T_SubClasses_returns_a_non_empty_list_on_class_DataType" executed="True" success="True" time="0.036" asserts="2" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_T_WrongItemType_fails" executed="True" success="True" time="0.032" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetListOf_T_WrongPropertyName_fails" executed="True" success="True" time="0.016" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetQuery" executed="True" success="True" time="0.011" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.GetQuery_ObjType" executed="True" success="True" time="0.065" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.UpdateSomeData_SubmitChanges" executed="True" success="True" time="0.030" asserts="4" />
-                            </results>
-                          </test-suite>
-                          <test-suite name="Linq" success="True" time="0.076" asserts="0">
-                            <results>
-                              <test-case name="Kistl.DalProvider.EF.Tests.Linq.Count_returns_correct_count" executed="True" success="True" time="0.020" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.Linq.Where_filters_correctly" executed="True" success="True" time="0.054" asserts="2" />
-                            </results>
-                          </test-suite>
-                          <test-suite name="ServerCollectionEntry_EF" success="True" time="0.026" asserts="0">
-                            <results>
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.fails_on_serializing_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.fails_on_serializing_to_null_stream" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.FromStream_of_WrongType_fails" executed="True" success="True" time="0.002" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.ObjectState_CreatedObject_Modified" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.ObjectState_should_be_New_when_created" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.should_be_attached_after_attaching" executed="False">
-                                <reason>
-                                  <message><![CDATA[Cannot get context without Kistl.API.{Client,Server} reference]]></message>
-                                </reason>
-                              </test-case>
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.should_be_attached_to_EFContext_after_attaching" executed="True" success="True" time="0.006" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.should_have_a_RelationshipManager" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.should_have_Detached_EntityState_when_created" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.should_have_no_EntityKey_when_created" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.should_not_be_attached_when_created" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.should_roundtrip_IPersistenceObject_correctly" executed="True" success="True" time="0.001" asserts="3" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.ServerCollectionEntry_EF.should_roundtrip_without_errors" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.DalProvider.EF.Tests.QueryTranslatorTests.test_against_class" executed="True" success="True" time="6.975" asserts="0" />
+                              <test-case name="Kistl.DalProvider.EF.Tests.QueryTranslatorTests.test_against_interface" executed="True" success="True" time="0.121" asserts="0" />
+                              <test-case name="Kistl.DalProvider.EF.Tests.QueryTranslatorTests.test_against_kistl_object" executed="True" success="True" time="0.368" asserts="0" />
                             </results>
                           </test-suite>
                         </results>

@@ -7,6 +7,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.API.Server;
+using Kistl.App.Base;
 using Kistl.App.Projekte;
 using Kistl.App.Test;
 using Kistl.DalProvider.EF.Mocks;
@@ -89,6 +90,7 @@ namespace Kistl.DalProvider.EF.Tests
 
             Assert.That(linqResult, Is.EqualTo(localResult));
         }
+
 
     }
 }
