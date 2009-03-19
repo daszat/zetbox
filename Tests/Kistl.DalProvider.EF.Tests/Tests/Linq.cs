@@ -7,9 +7,9 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.API.Server;
-using Kistl.API.Server.Mocks;
 using Kistl.App.Projekte;
 using Kistl.App.Test;
+using Kistl.DalProvider.EF.Mocks;
 
 using NUnit.Framework;
 

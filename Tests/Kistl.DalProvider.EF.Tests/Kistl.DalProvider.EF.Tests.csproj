@@ -83,7 +83,7 @@
     <Compile Include="Tests\KistlDataContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DefaultConfig_API.Server.Tests.xml">
+    <None Include="DefaultConfig_DalProvider.EF.Tests.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Kistl.DalProvider.EF.Tests.nunit">

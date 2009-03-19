@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Kistl.API.Server.Mocks;
+using Kistl.DalProvider.EF.Mocks;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;

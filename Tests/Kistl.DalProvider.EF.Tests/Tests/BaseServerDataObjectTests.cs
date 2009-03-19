@@ -7,9 +7,9 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.API.Server;
-using Kistl.API.Server.Mocks;
 using Kistl.API.Tests.Skeletons;
 using Kistl.App.Base;
+using Kistl.DalProvider.EF.Mocks;
 
 using NUnit.Framework;
 
@@ -166,7 +166,7 @@ namespace Kistl.DalProvider.EF.Tests
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var result = ctx.Create<ObjectClass>();
                 result.FromStream(sr);
@@ -177,7 +177,7 @@ namespace Kistl.DalProvider.EF.Tests
         public void AttachToContext()
         {
             Assert.That(obj.Context, Is.Null);
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -190,12 +190,12 @@ namespace Kistl.DalProvider.EF.Tests
         public void AttachToContext_Other_fails()
         {
             Assert.That(obj.Context, Is.Null);
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
-                using (IKistlContext ctx2 = Kistl.API.Server.KistlContext.GetContext())
+                using (IKistlContext ctx2 = KistlContext.GetContext())
                 {
                     obj.AttachToContext(ctx2);
                     Assert.That(obj.Context, Is.Not.Null);
@@ -209,7 +209,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             Assert.That(obj.Context, Is.Null);
             obj.ID = 10;
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 ctx.Attach(obj);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -227,7 +227,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             Assert.That(obj.Context, Is.Null);
             obj.ID = 10;
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 ctx.Attach(obj);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -236,7 +236,7 @@ namespace Kistl.DalProvider.EF.Tests
                 Assert.That(obj.Context, Is.Null);
                 Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
 
-                using (IKistlContext ctx2 = Kistl.API.Server.KistlContext.GetContext())
+                using (IKistlContext ctx2 = KistlContext.GetContext())
                 {
                     obj.DetachFromContext(ctx2);
                     Assert.That(obj.Context, Is.Null);
