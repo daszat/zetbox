@@ -31,49 +31,33 @@ namespace Kistl.API.Tests
             var testCtx = new TestApplicationContext();
         }
 
-        [Test]
-        public void Bool()
+        [Datapoints]
+        public readonly bool[] Bools = new[] { true, false };
+
+        [Theory]
+        public void should_handle_bools(bool value)
         {
-            bool toval, fromval;
-            toval = true;
-            BinarySerializer.ToStream(toval, sw);
+            BinarySerializer.ToStream(value, sw);
             ms.Seek(0, SeekOrigin.Begin);
 
-            BinarySerializer.FromStream(out fromval, sr);
-            Assert.That(fromval, Is.EqualTo(toval));
+            bool readValue;
+            BinarySerializer.FromStream(out readValue, sr);
+            Assert.That(readValue, Is.EqualTo(value));
         }
 
-        [Test]
-        public void BoolNull()
+        [Theory]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void should_always_fail_on_writing_to_null_stream_bool(bool value)
         {
-            bool? toval, fromval;
-            toval = null;
-
-            BinarySerializer.ToStream(toval, sw);
-            ms.Seek(0, SeekOrigin.Begin);
-
-            BinarySerializer.FromStream(out fromval, sr);
-            Assert.That(fromval, Is.EqualTo(toval));
-        }
-
-        [Test]
-        public void BoolNullValue()
-        {
-            bool? toval, fromval;
-            toval = true;
-            BinarySerializer.ToStream(toval, sw);
-            ms.Seek(0, SeekOrigin.Begin);
-
-            BinarySerializer.FromStream(out fromval, sr);
-            Assert.That(fromval, Is.EqualTo(toval));
+            BinarySerializer.ToStream(value, null);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        [Ignore("This needs quite a bit of these tests yet")]
-        public void BoolNullStream()
+        public void should_always_fail_on_reading_from_null_stream_bool()
         {
-            BinarySerializer.ToStream(true, null);
+            bool value;
+            BinarySerializer.FromStream(out value, null);
         }
 
         [Test]

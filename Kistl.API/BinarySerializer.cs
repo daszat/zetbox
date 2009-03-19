@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 
 namespace Kistl.API
 {
@@ -28,20 +29,23 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(bool val, System.IO.BinaryWriter sw)
+        public static void ToStream(bool val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing bool {0} (1 byte)", val);
             sw.Write(val);
         }
+
 
         /// <summary>
         /// Deserialize a bool
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out bool val, System.IO.BinaryReader sr)
+        public static void FromStream(out bool val, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             val = sr.ReadBoolean();
             SerializerTrace("read bool {0}", val);
@@ -53,8 +57,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(bool? val, System.IO.BinaryWriter sw)
+        public static void ToStream(bool? val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing bool? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
@@ -65,8 +70,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out bool? val, System.IO.BinaryReader sr)
+        public static void FromStream(out bool? val, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             val = sr.ReadBoolean() ? (bool?)sr.ReadBoolean() : null;
             SerializerTrace("read bool? {0}", val);
@@ -81,8 +87,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(DateTime val, System.IO.BinaryWriter sw)
+        public static void ToStream(DateTime val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing DateTime {0} (8 bytes)", val);
             sw.Write(val.ToBinary());
@@ -93,8 +100,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out DateTime val, System.IO.BinaryReader sr)
+        public static void FromStream(out DateTime val, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             val = DateTime.FromBinary(sr.ReadInt64());
             SerializerTrace("read DateTime {0}", val);
@@ -105,8 +113,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(DateTime? val, System.IO.BinaryWriter sw)
+        public static void ToStream(DateTime? val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing DateTime? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value.ToBinary()); } else sw.Write(false);
@@ -117,8 +126,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out DateTime? val, System.IO.BinaryReader sr)
+        public static void FromStream(out DateTime? val, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             val = sr.ReadBoolean() ? (DateTime?)DateTime.FromBinary(sr.ReadInt64()) : null;
             SerializerTrace("read DateTime? {0}", val);
@@ -133,8 +143,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(double val, System.IO.BinaryWriter sw)
+        public static void ToStream(double val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing double {0}", val);
             sw.Write(val);
@@ -145,8 +156,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out double val, System.IO.BinaryReader sr)
+        public static void FromStream(out double val, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             val = sr.ReadDouble();
             SerializerTrace("read double {0}", val);
@@ -157,8 +169,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(double? val, System.IO.BinaryWriter sw)
+        public static void ToStream(double? val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing double? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
@@ -169,8 +182,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out double? val, System.IO.BinaryReader sr)
+        public static void FromStream(out double? val, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             val = sr.ReadBoolean() ? (double?)sr.ReadDouble() : null;
             SerializerTrace("read double? {0}", val);
@@ -185,8 +199,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(float val, System.IO.BinaryWriter sw)
+        public static void ToStream(float val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing float {0}", val);
             sw.Write(val);
@@ -197,8 +212,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out float val, System.IO.BinaryReader sr)
+        public static void FromStream(out float val, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             val = sr.ReadSingle();
             SerializerTrace("read float {0}", val);
@@ -209,8 +225,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(float? val, System.IO.BinaryWriter sw)
+        public static void ToStream(float? val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing float? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
@@ -221,8 +238,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out float? val, System.IO.BinaryReader sr)
+        public static void FromStream(out float? val, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             val = sr.ReadBoolean() ? (float?)sr.ReadSingle() : null;
             SerializerTrace("read float? {0}", val);
@@ -237,8 +255,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(int val, System.IO.BinaryWriter sw)
+        public static void ToStream(int val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing int {0} (four bytes)", val);
             sw.Write(val);
@@ -249,8 +268,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out int val, System.IO.BinaryReader sr)
+        public static void FromStream(out int val, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             val = sr.ReadInt32();
             SerializerTrace("read int {0} (4 bytes)", val);
@@ -261,8 +281,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="conv"></param>
         /// <param name="sr"></param>
-        public static void FromStreamConverter(Action<int> conv, System.IO.BinaryReader sr)
+        public static void FromStreamConverter(Action<int> conv, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             int val = sr.ReadInt32();
             conv(val);
@@ -274,8 +295,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(int? val, System.IO.BinaryWriter sw)
+        public static void ToStream(int? val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing int? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
@@ -285,8 +307,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out int? val, System.IO.BinaryReader sr)
+        public static void FromStream(out int? val, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             val = sr.ReadBoolean() ? (int?)sr.ReadInt32() : null;
             SerializerTrace("read int? {0}", val);
@@ -302,7 +325,7 @@ namespace Kistl.API
         /// <param name="obj"></param>
         /// <param name="sw"></param>
         /// TODO: See Case 805
-        public static void ToStream(IPersistenceObject obj, System.IO.BinaryWriter sw)
+        public static void ToStream(IPersistenceObject obj, BinaryWriter sw)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (sw == null) throw new ArgumentNullException("sw");
@@ -329,8 +352,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWriter to serialize to.</param>
-        public static void ToStream(IStruct val, System.IO.BinaryWriter sw)
+        public static void ToStream(IStruct val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing IStruct {0}", val);
             if (val != null) { sw.Write(true); val.ToStream(sw); } else sw.Write(false);
@@ -341,9 +365,10 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream<T>(out T val, System.IO.BinaryReader sr)
+        public static void FromStream<T>(out T val, BinaryReader sr)
             where T : class, IStruct, new()
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             val = null;
             if (sr.ReadBoolean())
@@ -363,8 +388,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="e">SerializableExpression to serialize.</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(SerializableExpression e, System.IO.BinaryWriter sw)
+        public static void ToStream(SerializableExpression e, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             if (e != null)
             {
@@ -383,8 +409,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="e">Expression Tree.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out SerializableExpression e, System.IO.BinaryReader sr)
+        public static void FromStream(out SerializableExpression e, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             e = null;
             if (sr.ReadBoolean())
@@ -403,7 +430,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="type">SerializableType to serialize.</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(SerializableType type, System.IO.BinaryWriter sw)
+        public static void ToStream(SerializableType type, BinaryWriter sw)
         {
             if (type == null) throw new ArgumentNullException("type");
             if (sw == null) throw new ArgumentNullException("sw");
@@ -425,7 +452,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="type">SerializableType</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out SerializableType type, System.IO.BinaryReader sr)
+        public static void FromStream(out SerializableType type, BinaryReader sr)
         {
             if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
@@ -446,8 +473,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStream(string val, System.IO.BinaryWriter sw)
+        public static void ToStream(string val, BinaryWriter sw)
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             long beginPos = sw.BaseStream.Position;
             if (val != null) { sw.Write(true); sw.Write(val); } else sw.Write(false);
@@ -467,8 +495,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out string val, System.IO.BinaryReader sr)
+        public static void FromStream(out string val, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             long beginPos = sr.BaseStream.Position;
             val = sr.ReadBoolean() ? sr.ReadString() : null;
@@ -488,8 +517,9 @@ namespace Kistl.API
         /// </summary>
         /// <param name="conv"></param>
         /// <param name="sr"></param>
-        public static void FromStreamConverter(Action<string> conv, System.IO.BinaryReader sr)
+        public static void FromStreamConverter(Action<string> conv, BinaryReader sr)
         {
+            if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             bool hasValue = sr.ReadBoolean();
             if (hasValue)
@@ -514,9 +544,10 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Collection to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
-        public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, System.IO.BinaryWriter sw)
+        public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, BinaryWriter sw)
             where T : ICollectionEntry
         {
+            if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             foreach (ICollectionEntry obj in val)
             {
@@ -534,7 +565,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStreamCollectionEntries<T>(ICollection<T> val, System.IO.BinaryReader sr)
+        public static void FromStreamCollectionEntries<T>(ICollection<T> val, BinaryReader sr)
             where T : ICollectionEntry, new()
         {
             if (val == null) throw new ArgumentNullException("val");
