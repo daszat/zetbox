@@ -1,0 +1,526 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="P:\Kistl\Tests\Kistl.API.Tests\Kistl.API.Tests.nunit" total="281" errors="0" failures="0" not-run="1" ignored="1" skipped="0" invalid="0" date="2009-03-19" time="14:21:30">
+  <environment nunit-version="2.5.0.9015" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.API.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
+  <culture-info current-culture="de-AT" current-uiculture="de-DE" />
+  <test-suite name="P:\Kistl\Tests\Kistl.API.Tests\Kistl.API.Tests.nunit" executed="True" success="True" time="1.687" asserts="0">
+    <results>
+      <test-suite name="P:\Kistl\Tests\Kistl.API.Tests\bin\Debug\Kistl.API.Tests.dll" executed="True" success="True" time="1.641" asserts="0">
+        <results>
+          <test-suite name="Kistl" executed="True" success="True" time="1.606" asserts="0">
+            <results>
+              <test-suite name="API" executed="True" success="True" time="1.568" asserts="0">
+                <results>
+                  <test-suite name="Tests" executed="True" success="True" time="1.567" asserts="0">
+                    <results>
+                      <test-suite name="ApplicationContextTests" executed="True" success="True" time="0.582" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.ApplicationContextTests.IDisposable_Dispose" executed="True" success="True" time="0.491" asserts="2" />
+                          <test-case name="Kistl.API.Tests.ApplicationContextTests.IDisposable_Finalizer" executed="True" success="True" time="0.009" asserts="1" />
+                          <test-case name="Kistl.API.Tests.ApplicationContextTests.InitDefaultConfig" executed="True" success="True" time="0.008" asserts="2" />
+                          <test-case name="Kistl.API.Tests.ApplicationContextTests.PersistsTypes" executed="True" success="True" time="0.002" asserts="4" />
+                          <test-case name="Kistl.API.Tests.ApplicationContextTests.SetCustomActionsManagerCallsInit" executed="True" success="True" time="0.044" asserts="1" />
+                          <test-case name="Kistl.API.Tests.ApplicationContextTests.SetCustomActionsManagerNull" executed="True" success="True" time="0.002" asserts="0" />
+                          <test-case name="Kistl.API.Tests.ApplicationContextTests.SetCustomActionsManagerTwice" executed="True" success="True" time="0.004" asserts="0" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="AssemblyLoaderTests" executed="True" success="True" time="0.004" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.AssemblyLoaderTests.AssemblyResolve" executed="True" success="True" time="0.003" asserts="0" />
+                          <test-case name="Kistl.API.Tests.AssemblyLoaderTests.AssemblyResolveReflection" executed="True" success="True" time="0.001" asserts="0" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_bools" executed="True" success="True" time="0.010" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_bools.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.002" asserts="0" />
+                          <test-suite name="should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.003" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_bools.should_fail_on_writing_to_null_stream(False)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_bools.should_fail_on_writing_to_null_stream(True)" executed="True" success="True" time="0.001" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="should_roundtrip" executed="True" success="True" time="0.003" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_bools.should_roundtrip(False)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_bools.should_roundtrip(True)" executed="True" success="True" time="0.000" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_CollectionEntries" executed="True" success="True" time="0.025" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_CollectionEntries.can_roundtrip_list_with_multiple_entries" executed="True" success="True" time="0.006" asserts="1" />
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_CollectionEntries.can_roundtrip_list_with_no_entry" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_CollectionEntries.can_roundtrip_list_with_single_entry" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_CollectionEntries.can_roundtrip_observablelist" executed="True" success="True" time="0.012" asserts="1" />
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_CollectionEntries.cannot_deserialize_collection_entries_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_CollectionEntries.cannot_deserialize_collection_entries_to_null_collection" executed="True" success="True" time="0.001" asserts="0" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_DateTimes" executed="True" success="True" time="0.018" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_DateTimes.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-suite name="should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.006" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_DateTimes.should_fail_on_writing_to_null_stream(01/02/2008 00:00:00)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_DateTimes.should_fail_on_writing_to_null_stream(03/19/2009 00:00:00)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_DateTimes.should_fail_on_writing_to_null_stream(03/19/2009 13:21:28)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_DateTimes.should_fail_on_writing_to_null_stream(03/19/2009 14:21:28)" executed="True" success="True" time="0.001" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="should_roundtrip" executed="True" success="True" time="0.005" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_DateTimes.should_roundtrip(01/02/2008 00:00:00)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_DateTimes.should_roundtrip(03/19/2009 00:00:00)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_DateTimes.should_roundtrip(03/19/2009 13:21:28)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_DateTimes.should_roundtrip(03/19/2009 14:21:28)" executed="True" success="True" time="0.000" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_doubles" executed="True" success="True" time="0.043" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-suite name="should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.019" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(0.0d)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(0.1d)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(-0.1d)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(1.0d)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(-1.0d)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(10.0d)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(-10.0d)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(4.94065645841247E-324d)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(double.MaxValue)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(double.MinValue)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(double.NaN)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(double.NegativeInfinity)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_fail_on_writing_to_null_stream(double.PositiveInfinity)" executed="True" success="True" time="0.001" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="should_roundtrip" executed="True" success="True" time="0.020" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(0.0d)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(0.1d)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(-0.1d)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(1.0d)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(-1.0d)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(10.0d)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(-10.0d)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(4.94065645841247E-324d)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(double.MaxValue)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(double.MinValue)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(double.NaN)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(double.NegativeInfinity)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_doubles.should_roundtrip(double.PositiveInfinity)" executed="True" success="True" time="0.000" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_floats" executed="True" success="True" time="0.047" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-suite name="should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.018" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(0.0f)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(0.1f)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(-0.1f)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(1.0f)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(-1.0f)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(1.401298E-45f)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(10.0f)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(-10.0f)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(float.MaxValue)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(float.MinValue)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(float.NaN)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(float.NegativeInfinity)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_fail_on_writing_to_null_stream(float.PositiveInfinity)" executed="True" success="True" time="0.001" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="should_roundtrip" executed="True" success="True" time="0.023" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(0.0f)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(0.1f)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(-0.1f)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(1.0f)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(-1.0f)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(1.401298E-45f)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(10.0f)" executed="True" success="True" time="0.005" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(-10.0f)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(float.MaxValue)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(float.MinValue)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(float.NaN)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(float.NegativeInfinity)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_floats.should_roundtrip(float.PositiveInfinity)" executed="True" success="True" time="0.000" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_ints" executed="True" success="True" time="0.035" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-suite name="should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.014" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_writing_to_null_stream(0)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_writing_to_null_stream(1)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_writing_to_null_stream(-1)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_writing_to_null_stream(255)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_writing_to_null_stream(-255)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_writing_to_null_stream(256)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_writing_to_null_stream(-256)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_writing_to_null_stream(257)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_writing_to_null_stream(-257)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_writing_to_null_stream(int.MaxValue)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_fail_on_writing_to_null_stream(int.MinValue)" executed="True" success="True" time="0.001" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="should_roundtrip" executed="True" success="True" time="0.016" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_roundtrip(0)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_roundtrip(1)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_roundtrip(-1)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_roundtrip(255)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_roundtrip(-255)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_roundtrip(256)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_roundtrip(-256)" executed="True" success="True" time="0.002" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_roundtrip(257)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_roundtrip(-257)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_roundtrip(int.MaxValue)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_ints.should_roundtrip(int.MinValue)" executed="True" success="True" time="0.001" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_nullable_bools" executed="True" success="True" time="0.014" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_bools.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-suite name="should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.005" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_bools.should_fail_on_writing_to_null_stream(False)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_bools.should_fail_on_writing_to_null_stream(null)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_bools.should_fail_on_writing_to_null_stream(True)" executed="True" success="True" time="0.001" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="should_roundtrip" executed="True" success="True" time="0.004" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_bools.should_roundtrip(False)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_bools.should_roundtrip(null)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_bools.should_roundtrip(True)" executed="True" success="True" time="0.001" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_nullable_DateTimes" executed="True" success="True" time="0.020" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_DateTimes.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-suite name="should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.007" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_DateTimes.should_fail_on_writing_to_null_stream(01/02/2008 00:00:00)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_DateTimes.should_fail_on_writing_to_null_stream(03/19/2009 00:00:00)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_DateTimes.should_fail_on_writing_to_null_stream(03/19/2009 13:21:28)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_DateTimes.should_fail_on_writing_to_null_stream(03/19/2009 14:21:28)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_DateTimes.should_fail_on_writing_to_null_stream(null)" executed="True" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="should_roundtrip" executed="True" success="True" time="0.008" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_DateTimes.should_roundtrip(01/02/2008 00:00:00)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_DateTimes.should_roundtrip(03/19/2009 00:00:00)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_DateTimes.should_roundtrip(03/19/2009 13:21:28)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_DateTimes.should_roundtrip(03/19/2009 14:21:28)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_DateTimes.should_roundtrip(null)" executed="True" success="True" time="0.001" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_nullable_doubles" executed="True" success="True" time="0.048" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-suite name="should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.022" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(0.0d)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(0.1d)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(-0.1d)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(1.0d)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(-1.0d)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(10.0d)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(-10.0d)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(4.94065645841247E-324d)" executed="True" success="True" time="0.002" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(double.MaxValue)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(double.MinValue)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(double.NaN)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(double.NegativeInfinity)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(double.PositiveInfinity)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_fail_on_writing_to_null_stream(null)" executed="True" success="True" time="0.001" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="should_roundtrip" executed="True" success="True" time="0.020" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(0.0d)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(0.1d)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(-0.1d)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(1.0d)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(-1.0d)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(10.0d)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(-10.0d)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(4.94065645841247E-324d)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(double.MaxValue)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(double.MinValue)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(double.NaN)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(double.NegativeInfinity)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(double.PositiveInfinity)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_doubles.should_roundtrip(null)" executed="True" success="True" time="0.000" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_nullable_floats" executed="True" success="True" time="0.047" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-suite name="should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.019" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(0.0f)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(0.1f)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(-0.1f)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(1.0f)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(-1.0f)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(1.401298E-45f)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(10.0f)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(-10.0f)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(float.MaxValue)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(float.MinValue)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(float.NaN)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(float.NegativeInfinity)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(float.PositiveInfinity)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_fail_on_writing_to_null_stream(null)" executed="True" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="should_roundtrip" executed="True" success="True" time="0.023" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(0.0f)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(0.1f)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(-0.1f)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(1.0f)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(-1.0f)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(1.401298E-45f)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(10.0f)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(-10.0f)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(float.MaxValue)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(float.MinValue)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(float.NaN)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(float.NegativeInfinity)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(float.PositiveInfinity)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_floats.should_roundtrip(null)" executed="True" success="True" time="0.000" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_nullable_ints" executed="True" success="True" time="0.042" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-suite name="should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.019" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(0)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(1)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(-1)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(255)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(-255)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(256)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(-256)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(257)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(-257)" executed="True" success="True" time="0.000" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(int.MaxValue)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(int.MinValue)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_fail_on_writing_to_null_stream(null)" executed="True" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="should_roundtrip" executed="True" success="True" time="0.018" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(0)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(1)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(-1)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(255)" executed="True" success="True" time="0.002" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(-255)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(256)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(-256)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(257)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(-257)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(int.MaxValue)" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(int.MinValue)" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_nullable_ints.should_roundtrip(null)" executed="True" success="True" time="0.000" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_SerializableTypes" executed="True" success="True" time="0.132" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_SerializableTypes.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_SerializableTypes.should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.005" asserts="0" />
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_SerializableTypes.should_not_accept_nulls" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_SerializableTypes.should_roundtrip" executed="True" success="True" time="0.004" asserts="4" />
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_SerializableTypes.should_serialize_complete_expressions" executed="True" success="True" time="0.118" asserts="2" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_strings" executed="True" success="True" time="0.014" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_strings.should_fail_on_reading_from_null_stream" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-suite name="should_fail_on_writing_to_null_stream" executed="True" success="True" time="0.005" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_strings.should_fail_on_writing_to_null_stream(&quot;&quot;)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_strings.should_fail_on_writing_to_null_stream(&quot;Hello, World!&quot;)" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_strings.should_fail_on_writing_to_null_stream(null)" executed="True" success="True" time="0.000" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="should_roundtrip" executed="True" success="True" time="0.006" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_strings.should_roundtrip(&quot;&quot;)" executed="True" success="True" time="0.001" asserts="3" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_strings.should_roundtrip(&quot;Hello, World!&quot;)" executed="True" success="True" time="0.000" asserts="3" />
+                              <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_strings.should_roundtrip(null)" executed="True" success="True" time="0.000" asserts="3" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="BinarySerializerTests+when_serializing_Structs" executed="True" success="True" time="0.004" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_Structs.IStruct" executed="True" success="True" time="0.002" asserts="1" />
+                          <test-case name="Kistl.API.Tests.BinarySerializerTests+when_serializing_Structs.IStructNull" executed="True" success="True" time="0.001" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="ExpressionFilterTest" executed="True" success="True" time="0.020" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.ExpressionFilterTest.IllegalExpression" executed="True" success="True" time="0.013" asserts="1" />
+                          <test-case name="Kistl.API.Tests.ExpressionFilterTest.IllegalExpressionClass_UnknownToString" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.API.Tests.ExpressionFilterTest.LegalExpression" executed="True" success="True" time="0.002" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="ExpressionTreeVisitorTests" executed="True" success="True" time="0.071" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.ExpressionTreeVisitorTests.Visit" executed="True" success="True" time="0.071" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="ExtensionHelpersTest" executed="True" success="True" time="0.043" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.ForEach_IEnumerable" executed="True" success="True" time="0.002" asserts="1" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.ForEach_List" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.ForEach_ObservableCollection" executed="True" success="True" time="0.004" asserts="1" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPrivateFieldValue" executed="True" success="True" time="0.004" asserts="3" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPrivateFieldValue_InvalidPropertyName" executed="True" success="True" time="0.000" asserts="0" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPrivatePropertyValue" executed="True" success="True" time="0.002" asserts="1" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPrivatePropertyValue_InvalidPropertyName" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPropertyValue" executed="True" success="True" time="0.003" asserts="3" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.GetPropertyValue_InvalidPropertyName" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.In" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.InFalse" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPrivateFieldValue" executed="True" success="True" time="0.004" asserts="3" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPrivateFieldValue_InvalidPropertyName" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPrivatePropertyValue" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPrivatePropertyValue_InvalidPropertyName" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPropertyValue" executed="True" success="True" time="0.002" asserts="3" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.SetPropertyValue_InvalidPropertyName" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.API.Tests.ExtensionHelpersTest.XmlString" executed="False">
+                            <reason>
+                              <message><![CDATA[XML Serialization dysfunctional]]></message>
+                            </reason>
+                          </test-case>
+                        </results>
+                      </test-suite>
+                      <test-suite name="HelperTest" executed="True" success="True" time="0.003" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.HelperTest.IsFloatingObjectTest" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="Kistl.API.Tests.HelperTest.IsPersistedObject" executed="True" success="True" time="0.000" asserts="2" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="KistlConfigTests" executed="True" success="True" time="0.045" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.KistlConfigTests.ConfigurationExceptionWithMessage" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.API.Tests.KistlConfigTests.ConfigurationExceptionWithoutMessage" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="Kistl.API.Tests.KistlConfigTests.DefaultLoading" executed="True" success="True" time="0.000" asserts="3" />
+                          <test-case name="Kistl.API.Tests.KistlConfigTests.FromStream" executed="True" success="True" time="0.002" asserts="9" />
+                          <test-case name="Kistl.API.Tests.KistlConfigTests.FromTextReader" executed="True" success="True" time="0.001" asserts="9" />
+                          <test-case name="Kistl.API.Tests.KistlConfigTests.LoadFile" executed="True" success="True" time="0.001" asserts="3" />
+                          <test-case name="Kistl.API.Tests.KistlConfigTests.ToFile" executed="True" success="True" time="0.032" asserts="2" />
+                          <test-case name="Kistl.API.Tests.KistlConfigTests.ToStream" executed="True" success="True" time="0.001" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="KistlServiceStreamsMessageTests" executed="True" success="True" time="0.003" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.KistlServiceStreamsMessageTests.Stream" executed="True" success="True" time="0.003" asserts="3" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="LinqExtensionsTests" executed="True" success="True" time="0.157" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddEqualityCondition" executed="True" success="True" time="0.058" asserts="1" />
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddEqualityCondition_InvalidProperty" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddEqualityCondition_InvalidType" executed="True" success="True" time="0.044" asserts="0" />
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddFilter" executed="True" success="True" time="0.012" asserts="1" />
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddFilter_IllegalExpression" executed="True" success="True" time="0.001" asserts="0" />
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddOrderBy" executed="True" success="True" time="0.014" asserts="2" />
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddOrderBy_WithQuote" executed="True" success="True" time="0.001" asserts="2" />
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.AddSelector" executed="True" success="True" time="0.010" asserts="1" />
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.GetExpressionValue_Constant" executed="True" success="True" time="0.002" asserts="1" />
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.GetExpressionValue_LambdaExpression" executed="True" success="True" time="0.002" asserts="0" />
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.GetExpressionValue_MemberExpression_Field" executed="True" success="True" time="0.001" asserts="1" />
+                          <test-case name="Kistl.API.Tests.LinqExtensionsTests.GetExpressionValue_MemberExpression_Property" executed="True" success="True" time="0.000" asserts="1" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="NotifyingObservableCollectionTests" executed="True" success="True" time="0.018" asserts="0">
+                        <results>
+                          <test-case name="Kistl.API.Tests.NotifyingObservableCollectionTests.Event" executed="True" success="True" time="0.004" asserts="1" />
+                          <test-case name="Kistl.API.Tests.NotifyingObservableCollectionTests.List" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.API.Tests.NotifyingObservableCollectionTests.Property" executed="True" success="True" time="0.000" asserts="1" />
+                          <test-case name="Kistl.API.Tests.NotifyingObservableCollectionTests.SetItem" executed="True" success="True" time="0.003" asserts="1" />
+                          <test-case name="Kistl.API.Tests.NotifyingObservableCollectionTests.SetItem_WithBeginUpdate" executed="True" success="True" time="0.001" asserts="2" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="Serializables" executed="True" success="True" time="0.032" asserts="0">
+                        <results>
+                          <test-suite name="ConstantExpressions" executed="True" success="True" time="0.005" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.Serializables.ConstantExpressions.roundtrip_Constant_interface" executed="True" success="True" time="0.003" asserts="4" />
+                              <test-case name="Kistl.API.Tests.Serializables.ConstantExpressions.roundtrip_Constant_object" executed="True" success="True" time="0.001" asserts="3" />
+                              <test-case name="Kistl.API.Tests.Serializables.ConstantExpressions.roundtrip_Constant_string" executed="True" success="True" time="0.000" asserts="3" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="MemberExpressions" executed="True" success="True" time="0.002" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.Serializables.MemberExpressions.roundtrip_MemberAccess_to_string_Length_property_should_optimize_constness" executed="True" success="True" time="0.002" asserts="3" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="SerializableExpressionTests" executed="True" success="True" time="0.002" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.Serializables.SerializableExpressionTests.FromExpression_null_fails" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.Serializables.SerializableExpressionTests.ToExpression_null_fails" executed="True" success="True" time="0.001" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="SerializableTypeTests" executed="True" success="True" time="0.005" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.Serializables.SerializableTypeTests.GetHashCode_returns_right_value" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Tests.Serializables.SerializableTypeTests.GetSystemType_fails_on_invalid_AssemblyQualifiedName" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.Serializables.SerializableTypeTests.GetSystemType_fails_on_invalid_TypeName" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Tests.Serializables.SerializableTypeTests.GetSystemType_returns_right_type" executed="True" success="True" time="0.000" asserts="1" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="SerializerMockTests" executed="True" success="True" time="0.010" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Tests.Serializables.SerializerMockTests.AssertCorrectContents_correctly_identifies_ToStream_result" executed="True" success="True" time="0.010" asserts="24" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                      <test-suite name="Skeletons" executed="True" success="False" time="0.001" asserts="0">
+                        <results>
+                          <test-suite name="IDataObjectTests&lt;T&gt;" executed="True" success="False" time="0.000" asserts="0" />
+                          <test-suite name="IStreamableTests&lt;T&gt;" executed="True" success="False" time="0.000" asserts="0" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
