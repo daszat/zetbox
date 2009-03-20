@@ -64,11 +64,12 @@ namespace Kistl.DALProvider.EF
                     MarkEveryPropertyAsModified(ctx, obj);
                 }
             }
-            foreach (var obj in objects.OfType<IDataObject>())
+            foreach (var obj in objects.OfType<IPersistenceObject>())
             {
                 if (obj.ObjectState != DataObjectState.Deleted)
                 {
-                    UpdateRelationships(ctx, obj);
+                    obj.ReloadReferences();
+                    //UpdateRelationships(ctx, obj);
                 }
             }
             return base.SetObjects(ctx, objects);
@@ -81,14 +82,14 @@ namespace Kistl.DALProvider.EF
         /// <param name="obj"></param>
         protected static void UpdateRelationships(IKistlContext ctx, IDataObject obj)
         {
-            using (IKistlContext frozenctx = Kistl.API.Server.KistlContext.GetContext())
+            using (IKistlContext frozenctx = FrozenContext.Single)
             {
-                Kistl.App.Base.ObjectClass objClass = obj.GetObjectClass(frozenctx);
+                ObjectClass objClass = obj.GetObjectClass(frozenctx);
                 while (objClass != null)
                 {
-                    var listProperties = objClass.Properties.OfType<Kistl.App.Base.ObjectReferenceProperty>()
+                    var listProperties = objClass.Properties.OfType<ObjectReferenceProperty>()
                         .ToList().Where(p => p.HasStorage());
-                    foreach (Kistl.App.Base.ObjectReferenceProperty p in listProperties)
+                    foreach (ObjectReferenceProperty p in listProperties)
                     {
                         if (!p.IsList)
                         {
@@ -196,10 +197,9 @@ namespace Kistl.DALProvider.EF
             var relEnd = rel.GetEnd(endRole);
             var relOtherEnd = rel.GetOtherEnd(relEnd);
             var parent = ctx.Find<PARENT>(parentId);
-            var ceType = Type.GetType(rel.GetCollectionEntryFullName() + 
-                Kistl.API.Helper.ImplementationSuffix + 
+            var ceType = Type.GetType(rel.GetCollectionEntryFullName() +
+                Kistl.API.Helper.ImplementationSuffix +
                 ", " + ApplicationContext.Current.ImplementationAssembly);
-            
 
             var method = this.GetType().GetMethod("GetCollectionEntriesInternal", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             return (IEnumerable<ICollectionEntry>)method

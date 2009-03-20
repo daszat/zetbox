@@ -431,6 +431,26 @@ namespace Kistl.App.Base
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_Method.HasValue)
+				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
+			else
+				Method__Implementation__ = null;
+			if (_fk_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+			else
+				Module__Implementation__ = null;
+			if (_fk_InvokeOnObjectClass.HasValue)
+				InvokeOnObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_InvokeOnObjectClass.Value);
+			else
+				InvokeOnObjectClass__Implementation__ = null;
+			if (_fk_Implementor.HasValue)
+				Implementor__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_Implementor.Value);
+			else
+				Implementor__Implementation__ = null;
+		}
 
 #region Serializer
 

@@ -107,6 +107,10 @@ namespace Kistl.App.GUI
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+		}
 
 #region Serializer
 

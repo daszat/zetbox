@@ -53,6 +53,10 @@ namespace Kistl.API.Mocks
             BinarySerializer.ToStream(TestName, sw);
         }
 
+        public void ReloadReferences()
+        {
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangingEventHandler PropertyChanging;
 

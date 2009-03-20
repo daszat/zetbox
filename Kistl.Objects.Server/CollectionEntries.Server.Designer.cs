@@ -211,10 +211,24 @@ namespace Kistl.App.Base
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(ObjectClass_ImplementsInterfaces49CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(ObjectClass_ImplementsInterfaces49CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+			if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Interface__Implementation__)Context.Find<Kistl.App.Base.Interface>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
 
 
     }
@@ -481,10 +495,24 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Projekt_Mitarbeiter23CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Projekt_Mitarbeiter23CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.Find<Kistl.App.Projekte.Projekt>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+			if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
 
 
     }
@@ -691,10 +719,24 @@ namespace Kistl.App.GUI
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Template_Menu61CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Template_Menu61CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Template__Implementation__)Context.Find<Kistl.App.GUI.Template>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+			if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
 
 
     }
@@ -961,10 +1003,24 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(TypeRef_GenericArguments66CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(TypeRef_GenericArguments66CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+			if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
 
 
     }
@@ -1171,10 +1227,24 @@ namespace Kistl.App.GUI
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Visual_Children55CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Visual_Children55CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+			if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
 
 
     }
@@ -1381,10 +1451,24 @@ namespace Kistl.App.GUI
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Visual_ContextMenu60CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Visual_ContextMenu60CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+			if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
 
 
     }
@@ -1592,10 +1676,24 @@ namespace Kistl.App.Zeiterfassung
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Zeitkonto_Mitarbeiter42CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Zeitkonto_Mitarbeiter42CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Zeiterfassung.Zeitkonto__Implementation__)Context.Find<Kistl.App.Zeiterfassung.Zeitkonto>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+			if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
 
 
     }
@@ -1743,10 +1841,19 @@ namespace Kistl.App.Projekte
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Kunde_EMailsCollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Kunde_EMailsCollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			if (_fk_A.HasValue)
+				A__Implementation__ = (Kunde__Implementation__)Context.Find<Kunde>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+	
+		}
 
 
     }

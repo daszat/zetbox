@@ -147,10 +147,15 @@ namespace Kistl.App.Base
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(ObjectClass_ImplementsInterfaces49CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(ObjectClass_ImplementsInterfaces49CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+	
+		}
 
 
     }
@@ -350,10 +355,15 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Projekt_Mitarbeiter23CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Projekt_Mitarbeiter23CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+	
+		}
 
 
     }
@@ -499,10 +509,15 @@ namespace Kistl.App.GUI
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Template_Menu61CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Template_Menu61CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+	
+		}
 
 
     }
@@ -702,10 +717,15 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(TypeRef_GenericArguments66CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(TypeRef_GenericArguments66CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+	
+		}
 
 
     }
@@ -851,10 +871,15 @@ namespace Kistl.App.GUI
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Visual_Children55CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Visual_Children55CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+	
+		}
 
 
     }
@@ -1000,10 +1025,15 @@ namespace Kistl.App.GUI
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Visual_ContextMenu60CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Visual_ContextMenu60CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+	
+		}
 
 
     }
@@ -1150,10 +1180,15 @@ namespace Kistl.App.Zeiterfassung
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Zeitkonto_Mitarbeiter42CollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Zeitkonto_Mitarbeiter42CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+	
+		}
 
 
     }
@@ -1238,10 +1273,15 @@ namespace Kistl.App.Projekte
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(Kunde_EMailsCollectionEntry));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Kunde_EMailsCollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+	
+		}
 
 
     }

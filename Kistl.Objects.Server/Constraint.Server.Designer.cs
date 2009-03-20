@@ -232,6 +232,14 @@ namespace Kistl.App.Base
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_ConstrainedProperty.HasValue)
+				ConstrainedProperty__Implementation__ = (Kistl.App.Base.BaseProperty__Implementation__)Context.Find<Kistl.App.Base.BaseProperty>(_fk_ConstrainedProperty.Value);
+			else
+				ConstrainedProperty__Implementation__ = null;
+		}
 
 #region Serializer
 

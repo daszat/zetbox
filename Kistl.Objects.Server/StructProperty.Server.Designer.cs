@@ -206,6 +206,16 @@ namespace Kistl.App.Base
 
 
 
+		public override void ReloadReferences()
+		{
+			base.ReloadReferences();
+			
+			// fix direct object references
+			if (_fk_StructDefinition.HasValue)
+				StructDefinition__Implementation__ = (Kistl.App.Base.Struct__Implementation__)Context.Find<Kistl.App.Base.Struct>(_fk_StructDefinition.Value);
+			else
+				StructDefinition__Implementation__ = null;
+		}
 
 #region Serializer
 

@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-using Kistl.API;
-using Kistl.API.Server;
-
-namespace Kistl.API.Server.Tests
+namespace Kistl.API.Server.Mocks
 {
 
     public class TestNameCollectionWrapper

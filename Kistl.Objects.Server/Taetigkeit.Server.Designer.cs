@@ -376,6 +376,22 @@ namespace Kistl.App.Zeiterfassung
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_Mitarbeiter.HasValue)
+				Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
+			else
+				Mitarbeiter__Implementation__ = null;
+			if (_fk_Zeitkonto.HasValue)
+				Zeitkonto__Implementation__ = (Kistl.App.Zeiterfassung.Zeitkonto__Implementation__)Context.Find<Kistl.App.Zeiterfassung.Zeitkonto>(_fk_Zeitkonto.Value);
+			else
+				Zeitkonto__Implementation__ = null;
+			if (_fk_TaetigkeitsArt.HasValue)
+				TaetigkeitsArt__Implementation__ = (Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__)Context.Find<Kistl.App.Zeiterfassung.TaetigkeitsArt>(_fk_TaetigkeitsArt.Value);
+			else
+				TaetigkeitsArt__Implementation__ = null;
+		}
 
 #region Serializer
 

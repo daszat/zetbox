@@ -483,6 +483,11 @@
     <Compile Include="Generators\EntityFramework\Implementation\CollectionEntries\ValueCollectionEntry.Properties.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\IdProperty.cs" />
+    <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReloadReferences.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\ValueCollectionProperty.cs">
       <DependentUpon>ValueCollectionProperty.cst</DependentUpon>
     </Compile>
@@ -552,15 +557,23 @@
     <Compile Include="Generators\Interfaces\Implementation\ProjectFile.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
-    <Compile Include="Generators\Templates\Implementation\CollectionEntries\Template.Properties.cs" />
-    <Compile Include="Generators\Templates\Implementation\CollectionEntries\Template.cs" />
+    <Compile Include="Generators\Templates\Implementation\CollectionEntries\Template.Properties.cs"  >
+      <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Implementation\CollectionEntries\Template.cs" >
+      <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\Template.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Template.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cs" />
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cs" />
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cs" >
+      <DependentUpon>CollectionEntries.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cs"  >
+      <DependentUpon>CollectionEntryListProperty.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -642,14 +655,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TypeBase.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Implementation\TypeBase.Properties.cs" />
+    <Compile Include="Generators\Templates\Implementation\TypeBase.Properties.cs" >
+      <DependentUpon>TypeBase.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Interfaces\InterfaceGenerator.cs" />
     <Compile Include="Generators\Templates\Interface\CollectionEntries\CollectionEntries.Designer.cs">
       <DependentUpon>CollectionEntries.cst</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Generators\Templates\Interface\CollectionEntries\Template.cs" />
+    <Compile Include="Generators\Templates\Interface\CollectionEntries\Template.cs" >
+      <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Interface\CollectionEntries\Template.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -709,6 +726,10 @@
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertyTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ReloadReferences.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cst">
       <Generator>Arebis Template Processor</Generator>

@@ -185,6 +185,16 @@ namespace Kistl.App.Base
 
 
 
+		public override void ReloadReferences()
+		{
+			base.ReloadReferences();
+			
+			// fix direct object references
+			if (_fk_DataType.HasValue)
+				DataType__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_DataType.Value);
+			else
+				DataType__Implementation__ = null;
+		}
 
 #region Serializer
 

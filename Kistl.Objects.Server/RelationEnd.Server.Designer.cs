@@ -363,6 +363,18 @@ namespace Kistl.App.Base
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_Type.HasValue)
+				Type__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_Type.Value);
+			else
+				Type__Implementation__ = null;
+			if (_fk_Navigator.HasValue)
+				Navigator__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_Navigator.Value);
+			else
+				Navigator__Implementation__ = null;
+		}
 
 #region Serializer
 

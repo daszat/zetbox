@@ -331,6 +331,14 @@ namespace Kistl.App.Base
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_Method.HasValue)
+				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
+			else
+				Method__Implementation__ = null;
+		}
 
 #region Serializer
 

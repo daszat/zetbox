@@ -63,16 +63,6 @@ namespace Kistl.API.Client.Tests
                 }
             }
 
-            public void ToStream(System.IO.BinaryWriter sw)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void FromStream(System.IO.BinaryReader sr)
-            {
-                throw new NotImplementedException();
-            }
-
             public void NotifyPropertyChanging(string property)
             {
                 throw new NotImplementedException();
@@ -106,6 +96,25 @@ namespace Kistl.API.Client.Tests
             public InterfaceType GetInterfaceType()
             {
                 return new InterfaceType(typeof(IDataObject));
+            }
+
+            #endregion
+
+            #region IStreamable Members
+
+            public void ToStream(System.IO.BinaryWriter sw)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void FromStream(System.IO.BinaryReader sr)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void ReloadReferences()
+            {
+                throw new NotImplementedException();
             }
 
             #endregion

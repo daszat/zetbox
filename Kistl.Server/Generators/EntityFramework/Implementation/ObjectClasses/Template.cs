@@ -140,5 +140,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 
             base.ApplyObjectReferenceListTemplate(prop);
         }
+
+        protected override void ApplyClassTailTemplate()
+        {
+            base.ApplyClassTailTemplate();
+            this.CallTemplate("Implementation.ObjectClasses.ReloadReferences", ctx, this.DataType);
+        }
     }
 }

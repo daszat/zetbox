@@ -21,6 +21,23 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
 
         }
 
+        protected override void ApplyReloadReferenceBody()
+        {
+            base.ApplyReloadReferenceBody();
+
+            this.WriteObjects("\t\t\tif (_fk_A.HasValue)");
+            this.WriteLine();
+            this.WriteObjects("\t\t\t\tA__Implementation__ = (",
+                    prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix,
+                    ")Context.Find<",
+                    prop.ObjectClass.ClassName,
+                    ">(_fk_A.Value);");
+            this.WriteLine();
+            this.WriteObjects("\t\t\telse");
+            this.WriteLine();
+            this.WriteObjects("\t\t\t\tA__Implementation__ = null;");
+            this.WriteLine();
+        }
 
     }
 }

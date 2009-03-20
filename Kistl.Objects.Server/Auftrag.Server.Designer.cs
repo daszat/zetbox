@@ -397,6 +397,22 @@ namespace Kistl.App.Projekte
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_Mitarbeiter.HasValue)
+				Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
+			else
+				Mitarbeiter__Implementation__ = null;
+			if (_fk_Projekt.HasValue)
+				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
+			else
+				Projekt__Implementation__ = null;
+			if (_fk_Kunde.HasValue)
+				Kunde__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)Context.Find<Kistl.App.Projekte.Kunde>(_fk_Kunde.Value);
+			else
+				Kunde__Implementation__ = null;
+		}
 
 #region Serializer
 

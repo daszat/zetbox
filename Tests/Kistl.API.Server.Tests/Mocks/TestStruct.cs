@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.API.Server.Tests
+namespace Kistl.API.Server.Mocks
 {
     public class TestStruct : BaseServerStructObject
     {

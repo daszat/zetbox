@@ -311,6 +311,18 @@ namespace Kistl.App.Base
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+			if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+		}
 
 #region Serializer
 

@@ -337,6 +337,18 @@ namespace Kistl.App.GUI
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_PresenterAssembly.HasValue)
+				PresenterAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_PresenterAssembly.Value);
+			else
+				PresenterAssembly__Implementation__ = null;
+			if (_fk_DataAssembly.HasValue)
+				DataAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_DataAssembly.Value);
+			else
+				DataAssembly__Implementation__ = null;
+		}
 
 #region Serializer
 

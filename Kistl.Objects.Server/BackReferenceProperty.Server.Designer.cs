@@ -232,6 +232,16 @@ namespace Kistl.App.Base
 
 
 
+		public override void ReloadReferences()
+		{
+			base.ReloadReferences();
+			
+			// fix direct object references
+			if (_fk_ReferenceProperty.HasValue)
+				ReferenceProperty__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)Context.Find<Kistl.App.Base.ObjectReferenceProperty>(_fk_ReferenceProperty.Value);
+			else
+				ReferenceProperty__Implementation__ = null;
+		}
 
 #region Serializer
 

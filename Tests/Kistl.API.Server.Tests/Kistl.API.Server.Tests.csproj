@@ -66,15 +66,16 @@
     <Compile Include="Mocks\CustomActionsManagerAPITest.cs" />
     <Compile Include="Mocks\KistlContextMock.cs" />
     <Compile Include="Mocks\ServerApiContextMock.cs" />
-    <Compile Include="TestObjClass.cs" />
+    <Compile Include="Mocks\TestObjClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
-    <Compile Include="TestObjClass_TestNameCollectionEntry.cs" />
-    <Compile Include="TestObjClassImpl.cs" />
-    <Compile Include="TestStruct.cs" />
+    <Compile Include="Mocks\TestObjClass_TestNameCollectionEntry.cs" />
+    <Compile Include="Mocks\TestObjClassImpl.cs" />
+    <Compile Include="Mocks\TestStruct.cs" />
     <Compile Include="Tests\BaseServerCollectionEntryTests.cs" />
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />
     <Compile Include="Tests\BaseServerStructObjectTests.cs" />
+    <Compile Include="Tests\QueryTranslatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DefaultConfig_API.Server.Tests.xml">

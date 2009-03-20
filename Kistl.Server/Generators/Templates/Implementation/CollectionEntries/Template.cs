@@ -49,6 +49,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         /// <returns>true, if any side is ordered</returns>
         protected abstract bool IsOrdered();
 
+        protected virtual void ApplyReloadReferenceBody() { }
+
         protected virtual void ApplyClassTailTemplate() { }
 
     }

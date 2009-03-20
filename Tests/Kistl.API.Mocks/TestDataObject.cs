@@ -73,6 +73,10 @@ namespace Kistl.API.Mocks
             BinarySerializer.FromStream(out _BoolProperty, sr);
         }
 
+        public void ReloadReferences()
+        {
+        }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();

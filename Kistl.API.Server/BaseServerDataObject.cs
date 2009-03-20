@@ -83,6 +83,8 @@ namespace Kistl.API.Server
 
         public abstract bool IsAttached { get; }
 
+        #region IStreamable Members
+
         /// <summary>
         /// Base method for serializing this Object.
         /// </summary>
@@ -114,6 +116,10 @@ namespace Kistl.API.Server
             BinarySerializer.FromStreamConverter(i => ID = i, sr);
             BinarySerializer.FromStreamConverter(i => ObjectState = (DataObjectState)i, sr);
         }
+
+        public virtual void ReloadReferences() { }
+
+        #endregion
 
         /// <summary>
         /// Notifies that a Property is changing
@@ -262,7 +268,7 @@ namespace Kistl.API.Server
             _attachedObjectProperty = "";
         }
 
-        #region IStruct Members
+        #region IStreamable Members
 
         /// <summary>
         /// Base method for serializing this Object.
@@ -288,6 +294,9 @@ namespace Kistl.API.Server
             if (this.GetInterfaceType() != t.GetSystemType())
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
         }
+
+        // Structs don't have ObjectReferences
+        public void ReloadReferences() { }
 
         #endregion
 

@@ -51,6 +51,12 @@ namespace Kistl.API
         /// <param name="sr">BinaryReader to deserialize to.</param>
         void FromStream(System.IO.BinaryReader sr);
 
+        /// <summary>
+        /// Reloads Relations from internal storage into the providers caches.
+        /// Should be called after de-serializing and attaching an object graph 
+        /// to notify the provider of all references within the graph.
+        /// </summary>
+        void ReloadReferences();
     }
 
     /// <summary>

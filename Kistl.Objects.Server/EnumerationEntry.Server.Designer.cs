@@ -240,6 +240,14 @@ namespace Kistl.App.Base
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_Enumeration.HasValue)
+				Enumeration__Implementation__ = (Kistl.App.Base.Enumeration__Implementation__)Context.Find<Kistl.App.Base.Enumeration>(_fk_Enumeration.Value);
+			else
+				Enumeration__Implementation__ = null;
+		}
 
 #region Serializer
 

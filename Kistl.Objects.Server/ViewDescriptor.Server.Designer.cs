@@ -285,6 +285,18 @@ namespace Kistl.App.Base
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_LayoutRef.HasValue)
+				LayoutRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_LayoutRef.Value);
+			else
+				LayoutRef__Implementation__ = null;
+			if (_fk_ViewRef.HasValue)
+				ViewRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_ViewRef.Value);
+			else
+				ViewRef__Implementation__ = null;
+		}
 
 #region Serializer
 

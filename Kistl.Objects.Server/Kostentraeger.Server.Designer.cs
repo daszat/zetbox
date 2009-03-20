@@ -143,6 +143,16 @@ namespace Kistl.App.Zeiterfassung
 
 
 
+		public override void ReloadReferences()
+		{
+			base.ReloadReferences();
+			
+			// fix direct object references
+			if (_fk_Projekt.HasValue)
+				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
+			else
+				Projekt__Implementation__ = null;
+		}
 
 #region Serializer
 

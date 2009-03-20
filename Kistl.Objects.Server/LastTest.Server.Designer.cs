@@ -81,6 +81,10 @@ namespace Kistl.App.Test
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+		}
 
 #region Serializer
 

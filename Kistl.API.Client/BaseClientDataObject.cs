@@ -108,6 +108,8 @@ namespace Kistl.API.Client
             this.ID = obj.ID;
         }
 
+        #region IStreamable Members
+
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");
@@ -135,6 +137,10 @@ namespace Kistl.API.Client
             BinarySerializer.FromStream(out tmp, sr);
             ObjectState = (DataObjectState)tmp;
         }
+
+        public virtual void ReloadReferences() { }
+
+        #endregion
 
         #region Property Change Notification
 
@@ -181,7 +187,7 @@ namespace Kistl.API.Client
             }
             else
             {
-                if(!notifications.Contains(property))
+                if (!notifications.Contains(property))
                     notifications.Add(property);
             }
         }
@@ -262,12 +268,20 @@ namespace Kistl.API.Client
 
     public abstract class BaseClientStructObject : IStruct, INotifyPropertyChanged, INotifyPropertyChanging
     {
+
+        #region IStreamable Members
+
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
         }
         public virtual void FromStream(System.IO.BinaryReader sr)
         {
         }
+
+        // Structs don't have ObjectReferences
+        public void ReloadReferences() { }
+
+        #endregion
 
         public object Clone()
         {

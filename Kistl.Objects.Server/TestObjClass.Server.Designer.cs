@@ -277,6 +277,14 @@ namespace Kistl.App.Test
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_ObjectProp.HasValue)
+				ObjectProp__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)Context.Find<Kistl.App.Projekte.Kunde>(_fk_ObjectProp.Value);
+			else
+				ObjectProp__Implementation__ = null;
+		}
 
 #region Serializer
 

@@ -22,6 +22,9 @@ namespace Kistl.API.Mocks
             ID = _tmp;
         }
 
+        public void ReloadReferences()
+        {
+        }
 
         public object Clone()
         {

@@ -1,0 +1,47 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.ReloadReferences"
+	ClassName="Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ReloadReferences" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="cls" Type="ObjectClass" %>
+
+		public override void ReloadReferences()
+		{
+<%
+	if (cls.BaseObjectClass != null) {
+%>
+			base.ReloadReferences();
+			
+<%
+	}
+%>
+			// fix direct object references
+<%
+	foreach(var prop in ctx.GetQuery<ObjectReferenceProperty>().Where(orp => !orp.IsList && orp.ObjectClass.ID == cls.ID))
+	{
+		Relation rel = RelationExtensions.Lookup(ctx, prop);
+		RelationEnd relEnd = rel.GetEnd(prop);
+        RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+        
+        string referencedInterface = otherEnd.Type.GetDataTypeString();
+        string referencedImplementation = otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix;
+        string name = prop.PropertyName;
+		string efName = name + Kistl.API.Helper.ImplementationSuffix;
+		string fkBackingName = "_fk_" + name;
+%>
+			if (<%= fkBackingName %>.HasValue)
+				<%= efName %> = (<%= referencedImplementation %>)Context.Find<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
+			else
+				<%= efName %> = null;
+<%
+	}
+%>
+		}

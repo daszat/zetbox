@@ -480,6 +480,18 @@ namespace Kistl.App.Base
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+			else
+				Module__Implementation__ = null;
+			if (_fk_DefaultIcon.HasValue)
+				DefaultIcon__Implementation__ = (Kistl.App.GUI.Icon__Implementation__)Context.Find<Kistl.App.GUI.Icon>(_fk_DefaultIcon.Value);
+			else
+				DefaultIcon__Implementation__ = null;
+		}
 
 #region Serializer
 

@@ -68,10 +68,18 @@
 
 #endregion
 
-	public override InterfaceType GetInterfaceType()
-	{
-		return new InterfaceType(typeof(<%= GetCeInterface() %>));
-	}
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(<%= GetCeInterface() %>));
+		}
+	
+		public override void ReloadReferences()
+		{
+<%
+    ApplyReloadReferenceBody();
+%>
+	
+		}
 
 <%
     ApplyClassTailTemplate();

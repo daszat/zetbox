@@ -5,12 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-using Kistl.API;
-using Kistl.API.Server;
 using Kistl.API.Mocks;
-using Kistl.API.Server.Mocks;
 
-namespace Kistl.API.Server.Tests
+namespace Kistl.API.Server.Mocks
 {
 
     public class TestObjClass__Implementation__ : BaseServerDataObject, TestObjClass

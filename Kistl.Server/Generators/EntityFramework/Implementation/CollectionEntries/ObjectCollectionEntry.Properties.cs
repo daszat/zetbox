@@ -15,7 +15,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
         {
             RelationEnd relEnd = rel.GetEnd(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
-            
+
             CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
                 this.MembersToSerialize,
                 propertyName, rel.GetCollectionEntryAssociationName(endRole), relEnd.RoleName,
@@ -40,5 +40,34 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
                 this.WriteObjects("public int? ", endRole, "Index { get { return null; } set { } }");
             }
         }
+
+        protected override void ApplyReloadReferenceBody()
+        {
+            base.ApplyReloadReferenceBody();
+
+            ReloadReference(RelationEndRole.A);
+            this.WriteLine();
+
+            ReloadReference(RelationEndRole.B);
+        }
+
+        private void ReloadReference(RelationEndRole endRole)
+        {
+            RelationEnd relend = rel.GetEnd(endRole);
+
+            this.WriteObjects("\t\t\tif (_fk_", endRole.ToString(), ".HasValue)");
+            this.WriteLine();
+            this.WriteObjects("\t\t\t\t", endRole.ToString(), "__Implementation__ = (",
+                    relend.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix, 
+                    ")Context.Find<",
+                    relend.Type.GetDataTypeString(),
+                    ">(_fk_", endRole.ToString(), ".Value);");
+            this.WriteLine();
+            this.WriteObjects("\t\t\telse");
+            this.WriteLine();
+            this.WriteObjects("\t\t\t\t", endRole.ToString(), "__Implementation__ = null;");
+            this.WriteLine();
+        }
+
     }
 }

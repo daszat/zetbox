@@ -363,6 +363,18 @@ namespace Kistl.App.GUI
 
 
 
+		public override void ReloadReferences()
+		{
+			// fix direct object references
+			if (_fk_VisualTree.HasValue)
+				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_VisualTree.Value);
+			else
+				VisualTree__Implementation__ = null;
+			if (_fk_DisplayedTypeAssembly.HasValue)
+				DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
+			else
+				DisplayedTypeAssembly__Implementation__ = null;
+		}
 
 #region Serializer
 

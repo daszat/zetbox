@@ -62,6 +62,12 @@ namespace Kistl.App.Zeiterfassung
 
 
 
+		public override void ReloadReferences()
+		{
+			base.ReloadReferences();
+			
+			// fix direct object references
+		}
 
 #region Serializer
 

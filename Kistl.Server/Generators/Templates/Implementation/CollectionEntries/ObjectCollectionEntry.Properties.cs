@@ -41,5 +41,6 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         /// Creates a index property for this RelationEnd
         /// </summary>
         protected abstract void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole);
+
     }
 }

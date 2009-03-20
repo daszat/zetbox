@@ -34,6 +34,8 @@ namespace Kistl.DalProvider.Frozen
 
         public DataObjectState ObjectState { get { return DataObjectState.Unmodified; } }
 
+        #region IStreamable Members
+
         public virtual void ToStream(System.IO.BinaryWriter sw)
         {
             BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
@@ -45,6 +47,11 @@ namespace Kistl.DalProvider.Frozen
         {
             throw new InvalidOperationException("Cannot deserialize to a frozen Object");
         }
+
+        // frozen objects are already connected
+        public void ReloadReferences() { }
+
+        #endregion
 
         public void NotifyPropertyChanging(string property) { }
 
