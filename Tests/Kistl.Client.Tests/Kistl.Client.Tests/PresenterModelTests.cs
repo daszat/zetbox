@@ -13,6 +13,7 @@ using NUnit.Framework;
 namespace Kistl.Client.Tests
 {
     [TestFixture]
+    [Ignore]
     public class PresenterModelTests : MockeryTestFixture
     {
         //internal class PresentableModelInspector : PresentableModel
