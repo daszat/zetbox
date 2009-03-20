@@ -1228,7 +1228,10 @@ namespace Kistl.App.Projekte
                     return;
 
                 _ACache = value;
-                fk_A = value.ID;
+                if (value != null)
+					fk_A = value.ID;
+				else
+					fk_A = null;
             }
         }
         private Kunde _ACache;

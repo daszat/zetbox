@@ -42,7 +42,10 @@
                     return;
 
                 <%= cacheName %> = value;
-                <%= fkName %> = value.ID;
+                if (value != null)
+					<%= fkName %> = value.ID;
+				else
+					<%= fkName %> = null;
             }
         }
         private <%= referencedInterface %> <%= cacheName %>;

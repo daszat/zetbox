@@ -60,7 +60,10 @@ this.WriteObjects("                if (value != null && ",  backingName , ".HasV
 this.WriteObjects("                    return;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                ",  cacheName , " = value;\r\n");
-this.WriteObjects("                ",  fkName , " = value.ID;\r\n");
+this.WriteObjects("                if (value != null)\r\n");
+this.WriteObjects("					",  fkName , " = value.ID;\r\n");
+this.WriteObjects("				else\r\n");
+this.WriteObjects("					",  fkName , " = null;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  referencedInterface , " ",  cacheName , ";\r\n");
@@ -85,7 +88,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        // backing store for serialization\r\n");
 this.WriteObjects("        private int? ",  backingName , ";\r\n");
 this.WriteObjects("        \r\n");
-#line 71 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 74 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
 if (serializationList != null)
 		serializationList.Add(backingName);
 
