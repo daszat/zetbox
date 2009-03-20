@@ -132,7 +132,14 @@ namespace Kistl.DALProvider.EF
             // The reason is that "GetEntityName" returns a Query to the baseobject 
             // but maybe a derived object is asked. OfType will filter this.
             // return (ObjectQuery<T>)_table[type];
-            return ((IQueryable<T>)_table[type]).OfType<T>();
+            // Also query uncomitted objects, which seem to be ignored by EF
+            return _ctx.ObjectStateManager
+                    .GetObjectStateEntries(System.Data.EntityState.Added)
+                    .Select(ose => ose.Entity)
+                    .OfType<T>()
+                    .AsQueryable()
+                    .Concat(
+                        ((IQueryable<T>)_table[type]).OfType<T>());
         }
 
         public System.Collections.IList GetListHack<T>()
@@ -223,11 +230,6 @@ namespace Kistl.DALProvider.EF
         /// <returns>Number of affected Objects</returns>
         public override int SubmitChanges()
         {
-            var saveList = _ctx.ObjectStateManager
-                .GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified)
-                .Select(e => e.Entity)
-                .OfType<IPersistenceObject>()
-                .ToList();
 
 #if DEBUG
             Trace.WriteLine("************************* >>>> Submit Changes ******************************");
@@ -251,6 +253,12 @@ namespace Kistl.DALProvider.EF
 
             Trace.WriteLine("************************* Submit Changes <<<< ******************************");
 #endif
+
+            var saveList = _ctx.ObjectStateManager
+                .GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified)
+                .Select(e => e.Entity)
+                .OfType<IPersistenceObject>()
+                .ToList();
 
             saveList.OfType<IDataObject>().ForEach(obj => obj.NotifyPreSave());
 

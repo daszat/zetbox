@@ -78,7 +78,7 @@ namespace Kistl.Server
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
 
-                        foreach (IDataObject obj in changedObjects)
+                        foreach (var obj in changedObjects)
                         {
                             BinarySerializer.ToStream(true, sw);
                             obj.ToStream(sw);

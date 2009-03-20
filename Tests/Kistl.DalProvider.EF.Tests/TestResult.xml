@@ -1,25 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" total="3" errors="0" failures="0" not-run="0" ignored="0" skipped="0" invalid="0" date="2009-03-19" time="18:07:23">
+<test-results name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" total="1" errors="0" failures="0" not-run="0" ignored="0" skipped="0" invalid="0" date="2009-03-20" time="12:09:20">
   <environment nunit-version="2.5.0.9015" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" executed="True" success="True" time="11.648" asserts="0">
+  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.nunit" executed="True" success="True" time="12.683" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\bin\Debug\Kistl.DalProvider.EF.Tests.dll" executed="True" success="True" time="11.573" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.EF.Tests\bin\Debug\Kistl.DalProvider.EF.Tests.dll" executed="True" success="True" time="12.601" asserts="0">
         <results>
-          <test-suite name="Kistl" executed="True" success="True" time="11.569" asserts="0">
+          <test-suite name="Kistl" executed="True" success="True" time="12.598" asserts="0">
             <results>
-              <test-suite name="DalProvider" executed="True" success="True" time="11.567" asserts="0">
+              <test-suite name="DalProvider" executed="True" success="True" time="12.595" asserts="0">
                 <results>
-                  <test-suite name="EF" executed="True" success="True" time="11.566" asserts="0">
+                  <test-suite name="EF" executed="True" success="True" time="12.594" asserts="0">
                     <results>
-                      <test-suite name="Tests" executed="True" success="True" time="11.563" asserts="0">
+                      <test-suite name="Tests" executed="True" success="True" time="12.593" asserts="0">
                         <results>
-                          <test-suite name="QueryTranslatorTests" executed="True" success="True" time="7.472" asserts="0">
+                          <test-suite name="KistlDataContextTests" executed="True" success="True" time="8.447" asserts="0">
                             <results>
-                              <test-case name="Kistl.DalProvider.EF.Tests.QueryTranslatorTests.test_against_class" executed="True" success="True" time="6.975" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.QueryTranslatorTests.test_against_interface" executed="True" success="True" time="0.121" asserts="0" />
-                              <test-case name="Kistl.DalProvider.EF.Tests.QueryTranslatorTests.test_against_kistl_object" executed="True" success="True" time="0.368" asserts="0" />
+                              <test-case name="Kistl.DalProvider.EF.Tests.KistlDataContextTests.should_find_new_objects" executed="True" success="True" time="8.442" asserts="1" />
                             </results>
                           </test-suite>
                         </results>
