@@ -4,46 +4,42 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
-using Kistl.API.Server;
 using Kistl.App.Base;
 
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
-namespace Kistl.Server.Tests
+namespace Kistl.DalProvider.Frozen.Tests
 {
     [TestFixture]
     public class FrozenContextTests
     {
-        [SetUp]
-        public void SetUp()
-        {
-        }
 
         [Test]
-        public void IsReadonlyFlag()
+        public void should_have_IsReadonly_set()
         {
             Assert.That(FrozenContext.Single.IsReadonly, Is.True);
         }
 
         [Test]
         [ExpectedException(typeof(ReadOnlyContextException))]
-        public void IsReadonly_Create()
+        public void should_forbid_Create()
         {
             var obj = FrozenContext.Single.Create<ObjectClass>();
         }
 
 
         [Test]
-        public void IsReadonlyObject()
+        public void should_only_hand_out_objects_with_IsReadonly_set()
         {
-            var obj = FrozenContext.Single.GetQuery<ObjectClass>().First();
-            Assert.That(obj.IsReadonly, Is.True);
+            foreach (var obj in FrozenContext.Single.GetQuery<ObjectClass>())
+            {
+                Assert.That(obj.IsReadonly, Is.True);
+            }
         }
 
         [Test]
         [ExpectedException(typeof(ReadOnlyObjectException))]
-        public void IsReadonlyObject_String()
+        public void should_forbid_setting_simple_properties()
         {
             var obj = FrozenContext.Single.GetQuery<ObjectClass>().First();
             obj.ClassName = "test";
@@ -51,11 +47,12 @@ namespace Kistl.Server.Tests
 
         [Test]
         [ExpectedException(typeof(ReadOnlyObjectException))]
-        public void IsReadonlyObject_Reference()
+        public void should_forbid_setting_reference_properties()
         {
             var obj = FrozenContext.Single.GetQuery<ObjectClass>().First();
             var baseobj = FrozenContext.Single.GetQuery<ObjectClass>().Skip(2).First();
             obj.BaseObjectClass = baseobj;
         }
+
     }
 }

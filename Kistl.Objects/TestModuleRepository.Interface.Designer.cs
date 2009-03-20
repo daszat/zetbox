@@ -14,36 +14,6 @@ namespace Kistl.App.Test
 		
 		public IKistlContext Context { get; private set; }
 		
-		/// <summary>List of all TestObjClass</summary>
-		/// 
-		public IQueryable<TestObjClass> TestObjClasses
-		{ 
-			get
-			{
-				return Context.GetQuery<TestObjClass>();
-			}
-		}
-		
-		/// <summary>List of all TestCustomObject</summary>
-		/// 
-		public IQueryable<TestCustomObject> TestCustomObjects
-		{ 
-			get
-			{
-				return Context.GetQuery<TestCustomObject>();
-			}
-		}
-		
-		/// <summary>List of all Muhblah</summary>
-		/// 
-		public IQueryable<Muhblah> Muhblas
-		{ 
-			get
-			{
-				return Context.GetQuery<Muhblah>();
-			}
-		}
-		
 		/// <summary>List of all LastTest</summary>
 		/// 
 		public IQueryable<LastTest> LastTests
@@ -61,6 +31,36 @@ namespace Kistl.App.Test
 			get
 			{
 				return Context.GetQuery<AnotherTest>();
+			}
+		}
+		
+		/// <summary>List of all Muhblah</summary>
+		/// 
+		public IQueryable<Muhblah> Muhblas
+		{ 
+			get
+			{
+				return Context.GetQuery<Muhblah>();
+			}
+		}
+		
+		/// <summary>List of all TestCustomObject</summary>
+		/// 
+		public IQueryable<TestCustomObject> TestCustomObjects
+		{ 
+			get
+			{
+				return Context.GetQuery<TestCustomObject>();
+			}
+		}
+		
+		/// <summary>List of all TestObjClass</summary>
+		/// 
+		public IQueryable<TestObjClass> TestObjClasses
+		{ 
+			get
+			{
+				return Context.GetQuery<TestObjClass>();
 			}
 		}
 		

@@ -1205,34 +1205,54 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-        // parent property
-        public virtual Kunde A
+
+        public Kunde A
         {
             get
             {
-                return _A;
+                if (_ACache != null && _ACache.ID == _fk_A)
+                    return _ACache;
+
+                if (_fk_A.HasValue)
+                    _ACache = this.Context.Find<Kunde>(_fk_A.Value);
+                else
+                    _ACache = null;
+
+                return _ACache;
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_A != value)
+                if (value == null && !_fk_A.HasValue)
+                    return;
+                if (value != null && _fk_A.HasValue && value.ID == _fk_A.Value)
+                    return;
+
+                _ACache = value;
+                fk_A = value.ID;
+            }
+        }
+        private Kunde _ACache;
+
+        public int? fk_A
+        {
+            get
+            {
+                return _fk_A;
+            }
+            set
+            {
+                if (_fk_A != value)
                 {
                     NotifyPropertyChanging("A");
-                    _A = value;
+                    _fk_A = value;
                     NotifyPropertyChanged("A");
                 }
             }
         }
-        private Kunde _A;
 
-        // proxy to A.ID
-        public int fk_A
-        {
-            get { return A.ID; }
-            set { A = this.Context.Find<Kunde>(value); }
-        }
-
-
+        // backing store for serialization
+        private int? _fk_A;
+        
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -1262,12 +1282,14 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._B, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._B, binStream);
         }
 

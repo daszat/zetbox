@@ -26,7 +26,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Repositories
 #line 12 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 string classname = "Frozen" + module.ModuleName + "Repository";
     // TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
-	var frozenClasses = module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen());
+	var frozenClasses = module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.ClassName);
 
 #line 16 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst"
 this.WriteObjects("using System;\r\n");

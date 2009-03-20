@@ -60,12 +60,10 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
-    <Compile Include="Tests\FrozenContextTests.cs" />
     <Compile Include="Tests\GeneratorTests.cs" />
-    <Compile Include="Tests\GetListOfTests.cs" />
     <Compile Include="Tests\GetListTests.cs" />
     <Compile Include="Tests\InheritanceTests.cs" />
-    <Compile Include="Tests\ListPropetiesTests.cs" />
+    <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\ObjectTests.cs" />
     <Compile Include="Tests\RelationTests.cs" />
     <Compile Include="Tests\StructTests.cs" />
@@ -99,6 +97,10 @@
     <ProjectReference Include="..\..\Kistl.Server\Kistl.Server.csproj">
       <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
       <Name>Kistl.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.AbstractConsumerTests\Kistl.API.AbstractConsumerTests.csproj">
+      <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
+      <Name>Kistl.API.AbstractConsumerTests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

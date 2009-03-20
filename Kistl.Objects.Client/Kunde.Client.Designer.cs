@@ -66,7 +66,7 @@ namespace Kistl.App.Projekte
 		}
 
 		private ClientCollectionBSideWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__> _EMailsWrapper;
-		private ICollection<Kunde_EMailsCollectionEntry__Implementation__> _EMails;
+		private ICollection<Kunde_EMailsCollectionEntry__Implementation__> _EMails = new List<Kunde_EMailsCollectionEntry__Implementation__>();
 
         /// <summary>
         /// Name des Kunden

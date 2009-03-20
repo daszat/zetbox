@@ -14,16 +14,6 @@ namespace Kistl.App.GUI
 		
 		public IKistlContext Context { get; private set; }
 		
-		/// <summary>List of all Visual</summary>
-		/// 
-		public IQueryable<Visual> Visuals
-		{ 
-			get
-			{
-				return Context.GetQuery<Visual>();
-			}
-		}
-		
 		/// <summary>List of all Template</summary>
 		/// 
 		public IQueryable<Template> Templates
@@ -31,6 +21,16 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<Template>();
+			}
+		}
+		
+		/// <summary>List of all Visual</summary>
+		/// 
+		public IQueryable<Visual> Visuals
+		{ 
+			get
+			{
+				return Context.GetQuery<Visual>();
 			}
 		}
 		
@@ -44,16 +44,6 @@ namespace Kistl.App.GUI
 			}
 		}
 		
-		/// <summary>List of all Icon</summary>
-		/// 
-		public IQueryable<Icon> Icons
-		{ 
-			get
-			{
-				return Context.GetQuery<Icon>();
-			}
-		}
-		
 		/// <summary>List of all ControlInfo</summary>
 		/// 
 		public IQueryable<ControlInfo> ControlInfos
@@ -61,6 +51,16 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<ControlInfo>();
+			}
+		}
+		
+		/// <summary>List of all Icon</summary>
+		/// 
+		public IQueryable<Icon> Icons
+		{ 
+			get
+			{
+				return Context.GetQuery<Icon>();
 			}
 		}
 		

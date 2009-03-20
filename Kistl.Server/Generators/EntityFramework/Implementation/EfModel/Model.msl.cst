@@ -47,19 +47,19 @@
         <MappingFragment StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
 <%
-    if (rel.NeedsPositionStorage(RelationEndRole.A))
-    {
+		if (rel.NeedsPositionStorage(RelationEndRole.A))
+		{
 %>
           <ScalarProperty Name="A<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="<%= fkAName %><%= Kistl.API.Helper.PositionSuffix %>" />
 <%
-    }
+		}
 
-    if (rel.NeedsPositionStorage(RelationEndRole.B))
-    {
+		if (rel.NeedsPositionStorage(RelationEndRole.B))
+		{
 %>
           <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="<%= fkBName %><%= Kistl.API.Helper.PositionSuffix %>" />
 <%
-    }
+		}
 %>
         </MappingFragment>
       </EntityTypeMapping>
@@ -141,7 +141,7 @@
     foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
-        .OrderBy(p => p.PropertyName))
+        .ThenBy(p => p.PropertyName))
     { 
 %>
     <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>">
@@ -150,12 +150,12 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="B" ColumnName="<%= prop.PropertyName %>" />
 <%
-    if (prop.IsIndexed)
-    {
+		if (prop.IsIndexed)
+		{
 %>
           <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="BIndex" />
 <%
-    }
+		}
 %>
         </MappingFragment>
       </EntityTypeMapping>

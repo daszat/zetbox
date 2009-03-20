@@ -32,12 +32,12 @@ this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  cls.Cl
 this.WriteObjects("	    <MappingFragment StoreEntitySet=\"",  cls.ClassName , "\">\r\n");
 this.WriteObjects("	      <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 #line 20 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
-foreach(var prop in cls.Properties.OfType<Property>().Where(p => !p.IsList))
+foreach(var prop in cls.Properties.OfType<Property>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
 		{
 			ApplyScalarProperty(prop, "");
 		}
 
-		foreach(var prop in cls.Properties.OfType<StructProperty>().Where(p => !p.IsList))
+		foreach(var prop in cls.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
 		{
 			ApplyComplexProperty(prop, "");
 		}
@@ -46,7 +46,7 @@ foreach(var prop in cls.Properties.OfType<Property>().Where(p => !p.IsList))
 this.WriteObjects("	    </MappingFragment>\r\n");
 this.WriteObjects("      </EntityTypeMapping>\r\n");
 #line 33 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
-foreach(var subCls in cls.SubClasses)
+foreach(var subCls in cls.SubClasses.OrderBy(c => c.ClassName))
 	{
 		ApplyEntityTypeMapping(subCls);	
 	}

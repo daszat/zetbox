@@ -25,7 +25,6 @@ namespace Kistl.DalProvider.EF.Tests
         [SetUp]
         public void SetUp()
         {
-            var testCtx = new ServerApiContextMock();
 
             using (IKistlContext ctx = KistlContext.GetContext())
             {

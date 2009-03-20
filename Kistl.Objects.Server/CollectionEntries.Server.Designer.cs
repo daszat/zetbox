@@ -1830,12 +1830,18 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this.fk_A, binStream);
             BinarySerializer.ToStream(this._B, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            {
+                var tmp = this.fk_A;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_A = tmp;
+            }
             BinarySerializer.FromStream(out this._B, binStream);
         }
 

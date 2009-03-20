@@ -16,8 +16,10 @@
 	
 	// list of all instances of exactly this class
 	var instanceList = ctx.GetQuery(t)
-	    .ToList()
-	    .Where(o => o.GetInterfaceType() == t);
+	    .ToList() // remove this, if possible
+	    .Where(o => o.GetInterfaceType() == t)
+	    .OrderBy(o => o.ID)
+	    .ToList(); // cache sorted list, not expensive query
 %>
 
 
@@ -58,7 +60,7 @@
 	foreach(var obj in instanceList) 
 	{
 		foreach(var baseCls in cls.GetObjectHierarchie()) {
-			foreach(var prop in baseCls.Properties.Cast<Property>())
+			foreach(var prop in baseCls.Properties.Cast<Property>().OrderBy(p => p.PropertyName))
 			{
 				string value = GetPropertyValueAsCSharp(obj, prop);
 				if (!String.IsNullOrEmpty(value))

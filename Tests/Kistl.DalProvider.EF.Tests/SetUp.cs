@@ -43,6 +43,8 @@ namespace Kistl.DalProvider.EF.Tests
                 }
             }
             Trace.TraceInformation("Done Resetting Database");
+
+            var testCtx = new ServerApiContextMock();
         }
     }
 }

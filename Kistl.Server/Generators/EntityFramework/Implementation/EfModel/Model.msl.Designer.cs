@@ -68,15 +68,15 @@ this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  rel.GetCollecti
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 #line 50 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 if (rel.NeedsPositionStorage(RelationEndRole.A))
-    {
+		{
 
 #line 53 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("          <ScalarProperty Name=\"A",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"",  fkAName , "",  Kistl.API.Helper.PositionSuffix , "\" />\r\n");
 #line 55 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
 
-    if (rel.NeedsPositionStorage(RelationEndRole.B))
-    {
+		if (rel.NeedsPositionStorage(RelationEndRole.B))
+		{
 
 #line 60 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("          <ScalarProperty Name=\"B",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"",  fkBName , "",  Kistl.API.Helper.PositionSuffix , "\" />\r\n");
@@ -168,7 +168,7 @@ this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for Val
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
-        .OrderBy(p => p.PropertyName))
+        .ThenBy(p => p.PropertyName))
     { 
 
 #line 147 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
@@ -179,7 +179,7 @@ this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\
 this.WriteObjects("          <ScalarProperty Name=\"B\" ColumnName=\"",  prop.PropertyName , "\" />\r\n");
 #line 153 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 if (prop.IsIndexed)
-    {
+		{
 
 #line 156 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("          <ScalarProperty Name=\"B",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"BIndex\" />\r\n");

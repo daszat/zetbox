@@ -7,9 +7,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt)">
 	    <MappingFragment StoreEntitySet="Projekt">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="AufwandGes" ColumnName="AufwandGes" />
 <ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
+<ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -17,10 +17,10 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Task)">
 	    <MappingFragment StoreEntitySet="Task">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Name" ColumnName="Name" />
-<ScalarProperty Name="DatumVon" ColumnName="DatumVon" />
-<ScalarProperty Name="DatumBis" ColumnName="DatumBis" />
 <ScalarProperty Name="Aufwand" ColumnName="Aufwand" />
+<ScalarProperty Name="DatumBis" ColumnName="DatumBis" />
+<ScalarProperty Name="DatumVon" ColumnName="DatumVon" />
+<ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -28,9 +28,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.BaseProperty)">
 	    <MappingFragment StoreEntitySet="BaseProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
 <ScalarProperty Name="AltText" ColumnName="AltText" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.BackReferenceProperty)">
@@ -42,9 +42,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="IsIndexed" ColumnName="IsIndexed" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />
 <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
-<ScalarProperty Name="IsIndexed" ColumnName="IsIndexed" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">
@@ -62,24 +62,8 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StringProperty)">
-	    <MappingFragment StoreEntitySet="StringProperty">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Length" ColumnName="Length" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IntProperty)">
-	    <MappingFragment StoreEntitySet="IntProperty">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationProperty)">
-	    <MappingFragment StoreEntitySet="EnumerationProperty">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DoubleProperty)">
-	    <MappingFragment StoreEntitySet="DoubleProperty">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolProperty)">
+	    <MappingFragment StoreEntitySet="BoolProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -88,9 +72,25 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolProperty)">
-	    <MappingFragment StoreEntitySet="BoolProperty">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DoubleProperty)">
+	    <MappingFragment StoreEntitySet="DoubleProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationProperty)">
+	    <MappingFragment StoreEntitySet="EnumerationProperty">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IntProperty)">
+	    <MappingFragment StoreEntitySet="IntProperty">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringProperty)">
+	    <MappingFragment StoreEntitySet="StringProperty">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Length" ColumnName="Length" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -98,8 +98,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Mitarbeiter)">
 	    <MappingFragment StoreEntitySet="Mitarbeiter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="Geburtstag" ColumnName="Geburtstag" />
+<ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="SVNr" ColumnName="SVNr" />
 <ScalarProperty Name="TelefonNummer" ColumnName="TelefonNummer" />
 	    </MappingFragment>
@@ -109,9 +109,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Method)">
 	    <MappingFragment StoreEntitySet="Method">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="MethodName" ColumnName="MethodName" />
-<ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
+<ScalarProperty Name="MethodName" ColumnName="MethodName" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -119,9 +119,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Module)">
 	    <MappingFragment StoreEntitySet="Module">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Namespace" ColumnName="Namespace" />
-<ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+<ScalarProperty Name="Namespace" ColumnName="Namespace" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -138,18 +138,18 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Zeitkonto)">
 	    <MappingFragment StoreEntitySet="Zeitkonto">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="AktuelleStunden" ColumnName="AktuelleStunden" />
 <ScalarProperty Name="Kontoname" ColumnName="Kontoname" />
 <ScalarProperty Name="MaxStunden" ColumnName="MaxStunden" />
-<ScalarProperty Name="AktuelleStunden" ColumnName="AktuelleStunden" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Kostentraeger)">
-	    <MappingFragment StoreEntitySet="Kostentraeger">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kostenstelle)">
 	    <MappingFragment StoreEntitySet="Kostenstelle">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Kostentraeger)">
+	    <MappingFragment StoreEntitySet="Kostentraeger">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -167,11 +167,11 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde)">
 	    <MappingFragment StoreEntitySet="Kunde">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
 <ScalarProperty Name="Adresse" ColumnName="Adresse" />
-<ScalarProperty Name="PLZ" ColumnName="PLZ" />
-<ScalarProperty Name="Ort" ColumnName="Ort" />
+<ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
 <ScalarProperty Name="Land" ColumnName="Land" />
+<ScalarProperty Name="Ort" ColumnName="Ort" />
+<ScalarProperty Name="PLZ" ColumnName="PLZ" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -229,9 +229,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass)">
 	    <MappingFragment StoreEntitySet="ObjectClass">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="TableName" ColumnName="TableName" />
-<ScalarProperty Name="IsSimpleObject" ColumnName="IsSimpleObject" />
 <ScalarProperty Name="IsFrozenObject" ColumnName="IsFrozenObject" />
+<ScalarProperty Name="IsSimpleObject" ColumnName="IsSimpleObject" />
+<ScalarProperty Name="TableName" ColumnName="TableName" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Struct)">
@@ -244,11 +244,11 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameter)">
 	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
-<ScalarProperty Name="Method_pos" ColumnName="fk_Method_pos" />
+<ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />
 <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
-<ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="Method_pos" ColumnName="fk_Method_pos" />
+<ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.BoolParameter)">
@@ -292,9 +292,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationEntry)">
 	    <MappingFragment StoreEntitySet="EnumerationEntry">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Value" ColumnName="Value" />
-<ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="Value" ColumnName="Value" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -302,9 +302,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.TestObjClass)">
 	    <MappingFragment StoreEntitySet="TestObjClass">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="MyIntProperty" ColumnName="MyIntProperty" />
 <ScalarProperty Name="StringProp" ColumnName="StringProp" />
 <ScalarProperty Name="TestEnumProp" ColumnName="TestEnumProp" />
-<ScalarProperty Name="MyIntProperty" ColumnName="MyIntProperty" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -313,9 +313,9 @@
 	    <MappingFragment StoreEntitySet="ControlInfo">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+<ScalarProperty Name="ControlType" ColumnName="ControlType" />
 <ScalarProperty Name="IsContainer" ColumnName="IsContainer" />
 <ScalarProperty Name="Platform" ColumnName="Platform" />
-<ScalarProperty Name="ControlType" ColumnName="ControlType" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -323,8 +323,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObject)">
 	    <MappingFragment StoreEntitySet="TestCustomObject">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="PersonName" ColumnName="PersonName" />
 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+<ScalarProperty Name="PersonName" ColumnName="PersonName" />
 <ComplexProperty Name="PhoneNumberMobile__Implementation__" TypeName="Model.TestPhoneStruct">
 <ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
@@ -362,8 +362,8 @@
 	    <MappingFragment StoreEntitySet="PresenterInfo">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ControlType" ColumnName="ControlType" />
-<ScalarProperty Name="PresenterTypeName" ColumnName="PresenterTypeName" />
 <ScalarProperty Name="DataTypeName" ColumnName="DataTypeName" />
+<ScalarProperty Name="PresenterTypeName" ColumnName="PresenterTypeName" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -371,8 +371,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Visual)">
 	    <MappingFragment StoreEntitySet="Visual">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ControlType" ColumnName="ControlType" />
+<ScalarProperty Name="Description" ColumnName="Description" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -380,8 +380,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Template)">
 	    <MappingFragment StoreEntitySet="Template">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
 <ScalarProperty Name="DisplayedTypeFullName" ColumnName="DisplayedTypeFullName" />
+<ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -431,8 +431,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Relation)">
 	    <MappingFragment StoreEntitySet="Relation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Storage" ColumnName="Storage" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="Storage" ColumnName="Storage" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -456,10 +456,10 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEnd)">
 	    <MappingFragment StoreEntitySet="RelationEnd">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="RoleName" ColumnName="RoleName" />
-<ScalarProperty Name="Role" ColumnName="Role" />
-<ScalarProperty Name="Multiplicity" ColumnName="Multiplicity" />
 <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
+<ScalarProperty Name="Multiplicity" ColumnName="Multiplicity" />
+<ScalarProperty Name="Role" ColumnName="Role" />
+<ScalarProperty Name="RoleName" ColumnName="RoleName" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

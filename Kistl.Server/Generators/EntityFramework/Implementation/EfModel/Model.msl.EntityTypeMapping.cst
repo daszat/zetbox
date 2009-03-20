@@ -17,12 +17,12 @@
 	    <MappingFragment StoreEntitySet="<%= cls.ClassName %>">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <%
-		foreach(var prop in cls.Properties.OfType<Property>().Where(p => !p.IsList))
+		foreach(var prop in cls.Properties.OfType<Property>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
 		{
 			ApplyScalarProperty(prop, "");
 		}
 
-		foreach(var prop in cls.Properties.OfType<StructProperty>().Where(p => !p.IsList))
+		foreach(var prop in cls.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
 		{
 			ApplyComplexProperty(prop, "");
 		}
@@ -30,7 +30,7 @@
 	    </MappingFragment>
       </EntityTypeMapping>
 <%
-	foreach(var subCls in cls.SubClasses)
+	foreach(var subCls in cls.SubClasses.OrderBy(c => c.ClassName))
 	{
 		ApplyEntityTypeMapping(subCls);	
 	}

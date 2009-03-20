@@ -148,47 +148,47 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[50].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0) {
+			DataStore[50].ClassName = @"TestEnum";
+			DataStore[50].DefaultIcon = null;
+			DataStore[50].Description = @"A TestEnum";
+			DataStore[50].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[50].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
 			DataStore[50].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[50].DefaultIcon = null;
-			DataStore[50].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[50].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0) {
 });
-			DataStore[50].ClassName = @"TestEnum";
-			DataStore[50].Description = @"A TestEnum";
 			DataStore[50].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(2) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[2],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[3],
 });
 			DataStore[50].Seal();
-			DataStore[53].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0) {
+			DataStore[53].ClassName = @"Toolkit";
+			DataStore[53].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[4];
+			DataStore[53].Description = null;
+			DataStore[53].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[53].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
 			DataStore[53].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[53].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[4];
-			DataStore[53].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[53].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0) {
 });
-			DataStore[53].ClassName = @"Toolkit";
-			DataStore[53].Description = null;
 			DataStore[53].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(3) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[5],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[6],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[7],
 });
 			DataStore[53].Seal();
-			DataStore[55].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0) {
+			DataStore[55].ClassName = @"VisualType";
+			DataStore[55].DefaultIcon = null;
+			DataStore[55].Description = null;
+			DataStore[55].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[55].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
 			DataStore[55].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[55].DefaultIcon = null;
-			DataStore[55].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[55].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0) {
 });
-			DataStore[55].ClassName = @"VisualType";
-			DataStore[55].Description = null;
 			DataStore[55].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(20) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[40],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[41],
@@ -212,16 +212,16 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[58],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[59],
 });
 			DataStore[55].Seal();
-			DataStore[78].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0) {
+			DataStore[78].ClassName = @"StorageType";
+			DataStore[78].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[10];
+			DataStore[78].Description = @"Storage Type of a 1:1 Releation.";
+			DataStore[78].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[78].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
 			DataStore[78].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[78].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[10];
-			DataStore[78].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[78].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0) {
 });
-			DataStore[78].ClassName = @"StorageType";
-			DataStore[78].Description = @"Storage Type of a 1:1 Releation.";
 			DataStore[78].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(6) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[60],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[61],
@@ -231,16 +231,16 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[67],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[68],
 });
 			DataStore[78].Seal();
-			DataStore[81].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0) {
+			DataStore[81].ClassName = @"Multiplicity";
+			DataStore[81].DefaultIcon = null;
+			DataStore[81].Description = @"Describes the multiplicities of objects on RelationEnds";
+			DataStore[81].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[81].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
 			DataStore[81].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[81].DefaultIcon = null;
-			DataStore[81].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[81].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0) {
 });
-			DataStore[81].ClassName = @"Multiplicity";
-			DataStore[81].Description = @"Describes the multiplicities of objects on RelationEnds";
 			DataStore[81].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(3) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[63],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[64],

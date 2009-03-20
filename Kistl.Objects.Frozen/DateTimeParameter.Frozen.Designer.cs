@@ -122,29 +122,29 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[8].ParameterName = @"TestDateTime";
-			DataStore[8].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
+			DataStore[8].Description = null;
 			DataStore[8].IsList = false;
 			DataStore[8].IsReturnParameter = false;
-			DataStore[8].Description = null;
+			DataStore[8].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
+			DataStore[8].ParameterName = @"TestDateTime";
 			DataStore[8].Seal();
-			DataStore[9].ParameterName = @"TestDateTimeReturn";
-			DataStore[9].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
+			DataStore[9].Description = null;
 			DataStore[9].IsList = false;
 			DataStore[9].IsReturnParameter = true;
-			DataStore[9].Description = null;
+			DataStore[9].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
+			DataStore[9].ParameterName = @"TestDateTimeReturn";
 			DataStore[9].Seal();
-			DataStore[12].ParameterName = @"DateTimeParam";
-			DataStore[12].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[90];
+			DataStore[12].Description = null;
 			DataStore[12].IsList = false;
 			DataStore[12].IsReturnParameter = false;
-			DataStore[12].Description = null;
+			DataStore[12].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[90];
+			DataStore[12].ParameterName = @"DateTimeParam";
 			DataStore[12].Seal();
-			DataStore[13].ParameterName = @"DateTimeParamForTestMethod";
-			DataStore[13].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[95];
+			DataStore[13].Description = null;
 			DataStore[13].IsList = false;
 			DataStore[13].IsReturnParameter = false;
-			DataStore[13].Description = null;
+			DataStore[13].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[95];
+			DataStore[13].ParameterName = @"DateTimeParamForTestMethod";
 			DataStore[13].Seal();
 	
 		}

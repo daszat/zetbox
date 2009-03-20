@@ -191,147 +191,147 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[11].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
-			DataStore[11].PropertyName = @"IsList";
 			DataStore[11].AltText = null;
-			DataStore[11].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[11].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[143],
 });
 			DataStore[11].Description = null;
+			DataStore[11].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[11].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
+			DataStore[11].PropertyName = @"IsList";
+			DataStore[11].IsIndexed = false;
 			DataStore[11].IsList = false;
 			DataStore[11].IsNullable = false;
-			DataStore[11].IsIndexed = false;
 			DataStore[11].Seal();
-			DataStore[26].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
-			DataStore[26].PropertyName = @"IsNullable";
 			DataStore[26].AltText = null;
-			DataStore[26].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[26].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[142],
 });
 			DataStore[26].Description = null;
+			DataStore[26].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[26].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
+			DataStore[26].PropertyName = @"IsNullable";
+			DataStore[26].IsIndexed = false;
 			DataStore[26].IsList = false;
 			DataStore[26].IsNullable = false;
-			DataStore[26].IsIndexed = false;
 			DataStore[26].Seal();
-			DataStore[83].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
-			DataStore[83].PropertyName = @"IsClientAssembly";
 			DataStore[83].AltText = @"Legt fest, ob es sich um ein Client-Assembly handelt.";
-			DataStore[83].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[83].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[117],
 });
 			DataStore[83].Description = @"Legt fest, ob es sich um ein Client-Assembly handelt.";
+			DataStore[83].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[83].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
+			DataStore[83].PropertyName = @"IsClientAssembly";
+			DataStore[83].IsIndexed = false;
 			DataStore[83].IsList = false;
 			DataStore[83].IsNullable = false;
-			DataStore[83].IsIndexed = false;
 			DataStore[83].Seal();
-			DataStore[84].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[16];
-			DataStore[84].PropertyName = @"PreFetchToClient";
 			DataStore[84].AltText = @"Serialisierung der Liste zum Client";
-			DataStore[84].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[84].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[116],
 });
 			DataStore[84].Description = @"Serialisierung der Liste zum Client";
+			DataStore[84].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[84].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[16];
+			DataStore[84].PropertyName = @"PreFetchToClient";
+			DataStore[84].IsIndexed = false;
 			DataStore[84].IsList = false;
 			DataStore[84].IsNullable = false;
-			DataStore[84].IsIndexed = false;
 			DataStore[84].Seal();
-			DataStore[94].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
-			DataStore[94].PropertyName = @"IsList";
 			DataStore[94].AltText = @"Parameter wird als List<> generiert";
-			DataStore[94].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[94].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[111],
 });
 			DataStore[94].Description = @"Parameter wird als List<> generiert";
+			DataStore[94].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[94].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[94].PropertyName = @"IsList";
+			DataStore[94].IsIndexed = false;
 			DataStore[94].IsList = false;
 			DataStore[94].IsNullable = false;
-			DataStore[94].IsIndexed = false;
 			DataStore[94].Seal();
-			DataStore[95].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
-			DataStore[95].PropertyName = @"IsReturnParameter";
 			DataStore[95].AltText = @"Es darf nur ein Return Parameter angegeben werden";
-			DataStore[95].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[95].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[110],
 });
 			DataStore[95].Description = @"Es darf nur ein Return Parameter angegeben werden";
+			DataStore[95].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[95].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[95].PropertyName = @"IsReturnParameter";
+			DataStore[95].IsIndexed = false;
 			DataStore[95].IsList = false;
 			DataStore[95].IsNullable = false;
-			DataStore[95].IsIndexed = false;
 			DataStore[95].Seal();
-			DataStore[116].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
-			DataStore[116].PropertyName = @"IsContainer";
 			DataStore[116].AltText = @"Whether or not this Control can contain other Controls";
-			DataStore[116].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[116].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[96],
 });
 			DataStore[116].Description = @"Whether or not this Control can contain other Controls";
+			DataStore[116].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[116].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
+			DataStore[116].PropertyName = @"IsContainer";
+			DataStore[116].IsIndexed = false;
 			DataStore[116].IsList = false;
 			DataStore[116].IsNullable = false;
-			DataStore[116].IsIndexed = false;
 			DataStore[116].Seal();
-			DataStore[119].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
-			DataStore[119].PropertyName = @"IsSimpleObject";
 			DataStore[119].AltText = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.";
-			DataStore[119].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[119].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[93],
 });
 			DataStore[119].Description = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.";
+			DataStore[119].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[119].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
+			DataStore[119].PropertyName = @"IsSimpleObject";
+			DataStore[119].IsIndexed = false;
 			DataStore[119].IsList = false;
 			DataStore[119].IsNullable = false;
-			DataStore[119].IsIndexed = false;
 			DataStore[119].Seal();
-			DataStore[124].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
-			DataStore[124].PropertyName = @"IsDisplayable";
 			DataStore[124].AltText = @"Shows this Method in th GUI";
-			DataStore[124].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[124].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[92],
 });
 			DataStore[124].Description = @"Shows this Method in th GUI";
+			DataStore[124].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[124].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
+			DataStore[124].PropertyName = @"IsDisplayable";
+			DataStore[124].IsIndexed = false;
 			DataStore[124].IsList = false;
 			DataStore[124].IsNullable = false;
-			DataStore[124].IsIndexed = false;
 			DataStore[124].Seal();
-			DataStore[174].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
-			DataStore[174].PropertyName = @"IsFrozenObject";
 			DataStore[174].AltText = @"if true then all Instances appear in FozenContext.";
-			DataStore[174].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[174].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[202],
 });
 			DataStore[174].Description = @"if true then all Instances appear in FozenContext.";
+			DataStore[174].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[174].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
+			DataStore[174].PropertyName = @"IsFrozenObject";
+			DataStore[174].IsIndexed = false;
 			DataStore[174].IsList = false;
 			DataStore[174].IsNullable = false;
-			DataStore[174].IsIndexed = false;
 			DataStore[174].Seal();
-			DataStore[204].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
-			DataStore[204].PropertyName = @"IsIndexed";
 			DataStore[204].AltText = @"Whether or not a list-valued property has a index";
-			DataStore[204].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[204].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[204].Description = @"Whether or not a list-valued property has a index";
+			DataStore[204].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[204].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
+			DataStore[204].PropertyName = @"IsIndexed";
+			DataStore[204].IsIndexed = false;
 			DataStore[204].IsList = false;
 			DataStore[204].IsNullable = false;
-			DataStore[204].IsIndexed = false;
 			DataStore[204].Seal();
-			DataStore[220].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
-			DataStore[220].PropertyName = @"HasPersistentOrder";
 			DataStore[220].AltText = @"Is true, if this RelationEnd persists the order of its elements";
-			DataStore[220].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[220].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[220].Description = @"Is true, if this RelationEnd persists the order of its elements";
+			DataStore[220].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[220].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
+			DataStore[220].PropertyName = @"HasPersistentOrder";
+			DataStore[220].IsIndexed = false;
 			DataStore[220].IsList = false;
 			DataStore[220].IsNullable = false;
-			DataStore[220].IsIndexed = false;
 			DataStore[220].Seal();
 	
 		}

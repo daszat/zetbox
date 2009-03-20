@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <ConfigName>Frozen DalProvider Test Configuration</ConfigName>
+  <Server StartServer="true">
+    <!-- No references should be needed -->
+    <DocumentStore>P:\Kistl\DocumentStore\Server\</DocumentStore>
+  </Server>
+  <Client StartClient="true" ThrowErrors="true">
+    <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
+  </Client>
+  <SourceFileLocation>
+    <string>C:\temp\KistlCodeGen\bin\Debug</string>
+    <string>P:\Kistl\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Objects\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Objects.Server\bin\Debug</string>
+    <string>P:\Kistl\Kistl.Objects.Frozen\bin\Debug</string>
+  </SourceFileLocation>
+</KistlConfig>

@@ -21,7 +21,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
             string fkName = "fk_" + propertyName;
 
             ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx, MembersToSerialize,
-               propertyName, backingName, fkName, "_" + fkName,
+                propertyName, backingName, fkName, "_" + fkName,
                 relEnd.Type.GetDataTypeString(), rel, endRole,
                 false, rel.NeedsPositionStorage(endRole));
         }

@@ -116,11 +116,11 @@
     <Compile Include="TestPhoneStruct.Interface.Designer.cs" />
     <Compile Include="AssemblyInfo.Interface.cs" />
     <Compile Include="ModuleRepository.Interface.Designer.cs" />
+    <Compile Include="GUIRepository.Interface.Designer.cs" />
     <Compile Include="KistlBaseRepository.Interface.Designer.cs" />
     <Compile Include="ProjekteRepository.Interface.Designer.cs" />
-    <Compile Include="ZeiterfassungRepository.Interface.Designer.cs" />
-    <Compile Include="GUIRepository.Interface.Designer.cs" />
     <Compile Include="TestModuleRepository.Interface.Designer.cs" />
+    <Compile Include="ZeiterfassungRepository.Interface.Designer.cs" />
   </ItemGroup>
   
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

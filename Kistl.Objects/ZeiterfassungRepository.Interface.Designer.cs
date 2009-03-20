@@ -14,16 +14,6 @@ namespace Kistl.App.Zeiterfassung
 		
 		public IKistlContext Context { get; private set; }
 		
-		/// <summary>List of all Zeitkonto</summary>
-		/// 
-		public IQueryable<Zeitkonto> Zeitkonten
-		{ 
-			get
-			{
-				return Context.GetQuery<Zeitkonto>();
-			}
-		}
-		
 		/// <summary>List of all TaetigkeitsArt</summary>
 		/// 
 		public IQueryable<TaetigkeitsArt> TaetigkeitsArten
@@ -61,6 +51,16 @@ namespace Kistl.App.Zeiterfassung
 			get
 			{
 				return Context.GetQuery<Kostenstelle>();
+			}
+		}
+		
+		/// <summary>List of all Zeitkonto</summary>
+		/// 
+		public IQueryable<Zeitkonto> Zeitkonten
+		{ 
+			get
+			{
+				return Context.GetQuery<Zeitkonto>();
 			}
 		}
 		

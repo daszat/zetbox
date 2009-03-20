@@ -114,8 +114,8 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[198].Reason = null;
 			DataStore[198].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[42];
+			DataStore[198].Reason = null;
 			DataStore[198].Seal();
 	
 		}

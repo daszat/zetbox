@@ -24,7 +24,6 @@ namespace Kistl.DalProvider.EF.Tests
         [SetUp]
         public override void SetUp()
         {
-            var testCtx = new ServerApiContextMock();
 
             currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
             currentCustomActionsManager.Reset();

@@ -21,25 +21,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             ApplyValuePropertyTemplate(this.prop, "B");
         }
 
-        protected virtual void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName)
-        {
-            this.WriteLine("        // parent property");
-            ApplyNotifyingValueProperty(null, prop.ObjectClass.ClassName, propertyName);
-            this.WriteLine();
-            this.WriteLine("        // proxy to A.ID");
-            this.WriteLine("        public int fk_A");
-            this.WriteLine("        {");
-            this.WriteLine("            get { return A.ID; }");
-            this.WriteObjects("            set { A = this.Context.Find<", this.prop.ObjectClass.ClassName, ">(value); }");
-            this.WriteLine();
-            this.WriteLine("        }");
-            this.WriteLine();
-            this.WriteLine();
-
-            // shouldn't be serialized
-            //this.MembersToSerialize.Add("fk_A");
-
-        }
+        protected abstract void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName);
 
         protected virtual void ApplyValuePropertyTemplate(Property p, string propertyName)
         {

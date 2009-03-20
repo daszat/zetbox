@@ -113,11 +113,11 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[2].ParameterName = @"TestInt";
-			DataStore[2].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
+			DataStore[2].Description = null;
 			DataStore[2].IsList = false;
 			DataStore[2].IsReturnParameter = false;
-			DataStore[2].Description = null;
+			DataStore[2].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
+			DataStore[2].ParameterName = @"TestInt";
 			DataStore[2].Seal();
 	
 		}

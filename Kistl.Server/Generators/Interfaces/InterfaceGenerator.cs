@@ -45,7 +45,7 @@ namespace Kistl.Server.Generators.Interfaces
         {
             var otherFileNames = new List<string>();
 
-            var modules = ctx.GetQuery<Module>().ToList();
+            var modules = ctx.GetQuery<Module>().OrderBy(m => m.ModuleName).ToList();
             otherFileNames.Add(RunTemplateWithExtension(ctx, "Interface.Repositories.ModuleRepository", "ModuleRepository", "Designer.cs", modules));
             foreach (var m in modules)
             {

@@ -12,6 +12,16 @@ namespace Kistl.App
 		
 		public IKistlContext Context { get; private set; }
 	
+		/// <summary>Repository for GUI</summary>
+		/// 
+		public Kistl.App.GUI.GUIRepository GUI
+		{
+			get
+			{
+				return new Kistl.App.GUI.GUIRepository(Context);
+			}
+		}
+		
 		/// <summary>Repository for KistlBase</summary>
 		/// 
 		public Kistl.App.Base.KistlBaseRepository KistlBase
@@ -32,26 +42,6 @@ namespace Kistl.App
 			}
 		}
 		
-		/// <summary>Repository for Zeiterfassung</summary>
-		/// 
-		public Kistl.App.Zeiterfassung.ZeiterfassungRepository Zeiterfassung
-		{
-			get
-			{
-				return new Kistl.App.Zeiterfassung.ZeiterfassungRepository(Context);
-			}
-		}
-		
-		/// <summary>Repository for GUI</summary>
-		/// 
-		public Kistl.App.GUI.GUIRepository GUI
-		{
-			get
-			{
-				return new Kistl.App.GUI.GUIRepository(Context);
-			}
-		}
-		
 		/// <summary>Repository for TestModule</summary>
 		/// 
 		public Kistl.App.Test.TestModuleRepository TestModule
@@ -59,6 +49,16 @@ namespace Kistl.App
 			get
 			{
 				return new Kistl.App.Test.TestModuleRepository(Context);
+			}
+		}
+		
+		/// <summary>Repository for Zeiterfassung</summary>
+		/// 
+		public Kistl.App.Zeiterfassung.ZeiterfassungRepository Zeiterfassung
+		{
+			get
+			{
+				return new Kistl.App.Zeiterfassung.ZeiterfassungRepository(Context);
 			}
 		}
 		

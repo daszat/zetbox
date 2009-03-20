@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Kistl.API;
 using Kistl.API.Client;
+using Kistl.App.Base;
+using Kistl.App.Projekte;
 using Kistl.Client;
 
 using NUnit.Framework;
@@ -23,9 +26,9 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetObject()
         {
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var obj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == 2);
+                var obj = ctx.GetQuery<ObjectClass>().Single(o => o.ID == 2);
                 Assert.That(obj.ID, Is.EqualTo(2));
             }
         }
@@ -33,12 +36,12 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetObject_Twice()
         {
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var obj1 = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == 2);
+                var obj1 = ctx.GetQuery<ObjectClass>().Single(o => o.ID == 2);
                 Assert.That(obj1.ID, Is.EqualTo(2));
 
-                var obj2 = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Single(o => o.ID == 2);
+                var obj2 = ctx.GetQuery<ObjectClass>().Single(o => o.ID == 2);
                 Assert.That(obj2.ID, Is.EqualTo(2));
 
                 Assert.That(object.ReferenceEquals(obj1, obj2), "Obj1 & Obj2 are different Objects");
@@ -49,11 +52,11 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListOf()
         {
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery<Kistl.App.Projekte.Projekt>();
+                var list = ctx.GetQuery<Projekt>();
                 int count = 0;
-                foreach (Kistl.App.Projekte.Projekt prj in list)
+                foreach (Projekt prj in list)
                 {
                     count += prj.Tasks.Count;
                 }
@@ -64,11 +67,11 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListOf_List()
         {
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery<Kistl.App.Projekte.Mitarbeiter>();
+                var list = ctx.GetQuery<Mitarbeiter>();
                 int count = 0;
-                foreach (Kistl.App.Projekte.Mitarbeiter ma in list)
+                foreach (Mitarbeiter ma in list)
                 {
                     count += ma.Projekte.Count;
                 }
@@ -81,7 +84,7 @@ namespace Kistl.IntegrationTests
         {
             double aufwand;
             int ID;
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var list = ctx.GetQuery<Kistl.App.Projekte.Task>().ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
@@ -97,9 +100,9 @@ namespace Kistl.IntegrationTests
 
             //CacheController<Kistl.API.IDataObject>.Current.Clear();
 
-            using (Kistl.API.IKistlContext checkctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext checkctx = KistlContext.GetContext())
             {
-                var obj = checkctx.GetQuery<Kistl.App.Projekte.Task>().Single(o => o.ID == ID);
+                var obj = checkctx.GetQuery<Task>().Single(o => o.ID == ID);
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.Aufwand, Is.EqualTo(aufwand));
             }
@@ -111,11 +114,11 @@ namespace Kistl.IntegrationTests
             int ID;
             double aufwand = 1.0;
             DateTime datum = DateTime.Now;
-            Kistl.App.Projekte.Projekt p;
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            Projekt p;
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                p = ctx.GetQuery<Kistl.App.Projekte.Projekt>().ToList()[0];
-                var obj = ctx.Create<Kistl.App.Projekte.Task>();
+                p = ctx.GetQuery<Projekt>().ToList()[0];
+                var obj = ctx.Create<Task>();
 
                 obj.Name = "NUnit Test Task";
                 obj.Aufwand = aufwand;
@@ -130,9 +133,9 @@ namespace Kistl.IntegrationTests
 
             //CacheController<Kistl.API.IDataObject>.Current.Clear();
 
-            using (Kistl.API.IKistlContext checkctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext checkctx = KistlContext.GetContext())
             {
-                var obj = checkctx.GetQuery<Kistl.App.Projekte.Task>().Single(o => o.ID == ID);
+                var obj = checkctx.GetQuery<Task>().Single(o => o.ID == ID);
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.Aufwand, Is.EqualTo(aufwand));
                 Assert.That(obj.Projekt.ID, Is.EqualTo(p.ID));

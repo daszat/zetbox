@@ -10,7 +10,7 @@ using NUnit.Framework.Constraints;
 
 namespace Kistl.Server.Tests
 {
-    //[TestFixture]
+    [TestFixture]
     public class GeneratorTests
     {
         [SetUp]
@@ -18,7 +18,7 @@ namespace Kistl.Server.Tests
         {
             System.IO.Directory.CreateDirectory(@"C:\temp\KistlCodeGen\bin\");
             System.IO.Directory.CreateDirectory(@"C:\temp\KistlCodeGen\bin\Debug");
-            System.IO.Directory.GetFiles(@"C:\temp\KistlCodeGen\bin\", "Kistl.Objects.*")
+            System.IO.Directory.GetFiles(@"C:\temp\KistlCodeGen\bin\Debug", "Kistl.Objects.*")
                 .ToList().ForEach(f => System.IO.File.Delete(f));
         }
 
@@ -33,10 +33,7 @@ namespace Kistl.Server.Tests
         [Test]
         public void Generate()
         {
-            //using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
-            //{
-            //    Proxy.Current.Generate();                
-            //}
+            Generators.Generator.GenerateCode();
         }
     }
 }

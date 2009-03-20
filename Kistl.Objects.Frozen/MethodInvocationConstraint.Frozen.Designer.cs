@@ -113,8 +113,8 @@ namespace Kistl.App.Base
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[193].Reason = @"Method.ObjectClass and InvokeOnObjectClass have to match.";
 			DataStore[193].ConstrainedProperty = Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[74];
+			DataStore[193].Reason = @"Method.ObjectClass and InvokeOnObjectClass have to match.";
 			DataStore[193].Seal();
 	
 		}
