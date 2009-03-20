@@ -12,10 +12,9 @@ using NUnit.Framework;
 
 namespace Kistl.Client.Tests
 {
-    [TestFixture]
-    [Ignore]
-    public class PresenterModelTests : MockeryTestFixture
-    {
+    //[TestFixture]
+    //public class PresenterModelTests : MockeryTestFixture
+    //{
         //internal class PresentableModelInspector : PresentableModel
         //{
         //    internal PresentableModelInspector(ThreadManagerMock uiThreadMock, ThreadManagerMock backgroundThreadMock)
@@ -66,5 +65,5 @@ namespace Kistl.Client.Tests
         //    Assert.AreEqual(ModelState.Invalid, pm.State);
         //}
 
-    }
+    //}
 }
