@@ -185,9 +185,9 @@ namespace Kistl.API.Server
 
         protected override Expression VisitUnary(UnaryExpression u)
         {
-            if (u.NodeType == ExpressionType.Convert)
+            // ignore Converts for persistence objects
+            if (u.NodeType == ExpressionType.Convert && typeof(IPersistenceObject).IsAssignableFrom(u.Type))
             {
-                // TODO: Only for IDataObjects, primitive Types should be allowed
                 return base.Visit(u.Operand);
             }
             else
@@ -253,7 +253,13 @@ namespace Kistl.API.Server
             }
             else
             {
-                result = Expression.MakeMemberAccess(e, m.Member);
+                MemberInfo member = m.Member;
+                if (!member.DeclaringType.IsAssignableFrom(e.Type))
+                {
+                    member = e.Type.GetMember(m.Member.Name).Single();
+                }
+
+                result = Expression.MakeMemberAccess(e, member);
             }
             return result;
         }
