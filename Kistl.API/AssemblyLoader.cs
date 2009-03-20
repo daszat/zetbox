@@ -67,8 +67,15 @@ namespace Kistl.API
             Directory.CreateDirectory(TargetAssemblyFolder);
 
             // Delete stale Assemblies
-            Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
-            Trace.TraceInformation("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
+            try
+            {
+                Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
+                Trace.TraceInformation("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
+            }
+            catch (IOException ex)
+            {
+                Trace.TraceWarning("Couldn't clean TargetAssemblyFolder {0}: {1}", AssemblyLoader.TargetAssemblyFolder, ex.ToString());
+            }
         }
 
         /// <summary>
