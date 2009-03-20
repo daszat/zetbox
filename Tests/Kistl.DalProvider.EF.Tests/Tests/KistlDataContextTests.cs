@@ -78,7 +78,7 @@ namespace Kistl.DalProvider.EF.Tests
                 Assert.That(result, Is.Not.Null);
                 var testObj = result.First(o => o.ID == firstId);
                 Assert.That(testObj, Is.Not.Null);
-                Assert.That(testObj, Is.InstanceOfType(typeof(TestObjClass)));
+                Assert.That(testObj, Is.InstanceOf(typeof(TestObjClass)));
             }
         }
 
