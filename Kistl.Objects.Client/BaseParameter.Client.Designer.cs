@@ -135,13 +135,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.Parameter.Remove(this);
+					(oldValue.Parameter as BackReferenceCollection<Kistl.App.Base.BaseParameter>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.Parameter.Add(this);
+					(value.Parameter as BackReferenceCollection<Kistl.App.Base.BaseParameter>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("Method");

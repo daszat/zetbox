@@ -66,13 +66,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.Constraints.Remove(this);
+					(oldValue.Constraints as BackReferenceCollection<Kistl.App.Base.Constraint>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.Constraints.Add(this);
+					(value.Constraints as BackReferenceCollection<Kistl.App.Base.Constraint>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("ConstrainedProperty");

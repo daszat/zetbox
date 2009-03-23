@@ -200,13 +200,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.Properties.Remove(this);
+					(oldValue.Properties as BackReferenceCollection<Kistl.App.Base.BaseProperty>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.Properties.Add(this);
+					(value.Properties as BackReferenceCollection<Kistl.App.Base.BaseProperty>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("ObjectClass");

@@ -223,13 +223,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.Methods.Remove(this);
+					(oldValue.Methods as BackReferenceCollection<Kistl.App.Base.Method>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.Methods.Add(this);
+					(value.Methods as BackReferenceCollection<Kistl.App.Base.Method>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("ObjectClass");

@@ -7,6 +7,7 @@ using Kistl.API;
 using Kistl.API.Client;
 
 using NUnit.Framework;
+using Kistl.App.Projekte;
 
 namespace Kistl.IntegrationTests
 {
@@ -156,22 +157,20 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var task = ctx.Create<Kistl.App.Projekte.Task>();
+                var prj1 = ctx.Create<Projekt>();
+                var prj2 = ctx.Create<Projekt>();
+                var task = ctx.Create<Task>();
 
-                task.Projekt = prj;
+                task.Projekt = prj1;
 
-                Assert.That(task.Projekt, Is.Not.Null);
-                Assert.That(prj.Tasks.Count, Is.EqualTo(1));
-                Assert.That(prj.Tasks.First(), Is.SameAs(task));
+                Assert.That(task.Projekt, Is.SameAs(prj1), "Setting the first property destroyed the object reference");
+                Assert.That(prj1.Tasks, Is.EquivalentTo(new[] { task }), "first task list not correct");
 
                 task.Projekt = prj2;
 
-                Assert.That(task.Projekt, Is.Not.Null);
-                Assert.That(prj.Tasks.Count, Is.EqualTo(0));
-                Assert.That(prj2.Tasks.Count, Is.EqualTo(1));
-                Assert.That(prj2.Tasks.First(), Is.SameAs(task));
+                Assert.That(task.Projekt, Is.SameAs(prj2), "Setting the second property destroyed the object reference");
+                Assert.That(prj1.Tasks, Is.Empty, "first Task list was not cleared");
+                Assert.That(prj2.Tasks.ToArray(), Is.EquivalentTo(new[] { task }), "second task list not correct");
             }
         }
 

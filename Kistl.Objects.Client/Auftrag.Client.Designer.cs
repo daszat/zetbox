@@ -228,13 +228,13 @@ namespace Kistl.App.Projekte
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.Auftraege.Remove(this);
+					(oldValue.Auftraege as BackReferenceCollection<Kistl.App.Projekte.Auftrag>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.Auftraege.Add(this);
+					(value.Auftraege as BackReferenceCollection<Kistl.App.Projekte.Auftrag>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("Projekt");

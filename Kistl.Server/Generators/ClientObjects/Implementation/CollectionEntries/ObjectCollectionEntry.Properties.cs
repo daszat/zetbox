@@ -22,6 +22,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 
             ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx, MembersToSerialize,
                 propertyName, backingName, fkName, "_" + fkName,
+                "/* not member of an interface, 'ownInterface' should not be used */", 
                 relEnd.Type.GetDataTypeString(), rel, endRole,
                 false, rel.NeedsPositionStorage(endRole));
         }

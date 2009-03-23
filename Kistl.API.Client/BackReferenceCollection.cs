@@ -38,6 +38,18 @@ namespace Kistl.API.Client
             this.collection = new List<T>(collection);
         }
 
+        public void AddWithoutSetParent(T item)
+        {
+            collection.Add(item);
+            OnItemAdded(item);
+        }
+
+        public void RemoveWithoutClearParent(T item)
+        {
+            collection.Remove(item);
+            OnItemRemoved(item);
+        }
+
         private void AddToList(T item, int index)
         {
             if (item == null) throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
@@ -54,41 +66,30 @@ namespace Kistl.API.Client
 
         private void SetPointerProperty(T item, int index)
         {
-            if (typeof(IEnumerable).IsAssignableFrom(item.GetPropertyType(_pointerProperty)))
-            {
-                item.AddToCollection<IDataObject>(_pointerProperty, _parent, true);
-            }
-            else
+            if (item.GetPropertyValue<object>(_pointerProperty) != _parent)
             {
                 item.SetPropertyValue<IDataObject>(_pointerProperty, _parent);
-                // TODO: Optimize in Generator
-                // Sets the position Property for a 1:n Relation
-                // eg. Method 1-n Parameter
-                // Sets Parameter.Method__Position__
-                if (item.HasProperty(_pointerProperty + Helper.PositionSuffix))
-                {
-                    item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, index);
-                }
+            }
+            // TODO: Optimize in Generator
+            // Sets the position Property for a 1:n Relation
+            // eg. Method 1-n Parameter
+            // Sets Parameter.Method__Position__
+            if (item.HasProperty(_pointerProperty + Helper.PositionSuffix))
+            {
+                item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, index);
             }
         }
 
         private void ClearPointerProperty(T item)
         {
-            if (typeof(IEnumerable).IsAssignableFrom(item.GetPropertyType(_pointerProperty)))
+            item.SetPropertyValue<IDataObject>(_pointerProperty, null);
+            // TODO: Optimize in Generator
+            // Clears the position Property for a 1:n Relation
+            // eg. Method 1-n Parameter
+            // Clears Parameter.Method__Position__
+            if (item.HasProperty(_pointerProperty + Helper.PositionSuffix))
             {
-                item.RemoveFromCollection<IDataObject>(_pointerProperty, _parent);
-            }
-            else
-            {
-                item.SetPropertyValue<IDataObject>(_pointerProperty, null);
-                // TODO: Optimize in Generator
-                // Clears the position Property for a 1:n Relation
-                // eg. Method 1-n Parameter
-                // Clears Parameter.Method__Position__
-                if (item.HasProperty(_pointerProperty + Helper.PositionSuffix))
-                {
-                    item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, null);
-                }
+                item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, null);
             }
         }
 
@@ -214,13 +215,13 @@ namespace Kistl.API.Client
         protected virtual void OnItemAdded(T newItem)
         {
             if (CollectionChanged != null)
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, new ArrayList(1) { newItem }));
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem));
         }
 
         protected virtual void OnItemRemoved(T removedItem)
         {
             if (CollectionChanged != null)
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new ArrayList(1) { removedItem }));
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItem));
         }
 
         protected virtual void OnCollectionReset()

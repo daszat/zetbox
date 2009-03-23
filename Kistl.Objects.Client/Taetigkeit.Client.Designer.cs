@@ -228,13 +228,13 @@ namespace Kistl.App.Zeiterfassung
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.Taetigkeiten.Remove(this);
+					(oldValue.Taetigkeiten as BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.Taetigkeiten.Add(this);
+					(value.Taetigkeiten as BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("Zeitkonto");

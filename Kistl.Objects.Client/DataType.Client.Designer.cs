@@ -230,13 +230,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.DataTypes.Remove(this);
+					(oldValue.DataTypes as BackReferenceCollection<Kistl.App.Base.DataType>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.DataTypes.Add(this);
+					(value.DataTypes as BackReferenceCollection<Kistl.App.Base.DataType>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("Module");

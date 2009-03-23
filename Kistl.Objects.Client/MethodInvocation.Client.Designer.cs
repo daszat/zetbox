@@ -124,13 +124,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.MethodInvocations.Remove(this);
+					(oldValue.MethodInvocations as BackReferenceCollection<Kistl.App.Base.MethodInvocation>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.MethodInvocations.Add(this);
+					(value.MethodInvocations as BackReferenceCollection<Kistl.App.Base.MethodInvocation>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("InvokeOnObjectClass");
@@ -224,13 +224,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.MethodInvokations.Remove(this);
+					(oldValue.MethodInvokations as BackReferenceCollection<Kistl.App.Base.MethodInvocation>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.MethodInvokations.Add(this);
+					(value.MethodInvokations as BackReferenceCollection<Kistl.App.Base.MethodInvocation>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("Method");

@@ -66,13 +66,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.SubClasses.Remove(this);
+					(oldValue.SubClasses as BackReferenceCollection<Kistl.App.Base.ObjectClass>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.SubClasses.Add(this);
+					(value.SubClasses as BackReferenceCollection<Kistl.App.Base.ObjectClass>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("BaseObjectClass");

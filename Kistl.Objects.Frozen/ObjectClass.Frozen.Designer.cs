@@ -630,8 +630,8 @@ Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[176],
 			DataStore[5].IsFrozenObject = true;
 			DataStore[5].IsSimpleObject = false;
 			DataStore[5].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(2) {
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[16],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7],
 });
 			DataStore[5].TableName = @"BaseProperties";
 			DataStore[5].Seal();
@@ -685,9 +685,9 @@ Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[204],
 			DataStore[7].IsFrozenObject = false;
 			DataStore[7].IsSimpleObject = false;
 			DataStore[7].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(3) {
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[14],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[64],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8],
 });
 			DataStore[7].TableName = @"Properties";
 			DataStore[7].Seal();
@@ -710,10 +710,10 @@ Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[64],
 			DataStore[8].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(6) {
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[9],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[11],
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[12],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[47],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[13],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[15],
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[47],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[12],
 });
 			DataStore[8].TableName = @"ValueTypeProperties";
 			DataStore[8].Seal();
@@ -1001,8 +1001,8 @@ Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[90],
 			DataStore[20].IsFrozenObject = false;
 			DataStore[20].IsSimpleObject = false;
 			DataStore[20].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(2) {
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[21],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[23],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[21],
 });
 			DataStore[20].TableName = @"Zeitkonten";
 			DataStore[20].Seal();
@@ -1249,9 +1249,9 @@ Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[175],
 			DataStore[33].IsFrozenObject = true;
 			DataStore[33].IsSimpleObject = false;
 			DataStore[33].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(4) {
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2],
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[44],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[45],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[44],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[62],
 });
 			DataStore[33].TableName = @"DataTypes";
@@ -1287,13 +1287,13 @@ Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[177],
 			DataStore[36].IsFrozenObject = true;
 			DataStore[36].IsSimpleObject = false;
 			DataStore[36].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(7) {
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[37],
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[38],
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[39],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[40],
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[41],
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[42],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[43],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[41],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[39],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[38],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[42],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[37],
 });
 			DataStore[36].TableName = @"BaseParameters";
 			DataStore[36].Seal();
@@ -1863,11 +1863,11 @@ Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[171],
 			DataStore[69].IsFrozenObject = true;
 			DataStore[69].IsSimpleObject = false;
 			DataStore[69].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(5) {
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[70],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[71],
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[73],
-Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[74],
 Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[75],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[74],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[70],
+Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[73],
 });
 			DataStore[69].TableName = @"Constraints";
 			DataStore[69].Seal();

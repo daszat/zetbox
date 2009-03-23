@@ -112,13 +112,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.Assemblies.Remove(this);
+					(oldValue.Assemblies as BackReferenceCollection<Kistl.App.Base.Assembly>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.Assemblies.Add(this);
+					(value.Assemblies as BackReferenceCollection<Kistl.App.Base.Assembly>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("Module");

@@ -16,6 +16,7 @@
 <%@ Parameter Name="efName" Type="string" %>
 <%@ Parameter Name="fkName" Type="string" %>
 <%@ Parameter Name="fkBackingName" Type="string" %>
+<%@ Parameter Name="ownInterface" Type="string" %>
 <%@ Parameter Name="referencedInterface" Type="string" %>
 <%@ Parameter Name="rel" Type="Relation" %>
 <%@ Parameter Name="endRole" Type="RelationEndRole" %>
@@ -84,7 +85,7 @@
 			// TODO: check whether oldValue is loaded before potentially triggering a DB Call
 %>
 					// remove from old list
-					oldValue.<%= otherName %>.Remove(this);
+					(oldValue.<%= otherName %> as BackReferenceCollection<<%= ownInterface %>>).RemoveWithoutClearParent(this);
 <%
         }
         else
@@ -104,7 +105,7 @@
         {
 %>
 					// add to new list
-                    value.<%= otherName %>.Add(this);
+					(value.<%= otherName %> as BackReferenceCollection<<%= ownInterface %>>).AddWithoutSetParent(this);
 <%
         }
         else

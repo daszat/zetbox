@@ -66,13 +66,13 @@ namespace Kistl.App.Zeiterfassung
 				if (oldValue != null)
 				{
 					// remove from old list
-					oldValue.Kostentraeger.Remove(this);
+					(oldValue.Kostentraeger as BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-                    value.Kostentraeger.Add(this);
+					(value.Kostentraeger as BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("Projekt");
