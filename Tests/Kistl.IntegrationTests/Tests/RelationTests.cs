@@ -5,10 +5,10 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.API.Client;
+using Kistl.App.Base;
+using Kistl.App.Projekte;
 
 using NUnit.Framework;
-using Kistl.App.Projekte;
-using Kistl.App.Base;
 
 namespace Kistl.IntegrationTests
 {
@@ -22,95 +22,7 @@ namespace Kistl.IntegrationTests
 
         #region Set Relation once
 
-        #region 1:n
-        [Test]
-        public void Relation_1_n_Set_1()
-        {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                Assert.That(prj.Tasks, Is.Not.Null);
-                Assert.That(prj.Tasks.Count, Is.EqualTo(0));
-
-                var task = ctx.Create<Kistl.App.Projekte.Task>();
-                Assert.That(task.Projekt, Is.Null);
-
-                task.Projekt = prj;
-
-                Assert.That(task.Projekt, Is.Not.Null);
-                Assert.That(prj.Tasks.Count, Is.EqualTo(1));
-                Assert.That(prj.Tasks.First(), Is.SameAs(task));
-            }
-        }
-
-        [Test]
-        public void Relation_1_n_Set_n()
-        {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                Assert.That(prj.Tasks, Is.Not.Null);
-                Assert.That(prj.Tasks.Count, Is.EqualTo(0));
-
-                var task = ctx.Create<Kistl.App.Projekte.Task>();
-                Assert.That(task.Projekt, Is.Null);
-
-                prj.Tasks.Add(task);
-
-                Assert.That(task.Projekt, Is.Not.Null);
-                Assert.That(prj.Tasks.Count, Is.EqualTo(1));
-                Assert.That(prj.Tasks.First(), Is.SameAs(task));
-            }
-        }
-        #endregion
-
-        #region n:m
-        [Test]
-        public void Relation_n_m_Set_n()
-        {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                Assert.That(prj.Mitarbeiter, Is.Not.Null);
-                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(0));
-
-                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
-                Assert.That(ma.Projekte, Is.Not.Null);
-                Assert.That(ma.Projekte.Count, Is.EqualTo(0));
-
-                prj.Mitarbeiter.Add(ma);
-
-                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
-                Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma));
-                Assert.That(ma.Projekte.Count, Is.EqualTo(1));
-                Assert.That(ma.Projekte.First(), Is.SameAs(prj));
-            }
-        }
-
-        [Test]
-        public void Relation_n_m_Set_m()
-        {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                Assert.That(prj.Mitarbeiter, Is.Not.Null);
-                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(0));
-
-                var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
-                Assert.That(ma.Projekte, Is.Not.Null);
-                Assert.That(ma.Projekte.Count, Is.EqualTo(0));
-
-                ma.Projekte.Add(prj);
-
-                Assert.That(prj.Mitarbeiter.Count, Is.EqualTo(1));
-                Assert.That(prj.Mitarbeiter.First(), Is.SameAs(ma));
-                Assert.That(ma.Projekte.Count, Is.EqualTo(1));
-                Assert.That(ma.Projekte.First(), Is.SameAs(prj));
-            }
-        }
-        #endregion
-
-        //#region 1:1
+        #region 1:1
         //[Test]
         //public void Relation_1_1_Set_Left()
         //{
@@ -146,121 +58,12 @@ namespace Kistl.IntegrationTests
         //        Assert.That(prop.LeftOf, Is.SameAs(rel));
         //    }
         //}
-        //#endregion
+        #endregion
 
         #endregion
 
         #region Change Relation
-
-        #region 1:n
-
-        [Test]
-        public void Change_Relation_1_n_Set_1()
-        {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var prj1 = ctx.Create<Projekt>();
-                var prj2 = ctx.Create<Projekt>();
-                var task = ctx.Create<Task>();
-
-                task.Projekt = prj1;
-
-                Assert.That(task.Projekt, Is.SameAs(prj1), "Setting the first property destroyed the object reference");
-                Assert.That(prj1.Tasks, Is.EquivalentTo(new[] { task }), "first task list not correct");
-
-                task.Projekt = prj2;
-
-                Assert.That(task.Projekt, Is.SameAs(prj2), "Setting the second property destroyed the object reference");
-                Assert.That(prj1.Tasks, Is.Empty, "first Task list was not cleared");
-                Assert.That(prj2.Tasks.ToArray(), Is.EquivalentTo(new[] { task }), "second task list not correct");
-            }
-        }
-
-        [TestFixture]
-        public class Change_Relation_1_n_Set_n
-        {
-            IKistlContext ctx;
-            Projekt prj;
-            Task task1;
-            Task task2;
-
-            [SetUp]
-            public void InitTestObjects()
-            {
-                ctx = KistlContext.GetContext();
-                prj = ctx.Create<Projekt>();
-                task1 = ctx.Create<Task>();
-                task2 = ctx.Create<Task>();
-            }
-
-            [TearDown]
-            public void DisposeTestObjects()
-            {
-                ctx.Dispose();
-            }
-
-            [Test]
-            public void With_Remove()
-            {
-                prj.Tasks.Add(task1);
-
-                Assert.That(task1.Projekt, Is.SameAs(prj), "first parent: strange reference");
-                Assert.That(prj.Tasks.ToArray(), Is.EquivalentTo(new[] { task1 }), "collection wrong after first Add");
-
-                prj.Tasks.Remove(task1);
-                Assert.That(prj.Tasks.ToArray(), Is.Empty, "collection not empty after Remove()");
-
-                prj.Tasks.Add(task2);
-
-                Assert.That(task1.Projekt, Is.Null, "first parent not reset");
-                Assert.That(task2.Projekt, Is.SameAs(prj), "second parent: strange reference");
-                Assert.That(prj.Tasks.ToArray(), Is.EquivalentTo(new[] { task2 }), "collection wrong after second Add");
-            }
-
-            [Test]
-            public void With_Clear()
-            {
-                prj.Tasks.Add(task1);
-
-                           Assert.That(task1.Projekt, Is.SameAs(prj), "first parent: strange reference");
-                Assert.That(prj.Tasks.ToArray(), Is.EquivalentTo(new[] { task1 }), "collection wrong after first Add");
-
-                prj.Tasks.Clear();
-                Assert.That(prj.Tasks.ToArray(), Is.Empty, "collection not empty after Clear()");
-
-                prj.Tasks.Add(task2);
-
-                Assert.That(task1.Projekt, Is.Null, "first parent not reset");
-                Assert.That(task2.Projekt, Is.SameAs(prj), "second parent: strange reference");
-                Assert.That(prj.Tasks.ToArray(), Is.EquivalentTo(new[] { task2 }), "collection wrong after second Add");
- }
-
-        }
-
-        [Test]
-        public void Change_Relation_1_n_Set_n_By_Index()
-        {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var m = ctx.Create<Method>();
-                var p1 = ctx.Create<StringParameter>();
-                var p2 = ctx.Create<StringParameter>();
-
-                m.Parameter.Add(p1);
-
-                Assert.That(p1.Method, Is.SameAs(m), "first Parent wrong");
-                Assert.That(m.Parameter.ToArray(), Is.EquivalentTo(new[] { p1 }), "first Parameter collection wrong");
-
-                m.Parameter[0] = p2;
-
-                Assert.That(p1.Method, Is.Null, "first Parent not reset");
-                Assert.That(p2.Method, Is.SameAs(m), "second Parent wrong");
-                Assert.That(m.Parameter.ToArray(), Is.EquivalentTo(new[] { p2 }), "second Parameter collection wrong");
-            }
-        }
-
-        #endregion
-
+        
         #region n:m
         [Test]
         public void Change_Relation_n_m_Set_n_With_Remove()
@@ -427,40 +230,6 @@ namespace Kistl.IntegrationTests
         #endregion
 
         #region Sort Relation
-        [Test]
-        public void Sort_Relation_1_n()
-        {
-            int methodID = 0;
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var method = ctx.GetQuery<Kistl.App.Base.Method>().ToList().Where(m => m.Module.ModuleName == "Projekte")
-                    .OrderByDescending(m => m.Parameter.Count).First();
-                methodID = method.ID;
-
-                var tmpParameter = method.Parameter.ToList();
-                method.Parameter.Clear();
-                foreach (Kistl.App.Base.BaseParameter p in tmpParameter
-                    .OrderBy(p => p.IsReturnParameter).ThenBy(p => p.ParameterName))
-                {
-                    method.Parameter.Add(p);
-                }
-
-                ctx.SubmitChanges();
-            }
-
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var method = ctx.Find<Kistl.App.Base.Method>(methodID);
-
-                var tmpParameter = method.Parameter.ToList();
-                int i = 0;
-                foreach (Kistl.App.Base.BaseParameter p in tmpParameter
-                    .OrderBy(p => p.IsReturnParameter).ThenBy(p => p.ParameterName))
-                {
-                    Assert.That(p, Is.EqualTo(tmpParameter[i++]));
-                }
-            }
-        }
 
         [Test]
         public void Sort_Relation_n_m_n()
