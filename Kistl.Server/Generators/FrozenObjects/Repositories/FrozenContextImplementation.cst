@@ -100,12 +100,9 @@ namespace Kistl.App
 			throw new NotImplementedException();
 		}
 
-        IPersistenceObject IKistlContext.ContainsObject(Type type, int ID)
+        IPersistenceObject IKistlContext.ContainsObject(InterfaceType type, int ID)
         {
-			if (!InterfaceType.IsValid(type))
-				return null;
-				
-			return Find(new InterfaceType(type), ID);
+			return Find(type, ID);
         }
 
         public IEnumerable<IPersistenceObject> AttachedObjects

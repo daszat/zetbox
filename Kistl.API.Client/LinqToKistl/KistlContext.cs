@@ -92,7 +92,7 @@ namespace Kistl.API.Client
         /// <returns>If ID is InvalidID (Object is not inititalized) then an Exception will be thrown.
         /// If the Object is already in that Context, the Object Instace is returned.
         /// If the Object is not in that Context, null is returned.</returns>
-        public IPersistenceObject ContainsObject(Type type, int ID)
+        public IPersistenceObject ContainsObject(InterfaceType type, int ID)
         {
             if (ID == Helper.INVALIDID) throw new ArgumentException("ID cannot be invalid", "ID");
             return _objects.Lookup(type, ID);
@@ -306,7 +306,7 @@ namespace Kistl.API.Client
             else
             {
                 // Check if Object is already in this Context
-                var attachedObj = ContainsObject(obj.GetType(), obj.ID);
+                var attachedObj = ContainsObject(obj.GetInterfaceType(), obj.ID);
                 if (attachedObj != null)
                 {
                     // already attached, nothing to do
@@ -416,7 +416,7 @@ namespace Kistl.API.Client
                 }
                 else
                 {
-                    obj = (BaseClientPersistenceObject)this.ContainsObject(newobj.GetType(), newobj.ID) ?? newobj;
+                    obj = (BaseClientPersistenceObject)this.ContainsObject(newobj.GetInterfaceType(), newobj.ID) ?? newobj;
                 }
 
                 (obj).RecordNotifications();
@@ -474,7 +474,7 @@ namespace Kistl.API.Client
             where T : class, IDataObject
         {
             CheckDisposed();
-            IPersistenceObject cacheHit = _objects.Lookup(typeof(T), ID);
+            IPersistenceObject cacheHit = _objects.Lookup(new InterfaceType(typeof(T)), ID);
             if (cacheHit != null)
                 return (T)cacheHit;
             else
@@ -533,7 +533,7 @@ namespace Kistl.API.Client
         /// <returns>Root Type of the given Type</returns>
         private static Type GetRootImplType(IPersistenceObject obj)
         {
-            return GetRootImplType(obj.GetType());
+            return GetRootImplType(obj.GetInterfaceType().ToImplementationType());
         }
 
         /// <summary>
@@ -542,9 +542,9 @@ namespace Kistl.API.Client
         /// </summary>
         /// <param name="t">Type to inspect</param>
         /// <returns>Root Type of the given Type</returns>
-        private static Type GetRootImplType(Type t)
+        private static Type GetRootImplType(ImplementationType t)
         {
-            Type result = t.ToImplementationType();
+            Type result = t.Type;
             // TODO: Make this better - asking for BaseTypes is not elegant
             while (result != null && result.BaseType != typeof(BaseClientDataObject) && result.BaseType != typeof(BaseClientCollectionEntry))
             {
@@ -554,9 +554,9 @@ namespace Kistl.API.Client
             return result;
         }
 
-        public IPersistenceObject Lookup(Type t, int id)
+        public IPersistenceObject Lookup(InterfaceType t, int id)
         {
-            Type rootT = GetRootImplType(t);
+            Type rootT = GetRootImplType(t.ToImplementationType());
 
             if (!_objects.ContainsKey(rootT))
                 return null;

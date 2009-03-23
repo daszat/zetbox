@@ -389,7 +389,7 @@ namespace Kistl.DalProvider.EF.Tests
                 ctx.Create<TestObjClass>();
                 Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(2));
 
-                Assert.That(ctx.ContainsObject(obj.GetType(), obj.ID), Is.EqualTo(obj));
+                Assert.That(ctx.ContainsObject(obj.GetInterfaceType(), obj.ID), Is.EqualTo(obj));
             }
         }
 
@@ -402,7 +402,7 @@ namespace Kistl.DalProvider.EF.Tests
                 ctx.Create<TestObjClass>();
                 Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(1));
 
-                Assert.That(ctx.ContainsObject(obj.GetType(), obj.ID), Is.Null);
+                Assert.That(ctx.ContainsObject(obj.GetInterfaceType(), obj.ID), Is.Null);
             }
         }
 

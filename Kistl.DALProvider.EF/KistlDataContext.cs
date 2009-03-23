@@ -196,9 +196,9 @@ namespace Kistl.DALProvider.EF
         /// <returns>If ID is InvalidID (Object is not inititalized) then an Exception will be thrown.
         /// If the Object is already in that Context, the Object Instace is returned.
         /// If the Object is not in that Context, null is returned.</returns>
-        public override IPersistenceObject ContainsObject(Type type, int ID)
+        public override IPersistenceObject ContainsObject(InterfaceType type, int ID)
         {
-            return AttachedObjects.Where(obj => obj.GetType() == type && obj.ID == ID).SingleOrDefault();
+            return AttachedObjects.Where(obj => obj.GetInterfaceType() == type && obj.ID == ID).SingleOrDefault();
         }
 
         /// <summary>

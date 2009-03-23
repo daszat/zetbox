@@ -96,7 +96,7 @@ namespace Kistl.API
         /// <returns>If ID is InvalidID (Object is not inititalized) then an Exception will be thrown.
         /// If the Object is already in that Context, the Object Instace is returned.
         /// If the Object is not in that Context, null is returned.</returns>
-        IPersistenceObject ContainsObject(Type type, int ID);
+        IPersistenceObject ContainsObject(InterfaceType type, int ID);
 
         IEnumerable<IPersistenceObject> AttachedObjects { get; }
 

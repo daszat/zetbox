@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Diagnostics;
 
 namespace Kistl.API.Client
 {
@@ -311,13 +312,15 @@ namespace Kistl.API.Client
 
         public IEnumerable<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall())
+            using (TraceClient.TraceHelper.TraceMethodCall("Fetching relation"))
             {
+                Trace.TraceWarning("FetchRelation(ID={0},role={1},parentId={2}): enter", relationId, role, parent.ID);
                 // TODO: could be implemented in generated properties
                 if (parent.ObjectState == DataObjectState.New)
                     return new List<INewCollectionEntry<A, B>>();
 
                 MemoryStream ms = serviceStreams.FetchRelation(relationId, (int)role, parent.ID);
+                Trace.TraceWarning("FetchRelation(ID={0},role={1},parentId={2}): came back", relationId, role, parent.ID);
                 BinaryReader sr = new BinaryReader(ms);
 
                 List<INewCollectionEntry<A, B>> result = new List<INewCollectionEntry<A, B>>();

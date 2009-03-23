@@ -196,7 +196,7 @@ namespace Kistl.DALProvider.EF
             var rel = ctx.Find<Relation>(relId);
             var relEnd = rel.GetEnd(endRole);
             var relOtherEnd = rel.GetOtherEnd(relEnd);
-            var parent = ctx.Find<PARENT>(parentId);
+            var parent = ctx.Find(new ImplementationType(typeof(PARENT)).ToInterfaceType(), parentId);
             var ceType = Type.GetType(rel.GetCollectionEntryFullName() +
                 Kistl.API.Helper.ImplementationSuffix +
                 ", " + ApplicationContext.Current.ImplementationAssembly);

@@ -57,7 +57,7 @@ namespace Kistl.API.Server.Mocks
             return TestObjClasses.Values.Cast<IDataObject>().AsQueryable();
         }
 
-        public override IPersistenceObject ContainsObject(Type type, int ID)
+        public override IPersistenceObject ContainsObject(InterfaceType type, int ID)
         {
             throw new NotImplementedException();
         }

@@ -49,7 +49,7 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
-        public IPersistenceObject ContainsObject(Type type, int ID)
+        public IPersistenceObject ContainsObject(InterfaceType type, int ID)
         {
             throw new NotImplementedException();
         }

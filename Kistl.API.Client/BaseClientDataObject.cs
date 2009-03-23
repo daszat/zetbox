@@ -68,7 +68,7 @@ namespace Kistl.API.Client
         public virtual void AttachToContext(IKistlContext ctx)
         {
             if (_context != null && _context != ctx) throw new InvalidOperationException("Object cannot be attached to a new Context while attached to another Context.");
-            if (ctx.ContainsObject(this.GetType(), this.ID) == null)
+            if (ctx.ContainsObject(this.GetInterfaceType(), this.ID) == null)
             {
                 // Object is not in this Context present
                 // -> Attach it. Attach will call this Method again!

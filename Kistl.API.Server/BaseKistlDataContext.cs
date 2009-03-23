@@ -103,7 +103,7 @@ namespace Kistl.API.Server
         /// <returns>If ID is InvalidID (Object is not inititalized) then an Exception will be thrown.
         /// If the Object is already in that Context, the Object Instace is returned.
         /// If the Object is not in that Context, null is returned.</returns>
-        public abstract IPersistenceObject ContainsObject(Type type, int ID);
+        public abstract IPersistenceObject ContainsObject(InterfaceType type, int ID);
 
         /// <summary>
         /// 

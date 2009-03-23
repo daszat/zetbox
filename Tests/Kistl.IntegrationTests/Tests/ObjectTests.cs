@@ -69,13 +69,8 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery<Mitarbeiter>();
-                int count = 0;
-                foreach (Mitarbeiter ma in list)
-                {
-                    count += ma.Projekte.Count;
-                }
-                Assert.That(count, Is.GreaterThan(0));
+                var list = ctx.GetQuery<Mitarbeiter>().ToList();
+                Assert.That(list.Any(ma => ma.Projekte.Count > 0), "no projects assigned");
             }
         }
 
