@@ -23,7 +23,7 @@ namespace Kistl.API.Client
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
+            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)
@@ -67,7 +67,7 @@ namespace Kistl.API.Client
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
+            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)
@@ -110,7 +110,7 @@ namespace Kistl.API.Client
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
+            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)
@@ -153,7 +153,7 @@ namespace Kistl.API.Client
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
+            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)

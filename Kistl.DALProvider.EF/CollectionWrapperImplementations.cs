@@ -23,7 +23,7 @@ namespace Kistl.DALProvider.EF
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
+            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
@@ -47,7 +47,7 @@ namespace Kistl.DALProvider.EF
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
+            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
@@ -69,7 +69,7 @@ namespace Kistl.DALProvider.EF
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
+            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
@@ -91,7 +91,7 @@ namespace Kistl.DALProvider.EF
 
         protected override ENTRYTYPE CreateEntry()
         {
-            return ParentObject.Context.CreateCollectionEntry<ENTRYTYPE>();
+            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
