@@ -83,7 +83,7 @@ namespace Kistl.API.Client
         {
             if (item.GetPropertyValue<int?>(_fkProperty) != _parent.ID)
             {
-                item.SetPropertyValue<int?>(_fkProperty, _parent.ID);
+                item.SetPrivatePropertyValue<int?>(_fkProperty, _parent.ID);
             }
             // TODO: Optimize in Generator
             // Sets the position Property for a 1:n Relation
@@ -99,7 +99,7 @@ namespace Kistl.API.Client
         {
             if (item.GetPropertyValue<int?>(_fkProperty) != null)
             {
-                item.SetPropertyValue<int?>(_fkProperty, null);
+                item.SetPrivatePropertyValue<int?>(_fkProperty, null);
             }
             // TODO: Optimize in Generator
             // Clears the position Property for a 1:n Relation

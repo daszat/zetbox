@@ -1,90 +1,162 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.IntegrationTests\Kistl.IntegrationTests.nunit" total="16" errors="2" failures="9" not-run="1" ignored="1" skipped="0" invalid="0" date="2009-03-23" time="14:41:17">
+<test-results name="P:\Kistl\Tests\Kistl.IntegrationTests\Kistl.IntegrationTests.nunit" total="56" errors="2" failures="12" not-run="4" ignored="4" skipped="0" invalid="0" date="2009-03-23" time="16:21:20">
   <environment nunit-version="2.5.0.9015" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.IntegrationTests" machine-name="KISTL" user="david" user-domain="kistl" />
   <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.IntegrationTests\Kistl.IntegrationTests.nunit" executed="True" success="False" time="20.123" asserts="0">
+  <test-suite name="P:\Kistl\Tests\Kistl.IntegrationTests\Kistl.IntegrationTests.nunit" executed="True" success="False" time="34.963" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.IntegrationTests\bin\Debug\Kistl.IntegrationTests.dll" executed="True" success="False" time="20.044" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.IntegrationTests\bin\Debug\Kistl.IntegrationTests.dll" executed="True" success="False" time="34.863" asserts="0">
         <results>
-          <test-suite name="Kistl" executed="True" success="False" time="20.038" asserts="0">
+          <test-suite name="Kistl" executed="True" success="False" time="34.852" asserts="0">
             <results>
-              <test-suite name="IntegrationTests" executed="True" success="False" time="20.036" asserts="0">
+              <test-suite name="IntegrationTests" executed="True" success="False" time="34.850" asserts="0">
                 <results>
-                  <test-suite name="RelationTests" executed="True" success="False" time="8.058" asserts="0">
+                  <test-suite name="GeneratorTests" executed="True" success="False" time="5.859" asserts="0">
                     <results>
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_1_n_Set_1" executed="True" success="True" time="0.046" asserts="5" />
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_1_n_Set_n_By_Index" executed="True" success="False" time="0.043" asserts="0">
+                      <test-case name="Kistl.IntegrationTests.GeneratorTests.Generate" executed="True" success="False" time="5.854" asserts="0">
                         <failure>
-                          <message><![CDATA[System.ArgumentException : Die Property set-Methode wurde nicht gefunden.]]></message>
-                          <stack-trace><![CDATA[bei System.Reflection.RuntimePropertyInfo.SetValue(Object obj, Object value, BindingFlags invokeAttr, Binder binder, Object[] index, CultureInfo culture)
-bei System.Reflection.RuntimePropertyInfo.SetValue(Object obj, Object value, Object[] index)
-bei Kistl.API.ExtensionHelpers.SetPropertyValue[T](Object obj, String propName, T val) in P:\Kistl\Kistl.API\Helper.cs:Zeile 219.
-bei Kistl.API.Client.BackReferenceCollection`1.SetPointerProperty(T item, Int32 index) in P:\Kistl\Kistl.API.Client\BackReferenceCollection.cs:Zeile 86.
-bei Kistl.API.Client.BackReferenceCollection`1.AddToList(T item, Int32 index) in P:\Kistl\Kistl.API.Client\BackReferenceCollection.cs:Zeile 71.
-bei Kistl.API.Client.BackReferenceCollection`1.Add(T item) in P:\Kistl\Kistl.API.Client\BackReferenceCollection.cs:Zeile 172.
-bei Kistl.IntegrationTests.RelationTests.Change_Relation_1_n_Set_n_By_Index() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 238.
+                          <message><![CDATA[System.ServiceModel.FaultException : Failed to compile Interface Source Files]]></message>
+                          <stack-trace><![CDATA[
+Server stack trace:
+bei System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+bei System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+bei System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]:
+bei System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+bei System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+bei Kistl.API.Client.KistlService.IKistlService.Generate()
+bei Kistl.API.Client.KistlService.KistlServiceClient.Generate() in P:\Kistl\Kistl.API.Client\Service References\KistlService\Reference.cs:Zeile 95.
+bei Kistl.API.Client.ProxyImplementation.Generate() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 352.
+bei Kistl.IntegrationTests.GeneratorTests.Generate() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\GeneratorTests.cs:Zeile 36.
 ]]></stack-trace>
                         </failure>
                       </test-case>
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_1_n_Set_n_With_Clear" executed="True" success="True" time="0.022" asserts="7" />
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_1_n_Set_n_With_Remove" executed="True" success="True" time="0.008" asserts="7" />
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_By_Index" executed="True" success="False" time="0.578" asserts="1">
+                    </results>
+                  </test-suite>
+                  <test-suite name="GetListTests" executed="True" success="True" time="5.869" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetList" executed="True" success="True" time="1.541" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetList_GetObject" executed="True" success="True" time="1.448" asserts="3" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetList_Twice" executed="True" success="True" time="0.415" asserts="187" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListByTypeWithOrderBy" executed="True" success="True" time="0.306" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListFirst" executed="True" success="True" time="0.030" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListSingle" executed="True" success="True" time="0.017" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithFirst" executed="True" success="True" time="0.019" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="0.287" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithOrderByAndWhere" executed="True" success="True" time="0.210" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithOrderByThenOrderBy" executed="True" success="True" time="0.387" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithParameterIllegal" executed="True" success="True" time="0.049" asserts="0" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.067" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithProjection" executed="True" success="True" time="0.151" asserts="0" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithPropertyAccessor" executed="True" success="True" time="0.031" asserts="2" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithPropertyObjectAccessor" executed="True" success="True" time="0.211" asserts="2" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithSingle" executed="True" success="True" time="0.019" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithTake" executed="True" success="True" time="0.095" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetListWithTakeAndWhere" executed="True" success="True" time="0.079" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.GetListTests.GetObject_GetList" executed="True" success="True" time="0.485" asserts="6" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="InheritanceTests" executed="True" success="True" time="3.432" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.InheritanceTests.GetListOfInheritedObjects" executed="True" success="True" time="1.094" asserts="3" />
+                      <test-case name="Kistl.IntegrationTests.InheritanceTests.UpdateInheritedObject" executed="True" success="True" time="2.336" asserts="4" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="ListPropertiesTests" executed="True" success="True" time="3.925" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.ListPropertiesTests.AddStringListPropertyContent" executed="True" success="True" time="0.236" asserts="5" />
+                      <test-case name="Kistl.IntegrationTests.ListPropertiesTests.DeleteStringListPropertyContent" executed="True" success="True" time="0.098" asserts="5" />
+                      <test-case name="Kistl.IntegrationTests.ListPropertiesTests.list_and_query_should_yield_consistent_results" executed="True" success="True" time="0.253" asserts="2" />
+                      <test-case name="Kistl.IntegrationTests.ListPropertiesTests.navigating_a_fk_list_property_should_yield_related_objects" executed="True" success="True" time="0.219" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ListPropertiesTests.navigating_a_nm_list_property_should_yield_related_objects" executed="False">
+                        <reason>
+                          <message><![CDATA[Needs N:M relation between frozen objects with navigators in both directions]]></message>
+                        </reason>
+                      </test-case>
+                      <test-case name="Kistl.IntegrationTests.ListPropertiesTests.object_lists_should_have_elements" executed="True" success="True" time="2.836" asserts="2" />
+                      <test-case name="Kistl.IntegrationTests.ListPropertiesTests.retrieving_a_fk_list_twice_should_yield_same_list" executed="True" success="True" time="0.119" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ListPropertiesTests.retrieving_a_nm_list_twice_should_yield_same_list" executed="True" success="True" time="0.112" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ListPropertiesTests.UpdateStringListPropertyContent" executed="False">
+                        <reason>
+                          <message><![CDATA[Set IsSorted on Kunde.EMails]]></message>
+                        </reason>
+                      </test-case>
+                      <test-case name="Kistl.IntegrationTests.ListPropertiesTests.value_lists_should_have_elements" executed="True" success="True" time="0.043" asserts="1" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="ObjectTests" executed="True" success="True" time="1.288" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetListOf" executed="True" success="True" time="0.331" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetListOf_List" executed="True" success="True" time="0.232" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetObject" executed="True" success="True" time="0.038" asserts="1" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.GetObject_Twice" executed="True" success="True" time="0.073" asserts="3" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.NewObject" executed="True" success="True" time="0.288" asserts="4" />
+                      <test-case name="Kistl.IntegrationTests.ObjectTests.SetObject" executed="True" success="True" time="0.315" asserts="3" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="RelationTests" executed="True" success="False" time="2.009" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_1_n_Set_1" executed="True" success="True" time="0.009" asserts="5" />
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_1_n_Set_n_By_Index" executed="True" success="True" time="0.018" asserts="5" />
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_By_Index" executed="True" success="False" time="0.024" asserts="1">
                         <failure>
                           <message><![CDATA[  Expected: 1
   But was:  0
 ]]></message>
-                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_By_Index() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 397.
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_By_Index() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 403.
 ]]></stack-trace>
                         </failure>
                       </test-case>
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_With_Clear" executed="True" success="False" time="0.013" asserts="1">
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_With_Clear" executed="True" success="False" time="0.014" asserts="1">
                         <failure>
                           <message><![CDATA[  Expected: 1
   But was:  0
 ]]></message>
-                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_With_Clear() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 371.
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_With_Clear() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 377.
 ]]></stack-trace>
                         </failure>
                       </test-case>
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_With_Remove" executed="True" success="False" time="0.015" asserts="1">
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_With_Remove" executed="True" success="False" time="0.014" asserts="1">
                         <failure>
                           <message><![CDATA[  Expected: 1
   But was:  0
 ]]></message>
-                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_With_Remove() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 345.
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_m_With_Remove() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 351.
 ]]></stack-trace>
                         </failure>
                       </test-case>
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_By_Index" executed="True" success="False" time="0.030" asserts="3">
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_By_Index" executed="True" success="False" time="0.024" asserts="3">
                         <failure>
                           <message><![CDATA[  Expected: 1
   But was:  0
 ]]></message>
-                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_By_Index() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 321.
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_By_Index() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 327.
 ]]></stack-trace>
                         </failure>
                       </test-case>
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_With_Clear" executed="True" success="False" time="0.012" asserts="3">
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_With_Clear" executed="True" success="False" time="0.014" asserts="3">
                         <failure>
                           <message><![CDATA[  Expected: 1
   But was:  0
 ]]></message>
-                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_With_Clear() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 294.
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_With_Clear() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 300.
 ]]></stack-trace>
                         </failure>
                       </test-case>
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_With_Remove" executed="True" success="False" time="0.012" asserts="3">
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_With_Remove" executed="True" success="False" time="0.016" asserts="3">
                         <failure>
                           <message><![CDATA[  Expected: 1
   But was:  0
 ]]></message>
-                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_With_Remove() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 267.
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Change_Relation_n_m_Set_n_With_Remove() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 273.
 ]]></stack-trace>
                         </failure>
                       </test-case>
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Relation_1_n_Set_1" executed="True" success="True" time="0.009" asserts="6" />
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Relation_1_n_Set_n" executed="True" success="True" time="0.005" asserts="6" />
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Relation_1_n_Set_1" executed="True" success="True" time="0.006" asserts="6" />
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Relation_1_n_Set_n" executed="True" success="True" time="0.007" asserts="6" />
                       <test-case name="Kistl.IntegrationTests.RelationTests.Relation_n_m_Set_m" executed="True" success="False" time="0.010" asserts="5">
                         <failure>
                           <message><![CDATA[  Expected: 1
@@ -103,18 +175,12 @@ bei Kistl.IntegrationTests.RelationTests.Change_Relation_1_n_Set_n_By_Index() in
 ]]></stack-trace>
                         </failure>
                       </test-case>
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Sort_Relation_1_n" executed="True" success="False" time="3.659" asserts="0">
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Sort_Relation_1_n" executed="True" success="False" time="1.288" asserts="1">
                         <failure>
-                          <message><![CDATA[System.ArgumentException : Die Property set-Methode wurde nicht gefunden.]]></message>
-                          <stack-trace><![CDATA[bei System.Reflection.RuntimePropertyInfo.SetValue(Object obj, Object value, BindingFlags invokeAttr, Binder binder, Object[] index, CultureInfo culture)
-bei System.Reflection.RuntimePropertyInfo.SetValue(Object obj, Object value, Object[] index)
-bei Kistl.API.ExtensionHelpers.SetPropertyValue[T](Object obj, String propName, T val) in P:\Kistl\Kistl.API\Helper.cs:Zeile 219.
-bei Kistl.API.Client.BackReferenceCollection`1.ClearPointerProperty(T item) in P:\Kistl\Kistl.API.Client\BackReferenceCollection.cs:Zeile 102.
-bei Kistl.API.Client.BackReferenceCollection`1.RemoveFromList(T item) in P:\Kistl\Kistl.API.Client\BackReferenceCollection.cs:Zeile 78.
-bei Kistl.API.Client.BackReferenceCollection`1.<Clear>b__3(T i) in P:\Kistl\Kistl.API.Client\BackReferenceCollection.cs:Zeile 179.
-bei Kistl.API.ExtensionHelpers.ForEach[T](IList`1 lst, Action`1 action) in P:\Kistl\Kistl.API\Helper.cs:Zeile 533.
-bei Kistl.API.Client.BackReferenceCollection`1.Clear() in P:\Kistl\Kistl.API.Client\BackReferenceCollection.cs:Zeile 179.
-bei Kistl.IntegrationTests.RelationTests.Sort_Relation_1_n() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 430.
+                          <message><![CDATA[  Expected: <System.String TestString>
+  But was:  <System.Boolean TestBool>
+]]></message>
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Sort_Relation_1_n() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 455.
 ]]></stack-trace>
                         </failure>
                       </test-case>
@@ -123,14 +189,70 @@ bei Kistl.IntegrationTests.RelationTests.Sort_Relation_1_n() in P:\Kistl\Tests\K
                           <message><![CDATA[Case: 669, Fix with new CodeGenerator]]></message>
                         </reason>
                       </test-case>
-                      <test-case name="Kistl.IntegrationTests.RelationTests.Sort_Relation_n_m_n" executed="True" success="False" time="3.505" asserts="1">
+                      <test-case name="Kistl.IntegrationTests.RelationTests.Sort_Relation_n_m_n" executed="True" success="False" time="0.536" asserts="1">
                         <failure>
                           <message><![CDATA[  Expected: <Peter Mayer>
   But was:  <Arthur Zaczek>
 ]]></message>
-                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Sort_Relation_n_m_n() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 484.
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.RelationTests.Sort_Relation_n_m_n() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\RelationTests.cs:Zeile 490.
 ]]></stack-trace>
                         </failure>
+                      </test-case>
+                    </results>
+                  </test-suite>
+                  <test-suite name="RelationTests+Change_Relation_1_n_Set_n" executed="True" success="True" time="0.021" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.RelationTests+Change_Relation_1_n_Set_n.With_Clear" executed="True" success="True" time="0.011" asserts="6" />
+                      <test-case name="Kistl.IntegrationTests.RelationTests+Change_Relation_1_n_Set_n.With_Remove" executed="True" success="True" time="0.009" asserts="6" />
+                    </results>
+                  </test-suite>
+                  <test-suite name="StructTests" executed="True" success="False" time="0.453" asserts="0">
+                    <results>
+                      <test-case name="Kistl.IntegrationTests.StructTests.ChangeObjectWithStruct" executed="True" success="False" time="0.196" asserts="1">
+                        <failure>
+                          <message><![CDATA[  Expected: not null
+  But was:  null
+]]></message>
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.StructTests.ChangeObjectWithStruct() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\StructTests.cs:Zeile 132.
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="Kistl.IntegrationTests.StructTests.CreateObjectWithStruct" executed="True" success="False" time="0.060" asserts="2">
+                        <failure>
+                          <message><![CDATA[System.ServiceModel.FaultException : NULL-Wert für Element, für das keine NULL-Werte zulässig sind. Element: 'PhoneNumberMobile__Implementation__'.]]></message>
+                          <stack-trace><![CDATA[
+Server stack trace:
+bei System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+bei System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+bei System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+bei System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]:
+bei System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+bei System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+bei Kistl.API.Client.KistlServiceStreams.IKistlServiceStreams.SetObjects(MemoryStream msg)
+bei Kistl.API.Client.KistlServiceStreams.KistlServiceStreamsClient.SetObjects(MemoryStream msg) in P:\Kistl\Kistl.API.Client\Service References\KistlServiceStreams\Reference.cs:Zeile 67.
+bei Kistl.API.Client.ProxyImplementation.SetObjects(IEnumerable`1 objects) in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 280.
+bei Kistl.API.Client.KistlContextImpl.SubmitChanges() in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContext.cs:Zeile 404.
+bei Kistl.IntegrationTests.StructTests.CreateObjectWithStruct() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\StructTests.cs:Zeile 48.
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="Kistl.IntegrationTests.StructTests.GetObjectWithStruct" executed="True" success="True" time="0.161" asserts="32" />
+                      <test-case name="Kistl.IntegrationTests.StructTests.SaveObjectWithStruct" executed="True" success="False" time="0.030" asserts="1">
+                        <failure>
+                          <message><![CDATA[  Expected: 1
+  But was:  0
+]]></message>
+                          <stack-trace><![CDATA[bei Kistl.IntegrationTests.StructTests.SaveObjectWithStruct() in P:\Kistl\Tests\Kistl.IntegrationTests\Tests\StructTests.cs:Zeile 96.
+]]></stack-trace>
+                        </failure>
+                      </test-case>
+                      <test-case name="Kistl.IntegrationTests.StructTests.SetStructNull" executed="False">
+                        <reason>
+                          <message><![CDATA[Nicht fertig besprochen]]></message>
+                        </reason>
                       </test-case>
                     </results>
                   </test-suite>

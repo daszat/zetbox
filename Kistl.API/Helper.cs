@@ -292,9 +292,8 @@ namespace Kistl.API
         /// <returns>PropertyValue</returns>
         public static void SetPrivatePropertyValue<T>(this object obj, string propName, T val)
         {
-            PropertyInfo pi = obj.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-            pi.SetValue(obj, val, null);
+            Type t = obj.GetType();
+            t.InvokeMember(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.SetProperty | BindingFlags.Instance, null, obj, new object[] { val });
         }
 
         /// <summary>

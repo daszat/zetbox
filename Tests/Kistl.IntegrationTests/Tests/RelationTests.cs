@@ -176,54 +176,65 @@ namespace Kistl.IntegrationTests
             }
         }
 
-        [Test]
-        public void Change_Relation_1_n_Set_n_With_Remove()
+        [TestFixture]
+        public class Change_Relation_1_n_Set_n
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var task1 = ctx.Create<Kistl.App.Projekte.Task>();
-                var task2 = ctx.Create<Kistl.App.Projekte.Task>();
+            IKistlContext ctx;
+            Projekt prj;
+            Task task1;
+            Task task2;
 
+            [SetUp]
+            public void InitTestObjects()
+            {
+                ctx = KistlContext.GetContext();
+                prj = ctx.Create<Projekt>();
+                task1 = ctx.Create<Task>();
+                task2 = ctx.Create<Task>();
+            }
+
+            [TearDown]
+            public void DisposeTestObjects()
+            {
+                ctx.Dispose();
+            }
+
+            [Test]
+            public void With_Remove()
+            {
                 prj.Tasks.Add(task1);
 
-                Assert.That(task1.Projekt, Is.Not.Null, "first Parent not set");
-                Assert.That(prj.Tasks.ToArray(), Is.EquivalentTo(new[] { task1 }));
-                Assert.That(prj.Tasks.First(), Is.SameAs(task1));
+                Assert.That(task1.Projekt, Is.SameAs(prj), "first parent: strange reference");
+                Assert.That(prj.Tasks.ToArray(), Is.EquivalentTo(new[] { task1 }), "collection wrong after first Add");
 
                 prj.Tasks.Remove(task1);
+                Assert.That(prj.Tasks.ToArray(), Is.Empty, "collection not empty after Remove()");
+
                 prj.Tasks.Add(task2);
 
-                Assert.That(task1.Projekt, Is.Null);
-                Assert.That(task2.Projekt, Is.Not.Null);
-                Assert.That(prj.Tasks.Count, Is.EqualTo(1));
-                Assert.That(prj.Tasks.First(), Is.SameAs(task2));
+                Assert.That(task1.Projekt, Is.Null, "first parent not reset");
+                Assert.That(task2.Projekt, Is.SameAs(prj), "second parent: strange reference");
+                Assert.That(prj.Tasks.ToArray(), Is.EquivalentTo(new[] { task2 }), "collection wrong after second Add");
             }
-        }
 
-        [Test]
-        public void Change_Relation_1_n_Set_n_With_Clear()
-        {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            [Test]
+            public void With_Clear()
             {
-                var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
-                var task = ctx.Create<Kistl.App.Projekte.Task>();
-                var task2 = ctx.Create<Kistl.App.Projekte.Task>();
+                prj.Tasks.Add(task1);
 
-                prj.Tasks.Add(task);
-
-                Assert.That(task.Projekt, Is.Not.Null);
-                Assert.That(prj.Tasks.Count, Is.EqualTo(1));
-                Assert.That(prj.Tasks.First(), Is.SameAs(task));
+                           Assert.That(task1.Projekt, Is.SameAs(prj), "first parent: strange reference");
+                Assert.That(prj.Tasks.ToArray(), Is.EquivalentTo(new[] { task1 }), "collection wrong after first Add");
 
                 prj.Tasks.Clear();
+                Assert.That(prj.Tasks.ToArray(), Is.Empty, "collection not empty after Clear()");
+
                 prj.Tasks.Add(task2);
 
-                Assert.That(task.Projekt, Is.Null);
-                Assert.That(task2.Projekt, Is.Not.Null);
-                Assert.That(prj.Tasks.Count, Is.EqualTo(1));
-                Assert.That(prj.Tasks.First(), Is.SameAs(task2));
-            }
+                Assert.That(task1.Projekt, Is.Null, "first parent not reset");
+                Assert.That(task2.Projekt, Is.SameAs(prj), "second parent: strange reference");
+                Assert.That(prj.Tasks.ToArray(), Is.EquivalentTo(new[] { task2 }), "collection wrong after second Add");
+ }
+
         }
 
         [Test]
