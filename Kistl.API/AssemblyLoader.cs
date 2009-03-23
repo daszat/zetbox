@@ -72,7 +72,7 @@ namespace Kistl.API
                 Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
                 Trace.TraceInformation("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
                 Trace.TraceWarning("Couldn't clean TargetAssemblyFolder {0}: {1}", AssemblyLoader.TargetAssemblyFolder, ex.ToString());
             }

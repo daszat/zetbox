@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.API.AbstractConsumerTests;
 using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.App.Projekte;
@@ -16,8 +17,10 @@ using NUnit.Framework;
 namespace Kistl.DalProvider.EF.Tests
 {
     [TestFixture]
-    public class KistlDataContextTests
+    public class EFContextTests : AbstractContextTests
     {
+
+        protected override IKistlContext GetContext() { return KistlContext.GetContext(); }
 
         int firstId;
         int secondId;
@@ -534,55 +537,6 @@ namespace Kistl.DalProvider.EF.Tests
         //        Assert.That(obj.TestNames.Count, Is.EqualTo(1));
         //    }
         //}
-
-
-
-        [Test]
-        public void should_find_new_objects()
-        {
-            using (var ctx = KistlContext.GetContext())
-            {
-                var obj = ctx.Create<TestObjClass>();
-                Assert.That(ctx.Find<TestObjClass>(obj.ID), Is.SameAs(obj));
-            }
-
-        }
-
-        [Test]
-        [Ignore("Discuss")]
-        public void should_create_objects_with_valid_IDs()
-        {
-            using (var ctx = KistlContext.GetContext())
-            {
-                int objCount = 10;
-                while (objCount-- > 0)
-                {
-                    var obj = ctx.Create<TestObjClass>();
-                    Assert.That(obj.ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
-                }
-            }
-        }
-
-        [Test]
-        [Ignore("Discuss")]
-        public void should_create_objects_with_different_IDs()
-        {
-            var objList = new List<TestObjClass>();
-            using (var ctx = KistlContext.GetContext())
-            {
-                int objCount = 10;
-                while (objCount-- > 0)
-                {
-                    objList.Add(ctx.Create<TestObjClass>());
-                }
-            }
-
-            Assert.DoesNotThrow(delegate() { 
-                // throws exception on duplicate keys
-                objList.ToDictionary(o => o.ID); 
-            });
-        }
-
 
     }
 }

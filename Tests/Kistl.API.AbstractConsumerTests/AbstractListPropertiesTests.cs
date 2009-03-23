@@ -59,13 +59,13 @@ namespace Kistl.API.AbstractConsumerTests
 
                 Assume.That(navigatedList.Count, Is.GreaterThan(0));
 
-                var manualList = ctx.GetQuery<BaseProperty>().Where(t => t.ObjectClass == cls).ToList();
+                var manualList = ctx.GetQuery<BaseProperty>().Where(t => t.ObjectClass.ID == cls.ID).ToList();
                 Assert.That(navigatedList, Is.EquivalentTo(manualList));
             }
         }
 
         [Test]
-        [Ignore("Needs N:M relation between forzen objects with navigators in both directions")]
+        [Ignore("Needs N:M relation between frozen objects with navigators in both directions")]
         public void navigating_a_nm_list_property_should_yield_related_objects()
         {
             using (IKistlContext ctx = GetContext())
@@ -117,7 +117,7 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var tasks = ctx.GetQuery<Task>().Where(t => t.Projekt.Name == "Kistl");
+                var tasks = ctx.GetQuery<Task>().Where(t => t.Projekt.Name == "Kistl").ToList();
                 var prj = ctx.GetQuery<Projekt>().Where(p => p.Name == "Kistl").Single();
 
                 Assert.That(tasks, Is.EquivalentTo(prj.Tasks), "mismatch of tasks and project.tasks");
