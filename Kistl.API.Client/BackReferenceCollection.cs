@@ -20,21 +20,36 @@ namespace Kistl.API.Client
     public class BackReferenceCollection<T> : IList<T>, INotifyCollectionChanged
         where T : class, IDataObject
     {
-        private string _pointerProperty;
+        private string _fkProperty;
+        private string _posProperty;
         private IDataObject _parent;
         List<T> collection;
 
-        public BackReferenceCollection(string pointerProperty, IDataObject parent)
+        public BackReferenceCollection(string propertyName, IDataObject parent)
+            : this("fk_" + propertyName, propertyName + Helper.PositionSuffix, parent)
         {
-            _pointerProperty = pointerProperty;
+
+        }
+
+        public BackReferenceCollection(string propertyName, IDataObject parent, IEnumerable<T> collection)
+            : this("fk_" + propertyName, propertyName + Helper.PositionSuffix, parent, collection)
+        {
+
+        }
+
+        /// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
+        public BackReferenceCollection(string fkProperty, string posProperty, IDataObject parent)
+        {
+            _fkProperty = fkProperty;
+            _posProperty = posProperty;
             _parent = parent;
             collection = new List<T>();
         }
 
-        public BackReferenceCollection(string pointerProperty, IDataObject parent, IEnumerable<T> collection)
+        /// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
+        public BackReferenceCollection(string fkProperty, string posProperty, IDataObject parent, IEnumerable<T> collection)
+            : this(fkProperty, posProperty, parent)
         {
-            _pointerProperty = pointerProperty;
-            _parent = parent;
             this.collection = new List<T>(collection);
         }
 
@@ -66,30 +81,33 @@ namespace Kistl.API.Client
 
         private void SetPointerProperty(T item, int index)
         {
-            if (item.GetPropertyValue<object>(_pointerProperty) != _parent)
+            if (item.GetPropertyValue<int?>(_fkProperty) != _parent.ID)
             {
-                item.SetPropertyValue<IDataObject>(_pointerProperty, _parent);
+                item.SetPropertyValue<int?>(_fkProperty, _parent.ID);
             }
             // TODO: Optimize in Generator
             // Sets the position Property for a 1:n Relation
             // eg. Method 1-n Parameter
             // Sets Parameter.Method__Position__
-            if (item.HasProperty(_pointerProperty + Helper.PositionSuffix))
+            if (item.HasProperty(_posProperty))
             {
-                item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, index);
+                item.SetPropertyValue<int?>(_posProperty, index);
             }
         }
 
         private void ClearPointerProperty(T item)
         {
-            item.SetPropertyValue<IDataObject>(_pointerProperty, null);
+            if (item.GetPropertyValue<int?>(_fkProperty) != null)
+            {
+                item.SetPropertyValue<int?>(_fkProperty, null);
+            }
             // TODO: Optimize in Generator
             // Clears the position Property for a 1:n Relation
             // eg. Method 1-n Parameter
             // Clears Parameter.Method__Position__
-            if (item.HasProperty(_pointerProperty + Helper.PositionSuffix))
+            if (item.HasProperty(_posProperty))
             {
-                item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, null);
+                item.SetPropertyValue<int?>(_posProperty, null);
             }
         }
 
