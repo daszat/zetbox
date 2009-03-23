@@ -58,7 +58,7 @@ namespace Kistl.API.Server
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <returns>IQueryable</returns>
-        public abstract IQueryable<T> GetQuery<T>() where T : IDataObject;
+        public abstract IQueryable<T> GetQuery<T>() where T : class, IDataObject;
 
         /// <summary>
         /// Returns a Query by System.Type.
@@ -74,7 +74,7 @@ namespace Kistl.API.Server
         /// <param name="obj">Object which holds the BackReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        public virtual List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : IDataObject
+        public virtual List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             return obj.GetPropertyValue<IEnumerable>(propertyName).Cast<T>().ToList();
         }
@@ -87,7 +87,7 @@ namespace Kistl.API.Server
         /// <param name="ID">ID of the Object which holds the BackReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        public virtual List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : IDataObject
+        public virtual List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : class, IDataObject
         {
             IDataObject obj = (IDataObject)this.Find(type, ID);
             return GetListOf<T>(obj, propertyName);
@@ -144,7 +144,7 @@ namespace Kistl.API.Server
         /// </summary>
         /// <typeparam name="T">Type of the new IDataObject</typeparam>
         /// <returns>A new IDataObject</returns>
-        public virtual T Create<T>() where T : IDataObject
+        public virtual T Create<T>() where T : class, IDataObject
         {
             return (T)Create(new InterfaceType(typeof(T)));
         }
@@ -215,7 +215,7 @@ namespace Kistl.API.Server
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public abstract T Find<T>(int ID) where T : IDataObject;
+        public abstract T Find<T>(int ID) where T : class, IDataObject;
 
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 

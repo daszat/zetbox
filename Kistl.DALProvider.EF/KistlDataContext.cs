@@ -132,14 +132,7 @@ namespace Kistl.DALProvider.EF
             // The reason is that "GetEntityName" returns a Query to the baseobject 
             // but maybe a derived object is asked. OfType will filter this.
             // return (ObjectQuery<T>)_table[type];
-            // Also query uncomitted objects, which seem to be ignored by EF
-            return _ctx.ObjectStateManager
-                    .GetObjectStateEntries(System.Data.EntityState.Added)
-                    .Select(ose => ose.Entity)
-                    .OfType<T>()
-                    .AsQueryable()
-                    .Concat(
-                        ((IQueryable<T>)_table[type]).OfType<T>());
+            return ((IQueryable<T>)_table[type]).OfType<T>();
         }
 
         public System.Collections.IList GetListHack<T>()
@@ -358,7 +351,6 @@ namespace Kistl.DALProvider.EF
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
-        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
@@ -367,7 +359,8 @@ namespace Kistl.DALProvider.EF
         {
             try
             {
-                return GetQuery<T>().First(o => o.ID == ID);
+                return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
+                    ?? GetQuery<T>().First(o => o.ID == ID);
             }
             catch (InvalidOperationException)
             {

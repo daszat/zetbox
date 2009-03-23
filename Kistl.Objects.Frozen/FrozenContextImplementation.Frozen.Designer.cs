@@ -39,7 +39,7 @@ namespace Kistl.App
 		}
 
 		public IQueryable<T> GetQuery<T>()
-			where T : IDataObject
+            where T : class, IDataObject
 		{
 			return GetQuery(new InterfaceType(typeof(T))).Cast<T>();
 		}
@@ -302,7 +302,7 @@ namespace Kistl.App
 		}
 
         public T Find<T>(int ID)
-			where T : IDataObject
+			where T : class, IDataObject
         {
 			return (T)Find(new InterfaceType(typeof(T)), ID);
         }

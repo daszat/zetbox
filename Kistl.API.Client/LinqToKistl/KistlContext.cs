@@ -127,7 +127,7 @@ namespace Kistl.API.Client
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <returns>IQueryable</returns>
-        public IQueryable<T> GetQuery<T>() where T : IDataObject
+        public IQueryable<T> GetQuery<T>() where T : class, IDataObject
         {
             CheckDisposed();
             return new KistlContextQuery<T>(this, new InterfaceType(typeof(T)));
@@ -140,7 +140,7 @@ namespace Kistl.API.Client
         /// <param name="obj">Object which holds the BackReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : IDataObject
+        public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
             return this.GetListOf<T>(obj.GetInterfaceType(), obj.ID, propertyName);
@@ -154,7 +154,7 @@ namespace Kistl.API.Client
         /// <param name="ID">ID of the Object which holds the BackReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        public List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : IDataObject
+        public List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
             KistlContextQuery<T> query = new KistlContextQuery<T>(this, type);
@@ -219,7 +219,7 @@ namespace Kistl.API.Client
         /// </summary>
         /// <typeparam name="T">Type of the new IDataObject</typeparam>
         /// <returns>A new IDataObject</returns>
-        public T Create<T>() where T : IDataObject
+        public T Create<T>() where T : class, IDataObject
         {
             return (T)Create(new InterfaceType(typeof(T)));
         }
@@ -471,7 +471,7 @@ namespace Kistl.API.Client
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public T Find<T>(int ID)
-            where T : IDataObject
+            where T : class, IDataObject
         {
             CheckDisposed();
             IPersistenceObject cacheHit = _objects.Lookup(typeof(T), ID);

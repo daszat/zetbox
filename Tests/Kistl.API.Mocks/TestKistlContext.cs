@@ -24,7 +24,7 @@ namespace Kistl.API.Mocks
 
         }
 
-        public IQueryable<T> GetQuery<T>() where T : IDataObject
+        public IQueryable<T> GetQuery<T>() where T : class, IDataObject
         {
             throw new NotImplementedException();
         }
@@ -34,12 +34,12 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
-        public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : IDataObject
+        public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             throw new NotImplementedException();
         }
 
-        public List<T> GetListOf<T>(InterfaceType ifType, int ID, string propertyName) where T : IDataObject
+        public List<T> GetListOf<T>(InterfaceType ifType, int ID, string propertyName) where T : class, IDataObject
         {
             throw new NotImplementedException();
         }
@@ -74,7 +74,7 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
-        public T Create<T>() where T : IDataObject
+        public T Create<T>() where T : class, IDataObject
         {
             throw new NotImplementedException();
         }
@@ -104,7 +104,7 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
-        public T Find<T>(int ID) where T : IDataObject
+        public T Find<T>(int ID) where T : class, IDataObject
         {
             throw new NotImplementedException();
         }

@@ -161,7 +161,7 @@ namespace Kistl.API.Server
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class BaseServerObjectHandler<T> : IServerObjectHandler
-        where T : IDataObject
+        where T : class, IDataObject
     {
         /// <summary>
         /// Events registrieren

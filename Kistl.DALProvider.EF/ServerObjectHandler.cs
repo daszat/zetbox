@@ -19,7 +19,7 @@ namespace Kistl.DALProvider.EF
 {
     public class ServerObjectHandler<T>
         : BaseServerObjectHandler<T>
-        where T : IDataObject
+        where T : class, IDataObject
     {
         /// <summary>
         /// Gibt eine typisierte Objektinstanz zurück.

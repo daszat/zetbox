@@ -49,7 +49,7 @@ namespace Kistl.API
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <returns>IQueryable</returns>
-        IQueryable<T> GetQuery<T>() where T : IDataObject;
+        IQueryable<T> GetQuery<T>() where T : class, IDataObject;
         /// <summary>
         /// Returns a Query by InterfaceType
         /// </summary>
@@ -64,7 +64,7 @@ namespace Kistl.API
         /// <param name="obj">Object which holds the BackReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : IDataObject;
+        List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject;
         /// <summary>
         /// Returns the List of a BackReferenceProperty by the given Type, ID and PropertyName.
         /// </summary>
@@ -73,7 +73,7 @@ namespace Kistl.API
         /// <param name="ID">ID of the Object which holds the BackReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
         /// <returns>A List of Objects</returns>
-        List<T> GetListOf<T>(InterfaceType ifType, int ID, string propertyName) where T : IDataObject;
+        List<T> GetListOf<T>(InterfaceType ifType, int ID, string propertyName) where T : class, IDataObject;
 
         /// <summary>
         /// Fetches all collection entries of a given Relation (specified by <paramref name="ID"/>)
@@ -124,7 +124,7 @@ namespace Kistl.API
         /// </summary>
         /// <typeparam name="T">Type of the new IDataObject</typeparam>
         /// <returns>A new IDataObject</returns>
-        T Create<T>() where T : IDataObject;
+        T Create<T>() where T : class, IDataObject;
 
         /// <summary>
         /// Creates a new ICollectionEntry by Type
@@ -169,7 +169,7 @@ namespace Kistl.API
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        T Find<T>(int ID) where T : IDataObject;
+        T Find<T>(int ID) where T : class, IDataObject;
 
 
         /// <summary>
