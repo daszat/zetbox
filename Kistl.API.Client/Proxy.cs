@@ -166,8 +166,8 @@ namespace Kistl.API.Client
                 msg.Filter = filter != null ? SerializableExpression.FromExpression(filter) : null;
                 msg.OrderBy = orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o)).ToList() : new List<SerializableExpression>();
 
-                System.IO.MemoryStream s = serviceStreams.GetList(msg.ToStream());
-                System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
+                MemoryStream s = serviceStreams.GetList(msg.ToStream());
+                BinaryReader sr = new BinaryReader(s);
 
                 List<Kistl.API.IDataObject> result = new List<Kistl.API.IDataObject>();
                 bool cont = true;
@@ -178,7 +178,7 @@ namespace Kistl.API.Client
                     SerializableType objType;
                     BinarySerializer.FromStream(out objType, sr);
 
-                    s.Seek(pos, System.IO.SeekOrigin.Begin);
+                    s.Seek(pos, SeekOrigin.Begin);
 
                     IDataObject obj = (IDataObject)objType.NewObject();
                     obj.FromStream(sr);
@@ -204,8 +204,8 @@ namespace Kistl.API.Client
                 msg.Type = new SerializableType(ifType);
                 msg.ID = ID;
                 msg.Property = property;
-                System.IO.MemoryStream s = serviceStreams.GetListOf(msg.ToStream());
-                System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
+                MemoryStream s = serviceStreams.GetListOf(msg.ToStream());
+                BinaryReader sr = new BinaryReader(s);
 
                 List<Kistl.API.IDataObject> result = new List<Kistl.API.IDataObject>();
 
@@ -217,7 +217,7 @@ namespace Kistl.API.Client
                     SerializableType objType;
                     BinarySerializer.FromStream(out objType, sr);
 
-                    s.Seek(pos, System.IO.SeekOrigin.Begin);
+                    s.Seek(pos, SeekOrigin.Begin);
 
                     IDataObject obj = (IDataObject)objType.NewObject();
                     obj.FromStream(sr);
@@ -242,13 +242,13 @@ namespace Kistl.API.Client
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
                 msg.Type = new SerializableType(ifType);
                 msg.ID = ID;
-                System.IO.MemoryStream s = serviceStreams.GetObject(msg.ToStream());
-                System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
+                MemoryStream s = serviceStreams.GetObject(msg.ToStream());
+                BinaryReader sr = new BinaryReader(s);
 
                 SerializableType objType;
                 BinarySerializer.FromStream(out objType, sr);
 
-                s.Seek(0, System.IO.SeekOrigin.Begin);
+                s.Seek(0, SeekOrigin.Begin);
 
                 IDataObject obj = (IDataObject)objType.NewObject();
                 obj.FromStream(sr);
@@ -277,10 +277,10 @@ namespace Kistl.API.Client
                 BinarySerializer.ToStream(false, sw);
 
                 // Set Operation
-                System.IO.MemoryStream s = serviceStreams.SetObjects(ms);
+                MemoryStream s = serviceStreams.SetObjects(ms);
 
                 // Deserialize
-                System.IO.BinaryReader sr = new System.IO.BinaryReader(s);
+                BinaryReader sr = new BinaryReader(s);
 
                 var result = new List<IPersistenceObject>();
                 bool @continue;
@@ -291,7 +291,7 @@ namespace Kistl.API.Client
                     SerializableType objType;
                     BinarySerializer.FromStream(out objType, sr);
 
-                    s.Seek(pos, System.IO.SeekOrigin.Begin);
+                    s.Seek(pos, SeekOrigin.Begin);
 
                     var obj = (IPersistenceObject)objType.NewObject();
                     obj.FromStream(sr);
@@ -318,7 +318,7 @@ namespace Kistl.API.Client
                     return new List<INewCollectionEntry<A, B>>();
 
                 MemoryStream ms = serviceStreams.FetchRelation(relationId, (int)role, parent.ID);
-                System.IO.BinaryReader sr = new System.IO.BinaryReader(ms);
+                BinaryReader sr = new BinaryReader(ms);
 
                 List<INewCollectionEntry<A, B>> result = new List<INewCollectionEntry<A, B>>();
                 bool cont = true;
@@ -329,7 +329,7 @@ namespace Kistl.API.Client
                     SerializableType objType;
                     BinarySerializer.FromStream(out objType, sr);
 
-                    ms.Seek(pos, System.IO.SeekOrigin.Begin);
+                    ms.Seek(pos, SeekOrigin.Begin);
 
                     var obj = (INewCollectionEntry<A, B>)objType.NewObject();
                     obj.FromStream(sr);
