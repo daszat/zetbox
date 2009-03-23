@@ -14,11 +14,29 @@ namespace Kistl.API.Client.Tests
 
         public class TestObject : IDataObject
         {
+            public static Dictionary<int, TestObject> Instances = new Dictionary<int, TestObject>();
+            private static int MaxId = Helper.INVALIDID;
+
+            
             public TestObject Parent { get; set; }
+            public int? fk_Parent
+            {
+                get { return Parent == null ? (int?)null : Parent.ID; }
+                private set
+                {
+                    if (value.HasValue)
+                        Parent = TestObject.Instances[value.Value];
+                    else
+                        Parent = null;
+                }
+            }
+
             public BackReferenceCollection<TestObject> Children { get; private set; }
 
             public TestObject()
             {
+                this.ID = ++MaxId;
+                TestObject.Instances[this.ID] = this;
                 Children = new BackReferenceCollection<TestObject>("Parent", this);
             }
 
@@ -119,8 +137,8 @@ namespace Kistl.API.Client.Tests
 
             #endregion
 
-            public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-            public event System.ComponentModel.PropertyChangingEventHandler PropertyChanging;
+            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangingEventHandler PropertyChanging;
 
             #region ICloneable Member
 
