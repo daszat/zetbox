@@ -44,6 +44,7 @@ namespace Kistl.API.Client
         #endregion
 
         #region IEnumerable Members
+
         public IEnumerator<T> GetEnumerator()
         {
             return ((IEnumerable<T>)_provider.GetListCall<List<T>>(this._expression)).GetEnumerator();
@@ -51,11 +52,13 @@ namespace Kistl.API.Client
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable<T>)_provider.GetListCall<List<IDataObject>>(this._expression)).GetEnumerator();
+            return ((IEnumerable)_provider.GetListCall<List<IDataObject>>(this._expression)).GetEnumerator();
         }
+        
         #endregion
 
         #region IQueryable Members
+        
         public Type ElementType
         {
             get { return typeof(T); }
