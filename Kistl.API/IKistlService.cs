@@ -1,14 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.ServiceModel;
-using System.Xml;
-using System.Runtime.Serialization;
-using System.Xml.Serialization;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.ServiceModel;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Kistl.API
 {
@@ -55,7 +56,7 @@ namespace Kistl.API
         /// Deserializes a Message from the given Stream.
         /// </summary>
         /// <param name="msg">Stream</param>
-        public KistlServiceStreamsMessage(System.IO.Stream msg)
+        public KistlServiceStreamsMessage(Stream msg)
         {
             FromStream(msg);
         }
@@ -64,9 +65,9 @@ namespace Kistl.API
         /// Serializes the Message to a Stream.
         /// </summary>
         /// <param name="msg">Stream.</param>
-        public void ToStream(System.IO.Stream msg)
+        public void ToStream(Stream msg)
         {
-            System.IO.BinaryWriter sw = new System.IO.BinaryWriter(msg);
+            BinaryWriter sw = new BinaryWriter(msg);
 
             BinarySerializer.ToStream(Type, sw);
             sw.Write(ID);
@@ -89,9 +90,9 @@ namespace Kistl.API
         /// Serializes the Message to a Stream.
         /// </summary>
         /// <returns>new MemoryStream</returns>
-        public System.IO.MemoryStream ToStream()
+        public MemoryStream ToStream()
         {
-            System.IO.MemoryStream s = new System.IO.MemoryStream();
+            MemoryStream s = new MemoryStream();
             ToStream(s);
             return s;
         }
@@ -100,9 +101,9 @@ namespace Kistl.API
         /// Deserializes a Message from the given Stream.
         /// </summary>
         /// <param name="msg">Stream</param>
-        public void FromStream(System.IO.Stream msg)
+        public void FromStream(Stream msg)
         {
-            System.IO.BinaryReader sr = new System.IO.BinaryReader(msg);
+            BinaryReader sr = new BinaryReader(msg);
 
             SerializableType tmpType;
             BinarySerializer.FromStream(out tmpType, sr); Type = tmpType;
@@ -141,7 +142,7 @@ namespace Kistl.API
         /// <param name="msg"></param>
         /// <returns></returns>
         [OperationContract]
-        System.IO.MemoryStream GetObject(System.IO.MemoryStream msg);
+        MemoryStream GetObject(MemoryStream msg);
 
         /// <summary>
         /// 
@@ -149,7 +150,7 @@ namespace Kistl.API
         /// <param name="msg"></param>
         /// <returns></returns>
         [OperationContract]
-        System.IO.MemoryStream SetObjects(System.IO.MemoryStream msg);
+        MemoryStream SetObjects(MemoryStream msg);
 
         /// <summary>
         /// 
@@ -157,7 +158,7 @@ namespace Kistl.API
         /// <param name="msg"></param>
         /// <returns></returns>
         [OperationContract]
-        System.IO.MemoryStream GetList(System.IO.MemoryStream msg);
+        MemoryStream GetList(MemoryStream msg);
 
         /// <summary>
         /// 
@@ -165,11 +166,13 @@ namespace Kistl.API
         /// <param name="msg"></param>
         /// <returns></returns>
         [OperationContract]
-        System.IO.MemoryStream GetListOf(System.IO.MemoryStream msg);
+        MemoryStream GetListOf(MemoryStream msg);
 
 
         /// <summary>
-        /// Fetches a list of CollectionEntry objects of the Relation <paramref name="relID"/> which are owned by the object with the ID <paramref name="ID"/> in the role <paramref name="role"/>.
+        /// Fetches a list of CollectionEntry objects of the Relation 
+        /// <paramref name="relID"/> which are owned by the object with the 
+        /// ID <paramref name="ID"/> in the role <paramref name="role"/>.
         /// </summary>
         /// <param name="relId">the requested Relation</param>
         /// <param name="role">the parent role (1 == A, 2 == B)</param>
@@ -177,7 +180,7 @@ namespace Kistl.API
         /// <returns></returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        System.IO.MemoryStream FetchRelation(int relId, int role, int ID);
+        MemoryStream FetchRelation(int relId, int role, int ID);
     }
 
     /// <summary>
