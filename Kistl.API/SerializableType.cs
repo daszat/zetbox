@@ -18,7 +18,7 @@ namespace Kistl.API
         /// This class is used to place type information on the wire. Since the wire protocol is Provider independent, 
         /// only interface types are stored. Usually this is used to declare the type of the following IPersistenceObject.
         /// </summary>
-        /// <param name="type">System.Type to serialize</param>
+        /// <param name="ifType">System.Type to serialize</param>
         public SerializableType(InterfaceType ifType)
         {
             var type = ifType.Type;
