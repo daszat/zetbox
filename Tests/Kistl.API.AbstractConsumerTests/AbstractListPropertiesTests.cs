@@ -85,11 +85,11 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var prj1 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").Single();
+                var prj1 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").ToList().Single();
                 var list1 = prj1.Properties;
                 Assume.That(list1.Count, Is.GreaterThan(0));
 
-                var prj2 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").Single();
+                var prj2 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").ToList().Single();
                 var list2 = prj2.Properties;
 
                 Assert.That(list2, Is.SameAs(list1));
@@ -101,11 +101,11 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var prj1 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").Single();
+                var prj1 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").ToList().Single();
                 var list1 = prj1.ImplementsInterfaces;
                 Assume.That(list1.Count, Is.GreaterThan(0));
 
-                var prj2 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").Single();
+                var prj2 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").ToList().Single();
                 var list2 = prj2.ImplementsInterfaces;
 
                 Assert.That(list2, Is.SameAs(list1));
@@ -118,7 +118,7 @@ namespace Kistl.API.AbstractConsumerTests
             using (IKistlContext ctx = GetContext())
             {
                 var tasks = ctx.GetQuery<Task>().Where(t => t.Projekt.Name == "Kistl").ToList();
-                var prj = ctx.GetQuery<Projekt>().Where(p => p.Name == "Kistl").Single();
+                var prj = ctx.GetQuery<Projekt>().Where(p => p.Name == "Kistl").ToList().Single();
 
                 Assert.That(tasks, Is.EquivalentTo(prj.Tasks), "mismatch of tasks and project.tasks");
                 Assert.That(tasks.Select(t => t.Projekt), Has.All.EqualTo(prj), "task has wrong parent Project");
@@ -137,22 +137,18 @@ namespace Kistl.API.AbstractConsumerTests
             string mail = "";
             using (IKistlContext ctx = GetContext())
             {
-                var list = ctx.GetQuery<Kunde>();
-                foreach (Kunde k in list)
-                {
-                    mail = "UnitTest" + DateTime.Now + "@dasz.at";
-                    ID = k.ID;
-                    k.EMails.Add(mail);
-                    break;
-                }
+                var k = ctx.GetQuery<Kunde>().First();
+                mail = "UnitTest" + DateTime.Now + "@dasz.at";
+                ID = k.ID;
+                k.EMails.Add(mail);
                 Assert.That(mail, Is.Not.EqualTo(""));
                 int submitCount = ctx.SubmitChanges();
-                Assert.That(submitCount, Is.EqualTo(1));
+                Assert.That(submitCount, Is.GreaterThan(0));
             }
 
             using (IKistlContext ctx = GetContext())
             {
-                var kunde = ctx.GetQuery<Kunde>().Single(k => k.ID == ID);
+                var kunde = ctx.Find<Kunde>(ID);
                 Assert.That(kunde, Is.Not.Null);
                 Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
                 var result = kunde.EMails.SingleOrDefault(m => m == mail);
@@ -181,12 +177,12 @@ namespace Kistl.API.AbstractConsumerTests
                 }
                 Assert.That(mail, Is.Not.EqualTo(""));
                 int submitCount = ctx.SubmitChanges();
-                Assert.That(submitCount, Is.EqualTo(1));
+                Assert.That(submitCount, Is.GreaterThan(0));
             }
 
             using (IKistlContext ctx = GetContext())
             {
-                var kunde = ctx.GetQuery<Kunde>().Single(k => k.ID == ID);
+                var kunde = ctx.Find<Kunde>(ID);
                 Assert.That(kunde, Is.Not.Null);
                 Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
                 var result = kunde.EMails.SingleOrDefault(m => m == mail);
@@ -215,12 +211,12 @@ namespace Kistl.API.AbstractConsumerTests
                     }
                 }
                 int submitCount = ctx.SubmitChanges();
-                Assert.That(submitCount, Is.EqualTo(1));
+                Assert.That(submitCount, Is.GreaterThan(0));
             }
 
             using (IKistlContext ctx = GetContext())
             {
-                var kunde = ctx.GetQuery<Kunde>().Single(k => k.ID == ID);
+                var kunde = ctx.Find<Kunde>(ID);
                 Assert.That(kunde, Is.Not.Null);
                 Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
 
