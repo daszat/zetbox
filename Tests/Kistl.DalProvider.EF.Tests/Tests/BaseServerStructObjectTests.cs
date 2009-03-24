@@ -19,6 +19,8 @@ namespace Kistl.DalProvider.EF.Tests
     public class BaseServerStructObjectTests
         : IStreamableTests<TestPhoneStruct__Implementation__>
     {
+        TestCustomObject__Implementation__ parent;
+        TestPhoneStruct__Implementation__ attachedObj;
 
         [SetUp]
         public void SetUpTestObject()
@@ -26,14 +28,22 @@ namespace Kistl.DalProvider.EF.Tests
             var testCtx = new ServerApiContextMock();
 
             obj = new TestPhoneStruct__Implementation__() { AreaCode = "ABC", Number = "123456" };
+
+            parent = new TestCustomObject__Implementation__();
+            attachedObj = (TestPhoneStruct__Implementation__)parent.PhoneNumberOffice;
+            attachedObj.AreaCode = "attachedAreaCode";
+            attachedObj.Number = "attachedNumber";
         }
 
         [Test]
         public void Clone_creates_memberwise_equal_object()
         {
             var c = (TestPhoneStruct)obj.Clone();
+
             Assert.That(c.AreaCode, Is.EqualTo(obj.AreaCode));
             Assert.That(c.Number, Is.EqualTo(obj.Number));
+            Assert.That((c as BaseStructObject).ParentObject, Is.Null, "cloned object should not be attached to foreign object");
+            Assert.That((c as BaseStructObject).ParentProperty, Is.Null, "cloned object should forget old ParentProperty");
         }
 
         [Test]
@@ -48,27 +58,78 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void NotifyPropertyChanged_ing()
         {
+            const string testValue = "test";
+
             bool hasChanged = false;
             bool hasChanging = false;
 
-            PropertyChangedEventHandler changedHandler = new PropertyChangedEventHandler(delegate(object sender, PropertyChangedEventArgs e) { hasChanged = true; });
-            PropertyChangingEventHandler changingHanlder = new PropertyChangingEventHandler(delegate(object sender, PropertyChangingEventArgs e) { hasChanging = true; });
+            PropertyChangingEventHandler changingHandler = new PropertyChangingEventHandler(delegate(object sender, PropertyChangingEventArgs e)
+            {
+                Assert.That(hasChanging, Is.False, "changing event should be only triggered once");
+                Assert.That(sender, Is.SameAs(obj), "sender should be the changing object");
+                Assert.That(e.PropertyName, Is.EqualTo("AreaCode"), "changing property name should be correct");
+                Assert.That(obj.AreaCode, Is.Not.EqualTo(testValue), "changing event should be triggered before the value has changed");
+                hasChanging = true;
+            });
+            PropertyChangedEventHandler changedHandler = new PropertyChangedEventHandler(delegate(object sender, PropertyChangedEventArgs e)
+            {
+                Assert.That(hasChanged, Is.False, "changed event should be only triggered once");
+                Assert.That(sender, Is.SameAs(obj), "sender should be the changed object");
+                Assert.That(e.PropertyName, Is.EqualTo("AreaCode"), "changed property name should be correct");
+                Assert.That(obj.AreaCode, Is.EqualTo(testValue), "changed event should be triggered after the value has changed");
+                hasChanged = true;
+            });
 
             obj.PropertyChanged += changedHandler;
-            obj.PropertyChanging += changingHanlder;
+            obj.PropertyChanging += changingHandler;
 
-            obj.NotifyPropertyChanging("AreaCode");
-            obj.AreaCode = "test";
-            obj.NotifyPropertyChanged("AreaCode");
+            obj.AreaCode = testValue;
 
             Assert.That(hasChanged, Is.True);
             Assert.That(hasChanging, Is.True);
 
             obj.PropertyChanged -= changedHandler;
-            obj.PropertyChanging -= changingHanlder;
+            obj.PropertyChanging -= changingHandler;
         }
 
-        
+        [Test]
+        public void Parent_NotifyPropertyChanged_ing()
+        {
+            const string testValue = "test";
+
+            bool hasChanged = false;
+            bool hasChanging = false;
+
+            PropertyChangingEventHandler changingHandler = new PropertyChangingEventHandler(delegate(object sender, PropertyChangingEventArgs e)
+            {
+                Assert.That(hasChanging, Is.False, "changing event should be only triggered once");
+                Assert.That(sender, Is.SameAs(parent), "sender should be the changing object");
+                Assert.That(e.PropertyName, Is.EqualTo("PhoneNumberOffice"), "changing property name should be correct");
+                Assert.That(parent.PhoneNumberOffice.AreaCode, Is.Not.EqualTo(testValue), "changing event should be triggered before the value has changed");
+                hasChanging = true;
+            });
+            PropertyChangedEventHandler changedHandler = new PropertyChangedEventHandler(delegate(object sender, PropertyChangedEventArgs e)
+            {
+                Assert.That(hasChanged, Is.False, "changed event should be only triggered once");
+                Assert.That(sender, Is.SameAs(parent), "sender should be the changed object");
+                Assert.That(e.PropertyName, Is.EqualTo("PhoneNumberOffice"), "changed property name should be correct");
+                Assert.That(parent.PhoneNumberOffice.AreaCode, Is.EqualTo(testValue), "changed event should be triggered after the value has changed");
+                hasChanged = true;
+            });
+
+            parent.PropertyChanged += changedHandler;
+            parent.PropertyChanging += changingHandler;
+
+            parent.PhoneNumberOffice.AreaCode = testValue;
+
+            Assert.That(hasChanged, Is.True);
+            Assert.That(hasChanging, Is.True);
+
+            parent.PropertyChanged -= changedHandler;
+            parent.PropertyChanging -= changingHandler;
+        }
+
+
         [Test]
         public void should_be_initialised_as_members()
         {
@@ -81,6 +142,6 @@ namespace Kistl.DalProvider.EF.Tests
                 Is.EqualTo("PhoneNumberMobile"),
                 "parent property name should be initialised correctly when creating an object");
         }
-	
+
     }
 }

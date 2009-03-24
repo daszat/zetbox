@@ -58,7 +58,7 @@ namespace Kistl.IntegrationTests
                 obj.PhoneNumberOffice.AreaCode = "1";
                 obj.PhoneNumberOffice.Number = number;
 
-                Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
+                Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0), "no changes were submitted");
 
                 ID = obj.ID;
             }
@@ -106,7 +106,7 @@ namespace Kistl.IntegrationTests
                 obj.PhoneNumberOffice.AreaCode = "1";
                 obj.PhoneNumberOffice.Number = number;
 
-                Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
+                Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0), "no changes were submitted");
             }
             
             using (IKistlContext ctx = KistlContext.GetContext())
@@ -145,7 +145,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(testObject.PhoneNumberMobile.Number, Is.EqualTo(number));
                 Assert.That(testObject.PhoneNumberOffice.Number, Is.EqualTo(number));
 
-                Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
+                Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0), "no changes were submitted");
 
                 ID = testObject.ID;
             }
@@ -185,7 +185,7 @@ namespace Kistl.IntegrationTests
                 testObject.PhoneNumberOffice = null;
                 testObject.PhoneNumberMobile = null;
 
-                Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
+                Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0), "no changes were submitted");
 
                 ID = testObject.ID;
             }
