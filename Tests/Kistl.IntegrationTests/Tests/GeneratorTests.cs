@@ -31,6 +31,7 @@ namespace Kistl.IntegrationTests
 
 
         [Test]
+        [Ignore("times out after 30s due to WCF policy")]
         public void Generate()
         {
             Proxy.Current.Generate();
