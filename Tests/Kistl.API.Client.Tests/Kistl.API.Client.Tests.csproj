@@ -65,6 +65,7 @@
     <Compile Include="Tests\BackReferenceCollectionTests.cs" />
     <Compile Include="Tests\BaseClientCollectionEntryTests.cs" />
     <Compile Include="Tests\BaseClientDataObjectTests.cs" />
+    <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
     <Compile Include="Tests\KistlContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
