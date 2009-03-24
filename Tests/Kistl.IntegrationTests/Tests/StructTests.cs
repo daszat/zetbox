@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Kistl.API;
 using Kistl.API.Client;
+using Kistl.App.Test;
 using Kistl.Client;
 
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Kistl.IntegrationTests
 {
@@ -27,17 +28,17 @@ namespace Kistl.IntegrationTests
         public void CreateObjectWithStruct()
         {
             int ID = Kistl.API.Helper.INVALIDID;
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var obj = ctx.Create<Kistl.App.Test.TestCustomObject>();
+                var obj = ctx.Create<TestCustomObject>();
                 obj.PersonName = "TestPerson " + rnd.Next();
                 obj.Birthday = DateTime.Now;
 
                 Assert.That(obj.PhoneNumberMobile, Is.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Null);
 
-                obj.PhoneNumberMobile = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
-                obj.PhoneNumberOffice = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
+                obj.PhoneNumberMobile = ctx.CreateStruct<TestPhoneStruct>();
+                obj.PhoneNumberOffice = ctx.CreateStruct<TestPhoneStruct>();
 
                 obj.PhoneNumberMobile.AreaCode = "1";
                 obj.PhoneNumberMobile.Number = number;
@@ -50,7 +51,7 @@ namespace Kistl.IntegrationTests
                 ID = obj.ID;
             }
 
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var obj = ctx.Find<Kistl.App.Test.TestCustomObject>(ID);
                 Assert.That(obj, Is.Not.Null);
@@ -64,12 +65,12 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetObjectWithStruct()
         {
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var objList = ctx.GetQuery<Kistl.App.Test.TestCustomObject>();
+                var objList = ctx.GetQuery<TestCustomObject>();
                 foreach (var obj in objList)
                 {
-                    Assert.That(obj.ID, Is.GreaterThan(Kistl.API.Helper.INVALIDID));
+                    Assert.That(obj.ID, Is.GreaterThan(Helper.INVALIDID));
                 }
             }
         }
@@ -78,14 +79,14 @@ namespace Kistl.IntegrationTests
         public void SaveObjectWithStruct()
         {
             int ID = Kistl.API.Helper.INVALIDID;
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var objList = ctx.GetQuery<Kistl.App.Test.TestCustomObject>();
+                var objList = ctx.GetQuery<TestCustomObject>();
                 var obj = objList.First();
                 ID = obj.ID;
 
-                obj.PhoneNumberMobile = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
-                obj.PhoneNumberOffice = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
+                obj.PhoneNumberMobile = ctx.CreateStruct<TestPhoneStruct>();
+                obj.PhoneNumberOffice = ctx.CreateStruct<TestPhoneStruct>();
 
                 obj.PhoneNumberMobile.AreaCode = "1";
                 obj.PhoneNumberMobile.Number = number;
@@ -96,9 +97,9 @@ namespace Kistl.IntegrationTests
                 Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
             }
             
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var obj = ctx.Find<Kistl.App.Test.TestCustomObject>(ID);
+                var obj = ctx.Find<TestCustomObject>(ID);
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
@@ -116,10 +117,10 @@ namespace Kistl.IntegrationTests
             int ID = Kistl.API.Helper.INVALIDID;
             string oldNumber;
 
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var objList = ctx.GetQuery<Kistl.App.Test.TestCustomObject>();
-                Kistl.App.Test.TestCustomObject testObject = null;
+                var objList = ctx.GetQuery<TestCustomObject>();
+                TestCustomObject testObject = null;
                 foreach (var obj in objList)
                 {
                     if (obj.PhoneNumberMobile != null && obj.PhoneNumberOffice != null)
@@ -144,7 +145,7 @@ namespace Kistl.IntegrationTests
                 ID = testObject.ID;
             }
 
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var obj = ctx.Find<Kistl.App.Test.TestCustomObject>(ID);
                 Assert.That(obj, Is.Not.Null);
@@ -162,10 +163,10 @@ namespace Kistl.IntegrationTests
             int ID = Kistl.API.Helper.INVALIDID;
             string number = new Random().Next().ToString();
 
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var objList = ctx.GetQuery<Kistl.App.Test.TestCustomObject>();
-                Kistl.App.Test.TestCustomObject testObject = null;
+                var objList = ctx.GetQuery<TestCustomObject>();
+                TestCustomObject testObject = null;
                 foreach (var obj in objList)
                 {
                     if (obj.PhoneNumberMobile != null && obj.PhoneNumberOffice != null)
@@ -184,9 +185,9 @@ namespace Kistl.IntegrationTests
                 ID = testObject.ID;
             }
 
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var obj = ctx.Find<Kistl.App.Test.TestCustomObject>(ID);
+                var obj = ctx.Find<TestCustomObject>(ID);
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.PhoneNumberMobile, Is.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Null);
