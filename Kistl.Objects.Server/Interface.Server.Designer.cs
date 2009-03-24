@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Interface")]
     public class Interface__Implementation__ : Kistl.App.Base.DataType__Implementation__, Interface
     {
+    
+		public Interface__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

@@ -24,6 +24,12 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Visual")]
     public class Visual__Implementation__ : BaseServerDataObject_EntityFramework, Visual
     {
+    
+		public Visual__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

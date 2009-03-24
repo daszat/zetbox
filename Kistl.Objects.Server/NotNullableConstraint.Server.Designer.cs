@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("NotNullableConstraint")]
     public class NotNullableConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, NotNullableConstraint
     {
+    
+		public NotNullableConstraint__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

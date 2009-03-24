@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("EnumerationEntry")]
     public class EnumerationEntry__Implementation__ : BaseClientDataObject, EnumerationEntry
     {
+    
+		public EnumerationEntry__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

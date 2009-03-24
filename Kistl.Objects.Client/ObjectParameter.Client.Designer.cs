@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectParameter")]
     public class ObjectParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, ObjectParameter
     {
+    
+		public ObjectParameter__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

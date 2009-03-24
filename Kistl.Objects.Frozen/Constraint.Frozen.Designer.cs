@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Constraint")]
     public class Constraint__Implementation__Frozen : BaseFrozenDataObject, Constraint
     {
+    
+		public Constraint__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

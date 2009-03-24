@@ -54,6 +54,13 @@ namespace <%= DataType.Module.Namespace %>
     [System.Diagnostics.DebuggerDisplay("<%= DataType.ClassName %>")]
     public class <%= mungedClassName %> <%= GetInheritance() %>
     {
+    
+		public <%= mungedClassName %>()
+		{
+<%
+            ApplyConstructorTemplate();
+%>
+        }
 
 <%
         ApplyIDPropertyTemplate();

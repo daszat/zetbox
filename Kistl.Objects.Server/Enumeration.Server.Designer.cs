@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Enumeration")]
     public class Enumeration__Implementation__ : Kistl.App.Base.DataType__Implementation__, Enumeration
     {
+    
+		public Enumeration__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

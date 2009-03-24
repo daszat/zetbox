@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectParameter")]
     public class ObjectParameter__Implementation__Frozen : Kistl.App.Base.BaseParameter__Implementation__Frozen, ObjectParameter
     {
+    
+		public ObjectParameter__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

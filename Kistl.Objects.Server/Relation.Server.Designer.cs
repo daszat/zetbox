@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Relation")]
     public class Relation__Implementation__ : BaseServerDataObject_EntityFramework, Relation
     {
+    
+		public Relation__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

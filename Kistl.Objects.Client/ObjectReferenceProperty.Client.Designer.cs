@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty")]
     public class ObjectReferenceProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, ObjectReferenceProperty
     {
+    
+		public ObjectReferenceProperty__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

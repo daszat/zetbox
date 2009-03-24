@@ -24,6 +24,12 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Auftrag")]
     public class Auftrag__Implementation__ : BaseServerDataObject_EntityFramework, Auftrag
     {
+    
+		public Auftrag__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

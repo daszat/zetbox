@@ -24,6 +24,12 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Kunde")]
     public class Kunde__Implementation__ : BaseServerDataObject_EntityFramework, Kunde
     {
+    
+		public Kunde__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

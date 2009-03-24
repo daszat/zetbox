@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
     public class TypeRef__Implementation__ : BaseClientDataObject, TypeRef
     {
+    
+		public TypeRef__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

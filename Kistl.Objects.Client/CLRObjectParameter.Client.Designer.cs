@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CLRObjectParameter")]
     public class CLRObjectParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, CLRObjectParameter
     {
+    
+		public CLRObjectParameter__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

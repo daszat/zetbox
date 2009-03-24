@@ -24,6 +24,18 @@ namespace Kistl.IntegrationTests
             number = rnd.Next().ToString();
         }
 
+        
+        [Test]
+        public void structs_should_always_be_initialised()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var tco = ctx.GetQuery<TestCustomObject>().FirstOrDefault();
+                Assert.That(tco.PhoneNumberMobile, Is.Not.Null, "structs should be initialised");
+            }
+        }
+	
+
         [Test]
         public void CreateObjectWithStruct()
         {
@@ -120,9 +132,10 @@ namespace Kistl.IntegrationTests
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var testObject = ctx.GetQuery<TestCustomObject>()
-                    .First(obj => obj.PhoneNumberMobile != null && obj.PhoneNumberOffice != null);
+                    .ToList()
+                    .FirstOrDefault(obj => obj.PhoneNumberMobile != null && obj.PhoneNumberOffice != null);
 
-                Assert.That(testObject, Is.Not.Null);
+                Assume.That(testObject, Is.Not.Null);
 
                 oldNumber = testObject.PhoneNumberOffice.Number;
 

@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BoolProperty")]
     public class BoolProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, BoolProperty
     {
+    
+		public BoolProperty__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

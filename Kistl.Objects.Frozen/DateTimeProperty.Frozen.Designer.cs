@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DateTimeProperty")]
     public class DateTimeProperty__Implementation__Frozen : Kistl.App.Base.ValueTypeProperty__Implementation__Frozen, DateTimeProperty
     {
+    
+		public DateTimeProperty__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

@@ -24,6 +24,12 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Mitarbeiter")]
     public class Mitarbeiter__Implementation__ : BaseServerDataObject_EntityFramework, Mitarbeiter
     {
+    
+		public Mitarbeiter__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

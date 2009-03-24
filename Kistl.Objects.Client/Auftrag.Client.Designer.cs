@@ -20,6 +20,12 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Auftrag")]
     public class Auftrag__Implementation__ : BaseClientDataObject, Auftrag
     {
+    
+		public Auftrag__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

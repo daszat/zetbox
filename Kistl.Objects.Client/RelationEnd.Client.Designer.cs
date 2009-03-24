@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("RelationEnd")]
     public class RelationEnd__Implementation__ : BaseClientDataObject, RelationEnd
     {
+    
+		public RelationEnd__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

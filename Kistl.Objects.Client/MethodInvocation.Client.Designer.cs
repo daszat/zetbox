@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("MethodInvocation")]
     public class MethodInvocation__Implementation__ : BaseClientDataObject, MethodInvocation
     {
+    
+		public MethodInvocation__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

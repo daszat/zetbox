@@ -24,6 +24,12 @@ namespace Kistl.App.Zeiterfassung
     [System.Diagnostics.DebuggerDisplay("Zeitkonto")]
     public class Zeitkonto__Implementation__ : BaseServerDataObject_EntityFramework, Zeitkonto
     {
+    
+		public Zeitkonto__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

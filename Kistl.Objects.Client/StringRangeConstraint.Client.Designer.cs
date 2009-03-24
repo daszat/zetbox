@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringRangeConstraint")]
     public class StringRangeConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, StringRangeConstraint
     {
+    
+		public StringRangeConstraint__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

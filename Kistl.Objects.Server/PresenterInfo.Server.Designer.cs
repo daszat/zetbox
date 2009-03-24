@@ -24,6 +24,12 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("PresenterInfo")]
     public class PresenterInfo__Implementation__ : BaseServerDataObject_EntityFramework, PresenterInfo
     {
+    
+		public PresenterInfo__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

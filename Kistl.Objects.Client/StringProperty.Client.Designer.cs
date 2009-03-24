@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringProperty")]
     public class StringProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, StringProperty
     {
+    
+		public StringProperty__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

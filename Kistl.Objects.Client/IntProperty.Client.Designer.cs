@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IntProperty")]
     public class IntProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, IntProperty
     {
+    
+		public IntProperty__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

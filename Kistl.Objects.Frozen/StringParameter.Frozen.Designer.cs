@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringParameter")]
     public class StringParameter__Implementation__Frozen : Kistl.App.Base.BaseParameter__Implementation__Frozen, StringParameter
     {
+    
+		public StringParameter__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

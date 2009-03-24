@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectClass")]
     public class ObjectClass__Implementation__ : Kistl.App.Base.DataType__Implementation__, ObjectClass
     {
+    
+		public ObjectClass__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

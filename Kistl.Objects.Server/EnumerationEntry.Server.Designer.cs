@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("EnumerationEntry")]
     public class EnumerationEntry__Implementation__ : BaseServerDataObject_EntityFramework, EnumerationEntry
     {
+    
+		public EnumerationEntry__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Module")]
     public class Module__Implementation__ : BaseClientDataObject, Module
     {
+    
+		public Module__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

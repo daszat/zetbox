@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Assembly")]
     public class Assembly__Implementation__ : BaseClientDataObject, Assembly
     {
+    
+		public Assembly__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

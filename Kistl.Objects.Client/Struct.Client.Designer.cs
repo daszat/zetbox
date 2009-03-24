@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Struct")]
     public class Struct__Implementation__ : Kistl.App.Base.DataType__Implementation__, Struct
     {
+    
+		public Struct__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

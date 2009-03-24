@@ -20,6 +20,12 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("ControlInfo")]
     public class ControlInfo__Implementation__ : BaseClientDataObject, ControlInfo
     {
+    
+		public ControlInfo__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

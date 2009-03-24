@@ -20,6 +20,12 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestObjClass")]
     public class TestObjClass__Implementation__ : BaseClientDataObject, TestObjClass
     {
+    
+		public TestObjClass__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

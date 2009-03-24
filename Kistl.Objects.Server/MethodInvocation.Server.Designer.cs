@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("MethodInvocation")]
     public class MethodInvocation__Implementation__ : BaseServerDataObject_EntityFramework, MethodInvocation
     {
+    
+		public MethodInvocation__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

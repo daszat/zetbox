@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BoolParameter")]
     public class BoolParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, BoolParameter
     {
+    
+		public BoolParameter__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

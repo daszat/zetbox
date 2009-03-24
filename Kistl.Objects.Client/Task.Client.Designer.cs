@@ -20,6 +20,12 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Task")]
     public class Task__Implementation__ : BaseClientDataObject, Task
     {
+    
+		public Task__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

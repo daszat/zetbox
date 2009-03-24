@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DoubleProperty")]
     public class DoubleProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, DoubleProperty
     {
+    
+		public DoubleProperty__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

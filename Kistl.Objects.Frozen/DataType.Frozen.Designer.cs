@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DataType")]
     public class DataType__Implementation__Frozen : BaseFrozenDataObject, DataType
     {
+    
+		public DataType__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

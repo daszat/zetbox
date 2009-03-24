@@ -40,14 +40,19 @@ namespace Kistl.Server.Generators.Templates.Implementation
         protected virtual void ApplyNamespaceTailTemplate() { }
 
         /// <summary>
-        /// is called to apply a optional tail part within the class
-        /// </summary>
-        protected virtual void ApplyClassTailTemplate() { }
-
-        /// <summary>
         /// Is called to apply optional decoration in front of the class declaration, like Attributes.
         /// </summary>
         protected virtual void ApplyClassAttributeTemplate() { }
+
+        /// <summary>
+        /// Is called to apply the contents of the default constructor
+        /// </summary>
+        protected virtual void ApplyConstructorTemplate() { }
+
+        /// <summary>
+        /// is called to apply a optional tail part within the class
+        /// </summary>
+        protected virtual void ApplyClassTailTemplate() { }
 
         protected virtual void ApplyIDPropertyTemplate() { }
 

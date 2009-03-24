@@ -20,6 +20,12 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Icon")]
     public class Icon__Implementation__ : BaseClientDataObject, Icon
     {
+    
+		public Icon__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

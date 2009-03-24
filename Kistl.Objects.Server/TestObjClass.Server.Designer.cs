@@ -24,6 +24,12 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestObjClass")]
     public class TestObjClass__Implementation__ : BaseServerDataObject_EntityFramework, TestObjClass
     {
+    
+		public TestObjClass__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Struct")]
     public class Struct__Implementation__Frozen : Kistl.App.Base.DataType__Implementation__Frozen, Struct
     {
+    
+		public Struct__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

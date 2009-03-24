@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DoubleProperty")]
     public class DoubleProperty__Implementation__Frozen : Kistl.App.Base.ValueTypeProperty__Implementation__Frozen, DoubleProperty
     {
+    
+		public DoubleProperty__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

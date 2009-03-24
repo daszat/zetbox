@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty")]
     public class ObjectReferenceProperty__Implementation__Frozen : Kistl.App.Base.Property__Implementation__Frozen, ObjectReferenceProperty
     {
+    
+		public ObjectReferenceProperty__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

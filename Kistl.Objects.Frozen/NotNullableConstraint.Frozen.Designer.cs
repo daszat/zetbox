@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("NotNullableConstraint")]
     public class NotNullableConstraint__Implementation__Frozen : Kistl.App.Base.Constraint__Implementation__Frozen, NotNullableConstraint
     {
+    
+		public NotNullableConstraint__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

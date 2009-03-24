@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IsValidNamespaceConstraint")]
     public class IsValidNamespaceConstraint__Implementation__Frozen : Kistl.App.Base.IsValidIdentifierConstraint__Implementation__Frozen, IsValidNamespaceConstraint
     {
+    
+		public IsValidNamespaceConstraint__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

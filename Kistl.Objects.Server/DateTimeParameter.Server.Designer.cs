@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DateTimeParameter")]
     public class DateTimeParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, DateTimeParameter
     {
+    
+		public DateTimeParameter__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

@@ -24,6 +24,12 @@ namespace Kistl.App.Zeiterfassung
     [System.Diagnostics.DebuggerDisplay("Kostenstelle")]
     public class Kostenstelle__Implementation__ : Kistl.App.Zeiterfassung.Zeitkonto__Implementation__, Kostenstelle
     {
+    
+		public Kostenstelle__Implementation__()
+		{
+            {
+            }
+        }
 
 
 		public override InterfaceType GetInterfaceType()

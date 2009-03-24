@@ -24,6 +24,12 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Projekt")]
     public class Projekt__Implementation__ : BaseServerDataObject_EntityFramework, Projekt
     {
+    
+		public Projekt__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor")]
     public class ViewDescriptor__Implementation__ : BaseClientDataObject, ViewDescriptor
     {
+    
+		public ViewDescriptor__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

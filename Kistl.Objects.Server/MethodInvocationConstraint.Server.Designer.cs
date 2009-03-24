@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("MethodInvocationConstraint")]
     public class MethodInvocationConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, MethodInvocationConstraint
     {
+    
+		public MethodInvocationConstraint__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

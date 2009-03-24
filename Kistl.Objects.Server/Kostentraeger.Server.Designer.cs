@@ -24,6 +24,12 @@ namespace Kistl.App.Zeiterfassung
     [System.Diagnostics.DebuggerDisplay("Kostentraeger")]
     public class Kostentraeger__Implementation__ : Kistl.App.Zeiterfassung.Zeitkonto__Implementation__, Kostentraeger
     {
+    
+		public Kostentraeger__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

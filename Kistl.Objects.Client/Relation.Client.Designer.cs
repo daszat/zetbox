@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Relation")]
     public class Relation__Implementation__ : BaseClientDataObject, Relation
     {
+    
+		public Relation__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

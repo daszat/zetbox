@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor")]
     public class ViewDescriptor__Implementation__ : BaseServerDataObject_EntityFramework, ViewDescriptor
     {
+    
+		public ViewDescriptor__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

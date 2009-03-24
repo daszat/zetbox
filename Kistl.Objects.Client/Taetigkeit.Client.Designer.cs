@@ -20,6 +20,12 @@ namespace Kistl.App.Zeiterfassung
     [System.Diagnostics.DebuggerDisplay("Taetigkeit")]
     public class Taetigkeit__Implementation__ : BaseClientDataObject, Taetigkeit
     {
+    
+		public Taetigkeit__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringProperty")]
     public class StringProperty__Implementation__Frozen : Kistl.App.Base.ValueTypeProperty__Implementation__Frozen, StringProperty
     {
+    
+		public StringProperty__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

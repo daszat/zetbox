@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectClass")]
     public class ObjectClass__Implementation__Frozen : Kistl.App.Base.DataType__Implementation__Frozen, ObjectClass
     {
+    
+		public ObjectClass__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

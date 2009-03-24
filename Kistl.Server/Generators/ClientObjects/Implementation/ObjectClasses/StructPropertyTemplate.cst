@@ -14,16 +14,20 @@
 <%
 
 	string name = prop.PropertyName;
-
+	string backingName = "_" + name;
+	
 	string structType = prop.GetPropertyTypeString();
+	string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
 
 %>
         // implement the user-visible interface
         public <%= structType %> <%= name %>
         {
-            get;
-            set;
+            get { return <%= backingName %>; }
+            set { <%= backingName %> = (<%= structImplementationType %>)value; }
         }
+        
+        private <%= structImplementationType %> <%= backingName %>;
 <%
-        AddSerialization(serializationList, name);
+        AddSerialization(serializationList, backingName);
 %>  

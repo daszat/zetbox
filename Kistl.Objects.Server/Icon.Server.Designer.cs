@@ -24,6 +24,12 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Icon")]
     public class Icon__Implementation__ : BaseServerDataObject_EntityFramework, Icon
     {
+    
+		public Icon__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

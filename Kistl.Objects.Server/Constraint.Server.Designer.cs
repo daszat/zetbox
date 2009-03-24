@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Constraint")]
     public class Constraint__Implementation__ : BaseServerDataObject_EntityFramework, Constraint
     {
+    
+		public Constraint__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

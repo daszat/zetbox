@@ -20,6 +20,12 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("PresenterInfo")]
     public class PresenterInfo__Implementation__ : BaseClientDataObject, PresenterInfo
     {
+    
+		public PresenterInfo__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

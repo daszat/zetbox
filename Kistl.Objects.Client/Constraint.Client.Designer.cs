@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Constraint")]
     public class Constraint__Implementation__ : BaseClientDataObject, Constraint
     {
+    
+		public Constraint__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

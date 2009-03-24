@@ -20,6 +20,12 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("LastTest")]
     public class LastTest__Implementation__ : BaseClientDataObject, LastTest
     {
+    
+		public LastTest__Implementation__()
+		{
+            {
+            }
+        }
 
 
 		public override InterfaceType GetInterfaceType()

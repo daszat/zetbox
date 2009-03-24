@@ -24,6 +24,12 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("ControlInfo")]
     public class ControlInfo__Implementation__ : BaseServerDataObject_EntityFramework, ControlInfo
     {
+    
+		public ControlInfo__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

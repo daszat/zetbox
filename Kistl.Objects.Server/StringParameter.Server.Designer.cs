@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringParameter")]
     public class StringParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, StringParameter
     {
+    
+		public StringParameter__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

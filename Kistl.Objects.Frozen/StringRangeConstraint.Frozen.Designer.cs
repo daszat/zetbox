@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringRangeConstraint")]
     public class StringRangeConstraint__Implementation__Frozen : Kistl.App.Base.Constraint__Implementation__Frozen, StringRangeConstraint
     {
+    
+		public StringRangeConstraint__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

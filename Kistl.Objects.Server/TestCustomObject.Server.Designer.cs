@@ -24,6 +24,14 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestCustomObject")]
     public class TestCustomObject__Implementation__ : BaseServerDataObject_EntityFramework, TestCustomObject
     {
+    
+		public TestCustomObject__Implementation__()
+		{
+            {
+                _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberMobile");
+                _PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberOffice");
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID
@@ -130,17 +138,15 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (_PhoneNumberMobile == null)
-                    return Kistl.App.Test.TestPhoneStruct__Implementation__.NoValue;
                 return _PhoneNumberMobile;
             }
             set
             {
-                if(!Object.Equals(Kistl.App.Test.TestPhoneStruct__Implementation__.NoValue, value))
-                {
-                    // use property to trigger notify
-                    PhoneNumberMobile = value;
-                }
+                if (value == null)
+					throw new ArgumentNullException("value");
+                
+                // use property to trigger notify
+                PhoneNumberMobile = value;
             }
         }
 
@@ -179,17 +185,15 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (_PhoneNumberOffice == null)
-                    return Kistl.App.Test.TestPhoneStruct__Implementation__.NoValue;
                 return _PhoneNumberOffice;
             }
             set
             {
-                if(!Object.Equals(Kistl.App.Test.TestPhoneStruct__Implementation__.NoValue, value))
-                {
-                    // use property to trigger notify
-                    PhoneNumberOffice = value;
-                }
+                if (value == null)
+					throw new ArgumentNullException("value");
+                
+                // use property to trigger notify
+                PhoneNumberOffice = value;
             }
         }
 
@@ -244,6 +248,8 @@ namespace Kistl.App.Test
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Birthday, binStream);
             BinarySerializer.ToStream(this._PersonName, binStream);
+            BinarySerializer.ToStream(this._PhoneNumberMobile, binStream);
+            BinarySerializer.ToStream(this._PhoneNumberOffice, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -251,6 +257,8 @@ namespace Kistl.App.Test
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Birthday, binStream);
             BinarySerializer.FromStream(out this._PersonName, binStream);
+            BinarySerializer.FromStream(out this._PhoneNumberMobile, binStream);
+            BinarySerializer.FromStream(out this._PhoneNumberOffice, binStream);
         }
 
 #endregion

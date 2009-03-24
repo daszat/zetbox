@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IntegerRangeConstraint")]
     public class IntegerRangeConstraint__Implementation__Frozen : Kistl.App.Base.Constraint__Implementation__Frozen, IntegerRangeConstraint
     {
+    
+		public IntegerRangeConstraint__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

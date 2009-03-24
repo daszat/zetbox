@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DateTimeParameter")]
     public class DateTimeParameter__Implementation__Frozen : Kistl.App.Base.BaseParameter__Implementation__Frozen, DateTimeParameter
     {
+    
+		public DateTimeParameter__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

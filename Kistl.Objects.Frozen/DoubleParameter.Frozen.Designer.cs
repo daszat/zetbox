@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DoubleParameter")]
     public class DoubleParameter__Implementation__Frozen : Kistl.App.Base.BaseParameter__Implementation__Frozen, DoubleParameter
     {
+    
+		public DoubleParameter__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

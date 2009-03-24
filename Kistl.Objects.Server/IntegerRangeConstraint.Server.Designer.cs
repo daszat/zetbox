@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IntegerRangeConstraint")]
     public class IntegerRangeConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, IntegerRangeConstraint
     {
+    
+		public IntegerRangeConstraint__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

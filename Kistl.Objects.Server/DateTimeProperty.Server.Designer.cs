@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DateTimeProperty")]
     public class DateTimeProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, DateTimeProperty
     {
+    
+		public DateTimeProperty__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

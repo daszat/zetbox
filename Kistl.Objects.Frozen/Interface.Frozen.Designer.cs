@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Interface")]
     public class Interface__Implementation__Frozen : Kistl.App.Base.DataType__Implementation__Frozen, Interface
     {
+    
+		public Interface__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

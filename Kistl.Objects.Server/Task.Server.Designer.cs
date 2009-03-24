@@ -24,6 +24,12 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Task")]
     public class Task__Implementation__ : BaseServerDataObject_EntityFramework, Task
     {
+    
+		public Task__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

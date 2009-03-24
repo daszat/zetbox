@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
     public class TypeRef__Implementation__Frozen : BaseFrozenDataObject, TypeRef
     {
+    
+		public TypeRef__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

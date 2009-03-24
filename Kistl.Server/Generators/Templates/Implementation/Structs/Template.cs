@@ -26,9 +26,5 @@ namespace Kistl.Server.Generators.Templates.Implementation.Structs
             return base.GetInterfaces().Concat(new string[] { "IStruct" }).ToArray();
         }
 
-        protected override void ApplyClassTailTemplate()
-        {
-            base.ApplyClassTailTemplate();
-        }
     }
 }

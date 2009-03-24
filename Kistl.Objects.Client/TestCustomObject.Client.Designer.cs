@@ -20,6 +20,14 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestCustomObject")]
     public class TestCustomObject__Implementation__ : BaseClientDataObject, TestCustomObject
     {
+    
+		public TestCustomObject__Implementation__()
+		{
+            {
+                _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberMobile");
+                _PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberOffice");
+            }
+        }
 
 
         /// <summary>
@@ -75,9 +83,11 @@ namespace Kistl.App.Test
         // implement the user-visible interface
         public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
         {
-            get;
-            set;
+            get { return _PhoneNumberMobile; }
+            set { _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStruct__Implementation__)value; }
         }
+        
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberMobile;
   
         /// <summary>
         /// Office Phone Number
@@ -86,9 +96,11 @@ namespace Kistl.App.Test
         // implement the user-visible interface
         public Kistl.App.Test.TestPhoneStruct PhoneNumberOffice
         {
-            get;
-            set;
+            get { return _PhoneNumberOffice; }
+            set { _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStruct__Implementation__)value; }
         }
+        
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberOffice;
   
 		public override InterfaceType GetInterfaceType()
 		{
@@ -145,6 +157,8 @@ namespace Kistl.App.Test
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Birthday, binStream);
             BinarySerializer.ToStream(this._PersonName, binStream);
+            BinarySerializer.ToStream(this._PhoneNumberMobile, binStream);
+            BinarySerializer.ToStream(this._PhoneNumberOffice, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -152,6 +166,8 @@ namespace Kistl.App.Test
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Birthday, binStream);
             BinarySerializer.FromStream(out this._PersonName, binStream);
+            BinarySerializer.FromStream(out this._PhoneNumberMobile, binStream);
+            BinarySerializer.FromStream(out this._PhoneNumberOffice, binStream);
         }
 
 #endregion

@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BackReferenceProperty")]
     public class BackReferenceProperty__Implementation__Frozen : Kistl.App.Base.BaseProperty__Implementation__Frozen, BackReferenceProperty
     {
+    
+		public BackReferenceProperty__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

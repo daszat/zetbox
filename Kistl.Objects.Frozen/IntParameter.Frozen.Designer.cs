@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IntParameter")]
     public class IntParameter__Implementation__Frozen : Kistl.App.Base.BaseParameter__Implementation__Frozen, IntParameter
     {
+    
+		public IntParameter__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

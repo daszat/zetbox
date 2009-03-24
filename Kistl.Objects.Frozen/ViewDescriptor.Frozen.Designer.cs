@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor")]
     public class ViewDescriptor__Implementation__Frozen : BaseFrozenDataObject, ViewDescriptor
     {
+    
+		public ViewDescriptor__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

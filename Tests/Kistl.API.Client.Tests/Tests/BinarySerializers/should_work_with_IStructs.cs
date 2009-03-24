@@ -11,8 +11,20 @@ using NUnit.Framework;
 
 namespace Kistl.API.Client.Tests.BinarySerializers
 {
-    [TestFixture(typeof(BaseClientStructObject))]
-    public class should_work_with_EFStructs<T>
+    public interface StructMock : IStruct
+    {
+    }
+
+    public class StructMock__Implementation__ : BaseClientStructObject
+    {
+        public override InterfaceType GetInterfaceType()
+        {
+            return new InterfaceType(typeof(StructMock));
+        }
+    }
+
+    [TestFixture(typeof(StructMock__Implementation__))]
+    public class should_work_with_IStructs<T>
         : Kistl.API.Tests.BinarySerializers.should_work_with_IStructs<T>
         where T : class, IStruct, new()
     {

@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StructProperty")]
     public class StructProperty__Implementation__Frozen : Kistl.App.Base.Property__Implementation__Frozen, StructProperty
     {
+    
+		public StructProperty__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

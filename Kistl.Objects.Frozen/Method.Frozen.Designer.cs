@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Method")]
     public class Method__Implementation__Frozen : BaseFrozenDataObject, Method
     {
+    
+		public Method__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

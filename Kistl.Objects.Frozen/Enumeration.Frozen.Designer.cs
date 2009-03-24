@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Enumeration")]
     public class Enumeration__Implementation__Frozen : Kistl.App.Base.DataType__Implementation__Frozen, Enumeration
     {
+    
+		public Enumeration__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

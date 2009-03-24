@@ -25,6 +25,24 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             WriteLine("    [EdmEntityType(NamespaceName=\"Model\", Name=\"{0}\")]", this.DataType.ClassName);
         }
 
+        protected override void ApplyConstructorTemplate()
+        {
+            base.ApplyConstructorTemplate();
+            this.WriteObjects("            {");
+            this.WriteLine();
+            foreach (var prop in DataType.Properties.OfType<StructProperty>())
+            {
+                string name = prop.PropertyName;
+                string backingName = "_" + name;
+                string structType = prop.GetPropertyTypeString();
+                string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
+                this.WriteObjects("                ", backingName, " = new ", structImplementationType, "(this, \"", name, "\");");
+                this.WriteLine();
+            }
+            this.WriteObjects("            }");
+            this.WriteLine();
+        }
+
         protected override void ApplyIDPropertyTemplate()
         {
             bool hasId = false;

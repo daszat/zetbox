@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Property")]
     public class Property__Implementation__Frozen : Kistl.App.Base.BaseProperty__Implementation__Frozen, Property
     {
+    
+		public Property__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

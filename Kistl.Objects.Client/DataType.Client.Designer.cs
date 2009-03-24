@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DataType")]
     public class DataType__Implementation__ : BaseClientDataObject, DataType
     {
+    
+		public DataType__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

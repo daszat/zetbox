@@ -11,6 +11,7 @@ using Kistl.App.Test;
 using Kistl.DalProvider.EF.Mocks;
 
 using NUnit.Framework;
+using Kistl.DALProvider.EF;
 
 namespace Kistl.DalProvider.EF.Tests
 {
@@ -66,5 +67,20 @@ namespace Kistl.DalProvider.EF.Tests
             obj.PropertyChanged -= changedHandler;
             obj.PropertyChanging -= changingHanlder;
         }
+
+        
+        [Test]
+        public void should_be_initialised_as_members()
+        {
+            var parent = new TestCustomObject__Implementation__();
+            Assert.That(parent.PhoneNumberMobile, Is.Not.Null, "structs should be initialised when creating an object");
+            Assert.That((parent.PhoneNumberMobile as BaseServerStructObject_EntityFramework).ParentObject,
+                Is.SameAs(parent),
+                "parent should be initialised correctly when creating an object");
+            Assert.That((parent.PhoneNumberMobile as BaseServerStructObject_EntityFramework).ParentProperty,
+                Is.EqualTo("PhoneNumberMobile"),
+                "parent property name should be initialised correctly when creating an object");
+        }
+	
     }
 }

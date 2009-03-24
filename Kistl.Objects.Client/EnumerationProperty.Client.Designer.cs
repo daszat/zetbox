@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("EnumerationProperty")]
     public class EnumerationProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, EnumerationProperty
     {
+    
+		public EnumerationProperty__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

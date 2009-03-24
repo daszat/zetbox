@@ -20,6 +20,12 @@ namespace Kistl.App.Zeiterfassung
     [System.Diagnostics.DebuggerDisplay("Zeitkonto")]
     public class Zeitkonto__Implementation__ : BaseClientDataObject, Zeitkonto
     {
+    
+		public Zeitkonto__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

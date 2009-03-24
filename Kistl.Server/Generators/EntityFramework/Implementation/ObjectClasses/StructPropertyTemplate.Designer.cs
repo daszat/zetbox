@@ -33,7 +33,7 @@ string name = prop.PropertyName;
 	string backingName = "_" + name;
 
 	string structType = prop.GetPropertyTypeString();
-	string structImplementationType = prop.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix;
+	string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
 
 
 #line 24 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
@@ -66,25 +66,23 @@ this.WriteObjects("        public ",  structImplementationType , " ",  efName , 
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (",  backingName , " == null)\r\n");
-this.WriteObjects("                    return ",  structImplementationType , ".NoValue;\r\n");
 this.WriteObjects("                return ",  backingName , ";\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if(!Object.Equals(",  structImplementationType , ".NoValue, value))\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    // use property to trigger notify\r\n");
-this.WriteObjects("                    ",  name , " = value;\r\n");
-this.WriteObjects("                }\r\n");
+this.WriteObjects("                if (value == null)\r\n");
+this.WriteObjects("					throw new ArgumentNullException(\"value\");\r\n");
+this.WriteObjects("                \r\n");
+this.WriteObjects("                // use property to trigger notify\r\n");
+this.WriteObjects("                ",  name , " = value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
-#line 69 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
-AddSerialization(serializationList, efName);
+#line 67 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+AddSerialization(serializationList, backingName);
 
-#line 70 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 68 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 this.WriteObjects("  ");
 
         }

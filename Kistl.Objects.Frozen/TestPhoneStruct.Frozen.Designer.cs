@@ -20,6 +20,10 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestPhoneStruct")]
     public class TestPhoneStruct__Implementation__ : BaseFrozenStruct, TestPhoneStruct, IStruct
     {
+    
+		public TestPhoneStruct__Implementation__()
+		{
+        }
 
 
         /// <summary>

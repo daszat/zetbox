@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StructProperty")]
     public class StructProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, StructProperty
     {
+    
+		public StructProperty__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

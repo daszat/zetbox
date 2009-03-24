@@ -18,7 +18,7 @@
 	string backingName = "_" + name;
 
 	string structType = prop.GetPropertyTypeString();
-	string structImplementationType = prop.GetPropertyTypeString() + Kistl.API.Helper.ImplementationSuffix;
+	string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
 
 %>
         // implement the user-visible interface
@@ -50,21 +50,19 @@
         {
             get
             {
-                if (<%= backingName %> == null)
-                    return <%= structImplementationType %>.NoValue;
                 return <%= backingName %>;
             }
             set
             {
-                if(!Object.Equals(<%= structImplementationType %>.NoValue, value))
-                {
-                    // use property to trigger notify
-                    <%= name %> = value;
-                }
+                if (value == null)
+					throw new ArgumentNullException("value");
+                
+                // use property to trigger notify
+                <%= name %> = value;
             }
         }
 
 
 <%
-        AddSerialization(serializationList, efName);
+        AddSerialization(serializationList, backingName);
 %>  

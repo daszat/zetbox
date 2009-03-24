@@ -20,6 +20,12 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Mitarbeiter")]
     public class Mitarbeiter__Implementation__ : BaseClientDataObject, Mitarbeiter
     {
+    
+		public Mitarbeiter__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

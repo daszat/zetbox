@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("MethodInvocationConstraint")]
     public class MethodInvocationConstraint__Implementation__Frozen : Kistl.App.Base.Constraint__Implementation__Frozen, MethodInvocationConstraint
     {
+    
+		public MethodInvocationConstraint__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

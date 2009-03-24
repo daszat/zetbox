@@ -20,6 +20,12 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Template")]
     public class Template__Implementation__ : BaseClientDataObject, Template
     {
+    
+		public Template__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

@@ -24,6 +24,12 @@ namespace Kistl.App.Zeiterfassung
     [System.Diagnostics.DebuggerDisplay("Taetigkeit")]
     public class Taetigkeit__Implementation__ : BaseServerDataObject_EntityFramework, Taetigkeit
     {
+    
+		public Taetigkeit__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

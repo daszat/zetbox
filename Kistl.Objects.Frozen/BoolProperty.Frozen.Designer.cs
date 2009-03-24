@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BoolProperty")]
     public class BoolProperty__Implementation__Frozen : Kistl.App.Base.ValueTypeProperty__Implementation__Frozen, BoolProperty
     {
+    
+		public BoolProperty__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

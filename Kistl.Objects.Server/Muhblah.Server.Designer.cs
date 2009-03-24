@@ -24,6 +24,12 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("Muhblah")]
     public class Muhblah__Implementation__ : BaseServerDataObject_EntityFramework, Muhblah
     {
+    
+		public Muhblah__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

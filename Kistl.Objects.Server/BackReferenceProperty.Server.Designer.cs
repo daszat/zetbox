@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BackReferenceProperty")]
     public class BackReferenceProperty__Implementation__ : Kistl.App.Base.BaseProperty__Implementation__, BackReferenceProperty
     {
+    
+		public BackReferenceProperty__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

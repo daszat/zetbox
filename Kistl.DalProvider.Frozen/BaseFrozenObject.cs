@@ -10,6 +10,10 @@ namespace Kistl.DalProvider.Frozen
 {
     public abstract class BaseFrozenObject : IPersistenceObject
     {
+        protected BaseFrozenObject()
+        {
+            throw new InvalidOperationException("BaseFrozenObject constructor without id called");
+        }
 
         protected BaseFrozenObject(int id)
         {
@@ -94,6 +98,11 @@ namespace Kistl.DalProvider.Frozen
     public abstract class BaseFrozenDataObject : BaseFrozenObject, IDataObject
     {
 
+        protected BaseFrozenDataObject()
+        {
+            throw new InvalidOperationException("BaseFrozenDataObject constructor without id called");
+        }
+
         protected BaseFrozenDataObject(int id)
             : base(id)
         {
@@ -121,6 +130,10 @@ namespace Kistl.DalProvider.Frozen
     public abstract class BaseFrozenStruct
         : BaseFrozenObject, IStruct
     {
+        protected BaseFrozenStruct()
+        {
+            throw new InvalidOperationException("BaseFrozenStruct constructor without id called");
+        }
 
         protected BaseFrozenStruct(int id)
             : base(id)

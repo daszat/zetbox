@@ -20,6 +20,12 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Visual")]
     public class Visual__Implementation__ : BaseClientDataObject, Visual
     {
+    
+		public Visual__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

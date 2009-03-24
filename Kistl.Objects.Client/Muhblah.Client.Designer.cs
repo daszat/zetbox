@@ -20,6 +20,12 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("Muhblah")]
     public class Muhblah__Implementation__ : BaseClientDataObject, Muhblah
     {
+    
+		public Muhblah__Implementation__()
+		{
+            {
+            }
+        }
 
 
 		public override InterfaceType GetInterfaceType()

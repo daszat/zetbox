@@ -20,6 +20,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BaseProperty")]
     public class BaseProperty__Implementation__ : BaseClientDataObject, BaseProperty
     {
+    
+		public BaseProperty__Implementation__()
+		{
+            {
+            }
+        }
 
 
         /// <summary>

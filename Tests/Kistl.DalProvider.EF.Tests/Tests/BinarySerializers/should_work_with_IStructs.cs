@@ -13,7 +13,19 @@ using NUnit.Framework;
 
 namespace Kistl.DalProvider.EF.Tests.BinarySerializers
 {
-    [TestFixture(typeof(BaseServerStructObject))]
+    public interface StructMock : IStruct
+    {
+    }
+
+    public class StructMock__Implementation__ : BaseServerStructObject
+    {
+        public override InterfaceType GetInterfaceType()
+        {
+            return new InterfaceType(typeof(StructMock));
+        }
+    }
+
+    [TestFixture(typeof(StructMock__Implementation__))]
     [TestFixture(typeof(TestPhoneStruct__Implementation__))]
     public class should_work_with_EFStructs<T>
         : Kistl.API.Tests.BinarySerializers.should_work_with_IStructs<T>

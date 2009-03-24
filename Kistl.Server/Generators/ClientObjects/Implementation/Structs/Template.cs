@@ -33,5 +33,21 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.Structs
             return "BaseClientStructObject";
         }
 
+        protected override void ApplyClassTailTemplate()
+        {
+            base.ApplyClassTailTemplate();
+
+            string clsName = this.GetTypeName();
+
+            this.WriteObjects("        public ", clsName, "(IPersistenceObject parent, string property)");
+            this.WriteLine();
+            this.WriteObjects("        {");
+            this.WriteLine();
+            this.WriteObjects("            AttachToObject(parent, property);");
+            this.WriteLine();
+            this.WriteObjects("        }");
+            this.WriteLine();
+
+        }
     }
 }

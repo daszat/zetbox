@@ -20,6 +20,10 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestPhoneStruct")]
     public class TestPhoneStruct__Implementation__ : BaseClientStructObject, TestPhoneStruct, IStruct
     {
+    
+		public TestPhoneStruct__Implementation__()
+		{
+        }
 
 
         /// <summary>
@@ -72,6 +76,10 @@ namespace Kistl.App.Test
 		{
 			return new InterfaceType(typeof(TestPhoneStruct));
 		}
+        public TestPhoneStruct__Implementation__(IPersistenceObject parent, string property)
+        {
+            AttachToObject(parent, property);
+        }
 
 
 #region Serializer

@@ -24,6 +24,12 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BaseProperty")]
     public class BaseProperty__Implementation__ : BaseServerDataObject_EntityFramework, BaseProperty
     {
+    
+		public BaseProperty__Implementation__()
+		{
+            {
+            }
+        }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
         public override int ID

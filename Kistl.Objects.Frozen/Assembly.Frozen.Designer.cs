@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Assembly")]
     public class Assembly__Implementation__Frozen : BaseFrozenDataObject, Assembly
     {
+    
+		public Assembly__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

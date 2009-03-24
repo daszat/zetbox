@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BoolParameter")]
     public class BoolParameter__Implementation__Frozen : Kistl.App.Base.BaseParameter__Implementation__Frozen, BoolParameter
     {
+    
+		public BoolParameter__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>

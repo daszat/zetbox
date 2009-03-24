@@ -20,6 +20,10 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CLRObjectParameter")]
     public class CLRObjectParameter__Implementation__Frozen : Kistl.App.Base.BaseParameter__Implementation__Frozen, CLRObjectParameter
     {
+    
+		public CLRObjectParameter__Implementation__Frozen()
+		{
+        }
 
 
         /// <summary>
