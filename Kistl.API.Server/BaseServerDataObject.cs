@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 using System.Data.Linq.Mapping;
 using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace Kistl.API.Server
 {
@@ -89,7 +90,7 @@ namespace Kistl.API.Server
         /// Base method for serializing this Object.
         /// </summary>
         /// <param name="sw">Stream to serialize to</param>
-        public virtual void ToStream(System.IO.BinaryWriter sw)
+        public virtual void ToStream(BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");
 
@@ -102,7 +103,7 @@ namespace Kistl.API.Server
         /// Base method for deserializing this Object.
         /// </summary>
         /// <param name="sr">Stream to serialize from</param>
-        public virtual void FromStream(System.IO.BinaryReader sr)
+        public virtual void FromStream(BinaryReader sr)
         {
             if (this.IsAttached) throw new InvalidOperationException("Deserializing attached objects is not allowed");
             if (sr == null) throw new ArgumentNullException("sr");
@@ -208,98 +209,10 @@ namespace Kistl.API.Server
     /// Server Collection Entry Implementation. A Collection Entry is a "connection" Object between other Data Objects 
     /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
     /// </summary>
-    public abstract class BaseServerCollectionEntry : BaseServerPersistenceObject, ICollectionEntry
-    {
-    }
+    public abstract class BaseServerCollectionEntry : BaseServerPersistenceObject, ICollectionEntry { }
 
-    public abstract class BaseServerStructObject : /*ComplexObject, */ IStruct, INotifyPropertyChanged, INotifyPropertyChanging
-    {
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
-
-        public bool IsReadonly { get { return _attachedObject != null ? _attachedObject.IsReadonly : false; } }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event PropertyChangingEventHandler PropertyChanging;
-
-        /// <summary>
-        /// Property is about to be changed
-        /// </summary>
-        /// <param name="property"></param>
-        public virtual void NotifyPropertyChanging(string property)
-        {
-            if (PropertyChanging != null)
-                PropertyChanging(this, new PropertyChangingEventArgs(property));
-
-            if (_attachedObject != null)
-                _attachedObject.NotifyPropertyChanging(_attachedObjectProperty);
-        }
-
-        /// <summary>
-        /// Property has been changed
-        /// </summary>
-        /// <param name="property"></param>
-        public virtual void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-
-            if (_attachedObject != null)
-                _attachedObject.NotifyPropertyChanged(_attachedObjectProperty);
-        }
-
-        private IPersistenceObject _attachedObject;
-        private string _attachedObjectProperty;
-
-        public void AttachToObject(IPersistenceObject obj, string property)
-        {
-            if (_attachedObject != null && _attachedObject != obj) throw new ArgumentException("Struct is already attached to another object");
-
-            _attachedObjectProperty = property;
-            _attachedObject = obj;
-        }
-
-        public void DetachFromObject(IPersistenceObject obj, string property)
-        {
-            _attachedObject = null;
-            _attachedObjectProperty = "";
-        }
-
-        #region IStreamable Members
-
-        /// <summary>
-        /// Base method for serializing this Object.
-        /// </summary>
-        /// <param name="sw">Stream to serialize to</param>
-        public virtual void ToStream(System.IO.BinaryWriter sw)
-        {
-            if (sw == null) throw new ArgumentNullException("sw");
-
-            BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
-        }
-        /// <summary>
-        /// Base method for deserializing this Object.
-        /// </summary>
-        /// <param name="sr">Stream to serialize from</param>
-        public virtual void FromStream(System.IO.BinaryReader sr)
-        {
-            if (sr == null) throw new ArgumentNullException("sw");
-
-            SerializableType t;
-            BinarySerializer.FromStream(out t, sr);
-
-            if (this.GetInterfaceType() != t.GetSystemType())
-                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
-        }
-
-        // Structs don't have ObjectReferences
-        public void ReloadReferences() { }
-
-        #endregion
-
-        public abstract InterfaceType GetInterfaceType();
-    }
+    /// <summary>
+    /// local proxy
+    /// </summary>
+    public abstract class BaseServerStructObject : BaseStructObject { }
 }

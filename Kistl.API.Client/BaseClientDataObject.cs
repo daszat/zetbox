@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace Kistl.API.Client
 {
@@ -111,7 +112,7 @@ namespace Kistl.API.Client
 
         #region IStreamable Members
 
-        public virtual void ToStream(System.IO.BinaryWriter sw)
+        public virtual void ToStream(BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");
 
@@ -120,7 +121,7 @@ namespace Kistl.API.Client
             BinarySerializer.ToStream((int)ObjectState, sw);
         }
 
-        public virtual void FromStream(System.IO.BinaryReader sr)
+        public virtual void FromStream(BinaryReader sr)
         {
             if (sr == null) throw new ArgumentNullException("sr");
             if (this.IsAttached) throw new InvalidOperationException("Deserializing into attached objects is not allowed");
@@ -269,79 +270,11 @@ namespace Kistl.API.Client
         #endregion
     }
 
-    public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject, ICollectionEntry
-    {
-    }
+    public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject, ICollectionEntry { }
 
-    public abstract class BaseClientStructObject : IStruct, INotifyPropertyChanged, INotifyPropertyChanging
-    {
+    /// <summary>
+    /// local proxy
+    /// </summary>
+    public abstract class BaseClientStructObject : BaseStructObject { }
 
-        #region IStreamable Members
-
-        public virtual void ToStream(System.IO.BinaryWriter sw)
-        {
-        }
-        public virtual void FromStream(System.IO.BinaryReader sr)
-        {
-        }
-
-        // Structs don't have ObjectReferences
-        public void ReloadReferences() { }
-
-        #endregion
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
-
-        public bool IsReadonly { get { return _attachedObject != null ? _attachedObject.IsReadonly : false; } }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event PropertyChangingEventHandler PropertyChanging;
-
-        /// <summary>
-        /// Property is beeing changing
-        /// </summary>
-        /// <param name="property"></param>
-        public virtual void NotifyPropertyChanging(string property)
-        {
-            if (PropertyChanging != null)
-                PropertyChanging(this, new PropertyChangingEventArgs(property));
-
-            if (_attachedObject != null)
-                _attachedObject.NotifyPropertyChanging(_attachedObjectProperty);
-        }
-
-        /// <summary>
-        /// Property has been changed
-        /// </summary>
-        /// <param name="property"></param>
-        public virtual void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-
-            if (_attachedObject != null)
-                _attachedObject.NotifyPropertyChanged(_attachedObjectProperty);
-        }
-
-        private IPersistenceObject _attachedObject;
-        private string _attachedObjectProperty;
-        public void AttachToObject(IPersistenceObject obj, string property)
-        {
-            if (_attachedObject != null && _attachedObject != obj) throw new ArgumentException("Struct is already attached to another object");
-
-            _attachedObjectProperty = property;
-            _attachedObject = obj;
-        }
-
-        public void DetachFromObject(IPersistenceObject obj, string property)
-        {
-            _attachedObject = null;
-            _attachedObjectProperty = "";
-        }
-
-        public abstract InterfaceType GetInterfaceType();
-    }
 }

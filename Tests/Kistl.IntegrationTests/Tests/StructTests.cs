@@ -70,7 +70,7 @@ namespace Kistl.IntegrationTests
                 var objList = ctx.GetQuery<TestCustomObject>();
                 foreach (var obj in objList)
                 {
-                    Assert.That(obj.ID, Is.GreaterThan(Helper.INVALIDID));
+                    Assert.That(obj.ID, Is.GreaterThan(Helper.INVALIDID), "received object with invalid id");
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace Kistl.IntegrationTests
         }
 
         /// <summary>
-        /// Tests if setting a Structmember directy does _not_ change the value.
+        /// Tests if setting a Structmember directly does _not_ change the value.
         /// </summary>
         [Test]
         public void ChangeObjectWithStruct()
@@ -119,16 +119,8 @@ namespace Kistl.IntegrationTests
 
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var objList = ctx.GetQuery<TestCustomObject>();
-                TestCustomObject testObject = null;
-                foreach (var obj in objList)
-                {
-                    if (obj.PhoneNumberMobile != null && obj.PhoneNumberOffice != null)
-                    {
-                        testObject = obj;
-                        break;
-                    }
-                }
+                var testObject = ctx.GetQuery<TestCustomObject>()
+                    .First(obj => obj.PhoneNumberMobile != null && obj.PhoneNumberOffice != null);
 
                 Assert.That(testObject, Is.Not.Null);
 

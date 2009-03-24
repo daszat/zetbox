@@ -17,7 +17,7 @@ using NUnit.Framework;
 namespace Kistl.DalProvider.EF.Tests
 {
     [TestFixture]
-    public class EFContextTests : AbstractContextTests
+    public class ContextTests : AbstractContextTests
     {
 
         protected override IKistlContext GetContext() { return KistlContext.GetContext(); }
@@ -28,6 +28,7 @@ namespace Kistl.DalProvider.EF.Tests
         [SetUp]
         public void SetUp()
         {
+            var appCtx = new ServerApiContextMock();
 
             using (IKistlContext ctx = KistlContext.GetContext())
             {

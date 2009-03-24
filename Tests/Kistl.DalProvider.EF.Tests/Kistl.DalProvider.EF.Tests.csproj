@@ -76,6 +76,7 @@
     <Compile Include="Mocks\ServerApiContextMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
+    <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
     <Compile Include="Tests\Linq.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
@@ -85,7 +86,7 @@
     <Compile Include="Tests\ServerCollectionEntry_EF.cs" />
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />
     <Compile Include="Tests\BaseServerStructObjectTests.cs" />
-    <Compile Include="Tests\KistlDataContextTests.cs" />
+    <Compile Include="Tests\ContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DefaultConfig_DalProvider.EF.Tests.xml">

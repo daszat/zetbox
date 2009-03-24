@@ -606,30 +606,31 @@ namespace Kistl.API.Tests
             [Test]
             public void IStruct()
             {
-                TestStruct toval = new TestStruct() { ID = 1 };
+                const string testString = "muh";
+                TestStruct__Implementation__ toval = new TestStruct__Implementation__() { TestProperty = testString };
 
                 BinarySerializer.ToStream(toval, sw);
                 ms.Seek(0, SeekOrigin.Begin);
 
-                TestStruct fromval;
-                BinarySerializer.FromStream<TestStruct>(out fromval, sr);
-                Assert.That(fromval.ID, Is.EqualTo(fromval.ID));
+                TestStruct__Implementation__ fromval;
+                BinarySerializer.FromStream<TestStruct__Implementation__>(out fromval, sr);
+                Assert.That(fromval.TestProperty, Is.EqualTo(fromval.TestProperty));
             }
 
             [Test]
             public void IStructNull()
             {
-                TestStruct toval = null;
+                TestStruct__Implementation__ toval = null;
 
                 BinarySerializer.ToStream(toval, sw);
                 ms.Seek(0, SeekOrigin.Begin);
 
-                TestStruct fromval;
-                BinarySerializer.FromStream<TestStruct>(out fromval, sr);
+                TestStruct__Implementation__ fromval;
+                BinarySerializer.FromStream<TestStruct__Implementation__>(out fromval, sr);
                 Assert.That(fromval, Is.Null);
             }
 
         }
-     
+
     }
 }

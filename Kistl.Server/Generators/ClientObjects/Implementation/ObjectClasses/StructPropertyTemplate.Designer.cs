@@ -41,7 +41,7 @@ this.WriteObjects("            get;\r\n");
 this.WriteObjects("            set;\r\n");
 this.WriteObjects("        }\r\n");
 #line 28 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
-// AddSerialization(serializationList, efName);
+AddSerialization(serializationList, name);
 
 #line 29 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 this.WriteObjects("  ");

@@ -25,5 +25,5 @@
             set;
         }
 <%
-        // AddSerialization(serializationList, efName);
+        AddSerialization(serializationList, name);
 %>  

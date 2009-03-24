@@ -138,7 +138,11 @@ namespace Kistl.API
         void NotifyPostSave();
     }
 
-    public interface IStruct : IStreamable, ICloneable
+    /// <summary>
+    /// An IStruct is a simple bag of named values.
+    /// </summary>
+    /// Supports <see cref="ICloneable"/>, because structs don't have a independent identity and thus can be copied freely.
+    public interface IStruct : IStreamable, ICloneable, INotifyPropertyChanged, INotifyPropertyChanging
     {
         void AttachToObject(IPersistenceObject obj, string property);
         void DetachFromObject(IPersistenceObject obj, string property);

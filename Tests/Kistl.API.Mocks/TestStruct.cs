@@ -1,43 +1,42 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace Kistl.API.Mocks
 {
-    public class TestStruct : IStruct
+    public interface TestStruct : IStruct
     {
-        public int ID { get; set; }
-        public bool IsReadonly { get; private set; }
+        string TestProperty { get; set; }
+    }
 
-        public void ToStream(System.IO.BinaryWriter sw)
+    public class TestStruct__Implementation__ : BaseStructObject, TestStruct
+    {
+
+        public void ToStream(BinaryWriter sw)
         {
-            BinarySerializer.ToStream(ID, sw);
+            base.ToStream(sw);
+            BinarySerializer.ToStream(TestProperty, sw);
         }
 
-        public void FromStream(System.IO.BinaryReader sr)
+        public void FromStream(BinaryReader sr)
         {
-            int _tmp;
+            base.FromStream(sr);
+            string _tmp;
             BinarySerializer.FromStream(out _tmp, sr);
-            ID = _tmp;
+            TestProperty = _tmp;
         }
 
-        public void ReloadReferences()
-        {
-        }
+        #region TestStruct Members
 
-        public object Clone()
-        {
-            return null;
-        }
+        public string TestProperty { get; set; }
 
+        #endregion
 
-        public void AttachToObject(IPersistenceObject obj, string property)
+        public override InterfaceType GetInterfaceType()
         {
-        }
-
-        public void DetachFromObject(IPersistenceObject obj, string property)
-        {
+            return new InterfaceType(typeof(TestStruct));
         }
     }
 }
