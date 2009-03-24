@@ -31,7 +31,7 @@ namespace Kistl.API
     {
         one_n,
         n_m,
-        one_one,        
+        one_one,
     }
 
     /// <summary>
