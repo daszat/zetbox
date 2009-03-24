@@ -13,7 +13,7 @@ namespace Kistl.API.Client.Tests
     [TestFixture]
     public class BaseClientDataObjectTests
     {
-        private BaseClientDataObjectMock obj;
+        private BaseClientDataObjectMock__Implementation__ obj;
         private CustomActionsManagerAPITest currentCustomActionsManager;
         private bool PropertyChangedCalled = false;
 
@@ -27,7 +27,7 @@ namespace Kistl.API.Client.Tests
 
             PropertyChangedCalled = false;
 
-            obj = new BaseClientDataObjectMock();
+            obj = new BaseClientDataObjectMock__Implementation__();
             obj.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(obj_PropertyChanged);
         }
 
@@ -96,7 +96,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void ApplyChanges()
         {
-            BaseClientDataObjectMock result = new BaseClientDataObjectMock();
+            BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
 
             obj.SetPrivatePropertyValue<int>("ID", 10);
 
@@ -109,7 +109,7 @@ namespace Kistl.API.Client.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void ApplyChanges_Null()
         {
-            BaseClientDataObjectMock result = null;
+            BaseClientDataObjectMock__Implementation__ result = null;
             obj.ApplyChangesFrom(result);
         }
 
@@ -135,7 +135,7 @@ namespace Kistl.API.Client.Tests
 
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                BaseClientDataObjectMock result = new BaseClientDataObjectMock();
+                BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
                 result.FromStream(sr);
 
                 Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
@@ -151,7 +151,7 @@ namespace Kistl.API.Client.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                BaseClientDataObjectMock result = new BaseClientDataObjectMock();
+                BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
                 result.FromStream(null);
             }
         }
@@ -170,7 +170,7 @@ namespace Kistl.API.Client.Tests
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 ms.Seek(0, SeekOrigin.Begin);
-                BaseClientDataObjectMock result = new BaseClientDataObjectMock();
+                BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
                 result.FromStream(sr);
             }
         }

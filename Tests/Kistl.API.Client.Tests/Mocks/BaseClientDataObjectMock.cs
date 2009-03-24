@@ -6,19 +6,19 @@ using System.Text;
 namespace Kistl.API.Client.Mocks
 {
     /// <summary>
-    /// Empty interface for BaseClientDataObjectMock
+    /// Empty interface for BaseClientDataObjectMock__Implementation__
     /// </summary>
-    public interface BaseClientDataObjectMockInterface
+    public interface BaseClientDataObjectMock
         : IDataObject
     {
     }
 
-    public class BaseClientDataObjectMock 
-        : BaseClientDataObject, BaseClientDataObjectMockInterface
+    public class BaseClientDataObjectMock__Implementation__ 
+        : BaseClientDataObject, BaseClientDataObjectMock
     {
         public override InterfaceType GetInterfaceType()
         {
-            return new InterfaceType(typeof(BaseClientDataObjectMockInterface));
+            return new InterfaceType(typeof(BaseClientDataObjectMock));
         }
 
         #region IDataErrorInfo Members
