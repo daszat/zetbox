@@ -6,7 +6,6 @@ using System.Text;
 using Kistl.API.Server;
 
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Kistl.Server.Tests
 {
@@ -31,6 +30,7 @@ namespace Kistl.Server.Tests
 
 
         [Test]
+        [RequiresSTA]
         public void Generate()
         {
             Generators.Generator.GenerateCode();

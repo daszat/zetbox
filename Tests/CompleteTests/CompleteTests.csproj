@@ -54,9 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="CompleteTests.exe.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="CompleteTests.nunit">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
