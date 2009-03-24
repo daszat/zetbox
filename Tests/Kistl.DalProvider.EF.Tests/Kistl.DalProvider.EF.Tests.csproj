@@ -78,6 +78,9 @@
     <Compile Include="SetUp.cs" />
     <Compile Include="Tests\Linq.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
+    <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
+    <Compile Include="Tests\one_to_N_relations\should_obey_order.cs" />
+    <Compile Include="Tests\one_to_N_relations\should_synchronize.cs" />
     <Compile Include="Tests\QueryTranslatorTests.cs" />
     <Compile Include="Tests\ServerCollectionEntry_EF.cs" />
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />

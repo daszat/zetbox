@@ -7,7 +7,7 @@ using Kistl.API;
 
 using NUnit.Framework;
 
-namespace Kistl.IntegrationTests.one_to_N_relations
+namespace Kistl.DalProvider.EF.Tests.one_to_N_relations
 {
 
     [TestFixture]
@@ -16,7 +16,8 @@ namespace Kistl.IntegrationTests.one_to_N_relations
     {
         protected override IKistlContext GetContext()
         {
-            return Kistl.API.Client.KistlContext.GetContext();
+            return Kistl.API.Server.KistlContext.GetContext();
         }
     }
+
 }

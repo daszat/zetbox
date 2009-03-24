@@ -7,16 +7,17 @@ using Kistl.API;
 
 using NUnit.Framework;
 
-namespace Kistl.IntegrationTests.one_to_N_relations
+namespace Kistl.DalProvider.EF.Tests.N_to_M_relations
 {
 
     [TestFixture]
-    public class should_obey_order 
-        : Kistl.API.AbstractConsumerTests.one_to_N_relations.should_obey_order
+    public class should_synchronize 
+        : Kistl.API.AbstractConsumerTests.N_to_M_relations.should_synchronize
     {
         protected override IKistlContext GetContext()
         {
-            return Kistl.API.Client.KistlContext.GetContext();
+            return Kistl.API.Server.KistlContext.GetContext();
         }
     }
+
 }
