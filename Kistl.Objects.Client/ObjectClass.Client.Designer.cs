@@ -402,6 +402,22 @@ namespace Kistl.App.Base
 
 
 
+		public override void UpdateParent(string propertyName, int? id)
+		{
+			switch(propertyName)
+			{
+                case "BaseObjectClass":
+                    fk_BaseObjectClass = id;
+                    break;
+                case "DefaultModel":
+                    fk_DefaultModel = id;
+                    break;
+				default:
+					base.UpdateParent(propertyName, id);
+					break;
+			}
+		}
+
 
 #region Serializer
 

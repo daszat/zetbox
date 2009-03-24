@@ -12,7 +12,8 @@ namespace Kistl.API.Client
     {
         protected BaseClientPersistenceObject()
         {
-            if (ApplicationContext.Current.HostType != HostType.Client) throw new InvalidOperationException("A BaseClientPersistenceObject can exist only on a client");
+            if (ApplicationContext.Current.HostType != HostType.Client)
+                throw new InvalidOperationException("A BaseClientPersistenceObject can exist only on a client");
         }
 
         private int _ID;
@@ -223,6 +224,7 @@ namespace Kistl.API.Client
         #endregion
 
         public abstract InterfaceType GetInterfaceType();
+
     }
 
     public abstract class BaseClientDataObject : BaseClientPersistenceObject, IDataObject
@@ -234,6 +236,11 @@ namespace Kistl.API.Client
 
         public virtual void NotifyPreSave() { }
         public virtual void NotifyPostSave() { }
+
+        public virtual void UpdateParent(string propertyName, int? id)
+        {
+            throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetInterfaceType().Type.FullName));
+        }
 
         #region IDataErrorInfo Members
 

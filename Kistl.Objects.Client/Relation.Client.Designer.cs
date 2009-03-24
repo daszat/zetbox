@@ -220,6 +220,22 @@ namespace Kistl.App.Base
 
 
 
+		public override void UpdateParent(string propertyName, int? id)
+		{
+			switch(propertyName)
+			{
+                case "A":
+                    fk_A = id;
+                    break;
+                case "B":
+                    fk_B = id;
+                    break;
+				default:
+					base.UpdateParent(propertyName, id);
+					break;
+			}
+		}
+
 
 #region Serializer
 

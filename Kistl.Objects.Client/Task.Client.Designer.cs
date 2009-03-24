@@ -227,6 +227,19 @@ namespace Kistl.App.Projekte
 
 
 
+		public override void UpdateParent(string propertyName, int? id)
+		{
+			switch(propertyName)
+			{
+                case "Projekt":
+                    fk_Projekt = id;
+                    break;
+				default:
+					base.UpdateParent(propertyName, id);
+					break;
+			}
+		}
+
 
 #region Serializer
 

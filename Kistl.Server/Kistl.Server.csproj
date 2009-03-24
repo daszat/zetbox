@@ -456,6 +456,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\UpdateParentTemplate.cs" >
+      <DependentUpon>UpdateParentTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\UpdateParentTemplate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateParentTemplate.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cs">
       <DependentUpon>ValueCollectionProperty.cst</DependentUpon>
     </Compile>
@@ -796,6 +804,10 @@
     <None Include="Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ValueCollectionEntryParentReference.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\ClientObjects\Implementation\ObjectClasses\UpdateParentTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>UpdateParentTemplate.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Generators\EntityFramework\Implementation\README 1-N.txt" />
     <Content Include="Generators\EntityFramework\Implementation\README N-M.txt" />

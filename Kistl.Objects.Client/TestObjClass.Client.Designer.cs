@@ -206,6 +206,19 @@ namespace Kistl.App.Test
 
 
 
+		public override void UpdateParent(string propertyName, int? id)
+		{
+			switch(propertyName)
+			{
+                case "ObjectProp":
+                    fk_ObjectProp = id;
+                    break;
+				default:
+					base.UpdateParent(propertyName, id);
+					break;
+			}
+		}
+
 
 #region Serializer
 

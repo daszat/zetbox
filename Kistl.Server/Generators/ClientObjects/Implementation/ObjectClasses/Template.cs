@@ -15,7 +15,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         : Templates.Implementation.ObjectClasses.Template
     {
 
-        public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Kistl.App.Base.ObjectClass cls)
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
             : base(_host, ctx, cls)
         {
         }
@@ -77,5 +77,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Implementation.ObjectClasses.ValueCollectionProperty.Call(Host, ctx, MembersToSerialize, prop);
         }
 
+        protected override void ApplyClassTailTemplate()
+        {
+            base.ApplyClassTailTemplate();
+            this.CallTemplate("Implementation.ObjectClasses.UpdateParentTemplate",
+                ctx, DataType);
+        }
     }
 }

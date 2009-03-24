@@ -12,12 +12,12 @@ namespace Kistl.API.Client.Tests
     public class BackReferenceCollectionTests
     {
 
-        public class TestObject : IDataObject
+        public class TestObject : BaseClientDataObject, IDataObject
         {
             public static Dictionary<int, TestObject> Instances = new Dictionary<int, TestObject>();
             private static int MaxId = Helper.INVALIDID;
 
-            
+
             public TestObject Parent { get; set; }
             public int? fk_Parent
             {
@@ -40,132 +40,23 @@ namespace Kistl.API.Client.Tests
                 Children = new BackReferenceCollection<TestObject>("Parent", this);
             }
 
-            #region IDataObject Member
-
-            public void NotifyChange()
+            public override InterfaceType GetInterfaceType()
             {
                 throw new NotImplementedException();
             }
 
-            public void NotifyPreSave()
+            public override void UpdateParent(string propertyName, int? id)
             {
-                throw new NotImplementedException();
-            }
-
-            public void NotifyPostSave()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void CopyTo(IDataObject obj)
-            {
-                throw new NotImplementedException();
-            }
-
-            #endregion
-
-            #region IPersistenceObject Members
-
-            public int ID { get; set; }
-            public bool IsReadonly { get; private set; }
-
-            public DataObjectState ObjectState
-            {
-                get
+                switch (propertyName)
                 {
-                    throw new NotImplementedException();
-                }
-                set
-                {
-                    throw new NotImplementedException();
+                    case "Parent":
+                        fk_Parent = id;
+                        break;
+                    default:
+                        base.UpdateParent(propertyName, id);
+                        break;
                 }
             }
-
-            public void NotifyPropertyChanging(string property)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void NotifyPropertyChanged(string property)
-            {
-                throw new NotImplementedException();
-            }
-
-            public IKistlContext Context
-            {
-                get { throw new NotImplementedException(); }
-            }
-
-            public void AttachToContext(IKistlContext ctx)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void DetachFromContext(IKistlContext ctx)
-            {
-                throw new NotImplementedException();
-            }
-
-            public bool IsAttached
-            {
-                get { throw new NotImplementedException(); }
-            }
-
-            public InterfaceType GetInterfaceType()
-            {
-                return new InterfaceType(typeof(IDataObject));
-            }
-
-            #endregion
-
-            #region IStreamable Members
-
-            public void ToStream(System.IO.BinaryWriter sw)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void FromStream(System.IO.BinaryReader sr)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void ReloadReferences()
-            {
-                throw new NotImplementedException();
-            }
-
-            #endregion
-
-            public event PropertyChangedEventHandler PropertyChanged;
-            public event PropertyChangingEventHandler PropertyChanging;
-
-            #region ICloneable Member
-
-            public object Clone()
-            {
-                throw new NotImplementedException();
-            }
-
-            #endregion
-
-            #region IDataErrorInfo Members
-
-            string IDataErrorInfo.this[string columnName]
-            {
-                get
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            string IDataErrorInfo.Error
-            {
-                get { throw new NotImplementedException(); }
-            }
-
-            #endregion
-
         }
 
         [Test]

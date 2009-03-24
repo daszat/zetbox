@@ -297,6 +297,25 @@ namespace Kistl.App.Zeiterfassung
 
 
 
+		public override void UpdateParent(string propertyName, int? id)
+		{
+			switch(propertyName)
+			{
+                case "Mitarbeiter":
+                    fk_Mitarbeiter = id;
+                    break;
+                case "TaetigkeitsArt":
+                    fk_TaetigkeitsArt = id;
+                    break;
+                case "Zeitkonto":
+                    fk_Zeitkonto = id;
+                    break;
+				default:
+					base.UpdateParent(propertyName, id);
+					break;
+			}
+		}
+
 
 #region Serializer
 

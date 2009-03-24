@@ -266,6 +266,22 @@ namespace Kistl.App.Base
 
 
 
+		public override void UpdateParent(string propertyName, int? id)
+		{
+			switch(propertyName)
+			{
+                case "Navigator":
+                    fk_Navigator = id;
+                    break;
+                case "Type":
+                    fk_Type = id;
+                    break;
+				default:
+					base.UpdateParent(propertyName, id);
+					break;
+			}
+		}
+
 
 #region Serializer
 

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Kistl.API.Client.Mocks;
+
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Kistl.API.Client.Tests
 {
@@ -14,6 +15,8 @@ namespace Kistl.API.Client.Tests
         [SetUp]
         public void Init()
         {
+            var testCtx = new ClientApplicationContextMock();
+
             System.Diagnostics.Trace.WriteLine("Setting up Kistl");
 /*
             Kistl.API.APIInit init = new Kistl.API.APIInit();

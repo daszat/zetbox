@@ -197,6 +197,22 @@ namespace Kistl.App.Base
 
 
 
+		public override void UpdateParent(string propertyName, int? id)
+		{
+			switch(propertyName)
+			{
+                case "LayoutRef":
+                    fk_LayoutRef = id;
+                    break;
+                case "ViewRef":
+                    fk_ViewRef = id;
+                    break;
+				default:
+					base.UpdateParent(propertyName, id);
+					break;
+			}
+		}
+
 
 #region Serializer
 

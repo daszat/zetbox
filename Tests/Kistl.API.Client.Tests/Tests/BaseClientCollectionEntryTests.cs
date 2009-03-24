@@ -13,12 +13,6 @@ namespace Kistl.API.Client.Tests
     [TestFixture]
     public class BaseClientCollectionEntryTests : CollectionEntryTests<TestObjClass_TestNameCollectionEntry>
     {
-        public override void SetUp()
-        {
-            var testCtx = new ClientApplicationContextMock();
-
-            base.SetUp();
-        }
     }
 
 }

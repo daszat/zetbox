@@ -243,6 +243,22 @@ namespace Kistl.App.GUI
 
 
 
+		public override void UpdateParent(string propertyName, int? id)
+		{
+			switch(propertyName)
+			{
+                case "DataAssembly":
+                    fk_DataAssembly = id;
+                    break;
+                case "PresenterAssembly":
+                    fk_PresenterAssembly = id;
+                    break;
+				default:
+					base.UpdateParent(propertyName, id);
+					break;
+			}
+		}
+
 
 #region Serializer
 

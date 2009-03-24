@@ -21,7 +21,6 @@ namespace Kistl.API.Client.Tests
         public void SetUp()
         {
             var testCtx = new ClientApplicationContextMock();
-
             currentCustomActionsManager = (CustomActionsManagerAPITest)testCtx.CustomActionsManager;
             currentCustomActionsManager.Reset();
 

@@ -351,6 +351,28 @@ namespace Kistl.App.Base
 
 
 
+		public override void UpdateParent(string propertyName, int? id)
+		{
+			switch(propertyName)
+			{
+                case "Implementor":
+                    fk_Implementor = id;
+                    break;
+                case "InvokeOnObjectClass":
+                    fk_InvokeOnObjectClass = id;
+                    break;
+                case "Method":
+                    fk_Method = id;
+                    break;
+                case "Module":
+                    fk_Module = id;
+                    break;
+				default:
+					base.UpdateParent(propertyName, id);
+					break;
+			}
+		}
+
 
 #region Serializer
 
