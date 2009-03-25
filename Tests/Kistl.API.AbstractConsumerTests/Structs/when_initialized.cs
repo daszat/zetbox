@@ -14,6 +14,12 @@ namespace Kistl.API.AbstractConsumerTests.Structs
     {
 
         [Test]
+        public void should_exist()
+        {
+            Assert.That(obj.PhoneNumberMobile , Is.Not.Null);
+        }
+
+        [Test]
         public void should_be_attached_to_their_parent()
         {
             Assert.That((obj.PhoneNumberMobile as BaseStructObject).ParentObject, Is.SameAs(obj));
