@@ -15,12 +15,16 @@ namespace Kistl.App.Base
         /// <summary>
         /// The maximal length of this StringProperty
         /// </summary>
-
-		int MaxLength { get; set; }
+		int MaxLength {
+			get;
+			set;
+		}
         /// <summary>
         /// The minimal length of this StringProperty
         /// </summary>
-
-		int MinLength { get; set; }
+		int MinLength {
+			get;
+			set;
+		}
     }
 }

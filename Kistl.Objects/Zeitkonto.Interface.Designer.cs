@@ -13,29 +13,35 @@ namespace Kistl.App.Zeiterfassung
     {
 
         /// <summary>
-        /// Tätigkeiten
+        /// Aktuell gebuchte Stunden
         /// </summary>
-
-        ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten { get; }
+		double? AktuelleStunden {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Name des Zeiterfassungskontos
+        /// </summary>
+		string Kontoname {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Maximal erlaubte Stundenanzahl
+        /// </summary>
+		double? MaxStunden {
+			get;
+			set;
+		}
         /// <summary>
         /// Zugeordnete Mitarbeiter
         /// </summary>
 
         ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter { get; }
         /// <summary>
-        /// Name des Zeiterfassungskontos
+        /// Tätigkeiten
         /// </summary>
 
-		string Kontoname { get; set; }
-        /// <summary>
-        /// Maximal erlaubte Stundenanzahl
-        /// </summary>
-
-		double? MaxStunden { get; set; }
-        /// <summary>
-        /// Aktuell gebuchte Stunden
-        /// </summary>
-
-		double? AktuelleStunden { get; set; }
+        ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten { get; }
     }
 }

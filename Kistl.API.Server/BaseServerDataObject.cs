@@ -52,8 +52,21 @@ namespace Kistl.API.Server
             private set
             {
                 // Objectstate from Serializer
-                _ObjectState = value;
+                if (_ObjectState != value)
+                {
+                    // only call event but do not call other infrastructure
+                    // to avoid triggering provider specific business logic
+                    if (PropertyChanging != null)
+                        PropertyChanging(this, new PropertyChangingEventArgs("ObjectState"));
+                    _ObjectState = value;
+                    if (PropertyChanged != null)
+                        PropertyChanged(this, new PropertyChangedEventArgs("ObjectState"));
+                }
             }
+        }
+        protected void SetModified()
+        {
+            ObjectState = DataObjectState.Modified;
         }
 
         private IKistlContext _context;

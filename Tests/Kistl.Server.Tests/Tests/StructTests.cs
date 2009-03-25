@@ -38,9 +38,6 @@ namespace Kistl.Server.Tests
                 Assert.That(obj.PhoneNumberMobile, Is.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Null);
 
-                obj.PhoneNumberMobile = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
-                obj.PhoneNumberOffice = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
-
                 obj.PhoneNumberMobile.AreaCode = "1";
                 obj.PhoneNumberMobile.Number = number;
 
@@ -87,9 +84,6 @@ namespace Kistl.Server.Tests
                 var objList = ctx.GetQuery<Kistl.App.Test.TestCustomObject>();
                 var obj = objList.First();
                 ID = obj.ID;
-
-                obj.PhoneNumberMobile = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
-                obj.PhoneNumberOffice = ctx.CreateStruct<Kistl.App.Test.TestPhoneStruct>();
 
                 obj.PhoneNumberMobile.AreaCode = "1";
                 obj.PhoneNumberMobile.Number = number;
@@ -181,8 +175,6 @@ namespace Kistl.Server.Tests
                 }
 
                 Assert.That(testObject, Is.Not.Null);
-                testObject.PhoneNumberOffice = null;
-                testObject.PhoneNumberMobile = null;
 
                 Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
 

@@ -28,16 +28,6 @@
             {
                 return <%= backingName %>;
             }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (!object.Equals(<%= backingName %>, value))
-                {
-                    NotifyPropertyChanging("<%= name %>");
-                    <%= backingName %> = (<%= structImplementationType %>)value;
-                    NotifyPropertyChanged("<%= name %>");
-                }
-            }
         }
         
         /// <summary>backing store for <%= name %></summary>
@@ -57,8 +47,18 @@
                 if (value == null)
 					throw new ArgumentNullException("value");
                 
-                // use property to trigger notify
-                <%= name %> = value;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (!object.Equals(<%= backingName %>, value))
+                {
+                    NotifyPropertyChanging("<%= name %>", "<%= efName %>");
+                    if (<%= backingName %> != null)
+                    {
+						<%= backingName %>.DetachFromObject(this, "<%= name %>");
+					}
+                    <%= backingName %> = (<%= structImplementationType %>)value;
+					<%= backingName %>.AttachToObject(this, "<%= name %>");
+                    NotifyPropertyChanged("<%= name %>", "<%= efName %>");
+                }
             }
         }
 

@@ -15,7 +15,9 @@ namespace Kistl.App.Base
         /// <summary>
         /// Kistl-Typ des Parameters
         /// </summary>
-
-		Kistl.App.Base.DataType DataType { get; set; }
+		Kistl.App.Base.DataType DataType {
+			get;
+			set;
+		}
     }
 }

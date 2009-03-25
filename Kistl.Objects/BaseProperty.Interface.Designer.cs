@@ -15,23 +15,10 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
-		Kistl.App.Base.DataType ObjectClass { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-
-		string PropertyName { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-
-		string AltText { get; set; }
-        /// <summary>
-        /// Zugehörig zum Modul
-        /// </summary>
-
-		Kistl.App.Base.Module Module { get; set; }
+		string AltText {
+			get;
+			set;
+		}
         /// <summary>
         /// The list of constraints applying to this Property
         /// </summary>
@@ -40,13 +27,31 @@ namespace Kistl.App.Base
         /// <summary>
         /// Description of this Property
         /// </summary>
-
-		string Description { get; set; }
+		string Description {
+			get;
+			set;
+		}
         /// <summary>
-        /// Returns the String representation of this Property Meta Object.
+        /// Zugehörig zum Modul
         /// </summary>
-
-		 string GetPropertyTypeString() ;
+		Kistl.App.Base.Module Module {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Base.DataType ObjectClass {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		string PropertyName {
+			get;
+			set;
+		}
         /// <summary>
         /// 
         /// </summary>
@@ -57,5 +62,10 @@ namespace Kistl.App.Base
         /// </summary>
 
 		 System.Type GetPropertyType() ;
+        /// <summary>
+        /// Returns the String representation of this Property Meta Object.
+        /// </summary>
+
+		 string GetPropertyTypeString() ;
     }
 }

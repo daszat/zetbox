@@ -13,26 +13,38 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
     {
 		protected IKistlContext ctx;
 		protected Property prop;
+		protected bool isReadonly;
 
 
-        public SimplePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop)
+        public SimplePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop, bool isReadonly)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.prop = prop;
+			this.isReadonly = isReadonly;
 
         }
         
         public override void Generate()
         {
-#line 11 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
-this.WriteObjects("\r\n");
 #line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
 string name = prop.PropertyName;
 	string type = prop.ReferencedTypeAsCSharp();
 
 #line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
-this.WriteObjects("		",  type , " ",  name , " { get; set; }");
+this.WriteObjects("		",  type , " ",  name , " {\r\n");
+this.WriteObjects("			get;\r\n");
+#line 21 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
+if (!isReadonly)
+	{
+
+#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
+this.WriteObjects("			set;\r\n");
+#line 26 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
+}
+
+#line 28 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
+this.WriteObjects("		}");
 
         }
 

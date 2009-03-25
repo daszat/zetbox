@@ -24,7 +24,14 @@
         public <%= structType %> <%= name %>
         {
             get { return <%= backingName %>; }
-            set { <%= backingName %> = (<%= structImplementationType %>)value; }
+            internal set {
+				if (<%= backingName %> != null)
+				{
+	                <%= backingName %>.DetachFromObject(this, "<%= name %>");
+				}
+                <%= backingName %> = (<%= structImplementationType %>)value;
+                <%= backingName %>.AttachToObject(this, "<%= name %>");
+            }
         }
         
         private <%= structImplementationType %> <%= backingName %>;

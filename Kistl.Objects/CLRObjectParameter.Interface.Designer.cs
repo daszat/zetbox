@@ -15,12 +15,16 @@ namespace Kistl.App.Base
         /// <summary>
         /// Assembly des CLR Objektes, NULL für Default Assemblies
         /// </summary>
-
-		Kistl.App.Base.Assembly Assembly { get; set; }
+		Kistl.App.Base.Assembly Assembly {
+			get;
+			set;
+		}
         /// <summary>
         /// Name des CLR Datentypen
         /// </summary>
-
-		string FullTypeName { get; set; }
+		string FullTypeName {
+			get;
+			set;
+		}
     }
 }

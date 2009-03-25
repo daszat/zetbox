@@ -15,12 +15,16 @@ namespace Kistl.App.Base
         /// <summary>
         /// The biggest value accepted by this constraint
         /// </summary>
-
-		int Max { get; set; }
+		int Max {
+			get;
+			set;
+		}
         /// <summary>
         /// The smallest value accepted by this constraint
         /// </summary>
-
-		int Min { get; set; }
+		int Min {
+			get;
+			set;
+		}
     }
 }

@@ -13,34 +13,46 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Specifies which type this End of the relation has. MUST NOT be null.
+        /// Is true, if this RelationEnd persists the order of its elements
         /// </summary>
-
-		Kistl.App.Base.ObjectClass Type { get; set; }
-        /// <summary>
-        /// This end's role name in the relation
-        /// </summary>
-
-		string RoleName { get; set; }
-        /// <summary>
-        /// Which RelationEndRole this End has
-        /// </summary>
-
-		int Role { get; set; }
-        /// <summary>
-        /// The ORP to navigate FROM this end of the relation. MAY be null.
-        /// </summary>
-
-		Kistl.App.Base.Property Navigator { get; set; }
+		bool HasPersistentOrder {
+			get;
+			set;
+		}
         /// <summary>
         /// Specifies how many instances may occur on this end of the relation.
         /// </summary>
-
-		Kistl.App.Base.Multiplicity Multiplicity { get; set; }
+		Kistl.App.Base.Multiplicity Multiplicity {
+			get;
+			set;
+		}
         /// <summary>
-        /// Is true, if this RelationEnd persists the order of its elements
+        /// The ORP to navigate FROM this end of the relation. MAY be null.
         /// </summary>
-
-		bool HasPersistentOrder { get; set; }
+		Kistl.App.Base.Property Navigator {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Which RelationEndRole this End has
+        /// </summary>
+		int Role {
+			get;
+			set;
+		}
+        /// <summary>
+        /// This end's role name in the relation
+        /// </summary>
+		string RoleName {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Specifies which type this End of the relation has. MUST NOT be null.
+        /// </summary>
+		Kistl.App.Base.ObjectClass Type {
+			get;
+			set;
+		}
     }
 }

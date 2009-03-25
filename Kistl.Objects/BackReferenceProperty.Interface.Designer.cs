@@ -13,14 +13,18 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Das Property, welches auf diese Klasse zeigt
-        /// </summary>
-
-		Kistl.App.Base.ObjectReferenceProperty ReferenceProperty { get; set; }
-        /// <summary>
         /// Serialisierung der Liste zum Client
         /// </summary>
-
-		bool PreFetchToClient { get; set; }
+		bool PreFetchToClient {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Das Property, welches auf diese Klasse zeigt
+        /// </summary>
+		Kistl.App.Base.ObjectReferenceProperty ReferenceProperty {
+			get;
+			set;
+		}
     }
 }

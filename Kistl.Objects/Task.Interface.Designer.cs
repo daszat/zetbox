@@ -13,29 +13,39 @@ namespace Kistl.App.Projekte
     {
 
         /// <summary>
-        /// Verknüpfung zum Projekt
+        /// Aufwand in Stunden
         /// </summary>
-
-		Kistl.App.Projekte.Projekt Projekt { get; set; }
-        /// <summary>
-        /// Taskname
-        /// </summary>
-
-		string Name { get; set; }
-        /// <summary>
-        /// Start Datum
-        /// </summary>
-
-		DateTime? DatumVon { get; set; }
+		double? Aufwand {
+			get;
+			set;
+		}
         /// <summary>
         /// Enddatum
         /// </summary>
-
-		DateTime? DatumBis { get; set; }
+		DateTime? DatumBis {
+			get;
+			set;
+		}
         /// <summary>
-        /// Aufwand in Stunden
+        /// Start Datum
         /// </summary>
-
-		double? Aufwand { get; set; }
+		DateTime? DatumVon {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Taskname
+        /// </summary>
+		string Name {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Verknüpfung zum Projekt
+        /// </summary>
+		Kistl.App.Projekte.Projekt Projekt {
+			get;
+			set;
+		}
     }
 }

@@ -15,7 +15,9 @@ namespace Kistl.App.Base
         /// <summary>
         /// Pointer zur Objektklasse
         /// </summary>
-
-		Kistl.App.Base.ObjectClass ReferenceObjectClass { get; set; }
+		Kistl.App.Base.ObjectClass ReferenceObjectClass {
+			get;
+			set;
+		}
     }
 }

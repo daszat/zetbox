@@ -49,9 +49,6 @@ namespace Kistl.IntegrationTests
                 Assert.That(obj.PhoneNumberMobile, Is.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Null);
 
-                obj.PhoneNumberMobile = ctx.CreateStruct<TestPhoneStruct>();
-                obj.PhoneNumberOffice = ctx.CreateStruct<TestPhoneStruct>();
-
                 obj.PhoneNumberMobile.AreaCode = "1";
                 obj.PhoneNumberMobile.Number = number;
 
@@ -96,9 +93,6 @@ namespace Kistl.IntegrationTests
                 var objList = ctx.GetQuery<TestCustomObject>();
                 var obj = objList.First();
                 ID = obj.ID;
-
-                obj.PhoneNumberMobile = ctx.CreateStruct<TestPhoneStruct>();
-                obj.PhoneNumberOffice = ctx.CreateStruct<TestPhoneStruct>();
 
                 obj.PhoneNumberMobile.AreaCode = "1";
                 obj.PhoneNumberMobile.Number = number;
@@ -182,8 +176,6 @@ namespace Kistl.IntegrationTests
                 }
 
                 Assert.That(testObject, Is.Not.Null);
-                testObject.PhoneNumberOffice = null;
-                testObject.PhoneNumberMobile = null;
 
                 Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0), "no changes were submitted");
 

@@ -13,49 +13,59 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Liste der vererbten Klassen
-        /// </summary>
-
-        ICollection<Kistl.App.Base.ObjectClass> SubClasses { get; }
-        /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
-
-		Kistl.App.Base.ObjectClass BaseObjectClass { get; set; }
+		Kistl.App.Base.ObjectClass BaseObjectClass {
+			get;
+			set;
+		}
+        /// <summary>
+        /// The default model to use for the UI
+        /// </summary>
+		Kistl.App.Base.TypeRef DefaultModel {
+			get;
+			set;
+		}
         /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
 
         ICollection<Kistl.App.Base.Interface> ImplementsInterfaces { get; }
         /// <summary>
-        /// Tabellenname in der Datenbank
+        /// if true then all Instances appear in FozenContext.
         /// </summary>
-
-		string TableName { get; set; }
+		bool IsFrozenObject {
+			get;
+			set;
+		}
         /// <summary>
         /// Setting this to true marks the instances of this class as "simple." At first this will only mean that they'll be displayed inline.
         /// </summary>
-
-		bool IsSimpleObject { get; set; }
+		bool IsSimpleObject {
+			get;
+			set;
+		}
         /// <summary>
-        /// if true then all Instances appear in FozenContext.
+        /// Liste der vererbten Klassen
         /// </summary>
 
-		bool IsFrozenObject { get; set; }
+        ICollection<Kistl.App.Base.ObjectClass> SubClasses { get; }
         /// <summary>
-        /// The default model to use for the UI
+        /// Tabellenname in der Datenbank
         /// </summary>
-
-		Kistl.App.Base.TypeRef DefaultModel { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-
-		 IList<Kistl.App.Base.Method> GetInheritedMethods() ;
+		string TableName {
+			get;
+			set;
+		}
         /// <summary>
         /// 
         /// </summary>
 
 		 Kistl.App.Base.TypeRef GetDefaultModelRef() ;
+        /// <summary>
+        /// 
+        /// </summary>
+
+		 IList<Kistl.App.Base.Method> GetInheritedMethods() ;
     }
 }

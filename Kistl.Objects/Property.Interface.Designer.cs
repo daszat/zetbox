@@ -13,19 +13,25 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// 
-        /// </summary>
-
-		bool IsList { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-
-		bool IsNullable { get; set; }
-        /// <summary>
         /// Whether or not a list-valued property has a index
         /// </summary>
-
-		bool IsIndexed { get; set; }
+		bool IsIndexed {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		bool IsList {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		bool IsNullable {
+			get;
+			set;
+		}
     }
 }

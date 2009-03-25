@@ -15,7 +15,9 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
-		int Length { get; set; }
+		int Length {
+			get;
+			set;
+		}
     }
 }

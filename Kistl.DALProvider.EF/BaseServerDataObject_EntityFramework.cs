@@ -90,19 +90,45 @@ namespace Kistl.DALProvider.EF
 
         public override void NotifyPropertyChanging(string property)
         {
-            base.NotifyPropertyChanging(property);
-            if (_changeTracker != null)
-            {
-                _changeTracker.EntityMemberChanging(property);
-            }
+            NotifyPropertyChanging(property, property);
         }
 
         public override void NotifyPropertyChanged(string property)
         {
+            NotifyPropertyChanged(property, property);
+        }
+
+        /// <summary>
+        /// Special NotifyPropertyChanged implementation. Use this if the 
+        /// underlying EF-Property name doesn't match the public property
+        /// name.
+        /// </summary>
+        /// <param name="property">the official name of the property</param>
+        /// <param name="efProperty">the EF name of the property</param>
+        public void NotifyPropertyChanged(string property, string efProperty)
+        {
             base.NotifyPropertyChanged(property);
             if (_changeTracker != null)
             {
-                _changeTracker.EntityMemberChanged(property);
+                _changeTracker.EntityMemberChanged(efProperty);
+                if (ObjectState == DataObjectState.Unmodified)
+                    SetModified();
+            }
+        }
+
+        /// <summary>
+        /// Special NotifyPropertyChanging implementation. Use this if the 
+        /// underlying EF-Property name doesn't match the public property
+        /// name.
+        /// </summary>
+        /// <param name="property">the official name of the property</param>
+        /// <param name="efProperty">the EF name of the property</param>
+        public void NotifyPropertyChanging(string property, string efProperty)
+        {
+            base.NotifyPropertyChanging(property);
+            if (_changeTracker != null)
+            {
+                _changeTracker.EntityMemberChanging(efProperty);
             }
         }
     }
@@ -151,7 +177,7 @@ namespace Kistl.DALProvider.EF
         #endregion
 
         #region IEntityChangeTracker
-        
+
         IEntityChangeTracker _changeTracker = null;
 
         public virtual void SetChangeTracker(IEntityChangeTracker changeTracker)
@@ -198,6 +224,8 @@ namespace Kistl.DALProvider.EF
             if (_changeTracker != null)
             {
                 _changeTracker.EntityMemberChanged(property);
+                if (ObjectState == DataObjectState.Unmodified)
+                    SetModified();
             }
         }
 
@@ -212,9 +240,25 @@ namespace Kistl.DALProvider.EF
     /// <summary>
     /// Implementing a change tracker is not required because Structs are attached to their 
     /// parent objects. Every change will notify the parent also.
-    /// See BaseServerStructObject.AttachToObject and BaseServerStructObject.NotifyPropertyChanged
     /// </summary>
-    public abstract class BaseServerStructObject_EntityFramework : BaseServerStructObject
+    public abstract class BaseServerStructObject_EntityFramework
+        : BaseServerStructObject
     {
+        protected override void OnNotifyPropertyChanging(string property)
+        {
+            //base.OnNotifyPropertyChanging(property);
+            if (ParentObject != null)
+                (ParentObject as BaseServerDataObject_EntityFramework)
+                    .NotifyPropertyChanging(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix);
+        }
+
+        protected override void OnNotifyPropertyChanged(string property)
+        {
+            //base.OnNotifyPropertyChanged(property);
+            if (ParentObject != null)
+                (ParentObject as BaseServerDataObject_EntityFramework)
+                    .NotifyPropertyChanged(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix);
+        }
+
     }
 }

@@ -116,16 +116,6 @@ namespace Kistl.App.Test
             {
                 return _PhoneNumberMobile;
             }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (!object.Equals(_PhoneNumberMobile, value))
-                {
-                    NotifyPropertyChanging("PhoneNumberMobile");
-                    _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
-                    NotifyPropertyChanged("PhoneNumberMobile");
-                }
-            }
         }
         
         /// <summary>backing store for PhoneNumberMobile</summary>
@@ -145,8 +135,18 @@ namespace Kistl.App.Test
                 if (value == null)
 					throw new ArgumentNullException("value");
                 
-                // use property to trigger notify
-                PhoneNumberMobile = value;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (!object.Equals(_PhoneNumberMobile, value))
+                {
+                    NotifyPropertyChanging("PhoneNumberMobile", "PhoneNumberMobile__Implementation__");
+                    if (_PhoneNumberMobile != null)
+                    {
+						_PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
+					}
+                    _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+					_PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
+                    NotifyPropertyChanged("PhoneNumberMobile", "PhoneNumberMobile__Implementation__");
+                }
             }
         }
 
@@ -162,16 +162,6 @@ namespace Kistl.App.Test
             get
             {
                 return _PhoneNumberOffice;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (!object.Equals(_PhoneNumberOffice, value))
-                {
-                    NotifyPropertyChanging("PhoneNumberOffice");
-                    _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
-                    NotifyPropertyChanged("PhoneNumberOffice");
-                }
             }
         }
         
@@ -192,8 +182,18 @@ namespace Kistl.App.Test
                 if (value == null)
 					throw new ArgumentNullException("value");
                 
-                // use property to trigger notify
-                PhoneNumberOffice = value;
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (!object.Equals(_PhoneNumberOffice, value))
+                {
+                    NotifyPropertyChanging("PhoneNumberOffice", "PhoneNumberOffice__Implementation__");
+                    if (_PhoneNumberOffice != null)
+                    {
+						_PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
+					}
+                    _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+					_PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
+                    NotifyPropertyChanged("PhoneNumberOffice", "PhoneNumberOffice__Implementation__");
+                }
             }
         }
 

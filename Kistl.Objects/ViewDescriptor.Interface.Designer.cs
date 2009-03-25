@@ -15,17 +15,23 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
-		Kistl.App.Base.TypeRef LayoutRef { get; set; }
+		Kistl.App.Base.TypeRef LayoutRef {
+			get;
+			set;
+		}
         /// <summary>
         /// 
         /// </summary>
-
-		Kistl.App.GUI.Toolkit Toolkit { get; set; }
+		Kistl.App.GUI.Toolkit Toolkit {
+			get;
+			set;
+		}
         /// <summary>
         /// 
         /// </summary>
-
-		Kistl.App.Base.TypeRef ViewRef { get; set; }
+		Kistl.App.Base.TypeRef ViewRef {
+			get;
+			set;
+		}
     }
 }

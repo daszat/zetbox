@@ -13,14 +13,18 @@ namespace Kistl.App.Test
     {
 
         /// <summary>
-        /// Enter a Number
-        /// </summary>
-
-		string Number { get; set; }
-        /// <summary>
         /// Enter Area Code
         /// </summary>
-
-		string AreaCode { get; set; }
+		string AreaCode {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Enter a Number
+        /// </summary>
+		string Number {
+			get;
+			set;
+		}
     }
 }

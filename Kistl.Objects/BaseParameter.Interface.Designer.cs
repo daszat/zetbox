@@ -13,39 +13,49 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Name des Parameter
+        /// Description of this Parameter
         /// </summary>
-
-		string ParameterName { get; set; }
-        /// <summary>
-        /// Methode des Parameters
-        /// </summary>
-
-		Kistl.App.Base.Method Method { get; set; }
+		string Description {
+			get;
+			set;
+		}
         /// <summary>
         /// Parameter wird als List<> generiert
         /// </summary>
-
-		bool IsList { get; set; }
+		bool IsList {
+			get;
+			set;
+		}
         /// <summary>
         /// Es darf nur ein Return Parameter angegeben werden
         /// </summary>
-
-		bool IsReturnParameter { get; set; }
+		bool IsReturnParameter {
+			get;
+			set;
+		}
         /// <summary>
-        /// Description of this Parameter
+        /// Methode des Parameters
         /// </summary>
-
-		string Description { get; set; }
+		Kistl.App.Base.Method Method {
+			get;
+			set;
+		}
         /// <summary>
-        /// Returns the String representation of this Method-Parameter Meta Object.
+        /// Name des Parameter
         /// </summary>
-
-		 string GetParameterTypeString() ;
+		string ParameterName {
+			get;
+			set;
+		}
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
 
 		 System.Type GetParameterType() ;
+        /// <summary>
+        /// Returns the String representation of this Method-Parameter Meta Object.
+        /// </summary>
+
+		 string GetParameterTypeString() ;
     }
 }

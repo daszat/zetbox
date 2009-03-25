@@ -15,7 +15,9 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Filename of the Icon
         /// </summary>
-
-		string IconFile { get; set; }
+		string IconFile {
+			get;
+			set;
+		}
     }
 }

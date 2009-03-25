@@ -13,24 +13,28 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// The reason of this constraint
-        /// </summary>
-
-		string Reason { get; set; }
-        /// <summary>
         /// The property to be constrained
         /// </summary>
-
-		Kistl.App.Base.BaseProperty ConstrainedProperty { get; set; }
+		Kistl.App.Base.BaseProperty ConstrainedProperty {
+			get;
+			set;
+		}
         /// <summary>
-        /// 
+        /// The reason of this constraint
         /// </summary>
-
-		 bool IsValid(System.Object constrainedValue, System.Object constrainedObj) ;
+		string Reason {
+			get;
+			set;
+		}
         /// <summary>
         /// 
         /// </summary>
 
 		 string GetErrorText(System.Object constrainedValue, System.Object constrainedObject) ;
+        /// <summary>
+        /// 
+        /// </summary>
+
+		 bool IsValid(System.Object constrainedValue, System.Object constrainedObj) ;
     }
 }

@@ -18,29 +18,37 @@ namespace Kistl.App.GUI
 
         ICollection<Kistl.App.GUI.Visual> Children { get; }
         /// <summary>
-        /// The Property to display
-        /// </summary>
-
-		Kistl.App.Base.BaseProperty Property { get; set; }
-        /// <summary>
-        /// The Method whose return value shoud be displayed
-        /// </summary>
-
-		Kistl.App.Base.Method Method { get; set; }
-        /// <summary>
         /// The context menu for this Visual
         /// </summary>
 
         ICollection<Kistl.App.GUI.Visual> ContextMenu { get; }
         /// <summary>
-        /// A short description of the utility of this visual
-        /// </summary>
-
-		string Description { get; set; }
-        /// <summary>
         /// Which visual is represented here
         /// </summary>
-
-		Kistl.App.GUI.VisualType ControlType { get; set; }
+		Kistl.App.GUI.VisualType ControlType {
+			get;
+			set;
+		}
+        /// <summary>
+        /// A short description of the utility of this visual
+        /// </summary>
+		string Description {
+			get;
+			set;
+		}
+        /// <summary>
+        /// The Method whose return value shoud be displayed
+        /// </summary>
+		Kistl.App.Base.Method Method {
+			get;
+			set;
+		}
+        /// <summary>
+        /// The Property to display
+        /// </summary>
+		Kistl.App.Base.BaseProperty Property {
+			get;
+			set;
+		}
     }
 }

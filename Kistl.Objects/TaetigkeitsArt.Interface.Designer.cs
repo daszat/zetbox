@@ -15,7 +15,9 @@ namespace Kistl.App.Zeiterfassung
         /// <summary>
         /// Name der Tätigkeitsart
         /// </summary>
-
-		string Name { get; set; }
+		string Name {
+			get;
+			set;
+		}
     }
 }

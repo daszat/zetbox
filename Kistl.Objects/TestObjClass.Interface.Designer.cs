@@ -13,25 +13,33 @@ namespace Kistl.App.Test
     {
 
         /// <summary>
+        /// test
+        /// </summary>
+		int? MyIntProperty {
+			get;
+			set;
+		}
+        /// <summary>
         /// testtest
         /// </summary>
-
-		Kistl.App.Projekte.Kunde ObjectProp { get; set; }
+		Kistl.App.Projekte.Kunde ObjectProp {
+			get;
+			set;
+		}
         /// <summary>
         /// String Property
         /// </summary>
-
-		string StringProp { get; set; }
+		string StringProp {
+			get;
+			set;
+		}
         /// <summary>
         /// Test Enumeration Property
         /// </summary>
-
-		Kistl.App.Test.TestEnum TestEnumProp { get; set; }
-        /// <summary>
-        /// test
-        /// </summary>
-
-		int? MyIntProperty { get; set; }
+		Kistl.App.Test.TestEnum TestEnumProp {
+			get;
+			set;
+		}
         /// <summary>
         /// testmethod
         /// </summary>

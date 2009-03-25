@@ -13,24 +13,30 @@ namespace Kistl.App.Test
     {
 
         /// <summary>
+        /// Happy Birthday!
+        /// </summary>
+		DateTime? Birthday {
+			get;
+			set;
+		}
+        /// <summary>
         /// Persons Name
         /// </summary>
-
-		string PersonName { get; set; }
+		string PersonName {
+			get;
+			set;
+		}
         /// <summary>
         /// Mobile Phone Number
         /// </summary>
-
-		Kistl.App.Test.TestPhoneStruct PhoneNumberMobile { get; set; }
+		Kistl.App.Test.TestPhoneStruct PhoneNumberMobile {
+			get;
+		}
         /// <summary>
         /// Office Phone Number
         /// </summary>
-
-		Kistl.App.Test.TestPhoneStruct PhoneNumberOffice { get; set; }
-        /// <summary>
-        /// Happy Birthday!
-        /// </summary>
-
-		DateTime? Birthday { get; set; }
+		Kistl.App.Test.TestPhoneStruct PhoneNumberOffice {
+			get;
+		}
     }
 }

@@ -13,24 +13,32 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// Description of this Enumeration Entry
+        /// </summary>
+		string Description {
+			get;
+			set;
+		}
+        /// <summary>
         /// Übergeordnete Enumeration
         /// </summary>
-
-		Kistl.App.Base.Enumeration Enumeration { get; set; }
-        /// <summary>
-        /// The CLR value of this entry
-        /// </summary>
-
-		int Value { get; set; }
+		Kistl.App.Base.Enumeration Enumeration {
+			get;
+			set;
+		}
         /// <summary>
         /// CLR name of this entry
         /// </summary>
-
-		string Name { get; set; }
+		string Name {
+			get;
+			set;
+		}
         /// <summary>
-        /// Description of this Enumeration Entry
+        /// The CLR value of this entry
         /// </summary>
-
-		string Description { get; set; }
+		int Value {
+			get;
+			set;
+		}
     }
 }

@@ -13,30 +13,38 @@ namespace Kistl.App.Projekte
     {
 
         /// <summary>
+        /// Herzlichen Glückwunsch zum Geburtstag
+        /// </summary>
+		DateTime? Geburtstag {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Vorname Nachname
+        /// </summary>
+		string Name {
+			get;
+			set;
+		}
+        /// <summary>
         /// Projekte des Mitarbeiters für die er Verantwortlich ist
         /// </summary>
 
         IList<Kistl.App.Projekte.Projekt> Projekte { get; }
         /// <summary>
-        /// Vorname Nachname
-        /// </summary>
-
-		string Name { get; set; }
-        /// <summary>
-        /// Herzlichen Glückwunsch zum Geburtstag
-        /// </summary>
-
-		DateTime? Geburtstag { get; set; }
-        /// <summary>
         /// NNNN TTMMYY
         /// </summary>
-
-		string SVNr { get; set; }
+		string SVNr {
+			get;
+			set;
+		}
         /// <summary>
         /// +43 123 12345678
         /// </summary>
-
-		string TelefonNummer { get; set; }
+		string TelefonNummer {
+			get;
+			set;
+		}
         /// <summary>
         /// 
         /// </summary>

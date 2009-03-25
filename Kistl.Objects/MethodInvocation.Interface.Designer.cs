@@ -13,29 +13,39 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Methode, die Aufgerufen wird
+        /// The Type implementing this invocation
         /// </summary>
-
-		Kistl.App.Base.Method Method { get; set; }
-        /// <summary>
-        /// Zugehörig zum Modul
-        /// </summary>
-
-		Kistl.App.Base.Module Module { get; set; }
+		Kistl.App.Base.TypeRef Implementor {
+			get;
+			set;
+		}
         /// <summary>
         /// In dieser Objektklasse implementieren
         /// </summary>
-
-		Kistl.App.Base.DataType InvokeOnObjectClass { get; set; }
+		Kistl.App.Base.DataType InvokeOnObjectClass {
+			get;
+			set;
+		}
         /// <summary>
         /// Name des implementierenden Members
         /// </summary>
-
-		string MemberName { get; set; }
+		string MemberName {
+			get;
+			set;
+		}
         /// <summary>
-        /// The Type implementing this invocation
+        /// Methode, die Aufgerufen wird
         /// </summary>
-
-		Kistl.App.Base.TypeRef Implementor { get; set; }
+		Kistl.App.Base.Method Method {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Zugehörig zum Modul
+        /// </summary>
+		Kistl.App.Base.Module Module {
+			get;
+			set;
+		}
     }
 }

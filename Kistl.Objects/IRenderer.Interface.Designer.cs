@@ -15,8 +15,15 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The Toolkit used by this Renderer
         /// </summary>
+		Kistl.App.GUI.Toolkit Platform {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
 
-		Kistl.App.GUI.Toolkit Platform { get; set; }
+		 Kistl.API.IDataObject ChooseObject(Kistl.API.IKistlContext ctx, System.Type objectType) ;
         /// <summary>
         /// 
         /// </summary>
@@ -27,10 +34,5 @@ namespace Kistl.App.GUI
         /// </summary>
 
 		 void ShowObject(Kistl.API.IDataObject obj) ;
-        /// <summary>
-        /// 
-        /// </summary>
-
-		 Kistl.API.IDataObject ChooseObject(Kistl.API.IKistlContext ctx, System.Type objectType) ;
     }
 }

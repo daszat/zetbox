@@ -15,7 +15,9 @@ namespace Kistl.App.Base
         /// <summary>
         /// Enumeration der Eigenschaft
         /// </summary>
-
-		Kistl.App.Base.Enumeration Enumeration { get; set; }
+		Kistl.App.Base.Enumeration Enumeration {
+			get;
+			set;
+		}
     }
 }

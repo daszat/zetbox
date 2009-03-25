@@ -15,7 +15,9 @@ namespace Kistl.App.Zeiterfassung
         /// <summary>
         /// Projekt des Kostenträgers
         /// </summary>
-
-		Kistl.App.Projekte.Projekt Projekt { get; set; }
+		Kistl.App.Projekte.Projekt Projekt {
+			get;
+			set;
+		}
     }
 }

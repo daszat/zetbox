@@ -57,6 +57,10 @@ namespace Kistl.API.Client
                 // Objectstate from Serializer or set by KistlContext
                 if (_ObjectState != value)
                 {
+                    // only call event but do not call other infrastructure
+                    // to avoid triggering provider specific business logic
+                    if (PropertyChanging != null)
+                        PropertyChanging(this, new PropertyChangingEventArgs("ObjectState"));
                     _ObjectState = value;
                     if (PropertyChanged != null)
                         PropertyChanged(this, new PropertyChangedEventArgs("ObjectState"));

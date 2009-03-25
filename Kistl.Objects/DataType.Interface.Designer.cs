@@ -13,10 +13,31 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Eigenschaften der Objektklasse
+        /// Der Name der Objektklasse
+        /// </summary>
+		string ClassName {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Standard Icon wenn IIcon nicht implementiert ist
+        /// </summary>
+		Kistl.App.GUI.Icon DefaultIcon {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Description of this DataType
+        /// </summary>
+		string Description {
+			get;
+			set;
+		}
+        /// <summary>
+        /// all implemented Methods in this DataType
         /// </summary>
 
-        ICollection<Kistl.App.Base.BaseProperty> Properties { get; }
+        ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations { get; }
         /// <summary>
         /// Liste aller Methoden der Objektklasse.
         /// </summary>
@@ -25,37 +46,24 @@ namespace Kistl.App.Base
         /// <summary>
         /// Modul der Objektklasse
         /// </summary>
-
-		Kistl.App.Base.Module Module { get; set; }
+		Kistl.App.Base.Module Module {
+			get;
+			set;
+		}
         /// <summary>
-        /// Standard Icon wenn IIcon nicht implementiert ist
+        /// Eigenschaften der Objektklasse
         /// </summary>
 
-		Kistl.App.GUI.Icon DefaultIcon { get; set; }
-        /// <summary>
-        /// all implemented Methods in this DataType
-        /// </summary>
-
-        ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations { get; }
-        /// <summary>
-        /// Der Name der Objektklasse
-        /// </summary>
-
-		string ClassName { get; set; }
-        /// <summary>
-        /// Description of this DataType
-        /// </summary>
-
-		string Description { get; set; }
-        /// <summary>
-        /// Returns the String representation of this Datatype Meta Object.
-        /// </summary>
-
-		 string GetDataTypeString() ;
+        ICollection<Kistl.App.Base.BaseProperty> Properties { get; }
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
 
 		 System.Type GetDataType() ;
+        /// <summary>
+        /// Returns the String representation of this Datatype Meta Object.
+        /// </summary>
+
+		 string GetDataTypeString() ;
     }
 }

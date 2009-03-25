@@ -15,7 +15,9 @@ namespace Kistl.App.Base
         /// <summary>
         /// Definition of this Struct
         /// </summary>
-
-		Kistl.App.Base.Struct StructDefinition { get; set; }
+		Kistl.App.Base.Struct StructDefinition {
+			get;
+			set;
+		}
     }
 }

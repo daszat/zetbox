@@ -84,7 +84,14 @@ namespace Kistl.App.Test
         public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
         {
             get { return _PhoneNumberMobile; }
-            set { _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStruct__Implementation__)value; }
+            internal set {
+				if (_PhoneNumberMobile != null)
+				{
+	                _PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
+				}
+                _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+                _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
+            }
         }
         
         private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberMobile;
@@ -97,7 +104,14 @@ namespace Kistl.App.Test
         public Kistl.App.Test.TestPhoneStruct PhoneNumberOffice
         {
             get { return _PhoneNumberOffice; }
-            set { _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStruct__Implementation__)value; }
+            internal set {
+				if (_PhoneNumberOffice != null)
+				{
+	                _PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
+				}
+                _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+                _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
+            }
         }
         
         private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberOffice;

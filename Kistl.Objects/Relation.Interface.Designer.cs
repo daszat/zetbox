@@ -13,24 +13,32 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
-        /// </summary>
-
-		Kistl.App.Base.StorageType? Storage { get; set; }
-        /// <summary>
-        /// Description of this Relation
-        /// </summary>
-
-		string Description { get; set; }
-        /// <summary>
         /// The A-side of this Relation.
         /// </summary>
-
-		Kistl.App.Base.RelationEnd A { get; set; }
+		Kistl.App.Base.RelationEnd A {
+			get;
+			set;
+		}
         /// <summary>
         /// The B-side of this Relation.
         /// </summary>
-
-		Kistl.App.Base.RelationEnd B { get; set; }
+		Kistl.App.Base.RelationEnd B {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Description of this Relation
+        /// </summary>
+		string Description {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
+        /// </summary>
+		Kistl.App.Base.StorageType? Storage {
+			get;
+			set;
+		}
     }
 }

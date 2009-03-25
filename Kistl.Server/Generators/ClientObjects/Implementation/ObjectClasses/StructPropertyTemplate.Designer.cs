@@ -40,14 +40,21 @@ this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        public ",  structType , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get { return ",  backingName , "; }\r\n");
-this.WriteObjects("            set { ",  backingName , " = (",  structImplementationType , ")value; }\r\n");
+this.WriteObjects("            internal set {\r\n");
+this.WriteObjects("				if (",  backingName , " != null)\r\n");
+this.WriteObjects("				{\r\n");
+this.WriteObjects("	                ",  backingName , ".DetachFromObject(this, \"",  name , "\");\r\n");
+this.WriteObjects("				}\r\n");
+this.WriteObjects("                ",  backingName , " = (",  structImplementationType , ")value;\r\n");
+this.WriteObjects("                ",  backingName , ".AttachToObject(this, \"",  name , "\");\r\n");
+this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("        private ",  structImplementationType , " ",  backingName , ";\r\n");
-#line 32 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 39 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 AddSerialization(serializationList, backingName);
 
-#line 33 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 40 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 this.WriteObjects("  ");
 
         }

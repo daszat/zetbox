@@ -61,7 +61,8 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         {
             if (!p.IsListProperty())
             {
-                this.Host.CallTemplate("Interface.DataTypes.SimplePropertyTemplate", ctx, p);
+                bool isReadonly = p is StructProperty;
+                this.Host.CallTemplate("Interface.DataTypes.SimplePropertyTemplate", ctx, p, isReadonly);
             }
             else
             {

@@ -292,8 +292,8 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[27],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[53],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[53],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52],
 });
 			DataStore[4].Description = null;

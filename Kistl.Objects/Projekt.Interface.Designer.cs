@@ -13,39 +13,45 @@ namespace Kistl.App.Projekte
     {
 
         /// <summary>
-        /// 
-        /// </summary>
-
-        ICollection<Kistl.App.Projekte.Task> Tasks { get; }
-        /// <summary>
-        /// 
-        /// </summary>
-
-        IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter { get; }
-        /// <summary>
         /// Aufträge
         /// </summary>
 
         ICollection<Kistl.App.Projekte.Auftrag> Auftraege { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+		double? AufwandGes {
+			get;
+			set;
+		}
         /// <summary>
         /// Kostenträger
         /// </summary>
 
         ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger { get; }
         /// <summary>
-        /// Projektname
+        /// Bitte geben Sie den Kundennamen ein
         /// </summary>
-
-		string Name { get; set; }
+		string Kundenname {
+			get;
+			set;
+		}
         /// <summary>
         /// 
         /// </summary>
 
-		double? AufwandGes { get; set; }
+        IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter { get; }
         /// <summary>
-        /// Bitte geben Sie den Kundennamen ein
+        /// Projektname
+        /// </summary>
+		string Name {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
         /// </summary>
 
-		string Kundenname { get; set; }
+        ICollection<Kistl.App.Projekte.Task> Tasks { get; }
     }
 }

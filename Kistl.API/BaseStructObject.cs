@@ -88,7 +88,7 @@ namespace Kistl.API
         /// </summary>
         public object Clone()
         {
-            var clone = (BaseStructObject) this.MemberwiseClone();
+            var clone = (BaseStructObject)this.MemberwiseClone();
             // detach struct when cloning
             clone.ParentObject = null;
             clone.ParentProperty = null;
@@ -96,7 +96,7 @@ namespace Kistl.API
         }
 
         #endregion
-    
+
         /// <summary>
         /// returns the Kistl.Objects interface type of this struct
         /// </summary>
@@ -109,30 +109,51 @@ namespace Kistl.API
         public event PropertyChangingEventHandler PropertyChanging;
 
         /// <summary>
-        /// Property is about to be changed
+        /// Property is about to be changed. Override <see cref="OnNotifyPropertyChanging"/> to add functionality here.
         /// </summary>
         /// <param name="property"></param>
-        public virtual void NotifyPropertyChanging(string property)
+        public void NotifyPropertyChanging(string property)
         {
             if (PropertyChanging != null)
                 PropertyChanging(this, new PropertyChangingEventArgs(property));
 
+            OnNotifyPropertyChanging(property);
+        }
+
+        /// <summary>
+        /// Is called before the property "property" changes its value.
+        /// By default it notifies the parent object (if attached).
+        /// </summary>
+        /// <param name="property">the property that will change</param>
+        protected virtual void OnNotifyPropertyChanging(string property)
+        {
             if (ParentObject != null)
                 ParentObject.NotifyPropertyChanging(ParentProperty);
         }
 
         /// <summary>
-        /// Property has been changed
+        /// Property has been changed. Override <see cref="OnNotifyPropertyChanged"/> to add functionality here.
         /// </summary>
         /// <param name="property"></param>
-        public virtual void NotifyPropertyChanged(string property)
+        public void NotifyPropertyChanged(string property)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
 
+            OnNotifyPropertyChanged(property);
+        }
+
+        /// <summary>
+        /// Is called after the property "property" changes its value.
+        /// By default it notifies the parent object (if attached).
+        /// </summary>
+        /// <param name="property">the property that changed</param>
+        protected virtual void OnNotifyPropertyChanged(string property)
+        {
             if (ParentObject != null)
                 ParentObject.NotifyPropertyChanged(ParentProperty);
         }
+
 
         #endregion
 
