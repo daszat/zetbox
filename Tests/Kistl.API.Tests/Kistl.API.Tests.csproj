@@ -103,6 +103,10 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.AbstractConsumerTests\Kistl.API.AbstractConsumerTests.csproj">
+      <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
+      <Name>Kistl.API.AbstractConsumerTests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kistl.API.Mocks\Kistl.API.Mocks.csproj">
       <Project>{95E39A40-35BC-4214-86E5-EE451C138EE1}</Project>
       <Name>Kistl.API.Mocks</Name>

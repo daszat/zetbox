@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
     <Compile Include="Tests\GeneratorTests.cs" />
     <Compile Include="Tests\GetListTests.cs" />
     <Compile Include="Tests\InheritanceTests.cs" />
@@ -71,7 +72,11 @@
     <Compile Include="SetUp.cs" />
     <Compile Include="Tests\one_to_N_relations\should_obey_order.cs" />
     <Compile Include="Tests\one_to_N_relations\should_synchronize.cs" />
+    <Compile Include="Tests\PersistenceObjects\when_changed.cs" />
+    <Compile Include="Tests\PersistenceObjects\when_loaded.cs" />
     <Compile Include="Tests\RelationTests.cs" />
+    <Compile Include="Tests\Structs\when_changing_a_struct_member.cs" />
+    <Compile Include="Tests\Structs\when_initialized.cs" />
     <Compile Include="Tests\StructTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +109,10 @@
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
       <Name>Kistl.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Objects.Client\Kistl.Objects.Client.csproj">
+      <Project>{80F37FB5-66C6-45F2-9E2A-F787B141D66C}</Project>
+      <Name>Kistl.Objects.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects</Name>
@@ -112,6 +121,10 @@
     <ProjectReference Include="..\Kistl.API.AbstractConsumerTests\Kistl.API.AbstractConsumerTests.csproj">
       <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
       <Name>Kistl.API.AbstractConsumerTests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.Tests\Kistl.API.Tests.csproj">
+      <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
+      <Name>Kistl.API.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
