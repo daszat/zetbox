@@ -23,8 +23,9 @@ namespace Kistl.DalProvider.EF.Tests
         [SetUp]
         public void Init()
         {
-            Trace.TraceInformation("Resetting Database");
             var appCtx = new ServerApiContextMock();
+
+            Trace.TraceInformation("Resetting Database");
             using (var db = new SqlConnection(appCtx.Configuration.Server.ConnectionString))
             {
                 db.Open();
@@ -44,7 +45,6 @@ namespace Kistl.DalProvider.EF.Tests
             }
             Trace.TraceInformation("Done Resetting Database");
 
-            var testCtx = new ServerApiContextMock();
         }
     }
 }

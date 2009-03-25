@@ -4,26 +4,20 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.API.Server;
 
 using NUnit.Framework;
 
 namespace Kistl.DalProvider.EF.Tests.BaseServerDataObjects
 {
-     [TestFixture]
+    [TestFixture]
     public class when_loaded
-        : BsdoLoadFixture
+        : Kistl.API.AbstractConsumerTests.PersistenceObjects.when_loaded
     {
 
-        [Test]
-        public void should_be_unmodified()
+        public override IKistlContext GetContext()
         {
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-        }
-
-        [Test]
-        public void should_be_attached()
-        {
-            Assert.That(obj.IsAttached, Is.True);
+            return KistlContext.GetContext();
         }
 
     }

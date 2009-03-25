@@ -72,6 +72,10 @@
       <Project>{2C899579-BF78-442B-8810-8C7E7A2CA212}</Project>
       <Name>Kistl.Client.WPF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Objects.Client\Kistl.Objects.Client.csproj">
+      <Project>{80F37FB5-66C6-45F2-9E2A-F787B141D66C}</Project>
+      <Name>Kistl.Objects.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kistl.API.Client.Tests\Kistl.API.Client.Tests.csproj">
       <Project>{382F1331-A177-4B38-A3E7-6D1B9A0F812B}</Project>
       <Name>Kistl.API.Client.Tests</Name>
@@ -87,6 +91,10 @@
     <ProjectReference Include="..\Kistl.Client.Tests\Kistl.Client.Tests.csproj">
       <Project>{04B881EC-50C8-43DE-8E21-1D2EB38E1BB7}</Project>
       <Name>Kistl.Client.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.csproj">
+      <Project>{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}</Project>
+      <Name>Kistl.DalProvider.ClientObjects.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.csproj">
       <Project>{980874F0-D9C1-4EDB-8143-AD51C1E2666F}</Project>

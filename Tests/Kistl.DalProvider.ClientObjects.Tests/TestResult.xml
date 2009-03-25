@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.nunit" total="12" errors="8" failures="0" not-run="0" ignored="0" skipped="0" invalid="0" date="2009-03-25" time="13:07:45">
+  <environment nunit-version="2.5.0.9015" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
+  <culture-info current-culture="de-AT" current-uiculture="de-DE" />
+  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.nunit" executed="True" success="False" time="1.261" asserts="0">
+    <results>
+      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\bin\Debug\Kistl.DalProvider.ClientObjects.Tests.dll" executed="True" success="False" time="1.180" asserts="0">
+        <results>
+          <test-suite name="Kistl" executed="True" success="False" time="1.173" asserts="0">
+            <results>
+              <test-suite name="DalProvider" executed="True" success="False" time="1.169" asserts="0">
+                <results>
+                  <test-suite name="ClientObjects" executed="True" success="False" time="1.165" asserts="0">
+                    <results>
+                      <test-suite name="Tests" executed="True" success="False" time="1.163" asserts="0">
+                        <results>
+                          <test-suite name="BinarySerializers" executed="True" success="True" time="0.037" asserts="0">
+                            <results>
+                              <test-suite name="should_work_with_ClientStructs&lt;T&gt;" executed="True" success="True" time="0.036" asserts="0">
+                                <results>
+                                  <test-suite name="should_work_with_ClientStructs&lt;TestPhoneStruct__Implementation__&gt;" executed="True" success="True" time="0.028" asserts="0">
+                                    <results>
+                                      <test-case name="Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.should_work_with_ClientStructs`1[[Kistl.App.Test.TestPhoneStruct__Implementation__, Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]].when_deserializing" executed="True" success="True" time="0.017" asserts="0" />
+                                      <test-case name="Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.should_work_with_ClientStructs`1[[Kistl.App.Test.TestPhoneStruct__Implementation__, Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]].when_serializing" executed="True" success="True" time="0.000" asserts="0" />
+                                    </results>
+                                  </test-suite>
+                                  <test-suite name="should_work_with_ClientStructs&lt;StructMock__Implementation__&gt;" executed="True" success="True" time="0.003" asserts="0">
+                                    <results>
+                                      <test-case name="Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.should_work_with_ClientStructs`1[[Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.StructMock__Implementation__, Kistl.DalProvider.ClientObjects.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]].when_deserializing" executed="True" success="True" time="0.001" asserts="0" />
+                                      <test-case name="Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.should_work_with_ClientStructs`1[[Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.StructMock__Implementation__, Kistl.DalProvider.ClientObjects.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]].when_serializing" executed="True" success="True" time="0.001" asserts="0" />
+                                    </results>
+                                  </test-suite>
+                                </results>
+                              </test-suite>
+                            </results>
+                          </test-suite>
+                          <test-suite name="PersistenceObjects" executed="True" success="False" time="0.539" asserts="0">
+                            <results>
+                              <test-suite name="when_changed" executed="True" success="False" time="0.484" asserts="0">
+                                <results>
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_changed.should_be_modified" executed="True" success="False" time="0.484" asserts="0">
+                                    <failure>
+                                      <message><![CDATA[System.InvalidOperationException : Es wurde kein standardmäßiges Endpunktelement gefunden, das auf den Vertrag "KistlService.IKistlService" im ServiceModel-Clientkonfigurationsabschnitt verweist. Dies kann folgende Ursachen haben: Für die Anwendung wurde keine Konfigurationsdatei gefunden, oder im Clientelement wurde kein Endpunktelement gefunden, das diesem Vertrag entsprach.]]></message>
+                                      <stack-trace><![CDATA[bei System.ServiceModel.Description.ConfigLoader.LoadChannelBehaviors(ServiceEndpoint serviceEndpoint, String configurationName)
+bei System.ServiceModel.ChannelFactory.ApplyConfiguration(String configurationName)
+bei System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+bei System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+bei System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+bei System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+bei System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+bei System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+bei System.ServiceModel.ClientBase`1..ctor()
+bei Kistl.API.Client.KistlService.KistlServiceClient..ctor() in P:\Kistl\Kistl.API.Client\Service References\KistlService\Reference.cs:Zeile 55.
+bei Kistl.API.Client.ProxyImplementation..ctor() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 151.
+bei Kistl.API.Client.Proxy.get_Current() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 70.
+bei Kistl.API.Client.KistlContextProvider.CallService() in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 170.
+bei Kistl.API.Client.KistlContextProvider.GetObjectCall[T](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 250.
+bei Kistl.API.Client.KistlContextProvider.Execute[TResult](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 296.
+bei System.Linq.Queryable.First[TSource](IQueryable`1 source)
+bei Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.InitTestObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:Zeile 25.
+]]></stack-trace>
+                                    </failure>
+                                  </test-case>
+                                </results>
+                              </test-suite>
+                              <test-suite name="when_loaded" executed="True" success="False" time="0.014" asserts="0">
+                                <results>
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_loaded.should_be_attached" executed="True" success="False" time="0.004" asserts="0">
+                                    <failure>
+                                      <message><![CDATA[System.InvalidOperationException : Es wurde kein standardmäßiges Endpunktelement gefunden, das auf den Vertrag "KistlService.IKistlService" im ServiceModel-Clientkonfigurationsabschnitt verweist. Dies kann folgende Ursachen haben: Für die Anwendung wurde keine Konfigurationsdatei gefunden, oder im Clientelement wurde kein Endpunktelement gefunden, das diesem Vertrag entsprach.]]></message>
+                                      <stack-trace><![CDATA[bei System.ServiceModel.Description.ConfigLoader.LoadChannelBehaviors(ServiceEndpoint serviceEndpoint, String configurationName)
+bei System.ServiceModel.ChannelFactory.ApplyConfiguration(String configurationName)
+bei System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+bei System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+bei System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+bei System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+bei System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+bei System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+bei System.ServiceModel.ClientBase`1..ctor()
+bei Kistl.API.Client.KistlService.KistlServiceClient..ctor() in P:\Kistl\Kistl.API.Client\Service References\KistlService\Reference.cs:Zeile 55.
+bei Kistl.API.Client.ProxyImplementation..ctor() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 151.
+bei Kistl.API.Client.Proxy.get_Current() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 70.
+bei Kistl.API.Client.KistlContextProvider.CallService() in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 170.
+bei Kistl.API.Client.KistlContextProvider.GetObjectCall[T](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 250.
+bei Kistl.API.Client.KistlContextProvider.Execute[TResult](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 296.
+bei System.Linq.Queryable.First[TSource](IQueryable`1 source)
+bei Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.InitTestObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:Zeile 25.
+]]></stack-trace>
+                                    </failure>
+                                  </test-case>
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_loaded.should_be_unmodified" executed="True" success="False" time="0.004" asserts="0">
+                                    <failure>
+                                      <message><![CDATA[System.InvalidOperationException : Es wurde kein standardmäßiges Endpunktelement gefunden, das auf den Vertrag "KistlService.IKistlService" im ServiceModel-Clientkonfigurationsabschnitt verweist. Dies kann folgende Ursachen haben: Für die Anwendung wurde keine Konfigurationsdatei gefunden, oder im Clientelement wurde kein Endpunktelement gefunden, das diesem Vertrag entsprach.]]></message>
+                                      <stack-trace><![CDATA[bei System.ServiceModel.Description.ConfigLoader.LoadChannelBehaviors(ServiceEndpoint serviceEndpoint, String configurationName)
+bei System.ServiceModel.ChannelFactory.ApplyConfiguration(String configurationName)
+bei System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+bei System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+bei System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+bei System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+bei System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+bei System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+bei System.ServiceModel.ClientBase`1..ctor()
+bei Kistl.API.Client.KistlService.KistlServiceClient..ctor() in P:\Kistl\Kistl.API.Client\Service References\KistlService\Reference.cs:Zeile 55.
+bei Kistl.API.Client.ProxyImplementation..ctor() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 151.
+bei Kistl.API.Client.Proxy.get_Current() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 70.
+bei Kistl.API.Client.KistlContextProvider.CallService() in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 170.
+bei Kistl.API.Client.KistlContextProvider.GetObjectCall[T](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 250.
+bei Kistl.API.Client.KistlContextProvider.Execute[TResult](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 296.
+bei System.Linq.Queryable.First[TSource](IQueryable`1 source)
+bei Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.InitTestObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:Zeile 25.
+]]></stack-trace>
+                                    </failure>
+                                  </test-case>
+                                </results>
+                              </test-suite>
+                            </results>
+                          </test-suite>
+                          <test-suite name="Structs" executed="True" success="False" time="0.067" asserts="0">
+                            <results>
+                              <test-suite name="when_changing_a_struct_member" executed="True" success="False" time="0.036" asserts="0">
+                                <results>
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.Structs.when_changing_a_struct_member.should_commit_changes" executed="True" success="False" time="0.004" asserts="0">
+                                    <failure>
+                                      <message><![CDATA[System.InvalidOperationException : Es wurde kein standardmäßiges Endpunktelement gefunden, das auf den Vertrag "KistlService.IKistlService" im ServiceModel-Clientkonfigurationsabschnitt verweist. Dies kann folgende Ursachen haben: Für die Anwendung wurde keine Konfigurationsdatei gefunden, oder im Clientelement wurde kein Endpunktelement gefunden, das diesem Vertrag entsprach.]]></message>
+                                      <stack-trace><![CDATA[bei System.ServiceModel.Description.ConfigLoader.LoadChannelBehaviors(ServiceEndpoint serviceEndpoint, String configurationName)
+bei System.ServiceModel.ChannelFactory.ApplyConfiguration(String configurationName)
+bei System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+bei System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+bei System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+bei System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+bei System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+bei System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+bei System.ServiceModel.ClientBase`1..ctor()
+bei Kistl.API.Client.KistlService.KistlServiceClient..ctor() in P:\Kistl\Kistl.API.Client\Service References\KistlService\Reference.cs:Zeile 55.
+bei Kistl.API.Client.ProxyImplementation..ctor() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 151.
+bei Kistl.API.Client.Proxy.get_Current() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 70.
+bei Kistl.API.Client.KistlContextProvider.CallService() in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 170.
+bei Kistl.API.Client.KistlContextProvider.GetObjectCall[T](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 250.
+bei Kistl.API.Client.KistlContextProvider.Execute[TResult](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 296.
+bei System.Linq.Queryable.First[TSource](IQueryable`1 source)
+bei Kistl.API.AbstractConsumerTests.Structs.StructFixture.InitTestObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\Structs\StructFixture.cs:Zeile 25.
+]]></stack-trace>
+                                    </failure>
+                                  </test-case>
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.Structs.when_changing_a_struct_member.should_notify_parent" executed="True" success="False" time="0.004" asserts="0">
+                                    <failure>
+                                      <message><![CDATA[System.InvalidOperationException : Es wurde kein standardmäßiges Endpunktelement gefunden, das auf den Vertrag "KistlService.IKistlService" im ServiceModel-Clientkonfigurationsabschnitt verweist. Dies kann folgende Ursachen haben: Für die Anwendung wurde keine Konfigurationsdatei gefunden, oder im Clientelement wurde kein Endpunktelement gefunden, das diesem Vertrag entsprach.]]></message>
+                                      <stack-trace><![CDATA[bei System.ServiceModel.Description.ConfigLoader.LoadChannelBehaviors(ServiceEndpoint serviceEndpoint, String configurationName)
+bei System.ServiceModel.ChannelFactory.ApplyConfiguration(String configurationName)
+bei System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+bei System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+bei System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+bei System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+bei System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+bei System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+bei System.ServiceModel.ClientBase`1..ctor()
+bei Kistl.API.Client.KistlService.KistlServiceClient..ctor() in P:\Kistl\Kistl.API.Client\Service References\KistlService\Reference.cs:Zeile 55.
+bei Kistl.API.Client.ProxyImplementation..ctor() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 151.
+bei Kistl.API.Client.Proxy.get_Current() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 70.
+bei Kistl.API.Client.KistlContextProvider.CallService() in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 170.
+bei Kistl.API.Client.KistlContextProvider.GetObjectCall[T](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 250.
+bei Kistl.API.Client.KistlContextProvider.Execute[TResult](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 296.
+bei System.Linq.Queryable.First[TSource](IQueryable`1 source)
+bei Kistl.API.AbstractConsumerTests.Structs.StructFixture.InitTestObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\Structs\StructFixture.cs:Zeile 25.
+]]></stack-trace>
+                                    </failure>
+                                  </test-case>
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.Structs.when_changing_a_struct_member.should_notify_self" executed="True" success="False" time="0.013" asserts="0">
+                                    <failure>
+                                      <message><![CDATA[System.InvalidOperationException : Es wurde kein standardmäßiges Endpunktelement gefunden, das auf den Vertrag "KistlService.IKistlService" im ServiceModel-Clientkonfigurationsabschnitt verweist. Dies kann folgende Ursachen haben: Für die Anwendung wurde keine Konfigurationsdatei gefunden, oder im Clientelement wurde kein Endpunktelement gefunden, das diesem Vertrag entsprach.]]></message>
+                                      <stack-trace><![CDATA[bei System.ServiceModel.Description.ConfigLoader.LoadChannelBehaviors(ServiceEndpoint serviceEndpoint, String configurationName)
+bei System.ServiceModel.ChannelFactory.ApplyConfiguration(String configurationName)
+bei System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+bei System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+bei System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+bei System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+bei System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+bei System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+bei System.ServiceModel.ClientBase`1..ctor()
+bei Kistl.API.Client.KistlService.KistlServiceClient..ctor() in P:\Kistl\Kistl.API.Client\Service References\KistlService\Reference.cs:Zeile 55.
+bei Kistl.API.Client.ProxyImplementation..ctor() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 151.
+bei Kistl.API.Client.Proxy.get_Current() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 70.
+bei Kistl.API.Client.KistlContextProvider.CallService() in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 170.
+bei Kistl.API.Client.KistlContextProvider.GetObjectCall[T](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 250.
+bei Kistl.API.Client.KistlContextProvider.Execute[TResult](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 296.
+bei System.Linq.Queryable.First[TSource](IQueryable`1 source)
+bei Kistl.API.AbstractConsumerTests.Structs.StructFixture.InitTestObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\Structs\StructFixture.cs:Zeile 25.
+]]></stack-trace>
+                                    </failure>
+                                  </test-case>
+                                </results>
+                              </test-suite>
+                              <test-suite name="when_initialized" executed="True" success="False" time="0.017" asserts="0">
+                                <results>
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.Structs.when_initialized.should_be_attached_to_their_parent" executed="True" success="False" time="0.005" asserts="0">
+                                    <failure>
+                                      <message><![CDATA[System.InvalidOperationException : Es wurde kein standardmäßiges Endpunktelement gefunden, das auf den Vertrag "KistlService.IKistlService" im ServiceModel-Clientkonfigurationsabschnitt verweist. Dies kann folgende Ursachen haben: Für die Anwendung wurde keine Konfigurationsdatei gefunden, oder im Clientelement wurde kein Endpunktelement gefunden, das diesem Vertrag entsprach.]]></message>
+                                      <stack-trace><![CDATA[bei System.ServiceModel.Description.ConfigLoader.LoadChannelBehaviors(ServiceEndpoint serviceEndpoint, String configurationName)
+bei System.ServiceModel.ChannelFactory.ApplyConfiguration(String configurationName)
+bei System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+bei System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+bei System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+bei System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+bei System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+bei System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+bei System.ServiceModel.ClientBase`1..ctor()
+bei Kistl.API.Client.KistlService.KistlServiceClient..ctor() in P:\Kistl\Kistl.API.Client\Service References\KistlService\Reference.cs:Zeile 55.
+bei Kistl.API.Client.ProxyImplementation..ctor() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 151.
+bei Kistl.API.Client.Proxy.get_Current() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 70.
+bei Kistl.API.Client.KistlContextProvider.CallService() in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 170.
+bei Kistl.API.Client.KistlContextProvider.GetObjectCall[T](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 250.
+bei Kistl.API.Client.KistlContextProvider.Execute[TResult](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 296.
+bei System.Linq.Queryable.First[TSource](IQueryable`1 source)
+bei Kistl.API.AbstractConsumerTests.Structs.StructFixture.InitTestObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\Structs\StructFixture.cs:Zeile 25.
+]]></stack-trace>
+                                    </failure>
+                                  </test-case>
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.Structs.when_initialized.should_have_right_property_name_set" executed="True" success="False" time="0.004" asserts="0">
+                                    <failure>
+                                      <message><![CDATA[System.InvalidOperationException : Es wurde kein standardmäßiges Endpunktelement gefunden, das auf den Vertrag "KistlService.IKistlService" im ServiceModel-Clientkonfigurationsabschnitt verweist. Dies kann folgende Ursachen haben: Für die Anwendung wurde keine Konfigurationsdatei gefunden, oder im Clientelement wurde kein Endpunktelement gefunden, das diesem Vertrag entsprach.]]></message>
+                                      <stack-trace><![CDATA[bei System.ServiceModel.Description.ConfigLoader.LoadChannelBehaviors(ServiceEndpoint serviceEndpoint, String configurationName)
+bei System.ServiceModel.ChannelFactory.ApplyConfiguration(String configurationName)
+bei System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+bei System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+bei System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+bei System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+bei System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+bei System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+bei System.ServiceModel.ClientBase`1..ctor()
+bei Kistl.API.Client.KistlService.KistlServiceClient..ctor() in P:\Kistl\Kistl.API.Client\Service References\KistlService\Reference.cs:Zeile 55.
+bei Kistl.API.Client.ProxyImplementation..ctor() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 151.
+bei Kistl.API.Client.Proxy.get_Current() in P:\Kistl\Kistl.API.Client\Proxy.cs:Zeile 70.
+bei Kistl.API.Client.KistlContextProvider.CallService() in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 170.
+bei Kistl.API.Client.KistlContextProvider.GetObjectCall[T](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 250.
+bei Kistl.API.Client.KistlContextProvider.Execute[TResult](Expression e) in P:\Kistl\Kistl.API.Client\LinqToKistl\KistlContextProvider.cs:Zeile 296.
+bei System.Linq.Queryable.First[TSource](IQueryable`1 source)
+bei Kistl.API.AbstractConsumerTests.Structs.StructFixture.InitTestObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\Structs\StructFixture.cs:Zeile 25.
+]]></stack-trace>
+                                    </failure>
+                                  </test-case>
+                                </results>
+                              </test-suite>
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

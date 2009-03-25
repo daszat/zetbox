@@ -76,7 +76,6 @@
     <Compile Include="Mocks\ServerApiContextMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
-    <Compile Include="Tests\BaseServerDataObjects\BsdoLoadFixture.cs" />
     <Compile Include="Tests\BaseServerDataObjects\when_changed.cs" />
     <Compile Include="Tests\BaseServerDataObjects\when_loaded.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
@@ -90,7 +89,6 @@
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />
     <Compile Include="Tests\BaseServerStructObjectTests.cs" />
     <Compile Include="Tests\ContextTests.cs" />
-    <Compile Include="Tests\Structs\StructFixture.cs" />
     <Compile Include="Tests\Structs\when_changing_a_struct_member.cs" />
     <Compile Include="Tests\Structs\when_initialized.cs" />
   </ItemGroup>

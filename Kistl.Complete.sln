@@ -92,6 +92,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.AbstractConsumerT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.Frozen.Tests", "Tests\Kistl.DalProvider.Frozen.Tests\Kistl.DalProvider.Frozen.Tests.csproj", "{AC5D6781-62E6-4143-9447-BF7B3F5005F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.ClientObjects.Tests", "Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.csproj", "{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -402,6 +404,16 @@ Global
 		{AC5D6781-62E6-4143-9447-BF7B3F5005F7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC5D6781-62E6-4143-9447-BF7B3F5005F7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AC5D6781-62E6-4143-9447-BF7B3F5005F7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}.Release|.NET.ActiveCfg = Release|Any CPU
+		{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -424,6 +436,7 @@ Global
 		{95E39A40-35BC-4214-86E5-EE451C138EE1} = {ACC74A05-6833-4897-B739-8D5E82E846C2}
 		{1EEA57CD-4824-4A14-9447-3BD0E57997F4} = {ACC74A05-6833-4897-B739-8D5E82E846C2}
 		{AC5D6781-62E6-4143-9447-BF7B3F5005F7} = {ACC74A05-6833-4897-B739-8D5E82E846C2}
+		{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB} = {ACC74A05-6833-4897-B739-8D5E82E846C2}
 		{04656394-60EA-4675-95EE-3DA6D07BAB89} = {ACDAC04D-0C0C-4FDF-BF8A-DDB0205C7A51}
 		{CBE35A83-01BB-4F10-93E3-241784A22620} = {ACDAC04D-0C0C-4FDF-BF8A-DDB0205C7A51}
 	EndGlobalSection

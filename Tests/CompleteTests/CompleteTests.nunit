@@ -7,6 +7,7 @@
     <assembly path="Kistl.Client.Tests.dll" />
     <assembly path="Kistl.IntegrationTests.dll" />
     <assembly path="Kistl.Server.Tests.dll" />
+    <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
     <assembly path="Kistl.DalProvider.EF.Tests.dll" />
     <assembly path="Kistl.DalProvider.Frozen.Tests.dll" />
   </Config>
@@ -17,6 +18,7 @@
     <assembly path="Kistl.Client.Tests.dll" />
     <assembly path="Kistl.IntegrationTests.dll" />
     <assembly path="Kistl.Server.Tests.dll" />
+    <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
     <assembly path="Kistl.DalProvider.EF.Tests.dll" />
     <assembly path="Kistl.DalProvider.Frozen.Tests.dll" />
   </Config>
@@ -27,6 +29,7 @@
     <assembly path="Kistl.Client.Tests.dll" />
     <assembly path="Kistl.IntegrationTests.dll" />
     <assembly path="Kistl.Server.Tests.dll" />
+    <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
     <assembly path="Kistl.DalProvider.EF.Tests.dll" />
     <assembly path="Kistl.DalProvider.Frozen.Tests.dll" />
   </Config>

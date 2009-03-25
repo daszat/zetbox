@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.nunit</TopNode>
+  <SelectedNode>[0-1000]P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.nunit</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.nunit" Expanded="true">
+      <Nodes>
+        <Node UniqueName="[1-1020]P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\bin\Debug\Kistl.DalProvider.ClientObjects.Tests.dll" Expanded="true">
+          <Nodes>
+            <Node UniqueName="[1-1021]Kistl" Expanded="true">
+              <Nodes>
+                <Node UniqueName="[1-1022]Kistl.DalProvider" Expanded="true">
+                  <Nodes>
+                    <Node UniqueName="[1-1023]Kistl.DalProvider.ClientObjects" Expanded="true">
+                      <Nodes>
+                        <Node UniqueName="[1-1019]Kistl.DalProvider.ClientObjects.Tests.SetUp" Expanded="true">
+                          <Nodes>
+                            <Node UniqueName="[1-1027]Kistl.DalProvider.ClientObjects.Tests.BinarySerializers" Expanded="true">
+                              <Nodes>
+                                <Node UniqueName="[1-1012]Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.should_work_with_ClientStructs&lt;T&gt;" Expanded="true">
+                                  <Nodes>
+                                    <Node UniqueName="[1-1016]Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.should_work_with_ClientStructs`1[[Kistl.App.Test.TestPhoneStruct__Implementation__, Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Expanded="true">
+                                      <Nodes>
+                                        <Node UniqueName="[1-1018]Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.should_work_with_ClientStructs`1[[Kistl.App.Test.TestPhoneStruct__Implementation__, Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]].when_deserializing" />
+                                        <Node UniqueName="[1-1017]Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.should_work_with_ClientStructs`1[[Kistl.App.Test.TestPhoneStruct__Implementation__, Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]].when_serializing" />
+                                      </Nodes>
+                                    </Node>
+                                    <Node UniqueName="[1-1013]Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.should_work_with_ClientStructs`1[[Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.StructMock__Implementation__, Kistl.DalProvider.ClientObjects.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Expanded="true">
+                                      <Nodes>
+                                        <Node UniqueName="[1-1015]Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.should_work_with_ClientStructs`1[[Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.StructMock__Implementation__, Kistl.DalProvider.ClientObjects.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]].when_deserializing" />
+                                        <Node UniqueName="[1-1014]Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.should_work_with_ClientStructs`1[[Kistl.DalProvider.ClientObjects.Tests.BinarySerializers.StructMock__Implementation__, Kistl.DalProvider.ClientObjects.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]].when_serializing" />
+                                      </Nodes>
+                                    </Node>
+                                  </Nodes>
+                                </Node>
+                              </Nodes>
+                            </Node>
+                            <Node UniqueName="[1-1026]Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects" Expanded="true">
+                              <Nodes>
+                                <Node UniqueName="[1-1007]Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_changed" Expanded="true">
+                                  <Nodes>
+                                    <Node UniqueName="[1-1008]Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_changed.should_be_modified" />
+                                  </Nodes>
+                                </Node>
+                                <Node UniqueName="[1-1009]Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_loaded" Expanded="true">
+                                  <Nodes>
+                                    <Node UniqueName="[1-1011]Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_loaded.should_be_attached" />
+                                    <Node UniqueName="[1-1010]Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_loaded.should_be_unmodified" />
+                                  </Nodes>
+                                </Node>
+                              </Nodes>
+                            </Node>
+                            <Node UniqueName="[1-1025]Kistl.DalProvider.ClientObjects.Tests.Structs" Expanded="true">
+                              <Nodes>
+                                <Node UniqueName="[1-1003]Kistl.DalProvider.ClientObjects.Tests.Structs.when_changing_a_struct_member" Expanded="true">
+                                  <Nodes>
+                                    <Node UniqueName="[1-1006]Kistl.DalProvider.ClientObjects.Tests.Structs.when_changing_a_struct_member.should_commit_changes" />
+                                    <Node UniqueName="[1-1005]Kistl.DalProvider.ClientObjects.Tests.Structs.when_changing_a_struct_member.should_notify_parent" />
+                                    <Node UniqueName="[1-1004]Kistl.DalProvider.ClientObjects.Tests.Structs.when_changing_a_struct_member.should_notify_self" />
+                                  </Nodes>
+                                </Node>
+                                <Node UniqueName="[1-1000]Kistl.DalProvider.ClientObjects.Tests.Structs.when_initialized" Expanded="true">
+                                  <Nodes>
+                                    <Node UniqueName="[1-1001]Kistl.DalProvider.ClientObjects.Tests.Structs.when_initialized.should_be_attached_to_their_parent" />
+                                    <Node UniqueName="[1-1002]Kistl.DalProvider.ClientObjects.Tests.Structs.when_initialized.should_have_right_property_name_set" />
+                                  </Nodes>
+                                </Node>
+                              </Nodes>
+                            </Node>
+                          </Nodes>
+                        </Node>
+                      </Nodes>
+                    </Node>
+                  </Nodes>
+                </Node>
+              </Nodes>
+            </Node>
+          </Nodes>
+        </Node>
+      </Nodes>
+    </Node>
+  </Nodes>
+</VisualState>

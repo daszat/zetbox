@@ -1,0 +1,12 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" appbase="bin\Debug" configfile="Kistl.DalProvider.Frozen.ClientObjects.dll.config" binpathtype="Auto">
+    <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
+  </Config>
+  <Config name="Release" appbase="bin\Release" configfile="Kistl.DalProvider.Frozen.ClientObjects.dll.config" binpathtype="Auto">
+    <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
+  </Config>
+  <Config name="Studio" appbase="" configfile="Kistl.DalProvider.Frozen.ClientObjects.dll.config" binpathtype="Auto">
+    <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
+  </Config>
+</NUnitProject>
