@@ -9,7 +9,6 @@ using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests.Structs
 {
-    [TestFixture]
     public abstract class when_initialized
         : StructFixture
     {

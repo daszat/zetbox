@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
 {
-    [TestFixture]
+    
     public abstract class when_changed
         : ObjectLoadFixture
     {
@@ -38,4 +38,5 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
     }
+
 }

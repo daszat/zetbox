@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -13,14 +12,9 @@ namespace Kistl.API.Server.Tests
 {
 
     [TestFixture]
-    public class BaseServerCollectionEntryTests : CollectionEntryTests<TestObjClass_TestNameCollectionEntry__Implementation__>
+    public class BaseServerCollectionEntryTests
+        : CollectionEntryTests<TestObjClass_TestNameCollectionEntry__Implementation__>
     {
-        public override void SetUp()
-        {
-            var testCtx = new ServerApiContextMock();
-
-            base.SetUp();
-        }
     }
 
 }

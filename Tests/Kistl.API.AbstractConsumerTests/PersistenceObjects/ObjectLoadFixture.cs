@@ -15,6 +15,11 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
     {
         public abstract IKistlContext GetContext();
 
+        public virtual TestCustomObject GetObject()
+        {
+            return ctx.GetQuery<TestCustomObject>().First();
+        }
+
         protected IKistlContext ctx { get; private set; }
         protected TestCustomObject obj { get; private set; }
 
@@ -22,13 +27,14 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         public void InitTestObjects()
         {
             ctx = GetContext();
-            obj = ctx.GetQuery<TestCustomObject>().First();
+            obj = GetObject();
         }
 
         [TearDown]
         public void DisposeContext()
         {
-            ctx.Dispose();
+            if (ctx != null)
+                ctx.Dispose();
         }
     }
 

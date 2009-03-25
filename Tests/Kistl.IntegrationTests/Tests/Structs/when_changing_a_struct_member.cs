@@ -1,19 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
 using Kistl.API;
-using Kistl.API.Client;
+using Kistl.App.Test;
 
 using NUnit.Framework;
+using Kistl.API.Client;
 
-namespace Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects
+namespace Kistl.IntegrationTests.Structs
 {
+
     [TestFixture]
-    [Ignore("Needs mocked IKistlService and IKistlServiceStreams")]
-    public class when_changed
-        : Kistl.API.AbstractConsumerTests.PersistenceObjects.when_changed
+    public class when_changing_a_struct_member
+        : Kistl.API.AbstractConsumerTests.Structs.when_changing_a_struct_member
     {
 
         public override IKistlContext GetContext()

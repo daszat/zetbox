@@ -22,4 +22,5 @@ namespace Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects
         }
 
     }
+
 }

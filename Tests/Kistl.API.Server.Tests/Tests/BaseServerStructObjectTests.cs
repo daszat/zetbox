@@ -19,8 +19,6 @@ namespace Kistl.API.Server.Tests
         [SetUp]
         public void SetUp()
         {
-            var testCtx = new ServerApiContextMock();
-
             obj = new TestStruct() { TestInt = 1, TestString = "Hello World" };
         }
 

@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
 {
-    [TestFixture]
+
     public abstract class when_loaded
         : ObjectLoadFixture
     {
@@ -27,4 +27,5 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
     }
+
 }

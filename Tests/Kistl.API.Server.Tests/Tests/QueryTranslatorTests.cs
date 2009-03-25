@@ -18,7 +18,6 @@ namespace Kistl.API.Server.Tests
         [SetUp]
         public void SetUp()
         {
-            var testCtx = new ServerApiContextMock();
             ctx = new KistlContextMock();
         }
 

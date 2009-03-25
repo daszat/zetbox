@@ -8,12 +8,11 @@ using Kistl.API.Client;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects
+namespace Kistl.IntegrationTests.PersistenceObjects
 {
     [TestFixture]
-    [Ignore("Needs mocked IKistlService and IKistlServiceStreams")]
-    public class when_changed
-        : Kistl.API.AbstractConsumerTests.PersistenceObjects.when_changed
+    public class when_loaded
+        : Kistl.API.AbstractConsumerTests.PersistenceObjects.when_loaded
     {
 
         public override IKistlContext GetContext()
