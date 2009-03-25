@@ -114,14 +114,14 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _PhoneNumberMobile;
+                return PhoneNumberMobile__Implementation__;
             }
         }
         
         /// <summary>backing store for PhoneNumberMobile</summary>
         private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberMobile;
         
-        /// <summary>EF sees only this property, for PhoneNumberMobile</summary>
+        /// <summary>backing property for PhoneNumberMobile, takes care of attaching/detaching the values, mapped via EF</summary>
         [XmlIgnore()]
         [EdmComplexProperty()]
         public Kistl.App.Test.TestPhoneStruct__Implementation__ PhoneNumberMobile__Implementation__
@@ -161,14 +161,14 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _PhoneNumberOffice;
+                return PhoneNumberOffice__Implementation__;
             }
         }
         
         /// <summary>backing store for PhoneNumberOffice</summary>
         private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberOffice;
         
-        /// <summary>EF sees only this property, for PhoneNumberOffice</summary>
+        /// <summary>backing property for PhoneNumberOffice, takes care of attaching/detaching the values, mapped via EF</summary>
         [XmlIgnore()]
         [EdmComplexProperty()]
         public Kistl.App.Test.TestPhoneStruct__Implementation__ PhoneNumberOffice__Implementation__
@@ -248,8 +248,8 @@ namespace Kistl.App.Test
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Birthday, binStream);
             BinarySerializer.ToStream(this._PersonName, binStream);
-            BinarySerializer.ToStream(this._PhoneNumberMobile, binStream);
-            BinarySerializer.ToStream(this._PhoneNumberOffice, binStream);
+			BinarySerializer.ToStream(this.PhoneNumberMobile__Implementation__, binStream);
+			BinarySerializer.ToStream(this.PhoneNumberOffice__Implementation__, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -257,8 +257,20 @@ namespace Kistl.App.Test
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Birthday, binStream);
             BinarySerializer.FromStream(out this._PersonName, binStream);
-            BinarySerializer.FromStream(out this._PhoneNumberMobile, binStream);
-            BinarySerializer.FromStream(out this._PhoneNumberOffice, binStream);
+			{
+				// trick compiler into generating correct temporary variable
+				var tmp = this.PhoneNumberMobile__Implementation__;
+				BinarySerializer.FromStream(out tmp, binStream);
+				// use setter to de-/attach everything correctly
+	            this.PhoneNumberMobile__Implementation__ = tmp;
+	        }
+			{
+				// trick compiler into generating correct temporary variable
+				var tmp = this.PhoneNumberOffice__Implementation__;
+				BinarySerializer.FromStream(out tmp, binStream);
+				// use setter to de-/attach everything correctly
+	            this.PhoneNumberOffice__Implementation__ = tmp;
+	        }
         }
 
 #endregion

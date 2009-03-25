@@ -1,0 +1,42 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.StructSerialization"
+	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.StructSerialization" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Generators.Templates.Implementation" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="direction" Type="SerializerDirection" %>
+<%@ Parameter Name="streamName" Type="string" %>
+<%@ Parameter Name="memberName" Type="string" %>
+<%
+	string backingName = "_" + memberName;
+	
+	if (direction == SerializerDirection.ToStream)
+	{
+%>
+			BinarySerializer.ToStream(this.<%= memberName %>, <%= streamName %>);
+<%	
+	}
+	else if (direction == SerializerDirection.FromStream)
+	{
+%>
+			{
+				// trick compiler into generating correct temporary variable
+				var tmp = this.<%= memberName %>;
+				BinarySerializer.FromStream(out tmp, <%= streamName %>);
+				// use setter to de-/attach everything correctly
+	            this.<%= memberName %> = tmp;
+	        }
+<%	
+	}
+	else
+	{
+		throw new ArgumentOutOfRangeException("direction");
+	}
+%>

@@ -42,14 +42,14 @@ this.WriteObjects("        public ",  structType , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                return ",  backingName , ";\r\n");
+this.WriteObjects("                return ",  efName , ";\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("        /// <summary>backing store for ",  name , "</summary>\r\n");
 this.WriteObjects("        private ",  structImplementationType , " ",  backingName , ";\r\n");
 this.WriteObjects("        \r\n");
-this.WriteObjects("        /// <summary>EF sees only this property, for ",  name , "</summary>\r\n");
+this.WriteObjects("        /// <summary>backing property for ",  name , ", takes care of attaching/detaching the values, mapped via EF</summary>\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [EdmComplexProperty()]\r\n");
 this.WriteObjects("        public ",  structImplementationType , " ",  efName , "\r\n");
@@ -80,7 +80,7 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 #line 67 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
-AddSerialization(serializationList, backingName);
+AddSerialization(serializationList, efName);
 
 #line 68 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 this.WriteObjects("  ");

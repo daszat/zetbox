@@ -84,17 +84,23 @@ namespace Kistl.App.Test
         public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
         {
             get { return _PhoneNumberMobile; }
-            internal set {
-				if (_PhoneNumberMobile != null)
-				{
-	                _PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
-				}
-                _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
-                _PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
-            }
         }
         
-        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberMobile;
+        /// <summary>backing store for PhoneNumberMobile</summary>
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberMobileStore;
+        
+        /// <summary>backing property for PhoneNumberMobile, takes care of attaching/detaching the values</summary>
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberMobile {
+            get { return _PhoneNumberMobileStore; }
+            set {
+				if (_PhoneNumberMobileStore != null)
+				{
+	                _PhoneNumberMobileStore.DetachFromObject(this, "PhoneNumberMobile");
+				}
+                _PhoneNumberMobileStore = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+                _PhoneNumberMobileStore.AttachToObject(this, "PhoneNumberMobile");
+            }
+		}
   
         /// <summary>
         /// Office Phone Number
@@ -104,17 +110,23 @@ namespace Kistl.App.Test
         public Kistl.App.Test.TestPhoneStruct PhoneNumberOffice
         {
             get { return _PhoneNumberOffice; }
-            internal set {
-				if (_PhoneNumberOffice != null)
-				{
-	                _PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
-				}
-                _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
-                _PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
-            }
         }
         
-        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberOffice;
+        /// <summary>backing store for PhoneNumberOffice</summary>
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberOfficeStore;
+        
+        /// <summary>backing property for PhoneNumberOffice, takes care of attaching/detaching the values</summary>
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberOffice {
+            get { return _PhoneNumberOfficeStore; }
+            set {
+				if (_PhoneNumberOfficeStore != null)
+				{
+	                _PhoneNumberOfficeStore.DetachFromObject(this, "PhoneNumberOffice");
+				}
+                _PhoneNumberOfficeStore = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+                _PhoneNumberOfficeStore.AttachToObject(this, "PhoneNumberOffice");
+            }
+		}
   
 		public override InterfaceType GetInterfaceType()
 		{
@@ -171,8 +183,8 @@ namespace Kistl.App.Test
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Birthday, binStream);
             BinarySerializer.ToStream(this._PersonName, binStream);
-            BinarySerializer.ToStream(this._PhoneNumberMobile, binStream);
-            BinarySerializer.ToStream(this._PhoneNumberOffice, binStream);
+			BinarySerializer.ToStream(this._PhoneNumberMobile, binStream);
+			BinarySerializer.ToStream(this._PhoneNumberOffice, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -180,8 +192,20 @@ namespace Kistl.App.Test
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Birthday, binStream);
             BinarySerializer.FromStream(out this._PersonName, binStream);
-            BinarySerializer.FromStream(out this._PhoneNumberMobile, binStream);
-            BinarySerializer.FromStream(out this._PhoneNumberOffice, binStream);
+			{
+				// trick compiler into generating correct temporary variable
+				var tmp = this._PhoneNumberMobile;
+				BinarySerializer.FromStream(out tmp, binStream);
+				// use setter to de-/attach everything correctly
+	            this._PhoneNumberMobile = tmp;
+	        }
+			{
+				// trick compiler into generating correct temporary variable
+				var tmp = this._PhoneNumberOffice;
+				BinarySerializer.FromStream(out tmp, binStream);
+				// use setter to de-/attach everything correctly
+	            this._PhoneNumberOffice = tmp;
+	        }
         }
 
 #endregion

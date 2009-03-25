@@ -26,14 +26,14 @@
         {
             get
             {
-                return <%= backingName %>;
+                return <%= efName %>;
             }
         }
         
         /// <summary>backing store for <%= name %></summary>
         private <%= structImplementationType %> <%= backingName %>;
         
-        /// <summary>EF sees only this property, for <%= name %></summary>
+        /// <summary>backing property for <%= name %>, takes care of attaching/detaching the values, mapped via EF</summary>
         [XmlIgnore()]
         [EdmComplexProperty()]
         public <%= structImplementationType %> <%= efName %>
@@ -64,5 +64,5 @@
 
 
 <%
-        AddSerialization(serializationList, backingName);
+        AddSerialization(serializationList, efName);
 %>  

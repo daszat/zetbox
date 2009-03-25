@@ -14,7 +14,8 @@
 <%
 
 	string name = prop.PropertyName;
-	string backingName = "_" + name;
+	string backingPropertyName = "_" + name;
+	string backingStoreName = "_" + name + "Store";
 	
 	string structType = prop.GetPropertyTypeString();
 	string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
@@ -23,18 +24,24 @@
         // implement the user-visible interface
         public <%= structType %> <%= name %>
         {
-            get { return <%= backingName %>; }
-            internal set {
-				if (<%= backingName %> != null)
-				{
-	                <%= backingName %>.DetachFromObject(this, "<%= name %>");
-				}
-                <%= backingName %> = (<%= structImplementationType %>)value;
-                <%= backingName %>.AttachToObject(this, "<%= name %>");
-            }
+            get { return <%= backingPropertyName %>; }
         }
         
-        private <%= structImplementationType %> <%= backingName %>;
+        /// <summary>backing store for <%= name %></summary>
+        private <%= structImplementationType %> <%= backingStoreName %>;
+        
+        /// <summary>backing property for <%= name %>, takes care of attaching/detaching the values</summary>
+        private <%= structImplementationType %> <%= backingPropertyName %> {
+            get { return <%= backingStoreName %>; }
+            set {
+				if (<%= backingStoreName %> != null)
+				{
+	                <%= backingStoreName %>.DetachFromObject(this, "<%= name %>");
+				}
+                <%= backingStoreName %> = (<%= structImplementationType %>)value;
+                <%= backingStoreName %>.AttachToObject(this, "<%= name %>");
+            }
+		}
 <%
-        AddSerialization(serializationList, backingName);
+        AddSerialization(serializationList, backingPropertyName);
 %>  
