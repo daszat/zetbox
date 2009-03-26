@@ -35,11 +35,10 @@ namespace Kistl.Client.Presentables
             UI.Verify();
             // fetch old SelectedItem to reestablish selection after modifying RecentObjects
             var item = SelectedItem;
-            if (RecentObjects.Contains(mdl))
+            if (!RecentObjects.Contains(mdl))
             {
-                RecentObjects.Remove(mdl);
+                RecentObjects.Add(mdl);
             }
-            RecentObjects.Add(mdl);
             // reestablish selection 
             SelectedItem = item;
         }
