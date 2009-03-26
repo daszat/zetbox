@@ -42,6 +42,8 @@ namespace Kistl.Client.WPF
 
         protected override void ShowInView(object renderer, PresentableModel mdl, IView view, bool activate)
         {
+            AppContext.UiThread.Verify();
+            
             if (view is Window)
             {
                 var viewControl = (Window)view;
