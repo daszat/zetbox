@@ -120,6 +120,8 @@ namespace Kistl.Client.Presentables
             {
                 IDataObject newObj = (IDataObject)DataContext.Create(new InterfaceType(Property.GetPropertyType()));
                 Object.SetPropertyValue<IDataObject>(Property.PropertyName, newObj);
+                // show newly created object in workspace
+                UI.Queue(UI, () => Factory.ShowModel(Factory.CreateDefaultModel(DataContext, newObj), true));
                 // State will be reset by PropertyChanged event
             });
         }
