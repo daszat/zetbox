@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Complete Tests Configuration</ConfigName>
-  <Server StartServer="true">
+  <Address></Address>
+  <ConfigName>Kistl.Client's Test Configuration</ConfigName>
+  <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl_test;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <DocumentStore>P:\Kistl\DocumentStore\Server\</DocumentStore>
     <KistlDataContextType>Kistl.DALProvider.EF.KistlDataContext, Kistl.DALProvider.EF</KistlDataContextType>
     <ServerObjectHandlerType>Kistl.DALProvider.EF.ServerObjectHandler`1, Kistl.DALProvider.EF</ServerObjectHandlerType>
     <ServerObjectSetHandlerType>Kistl.DALProvider.EF.ServerObjectSetHandler, Kistl.DALProvider.EF</ServerObjectSetHandlerType>
   </Server>
-  <Client StartClient="false" ThrowErrors="true">
+  <Client StartClient="true">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>

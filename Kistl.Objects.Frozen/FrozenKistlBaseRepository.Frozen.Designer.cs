@@ -20,16 +20,6 @@ namespace Kistl.App.Base
 			}
 		}
 		
-		/// <summary>Frozen List of all BackReferenceProperty</summary>
-		/// Metadefinition Object for BackReference Properties.
-		public static IQueryable<BackReferenceProperty> BackReferenceProperties
-		{ 
-			get
-			{
-				return BackReferenceProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<BackReferenceProperty>();
-			}
-		}
-		
 		/// <summary>Frozen List of all BaseParameter</summary>
 		/// Metadefinition Object for Parameter. This class is abstract.
 		public static IQueryable<BaseParameter> BaseParameters
@@ -404,7 +394,6 @@ namespace Kistl.App.Base
 		internal static void CreateInstances()
 		{
 				Assembly__Implementation__Frozen.CreateInstances();
-				BackReferenceProperty__Implementation__Frozen.CreateInstances();
 				BaseParameter__Implementation__Frozen.CreateInstances();
 				BaseProperty__Implementation__Frozen.CreateInstances();
 				BoolParameter__Implementation__Frozen.CreateInstances();
@@ -448,7 +437,6 @@ namespace Kistl.App.Base
 		internal static void FillDataStore()
 		{
 				Assembly__Implementation__Frozen.FillDataStore();
-				BackReferenceProperty__Implementation__Frozen.FillDataStore();
 				BaseParameter__Implementation__Frozen.FillDataStore();
 				BaseProperty__Implementation__Frozen.FillDataStore();
 				BoolParameter__Implementation__Frozen.FillDataStore();

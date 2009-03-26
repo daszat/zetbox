@@ -18,7 +18,7 @@ namespace Kistl.API.Tests
             Action disposeUnmanaged;
 
             public ApplicationContextMock(Action disposeManagedAction, Action disposeUnmanagedAction)
-                : base(HostType.Server, KistlConfig.FromFile(""))
+                : base(HostType.Server, KistlConfig.FromFile("Kistl.API.Tests.Config.xml"))
             {
                 this.disposeManaged = disposeManagedAction ?? delegate { };
                 this.disposeUnmanaged = disposeUnmanagedAction ?? delegate { };

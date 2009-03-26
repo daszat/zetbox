@@ -152,7 +152,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(68);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(67);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[7] = 
@@ -206,10 +206,6 @@ namespace Kistl.App.Base
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[46] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[46] = 
 			DataStore[46] = new ObjectReferenceProperty__Implementation__Frozen(46);
-
-			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[47] = 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[47] = 
-			DataStore[47] = new ObjectReferenceProperty__Implementation__Frozen(47);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[49] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[49] = 
@@ -589,18 +585,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[46].IsNullable = false;
 			DataStore[46].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
 			DataStore[46].Seal();
-			DataStore[47].AltText = @"Das Property, welches auf diese Klasse zeigt";
-			DataStore[47].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[47].Description = @"Das Property, welches auf diese Klasse zeigt";
-			DataStore[47].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[47].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[16];
-			DataStore[47].PropertyName = @"ReferenceProperty";
-			DataStore[47].IsIndexed = false;
-			DataStore[47].IsList = false;
-			DataStore[47].IsNullable = true;
-			DataStore[47].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[14];
-			DataStore[47].Seal();
 			DataStore[49].AltText = null;
 			DataStore[49].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });

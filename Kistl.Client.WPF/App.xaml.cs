@@ -91,7 +91,7 @@ namespace Kistl.Client.WPF
         private void FixupDatabase()
         {
             //FixNotNullableConstraints();
-            CreateTypeRefs();
+            //CreateTypeRefs();
         }
 
         private void CreateTypeRefs()

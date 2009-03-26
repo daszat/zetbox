@@ -14,7 +14,7 @@ using NUnit.Framework.Constraints;
 namespace Kistl.IntegrationTests
 {
     [SetUpFixture]
-    public class SetUp : IDisposable
+    public class SetUp : Kistl.API.AbstractConsumerTests.DatabaseResetup, IDisposable
     {
         private ServerDomainManager manager;
 
@@ -23,7 +23,9 @@ namespace Kistl.IntegrationTests
         {
             System.Diagnostics.Trace.WriteLine("Setting up Kistl");
 
-            var config = KistlConfig.FromFile("DefaultConfig_Integration.Tests.xml");
+            var config = KistlConfig.FromFile("Kistl.IntegrationTests.Config.xml");
+
+            ResetDatabase(config);
 
             manager = new ServerDomainManager();
             manager.Start(config);

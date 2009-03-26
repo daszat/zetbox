@@ -58,7 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assembly.Frozen.Designer.cs" />
-    <Compile Include="BackReferenceProperty.Frozen.Designer.cs" />
     <Compile Include="BaseParameter.Frozen.Designer.cs" />
     <Compile Include="BaseProperty.Frozen.Designer.cs" />
     <Compile Include="BoolParameter.Frozen.Designer.cs" />

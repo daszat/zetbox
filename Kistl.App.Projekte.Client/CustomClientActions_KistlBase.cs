@@ -134,11 +134,6 @@ namespace Kistl.App.Base
             e.Result = obj.ModuleName;
         }
 
-        //public void OnToString_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
-        //{
-        //    e.Result = "* " + e.Result;
-        //}
-
         public void OnToString_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = "-> " + e.Result;
@@ -263,21 +258,6 @@ namespace Kistl.App.Base
             else
             {
                 e.Result = String.Format("ObjectReferenceProperty {0}: {1}", obj.ID, obj.PropertyName);
-            }
-
-        }
-
-        public void OnGetPropertyTypeString_BackReferenceProperty(Kistl.App.Base.BackReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            // TODO: IsValid?
-            if (Helper.IsPersistedObject(obj))
-            {
-                DataType objClass = obj.ReferenceProperty.ObjectClass;
-                e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
-            }
-            else
-            {
-                e.Result = String.Format("BackReferenceProperty {0}: {1}", obj.ID, obj.PropertyName);
             }
 
         }

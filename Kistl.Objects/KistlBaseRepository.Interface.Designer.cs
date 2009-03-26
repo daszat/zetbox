@@ -404,16 +404,6 @@ namespace Kistl.App.Base
 			}
 		}
 		
-		/// <summary>List of all BackReferenceProperty</summary>
-		/// Metadefinition Object for BackReference Properties.
-		public IQueryable<BackReferenceProperty> BackReferenceProperties
-		{ 
-			get
-			{
-				return Context.GetQuery<BackReferenceProperty>();
-			}
-		}
-		
 		/// <summary>List of all Assembly</summary>
 		/// 
 		public IQueryable<Assembly> Assemblies

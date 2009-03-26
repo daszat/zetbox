@@ -134,11 +134,11 @@ namespace Kistl.API.Client
         }
 
         /// <summary>
-        /// Returns the List of a BackReferenceProperty by the given PropertyName.
+        /// Returns the List referenced by the given PropertyName.
         /// </summary>
-        /// <typeparam name="T">List Type of the BackReferenceProperty</typeparam>
-        /// <param name="obj">Object which holds the BackReferenceProperty</param>
-        /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
+        /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
+        /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
+        /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
         /// <returns>A List of Objects</returns>
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
@@ -147,12 +147,12 @@ namespace Kistl.API.Client
         }
 
         /// <summary>
-        /// Returns the List of a BackReferenceProperty by the given Type, ID and PropertyName.
+        /// Returns the List referenced by the given Type, ID and PropertyName.
         /// </summary>
-        /// <typeparam name="T">List Type of the BackReferenceProperty</typeparam>
-        /// <param name="type">Type of the Object which holds the BackReferenceProperty</param>
-        /// <param name="ID">ID of the Object which holds the BackReferenceProperty</param>
-        /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
+        /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
+        /// <param name="type">Type of the Object which holds the ObjectReferenceProperty</param>
+        /// <param name="ID">ID of the Object which holds the ObjectReferenceProperty</param>
+        /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
         /// <returns>A List of Objects</returns>
         public List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : class, IDataObject
         {

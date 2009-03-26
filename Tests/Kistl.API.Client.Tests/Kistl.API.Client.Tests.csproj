@@ -73,10 +73,9 @@
     <Compile Include="Tests\KistlContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DefaultConfig.xml">
+    <Content Include="Kistl.API.Client.Tests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DefaultConfig_API.Client.Tests.xml" />
     <Content Include="Kistl.API.Client.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>

@@ -10,8 +10,8 @@ namespace Kistl.API.Mocks
 {
     public class TestApplicationContext : ApplicationContext
     {
-        public TestApplicationContext()
-            : base(HostType.None, KistlConfig.FromFile(""))
+        public TestApplicationContext(string configfilename)
+            : base(HostType.None, KistlConfig.FromFile(configfilename))
         {
             this.SetAssemblies(Assembly.GetAssembly(this.GetType()).FullName);
         }

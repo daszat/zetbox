@@ -12,7 +12,7 @@ namespace Kistl.DalProvider.EF.Mocks
     class ServerApiContextMock : ServerApiContext
     {
         public ServerApiContextMock()
-            : base(KistlConfig.FromFile("DefaultConfig_DalProvider.EF.Tests.xml"))
+            : base(KistlConfig.FromFile("Kistl.DalProvider.EF.Tests.Config.xml"))
         {
             SetCustomActionsManager(new CustomActionsManagerAPITest());
             InterfaceAssembly = Assembly.GetAssembly(typeof(Kistl.App.Base.Assembly)).FullName;

@@ -55,18 +55,6 @@ namespace Kistl.Client.Mocks
             return result;
         }
 
-        //public static BackReferenceProperty CreateBackReferenceProperty(Mockery m)
-        //{
-        //    var result = m.NewMock<BackReferenceProperty>();
-
-        //    Stub.On(result)
-        //        .Method("GetPropertyTypeString")
-        //        .WithNoArguments()
-        //        .Will(Return.Value(result.GetType().FullName));
-
-        //    return result;
-        //}
-
         public static TestObject CreateTestObject(Mockery m)
         {
             var result = m.NewMock<TestObject>("Some TestObject");

@@ -16,17 +16,6 @@ namespace Kistl.API.Client.Tests
         public void Init()
         {
             var testCtx = new ClientApplicationContextMock();
-
-            System.Diagnostics.Trace.WriteLine("Setting up Kistl");
-/*
-            Kistl.API.APIInit init = new Kistl.API.APIInit();
-            init.Init(Kistl.API.HostType.Client, @"..\..\DefaultConfig_API.Client.Tests.xml");
-            Kistl.API.APIInit.ImplementationAssembly = this.GetType().Assembly.FullName;
-            Kistl.API.APIInit.InterfaceAssembly = this.GetType().Assembly.FullName;
-
-            Kistl.API.CustomActionsManagerFactory.Init(new CustomActionsManagerAPITest());
-            */
-            System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");
         }
     }
 }

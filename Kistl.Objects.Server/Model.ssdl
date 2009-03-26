@@ -103,13 +103,6 @@
       <End Role="B_DateTimeProperty" EntitySet="DateTimeProperty" />
     </AssociationSet>
     
-    <EntitySet Name="BackReferenceProperty" EntityType="Model.Store.BackReferenceProperty" Table="BackReferenceProperties"/>
-    <!-- inherits from BaseProperty -->
-    <AssociationSet Name="FK_BackReferenceProperty_BaseProperty_ID" Association="Model.Store.FK_BackReferenceProperty_BaseProperty_ID" >
-      <End Role="A_BaseProperty" EntitySet="BaseProperty" />
-      <End Role="B_BackReferenceProperty" EntitySet="BackReferenceProperty" />
-    </AssociationSet>
-    
     <EntitySet Name="Kostenstelle" EntityType="Model.Store.Kostenstelle" Table="Kostenstellen"/>
     <!-- inherits from Zeitkonto -->
     <AssociationSet Name="FK_Kostenstelle_Zeitkonto_ID" Association="Model.Store.FK_Kostenstelle_Zeitkonto_ID" >
@@ -374,10 +367,6 @@
     <AssociationSet Name="FK_Auftrag_Mitarbeiter_Auftrag_29" Association="Model.Store.FK_Auftrag_Mitarbeiter_Auftrag_29" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28" Association="Model.Store.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28" >
-      <End Role="BackReferenceProperty" EntitySet="BackReferenceProperty" />
-      <End Role="ReferenceProperty" EntitySet="ObjectReferenceProperty" />
     </AssociationSet>
     <AssociationSet Name="FK_BaseProperty_Constraint_ConstrainedProperty_62" Association="Model.Store.FK_BaseProperty_Constraint_ConstrainedProperty_62" >
       <End Role="ConstrainedProperty" EntitySet="BaseProperty" />
@@ -689,15 +678,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="BackReferenceProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_ReferenceProperty" Type="int" />
-    <Property Name="PreFetchToClient" Type="bit" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Module">
@@ -1422,21 +1402,6 @@
       </Principal>
       <Dependent Role="Auftrag">
         <PropertyRef Name="fk_Mitarbeiter" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28">
-    <End Role="ReferenceProperty" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="BackReferenceProperty" Type="Model.Store.BackReferenceProperty" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ReferenceProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="BackReferenceProperty">
-        <PropertyRef Name="fk_ReferenceProperty" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2178,18 +2143,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_DateTimeProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BackReferenceProperty_BaseProperty_ID">
-    <End Role="A_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="1" />
-    <End Role="B_BackReferenceProperty" Type="Model.Store.BackReferenceProperty" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_BaseProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_BackReferenceProperty">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

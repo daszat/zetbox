@@ -86,7 +86,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DefaultConfig_Integration.Tests.xml">
+    <Content Include="Kistl.IntegrationTests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Kistl.IntegrationTests.PartCoverSettings.xml" />

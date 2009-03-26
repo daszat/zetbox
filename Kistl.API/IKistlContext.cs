@@ -58,20 +58,20 @@ namespace Kistl.API
         IQueryable<IDataObject> GetQuery(InterfaceType ifType);
 
         /// <summary>
-        /// Returns the List of a BackReferenceProperty by the given PropertyName.
+        /// Returns the List referenced by the given PropertyName.
         /// </summary>
-        /// <typeparam name="T">List Type of the BackReferenceProperty</typeparam>
-        /// <param name="obj">Object which holds the BackReferenceProperty</param>
-        /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
+        /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
+        /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
+        /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
         /// <returns>A List of Objects</returns>
         List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject;
         /// <summary>
-        /// Returns the List of a BackReferenceProperty by the given Type, ID and PropertyName.
+        /// Returns the List referenced by the given Type, ID and PropertyName.
         /// </summary>
-        /// <typeparam name="T">List Type of the BackReferenceProperty</typeparam>
-        /// <param name="ifType">Type of the Object which holds the BackReferenceProperty</param>
-        /// <param name="ID">ID of the Object which holds the BackReferenceProperty</param>
-        /// <param name="propertyName">Propertyname which holds the BackReferenceProperty</param>
+        /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
+        /// <param name="ifType">Type of the Object which holds the ObjectReferenceProperty</param>
+        /// <param name="ID">ID of the Object which holds the ObjectReferenceProperty</param>
+        /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
         /// <returns>A List of Objects</returns>
         List<T> GetListOf<T>(InterfaceType ifType, int ID, string propertyName) where T : class, IDataObject;
 

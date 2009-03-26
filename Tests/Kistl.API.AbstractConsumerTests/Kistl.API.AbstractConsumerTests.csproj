@@ -49,6 +49,7 @@
     <Compile Include="AbstractContextTests.cs" />
     <Compile Include="AbstractListPropertiesTests.cs" />
     <Compile Include="BinarySerializers\should_work_with_IStructs.cs" />
+    <Compile Include="DatabaseResetup.cs" />
     <Compile Include="N_to_M_relations\should_synchronize.cs" />
     <Compile Include="one_to_N_relations\should_obey_order.cs" />
     <Compile Include="one_to_N_relations\should_synchronize.cs" />

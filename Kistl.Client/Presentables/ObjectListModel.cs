@@ -27,17 +27,6 @@ namespace Kistl.Client.Presentables
             RegisterCollectionChanged();
         }
 
-        /// <summary>
-        /// deprecated BackReferenceProperty
-        /// </summary>
-        public ObjectListModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            IDataObject referenceHolder, BackReferenceProperty prop)
-            : base(appCtx, dataCtx, referenceHolder, prop)
-        {
-            RegisterCollectionChanged();
-        }
-
         private void RegisterCollectionChanged()
         {
             Async.Queue(DataContext, () =>
@@ -111,17 +100,8 @@ namespace Kistl.Client.Presentables
             Async.Queue(DataContext, () =>
             {
                 ObjectClass baseclass;
-                if (this.Property is BackReferenceProperty)
-                {
-                    baseclass = ((BackReferenceProperty)this.Property).ReferenceProperty.ObjectClass as ObjectClass;
-                    // TODO: non-ObjectClass references have to be handled properly too
-                    if (baseclass == null)
-                        throw new InvalidOperationException();
-                }
-                else
-                {
-                    baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
-                }
+
+                baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
 
                 var children = new List<ObjectClass>() { baseclass };
                 AsyncCollectChildClasses(baseclass.ID, children);

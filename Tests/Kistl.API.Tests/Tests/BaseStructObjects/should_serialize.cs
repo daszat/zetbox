@@ -25,7 +25,7 @@ namespace Kistl.API.Tests.BaseStructObjects
             ms = new MemoryStream();
             sw = new BinaryWriter(ms);
             sr = new BinaryReader(ms);
-            var testCtx = new TestApplicationContext();
+            var testCtx = new TestApplicationContext("Kistl.API.Tests.Config.xml");
 
             test = new TestStruct__Implementation__();
         }

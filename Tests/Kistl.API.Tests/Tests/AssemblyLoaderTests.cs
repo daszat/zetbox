@@ -18,7 +18,7 @@ namespace Kistl.API.Tests
         [SetUp]
         public void SetUp()
         {
-            var textCtx = new TestApplicationContext();
+            var textCtx = new TestApplicationContext("Kistl.API.Tests.Config.xml");
             textCtx.Configuration.SourceFileLocation = new string[] { "." };
         }
 

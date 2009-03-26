@@ -11,7 +11,7 @@ namespace Kistl.API.Server.Mocks
     class ServerApiContextMock : ServerApiContext
     {
         public ServerApiContextMock()
-            : base(KistlConfig.FromFile("DefaultConfig_API.Server.Tests.xml"))
+            : base(KistlConfig.FromFile("Kistl.API.Server.Tests.Config.xml"))
         {
             SetCustomActionsManager(new CustomActionsManagerAPITest());
             ImplementationAssembly = InterfaceAssembly = Assembly.GetAssembly(this.GetType()).FullName;

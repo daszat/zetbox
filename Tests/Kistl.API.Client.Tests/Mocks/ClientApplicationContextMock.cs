@@ -11,7 +11,7 @@ namespace Kistl.API.Client.Mocks
     public class ClientApplicationContextMock : ClientApiContext
     {
         public ClientApplicationContextMock()
-            : base(KistlConfig.FromFile(""))
+            : base(KistlConfig.FromFile("Kistl.API.Client.Tests.Config.xml"))
         {
             SetCustomActionsManager(new CustomActionsManagerAPITest());
             ImplementationAssembly = InterfaceAssembly = Assembly.GetAssembly(this.GetType()).FullName;

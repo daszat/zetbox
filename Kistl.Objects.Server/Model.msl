@@ -33,12 +33,6 @@
 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BackReferenceProperty)">
-	    <MappingFragment StoreEntitySet="BackReferenceProperty">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="PreFetchToClient" ColumnName="PreFetchToClient" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -772,23 +766,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28
-    A: ZeroOrMore BackReferenceProperty as BackReferenceProperty
-    B: ZeroOrOne ObjectReferenceProperty as ReferenceProperty
-    Preferred Storage: Left
-    -->
-    <AssociationSetMapping Name="FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28"
-                           TypeName="Model.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28"
-                           StoreEntitySet="BackReferenceProperty" >
-      <EndProperty Name="ReferenceProperty">
-        <ScalarProperty Name="ID" ColumnName="fk_ReferenceProperty"/>
-      </EndProperty>
-      <EndProperty Name="BackReferenceProperty">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ReferenceProperty" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_BaseProperty_Constraint_ConstrainedProperty_62

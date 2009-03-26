@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- This config is used as test for the default config file loading code path -->
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Default Test Configuration</ConfigName>
+  <ConfigName>Kistl.API.Tests' Default Configuration</ConfigName>
   <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl_test;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <DocumentStore>P:\Kistl\DocumentStore\Server\</DocumentStore>
     <KistlDataContextType>Kistl.API.Tests.NoKistlDataContext, Kistl.API.Tests</KistlDataContextType>
     <ServerObjectHandlerType>Kistl.API.Tests.NoServerObjectHandler, Kistl.API.Tests</ServerObjectHandlerType>
@@ -13,5 +14,6 @@
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
+    <string>X:\somepath\</string>
   </SourceFileLocation>
 </KistlConfig>

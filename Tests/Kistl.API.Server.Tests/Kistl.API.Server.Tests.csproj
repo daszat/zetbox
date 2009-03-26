@@ -79,7 +79,7 @@
     <Compile Include="Tests\QueryTranslatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DefaultConfig_API.Server.Tests.xml">
+    <None Include="Kistl.API.Server.Tests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Kistl.API.ServerTests.PartCoverSettings.xml" />

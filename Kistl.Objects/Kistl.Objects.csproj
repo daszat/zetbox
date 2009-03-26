@@ -47,7 +47,6 @@
     <Compile Include="AnotherTest.Interface.Designer.cs" />
     <Compile Include="Assembly.Interface.Designer.cs" />
     <Compile Include="Auftrag.Interface.Designer.cs" />
-    <Compile Include="BackReferenceProperty.Interface.Designer.cs" />
     <Compile Include="BaseParameter.Interface.Designer.cs" />
     <Compile Include="BaseProperty.Interface.Designer.cs" />
     <Compile Include="BoolParameter.Interface.Designer.cs" />

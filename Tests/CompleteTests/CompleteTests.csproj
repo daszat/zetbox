@@ -60,12 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CompleteTests.PartCoverSettings.xml" />
-    <Content Include="DefaultConfig.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DefaultConfig_Integration.Tests.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kistl.Client.WPF\Kistl.Client.WPF.csproj">

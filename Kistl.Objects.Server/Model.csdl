@@ -115,10 +115,6 @@
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
-    <AssociationSet Name="FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28" Association="Model.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28" >
-      <End Role="BackReferenceProperty" EntitySet="BaseProperty" />
-      <End Role="ReferenceProperty" EntitySet="BaseProperty" />
-    </AssociationSet>
     <AssociationSet Name="FK_BaseProperty_Constraint_ConstrainedProperty_62" Association="Model.FK_BaseProperty_Constraint_ConstrainedProperty_62" >
       <End Role="ConstrainedProperty" EntitySet="BaseProperty" />
       <End Role="Constraints" EntitySet="Constraint" />
@@ -781,13 +777,6 @@
   </EntityType>
 
   <!-- EntityTypes for all other classes -->
-  <EntityType Name="BackReferenceProperty" BaseType="Model.BaseProperty" >
-    <NavigationProperty Name="ReferenceProperty__Implementation__"
-                        Relationship="Model.FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28"
-                        FromRole="BackReferenceProperty"
-                        ToRole="ReferenceProperty" />
-    <Property Name="PreFetchToClient" Type="Boolean" Nullable="false" />
-  </EntityType>
   <EntityType Name="BoolParameter" BaseType="Model.BaseParameter" >
   </EntityType>
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" >
@@ -1237,14 +1226,6 @@
          Multiplicity="*" />
     <End Role="Mitarbeiter"
          Type="Model.Mitarbeiter" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28" >
-    <End Role="BackReferenceProperty"
-         Type="Model.BackReferenceProperty" 
-         Multiplicity="*" />
-    <End Role="ReferenceProperty"
-         Type="Model.ObjectReferenceProperty" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_BaseProperty_Constraint_ConstrainedProperty_62" >

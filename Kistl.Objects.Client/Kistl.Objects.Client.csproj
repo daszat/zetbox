@@ -63,7 +63,6 @@
     <Compile Include="AnotherTest.Client.Designer.cs" />
     <Compile Include="Assembly.Client.Designer.cs" />
     <Compile Include="Auftrag.Client.Designer.cs" />
-    <Compile Include="BackReferenceProperty.Client.Designer.cs" />
     <Compile Include="BaseParameter.Client.Designer.cs" />
     <Compile Include="BaseProperty.Client.Designer.cs" />
     <Compile Include="BoolParameter.Client.Designer.cs" />

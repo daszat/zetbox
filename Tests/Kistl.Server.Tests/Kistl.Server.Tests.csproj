@@ -69,7 +69,7 @@
     <Compile Include="Tests\StructTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DefaultConfig_Server.Tests.xml">
+    <Content Include="Kistl.Server.Tests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Kistl.ServerTests.PartCoverSettings.xml" />

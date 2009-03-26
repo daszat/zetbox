@@ -129,7 +129,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, BoolProperty__Implementation__Frozen> DataStore = new Dictionary<int, BoolProperty__Implementation__Frozen>(12);
+		internal new static Dictionary<int, BoolProperty__Implementation__Frozen> DataStore = new Dictionary<int, BoolProperty__Implementation__Frozen>(11);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[11] = 
@@ -146,11 +146,6 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[83] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[83] = 
 			DataStore[83] = new BoolProperty__Implementation__Frozen(83);
-
-			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[84] = 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[84] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[84] = 
-			DataStore[84] = new BoolProperty__Implementation__Frozen(84);
 
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[94] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[94] = 
@@ -231,18 +226,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[117],
 			DataStore[83].IsList = false;
 			DataStore[83].IsNullable = false;
 			DataStore[83].Seal();
-			DataStore[84].AltText = @"Serialisierung der Liste zum Client";
-			DataStore[84].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[116],
-});
-			DataStore[84].Description = @"Serialisierung der Liste zum Client";
-			DataStore[84].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[84].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[16];
-			DataStore[84].PropertyName = @"PreFetchToClient";
-			DataStore[84].IsIndexed = false;
-			DataStore[84].IsList = false;
-			DataStore[84].IsNullable = false;
-			DataStore[84].Seal();
 			DataStore[94].AltText = @"Parameter wird als List<> generiert";
 			DataStore[94].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[111],

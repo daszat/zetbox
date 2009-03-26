@@ -50,8 +50,6 @@ namespace Kistl.App
 				return Kistl.App.GUI.Icon__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.Assembly))
 				return Kistl.App.Base.Assembly__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (ifType == typeof(Kistl.App.Base.BackReferenceProperty))
-				return Kistl.App.Base.BackReferenceProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.BaseParameter))
 				return Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.BaseProperty))
@@ -156,7 +154,6 @@ namespace Kistl.App
 				return new List<IPersistenceObject>(0)
 					.Concat(GetQuery<Kistl.App.GUI.Icon>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.Assembly>().Cast<IPersistenceObject>())
-					.Concat(GetQuery<Kistl.App.Base.BackReferenceProperty>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.BaseParameter>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.BaseProperty>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.BoolParameter>().Cast<IPersistenceObject>())
@@ -219,8 +216,6 @@ namespace Kistl.App
 				return Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.Assembly))
 				return Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[ID];
-			if (ifType == typeof(Kistl.App.Base.BackReferenceProperty))
-				return Kistl.App.Base.BackReferenceProperty__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.BaseParameter))
 				return Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.BaseProperty))

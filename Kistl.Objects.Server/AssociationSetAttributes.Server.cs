@@ -38,21 +38,6 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28
-    A: ZeroOrMore BackReferenceProperty as BackReferenceProperty
-    B: ZeroOrOne ObjectReferenceProperty as ReferenceProperty
-    Preferred Storage: Left
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_BackReferenceProperty_ObjectReferenceProperty_BackReferenceProperty_28",
-    "BackReferenceProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BackReferenceProperty__Implementation__),
-    "ReferenceProperty", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_BaseProperty_Constraint_ConstrainedProperty_62
     A: One BaseProperty as ConstrainedProperty
     B: ZeroOrMore Constraint as Constraints

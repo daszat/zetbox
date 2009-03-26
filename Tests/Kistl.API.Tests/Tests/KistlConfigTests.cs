@@ -18,6 +18,7 @@ namespace Kistl.API.Tests
     [TestFixture]
     public class KistlConfigTests
     {
+        readonly static string ConfigFile = "Kistl.API.Tests.Config.xml";
 
         private void CheckConfig(KistlConfig cfg)
         {
@@ -46,18 +47,17 @@ namespace Kistl.API.Tests
         [Test]
         public void LoadFile()
         {
-            var filename = "TestConfig.xml";
-            var config = KistlConfig.FromFile(filename);
+            var config = KistlConfig.FromFile(ConfigFile);
 
             Assert.That(config, Is.Not.Null, "Configuration");
-            Assert.That(config.ConfigFilePath, Is.EqualTo(filename), "ConfigFilePath");
+            Assert.That(config.ConfigFilePath, Is.EqualTo(ConfigFile), "ConfigFilePath");
             Assert.That(config.ConfigName, Is.Not.Empty, "ConfigName");
         }
 
         [Test]
         public void FromStream()
         {
-            using (FileStream s = File.OpenRead(@"TestConfig.xml"))
+            using (FileStream s = File.OpenRead(ConfigFile))
             {
                 KistlConfig cfg = KistlConfig.FromStream(s);
                 Assert.That(cfg.ConfigFilePath, Is.Null);
@@ -68,7 +68,7 @@ namespace Kistl.API.Tests
         [Test]
         public void FromTextReader()
         {
-            using (FileStream s = File.OpenRead(@"TestConfig.xml"))
+            using (FileStream s = File.OpenRead(ConfigFile))
             {
                 TextReader rd = new StreamReader(s);
                 KistlConfig cfg = KistlConfig.FromStream(rd);

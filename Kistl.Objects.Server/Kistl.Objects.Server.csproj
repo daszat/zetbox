@@ -72,7 +72,6 @@
     <Compile Include="AnotherTest.Server.Designer.cs" />
     <Compile Include="Assembly.Server.Designer.cs" />
     <Compile Include="Auftrag.Server.Designer.cs" />
-    <Compile Include="BackReferenceProperty.Server.Designer.cs" />
     <Compile Include="BaseParameter.Server.Designer.cs" />
     <Compile Include="BaseProperty.Server.Designer.cs" />
     <Compile Include="BoolParameter.Server.Designer.cs" />

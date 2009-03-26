@@ -16,7 +16,7 @@ using NUnit.Framework.Constraints;
 namespace Kistl.Server.Tests
 {
     [SetUpFixture]
-    public class SetUp : IDisposable
+    public class SetUp : Kistl.API.AbstractConsumerTests.DatabaseResetup, IDisposable
     {
         private Server manager;
 
@@ -25,30 +25,12 @@ namespace Kistl.Server.Tests
         {
             System.Diagnostics.Trace.WriteLine("Setting up Kistl");
 
-            var config = KistlConfig.FromFile("DefaultConfig_Server.Tests.xml");
+            var config = KistlConfig.FromFile("Kistl.Server.Tests.Config.xml");
+
+            ResetDatabase(config);
 
             manager = new Server();
             manager.Start(config);
-
-            Trace.TraceInformation("Resetting Database");
-            using (var db = new SqlConnection(ApplicationContext.Current.Configuration.Server.ConnectionString))
-            {
-                db.Open();
-                // TODO: don't hardcode db script here
-                var databaseScript = File.ReadAllText(@"P:\Kistl\Kistl.Server\Database\Database.63.sql");
-                using (var tx = db.BeginTransaction())
-                {
-                    foreach (var cmdString in databaseScript.Split(new[] { "GO" }, StringSplitOptions.RemoveEmptyEntries))
-                    {
-                        using (var cmd = new SqlCommand(cmdString, db, tx))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    tx.Commit();
-                }
-            }
-            Trace.TraceInformation("Done Resetting Database");
 
             System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");
         }

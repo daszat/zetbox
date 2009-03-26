@@ -28,7 +28,7 @@ namespace Kistl.API.Tests
             ms = new MemoryStream();
             sw = new BinaryWriter(ms);
             sr = new BinaryReader(ms);
-            var testCtx = new TestApplicationContext();
+            var testCtx = new TestApplicationContext("Kistl.API.Tests.Config.xml");
         }
 
         [TestFixture]
