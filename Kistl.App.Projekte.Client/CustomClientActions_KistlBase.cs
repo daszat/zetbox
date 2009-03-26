@@ -186,9 +186,12 @@ namespace Kistl.App.Base
         {
             e.Result = String.Format("{0}{1}, {2}",
                 obj.FullName,
-                (obj.GenericArguments.Count > 0
+                "<???>" /* Currently this goes to the Database once per TypeRef
+                       * TODO: re-enable that, when GenericArguments is loaded eagerly. 
+                       * (obj.GenericArguments.Count > 0
                     ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.ToString()).ToArray()) + ">"
-                    : ""),
+                    : "") */
+                            ,
                 obj.Assembly);
         }
 
