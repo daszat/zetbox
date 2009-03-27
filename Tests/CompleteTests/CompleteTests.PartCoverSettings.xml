@@ -1,13 +1,17 @@
 <PartCoverSettings>
-  <Target>E:\Program Files\NUnit 2.4.7\bin\nunit-console.exe</Target>
-  <TargetWorkDir>E:\Projekte\Kistl\Tests\CompleteTests</TargetWorkDir>
-  <TargetArgs>CompleteTests.nunit</TargetArgs>
+  <Target>C:\Program Files\NUnit 2.5\bin\net-2.0\nunit-console.exe</Target>
+  <TargetWorkDir>P:\Kistl\Tests\CompleteTests</TargetWorkDir>
+  <TargetArgs>/process:Single /domain:Multiple CompleteTests.nunit</TargetArgs>
   <Rule>+[Kistl.API]*</Rule>
   <Rule>+[Kistl.API.Client]*</Rule>
   <Rule>+[Kistl.API.Server]*</Rule>
   <Rule>+[Kistl.Client]*</Rule>
   <Rule>+[Kistl.Client.WPF]*</Rule>
-  <Rule>+[Kistl.Objects.Client]*</Rule>
   <Rule>+[Kistl.Server]*</Rule>
+  <Rule>+[Kistl.DALProvider.ClientObjects]*</Rule>
+  <Rule>+[Kistl.DALProvider.EF]*</Rule>
+  <Rule>+[Kistl.DALProvider.Frozen]*</Rule>
+  <Rule>+[Kistl.Objects.Client]*</Rule>
+  <Rule>+[Kistl.Objects.Frozen]*</Rule>
   <Rule>+[Kistl.Objects.Server]*</Rule>
 </PartCoverSettings>
