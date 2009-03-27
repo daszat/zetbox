@@ -41,7 +41,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// A read-only <see cref="IKistlContext"/> to access meta data
         /// </summary>
-        protected IKistlContext GuiContext { get { return AppContext.FrozenContext; } }
+        protected IKistlContext MetaContext { get { return AppContext.MetaContext; } }
 
         /// <summary>
         /// The factory from where new models should be created
@@ -75,7 +75,7 @@ namespace Kistl.Client.Presentables
                 UI.Verify();
                 return _State;
             }
-            protected set
+            internal set
             {
                 UI.Verify();
                 if (value != _State)
@@ -163,12 +163,12 @@ namespace Kistl.Client.Presentables
     {
         #region IGuiApplicationContext Members
 
-        public IKistlContext FrozenContext
+        public IKistlContext GuiDataContext
         {
             get { throw new InvalidOperationException("No data access allowed in Design mode"); }
         }
 
-        public IKistlContext GuiDataContext
+        public IKistlContext MetaContext
         {
             get { throw new InvalidOperationException("No data access operations allowed in Design mode"); }
         }

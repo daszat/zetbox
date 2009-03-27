@@ -56,6 +56,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        // TODO: make readonly, take care of new and deleted+submitted objects
         private ObservableCollection<DataObjectModel> _instances = null;
         public ObservableCollection<DataObjectModel> Instances
         {

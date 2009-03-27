@@ -15,7 +15,7 @@ using Kistl.App.Base;
 namespace Kistl.Client.Presentables
 {
     public interface IValueListModel<TElement>
-        : IReadOnlyValueModel<IReadOnlyObservableCollection<TElement>>
+        : IReadOnlyValueModel<ReadOnlyObservableCollection<TElement>>
     {
 
         /// <summary>
@@ -49,6 +49,11 @@ namespace Kistl.Client.Presentables
         TElement SelectedItem { get; set; }
     }
 
+    /// <summary>
+    /// Manages a mutable list of TElements wrapped in TElementModels
+    /// </summary>
+    /// <typeparam name="TElementModel"></typeparam>
+    /// <typeparam name="TElement"></typeparam>
     public abstract class ReferenceListPropertyModel<TElementModel, TElement>
         : PropertyModel<ICollection<TElementModel>>, IValueListModel<TElementModel>
     {
@@ -58,20 +63,6 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx, obj, prop)
         {
             //AllowNullInput = prop.IsNullable;
-
-            RegisterCollectionChanged();
-        }
-
-        /// <summary>
-        /// registers a callback to handle changes of the underlying model
-        /// </summary>
-        private void RegisterCollectionChanged()
-        {
-            Async.Queue(DataContext, () =>
-            {
-                INotifyCollectionChanged collection = Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName);
-                collection.CollectionChanged += AsyncCollectionChanged;
-            });
         }
 
         #region Public Interface and IReadOnlyValueModel<IList<TValue>> Members
@@ -99,43 +90,37 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ObservableCollection<TElementModel> _valueCache = new ObservableCollection<TElementModel>();
-        private IReadOnlyObservableCollection<TElementModel> _valueView;
-        public IReadOnlyObservableCollection<TElementModel> Value
+        private AsyncList<TElement, TElementModel> _valueCache;
+        public ReadOnlyObservableCollection<TElementModel> Value
         {
             get
             {
-                UI.Verify();
-                if (_valueView == null)
+                if (_valueCache == null)
                 {
-                    _valueView = new ReadOnlyObservableCollectionWrapper<TElementModel>(_valueCache);
+                    _valueCache = AsyncListFactory.UiCreateMutable<TElement, TElementModel>(
+                        AppContext, DataContext, this,
+                        () => Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
+                        () => Object.GetPropertyValue<IList<TElement>>(Property.PropertyName),
+                        GetModel,
+                        GetItem);
                 }
-                return _valueView;
+                return _valueCache.GetUiView();
             }
         }
 
         public void AddItem(TElementModel mdl)
         {
             UI.Verify();
-            State = ModelState.Loading;
-            Async.Queue(DataContext, () =>
-            {
-                Object.AddToCollection<TElement>(Property.PropertyName, GetItem(mdl));
-                UI.Queue(UI, () => State = ModelState.Active);
-            });
+            _valueCache.AddItem(mdl);
         }
 
         public void RemoveItem(TElementModel mdl)
         {
             UI.Verify();
-            State = ModelState.Loading;
-            Async.Queue(DataContext, () =>
-            {
-                Object.RemoveFromCollection<TElement>(Property.PropertyName, GetItem(mdl));
-                UI.Queue(UI, () => State = ModelState.Active);
-            });
+            _valueCache.RemoveItem(mdl);
         }
 
+        // still works as before, AsyncList will pickup change via notification
         public void DeleteItem(TElementModel mdl)
         {
             UI.Verify();
@@ -154,31 +139,6 @@ namespace Kistl.Client.Presentables
 
         #region Async handlers and UI callbacks
 
-        protected override void AsyncGetPropertyValue()
-        {
-            Async.Verify();
-            var newValue = Object.GetPropertyValue<IEnumerable>(Property.PropertyName).AsQueryable().Cast<TElement>().ToList();
-            UI.Queue(UI, () => SyncValues(newValue));
-        }
-
-        private void SyncValues(IList<TElement> elements)
-        {
-            UI.Verify();
-            _valueCache.Clear();
-            foreach (TElement e in elements)
-            {
-                _valueCache.Add(GetModel(e));
-            }
-        }
-
-        private void AsyncCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            // TODO: improve implementation
-            Async.Verify();
-            var newValue = Object.GetPropertyValue<IEnumerable>(Property.PropertyName).AsQueryable().Cast<TElement>().ToList();
-            UI.Queue(UI, () => SyncValues(newValue));
-        }
-
         #endregion
 
         /// <summary>
@@ -193,6 +153,11 @@ namespace Kistl.Client.Presentables
         /// deletes the given element from the data store after it is removed from the collection
         /// </summary>
         protected abstract void AsyncDeleteItem(TElement mdl);
+
+        protected override void AsyncGetPropertyValue()
+        {
+            // AsyncList takes care of all that
+        }
     }
 
     /// <summary>
@@ -234,7 +199,7 @@ namespace Kistl.Client.Presentables
         #region IValueListModel<string> Members
 
         /// <summary>
-        /// Convert a string into a TElement
+        /// Convert a string into a TElement, should be overridden if the systems default conversion is not enough.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
@@ -281,18 +246,9 @@ namespace Kistl.Client.Presentables
 
         #region IReadOnlyValueModel<ReadOnlyObservableCollection<string>> Members
 
-        private ReadOnlyObservableProjection<TElement, string> _stringListCache;
-        IReadOnlyObservableCollection<string> IReadOnlyValueModel<IReadOnlyObservableCollection<string>>.Value
+        public new ReadOnlyObservableCollection<string> Value
         {
-            get
-            {
-                UI.Verify();
-                if (_stringListCache == null)
-                {
-                    _stringListCache = new ReadOnlyObservableProjection<TElement, string>(this.Value, e => e != null ? e.ToString() : "");
-                }
-                return _stringListCache;
-            }
+            get { throw new NotImplementedException(); }
         }
 
         #endregion

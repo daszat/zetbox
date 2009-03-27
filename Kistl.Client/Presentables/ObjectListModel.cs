@@ -24,16 +24,6 @@ namespace Kistl.Client.Presentables
         {
             if (!prop.IsList)
                 throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list");
-            RegisterCollectionChanged();
-        }
-
-        private void RegisterCollectionChanged()
-        {
-            Async.Queue(DataContext, () =>
-            {
-                INotifyCollectionChanged collection = Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName);
-                collection.CollectionChanged += AsyncCollectionChanged;
-            });
         }
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
@@ -41,18 +31,22 @@ namespace Kistl.Client.Presentables
         public bool HasValue { get { UI.Verify(); return true; } }
         public bool IsNull { get { UI.Verify(); return false; } }
 
-        private ObservableCollection<DataObjectModel> _valueCache = new ObservableCollection<DataObjectModel>();
-        private IReadOnlyObservableCollection<DataObjectModel> _valueView;
-        public IReadOnlyObservableCollection<DataObjectModel> Value
+        private AsyncList<IDataObject, DataObjectModel> _valueCache;
+        public ReadOnlyObservableCollection<DataObjectModel> Value
         {
             get
             {
                 UI.Verify();
-                if (_valueView == null)
+                if (_valueCache == null)
                 {
-                    _valueView = new ReadOnlyObservableCollectionWrapper<DataObjectModel>(_valueCache);
+                    _valueCache = AsyncListFactory.UiCreateMutable<IDataObject, DataObjectModel>(
+                        AppContext, DataContext, this,
+                        () => Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
+                        () => MagicCollectionFactory.WrapAsList<IDataObject>(Object.GetPropertyValue<object>(Property.PropertyName)),
+                        asyncObj => Factory.CreateSpecificModel<DataObjectModel>(DataContext, asyncObj),
+                        uiObject => uiObject.Object);
                 }
-                return _valueView;
+                return _valueCache.GetUiView();
             }
         }
 
@@ -152,23 +146,13 @@ namespace Kistl.Client.Presentables
         public void AddItem(DataObjectModel item)
         {
             UI.Verify();
-            State = ModelState.Loading;
-            Async.Queue(DataContext, () =>
-            {
-                Object.AddToCollection<IDataObject>(Property.PropertyName, item.Object);
-                UI.Queue(UI, () => State = ModelState.Active);
-            });
+            _valueCache.AddItem(item);
         }
 
         public void RemoveItem(DataObjectModel item)
         {
             UI.Verify();
-            State = ModelState.Loading;
-            Async.Queue(DataContext, () =>
-            {
-                Object.RemoveFromCollection<IDataObject>(Property.PropertyName, item.Object);
-                UI.Queue(UI, () => State = ModelState.Active);
-            });
+            _valueCache.RemoveItem(item);
         }
 
         public void DeleteItem(DataObjectModel item)
@@ -197,34 +181,13 @@ namespace Kistl.Client.Presentables
 
         protected override void AsyncGetPropertyValue()
         {
-            Async.Verify();
-            var newValue = Object.GetPropertyValue<IEnumerable>(Property.PropertyName).AsQueryable().Cast<IDataObject>().ToList();
-            UI.Queue(UI, () => SyncValues(newValue));
-        }
-
-        private void SyncValues(IList<IDataObject> elements)
-        {
-            UI.Verify();
-            _valueCache.Clear();
-            foreach (IDataObject obj in elements.Cast<IDataObject>())
-            {
-                _valueCache.Add(Factory.CreateSpecificModel<DataObjectModel>(DataContext, obj));
-            }
-        }
-
-        private void AsyncCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            // TODO: improve implementation
-            Async.Verify();
-            var newValue = Object.GetPropertyValue<IEnumerable>(Property.PropertyName).AsQueryable().Cast<IDataObject>().ToList();
-            UI.Queue(UI, () => SyncValues(newValue));
         }
 
         private void AsyncCollectChildClasses(int id, List<ObjectClass> children)
         {
             Async.Verify();
 
-            var nextChildren = GuiContext.GetQuery<ObjectClass>().Where(oc =>
+            var nextChildren = MetaContext.GetQuery<ObjectClass>().Where(oc =>
                 oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id);
 
             if (nextChildren.Count() > 0)

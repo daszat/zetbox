@@ -130,7 +130,7 @@ namespace Kistl.API
         /// <summary>
         /// Checks whether <paramref name="type"/> is a provider dependent Type from the 
         /// current ImplementationAssembly -OR- a generic (collection-)type only referencing 
-        /// <see cref="ImplementationTypes"/>s -OR- any other type neither coming from the 
+        /// <see cref="ImplementationType"/>s -OR- any other type neither coming from the 
         /// InterfaceAssembly or the ImplementationAssembly (this is convenience functionality 
         /// to pass through system types unscathed)
         /// </summary>

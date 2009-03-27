@@ -87,6 +87,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        // TODO: make readonly for the view
         private ObservableCollection<DataObjectModel> _domain;
         public ObservableCollection<DataObjectModel> Domain
         {

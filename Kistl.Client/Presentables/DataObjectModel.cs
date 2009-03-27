@@ -19,10 +19,10 @@ namespace Kistl.Client.Presentables
     public class DataObjectModel : PresentableModel
     {
 
-        public static DataObjectModel CreateDesignMock()
-        {
-            return new DataObjectModel(true);
-        }
+        //public static DataObjectModel CreateDesignMock()
+        //{
+        //    return new DataObjectModel(true);
+        //}
 
         public DataObjectModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -39,23 +39,6 @@ namespace Kistl.Client.Presentables
             });
         }
 
-        protected DataObjectModel(bool designMode)
-            : base(designMode)
-        {
-            _propertyModelsCache = new ObservableCollection<PresentableModel>() {
-                NullableValuePropertyModel<bool>.CreateDesignMock(true),
-                NullableValuePropertyModel<int>.CreateDesignMock(42),
-                NullableValuePropertyModel<double>.CreateDesignMock(Math.PI),
-                NullableValuePropertyModel<DateTime>.CreateDesignMock(DateTime.Now),
-                //NullableValuePropertyModel<string>.CreateDesignMock("short test string"),
-                //NullableValuePropertyModel<string>.CreateDesignMock("Lore ipsum long test string. Lore ipsum long test string. Lore ipsum long test string. Lore ipsum long test string. Lore ipsum long test string. Lore ipsum long test string. Lore ipsum long test string."),
-            };
-
-            Name = "Some Name";
-            // TODO: ship and link "real" icon here
-            IconPath = "/illegal icon path";
-        }
-
         #region Public Interface
 
         public int ID
@@ -70,25 +53,48 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ObservableCollection<PresentableModel> _propertyModelsCache;
-        private ReadOnlyObservableCollection<PresentableModel> _propertyModelsView;
-        public ReadOnlyObservableCollection<PresentableModel> PropertyModels
+        private ImmutableAsyncList<BaseProperty, PresentableModel> _propertyModels;
+        public ReadOnlyCollection<PresentableModel> PropertyModels
         {
             get
             {
                 UI.Verify();
-                if (_propertyModelsView == null)
+
+                if (_propertyModels == null)
                 {
-                    _propertyModelsCache = new ObservableCollection<PresentableModel>();
-                    _propertyModelsView = new ReadOnlyObservableCollection<PresentableModel>(_propertyModelsCache);
-                    State = ModelState.Loading;
-                    Async.Queue(DataContext, () =>
-                    {
-                        AsyncFetchProperties();
-                        UI.Queue(UI, () => this.State = ModelState.Active);
-                    });
+                    _propertyModels = AsyncListFactory.UiCreateImmutable<BaseProperty, PresentableModel>(
+                        AppContext, DataContext, this,
+                        AsyncFetchPropertyList,
+                        property => Factory.CreateModel(
+                            DataMocks.LookupDefaultPropertyModelDescriptor(property),
+                            DataContext,
+                            new object[] { _object, property })
+                        );
                 }
-                return _propertyModelsView;
+                return _propertyModels.GetUiView();
+            }
+        }
+
+        private ImmutableAsyncList<Method, PresentableModel> _methodResultsCache;
+        public ReadOnlyCollection<PresentableModel> MethodResults
+        {
+            get
+            {
+                UI.Verify();
+
+                if (_methodResultsCache == null)
+                {
+                    _methodResultsCache = AsyncListFactory.UiCreateImmutable<Method, PresentableModel>(
+                        AppContext, DataContext, this,
+                        AsyncFetchMethodList,
+                        method =>
+                        {
+                            // TODO: cache cls
+                            ObjectClass cls = _object.GetObjectClass(MetaContext);
+                            return ModelFromMethod(cls, method);
+                        });
+                }
+                return _methodResultsCache.GetUiView();
             }
         }
 
@@ -170,34 +176,45 @@ namespace Kistl.Client.Presentables
 
         #region Async handlers and UI callbacks
 
-        private void AsyncFetchProperties()
+        private IEnumerable<BaseProperty> AsyncFetchPropertyList()
         {
             Async.Verify();
 
-            // load properties
-            ObjectClass cls = _object.GetObjectClass(GuiContext);
+            // load properties from MetaContext
+            ObjectClass cls = _object.GetObjectClass(MetaContext);
             var props = new List<BaseProperty>();
-            var methods = new List<Method>();
             while (cls != null)
             {
                 foreach (BaseProperty p in cls.Properties)
                 {
                     props.Add(p);
                 }
-
-                cls.Methods.Where(m =>
-                    m.IsDisplayable
-                    && m.Parameter.Count == 1
-                    && m.Parameter.Single().IsReturnParameter)
-                    .ForEach<Method>(m => methods.Add(m));
-
                 cls = cls.BaseObjectClass;
             }
-            UI.Queue(UI, () =>
+
+            return props;
+        }
+
+        private IEnumerable<Method> AsyncFetchMethodList()
+        {
+            Async.Verify();
+
+            // load properties from MetaContext
+            ObjectClass cls = _object.GetObjectClass(MetaContext);
+            var methods = new List<Method>();
+            while (cls != null)
             {
-                SetClassPropertyModels(cls, props);
-                SetClassMethodModels(cls, methods);
-            });
+                foreach (Method m in cls.Methods.Where(m =>
+                    m.IsDisplayable
+                    && m.Parameter.Count == 1
+                    && m.Parameter.Single().IsReturnParameter))
+                {
+                    methods.Add(m);
+                }
+                cls = cls.BaseObjectClass;
+            }
+
+            return methods;
         }
 
         private void AsyncFetchActions()
@@ -205,7 +222,7 @@ namespace Kistl.Client.Presentables
             Async.Verify();
 
             // load properties
-            ObjectClass cls = _object.GetObjectClass(GuiContext);
+            ObjectClass cls = _object.GetObjectClass(MetaContext);
             var actions = new List<Method>();
             while (cls != null)
             {
@@ -223,20 +240,6 @@ namespace Kistl.Client.Presentables
         }
 
         // TODO: should go to renderer and use database backed decision tables
-        protected virtual void SetClassPropertyModels(ObjectClass cls, IEnumerable<BaseProperty> props)
-        {
-            UI.Verify();
-            foreach (var pm in props)
-            {
-                _propertyModelsCache.Add(Factory
-                    .CreateModel(
-                        DataMocks.LookupDefaultPropertyModelDescriptor(pm),
-                        DataContext,
-                        new object[] { _object, pm }));
-            }
-        }
-
-        // TODO: should go to renderer and use database backed decision tables
         protected virtual void SetClassActionModels(ObjectClass cls, IEnumerable<Method> methods)
         {
             UI.Verify();
@@ -248,42 +251,40 @@ namespace Kistl.Client.Presentables
         }
 
         // TODO: should go to renderer and use database backed decision tables
-        protected virtual void SetClassMethodModels(ObjectClass cls, IEnumerable<Method> methods)
+        protected virtual PresentableModel ModelFromMethod(ObjectClass cls, Method pm)
         {
             UI.Verify();
-            foreach (var pm in methods)
-            {
-                Debug.Assert(pm.Parameter.Single().IsReturnParameter);
-                var retParam = pm.GetReturnParameter();
+            Debug.Assert(pm.Parameter.Single().IsReturnParameter);
+            var retParam = pm.GetReturnParameter();
 
-                if (retParam is BoolParameter && !retParam.IsList)
-                {
-                    _propertyModelsCache.Add(Factory.CreateSpecificModel<NullableResultModel<Boolean>>(DataContext, _object, pm));
-                }
-                else if (pm is DateTimeParameter && !retParam.IsList)
-                {
-                    _propertyModelsCache.Add(Factory.CreateSpecificModel<NullableResultModel<DateTime>>(DataContext, _object, pm));
-                }
-                else if (pm is DoubleParameter && !retParam.IsList)
-                {
-                    _propertyModelsCache.Add(Factory.CreateSpecificModel<NullableResultModel<Double>>(DataContext, _object, pm));
-                }
-                else if (pm is IntParameter && !retParam.IsList)
-                {
-                    _propertyModelsCache.Add(Factory.CreateSpecificModel<NullableResultModel<int>>(DataContext, _object, pm));
-                }
-                else if (pm is StringParameter && !retParam.IsList)
-                {
-                    _propertyModelsCache.Add(Factory.CreateSpecificModel<ObjectResultModel<string>>(DataContext, _object, pm));
-                }
-                else if (pm is ObjectParameter && !retParam.IsList)
-                {
-                    _propertyModelsCache.Add(Factory.CreateSpecificModel<ObjectResultModel<IDataObject>>(DataContext, _object, pm));
-                }
-                else
-                {
-                    Trace.TraceWarning("No model for property: '{0}' of Type '{1}'", pm, pm.GetType());
-                }
+            if (retParam is BoolParameter && !retParam.IsList)
+            {
+                return (Factory.CreateSpecificModel<NullableResultModel<Boolean>>(DataContext, _object, pm));
+            }
+            else if (pm is DateTimeParameter && !retParam.IsList)
+            {
+                return (Factory.CreateSpecificModel<NullableResultModel<DateTime>>(DataContext, _object, pm));
+            }
+            else if (pm is DoubleParameter && !retParam.IsList)
+            {
+                return (Factory.CreateSpecificModel<NullableResultModel<Double>>(DataContext, _object, pm));
+            }
+            else if (pm is IntParameter && !retParam.IsList)
+            {
+                return (Factory.CreateSpecificModel<NullableResultModel<int>>(DataContext, _object, pm));
+            }
+            else if (pm is StringParameter && !retParam.IsList)
+            {
+                return (Factory.CreateSpecificModel<ObjectResultModel<string>>(DataContext, _object, pm));
+            }
+            else if (pm is ObjectParameter && !retParam.IsList)
+            {
+                return (Factory.CreateSpecificModel<ObjectResultModel<IDataObject>>(DataContext, _object, pm));
+            }
+            else
+            {
+                Trace.TraceWarning("No model for property: '{0}' of Type '{1}'", pm, pm.GetType());
+                return null;
             }
         }
 
@@ -331,7 +332,7 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                icon = _object.GetObjectClass(GuiContext).DefaultIcon;
+                icon = _object.GetObjectClass(MetaContext).DefaultIcon;
             }
             return icon;
         }

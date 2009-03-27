@@ -53,7 +53,7 @@ namespace Kistl.Client.Presentables
         public PresentableModel CreateDefaultModel(IKistlContext ctx, IDataObject obj, params object[] data)
         {
             AppContext.UiThread.Verify();
-            Type t = obj.GetObjectClass(AppContext.FrozenContext).GetDefaultModelRef().AsType(true); ;
+            Type t = obj.GetObjectClass(AppContext.MetaContext).GetDefaultModelRef().AsType(true); ;
             return CreateModel(t, ctx, new object[] { obj }.Concat(data).ToArray());
         }
 

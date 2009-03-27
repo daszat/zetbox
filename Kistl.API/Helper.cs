@@ -448,6 +448,12 @@ namespace Kistl.API
             return null;
         }
 
+        /// <summary>
+        /// Finds the return type of the first implemented IEnumerable
+        /// </summary>
+        /// <param name="seqType"></param>
+        /// <returns></returns>
+        [Obsolete("Use the array variant FindElementTypes instead")]
         public static Type GetCollectionElementType(this Type seqType)
         {
             Type ienum = FindIEnumerable(seqType);
@@ -455,14 +461,30 @@ namespace Kistl.API
             return ienum.GetGenericArguments()[0];
         }
 
+        /// <summary>
+        /// Finds the first implemented by seqType from this List:
+        /// <list type="*">
+        /// <item>IEnumerable&lt;X&gt;,</item>
+        /// <item>IEnumerable,</item>
+        /// <item>null</item>
+        /// </list>
+        /// </summary>
+        /// <param name="seqType"></param>
+        /// <returns></returns>
+        [Obsolete("Use the array variant FindIEnumerables instead")]
         public static Type FindIEnumerable(this Type seqType)
         {
             if (seqType == null || seqType == typeof(string))
                 return null;
 
             if (seqType.IsArray)
-                return typeof(IEnumerable<>).MakeGenericType(seqType.GetCollectionElementType());
+                return typeof(IEnumerable);
 
+            if (seqType == typeof(IEnumerable))
+                return seqType;
+
+            // quick shortcut: guess that generic arguments often end up in
+            // an IEnumerable<>, also handles coincidentally IEnumerable<>s
             if (seqType.IsGenericType)
             {
                 foreach (Type arg in seqType.GetGenericArguments())
@@ -491,6 +513,41 @@ namespace Kistl.API
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Finds all implemented IEnumerables of the given Type
+        /// </summary>
+        public static IQueryable<Type> FindIEnumerables(this Type seqType)
+        {
+            if (seqType == null || seqType == typeof(object) || seqType == typeof(string))
+                return new Type[] { }.AsQueryable();
+
+            if (seqType.IsArray || seqType == typeof(IEnumerable))
+                return new Type[] { typeof(IEnumerable) }.AsQueryable();
+
+            if (seqType.IsGenericType && seqType.GetGenericArguments().Length == 1 && seqType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+            {
+                return new Type[] { seqType, typeof(IEnumerable) }.AsQueryable();
+            }
+
+            var result = new List<Type>();
+
+            foreach (var iface in (seqType.GetInterfaces() ?? new Type[] { }))
+            {
+                result.AddRange(FindIEnumerables(iface));
+            }
+
+            return FindIEnumerables(seqType.BaseType).Union(result);
+        }
+
+        /// <summary>
+        /// Finds all element types provided by a specified sequence type.
+        /// "Element types" are T for IEnumerable&lt;T&gt; and object for IEnumerable.
+        /// </summary>
+        public static IQueryable<Type> FindElementTypes(this Type seqType)
+        {
+            return seqType.FindIEnumerables().Select(t => t.IsGenericType ? t.GetGenericArguments().Single() : typeof(object));
         }
 
         /// <summary>

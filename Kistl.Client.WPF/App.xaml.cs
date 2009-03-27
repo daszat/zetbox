@@ -96,12 +96,6 @@ namespace Kistl.Client.WPF
 
         private void CreateTypeRefs()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var muh = (typeof(ObjectListModel).ToRef(ctx));
-                ctx.SubmitChanges();
-            }
-
             using (TraceClient.TraceHelper.TraceMethodCall("Creating TypeRefs for GUI"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
@@ -114,7 +108,6 @@ namespace Kistl.Client.WPF
                     muh = (typeof(ChooseReferencePropertyModel<string>).ToRef(ctx));
                     muh = (typeof(SimpleReferenceListPropertyModel<string>).ToRef(ctx));
                     muh = (typeof(ReferencePropertyModel<string>).ToRef(ctx));
-                    muh = (typeof(ObjectListModel).ToRef(ctx));
                     muh = (typeof(ObjectReferenceModel).ToRef(ctx));
                     muh = (typeof(ObjectListModel).ToRef(ctx));
 

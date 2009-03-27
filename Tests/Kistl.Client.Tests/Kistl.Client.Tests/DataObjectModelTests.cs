@@ -9,13 +9,13 @@ using NUnit.Framework;
 
 namespace Kistl.Client.Tests
 {
-    [TestFixture]
-    public class DataObjectModelTests
-    {
-        [Test]
-        public void TestDesignMock()
-        {
-            DataObjectModel.CreateDesignMock();
-        }
-    }
+    //[TestFixture]
+    //public class DataObjectModelTests
+    //{
+    //    [Test]
+    //    public void TestDesignMock()
+    //    {
+    //        DataObjectModel.CreateDesignMock();
+    //    }
+    //}
 }

@@ -11,7 +11,8 @@ using Kistl.Client.GUI.DB;
 
 namespace Kistl.Client.Presentables
 {
-    public class MethodInvocationModel : DataObjectModel
+    public class MethodInvocationModel
+        : DataObjectModel
     {
         public MethodInvocationModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -24,18 +25,12 @@ namespace Kistl.Client.Presentables
 
         #region Async handlers and UI callbacks
 
-        protected override void SetClassPropertyModels(ObjectClass cls, IEnumerable<BaseProperty> props)
-        {
-            base.SetClassPropertyModels(cls, props);
-            Async.Queue(DataContext, AsyncUpdateMemberNamePossibilities);
-        }
-
         private void AsyncUpdateMemberNamePossibilities()
         {
             Async.Verify();
 
             if (_memberNameProperty == null)
-                _memberNameProperty = Object.GetObjectClass(GuiContext).Properties.Single(p => p.PropertyName == "MemberName");
+                _memberNameProperty = Object.GetObjectClass(MetaContext).Properties.Single(p => p.PropertyName == "MemberName");
 
             if (_memberNameModel == null)
                 // fetches already generated model from cache
@@ -51,11 +46,6 @@ namespace Kistl.Client.Presentables
                 .Distinct()
                 .OrderBy(name => name)
                 .ToList();
-
-            if (possibleValues.Count == 0)
-            {
-
-            }
 
             UI.Queue(UI, () =>
             {

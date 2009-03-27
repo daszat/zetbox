@@ -70,6 +70,9 @@
     <Compile Include="GUI\IRenderer.cs" />
     <Compile Include="GUI\IView.cs" />
     <Compile Include="Presentables\ActionModel.cs" />
+    <Compile Include="Presentables\Assemblies\AssemblyModel.cs" />
+    <Compile Include="Presentables\Assemblies\SystemTypeModel.cs" />
+    <Compile Include="Presentables\AsyncList.cs" />
     <Compile Include="Presentables\DataObjectModel.cs" />
     <Compile Include="Presentables\DataTypeModel.cs" />
     <Compile Include="Presentables\IAsyncUiManager.cs" />

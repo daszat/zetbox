@@ -17,12 +17,7 @@ namespace Kistl.Client
         /// <summary>
         /// A read-only <see cref="IKistlContext"/> to access meta data
         /// </summary>
-        IKistlContext FrozenContext { get; }
-        /// <summary>
-        /// A <see cref="IKistlContext"/> for the GUI internals
-        /// </summary>
-        IKistlContext GuiDataContext { get; }
-
+        IKistlContext MetaContext { get; }
 
         /// <summary>
         /// The <see cref="ModelFactory"/> of this GUI.
@@ -76,10 +71,10 @@ namespace Kistl.Client
             switch (tk)
             {
                 case Toolkit.WPF:
-                    UiThread = new Kistl.Client.Presentables.WPF.UiThreadManager();
-                    AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
-                    //UiThread = new SynchronousThreadManager();
-                    //AsyncThread = new SynchronousThreadManager();
+                    UiThread = new SynchronousThreadManager();
+                    AsyncThread = new SynchronousThreadManager();
+                    //UiThread = new Kistl.Client.Presentables.WPF.UiThreadManager();
+                    //AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
 
                     Factory = (ModelFactory)Activator.CreateInstance(
                         Type.GetType("Kistl.Client.WPF.WpfModelFactory, Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", true),
@@ -114,13 +109,13 @@ namespace Kistl.Client
         /// <summary>
         /// A read-only <see cref="IKistlContext"/> to access meta data
         /// </summary>
-        public IKistlContext FrozenContext { get { return Kistl.API.FrozenContext.Single; } }
+        public IKistlContext GuiDataContext { get { return Kistl.API.FrozenContext.Single; } }
 
         private IKistlContext _guiDataContextCache;
         /// <summary>
         /// A <see cref="IKistlContext"/> for the GUI internals
         /// </summary>
-        public IKistlContext GuiDataContext
+        public IKistlContext MetaContext
         {
             get
             {
