@@ -98,6 +98,83 @@ namespace Kistl.App.Base
         private bool _IsNullable;
 
         /// <summary>
+        /// The RelationEnd describing this Property
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.RelationEnd RelationEnd
+        {
+            get
+            {
+                if (fk_RelationEnd.HasValue)
+                    return Context.Find<Kistl.App.Base.RelationEnd>(fk_RelationEnd.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                
+                // shortcut noops
+                if (value == null && _fk_RelationEnd == null)
+					return;
+                else if (value != null && value.ID == _fk_RelationEnd)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("RelationEnd");
+				           
+	            // cache old value to remove inverse references later
+                var oldValue = RelationEnd;
+                
+				// next, set the local reference
+                _fk_RelationEnd = value == null ? (int?)null : value.ID;
+				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+				if (oldValue != null)
+				{
+					// unset old reference
+					oldValue.Navigator = null;
+				}
+
+                if (value != null)
+                {
+					// set new reference
+                    value.Navigator = this;
+                }
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("RelationEnd");
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_RelationEnd
+        {
+            get
+            {
+                return _fk_RelationEnd;
+            }
+            private set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_RelationEnd != value)
+                {
+                    NotifyPropertyChanging("RelationEnd");
+                    _fk_RelationEnd = value;
+                    NotifyPropertyChanged("RelationEnd");
+                }
+            }
+        }
+        private int? _fk_RelationEnd;
+
+        /// <summary>
         /// 
         /// </summary>
 
@@ -216,6 +293,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._IsIndexed, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
             BinarySerializer.ToStream(this._IsNullable, binStream);
+            BinarySerializer.ToStream(this._fk_RelationEnd, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -224,6 +302,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._IsIndexed, binStream);
             BinarySerializer.FromStream(out this._IsList, binStream);
             BinarySerializer.FromStream(out this._IsNullable, binStream);
+            BinarySerializer.FromStream(out this._fk_RelationEnd, binStream);
         }
 
 #endregion

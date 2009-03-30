@@ -104,9 +104,28 @@ namespace Kistl.App.Base
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("Navigator");
 				           
+	            // cache old value to remove inverse references later
+                var oldValue = Navigator;
+                
 				// next, set the local reference
                 _fk_Navigator = value == null ? (int?)null : value.ID;
 				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+				if (oldValue != null)
+				{
+					// unset old reference
+					oldValue.RelationEnd = null;
+				}
+
+                if (value != null)
+                {
+					// set new reference
+                    value.RelationEnd = this;
+                }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("Navigator");
             }

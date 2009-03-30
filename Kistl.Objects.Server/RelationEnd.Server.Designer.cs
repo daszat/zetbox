@@ -124,7 +124,7 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_RelationEnd_Property_RelationEnd_74
-    A: ZeroOrMore RelationEnd as RelationEnd
+    A: ZeroOrOne RelationEnd as RelationEnd
     B: ZeroOrOne Property as Navigator
     Preferred Storage: Left
     */

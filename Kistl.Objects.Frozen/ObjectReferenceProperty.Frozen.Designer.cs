@@ -152,7 +152,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(67);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(68);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[7] = 
@@ -422,6 +422,10 @@ namespace Kistl.App.Base
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[218] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[218] = 
 			DataStore[218] = new ObjectReferenceProperty__Implementation__Frozen(218);
+
+			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[222] = 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[222] = 
+			DataStore[222] = new ObjectReferenceProperty__Implementation__Frozen(222);
 
 		}
 
@@ -958,6 +962,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[104],
 			DataStore[108].IsIndexed = false;
 			DataStore[108].IsList = false;
 			DataStore[108].IsNullable = false;
+			DataStore[108].RelationEnd = null;
 			DataStore[108].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
 			DataStore[108].Seal();
 			DataStore[112].AltText = @"testtest";
@@ -1258,6 +1263,18 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[218].IsNullable = true;
 			DataStore[218].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
 			DataStore[218].Seal();
+			DataStore[222].AltText = null;
+			DataStore[222].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[222].Description = @"The RelationEnd describing this Property";
+			DataStore[222].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[222].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
+			DataStore[222].PropertyName = @"RelationEnd";
+			DataStore[222].IsIndexed = false;
+			DataStore[222].IsList = false;
+			DataStore[222].IsNullable = true;
+			DataStore[222].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[82];
+			DataStore[222].Seal();
 	
 		}
 

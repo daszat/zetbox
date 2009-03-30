@@ -96,6 +96,29 @@ namespace Kistl.App.Base
         private bool _IsNullable;
 
         /// <summary>
+        /// The RelationEnd describing this Property
+        /// </summary>
+        // object reference property
+        public virtual Kistl.App.Base.RelationEnd RelationEnd
+        {
+            get
+            {
+                return _RelationEnd;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_RelationEnd != value)
+                {
+                    NotifyPropertyChanging("RelationEnd");
+                    _RelationEnd = value;
+                    NotifyPropertyChanged("RelationEnd");
+                }
+            }
+        }
+        private Kistl.App.Base.RelationEnd _RelationEnd;
+
+        /// <summary>
         /// 
         /// </summary>
 

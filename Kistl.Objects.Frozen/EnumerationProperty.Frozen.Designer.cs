@@ -219,6 +219,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[102],
 			DataStore[110].IsIndexed = false;
 			DataStore[110].IsList = false;
 			DataStore[110].IsNullable = false;
+			DataStore[110].RelationEnd = null;
 			DataStore[110].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[50];
 			DataStore[110].Seal();
 			DataStore[111].AltText = @"Test Enum Property";
@@ -232,6 +233,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[101],
 			DataStore[111].IsIndexed = false;
 			DataStore[111].IsList = false;
 			DataStore[111].IsNullable = false;
+			DataStore[111].RelationEnd = null;
 			DataStore[111].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[50];
 			DataStore[111].Seal();
 			DataStore[113].AltText = @"The Toolkit used by this Renderer";
@@ -245,6 +247,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[99],
 			DataStore[113].IsIndexed = false;
 			DataStore[113].IsList = false;
 			DataStore[113].IsNullable = false;
+			DataStore[113].RelationEnd = null;
 			DataStore[113].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
 			DataStore[113].Seal();
 			DataStore[117].AltText = @"The toolkit of this Control.";
@@ -258,6 +261,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[95],
 			DataStore[117].IsIndexed = false;
 			DataStore[117].IsList = false;
 			DataStore[117].IsNullable = false;
+			DataStore[117].RelationEnd = null;
 			DataStore[117].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
 			DataStore[117].Seal();
 			DataStore[118].AltText = @"The type of Control of this implementation";
@@ -271,6 +275,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[94],
 			DataStore[118].IsIndexed = false;
 			DataStore[118].IsList = false;
 			DataStore[118].IsNullable = false;
+			DataStore[118].RelationEnd = null;
 			DataStore[118].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[118].Seal();
 			DataStore[137].AltText = @"which controls are handled by this Presenter";
@@ -284,6 +289,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[87],
 			DataStore[137].IsIndexed = false;
 			DataStore[137].IsList = false;
 			DataStore[137].IsNullable = false;
+			DataStore[137].RelationEnd = null;
 			DataStore[137].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[137].Seal();
 			DataStore[150].AltText = @"Which visual is represented here";
@@ -297,6 +303,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 			DataStore[150].IsIndexed = false;
 			DataStore[150].IsList = false;
 			DataStore[150].IsNullable = false;
+			DataStore[150].RelationEnd = null;
 			DataStore[150].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[150].Seal();
 			DataStore[183].AltText = @"Storagetype for 1:1 Relations";
@@ -309,6 +316,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 			DataStore[183].IsIndexed = false;
 			DataStore[183].IsList = false;
 			DataStore[183].IsNullable = true;
+			DataStore[183].RelationEnd = null;
 			DataStore[183].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
 			DataStore[183].Seal();
 			DataStore[210].AltText = @"";
@@ -322,6 +330,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 			DataStore[210].IsIndexed = false;
 			DataStore[210].IsList = false;
 			DataStore[210].IsNullable = false;
+			DataStore[210].RelationEnd = null;
 			DataStore[210].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
 			DataStore[210].Seal();
 			DataStore[219].AltText = @"Specifies how many instances may occur on this end of the relation.";
@@ -334,6 +343,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 			DataStore[219].IsIndexed = false;
 			DataStore[219].IsList = false;
 			DataStore[219].IsNullable = false;
+			DataStore[219].RelationEnd = null;
 			DataStore[219].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[81];
 			DataStore[219].Seal();
 	
