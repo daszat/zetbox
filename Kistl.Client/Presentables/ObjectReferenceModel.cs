@@ -7,6 +7,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables
 {
@@ -113,17 +114,59 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// creates a new target and references it
         /// </summary>
-        public void CreateNew()
+        public void CreateNewItem(Action<DataObjectModel> onCreated)
         {
             UI.Verify();
-            State = ModelState.Loading;
+
             Async.Queue(DataContext, () =>
             {
-                IDataObject newObj = (IDataObject)DataContext.Create(new InterfaceType(Property.GetPropertyType()));
-                Object.SetPropertyValue<IDataObject>(Property.PropertyName, newObj);
-                // show newly created object in workspace
-                UI.Queue(UI, () => Factory.ShowModel(Factory.CreateDefaultModel(DataContext, newObj), true));
-                // State will be reset by PropertyChanged event
+                ObjectClass baseclass;
+
+                baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
+
+                var children = new List<ObjectClass>() { baseclass };
+                AsyncCollectChildClasses(baseclass.ID, children);
+
+                if (children.Count == 1)
+                {
+                    var targetType = baseclass.GetDescribedInterfaceType();
+                    var item = this.DataContext.Create(targetType);
+                    UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
+                }
+                else
+                {
+                    UI.Queue(UI, () =>
+                    {
+                        // sort by name, create models
+                        // TODO: filter non-instantiable classes
+                        var childModels = children
+                            .OrderBy(oc => oc.ClassName)
+                            .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
+                            .ToList();
+
+                        Factory.ShowModel(
+                            Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+                                DataContext,
+                                childModels,
+                                new Action<DataObjectModel>(delegate(DataObjectModel chosen)
+                                {
+                                    UI.Verify();
+                                    Async.Queue(DataContext, () =>
+                                    {
+                                        if (chosen != null)
+                                        {
+                                            var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
+                                            var item = this.DataContext.Create(targetType);
+                                            UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
+                                        }
+                                        else
+                                        {
+                                            UI.Queue(UI, () => onCreated(null));
+                                        }
+                                    });
+                                })), true);
+                    });
+                }
             });
         }
 
@@ -156,6 +199,24 @@ namespace Kistl.Client.Presentables
                 }
                 State = ModelState.Active;
             });
+        }
+
+        private void AsyncCollectChildClasses(int id, List<ObjectClass> children)
+        {
+            Async.Verify();
+
+            var nextChildren = MetaContext.GetQuery<ObjectClass>()
+                .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id)
+                .ToList();
+
+            if (nextChildren.Count() > 0)
+            {
+                foreach (ObjectClass oc in nextChildren)
+                {
+                    children.Add(oc);
+                    AsyncCollectChildClasses(oc.ID, children);
+                };
+            }
         }
 
         #endregion

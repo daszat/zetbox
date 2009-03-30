@@ -42,7 +42,14 @@ namespace Kistl.Client.WPF.View
         private void CreateNewHandler(object sender, RoutedEventArgs e)
         {
             var model = (ObjectReferenceModel)DataContext;
-            model.CreateNew();
+            model.CreateNewItem(item =>
+            {
+                if (item != null)
+                {
+                    model.Domain.Add(item);
+                    model.Value = item;
+                }
+            });
         }
 
         #region IView Members

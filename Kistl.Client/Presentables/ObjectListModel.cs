@@ -187,15 +187,18 @@ namespace Kistl.Client.Presentables
         {
             Async.Verify();
 
-            var nextChildren = MetaContext.GetQuery<ObjectClass>().Where(oc =>
-                oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id);
+            var nextChildren = MetaContext.GetQuery<ObjectClass>()
+                .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id)
+                .ToList();
 
             if (nextChildren.Count() > 0)
+            {
                 foreach (ObjectClass oc in nextChildren)
                 {
                     children.Add(oc);
                     AsyncCollectChildClasses(oc.ID, children);
                 };
+            }
         }
 
         #endregion
