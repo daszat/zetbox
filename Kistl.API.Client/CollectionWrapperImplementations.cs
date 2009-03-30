@@ -11,12 +11,12 @@ namespace Kistl.API.Client
 {
 
     public sealed class ClientCollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : CollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>, INotifyCollectionChanged
+        : CollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE, IList<ENTRYTYPE>>, IList<ATYPE>, INotifyCollectionChanged
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where ENTRYTYPE : BaseClientCollectionEntry, INewCollectionEntry<ATYPE, BTYPE>, new()
     {
-        public ClientCollectionASideWrapper(BTYPE parentObject, ICollection<ENTRYTYPE> ec)
+        public ClientCollectionASideWrapper(BTYPE parentObject, IList<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
@@ -39,6 +39,37 @@ namespace Kistl.API.Client
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, ItemFromEntry(entry)));
         }
 
+        #region IList<ATYPE> Members
+
+        public int IndexOf(ATYPE item)
+        {
+            return Collection.IndexOf(GetEntryOrDefault(item));
+        }
+
+        public void Insert(int index, ATYPE item)
+        {
+            Collection.Insert(index, InitialiseEntry(CreateEntry(), item));
+        }
+
+        public void RemoveAt(int index)
+        {
+            Collection.RemoveAt(index);
+        }
+
+        public ATYPE this[int index]
+        {
+            get
+            {
+                return ItemFromEntry(Collection[index]);
+            }
+            set
+            {
+                Collection[index].A = value;
+            }
+        }
+
+        #endregion
+
         #region INotifyCollectionChanged Members
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
@@ -52,6 +83,7 @@ namespace Kistl.API.Client
         }
 
         #endregion
+
     }
 
     public sealed class ClientListASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
@@ -99,11 +131,11 @@ namespace Kistl.API.Client
     }
 
     public sealed class ClientCollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : CollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>, INotifyCollectionChanged
+        : CollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, IList<ENTRYTYPE>>, IList<BTYPE>, INotifyCollectionChanged
         where ATYPE : class, IDataObject
         where ENTRYTYPE : BaseClientCollectionEntry, INewCollectionEntry<ATYPE, BTYPE>, new()
     {
-        public ClientCollectionBSideWrapper(ATYPE parentObject, ICollection<ENTRYTYPE> ec)
+        public ClientCollectionBSideWrapper(ATYPE parentObject, IList<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
@@ -126,6 +158,37 @@ namespace Kistl.API.Client
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, ItemFromEntry(entry)));
         }
 
+        #region IList<BTYPE> Members
+
+        public int IndexOf(BTYPE item)
+        {
+            return Collection.IndexOf(GetEntryOrDefault(item));
+        }
+
+        public void Insert(int index, BTYPE item)
+        {
+            Collection.Insert(index, InitialiseEntry(CreateEntry(), item));
+        }
+
+        public void RemoveAt(int index)
+        {
+            Collection.RemoveAt(index);
+        }
+
+        public BTYPE this[int index]
+        {
+            get
+            {
+                return ItemFromEntry(Collection[index]);
+            }
+            set
+            {
+                Collection[index].B = value;
+            }
+        }
+
+        #endregion
+
         #region INotifyCollectionChanged Members
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
@@ -139,6 +202,7 @@ namespace Kistl.API.Client
         }
 
         #endregion
+
     }
 
     public sealed class ClientListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>

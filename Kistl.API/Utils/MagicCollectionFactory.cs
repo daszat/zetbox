@@ -12,7 +12,7 @@ namespace Kistl.API.Utils
     public static class MagicCollectionFactory
     {
 
-        public static ICollection<T> WrapAsCollection<T, X>(ICollection<X> collection)
+        public static ICollection<T> WrapAsCollectionHelper<T, X>(ICollection<X> collection)
             where X : T
         {
             return new GenericCastingCollectionWrapper<T, X>(collection);
@@ -23,13 +23,27 @@ namespace Kistl.API.Utils
         /// </summary>
         public static ICollection<T> WrapAsCollection<T>(object collection)
         {
-            if (typeof(ICollection<T>).IsAssignableFrom(collection.GetType()))
+            if (collection is ICollection<T>)
             {
                 return (ICollection<T>)collection;
             }
-            else if (typeof(IList).IsAssignableFrom(collection.GetType()))
+            else
             {
-                return new CastingCollectionWrapper<T>((IList)collection);
+                var elementTypes = collection.GetType().FindElementTypes().Where(t => typeof(T).IsAssignableFrom(t)).ToArray();
+
+                if (elementTypes.Count() > 1)
+                {
+                    throw new AmbiguousMatchException("Ambiguous Element Types found");
+                }
+                else if (elementTypes.Count() == 1)
+                {
+                    MethodInfo wrapAsList = typeof(MagicCollectionFactory).GetMethod("WrapAsCollectionHelper");
+                    return (IList<T>)wrapAsList.MakeGenericMethod(typeof(T), elementTypes.Single()).Invoke(null, new object[] { collection });
+                }
+                else if (collection is IList)
+                {
+                    return new CastingCollectionWrapper<T>((IList)collection);
+                }
             }
             return null;
         }
@@ -41,7 +55,7 @@ namespace Kistl.API.Utils
         }
 
         /// <summary>
-        /// Wrap a list-like objects into an IList&lt;T&gt;. Currently works with ILists
+        /// Wrap a list-like objects into an IList&lt;T&gt;. Currently works with IList&lt;t>s, ILists and ICollection&ltT>s
         /// </summary>
         public static IList<T> WrapAsList<T>(object collection)
         {
@@ -322,5 +336,110 @@ namespace Kistl.API.Utils
         #endregion
     }
 
+    public class SortListFromCollection<TKey, TValue> : IList<TValue>
+    {
+        private ICollection<TValue> _baseCollection;
+        private SortedList<TKey, TValue> _sortedList;
+        private Func<TValue, TKey> _keyFromItem;
 
+        public SortListFromCollection(Func<TValue, TKey> keyFromItem, ICollection<TValue> collection)
+        {
+            _baseCollection = collection;
+            _keyFromItem = keyFromItem;
+            // allocate a bit more space to avoid immediate re-allocation at first Add
+            _sortedList = new SortedList<TKey, TValue>(_baseCollection.Count + 10);
+            foreach (var i in _baseCollection)
+            {
+                _sortedList.Add(_keyFromItem(i), i);
+            }
+        }
+
+        #region IList<TValue> Members
+
+        public int IndexOf(TValue item)
+        {
+            return _sortedList.IndexOfKey(_keyFromItem(item));
+        }
+
+        public void Insert(int index, TValue item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveAt(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TValue this[int index]
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion
+
+        #region ICollection<TValue> Members
+
+        public void Add(TValue item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(TValue item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(TValue[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Count
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool IsReadOnly
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool Remove(TValue item)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IEnumerable<TValue> Members
+
+        public IEnumerator<TValue> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IEnumerable Members
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
 }
