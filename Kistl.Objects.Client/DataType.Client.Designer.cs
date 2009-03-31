@@ -276,19 +276,19 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.BaseProperty> Properties
+        public ICollection<Kistl.App.Base.Property> Properties
         {
             get
             {
                 if (_PropertiesWrapper == null)
                 {
-                    List<Kistl.App.Base.BaseProperty> serverList;
+                    List<Kistl.App.Base.Property> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.BaseProperty>(this, "Properties");
+                        serverList = Context.GetListOf<Kistl.App.Base.Property>(this, "Properties");
                     else
-                        serverList = new List<Kistl.App.Base.BaseProperty>();
+                        serverList = new List<Kistl.App.Base.Property>();
                         
-                    _PropertiesWrapper = new BackReferenceCollection<Kistl.App.Base.BaseProperty>(
+                    _PropertiesWrapper = new BackReferenceCollection<Kistl.App.Base.Property>(
                         "ObjectClass",
                         this,
                         serverList);
@@ -297,7 +297,7 @@ namespace Kistl.App.Base
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.BaseProperty> _PropertiesWrapper;
+        private BackReferenceCollection<Kistl.App.Base.Property> _PropertiesWrapper;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.

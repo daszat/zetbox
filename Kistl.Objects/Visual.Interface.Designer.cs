@@ -46,7 +46,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The Property to display
         /// </summary>
-		Kistl.App.Base.BaseProperty Property {
+		Kistl.App.Base.Property Property {
 			get;
 			set;
 		}

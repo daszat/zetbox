@@ -54,7 +54,7 @@ namespace Kistl.App.Base
         /// Eigenschaften der Objektklasse
         /// </summary>
 
-        ICollection<Kistl.App.Base.BaseProperty> Properties { get; }
+        ICollection<Kistl.App.Base.Property> Properties { get; }
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>

@@ -72,7 +72,7 @@ namespace Kistl.Client.Presentables
         #endregion
 
         private MethodInvocation _invocation;
-        private BaseProperty _memberNameProperty;
+        private Property _memberNameProperty;
         private ChooseReferencePropertyModel<string> _memberNameModel;
     }
 }

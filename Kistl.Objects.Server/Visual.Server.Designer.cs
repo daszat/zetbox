@@ -298,16 +298,16 @@ namespace Kistl.App.GUI
         /// The Property to display
         /// </summary>
     /*
-    Relation: FK_Visual_BaseProperty_Visual_56
+    Relation: FK_Visual_Property_Visual_56
     A: ZeroOrMore Visual as Visual
-    B: ZeroOrOne BaseProperty as Property
+    B: ZeroOrOne Property as Property
     Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.BaseProperty Property
+        public Kistl.App.Base.Property Property
         {
             get
             {
@@ -318,7 +318,7 @@ namespace Kistl.App.GUI
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                Property__Implementation__ = (Kistl.App.Base.BaseProperty__Implementation__)value;
+                Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)value;
             }
         }
         
@@ -341,14 +341,14 @@ namespace Kistl.App.GUI
         }
         private int? _fk_Property;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_BaseProperty_Visual_56", "Property")]
-        public Kistl.App.Base.BaseProperty__Implementation__ Property__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_Property_Visual_56", "Property")]
+        public Kistl.App.Base.Property__Implementation__ Property__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.BaseProperty__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty__Implementation__>(
-                        "Model.FK_Visual_BaseProperty_Visual_56",
+                EntityReference<Kistl.App.Base.Property__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
+                        "Model.FK_Visual_Property_Visual_56",
                         "Property");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -360,16 +360,16 @@ namespace Kistl.App.GUI
             }
             set
             {
-                EntityReference<Kistl.App.Base.BaseProperty__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty__Implementation__>(
-                        "Model.FK_Visual_BaseProperty_Visual_56",
+                EntityReference<Kistl.App.Base.Property__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
+                        "Model.FK_Visual_Property_Visual_56",
                         "Property");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.BaseProperty__Implementation__)value;
+                r.Value = (Kistl.App.Base.Property__Implementation__)value;
             }
         }
         
@@ -415,7 +415,7 @@ namespace Kistl.App.GUI
 		{
 			// fix direct object references
 			if (_fk_Property.HasValue)
-				Property__Implementation__ = (Kistl.App.Base.BaseProperty__Implementation__)Context.Find<Kistl.App.Base.BaseProperty>(_fk_Property.Value);
+				Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_Property.Value);
 			else
 				Property__Implementation__ = null;
 			if (_fk_Method.HasValue)

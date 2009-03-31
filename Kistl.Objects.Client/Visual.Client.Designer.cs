@@ -187,12 +187,12 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.BaseProperty Property
+        public Kistl.App.Base.Property Property
         {
             get
             {
                 if (fk_Property.HasValue)
-                    return Context.Find<Kistl.App.Base.BaseProperty>(fk_Property.Value);
+                    return Context.Find<Kistl.App.Base.Property>(fk_Property.Value);
                 else
                     return null;
             }

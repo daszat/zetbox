@@ -87,7 +87,7 @@ namespace Kistl.App.Base
             e.Result = obj.Module.Namespace + "." + obj.ClassName;
         }
 
-        public void OnGetPropertyType_BaseProperty(Kistl.App.Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+        public void OnGetPropertyType_Property(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
         {
             string fullname = obj.GetPropertyTypeString();
 
@@ -108,9 +108,9 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnGetPropertyTypeString_BaseProperty(Kistl.App.Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_Property(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = "<Invalid Datatype, please implement BaseProperty.GetPropertyTypeString()>";
+            e.Result = "<Invalid Datatype, please implement Property.GetPropertyTypeString()>";
         }
 
         public void OnGetPropertyTypeString_StringProperty(Kistl.App.Base.StringProperty obj, Kistl.API.MethodReturnEventArgs<string> e)

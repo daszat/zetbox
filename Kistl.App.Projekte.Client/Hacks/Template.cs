@@ -22,7 +22,7 @@ namespace Kistl.App.GUI.Hacks
 
             // Copy visuals to tree (base properties first)
             // TODO: later, group by implementing class and use property group
-            foreach (BaseProperty bp in GetAllProperties(@class).Reverse())
+            foreach (Property bp in GetAllProperties(@class).Reverse())
             {
                 result.Children.Add(ctx.CreateDefaultVisual(bp));
             }
@@ -54,12 +54,12 @@ namespace Kistl.App.GUI.Hacks
         }
 
         /// <returns>the list of all Properties of objectType</returns>
-        private static IList<BaseProperty> GetAllProperties(ObjectClass @class)
+        private static IList<Property> GetAllProperties(ObjectClass @class)
         {
-            List<BaseProperty> result = new List<BaseProperty>();
+            List<Property> result = new List<Property>();
             while (@class != null)
             {
-                foreach (BaseProperty p in @class.Properties)
+                foreach (Property p in @class.Properties)
                 {
                     result.Add(p);
                 }

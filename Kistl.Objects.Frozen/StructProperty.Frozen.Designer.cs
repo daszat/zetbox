@@ -155,11 +155,9 @@ namespace Kistl.App.Base
 		internal new static Dictionary<int, StructProperty__Implementation__Frozen> DataStore = new Dictionary<int, StructProperty__Implementation__Frozen>(2);
 		internal new static void CreateInstances()
 		{
-			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[131] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[131] = 
 			DataStore[131] = new StructProperty__Implementation__Frozen(131);
 
-			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[132] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[132] = 
 			DataStore[132] = new StructProperty__Implementation__Frozen(132);
 
@@ -170,24 +168,24 @@ namespace Kistl.App.Base
 			DataStore[131].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[131].Description = @"Mobile Phone Number";
-			DataStore[131].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[131].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
-			DataStore[131].PropertyName = @"PhoneNumberMobile";
 			DataStore[131].IsIndexed = false;
 			DataStore[131].IsList = false;
 			DataStore[131].IsNullable = true;
+			DataStore[131].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[131].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
+			DataStore[131].PropertyName = @"PhoneNumberMobile";
 			DataStore[131].StructDefinition = Kistl.App.Base.Struct__Implementation__Frozen.DataStore[63];
 			DataStore[131].Seal();
 			DataStore[132].AltText = @"Office Phone Number";
 			DataStore[132].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[132].Description = @"Office Phone Number";
-			DataStore[132].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[132].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
-			DataStore[132].PropertyName = @"PhoneNumberOffice";
 			DataStore[132].IsIndexed = false;
 			DataStore[132].IsList = false;
 			DataStore[132].IsNullable = true;
+			DataStore[132].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[132].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
+			DataStore[132].PropertyName = @"PhoneNumberOffice";
 			DataStore[132].StructDefinition = Kistl.App.Base.Struct__Implementation__Frozen.DataStore[63];
 			DataStore[132].Seal();
 	

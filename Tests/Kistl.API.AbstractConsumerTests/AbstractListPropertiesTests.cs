@@ -59,7 +59,7 @@ namespace Kistl.API.AbstractConsumerTests
 
                 Assume.That(navigatedList.Count, Is.GreaterThan(0));
 
-                var manualList = ctx.GetQuery<BaseProperty>().Where(t => t.ObjectClass.ID == cls.ID).ToList();
+                var manualList = ctx.GetQuery<Property>().Where(t => t.ObjectClass.ID == cls.ID).ToList();
                 Assert.That(navigatedList, Is.EquivalentTo(manualList));
             }
         }

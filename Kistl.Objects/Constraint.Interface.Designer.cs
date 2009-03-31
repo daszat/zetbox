@@ -15,7 +15,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The property to be constrained
         /// </summary>
-		Kistl.App.Base.BaseProperty ConstrainedProperty {
+		Kistl.App.Base.Property ConstrainedProperty {
 			get;
 			set;
 		}

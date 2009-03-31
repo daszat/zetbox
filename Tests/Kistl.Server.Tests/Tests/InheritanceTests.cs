@@ -27,10 +27,10 @@ namespace Kistl.Server.Tests
                 bool intFound = false;
                 bool stringFound = false;
 
-                var list = ctx.GetQuery<Kistl.App.Base.BaseProperty>().ToList();
+                var list = ctx.GetQuery<Kistl.App.Base.Property>().ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
 
-                foreach (Kistl.App.Base.BaseProperty bp in list)
+                foreach (Kistl.App.Base.Property bp in list)
                 {
                     if (bp is Kistl.App.Base.IntProperty)
                     {

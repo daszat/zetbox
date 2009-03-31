@@ -64,7 +64,6 @@
     <Compile Include="Assembly.Client.Designer.cs" />
     <Compile Include="Auftrag.Client.Designer.cs" />
     <Compile Include="BaseParameter.Client.Designer.cs" />
-    <Compile Include="BaseProperty.Client.Designer.cs" />
     <Compile Include="BoolParameter.Client.Designer.cs" />
     <Compile Include="BoolProperty.Client.Designer.cs" />
     <Compile Include="CLRObjectParameter.Client.Designer.cs" />

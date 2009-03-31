@@ -47,12 +47,12 @@ namespace Kistl.Client
             return q.First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
         }
 
-        public static BaseProperty GetProperty(this ObjectClass c, string property)
+        public static Property GetProperty(this ObjectClass c, string property)
         {
             ObjectClass objClass = c;
             while (objClass != null)
             {
-                BaseProperty prop = objClass.Properties.SingleOrDefault(p => p.PropertyName == property);
+                Property prop = objClass.Properties.SingleOrDefault(p => p.PropertyName == property);
                 if (prop != null)
                 {
                     return prop;

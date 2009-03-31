@@ -89,7 +89,7 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnToString_BaseProperty(Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnToString_Property(Base.Property obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
@@ -101,12 +101,9 @@ namespace Kistl.App.Base
             }
             else
             {
-                e.Result = String.Format("BaseProperty {0}", obj.ID);
+                e.Result = String.Format("Property {0}", obj.ID);
             }
-        }
 
-        public void OnToString_Property(Base.Property obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
             if (obj.IsList) e.Result += " [0..n]";
         }
 
@@ -213,7 +210,7 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnGetPropertyType_BaseProperty(Kistl.App.Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+        public void OnGetPropertyType_Property(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
         {
             string fullname = obj.GetPropertyTypeString();
 
@@ -235,9 +232,9 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnGetPropertyTypeString_BaseProperty(Kistl.App.Base.BaseProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_Property(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = "<Invalid Datatype, please implement BaseProperty.GetPropertyTypeString()>";
+            e.Result = "<Invalid Datatype, please implement Property.GetPropertyTypeString()>";
         }
 
         public void OnGetPropertyTypeString_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)

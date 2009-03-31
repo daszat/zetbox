@@ -101,7 +101,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
             cmd.ExecuteNonQuery();
         }
 
-        public static void CreateListPositionColumn(ObjectClass objClass, BaseProperty p, string parentPropertyName, SqlConnection db, SqlTransaction tx)
+        public static void CreateListPositionColumn(ObjectClass objClass, Property p, string parentPropertyName, SqlConnection db, SqlTransaction tx)
         {
             SQLServerHelper.CreateColumn(
                 GeneratorHelper.GetDatabaseTableName(objClass),
@@ -116,7 +116,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 "int", true, db, tx);
         }
 
-        public static void AlterListPositionColumn(ObjectClass objClass, BaseProperty p, string parentPropertyName, SqlConnection db, SqlTransaction tx)
+        public static void AlterListPositionColumn(ObjectClass objClass, Property p, string parentPropertyName, SqlConnection db, SqlTransaction tx)
         {
             SQLServerHelper.AlterColumn(
                 GeneratorHelper.GetDatabaseTableName(objClass),
@@ -230,7 +230,7 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
         /// </summary>
         /// <param name="clrType">CLR Type as string</param>
         /// <returns>Databasetype</returns>
-        public static string GetDBType(BaseProperty p)
+        public static string GetDBType(Property p)
         {
             if (p is ObjectReferenceProperty)
             {

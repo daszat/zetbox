@@ -363,36 +363,36 @@ namespace Kistl.App.Base
         /// Eigenschaften der Objektklasse
         /// </summary>
     /*
-    Relation: FK_DataType_BaseProperty_ObjectClass_19
+    Relation: FK_DataType_Property_ObjectClass_19
     A: One DataType as ObjectClass
-    B: ZeroOrMore BaseProperty as Properties
+    B: ZeroOrMore Property as Properties
     Preferred Storage: Right
     */
         // object list property
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.BaseProperty> Properties
+        public ICollection<Kistl.App.Base.Property> Properties
         {
             get
             {
                 if (_PropertiesWrapper == null)
                 {
-                    _PropertiesWrapper = new EntityCollectionWrapper<Kistl.App.Base.BaseProperty, Kistl.App.Base.BaseProperty__Implementation__>(
+                    _PropertiesWrapper = new EntityCollectionWrapper<Kistl.App.Base.Property, Kistl.App.Base.Property__Implementation__>(
                             this.Context, Properties__Implementation__);
                 }
                 return _PropertiesWrapper;
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_BaseProperty_ObjectClass_19", "Properties")]
-        public EntityCollection<Kistl.App.Base.BaseProperty__Implementation__> Properties__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_Property_ObjectClass_19", "Properties")]
+        public EntityCollection<Kistl.App.Base.Property__Implementation__> Properties__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Base.BaseProperty__Implementation__>(
-                        "Model.FK_DataType_BaseProperty_ObjectClass_19",
+                    .GetRelatedCollection<Kistl.App.Base.Property__Implementation__>(
+                        "Model.FK_DataType_Property_ObjectClass_19",
                         "Properties");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -402,7 +402,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityCollectionWrapper<Kistl.App.Base.BaseProperty, Kistl.App.Base.BaseProperty__Implementation__> _PropertiesWrapper;
+        private EntityCollectionWrapper<Kistl.App.Base.Property, Kistl.App.Base.Property__Implementation__> _PropertiesWrapper;
 
 
 

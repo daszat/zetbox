@@ -129,10 +129,10 @@ namespace Kistl.App.Base
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[90],
 });
 			DataStore[48].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[48].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(3) {
-Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[107],
-Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[108],
-Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[111],
+			DataStore[48].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(3) {
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[107],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[108],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[111],
 });
 			DataStore[48].Seal();
 			DataStore[52].ClassName = @"IRenderer";
@@ -146,8 +146,8 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[97],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[98],
 });
 			DataStore[52].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[52].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(1) {
-Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[113],
+			DataStore[52].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(1) {
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[113],
 });
 			DataStore[52].Seal();
 	

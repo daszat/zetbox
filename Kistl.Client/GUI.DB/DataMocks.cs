@@ -374,7 +374,7 @@ namespace Kistl.Client.GUI.DB
             return obj.GetObjectClass(FrozenContext.Single).GetDefaultModelRef();
         }
 
-        public static Kistl.App.Base.TypeRef LookupDefaultPropertyModelDescriptor(BaseProperty p)
+        public static Kistl.App.Base.TypeRef LookupDefaultPropertyModelDescriptor(Property p)
         {
             var ctx = FrozenContext.Single;
 

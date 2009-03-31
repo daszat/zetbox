@@ -35,12 +35,12 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.BaseProperty ConstrainedProperty
+        public Kistl.App.Base.Property ConstrainedProperty
         {
             get
             {
                 if (fk_ConstrainedProperty.HasValue)
-                    return Context.Find<Kistl.App.Base.BaseProperty>(fk_ConstrainedProperty.Value);
+                    return Context.Find<Kistl.App.Base.Property>(fk_ConstrainedProperty.Value);
                 else
                     return null;
             }

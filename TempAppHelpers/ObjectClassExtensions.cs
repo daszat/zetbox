@@ -42,12 +42,12 @@ namespace Kistl.App.Extensions
             return objClass;
         }
 
-        public static BaseProperty GetProperty(this ObjectClass c, string property)
+        public static Property GetProperty(this ObjectClass c, string property)
         {
             ObjectClass objClass = c;
             while (objClass != null)
             {
-                BaseProperty prop = objClass.Properties.SingleOrDefault(p => p.PropertyName == property);
+                Property prop = objClass.Properties.SingleOrDefault(p => p.PropertyName == property);
                 if (prop != null)
                 {
                     return prop;

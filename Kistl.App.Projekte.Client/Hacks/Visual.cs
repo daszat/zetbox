@@ -30,7 +30,7 @@ namespace Kistl.App.GUI.Hacks
             return result;
         }
 
-        public static Visual CreateVisual(this IKistlContext ctx, VisualType type, string description, BaseProperty p)
+        public static Visual CreateVisual(this IKistlContext ctx, VisualType type, string description, Property p)
         {
             Visual result = ctx.CreateVisual(type, description);
             result.Property = p;
@@ -38,12 +38,12 @@ namespace Kistl.App.GUI.Hacks
         }
 
         /// <summary>
-        /// Create the default <see cref="Visual"/> for a given <see cref="BaseProperty"/>
+        /// Create the default <see cref="Visual"/> for a given <see cref="Property"/>
         /// </summary>
-        /// Part of a Visitor&lt;<see cref="BaseProperty"/>&gt; pattern to create a <see cref="Visual"/> for a given <see cref="BaseProperty"/>
+        /// Part of a Visitor&lt;<see cref="Property"/>&gt; pattern to create a <see cref="Visual"/> for a given <see cref="Property"/>
         /// <param name="ctx">the context used to create the <see cref="Visual"/></param>
-        /// <param name="p">the <see cref="BaseProperty"/> to visualize</param>
-        public static Visual CreateDefaultVisual(this IKistlContext ctx, BaseProperty p)
+        /// <param name="p">the <see cref="Property"/> to visualize</param>
+        public static Visual CreateDefaultVisual(this IKistlContext ctx, Property p)
         {
             if (p is BoolProperty)
             {

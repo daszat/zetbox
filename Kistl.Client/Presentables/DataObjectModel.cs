@@ -53,7 +53,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ImmutableAsyncList<BaseProperty, PresentableModel> _propertyModels;
+        private ImmutableAsyncList<Property, PresentableModel> _propertyModels;
         public ReadOnlyCollection<PresentableModel> PropertyModels
         {
             get
@@ -62,7 +62,7 @@ namespace Kistl.Client.Presentables
 
                 if (_propertyModels == null)
                 {
-                    _propertyModels = AsyncListFactory.UiCreateImmutable<BaseProperty, PresentableModel>(
+                    _propertyModels = AsyncListFactory.UiCreateImmutable<Property, PresentableModel>(
                         AppContext, DataContext, this,
                         AsyncFetchPropertyList,
                         property => Factory.CreateModel(
@@ -195,16 +195,16 @@ namespace Kistl.Client.Presentables
 
         #region Async handlers and UI callbacks
 
-        private IEnumerable<BaseProperty> AsyncFetchPropertyList()
+        private IEnumerable<Property> AsyncFetchPropertyList()
         {
             Async.Verify();
 
             // load properties from MetaContext
             ObjectClass cls = _object.GetObjectClass(MetaContext);
-            var props = new List<BaseProperty>();
+            var props = new List<Property>();
             while (cls != null)
             {
-                foreach (BaseProperty p in cls.Properties)
+                foreach (Property p in cls.Properties)
                 {
                     props.Add(p);
                 }

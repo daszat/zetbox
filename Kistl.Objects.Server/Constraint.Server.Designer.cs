@@ -55,8 +55,8 @@ namespace Kistl.App.Base
         /// The property to be constrained
         /// </summary>
     /*
-    Relation: FK_BaseProperty_Constraint_ConstrainedProperty_62
-    A: One BaseProperty as ConstrainedProperty
+    Relation: FK_Property_Constraint_ConstrainedProperty_62
+    A: One Property as ConstrainedProperty
     B: ZeroOrMore Constraint as Constraints
     Preferred Storage: Right
     */
@@ -64,7 +64,7 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.BaseProperty ConstrainedProperty
+        public Kistl.App.Base.Property ConstrainedProperty
         {
             get
             {
@@ -75,7 +75,7 @@ namespace Kistl.App.Base
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                ConstrainedProperty__Implementation__ = (Kistl.App.Base.BaseProperty__Implementation__)value;
+                ConstrainedProperty__Implementation__ = (Kistl.App.Base.Property__Implementation__)value;
             }
         }
         
@@ -98,14 +98,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_ConstrainedProperty;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_BaseProperty_Constraint_ConstrainedProperty_62", "ConstrainedProperty")]
-        public Kistl.App.Base.BaseProperty__Implementation__ ConstrainedProperty__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Property_Constraint_ConstrainedProperty_62", "ConstrainedProperty")]
+        public Kistl.App.Base.Property__Implementation__ ConstrainedProperty__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.BaseProperty__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty__Implementation__>(
-                        "Model.FK_BaseProperty_Constraint_ConstrainedProperty_62",
+                EntityReference<Kistl.App.Base.Property__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
+                        "Model.FK_Property_Constraint_ConstrainedProperty_62",
                         "ConstrainedProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -117,16 +117,16 @@ namespace Kistl.App.Base
             }
             set
             {
-                EntityReference<Kistl.App.Base.BaseProperty__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.BaseProperty__Implementation__>(
-                        "Model.FK_BaseProperty_Constraint_ConstrainedProperty_62",
+                EntityReference<Kistl.App.Base.Property__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
+                        "Model.FK_Property_Constraint_ConstrainedProperty_62",
                         "ConstrainedProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.BaseProperty__Implementation__)value;
+                r.Value = (Kistl.App.Base.Property__Implementation__)value;
             }
         }
         
@@ -242,7 +242,7 @@ namespace Kistl.App.Base
 		{
 			// fix direct object references
 			if (_fk_ConstrainedProperty.HasValue)
-				ConstrainedProperty__Implementation__ = (Kistl.App.Base.BaseProperty__Implementation__)Context.Find<Kistl.App.Base.BaseProperty>(_fk_ConstrainedProperty.Value);
+				ConstrainedProperty__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_ConstrainedProperty.Value);
 			else
 				ConstrainedProperty__Implementation__ = null;
 		}

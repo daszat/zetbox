@@ -168,12 +168,12 @@ namespace Kistl.App.Base
         /// Eigenschaften der Objektklasse
         /// </summary>
         // object list property
-        public virtual ICollection<Kistl.App.Base.BaseProperty> Properties
+        public virtual ICollection<Kistl.App.Base.Property> Properties
         {
             get
             {
                 if (_Properties == null)
-                    _Properties = new ReadOnlyCollection<Kistl.App.Base.BaseProperty>(new List<Kistl.App.Base.BaseProperty>(0));
+                    _Properties = new ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0));
                 return _Properties;
             }
             internal set
@@ -182,10 +182,10 @@ namespace Kistl.App.Base
                 {
                     throw new ReadOnlyObjectException();
                 }
-                _Properties = (ReadOnlyCollection<Kistl.App.Base.BaseProperty>)value;
+                _Properties = (ReadOnlyCollection<Kistl.App.Base.Property>)value;
             }
         }
-        private ReadOnlyCollection<Kistl.App.Base.BaseProperty> _Properties;
+        private ReadOnlyCollection<Kistl.App.Base.Property> _Properties;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.

@@ -384,16 +384,6 @@ namespace Kistl.App.Base
 			}
 		}
 		
-		/// <summary>List of all BaseProperty</summary>
-		/// Metadefinition Object for Properties. This class is abstract.
-		public IQueryable<BaseProperty> BaseProperties
-		{ 
-			get
-			{
-				return Context.GetQuery<BaseProperty>();
-			}
-		}
-		
 		/// <summary>List of all BaseParameter</summary>
 		/// Metadefinition Object for Parameter. This class is abstract.
 		public IQueryable<BaseParameter> BaseParameters

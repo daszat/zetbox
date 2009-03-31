@@ -38,36 +38,6 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_BaseProperty_Constraint_ConstrainedProperty_62
-    A: One BaseProperty as ConstrainedProperty
-    B: ZeroOrMore Constraint as Constraints
-    Preferred Storage: Right
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_BaseProperty_Constraint_ConstrainedProperty_62",
-    "ConstrainedProperty", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.BaseProperty__Implementation__),
-    "Constraints", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Constraint__Implementation__)
-    )]
-
-
-	/*
-    Relation: FK_BaseProperty_Module_BaseProperty_37
-    A: ZeroOrMore BaseProperty as BaseProperty
-    B: ZeroOrOne Module as Module
-    Preferred Storage: Left
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_BaseProperty_Module_BaseProperty_37",
-    "BaseProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseProperty__Implementation__),
-    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_CLRObjectParameter_Assembly_CLRObjectParameter_46
     A: ZeroOrMore CLRObjectParameter as CLRObjectParameter
     B: ZeroOrOne Assembly as Assembly
@@ -94,21 +64,6 @@ using Kistl.DALProvider.EF;
     "Model", "FK_ControlInfo_Assembly_ControlInfo_51",
     "ControlInfo", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlInfo__Implementation__),
     "Assembly", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly__Implementation__)
-    )]
-
-
-	/*
-    Relation: FK_DataType_BaseProperty_ObjectClass_19
-    A: One DataType as ObjectClass
-    B: ZeroOrMore BaseProperty as Properties
-    Preferred Storage: Right
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_DataType_BaseProperty_ObjectClass_19",
-    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataType__Implementation__),
-    "Properties", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseProperty__Implementation__)
     )]
 
 
@@ -154,6 +109,21 @@ using Kistl.DALProvider.EF;
     "Model", "FK_DataType_MethodInvocation_InvokeOnObjectClass_41",
     "InvokeOnObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataType__Implementation__),
     "MethodInvocations", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_DataType_Property_ObjectClass_19
+    A: One DataType as ObjectClass
+    B: ZeroOrMore Property as Properties
+    Preferred Storage: Right
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_DataType_Property_ObjectClass_19",
+    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataType__Implementation__),
+    "Properties", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Property__Implementation__)
     )]
 
 
@@ -464,6 +434,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Property_Constraint_ConstrainedProperty_62
+    A: One Property as ConstrainedProperty
+    B: ZeroOrMore Constraint as Constraints
+    Preferred Storage: Right
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Property_Constraint_ConstrainedProperty_62",
+    "ConstrainedProperty", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Property__Implementation__),
+    "Constraints", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Constraint__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Property_Module_BaseProperty_37
+    A: ZeroOrMore Property as BaseProperty
+    B: ZeroOrOne Module as Module
+    Preferred Storage: Left
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Property_Module_BaseProperty_37",
+    "BaseProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Property__Implementation__),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Relation_RelationEnd_Relation_71
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as A
@@ -695,21 +695,6 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_Visual_BaseProperty_Visual_56
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrOne BaseProperty as Property
-    Preferred Storage: Left
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Visual_BaseProperty_Visual_56",
-    "Visual", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual__Implementation__),
-    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.BaseProperty__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_Visual_Method_Visual_57
     A: ZeroOrMore Visual as Visual
     B: ZeroOrOne Method as Method
@@ -721,6 +706,21 @@ using Kistl.DALProvider.EF;
     "Model", "FK_Visual_Method_Visual_57",
     "Visual", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual__Implementation__),
     "Method", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Method__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Visual_Property_Visual_56
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrOne Property as Property
+    Preferred Storage: Left
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Visual_Property_Visual_56",
+    "Visual", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Visual__Implementation__),
+    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Property__Implementation__)
     )]
 
 

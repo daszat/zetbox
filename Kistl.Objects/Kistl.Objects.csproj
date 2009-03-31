@@ -48,7 +48,6 @@
     <Compile Include="Assembly.Interface.Designer.cs" />
     <Compile Include="Auftrag.Interface.Designer.cs" />
     <Compile Include="BaseParameter.Interface.Designer.cs" />
-    <Compile Include="BaseProperty.Interface.Designer.cs" />
     <Compile Include="BoolParameter.Interface.Designer.cs" />
     <Compile Include="BoolProperty.Interface.Designer.cs" />
     <Compile Include="CLRObjectParameter.Interface.Designer.cs" />

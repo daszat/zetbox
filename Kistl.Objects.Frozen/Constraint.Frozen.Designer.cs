@@ -30,7 +30,7 @@ namespace Kistl.App.Base
         /// The property to be constrained
         /// </summary>
         // object reference property
-        public virtual Kistl.App.Base.BaseProperty ConstrainedProperty
+        public virtual Kistl.App.Base.Property ConstrainedProperty
         {
             get
             {
@@ -47,7 +47,7 @@ namespace Kistl.App.Base
                 }
             }
         }
-        private Kistl.App.Base.BaseProperty _ConstrainedProperty;
+        private Kistl.App.Base.Property _ConstrainedProperty;
 
         /// <summary>
         /// The reason of this constraint

@@ -24,21 +24,27 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BaseProperty">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BaseProperty)">
-	    <MappingFragment StoreEntitySet="BaseProperty">
+    <EntitySetMapping Name="Mitarbeiter">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Mitarbeiter)">
+	    <MappingFragment StoreEntitySet="Mitarbeiter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="AltText" ColumnName="AltText" />
-<ScalarProperty Name="Description" ColumnName="Description" />
-<ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+<ScalarProperty Name="Geburtstag" ColumnName="Geburtstag" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="SVNr" ColumnName="SVNr" />
+<ScalarProperty Name="TelefonNummer" ColumnName="TelefonNummer" />
 	    </MappingFragment>
       </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Property">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="AltText" ColumnName="AltText" />
+<ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="IsIndexed" ColumnName="IsIndexed" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />
 <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
+<ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">
@@ -85,17 +91,6 @@
 	    <MappingFragment StoreEntitySet="StringProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Length" ColumnName="Length" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Mitarbeiter">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Mitarbeiter)">
-	    <MappingFragment StoreEntitySet="Mitarbeiter">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Geburtstag" ColumnName="Geburtstag" />
-<ScalarProperty Name="Name" ColumnName="Name" />
-<ScalarProperty Name="SVNr" ColumnName="SVNr" />
-<ScalarProperty Name="TelefonNummer" ColumnName="TelefonNummer" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -768,40 +763,6 @@
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_BaseProperty_Constraint_ConstrainedProperty_62
-    A: One BaseProperty as ConstrainedProperty
-    B: ZeroOrMore Constraint as Constraints
-    Preferred Storage: Right
-    -->
-    <AssociationSetMapping Name="FK_BaseProperty_Constraint_ConstrainedProperty_62"
-                           TypeName="Model.FK_BaseProperty_Constraint_ConstrainedProperty_62"
-                           StoreEntitySet="Constraint" >
-      <EndProperty Name="ConstrainedProperty">
-        <ScalarProperty Name="ID" ColumnName="fk_ConstrainedProperty"/>
-      </EndProperty>
-      <EndProperty Name="Constraints">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ConstrainedProperty" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_BaseProperty_Module_BaseProperty_37
-    A: ZeroOrMore BaseProperty as BaseProperty
-    B: ZeroOrOne Module as Module
-    Preferred Storage: Left
-    -->
-    <AssociationSetMapping Name="FK_BaseProperty_Module_BaseProperty_37"
-                           TypeName="Model.FK_BaseProperty_Module_BaseProperty_37"
-                           StoreEntitySet="BaseProperty" >
-      <EndProperty Name="Module">
-        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
-      </EndProperty>
-      <EndProperty Name="BaseProperty">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Module" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_CLRObjectParameter_Assembly_CLRObjectParameter_46
     A: ZeroOrMore CLRObjectParameter as CLRObjectParameter
     B: ZeroOrOne Assembly as Assembly
@@ -834,23 +795,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Assembly" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_DataType_BaseProperty_ObjectClass_19
-    A: One DataType as ObjectClass
-    B: ZeroOrMore BaseProperty as Properties
-    Preferred Storage: Right
-    -->
-    <AssociationSetMapping Name="FK_DataType_BaseProperty_ObjectClass_19"
-                           TypeName="Model.FK_DataType_BaseProperty_ObjectClass_19"
-                           StoreEntitySet="BaseProperty" >
-      <EndProperty Name="ObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
-      </EndProperty>
-      <EndProperty Name="Properties">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_DataType_Icon_DataType_35
@@ -902,6 +846,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_InvokeOnObjectClass" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_DataType_Property_ObjectClass_19
+    A: One DataType as ObjectClass
+    B: ZeroOrMore Property as Properties
+    Preferred Storage: Right
+    -->
+    <AssociationSetMapping Name="FK_DataType_Property_ObjectClass_19"
+                           TypeName="Model.FK_DataType_Property_ObjectClass_19"
+                           StoreEntitySet="Property" >
+      <EndProperty Name="ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
+      </EndProperty>
+      <EndProperty Name="Properties">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Enumeration_EnumerationEntry_Enumeration_47
@@ -1210,6 +1171,40 @@
       <Condition ColumnName="fk_Projekt" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Property_Constraint_ConstrainedProperty_62
+    A: One Property as ConstrainedProperty
+    B: ZeroOrMore Constraint as Constraints
+    Preferred Storage: Right
+    -->
+    <AssociationSetMapping Name="FK_Property_Constraint_ConstrainedProperty_62"
+                           TypeName="Model.FK_Property_Constraint_ConstrainedProperty_62"
+                           StoreEntitySet="Constraint" >
+      <EndProperty Name="ConstrainedProperty">
+        <ScalarProperty Name="ID" ColumnName="fk_ConstrainedProperty"/>
+      </EndProperty>
+      <EndProperty Name="Constraints">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ConstrainedProperty" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Property_Module_BaseProperty_37
+    A: ZeroOrMore Property as BaseProperty
+    B: ZeroOrOne Module as Module
+    Preferred Storage: Left
+    -->
+    <AssociationSetMapping Name="FK_Property_Module_BaseProperty_37"
+                           TypeName="Model.FK_Property_Module_BaseProperty_37"
+                           StoreEntitySet="Property" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="BaseProperty">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Relation_RelationEnd_Relation_71
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as A
@@ -1431,23 +1426,6 @@
       <Condition ColumnName="fk_ViewRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Visual_BaseProperty_Visual_56
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrOne BaseProperty as Property
-    Preferred Storage: Left
-    -->
-    <AssociationSetMapping Name="FK_Visual_BaseProperty_Visual_56"
-                           TypeName="Model.FK_Visual_BaseProperty_Visual_56"
-                           StoreEntitySet="Visual" >
-      <EndProperty Name="Property">
-        <ScalarProperty Name="ID" ColumnName="fk_Property"/>
-      </EndProperty>
-      <EndProperty Name="Visual">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Property" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_Visual_Method_Visual_57
     A: ZeroOrMore Visual as Visual
     B: ZeroOrOne Method as Method
@@ -1463,6 +1441,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Method" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Visual_Property_Visual_56
+    A: ZeroOrMore Visual as Visual
+    B: ZeroOrOne Property as Property
+    Preferred Storage: Left
+    -->
+    <AssociationSetMapping Name="FK_Visual_Property_Visual_56"
+                           TypeName="Model.FK_Visual_Property_Visual_56"
+                           StoreEntitySet="Visual" >
+      <EndProperty Name="Property">
+        <ScalarProperty Name="ID" ColumnName="fk_Property"/>
+      </EndProperty>
+      <EndProperty Name="Visual">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Property" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Zeitkonto_Taetigkeit_Zeitkonto_33

@@ -9,8 +9,8 @@
     <!-- EntitySets for all Base Classes -->
     <EntitySet Name="Projekt" EntityType="Model.Store.Projekt" Table="Projekte"/>
     <EntitySet Name="Task" EntityType="Model.Store.Task" Table="Tasks"/>
-    <EntitySet Name="BaseProperty" EntityType="Model.Store.BaseProperty" Table="BaseProperties"/>
     <EntitySet Name="Mitarbeiter" EntityType="Model.Store.Mitarbeiter" Table="Mitarbeiter"/>
+    <EntitySet Name="Property" EntityType="Model.Store.Property" Table="Properties"/>
     <EntitySet Name="Method" EntityType="Model.Store.Method" Table="Methods"/>
     <EntitySet Name="Module" EntityType="Model.Store.Module" Table="Modules"/>
     <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Table="Auftraege"/>
@@ -45,13 +45,6 @@
     <AssociationSet Name="FK_ObjectClass_DataType_ID" Association="Model.Store.FK_ObjectClass_DataType_ID" >
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
-    </AssociationSet>
-    
-    <EntitySet Name="Property" EntityType="Model.Store.Property" Table="Properties"/>
-    <!-- inherits from BaseProperty -->
-    <AssociationSet Name="FK_Property_BaseProperty_ID" Association="Model.Store.FK_Property_BaseProperty_ID" >
-      <End Role="A_BaseProperty" EntitySet="BaseProperty" />
-      <End Role="B_Property" EntitySet="Property" />
     </AssociationSet>
     
     <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties"/>
@@ -368,14 +361,6 @@
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
-    <AssociationSet Name="FK_BaseProperty_Constraint_ConstrainedProperty_62" Association="Model.Store.FK_BaseProperty_Constraint_ConstrainedProperty_62" >
-      <End Role="ConstrainedProperty" EntitySet="BaseProperty" />
-      <End Role="Constraints" EntitySet="Constraint" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BaseProperty_Module_BaseProperty_37" Association="Model.Store.FK_BaseProperty_Module_BaseProperty_37" >
-      <End Role="BaseProperty" EntitySet="BaseProperty" />
-      <End Role="Module" EntitySet="Module" />
-    </AssociationSet>
     <AssociationSet Name="FK_CLRObjectParameter_Assembly_CLRObjectParameter_46" Association="Model.Store.FK_CLRObjectParameter_Assembly_CLRObjectParameter_46" >
       <End Role="CLRObjectParameter" EntitySet="CLRObjectParameter" />
       <End Role="Assembly" EntitySet="Assembly" />
@@ -383,10 +368,6 @@
     <AssociationSet Name="FK_ControlInfo_Assembly_ControlInfo_51" Association="Model.Store.FK_ControlInfo_Assembly_ControlInfo_51" >
       <End Role="ControlInfo" EntitySet="ControlInfo" />
       <End Role="Assembly" EntitySet="Assembly" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DataType_BaseProperty_ObjectClass_19" Association="Model.Store.FK_DataType_BaseProperty_ObjectClass_19" >
-      <End Role="ObjectClass" EntitySet="DataType" />
-      <End Role="Properties" EntitySet="BaseProperty" />
     </AssociationSet>
     <AssociationSet Name="FK_DataType_Icon_DataType_35" Association="Model.Store.FK_DataType_Icon_DataType_35" >
       <End Role="DataType" EntitySet="DataType" />
@@ -399,6 +380,10 @@
     <AssociationSet Name="FK_DataType_MethodInvocation_InvokeOnObjectClass_41" Association="Model.Store.FK_DataType_MethodInvocation_InvokeOnObjectClass_41" >
       <End Role="InvokeOnObjectClass" EntitySet="DataType" />
       <End Role="MethodInvocations" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataType_Property_ObjectClass_19" Association="Model.Store.FK_DataType_Property_ObjectClass_19" >
+      <End Role="ObjectClass" EntitySet="DataType" />
+      <End Role="Properties" EntitySet="Property" />
     </AssociationSet>
     <AssociationSet Name="FK_Enumeration_EnumerationEntry_Enumeration_47" Association="Model.Store.FK_Enumeration_EnumerationEntry_Enumeration_47" >
       <End Role="Enumeration" EntitySet="Enumeration" />
@@ -472,6 +457,14 @@
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Tasks" EntitySet="Task" />
     </AssociationSet>
+    <AssociationSet Name="FK_Property_Constraint_ConstrainedProperty_62" Association="Model.Store.FK_Property_Constraint_ConstrainedProperty_62" >
+      <End Role="ConstrainedProperty" EntitySet="Property" />
+      <End Role="Constraints" EntitySet="Constraint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Property_Module_BaseProperty_37" Association="Model.Store.FK_Property_Module_BaseProperty_37" >
+      <End Role="BaseProperty" EntitySet="Property" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
     <AssociationSet Name="FK_Relation_RelationEnd_Relation_71" Association="Model.Store.FK_Relation_RelationEnd_Relation_71" >
       <End Role="Relation" EntitySet="Relation" />
       <End Role="A" EntitySet="RelationEnd" />
@@ -524,13 +517,13 @@
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
       <End Role="ViewRef" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_Visual_BaseProperty_Visual_56" Association="Model.Store.FK_Visual_BaseProperty_Visual_56" >
-      <End Role="Visual" EntitySet="Visual" />
-      <End Role="Property" EntitySet="BaseProperty" />
-    </AssociationSet>
     <AssociationSet Name="FK_Visual_Method_Visual_57" Association="Model.Store.FK_Visual_Method_Visual_57" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="Method" EntitySet="Method" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visual_Property_Visual_56" Association="Model.Store.FK_Visual_Property_Visual_56" >
+      <End Role="Visual" EntitySet="Visual" />
+      <End Role="Property" EntitySet="Property" />
     </AssociationSet>
     <AssociationSet Name="FK_Zeitkonto_Taetigkeit_Zeitkonto_33" Association="Model.Store.FK_Zeitkonto_Taetigkeit_Zeitkonto_33" >
       <End Role="Zeitkonto" EntitySet="Zeitkonto" />
@@ -584,18 +577,6 @@
     <Property Name="Aufwand" Type="float" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="BaseProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_ObjectClass" Type="int" />
-    <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="AltText" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="fk_Module" Type="int" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
-  </EntityType>
-	
   <EntityType Name="Mitarbeiter">
     <Key>
       <PropertyRef Name="ID" />
@@ -611,9 +592,14 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ObjectClass" Type="int" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="IsList" Type="bit" Nullable="false" />
     <Property Name="IsNullable" Type="bit" Nullable="false" />
+    <Property Name="AltText" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="IsIndexed" Type="bit" Nullable="false" />
   </EntityType>
 	
@@ -794,9 +780,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="51" Nullable="false" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_DefaultIcon" Type="int" />
-    <Property Name="ClassName" Type="nvarchar" MaxLength="51" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
 	
@@ -975,10 +961,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_PresenterAssembly" Type="int" />
-    <Property Name="fk_DataAssembly" Type="int" />
     <Property Name="ControlType" Type="int" Nullable="false" />
+    <Property Name="fk_PresenterAssembly" Type="int" />
     <Property Name="PresenterTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_DataAssembly" Type="int" />
     <Property Name="DataTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
@@ -1407,36 +1393,6 @@
   </Association>
 
 
-  <Association Name="FK_BaseProperty_Constraint_ConstrainedProperty_62">
-    <End Role="ConstrainedProperty" Type="Model.Store.BaseProperty" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Constraints" Type="Model.Store.Constraint" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ConstrainedProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Constraints">
-        <PropertyRef Name="fk_ConstrainedProperty" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_BaseProperty_Module_BaseProperty_37">
-    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Module">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="BaseProperty">
-        <PropertyRef Name="fk_Module" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_CLRObjectParameter_Assembly_CLRObjectParameter_46">
     <End Role="Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -1462,21 +1418,6 @@
       </Principal>
       <Dependent Role="ControlInfo">
         <PropertyRef Name="fk_Assembly" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_DataType_BaseProperty_ObjectClass_19">
-    <End Role="ObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Properties" Type="Model.Store.BaseProperty" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ObjectClass">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Properties">
-        <PropertyRef Name="fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1522,6 +1463,21 @@
       </Principal>
       <Dependent Role="MethodInvocations">
         <PropertyRef Name="fk_InvokeOnObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_DataType_Property_ObjectClass_19">
+    <End Role="ObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Properties" Type="Model.Store.Property" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Properties">
+        <PropertyRef Name="fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1797,6 +1753,36 @@
   </Association>
 
 
+  <Association Name="FK_Property_Constraint_ConstrainedProperty_62">
+    <End Role="ConstrainedProperty" Type="Model.Store.Property" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Constraints" Type="Model.Store.Constraint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConstrainedProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Constraints">
+        <PropertyRef Name="fk_ConstrainedProperty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Property_Module_BaseProperty_37">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="BaseProperty" Type="Model.Store.Property" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BaseProperty">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Relation_RelationEnd_Relation_71">
     <End Role="A" Type="Model.Store.RelationEnd" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -1992,21 +1978,6 @@
   </Association>
 
 
-  <Association Name="FK_Visual_BaseProperty_Visual_56">
-    <End Role="Property" Type="Model.Store.BaseProperty" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Visual" Type="Model.Store.Visual" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Property">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Visual">
-        <PropertyRef Name="fk_Property" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_Visual_Method_Visual_57">
     <End Role="Method" Type="Model.Store.Method" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2017,6 +1988,21 @@
       </Principal>
       <Dependent Role="Visual">
         <PropertyRef Name="fk_Method" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Visual_Property_Visual_56">
+    <End Role="Property" Type="Model.Store.Property" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Visual" Type="Model.Store.Visual" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Property">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Visual">
+        <PropertyRef Name="fk_Property" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2047,18 +2033,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_ObjectClass">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Property_BaseProperty_ID">
-    <End Role="A_BaseProperty" Type="Model.Store.BaseProperty" Multiplicity="1" />
-    <End Role="B_Property" Type="Model.Store.Property" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_BaseProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_Property">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

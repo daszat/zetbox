@@ -64,7 +64,7 @@ namespace Kistl.Client.Presentables
     {
         public PropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            IDataObject obj, BaseProperty bp)
+            IDataObject obj, Property bp)
             : base(appCtx, dataCtx)
         {
             if (obj == null)
@@ -194,7 +194,7 @@ namespace Kistl.Client.Presentables
         #endregion
 
         protected IDataObject Object { get; private set; }
-        protected BaseProperty Property { get; private set; }
+        protected Property Property { get; private set; }
 
         #region Design Mode
 

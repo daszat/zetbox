@@ -30,16 +30,6 @@ namespace Kistl.App.Base
 			}
 		}
 		
-		/// <summary>Frozen List of all BaseProperty</summary>
-		/// Metadefinition Object for Properties. This class is abstract.
-		public static IQueryable<BaseProperty> BaseProperties
-		{ 
-			get
-			{
-				return BaseProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<BaseProperty>();
-			}
-		}
-		
 		/// <summary>Frozen List of all BoolParameter</summary>
 		/// Metadefinition Object for Bool Parameter.
 		public static IQueryable<BoolParameter> BoolParameters
@@ -395,7 +385,6 @@ namespace Kistl.App.Base
 		{
 				Assembly__Implementation__Frozen.CreateInstances();
 				BaseParameter__Implementation__Frozen.CreateInstances();
-				BaseProperty__Implementation__Frozen.CreateInstances();
 				BoolParameter__Implementation__Frozen.CreateInstances();
 				BoolProperty__Implementation__Frozen.CreateInstances();
 				CLRObjectParameter__Implementation__Frozen.CreateInstances();
@@ -438,7 +427,6 @@ namespace Kistl.App.Base
 		{
 				Assembly__Implementation__Frozen.FillDataStore();
 				BaseParameter__Implementation__Frozen.FillDataStore();
-				BaseProperty__Implementation__Frozen.FillDataStore();
 				BoolParameter__Implementation__Frozen.FillDataStore();
 				BoolProperty__Implementation__Frozen.FillDataStore();
 				CLRObjectParameter__Implementation__Frozen.FillDataStore();
