@@ -53,7 +53,7 @@ namespace Kistl.API.Client.Tests
             int targetId = 1;
             TestObjClass obj = ctx.Find<TestObjClass>(targetId);
             Assert.That(obj, Is.Not.Null);
-            Assert.That(obj, Is.InstanceOfType(typeof(TestObjClass)));
+            Assert.That(obj, Is.InstanceOf(typeof(TestObjClass)));
             Assert.That(obj.ID, Is.EqualTo(targetId));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(obj.Context, Is.EqualTo(ctx));
@@ -65,7 +65,7 @@ namespace Kistl.API.Client.Tests
             int targetId = 1;
             TestObjClass obj = (TestObjClass)ctx.Find(new InterfaceType(typeof(TestObjClass)), targetId);
             Assert.That(obj, Is.Not.Null);
-            Assert.That(obj, Is.InstanceOfType(typeof(TestObjClass)));
+            Assert.That(obj, Is.InstanceOf(typeof(TestObjClass)));
             Assert.That(obj.ID, Is.EqualTo(targetId));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(obj.Context, Is.EqualTo(ctx));
