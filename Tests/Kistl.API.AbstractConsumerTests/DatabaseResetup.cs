@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using Kistl.API.Configuration;
 
@@ -31,7 +32,7 @@ namespace Kistl.API.AbstractConsumerTests
                 var databaseScript = File.ReadAllText(CurrentDbScript);
                 using (var tx = db.BeginTransaction())
                 {
-                    foreach (var cmdString in databaseScript.Split(new[] { "GO" }, StringSplitOptions.RemoveEmptyEntries))
+                    foreach (var cmdString in Regex.Split(databaseScript, "\r?\nGO\r?\n").Where(s => !String.IsNullOrEmpty(s)))
                     {
                         using (var cmd = new SqlCommand(cmdString, db, tx))
                         {
