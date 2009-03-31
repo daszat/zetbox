@@ -149,6 +149,37 @@ namespace Kistl.Client.Presentables
             _valueCache.AddItem(item);
         }
 
+        /// <summary>
+        /// Adds an existing item into this ObjectList. Asks the User which should be added.
+        /// </summary>
+        public void AddExistingItem()
+        {
+            Async.Queue(DataContext, () =>
+            {
+                var baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass.GetDescribedInterfaceType();
+                var instances = DataContext.GetQuery(baseclass).ToList().OrderBy(i => i.ToString());
+                UI.Queue(UI, () =>
+                {
+                    var instanceModels = instances
+                        .Select(i => (DataObjectModel)Factory.CreateDefaultModel(DataContext, i))
+                        .ToList();
+
+                    Factory.ShowModel(
+                        Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+                            DataContext,
+                            instanceModels,
+                            new Action<DataObjectModel>(delegate(DataObjectModel chosen)
+                            {
+                                if (chosen != null)
+                                {
+                                    AddItem(chosen);
+                                    SelectedItem = chosen;
+                                }
+                            })), true);
+                });
+            });
+        }
+
         public void RemoveItem(DataObjectModel item)
         {
             UI.Verify();

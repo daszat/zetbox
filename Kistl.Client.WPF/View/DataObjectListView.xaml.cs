@@ -30,7 +30,7 @@ namespace Kistl.Client.WPF.View
 
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {
-            var model = DataContext as ObjectListModel;
+            var model = (ObjectListModel)DataContext;
             model.CreateNewItem(newitem =>
             {
                 if (newitem != null)
@@ -42,9 +42,15 @@ namespace Kistl.Client.WPF.View
             });
         }
 
+        private void AddExistingItemHandler(object sender, RoutedEventArgs e)
+        {
+            var model = (ObjectListModel)DataContext;
+            model.AddExistingItem();
+        }
+
         private void RemoveHandler(object sender, RoutedEventArgs e)
         {
-            var model = DataContext as ObjectListModel;
+            var model = (ObjectListModel)DataContext;
             if (model.SelectedItem != null)
             {
                 model.RemoveItem(model.SelectedItem);
@@ -53,7 +59,7 @@ namespace Kistl.Client.WPF.View
 
         private void DeleteHandler(object sender, RoutedEventArgs e)
         {
-            var model = DataContext as ObjectListModel;
+            var model = (ObjectListModel)DataContext;
             if (model.SelectedItem != null)
             {
                 model.DeleteItem(model.SelectedItem);
@@ -62,7 +68,7 @@ namespace Kistl.Client.WPF.View
 
         private void ItemActivatedHandler(object sender, MouseButtonEventArgs e)
         {
-            var model = DataContext as ObjectListModel;
+            var model = (ObjectListModel)DataContext;
             if (model.SelectedItem != null)
             {
                 model.ActivateItem(model.SelectedItem, true);
