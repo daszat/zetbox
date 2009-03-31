@@ -123,16 +123,16 @@ namespace Kistl.App.Base
         /// The ORP to navigate FROM this end of the relation. MAY be null.
         /// </summary>
     /*
-    Relation: FK_RelationEnd_Property_RelationEnd_74
+    Relation: FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74
     A: ZeroOrOne RelationEnd as RelationEnd
-    B: ZeroOrOne Property as Navigator
+    B: ZeroOrOne ObjectReferenceProperty as Navigator
     Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Property Navigator
+        public Kistl.App.Base.ObjectReferenceProperty Navigator
         {
             get
             {
@@ -143,7 +143,7 @@ namespace Kistl.App.Base
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                Navigator__Implementation__ = (Kistl.App.Base.Property__Implementation__)value;
+                Navigator__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
             }
         }
         
@@ -166,14 +166,14 @@ namespace Kistl.App.Base
         }
         private int? _fk_Navigator;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_Property_RelationEnd_74", "Navigator")]
-        public Kistl.App.Base.Property__Implementation__ Navigator__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74", "Navigator")]
+        public Kistl.App.Base.ObjectReferenceProperty__Implementation__ Navigator__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.Property__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
-                        "Model.FK_RelationEnd_Property_RelationEnd_74",
+                EntityReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__>(
+                        "Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74",
                         "Navigator");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -185,16 +185,16 @@ namespace Kistl.App.Base
             }
             set
             {
-                EntityReference<Kistl.App.Base.Property__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
-                        "Model.FK_RelationEnd_Property_RelationEnd_74",
+                EntityReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectReferenceProperty__Implementation__>(
+                        "Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74",
                         "Navigator");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.Property__Implementation__)value;
+                r.Value = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
             }
         }
         
@@ -377,7 +377,7 @@ namespace Kistl.App.Base
 			else
 				Type__Implementation__ = null;
 			if (_fk_Navigator.HasValue)
-				Navigator__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_Navigator.Value);
+				Navigator__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)Context.Find<Kistl.App.Base.ObjectReferenceProperty>(_fk_Navigator.Value);
 			else
 				Navigator__Implementation__ = null;
 		}

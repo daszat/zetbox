@@ -114,6 +114,87 @@ namespace Kistl.App.Base
         
 
         /// <summary>
+        /// The RelationEnd describing this Property
+        /// </summary>
+    /*
+    Relation: FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74
+    A: ZeroOrOne RelationEnd as RelationEnd
+    B: ZeroOrOne ObjectReferenceProperty as Navigator
+    Preferred Storage: Left
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.RelationEnd RelationEnd
+        {
+            get
+            {
+                return RelationEnd__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_RelationEnd
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && RelationEnd != null)
+                {
+                    _fk_RelationEnd = RelationEnd.ID;
+                }
+                return _fk_RelationEnd;
+            }
+            set
+            {
+                _fk_RelationEnd = value;
+            }
+        }
+        private int? _fk_RelationEnd;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74", "RelationEnd")]
+        public Kistl.App.Base.RelationEnd__Implementation__ RelationEnd__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
+                        "Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74",
+                        "RelationEnd");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
+                        "Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74",
+                        "RelationEnd");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Base.RelationEnd__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
         /// 
         /// </summary>
 
@@ -221,6 +302,10 @@ namespace Kistl.App.Base
 				ReferenceObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_ReferenceObjectClass.Value);
 			else
 				ReferenceObjectClass__Implementation__ = null;
+			if (_fk_RelationEnd.HasValue)
+				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_RelationEnd.Value);
+			else
+				RelationEnd__Implementation__ = null;
 		}
 
 #region Serializer
@@ -230,6 +315,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_ReferenceObjectClass, binStream);
+            BinarySerializer.ToStream(this.fk_RelationEnd, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -239,6 +325,11 @@ namespace Kistl.App.Base
                 var tmp = this.fk_ReferenceObjectClass;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_ReferenceObjectClass = tmp;
+            }
+            {
+                var tmp = this.fk_RelationEnd;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_RelationEnd = tmp;
             }
         }
 

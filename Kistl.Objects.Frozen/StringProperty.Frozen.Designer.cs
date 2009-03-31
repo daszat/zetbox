@@ -416,7 +416,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[195],
 			DataStore[1].IsIndexed = false;
 			DataStore[1].IsList = false;
 			DataStore[1].IsNullable = false;
-			DataStore[1].RelationEnd = null;
 			DataStore[1].Length = 51;
 			DataStore[1].Seal();
 			DataStore[3].AltText = @"Tabellenname in der Datenbank";
@@ -432,7 +431,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[194],
 			DataStore[3].IsIndexed = false;
 			DataStore[3].IsList = false;
 			DataStore[3].IsNullable = false;
-			DataStore[3].RelationEnd = null;
 			DataStore[3].Length = 100;
 			DataStore[3].Seal();
 			DataStore[9].AltText = null;
@@ -447,7 +445,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[196],
 			DataStore[9].IsIndexed = false;
 			DataStore[9].IsList = false;
 			DataStore[9].IsNullable = true;
-			DataStore[9].RelationEnd = null;
 			DataStore[9].Length = 100;
 			DataStore[9].Seal();
 			DataStore[13].AltText = @"Projektname";
@@ -461,7 +458,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[189],
 			DataStore[13].IsIndexed = false;
 			DataStore[13].IsList = false;
 			DataStore[13].IsNullable = true;
-			DataStore[13].RelationEnd = null;
 			DataStore[13].Length = 100;
 			DataStore[13].Seal();
 			DataStore[15].AltText = @"Taskname";
@@ -475,7 +471,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[188],
 			DataStore[15].IsIndexed = false;
 			DataStore[15].IsList = false;
 			DataStore[15].IsNullable = true;
-			DataStore[15].RelationEnd = null;
 			DataStore[15].Length = 100;
 			DataStore[15].Seal();
 			DataStore[20].AltText = @"Vorname Nachname";
@@ -489,7 +484,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[187],
 			DataStore[20].IsIndexed = false;
 			DataStore[20].IsList = false;
 			DataStore[20].IsNullable = true;
-			DataStore[20].RelationEnd = null;
 			DataStore[20].Length = 100;
 			DataStore[20].Seal();
 			DataStore[30].AltText = null;
@@ -505,7 +499,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[199],
 			DataStore[30].IsIndexed = false;
 			DataStore[30].IsList = false;
 			DataStore[30].IsNullable = false;
-			DataStore[30].RelationEnd = null;
 			DataStore[30].Length = 100;
 			DataStore[30].Seal();
 			DataStore[39].AltText = @"NNNN TTMMYY";
@@ -519,7 +512,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[185],
 			DataStore[39].IsIndexed = false;
 			DataStore[39].IsList = false;
 			DataStore[39].IsNullable = true;
-			DataStore[39].RelationEnd = null;
 			DataStore[39].Length = 20;
 			DataStore[39].Seal();
 			DataStore[40].AltText = @"+43 123 12345678";
@@ -533,7 +525,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[184],
 			DataStore[40].IsIndexed = false;
 			DataStore[40].IsList = false;
 			DataStore[40].IsNullable = true;
-			DataStore[40].RelationEnd = null;
 			DataStore[40].Length = 50;
 			DataStore[40].Seal();
 			DataStore[41].AltText = null;
@@ -547,7 +538,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[183],
 			DataStore[41].IsIndexed = false;
 			DataStore[41].IsList = false;
 			DataStore[41].IsNullable = true;
-			DataStore[41].RelationEnd = null;
 			DataStore[41].Length = 200;
 			DataStore[41].Seal();
 			DataStore[42].AltText = @"CLR Namespace des Moduls";
@@ -563,7 +553,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[198],
 			DataStore[42].IsIndexed = false;
 			DataStore[42].IsList = false;
 			DataStore[42].IsNullable = false;
-			DataStore[42].RelationEnd = null;
 			DataStore[42].Length = 200;
 			DataStore[42].Seal();
 			DataStore[43].AltText = @"Name des Moduls";
@@ -578,7 +567,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[181],
 			DataStore[43].IsIndexed = false;
 			DataStore[43].IsList = false;
 			DataStore[43].IsNullable = false;
-			DataStore[43].RelationEnd = null;
 			DataStore[43].Length = 200;
 			DataStore[43].Seal();
 			DataStore[48].AltText = @"Bitte geben Sie den Kundennamen ein";
@@ -592,7 +580,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[180],
 			DataStore[48].IsIndexed = false;
 			DataStore[48].IsList = false;
 			DataStore[48].IsNullable = true;
-			DataStore[48].RelationEnd = null;
 			DataStore[48].Length = 100;
 			DataStore[48].Seal();
 			DataStore[50].AltText = @"Bitte füllen Sie einen sprechenden Auftragsnamen aus";
@@ -606,7 +593,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[179],
 			DataStore[50].IsIndexed = false;
 			DataStore[50].IsList = false;
 			DataStore[50].IsNullable = true;
-			DataStore[50].RelationEnd = null;
 			DataStore[50].Length = 200;
 			DataStore[50].Seal();
 			DataStore[52].AltText = @"Name des Zeiterfassungskontos";
@@ -621,7 +607,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[178],
 			DataStore[52].IsIndexed = false;
 			DataStore[52].IsList = false;
 			DataStore[52].IsNullable = false;
-			DataStore[52].RelationEnd = null;
 			DataStore[52].Length = 200;
 			DataStore[52].Seal();
 			DataStore[59].AltText = @"Name des Kunden";
@@ -636,7 +621,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[177],
 			DataStore[59].IsIndexed = false;
 			DataStore[59].IsList = false;
 			DataStore[59].IsNullable = false;
-			DataStore[59].RelationEnd = null;
 			DataStore[59].Length = 200;
 			DataStore[59].Seal();
 			DataStore[60].AltText = @"Adresse & Hausnummer";
@@ -650,7 +634,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[176],
 			DataStore[60].IsIndexed = false;
 			DataStore[60].IsList = false;
 			DataStore[60].IsNullable = true;
-			DataStore[60].RelationEnd = null;
 			DataStore[60].Length = 200;
 			DataStore[60].Seal();
 			DataStore[61].AltText = @"Postleitzahl";
@@ -665,7 +648,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[175],
 			DataStore[61].IsIndexed = false;
 			DataStore[61].IsList = false;
 			DataStore[61].IsNullable = false;
-			DataStore[61].RelationEnd = null;
 			DataStore[61].Length = 10;
 			DataStore[61].Seal();
 			DataStore[62].AltText = @"Ort";
@@ -679,7 +661,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[174],
 			DataStore[62].IsIndexed = false;
 			DataStore[62].IsList = false;
 			DataStore[62].IsNullable = true;
-			DataStore[62].RelationEnd = null;
 			DataStore[62].Length = 100;
 			DataStore[62].Seal();
 			DataStore[63].AltText = @"Land";
@@ -693,7 +674,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[173],
 			DataStore[63].IsIndexed = false;
 			DataStore[63].IsList = false;
 			DataStore[63].IsNullable = true;
-			DataStore[63].RelationEnd = null;
 			DataStore[63].Length = 50;
 			DataStore[63].Seal();
 			DataStore[68].AltText = @"Filename of the Icon";
@@ -708,7 +688,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[172],
 			DataStore[68].IsIndexed = false;
 			DataStore[68].IsList = false;
 			DataStore[68].IsNullable = false;
-			DataStore[68].RelationEnd = null;
 			DataStore[68].Length = 200;
 			DataStore[68].Seal();
 			DataStore[71].AltText = @"Full Assemblyname eg. MyActions, Version=1.0.0.0";
@@ -723,7 +702,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[171],
 			DataStore[71].IsIndexed = false;
 			DataStore[71].IsList = false;
 			DataStore[71].IsNullable = false;
-			DataStore[71].RelationEnd = null;
 			DataStore[71].Length = 200;
 			DataStore[71].Seal();
 			DataStore[77].AltText = @"Name des implementierenden Members";
@@ -738,7 +716,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[169],
 			DataStore[77].IsIndexed = false;
 			DataStore[77].IsList = false;
 			DataStore[77].IsNullable = false;
-			DataStore[77].RelationEnd = null;
 			DataStore[77].Length = 200;
 			DataStore[77].Seal();
 			DataStore[85].AltText = @"EMails des Kunden - können mehrere sein";
@@ -752,7 +729,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[168],
 			DataStore[85].IsIndexed = false;
 			DataStore[85].IsList = true;
 			DataStore[85].IsNullable = true;
-			DataStore[85].RelationEnd = null;
 			DataStore[85].Length = 200;
 			DataStore[85].Seal();
 			DataStore[87].AltText = @"Name der Tätigkeitsart";
@@ -767,7 +743,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[167],
 			DataStore[87].IsIndexed = false;
 			DataStore[87].IsList = false;
 			DataStore[87].IsNullable = false;
-			DataStore[87].RelationEnd = null;
 			DataStore[87].Length = 200;
 			DataStore[87].Seal();
 			DataStore[91].AltText = @"Name des Parameter";
@@ -783,7 +758,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[200],
 			DataStore[91].IsIndexed = false;
 			DataStore[91].IsList = false;
 			DataStore[91].IsNullable = false;
-			DataStore[91].RelationEnd = null;
 			DataStore[91].Length = 100;
 			DataStore[91].Seal();
 			DataStore[99].AltText = @"Name des CLR Datentypen";
@@ -798,7 +772,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[165],
 			DataStore[99].IsIndexed = false;
 			DataStore[99].IsList = false;
 			DataStore[99].IsNullable = false;
-			DataStore[99].RelationEnd = null;
 			DataStore[99].Length = 200;
 			DataStore[99].Seal();
 			DataStore[107].AltText = @"String Property für das Testinterface";
@@ -813,7 +786,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[164],
 			DataStore[107].IsIndexed = false;
 			DataStore[107].IsList = false;
 			DataStore[107].IsNullable = false;
-			DataStore[107].RelationEnd = null;
 			DataStore[107].Length = 200;
 			DataStore[107].Seal();
 			DataStore[109].AltText = @"String Property";
@@ -828,7 +800,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[163],
 			DataStore[109].IsIndexed = false;
 			DataStore[109].IsList = false;
 			DataStore[109].IsNullable = false;
-			DataStore[109].RelationEnd = null;
 			DataStore[109].Length = 200;
 			DataStore[109].Seal();
 			DataStore[115].AltText = @"The name of the class implementing this Control";
@@ -843,7 +814,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[162],
 			DataStore[115].IsIndexed = false;
 			DataStore[115].IsList = false;
 			DataStore[115].IsNullable = false;
-			DataStore[115].RelationEnd = null;
 			DataStore[115].Length = 200;
 			DataStore[115].Seal();
 			DataStore[127].AltText = @"Enter a Number";
@@ -857,7 +827,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[161],
 			DataStore[127].IsIndexed = false;
 			DataStore[127].IsList = false;
 			DataStore[127].IsNullable = true;
-			DataStore[127].RelationEnd = null;
 			DataStore[127].Length = 50;
 			DataStore[127].Seal();
 			DataStore[128].AltText = @"Enter Area Code";
@@ -871,7 +840,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[160],
 			DataStore[128].IsIndexed = false;
 			DataStore[128].IsList = false;
 			DataStore[128].IsNullable = true;
-			DataStore[128].RelationEnd = null;
 			DataStore[128].Length = 50;
 			DataStore[128].Seal();
 			DataStore[130].AltText = @"Persons Name";
@@ -886,7 +854,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[159],
 			DataStore[130].IsIndexed = false;
 			DataStore[130].IsList = false;
 			DataStore[130].IsNullable = false;
-			DataStore[130].RelationEnd = null;
 			DataStore[130].Length = 200;
 			DataStore[130].Seal();
 			DataStore[136].AltText = @"CLR name of this entry";
@@ -902,7 +869,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[201],
 			DataStore[136].IsIndexed = false;
 			DataStore[136].IsList = false;
 			DataStore[136].IsNullable = false;
-			DataStore[136].RelationEnd = null;
 			DataStore[136].Length = 200;
 			DataStore[136].Seal();
 			DataStore[139].AltText = @"The CLR namespace and class name of the Presenter";
@@ -917,7 +883,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[157],
 			DataStore[139].IsIndexed = false;
 			DataStore[139].IsList = false;
 			DataStore[139].IsNullable = false;
-			DataStore[139].RelationEnd = null;
 			DataStore[139].Length = 200;
 			DataStore[139].Seal();
 			DataStore[148].AltText = @"The CLR namespace and class name of the Data Type";
@@ -932,7 +897,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[156],
 			DataStore[148].IsIndexed = false;
 			DataStore[148].IsList = false;
 			DataStore[148].IsNullable = false;
-			DataStore[148].RelationEnd = null;
 			DataStore[148].Length = 200;
 			DataStore[148].Seal();
 			DataStore[149].AltText = @"A short description of the utility of this visual";
@@ -947,7 +911,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[155],
 			DataStore[149].IsIndexed = false;
 			DataStore[149].IsList = false;
 			DataStore[149].IsNullable = false;
-			DataStore[149].RelationEnd = null;
 			DataStore[149].Length = 200;
 			DataStore[149].Seal();
 			DataStore[154].AltText = @"a short name to identify this Template to the user";
@@ -962,7 +925,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[154],
 			DataStore[154].IsIndexed = false;
 			DataStore[154].IsList = false;
 			DataStore[154].IsNullable = false;
-			DataStore[154].RelationEnd = null;
 			DataStore[154].Length = 200;
 			DataStore[154].Seal();
 			DataStore[162].AltText = @"FullName of the Type that is displayed with this Template";
@@ -977,7 +939,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[153],
 			DataStore[162].IsIndexed = false;
 			DataStore[162].IsList = false;
 			DataStore[162].IsNullable = false;
-			DataStore[162].RelationEnd = null;
 			DataStore[162].Length = 200;
 			DataStore[162].Seal();
 			DataStore[167].AltText = @"The reason of this constraint";
@@ -991,7 +952,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[152],
 			DataStore[167].IsIndexed = false;
 			DataStore[167].IsList = false;
 			DataStore[167].IsNullable = true;
-			DataStore[167].RelationEnd = null;
 			DataStore[167].Length = 400;
 			DataStore[167].Seal();
 			DataStore[175].AltText = @"Description of this DataType";
@@ -1005,7 +965,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[207],
 			DataStore[175].IsIndexed = false;
 			DataStore[175].IsList = false;
 			DataStore[175].IsNullable = true;
-			DataStore[175].RelationEnd = null;
 			DataStore[175].Length = 200;
 			DataStore[175].Seal();
 			DataStore[176].AltText = @"Description of this Property";
@@ -1019,7 +978,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[206],
 			DataStore[176].IsIndexed = false;
 			DataStore[176].IsList = false;
 			DataStore[176].IsNullable = true;
-			DataStore[176].RelationEnd = null;
 			DataStore[176].Length = 200;
 			DataStore[176].Seal();
 			DataStore[177].AltText = @"Description of this Parameter";
@@ -1033,7 +991,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[205],
 			DataStore[177].IsIndexed = false;
 			DataStore[177].IsList = false;
 			DataStore[177].IsNullable = true;
-			DataStore[177].RelationEnd = null;
 			DataStore[177].Length = 200;
 			DataStore[177].Seal();
 			DataStore[178].AltText = @"Description of this Enumeration Entry";
@@ -1047,7 +1004,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[204],
 			DataStore[178].IsIndexed = false;
 			DataStore[178].IsList = false;
 			DataStore[178].IsNullable = true;
-			DataStore[178].RelationEnd = null;
 			DataStore[178].Length = 200;
 			DataStore[178].Seal();
 			DataStore[179].AltText = @"Description of this Module";
@@ -1061,7 +1017,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[203],
 			DataStore[179].IsIndexed = false;
 			DataStore[179].IsList = false;
 			DataStore[179].IsNullable = true;
-			DataStore[179].RelationEnd = null;
 			DataStore[179].Length = 200;
 			DataStore[179].Seal();
 			DataStore[180].AltText = @"Description of this Method";
@@ -1075,7 +1030,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[208],
 			DataStore[180].IsIndexed = false;
 			DataStore[180].IsList = false;
 			DataStore[180].IsNullable = true;
-			DataStore[180].RelationEnd = null;
 			DataStore[180].Length = 200;
 			DataStore[180].Seal();
 			DataStore[184].AltText = @"Description of this Relation";
@@ -1089,7 +1043,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[184].IsIndexed = false;
 			DataStore[184].IsList = false;
 			DataStore[184].IsNullable = true;
-			DataStore[184].RelationEnd = null;
 			DataStore[184].Length = 200;
 			DataStore[184].Seal();
 			DataStore[205].AltText = null;
@@ -1102,7 +1055,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[205].IsIndexed = false;
 			DataStore[205].IsList = false;
 			DataStore[205].IsNullable = false;
-			DataStore[205].RelationEnd = null;
 			DataStore[205].Length = 200;
 			DataStore[205].Seal();
 			DataStore[216].AltText = @"This end's role name in the relation";
@@ -1115,7 +1067,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[216].IsIndexed = false;
 			DataStore[216].IsList = false;
 			DataStore[216].IsNullable = false;
-			DataStore[216].RelationEnd = null;
 			DataStore[216].Length = 200;
 			DataStore[216].Seal();
 	

@@ -170,7 +170,6 @@ namespace Kistl.App.Base
 			DataStore[16].IsIndexed = false;
 			DataStore[16].IsList = false;
 			DataStore[16].IsNullable = true;
-			DataStore[16].RelationEnd = null;
 			DataStore[16].Seal();
 			DataStore[17].AltText = @"Enddatum";
 			DataStore[17].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
@@ -182,7 +181,6 @@ namespace Kistl.App.Base
 			DataStore[17].IsIndexed = false;
 			DataStore[17].IsList = false;
 			DataStore[17].IsNullable = true;
-			DataStore[17].RelationEnd = null;
 			DataStore[17].Seal();
 			DataStore[38].AltText = @"Herzlichen Glückwunsch zum Geburtstag";
 			DataStore[38].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
@@ -194,7 +192,6 @@ namespace Kistl.App.Base
 			DataStore[38].IsIndexed = false;
 			DataStore[38].IsList = false;
 			DataStore[38].IsNullable = true;
-			DataStore[38].RelationEnd = null;
 			DataStore[38].Seal();
 			DataStore[56].AltText = @"Datum";
 			DataStore[56].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
@@ -207,7 +204,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[132],
 			DataStore[56].IsIndexed = false;
 			DataStore[56].IsList = false;
 			DataStore[56].IsNullable = false;
-			DataStore[56].RelationEnd = null;
 			DataStore[56].Seal();
 			DataStore[133].AltText = @"Happy Birthday!";
 			DataStore[133].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
@@ -219,7 +215,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[132],
 			DataStore[133].IsIndexed = false;
 			DataStore[133].IsList = false;
 			DataStore[133].IsNullable = true;
-			DataStore[133].RelationEnd = null;
 			DataStore[133].Seal();
 	
 		}

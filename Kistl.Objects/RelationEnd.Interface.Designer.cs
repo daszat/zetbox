@@ -29,7 +29,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// The ORP to navigate FROM this end of the relation. MAY be null.
         /// </summary>
-		Kistl.App.Base.Property Navigator {
+		Kistl.App.Base.ObjectReferenceProperty Navigator {
 			get;
 			set;
 		}

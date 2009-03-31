@@ -509,17 +509,17 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_RelationEnd_Property_RelationEnd_74
+    Relation: FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74
     A: ZeroOrOne RelationEnd as RelationEnd
-    B: ZeroOrOne Property as Navigator
+    B: ZeroOrOne ObjectReferenceProperty as Navigator
     Preferred Storage: Left
 	*/
 
 // basic association
 [assembly: EdmRelationship(
-    "Model", "FK_RelationEnd_Property_RelationEnd_74",
+    "Model", "FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74",
     "RelationEnd", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.RelationEnd__Implementation__),
-    "Navigator", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Property__Implementation__)
+    "Navigator", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__)
     )]
 
 

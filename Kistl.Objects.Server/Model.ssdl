@@ -484,9 +484,9 @@
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="Type" EntitySet="ObjectClass" />
     </AssociationSet>
-    <AssociationSet Name="FK_RelationEnd_Property_RelationEnd_74" Association="Model.Store.FK_RelationEnd_Property_RelationEnd_74" >
+    <AssociationSet Name="FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74" Association="Model.Store.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
-      <End Role="Navigator" EntitySet="Property" />
+      <End Role="Navigator" EntitySet="ObjectReferenceProperty" />
     </AssociationSet>
     <AssociationSet Name="FK_StructProperty_Struct_StructProperty_52" Association="Model.Store.FK_StructProperty_Struct_StructProperty_52" >
       <End Role="StructProperty" EntitySet="StructProperty" />
@@ -1842,8 +1842,8 @@
   </Association>
 
 
-  <Association Name="FK_RelationEnd_Property_RelationEnd_74">
-    <End Role="Navigator" Type="Model.Store.Property" Multiplicity="0..1" />
+  <Association Name="FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74">
+    <End Role="Navigator" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="RelationEnd" Type="Model.Store.RelationEnd" Multiplicity="*" />
     <ReferentialConstraint>

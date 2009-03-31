@@ -19,5 +19,12 @@ namespace Kistl.App.Base
 			get;
 			set;
 		}
+        /// <summary>
+        /// The RelationEnd describing this Property
+        /// </summary>
+		Kistl.App.Base.RelationEnd RelationEnd {
+			get;
+			set;
+		}
     }
 }

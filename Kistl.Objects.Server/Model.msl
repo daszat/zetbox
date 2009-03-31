@@ -1261,13 +1261,13 @@
       <Condition ColumnName="fk_Type" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_RelationEnd_Property_RelationEnd_74
+    Relation: FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74
     A: ZeroOrOne RelationEnd as RelationEnd
-    B: ZeroOrOne Property as Navigator
+    B: ZeroOrOne ObjectReferenceProperty as Navigator
     Preferred Storage: Left
     -->
-    <AssociationSetMapping Name="FK_RelationEnd_Property_RelationEnd_74"
-                           TypeName="Model.FK_RelationEnd_Property_RelationEnd_74"
+    <AssociationSetMapping Name="FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74"
+                           TypeName="Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74"
                            StoreEntitySet="RelationEnd" >
       <EndProperty Name="Navigator">
         <ScalarProperty Name="ID" ColumnName="fk_Navigator"/>

@@ -175,7 +175,6 @@ namespace Kistl.App.Base
 			DataStore[18].IsIndexed = false;
 			DataStore[18].IsList = false;
 			DataStore[18].IsNullable = true;
-			DataStore[18].RelationEnd = null;
 			DataStore[18].Seal();
 			DataStore[23].AltText = null;
 			DataStore[23].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
@@ -187,7 +186,6 @@ namespace Kistl.App.Base
 			DataStore[23].IsIndexed = false;
 			DataStore[23].IsList = false;
 			DataStore[23].IsNullable = true;
-			DataStore[23].RelationEnd = null;
 			DataStore[23].Seal();
 			DataStore[57].AltText = @"Dauer in Stunden";
 			DataStore[57].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
@@ -200,7 +198,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[131],
 			DataStore[57].IsIndexed = false;
 			DataStore[57].IsList = false;
 			DataStore[57].IsNullable = false;
-			DataStore[57].RelationEnd = null;
 			DataStore[57].Seal();
 			DataStore[65].AltText = @"Wert in EUR des Auftrages";
 			DataStore[65].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
@@ -212,7 +209,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[131],
 			DataStore[65].IsIndexed = false;
 			DataStore[65].IsList = false;
 			DataStore[65].IsNullable = true;
-			DataStore[65].RelationEnd = null;
 			DataStore[65].Seal();
 			DataStore[89].AltText = @"Maximal erlaubte Stundenanzahl";
 			DataStore[89].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
@@ -224,7 +220,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[131],
 			DataStore[89].IsIndexed = false;
 			DataStore[89].IsList = false;
 			DataStore[89].IsNullable = true;
-			DataStore[89].RelationEnd = null;
 			DataStore[89].Seal();
 			DataStore[90].AltText = @"Aktuell gebuchte Stunden";
 			DataStore[90].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
@@ -236,7 +231,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[131],
 			DataStore[90].IsIndexed = false;
 			DataStore[90].IsList = false;
 			DataStore[90].IsNullable = true;
-			DataStore[90].RelationEnd = null;
 			DataStore[90].Seal();
 	
 		}

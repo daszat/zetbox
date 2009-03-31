@@ -81,12 +81,12 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Property Navigator
+        public Kistl.App.Base.ObjectReferenceProperty Navigator
         {
             get
             {
                 if (fk_Navigator.HasValue)
-                    return Context.Find<Kistl.App.Base.Property>(fk_Navigator.Value);
+                    return Context.Find<Kistl.App.Base.ObjectReferenceProperty>(fk_Navigator.Value);
                 else
                     return null;
             }

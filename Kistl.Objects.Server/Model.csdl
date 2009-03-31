@@ -231,7 +231,7 @@
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="Type" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_RelationEnd_Property_RelationEnd_74" Association="Model.FK_RelationEnd_Property_RelationEnd_74" >
+    <AssociationSet Name="FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74" Association="Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="Navigator" EntitySet="BaseProperty" />
     </AssociationSet>
@@ -610,7 +610,7 @@
     <Property Name="RoleName" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="Role" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Navigator__Implementation__"
-                        Relationship="Model.FK_RelationEnd_Property_RelationEnd_74"
+                        Relationship="Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74"
                         FromRole="RelationEnd"
                         ToRole="Navigator" />
     <Property Name="Multiplicity" Type="Int32" Nullable="false" />
@@ -866,15 +866,15 @@
                         Relationship="Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27"
                         FromRole="ObjectReferenceProperty"
                         ToRole="ReferenceObjectClass" />
+    <NavigationProperty Name="RelationEnd__Implementation__"
+                        Relationship="Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74"
+                        FromRole="Navigator"
+                        ToRole="RelationEnd" />
   </EntityType>
   <EntityType Name="Property" BaseType="Model.BaseProperty" >
     <Property Name="IsList" Type="Boolean" Nullable="false" />
     <Property Name="IsNullable" Type="Boolean" Nullable="false" />
     <Property Name="IsIndexed" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="RelationEnd__Implementation__"
-                        Relationship="Model.FK_RelationEnd_Property_RelationEnd_74"
-                        FromRole="Navigator"
-                        ToRole="RelationEnd" />
   </EntityType>
   <EntityType Name="StringParameter" BaseType="Model.BaseParameter" >
   </EntityType>
@@ -1464,12 +1464,12 @@
          Type="Model.ObjectClass" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_RelationEnd_Property_RelationEnd_74" >
+  <Association Name="FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74" >
     <End Role="RelationEnd"
          Type="Model.RelationEnd" 
          Multiplicity="0..1" />
     <End Role="Navigator"
-         Type="Model.Property" 
+         Type="Model.ObjectReferenceProperty" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_StructProperty_Struct_StructProperty_52" >

@@ -50,6 +50,29 @@ namespace Kistl.App.Base
         private Kistl.App.Base.ObjectClass _ReferenceObjectClass;
 
         /// <summary>
+        /// The RelationEnd describing this Property
+        /// </summary>
+        // object reference property
+        public virtual Kistl.App.Base.RelationEnd RelationEnd
+        {
+            get
+            {
+                return _RelationEnd;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_RelationEnd != value)
+                {
+                    NotifyPropertyChanging("RelationEnd");
+                    _RelationEnd = value;
+                    NotifyPropertyChanged("RelationEnd");
+                }
+            }
+        }
+        private Kistl.App.Base.RelationEnd _RelationEnd;
+
+        /// <summary>
         /// 
         /// </summary>
 
@@ -962,8 +985,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[104],
 			DataStore[108].IsIndexed = false;
 			DataStore[108].IsList = false;
 			DataStore[108].IsNullable = false;
-			DataStore[108].RelationEnd = null;
 			DataStore[108].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
+			DataStore[108].RelationEnd = null;
 			DataStore[108].Seal();
 			DataStore[112].AltText = @"testtest";
 			DataStore[112].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
@@ -1261,14 +1284,14 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[218].IsIndexed = false;
 			DataStore[218].IsList = false;
 			DataStore[218].IsNullable = true;
-			DataStore[218].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
+			DataStore[218].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[14];
 			DataStore[218].Seal();
 			DataStore[222].AltText = null;
 			DataStore[222].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[222].Description = @"The RelationEnd describing this Property";
 			DataStore[222].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[222].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
+			DataStore[222].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
 			DataStore[222].PropertyName = @"RelationEnd";
 			DataStore[222].IsIndexed = false;
 			DataStore[222].IsList = false;

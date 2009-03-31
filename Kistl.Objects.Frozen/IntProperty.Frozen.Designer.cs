@@ -187,7 +187,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 			DataStore[28].IsIndexed = false;
 			DataStore[28].IsList = false;
 			DataStore[28].IsNullable = false;
-			DataStore[28].RelationEnd = null;
 			DataStore[28].Seal();
 			DataStore[126].AltText = @"test";
 			DataStore[126].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
@@ -199,7 +198,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 			DataStore[126].IsIndexed = false;
 			DataStore[126].IsList = false;
 			DataStore[126].IsNullable = true;
-			DataStore[126].RelationEnd = null;
 			DataStore[126].Seal();
 			DataStore[135].AltText = @"The CLR value of this entry";
 			DataStore[135].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
@@ -212,7 +210,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[89],
 			DataStore[135].IsIndexed = false;
 			DataStore[135].IsList = false;
 			DataStore[135].IsNullable = false;
-			DataStore[135].RelationEnd = null;
 			DataStore[135].Seal();
 			DataStore[168].AltText = @"The biggest value accepted by this constraint";
 			DataStore[168].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
@@ -225,7 +222,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[76],
 			DataStore[168].IsIndexed = false;
 			DataStore[168].IsList = false;
 			DataStore[168].IsNullable = false;
-			DataStore[168].RelationEnd = null;
 			DataStore[168].Seal();
 			DataStore[169].AltText = @"The smallest value accepted by this constraint";
 			DataStore[169].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
@@ -238,7 +234,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[75],
 			DataStore[169].IsIndexed = false;
 			DataStore[169].IsList = false;
 			DataStore[169].IsNullable = false;
-			DataStore[169].RelationEnd = null;
 			DataStore[169].Seal();
 			DataStore[172].AltText = @"The maximal length of this StringProperty";
 			DataStore[172].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
@@ -252,7 +247,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[151],
 			DataStore[172].IsIndexed = false;
 			DataStore[172].IsList = false;
 			DataStore[172].IsNullable = false;
-			DataStore[172].RelationEnd = null;
 			DataStore[172].Seal();
 			DataStore[173].AltText = @"The minimal length of this StringProperty";
 			DataStore[173].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
@@ -266,7 +260,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[150],
 			DataStore[173].IsIndexed = false;
 			DataStore[173].IsList = false;
 			DataStore[173].IsNullable = false;
-			DataStore[173].RelationEnd = null;
 			DataStore[173].Seal();
 			DataStore[217].AltText = @"Which RelationEndRole this End has";
 			DataStore[217].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
@@ -279,7 +272,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[216],
 			DataStore[217].IsIndexed = false;
 			DataStore[217].IsList = false;
 			DataStore[217].IsNullable = false;
-			DataStore[217].RelationEnd = null;
 			DataStore[217].Seal();
 	
 		}
