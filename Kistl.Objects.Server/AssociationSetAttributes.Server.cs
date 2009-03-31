@@ -465,7 +465,7 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Relation_RelationEnd_Relation_71
-    A: ZeroOrMore Relation as Relation
+    A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as A
     Preferred Storage: Left
 	*/
@@ -473,14 +473,14 @@ using Kistl.DALProvider.EF;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Relation_RelationEnd_Relation_71",
-    "Relation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Relation__Implementation__),
+    "Relation", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Relation__Implementation__),
     "A", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.RelationEnd__Implementation__)
     )]
 
 
 	/*
     Relation: FK_Relation_RelationEnd_Relation_72
-    A: ZeroOrMore Relation as Relation
+    A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as B
     Preferred Storage: Left
 	*/
@@ -488,7 +488,7 @@ using Kistl.DALProvider.EF;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Relation_RelationEnd_Relation_72",
-    "Relation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Relation__Implementation__),
+    "Relation", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Relation__Implementation__),
     "B", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.RelationEnd__Implementation__)
     )]
 

@@ -29,6 +29,160 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// The Relation using this RelationEnd as A
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Relation AParent
+        {
+            get
+            {
+                if (fk_AParent.HasValue)
+                    return Context.Find<Kistl.App.Base.Relation>(fk_AParent.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                
+                // shortcut noops
+                if (value == null && _fk_AParent == null)
+					return;
+                else if (value != null && value.ID == _fk_AParent)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("AParent");
+				           
+	            // cache old value to remove inverse references later
+                var oldValue = AParent;
+                
+				// next, set the local reference
+                _fk_AParent = value == null ? (int?)null : value.ID;
+				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+				if (oldValue != null)
+				{
+					// unset old reference
+					oldValue.A = null;
+				}
+
+                if (value != null)
+                {
+					// set new reference
+                    value.A = this;
+                }
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("AParent");
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_AParent
+        {
+            get
+            {
+                return _fk_AParent;
+            }
+            private set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_AParent != value)
+                {
+                    NotifyPropertyChanging("AParent");
+                    _fk_AParent = value;
+                    NotifyPropertyChanged("AParent");
+                }
+            }
+        }
+        private int? _fk_AParent;
+
+        /// <summary>
+        /// The Relation using this RelationEnd as B
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Relation BParent
+        {
+            get
+            {
+                if (fk_BParent.HasValue)
+                    return Context.Find<Kistl.App.Base.Relation>(fk_BParent.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                
+                // shortcut noops
+                if (value == null && _fk_BParent == null)
+					return;
+                else if (value != null && value.ID == _fk_BParent)
+					return;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("BParent");
+				           
+	            // cache old value to remove inverse references later
+                var oldValue = BParent;
+                
+				// next, set the local reference
+                _fk_BParent = value == null ? (int?)null : value.ID;
+				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+				if (oldValue != null)
+				{
+					// unset old reference
+					oldValue.B = null;
+				}
+
+                if (value != null)
+                {
+					// set new reference
+                    value.B = this;
+                }
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("BParent");
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_BParent
+        {
+            get
+            {
+                return _fk_BParent;
+            }
+            private set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_BParent != value)
+                {
+                    NotifyPropertyChanging("BParent");
+                    _fk_BParent = value;
+                    NotifyPropertyChanged("BParent");
+                }
+            }
+        }
+        private int? _fk_BParent;
+
+        /// <summary>
         /// Is true, if this RelationEnd persists the order of its elements
         /// </summary>
         // value type property
@@ -314,6 +468,8 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._fk_AParent, binStream);
+            BinarySerializer.ToStream(this._fk_BParent, binStream);
             BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
             BinarySerializer.ToStream((int)((RelationEnd)this).Multiplicity, binStream);
             BinarySerializer.ToStream(this._fk_Navigator, binStream);
@@ -325,6 +481,8 @@ namespace Kistl.App.Base
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_AParent, binStream);
+            BinarySerializer.FromStream(out this._fk_BParent, binStream);
             BinarySerializer.FromStream(out this._HasPersistentOrder, binStream);
             BinarySerializer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, binStream);
             BinarySerializer.FromStream(out this._fk_Navigator, binStream);

@@ -615,6 +615,14 @@
                         ToRole="Navigator" />
     <Property Name="Multiplicity" Type="Int32" Nullable="false" />
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="BParent__Implementation__"
+                        Relationship="Model.FK_Relation_RelationEnd_Relation_72"
+                        FromRole="B"
+                        ToRole="Relation" />
+    <NavigationProperty Name="AParent__Implementation__"
+                        Relationship="Model.FK_Relation_RelationEnd_Relation_71"
+                        FromRole="A"
+                        ToRole="Relation" />
   </EntityType>
   <EntityType Name="Taetigkeit">
     <Key>
@@ -1443,7 +1451,7 @@
   <Association Name="FK_Relation_RelationEnd_Relation_71" >
     <End Role="Relation"
          Type="Model.Relation" 
-         Multiplicity="*" />
+         Multiplicity="0..1" />
     <End Role="A"
          Type="Model.RelationEnd" 
          Multiplicity="0..1" />
@@ -1451,7 +1459,7 @@
   <Association Name="FK_Relation_RelationEnd_Relation_72" >
     <End Role="Relation"
          Type="Model.Relation" 
-         Multiplicity="*" />
+         Multiplicity="0..1" />
     <End Role="B"
          Type="Model.RelationEnd" 
          Multiplicity="0..1" />

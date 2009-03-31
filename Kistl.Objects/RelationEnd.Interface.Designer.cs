@@ -13,6 +13,20 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// The Relation using this RelationEnd as A
+        /// </summary>
+		Kistl.App.Base.Relation AParent {
+			get;
+			set;
+		}
+        /// <summary>
+        /// The Relation using this RelationEnd as B
+        /// </summary>
+		Kistl.App.Base.Relation BParent {
+			get;
+			set;
+		}
+        /// <summary>
         /// Is true, if this RelationEnd persists the order of its elements
         /// </summary>
 		bool HasPersistentOrder {

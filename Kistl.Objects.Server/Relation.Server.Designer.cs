@@ -56,7 +56,7 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Relation_RelationEnd_Relation_71
-    A: ZeroOrMore Relation as Relation
+    A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as A
     Preferred Storage: Left
     */
@@ -137,7 +137,7 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Relation_RelationEnd_Relation_72
-    A: ZeroOrMore Relation as Relation
+    A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as B
     Preferred Storage: Left
     */

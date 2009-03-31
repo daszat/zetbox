@@ -58,9 +58,28 @@ namespace Kistl.App.Base
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("A");
 				           
+	            // cache old value to remove inverse references later
+                var oldValue = A;
+                
 				// next, set the local reference
                 _fk_A = value == null ? (int?)null : value.ID;
 				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+				if (oldValue != null)
+				{
+					// unset old reference
+					oldValue.AParent = null;
+				}
+
+                if (value != null)
+                {
+					// set new reference
+                    value.AParent = this;
+                }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("A");
             }
@@ -116,9 +135,28 @@ namespace Kistl.App.Base
 				// Changing Event fires before anything is touched
 				NotifyPropertyChanging("B");
 				           
+	            // cache old value to remove inverse references later
+                var oldValue = B;
+                
 				// next, set the local reference
                 _fk_B = value == null ? (int?)null : value.ID;
 				
+				// now fixup redundant, inverse references
+				// The inverse navigator will also fire events when changed, so should 
+				// only be touched after setting the local value above. 
+				// TODO: for complete correctness, the "other" Changing event should also fire 
+				//       before the local value is changed
+				if (oldValue != null)
+				{
+					// unset old reference
+					oldValue.BParent = null;
+				}
+
+                if (value != null)
+                {
+					// set new reference
+                    value.BParent = this;
+                }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("B");
             }

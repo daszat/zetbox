@@ -175,7 +175,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(68);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(70);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[7] = 
@@ -449,6 +449,14 @@ namespace Kistl.App.Base
 			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[222] = 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[222] = 
 			DataStore[222] = new ObjectReferenceProperty__Implementation__Frozen(222);
+
+			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[223] = 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[223] = 
+			DataStore[223] = new ObjectReferenceProperty__Implementation__Frozen(223);
+
+			Kistl.App.Base.BaseProperty__Implementation__Frozen.DataStore[224] = 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[224] = 
+			DataStore[224] = new ObjectReferenceProperty__Implementation__Frozen(224);
 
 		}
 
@@ -1298,6 +1306,30 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[222].IsNullable = true;
 			DataStore[222].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[82];
 			DataStore[222].Seal();
+			DataStore[223].AltText = null;
+			DataStore[223].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[223].Description = @"The Relation using this RelationEnd as B";
+			DataStore[223].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[223].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
+			DataStore[223].PropertyName = @"BParent";
+			DataStore[223].IsIndexed = false;
+			DataStore[223].IsList = false;
+			DataStore[223].IsNullable = true;
+			DataStore[223].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[77];
+			DataStore[223].Seal();
+			DataStore[224].AltText = null;
+			DataStore[224].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[224].Description = @"The Relation using this RelationEnd as A";
+			DataStore[224].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[224].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
+			DataStore[224].PropertyName = @"AParent";
+			DataStore[224].IsIndexed = false;
+			DataStore[224].IsList = false;
+			DataStore[224].IsNullable = true;
+			DataStore[224].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[77];
+			DataStore[224].Seal();
 	
 		}
 

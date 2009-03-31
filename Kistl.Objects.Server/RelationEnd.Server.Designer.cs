@@ -52,6 +52,168 @@ namespace Kistl.App.Base
         private int _ID;
 
         /// <summary>
+        /// The Relation using this RelationEnd as A
+        /// </summary>
+    /*
+    Relation: FK_Relation_RelationEnd_Relation_71
+    A: ZeroOrOne Relation as Relation
+    B: ZeroOrOne RelationEnd as A
+    Preferred Storage: Left
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Relation AParent
+        {
+            get
+            {
+                return AParent__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                AParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_AParent
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && AParent != null)
+                {
+                    _fk_AParent = AParent.ID;
+                }
+                return _fk_AParent;
+            }
+            set
+            {
+                _fk_AParent = value;
+            }
+        }
+        private int? _fk_AParent;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_71", "Relation")]
+        public Kistl.App.Base.Relation__Implementation__ AParent__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Relation__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
+                        "Model.FK_Relation_RelationEnd_Relation_71",
+                        "Relation");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Relation__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
+                        "Model.FK_Relation_RelationEnd_Relation_71",
+                        "Relation");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Base.Relation__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
+        /// The Relation using this RelationEnd as B
+        /// </summary>
+    /*
+    Relation: FK_Relation_RelationEnd_Relation_72
+    A: ZeroOrOne Relation as Relation
+    B: ZeroOrOne RelationEnd as B
+    Preferred Storage: Left
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Relation BParent
+        {
+            get
+            {
+                return BParent__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                BParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_BParent
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && BParent != null)
+                {
+                    _fk_BParent = BParent.ID;
+                }
+                return _fk_BParent;
+            }
+            set
+            {
+                _fk_BParent = value;
+            }
+        }
+        private int? _fk_BParent;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_72", "Relation")]
+        public Kistl.App.Base.Relation__Implementation__ BParent__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Relation__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
+                        "Model.FK_Relation_RelationEnd_Relation_72",
+                        "Relation");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Relation__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Relation__Implementation__>(
+                        "Model.FK_Relation_RelationEnd_Relation_72",
+                        "Relation");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Base.Relation__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
         /// Is true, if this RelationEnd persists the order of its elements
         /// </summary>
         // value type property
@@ -380,6 +542,14 @@ namespace Kistl.App.Base
 				Navigator__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)Context.Find<Kistl.App.Base.ObjectReferenceProperty>(_fk_Navigator.Value);
 			else
 				Navigator__Implementation__ = null;
+			if (_fk_BParent.HasValue)
+				BParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)Context.Find<Kistl.App.Base.Relation>(_fk_BParent.Value);
+			else
+				BParent__Implementation__ = null;
+			if (_fk_AParent.HasValue)
+				AParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)Context.Find<Kistl.App.Base.Relation>(_fk_AParent.Value);
+			else
+				AParent__Implementation__ = null;
 		}
 
 #region Serializer
@@ -388,6 +558,8 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this.fk_AParent, binStream);
+            BinarySerializer.ToStream(this.fk_BParent, binStream);
             BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
             BinarySerializer.ToStream((int)((RelationEnd)this).Multiplicity, binStream);
             BinarySerializer.ToStream(this.fk_Navigator, binStream);
@@ -399,6 +571,16 @@ namespace Kistl.App.Base
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
+            {
+                var tmp = this.fk_AParent;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_AParent = tmp;
+            }
+            {
+                var tmp = this.fk_BParent;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_BParent = tmp;
+            }
             BinarySerializer.FromStream(out this._HasPersistentOrder, binStream);
             BinarySerializer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, binStream);
             {
