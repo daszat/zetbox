@@ -9,7 +9,7 @@ namespace Kistl.API
 {
     /// <summary>
     /// A ObservableCollection implementation, that reports changes to a parent Object.
-    /// Reports changes of the colelction _and_ changes of Items.
+    /// Reports changes of the collection _and_ changes of Items.
     /// </summary>
     /// <typeparam name="T">Collection Item Type</typeparam>
     public class NotifyingObservableCollection<T> : ObservableCollection<T> where T : INotifyPropertyChanged
