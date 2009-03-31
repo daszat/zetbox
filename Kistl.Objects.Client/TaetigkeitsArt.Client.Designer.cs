@@ -56,6 +56,16 @@ namespace Kistl.App.Zeiterfassung
 			return new InterfaceType(typeof(TaetigkeitsArt));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (TaetigkeitsArt)obj;
+			var otherImpl = (TaetigkeitsArt__Implementation__)obj;
+			var me = (TaetigkeitsArt)this;
+
+			me.Name = other.Name;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -96,7 +106,6 @@ namespace Kistl.App.Zeiterfassung
 					break;
 			}
 		}
-
 
 #region Serializer
 

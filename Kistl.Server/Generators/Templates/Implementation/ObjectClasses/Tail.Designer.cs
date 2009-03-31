@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
@@ -25,7 +26,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 13 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+#line 14 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        // tail template\r\n");
 this.WriteObjects("\r\n");

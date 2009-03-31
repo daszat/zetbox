@@ -181,6 +181,16 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(StructProperty));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (StructProperty)obj;
+			var otherImpl = (StructProperty__Implementation__)obj;
+			var me = (StructProperty)this;
+
+			this.fk_StructDefinition = otherImpl.fk_StructDefinition;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -222,7 +232,6 @@ namespace Kistl.App.Base
 			else
 				StructDefinition__Implementation__ = null;
 		}
-
 #region Serializer
 
 

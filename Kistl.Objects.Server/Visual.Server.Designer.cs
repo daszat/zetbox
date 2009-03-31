@@ -380,6 +380,19 @@ namespace Kistl.App.GUI
 			return new InterfaceType(typeof(Visual));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Visual)obj;
+			var otherImpl = (Visual__Implementation__)obj;
+			var me = (Visual)this;
+
+			me.ControlType = other.ControlType;
+			me.Description = other.Description;
+			this.fk_Method = otherImpl.fk_Method;
+			this.fk_Property = otherImpl.fk_Property;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -423,7 +436,6 @@ namespace Kistl.App.GUI
 			else
 				Method__Implementation__ = null;
 		}
-
 #region Serializer
 
 

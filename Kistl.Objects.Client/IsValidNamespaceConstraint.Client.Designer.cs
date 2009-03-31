@@ -75,6 +75,15 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(IsValidNamespaceConstraint));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (IsValidNamespaceConstraint)obj;
+			var otherImpl = (IsValidNamespaceConstraint__Implementation__)obj;
+			var me = (IsValidNamespaceConstraint)this;
+
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -115,7 +124,6 @@ namespace Kistl.App.Base
 					break;
 			}
 		}
-
 
 #region Serializer
 

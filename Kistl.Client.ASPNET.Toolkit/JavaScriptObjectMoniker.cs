@@ -56,7 +56,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
             else
             {
-                obj = ctx.Find(Type.GetInterfaceType(), ID);
+                obj = (IDataObject)ctx.Find(Type.GetInterfaceType(), ID);
             }
 
             return GuiApplicationContext.Current.Factory.CreateSpecificModel<DataObjectModel>(ctx, obj);

@@ -171,6 +171,19 @@ namespace Kistl.App.Projekte
 			return new InterfaceType(typeof(Mitarbeiter));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Mitarbeiter)obj;
+			var otherImpl = (Mitarbeiter__Implementation__)obj;
+			var me = (Mitarbeiter)this;
+
+			me.Geburtstag = other.Geburtstag;
+			me.Name = other.Name;
+			me.SVNr = other.SVNr;
+			me.TelefonNummer = other.TelefonNummer;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -211,7 +224,6 @@ namespace Kistl.App.Projekte
 					break;
 			}
 		}
-
 
 #region Serializer
 

@@ -61,6 +61,8 @@ namespace Kistl.API.Server.Tests
 
                 objImpl.TestNames__Implementation__.Add(ce);
             }
+
+            objImpl.ObjectState = DataObjectState.Unmodified;
         }
 
         [Test]
@@ -97,7 +99,7 @@ namespace Kistl.API.Server.Tests
         {
             ((TestObjClass__Implementation__)obj).ID = 10;
             obj.NotifyPropertyChanged("test");
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
         [Test]
@@ -107,13 +109,6 @@ namespace Kistl.API.Server.Tests
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
             ((TestObjClass__Implementation__)obj).ID = 10;
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-        }
-
-        [Test]
-        [ExpectedException(typeof(NotImplementedException))]
-        public void NotifyChange()
-        {
-            obj.NotifyChange();
         }
 
         [Test]

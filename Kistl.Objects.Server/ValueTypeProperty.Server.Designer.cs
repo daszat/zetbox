@@ -100,6 +100,15 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(ValueTypeProperty));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (ValueTypeProperty)obj;
+			var otherImpl = (ValueTypeProperty__Implementation__)obj;
+			var me = (ValueTypeProperty)this;
+
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -137,7 +146,6 @@ namespace Kistl.App.Base
 			
 			// fix direct object references
 		}
-
 #region Serializer
 
 

@@ -1,0 +1,38 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.ApplyChangesFromMethod"
+	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.ApplyChangesFromMethod" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="cls" Type="ObjectClass" %>
+
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (<%= cls.ClassName %>)obj;
+			var otherImpl = (<%= cls.ClassName + Kistl.API.Helper.ImplementationSuffix %>)obj;
+			var me = (<%= cls.ClassName %>)this;
+
+<%			
+			foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+			{
+%>
+			me.<%= prop.PropertyName %> = other.<%= prop.PropertyName %>;
+<%
+			}
+%>
+<%			
+			foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+			{
+%>
+			this.fk_<%= prop.PropertyName %> = otherImpl.fk_<%= prop.PropertyName %>;
+<%
+			}
+%>
+		}

@@ -351,6 +351,20 @@ namespace Kistl.App.Zeiterfassung
 			return new InterfaceType(typeof(Taetigkeit));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Taetigkeit)obj;
+			var otherImpl = (Taetigkeit__Implementation__)obj;
+			var me = (Taetigkeit)this;
+
+			me.Datum = other.Datum;
+			me.Dauer = other.Dauer;
+			this.fk_Mitarbeiter = otherImpl.fk_Mitarbeiter;
+			this.fk_TaetigkeitsArt = otherImpl.fk_TaetigkeitsArt;
+			this.fk_Zeitkonto = otherImpl.fk_Zeitkonto;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -398,7 +412,6 @@ namespace Kistl.App.Zeiterfassung
 			else
 				TaetigkeitsArt__Implementation__ = null;
 		}
-
 #region Serializer
 
 

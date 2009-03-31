@@ -73,6 +73,15 @@ namespace Kistl.DalProvider.Frozen
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Applies changes from another IPersistenceObject of the same interface type.
+        /// </summary>
+        /// <param name="obj"></param>
+        public virtual void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool IsAttached { get { return true; } }
 
         public bool IsReadonly { get { return IsSealed; } }

@@ -56,6 +56,16 @@ namespace Kistl.App.GUI
 			return new InterfaceType(typeof(Icon));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Icon)obj;
+			var otherImpl = (Icon__Implementation__)obj;
+			var me = (Icon)this;
+
+			me.IconFile = other.IconFile;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -96,7 +106,6 @@ namespace Kistl.App.GUI
 					break;
 			}
 		}
-
 
 #region Serializer
 

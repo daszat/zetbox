@@ -419,7 +419,7 @@ namespace Kistl.API.Client
                     obj = (BaseClientPersistenceObject)this.ContainsObject(newobj.GetInterfaceType(), newobj.ID) ?? newobj;
                 }
 
-                (obj).RecordNotifications();
+                obj.RecordNotifications();
                 if (obj != newobj)
                 {
                     obj.ApplyChangesFrom(newobj);
@@ -480,6 +480,42 @@ namespace Kistl.API.Client
             else
                 return GetQuery<T>().Single(o => o.ID == ID);
         }
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by ID
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
+        {
+            // TODO: check "type" for being a IDataObject
+            CheckDisposed();
+
+            // TODO: should be able to pass "type" unmodified, like this
+            // See Case 552
+            //return GetQuery(type).Single(o => o.ID == ID);
+
+            return (IPersistenceObject)this.GetType().FindGenericMethod("FindPersistenceObject",
+                new Type[] { ifType.Type },
+                new Type[] { typeof(int) })
+                .Invoke(this, new object[] { ID });
+        }
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by ID.
+        /// Note: This method is not supported on the client
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public T FindPersistenceObject<T>(int ID) where T : class, IPersistenceObject
+        {
+            throw new NotSupportedException();
+        }
+
 
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 

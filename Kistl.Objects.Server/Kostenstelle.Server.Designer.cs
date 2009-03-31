@@ -37,6 +37,15 @@ namespace Kistl.App.Zeiterfassung
 			return new InterfaceType(typeof(Kostenstelle));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Kostenstelle)obj;
+			var otherImpl = (Kostenstelle__Implementation__)obj;
+			var me = (Kostenstelle)this;
+
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -74,7 +83,6 @@ namespace Kistl.App.Zeiterfassung
 			
 			// fix direct object references
 		}
-
 #region Serializer
 
 

@@ -164,7 +164,6 @@ namespace Kistl.App.Base
 		internal static void FillDataStore() {
 	
 		}
-
 #region Serializer
 
         public override void ToStream(System.IO.BinaryWriter binStream)

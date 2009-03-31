@@ -156,6 +156,17 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(CLRObjectParameter));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (CLRObjectParameter)obj;
+			var otherImpl = (CLRObjectParameter__Implementation__)obj;
+			var me = (CLRObjectParameter)this;
+
+			me.FullTypeName = other.FullTypeName;
+			this.fk_Assembly = otherImpl.fk_Assembly;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -199,7 +210,6 @@ namespace Kistl.App.Base
 					break;
 			}
 		}
-
 
 #region Serializer
 

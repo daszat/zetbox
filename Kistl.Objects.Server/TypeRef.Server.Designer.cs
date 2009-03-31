@@ -232,6 +232,17 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(TypeRef));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (TypeRef)obj;
+			var otherImpl = (TypeRef__Implementation__)obj;
+			var me = (TypeRef)this;
+
+			me.FullName = other.FullName;
+			this.fk_Assembly = otherImpl.fk_Assembly;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -271,7 +282,6 @@ namespace Kistl.App.Base
 			else
 				Assembly__Implementation__ = null;
 		}
-
 #region Serializer
 
 

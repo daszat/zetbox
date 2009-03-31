@@ -86,5 +86,16 @@ namespace Kistl.API.Server.Mocks
         {
             throw new NotImplementedException();
         }
+
+        public override T FindPersistenceObject<T>(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

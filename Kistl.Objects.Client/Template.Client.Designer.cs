@@ -240,6 +240,19 @@ namespace Kistl.App.GUI
 			return new InterfaceType(typeof(Template));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Template)obj;
+			var otherImpl = (Template__Implementation__)obj;
+			var me = (Template)this;
+
+			me.DisplayedTypeFullName = other.DisplayedTypeFullName;
+			me.DisplayName = other.DisplayName;
+			this.fk_DisplayedTypeAssembly = otherImpl.fk_DisplayedTypeAssembly;
+			this.fk_VisualTree = otherImpl.fk_VisualTree;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -286,7 +299,6 @@ namespace Kistl.App.GUI
 					break;
 			}
 		}
-
 
 #region Serializer
 

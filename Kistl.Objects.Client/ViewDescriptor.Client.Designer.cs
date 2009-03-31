@@ -172,6 +172,18 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(ViewDescriptor));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (ViewDescriptor)obj;
+			var otherImpl = (ViewDescriptor__Implementation__)obj;
+			var me = (ViewDescriptor)this;
+
+			me.Toolkit = other.Toolkit;
+			this.fk_LayoutRef = otherImpl.fk_LayoutRef;
+			this.fk_ViewRef = otherImpl.fk_ViewRef;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -218,7 +230,6 @@ namespace Kistl.App.Base
 					break;
 			}
 		}
-
 
 #region Serializer
 

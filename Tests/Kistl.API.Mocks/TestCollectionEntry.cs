@@ -85,6 +85,21 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Applies changes from another IPersistenceObject of the same interface type.
+        /// </summary>
+        /// <param name="obj"></param>
+        public virtual void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+            if (obj.GetType().ToInterfaceType() != this.GetType().ToInterfaceType())
+                throw new ArgumentOutOfRangeException("obj");
+
+            this.ID = obj.ID;
+        }
+
+
         public DataObjectState ObjectState
         {
             get

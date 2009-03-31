@@ -102,11 +102,24 @@ ApplyReloadReferenceBody();
 #line 81 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("	\r\n");
 this.WriteObjects("		}\r\n");
+this.WriteObjects("		\r\n");
+this.WriteObjects("		public override void ApplyChangesFrom(IPersistenceObject obj)\r\n");
+this.WriteObjects("		{\r\n");
+this.WriteObjects("			base.ApplyChangesFrom(obj);\r\n");
+this.WriteObjects("			var other = (",  GetCeClassName() , ")obj;\r\n");
+this.WriteObjects("			var me = (",  GetCeClassName() , ")this;\r\n");
+this.WriteObjects("			\r\n");
+#line 91 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+ApplyChangesFromBody();
+
+#line 93 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+this.WriteObjects("			\r\n");
+this.WriteObjects("		}		\r\n");
 this.WriteObjects("\r\n");
-#line 85 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 97 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyClassTailTemplate();
 
-#line 87 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 99 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 

@@ -207,6 +207,17 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(Constraint));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Constraint)obj;
+			var otherImpl = (Constraint__Implementation__)obj;
+			var me = (Constraint)this;
+
+			me.Reason = other.Reason;
+			this.fk_ConstrainedProperty = otherImpl.fk_ConstrainedProperty;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -246,7 +257,6 @@ namespace Kistl.App.Base
 			else
 				ConstrainedProperty__Implementation__ = null;
 		}
-
 #region Serializer
 
 

@@ -228,6 +228,18 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(Module));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Module)obj;
+			var otherImpl = (Module__Implementation__)obj;
+			var me = (Module)this;
+
+			me.Description = other.Description;
+			me.ModuleName = other.ModuleName;
+			me.Namespace = other.Namespace;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -263,7 +275,6 @@ namespace Kistl.App.Base
 		{
 			// fix direct object references
 		}
-
 #region Serializer
 
 

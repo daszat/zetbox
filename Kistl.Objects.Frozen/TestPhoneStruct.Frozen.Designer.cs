@@ -80,7 +80,6 @@ namespace Kistl.App.Test
             : base(id)
         { }
 
-
 #region Serializer
 
         public override void ToStream(System.IO.BinaryWriter binStream)

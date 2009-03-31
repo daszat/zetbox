@@ -414,6 +414,23 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(RelationEnd));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (RelationEnd)obj;
+			var otherImpl = (RelationEnd__Implementation__)obj;
+			var me = (RelationEnd)this;
+
+			me.HasPersistentOrder = other.HasPersistentOrder;
+			me.Multiplicity = other.Multiplicity;
+			me.Role = other.Role;
+			me.RoleName = other.RoleName;
+			this.fk_AParent = otherImpl.fk_AParent;
+			this.fk_BParent = otherImpl.fk_BParent;
+			this.fk_Navigator = otherImpl.fk_Navigator;
+			this.fk_Type = otherImpl.fk_Type;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -460,7 +477,6 @@ namespace Kistl.App.Base
 					break;
 			}
 		}
-
 
 #region Serializer
 

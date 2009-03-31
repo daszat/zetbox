@@ -412,6 +412,20 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(Method));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Method)obj;
+			var otherImpl = (Method__Implementation__)obj;
+			var me = (Method)this;
+
+			me.Description = other.Description;
+			me.IsDisplayable = other.IsDisplayable;
+			me.MethodName = other.MethodName;
+			this.fk_Module = otherImpl.fk_Module;
+			this.fk_ObjectClass = otherImpl.fk_ObjectClass;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -455,7 +469,6 @@ namespace Kistl.App.Base
 			else
 				Module__Implementation__ = null;
 		}
-
 #region Serializer
 
 

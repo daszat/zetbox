@@ -286,6 +286,19 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(Relation));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Relation)obj;
+			var otherImpl = (Relation__Implementation__)obj;
+			var me = (Relation)this;
+
+			me.Description = other.Description;
+			me.Storage = other.Storage;
+			this.fk_A = otherImpl.fk_A;
+			this.fk_B = otherImpl.fk_B;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -329,7 +342,6 @@ namespace Kistl.App.Base
 			else
 				B__Implementation__ = null;
 		}
-
 #region Serializer
 
 

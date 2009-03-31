@@ -75,6 +75,15 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(IntParameter));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (IntParameter)obj;
+			var otherImpl = (IntParameter__Implementation__)obj;
+			var me = (IntParameter)this;
+
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -115,7 +124,6 @@ namespace Kistl.App.Base
 					break;
 			}
 		}
-
 
 #region Serializer
 

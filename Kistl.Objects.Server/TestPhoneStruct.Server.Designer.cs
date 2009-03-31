@@ -91,7 +91,6 @@ namespace Kistl.App.Test
             AttachToObject(parent, property);
         }
 
-
 #region Serializer
 
 

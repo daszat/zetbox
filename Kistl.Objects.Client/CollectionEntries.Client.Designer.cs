@@ -156,6 +156,15 @@ namespace Kistl.App.Base
 		{
 	
 		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__)obj;
+			var me = (ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__)this;
+			
+			
+		}		
 
 
     }
@@ -364,6 +373,17 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 		{
 	
 		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Projekt_Mitarbeiter23CollectionEntry__Implementation__)obj;
+			var me = (Projekt_Mitarbeiter23CollectionEntry__Implementation__)this;
+			
+            me.AIndex = other.AIndex;
+            me.BIndex = other.BIndex;
+			
+		}		
 
 
     }
@@ -518,6 +538,15 @@ namespace Kistl.App.GUI
 		{
 	
 		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Template_Menu61CollectionEntry__Implementation__)obj;
+			var me = (Template_Menu61CollectionEntry__Implementation__)this;
+			
+			
+		}		
 
 
     }
@@ -726,6 +755,17 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 		{
 	
 		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (TypeRef_GenericArguments66CollectionEntry__Implementation__)obj;
+			var me = (TypeRef_GenericArguments66CollectionEntry__Implementation__)this;
+			
+            me.AIndex = other.AIndex;
+            me.BIndex = other.BIndex;
+			
+		}		
 
 
     }
@@ -880,6 +920,15 @@ namespace Kistl.App.GUI
 		{
 	
 		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Visual_Children55CollectionEntry__Implementation__)obj;
+			var me = (Visual_Children55CollectionEntry__Implementation__)this;
+			
+			
+		}		
 
 
     }
@@ -1034,6 +1083,15 @@ namespace Kistl.App.GUI
 		{
 	
 		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Visual_ContextMenu60CollectionEntry__Implementation__)obj;
+			var me = (Visual_ContextMenu60CollectionEntry__Implementation__)this;
+			
+			
+		}		
 
 
     }
@@ -1189,6 +1247,15 @@ namespace Kistl.App.Zeiterfassung
 		{
 	
 		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)obj;
+			var me = (Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)this;
+			
+			
+		}		
 
 
     }
@@ -1307,6 +1374,16 @@ namespace Kistl.App.Projekte
 		{
 	
 		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Kunde_EMailsCollectionEntry__Implementation__)obj;
+			var me = (Kunde_EMailsCollectionEntry__Implementation__)this;
+			
+            me.B = other.B;
+			
+		}		
 
 
     }

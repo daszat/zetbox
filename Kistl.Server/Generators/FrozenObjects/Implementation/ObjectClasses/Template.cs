@@ -69,6 +69,11 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             ApplyListProperty(relEnd.Navigator, MembersToSerialize);
         }
 
+        protected override void ApplyApplyChangesFromMethod()
+        {
+            // Read only, no overload
+        }
+
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();

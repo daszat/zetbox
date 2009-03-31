@@ -34,5 +34,14 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         {
             return prop.IsIndexed;
         }
+
+        protected override void ApplyChangesFromBody()
+        {
+            if (IsOrdered())
+            {
+                this.WriteLine("            me.AIndex = other.AIndex;");
+            }
+            this.WriteLine("            me.B = other.B;");
+        }
     }
 }

@@ -94,9 +94,9 @@ namespace <%= DataType.Module.Namespace %>
 			return new InterfaceType(typeof(<%= DataType.ClassName %>));
 		}
 <%
+		ApplyApplyChangesFromMethod();
         ApplyClassTailTemplate();
 %>
-
 
 #region Serializer
 

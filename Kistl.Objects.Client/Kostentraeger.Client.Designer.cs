@@ -110,6 +110,16 @@ namespace Kistl.App.Zeiterfassung
 			return new InterfaceType(typeof(Kostentraeger));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Kostentraeger)obj;
+			var otherImpl = (Kostentraeger__Implementation__)obj;
+			var me = (Kostentraeger)this;
+
+			this.fk_Projekt = otherImpl.fk_Projekt;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -153,7 +163,6 @@ namespace Kistl.App.Zeiterfassung
 					break;
 			}
 		}
-
 
 #region Serializer
 

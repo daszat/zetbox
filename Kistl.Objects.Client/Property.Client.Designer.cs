@@ -402,6 +402,23 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(Property));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Property)obj;
+			var otherImpl = (Property__Implementation__)obj;
+			var me = (Property)this;
+
+			me.AltText = other.AltText;
+			me.Description = other.Description;
+			me.IsIndexed = other.IsIndexed;
+			me.IsList = other.IsList;
+			me.IsNullable = other.IsNullable;
+			me.PropertyName = other.PropertyName;
+			this.fk_Module = otherImpl.fk_Module;
+			this.fk_ObjectClass = otherImpl.fk_ObjectClass;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -448,7 +465,6 @@ namespace Kistl.App.Base
 					break;
 			}
 		}
-
 
 #region Serializer
 

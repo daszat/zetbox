@@ -102,6 +102,12 @@ namespace Kistl.API
         void DetachFromContext(IKistlContext ctx);
 
         /// <summary>
+        /// Applies changes from another IPersistenceObject of the same interface type.
+        /// </summary>
+        /// <param name="obj"></param>
+        void ApplyChangesFrom(IPersistenceObject obj);
+
+        /// <summary>
         /// Returns true if this Object is attached to a Context
         /// </summary>
         bool IsAttached { get; }
@@ -123,11 +129,6 @@ namespace Kistl.API
     /// </summary>
     public interface IDataObject : IPersistenceObject, IDataErrorInfo
     {
-        /// <summary>
-        /// Not implemented yet.
-        /// </summary>
-        void NotifyChange();
-
         /// <summary>
         /// Fires an Event before an Object is saved.
         /// </summary>

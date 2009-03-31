@@ -75,7 +75,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                 }
                 else
                 {
-                    return KistlContextManagerModule.KistlContext.Find(new InterfaceType(typeof(IDataObject)),
+                    return (IDataObject)KistlContextManagerModule.KistlContext.Find(new InterfaceType(typeof(IDataObject)),
                         moniker.FromJSON(KistlContextManagerModule.KistlContext).ID);
                 }
             }            

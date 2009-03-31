@@ -449,6 +449,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\StructSerialization.Designer.cs">
       <DependentUpon>StructSerialization.cst</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -730,6 +735,10 @@
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ApplyChangesFromMethod.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst">
       <Generator>Arebis Template Processor</Generator>

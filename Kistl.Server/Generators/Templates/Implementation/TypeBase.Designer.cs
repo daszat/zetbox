@@ -115,10 +115,10 @@ this.WriteObjects("		{\r\n");
 this.WriteObjects("			return new InterfaceType(typeof(",  DataType.ClassName , "));\r\n");
 this.WriteObjects("		}\r\n");
 #line 97 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
-ApplyClassTailTemplate();
+ApplyApplyChangesFromMethod();
+        ApplyClassTailTemplate();
 
-#line 99 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
-this.WriteObjects("\r\n");
+#line 100 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("#region Serializer\r\n");
 this.WriteObjects("\r\n");

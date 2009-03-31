@@ -104,6 +104,12 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             return inherited.Where(m => !m.IsDefaultMethod());
         }
 
+        protected override void ApplyApplyChangesFromMethod()
+        {
+            base.ApplyApplyChangesFromMethod();
+            this.Host.CallTemplate("Implementation.ObjectClasses.ApplyChangesFromMethod", ctx, this.DataType);
+        }
+
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();

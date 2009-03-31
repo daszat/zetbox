@@ -204,6 +204,17 @@ namespace Kistl.App.Test
 			return new InterfaceType(typeof(TestCustomObject));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (TestCustomObject)obj;
+			var otherImpl = (TestCustomObject__Implementation__)obj;
+			var me = (TestCustomObject)this;
+
+			me.Birthday = other.Birthday;
+			me.PersonName = other.PersonName;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -239,7 +250,6 @@ namespace Kistl.App.Test
 		{
 			// fix direct object references
 		}
-
 #region Serializer
 
 

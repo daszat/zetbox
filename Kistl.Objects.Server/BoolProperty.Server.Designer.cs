@@ -100,6 +100,15 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(BoolProperty));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (BoolProperty)obj;
+			var otherImpl = (BoolProperty__Implementation__)obj;
+			var me = (BoolProperty)this;
+
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -137,7 +146,6 @@ namespace Kistl.App.Base
 			
 			// fix direct object references
 		}
-
 #region Serializer
 
 

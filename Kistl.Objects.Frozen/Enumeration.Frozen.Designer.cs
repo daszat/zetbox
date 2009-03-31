@@ -253,7 +253,6 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[65],
 			DataStore[81].Seal();
 	
 		}
-
 #region Serializer
 
         public override void ToStream(System.IO.BinaryWriter binStream)

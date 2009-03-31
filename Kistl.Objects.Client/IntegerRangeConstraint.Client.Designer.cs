@@ -121,6 +121,17 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(IntegerRangeConstraint));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (IntegerRangeConstraint)obj;
+			var otherImpl = (IntegerRangeConstraint__Implementation__)obj;
+			var me = (IntegerRangeConstraint)this;
+
+			me.Max = other.Max;
+			me.Min = other.Min;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -161,7 +172,6 @@ namespace Kistl.App.Base
 					break;
 			}
 		}
-
 
 #region Serializer
 

@@ -262,6 +262,17 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(ObjectReferenceProperty));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (ObjectReferenceProperty)obj;
+			var otherImpl = (ObjectReferenceProperty__Implementation__)obj;
+			var me = (ObjectReferenceProperty)this;
+
+			this.fk_ReferenceObjectClass = otherImpl.fk_ReferenceObjectClass;
+			this.fk_RelationEnd = otherImpl.fk_RelationEnd;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -307,7 +318,6 @@ namespace Kistl.App.Base
 			else
 				RelationEnd__Implementation__ = null;
 		}
-
 #region Serializer
 
 

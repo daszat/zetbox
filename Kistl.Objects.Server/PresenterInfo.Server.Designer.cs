@@ -312,6 +312,20 @@ namespace Kistl.App.GUI
 			return new InterfaceType(typeof(PresenterInfo));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (PresenterInfo)obj;
+			var otherImpl = (PresenterInfo__Implementation__)obj;
+			var me = (PresenterInfo)this;
+
+			me.ControlType = other.ControlType;
+			me.DataTypeName = other.DataTypeName;
+			me.PresenterTypeName = other.PresenterTypeName;
+			this.fk_DataAssembly = otherImpl.fk_DataAssembly;
+			this.fk_PresenterAssembly = otherImpl.fk_PresenterAssembly;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -355,7 +369,6 @@ namespace Kistl.App.GUI
 			else
 				DataAssembly__Implementation__ = null;
 		}
-
 #region Serializer
 
 

@@ -53,5 +53,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected virtual void ApplyClassTailTemplate() { }
 
+        protected virtual void ApplyChangesFromBody() {  }
+
     }
 }

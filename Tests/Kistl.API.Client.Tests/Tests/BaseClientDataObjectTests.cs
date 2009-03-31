@@ -78,13 +78,6 @@ namespace Kistl.API.Client.Tests
         }
 
         [Test]
-        public void NotifyChange()
-        {
-            obj.NotifyChange();
-            Assert.That(PropertyChangedCalled, Is.True);
-        }
-
-        [Test]
         public void NotifyPropertyChanged_ing()
         {
             obj.NotifyPropertyChanging("ID");

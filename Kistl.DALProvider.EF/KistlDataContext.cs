@@ -120,6 +120,16 @@ namespace Kistl.DALProvider.EF
         /// <returns>IQueryable</returns>
         public override IQueryable<T> GetQuery<T>()
         {
+            return GetPersistenceObjectQuery<T>();
+        }
+
+        /// <summary>
+        /// Returns a Query by T
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <returns>IQueryable</returns>
+        private IQueryable<T> GetPersistenceObjectQuery<T>() where T : IPersistenceObject
+        {
             Type type = typeof(T).ToImplementationType();
 
             if (!_table.ContainsKey(type))
@@ -134,6 +144,7 @@ namespace Kistl.DALProvider.EF
             // return (ObjectQuery<T>)_table[type];
             return ((IQueryable<T>)_table[type]).OfType<T>();
         }
+
 
         public System.Collections.IList GetListHack<T>()
         {
@@ -273,23 +284,7 @@ namespace Kistl.DALProvider.EF
             string entityName = GetEntityName(obj.GetType());
             if (obj.ObjectState == DataObjectState.New)
             {
-                // http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=2232129&SiteID=1
-                // Another way to solve your dilemma would be to go with your second approach 
-                // where you attach the whole graph, then detach the added things, 
-                // *set the key to null*, and then add them back.  
-                // Technically this would work, but it's less efficient than avoiding attaching 
-                // the things which are new in the first place.
-                IEntityStateObject entityObj = (IEntityStateObject)obj;
-                if (entityObj.EntityState != System.Data.EntityState.Added)
-                {
-                    if (entityObj.EntityState != System.Data.EntityState.Detached)
-                    {
-                        _ctx.Detach(entityObj);
-                        entityObj.EntityKey = null;
-                    }
-
-                    _ctx.AddObject(entityName, obj);
-                }
+                _ctx.AddObject(entityName, obj);
             }
             else if (obj.ObjectState == DataObjectState.Deleted)
             {
@@ -370,6 +365,62 @@ namespace Kistl.DALProvider.EF
                 // Since we do not want to rely on the exception string, 
                 // we have to check whether there is _any_ object with that ID
                 if (GetQuery<T>().Count(o => o.ID == ID) == 0)
+                {
+                    throw new ArgumentOutOfRangeException("ID", ID, "No such object");
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
+        /// This could be moved to a common abstract IKistlContextBase
+        /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
+        {
+            try
+            {
+                // See Case 552
+                return (IPersistenceObject)this.GetType().FindGenericMethod("FindPersistenceObject", new Type[] { ifType.Type }, new Type[] { typeof(int) }).Invoke(this, new object[] { ID });
+            }
+            catch (TargetInvocationException tiex)
+            {
+                // unwrap "business" exception
+                throw tiex.InnerException;
+            }
+        }
+
+        /// <summary>
+        /// Find the Object of the given type by ID
+        /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
+        /// This could be moved to a common abstract IKistlContextBase
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        public override T FindPersistenceObject<T>(int ID)
+        {
+            try
+            {
+                return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
+                    ?? GetPersistenceObjectQuery<T>().First(o => o.ID == ID);
+            }
+            catch (InvalidOperationException)
+            {
+                // if the IOEx happened because there is no such object, we 
+                // want to report this with an ArgumentOutOfRangeException, 
+                // else, we just want to pass the exception on.
+                // Since we do not want to rely on the exception string, 
+                // we have to check whether there is _any_ object with that ID
+                if (GetPersistenceObjectQuery<T>().Count(o => o.ID == ID) == 0)
                 {
                     throw new ArgumentOutOfRangeException("ID", ID, "No such object");
                 }

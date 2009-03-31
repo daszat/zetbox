@@ -105,6 +105,15 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(Enumeration));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Enumeration)obj;
+			var otherImpl = (Enumeration__Implementation__)obj;
+			var me = (Enumeration)this;
+
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -145,7 +154,6 @@ namespace Kistl.App.Base
 					break;
 			}
 		}
-
 
 #region Serializer
 

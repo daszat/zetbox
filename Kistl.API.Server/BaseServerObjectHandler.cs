@@ -259,9 +259,45 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public virtual IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects)
         {
+            // Fist of all, attach new Objects
+            foreach (var obj in objects.Where(o => o.ObjectState == DataObjectState.New))
+            {
+                ctx.Attach(obj);
+            }
+
+            // then apply changes
+            foreach (var obj in objects.Where(o => o.ObjectState == DataObjectState.Modified))
+            {
+                var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
+                ((BasePersistenceObject)ctxObj).RecordNotifications();
+                ctxObj.ApplyChangesFrom(obj);
+            }
+
+            // then update references
+            foreach (var obj in objects.Where(o => o.ObjectState != DataObjectState.Deleted))
+            {
+                var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
+                ((BasePersistenceObject)ctxObj).RecordNotifications();
+                ctxObj.ReloadReferences();
+            }
+
+            // then delete objects
+            foreach (var obj in objects.Where(o => o.ObjectState == DataObjectState.Deleted))
+            {
+                var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
+                ctx.Delete(ctxObj);
+            }
+
+            // Playback notifications
+            foreach (var obj in objects.Where(o => o.ObjectState != DataObjectState.Deleted))
+            {
+                var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
+                ((BasePersistenceObject)ctxObj).PlaybackNotifications();
+            }
+
             ctx.SubmitChanges();
 
-            // TODO: Detect changes made by server nethod calls
+            // TODO: Detect changes made by server method calls
             return objects.Where(o => o.ObjectState != DataObjectState.Deleted);
         }
     }

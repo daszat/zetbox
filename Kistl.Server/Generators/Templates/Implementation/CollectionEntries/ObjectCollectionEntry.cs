@@ -37,5 +37,17 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             return rel.NeedsPositionStorage(RelationEndRole.A) || rel.NeedsPositionStorage(RelationEndRole.B);
         }
 
+        protected override void ApplyChangesFromBody()
+        {
+            if (rel.NeedsPositionStorage(RelationEndRole.A))
+            {
+                this.WriteLine("            me.AIndex = other.AIndex;");
+            }
+            if (rel.NeedsPositionStorage(RelationEndRole.B))
+            {
+                this.WriteLine("            me.BIndex = other.BIndex;");
+            }
+        }
+
     }
 }

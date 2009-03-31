@@ -130,15 +130,15 @@ namespace Kistl.API.Server.Mocks
             BinarySerializer.FromStream(out id, sr);
             if (id.HasValue)
             {
-                this.BaseTestObjClass = KistlContextMock.TestObjClasses[id.Value];
+                this._BaseTestObjClass = KistlContextMock.TestObjClasses[id.Value];
             }
             else
             {
-                this.BaseTestObjClass = null;
+                this._BaseTestObjClass = null;
             }
 
             BinarySerializer.FromStream(out this._StringProp, sr);
-            BinarySerializer.FromStreamConverter(value => this.TestEnumProp = (TestEnum)value, sr);
+            BinarySerializer.FromStreamConverter(value => this._TestEnumProp = (TestEnum)value, sr);
             BinarySerializer.FromStreamCollectionEntries(this.TestNames__Implementation__, sr);
         }
 

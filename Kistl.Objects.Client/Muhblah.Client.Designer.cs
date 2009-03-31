@@ -33,6 +33,15 @@ namespace Kistl.App.Test
 			return new InterfaceType(typeof(Muhblah));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Muhblah)obj;
+			var otherImpl = (Muhblah__Implementation__)obj;
+			var me = (Muhblah)this;
+
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -73,7 +82,6 @@ namespace Kistl.App.Test
 					break;
 			}
 		}
-
 
 #region Serializer
 

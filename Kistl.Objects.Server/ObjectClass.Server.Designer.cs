@@ -457,6 +457,20 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(ObjectClass));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (ObjectClass)obj;
+			var otherImpl = (ObjectClass__Implementation__)obj;
+			var me = (ObjectClass)this;
+
+			me.IsFrozenObject = other.IsFrozenObject;
+			me.IsSimpleObject = other.IsSimpleObject;
+			me.TableName = other.TableName;
+			this.fk_BaseObjectClass = otherImpl.fk_BaseObjectClass;
+			this.fk_DefaultModel = otherImpl.fk_DefaultModel;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -502,7 +516,6 @@ namespace Kistl.App.Base
 			else
 				DefaultModel__Implementation__ = null;
 		}
-
 #region Serializer
 
 

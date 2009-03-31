@@ -104,6 +104,16 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
+        public T FindPersistenceObject<T>(int ID) where T : class, IPersistenceObject
+        {
+            throw new NotImplementedException();
+        }
+
+        public IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
+        {
+            throw new NotImplementedException();
+        }
+
         public T Find<T>(int ID) where T : class, IDataObject
         {
             throw new NotImplementedException();

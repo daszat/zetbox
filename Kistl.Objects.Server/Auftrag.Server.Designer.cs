@@ -372,6 +372,20 @@ namespace Kistl.App.Projekte
 			return new InterfaceType(typeof(Auftrag));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Auftrag)obj;
+			var otherImpl = (Auftrag__Implementation__)obj;
+			var me = (Auftrag)this;
+
+			me.Auftragsname = other.Auftragsname;
+			me.Auftragswert = other.Auftragswert;
+			this.fk_Kunde = otherImpl.fk_Kunde;
+			this.fk_Mitarbeiter = otherImpl.fk_Mitarbeiter;
+			this.fk_Projekt = otherImpl.fk_Projekt;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -419,7 +433,6 @@ namespace Kistl.App.Projekte
 			else
 				Kunde__Implementation__ = null;
 		}
-
 #region Serializer
 
 

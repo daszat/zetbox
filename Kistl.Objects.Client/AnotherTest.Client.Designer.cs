@@ -33,6 +33,15 @@ namespace Kistl.App.Test
 			return new InterfaceType(typeof(AnotherTest));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (AnotherTest)obj;
+			var otherImpl = (AnotherTest__Implementation__)obj;
+			var me = (AnotherTest)this;
+
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -73,7 +82,6 @@ namespace Kistl.App.Test
 					break;
 			}
 		}
-
 
 #region Serializer
 

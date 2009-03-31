@@ -131,12 +131,14 @@ namespace Kistl.API
         /// </summary>
         /// <param name="ifType">Type of the new ICollectionEntry</param>
         /// <returns>A new ICollectionEntry</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         ICollectionEntry CreateCollectionEntry(InterfaceType ifType);
         /// <summary>
         /// Creates a new ICollectionEntry.
         /// </summary>
         /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
         /// <returns>A new ICollectionEntry</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         T CreateCollectionEntry<T>() where T : ICollectionEntry;
 
         /// <summary>
@@ -170,6 +172,23 @@ namespace Kistl.API
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         T Find<T>(int ID) where T : class, IDataObject;
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by ID
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID);
+        /// <summary>
+        /// Find the Persistence Object of the given type by ID
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        T FindPersistenceObject<T>(int ID) where T : class, IPersistenceObject;        
 
 
         /// <summary>

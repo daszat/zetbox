@@ -188,7 +188,6 @@ namespace Kistl.App.Base
 			DataStore[33].Seal();
 	
 		}
-
 #region Serializer
 
         public override void ToStream(System.IO.BinaryWriter binStream)

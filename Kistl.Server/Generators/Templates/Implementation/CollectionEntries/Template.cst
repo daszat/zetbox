@@ -80,6 +80,18 @@
 %>
 	
 		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (<%= GetCeClassName() %>)obj;
+			var me = (<%= GetCeClassName() %>)this;
+			
+<%
+			ApplyChangesFromBody();
+%>
+			
+		}		
 
 <%
     ApplyClassTailTemplate();

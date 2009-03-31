@@ -96,6 +96,15 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(DateTimeProperty));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (DateTimeProperty)obj;
+			var otherImpl = (DateTimeProperty__Implementation__)obj;
+			var me = (DateTimeProperty)this;
+
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -136,7 +145,6 @@ namespace Kistl.App.Base
 					break;
 			}
 		}
-
 
 #region Serializer
 

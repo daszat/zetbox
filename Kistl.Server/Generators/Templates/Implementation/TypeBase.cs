@@ -54,6 +54,11 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// </summary>
         protected virtual void ApplyClassTailTemplate() { }
 
+        /// <summary>
+        /// is called to apply a optional ApplyChangesFrom override
+        /// </summary>
+        protected virtual void ApplyApplyChangesFromMethod() { }
+
         protected virtual void ApplyIDPropertyTemplate() { }
 
         /// <returns>The base class to inherit from.</returns>

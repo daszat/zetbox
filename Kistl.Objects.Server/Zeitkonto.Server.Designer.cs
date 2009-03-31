@@ -228,6 +228,18 @@ namespace Kistl.App.Zeiterfassung
 			return new InterfaceType(typeof(Zeitkonto));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Zeitkonto)obj;
+			var otherImpl = (Zeitkonto__Implementation__)obj;
+			var me = (Zeitkonto)this;
+
+			me.AktuelleStunden = other.AktuelleStunden;
+			me.Kontoname = other.Kontoname;
+			me.MaxStunden = other.MaxStunden;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -263,7 +275,6 @@ namespace Kistl.App.Zeiterfassung
 		{
 			// fix direct object references
 		}
-
 #region Serializer
 
 

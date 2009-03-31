@@ -13,12 +13,5 @@ namespace Kistl.API.Tests.Skeletons
         where T : IDataObject, new()
     {
 
-        [Test]
-        [Ignore("not implemented")]
-        public void NotifyChange()
-        {
-            obj.NotifyChange();
-        }
-
     }
 }

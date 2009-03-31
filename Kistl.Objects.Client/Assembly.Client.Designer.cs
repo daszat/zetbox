@@ -177,6 +177,18 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(Assembly));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Assembly)obj;
+			var otherImpl = (Assembly__Implementation__)obj;
+			var me = (Assembly)this;
+
+			me.AssemblyName = other.AssemblyName;
+			me.IsClientAssembly = other.IsClientAssembly;
+			this.fk_Module = otherImpl.fk_Module;
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -220,7 +232,6 @@ namespace Kistl.App.Base
 					break;
 			}
 		}
-
 
 #region Serializer
 

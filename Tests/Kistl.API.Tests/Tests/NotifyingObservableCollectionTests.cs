@@ -44,16 +44,6 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        public void Event()
-        {
-            bool hasChanged = false;
-            parent.PropertyChanged += new PropertyChangedEventHandler(delegate(object sender, PropertyChangedEventArgs e) { hasChanged = true; });
-            a.NotifyChange();
-
-            Assert.That(hasChanged, Is.True);
-        }
-
-        [Test]
         public void SetItem()
         {
             bool hasChanged = false;

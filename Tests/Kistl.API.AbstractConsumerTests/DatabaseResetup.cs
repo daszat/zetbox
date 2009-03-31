@@ -19,7 +19,7 @@ namespace Kistl.API.AbstractConsumerTests
     public abstract class DatabaseResetup
     {
         // TODO: don't hardcode db script path here
-        readonly static string CurrentDbScript = @"P:\Kistl\Kistl.Server\Database\Database.66.sql";
+        readonly static string CurrentDbScript = @"P:\Kistl\Kistl.Server\Database\Database.68.sql";
 
         protected void ResetDatabase(KistlConfig config)
         {

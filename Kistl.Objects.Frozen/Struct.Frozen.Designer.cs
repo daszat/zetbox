@@ -132,7 +132,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[128],
 			DataStore[63].Seal();
 	
 		}
-
 #region Serializer
 
         public override void ToStream(System.IO.BinaryWriter binStream)

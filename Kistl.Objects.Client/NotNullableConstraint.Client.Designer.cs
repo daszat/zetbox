@@ -75,6 +75,15 @@ namespace Kistl.App.Base
 			return new InterfaceType(typeof(NotNullableConstraint));
 		}
 
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (NotNullableConstraint)obj;
+			var otherImpl = (NotNullableConstraint__Implementation__)obj;
+			var me = (NotNullableConstraint)this;
+
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
@@ -115,7 +124,6 @@ namespace Kistl.App.Base
 					break;
 			}
 		}
-
 
 #region Serializer
 

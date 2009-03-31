@@ -200,13 +200,6 @@ namespace Kistl.API.Server
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public abstract IDataObject Find(InterfaceType type, int ID);
 
-        public IKistlContext GetReadonlyContext()
-        {
-            // TODO: actually create a ThreadStatic read-only variant of this to allow for a common cache
-            //return this;
-            return FrozenContext.Single;
-        }
-
         /// <summary>
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
@@ -216,6 +209,31 @@ namespace Kistl.API.Server
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public abstract T Find<T>(int ID) where T : class, IDataObject;
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by ID
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID);
+        /// <summary>
+        /// Find the Persistence Object of the given type by ID
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="ID">ID of the Object to find.</param>
+        /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract T FindPersistenceObject<T>(int ID) where T : class, IPersistenceObject;        
+
+
+        public IKistlContext GetReadonlyContext()
+        {
+            // TODO: actually create a ThreadStatic read-only variant of this to allow for a common cache
+            //return this;
+            return FrozenContext.Single;
+        }
 
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 
