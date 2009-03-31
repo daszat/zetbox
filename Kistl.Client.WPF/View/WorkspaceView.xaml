@@ -63,20 +63,22 @@
                 <GridSplitter Grid.Row="1"
                               HorizontalAlignment="Stretch" />
 
-                <ListBox Grid.Row="2"
-                         x:Name="ObjectList"
-                         ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}"
-                         SelectedItem="{Binding SelectedItem}"
-                         ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                         BorderThickness="0">
-                    <ListBox.Template>
-                        <ControlTemplate>
-                            <ScrollViewer HorizontalScrollBarVisibility="Visible">
-                                <StackPanel IsItemsHost="True" />
-                            </ScrollViewer>
-                        </ControlTemplate>
-                    </ListBox.Template>
-                </ListBox>
+                <DockPanel Grid.Row="2">
+                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center">Existing Instances:</TextBlock>
+                    <ListBox x:Name="ObjectList"
+                             ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}"
+                             SelectedItem="{Binding SelectedItem}"
+                             ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                             BorderThickness="0">
+                        <ListBox.Template>
+                            <ControlTemplate>
+                                <ScrollViewer HorizontalScrollBarVisibility="Visible">
+                                    <StackPanel IsItemsHost="True" />
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </ListBox.Template>
+                    </ListBox>
+                </DockPanel>
 
                 <GridSplitter Grid.Row="3"
                               HorizontalAlignment="Stretch" />
