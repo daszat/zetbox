@@ -242,15 +242,23 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        #endregion
-
-        #region IReadOnlyValueModel<ReadOnlyObservableCollection<string>> Members
-
-        public new ReadOnlyObservableCollection<string> Value
+        private AsyncList<TElement, string> _stringListCache;
+        ReadOnlyObservableCollection<string> IReadOnlyValueModel<ReadOnlyObservableCollection<string>>.Value
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                if (_stringListCache == null)
+                {
+                    _stringListCache = AsyncListFactory.UiCreateMutable<TElement, string>(
+                        AppContext, DataContext, this,
+                        () => this.Value,
+                        () => this.Value,
+                        i => i.ToString(),
+                        ToItem);
+                }
+                return _stringListCache.GetUiView();
+            }
         }
-
         #endregion
     }
 }
