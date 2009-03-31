@@ -139,6 +139,25 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        private string _longNameCache;
+        public string LongName
+        {
+            get
+            {
+                UI.Verify();
+                return _longNameCache;
+            }
+            private set
+            {
+                UI.Verify();
+                if (value != _longNameCache)
+                {
+                    _longNameCache = value;
+                    OnPropertyChanged("LongName");
+                }
+            }
+        }
+
         private string _iconPathCache;
         public string IconPath
         {
@@ -302,8 +321,14 @@ namespace Kistl.Client.Presentables
             Async.Verify();
 
             // update Name
-            _toStringCache = String.Format("{0} {1}", _object.ObjectState.ToUserString(), _object.ToString());
+            _toStringCache = String.Format("{0} {1}",
+                _object.ObjectState.ToUserString(),
+                _object.ToString());
+            _longNameCache = String.Format("{0}: {1}",
+                _object.GetInterfaceType().Type.FullName,
+                _toStringCache);
             AsyncOnPropertyChanged("Name");
+            AsyncOnPropertyChanged("LongName");
 
             // update IconPath
             Icon icon = AsyncGetIcon();

@@ -21,10 +21,16 @@
                  ItemsSource="{Binding Actions}"
                  ItemTemplateSelector="{StaticResource defaultTemplateSelector}" />
 
-        <TextBlock DockPanel.Dock="Top"
-                   Text="{Binding Name}"
-                   HorizontalAlignment="Center" />
-
+        <DockPanel DockPanel.Dock="Top">
+            <Image DockPanel.Dock="Left"
+                   Source="{Binding IconPath}"
+                   Margin="4,2,2,2"
+                   Width="14"
+                   Height="14" />
+            <TextBlock Text="{Binding LongName}"
+                       HorizontalAlignment="Center" />
+        </DockPanel>
+        
         <ctrls:LoadingIndicator DockPanel.Dock="Top" />
 
         <ScrollViewer HorizontalScrollBarVisibility="Disabled">
@@ -33,7 +39,7 @@
                       BorderThickness="0"
                       ItemTemplateSelector="{StaticResource defaultTemplateSelector}"
                       HorizontalContentAlignment="Stretch">
-             
+
                 <!-- use the whole horizontal space, but no more -->
                 <ListView.ItemContainerStyle>
                     <Style>
@@ -41,7 +47,7 @@
                                 Value="Top" />
                     </Style>
                 </ListView.ItemContainerStyle>
-            
+
                 <ListView.Template>
                     <ControlTemplate>
                         <DockPanel IsItemsHost="True"
