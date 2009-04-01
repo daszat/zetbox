@@ -116,7 +116,7 @@ namespace Kistl.API.Client.Tests
 
         public IEnumerable<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent)
         {
-            throw new NotImplementedException();
+            return new List<INewCollectionEntry<A, B>>();
         }
 
         #endregion

@@ -25,8 +25,6 @@ namespace Kistl.API.Client.Tests
             currentCustomActionsManager = (CustomActionsManagerAPITest)testCtx.CustomActionsManager;
             currentCustomActionsManager.Reset();
 
-            // Set Proxy
-            Proxy.SetProxy(new TestProxy());
             ctx = KistlContext.GetContext();
             //CacheController<Kistl.API.IDataObject>.Current.Clear();
         }
