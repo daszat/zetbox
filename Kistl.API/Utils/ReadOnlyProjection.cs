@@ -8,7 +8,7 @@ namespace Kistl.API.Utils
 {
 
     public interface IReadOnlyCollection<TValue>
-        : IList<TValue>, ICollection<TValue>, IEnumerable<TValue>, IList, ICollection, IEnumerable
+        : IList<TValue>, ICollection<TValue>, IEnumerable<TValue>
     {
     }
 
@@ -18,7 +18,7 @@ namespace Kistl.API.Utils
     /// <typeparam name="TValue">The type of elements in the underlying collection.</typeparam>
     /// <typeparam name="TResult">The type of projected elements in the collection.</typeparam>
     public class ReadOnlyProjection<TValue, TResult>
-        : IReadOnlyCollection<TResult>
+        : IReadOnlyCollection<TResult>, IList, ICollection, IEnumerable
     {
         private IList<TValue> _list;
         private Func<TValue, TResult> _select;

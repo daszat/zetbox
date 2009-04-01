@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.API.Utils;
 using Kistl.App.Base;
 
 namespace Kistl.Client.Presentables.Assemblies
@@ -24,43 +25,20 @@ namespace Kistl.Client.Presentables.Assemblies
 
         #region Public Interface
 
-        private ImmutableAsyncList<Type, SystemTypeModel> _typeList;
-        public ReadOnlyCollection<SystemTypeModel> Types
+        private ReadOnlyProjection<Type, SystemTypeModel> _typeList;
+        public IReadOnlyCollection<SystemTypeModel> Types
         {
             get
             {
                 if (_typeList == null)
                 {
-                    _typeList = AsyncListFactory.UiCreateImmutable(
-                        AppContext, DataContext, this,
-                        () => System.Reflection.Assembly.ReflectionOnlyLoad(_assembly.AssemblyName).GetTypes(),
+                    _typeList = new ReadOnlyProjection<Type,SystemTypeModel>(
+                        System.Reflection.Assembly.ReflectionOnlyLoad(_assembly.AssemblyName).GetTypes(),
                         t => Factory.CreateSpecificModel<SystemTypeModel>(DataContext, t));
                 }
-                return _typeList.GetUiView();
+                return _typeList;
             }
         }
-
-        //private ObservableCollection<SystemTypeModel> _typesCache;
-        //private ReadOnlyObservableCollection<SystemTypeModel> _typesView;
-        //public ReadOnlyObservableCollection<SystemTypeModel> Types
-        //{
-        //    get
-        //    {
-        //        UI.Verify();
-        //        if (_typesView == null)
-        //        {
-        //            _typesCache = new ObservableCollection<SystemTypeModel>();
-        //            _typesView = new ReadOnlyObservableCollection<SystemTypeModel>(_typesCache);
-        //            State = ModelState.Loading;
-        //            Async.Queue(DataContext, () =>
-        //            {
-        //                AsyncFetchSystemTypes();
-        //                UI.Queue(UI, () => this.State = ModelState.Active);
-        //            });
-        //        }
-        //        return _typesView;
-        //    }
-        //}
 
         #endregion
 

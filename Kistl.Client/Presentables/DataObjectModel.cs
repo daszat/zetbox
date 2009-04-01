@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.API.Utils;
 using Kistl.App.Base;
 using Kistl.App.GUI;
 using Kistl.Client.GUI.DB;
@@ -52,28 +53,27 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ImmutableAsyncList<Property, PresentableModel> _propertyModels;
-        public ReadOnlyCollection<PresentableModel> PropertyModels
+        private ReadOnlyProjection<Property, PresentableModel> _propertyModels;
+        public IReadOnlyCollection<PresentableModel> PropertyModels
         {
             get
             {
                 if (_propertyModels == null)
                 {
-                    _propertyModels = AsyncListFactory.UiCreateImmutable<Property, PresentableModel>(
-                        AppContext, DataContext, this,
-                        FetchPropertyList,
+                    _propertyModels = new ReadOnlyProjection<Property,PresentableModel>(
+                        FetchPropertyList().ToList(),
                         property => Factory.CreateModel(
                             DataMocks.LookupDefaultPropertyModelDescriptor(property),
                             DataContext,
                             new object[] { _object, property })
                         );
                 }
-                return _propertyModels.GetUiView();
+                return _propertyModels;
             }
         }
 
-        private ImmutableAsyncList<Method, PresentableModel> _methodResultsCache;
-        public ReadOnlyCollection<PresentableModel> MethodResults
+        private ReadOnlyProjection<Method, PresentableModel> _methodResultsCache;
+        public IReadOnlyCollection<PresentableModel> MethodResults
         {
             get
             {
@@ -81,17 +81,15 @@ namespace Kistl.Client.Presentables
 
                 if (_methodResultsCache == null)
                 {
-                    _methodResultsCache = AsyncListFactory.UiCreateImmutable<Method, PresentableModel>(
-                        AppContext, DataContext, this,
-                        FetchMethodList,
+                    _methodResultsCache = new ReadOnlyProjection<Method,PresentableModel>(
+                        FetchMethodList().ToList(),
                         method =>
                         {
-                            // TODO: cache cls
                             ObjectClass cls = _object.GetObjectClass(MetaContext);
                             return ModelFromMethod(cls, method);
                         });
                 }
-                return _methodResultsCache.GetUiView();
+                return _methodResultsCache;
             }
         }
 
