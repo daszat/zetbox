@@ -22,6 +22,16 @@ namespace Kistl.API.Server.Mocks
 
         public override int ID { get; set; }
 
+        protected override void SetModified()
+        {
+            
+        }
+
+        public override DataObjectState ObjectState
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public TestObjClass BaseTestObjClass
         {
             get

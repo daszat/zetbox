@@ -57,6 +57,7 @@ namespace Kistl.DalProvider.EF.Tests
 
         // TODO: WTF? Please explain
         [Test]
+        [Ignore("Wrong test, ObjectState is managed by EF")]
         public void ObjectState_should_be_Unmodified_after_setting_ID()
         {
             obj.ID = 10;
@@ -64,10 +65,11 @@ namespace Kistl.DalProvider.EF.Tests
         }
 
         [Test]
-        /// ObjectState is just for serialization....
+        [Ignore("Wrong test, ObjectState is managed by EF")]
         public void ObjectState_ObjectWithID_Modified()
         {
             obj.ID = 10;
+            obj.ClientObjectState = DataObjectState.Unmodified;
             obj.NotifyPropertyChanged("test");
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
         }
@@ -208,6 +210,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             Assert.That(obj.Context, Is.Null);
             obj.ID = 10;
+            obj.ClientObjectState = DataObjectState.Unmodified;
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 ctx.Attach(obj);
@@ -226,6 +229,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             Assert.That(obj.Context, Is.Null);
             obj.ID = 10;
+            obj.ClientObjectState = DataObjectState.Unmodified;
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 ctx.Attach(obj);

@@ -61,8 +61,6 @@ namespace Kistl.API.Server.Tests
 
                 objImpl.TestNames__Implementation__.Add(ce);
             }
-
-            objImpl.ObjectState = DataObjectState.Unmodified;
         }
 
         [Test]
@@ -72,6 +70,7 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
+        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
         public void ObjectState_should_be_new_after_init()
         {
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
@@ -79,6 +78,7 @@ namespace Kistl.API.Server.Tests
 
         // TODO: WTF? Please explain
         [Test]
+        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
         public void ObjectState_should_be_Unmodified_after_setting_ID()
         {
             obj.ID = 10;
@@ -87,6 +87,7 @@ namespace Kistl.API.Server.Tests
 
         [Test]
         /// ObjectState is just for serialization....
+        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
         public void ObjectState_CreatedObject_Modified()
         {
             obj.NotifyPropertyChanged("test");
@@ -95,6 +96,7 @@ namespace Kistl.API.Server.Tests
 
         [Test]
         /// ObjectState is just for serialization....
+        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
         public void ObjectState_ObjectWithID_Modified()
         {
             ((TestObjClass__Implementation__)obj).ID = 10;
@@ -104,6 +106,7 @@ namespace Kistl.API.Server.Tests
 
         [Test]
         /// ObjectState is just for serialization....
+        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
         public void ObjectState_New_then_UnModified()
         {
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
@@ -211,7 +214,8 @@ namespace Kistl.API.Server.Tests
 
                 Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
                 Assert.That(result.ID, Is.EqualTo(obj.ID));
-                Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
+                //[Ignore("Obsolete, DAL Provider will manage ObjectState")]
+                //Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
             }
         }
 

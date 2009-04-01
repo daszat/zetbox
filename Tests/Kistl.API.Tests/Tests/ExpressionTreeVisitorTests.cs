@@ -59,7 +59,7 @@ namespace Kistl.API.Tests
                            Test = o.IntProperty * 2,
                            Test2 = MethodCallTest(o.StringProperty.Length * 2),
                            TestList = new int[] { o.IntProperty, o.ID, o.StringProperty.Length },
-                           TestObj = new { o.ObjectState, o.ID },
+                           TestObj = new { o.BoolProperty, o.ID },
                            Date = new DateTime(1000),
                            Test3 = obj.StringProperty,
                            Test4 = new TestDataObject__Implementation__() { StringProperty = o.StringProperty, ID = MethodCallTest(o.IntProperty) },

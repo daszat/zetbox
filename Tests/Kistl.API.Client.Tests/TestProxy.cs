@@ -107,7 +107,7 @@ namespace Kistl.API.Client.Tests
                         newObj.SetPrivatePropertyValue<int>("ID", ++newID);
                     }
                     result.Add(newObj);
-                    newObj.SetPrivatePropertyValue<DataObjectState>("ObjectState", DataObjectState.Unmodified);
+                    newObj.SetPrivateFieldValue<DataObjectState>("_ObjectState", DataObjectState.Unmodified);
                 }
             }
 

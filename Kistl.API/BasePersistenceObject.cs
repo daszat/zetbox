@@ -21,44 +21,9 @@ namespace Kistl.API
 
         public abstract bool IsAttached { get; }
 
-        private DataObjectState _ObjectState = DataObjectState.Unmodified;
-        public DataObjectState ObjectState
-        {
-            get
-            {
-                // Calc Objectstate
-                if (_ObjectState != DataObjectState.Deleted)
-                {
-                    if (ID <= API.Helper.INVALIDID)
-                    {
-                        _ObjectState = DataObjectState.New;
-                    }
-                    else if (_ObjectState == DataObjectState.New)
-                    {
-                        _ObjectState = DataObjectState.Unmodified;
-                    }
-                }
-                return _ObjectState;
-            }
-            set
-            {
-                // Objectstate from Serializer or set by KistlContext
-                if (_ObjectState != value)
-                {
-                    // only call event but do not call other infrastructure
-                    // to avoid triggering provider specific business logic
-                    OnPropertyChanging("ObjectState");
-                    _ObjectState = value;
-                    OnPropertyChanged("ObjectState");
-                }
-            }
-        }
+        public abstract DataObjectState ObjectState { get; }
 
-        protected void SetModified()
-        {
-            if (this.ObjectState == DataObjectState.Unmodified)
-                this.ObjectState = DataObjectState.Modified;
-        }
+        protected abstract void SetModified();
 
         /// <summary>
         /// Attach this Object to a Context. This Method is called by the Context.
@@ -106,7 +71,6 @@ namespace Kistl.API
 
             BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
             BinarySerializer.ToStream(ID, sw);
-            BinarySerializer.ToStream((int)ObjectState, sw);
         }
 
         /// <summary>
@@ -125,7 +89,6 @@ namespace Kistl.API
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
 
             BinarySerializer.FromStreamConverter(i => ID = i, sr);
-            BinarySerializer.FromStreamConverter(i => ObjectState = (DataObjectState)i, sr);
         }
 
 

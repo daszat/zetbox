@@ -183,7 +183,8 @@ namespace Kistl.API.Mocks
             where ENUMTYPE : struct
         {
             Assert.That(obj.ID, Is.EqualTo(TestObjClassId), "wrong ID");
-            Assert.That(obj.ObjectState, Is.EqualTo(TestObjectState), "wrong ObjectState");
+            // TODO: Unable to check that here -> Server evaluates ClientObjectState!
+            //Assert.That(obj.ObjectState, Is.EqualTo(TestObjectState), "wrong ObjectState");
             Assert.That(obj.BaseTestObjClass.ID, Is.EqualTo(TestBaseClassId), "wrong BaseTestObjClass.ID");
             Assert.That(obj.StringProp, Is.EqualTo(TestStringPropValue), "wrong StringProp");
             // not serialized

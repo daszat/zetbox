@@ -32,6 +32,7 @@ namespace Kistl.API.Tests.Skeletons
         }
 
         [Test]
+        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
         public void ObjectState_should_be_New_when_created()
         {
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
@@ -44,10 +45,12 @@ namespace Kistl.API.Tests.Skeletons
             T result = SerializationRoundtrip(obj);
 
             Assert.That(result.ID, Is.EqualTo(obj.ID));
-            Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
+            // [Ignore("Obsolete, DAL Provider will manage ObjectState")]
+            // Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
         }
 
         [Test]
+        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
         /// ObjectState is just for serialization....
         public void ObjectState_CreatedObject_Modified()
         {

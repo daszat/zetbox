@@ -257,48 +257,53 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="objects"></param>
         /// <returns></returns>
-        public virtual IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects)
+        public virtual IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objList)
         {
+            var objects = objList.Cast<BaseServerPersistenceObject>().ToList();
+            var entityObjects = new List<IPersistenceObject>();
+
             // Fist of all, attach new Objects
-            foreach (var obj in objects.Where(o => o.ObjectState == DataObjectState.New))
+            foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.New))
             {
                 ctx.Attach(obj);
+                if (!entityObjects.Contains(obj)) entityObjects.Add(obj);
             }
 
             // then apply changes
-            foreach (var obj in objects.Where(o => o.ObjectState == DataObjectState.Modified))
+            foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.Modified))
             {
                 var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
                 ctxObj.ApplyChangesFrom(obj);
+                if (!entityObjects.Contains(ctxObj)) entityObjects.Add(ctxObj);
             }
 
             // then update references
-            foreach (var obj in objects.Where(o => o.ObjectState != DataObjectState.Deleted))
+            foreach (var obj in objects.Where(o => o.ClientObjectState != DataObjectState.Deleted))
             {
                 var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
                 ctxObj.ReloadReferences();
+                if (!entityObjects.Contains(ctxObj)) entityObjects.Add(ctxObj);
             }
 
             // then delete objects
-            foreach (var obj in objects.Where(o => o.ObjectState == DataObjectState.Deleted))
+            foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.Deleted))
             {
                 var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
                 ctx.Delete(ctxObj);
             }
 
             // Playback notifications
-            foreach (var obj in objects.Where(o => o.ObjectState != DataObjectState.Deleted))
+            foreach (var obj in entityObjects.Cast<BasePersistenceObject>())
             {
-                var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
-                ((BasePersistenceObject)ctxObj).PlaybackNotifications();
+                obj.PlaybackNotifications();
             }
 
             ctx.SubmitChanges();
 
             // TODO: Detect changes made by server method calls
-            return objects.Where(o => o.ObjectState != DataObjectState.Deleted);
+            return entityObjects;
         }
     }
 }

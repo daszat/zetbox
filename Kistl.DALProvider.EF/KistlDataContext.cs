@@ -280,13 +280,15 @@ namespace Kistl.DALProvider.EF
         /// <returns>Object Attached</returns>
         public override IPersistenceObject Attach(IPersistenceObject obj)
         {
-            // Fist Attach/Detach
+            var serverObj = (BaseServerPersistenceObject)obj;
             string entityName = GetEntityName(obj.GetType());
-            if (obj.ObjectState == DataObjectState.New)
+
+            if (serverObj.ClientObjectState == DataObjectState.New 
+                || serverObj.ClientObjectState == DataObjectState.NotDeserialized)
             {
                 _ctx.AddObject(entityName, obj);
             }
-            else if (obj.ObjectState == DataObjectState.Deleted)
+            else if (serverObj.ClientObjectState == DataObjectState.Deleted)
             {
                 _ctx.AttachTo(entityName, obj);
                 _ctx.DeleteObject(obj);

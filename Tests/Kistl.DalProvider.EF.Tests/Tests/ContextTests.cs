@@ -272,7 +272,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                TestObjClass obj = new TestObjClass__Implementation__() { ID = 3 };
+                TestObjClass obj = new TestObjClass__Implementation__() { ID = 3, ClientObjectState = DataObjectState.Unmodified };
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Detached));
                 ctx.Attach(obj);
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Unchanged));
@@ -284,7 +284,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                TestObjClass obj = new TestObjClass__Implementation__() { ID = 3 };
+                TestObjClass obj = new TestObjClass__Implementation__() { ID = 3, ClientObjectState = DataObjectState.Unmodified };
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Detached));
                 ctx.Attach(obj);
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Unchanged));
@@ -299,12 +299,12 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                TestObjClass obj1 = new TestObjClass__Implementation__() { ID = 3 };
+                TestObjClass obj1 = new TestObjClass__Implementation__() { ID = 3, ClientObjectState = DataObjectState.Unmodified };
                 Assert.That(((TestObjClass__Implementation__)obj1).EntityState, Is.EqualTo(EntityState.Detached));
                 ctx.Attach(obj1);
                 Assert.That(((TestObjClass__Implementation__)obj1).EntityState, Is.EqualTo(EntityState.Unchanged));
 
-                TestObjClass obj2 = new TestObjClass__Implementation__() { ID = 3 };
+                TestObjClass obj2 = new TestObjClass__Implementation__() { ID = 3, ClientObjectState = DataObjectState.Unmodified };
                 Assert.That(((TestObjClass__Implementation__)obj2).EntityState, Is.EqualTo(EntityState.Detached));
                 ctx.Attach(obj2);
                 Assert.That(((TestObjClass__Implementation__)obj2).EntityState, Is.EqualTo(EntityState.Unchanged));

@@ -37,7 +37,6 @@ namespace Kistl.API.Tests
             var list = from o in ctx
                        where o.ID == 1
                        && o.GetType().FullName.StartsWith("test")
-                       && o.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified)
                        select o;
 
             List<IllegalExpression> errorList;

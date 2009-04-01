@@ -31,6 +31,51 @@ namespace Kistl.API.Client
             }
         }
 
+        private DataObjectState _ObjectState = DataObjectState.Unmodified;
+        public override DataObjectState ObjectState
+        {
+            get
+            {
+                // Calc Objectstate
+                if (_ObjectState != DataObjectState.Deleted)
+                {
+                    if (ID <= API.Helper.INVALIDID)
+                    {
+                        _ObjectState = DataObjectState.New;
+                    }
+                    else if (_ObjectState == DataObjectState.New)
+                    {
+                        _ObjectState = DataObjectState.Unmodified;
+                    }
+                }
+                return _ObjectState;
+            }
+        }
+
+        protected override void SetModified()
+        {
+            if (this.ObjectState == DataObjectState.Unmodified)
+            {
+                OnPropertyChanging("ObjectState");
+                this._ObjectState = DataObjectState.Modified;
+                OnPropertyChanged("ObjectState");
+            }
+        }
+
+        internal void SetUnmodified()
+        {
+            OnPropertyChanging("ObjectState");
+            this._ObjectState = DataObjectState.Unmodified;
+            OnPropertyChanged("ObjectState");
+        }
+
+        internal void SetDeleted()
+        {
+            OnPropertyChanging("ObjectState");
+            this._ObjectState = DataObjectState.Deleted;
+            OnPropertyChanged("ObjectState");
+        }
+
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
@@ -48,6 +93,18 @@ namespace Kistl.API.Client
             {
                 return Context != null;
             }
+        }
+
+        public override void ToStream(BinaryWriter sw)
+        {
+            base.ToStream(sw);
+            BinarySerializer.ToStream((int)ObjectState, sw);
+        }
+
+        public override void FromStream(BinaryReader sr)
+        {
+            base.FromStream(sr);
+            BinarySerializer.FromStreamConverter(i => _ObjectState = (DataObjectState)i, sr);
         }
     }
 

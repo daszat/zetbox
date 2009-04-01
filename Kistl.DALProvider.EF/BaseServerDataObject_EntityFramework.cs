@@ -18,6 +18,30 @@ namespace Kistl.DALProvider.EF
     public abstract class BaseServerDataObject_EntityFramework
         : BaseServerDataObject, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject
     {
+        public override DataObjectState ObjectState
+        {
+            get
+            {
+                switch (EntityState)
+                {
+                    case System.Data.EntityState.Added:
+                        return DataObjectState.New;
+                    case System.Data.EntityState.Modified:
+                        return DataObjectState.Modified;
+                    case System.Data.EntityState.Unchanged:
+                        return DataObjectState.Unmodified;
+                    case System.Data.EntityState.Deleted:
+                        return DataObjectState.Deleted;
+                    default:
+                        throw new InvalidOperationException("Invalid Entity Object State: " + EntityState.ToString());
+                }
+            }
+        }
+
+        protected override void SetModified()
+        {
+            // EF will do that for us
+        }
 
         #region IEntityWithKey Members
         private System.Data.EntityKey _entityKey = null;
@@ -111,8 +135,6 @@ namespace Kistl.DALProvider.EF
             if (_changeTracker != null)
             {
                 _changeTracker.EntityMemberChanged(efProperty);
-                if (ObjectState == DataObjectState.Unmodified)
-                    SetModified();
             }
         }
 
@@ -136,6 +158,31 @@ namespace Kistl.DALProvider.EF
     public abstract class BaseServerCollectionEntry_EntityFramework
         : BaseServerCollectionEntry, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject
     {
+        public override DataObjectState ObjectState
+        {
+            get
+            {
+                switch (EntityState)
+                {
+                    case System.Data.EntityState.Added:
+                        return DataObjectState.New;
+                    case System.Data.EntityState.Modified:
+                        return DataObjectState.Modified;
+                    case System.Data.EntityState.Unchanged:
+                        return DataObjectState.Unmodified;
+                    case System.Data.EntityState.Deleted:
+                        return DataObjectState.Deleted;
+                    default:
+                        throw new InvalidOperationException("Invalid Entity Object State: " + EntityState.ToString());
+                }
+            }
+        }
+
+        protected override void SetModified()
+        {
+            // EF will do that for us
+        }
+
         #region IEntityWithKey Members
         private System.Data.EntityKey _entityKey = null;
         public System.Data.EntityKey EntityKey
@@ -224,8 +271,6 @@ namespace Kistl.DALProvider.EF
             if (_changeTracker != null)
             {
                 _changeTracker.EntityMemberChanged(property);
-                if (ObjectState == DataObjectState.Unmodified)
-                    SetModified();
             }
         }
 

@@ -25,6 +25,10 @@ namespace Kistl.API
         /// Object is deleted, should be deleted from the Database, Caches, etc.
         /// </summary>
         Deleted,
+        /// <summary>
+        /// The Entity was not deserialied
+        /// </summary>
+        NotDeserialized,
     }
 
     public enum RelationType

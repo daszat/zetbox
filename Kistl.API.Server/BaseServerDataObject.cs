@@ -17,6 +17,21 @@ namespace Kistl.API.Server
         protected BaseServerPersistenceObject()
         {
             if (ApplicationContext.Current.HostType != HostType.Server) throw new InvalidOperationException("A BaseServerPersistenceObject can only exist on a server");
+            ClientObjectState = DataObjectState.NotDeserialized;
+        }
+
+        public DataObjectState ClientObjectState { get; set; }
+
+        public override void ToStream(BinaryWriter sw)
+        {
+            base.ToStream(sw);
+            BinarySerializer.ToStream((int)DataObjectState.Unmodified, sw);
+        }
+
+        public override void FromStream(BinaryReader sr)
+        {
+            base.FromStream(sr);
+            BinarySerializer.FromStreamConverter(i => ClientObjectState = (DataObjectState)i, sr);
         }
     }
 
@@ -32,7 +47,6 @@ namespace Kistl.API.Server
         {
             ApplicationContext.Current.CustomActionsManager.AttachEvents(this);
         }
-
 
         /// <summary>
         /// Fires an Event before an Object is saved.

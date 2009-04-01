@@ -322,7 +322,7 @@ namespace Kistl.API.Client
 
             // Attach & set Objectstate to Unmodified
             _objects.Add(obj);
-            ((BaseClientPersistenceObject)obj).ObjectState = DataObjectState.Unmodified;
+            ((BaseClientPersistenceObject)obj).SetUnmodified();
 
             // Call Objects Attach Method to ensure, that every Child Object is also attached
             obj.AttachToContext(this);
@@ -357,7 +357,7 @@ namespace Kistl.API.Client
             CheckDisposed();
             if (obj == null) throw new ArgumentNullException("obj");
             if (obj.Context != this) throw new InvalidOperationException("The Object does not belong to the current Context");
-            ((BaseClientPersistenceObject)obj).ObjectState = DataObjectState.Deleted;
+            ((BaseClientPersistenceObject)obj).SetDeleted();
             OnObjectDeleted(obj);
         }
 
@@ -426,7 +426,7 @@ namespace Kistl.API.Client
                 }
 
                 // reset ObjectState to new truth
-                obj.ObjectState = DataObjectState.Unmodified;
+                obj.SetUnmodified();
 
                 changedObjects.Add(obj);
             }
