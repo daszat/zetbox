@@ -199,6 +199,7 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[110].AltText = @"Test Enumeration Property";
+			DataStore[110].CategoryTags = null;
 			DataStore[110].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[102],
 });
@@ -212,6 +213,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[102],
 			DataStore[110].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[50];
 			DataStore[110].Seal();
 			DataStore[111].AltText = @"Test Enum Property";
+			DataStore[111].CategoryTags = null;
 			DataStore[111].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[101],
 });
@@ -225,6 +227,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[101],
 			DataStore[111].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[50];
 			DataStore[111].Seal();
 			DataStore[113].AltText = @"The Toolkit used by this Renderer";
+			DataStore[113].CategoryTags = null;
 			DataStore[113].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[99],
 });
@@ -238,6 +241,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[99],
 			DataStore[113].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
 			DataStore[113].Seal();
 			DataStore[117].AltText = @"The toolkit of this Control.";
+			DataStore[117].CategoryTags = null;
 			DataStore[117].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[95],
 });
@@ -251,6 +255,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[95],
 			DataStore[117].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
 			DataStore[117].Seal();
 			DataStore[118].AltText = @"The type of Control of this implementation";
+			DataStore[118].CategoryTags = null;
 			DataStore[118].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[94],
 });
@@ -264,6 +269,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[94],
 			DataStore[118].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[118].Seal();
 			DataStore[137].AltText = @"which controls are handled by this Presenter";
+			DataStore[137].CategoryTags = null;
 			DataStore[137].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[87],
 });
@@ -277,6 +283,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[87],
 			DataStore[137].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[137].Seal();
 			DataStore[150].AltText = @"Which visual is represented here";
+			DataStore[150].CategoryTags = null;
 			DataStore[150].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 });
@@ -290,6 +297,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 			DataStore[150].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[150].Seal();
 			DataStore[183].AltText = @"Storagetype for 1:1 Relations";
+			DataStore[183].CategoryTags = null;
 			DataStore[183].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[183].Description = @"Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.";
@@ -302,6 +310,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 			DataStore[183].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
 			DataStore[183].Seal();
 			DataStore[210].AltText = @"";
+			DataStore[210].CategoryTags = null;
 			DataStore[210].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 });
@@ -315,6 +324,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 			DataStore[210].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
 			DataStore[210].Seal();
 			DataStore[219].AltText = @"Specifies how many instances may occur on this end of the relation.";
+			DataStore[219].CategoryTags = null;
 			DataStore[219].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[219].Description = @"Specifies how many instances may occur on this end of the relation.";

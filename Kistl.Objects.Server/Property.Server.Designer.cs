@@ -78,6 +78,32 @@ namespace Kistl.App.Base
         private string _AltText;
 
         /// <summary>
+        /// A space separated list of category names containing this Property
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual string CategoryTags
+        {
+            get
+            {
+                return _CategoryTags;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_CategoryTags != value)
+                {
+                    NotifyPropertyChanging("CategoryTags");
+                    _CategoryTags = value;
+                    NotifyPropertyChanged("CategoryTags");
+                }
+            }
+        }
+        private string _CategoryTags;
+
+        /// <summary>
         /// The list of constraints applying to this Property
         /// </summary>
     /*
@@ -495,6 +521,7 @@ namespace Kistl.App.Base
 			var me = (Property)this;
 
 			me.AltText = other.AltText;
+			me.CategoryTags = other.CategoryTags;
 			me.Description = other.Description;
 			me.IsIndexed = other.IsIndexed;
 			me.IsList = other.IsList;
@@ -554,6 +581,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._AltText, binStream);
+            BinarySerializer.ToStream(this._CategoryTags, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._IsIndexed, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
@@ -567,6 +595,7 @@ namespace Kistl.App.Base
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._AltText, binStream);
+            BinarySerializer.FromStream(out this._CategoryTags, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._IsIndexed, binStream);
             BinarySerializer.FromStream(out this._IsList, binStream);

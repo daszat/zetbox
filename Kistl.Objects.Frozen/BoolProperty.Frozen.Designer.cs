@@ -180,6 +180,7 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[11].AltText = null;
+			DataStore[11].CategoryTags = @"DataModel";
 			DataStore[11].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[143],
 });
@@ -192,6 +193,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[143],
 			DataStore[11].PropertyName = @"IsList";
 			DataStore[11].Seal();
 			DataStore[26].AltText = null;
+			DataStore[26].CategoryTags = @"DataModel";
 			DataStore[26].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[142],
 });
@@ -204,6 +206,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[142],
 			DataStore[26].PropertyName = @"IsNullable";
 			DataStore[26].Seal();
 			DataStore[83].AltText = @"Legt fest, ob es sich um ein Client-Assembly handelt.";
+			DataStore[83].CategoryTags = null;
 			DataStore[83].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[117],
 });
@@ -216,6 +219,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[117],
 			DataStore[83].PropertyName = @"IsClientAssembly";
 			DataStore[83].Seal();
 			DataStore[94].AltText = @"Parameter wird als List<> generiert";
+			DataStore[94].CategoryTags = null;
 			DataStore[94].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[111],
 });
@@ -228,6 +232,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[111],
 			DataStore[94].PropertyName = @"IsList";
 			DataStore[94].Seal();
 			DataStore[95].AltText = @"Es darf nur ein Return Parameter angegeben werden";
+			DataStore[95].CategoryTags = null;
 			DataStore[95].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[110],
 });
@@ -240,6 +245,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[110],
 			DataStore[95].PropertyName = @"IsReturnParameter";
 			DataStore[95].Seal();
 			DataStore[116].AltText = @"Whether or not this Control can contain other Controls";
+			DataStore[116].CategoryTags = null;
 			DataStore[116].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[96],
 });
@@ -252,6 +258,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[96],
 			DataStore[116].PropertyName = @"IsContainer";
 			DataStore[116].Seal();
 			DataStore[119].AltText = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.";
+			DataStore[119].CategoryTags = @"DataModel";
 			DataStore[119].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[93],
 });
@@ -264,6 +271,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[93],
 			DataStore[119].PropertyName = @"IsSimpleObject";
 			DataStore[119].Seal();
 			DataStore[124].AltText = @"Shows this Method in th GUI";
+			DataStore[124].CategoryTags = null;
 			DataStore[124].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[92],
 });
@@ -276,6 +284,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[92],
 			DataStore[124].PropertyName = @"IsDisplayable";
 			DataStore[124].Seal();
 			DataStore[174].AltText = @"if true then all Instances appear in FozenContext.";
+			DataStore[174].CategoryTags = @"Physical";
 			DataStore[174].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[202],
 });
@@ -288,6 +297,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[202],
 			DataStore[174].PropertyName = @"IsFrozenObject";
 			DataStore[174].Seal();
 			DataStore[204].AltText = @"Whether or not a list-valued property has a index";
+			DataStore[204].CategoryTags = @"DataModel";
 			DataStore[204].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[204].Description = @"Whether or not a list-valued property has a index";
@@ -299,6 +309,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[202],
 			DataStore[204].PropertyName = @"IsIndexed";
 			DataStore[204].Seal();
 			DataStore[220].AltText = @"Is true, if this RelationEnd persists the order of its elements";
+			DataStore[220].CategoryTags = null;
 			DataStore[220].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[220].Description = @"Is true, if this RelationEnd persists the order of its elements";

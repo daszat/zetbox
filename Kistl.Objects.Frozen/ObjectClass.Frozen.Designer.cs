@@ -642,7 +642,7 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[46],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[118],
 });
 			DataStore[7].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[7].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(9) {
+			DataStore[7].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(10) {
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[8],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[72],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[9],
@@ -652,6 +652,7 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[41],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[170],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[176],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[204],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[225],
 });
 			DataStore[7].BaseObjectClass = null;
 			DataStore[7].DefaultModel = null;

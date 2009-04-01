@@ -40,6 +40,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="AltText" ColumnName="AltText" />
+<ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="IsIndexed" ColumnName="IsIndexed" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />

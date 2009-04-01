@@ -601,6 +601,7 @@
     <Property Name="AltText" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="IsIndexed" Type="bit" Nullable="false" />
+    <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="ValueTypeProperty">

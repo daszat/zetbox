@@ -60,7 +60,7 @@ namespace Kistl.Client.Presentables
             {
                 if (_propertyModels == null)
                 {
-                    _propertyModels = new ReadOnlyProjection<Property,PresentableModel>(
+                    _propertyModels = new ReadOnlyProjection<Property, PresentableModel>(
                         FetchPropertyList().ToList(),
                         property => Factory.CreateModel(
                             DataMocks.LookupDefaultPropertyModelDescriptor(property),
@@ -81,7 +81,7 @@ namespace Kistl.Client.Presentables
 
                 if (_methodResultsCache == null)
                 {
-                    _methodResultsCache = new ReadOnlyProjection<Method,PresentableModel>(
+                    _methodResultsCache = new ReadOnlyProjection<Method, PresentableModel>(
                         FetchMethodList().ToList(),
                         method =>
                         {
@@ -108,6 +108,37 @@ namespace Kistl.Client.Presentables
                 return _actionsView;
             }
         }
+
+        private ReadOnlyCollection<PropertyGroupModel> _propertyGroups;
+        public ReadOnlyCollection<PropertyGroupModel> PropertyGroups
+        {
+            get
+            {
+                if (_propertyGroups == null)
+                {
+                    _propertyGroups = new ReadOnlyCollection<PropertyGroupModel>(
+                        FetchPropertyList()
+                            .SelectMany(p => (p.CategoryTags ?? "Uncategorised")
+                                                .Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                                                .Select(s => new { Category = s, Property = p }))
+                            .GroupBy(x => x.Category, x => x.Property)
+                            .OrderBy(group => group.Key)
+                            .Select(group => new PropertyGroupModel(
+                                AppContext,
+                                DataContext,
+                                group.Key,
+                                group.Select(p =>
+                                    Factory.CreateModel(
+                                        DataMocks.LookupDefaultPropertyModelDescriptor(p).AsType(true),
+                                        DataContext,
+                                        new object[] { _object, p }))))
+                            .ToList());
+
+                }
+                return _propertyGroups;
+            }
+        }
+
 
         private string _toStringCache;
         public string Name

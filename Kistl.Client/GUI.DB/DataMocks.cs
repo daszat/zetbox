@@ -72,6 +72,13 @@ namespace Kistl.Client.GUI.DB
     }
 
     /// <summary>
+    /// layout a group of properties within a GroupBox or TabItem
+    /// </summary>
+    public class PropertyGroupLayout : Layout
+    {
+    }
+
+    /// <summary>
     /// layout a nullable enum value
     /// </summary>
     public class SimpleEnumValueLayout : Layout
@@ -154,6 +161,8 @@ namespace Kistl.Client.GUI.DB
                     AddLayoutCacheEntry(new SimpleNullableValueLayout<DateTime>() { SourceModelType = typeof(NullableResultModel<DateTime>), AllowNullInput = true });
                     AddLayoutCacheEntry(new SimpleNullableValueLayout<Double>() { SourceModelType = typeof(NullableResultModel<Double>), AllowNullInput = true });
                     AddLayoutCacheEntry(new SimpleNullableValueLayout<int>() { SourceModelType = typeof(NullableResultModel<int>), AllowNullInput = true });
+
+                    AddLayoutCacheEntry(new PropertyGroupLayout() { SourceModelType = typeof(PropertyGroupModel) });
 
                     AddLayoutCacheEntry(new DataObjectFullLayout() { SourceModelType = typeof(DataObjectModel) });
                     AddLayoutCacheEntry(new DataObjectListLayout() { SourceModelType = typeof(ObjectListModel) });
@@ -342,6 +351,10 @@ namespace Kistl.Client.GUI.DB
                             new ViewDescriptor(
                                 FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.NullableBoolValueView", "Kistl.Client.WPF"),
                                 Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(SimpleNullableValueLayout<Boolean>))),
+
+                            new ViewDescriptor(
+                                FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.PropertyGroupBoxView", "Kistl.Client.WPF"),
+                                Toolkit.WPF, FindOrCreateTypeRef(ctx, typeof(PropertyGroupLayout))),
 
                             new ViewDescriptor(
                                 FindOrCreateTypeRef(ctx, "Kistl.Client.WPF.View.SelectionDialog", "Kistl.Client.WPF"),

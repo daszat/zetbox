@@ -157,7 +157,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(146);
+		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(148);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new TypeRef__Implementation__Frozen(1);
@@ -451,6 +451,10 @@ namespace Kistl.App.Base
 			DataStore[276] = new TypeRef__Implementation__Frozen(276);
 
 			DataStore[277] = new TypeRef__Implementation__Frozen(277);
+
+			DataStore[278] = new TypeRef__Implementation__Frozen(278);
+
+			DataStore[279] = new TypeRef__Implementation__Frozen(279);
 
 		}
 
@@ -1190,6 +1194,16 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[114],
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[116],
 });
 			DataStore[277].Seal();
+			DataStore[278].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
+			DataStore[278].FullName = @"Kistl.Client.WPF.View.PropertyGroupBoxView";
+			DataStore[278].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
+});
+			DataStore[278].Seal();
+			DataStore[279].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
+			DataStore[279].FullName = @"Kistl.Client.GUI.DB.PropertyGroupLayout";
+			DataStore[279].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
+});
+			DataStore[279].Seal();
 	
 		}
 #region Serializer

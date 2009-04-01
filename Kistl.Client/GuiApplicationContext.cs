@@ -119,9 +119,10 @@ namespace Kistl.Client
         {
             get
             {
-                if (_guiDataContextCache == null)
-                    _guiDataContextCache = KistlContext.GetContext();
-                return _guiDataContextCache;
+                return FrozenContext.Single;
+                //if (_guiDataContextCache == null)
+                //    _guiDataContextCache = KistlContext.GetContext();
+                //return _guiDataContextCache;
             }
         }
 

@@ -35,7 +35,7 @@
 
         <ScrollViewer HorizontalScrollBarVisibility="Disabled">
             <ListView x:Name="PropertyList"
-                      ItemsSource="{Binding PropertyModels}"
+                      ItemsSource="{Binding PropertyGroups}"
                       BorderThickness="0"
                       ItemTemplateSelector="{StaticResource defaultTemplateSelector}"
                       HorizontalContentAlignment="Stretch">

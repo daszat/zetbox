@@ -50,6 +50,29 @@ namespace Kistl.App.Base
         private string _AltText;
 
         /// <summary>
+        /// A space separated list of category names containing this Property
+        /// </summary>
+        // value type property
+        public virtual string CategoryTags
+        {
+            get
+            {
+                return _CategoryTags;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_CategoryTags != value)
+                {
+                    NotifyPropertyChanging("CategoryTags");
+                    _CategoryTags = value;
+                    NotifyPropertyChanged("CategoryTags");
+                }
+            }
+        }
+        private string _CategoryTags;
+
+        /// <summary>
         /// The list of constraints applying to this Property
         /// </summary>
         // object list property

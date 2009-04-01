@@ -165,6 +165,7 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[131].AltText = @"Mobile Phone Number";
+			DataStore[131].CategoryTags = null;
 			DataStore[131].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[131].Description = @"Mobile Phone Number";
@@ -177,6 +178,7 @@ namespace Kistl.App.Base
 			DataStore[131].StructDefinition = Kistl.App.Base.Struct__Implementation__Frozen.DataStore[63];
 			DataStore[131].Seal();
 			DataStore[132].AltText = @"Office Phone Number";
+			DataStore[132].CategoryTags = null;
 			DataStore[132].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[132].Description = @"Office Phone Number";

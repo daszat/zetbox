@@ -584,6 +584,7 @@
                         ToRole="Constraints" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="IsIndexed" Type="Boolean" Nullable="false" />
+    <Property Name="CategoryTags" Type="String" Nullable="true" MaxLength="4000" />
   </EntityType>
   <EntityType Name="Relation">
     <Key>

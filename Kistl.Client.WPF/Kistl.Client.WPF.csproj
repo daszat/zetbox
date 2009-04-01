@@ -102,6 +102,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PropertyGroupBoxView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\DataObjectListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -195,6 +199,9 @@
     </Compile>
     <Compile Include="View\ActionView.xaml.cs">
       <DependentUpon>ActionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PropertyGroupBoxView.xaml.cs">
+      <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DataObjectListView.xaml.cs">
       <DependentUpon>DataObjectListView.xaml</DependentUpon>

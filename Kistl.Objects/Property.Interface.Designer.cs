@@ -20,6 +20,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// A space separated list of category names containing this Property
+        /// </summary>
+		string CategoryTags {
+			get;
+			set;
+		}
+        /// <summary>
         /// The list of constraints applying to this Property
         /// </summary>
 

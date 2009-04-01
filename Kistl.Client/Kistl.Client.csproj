@@ -87,6 +87,7 @@
     <Compile Include="Presentables\ObjectListModel.cs" />
     <Compile Include="Presentables\ObjectReferenceModel.cs" />
     <Compile Include="Presentables\PresentableModel.cs" />
+    <Compile Include="Presentables\PropertyGroupModel.cs" />
     <Compile Include="Presentables\Relations\RelationEndModel.cs" />
     <Compile Include="Presentables\Relations\RelationModel.cs" />
     <Compile Include="Presentables\SelectionTaskModel.cs" />
