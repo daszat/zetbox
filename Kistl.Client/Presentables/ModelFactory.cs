@@ -41,7 +41,6 @@ namespace Kistl.Client.Presentables
         public TModel CreateSpecificModel<TModel>(IKistlContext ctx, params object[] data)
             where TModel : PresentableModel
         {
-            AppContext.UiThread.Verify();
             Type requestedType = typeof(TModel);
             return (TModel)CreateModel(requestedType, ctx, data);
         }
@@ -52,7 +51,6 @@ namespace Kistl.Client.Presentables
         /// <returns>the configured model</returns>
         public PresentableModel CreateDefaultModel(IKistlContext ctx, IDataObject obj, params object[] data)
         {
-            AppContext.UiThread.Verify();
             Type t = obj.GetObjectClass(AppContext.MetaContext).GetDefaultModelRef().AsType(true); ;
             return CreateModel(t, ctx, new object[] { obj }.Concat(data).ToArray());
         }
@@ -61,15 +59,14 @@ namespace Kistl.Client.Presentables
         /// deprecated helper
         /// </summary>
         [Browsable(false)]
+        [Obsolete]
         public PresentableModel CreateModel(Kistl.App.Base.TypeRef modelType, IKistlContext ctx, object[] data)
         {
-            AppContext.UiThread.Verify();
             return CreateModel(modelType.AsType(true), ctx, data);
         }
 
         public PresentableModel CreateModel(Type requestedType, IKistlContext ctx, object[] data)
         {
-            AppContext.UiThread.Verify();
 
             // by convention, all presentable models take the IGuiApplicationContext
             // and a IKistlContext as first parameters
@@ -104,7 +101,6 @@ namespace Kistl.Client.Presentables
         /// <returns></returns>
         public IView CreateDefaultView(PresentableModel mdl)
         {
-            AppContext.UiThread.Verify();
             Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
             ViewDescriptor vDesc = DataMocks.LookupViewDescriptor(Toolkit, lout);
             IView view = (IView)vDesc.ViewRef.Create();
@@ -114,7 +110,6 @@ namespace Kistl.Client.Presentables
 
         public void ShowModel(PresentableModel mdl, bool activate)
         {
-            AppContext.UiThread.Verify();
             if (mdl is DataObjectModel)
             {
                 // TODO improve multi-workspace facitilities

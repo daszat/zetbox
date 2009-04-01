@@ -18,7 +18,7 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx, mdl)
         {
             _module = mdl;
-            _module.PropertyChanged += AsyncModulePropertyChanged;
+            _module.PropertyChanged += ModulePropertyChanged;
         }
 
         #region public interface
@@ -28,16 +28,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 if (_objectClassesCache == null)
                 {
                     _objectClassesCache = new ObservableCollection<DataObjectModel>();
-                    State = ModelState.Loading;
-                    Async.Queue(DataContext, () =>
-                    {
-                        AsyncLoadObjectClasses();
-                        UI.Queue(UI, () => this.State = ModelState.Active);
-                    });
+                    LoadObjectClasses();
                 }
                 return _objectClassesCache;
             }
@@ -45,43 +39,35 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
-        private void AsyncLoadObjectClasses()
+        private void LoadObjectClasses()
         {
-            Async.Verify();
-            UI.Queue(UI, () => State = ModelState.Loading);
             var datatypes = DataContext.GetQuery<DataType>()
                 .Where(dt => dt.Module.ID == _module.ID)
-                .OrderBy(dt => dt.ClassName)
-                .ToList();
-            UI.Queue(UI, () =>
+                .OrderBy(dt => dt.ClassName);
+            foreach (var dt in datatypes)
             {
-                foreach (var dt in datatypes)
+                if (dt is ObjectClass)
                 {
-                    if (dt is ObjectClass)
-                    {
-                        ObjectClasses.Add(Factory.CreateSpecificModel<ObjectClassModel>(DataContext, (ObjectClass)dt));
-                    }
-                    else
-                    {
-                        ObjectClasses.Add(Factory.CreateSpecificModel<DataTypeModel>(DataContext, dt));
-                    }
+                    ObjectClasses.Add(Factory.CreateSpecificModel<ObjectClassModel>(DataContext, (ObjectClass)dt));
                 }
-                State = ModelState.Active;
-            });
+                else
+                {
+                    ObjectClasses.Add(Factory.CreateSpecificModel<DataTypeModel>(DataContext, dt));
+                }
+            }
         }
 
         #endregion
 
         #region PropertyChanged event handlers
 
-        private void AsyncModulePropertyChanged(object sender, PropertyChangedEventArgs args)
+        private void ModulePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            Async.Verify();
             switch (args.PropertyName)
             {
-                case "ModuleName": AsyncOnPropertyChanged("Name"); break;
+                case "ModuleName": OnPropertyChanged("Name"); break;
             }
         }
 

@@ -29,12 +29,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _valueCache != null;
             }
             set
             {
-                UI.Verify();
                 if (!value)
                     Value = null;
             }
@@ -44,12 +42,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _valueCache == null;
             }
             set
             {
-                UI.Verify();
                 if (value)
                     Value = null;
             }
@@ -69,19 +65,14 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public DataObjectModel Value
         {
-            get { UI.Verify(); return _valueCache; }
+            get { return _valueCache; }
             set
             {
-                UI.Verify();
-
                 _valueCache = value;
-                State = ModelState.Loading;
-                Async.Queue(DataContext, () =>
-                {
-                    Object.SetPropertyValue<IDataObject>(Property.PropertyName, _valueCache == null ? null : _valueCache.Object);
-                    AsyncCheckConstraints();
-                    UI.Queue(UI, () => this.State = ModelState.Active);
-                });
+
+                Object.SetPropertyValue<IDataObject>(Property.PropertyName, _valueCache == null ? null : _valueCache.Object);
+                CheckConstraints();
+
                 OnPropertyChanged("Value");
                 OnPropertyChanged("HasValue");
                 OnPropertyChanged("IsNull");
@@ -94,11 +85,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 if (_domain == null)
                 {
                     _domain = new ObservableCollection<DataObjectModel>();
-                    Async.Queue(DataContext, AsyncFetchDomain);
+                    FetchDomain();
                 }
                 return _domain;
             }
@@ -106,7 +96,6 @@ namespace Kistl.Client.Presentables
 
         public void OpenReference()
         {
-            UI.Verify();
             if (Value != null)
                 Factory.ShowModel(Value, true);
         }
@@ -116,96 +105,74 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public void CreateNewItem(Action<DataObjectModel> onCreated)
         {
-            UI.Verify();
+            ObjectClass baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
 
-            Async.Queue(DataContext, () =>
+            var children = new List<ObjectClass>() { baseclass };
+            CollectChildClasses(baseclass.ID, children);
+
+            if (children.Count == 1)
             {
-                ObjectClass baseclass;
+                var targetType = baseclass.GetDescribedInterfaceType();
+                var item = this.DataContext.Create(targetType);
+                onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item));
+            }
+            else
+            {
+                // sort by name, create models
+                // TODO: filter non-instantiable classes
+                var childModels = children
+                    .OrderBy(oc => oc.ClassName)
+                    .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
+                    .ToList();
 
-                baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
-
-                var children = new List<ObjectClass>() { baseclass };
-                AsyncCollectChildClasses(baseclass.ID, children);
-
-                if (children.Count == 1)
-                {
-                    var targetType = baseclass.GetDescribedInterfaceType();
-                    var item = this.DataContext.Create(targetType);
-                    UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
-                }
-                else
-                {
-                    UI.Queue(UI, () =>
-                    {
-                        // sort by name, create models
-                        // TODO: filter non-instantiable classes
-                        var childModels = children
-                            .OrderBy(oc => oc.ClassName)
-                            .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
-                            .ToList();
-
-                        Factory.ShowModel(
-                            Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
-                                DataContext,
-                                childModels,
-                                new Action<DataObjectModel>(delegate(DataObjectModel chosen)
-                                {
-                                    UI.Verify();
-                                    Async.Queue(DataContext, () =>
-                                    {
-                                        if (chosen != null)
-                                        {
-                                            var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
-                                            var item = this.DataContext.Create(targetType);
-                                            UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
-                                        }
-                                        else
-                                        {
-                                            UI.Queue(UI, () => onCreated(null));
-                                        }
-                                    });
-                                })), true);
-                    });
-                }
-            });
+                Factory.ShowModel(
+                    Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+                        DataContext,
+                        childModels,
+                        new Action<DataObjectModel>(delegate(DataObjectModel chosen)
+                        {
+                            if (chosen != null)
+                            {
+                                var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
+                                var item = this.DataContext.Create(targetType);
+                                onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item));
+                            }
+                            else
+                            {
+                                onCreated(null);
+                            }
+                        })), true);
+            }
         }
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
-        protected override void AsyncGetPropertyValue()
+        protected override void GetPropertyValue()
         {
-            Async.Verify();
             IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.PropertyName);
-            UI.Queue(UI, () => Value = newValue == null ? null : Factory.CreateSpecificModel<DataObjectModel>(DataContext, newValue));
+            Value = newValue == null ? null : (DataObjectModel)Factory.CreateDefaultModel(DataContext, newValue);
         }
 
-        private void AsyncFetchDomain()
+        private void FetchDomain()
         {
-            Async.Verify();
             Debug.Assert(_domain != null);
 
-            UI.Queue(UI, () => State = ModelState.Loading);
-
-            var objs = DataContext.GetQuery(new InterfaceType(Property.GetPropertyType()))
-                .ToList().OrderBy(obj => obj.ToString()).ToList();
-
-            UI.Queue(UI, () =>
+            foreach (var obj in DataContext
+                .GetQuery(new InterfaceType(Property.GetPropertyType()))
+                .ToList() // TODO: remove this
+                .OrderBy(obj => obj.ToString()).ToList())
             {
-                foreach (var obj in objs)
-                {
-                    _domain.Add(Factory.CreateSpecificModel<DataObjectModel>(DataContext, obj));
-                }
-                State = ModelState.Active;
-            });
+                _domain.Add(Factory.CreateSpecificModel<DataObjectModel>(DataContext, obj));
+            }
+
         }
 
-        private void AsyncCollectChildClasses(int id, List<ObjectClass> children)
+        private void CollectChildClasses(int id, List<ObjectClass> children)
         {
-            Async.Verify();
-
-            var nextChildren = MetaContext.GetQuery<ObjectClass>()
+            var nextChildren = MetaContext
+                .GetQuery<ObjectClass>()
                 .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id)
                 .ToList();
 
@@ -214,7 +181,7 @@ namespace Kistl.Client.Presentables
                 foreach (ObjectClass oc in nextChildren)
                 {
                     children.Add(oc);
-                    AsyncCollectChildClasses(oc.ID, children);
+                    CollectChildClasses(oc.ID, children);
                 };
             }
         }

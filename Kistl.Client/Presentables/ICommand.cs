@@ -65,10 +65,9 @@ namespace Kistl.Client.Presentables
         private bool _executingCache = false;
         public bool Executing
         {
-            get { UI.Verify(); return _executingCache; }
+            get { return _executingCache; }
             protected set
             {
-                UI.Verify();
                 if (_executingCache != value)
                 {
                     _executingCache = value;
@@ -83,10 +82,9 @@ namespace Kistl.Client.Presentables
         private string _labelCache;
         public string Label
         {
-            get { UI.Verify(); return _labelCache; }
+            get { return _labelCache; }
             protected set
             {
-                UI.Verify();
                 if (_labelCache != value)
                 {
                     _labelCache = value;
@@ -98,7 +96,7 @@ namespace Kistl.Client.Presentables
         private string _toolTipCache;
         public string ToolTip
         {
-            get { UI.Verify(); return _toolTipCache; }
+            get { return _toolTipCache; }
             protected set
             {
                 UI.Verify();

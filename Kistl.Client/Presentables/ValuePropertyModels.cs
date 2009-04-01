@@ -75,14 +75,11 @@ namespace Kistl.Client.Presentables
             Object = obj;
             Property = bp;
 
-            Property.PropertyChanged += AsyncPropertyPropertyChanged;
-            Object.PropertyChanged += AsyncObjectPropertyChanged;
-            Async.Queue(DataContext, () =>
-            {
-                this.AsyncGetPropertyValue();
-                this.AsyncCheckConstraints();
-                UI.Queue(UI, () => { this.State = ModelState.Active; });
-            });
+            Property.PropertyChanged += PropertyPropertyChangedHandler;
+            Object.PropertyChanged += ObjectPropertyChangedHandler;
+
+            GetPropertyValue();
+            CheckConstraints();
         }
 
         #region Public Interface
@@ -102,58 +99,42 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
         /// <summary>
         /// Loads the Value from the object into the cache.
-        /// Called on the Async Thread.
         /// </summary>
-        protected abstract void AsyncGetPropertyValue();
+        protected abstract void GetPropertyValue();
 
         /// <summary>
         /// Checks constraints on the object and puts the results into the cache.
-        /// Called on the Async Thread.
         /// </summary> 
-        protected void AsyncCheckConstraints()
+        protected void CheckConstraints()
         {
-            Async.Verify();
-            string newError = Object[Property.PropertyName];
-            UI.Queue(UI, () => this.ValueError = newError);
+            ValueError = Object[Property.PropertyName];
         }
 
         #endregion
 
         #region PropertyChanged event handlers
 
-        private void AsyncObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ObjectPropertyChangedHandler(object sender, PropertyChangedEventArgs e)
         {
-            Async.Verify();
-
-            // although we're already Async here, defer actually checking 
-            // the object onto another thread
-            Async.Queue(DataContext, () =>
+            if (e.PropertyName == Property.PropertyName)
             {
-                // flag to the user that something's happening
-                UI.Queue(UI, () => this.State = ModelState.Loading);
+                GetPropertyValue();
+            }
 
-                if (e.PropertyName == Property.PropertyName)
-                {
-                    AsyncGetPropertyValue();
-                }
-                // TODO: ask constraints about dependencies and reduce check frequency
-                AsyncCheckConstraints();
-                // all updates done
-                UI.Queue(UI, () => this.State = ModelState.Active);
-            });
+            // TODO: ask constraints about dependencies and reduce check frequency on object changes
+            CheckConstraints();
         }
 
-        private void AsyncPropertyPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void PropertyPropertyChangedHandler(object sender, PropertyChangedEventArgs e)
         {
-            Async.Verify();
             switch (e.PropertyName)
             {
-                case "PropertyName": AsyncOnPropertyChanged("Label"); break;
-                case "AltText": AsyncOnPropertyChanged("ToolTip"); break;
+                case "PropertyName": OnPropertyChanged("Label"); break;
+                case "AltText": OnPropertyChanged("ToolTip"); break;
             }
         }
 
@@ -167,7 +148,6 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 if (columnName == "Value")
                     return ValueError;
                 else
@@ -181,7 +161,6 @@ namespace Kistl.Client.Presentables
             get { UI.Verify(); return _errorCache; }
             set
             {
-                UI.Verify();
                 if (_errorCache != value)
                 {
                     _errorCache = value;
@@ -222,12 +201,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _valueCache != null;
             }
             set
             {
-                UI.Verify();
                 if (!value)
                     Value = null;
             }
@@ -237,12 +214,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _valueCache == null;
             }
             set
             {
-                UI.Verify();
                 if (value)
                     Value = null;
             }
@@ -262,10 +237,9 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public Nullable<TValue> Value
         {
-            get { UI.Verify(); return _valueCache; }
+            get { return _valueCache; }
             set
             {
-                UI.Verify();
                 if (!_valueCache.HasValue && !value.HasValue)
                     return;
 
@@ -273,13 +247,10 @@ namespace Kistl.Client.Presentables
                     throw new InvalidOperationException("\"null\" input not allowed");
 
                 _valueCache = value;
-                State = ModelState.Loading;
-                Async.Queue(DataContext, () =>
-                {
-                    Object.SetPropertyValue<Nullable<TValue>>(Property.PropertyName, value);
-                    AsyncCheckConstraints();
-                    UI.Queue(UI, () => this.State = ModelState.Active);
-                });
+
+                Object.SetPropertyValue<Nullable<TValue>>(Property.PropertyName, value);
+                CheckConstraints();
+
                 OnPropertyChanged("Value");
                 OnPropertyChanged("IsNull");
                 OnPropertyChanged("HasValue");
@@ -294,7 +265,7 @@ namespace Kistl.Client.Presentables
             }
             set
             {
-                this.Value = string.IsNullOrEmpty(value) ? null : (Nullable<TValue>)System.Convert.ChangeType(value, typeof(TValue));
+                this.Value = String.IsNullOrEmpty(value) ? null : (Nullable<TValue>)System.Convert.ChangeType(value, typeof(TValue));
             }
         }
 
@@ -309,13 +280,11 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
-        protected override void AsyncGetPropertyValue()
+        protected override void GetPropertyValue()
         {
-            Async.Verify();
-            Nullable<TValue> newValue = Object.GetPropertyValue<Nullable<TValue>>(Property.PropertyName);
-            UI.Queue(UI, () => Value = newValue);
+            Value = Object.GetPropertyValue<Nullable<TValue>>(Property.PropertyName);
         }
 
         #endregion
@@ -355,12 +324,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _valueCache != null;
             }
             set
             {
-                UI.Verify();
                 if (!value)
                     Value = null;
             }
@@ -370,12 +337,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _valueCache == null;
             }
             set
             {
-                UI.Verify();
                 if (value)
                     Value = null;
             }
@@ -395,19 +360,14 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public TValue Value
         {
-            get { UI.Verify(); return _valueCache; }
+            get { return _valueCache; }
             set
             {
-                UI.Verify();
-
                 _valueCache = value;
-                State = ModelState.Loading;
-                Async.Queue(DataContext, () =>
-                {
-                    Object.SetPropertyValue<TValue>(Property.PropertyName, value);
-                    AsyncCheckConstraints();
-                    UI.Queue(UI, () => this.State = ModelState.Active);
-                });
+
+                Object.SetPropertyValue<TValue>(Property.PropertyName, value);
+                CheckConstraints();
+
                 OnPropertyChanged("Value");
                 OnPropertyChanged("IsNull");
                 OnPropertyChanged("HasValue");
@@ -416,13 +376,11 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
-        protected override void AsyncGetPropertyValue()
+        protected override void GetPropertyValue()
         {
-            Async.Verify();
-            TValue newValue = Object.GetPropertyValue<TValue>(Property.PropertyName);
-            UI.Queue(UI, () => Value = newValue);
+            Value = Object.GetPropertyValue<TValue>(Property.PropertyName);
         }
 
         #endregion

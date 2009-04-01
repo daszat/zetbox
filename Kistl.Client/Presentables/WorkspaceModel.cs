@@ -32,7 +32,6 @@ namespace Kistl.Client.Presentables
         /// <param name="mdl"></param>
         public void HistoryTouch(DataObjectModel mdl)
         {
-            UI.Verify();
             // fetch old SelectedItem to reestablish selection after modifying RecentObjects
             var item = SelectedItem;
             if (!RecentObjects.Contains(mdl))
@@ -51,16 +50,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 if (_modulesCache == null)
                 {
                     _modulesCache = new ObservableCollection<ModuleModel>();
-                    State = ModelState.Loading;
-                    Async.Queue(DataContext, () =>
-                    {
-                        AsyncLoadModules();
-                        UI.Queue(UI, () => this.State = ModelState.Active);
-                    });
+                    LoadModules();
                 }
                 return _modulesCache;
             }
@@ -76,7 +69,6 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 if (_saveCommand == null)
                     _saveCommand = Factory.CreateSpecificModel<SaveContextCommand>(DataContext);
 
@@ -89,12 +81,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _selectedItem;
             }
             set
             {
-                UI.Verify();
                 if (_selectedItem != value)
                 {
                     _selectedItem = value;
@@ -109,35 +99,26 @@ namespace Kistl.Client.Presentables
         public bool CreateNewInstanceEnabled { get { return SelectedItem != null && SelectedItem.Object is ObjectClass; } }
         public void CreateNewInstance()
         {
-            UI.Verify();
             var obj = SelectedItem;
-            Async.Queue(DataContext, () =>
-            {
-                var objClass = (ObjectClass)obj.Object;
-                var created = (IDataObject)DataContext.Create(objClass.GetDescribedInterfaceType());
-                UI.Queue(UI, () => SelectedItem = (DataObjectModel)Factory.CreateDefaultModel(DataContext, created));
-            });
+            var objClass = (ObjectClass)obj.Object;
+            var created = (IDataObject)DataContext.Create(objClass.GetDescribedInterfaceType());
+            SelectedItem = (DataObjectModel)Factory.CreateDefaultModel(DataContext, created);
         }
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
-        private void AsyncLoadModules()
+        private void LoadModules()
         {
-            Async.Verify();
             var modules = DataContext.GetQuery<Module>().ToList();
-            UI.Queue(UI, () =>
+            foreach (var m in modules)
             {
-                foreach (var m in modules)
-                {
-                    Modules.Add((ModuleModel)Factory
-                        .CreateModel(
-                            DataMocks.LookupDefaultModelDescriptor(m),
-                            DataContext, new object[] { m }));
-                }
-                State = ModelState.Active;
-            });
+                Modules.Add((ModuleModel)Factory
+                    .CreateModel(
+                        DataMocks.LookupDefaultModelDescriptor(m),
+                        DataContext, new object[] { m }));
+            }
         }
 
         #endregion
@@ -155,19 +136,14 @@ namespace Kistl.Client.Presentables
 
         public override bool CanExecute(object data)
         {
-            UI.Verify();
             return data == null;
         }
 
         public override void Execute(object data)
         {
-            UI.Verify();
             Executing = true;
-            Async.Queue(DataContext, () =>
-            {
-                DataContext.SubmitChanges();
-                UI.Queue(UI, () => Executing = false);
-            });
+            DataContext.SubmitChanges();
+            Executing = false;
         }
 
     }

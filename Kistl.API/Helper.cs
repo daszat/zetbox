@@ -1,15 +1,18 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 using System.Collections;
-using System.Reflection;
-using TraceClient;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
+
+using Kistl.API.Utils;
+
+using TraceClient;
 
 namespace Kistl.API
 {
@@ -223,6 +226,16 @@ namespace Kistl.API
         {
             PropertyInfo pi = obj.GetType().GetProperty(propName);
             return pi != null;
+        }
+
+        public static void AddToCollectionQuick(this IDataObject obj, string propName, object val)
+        {
+            MagicCollectionFactory.WrapAsCollection<object>(obj.GetPropertyValue<object>(propName)).Add(val);
+        }
+
+        public static void RemoveFromCollectionQuick(this IDataObject obj, string propName, object val)
+        {
+            MagicCollectionFactory.WrapAsCollection<object>(obj.GetPropertyValue<object>(propName)).Remove(val);
         }
 
         public static void AddToCollection<T>(this object obj, string propName, T val)

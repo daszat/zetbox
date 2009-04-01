@@ -19,7 +19,7 @@ namespace Kistl.Client.Presentables
         {
             _type = type;
             // refresh Icon
-            Async.Queue(DataContext, AsyncUpdateViewCache);
+            UpdateViewCache();
         }
 
         #region Public interface
@@ -29,25 +29,18 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
-                State = ModelState.Loading;
-                Async.Queue(DataContext, () =>
-                {
-                    AsyncQueryHasInstances();
-                    // TODO: Wird auch in der Ableitung aufgerufen.
-                    // Stateobjekt als IDisposable durchreichen
-                    // aber dann braucht man einen ReferenceCounter - Uaaaaa
-                    // was nochmals eine andere Klasse von Scheiße ist.
-                    // Aber man könnte dem einen String umhängen, was geladen wurde.
-                    // Umpriorisieren & Abbrechen wäre dann auch möglich.
-                    // Case: 661
-                    UI.Queue(UI, () => this.State = ModelState.Active);
-                });
+                QueryHasInstances();
+                // TODO: Wird auch in der Ableitung aufgerufen.
+                // Stateobjekt als IDisposable durchreichen
+                // aber dann braucht man einen ReferenceCounter - Uaaaaa
+                // was nochmals eine andere Klasse von Scheiße ist.
+                // Aber man könnte dem einen String umhängen, was geladen wurde.
+                // Umpriorisieren & Abbrechen wäre dann auch möglich.
+                // Case: 661
                 return _hasInstances;
             }
             protected set
             {
-                UI.Verify();
                 if (value != _hasInstances)
                 {
                     _hasInstances = value;
@@ -62,13 +55,12 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 if (_instances == null)
                 {
                     _instances = new ObservableCollection<DataObjectModel>();
                     // As this is a "calculated" collection, only insider should modify this
                     //_instances.CollectionChanged += _instances_CollectionChanged;
-                    Async.Queue(DataContext, AsyncLoadInstances);
+                    LoadInstances();
                 }
                 return _instances;
             }
@@ -76,31 +68,26 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
         /// <summary>
         /// Sets the HasInstances property to the appropriate value
         /// </summary>
-        protected virtual void AsyncQueryHasInstances()
+        protected virtual void QueryHasInstances()
         {
-            Async.Verify();
-            UI.Queue(UI, () => { HasInstances = false; State = ModelState.Active; });
+             HasInstances = false; 
         }
 
         /// <summary>
         /// Loads the instances of this DataType and adds them to the Instances collection
         /// </summary>
-        protected virtual void AsyncLoadInstances()
+        protected virtual void LoadInstances()
         {
-            Async.Verify();
-            UI.Queue(UI, () => { State = ModelState.Active; });
-
         }
 
         /// <returns>the default icon of this <see cref="DataType"/></returns>
-        protected override Kistl.App.GUI.Icon AsyncGetIcon()
+        protected override Kistl.App.GUI.Icon GetIcon()
         {
-            Async.Verify();
             if (_type != null)
                 return _type.DefaultIcon;
             else

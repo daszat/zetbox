@@ -29,8 +29,6 @@ namespace Kistl.Client.Presentables.Assemblies
         {
             get
             {
-                UI.Verify();
-
                 if (_typeList == null)
                 {
                     _typeList = AsyncListFactory.UiCreateImmutable(

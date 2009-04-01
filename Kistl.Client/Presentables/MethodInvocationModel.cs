@@ -20,15 +20,13 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx, mdl)
         {
             _invocation = mdl;
-            _invocation.PropertyChanged += AsyncInvocationPropertyChanged;
+            _invocation.PropertyChanged += InvocationPropertyChanged;
         }
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
-        private void AsyncUpdateMemberNamePossibilities()
+        private void UpdateMemberNamePossibilities()
         {
-            Async.Verify();
-
             if (_memberNameProperty == null)
                 _memberNameProperty = Object.GetObjectClass(MetaContext).Properties.Single(p => p.PropertyName == "MemberName");
 
@@ -47,25 +45,21 @@ namespace Kistl.Client.Presentables
                 .OrderBy(name => name)
                 .ToList();
 
-            UI.Queue(UI, () =>
-            {
-                var originalValue = _memberNameModel.Value;
-                _memberNameModel.PossibleValues.Clear();
-                possibleValues.ForEach(v => _memberNameModel.PossibleValues.Add(v));
-                _memberNameModel.Value = originalValue;
-            });
+            var originalValue = _memberNameModel.Value;
+            _memberNameModel.PossibleValues.Clear();
+            possibleValues.ForEach(v => _memberNameModel.PossibleValues.Add(v));
+            _memberNameModel.Value = originalValue;
         }
 
         #endregion
 
         #region PropertyChanged event handlers
 
-        private void AsyncInvocationPropertyChanged(object sender, PropertyChangedEventArgs args)
+        private void InvocationPropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            Async.Verify();
             switch (args.PropertyName)
             {
-                case "Implementor": AsyncUpdateMemberNamePossibilities(); break;
+                case "Implementor": UpdateMemberNamePossibilities(); break;
             }
         }
 

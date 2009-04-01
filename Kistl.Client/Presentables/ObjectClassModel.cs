@@ -21,33 +21,24 @@ namespace Kistl.Client.Presentables
             _class = cls;
         }
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
-        protected override void AsyncQueryHasInstances()
+        protected override void QueryHasInstances()
         {
-            Async.Verify();
             var obj = DataContext.GetQuery(_class.GetDescribedInterfaceType()).FirstOrDefault();
-            UI.Queue(UI, () => { HasInstances = (obj != null); State = ModelState.Active; });
+            HasInstances = (obj != null);
         }
 
-        protected override void AsyncLoadInstances()
+        protected override void LoadInstances()
         {
-            Async.Verify();
-            UI.Queue(UI, () => State = ModelState.Loading);
-            var objs = DataContext.GetQuery(_class.GetDescribedInterfaceType()).ToList().OrderBy(obj => obj.ToString()).ToList();
-
-            UI.Queue(UI, () =>
+            foreach (var obj in DataContext.GetQuery(_class.GetDescribedInterfaceType()).ToList().OrderBy(obj => obj.ToString()))
             {
-                foreach (var obj in objs)
-                {
-                    var mdlDesc = DataMocks.LookupDefaultModelDescriptor(obj);
-                    Instances.Add((DataObjectModel)Factory.CreateModel(
-                        mdlDesc,
-                        DataContext,
-                       new object[] { obj }));
-                }
-                State = ModelState.Active;
-            });
+                var mdlDesc = DataMocks.LookupDefaultModelDescriptor(obj);
+                Instances.Add((DataObjectModel)Factory.CreateModel(
+                    mdlDesc,
+                    DataContext,
+                   new object[] { obj }));
+            }
         }
 
         #endregion

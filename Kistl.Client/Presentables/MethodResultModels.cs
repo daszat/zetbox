@@ -19,13 +19,10 @@ namespace Kistl.Client.Presentables
             Object = obj;
             Method = m;
 
-            Method.PropertyChanged += AsyncMethodPropertyChanged;
-            Object.PropertyChanged += AsyncObjectPropertyChanged;
-            Async.Queue(Object.Context, () =>
-            {
-                this.AsyncGetResult();
-                UI.Queue(UI, () => { this.State = ModelState.Active; });
-            });
+            Method.PropertyChanged += MethodPropertyChanged;
+            Object.PropertyChanged += ObjectPropertyChanged;
+
+            GetResult();
         }
 
         #region Public Interface
@@ -39,59 +36,41 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
         /// <summary>
         /// Loads the method's result from the object into the cache.
-        /// Called on the Async Thread.
         /// </summary>
-        protected void AsyncGetResult()
+        protected void GetResult()
         {
-            Async.Verify();
-            TValue newValue = Object.CallMethod<TValue>(Method.MethodName);
-            UI.Queue(UI, () => Value = newValue);
+            Value = Object.CallMethod<TValue>(Method.MethodName);
         }
 
         /// <summary>
         /// Notifies listner that the object state has changed
         /// </summary>
-        protected virtual void AsyncOnResultChanged()
+        protected virtual void OnResultChanged()
         {
-            Async.Verify();
-            AsyncOnPropertyChanged("Value");
-            AsyncOnPropertyChanged("IsNull");
-            AsyncOnPropertyChanged("HasValue");
+            OnPropertyChanged("Value");
+            OnPropertyChanged("IsNull");
+            OnPropertyChanged("HasValue");
         }
         #endregion
 
         #region PropertyChanged event handlers
 
-        private void AsyncObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Async.Verify();
-
-            // although we're already Async here, defer actually checking 
-            // the object onto another thread
-            Async.Queue(DataContext, () =>
-            {
-                // flag to the user that something's happening
-                UI.Queue(UI, () => this.State = ModelState.Loading);
-
-                // always have to recalculate
-                AsyncGetResult();
-
-                // all updates done
-                UI.Queue(UI, () => this.State = ModelState.Active);
-            });
+            // always have to recalculate
+            GetResult();
         }
 
-        private void AsyncMethodPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MethodPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Async.Verify();
             switch (e.PropertyName)
             {
-                case "MethodName": AsyncOnPropertyChanged("Label"); break;
-                case "Description": AsyncOnPropertyChanged("ToolTip"); break;
+                case "MethodName": OnPropertyChanged("Label"); break;
+                case "Description": OnPropertyChanged("ToolTip"); break;
             }
         }
 
@@ -116,12 +95,12 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// Whether or not the method returned a value. <seealso cref="IsNull"/>
         /// </summary>
-        public bool HasValue { get { UI.Verify(); return _valueCache.HasValue; } }
+        public bool HasValue { get { return _valueCache.HasValue; } }
 
         /// <summary>
         /// Whether or not the method returned null. <seealso cref="HasValue"/>
         /// </summary>
-        public bool IsNull { get { UI.Verify(); return !_valueCache.HasValue; } }
+        public bool IsNull { get { return !_valueCache.HasValue; } }
 
         private Nullable<TValue> _valueCache;
 
@@ -130,15 +109,14 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public override Nullable<TValue> Value
         {
-            get { UI.Verify(); return _valueCache; }
+            get {return _valueCache; }
             protected set
             {
-                UI.Verify();
                 if (!_valueCache.HasValue && !value.HasValue)
                     return;
 
                 _valueCache = value;
-                Async.Queue(DataContext, AsyncOnResultChanged);
+                OnResultChanged();
             }
         }
     }
@@ -157,12 +135,12 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// Whether or not the method returned a value. <seealso cref="IsNull"/>
         /// </summary>
-        public bool HasValue { get { UI.Verify(); return Value != null; } }
+        public bool HasValue { get { return Value != null; } }
 
         /// <summary>
         /// Whether or not the method returned null. <seealso cref="HasValue"/>
         /// </summary>
-        public bool IsNull { get { UI.Verify(); return Value == null; } }
+        public bool IsNull { get { return Value == null; } }
 
         private TValue _valueCache;
 
@@ -171,14 +149,13 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public override TValue Value
         {
-            get { UI.Verify(); return _valueCache; }
+            get { return _valueCache; }
             protected set
             {
-                UI.Verify();
                 if (_valueCache != value)
                 {
                     _valueCache = value;
-                    Async.Queue(DataContext, AsyncOnResultChanged);
+                    OnResultChanged();
                 }
             }
         }

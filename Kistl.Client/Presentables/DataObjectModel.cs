@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -30,22 +31,20 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx)
         {
             _object = obj;
-            _object.PropertyChanged += AsyncObjectPropertyChanged;
+            _object.PropertyChanged += ObjectPropertyChanged;
             // TODO: Optional machen!
-            Async.Queue(DataContext, () =>
-            {
-                AsyncUpdateViewCache();
-                UI.Queue(UI, () => this.State = ModelState.Active);
-            });
+            UpdateViewCache();
         }
 
         #region Public Interface
+
+        private IDataObject _object;
+        internal IDataObject Object { get { return _object; } }
 
         public int ID
         {
             get
             {
-                UI.Verify();
                 return IsInDesignMode
                     ? 42
                     // this should always be instantaneous
@@ -58,13 +57,11 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
-
                 if (_propertyModels == null)
                 {
                     _propertyModels = AsyncListFactory.UiCreateImmutable<Property, PresentableModel>(
                         AppContext, DataContext, this,
-                        AsyncFetchPropertyList,
+                        FetchPropertyList,
                         property => Factory.CreateModel(
                             DataMocks.LookupDefaultPropertyModelDescriptor(property),
                             DataContext,
@@ -86,7 +83,7 @@ namespace Kistl.Client.Presentables
                 {
                     _methodResultsCache = AsyncListFactory.UiCreateImmutable<Method, PresentableModel>(
                         AppContext, DataContext, this,
-                        AsyncFetchMethodList,
+                        FetchMethodList,
                         method =>
                         {
                             // TODO: cache cls
@@ -104,17 +101,11 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 if (_actionsView == null)
                 {
                     _actionsCache = new ObservableCollection<ActionModel>();
                     _actionsView = new ReadOnlyObservableCollection<ActionModel>(_actionsCache);
-                    State = ModelState.Loading;
-                    Async.Queue(DataContext, () =>
-                    {
-                        AsyncFetchActions();
-                        UI.Queue(UI, () => this.State = ModelState.Active);
-                    });
+                    FetchActions();
                 }
                 return _actionsView;
             }
@@ -125,12 +116,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _toStringCache;
             }
             private set
             {
-                UI.Verify();
                 if (value != _toStringCache)
                 {
                     _toStringCache = value;
@@ -144,12 +133,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _longNameCache;
             }
             private set
             {
-                UI.Verify();
                 if (value != _longNameCache)
                 {
                     _longNameCache = value;
@@ -163,12 +150,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _iconPathCache;
             }
             set
             {
-                UI.Verify();
                 if (value != _iconPathCache)
                 {
                     _iconPathCache = value;
@@ -182,23 +167,20 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public void Delete()
         {
-            UI.Verify();
-            State = ModelState.Loading;
-            Async.Queue(DataContext, () =>
-            {
-                DataContext.Delete(Object);
-                UI.Queue(UI, () => State = ModelState.Active);
-            });
+            DataContext.Delete(Object);
+        }
+
+        public InterfaceType GetInterfaceType()
+        {
+            return Object.GetInterfaceType();
         }
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
-        private IEnumerable<Property> AsyncFetchPropertyList()
+        private IEnumerable<Property> FetchPropertyList()
         {
-            Async.Verify();
-
             // load properties from MetaContext
             ObjectClass cls = _object.GetObjectClass(MetaContext);
             var props = new List<Property>();
@@ -214,10 +196,8 @@ namespace Kistl.Client.Presentables
             return props;
         }
 
-        private IEnumerable<Method> AsyncFetchMethodList()
+        private IEnumerable<Method> FetchMethodList()
         {
-            Async.Verify();
-
             // load properties from MetaContext
             ObjectClass cls = _object.GetObjectClass(MetaContext);
             var methods = new List<Method>();
@@ -236,10 +216,8 @@ namespace Kistl.Client.Presentables
             return methods;
         }
 
-        private void AsyncFetchActions()
+        private void FetchActions()
         {
-            Async.Verify();
-
             // load properties
             ObjectClass cls = _object.GetObjectClass(MetaContext);
             var actions = new List<Method>();
@@ -252,16 +230,12 @@ namespace Kistl.Client.Presentables
                 cls = cls.BaseObjectClass;
             }
 
-            UI.Queue(UI, () =>
-            {
-                SetClassActionModels(cls, actions);
-            });
+            SetClassActionModels(cls, actions);
         }
 
         // TODO: should go to renderer and use database backed decision tables
         protected virtual void SetClassActionModels(ObjectClass cls, IEnumerable<Method> methods)
         {
-            UI.Verify();
             foreach (var action in methods)
             {
                 Debug.Assert(action.Parameter.Count == 0);
@@ -272,7 +246,6 @@ namespace Kistl.Client.Presentables
         // TODO: should go to renderer and use database backed decision tables
         protected virtual PresentableModel ModelFromMethod(ObjectClass cls, Method pm)
         {
-            UI.Verify();
             Debug.Assert(pm.Parameter.Single().IsReturnParameter);
             var retParam = pm.GetReturnParameter();
 
@@ -312,13 +285,12 @@ namespace Kistl.Client.Presentables
             string result = AppContext.Configuration.Client.DocumentStore
                 + @"\GUI.Icons\"
                 + name;
-            result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
+            result = Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
             return result;
         }
 
-        protected void AsyncUpdateViewCache()
+        protected void UpdateViewCache()
         {
-            Async.Verify();
 
             // update Name
             _toStringCache = String.Format("{0} {1}",
@@ -327,19 +299,19 @@ namespace Kistl.Client.Presentables
             _longNameCache = String.Format("{0}: {1}",
                 _object.GetInterfaceType().Type.FullName,
                 _toStringCache);
-            AsyncOnPropertyChanged("Name");
-            AsyncOnPropertyChanged("LongName");
+            OnPropertyChanged("Name");
+            OnPropertyChanged("LongName");
 
             // update IconPath
-            Icon icon = AsyncGetIcon();
+            Icon icon = GetIcon();
             if (icon != null)
             {
                 string newIconPath = GetIconPath(icon.IconFile);
-                UI.Queue(UI, () => IconPath = newIconPath);
+                IconPath = newIconPath;
             }
             else
             {
-                UI.Queue(UI, () => IconPath = "");
+                IconPath = "";
             }
         }
 
@@ -347,9 +319,8 @@ namespace Kistl.Client.Presentables
         /// Override this to present a custom icon
         /// </summary>
         /// <returns>an <see cref="Icon"/> describing the desired icon</returns>
-        protected virtual Icon AsyncGetIcon()
+        protected virtual Icon GetIcon()
         {
-            Async.Verify();
             Icon icon = null;
             if (_object is Icon)
             {
@@ -366,37 +337,17 @@ namespace Kistl.Client.Presentables
 
         #region PropertyChanged event handlers
 
-        private void AsyncObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Async.Verify();
-
             // notify consumers if ID has changed
             if (e.PropertyName == "ID")
-                AsyncOnPropertyChanged("ID");
+                OnPropertyChanged("ID");
 
-            // defer updating the cache into another work item
-            Async.Queue(DataContext, () =>
-            {
-                // flag to the user that something's happening
-                UI.Queue(UI, () => this.State = ModelState.Loading);
-                AsyncUpdateViewCache();
-                // all updates done
-                UI.Queue(UI, () => this.State = ModelState.Active);
-            });
-
-
+            UpdateViewCache();
+            // all updates done
         }
 
         #endregion
 
-        private IDataObject _object;
-
-        /// <summary>
-        /// Contrary to all other Properties, this directly exposes the 
-        /// modelled IDataObject and thus may neither be thread-safe nor 
-        /// low-latency.
-        /// </summary>
-        // other models need access to this.
-        public IDataObject Object { get { return _object; } }
     }
 }

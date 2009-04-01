@@ -31,22 +31,18 @@ namespace Kistl.Client.Presentables
         public bool HasValue { get { UI.Verify(); return true; } }
         public bool IsNull { get { UI.Verify(); return false; } }
 
-        private AsyncList<IDataObject, DataObjectModel> _valueCache;
-        public ReadOnlyObservableCollection<DataObjectModel> Value
+        private ReadOnlyObservableProjection<IDataObject, DataObjectModel> _valueCache;
+        public IReadOnlyObservableCollection<DataObjectModel> Value
         {
             get
             {
-                UI.Verify();
                 if (_valueCache == null)
                 {
-                    _valueCache = AsyncListFactory.UiCreateMutable<IDataObject, DataObjectModel>(
-                        AppContext, DataContext, this,
-                        () => Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
-                        () => MagicCollectionFactory.WrapAsList<IDataObject>(Object.GetPropertyValue<object>(Property.PropertyName)),
-                        asyncObj => Factory.CreateSpecificModel<DataObjectModel>(DataContext, asyncObj),
-                        uiObject => uiObject.Object);
+                    _valueCache = new ReadOnlyObservableProjection<IDataObject, DataObjectModel>(
+                        Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
+                        obj => (DataObjectModel)Factory.CreateDefaultModel(DataContext, obj));
                 }
-                return _valueCache.GetUiView();
+                return _valueCache;
             }
         }
 
@@ -55,12 +51,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _selectedItem;
             }
             set
             {
-                UI.Verify();
                 if (_selectedItem != value)
                 {
                     _selectedItem = value;
@@ -89,64 +83,50 @@ namespace Kistl.Client.Presentables
         /// </example>
         public void CreateNewItem(Action<DataObjectModel> onCreated)
         {
-            UI.Verify();
+            ObjectClass baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
 
-            Async.Queue(DataContext, () =>
+            var children = new List<ObjectClass>() { baseclass };
+            CollectChildClasses(baseclass.ID, children);
+
+            if (children.Count == 1)
             {
-                ObjectClass baseclass;
+                var targetType = baseclass.GetDescribedInterfaceType();
+                var item = this.DataContext.Create(targetType);
+                onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item));
+            }
+            else
+            {
+                // sort by name, create models
+                // TODO: filter non-instantiable classes
+                var childModels = children
+                    .OrderBy(oc => oc.ClassName)
+                    .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
+                    .ToList();
 
-                baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
-
-                var children = new List<ObjectClass>() { baseclass };
-                AsyncCollectChildClasses(baseclass.ID, children);
-
-                if (children.Count == 1)
-                {
-                    var targetType = baseclass.GetDescribedInterfaceType();
-                    var item = this.DataContext.Create(targetType);
-                    UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
-                }
-                else
-                {
-                    UI.Queue(UI, () =>
-                    {
-                        // sort by name, create models
-                        // TODO: filter non-instantiable classes
-                        var childModels = children
-                            .OrderBy(oc => oc.ClassName)
-                            .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
-                            .ToList();
-
-                        Factory.ShowModel(
-                            Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
-                                DataContext,
-                                childModels,
-                                new Action<DataObjectModel>(delegate(DataObjectModel chosen)
-                                {
-                                    UI.Verify();
-                                    Async.Queue(DataContext, () =>
-                                    {
-                                        if (chosen != null)
-                                        {
-                                            var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
-                                            var item = this.DataContext.Create(targetType);
-                                            UI.Queue(UI, () => onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item)));
-                                        }
-                                        else
-                                        {
-                                            UI.Queue(UI, () => onCreated(null));
-                                        }
-                                    });
-                                })), true);
-                    });
-                }
-            });
+                Factory.ShowModel(
+                    Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+                        DataContext,
+                        childModels,
+                        new Action<DataObjectModel>(delegate(DataObjectModel chosen)
+                        {
+                            if (chosen != null)
+                            {
+                                var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
+                                var item = this.DataContext.Create(targetType);
+                                onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item));
+                            }
+                            else
+                            {
+                                onCreated(null);
+                            }
+                        })), true);
+            }
         }
 
         public void AddItem(DataObjectModel item)
         {
             UI.Verify();
-            _valueCache.AddItem(item);
+            Object.AddToCollectionQuick(Property.PropertyName, item.Object);
         }
 
         /// <summary>
@@ -154,51 +134,36 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public void AddExistingItem()
         {
-            Async.Queue(DataContext, () =>
-            {
-                var baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass.GetDescribedInterfaceType();
-                var instances = DataContext.GetQuery(baseclass).ToList().OrderBy(i => i.ToString());
-                UI.Queue(UI, () =>
-                {
-                    var instanceModels = instances
-                        .Select(i => (DataObjectModel)Factory.CreateDefaultModel(DataContext, i))
-                        .ToList();
+            var baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass.GetDescribedInterfaceType();
+            var instances = DataContext.GetQuery(baseclass).ToList(); // TODO: remove superfluous ToList
+            var instanceModels = instances
+                .OrderBy(i => i.ToString())
+                .Select(i => (DataObjectModel)Factory.CreateDefaultModel(DataContext, i))
+                .ToList();
 
-                    Factory.ShowModel(
-                        Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
-                            DataContext,
-                            instanceModels,
-                            new Action<DataObjectModel>(delegate(DataObjectModel chosen)
-                            {
-                                if (chosen != null)
-                                {
-                                    AddItem(chosen);
-                                    SelectedItem = chosen;
-                                }
-                            })), true);
-                });
-            });
+            Factory.ShowModel(
+                Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+                    DataContext,
+                    instanceModels,
+                    new Action<DataObjectModel>(delegate(DataObjectModel chosen)
+                    {
+                        if (chosen != null)
+                        {
+                            AddItem(chosen);
+                            SelectedItem = chosen;
+                        }
+                    })), true);
         }
 
         public void RemoveItem(DataObjectModel item)
         {
-            UI.Verify();
-            _valueCache.RemoveItem(item);
+            Object.RemoveFromCollectionQuick(Property.PropertyName, item.Object);
         }
 
         public void DeleteItem(DataObjectModel item)
         {
-            UI.Verify();
-            State = ModelState.Loading;
-            Async.Queue(DataContext, () =>
-            {
-                Object.RemoveFromCollection<IDataObject>(Property.PropertyName, item.Object);
-                UI.Queue(UI, () =>
-                {
-                    item.Delete();
-                    State = ModelState.Active;
-                });
-            });
+            RemoveItem(item);
+            item.Delete();
         }
 
         public void ActivateItem(DataObjectModel item, bool activate)
@@ -208,16 +173,14 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
-        protected override void AsyncGetPropertyValue()
+        protected override void GetPropertyValue()
         {
         }
 
-        private void AsyncCollectChildClasses(int id, List<ObjectClass> children)
+        private void CollectChildClasses(int id, List<ObjectClass> children)
         {
-            Async.Verify();
-
             var nextChildren = MetaContext.GetQuery<ObjectClass>()
                 .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id)
                 .ToList();
@@ -227,7 +190,7 @@ namespace Kistl.Client.Presentables
                 foreach (ObjectClass oc in nextChildren)
                 {
                     children.Add(oc);
-                    AsyncCollectChildClasses(oc.ID, children);
+                    CollectChildClasses(oc.ID, children);
                 };
             }
         }

@@ -15,7 +15,7 @@ using Kistl.App.Base;
 namespace Kistl.Client.Presentables
 {
     public interface IValueListModel<TElement>
-        : IReadOnlyValueModel<ReadOnlyObservableCollection<TElement>>
+        : IReadOnlyValueModel<IReadOnlyObservableCollection<TElement>>
     {
 
         /// <summary>
@@ -90,54 +90,42 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private AsyncList<TElement, TElementModel> _valueCache;
-        public ReadOnlyObservableCollection<TElementModel> Value
+        private ReadOnlyObservableProjection<TElement, TElementModel> _valueCache;
+        public IReadOnlyObservableCollection<TElementModel> Value
         {
             get
             {
                 if (_valueCache == null)
                 {
-                    _valueCache = AsyncListFactory.UiCreateMutable<TElement, TElementModel>(
-                        AppContext, DataContext, this,
-                        () => Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
-                        () => Object.GetPropertyValue<IList<TElement>>(Property.PropertyName),
-                        GetModel,
-                        GetItem);
+                    _valueCache = new ReadOnlyObservableProjection<TElement, TElementModel>(
+                        Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
+                        GetModel);
                 }
-                return _valueCache.GetUiView();
+                return _valueCache;
             }
         }
 
         public void AddItem(TElementModel mdl)
         {
-            UI.Verify();
-            _valueCache.AddItem(mdl);
+            Object.AddToCollectionQuick(Property.PropertyName, GetItem(mdl));
         }
 
         public void RemoveItem(TElementModel mdl)
         {
-            UI.Verify();
-            _valueCache.RemoveItem(mdl);
+            Object.RemoveFromCollectionQuick(Property.PropertyName, GetItem(mdl));
         }
 
-        // still works as before, AsyncList will pickup change via notification
         public void DeleteItem(TElementModel mdl)
         {
-            UI.Verify();
-            State = ModelState.Loading;
-            Async.Queue(DataContext, () =>
-            {
-                Object.RemoveFromCollection<TElement>(Property.PropertyName, GetItem(mdl));
-                AsyncDeleteItem(GetItem(mdl));
-                UI.Queue(UI, () => State = ModelState.Active);
-            });
+            RemoveItem(mdl);
+            DeleteItemFromDataStore(GetItem(mdl));
         }
 
         public abstract void ActivateItem(TElementModel mdl, bool activate);
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
         #endregion
 
@@ -152,9 +140,9 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// deletes the given element from the data store after it is removed from the collection
         /// </summary>
-        protected abstract void AsyncDeleteItem(TElement mdl);
+        protected abstract void DeleteItemFromDataStore(TElement mdl);
 
-        protected override void AsyncGetPropertyValue()
+        protected override void GetPropertyValue()
         {
             // AsyncList takes care of all that
         }
@@ -186,14 +174,13 @@ namespace Kistl.Client.Presentables
             return mdl;
         }
 
-        protected override void AsyncDeleteItem(TElement mdl)
-        {
-            // since TElement needs no Model, it is no IDataObject.
-            // since it is no IDataObject, it doesn't need to be deleted.
-        }
-
         public override void ActivateItem(TElement mdl, bool activate)
         {
+        }
+
+        protected override void DeleteItemFromDataStore(TElement mdl)
+        {
+            // Values are deleted automatically from DataStore, when being removed from the collection
         }
 
         #region IValueListModel<string> Members
@@ -232,33 +219,29 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return SelectedItem != null ? SelectedItem.ToString() : "";
             }
             set
             {
-                UI.Verify();
                 SelectedItem = ToItem(value);
             }
         }
 
-        private AsyncList<TElement, string> _stringListCache;
-        ReadOnlyObservableCollection<string> IReadOnlyValueModel<ReadOnlyObservableCollection<string>>.Value
+        private ReadOnlyObservableProjection<TElement, string> _stringListCache;
+        IReadOnlyObservableCollection<string> IReadOnlyValueModel<IReadOnlyObservableCollection<string>>.Value
         {
             get
             {
                 if (_stringListCache == null)
                 {
-                    _stringListCache = AsyncListFactory.UiCreateMutable<TElement, string>(
-                        AppContext, DataContext, this,
-                        () => this.Value,
-                        () => this.Value,
-                        i => i.ToString(),
-                        ToItem);
+                    _stringListCache = new ReadOnlyObservableProjection<TElement, string>(
+                        Value,
+                        i => i.ToString());
                 }
-                return _stringListCache.GetUiView();
+                return _stringListCache;
             }
         }
         #endregion
+
     }
 }

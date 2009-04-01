@@ -28,7 +28,6 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _choices;
             }
         }

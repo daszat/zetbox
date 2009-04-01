@@ -9,11 +9,6 @@ using Kistl.API;
 
 namespace Kistl.Client.Presentables
 {
-    /////////////////////////////////////////////////////////////////
-    //   hack the heck out of the model concept to re-use          //
-    //   their structures for a sufficiently asynchronous          //
-    //   kistl debugger                                            //
-    /////////////////////////////////////////////////////////////////
 
     public class KistlDebuggerAsModel : PresentableModel, IKistlContextDebugger
     {
@@ -57,7 +52,7 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        #region IKistlContextDebugger Members (all async)
+        #region IKistlContextDebugger Members
 
         private KistlContextModel GetModel(IKistlContext ctx)
         {
@@ -66,21 +61,20 @@ namespace Kistl.Client.Presentables
 
         void IKistlContextDebugger.Created(IKistlContext ctx)
         {
-            UI.Queue(UI, () => _activeCtxCache.Add(GetModel(ctx)));
+            _activeCtxCache.Add(GetModel(ctx));
         }
 
         void IKistlContextDebugger.Disposed(IKistlContext ctx)
         {
-            UI.Queue(UI, () => { var mdl = GetModel(ctx); _activeCtxCache.Remove(mdl); _disposedCtxCache.Add(mdl); });
+            var mdl = GetModel(ctx);
+            _activeCtxCache.Remove(mdl);
+            _disposedCtxCache.Add(mdl);
         }
 
         void IKistlContextDebugger.Changed(IKistlContext ctx)
         {
-            UI.Queue(UI, () =>
-            {
-                var ctxMdl = GetModel(ctx);
-                Async.Queue(ctx, ctxMdl.AsyncOnContextChanged);
-            });
+            var ctxMdl = GetModel(ctx);
+            ctxMdl.OnContextChanged();
         }
 
         #endregion
@@ -155,7 +149,6 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 if (_objView == null)
                 {
                     _objView = new ReadOnlyObservableCollection<DataObjectModel>(_objCache);
@@ -169,12 +162,10 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return _countCache;
             }
             private set
             {
-                UI.Verify();
                 if (_countCache != value)
                 {
                     _countCache = value;
@@ -187,7 +178,6 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 return String.Join("", DebuggingContext.CreatedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
             }
         }
@@ -196,14 +186,12 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
                 if (DebuggingContext.DisposedAt == null)
                 {
                     return "still active";
                 }
                 else
                 {
-
                     return String.Join("", DebuggingContext.DisposedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
                 }
             }
@@ -211,17 +199,16 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        #region Async Handlers and UI callbacks
+        #region Utilities and UI callbacks
 
         /// <summary>
         /// Update the model's state when the context is changed
         /// </summary>
         /// is only called by the <see cref="KistlDebuggerAsModel"/>
-        internal void AsyncOnContextChanged()
+        internal void OnContextChanged()
         {
-            Async.Verify();
             var objs = DataContext.AttachedObjects.OfType<IDataObject>().ToArray();
-            UI.Queue(UI, () => SyncObjects(objs));
+            SyncObjects(objs);
         }
 
         private void SyncObjects(IDataObject[] objs)

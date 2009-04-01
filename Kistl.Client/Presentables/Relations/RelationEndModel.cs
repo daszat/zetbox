@@ -35,7 +35,7 @@ namespace Kistl.Client.Presentables.Relations
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
         #endregion
 
         #region Event handlers

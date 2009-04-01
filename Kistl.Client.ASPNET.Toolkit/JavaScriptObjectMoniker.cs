@@ -41,7 +41,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         private void Init(DataObjectModel m)
         {
             ID = m.ID;
-            Type = new SerializableType(m.Object.GetInterfaceType());
+            Type = new SerializableType(m.GetInterfaceType());
             Text = m.Name;
         }
 

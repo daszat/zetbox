@@ -20,7 +20,7 @@ namespace Kistl.Client.Presentables
             Object = obj;
             Method = m;
 
-            Method.PropertyChanged += AsyncMethodPropertyChanged;
+            Method.PropertyChanged += MethodPropertyChanged;
         }
 
 
@@ -38,42 +38,26 @@ namespace Kistl.Client.Presentables
         /// <param name="callback"></param>
         public void Execute(Action callback)
         {
-            UI.Verify();
-            State = ModelState.Loading;
-            Async.Queue(DataContext, () =>
-            {
-                MethodInfo info = Object.GetType().FindMethod(Method.MethodName, new Type[] { });
-                info.Invoke(Object, new object[] { });
-                UI.Queue(UI, () =>
-                {
-                    try
-                    {
-                        if (callback != null)
-                            callback();
-                    }
-                    finally
-                    {
-                        State = ModelState.Active;
-                    }
-                });
-            });
+            MethodInfo info = Object.GetType().FindMethod(Method.MethodName, new Type[] { });
+            info.Invoke(Object, new object[] { });
+            if (callback != null)
+                callback();
         }
 
         #endregion
 
-        #region Async handlers and UI callbacks
+        #region Utilities and UI callbacks
 
         #endregion
 
         #region PropertyChanged event handlers
 
-        private void AsyncMethodPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MethodPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Async.Verify();
             switch (e.PropertyName)
             {
-                case "MethodName": AsyncOnPropertyChanged("Label"); break;
-                case "Description": AsyncOnPropertyChanged("ToolTip"); break;
+                case "MethodName": OnPropertyChanged("Label"); break;
+                case "Description": OnPropertyChanged("ToolTip"); break;
             }
         }
 

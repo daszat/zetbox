@@ -21,14 +21,20 @@ namespace Kistl.API.Utils
             : base(list, select)
         {
             list.CollectionChanged += new NotifyCollectionChangedEventHandler(list_CollectionChanged);
-            ((INotifyPropertyChanged)list).PropertyChanged += new PropertyChangedEventHandler(ReadOnlyObservableProjection_PropertyChanged);
+            if (list is INotifyPropertyChanged)
+            {
+                ((INotifyPropertyChanged)list).PropertyChanged += new PropertyChangedEventHandler(ReadOnlyObservableProjection_PropertyChanged);
+            }
         }
 
-        public ReadOnlyObservableProjection(INotifyCollectionChanged list, Func<TValue, TResult> select)
-            : base((IList<TValue>)list, select)
+        public ReadOnlyObservableProjection(INotifyCollectionChanged notifier, Func<TValue, TResult> select)
+            : base(MagicCollectionFactory.WrapAsList<TValue>(notifier), select)
         {
-            list.CollectionChanged += new NotifyCollectionChangedEventHandler(list_CollectionChanged);
-            ((INotifyPropertyChanged)list).PropertyChanged += new PropertyChangedEventHandler(ReadOnlyObservableProjection_PropertyChanged);
+            notifier.CollectionChanged += new NotifyCollectionChangedEventHandler(list_CollectionChanged);
+            if (notifier is INotifyPropertyChanged)
+            {
+                ((INotifyPropertyChanged)notifier).PropertyChanged += new PropertyChangedEventHandler(ReadOnlyObservableProjection_PropertyChanged);
+            }
         }
 
         void ReadOnlyObservableProjection_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -40,22 +46,30 @@ namespace Kistl.API.Utils
         {
             switch (e.Action)
             {
-                case NotifyCollectionChangedAction.Reset:
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                    break;
                 case NotifyCollectionChangedAction.Add:
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
                         e.NewItems.Cast<TValue>().Select(this.Selector).ToList(),
                         e.NewStartingIndex));
                     break;
+                case NotifyCollectionChangedAction.Move:
+                    CollectionChanged(this, new NotifyCollectionChangedEventArgs(e.Action,
+                        e.NewItems.Cast<TValue>().Select(this.Selector).ToList(),
+                        e.NewStartingIndex,
+                        e.OldStartingIndex));
+                    break;
                 case NotifyCollectionChangedAction.Remove:
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+                    CollectionChanged(this, new NotifyCollectionChangedEventArgs(e.Action,
                         e.OldItems.Cast<TValue>().Select(this.Selector).ToList(),
                         e.OldStartingIndex));
                     break;
-                case NotifyCollectionChangedAction.Move:
                 case NotifyCollectionChangedAction.Replace:
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    CollectionChanged(this, new NotifyCollectionChangedEventArgs(e.Action,
+                        e.NewItems.Cast<TValue>().Select(this.Selector).ToList(),
+                        e.OldItems.Cast<TValue>().Select(this.Selector).ToList(),
+                        e.NewStartingIndex));
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    CollectionChanged(this, new NotifyCollectionChangedEventArgs(e.Action));
                     break;
                 default:
                     throw new InvalidOperationException(String.Format("Unknown NotifyCollectionChangedAction: {0}", e.Action));

@@ -60,24 +60,20 @@ namespace Kistl.Client.Presentables
 
             AppContext = appCtx;
 
-            UI.Verify();
-
             DataContext = dataCtx;
         }
 
         #region Public interface
 
-        private ModelState _State = ModelState.Loading;
+        private ModelState _State = ModelState.Active;
         public ModelState State
         {
             get
             {
-                UI.Verify();
                 return _State;
             }
             internal set
             {
-                UI.Verify();
                 if (value != _State)
                 {
                     _State = value;
@@ -96,24 +92,12 @@ namespace Kistl.Client.Presentables
         {
             add
             {
-                UI.Verify();
                 _PropertyChangedEvent += value;
             }
             remove
             {
-                UI.Verify();
                 _PropertyChangedEvent -= value;
             }
-        }
-
-        /// <summary>
-        /// Delegate a property change notification to the UI thread.
-        /// </summary>
-        /// <param name="propertyName">the changed property</param>
-        protected void AsyncOnPropertyChanged(string propertyName)
-        {
-            Async.Verify();
-            UI.Queue(UI, () => OnPropertyChanged(propertyName));
         }
 
         /// <summary>
@@ -122,7 +106,6 @@ namespace Kistl.Client.Presentables
         /// <param name="propertyName">the changed property</param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            UI.Verify();
             if (_PropertyChangedEvent != null)
                 _PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -145,7 +128,6 @@ namespace Kistl.Client.Presentables
 
             IsInDesignMode = true;
             AppContext = new DesignApplicationContext();
-            State = ModelState.Active;
         }
 
         /// <summary>
