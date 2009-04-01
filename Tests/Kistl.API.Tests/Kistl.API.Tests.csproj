@@ -83,6 +83,8 @@
     <Compile Include="Tests\ExpressionFilterTest.cs" />
     <Compile Include="Tests\ExtensionHelpersTest.cs" />
     <Compile Include="Tests\LinqExtensionsTests.cs" />
+    <Compile Include="Tests\MagicCollectionFactory\should_wrap_lists.cs" />
+    <Compile Include="Tests\MagicCollectionFactory\should_wrap_collections.cs" />
     <Compile Include="Tests\NotifyingObservableCollectionTests.cs" />
     <Compile Include="Tests.Serializables\SerializableExpressionTests.cs" />
     <Compile Include="Tests.Serializables\SerializableTypeTests.cs" />

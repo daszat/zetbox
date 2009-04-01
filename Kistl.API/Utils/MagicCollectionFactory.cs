@@ -12,10 +12,16 @@ namespace Kistl.API.Utils
     public static class MagicCollectionFactory
     {
 
-        public static ICollection<T> WrapAsCollectionHelper<T, X>(ICollection<X> collection)
-            where X : T
+        public static ICollection<TResult> WrapAsCollectionHelper<TFrom, TResult>(ICollection<TFrom> collection)
+            where TFrom : TResult
         {
-            return new GenericCastingCollectionWrapper<T, X>(collection);
+            return new GenericCastingCollectionWrapper<TFrom, TResult>(collection);
+        }
+
+        public static object WrapAsCollectionReflectionHelper(Type TFrom, Type TResult, object collection)
+        {
+            MethodInfo wrapAsCollection = typeof(MagicCollectionFactory).GetMethod("WrapAsCollectionHelper");
+            return wrapAsCollection.MakeGenericMethod(TFrom, TResult).Invoke(null, new[] { collection });
         }
 
         /// <summary>
@@ -27,9 +33,18 @@ namespace Kistl.API.Utils
             {
                 return (ICollection<T>)collection;
             }
+            else if (collection is IList<T>)
+            {
+                return (IList<T>)collection;
+            }
             else
             {
                 var elementTypes = collection.GetType().FindElementTypes().Where(t => typeof(T).IsAssignableFrom(t)).ToArray();
+
+                if (elementTypes.Contains(typeof(T)))
+                {
+                    elementTypes = elementTypes.Where(t => t != typeof(T)).ToArray();
+                }
 
                 if (elementTypes.Count() > 1)
                 {
@@ -37,8 +52,7 @@ namespace Kistl.API.Utils
                 }
                 else if (elementTypes.Count() == 1)
                 {
-                    MethodInfo wrapAsList = typeof(MagicCollectionFactory).GetMethod("WrapAsCollectionHelper");
-                    return (IList<T>)wrapAsList.MakeGenericMethod(typeof(T), elementTypes.Single()).Invoke(null, new object[] { collection });
+                    return (ICollection<T>)WrapAsCollectionReflectionHelper(elementTypes.Single(), typeof(T), collection);
                 }
                 else if (collection is IList)
                 {
@@ -48,11 +62,18 @@ namespace Kistl.API.Utils
             return null;
         }
 
-        public static IList<T> WrapAsListHelper<T, X>(IList<X> collection)
-            where X : T
+        public static IList<TResult> WrapAsListHelper<TFrom, TResult>(IList<TFrom> list)
+            where TFrom : TResult
         {
-            return new GenericCastingListWrapper<T, X>(collection);
+            return new GenericCastingListWrapper<TFrom, TResult>(list);
         }
+
+        public static object WrapAsListReflectionHelper(Type TFrom, Type TResult, object list)
+        {
+            MethodInfo wrapAsList = typeof(MagicCollectionFactory).GetMethod("WrapAsListHelper");
+            return wrapAsList.MakeGenericMethod(TFrom, TResult).Invoke(null, new[] { list });
+        }
+
 
         /// <summary>
         /// Wrap a list-like objects into an IList&lt;T&gt;. Currently works with IList&lt;t>s, ILists and ICollection&ltT>s
@@ -67,14 +88,18 @@ namespace Kistl.API.Utils
             {
                 var elementTypes = collection.GetType().FindElementTypes().Where(t => typeof(T).IsAssignableFrom(t)).ToArray();
 
+                if (elementTypes.Contains(typeof(T)))
+                {
+                    elementTypes = elementTypes.Where(t => t != typeof(T)).ToArray();
+                }
+
                 if (elementTypes.Count() > 1)
                 {
                     throw new AmbiguousMatchException("Ambiguous Element Types found");
                 }
                 else if (elementTypes.Count() == 1)
                 {
-                    MethodInfo wrapAsList = typeof(MagicCollectionFactory).GetMethod("WrapAsListHelper");
-                    return (IList<T>)wrapAsList.MakeGenericMethod(typeof(T), elementTypes.Single()).Invoke(null, new object[] { collection });
+                    return (IList<T>)WrapAsListReflectionHelper(elementTypes.Single(), typeof(T), collection);
                 }
                 else if (collection is IList)
                 {
@@ -208,21 +233,21 @@ namespace Kistl.API.Utils
 
     }
 
-    public class GenericCastingCollectionWrapper<T, X> : ICollection<T>
-        where X : T
+    public class GenericCastingCollectionWrapper<TFrom, TResult> : ICollection<TResult>
+        where TFrom : TResult
     {
-        protected ICollection<X> baseCollection;
+        protected ICollection<TFrom> baseCollection;
 
-        public GenericCastingCollectionWrapper(ICollection<X> baseList)
+        public GenericCastingCollectionWrapper(ICollection<TFrom> baseList)
         {
             this.baseCollection = baseList;
         }
 
         #region ICollection<T> Members
 
-        public void Add(T item)
+        public void Add(TResult item)
         {
-            baseCollection.Add((X)item);
+            baseCollection.Add((TFrom)item);
         }
 
         public void Clear()
@@ -230,15 +255,15 @@ namespace Kistl.API.Utils
             baseCollection.Clear();
         }
 
-        public bool Contains(T item)
+        public bool Contains(TResult item)
         {
-            if (item is X)
-                return baseCollection.Contains((X)item);
+            if (item is TFrom)
+                return baseCollection.Contains((TFrom)item);
             else
                 return false;
         }
 
-        public void CopyTo(T[] array, int arrayIndex)
+        public void CopyTo(TResult[] array, int arrayIndex)
         {
             foreach (var item in baseCollection)
             {
@@ -256,11 +281,11 @@ namespace Kistl.API.Utils
             get { return baseCollection.IsReadOnly; }
         }
 
-        public bool Remove(T item)
+        public bool Remove(TResult item)
         {
             if (Contains(item))
             {
-                baseCollection.Remove((X)item);
+                baseCollection.Remove((TFrom)item);
                 return true;
             }
             else
@@ -273,9 +298,9 @@ namespace Kistl.API.Utils
 
         #region IEnumerable<T> Members
 
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<TResult> GetEnumerator()
         {
-            return baseCollection.Cast<T>().GetEnumerator();
+            return baseCollection.Cast<TResult>().GetEnumerator();
         }
 
         #endregion
@@ -290,12 +315,12 @@ namespace Kistl.API.Utils
         #endregion
     }
 
-    public class GenericCastingListWrapper<T, X> : GenericCastingCollectionWrapper<T, X>, IList<T>
-        where X : T
+    public class GenericCastingListWrapper<TFrom, TResult> : GenericCastingCollectionWrapper<TFrom, TResult>, IList<TResult>
+        where TFrom : TResult
     {
-        protected IList<X> baseList;
+        protected IList<TFrom> baseList;
 
-        public GenericCastingListWrapper(IList<X> baseList)
+        public GenericCastingListWrapper(IList<TFrom> baseList)
             : base(baseList)
         {
             this.baseList = baseList;
@@ -303,17 +328,17 @@ namespace Kistl.API.Utils
 
         #region IList<T> Members
 
-        public int IndexOf(T item)
+        public int IndexOf(TResult item)
         {
-            if (item is X)
-                return baseList.IndexOf((X)item);
+            if (item is TFrom)
+                return baseList.IndexOf((TFrom)item);
             else
                 return -1;
         }
 
-        public void Insert(int index, T item)
+        public void Insert(int index, TResult item)
         {
-            baseList.Insert(index, (X)item);
+            baseList.Insert(index, (TFrom)item);
         }
 
         public void RemoveAt(int index)
@@ -321,15 +346,15 @@ namespace Kistl.API.Utils
             baseList.RemoveAt(index);
         }
 
-        public T this[int index]
+        public TResult this[int index]
         {
             get
             {
-                return (T)baseList[index];
+                return (TResult)baseList[index];
             }
             set
             {
-                baseList[index] = (X)value;
+                baseList[index] = (TFrom)value;
             }
         }
 

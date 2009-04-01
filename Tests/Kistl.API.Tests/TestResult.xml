@@ -1,80 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.API.Tests\Kistl.API.Tests.nunit" total="32" errors="0" failures="0" not-run="0" ignored="0" skipped="0" invalid="0" date="2009-03-27" time="15:28:32">
-  <environment nunit-version="2.5.0.9015" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.API.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
-  <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.API.Tests\Kistl.API.Tests.nunit" executed="True" success="True" time="0.412" asserts="0">
+<test-results name="P:\Kistl\Tests\Kistl.API.Tests\Kistl.API.Tests.nunit" total="4" errors="0" failures="0" not-run="0" ignored="0" skipped="0" invalid="0" date="2009-04-01" time="12:01:51">
+  <environment nunit-version="2.5.0.9015" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.API.Tests" machine-name="DAVID-PC" user="david" user-domain="david-PC" />
+  <culture-info current-culture="de-AT" current-uiculture="en-US" />
+  <test-suite name="P:\Kistl\Tests\Kistl.API.Tests\Kistl.API.Tests.nunit" executed="True" success="True" time="0.230" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.API.Tests\bin\Debug\Kistl.API.Tests.dll" executed="True" success="True" time="0.279" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.API.Tests\bin\Debug\Kistl.API.Tests.dll" executed="True" success="True" time="0.144" asserts="0">
         <results>
-          <test-suite name="Kistl" executed="True" success="True" time="0.270" asserts="0">
+          <test-suite name="Kistl" executed="True" success="True" time="0.142" asserts="0">
             <results>
-              <test-suite name="API" executed="True" success="True" time="0.265" asserts="0">
+              <test-suite name="API" executed="True" success="True" time="0.142" asserts="0">
                 <results>
-                  <test-suite name="Tests" executed="True" success="True" time="0.259" asserts="0">
+                  <test-suite name="Tests" executed="True" success="True" time="0.142" asserts="0">
                     <results>
-                      <test-suite name="HelperTest" executed="True" success="True" time="0.259" asserts="0">
+                      <test-suite name="MagicCollectionFactory" executed="True" success="True" time="0.142" asserts="0">
                         <results>
-                          <test-suite name="FindElementTypes_should_find_multiple_IEnumerable" executed="True" success="True" time="0.172" asserts="0">
+                          <test-suite name="should_wrap_collections" executed="True" success="True" time="0.127" asserts="0">
                             <results>
-                              <test-case name="Kistl.API.Tests.HelperTest.FindElementTypes_should_find_multiple_IEnumerable(Kistl.API.Tests.HelperTest+TestSequence,System.Type[])" executed="True" success="True" time="0.145" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindElementTypes_should_find_multiple_IEnumerable(Kistl.API.Tests.HelperTest+TestSequenceGeneric,System.Type[])" executed="True" success="True" time="0.003" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindElementTypes_should_find_multiple_IEnumerable(Kistl.API.Tests.HelperTest+TestSequenceInheritance,System.Type[])" executed="True" success="True" time="0.008" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindElementTypes_should_find_multiple_IEnumerable(System.Collections.Generic.IEnumerable`1[System.String],System.Type[])" executed="True" success="True" time="0.006" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindElementTypes_should_find_multiple_IEnumerable(System.Collections.Generic.IList`1[System.String],System.Type[])" executed="True" success="True" time="0.002" asserts="1" />
+                              <test-case name="Kistl.API.Tests.MagicCollectionFactory.should_wrap_collections.from_any_string_to_object" executed="True" success="True" time="0.116" asserts="4" />
+                              <test-case name="Kistl.API.Tests.MagicCollectionFactory.should_wrap_collections.from_string_to_object" executed="True" success="True" time="0.003" asserts="4" />
                             </results>
                           </test-suite>
-                          <test-suite name="FindElementTypes_should_find_single_IEnumerable" executed="True" success="True" time="0.006" asserts="0">
+                          <test-suite name="should_wrap_lists" executed="True" success="True" time="0.012" asserts="0">
                             <results>
-                              <test-case name="Kistl.API.Tests.HelperTest.FindElementTypes_should_find_single_IEnumerable(System.Collections.IEnumerable,System.Object)" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindElementTypes_should_find_single_IEnumerable(System.Object[],System.Object)" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindElementTypes_should_find_single_IEnumerable(System.String[],System.Object)" description="this might run against common expectations, but string[] really doesn't implement IEnumerable&lt;string&gt;" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Tests.MagicCollectionFactory.should_wrap_lists.from_any_string_to_object" executed="True" success="True" time="0.011" asserts="4" />
+                              <test-case name="Kistl.API.Tests.MagicCollectionFactory.should_wrap_lists.from_string_to_object" executed="True" success="True" time="0.001" asserts="4" />
                             </results>
                           </test-suite>
-                          <test-suite name="FindElementTypes_should_not_invent_stuff" executed="True" success="True" time="0.006" asserts="0">
-                            <results>
-                              <test-case name="Kistl.API.Tests.HelperTest.FindElementTypes_should_not_invent_stuff(null)" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindElementTypes_should_not_invent_stuff(System.Object)" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindElementTypes_should_not_invent_stuff(System.String)" executed="True" success="True" time="0.001" asserts="1" />
-                            </results>
-                          </test-suite>
-                          <test-suite name="FindIEnumerable_should_find_IEnumerable" executed="True" success="True" time="0.017" asserts="0">
-                            <results>
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerable_should_find_IEnumerable(null,null)" executed="True" success="True" time="0.003" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerable_should_find_IEnumerable(System.Collections.Generic.IEnumerable`1[System.String],System.Collections.Generic.IEnumerable`1[System.String])" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerable_should_find_IEnumerable(System.Collections.Generic.IList`1[System.String],System.Collections.Generic.IEnumerable`1[System.String])" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerable_should_find_IEnumerable(System.Collections.IEnumerable,System.Collections.IEnumerable)" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerable_should_find_IEnumerable(System.Object,null)" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerable_should_find_IEnumerable(System.Object[],System.Collections.IEnumerable)" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerable_should_find_IEnumerable(System.String,null)" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerable_should_find_IEnumerable(System.String[],System.Collections.IEnumerable)" executed="True" success="True" time="0.000" asserts="1" />
-                            </results>
-                          </test-suite>
-                          <test-suite name="FindIEnumerables_should_find_multiple_IEnumerable" executed="True" success="True" time="0.023" asserts="0">
-                            <results>
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerables_should_find_multiple_IEnumerable(Kistl.API.Tests.HelperTest+TestSequence,System.Type[])" executed="True" success="True" time="0.005" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerables_should_find_multiple_IEnumerable(Kistl.API.Tests.HelperTest+TestSequenceGeneric,System.Type[])" executed="True" success="True" time="0.003" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerables_should_find_multiple_IEnumerable(Kistl.API.Tests.HelperTest+TestSequenceInheritance,System.Type[])" executed="True" success="True" time="0.008" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerables_should_find_multiple_IEnumerable(System.Collections.Generic.IEnumerable`1[System.String],System.Type[])" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerables_should_find_multiple_IEnumerable(System.Collections.Generic.IList`1[System.String],System.Type[])" executed="True" success="True" time="0.002" asserts="1" />
-                            </results>
-                          </test-suite>
-                          <test-suite name="FindIEnumerables_should_find_single_IEnumerable" executed="True" success="True" time="0.004" asserts="0">
-                            <results>
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerables_should_find_single_IEnumerable(System.Collections.IEnumerable,System.Collections.IEnumerable)" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerables_should_find_single_IEnumerable(System.Object[],System.Collections.IEnumerable)" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerables_should_find_single_IEnumerable(System.String[],System.Collections.IEnumerable)" executed="True" success="True" time="0.001" asserts="1" />
-                            </results>
-                          </test-suite>
-                          <test-suite name="FindIEnumerables_should_not_invent_stuff" executed="True" success="True" time="0.006" asserts="0">
-                            <results>
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerables_should_not_invent_stuff(null)" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerables_should_not_invent_stuff(System.Object)" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Tests.HelperTest.FindIEnumerables_should_not_invent_stuff(System.String)" executed="True" success="True" time="0.000" asserts="1" />
-                            </results>
-                          </test-suite>
-                          <test-case name="Kistl.API.Tests.HelperTest.IsFloatingObjectTest" executed="True" success="True" time="0.001" asserts="2" />
-                          <test-case name="Kistl.API.Tests.HelperTest.IsPersistedObject" executed="True" success="True" time="0.000" asserts="2" />
                         </results>
                       </test-suite>
                     </results>
