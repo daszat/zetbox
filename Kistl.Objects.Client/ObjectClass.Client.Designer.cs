@@ -177,9 +177,7 @@ namespace Kistl.App.Base
 					_ImplementsInterfaces 
 						= new ClientCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(
 							this, 
-							Context.FetchRelation<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface>(49, RelationEndRole.A, this)
-							    .Cast<ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>()
-							    .ToList());
+							Context.FetchRelation<ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(49, RelationEndRole.A, this));
 				}
 				return _ImplementsInterfaces;
 			}

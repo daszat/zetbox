@@ -86,7 +86,10 @@ namespace Kistl.API.Server
     /// Server Collection Entry Implementation. A Collection Entry is a "connection" Object between other Data Objects 
     /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
     /// </summary>
-    public abstract class BaseServerCollectionEntry : BaseServerPersistenceObject, ICollectionEntry { }
+    public abstract class BaseServerCollectionEntry : BaseServerPersistenceObject, ICollectionEntry 
+    {
+        public abstract int RelationID { get; }
+    }
 
     /// <summary>
     /// local proxy

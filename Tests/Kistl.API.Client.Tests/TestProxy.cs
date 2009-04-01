@@ -114,9 +114,9 @@ namespace Kistl.API.Client.Tests
             return result;
         }
 
-        public IEnumerable<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent)
+        public IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent) where T : class, ICollectionEntry
         {
-            return new List<INewCollectionEntry<A, B>>();
+            return new List<T>();
         }
 
         #endregion

@@ -36,6 +36,7 @@ namespace Kistl.App.Base
             }
         }
         private int _ID;
+        public override int RelationID { get { return 49; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -269,6 +270,7 @@ namespace Kistl.App.Projekte
             }
         }
         private int _ID;
+        public override int RelationID { get { return 23; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -564,6 +566,7 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
+        public override int RelationID { get { return 61; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -797,6 +800,7 @@ namespace Kistl.App.Base
             }
         }
         private int _ID;
+        public override int RelationID { get { return 66; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -1092,6 +1096,7 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
+        public override int RelationID { get { return 55; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -1325,6 +1330,7 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
+        public override int RelationID { get { return 60; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -1559,6 +1565,7 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         private int _ID;
+        public override int RelationID { get { return 42; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -1791,6 +1798,7 @@ namespace Kistl.App.Projekte
             }
         }
         private int _ID;
+        public override int RelationID { get { return -1; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry

@@ -150,7 +150,10 @@ namespace Kistl.API.Client
         #endregion
     }
 
-    public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject, ICollectionEntry { }
+    public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject, ICollectionEntry 
+    {
+        public abstract int RelationID { get; }
+    }
 
     /// <summary>
     /// local proxy

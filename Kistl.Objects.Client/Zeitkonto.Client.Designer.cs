@@ -111,9 +111,7 @@ namespace Kistl.App.Zeiterfassung
 					_Mitarbeiter 
 						= new ClientCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(
 							this, 
-							Context.FetchRelation<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter>(42, RelationEndRole.A, this)
-							    .Cast<Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>()
-							    .ToList());
+							Context.FetchRelation<Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(42, RelationEndRole.A, this));
 				}
 				return _Mitarbeiter;
 			}

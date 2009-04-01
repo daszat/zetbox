@@ -17,6 +17,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         /// <returns>which CollectionEntry interface to implement.</returns>
         protected abstract string GetCeInterface();
 
+        protected abstract void ApplyRelationIdPropertyTemplate();
+
         /// <returns>The interfaces this class implements</returns>
         protected virtual string[] GetInterfaces()
         {

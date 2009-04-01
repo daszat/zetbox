@@ -194,7 +194,7 @@ namespace Kistl.DALProvider.EF
             //return query.AddOfType<IDataObject>(objType);
         }
 
-        public override ICollection<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent)
+        public override IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent)
         {
             throw new NotImplementedException();
         }

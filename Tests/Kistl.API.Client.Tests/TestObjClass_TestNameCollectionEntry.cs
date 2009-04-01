@@ -15,6 +15,8 @@ namespace Kistl.API.Client.Tests
 
         private int _fk_Parent;
 
+        public override int RelationID { get { return -1; } }
+
        
 
         public string B
@@ -78,7 +80,7 @@ namespace Kistl.API.Client.Tests
 
         public override InterfaceType GetInterfaceType()
         {
-            return new InterfaceType(typeof(ICollectionEntry<string, TestObjClass>));
+            return new InterfaceType(typeof(INewCollectionEntry<string, TestObjClass>));
         }
     }
 }

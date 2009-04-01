@@ -44,7 +44,7 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
-        ICollection<INewCollectionEntry<A,B>> IKistlContext.FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject parent)
+        public IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent) where T : class, ICollectionEntry
         {
             throw new NotImplementedException();
         }

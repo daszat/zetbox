@@ -20,6 +20,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             this.prop = prop;
         }
 
+        protected override void ApplyRelationIdPropertyTemplate()
+        {
+            this.WriteLine("        public override int RelationID { get { return -1; } }");
+        }
+
         protected override string GetCeClassName()
         {
             return prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;

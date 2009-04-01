@@ -12,6 +12,9 @@ namespace Kistl.API.Mocks
         public int ID { get { return _ID; } set { _ID = value; } }
         public bool IsReadonly { get; private set; }
 
+        public int RelationID { get { return -1; } }
+
+
         private string _TestName;
         public string TestName { get { return _TestName; } set { _TestName = value; } }
 

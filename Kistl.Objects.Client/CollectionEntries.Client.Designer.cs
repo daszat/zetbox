@@ -14,6 +14,7 @@ namespace Kistl.App.Base
     {
     
 // ID is inherited
+        public override int RelationID { get { return 49; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -177,6 +178,7 @@ namespace Kistl.App.Projekte
     {
     
 // ID is inherited
+        public override int RelationID { get { return 23; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -396,6 +398,7 @@ namespace Kistl.App.GUI
     {
     
 // ID is inherited
+        public override int RelationID { get { return 61; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -559,6 +562,7 @@ namespace Kistl.App.Base
     {
     
 // ID is inherited
+        public override int RelationID { get { return 66; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -778,6 +782,7 @@ namespace Kistl.App.GUI
     {
     
 // ID is inherited
+        public override int RelationID { get { return 55; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -941,6 +946,7 @@ namespace Kistl.App.GUI
     {
     
 // ID is inherited
+        public override int RelationID { get { return 60; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -1105,6 +1111,7 @@ namespace Kistl.App.Zeiterfassung
     {
     
 // ID is inherited
+        public override int RelationID { get { return 42; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -1268,6 +1275,7 @@ namespace Kistl.App.Projekte
     {
     
 // ID is inherited
+        public override int RelationID { get { return -1; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry

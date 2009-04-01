@@ -199,19 +199,37 @@ namespace Kistl.API.Client
             }
         }
         private Dictionary<RelationContentKey, object> _fetchRelationCache = new Dictionary<RelationContentKey, object>();
-        public ICollection<INewCollectionEntry<A, B>> FetchRelation<A, B>(int relationId, RelationEndRole role, IDataObject container)
+        public IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject container) where T : class, ICollectionEntry
         {
             var key = new RelationContentKey(relationId, role, container.ID);
             if (_fetchRelationCache.ContainsKey(key))
             {
-                return (ICollection<INewCollectionEntry<A, B>>)_fetchRelationCache[key];
+                return (List<T>)_fetchRelationCache[key];
             }
             else
             {
-                var result = Proxy.Current.FetchRelation<A, B>(relationId, role, container).ToList();
+                var serverList = Proxy.Current.FetchRelation<T>(relationId, role, container);
+                var result = new List<T>();
+                foreach (IPersistenceObject obj in serverList)
+                {
+                    var localobj = this.Attach(obj);
+                    localobj.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(collectionEntry_PropertyChanged);
+                    localobj.PropertyChanging += new System.ComponentModel.PropertyChangingEventHandler(collectionEntry_PropertyChanging);
+                    result.Add((T)localobj);
+                }
                 _fetchRelationCache[key] = result;
                 return result;
             }
+        }
+
+        void collectionEntry_PropertyChanging(object sender, System.ComponentModel.PropertyChangingEventArgs e)
+        {
+            System.Diagnostics.Trace.WriteLine("Changing: " + sender + ", Property: " + e.PropertyName);
+        }
+
+        void collectionEntry_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            System.Diagnostics.Trace.WriteLine("Changed: " + sender + ", Property: " + e.PropertyName);
         }
 
         /// <summary>
@@ -259,6 +277,11 @@ namespace Kistl.API.Client
             CheckDisposed();
             IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
             Attach(obj);
+            if (obj is ICollectionEntry)
+            {
+                obj.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(collectionEntry_PropertyChanged);
+                obj.PropertyChanging += new System.ComponentModel.PropertyChangingEventHandler(collectionEntry_PropertyChanging);
+            }
             OnObjectCreated(obj);
             return obj;
         }

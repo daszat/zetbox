@@ -23,6 +23,8 @@ namespace Kistl.API.Server.Mocks
 
     public class TestObjClass_TestNameCollectionEntry__Implementation__ : BaseServerCollectionEntry, INewCollectionEntry<TestObjClass, string>
     {
+        public override int RelationID { get { return -1; } }
+
         /// <summary>
         /// returns the most specific implemented data object interface
         /// </summary>

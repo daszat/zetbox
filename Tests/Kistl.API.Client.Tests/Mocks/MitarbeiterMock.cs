@@ -71,9 +71,7 @@ namespace Kistl.App.Projekte
                     _Projekte
                         = new ClientListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
                             this,
-                            Context.FetchRelation<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter>(23, RelationEndRole.B, this)
-                                .Cast<Projekt_Mitarbeiter23CollectionEntry__Implementation__>()
-                                .ToList());
+                            Context.FetchRelation<Projekt_Mitarbeiter23CollectionEntry__Implementation__>(23, RelationEndRole.B, this));
                 }
                 return _Projekte;
             }

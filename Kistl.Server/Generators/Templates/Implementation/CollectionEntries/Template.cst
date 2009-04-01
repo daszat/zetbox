@@ -19,6 +19,7 @@
     
 <%
     ApplyIdPropertyTemplate();
+    ApplyRelationIdPropertyTemplate();
 %>
 
         /// <summary>

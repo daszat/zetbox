@@ -9,6 +9,7 @@ namespace Kistl.API
     /// </summary>
     public interface ICollectionEntry : IPersistenceObject
     {
+        int RelationID { get; }
     }
 
     // TODO: Remove "New" when new Generator works
@@ -50,26 +51,26 @@ namespace Kistl.API
 
 
 
-    // TODO: rename INewCollectionEntry to this
-    /// <summary> legacy interface </summary>
-    public interface ICollectionEntry<LEFT, RIGHT> : ICollectionEntry
-    {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        LEFT Value { get; set; }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        RIGHT Parent { get; set; }
-        int fk_Parent { get; set; }
-    }
+    //// TODO: rename INewCollectionEntry to this
+    ///// <summary> legacy interface </summary>
+    //public interface ICollectionEntry<LEFT, RIGHT> : ICollectionEntry
+    //{
+    //    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    //    LEFT Value { get; set; }
+    //    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    //    RIGHT Parent { get; set; }
+    //    int fk_Parent { get; set; }
+    //}
 
-    /// <summary> legacy interface </summary>
-    public interface ICollectionEntrySorted : ICollectionEntry
-    {
-        int? ValueIndex { get; set; }
-        int? ParentIndex { get; set; }
-    }
+    ///// <summary> legacy interface </summary>
+    //public interface ICollectionEntrySorted : ICollectionEntry
+    //{
+    //    int? ValueIndex { get; set; }
+    //    int? ParentIndex { get; set; }
+    //}
 
-    /// <summary> legacy interface </summary>
-    public interface ICollectionEntrySorted<VALUE, PARENT> : ICollectionEntry<VALUE, PARENT>, ICollectionEntrySorted
-    {
-    }
+    ///// <summary> legacy interface </summary>
+    //public interface ICollectionEntrySorted<VALUE, PARENT> : ICollectionEntry<VALUE, PARENT>, ICollectionEntrySorted
+    //{
+    //}
 }

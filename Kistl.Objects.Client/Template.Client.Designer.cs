@@ -146,9 +146,7 @@ namespace Kistl.App.GUI
 					_Menu 
 						= new ClientCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_Menu61CollectionEntry__Implementation__>(
 							this, 
-							Context.FetchRelation<Kistl.App.GUI.Template, Kistl.App.GUI.Visual>(61, RelationEndRole.A, this)
-							    .Cast<Template_Menu61CollectionEntry__Implementation__>()
-							    .ToList());
+							Context.FetchRelation<Template_Menu61CollectionEntry__Implementation__>(61, RelationEndRole.A, this));
 				}
 				return _Menu;
 			}

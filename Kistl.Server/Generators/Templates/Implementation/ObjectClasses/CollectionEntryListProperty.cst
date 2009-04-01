@@ -31,9 +31,7 @@
 					<%= backingName %> 
 						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>>(
 							this, 
-							Context.FetchRelation<<%= aSideType %>, <%= bSideType %>>(<%= relId %>, RelationEndRole.<%= role %>, this)
-							    .Cast<<%= entryType %>>()
-							    .ToList());
+							Context.FetchRelation<<%= entryType %>>(<%= relId %>, RelationEndRole.<%= role %>, this));
 				}
 				return <%= backingName %>;
 			}

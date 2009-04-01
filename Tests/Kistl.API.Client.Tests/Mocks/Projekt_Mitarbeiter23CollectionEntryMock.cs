@@ -13,6 +13,8 @@ namespace Kistl.App.Projekte
     {
 
         // ID is inherited
+        public override int RelationID { get { return 23; } }
+
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry

@@ -135,7 +135,7 @@ namespace Kistl.App
 			throw new NotImplementedException();
 		}
 		
-		ICollection<INewCollectionEntry<A, B>> IKistlContext.FetchRelation<A, B>(int relId, RelationEndRole role, IDataObject parent)
+		IList<T> IKistlContext.FetchRelation<T>(int relId, RelationEndRole role, IDataObject parent)
 		{
 			throw new NotImplementedException();
 		}
