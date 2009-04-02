@@ -43,9 +43,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -69,9 +70,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Auftragsname != value)
                 {
-                    NotifyPropertyChanging("Auftragsname");
+					var __oldValue = _Auftragsname;
+                    NotifyPropertyChanging("Auftragsname", __oldValue, value);
                     _Auftragsname = value;
-                    NotifyPropertyChanged("Auftragsname");
+                    NotifyPropertyChanged("Auftragsname", __oldValue, value);
                 }
             }
         }
@@ -95,9 +97,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Auftragswert != value)
                 {
-                    NotifyPropertyChanging("Auftragswert");
+					var __oldValue = _Auftragswert;
+                    NotifyPropertyChanging("Auftragswert", __oldValue, value);
                     _Auftragswert = value;
-                    NotifyPropertyChanged("Auftragswert");
+                    NotifyPropertyChanged("Auftragswert", __oldValue, value);
                 }
             }
         }

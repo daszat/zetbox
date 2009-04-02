@@ -54,12 +54,12 @@ namespace Kistl.App.Zeiterfassung
 					return;
                 else if (value != null && value.ID == _fk_Projekt)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Projekt");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = Projekt;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Projekt", oldValue, value);
                 
 				// next, set the local reference
                 _fk_Projekt = value == null ? (int?)null : value.ID;
@@ -81,7 +81,7 @@ namespace Kistl.App.Zeiterfassung
 					(value.Kostentraeger as BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Projekt");
+				NotifyPropertyChanged("Projekt", oldValue, value);
             }
         }
         
@@ -97,9 +97,10 @@ namespace Kistl.App.Zeiterfassung
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Projekt != value)
                 {
-                    NotifyPropertyChanging("Projekt");
+					var __oldValue = _fk_Projekt;
+                    NotifyPropertyChanging("Projekt", __oldValue, value);
                     _fk_Projekt = value;
-                    NotifyPropertyChanged("Projekt");
+                    NotifyPropertyChanged("Projekt", __oldValue, value);
                 }
             }
         }

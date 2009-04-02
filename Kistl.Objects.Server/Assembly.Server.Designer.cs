@@ -43,9 +43,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -69,9 +70,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_AssemblyName != value)
                 {
-                    NotifyPropertyChanging("AssemblyName");
+					var __oldValue = _AssemblyName;
+                    NotifyPropertyChanging("AssemblyName", __oldValue, value);
                     _AssemblyName = value;
-                    NotifyPropertyChanged("AssemblyName");
+                    NotifyPropertyChanged("AssemblyName", __oldValue, value);
                 }
             }
         }
@@ -95,9 +97,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsClientAssembly != value)
                 {
-                    NotifyPropertyChanging("IsClientAssembly");
+					var __oldValue = _IsClientAssembly;
+                    NotifyPropertyChanging("IsClientAssembly", __oldValue, value);
                     _IsClientAssembly = value;
-                    NotifyPropertyChanged("IsClientAssembly");
+                    NotifyPropertyChanged("IsClientAssembly", __oldValue, value);
                 }
             }
         }

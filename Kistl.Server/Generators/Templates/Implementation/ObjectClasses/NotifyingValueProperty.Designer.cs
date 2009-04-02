@@ -49,14 +49,15 @@ this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (IsReadonly) throw new ReadOnlyObjectException();\r\n");
 this.WriteObjects("                if (",  backingName , " != value)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\");\r\n");
+this.WriteObjects("					var __oldValue = ",  backingName , ";\r\n");
+this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", __oldValue, value);\r\n");
 this.WriteObjects("                    ",  backingName , " = value;\r\n");
-this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\");\r\n");
+this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", __oldValue, value);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  type , " ",  backingName , ";\r\n");
-#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
+#line 44 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
 AddSerialization(serializationList, name);
 
 

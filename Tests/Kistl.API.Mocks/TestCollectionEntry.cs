@@ -63,12 +63,16 @@ namespace Kistl.API.Mocks
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangingEventHandler PropertyChanging;
 
-        public void NotifyPropertyChanged(string property)
+        public event PropertyChangeWithValueEventHandler PropertyChangedWithValue;
+        public event PropertyChangeWithValueEventHandler PropertyChangingWithValue;
+
+
+        public void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
             throw new NotImplementedException();
         }
 
-        public void NotifyPropertyChanging(string property)
+        public void NotifyPropertyChanging(string property, object oldValue, object newValue)
         {
             throw new NotImplementedException();
         }

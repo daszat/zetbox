@@ -54,7 +54,7 @@ namespace Kistl.API.Tests.Skeletons
         /// ObjectState is just for serialization....
         public void ObjectState_CreatedObject_Modified()
         {
-            obj.NotifyPropertyChanged("test");
+            obj.NotifyPropertyChanged("test", null, null);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
         }
 

@@ -66,7 +66,7 @@ namespace Kistl.API
     /// <summary>
     /// Interface for all persistent objects.
     /// </summary>
-    public interface IPersistenceObject : IStreamable, INotifyPropertyChanged, INotifyPropertyChanging
+    public interface IPersistenceObject : INotifyingObject, IStreamable
     {
         /// <summary>
         /// Every Object has at least an ID
@@ -82,12 +82,12 @@ namespace Kistl.API
         /// Fires an Event before an Property is changed.
         /// </summary>
         /// <param name="property">Propertyname</param>
-        void NotifyPropertyChanging(string property);
+        void NotifyPropertyChanging(string property, object oldValue, object newValue);
         /// <summary>
         /// Fires an Event after an Property is changed.
         /// </summary>
         /// <param name="property">Propertyname</param>
-        void NotifyPropertyChanged(string property);
+        void NotifyPropertyChanged(string property, object oldValue, object newValue);
 
         /// <summary>
         /// Current Context.
@@ -147,7 +147,7 @@ namespace Kistl.API
     /// An IStruct is a simple bag of named values.
     /// </summary>
     /// Supports <see cref="ICloneable"/>, because structs don't have a independent identity and thus can be copied freely.
-    public interface IStruct : IStreamable, ICloneable, INotifyPropertyChanged, INotifyPropertyChanging
+    public interface IStruct : INotifyingObject, IStreamable, ICloneable
     {
         void AttachToObject(IPersistenceObject obj, string property);
         void DetachFromObject(IPersistenceObject obj, string property);

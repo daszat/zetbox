@@ -50,9 +50,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Max != value)
                 {
-                    NotifyPropertyChanging("Max");
+					var __oldValue = _Max;
+                    NotifyPropertyChanging("Max", __oldValue, value);
                     _Max = value;
-                    NotifyPropertyChanged("Max");
+                    NotifyPropertyChanged("Max", __oldValue, value);
                 }
             }
         }
@@ -76,9 +77,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Min != value)
                 {
-                    NotifyPropertyChanging("Min");
+					var __oldValue = _Min;
+                    NotifyPropertyChanging("Min", __oldValue, value);
                     _Min = value;
-                    NotifyPropertyChanged("Min");
+                    NotifyPropertyChanged("Min", __oldValue, value);
                 }
             }
         }

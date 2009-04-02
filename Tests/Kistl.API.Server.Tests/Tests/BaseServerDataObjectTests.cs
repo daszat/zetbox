@@ -90,7 +90,7 @@ namespace Kistl.API.Server.Tests
         [Ignore("Obsolete, DAL Provider will manage ObjectState")]
         public void ObjectState_CreatedObject_Modified()
         {
-            obj.NotifyPropertyChanged("test");
+            obj.NotifyPropertyChanged("test", null, null);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
         }
 
@@ -100,7 +100,7 @@ namespace Kistl.API.Server.Tests
         public void ObjectState_ObjectWithID_Modified()
         {
             ((TestObjClass__Implementation__)obj).ID = 10;
-            obj.NotifyPropertyChanged("test");
+            obj.NotifyPropertyChanged("test", null, null);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
@@ -117,9 +117,9 @@ namespace Kistl.API.Server.Tests
         [Test]
         public void NotifyPropertyChanged_ing()
         {
-            obj.NotifyPropertyChanging("StringProp");
+            obj.NotifyPropertyChanging("StringProp", null, null);
             obj.StringProp = "test";
-            obj.NotifyPropertyChanged("StringProp");
+            obj.NotifyPropertyChanged("StringProp", null, null);
         }
 
         [Test]

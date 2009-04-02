@@ -43,9 +43,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
-                    NotifyPropertyChanging("Description");
+					var __oldValue = _Description;
+                    NotifyPropertyChanging("Description", __oldValue, value);
                     _Description = value;
-                    NotifyPropertyChanged("Description");
+                    NotifyPropertyChanged("Description", __oldValue, value);
                 }
             }
         }
@@ -77,12 +78,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_Enumeration)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Enumeration");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = Enumeration;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Enumeration", oldValue, value);
                 
 				// next, set the local reference
                 _fk_Enumeration = value == null ? (int?)null : value.ID;
@@ -104,7 +105,7 @@ namespace Kistl.App.Base
 					(value.EnumerationEntries as BackReferenceCollection<Kistl.App.Base.EnumerationEntry>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Enumeration");
+				NotifyPropertyChanged("Enumeration", oldValue, value);
             }
         }
         
@@ -120,9 +121,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Enumeration != value)
                 {
-                    NotifyPropertyChanging("Enumeration");
+					var __oldValue = _fk_Enumeration;
+                    NotifyPropertyChanging("Enumeration", __oldValue, value);
                     _fk_Enumeration = value;
-                    NotifyPropertyChanged("Enumeration");
+                    NotifyPropertyChanged("Enumeration", __oldValue, value);
                 }
             }
         }
@@ -143,9 +145,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Name != value)
                 {
-                    NotifyPropertyChanging("Name");
+					var __oldValue = _Name;
+                    NotifyPropertyChanging("Name", __oldValue, value);
                     _Name = value;
-                    NotifyPropertyChanged("Name");
+                    NotifyPropertyChanged("Name", __oldValue, value);
                 }
             }
         }
@@ -166,9 +169,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Value != value)
                 {
-                    NotifyPropertyChanging("Value");
+					var __oldValue = _Value;
+                    NotifyPropertyChanging("Value", __oldValue, value);
                     _Value = value;
-                    NotifyPropertyChanged("Value");
+                    NotifyPropertyChanged("Value", __oldValue, value);
                 }
             }
         }

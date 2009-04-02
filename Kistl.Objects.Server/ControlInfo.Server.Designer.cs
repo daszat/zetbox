@@ -43,9 +43,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -150,9 +151,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ClassName != value)
                 {
-                    NotifyPropertyChanging("ClassName");
+					var __oldValue = _ClassName;
+                    NotifyPropertyChanging("ClassName", __oldValue, value);
                     _ClassName = value;
-                    NotifyPropertyChanged("ClassName");
+                    NotifyPropertyChanged("ClassName", __oldValue, value);
                 }
             }
         }
@@ -174,9 +176,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ControlType != value)
                 {
-                    NotifyPropertyChanging("ControlType");
+					var __oldValue = _ControlType;
+                    NotifyPropertyChanging("ControlType", __oldValue, value);
                     _ControlType = value;
-                    NotifyPropertyChanged("ControlType");
+                    NotifyPropertyChanged("ControlType", __oldValue, value);
                 }
             }
         }
@@ -218,9 +221,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsContainer != value)
                 {
-                    NotifyPropertyChanging("IsContainer");
+					var __oldValue = _IsContainer;
+                    NotifyPropertyChanging("IsContainer", __oldValue, value);
                     _IsContainer = value;
-                    NotifyPropertyChanged("IsContainer");
+                    NotifyPropertyChanged("IsContainer", __oldValue, value);
                 }
             }
         }
@@ -242,9 +246,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Platform != value)
                 {
-                    NotifyPropertyChanging("Platform");
+					var __oldValue = _Platform;
+                    NotifyPropertyChanging("Platform", __oldValue, value);
                     _Platform = value;
-                    NotifyPropertyChanged("Platform");
+                    NotifyPropertyChanged("Platform", __oldValue, value);
                 }
             }
         }

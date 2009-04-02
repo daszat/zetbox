@@ -43,9 +43,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_MyIntProperty != value)
                 {
-                    NotifyPropertyChanging("MyIntProperty");
+					var __oldValue = _MyIntProperty;
+                    NotifyPropertyChanging("MyIntProperty", __oldValue, value);
                     _MyIntProperty = value;
-                    NotifyPropertyChanged("MyIntProperty");
+                    NotifyPropertyChanged("MyIntProperty", __oldValue, value);
                 }
             }
         }
@@ -77,15 +78,18 @@ namespace Kistl.App.Test
 					return;
                 else if (value != null && value.ID == _fk_ObjectProp)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = ObjectProp;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("ObjectProp");
-				           
+				NotifyPropertyChanging("ObjectProp", oldValue, value);
+                
 				// next, set the local reference
                 _fk_ObjectProp = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("ObjectProp");
+				NotifyPropertyChanged("ObjectProp", oldValue, value);
             }
         }
         
@@ -101,9 +105,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_ObjectProp != value)
                 {
-                    NotifyPropertyChanging("ObjectProp");
+					var __oldValue = _fk_ObjectProp;
+                    NotifyPropertyChanging("ObjectProp", __oldValue, value);
                     _fk_ObjectProp = value;
-                    NotifyPropertyChanged("ObjectProp");
+                    NotifyPropertyChanged("ObjectProp", __oldValue, value);
                 }
             }
         }
@@ -124,9 +129,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_StringProp != value)
                 {
-                    NotifyPropertyChanging("StringProp");
+					var __oldValue = _StringProp;
+                    NotifyPropertyChanging("StringProp", __oldValue, value);
                     _StringProp = value;
-                    NotifyPropertyChanged("StringProp");
+                    NotifyPropertyChanged("StringProp", __oldValue, value);
                 }
             }
         }
@@ -147,9 +153,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_TestEnumProp != value)
                 {
-                    NotifyPropertyChanging("TestEnumProp");
+					var __oldValue = _TestEnumProp;
+                    NotifyPropertyChanging("TestEnumProp", __oldValue, value);
                     _TestEnumProp = value;
-                    NotifyPropertyChanged("TestEnumProp");
+                    NotifyPropertyChanged("TestEnumProp", __oldValue, value);
                 }
             }
         }

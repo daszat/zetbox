@@ -44,9 +44,9 @@ namespace Kistl.API.Client.Tests
             }
             set
             {
-                NotifyPropertyChanging("StringProp");
+                NotifyPropertyChanging("StringProp", null, null);
                 _StringProp = value;
-                NotifyPropertyChanged("StringProp"); ;
+                NotifyPropertyChanged("StringProp", null, null); ;
             }
         }
 
@@ -58,9 +58,9 @@ namespace Kistl.API.Client.Tests
             }
             set
             {
-                NotifyPropertyChanging("TestEnumProp");
+                NotifyPropertyChanging("TestEnumProp", null, null);
                 _TestEnumProp = value;
-                NotifyPropertyChanged("TestEnumProp"); ;
+                NotifyPropertyChanged("TestEnumProp", null, null); ;
             }
         }
 
@@ -97,9 +97,9 @@ namespace Kistl.API.Client.Tests
             {
                 if (fk_Parent != value)
                 {
-                    NotifyPropertyChanging("Parent");
+                    NotifyPropertyChanging("Parent", null, null);
                     _fk_Parent = value;
-                    NotifyPropertyChanged("Parent");
+                    NotifyPropertyChanged("Parent", null, null);
                 }
             }
         }

@@ -66,7 +66,7 @@ namespace Kistl.API
         {
             if (_UpdateCounter == 0)
             {
-                _Parent.NotifyPropertyChanged(_PropertyName);
+                _Parent.NotifyPropertyChanged(_PropertyName, null, null);
             }
         }
 

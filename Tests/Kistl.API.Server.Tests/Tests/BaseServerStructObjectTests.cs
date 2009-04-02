@@ -84,9 +84,9 @@ namespace Kistl.API.Server.Tests
             obj.PropertyChanged += changedHandler;
             obj.PropertyChanging += changingHanlder;
 
-            obj.NotifyPropertyChanging("TestString");
+            obj.NotifyPropertyChanging("TestString", null, null);
             obj.TestString = "test";
-            obj.NotifyPropertyChanged("TestString");
+            obj.NotifyPropertyChanged("TestString", null, null);
 
             Assert.That(hasChanged, Is.True);
             Assert.That(hasChanging, Is.True);

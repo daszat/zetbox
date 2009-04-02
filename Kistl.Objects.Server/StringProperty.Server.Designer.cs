@@ -50,9 +50,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Length != value)
                 {
-                    NotifyPropertyChanging("Length");
+					var __oldValue = _Length;
+                    NotifyPropertyChanging("Length", __oldValue, value);
                     _Length = value;
-                    NotifyPropertyChanged("Length");
+                    NotifyPropertyChanged("Length", __oldValue, value);
                 }
             }
         }

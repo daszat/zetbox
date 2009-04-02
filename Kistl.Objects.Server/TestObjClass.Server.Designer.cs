@@ -43,9 +43,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -69,9 +70,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_MyIntProperty != value)
                 {
-                    NotifyPropertyChanging("MyIntProperty");
+					var __oldValue = _MyIntProperty;
+                    NotifyPropertyChanging("MyIntProperty", __oldValue, value);
                     _MyIntProperty = value;
-                    NotifyPropertyChanged("MyIntProperty");
+                    NotifyPropertyChanged("MyIntProperty", __oldValue, value);
                 }
             }
         }
@@ -176,9 +178,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_StringProp != value)
                 {
-                    NotifyPropertyChanging("StringProp");
+					var __oldValue = _StringProp;
+                    NotifyPropertyChanging("StringProp", __oldValue, value);
                     _StringProp = value;
-                    NotifyPropertyChanged("StringProp");
+                    NotifyPropertyChanged("StringProp", __oldValue, value);
                 }
             }
         }
@@ -200,9 +203,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_TestEnumProp != value)
                 {
-                    NotifyPropertyChanging("TestEnumProp");
+					var __oldValue = _TestEnumProp;
+                    NotifyPropertyChanging("TestEnumProp", __oldValue, value);
                     _TestEnumProp = value;
-                    NotifyPropertyChanged("TestEnumProp");
+                    NotifyPropertyChanged("TestEnumProp", __oldValue, value);
                 }
             }
         }

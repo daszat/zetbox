@@ -54,12 +54,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_A)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("A");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = A;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("A", oldValue, value);
                 
 				// next, set the local reference
                 _fk_A = value == null ? (int?)null : value.ID;
@@ -81,7 +81,7 @@ namespace Kistl.App.Base
                     value.AParent = this;
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("A");
+				NotifyPropertyChanged("A", oldValue, value);
             }
         }
         
@@ -97,9 +97,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_A != value)
                 {
-                    NotifyPropertyChanging("A");
+					var __oldValue = _fk_A;
+                    NotifyPropertyChanging("A", __oldValue, value);
                     _fk_A = value;
-                    NotifyPropertyChanged("A");
+                    NotifyPropertyChanged("A", __oldValue, value);
                 }
             }
         }
@@ -131,12 +132,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_B)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("B");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = B;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("B", oldValue, value);
                 
 				// next, set the local reference
                 _fk_B = value == null ? (int?)null : value.ID;
@@ -158,7 +159,7 @@ namespace Kistl.App.Base
                     value.BParent = this;
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("B");
+				NotifyPropertyChanged("B", oldValue, value);
             }
         }
         
@@ -174,9 +175,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_B != value)
                 {
-                    NotifyPropertyChanging("B");
+					var __oldValue = _fk_B;
+                    NotifyPropertyChanging("B", __oldValue, value);
                     _fk_B = value;
-                    NotifyPropertyChanged("B");
+                    NotifyPropertyChanged("B", __oldValue, value);
                 }
             }
         }
@@ -197,9 +199,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
-                    NotifyPropertyChanging("Description");
+					var __oldValue = _Description;
+                    NotifyPropertyChanging("Description", __oldValue, value);
                     _Description = value;
-                    NotifyPropertyChanged("Description");
+                    NotifyPropertyChanged("Description", __oldValue, value);
                 }
             }
         }
@@ -220,9 +223,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Storage != value)
                 {
-                    NotifyPropertyChanging("Storage");
+					var __oldValue = _Storage;
+                    NotifyPropertyChanging("Storage", __oldValue, value);
                     _Storage = value;
-                    NotifyPropertyChanged("Storage");
+                    NotifyPropertyChanged("Storage", __oldValue, value);
                 }
             }
         }

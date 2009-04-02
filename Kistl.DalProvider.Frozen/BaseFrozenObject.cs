@@ -57,9 +57,8 @@ namespace Kistl.DalProvider.Frozen
 
         #endregion
 
-        public void NotifyPropertyChanging(string property) { }
-
-        public void NotifyPropertyChanged(string property) { }
+        public void NotifyPropertyChanging(string property, object oldValue, object newValue) { }
+        public void NotifyPropertyChanged(string property, object oldValue, object newValue) { }
 
         public IKistlContext Context { get { return FrozenContext.Single; } }
 
@@ -93,12 +92,10 @@ namespace Kistl.DalProvider.Frozen
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged { add { } remove { } }
-
-        #endregion
-
-        #region INotifyPropertyChanging Members
-
         public event PropertyChangingEventHandler PropertyChanging { add { } remove { } }
+
+        public event PropertyChangeWithValueEventHandler PropertyChangedWithValue { add { } remove { } }
+        public event PropertyChangeWithValueEventHandler PropertyChangingWithValue { add { } remove { } }
 
         #endregion
 
@@ -119,12 +116,6 @@ namespace Kistl.DalProvider.Frozen
 
         public virtual void NotifyPreSave() { }
         public virtual void NotifyPostSave() { }
-
-        #region IDataObject Members
-
-        public void NotifyChange() { }
-
-        #endregion
 
         #region IDataErrorInfo Members
 

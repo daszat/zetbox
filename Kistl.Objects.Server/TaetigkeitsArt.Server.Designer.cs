@@ -43,9 +43,10 @@ namespace Kistl.App.Zeiterfassung
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -69,9 +70,10 @@ namespace Kistl.App.Zeiterfassung
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Name != value)
                 {
-                    NotifyPropertyChanging("Name");
+					var __oldValue = _Name;
+                    NotifyPropertyChanging("Name", __oldValue, value);
                     _Name = value;
-                    NotifyPropertyChanged("Name");
+                    NotifyPropertyChanged("Name", __oldValue, value);
                 }
             }
         }

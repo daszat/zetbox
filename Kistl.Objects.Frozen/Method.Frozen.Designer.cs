@@ -41,9 +41,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
-                    NotifyPropertyChanging("Description");
+					var __oldValue = _Description;
+                    NotifyPropertyChanging("Description", __oldValue, value);
                     _Description = value;
-                    NotifyPropertyChanged("Description");
+                    NotifyPropertyChanged("Description", __oldValue, value);
                 }
             }
         }
@@ -64,9 +65,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsDisplayable != value)
                 {
-                    NotifyPropertyChanging("IsDisplayable");
+					var __oldValue = _IsDisplayable;
+                    NotifyPropertyChanging("IsDisplayable", __oldValue, value);
                     _IsDisplayable = value;
-                    NotifyPropertyChanged("IsDisplayable");
+                    NotifyPropertyChanged("IsDisplayable", __oldValue, value);
                 }
             }
         }
@@ -110,9 +112,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_MethodName != value)
                 {
-                    NotifyPropertyChanging("MethodName");
+					var __oldValue = _MethodName;
+                    NotifyPropertyChanging("MethodName", __oldValue, value);
                     _MethodName = value;
-                    NotifyPropertyChanged("MethodName");
+                    NotifyPropertyChanged("MethodName", __oldValue, value);
                 }
             }
         }
@@ -133,9 +136,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Module != value)
                 {
-                    NotifyPropertyChanging("Module");
+					var __oldValue = _Module;
+                    NotifyPropertyChanging("Module", __oldValue, value);
                     _Module = value;
-                    NotifyPropertyChanged("Module");
+                    NotifyPropertyChanged("Module", __oldValue, value);
                 }
             }
         }
@@ -156,9 +160,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ObjectClass != value)
                 {
-                    NotifyPropertyChanging("ObjectClass");
+					var __oldValue = _ObjectClass;
+                    NotifyPropertyChanging("ObjectClass", __oldValue, value);
                     _ObjectClass = value;
-                    NotifyPropertyChanged("ObjectClass");
+                    NotifyPropertyChanged("ObjectClass", __oldValue, value);
                 }
             }
         }

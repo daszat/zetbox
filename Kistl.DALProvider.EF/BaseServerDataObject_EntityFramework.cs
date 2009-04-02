@@ -112,14 +112,26 @@ namespace Kistl.DALProvider.EF
             }
         }
 
-        public override void NotifyPropertyChanging(string property)
+        public override void NotifyPropertyChanging(string property, object oldValue, object newValue)
         {
-            NotifyPropertyChanging(property, property);
+            NotifyPropertyChanging(property, property, oldValue, newValue);
         }
 
-        public override void NotifyPropertyChanged(string property)
+        public override void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
-            NotifyPropertyChanged(property, property);
+            NotifyPropertyChanged(property, property, oldValue, newValue);
+        }
+
+        /// <summary>
+        /// Special NotifyPropertyChanging implementation. Use this if the 
+        /// underlying EF-Property name doesn't match the public property
+        /// name.
+        /// </summary>
+        /// <param name="property">the official name of the property</param>
+        /// <param name="efProperty">the EF name of the property</param>
+        public void NotifyPropertyChanging(string property, string efProperty)
+        {
+            NotifyPropertyChanging(property, efProperty, null, null);
         }
 
         /// <summary>
@@ -129,9 +141,9 @@ namespace Kistl.DALProvider.EF
         /// </summary>
         /// <param name="property">the official name of the property</param>
         /// <param name="efProperty">the EF name of the property</param>
-        public void NotifyPropertyChanged(string property, string efProperty)
+        public void NotifyPropertyChanged(string property, string efProperty, object oldValue, object newValue)
         {
-            base.NotifyPropertyChanged(property);
+            base.NotifyPropertyChanged(property, oldValue, newValue);
             if (_changeTracker != null)
             {
                 _changeTracker.EntityMemberChanged(efProperty);
@@ -145,9 +157,9 @@ namespace Kistl.DALProvider.EF
         /// </summary>
         /// <param name="property">the official name of the property</param>
         /// <param name="efProperty">the EF name of the property</param>
-        public void NotifyPropertyChanging(string property, string efProperty)
+        public void NotifyPropertyChanging(string property, string efProperty, object oldValue, object newValue)
         {
-            base.NotifyPropertyChanging(property);
+            base.NotifyPropertyChanging(property, oldValue, newValue);
             if (_changeTracker != null)
             {
                 _changeTracker.EntityMemberChanging(efProperty);
@@ -256,18 +268,18 @@ namespace Kistl.DALProvider.EF
             }
         }
 
-        public override void NotifyPropertyChanging(string property)
+        public override void NotifyPropertyChanging(string property, object oldValue, object newValue)
         {
-            base.NotifyPropertyChanging(property);
+            base.NotifyPropertyChanging(property, oldValue, newValue);
             if (_changeTracker != null)
             {
                 _changeTracker.EntityMemberChanging(property);
             }
         }
 
-        public override void NotifyPropertyChanged(string property)
+        public override void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
-            base.NotifyPropertyChanged(property);
+            base.NotifyPropertyChanged(property, oldValue, newValue);
             if (_changeTracker != null)
             {
                 _changeTracker.EntityMemberChanged(property);
@@ -289,20 +301,20 @@ namespace Kistl.DALProvider.EF
     public abstract class BaseServerStructObject_EntityFramework
         : BaseServerStructObject
     {
-        protected override void OnNotifyPropertyChanging(string property)
+        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
         {
             //base.OnNotifyPropertyChanging(property);
             if (ParentObject != null)
                 (ParentObject as BaseServerDataObject_EntityFramework)
-                    .NotifyPropertyChanging(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix);
+                    .NotifyPropertyChanging(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);
         }
 
-        protected override void OnNotifyPropertyChanged(string property)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             //base.OnNotifyPropertyChanged(property);
             if (ParentObject != null)
                 (ParentObject as BaseServerDataObject_EntityFramework)
-                    .NotifyPropertyChanged(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix);
+                    .NotifyPropertyChanged(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);
         }
 
     }

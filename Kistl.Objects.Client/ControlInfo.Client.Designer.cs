@@ -54,15 +54,18 @@ namespace Kistl.App.GUI
 					return;
                 else if (value != null && value.ID == _fk_Assembly)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Assembly;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Assembly");
-				           
+				NotifyPropertyChanging("Assembly", oldValue, value);
+                
 				// next, set the local reference
                 _fk_Assembly = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Assembly");
+				NotifyPropertyChanged("Assembly", oldValue, value);
             }
         }
         
@@ -78,9 +81,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Assembly != value)
                 {
-                    NotifyPropertyChanging("Assembly");
+					var __oldValue = _fk_Assembly;
+                    NotifyPropertyChanging("Assembly", __oldValue, value);
                     _fk_Assembly = value;
-                    NotifyPropertyChanged("Assembly");
+                    NotifyPropertyChanged("Assembly", __oldValue, value);
                 }
             }
         }
@@ -101,9 +105,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ClassName != value)
                 {
-                    NotifyPropertyChanging("ClassName");
+					var __oldValue = _ClassName;
+                    NotifyPropertyChanging("ClassName", __oldValue, value);
                     _ClassName = value;
-                    NotifyPropertyChanged("ClassName");
+                    NotifyPropertyChanged("ClassName", __oldValue, value);
                 }
             }
         }
@@ -124,9 +129,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ControlType != value)
                 {
-                    NotifyPropertyChanging("ControlType");
+					var __oldValue = _ControlType;
+                    NotifyPropertyChanging("ControlType", __oldValue, value);
                     _ControlType = value;
-                    NotifyPropertyChanged("ControlType");
+                    NotifyPropertyChanged("ControlType", __oldValue, value);
                 }
             }
         }
@@ -147,9 +153,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsContainer != value)
                 {
-                    NotifyPropertyChanging("IsContainer");
+					var __oldValue = _IsContainer;
+                    NotifyPropertyChanging("IsContainer", __oldValue, value);
                     _IsContainer = value;
-                    NotifyPropertyChanged("IsContainer");
+                    NotifyPropertyChanged("IsContainer", __oldValue, value);
                 }
             }
         }
@@ -170,9 +177,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Platform != value)
                 {
-                    NotifyPropertyChanging("Platform");
+					var __oldValue = _Platform;
+                    NotifyPropertyChanging("Platform", __oldValue, value);
                     _Platform = value;
-                    NotifyPropertyChanged("Platform");
+                    NotifyPropertyChanged("Platform", __oldValue, value);
                 }
             }
         }

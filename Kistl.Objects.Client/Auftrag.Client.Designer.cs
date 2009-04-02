@@ -43,9 +43,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Auftragsname != value)
                 {
-                    NotifyPropertyChanging("Auftragsname");
+					var __oldValue = _Auftragsname;
+                    NotifyPropertyChanging("Auftragsname", __oldValue, value);
                     _Auftragsname = value;
-                    NotifyPropertyChanged("Auftragsname");
+                    NotifyPropertyChanged("Auftragsname", __oldValue, value);
                 }
             }
         }
@@ -66,9 +67,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Auftragswert != value)
                 {
-                    NotifyPropertyChanging("Auftragswert");
+					var __oldValue = _Auftragswert;
+                    NotifyPropertyChanging("Auftragswert", __oldValue, value);
                     _Auftragswert = value;
-                    NotifyPropertyChanged("Auftragswert");
+                    NotifyPropertyChanged("Auftragswert", __oldValue, value);
                 }
             }
         }
@@ -100,15 +102,18 @@ namespace Kistl.App.Projekte
 					return;
                 else if (value != null && value.ID == _fk_Kunde)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Kunde;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Kunde");
-				           
+				NotifyPropertyChanging("Kunde", oldValue, value);
+                
 				// next, set the local reference
                 _fk_Kunde = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Kunde");
+				NotifyPropertyChanged("Kunde", oldValue, value);
             }
         }
         
@@ -124,9 +129,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Kunde != value)
                 {
-                    NotifyPropertyChanging("Kunde");
+					var __oldValue = _fk_Kunde;
+                    NotifyPropertyChanging("Kunde", __oldValue, value);
                     _fk_Kunde = value;
-                    NotifyPropertyChanged("Kunde");
+                    NotifyPropertyChanged("Kunde", __oldValue, value);
                 }
             }
         }
@@ -158,15 +164,18 @@ namespace Kistl.App.Projekte
 					return;
                 else if (value != null && value.ID == _fk_Mitarbeiter)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Mitarbeiter;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Mitarbeiter");
-				           
+				NotifyPropertyChanging("Mitarbeiter", oldValue, value);
+                
 				// next, set the local reference
                 _fk_Mitarbeiter = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Mitarbeiter");
+				NotifyPropertyChanged("Mitarbeiter", oldValue, value);
             }
         }
         
@@ -182,9 +191,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Mitarbeiter != value)
                 {
-                    NotifyPropertyChanging("Mitarbeiter");
+					var __oldValue = _fk_Mitarbeiter;
+                    NotifyPropertyChanging("Mitarbeiter", __oldValue, value);
                     _fk_Mitarbeiter = value;
-                    NotifyPropertyChanged("Mitarbeiter");
+                    NotifyPropertyChanged("Mitarbeiter", __oldValue, value);
                 }
             }
         }
@@ -216,12 +226,12 @@ namespace Kistl.App.Projekte
 					return;
                 else if (value != null && value.ID == _fk_Projekt)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Projekt");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = Projekt;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Projekt", oldValue, value);
                 
 				// next, set the local reference
                 _fk_Projekt = value == null ? (int?)null : value.ID;
@@ -243,7 +253,7 @@ namespace Kistl.App.Projekte
 					(value.Auftraege as BackReferenceCollection<Kistl.App.Projekte.Auftrag>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Projekt");
+				NotifyPropertyChanged("Projekt", oldValue, value);
             }
         }
         
@@ -259,9 +269,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Projekt != value)
                 {
-                    NotifyPropertyChanging("Projekt");
+					var __oldValue = _fk_Projekt;
+                    NotifyPropertyChanging("Projekt", __oldValue, value);
                     _fk_Projekt = value;
-                    NotifyPropertyChanged("Projekt");
+                    NotifyPropertyChanged("Projekt", __oldValue, value);
                 }
             }
         }

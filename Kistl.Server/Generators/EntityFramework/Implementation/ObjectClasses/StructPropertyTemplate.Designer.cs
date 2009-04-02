@@ -66,23 +66,24 @@ this.WriteObjects("                \r\n");
 this.WriteObjects("                if (IsReadonly) throw new ReadOnlyObjectException();\r\n");
 this.WriteObjects("                if (!object.Equals(",  backingName , ", value))\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", \"",  efName , "\");\r\n");
+this.WriteObjects("					var __oldValue = ",  backingName , ";\r\n");
+this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", \"",  efName , "\", __oldValue, value);\r\n");
 this.WriteObjects("                    if (",  backingName , " != null)\r\n");
 this.WriteObjects("                    {\r\n");
 this.WriteObjects("						",  backingName , ".DetachFromObject(this, \"",  name , "\");\r\n");
 this.WriteObjects("					}\r\n");
 this.WriteObjects("                    ",  backingName , " = (",  structImplementationType , ")value;\r\n");
 this.WriteObjects("					",  backingName , ".AttachToObject(this, \"",  name , "\");\r\n");
-this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", \"",  efName , "\");\r\n");
+this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", \"",  efName , "\", __oldValue, value);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
-#line 67 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 68 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 AddSerialization(serializationList, efName);
 
-#line 68 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 69 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 this.WriteObjects("  ");
 
         }

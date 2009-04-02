@@ -54,12 +54,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_ConstrainedProperty)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("ConstrainedProperty");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = ConstrainedProperty;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("ConstrainedProperty", oldValue, value);
                 
 				// next, set the local reference
                 _fk_ConstrainedProperty = value == null ? (int?)null : value.ID;
@@ -81,7 +81,7 @@ namespace Kistl.App.Base
 					(value.Constraints as BackReferenceCollection<Kistl.App.Base.Constraint>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("ConstrainedProperty");
+				NotifyPropertyChanged("ConstrainedProperty", oldValue, value);
             }
         }
         
@@ -97,9 +97,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_ConstrainedProperty != value)
                 {
-                    NotifyPropertyChanging("ConstrainedProperty");
+					var __oldValue = _fk_ConstrainedProperty;
+                    NotifyPropertyChanging("ConstrainedProperty", __oldValue, value);
                     _fk_ConstrainedProperty = value;
-                    NotifyPropertyChanged("ConstrainedProperty");
+                    NotifyPropertyChanged("ConstrainedProperty", __oldValue, value);
                 }
             }
         }
@@ -120,9 +121,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Reason != value)
                 {
-                    NotifyPropertyChanging("Reason");
+					var __oldValue = _Reason;
+                    NotifyPropertyChanging("Reason", __oldValue, value);
                     _Reason = value;
-                    NotifyPropertyChanged("Reason");
+                    NotifyPropertyChanged("Reason", __oldValue, value);
                 }
             }
         }

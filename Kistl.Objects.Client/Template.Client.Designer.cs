@@ -54,15 +54,18 @@ namespace Kistl.App.GUI
 					return;
                 else if (value != null && value.ID == _fk_DisplayedTypeAssembly)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = DisplayedTypeAssembly;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("DisplayedTypeAssembly");
-				           
+				NotifyPropertyChanging("DisplayedTypeAssembly", oldValue, value);
+                
 				// next, set the local reference
                 _fk_DisplayedTypeAssembly = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("DisplayedTypeAssembly");
+				NotifyPropertyChanged("DisplayedTypeAssembly", oldValue, value);
             }
         }
         
@@ -78,9 +81,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_DisplayedTypeAssembly != value)
                 {
-                    NotifyPropertyChanging("DisplayedTypeAssembly");
+					var __oldValue = _fk_DisplayedTypeAssembly;
+                    NotifyPropertyChanging("DisplayedTypeAssembly", __oldValue, value);
                     _fk_DisplayedTypeAssembly = value;
-                    NotifyPropertyChanged("DisplayedTypeAssembly");
+                    NotifyPropertyChanged("DisplayedTypeAssembly", __oldValue, value);
                 }
             }
         }
@@ -101,9 +105,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_DisplayedTypeFullName != value)
                 {
-                    NotifyPropertyChanging("DisplayedTypeFullName");
+					var __oldValue = _DisplayedTypeFullName;
+                    NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, value);
                     _DisplayedTypeFullName = value;
-                    NotifyPropertyChanged("DisplayedTypeFullName");
+                    NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, value);
                 }
             }
         }
@@ -124,9 +129,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_DisplayName != value)
                 {
-                    NotifyPropertyChanging("DisplayName");
+					var __oldValue = _DisplayName;
+                    NotifyPropertyChanging("DisplayName", __oldValue, value);
                     _DisplayName = value;
-                    NotifyPropertyChanged("DisplayName");
+                    NotifyPropertyChanged("DisplayName", __oldValue, value);
                 }
             }
         }
@@ -180,15 +186,18 @@ namespace Kistl.App.GUI
 					return;
                 else if (value != null && value.ID == _fk_VisualTree)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = VisualTree;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("VisualTree");
-				           
+				NotifyPropertyChanging("VisualTree", oldValue, value);
+                
 				// next, set the local reference
                 _fk_VisualTree = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("VisualTree");
+				NotifyPropertyChanged("VisualTree", oldValue, value);
             }
         }
         
@@ -204,9 +213,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_VisualTree != value)
                 {
-                    NotifyPropertyChanging("VisualTree");
+					var __oldValue = _fk_VisualTree;
+                    NotifyPropertyChanging("VisualTree", __oldValue, value);
                     _fk_VisualTree = value;
-                    NotifyPropertyChanged("VisualTree");
+                    NotifyPropertyChanged("VisualTree", __oldValue, value);
                 }
             }
         }

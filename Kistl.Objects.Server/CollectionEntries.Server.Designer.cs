@@ -29,9 +29,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -263,9 +264,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -358,9 +360,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_A_pos != value)
                 {
-                    NotifyPropertyChanging("A_pos");
+					var __oldValue = _A_pos;
+                    NotifyPropertyChanging("A_pos", __oldValue, value);
                     _A_pos = value;
-                    NotifyPropertyChanged("A_pos");
+                    NotifyPropertyChanged("A_pos", __oldValue, value);
                 }
             }
         }
@@ -452,9 +455,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_B_pos != value)
                 {
-                    NotifyPropertyChanging("B_pos");
+					var __oldValue = _B_pos;
+                    NotifyPropertyChanging("B_pos", __oldValue, value);
                     _B_pos = value;
-                    NotifyPropertyChanged("B_pos");
+                    NotifyPropertyChanged("B_pos", __oldValue, value);
                 }
             }
         }
@@ -559,9 +563,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -793,9 +798,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -888,9 +894,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_A_pos != value)
                 {
-                    NotifyPropertyChanging("A_pos");
+					var __oldValue = _A_pos;
+                    NotifyPropertyChanging("A_pos", __oldValue, value);
                     _A_pos = value;
-                    NotifyPropertyChanged("A_pos");
+                    NotifyPropertyChanged("A_pos", __oldValue, value);
                 }
             }
         }
@@ -982,9 +989,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_B_pos != value)
                 {
-                    NotifyPropertyChanging("B_pos");
+					var __oldValue = _B_pos;
+                    NotifyPropertyChanging("B_pos", __oldValue, value);
                     _B_pos = value;
-                    NotifyPropertyChanged("B_pos");
+                    NotifyPropertyChanged("B_pos", __oldValue, value);
                 }
             }
         }
@@ -1089,9 +1097,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -1323,9 +1332,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -1558,9 +1568,10 @@ namespace Kistl.App.Zeiterfassung
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -1791,9 +1802,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -1891,9 +1903,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_B != value)
                 {
-                    NotifyPropertyChanging("B");
+					var __oldValue = _B;
+                    NotifyPropertyChanging("B", __oldValue, value);
                     _B = value;
-                    NotifyPropertyChanged("B");
+                    NotifyPropertyChanged("B", __oldValue, value);
                 }
             }
         }

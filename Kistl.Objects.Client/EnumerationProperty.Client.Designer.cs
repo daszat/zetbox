@@ -54,15 +54,18 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_Enumeration)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Enumeration;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Enumeration");
-				           
+				NotifyPropertyChanging("Enumeration", oldValue, value);
+                
 				// next, set the local reference
                 _fk_Enumeration = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Enumeration");
+				NotifyPropertyChanged("Enumeration", oldValue, value);
             }
         }
         
@@ -78,9 +81,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Enumeration != value)
                 {
-                    NotifyPropertyChanging("Enumeration");
+					var __oldValue = _fk_Enumeration;
+                    NotifyPropertyChanging("Enumeration", __oldValue, value);
                     _fk_Enumeration = value;
-                    NotifyPropertyChanged("Enumeration");
+                    NotifyPropertyChanged("Enumeration", __oldValue, value);
                 }
             }
         }

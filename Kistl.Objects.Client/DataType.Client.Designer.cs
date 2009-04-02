@@ -43,9 +43,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ClassName != value)
                 {
-                    NotifyPropertyChanging("ClassName");
+					var __oldValue = _ClassName;
+                    NotifyPropertyChanging("ClassName", __oldValue, value);
                     _ClassName = value;
-                    NotifyPropertyChanged("ClassName");
+                    NotifyPropertyChanged("ClassName", __oldValue, value);
                 }
             }
         }
@@ -77,15 +78,18 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_DefaultIcon)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = DefaultIcon;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("DefaultIcon");
-				           
+				NotifyPropertyChanging("DefaultIcon", oldValue, value);
+                
 				// next, set the local reference
                 _fk_DefaultIcon = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("DefaultIcon");
+				NotifyPropertyChanged("DefaultIcon", oldValue, value);
             }
         }
         
@@ -101,9 +105,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_DefaultIcon != value)
                 {
-                    NotifyPropertyChanging("DefaultIcon");
+					var __oldValue = _fk_DefaultIcon;
+                    NotifyPropertyChanging("DefaultIcon", __oldValue, value);
                     _fk_DefaultIcon = value;
-                    NotifyPropertyChanged("DefaultIcon");
+                    NotifyPropertyChanged("DefaultIcon", __oldValue, value);
                 }
             }
         }
@@ -124,9 +129,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
-                    NotifyPropertyChanging("Description");
+					var __oldValue = _Description;
+                    NotifyPropertyChanging("Description", __oldValue, value);
                     _Description = value;
-                    NotifyPropertyChanged("Description");
+                    NotifyPropertyChanged("Description", __oldValue, value);
                 }
             }
         }
@@ -218,12 +224,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_Module)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Module");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = Module;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Module", oldValue, value);
                 
 				// next, set the local reference
                 _fk_Module = value == null ? (int?)null : value.ID;
@@ -245,7 +251,7 @@ namespace Kistl.App.Base
 					(value.DataTypes as BackReferenceCollection<Kistl.App.Base.DataType>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Module");
+				NotifyPropertyChanged("Module", oldValue, value);
             }
         }
         
@@ -261,9 +267,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Module != value)
                 {
-                    NotifyPropertyChanging("Module");
+					var __oldValue = _fk_Module;
+                    NotifyPropertyChanging("Module", __oldValue, value);
                     _fk_Module = value;
-                    NotifyPropertyChanged("Module");
+                    NotifyPropertyChanged("Module", __oldValue, value);
                 }
             }
         }

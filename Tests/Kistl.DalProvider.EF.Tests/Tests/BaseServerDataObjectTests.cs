@@ -70,16 +70,16 @@ namespace Kistl.DalProvider.EF.Tests
         {
             obj.ID = 10;
             obj.ClientObjectState = DataObjectState.Unmodified;
-            obj.NotifyPropertyChanged("test");
+            obj.NotifyPropertyChanged("test", null, null);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
         }
 
         [Test]
         public void NotifyPropertyChanged_ing()
         {
-            obj.NotifyPropertyChanging("StringProp");
+            obj.NotifyPropertyChanging("StringProp", null, null);
             obj.ClassName = "test";
-            obj.NotifyPropertyChanged("StringProp");
+            obj.NotifyPropertyChanged("StringProp", null, null);
         }
 
         [Test]

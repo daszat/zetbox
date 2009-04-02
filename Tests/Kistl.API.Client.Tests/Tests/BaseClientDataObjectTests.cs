@@ -57,7 +57,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void ObjectState_CreatedObject_Modified()
         {
-            obj.NotifyPropertyChanged("test");
+            obj.NotifyPropertyChanged("test", null, null);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
         }
 
@@ -65,7 +65,7 @@ namespace Kistl.API.Client.Tests
         public void ObjectState_ObjectWithID_Modified()
         {
             obj.SetPrivatePropertyValue<int>("ID", 10);
-            obj.NotifyPropertyChanged("test");
+            obj.NotifyPropertyChanged("test", null, null);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
@@ -80,8 +80,8 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void NotifyPropertyChanged_ing()
         {
-            obj.NotifyPropertyChanging("ID");
-            obj.NotifyPropertyChanged("ID");
+            obj.NotifyPropertyChanging("ID", null, null);
+            obj.NotifyPropertyChanged("ID", null, null);
             Assert.That(PropertyChangedCalled, Is.True);
         }
 

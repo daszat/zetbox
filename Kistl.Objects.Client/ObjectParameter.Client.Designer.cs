@@ -54,15 +54,18 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_DataType)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = DataType;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("DataType");
-				           
+				NotifyPropertyChanging("DataType", oldValue, value);
+                
 				// next, set the local reference
                 _fk_DataType = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("DataType");
+				NotifyPropertyChanged("DataType", oldValue, value);
             }
         }
         
@@ -78,9 +81,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_DataType != value)
                 {
-                    NotifyPropertyChanging("DataType");
+					var __oldValue = _fk_DataType;
+                    NotifyPropertyChanging("DataType", __oldValue, value);
                     _fk_DataType = value;
-                    NotifyPropertyChanged("DataType");
+                    NotifyPropertyChanged("DataType", __oldValue, value);
                 }
             }
         }

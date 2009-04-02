@@ -43,9 +43,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -69,9 +70,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IconFile != value)
                 {
-                    NotifyPropertyChanging("IconFile");
+					var __oldValue = _IconFile;
+                    NotifyPropertyChanging("IconFile", __oldValue, value);
                     _IconFile = value;
-                    NotifyPropertyChanged("IconFile");
+                    NotifyPropertyChanged("IconFile", __oldValue, value);
                 }
             }
         }

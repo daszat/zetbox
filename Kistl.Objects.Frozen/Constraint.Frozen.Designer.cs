@@ -41,9 +41,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ConstrainedProperty != value)
                 {
-                    NotifyPropertyChanging("ConstrainedProperty");
+					var __oldValue = _ConstrainedProperty;
+                    NotifyPropertyChanging("ConstrainedProperty", __oldValue, value);
                     _ConstrainedProperty = value;
-                    NotifyPropertyChanged("ConstrainedProperty");
+                    NotifyPropertyChanged("ConstrainedProperty", __oldValue, value);
                 }
             }
         }
@@ -64,9 +65,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Reason != value)
                 {
-                    NotifyPropertyChanging("Reason");
+					var __oldValue = _Reason;
+                    NotifyPropertyChanging("Reason", __oldValue, value);
                     _Reason = value;
-                    NotifyPropertyChanged("Reason");
+                    NotifyPropertyChanged("Reason", __oldValue, value);
                 }
             }
         }

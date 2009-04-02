@@ -43,9 +43,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -67,9 +68,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ControlType != value)
                 {
-                    NotifyPropertyChanging("ControlType");
+					var __oldValue = _ControlType;
+                    NotifyPropertyChanging("ControlType", __oldValue, value);
                     _ControlType = value;
-                    NotifyPropertyChanged("ControlType");
+                    NotifyPropertyChanged("ControlType", __oldValue, value);
                 }
             }
         }
@@ -192,9 +194,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_DataTypeName != value)
                 {
-                    NotifyPropertyChanging("DataTypeName");
+					var __oldValue = _DataTypeName;
+                    NotifyPropertyChanging("DataTypeName", __oldValue, value);
                     _DataTypeName = value;
-                    NotifyPropertyChanged("DataTypeName");
+                    NotifyPropertyChanged("DataTypeName", __oldValue, value);
                 }
             }
         }
@@ -299,9 +302,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_PresenterTypeName != value)
                 {
-                    NotifyPropertyChanging("PresenterTypeName");
+					var __oldValue = _PresenterTypeName;
+                    NotifyPropertyChanging("PresenterTypeName", __oldValue, value);
                     _PresenterTypeName = value;
-                    NotifyPropertyChanged("PresenterTypeName");
+                    NotifyPropertyChanged("PresenterTypeName", __oldValue, value);
                 }
             }
         }

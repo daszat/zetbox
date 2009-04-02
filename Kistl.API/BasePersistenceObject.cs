@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Kistl.API
 {
-    public abstract class BasePersistenceObject : IPersistenceObject, INotifyPropertyChanged, INotifyPropertyChanging
+    public abstract class BasePersistenceObject : BaseNotifyingObject, IPersistenceObject
     {
         /// <summary>
         /// Everyone has an ID
@@ -22,8 +22,6 @@ namespace Kistl.API
         public abstract bool IsAttached { get; }
 
         public abstract DataObjectState ObjectState { get; }
-
-        protected abstract void SetModified();
 
         /// <summary>
         /// Attach this Object to a Context. This Method is called by the Context.
@@ -93,79 +91,6 @@ namespace Kistl.API
 
 
         public virtual void ReloadReferences() { }
-
-        #endregion
-
-        #region Property Change Notification
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event PropertyChangingEventHandler PropertyChanging;
-
-        /// <summary>
-        /// Property is beeing changing
-        /// </summary>
-        /// <param name="property"></param>
-        public virtual void NotifyPropertyChanging(string property)
-        {
-            if (notifications == null)
-            {
-                OnPropertyChanging(property);
-            }
-        }
-
-        /// <summary>
-        /// Property has been changed
-        /// </summary>
-        /// <param name="property"></param>
-        public virtual void NotifyPropertyChanged(string property)
-        {
-            if (notifications == null)
-            {
-                SetModified();
-                OnPropertyChanged(property);
-            }
-            else
-            {
-                if (!notifications.Contains(property))
-                    notifications.Add(property);
-            }
-        }
-
-        protected virtual void OnPropertyChanging(string property)
-        {
-            if (PropertyChanging != null)
-                PropertyChanging(this, new PropertyChangingEventArgs(property));
-        }
-
-        protected virtual void OnPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
-
-        private List<string> notifications = null;
-        public void RecordNotifications()
-        {
-            if (notifications == null)
-            {
-                notifications = new List<string>();
-            }
-        }
-
-        public void PlaybackNotifications()
-        {
-            if (notifications == null) return;
-
-            // enable normal notifications before playing back the old
-            // this is neccessary to allow handlers to cause normal events
-            var localCopy = notifications;
-            notifications = null;
-
-            if (PropertyChanged != null)
-            {
-                localCopy.ForEach(p => OnPropertyChanged(p));
-            }
-        }
 
         #endregion
 

@@ -32,9 +32,10 @@
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (<%= backingName %> != value)
                 {
-                    NotifyPropertyChanging("<%= name %>");
+					var __oldValue = <%= backingName %>;
+                    NotifyPropertyChanging("<%= name %>", __oldValue, value);
                     <%= backingName %> = value;
-                    NotifyPropertyChanged("<%= name %>");
+                    NotifyPropertyChanged("<%= name %>", __oldValue, value);
                 }
             }
         }

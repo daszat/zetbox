@@ -43,9 +43,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -148,9 +149,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Toolkit != value)
                 {
-                    NotifyPropertyChanging("Toolkit");
+					var __oldValue = _Toolkit;
+                    NotifyPropertyChanging("Toolkit", __oldValue, value);
                     _Toolkit = value;
-                    NotifyPropertyChanged("Toolkit");
+                    NotifyPropertyChanged("Toolkit", __oldValue, value);
                 }
             }
         }

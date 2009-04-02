@@ -101,6 +101,7 @@
     <Content Include="Configuration\SampleConfig.xml" />
     <None Include="ClassDiagram.Kistl.API.cd" />
     <None Include="Configuration\CreateSchema.cmd" />
+    <Compile Include="BaseNotifyingObject.cs" />
     <Compile Include="BasePersistenceObject.cs" />
     <Compile Include="BaseStructObject.cs" />
     <Compile Include="RelationEndRole.cs" />

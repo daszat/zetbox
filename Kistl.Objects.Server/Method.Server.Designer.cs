@@ -43,9 +43,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -69,9 +70,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
-                    NotifyPropertyChanging("Description");
+					var __oldValue = _Description;
+                    NotifyPropertyChanging("Description", __oldValue, value);
                     _Description = value;
-                    NotifyPropertyChanged("Description");
+                    NotifyPropertyChanged("Description", __oldValue, value);
                 }
             }
         }
@@ -95,9 +97,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsDisplayable != value)
                 {
-                    NotifyPropertyChanging("IsDisplayable");
+					var __oldValue = _IsDisplayable;
+                    NotifyPropertyChanging("IsDisplayable", __oldValue, value);
                     _IsDisplayable = value;
-                    NotifyPropertyChanged("IsDisplayable");
+                    NotifyPropertyChanged("IsDisplayable", __oldValue, value);
                 }
             }
         }
@@ -168,9 +171,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_MethodName != value)
                 {
-                    NotifyPropertyChanging("MethodName");
+					var __oldValue = _MethodName;
+                    NotifyPropertyChanging("MethodName", __oldValue, value);
                     _MethodName = value;
-                    NotifyPropertyChanged("MethodName");
+                    NotifyPropertyChanged("MethodName", __oldValue, value);
                 }
             }
         }

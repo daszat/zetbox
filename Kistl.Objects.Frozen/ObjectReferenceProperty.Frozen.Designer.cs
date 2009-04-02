@@ -41,9 +41,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ReferenceObjectClass != value)
                 {
-                    NotifyPropertyChanging("ReferenceObjectClass");
+					var __oldValue = _ReferenceObjectClass;
+                    NotifyPropertyChanging("ReferenceObjectClass", __oldValue, value);
                     _ReferenceObjectClass = value;
-                    NotifyPropertyChanged("ReferenceObjectClass");
+                    NotifyPropertyChanged("ReferenceObjectClass", __oldValue, value);
                 }
             }
         }
@@ -64,9 +65,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_RelationEnd != value)
                 {
-                    NotifyPropertyChanging("RelationEnd");
+					var __oldValue = _RelationEnd;
+                    NotifyPropertyChanging("RelationEnd", __oldValue, value);
                     _RelationEnd = value;
-                    NotifyPropertyChanged("RelationEnd");
+                    NotifyPropertyChanged("RelationEnd", __oldValue, value);
                 }
             }
         }

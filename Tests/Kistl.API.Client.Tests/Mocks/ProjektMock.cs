@@ -51,9 +51,9 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_AufwandGes != value)
                 {
-                    NotifyPropertyChanging("AufwandGes");
+                    NotifyPropertyChanging("AufwandGes", null, null);
                     _AufwandGes = value;
-                    NotifyPropertyChanged("AufwandGes");
+                    NotifyPropertyChanged("AufwandGes", null, null);
                 }
             }
         }
@@ -98,9 +98,9 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Kundenname != value)
                 {
-                    NotifyPropertyChanging("Kundenname");
+                    NotifyPropertyChanging("Kundenname", null, null);
                     _Kundenname = value;
-                    NotifyPropertyChanged("Kundenname");
+                    NotifyPropertyChanged("Kundenname", null, null);
                 }
             }
         }
@@ -143,9 +143,9 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Name != value)
                 {
-                    NotifyPropertyChanging("Name");
+                    NotifyPropertyChanging("Name", null, null);
                     _Name = value;
-                    NotifyPropertyChanged("Name");
+                    NotifyPropertyChanged("Name", null, null);
                 }
             }
         }

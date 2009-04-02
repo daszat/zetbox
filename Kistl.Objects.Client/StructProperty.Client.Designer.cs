@@ -54,15 +54,18 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_StructDefinition)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = StructDefinition;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("StructDefinition");
-				           
+				NotifyPropertyChanging("StructDefinition", oldValue, value);
+                
 				// next, set the local reference
                 _fk_StructDefinition = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("StructDefinition");
+				NotifyPropertyChanged("StructDefinition", oldValue, value);
             }
         }
         
@@ -78,9 +81,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_StructDefinition != value)
                 {
-                    NotifyPropertyChanging("StructDefinition");
+					var __oldValue = _fk_StructDefinition;
+                    NotifyPropertyChanging("StructDefinition", __oldValue, value);
                     _fk_StructDefinition = value;
-                    NotifyPropertyChanged("StructDefinition");
+                    NotifyPropertyChanged("StructDefinition", __oldValue, value);
                 }
             }
         }

@@ -78,9 +78,10 @@ this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (",  backingName , " != value)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    NotifyPropertyChanging(\"",  propertyName , "\");\r\n");
+this.WriteObjects("					var __oldValue = ",  backingName , ";\r\n");
+this.WriteObjects("                    NotifyPropertyChanging(\"",  propertyName , "\", __oldValue, value);\r\n");
 this.WriteObjects("                    ",  backingName , " = value;\r\n");
-this.WriteObjects("                    NotifyPropertyChanged(\"",  propertyName , "\");\r\n");
+this.WriteObjects("                    NotifyPropertyChanged(\"",  propertyName , "\", __oldValue, value);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
@@ -88,7 +89,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        // backing store for serialization\r\n");
 this.WriteObjects("        private int? ",  backingName , ";\r\n");
 this.WriteObjects("        \r\n");
-#line 74 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 75 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
 if (serializationList != null)
 		serializationList.Add(backingName);
 

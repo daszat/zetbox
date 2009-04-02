@@ -41,9 +41,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_DataType != value)
                 {
-                    NotifyPropertyChanging("DataType");
+					var __oldValue = _DataType;
+                    NotifyPropertyChanging("DataType", __oldValue, value);
                     _DataType = value;
-                    NotifyPropertyChanged("DataType");
+                    NotifyPropertyChanged("DataType", __oldValue, value);
                 }
             }
         }

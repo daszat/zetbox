@@ -43,9 +43,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -150,9 +151,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_DisplayedTypeFullName != value)
                 {
-                    NotifyPropertyChanging("DisplayedTypeFullName");
+					var __oldValue = _DisplayedTypeFullName;
+                    NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, value);
                     _DisplayedTypeFullName = value;
-                    NotifyPropertyChanged("DisplayedTypeFullName");
+                    NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, value);
                 }
             }
         }
@@ -176,9 +178,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_DisplayName != value)
                 {
-                    NotifyPropertyChanging("DisplayName");
+					var __oldValue = _DisplayName;
+                    NotifyPropertyChanging("DisplayName", __oldValue, value);
                     _DisplayName = value;
-                    NotifyPropertyChanged("DisplayName");
+                    NotifyPropertyChanged("DisplayName", __oldValue, value);
                 }
             }
         }

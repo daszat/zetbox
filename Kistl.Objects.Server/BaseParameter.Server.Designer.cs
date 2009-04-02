@@ -43,9 +43,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -69,9 +70,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
-                    NotifyPropertyChanging("Description");
+					var __oldValue = _Description;
+                    NotifyPropertyChanging("Description", __oldValue, value);
                     _Description = value;
-                    NotifyPropertyChanged("Description");
+                    NotifyPropertyChanged("Description", __oldValue, value);
                 }
             }
         }
@@ -95,9 +97,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsList != value)
                 {
-                    NotifyPropertyChanging("IsList");
+					var __oldValue = _IsList;
+                    NotifyPropertyChanging("IsList", __oldValue, value);
                     _IsList = value;
-                    NotifyPropertyChanged("IsList");
+                    NotifyPropertyChanged("IsList", __oldValue, value);
                 }
             }
         }
@@ -121,9 +124,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsReturnParameter != value)
                 {
-                    NotifyPropertyChanging("IsReturnParameter");
+					var __oldValue = _IsReturnParameter;
+                    NotifyPropertyChanging("IsReturnParameter", __oldValue, value);
                     _IsReturnParameter = value;
-                    NotifyPropertyChanged("IsReturnParameter");
+                    NotifyPropertyChanged("IsReturnParameter", __oldValue, value);
                 }
             }
         }
@@ -222,9 +226,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Method_pos != value)
                 {
-                    NotifyPropertyChanging("Method_pos");
+					var __oldValue = _Method_pos;
+                    NotifyPropertyChanging("Method_pos", __oldValue, value);
                     _Method_pos = value;
-                    NotifyPropertyChanged("Method_pos");
+                    NotifyPropertyChanged("Method_pos", __oldValue, value);
                 }
             }
         }
@@ -249,9 +254,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ParameterName != value)
                 {
-                    NotifyPropertyChanging("ParameterName");
+					var __oldValue = _ParameterName;
+                    NotifyPropertyChanging("ParameterName", __oldValue, value);
                     _ParameterName = value;
-                    NotifyPropertyChanged("ParameterName");
+                    NotifyPropertyChanged("ParameterName", __oldValue, value);
                 }
             }
         }

@@ -43,9 +43,10 @@ namespace Kistl.App.Zeiterfassung
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -69,9 +70,10 @@ namespace Kistl.App.Zeiterfassung
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_AktuelleStunden != value)
                 {
-                    NotifyPropertyChanging("AktuelleStunden");
+					var __oldValue = _AktuelleStunden;
+                    NotifyPropertyChanging("AktuelleStunden", __oldValue, value);
                     _AktuelleStunden = value;
-                    NotifyPropertyChanged("AktuelleStunden");
+                    NotifyPropertyChanged("AktuelleStunden", __oldValue, value);
                 }
             }
         }
@@ -95,9 +97,10 @@ namespace Kistl.App.Zeiterfassung
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Kontoname != value)
                 {
-                    NotifyPropertyChanging("Kontoname");
+					var __oldValue = _Kontoname;
+                    NotifyPropertyChanging("Kontoname", __oldValue, value);
                     _Kontoname = value;
-                    NotifyPropertyChanged("Kontoname");
+                    NotifyPropertyChanged("Kontoname", __oldValue, value);
                 }
             }
         }
@@ -121,9 +124,10 @@ namespace Kistl.App.Zeiterfassung
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_MaxStunden != value)
                 {
-                    NotifyPropertyChanging("MaxStunden");
+					var __oldValue = _MaxStunden;
+                    NotifyPropertyChanging("MaxStunden", __oldValue, value);
                     _MaxStunden = value;
-                    NotifyPropertyChanged("MaxStunden");
+                    NotifyPropertyChanged("MaxStunden", __oldValue, value);
                 }
             }
         }

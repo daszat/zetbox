@@ -54,12 +54,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_AParent)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("AParent");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = AParent;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("AParent", oldValue, value);
                 
 				// next, set the local reference
                 _fk_AParent = value == null ? (int?)null : value.ID;
@@ -81,7 +81,7 @@ namespace Kistl.App.Base
                     value.A = this;
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("AParent");
+				NotifyPropertyChanged("AParent", oldValue, value);
             }
         }
         
@@ -97,9 +97,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_AParent != value)
                 {
-                    NotifyPropertyChanging("AParent");
+					var __oldValue = _fk_AParent;
+                    NotifyPropertyChanging("AParent", __oldValue, value);
                     _fk_AParent = value;
-                    NotifyPropertyChanged("AParent");
+                    NotifyPropertyChanged("AParent", __oldValue, value);
                 }
             }
         }
@@ -131,12 +132,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_BParent)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("BParent");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = BParent;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("BParent", oldValue, value);
                 
 				// next, set the local reference
                 _fk_BParent = value == null ? (int?)null : value.ID;
@@ -158,7 +159,7 @@ namespace Kistl.App.Base
                     value.B = this;
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("BParent");
+				NotifyPropertyChanged("BParent", oldValue, value);
             }
         }
         
@@ -174,9 +175,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_BParent != value)
                 {
-                    NotifyPropertyChanging("BParent");
+					var __oldValue = _fk_BParent;
+                    NotifyPropertyChanging("BParent", __oldValue, value);
                     _fk_BParent = value;
-                    NotifyPropertyChanged("BParent");
+                    NotifyPropertyChanged("BParent", __oldValue, value);
                 }
             }
         }
@@ -197,9 +199,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_HasPersistentOrder != value)
                 {
-                    NotifyPropertyChanging("HasPersistentOrder");
+					var __oldValue = _HasPersistentOrder;
+                    NotifyPropertyChanging("HasPersistentOrder", __oldValue, value);
                     _HasPersistentOrder = value;
-                    NotifyPropertyChanged("HasPersistentOrder");
+                    NotifyPropertyChanged("HasPersistentOrder", __oldValue, value);
                 }
             }
         }
@@ -220,9 +223,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Multiplicity != value)
                 {
-                    NotifyPropertyChanging("Multiplicity");
+					var __oldValue = _Multiplicity;
+                    NotifyPropertyChanging("Multiplicity", __oldValue, value);
                     _Multiplicity = value;
-                    NotifyPropertyChanged("Multiplicity");
+                    NotifyPropertyChanged("Multiplicity", __oldValue, value);
                 }
             }
         }
@@ -254,12 +258,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_Navigator)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Navigator");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = Navigator;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Navigator", oldValue, value);
                 
 				// next, set the local reference
                 _fk_Navigator = value == null ? (int?)null : value.ID;
@@ -281,7 +285,7 @@ namespace Kistl.App.Base
                     value.RelationEnd = this;
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Navigator");
+				NotifyPropertyChanged("Navigator", oldValue, value);
             }
         }
         
@@ -297,9 +301,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Navigator != value)
                 {
-                    NotifyPropertyChanging("Navigator");
+					var __oldValue = _fk_Navigator;
+                    NotifyPropertyChanging("Navigator", __oldValue, value);
                     _fk_Navigator = value;
-                    NotifyPropertyChanged("Navigator");
+                    NotifyPropertyChanged("Navigator", __oldValue, value);
                 }
             }
         }
@@ -320,9 +325,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Role != value)
                 {
-                    NotifyPropertyChanging("Role");
+					var __oldValue = _Role;
+                    NotifyPropertyChanging("Role", __oldValue, value);
                     _Role = value;
-                    NotifyPropertyChanged("Role");
+                    NotifyPropertyChanged("Role", __oldValue, value);
                 }
             }
         }
@@ -343,9 +349,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_RoleName != value)
                 {
-                    NotifyPropertyChanging("RoleName");
+					var __oldValue = _RoleName;
+                    NotifyPropertyChanging("RoleName", __oldValue, value);
                     _RoleName = value;
-                    NotifyPropertyChanged("RoleName");
+                    NotifyPropertyChanged("RoleName", __oldValue, value);
                 }
             }
         }
@@ -377,15 +384,18 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_Type)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Type;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Type");
-				           
+				NotifyPropertyChanging("Type", oldValue, value);
+                
 				// next, set the local reference
                 _fk_Type = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Type");
+				NotifyPropertyChanged("Type", oldValue, value);
             }
         }
         
@@ -401,9 +411,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Type != value)
                 {
-                    NotifyPropertyChanging("Type");
+					var __oldValue = _fk_Type;
+                    NotifyPropertyChanging("Type", __oldValue, value);
                     _fk_Type = value;
-                    NotifyPropertyChanged("Type");
+                    NotifyPropertyChanged("Type", __oldValue, value);
                 }
             }
         }

@@ -84,6 +84,8 @@ namespace Kistl.API.Mocks
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangeWithValueEventHandler PropertyChangedWithValue;
+        public event PropertyChangeWithValueEventHandler PropertyChangingWithValue;
 
         public void CopyTo(IDataObject obj)
         {
@@ -91,14 +93,6 @@ namespace Kistl.API.Mocks
             ((TestDataObject)obj).IntProperty = this.IntProperty;
             ((TestDataObject)obj).StringProperty = this.StringProperty;
             ((TestDataObject)obj).BoolProperty = this.BoolProperty;
-        }
-
-        public void NotifyChange()
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(""));
-            }
         }
 
         public void NotifyPostSave()
@@ -109,7 +103,7 @@ namespace Kistl.API.Mocks
         {
         }
 
-        public void NotifyPropertyChanged(string property)
+        public void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
             if (PropertyChanged != null)
             {
@@ -117,7 +111,7 @@ namespace Kistl.API.Mocks
             }
         }
 
-        public void NotifyPropertyChanging(string property)
+        public void NotifyPropertyChanging(string property, object oldValue, object newValue)
         {
         }
 

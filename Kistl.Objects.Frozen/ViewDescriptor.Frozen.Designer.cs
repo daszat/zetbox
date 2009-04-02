@@ -41,9 +41,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_LayoutRef != value)
                 {
-                    NotifyPropertyChanging("LayoutRef");
+					var __oldValue = _LayoutRef;
+                    NotifyPropertyChanging("LayoutRef", __oldValue, value);
                     _LayoutRef = value;
-                    NotifyPropertyChanged("LayoutRef");
+                    NotifyPropertyChanged("LayoutRef", __oldValue, value);
                 }
             }
         }
@@ -64,9 +65,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Toolkit != value)
                 {
-                    NotifyPropertyChanging("Toolkit");
+					var __oldValue = _Toolkit;
+                    NotifyPropertyChanging("Toolkit", __oldValue, value);
                     _Toolkit = value;
-                    NotifyPropertyChanged("Toolkit");
+                    NotifyPropertyChanged("Toolkit", __oldValue, value);
                 }
             }
         }
@@ -87,9 +89,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ViewRef != value)
                 {
-                    NotifyPropertyChanging("ViewRef");
+					var __oldValue = _ViewRef;
+                    NotifyPropertyChanging("ViewRef", __oldValue, value);
                     _ViewRef = value;
-                    NotifyPropertyChanged("ViewRef");
+                    NotifyPropertyChanged("ViewRef", __oldValue, value);
                 }
             }
         }

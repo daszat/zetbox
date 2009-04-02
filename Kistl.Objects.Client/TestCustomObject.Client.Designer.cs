@@ -45,9 +45,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Birthday != value)
                 {
-                    NotifyPropertyChanging("Birthday");
+					var __oldValue = _Birthday;
+                    NotifyPropertyChanging("Birthday", __oldValue, value);
                     _Birthday = value;
-                    NotifyPropertyChanged("Birthday");
+                    NotifyPropertyChanged("Birthday", __oldValue, value);
                 }
             }
         }
@@ -68,9 +69,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_PersonName != value)
                 {
-                    NotifyPropertyChanging("PersonName");
+					var __oldValue = _PersonName;
+                    NotifyPropertyChanging("PersonName", __oldValue, value);
                     _PersonName = value;
-                    NotifyPropertyChanged("PersonName");
+                    NotifyPropertyChanged("PersonName", __oldValue, value);
                 }
             }
         }

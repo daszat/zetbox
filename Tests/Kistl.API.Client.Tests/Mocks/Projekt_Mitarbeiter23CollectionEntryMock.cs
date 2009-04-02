@@ -15,7 +15,6 @@ namespace Kistl.App.Projekte
         // ID is inherited
         public override int RelationID { get { return 23; } }
 
-
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
@@ -42,14 +41,17 @@ namespace Kistl.App.Projekte
                 else if (value != null && value.ID == _fk_A)
                     return;
 
+                // cache old value to remove inverse references later
+                var oldValue = A;
+
                 // Changing Event fires before anything is touched
-                NotifyPropertyChanging("A");
+                NotifyPropertyChanging("A", oldValue, value);
 
                 // next, set the local reference
                 _fk_A = value == null ? (int?)null : value.ID;
 
                 // everything is done. fire the Changed event
-                NotifyPropertyChanged("A");
+                NotifyPropertyChanged("A", oldValue, value);
             }
         }
 
@@ -65,9 +67,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_A != value)
                 {
-                    NotifyPropertyChanging("A");
+                    var __oldValue = _fk_A;
+                    NotifyPropertyChanging("A", __oldValue, value);
                     _fk_A = value;
-                    NotifyPropertyChanged("A");
+                    NotifyPropertyChanged("A", __oldValue, value);
                 }
             }
         }
@@ -83,9 +86,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_A_pos != value)
                 {
-                    NotifyPropertyChanging("A_pos");
+                    var __oldValue = _A_pos;
+                    NotifyPropertyChanging("A_pos", __oldValue, value);
                     _A_pos = value;
-                    NotifyPropertyChanged("A_pos");
+                    NotifyPropertyChanged("A_pos", __oldValue, value);
                 }
             }
         }
@@ -116,14 +120,17 @@ namespace Kistl.App.Projekte
                 else if (value != null && value.ID == _fk_B)
                     return;
 
+                // cache old value to remove inverse references later
+                var oldValue = B;
+
                 // Changing Event fires before anything is touched
-                NotifyPropertyChanging("B");
+                NotifyPropertyChanging("B", oldValue, value);
 
                 // next, set the local reference
                 _fk_B = value == null ? (int?)null : value.ID;
 
                 // everything is done. fire the Changed event
-                NotifyPropertyChanged("B");
+                NotifyPropertyChanged("B", oldValue, value);
             }
         }
 
@@ -139,9 +146,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_B != value)
                 {
-                    NotifyPropertyChanging("B");
+                    var __oldValue = _fk_B;
+                    NotifyPropertyChanging("B", __oldValue, value);
                     _fk_B = value;
-                    NotifyPropertyChanged("B");
+                    NotifyPropertyChanged("B", __oldValue, value);
                 }
             }
         }
@@ -157,9 +165,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_B_pos != value)
                 {
-                    NotifyPropertyChanging("B_pos");
+                    var __oldValue = _B_pos;
+                    NotifyPropertyChanging("B_pos", __oldValue, value);
                     _B_pos = value;
-                    NotifyPropertyChanged("B_pos");
+                    NotifyPropertyChanged("B_pos", __oldValue, value);
                 }
             }
         }
@@ -175,7 +184,6 @@ namespace Kistl.App.Projekte
         /// Index into the B-side list of this relation
         /// </summary>
         public int? BIndex { get { return B_pos; } set { B_pos = value; } }
-
         public override Kistl.API.InterfaceType GetInterfaceType()
         {
             return new InterfaceType(typeof(Projekt_Mitarbeiter23CollectionEntry));

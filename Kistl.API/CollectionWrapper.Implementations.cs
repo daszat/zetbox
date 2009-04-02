@@ -31,8 +31,8 @@ namespace Kistl.API
 
         protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, ATYPE item)
         {
-            entry.A = item;
             entry.B = ParentObject;
+            entry.A = item;
             return entry;
         }
 
@@ -67,8 +67,8 @@ namespace Kistl.API
 
         protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, ATYPE item)
         {
-            entry.A = item;
             entry.B = ParentObject;
+            entry.A = item;
             entry.BIndex = Kistl.API.Helper.LASTINDEXPOSITION;
             return entry;
         }

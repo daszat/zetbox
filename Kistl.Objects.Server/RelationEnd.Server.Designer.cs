@@ -43,9 +43,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -231,9 +232,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_HasPersistentOrder != value)
                 {
-                    NotifyPropertyChanging("HasPersistentOrder");
+					var __oldValue = _HasPersistentOrder;
+                    NotifyPropertyChanging("HasPersistentOrder", __oldValue, value);
                     _HasPersistentOrder = value;
-                    NotifyPropertyChanged("HasPersistentOrder");
+                    NotifyPropertyChanged("HasPersistentOrder", __oldValue, value);
                 }
             }
         }
@@ -255,9 +257,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Multiplicity != value)
                 {
-                    NotifyPropertyChanging("Multiplicity");
+					var __oldValue = _Multiplicity;
+                    NotifyPropertyChanging("Multiplicity", __oldValue, value);
                     _Multiplicity = value;
-                    NotifyPropertyChanged("Multiplicity");
+                    NotifyPropertyChanged("Multiplicity", __oldValue, value);
                 }
             }
         }
@@ -380,9 +383,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Role != value)
                 {
-                    NotifyPropertyChanging("Role");
+					var __oldValue = _Role;
+                    NotifyPropertyChanging("Role", __oldValue, value);
                     _Role = value;
-                    NotifyPropertyChanged("Role");
+                    NotifyPropertyChanged("Role", __oldValue, value);
                 }
             }
         }
@@ -406,9 +410,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_RoleName != value)
                 {
-                    NotifyPropertyChanging("RoleName");
+					var __oldValue = _RoleName;
+                    NotifyPropertyChanging("RoleName", __oldValue, value);
                     _RoleName = value;
-                    NotifyPropertyChanged("RoleName");
+                    NotifyPropertyChanged("RoleName", __oldValue, value);
                 }
             }
         }

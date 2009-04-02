@@ -60,9 +60,10 @@
             {
                 if (<%= backingName %> != value)
                 {
-                    NotifyPropertyChanging("<%= propertyName %>");
+					var __oldValue = <%= backingName %>;
+                    NotifyPropertyChanging("<%= propertyName %>", __oldValue, value);
                     <%= backingName %> = value;
-                    NotifyPropertyChanged("<%= propertyName %>");
+                    NotifyPropertyChanged("<%= propertyName %>", __oldValue, value);
                 }
             }
         }

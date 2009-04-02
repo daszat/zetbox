@@ -41,9 +41,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ClassName != value)
                 {
-                    NotifyPropertyChanging("ClassName");
+					var __oldValue = _ClassName;
+                    NotifyPropertyChanging("ClassName", __oldValue, value);
                     _ClassName = value;
-                    NotifyPropertyChanged("ClassName");
+                    NotifyPropertyChanged("ClassName", __oldValue, value);
                 }
             }
         }
@@ -64,9 +65,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_DefaultIcon != value)
                 {
-                    NotifyPropertyChanging("DefaultIcon");
+					var __oldValue = _DefaultIcon;
+                    NotifyPropertyChanging("DefaultIcon", __oldValue, value);
                     _DefaultIcon = value;
-                    NotifyPropertyChanged("DefaultIcon");
+                    NotifyPropertyChanged("DefaultIcon", __oldValue, value);
                 }
             }
         }
@@ -87,9 +89,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
-                    NotifyPropertyChanging("Description");
+					var __oldValue = _Description;
+                    NotifyPropertyChanging("Description", __oldValue, value);
                     _Description = value;
-                    NotifyPropertyChanged("Description");
+                    NotifyPropertyChanged("Description", __oldValue, value);
                 }
             }
         }
@@ -156,9 +159,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Module != value)
                 {
-                    NotifyPropertyChanging("Module");
+					var __oldValue = _Module;
+                    NotifyPropertyChanging("Module", __oldValue, value);
                     _Module = value;
-                    NotifyPropertyChanged("Module");
+                    NotifyPropertyChanged("Module", __oldValue, value);
                 }
             }
         }

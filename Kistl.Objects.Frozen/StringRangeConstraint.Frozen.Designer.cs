@@ -41,9 +41,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_MaxLength != value)
                 {
-                    NotifyPropertyChanging("MaxLength");
+					var __oldValue = _MaxLength;
+                    NotifyPropertyChanging("MaxLength", __oldValue, value);
                     _MaxLength = value;
-                    NotifyPropertyChanged("MaxLength");
+                    NotifyPropertyChanged("MaxLength", __oldValue, value);
                 }
             }
         }
@@ -64,9 +65,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_MinLength != value)
                 {
-                    NotifyPropertyChanging("MinLength");
+					var __oldValue = _MinLength;
+                    NotifyPropertyChanging("MinLength", __oldValue, value);
                     _MinLength = value;
-                    NotifyPropertyChanged("MinLength");
+                    NotifyPropertyChanged("MinLength", __oldValue, value);
                 }
             }
         }

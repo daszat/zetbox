@@ -48,20 +48,13 @@
 					return;
                 else if (value != null && value.ID == <%= fkBackingName %>)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("<%= name %>");
-				           
-<%
-    if (hasInverseNavigator)
-    {
-%>
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = <%= name %>;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("<%= name %>", oldValue, value);
                 
-<%
-	}
-%>
 				// next, set the local reference
                 <%= fkBackingName %> = value == null ? (int?)null : value.ID;
 				
@@ -121,7 +114,7 @@
     }
 %>
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("<%= name %>");
+				NotifyPropertyChanged("<%= name %>", oldValue, value);
             }
         }
         
@@ -137,9 +130,10 @@
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (<%= fkBackingName %> != value)
                 {
-                    NotifyPropertyChanging("<%= name %>");
+					var __oldValue = <%= fkBackingName %>;
+                    NotifyPropertyChanging("<%= name %>", __oldValue, value);
                     <%= fkBackingName %> = value;
-                    NotifyPropertyChanged("<%= name %>");
+                    NotifyPropertyChanged("<%= name %>", __oldValue, value);
                 }
             }
         }

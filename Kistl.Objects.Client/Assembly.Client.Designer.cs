@@ -43,9 +43,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_AssemblyName != value)
                 {
-                    NotifyPropertyChanging("AssemblyName");
+					var __oldValue = _AssemblyName;
+                    NotifyPropertyChanging("AssemblyName", __oldValue, value);
                     _AssemblyName = value;
-                    NotifyPropertyChanged("AssemblyName");
+                    NotifyPropertyChanged("AssemblyName", __oldValue, value);
                 }
             }
         }
@@ -66,9 +67,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsClientAssembly != value)
                 {
-                    NotifyPropertyChanging("IsClientAssembly");
+					var __oldValue = _IsClientAssembly;
+                    NotifyPropertyChanging("IsClientAssembly", __oldValue, value);
                     _IsClientAssembly = value;
-                    NotifyPropertyChanged("IsClientAssembly");
+                    NotifyPropertyChanged("IsClientAssembly", __oldValue, value);
                 }
             }
         }
@@ -100,12 +102,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_Module)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Module");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = Module;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Module", oldValue, value);
                 
 				// next, set the local reference
                 _fk_Module = value == null ? (int?)null : value.ID;
@@ -127,7 +129,7 @@ namespace Kistl.App.Base
 					(value.Assemblies as BackReferenceCollection<Kistl.App.Base.Assembly>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Module");
+				NotifyPropertyChanged("Module", oldValue, value);
             }
         }
         
@@ -143,9 +145,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Module != value)
                 {
-                    NotifyPropertyChanging("Module");
+					var __oldValue = _fk_Module;
+                    NotifyPropertyChanging("Module", __oldValue, value);
                     _fk_Module = value;
-                    NotifyPropertyChanged("Module");
+                    NotifyPropertyChanged("Module", __oldValue, value);
                 }
             }
         }

@@ -41,9 +41,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_AreaCode != value)
                 {
-                    NotifyPropertyChanging("AreaCode");
+					var __oldValue = _AreaCode;
+                    NotifyPropertyChanging("AreaCode", __oldValue, value);
                     _AreaCode = value;
-                    NotifyPropertyChanged("AreaCode");
+                    NotifyPropertyChanged("AreaCode", __oldValue, value);
                 }
             }
         }
@@ -64,9 +65,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Number != value)
                 {
-                    NotifyPropertyChanging("Number");
+					var __oldValue = _Number;
+                    NotifyPropertyChanging("Number", __oldValue, value);
                     _Number = value;
-                    NotifyPropertyChanged("Number");
+                    NotifyPropertyChanged("Number", __oldValue, value);
                 }
             }
         }

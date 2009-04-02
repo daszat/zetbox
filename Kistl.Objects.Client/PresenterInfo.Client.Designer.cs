@@ -43,9 +43,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ControlType != value)
                 {
-                    NotifyPropertyChanging("ControlType");
+					var __oldValue = _ControlType;
+                    NotifyPropertyChanging("ControlType", __oldValue, value);
                     _ControlType = value;
-                    NotifyPropertyChanged("ControlType");
+                    NotifyPropertyChanged("ControlType", __oldValue, value);
                 }
             }
         }
@@ -77,15 +78,18 @@ namespace Kistl.App.GUI
 					return;
                 else if (value != null && value.ID == _fk_DataAssembly)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = DataAssembly;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("DataAssembly");
-				           
+				NotifyPropertyChanging("DataAssembly", oldValue, value);
+                
 				// next, set the local reference
                 _fk_DataAssembly = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("DataAssembly");
+				NotifyPropertyChanged("DataAssembly", oldValue, value);
             }
         }
         
@@ -101,9 +105,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_DataAssembly != value)
                 {
-                    NotifyPropertyChanging("DataAssembly");
+					var __oldValue = _fk_DataAssembly;
+                    NotifyPropertyChanging("DataAssembly", __oldValue, value);
                     _fk_DataAssembly = value;
-                    NotifyPropertyChanged("DataAssembly");
+                    NotifyPropertyChanged("DataAssembly", __oldValue, value);
                 }
             }
         }
@@ -124,9 +129,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_DataTypeName != value)
                 {
-                    NotifyPropertyChanging("DataTypeName");
+					var __oldValue = _DataTypeName;
+                    NotifyPropertyChanging("DataTypeName", __oldValue, value);
                     _DataTypeName = value;
-                    NotifyPropertyChanged("DataTypeName");
+                    NotifyPropertyChanged("DataTypeName", __oldValue, value);
                 }
             }
         }
@@ -158,15 +164,18 @@ namespace Kistl.App.GUI
 					return;
                 else if (value != null && value.ID == _fk_PresenterAssembly)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = PresenterAssembly;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("PresenterAssembly");
-				           
+				NotifyPropertyChanging("PresenterAssembly", oldValue, value);
+                
 				// next, set the local reference
                 _fk_PresenterAssembly = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("PresenterAssembly");
+				NotifyPropertyChanged("PresenterAssembly", oldValue, value);
             }
         }
         
@@ -182,9 +191,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_PresenterAssembly != value)
                 {
-                    NotifyPropertyChanging("PresenterAssembly");
+					var __oldValue = _fk_PresenterAssembly;
+                    NotifyPropertyChanging("PresenterAssembly", __oldValue, value);
                     _fk_PresenterAssembly = value;
-                    NotifyPropertyChanged("PresenterAssembly");
+                    NotifyPropertyChanged("PresenterAssembly", __oldValue, value);
                 }
             }
         }
@@ -205,9 +215,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_PresenterTypeName != value)
                 {
-                    NotifyPropertyChanging("PresenterTypeName");
+					var __oldValue = _PresenterTypeName;
+                    NotifyPropertyChanging("PresenterTypeName", __oldValue, value);
                     _PresenterTypeName = value;
-                    NotifyPropertyChanged("PresenterTypeName");
+                    NotifyPropertyChanged("PresenterTypeName", __oldValue, value);
                 }
             }
         }

@@ -41,9 +41,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Enumeration != value)
                 {
-                    NotifyPropertyChanging("Enumeration");
+					var __oldValue = _Enumeration;
+                    NotifyPropertyChanging("Enumeration", __oldValue, value);
                     _Enumeration = value;
-                    NotifyPropertyChanged("Enumeration");
+                    NotifyPropertyChanged("Enumeration", __oldValue, value);
                 }
             }
         }

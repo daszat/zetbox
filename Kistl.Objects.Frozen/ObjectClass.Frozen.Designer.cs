@@ -41,9 +41,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_BaseObjectClass != value)
                 {
-                    NotifyPropertyChanging("BaseObjectClass");
+					var __oldValue = _BaseObjectClass;
+                    NotifyPropertyChanging("BaseObjectClass", __oldValue, value);
                     _BaseObjectClass = value;
-                    NotifyPropertyChanged("BaseObjectClass");
+                    NotifyPropertyChanged("BaseObjectClass", __oldValue, value);
                 }
             }
         }
@@ -64,9 +65,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_DefaultModel != value)
                 {
-                    NotifyPropertyChanging("DefaultModel");
+					var __oldValue = _DefaultModel;
+                    NotifyPropertyChanging("DefaultModel", __oldValue, value);
                     _DefaultModel = value;
-                    NotifyPropertyChanged("DefaultModel");
+                    NotifyPropertyChanged("DefaultModel", __oldValue, value);
                 }
             }
         }
@@ -110,9 +112,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsFrozenObject != value)
                 {
-                    NotifyPropertyChanging("IsFrozenObject");
+					var __oldValue = _IsFrozenObject;
+                    NotifyPropertyChanging("IsFrozenObject", __oldValue, value);
                     _IsFrozenObject = value;
-                    NotifyPropertyChanged("IsFrozenObject");
+                    NotifyPropertyChanged("IsFrozenObject", __oldValue, value);
                 }
             }
         }
@@ -133,9 +136,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsSimpleObject != value)
                 {
-                    NotifyPropertyChanging("IsSimpleObject");
+					var __oldValue = _IsSimpleObject;
+                    NotifyPropertyChanging("IsSimpleObject", __oldValue, value);
                     _IsSimpleObject = value;
-                    NotifyPropertyChanged("IsSimpleObject");
+                    NotifyPropertyChanged("IsSimpleObject", __oldValue, value);
                 }
             }
         }
@@ -179,9 +183,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_TableName != value)
                 {
-                    NotifyPropertyChanging("TableName");
+					var __oldValue = _TableName;
+                    NotifyPropertyChanging("TableName", __oldValue, value);
                     _TableName = value;
-                    NotifyPropertyChanged("TableName");
+                    NotifyPropertyChanged("TableName", __oldValue, value);
                 }
             }
         }

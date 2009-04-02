@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using Kistl.API.Client.LinqToKistl;
 
 namespace Kistl.API.Client
 {
@@ -32,7 +33,10 @@ namespace Kistl.API.Client
         {
             CreatedAt = new StackTrace(true);
             KistlContextDebugger.Created(this);
+            _relationshipManager = new RelationshipManager(this);
         }
+
+        private LinqToKistl.RelationshipManager _relationshipManager;
 
         private bool disposed = false;
         /// <summary>
@@ -161,50 +165,19 @@ namespace Kistl.API.Client
             return ((KistlContextProvider)query.Provider).GetListOf(ID, propertyName).Cast<T>().ToList();
         }
 
-        /// <summary>
-        /// An immutable key to lookup cache results of FetchRelation
-        /// </summary>
-        internal struct RelationContentKey
+        internal IList<ICollectionEntry> FetchRelation(ImplementationType imType, int relationId, RelationEndRole role, IDataObject container)
         {
-            internal RelationContentKey(int id, RelationEndRole role, int containerId)
-                : this()
-            {
-                this.ID = id;
-                this.Role = role;
-                this.ContainerId = containerId;
-            }
-
-            internal int ID { get; private set; }
-            internal RelationEndRole Role { get; private set; }
-            internal int ContainerId { get; private set; }
-
-            public override int GetHashCode()
-            {
-                return ID.GetHashCode() ^ Role.GetHashCode() ^ ContainerId.GetHashCode();
-            }
-
-            public override bool Equals(object obj)
-            {
-                if (obj is RelationContentKey)
-                {
-                    var other = (RelationContentKey)obj;
-                    return this.ID == other.ID
-                        && this.Role == other.Role
-                        && this.ContainerId == other.ContainerId;
-                }
-                else
-                {
-                    return false;
-                }
-            }
+            object result = this.GetType().FindGenericMethod("FetchRelation", new Type[] { imType.Type }, new Type[] { typeof(int), typeof(RelationEndRole), typeof(IDataObject) })
+                .Invoke(this, new object[] { relationId, role, container });
+            return Kistl.API.Utils.MagicCollectionFactory.WrapAsList<ICollectionEntry>(result);
         }
-        private Dictionary<RelationContentKey, object> _fetchRelationCache = new Dictionary<RelationContentKey, object>();
+
         public IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject container) where T : class, ICollectionEntry
         {
             var key = new RelationContentKey(relationId, role, container.ID);
-            if (_fetchRelationCache.ContainsKey(key))
+            if (_relationshipManager.FetchRelationCache.ContainsKey(key))
             {
-                return (List<T>)_fetchRelationCache[key];
+                return (List<T>)_relationshipManager.FetchRelationCache[key];
             }
             else
             {
@@ -213,23 +186,12 @@ namespace Kistl.API.Client
                 foreach (IPersistenceObject obj in serverList)
                 {
                     var localobj = this.Attach(obj);
-                    localobj.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(collectionEntry_PropertyChanged);
-                    localobj.PropertyChanging += new System.ComponentModel.PropertyChangingEventHandler(collectionEntry_PropertyChanging);
+                    _relationshipManager.ManageRelationsip((ICollectionEntry)localobj);
                     result.Add((T)localobj);
                 }
-                _fetchRelationCache[key] = result;
+                _relationshipManager.FetchRelationCache[key] = result;
                 return result;
             }
-        }
-
-        void collectionEntry_PropertyChanging(object sender, System.ComponentModel.PropertyChangingEventArgs e)
-        {
-            System.Diagnostics.Trace.WriteLine("Changing: " + sender + ", Property: " + e.PropertyName);
-        }
-
-        void collectionEntry_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            System.Diagnostics.Trace.WriteLine("Changed: " + sender + ", Property: " + e.PropertyName);
         }
 
         /// <summary>
@@ -279,8 +241,7 @@ namespace Kistl.API.Client
             Attach(obj);
             if (obj is ICollectionEntry)
             {
-                obj.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(collectionEntry_PropertyChanged);
-                obj.PropertyChanging += new System.ComponentModel.PropertyChangingEventHandler(collectionEntry_PropertyChanging);
+                _relationshipManager.ManageRelationsip((ICollectionEntry)obj);
             }
             OnObjectCreated(obj);
             return obj;

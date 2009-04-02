@@ -41,9 +41,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_StructDefinition != value)
                 {
-                    NotifyPropertyChanging("StructDefinition");
+					var __oldValue = _StructDefinition;
+                    NotifyPropertyChanging("StructDefinition", __oldValue, value);
                     _StructDefinition = value;
-                    NotifyPropertyChanged("StructDefinition");
+                    NotifyPropertyChanged("StructDefinition", __oldValue, value);
                 }
             }
         }

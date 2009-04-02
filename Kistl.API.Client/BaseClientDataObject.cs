@@ -25,8 +25,8 @@ namespace Kistl.API.Client
             {
                 if (_ID != value)
                 {
+                    OnPropertyChanged("ID", _ID, value);
                     _ID = value;
-                    OnPropertyChanged("ID");
                 }
             }
         }
@@ -56,24 +56,27 @@ namespace Kistl.API.Client
         {
             if (this.ObjectState == DataObjectState.Unmodified)
             {
-                OnPropertyChanging("ObjectState");
+                var oldValue = this._ObjectState;
+                OnPropertyChanging("ObjectState", oldValue, DataObjectState.Modified);
                 this._ObjectState = DataObjectState.Modified;
-                OnPropertyChanged("ObjectState");
+                OnPropertyChanged("ObjectState", oldValue, DataObjectState.Modified);
             }
         }
 
         internal void SetUnmodified()
         {
-            OnPropertyChanging("ObjectState");
+            var oldValue = this._ObjectState;
+            OnPropertyChanging("ObjectState", oldValue, DataObjectState.Unmodified);
             this._ObjectState = DataObjectState.Unmodified;
-            OnPropertyChanged("ObjectState");
+            OnPropertyChanged("ObjectState", oldValue, DataObjectState.Unmodified);
         }
 
         internal void SetDeleted()
         {
-            OnPropertyChanging("ObjectState");
+            var oldValue = this._ObjectState;
+            OnPropertyChanging("ObjectState", oldValue, DataObjectState.Deleted);
             this._ObjectState = DataObjectState.Deleted;
-            OnPropertyChanged("ObjectState");
+            OnPropertyChanged("ObjectState", oldValue, DataObjectState.Deleted);
         }
 
         public override void AttachToContext(IKistlContext ctx)

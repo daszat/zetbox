@@ -61,6 +61,8 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangingEventHandler PropertyChanging;
+        public event PropertyChangeWithValueEventHandler PropertyChangedWithValue;
+        public event PropertyChangeWithValueEventHandler PropertyChangingWithValue;
 
         #endregion
     }

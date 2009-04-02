@@ -40,9 +40,9 @@ namespace Kistl.API.Server.Mocks
             }
             set
             {
-                NotifyPropertyChanging("BaseTestObjClass");
+                NotifyPropertyChanging("BaseTestObjClass", null, null);
                 _BaseTestObjClass = value;
-                NotifyPropertyChanged("BaseTestObjClass"); ;
+                NotifyPropertyChanged("BaseTestObjClass", null, null); ;
             }
         }
         private TestObjClass _BaseTestObjClass;
@@ -57,9 +57,9 @@ namespace Kistl.API.Server.Mocks
             }
             set
             {
-                NotifyPropertyChanging("StringProp");
+                NotifyPropertyChanging("StringProp", null, null);
                 _StringProp = value;
-                NotifyPropertyChanged("StringProp"); ;
+                NotifyPropertyChanged("StringProp", null, null); ;
             }
         }
         private string _StringProp;
@@ -72,9 +72,9 @@ namespace Kistl.API.Server.Mocks
             }
             set
             {
-                NotifyPropertyChanging("TestEnumProp");
+                NotifyPropertyChanging("TestEnumProp", null, null);
                 _TestEnumProp = value;
-                NotifyPropertyChanged("TestEnumProp"); ;
+                NotifyPropertyChanged("TestEnumProp", null, null); ;
             }
         }
         private TestEnum _TestEnumProp;

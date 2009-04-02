@@ -41,9 +41,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_AltText != value)
                 {
-                    NotifyPropertyChanging("AltText");
+					var __oldValue = _AltText;
+                    NotifyPropertyChanging("AltText", __oldValue, value);
                     _AltText = value;
-                    NotifyPropertyChanged("AltText");
+                    NotifyPropertyChanged("AltText", __oldValue, value);
                 }
             }
         }
@@ -110,9 +111,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
-                    NotifyPropertyChanging("Description");
+					var __oldValue = _Description;
+                    NotifyPropertyChanging("Description", __oldValue, value);
                     _Description = value;
-                    NotifyPropertyChanged("Description");
+                    NotifyPropertyChanged("Description", __oldValue, value);
                 }
             }
         }
@@ -133,9 +135,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsIndexed != value)
                 {
-                    NotifyPropertyChanging("IsIndexed");
+					var __oldValue = _IsIndexed;
+                    NotifyPropertyChanging("IsIndexed", __oldValue, value);
                     _IsIndexed = value;
-                    NotifyPropertyChanged("IsIndexed");
+                    NotifyPropertyChanged("IsIndexed", __oldValue, value);
                 }
             }
         }
@@ -156,9 +159,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsList != value)
                 {
-                    NotifyPropertyChanging("IsList");
+					var __oldValue = _IsList;
+                    NotifyPropertyChanging("IsList", __oldValue, value);
                     _IsList = value;
-                    NotifyPropertyChanged("IsList");
+                    NotifyPropertyChanged("IsList", __oldValue, value);
                 }
             }
         }
@@ -179,9 +183,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsNullable != value)
                 {
-                    NotifyPropertyChanging("IsNullable");
+					var __oldValue = _IsNullable;
+                    NotifyPropertyChanging("IsNullable", __oldValue, value);
                     _IsNullable = value;
-                    NotifyPropertyChanged("IsNullable");
+                    NotifyPropertyChanged("IsNullable", __oldValue, value);
                 }
             }
         }
@@ -202,9 +207,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Module != value)
                 {
-                    NotifyPropertyChanging("Module");
+					var __oldValue = _Module;
+                    NotifyPropertyChanging("Module", __oldValue, value);
                     _Module = value;
-                    NotifyPropertyChanged("Module");
+                    NotifyPropertyChanged("Module", __oldValue, value);
                 }
             }
         }
@@ -225,9 +231,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ObjectClass != value)
                 {
-                    NotifyPropertyChanging("ObjectClass");
+					var __oldValue = _ObjectClass;
+                    NotifyPropertyChanging("ObjectClass", __oldValue, value);
                     _ObjectClass = value;
-                    NotifyPropertyChanged("ObjectClass");
+                    NotifyPropertyChanged("ObjectClass", __oldValue, value);
                 }
             }
         }
@@ -248,9 +255,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_PropertyName != value)
                 {
-                    NotifyPropertyChanging("PropertyName");
+					var __oldValue = _PropertyName;
+                    NotifyPropertyChanging("PropertyName", __oldValue, value);
                     _PropertyName = value;
-                    NotifyPropertyChanged("PropertyName");
+                    NotifyPropertyChanged("PropertyName", __oldValue, value);
                 }
             }
         }

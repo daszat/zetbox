@@ -26,9 +26,9 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Geburtstag != value)
                 {
-                    NotifyPropertyChanging("Geburtstag");
+                    NotifyPropertyChanging("Geburtstag", null, null);
                     _Geburtstag = value;
-                    NotifyPropertyChanged("Geburtstag");
+                    NotifyPropertyChanged("Geburtstag", null, null);
                 }
             }
         }
@@ -49,9 +49,9 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Name != value)
                 {
-                    NotifyPropertyChanging("Name");
+                    NotifyPropertyChanging("Name", null, null);
                     _Name = value;
-                    NotifyPropertyChanged("Name");
+                    NotifyPropertyChanged("Name", null, null);
                 }
             }
         }
@@ -94,9 +94,9 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_SVNr != value)
                 {
-                    NotifyPropertyChanging("SVNr");
+                    NotifyPropertyChanging("SVNr", null, null);
                     _SVNr = value;
-                    NotifyPropertyChanged("SVNr");
+                    NotifyPropertyChanged("SVNr", null, null);
                 }
             }
         }
@@ -117,9 +117,9 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_TelefonNummer != value)
                 {
-                    NotifyPropertyChanging("TelefonNummer");
+                    NotifyPropertyChanging("TelefonNummer", null, null);
                     _TelefonNummer = value;
-                    NotifyPropertyChanged("TelefonNummer");
+                    NotifyPropertyChanged("TelefonNummer", null, null);
                 }
             }
         }

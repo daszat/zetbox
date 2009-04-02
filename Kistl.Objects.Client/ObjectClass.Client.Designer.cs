@@ -54,12 +54,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_BaseObjectClass)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("BaseObjectClass");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = BaseObjectClass;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("BaseObjectClass", oldValue, value);
                 
 				// next, set the local reference
                 _fk_BaseObjectClass = value == null ? (int?)null : value.ID;
@@ -81,7 +81,7 @@ namespace Kistl.App.Base
 					(value.SubClasses as BackReferenceCollection<Kistl.App.Base.ObjectClass>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("BaseObjectClass");
+				NotifyPropertyChanged("BaseObjectClass", oldValue, value);
             }
         }
         
@@ -97,9 +97,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_BaseObjectClass != value)
                 {
-                    NotifyPropertyChanging("BaseObjectClass");
+					var __oldValue = _fk_BaseObjectClass;
+                    NotifyPropertyChanging("BaseObjectClass", __oldValue, value);
                     _fk_BaseObjectClass = value;
-                    NotifyPropertyChanged("BaseObjectClass");
+                    NotifyPropertyChanged("BaseObjectClass", __oldValue, value);
                 }
             }
         }
@@ -131,15 +132,18 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_DefaultModel)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = DefaultModel;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("DefaultModel");
-				           
+				NotifyPropertyChanging("DefaultModel", oldValue, value);
+                
 				// next, set the local reference
                 _fk_DefaultModel = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("DefaultModel");
+				NotifyPropertyChanged("DefaultModel", oldValue, value);
             }
         }
         
@@ -155,9 +159,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_DefaultModel != value)
                 {
-                    NotifyPropertyChanging("DefaultModel");
+					var __oldValue = _fk_DefaultModel;
+                    NotifyPropertyChanging("DefaultModel", __oldValue, value);
                     _fk_DefaultModel = value;
-                    NotifyPropertyChanged("DefaultModel");
+                    NotifyPropertyChanged("DefaultModel", __oldValue, value);
                 }
             }
         }
@@ -200,9 +205,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsFrozenObject != value)
                 {
-                    NotifyPropertyChanging("IsFrozenObject");
+					var __oldValue = _IsFrozenObject;
+                    NotifyPropertyChanging("IsFrozenObject", __oldValue, value);
                     _IsFrozenObject = value;
-                    NotifyPropertyChanged("IsFrozenObject");
+                    NotifyPropertyChanged("IsFrozenObject", __oldValue, value);
                 }
             }
         }
@@ -223,9 +229,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsSimpleObject != value)
                 {
-                    NotifyPropertyChanging("IsSimpleObject");
+					var __oldValue = _IsSimpleObject;
+                    NotifyPropertyChanging("IsSimpleObject", __oldValue, value);
                     _IsSimpleObject = value;
-                    NotifyPropertyChanged("IsSimpleObject");
+                    NotifyPropertyChanged("IsSimpleObject", __oldValue, value);
                 }
             }
         }
@@ -276,9 +283,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_TableName != value)
                 {
-                    NotifyPropertyChanging("TableName");
+					var __oldValue = _TableName;
+                    NotifyPropertyChanging("TableName", __oldValue, value);
                     _TableName = value;
-                    NotifyPropertyChanged("TableName");
+                    NotifyPropertyChanged("TableName", __oldValue, value);
                 }
             }
         }

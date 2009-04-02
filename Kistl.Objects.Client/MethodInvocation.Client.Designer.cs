@@ -54,15 +54,18 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_Implementor)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Implementor;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Implementor");
-				           
+				NotifyPropertyChanging("Implementor", oldValue, value);
+                
 				// next, set the local reference
                 _fk_Implementor = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Implementor");
+				NotifyPropertyChanged("Implementor", oldValue, value);
             }
         }
         
@@ -78,9 +81,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Implementor != value)
                 {
-                    NotifyPropertyChanging("Implementor");
+					var __oldValue = _fk_Implementor;
+                    NotifyPropertyChanging("Implementor", __oldValue, value);
                     _fk_Implementor = value;
-                    NotifyPropertyChanged("Implementor");
+                    NotifyPropertyChanged("Implementor", __oldValue, value);
                 }
             }
         }
@@ -112,12 +116,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_InvokeOnObjectClass)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("InvokeOnObjectClass");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = InvokeOnObjectClass;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("InvokeOnObjectClass", oldValue, value);
                 
 				// next, set the local reference
                 _fk_InvokeOnObjectClass = value == null ? (int?)null : value.ID;
@@ -139,7 +143,7 @@ namespace Kistl.App.Base
 					(value.MethodInvocations as BackReferenceCollection<Kistl.App.Base.MethodInvocation>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("InvokeOnObjectClass");
+				NotifyPropertyChanged("InvokeOnObjectClass", oldValue, value);
             }
         }
         
@@ -155,9 +159,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_InvokeOnObjectClass != value)
                 {
-                    NotifyPropertyChanging("InvokeOnObjectClass");
+					var __oldValue = _fk_InvokeOnObjectClass;
+                    NotifyPropertyChanging("InvokeOnObjectClass", __oldValue, value);
                     _fk_InvokeOnObjectClass = value;
-                    NotifyPropertyChanged("InvokeOnObjectClass");
+                    NotifyPropertyChanged("InvokeOnObjectClass", __oldValue, value);
                 }
             }
         }
@@ -178,9 +183,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_MemberName != value)
                 {
-                    NotifyPropertyChanging("MemberName");
+					var __oldValue = _MemberName;
+                    NotifyPropertyChanging("MemberName", __oldValue, value);
                     _MemberName = value;
-                    NotifyPropertyChanged("MemberName");
+                    NotifyPropertyChanged("MemberName", __oldValue, value);
                 }
             }
         }
@@ -212,12 +218,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_Method)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Method");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = Method;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Method", oldValue, value);
                 
 				// next, set the local reference
                 _fk_Method = value == null ? (int?)null : value.ID;
@@ -239,7 +245,7 @@ namespace Kistl.App.Base
 					(value.MethodInvokations as BackReferenceCollection<Kistl.App.Base.MethodInvocation>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Method");
+				NotifyPropertyChanged("Method", oldValue, value);
             }
         }
         
@@ -255,9 +261,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Method != value)
                 {
-                    NotifyPropertyChanging("Method");
+					var __oldValue = _fk_Method;
+                    NotifyPropertyChanging("Method", __oldValue, value);
                     _fk_Method = value;
-                    NotifyPropertyChanged("Method");
+                    NotifyPropertyChanged("Method", __oldValue, value);
                 }
             }
         }
@@ -289,15 +296,18 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_Module)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Module;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Module");
-				           
+				NotifyPropertyChanging("Module", oldValue, value);
+                
 				// next, set the local reference
                 _fk_Module = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Module");
+				NotifyPropertyChanged("Module", oldValue, value);
             }
         }
         
@@ -313,9 +323,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Module != value)
                 {
-                    NotifyPropertyChanging("Module");
+					var __oldValue = _fk_Module;
+                    NotifyPropertyChanging("Module", __oldValue, value);
                     _fk_Module = value;
-                    NotifyPropertyChanged("Module");
+                    NotifyPropertyChanged("Module", __oldValue, value);
                 }
             }
         }

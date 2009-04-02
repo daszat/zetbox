@@ -43,9 +43,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -69,9 +70,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Adresse != value)
                 {
-                    NotifyPropertyChanging("Adresse");
+					var __oldValue = _Adresse;
+                    NotifyPropertyChanging("Adresse", __oldValue, value);
                     _Adresse = value;
-                    NotifyPropertyChanged("Adresse");
+                    NotifyPropertyChanged("Adresse", __oldValue, value);
                 }
             }
         }
@@ -135,9 +137,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Kundenname != value)
                 {
-                    NotifyPropertyChanging("Kundenname");
+					var __oldValue = _Kundenname;
+                    NotifyPropertyChanging("Kundenname", __oldValue, value);
                     _Kundenname = value;
-                    NotifyPropertyChanged("Kundenname");
+                    NotifyPropertyChanged("Kundenname", __oldValue, value);
                 }
             }
         }
@@ -161,9 +164,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Land != value)
                 {
-                    NotifyPropertyChanging("Land");
+					var __oldValue = _Land;
+                    NotifyPropertyChanging("Land", __oldValue, value);
                     _Land = value;
-                    NotifyPropertyChanged("Land");
+                    NotifyPropertyChanged("Land", __oldValue, value);
                 }
             }
         }
@@ -187,9 +191,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Ort != value)
                 {
-                    NotifyPropertyChanging("Ort");
+					var __oldValue = _Ort;
+                    NotifyPropertyChanging("Ort", __oldValue, value);
                     _Ort = value;
-                    NotifyPropertyChanged("Ort");
+                    NotifyPropertyChanged("Ort", __oldValue, value);
                 }
             }
         }
@@ -213,9 +218,10 @@ namespace Kistl.App.Projekte
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_PLZ != value)
                 {
-                    NotifyPropertyChanging("PLZ");
+					var __oldValue = _PLZ;
+                    NotifyPropertyChanging("PLZ", __oldValue, value);
                     _PLZ = value;
-                    NotifyPropertyChanged("PLZ");
+                    NotifyPropertyChanged("PLZ", __oldValue, value);
                 }
             }
         }

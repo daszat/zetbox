@@ -50,14 +50,15 @@
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (!object.Equals(<%= backingName %>, value))
                 {
-                    NotifyPropertyChanging("<%= name %>", "<%= efName %>");
+					var __oldValue = <%= backingName %>;
+                    NotifyPropertyChanging("<%= name %>", "<%= efName %>", __oldValue, value);
                     if (<%= backingName %> != null)
                     {
 						<%= backingName %>.DetachFromObject(this, "<%= name %>");
 					}
                     <%= backingName %> = (<%= structImplementationType %>)value;
 					<%= backingName %>.AttachToObject(this, "<%= name %>");
-                    NotifyPropertyChanged("<%= name %>", "<%= efName %>");
+                    NotifyPropertyChanged("<%= name %>", "<%= efName %>", __oldValue, value);
                 }
             }
         }

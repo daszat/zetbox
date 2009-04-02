@@ -87,9 +87,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ControlType != value)
                 {
-                    NotifyPropertyChanging("ControlType");
+					var __oldValue = _ControlType;
+                    NotifyPropertyChanging("ControlType", __oldValue, value);
                     _ControlType = value;
-                    NotifyPropertyChanged("ControlType");
+                    NotifyPropertyChanged("ControlType", __oldValue, value);
                 }
             }
         }
@@ -110,9 +111,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
-                    NotifyPropertyChanging("Description");
+					var __oldValue = _Description;
+                    NotifyPropertyChanging("Description", __oldValue, value);
                     _Description = value;
-                    NotifyPropertyChanged("Description");
+                    NotifyPropertyChanged("Description", __oldValue, value);
                 }
             }
         }
@@ -144,15 +146,18 @@ namespace Kistl.App.GUI
 					return;
                 else if (value != null && value.ID == _fk_Method)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Method;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Method");
-				           
+				NotifyPropertyChanging("Method", oldValue, value);
+                
 				// next, set the local reference
                 _fk_Method = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Method");
+				NotifyPropertyChanged("Method", oldValue, value);
             }
         }
         
@@ -168,9 +173,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Method != value)
                 {
-                    NotifyPropertyChanging("Method");
+					var __oldValue = _fk_Method;
+                    NotifyPropertyChanging("Method", __oldValue, value);
                     _fk_Method = value;
-                    NotifyPropertyChanged("Method");
+                    NotifyPropertyChanged("Method", __oldValue, value);
                 }
             }
         }
@@ -202,15 +208,18 @@ namespace Kistl.App.GUI
 					return;
                 else if (value != null && value.ID == _fk_Property)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Property;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Property");
-				           
+				NotifyPropertyChanging("Property", oldValue, value);
+                
 				// next, set the local reference
                 _fk_Property = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Property");
+				NotifyPropertyChanged("Property", oldValue, value);
             }
         }
         
@@ -226,9 +235,10 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Property != value)
                 {
-                    NotifyPropertyChanging("Property");
+					var __oldValue = _fk_Property;
+                    NotifyPropertyChanging("Property", __oldValue, value);
                     _fk_Property = value;
-                    NotifyPropertyChanged("Property");
+                    NotifyPropertyChanged("Property", __oldValue, value);
                 }
             }
         }

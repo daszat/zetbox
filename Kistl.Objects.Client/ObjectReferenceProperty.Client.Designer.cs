@@ -54,15 +54,18 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_ReferenceObjectClass)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = ReferenceObjectClass;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("ReferenceObjectClass");
-				           
+				NotifyPropertyChanging("ReferenceObjectClass", oldValue, value);
+                
 				// next, set the local reference
                 _fk_ReferenceObjectClass = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("ReferenceObjectClass");
+				NotifyPropertyChanged("ReferenceObjectClass", oldValue, value);
             }
         }
         
@@ -78,9 +81,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_ReferenceObjectClass != value)
                 {
-                    NotifyPropertyChanging("ReferenceObjectClass");
+					var __oldValue = _fk_ReferenceObjectClass;
+                    NotifyPropertyChanging("ReferenceObjectClass", __oldValue, value);
                     _fk_ReferenceObjectClass = value;
-                    NotifyPropertyChanged("ReferenceObjectClass");
+                    NotifyPropertyChanged("ReferenceObjectClass", __oldValue, value);
                 }
             }
         }
@@ -112,12 +116,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_RelationEnd)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("RelationEnd");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = RelationEnd;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("RelationEnd", oldValue, value);
                 
 				// next, set the local reference
                 _fk_RelationEnd = value == null ? (int?)null : value.ID;
@@ -139,7 +143,7 @@ namespace Kistl.App.Base
                     value.Navigator = this;
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("RelationEnd");
+				NotifyPropertyChanged("RelationEnd", oldValue, value);
             }
         }
         
@@ -155,9 +159,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_RelationEnd != value)
                 {
-                    NotifyPropertyChanging("RelationEnd");
+					var __oldValue = _fk_RelationEnd;
+                    NotifyPropertyChanging("RelationEnd", __oldValue, value);
                     _fk_RelationEnd = value;
-                    NotifyPropertyChanged("RelationEnd");
+                    NotifyPropertyChanged("RelationEnd", __oldValue, value);
                 }
             }
         }

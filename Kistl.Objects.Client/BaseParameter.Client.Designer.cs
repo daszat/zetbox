@@ -43,9 +43,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
-                    NotifyPropertyChanging("Description");
+					var __oldValue = _Description;
+                    NotifyPropertyChanging("Description", __oldValue, value);
                     _Description = value;
-                    NotifyPropertyChanged("Description");
+                    NotifyPropertyChanged("Description", __oldValue, value);
                 }
             }
         }
@@ -66,9 +67,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsList != value)
                 {
-                    NotifyPropertyChanging("IsList");
+					var __oldValue = _IsList;
+                    NotifyPropertyChanging("IsList", __oldValue, value);
                     _IsList = value;
-                    NotifyPropertyChanged("IsList");
+                    NotifyPropertyChanged("IsList", __oldValue, value);
                 }
             }
         }
@@ -89,9 +91,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsReturnParameter != value)
                 {
-                    NotifyPropertyChanging("IsReturnParameter");
+					var __oldValue = _IsReturnParameter;
+                    NotifyPropertyChanging("IsReturnParameter", __oldValue, value);
                     _IsReturnParameter = value;
-                    NotifyPropertyChanged("IsReturnParameter");
+                    NotifyPropertyChanged("IsReturnParameter", __oldValue, value);
                 }
             }
         }
@@ -123,12 +126,12 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_Method)
 					return;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Method");
-				           
+			           
 	            // cache old value to remove inverse references later
                 var oldValue = Method;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Method", oldValue, value);
                 
 				// next, set the local reference
                 _fk_Method = value == null ? (int?)null : value.ID;
@@ -150,7 +153,7 @@ namespace Kistl.App.Base
 					(value.Parameter as BackReferenceCollection<Kistl.App.Base.BaseParameter>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Method");
+				NotifyPropertyChanged("Method", oldValue, value);
             }
         }
         
@@ -166,9 +169,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Method != value)
                 {
-                    NotifyPropertyChanging("Method");
+					var __oldValue = _fk_Method;
+                    NotifyPropertyChanging("Method", __oldValue, value);
                     _fk_Method = value;
-                    NotifyPropertyChanged("Method");
+                    NotifyPropertyChanged("Method", __oldValue, value);
                 }
             }
         }
@@ -184,9 +188,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Method_pos != value)
                 {
-                    NotifyPropertyChanging("Method_pos");
+					var __oldValue = _Method_pos;
+                    NotifyPropertyChanging("Method_pos", __oldValue, value);
                     _Method_pos = value;
-                    NotifyPropertyChanged("Method_pos");
+                    NotifyPropertyChanged("Method_pos", __oldValue, value);
                 }
             }
         }
@@ -207,9 +212,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ParameterName != value)
                 {
-                    NotifyPropertyChanging("ParameterName");
+					var __oldValue = _ParameterName;
+                    NotifyPropertyChanging("ParameterName", __oldValue, value);
                     _ParameterName = value;
-                    NotifyPropertyChanged("ParameterName");
+                    NotifyPropertyChanged("ParameterName", __oldValue, value);
                 }
             }
         }

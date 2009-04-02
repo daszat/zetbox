@@ -45,9 +45,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-                    NotifyPropertyChanging("ID");
+					var __oldValue = _ID;
+                    NotifyPropertyChanging("ID", __oldValue, value);
                     _ID = value;
-                    NotifyPropertyChanged("ID");
+                    NotifyPropertyChanged("ID", __oldValue, value);
                 }
             }
         }
@@ -71,9 +72,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_Birthday != value)
                 {
-                    NotifyPropertyChanging("Birthday");
+					var __oldValue = _Birthday;
+                    NotifyPropertyChanging("Birthday", __oldValue, value);
                     _Birthday = value;
-                    NotifyPropertyChanged("Birthday");
+                    NotifyPropertyChanged("Birthday", __oldValue, value);
                 }
             }
         }
@@ -97,9 +99,10 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_PersonName != value)
                 {
-                    NotifyPropertyChanging("PersonName");
+					var __oldValue = _PersonName;
+                    NotifyPropertyChanging("PersonName", __oldValue, value);
                     _PersonName = value;
-                    NotifyPropertyChanged("PersonName");
+                    NotifyPropertyChanged("PersonName", __oldValue, value);
                 }
             }
         }
@@ -138,14 +141,15 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (!object.Equals(_PhoneNumberMobile, value))
                 {
-                    NotifyPropertyChanging("PhoneNumberMobile", "PhoneNumberMobile__Implementation__");
+					var __oldValue = _PhoneNumberMobile;
+                    NotifyPropertyChanging("PhoneNumberMobile", "PhoneNumberMobile__Implementation__", __oldValue, value);
                     if (_PhoneNumberMobile != null)
                     {
 						_PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
 					}
                     _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
 					_PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
-                    NotifyPropertyChanged("PhoneNumberMobile", "PhoneNumberMobile__Implementation__");
+                    NotifyPropertyChanged("PhoneNumberMobile", "PhoneNumberMobile__Implementation__", __oldValue, value);
                 }
             }
         }
@@ -185,14 +189,15 @@ namespace Kistl.App.Test
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (!object.Equals(_PhoneNumberOffice, value))
                 {
-                    NotifyPropertyChanging("PhoneNumberOffice", "PhoneNumberOffice__Implementation__");
+					var __oldValue = _PhoneNumberOffice;
+                    NotifyPropertyChanging("PhoneNumberOffice", "PhoneNumberOffice__Implementation__", __oldValue, value);
                     if (_PhoneNumberOffice != null)
                     {
 						_PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
 					}
                     _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
 					_PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
-                    NotifyPropertyChanged("PhoneNumberOffice", "PhoneNumberOffice__Implementation__");
+                    NotifyPropertyChanged("PhoneNumberOffice", "PhoneNumberOffice__Implementation__", __oldValue, value);
                 }
             }
         }

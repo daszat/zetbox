@@ -54,15 +54,18 @@ namespace Kistl.App.Base
 					return;
                 else if (value != null && value.ID == _fk_Assembly)
 					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Assembly;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("Assembly");
-				           
+				NotifyPropertyChanging("Assembly", oldValue, value);
+                
 				// next, set the local reference
                 _fk_Assembly = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("Assembly");
+				NotifyPropertyChanged("Assembly", oldValue, value);
             }
         }
         
@@ -78,9 +81,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_Assembly != value)
                 {
-                    NotifyPropertyChanging("Assembly");
+					var __oldValue = _fk_Assembly;
+                    NotifyPropertyChanging("Assembly", __oldValue, value);
                     _fk_Assembly = value;
-                    NotifyPropertyChanged("Assembly");
+                    NotifyPropertyChanged("Assembly", __oldValue, value);
                 }
             }
         }
@@ -101,9 +105,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_FullTypeName != value)
                 {
-                    NotifyPropertyChanging("FullTypeName");
+					var __oldValue = _FullTypeName;
+                    NotifyPropertyChanging("FullTypeName", __oldValue, value);
                     _FullTypeName = value;
-                    NotifyPropertyChanged("FullTypeName");
+                    NotifyPropertyChanged("FullTypeName", __oldValue, value);
                 }
             }
         }
