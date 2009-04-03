@@ -6,10 +6,15 @@ namespace Kistl.API
     /// <summary>
     /// Collection Entry Interface. A Collection Entry is a "connection" Object between other Data Objects 
     /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
+    /// TODO: Seperate value collection from n:m collection and implement AObject & BObject as IDataObjects. 
+    /// Also add fk_A & fk_B to the Interface (e.g. IRelationEntry)
     /// </summary>
     public interface ICollectionEntry : IPersistenceObject
     {
         int RelationID { get; }
+
+        object AObject { get; }
+        object BObject { get; }
     }
 
     // TODO: Remove "New" when new Generator works
@@ -48,29 +53,4 @@ namespace Kistl.API
     public interface INewListEntry<AType, BType> : INewCollectionEntry<AType, BType>, INewCollectionEntrySorted
     {
     }
-
-
-
-    //// TODO: rename INewCollectionEntry to this
-    ///// <summary> legacy interface </summary>
-    //public interface ICollectionEntry<LEFT, RIGHT> : ICollectionEntry
-    //{
-    //    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    //    LEFT Value { get; set; }
-    //    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    //    RIGHT Parent { get; set; }
-    //    int fk_Parent { get; set; }
-    //}
-
-    ///// <summary> legacy interface </summary>
-    //public interface ICollectionEntrySorted : ICollectionEntry
-    //{
-    //    int? ValueIndex { get; set; }
-    //    int? ParentIndex { get; set; }
-    //}
-
-    ///// <summary> legacy interface </summary>
-    //public interface ICollectionEntrySorted<VALUE, PARENT> : ICollectionEntry<VALUE, PARENT>, ICollectionEntrySorted
-    //{
-    //}
 }

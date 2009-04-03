@@ -169,6 +169,12 @@ namespace Kistl.API.Server
             return (T)CreateCollectionEntry(new InterfaceType(typeof(T)));
         }
 
+        public virtual ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other)
+        {
+            var result = AttachedObjects.OfType<ICollectionEntry>().FirstOrDefault(e => (e.AObject == one && e.BObject == other) || (e.AObject == other && e.BObject == one));
+            return result;
+        }
+
         /// <summary>
         /// Creates a new Struct by Type
         /// </summary>

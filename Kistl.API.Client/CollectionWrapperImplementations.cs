@@ -21,9 +21,10 @@ namespace Kistl.API.Client
         {
         }
 
-        protected override ENTRYTYPE CreateEntry()
+        protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
+                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)
@@ -48,7 +49,7 @@ namespace Kistl.API.Client
 
         public void Insert(int index, ATYPE item)
         {
-            Collection.Insert(index, InitialiseEntry(CreateEntry(), item));
+            Collection.Insert(index, InitialiseEntry(CreateEntry(item), item));
         }
 
         public void RemoveAt(int index)
@@ -97,9 +98,10 @@ namespace Kistl.API.Client
         {
         }
 
-        protected override ENTRYTYPE CreateEntry()
+        protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
+                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)
@@ -140,9 +142,10 @@ namespace Kistl.API.Client
         {
         }
 
-        protected override ENTRYTYPE CreateEntry()
+        protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
+                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)
@@ -167,7 +170,7 @@ namespace Kistl.API.Client
 
         public void Insert(int index, BTYPE item)
         {
-            Collection.Insert(index, InitialiseEntry(CreateEntry(), item));
+            Collection.Insert(index, InitialiseEntry(CreateEntry(item), item));
         }
 
         public void RemoveAt(int index)
@@ -215,9 +218,10 @@ namespace Kistl.API.Client
         {
         }
 
-        protected override ENTRYTYPE CreateEntry()
+        protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
+                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)

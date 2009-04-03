@@ -15,7 +15,7 @@ namespace Kistl.API.Server.Mocks
         {
         }
 
-        protected override TestObjClass_TestNameCollectionEntry__Implementation__ CreateEntry()
+        protected override TestObjClass_TestNameCollectionEntry__Implementation__ CreateEntry(object item)
         {
             return new TestObjClass_TestNameCollectionEntry__Implementation__();
         }

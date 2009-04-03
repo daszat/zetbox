@@ -142,6 +142,16 @@ namespace Kistl.API
         T CreateCollectionEntry<T>() where T : ICollectionEntry;
 
         /// <summary>
+        /// Lookups if a relation between two IDataObjects already exists in this Context.
+        /// Lookup is done on both sides: A-B and B-A
+        /// </summary>
+        /// <param name="one"></param>
+        /// <param name="other"></param>
+        /// <returns>ICollectionEntry or null if not found in current Context</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other);
+
+        /// <summary>
         /// Creates a new Struct by Type
         /// </summary>
         /// <param name="ifType">Type of the new Struct</param>

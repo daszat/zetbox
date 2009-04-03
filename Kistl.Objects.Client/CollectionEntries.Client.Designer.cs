@@ -15,6 +15,8 @@ namespace Kistl.App.Base
     
 // ID is inherited
         public override int RelationID { get { return 49; } }
+        public override object AObject { get { return A; } }
+        public override object BObject { get { return B; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -187,6 +189,8 @@ namespace Kistl.App.Projekte
     
 // ID is inherited
         public override int RelationID { get { return 23; } }
+        public override object AObject { get { return A; } }
+        public override object BObject { get { return B; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -417,6 +421,8 @@ namespace Kistl.App.GUI
     
 // ID is inherited
         public override int RelationID { get { return 61; } }
+        public override object AObject { get { return A; } }
+        public override object BObject { get { return B; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -589,6 +595,8 @@ namespace Kistl.App.Base
     
 // ID is inherited
         public override int RelationID { get { return 66; } }
+        public override object AObject { get { return A; } }
+        public override object BObject { get { return B; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -819,6 +827,8 @@ namespace Kistl.App.GUI
     
 // ID is inherited
         public override int RelationID { get { return 55; } }
+        public override object AObject { get { return A; } }
+        public override object BObject { get { return B; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -991,6 +1001,8 @@ namespace Kistl.App.GUI
     
 // ID is inherited
         public override int RelationID { get { return 60; } }
+        public override object AObject { get { return A; } }
+        public override object BObject { get { return B; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -1164,6 +1176,8 @@ namespace Kistl.App.Zeiterfassung
     
 // ID is inherited
         public override int RelationID { get { return 42; } }
+        public override object AObject { get { return A; } }
+        public override object BObject { get { return B; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry

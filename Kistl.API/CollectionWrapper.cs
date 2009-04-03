@@ -71,7 +71,7 @@ namespace Kistl.API
         /// Creates a new entry
         /// </summary>
         /// <returns></returns>
-        protected abstract ENTRYTYPE CreateEntry();
+        protected abstract ENTRYTYPE CreateEntry(object item);
 
         /// <summary>
         /// Initialises an entry for the given item
@@ -111,10 +111,13 @@ namespace Kistl.API
 
         public virtual void Add(ITEMTYPE item)
         {
-            ENTRYTYPE entry = InitialiseEntry(CreateEntry(), item);
-            OnEntryAdding(entry);
-            Collection.Add(entry);
-            OnEntryAdded(entry);
+            ENTRYTYPE entry = InitialiseEntry(CreateEntry(item), item);
+            if (!Collection.Contains(entry))
+            {
+                OnEntryAdding(entry);
+                Collection.Add(entry);
+                OnEntryAdded(entry);
+            }
         }
 
         public virtual void Clear()
@@ -302,12 +305,15 @@ namespace Kistl.API
                 }
             }
 
-            ENTRYTYPE newEntry = InitialiseEntry(CreateEntry(), item);
+            ENTRYTYPE newEntry = InitialiseEntry(CreateEntry(item), item);
             SetIndex(newEntry, index);
 
-            OnEntryAdding(newEntry);
-            Collection.Add(newEntry);
-            OnEntryAdded(newEntry);
+            if (!Collection.Contains(newEntry))
+            {
+                OnEntryAdding(newEntry);
+                Collection.Add(newEntry);
+                OnEntryAdded(newEntry);
+            }
         }
 
         public void RemoveAt(int index)

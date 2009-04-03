@@ -89,6 +89,11 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
+        public ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other)
+        {
+            throw new NotImplementedException();
+        }
+
         public IStruct CreateStruct(InterfaceType ifType)
         {
             throw new NotImplementedException();

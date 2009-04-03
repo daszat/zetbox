@@ -27,6 +27,12 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             this.WriteLine("        public override int RelationID {{ get {{ return {0}; }} }}", rel.ID);
         }
 
+        protected override void ApplyObjectGetterTemplate()
+        {
+            this.WriteLine("        public override object AObject { get { return A; } }");
+            this.WriteLine("        public override object BObject { get { return B; } }");
+        }
+
         protected override string GetCeClassName()
         {
             return rel.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;

@@ -89,6 +89,8 @@ namespace Kistl.API.Server
     public abstract class BaseServerCollectionEntry : BaseServerPersistenceObject, ICollectionEntry 
     {
         public abstract int RelationID { get; }
+        public virtual object AObject { get { return null; } }
+        public virtual object BObject { get { return null; } }
     }
 
     /// <summary>

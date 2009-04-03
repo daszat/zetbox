@@ -247,6 +247,11 @@ namespace Kistl.API.Client
             return obj;
         }
 
+        public ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other)
+        {
+            var result = _objects.OfType<ICollectionEntry>().FirstOrDefault(e => (e.AObject == one && e.BObject == other) || (e.AObject == other && e.BObject == one));
+            return result;
+        }
 
         /// <summary>
         /// Creates a new Struct by Type

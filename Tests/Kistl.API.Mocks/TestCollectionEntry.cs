@@ -13,6 +13,8 @@ namespace Kistl.API.Mocks
         public bool IsReadonly { get; private set; }
 
         public int RelationID { get { return -1; } }
+        public virtual object AObject { get { return null; } }
+        public virtual object BObject { get { return null; } }
 
 
         private string _TestName;

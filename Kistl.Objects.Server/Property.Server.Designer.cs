@@ -97,9 +97,10 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 if (_CategoryTags != value)
                 {
-                    NotifyPropertyChanging("CategoryTags");
+					var __oldValue = _CategoryTags;
+                    NotifyPropertyChanging("CategoryTags", __oldValue, value);
                     _CategoryTags = value;
-                    NotifyPropertyChanged("CategoryTags");
+                    NotifyPropertyChanged("CategoryTags", __oldValue, value);
                 }
             }
         }

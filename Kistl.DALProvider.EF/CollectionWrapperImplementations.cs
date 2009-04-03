@@ -21,9 +21,10 @@ namespace Kistl.DALProvider.EF
         {
         }
 
-        protected override ENTRYTYPE CreateEntry()
+        protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
+                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
@@ -45,9 +46,10 @@ namespace Kistl.DALProvider.EF
         {
         }
 
-        protected override ENTRYTYPE CreateEntry()
+        protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
+                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
@@ -67,9 +69,10 @@ namespace Kistl.DALProvider.EF
         {
         }
 
-        protected override ENTRYTYPE CreateEntry()
+        protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
+                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
@@ -89,9 +92,10 @@ namespace Kistl.DALProvider.EF
         {
         }
 
-        protected override ENTRYTYPE CreateEntry()
+        protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
+                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)

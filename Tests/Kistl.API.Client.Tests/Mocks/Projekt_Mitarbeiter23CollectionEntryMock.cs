@@ -14,6 +14,21 @@ namespace Kistl.App.Projekte
 
         // ID is inherited
         public override int RelationID { get { return 23; } }
+        public override object AObject
+        {
+            get
+            {
+                return A;
+            }
+        }
+
+        public override object BObject
+        {
+            get
+            {
+                return B;
+            }
+        }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry

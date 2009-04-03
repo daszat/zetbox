@@ -71,12 +71,13 @@ namespace Kistl.API.Client.LinqToKistl
         void obj_PropertyChangedWithValue(object sender, PropertyChangeWithValueEventArgs args)
         {
             ICollectionEntry e = (ICollectionEntry)sender;
+            if (!(args.NewValue is IDataObject)) return;
 
             if (args.PropertyName == "A")
             {
                 IDataObject a = (IDataObject)args.NewValue;
-                IDataObject b = e.GetPropertyValue<IDataObject>("B");
-                if (b == null) return; // initialization
+                IDataObject b = e.GetPropertyValue<object>("B") as IDataObject;
+                if (b == null) return; // initialization or value collection TODO: Seperate Relation from CollectionEntry
 
                 var key = new RelationContentKey(e.RelationID, RelationEndRole.A, a.ID);
                 IList<ICollectionEntry> aList = null;
