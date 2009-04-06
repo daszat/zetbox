@@ -1,0 +1,12 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="Build"> 
+
+    <!-- Clean, then rebuild entire solution -->
+    <MSBuild Projects="Kistl.Complete.sln" Targets="Clean;Rebuild" />   
+
+    <!-- Run FxCop analysis -->
+    <Exec Command="FxCopCmd.exe /project:$(SourceLocation)\FxCop.FxCop /out:$(SourceLocation)\FxCop.results.xml" WorkingDirectory="C:\Program Files\Microsoft FxCop 1.36" />     
+
+  </Target>
+</Project>
+
