@@ -23,9 +23,9 @@
  <Targets>
   <AssemblyReferenceDirectories>
    <Directory>$(ProjectDir)/Tracing/</Directory>
-   <Directory>$(ProjectDir)/WPFLibrary/obj/Release/</Directory>
+   <Directory>$(ProjectDir)/WPFLibrary/obj/Debug/</Directory>
   </AssemblyReferenceDirectories>
-  <Target Name="$(ProjectDir)/Kistl.API.Client/obj/Release/Kistl.API.Client.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/Kistl.API.Client/obj/Debug/Kistl.API.Client.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.api.client.dll" Analyze="True">
      <Namespaces>
@@ -355,7 +355,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/Kistl.API.Server/obj/Release/Kistl.API.Server.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/Kistl.API.Server/obj/Debug/Kistl.API.Server.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.api.server.dll" Analyze="True">
      <Namespaces>
@@ -484,7 +484,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/Kistl.API/obj/Release/Kistl.API.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/Kistl.API/obj/Debug/Kistl.API.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.api.dll" Analyze="True">
      <Namespaces>
@@ -1358,7 +1358,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/Kistl.App.Projekte.Client/obj/Release/Kistl.App.Projekte.Client.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/Kistl.App.Projekte.Client/obj/Debug/Kistl.App.Projekte.Client.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.app.projekte.client.dll" Analyze="True">
      <Namespaces>
@@ -1564,7 +1564,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/Kistl.App.Projekte.Server/obj/Release/Kistl.App.Projekte.Server.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/Kistl.App.Projekte.Server/obj/Debug/Kistl.App.Projekte.Server.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.app.projekte.server.dll" Analyze="True">
      <Namespaces>
@@ -1650,7 +1650,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/Kistl.Client/obj/Release/Kistl.Client.exe" Analyze="True">
+  <Target Name="$(ProjectDir)/Kistl.Client/obj/Debug/Kistl.Client.exe" Analyze="True">
    <Modules>
     <Module Name="kistl.client.exe" Analyze="True">
      <Namespaces>
@@ -3305,7 +3305,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/Kistl.Objects.Client/obj/Release/Kistl.Objects.Client.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/Kistl.Objects.Client/obj/Debug/Kistl.Objects.Client.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.objects.client.dll" Analyze="True">
      <Namespaces>
@@ -6201,7 +6201,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/Kistl.Objects.Server/obj/Release/Kistl.Objects.Server.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/Kistl.Objects.Server/obj/Debug/Kistl.Objects.Server.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.objects.server.dll" Analyze="True">
      <Namespaces>
@@ -9016,7 +9016,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/Kistl.Server/obj/Release/Kistl.Server.exe" Analyze="True">
+  <Target Name="$(ProjectDir)/Kistl.Server/obj/Debug/Kistl.Server.exe" Analyze="True">
    <Modules>
     <Module Name="kistl.server.exe" Analyze="True">
      <Namespaces>
@@ -10290,7 +10290,7 @@
    </Namespace>
   </Namespaces>
   <Targets>
-   <Target Name="$(ProjectDir)/Kistl.API.Client/obj/Release/Kistl.API.Client.dll">
+   <Target Name="$(ProjectDir)/Kistl.API.Client/obj/Debug/Kistl.API.Client.dll">
     <Modules>
      <Module Name="kistl.api.client.dll">
       <Messages>
@@ -10694,7 +10694,7 @@
      </Module>
     </Modules>
    </Target>
-   <Target Name="$(ProjectDir)/Kistl.API.Server/obj/Release/Kistl.API.Server.dll">
+   <Target Name="$(ProjectDir)/Kistl.API.Server/obj/Debug/Kistl.API.Server.dll">
     <Modules>
      <Module Name="kistl.api.server.dll">
       <Messages>
@@ -10871,7 +10871,7 @@
      </Module>
     </Modules>
    </Target>
-   <Target Name="$(ProjectDir)/Kistl.API/obj/Release/Kistl.API.dll">
+   <Target Name="$(ProjectDir)/Kistl.API/obj/Debug/Kistl.API.dll">
     <Modules>
      <Module Name="kistl.api.dll">
       <Messages>
@@ -12530,7 +12530,7 @@
      </Module>
     </Modules>
    </Target>
-   <Target Name="$(ProjectDir)/Kistl.App.Projekte.Client/obj/Release/Kistl.App.Projekte.Client.dll">
+   <Target Name="$(ProjectDir)/Kistl.App.Projekte.Client/obj/Debug/Kistl.App.Projekte.Client.dll">
     <Modules>
      <Module Name="kistl.app.projekte.client.dll">
       <Messages>
@@ -14126,7 +14126,7 @@
      </Module>
     </Modules>
    </Target>
-   <Target Name="$(ProjectDir)/Kistl.App.Projekte.Server/obj/Release/Kistl.App.Projekte.Server.dll">
+   <Target Name="$(ProjectDir)/Kistl.App.Projekte.Server/obj/Debug/Kistl.App.Projekte.Server.dll">
     <Modules>
      <Module Name="kistl.app.projekte.server.dll">
       <Messages>
@@ -14760,7 +14760,7 @@
      </Module>
     </Modules>
    </Target>
-   <Target Name="$(ProjectDir)/Kistl.Client/obj/Release/Kistl.Client.exe">
+   <Target Name="$(ProjectDir)/Kistl.Client/obj/Debug/Kistl.Client.exe">
     <Modules>
      <Module Name="kistl.client.exe">
       <Messages>
@@ -17131,7 +17131,7 @@
      </Module>
     </Modules>
    </Target>
-   <Target Name="$(ProjectDir)/Kistl.Objects.Client/obj/Release/Kistl.Objects.Client.dll">
+   <Target Name="$(ProjectDir)/Kistl.Objects.Client/obj/Debug/Kistl.Objects.Client.dll">
     <Modules>
      <Module Name="kistl.objects.client.dll">
       <Messages>
@@ -23397,7 +23397,7 @@
      </Module>
     </Modules>
    </Target>
-   <Target Name="$(ProjectDir)/Kistl.Objects.Server/obj/Release/Kistl.Objects.Server.dll">
+   <Target Name="$(ProjectDir)/Kistl.Objects.Server/obj/Debug/Kistl.Objects.Server.dll">
     <Modules>
      <Module Name="kistl.objects.server.dll">
       <Messages>
@@ -29527,7 +29527,7 @@
      </Module>
     </Modules>
    </Target>
-   <Target Name="$(ProjectDir)/Kistl.Server/obj/Release/Kistl.Server.exe">
+   <Target Name="$(ProjectDir)/Kistl.Server/obj/Debug/Kistl.Server.exe">
     <Modules>
      <Module Name="kistl.server.exe">
       <Messages>
