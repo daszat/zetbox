@@ -7,7 +7,7 @@
     <MSBuild Projects="Kistl.Complete.sln" Targets="Clean;Rebuild" />   
 
     <!-- Run FxCop analysis -->
-    <Exec Command="FxCopCmd.exe /project:$(SourceLocation)\FxCop.FxCop /out:$(SourceLocation)\FxCop.results.xml /s /fo" WorkingDirectory="C:\Program Files\Microsoft FxCop 1.36" />     
+    <Exec Command="FxCopCmd.exe /project:$(SourceLocation)\FxCop.FxCop /out:$(SourceLocation)\FxCop.results.xml /dictionary:$(SourceLocation)\FxCopDictionary.xml /s /fo" WorkingDirectory="C:\Program Files\Microsoft FxCop 1.36" />     
 
   </Target>
 </Project>
