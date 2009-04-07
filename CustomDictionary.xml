@@ -1,0 +1,28 @@
+<Dictionary>
+	<Words>
+		<!--
+		<Unrecognized>
+			<Word>cb</Word>
+		</Unrecognized>
+		-->
+		<Recognized>
+			<Word>Kistl</Word>
+			<Word>Utils</Word>
+			<Word>Presentables</Word>
+			<Word>Dal</Word><!-- abbrevation for Data Access Layer -->
+			<Word>EF</Word><!-- abbrevation for Entity Framework -->
+			<Word>ctx</Word><!-- default variable name for IKistlContexts -->
+		</Recognized>
+		<Deprecated>
+			<Term PreferredAlternate="Projects">Projekte</Term>
+			<Term PreferredAlternate="TimeRecording">Zeiterfassung</Term>
+		</Deprecated>
+	</Words>
+	<Acronyms>
+		<CasingExceptions>
+			<Acronym>API</Acronym>
+			<Acronym>GUI</Acronym>
+			<Acronym>WPF</Acronym>
+		</CasingExceptions>
+	</Acronyms>
+</Dictionary>

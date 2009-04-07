@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+
 using Kistl.API.Client.LinqToKistl;
 
 namespace Kistl.API.Client
@@ -38,6 +40,8 @@ namespace Kistl.API.Client
 
         private LinqToKistl.RelationshipManager _relationshipManager;
 
+
+        [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification="Clarifies intent of variable")]
         private bool disposed = false;
         /// <summary>
         /// Dispose this Context.
@@ -86,6 +90,7 @@ namespace Kistl.API.Client
         /// <summary>
         /// Counter for newly created Objects to give them a valid ID
         /// </summary>
+        [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
         /// <summary>
