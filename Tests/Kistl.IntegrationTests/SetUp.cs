@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -21,19 +22,30 @@ namespace Kistl.IntegrationTests
         [SetUp]
         public void Init()
         {
-            System.Diagnostics.Trace.WriteLine("Setting up Kistl");
+            try
+            {
+                Trace.WriteLine("Setting up Kistl");
 
-            var config = KistlConfig.FromFile("Kistl.IntegrationTests.Config.xml");
+                var config = KistlConfig.FromFile("Kistl.IntegrationTests.Config.xml");
 
-            ResetDatabase(config);
+                ResetDatabase(config);
 
-            manager = new ServerDomainManager();
-            manager.Start(config);
+                manager = new ServerDomainManager();
+                manager.Start(config);
 
-            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-            var testCtx = new GuiApplicationContext(config, "WPF");
+                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+                var testCtx = new GuiApplicationContext(config, "WPF");
 
-            System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");
+                Trace.WriteLine("Setting up Kistl finished");
+            }
+            catch (Exception error)
+            {
+                Trace.TraceError("Error ({0}) while initialising Integretation Tests: {1}", error.GetType().Name, error.Message);
+                Trace.TraceError(error.ToString());
+                Trace.TraceError(error.StackTrace);
+
+                throw error;
+            }
         }
 
         [TearDown]
