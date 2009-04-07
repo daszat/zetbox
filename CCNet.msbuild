@@ -1,5 +1,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Build"> 
+    <!-- remove temp output -->
+    <RemoveDir Directories="C:\temp\KistlCodeGen" />
 
     <!-- Clean, then rebuild entire solution -->
     <MSBuild Projects="Kistl.Complete.sln" Targets="Clean;Rebuild" />   
