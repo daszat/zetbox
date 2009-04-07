@@ -19,7 +19,7 @@ namespace Kistl.API.AbstractConsumerTests
     public abstract class DatabaseResetup
     {
         // TODO: don't hardcode db script path here
-        readonly static string CurrentDbScript = @"P:\Kistl\Kistl.Server\Database\Database.68.sql";
+        readonly static string CurrentDbScript = @"Kistl.Server.Database.Database.sql";
 
         protected void ResetDatabase(KistlConfig config)
         {
@@ -31,7 +31,8 @@ namespace Kistl.API.AbstractConsumerTests
                 using (var db = new SqlConnection(config.Server.ConnectionString))
                 {
                     db.Open();
-                    var databaseScript = File.ReadAllText(CurrentDbScript);
+                    var scriptStream = new StreamReader(typeof(Kistl.Server.Helper).Assembly.GetManifestResourceStream(CurrentDbScript));
+                    var databaseScript = scriptStream.ReadToEnd();
                     using (var tx = db.BeginTransaction())
                     {
                         foreach (var cmdString in Regex.Split(databaseScript, "\r?\nGO\r?\n").Where(s => !String.IsNullOrEmpty(s)))

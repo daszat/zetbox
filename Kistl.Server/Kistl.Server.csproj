@@ -299,28 +299,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Database\Database.04.sql" />
-    <None Include="Database\Database.01.sql" />
-    <None Include="Database\Database.02.sql" />
-    <None Include="Database\Database.03.sql" />
-    <None Include="Database\Database.05.sql" />
-    <None Include="Database\Database.06.sql" />
-    <None Include="Database\Database.07.sql" />
-    <None Include="Database\Database.08.sql" />
-    <None Include="Database\Database.09.sql" />
-    <None Include="Database\Database.10.sql" />
-    <None Include="Database\Database.11.sql" />
-    <None Include="Database\Database.12.sql" />
-    <None Include="Database\Database.13.sql" />
-    <None Include="Database\Database.14.sql" />
-    <None Include="Database\Database.15.sql" />
-    <None Include="Database\Database.16.sql" />
-    <None Include="Database\Database.17.sql" />
-    <None Include="Database\Database.18.sql" />
-    <None Include="Database\Database.19.sql" />
-    <None Include="Database\Database.20.sql" />
-    <None Include="Database\Database.21.sql" />
-    <None Include="Database\Database.22.sql" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -331,19 +309,6 @@
     <None Include="DefaultConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Database\Database.23.sql" />
-    <None Include="Database\Database.24.sql" />
-    <None Include="Database\Database.25.sql" />
-    <None Include="Database\Database.26.sql" />
-    <None Include="Database\Database.27.sql" />
-    <None Include="Database\Database.28.sql" />
-    <None Include="Database\Database.29.sql" />
-    <None Include="Database\Database.30.sql" />
-    <None Include="Database\Database.31.sql" />
-    <None Include="Database\Database.32.sql" />
-    <None Include="Database\Database.33.sql" />
-    <None Include="Database\Database.34.sql" />
-    <None Include="Database\Database.35.sql" />
     <None Include="Generators\Templates\Implementation\ObjectClasses\MethodBody.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>MethodBody.Designer.cs</LastGenOutput>
@@ -732,6 +697,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Database\Database.sql" />
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
