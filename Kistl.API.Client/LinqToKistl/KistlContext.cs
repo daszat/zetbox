@@ -234,6 +234,27 @@ namespace Kistl.API.Client
             return (ICollectionEntry)CreateInternal(ifType);
         }
 
+        /// <summary>
+        /// Creates a new ICollectionEntry by Type
+        /// </summary>
+        /// <param name="type">Type of the new ICollectionEntry</param>
+        /// <returns>A new ICollectionEntry</returns>
+        public T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry
+        {
+            return (T)CreateValueCollectionEntry(new InterfaceType(typeof(T)));
+        }
+
+        /// <summary>
+        /// Creates a new ICollectionEntry.
+        /// </summary>
+        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
+        /// <returns>A new ICollectionEntry</returns>
+        public IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType)
+        {
+            return (IValueCollectionEntry)CreateInternal(ifType);
+        }
+
+
         private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
             CheckDisposed();

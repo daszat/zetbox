@@ -25,7 +25,7 @@
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = (prop.IsIndexed ? "EntityListBSideWrapper" : "EntityCollectionBSideWrapper");
+	string wrapperClass = (prop.IsIndexed ? "EFValueListWrapper" : "EFValueCollectionWrapper");
 	
 	// the name of the EF association
 	string assocName = prop.GetAssociationName();
@@ -53,7 +53,8 @@
             {
                 if (<%= wrapperName %> == null)
                 {
-                    <%= wrapperName %> = new <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>>(
+                    <%= wrapperName %> = new <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>, EntityCollection<<%= referencedCollectionEntry %>>>(
+						this.Context,
                         this,
                         <%= efName %>);
                 }
@@ -78,4 +79,4 @@
                 return c;
             }
         }
-        private <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>> <%= wrapperName %>;
+        private <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>, EntityCollection<<%= referencedCollectionEntry %>>> <%= wrapperName %>;

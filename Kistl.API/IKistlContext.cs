@@ -142,6 +142,21 @@ namespace Kistl.API
         T CreateCollectionEntry<T>() where T : ICollectionEntry;
 
         /// <summary>
+        /// Creates a new ICollectionEntry by Type
+        /// </summary>
+        /// <param name="ifType">Type of the new ICollectionEntry</param>
+        /// <returns>A new ICollectionEntry</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType);
+        /// <summary>
+        /// Creates a new ICollectionEntry.
+        /// </summary>
+        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
+        /// <returns>A new ICollectionEntry</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry;
+
+        /// <summary>
         /// Lookups if a relation between two IDataObjects already exists in this Context.
         /// Lookup is done on both sides: A-B and B-A
         /// </summary>

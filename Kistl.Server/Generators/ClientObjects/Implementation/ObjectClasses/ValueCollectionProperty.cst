@@ -34,7 +34,8 @@
 				if (<%= backingName %> == null)
 				{
 				    <%= backingName %> 
-				        = new <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>>(
+				        = new <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>, <%= providerCollectionType %>>(
+							this.Context,
 				            this, 
 				            <%= underlyingCollectionName %>);
 				}
@@ -42,5 +43,5 @@
 			}
 		}
 
-		private <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>> <%= backingName %>;
+		private <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>, <%= providerCollectionType %>> <%= backingName %>;
 		private <%= providerCollectionType %> <%= underlyingCollectionName %> = new List<<%= entryType %>>();

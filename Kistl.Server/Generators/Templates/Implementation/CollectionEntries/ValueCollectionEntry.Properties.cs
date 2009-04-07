@@ -14,11 +14,17 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         protected override void ApplyAPropertyTemplate()
         {
             ApplyParentReferencePropertyTemplate(this.prop, "A");
+
+            // TODO: Move to implementation
+            this.WriteLine("public {0} Parent {{ get {{ return A; }} set {{ A = value; }} }}", this.prop.ObjectClass.ClassName);
         }
 
         protected override void ApplyBPropertyTemplate()
         {
             ApplyValuePropertyTemplate(this.prop, "B");
+
+            // TODO: Move to implementation
+            this.WriteLine("public {0} Value {{ get {{ return B; }} set {{ B = value; }} }}", this.prop.ReferencedTypeAsCSharp());
         }
 
         protected abstract void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName);

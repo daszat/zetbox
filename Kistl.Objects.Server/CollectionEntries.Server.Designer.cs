@@ -1825,6 +1825,8 @@ namespace Kistl.App.Projekte
         }
         private int _ID;
         public override int RelationID { get { return -1; } }
+        public IDataObject ParentObject { get { return Parent; } set { Parent = (Kunde)value; } }
+        public object ValueObject { get { return Value; } set { Value = (string)value; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -1899,6 +1901,7 @@ namespace Kistl.App.Projekte
         }
         
         
+public Kunde Parent { get { return A; } set { A = value; } }
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -1925,6 +1928,7 @@ namespace Kistl.App.Projekte
             }
         }
         private string _B;
+public string Value { get { return B; } set { B = value; } }
 
 #region Serializer
 

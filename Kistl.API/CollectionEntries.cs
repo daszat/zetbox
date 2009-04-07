@@ -8,8 +8,8 @@ namespace Kistl.API
     {
         int RelationID { get; }
 
-        IDataObject AObject { get; }
-        IDataObject BObject { get; }
+        IDataObject AObject { get; set; }
+        IDataObject BObject { get; set; }
     }
 
     public interface IRelationListEntry : IRelationCollectionEntry
@@ -22,8 +22,8 @@ namespace Kistl.API
         where AType : class, IDataObject
         where BType : class, IDataObject
     {
-        AType A { get; }
-        BType B { get; }
+        AType A { get; set; }
+        BType B { get; set; }
     }
 
     public interface IRelationListEntry<AType, BType> : IRelationCollectionEntry<AType, BType>, IRelationListEntry
@@ -35,8 +35,8 @@ namespace Kistl.API
 
     public interface IValueCollectionEntry : IPersistenceObject
     {
-        IDataObject ParentObject { get; }
-        object ValueObject { get; }
+        IDataObject ParentObject { get; set; }
+        object ValueObject { get; set; }
     }
 
     public interface IValueListEntry : IValueCollectionEntry
@@ -47,8 +47,8 @@ namespace Kistl.API
     public interface IValueCollectionEntry<TParent, TValue> : IValueCollectionEntry
         where TParent : class, IDataObject
     {
-        TParent Parent { get; }
-        TValue Value { get; }
+        TParent Parent { get; set; }
+        TValue Value { get; set; }
     }
 
     public interface IValueListEntry<TParent, TValue> : IValueCollectionEntry<TParent, TValue>, IValueListEntry

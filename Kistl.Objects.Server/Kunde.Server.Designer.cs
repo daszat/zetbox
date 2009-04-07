@@ -92,7 +92,8 @@ namespace Kistl.App.Projekte
             {
                 if (_EMailsWrapper == null)
                 {
-                    _EMailsWrapper = new EntityCollectionBSideWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__>(
+                    _EMailsWrapper = new EFValueCollectionWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__, EntityCollection<Kunde_EMailsCollectionEntry__Implementation__>>(
+						this.Context,
                         this,
                         EMails__Implementation__);
                 }
@@ -117,7 +118,7 @@ namespace Kistl.App.Projekte
                 return c;
             }
         }
-        private EntityCollectionBSideWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__> _EMailsWrapper;
+        private EFValueCollectionWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__, EntityCollection<Kunde_EMailsCollectionEntry__Implementation__>> _EMailsWrapper;
 
         /// <summary>
         /// Name des Kunden

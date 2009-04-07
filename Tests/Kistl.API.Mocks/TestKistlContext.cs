@@ -89,6 +89,17 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
+        public IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry
+        {
+            throw new NotImplementedException();
+        }
+
+
         public ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other)
         {
             throw new NotImplementedException();

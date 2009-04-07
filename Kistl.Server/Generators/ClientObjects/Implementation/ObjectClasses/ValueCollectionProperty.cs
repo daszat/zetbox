@@ -23,7 +23,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
             string name = prop.PropertyName;
             string backingName = "_" + name + "Wrapper";
-            string backingCollectionType = (prop.IsIndexed ? "ClientListBSideWrapper" : "ClientCollectionBSideWrapper");
+            string backingCollectionType = (prop.IsIndexed ? "ClientValueListWrapper" : "ClientValueCollectionWrapper");
 
             string exposedCollectionInterface = prop.IsIndexed ? "IList" : "ICollection";
 

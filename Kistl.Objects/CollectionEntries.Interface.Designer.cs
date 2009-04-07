@@ -106,7 +106,7 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// ValueCollectionEntry for EMails des Kunden - können mehrere sein
     /// </summary>
-    public interface Kunde_EMailsCollectionEntry : INewCollectionEntry<Kunde, System.String> 
+    public interface Kunde_EMailsCollectionEntry : IValueCollectionEntry<Kunde, System.String> 
     {
 
     }

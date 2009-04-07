@@ -40,7 +40,7 @@ Debug.Assert(prop.IsList);
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = (prop.IsIndexed ? "EntityListBSideWrapper" : "EntityCollectionBSideWrapper");
+	string wrapperClass = (prop.IsIndexed ? "EFValueListWrapper" : "EFValueCollectionWrapper");
 	
 	// the name of the EF association
 	string assocName = prop.GetAssociationName();
@@ -69,7 +69,8 @@ this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (",  wrapperName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  thisInterface , ", ",  referencedType , ", ",  referencedCollectionEntry , ">(\r\n");
+this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  thisInterface , ", ",  referencedType , ", ",  referencedCollectionEntry , ", EntityCollection<",  referencedCollectionEntry , ">>(\r\n");
+this.WriteObjects("						this.Context,\r\n");
 this.WriteObjects("                        this,\r\n");
 this.WriteObjects("                        ",  efName , ");\r\n");
 this.WriteObjects("                }\r\n");
@@ -94,7 +95,7 @@ this.WriteObjects("                }\r\n");
 this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        private ",  wrapperClass , "<",  thisInterface , ", ",  referencedType , ", ",  referencedCollectionEntry , "> ",  wrapperName , ";\r\n");
+this.WriteObjects("        private ",  wrapperClass , "<",  thisInterface , ", ",  referencedType , ", ",  referencedCollectionEntry , ", EntityCollection<",  referencedCollectionEntry , ">> ",  wrapperName , ";\r\n");
 
         }
 

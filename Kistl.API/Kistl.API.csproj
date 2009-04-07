@@ -104,6 +104,7 @@
     <Compile Include="BaseNotifyingObject.cs" />
     <Compile Include="BasePersistenceObject.cs" />
     <Compile Include="BaseStructObject.cs" />
+    <Compile Include="BaseValueCollectionWrapper.cs" />
     <Compile Include="RelationEndRole.cs" />
     <Compile Include="SerializableExpression.Visitors.cs" />
     <Compile Include="TypeTransformations.cs" />

@@ -19,10 +19,16 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         {
             this.prop = prop;
         }
-
+        
         protected override void ApplyRelationIdPropertyTemplate()
         {
             this.WriteLine("        public override int RelationID { get { return -1; } }");
+        }
+
+        protected override void ApplyObjectGetterTemplate()
+        {
+            this.WriteLine("        public IDataObject ParentObject {{ get {{ return Parent; }} set {{ Parent = ({0})value; }} }}", prop.ObjectClass.ClassName);
+            this.WriteLine("        public object ValueObject {{ get {{ return Value; }} set {{ Value = ({0})value; }} }}", prop.ReferencedTypeAsCSharp());
         }
 
         protected override string GetCeClassName()

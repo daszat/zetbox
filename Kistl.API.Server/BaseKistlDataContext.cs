@@ -169,6 +169,27 @@ namespace Kistl.API.Server
             return (T)CreateCollectionEntry(new InterfaceType(typeof(T)));
         }
 
+        /// <summary>
+        /// Creates a new IPersistenceObject by System.Type. Note - this Method is depricated!
+        /// </summary>
+        /// <param name="type">System.Type of the new IPersistenceObject</param>
+        /// <returns>A new IPersistenceObject</returns>
+        public virtual IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType)
+        {
+            return (IValueCollectionEntry)CreateInternal(ifType);
+        }
+
+        /// <summary>
+        /// Creates a new IPersistenceObject.
+        /// </summary>
+        /// <typeparam name="T">Type of the new IPersistenceObject</typeparam>
+        /// <returns>A new IDataObject</returns>
+        public virtual T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry
+        {
+            return (T)CreateValueCollectionEntry(new InterfaceType(typeof(T)));
+        }
+
+
         public virtual ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other)
         {
             //var result = AttachedObjects.OfType<ICollectionEntry>().FirstOrDefault(e => (e.AObject == one && e.BObject == other) || (e.AObject == other && e.BObject == one));

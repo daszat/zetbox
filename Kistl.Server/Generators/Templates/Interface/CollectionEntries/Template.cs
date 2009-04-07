@@ -76,7 +76,7 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
         protected override string GetCeInterface()
         {
             return String.Format("{0}<{1}, {2}>",
-                IsOrdered() ? "INewListEntry" : "INewCollectionEntry",
+                IsOrdered() ? "IValueListEntry" : "IValueCollectionEntry",
                 this.prop.ObjectClass.ClassName,
                 this.prop.GetPropertyTypeString());
         }

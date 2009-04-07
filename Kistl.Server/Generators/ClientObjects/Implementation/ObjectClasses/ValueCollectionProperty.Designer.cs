@@ -58,7 +58,8 @@ this.WriteObjects("			{\r\n");
 this.WriteObjects("				if (",  backingName , " == null)\r\n");
 this.WriteObjects("				{\r\n");
 this.WriteObjects("				    ",  backingName , " \r\n");
-this.WriteObjects("				        = new ",  backingCollectionType , "<",  thisInterface , ", ",  referencedType , ", ",  entryType , ">(\r\n");
+this.WriteObjects("				        = new ",  backingCollectionType , "<",  thisInterface , ", ",  referencedType , ", ",  entryType , ", ",  providerCollectionType , ">(\r\n");
+this.WriteObjects("							this.Context,\r\n");
 this.WriteObjects("				            this, \r\n");
 this.WriteObjects("				            ",  underlyingCollectionName , ");\r\n");
 this.WriteObjects("				}\r\n");
@@ -66,7 +67,7 @@ this.WriteObjects("				return ",  backingName , ";\r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("		private ",  backingCollectionType , "<",  thisInterface , ", ",  referencedType , ", ",  entryType , "> ",  backingName , ";\r\n");
+this.WriteObjects("		private ",  backingCollectionType , "<",  thisInterface , ", ",  referencedType , ", ",  entryType , ", ",  providerCollectionType , "> ",  backingName , ";\r\n");
 this.WriteObjects("		private ",  providerCollectionType , " ",  underlyingCollectionName , " = new List<",  entryType , ">();\r\n");
 
         }
