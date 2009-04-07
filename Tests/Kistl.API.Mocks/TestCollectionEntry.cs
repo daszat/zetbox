@@ -6,15 +6,15 @@ using System.Text;
 
 namespace Kistl.API.Mocks
 {
-    public class TestCollectionEntry : ICollectionEntry
+    public class TestCollectionEntry : IRelationCollectionEntry
     {
         private int _ID  = -1;
         public int ID { get { return _ID; } set { _ID = value; } }
         public bool IsReadonly { get; private set; }
 
         public int RelationID { get { return -1; } }
-        public virtual object AObject { get { return null; } }
-        public virtual object BObject { get { return null; } }
+        public IDataObject AObject { get; set; }
+        public IDataObject BObject { get; set; }
 
 
         private string _TestName;
@@ -40,7 +40,7 @@ namespace Kistl.API.Mocks
             return ID;
         }
 
-        public void CopyTo(ICollectionEntry obj)
+        public void CopyTo(IRelationCollectionEntry obj)
         {
             ((TestCollectionEntry)obj).ID = this.ID;
             ((TestCollectionEntry)obj).TestName = this.TestName;
@@ -131,7 +131,7 @@ namespace Kistl.API.Mocks
 
         public InterfaceType GetInterfaceType()
         {
-            return new InterfaceType(typeof(ICollectionEntry));
+            return new InterfaceType(typeof(IRelationCollectionEntry));
         }
 
         #endregion

@@ -24,13 +24,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override void ApplyRelationIdPropertyTemplate()
         {
-            this.WriteLine("        public override int RelationID {{ get {{ return {0}; }} }}", rel.ID);
+            this.WriteLine("        public int RelationID {{ get {{ return {0}; }} }}", rel.ID);
         }
 
         protected override void ApplyObjectGetterTemplate()
         {
-            this.WriteLine("        public override object AObject { get { return A; } }");
-            this.WriteLine("        public override object BObject { get { return B; } }");
+            this.WriteLine("        public IDataObject AObject {{ get {{ return A; }} set {{ A = ({0})value; }} }}", rel.A.Type.GetDataTypeString());
+            this.WriteLine("        public IDataObject BObject {{ get {{ return B; }} set {{ B = ({0})value; }} }}", rel.B.Type.GetDataTypeString());
         }
 
         protected override string GetCeClassName()

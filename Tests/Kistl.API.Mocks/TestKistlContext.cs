@@ -44,7 +44,7 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
-        public IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent) where T : class, ICollectionEntry
+        public IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry
         {
             throw new NotImplementedException();
         }
@@ -79,12 +79,12 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
-        public ICollectionEntry CreateCollectionEntry(InterfaceType ifType)
+        public IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
             throw new NotImplementedException();
         }
 
-        public T CreateCollectionEntry<T>() where T : ICollectionEntry
+        public T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry
         {
             throw new NotImplementedException();
         }
@@ -99,11 +99,6 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
-
-        public ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other)
-        {
-            throw new NotImplementedException();
-        }
 
         public IStruct CreateStruct(InterfaceType ifType)
         {

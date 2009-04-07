@@ -93,7 +93,7 @@ namespace Kistl.API.Server
             return GetListOf<T>(obj, propertyName);
         }
 
-        public abstract IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent) where T : class, ICollectionEntry;
+        public abstract IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -154,9 +154,9 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="type">System.Type of the new IPersistenceObject</param>
         /// <returns>A new IPersistenceObject</returns>
-        public virtual ICollectionEntry CreateCollectionEntry(InterfaceType ifType)
+        public virtual IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
-            return (ICollectionEntry)CreateInternal(ifType);
+            return (IRelationCollectionEntry)CreateInternal(ifType);
         }
 
         /// <summary>
@@ -164,9 +164,9 @@ namespace Kistl.API.Server
         /// </summary>
         /// <typeparam name="T">Type of the new IPersistenceObject</typeparam>
         /// <returns>A new IDataObject</returns>
-        public virtual T CreateCollectionEntry<T>() where T : ICollectionEntry
+        public virtual T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry
         {
-            return (T)CreateCollectionEntry(new InterfaceType(typeof(T)));
+            return (T)CreateRelationCollectionEntry(new InterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -187,14 +187,6 @@ namespace Kistl.API.Server
         public virtual T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry
         {
             return (T)CreateValueCollectionEntry(new InterfaceType(typeof(T)));
-        }
-
-
-        public virtual ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other)
-        {
-            //var result = AttachedObjects.OfType<ICollectionEntry>().FirstOrDefault(e => (e.AObject == one && e.BObject == other) || (e.AObject == other && e.BObject == one));
-            //return result;
-            return null;
         }
 
         /// <summary>

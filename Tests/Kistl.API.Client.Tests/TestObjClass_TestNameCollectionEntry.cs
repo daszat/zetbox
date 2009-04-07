@@ -6,20 +6,15 @@ using System.Xml.Serialization;
 
 namespace Kistl.API.Client.Tests
 {
-    public class TestObjClass_TestNameCollectionEntry : BaseClientCollectionEntry, INewCollectionEntry<TestObjClass, string>
+    public class TestObjClass_TestNameCollectionEntry : BaseClientCollectionEntry, IValueCollectionEntry<TestObjClass, string>
     {
-
-        private int _ID;
-
         private string _Value;
-
         private int _fk_Parent;
 
-        public override int RelationID { get { return -1; } }
+        public IDataObject ParentObject { get; set; }
+        public object ValueObject{ get; set; }
 
-       
-
-        public string B
+        public string Value
         {
             get
             {
@@ -27,14 +22,14 @@ namespace Kistl.API.Client.Tests
             }
             set
             {
-                base.NotifyPropertyChanging("B", null, null);
+                base.NotifyPropertyChanging("Value", null, null);
                 _Value = value;
-                base.NotifyPropertyChanged("B", null, null); 
+                base.NotifyPropertyChanged("Value", null, null); 
             }
         }
 
         [XmlIgnore()]
-        public TestObjClass A
+        public TestObjClass Parent
         {
             get
             {
@@ -60,7 +55,7 @@ namespace Kistl.API.Client.Tests
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToStream(this.B, sw);
+            BinarySerializer.ToStream(this.Value, sw);
             BinarySerializer.ToStream(this.fk_Parent, sw);
         }
 
@@ -80,7 +75,7 @@ namespace Kistl.API.Client.Tests
 
         public override InterfaceType GetInterfaceType()
         {
-            return new InterfaceType(typeof(INewCollectionEntry<string, TestObjClass>));
+            return new InterfaceType(typeof(IValueCollectionEntry<TestObjClass, string>));
         }
     }
 }

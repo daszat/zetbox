@@ -152,7 +152,7 @@ namespace Kistl.App.Zeiterfassung
             {
                 if (_MitarbeiterWrapper == null)
                 {
-                    _MitarbeiterWrapper = new EntityCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(
+                    _MitarbeiterWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(
                             this,
                             Mitarbeiter__Implementation__);
                 }
@@ -177,7 +177,7 @@ namespace Kistl.App.Zeiterfassung
                 return c;
             }
         }
-        private EntityCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__> _MitarbeiterWrapper;
+        private EntityRelationBSideCollectionWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__> _MitarbeiterWrapper;
         
 
         /// <summary>

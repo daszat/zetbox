@@ -56,8 +56,8 @@ namespace Kistl.API.Server.Tests
             {
                 var ce = new TestObjClass_TestNameCollectionEntry__Implementation__();
                 ce.ID = TestObjClassSerializationMock.TestTestNamesIds[i];
-                ce.A = objImpl;
-                ce.B = TestObjClassSerializationMock.TestTestNamesValues[i];
+                ce.Parent = objImpl;
+                ce.Value = TestObjClassSerializationMock.TestTestNamesValues[i];
 
                 objImpl.TestNames__Implementation__.Add(ce);
             }

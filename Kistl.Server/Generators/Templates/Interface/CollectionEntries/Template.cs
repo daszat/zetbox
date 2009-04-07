@@ -29,7 +29,7 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
         protected override string GetCeInterface()
         {
             return String.Format("{0}<{1}, {2}>",
-                IsOrdered() ? "INewListEntry" : "INewCollectionEntry",
+                IsOrdered() ? "IRelationListEntry" : "IRelationCollectionEntry",
                 rel.A.Type.ClassName,
                 rel.B.Type.ClassName);
         }

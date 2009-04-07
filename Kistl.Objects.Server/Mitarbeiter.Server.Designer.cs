@@ -125,7 +125,7 @@ namespace Kistl.App.Projekte
             {
                 if (_ProjekteWrapper == null)
                 {
-                    _ProjekteWrapper = new EntityListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
+                    _ProjekteWrapper = new EntityRelationASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
                             this,
                             Projekte__Implementation__);
                 }
@@ -150,7 +150,7 @@ namespace Kistl.App.Projekte
                 return c;
             }
         }
-        private EntityListASideWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__> _ProjekteWrapper;
+        private EntityRelationASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__> _ProjekteWrapper;
         
 
         /// <summary>

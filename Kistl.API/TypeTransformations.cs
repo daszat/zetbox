@@ -262,7 +262,11 @@ namespace Kistl.API
                 {
                     return ApplicationContext.Current.BaseStructObjectType;
                 }
-                else if (type == typeof(ICollectionEntry))
+                else if (type == typeof(IRelationCollectionEntry))
+                {
+                    return ApplicationContext.Current.BaseCollectionEntryType;
+                }
+                else if (type == typeof(IValueCollectionEntry))
                 {
                     return ApplicationContext.Current.BaseCollectionEntryType;
                 }

@@ -112,7 +112,7 @@ namespace Kistl.App.Zeiterfassung
 				if (_Mitarbeiter == null)
 				{
 					_Mitarbeiter 
-						= new ClientCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(
+						= new ClientRelationBSideCollectionWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(
 							this, 
 							Context.FetchRelation<Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(42, RelationEndRole.A, this));
 				}
@@ -120,7 +120,7 @@ namespace Kistl.App.Zeiterfassung
 			}
 		}
 
-		private ClientCollectionBSideWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__> _Mitarbeiter;
+		private ClientRelationBSideCollectionWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__> _Mitarbeiter;
 
         /// <summary>
         /// Tätigkeiten

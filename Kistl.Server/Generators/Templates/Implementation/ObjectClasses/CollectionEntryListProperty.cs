@@ -37,22 +37,22 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             {
                 if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
                 {
-                    backingCollectionType = "ClientListASideWrapper";
+                    backingCollectionType = "ClientRelationASideListWrapper";
                 }
                 else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
                 {
-                    backingCollectionType = "ClientListBSideWrapper";
+                    backingCollectionType = "ClientRelationBSideListWrapper";
                 }
             }
             else
             {
                 if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
                 {
-                    backingCollectionType = "ClientCollectionASideWrapper";
+                    backingCollectionType = "ClientRelationASideCollectionWrapper";
                 }
                 else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
                 {
-                    backingCollectionType = "ClientCollectionBSideWrapper";
+                    backingCollectionType = "ClientRelationBSideCollectionWrapper";
                 }
             }
             

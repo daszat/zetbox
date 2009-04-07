@@ -8,30 +8,28 @@ namespace Kistl.API.Server.Mocks
 {
 
     public class TestNameCollectionWrapper
-        : CollectionBSideWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntry__Implementation__, List<TestObjClass_TestNameCollectionEntry__Implementation__>>
+        : ValueCollectionWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntry__Implementation__, List<TestObjClass_TestNameCollectionEntry__Implementation__>>
     {
-        public TestNameCollectionWrapper(TestObjClass__Implementation__ parent, List<TestObjClass_TestNameCollectionEntry__Implementation__> baselist)
-            : base(parent, baselist)
+        public TestNameCollectionWrapper(IKistlContext ctx, TestObjClass__Implementation__ parent, List<TestObjClass_TestNameCollectionEntry__Implementation__> baselist)
+            : base(ctx, parent, baselist)
         {
         }
 
-        protected override TestObjClass_TestNameCollectionEntry__Implementation__ CreateEntry(object item)
+        protected override TestObjClass_TestNameCollectionEntry__Implementation__ CreateEntry()
         {
             return new TestObjClass_TestNameCollectionEntry__Implementation__();
         }
     }
 
-    public class TestObjClass_TestNameCollectionEntry__Implementation__ : BaseServerCollectionEntry, INewCollectionEntry<TestObjClass, string>
+    public class TestObjClass_TestNameCollectionEntry__Implementation__ : BaseServerCollectionEntry, IValueCollectionEntry<TestObjClass, string>
     {
-        public override int RelationID { get { return -1; } }
-
         /// <summary>
         /// returns the most specific implemented data object interface
         /// </summary>
         /// <returns></returns>
         public override InterfaceType GetInterfaceType()
         {
-            return new InterfaceType(typeof(INewCollectionEntry<TestObjClass, string>));
+            return new InterfaceType(typeof(IValueCollectionEntry<TestObjClass, string>));
         }
 
         public override int ID { get; set; }
@@ -62,18 +60,20 @@ namespace Kistl.API.Server.Mocks
             _IsAttached = false;
         }
 
-        #region INewCollectionEntry<TestObjClass,string> Members
+        #region IValueCollectionEntry<TestObjClass,string> Members
 
-        public TestObjClass A { get; set; }
+        public TestObjClass Parent { get; set; }
+        public IDataObject ParentObject { get; set; }
 
-        public string B { get; set; }
+        public string Value { get; set; }
+        public object ValueObject { get; set; }
 
         #endregion
 
         public override void ToStream(System.IO.BinaryWriter sw)
         {
             base.ToStream(sw);
-            BinarySerializer.ToStream(B, sw);
+            BinarySerializer.ToStream(Value, sw);
         }
 
         public override void FromStream(System.IO.BinaryReader sr)
@@ -81,7 +81,7 @@ namespace Kistl.API.Server.Mocks
             base.FromStream(sr);
             string s;
             BinarySerializer.FromStream(out s, sr);
-            B = s;
+            Value = s;
         }
     }
 }

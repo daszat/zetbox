@@ -6,7 +6,7 @@ using Kistl.API;
 
 namespace Kistl.DALProvider.EF
 {
-    public class EFValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : BaseValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
+    public class EFValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
         where TParent : class, IDataObject
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
@@ -15,14 +15,9 @@ namespace Kistl.DALProvider.EF
             : base(ctx, parent, collection)
         {
         }
-
-        protected override TEntry CreateEntry()
-        {
-            return (TEntry)ctx.CreateValueCollectionEntry<TEntry>();
-        }
     }
 
-    public class EFValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : BaseValueListWrapper<TParent, TValue, TEntry, TEntryCollection>
+    public class EFValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueListWrapper<TParent, TValue, TEntry, TEntryCollection>
         where TParent : class, IDataObject
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : IList<TEntry>
@@ -30,11 +25,6 @@ namespace Kistl.DALProvider.EF
         public EFValueListWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
             : base(ctx, parent, collection)
         {
-        }
-
-        protected override TEntry CreateEntry()
-        {
-            return (TEntry)ctx.CreateValueCollectionEntry<TEntry>();
         }
     }
 }

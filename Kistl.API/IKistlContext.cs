@@ -86,7 +86,7 @@ namespace Kistl.API
         /// <param name="role">Specifies how to interpret the container</param>
         /// <param name="container">The container of the requested collection</param>
         /// <returns></returns>
-        IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject container) where T : class, ICollectionEntry;
+        IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -132,14 +132,14 @@ namespace Kistl.API
         /// <param name="ifType">Type of the new ICollectionEntry</param>
         /// <returns>A new ICollectionEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ICollectionEntry CreateCollectionEntry(InterfaceType ifType);
+        IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType);
         /// <summary>
         /// Creates a new ICollectionEntry.
         /// </summary>
         /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
         /// <returns>A new ICollectionEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        T CreateCollectionEntry<T>() where T : ICollectionEntry;
+        T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry;
 
         /// <summary>
         /// Creates a new ICollectionEntry by Type
@@ -155,16 +155,6 @@ namespace Kistl.API
         /// <returns>A new ICollectionEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry;
-
-        /// <summary>
-        /// Lookups if a relation between two IDataObjects already exists in this Context.
-        /// Lookup is done on both sides: A-B and B-A
-        /// </summary>
-        /// <param name="one"></param>
-        /// <param name="other"></param>
-        /// <returns>ICollectionEntry or null if not found in current Context</returns>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other);
 
         /// <summary>
         /// Creates a new Struct by Type

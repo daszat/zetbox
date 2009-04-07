@@ -180,7 +180,7 @@ namespace Kistl.App.Base
 				if (_ImplementsInterfaces == null)
 				{
 					_ImplementsInterfaces 
-						= new ClientCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(
+						= new ClientRelationBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(
 							this, 
 							Context.FetchRelation<ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(49, RelationEndRole.A, this));
 				}
@@ -188,7 +188,7 @@ namespace Kistl.App.Base
 			}
 		}
 
-		private ClientCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__> _ImplementsInterfaces;
+		private ClientRelationBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__> _ImplementsInterfaces;
 
         /// <summary>
         /// if true then all Instances appear in FozenContext.

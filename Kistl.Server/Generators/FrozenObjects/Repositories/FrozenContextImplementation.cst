@@ -134,9 +134,8 @@ namespace Kistl.App
         IDataObject IKistlContext.Create(InterfaceType ifType) { throw new ReadOnlyContextException(); }
         T IKistlContext.Create<T>() { throw new ReadOnlyContextException(); }
         
-        ICollectionEntry IKistlContext.CreateCollectionEntry(InterfaceType ifType) { throw new ReadOnlyContextException(); }
-        T IKistlContext.CreateCollectionEntry<T>() { throw new ReadOnlyContextException(); }
-		ICollectionEntry IKistlContext.LookupCollectionEntry(IDataObject one, IDataObject other) { throw new ReadOnlyContextException(); }
+        IRelationCollectionEntry IKistlContext.CreateRelationCollectionEntry(InterfaceType ifType) { throw new ReadOnlyContextException(); }
+        T IKistlContext.CreateRelationCollectionEntry<T>() { throw new ReadOnlyContextException(); }
 
         IValueCollectionEntry IKistlContext.CreateValueCollectionEntry(InterfaceType ifType) { throw new ReadOnlyContextException(); }
         T IKistlContext.CreateValueCollectionEntry<T>() { throw new ReadOnlyContextException(); }

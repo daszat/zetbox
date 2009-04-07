@@ -16,17 +16,18 @@ namespace Kistl.API
     /// <typeparam name="ITEMTYPE">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
     /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
     /// <typeparam name="BASECOLLECTIONTYPE">the provider's collection type</typeparam>
-    public abstract class BaseCollectionWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+    public abstract class BaseRelationCollectionWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         : ICollection<ITEMTYPE>, ICollection, IEnumerable
         where ATYPE : class, IDataObject
+        where BTYPE : class, IDataObject
         where PARENTTYPE : class, IDataObject
-        where ENTRYTYPE : class, INewCollectionEntry<ATYPE, BTYPE>
+        where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
         protected BASECOLLECTIONTYPE Collection { get; private set; }
         protected PARENTTYPE ParentObject { get; private set; }
 
-        public BaseCollectionWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        public BaseRelationCollectionWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
         {
             Collection = baseCollection;
             ParentObject = parentObject;
@@ -213,14 +214,15 @@ namespace Kistl.API
     /// <typeparam name="ITEMTYPE">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
     /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
     /// <typeparam name="BASECOLLECTIONTYPE">the provider's collection type</typeparam>
-    public abstract class BaseListWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : BaseCollectionWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>, IList<ITEMTYPE>, IList
+    public abstract class BaseRelationListWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : BaseRelationCollectionWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>, IList<ITEMTYPE>, IList
         where ATYPE : class, IDataObject
+        where BTYPE : class, IDataObject
         where PARENTTYPE : class, IDataObject
-        where ENTRYTYPE : class, INewListEntry<ATYPE, BTYPE>
+        where ENTRYTYPE : class, IRelationListEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public BaseListWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        public BaseRelationListWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
             : base(parentObject, baseCollection)
         {
         }

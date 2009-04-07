@@ -10,7 +10,7 @@ namespace Kistl.API.Client.Mocks
 {
     public class ClientApplicationContextMock : ClientApiContext
     {
-        public static new ClientApplicationContextMock CurrentMock { get; private set; }
+        public static ClientApplicationContextMock CurrentMock { get; private set; }
 
         public ClientApplicationContextMock()
             : base(KistlConfig.FromFile("Kistl.API.Client.Tests.Config.xml"))

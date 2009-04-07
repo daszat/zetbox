@@ -71,7 +71,7 @@ namespace Kistl.App.GUI
             {
                 if (_ChildrenWrapper == null)
                 {
-                    _ChildrenWrapper = new EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_Children55CollectionEntry__Implementation__>(
+                    _ChildrenWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_Children55CollectionEntry__Implementation__>(
                             this,
                             Children__Implementation__);
                 }
@@ -96,7 +96,7 @@ namespace Kistl.App.GUI
                 return c;
             }
         }
-        private EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_Children55CollectionEntry__Implementation__> _ChildrenWrapper;
+        private EntityRelationBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_Children55CollectionEntry__Implementation__> _ChildrenWrapper;
         
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Kistl.App.GUI
             {
                 if (_ContextMenuWrapper == null)
                 {
-                    _ContextMenuWrapper = new EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ContextMenu60CollectionEntry__Implementation__>(
+                    _ContextMenuWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ContextMenu60CollectionEntry__Implementation__>(
                             this,
                             ContextMenu__Implementation__);
                 }
@@ -143,7 +143,7 @@ namespace Kistl.App.GUI
                 return c;
             }
         }
-        private EntityCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ContextMenu60CollectionEntry__Implementation__> _ContextMenuWrapper;
+        private EntityRelationBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_ContextMenu60CollectionEntry__Implementation__> _ContextMenuWrapper;
         
 
         /// <summary>

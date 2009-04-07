@@ -13,20 +13,28 @@ namespace Kistl.App.Projekte
     {
 
         // ID is inherited
-        public override int RelationID { get { return 23; } }
-        public override object AObject
+        public int RelationID { get { return 23; } }
+        public IDataObject AObject
         {
             get
             {
                 return A;
             }
+            set
+            {
+                A = (Projekt)value;
+            }
         }
 
-        public override object BObject
+        public IDataObject BObject
         {
             get
             {
                 return B;
+            }
+            set
+            {
+                B = (Mitarbeiter)value;
             }
         }
 

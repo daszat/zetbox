@@ -14,9 +14,9 @@ namespace Kistl.App.Base
     {
     
 // ID is inherited
-        public override int RelationID { get { return 49; } }
-        public override object AObject { get { return A; } }
-        public override object BObject { get { return B; } }
+        public int RelationID { get { return 49; } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.Base.ObjectClass)value; } }
+        public IDataObject BObject { get { return B; } set { B = (Kistl.App.Base.Interface)value; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -188,9 +188,9 @@ namespace Kistl.App.Projekte
     {
     
 // ID is inherited
-        public override int RelationID { get { return 23; } }
-        public override object AObject { get { return A; } }
-        public override object BObject { get { return B; } }
+        public int RelationID { get { return 23; } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.Projekte.Projekt)value; } }
+        public IDataObject BObject { get { return B; } set { B = (Kistl.App.Projekte.Mitarbeiter)value; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -420,9 +420,9 @@ namespace Kistl.App.GUI
     {
     
 // ID is inherited
-        public override int RelationID { get { return 61; } }
-        public override object AObject { get { return A; } }
-        public override object BObject { get { return B; } }
+        public int RelationID { get { return 61; } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.GUI.Template)value; } }
+        public IDataObject BObject { get { return B; } set { B = (Kistl.App.GUI.Visual)value; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -594,9 +594,9 @@ namespace Kistl.App.Base
     {
     
 // ID is inherited
-        public override int RelationID { get { return 66; } }
-        public override object AObject { get { return A; } }
-        public override object BObject { get { return B; } }
+        public int RelationID { get { return 66; } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.Base.TypeRef)value; } }
+        public IDataObject BObject { get { return B; } set { B = (Kistl.App.Base.TypeRef)value; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -826,9 +826,9 @@ namespace Kistl.App.GUI
     {
     
 // ID is inherited
-        public override int RelationID { get { return 55; } }
-        public override object AObject { get { return A; } }
-        public override object BObject { get { return B; } }
+        public int RelationID { get { return 55; } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.GUI.Visual)value; } }
+        public IDataObject BObject { get { return B; } set { B = (Kistl.App.GUI.Visual)value; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -1000,9 +1000,9 @@ namespace Kistl.App.GUI
     {
     
 // ID is inherited
-        public override int RelationID { get { return 60; } }
-        public override object AObject { get { return A; } }
-        public override object BObject { get { return B; } }
+        public int RelationID { get { return 60; } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.GUI.Visual)value; } }
+        public IDataObject BObject { get { return B; } set { B = (Kistl.App.GUI.Visual)value; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -1175,9 +1175,9 @@ namespace Kistl.App.Zeiterfassung
     {
     
 // ID is inherited
-        public override int RelationID { get { return 42; } }
-        public override object AObject { get { return A; } }
-        public override object BObject { get { return B; } }
+        public int RelationID { get { return 42; } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.Zeiterfassung.Zeitkonto)value; } }
+        public IDataObject BObject { get { return B; } set { B = (Kistl.App.Projekte.Mitarbeiter)value; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -1349,7 +1349,6 @@ namespace Kistl.App.Projekte
     {
     
 // ID is inherited
-        public override int RelationID { get { return -1; } }
         public IDataObject ParentObject { get { return Parent; } set { Parent = (Kunde)value; } }
         public object ValueObject { get { return Value; } set { Value = (string)value; } }
 

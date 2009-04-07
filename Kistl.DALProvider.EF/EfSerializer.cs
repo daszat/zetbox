@@ -8,18 +8,18 @@ using Kistl.API;
 
 namespace Kistl.DALProvider.EF
 {
-    public static class EfSerializer
-    {
-        public static void ToStream<T, AType, BType>(EntityCollection<T> collection, System.IO.BinaryWriter sw)
-            where T : class, IEntityWithRelationships, INewCollectionEntry<AType, BType>
-        {
-            foreach (var obj in collection)
-            {
-                BinarySerializer.ToStream(true, sw);
-                obj.ToStream(sw);
-            }
+    //public static class EfSerializer
+    //{
+    //    public static void ToStream<T, AType, BType>(EntityCollection<T> collection, System.IO.BinaryWriter sw)
+    //        where T : class, IEntityWithRelationships, IRelationCollectionEntry<AType, BType>
+    //    {
+    //        foreach (var obj in collection)
+    //        {
+    //            BinarySerializer.ToStream(true, sw);
+    //            obj.ToStream(sw);
+    //        }
 
-            BinarySerializer.ToStream(false, sw);
-        }
-    }
+    //        BinarySerializer.ToStream(false, sw);
+    //    }
+    //}
 }

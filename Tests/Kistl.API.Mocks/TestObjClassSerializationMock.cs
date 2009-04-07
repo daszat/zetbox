@@ -44,7 +44,7 @@ namespace Kistl.API.Mocks
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {
-            return new SerializableType(new InterfaceType(typeof(INewCollectionEntry<LOCALINTERFACE, string>)));
+            return new SerializableType(new InterfaceType(typeof(IValueCollectionEntry<LOCALINTERFACE, string>)));
         }
 
         /// <summary>

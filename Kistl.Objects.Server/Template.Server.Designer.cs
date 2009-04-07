@@ -206,7 +206,7 @@ namespace Kistl.App.GUI
             {
                 if (_MenuWrapper == null)
                 {
-                    _MenuWrapper = new EntityCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__>(
+                    _MenuWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__>(
                             this,
                             Menu__Implementation__);
                 }
@@ -231,7 +231,7 @@ namespace Kistl.App.GUI
                 return c;
             }
         }
-        private EntityCollectionBSideWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__> _MenuWrapper;
+        private EntityRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__> _MenuWrapper;
         
 
         /// <summary>

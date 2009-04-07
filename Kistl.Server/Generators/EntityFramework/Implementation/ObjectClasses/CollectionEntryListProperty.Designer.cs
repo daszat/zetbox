@@ -46,22 +46,22 @@ RelationEnd relEnd = rel.GetEnd(endRole);
 	{
 	    if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
 	    {
-	        wrapperClass = "EntityListASideWrapper";
+	        wrapperClass = "EntityRelationASideListWrapper";
 	    }
 	    else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
 	    {
-	        wrapperClass = "EntityListBSideWrapper";
+	        wrapperClass = "EntityRelationBSideListWrapper";
 	    }
 	}
 	else
 	{
 	    if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
 	    {
-	        wrapperClass = "EntityCollectionASideWrapper";
+	        wrapperClass = "EntityRelationASideCollectionWrapper";
 	    }
 	    else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
 	    {
-	        wrapperClass = "EntityCollectionBSideWrapper";
+	        wrapperClass = "EntityRelationBSideCollectionWrapper";
 	    }
 	}
 

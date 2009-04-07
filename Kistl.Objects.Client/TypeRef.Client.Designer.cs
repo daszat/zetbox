@@ -126,7 +126,7 @@ namespace Kistl.App.Base
 				if (_GenericArguments == null)
 				{
 					_GenericArguments 
-						= new ClientListBSideWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments66CollectionEntry__Implementation__>(
+						= new ClientRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments66CollectionEntry__Implementation__>(
 							this, 
 							Context.FetchRelation<TypeRef_GenericArguments66CollectionEntry__Implementation__>(66, RelationEndRole.A, this));
 				}
@@ -134,7 +134,7 @@ namespace Kistl.App.Base
 			}
 		}
 
-		private ClientListBSideWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments66CollectionEntry__Implementation__> _GenericArguments;
+		private ClientRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments66CollectionEntry__Implementation__> _GenericArguments;
 
         /// <summary>
         /// get the referenced <see cref="System.Type"/>

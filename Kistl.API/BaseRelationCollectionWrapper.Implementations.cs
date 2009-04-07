@@ -7,14 +7,14 @@ using System.Text;
 namespace Kistl.API
 {
 
-    public abstract class CollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : BaseCollectionWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+    public abstract class RelationASideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : BaseRelationCollectionWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
-        where ENTRYTYPE : class, INewCollectionEntry<ATYPE, BTYPE>
+        where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public CollectionASideWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        public RelationASideCollectionWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
             : base(parentObject, baseCollection)
         {
         }
@@ -38,14 +38,14 @@ namespace Kistl.API
 
     }
 
-    public abstract class ListASideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : BaseListWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+    public abstract class RelationASideListWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : BaseRelationListWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
-        where ENTRYTYPE : class, INewListEntry<ATYPE, BTYPE>
+        where ENTRYTYPE : class, IRelationListEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public ListASideWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        public RelationASideListWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
             : base(parentObject, baseCollection)
         {
         }
@@ -100,13 +100,14 @@ namespace Kistl.API
         }
     }
 
-    public abstract class CollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : BaseCollectionWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+    public abstract class RelationBSideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : BaseRelationCollectionWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
-        where ENTRYTYPE : class, INewCollectionEntry<ATYPE, BTYPE>
+        where BTYPE : class, IDataObject
+        where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public CollectionBSideWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        public RelationBSideCollectionWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
             : base(parentObject, baseCollection)
         {
         }
@@ -131,13 +132,14 @@ namespace Kistl.API
 
     }
 
-    public abstract class ListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : BaseListWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+    public abstract class RelationBSideListWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : BaseRelationListWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
-        where ENTRYTYPE : class, INewListEntry<ATYPE, BTYPE>
+        where BTYPE : class, IDataObject
+        where ENTRYTYPE : class, IRelationListEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public ListBSideWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        public RelationBSideListWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
             : base(parentObject, baseCollection)
         {
         }

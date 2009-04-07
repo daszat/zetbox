@@ -165,14 +165,14 @@ namespace Kistl.API.Client
             return ((KistlContextProvider)query.Provider).GetListOf(ID, propertyName).Cast<T>().ToList();
         }
 
-        internal IList<ICollectionEntry> FetchRelation(ImplementationType imType, int relationId, RelationEndRole role, IDataObject container)
+        internal IList<IRelationCollectionEntry> FetchRelation(ImplementationType imType, int relationId, RelationEndRole role, IDataObject container)
         {
             object result = this.GetType().FindGenericMethod("FetchRelation", new Type[] { imType.Type }, new Type[] { typeof(int), typeof(RelationEndRole), typeof(IDataObject) })
                 .Invoke(this, new object[] { relationId, role, container });
-            return Kistl.API.Utils.MagicCollectionFactory.WrapAsList<ICollectionEntry>(result);
+            return Kistl.API.Utils.MagicCollectionFactory.WrapAsList<IRelationCollectionEntry>(result);
         }
 
-        public IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject container) where T : class, ICollectionEntry
+        public IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry
         {
             var key = new RelationContentKey(relationId, role, container.ID);
             if (_relationshipManager.FetchRelationCache.ContainsKey(key))
@@ -186,7 +186,7 @@ namespace Kistl.API.Client
                 foreach (IPersistenceObject obj in serverList)
                 {
                     var localobj = this.Attach(obj);
-                    _relationshipManager.ManageRelationsip((ICollectionEntry)localobj);
+                    _relationshipManager.ManageRelationsip((IRelationCollectionEntry)localobj);
                     result.Add((T)localobj);
                 }
                 _relationshipManager.FetchRelationCache[key] = result;
@@ -219,9 +219,9 @@ namespace Kistl.API.Client
         /// </summary>
         /// <param name="type">Type of the new ICollectionEntry</param>
         /// <returns>A new ICollectionEntry</returns>
-        public T CreateCollectionEntry<T>() where T : ICollectionEntry
+        public T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry
         {
-            return (T)CreateCollectionEntry(new InterfaceType(typeof(T)));
+            return (T)CreateRelationCollectionEntry(new InterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -229,9 +229,9 @@ namespace Kistl.API.Client
         /// </summary>
         /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
         /// <returns>A new ICollectionEntry</returns>
-        public ICollectionEntry CreateCollectionEntry(InterfaceType ifType)
+        public IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
-            return (ICollectionEntry)CreateInternal(ifType);
+            return (IRelationCollectionEntry)CreateInternal(ifType);
         }
 
         /// <summary>
@@ -260,19 +260,12 @@ namespace Kistl.API.Client
             CheckDisposed();
             IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
             Attach(obj);
-            if (obj is ICollectionEntry)
+            if (obj is IRelationCollectionEntry)
             {
-                _relationshipManager.ManageRelationsip((ICollectionEntry)obj);
+                _relationshipManager.ManageRelationsip((IRelationCollectionEntry)obj);
             }
             OnObjectCreated(obj);
             return obj;
-        }
-
-        public ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other)
-        {
-            // var result = _objects.OfType<ICollectionEntry>().FirstOrDefault(e => (e.AObject == one && e.BObject == other) || (e.AObject == other && e.BObject == one));
-            // return result;
-            return null;
         }
 
         /// <summary>

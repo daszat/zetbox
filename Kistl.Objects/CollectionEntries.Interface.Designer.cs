@@ -15,7 +15,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// ObjectCollectionEntry for 
     /// </summary>
-    public interface ObjectClass_ImplementsInterfaces49CollectionEntry : INewCollectionEntry<ObjectClass, Interface> 
+    public interface ObjectClass_ImplementsInterfaces49CollectionEntry : IRelationCollectionEntry<ObjectClass, Interface> 
     {
 
     }
@@ -28,7 +28,7 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// ObjectCollectionEntry for 
     /// </summary>
-    public interface Projekt_Mitarbeiter23CollectionEntry : INewListEntry<Projekt, Mitarbeiter> 
+    public interface Projekt_Mitarbeiter23CollectionEntry : IRelationListEntry<Projekt, Mitarbeiter> 
     {
 
     }
@@ -41,7 +41,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// ObjectCollectionEntry for 
     /// </summary>
-    public interface Template_Menu61CollectionEntry : INewCollectionEntry<Template, Visual> 
+    public interface Template_Menu61CollectionEntry : IRelationCollectionEntry<Template, Visual> 
     {
 
     }
@@ -54,7 +54,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// ObjectCollectionEntry for 
     /// </summary>
-    public interface TypeRef_GenericArguments66CollectionEntry : INewListEntry<TypeRef, TypeRef> 
+    public interface TypeRef_GenericArguments66CollectionEntry : IRelationListEntry<TypeRef, TypeRef> 
     {
 
     }
@@ -67,7 +67,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// ObjectCollectionEntry for 
     /// </summary>
-    public interface Visual_Children55CollectionEntry : INewCollectionEntry<Visual, Visual> 
+    public interface Visual_Children55CollectionEntry : IRelationCollectionEntry<Visual, Visual> 
     {
 
     }
@@ -80,7 +80,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// ObjectCollectionEntry for 
     /// </summary>
-    public interface Visual_ContextMenu60CollectionEntry : INewCollectionEntry<Visual, Visual> 
+    public interface Visual_ContextMenu60CollectionEntry : IRelationCollectionEntry<Visual, Visual> 
     {
 
     }
@@ -94,7 +94,7 @@ namespace Kistl.App.Zeiterfassung
     /// <summary>
     /// ObjectCollectionEntry for 
     /// </summary>
-    public interface Zeitkonto_Mitarbeiter42CollectionEntry : INewCollectionEntry<Zeitkonto, Mitarbeiter> 
+    public interface Zeitkonto_Mitarbeiter42CollectionEntry : IRelationCollectionEntry<Zeitkonto, Mitarbeiter> 
     {
 
     }

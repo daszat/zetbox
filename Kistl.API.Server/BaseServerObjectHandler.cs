@@ -54,7 +54,7 @@ namespace Kistl.API.Server
 
     public interface IServerCollectionHandler
     {
-        IEnumerable<ICollectionEntry> GetCollectionEntries(IKistlContext ctx, int relId, RelationEndRole endRole, int parentId);
+        IEnumerable<IRelationCollectionEntry> GetCollectionEntries(IKistlContext ctx, int relId, RelationEndRole endRole, int parentId);
     }
 
     /// <summary>

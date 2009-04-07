@@ -17,7 +17,7 @@ namespace Kistl.API.Server.Mocks
         {
             SubClasses = new List<TestObjClass>();
             TestNames__Implementation__ = new List<TestObjClass_TestNameCollectionEntry__Implementation__>();
-            TestNames = new TestNameCollectionWrapper(this, TestNames__Implementation__);
+            TestNames = new TestNameCollectionWrapper(this.Context, this, TestNames__Implementation__);
         }
 
         public override int ID { get; set; }

@@ -80,8 +80,8 @@
     <Compile Include="IKistlService.cs" />
     <Compile Include="KistlContextDebugger.cs" />
     <Compile Include="LinqExtensions.cs" />
-    <Compile Include="CollectionWrapper.cs" />
-    <Compile Include="CollectionWrapper.Implementations.cs" />
+    <Compile Include="BaseRelationCollectionWrapper.cs" />
+    <Compile Include="BaseRelationCollectionWrapper.Implementations.cs" />
     <Compile Include="ModuleRepositoryAttribute.cs" />
     <Compile Include="NotifyingObservableCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

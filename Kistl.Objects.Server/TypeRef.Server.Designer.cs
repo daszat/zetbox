@@ -179,7 +179,7 @@ namespace Kistl.App.Base
             {
                 if (_GenericArgumentsWrapper == null)
                 {
-                    _GenericArgumentsWrapper = new EntityListBSideWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__>(
+                    _GenericArgumentsWrapper = new EntityRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__>(
                             this,
                             GenericArguments__Implementation__);
                 }
@@ -204,7 +204,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityListBSideWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__> _GenericArgumentsWrapper;
+        private EntityRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__> _GenericArgumentsWrapper;
         
 
         /// <summary>

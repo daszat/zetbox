@@ -20,8 +20,6 @@ namespace Kistl.API.Client.Tests
     public class TestObjClass__Implementation__ : BaseClientDataObject, TestObjClass
     {
 
-        private int _ID;
-
         private string _StringProp;
 
         private int _TestEnumProp;

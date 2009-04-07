@@ -40,7 +40,7 @@ namespace Kistl.App.GUI
 				if (_Children == null)
 				{
 					_Children 
-						= new ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children55CollectionEntry__Implementation__>(
+						= new ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children55CollectionEntry__Implementation__>(
 							this, 
 							Context.FetchRelation<Visual_Children55CollectionEntry__Implementation__>(55, RelationEndRole.A, this));
 				}
@@ -48,7 +48,7 @@ namespace Kistl.App.GUI
 			}
 		}
 
-		private ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children55CollectionEntry__Implementation__> _Children;
+		private ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children55CollectionEntry__Implementation__> _Children;
 
         /// <summary>
         /// The context menu for this Visual
@@ -62,7 +62,7 @@ namespace Kistl.App.GUI
 				if (_ContextMenu == null)
 				{
 					_ContextMenu 
-						= new ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu60CollectionEntry__Implementation__>(
+						= new ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu60CollectionEntry__Implementation__>(
 							this, 
 							Context.FetchRelation<Visual_ContextMenu60CollectionEntry__Implementation__>(60, RelationEndRole.A, this));
 				}
@@ -70,7 +70,7 @@ namespace Kistl.App.GUI
 			}
 		}
 
-		private ClientCollectionBSideWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu60CollectionEntry__Implementation__> _ContextMenu;
+		private ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu60CollectionEntry__Implementation__> _ContextMenu;
 
         /// <summary>
         /// Which visual is represented here

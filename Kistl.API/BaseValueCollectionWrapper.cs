@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace Kistl.API
 {
-    public abstract class BaseValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : ICollection<TValue>
+    public abstract class ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : ICollection<TValue>
         where TParent : class, IDataObject
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
@@ -15,7 +15,7 @@ namespace Kistl.API
         protected TEntryCollection collection;
         protected IKistlContext ctx;
 
-        public BaseValueCollectionWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
+        public ValueCollectionWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
         {
             this.ctx = ctx;
             this.parent = parent;
@@ -48,7 +48,11 @@ namespace Kistl.API
         protected virtual void OnEntryRemoved(TEntry entry) { }
         #endregion
 
-        protected abstract TEntry CreateEntry();
+        protected virtual TEntry CreateEntry()
+        {
+            return ctx.CreateValueCollectionEntry<TEntry>();
+        }
+
         protected virtual TEntry InitialiseEntry(TEntry e, TValue value)
         {
             e.Parent = parent;
@@ -143,12 +147,12 @@ namespace Kistl.API
         #endregion
     }
 
-    public abstract class BaseValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : BaseValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>, IList<TValue>
+    public abstract class ValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>, IList<TValue>
         where TParent : class, IDataObject
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : IList<TEntry>
     {
-        public BaseValueListWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
+        public ValueListWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
             : base(ctx, parent, collection)
         {
         }

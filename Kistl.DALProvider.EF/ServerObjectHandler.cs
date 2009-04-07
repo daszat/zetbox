@@ -66,7 +66,7 @@ namespace Kistl.DALProvider.EF
         where CHILD : BaseServerDataObject_EntityFramework
     {
 
-        public IEnumerable<ICollectionEntry> GetCollectionEntries(
+        public IEnumerable<IRelationCollectionEntry> GetCollectionEntries(
             IKistlContext ctx,
             int relId, RelationEndRole endRole,
             int parentId)
@@ -80,12 +80,12 @@ namespace Kistl.DALProvider.EF
                 ", " + ApplicationContext.Current.ImplementationAssembly);
 
             var method = this.GetType().GetMethod("GetCollectionEntriesInternal", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            return (IEnumerable<ICollectionEntry>)method
+            return (IEnumerable<IRelationCollectionEntry>)method
                 .MakeGenericMethod(ceType)
                 .Invoke(this, new object[] { parent, rel, endRole });
         }
 
-        private IEnumerable<ICollectionEntry> GetCollectionEntriesInternal<IMPL>(PARENT parent, Relation rel, RelationEndRole endRole)
+        private IEnumerable<IRelationCollectionEntry> GetCollectionEntriesInternal<IMPL>(PARENT parent, Relation rel, RelationEndRole endRole)
             where IMPL : class, IEntityWithRelationships
         {
             var c = ((IEntityWithRelationships)(parent)).RelationshipManager
@@ -97,7 +97,7 @@ namespace Kistl.DALProvider.EF
             {
                 c.Load();
             }
-            return c.Cast<ICollectionEntry>();
+            return c.Cast<IRelationCollectionEntry>();
         }
     }
 }

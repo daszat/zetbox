@@ -545,11 +545,11 @@ namespace Kistl.API
         /// <param name="val">Collection to serialize,</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
         public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, BinaryWriter sw)
-            where T : ICollectionEntry
+            where T : IStreamable
         {
             if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
-            foreach (ICollectionEntry obj in val)
+            foreach (IStreamable obj in val)
             {
                 ToStream(true, sw);
                 SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
@@ -566,7 +566,7 @@ namespace Kistl.API
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
         public static void FromStreamCollectionEntries<T>(ICollection<T> val, BinaryReader sr)
-            where T : ICollectionEntry, new()
+            where T : IStreamable, new()
         {
             if (val == null) throw new ArgumentNullException("val");
             if (sr == null) throw new ArgumentNullException("sr");

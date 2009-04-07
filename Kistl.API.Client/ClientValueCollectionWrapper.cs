@@ -6,7 +6,7 @@ using Kistl.API;
 
 namespace Kistl.API.Client
 {
-    public class ClientValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : BaseValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
+    public class ClientValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
         where TParent : class, IDataObject
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
@@ -15,14 +15,9 @@ namespace Kistl.API.Client
             : base(ctx, parent, collection)
         {
         }
-
-        protected override TEntry CreateEntry()
-        {
-            return ctx.CreateValueCollectionEntry<TEntry>();
-        }
     }
 
-    public class ClientValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : BaseValueListWrapper<TParent, TValue, TEntry, TEntryCollection>
+    public class ClientValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueListWrapper<TParent, TValue, TEntry, TEntryCollection>
         where TParent : class, IDataObject
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : IList<TEntry>
@@ -30,11 +25,6 @@ namespace Kistl.API.Client
         public ClientValueListWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
             : base(ctx, parent, collection)
         {
-        }
-
-        protected override TEntry CreateEntry()
-        {
-            return ctx.CreateValueCollectionEntry<TEntry>();
         }
     }
 }

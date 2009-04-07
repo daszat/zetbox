@@ -10,21 +10,20 @@ using Kistl.API;
 namespace Kistl.DALProvider.EF
 {
 
-    public sealed class EntityCollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : CollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
+    public sealed class EntityRelationASideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE>
+        : RelationASideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewCollectionEntry<ATYPE, BTYPE>, new()
+        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationCollectionEntry<ATYPE, BTYPE>, new()
     {
-        public EntityCollectionASideWrapper(BTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
+        public EntityRelationASideCollectionWrapper(BTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
 
         protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
-                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
@@ -35,21 +34,20 @@ namespace Kistl.DALProvider.EF
 
     }
 
-    public sealed class EntityListASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : ListASideWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
+    public sealed class EntityRelationASideListWrapper<ATYPE, BTYPE, ENTRYTYPE>
+        : RelationASideListWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewListEntry<ATYPE, BTYPE>, new()
+        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationListEntry<ATYPE, BTYPE>, new()
     {
-        public EntityListASideWrapper(BTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
+        public EntityRelationASideListWrapper(BTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
 
         protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
-                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
@@ -59,20 +57,20 @@ namespace Kistl.DALProvider.EF
         }
     }
 
-    public sealed class EntityCollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : CollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
+    public sealed class EntityRelationBSideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE>
+        : RelationBSideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
         where ATYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewCollectionEntry<ATYPE, BTYPE>, new()
+        where BTYPE : class, IDataObject
+        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationCollectionEntry<ATYPE, BTYPE>, new()
     {
-        public EntityCollectionBSideWrapper(ATYPE parentObject, EntityCollection<ENTRYTYPE> ec)
+        public EntityRelationBSideCollectionWrapper(ATYPE parentObject, EntityCollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
 
         protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
-                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)
@@ -82,20 +80,20 @@ namespace Kistl.DALProvider.EF
         }
     }
 
-    public sealed class EntityListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : ListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
+    public sealed class EntityRelationBSideListWrapper<ATYPE, BTYPE, ENTRYTYPE>
+        : RelationBSideListWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
         where ATYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, INewListEntry<ATYPE, BTYPE>, new()
+        where BTYPE : class, IDataObject
+        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationListEntry<ATYPE, BTYPE>, new()
     {
-        public EntityListBSideWrapper(ATYPE parentObject, EntityCollection<ENTRYTYPE> ec)
+        public EntityRelationBSideListWrapper(ATYPE parentObject, EntityCollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
 
         protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
-                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(ENTRYTYPE entry)

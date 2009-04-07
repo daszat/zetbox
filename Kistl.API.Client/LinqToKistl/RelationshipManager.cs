@@ -62,7 +62,7 @@ namespace Kistl.API.Client.LinqToKistl
             _ctx = ctx;
         }
 
-        public void ManageRelationsip(ICollectionEntry obj)
+        public void ManageRelationsip(IRelationCollectionEntry obj)
         {
             obj.PropertyChangingWithValue += new PropertyChangeWithValueEventHandler(obj_PropertyChangingWithValue);
             obj.PropertyChangedWithValue += new PropertyChangeWithValueEventHandler(obj_PropertyChangedWithValue);
@@ -70,7 +70,7 @@ namespace Kistl.API.Client.LinqToKistl
 
         void obj_PropertyChangedWithValue(object sender, PropertyChangeWithValueEventArgs args)
         {
-            ICollectionEntry e = (ICollectionEntry)sender;
+            IRelationCollectionEntry e = (IRelationCollectionEntry)sender;
             if (!(args.NewValue is IDataObject)) return;
 
             if (args.PropertyName == "A")
@@ -80,10 +80,10 @@ namespace Kistl.API.Client.LinqToKistl
                 if (b == null) return; // initialization or value collection TODO: Seperate Relation from CollectionEntry
 
                 var key = new RelationContentKey(e.RelationID, RelationEndRole.A, a.ID);
-                IList<ICollectionEntry> aList = null;
+                IList<IRelationCollectionEntry> aList = null;
                 if (_fetchRelationCache.ContainsKey(key))
                 {
-                    aList = MagicCollectionFactory.WrapAsList<ICollectionEntry>(_fetchRelationCache[key]);
+                    aList = MagicCollectionFactory.WrapAsList<IRelationCollectionEntry>(_fetchRelationCache[key]);
                 }
                 else
                 {
@@ -102,10 +102,10 @@ namespace Kistl.API.Client.LinqToKistl
                 if (a == null) return; // initialization
 
                 var key = new RelationContentKey(e.RelationID, RelationEndRole.B, b.ID);
-                IList<ICollectionEntry> bList = null;
+                IList<IRelationCollectionEntry> bList = null;
                 if (_fetchRelationCache.ContainsKey(key))
                 {
-                    bList = MagicCollectionFactory.WrapAsList<ICollectionEntry>(_fetchRelationCache[key]);
+                    bList = MagicCollectionFactory.WrapAsList<IRelationCollectionEntry>(_fetchRelationCache[key]);
                 }
                 else
                 {

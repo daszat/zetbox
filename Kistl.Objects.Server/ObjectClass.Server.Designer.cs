@@ -213,7 +213,7 @@ namespace Kistl.App.Base
             {
                 if (_ImplementsInterfacesWrapper == null)
                 {
-                    _ImplementsInterfacesWrapper = new EntityCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(
+                    _ImplementsInterfacesWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(
                             this,
                             ImplementsInterfaces__Implementation__);
                 }
@@ -238,7 +238,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityCollectionBSideWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__> _ImplementsInterfacesWrapper;
+        private EntityRelationBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__> _ImplementsInterfacesWrapper;
         
 
         /// <summary>

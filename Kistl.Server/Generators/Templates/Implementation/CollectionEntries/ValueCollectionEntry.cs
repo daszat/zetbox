@@ -22,7 +22,6 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         
         protected override void ApplyRelationIdPropertyTemplate()
         {
-            this.WriteLine("        public override int RelationID { get { return -1; } }");
         }
 
         protected override void ApplyObjectGetterTemplate()

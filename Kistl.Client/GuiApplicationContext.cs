@@ -111,7 +111,7 @@ namespace Kistl.Client
         /// </summary>
         public IKistlContext GuiDataContext { get { return Kistl.API.FrozenContext.Single; } }
 
-        private IKistlContext _guiDataContextCache;
+        //private IKistlContext _guiDataContextCache;
         /// <summary>
         /// A <see cref="IKistlContext"/> for the GUI internals
         /// </summary>

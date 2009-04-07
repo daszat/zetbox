@@ -11,7 +11,7 @@ namespace Kistl.API.Tests.Skeletons
 
     public abstract class CollectionEntryTests<T>
         : IPersistenceObjectTests<T>
-        where T : ICollectionEntry, new()
+        where T : IValueCollectionEntry, new()
     {
     }
 

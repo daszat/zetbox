@@ -10,21 +10,20 @@ using Kistl.API;
 namespace Kistl.API.Client
 {
 
-    public sealed class ClientCollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : CollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE, IList<ENTRYTYPE>>, IList<ATYPE>, INotifyCollectionChanged
+    public sealed class ClientRelationASideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE>
+        : RelationASideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, IList<ENTRYTYPE>>, IList<ATYPE>, INotifyCollectionChanged
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
-        where ENTRYTYPE : BaseClientCollectionEntry, INewCollectionEntry<ATYPE, BTYPE>, new()
+        where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>, new()
     {
-        public ClientCollectionASideWrapper(BTYPE parentObject, IList<ENTRYTYPE> ec)
+        public ClientRelationASideCollectionWrapper(BTYPE parentObject, IList<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
 
         protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
-                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)
@@ -87,21 +86,20 @@ namespace Kistl.API.Client
 
     }
 
-    public sealed class ClientListASideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : ListASideWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>, INotifyCollectionChanged
+    public sealed class ClientRelationASideListWrapper<ATYPE, BTYPE, ENTRYTYPE>
+        : RelationASideListWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>, INotifyCollectionChanged
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
-        where ENTRYTYPE : BaseClientCollectionEntry, INewListEntry<ATYPE, BTYPE>, new()
+        where ENTRYTYPE : class, IRelationListEntry<ATYPE, BTYPE>, new()
     {
-        public ClientListASideWrapper(BTYPE parentObject, ICollection<ENTRYTYPE> ec)
+        public ClientRelationASideListWrapper(BTYPE parentObject, ICollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
 
         protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
-                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)
@@ -132,20 +130,20 @@ namespace Kistl.API.Client
         #endregion
     }
 
-    public sealed class ClientCollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : CollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, IList<ENTRYTYPE>>, IList<BTYPE>, INotifyCollectionChanged
+    public sealed class ClientRelationBSideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE>
+        : RelationBSideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, IList<ENTRYTYPE>>, IList<BTYPE>, INotifyCollectionChanged
         where ATYPE : class, IDataObject
-        where ENTRYTYPE : BaseClientCollectionEntry, INewCollectionEntry<ATYPE, BTYPE>, new()
+        where BTYPE : class, IDataObject
+        where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>, new()
     {
-        public ClientCollectionBSideWrapper(ATYPE parentObject, IList<ENTRYTYPE> ec)
+        public ClientRelationBSideCollectionWrapper(ATYPE parentObject, IList<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
 
         protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
-                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)
@@ -208,20 +206,20 @@ namespace Kistl.API.Client
 
     }
 
-    public sealed class ClientListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : ListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>, INotifyCollectionChanged
+    public sealed class ClientRelationBSideListWrapper<ATYPE, BTYPE, ENTRYTYPE>
+        : RelationBSideListWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>, INotifyCollectionChanged
         where ATYPE : class, IDataObject
-        where ENTRYTYPE : BaseClientCollectionEntry, INewListEntry<ATYPE, BTYPE>, new()
+        where BTYPE : class, IDataObject
+        where ENTRYTYPE : class, IRelationListEntry<ATYPE, BTYPE>, new()
     {
-        public ClientListBSideWrapper(ATYPE parentObject, ICollection<ENTRYTYPE> ec)
+        public ClientRelationBSideListWrapper(ATYPE parentObject, ICollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
 
         protected override ENTRYTYPE CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.LookupCollectionEntry(ParentObject, item as IDataObject) ??
-                (ENTRYTYPE)ParentObject.Context.CreateCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(ENTRYTYPE entry)
