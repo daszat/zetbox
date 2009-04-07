@@ -47,9 +47,9 @@ namespace Kistl.Server
                 serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
                 serviceThread.Start();
 
-                if (!serverStarted.WaitOne(20 * 1000, false))
+                if (!serverStarted.WaitOne(40 * 1000, false))
                 {
-                    throw new InvalidOperationException("Server did not started within 20 sec.");
+                    throw new InvalidOperationException("Server did not started within 40 sec.");
                 }
             }
         }
