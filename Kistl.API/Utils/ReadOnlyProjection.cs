@@ -101,7 +101,7 @@ namespace Kistl.API.Utils
 
             if (arrayIndex >= array.Length
                 || (array.Length - arrayIndex) < _list.Count)
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException("arrayIndex");
 
             for (int i = 0; i < _list.Count; i++)
             {

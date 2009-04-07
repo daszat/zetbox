@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -42,6 +43,8 @@ namespace Kistl.API
             /// Handle a null input value. Throws a ArgumentNullException by default.
             /// </summary>
             /// <returns></returns>
+            /// 
+            [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly", Justification="used as utility function in Visit(expr), thereby throwing the right exception")]
             protected virtual TResult VisitNull()
             {
                 throw new ArgumentNullException("expr");
@@ -104,6 +107,7 @@ namespace Kistl.API
         /// Handle a null input value. Throws a ArgumentNullException by default.
         /// </summary>
         /// <returns></returns>
+        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly", Justification="used as utility function in Visit(expr), thereby throwing the right exception")]
         protected virtual TResult VisitNull()
         {
             throw new ArgumentNullException("expr");

@@ -73,7 +73,7 @@ namespace Kistl.API.Server
         /// <returns></returns>
         public static IServerObjectHandler GetServerObjectHandler(Type type)
         {
-            if (type == null) throw new ArgumentNullException("Type is null");
+            if (type == null) throw new ArgumentNullException("type");
 
             lock (typeof(ServerObjectHandlerFactory))
             {

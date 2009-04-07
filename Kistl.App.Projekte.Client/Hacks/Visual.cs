@@ -92,7 +92,7 @@ namespace Kistl.App.GUI.Hacks
         public static Visual CreateDefaultVisual(this IKistlContext ctx, Method method)
         {
             if (method == null)
-                throw new ArgumentNullException("m", "cannot create Visual for null Method");
+                throw new ArgumentNullException("method", "cannot create Visual for null Method");
 
             BaseParameter bp = method.GetReturnParameter();
 

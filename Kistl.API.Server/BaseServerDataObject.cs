@@ -70,7 +70,7 @@ namespace Kistl.API.Server
 
         protected virtual string GetPropertyError(string prop)
         {
-            throw new ArgumentOutOfRangeException("columnName", "unknown property " + prop);
+            throw new ArgumentOutOfRangeException("prop", "unknown property " + prop);
         }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
