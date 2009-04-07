@@ -39,10 +39,11 @@ namespace Kistl.App.GUI
 			{
 				if (_Children == null)
 				{
+					Context.FetchRelation<Visual_Children55CollectionEntry__Implementation__>(55, RelationEndRole.A, this);
 					_Children 
 						= new ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_Children55CollectionEntry__Implementation__>(
 							this, 
-							Context.FetchRelation<Visual_Children55CollectionEntry__Implementation__>(55, RelationEndRole.A, this));
+							new RelationshipFilterASideCollection<Visual_Children55CollectionEntry__Implementation__>(this.Context, this));
 				}
 				return _Children;
 			}
@@ -61,10 +62,11 @@ namespace Kistl.App.GUI
 			{
 				if (_ContextMenu == null)
 				{
+					Context.FetchRelation<Visual_ContextMenu60CollectionEntry__Implementation__>(60, RelationEndRole.A, this);
 					_ContextMenu 
 						= new ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_ContextMenu60CollectionEntry__Implementation__>(
 							this, 
-							Context.FetchRelation<Visual_ContextMenu60CollectionEntry__Implementation__>(60, RelationEndRole.A, this));
+							new RelationshipFilterASideCollection<Visual_ContextMenu60CollectionEntry__Implementation__>(this.Context, this));
 				}
 				return _ContextMenu;
 			}

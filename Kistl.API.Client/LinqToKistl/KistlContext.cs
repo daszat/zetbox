@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
-using Kistl.API.Client.LinqToKistl;
+//using Kistl.API.Client.LinqToKistl;
 
 namespace Kistl.API.Client
 {
@@ -35,10 +35,10 @@ namespace Kistl.API.Client
         {
             CreatedAt = new StackTrace(true);
             KistlContextDebugger.Created(this);
-            _relationshipManager = new RelationshipManager(this);
+            //_relationshipManager = new RelationshipManager(this);
         }
 
-        private LinqToKistl.RelationshipManager _relationshipManager;
+        //private LinqToKistl.RelationshipManager _relationshipManager;
 
 
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification="Clarifies intent of variable")]
@@ -179,22 +179,22 @@ namespace Kistl.API.Client
 
         public IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry
         {
-            var key = new RelationContentKey(relationId, role, container.ID);
-            if (_relationshipManager.FetchRelationCache.ContainsKey(key))
-            {
-                return (List<T>)_relationshipManager.FetchRelationCache[key];
-            }
-            else
+            //var key = new RelationContentKey(relationId, role, container.ID);
+            //if (_relationshipManager.FetchRelationCache.ContainsKey(key))
+            //{
+            //    return (List<T>)_relationshipManager.FetchRelationCache[key];
+            //}
+            //else
             {
                 var serverList = Proxy.Current.FetchRelation<T>(relationId, role, container);
                 var result = new List<T>();
                 foreach (IPersistenceObject obj in serverList)
                 {
                     var localobj = this.Attach(obj);
-                    _relationshipManager.ManageRelationsip((IRelationCollectionEntry)localobj);
+                    //_relationshipManager.ManageRelationsip((IRelationCollectionEntry)localobj);
                     result.Add((T)localobj);
                 }
-                _relationshipManager.FetchRelationCache[key] = result;
+                //_relationshipManager.FetchRelationCache[key] = result;
                 return result;
             }
         }
@@ -265,10 +265,10 @@ namespace Kistl.API.Client
             CheckDisposed();
             IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
             Attach(obj);
-            if (obj is IRelationCollectionEntry)
-            {
-                _relationshipManager.ManageRelationsip((IRelationCollectionEntry)obj);
-            }
+            //if (obj is IRelationCollectionEntry)
+            //{
+            //    _relationshipManager.ManageRelationsip((IRelationCollectionEntry)obj);
+            //}
             OnObjectCreated(obj);
             return obj;
         }

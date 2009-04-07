@@ -179,10 +179,11 @@ namespace Kistl.App.Base
 			{
 				if (_ImplementsInterfaces == null)
 				{
+					Context.FetchRelation<ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(49, RelationEndRole.A, this);
 					_ImplementsInterfaces 
 						= new ClientRelationBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(
 							this, 
-							Context.FetchRelation<ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(49, RelationEndRole.A, this));
+							new RelationshipFilterASideCollection<ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__>(this.Context, this));
 				}
 				return _ImplementsInterfaces;
 			}

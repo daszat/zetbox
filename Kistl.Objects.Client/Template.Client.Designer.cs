@@ -149,10 +149,11 @@ namespace Kistl.App.GUI
 			{
 				if (_Menu == null)
 				{
+					Context.FetchRelation<Template_Menu61CollectionEntry__Implementation__>(61, RelationEndRole.A, this);
 					_Menu 
 						= new ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_Menu61CollectionEntry__Implementation__>(
 							this, 
-							Context.FetchRelation<Template_Menu61CollectionEntry__Implementation__>(61, RelationEndRole.A, this));
+							new RelationshipFilterASideCollection<Template_Menu61CollectionEntry__Implementation__>(this.Context, this));
 				}
 				return _Menu;
 			}

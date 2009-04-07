@@ -111,10 +111,11 @@ namespace Kistl.App.Zeiterfassung
 			{
 				if (_Mitarbeiter == null)
 				{
+					Context.FetchRelation<Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(42, RelationEndRole.A, this);
 					_Mitarbeiter 
 						= new ClientRelationBSideCollectionWrapper<Kistl.App.Zeiterfassung.Zeitkonto, Kistl.App.Projekte.Mitarbeiter, Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(
 							this, 
-							Context.FetchRelation<Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(42, RelationEndRole.A, this));
+							new RelationshipFilterASideCollection<Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__>(this.Context, this));
 				}
 				return _Mitarbeiter;
 			}

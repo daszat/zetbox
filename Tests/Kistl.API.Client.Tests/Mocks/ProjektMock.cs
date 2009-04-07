@@ -117,10 +117,11 @@ namespace Kistl.App.Projekte
             {
                 if (_Mitarbeiter == null)
                 {
+                    Context.FetchRelation<Projekt_Mitarbeiter23CollectionEntry__Implementation__>(23, RelationEndRole.A, this);
                     _Mitarbeiter
                         = new ClientRelationBSideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
                             this,
-                            Context.FetchRelation<Projekt_Mitarbeiter23CollectionEntry__Implementation__>(23, RelationEndRole.A, this));
+                            new RelationshipFilterASideCollection<Projekt_Mitarbeiter23CollectionEntry__Implementation__>(this.Context, this));
                 }
                 return _Mitarbeiter;
             }

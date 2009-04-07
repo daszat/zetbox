@@ -267,7 +267,6 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
-        [Ignore("Case: 669, Fix with new CodeGenerator")]
         public void Sort_Relation_n_m_m()
         {
             int maID = 0;

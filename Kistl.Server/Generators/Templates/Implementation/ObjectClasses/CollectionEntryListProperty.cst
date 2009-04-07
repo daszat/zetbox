@@ -28,10 +28,11 @@
 			{
 				if (<%= backingName %> == null)
 				{
+					Context.FetchRelation<<%= entryType %>>(<%= relId %>, RelationEndRole.<%= role %>, this);
 					<%= backingName %> 
 						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>>(
 							this, 
-							Context.FetchRelation<<%= entryType %>>(<%= relId %>, RelationEndRole.<%= role %>, this));
+							new RelationshipFilter<%= role %>SideCollection<<%= entryType %>>(this.Context, this));
 				}
 				return <%= backingName %>;
 			}

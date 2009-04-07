@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientValueCollectionWrapper.cs" />
+    <Compile Include="LinqToKistl\RelationshipFilterCollection.cs" />
     <Compile Include="OneNRelationCollection.cs" />
     <Compile Include="BaseClientDataObject.cs" />
     <Compile Include="CacheController.cs" />

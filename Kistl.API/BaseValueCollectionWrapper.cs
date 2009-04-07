@@ -102,7 +102,10 @@ namespace Kistl.API
 
         public void CopyTo(TValue[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            foreach (var i in collection)
+            {
+                array[arrayIndex++] = i.Value;
+            }
         }
 
         public int Count

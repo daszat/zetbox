@@ -125,10 +125,11 @@ namespace Kistl.App.Base
 			{
 				if (_GenericArguments == null)
 				{
+					Context.FetchRelation<TypeRef_GenericArguments66CollectionEntry__Implementation__>(66, RelationEndRole.A, this);
 					_GenericArguments 
 						= new ClientRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments66CollectionEntry__Implementation__>(
 							this, 
-							Context.FetchRelation<TypeRef_GenericArguments66CollectionEntry__Implementation__>(66, RelationEndRole.A, this));
+							new RelationshipFilterASideCollection<TypeRef_GenericArguments66CollectionEntry__Implementation__>(this.Context, this));
 				}
 				return _GenericArguments;
 			}

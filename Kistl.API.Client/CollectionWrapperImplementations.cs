@@ -11,12 +11,12 @@ namespace Kistl.API.Client
 {
 
     public sealed class ClientRelationASideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : RelationASideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, IList<ENTRYTYPE>>, IList<ATYPE>, INotifyCollectionChanged
+        : RelationASideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>/*, IList<ATYPE>*/, INotifyCollectionChanged
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>, new()
     {
-        public ClientRelationASideCollectionWrapper(BTYPE parentObject, IList<ENTRYTYPE> ec)
+        public ClientRelationASideCollectionWrapper(BTYPE parentObject, ICollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
@@ -39,36 +39,36 @@ namespace Kistl.API.Client
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, ItemFromEntry(entry)));
         }
 
-        #region IList<ATYPE> Members
+        //#region IList<ATYPE> Members
 
-        public int IndexOf(ATYPE item)
-        {
-            return Collection.IndexOf(GetEntryOrDefault(item));
-        }
+        //public int IndexOf(ATYPE item)
+        //{
+        //    return Collection.IndexOf(GetEntryOrDefault(item));
+        //}
 
-        public void Insert(int index, ATYPE item)
-        {
-            Collection.Insert(index, InitialiseEntry(CreateEntry(item), item));
-        }
+        //public void Insert(int index, ATYPE item)
+        //{
+        //    Collection.Insert(index, InitialiseEntry(CreateEntry(item), item));
+        //}
 
-        public void RemoveAt(int index)
-        {
-            Collection.RemoveAt(index);
-        }
+        //public void RemoveAt(int index)
+        //{
+        //    Collection.RemoveAt(index);
+        //}
 
-        public ATYPE this[int index]
-        {
-            get
-            {
-                return ItemFromEntry(Collection[index]);
-            }
-            set
-            {
-                Collection[index].A = value;
-            }
-        }
+        //public ATYPE this[int index]
+        //{
+        //    get
+        //    {
+        //        return ItemFromEntry(Collection[index]);
+        //    }
+        //    set
+        //    {
+        //        Collection[index].A = value;
+        //    }
+        //}
 
-        #endregion
+        //#endregion
 
         #region INotifyCollectionChanged Members
 
@@ -131,12 +131,12 @@ namespace Kistl.API.Client
     }
 
     public sealed class ClientRelationBSideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : RelationBSideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, IList<ENTRYTYPE>>, IList<BTYPE>, INotifyCollectionChanged
+        : RelationBSideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, ICollection<ENTRYTYPE>>/*, IList<BTYPE>*/, INotifyCollectionChanged
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>, new()
     {
-        public ClientRelationBSideCollectionWrapper(ATYPE parentObject, IList<ENTRYTYPE> ec)
+        public ClientRelationBSideCollectionWrapper(ATYPE parentObject, ICollection<ENTRYTYPE> ec)
             : base(parentObject, ec)
         {
         }
@@ -159,36 +159,36 @@ namespace Kistl.API.Client
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, ItemFromEntry(entry)));
         }
 
-        #region IList<BTYPE> Members
+        //#region IList<BTYPE> Members
 
-        public int IndexOf(BTYPE item)
-        {
-            return Collection.IndexOf(GetEntryOrDefault(item));
-        }
+        //public int IndexOf(BTYPE item)
+        //{
+        //    return Collection.IndexOf(GetEntryOrDefault(item));
+        //}
 
-        public void Insert(int index, BTYPE item)
-        {
-            Collection.Insert(index, InitialiseEntry(CreateEntry(item), item));
-        }
+        //public void Insert(int index, BTYPE item)
+        //{
+        //    Collection.Insert(index, InitialiseEntry(CreateEntry(item), item));
+        //}
 
-        public void RemoveAt(int index)
-        {
-            Collection.RemoveAt(index);
-        }
+        //public void RemoveAt(int index)
+        //{
+        //    Collection.RemoveAt(index);
+        //}
 
-        public BTYPE this[int index]
-        {
-            get
-            {
-                return ItemFromEntry(Collection[index]);
-            }
-            set
-            {
-                Collection[index].B = value;
-            }
-        }
+        //public BTYPE this[int index]
+        //{
+        //    get
+        //    {
+        //        return ItemFromEntry(Collection[index]);
+        //    }
+        //    set
+        //    {
+        //        Collection[index].B = value;
+        //    }
+        //}
 
-        #endregion
+        //#endregion
 
         #region INotifyCollectionChanged Members
 
