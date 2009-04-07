@@ -157,7 +157,7 @@ namespace Kistl.App.Base
                     else
                         serverList = new List<Kistl.App.Base.MethodInvocation>();
                         
-                    _MethodInvocationsWrapper = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(
+                    _MethodInvocationsWrapper = new OneNRelationCollection<Kistl.App.Base.MethodInvocation>(
                         "InvokeOnObjectClass",
                         this,
                         serverList);
@@ -166,7 +166,7 @@ namespace Kistl.App.Base
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.MethodInvocation> _MethodInvocationsWrapper;
+        private OneNRelationCollection<Kistl.App.Base.MethodInvocation> _MethodInvocationsWrapper;
 
         /// <summary>
         /// Liste aller Methoden der Objektklasse.
@@ -187,7 +187,7 @@ namespace Kistl.App.Base
                     else
                         serverList = new List<Kistl.App.Base.Method>();
                         
-                    _MethodsWrapper = new BackReferenceCollection<Kistl.App.Base.Method>(
+                    _MethodsWrapper = new OneNRelationCollection<Kistl.App.Base.Method>(
                         "ObjectClass",
                         this,
                         serverList);
@@ -196,7 +196,7 @@ namespace Kistl.App.Base
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.Method> _MethodsWrapper;
+        private OneNRelationCollection<Kistl.App.Base.Method> _MethodsWrapper;
 
         /// <summary>
         /// Modul der Objektklasse
@@ -242,13 +242,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					(oldValue.DataTypes as BackReferenceCollection<Kistl.App.Base.DataType>).RemoveWithoutClearParent(this);
+					(oldValue.DataTypes as OneNRelationCollection<Kistl.App.Base.DataType>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-					(value.DataTypes as BackReferenceCollection<Kistl.App.Base.DataType>).AddWithoutSetParent(this);
+					(value.DataTypes as OneNRelationCollection<Kistl.App.Base.DataType>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("Module", oldValue, value);
@@ -295,7 +295,7 @@ namespace Kistl.App.Base
                     else
                         serverList = new List<Kistl.App.Base.Property>();
                         
-                    _PropertiesWrapper = new BackReferenceCollection<Kistl.App.Base.Property>(
+                    _PropertiesWrapper = new OneNRelationCollection<Kistl.App.Base.Property>(
                         "ObjectClass",
                         this,
                         serverList);
@@ -304,7 +304,7 @@ namespace Kistl.App.Base
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.Property> _PropertiesWrapper;
+        private OneNRelationCollection<Kistl.App.Base.Property> _PropertiesWrapper;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.

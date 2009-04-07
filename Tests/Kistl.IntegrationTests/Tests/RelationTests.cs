@@ -23,41 +23,41 @@ namespace Kistl.IntegrationTests
         #region Set Relation once
 
         #region 1:1
-        //[Test]
-        //public void Relation_1_1_Set_Left()
-        //{
-        //    using (IKistlContext ctx = KistlContext.GetContext())
-        //    {
-        //        var rel = ctx.Create<Kistl.App.Base.Relation>();
-        //        Assert.That(rel.LeftPart, Is.Null);
+        [Test]
+        public void Relation_1_1_Set_Left()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var rel = ctx.Create<Kistl.App.Base.Relation>();
+                Assert.That(rel.A, Is.Null);
 
-        //        var prop = ctx.Create<Kistl.App.Base.ObjectReferenceProperty>();
-        //        Assert.That(prop.LeftOf, Is.Null);
+                var end = ctx.Create<Kistl.App.Base.RelationEnd>();
+                Assert.That(end.AParent, Is.Null);
 
-        //        rel.LeftPart = prop;
+                rel.A = end;
 
-        //        Assert.That(rel.LeftPart, Is.SameAs(prop));
-        //        Assert.That(prop.LeftOf, Is.SameAs(rel));
-        //    }
-        //}
+                Assert.That(rel.A, Is.SameAs(end));
+                Assert.That(end.AParent, Is.SameAs(rel));
+            }
+        }
 
-        //[Test]
-        //public void Relation_1_1_Set_Right()
-        //{
-        //    using (IKistlContext ctx = KistlContext.GetContext())
-        //    {
-        //        var rel = ctx.Create<Kistl.App.Base.Relation>();
-        //        Assert.That(rel.LeftPart, Is.Null);
+        [Test]
+        public void Relation_1_1_Set_Right()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var rel = ctx.Create<Kistl.App.Base.Relation>();
+                Assert.That(rel.A, Is.Null);
 
-        //        var prop = ctx.Create<Kistl.App.Base.ObjectReferenceProperty>();
-        //        Assert.That(prop.LeftOf, Is.Null);
+                var end = ctx.Create<Kistl.App.Base.RelationEnd>();
+                Assert.That(end.AParent, Is.Null);
 
-        //        prop.LeftOf = rel;
+                end.AParent = rel;
 
-        //        Assert.That(rel.LeftPart, Is.SameAs(prop));
-        //        Assert.That(prop.LeftOf, Is.SameAs(rel));
-        //    }
-        //}
+                Assert.That(rel.A, Is.SameAs(end));
+                Assert.That(end.AParent, Is.SameAs(rel));
+            }
+        }
         #endregion
 
         #endregion

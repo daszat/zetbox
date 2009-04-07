@@ -47,7 +47,7 @@ namespace Kistl.App.Base
                     else
                         serverList = new List<Kistl.App.Base.EnumerationEntry>();
                         
-                    _EnumerationEntriesWrapper = new BackReferenceCollection<Kistl.App.Base.EnumerationEntry>(
+                    _EnumerationEntriesWrapper = new OneNRelationCollection<Kistl.App.Base.EnumerationEntry>(
                         "Enumeration",
                         this,
                         serverList);
@@ -56,7 +56,7 @@ namespace Kistl.App.Base
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.EnumerationEntry> _EnumerationEntriesWrapper;
+        private OneNRelationCollection<Kistl.App.Base.EnumerationEntry> _EnumerationEntriesWrapper;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.

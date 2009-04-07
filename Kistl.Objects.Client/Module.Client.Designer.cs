@@ -47,7 +47,7 @@ namespace Kistl.App.Base
                     else
                         serverList = new List<Kistl.App.Base.Assembly>();
                         
-                    _AssembliesWrapper = new BackReferenceCollection<Kistl.App.Base.Assembly>(
+                    _AssembliesWrapper = new OneNRelationCollection<Kistl.App.Base.Assembly>(
                         "Module",
                         this,
                         serverList);
@@ -56,7 +56,7 @@ namespace Kistl.App.Base
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.Assembly> _AssembliesWrapper;
+        private OneNRelationCollection<Kistl.App.Base.Assembly> _AssembliesWrapper;
 
         /// <summary>
         /// Datentypendes Modules
@@ -77,7 +77,7 @@ namespace Kistl.App.Base
                     else
                         serverList = new List<Kistl.App.Base.DataType>();
                         
-                    _DataTypesWrapper = new BackReferenceCollection<Kistl.App.Base.DataType>(
+                    _DataTypesWrapper = new OneNRelationCollection<Kistl.App.Base.DataType>(
                         "Module",
                         this,
                         serverList);
@@ -86,7 +86,7 @@ namespace Kistl.App.Base
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.DataType> _DataTypesWrapper;
+        private OneNRelationCollection<Kistl.App.Base.DataType> _DataTypesWrapper;
 
         /// <summary>
         /// Description of this Module

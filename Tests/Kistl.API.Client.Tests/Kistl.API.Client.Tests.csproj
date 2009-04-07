@@ -69,7 +69,7 @@
     <Compile Include="TestObjClass.cs" />
     <Compile Include="TestObjClass_TestNameCollectionEntry.cs" />
     <Compile Include="TestProxy.cs" />
-    <Compile Include="Tests\BackReferenceCollectionTests.cs" />
+    <Compile Include="Tests\OneNRelationCollectionTests.cs" />
     <Compile Include="Tests\BaseClientCollectionEntryTests.cs" />
     <Compile Include="Tests\BaseClientDataObjectTests.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />

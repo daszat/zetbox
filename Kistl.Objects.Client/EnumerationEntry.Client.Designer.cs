@@ -96,13 +96,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					(oldValue.EnumerationEntries as BackReferenceCollection<Kistl.App.Base.EnumerationEntry>).RemoveWithoutClearParent(this);
+					(oldValue.EnumerationEntries as OneNRelationCollection<Kistl.App.Base.EnumerationEntry>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-					(value.EnumerationEntries as BackReferenceCollection<Kistl.App.Base.EnumerationEntry>).AddWithoutSetParent(this);
+					(value.EnumerationEntries as OneNRelationCollection<Kistl.App.Base.EnumerationEntry>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("Enumeration", oldValue, value);

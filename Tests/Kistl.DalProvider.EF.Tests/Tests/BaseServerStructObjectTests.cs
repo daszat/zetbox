@@ -16,6 +16,7 @@ using Kistl.DALProvider.EF;
 namespace Kistl.DalProvider.EF.Tests
 {
     [TestFixture]
+    [Ignore("To be implemented")]
     public class BaseServerStructObjectTests
         : IStreamableTests<TestPhoneStruct__Implementation__>
     {

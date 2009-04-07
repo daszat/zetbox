@@ -106,7 +106,7 @@ if (otherProp.IsList)
 
 #line 80 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("					// remove from old list\r\n");
-this.WriteObjects("					(oldValue.",  otherName , " as BackReferenceCollection<",  ownInterface , ">).RemoveWithoutClearParent(this);\r\n");
+this.WriteObjects("					(oldValue.",  otherName , " as OneNRelationCollection<",  ownInterface , ">).RemoveWithoutClearParent(this);\r\n");
 #line 83 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
         else
@@ -129,7 +129,7 @@ if (otherProp.IsList)
 
 #line 100 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("					// add to new list\r\n");
-this.WriteObjects("					(value.",  otherName , " as BackReferenceCollection<",  ownInterface , ">).AddWithoutSetParent(this);\r\n");
+this.WriteObjects("					(value.",  otherName , " as OneNRelationCollection<",  ownInterface , ">).AddWithoutSetParent(this);\r\n");
 #line 103 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
         else

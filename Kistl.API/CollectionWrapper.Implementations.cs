@@ -8,7 +8,7 @@ namespace Kistl.API
 {
 
     public abstract class CollectionASideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : CollectionEntriesWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : BaseCollectionWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where ENTRYTYPE : class, INewCollectionEntry<ATYPE, BTYPE>
@@ -39,7 +39,7 @@ namespace Kistl.API
     }
 
     public abstract class ListASideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : ListEntriesWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : BaseListWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
         where BTYPE : class, IDataObject
         where ENTRYTYPE : class, INewListEntry<ATYPE, BTYPE>
@@ -101,7 +101,7 @@ namespace Kistl.API
     }
 
     public abstract class CollectionBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : CollectionEntriesWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : BaseCollectionWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
         where ENTRYTYPE : class, INewCollectionEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
@@ -132,7 +132,7 @@ namespace Kistl.API
     }
 
     public abstract class ListBSideWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : ListEntriesWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : BaseListWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         where ATYPE : class, IDataObject
         where ENTRYTYPE : class, INewListEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>

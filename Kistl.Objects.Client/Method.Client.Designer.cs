@@ -95,7 +95,7 @@ namespace Kistl.App.Base
                     else
                         serverList = new List<Kistl.App.Base.MethodInvocation>();
                         
-                    _MethodInvokationsWrapper = new BackReferenceCollection<Kistl.App.Base.MethodInvocation>(
+                    _MethodInvokationsWrapper = new OneNRelationCollection<Kistl.App.Base.MethodInvocation>(
                         "Method",
                         this,
                         serverList);
@@ -104,7 +104,7 @@ namespace Kistl.App.Base
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.MethodInvocation> _MethodInvokationsWrapper;
+        private OneNRelationCollection<Kistl.App.Base.MethodInvocation> _MethodInvokationsWrapper;
 
         /// <summary>
         /// 
@@ -236,13 +236,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					(oldValue.Methods as BackReferenceCollection<Kistl.App.Base.Method>).RemoveWithoutClearParent(this);
+					(oldValue.Methods as OneNRelationCollection<Kistl.App.Base.Method>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-					(value.Methods as BackReferenceCollection<Kistl.App.Base.Method>).AddWithoutSetParent(this);
+					(value.Methods as OneNRelationCollection<Kistl.App.Base.Method>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("ObjectClass", oldValue, value);
@@ -289,7 +289,7 @@ namespace Kistl.App.Base
                     else
                         serverList = new List<Kistl.App.Base.BaseParameter>();
                         
-                    _ParameterWrapper = new BackReferenceCollection<Kistl.App.Base.BaseParameter>(
+                    _ParameterWrapper = new OneNRelationCollection<Kistl.App.Base.BaseParameter>(
                         "Method",
                         this,
                         serverList);
@@ -298,7 +298,7 @@ namespace Kistl.App.Base
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.BaseParameter> _ParameterWrapper;
+        private OneNRelationCollection<Kistl.App.Base.BaseParameter> _ParameterWrapper;
 
         /// <summary>
         /// Returns the Return Parameter Meta Object of this Method Meta Object.

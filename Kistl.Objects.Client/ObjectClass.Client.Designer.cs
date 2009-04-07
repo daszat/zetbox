@@ -72,13 +72,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					(oldValue.SubClasses as BackReferenceCollection<Kistl.App.Base.ObjectClass>).RemoveWithoutClearParent(this);
+					(oldValue.SubClasses as OneNRelationCollection<Kistl.App.Base.ObjectClass>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-					(value.SubClasses as BackReferenceCollection<Kistl.App.Base.ObjectClass>).AddWithoutSetParent(this);
+					(value.SubClasses as OneNRelationCollection<Kistl.App.Base.ObjectClass>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("BaseObjectClass", oldValue, value);
@@ -257,7 +257,7 @@ namespace Kistl.App.Base
                     else
                         serverList = new List<Kistl.App.Base.ObjectClass>();
                         
-                    _SubClassesWrapper = new BackReferenceCollection<Kistl.App.Base.ObjectClass>(
+                    _SubClassesWrapper = new OneNRelationCollection<Kistl.App.Base.ObjectClass>(
                         "BaseObjectClass",
                         this,
                         serverList);
@@ -266,7 +266,7 @@ namespace Kistl.App.Base
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.ObjectClass> _SubClassesWrapper;
+        private OneNRelationCollection<Kistl.App.Base.ObjectClass> _SubClassesWrapper;
 
         /// <summary>
         /// Tabellenname in der Datenbank

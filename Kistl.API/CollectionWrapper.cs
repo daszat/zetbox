@@ -8,7 +8,7 @@ namespace Kistl.API
 {
 
     /// <summary>
-    /// A wrapper around a EntityCollection of CollectionEntrys to present one "side" as normal collection.
+    /// A wrapper around a Collection of CollectionEntrys to present one "side" as normal collection.
     /// </summary>
     /// <typeparam name="ATYPE">the type of the A side</typeparam>
     /// <typeparam name="BTYPE">the type of the B side</typeparam>
@@ -16,7 +16,7 @@ namespace Kistl.API
     /// <typeparam name="ITEMTYPE">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
     /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
     /// <typeparam name="BASECOLLECTIONTYPE">the provider's collection type</typeparam>
-    public abstract class CollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+    public abstract class BaseCollectionWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
         : ICollection<ITEMTYPE>, ICollection, IEnumerable
         where ATYPE : class, IDataObject
         where PARENTTYPE : class, IDataObject
@@ -26,7 +26,7 @@ namespace Kistl.API
         protected BASECOLLECTIONTYPE Collection { get; private set; }
         protected PARENTTYPE ParentObject { get; private set; }
 
-        public CollectionEntriesWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        public BaseCollectionWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
         {
             Collection = baseCollection;
             ParentObject = parentObject;
@@ -112,12 +112,9 @@ namespace Kistl.API
         public virtual void Add(ITEMTYPE item)
         {
             ENTRYTYPE entry = InitialiseEntry(CreateEntry(item), item);
-            if (!Collection.Contains(entry))
-            {
-                OnEntryAdding(entry);
-                Collection.Add(entry);
-                OnEntryAdded(entry);
-            }
+            OnEntryAdding(entry);
+            Collection.Add(entry);
+            OnEntryAdded(entry);
         }
 
         public virtual void Clear()
@@ -208,7 +205,7 @@ namespace Kistl.API
     }
 
     /// <summary>
-    /// A wrapper around a EntityCollection of CollectionEntrys to present one "side" as normal list.
+    /// A wrapper around a List of CollectionEntrys to present one "side" as normal list.
     /// </summary>
     /// <typeparam name="ATYPE">the type of the A side</typeparam>
     /// <typeparam name="BTYPE">the type of the B side</typeparam>
@@ -216,14 +213,14 @@ namespace Kistl.API
     /// <typeparam name="ITEMTYPE">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
     /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
     /// <typeparam name="BASECOLLECTIONTYPE">the provider's collection type</typeparam>
-    public abstract class ListEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : CollectionEntriesWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>, IList<ITEMTYPE>, IList
+    public abstract class BaseListWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
+        : BaseCollectionWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>, IList<ITEMTYPE>, IList
         where ATYPE : class, IDataObject
         where PARENTTYPE : class, IDataObject
         where ENTRYTYPE : class, INewListEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public ListEntriesWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        public BaseListWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
             : base(parentObject, baseCollection)
         {
         }
@@ -308,12 +305,9 @@ namespace Kistl.API
             ENTRYTYPE newEntry = InitialiseEntry(CreateEntry(item), item);
             SetIndex(newEntry, index);
 
-            if (!Collection.Contains(newEntry))
-            {
-                OnEntryAdding(newEntry);
-                Collection.Add(newEntry);
-                OnEntryAdded(newEntry);
-            }
+            OnEntryAdding(newEntry);
+            Collection.Add(newEntry);
+            OnEntryAdded(newEntry);
         }
 
         public void RemoveAt(int index)

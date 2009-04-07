@@ -17,7 +17,7 @@ namespace Kistl.API.Client
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BackReferenceCollection<T> : IList<T>, INotifyCollectionChanged
+    public class OneNRelationCollection<T> : IList<T>, INotifyCollectionChanged
         where T : class, IDataObject
     {
         private string _propertyName;
@@ -25,20 +25,20 @@ namespace Kistl.API.Client
         private IDataObject _parent;
         List<T> collection;
 
-        public BackReferenceCollection(string propertyName, IDataObject parent)
+        public OneNRelationCollection(string propertyName, IDataObject parent)
             : this(propertyName, propertyName + Helper.PositionSuffix, parent)
         {
 
         }
 
-        public BackReferenceCollection(string propertyName, IDataObject parent, IEnumerable<T> collection)
+        public OneNRelationCollection(string propertyName, IDataObject parent, IEnumerable<T> collection)
             : this(propertyName, propertyName + Helper.PositionSuffix, parent, collection)
         {
 
         }
 
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
-        public BackReferenceCollection(string fkProperty, string posProperty, IDataObject parent)
+        public OneNRelationCollection(string fkProperty, string posProperty, IDataObject parent)
         {
             _propertyName = fkProperty;
             _posProperty = posProperty;
@@ -47,7 +47,7 @@ namespace Kistl.API.Client
         }
 
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
-        public BackReferenceCollection(string fkProperty, string posProperty, IDataObject parent, IEnumerable<T> collection)
+        public OneNRelationCollection(string fkProperty, string posProperty, IDataObject parent, IEnumerable<T> collection)
             : this(fkProperty, posProperty, parent)
         {
             this.collection = new List<T>(collection);
@@ -111,7 +111,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public void ApplyChanges(BackReferenceCollection<T> list)
+        public void ApplyChanges(OneNRelationCollection<T> list)
         {
             if (list == null) return;
             list.collection = new List<T>(this.collection);

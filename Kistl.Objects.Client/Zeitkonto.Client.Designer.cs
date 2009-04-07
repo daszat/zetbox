@@ -141,7 +141,7 @@ namespace Kistl.App.Zeiterfassung
                     else
                         serverList = new List<Kistl.App.Zeiterfassung.Taetigkeit>();
                         
-                    _TaetigkeitenWrapper = new BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit>(
+                    _TaetigkeitenWrapper = new OneNRelationCollection<Kistl.App.Zeiterfassung.Taetigkeit>(
                         "Zeitkonto",
                         this,
                         serverList);
@@ -150,7 +150,7 @@ namespace Kistl.App.Zeiterfassung
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Zeiterfassung.Taetigkeit> _TaetigkeitenWrapper;
+        private OneNRelationCollection<Kistl.App.Zeiterfassung.Taetigkeit> _TaetigkeitenWrapper;
 
 		public override InterfaceType GetInterfaceType()
 		{

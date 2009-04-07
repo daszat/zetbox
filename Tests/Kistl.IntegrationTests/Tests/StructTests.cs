@@ -13,6 +13,7 @@ using NUnit.Framework;
 namespace Kistl.IntegrationTests
 {
     [TestFixture]
+    [Ignore("To be implemented")]
     public class StructTests
     {
         Random rnd = new Random();

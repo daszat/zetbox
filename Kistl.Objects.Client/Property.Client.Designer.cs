@@ -95,7 +95,7 @@ namespace Kistl.App.Base
                     else
                         serverList = new List<Kistl.App.Base.Constraint>();
                         
-                    _ConstraintsWrapper = new BackReferenceCollection<Kistl.App.Base.Constraint>(
+                    _ConstraintsWrapper = new OneNRelationCollection<Kistl.App.Base.Constraint>(
                         "ConstrainedProperty",
                         this,
                         serverList);
@@ -104,7 +104,7 @@ namespace Kistl.App.Base
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Base.Constraint> _ConstraintsWrapper;
+        private OneNRelationCollection<Kistl.App.Base.Constraint> _ConstraintsWrapper;
 
         /// <summary>
         /// Description of this Property
@@ -308,13 +308,13 @@ namespace Kistl.App.Base
 				if (oldValue != null)
 				{
 					// remove from old list
-					(oldValue.Properties as BackReferenceCollection<Kistl.App.Base.Property>).RemoveWithoutClearParent(this);
+					(oldValue.Properties as OneNRelationCollection<Kistl.App.Base.Property>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-					(value.Properties as BackReferenceCollection<Kistl.App.Base.Property>).AddWithoutSetParent(this);
+					(value.Properties as OneNRelationCollection<Kistl.App.Base.Property>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("ObjectClass", oldValue, value);

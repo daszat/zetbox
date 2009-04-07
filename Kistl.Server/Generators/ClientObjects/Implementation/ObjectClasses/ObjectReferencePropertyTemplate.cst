@@ -78,7 +78,7 @@
 			// TODO: check whether oldValue is loaded before potentially triggering a DB Call
 %>
 					// remove from old list
-					(oldValue.<%= otherName %> as BackReferenceCollection<<%= ownInterface %>>).RemoveWithoutClearParent(this);
+					(oldValue.<%= otherName %> as OneNRelationCollection<<%= ownInterface %>>).RemoveWithoutClearParent(this);
 <%
         }
         else
@@ -98,7 +98,7 @@
         {
 %>
 					// add to new list
-					(value.<%= otherName %> as BackReferenceCollection<<%= ownInterface %>>).AddWithoutSetParent(this);
+					(value.<%= otherName %> as OneNRelationCollection<<%= ownInterface %>>).AddWithoutSetParent(this);
 <%
         }
         else

@@ -249,8 +249,9 @@ namespace Kistl.API.Client
 
         public ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other)
         {
-            var result = _objects.OfType<ICollectionEntry>().FirstOrDefault(e => (e.AObject == one && e.BObject == other) || (e.AObject == other && e.BObject == one));
-            return result;
+            // var result = _objects.OfType<ICollectionEntry>().FirstOrDefault(e => (e.AObject == one && e.BObject == other) || (e.AObject == other && e.BObject == one));
+            // return result;
+            return null;
         }
 
         /// <summary>

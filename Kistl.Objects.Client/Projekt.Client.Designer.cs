@@ -47,7 +47,7 @@ namespace Kistl.App.Projekte
                     else
                         serverList = new List<Kistl.App.Projekte.Auftrag>();
                         
-                    _AuftraegeWrapper = new BackReferenceCollection<Kistl.App.Projekte.Auftrag>(
+                    _AuftraegeWrapper = new OneNRelationCollection<Kistl.App.Projekte.Auftrag>(
                         "Projekt",
                         this,
                         serverList);
@@ -56,7 +56,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Projekte.Auftrag> _AuftraegeWrapper;
+        private OneNRelationCollection<Kistl.App.Projekte.Auftrag> _AuftraegeWrapper;
 
         /// <summary>
         /// 
@@ -101,7 +101,7 @@ namespace Kistl.App.Projekte
                     else
                         serverList = new List<Kistl.App.Zeiterfassung.Kostentraeger>();
                         
-                    _KostentraegerWrapper = new BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger>(
+                    _KostentraegerWrapper = new OneNRelationCollection<Kistl.App.Zeiterfassung.Kostentraeger>(
                         "Projekt",
                         this,
                         serverList);
@@ -110,7 +110,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Zeiterfassung.Kostentraeger> _KostentraegerWrapper;
+        private OneNRelationCollection<Kistl.App.Zeiterfassung.Kostentraeger> _KostentraegerWrapper;
 
         /// <summary>
         /// Bitte geben Sie den Kundennamen ein
@@ -201,7 +201,7 @@ namespace Kistl.App.Projekte
                     else
                         serverList = new List<Kistl.App.Projekte.Task>();
                         
-                    _TasksWrapper = new BackReferenceCollection<Kistl.App.Projekte.Task>(
+                    _TasksWrapper = new OneNRelationCollection<Kistl.App.Projekte.Task>(
                         "Projekt",
                         this,
                         serverList);
@@ -210,7 +210,7 @@ namespace Kistl.App.Projekte
             }
         }
         
-        private BackReferenceCollection<Kistl.App.Projekte.Task> _TasksWrapper;
+        private OneNRelationCollection<Kistl.App.Projekte.Task> _TasksWrapper;
 
 		public override InterfaceType GetInterfaceType()
 		{

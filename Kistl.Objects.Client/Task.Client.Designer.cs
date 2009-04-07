@@ -168,13 +168,13 @@ namespace Kistl.App.Projekte
 				if (oldValue != null)
 				{
 					// remove from old list
-					(oldValue.Tasks as BackReferenceCollection<Kistl.App.Projekte.Task>).RemoveWithoutClearParent(this);
+					(oldValue.Tasks as OneNRelationCollection<Kistl.App.Projekte.Task>).RemoveWithoutClearParent(this);
 				}
 
                 if (value != null)
                 {
 					// add to new list
-					(value.Tasks as BackReferenceCollection<Kistl.App.Projekte.Task>).AddWithoutSetParent(this);
+					(value.Tasks as OneNRelationCollection<Kistl.App.Projekte.Task>).AddWithoutSetParent(this);
                 }
 				// everything is done. fire the Changed event
 				NotifyPropertyChanged("Projekt", oldValue, value);

@@ -20,7 +20,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Debug.Assert(prop.IsList);
 
             string name = prop.PropertyName;
-            string wrapperClass = "BackReferenceCollection";
+            string wrapperClass = "OneNRelationCollection";
             var rel = RelationExtensions.Lookup(ctx, prop);
             var relEnd = rel.GetEnd(prop);
             var otherEnd = rel.GetOtherEnd(relEnd);

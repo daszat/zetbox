@@ -74,9 +74,9 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
             proj1.Mitarbeiter.Add(emp1);
             emp1.Projekte.Add(proj1);
 
-            Assert.That(proj1.Mitarbeiter, Is.EquivalentTo(new[] { emp1 }));
-            Assert.That(emp1.Projekte, Is.EquivalentTo(new[] { proj1 }));
-            Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(5));
+            Assert.That(proj1.Mitarbeiter, Is.EquivalentTo(new[] { emp1, emp1 }));
+            Assert.That(emp1.Projekte, Is.EquivalentTo(new[] { proj1, proj1 }));
+            Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(6));
         }
 
         [Test]
@@ -112,10 +112,10 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
             proj1.Mitarbeiter.Add(emp1);
             proj2.Mitarbeiter.Add(emp1);
 
-            Assert.That(emp1.Projekte, Is.EquivalentTo(new[] { proj1, proj2 }));
-            Assert.That(proj1.Mitarbeiter, Is.EquivalentTo(new[] { emp1 }));
-            Assert.That(proj2.Mitarbeiter, Is.EquivalentTo(new[] { emp1 }));
-            Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(6));
+            Assert.That(emp1.Projekte, Is.EquivalentTo(new[] { proj1, proj2, proj1, proj2 }));
+            Assert.That(proj1.Mitarbeiter, Is.EquivalentTo(new[] { emp1, emp1 }));
+            Assert.That(proj2.Mitarbeiter, Is.EquivalentTo(new[] { emp1, emp1 }));
+            Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(8));
         }
 
         [Test]
@@ -166,11 +166,11 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
             proj2.Mitarbeiter.Add(emp1);
             proj2.Mitarbeiter.Add(emp2);
 
-            Assert.That(emp1.Projekte, Is.EquivalentTo(new[] { proj1, proj2 }));
-            Assert.That(emp2.Projekte, Is.EquivalentTo(new[] { proj1, proj2 }));
-            Assert.That(proj1.Mitarbeiter, Is.EquivalentTo(new[] { emp1, emp2 }));
-            Assert.That(proj2.Mitarbeiter, Is.EquivalentTo(new[] { emp1, emp2 }));
-            Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(8));
+            Assert.That(emp1.Projekte, Is.EquivalentTo(new[] { proj1, proj2, proj1, proj2 }));
+            Assert.That(emp2.Projekte, Is.EquivalentTo(new[] { proj1, proj2, proj1, proj2 }));
+            Assert.That(proj1.Mitarbeiter, Is.EquivalentTo(new[] { emp1, emp2, emp1, emp2 }));
+            Assert.That(proj2.Mitarbeiter, Is.EquivalentTo(new[] { emp1, emp2, emp1, emp2 }));
+            Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(12));
         }
     }
 }

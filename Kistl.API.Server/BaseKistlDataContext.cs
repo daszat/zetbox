@@ -171,8 +171,9 @@ namespace Kistl.API.Server
 
         public virtual ICollectionEntry LookupCollectionEntry(IDataObject one, IDataObject other)
         {
-            var result = AttachedObjects.OfType<ICollectionEntry>().FirstOrDefault(e => (e.AObject == one && e.BObject == other) || (e.AObject == other && e.BObject == one));
-            return result;
+            //var result = AttachedObjects.OfType<ICollectionEntry>().FirstOrDefault(e => (e.AObject == one && e.BObject == other) || (e.AObject == other && e.BObject == one));
+            //return result;
+            return null;
         }
 
         /// <summary>

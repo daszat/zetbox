@@ -61,10 +61,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OneNRelationCollection.cs" />
     <Compile Include="BaseClientDataObject.cs" />
     <Compile Include="CacheController.cs" />
     <Compile Include="ClientApiContext.cs" />
-    <Compile Include="BackReferenceCollection.cs" />
     <Compile Include="CollectionWrapperImplementations.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="LinqToKistl\KistlContext.cs" />
