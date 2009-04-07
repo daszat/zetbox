@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ServiceModel;
-using System.Threading;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
-using Kistl.API.Server;
+using System.ServiceModel;
+using System.Text;
+using System.Threading;
+
 using Kistl.API.Configuration;
+using Kistl.API.Server;
 
 namespace Kistl.Server
 {
@@ -73,30 +74,41 @@ namespace Kistl.Server
         /// </summary>
         private void RunWCFServer()
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("Starting WCF Server"))
+            try
             {
-                host = new ServiceHost(typeof(Kistl.Server.KistlService),
-                    new Uri(String.IsNullOrEmpty(appCtx.Configuration.ServiceUrl) ? DefaultServiceUrl : appCtx.Configuration.ServiceUrl));
-                host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
-                host.Faulted += new EventHandler(host_Faulted);
+                using (TraceClient.TraceHelper.TraceMethodCall("Starting WCF Server"))
+                {
+                    host = new ServiceHost(typeof(Kistl.Server.KistlService),
+                        new Uri(String.IsNullOrEmpty(appCtx.Configuration.ServiceUrl) ? DefaultServiceUrl : appCtx.Configuration.ServiceUrl));
+                    host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
+                    host.Faulted += new EventHandler(host_Faulted);
 
-                host.Open();
+                    host.Open();
 
-                hostStreams = new ServiceHost(typeof(Kistl.Server.KistlServiceStreams),
-                    new Uri(String.IsNullOrEmpty(appCtx.Configuration.StreamsUrl) ? DefaultStreamsUrl : appCtx.Configuration.StreamsUrl));
-                hostStreams.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
-                hostStreams.Faulted += new EventHandler(host_Faulted);
+                    hostStreams = new ServiceHost(typeof(Kistl.Server.KistlServiceStreams),
+                        new Uri(String.IsNullOrEmpty(appCtx.Configuration.StreamsUrl) ? DefaultStreamsUrl : appCtx.Configuration.StreamsUrl));
+                    hostStreams.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
+                    hostStreams.Faulted += new EventHandler(host_Faulted);
 
-                hostStreams.Open();
+                    hostStreams.Open();
 
-                serverStarted.Set();
+                    serverStarted.Set();
+                }
+
+                Trace.TraceInformation("WCF Server started");
+
+                while (host.State == CommunicationState.Opened)
+                {
+                    Thread.Sleep(100);
+                }
             }
-
-            Trace.TraceInformation("WCF Server started");
-
-            while (host.State == CommunicationState.Opened)
+            catch (Exception error)
             {
-                Thread.Sleep(100);
+                Trace.TraceError("Unhandled exception ({0}) while running the WCF Server: {1}", error.GetType().Name, error.Message);
+                Trace.TraceError(error.ToString());
+                Trace.TraceError(error.StackTrace);
+
+                throw error;
             }
         }
 
