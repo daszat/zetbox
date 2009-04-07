@@ -79,14 +79,8 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
-  <PropertyGroup>
-    <PostBuildEvent>mkdir C:\temp\KistlCodeGen\bin\
-mkdir C:\temp\KistlCodeGen\bin\$(OutputPath)
-copy /y $(TargetDir)$(TargetName).dll C:\temp\KistlCodeGen\bin\$(OutputPath)
-copy /y $(TargetDir)$(TargetName).pdb C:\temp\KistlCodeGen\bin\$(OutputPath)
-</PostBuildEvent>
-  </PropertyGroup>
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).pdb" DestinationFolder="C:\temp\KistlCodeGen\bin\$(OutputPath)" />
+  </Target>
 </Project>

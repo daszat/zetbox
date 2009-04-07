@@ -129,18 +129,8 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
-  <PropertyGroup>
-    <!--
-        clutch for deploying generated assemblies always to the temp output directory
-        TODO: split OutputPath into DeployLocation (always absolute, depnding on Builder) and 
-        OutputPath (always relative, dependent on Configuration)
-    -->
-    <PostBuildEvent>mkdir C:\temp\KistlCodeGen\bin
-mkdir C:\temp\KistlCodeGen\bin\Debug
-robocopy $(TargetDir) C:\temp\KistlCodeGen\bin\Debug $(TargetName).dll $(TargetName).pdb
-</PostBuildEvent>
-  </PropertyGroup>
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).pdb" DestinationFolder="C:\temp\KistlCodeGen\bin\$(OutputPath)" />
+  </Target>
 </Project>
