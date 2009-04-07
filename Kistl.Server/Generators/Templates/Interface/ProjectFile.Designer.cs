@@ -97,6 +97,17 @@ this.WriteObjects("  </Target>\r\n");
 this.WriteObjects("  <Target Name=\"AfterBuild\">\r\n");
 this.WriteObjects("  </Target>\r\n");
 this.WriteObjects("  -->\r\n");
+this.WriteObjects("  <PropertyGroup>\r\n");
+this.WriteObjects("    <!--\r\n");
+this.WriteObjects("        clutch for deploying generated assemblies always to the temp output directory\r\n");
+this.WriteObjects("        TODO: split OutputPath into DeployLocation (always absolute, depnding on Builder) and \r\n");
+this.WriteObjects("        OutputPath (always relative, dependent on Configuration)\r\n");
+this.WriteObjects("    -->\r\n");
+this.WriteObjects("    <PostBuildEvent>mkdir C:\\temp\\KistlCodeGen\\bin\r\n");
+this.WriteObjects("mkdir C:\\temp\\KistlCodeGen\\bin\\Debug\r\n");
+this.WriteObjects("robocopy $(TargetDir) C:\\temp\\KistlCodeGen\\bin\\Debug $(TargetName).dll $(TargetName).pdb\r\n");
+this.WriteObjects("</PostBuildEvent>\r\n");
+this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("</Project>");
 
         }
