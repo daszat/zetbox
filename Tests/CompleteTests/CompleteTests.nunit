@@ -1,5 +1,5 @@
 ﻿<NUnitProject>
-  <Settings activeconfig="Debug" />
+  <Settings activeconfig="Debug" processModel="Single" domainUsage="Multiple" />
   <Config name="Debug" appbase="bin\Debug" configfile="CompleteTests.dll.config" binpathtype="Auto">
     <assembly path="Kistl.API.Tests.dll" />
     <assembly path="Kistl.API.Client.Tests.dll" />
