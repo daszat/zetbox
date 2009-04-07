@@ -25,25 +25,35 @@ namespace Kistl.API.AbstractConsumerTests
         {
             Assert.That(config.Server.ConnectionString, Text.Contains("_test"), "test databases should be marked with '_test' in the connection string");
 
-            Trace.TraceInformation("Resetting Database");
-            using (var db = new SqlConnection(config.Server.ConnectionString))
+            try
             {
-                db.Open();
-                var databaseScript = File.ReadAllText(CurrentDbScript);
-                using (var tx = db.BeginTransaction())
+                Trace.TraceInformation("Resetting Database");
+                using (var db = new SqlConnection(config.Server.ConnectionString))
                 {
-                    foreach (var cmdString in Regex.Split(databaseScript, "\r?\nGO\r?\n").Where(s => !String.IsNullOrEmpty(s)))
+                    db.Open();
+                    var databaseScript = File.ReadAllText(CurrentDbScript);
+                    using (var tx = db.BeginTransaction())
                     {
-                        using (var cmd = new SqlCommand(cmdString, db, tx))
+                        foreach (var cmdString in Regex.Split(databaseScript, "\r?\nGO\r?\n").Where(s => !String.IsNullOrEmpty(s)))
                         {
-                            cmd.ExecuteNonQuery();
+                            using (var cmd = new SqlCommand(cmdString, db, tx))
+                            {
+                                cmd.ExecuteNonQuery();
+                            }
                         }
+                        tx.Commit();
                     }
-                    tx.Commit();
                 }
+                Trace.TraceInformation("Done Resetting Database");
             }
-            Trace.TraceInformation("Done Resetting Database");
+            catch (Exception error)
+            {
+                Trace.TraceError("Error ({0}) while resetting database: {1}", error.GetType().Name, error.Message);
+                Trace.TraceError(error.ToString());
+                Trace.TraceError(error.StackTrace);
 
+                throw error;
+            }
         }
 
     }
