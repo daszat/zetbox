@@ -191,6 +191,12 @@ namespace Kistl.App.Projekte
 			me.PLZ = other.PLZ;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+			_EMails.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

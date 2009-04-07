@@ -243,6 +243,11 @@ namespace Kistl.App.GUI
 			this.fk_PresenterAssembly = otherImpl.fk_PresenterAssembly;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

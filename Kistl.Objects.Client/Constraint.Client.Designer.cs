@@ -190,6 +190,11 @@ namespace Kistl.App.Base
 			this.fk_ConstrainedProperty = otherImpl.fk_ConstrainedProperty;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

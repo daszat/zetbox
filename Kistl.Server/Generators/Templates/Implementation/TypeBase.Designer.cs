@@ -116,29 +116,30 @@ this.WriteObjects("			return new InterfaceType(typeof(",  DataType.ClassName , "
 this.WriteObjects("		}\r\n");
 #line 97 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyApplyChangesFromMethod();
+		ApplyAttachToContextMethod();
         ApplyClassTailTemplate();
 
-#line 100 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 101 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("#region Serializer\r\n");
 this.WriteObjects("\r\n");
-#line 104 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 105 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
 			SerializerDirection.ToStream, this.MembersToSerialize);
 		
 		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
 			SerializerDirection.FromStream, this.MembersToSerialize);
 
-#line 110 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 111 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("#endregion\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");
-#line 116 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 117 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyNamespaceTailTemplate();
 
-#line 118 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 119 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("}");
 

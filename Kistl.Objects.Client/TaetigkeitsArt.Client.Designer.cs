@@ -67,6 +67,11 @@ namespace Kistl.App.Zeiterfassung
 			me.Name = other.Name;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

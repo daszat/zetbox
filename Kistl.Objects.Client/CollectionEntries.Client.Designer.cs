@@ -174,9 +174,9 @@ namespace Kistl.App.Base
 			var other = (ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__)obj;
 			var me = (ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__)this;
 			
-			
 		}		
-
+		
+		
 
     }
 }
@@ -406,9 +406,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 			
             me.AIndex = other.AIndex;
             me.BIndex = other.BIndex;
-			
 		}		
-
+		
+		
 
     }
 }
@@ -580,9 +580,9 @@ namespace Kistl.App.GUI
 			var other = (Template_Menu61CollectionEntry__Implementation__)obj;
 			var me = (Template_Menu61CollectionEntry__Implementation__)this;
 			
-			
 		}		
-
+		
+		
 
     }
 }
@@ -812,9 +812,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 			
             me.AIndex = other.AIndex;
             me.BIndex = other.BIndex;
-			
 		}		
-
+		
+		
 
     }
 }
@@ -986,9 +986,9 @@ namespace Kistl.App.GUI
 			var other = (Visual_Children55CollectionEntry__Implementation__)obj;
 			var me = (Visual_Children55CollectionEntry__Implementation__)this;
 			
-			
 		}		
-
+		
+		
 
     }
 }
@@ -1160,9 +1160,9 @@ namespace Kistl.App.GUI
 			var other = (Visual_ContextMenu60CollectionEntry__Implementation__)obj;
 			var me = (Visual_ContextMenu60CollectionEntry__Implementation__)this;
 			
-			
 		}		
-
+		
+		
 
     }
 }
@@ -1335,9 +1335,9 @@ namespace Kistl.App.Zeiterfassung
 			var other = (Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)obj;
 			var me = (Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)this;
 			
-			
 		}		
-
+		
+		
 
     }
 }
@@ -1469,9 +1469,9 @@ public string Value { get { return B; } set { B = value; } }
 			var me = (Kunde_EMailsCollectionEntry__Implementation__)this;
 			
             me.B = other.B;
-			
 		}		
-
+		
+		
 
     }
 }

@@ -201,6 +201,11 @@ namespace Kistl.App.Test
 			this.fk_ObjectProp = otherImpl.fk_ObjectProp;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

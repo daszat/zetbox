@@ -177,6 +177,11 @@ namespace Kistl.App.Base
 			me.Namespace = other.Namespace;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

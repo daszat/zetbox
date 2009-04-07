@@ -86,35 +86,6 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
-        /// ObjectState is just for serialization....
-        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
-        public void ObjectState_CreatedObject_Modified()
-        {
-            obj.NotifyPropertyChanged("test", null, null);
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-        }
-
-        [Test]
-        /// ObjectState is just for serialization....
-        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
-        public void ObjectState_ObjectWithID_Modified()
-        {
-            ((TestObjClass__Implementation__)obj).ID = 10;
-            obj.NotifyPropertyChanged("test", null, null);
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
-        }
-
-        [Test]
-        /// ObjectState is just for serialization....
-        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
-        public void ObjectState_New_then_UnModified()
-        {
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-            ((TestObjClass__Implementation__)obj).ID = 10;
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-        }
-
-        [Test]
         public void NotifyPropertyChanged_ing()
         {
             obj.NotifyPropertyChanging("StringProp", null, null);

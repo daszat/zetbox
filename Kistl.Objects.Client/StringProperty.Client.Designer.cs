@@ -130,6 +130,11 @@ namespace Kistl.App.Base
 			me.Length = other.Length;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

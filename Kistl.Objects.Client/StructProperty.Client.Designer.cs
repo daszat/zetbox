@@ -168,6 +168,11 @@ namespace Kistl.App.Base
 			this.fk_StructDefinition = otherImpl.fk_StructDefinition;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

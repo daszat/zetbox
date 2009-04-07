@@ -297,6 +297,11 @@ namespace Kistl.App.Zeiterfassung
 			this.fk_Zeitkonto = otherImpl.fk_Zeitkonto;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

@@ -397,6 +397,11 @@ namespace Kistl.App.Base
 			this.fk_DefaultModel = otherImpl.fk_DefaultModel;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

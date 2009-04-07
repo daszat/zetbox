@@ -7,7 +7,7 @@ using System.Collections;
 namespace Kistl.API
 {
     public abstract class ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : ICollection<TValue>
-        where TParent : class, IDataObject
+        where TParent : IDataObject
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
     {
@@ -50,7 +50,7 @@ namespace Kistl.API
 
         protected virtual TEntry CreateEntry()
         {
-            return ctx.CreateValueCollectionEntry<TEntry>();
+            return (TEntry)ctx.CreateValueCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
         protected virtual TEntry InitialiseEntry(TEntry e, TValue value)
@@ -148,7 +148,7 @@ namespace Kistl.API
     }
 
     public abstract class ValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>, IList<TValue>
-        where TParent : class, IDataObject
+        where TParent : IDataObject
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : IList<TEntry>
     {

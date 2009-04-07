@@ -404,6 +404,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ValueCollectionEntryParentReference.cst</DependentUpon>
     </Compile>
+    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttachToContextTemplate.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionEntries.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\IdProperty.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cs">
@@ -698,6 +703,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Database\Database.sql" />
+    <None Include="Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>AttachToContextTemplate.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>

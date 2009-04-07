@@ -196,6 +196,11 @@ namespace Kistl.App.Base
 			this.fk_Enumeration = otherImpl.fk_Enumeration;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

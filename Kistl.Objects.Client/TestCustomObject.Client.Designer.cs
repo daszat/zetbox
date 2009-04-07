@@ -146,6 +146,11 @@ namespace Kistl.App.Test
 			me.PersonName = other.PersonName;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

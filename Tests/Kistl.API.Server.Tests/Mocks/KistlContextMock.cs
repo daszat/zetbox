@@ -9,12 +9,16 @@ namespace Kistl.API.Server.Mocks
     public class KistlContextMock : BaseKistlDataContext
     {
 
-        public readonly static Dictionary<int, TestObjClass__Implementation__> TestObjClasses = new Dictionary<int, TestObjClass__Implementation__>();
-        static KistlContextMock()
+        public Dictionary<int, TestObjClass__Implementation__> TestObjClasses = new Dictionary<int, TestObjClass__Implementation__>();
+        public KistlContextMock()
         {
             TestObjClasses[1] = new TestObjClass__Implementation__() { ID = 1 };
             TestObjClasses[3] = new TestObjClass__Implementation__() { ID = 3 };
             TestObjClasses[22] = new TestObjClass__Implementation__() { ID = 22 };
+
+            base.Attach(TestObjClasses[1]);
+            base.Attach(TestObjClasses[3]);
+            base.Attach(TestObjClasses[22]);
 
             TestObjClasses[1].BaseTestObjClass = null;
             TestObjClasses[1].StringProp = "some value (ID=1)";

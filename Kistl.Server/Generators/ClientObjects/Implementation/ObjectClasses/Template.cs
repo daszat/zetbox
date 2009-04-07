@@ -95,6 +95,12 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             this.WriteLine();
         }
 
+        protected override void ApplyAttachToContextMethod()
+        {
+            base.ApplyAttachToContextMethod();
+            this.CallTemplate("Implementation.ObjectClasses.AttachToContextTemplate", ctx, DataType);
+        }
+
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();

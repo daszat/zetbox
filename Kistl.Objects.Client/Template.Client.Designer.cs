@@ -261,6 +261,11 @@ namespace Kistl.App.GUI
 			this.fk_VisualTree = otherImpl.fk_VisualTree;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

@@ -121,6 +121,11 @@ namespace Kistl.App.Zeiterfassung
 			this.fk_Projekt = otherImpl.fk_Projekt;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

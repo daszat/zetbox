@@ -59,6 +59,8 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// </summary>
         protected virtual void ApplyApplyChangesFromMethod() { }
 
+        protected virtual void ApplyAttachToContextMethod() { }
+
         protected virtual void ApplyIDPropertyTemplate() { }
 
         /// <returns>The base class to inherit from.</returns>

@@ -42,6 +42,11 @@ namespace Kistl.App.Zeiterfassung
 
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

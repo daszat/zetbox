@@ -115,9 +115,9 @@ this.WriteObjects("			\r\n");
 ApplyChangesFromBody();
 
 #line 95 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
-this.WriteObjects("			\r\n");
 this.WriteObjects("		}		\r\n");
-this.WriteObjects("\r\n");
+this.WriteObjects("		\r\n");
+this.WriteObjects("		\r\n");
 #line 99 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyClassTailTemplate();
 

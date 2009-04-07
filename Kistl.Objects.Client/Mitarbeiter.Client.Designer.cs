@@ -186,6 +186,11 @@ namespace Kistl.App.Projekte
 			me.TelefonNummer = other.TelefonNummer;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

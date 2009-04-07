@@ -95,6 +95,7 @@ namespace <%= DataType.Module.Namespace %>
 		}
 <%
 		ApplyApplyChangesFromMethod();
+		ApplyAttachToContextMethod();
         ApplyClassTailTemplate();
 %>
 

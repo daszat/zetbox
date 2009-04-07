@@ -7,7 +7,7 @@ using Kistl.API;
 namespace Kistl.DALProvider.EF
 {
     public class EFValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
-        where TParent : class, IDataObject
+        where TParent : IDataObject
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
     {
@@ -18,7 +18,7 @@ namespace Kistl.DALProvider.EF
     }
 
     public class EFValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueListWrapper<TParent, TValue, TEntry, TEntryCollection>
-        where TParent : class, IDataObject
+        where TParent : IDataObject
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : IList<TEntry>
     {

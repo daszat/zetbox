@@ -185,7 +185,8 @@ namespace Kistl.API.Mocks
             Assert.That(obj.ID, Is.EqualTo(TestObjClassId), "wrong ID");
             // TODO: Unable to check that here -> Server evaluates ClientObjectState!
             //Assert.That(obj.ObjectState, Is.EqualTo(TestObjectState), "wrong ObjectState");
-            Assert.That(obj.BaseTestObjClass.ID, Is.EqualTo(TestBaseClassId), "wrong BaseTestObjClass.ID");
+            // TODO: Unable to check that here -> some tests works with detached objects
+            //Assert.That(obj.BaseTestObjClass.ID, Is.EqualTo(TestBaseClassId), "wrong BaseTestObjClass.ID");
             Assert.That(obj.StringProp, Is.EqualTo(TestStringPropValue), "wrong StringProp");
             // not serialized
             //Assert.That(obj.SubClasses.Select(sc => sc.ID).ToArray(), Is.EqualTo(TestSubClassesIds), "wrong SubClasses");

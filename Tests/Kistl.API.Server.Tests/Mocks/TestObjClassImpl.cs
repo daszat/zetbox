@@ -17,7 +17,7 @@ namespace Kistl.API.Server.Mocks
         {
             SubClasses = new List<TestObjClass>();
             TestNames__Implementation__ = new List<TestObjClass_TestNameCollectionEntry__Implementation__>();
-            TestNames = new TestNameCollectionWrapper(this.Context, this, TestNames__Implementation__);
+            _TestNames = null;
         }
 
         public override int ID { get; set; }
@@ -32,16 +32,22 @@ namespace Kistl.API.Server.Mocks
             get { throw new NotImplementedException(); }
         }
 
+        public int fk_BaseTestObjClass = -1;
         public TestObjClass BaseTestObjClass
         {
             get
             {
+                if (fk_BaseTestObjClass != -1 && _BaseTestObjClass == null)
+                {
+                    _BaseTestObjClass = Context.Find<TestObjClass>(fk_BaseTestObjClass);
+                }
                 return _BaseTestObjClass;
             }
             set
             {
                 NotifyPropertyChanging("BaseTestObjClass", null, null);
                 _BaseTestObjClass = value;
+                fk_BaseTestObjClass = value != null ? value.ID : -1;
                 NotifyPropertyChanged("BaseTestObjClass", null, null); ;
             }
         }
@@ -79,7 +85,18 @@ namespace Kistl.API.Server.Mocks
         }
         private TestEnum _TestEnumProp;
 
-        public ICollection<string> TestNames { get; private set; }
+        private TestNameCollectionWrapper _TestNames;
+        public ICollection<string> TestNames
+        {
+            get
+            {
+                if (_TestNames == null)
+                {
+                    _TestNames = new TestNameCollectionWrapper(this.Context, this, TestNames__Implementation__);
+                }
+                return _TestNames;
+            }
+        }
         internal List<TestObjClass_TestNameCollectionEntry__Implementation__> TestNames__Implementation__ { get; private set; }
 
         public event ToStringHandler<TestObjClass> OnToString_TestObjClass;
@@ -140,11 +157,11 @@ namespace Kistl.API.Server.Mocks
             BinarySerializer.FromStream(out id, sr);
             if (id.HasValue)
             {
-                this._BaseTestObjClass = KistlContextMock.TestObjClasses[id.Value];
+                this.fk_BaseTestObjClass = id.Value;
             }
             else
             {
-                this._BaseTestObjClass = null;
+                this.fk_BaseTestObjClass = -1;
             }
 
             BinarySerializer.FromStream(out this._StringProp, sr);

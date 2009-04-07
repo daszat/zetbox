@@ -172,6 +172,11 @@ namespace Kistl.App.Base
 			this.fk_Assembly = otherImpl.fk_Assembly;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

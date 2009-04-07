@@ -169,6 +169,11 @@ namespace Kistl.App.Zeiterfassung
 			me.MaxStunden = other.MaxStunden;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

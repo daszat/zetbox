@@ -262,6 +262,11 @@ namespace Kistl.App.GUI
 			this.fk_Property = otherImpl.fk_Property;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

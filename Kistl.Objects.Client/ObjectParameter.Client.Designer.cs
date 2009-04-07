@@ -147,6 +147,11 @@ namespace Kistl.App.Base
 			this.fk_DataType = otherImpl.fk_DataType;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]

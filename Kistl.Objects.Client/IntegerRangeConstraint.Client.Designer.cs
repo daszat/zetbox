@@ -134,6 +134,11 @@ namespace Kistl.App.Base
 			me.Min = other.Min;
 		}
 
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+		}
+
         // tail template
 
         [System.Diagnostics.DebuggerHidden()]
