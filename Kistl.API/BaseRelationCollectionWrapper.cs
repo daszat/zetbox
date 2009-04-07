@@ -27,7 +27,7 @@ namespace Kistl.API
         protected BASECOLLECTIONTYPE Collection { get; private set; }
         protected PARENTTYPE ParentObject { get; private set; }
 
-        public BaseRelationCollectionWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected BaseRelationCollectionWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
         {
             Collection = baseCollection;
             ParentObject = parentObject;
@@ -222,7 +222,7 @@ namespace Kistl.API
         where ENTRYTYPE : class, IRelationListEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public BaseRelationListWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected BaseRelationListWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
             : base(parentObject, baseCollection)
         {
         }

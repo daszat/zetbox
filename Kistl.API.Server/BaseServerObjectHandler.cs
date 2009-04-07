@@ -166,7 +166,7 @@ namespace Kistl.API.Server
         /// <summary>
         /// Events registrieren
         /// </summary>
-        public BaseServerObjectHandler()
+        protected BaseServerObjectHandler()
         {
         }
 

@@ -14,7 +14,7 @@ namespace Kistl.API
         where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public RelationASideCollectionWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected RelationASideCollectionWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
             : base(parentObject, baseCollection)
         {
         }
@@ -45,7 +45,7 @@ namespace Kistl.API
         where ENTRYTYPE : class, IRelationListEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public RelationASideListWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected RelationASideListWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
             : base(parentObject, baseCollection)
         {
         }
@@ -107,7 +107,7 @@ namespace Kistl.API
         where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public RelationBSideCollectionWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected RelationBSideCollectionWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
             : base(parentObject, baseCollection)
         {
         }
@@ -139,7 +139,7 @@ namespace Kistl.API
         where ENTRYTYPE : class, IRelationListEntry<ATYPE, BTYPE>
         where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
     {
-        public RelationBSideListWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected RelationBSideListWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
             : base(parentObject, baseCollection)
         {
         }

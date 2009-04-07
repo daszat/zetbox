@@ -15,7 +15,7 @@ namespace Kistl.API
         protected TEntryCollection collection;
         protected IKistlContext ctx;
 
-        public ValueCollectionWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
+        protected ValueCollectionWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
         {
             this.ctx = ctx;
             this.parent = parent;
@@ -152,7 +152,7 @@ namespace Kistl.API
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : IList<TEntry>
     {
-        public ValueListWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
+        protected ValueListWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
             : base(ctx, parent, collection)
         {
         }

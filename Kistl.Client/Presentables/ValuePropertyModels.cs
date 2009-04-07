@@ -62,7 +62,7 @@ namespace Kistl.Client.Presentables
 
     public abstract class PropertyModel<TValue> : PresentableModel, IDataErrorInfo
     {
-        public PropertyModel(
+        protected PropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Property bp)
             : base(appCtx, dataCtx)

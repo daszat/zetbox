@@ -57,7 +57,7 @@ namespace Kistl.Client.Presentables
     public abstract class ReferenceListPropertyModel<TElementModel, TElement>
         : PropertyModel<ICollection<TElementModel>>, IValueListModel<TElementModel>
     {
-        public ReferenceListPropertyModel(
+        protected ReferenceListPropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)

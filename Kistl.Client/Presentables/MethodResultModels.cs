@@ -11,7 +11,7 @@ namespace Kistl.Client.Presentables
 
     public abstract class MethodResultModel<TValue> : PresentableModel
     {
-        public MethodResultModel(
+        protected MethodResultModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
             : base(appCtx, dataCtx)

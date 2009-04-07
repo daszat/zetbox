@@ -49,7 +49,7 @@ namespace Kistl.Client.Presentables
 
     public abstract class CommandModel : PresentableModel, ICommand
     {
-        public CommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        protected CommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
         }
