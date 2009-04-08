@@ -61,8 +61,18 @@ namespace Kistl.Server
         public void Stop()
         {
             Trace.TraceInformation("Stopping Server");
+            
             host.Close();
             hostStreams.Close();
+
+            if (!serviceThread.Join(5000))
+            {
+                Trace.TraceInformation("Server did not stopped, aborting");
+                serviceThread.Abort();
+            }
+            serviceThread = null;
+            serverStarted.Close();
+
             Trace.TraceInformation("Server stopped");
         }
 
@@ -101,6 +111,8 @@ namespace Kistl.Server
                 {
                     Thread.Sleep(100);
                 }
+
+                Trace.TraceInformation("WCF Server: Hosts closed, exiting WCF thread");
             }
             catch (Exception error)
             {
@@ -122,11 +134,6 @@ namespace Kistl.Server
             Trace.TraceWarning("UnknownMessageReceived: {0}", e.Message.ToString());
         }
 
-        //internal void GenerateOldCode()
-        //{
-        //    GeneratorsOld.Generator.GenerateCode();
-        //}
-
         internal void GenerateCode()
         {
             Generators.Generator.GenerateCode();
@@ -143,35 +150,29 @@ namespace Kistl.Server
         }
 
         #region IDisposable Members
-        // implement Dispose Pattern after 
+        // TODO: implement Dispose Pattern after 
         // http://msdn2.microsoft.com/en-us/library/ms244737.aspx
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+            //if (disposing)
+            //{
+            //    if (host != null)
+            //    {
+            //        host.Close();
+            //        host = null;
+            //    }
+            //    if (hostStreams != null)
+            //    {
+            //        hostStreams.Close();
+            //        hostStreams = null;
+            //    }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (host != null)
-                {
-                    host.Close();
-                    host = null;
-                }
-                if (hostStreams != null)
-                {
-                    hostStreams.Close();
-                    hostStreams = null;
-                }
-
-                if (serverStarted != null)
-                {
-                    serverStarted.Close();
-                    serverStarted = null;
-                }
-            }
+            //    if (serverStarted != null)
+            //    {
+            //        serverStarted.Close();
+            //        serverStarted = null;
+            //    }
+            //}
         }
 
         #endregion

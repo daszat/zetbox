@@ -17,6 +17,16 @@ namespace Kistl.Client
         private AppDomain serverDomain = null;
         private ClientSponsor clientSponsor;
 
+        private bool unloadAppDomainOnShutDown = true;
+
+        /// <summary>
+        /// TODO: This is for NUnit...
+        /// </summary>
+        public void DisableUnloadAppDomainOnShutdown()
+        {
+            unloadAppDomainOnShutDown = false;
+        }
+
         public void Start(KistlConfig config)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("Starting AppDomain for Server"))
@@ -51,19 +61,20 @@ namespace Kistl.Client
                     {
                         clientSponsor.Unregister(serverManager as MarshalByRefObject);
                         serverManager.Stop();
+                        AssemblyLoader.Unload(serverDomain);
                     }
                     catch (Exception ex)
                     {
                         System.Diagnostics.Trace.TraceError(ex.ToString());
                     }
-                    serverManager = null;
                 }
+                serverManager = null;
 
-                if (serverDomain != null && !serverDomain.IsFinalizingForUnload())
+                if (serverDomain != null && unloadAppDomainOnShutDown)
                 {
                     AppDomain.Unload(serverDomain);
-                    serverDomain = null;
                 }
+                serverDomain = null;
             }
         }
 

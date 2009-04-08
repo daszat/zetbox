@@ -36,6 +36,24 @@ namespace Kistl.API
             init.Init(config);
         }
 
+        public static void Unload(AppDomain domain)
+        {
+            var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
+                "Kistl.API",
+                "Kistl.API.AssemblyLoaderInitializer");
+
+            init.Unload();
+        }
+
+        internal static void Unload()
+        {
+            lock (typeof(AssemblyLoader))
+            {
+                AppDomain.CurrentDomain.AssemblyResolve -= AssemblyLoader.AssemblyResolve;
+                AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve -= AssemblyLoader.ReflectionOnlyAssemblyResolve;
+            }
+        }
+
         private static bool _isInitialised = false;
         public static void EnsureInitialisation(KistlConfig config)
         {
@@ -258,6 +276,11 @@ namespace Kistl.API
         public void Init(KistlConfig config)
         {
             AssemblyLoader.EnsureInitialisation(config);
+        }
+
+        public void Unload()
+        {
+            AssemblyLoader.Unload();
         }
     }
 }

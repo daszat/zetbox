@@ -56,6 +56,7 @@ namespace Kistl.IntegrationTests
                 if (manager != null)
                 {
                     System.Diagnostics.Trace.WriteLine("Shutting down Kistl");
+                    manager.DisableUnloadAppDomainOnShutdown();
                     manager.Stop();
                     manager = null;
                     System.Diagnostics.Trace.WriteLine("Shutting down Kistl finished");

@@ -21,8 +21,7 @@ namespace Kistl.API
 
         protected override IEnumerable<ATYPE> GetItems()
         {
-            // TODO: Why??
-            return Collection.ToList().Select(e => e.A);
+            return Collection.Select(e => e.A);
         }
 
         protected override ATYPE ItemFromEntry(ENTRYTYPE entry)
@@ -53,8 +52,7 @@ namespace Kistl.API
 
         protected override IEnumerable<ATYPE> GetItems()
         {
-            // TODO: Why??
-            return Collection.ToList().Select(e => e.A);
+            return Collection.Select(e => e.A);
         }
 
         protected override IEnumerable<ATYPE> GetList()
@@ -116,8 +114,7 @@ namespace Kistl.API
 
         protected override IEnumerable<BTYPE> GetItems()
         {
-            // TODO: Why??
-            return Collection.ToList().Select(e => e.B);
+            return Collection.Select(e => e.B);
         }
 
         protected override BTYPE ItemFromEntry(ENTRYTYPE entry)
@@ -149,8 +146,7 @@ namespace Kistl.API
 
         protected override IEnumerable<BTYPE> GetItems()
         {
-            // TODO: Why??
-            return Collection.ToList().Select(e => e.B);
+            return Collection.Select(e => e.B);
         }
 
         protected override IEnumerable<BTYPE> GetList()
