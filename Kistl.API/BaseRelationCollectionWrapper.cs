@@ -31,11 +31,6 @@ namespace Kistl.API
         {
             Collection = baseCollection;
             ParentObject = parentObject;
-
-            foreach (IPersistenceObject obj in Collection)
-            {
-                obj.AttachToContext(parentObject.Context);
-            }
         }
 
         #region provider- and end-specific extension points
@@ -140,7 +135,7 @@ namespace Kistl.API
 
         public void CopyTo(ITEMTYPE[] array, int arrayIndex)
         {
-            foreach (var i in GetItems())
+            foreach (var i in GetList())
             {
                 array[arrayIndex++] = i;
             }
@@ -192,7 +187,7 @@ namespace Kistl.API
 
         public void CopyTo(Array array, int index)
         {
-            foreach (var i in GetItems())
+            foreach (var i in GetList())
             {
                 array.SetValue(i, index++);
             }
