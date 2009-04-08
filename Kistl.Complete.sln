@@ -12,8 +12,17 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.Server", "Kistl.API.Server\Kistl.API.Server.csproj", "{08902397-B9CA-43DA-8C8D-27DCEC097611}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Server", "Kistl.Objects.Server\Kistl.Objects.Server.csproj", "{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}"
+	ProjectSection(ProjectDependencies) = postProject
+		{08902397-B9CA-43DA-8C8D-27DCEC097611} = {08902397-B9CA-43DA-8C8D-27DCEC097611}
+		{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9} = {AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}
+		{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711} = {52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Client", "Kistl.Objects.Client\Kistl.Objects.Client.csproj", "{80F37FB5-66C6-45F2-9E2A-F787B141D66C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9} = {AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}
+		{DD11A4F6-24C2-4935-8042-DE49CA6B32C0} = {DD11A4F6-24C2-4935-8042-DE49CA6B32C0}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.App.Projekte.Client", "Kistl.App.Projekte.Client\Kistl.App.Projekte.Client.csproj", "{379A67E8-388E-47B6-A591-5D4C05DAFBDB}"
 EndProject
@@ -69,6 +78,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generated Code", "Generated Code", "{70BC8B82-94AE-4823-85FF-B3FEDFD60F32}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects", "Kistl.Objects\Kistl.Objects.csproj", "{0C9E6E69-309F-46F7-A936-D5762229DEB9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9} = {AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DALProvider.EF", "Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj", "{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}"
 EndProject
@@ -81,6 +93,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.Frozen", "Kistl.DalProvider.Frozen\Kistl.DalProvider.Frozen.csproj", "{F3B74A4A-BE0C-4BC2-BE32-D1A1D179B4F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Frozen", "Kistl.Objects.Frozen\Kistl.Objects.Frozen.csproj", "{CA615374-AEA3-4187-BF73-584CCD082766}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F3B74A4A-BE0C-4BC2-BE32-D1A1D179B4F7} = {F3B74A4A-BE0C-4BC2-BE32-D1A1D179B4F7}
+		{0C9E6E69-309F-46F7-A936-D5762229DEB9} = {0C9E6E69-309F-46F7-A936-D5762229DEB9}
+		{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9} = {AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.EF.Tests", "Tests\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.csproj", "{980874F0-D9C1-4EDB-8143-AD51C1E2666F}"
 EndProject
