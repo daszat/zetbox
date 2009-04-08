@@ -150,9 +150,9 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// Creates a new IPersistenceObject by System.Type. Note - this Method is depricated!
+        /// Creates a new IPersistenceObject by System.Type.
         /// </summary>
-        /// <param name="type">System.Type of the new IPersistenceObject</param>
+        /// <param name="ifType">Interface type of the new IPersistenceObject</param>
         /// <returns>A new IPersistenceObject</returns>
         public virtual IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
@@ -170,9 +170,9 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// Creates a new IPersistenceObject by System.Type. Note - this Method is depricated!
+        /// Creates a new IPersistenceObject by System.Type.
         /// </summary>
-        /// <param name="type">System.Type of the new IPersistenceObject</param>
+        /// <param name="ifType">Interface type of the new IPersistenceObject</param>
         /// <returns>A new IPersistenceObject</returns>
         public virtual IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType)
         {

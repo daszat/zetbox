@@ -95,24 +95,22 @@ namespace Kistl.API.Mocks
             ((TestDataObject)obj).BoolProperty = this.BoolProperty;
         }
 
-        public void NotifyPostSave()
-        {
-        }
-
-        public void NotifyPreSave()
-        {
-        }
-
         public void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
             if (PropertyChanged != null)
-            {
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+
+            if (PropertyChangedWithValue != null)
+                PropertyChangedWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
         public void NotifyPropertyChanging(string property, object oldValue, object newValue)
         {
+            if (PropertyChanging != null)
+                PropertyChanging(this, new PropertyChangingEventArgs(property));
+
+            if (PropertyChangingWithValue != null)
+                PropertyChangingWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
         private IKistlContext _context = null;
@@ -175,6 +173,14 @@ namespace Kistl.API.Mocks
         public InterfaceType GetInterfaceType()
         {
             return new InterfaceType(typeof(TestDataObject));
+        }
+
+        public void NotifyPreSave()
+        {
+        }
+
+        public void NotifyPostSave()
+        {
         }
     }
 }

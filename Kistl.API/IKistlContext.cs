@@ -80,8 +80,7 @@ namespace Kistl.API
         /// which reference the given <paramref name="container"/> on the side <paramref name="role"/>
         /// of the relation. Mostly for internal use.
         /// </summary>
-        /// <typeparam name="A">A-side type of the relation</typeparam>
-        /// <typeparam name="B">B-side type of the relation</typeparam>
+        /// <typeparam name="T">Type of the IRelationCollectionEntry element</typeparam>
         /// <param name="relationId">Specifies which relation to fetch</param>
         /// <param name="role">Specifies how to interpret the container</param>
         /// <param name="container">The container of the requested collection</param>

@@ -71,12 +71,20 @@ namespace Kistl.API.Mocks
 
         public void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
-            throw new NotImplementedException();
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+
+            if (PropertyChangedWithValue != null)
+                PropertyChangedWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
         public void NotifyPropertyChanging(string property, object oldValue, object newValue)
         {
-            throw new NotImplementedException();
+            if (PropertyChanging != null)
+                PropertyChanging(this, new PropertyChangingEventArgs(property));
+
+            if (PropertyChangingWithValue != null)
+                PropertyChangingWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
         public void AttachToContext(IKistlContext ctx)

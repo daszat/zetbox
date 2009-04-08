@@ -70,7 +70,6 @@ namespace Kistl.API.Server
     {
         IQueryable _source;
         IKistlContext _ctx = null;
-        Expression _filter = null;
 
         public QueryTranslatorProvider(IQueryable source, IKistlContext ctx)
         {
@@ -92,7 +91,7 @@ namespace Kistl.API.Server
         {
             if (expression == null) throw new ArgumentNullException("expression");
 
-            Type elementType = expression.Type.GetCollectionElementType();
+            Type elementType = expression.Type.FindElementTypes().First();
             IQueryable result = (IQueryable)Activator.CreateInstance(typeof(QueryTranslator<>).MakeGenericType(elementType),
                 new object[] { _source, _ctx, expression });
             return result;

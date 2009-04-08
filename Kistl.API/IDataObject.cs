@@ -79,14 +79,18 @@ namespace Kistl.API
         DataObjectState ObjectState { get; }
 
         /// <summary>
-        /// Fires an Event before an Property is changed.
+        /// Notifies that a property is beeing changing
         /// </summary>
         /// <param name="property">Propertyname</param>
+        /// <param name="oldValue">old value of the changing property</param>
+        /// <param name="newValue">new value of the changing property</param>
         void NotifyPropertyChanging(string property, object oldValue, object newValue);
         /// <summary>
-        /// Fires an Event after an Property is changed.
+        /// Notifies that a property has been changed
         /// </summary>
         /// <param name="property">Propertyname</param>
+        /// <param name="oldValue">old value of the changed property</param>
+        /// <param name="newValue">new value of the changed property</param>
         void NotifyPropertyChanged(string property, object oldValue, object newValue);
 
         /// <summary>

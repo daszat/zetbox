@@ -43,18 +43,18 @@ namespace Kistl.API.Tests
             Assert.That(Helper.IsPersistedObject(obj), Is.EqualTo(true));
         }
 
-        [TestCase(null, null)]
-        [TestCase(typeof(object), null)]
-        [TestCase(typeof(string), null)]
-        [TestCase(typeof(object[]), typeof(IEnumerable))]
-        [TestCase(typeof(string[]), typeof(IEnumerable))]
-        [TestCase(typeof(IEnumerable), typeof(IEnumerable))]
-        [TestCase(typeof(IEnumerable<string>), typeof(IEnumerable<string>))]
-        [TestCase(typeof(IList<string>), typeof(IEnumerable<string>))]
-        public void FindIEnumerable_should_find_IEnumerable(Type value, Type expected)
-        {
-            Assert.That(value.FindIEnumerable(), Is.EqualTo(expected));
-        }
+        //[TestCase(null, null)]
+        //[TestCase(typeof(object), null)]
+        //[TestCase(typeof(string), null)]
+        //[TestCase(typeof(object[]), typeof(IEnumerable))]
+        //[TestCase(typeof(string[]), typeof(IEnumerable))]
+        //[TestCase(typeof(IEnumerable), typeof(IEnumerable))]
+        //[TestCase(typeof(IEnumerable<string>), typeof(IEnumerable<string>))]
+        //[TestCase(typeof(IList<string>), typeof(IEnumerable<string>))]
+        //public void FindIEnumerable_should_find_IEnumerable(Type value, Type expected)
+        //{
+        //    Assert.That(value.FindIEnumerable(), Is.EqualTo(expected));
+        //}
 
 
 

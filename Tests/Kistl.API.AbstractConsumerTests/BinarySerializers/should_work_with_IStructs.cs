@@ -57,6 +57,27 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
 
         #endregion
 
+        #region Notify
+        public virtual void NotifyPropertyChanging(string property, object oldValue, object newValue)
+        {
+            if (PropertyChanging != null)
+                PropertyChanging(this, new PropertyChangingEventArgs(property));
+
+            if (PropertyChangingWithValue != null)
+                PropertyChangingWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
+        }
+
+        public virtual void NotifyPropertyChanged(string property, object oldValue, object newValue)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+
+            if (PropertyChangedWithValue != null)
+                PropertyChangedWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
+        }
+
+        #endregion
+
         #region INotifyPropertyChang* Members
 
         public event PropertyChangedEventHandler PropertyChanged;

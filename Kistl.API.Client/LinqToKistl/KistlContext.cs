@@ -220,40 +220,38 @@ namespace Kistl.API.Client
         }
 
         /// <summary>
-        /// Creates a new ICollectionEntry by Type
+        /// Creates a new IRelationCollectionEntry by Type
         /// </summary>
-        /// <param name="type">Type of the new ICollectionEntry</param>
-        /// <returns>A new ICollectionEntry</returns>
+        /// <typeparam name="T">Type of the new IRelationCollectionEntry</typeparam>
+        /// <returns>A new IRelationCollectionEntry</returns>
         public T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry
         {
             return (T)CreateRelationCollectionEntry(new InterfaceType(typeof(T)));
         }
 
         /// <summary>
-        /// Creates a new ICollectionEntry.
+        /// Creates a new IRelationCollectionEntry.
         /// </summary>
-        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
-        /// <returns>A new ICollectionEntry</returns>
+        /// <returns>A new IRelationCollectionEntry</returns>
         public IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
             return (IRelationCollectionEntry)CreateInternal(ifType);
         }
 
         /// <summary>
-        /// Creates a new ICollectionEntry by Type
+        /// Creates a new IValueCollectionEntry by Type
         /// </summary>
-        /// <param name="type">Type of the new ICollectionEntry</param>
-        /// <returns>A new ICollectionEntry</returns>
+        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
+        /// <returns>A new IValueCollectionEntry</returns>
         public T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry
         {
             return (T)CreateValueCollectionEntry(new InterfaceType(typeof(T)));
         }
 
         /// <summary>
-        /// Creates a new ICollectionEntry.
+        /// Creates a new IValueCollectionEntry.
         /// </summary>
-        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
-        /// <returns>A new ICollectionEntry</returns>
+        /// <returns>A new IValueCollectionEntry</returns>
         public IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType)
         {
             return (IValueCollectionEntry)CreateInternal(ifType);
@@ -453,7 +451,7 @@ namespace Kistl.API.Client
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
         /// </summary>
-        /// <param name="type">Object Type of the Object to find.</param>
+        /// <param name="ifType">Interface Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public IDataObject Find(InterfaceType ifType, int ID)

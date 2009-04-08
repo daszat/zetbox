@@ -461,72 +461,72 @@ namespace Kistl.API
             return null;
         }
 
-        /// <summary>
-        /// Finds the return type of the first implemented IEnumerable
-        /// </summary>
-        /// <param name="seqType"></param>
-        /// <returns></returns>
-        [Obsolete("Use the array variant FindElementTypes instead")]
-        public static Type GetCollectionElementType(this Type seqType)
-        {
-            Type ienum = FindIEnumerable(seqType);
-            if (ienum == null) return seqType;
-            return ienum.GetGenericArguments()[0];
-        }
+        ///// <summary>
+        ///// Finds the return type of the first implemented IEnumerable
+        ///// </summary>
+        ///// <param name="seqType"></param>
+        ///// <returns></returns>
+        //[Obsolete("Use the array variant FindElementTypes instead")]
+        //public static Type GetCollectionElementType(this Type seqType)
+        //{
+        //    Type ienum = FindIEnumerable(seqType);
+        //    if (ienum == null) return seqType;
+        //    return ienum.GetGenericArguments()[0];
+        //}
 
-        /// <summary>
-        /// Finds the first implemented by seqType from this List:
-        /// <list type="*">
-        /// <item>IEnumerable&lt;X&gt;,</item>
-        /// <item>IEnumerable,</item>
-        /// <item>null</item>
-        /// </list>
-        /// </summary>
-        /// <param name="seqType"></param>
-        /// <returns></returns>
-        [Obsolete("Use the array variant FindIEnumerables instead")]
-        public static Type FindIEnumerable(this Type seqType)
-        {
-            if (seqType == null || seqType == typeof(string))
-                return null;
+        ///// <summary>
+        ///// Finds the first implemented by seqType from this List:
+        ///// <list type="*">
+        ///// <item>IEnumerable&lt;X&gt;,</item>
+        ///// <item>IEnumerable,</item>
+        ///// <item>null</item>
+        ///// </list>
+        ///// </summary>
+        ///// <param name="seqType"></param>
+        ///// <returns></returns>
+        //[Obsolete("Use the array variant FindIEnumerables instead")]
+        //public static Type FindIEnumerable(this Type seqType)
+        //{
+        //    if (seqType == null || seqType == typeof(string))
+        //        return null;
 
-            if (seqType.IsArray)
-                return typeof(IEnumerable);
+        //    if (seqType.IsArray)
+        //        return typeof(IEnumerable);
 
-            if (seqType == typeof(IEnumerable))
-                return seqType;
+        //    if (seqType == typeof(IEnumerable))
+        //        return seqType;
 
-            // quick shortcut: guess that generic arguments often end up in
-            // an IEnumerable<>, also handles coincidentally IEnumerable<>s
-            if (seqType.IsGenericType)
-            {
-                foreach (Type arg in seqType.GetGenericArguments())
-                {
-                    Type ienum = typeof(IEnumerable<>).MakeGenericType(arg);
-                    if (ienum.IsAssignableFrom(seqType))
-                    {
-                        return ienum;
-                    }
-                }
-            }
+        //    // quick shortcut: guess that generic arguments often end up in
+        //    // an IEnumerable<>, also handles coincidentally IEnumerable<>s
+        //    if (seqType.IsGenericType)
+        //    {
+        //        foreach (Type arg in seqType.GetGenericArguments())
+        //        {
+        //            Type ienum = typeof(IEnumerable<>).MakeGenericType(arg);
+        //            if (ienum.IsAssignableFrom(seqType))
+        //            {
+        //                return ienum;
+        //            }
+        //        }
+        //    }
 
-            Type[] ifaces = seqType.GetInterfaces();
-            if (ifaces != null && ifaces.Length > 0)
-            {
-                foreach (Type iface in ifaces)
-                {
-                    Type ienum = FindIEnumerable(iface);
-                    if (ienum != null) return ienum;
-                }
-            }
+        //    Type[] ifaces = seqType.GetInterfaces();
+        //    if (ifaces != null && ifaces.Length > 0)
+        //    {
+        //        foreach (Type iface in ifaces)
+        //        {
+        //            Type ienum = FindIEnumerable(iface);
+        //            if (ienum != null) return ienum;
+        //        }
+        //    }
 
-            if (seqType.BaseType != null && seqType.BaseType != typeof(object))
-            {
-                return FindIEnumerable(seqType.BaseType);
-            }
+        //    if (seqType.BaseType != null && seqType.BaseType != typeof(object))
+        //    {
+        //        return FindIEnumerable(seqType.BaseType);
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
         /// <summary>
         /// Finds all implemented IEnumerables of the given Type

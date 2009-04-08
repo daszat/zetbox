@@ -20,8 +20,9 @@ namespace Kistl.API.Server
     public interface IServerObjectHandler
     {
         /// <summary>
-        /// Implementiert den GetList Befehl.
+        /// 
         /// </summary>
+        /// <param name="ctx"></param>
         /// <param name="maxListCount"></param>
         /// <param name="filter"></param>
         /// <param name="orderBy"></param>
@@ -31,6 +32,7 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den GetListOf Befehl.
         /// </summary>
+        /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns></returns>
@@ -39,6 +41,7 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den GetObject Befehl.
         /// </summary>
+        /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
         IDataObject GetObject(IKistlContext ctx, int ID);
@@ -203,6 +206,7 @@ namespace Kistl.API.Server
         /// GetListOf can be used to get the list of values in the property 
         /// <code>property</code> of the object with the <code>ID</code>
         /// </summary>
+        /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns>the list of values in the property</returns>
@@ -219,29 +223,15 @@ namespace Kistl.API.Server
         /// <summary>
         /// Gibt eine typisierte Objektinstanz zurück.
         /// </summary>
+        /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns>a typed object</returns>
         protected abstract T GetObjectInstance(IKistlContext ctx, int ID);
-        //{
-        //    using (TraceClient.TraceHelper.TraceMethodCall(string.Format("ID = {0}", ID)))
-        //    {
-        //        if (ID < Kistl.API.Helper.INVALIDID)
-        //        {
-        //             new object -> look in current context
-        //            ObjectContext ctx = (ObjectContext)KistlDataContext.Current;
-        //            return (T)ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
-        //                .FirstOrDefault(e => e.Entity is IDataObject && ((IDataObject)e.Entity).ID == ID).Entity;
-        //        }
-        //        else
-        //        {
-        //            return KistlDataContext.Current.GetQuery<T>().FirstOrDefault<T>(a => a.ID == ID);
-        //        }
-        //    }
-        //}
 
         /// <summary>
         /// Implementiert den GetObject Befehl.
         /// </summary>
+        /// <param name="ctx"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
         public IDataObject GetObject(IKistlContext ctx, int ID)
@@ -255,7 +245,8 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
-        /// <param name="objects"></param>
+        /// <param name="ctx"></param>
+        /// <param name="objList"></param>
         /// <returns></returns>
         public virtual IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objList)
         {

@@ -76,7 +76,7 @@ namespace Kistl.API.Utils
 
 
         /// <summary>
-        /// Wrap a list-like objects into an IList&lt;T&gt;. Currently works with IList&lt;t>s, ILists and ICollection&ltT>s
+        /// Wrap a list-like objects into an IList&lt;T&gt;. Currently works with IList&lt;T&gt;s, ILists and ICollection&lt;T&gt;s
         /// </summary>
         public static IList<T> WrapAsList<T>(object collection)
         {

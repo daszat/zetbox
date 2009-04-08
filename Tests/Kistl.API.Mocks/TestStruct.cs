@@ -14,13 +14,13 @@ namespace Kistl.API.Mocks
     public class TestStruct__Implementation__ : BaseStructObject, TestStruct
     {
 
-        public void ToStream(BinaryWriter sw)
+        public override void ToStream(BinaryWriter sw)
         {
             base.ToStream(sw);
             BinarySerializer.ToStream(TestProperty, sw);
         }
 
-        public void FromStream(BinaryReader sr)
+        public override void FromStream(BinaryReader sr)
         {
             base.FromStream(sr);
             string _tmp;

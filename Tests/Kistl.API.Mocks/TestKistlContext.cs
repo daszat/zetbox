@@ -137,6 +137,15 @@ namespace Kistl.API.Mocks
 
         public bool IsReadonly { get { return false; } }
 
+        public void NotifyObjectCreated()
+        {
+            if (ObjectCreated != null) ObjectCreated(this, new GenericEventArgs<IPersistenceObject>());
+        }
+
+        public void NotifyObjectDeleted()
+        {
+            if (ObjectDeleted != null) ObjectDeleted(this, new GenericEventArgs<IPersistenceObject>());
+        }
 
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 

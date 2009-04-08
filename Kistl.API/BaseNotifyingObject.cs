@@ -39,9 +39,11 @@ namespace Kistl.API
         public event PropertyChangeWithValueEventHandler PropertyChangingWithValue;
 
         /// <summary>
-        /// Property is beeing changing
+        /// Notifies that a property is beeing changing
         /// </summary>
-        /// <param name="property"></param>
+        /// <param name="property">Propertyname</param>
+        /// <param name="oldValue">old value of the changing property</param>
+        /// <param name="newValue">new value of the changing property</param>
         public virtual void NotifyPropertyChanging(string property, object oldValue, object newValue)
         {
             if (notifications == null)
@@ -51,9 +53,11 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Property has been changed
+        /// Notifies that a property has been changed
         /// </summary>
-        /// <param name="property"></param>
+        /// <param name="property">Propertyname</param>
+        /// <param name="oldValue">old value of the changed property</param>
+        /// <param name="newValue">new value of the changed property</param>
         public virtual void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
             if (notifications == null)
@@ -68,6 +72,12 @@ namespace Kistl.API
             }
         }
 
+        /// <summary>
+        /// Fires PropertyChanging and PropertyChangingWithValue events
+        /// </summary>
+        /// <param name="property">Propertyname</param>
+        /// <param name="oldValue">old value of the changed property</param>
+        /// <param name="newValue">new value of the changed property</param>
         protected virtual void OnPropertyChanging(string property, object oldValue, object newValue)
         {
             if (PropertyChanging != null)
@@ -77,6 +87,12 @@ namespace Kistl.API
                 PropertyChangingWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
+        /// <summary>
+        /// Fires PropertyChanged and PropertyChangedWithValue events
+        /// </summary>
+        /// <param name="property">Propertyname</param>
+        /// <param name="oldValue">old value of the changed property</param>
+        /// <param name="newValue">new value of the changed property</param>
         protected virtual void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             if (PropertyChanged != null)
@@ -87,6 +103,10 @@ namespace Kistl.API
         }
 
         private List<string> notifications = null;
+        /// <summary>
+        /// Records notifications. PropertyChanged &amp; PropertyChanging will not be fired until <see cref="PlaybackNotifications"/> is called.
+        /// This function does nothing if it is called more then once.
+        /// </summary>
         public void RecordNotifications()
         {
             if (notifications == null)
@@ -95,6 +115,10 @@ namespace Kistl.API
             }
         }
 
+        /// <summary>
+        /// Playback all recorded notifications. Only the PropertyChanged event is fired
+        /// This function does nothing if it is called more then once.
+        /// </summary>
         public void PlaybackNotifications()
         {
             if (notifications == null) return;
@@ -104,7 +128,7 @@ namespace Kistl.API
             var localCopy = notifications;
             notifications = null;
 
-            if (PropertyChanged != null)
+            if (PropertyChanged != null || PropertyChangedWithValue != null)
             {
                 localCopy.ForEach(p => OnPropertyChanged(p, null, null));
             }

@@ -212,7 +212,7 @@ namespace Kistl.API.Client
                 }
                 AddNewLocalObjects(_type, result);
 
-                IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, typeof(T).GetCollectionElementType());
+                IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, typeof(T).FindElementTypes().First());
                 return (T)Activator.CreateInstance(typeof(T), selectResult.GetEnumerator());
             }
             else
@@ -286,7 +286,7 @@ namespace Kistl.API.Client
         public IQueryable CreateQuery(Expression expression)
         {
             System.Diagnostics.Trace.WriteLine(string.Format("CreateQuery {0}", expression.ToString()));
-            Type elementType = expression.Type.GetCollectionElementType();
+            Type elementType = expression.Type.FindElementTypes().First();
             return (IQueryable)Activator.CreateInstance(typeof(KistlContextQuery<>)
                 .MakeGenericType(elementType), new object[] { _context, _type, this, expression });
         }
