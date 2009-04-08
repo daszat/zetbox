@@ -65,7 +65,6 @@ namespace Kistl.Server.Generators
                             var proj = new Project(engine);
                             proj.Load(projectFileName);
                             var defaultPropertyGroup = proj.AddNewPropertyGroup(false);
-                            defaultPropertyGroup.AddNewProperty("SourcePath", @"P:\Kistl", true);
                             defaultPropertyGroup.AddNewProperty("OutputPath", binPath, true);
 
                             if (!engine.BuildProject(proj))

@@ -34,11 +34,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation
             this.WriteLine(@"    </Reference>");
 
             // Client API
-            this.WriteLine(@"    <ProjectReference Include=""$(SourcePath)\Kistl.API.Client\Kistl.API.Client.csproj"">");
-            this.WriteLine(@"      <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>");
-            this.WriteLine(@"      <Name>Kistl.API.Client</Name>");
-            this.WriteLine(@"      <Private>True</Private>");
-            this.WriteLine(@"    </ProjectReference>");
+            this.WriteLine(@"    <Reference Include=""Kistl.API.Client"" />");
         }
 
     }
