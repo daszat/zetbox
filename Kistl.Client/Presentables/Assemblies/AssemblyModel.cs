@@ -25,16 +25,17 @@ namespace Kistl.Client.Presentables.Assemblies
 
         #region Public Interface
 
-        private ReadOnlyProjection<Type, SystemTypeModel> _typeList;
-        public IReadOnlyCollection<SystemTypeModel> Types
+        private ReadOnlyProjectedList<Type, SystemTypeModel> _typeList;
+        public IReadOnlyList<SystemTypeModel> Types
         {
             get
             {
                 if (_typeList == null)
                 {
-                    _typeList = new ReadOnlyProjection<Type,SystemTypeModel>(
+                    _typeList = new ReadOnlyProjectedList<Type,SystemTypeModel>(
                         System.Reflection.Assembly.ReflectionOnlyLoad(_assembly.AssemblyName).GetTypes(),
-                        t => Factory.CreateSpecificModel<SystemTypeModel>(DataContext, t));
+                        t => Factory.CreateSpecificModel<SystemTypeModel>(DataContext, t),
+                        mdl => mdl.Value);
                 }
                 return _typeList;
             }

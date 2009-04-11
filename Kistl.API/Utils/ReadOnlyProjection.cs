@@ -8,33 +8,158 @@ namespace Kistl.API.Utils
 {
 
     public interface IReadOnlyCollection<TValue>
-        : IList<TValue>, ICollection<TValue>, IEnumerable<TValue>
+        : ICollection<TValue>, IEnumerable<TValue>
+    {
+    }
+
+    public interface IReadOnlyList<TValue>
+        : IList<TValue>, IReadOnlyCollection<TValue>
     {
     }
 
     /// <summary>
-    /// A living read only projection of a collection through a function
+    /// A live read only projection of a collection through a function
     /// </summary>
-    /// <typeparam name="TValue">The type of elements in the underlying collection.</typeparam>
-    /// <typeparam name="TResult">The type of projected elements in the collection.</typeparam>
-    public class ReadOnlyProjection<TValue, TResult>
-        : IReadOnlyCollection<TResult>, IList, ICollection, IEnumerable
+    /// <typeparam name="TInput">The type of elements in the underlying collection.</typeparam>
+    /// <typeparam name="TOutput">The type of projected elements in the collection.</typeparam>
+    public class ReadOnlyProjectedCollection<TInput, TOutput>
+        : IReadOnlyCollection<TOutput>
     {
-        private IList<TValue> _list;
-        private Func<TValue, TResult> _select;
-        public ReadOnlyProjection(IList<TValue> list, Func<TValue, TResult> select)
+        private readonly ICollection<TInput> _collection;
+        private readonly Func<TInput, TOutput> _selector;
+        private readonly Func<TOutput, TInput> _inverter;
+
+        /// <summary>
+        /// </summary>
+        /// <param name="collection">the collection to project</param>
+        /// <param name="selector">produces TOutput objects for TInput values; MUST always create Equal objects for the same input</param>
+        /// <param name="inverter">an optional inversion of the <paramref name="selector"/>; used to accelerate some operations; MAY be null</param>
+        public ReadOnlyProjectedCollection(ICollection<TInput> collection, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter)
         {
-            _list = list;
-            _select = select;
+            _collection = collection;
+            _selector = selector;
+            _inverter = inverter;
         }
 
-        protected Func<TValue, TResult> Selector { get { return _select; } }
+        #region Utilities
+
+        protected Func<TInput, TOutput> Selector { get { return _selector; } }
+
+        protected Func<TOutput, TInput> Inverter { get { return _inverter; } }
+
+        /// <summary>
+        /// returns an TInput item whose projection matches <paramref name="item"/>. 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        protected TInput Invert(TOutput item)
+        {
+            if (_inverter != null)
+            {
+                return _inverter(item);
+            }
+            else
+            {
+                return _collection.FirstOrDefault(input => Object.Equals(item, _selector(input)));
+            }
+        }
+
+        #endregion
+
+        #region ICollection<TOutput> Members
+
+        void ICollection<TOutput>.Add(TOutput item)
+        {
+            throw new InvalidOperationException();
+        }
+
+        void ICollection<TOutput>.Clear()
+        {
+            throw new InvalidOperationException();
+        }
+
+        public bool Contains(TOutput item)
+        {
+            return _collection.Contains(Invert(item));
+        }
+
+        public void CopyTo(TOutput[] array, int arrayIndex)
+        {
+            if (array == null)
+                throw new ArgumentNullException("array");
+
+            if (arrayIndex < 0)
+                throw new ArgumentOutOfRangeException("arrayIndex");
+
+            if (arrayIndex >= array.Length
+                || (array.Length - arrayIndex) < _collection.Count)
+                throw new ArgumentOutOfRangeException("arrayIndex");
+
+            foreach (var output in this)
+            {
+                array[arrayIndex++] = output;
+            }
+        }
+
+        public int Count
+        {
+            get { return _collection.Count; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return true; }
+        }
+
+        public bool Remove(TOutput item)
+        {
+            throw new InvalidOperationException();
+        }
+
+        #endregion
+
+        #region IEnumerable<TOutput> Members
+
+        public IEnumerator<TOutput> GetEnumerator()
+        {
+            return _collection.Select(_selector).GetEnumerator();
+        }
+
+        #endregion
+
+        #region IEnumerable Members
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _collection.Select(_selector).GetEnumerator();
+        }
+
+        #endregion
+
+    }
+
+
+    /// <summary>
+    /// A live read only projection of a List through a function
+    /// </summary>
+    /// <typeparam name="TInput">The type of elements in the underlying List.</typeparam>
+    /// <typeparam name="TOutput">The type of projected elements in the List.</typeparam>
+    public class ReadOnlyProjectedList<TInput, TOutput>
+        : ReadOnlyProjectedCollection<TInput, TOutput>, IReadOnlyList<TOutput>, IList, ICollection, IEnumerable
+    {
+        private IList<TInput> _list;
+
+        public ReadOnlyProjectedList(IList<TInput> list, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter)
+            : base(list, selector, inverter)
+        {
+            _list = list;
+        }
 
         #region IList<TResult> Members
 
-        public int IndexOf(TResult item)
+        public int IndexOf(TOutput item)
         {
-            var source = _list.Where(v => Object.Equals(_select(v), item)).FirstOrDefault();
+            var source = _list.Where(v => Object.Equals(Selector(v), item)).FirstOrDefault();
 
             if (source != null)
                 return _list.IndexOf(source);
@@ -42,25 +167,26 @@ namespace Kistl.API.Utils
                 return -1;
         }
 
-        void IList<TResult>.Insert(int index, TResult item)
+        void IList<TOutput>.Insert(int index, TOutput item)
         {
             throw new InvalidOperationException();
         }
 
-        void IList<TResult>.RemoveAt(int index)
+        void IList<TOutput>.RemoveAt(int index)
         {
             throw new InvalidOperationException();
         }
 
-        public TResult this[int index]
+        public TOutput this[int index]
         {
             get
             {
-                return _select(_list[index]);
+                return Selector(_list[index]);
             }
         }
 
-        TResult IList<TResult>.this[int index]
+        // hide the settor when not using the interface
+        TOutput IList<TOutput>.this[int index]
         {
             get
             {
@@ -70,79 +196,6 @@ namespace Kistl.API.Utils
             {
                 throw new InvalidOperationException();
             }
-        }
-
-        #endregion
-
-        #region ICollection<TResult> Members
-
-        void ICollection<TResult>.Add(TResult item)
-        {
-            throw new InvalidOperationException();
-        }
-
-        void ICollection<TResult>.Clear()
-        {
-            throw new InvalidOperationException();
-        }
-
-        public bool Contains(TResult item)
-        {
-            return _list.Any(v => Object.Equals(_select(v), item));
-        }
-
-        public void CopyTo(TResult[] array, int arrayIndex)
-        {
-            if (array == null)
-                throw new ArgumentNullException("array");
-
-            if (arrayIndex < 0)
-                throw new ArgumentOutOfRangeException("arrayIndex");
-
-            if (arrayIndex >= array.Length
-                || (array.Length - arrayIndex) < _list.Count)
-                throw new ArgumentOutOfRangeException("arrayIndex");
-
-            for (int i = 0; i < _list.Count; i++)
-            {
-                array[i + arrayIndex] = _select(_list[i]);
-            }
-        }
-
-        public int Count
-        {
-            get { return _list.Count; }
-        }
-
-        public bool IsReadOnly
-        {
-            get { return true; }
-        }
-
-        bool ICollection<TResult>.Remove(TResult item)
-        {
-            throw new InvalidOperationException();
-        }
-
-        #endregion
-
-        #region IEnumerable<TResult> Members
-
-        public IEnumerator<TResult> GetEnumerator()
-        {
-            foreach (var v in _list)
-            {
-                yield return _select(v);
-            }
-        }
-
-        #endregion
-
-        #region IEnumerable Members
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
         }
 
         #endregion
@@ -161,12 +214,12 @@ namespace Kistl.API.Utils
 
         bool IList.Contains(object value)
         {
-            return this.Contains((TResult)value);
+            return this.Contains((TOutput)value);
         }
 
         int IList.IndexOf(object value)
         {
-            return this.IndexOf((TResult)value);
+            return this.IndexOf((TOutput)value);
         }
 
         void IList.Insert(int index, object value)
@@ -207,7 +260,7 @@ namespace Kistl.API.Utils
 
         void ICollection.CopyTo(Array array, int index)
         {
-            this.CopyTo((TResult[])array, index);
+            this.CopyTo((TOutput[])array, index);
         }
 
         bool ICollection.IsSynchronized

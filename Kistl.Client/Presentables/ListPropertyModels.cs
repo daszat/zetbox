@@ -90,16 +90,16 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ReadOnlyObservableProjection<TElement, TElementModel> _valueCache;
+        private ReadOnlyObservableProjectedList<TElement, TElementModel> _valueCache;
         public IReadOnlyObservableCollection<TElementModel> Value
         {
             get
             {
                 if (_valueCache == null)
                 {
-                    _valueCache = new ReadOnlyObservableProjection<TElement, TElementModel>(
+                    _valueCache = new ReadOnlyObservableProjectedList<TElement, TElementModel>(
                         Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
-                        GetModel);
+                        GetModel, null);
                 }
                 return _valueCache;
             }
@@ -227,16 +227,17 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ReadOnlyObservableProjection<TElement, string> _stringListCache;
+        private ReadOnlyObservableProjectedList<TElement, string> _stringListCache;
         IReadOnlyObservableCollection<string> IReadOnlyValueModel<IReadOnlyObservableCollection<string>>.Value
         {
             get
             {
                 if (_stringListCache == null)
                 {
-                    _stringListCache = new ReadOnlyObservableProjection<TElement, string>(
+                    _stringListCache = new ReadOnlyObservableProjectedList<TElement, string>(
                         Value,
-                        i => i.ToString());
+                        i => i.ToString(),
+                        null);
                 }
                 return _stringListCache;
             }

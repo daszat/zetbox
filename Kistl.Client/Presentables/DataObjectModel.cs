@@ -53,24 +53,24 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ReadOnlyProjection<Property, PresentableModel> _propertyModels;
-        public IReadOnlyCollection<PresentableModel> PropertyModels
+        private ReadOnlyProjectedList<Property, PresentableModel> _propertyModels;
+        public IReadOnlyList<PresentableModel> PropertyModels
         {
             get
             {
                 if (_propertyModels == null)
                 {
-                    _propertyModels = new ReadOnlyProjection<Property, PresentableModel>(
+                    _propertyModels = new ReadOnlyProjectedList<Property, PresentableModel>(
                         FetchPropertyList().ToList(),
-                        property => Factory.CreateDefaultModel(DataContext, property)
-                        );
+                        property => Factory.CreateDefaultModel(DataContext, property),
+                        null);
                 }
                 return _propertyModels;
             }
         }
 
-        private ReadOnlyProjection<Method, PresentableModel> _methodResultsCache;
-        public IReadOnlyCollection<PresentableModel> MethodResults
+        private ReadOnlyProjectedList<Method, PresentableModel> _methodResultsCache;
+        public IReadOnlyList<PresentableModel> MethodResults
         {
             get
             {
@@ -78,13 +78,14 @@ namespace Kistl.Client.Presentables
 
                 if (_methodResultsCache == null)
                 {
-                    _methodResultsCache = new ReadOnlyProjection<Method, PresentableModel>(
+                    _methodResultsCache = new ReadOnlyProjectedList<Method, PresentableModel>(
                         FetchMethodList().ToList(),
                         method =>
                         {
                             ObjectClass cls = _object.GetObjectClass(MetaContext);
                             return ModelFromMethod(cls, method);
-                        });
+                        },
+                        null);
                 }
                 return _methodResultsCache;
             }

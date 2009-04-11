@@ -13,6 +13,9 @@ using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables
 {
+    /// <summary>
+    /// Actually only models a Collection.
+    /// </summary>
     public class ObjectListModel
         : PropertyModel<ICollection<DataObjectModel>>, IValueListModel<DataObjectModel>
     {
@@ -31,16 +34,17 @@ namespace Kistl.Client.Presentables
         public bool HasValue { get { UI.Verify(); return true; } }
         public bool IsNull { get { UI.Verify(); return false; } }
 
-        private ReadOnlyObservableProjection<IDataObject, DataObjectModel> _valueCache;
+        private ReadOnlyObservableProjectedCollection<IDataObject, DataObjectModel> _valueCache;
         public IReadOnlyObservableCollection<DataObjectModel> Value
         {
             get
             {
                 if (_valueCache == null)
                 {
-                    _valueCache = new ReadOnlyObservableProjection<IDataObject, DataObjectModel>(
+                    _valueCache = new ReadOnlyObservableProjectedCollection<IDataObject, DataObjectModel>(
                         Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
-                        obj => (DataObjectModel)Factory.CreateDefaultModel(DataContext, obj));
+                        obj => (DataObjectModel)Factory.CreateDefaultModel(DataContext, obj),
+                        mdl => mdl.Object);
                 }
                 return _valueCache;
             }
