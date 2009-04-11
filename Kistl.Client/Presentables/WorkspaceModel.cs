@@ -114,10 +114,7 @@ namespace Kistl.Client.Presentables
             var modules = DataContext.GetQuery<Module>().ToList();
             foreach (var m in modules)
             {
-                Modules.Add((ModuleModel)Factory
-                    .CreateModel(
-                        DataMocks.LookupDefaultModelDescriptor(m),
-                        DataContext, new object[] { m }));
+                Modules.Add((ModuleModel)Factory.CreateDefaultModel(DataContext, m));
             }
         }
 

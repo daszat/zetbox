@@ -33,11 +33,7 @@ namespace Kistl.Client.Presentables
         {
             foreach (var obj in DataContext.GetQuery(_class.GetDescribedInterfaceType()).ToList().OrderBy(obj => obj.ToString()))
             {
-                var mdlDesc = DataMocks.LookupDefaultModelDescriptor(obj);
-                Instances.Add((DataObjectModel)Factory.CreateModel(
-                    mdlDesc,
-                    DataContext,
-                   new object[] { obj }));
+                Instances.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, obj));
             }
         }
 

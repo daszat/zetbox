@@ -32,10 +32,7 @@ namespace Kistl.Client.Presentables
 
             if (_memberNameModel == null)
                 // fetches already generated model from cache
-                _memberNameModel = (ChooseReferencePropertyModel<string>)Factory.CreateModel(
-                    DataMocks.LookupDefaultPropertyModelDescriptor(_memberNameProperty),
-                    DataContext,
-                    new object[] { Object, _memberNameProperty });
+                _memberNameModel = (ChooseReferencePropertyModel<string>)Factory.CreateDefaultModel(DataContext, _memberNameProperty);
 
             var possibleValues = _invocation
                 .Implementor.AsType(true)

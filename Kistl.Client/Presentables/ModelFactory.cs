@@ -55,16 +55,6 @@ namespace Kistl.Client.Presentables
             return CreateModel(t, ctx, new object[] { obj }.Concat(data).ToArray());
         }
 
-        /// <summary>
-        /// deprecated helper
-        /// </summary>
-        [Browsable(false)]
-        [Obsolete]
-        public PresentableModel CreateModel(Kistl.App.Base.TypeRef modelType, IKistlContext ctx, object[] data)
-        {
-            return CreateModel(modelType.AsType(true), ctx, data);
-        }
-
         public PresentableModel CreateModel(Type requestedType, IKistlContext ctx, object[] data)
         {
 

@@ -62,10 +62,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyModels = new ReadOnlyProjection<Property, PresentableModel>(
                         FetchPropertyList().ToList(),
-                        property => Factory.CreateModel(
-                            DataMocks.LookupDefaultPropertyModelDescriptor(property),
-                            DataContext,
-                            new object[] { _object, property })
+                        property => Factory.CreateDefaultModel(DataContext, property)
                         );
                 }
                 return _propertyModels;
