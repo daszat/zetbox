@@ -162,7 +162,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(34);
+		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(37);
 		internal static void CreateInstances()
 		{
 			DataStore[2] = new EnumerationEntry__Implementation__Frozen(2);
@@ -233,6 +233,12 @@ namespace Kistl.App.Base
 
 			DataStore[68] = new EnumerationEntry__Implementation__Frozen(68);
 
+			DataStore[69] = new EnumerationEntry__Implementation__Frozen(69);
+
+			DataStore[70] = new EnumerationEntry__Implementation__Frozen(70);
+
+			DataStore[71] = new EnumerationEntry__Implementation__Frozen(71);
+
 		}
 
 		internal static void FillDataStore() {
@@ -266,7 +272,7 @@ namespace Kistl.App.Base
 			DataStore[40].Name = @"SimpleObjectList";
 			DataStore[40].Value = 16;
 			DataStore[40].Seal();
-			DataStore[41].Description = null;
+			DataStore[41].Description = @"display a value from an Enumeration";
 			DataStore[41].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[41].Name = @"Enumeration";
 			DataStore[41].Value = 15;
@@ -301,47 +307,47 @@ namespace Kistl.App.Base
 			DataStore[47].Name = @"Double";
 			DataStore[47].Value = 9;
 			DataStore[47].Seal();
-			DataStore[48].Description = null;
+			DataStore[48].Description = @"a list of date/time values";
 			DataStore[48].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[48].Name = @"DateTimeList";
 			DataStore[48].Value = 8;
 			DataStore[48].Seal();
-			DataStore[49].Description = null;
+			DataStore[49].Description = @"a date/time value";
 			DataStore[49].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[49].Name = @"DateTime";
 			DataStore[49].Value = 7;
 			DataStore[49].Seal();
-			DataStore[50].Description = null;
+			DataStore[50].Description = @"a list of booleans";
 			DataStore[50].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[50].Name = @"BooleanList";
 			DataStore[50].Value = 6;
 			DataStore[50].Seal();
-			DataStore[51].Description = null;
+			DataStore[51].Description = @"a boolean";
 			DataStore[51].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[51].Name = @"Boolean";
 			DataStore[51].Value = 5;
 			DataStore[51].Seal();
-			DataStore[52].Description = null;
+			DataStore[52].Description = @"A reference to an object";
 			DataStore[52].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[52].Name = @"ObjectReference";
 			DataStore[52].Value = 4;
 			DataStore[52].Seal();
-			DataStore[53].Description = null;
+			DataStore[53].Description = @"A list of objects";
 			DataStore[53].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[53].Name = @"ObjectList";
 			DataStore[53].Value = 3;
 			DataStore[53].Seal();
-			DataStore[54].Description = null;
+			DataStore[54].Description = @"A group of properties";
 			DataStore[54].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[54].Name = @"PropertyGroup";
 			DataStore[54].Value = 2;
 			DataStore[54].Seal();
-			DataStore[55].Description = null;
+			DataStore[55].Description = @"A full view of the object";
 			DataStore[55].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[55].Name = @"Object";
 			DataStore[55].Value = 1;
 			DataStore[55].Seal();
-			DataStore[56].Description = null;
+			DataStore[56].Description = @"The renderer class is no actual ""View"", but neverthe less needs to be found";
 			DataStore[56].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[56].Name = @"Renderer";
 			DataStore[56].Value = 0;
@@ -406,6 +412,21 @@ namespace Kistl.App.Base
 			DataStore[68].Name = @"Separate";
 			DataStore[68].Value = 4;
 			DataStore[68].Seal();
+			DataStore[69].Description = @"Displays an Integer with a slider instead of a text box";
+			DataStore[69].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[69].Name = @"IntegerSlider";
+			DataStore[69].Value = 20;
+			DataStore[69].Seal();
+			DataStore[70].Description = @"An object as entry of a list";
+			DataStore[70].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[70].Name = @"ObjectListEntry";
+			DataStore[70].Value = 21;
+			DataStore[70].Seal();
+			DataStore[71].Description = @"The debugger window for displaying the active contexts";
+			DataStore[71].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[71].Name = @"KistlDebugger";
+			DataStore[71].Value = 22;
+			DataStore[71].Seal();
 	
 		}
 #region Serializer
