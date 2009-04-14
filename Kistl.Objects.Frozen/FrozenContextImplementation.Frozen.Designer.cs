@@ -48,6 +48,8 @@ namespace Kistl.App
 		{
 			if (ifType == typeof(Kistl.App.GUI.Icon))
 				return Kistl.App.GUI.Icon__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
+			if (ifType == typeof(Kistl.App.GUI.PresentableModelDescriptor))
+				return Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.GUI.ViewDescriptor))
 				return Kistl.App.GUI.ViewDescriptor__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.Assembly))
@@ -151,6 +153,7 @@ namespace Kistl.App
 			{
 				return new List<IPersistenceObject>(0)
 					.Concat(GetQuery<Kistl.App.GUI.Icon>().Cast<IPersistenceObject>())
+					.Concat(GetQuery<Kistl.App.GUI.PresentableModelDescriptor>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.GUI.ViewDescriptor>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.Assembly>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.BaseParameter>().Cast<IPersistenceObject>())
@@ -214,6 +217,8 @@ namespace Kistl.App
 		{
 			if (ifType == typeof(Kistl.App.GUI.Icon))
 				return Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[ID];
+			if (ifType == typeof(Kistl.App.GUI.PresentableModelDescriptor))
+				return Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.GUI.ViewDescriptor))
 				return Kistl.App.GUI.ViewDescriptor__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.Assembly))

@@ -54,6 +54,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all PresentableModelDescriptor</summary>
+		/// 
+		public IQueryable<PresentableModelDescriptor> PresentableModelDescriptors
+		{ 
+			get
+			{
+				return Context.GetQuery<PresentableModelDescriptor>();
+			}
+		}
+		
 		/// <summary>List of all Icon</summary>
 		/// 
 		public IQueryable<Icon> Icons

@@ -153,7 +153,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, EnumerationProperty__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationProperty__Implementation__Frozen>(12);
+		internal new static Dictionary<int, EnumerationProperty__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationProperty__Implementation__Frozen>(13);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[110] = 
@@ -203,6 +203,10 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[229] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[229] = 
 			DataStore[229] = new EnumerationProperty__Implementation__Frozen(229);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[233] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[233] = 
+			DataStore[233] = new EnumerationProperty__Implementation__Frozen(233);
 
 		}
 
@@ -371,6 +375,19 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 			DataStore[229].PropertyName = @"VisualType";
 			DataStore[229].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
 			DataStore[229].Seal();
+			DataStore[233].AltText = null;
+			DataStore[233].CategoryTags = @"Summary,Main";
+			DataStore[233].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[233].Description = @"The default visual type used for this PresentableModel";
+			DataStore[233].IsIndexed = false;
+			DataStore[233].IsList = false;
+			DataStore[233].IsNullable = false;
+			DataStore[233].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[233].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
+			DataStore[233].PropertyName = @"DefaultVisualType";
+			DataStore[233].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[233].Seal();
 	
 		}
 #region Serializer

@@ -454,6 +454,15 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PresentableModelDescriptor">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PresentableModelDescriptor)">
+	    <MappingFragment StoreEntitySet="PresentableModelDescriptor">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="DefaultVisualType" ColumnName="DefaultVisualType" />
+<ScalarProperty Name="Description" ColumnName="Description" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
 
 
     <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->
@@ -1086,6 +1095,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_ReferenceObjectClass" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_PresentableModelDescriptor_TypeRef_Descriptor_77
+    A: ZeroOrMore PresentableModelDescriptor as Descriptor
+    B: One TypeRef as PresentableModelRef
+    Preferred Storage: Left
+    -->
+    <AssociationSetMapping Name="FK_PresentableModelDescriptor_TypeRef_Descriptor_77"
+                           TypeName="Model.FK_PresentableModelDescriptor_TypeRef_Descriptor_77"
+                           StoreEntitySet="PresentableModelDescriptor" >
+      <EndProperty Name="PresentableModelRef">
+        <ScalarProperty Name="ID" ColumnName="fk_PresentableModelRef"/>
+      </EndProperty>
+      <EndProperty Name="Descriptor">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_PresentableModelRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_PresenterInfo_Assembly_PresenterInfo_53

@@ -20,6 +20,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>Frozen List of all PresentableModelDescriptor</summary>
+		/// 
+		public static IQueryable<PresentableModelDescriptor> PresentableModelDescriptors
+		{ 
+			get
+			{
+				return PresentableModelDescriptor__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<PresentableModelDescriptor>();
+			}
+		}
+		
 		/// <summary>Frozen List of all ViewDescriptor</summary>
 		/// 
 		public static IQueryable<ViewDescriptor> ViewDescriptors
@@ -34,6 +44,7 @@ namespace Kistl.App.GUI
 		internal static void CreateInstances()
 		{
 				Icon__Implementation__Frozen.CreateInstances();
+				PresentableModelDescriptor__Implementation__Frozen.CreateInstances();
 				ViewDescriptor__Implementation__Frozen.CreateInstances();
 		}
 
@@ -41,6 +52,7 @@ namespace Kistl.App.GUI
 		internal static void FillDataStore()
 		{
 				Icon__Implementation__Frozen.FillDataStore();
+				PresentableModelDescriptor__Implementation__Frozen.FillDataStore();
 				ViewDescriptor__Implementation__Frozen.FillDataStore();
 		}
 	}

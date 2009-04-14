@@ -153,7 +153,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(50);
+		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(51);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[1] = 
@@ -355,6 +355,10 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[225] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[225] = 
 			DataStore[225] = new StringProperty__Implementation__Frozen(225);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[232] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[232] = 
+			DataStore[232] = new StringProperty__Implementation__Frozen(232);
 
 		}
 
@@ -1087,6 +1091,19 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[225].PropertyName = @"CategoryTags";
 			DataStore[225].Length = 4000;
 			DataStore[225].Seal();
+			DataStore[232].AltText = null;
+			DataStore[232].CategoryTags = @"Summary,Main";
+			DataStore[232].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[232].Description = @"describe this PresentableModel";
+			DataStore[232].IsIndexed = false;
+			DataStore[232].IsList = false;
+			DataStore[232].IsNullable = false;
+			DataStore[232].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[232].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
+			DataStore[232].PropertyName = @"Description";
+			DataStore[232].Length = 4000;
+			DataStore[232].Seal();
 	
 		}
 #region Serializer

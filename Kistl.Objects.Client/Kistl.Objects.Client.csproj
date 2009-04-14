@@ -90,6 +90,7 @@
     <Compile Include="ObjectClass.Client.Designer.cs" />
     <Compile Include="ObjectParameter.Client.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Client.Designer.cs" />
+    <Compile Include="PresentableModelDescriptor.Client.Designer.cs" />
     <Compile Include="PresenterInfo.Client.Designer.cs" />
     <Compile Include="Projekt.Client.Designer.cs" />
     <Compile Include="Property.Client.Designer.cs" />

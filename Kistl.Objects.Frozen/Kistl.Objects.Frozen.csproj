@@ -78,6 +78,7 @@
     <Compile Include="ObjectClass.Frozen.Designer.cs" />
     <Compile Include="ObjectParameter.Frozen.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Frozen.Designer.cs" />
+    <Compile Include="PresentableModelDescriptor.Frozen.Designer.cs" />
     <Compile Include="Property.Frozen.Designer.cs" />
     <Compile Include="StringParameter.Frozen.Designer.cs" />
     <Compile Include="StringProperty.Frozen.Designer.cs" />

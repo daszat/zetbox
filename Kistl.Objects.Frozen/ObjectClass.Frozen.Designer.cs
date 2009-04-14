@@ -318,7 +318,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectClass__Implementation__Frozen> DataStore = new Dictionary<int, ObjectClass__Implementation__Frozen>(59);
+		internal new static Dictionary<int, ObjectClass__Implementation__Frozen> DataStore = new Dictionary<int, ObjectClass__Implementation__Frozen>(60);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2] = 
@@ -497,6 +497,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83] = 
 			DataStore[83] = new ObjectClass__Implementation__Frozen(83);
+
+			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85] = 
+			DataStore[85] = new ObjectClass__Implementation__Frozen(85);
 
 		}
 
@@ -2085,6 +2088,32 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[229],
 });
 			DataStore[83].TableName = @"ViewDescriptors";
 			DataStore[83].Seal();
+			DataStore[85].ClassName = @"PresentableModelDescriptor";
+			DataStore[85].DefaultIcon = null;
+			DataStore[85].Description = null;
+			DataStore[85].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[85].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[163],
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[164],
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[165],
+});
+			DataStore[85].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[85].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(3) {
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[231],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[232],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[233],
+});
+			DataStore[85].BaseObjectClass = null;
+			DataStore[85].DefaultModel = null;
+			DataStore[85].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
+});
+			DataStore[85].IsFrozenObject = true;
+			DataStore[85].IsSimpleObject = false;
+			DataStore[85].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(0) {
+});
+			DataStore[85].TableName = @"PresentableModelDescriptors";
+			DataStore[85].Seal();
 	
 		}
 #region Serializer

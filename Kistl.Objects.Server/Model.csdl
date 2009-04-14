@@ -19,6 +19,7 @@
     <EntitySet Name="Mitarbeiter" EntityType="Model.Mitarbeiter" />
     <EntitySet Name="Module" EntityType="Model.Module" />
     <EntitySet Name="Muhblah" EntityType="Model.Muhblah" />
+    <EntitySet Name="PresentableModelDescriptor" EntityType="Model.PresentableModelDescriptor" />
     <EntitySet Name="PresenterInfo" EntityType="Model.PresenterInfo" />
     <EntitySet Name="Projekt" EntityType="Model.Projekt" />
     <EntitySet Name="Property" EntityType="Model.Property" />
@@ -190,6 +191,10 @@
     <AssociationSet Name="FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27" Association="Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27" >
       <End Role="ObjectReferenceProperty" EntitySet="Property" />
       <End Role="ReferenceObjectClass" EntitySet="DataType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresentableModelDescriptor_TypeRef_Descriptor_77" Association="Model.FK_PresentableModelDescriptor_TypeRef_Descriptor_77" >
+      <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
+      <End Role="PresentableModelRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_PresenterInfo_Assembly_PresenterInfo_53" Association="Model.FK_PresenterInfo_Assembly_PresenterInfo_53" >
       <End Role="PresenterInfo" EntitySet="PresenterInfo" />
@@ -518,6 +523,18 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PresentableModelDescriptor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PresentableModelRef__Implementation__"
+                        Relationship="Model.FK_PresentableModelDescriptor_TypeRef_Descriptor_77"
+                        FromRole="Descriptor"
+                        ToRole="PresentableModelRef" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" />
+    <Property Name="DefaultVisualType" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="PresenterInfo">
     <Key>
@@ -1390,6 +1407,14 @@
          Multiplicity="*" />
     <End Role="ReferenceObjectClass"
          Type="Model.ObjectClass" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_PresentableModelDescriptor_TypeRef_Descriptor_77" >
+    <End Role="Descriptor"
+         Type="Model.PresentableModelDescriptor" 
+         Multiplicity="*" />
+    <End Role="PresentableModelRef"
+         Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_PresenterInfo_Assembly_PresenterInfo_53" >

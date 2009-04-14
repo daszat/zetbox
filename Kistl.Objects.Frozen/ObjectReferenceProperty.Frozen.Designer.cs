@@ -177,7 +177,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(72);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(73);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
@@ -395,6 +395,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[227] = 
 			DataStore[227] = new ObjectReferenceProperty__Implementation__Frozen(227);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[231] = 
+			DataStore[231] = new ObjectReferenceProperty__Implementation__Frozen(231);
 
 		}
 
@@ -1366,6 +1369,19 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[227].PropertyName = @"ControlRef";
 			DataStore[227].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[227].Seal();
+			DataStore[231].AltText = null;
+			DataStore[231].CategoryTags = @"Main";
+			DataStore[231].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[231].Description = @"The described CLR class' reference";
+			DataStore[231].IsIndexed = false;
+			DataStore[231].IsList = false;
+			DataStore[231].IsNullable = false;
+			DataStore[231].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[231].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
+			DataStore[231].PropertyName = @"PresentableModelRef";
+			DataStore[231].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
+			DataStore[231].Seal();
 	
 		}
 #region Serializer

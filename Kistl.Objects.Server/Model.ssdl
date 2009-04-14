@@ -38,6 +38,7 @@
     <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Table="TypeRefs"/>
     <EntitySet Name="RelationEnd" EntityType="Model.Store.RelationEnd" Table="RelationEnds"/>
     <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Table="ViewDescriptors"/>
+    <EntitySet Name="PresentableModelDescriptor" EntityType="Model.Store.PresentableModelDescriptor" Table="PresentableModelDescriptors"/>
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
     <EntitySet Name="ObjectClass" EntityType="Model.Store.ObjectClass" Table="ObjectClasses"/>
@@ -436,6 +437,10 @@
     <AssociationSet Name="FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27" Association="Model.Store.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27" >
       <End Role="ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
       <End Role="ReferenceObjectClass" EntitySet="ObjectClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresentableModelDescriptor_TypeRef_Descriptor_77" Association="Model.Store.FK_PresentableModelDescriptor_TypeRef_Descriptor_77" >
+      <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
+      <End Role="PresentableModelRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_PresenterInfo_Assembly_PresenterInfo_53" Association="Model.Store.FK_PresenterInfo_Assembly_PresenterInfo_53" >
       <End Role="PresenterInfo" EntitySet="PresenterInfo" />
@@ -1089,6 +1094,16 @@
     <Property Name="Toolkit" Type="int" Nullable="false" />
     <Property Name="VisualType" Type="int" Nullable="false" />
   </EntityType>
+	
+  <EntityType Name="PresentableModelDescriptor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_PresentableModelRef" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="DefaultVisualType" Type="int" Nullable="false" />
+  </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
 	
@@ -1675,6 +1690,21 @@
       </Principal>
       <Dependent Role="ObjectReferenceProperty">
         <PropertyRef Name="fk_ReferenceObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_PresentableModelDescriptor_TypeRef_Descriptor_77">
+    <End Role="PresentableModelRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Descriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PresentableModelRef">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Descriptor">
+        <PropertyRef Name="fk_PresentableModelRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

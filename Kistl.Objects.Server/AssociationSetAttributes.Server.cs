@@ -341,6 +341,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_PresentableModelDescriptor_TypeRef_Descriptor_77
+    A: ZeroOrMore PresentableModelDescriptor as Descriptor
+    B: One TypeRef as PresentableModelRef
+    Preferred Storage: Left
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_PresentableModelDescriptor_TypeRef_Descriptor_77",
+    "Descriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresentableModelDescriptor__Implementation__),
+    "PresentableModelRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_PresenterInfo_Assembly_PresenterInfo_53
     A: ZeroOrMore PresenterInfo as PresenterInfo
     B: ZeroOrOne Assembly as PresenterAssembly

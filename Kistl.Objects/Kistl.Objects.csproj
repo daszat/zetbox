@@ -78,6 +78,7 @@
     <Compile Include="ObjectClass.Interface.Designer.cs" />
     <Compile Include="ObjectParameter.Interface.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Interface.Designer.cs" />
+    <Compile Include="PresentableModelDescriptor.Interface.Designer.cs" />
     <Compile Include="PresenterInfo.Interface.Designer.cs" />
     <Compile Include="Projekt.Interface.Designer.cs" />
     <Compile Include="Property.Interface.Designer.cs" />
