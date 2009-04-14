@@ -22,7 +22,7 @@ namespace Kistl.Client.WPF.View
                 {
                     SourceModelType = typeof(DataObjectModel)
                 };
-                ViewDescriptor vDesc = DataMocks.LookupViewDescriptor(Toolkit.WPF, lout);
+                var vDesc = DataMocks.LookupViewDescriptor(Toolkit.WPF, lout);
                 DataTemplate result = new DataTemplate();
                 result.VisualTree = new FrameworkElementFactory(vDesc.ViewRef.AsType(true));
                 return result;

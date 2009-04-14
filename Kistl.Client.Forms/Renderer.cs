@@ -17,7 +17,7 @@ namespace Kistl.Client.Forms
         public void ShowModel(PresentableModel mdl, Control parent)
         {
             Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
-            ViewDescriptor vDesc = DataMocks.LookupViewDescriptor(Toolkit.TEST, lout);
+            var vDesc = DataMocks.LookupViewDescriptor(Toolkit.TEST, lout);
             var formsView = (IFormsView)vDesc.ViewRef.Create();
             formsView.SetRenderer(this);
             formsView.SetDataContext(mdl);

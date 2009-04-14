@@ -79,10 +79,10 @@ namespace Kistl.App.GUI
 
         public void OnToString_ViewDescriptor(ViewDescriptor obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0}: Display layout {1} with {2}",
+            e.Result = String.Format("{0}: Display model {1} with {2}",
                 obj.Toolkit,
-                obj.LayoutRef.AsType(true).Name,
-                obj.ViewRef.AsType(true).Name);
+                obj.PresentedModelRef.AsType(true).Name,
+                obj.ControlRef.AsType(true).Name);
         }
 
         public void OnGetDefaultModelRef_ObjectClass(ObjectClass objClass, MethodReturnEventArgs<TypeRef> e)

@@ -92,7 +92,7 @@ namespace Kistl.Client.Presentables
         public IView CreateDefaultView(PresentableModel mdl)
         {
             Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
-            ViewDescriptor vDesc = DataMocks.LookupViewDescriptor(Toolkit, lout);
+            var vDesc = DataMocks.LookupViewDescriptor(Toolkit, lout);
             IView view = (IView)vDesc.ViewRef.Create();
             view.SetModel(mdl);
             return view;
