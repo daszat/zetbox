@@ -426,6 +426,10 @@
       <End Role="BaseObjectClass" EntitySet="ObjectClass" />
       <End Role="SubClasses" EntitySet="ObjectClass" />
     </AssociationSet>
+    <AssociationSet Name="FK_ObjectClass_PresentableModelDescriptor_Presentable_78" Association="Model.Store.FK_ObjectClass_PresentableModelDescriptor_Presentable_78" >
+      <End Role="Presentable" EntitySet="ObjectClass" />
+      <End Role="DefaultPresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
+    </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_TypeRef_ObjectClass_70" Association="Model.Store.FK_ObjectClass_TypeRef_ObjectClass_70" >
       <End Role="ObjectClass" EntitySet="ObjectClass" />
       <End Role="DefaultModel" EntitySet="TypeRef" />
@@ -558,6 +562,7 @@
     <Property Name="IsSimpleObject" Type="bit" Nullable="false" />
     <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
     <Property Name="fk_DefaultModel" Type="int" />
+    <Property Name="fk_DefaultPresentableModelDescriptor" Type="int" />
   </EntityType>
 	
   <EntityType Name="Projekt">
@@ -1645,6 +1650,21 @@
       </Principal>
       <Dependent Role="SubClasses">
         <PropertyRef Name="fk_BaseObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_ObjectClass_PresentableModelDescriptor_Presentable_78">
+    <End Role="DefaultPresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Presentable" Type="Model.Store.ObjectClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DefaultPresentableModelDescriptor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Presentable">
+        <PropertyRef Name="fk_DefaultPresentableModelDescriptor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

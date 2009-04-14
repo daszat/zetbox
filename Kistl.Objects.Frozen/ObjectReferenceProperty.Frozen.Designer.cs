@@ -177,7 +177,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(73);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(74);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
@@ -398,6 +398,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[231] = 
 			DataStore[231] = new ObjectReferenceProperty__Implementation__Frozen(231);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[234] = 
+			DataStore[234] = new ObjectReferenceProperty__Implementation__Frozen(234);
 
 		}
 
@@ -1382,6 +1385,19 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[231].PropertyName = @"PresentableModelRef";
 			DataStore[231].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[231].Seal();
+			DataStore[234].AltText = null;
+			DataStore[234].CategoryTags = @"Main";
+			DataStore[234].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[234].Description = @"The default PresentableModel to use for this ObjectClass";
+			DataStore[234].IsIndexed = false;
+			DataStore[234].IsList = false;
+			DataStore[234].IsNullable = false;
+			DataStore[234].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[234].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
+			DataStore[234].PropertyName = @"DefaultPresentableModelDescriptor";
+			DataStore[234].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[85];
+			DataStore[234].Seal();
 	
 		}
 #region Serializer

@@ -180,6 +180,10 @@
       <End Role="BaseObjectClass" EntitySet="DataType" />
       <End Role="SubClasses" EntitySet="DataType" />
     </AssociationSet>
+    <AssociationSet Name="FK_ObjectClass_PresentableModelDescriptor_Presentable_78" Association="Model.FK_ObjectClass_PresentableModelDescriptor_Presentable_78" >
+      <End Role="Presentable" EntitySet="DataType" />
+      <End Role="DefaultPresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
+    </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_TypeRef_ObjectClass_70" Association="Model.FK_ObjectClass_TypeRef_ObjectClass_70" >
       <End Role="ObjectClass" EntitySet="DataType" />
       <End Role="DefaultModel" EntitySet="TypeRef" />
@@ -884,6 +888,10 @@
                         Relationship="Model.FK_ObjectClass_TypeRef_ObjectClass_70"
                         FromRole="ObjectClass"
                         ToRole="DefaultModel" />
+    <NavigationProperty Name="DefaultPresentableModelDescriptor__Implementation__"
+                        Relationship="Model.FK_ObjectClass_PresentableModelDescriptor_Presentable_78"
+                        FromRole="Presentable"
+                        ToRole="DefaultPresentableModelDescriptor" />
   </EntityType>
   <EntityType Name="ObjectParameter" BaseType="Model.BaseParameter" >
     <NavigationProperty Name="DataType__Implementation__"
@@ -1384,6 +1392,14 @@
     <End Role="SubClasses"
          Type="Model.ObjectClass" 
          Multiplicity="*" />
+  </Association>
+  <Association Name="FK_ObjectClass_PresentableModelDescriptor_Presentable_78" >
+    <End Role="Presentable"
+         Type="Model.ObjectClass" 
+         Multiplicity="*" />
+    <End Role="DefaultPresentableModelDescriptor"
+         Type="Model.PresentableModelDescriptor" 
+         Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ObjectClass_TypeRef_ObjectClass_70" >
     <End Role="ObjectClass"

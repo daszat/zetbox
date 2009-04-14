@@ -27,6 +27,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// The default PresentableModel to use for this ObjectClass
+        /// </summary>
+		Kistl.App.GUI.PresentableModelDescriptor DefaultPresentableModelDescriptor {
+			get;
+			set;
+		}
+        /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
 

@@ -195,6 +195,87 @@ namespace Kistl.App.Base
         
 
         /// <summary>
+        /// The default PresentableModel to use for this ObjectClass
+        /// </summary>
+    /*
+    Relation: FK_ObjectClass_PresentableModelDescriptor_Presentable_78
+    A: ZeroOrMore ObjectClass as Presentable
+    B: One PresentableModelDescriptor as DefaultPresentableModelDescriptor
+    Preferred Storage: Left
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.PresentableModelDescriptor DefaultPresentableModelDescriptor
+        {
+            get
+            {
+                return DefaultPresentableModelDescriptor__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                DefaultPresentableModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_DefaultPresentableModelDescriptor
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && DefaultPresentableModelDescriptor != null)
+                {
+                    _fk_DefaultPresentableModelDescriptor = DefaultPresentableModelDescriptor.ID;
+                }
+                return _fk_DefaultPresentableModelDescriptor;
+            }
+            set
+            {
+                _fk_DefaultPresentableModelDescriptor = value;
+            }
+        }
+        private int? _fk_DefaultPresentableModelDescriptor;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_PresentableModelDescriptor_Presentable_78", "DefaultPresentableModelDescriptor")]
+        public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ DefaultPresentableModelDescriptor__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
+                        "Model.FK_ObjectClass_PresentableModelDescriptor_Presentable_78",
+                        "DefaultPresentableModelDescriptor");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
+                        "Model.FK_ObjectClass_PresentableModelDescriptor_Presentable_78",
+                        "DefaultPresentableModelDescriptor");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
     /*
@@ -472,6 +553,7 @@ namespace Kistl.App.Base
 			me.TableName = other.TableName;
 			this.fk_BaseObjectClass = otherImpl.fk_BaseObjectClass;
 			this.fk_DefaultModel = otherImpl.fk_DefaultModel;
+			this.fk_DefaultPresentableModelDescriptor = otherImpl.fk_DefaultPresentableModelDescriptor;
 		}
 
         // tail template
@@ -518,6 +600,10 @@ namespace Kistl.App.Base
 				DefaultModel__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_DefaultModel.Value);
 			else
 				DefaultModel__Implementation__ = null;
+			if (_fk_DefaultPresentableModelDescriptor.HasValue)
+				DefaultPresentableModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_DefaultPresentableModelDescriptor.Value);
+			else
+				DefaultPresentableModelDescriptor__Implementation__ = null;
 		}
 #region Serializer
 
@@ -527,6 +613,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_BaseObjectClass, binStream);
             BinarySerializer.ToStream(this.fk_DefaultModel, binStream);
+            BinarySerializer.ToStream(this.fk_DefaultPresentableModelDescriptor, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
             BinarySerializer.ToStream(this._TableName, binStream);
@@ -544,6 +631,11 @@ namespace Kistl.App.Base
                 var tmp = this.fk_DefaultModel;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_DefaultModel = tmp;
+            }
+            {
+                var tmp = this.fk_DefaultPresentableModelDescriptor;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_DefaultPresentableModelDescriptor = tmp;
             }
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
