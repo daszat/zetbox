@@ -166,7 +166,7 @@ namespace Kistl.App.Base
             {
                 e.Result = String.Format("RelationEnd {0}({1})",
                     obj.RoleName,
-                    obj.Type.ClassName);
+                    obj.Type == null ? "no type" : obj.Type.ClassName);
             }
             catch (NullReferenceException)
             {
