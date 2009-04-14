@@ -20,16 +20,28 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>Frozen List of all ViewDescriptor</summary>
+		/// 
+		public static IQueryable<ViewDescriptor> ViewDescriptors
+		{ 
+			get
+			{
+				return ViewDescriptor__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<ViewDescriptor>();
+			}
+		}
+		
 
 		internal static void CreateInstances()
 		{
 				Icon__Implementation__Frozen.CreateInstances();
+				ViewDescriptor__Implementation__Frozen.CreateInstances();
 		}
 
 
 		internal static void FillDataStore()
 		{
 				Icon__Implementation__Frozen.FillDataStore();
+				ViewDescriptor__Implementation__Frozen.FillDataStore();
 		}
 	}
 	

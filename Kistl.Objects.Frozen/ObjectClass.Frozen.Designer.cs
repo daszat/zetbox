@@ -492,11 +492,11 @@ namespace Kistl.App.Base
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79] = 
 			DataStore[79] = new ObjectClass__Implementation__Frozen(79);
 
-			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[80] = 
-			DataStore[80] = new ObjectClass__Implementation__Frozen(80);
-
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82] = 
 			DataStore[82] = new ObjectClass__Implementation__Frozen(82);
+
+			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83] = 
+			DataStore[83] = new ObjectClass__Implementation__Frozen(83);
 
 		}
 
@@ -2026,33 +2026,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[207],
 });
 			DataStore[79].TableName = @"TypeRefs";
 			DataStore[79].Seal();
-			DataStore[80].ClassName = @"ViewDescriptor";
-			DataStore[80].DefaultIcon = null;
-			DataStore[80].Description = null;
-			DataStore[80].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[110],
-});
-			DataStore[80].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[152],
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[153],
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[154],
-});
-			DataStore[80].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[80].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(3) {
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[209],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[210],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[211],
-});
-			DataStore[80].BaseObjectClass = null;
-			DataStore[80].DefaultModel = null;
-			DataStore[80].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
-});
-			DataStore[80].IsFrozenObject = true;
-			DataStore[80].IsSimpleObject = false;
-			DataStore[80].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(0) {
-});
-			DataStore[80].TableName = @"ViewDescriptors";
-			DataStore[80].Seal();
 			DataStore[82].ClassName = @"RelationEnd";
 			DataStore[82].DefaultIcon = null;
 			DataStore[82].Description = @"Describes one end of a relation between two object classes";
@@ -2085,6 +2058,33 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[224],
 });
 			DataStore[82].TableName = @"RelationEnds";
 			DataStore[82].Seal();
+			DataStore[83].ClassName = @"ViewDescriptor";
+			DataStore[83].DefaultIcon = null;
+			DataStore[83].Description = null;
+			DataStore[83].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[83].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[160],
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[161],
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[162],
+});
+			DataStore[83].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[83].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(4) {
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[226],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[227],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[228],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[229],
+});
+			DataStore[83].BaseObjectClass = null;
+			DataStore[83].DefaultModel = null;
+			DataStore[83].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
+});
+			DataStore[83].IsFrozenObject = true;
+			DataStore[83].IsSimpleObject = false;
+			DataStore[83].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(0) {
+});
+			DataStore[83].TableName = @"ViewDescriptors";
+			DataStore[83].Seal();
 	
 		}
 #region Serializer

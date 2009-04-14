@@ -177,7 +177,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(70);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(72);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
@@ -389,6 +389,12 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[224] = 
 			DataStore[224] = new ObjectReferenceProperty__Implementation__Frozen(224);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[226] = 
+			DataStore[226] = new ObjectReferenceProperty__Implementation__Frozen(226);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[227] = 
+			DataStore[227] = new ObjectReferenceProperty__Implementation__Frozen(227);
 
 		}
 
@@ -1210,9 +1216,10 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[213],
 			DataStore[209].IsList = false;
 			DataStore[209].IsNullable = false;
 			DataStore[209].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[209].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[80];
+			DataStore[209].ObjectClass = null;
 			DataStore[209].PropertyName = @"LayoutRef";
 			DataStore[209].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
+			DataStore[209].RelationEnd = null;
 			DataStore[209].Seal();
 			DataStore[211].AltText = @"the Type of a View for this Layout";
 			DataStore[211].CategoryTags = null;
@@ -1224,9 +1231,10 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[211].IsList = false;
 			DataStore[211].IsNullable = false;
 			DataStore[211].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[211].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[80];
+			DataStore[211].ObjectClass = null;
 			DataStore[211].PropertyName = @"ViewRef";
 			DataStore[211].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
+			DataStore[211].RelationEnd = null;
 			DataStore[211].Seal();
 			DataStore[212].AltText = @"The default model to use for the UI";
 			DataStore[212].CategoryTags = @"GUI";
@@ -1332,6 +1340,32 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[224].PropertyName = @"AParent";
 			DataStore[224].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[77];
 			DataStore[224].Seal();
+			DataStore[226].AltText = null;
+			DataStore[226].CategoryTags = @"Main";
+			DataStore[226].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[226].Description = @"The PresentableModel usable by this View";
+			DataStore[226].IsIndexed = false;
+			DataStore[226].IsList = false;
+			DataStore[226].IsNullable = false;
+			DataStore[226].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[226].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
+			DataStore[226].PropertyName = @"PresentedModelRef";
+			DataStore[226].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
+			DataStore[226].Seal();
+			DataStore[227].AltText = null;
+			DataStore[227].CategoryTags = @"Main";
+			DataStore[227].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[227].Description = @"The control implementing this View";
+			DataStore[227].IsIndexed = false;
+			DataStore[227].IsList = false;
+			DataStore[227].IsNullable = false;
+			DataStore[227].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[227].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
+			DataStore[227].PropertyName = @"ControlRef";
+			DataStore[227].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
+			DataStore[227].Seal();
 	
 		}
 #region Serializer

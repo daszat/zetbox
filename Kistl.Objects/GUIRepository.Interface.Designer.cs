@@ -24,6 +24,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all ViewDescriptor</summary>
+		/// 
+		public IQueryable<ViewDescriptor> ViewDescriptors
+		{ 
+			get
+			{
+				return Context.GetQuery<ViewDescriptor>();
+			}
+		}
+		
 		/// <summary>List of all Template</summary>
 		/// 
 		public IQueryable<Template> Templates

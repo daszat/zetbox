@@ -92,6 +92,90 @@ namespace Kistl.Client.WPF
         {
             //FixNotNullableConstraints();
             //CreateTypeRefs();
+
+            // CreateViewDescriptors();
+        }
+
+        private void CreateViewDescriptors()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall("Creating TypeRefs for GUI"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    var guiModule = ctx.Find<Module>(4);
+                    var typeRefClass = ctx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "TypeRef");
+                    var vdClass = ctx.Create<ObjectClass>();
+                    vdClass.ClassName = "ViewDescriptor";
+                    vdClass.TableName = "ViewDescriptors";
+                    vdClass.Module = guiModule;
+                    vdClass.IsFrozenObject = true;
+
+                    var nameProp = ctx.Create<EnumerationProperty>();
+                    nameProp.CategoryTags = "Summary,Main";
+                    nameProp.Description = "The visual type of this View";
+                    nameProp.Enumeration = ctx.Find<Enumeration>(55);
+                    nameProp.Module = guiModule;
+                    nameProp.ObjectClass = vdClass;
+                    nameProp.PropertyName = "VisualType";
+
+                    var toolkitProp = ctx.Create<EnumerationProperty>();
+                    toolkitProp.CategoryTags = "Summary,Main";
+                    toolkitProp.Description = "Which toolkit provides this View";
+                    toolkitProp.Enumeration = ctx.Find<Enumeration>(53);
+                    toolkitProp.Module = guiModule;
+                    toolkitProp.ObjectClass = vdClass;
+                    toolkitProp.PropertyName = "Toolkit";
+
+                    var controlRel = ctx.Create<Relation>();
+                    controlRel.Description = "This relation describes which control implements which view";
+                    controlRel.A = ctx.Create<RelationEnd>();
+                    controlRel.A.RoleName = "View";
+                    controlRel.A.Type = vdClass;
+                    controlRel.A.Multiplicity = Multiplicity.ZeroOrMore;
+                    controlRel.A.Navigator = ctx.Create<ObjectReferenceProperty>();
+                    controlRel.A.Navigator.CategoryTags = "Main";
+                    controlRel.A.Navigator.Description = "The control implementing this View";
+                    controlRel.A.Navigator.Module = guiModule;
+                    controlRel.A.Navigator.ObjectClass = vdClass;
+                    controlRel.A.Navigator.PropertyName = "ControlRef";
+                    controlRel.A.Navigator.ReferenceObjectClass = typeRefClass;
+                    controlRel.A.Role = (int)RelationEndRole.A;
+
+                    controlRel.B = ctx.Create<RelationEnd>();
+                    controlRel.B.RoleName = "ControlRef";
+                    controlRel.B.Type = typeRefClass;
+                    controlRel.B.Multiplicity = Multiplicity.One;
+                    controlRel.B.Role = (int)RelationEndRole.B;
+
+                    controlRel.Storage = StorageType.MergeIntoA;
+
+                    var pModelRel = ctx.Create<Relation>();
+                    pModelRel.Description = "This relation describes which presentable model can be displayed with this view";
+                    pModelRel.A = ctx.Create<RelationEnd>();
+                    pModelRel.A.RoleName = "View";
+                    pModelRel.A.Type = vdClass;
+                    pModelRel.A.Multiplicity = Multiplicity.ZeroOrMore;
+                    pModelRel.A.Navigator = ctx.Create<ObjectReferenceProperty>();
+                    pModelRel.A.Navigator.CategoryTags = "Main";
+                    pModelRel.A.Navigator.Description = "The PresentableModel usable by this View";
+                    pModelRel.A.Navigator.Module = guiModule;
+                    pModelRel.A.Navigator.ObjectClass = vdClass;
+                    pModelRel.A.Navigator.PropertyName = "PresentedModelRef";
+                    pModelRel.A.Navigator.ReferenceObjectClass = typeRefClass;
+                    pModelRel.A.Role = (int)RelationEndRole.A;
+
+                    pModelRel.B = ctx.Create<RelationEnd>();
+                    pModelRel.B.RoleName = "PresentedModelRef";
+                    pModelRel.B.Type = typeRefClass;
+                    pModelRel.B.Multiplicity = Multiplicity.One;
+                    pModelRel.B.Role = (int)RelationEndRole.B;
+                    
+                    pModelRel.Storage = StorageType.MergeIntoA;
+
+                    ctx.SubmitChanges();
+
+                }
+            }
         }
 
         private void CreateTypeRefs()

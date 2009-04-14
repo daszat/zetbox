@@ -48,6 +48,8 @@ namespace Kistl.App
 		{
 			if (ifType == typeof(Kistl.App.GUI.Icon))
 				return Kistl.App.GUI.Icon__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
+			if (ifType == typeof(Kistl.App.GUI.ViewDescriptor))
+				return Kistl.App.GUI.ViewDescriptor__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.Assembly))
 				return Kistl.App.Base.Assembly__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.BaseParameter))
@@ -120,8 +122,6 @@ namespace Kistl.App
 				return Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.ValueTypeProperty))
 				return Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
-			if (ifType == typeof(Kistl.App.Base.ViewDescriptor))
-				return Kistl.App.Base.ViewDescriptor__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			throw new NotImplementedException();
 		}
 
@@ -151,6 +151,7 @@ namespace Kistl.App
 			{
 				return new List<IPersistenceObject>(0)
 					.Concat(GetQuery<Kistl.App.GUI.Icon>().Cast<IPersistenceObject>())
+					.Concat(GetQuery<Kistl.App.GUI.ViewDescriptor>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.Assembly>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.BaseParameter>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.BoolParameter>().Cast<IPersistenceObject>())
@@ -187,7 +188,6 @@ namespace Kistl.App
 					.Concat(GetQuery<Kistl.App.Base.StructProperty>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.TypeRef>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.ValueTypeProperty>().Cast<IPersistenceObject>())
-					.Concat(GetQuery<Kistl.App.Base.ViewDescriptor>().Cast<IPersistenceObject>())
 ;
 			}
 		}
@@ -214,6 +214,8 @@ namespace Kistl.App
 		{
 			if (ifType == typeof(Kistl.App.GUI.Icon))
 				return Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[ID];
+			if (ifType == typeof(Kistl.App.GUI.ViewDescriptor))
+				return Kistl.App.GUI.ViewDescriptor__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.Assembly))
 				return Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.BaseParameter))
@@ -286,8 +288,6 @@ namespace Kistl.App
 				return Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.ValueTypeProperty))
 				return Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[ID];
-			if (ifType == typeof(Kistl.App.Base.ViewDescriptor))
-				return Kistl.App.Base.ViewDescriptor__Implementation__Frozen.DataStore[ID];
 			throw new NotImplementedException();
 		}
 

@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Base
+namespace Kistl.App.GUI
 {
     using System;
     using System.Collections;
@@ -29,18 +29,18 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// 
+        /// The control implementing this View
         /// </summary>
         // object reference property
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef LayoutRef
+        public Kistl.App.Base.TypeRef ControlRef
         {
             get
             {
-                if (fk_LayoutRef.HasValue)
-                    return Context.Find<Kistl.App.Base.TypeRef>(fk_LayoutRef.Value);
+                if (fk_ControlRef.HasValue)
+                    return Context.Find<Kistl.App.Base.TypeRef>(fk_ControlRef.Value);
                 else
                     return null;
             }
@@ -50,48 +50,110 @@ namespace Kistl.App.Base
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
-                if (value == null && _fk_LayoutRef == null)
+                if (value == null && _fk_ControlRef == null)
 					return;
-                else if (value != null && value.ID == _fk_LayoutRef)
+                else if (value != null && value.ID == _fk_ControlRef)
 					return;
 			           
 	            // cache old value to remove inverse references later
-                var oldValue = LayoutRef;
+                var oldValue = ControlRef;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("LayoutRef", oldValue, value);
+				NotifyPropertyChanging("ControlRef", oldValue, value);
                 
 				// next, set the local reference
-                _fk_LayoutRef = value == null ? (int?)null : value.ID;
+                _fk_ControlRef = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("LayoutRef", oldValue, value);
+				NotifyPropertyChanged("ControlRef", oldValue, value);
             }
         }
         
         // provide a way to directly access the foreign key int
-        public int? fk_LayoutRef
+        public int? fk_ControlRef
         {
             get
             {
-                return _fk_LayoutRef;
+                return _fk_ControlRef;
             }
             private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_LayoutRef != value)
+                if (_fk_ControlRef != value)
                 {
-					var __oldValue = _fk_LayoutRef;
-                    NotifyPropertyChanging("LayoutRef", __oldValue, value);
-                    _fk_LayoutRef = value;
-                    NotifyPropertyChanged("LayoutRef", __oldValue, value);
+					var __oldValue = _fk_ControlRef;
+                    NotifyPropertyChanging("ControlRef", __oldValue, value);
+                    _fk_ControlRef = value;
+                    NotifyPropertyChanged("ControlRef", __oldValue, value);
                 }
             }
         }
-        private int? _fk_LayoutRef;
+        private int? _fk_ControlRef;
 
         /// <summary>
-        /// 
+        /// The PresentableModel usable by this View
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.TypeRef PresentedModelRef
+        {
+            get
+            {
+                if (fk_PresentedModelRef.HasValue)
+                    return Context.Find<Kistl.App.Base.TypeRef>(fk_PresentedModelRef.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                
+                // shortcut noops
+                if (value == null && _fk_PresentedModelRef == null)
+					return;
+                else if (value != null && value.ID == _fk_PresentedModelRef)
+					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = PresentedModelRef;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("PresentedModelRef", oldValue, value);
+                
+				// next, set the local reference
+                _fk_PresentedModelRef = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("PresentedModelRef", oldValue, value);
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_PresentedModelRef
+        {
+            get
+            {
+                return _fk_PresentedModelRef;
+            }
+            private set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_PresentedModelRef != value)
+                {
+					var __oldValue = _fk_PresentedModelRef;
+                    NotifyPropertyChanging("PresentedModelRef", __oldValue, value);
+                    _fk_PresentedModelRef = value;
+                    NotifyPropertyChanged("PresentedModelRef", __oldValue, value);
+                }
+            }
+        }
+        private int? _fk_PresentedModelRef;
+
+        /// <summary>
+        /// Which toolkit provides this View
         /// </summary>
         // enumeration property
         public virtual Kistl.App.GUI.Toolkit Toolkit
@@ -115,66 +177,28 @@ namespace Kistl.App.Base
         private Kistl.App.GUI.Toolkit _Toolkit;
 
         /// <summary>
-        /// 
+        /// The visual type of this View
         /// </summary>
-        // object reference property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef ViewRef
+        // enumeration property
+        public virtual Kistl.App.GUI.VisualType VisualType
         {
             get
             {
-                if (fk_ViewRef.HasValue)
-                    return Context.Find<Kistl.App.Base.TypeRef>(fk_ViewRef.Value);
-                else
-                    return null;
+                return _VisualType;
             }
             set
             {
-                // TODO: only accept objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                
-                // shortcut noops
-                if (value == null && _fk_ViewRef == null)
-					return;
-                else if (value != null && value.ID == _fk_ViewRef)
-					return;
-			           
-	            // cache old value to remove inverse references later
-                var oldValue = ViewRef;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("ViewRef", oldValue, value);
-                
-				// next, set the local reference
-                _fk_ViewRef = value == null ? (int?)null : value.ID;
-				
-				// everything is done. fire the Changed event
-				NotifyPropertyChanged("ViewRef", oldValue, value);
-            }
-        }
-        
-        // provide a way to directly access the foreign key int
-        public int? fk_ViewRef
-        {
-            get
-            {
-                return _fk_ViewRef;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_ViewRef != value)
+                if (_VisualType != value)
                 {
-					var __oldValue = _fk_ViewRef;
-                    NotifyPropertyChanging("ViewRef", __oldValue, value);
-                    _fk_ViewRef = value;
-                    NotifyPropertyChanged("ViewRef", __oldValue, value);
+					var __oldValue = _VisualType;
+                    NotifyPropertyChanging("VisualType", __oldValue, value);
+                    _VisualType = value;
+                    NotifyPropertyChanged("VisualType", __oldValue, value);
                 }
             }
         }
-        private int? _fk_ViewRef;
+        private Kistl.App.GUI.VisualType _VisualType;
 
 		public override InterfaceType GetInterfaceType()
 		{
@@ -189,8 +213,9 @@ namespace Kistl.App.Base
 			var me = (ViewDescriptor)this;
 
 			me.Toolkit = other.Toolkit;
-			this.fk_LayoutRef = otherImpl.fk_LayoutRef;
-			this.fk_ViewRef = otherImpl.fk_ViewRef;
+			me.VisualType = other.VisualType;
+			this.fk_ControlRef = otherImpl.fk_ControlRef;
+			this.fk_PresentedModelRef = otherImpl.fk_PresentedModelRef;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -233,11 +258,11 @@ namespace Kistl.App.Base
 		{
 			switch(propertyName)
 			{
-                case "LayoutRef":
-                    fk_LayoutRef = id;
+                case "ControlRef":
+                    fk_ControlRef = id;
                     break;
-                case "ViewRef":
-                    fk_ViewRef = id;
+                case "PresentedModelRef":
+                    fk_PresentedModelRef = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);
@@ -251,17 +276,19 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._fk_LayoutRef, binStream);
+            BinarySerializer.ToStream(this._fk_ControlRef, binStream);
+            BinarySerializer.ToStream(this._fk_PresentedModelRef, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
-            BinarySerializer.ToStream(this._fk_ViewRef, binStream);
+            BinarySerializer.ToStream((int)((ViewDescriptor)this).VisualType, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_LayoutRef, binStream);
+            BinarySerializer.FromStream(out this._fk_ControlRef, binStream);
+            BinarySerializer.FromStream(out this._fk_PresentedModelRef, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
-            BinarySerializer.FromStream(out this._fk_ViewRef, binStream);
+            BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, binStream);
         }
 
 #endregion

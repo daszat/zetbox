@@ -263,13 +263,13 @@
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_68" Association="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_68" >
-      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
-      <End Role="LayoutRef" EntitySet="TypeRef" />
+    <AssociationSet Name="FK_ViewDescriptor_TypeRef_View_75" Association="Model.FK_ViewDescriptor_TypeRef_View_75" >
+      <End Role="View" EntitySet="ViewDescriptor" />
+      <End Role="PresentedModelRef" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_69" Association="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_69" >
-      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
-      <End Role="ViewRef" EntitySet="TypeRef" />
+    <AssociationSet Name="FK_ViewDescriptor_TypeRef_View_76" Association="Model.FK_ViewDescriptor_TypeRef_View_76" >
+      <End Role="View" EntitySet="ViewDescriptor" />
+      <End Role="ControlRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_Visual_Method_Visual_57" Association="Model.FK_Visual_Method_Visual_57" >
       <End Role="Visual" EntitySet="Visual" />
@@ -736,15 +736,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="LayoutRef__Implementation__"
-                        Relationship="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_68"
-                        FromRole="ViewDescriptor"
-                        ToRole="LayoutRef" />
+    <NavigationProperty Name="PresentedModelRef__Implementation__"
+                        Relationship="Model.FK_ViewDescriptor_TypeRef_View_75"
+                        FromRole="View"
+                        ToRole="PresentedModelRef" />
+    <NavigationProperty Name="ControlRef__Implementation__"
+                        Relationship="Model.FK_ViewDescriptor_TypeRef_View_76"
+                        FromRole="View"
+                        ToRole="ControlRef" />
     <Property Name="Toolkit" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ViewRef__Implementation__"
-                        Relationship="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_69"
-                        FromRole="ViewDescriptor"
-                        ToRole="ViewRef" />
+    <Property Name="VisualType" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Visual">
     <Key>
@@ -1535,19 +1536,19 @@
          Type="Model.Assembly" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_68" >
-    <End Role="ViewDescriptor"
+  <Association Name="FK_ViewDescriptor_TypeRef_View_75" >
+    <End Role="View"
          Type="Model.ViewDescriptor" 
          Multiplicity="*" />
-    <End Role="LayoutRef"
+    <End Role="PresentedModelRef"
          Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_69" >
-    <End Role="ViewDescriptor"
+  <Association Name="FK_ViewDescriptor_TypeRef_View_76" >
+    <End Role="View"
          Type="Model.ViewDescriptor" 
          Multiplicity="*" />
-    <End Role="ViewRef"
+    <End Role="ControlRef"
          Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>

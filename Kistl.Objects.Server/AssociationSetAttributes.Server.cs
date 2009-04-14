@@ -665,32 +665,32 @@ using Kistl.DALProvider.EF;
     )]
 
 	/*
-    Relation: FK_ViewDescriptor_TypeRef_ViewDescriptor_68
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrOne TypeRef as LayoutRef
+    Relation: FK_ViewDescriptor_TypeRef_View_75
+    A: ZeroOrMore ViewDescriptor as View
+    B: One TypeRef as PresentedModelRef
     Preferred Storage: Left
 	*/
 
 // basic association
 [assembly: EdmRelationship(
-    "Model", "FK_ViewDescriptor_TypeRef_ViewDescriptor_68",
-    "ViewDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ViewDescriptor__Implementation__),
-    "LayoutRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
+    "Model", "FK_ViewDescriptor_TypeRef_View_75",
+    "View", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
+    "PresentedModelRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
     )]
 
 
 	/*
-    Relation: FK_ViewDescriptor_TypeRef_ViewDescriptor_69
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrOne TypeRef as ViewRef
+    Relation: FK_ViewDescriptor_TypeRef_View_76
+    A: ZeroOrMore ViewDescriptor as View
+    B: One TypeRef as ControlRef
     Preferred Storage: Left
 	*/
 
 // basic association
 [assembly: EdmRelationship(
-    "Model", "FK_ViewDescriptor_TypeRef_ViewDescriptor_69",
-    "ViewDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ViewDescriptor__Implementation__),
-    "ViewRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
+    "Model", "FK_ViewDescriptor_TypeRef_View_76",
+    "View", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
+    "ControlRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
     )]
 
 

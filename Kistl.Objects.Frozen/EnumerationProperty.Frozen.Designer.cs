@@ -153,7 +153,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, EnumerationProperty__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationProperty__Implementation__Frozen>(10);
+		internal new static Dictionary<int, EnumerationProperty__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationProperty__Implementation__Frozen>(12);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[110] = 
@@ -195,6 +195,14 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[219] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[219] = 
 			DataStore[219] = new EnumerationProperty__Implementation__Frozen(219);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[228] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[228] = 
+			DataStore[228] = new EnumerationProperty__Implementation__Frozen(228);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[229] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[229] = 
+			DataStore[229] = new EnumerationProperty__Implementation__Frozen(229);
 
 		}
 
@@ -320,7 +328,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 			DataStore[210].IsList = false;
 			DataStore[210].IsNullable = false;
 			DataStore[210].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[210].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[80];
+			DataStore[210].ObjectClass = null;
 			DataStore[210].PropertyName = @"Toolkit";
 			DataStore[210].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
 			DataStore[210].Seal();
@@ -337,6 +345,32 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 			DataStore[219].PropertyName = @"Multiplicity";
 			DataStore[219].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[81];
 			DataStore[219].Seal();
+			DataStore[228].AltText = null;
+			DataStore[228].CategoryTags = @"Summary,Main";
+			DataStore[228].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[228].Description = @"Which toolkit provides this View";
+			DataStore[228].IsIndexed = false;
+			DataStore[228].IsList = false;
+			DataStore[228].IsNullable = false;
+			DataStore[228].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[228].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
+			DataStore[228].PropertyName = @"Toolkit";
+			DataStore[228].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
+			DataStore[228].Seal();
+			DataStore[229].AltText = null;
+			DataStore[229].CategoryTags = @"Summary,Main";
+			DataStore[229].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[229].Description = @"The visual type of this View";
+			DataStore[229].IsIndexed = false;
+			DataStore[229].IsList = false;
+			DataStore[229].IsNullable = false;
+			DataStore[229].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[229].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
+			DataStore[229].PropertyName = @"VisualType";
+			DataStore[229].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[229].Seal();
 	
 		}
 #region Serializer

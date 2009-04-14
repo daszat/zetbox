@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Base
+namespace Kistl.App.GUI
 {
     using System;
     using System.Collections;
@@ -53,61 +53,61 @@ namespace Kistl.App.Base
         private int _ID;
 
         /// <summary>
-        /// 
+        /// The control implementing this View
         /// </summary>
     /*
-    Relation: FK_ViewDescriptor_TypeRef_ViewDescriptor_68
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrOne TypeRef as LayoutRef
+    Relation: FK_ViewDescriptor_TypeRef_View_76
+    A: ZeroOrMore ViewDescriptor as View
+    B: One TypeRef as ControlRef
     Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef LayoutRef
+        public Kistl.App.Base.TypeRef ControlRef
         {
             get
             {
-                return LayoutRef__Implementation__;
+                return ControlRef__Implementation__;
             }
             set
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                LayoutRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
+                ControlRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
             }
         }
         
         // provide a way to directly access the foreign key int
-        public int? fk_LayoutRef
+        public int? fk_ControlRef
         {
             get
             {
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && LayoutRef != null)
+                    && ControlRef != null)
                 {
-                    _fk_LayoutRef = LayoutRef.ID;
+                    _fk_ControlRef = ControlRef.ID;
                 }
-                return _fk_LayoutRef;
+                return _fk_ControlRef;
             }
             set
             {
-                _fk_LayoutRef = value;
+                _fk_ControlRef = value;
             }
         }
-        private int? _fk_LayoutRef;
+        private int? _fk_ControlRef;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_TypeRef_ViewDescriptor_68", "LayoutRef")]
-        public Kistl.App.Base.TypeRef__Implementation__ LayoutRef__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_TypeRef_View_76", "ControlRef")]
+        public Kistl.App.Base.TypeRef__Implementation__ ControlRef__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_68",
-                        "LayoutRef");
+                        "Model.FK_ViewDescriptor_TypeRef_View_76",
+                        "ControlRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -120,8 +120,8 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_68",
-                        "LayoutRef");
+                        "Model.FK_ViewDescriptor_TypeRef_View_76",
+                        "ControlRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -134,7 +134,88 @@ namespace Kistl.App.Base
         
 
         /// <summary>
-        /// 
+        /// The PresentableModel usable by this View
+        /// </summary>
+    /*
+    Relation: FK_ViewDescriptor_TypeRef_View_75
+    A: ZeroOrMore ViewDescriptor as View
+    B: One TypeRef as PresentedModelRef
+    Preferred Storage: Left
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.TypeRef PresentedModelRef
+        {
+            get
+            {
+                return PresentedModelRef__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                PresentedModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_PresentedModelRef
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && PresentedModelRef != null)
+                {
+                    _fk_PresentedModelRef = PresentedModelRef.ID;
+                }
+                return _fk_PresentedModelRef;
+            }
+            set
+            {
+                _fk_PresentedModelRef = value;
+            }
+        }
+        private int? _fk_PresentedModelRef;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_TypeRef_View_75", "PresentedModelRef")]
+        public Kistl.App.Base.TypeRef__Implementation__ PresentedModelRef__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
+                        "Model.FK_ViewDescriptor_TypeRef_View_75",
+                        "PresentedModelRef");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
+                        "Model.FK_ViewDescriptor_TypeRef_View_75",
+                        "PresentedModelRef");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Base.TypeRef__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
+        /// Which toolkit provides this View
         /// </summary>
         // enumeration property
         // implement the user-visible interface
@@ -177,84 +258,46 @@ namespace Kistl.App.Base
         
 
         /// <summary>
-        /// 
+        /// The visual type of this View
         /// </summary>
-    /*
-    Relation: FK_ViewDescriptor_TypeRef_ViewDescriptor_69
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrOne TypeRef as ViewRef
-    Preferred Storage: Left
-    */
-        // object reference property
+        // enumeration property
         // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef ViewRef
+        Kistl.App.GUI.VisualType ViewDescriptor.VisualType
         {
             get
             {
-                return ViewRef__Implementation__;
+                return _VisualType;
             }
             set
             {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                ViewRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
+                if (_VisualType != value)
+                {
+					var __oldValue = _VisualType;
+                    NotifyPropertyChanging("VisualType", __oldValue, value);
+                    _VisualType = value;
+                    NotifyPropertyChanged("VisualType", __oldValue, value);
+                }
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ViewRef
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && ViewRef != null)
-                {
-                    _fk_ViewRef = ViewRef.ID;
-                }
-                return _fk_ViewRef;
-            }
-            set
-            {
-                _fk_ViewRef = value;
-            }
-        }
-        private int? _fk_ViewRef;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_TypeRef_ViewDescriptor_69", "ViewRef")]
-        public Kistl.App.Base.TypeRef__Implementation__ ViewRef__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_69",
-                        "ViewRef");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
-                }
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_69",
-                        "ViewRef");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                r.Value = (Kistl.App.Base.TypeRef__Implementation__)value;
-            }
-        }
+        /// <summary>backing store for VisualType</summary>
+        private Kistl.App.GUI.VisualType _VisualType;
         
+        /// <summary>EF sees only this property, for VisualType</summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int VisualType
+        {
+            get
+            {
+                return (int)((ViewDescriptor)this).VisualType;
+            }
+            set
+            {
+                ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)value;
+            }
+        }
         
 
 		public override InterfaceType GetInterfaceType()
@@ -270,8 +313,9 @@ namespace Kistl.App.Base
 			var me = (ViewDescriptor)this;
 
 			me.Toolkit = other.Toolkit;
-			this.fk_LayoutRef = otherImpl.fk_LayoutRef;
-			this.fk_ViewRef = otherImpl.fk_ViewRef;
+			me.VisualType = other.VisualType;
+			this.fk_ControlRef = otherImpl.fk_ControlRef;
+			this.fk_PresentedModelRef = otherImpl.fk_PresentedModelRef;
 		}
 
         // tail template
@@ -308,14 +352,14 @@ namespace Kistl.App.Base
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_LayoutRef.HasValue)
-				LayoutRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_LayoutRef.Value);
+			if (_fk_PresentedModelRef.HasValue)
+				PresentedModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_PresentedModelRef.Value);
 			else
-				LayoutRef__Implementation__ = null;
-			if (_fk_ViewRef.HasValue)
-				ViewRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_ViewRef.Value);
+				PresentedModelRef__Implementation__ = null;
+			if (_fk_ControlRef.HasValue)
+				ControlRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_ControlRef.Value);
 			else
-				ViewRef__Implementation__ = null;
+				ControlRef__Implementation__ = null;
 		}
 #region Serializer
 
@@ -323,25 +367,27 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_LayoutRef, binStream);
+            BinarySerializer.ToStream(this.fk_ControlRef, binStream);
+            BinarySerializer.ToStream(this.fk_PresentedModelRef, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
-            BinarySerializer.ToStream(this.fk_ViewRef, binStream);
+            BinarySerializer.ToStream((int)((ViewDescriptor)this).VisualType, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
             {
-                var tmp = this.fk_LayoutRef;
+                var tmp = this.fk_ControlRef;
                 BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_LayoutRef = tmp;
+                this.fk_ControlRef = tmp;
+            }
+            {
+                var tmp = this.fk_PresentedModelRef;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_PresentedModelRef = tmp;
             }
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
-            {
-                var tmp = this.fk_ViewRef;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_ViewRef = tmp;
-            }
+            BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, binStream);
         }
 
 #endregion

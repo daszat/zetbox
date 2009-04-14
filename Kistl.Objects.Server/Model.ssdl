@@ -36,8 +36,8 @@
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Table="Constraints"/>
     <EntitySet Name="Relation" EntityType="Model.Store.Relation" Table="Relations"/>
     <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Table="TypeRefs"/>
-    <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Table="ViewDescriptors"/>
     <EntitySet Name="RelationEnd" EntityType="Model.Store.RelationEnd" Table="RelationEnds"/>
+    <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Table="ViewDescriptors"/>
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
     <EntitySet Name="ObjectClass" EntityType="Model.Store.ObjectClass" Table="ObjectClasses"/>
@@ -509,13 +509,13 @@
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_68" Association="Model.Store.FK_ViewDescriptor_TypeRef_ViewDescriptor_68" >
-      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
-      <End Role="LayoutRef" EntitySet="TypeRef" />
+    <AssociationSet Name="FK_ViewDescriptor_TypeRef_View_75" Association="Model.Store.FK_ViewDescriptor_TypeRef_View_75" >
+      <End Role="View" EntitySet="ViewDescriptor" />
+      <End Role="PresentedModelRef" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_69" Association="Model.Store.FK_ViewDescriptor_TypeRef_ViewDescriptor_69" >
-      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
-      <End Role="ViewRef" EntitySet="TypeRef" />
+    <AssociationSet Name="FK_ViewDescriptor_TypeRef_View_76" Association="Model.Store.FK_ViewDescriptor_TypeRef_View_76" >
+      <End Role="View" EntitySet="ViewDescriptor" />
+      <End Role="ControlRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_Visual_Method_Visual_57" Association="Model.Store.FK_Visual_Method_Visual_57" >
       <End Role="Visual" EntitySet="Visual" />
@@ -1066,16 +1066,6 @@
     <Property Name="fk_Assembly" Type="int" />
   </EntityType>
 	
-  <EntityType Name="ViewDescriptor">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_LayoutRef" Type="int" />
-    <Property Name="Toolkit" Type="int" Nullable="false" />
-    <Property Name="fk_ViewRef" Type="int" />
-  </EntityType>
-	
   <EntityType Name="RelationEnd">
     <Key>
       <PropertyRef Name="ID" />
@@ -1087,6 +1077,17 @@
     <Property Name="fk_Navigator" Type="int" />
     <Property Name="Multiplicity" Type="int" Nullable="false" />
     <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="ViewDescriptor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_PresentedModelRef" Type="int" />
+    <Property Name="fk_ControlRef" Type="int" />
+    <Property Name="Toolkit" Type="int" Nullable="false" />
+    <Property Name="VisualType" Type="int" Nullable="false" />
   </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
@@ -1949,31 +1950,31 @@
   </Association>
 
 
-  <Association Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_68">
-    <End Role="LayoutRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+  <Association Name="FK_ViewDescriptor_TypeRef_View_75">
+    <End Role="PresentedModelRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="ViewDescriptor" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
+    <End Role="View" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="LayoutRef">
+      <Principal Role="PresentedModelRef">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="ViewDescriptor">
-        <PropertyRef Name="fk_LayoutRef" />
+      <Dependent Role="View">
+        <PropertyRef Name="fk_PresentedModelRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
 
 
-  <Association Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_69">
-    <End Role="ViewRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+  <Association Name="FK_ViewDescriptor_TypeRef_View_76">
+    <End Role="ControlRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="ViewDescriptor" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
+    <End Role="View" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ViewRef">
+      <Principal Role="ControlRef">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="ViewDescriptor">
-        <PropertyRef Name="fk_ViewRef" />
+      <Dependent Role="View">
+        <PropertyRef Name="fk_ControlRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

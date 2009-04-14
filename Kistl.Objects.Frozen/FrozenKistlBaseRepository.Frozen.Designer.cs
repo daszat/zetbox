@@ -370,16 +370,6 @@ namespace Kistl.App.Base
 			}
 		}
 		
-		/// <summary>Frozen List of all ViewDescriptor</summary>
-		/// 
-		public static IQueryable<ViewDescriptor> ViewDescriptors
-		{ 
-			get
-			{
-				return ViewDescriptor__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<ViewDescriptor>();
-			}
-		}
-		
 
 		internal static void CreateInstances()
 		{
@@ -419,7 +409,6 @@ namespace Kistl.App.Base
 				StructProperty__Implementation__Frozen.CreateInstances();
 				TypeRef__Implementation__Frozen.CreateInstances();
 				ValueTypeProperty__Implementation__Frozen.CreateInstances();
-				ViewDescriptor__Implementation__Frozen.CreateInstances();
 		}
 
 
@@ -461,7 +450,6 @@ namespace Kistl.App.Base
 				StructProperty__Implementation__Frozen.FillDataStore();
 				TypeRef__Implementation__Frozen.FillDataStore();
 				ValueTypeProperty__Implementation__Frozen.FillDataStore();
-				ViewDescriptor__Implementation__Frozen.FillDataStore();
 		}
 	}
 	

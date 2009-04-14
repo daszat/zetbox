@@ -14,16 +14,6 @@ namespace Kistl.App.Base
 		
 		public IKistlContext Context { get; private set; }
 		
-		/// <summary>List of all ViewDescriptor</summary>
-		/// 
-		public IQueryable<ViewDescriptor> ViewDescriptors
-		{ 
-			get
-			{
-				return Context.GetQuery<ViewDescriptor>();
-			}
-		}
-		
 		/// <summary>List of all ValueTypeProperty</summary>
 		/// Metadefinition Object for ValueType Properties. This class is abstract.
 		public IQueryable<ValueTypeProperty> ValueTypeProperties

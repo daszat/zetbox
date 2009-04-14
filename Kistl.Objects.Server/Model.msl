@@ -434,14 +434,6 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ViewDescriptor">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor)">
-	    <MappingFragment StoreEntitySet="ViewDescriptor">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Toolkit" ColumnName="Toolkit" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="RelationEnd">
       <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEnd)">
 	    <MappingFragment StoreEntitySet="RelationEnd">
@@ -450,6 +442,15 @@
 <ScalarProperty Name="Multiplicity" ColumnName="Multiplicity" />
 <ScalarProperty Name="Role" ColumnName="Role" />
 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewDescriptor">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor)">
+	    <MappingFragment StoreEntitySet="ViewDescriptor">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Toolkit" ColumnName="Toolkit" />
+<ScalarProperty Name="VisualType" ColumnName="VisualType" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1393,38 +1394,38 @@
       <Condition ColumnName="fk_Assembly" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ViewDescriptor_TypeRef_ViewDescriptor_68
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrOne TypeRef as LayoutRef
+    Relation: FK_ViewDescriptor_TypeRef_View_75
+    A: ZeroOrMore ViewDescriptor as View
+    B: One TypeRef as PresentedModelRef
     Preferred Storage: Left
     -->
-    <AssociationSetMapping Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_68"
-                           TypeName="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_68"
+    <AssociationSetMapping Name="FK_ViewDescriptor_TypeRef_View_75"
+                           TypeName="Model.FK_ViewDescriptor_TypeRef_View_75"
                            StoreEntitySet="ViewDescriptor" >
-      <EndProperty Name="LayoutRef">
-        <ScalarProperty Name="ID" ColumnName="fk_LayoutRef"/>
+      <EndProperty Name="PresentedModelRef">
+        <ScalarProperty Name="ID" ColumnName="fk_PresentedModelRef"/>
       </EndProperty>
-      <EndProperty Name="ViewDescriptor">
+      <EndProperty Name="View">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_LayoutRef" IsNull="false"/>
+      <Condition ColumnName="fk_PresentedModelRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ViewDescriptor_TypeRef_ViewDescriptor_69
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrOne TypeRef as ViewRef
+    Relation: FK_ViewDescriptor_TypeRef_View_76
+    A: ZeroOrMore ViewDescriptor as View
+    B: One TypeRef as ControlRef
     Preferred Storage: Left
     -->
-    <AssociationSetMapping Name="FK_ViewDescriptor_TypeRef_ViewDescriptor_69"
-                           TypeName="Model.FK_ViewDescriptor_TypeRef_ViewDescriptor_69"
+    <AssociationSetMapping Name="FK_ViewDescriptor_TypeRef_View_76"
+                           TypeName="Model.FK_ViewDescriptor_TypeRef_View_76"
                            StoreEntitySet="ViewDescriptor" >
-      <EndProperty Name="ViewRef">
-        <ScalarProperty Name="ID" ColumnName="fk_ViewRef"/>
+      <EndProperty Name="ControlRef">
+        <ScalarProperty Name="ID" ColumnName="fk_ControlRef"/>
       </EndProperty>
-      <EndProperty Name="ViewDescriptor">
+      <EndProperty Name="View">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_ViewRef" IsNull="false"/>
+      <Condition ColumnName="fk_ControlRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Visual_Method_Visual_57

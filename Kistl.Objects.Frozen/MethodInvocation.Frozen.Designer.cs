@@ -186,7 +186,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(102);
+		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(101);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new MethodInvocation__Implementation__Frozen(1);
@@ -372,8 +372,6 @@ namespace Kistl.App.Base
 			DataStore[108] = new MethodInvocation__Implementation__Frozen(108);
 
 			DataStore[109] = new MethodInvocation__Implementation__Frozen(109);
-
-			DataStore[110] = new MethodInvocation__Implementation__Frozen(110);
 
 			DataStore[111] = new MethodInvocation__Implementation__Frozen(111);
 
@@ -948,12 +946,6 @@ namespace Kistl.App.Base
 			DataStore[109].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[148];
 			DataStore[109].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[109].Seal();
-			DataStore[110].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
-			DataStore[110].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[80];
-			DataStore[110].MemberName = @"OnToString_ViewDescriptor";
-			DataStore[110].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[152];
-			DataStore[110].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[110].Seal();
 			DataStore[111].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
 			DataStore[111].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
 			DataStore[111].MemberName = @"OnRegenerateTypeRefs_Assembly";
