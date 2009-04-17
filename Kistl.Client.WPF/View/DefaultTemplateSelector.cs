@@ -19,11 +19,8 @@ namespace Kistl.Client.WPF.View
         {
             if (item is PresentableModel)
             {
-                TypeRef mdlType = item.GetType().ToRef(FrozenContext.Single);
-                PresentableModelDescriptor pmd = FrozenContext.Single
-                    .GetQuery<PresentableModelDescriptor>()
-                    .Single(obj => obj.PresentableModelRef == mdlType);
-
+                PresentableModelDescriptor pmd = item.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor(); 
+                
                 var vDesc = pmd.GetDefaultViewDescriptor(Toolkit.WPF);
 
                 DataTemplate result = new DataTemplate();

@@ -96,10 +96,7 @@ namespace Kistl.Client.Presentables
         /// <returns></returns>
         public IView CreateDefaultView(PresentableModel mdl)
         {
-            TypeRef mdlType = mdl.GetType().ToRef(FrozenContext.Single);
-            PresentableModelDescriptor pmd = FrozenContext.Single
-                .GetQuery<PresentableModelDescriptor>()
-                .Single(obj => obj.PresentableModelRef == mdlType);
+            PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor();
 
             var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
             IView view = (IView)vDesc.ControlRef.Create();

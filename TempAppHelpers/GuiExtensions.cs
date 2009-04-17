@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.App.Base;
 using Kistl.App.GUI;
 
 namespace Kistl.App.Extensions
@@ -37,15 +38,32 @@ namespace Kistl.App.Extensions
             Toolkit tk,
             VisualType vt)
         {
+            ViewDescriptor result = null;
+            while (result == null && pmd != null)
+            {
+                result = FrozenContext.Single
+                     .GetQuery<ViewDescriptor>()
+                     .SingleOrDefault(obj => obj.Toolkit == tk
+                         && obj.VisualType == vt
+                         && obj.PresentedModelDescriptor == pmd);
 
-            var debug = FrozenContext.Single
-                .GetQuery<ViewDescriptor>()
-                .Where(obj => obj.Toolkit == tk
-                    && obj.VisualType == vt
-                    && obj.PresentedModelDescriptor == pmd);
+                // crawl up the inheritance tree
+                pmd = pmd.PresentableModelRef.Parent.GetPresentableModelDescriptor();
+            }
 
-            var result = debug.Single();
+            return result;
+        }
 
+        public static PresentableModelDescriptor GetPresentableModelDescriptor(this TypeRef tr)
+        {
+            PresentableModelDescriptor result = null;
+            while (result == null && tr != null)
+            {
+                result = FrozenContext.Single
+                    .GetQuery<PresentableModelDescriptor>()
+                    .SingleOrDefault(obj => obj.PresentableModelRef.ID == tr.ID);
+                tr = tr.Parent;
+            }
             return result;
         }
 
