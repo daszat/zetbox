@@ -16,15 +16,16 @@ namespace Kistl.Client.Forms
 
         public void ShowModel(PresentableModel mdl, Control parent)
         {
-            Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
-            var vDesc = DataMocks.LookupViewDescriptor(Toolkit.TEST, lout);
-            var formsView = (IFormsView)vDesc.ViewRef.Create();
-            formsView.SetRenderer(this);
-            formsView.SetDataContext(mdl);
+            // TODO: revive with new infrastructure
+            //Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
+            //var vDesc = DataMocks.LookupViewDescriptor(Toolkit.WinForms, lout);
+            //var formsView = (IFormsView)vDesc.ViewRef.Create();
+            //formsView.SetRenderer(this);
+            //formsView.SetDataContext(mdl);
 
-            var control = (Control)formsView;
-            // control.Dock = DockStyle.Fill;
-            parent.Controls.Add(control);
+            //var control = (Control)formsView;
+            //// control.Dock = DockStyle.Fill;
+            //parent.Controls.Add(control);
         }
 
     }

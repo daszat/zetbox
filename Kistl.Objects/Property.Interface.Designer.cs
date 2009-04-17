@@ -81,11 +81,6 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// 
-        /// </summary>
-
-		 string GetGUIRepresentation() ;
-        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 

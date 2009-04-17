@@ -208,6 +208,87 @@ namespace Kistl.App.Base
         
 
         /// <summary>
+        /// The TypeRef of the BaseClass of the referenced Type
+        /// </summary>
+    /*
+    Relation: FK_TypeRef_TypeRef_Child_79
+    A: ZeroOrMore TypeRef as Child
+    B: One TypeRef as Parent
+    Preferred Storage: Left
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.TypeRef Parent
+        {
+            get
+            {
+                return Parent__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                Parent__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_Parent
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && Parent != null)
+                {
+                    _fk_Parent = Parent.ID;
+                }
+                return _fk_Parent;
+            }
+            set
+            {
+                _fk_Parent = value;
+            }
+        }
+        private int? _fk_Parent;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_Child_79", "Parent")]
+        public Kistl.App.Base.TypeRef__Implementation__ Parent__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
+                        "Model.FK_TypeRef_TypeRef_Child_79",
+                        "Parent");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
+                        "Model.FK_TypeRef_TypeRef_Child_79",
+                        "Parent");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Base.TypeRef__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
         /// get the referenced <see cref="System.Type"/>
         /// </summary>
 
@@ -243,6 +324,7 @@ namespace Kistl.App.Base
 
 			me.FullName = other.FullName;
 			this.fk_Assembly = otherImpl.fk_Assembly;
+			this.fk_Parent = otherImpl.fk_Parent;
 		}
 
         // tail template
@@ -283,6 +365,10 @@ namespace Kistl.App.Base
 				Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_Assembly.Value);
 			else
 				Assembly__Implementation__ = null;
+			if (_fk_Parent.HasValue)
+				Parent__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_Parent.Value);
+			else
+				Parent__Implementation__ = null;
 		}
 #region Serializer
 
@@ -292,6 +378,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_Assembly, binStream);
             BinarySerializer.ToStream(this._FullName, binStream);
+            BinarySerializer.ToStream(this.fk_Parent, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -303,6 +390,11 @@ namespace Kistl.App.Base
                 this.fk_Assembly = tmp;
             }
             BinarySerializer.FromStream(out this._FullName, binStream);
+            {
+                var tmp = this.fk_Parent;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_Parent = tmp;
+            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -310,11 +402,13 @@ namespace Kistl.App.Base
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this.fk_Assembly, xml, "fk_Assembly", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._FullName, xml, "FullName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Parent, xml, "fk_Parent", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
+            // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
         }

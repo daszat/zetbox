@@ -394,7 +394,7 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this.fk_ControlRef, xml, "fk_ControlRef", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_PresentedModelRef, xml, "fk_PresentedModelRef", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_PresentedModelDescriptor, xml, "fk_PresentedModelDescriptor", "http://dasz.at/Kistl");
             // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
         }

@@ -138,7 +138,7 @@ namespace Kistl.App.GUI
         { }
 
 
-		internal static Dictionary<int, PresentableModelDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, PresentableModelDescriptor__Implementation__Frozen>(25);
+		internal static Dictionary<int, PresentableModelDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, PresentableModelDescriptor__Implementation__Frozen>(29);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new PresentableModelDescriptor__Implementation__Frozen(1);
@@ -190,6 +190,14 @@ namespace Kistl.App.GUI
 			DataStore[24] = new PresentableModelDescriptor__Implementation__Frozen(24);
 
 			DataStore[25] = new PresentableModelDescriptor__Implementation__Frozen(25);
+
+			DataStore[30] = new PresentableModelDescriptor__Implementation__Frozen(30);
+
+			DataStore[31] = new PresentableModelDescriptor__Implementation__Frozen(31);
+
+			DataStore[32] = new PresentableModelDescriptor__Implementation__Frozen(32);
+
+			DataStore[33] = new PresentableModelDescriptor__Implementation__Frozen(33);
 
 		}
 
@@ -294,6 +302,22 @@ namespace Kistl.App.GUI
 			DataStore[25].Description = @"An enumeration value for TestEnum";
 			DataStore[25].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[293];
 			DataStore[25].Seal();
+			DataStore[30].DefaultVisualType = (VisualType)1;
+			DataStore[30].Description = @"DataObjectModel with specific extensions for DataTypes";
+			DataStore[30].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[11];
+			DataStore[30].Seal();
+			DataStore[31].DefaultVisualType = (VisualType)1;
+			DataStore[31].Description = @"DataObjectModel with specific extensions for MethodInvocations";
+			DataStore[31].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[41];
+			DataStore[31].Seal();
+			DataStore[32].DefaultVisualType = (VisualType)1;
+			DataStore[32].Description = @"DataObjectModel with specific extensions for Modules";
+			DataStore[32].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[9];
+			DataStore[32].Seal();
+			DataStore[33].DefaultVisualType = (VisualType)1;
+			DataStore[33].Description = @"DataObjectModel with specific extensions for ObjectClasses";
+			DataStore[33].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[10];
+			DataStore[33].Seal();
 	
 		}
 #region Serializer

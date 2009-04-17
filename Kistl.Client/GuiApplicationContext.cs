@@ -81,7 +81,7 @@ namespace Kistl.Client
                         new object[] { this }
                       );
                     break;
-                case Toolkit.TEST:
+                case Toolkit.WinForms:
                     //UiThread = new Kistl.Client.Presentables.WPF.UiThreadManager();
                     //AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
                     UiThread = new SynchronousThreadManager();

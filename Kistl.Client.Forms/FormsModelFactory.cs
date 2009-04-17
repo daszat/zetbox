@@ -22,7 +22,7 @@ namespace Kistl.Client.Forms
 
         protected override Kistl.App.GUI.Toolkit Toolkit
         {
-            get { return Kistl.App.GUI.Toolkit.TEST; }
+            get { return Kistl.App.GUI.Toolkit.WinForms; }
         }
 
         protected void CreateWorkspace(WorkspaceModel mdl, bool activate)

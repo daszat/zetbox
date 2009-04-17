@@ -108,7 +108,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, StringParameter__Implementation__Frozen> DataStore = new Dictionary<int, StringParameter__Implementation__Frozen>(8);
+		internal new static Dictionary<int, StringParameter__Implementation__Frozen> DataStore = new Dictionary<int, StringParameter__Implementation__Frozen>(7);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[1] = 
@@ -116,9 +116,6 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[3] = 
 			DataStore[3] = new StringParameter__Implementation__Frozen(3);
-
-			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[4] = 
-			DataStore[4] = new StringParameter__Implementation__Frozen(4);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[5] = 
 			DataStore[5] = new StringParameter__Implementation__Frozen(5);
@@ -150,12 +147,6 @@ namespace Kistl.App.Base
 			DataStore[3].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
 			DataStore[3].ParameterName = @"ReturnParameter";
 			DataStore[3].Seal();
-			DataStore[4].Description = null;
-			DataStore[4].IsList = false;
-			DataStore[4].IsReturnParameter = true;
-			DataStore[4].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[46];
-			DataStore[4].ParameterName = @"ReturnParameter";
-			DataStore[4].Seal();
 			DataStore[5].Description = null;
 			DataStore[5].IsList = false;
 			DataStore[5].IsReturnParameter = true;

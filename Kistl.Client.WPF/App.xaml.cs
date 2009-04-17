@@ -99,15 +99,134 @@ namespace Kistl.Client.WPF
             //AddDefaultPMDescriptorToObjectClass();
 
             //CreatePresentableModelDescriptors();
+            //CreateMorePresentableModelDescriptors();
+
+            //CreateTypeRefBaseTypeRefRelation();
+            //FixupTypeRefParents();
+        }
+
+        private void FixupTypeRefParents()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall("FixupTypeRefParents"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    var typeRefs = ctx.GetQuery<TypeRef>();
+                    foreach (var tr in typeRefs)
+                    {
+                        if (tr.Parent != null)
+                            continue;
+
+                        UpdateParent(ctx, tr);
+                        ctx.SubmitChanges();
+                    }
+                }
+            }
+        }
+
+        private static void UpdateParent(IKistlContext ctx, TypeRef tr)
+        {
+            var type = tr.AsType(false);
+            if (type != null 
+                && type != typeof(object) 
+                && !type.IsGenericTypeDefinition 
+                && type.BaseType != null)
+            {
+                tr.Parent = FindOrCreateTypeRef(ctx, type.BaseType.FullName, type.BaseType.Assembly.FullName);
+                UpdateParent(ctx, tr.Parent);
+            }
+        }
+
+        private void CreateTypeRefBaseTypeRefRelation()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall("CreateTypeRefBaseTypeRefRelation"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    var typeRefClass = ctx.GetQuery<ObjectClass>().Single(cls => cls.ClassName == "TypeRef");
+                    var baseModule = ctx.GetQuery<Module>().Single(m => m.ModuleName == "KistlBase");
+
+                    var controlRel = ctx.Create<Relation>();
+                    controlRel.Description = "This relation describes the underlying inheritance relationships";
+                    controlRel.A = ctx.Create<RelationEnd>();
+                    controlRel.A.RoleName = "Child";
+                    controlRel.A.Type = typeRefClass;
+                    controlRel.A.Multiplicity = Multiplicity.ZeroOrMore;
+                    controlRel.A.Navigator = ctx.Create<ObjectReferenceProperty>();
+                    controlRel.A.Navigator.Description = "The TypeRef of the BaseClass of the referenced Type";
+                    controlRel.A.Navigator.Module = baseModule;
+                    controlRel.A.Navigator.ObjectClass = typeRefClass;
+                    controlRel.A.Navigator.PropertyName = "Parent";
+                    controlRel.A.Navigator.ReferenceObjectClass = typeRefClass;
+                    controlRel.A.Role = (int)RelationEndRole.A;
+
+                    controlRel.B = ctx.Create<RelationEnd>();
+                    controlRel.B.RoleName = "Parent";
+                    controlRel.B.Type = typeRefClass;
+                    controlRel.B.Multiplicity = Multiplicity.One;
+                    controlRel.B.Role = (int)RelationEndRole.B;
+
+                    controlRel.Storage = StorageType.MergeIntoA;
+
+                    ctx.SubmitChanges();
+                }
+            }
+        }
+
+        private void CreateMorePresentableModelDescriptors()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall("CreateMorePresentableModelDescriptors"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    PresentableModelDescriptor pmd;
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(ObjectClassModel),
+                        VisualType.Object,
+                        "DataObjectModel with specific extensions for ObjectClasses");
+
+                    var ocClass = ctx.GetQuery<ObjectClass>().Single(obj => obj.ClassName == "ObjectClass");
+                    ocClass.DefaultPresentableModelDescriptor = pmd;
+
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(ModuleModel),
+                        VisualType.Object,
+                        "DataObjectModel with specific extensions for Modules");
+
+                    ocClass = ctx.GetQuery<ObjectClass>().Single(obj => obj.ClassName == "Module");
+                    ocClass.DefaultPresentableModelDescriptor = pmd;
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(MethodInvocationModel),
+                        VisualType.Object,
+                        "DataObjectModel with specific extensions for MethodInvocations");
+
+                    ocClass = ctx.GetQuery<ObjectClass>().Single(obj => obj.ClassName == "MethodInvocation");
+                    ocClass.DefaultPresentableModelDescriptor = pmd;
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(DataTypeModel),
+                        VisualType.Object,
+                        "DataObjectModel with specific extensions for DataTypes");
+
+                    ocClass = ctx.GetQuery<ObjectClass>().Single(obj => obj.ClassName == "DataType");
+                    ocClass.DefaultPresentableModelDescriptor = pmd;
+
+                    ctx.SubmitChanges();
+                }
+            }
         }
 
         private void CreatePresentableModelDescriptors()
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("Creating ViewDescriptor class for GUI"))
+            using (TraceClient.TraceHelper.TraceMethodCall("CreatePresentableModelDescriptors"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     ctx.GetQuery<PresentableModelDescriptor>().ForEach(obj => ctx.Delete(obj));
+                    ctx.GetQuery<ViewDescriptor>().ForEach(obj => ctx.Delete(obj));
 
                     PresentableModelDescriptor pmd;
 
@@ -128,7 +247,7 @@ namespace Kistl.Client.WPF
 
                     // no specific boolean control available
                     CreateViewDescriptor(ctx, pmd,
-                        Toolkit.WPF, VisualType.String,
+                        Toolkit.ASPNET, VisualType.String,
                         "Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit");
 
                     pmd = CreatePresentableModelDescriptor(ctx,
@@ -159,7 +278,7 @@ namespace Kistl.Client.WPF
 
                     CreateAllPropertyViewDescriptors(ctx, pmd);
 
-                    CreateViewDescriptor(ctx, pmd, 
+                    CreateViewDescriptor(ctx, pmd,
                         Toolkit.WPF, VisualType.StringList,
                         "Kistl.Client.WPF.View.ListValueView", "Kistl.Client.WPF");
 
@@ -196,7 +315,7 @@ namespace Kistl.Client.WPF
 
                         // no specific enumeration control available
                         CreateViewDescriptor(ctx, pmd,
-                            Toolkit.WPF, VisualType.String,
+                            Toolkit.ASPNET, VisualType.String,
                             "Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit");
 
                     }
@@ -218,7 +337,7 @@ namespace Kistl.Client.WPF
 
                     // no specific boolean control available
                     CreateViewDescriptor(ctx, pmd,
-                        Toolkit.WPF, VisualType.String,
+                        Toolkit.ASPNET, VisualType.String,
                         "Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit");
 
 
@@ -445,7 +564,7 @@ namespace Kistl.Client.WPF
 
         private void AddDefaultPMDescriptorToObjectClass()
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("Creating ViewDescriptor class for GUI"))
+            using (TraceClient.TraceHelper.TraceMethodCall("AddDefaultPMDescriptorToObjectClass"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
@@ -483,7 +602,7 @@ namespace Kistl.Client.WPF
 
         private void CreatePresentableModelDescriptorClass()
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("Creating ViewDescriptor class for GUI"))
+            using (TraceClient.TraceHelper.TraceMethodCall("CreatePresentableModelDescriptorClass"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
@@ -537,22 +656,6 @@ namespace Kistl.Client.WPF
 
                     ctx.SubmitChanges();
 
-                }
-            }
-        }
-
-        private void CreateViewDescriptors()
-        {
-            using (TraceClient.TraceHelper.TraceMethodCall("Creating ViewDescriptor class for GUI"))
-            {
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    foreach (var vd in Kistl.Client.GUI.DB.DataMocks.Views)
-                    {
-                        var descriptor = ctx.Create<ViewDescriptor>();
-                        descriptor.Toolkit = vd.Toolkit;
-                        //descriptor.VisualType
-                    }
                 }
             }
         }

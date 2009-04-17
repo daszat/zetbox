@@ -48,14 +48,7 @@ namespace Kistl.Client.Presentables
                 .OrderBy(dt => dt.ClassName);
             foreach (var dt in datatypes)
             {
-                if (dt is ObjectClass)
-                {
-                    ObjectClasses.Add(Factory.CreateSpecificModel<ObjectClassModel>(DataContext, (ObjectClass)dt));
-                }
-                else
-                {
-                    ObjectClasses.Add(Factory.CreateSpecificModel<DataTypeModel>(DataContext, dt));
-                }
+                ObjectClasses.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, dt));
             }
         }
 

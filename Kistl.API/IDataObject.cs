@@ -59,7 +59,7 @@ namespace Kistl.API
         /// Serialize this Object to a XmlWriter
         /// </summary>
         /// <param name="xml">XmlWriter to serialize to</param>
-        /// <param name="modules"
+        /// <param name="modules">a list of modules to filter the output</param>
         void ToStream(System.Xml.XmlWriter xml, string[] modules);
         /// <summary>
         /// Deserialize this Object from a XmlReader

@@ -1437,6 +1437,23 @@
       <Condition ColumnName="fk_Assembly" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_TypeRef_TypeRef_Child_79
+    A: ZeroOrMore TypeRef as Child
+    B: One TypeRef as Parent
+    Preferred Storage: Left
+    -->
+    <AssociationSetMapping Name="FK_TypeRef_TypeRef_Child_79"
+                           TypeName="Model.FK_TypeRef_TypeRef_Child_79"
+                           StoreEntitySet="TypeRef" >
+      <EndProperty Name="Parent">
+        <ScalarProperty Name="ID" ColumnName="fk_Parent"/>
+      </EndProperty>
+      <EndProperty Name="Child">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Parent" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_ViewDescriptor_PresentableModelDescriptor_View_75
     A: ZeroOrMore ViewDescriptor as View
     B: One PresentableModelDescriptor as PresentedModelDescriptor

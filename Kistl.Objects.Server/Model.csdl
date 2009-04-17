@@ -272,6 +272,10 @@
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
+    <AssociationSet Name="FK_TypeRef_TypeRef_Child_79" Association="Model.FK_TypeRef_TypeRef_Child_79" >
+      <End Role="Child" EntitySet="TypeRef" />
+      <End Role="Parent" EntitySet="TypeRef" />
+    </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_PresentableModelDescriptor_View_75" Association="Model.FK_ViewDescriptor_PresentableModelDescriptor_View_75" >
       <End Role="View" EntitySet="ViewDescriptor" />
       <End Role="PresentedModelDescriptor" EntitySet="PresentableModelDescriptor" />
@@ -751,6 +755,10 @@
                         Relationship="Model.FK_TypeRef_TypeRef_TypeRef_66"
                         FromRole="TypeRef"
                         ToRole="CollectionEntry" />
+    <NavigationProperty Name="Parent__Implementation__"
+                        Relationship="Model.FK_TypeRef_TypeRef_Child_79"
+                        FromRole="Child"
+                        ToRole="Parent" />
   </EntityType>
   <EntityType Name="ViewDescriptor">
     <Key>
@@ -1575,6 +1583,14 @@
          Multiplicity="*" />
     <End Role="Assembly"
          Type="Model.Assembly" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_TypeRef_TypeRef_Child_79" >
+    <End Role="Child"
+         Type="Model.TypeRef" 
+         Multiplicity="*" />
+    <End Role="Parent"
+         Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ViewDescriptor_PresentableModelDescriptor_View_75" >

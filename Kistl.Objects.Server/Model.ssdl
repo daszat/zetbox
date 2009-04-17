@@ -518,6 +518,10 @@
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
+    <AssociationSet Name="FK_TypeRef_TypeRef_Child_79" Association="Model.Store.FK_TypeRef_TypeRef_Child_79" >
+      <End Role="Child" EntitySet="TypeRef" />
+      <End Role="Parent" EntitySet="TypeRef" />
+    </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_PresentableModelDescriptor_View_75" Association="Model.Store.FK_ViewDescriptor_PresentableModelDescriptor_View_75" >
       <End Role="View" EntitySet="ViewDescriptor" />
       <End Role="PresentedModelDescriptor" EntitySet="PresentableModelDescriptor" />
@@ -1074,6 +1078,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="fk_Assembly" Type="int" />
+    <Property Name="fk_Parent" Type="int" />
   </EntityType>
 	
   <EntityType Name="RelationEnd">
@@ -1995,6 +2000,21 @@
       </Principal>
       <Dependent Role="TypeRef">
         <PropertyRef Name="fk_Assembly" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_TypeRef_TypeRef_Child_79">
+    <End Role="Parent" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Child" Type="Model.Store.TypeRef" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parent">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Child">
+        <PropertyRef Name="fk_Parent" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

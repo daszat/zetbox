@@ -266,28 +266,6 @@ namespace Kistl.App.Base
         private string _PropertyName;
 
         /// <summary>
-        /// 
-        /// </summary>
-
-		public virtual string GetGUIRepresentation() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetGUIRepresentation_Property != null)
-            {
-                OnGetGUIRepresentation_Property(this, e);
-            }
-            else
-            {
-                throw new NotImplementedException("No handler registered on Property.GetGUIRepresentation");
-            }
-            return e.Result;
-        }
-		public delegate void GetGUIRepresentation_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-		public event GetGUIRepresentation_Handler<Property> OnGetGUIRepresentation_Property;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 

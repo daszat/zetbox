@@ -5,8 +5,11 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
+using Kistl.API;
+using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.App.GUI;
-using Kistl.Client.GUI.DB;
+using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View
 {
@@ -14,12 +17,17 @@ namespace Kistl.Client.WPF.View
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            if (item != null)
+            if (item is PresentableModel)
             {
-                Layout lout = DataMocks.LookupDefaultLayout(item.GetType());
-                var vDesc = DataMocks.LookupViewDescriptor(Toolkit.WPF, lout);
+                TypeRef mdlType = item.GetType().ToRef(FrozenContext.Single);
+                PresentableModelDescriptor pmd = FrozenContext.Single
+                    .GetQuery<PresentableModelDescriptor>()
+                    .Single(obj => obj.PresentableModelRef == mdlType);
+
+                var vDesc = pmd.GetDefaultViewDescriptor(Toolkit.WPF);
+
                 DataTemplate result = new DataTemplate();
-                result.VisualTree = new FrameworkElementFactory(vDesc.ViewRef.AsType(true));
+                result.VisualTree = new FrameworkElementFactory(vDesc.ControlRef.AsType(true));
                 return result;
             }
 

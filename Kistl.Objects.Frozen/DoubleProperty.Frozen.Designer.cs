@@ -27,27 +27,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// 
-        /// </summary>
-
-		public override string GetGUIRepresentation() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetGUIRepresentation_DoubleProperty != null)
-            {
-                OnGetGUIRepresentation_DoubleProperty(this, e);
-            }
-            else
-            {
-                e.Result = base.GetGUIRepresentation();
-            }
-            return e.Result;
-        }
-		public event GetGUIRepresentation_Handler<DoubleProperty> OnGetGUIRepresentation_DoubleProperty;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 

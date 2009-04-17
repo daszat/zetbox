@@ -195,27 +195,6 @@ namespace Kistl.App.Base
         
 
         /// <summary>
-        /// 
-        /// </summary>
-
-		public override string GetGUIRepresentation() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetGUIRepresentation_ObjectReferenceProperty != null)
-            {
-                OnGetGUIRepresentation_ObjectReferenceProperty(this, e);
-            }
-            else
-            {
-                e.Result = base.GetGUIRepresentation();
-            }
-            return e.Result;
-        }
-		public event GetGUIRepresentation_Handler<ObjectReferenceProperty> OnGetGUIRepresentation_ObjectReferenceProperty;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 

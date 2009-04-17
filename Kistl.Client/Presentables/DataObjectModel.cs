@@ -126,10 +126,9 @@ namespace Kistl.Client.Presentables
                                 DataContext,
                                 group.Key,
                                 group.Select(p =>
-                                    Factory.CreateModel(
-                                        DataMocks.LookupDefaultPropertyModelDescriptor(p).AsType(true),
+                                    Factory.CreateDefaultModel(
                                         DataContext,
-                                        new object[] { _object, p }))))
+                                        _object, p))))
                             .ToList());
 
                 }

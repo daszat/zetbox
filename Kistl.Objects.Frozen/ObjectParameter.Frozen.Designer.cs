@@ -132,7 +132,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectParameter__Implementation__Frozen> DataStore = new Dictionary<int, ObjectParameter__Implementation__Frozen>(5);
+		internal new static Dictionary<int, ObjectParameter__Implementation__Frozen> DataStore = new Dictionary<int, ObjectParameter__Implementation__Frozen>(4);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[10] = 
@@ -146,9 +146,6 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[36] = 
 			DataStore[36] = new ObjectParameter__Implementation__Frozen(36);
-
-			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[39] = 
-			DataStore[39] = new ObjectParameter__Implementation__Frozen(39);
 
 		}
 
@@ -181,13 +178,6 @@ namespace Kistl.App.Base
 			DataStore[36].ParameterName = @"cls";
 			DataStore[36].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[36].Seal();
-			DataStore[39].Description = @"returns the TypeRef of the default model for this ObjectClass";
-			DataStore[39].IsList = false;
-			DataStore[39].IsReturnParameter = true;
-			DataStore[39].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[156];
-			DataStore[39].ParameterName = @"result";
-			DataStore[39].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
-			DataStore[39].Seal();
 	
 		}
 #region Serializer

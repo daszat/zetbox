@@ -53,27 +53,6 @@ namespace Kistl.App.Base
         private int _Length;
 
         /// <summary>
-        /// 
-        /// </summary>
-
-		public override string GetGUIRepresentation() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetGUIRepresentation_StringProperty != null)
-            {
-                OnGetGUIRepresentation_StringProperty(this, e);
-            }
-            else
-            {
-                e.Result = base.GetGUIRepresentation();
-            }
-            return e.Result;
-        }
-		public event GetGUIRepresentation_Handler<StringProperty> OnGetGUIRepresentation_StringProperty;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 

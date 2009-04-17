@@ -68,11 +68,6 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		 Kistl.App.Base.TypeRef GetDefaultModelRef() ;
-        /// <summary>
-        /// 
-        /// </summary>
-
 		 IList<Kistl.App.Base.Method> GetInheritedMethods() ;
     }
 }

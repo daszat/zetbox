@@ -30,6 +30,7 @@ namespace Kistl.Client.WPF
 
     public class WpfModelFactory : ModelFactory
     {
+
         public WpfModelFactory(IGuiApplicationContext appCtx)
             : base(appCtx)
         {
@@ -59,6 +60,7 @@ namespace Kistl.Client.WPF
         }
 
         protected override object Renderer { get { return null; } }
+
     }
 
 }

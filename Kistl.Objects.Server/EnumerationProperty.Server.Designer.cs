@@ -114,27 +114,6 @@ namespace Kistl.App.Base
         
 
         /// <summary>
-        /// 
-        /// </summary>
-
-		public override string GetGUIRepresentation() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetGUIRepresentation_EnumerationProperty != null)
-            {
-                OnGetGUIRepresentation_EnumerationProperty(this, e);
-            }
-            else
-            {
-                e.Result = base.GetGUIRepresentation();
-            }
-            return e.Result;
-        }
-		public event GetGUIRepresentation_Handler<EnumerationProperty> OnGetGUIRepresentation_EnumerationProperty;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 

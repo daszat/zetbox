@@ -515,7 +515,7 @@ namespace Kistl.App.Base
 			DataStore[204].Seal();
 			DataStore[205].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[177];
 			DataStore[205].Reason = null;
-			DataStore[205].MaxLength = 200;
+			DataStore[205].MaxLength = 600;
 			DataStore[205].MinLength = 0;
 			DataStore[205].Seal();
 			DataStore[206].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[176];

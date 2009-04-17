@@ -186,7 +186,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(101);
+		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(97);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new MethodInvocation__Implementation__Frozen(1);
@@ -248,12 +248,6 @@ namespace Kistl.App.Base
 			DataStore[35] = new MethodInvocation__Implementation__Frozen(35);
 
 			DataStore[37] = new MethodInvocation__Implementation__Frozen(37);
-
-			DataStore[41] = new MethodInvocation__Implementation__Frozen(41);
-
-			DataStore[42] = new MethodInvocation__Implementation__Frozen(42);
-
-			DataStore[43] = new MethodInvocation__Implementation__Frozen(43);
 
 			DataStore[44] = new MethodInvocation__Implementation__Frozen(44);
 
@@ -374,8 +368,6 @@ namespace Kistl.App.Base
 			DataStore[109] = new MethodInvocation__Implementation__Frozen(109);
 
 			DataStore[111] = new MethodInvocation__Implementation__Frozen(111);
-
-			DataStore[112] = new MethodInvocation__Implementation__Frozen(112);
 
 			DataStore[113] = new MethodInvocation__Implementation__Frozen(113);
 
@@ -574,24 +566,6 @@ namespace Kistl.App.Base
 			DataStore[37].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
 			DataStore[37].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[37].Seal();
-			DataStore[41].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
-			DataStore[41].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[12];
-			DataStore[41].MemberName = @"OnGetGUIRepresentation_BoolProperty";
-			DataStore[41].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[46];
-			DataStore[41].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[41].Seal();
-			DataStore[42].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
-			DataStore[42].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
-			DataStore[42].MemberName = @"OnGetGUIRepresentation_ObjectReferenceProperty";
-			DataStore[42].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[46];
-			DataStore[42].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[42].Seal();
-			DataStore[43].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
-			DataStore[43].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[15];
-			DataStore[43].MemberName = @"OnGetGUIRepresentation_DateTimeProperty";
-			DataStore[43].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[46];
-			DataStore[43].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[43].Seal();
 			DataStore[44].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[6];
 			DataStore[44].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[31];
 			DataStore[44].MemberName = @"OnToString_TaetigkeitsArt";
@@ -952,12 +926,6 @@ namespace Kistl.App.Base
 			DataStore[111].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[155];
 			DataStore[111].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[111].Seal();
-			DataStore[112].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
-			DataStore[112].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
-			DataStore[112].MemberName = @"OnGetDefaultModelRef_ObjectClass";
-			DataStore[112].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[156];
-			DataStore[112].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[112].Seal();
 			DataStore[113].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[7];
 			DataStore[113].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
 			DataStore[113].MemberName = @"OnToString_RelationEnd";

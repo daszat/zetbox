@@ -138,6 +138,68 @@ namespace Kistl.App.Base
 		private ClientRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments66CollectionEntry__Implementation__> _GenericArguments;
 
         /// <summary>
+        /// The TypeRef of the BaseClass of the referenced Type
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.TypeRef Parent
+        {
+            get
+            {
+                if (fk_Parent.HasValue)
+                    return Context.Find<Kistl.App.Base.TypeRef>(fk_Parent.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                
+                // shortcut noops
+                if (value == null && _fk_Parent == null)
+					return;
+                else if (value != null && value.ID == _fk_Parent)
+					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Parent;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Parent", oldValue, value);
+                
+				// next, set the local reference
+                _fk_Parent = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Parent", oldValue, value);
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_Parent
+        {
+            get
+            {
+                return _fk_Parent;
+            }
+            private set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_Parent != value)
+                {
+					var __oldValue = _fk_Parent;
+                    NotifyPropertyChanging("Parent", __oldValue, value);
+                    _fk_Parent = value;
+                    NotifyPropertyChanged("Parent", __oldValue, value);
+                }
+            }
+        }
+        private int? _fk_Parent;
+
+        /// <summary>
         /// get the referenced <see cref="System.Type"/>
         /// </summary>
 
@@ -173,6 +235,7 @@ namespace Kistl.App.Base
 
 			me.FullName = other.FullName;
 			this.fk_Assembly = otherImpl.fk_Assembly;
+			this.fk_Parent = otherImpl.fk_Parent;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -218,6 +281,9 @@ namespace Kistl.App.Base
                 case "Assembly":
                     fk_Assembly = id;
                     break;
+                case "Parent":
+                    fk_Parent = id;
+                    break;
 				default:
 					base.UpdateParent(propertyName, id);
 					break;
@@ -232,6 +298,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_Assembly, binStream);
             BinarySerializer.ToStream(this._FullName, binStream);
+            BinarySerializer.ToStream(this._fk_Parent, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -239,6 +306,7 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Assembly, binStream);
             BinarySerializer.FromStream(out this._FullName, binStream);
+            BinarySerializer.FromStream(out this._fk_Parent, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -246,11 +314,13 @@ namespace Kistl.App.Base
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this._fk_Assembly, xml, "fk_Assembly", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._FullName, xml, "FullName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Parent, xml, "fk_Parent", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
+            // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
         }

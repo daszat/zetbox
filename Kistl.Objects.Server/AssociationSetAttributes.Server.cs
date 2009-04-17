@@ -677,6 +677,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_TypeRef_TypeRef_Child_79
+    A: ZeroOrMore TypeRef as Child
+    B: One TypeRef as Parent
+    Preferred Storage: Left
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_TypeRef_TypeRef_Child_79",
+    "Child", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.TypeRef__Implementation__),
+    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_TypeRef_TypeRef_TypeRef_66
     A: ZeroOrMore TypeRef as TypeRef
     B: ZeroOrMore TypeRef as GenericArguments

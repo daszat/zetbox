@@ -159,7 +159,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, Assembly__Implementation__Frozen> DataStore = new Dictionary<int, Assembly__Implementation__Frozen>(10);
+		internal static Dictionary<int, Assembly__Implementation__Frozen> DataStore = new Dictionary<int, Assembly__Implementation__Frozen>(20);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new Assembly__Implementation__Frozen(1);
@@ -181,6 +181,26 @@ namespace Kistl.App.Base
 			DataStore[17] = new Assembly__Implementation__Frozen(17);
 
 			DataStore[18] = new Assembly__Implementation__Frozen(18);
+
+			DataStore[29] = new Assembly__Implementation__Frozen(29);
+
+			DataStore[30] = new Assembly__Implementation__Frozen(30);
+
+			DataStore[31] = new Assembly__Implementation__Frozen(31);
+
+			DataStore[32] = new Assembly__Implementation__Frozen(32);
+
+			DataStore[33] = new Assembly__Implementation__Frozen(33);
+
+			DataStore[34] = new Assembly__Implementation__Frozen(34);
+
+			DataStore[35] = new Assembly__Implementation__Frozen(35);
+
+			DataStore[36] = new Assembly__Implementation__Frozen(36);
+
+			DataStore[37] = new Assembly__Implementation__Frozen(37);
+
+			DataStore[38] = new Assembly__Implementation__Frozen(38);
 
 		}
 
@@ -225,6 +245,46 @@ namespace Kistl.App.Base
 			DataStore[18].IsClientAssembly = false;
 			DataStore[18].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[18].Seal();
+			DataStore[29].AssemblyName = @"mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+			DataStore[29].IsClientAssembly = false;
+			DataStore[29].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[29].Seal();
+			DataStore[30].AssemblyName = @"Kistl.API.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[30].IsClientAssembly = false;
+			DataStore[30].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[30].Seal();
+			DataStore[31].AssemblyName = @"WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+			DataStore[31].IsClientAssembly = false;
+			DataStore[31].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[31].Seal();
+			DataStore[32].AssemblyName = @"PresentationCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+			DataStore[32].IsClientAssembly = false;
+			DataStore[32].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[32].Seal();
+			DataStore[33].AssemblyName = @"PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+			DataStore[33].IsClientAssembly = false;
+			DataStore[33].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[33].Seal();
+			DataStore[34].AssemblyName = @"Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[34].IsClientAssembly = false;
+			DataStore[34].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[34].Seal();
+			DataStore[35].AssemblyName = @"Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[35].IsClientAssembly = false;
+			DataStore[35].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[35].Seal();
+			DataStore[36].AssemblyName = @"System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+			DataStore[36].IsClientAssembly = false;
+			DataStore[36].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[36].Seal();
+			DataStore[37].AssemblyName = @"System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+			DataStore[37].IsClientAssembly = false;
+			DataStore[37].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[37].Seal();
+			DataStore[38].AssemblyName = @"Kistl.Client.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[38].IsClientAssembly = false;
+			DataStore[38].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[38].Seal();
 	
 		}
 #region Serializer

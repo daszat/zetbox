@@ -401,28 +401,6 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public virtual Kistl.App.Base.TypeRef GetDefaultModelRef() 
-        {
-            var e = new MethodReturnEventArgs<Kistl.App.Base.TypeRef>();
-            if (OnGetDefaultModelRef_ObjectClass != null)
-            {
-                OnGetDefaultModelRef_ObjectClass(this, e);
-            }
-            else
-            {
-                throw new NotImplementedException("No handler registered on ObjectClass.GetDefaultModelRef");
-            }
-            return e.Result;
-        }
-		public delegate void GetDefaultModelRef_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.TypeRef> ret);
-		public event GetDefaultModelRef_Handler<ObjectClass> OnGetDefaultModelRef_ObjectClass;
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-
 		public virtual IList<Kistl.App.Base.Method> GetInheritedMethods() 
         {
             var e = new MethodReturnEventArgs<IList<Kistl.App.Base.Method>>();

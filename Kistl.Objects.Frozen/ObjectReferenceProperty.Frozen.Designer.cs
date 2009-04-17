@@ -75,27 +75,6 @@ namespace Kistl.App.Base
         private Kistl.App.Base.RelationEnd _RelationEnd;
 
         /// <summary>
-        /// 
-        /// </summary>
-
-		public override string GetGUIRepresentation() 
-        {
-            var e = new MethodReturnEventArgs<string>();
-            if (OnGetGUIRepresentation_ObjectReferenceProperty != null)
-            {
-                OnGetGUIRepresentation_ObjectReferenceProperty(this, e);
-            }
-            else
-            {
-                e.Result = base.GetGUIRepresentation();
-            }
-            return e.Result;
-        }
-		public event GetGUIRepresentation_Handler<ObjectReferenceProperty> OnGetGUIRepresentation_ObjectReferenceProperty;
-
-
-
-        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 
@@ -177,7 +156,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(74);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(75);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
@@ -401,6 +380,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[234] = 
 			DataStore[234] = new ObjectReferenceProperty__Implementation__Frozen(234);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[235] = 
+			DataStore[235] = new ObjectReferenceProperty__Implementation__Frozen(235);
 
 		}
 
@@ -1398,6 +1380,19 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[234].PropertyName = @"DefaultPresentableModelDescriptor";
 			DataStore[234].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[85];
 			DataStore[234].Seal();
+			DataStore[235].AltText = null;
+			DataStore[235].CategoryTags = null;
+			DataStore[235].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[235].Description = @"The TypeRef of the BaseClass of the referenced Type";
+			DataStore[235].IsIndexed = false;
+			DataStore[235].IsList = false;
+			DataStore[235].IsNullable = false;
+			DataStore[235].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[235].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
+			DataStore[235].PropertyName = @"Parent";
+			DataStore[235].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
+			DataStore[235].Seal();
 	
 		}
 #region Serializer

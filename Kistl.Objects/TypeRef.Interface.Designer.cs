@@ -32,6 +32,13 @@ namespace Kistl.App.Base
 
         IList<Kistl.App.Base.TypeRef> GenericArguments { get; }
         /// <summary>
+        /// The TypeRef of the BaseClass of the referenced Type
+        /// </summary>
+		Kistl.App.Base.TypeRef Parent {
+			get;
+			set;
+		}
+        /// <summary>
         /// get the referenced <see cref="System.Type"/>
         /// </summary>
 

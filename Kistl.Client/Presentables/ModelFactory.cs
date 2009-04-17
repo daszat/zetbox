@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.App.GUI;
 using Kistl.Client.GUI;
 using Kistl.Client.GUI.DB;
@@ -51,7 +53,10 @@ namespace Kistl.Client.Presentables
         /// <returns>the configured model</returns>
         public PresentableModel CreateDefaultModel(IKistlContext ctx, IDataObject obj, params object[] data)
         {
-            Type t = obj.GetObjectClass(AppContext.MetaContext).GetDefaultModelRef().AsType(true); ;
+            Type t = obj.GetObjectClass(AppContext.MetaContext)
+                .DefaultPresentableModelDescriptor
+                .PresentableModelRef
+                .AsType(true); ;
             return CreateModel(t, ctx, new object[] { obj }.Concat(data).ToArray());
         }
 
@@ -91,9 +96,13 @@ namespace Kistl.Client.Presentables
         /// <returns></returns>
         public IView CreateDefaultView(PresentableModel mdl)
         {
-            Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
-            var vDesc = DataMocks.LookupViewDescriptor(Toolkit, lout);
-            IView view = (IView)vDesc.ViewRef.Create();
+            TypeRef mdlType = mdl.GetType().ToRef(FrozenContext.Single);
+            PresentableModelDescriptor pmd = FrozenContext.Single
+                .GetQuery<PresentableModelDescriptor>()
+                .Single(obj => obj.PresentableModelRef == mdlType);
+
+            var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
+            IView view = (IView)vDesc.ControlRef.Create();
             view.SetModel(mdl);
             return view;
         }
@@ -112,14 +121,6 @@ namespace Kistl.Client.Presentables
         }
 
         protected abstract void ShowInView(object renderer, PresentableModel mdl, IView view, bool activate);
-
-        //public void ShowModel(PresentableModel mdl, TContainer parent)
-        //{
-        //    Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());
-        //    ViewDescriptor vDesc = DataMocks.LookupViewDescriptor(Toolkit, lout);
-        //    ShowInViewInContainer(vDesc.ViewRef.Create(), mdl, parent);
-        //}
-        //protected abstract void ShowInViewInContainer(PresentableModel mdl, TView view, TContainer parent);
 
         #endregion
     }
