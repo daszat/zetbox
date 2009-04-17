@@ -93,12 +93,473 @@ namespace Kistl.Client.WPF
             //FixNotNullableConstraints();
             //CreateTypeRefs();
 
-            // CreateViewDescriptors();
+            //CreateViewDescriptors();
+            //CreatePresentableModelDescriptorClass();
+
+            //AddDefaultPMDescriptorToObjectClass();
+
+            //CreatePresentableModelDescriptors();
+        }
+
+        private void CreatePresentableModelDescriptors()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall("Creating ViewDescriptor class for GUI"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    ctx.GetQuery<PresentableModelDescriptor>().ForEach(obj => ctx.Delete(obj));
+
+                    PresentableModelDescriptor pmd;
+
+                    // Propertyvalues
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(NullableValuePropertyModel<Boolean>),
+                        VisualType.Boolean,
+                        "A simple true/false attribute");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.Boolean,
+                        "Kistl.Client.WPF.View.NullableBoolValueView", "Kistl.Client.WPF");
+
+                    // no specific boolean control available
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WinForms, VisualType.String,
+                        "Kistl.Client.Forms.View.NullablePropertyTextBoxView", "Kistl.Client.Forms");
+
+                    // no specific boolean control available
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.String,
+                        "Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit");
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(NullableValuePropertyModel<DateTime>),
+                        VisualType.String,
+                        "A date and time attribute");
+
+                    CreateAllPropertyViewDescriptors(ctx, pmd);
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(NullableValuePropertyModel<Double>),
+                        VisualType.String,
+                        "A floating point attribute");
+
+                    CreateAllPropertyViewDescriptors(ctx, pmd);
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(NullableValuePropertyModel<int>),
+                        VisualType.String,
+                        "An integer attribute");
+
+                    CreateAllPropertyViewDescriptors(ctx, pmd);
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(ReferencePropertyModel<String>),
+                        VisualType.String,
+                        "A string attribute");
+
+                    CreateAllPropertyViewDescriptors(ctx, pmd);
+
+                    CreateViewDescriptor(ctx, pmd, 
+                        Toolkit.WPF, VisualType.StringList,
+                        "Kistl.Client.WPF.View.ListValueView", "Kistl.Client.WPF");
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(ChooseReferencePropertyModel<String>),
+                        VisualType.StringSelection,
+                        "Select a string value from a set of values");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.StringSelection,
+                        "Kistl.Client.WPF.View.TextValueSelectionView", "Kistl.Client.WPF");
+
+
+
+                    foreach (var enumDef in ctx.GetQuery<Enumeration>())
+                    {
+                        Type enumType = typeof(EnumerationPropertyModel<int>)
+                            .GetGenericTypeDefinition()
+                            .MakeGenericType(enumDef.GetDataType());
+
+                        pmd = CreatePresentableModelDescriptor(ctx,
+                            enumType,
+                            VisualType.Enumeration,
+                            String.Format("An enumeration value for {0}", enumDef.ClassName));
+
+                        CreateViewDescriptor(ctx, pmd,
+                            Toolkit.WPF, VisualType.Enumeration,
+                            "Kistl.Client.WPF.View.EnumSelectionView", "Kistl.Client.WPF");
+
+                        // no specific enumeration control available
+                        CreateViewDescriptor(ctx, pmd,
+                            Toolkit.WinForms, VisualType.String,
+                            "Kistl.Client.Forms.View.NullablePropertyTextBoxView", "Kistl.Client.Forms");
+
+                        // no specific enumeration control available
+                        CreateViewDescriptor(ctx, pmd,
+                            Toolkit.WPF, VisualType.String,
+                            "Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit");
+
+                    }
+
+                    // Method results
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(NullableResultModel<Boolean>),
+                        VisualType.Boolean,
+                        "A method returning true or false");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.Boolean,
+                        "Kistl.Client.WPF.View.NullableBoolValueView", "Kistl.Client.WPF");
+
+                    // no specific boolean control available
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WinForms, VisualType.String,
+                        "Kistl.Client.Forms.View.NullablePropertyTextBoxView", "Kistl.Client.Forms");
+
+                    // no specific boolean control available
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.String,
+                        "Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit");
+
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(NullableResultModel<DateTime>),
+                        VisualType.String,
+                        "A method returning a date and time value");
+
+                    CreateAllPropertyViewDescriptors(ctx, pmd);
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(NullableResultModel<Double>),
+                        VisualType.String,
+                        "A method returning a floating point value");
+
+                    CreateAllPropertyViewDescriptors(ctx, pmd);
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(NullableResultModel<int>),
+                        VisualType.String,
+                        "A method returning an integer value");
+
+                    CreateAllPropertyViewDescriptors(ctx, pmd);
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(ObjectResultModel<String>),
+                        VisualType.String,
+                        "A method returning a string");
+
+                    CreateAllPropertyViewDescriptors(ctx, pmd);
+
+
+                    // Various top- and midlevel objects
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(PropertyGroupModel),
+                        VisualType.PropertyGroup,
+                        "A group of properties");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.PropertyGroup,
+                        "Kistl.Client.WPF.View.PropertyGroupBoxView", "Kistl.Client.WPF");
+
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(DataObjectModel),
+                        VisualType.Object,
+                        "A complete IDataObject");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.Object,
+                        "Kistl.Client.WPF.View.DataObjectFullView", "Kistl.Client.WPF");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.ObjectListEntry,
+                        "Kistl.Client.WPF.View.DataObjectView", "Kistl.Client.WPF");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WinForms, VisualType.Object,
+                        "Kistl.Client.Forms.View.DataObjectFullView", "Kistl.Client.Forms");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.ASPNET, VisualType.Object,
+                        "Kistl.Client.ASPNET.Toolkit.View.DataObjectFullViewLoader", "Kistl.Client.ASPNET.Toolkit");
+
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(ObjectListModel),
+                        VisualType.ObjectList,
+                        "A list of IDataObjects");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.ObjectList,
+                        "Kistl.Client.WPF.View.DataObjectListView", "Kistl.Client.WPF");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WinForms, VisualType.ObjectList,
+                        "Kistl.Client.Forms.View.DataObjectListView", "Kistl.Client.Forms");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.ASPNET, VisualType.ObjectList,
+                        "Kistl.Client.ASPNET.Toolkit.View.DataObjectListViewLoader", "Kistl.Client.ASPNET.Toolkit");
+
+
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(ObjectReferenceModel),
+                        VisualType.ObjectReference,
+                        "A reference to an IDataObject");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.ObjectReference,
+                        "Kistl.Client.WPF.View.ObjectReferenceView", "Kistl.Client.WPF");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WinForms, VisualType.ObjectReference,
+                        "Kistl.Client.Forms.View.ObjectReferenceView", "Kistl.Client.Forms");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.ASPNET, VisualType.ObjectReference,
+                        "Kistl.Client.ASPNET.Toolkit.View.ObjectReferenceViewLoader", "Kistl.Client.ASPNET.Toolkit");
+
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(ObjectResultModel<Kistl.API.IDataObject>),
+                        VisualType.ObjectReference,
+                        "A method returning an IDataObject reference");
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(ActionModel),
+                        VisualType.MenuItem,
+                        "An action which can be triggered by the user");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.MenuItem,
+                        "Kistl.Client.WPF.View.ActionView", "Kistl.Client.WPF");
+
+
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(DataObjectSelectionTaskModel),
+                        VisualType.SelectionTaskDialog,
+                        "A task for the user: select an IDataObject from a list");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.SelectionTaskDialog,
+                        "Kistl.Client.WPF.View.SelectionDialog", "Kistl.Client.WPF");
+
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(WorkspaceModel),
+                        VisualType.WorkspaceWindow,
+                        "A top-level window containing a Workspace, a visual representation for IKistlContext");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.WorkspaceWindow,
+                        "Kistl.Client.WPF.View.WorkspaceView", "Kistl.Client.WPF");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WinForms, VisualType.WorkspaceWindow,
+                        "Kistl.Client.Forms.View.WorkspaceView", "Kistl.Client.Forms");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.ASPNET, VisualType.WorkspaceWindow,
+                        "Kistl.Client.ASPNET.Toolkit.View.WorkspaceViewLoader", "Kistl.Client.ASPNET.Toolkit");
+
+
+                    pmd = CreatePresentableModelDescriptor(ctx,
+                        typeof(KistlDebuggerAsModel),
+                        VisualType.KistlDebugger,
+                        "A debugger window showing the used IKistlContexts and their AttachedObjects");
+
+                    CreateViewDescriptor(ctx, pmd,
+                        Toolkit.WPF, VisualType.KistlDebugger,
+                        "Kistl.Client.WPF.View.KistlDebuggerView", "Kistl.Client.WPF");
+
+                    //CreatePresentableModelDescriptor(ctx,
+                    //    typeof(xx),
+                    //    VisualType.xx,
+                    //    "xx");
+
+                    ctx.SubmitChanges();
+                }
+            }
+        }
+
+        private void CreateAllPropertyViewDescriptors(IKistlContext ctx, PresentableModelDescriptor pmd)
+        {
+            CreatePropertyViewDescriptor(ctx, pmd, Toolkit.WPF,
+                "Kistl.Client.WPF.View.NullablePropertyTextBoxView", "Kistl.Client.WPF");
+
+            CreatePropertyViewDescriptor(ctx, pmd, Toolkit.WinForms,
+                "Kistl.Client.Forms.View.NullablePropertyTextBoxView", "Kistl.Client.Forms");
+
+            CreatePropertyViewDescriptor(ctx, pmd, Toolkit.ASPNET,
+                "Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader", "Kistl.Client.ASPNET.Toolkit");
+
+        }
+
+        private void CreatePropertyViewDescriptor(
+            IKistlContext ctx, PresentableModelDescriptor pmd,
+            Toolkit tk,
+            string typeName, string assemblyName)
+        {
+            CreateViewDescriptor(ctx, pmd, tk, pmd.DefaultVisualType, typeName, assemblyName);
+        }
+
+        private static void CreateViewDescriptor(IKistlContext ctx, PresentableModelDescriptor pmd,
+            Toolkit tk, VisualType vt, string typeName, string assemblyName)
+        {
+            var vd = ctx.Create<ViewDescriptor>();
+            vd.ControlRef = FindOrCreateTypeRef(ctx, typeName, assemblyName);
+            vd.Toolkit = tk;
+            vd.VisualType = vt;
+            vd.PresentedModelDescriptor = pmd;
+        }
+
+        private static PresentableModelDescriptor CreatePresentableModelDescriptor(IKistlContext ctx, Type mdlType, VisualType defaultVisual, string description)
+        {
+            var pmd = ctx.Create<PresentableModelDescriptor>();
+            pmd.DefaultVisualType = defaultVisual;
+            pmd.Description = description;
+            pmd.PresentableModelRef = mdlType.ToRef(ctx);
+            return pmd;
+        }
+
+        private static TypeRef FindOrCreateTypeRef(IKistlContext ctx, string fullname, string assembly)
+        {
+            // Adapted from ToRef(Type,IKistlContext)
+            var result = ctx.GetQuery<TypeRef>().SingleOrDefault(tRef => tRef.Assembly.AssemblyName == assembly && tRef.FullName == fullname && tRef.GenericArguments.Count == 0);
+            if (result == null)
+            {
+                result = ctx.Create<TypeRef>();
+                result.FullName = fullname;
+                result.Assembly = ctx.GetQuery<Assembly>().SingleOrDefault(a => a.AssemblyName == assembly);
+                if (result.Assembly == null)
+                {
+                    result.Assembly = ctx.Create<Assembly>();
+                    result.Assembly.AssemblyName = assembly;
+                    result.Assembly.Module = ctx.Find<Module>(4); // GUI Module
+                }
+            }
+            return result;
+        }
+
+        private void AddDefaultPMDescriptorToObjectClass()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall("Creating ViewDescriptor class for GUI"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    var guiModule = ctx.Find<Module>(4);
+                    var ocClass = ctx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "ObjectClass");
+                    var pmdClass = ctx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "PresentableModelDescriptor");
+
+                    var controlRel = ctx.Create<Relation>();
+                    controlRel.Description = "This relation between a PresentableModelDescriptor and the described PresentableModel's Type";
+                    controlRel.A = ctx.Create<RelationEnd>();
+                    controlRel.A.RoleName = "Presentable";
+                    controlRel.A.Type = ocClass;
+                    controlRel.A.Multiplicity = Multiplicity.ZeroOrMore;
+                    controlRel.A.Navigator = ctx.Create<ObjectReferenceProperty>();
+                    controlRel.A.Navigator.CategoryTags = "Main";
+                    controlRel.A.Navigator.Description = "The default PresentableModel to use for this ObjectClass";
+                    controlRel.A.Navigator.Module = guiModule;
+                    controlRel.A.Navigator.ObjectClass = ocClass;
+                    controlRel.A.Navigator.PropertyName = "DefaultPresentableModelDescriptor";
+                    controlRel.A.Navigator.ReferenceObjectClass = pmdClass;
+                    controlRel.A.Role = (int)RelationEndRole.A;
+
+                    controlRel.B = ctx.Create<RelationEnd>();
+                    controlRel.B.RoleName = "DefaultPresentableModelDescriptor";
+                    controlRel.B.Type = pmdClass;
+                    controlRel.B.Multiplicity = Multiplicity.One;
+                    controlRel.B.Role = (int)RelationEndRole.B;
+
+                    controlRel.Storage = StorageType.MergeIntoA;
+
+                    ctx.SubmitChanges();
+                }
+            }
+        }
+
+        private void CreatePresentableModelDescriptorClass()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall("Creating ViewDescriptor class for GUI"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    var guiModule = ctx.Find<Module>(4);
+                    var typeRefClass = ctx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "TypeRef");
+
+                    var pmdClass = ctx.Create<ObjectClass>();
+                    pmdClass.ClassName = "PresentableModelDescriptor";
+                    pmdClass.TableName = "PresentableModelDescriptors";
+                    pmdClass.Module = guiModule;
+                    pmdClass.IsFrozenObject = true;
+
+                    var vtProp = ctx.Create<EnumerationProperty>();
+                    vtProp.CategoryTags = "Summary,Main";
+                    vtProp.Description = "The default visual type used for this PresentableModel";
+                    vtProp.Enumeration = ctx.Find<Enumeration>(55);
+                    vtProp.Module = guiModule;
+                    vtProp.ObjectClass = pmdClass;
+                    vtProp.PropertyName = "DefaultVisualType";
+
+                    var descProp = ctx.Create<StringProperty>();
+                    descProp.CategoryTags = "Summary,Main";
+                    descProp.Description = "describe this PresentableModel";
+                    descProp.Length = 4000;
+                    descProp.Module = guiModule;
+                    descProp.ObjectClass = pmdClass;
+                    descProp.PropertyName = "Description";
+
+                    var controlRel = ctx.Create<Relation>();
+                    controlRel.Description = "This relation between a PresentableModelDescriptor and the described PresentableModel's Type";
+                    controlRel.A = ctx.Create<RelationEnd>();
+                    controlRel.A.RoleName = "Descriptor";
+                    controlRel.A.Type = pmdClass;
+                    controlRel.A.Multiplicity = Multiplicity.ZeroOrMore;
+                    controlRel.A.Navigator = ctx.Create<ObjectReferenceProperty>();
+                    controlRel.A.Navigator.CategoryTags = "Main";
+                    controlRel.A.Navigator.Description = "The described CLR class' reference";
+                    controlRel.A.Navigator.Module = guiModule;
+                    controlRel.A.Navigator.ObjectClass = pmdClass;
+                    controlRel.A.Navigator.PropertyName = "PresentableModelRef";
+                    controlRel.A.Navigator.ReferenceObjectClass = typeRefClass;
+                    controlRel.A.Role = (int)RelationEndRole.A;
+
+                    controlRel.B = ctx.Create<RelationEnd>();
+                    controlRel.B.RoleName = "PresentableModelRef";
+                    controlRel.B.Type = typeRefClass;
+                    controlRel.B.Multiplicity = Multiplicity.One;
+                    controlRel.B.Role = (int)RelationEndRole.B;
+
+                    controlRel.Storage = StorageType.MergeIntoA;
+
+                    ctx.SubmitChanges();
+
+                }
+            }
         }
 
         private void CreateViewDescriptors()
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("Creating TypeRefs for GUI"))
+            using (TraceClient.TraceHelper.TraceMethodCall("Creating ViewDescriptor class for GUI"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    foreach (var vd in Kistl.Client.GUI.DB.DataMocks.Views)
+                    {
+                        var descriptor = ctx.Create<ViewDescriptor>();
+                        descriptor.Toolkit = vd.Toolkit;
+                        //descriptor.VisualType
+                    }
+                }
+            }
+        }
+
+        private void CreateViewDescriptorClass()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall("Creating ViewDescriptor class for GUI"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
@@ -169,7 +630,7 @@ namespace Kistl.Client.WPF
                     pModelRel.B.Type = typeRefClass;
                     pModelRel.B.Multiplicity = Multiplicity.One;
                     pModelRel.B.Role = (int)RelationEndRole.B;
-                    
+
                     pModelRel.Storage = StorageType.MergeIntoA;
 
                     ctx.SubmitChanges();
