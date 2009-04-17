@@ -1437,21 +1437,21 @@
       <Condition ColumnName="fk_Assembly" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ViewDescriptor_TypeRef_View_75
+    Relation: FK_ViewDescriptor_PresentableModelDescriptor_View_75
     A: ZeroOrMore ViewDescriptor as View
-    B: One TypeRef as PresentedModelRef
+    B: One PresentableModelDescriptor as PresentedModelDescriptor
     Preferred Storage: Left
     -->
-    <AssociationSetMapping Name="FK_ViewDescriptor_TypeRef_View_75"
-                           TypeName="Model.FK_ViewDescriptor_TypeRef_View_75"
+    <AssociationSetMapping Name="FK_ViewDescriptor_PresentableModelDescriptor_View_75"
+                           TypeName="Model.FK_ViewDescriptor_PresentableModelDescriptor_View_75"
                            StoreEntitySet="ViewDescriptor" >
-      <EndProperty Name="PresentedModelRef">
-        <ScalarProperty Name="ID" ColumnName="fk_PresentedModelRef"/>
+      <EndProperty Name="PresentedModelDescriptor">
+        <ScalarProperty Name="ID" ColumnName="fk_PresentedModelDescriptor"/>
       </EndProperty>
       <EndProperty Name="View">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_PresentedModelRef" IsNull="false"/>
+      <Condition ColumnName="fk_PresentedModelDescriptor" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ViewDescriptor_TypeRef_View_76

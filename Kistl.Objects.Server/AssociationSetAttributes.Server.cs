@@ -695,17 +695,17 @@ using Kistl.DALProvider.EF;
     )]
 
 	/*
-    Relation: FK_ViewDescriptor_TypeRef_View_75
+    Relation: FK_ViewDescriptor_PresentableModelDescriptor_View_75
     A: ZeroOrMore ViewDescriptor as View
-    B: One TypeRef as PresentedModelRef
+    B: One PresentableModelDescriptor as PresentedModelDescriptor
     Preferred Storage: Left
 	*/
 
 // basic association
 [assembly: EdmRelationship(
-    "Model", "FK_ViewDescriptor_TypeRef_View_75",
+    "Model", "FK_ViewDescriptor_PresentableModelDescriptor_View_75",
     "View", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
-    "PresentedModelRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
+    "PresentedModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.PresentableModelDescriptor__Implementation__)
     )]
 
 

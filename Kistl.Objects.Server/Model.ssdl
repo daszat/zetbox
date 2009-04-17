@@ -518,9 +518,9 @@
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_TypeRef_View_75" Association="Model.Store.FK_ViewDescriptor_TypeRef_View_75" >
+    <AssociationSet Name="FK_ViewDescriptor_PresentableModelDescriptor_View_75" Association="Model.Store.FK_ViewDescriptor_PresentableModelDescriptor_View_75" >
       <End Role="View" EntitySet="ViewDescriptor" />
-      <End Role="PresentedModelRef" EntitySet="TypeRef" />
+      <End Role="PresentedModelDescriptor" EntitySet="PresentableModelDescriptor" />
     </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_TypeRef_View_76" Association="Model.Store.FK_ViewDescriptor_TypeRef_View_76" >
       <End Role="View" EntitySet="ViewDescriptor" />
@@ -1094,7 +1094,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_PresentedModelRef" Type="int" />
+    <Property Name="fk_PresentedModelDescriptor" Type="int" />
     <Property Name="fk_ControlRef" Type="int" />
     <Property Name="Toolkit" Type="int" Nullable="false" />
     <Property Name="VisualType" Type="int" Nullable="false" />
@@ -2000,16 +2000,16 @@
   </Association>
 
 
-  <Association Name="FK_ViewDescriptor_TypeRef_View_75">
-    <End Role="PresentedModelRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+  <Association Name="FK_ViewDescriptor_PresentableModelDescriptor_View_75">
+    <End Role="PresentedModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="View" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PresentedModelRef">
+      <Principal Role="PresentedModelDescriptor">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="View">
-        <PropertyRef Name="fk_PresentedModelRef" />
+        <PropertyRef Name="fk_PresentedModelDescriptor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

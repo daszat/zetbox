@@ -137,58 +137,58 @@ namespace Kistl.App.GUI
         /// The PresentableModel usable by this View
         /// </summary>
     /*
-    Relation: FK_ViewDescriptor_TypeRef_View_75
+    Relation: FK_ViewDescriptor_PresentableModelDescriptor_View_75
     A: ZeroOrMore ViewDescriptor as View
-    B: One TypeRef as PresentedModelRef
+    B: One PresentableModelDescriptor as PresentedModelDescriptor
     Preferred Storage: Left
     */
         // object reference property
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef PresentedModelRef
+        public Kistl.App.GUI.PresentableModelDescriptor PresentedModelDescriptor
         {
             get
             {
-                return PresentedModelRef__Implementation__;
+                return PresentedModelDescriptor__Implementation__;
             }
             set
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                PresentedModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
+                PresentedModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)value;
             }
         }
         
         // provide a way to directly access the foreign key int
-        public int? fk_PresentedModelRef
+        public int? fk_PresentedModelDescriptor
         {
             get
             {
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && PresentedModelRef != null)
+                    && PresentedModelDescriptor != null)
                 {
-                    _fk_PresentedModelRef = PresentedModelRef.ID;
+                    _fk_PresentedModelDescriptor = PresentedModelDescriptor.ID;
                 }
-                return _fk_PresentedModelRef;
+                return _fk_PresentedModelDescriptor;
             }
             set
             {
-                _fk_PresentedModelRef = value;
+                _fk_PresentedModelDescriptor = value;
             }
         }
-        private int? _fk_PresentedModelRef;
+        private int? _fk_PresentedModelDescriptor;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_TypeRef_View_75", "PresentedModelRef")]
-        public Kistl.App.Base.TypeRef__Implementation__ PresentedModelRef__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_PresentableModelDescriptor_View_75", "PresentedModelDescriptor")]
+        public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ PresentedModelDescriptor__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ViewDescriptor_TypeRef_View_75",
-                        "PresentedModelRef");
+                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
+                        "Model.FK_ViewDescriptor_PresentableModelDescriptor_View_75",
+                        "PresentedModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -199,16 +199,16 @@ namespace Kistl.App.GUI
             }
             set
             {
-                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ViewDescriptor_TypeRef_View_75",
-                        "PresentedModelRef");
+                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
+                        "Model.FK_ViewDescriptor_PresentableModelDescriptor_View_75",
+                        "PresentedModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.TypeRef__Implementation__)value;
+                r.Value = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)value;
             }
         }
         
@@ -315,7 +315,7 @@ namespace Kistl.App.GUI
 			me.Toolkit = other.Toolkit;
 			me.VisualType = other.VisualType;
 			this.fk_ControlRef = otherImpl.fk_ControlRef;
-			this.fk_PresentedModelRef = otherImpl.fk_PresentedModelRef;
+			this.fk_PresentedModelDescriptor = otherImpl.fk_PresentedModelDescriptor;
 		}
 
         // tail template
@@ -352,10 +352,10 @@ namespace Kistl.App.GUI
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_PresentedModelRef.HasValue)
-				PresentedModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_PresentedModelRef.Value);
+			if (_fk_PresentedModelDescriptor.HasValue)
+				PresentedModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_PresentedModelDescriptor.Value);
 			else
-				PresentedModelRef__Implementation__ = null;
+				PresentedModelDescriptor__Implementation__ = null;
 			if (_fk_ControlRef.HasValue)
 				ControlRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_ControlRef.Value);
 			else
@@ -368,7 +368,7 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this.fk_ControlRef, binStream);
-            BinarySerializer.ToStream(this.fk_PresentedModelRef, binStream);
+            BinarySerializer.ToStream(this.fk_PresentedModelDescriptor, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).VisualType, binStream);
         }
@@ -382,9 +382,9 @@ namespace Kistl.App.GUI
                 this.fk_ControlRef = tmp;
             }
             {
-                var tmp = this.fk_PresentedModelRef;
+                var tmp = this.fk_PresentedModelDescriptor;
                 BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_PresentedModelRef = tmp;
+                this.fk_PresentedModelDescriptor = tmp;
             }
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, binStream);

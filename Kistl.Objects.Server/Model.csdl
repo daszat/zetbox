@@ -272,9 +272,9 @@
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_TypeRef_View_75" Association="Model.FK_ViewDescriptor_TypeRef_View_75" >
+    <AssociationSet Name="FK_ViewDescriptor_PresentableModelDescriptor_View_75" Association="Model.FK_ViewDescriptor_PresentableModelDescriptor_View_75" >
       <End Role="View" EntitySet="ViewDescriptor" />
-      <End Role="PresentedModelRef" EntitySet="TypeRef" />
+      <End Role="PresentedModelDescriptor" EntitySet="PresentableModelDescriptor" />
     </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_TypeRef_View_76" Association="Model.FK_ViewDescriptor_TypeRef_View_76" >
       <End Role="View" EntitySet="ViewDescriptor" />
@@ -757,10 +757,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="PresentedModelRef__Implementation__"
-                        Relationship="Model.FK_ViewDescriptor_TypeRef_View_75"
+    <NavigationProperty Name="PresentedModelDescriptor__Implementation__"
+                        Relationship="Model.FK_ViewDescriptor_PresentableModelDescriptor_View_75"
                         FromRole="View"
-                        ToRole="PresentedModelRef" />
+                        ToRole="PresentedModelDescriptor" />
     <NavigationProperty Name="ControlRef__Implementation__"
                         Relationship="Model.FK_ViewDescriptor_TypeRef_View_76"
                         FromRole="View"
@@ -1577,12 +1577,12 @@
          Type="Model.Assembly" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ViewDescriptor_TypeRef_View_75" >
+  <Association Name="FK_ViewDescriptor_PresentableModelDescriptor_View_75" >
     <End Role="View"
          Type="Model.ViewDescriptor" 
          Multiplicity="*" />
-    <End Role="PresentedModelRef"
-         Type="Model.TypeRef" 
+    <End Role="PresentedModelDescriptor"
+         Type="Model.PresentableModelDescriptor" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ViewDescriptor_TypeRef_View_76" >

@@ -162,7 +162,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(37);
+		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(41);
 		internal static void CreateInstances()
 		{
 			DataStore[2] = new EnumerationEntry__Implementation__Frozen(2);
@@ -238,6 +238,14 @@ namespace Kistl.App.Base
 			DataStore[70] = new EnumerationEntry__Implementation__Frozen(70);
 
 			DataStore[71] = new EnumerationEntry__Implementation__Frozen(71);
+
+			DataStore[74] = new EnumerationEntry__Implementation__Frozen(74);
+
+			DataStore[75] = new EnumerationEntry__Implementation__Frozen(75);
+
+			DataStore[76] = new EnumerationEntry__Implementation__Frozen(76);
+
+			DataStore[77] = new EnumerationEntry__Implementation__Frozen(77);
 
 		}
 
@@ -427,6 +435,26 @@ namespace Kistl.App.Base
 			DataStore[71].Name = @"KistlDebugger";
 			DataStore[71].Value = 22;
 			DataStore[71].Seal();
+			DataStore[74].Description = @"A task for the user: select a value from a list";
+			DataStore[74].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[74].Name = @"SelectionTaskDialog";
+			DataStore[74].Value = 23;
+			DataStore[74].Seal();
+			DataStore[75].Description = @"A top-level window containing a Workspace, a visual representation for IKistlContext";
+			DataStore[75].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[75].Name = @"WorkspaceWindow";
+			DataStore[75].Value = 24;
+			DataStore[75].Seal();
+			DataStore[76].Description = @"Select a string from a aset of values";
+			DataStore[76].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[76].Name = @"StringSelection";
+			DataStore[76].Value = 26;
+			DataStore[76].Seal();
+			DataStore[77].Description = @"Windows Forms Toolkit";
+			DataStore[77].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
+			DataStore[77].Name = @"WinForms";
+			DataStore[77].Value = 3;
+			DataStore[77].Seal();
 	
 		}
 #region Serializer

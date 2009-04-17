@@ -97,12 +97,12 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef PresentedModelRef
+        public Kistl.App.GUI.PresentableModelDescriptor PresentedModelDescriptor
         {
             get
             {
-                if (fk_PresentedModelRef.HasValue)
-                    return Context.Find<Kistl.App.Base.TypeRef>(fk_PresentedModelRef.Value);
+                if (fk_PresentedModelDescriptor.HasValue)
+                    return Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(fk_PresentedModelDescriptor.Value);
                 else
                     return null;
             }
@@ -112,45 +112,45 @@ namespace Kistl.App.GUI
                 if (IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
-                if (value == null && _fk_PresentedModelRef == null)
+                if (value == null && _fk_PresentedModelDescriptor == null)
 					return;
-                else if (value != null && value.ID == _fk_PresentedModelRef)
+                else if (value != null && value.ID == _fk_PresentedModelDescriptor)
 					return;
 			           
 	            // cache old value to remove inverse references later
-                var oldValue = PresentedModelRef;
+                var oldValue = PresentedModelDescriptor;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("PresentedModelRef", oldValue, value);
+				NotifyPropertyChanging("PresentedModelDescriptor", oldValue, value);
                 
 				// next, set the local reference
-                _fk_PresentedModelRef = value == null ? (int?)null : value.ID;
+                _fk_PresentedModelDescriptor = value == null ? (int?)null : value.ID;
 				
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("PresentedModelRef", oldValue, value);
+				NotifyPropertyChanged("PresentedModelDescriptor", oldValue, value);
             }
         }
         
         // provide a way to directly access the foreign key int
-        public int? fk_PresentedModelRef
+        public int? fk_PresentedModelDescriptor
         {
             get
             {
-                return _fk_PresentedModelRef;
+                return _fk_PresentedModelDescriptor;
             }
             private set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_PresentedModelRef != value)
+                if (_fk_PresentedModelDescriptor != value)
                 {
-					var __oldValue = _fk_PresentedModelRef;
-                    NotifyPropertyChanging("PresentedModelRef", __oldValue, value);
-                    _fk_PresentedModelRef = value;
-                    NotifyPropertyChanged("PresentedModelRef", __oldValue, value);
+					var __oldValue = _fk_PresentedModelDescriptor;
+                    NotifyPropertyChanging("PresentedModelDescriptor", __oldValue, value);
+                    _fk_PresentedModelDescriptor = value;
+                    NotifyPropertyChanged("PresentedModelDescriptor", __oldValue, value);
                 }
             }
         }
-        private int? _fk_PresentedModelRef;
+        private int? _fk_PresentedModelDescriptor;
 
         /// <summary>
         /// Which toolkit provides this View
@@ -215,7 +215,7 @@ namespace Kistl.App.GUI
 			me.Toolkit = other.Toolkit;
 			me.VisualType = other.VisualType;
 			this.fk_ControlRef = otherImpl.fk_ControlRef;
-			this.fk_PresentedModelRef = otherImpl.fk_PresentedModelRef;
+			this.fk_PresentedModelDescriptor = otherImpl.fk_PresentedModelDescriptor;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -261,8 +261,8 @@ namespace Kistl.App.GUI
                 case "ControlRef":
                     fk_ControlRef = id;
                     break;
-                case "PresentedModelRef":
-                    fk_PresentedModelRef = id;
+                case "PresentedModelDescriptor":
+                    fk_PresentedModelDescriptor = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);
@@ -277,7 +277,7 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_ControlRef, binStream);
-            BinarySerializer.ToStream(this._fk_PresentedModelRef, binStream);
+            BinarySerializer.ToStream(this._fk_PresentedModelDescriptor, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).VisualType, binStream);
         }
@@ -286,7 +286,7 @@ namespace Kistl.App.GUI
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ControlRef, binStream);
-            BinarySerializer.FromStream(out this._fk_PresentedModelRef, binStream);
+            BinarySerializer.FromStream(out this._fk_PresentedModelDescriptor, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, binStream);
         }

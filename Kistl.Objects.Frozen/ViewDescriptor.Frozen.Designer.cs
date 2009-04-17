@@ -54,25 +54,25 @@ namespace Kistl.App.GUI
         /// The PresentableModel usable by this View
         /// </summary>
         // object reference property
-        public virtual Kistl.App.Base.TypeRef PresentedModelRef
+        public virtual Kistl.App.GUI.PresentableModelDescriptor PresentedModelDescriptor
         {
             get
             {
-                return _PresentedModelRef;
+                return _PresentedModelDescriptor;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_PresentedModelRef != value)
+                if (_PresentedModelDescriptor != value)
                 {
-					var __oldValue = _PresentedModelRef;
-                    NotifyPropertyChanging("PresentedModelRef", __oldValue, value);
-                    _PresentedModelRef = value;
-                    NotifyPropertyChanged("PresentedModelRef", __oldValue, value);
+					var __oldValue = _PresentedModelDescriptor;
+                    NotifyPropertyChanging("PresentedModelDescriptor", __oldValue, value);
+                    _PresentedModelDescriptor = value;
+                    NotifyPropertyChanged("PresentedModelDescriptor", __oldValue, value);
                 }
             }
         }
-        private Kistl.App.Base.TypeRef _PresentedModelRef;
+        private Kistl.App.GUI.PresentableModelDescriptor _PresentedModelDescriptor;
 
         /// <summary>
         /// Which toolkit provides this View

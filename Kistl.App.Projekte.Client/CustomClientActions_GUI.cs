@@ -81,7 +81,9 @@ namespace Kistl.App.GUI
         {
             e.Result = String.Format("{0}: Display model {1} with {2}",
                 obj.Toolkit,
-                obj.PresentedModelRef == null ? "(none)" : obj.PresentedModelRef.AsType(true).Name,
+                obj.PresentedModelDescriptor == null || obj.PresentedModelDescriptor.PresentableModelRef == null
+                    ? "(none)"
+                    : obj.PresentedModelDescriptor.PresentableModelRef.AsType(true).Name,
                 obj.ControlRef == null ? "(none)" : obj.ControlRef.AsType(true).Name);
         }
 

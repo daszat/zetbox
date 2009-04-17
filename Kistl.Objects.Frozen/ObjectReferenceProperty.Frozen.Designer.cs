@@ -1356,8 +1356,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[226].IsNullable = false;
 			DataStore[226].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[226].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
-			DataStore[226].PropertyName = @"PresentedModelRef";
-			DataStore[226].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
+			DataStore[226].PropertyName = @"PresentedModelDescriptor";
+			DataStore[226].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[85];
 			DataStore[226].Seal();
 			DataStore[227].AltText = null;
 			DataStore[227].CategoryTags = @"Main";

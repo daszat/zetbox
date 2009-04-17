@@ -22,7 +22,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// The PresentableModel usable by this View
         /// </summary>
-		Kistl.App.Base.TypeRef PresentedModelRef {
+		Kistl.App.GUI.PresentableModelDescriptor PresentedModelDescriptor {
 			get;
 			set;
 		}

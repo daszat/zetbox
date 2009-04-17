@@ -22,5 +22,10 @@ namespace Kistl.App.GUI
 		/// </summary>
 		TEST = 2,
 
+		/// <summary>
+		/// Windows Forms Toolkit
+		/// </summary>
+		WinForms = 3,
+
 	}
 }

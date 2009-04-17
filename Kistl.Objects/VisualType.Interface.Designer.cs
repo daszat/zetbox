@@ -122,5 +122,20 @@ namespace Kistl.App.GUI
 		/// </summary>
 		KistlDebugger = 22,
 
+		/// <summary>
+		/// A task for the user: select a value from a list
+		/// </summary>
+		SelectionTaskDialog = 23,
+
+		/// <summary>
+		/// A top-level window containing a Workspace, a visual representation for IKistlContext
+		/// </summary>
+		WorkspaceWindow = 24,
+
+		/// <summary>
+		/// Select a string from a aset of values
+		/// </summary>
+		StringSelection = 26,
+
 	}
 }
