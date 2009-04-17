@@ -7,6 +7,7 @@ using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Kistl.Server.Generators.Templates.Implementation;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 {
@@ -33,7 +34,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 
             if (rel.NeedsPositionStorage(endRole))
             {
-                this.MembersToSerialize.Add("_" + endRole + Kistl.API.Helper.PositionSuffix);
+                this.MembersToSerialize.Add("_" + endRole + Kistl.API.Helper.PositionSuffix, SerializerType.All);
                 this.WriteObjects("public int? ", endRole, "Index { get { return ",
                     endRole, Kistl.API.Helper.PositionSuffix, "; } set { ",
                     endRole, Kistl.API.Helper.PositionSuffix, " = value; } }");

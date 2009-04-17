@@ -374,6 +374,24 @@ namespace Kistl.App.Base
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this.fk_A, xml, "fk_A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_B, xml, "fk_B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Description, xml, "Description", "http://dasz.at/Kistl");
+            // TODO: Add XML Serializer here
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

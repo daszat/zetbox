@@ -185,6 +185,18 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.FromStream(out this._fk_Projekt, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._fk_Projekt, xml, "fk_Projekt", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

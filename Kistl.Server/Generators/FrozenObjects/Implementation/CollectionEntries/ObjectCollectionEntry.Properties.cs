@@ -39,7 +39,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
 
             if (rel.NeedsPositionStorage(endRole))
             {
-                this.MembersToSerialize.Add("_" + endRole + Kistl.API.Helper.PositionSuffix);
+                this.MembersToSerialize.Add("_" + endRole + Kistl.API.Helper.PositionSuffix, SerializerType.All);
                 this.WriteObjects("public int? ", endRole, "Index { get { return ",
                     endRole, Kistl.API.Helper.PositionSuffix, "; } set { ",
                     endRole, Kistl.API.Helper.PositionSuffix, " = value; } }");

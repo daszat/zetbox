@@ -3,6 +3,7 @@
 	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.SerializerTemplate" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
@@ -15,27 +16,49 @@
 
 <%
 	string methodName = direction.ToString();
+	string argName;
 	string argType;
+	string argModules = "";
+	string callBaseWithModules = "";
+	SerializerType serType;
 	
 	switch(direction){
 		case SerializerDirection.ToStream:
 			argType = "System.IO.BinaryWriter";
+			argName = "binStream";
+			serType = SerializerType.Binary;
 			break;
 		case SerializerDirection.FromStream:
 			argType = "System.IO.BinaryReader";
+			argName = "binStream";
+			serType = SerializerType.Binary;
+			break;
+		case SerializerDirection.ToXmlStream:
+			argType = "System.Xml.XmlWriter";
+			argModules = ", string[] modules";
+			callBaseWithModules = ", modules";
+			argName = "xml";
+			methodName = "ToStream";
+			serType = SerializerType.Xml;
+			break;
+		case SerializerDirection.FromXmlStream:
+			argType = "System.Xml.XmlReader";
+			argName = "xml";
+			methodName = "FromStream";
+			serType = SerializerType.Xml;
 			break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");
 	}
 	
 %>
-        public override void <%= methodName %>(<%= argType %> binStream)
+        public override void <%= methodName %>(<%= argType %> <%= argName %><%= argModules %>)
         {
-            base.<%= methodName %>(binStream);
+            base.<%= methodName %>(<%= argName %><%= callBaseWithModules %>);
 <%
-	foreach(var serMember in fields)
+	foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
 	{
-	    ApplySerializer(direction, serMember, "binStream");
+	    ApplySerializer(direction, serMember, argName);
 	}
 %>
         }

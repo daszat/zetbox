@@ -52,6 +52,16 @@ namespace Kistl.DalProvider.Frozen
             throw new InvalidOperationException("Cannot deserialize to a frozen Object");
         }
 
+        public virtual void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            if (xml == null) throw new ArgumentNullException("xml");
+        }
+
+        public virtual void FromStream(System.Xml.XmlReader xml)
+        {
+            if (xml == null) throw new ArgumentNullException("xml");
+        }
+
         // frozen objects are already connected
         public void ReloadReferences() { }
 

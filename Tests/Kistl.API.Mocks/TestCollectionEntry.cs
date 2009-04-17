@@ -58,6 +58,17 @@ namespace Kistl.API.Mocks
             BinarySerializer.ToStream(TestName, sw);
         }
 
+        public virtual void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            if (xml == null) throw new ArgumentNullException("xml");
+        }
+
+        public virtual void FromStream(System.Xml.XmlReader xml)
+        {
+            if (xml == null) throw new ArgumentNullException("xml");
+        }
+
+
         public void ReloadReferences()
         {
         }

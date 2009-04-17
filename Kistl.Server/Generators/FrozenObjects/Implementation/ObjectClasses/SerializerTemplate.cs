@@ -25,9 +25,23 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                 this.WriteLine("            throw new NotImplementedException();");
                 this.WriteLine("        }");
             }
-            else
+            else if (direction == SerializerDirection.FromStream)
             {
                 this.WriteLine("        public override void FromStream(System.IO.BinaryReader binStream)");
+                this.WriteLine("        {");
+                this.WriteLine("            throw new NotImplementedException();");
+                this.WriteLine("        }");
+            }
+            else if (direction == SerializerDirection.ToXmlStream)
+            {
+                this.WriteLine("        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)");
+                this.WriteLine("        {");
+                this.WriteLine("            throw new NotImplementedException();");
+                this.WriteLine("        }");
+            }
+            else if (direction == SerializerDirection.FromXmlStream)
+            {
+                this.WriteLine("        public override void FromStream(System.Xml.XmlReader xml)");
                 this.WriteLine("        {");
                 this.WriteLine("            throw new NotImplementedException();");
                 this.WriteLine("        }");

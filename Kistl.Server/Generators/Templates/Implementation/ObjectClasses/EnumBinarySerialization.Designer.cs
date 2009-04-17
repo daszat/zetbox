@@ -50,6 +50,18 @@ break;
 this.WriteObjects("            BinarySerializer.",  methodName , "Converter(v => ((",  interfaceName , ")this).",  memberName , " = (",  enumName , ")v, ",  streamName , ");\r\n");
 #line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
 break;
+		case SerializerDirection.ToXmlStream:
+
+#line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+this.WriteObjects("            // TODO: Add XML Serializer here\r\n");
+#line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+break;
+		case SerializerDirection.FromXmlStream:
+
+#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+this.WriteObjects("            // TODO: Add XML Serializer here\r\n");
+#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");
 	}

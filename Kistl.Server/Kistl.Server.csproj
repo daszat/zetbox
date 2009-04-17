@@ -686,6 +686,8 @@
       <DependentUpon>Repository.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\EntityFramework\Implementation\InheritanceStorageAssociationInfo.cs" />
+    <Compile Include="Packaging\Exporter.cs" />
+    <Compile Include="Packaging\Importer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst">

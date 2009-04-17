@@ -31,6 +31,16 @@
             BinarySerializer.<%= methodName %>Converter(v => ((<%= interfaceName %>)this).<%= memberName %> = (<%= enumName %>)v, <%= streamName %>);
 <%
 			break;
+		case SerializerDirection.ToXmlStream:
+%>
+            // TODO: Add XML Serializer here
+<%
+            break;
+		case SerializerDirection.FromXmlStream:
+%>
+            // TODO: Add XML Serializer here
+<%
+            break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");
 	}

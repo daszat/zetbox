@@ -307,6 +307,28 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromStream(out this._PLZ, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._Adresse, xml, "Adresse", "http://dasz.at/Kistl");
+            XmlStreamer.ToStreamCollectionEntries(this.EMails__Implementation__, xml, "EMails__Implementation__", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Kundenname, xml, "Kundenname", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Land, xml, "Land", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Ort, xml, "Ort", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._PLZ, xml, "PLZ", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            XmlStreamer.FromStreamCollectionEntries(this.EMails__Implementation__, xml, "EMails__Implementation__", "http://dasz.at/Kistl");
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

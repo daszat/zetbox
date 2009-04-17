@@ -110,6 +110,7 @@
     <Compile Include="TypeTransformations.cs" />
     <Compile Include="Utils\ExpressionComparer.cs" />
     <Compile Include="Utils\MagicCollectionFactory.cs" />
+    <Compile Include="XmlStreamer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

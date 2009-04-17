@@ -254,6 +254,24 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromStream(out this._TelefonNummer, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._Geburtstag, xml, "Geburtstag", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Name, xml, "Name", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._SVNr, xml, "SVNr", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._TelefonNummer, xml, "TelefonNummer", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

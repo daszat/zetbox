@@ -15,7 +15,23 @@
 <%@ Parameter Name="collectionName" Type="string" %>
 <%
 
-    string methodName = direction.ToString();
+    string methodName = direction.ToString().Replace("Xml", "");
     
+	switch(direction)
+	{
+		case SerializerDirection.ToStream:
+		case SerializerDirection.FromStream:
 %>
             BinarySerializer.<%= methodName %>CollectionEntries(this.<%= collectionName %>, <%= streamName %>);
+<%
+			break;
+		case SerializerDirection.ToXmlStream:
+		case SerializerDirection.FromXmlStream:
+%>
+            XmlStreamer.<%= methodName %>CollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= collectionName.TrimStart('_') %>", "http://dasz.at/Kistl");
+<%
+			break;
+		default:
+			throw new ArgumentOutOfRangeException("direction");
+	}
+%>

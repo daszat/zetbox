@@ -54,6 +54,20 @@ this.WriteObjects("	            this.",  memberName , " = tmp;\r\n");
 this.WriteObjects("	        }\r\n");
 #line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
 }
+	else if (direction == SerializerDirection.ToXmlStream)
+	{
+
+#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
+this.WriteObjects("			// TODO: Add XML Serializer here\r\n");
+#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
+}
+	else if (direction == SerializerDirection.FromXmlStream)
+	{
+
+#line 47 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
+this.WriteObjects("			// TODO: Add XML Serializer here\r\n");
+#line 49 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
+}
 	else
 	{
 		throw new ArgumentOutOfRangeException("direction");

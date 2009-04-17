@@ -642,6 +642,28 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._TableName, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this.fk_BaseObjectClass, xml, "fk_BaseObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_DefaultModel, xml, "fk_DefaultModel", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_DefaultPresentableModelDescriptor, xml, "fk_DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._TableName, xml, "TableName", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

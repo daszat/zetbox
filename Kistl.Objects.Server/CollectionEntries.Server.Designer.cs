@@ -213,6 +213,20 @@ namespace Kistl.App.Base
             }
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this.fk_A, xml, "fk_A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_B, xml, "fk_B", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
 		public override InterfaceType GetInterfaceType()
@@ -512,6 +526,28 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             BinarySerializer.FromStream(out this._B_pos, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this.fk_A, xml, "fk_A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_B, xml, "fk_B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
 		public override InterfaceType GetInterfaceType()
@@ -749,6 +785,20 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_B = tmp;
             }
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this.fk_A, xml, "fk_A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_B, xml, "fk_B", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
         }
 
 #endregion
@@ -1050,6 +1100,28 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             BinarySerializer.FromStream(out this._B_pos, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this.fk_A, xml, "fk_A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_B, xml, "fk_B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
 		public override InterfaceType GetInterfaceType()
@@ -1289,6 +1361,20 @@ namespace Kistl.App.GUI
             }
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this.fk_A, xml, "fk_A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_B, xml, "fk_B", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
 		public override InterfaceType GetInterfaceType()
@@ -1524,6 +1610,20 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.fk_B = tmp;
             }
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this.fk_A, xml, "fk_A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_B, xml, "fk_B", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
         }
 
 #endregion
@@ -1764,6 +1864,20 @@ namespace Kistl.App.Zeiterfassung
             }
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this.fk_A, xml, "fk_A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_B, xml, "fk_B", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
 		public override InterfaceType GetInterfaceType()
@@ -1948,6 +2062,20 @@ public string Value { get { return B; } set { B = value; } }
                 this.fk_A = tmp;
             }
             BinarySerializer.FromStream(out this._B, binStream);
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this.fk_A, xml, "fk_A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._B, xml, "B", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
         }
 
 #endregion

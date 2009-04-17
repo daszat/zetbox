@@ -144,7 +144,7 @@ namespace Kistl.API.Client.Tests
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
-                result.FromStream(null);
+                result.FromStream((BinaryReader)null);
             }
         }
 

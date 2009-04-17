@@ -194,9 +194,24 @@ namespace Kistl.DALProvider.EF
             //return query.AddOfType<IDataObject>(objType);
         }
 
+        /// <summary>
+        /// TODO: Create new override
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="relationId"></param>
+        /// <param name="role"></param>
+        /// <param name="parent"></param>
+        /// <returns></returns>
         public override IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent)
         {
-            throw new NotImplementedException();
+            if (parent == null)
+            {
+                return this.GetPersistenceObjectQuery<T>().ToList();
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         /// <summary>

@@ -66,6 +66,12 @@
     
     CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
         Templates.Implementation.SerializerDirection.FromStream, this.MembersToSerialize);
+
+    CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+        Templates.Implementation.SerializerDirection.ToXmlStream, this.MembersToSerialize);
+    
+    CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+        Templates.Implementation.SerializerDirection.FromXmlStream, this.MembersToSerialize);
 %>
 
 #endregion

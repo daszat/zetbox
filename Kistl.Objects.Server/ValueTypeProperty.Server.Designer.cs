@@ -159,6 +159,16 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+        }
+
 #endregion
 
     }

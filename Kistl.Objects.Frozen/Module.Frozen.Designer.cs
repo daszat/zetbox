@@ -330,6 +330,14 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48],
         {
             throw new NotImplementedException();
         }
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
 
 #endregion
 

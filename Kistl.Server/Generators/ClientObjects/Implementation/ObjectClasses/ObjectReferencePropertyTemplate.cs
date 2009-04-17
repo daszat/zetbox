@@ -7,6 +7,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Kistl.Server.Generators.Templates.Implementation;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
@@ -78,7 +79,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
         {
             if (list != null)
-                list.Add(memberName);
+                list.Add(memberName, SerializerType.All);
         }
     }
 }

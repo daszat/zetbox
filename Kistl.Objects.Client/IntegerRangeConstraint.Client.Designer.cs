@@ -197,6 +197,20 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._Min, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._Max, xml, "Max", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Min, xml, "Min", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

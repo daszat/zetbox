@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Kistl.Server.Generators.Templates.Implementation;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
@@ -10,7 +11,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
         {
             //if (list != null)
-            //    list.Add("Implementation.ObjectClasses.CollectionSerialization", memberName);
+            //    list.Add("Implementation.ObjectClasses.CollectionSerialization", SerializerType.Xml, memberName);
         }
     }
 }

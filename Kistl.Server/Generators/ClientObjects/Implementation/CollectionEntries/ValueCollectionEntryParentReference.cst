@@ -73,5 +73,5 @@
         
 <%
 	if (serializationList != null)
-		serializationList.Add(backingName);
+		serializationList.Add(backingName, Kistl.Server.Generators.Templates.Implementation.SerializerType.All);
 %>

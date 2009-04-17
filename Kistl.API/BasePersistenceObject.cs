@@ -77,8 +77,8 @@ namespace Kistl.API
         /// <param name="sr">Stream to serialize from</param>
         public virtual void FromStream(BinaryReader sr)
         {
-            if (this.IsAttached) throw new InvalidOperationException("Deserializing attached objects is not allowed");
             if (sr == null) throw new ArgumentNullException("sr");
+            if (this.IsAttached) throw new InvalidOperationException("Deserializing attached objects is not allowed");
 
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
@@ -89,12 +89,23 @@ namespace Kistl.API
             BinarySerializer.FromStreamConverter(i => ID = i, sr);
         }
 
+        public virtual void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            if (xml == null) throw new ArgumentNullException("xml");
+            xml.WriteAttributeString("ID", ID.ToString());
+        }
+
+        public virtual void FromStream(System.Xml.XmlReader xml)
+        {
+            if (xml == null) throw new ArgumentNullException("xml");
+            // TODO: Da hats was - ist asymetrisch zu FromStream(BinaryReader)
+            if (!this.IsAttached) throw new InvalidOperationException("Xml Deserializing dettached objects is not allowed");
+        }
 
         public virtual void ReloadReferences() { }
 
         #endregion
 
         public abstract InterfaceType GetInterfaceType();
-
     }
 }

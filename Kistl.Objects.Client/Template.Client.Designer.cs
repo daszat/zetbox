@@ -335,6 +335,24 @@ namespace Kistl.App.GUI
             BinarySerializer.FromStream(out this._fk_VisualTree, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._fk_DisplayedTypeAssembly, xml, "fk_DisplayedTypeAssembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._DisplayName, xml, "DisplayName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_VisualTree, xml, "fk_VisualTree", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

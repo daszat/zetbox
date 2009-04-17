@@ -31,8 +31,17 @@
             }
 <%
 			break;
+		case SerializerDirection.ToXmlStream:
+%>
+            XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= memberName.TrimStart('_') %>", "http://dasz.at/Kistl");
+<%
+            break;
+		case SerializerDirection.FromXmlStream:
+%>
+            // TODO: Add XML Serializer here
+<%
+            break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");
 	}
-	
 %>

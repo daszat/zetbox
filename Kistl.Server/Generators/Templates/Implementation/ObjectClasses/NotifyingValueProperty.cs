@@ -28,7 +28,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         protected virtual void AddSerialization(SerializationMembersList list, string name)
         {
             if (list != null)
-                list.Add(BackingMemberFromName(name));
+                list.Add(BackingMemberFromName(name), SerializerType.All);
         }
 
         protected string GetModifiers()

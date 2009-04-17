@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.App.Base;
+using Kistl.Server.Generators.Templates.Implementation;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
@@ -12,7 +13,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string efName)
         {
             if (list != null)
-                list.Add("Implementation.ObjectClasses.CollectionSerialization", efName);
+                list.Add("Implementation.ObjectClasses.CollectionSerialization", SerializerType.All, efName);
         }
     }
 }

@@ -296,6 +296,24 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._Value, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._Description, xml, "Description", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Enumeration, xml, "fk_Enumeration", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Name, xml, "Name", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Value, xml, "Value", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

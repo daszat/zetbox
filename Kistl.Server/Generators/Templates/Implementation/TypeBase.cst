@@ -107,6 +107,12 @@ namespace <%= DataType.Module.Namespace %>
 		
 		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
 			SerializerDirection.FromStream, this.MembersToSerialize);
+
+		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.ToXmlStream, this.MembersToSerialize);
+		
+		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.FromXmlStream, this.MembersToSerialize);
 %>
 
 #endregion

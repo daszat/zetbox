@@ -14,19 +14,40 @@
 <%@ Parameter Name="streamName" Type="string" %>
 <%@ Parameter Name="memberName" Type="string" %>
 <%
-	string methodName = direction.ToString();
-	string modifier;
-	
-	switch(direction){
-		case SerializerDirection.ToStream:
-			modifier = "";
-			break;
-		case SerializerDirection.FromStream:
-			modifier = "out ";
-			break;
-		default:
-			throw new ArgumentOutOfRangeException("direction");
-	}
+	if(direction == SerializerDirection.ToStream || direction == SerializerDirection.FromStream)
+	{
+		string methodName = direction.ToString();
+		string modifier;
+		
+		switch(direction){
+			case SerializerDirection.ToStream:
+				modifier = "";
+				break;
+			case SerializerDirection.FromStream:
+				modifier = "out ";
+				break;
+			default:
+				throw new ArgumentOutOfRangeException("direction");
+		}
 	
 %>
             BinarySerializer.<%= methodName %>(<%= modifier %>this.<%= memberName %>, <%= streamName %>);
+<%	
+	}
+	else if(direction == SerializerDirection.ToXmlStream)
+	{
+%>
+            XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= memberName.TrimStart('_') %>", "http://dasz.at/Kistl");
+<%	
+	}
+	else if(direction == SerializerDirection.FromXmlStream)
+	{
+%>
+            // TODO: Add XML Serializer here
+<%	
+	}
+	else
+	{
+		throw new ArgumentOutOfRangeException("direction");
+	}
+%>

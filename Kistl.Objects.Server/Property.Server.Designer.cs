@@ -621,6 +621,34 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._PropertyName, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._AltText, xml, "AltText", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Description, xml, "Description", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._IsIndexed, xml, "IsIndexed", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._IsList, xml, "IsList", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._IsNullable, xml, "IsNullable", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Module, xml, "fk_Module", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_ObjectClass, xml, "fk_ObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

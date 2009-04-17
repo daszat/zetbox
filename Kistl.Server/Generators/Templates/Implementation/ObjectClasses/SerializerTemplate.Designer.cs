@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Kistl.API;
 using Kistl.API.Server;
@@ -28,35 +29,57 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 this.WriteObjects("\r\n");
-#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 string methodName = direction.ToString();
+	string argName;
 	string argType;
+	string argModules = "";
+	string callBaseWithModules = "";
+	SerializerType serType;
 	
 	switch(direction){
 		case SerializerDirection.ToStream:
 			argType = "System.IO.BinaryWriter";
+			argName = "binStream";
+			serType = SerializerType.Binary;
 			break;
 		case SerializerDirection.FromStream:
 			argType = "System.IO.BinaryReader";
+			argName = "binStream";
+			serType = SerializerType.Binary;
+			break;
+		case SerializerDirection.ToXmlStream:
+			argType = "System.Xml.XmlWriter";
+			argModules = ", string[] modules";
+			callBaseWithModules = ", modules";
+			argName = "xml";
+			methodName = "ToStream";
+			serType = SerializerType.Xml;
+			break;
+		case SerializerDirection.FromXmlStream:
+			argType = "System.Xml.XmlReader";
+			argName = "xml";
+			methodName = "FromStream";
+			serType = SerializerType.Xml;
 			break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");
 	}
 	
 
-#line 32 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
-this.WriteObjects("        public override void ",  methodName , "(",  argType , " binStream)\r\n");
+#line 55 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+this.WriteObjects("        public override void ",  methodName , "(",  argType , " ",  argName , "",  argModules , ")\r\n");
 this.WriteObjects("        {\r\n");
-this.WriteObjects("            base.",  methodName , "(binStream);\r\n");
-#line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
-foreach(var serMember in fields)
+this.WriteObjects("            base.",  methodName , "(",  argName , "",  callBaseWithModules , ");\r\n");
+#line 59 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
 	{
-	    ApplySerializer(direction, serMember, "binStream");
+	    ApplySerializer(direction, serMember, argName);
 	}
 
-#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 64 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 this.WriteObjects("        }\r\n");
 
         }

@@ -56,6 +56,18 @@ namespace Kistl.API
         void FromStream(System.IO.BinaryReader sr);
 
         /// <summary>
+        /// Serialize this Object to a XmlWriter
+        /// </summary>
+        /// <param name="xml">XmlWriter to serialize to</param>
+        /// <param name="modules"
+        void ToStream(System.Xml.XmlWriter xml, string[] modules);
+        /// <summary>
+        /// Deserialize this Object from a XmlReader
+        /// </summary>
+        /// <param name="xml">XmlReader to deserialize to.</param>
+        void FromStream(System.Xml.XmlReader xml);
+
+        /// <summary>
         /// Reloads Relations from internal storage into the providers caches.
         /// Should be called after de-serializing and attaching an object graph 
         /// to notify the provider of all references within the graph.

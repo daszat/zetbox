@@ -68,7 +68,7 @@ namespace Kistl.API.Server.Tests
             using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
             {
                 TestStruct result = new TestStruct();
-                result.FromStream(null);
+                result.FromStream((BinaryReader)null);
             }
         }
 

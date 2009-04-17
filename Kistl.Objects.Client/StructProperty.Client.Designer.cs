@@ -232,6 +232,18 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_StructDefinition, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._fk_StructDefinition, xml, "fk_StructDefinition", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

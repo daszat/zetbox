@@ -130,16 +130,22 @@ CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
 		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
 			SerializerDirection.FromStream, this.MembersToSerialize);
 
-#line 111 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.ToXmlStream, this.MembersToSerialize);
+		
+		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+			SerializerDirection.FromXmlStream, this.MembersToSerialize);
+
+#line 117 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("#endregion\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");
-#line 117 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 123 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyNamespaceTailTemplate();
 
-#line 119 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 125 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("}");
 

@@ -25,14 +25,14 @@ namespace Kistl.API.Tests.Skeletons
         [ExpectedException(typeof(ArgumentNullException))]
         public void fails_on_serializing_to_null_stream()
         {
-            obj.ToStream(null);
+            obj.ToStream((BinaryWriter)null);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void fails_on_serializing_from_null_stream()
         {
-            obj.FromStream(null);
+            obj.FromStream((BinaryReader)null);
         }
 
         [Test]

@@ -74,6 +74,16 @@ namespace Kistl.API
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
         }
 
+        public virtual void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            if (xml == null) throw new ArgumentNullException("xml");
+        }
+
+        public virtual void FromStream(System.Xml.XmlReader xml)
+        {
+            if (xml == null) throw new ArgumentNullException("xml");
+        }
+
         /// <summary>
         /// Empty implementation, since Structs can't have ObjectReferences
         /// </summary>

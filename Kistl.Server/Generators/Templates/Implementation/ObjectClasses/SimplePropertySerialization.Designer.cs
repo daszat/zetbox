@@ -50,10 +50,21 @@ this.WriteObjects("                this.",  memberName , " = tmp;\r\n");
 this.WriteObjects("            }\r\n");
 #line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
 break;
+		case SerializerDirection.ToXmlStream:
+
+#line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
+this.WriteObjects("            XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  memberName.TrimStart('_') , "\", \"http://dasz.at/Kistl\");\r\n");
+#line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
+break;
+		case SerializerDirection.FromXmlStream:
+
+#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
+this.WriteObjects("            // TODO: Add XML Serializer here\r\n");
+#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst"
+break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");
 	}
-	
 
 
         }

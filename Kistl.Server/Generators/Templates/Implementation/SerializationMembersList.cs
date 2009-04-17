@@ -8,9 +8,10 @@ namespace Kistl.Server.Generators.Templates.Implementation
 
     public sealed class SerializationMember
     {
-        public SerializationMember(string templatename, params object[] templateparams)
+        public SerializationMember(string templatename, SerializerType type, params object[] templateparams)
         {
             this.TemplateName = templatename;
+            this.SerializerType = type;
             this.TemplateParams = templateparams;
         }
 
@@ -18,6 +19,12 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// which serializer to use
         /// </summary>
         public string TemplateName { get; private set; }
+
+        /// <summary>
+        /// which type of serializer
+        /// </summary>
+        public SerializerType SerializerType { get; private set; }
+
         /// <summary>
         /// which member to serialize, will be interpreted by template.
         /// </summary>
@@ -55,9 +62,9 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// </summary>
         /// <param name="templatename"></param>
         /// <param name="membername"></param>
-        public void Add(string templatename, params object[] templateparams)
+        public void Add(string templatename, SerializerType type, params object[] templateparams)
         {
-            this.Add(new SerializationMember(templatename, templateparams));
+            this.Add(new SerializationMember(templatename, type, templateparams));
         }       
         
         /// <summary>
@@ -65,9 +72,9 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// </summary>
         /// <param name="serializer"></param>
         /// <param name="membername"></param>
-        public void Add(string membername)
+        public void Add(string membername, SerializerType type)
         {
-            this.Add(new SerializationMember("Implementation.ObjectClasses.SimpleBinarySerialization", membername));
+            this.Add(new SerializationMember("Implementation.ObjectClasses.SimpleBinarySerialization", type, membername));
         }
     }
 }

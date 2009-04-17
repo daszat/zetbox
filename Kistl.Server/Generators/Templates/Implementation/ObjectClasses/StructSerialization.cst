@@ -35,6 +35,18 @@
 	        }
 <%	
 	}
+	else if (direction == SerializerDirection.ToXmlStream)
+	{
+%>
+			// TODO: Add XML Serializer here
+<%
+	}
+	else if (direction == SerializerDirection.FromXmlStream)
+	{
+%>
+			// TODO: Add XML Serializer here
+<%
+	}
 	else
 	{
 		throw new ArgumentOutOfRangeException("direction");

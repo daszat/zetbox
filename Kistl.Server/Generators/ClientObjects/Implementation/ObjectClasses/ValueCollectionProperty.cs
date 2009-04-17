@@ -7,6 +7,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.Server.Generators.Extensions;
+using Kistl.Server.Generators.Templates.Implementation;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
@@ -72,7 +73,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         {
             if (list != null)
             {
-                list.Add("Implementation.ObjectClasses.CollectionSerialization", underlyingCollectionName);
+                list.Add("Implementation.ObjectClasses.CollectionSerialization", SerializerType.All, underlyingCollectionName);
             }
         }
     }

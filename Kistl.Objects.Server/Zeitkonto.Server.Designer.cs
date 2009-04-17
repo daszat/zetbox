@@ -298,6 +298,22 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.FromStream(out this._MaxStunden, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._AktuelleStunden, xml, "AktuelleStunden", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Kontoname, xml, "Kontoname", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._MaxStunden, xml, "MaxStunden", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

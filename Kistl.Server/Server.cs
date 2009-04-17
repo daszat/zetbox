@@ -149,6 +149,16 @@ namespace Kistl.Server
             Generators.Generator.GenerateAll();
         }
 
+        internal void Export()
+        {
+            Packaging.Exporter.Export(@"c:\temp\KistlExport.xml", new string[] { "Projekte" });
+        }
+
+        internal void Import()
+        {
+            Packaging.Importer.Import(@"c:\temp\KistlExport.xml");
+        }
+
         #region IDisposable Members
         // TODO: implement Dispose Pattern after 
         // http://msdn2.microsoft.com/en-us/library/ms244737.aspx

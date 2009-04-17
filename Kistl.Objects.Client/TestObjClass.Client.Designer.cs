@@ -271,6 +271,24 @@ namespace Kistl.App.Test
             BinarySerializer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_ObjectProp, xml, "fk_ObjectProp", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "http://dasz.at/Kistl");
+            // TODO: Add XML Serializer here
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

@@ -36,6 +36,18 @@ namespace Kistl.Server
             {
                 bool actiondone = false;
 
+                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-export"))))
+                {
+                    actiondone = true;
+                    server.Export();
+                }
+
+                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-import"))))
+                {
+                    actiondone = true;
+                    server.Import();
+                }
+
                 if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-all"))))
                 {
                     actiondone = true;

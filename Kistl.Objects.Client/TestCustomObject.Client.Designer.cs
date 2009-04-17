@@ -225,6 +225,24 @@ namespace Kistl.App.Test
 	        }
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._Birthday, xml, "Birthday", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._PersonName, xml, "PersonName", "http://dasz.at/Kistl");
+			// TODO: Add XML Serializer here
+			// TODO: Add XML Serializer here
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+			// TODO: Add XML Serializer here
+			// TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

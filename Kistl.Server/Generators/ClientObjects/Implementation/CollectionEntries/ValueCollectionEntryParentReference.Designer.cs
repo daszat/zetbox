@@ -91,7 +91,7 @@ this.WriteObjects("        private int? ",  backingName , ";\r\n");
 this.WriteObjects("        \r\n");
 #line 75 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
 if (serializationList != null)
-		serializationList.Add(backingName);
+		serializationList.Add(backingName, Kistl.Server.Generators.Templates.Implementation.SerializerType.All);
 
 
         }

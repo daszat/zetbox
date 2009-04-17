@@ -141,7 +141,7 @@ namespace Kistl.API.Server.Tests
             using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
             {
                 TestObjClass result = new TestObjClass__Implementation__();
-                result.FromStream(null);
+                result.FromStream((BinaryReader)null);
             }
         }
 

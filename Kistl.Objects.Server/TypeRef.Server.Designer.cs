@@ -305,6 +305,20 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._FullName, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this.fk_Assembly, xml, "fk_Assembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._FullName, xml, "FullName", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }

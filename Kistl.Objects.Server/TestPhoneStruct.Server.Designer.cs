@@ -110,6 +110,20 @@ namespace Kistl.App.Test
             BinarySerializer.FromStream(out this._Number, binStream);
         }
 
+        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            base.ToStream(xml, modules);
+            XmlStreamer.ToStream(this._AreaCode, xml, "AreaCode", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Number, xml, "Number", "http://dasz.at/Kistl");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            base.FromStream(xml);
+            // TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+        }
+
 #endregion
 
     }
