@@ -59,6 +59,93 @@ namespace Kistl.Client.Presentables
             return CreateModel(t, ctx, new object[] { obj }.Concat(data).ToArray());
         }
 
+        /// <summary>
+        /// Creates a PresentableModel to display/edit the value of the property p of the object obj.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public PresentableModel CreatePropertyValueModel(IKistlContext ctx, IDataObject obj, Property p)
+        {
+            // TODO: check model-override from instance/ObjectClass
+            // TODO: implement common ObjectClasses[Property].{DefaultValueModel,DefaultListValueModel}
+            //       and specific Property.{DefaultValueModel,DefaultListValueModel}
+
+            //if (p.IsList)
+            //{
+            //    return CreateModel((p.DefaultListValueModel ?? obj.GetObjectClass(AppContext.MetaContext).DefaultListValueModel), ctx, new object[] { obj, p });
+            //}
+            //else
+            //{
+            //    return CreateModel((p.DefaultValueModel ?? obj.GetObjectClass(AppContext.MetaContext).DefaultValueModel), ctx, new object[] { obj, p });
+            //}
+
+            if (p is BoolProperty && !p.IsList)
+            {
+                return CreateSpecificModel<NullableValuePropertyModel<bool>>(ctx, obj, p);
+            }
+            else if (p is DateTimeProperty && !p.IsList)
+            {
+                return CreateSpecificModel<NullableValuePropertyModel<DateTime>>(ctx, obj, p);
+            }
+            else if (p is DoubleProperty && !p.IsList)
+            {
+                return CreateSpecificModel<NullableValuePropertyModel<double>>(ctx, obj, p);
+            }
+            else if (p is IntProperty && !p.IsList)
+            {
+                return CreateSpecificModel<NullableValuePropertyModel<int>>(ctx, obj, p);
+            }
+            else if (p is StringProperty)
+            {
+                if (p.ID == 77) // MethodInvocation.MemberName
+                    return CreateSpecificModel<ChooseReferencePropertyModel<string>>(ctx, obj, p);
+                else if (p.IsList)
+                    return CreateSpecificModel<SimpleReferenceListPropertyModel<string>>(ctx, obj, p);
+                else
+                    return CreateSpecificModel<ReferencePropertyModel<string>>(ctx, obj, p);
+            }
+            else if (p is ObjectReferenceProperty)
+            {
+                if (p.IsList)
+                    return CreateSpecificModel<ObjectListModel>(ctx, obj, p);
+                else
+                    return CreateSpecificModel<ObjectReferenceModel>(ctx, obj, p);
+            }
+            else if (p is EnumerationProperty)
+            {
+                switch (p.ID)
+                {
+                    case 2: return CreateSpecificModel<EnumerationPropertyModel<Toolkit>>(ctx, obj, p);
+                    case 5: return CreateSpecificModel<EnumerationPropertyModel<VisualType>>(ctx, obj, p);
+                        ...
+                }
+                var enumProp = p as EnumerationProperty;
+                var enumRef = enumProp.Enumeration.GetDataType().ToRef(ctx);
+                var genericRef = typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition();
+                var genericAssembly = ctx.GetQuery<Assembly>().Single(a => a.AssemblyName == genericRef.Assembly.FullName);
+                var concreteRef = ctx.GetQuery<Kistl.App.Base.TypeRef>()
+                    .Where(r => r.FullName == genericRef.FullName
+                        && r.Assembly.ID == genericAssembly.ID
+                        && r.GenericArguments.Count == 1)
+                    .ToList()
+                    .SingleOrDefault(r => r.GenericArguments[0] == enumRef);
+                if (concreteRef == null)
+                {
+                    concreteRef = ctx.Create<TypeRef>();
+                    concreteRef.FullName = genericRef.FullName;
+                    concreteRef.Assembly = genericAssembly;
+                    concreteRef.GenericArguments.Add(enumRef);
+                }
+                return concreteRef;
+            }
+            else
+            {
+                throw new NotImplementedException(String.Format("==>> No model for property: '{0}' of Type '{1}'", p, p.GetType()));
+            }
+        }
+
+
         public PresentableModel CreateModel(Type requestedType, IKistlContext ctx, object[] data)
         {
 

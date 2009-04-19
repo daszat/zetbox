@@ -125,7 +125,7 @@ namespace Kistl.Client.Presentables
                                 DataContext,
                                 group.Key,
                                 group.Select(p =>
-                                     Factory.CreateDefaultModel(DataContext, p))))
+                                     Factory.CreatePropertyValueModel(DataContext, _object, p))))
                             .ToList());
 
                 }
