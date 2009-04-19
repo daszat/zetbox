@@ -112,33 +112,33 @@ namespace Kistl.Client.Presentables
                 else
                     return CreateSpecificModel<ObjectReferenceModel>(ctx, obj, p);
             }
-            else if (p is EnumerationProperty)
-            {
-                switch (p.ID)
-                {
-                    case 2: return CreateSpecificModel<EnumerationPropertyModel<Toolkit>>(ctx, obj, p);
-                    case 5: return CreateSpecificModel<EnumerationPropertyModel<VisualType>>(ctx, obj, p);
-                        ...
-                }
-                var enumProp = p as EnumerationProperty;
-                var enumRef = enumProp.Enumeration.GetDataType().ToRef(ctx);
-                var genericRef = typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition();
-                var genericAssembly = ctx.GetQuery<Assembly>().Single(a => a.AssemblyName == genericRef.Assembly.FullName);
-                var concreteRef = ctx.GetQuery<Kistl.App.Base.TypeRef>()
-                    .Where(r => r.FullName == genericRef.FullName
-                        && r.Assembly.ID == genericAssembly.ID
-                        && r.GenericArguments.Count == 1)
-                    .ToList()
-                    .SingleOrDefault(r => r.GenericArguments[0] == enumRef);
-                if (concreteRef == null)
-                {
-                    concreteRef = ctx.Create<TypeRef>();
-                    concreteRef.FullName = genericRef.FullName;
-                    concreteRef.Assembly = genericAssembly;
-                    concreteRef.GenericArguments.Add(enumRef);
-                }
-                return concreteRef;
-            }
+            //else if (p is EnumerationProperty)
+            //{
+            //    switch (p.ID)
+            //    {
+            //        case 2: return CreateSpecificModel<EnumerationPropertyModel<Toolkit>>(ctx, obj, p);
+            //        case 5: return CreateSpecificModel<EnumerationPropertyModel<VisualType>>(ctx, obj, p);
+            //            ...
+            //    }
+            //    var enumProp = p as EnumerationProperty;
+            //    var enumRef = enumProp.Enumeration.GetDataType().ToRef(ctx);
+            //    var genericRef = typeof(EnumerationPropertyModel<int>).GetGenericTypeDefinition();
+            //    var genericAssembly = ctx.GetQuery<Assembly>().Single(a => a.AssemblyName == genericRef.Assembly.FullName);
+            //    var concreteRef = ctx.GetQuery<Kistl.App.Base.TypeRef>()
+            //        .Where(r => r.FullName == genericRef.FullName
+            //            && r.Assembly.ID == genericAssembly.ID
+            //            && r.GenericArguments.Count == 1)
+            //        .ToList()
+            //        .SingleOrDefault(r => r.GenericArguments[0] == enumRef);
+            //    if (concreteRef == null)
+            //    {
+            //        concreteRef = ctx.Create<TypeRef>();
+            //        concreteRef.FullName = genericRef.FullName;
+            //        concreteRef.Assembly = genericAssembly;
+            //        concreteRef.GenericArguments.Add(enumRef);
+            //    }
+            //    return concreteRef;
+            //}
             else
             {
                 throw new NotImplementedException(String.Format("==>> No model for property: '{0}' of Type '{1}'", p, p.GetType()));
