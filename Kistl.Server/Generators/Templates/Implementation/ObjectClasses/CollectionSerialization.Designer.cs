@@ -15,22 +15,26 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected IKistlContext ctx;
 		protected Templates.Implementation.SerializerDirection direction;
 		protected string streamName;
+		protected string xmlnamespace;
+		protected string xmlname;
 		protected string collectionName;
 
 
-        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializerDirection direction, string streamName, string collectionName)
+        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.direction = direction;
 			this.streamName = streamName;
+			this.xmlnamespace = xmlnamespace;
+			this.xmlname = xmlname;
 			this.collectionName = collectionName;
 
         }
         
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
+#line 20 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
 string methodName = direction.ToString().Replace("Xml", "");
     
 	switch(direction)
@@ -38,16 +42,16 @@ string methodName = direction.ToString().Replace("Xml", "");
 		case SerializerDirection.ToStream:
 		case SerializerDirection.FromStream:
 
-#line 25 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
-this.WriteObjects("            BinarySerializer.",  methodName , "CollectionEntries(this.",  collectionName , ", ",  streamName , ");\r\n");
 #line 27 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
+this.WriteObjects("            BinarySerializer.",  methodName , "CollectionEntries(this.",  collectionName , ", ",  streamName , ");\r\n");
+#line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
 break;
 		case SerializerDirection.ToXmlStream:
 		case SerializerDirection.FromXmlStream:
 
-#line 31 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
-this.WriteObjects("            XmlStreamer.",  methodName , "CollectionEntries(this.",  collectionName , ", ",  streamName , ", \"",  collectionName.TrimStart('_') , "\", \"http://dasz.at/Kistl\");\r\n");
 #line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
+this.WriteObjects("            XmlStreamer.",  methodName , "CollectionEntries(this.",  collectionName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+#line 35 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
 break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");

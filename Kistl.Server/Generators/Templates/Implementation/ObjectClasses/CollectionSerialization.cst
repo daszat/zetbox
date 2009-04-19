@@ -12,6 +12,8 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="direction" Type="Templates.Implementation.SerializerDirection" %>
 <%@ Parameter Name="streamName" Type="string" %>
+<%@ Parameter Name="xmlnamespace" Type="string" %>
+<%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="collectionName" Type="string" %>
 <%
 
@@ -28,7 +30,7 @@
 		case SerializerDirection.ToXmlStream:
 		case SerializerDirection.FromXmlStream:
 %>
-            XmlStreamer.<%= methodName %>CollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= collectionName.TrimStart('_') %>", "http://dasz.at/Kistl");
+            XmlStreamer.<%= methodName %>CollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
 			break;
 		default:

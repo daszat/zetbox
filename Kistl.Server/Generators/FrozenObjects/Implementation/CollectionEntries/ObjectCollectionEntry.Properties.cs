@@ -21,11 +21,11 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
         {
             RelationEnd relEnd = rel.GetEnd(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
-            
-            this.Host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+
+            Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
                     this.MembersToSerialize,
                     relEnd.Type.GetDataTypeString(),
-                    propertyName);
+                    propertyName, this.rel.A.Type.Module.Namespace);
 
             // HACK
             // TODO clean this up
@@ -39,7 +39,8 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
 
             if (rel.NeedsPositionStorage(endRole))
             {
-                this.MembersToSerialize.Add("_" + endRole + Kistl.API.Helper.PositionSuffix, SerializerType.All);
+                // TODO: XML Namespace
+                this.MembersToSerialize.Add(SerializerType.All, this.rel.A.Type.Module.Namespace, endRole + Kistl.API.Helper.PositionSuffix, "_" + endRole + Kistl.API.Helper.PositionSuffix);
                 this.WriteObjects("public int? ", endRole, "Index { get { return ",
                     endRole, Kistl.API.Helper.PositionSuffix, "; } set { ",
                     endRole, Kistl.API.Helper.PositionSuffix, " = value; } }");

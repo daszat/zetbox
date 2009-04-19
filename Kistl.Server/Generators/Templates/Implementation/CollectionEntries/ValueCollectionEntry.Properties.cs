@@ -65,10 +65,10 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected virtual void ApplyNotifyingValueProperty(SerializationMembersList serList, string typeRef, string propertyName)
         {
-            this.Host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+            Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
                 serList,
                 typeRef,
-                propertyName);
+                propertyName, this.prop.Module.Namespace);
         }
 
         protected override void ApplyAIndexPropertyTemplate()

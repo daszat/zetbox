@@ -78,8 +78,9 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
         {
+            // TODO: XML Namespace
             if (list != null)
-                list.Add(memberName, SerializerType.All);
+                list.Add(SerializerType.All, "http://dasz.at/Kistl", name, memberName);
         }
     }
 }

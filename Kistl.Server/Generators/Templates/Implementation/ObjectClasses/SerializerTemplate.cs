@@ -9,7 +9,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     {
         protected virtual void ApplySerializer(SerializerDirection direction, SerializationMember member, string streamName)
         {
-            this.CallTemplate(member.TemplateName, new object[] { this.ctx, direction, streamName }.Concat(member.TemplateParams).ToArray());
+            this.CallTemplate(member.TemplateName, new object[] { this.ctx, direction, streamName, member.XmlNamespace, member.XmlName }.Concat(member.TemplateParams).ToArray());
         }
     }
 }

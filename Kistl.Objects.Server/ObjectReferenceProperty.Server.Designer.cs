@@ -325,15 +325,23 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_ReferenceObjectClass, xml, "fk_ReferenceObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_RelationEnd, xml, "fk_RelationEnd", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_ReferenceObjectClass, xml, "ReferenceObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_RelationEnd, xml, "RelationEnd", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+            {
+                var tmp = this.fk_ReferenceObjectClass;
+                XmlStreamer.FromStream(ref tmp, xml, "ReferenceObjectClass", "http://dasz.at/Kistl");
+                this.fk_ReferenceObjectClass = tmp;
+            }
+            {
+                var tmp = this.fk_RelationEnd;
+                XmlStreamer.FromStream(ref tmp, xml, "RelationEnd", "http://dasz.at/Kistl");
+                this.fk_RelationEnd = tmp;
+            }
         }
 
 #endregion

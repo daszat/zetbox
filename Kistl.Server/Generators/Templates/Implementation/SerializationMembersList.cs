@@ -8,11 +8,13 @@ namespace Kistl.Server.Generators.Templates.Implementation
 
     public sealed class SerializationMember
     {
-        public SerializationMember(string templatename, SerializerType type, params object[] templateparams)
+        public SerializationMember(string templatename, SerializerType type, string xmlns, string xmlname, params object[] templateparams)
         {
             this.TemplateName = templatename;
             this.SerializerType = type;
             this.TemplateParams = templateparams;
+            this.XmlNamespace = xmlns;
+            this.XmlName = xmlname;
         }
 
         /// <summary>
@@ -24,6 +26,16 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// which type of serializer
         /// </summary>
         public SerializerType SerializerType { get; private set; }
+
+        /// <summary>
+        /// XML Namespace
+        /// </summary>
+        public string XmlNamespace { get; private set; }
+
+        /// <summary>
+        /// XML Tag name
+        /// </summary>
+        public string XmlName { get; private set; }
 
         /// <summary>
         /// which member to serialize, will be interpreted by template.
@@ -62,9 +74,9 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// </summary>
         /// <param name="templatename"></param>
         /// <param name="membername"></param>
-        public void Add(string templatename, SerializerType type, params object[] templateparams)
+        public void Add(string templatename, SerializerType type, string xmlns, string xmlname, params object[] templateparams)
         {
-            this.Add(new SerializationMember(templatename, type, templateparams));
+            this.Add(new SerializationMember(templatename, type, xmlns, xmlname, templateparams));
         }       
         
         /// <summary>
@@ -72,9 +84,9 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// </summary>
         /// <param name="serializer"></param>
         /// <param name="membername"></param>
-        public void Add(string membername, SerializerType type)
+        public void Add(SerializerType type, string xmlns, string xmlname, string membername)
         {
-            this.Add(new SerializationMember("Implementation.ObjectClasses.SimpleBinarySerialization", type, membername));
+            this.Add(new SerializationMember("Implementation.ObjectClasses.SimpleBinarySerialization", type, xmlns, xmlname, membername));
         }
     }
 }

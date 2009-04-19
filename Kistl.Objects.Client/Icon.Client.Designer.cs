@@ -131,13 +131,15 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._IconFile, xml, "IconFile", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._IconFile, xml, "IconFile", "http://dasz.at/Kistl");
         }
 
 #endregion

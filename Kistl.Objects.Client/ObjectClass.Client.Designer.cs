@@ -522,23 +522,35 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this._fk_BaseObjectClass, xml, "fk_BaseObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_DefaultModel, xml, "fk_DefaultModel", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_DefaultPresentableModelDescriptor, xml, "fk_DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_DefaultModel, xml, "DefaultModel", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._TableName, xml, "TableName", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_DefaultModel, xml, "DefaultModel", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "http://dasz.at/Kistl");
         }
 
 #endregion

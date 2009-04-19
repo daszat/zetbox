@@ -399,21 +399,31 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Auftragsname, xml, "Auftragsname", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Auftragswert, xml, "Auftragswert", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_Kunde, xml, "fk_Kunde", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_Mitarbeiter, xml, "fk_Mitarbeiter", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_Projekt, xml, "fk_Projekt", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_Kunde, xml, "Kunde", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Auftragsname, xml, "Auftragsname", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Auftragswert, xml, "Auftragswert", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_Kunde, xml, "Kunde", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
         }
 
 #endregion

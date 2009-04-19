@@ -19,10 +19,10 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
 
         protected override void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName)
         {
-            this.Host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+            Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
                     this.MembersToSerialize,
                     prop.ObjectClass.ClassName,
-                    propertyName);
+                    propertyName, this.prop.Module.Namespace);
 
             // HACK
             // TODO clean this up

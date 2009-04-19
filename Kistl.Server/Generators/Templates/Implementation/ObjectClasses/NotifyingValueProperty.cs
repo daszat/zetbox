@@ -5,11 +5,19 @@ using System.Linq;
 using System.Text;
 
 using Kistl.Server.Generators.Extensions;
+using Kistl.API;
 
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
     public partial class NotifyingValueProperty
     {
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host,
+            IKistlContext ctx, SerializationMembersList serializationList, string type, string name, string modulenamespace)
+        {
+            host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty",
+                ctx, serializationList, type, name, modulenamespace);
+        }
+
         /// <summary>
         /// Is called to insert requisites into the containing class, like wrappers or similar.
         /// </summary>
@@ -27,8 +35,9 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 
         protected virtual void AddSerialization(SerializationMembersList list, string name)
         {
+            // TODO: XML Namespace
             if (list != null)
-                list.Add(BackingMemberFromName(name), SerializerType.All);
+                list.Add(SerializerType.All, modulenamespace, name, BackingMemberFromName(name));
         }
 
         protected string GetModifiers()

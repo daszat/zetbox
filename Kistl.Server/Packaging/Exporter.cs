@@ -15,22 +15,22 @@ namespace Kistl.Server.Packaging
 {
     public class Exporter
     {
-        public static void Export(string filename, string[] modules)
+        public static void Export(string filename, string[] moduleNamespaces)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
-                Trace.TraceInformation("Starting Export for Modules {0}", string.Join(", ", modules));
+                Trace.TraceInformation("Starting Export for Modules {0}", string.Join(", ", moduleNamespaces));
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     using (XmlTextWriter xml = new XmlTextWriter(filename, Encoding.UTF8))
                     {
                         var moduleList = new List<Kistl.App.Base.Module>();
-                        foreach (var strModule in modules)
+                        foreach (var ns in moduleNamespaces)
                         {
-                            var module = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.ModuleName == strModule).FirstOrDefault();
+                            var module = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Namespace == ns).FirstOrDefault();
                             if (module == null)
                             {
-                                Trace.TraceWarning("Module {0} not found", strModule);
+                                Trace.TraceWarning("Module {0} not found", ns);
                                 continue;
                             }
                             moduleList.Add(module);
@@ -57,7 +57,7 @@ namespace Kistl.Server.Packaging
                                 {
                                     Console.Write(".");
                                     xml.WriteStartElement(objClass.ClassName, module.Namespace);
-                                    obj.ToStream(xml, modules);
+                                    obj.ToStream(xml, moduleNamespaces);
                                     xml.WriteEndElement();
                                 }
                                 Console.WriteLine();
@@ -85,7 +85,7 @@ namespace Kistl.Server.Packaging
                                 {
                                     Console.Write(".");
                                     xml.WriteStartElement(rel.GetCollectionEntryClassName(), rel.A.Type.Module.Namespace);
-                                    obj.ToStream(xml, modules);
+                                    obj.ToStream(xml, moduleNamespaces);
                                     xml.WriteEndElement();
                                 }
                             }

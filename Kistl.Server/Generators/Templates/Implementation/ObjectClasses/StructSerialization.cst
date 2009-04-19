@@ -13,6 +13,8 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="direction" Type="SerializerDirection" %>
 <%@ Parameter Name="streamName" Type="string" %>
+<%@ Parameter Name="xmlnamespace" Type="string" %>
+<%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="memberName" Type="string" %>
 <%
 	string backingName = "_" + memberName;

@@ -435,21 +435,31 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this._fk_Implementor, xml, "fk_Implementor", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_InvokeOnObjectClass, xml, "fk_InvokeOnObjectClass", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_Implementor, xml, "Implementor", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._MemberName, xml, "MemberName", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_Method, xml, "fk_Method", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_Module, xml, "fk_Module", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_Method, xml, "Method", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_Implementor, xml, "Implementor", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._MemberName, xml, "MemberName", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
 #endregion

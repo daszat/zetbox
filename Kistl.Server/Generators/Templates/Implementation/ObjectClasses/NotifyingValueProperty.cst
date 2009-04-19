@@ -12,6 +12,7 @@
 <%@ Parameter Name="serializationList" Type="SerializationMembersList" %>
 <%@ Parameter Name="type" Type="string" %>
 <%@ Parameter Name="name" Type="String" %>
+<%@ Parameter Name="modulenamespace" Type="String" %>
 <%
 
 	ApplyRequisitesTemplate();

@@ -515,21 +515,39 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_Implementor, xml, "fk_Implementor", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_InvokeOnObjectClass, xml, "fk_InvokeOnObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Implementor, xml, "Implementor", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._MemberName, xml, "MemberName", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Method, xml, "fk_Method", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Module, xml, "fk_Module", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Method, xml, "Method", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+            {
+                var tmp = this.fk_Implementor;
+                XmlStreamer.FromStream(ref tmp, xml, "Implementor", "http://dasz.at/Kistl");
+                this.fk_Implementor = tmp;
+            }
+            {
+                var tmp = this.fk_InvokeOnObjectClass;
+                XmlStreamer.FromStream(ref tmp, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
+                this.fk_InvokeOnObjectClass = tmp;
+            }
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._MemberName, xml, "MemberName", "http://dasz.at/Kistl");
+            {
+                var tmp = this.fk_Method;
+                XmlStreamer.FromStream(ref tmp, xml, "Method", "http://dasz.at/Kistl");
+                this.fk_Method = tmp;
+            }
+            {
+                var tmp = this.fk_Module;
+                XmlStreamer.FromStream(ref tmp, xml, "Module", "http://dasz.at/Kistl");
+                this.fk_Module = tmp;
+            }
         }
 
 #endregion

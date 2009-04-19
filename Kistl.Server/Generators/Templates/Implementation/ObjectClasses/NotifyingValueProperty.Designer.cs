@@ -15,21 +15,23 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected SerializationMembersList serializationList;
 		protected string type;
 		protected String name;
+		protected String modulenamespace;
 
 
-        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializationMembersList serializationList, string type, String name)
+        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializationMembersList serializationList, string type, String name, String modulenamespace)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.serializationList = serializationList;
 			this.type = type;
 			this.name = name;
+			this.modulenamespace = modulenamespace;
 
         }
         
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
+#line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
 ApplyRequisitesTemplate();
 
 	ApplyAttributesTemplate();
@@ -37,7 +39,7 @@ ApplyRequisitesTemplate();
 	string backingName = BackingMemberFromName(name);
 
 
-#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
+#line 25 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
 this.WriteObjects("        ",  GetModifiers() , " ",  type , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
@@ -57,7 +59,7 @@ this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  type , " ",  backingName , ";\r\n");
-#line 44 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
+#line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
 AddSerialization(serializationList, name);
 
 

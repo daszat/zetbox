@@ -472,18 +472,28 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml, modules);
             // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Description, xml, "Description", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Method, xml, "fk_Method", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Property, xml, "fk_Property", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Method, xml, "Method", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Property, xml, "Property", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
             // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "http://dasz.at/Kistl");
+            {
+                var tmp = this.fk_Method;
+                XmlStreamer.FromStream(ref tmp, xml, "Method", "http://dasz.at/Kistl");
+                this.fk_Method = tmp;
+            }
+            {
+                var tmp = this.fk_Property;
+                XmlStreamer.FromStream(ref tmp, xml, "Property", "http://dasz.at/Kistl");
+                this.fk_Property = tmp;
+            }
         }
 
 #endregion

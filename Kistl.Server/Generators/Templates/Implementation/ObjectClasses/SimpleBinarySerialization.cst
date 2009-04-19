@@ -12,6 +12,8 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="direction" Type="SerializerDirection" %>
 <%@ Parameter Name="streamName" Type="string" %>
+<%@ Parameter Name="xmlnamespace" Type="string" %>
+<%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="memberName" Type="string" %>
 <%
 	if(direction == SerializerDirection.ToStream || direction == SerializerDirection.FromStream)
@@ -37,13 +39,13 @@
 	else if(direction == SerializerDirection.ToXmlStream)
 	{
 %>
-            XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= memberName.TrimStart('_') %>", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%	
 	}
 	else if(direction == SerializerDirection.FromXmlStream)
 	{
 %>
-            // TODO: Add XML Serializer here
+            XmlStreamer.FromStream(ref this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%	
 	}
 	else

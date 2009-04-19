@@ -12,6 +12,7 @@ namespace Kistl.API
 {
     /// <summary>
     /// Binary Serializer Helper.
+    /// TODO: Rename to BinaryStreamer due to a naming conflict in XmlStreamer (Kistl.API.XmlSearializer vs. System.Xml.XmlSearializer)
     /// </summary>
     public static class BinarySerializer
     {

@@ -12,6 +12,8 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="direction" Type="SerializerDirection" %>
 <%@ Parameter Name="streamName" Type="string" %>
+<%@ Parameter Name="xmlnamespace" Type="string" %>
+<%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="prop" Type="EnumerationProperty" %>
 <%
 	// always use the interface to get the "right" property

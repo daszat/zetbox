@@ -179,9 +179,9 @@ AddSerialization(serializationList, fkBackingName);
 
 	if (hasPositionStorage)
 	{
-		CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx,
+		Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
 		    serializationList,
-			"int?", posStorageName);
+			"int?", posStorageName, "http://dasz.at/Kistl");
 	}
 
 

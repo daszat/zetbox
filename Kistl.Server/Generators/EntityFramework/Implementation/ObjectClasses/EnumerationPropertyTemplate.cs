@@ -11,7 +11,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list)
         {
             if (list != null)
-                list.Add("Implementation.ObjectClasses.EnumBinarySerialization", SerializerType.All, this.prop);
+                list.Add("Implementation.ObjectClasses.EnumBinarySerialization", SerializerType.All, this.prop.Module.Namespace, this.prop.PropertyName, this.prop);
         }
     }
 }

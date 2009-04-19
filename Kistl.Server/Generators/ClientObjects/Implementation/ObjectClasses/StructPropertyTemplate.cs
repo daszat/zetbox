@@ -11,7 +11,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
         {
             if (list != null)
-                list.Add("Implementation.ObjectClasses.StructSerialization", SerializerType.All, memberName);
+                list.Add("Implementation.ObjectClasses.StructSerialization", SerializerType.All, this.prop.Module.Namespace, this.prop.PropertyName, memberName);
         }
     }
 }

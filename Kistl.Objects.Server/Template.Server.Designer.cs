@@ -429,19 +429,31 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_DisplayedTypeAssembly, xml, "fk_DisplayedTypeAssembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._DisplayName, xml, "DisplayName", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_VisualTree, xml, "fk_VisualTree", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_VisualTree, xml, "VisualTree", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+            {
+                var tmp = this.fk_DisplayedTypeAssembly;
+                XmlStreamer.FromStream(ref tmp, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
+                this.fk_DisplayedTypeAssembly = tmp;
+            }
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._DisplayName, xml, "DisplayName", "http://dasz.at/Kistl");
+            {
+                var tmp = this.fk_VisualTree;
+                XmlStreamer.FromStream(ref tmp, xml, "VisualTree", "http://dasz.at/Kistl");
+                this.fk_VisualTree = tmp;
+            }
         }
 
 #endregion

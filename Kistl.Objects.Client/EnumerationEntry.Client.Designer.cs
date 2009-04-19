@@ -269,19 +269,27 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Description, xml, "Description", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_Enumeration, xml, "fk_Enumeration", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_Enumeration, xml, "Enumeration", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Name, xml, "Name", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Value, xml, "Value", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_Enumeration, xml, "Enumeration", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Value, xml, "Value", "http://dasz.at/Kistl");
         }
 
 #endregion

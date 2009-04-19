@@ -16,35 +16,39 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected IKistlContext ctx;
 		protected SerializerDirection direction;
 		protected string streamName;
+		protected string xmlnamespace;
+		protected string xmlname;
 		protected string memberName;
 
 
-        public StructSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string memberName)
+        public StructSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberName)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.direction = direction;
 			this.streamName = streamName;
+			this.xmlnamespace = xmlnamespace;
+			this.xmlname = xmlname;
 			this.memberName = memberName;
 
         }
         
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
+#line 20 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
 string backingName = "_" + memberName;
 	
 	if (direction == SerializerDirection.ToStream)
 	{
 
-#line 23 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
-this.WriteObjects("			BinarySerializer.ToStream(this.",  memberName , ", ",  streamName , ");\r\n");
 #line 25 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
+this.WriteObjects("			BinarySerializer.ToStream(this.",  memberName , ", ",  streamName , ");\r\n");
+#line 27 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
 }
 	else if (direction == SerializerDirection.FromStream)
 	{
 
-#line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
+#line 31 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
 this.WriteObjects("			{\r\n");
 this.WriteObjects("				// trick compiler into generating correct temporary variable\r\n");
 this.WriteObjects("				var tmp = this.",  memberName , ";\r\n");
@@ -52,21 +56,21 @@ this.WriteObjects("				BinarySerializer.FromStream(out tmp, ",  streamName , ");
 this.WriteObjects("				// use setter to de-/attach everything correctly\r\n");
 this.WriteObjects("	            this.",  memberName , " = tmp;\r\n");
 this.WriteObjects("	        }\r\n");
-#line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
+#line 39 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
 }
 	else if (direction == SerializerDirection.ToXmlStream)
 	{
 
-#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
-this.WriteObjects("			// TODO: Add XML Serializer here\r\n");
 #line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
+this.WriteObjects("			// TODO: Add XML Serializer here\r\n");
+#line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
 }
 	else if (direction == SerializerDirection.FromXmlStream)
 	{
 
-#line 47 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
-this.WriteObjects("			// TODO: Add XML Serializer here\r\n");
 #line 49 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
+this.WriteObjects("			// TODO: Add XML Serializer here\r\n");
+#line 51 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst"
 }
 	else
 	{

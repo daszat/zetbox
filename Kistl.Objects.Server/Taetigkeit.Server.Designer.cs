@@ -453,21 +453,37 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Datum, xml, "Datum", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Dauer, xml, "Dauer", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Mitarbeiter, xml, "fk_Mitarbeiter", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_TaetigkeitsArt, xml, "fk_TaetigkeitsArt", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Zeitkonto, xml, "fk_Zeitkonto", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_TaetigkeitsArt, xml, "TaetigkeitsArt", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Zeitkonto, xml, "Zeitkonto", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Datum, xml, "Datum", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Dauer, xml, "Dauer", "http://dasz.at/Kistl");
+            {
+                var tmp = this.fk_Mitarbeiter;
+                XmlStreamer.FromStream(ref tmp, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+                this.fk_Mitarbeiter = tmp;
+            }
+            {
+                var tmp = this.fk_TaetigkeitsArt;
+                XmlStreamer.FromStream(ref tmp, xml, "TaetigkeitsArt", "http://dasz.at/Kistl");
+                this.fk_TaetigkeitsArt = tmp;
+            }
+            {
+                var tmp = this.fk_Zeitkonto;
+                XmlStreamer.FromStream(ref tmp, xml, "Zeitkonto", "http://dasz.at/Kistl");
+                this.fk_Zeitkonto = tmp;
+            }
         }
 
 #endregion

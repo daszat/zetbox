@@ -10,8 +10,9 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     {
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
         {
+            // TODO: XML Namespace
             if (list != null)
-                list.Add("Implementation.ObjectClasses.SimplePropertySerialization", SerializerType.All, memberName);
+                list.Add("Implementation.ObjectClasses.SimplePropertySerialization", SerializerType.All, "http://dasz.at/Kistl", name, memberName);
         }
     }
 }

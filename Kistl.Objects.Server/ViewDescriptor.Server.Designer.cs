@@ -393,8 +393,8 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_ControlRef, xml, "fk_ControlRef", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_PresentedModelDescriptor, xml, "fk_PresentedModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_ControlRef, xml, "ControlRef", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
             // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
         }
@@ -402,8 +402,16 @@ namespace Kistl.App.GUI
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+            {
+                var tmp = this.fk_ControlRef;
+                XmlStreamer.FromStream(ref tmp, xml, "ControlRef", "http://dasz.at/Kistl");
+                this.fk_ControlRef = tmp;
+            }
+            {
+                var tmp = this.fk_PresentedModelDescriptor;
+                XmlStreamer.FromStream(ref tmp, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
+                this.fk_PresentedModelDescriptor = tmp;
+            }
             // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
         }

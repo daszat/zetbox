@@ -21,7 +21,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
                 // ID is currently serialized by the infrastructure, so ignore it here
                 new Templates.Implementation.SerializationMembersList(),
                 // hardcoded type and name
-                "int", "ID")
+                "int", "ID", "http://dasz.at/Kistl") // TODO: Do hots wos
         {
 
         }

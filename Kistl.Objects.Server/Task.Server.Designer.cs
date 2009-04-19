@@ -329,21 +329,33 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Aufwand, xml, "Aufwand", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._DatumBis, xml, "DatumBis", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._DatumVon, xml, "DatumVon", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Name, xml, "Name", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Projekt, xml, "fk_Projekt", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Aufwand, xml, "Aufwand", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._DatumBis, xml, "DatumBis", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._DatumVon, xml, "DatumVon", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "http://dasz.at/Kistl");
+            {
+                var tmp = this.fk_Projekt;
+                XmlStreamer.FromStream(ref tmp, xml, "Projekt", "http://dasz.at/Kistl");
+                this.fk_Projekt = tmp;
+            }
         }
 
 #endregion

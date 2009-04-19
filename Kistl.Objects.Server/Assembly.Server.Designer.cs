@@ -290,17 +290,25 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._AssemblyName, xml, "AssemblyName", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._IsClientAssembly, xml, "IsClientAssembly", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Module, xml, "fk_Module", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._AssemblyName, xml, "AssemblyName", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._IsClientAssembly, xml, "IsClientAssembly", "http://dasz.at/Kistl");
+            {
+                var tmp = this.fk_Module;
+                XmlStreamer.FromStream(ref tmp, xml, "Module", "http://dasz.at/Kistl");
+                this.fk_Module = tmp;
+            }
         }
 
 #endregion

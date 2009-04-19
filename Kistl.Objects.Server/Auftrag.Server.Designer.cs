@@ -474,21 +474,37 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Auftragsname, xml, "Auftragsname", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Auftragswert, xml, "Auftragswert", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Kunde, xml, "fk_Kunde", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Mitarbeiter, xml, "fk_Mitarbeiter", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Projekt, xml, "fk_Projekt", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Kunde, xml, "Kunde", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Auftragsname, xml, "Auftragsname", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Auftragswert, xml, "Auftragswert", "http://dasz.at/Kistl");
+            {
+                var tmp = this.fk_Kunde;
+                XmlStreamer.FromStream(ref tmp, xml, "Kunde", "http://dasz.at/Kistl");
+                this.fk_Kunde = tmp;
+            }
+            {
+                var tmp = this.fk_Mitarbeiter;
+                XmlStreamer.FromStream(ref tmp, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+                this.fk_Mitarbeiter = tmp;
+            }
+            {
+                var tmp = this.fk_Projekt;
+                XmlStreamer.FromStream(ref tmp, xml, "Projekt", "http://dasz.at/Kistl");
+                this.fk_Projekt = tmp;
+            }
         }
 
 #endregion

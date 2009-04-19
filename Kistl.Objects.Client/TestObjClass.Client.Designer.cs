@@ -274,8 +274,11 @@ namespace Kistl.App.Test
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_ObjectProp, xml, "fk_ObjectProp", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "http://dasz.at/Kistl");
             // TODO: Add XML Serializer here
         }
@@ -283,9 +286,12 @@ namespace Kistl.App.Test
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._MyIntProperty, xml, "MyIntProperty", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._StringProp, xml, "StringProp", "http://dasz.at/Kistl");
             // TODO: Add XML Serializer here
         }
 

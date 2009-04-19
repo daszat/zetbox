@@ -191,13 +191,17 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_Projekt, xml, "fk_Projekt", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
+            {
+                var tmp = this.fk_Projekt;
+                XmlStreamer.FromStream(ref tmp, xml, "Projekt", "http://dasz.at/Kistl");
+                this.fk_Projekt = tmp;
+            }
         }
 
 #endregion

@@ -65,6 +65,7 @@ namespace Kistl.Server.Packaging
                                     {
                                         throw new NotSupportedException("Interfacetype " + ifTypeName + " is not supported");
                                     }
+                                    ((BasePersistenceObject)obj).ID = id;
                                 }
                                 objects.Add(obj);
 

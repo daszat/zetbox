@@ -15,22 +15,26 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected IKistlContext ctx;
 		protected SerializerDirection direction;
 		protected string streamName;
+		protected string xmlnamespace;
+		protected string xmlname;
 		protected string memberName;
 
 
-        public SimpleBinarySerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string memberName)
+        public SimpleBinarySerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberName)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.direction = direction;
 			this.streamName = streamName;
+			this.xmlnamespace = xmlnamespace;
+			this.xmlname = xmlname;
 			this.memberName = memberName;
 
         }
         
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
+#line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
 if(direction == SerializerDirection.ToStream || direction == SerializerDirection.FromStream)
 	{
 		string methodName = direction.ToString();
@@ -48,23 +52,23 @@ if(direction == SerializerDirection.ToStream || direction == SerializerDirection
 		}
 	
 
-#line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
-this.WriteObjects("            BinarySerializer.",  methodName , "(",  modifier , "this.",  memberName , ", ",  streamName , ");\r\n");
 #line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
+this.WriteObjects("            BinarySerializer.",  methodName , "(",  modifier , "this.",  memberName , ", ",  streamName , ");\r\n");
+#line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
 }
 	else if(direction == SerializerDirection.ToXmlStream)
 	{
 
-#line 40 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
-this.WriteObjects("            XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  memberName.TrimStart('_') , "\", \"http://dasz.at/Kistl\");\r\n");
 #line 42 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
+this.WriteObjects("            XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+#line 44 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
 }
 	else if(direction == SerializerDirection.FromXmlStream)
 	{
 
-#line 46 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
-this.WriteObjects("            // TODO: Add XML Serializer here\r\n");
 #line 48 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
+this.WriteObjects("            XmlStreamer.FromStream(ref this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+#line 50 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
 }
 	else
 	{

@@ -408,9 +408,11 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml, modules);
             // TODO: Add XML Serializer here
-            XmlStreamer.ToStream(this.fk_DataAssembly, xml, "fk_DataAssembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_DataAssembly, xml, "DataAssembly", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._DataTypeName, xml, "DataTypeName", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_PresenterAssembly, xml, "fk_PresenterAssembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_PresenterAssembly, xml, "PresenterAssembly", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._PresenterTypeName, xml, "PresenterTypeName", "http://dasz.at/Kistl");
         }
 
@@ -418,10 +420,20 @@ namespace Kistl.App.GUI
         {
             base.FromStream(xml);
             // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+            {
+                var tmp = this.fk_DataAssembly;
+                XmlStreamer.FromStream(ref tmp, xml, "DataAssembly", "http://dasz.at/Kistl");
+                this.fk_DataAssembly = tmp;
+            }
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._DataTypeName, xml, "DataTypeName", "http://dasz.at/Kistl");
+            {
+                var tmp = this.fk_PresenterAssembly;
+                XmlStreamer.FromStream(ref tmp, xml, "PresenterAssembly", "http://dasz.at/Kistl");
+                this.fk_PresenterAssembly = tmp;
+            }
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._PresenterTypeName, xml, "PresenterTypeName", "http://dasz.at/Kistl");
         }
 
 #endregion

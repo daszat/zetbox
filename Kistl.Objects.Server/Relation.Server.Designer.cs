@@ -377,8 +377,9 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_A, xml, "fk_A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_B, xml, "fk_B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_B, xml, "B", "http://dasz.at/Kistl");
+			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Description, xml, "Description", "http://dasz.at/Kistl");
             // TODO: Add XML Serializer here
         }
@@ -386,9 +387,18 @@ namespace Kistl.App.Base
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
-            // TODO: Add XML Serializer here
+            {
+                var tmp = this.fk_A;
+                XmlStreamer.FromStream(ref tmp, xml, "A", "http://dasz.at/Kistl");
+                this.fk_A = tmp;
+            }
+            {
+                var tmp = this.fk_B;
+                XmlStreamer.FromStream(ref tmp, xml, "B", "http://dasz.at/Kistl");
+                this.fk_B = tmp;
+            }
+			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "http://dasz.at/Kistl");
             // TODO: Add XML Serializer here
         }
 

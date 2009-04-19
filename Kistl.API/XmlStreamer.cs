@@ -13,10 +13,26 @@ namespace Kistl.API
         {
             xml.WriteElementString(name, ns, XmlConvert.ToString(val));
         }
+
         public static void ToStream(bool? val, XmlWriter xml, string name, string ns)
         {
             if (!val.HasValue) return;
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value));
+        }
+
+        public static void FromStream(ref bool val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsBoolean();
+            }
+        }
+        public static void FromStream(ref bool? val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsBoolean();
+            }
         }
         #endregion
 
@@ -30,6 +46,21 @@ namespace Kistl.API
             if (!val.HasValue) return;
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value, XmlDateTimeSerializationMode.Utc));
         }
+
+        public static void FromStream(ref DateTime val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsDateTime();
+            }
+        }
+        public static void FromStream(ref DateTime? val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsDateTime();
+            }
+        }
         #endregion
 
         #region double
@@ -41,6 +72,21 @@ namespace Kistl.API
         {
             if (!val.HasValue) return;
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value));
+        }
+
+        public static void FromStream(ref double val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsDouble();
+            }
+        }
+        public static void FromStream(ref double? val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsDouble();
+            }
         }
         #endregion
 
@@ -54,6 +100,21 @@ namespace Kistl.API
             if (!val.HasValue) return;
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value));
         }
+
+        public static void FromStream(ref float val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsFloat();
+            }
+        }
+        public static void FromStream(ref float? val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsFloat();
+            }
+        }
         #endregion
 
         #region int
@@ -66,6 +127,21 @@ namespace Kistl.API
             if (!val.HasValue) return;
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value));
         }
+
+        public static void FromStream(ref int val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsInt();
+            }
+        }
+        public static void FromStream(ref int? val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsInt();
+            }
+        }
         #endregion
 
         #region string
@@ -73,6 +149,14 @@ namespace Kistl.API
         {
             if (val == null) return;
             xml.WriteElementString(name, ns, val);
+        }
+
+        public static void FromStream(ref string val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsString();
+            }
         }
         #endregion
 

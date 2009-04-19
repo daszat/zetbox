@@ -151,7 +151,7 @@ namespace Kistl.Server
 
         internal void Export()
         {
-            Packaging.Exporter.Export(@"c:\temp\KistlExport.xml", new string[] { "Projekte" });
+            Packaging.Exporter.Export(@"c:\temp\KistlExport.xml", new string[] { "Kistl.App.Projekte" });
         }
 
         internal void Import()
