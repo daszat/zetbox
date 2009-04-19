@@ -156,7 +156,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(75);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(76);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
@@ -384,6 +384,9 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[235] = 
 			DataStore[235] = new ObjectReferenceProperty__Implementation__Frozen(235);
 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[236] = 
+			DataStore[236] = new ObjectReferenceProperty__Implementation__Frozen(236);
+
 		}
 
 		internal new static void FillDataStore() {
@@ -398,6 +401,7 @@ namespace Kistl.App.Base
 			DataStore[7].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[7].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
 			DataStore[7].PropertyName = @"Properties";
+			DataStore[7].ValueModelDescriptor = null;
 			DataStore[7].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
 			DataStore[7].Seal();
 			DataStore[8].AltText = null;
@@ -412,6 +416,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[8].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[8].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
 			DataStore[8].PropertyName = @"ObjectClass";
+			DataStore[8].ValueModelDescriptor = null;
 			DataStore[8].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
 			DataStore[8].Seal();
 			DataStore[14].AltText = null;
@@ -425,6 +430,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[14].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[14].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[14].PropertyName = @"Tasks";
+			DataStore[14].ValueModelDescriptor = null;
 			DataStore[14].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[4];
 			DataStore[14].Seal();
 			DataStore[19].AltText = @"Verknüpfung zum Projekt";
@@ -438,6 +444,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[19].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[19].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
 			DataStore[19].PropertyName = @"Projekt";
+			DataStore[19].ValueModelDescriptor = null;
 			DataStore[19].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
 			DataStore[19].Seal();
 			DataStore[21].AltText = @"Projekte des Mitarbeiters für die er Verantwortlich ist";
@@ -451,6 +458,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[21].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[21].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
 			DataStore[21].PropertyName = @"Projekte";
+			DataStore[21].ValueModelDescriptor = null;
 			DataStore[21].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
 			DataStore[21].Seal();
 			DataStore[22].AltText = null;
@@ -464,6 +472,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[22].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[22].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[22].PropertyName = @"Mitarbeiter";
+			DataStore[22].ValueModelDescriptor = null;
 			DataStore[22].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
 			DataStore[22].Seal();
 			DataStore[25].AltText = @"Pointer auf die Basisklasse";
@@ -477,6 +486,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[25].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[25].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[25].PropertyName = @"BaseObjectClass";
+			DataStore[25].ValueModelDescriptor = null;
 			DataStore[25].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
 			DataStore[25].Seal();
 			DataStore[27].AltText = @"Liste der vererbten Klassen";
@@ -490,6 +500,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[27].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[27].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[27].PropertyName = @"SubClasses";
+			DataStore[27].ValueModelDescriptor = null;
 			DataStore[27].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
 			DataStore[27].Seal();
 			DataStore[29].AltText = null;
@@ -504,6 +515,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[141],
 			DataStore[29].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[29].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
 			DataStore[29].PropertyName = @"ObjectClass";
+			DataStore[29].ValueModelDescriptor = null;
 			DataStore[29].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
 			DataStore[29].Seal();
 			DataStore[31].AltText = @"Liste aller Methoden der Objektklasse.";
@@ -517,6 +529,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[141],
 			DataStore[31].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[31].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
 			DataStore[31].PropertyName = @"Methods";
+			DataStore[31].ValueModelDescriptor = null;
 			DataStore[31].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
 			DataStore[31].Seal();
 			DataStore[44].AltText = @"Datentypendes Modules";
@@ -530,6 +543,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[141],
 			DataStore[44].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[44].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
 			DataStore[44].PropertyName = @"DataTypes";
+			DataStore[44].ValueModelDescriptor = null;
 			DataStore[44].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
 			DataStore[44].Seal();
 			DataStore[45].AltText = @"Modul der Objektklasse";
@@ -544,6 +558,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[45].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[45].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
 			DataStore[45].PropertyName = @"Module";
+			DataStore[45].ValueModelDescriptor = null;
 			DataStore[45].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
 			DataStore[45].Seal();
 			DataStore[46].AltText = @"Pointer zur Objektklasse";
@@ -557,6 +572,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[46].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[46].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
 			DataStore[46].PropertyName = @"ReferenceObjectClass";
+			DataStore[46].ValueModelDescriptor = null;
 			DataStore[46].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
 			DataStore[46].Seal();
 			DataStore[49].AltText = null;
@@ -570,6 +586,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[49].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[49].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
 			DataStore[49].PropertyName = @"Mitarbeiter";
+			DataStore[49].ValueModelDescriptor = null;
 			DataStore[49].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
 			DataStore[49].Seal();
 			DataStore[51].AltText = @"Projekt zum Auftrag";
@@ -583,6 +600,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[51].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[51].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
 			DataStore[51].PropertyName = @"Projekt";
+			DataStore[51].ValueModelDescriptor = null;
 			DataStore[51].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
 			DataStore[51].Seal();
 			DataStore[53].AltText = @"Projekt des Kostenträgers";
@@ -597,6 +615,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[135],
 			DataStore[53].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[53].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[23];
 			DataStore[53].PropertyName = @"Projekt";
+			DataStore[53].ValueModelDescriptor = null;
 			DataStore[53].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
 			DataStore[53].Seal();
 			DataStore[54].AltText = @"Mitarbeiter";
@@ -611,6 +630,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[134],
 			DataStore[54].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[54].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
 			DataStore[54].PropertyName = @"Mitarbeiter";
+			DataStore[54].ValueModelDescriptor = null;
 			DataStore[54].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
 			DataStore[54].Seal();
 			DataStore[55].AltText = @"Zeitkonto";
@@ -625,6 +645,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[55].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[55].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
 			DataStore[55].PropertyName = @"Zeitkonto";
+			DataStore[55].ValueModelDescriptor = null;
 			DataStore[55].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[20];
 			DataStore[55].Seal();
 			DataStore[58].AltText = @"Tätigkeiten";
@@ -638,6 +659,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[58].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[58].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
 			DataStore[58].PropertyName = @"Taetigkeiten";
+			DataStore[58].ValueModelDescriptor = null;
 			DataStore[58].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[25];
 			DataStore[58].Seal();
 			DataStore[64].AltText = @"Kunde des Projektes";
@@ -651,6 +673,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[64].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[64].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
 			DataStore[64].PropertyName = @"Kunde";
+			DataStore[64].ValueModelDescriptor = null;
 			DataStore[64].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
 			DataStore[64].Seal();
 			DataStore[66].AltText = @"Kostenträger";
@@ -664,6 +687,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[66].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[66].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[66].PropertyName = @"Kostentraeger";
+			DataStore[66].ValueModelDescriptor = null;
 			DataStore[66].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[23];
 			DataStore[66].Seal();
 			DataStore[67].AltText = @"Aufträge";
@@ -677,6 +701,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[67].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[67].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[67].PropertyName = @"Auftraege";
+			DataStore[67].ValueModelDescriptor = null;
 			DataStore[67].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[19];
 			DataStore[67].Seal();
 			DataStore[69].AltText = @"Standard Icon wenn IIcon nicht implementiert ist";
@@ -690,6 +715,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
 			DataStore[69].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[69].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
 			DataStore[69].PropertyName = @"DefaultIcon";
+			DataStore[69].ValueModelDescriptor = null;
 			DataStore[69].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[27];
 			DataStore[69].Seal();
 			DataStore[70].AltText = @"Module";
@@ -704,6 +730,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[127],
 			DataStore[70].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[70].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
 			DataStore[70].PropertyName = @"Module";
+			DataStore[70].ValueModelDescriptor = null;
 			DataStore[70].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
 			DataStore[70].Seal();
 			DataStore[72].AltText = @"Zugehörig zum Modul";
@@ -718,6 +745,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[125],
 			DataStore[72].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[72].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
 			DataStore[72].PropertyName = @"Module";
+			DataStore[72].ValueModelDescriptor = null;
 			DataStore[72].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
 			DataStore[72].Seal();
 			DataStore[73].AltText = @"Zugehörig zum Modul";
@@ -732,6 +760,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[124],
 			DataStore[73].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[73].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
 			DataStore[73].PropertyName = @"Module";
+			DataStore[73].ValueModelDescriptor = null;
 			DataStore[73].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
 			DataStore[73].Seal();
 			DataStore[74].AltText = @"Methode, die Aufgerufen wird";
@@ -747,6 +776,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[193],
 			DataStore[74].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[74].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[74].PropertyName = @"Method";
+			DataStore[74].ValueModelDescriptor = null;
 			DataStore[74].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
 			DataStore[74].Seal();
 			DataStore[78].AltText = @"Zugehörig zum Modul";
@@ -761,6 +791,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[119],
 			DataStore[78].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[78].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[78].PropertyName = @"Module";
+			DataStore[78].ValueModelDescriptor = null;
 			DataStore[78].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
 			DataStore[78].Seal();
 			DataStore[79].AltText = @"In dieser Objektklasse implementieren";
@@ -775,6 +806,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[79].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[79].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[79].PropertyName = @"InvokeOnObjectClass";
+			DataStore[79].ValueModelDescriptor = null;
 			DataStore[79].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
 			DataStore[79].Seal();
 			DataStore[80].AltText = @"all implemented Methods in this DataType";
@@ -788,6 +820,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[80].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[80].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
 			DataStore[80].PropertyName = @"MethodInvocations";
+			DataStore[80].ValueModelDescriptor = null;
 			DataStore[80].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[30];
 			DataStore[80].Seal();
 			DataStore[81].AltText = @"Methodenaufrufe implementiert in dieser Objekt Klasse";
@@ -801,6 +834,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[81].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[81].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
 			DataStore[81].PropertyName = @"MethodInvokations";
+			DataStore[81].ValueModelDescriptor = null;
 			DataStore[81].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[30];
 			DataStore[81].Seal();
 			DataStore[82].AltText = @"Assemblies des Moduls";
@@ -814,6 +848,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[82].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[82].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
 			DataStore[82].PropertyName = @"Assemblies";
+			DataStore[82].ValueModelDescriptor = null;
 			DataStore[82].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
 			DataStore[82].Seal();
 			DataStore[86].AltText = @"Zugeordnete Mitarbeiter";
@@ -827,6 +862,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[86].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[86].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
 			DataStore[86].PropertyName = @"Mitarbeiter";
+			DataStore[86].ValueModelDescriptor = null;
 			DataStore[86].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
 			DataStore[86].Seal();
 			DataStore[88].AltText = @"Art der Tätigkeit";
@@ -840,6 +876,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[88].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[88].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
 			DataStore[88].PropertyName = @"TaetigkeitsArt";
+			DataStore[88].ValueModelDescriptor = null;
 			DataStore[88].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[31];
 			DataStore[88].Seal();
 			DataStore[92].AltText = @"Methode des Parameters";
@@ -854,6 +891,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[113],
 			DataStore[92].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[92].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
 			DataStore[92].PropertyName = @"Method";
+			DataStore[92].ValueModelDescriptor = null;
 			DataStore[92].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
 			DataStore[92].Seal();
 			DataStore[96].AltText = @"Parameter der Methode";
@@ -867,6 +905,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[113],
 			DataStore[96].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[96].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
 			DataStore[96].PropertyName = @"Parameter";
+			DataStore[96].ValueModelDescriptor = null;
 			DataStore[96].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
 			DataStore[96].Seal();
 			DataStore[97].AltText = @"Kistl-Typ des Parameters";
@@ -881,6 +920,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[109],
 			DataStore[97].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[97].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[42];
 			DataStore[97].PropertyName = @"DataType";
+			DataStore[97].ValueModelDescriptor = null;
 			DataStore[97].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
 			DataStore[97].Seal();
 			DataStore[98].AltText = @"Assembly des CLR Objektes, NULL für Default Assemblies";
@@ -894,6 +934,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[109],
 			DataStore[98].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[98].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[43];
 			DataStore[98].PropertyName = @"Assembly";
+			DataStore[98].ValueModelDescriptor = null;
 			DataStore[98].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
 			DataStore[98].Seal();
 			DataStore[100].AltText = @"Übergeordnete Enumeration";
@@ -908,6 +949,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[107],
 			DataStore[100].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[100].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
 			DataStore[100].PropertyName = @"Enumeration";
+			DataStore[100].ValueModelDescriptor = null;
 			DataStore[100].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[45];
 			DataStore[100].Seal();
 			DataStore[103].AltText = @"Einträge der Enumeration";
@@ -921,6 +963,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[107],
 			DataStore[103].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[103].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45];
 			DataStore[103].PropertyName = @"EnumerationEntries";
+			DataStore[103].ValueModelDescriptor = null;
 			DataStore[103].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[46];
 			DataStore[103].Seal();
 			DataStore[104].AltText = @"Enumeration der Eigenschaft";
@@ -935,6 +978,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[106],
 			DataStore[104].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[104].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47];
 			DataStore[104].PropertyName = @"Enumeration";
+			DataStore[104].ValueModelDescriptor = null;
 			DataStore[104].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[45];
 			DataStore[104].Seal();
 			DataStore[105].AltText = @"Interfaces der Objektklasse";
@@ -948,6 +992,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[106],
 			DataStore[105].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[105].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[105].PropertyName = @"ImplementsInterfaces";
+			DataStore[105].ValueModelDescriptor = null;
 			DataStore[105].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[44];
 			DataStore[105].Seal();
 			DataStore[108].AltText = @"Objektpointer für das Testinterface";
@@ -962,6 +1007,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[104],
 			DataStore[108].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[108].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48];
 			DataStore[108].PropertyName = @"ObjectProp";
+			DataStore[108].ValueModelDescriptor = null;
 			DataStore[108].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
 			DataStore[108].RelationEnd = null;
 			DataStore[108].Seal();
@@ -977,6 +1023,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[100],
 			DataStore[112].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[112].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
 			DataStore[112].PropertyName = @"ObjectProp";
+			DataStore[112].ValueModelDescriptor = null;
 			DataStore[112].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
 			DataStore[112].Seal();
 			DataStore[114].AltText = @"The assembly containing the Control";
@@ -991,6 +1038,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[98],
 			DataStore[114].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[114].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
 			DataStore[114].PropertyName = @"Assembly";
+			DataStore[114].ValueModelDescriptor = null;
 			DataStore[114].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
 			DataStore[114].Seal();
 			DataStore[129].AltText = @"Definition of this Struct";
@@ -1005,6 +1053,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[91],
 			DataStore[129].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[129].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[64];
 			DataStore[129].PropertyName = @"StructDefinition";
+			DataStore[129].ValueModelDescriptor = null;
 			DataStore[129].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[62];
 			DataStore[129].Seal();
 			DataStore[138].AltText = @"Where to find the implementation of the Presenter";
@@ -1019,6 +1068,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 			DataStore[138].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[138].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
 			DataStore[138].PropertyName = @"PresenterAssembly";
+			DataStore[138].ValueModelDescriptor = null;
 			DataStore[138].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
 			DataStore[138].Seal();
 			DataStore[147].AltText = @"The Assembly of the Data Type";
@@ -1032,6 +1082,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 			DataStore[147].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[147].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
 			DataStore[147].PropertyName = @"DataAssembly";
+			DataStore[147].ValueModelDescriptor = null;
 			DataStore[147].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
 			DataStore[147].Seal();
 			DataStore[151].AltText = @"if this is a container, here are the visually contained/controlled children of this Visual";
@@ -1045,6 +1096,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 			DataStore[151].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[151].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
 			DataStore[151].PropertyName = @"Children";
+			DataStore[151].ValueModelDescriptor = null;
 			DataStore[151].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
 			DataStore[151].Seal();
 			DataStore[152].AltText = @"The Property to display";
@@ -1058,6 +1110,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 			DataStore[152].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[152].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
 			DataStore[152].PropertyName = @"Property";
+			DataStore[152].ValueModelDescriptor = null;
 			DataStore[152].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
 			DataStore[152].Seal();
 			DataStore[153].AltText = @"The Method whose return value shoud be displayed";
@@ -1072,6 +1125,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[81],
 			DataStore[153].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[153].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
 			DataStore[153].PropertyName = @"Method";
+			DataStore[153].ValueModelDescriptor = null;
 			DataStore[153].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
 			DataStore[153].Seal();
 			DataStore[155].AltText = @"The visual representation of this Template";
@@ -1086,6 +1140,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[79],
 			DataStore[155].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[155].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
 			DataStore[155].PropertyName = @"VisualTree";
+			DataStore[155].ValueModelDescriptor = null;
 			DataStore[155].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
 			DataStore[155].Seal();
 			DataStore[163].AltText = @"Assembly of the Type that is displayed with this Template";
@@ -1100,6 +1155,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 			DataStore[163].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[163].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
 			DataStore[163].PropertyName = @"DisplayedTypeAssembly";
+			DataStore[163].ValueModelDescriptor = null;
 			DataStore[163].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
 			DataStore[163].Seal();
 			DataStore[164].AltText = @"The context menu for this Visual";
@@ -1113,6 +1169,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 			DataStore[164].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[164].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
 			DataStore[164].PropertyName = @"ContextMenu";
+			DataStore[164].ValueModelDescriptor = null;
 			DataStore[164].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
 			DataStore[164].Seal();
 			DataStore[165].AltText = @"The main menu for this Template";
@@ -1126,6 +1183,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 			DataStore[165].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[165].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
 			DataStore[165].PropertyName = @"Menu";
+			DataStore[165].ValueModelDescriptor = null;
 			DataStore[165].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
 			DataStore[165].Seal();
 			DataStore[170].AltText = @"The list of constraints applying to this Property";
@@ -1139,6 +1197,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 			DataStore[170].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[170].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
 			DataStore[170].PropertyName = @"Constraints";
+			DataStore[170].ValueModelDescriptor = null;
 			DataStore[170].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[69];
 			DataStore[170].Seal();
 			DataStore[171].AltText = @"The property to be constrained";
@@ -1153,6 +1212,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74],
 			DataStore[171].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[171].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[69];
 			DataStore[171].PropertyName = @"ConstrainedProperty";
+			DataStore[171].ValueModelDescriptor = null;
 			DataStore[171].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
 			DataStore[171].Seal();
 			DataStore[206].AltText = @"The assembly containing the referenced Type.";
@@ -1166,6 +1226,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74],
 			DataStore[206].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[206].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
 			DataStore[206].PropertyName = @"Assembly";
+			DataStore[206].ValueModelDescriptor = null;
 			DataStore[206].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
 			DataStore[206].Seal();
 			DataStore[207].AltText = @"list of type arguments";
@@ -1179,6 +1240,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74],
 			DataStore[207].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[207].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
 			DataStore[207].PropertyName = @"GenericArguments";
+			DataStore[207].ValueModelDescriptor = null;
 			DataStore[207].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[207].Seal();
 			DataStore[208].AltText = @"The Type implementing this invocation";
@@ -1192,6 +1254,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74],
 			DataStore[208].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[208].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[208].PropertyName = @"Implementor";
+			DataStore[208].ValueModelDescriptor = null;
 			DataStore[208].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[208].Seal();
 			DataStore[209].AltText = @"Which Layout is handled by this View";
@@ -1206,6 +1269,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[213],
 			DataStore[209].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[209].ObjectClass = null;
 			DataStore[209].PropertyName = @"LayoutRef";
+			DataStore[209].ValueModelDescriptor = null;
 			DataStore[209].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[209].RelationEnd = null;
 			DataStore[209].Seal();
@@ -1221,6 +1285,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[211].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[211].ObjectClass = null;
 			DataStore[211].PropertyName = @"ViewRef";
+			DataStore[211].ValueModelDescriptor = null;
 			DataStore[211].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[211].RelationEnd = null;
 			DataStore[211].Seal();
@@ -1235,6 +1300,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[212].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[212].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[212].PropertyName = @"DefaultModel";
+			DataStore[212].ValueModelDescriptor = null;
 			DataStore[212].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[212].Seal();
 			DataStore[213].AltText = @"The A-side of this Relation.";
@@ -1248,6 +1314,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[213].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[213].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
 			DataStore[213].PropertyName = @"A";
+			DataStore[213].ValueModelDescriptor = null;
 			DataStore[213].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[82];
 			DataStore[213].Seal();
 			DataStore[214].AltText = @"The B-side of this Relation.";
@@ -1261,6 +1328,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[214].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[214].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
 			DataStore[214].PropertyName = @"B";
+			DataStore[214].ValueModelDescriptor = null;
 			DataStore[214].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[82];
 			DataStore[214].Seal();
 			DataStore[215].AltText = @"Specifies which type this End of the relation has. MUST NOT be null.";
@@ -1274,6 +1342,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[215].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[215].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
 			DataStore[215].PropertyName = @"Type";
+			DataStore[215].ValueModelDescriptor = null;
 			DataStore[215].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
 			DataStore[215].Seal();
 			DataStore[218].AltText = @"The ORP to navigate FROM this end of the relation. MAY be null.";
@@ -1287,6 +1356,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[218].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[218].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
 			DataStore[218].PropertyName = @"Navigator";
+			DataStore[218].ValueModelDescriptor = null;
 			DataStore[218].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[14];
 			DataStore[218].Seal();
 			DataStore[222].AltText = null;
@@ -1300,6 +1370,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[222].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[222].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
 			DataStore[222].PropertyName = @"RelationEnd";
+			DataStore[222].ValueModelDescriptor = null;
 			DataStore[222].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[82];
 			DataStore[222].Seal();
 			DataStore[223].AltText = null;
@@ -1313,6 +1384,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[223].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[223].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
 			DataStore[223].PropertyName = @"BParent";
+			DataStore[223].ValueModelDescriptor = null;
 			DataStore[223].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[77];
 			DataStore[223].Seal();
 			DataStore[224].AltText = null;
@@ -1326,6 +1398,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[224].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[224].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
 			DataStore[224].PropertyName = @"AParent";
+			DataStore[224].ValueModelDescriptor = null;
 			DataStore[224].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[77];
 			DataStore[224].Seal();
 			DataStore[226].AltText = null;
@@ -1339,6 +1412,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[226].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[226].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
 			DataStore[226].PropertyName = @"PresentedModelDescriptor";
+			DataStore[226].ValueModelDescriptor = null;
 			DataStore[226].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[85];
 			DataStore[226].Seal();
 			DataStore[227].AltText = null;
@@ -1352,6 +1426,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[227].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[227].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
 			DataStore[227].PropertyName = @"ControlRef";
+			DataStore[227].ValueModelDescriptor = null;
 			DataStore[227].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[227].Seal();
 			DataStore[231].AltText = null;
@@ -1365,6 +1440,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[231].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[231].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
 			DataStore[231].PropertyName = @"PresentableModelRef";
+			DataStore[231].ValueModelDescriptor = null;
 			DataStore[231].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[231].Seal();
 			DataStore[234].AltText = null;
@@ -1378,6 +1454,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[234].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[234].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[234].PropertyName = @"DefaultPresentableModelDescriptor";
+			DataStore[234].ValueModelDescriptor = null;
 			DataStore[234].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[85];
 			DataStore[234].Seal();
 			DataStore[235].AltText = null;
@@ -1391,8 +1468,23 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[235].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[235].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
 			DataStore[235].PropertyName = @"Parent";
+			DataStore[235].ValueModelDescriptor = null;
 			DataStore[235].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[235].Seal();
+			DataStore[236].AltText = null;
+			DataStore[236].CategoryTags = @"Main";
+			DataStore[236].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[236].Description = @"The PresentableModel to use for values of this Property";
+			DataStore[236].IsIndexed = false;
+			DataStore[236].IsList = false;
+			DataStore[236].IsNullable = false;
+			DataStore[236].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[236].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
+			DataStore[236].PropertyName = @"ValueModelDescriptor";
+			DataStore[236].ValueModelDescriptor = null;
+			DataStore[236].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[85];
+			DataStore[236].Seal();
 	
 		}
 #region Serializer

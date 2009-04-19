@@ -69,11 +69,11 @@ namespace Kistl.Client.Presentables
         {
             // TODO: check model-override from instance/ObjectClass
             // TODO: implement common ObjectClasses[Property].{DefaultValueModel,DefaultListValueModel}
-            //       and specific Property.{DefaultValueModel,DefaultListValueModel}
+            //       and specific Property.DefaultValueModel
 
             //if (p.IsList)
             //{
-            //    return CreateModel((p.DefaultListValueModel ?? obj.GetObjectClass(AppContext.MetaContext).DefaultListValueModel), ctx, new object[] { obj, p });
+            //    return CreateModel((p.DefaultValueModel ?? obj.GetObjectClass(AppContext.MetaContext).DefaultListValueModel), ctx, new object[] { obj, p });
             //}
             //else
             //{

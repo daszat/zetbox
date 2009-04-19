@@ -474,6 +474,10 @@
       <End Role="BaseProperty" EntitySet="Property" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
+    <AssociationSet Name="FK_Property_PresentableModelDescriptor_Property_80" Association="Model.Store.FK_Property_PresentableModelDescriptor_Property_80" >
+      <End Role="Property" EntitySet="Property" />
+      <End Role="ValueModelDescriptor" EntitySet="PresentableModelDescriptor" />
+    </AssociationSet>
     <AssociationSet Name="FK_Relation_RelationEnd_Relation_71" Association="Model.Store.FK_Relation_RelationEnd_Relation_71" >
       <End Role="Relation" EntitySet="Relation" />
       <End Role="A" EntitySet="RelationEnd" />
@@ -616,6 +620,7 @@
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="IsIndexed" Type="bit" Nullable="false" />
     <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="fk_ValueModelDescriptor" Type="int" />
   </EntityType>
 	
   <EntityType Name="ValueTypeProperty">
@@ -1835,6 +1840,21 @@
       </Principal>
       <Dependent Role="BaseProperty">
         <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Property_PresentableModelDescriptor_Property_80">
+    <End Role="ValueModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Property" Type="Model.Store.Property" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ValueModelDescriptor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Property">
+        <PropertyRef Name="fk_ValueModelDescriptor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

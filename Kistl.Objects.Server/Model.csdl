@@ -228,6 +228,10 @@
       <End Role="BaseProperty" EntitySet="Property" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
+    <AssociationSet Name="FK_Property_PresentableModelDescriptor_Property_80" Association="Model.FK_Property_PresentableModelDescriptor_Property_80" >
+      <End Role="Property" EntitySet="Property" />
+      <End Role="ValueModelDescriptor" EntitySet="PresentableModelDescriptor" />
+    </AssociationSet>
     <AssociationSet Name="FK_Relation_RelationEnd_Relation_71" Association="Model.FK_Relation_RelationEnd_Relation_71" >
       <End Role="Relation" EntitySet="Relation" />
       <End Role="A" EntitySet="RelationEnd" />
@@ -610,6 +614,10 @@
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="IsIndexed" Type="Boolean" Nullable="false" />
     <Property Name="CategoryTags" Type="String" Nullable="true" MaxLength="4000" />
+    <NavigationProperty Name="ValueModelDescriptor__Implementation__"
+                        Relationship="Model.FK_Property_PresentableModelDescriptor_Property_80"
+                        FromRole="Property"
+                        ToRole="ValueModelDescriptor" />
   </EntityType>
   <EntityType Name="Relation">
     <Key>
@@ -1495,6 +1503,14 @@
          Multiplicity="*" />
     <End Role="Module"
          Type="Model.Module" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Property_PresentableModelDescriptor_Property_80" >
+    <End Role="Property"
+         Type="Model.Property" 
+         Multiplicity="*" />
+    <End Role="ValueModelDescriptor"
+         Type="Model.PresentableModelDescriptor" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Relation_RelationEnd_Relation_71" >

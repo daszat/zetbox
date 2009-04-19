@@ -81,6 +81,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// The PresentableModel to use for values of this Property
+        /// </summary>
+		Kistl.App.GUI.PresentableModelDescriptor ValueModelDescriptor {
+			get;
+			set;
+		}
+        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 

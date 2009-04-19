@@ -494,6 +494,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Property_PresentableModelDescriptor_Property_80
+    A: ZeroOrMore Property as Property
+    B: One PresentableModelDescriptor as ValueModelDescriptor
+    Preferred Storage: Left
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Property_PresentableModelDescriptor_Property_80",
+    "Property", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Property__Implementation__),
+    "ValueModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.PresentableModelDescriptor__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Relation_RelationEnd_Relation_71
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as A

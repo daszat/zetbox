@@ -266,6 +266,30 @@ namespace Kistl.App.Base
         private string _PropertyName;
 
         /// <summary>
+        /// The PresentableModel to use for values of this Property
+        /// </summary>
+        // object reference property
+        public virtual Kistl.App.GUI.PresentableModelDescriptor ValueModelDescriptor
+        {
+            get
+            {
+                return _ValueModelDescriptor;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ValueModelDescriptor != value)
+                {
+					var __oldValue = _ValueModelDescriptor;
+                    NotifyPropertyChanging("ValueModelDescriptor", __oldValue, value);
+                    _ValueModelDescriptor = value;
+                    NotifyPropertyChanged("ValueModelDescriptor", __oldValue, value);
+                }
+            }
+        }
+        private Kistl.App.GUI.PresentableModelDescriptor _ValueModelDescriptor;
+
+        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 

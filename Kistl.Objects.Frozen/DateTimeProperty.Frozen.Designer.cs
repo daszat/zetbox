@@ -145,6 +145,7 @@ namespace Kistl.App.Base
 			DataStore[16].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[16].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
 			DataStore[16].PropertyName = @"DatumVon";
+			DataStore[16].ValueModelDescriptor = null;
 			DataStore[16].Seal();
 			DataStore[17].AltText = @"Enddatum";
 			DataStore[17].CategoryTags = null;
@@ -157,6 +158,7 @@ namespace Kistl.App.Base
 			DataStore[17].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[17].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
 			DataStore[17].PropertyName = @"DatumBis";
+			DataStore[17].ValueModelDescriptor = null;
 			DataStore[17].Seal();
 			DataStore[38].AltText = @"Herzlichen Glückwunsch zum Geburtstag";
 			DataStore[38].CategoryTags = null;
@@ -169,6 +171,7 @@ namespace Kistl.App.Base
 			DataStore[38].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[38].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
 			DataStore[38].PropertyName = @"Geburtstag";
+			DataStore[38].ValueModelDescriptor = null;
 			DataStore[38].Seal();
 			DataStore[56].AltText = @"Datum";
 			DataStore[56].CategoryTags = null;
@@ -182,6 +185,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[132],
 			DataStore[56].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[56].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
 			DataStore[56].PropertyName = @"Datum";
+			DataStore[56].ValueModelDescriptor = null;
 			DataStore[56].Seal();
 			DataStore[133].AltText = @"Happy Birthday!";
 			DataStore[133].CategoryTags = null;
@@ -194,6 +198,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[132],
 			DataStore[133].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[133].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
 			DataStore[133].PropertyName = @"Birthday";
+			DataStore[133].ValueModelDescriptor = null;
 			DataStore[133].Seal();
 	
 		}

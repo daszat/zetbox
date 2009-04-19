@@ -367,6 +367,68 @@ namespace Kistl.App.Base
         private string _PropertyName;
 
         /// <summary>
+        /// The PresentableModel to use for values of this Property
+        /// </summary>
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.PresentableModelDescriptor ValueModelDescriptor
+        {
+            get
+            {
+                if (fk_ValueModelDescriptor.HasValue)
+                    return Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(fk_ValueModelDescriptor.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                
+                // shortcut noops
+                if (value == null && _fk_ValueModelDescriptor == null)
+					return;
+                else if (value != null && value.ID == _fk_ValueModelDescriptor)
+					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = ValueModelDescriptor;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("ValueModelDescriptor", oldValue, value);
+                
+				// next, set the local reference
+                _fk_ValueModelDescriptor = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("ValueModelDescriptor", oldValue, value);
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_ValueModelDescriptor
+        {
+            get
+            {
+                return _fk_ValueModelDescriptor;
+            }
+            private set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_fk_ValueModelDescriptor != value)
+                {
+					var __oldValue = _fk_ValueModelDescriptor;
+                    NotifyPropertyChanging("ValueModelDescriptor", __oldValue, value);
+                    _fk_ValueModelDescriptor = value;
+                    NotifyPropertyChanged("ValueModelDescriptor", __oldValue, value);
+                }
+            }
+        }
+        private int? _fk_ValueModelDescriptor;
+
+        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 
@@ -431,6 +493,7 @@ namespace Kistl.App.Base
 			me.PropertyName = other.PropertyName;
 			this.fk_Module = otherImpl.fk_Module;
 			this.fk_ObjectClass = otherImpl.fk_ObjectClass;
+			this.fk_ValueModelDescriptor = otherImpl.fk_ValueModelDescriptor;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -479,6 +542,9 @@ namespace Kistl.App.Base
                 case "ObjectClass":
                     fk_ObjectClass = id;
                     break;
+                case "ValueModelDescriptor":
+                    fk_ValueModelDescriptor = id;
+                    break;
 				default:
 					base.UpdateParent(propertyName, id);
 					break;
@@ -500,6 +566,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._fk_ObjectClass, binStream);
             BinarySerializer.ToStream(this._PropertyName, binStream);
+            BinarySerializer.ToStream(this._fk_ValueModelDescriptor, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -514,6 +581,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
             BinarySerializer.FromStream(out this._PropertyName, binStream);
+            BinarySerializer.FromStream(out this._fk_ValueModelDescriptor, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -528,11 +596,13 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._fk_Module, xml, "fk_Module", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._fk_ObjectClass, xml, "fk_ObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_ValueModelDescriptor, xml, "fk_ValueModelDescriptor", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
+            // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here

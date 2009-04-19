@@ -1250,6 +1250,23 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Property_PresentableModelDescriptor_Property_80
+    A: ZeroOrMore Property as Property
+    B: One PresentableModelDescriptor as ValueModelDescriptor
+    Preferred Storage: Left
+    -->
+    <AssociationSetMapping Name="FK_Property_PresentableModelDescriptor_Property_80"
+                           TypeName="Model.FK_Property_PresentableModelDescriptor_Property_80"
+                           StoreEntitySet="Property" >
+      <EndProperty Name="ValueModelDescriptor">
+        <ScalarProperty Name="ID" ColumnName="fk_ValueModelDescriptor"/>
+      </EndProperty>
+      <EndProperty Name="Property">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ValueModelDescriptor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Relation_RelationEnd_Relation_71
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as A

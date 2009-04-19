@@ -103,6 +103,48 @@ namespace Kistl.Client.WPF
 
             //CreateTypeRefBaseTypeRefRelation();
             //FixupTypeRefParents();
+
+            //CreateDefaultValueModelProperties();
+        }
+
+        private void CreateDefaultValueModelProperties()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall("CreateDefaultValueModelProperties"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+
+                    var guiModule = ctx.Find<Module>(4);
+                    //var ocClass = ctx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "ObjectClass");
+                    var propClass = ctx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "Property");
+                    var pmdClass = ctx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "PresentableModelDescriptor");
+
+                    var valueRel = ctx.Create<Relation>();
+                    valueRel.Description = "Connects a Property with the PresentableModel to display her value";
+                    valueRel.A = ctx.Create<RelationEnd>();
+                    valueRel.A.RoleName = "Property";
+                    valueRel.A.Type = propClass;
+                    valueRel.A.Multiplicity = Multiplicity.ZeroOrMore;
+                    valueRel.A.Navigator = ctx.Create<ObjectReferenceProperty>();
+                    valueRel.A.Navigator.CategoryTags = "Main";
+                    valueRel.A.Navigator.Description = "The PresentableModel to use for values of this Property";
+                    valueRel.A.Navigator.Module = guiModule;
+                    valueRel.A.Navigator.ObjectClass = propClass;
+                    valueRel.A.Navigator.PropertyName = "ValueModelDescriptor";
+                    valueRel.A.Navigator.ReferenceObjectClass = pmdClass;
+                    valueRel.A.Role = (int)RelationEndRole.A;
+
+                    valueRel.B = ctx.Create<RelationEnd>();
+                    valueRel.B.RoleName = "ValueModelDescriptor";
+                    valueRel.B.Type = pmdClass;
+                    valueRel.B.Multiplicity = Multiplicity.One;
+                    valueRel.B.Role = (int)RelationEndRole.B;
+
+                    valueRel.Storage = StorageType.MergeIntoA;
+
+                    ctx.SubmitChanges();
+                }
+            }
         }
 
         private void FixupTypeRefParents()
@@ -127,9 +169,9 @@ namespace Kistl.Client.WPF
         private static void UpdateParent(IKistlContext ctx, TypeRef tr)
         {
             var type = tr.AsType(false);
-            if (type != null 
-                && type != typeof(object) 
-                && !type.IsGenericTypeDefinition 
+            if (type != null
+                && type != typeof(object)
+                && !type.IsGenericTypeDefinition
                 && type.BaseType != null)
             {
                 tr.Parent = FindOrCreateTypeRef(ctx, type.BaseType.FullName, type.BaseType.Assembly.FullName);

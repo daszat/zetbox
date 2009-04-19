@@ -451,6 +451,87 @@ namespace Kistl.App.Base
         private string _PropertyName;
 
         /// <summary>
+        /// The PresentableModel to use for values of this Property
+        /// </summary>
+    /*
+    Relation: FK_Property_PresentableModelDescriptor_Property_80
+    A: ZeroOrMore Property as Property
+    B: One PresentableModelDescriptor as ValueModelDescriptor
+    Preferred Storage: Left
+    */
+        // object reference property
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.PresentableModelDescriptor ValueModelDescriptor
+        {
+            get
+            {
+                return ValueModelDescriptor__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)value;
+            }
+        }
+        
+        // provide a way to directly access the foreign key int
+        public int? fk_ValueModelDescriptor
+        {
+            get
+            {
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
+                    && ValueModelDescriptor != null)
+                {
+                    _fk_ValueModelDescriptor = ValueModelDescriptor.ID;
+                }
+                return _fk_ValueModelDescriptor;
+            }
+            set
+            {
+                _fk_ValueModelDescriptor = value;
+            }
+        }
+        private int? _fk_ValueModelDescriptor;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Property_PresentableModelDescriptor_Property_80", "ValueModelDescriptor")]
+        public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ ValueModelDescriptor__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
+                        "Model.FK_Property_PresentableModelDescriptor_Property_80",
+                        "ValueModelDescriptor");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
+                        "Model.FK_Property_PresentableModelDescriptor_Property_80",
+                        "ValueModelDescriptor");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 
@@ -515,6 +596,7 @@ namespace Kistl.App.Base
 			me.PropertyName = other.PropertyName;
 			this.fk_Module = otherImpl.fk_Module;
 			this.fk_ObjectClass = otherImpl.fk_ObjectClass;
+			this.fk_ValueModelDescriptor = otherImpl.fk_ValueModelDescriptor;
 		}
 
         // tail template
@@ -559,6 +641,10 @@ namespace Kistl.App.Base
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
 			else
 				Module__Implementation__ = null;
+			if (_fk_ValueModelDescriptor.HasValue)
+				ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_ValueModelDescriptor.Value);
+			else
+				ValueModelDescriptor__Implementation__ = null;
 		}
 #region Serializer
 
@@ -575,6 +661,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this.fk_Module, binStream);
             BinarySerializer.ToStream(this.fk_ObjectClass, binStream);
             BinarySerializer.ToStream(this._PropertyName, binStream);
+            BinarySerializer.ToStream(this.fk_ValueModelDescriptor, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -597,6 +684,11 @@ namespace Kistl.App.Base
                 this.fk_ObjectClass = tmp;
             }
             BinarySerializer.FromStream(out this._PropertyName, binStream);
+            {
+                var tmp = this.fk_ValueModelDescriptor;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.fk_ValueModelDescriptor = tmp;
+            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -611,11 +703,13 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this.fk_Module, xml, "fk_Module", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this.fk_ObjectClass, xml, "fk_ObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this.fk_ValueModelDescriptor, xml, "fk_ValueModelDescriptor", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
+            // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
