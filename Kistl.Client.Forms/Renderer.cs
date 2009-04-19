@@ -6,7 +6,6 @@ using System.Windows.Forms;
 
 using Kistl.App.GUI;
 using Kistl.Client.Forms.View;
-using Kistl.Client.GUI.DB;
 using Kistl.Client.Presentables;
 
 namespace Kistl.Client.Forms

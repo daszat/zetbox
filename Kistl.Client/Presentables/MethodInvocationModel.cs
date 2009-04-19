@@ -7,7 +7,6 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
-using Kistl.Client.GUI.DB;
 
 namespace Kistl.Client.Presentables
 {

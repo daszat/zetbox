@@ -13,7 +13,6 @@ using System.Windows.Shapes;
 
 using Kistl.App.GUI;
 using Kistl.Client.GUI;
-using Kistl.Client.GUI.DB;
 using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View

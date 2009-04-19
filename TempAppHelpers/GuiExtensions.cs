@@ -38,17 +38,20 @@ namespace Kistl.App.Extensions
             Toolkit tk,
             VisualType vt)
         {
+            PrimeCaches(tk);
+            var candidates = _vdCache[tk][vt].ToDictionary(obj => obj.PresentedModelDescriptor);
+
             ViewDescriptor result = null;
             while (result == null && pmd != null)
             {
-                result = FrozenContext.Single
-                     .GetQuery<ViewDescriptor>()
-                     .SingleOrDefault(obj => obj.Toolkit == tk
-                         && obj.VisualType == vt
-                         && obj.PresentedModelDescriptor == pmd);
+                if (candidates.ContainsKey(pmd))
+                {
+                    result = candidates[pmd];
+                }
 
                 // crawl up the inheritance tree
-                pmd = pmd.PresentableModelRef.Parent.GetPresentableModelDescriptor();
+                pmd = pmd.PresentableModelRef.Parent
+                    .GetPresentableModelDescriptor();
             }
 
             return result;
@@ -56,16 +59,53 @@ namespace Kistl.App.Extensions
 
         public static PresentableModelDescriptor GetPresentableModelDescriptor(this TypeRef tr)
         {
+            PrimeCaches(null);
+
             PresentableModelDescriptor result = null;
             while (result == null && tr != null)
             {
-                result = FrozenContext.Single
-                    .GetQuery<PresentableModelDescriptor>()
-                    .SingleOrDefault(obj => obj.PresentableModelRef.ID == tr.ID);
+                if (_pmdCache.ContainsKey(tr.ID))
+                    result = _pmdCache[tr.ID];
                 tr = tr.Parent;
             }
             return result;
         }
 
+        private static Dictionary<int, PresentableModelDescriptor> _pmdCache = null;
+        private static Dictionary<Toolkit, ILookup<VisualType, ViewDescriptor>> _vdCache = null;
+
+        private static void PrimeCaches(Toolkit? tk)
+        {
+            if (_pmdCache == null)
+            {
+                _pmdCache = GetPresentableModelDescriptorByTypeRefCache();
+            }
+            if (tk.HasValue)
+            {
+                if (_vdCache == null)
+                {
+                    _vdCache = new Dictionary<Toolkit, ILookup<VisualType, ViewDescriptor>>();
+                }
+                if (!_vdCache.ContainsKey(tk.Value))
+                {
+                    _vdCache[tk.Value] = GetViewDescriptorByVisualTypeCache(tk.Value);
+                }
+            }
+        }
+
+        private static Dictionary<int, PresentableModelDescriptor> GetPresentableModelDescriptorByTypeRefCache()
+        {
+            return FrozenContext.Single
+                .GetQuery<PresentableModelDescriptor>()
+                .ToDictionary(obj => obj.PresentableModelRef.ID);
+        }
+
+        private static ILookup<VisualType, ViewDescriptor> GetViewDescriptorByVisualTypeCache(Toolkit tk)
+        {
+            return FrozenContext.Single
+                .GetQuery<ViewDescriptor>()
+                .Where(obj => obj.Toolkit == tk)
+                .ToLookup(obj => obj.VisualType);
+        }
     }
 }

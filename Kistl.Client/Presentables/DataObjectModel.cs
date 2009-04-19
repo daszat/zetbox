@@ -11,7 +11,6 @@ using Kistl.API;
 using Kistl.API.Utils;
 using Kistl.App.Base;
 using Kistl.App.GUI;
-using Kistl.Client.GUI.DB;
 
 namespace Kistl.Client.Presentables
 {

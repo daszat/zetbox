@@ -8,7 +8,6 @@ using Kistl.API.Client;
 using Kistl.API.Configuration;
 using Kistl.App.GUI;
 using Kistl.Client.Presentables;
-using Kistl.GUI.DB;
 
 namespace Kistl.Client
 {

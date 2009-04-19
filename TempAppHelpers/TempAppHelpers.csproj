@@ -51,6 +51,7 @@
     <Compile Include="PropertyExtensions.cs" />
     <Compile Include="RelationExtensions.cs" />
     <Compile Include="ObjectClassExtensions.cs" />
+    <Compile Include="TypeRefExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">

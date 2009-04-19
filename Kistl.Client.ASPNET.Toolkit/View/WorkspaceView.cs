@@ -6,11 +6,11 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
+
 using Kistl.API;
 using Kistl.Client.ASPNET.Toolkit.Pages;
-using Kistl.Client.GUI.DB;
+using Kistl.Client.GUI;
+using Kistl.Client.Presentables;
 
 [assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.WorkspaceView.js", "text/javascript")] 
 

@@ -66,7 +66,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI.DB\DataMocks.cs" />
     <Compile Include="GUI\IRenderer.cs" />
     <Compile Include="GUI\IView.cs" />
     <Compile Include="Presentables\ActionModel.cs" />
@@ -96,7 +95,6 @@
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="GuiApplicationContext.cs" />
-    <Compile Include="GUI.DB\Template.cs" />
     <Compile Include="ClientHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

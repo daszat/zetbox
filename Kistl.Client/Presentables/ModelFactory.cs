@@ -9,7 +9,6 @@ using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.App.GUI;
 using Kistl.Client.GUI;
-using Kistl.Client.GUI.DB;
 
 namespace Kistl.Client.Presentables
 {
@@ -96,7 +95,8 @@ namespace Kistl.Client.Presentables
         /// <returns></returns>
         public IView CreateDefaultView(PresentableModel mdl)
         {
-            PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor();
+            PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
+                .GetPresentableModelDescriptor();
 
             var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
             IView view = (IView)vDesc.ControlRef.Create();
