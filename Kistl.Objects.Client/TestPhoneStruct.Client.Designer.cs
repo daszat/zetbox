@@ -103,19 +103,15 @@ namespace Kistl.App.Test
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._AreaCode, xml, "AreaCode", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Number, xml, "Number", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._AreaCode, xml, "AreaCode", "Kistl.App.Test");
+            XmlStreamer.ToStream(this._Number, xml, "Number", "Kistl.App.Test");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._AreaCode, xml, "AreaCode", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Number, xml, "Number", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._AreaCode, xml, "AreaCode", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._Number, xml, "Number", "Kistl.App.Test");
         }
 
 #endregion

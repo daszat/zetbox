@@ -301,23 +301,17 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._AktuelleStunden, xml, "AktuelleStunden", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Kontoname, xml, "Kontoname", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._MaxStunden, xml, "MaxStunden", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._AktuelleStunden, xml, "AktuelleStunden", "Kistl.App.Zeiterfassung");
+            XmlStreamer.ToStream(this._Kontoname, xml, "Kontoname", "Kistl.App.Zeiterfassung");
+            XmlStreamer.ToStream(this._MaxStunden, xml, "MaxStunden", "Kistl.App.Zeiterfassung");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._AktuelleStunden, xml, "AktuelleStunden", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Kontoname, xml, "Kontoname", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._MaxStunden, xml, "MaxStunden", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._AktuelleStunden, xml, "AktuelleStunden", "Kistl.App.Zeiterfassung");
+            XmlStreamer.FromStream(ref this._Kontoname, xml, "Kontoname", "Kistl.App.Zeiterfassung");
+            XmlStreamer.FromStream(ref this._MaxStunden, xml, "MaxStunden", "Kistl.App.Zeiterfassung");
         }
 
 #endregion

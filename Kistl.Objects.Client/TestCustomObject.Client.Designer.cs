@@ -228,10 +228,8 @@ namespace Kistl.App.Test
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Birthday, xml, "Birthday", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._PersonName, xml, "PersonName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Birthday, xml, "Birthday", "Kistl.App.Test");
+            XmlStreamer.ToStream(this._PersonName, xml, "PersonName", "Kistl.App.Test");
 			// TODO: Add XML Serializer here
 			// TODO: Add XML Serializer here
         }
@@ -239,10 +237,8 @@ namespace Kistl.App.Test
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Birthday, xml, "Birthday", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._PersonName, xml, "PersonName", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._Birthday, xml, "Birthday", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._PersonName, xml, "PersonName", "Kistl.App.Test");
 			// TODO: Add XML Serializer here
 			// TODO: Add XML Serializer here
         }

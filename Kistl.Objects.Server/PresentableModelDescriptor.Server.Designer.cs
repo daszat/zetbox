@@ -286,8 +286,7 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml, modules);
             // TODO: Add XML Serializer here
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Description, xml, "Description", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.fk_PresentableModelRef, xml, "PresentableModelRef", "http://dasz.at/Kistl");
         }
 
@@ -295,8 +294,7 @@ namespace Kistl.App.GUI
         {
             base.FromStream(xml);
             // TODO: Add XML Serializer here
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
             {
                 var tmp = this.fk_PresentableModelRef;
                 XmlStreamer.FromStream(ref tmp, xml, "PresentableModelRef", "http://dasz.at/Kistl");

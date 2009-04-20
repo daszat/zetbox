@@ -322,28 +322,20 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml, modules);
             // TODO: Add XML Serializer here
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_DataAssembly, xml, "DataAssembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._DataTypeName, xml, "DataTypeName", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._DataTypeName, xml, "DataTypeName", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._fk_PresenterAssembly, xml, "PresenterAssembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._PresenterTypeName, xml, "PresenterTypeName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._PresenterTypeName, xml, "PresenterTypeName", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
             // TODO: Add XML Serializer here
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_DataAssembly, xml, "DataAssembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._DataTypeName, xml, "DataTypeName", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._DataTypeName, xml, "DataTypeName", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_PresenterAssembly, xml, "PresenterAssembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._PresenterTypeName, xml, "PresenterTypeName", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._PresenterTypeName, xml, "PresenterTypeName", "Kistl.App.GUI");
         }
 
 #endregion

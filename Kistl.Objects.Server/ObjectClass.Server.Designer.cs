@@ -626,12 +626,9 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this.fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this.fk_DefaultModel, xml, "DefaultModel", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this.fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._TableName, xml, "TableName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -652,12 +649,9 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref tmp, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
                 this.fk_DefaultPresentableModelDescriptor = tmp;
             }
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
         }
 
 #endregion

@@ -430,10 +430,8 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this.fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._DisplayName, xml, "DisplayName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._DisplayName, xml, "DisplayName", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.fk_VisualTree, xml, "VisualTree", "http://dasz.at/Kistl");
         }
 
@@ -445,10 +443,8 @@ namespace Kistl.App.GUI
                 XmlStreamer.FromStream(ref tmp, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
                 this.fk_DisplayedTypeAssembly = tmp;
             }
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._DisplayName, xml, "DisplayName", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._DisplayName, xml, "DisplayName", "Kistl.App.GUI");
             {
                 var tmp = this.fk_VisualTree;
                 XmlStreamer.FromStream(ref tmp, xml, "VisualTree", "http://dasz.at/Kistl");

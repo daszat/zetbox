@@ -241,19 +241,15 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._FullTypeName, xml, "FullTypeName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
         }
 
 #endregion

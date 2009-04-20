@@ -362,11 +362,9 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this.fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._ClassName, xml, "ClassName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._ClassName, xml, "ClassName", "Kistl.App.GUI");
             // TODO: Add XML Serializer here
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._IsContainer, xml, "IsContainer", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._IsContainer, xml, "IsContainer", "Kistl.App.GUI");
             // TODO: Add XML Serializer here
         }
 
@@ -378,11 +376,9 @@ namespace Kistl.App.GUI
                 XmlStreamer.FromStream(ref tmp, xml, "Assembly", "http://dasz.at/Kistl");
                 this.fk_Assembly = tmp;
             }
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "Kistl.App.GUI");
             // TODO: Add XML Serializer here
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._IsContainer, xml, "IsContainer", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._IsContainer, xml, "IsContainer", "Kistl.App.GUI");
             // TODO: Add XML Serializer here
         }
 

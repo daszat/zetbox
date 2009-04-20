@@ -284,8 +284,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this.fk_ConstrainedProperty, xml, "ConstrainedProperty", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Reason, xml, "Reason", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -296,8 +295,7 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref tmp, xml, "ConstrainedProperty", "http://dasz.at/Kistl");
                 this.fk_ConstrainedProperty = tmp;
             }
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
 #endregion

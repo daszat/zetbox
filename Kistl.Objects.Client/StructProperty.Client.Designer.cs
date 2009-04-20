@@ -214,14 +214,12 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_StructDefinition, xml, "StructDefinition", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_StructDefinition, xml, "StructDefinition", "http://dasz.at/Kistl");
         }
 

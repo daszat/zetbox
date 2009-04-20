@@ -397,37 +397,27 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Description, xml, "Description", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._IsList, xml, "IsList", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._IsReturnParameter, xml, "IsReturnParameter", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
             XmlStreamer.ToStream(this.fk_Method, xml, "Method", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._Method_pos, xml, "Method_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._ParameterName, xml, "ParameterName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._IsReturnParameter, xml, "IsReturnParameter", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
             {
                 var tmp = this.fk_Method;
                 XmlStreamer.FromStream(ref tmp, xml, "Method", "http://dasz.at/Kistl");
                 this.fk_Method = tmp;
             }
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._Method_pos, xml, "Method_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._ParameterName, xml, "ParameterName", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
         }
 
 #endregion

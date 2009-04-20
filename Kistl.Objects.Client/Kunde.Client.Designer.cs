@@ -266,33 +266,23 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Adresse, xml, "Adresse", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Adresse, xml, "Adresse", "Kistl.App.Projekte");
             XmlStreamer.ToStreamCollectionEntries(this._EMails, xml, "EMails", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Kundenname, xml, "Kundenname", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Land, xml, "Land", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Ort, xml, "Ort", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._PLZ, xml, "PLZ", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._Land, xml, "Land", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._Ort, xml, "Ort", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._PLZ, xml, "PLZ", "Kistl.App.Projekte");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Adresse, xml, "Adresse", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._Adresse, xml, "Adresse", "Kistl.App.Projekte");
             XmlStreamer.FromStreamCollectionEntries(this._EMails, xml, "EMails", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Kundenname, xml, "Kundenname", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Land, xml, "Land", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Ort, xml, "Ort", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._PLZ, xml, "PLZ", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Land, xml, "Land", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Ort, xml, "Ort", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._PLZ, xml, "PLZ", "Kistl.App.Projekte");
         }
 
 #endregion

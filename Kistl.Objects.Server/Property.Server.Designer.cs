@@ -694,40 +694,27 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._AltText, xml, "AltText", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Description, xml, "Description", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._IsIndexed, xml, "IsIndexed", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._IsList, xml, "IsList", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._IsNullable, xml, "IsNullable", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._AltText, xml, "AltText", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._IsNullable, xml, "IsNullable", "Kistl.App.Base");
             XmlStreamer.ToStream(this.fk_Module, xml, "Module", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this.fk_ObjectClass, xml, "ObjectClass", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_ValueModelDescriptor, xml, "fk_ValueModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.fk_ValueModelDescriptor, xml, "ValueModelDescriptor", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._AltText, xml, "AltText", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._CategoryTags, xml, "CategoryTags", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._IsIndexed, xml, "IsIndexed", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._IsNullable, xml, "IsNullable", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._AltText, xml, "AltText", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsNullable, xml, "IsNullable", "Kistl.App.Base");
             {
                 var tmp = this.fk_Module;
                 XmlStreamer.FromStream(ref tmp, xml, "Module", "http://dasz.at/Kistl");
@@ -738,9 +725,12 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref tmp, xml, "ObjectClass", "http://dasz.at/Kistl");
                 this.fk_ObjectClass = tmp;
             }
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "http://dasz.at/Kistl");
-            // TODO: Add XML Serializer here
+            XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
+            {
+                var tmp = this.fk_ValueModelDescriptor;
+                XmlStreamer.FromStream(ref tmp, xml, "ValueModelDescriptor", "http://dasz.at/Kistl");
+                this.fk_ValueModelDescriptor = tmp;
+            }
         }
 
 #endregion

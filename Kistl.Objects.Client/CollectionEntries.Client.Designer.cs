@@ -159,18 +159,14 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
         }
 
@@ -407,34 +403,22 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
         }
 
@@ -617,18 +601,14 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
         }
 
@@ -865,34 +845,22 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
         }
 
@@ -1075,18 +1043,14 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
         }
 
@@ -1267,18 +1231,14 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
         }
 
@@ -1460,18 +1420,14 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
         }
 
@@ -1611,19 +1567,15 @@ public string Value { get { return B; } set { B = value; } }
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._B, xml, "B", "Kistl.App.Projekte");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._B, xml, "B", "Kistl.App.Projekte");
         }
 
 #endregion

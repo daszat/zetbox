@@ -301,23 +301,17 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Description, xml, "Description", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._ModuleName, xml, "ModuleName", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Namespace, xml, "Namespace", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._ModuleName, xml, "ModuleName", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Namespace, xml, "Namespace", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._ModuleName, xml, "ModuleName", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Namespace, xml, "Namespace", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ModuleName, xml, "ModuleName", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Namespace, xml, "Namespace", "Kistl.App.Base");
         }
 
 #endregion

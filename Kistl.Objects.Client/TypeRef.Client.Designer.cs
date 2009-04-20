@@ -312,22 +312,16 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
             XmlStreamer.ToStream(this._fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._FullName, xml, "FullName", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._FullName, xml, "FullName", "Kistl.App.Base");
             XmlStreamer.ToStream(this._fk_Parent, xml, "Parent", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
             XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "http://dasz.at/Kistl");
         }
 

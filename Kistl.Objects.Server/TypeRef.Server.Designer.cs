@@ -401,8 +401,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this.fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._FullName, xml, "FullName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._FullName, xml, "FullName", "Kistl.App.Base");
             XmlStreamer.ToStream(this.fk_Parent, xml, "Parent", "http://dasz.at/Kistl");
         }
 
@@ -414,8 +413,7 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref tmp, xml, "Assembly", "http://dasz.at/Kistl");
                 this.fk_Assembly = tmp;
             }
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "Kistl.App.Base");
             {
                 var tmp = this.fk_Parent;
                 XmlStreamer.FromStream(ref tmp, xml, "Parent", "http://dasz.at/Kistl");

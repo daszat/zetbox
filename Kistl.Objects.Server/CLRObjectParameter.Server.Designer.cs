@@ -264,8 +264,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this.fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._FullTypeName, xml, "FullTypeName", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -276,8 +275,7 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref tmp, xml, "Assembly", "http://dasz.at/Kistl");
                 this.fk_Assembly = tmp;
             }
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
         }
 
 #endregion

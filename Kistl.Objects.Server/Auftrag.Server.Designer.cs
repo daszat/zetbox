@@ -474,10 +474,8 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Auftragsname, xml, "Auftragsname", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Auftragswert, xml, "Auftragswert", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.fk_Kunde, xml, "Kunde", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this.fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this.fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
@@ -486,10 +484,8 @@ namespace Kistl.App.Projekte
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Auftragsname, xml, "Auftragsname", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Auftragswert, xml, "Auftragswert", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
             {
                 var tmp = this.fk_Kunde;
                 XmlStreamer.FromStream(ref tmp, xml, "Kunde", "http://dasz.at/Kistl");

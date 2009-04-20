@@ -444,26 +444,18 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._ClassName, xml, "ClassName", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._ClassName, xml, "ClassName", "Kistl.App.Base");
             XmlStreamer.ToStream(this._fk_DefaultIcon, xml, "DefaultIcon", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._Description, xml, "Description", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
+            XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_DefaultIcon, xml, "DefaultIcon", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 

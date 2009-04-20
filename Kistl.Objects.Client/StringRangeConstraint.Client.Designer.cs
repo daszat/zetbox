@@ -200,19 +200,15 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._MaxLength, xml, "MaxLength", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.ToStream(this._MinLength, xml, "MinLength", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._MaxLength, xml, "MaxLength", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._MinLength, xml, "MinLength", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._MaxLength, xml, "MaxLength", "http://dasz.at/Kistl");
-			// TODO: Use Propertyname
-            XmlStreamer.FromStream(ref this._MinLength, xml, "MinLength", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._MaxLength, xml, "MaxLength", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._MinLength, xml, "MinLength", "Kistl.App.Base");
         }
 
 #endregion
