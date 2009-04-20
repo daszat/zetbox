@@ -326,7 +326,7 @@ namespace Kistl.App.GUI
 			DataStore[6].Toolkit = (Toolkit)0;
 			DataStore[6].VisualType = (VisualType)17;
 			DataStore[6].Seal();
-			DataStore[7].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[281];
+			DataStore[7].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[159];
 			DataStore[7].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
 			DataStore[7].Toolkit = (Toolkit)1;
 			DataStore[7].VisualType = (VisualType)4;

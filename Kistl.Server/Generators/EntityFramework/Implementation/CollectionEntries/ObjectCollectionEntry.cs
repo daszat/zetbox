@@ -30,5 +30,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
             return "BaseServerCollectionEntry_EntityFramework";
         }
 
+        protected override void ApplyChangesFromBody()
+        {
+            base.ApplyChangesFromBody();
+            this.WriteLine("            me._fk_A = other._fk_A;");
+            this.WriteLine("            me._fk_B = other._fk_B;");
+        }
     }
 }

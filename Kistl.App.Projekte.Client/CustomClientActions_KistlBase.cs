@@ -7,6 +7,7 @@ using System.Xml;
 
 using Kistl.API;
 using Kistl.API.Client;
+using Kistl.App.Extensions;
 
 namespace Kistl.App.Base
 {
@@ -171,11 +172,14 @@ namespace Kistl.App.Base
         {
             e.Result = String.Format("{0}{1}, {2}",
                 obj.FullName,
-                "<???>" /* Currently this goes to the Database once per TypeRef
-                       * TODO: re-enable that, when GenericArguments is loaded eagerly. 
-                       * (obj.GenericArguments.Count > 0
+                //"<???>"
+                /* 
+                 * Currently this goes to the Database once per TypeRef
+                 * TODO: re-enable that, when GenericArguments is loaded eagerly. 
+                 */
+                (obj.GenericArguments.Count > 0 
                     ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.ToString()).ToArray()) + ">"
-                    : "") */
+                    : "")
                             ,
                 obj.Assembly);
         }
@@ -396,24 +400,17 @@ namespace Kistl.App.Base
         {
             var ctx = assembly.Context;
 
-            // the clr assembly descriptor from System.Reflection
-            var runtimeAssembly = System.Reflection.Assembly.Load(assembly.AssemblyName);
+            // pre-load context
+            var oldTypes = ctx.GetQuery<TypeRef>().Where(tr => tr.Assembly.ID == assembly.ID);
 
-            // a lookup of all TypeRefs currently in the data store
-            var refs = ctx.GetQuery<TypeRef>().Where(tr => tr.Assembly.ID == assembly.ID).ToLookup(tr => tr.FullName);
+            // load all current references into the context
+            var newTypes = System.Reflection.Assembly.Load(assembly.AssemblyName).GetExportedTypes().Select(t => t.ToRef(ctx)).ToDictionary(tr => tr.ID);
 
-            foreach (var t in runtimeAssembly.GetExportedTypes())
+            foreach (var tr in oldTypes)
             {
-                // lookup the ref to the generic tpye definition
-                // TODO: there should only be one ref without generic args
-                TypeRef current = refs[t.FullName].FirstOrDefault(tr => tr.GenericArguments.Count == 0);
-
-                if (current == null)
+                if (!newTypes.ContainsKey(tr.ID))
                 {
-                    // create a new one
-                    current = ctx.Create<TypeRef>();
-                    current.FullName = t.FullName;
-                    current.Assembly = assembly;
+                    ctx.Delete(tr);
                 }
             }
 

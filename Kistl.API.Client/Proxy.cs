@@ -314,13 +314,13 @@ namespace Kistl.API.Client
         {
             using (TraceClient.TraceHelper.TraceMethodCall("Fetching relation"))
             {
-                Trace.TraceWarning("FetchRelation(ID={0},role={1},parentId={2}): enter", relationId, role, parent.ID);
+                //Trace.TraceWarning("FetchRelation(ID={0},role={1},parentId={2}): enter", relationId, role, parent.ID);
                 // TODO: could be implemented in generated properties
                 if (parent.ObjectState == DataObjectState.New)
                     return new List<T>();
 
                 MemoryStream ms = serviceStreams.FetchRelation(relationId, (int)role, parent.ID);
-                Trace.TraceWarning("FetchRelation(ID={0},role={1},parentId={2}): came back", relationId, role, parent.ID);
+                //Trace.TraceWarning("FetchRelation(ID={0},role={1},parentId={2}): came back", relationId, role, parent.ID);
                 BinaryReader sr = new BinaryReader(ms);
 
                 List<T> result = new List<T>();

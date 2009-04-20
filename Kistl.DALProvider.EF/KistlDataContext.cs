@@ -251,26 +251,29 @@ namespace Kistl.DALProvider.EF
         {
 
 #if DEBUG
-            Trace.WriteLine("************************* >>>> Submit Changes ******************************");
+            if (_ctx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified).Count() > 0)
+            {
+                Trace.WriteLine("************************* >>>> Submit Changes ******************************");
 
-            foreach (var msgPair in new[]{
+                foreach (var msgPair in new[]{
                     new{State = EntityState.Added,      Label="Insert" },
                     new{State = EntityState.Modified,   Label="Update" },
                     new{State = EntityState.Deleted,    Label="Delete" },
                     new{State = EntityState.Unchanged,  Label="Unchanged" },
-            })
-            {
-                var debugList = _ctx.ObjectStateManager
-                    .GetObjectStateEntries(msgPair.State)
-                    .Where(e => e.Entity != null)
-                    .Select(e => e.Entity);
-                foreach (var i in debugList)
+                })
                 {
-                    Trace.WriteLine(string.Format("{0}: {1} -> {2}", msgPair.Label, i.GetType(), i.ToString()));
+                    var debugList = _ctx.ObjectStateManager
+                        .GetObjectStateEntries(msgPair.State)
+                        .Where(e => e.Entity != null)
+                        .Select(e => e.Entity);
+                    foreach (var i in debugList)
+                    {
+                        Trace.WriteLine(string.Format("{0}: {1} -> {2}", msgPair.Label, i.GetType(), i.ToString()));
+                    }
                 }
-            }
 
-            Trace.WriteLine("************************* Submit Changes <<<< ******************************");
+                Trace.WriteLine("************************* Submit Changes <<<< ******************************");
+            }
 #endif
 
             var saveList = _ctx.ObjectStateManager
@@ -298,7 +301,7 @@ namespace Kistl.DALProvider.EF
             var serverObj = (BaseServerPersistenceObject)obj;
             string entityName = GetEntityName(obj.GetType());
 
-            if (serverObj.ClientObjectState == DataObjectState.New 
+            if (serverObj.ClientObjectState == DataObjectState.New
                 || serverObj.ClientObjectState == DataObjectState.NotDeserialized)
             {
                 _ctx.AddObject(entityName, obj);

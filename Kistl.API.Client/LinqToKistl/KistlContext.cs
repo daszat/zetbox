@@ -395,28 +395,31 @@ namespace Kistl.API.Client
             }
 
             // Submit to server
-            var newObjects = Proxy.Current.SetObjects(objectsToSubmit.Cast<IPersistenceObject>());
+            var objectsFromServer = Proxy.Current.SetObjects(objectsToSubmit.Cast<IPersistenceObject>());
 
             // Apply Changes
             int counter = 0;
             var changedObjects = new List<BaseClientPersistenceObject>();
-            foreach (BaseClientPersistenceObject newobj in newObjects)
+            foreach (BaseClientPersistenceObject objFromServer in objectsFromServer)
             {
                 BaseClientPersistenceObject obj;
 
                 if (counter < objectsToAdd.Count)
                 {
                     obj = objectsToAdd[counter++];
+                    // remove object from cache, since index by ID may change.
+                    // will be re-inserted on attach later
+                    _objects.Remove(obj);
                 }
                 else
                 {
-                    obj = (BaseClientPersistenceObject)this.ContainsObject(newobj.GetInterfaceType(), newobj.ID) ?? newobj;
+                    obj = (BaseClientPersistenceObject)this.ContainsObject(objFromServer.GetInterfaceType(), objFromServer.ID) ?? objFromServer;
                 }
 
                 obj.RecordNotifications();
-                if (obj != newobj)
+                if (obj != objFromServer)
                 {
-                    obj.ApplyChangesFrom(newobj);
+                    obj.ApplyChangesFrom(objFromServer);
                 }
 
                 // reset ObjectState to new truth

@@ -28,5 +28,12 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
         {
             return "BaseClientCollectionEntry";
         }
+
+        protected override void ApplyChangesFromBody()
+        {
+            base.ApplyChangesFromBody();
+            this.WriteLine("            me._fk_A = other._fk_A;");
+            this.WriteLine("            me._fk_B = other._fk_B;");
+        }
     }
 }

@@ -205,19 +205,19 @@ namespace Kistl.App.Base
 		}
 
 		internal static void FillDataStore() {
-			DataStore[1].AssemblyName = @"Kistl.App.Projekte.Client";
+			DataStore[1].AssemblyName = @"Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 			DataStore[1].IsClientAssembly = true;
 			DataStore[1].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[1].Seal();
-			DataStore[2].AssemblyName = @"Kistl.App.Projekte.Server";
+			DataStore[2].AssemblyName = @"Kistl.App.Projekte.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 			DataStore[2].IsClientAssembly = false;
 			DataStore[2].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[2].Seal();
-			DataStore[3].AssemblyName = @"Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0";
+			DataStore[3].AssemblyName = @"Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 			DataStore[3].IsClientAssembly = false;
 			DataStore[3].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[3].Seal();
-			DataStore[4].AssemblyName = @"Kistl.Client.WPF, Version=1.0.0.0";
+			DataStore[4].AssemblyName = @"Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 			DataStore[4].IsClientAssembly = false;
 			DataStore[4].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[4].Seal();
@@ -233,15 +233,15 @@ namespace Kistl.App.Base
 			DataStore[15].IsClientAssembly = false;
 			DataStore[15].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[15].Seal();
-			DataStore[16].AssemblyName = @"Kistl.Client.ASPNET.Toolkit";
+			DataStore[16].AssemblyName = @"Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 			DataStore[16].IsClientAssembly = false;
 			DataStore[16].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[16].Seal();
-			DataStore[17].AssemblyName = @"Kistl.Client.Forms";
+			DataStore[17].AssemblyName = @"Kistl.Client.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 			DataStore[17].IsClientAssembly = false;
 			DataStore[17].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[17].Seal();
-			DataStore[18].AssemblyName = @"Kistl.Client.WPF";
+			DataStore[18].AssemblyName = @"Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
 			DataStore[18].IsClientAssembly = false;
 			DataStore[18].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[18].Seal();

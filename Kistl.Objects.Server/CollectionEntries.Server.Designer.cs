@@ -262,6 +262,8 @@ namespace Kistl.App.Base
 			var other = (ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__)obj;
 			var me = (ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__)this;
 			
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
 		}		
 		
 		
@@ -593,6 +595,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 			
             me.AIndex = other.AIndex;
             me.BIndex = other.BIndex;
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
 		}		
 		
 		
@@ -852,6 +856,8 @@ namespace Kistl.App.GUI
 			var other = (Template_Menu61CollectionEntry__Implementation__)obj;
 			var me = (Template_Menu61CollectionEntry__Implementation__)this;
 			
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
 		}		
 		
 		
@@ -1183,6 +1189,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 			
             me.AIndex = other.AIndex;
             me.BIndex = other.BIndex;
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
 		}		
 		
 		
@@ -1442,6 +1450,8 @@ namespace Kistl.App.GUI
 			var other = (Visual_Children55CollectionEntry__Implementation__)obj;
 			var me = (Visual_Children55CollectionEntry__Implementation__)this;
 			
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
 		}		
 		
 		
@@ -1701,6 +1711,8 @@ namespace Kistl.App.GUI
 			var other = (Visual_ContextMenu60CollectionEntry__Implementation__)obj;
 			var me = (Visual_ContextMenu60CollectionEntry__Implementation__)this;
 			
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
 		}		
 		
 		
@@ -1961,6 +1973,8 @@ namespace Kistl.App.Zeiterfassung
 			var other = (Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)obj;
 			var me = (Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)this;
 			
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
 		}		
 		
 		
