@@ -105,9 +105,11 @@
     <Compile Include="BasePersistenceObject.cs" />
     <Compile Include="BaseStructObject.cs" />
     <Compile Include="BaseValueCollectionWrapper.cs" />
+    <Compile Include="MemoryContext.cs" />
     <Compile Include="RelationEndRole.cs" />
     <Compile Include="SerializableExpression.Visitors.cs" />
     <Compile Include="TypeTransformations.cs" />
+    <Compile Include="Utils\ContextCache.cs" />
     <Compile Include="Utils\ExpressionComparer.cs" />
     <Compile Include="Utils\MagicCollectionFactory.cs" />
     <Compile Include="XmlStreamer.cs" />
