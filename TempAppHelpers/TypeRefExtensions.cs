@@ -55,7 +55,7 @@ namespace Kistl.App.Extensions
         private static TypeRef ToFrozenRef(this Type t)
         {
             PrimeRefCache();
-            return LookupByType(FrozenContext.Single, _typeRefsByFullName[t.FullName].AsQueryable(), t);
+            return LookupByType(FrozenContext.Single, _typeRefsByFullName[t.IsGenericType ? t.GetGenericTypeDefinition().FullName : t.FullName].AsQueryable(), t);
         }
 
         private static ILookup<string, TypeRef> _typeRefsByFullName;

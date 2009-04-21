@@ -109,8 +109,21 @@ namespace Kistl.Client.WPF
 
             //CheckAndCleanAllAssemblies();
             //CheckAndCleanAllTypeRefs();
+            //CreateTypeRefsForTesting();
         }
 
+        private void CreateTypeRefsForTesting()
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall("CreateTypeRefsForTesting"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                	typeof(ICollection<int>).ToRef(ctx);
+                	typeof(ICollection<int?>).ToRef(ctx);
+                    ctx.SubmitChanges();
+                }
+            }
+        }
         private void CheckAndCleanAllAssemblies()
         {
             using (TraceClient.TraceHelper.TraceMethodCall("CheckAndCleanAllAssemblies"))

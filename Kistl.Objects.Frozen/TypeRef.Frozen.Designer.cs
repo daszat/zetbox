@@ -183,7 +183,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(161);
+		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(163);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new TypeRef__Implementation__Frozen(1);
@@ -507,6 +507,10 @@ namespace Kistl.App.Base
 			DataStore[559] = new TypeRef__Implementation__Frozen(559);
 
 			DataStore[560] = new TypeRef__Implementation__Frozen(560);
+
+			DataStore[561] = new TypeRef__Implementation__Frozen(561);
+
+			DataStore[562] = new TypeRef__Implementation__Frozen(562);
 
 		}
 
@@ -1535,6 +1539,20 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[447],
 });
 			DataStore[560].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[560].Seal();
+			DataStore[561].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
+			DataStore[561].FullName = @"System.Collections.Generic.ICollection`1";
+			DataStore[561].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
+Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[395],
+});
+			DataStore[561].Parent = null;
+			DataStore[561].Seal();
+			DataStore[562].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
+			DataStore[562].FullName = @"System.Collections.Generic.ICollection`1";
+			DataStore[562].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
+Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
+});
+			DataStore[562].Parent = null;
+			DataStore[562].Seal();
 	
 		}
 #region Serializer
