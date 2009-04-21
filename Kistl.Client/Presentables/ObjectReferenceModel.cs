@@ -164,7 +164,7 @@ namespace Kistl.Client.Presentables
                 .ToList() // TODO: remove this
                 .OrderBy(obj => obj.ToString()).ToList())
             {
-                _domain.Add(Factory.CreateSpecificModel<DataObjectModel>(DataContext, obj));
+                _domain.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, obj));
             }
 
         }
