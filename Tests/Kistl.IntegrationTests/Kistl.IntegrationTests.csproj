@@ -76,6 +76,7 @@
     <Compile Include="Tests\one_to_N_relations\should_synchronize.cs" />
     <Compile Include="Tests\PersistenceObjects\when_changed.cs" />
     <Compile Include="Tests\PersistenceObjects\when_loaded.cs" />
+    <Compile Include="Tests\Presentables\ObjectReferenceModels\should_present_underlying_property_as_value.cs" />
     <Compile Include="Tests\RelationTests.cs" />
     <Compile Include="Tests\Structs\when_changing_a_struct_member.cs" />
     <Compile Include="Tests\Structs\when_initialized.cs" />
@@ -133,6 +134,8 @@
       <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
       <Name>Kistl.API.Tests</Name>
     </ProjectReference>
+    <Folder Include="Tests\Presentables" />
+    <Folder Include="Tests\Presentables\ObjectReferenceModels" />
     <Folder Include="Tests\TypeRefs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
