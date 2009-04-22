@@ -73,8 +73,6 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                UI.Verify();
-
                 if (_methodResultsCache == null)
                 {
                     _methodResultsCache = new ReadOnlyProjectedList<Method, PresentableModel>(

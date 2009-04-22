@@ -67,20 +67,25 @@ namespace Kistl.Client.Presentables
 
         #region Public Interface and IReadOnlyValueModel<IList<TValue>> Members
 
-        public bool HasValue { get { UI.Verify(); return true; } }
-        public bool IsNull { get { UI.Verify(); return false; } }
+        public bool HasValue
+        {
+            get { return true; }
+        }
+
+        public bool IsNull
+        {
+            get { return false; }
+        }
 
         private TElementModel _selectedItem;
         public TElementModel SelectedItem
         {
             get
             {
-                UI.Verify();
                 return _selectedItem;
             }
             set
             {
-                UI.Verify();
                 // TODO: check whether that works for all structs
                 if (!System.Object.Equals(_selectedItem, value))
                 {

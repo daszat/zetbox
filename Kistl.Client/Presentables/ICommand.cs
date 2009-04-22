@@ -19,7 +19,7 @@ namespace Kistl.Client.Presentables
         /// Occurs when the <see cref="CanExecute"/> state has changed.
         /// </summary>
         event EventHandler CanExecuteChanged;
-        
+
         /// <summary>
         /// Will execute the command with the given parameter.
         /// </summary>
@@ -57,7 +57,7 @@ namespace Kistl.Client.Presentables
         #region ICommand Members
 
         public abstract bool CanExecute(object data);
-        
+
         public event EventHandler CanExecuteChanged;
 
         public abstract void Execute(object data);
@@ -75,7 +75,7 @@ namespace Kistl.Client.Presentables
                     OnPropertyChanged("Executing");
                 }
             }
-        }      
+        }
 
         public event EventHandler ExecutingChanged;
 
@@ -96,10 +96,12 @@ namespace Kistl.Client.Presentables
         private string _toolTipCache;
         public string ToolTip
         {
-            get { return _toolTipCache; }
+            get
+            {
+                return _toolTipCache;
+            }
             protected set
             {
-                UI.Verify();
                 if (_toolTipCache != value)
                 {
                     _toolTipCache = value;

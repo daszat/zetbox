@@ -31,8 +31,15 @@ namespace Kistl.Client.Presentables
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
 
-        public bool HasValue { get { UI.Verify(); return true; } }
-        public bool IsNull { get { UI.Verify(); return false; } }
+        public bool HasValue
+        {
+            get { return true; }
+        }
+
+        public bool IsNull
+        {
+            get { return false; }
+        }
 
         private ReadOnlyObservableProjectedCollection<IDataObject, DataObjectModel> _valueCache;
         public IReadOnlyObservableCollection<DataObjectModel> Value
@@ -129,7 +136,6 @@ namespace Kistl.Client.Presentables
 
         public void AddItem(DataObjectModel item)
         {
-            UI.Verify();
             Object.AddToCollectionQuick(Property.PropertyName, item.Object);
         }
 

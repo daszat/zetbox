@@ -11,38 +11,49 @@ using Kistl.App.Base;
 
 namespace Kistl.Client.Presentables
 {
-
+    /// <summary>
+    /// A Model describing a read-only value of type <paramref name="TValue"/>, usually read from a property or a method return value.
+    /// </summary>
+    /// <typeparam name="TValue">the type of the presented value</typeparam>
     public interface IReadOnlyValueModel<TValue>
         : INotifyPropertyChanged
     {
         /// <summary>
-        /// Whether or not the property has a value. <seealso cref="IsNull"/>
+        /// Gets a value indicating whether or not the property has a value.
         /// </summary>
+        /// <seealso cref="IsNull"/>
         bool HasValue { get; }
+
         /// <summary>
-        /// Whether or not the property is null. <seealso cref="HasValue"/>
+        /// Gets a value indicating whether or not the property is null.
         /// </summary>
+        /// <seealso cref="HasValue"/>
         bool IsNull { get; }
 
         /// <summary>
-        /// A label to display with the Value
+        /// Gets a label to display with the Value.
         /// </summary>
         string Label { get; }
 
         /// <summary>
-        /// A tooltip to display with the Value
+        /// Gets a tooltip to display with the Value.
         /// </summary>
         string ToolTip { get; }
 
         /// <summary>
-        /// The value of this model
+        /// Gets the value of this model.
         /// </summary>
         TValue Value { get; }
-
     }
 
+    /// <summary>
+    /// This interface provides a method for nullable ValueModels to allow removing the value easily.
+    /// </summary>
     public interface IClearableValue
     {
+        /// <summary>
+        /// Clears the value of this Model. After calling this method the value should be <value>null</value> or "empty".
+        /// </summary>
         void ClearValue();
     }
 
@@ -50,12 +61,12 @@ namespace Kistl.Client.Presentables
         : IReadOnlyValueModel<TValue>, IClearableValue, INotifyPropertyChanged
     {
         /// <summary>
-        /// The value of this model
+        /// Gets or sets the value of this model.
         /// </summary>
         new TValue Value { get; set; }
 
         /// <summary>
-        /// Whether or not to allow <value>null</value> as input
+        /// Gets a value indicating whether or not to allow <value>null</value> as input.
         /// </summary>
         bool AllowNullInput { get; }
     }
@@ -72,27 +83,32 @@ namespace Kistl.Client.Presentables
             if (bp == null)
                 new ArgumentNullException("bp");
 
-            Object = obj;
-            Property = bp;
+            this.Object = obj;
+            this.Property = bp;
 
-            Property.PropertyChanged += PropertyPropertyChangedHandler;
-            Object.PropertyChanged += ObjectPropertyChangedHandler;
+            this.Property.PropertyChanged += this.PropertyPropertyChangedHandler;
+            this.Object.PropertyChanged += this.ObjectPropertyChangedHandler;
 
-            GetPropertyValue();
-            CheckConstraints();
+            this.GetPropertyValue();
+            this.CheckConstraints();
         }
 
         #region Public Interface
 
-        // TODO: proxying implementations might block on that
-        public string Label { get { return IsInDesignMode ? "Some Label" : Property.PropertyName; } }
+        public string Label
+        {
+            get
+            {
+                return IsInDesignMode ? "Some Label" : Property.PropertyName;
+            }
+        }
+
         public string ToolTip
         {
             get
             {
                 return IsInDesignMode
                     ? "[Design Mode ACTIVE] This property has some value that could be edited here."
-                    // TODO: proxying implementations might block on that
                     : Property.AltText;
             }
         }
@@ -111,7 +127,7 @@ namespace Kistl.Client.Presentables
         /// </summary> 
         protected void CheckConstraints()
         {
-            ValueError = Object[Property.PropertyName];
+            this.ValueError = Object[Property.PropertyName];
         }
 
         #endregion
@@ -122,19 +138,23 @@ namespace Kistl.Client.Presentables
         {
             if (e.PropertyName == Property.PropertyName)
             {
-                GetPropertyValue();
+                this.GetPropertyValue();
             }
 
             // TODO: ask constraints about dependencies and reduce check frequency on object changes
-            CheckConstraints();
+            this.CheckConstraints();
         }
 
         private void PropertyPropertyChangedHandler(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case "PropertyName": OnPropertyChanged("Label"); break;
-                case "AltText": OnPropertyChanged("ToolTip"); break;
+                case "PropertyName":
+                    OnPropertyChanged("Label");
+                    break;
+                case "AltText":
+                    OnPropertyChanged("ToolTip");
+                    break;
             }
         }
 
@@ -142,28 +162,43 @@ namespace Kistl.Client.Presentables
 
         #region IDataErrorInfo Members
 
-        public string Error { get { return this["Value"]; } }
+        public string Error
+        {
+            get
+            {
+                return this["Value"];
+            }
+        }
 
         public string this[string columnName]
         {
             get
             {
                 if (columnName == "Value")
-                    return ValueError;
+                {
+                    return this.ValueError;
+                }
                 else
+                {
                     return null;
+                }
             }
         }
 
         private string _errorCache;
+
         protected string ValueError
         {
-            get { UI.Verify(); return _errorCache; }
+            get
+            {
+                return _errorCache;
+            }
             set
             {
                 if (_errorCache != value)
                 {
                     _errorCache = value;
+
                     // notify listeners that the error state of the Value has changed
                     OnPropertyChanged("Value");
                 }
@@ -173,14 +208,17 @@ namespace Kistl.Client.Presentables
         #endregion
 
         protected IDataObject Object { get; private set; }
+
         protected Property Property { get; private set; }
 
         #region Design Mode
 
-        protected PropertyModel(bool designMode) : base(designMode) { }
+        protected PropertyModel(bool designMode)
+            : base(designMode)
+        {
+        }
 
         #endregion
-
     }
 
     public class NullableValuePropertyModel<TValue>
@@ -192,7 +230,7 @@ namespace Kistl.Client.Presentables
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
-            AllowNullInput = prop.IsNullable;
+            this.AllowNullInput = prop.IsNullable;
         }
 
         #region Public Interface
@@ -206,7 +244,7 @@ namespace Kistl.Client.Presentables
             set
             {
                 if (!value)
-                    Value = null;
+                    this.Value = null;
             }
         }
 
@@ -219,7 +257,7 @@ namespace Kistl.Client.Presentables
             set
             {
                 if (value)
-                    Value = null;
+                    this.Value = null;
             }
         }
 
@@ -227,23 +265,27 @@ namespace Kistl.Client.Presentables
 
         public void ClearValue()
         {
-            if (AllowNullInput) Value = null;
+            if (this.AllowNullInput) Value = null;
             else throw new InvalidOperationException("\"null\" input not allowed");
         }
 
         private Nullable<TValue> _valueCache;
+
         /// <summary>
-        /// The value of the property presented by this model
+        /// Gets or sets the value of the property presented by this model.
         /// </summary>
         public Nullable<TValue> Value
         {
-            get { return _valueCache; }
+            get
+            {
+                return _valueCache;
+            }
             set
             {
                 if (!_valueCache.HasValue && !value.HasValue)
                     return;
 
-                if (!AllowNullInput && value == null)
+                if (!this.AllowNullInput && value == null)
                     throw new InvalidOperationException("\"null\" input not allowed");
 
                 _valueCache = value;
@@ -261,7 +303,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return _valueCache != null ? _valueCache.ToString() : "";
+                return _valueCache != null ? _valueCache.ToString() : String.Empty;
             }
             set
             {
@@ -273,10 +315,9 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return _valueCache != null ? _valueCache.ToString() : "";
+                return _valueCache != null ? _valueCache.ToString() : String.Empty;
             }
         }
-
 
         #endregion
 
@@ -284,7 +325,7 @@ namespace Kistl.Client.Presentables
 
         protected override void GetPropertyValue()
         {
-            Value = Object.GetPropertyValue<Nullable<TValue>>(Property.PropertyName);
+            this.Value = Object.GetPropertyValue<Nullable<TValue>>(Property.PropertyName);
         }
 
         #endregion
@@ -299,7 +340,7 @@ namespace Kistl.Client.Presentables
         protected NullableValuePropertyModel(bool designMode, TValue value)
             : base(designMode)
         {
-            AllowNullInput = true;
+            this.AllowNullInput = true;
             _valueCache = value;
         }
 
@@ -315,7 +356,7 @@ namespace Kistl.Client.Presentables
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
-            AllowNullInput = prop.IsNullable;
+            this.AllowNullInput = prop.IsNullable;
         }
 
         #region Public Interface
@@ -329,7 +370,7 @@ namespace Kistl.Client.Presentables
             set
             {
                 if (!value)
-                    Value = null;
+                    this.Value = null;
             }
         }
 
@@ -342,7 +383,7 @@ namespace Kistl.Client.Presentables
             set
             {
                 if (value)
-                    Value = null;
+                    this.Value = null;
             }
         }
 
@@ -350,17 +391,21 @@ namespace Kistl.Client.Presentables
 
         public void ClearValue()
         {
-            if (AllowNullInput) Value = null;
+            if (this.AllowNullInput) this.Value = null;
             else throw new InvalidOperationException();
         }
 
         private TValue _valueCache;
+
         /// <summary>
-        /// The value of the property presented by this model
+        /// Gets or sets the value of the property presented by this model
         /// </summary>
         public TValue Value
         {
-            get { return _valueCache; }
+            get
+            {
+                return _valueCache;
+            }
             set
             {
                 _valueCache = value;
@@ -380,7 +425,7 @@ namespace Kistl.Client.Presentables
 
         protected override void GetPropertyValue()
         {
-            Value = Object.GetPropertyValue<TValue>(Property.PropertyName);
+            this.Value = Object.GetPropertyValue<TValue>(Property.PropertyName);
         }
 
         #endregion
@@ -415,8 +460,8 @@ namespace Kistl.Client.Presentables
             IDataObject obj, EnumerationProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
-            PossibleValues = new ReadOnlyCollection<TValue>(Enum.GetValues(typeof(TValue)).Cast<TValue>().ToList());
-            PossibleStringValues = new ReadOnlyCollection<string>(PossibleValues.Select(v => v.ToString()).ToList());
+            this.PossibleValues = new ReadOnlyCollection<TValue>(Enum.GetValues(typeof(TValue)).Cast<TValue>().ToList());
+            this.PossibleStringValues = new ReadOnlyCollection<string>(this.PossibleValues.Select(v => v.ToString()).ToList());
         }
 
         #region Public Interface
@@ -424,8 +469,8 @@ namespace Kistl.Client.Presentables
         public ReadOnlyCollection<TValue> PossibleValues { get; private set; }
 
         /// <summary>
-        /// When using these values in the UI, please use the value's index to
-        /// lookup the actual Value in <see cref="PossibleValues"/>.
+        /// Gets a list of strings representing possible values.
+        /// Please use the strings's index to lookup the actual Value in <see cref="PossibleValues"/>.
         /// </summary>
         public ReadOnlyCollection<string> PossibleStringValues { get; private set; }
 
