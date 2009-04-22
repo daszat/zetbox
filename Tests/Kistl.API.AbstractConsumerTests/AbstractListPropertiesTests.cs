@@ -125,6 +125,31 @@ namespace Kistl.API.AbstractConsumerTests
             }
         }
 
+
+        // check whether a IsOrdered list's items are ordered correctly
+        // not a very "good" test due to its dependency on "real" data
+        [Test]
+        public void list_should_be_sorted_correctly()
+        {
+            using (IKistlContext ctx = GetContext())
+            {
+                ObjectClass cls = ctx.GetQuery<ObjectClass>().Where(c => c.ClassName == "Constraint").ToList().Single();
+                Method isValid = cls.Methods.Where(m => m.MethodName == "IsValid").ToList().Single();
+
+                AssertThatIsCorrectParameterOrder(isValid.Parameter);
+
+                var resultOfEnumeration = isValid.Parameter.AsEnumerable().ToList();
+                AssertThatIsCorrectParameterOrder(resultOfEnumeration);
+            }
+        }
+
+        private static void AssertThatIsCorrectParameterOrder(IList<BaseParameter> parameter)
+        {
+            Assert.That(parameter[0].IsReturnParameter, Is.True, "return parameter should be first");
+            Assert.That(parameter[1].ParameterName, Is.EqualTo("constrainedObject"));
+            Assert.That(parameter[2].ParameterName, Is.EqualTo("constrainedValue"));
+        }
+
     }
 
     public abstract class AbstractListPropertiesTests : AbstractReadonlyListPropertiesTests

@@ -158,6 +158,23 @@ namespace Kistl.App.Zeiterfassung
         public event ObjectEventHandler<Kostentraeger> OnPostSave_Kostentraeger;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Projekt":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(53).Constraints
+						.Where(c => !c.IsValid(this, this.Projekt))
+						.Select(c => c.GetErrorText(this, this.Projekt))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

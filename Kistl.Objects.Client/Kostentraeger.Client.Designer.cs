@@ -13,6 +13,7 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// 
@@ -156,6 +157,23 @@ namespace Kistl.App.Zeiterfassung
         public event ObjectEventHandler<Kostentraeger> OnPostSave_Kostentraeger;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Projekt":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(53).Constraints
+						.Where(c => !c.IsValid(this, this.Projekt))
+						.Select(c => c.GetErrorText(this, this.Projekt))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

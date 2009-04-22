@@ -200,6 +200,23 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<StructProperty> OnPostSave_StructProperty;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "StructDefinition":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(129).Constraints
+						.Where(c => !c.IsValid(this, this.StructDefinition))
+						.Select(c => c.GetErrorText(this, this.StructDefinition))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

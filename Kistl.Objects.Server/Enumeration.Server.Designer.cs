@@ -165,6 +165,23 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Enumeration> OnPostSave_Enumeration;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "EnumerationEntries":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(103).Constraints
+						.Where(c => !c.IsValid(this, this.EnumerationEntries))
+						.Select(c => c.GetErrorText(this, this.EnumerationEntries))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

@@ -13,12 +13,13 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// Metadefinition Object for Modules.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Module")]
-    public class Module__Implementation__ : BaseClientDataObject, Module
+    public class Module__Implementation__ : BaseClientDataObject_ClientObjects, Module
     {
     
 		public Module__Implementation__()
@@ -212,6 +213,59 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Module> OnPostSave_Module;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Assemblies":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(82).Constraints
+						.Where(c => !c.IsValid(this, this.Assemblies))
+						.Select(c => c.GetErrorText(this, this.Assemblies))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "DataTypes":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(44).Constraints
+						.Where(c => !c.IsValid(this, this.DataTypes))
+						.Select(c => c.GetErrorText(this, this.DataTypes))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Description":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(179).Constraints
+						.Where(c => !c.IsValid(this, this.Description))
+						.Select(c => c.GetErrorText(this, this.Description))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ModuleName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(43).Constraints
+						.Where(c => !c.IsValid(this, this.ModuleName))
+						.Select(c => c.GetErrorText(this, this.ModuleName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Namespace":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(42).Constraints
+						.Where(c => !c.IsValid(this, this.Namespace))
+						.Select(c => c.GetErrorText(this, this.Namespace))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

@@ -13,12 +13,13 @@ namespace Kistl.App.GUI
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("PresenterInfo")]
-    public class PresenterInfo__Implementation__ : BaseClientDataObject, PresenterInfo
+    public class PresenterInfo__Implementation__ : BaseClientDataObject_ClientObjects, PresenterInfo
     {
     
 		public PresenterInfo__Implementation__()
@@ -278,6 +279,59 @@ namespace Kistl.App.GUI
         public event ObjectEventHandler<PresenterInfo> OnPostSave_PresenterInfo;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "ControlType":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(137).Constraints
+						.Where(c => !c.IsValid(this, this.ControlType))
+						.Select(c => c.GetErrorText(this, this.ControlType))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "DataAssembly":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(147).Constraints
+						.Where(c => !c.IsValid(this, this.DataAssembly))
+						.Select(c => c.GetErrorText(this, this.DataAssembly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "DataTypeName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(148).Constraints
+						.Where(c => !c.IsValid(this, this.DataTypeName))
+						.Select(c => c.GetErrorText(this, this.DataTypeName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "PresenterAssembly":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(138).Constraints
+						.Where(c => !c.IsValid(this, this.PresenterAssembly))
+						.Select(c => c.GetErrorText(this, this.PresenterAssembly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "PresenterTypeName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(139).Constraints
+						.Where(c => !c.IsValid(this, this.PresenterTypeName))
+						.Select(c => c.GetErrorText(this, this.PresenterTypeName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

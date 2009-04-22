@@ -13,12 +13,13 @@ namespace Kistl.App.GUI
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor")]
-    public class ViewDescriptor__Implementation__ : BaseClientDataObject, ViewDescriptor
+    public class ViewDescriptor__Implementation__ : BaseClientDataObject_ClientObjects, ViewDescriptor
     {
     
 		public ViewDescriptor__Implementation__()
@@ -253,6 +254,50 @@ namespace Kistl.App.GUI
         public event ObjectEventHandler<ViewDescriptor> OnPostSave_ViewDescriptor;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "ControlRef":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(227).Constraints
+						.Where(c => !c.IsValid(this, this.ControlRef))
+						.Select(c => c.GetErrorText(this, this.ControlRef))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "PresentedModelDescriptor":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(226).Constraints
+						.Where(c => !c.IsValid(this, this.PresentedModelDescriptor))
+						.Select(c => c.GetErrorText(this, this.PresentedModelDescriptor))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Toolkit":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(228).Constraints
+						.Where(c => !c.IsValid(this, this.Toolkit))
+						.Select(c => c.GetErrorText(this, this.Toolkit))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "VisualType":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(229).Constraints
+						.Where(c => !c.IsValid(this, this.VisualType))
+						.Select(c => c.GetErrorText(this, this.VisualType))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

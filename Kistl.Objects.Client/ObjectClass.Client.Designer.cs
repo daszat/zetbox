@@ -13,6 +13,7 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// Metadefinition Object for ObjectClasses.
@@ -474,6 +475,86 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<ObjectClass> OnPostSave_ObjectClass;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "BaseObjectClass":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(25).Constraints
+						.Where(c => !c.IsValid(this, this.BaseObjectClass))
+						.Select(c => c.GetErrorText(this, this.BaseObjectClass))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "DefaultModel":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(212).Constraints
+						.Where(c => !c.IsValid(this, this.DefaultModel))
+						.Select(c => c.GetErrorText(this, this.DefaultModel))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "DefaultPresentableModelDescriptor":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(234).Constraints
+						.Where(c => !c.IsValid(this, this.DefaultPresentableModelDescriptor))
+						.Select(c => c.GetErrorText(this, this.DefaultPresentableModelDescriptor))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ImplementsInterfaces":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(105).Constraints
+						.Where(c => !c.IsValid(this, this.ImplementsInterfaces))
+						.Select(c => c.GetErrorText(this, this.ImplementsInterfaces))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "IsFrozenObject":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(174).Constraints
+						.Where(c => !c.IsValid(this, this.IsFrozenObject))
+						.Select(c => c.GetErrorText(this, this.IsFrozenObject))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "IsSimpleObject":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(119).Constraints
+						.Where(c => !c.IsValid(this, this.IsSimpleObject))
+						.Select(c => c.GetErrorText(this, this.IsSimpleObject))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "SubClasses":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(27).Constraints
+						.Where(c => !c.IsValid(this, this.SubClasses))
+						.Select(c => c.GetErrorText(this, this.SubClasses))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "TableName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(3).Constraints
+						.Where(c => !c.IsValid(this, this.TableName))
+						.Select(c => c.GetErrorText(this, this.TableName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

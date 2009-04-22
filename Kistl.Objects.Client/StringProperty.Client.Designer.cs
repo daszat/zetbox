@@ -13,6 +13,7 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// Metadefinition Object for String Properties.
@@ -144,6 +145,23 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<StringProperty> OnPostSave_StringProperty;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Length":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(28).Constraints
+						.Where(c => !c.IsValid(this, this.Length))
+						.Select(c => c.GetErrorText(this, this.Length))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

@@ -211,5 +211,15 @@ namespace Kistl.App.Projekte
         {
             return new InterfaceType(typeof(Projekt_Mitarbeiter23CollectionEntry));
         }
+
+        public override bool IsValid()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetPropertyError(string prop)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -13,12 +13,13 @@ namespace Kistl.App.Projekte
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Projekt")]
-    public class Projekt__Implementation__ : BaseClientDataObject, Projekt
+    public class Projekt__Implementation__ : BaseClientDataObject_ClientObjects, Projekt
     {
     
 		public Projekt__Implementation__()
@@ -265,6 +266,77 @@ namespace Kistl.App.Projekte
         public event ObjectEventHandler<Projekt> OnPostSave_Projekt;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Auftraege":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(67).Constraints
+						.Where(c => !c.IsValid(this, this.Auftraege))
+						.Select(c => c.GetErrorText(this, this.Auftraege))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "AufwandGes":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(23).Constraints
+						.Where(c => !c.IsValid(this, this.AufwandGes))
+						.Select(c => c.GetErrorText(this, this.AufwandGes))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Kostentraeger":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(66).Constraints
+						.Where(c => !c.IsValid(this, this.Kostentraeger))
+						.Select(c => c.GetErrorText(this, this.Kostentraeger))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Kundenname":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(48).Constraints
+						.Where(c => !c.IsValid(this, this.Kundenname))
+						.Select(c => c.GetErrorText(this, this.Kundenname))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Mitarbeiter":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(22).Constraints
+						.Where(c => !c.IsValid(this, this.Mitarbeiter))
+						.Select(c => c.GetErrorText(this, this.Mitarbeiter))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Name":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(13).Constraints
+						.Where(c => !c.IsValid(this, this.Name))
+						.Select(c => c.GetErrorText(this, this.Name))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Tasks":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(14).Constraints
+						.Where(c => !c.IsValid(this, this.Tasks))
+						.Select(c => c.GetErrorText(this, this.Tasks))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

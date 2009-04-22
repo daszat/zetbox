@@ -164,12 +164,12 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public virtual string GetErrorText(System.Object constrainedValue, System.Object constrainedObject) 
+		public virtual string GetErrorText(System.Object constrainedObject, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetErrorText_Constraint != null)
             {
-                OnGetErrorText_Constraint(this, e, constrainedValue, constrainedObject);
+                OnGetErrorText_Constraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
@@ -177,7 +177,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.Object constrainedValue, System.Object constrainedObject);
+		public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.Object constrainedObject, System.Object constrainedValue);
 		public event GetErrorText_Handler<Constraint> OnGetErrorText_Constraint;
 
 
@@ -186,12 +186,12 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public virtual bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
+		public virtual bool IsValid(System.Object constrainedObject, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_Constraint != null)
             {
-                OnIsValid_Constraint(this, e, constrainedValue, constrainedObj);
+                OnIsValid_Constraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
@@ -199,7 +199,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object constrainedValue, System.Object constrainedObj);
+		public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object constrainedObject, System.Object constrainedValue);
 		public event IsValid_Handler<Constraint> OnIsValid_Constraint;
 
 
@@ -250,6 +250,32 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Constraint> OnPostSave_Constraint;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "ConstrainedProperty":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(171).Constraints
+						.Where(c => !c.IsValid(this, this.ConstrainedProperty))
+						.Select(c => c.GetErrorText(this, this.ConstrainedProperty))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Reason":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(167).Constraints
+						.Where(c => !c.IsValid(this, this.Reason))
+						.Select(c => c.GetErrorText(this, this.Reason))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

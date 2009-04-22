@@ -13,12 +13,13 @@ namespace Kistl.App.GUI
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Template")]
-    public class Template__Implementation__ : BaseClientDataObject, Template
+    public class Template__Implementation__ : BaseClientDataObject_ClientObjects, Template
     {
     
 		public Template__Implementation__()
@@ -297,6 +298,59 @@ namespace Kistl.App.GUI
         public event ObjectEventHandler<Template> OnPostSave_Template;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "DisplayedTypeAssembly":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(163).Constraints
+						.Where(c => !c.IsValid(this, this.DisplayedTypeAssembly))
+						.Select(c => c.GetErrorText(this, this.DisplayedTypeAssembly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "DisplayedTypeFullName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(162).Constraints
+						.Where(c => !c.IsValid(this, this.DisplayedTypeFullName))
+						.Select(c => c.GetErrorText(this, this.DisplayedTypeFullName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "DisplayName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(154).Constraints
+						.Where(c => !c.IsValid(this, this.DisplayName))
+						.Select(c => c.GetErrorText(this, this.DisplayName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Menu":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(165).Constraints
+						.Where(c => !c.IsValid(this, this.Menu))
+						.Select(c => c.GetErrorText(this, this.Menu))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "VisualTree":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(155).Constraints
+						.Where(c => !c.IsValid(this, this.VisualTree))
+						.Select(c => c.GetErrorText(this, this.VisualTree))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

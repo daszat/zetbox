@@ -1,14 +1,16 @@
 namespace Kistl.API
 {
     using System;
+    using System.ComponentModel;
     using System.IO;
     using System.Xml;
+    using System.Diagnostics;
 
     /// <summary>
     /// Implement basic functionality needed by all persistent objects.
     /// </summary>
     public abstract class BasePersistenceObject
-        : BaseNotifyingObject, IPersistenceObject
+        : BaseNotifyingObject, IPersistenceObject, IDataErrorInfo
     {
         /// <summary>
         /// Gets or sets the primary key of this object. By convention all persistent objects have to have this synthesised primary key.
@@ -75,6 +77,12 @@ namespace Kistl.API
 
             this.ID = obj.ID;
         }
+
+        /// <summary>
+        /// Returns the most specific <see cref="InterfaceType"/> implemented by this object.
+        /// </summary>
+        /// <returns>the <see cref="InterfaceType"/> of this object</returns>
+        public abstract InterfaceType GetInterfaceType();
 
         #region IStreamable Members
 
@@ -147,10 +155,53 @@ namespace Kistl.API
 
         #endregion
 
+        #region IDataErrorInfo Members
+
         /// <summary>
-        /// Returns the most specific <see cref="InterfaceType"/> implemented by this object.
+        /// Returns a value indicating whether or not this object is in a valid configuration.
         /// </summary>
-        /// <returns>the <see cref="InterfaceType"/> of this object</returns>
-        public abstract InterfaceType GetInterfaceType();
+        /// <returns>a value indicating whether or not this object is in a valid configuration.</returns>
+        public abstract bool IsValid();
+
+        /// <summary>
+        /// Gets the error message for the property with the given name.
+        /// </summary>
+        /// <param name="prop">The name of the property whose error message to get.</param>
+        /// <returns>The error message for the property. Returns 
+        /// <value>String.Empty</value> if there is nothing to report.</returns>
+        protected abstract string GetPropertyError(string prop);
+
+        /// <summary>
+        /// Gets an error message indicating what is wrong with this object. Returns 
+        /// <value>String.Empty</value> if there is nothing to report.
+        /// </summary>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        string IDataErrorInfo.Error
+        {
+            get
+            {
+                if (this.IsValid()) return "";
+                else return "This object has errors.";
+            }
+        }
+
+        /// <summary>
+        /// Gets the error message for the property with the given name.
+        /// </summary>
+        /// <param name="columnName">The name of the property whose error message to get.</param>
+        /// <returns>The error message for the property. Returns 
+        /// <value>String.Empty</value> if there is nothing to report.</returns>
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        string IDataErrorInfo.this[string columnName]
+        {
+            get
+            {
+                return GetPropertyError(columnName);
+            }
+        }
+
+
+        #endregion
+
     }
 }

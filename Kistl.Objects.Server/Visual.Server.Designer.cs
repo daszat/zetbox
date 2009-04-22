@@ -426,6 +426,68 @@ namespace Kistl.App.GUI
         public event ObjectEventHandler<Visual> OnPostSave_Visual;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Children":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(151).Constraints
+						.Where(c => !c.IsValid(this, this.Children))
+						.Select(c => c.GetErrorText(this, this.Children))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ContextMenu":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(164).Constraints
+						.Where(c => !c.IsValid(this, this.ContextMenu))
+						.Select(c => c.GetErrorText(this, this.ContextMenu))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ControlType":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(150).Constraints
+						.Where(c => !c.IsValid(this, this.ControlType))
+						.Select(c => c.GetErrorText(this, this.ControlType))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Description":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(149).Constraints
+						.Where(c => !c.IsValid(this, this.Description))
+						.Select(c => c.GetErrorText(this, this.Description))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Method":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(153).Constraints
+						.Where(c => !c.IsValid(this, this.Method))
+						.Select(c => c.GetErrorText(this, this.Method))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Property":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(152).Constraints
+						.Where(c => !c.IsValid(this, this.Property))
+						.Select(c => c.GetErrorText(this, this.Property))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

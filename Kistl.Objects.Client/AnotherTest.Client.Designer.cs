@@ -13,12 +13,13 @@ namespace Kistl.App.Test
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("AnotherTest")]
-    public class AnotherTest__Implementation__ : BaseClientDataObject, AnotherTest
+    public class AnotherTest__Implementation__ : BaseClientDataObject_ClientObjects, AnotherTest
     {
     
 		public AnotherTest__Implementation__()

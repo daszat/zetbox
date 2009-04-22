@@ -157,6 +157,50 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<EnumerationEntry> OnPostSave_EnumerationEntry;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Description":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(178).Constraints
+						.Where(c => !c.IsValid(this, this.Description))
+						.Select(c => c.GetErrorText(this, this.Description))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Enumeration":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(100).Constraints
+						.Where(c => !c.IsValid(this, this.Enumeration))
+						.Select(c => c.GetErrorText(this, this.Enumeration))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Name":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(136).Constraints
+						.Where(c => !c.IsValid(this, this.Name))
+						.Select(c => c.GetErrorText(this, this.Name))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Value":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(135).Constraints
+						.Where(c => !c.IsValid(this, this.Value))
+						.Select(c => c.GetErrorText(this, this.Value))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
         internal EnumerationEntry__Implementation__Frozen(int id)
             : base(id)
         { }

@@ -460,6 +460,77 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Method> OnPostSave_Method;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Description":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(180).Constraints
+						.Where(c => !c.IsValid(this, this.Description))
+						.Select(c => c.GetErrorText(this, this.Description))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "IsDisplayable":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(124).Constraints
+						.Where(c => !c.IsValid(this, this.IsDisplayable))
+						.Select(c => c.GetErrorText(this, this.IsDisplayable))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "MethodInvokations":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(81).Constraints
+						.Where(c => !c.IsValid(this, this.MethodInvokations))
+						.Select(c => c.GetErrorText(this, this.MethodInvokations))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "MethodName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(30).Constraints
+						.Where(c => !c.IsValid(this, this.MethodName))
+						.Select(c => c.GetErrorText(this, this.MethodName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Module":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(73).Constraints
+						.Where(c => !c.IsValid(this, this.Module))
+						.Select(c => c.GetErrorText(this, this.Module))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ObjectClass":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(29).Constraints
+						.Where(c => !c.IsValid(this, this.ObjectClass))
+						.Select(c => c.GetErrorText(this, this.ObjectClass))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Parameter":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(96).Constraints
+						.Where(c => !c.IsValid(this, this.Parameter))
+						.Select(c => c.GetErrorText(this, this.Parameter))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

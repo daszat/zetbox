@@ -13,6 +13,7 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// Metadefinition Object for CLR Object Parameter.
@@ -207,6 +208,32 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<CLRObjectParameter> OnPostSave_CLRObjectParameter;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Assembly":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(98).Constraints
+						.Where(c => !c.IsValid(this, this.Assembly))
+						.Select(c => c.GetErrorText(this, this.Assembly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "FullTypeName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(99).Constraints
+						.Where(c => !c.IsValid(this, this.FullTypeName))
+						.Select(c => c.GetErrorText(this, this.FullTypeName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

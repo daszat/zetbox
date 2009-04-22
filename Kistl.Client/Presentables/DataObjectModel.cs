@@ -10,6 +10,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Utils;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.App.GUI;
 
 namespace Kistl.Client.Presentables

@@ -13,6 +13,7 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// 

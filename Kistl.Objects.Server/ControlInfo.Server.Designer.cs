@@ -322,6 +322,59 @@ namespace Kistl.App.GUI
         public event ObjectEventHandler<ControlInfo> OnPostSave_ControlInfo;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Assembly":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(114).Constraints
+						.Where(c => !c.IsValid(this, this.Assembly))
+						.Select(c => c.GetErrorText(this, this.Assembly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ClassName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(115).Constraints
+						.Where(c => !c.IsValid(this, this.ClassName))
+						.Select(c => c.GetErrorText(this, this.ClassName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ControlType":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(118).Constraints
+						.Where(c => !c.IsValid(this, this.ControlType))
+						.Select(c => c.GetErrorText(this, this.ControlType))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "IsContainer":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(116).Constraints
+						.Where(c => !c.IsValid(this, this.IsContainer))
+						.Select(c => c.GetErrorText(this, this.IsContainer))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Platform":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(117).Constraints
+						.Where(c => !c.IsValid(this, this.Platform))
+						.Select(c => c.GetErrorText(this, this.Platform))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

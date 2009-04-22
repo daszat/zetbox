@@ -290,6 +290,59 @@ namespace Kistl.App.Projekte
         public event ObjectEventHandler<Task> OnPostSave_Task;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Aufwand":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(18).Constraints
+						.Where(c => !c.IsValid(this, this.Aufwand))
+						.Select(c => c.GetErrorText(this, this.Aufwand))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "DatumBis":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(17).Constraints
+						.Where(c => !c.IsValid(this, this.DatumBis))
+						.Select(c => c.GetErrorText(this, this.DatumBis))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "DatumVon":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(16).Constraints
+						.Where(c => !c.IsValid(this, this.DatumVon))
+						.Select(c => c.GetErrorText(this, this.DatumVon))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Name":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(15).Constraints
+						.Where(c => !c.IsValid(this, this.Name))
+						.Select(c => c.GetErrorText(this, this.Name))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Projekt":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(19).Constraints
+						.Where(c => !c.IsValid(this, this.Projekt))
+						.Select(c => c.GetErrorText(this, this.Projekt))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

@@ -56,37 +56,34 @@ namespace Kistl.API.Server
         /// Fires an Event after an Object is saved.
         /// </summary>
         public virtual void NotifyPostSave() { }
-
-        #region IDataErrorInfo Members
-
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        string IDataErrorInfo.this[string columnName]
-        {
-            get
-            {
-                return GetPropertyError(columnName);
-            }
-        }
-
-        protected virtual string GetPropertyError(string prop)
-        {
-            throw new ArgumentOutOfRangeException("prop", "unknown property " + prop);
-        }
-
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        string IDataErrorInfo.Error
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        #endregion
     }
 
     /// <summary>
     /// Server Collection Entry Implementation. A Collection Entry is a "connection" Object between other Data Objects 
     /// (ObjectReferenceProperty, IsList=true) or just a simple Collection (eg. StringProperty, IsList=true).
     /// </summary>
-    public abstract class BaseServerCollectionEntry : BaseServerPersistenceObject { }
+    public abstract class BaseServerCollectionEntry
+        : BaseServerPersistenceObject
+    {
+        /// <summary>
+        /// Always returns <value>true</value>. CollectionEntries are checked via their navigators or relations.
+        /// </summary>
+        /// <returns><value>true</value></returns>
+        public override bool IsValid()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Always returns <value>true</value>. CollectionEntries are checked via their navigators or relations.
+        /// </summary>
+        /// <param name="prop">is ignored</param>
+        /// <returns><value>true</value></returns>
+        protected override string GetPropertyError(string prop)
+        {
+            return String.Empty;
+        }
+    }
 
     /// <summary>
     /// local proxy

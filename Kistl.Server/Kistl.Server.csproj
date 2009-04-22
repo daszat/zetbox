@@ -438,6 +438,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
     </Compile>
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetPropertyErrorTemplate.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\StructSerialization.Designer.cs">
       <DependentUpon>StructSerialization.cst</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -827,6 +832,10 @@
     </None>
     <Content Include="Generators\EntityFramework\README.txt" />
     <Content Include="Generators\Interfaces\Repositories\README.txt" />
+    <None Include="Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>GetPropertyErrorTemplate.Designer.cs</LastGenOutput>
+    </None>
     <Content Include="Generators\Templates\Interface\README.txt" />
     <None Include="Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst">
       <Generator>Arebis Template Processor</Generator>

@@ -250,6 +250,41 @@ namespace Kistl.App.GUI
         public event ObjectEventHandler<PresentableModelDescriptor> OnPostSave_PresentableModelDescriptor;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "DefaultVisualType":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(233).Constraints
+						.Where(c => !c.IsValid(this, this.DefaultVisualType))
+						.Select(c => c.GetErrorText(this, this.DefaultVisualType))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Description":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(232).Constraints
+						.Where(c => !c.IsValid(this, this.Description))
+						.Select(c => c.GetErrorText(this, this.Description))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "PresentableModelRef":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(231).Constraints
+						.Where(c => !c.IsValid(this, this.PresentableModelRef))
+						.Select(c => c.GetErrorText(this, this.PresentableModelRef))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

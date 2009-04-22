@@ -35,6 +35,9 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation
 
             // Client API
             this.WriteLine(@"    <Reference Include=""Kistl.API.Client"" />");
+
+            // DAL Provider
+            this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.ClientObjects"" />");
         }
 
     }

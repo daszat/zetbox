@@ -299,6 +299,50 @@ namespace Kistl.App.Test
         public event ObjectEventHandler<TestObjClass> OnPostSave_TestObjClass;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "MyIntProperty":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(126).Constraints
+						.Where(c => !c.IsValid(this, this.MyIntProperty))
+						.Select(c => c.GetErrorText(this, this.MyIntProperty))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ObjectProp":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(112).Constraints
+						.Where(c => !c.IsValid(this, this.ObjectProp))
+						.Select(c => c.GetErrorText(this, this.ObjectProp))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "StringProp":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(109).Constraints
+						.Where(c => !c.IsValid(this, this.StringProp))
+						.Select(c => c.GetErrorText(this, this.StringProp))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "TestEnumProp":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(110).Constraints
+						.Where(c => !c.IsValid(this, this.TestEnumProp))
+						.Select(c => c.GetErrorText(this, this.TestEnumProp))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

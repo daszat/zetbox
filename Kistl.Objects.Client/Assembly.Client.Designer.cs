@@ -13,12 +13,13 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Assembly")]
-    public class Assembly__Implementation__ : BaseClientDataObject, Assembly
+    public class Assembly__Implementation__ : BaseClientDataObject_ClientObjects, Assembly
     {
     
 		public Assembly__Implementation__()
@@ -227,6 +228,41 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Assembly> OnPostSave_Assembly;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "AssemblyName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(71).Constraints
+						.Where(c => !c.IsValid(this, this.AssemblyName))
+						.Select(c => c.GetErrorText(this, this.AssemblyName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "IsClientAssembly":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(83).Constraints
+						.Where(c => !c.IsValid(this, this.IsClientAssembly))
+						.Select(c => c.GetErrorText(this, this.IsClientAssembly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Module":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(70).Constraints
+						.Where(c => !c.IsValid(this, this.Module))
+						.Select(c => c.GetErrorText(this, this.Module))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

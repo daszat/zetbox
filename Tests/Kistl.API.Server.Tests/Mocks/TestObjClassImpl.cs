@@ -190,6 +190,16 @@ namespace Kistl.API.Server.Mocks
             base.DetachFromContext(ctx);
             _IsAttached = false;
         }
+
+        public override bool IsValid()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetPropertyError(string prop)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

@@ -85,6 +85,23 @@ namespace Kistl.App.GUI
         public event ObjectEventHandler<Icon> OnPostSave_Icon;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "IconFile":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(68).Constraints
+						.Where(c => !c.IsValid(this, this.IconFile))
+						.Select(c => c.GetErrorText(this, this.IconFile))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
         internal Icon__Implementation__Frozen(int id)
             : base(id)
         { }

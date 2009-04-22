@@ -13,6 +13,7 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// Metadefinition Object for ObjectReference Properties.
@@ -261,6 +262,32 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<ObjectReferenceProperty> OnPostSave_ObjectReferenceProperty;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "ReferenceObjectClass":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(46).Constraints
+						.Where(c => !c.IsValid(this, this.ReferenceObjectClass))
+						.Select(c => c.GetErrorText(this, this.ReferenceObjectClass))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "RelationEnd":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(222).Constraints
+						.Where(c => !c.IsValid(this, this.RelationEnd))
+						.Select(c => c.GetErrorText(this, this.RelationEnd))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

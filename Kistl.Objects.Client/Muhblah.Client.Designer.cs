@@ -13,12 +13,13 @@ namespace Kistl.App.Test
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Muhblah")]
-    public class Muhblah__Implementation__ : BaseClientDataObject, Muhblah
+    public class Muhblah__Implementation__ : BaseClientDataObject_ClientObjects, Muhblah
     {
     
 		public Muhblah__Implementation__()

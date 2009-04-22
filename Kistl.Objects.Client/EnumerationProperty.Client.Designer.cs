@@ -13,6 +13,7 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// Metadefinition Object for Enumeration Properties.
@@ -182,6 +183,23 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<EnumerationProperty> OnPostSave_EnumerationProperty;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Enumeration":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(104).Constraints
+						.Where(c => !c.IsValid(this, this.Enumeration))
+						.Select(c => c.GetErrorText(this, this.Enumeration))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

@@ -225,6 +225,59 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<BaseParameter> OnPostSave_BaseParameter;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Description":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(177).Constraints
+						.Where(c => !c.IsValid(this, this.Description))
+						.Select(c => c.GetErrorText(this, this.Description))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "IsList":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(94).Constraints
+						.Where(c => !c.IsValid(this, this.IsList))
+						.Select(c => c.GetErrorText(this, this.IsList))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "IsReturnParameter":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(95).Constraints
+						.Where(c => !c.IsValid(this, this.IsReturnParameter))
+						.Select(c => c.GetErrorText(this, this.IsReturnParameter))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Method":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(92).Constraints
+						.Where(c => !c.IsValid(this, this.Method))
+						.Select(c => c.GetErrorText(this, this.Method))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ParameterName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(91).Constraints
+						.Where(c => !c.IsValid(this, this.ParameterName))
+						.Select(c => c.GetErrorText(this, this.ParameterName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
         internal BaseParameter__Implementation__Frozen(int id)
             : base(id)
         { }

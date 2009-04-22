@@ -78,16 +78,16 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public override string GetErrorText(System.Object constrainedValue, System.Object constrainedObject) 
+		public override string GetErrorText(System.Object constrainedObject, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetErrorText_IntegerRangeConstraint != null)
             {
-                OnGetErrorText_IntegerRangeConstraint(this, e, constrainedValue, constrainedObject);
+                OnGetErrorText_IntegerRangeConstraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
-                e.Result = base.GetErrorText(constrainedValue, constrainedObject);
+                e.Result = base.GetErrorText(constrainedObject, constrainedValue);
             }
             return e.Result;
         }
@@ -99,16 +99,16 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-		public override bool IsValid(System.Object constrainedValue, System.Object constrainedObj) 
+		public override bool IsValid(System.Object constrainedObject, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnIsValid_IntegerRangeConstraint != null)
             {
-                OnIsValid_IntegerRangeConstraint(this, e, constrainedValue, constrainedObj);
+                OnIsValid_IntegerRangeConstraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
-                e.Result = base.IsValid(constrainedValue, constrainedObj);
+                e.Result = base.IsValid(constrainedObject, constrainedValue);
             }
             return e.Result;
         }
@@ -151,6 +151,32 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<IntegerRangeConstraint> OnPostSave_IntegerRangeConstraint;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Max":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(168).Constraints
+						.Where(c => !c.IsValid(this, this.Max))
+						.Select(c => c.GetErrorText(this, this.Max))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Min":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(169).Constraints
+						.Where(c => !c.IsValid(this, this.Min))
+						.Select(c => c.GetErrorText(this, this.Min))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
         internal IntegerRangeConstraint__Implementation__Frozen(int id)
             : base(id)
         { }

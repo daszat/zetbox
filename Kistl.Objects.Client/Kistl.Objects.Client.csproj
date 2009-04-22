@@ -50,6 +50,7 @@
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="Kistl.API.Client" />
+    <Reference Include="Kistl.DalProvider.ClientObjects" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnotherTest.Client.Designer.cs" />

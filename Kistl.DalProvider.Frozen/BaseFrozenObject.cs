@@ -113,7 +113,6 @@ namespace Kistl.DalProvider.Frozen
 
     public abstract class BaseFrozenDataObject : BaseFrozenObject, IDataObject
     {
-
         protected BaseFrozenDataObject()
         {
             throw new InvalidOperationException("BaseFrozenDataObject constructor without id called");
@@ -129,11 +128,20 @@ namespace Kistl.DalProvider.Frozen
 
         #region IDataErrorInfo Members
 
-        public string Error { get { return ""; } }
+        /// <summary>
+        /// Gets the error message for the property with the given name.
+        /// </summary>
+        /// <param name="prop">The name of the property whose error message to get.</param>
+        /// <returns>The error message for the property. Returns 
+        /// <value>String.Empty</value> if there is nothing to report.</returns>
+        protected virtual string GetPropertyError(string prop) { return String.Empty; }
 
-        public string this[string columnName] { get { return ""; } }
+        public string Error { get { return String.Empty; } }
+
+        public string this[string columnName] { get { return GetPropertyError(columnName); } }
 
         #endregion
+
 
     }
 

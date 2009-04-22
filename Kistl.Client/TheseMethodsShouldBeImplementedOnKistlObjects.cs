@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.ServiceModel;
 using System.Linq;
+using System.ServiceModel;
+
+using Kistl.API;
 using Kistl.API.Client;
 using Kistl.App.Base;
-using Kistl.API;
+using Kistl.App.Extensions;
 
 namespace Kistl.Client
 {
@@ -26,28 +28,7 @@ namespace Kistl.Client
             return result;
         }
 
-        private static ILookup<string, ObjectClass> _frozenClasses;
-        public static ObjectClass GetObjectClass(this IDataObject obj, Kistl.API.IKistlContext ctx)
-        {
-            Type type = obj.GetInterfaceType().Type;
-            IQueryable<ObjectClass> q;
-            if (ctx == FrozenContext.Single)
-            {
-                if (_frozenClasses == null)
-                {
-                    _frozenClasses = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.ClassName);
-                }
-                q = _frozenClasses[type.Name].AsQueryable();
-            }
-            else
-            {
-                q = ctx.GetQuery<ObjectClass>();
-            }
-
-            return q.First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
-        }
-
-        public static Property GetProperty(this ObjectClass c, string property)
+       public static Property GetProperty(this ObjectClass c, string property)
         {
             ObjectClass objClass = c;
             while (objClass != null)
@@ -79,14 +60,6 @@ namespace Kistl.Client
 
             // self might be an ancestor of other, check here
             return IsAssignableFrom(self, (other as ObjectClass).BaseObjectClass);
-        }
-
-        public static bool IsValid(this IDataObject self)
-        {
-            ObjectClass oc = self.GetObjectClass(self.Context);
-            return oc.Properties.Aggregate(true, (acc, prop) =>
-                acc && prop.Constraints.All(c =>
-                    c.IsValid(self, self.GetPropertyValue<object>(prop.PropertyName))));
         }
 
         public static string ToUserString(this DataObjectState state)

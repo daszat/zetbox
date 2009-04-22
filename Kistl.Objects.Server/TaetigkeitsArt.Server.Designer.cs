@@ -124,6 +124,23 @@ namespace Kistl.App.Zeiterfassung
         public event ObjectEventHandler<TaetigkeitsArt> OnPostSave_TaetigkeitsArt;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Name":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(87).Constraints
+						.Where(c => !c.IsValid(this, this.Name))
+						.Select(c => c.GetErrorText(this, this.Name))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

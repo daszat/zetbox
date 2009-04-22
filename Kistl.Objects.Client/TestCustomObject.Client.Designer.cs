@@ -13,12 +13,13 @@ namespace Kistl.App.Test
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("TestCustomObject")]
-    public class TestCustomObject__Implementation__ : BaseClientDataObject, TestCustomObject
+    public class TestCustomObject__Implementation__ : BaseClientDataObject_ClientObjects, TestCustomObject
     {
     
 		public TestCustomObject__Implementation__()
@@ -181,6 +182,50 @@ namespace Kistl.App.Test
         public event ObjectEventHandler<TestCustomObject> OnPostSave_TestCustomObject;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Birthday":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(133).Constraints
+						.Where(c => !c.IsValid(this, this.Birthday))
+						.Select(c => c.GetErrorText(this, this.Birthday))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "PersonName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(130).Constraints
+						.Where(c => !c.IsValid(this, this.PersonName))
+						.Select(c => c.GetErrorText(this, this.PersonName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "PhoneNumberMobile":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(131).Constraints
+						.Where(c => !c.IsValid(this, this.PhoneNumberMobile))
+						.Select(c => c.GetErrorText(this, this.PhoneNumberMobile))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "PhoneNumberOffice":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(132).Constraints
+						.Where(c => !c.IsValid(this, this.PhoneNumberOffice))
+						.Select(c => c.GetErrorText(this, this.PhoneNumberOffice))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

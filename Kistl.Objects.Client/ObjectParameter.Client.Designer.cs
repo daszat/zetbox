@@ -13,6 +13,7 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// Metadefinition Object for Object Parameter.
@@ -182,6 +183,23 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<ObjectParameter> OnPostSave_ObjectParameter;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "DataType":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(97).Constraints
+						.Where(c => !c.IsValid(this, this.DataType))
+						.Select(c => c.GetErrorText(this, this.DataType))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

@@ -35,7 +35,7 @@ namespace Kistl.App.Base
             object constrainedObjectParam,
             object constrainedValueParam)
         {
-            e.Result &= constrainedValueParam != null;
+            e.Result = constrainedValueParam != null;
         }
 
         public void OnGetErrorText_NotNullableConstraint(
@@ -69,15 +69,15 @@ namespace Kistl.App.Base
             object constrainedObjectParam,
             object constrainedValueParam)
         {
-            // TODO: David: da hab ich NULL reinbekommen - kann/soll das sein?
             if (constrainedValueParam != null)
             {
                 int v = (int)constrainedValueParam;
-                e.Result &= (obj.Min <= v) && (v <= obj.Max);
+                e.Result = (obj.Min <= v) && (v <= obj.Max);
             }
             else
             {
-                e.Result &= true;
+                // only accept null values if no lower bound is set
+                e.Result = obj.Min == 0;
             }
         }
 
@@ -126,7 +126,7 @@ namespace Kistl.App.Base
             object constrainedValueParam)
         {
             int length = (constrainedValueParam ?? "").ToString().Length;
-            e.Result &= (obj.MinLength <= length) && (length <= obj.MaxLength);
+            e.Result = (obj.MinLength <= length) && (length <= obj.MaxLength);
         }
 
         public void OnGetErrorText_StringRangeConstraint(
@@ -194,7 +194,7 @@ namespace Kistl.App.Base
         {
             var constrainedObject = (MethodInvocation)constrainedObjectParam;
             var method = (Method)constrainedValueParam;
-            e.Result &= (method != null) && method.ObjectClass.IsAssignableFrom(constrainedObject.InvokeOnObjectClass);
+            e.Result = (method != null) && method.ObjectClass.IsAssignableFrom(constrainedObject.InvokeOnObjectClass);
         }
 
 
@@ -225,7 +225,7 @@ namespace Kistl.App.Base
                     object constrainedObjectParam,
                     object constrainedValueParam)
         {
-            e.Result &= (constrainedValueParam != null) &&
+            e.Result = (constrainedValueParam != null) &&
                 System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier((string)constrainedValueParam);
         }
 
@@ -239,7 +239,6 @@ namespace Kistl.App.Base
             {
                 string @namespace = (string)constrainedValueParam;
 
-                // Override baseclass's Result
                 e.Result = true;
                 foreach (string ns in @namespace.Split('.'))
                 {

@@ -77,5 +77,15 @@ namespace Kistl.API.Client.Tests
         {
             return new InterfaceType(typeof(IValueCollectionEntry<TestObjClass, string>));
         }
+
+        public override bool IsValid()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetPropertyError(string prop)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

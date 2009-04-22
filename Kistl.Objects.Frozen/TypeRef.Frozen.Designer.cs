@@ -178,6 +178,50 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<TypeRef> OnPostSave_TypeRef;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Assembly":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(206).Constraints
+						.Where(c => !c.IsValid(this, this.Assembly))
+						.Select(c => c.GetErrorText(this, this.Assembly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "FullName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(205).Constraints
+						.Where(c => !c.IsValid(this, this.FullName))
+						.Select(c => c.GetErrorText(this, this.FullName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "GenericArguments":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(207).Constraints
+						.Where(c => !c.IsValid(this, this.GenericArguments))
+						.Select(c => c.GetErrorText(this, this.GenericArguments))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Parent":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(235).Constraints
+						.Where(c => !c.IsValid(this, this.Parent))
+						.Select(c => c.GetErrorText(this, this.Parent))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
         internal TypeRef__Implementation__Frozen(int id)
             : base(id)
         { }

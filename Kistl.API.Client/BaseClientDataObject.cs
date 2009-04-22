@@ -125,35 +125,29 @@ namespace Kistl.API.Client
         {
             throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetInterfaceType().Type.FullName));
         }
-
-        #region IDataErrorInfo Members
-
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        string IDataErrorInfo.this[string columnName]
-        {
-            get
-            {
-                return GetPropertyError(columnName);
-            }
-        }
-
-        protected virtual string GetPropertyError(string prop)
-        {
-            // TODO: Wieder einbauen oder anders warnen
-            // throw new ArgumentOutOfRangeException("columnName", "unknown property " + prop);
-            return "";
-        }
-
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        string IDataErrorInfo.Error
-        {
-            get { return ""; /* throw new NotImplementedException();*/ }
-        }
-
-        #endregion
     }
 
-    public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject { }
+    public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject
+    {
+        /// <summary>
+        /// Always returns <value>true</value>. CollectionEntries are checked via their navigators or relations.
+        /// </summary>
+        /// <returns><value>true</value></returns>
+        public override bool IsValid()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Always returns <value>true</value>. CollectionEntries are checked via their navigators or relations.
+        /// </summary>
+        /// <param name="prop">is ignored</param>
+        /// <returns><value>true</value></returns>
+        protected override string GetPropertyError(string prop)
+        {
+            return String.Empty;
+        }
+    }
 
     /// <summary>
     /// local proxy

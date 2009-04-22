@@ -7,6 +7,8 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.API.Server;
+using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.DALProvider.EF
 {
@@ -165,6 +167,19 @@ namespace Kistl.DALProvider.EF
                 _changeTracker.EntityMemberChanging(efProperty);
             }
         }
+
+        public override bool IsValid()
+        {
+            ObjectClass oc = this.GetObjectClass(this.Context);
+            return oc.Properties.Aggregate(true, (acc, prop) =>
+                acc && prop.Constraints.All(c =>
+                    c.IsValid(this, this.GetPropertyValue<object>(prop.PropertyName))));
+        }
+
+        protected override string GetPropertyError(string prop)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public abstract class BaseServerCollectionEntry_EntityFramework
@@ -292,6 +307,14 @@ namespace Kistl.DALProvider.EF
             return _relationships.GetPrivatePropertyValue<ObjectContext>("Context");
         }
 
+        public override bool IsValid()
+        {
+            throw new NotImplementedException();
+        }
+        protected override string GetPropertyError(string prop)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>

@@ -13,12 +13,13 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
-    public class TypeRef__Implementation__ : BaseClientDataObject, TypeRef
+    public class TypeRef__Implementation__ : BaseClientDataObject_ClientObjects, TypeRef
     {
     
 		public TypeRef__Implementation__()
@@ -273,6 +274,50 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<TypeRef> OnPostSave_TypeRef;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Assembly":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(206).Constraints
+						.Where(c => !c.IsValid(this, this.Assembly))
+						.Select(c => c.GetErrorText(this, this.Assembly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "FullName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(205).Constraints
+						.Where(c => !c.IsValid(this, this.FullName))
+						.Select(c => c.GetErrorText(this, this.FullName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "GenericArguments":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(207).Constraints
+						.Where(c => !c.IsValid(this, this.GenericArguments))
+						.Select(c => c.GetErrorText(this, this.GenericArguments))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Parent":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(235).Constraints
+						.Where(c => !c.IsValid(this, this.Parent))
+						.Select(c => c.GetErrorText(this, this.Parent))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

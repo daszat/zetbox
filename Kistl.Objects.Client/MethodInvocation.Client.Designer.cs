@@ -13,12 +13,13 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// Metadefinition Object for a MethodInvocation on a Method of a DataType.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("MethodInvocation")]
-    public class MethodInvocation__Implementation__ : BaseClientDataObject, MethodInvocation
+    public class MethodInvocation__Implementation__ : BaseClientDataObject_ClientObjects, MethodInvocation
     {
     
 		public MethodInvocation__Implementation__()
@@ -386,6 +387,59 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<MethodInvocation> OnPostSave_MethodInvocation;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Implementor":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(208).Constraints
+						.Where(c => !c.IsValid(this, this.Implementor))
+						.Select(c => c.GetErrorText(this, this.Implementor))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "InvokeOnObjectClass":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(79).Constraints
+						.Where(c => !c.IsValid(this, this.InvokeOnObjectClass))
+						.Select(c => c.GetErrorText(this, this.InvokeOnObjectClass))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "MemberName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(77).Constraints
+						.Where(c => !c.IsValid(this, this.MemberName))
+						.Select(c => c.GetErrorText(this, this.MemberName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Method":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(74).Constraints
+						.Where(c => !c.IsValid(this, this.Method))
+						.Select(c => c.GetErrorText(this, this.Method))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Module":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(78).Constraints
+						.Where(c => !c.IsValid(this, this.Module))
+						.Select(c => c.GetErrorText(this, this.Module))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

@@ -127,6 +127,23 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<StringProperty> OnPostSave_StringProperty;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Length":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(28).Constraints
+						.Where(c => !c.IsValid(this, this.Length))
+						.Select(c => c.GetErrorText(this, this.Length))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
         internal StringProperty__Implementation__Frozen(int id)
             : base(id)
         { }

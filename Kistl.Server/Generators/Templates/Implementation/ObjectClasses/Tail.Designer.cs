@@ -57,7 +57,9 @@ this.WriteObjects("            if (OnPostSave_",  cls.ClassName , " != null) OnP
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public event ObjectEventHandler<",  cls.ClassName , "> OnPostSave_",  cls.ClassName , ";\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("\r\n");
+#line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+this.CallTemplate("Implementation.ObjectClasses.GetPropertyErrorTemplate", ctx, cls);
+
 
         }
 

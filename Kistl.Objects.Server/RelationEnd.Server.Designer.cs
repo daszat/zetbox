@@ -552,6 +552,86 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<RelationEnd> OnPostSave_RelationEnd;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "AParent":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(224).Constraints
+						.Where(c => !c.IsValid(this, this.AParent))
+						.Select(c => c.GetErrorText(this, this.AParent))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "BParent":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(223).Constraints
+						.Where(c => !c.IsValid(this, this.BParent))
+						.Select(c => c.GetErrorText(this, this.BParent))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "HasPersistentOrder":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(220).Constraints
+						.Where(c => !c.IsValid(this, this.HasPersistentOrder))
+						.Select(c => c.GetErrorText(this, this.HasPersistentOrder))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Multiplicity":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(219).Constraints
+						.Where(c => !c.IsValid(this, this.Multiplicity))
+						.Select(c => c.GetErrorText(this, this.Multiplicity))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Navigator":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(218).Constraints
+						.Where(c => !c.IsValid(this, this.Navigator))
+						.Select(c => c.GetErrorText(this, this.Navigator))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Role":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(217).Constraints
+						.Where(c => !c.IsValid(this, this.Role))
+						.Select(c => c.GetErrorText(this, this.Role))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "RoleName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(216).Constraints
+						.Where(c => !c.IsValid(this, this.RoleName))
+						.Select(c => c.GetErrorText(this, this.RoleName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Type":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(215).Constraints
+						.Where(c => !c.IsValid(this, this.Type))
+						.Select(c => c.GetErrorText(this, this.Type))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

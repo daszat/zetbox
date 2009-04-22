@@ -332,6 +332,50 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Relation> OnPostSave_Relation;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "A":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(213).Constraints
+						.Where(c => !c.IsValid(this, this.A))
+						.Select(c => c.GetErrorText(this, this.A))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "B":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(214).Constraints
+						.Where(c => !c.IsValid(this, this.B))
+						.Select(c => c.GetErrorText(this, this.B))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Description":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(184).Constraints
+						.Where(c => !c.IsValid(this, this.Description))
+						.Select(c => c.GetErrorText(this, this.Description))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Storage":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(183).Constraints
+						.Where(c => !c.IsValid(this, this.Storage))
+						.Select(c => c.GetErrorText(this, this.Storage))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

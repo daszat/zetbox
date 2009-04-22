@@ -211,12 +211,12 @@ namespace Kistl.App.Projekte
         /// 
         /// </summary>
 
-		public virtual DateTime TestMethodForParameter(System.String TestString, System.Int32 TestInt, System.Double TestDouble, System.Boolean TestBool, System.DateTime TestDateTime, Kistl.App.Projekte.Auftrag TestObjectParameter, System.Guid TestCLRObjectParameter) 
+		public virtual DateTime TestMethodForParameter(System.Boolean TestBool, System.Guid TestCLRObjectParameter, System.DateTime TestDateTime, System.Double TestDouble, System.Int32 TestInt, Kistl.App.Projekte.Auftrag TestObjectParameter, System.String TestString) 
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnTestMethodForParameter_Mitarbeiter != null)
             {
-                OnTestMethodForParameter_Mitarbeiter(this, e, TestString, TestInt, TestDouble, TestBool, TestDateTime, TestObjectParameter, TestCLRObjectParameter);
+                OnTestMethodForParameter_Mitarbeiter(this, e, TestBool, TestCLRObjectParameter, TestDateTime, TestDouble, TestInt, TestObjectParameter, TestString);
             }
             else
             {
@@ -224,7 +224,7 @@ namespace Kistl.App.Projekte
             }
             return e.Result;
         }
-		public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, System.String TestString, System.Int32 TestInt, System.Double TestDouble, System.Boolean TestBool, System.DateTime TestDateTime, Kistl.App.Projekte.Auftrag TestObjectParameter, System.Guid TestCLRObjectParameter);
+		public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, System.Boolean TestBool, System.Guid TestCLRObjectParameter, System.DateTime TestDateTime, System.Double TestDouble, System.Int32 TestInt, Kistl.App.Projekte.Auftrag TestObjectParameter, System.String TestString);
 		public event TestMethodForParameter_Handler<Mitarbeiter> OnTestMethodForParameter_Mitarbeiter;
 
 
@@ -277,6 +277,59 @@ namespace Kistl.App.Projekte
         public event ObjectEventHandler<Mitarbeiter> OnPostSave_Mitarbeiter;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Geburtstag":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(38).Constraints
+						.Where(c => !c.IsValid(this, this.Geburtstag))
+						.Select(c => c.GetErrorText(this, this.Geburtstag))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Name":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(20).Constraints
+						.Where(c => !c.IsValid(this, this.Name))
+						.Select(c => c.GetErrorText(this, this.Name))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Projekte":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(21).Constraints
+						.Where(c => !c.IsValid(this, this.Projekte))
+						.Select(c => c.GetErrorText(this, this.Projekte))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "SVNr":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(39).Constraints
+						.Where(c => !c.IsValid(this, this.SVNr))
+						.Select(c => c.GetErrorText(this, this.SVNr))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "TelefonNummer":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(40).Constraints
+						.Where(c => !c.IsValid(this, this.TelefonNummer))
+						.Select(c => c.GetErrorText(this, this.TelefonNummer))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

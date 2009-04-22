@@ -368,6 +368,113 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<Property> OnPostSave_Property;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "AltText":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(41).Constraints
+						.Where(c => !c.IsValid(this, this.AltText))
+						.Select(c => c.GetErrorText(this, this.AltText))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "CategoryTags":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(225).Constraints
+						.Where(c => !c.IsValid(this, this.CategoryTags))
+						.Select(c => c.GetErrorText(this, this.CategoryTags))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Constraints":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(170).Constraints
+						.Where(c => !c.IsValid(this, this.Constraints))
+						.Select(c => c.GetErrorText(this, this.Constraints))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Description":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(176).Constraints
+						.Where(c => !c.IsValid(this, this.Description))
+						.Select(c => c.GetErrorText(this, this.Description))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "IsIndexed":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(204).Constraints
+						.Where(c => !c.IsValid(this, this.IsIndexed))
+						.Select(c => c.GetErrorText(this, this.IsIndexed))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "IsList":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(11).Constraints
+						.Where(c => !c.IsValid(this, this.IsList))
+						.Select(c => c.GetErrorText(this, this.IsList))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "IsNullable":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(26).Constraints
+						.Where(c => !c.IsValid(this, this.IsNullable))
+						.Select(c => c.GetErrorText(this, this.IsNullable))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Module":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(72).Constraints
+						.Where(c => !c.IsValid(this, this.Module))
+						.Select(c => c.GetErrorText(this, this.Module))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ObjectClass":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(8).Constraints
+						.Where(c => !c.IsValid(this, this.ObjectClass))
+						.Select(c => c.GetErrorText(this, this.ObjectClass))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "PropertyName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(9).Constraints
+						.Where(c => !c.IsValid(this, this.PropertyName))
+						.Select(c => c.GetErrorText(this, this.PropertyName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ValueModelDescriptor":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(236).Constraints
+						.Where(c => !c.IsValid(this, this.ValueModelDescriptor))
+						.Select(c => c.GetErrorText(this, this.ValueModelDescriptor))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
         internal Property__Implementation__Frozen(int id)
             : base(id)
         { }

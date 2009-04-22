@@ -163,6 +163,12 @@ namespace Kistl.DALProvider.EF
             UpdateIndex(item, null);
             return base.Remove(item);
         }
+
+        protected override IEnumerable<INTERFACE> GetEnumerable()
+        {
+            return base.GetEnumerable().OrderBy(i => GetIndex(i));
+        }
+
         #endregion
 
         #region IList<INTERFACE> Members

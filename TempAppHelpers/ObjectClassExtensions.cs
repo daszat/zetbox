@@ -13,12 +13,27 @@ namespace Kistl.App.Extensions
     public static partial class ObjectClassExtensions
     {
 
+        private static ILookup<string, ObjectClass> _frozenClasses;
         public static ObjectClass GetObjectClass(this IDataObject obj, Kistl.API.IKistlContext ctx)
         {
             Type type = obj.GetInterfaceType().Type;
-            return ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
-        }
+            IQueryable<ObjectClass> q;
+            if (ctx == FrozenContext.Single)
+            {
+                // cache frozen classes by class name
+                if (_frozenClasses == null)
+                {
+                    _frozenClasses = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.ClassName);
+                }
+                q = _frozenClasses[type.Name].AsQueryable();
+            }
+            else
+            {
+                q = ctx.GetQuery<ObjectClass>();
+            }
 
+            return q.First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
+        }
 
         public static ICollection<ObjectClass> GetObjectHierarchie(this ObjectClass objClass)
         {

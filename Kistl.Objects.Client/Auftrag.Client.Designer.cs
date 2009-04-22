@@ -13,12 +13,13 @@ namespace Kistl.App.Projekte
     using Kistl.API;
 
     using Kistl.API.Client;
+    using Kistl.DalProvider.ClientObjects;
 
     /// <summary>
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Auftrag")]
-    public class Auftrag__Implementation__ : BaseClientDataObject, Auftrag
+    public class Auftrag__Implementation__ : BaseClientDataObject_ClientObjects, Auftrag
     {
     
 		public Auftrag__Implementation__()
@@ -353,6 +354,59 @@ namespace Kistl.App.Projekte
         public event ObjectEventHandler<Auftrag> OnPostSave_Auftrag;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Auftragsname":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(50).Constraints
+						.Where(c => !c.IsValid(this, this.Auftragsname))
+						.Select(c => c.GetErrorText(this, this.Auftragsname))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Auftragswert":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(65).Constraints
+						.Where(c => !c.IsValid(this, this.Auftragswert))
+						.Select(c => c.GetErrorText(this, this.Auftragswert))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Kunde":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(64).Constraints
+						.Where(c => !c.IsValid(this, this.Kunde))
+						.Select(c => c.GetErrorText(this, this.Kunde))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Mitarbeiter":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(49).Constraints
+						.Where(c => !c.IsValid(this, this.Mitarbeiter))
+						.Select(c => c.GetErrorText(this, this.Mitarbeiter))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Projekt":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(51).Constraints
+						.Where(c => !c.IsValid(this, this.Projekt))
+						.Select(c => c.GetErrorText(this, this.Projekt))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void UpdateParent(string propertyName, int? id)
 		{

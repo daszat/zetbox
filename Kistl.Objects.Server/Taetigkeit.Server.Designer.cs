@@ -398,6 +398,59 @@ namespace Kistl.App.Zeiterfassung
         public event ObjectEventHandler<Taetigkeit> OnPostSave_Taetigkeit;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Datum":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(56).Constraints
+						.Where(c => !c.IsValid(this, this.Datum))
+						.Select(c => c.GetErrorText(this, this.Datum))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Dauer":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(57).Constraints
+						.Where(c => !c.IsValid(this, this.Dauer))
+						.Select(c => c.GetErrorText(this, this.Dauer))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Mitarbeiter":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(54).Constraints
+						.Where(c => !c.IsValid(this, this.Mitarbeiter))
+						.Select(c => c.GetErrorText(this, this.Mitarbeiter))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "TaetigkeitsArt":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(88).Constraints
+						.Where(c => !c.IsValid(this, this.TaetigkeitsArt))
+						.Select(c => c.GetErrorText(this, this.TaetigkeitsArt))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Zeitkonto":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(55).Constraints
+						.Where(c => !c.IsValid(this, this.Zeitkonto))
+						.Select(c => c.GetErrorText(this, this.Zeitkonto))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{

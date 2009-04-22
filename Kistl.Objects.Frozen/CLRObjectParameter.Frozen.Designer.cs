@@ -151,6 +151,32 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<CLRObjectParameter> OnPostSave_CLRObjectParameter;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Assembly":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(98).Constraints
+						.Where(c => !c.IsValid(this, this.Assembly))
+						.Select(c => c.GetErrorText(this, this.Assembly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "FullTypeName":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(99).Constraints
+						.Where(c => !c.IsValid(this, this.FullTypeName))
+						.Select(c => c.GetErrorText(this, this.FullTypeName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
         internal CLRObjectParameter__Implementation__Frozen(int id)
             : base(id)
         { }
@@ -285,7 +311,7 @@ namespace Kistl.App.Base
 			DataStore[34].IsList = false;
 			DataStore[34].IsReturnParameter = false;
 			DataStore[34].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
-			DataStore[34].ParameterName = @"constrainedObj";
+			DataStore[34].ParameterName = @"constrainedObject";
 			DataStore[34].Assembly = null;
 			DataStore[34].FullTypeName = @"System.Object";
 			DataStore[34].Seal();

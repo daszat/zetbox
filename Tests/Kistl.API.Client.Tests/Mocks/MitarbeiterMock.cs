@@ -130,12 +130,17 @@ namespace Kistl.App.Projekte
         /// 
         /// </summary>
 
-        public virtual DateTime TestMethodForParameter(System.String TestString, System.Int32 TestInt, System.Double TestDouble, System.Boolean TestBool, System.DateTime TestDateTime, Kistl.App.Projekte.Auftrag TestObjectParameter, System.Guid TestCLRObjectParameter)
+        #endregion
+
+        #region Mitarbeiter Members
+
+
+        public DateTime TestMethodForParameter(bool TestBool, Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Auftrag TestObjectParameter, string TestString)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnTestMethodForParameter_Mitarbeiter != null)
             {
-                OnTestMethodForParameter_Mitarbeiter(this, e, TestString, TestInt, TestDouble, TestBool, TestDateTime, TestObjectParameter, TestCLRObjectParameter);
+                OnTestMethodForParameter_Mitarbeiter(this, e, TestBool, TestCLRObjectParameter, TestDateTime, TestDouble, TestInt, TestObjectParameter, TestString);
             }
             else
             {
@@ -143,7 +148,7 @@ namespace Kistl.App.Projekte
             }
             return e.Result;
         }
-        public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, System.String TestString, System.Int32 TestInt, System.Double TestDouble, System.Boolean TestBool, System.DateTime TestDateTime, Kistl.App.Projekte.Auftrag TestObjectParameter, System.Guid TestCLRObjectParameter);
+        public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, bool TestBool, Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Auftrag TestObjectParameter, string TestString);
         public event TestMethodForParameter_Handler<Mitarbeiter> OnTestMethodForParameter_Mitarbeiter;
 
         #endregion

@@ -34,5 +34,15 @@ namespace Kistl.API.Client.Mocks
         }
 
         #endregion
+
+        public override bool IsValid()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetPropertyError(string prop)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

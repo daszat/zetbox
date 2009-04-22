@@ -22,7 +22,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
         protected override IEnumerable<string> GetAdditionalImports()
         {
-            return base.GetAdditionalImports().Concat(new string[] { "Kistl.API.Client" });
+            return base.GetAdditionalImports().Concat(new string[] { "Kistl.API.Client", "Kistl.DalProvider.ClientObjects" });
         }
 
         protected override string MungeClassName(string name)
@@ -38,7 +38,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             }
             else
             {
-                return "BaseClientDataObject";
+                return "BaseClientDataObject_ClientObjects";
             }
         }
 
