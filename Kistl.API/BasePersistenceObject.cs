@@ -1,26 +1,41 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
-using System.IO;
-
 namespace Kistl.API
 {
-    public abstract class BasePersistenceObject : BaseNotifyingObject, IPersistenceObject
+    using System;
+    using System.IO;
+    using System.Xml;
+
+    /// <summary>
+    /// Implement basic functionality needed by all persistent objects.
+    /// </summary>
+    public abstract class BasePersistenceObject
+        : BaseNotifyingObject, IPersistenceObject
     {
         /// <summary>
-        /// Everyone has an ID
+        /// Gets or sets the primary key of this object. By convention all persistent objects have to have this synthesised primary key.
         /// </summary>
         public abstract int ID { get; set; }
 
-        public bool IsReadonly { get { return _context != null ? _context.IsReadonly : false; ; } }
+        /// <summary>
+        /// Gets a value indicating whether values of this object can be set. This is only a shorthand for asking the context for read-only status.
+        /// </summary>
+        public bool IsReadonly
+        {
+            get { return this.Context != null ? this.Context.IsReadonly : false; }
+        }
 
-        private IKistlContext _context;
-        public IKistlContext Context { get { return _context; } }
+        /// <summary>
+        /// Gets the <see cref="IKistlContext"/> containing this object.
+        /// </summary>
+        public IKistlContext Context { get; private set; }
 
+        /// <summary>
+        /// Gets a value indicating whether or not this object is attached to a context.
+        /// </summary>
         public abstract bool IsAttached { get; }
 
+        /// <summary>
+        /// Gets a value indicating the current state of this object.
+        /// </summary>
         public abstract DataObjectState ObjectState { get; }
 
         /// <summary>
@@ -29,8 +44,10 @@ namespace Kistl.API
         /// <param name="ctx">Context to attach this Object to.</param>
         public virtual void AttachToContext(IKistlContext ctx)
         {
-            if (_context != null && _context != ctx) throw new InvalidOperationException("Object cannot be attached to a new Context while attached to another Context.");
-            _context = ctx;
+            if (this.Context != null && this.Context != ctx)
+                throw new InvalidOperationException("Object cannot be attached to a new Context while attached to another Context.");
+
+            this.Context = ctx;
         }
 
         /// <summary>
@@ -39,15 +56,16 @@ namespace Kistl.API
         /// <param name="ctx">Context to detach this Object from.</param>
         public virtual void DetachFromContext(IKistlContext ctx)
         {
-            if (_context != ctx) throw new InvalidOperationException("Object is not attached to the given context.");
-            _context = null;
-        }
+            if (this.Context != ctx)
+                throw new InvalidOperationException("Object is not attached to the given context.");
 
+            this.Context = null;
+        }
 
         /// <summary>
         /// Applies changes from another IPersistenceObject of the same interface type.
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="obj">the object to copy from</param>
         public virtual void ApplyChangesFrom(IPersistenceObject obj)
         {
             if (obj == null)
@@ -59,16 +77,18 @@ namespace Kistl.API
         }
 
         #region IStreamable Members
+
         /// <summary>
         /// Base method for serializing this Object.
         /// </summary>
         /// <param name="sw">Stream to serialize to</param>
         public virtual void ToStream(BinaryWriter sw)
         {
-            if (sw == null) throw new ArgumentNullException("sw");
+            if (sw == null)
+                throw new ArgumentNullException("sw");
 
             BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
-            BinarySerializer.ToStream(ID, sw);
+            BinarySerializer.ToStream(this.ID, sw);
         }
 
         /// <summary>
@@ -77,8 +97,10 @@ namespace Kistl.API
         /// <param name="sr">Stream to serialize from</param>
         public virtual void FromStream(BinaryReader sr)
         {
-            if (sr == null) throw new ArgumentNullException("sr");
-            if (this.IsAttached) throw new InvalidOperationException("Deserializing attached objects is not allowed");
+            if (sr == null)
+                throw new ArgumentNullException("sr");
+            if (this.IsAttached)
+                throw new InvalidOperationException("Deserializing attached objects is not allowed");
 
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
@@ -86,26 +108,49 @@ namespace Kistl.API
             if (this.GetInterfaceType() != t.GetSystemType())
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
 
-            BinarySerializer.FromStreamConverter(i => ID = i, sr);
+            BinarySerializer.FromStreamConverter(i => this.ID = i, sr);
         }
 
-        public virtual void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        /// <summary>
+        /// Base method for serializing this Object to XML.
+        /// </summary>
+        /// <param name="xml">Stream to serialize to</param>
+        /// <param name="modules">an array of module names to constrain the output</param>
+        public virtual void ToStream(XmlWriter xml, string[] modules)
         {
-            if (xml == null) throw new ArgumentNullException("xml");
-            xml.WriteAttributeString("ID", ID.ToString());
+            if (xml == null)
+                throw new ArgumentNullException("xml");
+
+            xml.WriteAttributeString("ID", this.ID.ToString());
         }
 
-        public virtual void FromStream(System.Xml.XmlReader xml)
+        /// <summary>
+        /// Base method for deserializing this Object to XML.
+        /// </summary>
+        /// <param name="xml">Stream to serialize from</param>
+        public virtual void FromStream(XmlReader xml)
         {
-            if (xml == null) throw new ArgumentNullException("xml");
+            if (xml == null)
+                throw new ArgumentNullException("xml");
+
             // TODO: Da hats was - ist asymetrisch zu FromStream(BinaryReader)
-            if (!this.IsAttached) throw new InvalidOperationException("Xml Deserializing dettached objects is not allowed");
+            if (!this.IsAttached)
+                throw new InvalidOperationException("Xml Deserializing dettached objects is not allowed");
         }
 
-        public virtual void ReloadReferences() { }
+        /// <summary>
+        /// Reloads all references to other objects from the underlying storage. Providers may use this to update internal metadata after deserialisation.
+        /// </summary>
+        public virtual void ReloadReferences()
+        {
+        }
 
         #endregion
 
+        /// <summary>
+        /// Returns the most specific <see cref="InterfaceType"/> implemented by this object.
+        /// </summary>
+        /// <returns>the <see cref="InterfaceType"/> of this object</returns>
         public abstract InterfaceType GetInterfaceType();
     }
 }

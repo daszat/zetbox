@@ -1,9 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-
 namespace Kistl.API
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Xml;
+
     /// <summary>
     /// Data Object State
     /// </summary>
@@ -13,28 +15,48 @@ namespace Kistl.API
         /// Object is new, should be inserted.
         /// </summary>
         New,
+
         /// <summary>
-        /// Object is modified, shoud be updated.
+        /// Object is modified, should be updated.
         /// </summary>
         Modified,
+
         /// <summary>
-        /// Object is unmodified, nothing should be done.
+        /// Object is unmodified, nothing needs to be done.
         /// </summary>
         Unmodified,
+
         /// <summary>
-        /// Object is deleted, should be deleted from the Database, Caches, etc.
+        /// Object is deleted, should be deleted from the data store, caches, etc.
         /// </summary>
         Deleted,
+
         /// <summary>
-        /// The Entity was not deserialied
+        /// The Entity was not deserialized. Used by the 
+        /// BaseServerPersistenceObject to flag objects that were not 
+        /// unpacked from the incoming stream yet.
         /// </summary>
         NotDeserialized,
     }
 
+    /// <summary>
+    /// Describes the possible types of relations between objects.
+    /// </summary>
     public enum RelationType
     {
+        /// <summary>
+        /// 1:N relation
+        /// </summary>
         one_n,
+
+        /// <summary>
+        /// N:M relation
+        /// </summary>
         n_m,
+
+        /// <summary>
+        /// 1:1 relation
+        /// </summary>
         one_one,
     }
 
@@ -43,29 +65,30 @@ namespace Kistl.API
     /// </summary>
     public interface IStreamable
     {
-
         /// <summary>
         /// Serialize this Object to a BinaryWriter
         /// </summary>
         /// <param name="sw">BinaryWriter to serialize to</param>
-        void ToStream(System.IO.BinaryWriter sw);
+        void ToStream(BinaryWriter sw);
+
         /// <summary>
         /// Deserialize this Object from a BinaryReader
         /// </summary>
         /// <param name="sr">BinaryReader to deserialize to.</param>
-        void FromStream(System.IO.BinaryReader sr);
+        void FromStream(BinaryReader sr);
 
         /// <summary>
         /// Serialize this Object to a XmlWriter
         /// </summary>
         /// <param name="xml">XmlWriter to serialize to</param>
         /// <param name="modules">a list of modules to filter the output</param>
-        void ToStream(System.Xml.XmlWriter xml, string[] modules);
+        void ToStream(XmlWriter xml, string[] modules);
+
         /// <summary>
         /// Deserialize this Object from a XmlReader
         /// </summary>
         /// <param name="xml">XmlReader to deserialize to.</param>
-        void FromStream(System.Xml.XmlReader xml);
+        void FromStream(XmlReader xml);
 
         /// <summary>
         /// Reloads Relations from internal storage into the providers caches.
@@ -81,66 +104,68 @@ namespace Kistl.API
     public interface IPersistenceObject : INotifyingObject, IStreamable
     {
         /// <summary>
-        /// Every Object has at least an ID
+        /// Gets the primary key of this object. By convention all persistent objects have to have this synthesised primary key.
         /// </summary>
         int ID { get; }
 
         /// <summary>
-        /// State of this Object.
+        /// Gets a value indicating the current state of this object.
         /// </summary>
         DataObjectState ObjectState { get; }
 
         /// <summary>
+        /// Gets the <see cref="IKistlContext"/> containing this object.
+        /// </summary>
+        IKistlContext Context { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether or not this object is attached to a context.
+        /// </summary>
+        bool IsAttached { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether values of this object can be set. This depends mostly on the state of the containing context.
+        /// </summary>
+        bool IsReadonly { get; }
+
+        /// <summary>
         /// Notifies that a property is beeing changing
         /// </summary>
-        /// <param name="property">Propertyname</param>
-        /// <param name="oldValue">old value of the changing property</param>
-        /// <param name="newValue">new value of the changing property</param>
+        /// <param name="property">the name of the changing property</param>
+        /// <param name="oldValue">the old value of the changing property</param>
+        /// <param name="newValue">the new value of the changing property</param>
         void NotifyPropertyChanging(string property, object oldValue, object newValue);
+
         /// <summary>
         /// Notifies that a property has been changed
         /// </summary>
-        /// <param name="property">Propertyname</param>
-        /// <param name="oldValue">old value of the changed property</param>
-        /// <param name="newValue">new value of the changed property</param>
+        /// <param name="property">the name of the changed property</param>
+        /// <param name="oldValue">the old value of the changed property</param>
+        /// <param name="newValue">the new value of the changed property</param>
         void NotifyPropertyChanged(string property, object oldValue, object newValue);
 
         /// <summary>
-        /// Current Context.
+        /// Attach this object to a context. This method is called by the context.
         /// </summary>
-        IKistlContext Context { get; }
-        /// <summary>
-        /// Attach this Object to a Context. This Method is called by the Context.
-        /// </summary>
-        /// <param name="ctx">Context to attach this Object to.</param>
+        /// <param name="ctx">Context to attach this object to.</param>
         void AttachToContext(IKistlContext ctx);
 
         /// <summary>
-        /// Detach this Object from a Context. This Method is called by the Context.
+        /// Detach this Object from a Context. This method is called by the context.
         /// </summary>
-        /// <param name="ctx">Context to detach this Object from.</param>
+        /// <param name="ctx">Context to detach this object from.</param>
         void DetachFromContext(IKistlContext ctx);
 
         /// <summary>
         /// Applies changes from another IPersistenceObject of the same interface type.
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="obj">the object to copy from</param>
         void ApplyChangesFrom(IPersistenceObject obj);
 
         /// <summary>
-        /// Returns true if this Object is attached to a Context
+        /// Returns the most specific <see cref="InterfaceType"/> implemented by this object.
         /// </summary>
-        bool IsAttached { get; }
-
-        /// <summary>
-        /// Returns true if this Object is readonly
-        /// </summary>
-        bool IsReadonly { get; }
-
-        /// <summary>
-        /// Returns the most specific implemented IDataObject interface
-        /// </summary>
-        /// <returns></returns>
+        /// <returns>the <see cref="InterfaceType"/> of this object</returns>
         InterfaceType GetInterfaceType();
     }
 
@@ -153,6 +178,7 @@ namespace Kistl.API
         /// Fires an Event before an Object is saved.
         /// </summary>
         void NotifyPreSave();
+
         /// <summary>
         /// Fires an Event after an Object is saved.
         /// </summary>
@@ -165,15 +191,25 @@ namespace Kistl.API
     /// Supports <see cref="ICloneable"/>, because structs don't have a independent identity and thus can be copied freely.
     public interface IStruct : INotifyingObject, IStreamable, ICloneable
     {
-        void AttachToObject(IPersistenceObject obj, string property);
-        void DetachFromObject(IPersistenceObject obj, string property);
-
         /// <summary>
-        /// Returns true if this Object is readonly
+        /// Gets a value indicating whether values of this object can be set. This mostly depends on the state of the containing object.
         /// </summary>
         bool IsReadonly { get; }
-    }
 
+        /// <summary>
+        /// Attaches this struct to the specified object on the specified property.
+        /// </summary>
+        /// <param name="obj">the object to attach to</param>
+        /// <param name="property">the property to attach to</param>
+        void AttachToObject(IPersistenceObject obj, string property);
+
+        /// <summary>
+        /// Detaches this struct from the specified object on the specified property.
+        /// </summary>
+        /// <param name="obj">the object to detach from</param>
+        /// <param name="property">the property to detach from</param>
+        void DetachFromObject(IPersistenceObject obj, string property);
+    }
 
     /// <summary>
     /// XML Collection Interface. Used to serialize collection of Objects to XML. Implemented by the Generator.
@@ -181,7 +217,7 @@ namespace Kistl.API
     public interface IXmlObjectCollection
     {
         /// <summary>
-        /// List of Objects
+        /// Gets a list of Objects
         /// </summary>
         List<object> Objects { get; }
     }
@@ -192,24 +228,25 @@ namespace Kistl.API
     public interface IXmlObject
     {
         /// <summary>
-        /// Object to serialize.
+        /// Gets or sets the object to serialize.
         /// </summary>
         object Object { get; set; }
     }
 
     /// <summary>
-    /// Return Arguments for a Method Call Event
+    /// Return event arguments for a method call event.
     /// </summary>
+    /// <typeparam name="T">the type of the return value</typeparam>
     public class MethodReturnEventArgs<T>
     {
         /// <summary>
-        /// Result of the Method Call
+        /// Gets or sets the result of the method call. This can be modified multiple times while handling the event.
         /// </summary>
         public T Result { get; set; }
     }
 
     /// <summary>
-    /// ToString Event Delegate. Wird von den Datenobjekten gefeuert
+    /// ToString delegate. Is triggered by IDataObject implementors.
     /// </summary>
     /// <typeparam name="T">Type of the implementing Object.</typeparam>
     /// <param name="obj">Object that has fired this Event.</param>
@@ -217,7 +254,7 @@ namespace Kistl.API
     public delegate void ToStringHandler<T>(T obj, MethodReturnEventArgs<string> e) where T : IDataObject;
 
     /// <summary>
-    /// Handler for Custom Save Events. TODO: Außer SetObject hat's noch niemand implementiert.
+    /// Handler for custom save events. TODO: Außer SetObject hat's noch niemand implementiert.
     /// </summary>
     /// <typeparam name="T">Type of the implementing Object.</typeparam>
     /// <param name="obj">>Object that has fired this Event.</param>
