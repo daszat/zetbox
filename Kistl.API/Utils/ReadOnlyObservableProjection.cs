@@ -57,24 +57,24 @@ namespace Kistl.API.Utils
                         e.NewStartingIndex));
                     break;
                 case NotifyCollectionChangedAction.Move:
-                    CollectionChanged(this, new NotifyCollectionChangedEventArgs(e.Action,
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
                         e.NewItems.Cast<TInput>().Select(this.Selector).ToList(),
                         e.NewStartingIndex,
                         e.OldStartingIndex));
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    CollectionChanged(this, new NotifyCollectionChangedEventArgs(e.Action,
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
                         e.OldItems.Cast<TInput>().Select(this.Selector).ToList(),
                         e.OldStartingIndex));
                     break;
                 case NotifyCollectionChangedAction.Replace:
-                    CollectionChanged(this, new NotifyCollectionChangedEventArgs(e.Action,
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
                         e.NewItems.Cast<TInput>().Select(this.Selector).ToList(),
                         e.OldItems.Cast<TInput>().Select(this.Selector).ToList(),
                         e.NewStartingIndex));
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    CollectionChanged(this, new NotifyCollectionChangedEventArgs(e.Action));
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action));
                     break;
                 default:
                     throw new InvalidOperationException(String.Format("Unknown NotifyCollectionChangedAction: {0}", e.Action));
