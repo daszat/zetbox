@@ -25,11 +25,6 @@ namespace Kistl.App.Projekte
 			set;
 		}
         /// <summary>
-        /// Kostenträger
-        /// </summary>
-
-        ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger { get; }
-        /// <summary>
         /// Bitte geben Sie den Kundennamen ein
         /// </summary>
 		string Kundenname {

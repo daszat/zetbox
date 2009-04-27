@@ -182,7 +182,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(72);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(70);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
@@ -230,14 +230,8 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[51] = 
 			DataStore[51] = new ObjectReferenceProperty__Implementation__Frozen(51);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[53] = 
-			DataStore[53] = new ObjectReferenceProperty__Implementation__Frozen(53);
-
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[64] = 
 			DataStore[64] = new ObjectReferenceProperty__Implementation__Frozen(64);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[66] = 
-			DataStore[66] = new ObjectReferenceProperty__Implementation__Frozen(66);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[67] = 
 			DataStore[67] = new ObjectReferenceProperty__Implementation__Frozen(67);
@@ -617,21 +611,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[51].ValueModelDescriptor = null;
 			DataStore[51].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
 			DataStore[51].Seal();
-			DataStore[53].AltText = @"Projekt des Kostenträgers";
-			DataStore[53].CategoryTags = null;
-			DataStore[53].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[135],
-});
-			DataStore[53].Description = @"Projekt des Kostenträgers";
-			DataStore[53].IsIndexed = false;
-			DataStore[53].IsList = false;
-			DataStore[53].IsNullable = false;
-			DataStore[53].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[53].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[23];
-			DataStore[53].PropertyName = @"Projekt";
-			DataStore[53].ValueModelDescriptor = null;
-			DataStore[53].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
-			DataStore[53].Seal();
 			DataStore[64].AltText = @"Kunde des Projektes";
 			DataStore[64].CategoryTags = null;
 			DataStore[64].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
@@ -646,20 +625,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[135],
 			DataStore[64].ValueModelDescriptor = null;
 			DataStore[64].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
 			DataStore[64].Seal();
-			DataStore[66].AltText = @"Kostenträger";
-			DataStore[66].CategoryTags = null;
-			DataStore[66].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[66].Description = @"Kostenträger";
-			DataStore[66].IsIndexed = false;
-			DataStore[66].IsList = true;
-			DataStore[66].IsNullable = true;
-			DataStore[66].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[66].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
-			DataStore[66].PropertyName = @"Kostentraeger";
-			DataStore[66].ValueModelDescriptor = null;
-			DataStore[66].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[23];
-			DataStore[66].Seal();
 			DataStore[67].AltText = @"Aufträge";
 			DataStore[67].CategoryTags = null;
 			DataStore[67].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
@@ -822,7 +787,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[82].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
 			DataStore[82].Seal();
 			DataStore[86].AltText = @"Zugeordnete Mitarbeiter";
-			DataStore[86].CategoryTags = null;
+			DataStore[86].CategoryTags = @"Main";
 			DataStore[86].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[86].Description = @"Zugeordnete Mitarbeiter";

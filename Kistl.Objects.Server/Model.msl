@@ -134,16 +134,6 @@
 <ScalarProperty Name="Notizen" ColumnName="Notizen" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Kostenstelle)">
-	    <MappingFragment StoreEntitySet="Kostenstelle">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Kostentraeger)">
-	    <MappingFragment StoreEntitySet="Kostentraeger">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Kunde">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde)">
@@ -1161,23 +1151,6 @@
         <ScalarProperty Name="ID" ColumnName="fk_Projekt"/>
       </EndProperty>
       <EndProperty Name="Auftraege">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Projekt" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Projekt_Kostentraeger_Projekt_31
-    A: One Projekt as Projekt
-    B: ZeroOrMore Kostentraeger as Kostentraeger
-    Preferred Storage: Right
-    -->
-    <AssociationSetMapping Name="FK_Projekt_Kostentraeger_Projekt_31"
-                           TypeName="Model.FK_Projekt_Kostentraeger_Projekt_31"
-                           StoreEntitySet="Kostentraeger" >
-      <EndProperty Name="Projekt">
-        <ScalarProperty Name="ID" ColumnName="fk_Projekt"/>
-      </EndProperty>
-      <EndProperty Name="Kostentraeger">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Projekt" IsNull="false"/>

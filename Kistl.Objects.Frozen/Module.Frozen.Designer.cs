@@ -318,10 +318,8 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19],
 			DataStore[2].Seal();
 			DataStore[3].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0) {
 });
-			DataStore[3].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(3) {
+			DataStore[3].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(1) {
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[23],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[21],
 });
 			DataStore[3].Description = null;
 			DataStore[3].ModuleName = @"Zeiterfassung";

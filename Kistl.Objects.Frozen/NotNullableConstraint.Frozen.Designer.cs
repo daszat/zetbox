@@ -108,7 +108,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(74);
+		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(73);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74] = 
@@ -275,9 +275,6 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[134] = 
 			DataStore[134] = new NotNullableConstraint__Implementation__Frozen(134);
-
-			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[135] = 
-			DataStore[135] = new NotNullableConstraint__Implementation__Frozen(135);
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[136] = 
 			DataStore[136] = new NotNullableConstraint__Implementation__Frozen(136);
@@ -501,9 +498,6 @@ namespace Kistl.App.Base
 			DataStore[134].ConstrainedProperty = null;
 			DataStore[134].Reason = null;
 			DataStore[134].Seal();
-			DataStore[135].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[53];
-			DataStore[135].Reason = null;
-			DataStore[135].Seal();
 			DataStore[136].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[52];
 			DataStore[136].Reason = null;
 			DataStore[136].Seal();

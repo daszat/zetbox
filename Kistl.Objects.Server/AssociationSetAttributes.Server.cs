@@ -416,21 +416,6 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_Projekt_Kostentraeger_Projekt_31
-    A: One Projekt as Projekt
-    B: ZeroOrMore Kostentraeger as Kostentraeger
-    Preferred Storage: Right
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Projekt_Kostentraeger_Projekt_31",
-    "Projekt", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Projekt__Implementation__),
-    "Kostentraeger", RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Kostentraeger__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_Projekt_Mitarbeiter_Projekte_23
     A: ZeroOrMore Projekt as Projekte
     B: ZeroOrMore Mitarbeiter as Mitarbeiter

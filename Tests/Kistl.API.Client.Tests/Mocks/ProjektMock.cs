@@ -60,30 +60,6 @@ namespace Kistl.App.Projekte
         private double? _AufwandGes;
 
         /// <summary>
-        /// Kostenträger
-        /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
-        {
-            get
-            {
-                if (_KostentraegerWrapper == null)
-                {
-                    _KostentraegerWrapper = new OneNRelationCollection<Kistl.App.Zeiterfassung.Kostentraeger>(
-                        "Projekt",
-                        this,
-                        new List<Kistl.App.Zeiterfassung.Kostentraeger>());
-                }
-                return _KostentraegerWrapper;
-            }
-        }
-
-        private OneNRelationCollection<Kistl.App.Zeiterfassung.Kostentraeger> _KostentraegerWrapper;
-
-        /// <summary>
         /// Bitte geben Sie den Kundennamen ein
         /// </summary>
         // value type property

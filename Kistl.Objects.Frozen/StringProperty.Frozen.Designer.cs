@@ -580,7 +580,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[179],
 			DataStore[50].Length = 200;
 			DataStore[50].Seal();
 			DataStore[52].AltText = @"Name des Zeiterfassungskontos";
-			DataStore[52].CategoryTags = null;
+			DataStore[52].CategoryTags = @"Summary,Main";
 			DataStore[52].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[136],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[178],

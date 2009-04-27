@@ -24,26 +24,6 @@ namespace Kistl.App.Zeiterfassung
 			}
 		}
 		
-		/// <summary>List of all Kostentraeger</summary>
-		/// 
-		public IQueryable<Kostentraeger> Kostentraeger
-		{ 
-			get
-			{
-				return Context.GetQuery<Kostentraeger>();
-			}
-		}
-		
-		/// <summary>List of all Kostenstelle</summary>
-		/// 
-		public IQueryable<Kostenstelle> Kostenstellen
-		{ 
-			get
-			{
-				return Context.GetQuery<Kostenstelle>();
-			}
-		}
-		
 	
 	}
 	

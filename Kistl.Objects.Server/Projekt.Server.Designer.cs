@@ -127,53 +127,6 @@ namespace Kistl.App.Projekte
         private double? _AufwandGes;
 
         /// <summary>
-        /// Kostenträger
-        /// </summary>
-    /*
-    Relation: FK_Projekt_Kostentraeger_Projekt_31
-    A: One Projekt as Projekt
-    B: ZeroOrMore Kostentraeger as Kostentraeger
-    Preferred Storage: Right
-    */
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
-        {
-            get
-            {
-                if (_KostentraegerWrapper == null)
-                {
-                    _KostentraegerWrapper = new EntityCollectionWrapper<Kistl.App.Zeiterfassung.Kostentraeger, Kistl.App.Zeiterfassung.Kostentraeger__Implementation__>(
-                            this.Context, Kostentraeger__Implementation__);
-                }
-                return _KostentraegerWrapper;
-            }
-        }
-        
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Kostentraeger_Projekt_31", "Kostentraeger")]
-        public EntityCollection<Kistl.App.Zeiterfassung.Kostentraeger__Implementation__> Kostentraeger__Implementation__
-        {
-            get
-            {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Zeiterfassung.Kostentraeger__Implementation__>(
-                        "Model.FK_Projekt_Kostentraeger_Projekt_31",
-                        "Kostentraeger");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
-            }
-        }
-        private EntityCollectionWrapper<Kistl.App.Zeiterfassung.Kostentraeger, Kistl.App.Zeiterfassung.Kostentraeger__Implementation__> _KostentraegerWrapper;
-
-
-
-        /// <summary>
         /// Bitte geben Sie den Kundennamen ein
         /// </summary>
         // value type property
@@ -386,15 +339,6 @@ namespace Kistl.App.Projekte
 					var errors = Context.Find<Kistl.App.Base.Property>(23).Constraints
 						.Where(c => !c.IsValid(this, this.AufwandGes))
 						.Select(c => c.GetErrorText(this, this.AufwandGes))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Kostentraeger":
-				{
-					var errors = Context.Find<Kistl.App.Base.Property>(66).Constraints
-						.Where(c => !c.IsValid(this, this.Kostentraeger))
-						.Select(c => c.GetErrorText(this, this.Kostentraeger))
 						.ToArray();
 					
 					return String.Join("; ", errors);

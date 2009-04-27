@@ -84,36 +84,6 @@ namespace Kistl.App.Projekte
         private double? _AufwandGes;
 
         /// <summary>
-        /// Kostenträger
-        /// </summary>
-        // object list property
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Zeiterfassung.Kostentraeger> Kostentraeger
-        {
-            get
-            {
-                if (_KostentraegerWrapper == null)
-                {
-                    List<Kistl.App.Zeiterfassung.Kostentraeger> serverList;
-                    if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Zeiterfassung.Kostentraeger>(this, "Kostentraeger");
-                    else
-                        serverList = new List<Kistl.App.Zeiterfassung.Kostentraeger>();
-                        
-                    _KostentraegerWrapper = new OneNRelationCollection<Kistl.App.Zeiterfassung.Kostentraeger>(
-                        "Projekt",
-                        this,
-                        serverList);
-                }
-                return _KostentraegerWrapper;
-            }
-        }
-        
-        private OneNRelationCollection<Kistl.App.Zeiterfassung.Kostentraeger> _KostentraegerWrapper;
-
-        /// <summary>
         /// Bitte geben Sie den Kundennamen ein
         /// </summary>
         // value type property
@@ -284,15 +254,6 @@ namespace Kistl.App.Projekte
 					var errors = Context.Find<Kistl.App.Base.Property>(23).Constraints
 						.Where(c => !c.IsValid(this, this.AufwandGes))
 						.Select(c => c.GetErrorText(this, this.AufwandGes))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Kostentraeger":
-				{
-					var errors = Context.Find<Kistl.App.Base.Property>(66).Constraints
-						.Where(c => !c.IsValid(this, this.Kostentraeger))
-						.Select(c => c.GetErrorText(this, this.Kostentraeger))
 						.ToArray();
 					
 					return String.Join("; ", errors);

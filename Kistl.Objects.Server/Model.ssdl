@@ -95,20 +95,6 @@
       <End Role="B_DateTimeProperty" EntitySet="DateTimeProperty" />
     </AssociationSet>
     
-    <EntitySet Name="Kostenstelle" EntityType="Model.Store.Kostenstelle" Table="Kostenstellen"/>
-    <!-- inherits from Zeitkonto -->
-    <AssociationSet Name="FK_Kostenstelle_Zeitkonto_ID" Association="Model.Store.FK_Kostenstelle_Zeitkonto_ID" >
-      <End Role="A_Zeitkonto" EntitySet="Zeitkonto" />
-      <End Role="B_Kostenstelle" EntitySet="Kostenstelle" />
-    </AssociationSet>
-    
-    <EntitySet Name="Kostentraeger" EntityType="Model.Store.Kostentraeger" Table="Kostentraeger"/>
-    <!-- inherits from Zeitkonto -->
-    <AssociationSet Name="FK_Kostentraeger_Zeitkonto_ID" Association="Model.Store.FK_Kostentraeger_Zeitkonto_ID" >
-      <End Role="A_Zeitkonto" EntitySet="Zeitkonto" />
-      <End Role="B_Kostentraeger" EntitySet="Kostentraeger" />
-    </AssociationSet>
-    
     <EntitySet Name="StringParameter" EntityType="Model.Store.StringParameter" Table="StringParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_StringParameter_BaseParameter_ID" Association="Model.Store.FK_StringParameter_BaseParameter_ID" >
@@ -456,10 +442,6 @@
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Auftraege" EntitySet="Auftrag" />
     </AssociationSet>
-    <AssociationSet Name="FK_Projekt_Kostentraeger_Projekt_31" Association="Model.Store.FK_Projekt_Kostentraeger_Projekt_31" >
-      <End Role="Projekt" EntitySet="Projekt" />
-      <End Role="Kostentraeger" EntitySet="Kostentraeger" />
-    </AssociationSet>
     <AssociationSet Name="FK_Projekt_Task_Projekt_22" Association="Model.Store.FK_Projekt_Task_Projekt_22" >
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Tasks" EntitySet="Task" />
@@ -703,21 +685,6 @@
     <Property Name="MaxStunden" Type="float" Nullable="true" />
     <Property Name="AktuelleStunden" Type="float" Nullable="true" />
     <Property Name="Notizen" Type="nvarchar" MaxLength="4000" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Kostenstelle">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Kostentraeger">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_Projekt" Type="int" />
   </EntityType>
 	
   <EntityType Name="Kunde">
@@ -1752,21 +1719,6 @@
   </Association>
 
 
-  <Association Name="FK_Projekt_Kostentraeger_Projekt_31">
-    <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Kostentraeger" Type="Model.Store.Kostentraeger" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Projekt">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Kostentraeger">
-        <PropertyRef Name="fk_Projekt" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_Projekt_Task_Projekt_22">
     <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2131,30 +2083,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_DateTimeProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Kostenstelle_Zeitkonto_ID">
-    <End Role="A_Zeitkonto" Type="Model.Store.Zeitkonto" Multiplicity="1" />
-    <End Role="B_Kostenstelle" Type="Model.Store.Kostenstelle" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_Zeitkonto">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_Kostenstelle">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Kostentraeger_Zeitkonto_ID">
-    <End Role="A_Zeitkonto" Type="Model.Store.Zeitkonto" Multiplicity="1" />
-    <End Role="B_Kostentraeger" Type="Model.Store.Kostentraeger" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_Zeitkonto">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_Kostentraeger">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

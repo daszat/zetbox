@@ -210,10 +210,6 @@
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Auftraege" EntitySet="Auftrag" />
     </AssociationSet>
-    <AssociationSet Name="FK_Projekt_Kostentraeger_Projekt_31" Association="Model.FK_Projekt_Kostentraeger_Projekt_31" >
-      <End Role="Projekt" EntitySet="Projekt" />
-      <End Role="Kostentraeger" EntitySet="Zeitkonto" />
-    </AssociationSet>
     <AssociationSet Name="FK_Projekt_Task_Projekt_22" Association="Model.FK_Projekt_Task_Projekt_22" >
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Tasks" EntitySet="Task" />
@@ -568,10 +564,6 @@
                         Relationship="Model.FK_Projekt_Auftrag_Projekt_30"
                         FromRole="Projekt"
                         ToRole="Auftraege" />
-    <NavigationProperty Name="Kostentraeger__Implementation__"
-                        Relationship="Model.FK_Projekt_Kostentraeger_Projekt_31"
-                        FromRole="Projekt"
-                        ToRole="Kostentraeger" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="100" />
     <Property Name="AufwandGes" Type="Double" Nullable="true" />
     <Property Name="Kundenname" Type="String" Nullable="true" MaxLength="100" />
@@ -827,14 +819,6 @@
   <EntityType Name="IsValidIdentifierConstraint" BaseType="Model.Constraint" >
   </EntityType>
   <EntityType Name="IsValidNamespaceConstraint" BaseType="Model.IsValidIdentifierConstraint" >
-  </EntityType>
-  <EntityType Name="Kostenstelle" BaseType="Model.Zeitkonto" >
-  </EntityType>
-  <EntityType Name="Kostentraeger" BaseType="Model.Zeitkonto" >
-    <NavigationProperty Name="Projekt__Implementation__"
-                        Relationship="Model.FK_Projekt_Kostentraeger_Projekt_31"
-                        FromRole="Kostentraeger"
-                        ToRole="Projekt" />
   </EntityType>
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint" >
   </EntityType>
@@ -1427,14 +1411,6 @@
          Multiplicity="0..1" />
     <End Role="Auftraege"
          Type="Model.Auftrag" 
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Projekt_Kostentraeger_Projekt_31" >
-    <End Role="Projekt"
-         Type="Model.Projekt" 
-         Multiplicity="0..1" />
-    <End Role="Kostentraeger"
-         Type="Model.Kostentraeger" 
          Multiplicity="*" />
   </Association>
   <Association Name="FK_Projekt_Task_Projekt_22" >

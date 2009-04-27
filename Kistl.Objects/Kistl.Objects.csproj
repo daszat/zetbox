@@ -64,8 +64,6 @@
     <Compile Include="IntProperty.Interface.Designer.cs" />
     <Compile Include="IsValidIdentifierConstraint.Interface.Designer.cs" />
     <Compile Include="IsValidNamespaceConstraint.Interface.Designer.cs" />
-    <Compile Include="Kostenstelle.Interface.Designer.cs" />
-    <Compile Include="Kostentraeger.Interface.Designer.cs" />
     <Compile Include="Kunde.Interface.Designer.cs" />
     <Compile Include="LastTest.Interface.Designer.cs" />
     <Compile Include="Method.Interface.Designer.cs" />

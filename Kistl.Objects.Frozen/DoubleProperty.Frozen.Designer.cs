@@ -174,7 +174,7 @@ namespace Kistl.App.Base
 			DataStore[65].ValueModelDescriptor = null;
 			DataStore[65].Seal();
 			DataStore[89].AltText = @"Maximal erlaubte Stundenanzahl";
-			DataStore[89].CategoryTags = null;
+			DataStore[89].CategoryTags = @"Summary,Main";
 			DataStore[89].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[89].Description = @"Maximal erlaubte Stundenanzahl";
@@ -187,7 +187,7 @@ namespace Kistl.App.Base
 			DataStore[89].ValueModelDescriptor = null;
 			DataStore[89].Seal();
 			DataStore[90].AltText = @"Aktuell gebuchte Stunden";
-			DataStore[90].CategoryTags = null;
+			DataStore[90].CategoryTags = @"Summary,Main";
 			DataStore[90].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[90].Description = @"Aktuell gebuchte Stunden";
