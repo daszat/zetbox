@@ -111,7 +111,7 @@ namespace Kistl.App.Base
         public void OnToString_Method(Kistl.App.Base.Method obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?
-            if (Helper.IsPersistedObject(obj))
+            if (obj.ObjectClass != null && obj.Module != null)
             {
                 e.Result = obj.ObjectClass.Module.Namespace + "." +
                                 obj.ObjectClass.ClassName + "." + obj.MethodName;
@@ -177,7 +177,7 @@ namespace Kistl.App.Base
                  * Currently this goes to the Database once per TypeRef
                  * TODO: re-enable that, when GenericArguments is loaded eagerly. 
                  */
-                (obj.GenericArguments.Count > 0 
+                (obj.GenericArguments.Count > 0
                     ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.ToString()).ToArray()) + ">"
                     : "")
                             ,
