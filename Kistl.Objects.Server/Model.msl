@@ -437,6 +437,15 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ArbeitszeitEintrag">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ArbeitszeitEintrag)">
+	    <MappingFragment StoreEntitySet="ArbeitszeitEintrag">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Anfang" ColumnName="Anfang" />
+<ScalarProperty Name="Ende" ColumnName="Ende" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
 
 
     <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->
@@ -713,6 +722,23 @@
 
 
     <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->
+    <!--
+    Relation: FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81
+    A: ZeroOrMore ArbeitszeitEintrag as Arbeitszeit
+    B: One Mitarbeiter as Mitarbeiter
+    Preferred Storage: Left
+    -->
+    <AssociationSetMapping Name="FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81"
+                           TypeName="Model.FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81"
+                           StoreEntitySet="ArbeitszeitEintrag" >
+      <EndProperty Name="Mitarbeiter">
+        <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter"/>
+      </EndProperty>
+      <EndProperty Name="Arbeitszeit">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
+    </AssociationSetMapping>
     <!--
     Relation: FK_Auftrag_Kunde_Auftrag_34
     A: ZeroOrMore Auftrag as Auftrag

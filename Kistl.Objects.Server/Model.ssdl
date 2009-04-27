@@ -37,6 +37,7 @@
     <EntitySet Name="RelationEnd" EntityType="Model.Store.RelationEnd" Table="RelationEnds"/>
     <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Table="ViewDescriptors"/>
     <EntitySet Name="PresentableModelDescriptor" EntityType="Model.Store.PresentableModelDescriptor" Table="PresentableModelDescriptors"/>
+    <EntitySet Name="ArbeitszeitEintrag" EntityType="Model.Store.ArbeitszeitEintrag" Table="ArbeitszeitEinträge"/>
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
     <EntitySet Name="ObjectClass" EntityType="Model.Store.ObjectClass" Table="ObjectClasses"/>
@@ -338,6 +339,10 @@
 
 
     <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->
+    <AssociationSet Name="FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81" Association="Model.Store.FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81" >
+      <End Role="Arbeitszeit" EntitySet="ArbeitszeitEintrag" />
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+    </AssociationSet>
     <AssociationSet Name="FK_Auftrag_Kunde_Auftrag_34" Association="Model.Store.FK_Auftrag_Kunde_Auftrag_34" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Kunde" EntitySet="Kunde" />
@@ -1053,6 +1058,16 @@
     <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="DefaultVisualType" Type="int" Nullable="false" />
   </EntityType>
+	
+  <EntityType Name="ArbeitszeitEintrag">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Anfang" Type="datetime" Nullable="false" />
+    <Property Name="Ende" Type="datetime" Nullable="false" />
+    <Property Name="fk_Mitarbeiter" Type="int" />
+  </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
 	
@@ -1328,6 +1343,21 @@
 
 
   <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->
+
+  <Association Name="FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81">
+    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Arbeitszeit" Type="Model.Store.ArbeitszeitEintrag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mitarbeiter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Arbeitszeit">
+        <PropertyRef Name="fk_Mitarbeiter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
 
   <Association Name="FK_Auftrag_Kunde_Auftrag_34">
     <End Role="Kunde" Type="Model.Store.Kunde" Multiplicity="0..1" />

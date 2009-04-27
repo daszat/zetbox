@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnotherTest.Client.Designer.cs" />
+    <Compile Include="ArbeitszeitEintrag.Client.Designer.cs" />
     <Compile Include="Assembly.Client.Designer.cs" />
     <Compile Include="Auftrag.Client.Designer.cs" />
     <Compile Include="BaseParameter.Client.Designer.cs" />

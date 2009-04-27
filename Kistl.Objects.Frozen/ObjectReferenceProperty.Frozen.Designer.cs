@@ -182,7 +182,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(70);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(71);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
@@ -395,6 +395,9 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[236] = 
 			DataStore[236] = new ObjectReferenceProperty__Implementation__Frozen(236);
 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[244] = 
+			DataStore[244] = new ObjectReferenceProperty__Implementation__Frozen(244);
+
 		}
 
 		internal new static void FillDataStore() {
@@ -576,7 +579,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[46].Description = @"Pointer zur Objektklasse";
 			DataStore[46].IsIndexed = false;
 			DataStore[46].IsList = false;
-			DataStore[46].IsNullable = false;
+			DataStore[46].IsNullable = true;
 			DataStore[46].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[46].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
 			DataStore[46].PropertyName = @"ReferenceObjectClass";
@@ -1138,7 +1141,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74],
 			DataStore[171].Seal();
 			DataStore[206].AltText = @"The assembly containing the referenced Type.";
 			DataStore[206].CategoryTags = null;
-			DataStore[206].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[206].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[242],
 });
 			DataStore[206].Description = @"The assembly containing the referenced Type.";
 			DataStore[206].IsIndexed = false;
@@ -1166,7 +1170,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74],
 			DataStore[207].Seal();
 			DataStore[208].AltText = @"The Type implementing this invocation";
 			DataStore[208].CategoryTags = null;
-			DataStore[208].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[208].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[241],
 });
 			DataStore[208].Description = @"The Type implementing this invocation";
 			DataStore[208].IsIndexed = false;
@@ -1254,7 +1259,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[214].Seal();
 			DataStore[215].AltText = @"Specifies which type this End of the relation has. MUST NOT be null.";
 			DataStore[215].CategoryTags = null;
-			DataStore[215].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[215].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[240],
 });
 			DataStore[215].Description = @"Specifies which type this End of the relation has. MUST NOT be null.";
 			DataStore[215].IsIndexed = false;
@@ -1282,12 +1288,13 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[218].Seal();
 			DataStore[222].AltText = null;
 			DataStore[222].CategoryTags = null;
-			DataStore[222].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[222].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[235],
 });
 			DataStore[222].Description = @"The RelationEnd describing this Property";
 			DataStore[222].IsIndexed = false;
 			DataStore[222].IsList = false;
-			DataStore[222].IsNullable = true;
+			DataStore[222].IsNullable = false;
 			DataStore[222].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[222].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
 			DataStore[222].PropertyName = @"RelationEnd";
@@ -1324,7 +1331,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[224].Seal();
 			DataStore[226].AltText = null;
 			DataStore[226].CategoryTags = @"Main";
-			DataStore[226].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[226].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[234],
 });
 			DataStore[226].Description = @"The PresentableModel usable by this View";
 			DataStore[226].IsIndexed = false;
@@ -1338,7 +1346,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[226].Seal();
 			DataStore[227].AltText = null;
 			DataStore[227].CategoryTags = @"Main";
-			DataStore[227].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[227].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[233],
 });
 			DataStore[227].Description = @"The control implementing this View";
 			DataStore[227].IsIndexed = false;
@@ -1352,7 +1361,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[227].Seal();
 			DataStore[231].AltText = null;
 			DataStore[231].CategoryTags = @"Main";
-			DataStore[231].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[231].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[230],
 });
 			DataStore[231].Description = @"The described CLR class' reference";
 			DataStore[231].IsIndexed = false;
@@ -1366,7 +1376,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[231].Seal();
 			DataStore[234].AltText = null;
 			DataStore[234].CategoryTags = @"Main";
-			DataStore[234].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[234].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[227],
 });
 			DataStore[234].Description = @"The default PresentableModel to use for this ObjectClass";
 			DataStore[234].IsIndexed = false;
@@ -1380,7 +1391,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[234].Seal();
 			DataStore[235].AltText = null;
 			DataStore[235].CategoryTags = null;
-			DataStore[235].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[235].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[226],
 });
 			DataStore[235].Description = @"The TypeRef of the BaseClass of the referenced Type";
 			DataStore[235].IsIndexed = false;
@@ -1394,7 +1406,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[235].Seal();
 			DataStore[236].AltText = null;
 			DataStore[236].CategoryTags = @"Main";
-			DataStore[236].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[236].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[225],
 });
 			DataStore[236].Description = @"The PresentableModel to use for values of this Property";
 			DataStore[236].IsIndexed = false;
@@ -1406,6 +1419,20 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[236].ValueModelDescriptor = null;
 			DataStore[236].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[85];
 			DataStore[236].Seal();
+			DataStore[244].AltText = null;
+			DataStore[244].CategoryTags = @"Summary";
+			DataStore[244].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[244].Description = @"Welcher Mitarbeiter diese Arbeitszeit geleistet hat.";
+			DataStore[244].IsIndexed = false;
+			DataStore[244].IsList = false;
+			DataStore[244].IsNullable = true;
+			DataStore[244].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[244].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
+			DataStore[244].PropertyName = @"Mitarbeiter";
+			DataStore[244].ValueModelDescriptor = null;
+			DataStore[244].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
+			DataStore[244].Seal();
 	
 		}
 #region Serializer

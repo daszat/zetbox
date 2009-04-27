@@ -248,8 +248,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[150],
 			DataStore[173].Seal();
 			DataStore[217].AltText = @"Which RelationEndRole this End has";
 			DataStore[217].CategoryTags = null;
-			DataStore[217].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+			DataStore[217].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[216],
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[238],
 });
 			DataStore[217].Description = @"Which RelationEndRole this End has";
 			DataStore[217].IsIndexed = false;

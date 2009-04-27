@@ -182,7 +182,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, StringRangeConstraint__Implementation__Frozen> DataStore = new Dictionary<int, StringRangeConstraint__Implementation__Frozen>(47);
+		internal new static Dictionary<int, StringRangeConstraint__Implementation__Frozen> DataStore = new Dictionary<int, StringRangeConstraint__Implementation__Frozen>(52);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[152] = 
@@ -325,6 +325,21 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209] = 
 			DataStore[209] = new StringRangeConstraint__Implementation__Frozen(209);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[217] = 
+			DataStore[217] = new StringRangeConstraint__Implementation__Frozen(217);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[218] = 
+			DataStore[218] = new StringRangeConstraint__Implementation__Frozen(218);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[219] = 
+			DataStore[219] = new StringRangeConstraint__Implementation__Frozen(219);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[220] = 
+			DataStore[220] = new StringRangeConstraint__Implementation__Frozen(220);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[221] = 
+			DataStore[221] = new StringRangeConstraint__Implementation__Frozen(221);
 
 		}
 
@@ -541,7 +556,7 @@ namespace Kistl.App.Base
 			DataStore[204].Seal();
 			DataStore[205].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[177];
 			DataStore[205].Reason = null;
-			DataStore[205].MaxLength = 600;
+			DataStore[205].MaxLength = 200;
 			DataStore[205].MinLength = 0;
 			DataStore[205].Seal();
 			DataStore[206].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[176];
@@ -564,6 +579,31 @@ namespace Kistl.App.Base
 			DataStore[209].MaxLength = 200;
 			DataStore[209].MinLength = 0;
 			DataStore[209].Seal();
+			DataStore[217].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[237];
+			DataStore[217].Reason = null;
+			DataStore[217].MaxLength = 4000;
+			DataStore[217].MinLength = 0;
+			DataStore[217].Seal();
+			DataStore[218].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[232];
+			DataStore[218].Reason = null;
+			DataStore[218].MaxLength = 4000;
+			DataStore[218].MinLength = 0;
+			DataStore[218].Seal();
+			DataStore[219].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[225];
+			DataStore[219].Reason = null;
+			DataStore[219].MaxLength = 4000;
+			DataStore[219].MinLength = 0;
+			DataStore[219].Seal();
+			DataStore[220].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[216];
+			DataStore[220].Reason = null;
+			DataStore[220].MaxLength = 200;
+			DataStore[220].MinLength = 0;
+			DataStore[220].Seal();
+			DataStore[221].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[205];
+			DataStore[221].Reason = null;
+			DataStore[221].MaxLength = 200;
+			DataStore[221].MinLength = 0;
+			DataStore[221].Seal();
 	
 		}
 #region Serializer

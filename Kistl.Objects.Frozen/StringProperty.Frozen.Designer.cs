@@ -1081,7 +1081,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[184].Seal();
 			DataStore[205].AltText = null;
 			DataStore[205].CategoryTags = null;
-			DataStore[205].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[205].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[221],
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[243],
 });
 			DataStore[205].Description = null;
 			DataStore[205].IsIndexed = false;
@@ -1095,7 +1097,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[205].Seal();
 			DataStore[216].AltText = @"This end's role name in the relation";
 			DataStore[216].CategoryTags = null;
-			DataStore[216].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[216].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[220],
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[239],
 });
 			DataStore[216].Description = @"This end's role name in the relation";
 			DataStore[216].IsIndexed = false;
@@ -1109,7 +1113,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[216].Seal();
 			DataStore[225].AltText = null;
 			DataStore[225].CategoryTags = @"Description GUI";
-			DataStore[225].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[225].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[219],
 });
 			DataStore[225].Description = @"A space separated list of category names containing this Property";
 			DataStore[225].IsIndexed = false;
@@ -1123,7 +1128,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[225].Seal();
 			DataStore[232].AltText = null;
 			DataStore[232].CategoryTags = @"Summary,Main";
-			DataStore[232].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[232].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[218],
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[229],
 });
 			DataStore[232].Description = @"describe this PresentableModel";
 			DataStore[232].IsIndexed = false;
@@ -1137,7 +1144,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[232].Seal();
 			DataStore[237].AltText = null;
 			DataStore[237].CategoryTags = @"Main";
-			DataStore[237].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[237].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[217],
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[224],
 });
 			DataStore[237].Description = @"Platz für Notizen";
 			DataStore[237].IsIndexed = false;

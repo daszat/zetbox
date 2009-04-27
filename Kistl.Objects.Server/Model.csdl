@@ -4,6 +4,7 @@
   
     <!-- EntitySets for all classes -->
     <EntitySet Name="AnotherTest" EntityType="Model.AnotherTest" />
+    <EntitySet Name="ArbeitszeitEintrag" EntityType="Model.ArbeitszeitEintrag" />
     <EntitySet Name="Assembly" EntityType="Model.Assembly" />
     <EntitySet Name="Auftrag" EntityType="Model.Auftrag" />
     <EntitySet Name="BaseParameter" EntityType="Model.BaseParameter" />
@@ -106,6 +107,10 @@
     </AssociationSet>
 
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
+    <AssociationSet Name="FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81" Association="Model.FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81" >
+      <End Role="Arbeitszeit" EntitySet="ArbeitszeitEintrag" />
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+    </AssociationSet>
     <AssociationSet Name="FK_Auftrag_Kunde_Auftrag_34" Association="Model.FK_Auftrag_Kunde_Auftrag_34" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Kunde" EntitySet="Kunde" />
@@ -291,6 +296,18 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArbeitszeitEintrag">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Anfang" Type="DateTime" Nullable="false" />
+    <Property Name="Ende" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Mitarbeiter__Implementation__"
+                        Relationship="Model.FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81"
+                        FromRole="Arbeitszeit"
+                        ToRole="Mitarbeiter" />
   </EntityType>
   <EntityType Name="Assembly">
     <Key>
@@ -1205,6 +1222,14 @@
   </Association>
 
   <!-- Associations for all object-object relations without CollectionEntrys -->
+  <Association Name="FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81" >
+    <End Role="Arbeitszeit"
+         Type="Model.ArbeitszeitEintrag" 
+         Multiplicity="*" />
+    <End Role="Mitarbeiter"
+         Type="Model.Mitarbeiter" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Auftrag_Kunde_Auftrag_34" >
     <End Role="Auftrag"
          Type="Model.Auftrag" 

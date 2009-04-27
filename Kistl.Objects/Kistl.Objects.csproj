@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnotherTest.Interface.Designer.cs" />
+    <Compile Include="ArbeitszeitEintrag.Interface.Designer.cs" />
     <Compile Include="Assembly.Interface.Designer.cs" />
     <Compile Include="Auftrag.Interface.Designer.cs" />
     <Compile Include="BaseParameter.Interface.Designer.cs" />

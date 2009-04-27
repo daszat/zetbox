@@ -8,6 +8,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81
+    A: ZeroOrMore ArbeitszeitEintrag as Arbeitszeit
+    B: One Mitarbeiter as Mitarbeiter
+    Preferred Storage: Left
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81",
+    "Arbeitszeit", RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.ArbeitszeitEintrag__Implementation__),
+    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Auftrag_Kunde_Auftrag_34
     A: ZeroOrMore Auftrag as Auftrag
     B: ZeroOrOne Kunde as Kunde

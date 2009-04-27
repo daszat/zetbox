@@ -286,7 +286,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[202],
 			DataStore[174].Seal();
 			DataStore[204].AltText = @"Whether or not a list-valued property has a index";
 			DataStore[204].CategoryTags = @"DataModel";
-			DataStore[204].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[204].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[244],
 });
 			DataStore[204].Description = @"Whether or not a list-valued property has a index";
 			DataStore[204].IsIndexed = false;
@@ -299,7 +300,8 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[202],
 			DataStore[204].Seal();
 			DataStore[220].AltText = @"Is true, if this RelationEnd persists the order of its elements";
 			DataStore[220].CategoryTags = null;
-			DataStore[220].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[220].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[236],
 });
 			DataStore[220].Description = @"Is true, if this RelationEnd persists the order of its elements";
 			DataStore[220].IsIndexed = false;

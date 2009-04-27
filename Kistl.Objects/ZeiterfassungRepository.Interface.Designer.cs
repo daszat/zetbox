@@ -24,6 +24,16 @@ namespace Kistl.App.Zeiterfassung
 			}
 		}
 		
+		/// <summary>List of all ArbeitszeitEintrag</summary>
+		/// 
+		public IQueryable<ArbeitszeitEintrag> ArbeitszeitEinträge
+		{ 
+			get
+			{
+				return Context.GetQuery<ArbeitszeitEintrag>();
+			}
+		}
+		
 	
 	}
 	

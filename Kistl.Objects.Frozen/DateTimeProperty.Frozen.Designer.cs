@@ -108,7 +108,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, DateTimeProperty__Implementation__Frozen> DataStore = new Dictionary<int, DateTimeProperty__Implementation__Frozen>(4);
+		internal new static Dictionary<int, DateTimeProperty__Implementation__Frozen> DataStore = new Dictionary<int, DateTimeProperty__Implementation__Frozen>(6);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[16] = 
@@ -126,6 +126,14 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[133] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[133] = 
 			DataStore[133] = new DateTimeProperty__Implementation__Frozen(133);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[238] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[238] = 
+			DataStore[238] = new DateTimeProperty__Implementation__Frozen(238);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[239] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[239] = 
+			DataStore[239] = new DateTimeProperty__Implementation__Frozen(239);
 
 		}
 
@@ -182,6 +190,34 @@ namespace Kistl.App.Base
 			DataStore[133].PropertyName = @"Birthday";
 			DataStore[133].ValueModelDescriptor = null;
 			DataStore[133].Seal();
+			DataStore[238].AltText = null;
+			DataStore[238].CategoryTags = @"Summary";
+			DataStore[238].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
+});
+			DataStore[238].Description = @"Wann die Anwesenheit angefangen hat.";
+			DataStore[238].IsIndexed = false;
+			DataStore[238].IsList = false;
+			DataStore[238].IsNullable = false;
+			DataStore[238].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[238].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
+			DataStore[238].PropertyName = @"Anfang";
+			DataStore[238].ValueModelDescriptor = null;
+			DataStore[238].Seal();
+			DataStore[239].AltText = null;
+			DataStore[239].CategoryTags = @"Summary";
+			DataStore[239].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[222],
+});
+			DataStore[239].Description = @"Wann die Anwesenheit geendet hat.";
+			DataStore[239].IsIndexed = false;
+			DataStore[239].IsList = false;
+			DataStore[239].IsNullable = false;
+			DataStore[239].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[239].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
+			DataStore[239].PropertyName = @"Ende";
+			DataStore[239].ValueModelDescriptor = null;
+			DataStore[239].Seal();
 	
 		}
 #region Serializer
