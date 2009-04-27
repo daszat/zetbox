@@ -108,7 +108,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(96);
+		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(102);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74] = 
@@ -398,6 +398,24 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[244] = 
 			DataStore[244] = new NotNullableConstraint__Implementation__Frozen(244);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[248] = 
+			DataStore[248] = new NotNullableConstraint__Implementation__Frozen(248);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[249] = 
+			DataStore[249] = new NotNullableConstraint__Implementation__Frozen(249);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[250] = 
+			DataStore[250] = new NotNullableConstraint__Implementation__Frozen(250);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[251] = 
+			DataStore[251] = new NotNullableConstraint__Implementation__Frozen(251);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[252] = 
+			DataStore[252] = new NotNullableConstraint__Implementation__Frozen(252);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[253] = 
+			DataStore[253] = new NotNullableConstraint__Implementation__Frozen(253);
 
 		}
 
@@ -690,6 +708,24 @@ namespace Kistl.App.Base
 			DataStore[244].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[204];
 			DataStore[244].Reason = null;
 			DataStore[244].Seal();
+			DataStore[248].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[249];
+			DataStore[248].Reason = null;
+			DataStore[248].Seal();
+			DataStore[249].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[248];
+			DataStore[249].Reason = null;
+			DataStore[249].Seal();
+			DataStore[250].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[247];
+			DataStore[250].Reason = null;
+			DataStore[250].Seal();
+			DataStore[251].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[246];
+			DataStore[251].Reason = null;
+			DataStore[251].Seal();
+			DataStore[252].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[245];
+			DataStore[252].Reason = null;
+			DataStore[252].Seal();
+			DataStore[253].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[46];
+			DataStore[253].Reason = null;
+			DataStore[253].Seal();
 	
 		}
 #region Serializer

@@ -173,6 +173,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82
+    A: ZeroOrMore LeistungsEintrag as LeistungsEintrag
+    B: One Mitarbeiter as Mitarbeiter
+    Preferred Storage: Left
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82",
+    "LeistungsEintrag", RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.LeistungsEintrag__Implementation__),
+    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Method_BaseParameter_Method_44
     A: One Method as Method
     B: ZeroOrMore BaseParameter as Parameter

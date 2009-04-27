@@ -24,6 +24,16 @@ namespace Kistl.App.Zeiterfassung
 			}
 		}
 		
+		/// <summary>List of all LeistungsEintrag</summary>
+		/// Eine definierte Leistung eines Mitarbeiters, die auf ein Zeitkonto gebucht worden ist.
+		public IQueryable<LeistungsEintrag> LeistungsEinträge
+		{ 
+			get
+			{
+				return Context.GetQuery<LeistungsEintrag>();
+			}
+		}
+		
 		/// <summary>List of all ArbeitszeitEintrag</summary>
 		/// 
 		public IQueryable<ArbeitszeitEintrag> ArbeitszeitEinträge

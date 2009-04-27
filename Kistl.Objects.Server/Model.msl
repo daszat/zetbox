@@ -446,6 +446,17 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="LeistungsEintrag">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.LeistungsEintrag)">
+	    <MappingFragment StoreEntitySet="LeistungsEintrag">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Anfang" ColumnName="Anfang" />
+<ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
+<ScalarProperty Name="Ende" ColumnName="Ende" />
+<ScalarProperty Name="Notizen" ColumnName="Notizen" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
 
 
     <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->
@@ -908,6 +919,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Enumeration" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82
+    A: ZeroOrMore LeistungsEintrag as LeistungsEintrag
+    B: One Mitarbeiter as Mitarbeiter
+    Preferred Storage: Left
+    -->
+    <AssociationSetMapping Name="FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82"
+                           TypeName="Model.FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82"
+                           StoreEntitySet="LeistungsEintrag" >
+      <EndProperty Name="Mitarbeiter">
+        <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter"/>
+      </EndProperty>
+      <EndProperty Name="LeistungsEintrag">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Method_BaseParameter_Method_44

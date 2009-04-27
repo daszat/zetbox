@@ -182,7 +182,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(71);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(72);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
@@ -398,6 +398,9 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[244] = 
 			DataStore[244] = new ObjectReferenceProperty__Implementation__Frozen(244);
 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[249] = 
+			DataStore[249] = new ObjectReferenceProperty__Implementation__Frozen(249);
+
 		}
 
 		internal new static void FillDataStore() {
@@ -574,12 +577,13 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 			DataStore[45].Seal();
 			DataStore[46].AltText = @"Pointer zur Objektklasse";
 			DataStore[46].CategoryTags = null;
-			DataStore[46].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[46].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[253],
 });
 			DataStore[46].Description = @"Pointer zur Objektklasse";
 			DataStore[46].IsIndexed = false;
 			DataStore[46].IsList = false;
-			DataStore[46].IsNullable = true;
+			DataStore[46].IsNullable = false;
 			DataStore[46].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[46].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
 			DataStore[46].PropertyName = @"ReferenceObjectClass";
@@ -1433,6 +1437,21 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[225],
 			DataStore[244].ValueModelDescriptor = null;
 			DataStore[244].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
 			DataStore[244].Seal();
+			DataStore[249].AltText = null;
+			DataStore[249].CategoryTags = @"Summary";
+			DataStore[249].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[248],
+});
+			DataStore[249].Description = @"Der Mitarbeiter der diese Leistung erbracht hat.";
+			DataStore[249].IsIndexed = false;
+			DataStore[249].IsList = false;
+			DataStore[249].IsNullable = false;
+			DataStore[249].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[249].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
+			DataStore[249].PropertyName = @"Mitarbeiter";
+			DataStore[249].ValueModelDescriptor = null;
+			DataStore[249].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
+			DataStore[249].Seal();
 	
 		}
 #region Serializer

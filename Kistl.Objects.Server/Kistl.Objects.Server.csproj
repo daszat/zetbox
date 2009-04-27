@@ -84,6 +84,7 @@
     <Compile Include="IsValidNamespaceConstraint.Server.Designer.cs" />
     <Compile Include="Kunde.Server.Designer.cs" />
     <Compile Include="LastTest.Server.Designer.cs" />
+    <Compile Include="LeistungsEintrag.Server.Designer.cs" />
     <Compile Include="Method.Server.Designer.cs" />
     <Compile Include="MethodInvocation.Server.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.Server.Designer.cs" />

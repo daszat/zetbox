@@ -38,6 +38,7 @@
     <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Table="ViewDescriptors"/>
     <EntitySet Name="PresentableModelDescriptor" EntityType="Model.Store.PresentableModelDescriptor" Table="PresentableModelDescriptors"/>
     <EntitySet Name="ArbeitszeitEintrag" EntityType="Model.Store.ArbeitszeitEintrag" Table="ArbeitszeitEinträge"/>
+    <EntitySet Name="LeistungsEintrag" EntityType="Model.Store.LeistungsEintrag" Table="LeistungsEinträge"/>
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
     <EntitySet Name="ObjectClass" EntityType="Model.Store.ObjectClass" Table="ObjectClasses"/>
@@ -382,6 +383,10 @@
     <AssociationSet Name="FK_EnumerationProperty_Enumeration_EnumerationProperty_48" Association="Model.Store.FK_EnumerationProperty_Enumeration_EnumerationProperty_48" >
       <End Role="EnumerationProperty" EntitySet="EnumerationProperty" />
       <End Role="Enumeration" EntitySet="Enumeration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82" Association="Model.Store.FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82" >
+      <End Role="LeistungsEintrag" EntitySet="LeistungsEintrag" />
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_BaseParameter_Method_44" Association="Model.Store.FK_Method_BaseParameter_Method_44" >
       <End Role="Method" EntitySet="Method" />
@@ -1068,6 +1073,18 @@
     <Property Name="Ende" Type="datetime" Nullable="false" />
     <Property Name="fk_Mitarbeiter" Type="int" />
   </EntityType>
+	
+  <EntityType Name="LeistungsEintrag">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Bezeichnung" Type="nvarchar" MaxLength="400" Nullable="false" />
+    <Property Name="Notizen" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Anfang" Type="datetime" Nullable="false" />
+    <Property Name="Ende" Type="datetime" Nullable="false" />
+    <Property Name="fk_Mitarbeiter" Type="int" />
+  </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
 	
@@ -1504,6 +1521,21 @@
       </Principal>
       <Dependent Role="EnumerationProperty">
         <PropertyRef Name="fk_Enumeration" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82">
+    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="LeistungsEintrag" Type="Model.Store.LeistungsEintrag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mitarbeiter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="LeistungsEintrag">
+        <PropertyRef Name="fk_Mitarbeiter" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

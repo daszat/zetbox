@@ -15,6 +15,7 @@
     <EntitySet Name="Icon" EntityType="Model.Icon" />
     <EntitySet Name="Kunde" EntityType="Model.Kunde" />
     <EntitySet Name="LastTest" EntityType="Model.LastTest" />
+    <EntitySet Name="LeistungsEintrag" EntityType="Model.LeistungsEintrag" />
     <EntitySet Name="Method" EntityType="Model.Method" />
     <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
     <EntitySet Name="Mitarbeiter" EntityType="Model.Mitarbeiter" />
@@ -150,6 +151,10 @@
     <AssociationSet Name="FK_EnumerationProperty_Enumeration_EnumerationProperty_48" Association="Model.FK_EnumerationProperty_Enumeration_EnumerationProperty_48" >
       <End Role="EnumerationProperty" EntitySet="Property" />
       <End Role="Enumeration" EntitySet="DataType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82" Association="Model.FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82" >
+      <End Role="LeistungsEintrag" EntitySet="LeistungsEintrag" />
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_BaseParameter_Method_44" Association="Model.FK_Method_BaseParameter_Method_44" >
       <End Role="Method" EntitySet="Method" />
@@ -449,6 +454,20 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LeistungsEintrag">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Bezeichnung" Type="String" Nullable="false" MaxLength="400" />
+    <Property Name="Notizen" Type="String" Nullable="false" MaxLength="4000" />
+    <Property Name="Anfang" Type="DateTime" Nullable="false" />
+    <Property Name="Ende" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Mitarbeiter__Implementation__"
+                        Relationship="Model.FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82"
+                        FromRole="LeistungsEintrag"
+                        ToRole="Mitarbeiter" />
   </EntityType>
   <EntityType Name="Method">
     <Key>
@@ -1308,6 +1327,14 @@
          Multiplicity="*" />
     <End Role="Enumeration"
          Type="Model.Enumeration" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82" >
+    <End Role="LeistungsEintrag"
+         Type="Model.LeistungsEintrag" 
+         Multiplicity="*" />
+    <End Role="Mitarbeiter"
+         Type="Model.Mitarbeiter" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Method_BaseParameter_Method_44" >

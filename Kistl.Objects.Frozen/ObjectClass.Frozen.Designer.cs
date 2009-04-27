@@ -400,7 +400,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectClass__Implementation__Frozen> DataStore = new Dictionary<int, ObjectClass__Implementation__Frozen>(57);
+		internal new static Dictionary<int, ObjectClass__Implementation__Frozen> DataStore = new Dictionary<int, ObjectClass__Implementation__Frozen>(58);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2] = 
@@ -573,6 +573,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86] = 
 			DataStore[86] = new ObjectClass__Implementation__Frozen(86);
+
+			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87] = 
+			DataStore[87] = new ObjectClass__Implementation__Frozen(87);
 
 		}
 
@@ -2168,6 +2171,35 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[244],
 });
 			DataStore[86].TableName = @"ArbeitszeitEinträge";
 			DataStore[86].Seal();
+			DataStore[87].ClassName = @"LeistungsEintrag";
+			DataStore[87].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[7];
+			DataStore[87].Description = @"Eine definierte Leistung eines Mitarbeiters, die auf ein Zeitkonto gebucht worden ist.";
+			DataStore[87].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[87].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[169],
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[170],
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[171],
+});
+			DataStore[87].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[87].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(5) {
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[245],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[246],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[247],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[248],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[249],
+});
+			DataStore[87].BaseObjectClass = null;
+			DataStore[87].DefaultModel = null;
+			DataStore[87].DefaultPresentableModelDescriptor = null;
+			DataStore[87].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
+});
+			DataStore[87].IsFrozenObject = false;
+			DataStore[87].IsSimpleObject = false;
+			DataStore[87].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(0) {
+});
+			DataStore[87].TableName = @"LeistungsEinträge";
+			DataStore[87].Seal();
 	
 		}
 #region Serializer
