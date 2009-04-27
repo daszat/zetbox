@@ -584,36 +584,6 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_Taetigkeit_Mitarbeiter_Taetigkeit_32
-    A: ZeroOrMore Taetigkeit as Taetigkeit
-    B: ZeroOrOne Mitarbeiter as Mitarbeiter
-    Preferred Storage: Left
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Taetigkeit_Mitarbeiter_Taetigkeit_32",
-    "Taetigkeit", RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Taetigkeit__Implementation__),
-    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__)
-    )]
-
-
-	/*
-    Relation: FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43
-    A: ZeroOrMore Taetigkeit as Taetigkeit
-    B: ZeroOrOne TaetigkeitsArt as TaetigkeitsArt
-    Preferred Storage: Left
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43",
-    "Taetigkeit", RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Taetigkeit__Implementation__),
-    "TaetigkeitsArt", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Zeiterfassung.TaetigkeitsArt__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_Template_Assembly_Template_59
     A: ZeroOrMore Template as Template
     B: ZeroOrOne Assembly as DisplayedTypeAssembly
@@ -837,21 +807,6 @@ using Kistl.DALProvider.EF;
     "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)
     )]
-
-	/*
-    Relation: FK_Zeitkonto_Taetigkeit_Zeitkonto_33
-    A: One Zeitkonto as Zeitkonto
-    B: ZeroOrMore Taetigkeit as Taetigkeiten
-    Preferred Storage: Right
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Zeitkonto_Taetigkeit_Zeitkonto_33",
-    "Zeitkonto", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Zeiterfassung.Zeitkonto__Implementation__),
-    "Taetigkeiten", RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Taetigkeit__Implementation__)
-    )]
-
 
 
 // object-value association

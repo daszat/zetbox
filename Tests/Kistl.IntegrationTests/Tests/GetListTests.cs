@@ -221,21 +221,21 @@ namespace Kistl.IntegrationTests
             }
         }
 
-        [Test]
-        [ExpectedException(typeof(System.ServiceModel.FaultException))]
-        public void GetListWithParameterIllegal()
-        {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var test = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
-                           where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag > new DateTime(1978, 1, 1)).Count() > 0
-                           select z;
-                foreach (var t in test)
-                {
-                    System.Diagnostics.Trace.WriteLine(string.Format("GetListWithParameterIllegal: {0}", t.Kontoname));
-                }
-            }
-        }
+        //[Test]
+        //[ExpectedException(typeof(System.ServiceModel.FaultException))]
+        //public void GetListWithParameterIllegal()
+        //{
+        //    using (IKistlContext ctx = KistlContext.GetContext())
+        //    {
+        //        var test = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
+        //                   where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag > new DateTime(1978, 1, 1)).Count() > 0
+        //                   select z;
+        //        foreach (var t in test)
+        //        {
+        //            System.Diagnostics.Trace.WriteLine(string.Format("GetListWithParameterIllegal: {0}", t.Kontoname));
+        //        }
+        //    }
+        //}
 
         [Test]
         public void GetListWithProjection()

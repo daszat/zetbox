@@ -15,7 +15,7 @@ namespace Kistl.App.Zeiterfassung
 		public IKistlContext Context { get; private set; }
 		
 		/// <summary>List of all Zeitkonto</summary>
-		/// 
+		/// en:TimeAccount; Ein Konto für die Leistungserfassung. Es können nicht mehr als MaxStunden auf ein Konto gebucht werden.
 		public IQueryable<Zeitkonto> Zeitkonten
 		{ 
 			get
@@ -31,16 +31,6 @@ namespace Kistl.App.Zeiterfassung
 			get
 			{
 				return Context.GetQuery<TaetigkeitsArt>();
-			}
-		}
-		
-		/// <summary>List of all Taetigkeit</summary>
-		/// 
-		public IQueryable<Taetigkeit> Taetigkeiten
-		{ 
-			get
-			{
-				return Context.GetQuery<Taetigkeit>();
 			}
 		}
 		

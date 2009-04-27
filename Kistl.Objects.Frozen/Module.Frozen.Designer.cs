@@ -318,10 +318,9 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19],
 			DataStore[2].Seal();
 			DataStore[3].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0) {
 });
-			DataStore[3].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(5) {
+			DataStore[3].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(4) {
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[31],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[23],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[21],
 });

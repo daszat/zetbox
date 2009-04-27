@@ -131,6 +131,7 @@
 <ScalarProperty Name="AktuelleStunden" ColumnName="AktuelleStunden" />
 <ScalarProperty Name="Kontoname" ColumnName="Kontoname" />
 <ScalarProperty Name="MaxStunden" ColumnName="MaxStunden" />
+<ScalarProperty Name="Notizen" ColumnName="Notizen" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kostenstelle)">
@@ -141,15 +142,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kostentraeger)">
 	    <MappingFragment StoreEntitySet="Kostentraeger">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Taetigkeit">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Taetigkeit)">
-	    <MappingFragment StoreEntitySet="Taetigkeit">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Datum" ColumnName="Datum" />
-<ScalarProperty Name="Dauer" ColumnName="Dauer" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1352,40 +1344,6 @@
       <Condition ColumnName="fk_StructDefinition" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Taetigkeit_Mitarbeiter_Taetigkeit_32
-    A: ZeroOrMore Taetigkeit as Taetigkeit
-    B: ZeroOrOne Mitarbeiter as Mitarbeiter
-    Preferred Storage: Left
-    -->
-    <AssociationSetMapping Name="FK_Taetigkeit_Mitarbeiter_Taetigkeit_32"
-                           TypeName="Model.FK_Taetigkeit_Mitarbeiter_Taetigkeit_32"
-                           StoreEntitySet="Taetigkeit" >
-      <EndProperty Name="Mitarbeiter">
-        <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter"/>
-      </EndProperty>
-      <EndProperty Name="Taetigkeit">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43
-    A: ZeroOrMore Taetigkeit as Taetigkeit
-    B: ZeroOrOne TaetigkeitsArt as TaetigkeitsArt
-    Preferred Storage: Left
-    -->
-    <AssociationSetMapping Name="FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43"
-                           TypeName="Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43"
-                           StoreEntitySet="Taetigkeit" >
-      <EndProperty Name="TaetigkeitsArt">
-        <ScalarProperty Name="ID" ColumnName="fk_TaetigkeitsArt"/>
-      </EndProperty>
-      <EndProperty Name="Taetigkeit">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_TaetigkeitsArt" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_Template_Assembly_Template_59
     A: ZeroOrMore Template as Template
     B: ZeroOrOne Assembly as DisplayedTypeAssembly
@@ -1537,23 +1495,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Property" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Zeitkonto_Taetigkeit_Zeitkonto_33
-    A: One Zeitkonto as Zeitkonto
-    B: ZeroOrMore Taetigkeit as Taetigkeiten
-    Preferred Storage: Right
-    -->
-    <AssociationSetMapping Name="FK_Zeitkonto_Taetigkeit_Zeitkonto_33"
-                           TypeName="Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_33"
-                           StoreEntitySet="Taetigkeit" >
-      <EndProperty Name="Zeitkonto">
-        <ScalarProperty Name="ID" ColumnName="fk_Zeitkonto"/>
-      </EndProperty>
-      <EndProperty Name="Taetigkeiten">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Zeitkonto" IsNull="false"/>
     </AssociationSetMapping>
 
     <!-- EntitySetMappings and AssociationSetMappings for ValueType lists -->

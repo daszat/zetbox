@@ -252,7 +252,7 @@ namespace Kistl.DALProvider.EF
 
 #if DEBUG
             if (_ctx.ObjectStateManager
-                .GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified | System.Data.EntityState.Deleted)
+                .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted)
                 .Count() > 0)
             {
                 Trace.WriteLine("************************* >>>> Submit Changes ******************************");

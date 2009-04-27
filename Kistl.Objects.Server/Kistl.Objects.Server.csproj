@@ -106,7 +106,6 @@
     <Compile Include="StringRangeConstraint.Server.Designer.cs" />
     <Compile Include="Struct.Server.Designer.cs" />
     <Compile Include="StructProperty.Server.Designer.cs" />
-    <Compile Include="Taetigkeit.Server.Designer.cs" />
     <Compile Include="TaetigkeitsArt.Server.Designer.cs" />
     <Compile Include="Task.Server.Designer.cs" />
     <Compile Include="Template.Server.Designer.cs" />

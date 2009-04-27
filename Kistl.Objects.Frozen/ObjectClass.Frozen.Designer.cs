@@ -400,7 +400,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectClass__Implementation__Frozen> DataStore = new Dictionary<int, ObjectClass__Implementation__Frozen>(60);
+		internal new static Dictionary<int, ObjectClass__Implementation__Frozen> DataStore = new Dictionary<int, ObjectClass__Implementation__Frozen>(59);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2] = 
@@ -456,9 +456,6 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[23] = 
 			DataStore[23] = new ObjectClass__Implementation__Frozen(23);
-
-			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25] = 
-			DataStore[25] = new ObjectClass__Implementation__Frozen(25);
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26] = 
 			DataStore[26] = new ObjectClass__Implementation__Frozen(26);
@@ -1029,7 +1026,7 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[65],
 			DataStore[19].Seal();
 			DataStore[20].ClassName = @"Zeitkonto";
 			DataStore[20].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[12];
-			DataStore[20].Description = null;
+			DataStore[20].Description = @"en:TimeAccount; Ein Konto für die Leistungserfassung. Es können nicht mehr als MaxStunden auf ein Konto gebucht werden.";
 			DataStore[20].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[12],
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[45],
@@ -1041,11 +1038,11 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[30],
 });
 			DataStore[20].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[20].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(5) {
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[58],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[86],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[52],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[89],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[90],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[237],
 });
 			DataStore[20].BaseObjectClass = null;
 			DataStore[20].DefaultModel = null;
@@ -1103,37 +1100,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[53],
 });
 			DataStore[23].TableName = @"Kostentraeger";
 			DataStore[23].Seal();
-			DataStore[25].ClassName = @"Taetigkeit";
-			DataStore[25].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[7];
-			DataStore[25].Description = null;
-			DataStore[25].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[13],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[46],
-});
-			DataStore[25].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[31],
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[32],
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[33],
-});
-			DataStore[25].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[25].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(5) {
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[54],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[55],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[88],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[56],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[57],
-});
-			DataStore[25].BaseObjectClass = null;
-			DataStore[25].DefaultModel = null;
-			DataStore[25].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
-			DataStore[25].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
-});
-			DataStore[25].IsFrozenObject = false;
-			DataStore[25].IsSimpleObject = false;
-			DataStore[25].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(0) {
-});
-			DataStore[25].TableName = @"Taetigkeiten";
-			DataStore[25].Seal();
 			DataStore[26].ClassName = @"Kunde";
 			DataStore[26].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[6];
 			DataStore[26].Description = null;

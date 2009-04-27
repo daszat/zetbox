@@ -182,7 +182,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(76);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(72);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
@@ -233,15 +233,6 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[53] = 
 			DataStore[53] = new ObjectReferenceProperty__Implementation__Frozen(53);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[54] = 
-			DataStore[54] = new ObjectReferenceProperty__Implementation__Frozen(54);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[55] = 
-			DataStore[55] = new ObjectReferenceProperty__Implementation__Frozen(55);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[58] = 
-			DataStore[58] = new ObjectReferenceProperty__Implementation__Frozen(58);
-
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[64] = 
 			DataStore[64] = new ObjectReferenceProperty__Implementation__Frozen(64);
 
@@ -283,9 +274,6 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[86] = 
 			DataStore[86] = new ObjectReferenceProperty__Implementation__Frozen(86);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[88] = 
-			DataStore[88] = new ObjectReferenceProperty__Implementation__Frozen(88);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[92] = 
 			DataStore[92] = new ObjectReferenceProperty__Implementation__Frozen(92);
@@ -644,50 +632,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[135],
 			DataStore[53].ValueModelDescriptor = null;
 			DataStore[53].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
 			DataStore[53].Seal();
-			DataStore[54].AltText = @"Mitarbeiter";
-			DataStore[54].CategoryTags = null;
-			DataStore[54].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[134],
-});
-			DataStore[54].Description = @"Mitarbeiter";
-			DataStore[54].IsIndexed = false;
-			DataStore[54].IsList = false;
-			DataStore[54].IsNullable = false;
-			DataStore[54].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[54].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
-			DataStore[54].PropertyName = @"Mitarbeiter";
-			DataStore[54].ValueModelDescriptor = null;
-			DataStore[54].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
-			DataStore[54].Seal();
-			DataStore[55].AltText = @"Zeitkonto";
-			DataStore[55].CategoryTags = null;
-			DataStore[55].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[133],
-});
-			DataStore[55].Description = @"Zeitkonto";
-			DataStore[55].IsIndexed = false;
-			DataStore[55].IsList = false;
-			DataStore[55].IsNullable = false;
-			DataStore[55].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[55].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
-			DataStore[55].PropertyName = @"Zeitkonto";
-			DataStore[55].ValueModelDescriptor = null;
-			DataStore[55].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[20];
-			DataStore[55].Seal();
-			DataStore[58].AltText = @"Tätigkeiten";
-			DataStore[58].CategoryTags = null;
-			DataStore[58].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[58].Description = @"Tätigkeiten";
-			DataStore[58].IsIndexed = false;
-			DataStore[58].IsList = true;
-			DataStore[58].IsNullable = true;
-			DataStore[58].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[58].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
-			DataStore[58].PropertyName = @"Taetigkeiten";
-			DataStore[58].ValueModelDescriptor = null;
-			DataStore[58].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[25];
-			DataStore[58].Seal();
 			DataStore[64].AltText = @"Kunde des Projektes";
 			DataStore[64].CategoryTags = null;
 			DataStore[64].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
@@ -891,20 +835,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[86].ValueModelDescriptor = null;
 			DataStore[86].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
 			DataStore[86].Seal();
-			DataStore[88].AltText = @"Art der Tätigkeit";
-			DataStore[88].CategoryTags = null;
-			DataStore[88].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[88].Description = @"Art der Tätigkeit";
-			DataStore[88].IsIndexed = false;
-			DataStore[88].IsList = false;
-			DataStore[88].IsNullable = true;
-			DataStore[88].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[88].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
-			DataStore[88].PropertyName = @"TaetigkeitsArt";
-			DataStore[88].ValueModelDescriptor = null;
-			DataStore[88].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[31];
-			DataStore[88].Seal();
 			DataStore[92].AltText = @"Methode des Parameters";
 			DataStore[92].CategoryTags = null;
 			DataStore[92].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {

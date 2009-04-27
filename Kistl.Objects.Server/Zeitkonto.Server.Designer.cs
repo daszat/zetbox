@@ -18,7 +18,7 @@ namespace Kistl.App.Zeiterfassung
     using System.Data.Objects.DataClasses;
 
     /// <summary>
-    /// 
+    /// en:TimeAccount; Ein Konto für die Leistungserfassung. Es können nicht mehr als MaxStunden auf ein Konto gebucht werden.
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="Zeitkonto")]
     [System.Diagnostics.DebuggerDisplay("Zeitkonto")]
@@ -181,51 +181,31 @@ namespace Kistl.App.Zeiterfassung
         
 
         /// <summary>
-        /// Tätigkeiten
+        /// Platz für Notizen
         /// </summary>
-    /*
-    Relation: FK_Zeitkonto_Taetigkeit_Zeitkonto_33
-    A: One Zeitkonto as Zeitkonto
-    B: ZeroOrMore Taetigkeit as Taetigkeiten
-    Preferred Storage: Right
-    */
-        // object list property
-        // implement the user-visible interface
+        // value type property
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten
+        [EdmScalarProperty()]
+        public virtual string Notizen
         {
             get
             {
-                if (_TaetigkeitenWrapper == null)
-                {
-                    _TaetigkeitenWrapper = new EntityCollectionWrapper<Kistl.App.Zeiterfassung.Taetigkeit, Kistl.App.Zeiterfassung.Taetigkeit__Implementation__>(
-                            this.Context, Taetigkeiten__Implementation__);
-                }
-                return _TaetigkeitenWrapper;
+                return _Notizen;
             }
-        }
-        
-        [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Taetigkeit_Zeitkonto_33", "Taetigkeiten")]
-        public EntityCollection<Kistl.App.Zeiterfassung.Taetigkeit__Implementation__> Taetigkeiten__Implementation__
-        {
-            get
+            set
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Zeiterfassung.Taetigkeit__Implementation__>(
-                        "Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_33",
-                        "Taetigkeiten");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Notizen != value)
                 {
-                    c.Load();
+					var __oldValue = _Notizen;
+                    NotifyPropertyChanging("Notizen", __oldValue, value);
+                    _Notizen = value;
+                    NotifyPropertyChanged("Notizen", __oldValue, value);
                 }
-                return c;
             }
         }
-        private EntityCollectionWrapper<Kistl.App.Zeiterfassung.Taetigkeit, Kistl.App.Zeiterfassung.Taetigkeit__Implementation__> _TaetigkeitenWrapper;
-
-
+        private string _Notizen;
 
 		public override InterfaceType GetInterfaceType()
 		{
@@ -242,6 +222,7 @@ namespace Kistl.App.Zeiterfassung
 			me.AktuelleStunden = other.AktuelleStunden;
 			me.Kontoname = other.Kontoname;
 			me.MaxStunden = other.MaxStunden;
+			me.Notizen = other.Notizen;
 		}
 
         // tail template
@@ -314,11 +295,11 @@ namespace Kistl.App.Zeiterfassung
 					
 					return String.Join("; ", errors);
 				}
-				case "Taetigkeiten":
+				case "Notizen":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(58).Constraints
-						.Where(c => !c.IsValid(this, this.Taetigkeiten))
-						.Select(c => c.GetErrorText(this, this.Taetigkeiten))
+					var errors = Context.Find<Kistl.App.Base.Property>(237).Constraints
+						.Where(c => !c.IsValid(this, this.Notizen))
+						.Select(c => c.GetErrorText(this, this.Notizen))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -341,6 +322,7 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.ToStream(this._AktuelleStunden, binStream);
             BinarySerializer.ToStream(this._Kontoname, binStream);
             BinarySerializer.ToStream(this._MaxStunden, binStream);
+            BinarySerializer.ToStream(this._Notizen, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -349,6 +331,7 @@ namespace Kistl.App.Zeiterfassung
             BinarySerializer.FromStream(out this._AktuelleStunden, binStream);
             BinarySerializer.FromStream(out this._Kontoname, binStream);
             BinarySerializer.FromStream(out this._MaxStunden, binStream);
+            BinarySerializer.FromStream(out this._Notizen, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -357,6 +340,7 @@ namespace Kistl.App.Zeiterfassung
             XmlStreamer.ToStream(this._AktuelleStunden, xml, "AktuelleStunden", "Kistl.App.Zeiterfassung");
             XmlStreamer.ToStream(this._Kontoname, xml, "Kontoname", "Kistl.App.Zeiterfassung");
             XmlStreamer.ToStream(this._MaxStunden, xml, "MaxStunden", "Kistl.App.Zeiterfassung");
+            XmlStreamer.ToStream(this._Notizen, xml, "Notizen", "Kistl.App.Zeiterfassung");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -365,6 +349,7 @@ namespace Kistl.App.Zeiterfassung
             XmlStreamer.FromStream(ref this._AktuelleStunden, xml, "AktuelleStunden", "Kistl.App.Zeiterfassung");
             XmlStreamer.FromStream(ref this._Kontoname, xml, "Kontoname", "Kistl.App.Zeiterfassung");
             XmlStreamer.FromStream(ref this._MaxStunden, xml, "MaxStunden", "Kistl.App.Zeiterfassung");
+            XmlStreamer.FromStream(ref this._Notizen, xml, "Notizen", "Kistl.App.Zeiterfassung");
         }
 
 #endregion

@@ -149,7 +149,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(51);
+		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(52);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[1] = 
@@ -355,6 +355,10 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[232] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[232] = 
 			DataStore[232] = new StringProperty__Implementation__Frozen(232);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[237] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[237] = 
+			DataStore[237] = new StringProperty__Implementation__Frozen(237);
 
 		}
 
@@ -1151,6 +1155,20 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[232].ValueModelDescriptor = null;
 			DataStore[232].Length = 4000;
 			DataStore[232].Seal();
+			DataStore[237].AltText = null;
+			DataStore[237].CategoryTags = @"Main";
+			DataStore[237].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[237].Description = @"Platz für Notizen";
+			DataStore[237].IsIndexed = false;
+			DataStore[237].IsList = false;
+			DataStore[237].IsNullable = false;
+			DataStore[237].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[237].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
+			DataStore[237].PropertyName = @"Notizen";
+			DataStore[237].ValueModelDescriptor = null;
+			DataStore[237].Length = 4000;
+			DataStore[237].Seal();
 	
 		}
 #region Serializer

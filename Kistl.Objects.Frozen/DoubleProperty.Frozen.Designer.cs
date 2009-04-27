@@ -108,7 +108,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, DoubleProperty__Implementation__Frozen> DataStore = new Dictionary<int, DoubleProperty__Implementation__Frozen>(6);
+		internal new static Dictionary<int, DoubleProperty__Implementation__Frozen> DataStore = new Dictionary<int, DoubleProperty__Implementation__Frozen>(5);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[18] = 
@@ -118,10 +118,6 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[23] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[23] = 
 			DataStore[23] = new DoubleProperty__Implementation__Frozen(23);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[57] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[57] = 
-			DataStore[57] = new DoubleProperty__Implementation__Frozen(57);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[65] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[65] = 
@@ -164,20 +160,6 @@ namespace Kistl.App.Base
 			DataStore[23].PropertyName = @"AufwandGes";
 			DataStore[23].ValueModelDescriptor = null;
 			DataStore[23].Seal();
-			DataStore[57].AltText = @"Dauer in Stunden";
-			DataStore[57].CategoryTags = null;
-			DataStore[57].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[131],
-});
-			DataStore[57].Description = @"Dauer in Stunden";
-			DataStore[57].IsIndexed = false;
-			DataStore[57].IsList = false;
-			DataStore[57].IsNullable = false;
-			DataStore[57].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[57].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
-			DataStore[57].PropertyName = @"Dauer";
-			DataStore[57].ValueModelDescriptor = null;
-			DataStore[57].Seal();
 			DataStore[65].AltText = @"Wert in EUR des Auftrages";
 			DataStore[65].CategoryTags = null;
 			DataStore[65].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {

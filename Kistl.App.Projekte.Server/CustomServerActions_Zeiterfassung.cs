@@ -8,31 +8,31 @@ namespace Kistl.App.Zeiterfassung
 {
     public class CustomServerActions_Zeiterfassung
     {
-        public void OnPreSave_Zeitkonto(Kistl.App.Zeiterfassung.Zeitkonto obj)
-        {
-            UpdateZeitkontoAggregations(obj);
-        }
+        //public void OnPreSave_Zeitkonto(Kistl.App.Zeiterfassung.Zeitkonto obj)
+        //{
+        //    UpdateZeitkontoAggregations(obj);
+        //}
 
-        public void OnPreSave_Taetigkeit(Kistl.App.Zeiterfassung.Taetigkeit obj)
-        {
-            Zeitkonto z = obj.Zeitkonto;
+        //public void OnPreSave_Taetigkeit(Kistl.App.Zeiterfassung.Taetigkeit obj)
+        //{
+        //    Zeitkonto z = obj.Zeitkonto;
 
-            if (z.Mitarbeiter.FirstOrDefault(m => m.ID == obj.Mitarbeiter.ID) == null)
-            {
-                throw new SecurityException("Sie sind nicht berechtigt auf dieses Zeitkonto zu buchen.");
-            }
+        //    if (z.Mitarbeiter.FirstOrDefault(m => m.ID == obj.Mitarbeiter.ID) == null)
+        //    {
+        //        throw new SecurityException("Sie sind nicht berechtigt auf dieses Zeitkonto zu buchen.");
+        //    }
 
-            UpdateZeitkontoAggregations(z);
+        //    UpdateZeitkontoAggregations(z);
 
-            if (z.MaxStunden.HasValue && z.AktuelleStunden > z.MaxStunden)
-            {
-                throw new ArgumentException("Die aktuellen Stunden auf dem Zeitkonto überschreiten die max zulässige Anzahl an Stunden.");
-            }
-        }
+        //    if (z.MaxStunden.HasValue && z.AktuelleStunden > z.MaxStunden)
+        //    {
+        //        throw new ArgumentException("Die aktuellen Stunden auf dem Zeitkonto überschreiten die max zulässige Anzahl an Stunden.");
+        //    }
+        //}
 
-        private void UpdateZeitkontoAggregations(Kistl.App.Zeiterfassung.Zeitkonto obj)
-        {
-            obj.AktuelleStunden = obj.Taetigkeiten.Sum(t => t.Dauer);
-        }
+        //private void UpdateZeitkontoAggregations(Kistl.App.Zeiterfassung.Zeitkonto obj)
+        //{
+        //    obj.AktuelleStunden = obj.Taetigkeiten.Sum(t => t.Dauer);
+        //}
     }
 }

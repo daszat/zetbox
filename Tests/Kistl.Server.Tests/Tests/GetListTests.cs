@@ -221,22 +221,22 @@ namespace Kistl.Server.Tests
             }
         }
 
-        [Test]
-        [Ignore("System.InvalidOperationException : The operands for operator 'GreaterThan' do not match the parameters of method 'op_GreaterThan'.")]
-        public void GetListWithParameterIllegal()
-        {
-            using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
-            {
-                var test = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
-                           where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag.HasValue && 
-                               ((DateTime)tt.Mitarbeiter.Geburtstag) > new DateTime(1978, 1, 1)).Count() > 0
-                           select z;
-                foreach (var t in test)
-                {
-                    System.Diagnostics.Trace.WriteLine(string.Format("GetListWithParameterIllegal: {0}", t.Kontoname));
-                }
-            }
-        }
+        //[Test]
+        //[Ignore("System.InvalidOperationException : The operands for operator 'GreaterThan' do not match the parameters of method 'op_GreaterThan'.")]
+        //public void GetListWithParameterIllegal()
+        //{
+        //    using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
+        //    {
+        //        var test = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
+        //                   where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag.HasValue && 
+        //                       ((DateTime)tt.Mitarbeiter.Geburtstag) > new DateTime(1978, 1, 1)).Count() > 0
+        //                   select z;
+        //        foreach (var t in test)
+        //        {
+        //            System.Diagnostics.Trace.WriteLine(string.Format("GetListWithParameterIllegal: {0}", t.Kontoname));
+        //        }
+        //    }
+        //}
 
         [Test]
         public void GetListWithProjection()

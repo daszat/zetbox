@@ -108,7 +108,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, DateTimeProperty__Implementation__Frozen> DataStore = new Dictionary<int, DateTimeProperty__Implementation__Frozen>(5);
+		internal new static Dictionary<int, DateTimeProperty__Implementation__Frozen> DataStore = new Dictionary<int, DateTimeProperty__Implementation__Frozen>(4);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[16] = 
@@ -122,10 +122,6 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[38] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[38] = 
 			DataStore[38] = new DateTimeProperty__Implementation__Frozen(38);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[56] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[56] = 
-			DataStore[56] = new DateTimeProperty__Implementation__Frozen(56);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[133] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[133] = 
@@ -173,20 +169,6 @@ namespace Kistl.App.Base
 			DataStore[38].PropertyName = @"Geburtstag";
 			DataStore[38].ValueModelDescriptor = null;
 			DataStore[38].Seal();
-			DataStore[56].AltText = @"Datum";
-			DataStore[56].CategoryTags = null;
-			DataStore[56].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[132],
-});
-			DataStore[56].Description = @"Datum";
-			DataStore[56].IsIndexed = false;
-			DataStore[56].IsList = false;
-			DataStore[56].IsNullable = false;
-			DataStore[56].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[56].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
-			DataStore[56].PropertyName = @"Datum";
-			DataStore[56].ValueModelDescriptor = null;
-			DataStore[56].Seal();
 			DataStore[133].AltText = @"Happy Birthday!";
 			DataStore[133].CategoryTags = null;
 			DataStore[133].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {

@@ -25,7 +25,6 @@
     <EntitySet Name="Property" EntityType="Model.Property" />
     <EntitySet Name="Relation" EntityType="Model.Relation" />
     <EntitySet Name="RelationEnd" EntityType="Model.RelationEnd" />
-    <EntitySet Name="Taetigkeit" EntityType="Model.Taetigkeit" />
     <EntitySet Name="TaetigkeitsArt" EntityType="Model.TaetigkeitsArt" />
     <EntitySet Name="Task" EntityType="Model.Task" />
     <EntitySet Name="Template" EntityType="Model.Template" />
@@ -252,14 +251,6 @@
       <End Role="StructProperty" EntitySet="Property" />
       <End Role="StructDefinition" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_Taetigkeit_Mitarbeiter_Taetigkeit_32" Association="Model.FK_Taetigkeit_Mitarbeiter_Taetigkeit_32" >
-      <End Role="Taetigkeit" EntitySet="Taetigkeit" />
-      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43" Association="Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43" >
-      <End Role="Taetigkeit" EntitySet="Taetigkeit" />
-      <End Role="TaetigkeitsArt" EntitySet="TaetigkeitsArt" />
-    </AssociationSet>
     <AssociationSet Name="FK_Template_Assembly_Template_59" Association="Model.FK_Template_Assembly_Template_59" >
       <End Role="Template" EntitySet="Template" />
       <End Role="DisplayedTypeAssembly" EntitySet="Assembly" />
@@ -295,10 +286,6 @@
     <AssociationSet Name="FK_Visual_Property_Visual_56" Association="Model.FK_Visual_Property_Visual_56" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="Property" EntitySet="Property" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Zeitkonto_Taetigkeit_Zeitkonto_33" Association="Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_33" >
-      <End Role="Zeitkonto" EntitySet="Zeitkonto" />
-      <End Role="Taetigkeiten" EntitySet="Taetigkeit" />
     </AssociationSet>
 
   </EntityContainer>
@@ -661,26 +648,6 @@
                         FromRole="A"
                         ToRole="Relation" />
   </EntityType>
-  <EntityType Name="Taetigkeit">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Mitarbeiter__Implementation__"
-                        Relationship="Model.FK_Taetigkeit_Mitarbeiter_Taetigkeit_32"
-                        FromRole="Taetigkeit"
-                        ToRole="Mitarbeiter" />
-    <NavigationProperty Name="Zeitkonto__Implementation__"
-                        Relationship="Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_33"
-                        FromRole="Taetigkeiten"
-                        ToRole="Zeitkonto" />
-    <NavigationProperty Name="TaetigkeitsArt__Implementation__"
-                        Relationship="Model.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43"
-                        FromRole="Taetigkeit"
-                        ToRole="TaetigkeitsArt" />
-    <Property Name="Datum" Type="DateTime" Nullable="false" />
-    <Property Name="Dauer" Type="Double" Nullable="false" />
-  </EntityType>
   <EntityType Name="TaetigkeitsArt">
     <Key>
       <PropertyRef Name="ID" />
@@ -813,10 +780,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Taetigkeiten__Implementation__"
-                        Relationship="Model.FK_Zeitkonto_Taetigkeit_Zeitkonto_33"
-                        FromRole="Zeitkonto"
-                        ToRole="Taetigkeiten" />
     <NavigationProperty Name="Mitarbeiter__Implementation__"
                         Relationship="Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42"
                         FromRole="Zeitkonto"
@@ -824,6 +787,7 @@
     <Property Name="Kontoname" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="MaxStunden" Type="Double" Nullable="true" />
     <Property Name="AktuelleStunden" Type="Double" Nullable="true" />
+    <Property Name="Notizen" Type="String" Nullable="false" MaxLength="4000" />
   </EntityType>
 
   <!-- EntityTypes for all other classes -->
@@ -1553,22 +1517,6 @@
          Type="Model.Struct" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Taetigkeit_Mitarbeiter_Taetigkeit_32" >
-    <End Role="Taetigkeit"
-         Type="Model.Taetigkeit" 
-         Multiplicity="*" />
-    <End Role="Mitarbeiter"
-         Type="Model.Mitarbeiter" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43" >
-    <End Role="Taetigkeit"
-         Type="Model.Taetigkeit" 
-         Multiplicity="*" />
-    <End Role="TaetigkeitsArt"
-         Type="Model.TaetigkeitsArt" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_Template_Assembly_Template_59" >
     <End Role="Template"
          Type="Model.Template" 
@@ -1640,14 +1588,6 @@
     <End Role="Property"
          Type="Model.Property" 
          Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Zeitkonto_Taetigkeit_Zeitkonto_33" >
-    <End Role="Zeitkonto"
-         Type="Model.Zeitkonto" 
-         Multiplicity="0..1" />
-    <End Role="Taetigkeiten"
-         Type="Model.Taetigkeit" 
-         Multiplicity="*" />
   </Association>
 
 

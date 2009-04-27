@@ -7,7 +7,7 @@ namespace Kistl.App.Zeiterfassung
     using Kistl.API;
 
     /// <summary>
-    /// 
+    /// en:TimeAccount; Ein Konto für die Leistungserfassung. Es können nicht mehr als MaxStunden auf ein Konto gebucht werden.
     /// </summary>
     public interface Zeitkonto : IDataObject 
     {
@@ -39,9 +39,11 @@ namespace Kistl.App.Zeiterfassung
 
         ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter { get; }
         /// <summary>
-        /// Tätigkeiten
+        /// Platz für Notizen
         /// </summary>
-
-        ICollection<Kistl.App.Zeiterfassung.Taetigkeit> Taetigkeiten { get; }
+		string Notizen {
+			get;
+			set;
+		}
     }
 }

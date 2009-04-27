@@ -15,7 +15,6 @@
     <EntitySet Name="Module" EntityType="Model.Store.Module" Table="Modules"/>
     <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Table="Auftraege"/>
     <EntitySet Name="Zeitkonto" EntityType="Model.Store.Zeitkonto" Table="Zeitkonten"/>
-    <EntitySet Name="Taetigkeit" EntityType="Model.Store.Taetigkeit" Table="Taetigkeiten"/>
     <EntitySet Name="Kunde" EntityType="Model.Store.Kunde" Table="Kunden"/>
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons"/>
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies"/>
@@ -498,14 +497,6 @@
       <End Role="StructProperty" EntitySet="StructProperty" />
       <End Role="StructDefinition" EntitySet="Struct" />
     </AssociationSet>
-    <AssociationSet Name="FK_Taetigkeit_Mitarbeiter_Taetigkeit_32" Association="Model.Store.FK_Taetigkeit_Mitarbeiter_Taetigkeit_32" >
-      <End Role="Taetigkeit" EntitySet="Taetigkeit" />
-      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43" Association="Model.Store.FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43" >
-      <End Role="Taetigkeit" EntitySet="Taetigkeit" />
-      <End Role="TaetigkeitsArt" EntitySet="TaetigkeitsArt" />
-    </AssociationSet>
     <AssociationSet Name="FK_Template_Assembly_Template_59" Association="Model.Store.FK_Template_Assembly_Template_59" >
       <End Role="Template" EntitySet="Template" />
       <End Role="DisplayedTypeAssembly" EntitySet="Assembly" />
@@ -541,10 +532,6 @@
     <AssociationSet Name="FK_Visual_Property_Visual_56" Association="Model.Store.FK_Visual_Property_Visual_56" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="Property" EntitySet="Property" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Zeitkonto_Taetigkeit_Zeitkonto_33" Association="Model.Store.FK_Zeitkonto_Taetigkeit_Zeitkonto_33" >
-      <End Role="Zeitkonto" EntitySet="Zeitkonto" />
-      <End Role="Taetigkeiten" EntitySet="Taetigkeit" />
     </AssociationSet>
 
     <!-- EntitySets and AssociationSet for all object-value CollectionEntrys -->
@@ -716,6 +703,7 @@
     <Property Name="Kontoname" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="MaxStunden" Type="float" Nullable="true" />
     <Property Name="AktuelleStunden" Type="float" Nullable="true" />
+    <Property Name="Notizen" Type="nvarchar" MaxLength="4000" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Kostenstelle">
@@ -731,18 +719,6 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_Projekt" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="Taetigkeit">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Mitarbeiter" Type="int" />
-    <Property Name="fk_Zeitkonto" Type="int" />
-    <Property Name="fk_TaetigkeitsArt" Type="int" />
-    <Property Name="Datum" Type="datetime" Nullable="false" />
-    <Property Name="Dauer" Type="float" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Kunde">
@@ -1935,36 +1911,6 @@
   </Association>
 
 
-  <Association Name="FK_Taetigkeit_Mitarbeiter_Taetigkeit_32">
-    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Taetigkeit" Type="Model.Store.Taetigkeit" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Mitarbeiter">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Taetigkeit">
-        <PropertyRef Name="fk_Mitarbeiter" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Taetigkeit_TaetigkeitsArt_Taetigkeit_43">
-    <End Role="TaetigkeitsArt" Type="Model.Store.TaetigkeitsArt" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Taetigkeit" Type="Model.Store.Taetigkeit" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TaetigkeitsArt">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Taetigkeit">
-        <PropertyRef Name="fk_TaetigkeitsArt" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_Template_Assembly_Template_59">
     <End Role="DisplayedTypeAssembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2095,21 +2041,6 @@
       </Principal>
       <Dependent Role="Visual">
         <PropertyRef Name="fk_Property" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Zeitkonto_Taetigkeit_Zeitkonto_33">
-    <End Role="Zeitkonto" Type="Model.Store.Zeitkonto" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Taetigkeiten" Type="Model.Store.Taetigkeit" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Zeitkonto">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Taetigkeiten">
-        <PropertyRef Name="fk_Zeitkonto" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
