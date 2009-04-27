@@ -185,7 +185,7 @@ namespace Kistl.API.Client
 
         public void Add(T item)
         {
-            DoInsert(item, collection.Count - 1);
+            DoInsert(item, collection.Count);
         }
 
         public void Clear()
