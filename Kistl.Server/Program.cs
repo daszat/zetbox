@@ -70,6 +70,7 @@ namespace Kistl.Server
                 {
                     Console.WriteLine("Hit the anykey to exit");
                     Console.ReadKey();
+                    Console.WriteLine("Shutting down");
                     return;
                 }
             }
@@ -77,6 +78,7 @@ namespace Kistl.Server
             server.Start(config);
             Console.WriteLine("Server started, press the anykey to exit");
             Console.ReadKey();
+            Console.WriteLine("Shutting down");
 
             server.Stop();
         }
