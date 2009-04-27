@@ -61,22 +61,45 @@ namespace Kistl.API.Client
 
         public void RemoveWithoutClearParent(T item)
         {
+            int index = collection.IndexOf(item);
             collection.Remove(item);
-            OnItemRemoved(item);
+            OnItemRemoved(item, index);
         }
 
-        private void AddToList(T item, int index)
+        private void DoInsert(T item, int index)
         {
             if (item == null) throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
+            collection.Insert(index, item);
             SetPointerProperty(item, index);
             OnItemAdded(item);
         }
 
-        private void RemoveFromList(T item)
+        private void DoRemoveAt(T item, int index)
         {
-            if (item == null) throw new ArgumentNullException("item", "Cannot remove a NULL Object to this collection");
+            collection.RemoveAt(index);
             ClearPointerProperty(item);
-            OnItemRemoved(item);
+            OnItemRemoved(item, index);
+        }
+
+        private bool DoRemove(T item)
+        {
+            if (item == null) throw new ArgumentNullException("item", "Cannot remove a NULL Object from this collection");
+
+            int index = collection.IndexOf(item);
+            if (index < 0)
+                return false;
+            DoRemoveAt(item, index);
+            return true;
+        }
+
+        private void DoClear()
+        {
+            foreach (var item in collection)
+            {
+                ClearPointerProperty(item);
+            }
+            collection.Clear();
+            OnCollectionReset();
         }
 
         private void SetPointerProperty(T item, int index)
@@ -133,15 +156,12 @@ namespace Kistl.API.Client
 
         public void Insert(int index, T item)
         {
-            collection.Insert(index, item);
-            AddToList(item, index);
+            DoInsert(item, index);
         }
 
         public void RemoveAt(int index)
         {
-            T item = collection[index];
-            collection.RemoveAt(index);
-            RemoveFromList(item);
+            DoRemoveAt(collection[index], index);
         }
 
         public T this[int index]
@@ -152,13 +172,10 @@ namespace Kistl.API.Client
             }
             set
             {
-                if (collection[index].Equals(value)) return;
+                if (Object.Equals(collection[index], value)) return;
 
-                T item = collection[index];
-                collection[index] = value;
-
-                RemoveFromList(item);
-                AddToList(value, index);
+                DoRemove(collection[index]);
+                DoInsert(value, index);
             }
         }
 
@@ -168,15 +185,12 @@ namespace Kistl.API.Client
 
         public void Add(T item)
         {
-            collection.Add(item);
-            AddToList(item, collection.Count - 1);
+            DoInsert(item, collection.Count - 1);
         }
 
         public void Clear()
         {
-            var tmpCollection = collection.ToArray();
-            collection.Clear();
-            tmpCollection.ForEach(i => RemoveFromList(i));
+            DoClear();
         }
 
         public bool Contains(T item)
@@ -201,9 +215,7 @@ namespace Kistl.API.Client
 
         public bool Remove(T item)
         {
-            var result = collection.Remove(item);
-            RemoveFromList(item);
-            return result;
+            return DoRemove(item);
         }
 
         #endregion
@@ -236,10 +248,10 @@ namespace Kistl.API.Client
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem));
         }
 
-        protected virtual void OnItemRemoved(T removedItem)
+        protected virtual void OnItemRemoved(T removedItem, int index)
         {
             if (CollectionChanged != null)
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItem));
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItem, index));
         }
 
         protected virtual void OnCollectionReset()
