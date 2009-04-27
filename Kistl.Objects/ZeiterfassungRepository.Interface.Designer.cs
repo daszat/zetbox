@@ -24,16 +24,6 @@ namespace Kistl.App.Zeiterfassung
 			}
 		}
 		
-		/// <summary>List of all TaetigkeitsArt</summary>
-		/// 
-		public IQueryable<TaetigkeitsArt> TaetigkeitsArten
-		{ 
-			get
-			{
-				return Context.GetQuery<TaetigkeitsArt>();
-			}
-		}
-		
 		/// <summary>List of all Kostentraeger</summary>
 		/// 
 		public IQueryable<Kostentraeger> Kostentraeger

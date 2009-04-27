@@ -25,7 +25,6 @@
     <EntitySet Name="Property" EntityType="Model.Property" />
     <EntitySet Name="Relation" EntityType="Model.Relation" />
     <EntitySet Name="RelationEnd" EntityType="Model.RelationEnd" />
-    <EntitySet Name="TaetigkeitsArt" EntityType="Model.TaetigkeitsArt" />
     <EntitySet Name="Task" EntityType="Model.Task" />
     <EntitySet Name="Template" EntityType="Model.Template" />
     <EntitySet Name="TestCustomObject" EntityType="Model.TestCustomObject" />
@@ -647,13 +646,6 @@
                         Relationship="Model.FK_Relation_RelationEnd_Relation_71"
                         FromRole="A"
                         ToRole="Relation" />
-  </EntityType>
-  <EntityType Name="TaetigkeitsArt">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="Task">
     <Key>

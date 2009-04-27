@@ -456,7 +456,7 @@ namespace Kistl.App.Base
 			DataStore[114].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[91];
 			DataStore[114].Reason = null;
 			DataStore[114].Seal();
-			DataStore[115].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[87];
+			DataStore[115].ConstrainedProperty = null;
 			DataStore[115].Reason = null;
 			DataStore[115].Seal();
 			DataStore[117].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[83];

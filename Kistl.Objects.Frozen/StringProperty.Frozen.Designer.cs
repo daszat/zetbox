@@ -149,7 +149,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(52);
+		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(51);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[1] = 
@@ -247,10 +247,6 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[85] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[85] = 
 			DataStore[85] = new StringProperty__Implementation__Frozen(85);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[87] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[87] = 
-			DataStore[87] = new StringProperty__Implementation__Frozen(87);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[91] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[91] = 
@@ -739,22 +735,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[168],
 			DataStore[85].ValueModelDescriptor = null;
 			DataStore[85].Length = 200;
 			DataStore[85].Seal();
-			DataStore[87].AltText = @"Name der Tätigkeitsart";
-			DataStore[87].CategoryTags = null;
-			DataStore[87].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[115],
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[167],
-});
-			DataStore[87].Description = @"Name der Tätigkeitsart";
-			DataStore[87].IsIndexed = false;
-			DataStore[87].IsList = false;
-			DataStore[87].IsNullable = false;
-			DataStore[87].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[87].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[31];
-			DataStore[87].PropertyName = @"Name";
-			DataStore[87].ValueModelDescriptor = null;
-			DataStore[87].Length = 200;
-			DataStore[87].Seal();
 			DataStore[91].AltText = @"Name des Parameter";
 			DataStore[91].CategoryTags = null;
 			DataStore[91].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(3) {

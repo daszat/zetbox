@@ -182,14 +182,6 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TaetigkeitsArt">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TaetigkeitsArt)">
-	    <MappingFragment StoreEntitySet="TaetigkeitsArt">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Name" ColumnName="Name" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DataType">
       <EntityTypeMapping TypeName="IsTypeOf(Model.DataType)">
 	    <MappingFragment StoreEntitySet="DataType">

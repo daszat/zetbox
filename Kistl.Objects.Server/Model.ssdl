@@ -19,7 +19,6 @@
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons"/>
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies"/>
     <EntitySet Name="MethodInvocation" EntityType="Model.Store.MethodInvocation" Table="MethodInvocations"/>
-    <EntitySet Name="TaetigkeitsArt" EntityType="Model.Store.TaetigkeitsArt" Table="TaetigkeitsArten"/>
     <EntitySet Name="DataType" EntityType="Model.Store.DataType" Table="DataTypes"/>
     <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Table="BaseParameters"/>
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries"/>
@@ -761,14 +760,6 @@
     <Property Name="fk_InvokeOnObjectClass" Type="int" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="fk_Implementor" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="TaetigkeitsArt">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="DataType">

@@ -239,7 +239,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(95);
+		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(94);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new MethodInvocation__Implementation__Frozen(1);
@@ -299,8 +299,6 @@ namespace Kistl.App.Base
 			DataStore[35] = new MethodInvocation__Implementation__Frozen(35);
 
 			DataStore[37] = new MethodInvocation__Implementation__Frozen(37);
-
-			DataStore[44] = new MethodInvocation__Implementation__Frozen(44);
 
 			DataStore[45] = new MethodInvocation__Implementation__Frozen(45);
 
@@ -609,12 +607,6 @@ namespace Kistl.App.Base
 			DataStore[37].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
 			DataStore[37].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[37].Seal();
-			DataStore[44].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[6];
-			DataStore[44].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[31];
-			DataStore[44].MemberName = @"OnToString_TaetigkeitsArt";
-			DataStore[44].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[71];
-			DataStore[44].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[44].Seal();
 			DataStore[45].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[2];
 			DataStore[45].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
 			DataStore[45].MemberName = @"OnPreSave_Zeitkonto";

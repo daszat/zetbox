@@ -102,7 +102,6 @@
     <Compile Include="StringRangeConstraint.Client.Designer.cs" />
     <Compile Include="Struct.Client.Designer.cs" />
     <Compile Include="StructProperty.Client.Designer.cs" />
-    <Compile Include="TaetigkeitsArt.Client.Designer.cs" />
     <Compile Include="Task.Client.Designer.cs" />
     <Compile Include="Template.Client.Designer.cs" />
     <Compile Include="TestCustomObject.Client.Designer.cs" />
