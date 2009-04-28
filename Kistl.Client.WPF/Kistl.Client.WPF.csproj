@@ -166,11 +166,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Zeiterfassung\LeistungsEintragView.xaml">
+    <Page Include="View\TimeRecords\WorkEffortView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Zeiterfassung\LeistungserfassungsView.xaml">
+    <Page Include="View\TimeRecords\WorkEffortRecorderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -259,11 +259,11 @@
     <Compile Include="View\PropertyTextBoxView.xaml.cs">
       <DependentUpon>PropertyTextBoxView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Zeiterfassung\LeistungsEintragView.xaml.cs">
-      <DependentUpon>LeistungsEintragView.xaml</DependentUpon>
+    <Compile Include="View\TimeRecords\WorkEffortView.xaml.cs">
+      <DependentUpon>WorkEffortView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Zeiterfassung\LeistungserfassungsView.xaml.cs">
-      <DependentUpon>LeistungserfassungsView.xaml</DependentUpon>
+    <Compile Include="View\TimeRecords\WorkEffortRecorderView.xaml.cs">
+      <DependentUpon>WorkEffortRecorderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="WpfModelFactory.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

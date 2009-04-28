@@ -188,7 +188,7 @@ namespace Kistl.App.TimeRecords
         private string _Name;
 
         /// <summary>
-        /// Notizen zu dieser Leistung
+        /// Space for notes
         /// </summary>
         // value type property
         [XmlIgnore()]

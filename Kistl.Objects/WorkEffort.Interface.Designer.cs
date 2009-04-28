@@ -34,7 +34,7 @@ namespace Kistl.App.TimeRecords
 			set;
 		}
         /// <summary>
-        /// Notizen zu dieser Leistung
+        /// Space for notes
         /// </summary>
 		string Notes {
 			get;

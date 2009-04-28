@@ -1188,7 +1188,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[252],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[246],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[251],
 });
-			DataStore[246].Description = @"Notizen zu dieser Leistung";
+			DataStore[246].Description = @"Space for notes";
 			DataStore[246].IsIndexed = false;
 			DataStore[246].IsList = false;
 			DataStore[246].IsNullable = false;

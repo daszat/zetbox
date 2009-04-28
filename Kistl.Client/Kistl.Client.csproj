@@ -92,8 +92,8 @@
     <Compile Include="Presentables\SelectionTaskModel.cs" />
     <Compile Include="Presentables\ValuePropertyModels.cs" />
     <Compile Include="Presentables\WorkspaceModel.cs" />
-    <Compile Include="Presentables\Zeiterfassung\LeistungsEintragModel.cs" />
-    <Compile Include="Presentables\Zeiterfassung\LeistungserfassungsModel.cs" />
+    <Compile Include="Presentables\TimeRecords\WorkEffortModel.cs" />
+    <Compile Include="Presentables\TimeRecords\WorkEffortRecorderModel.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="GuiApplicationContext.cs" />
