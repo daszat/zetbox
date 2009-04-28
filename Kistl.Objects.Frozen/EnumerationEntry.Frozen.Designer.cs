@@ -206,7 +206,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(41);
+		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(42);
 		internal static void CreateInstances()
 		{
 			DataStore[2] = new EnumerationEntry__Implementation__Frozen(2);
@@ -290,6 +290,8 @@ namespace Kistl.App.Base
 			DataStore[76] = new EnumerationEntry__Implementation__Frozen(76);
 
 			DataStore[77] = new EnumerationEntry__Implementation__Frozen(77);
+
+			DataStore[78] = new EnumerationEntry__Implementation__Frozen(78);
 
 		}
 
@@ -499,6 +501,11 @@ namespace Kistl.App.Base
 			DataStore[77].Name = @"WinForms";
 			DataStore[77].Value = 3;
 			DataStore[77].Seal();
+			DataStore[78].Description = null;
+			DataStore[78].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[78].Name = @"Guid";
+			DataStore[78].Value = 27;
+			DataStore[78].Seal();
 	
 		}
 #region Serializer

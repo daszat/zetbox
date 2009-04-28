@@ -223,6 +223,13 @@
       <End Role="B_IsValidNamespaceConstraint" EntitySet="IsValidNamespaceConstraint" />
     </AssociationSet>
     
+    <EntitySet Name="GuidProperty" EntityType="Model.Store.GuidProperty" Table="GuidProperties"/>
+    <!-- inherits from ValueTypeProperty -->
+    <AssociationSet Name="FK_GuidProperty_ValueTypeProperty_ID" Association="Model.Store.FK_GuidProperty_ValueTypeProperty_ID" >
+      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
+      <End Role="B_GuidProperty" EntitySet="GuidProperty" />
+    </AssociationSet>
+    
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
     <!-- 
@@ -1084,6 +1091,13 @@
     <Property Name="From" Type="datetime" Nullable="false" />
     <Property Name="Thru" Type="datetime" Nullable="false" />
     <Property Name="fk_Mitarbeiter" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="GuidProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
@@ -2361,6 +2375,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_IsValidNamespaceConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuidProperty_ValueTypeProperty_ID">
+    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
+    <End Role="B_GuidProperty" Type="Model.Store.GuidProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ValueTypeProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_GuidProperty">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

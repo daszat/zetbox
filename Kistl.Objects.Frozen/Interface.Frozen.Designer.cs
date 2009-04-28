@@ -108,7 +108,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, Interface__Implementation__Frozen> DataStore = new Dictionary<int, Interface__Implementation__Frozen>(2);
+		internal new static Dictionary<int, Interface__Implementation__Frozen> DataStore = new Dictionary<int, Interface__Implementation__Frozen>(3);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48] = 
@@ -116,6 +116,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52] = 
 			DataStore[52] = new Interface__Implementation__Frozen(52);
+
+			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[88] = 
+			DataStore[88] = new Interface__Implementation__Frozen(88);
 
 		}
 
@@ -150,6 +153,17 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[98],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[113],
 });
 			DataStore[52].Seal();
+			DataStore[88].ClassName = @"IExportable";
+			DataStore[88].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[10];
+			DataStore[88].Description = @"Marks a DataType as exportable";
+			DataStore[88].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[88].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
+});
+			DataStore[88].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[88].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
+});
+			DataStore[88].Seal();
 	
 		}
 #region Serializer

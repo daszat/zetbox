@@ -254,6 +254,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all GuidProperty</summary>
+		/// Guid Property
+		public IQueryable<GuidProperty> GuidProperties
+		{ 
+			get
+			{
+				return Context.GetQuery<GuidProperty>();
+			}
+		}
+		
 		/// <summary>List of all EnumerationProperty</summary>
 		/// Metadefinition Object for Enumeration Properties.
 		public IQueryable<EnumerationProperty> EnumerationProperties

@@ -297,6 +297,11 @@ namespace Kistl.App.Base
             e.Result = "System.DateTime";
         }
 
+        public void OnGetPropertyTypeString_GuidProperty(Kistl.App.Base.DateTimeProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Guid";
+        }
+
         public void OnGetPropertyTypeString_EnumerationProperty(EnumerationProperty obj, MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?

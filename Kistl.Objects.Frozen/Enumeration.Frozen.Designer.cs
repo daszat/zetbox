@@ -211,7 +211,7 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[77],
 			DataStore[55].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[55].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
 });
-			DataStore[55].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(26) {
+			DataStore[55].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(27) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[40],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[41],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[42],
@@ -238,6 +238,7 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[71],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[74],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[75],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[76],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[78],
 });
 			DataStore[55].Seal();
 			DataStore[78].ClassName = @"StorageType";

@@ -577,7 +577,7 @@ namespace Kistl.App.Base
 		internal static void FillDataStore() {
 			DataStore[1].Description = @"Returns the String representation of this Property Meta Object.";
 			DataStore[1].IsDisplayable = true;
-			DataStore[1].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(18) {
+			DataStore[1].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(20) {
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[20],
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[21],
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[22],
@@ -596,6 +596,8 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[82],
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[83],
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[115],
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[116],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[121],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[122],
 });
 			DataStore[1].MethodName = @"GetPropertyTypeString";
 			DataStore[1].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];

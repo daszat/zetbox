@@ -57,6 +57,7 @@
     <Compile Include="Enumeration.Interface.Designer.cs" />
     <Compile Include="EnumerationEntry.Interface.Designer.cs" />
     <Compile Include="EnumerationProperty.Interface.Designer.cs" />
+    <Compile Include="GuidProperty.Interface.Designer.cs" />
     <Compile Include="Icon.Interface.Designer.cs" />
     <Compile Include="IntegerRangeConstraint.Interface.Designer.cs" />
     <Compile Include="Interface.Interface.Designer.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="WorkEffort.Interface.Designer.cs" />
     <Compile Include="WorkEffortAccount.Interface.Designer.cs" />
     <Compile Include="CollectionEntries.Interface.Designer.cs" />
+    <Compile Include="IExportable.Interface.Designer.cs" />
     <Compile Include="IRenderer.Interface.Designer.cs" />
     <Compile Include="ITestInterface.Interface.Designer.cs" />
     <Compile Include="Multiplicity.Interface.Designer.cs" />

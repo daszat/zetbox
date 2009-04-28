@@ -137,5 +137,10 @@ namespace Kistl.App.GUI
 		/// </summary>
 		StringSelection = 26,
 
+		/// <summary>
+		/// 
+		/// </summary>
+		Guid = 27,
+
 	}
 }

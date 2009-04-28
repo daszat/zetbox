@@ -138,6 +138,11 @@ namespace Kistl.App.Base
             e.Result = "System.DateTime";
         }
 
+        public void OnGetPropertyTypeString_GuidProperty(Kistl.App.Base.DateTimeProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Guid";
+        }
+
         public void OnGetPropertyTypeString_EnumerationProperty(Kistl.App.Base.EnumerationProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.ClassName;

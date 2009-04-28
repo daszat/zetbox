@@ -140,7 +140,31 @@ namespace Kistl.Client.WPF
                     // lv.VisualType = VisualType.WorkspaceWindow;
                     // lv.PresentedModelDescriptor = ctx.GetQuery<PresentableModelDescriptor>()
                     //    .Single(o => o.PresentableModelRef.ID == typeof(WorkEffortRecorderModel).ToRef(ctx).ID);
-                    ctx.SubmitChanges();
+
+                    //var desc = ctx.Create<PresentableModelDescriptor>();
+                    //desc.DefaultVisualType = VisualType.Guid;
+                    //desc.Description = "A GUID attribute";
+                    //desc.PresentableModelRef = typeof(Kistl.Client.Presentables.NullableValuePropertyModel<Guid>).ToRef(ctx);
+
+                    //var lv = ctx.Create<ViewDescriptor>();
+                    //lv.ControlRef = ctx.Find<TypeRef>(154);
+                    //lv.Toolkit = Toolkit.WPF;
+                    //lv.VisualType = VisualType.Guid;
+                    //lv.PresentedModelDescriptor = desc;
+
+                    //var lvForms = ctx.Create<ViewDescriptor>();
+                    //lvForms.ControlRef = ctx.Find<TypeRef>(153);
+                    //lvForms.Toolkit = Toolkit.WinForms;
+                    //lvForms.VisualType = VisualType.Guid;
+                    //lvForms.PresentedModelDescriptor = desc;
+
+                    //var lvAspNet = ctx.Create<ViewDescriptor>();
+                    //lvAspNet.ControlRef = ctx.Find<TypeRef>(152);
+                    //lvAspNet.Toolkit = Toolkit.ASPNET;
+                    //lvAspNet.VisualType = VisualType.Guid;
+                    //lvAspNet.PresentedModelDescriptor = desc;
+
+                    //ctx.SubmitChanges();
                 }
             }
         }

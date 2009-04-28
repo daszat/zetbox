@@ -63,6 +63,7 @@
     <Compile Include="Enumeration.Frozen.Designer.cs" />
     <Compile Include="EnumerationEntry.Frozen.Designer.cs" />
     <Compile Include="EnumerationProperty.Frozen.Designer.cs" />
+    <Compile Include="GuidProperty.Frozen.Designer.cs" />
     <Compile Include="Icon.Frozen.Designer.cs" />
     <Compile Include="IntegerRangeConstraint.Frozen.Designer.cs" />
     <Compile Include="Interface.Frozen.Designer.cs" />

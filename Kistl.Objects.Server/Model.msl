@@ -83,6 +83,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.GuidProperty)">
+	    <MappingFragment StoreEntitySet="GuidProperty">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.IntProperty)">
 	    <MappingFragment StoreEntitySet="IntProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />

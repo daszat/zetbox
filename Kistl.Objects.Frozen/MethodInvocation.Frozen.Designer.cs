@@ -239,7 +239,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(95);
+		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(97);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new MethodInvocation__Implementation__Frozen(1);
@@ -431,6 +431,10 @@ namespace Kistl.App.Base
 			DataStore[119] = new MethodInvocation__Implementation__Frozen(119);
 
 			DataStore[120] = new MethodInvocation__Implementation__Frozen(120);
+
+			DataStore[121] = new MethodInvocation__Implementation__Frozen(121);
+
+			DataStore[122] = new MethodInvocation__Implementation__Frozen(122);
 
 		}
 
@@ -1005,6 +1009,18 @@ namespace Kistl.App.Base
 			DataStore[120].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[165];
 			DataStore[120].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[120].Seal();
+			DataStore[121].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[1];
+			DataStore[121].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[89];
+			DataStore[121].MemberName = @"OnGetPropertyTypeString_GuidProperty";
+			DataStore[121].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[121].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[121].Seal();
+			DataStore[122].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[4];
+			DataStore[122].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[89];
+			DataStore[122].MemberName = @"OnGetPropertyTypeString_GuidProperty";
+			DataStore[122].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
+			DataStore[122].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[122].Seal();
 	
 		}
 #region Serializer

@@ -11,8 +11,18 @@
 <%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 <%
-	
-	InterfaceType t = cls.GetDescribedInterfaceType();
+	InterfaceType t;
+	try
+	{
+		t = cls.GetDescribedInterfaceType();
+	}
+	catch(TypeLoadException ex)
+	{
+		// TODO: Offensichtlich ist der Datentyp neu -> Fehler ignorieren
+		Console.WriteLine("** WARNING: DataStore, cls.GetDescribedInterfaceType()");
+		Console.WriteLine(ex.ToString());
+		return;
+	}
 	
 	// list of all instances of exactly this class
 	var instanceList = ctx.GetQuery(t)

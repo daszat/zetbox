@@ -206,7 +206,7 @@ namespace Kistl.App.GUI
         { }
 
 
-		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(66);
+		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(69);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new ViewDescriptor__Implementation__Frozen(1);
@@ -340,6 +340,12 @@ namespace Kistl.App.GUI
 			DataStore[65] = new ViewDescriptor__Implementation__Frozen(65);
 
 			DataStore[66] = new ViewDescriptor__Implementation__Frozen(66);
+
+			DataStore[67] = new ViewDescriptor__Implementation__Frozen(67);
+
+			DataStore[68] = new ViewDescriptor__Implementation__Frozen(68);
+
+			DataStore[69] = new ViewDescriptor__Implementation__Frozen(69);
 
 		}
 
@@ -674,6 +680,21 @@ namespace Kistl.App.GUI
 			DataStore[66].Toolkit = (Toolkit)0;
 			DataStore[66].VisualType = (VisualType)1;
 			DataStore[66].Seal();
+			DataStore[67].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
+			DataStore[67].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
+			DataStore[67].Toolkit = (Toolkit)1;
+			DataStore[67].VisualType = (VisualType)27;
+			DataStore[67].Seal();
+			DataStore[68].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
+			DataStore[68].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
+			DataStore[68].Toolkit = (Toolkit)3;
+			DataStore[68].VisualType = (VisualType)27;
+			DataStore[68].Seal();
+			DataStore[69].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
+			DataStore[69].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
+			DataStore[69].Toolkit = (Toolkit)0;
+			DataStore[69].VisualType = (VisualType)27;
+			DataStore[69].Seal();
 	
 		}
 #region Serializer

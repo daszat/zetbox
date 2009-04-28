@@ -80,6 +80,8 @@ namespace Kistl.App
 				return Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.EnumerationProperty))
 				return Kistl.App.Base.EnumerationProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
+			if (ifType == typeof(Kistl.App.Base.GuidProperty))
+				return Kistl.App.Base.GuidProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.IntegerRangeConstraint))
 				return Kistl.App.Base.IntegerRangeConstraint__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.Interface))
@@ -169,6 +171,7 @@ namespace Kistl.App
 					.Concat(GetQuery<Kistl.App.Base.Enumeration>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.EnumerationEntry>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.EnumerationProperty>().Cast<IPersistenceObject>())
+					.Concat(GetQuery<Kistl.App.Base.GuidProperty>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.IntegerRangeConstraint>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.Interface>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.IntParameter>().Cast<IPersistenceObject>())
@@ -249,6 +252,8 @@ namespace Kistl.App
 				return Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.EnumerationProperty))
 				return Kistl.App.Base.EnumerationProperty__Implementation__Frozen.DataStore[ID];
+			if (ifType == typeof(Kistl.App.Base.GuidProperty))
+				return Kistl.App.Base.GuidProperty__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.IntegerRangeConstraint))
 				return Kistl.App.Base.IntegerRangeConstraint__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.Interface))

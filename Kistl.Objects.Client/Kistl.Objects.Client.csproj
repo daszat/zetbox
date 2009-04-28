@@ -70,6 +70,7 @@
     <Compile Include="Enumeration.Client.Designer.cs" />
     <Compile Include="EnumerationEntry.Client.Designer.cs" />
     <Compile Include="EnumerationProperty.Client.Designer.cs" />
+    <Compile Include="GuidProperty.Client.Designer.cs" />
     <Compile Include="Icon.Client.Designer.cs" />
     <Compile Include="IntegerRangeConstraint.Client.Designer.cs" />
     <Compile Include="Interface.Client.Designer.cs" />

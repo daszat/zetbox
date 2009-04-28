@@ -150,6 +150,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>Frozen List of all GuidProperty</summary>
+		/// Guid Property
+		public static IQueryable<GuidProperty> GuidProperties
+		{ 
+			get
+			{
+				return GuidProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<GuidProperty>();
+			}
+		}
+		
 		/// <summary>Frozen List of all IntegerRangeConstraint</summary>
 		/// 
 		public static IQueryable<IntegerRangeConstraint> IntegerRangeConstraints
@@ -387,6 +397,7 @@ namespace Kistl.App.Base
 				Enumeration__Implementation__Frozen.CreateInstances();
 				EnumerationEntry__Implementation__Frozen.CreateInstances();
 				EnumerationProperty__Implementation__Frozen.CreateInstances();
+				GuidProperty__Implementation__Frozen.CreateInstances();
 				IntegerRangeConstraint__Implementation__Frozen.CreateInstances();
 				Interface__Implementation__Frozen.CreateInstances();
 				IntParameter__Implementation__Frozen.CreateInstances();
@@ -428,6 +439,7 @@ namespace Kistl.App.Base
 				Enumeration__Implementation__Frozen.FillDataStore();
 				EnumerationEntry__Implementation__Frozen.FillDataStore();
 				EnumerationProperty__Implementation__Frozen.FillDataStore();
+				GuidProperty__Implementation__Frozen.FillDataStore();
 				IntegerRangeConstraint__Implementation__Frozen.FillDataStore();
 				Interface__Implementation__Frozen.FillDataStore();
 				IntParameter__Implementation__Frozen.FillDataStore();
