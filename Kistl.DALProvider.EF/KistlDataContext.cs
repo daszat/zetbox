@@ -237,7 +237,7 @@ namespace Kistl.DALProvider.EF
             {
                 // Must use OfType -> ObjectStateManager also contains RelationshipEntities
                 return _ctx.ObjectStateManager
-                    .GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified | System.Data.EntityState.Deleted | System.Data.EntityState.Unchanged)
+                    .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted | EntityState.Unchanged)
                     .Select(e => e.Entity).OfType<IPersistenceObject>();
             }
         }
@@ -283,7 +283,7 @@ namespace Kistl.DALProvider.EF
 #endif
 
             var saveList = _ctx.ObjectStateManager
-                .GetObjectStateEntries(System.Data.EntityState.Added | System.Data.EntityState.Modified)
+                .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
                 .Select(e => e.Entity)
                 .OfType<IPersistenceObject>()
                 .ToList();

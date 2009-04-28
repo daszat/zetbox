@@ -1854,7 +1854,8 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[113],
 			DataStore[164].Seal();
 			DataStore[165].Description = null;
 			DataStore[165].IsDisplayable = false;
-			DataStore[165].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[165].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[120],
 });
 			DataStore[165].MethodName = @"ToString";
 			DataStore[165].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];

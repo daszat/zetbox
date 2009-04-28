@@ -173,7 +173,7 @@ namespace Kistl.App.GUI
         { }
 
 
-		internal static Dictionary<int, PresentableModelDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, PresentableModelDescriptor__Implementation__Frozen>(29);
+		internal static Dictionary<int, PresentableModelDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, PresentableModelDescriptor__Implementation__Frozen>(31);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new PresentableModelDescriptor__Implementation__Frozen(1);
@@ -233,6 +233,10 @@ namespace Kistl.App.GUI
 			DataStore[32] = new PresentableModelDescriptor__Implementation__Frozen(32);
 
 			DataStore[33] = new PresentableModelDescriptor__Implementation__Frozen(33);
+
+			DataStore[37] = new PresentableModelDescriptor__Implementation__Frozen(37);
+
+			DataStore[38] = new PresentableModelDescriptor__Implementation__Frozen(38);
 
 		}
 
@@ -353,6 +357,14 @@ namespace Kistl.App.GUI
 			DataStore[33].Description = @"DataObjectModel with specific extensions for ObjectClasses";
 			DataStore[33].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[10];
 			DataStore[33].Seal();
+			DataStore[37].DefaultVisualType = (VisualType)1;
+			DataStore[37].Description = @"A model for LeistungsEinträge";
+			DataStore[37].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[563];
+			DataStore[37].Seal();
+			DataStore[38].DefaultVisualType = (VisualType)24;
+			DataStore[38].Description = @"A workspace for Leistungserfassung/work effort recording";
+			DataStore[38].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[564];
+			DataStore[38].Seal();
 	
 		}
 #region Serializer

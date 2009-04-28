@@ -48,6 +48,11 @@ namespace Kistl.App.Extensions
                 {
                     result.FullName = t.FullName;
                 }
+
+                if (t.BaseType != null)
+                {
+                    result.Parent = t.BaseType.ToRef(ctx);
+                }
             }
             return result;
         }

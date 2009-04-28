@@ -239,7 +239,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(94);
+		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(95);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new MethodInvocation__Implementation__Frozen(1);
@@ -429,6 +429,8 @@ namespace Kistl.App.Base
 			DataStore[118] = new MethodInvocation__Implementation__Frozen(118);
 
 			DataStore[119] = new MethodInvocation__Implementation__Frozen(119);
+
+			DataStore[120] = new MethodInvocation__Implementation__Frozen(120);
 
 		}
 
@@ -997,6 +999,12 @@ namespace Kistl.App.Base
 			DataStore[119].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[14];
 			DataStore[119].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[119].Seal();
+			DataStore[120].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[120].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
+			DataStore[120].MemberName = @"OnToString_PresentableModelDescriptor";
+			DataStore[120].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[165];
+			DataStore[120].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[120].Seal();
 	
 		}
 #region Serializer

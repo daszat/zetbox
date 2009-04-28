@@ -227,7 +227,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(163);
+		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(165);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new TypeRef__Implementation__Frozen(1);
@@ -555,6 +555,10 @@ namespace Kistl.App.Base
 			DataStore[561] = new TypeRef__Implementation__Frozen(561);
 
 			DataStore[562] = new TypeRef__Implementation__Frozen(562);
+
+			DataStore[563] = new TypeRef__Implementation__Frozen(563);
+
+			DataStore[564] = new TypeRef__Implementation__Frozen(564);
 
 		}
 
@@ -994,7 +998,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[116],
 			DataStore[282].FullName = @"Kistl.Client.Forms.View.DataObjectReferenceView";
 			DataStore[282].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
-			DataStore[282].Parent = null;
+			DataStore[282].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[332];
 			DataStore[282].Seal();
 			DataStore[283].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
 			DataStore[283].FullName = @"Kistl.Client.Presentables.PropertyGroupModel";
@@ -1597,6 +1601,18 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
 });
 			DataStore[562].Parent = null;
 			DataStore[562].Seal();
+			DataStore[563].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
+			DataStore[563].FullName = @"Kistl.Client.Presentables.Zeiterfassung.LeistungsEintragModel";
+			DataStore[563].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
+});
+			DataStore[563].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83];
+			DataStore[563].Seal();
+			DataStore[564].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
+			DataStore[564].FullName = @"Kistl.Client.Presentables.Zeiterfassung.LeistungserfassungsModel";
+			DataStore[564].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
+});
+			DataStore[564].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[13];
+			DataStore[564].Seal();
 	
 		}
 #region Serializer
