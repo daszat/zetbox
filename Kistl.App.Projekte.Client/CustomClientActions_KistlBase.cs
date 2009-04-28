@@ -6,7 +6,6 @@ using System.Text;
 using System.Xml;
 
 using Kistl.API;
-using Kistl.API.Client;
 using Kistl.App.Extensions;
 
 namespace Kistl.App.Base
@@ -14,12 +13,26 @@ namespace Kistl.App.Base
     public partial class CustomClientActions_KistlBase
     {
         #region ToString
+
+        public void OnToString_Assembly(Assembly obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.AssemblyName;
+        }
+
+        public void OnToString_BaseParameter(BaseParameter obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = string.Format("{0}{1} {2}",
+                obj.IsReturnParameter ? "[Return] " : "",
+                obj.GetParameterTypeString(),
+                obj.ParameterName);
+        }
+
         /// <summary>
         /// ToString Event überschreiben
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        public void OnToString_DataType(DataType obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnToString_DataType(DataType obj, MethodReturnEventArgs<string> e)
         {
             if (Helper.IsFloatingObject(obj))
             {
@@ -38,7 +51,7 @@ namespace Kistl.App.Base
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        public void OnToString_Enumeration(Enumeration obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnToString_Enumeration(Enumeration obj, MethodReturnEventArgs<string> e)
         {
             // TODO: if (!IsValid)
             if (Helper.IsFloatingObject(obj))
@@ -56,7 +69,7 @@ namespace Kistl.App.Base
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        public void OnToString_EnumerationEntry(EnumerationEntry obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnToString_EnumerationEntry(EnumerationEntry obj, MethodReturnEventArgs<string> e)
         {
             // TODO: if (!IsValid)
             if (Helper.IsFloatingObject(obj))
@@ -74,7 +87,7 @@ namespace Kistl.App.Base
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        public void OnToString_MethodInvokation(MethodInvocation obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnToString_MethodInvokation(MethodInvocation obj, MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
@@ -90,7 +103,31 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnToString_Property(Base.Property obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnToString_Method(Method obj, MethodReturnEventArgs<string> e)
+        {
+            // TODO: IsValid?
+            if (obj.ObjectClass != null && obj.Module != null)
+            {
+                e.Result = obj.ObjectClass.Module.Namespace + "." +
+                                obj.ObjectClass.ClassName + "." + obj.MethodName;
+            }
+            else
+            {
+                e.Result = String.Format("Method {0}: {1}", obj.ID, obj.MethodName);
+            }
+        }
+
+        public void OnToString_Module(Module obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.ModuleName;
+        }
+
+        public void OnToString_ObjectReferenceProperty(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "-> " + e.Result;
+        }
+
+        public void OnToString_Property(Property obj, MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
@@ -108,44 +145,7 @@ namespace Kistl.App.Base
             if (obj.IsList) e.Result += " [0..n]";
         }
 
-        public void OnToString_Method(Kistl.App.Base.Method obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            // TODO: IsValid?
-            if (obj.ObjectClass != null && obj.Module != null)
-            {
-                e.Result = obj.ObjectClass.Module.Namespace + "." +
-                                obj.ObjectClass.ClassName + "." + obj.MethodName;
-            }
-            else
-            {
-                e.Result = String.Format("Method {0}: {1}", obj.ID, obj.MethodName);
-            }
-        }
-
-        public void OnToString_Assembly(Kistl.App.Base.Assembly obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            e.Result = obj.AssemblyName;
-        }
-
-        public void OnToString_Module(Kistl.App.Base.Module obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            e.Result = obj.ModuleName;
-        }
-
-        public void OnToString_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            e.Result = "-> " + e.Result;
-        }
-
-        public void OnToString_BaseParameter(Kistl.App.Base.BaseParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            e.Result = string.Format("{0}{1} {2}",
-                obj.IsReturnParameter ? "[Return] " : "",
-                obj.GetParameterTypeString(),
-                obj.ParameterName);
-        }
-
-        public void OnToString_Relation(Relation obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnToString_Relation(Relation obj, MethodReturnEventArgs<string> e)
         {
             try
             {
@@ -161,14 +161,14 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnToString_RelationEnd(RelationEnd obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnToString_RelationEnd(RelationEnd obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("RelationEnd {0}({1})",
                 obj.RoleName,
                 obj.Type == null ? "no type" : obj.Type.ClassName);
         }
 
-        public void OnToString_TypeRef(Kistl.App.Base.TypeRef obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnToString_TypeRef(TypeRef obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0}{1}, {2}",
                 obj.FullName,
@@ -186,8 +186,7 @@ namespace Kistl.App.Base
 
         #endregion
 
-        #region GetTypes
-        public void OnGetDataType_DataType(Kistl.App.Base.DataType obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+        public void OnGetDataType_DataType(DataType obj, MethodReturnEventArgs<System.Type> e)
         {
             // TODO: remove this bad test-hack
             string fullname = obj.GetDataTypeString();
@@ -195,7 +194,7 @@ namespace Kistl.App.Base
             e.Result = Type.GetType(fullname + ", " + assembly, true);
         }
 
-        public void OnGetDataTypeString_DataType(Kistl.App.Base.DataType obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetDataTypeString_DataType(DataType obj, MethodReturnEventArgs<string> e)
         {
             if (Helper.IsFloatingObject(obj))
             {
@@ -207,7 +206,9 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnGetPropertyType_Property(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+        #region OnGetPropertyType*
+
+        public void OnGetPropertyType_Property(Property obj, MethodReturnEventArgs<System.Type> e)
         {
             string fullname = obj.GetPropertyTypeString();
 
@@ -229,12 +230,12 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnGetPropertyTypeString_Property(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_Property(Property obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "<Invalid Datatype, please implement Property.GetPropertyTypeString()>";
         }
 
-        public void OnGetPropertyTypeString_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_ObjectReferenceProperty(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
@@ -256,7 +257,7 @@ namespace Kistl.App.Base
 
         }
 
-        public void OnGetPropertyTypeString_StructProperty(Kistl.App.Base.StructProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_StructProperty(StructProperty obj, MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
@@ -271,32 +272,32 @@ namespace Kistl.App.Base
 
         }
 
-        public void OnGetPropertyTypeString_StringProperty(Kistl.App.Base.StringProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_StringProperty(StringProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "System.String";
         }
 
-        public void OnGetPropertyTypeString_DoubleProperty(Kistl.App.Base.DoubleProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_DoubleProperty(DoubleProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "System.Double";
         }
 
-        public void OnGetPropertyTypeString_BoolProperty(Kistl.App.Base.BoolProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_BoolProperty(BoolProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "System.Boolean";
         }
 
-        public void OnGetPropertyTypeString_IntProperty(Kistl.App.Base.IntProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_IntProperty(IntProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "System.Int32";
         }
 
-        public void OnGetPropertyTypeString_DateTimeProperty(Kistl.App.Base.DateTimeProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_DateTimeProperty(DateTimeProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "System.DateTime";
         }
 
-        public void OnGetPropertyTypeString_EnumerationProperty(Kistl.App.Base.EnumerationProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_EnumerationProperty(EnumerationProperty obj, MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
@@ -309,44 +310,47 @@ namespace Kistl.App.Base
             }
         }
 
-        #region OnGetParameterTypeString_*
+        #endregion
 
-        public void OnGetParameterType_BaseParameter(Kistl.App.Base.BaseParameter obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+        #region OnGetParameterType*
+
+        public void OnGetParameterType_BaseParameter(BaseParameter obj, MethodReturnEventArgs<System.Type> e)
         {
             // TODO: e.Result = Type.GetType(obj.GetParameterTypeString(), true);
             e.Result = Type.GetType(obj.GetParameterTypeString());
         }
-        public void OnGetParameterType_ObjectParameter(Kistl.App.Base.ObjectParameter obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+
+        public void OnGetParameterType_ObjectParameter(ObjectParameter obj, MethodReturnEventArgs<System.Type> e)
         {
             e.Result = Type.GetType(obj.GetParameterTypeString() + ", Kistl.Objects", true);
         }
 
-        public void OnGetParameterTypeString_StringParameter(Kistl.App.Base.StringParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetParameterTypeString_StringParameter(StringParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "System.String";
         }
 
-        public void OnGetParameterTypeString_DoubleParameter(Kistl.App.Base.DoubleParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetParameterTypeString_DoubleParameter(DoubleParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "System.Double";
         }
 
-        public void OnGetParameterTypeString_BoolParameter(Kistl.App.Base.BoolParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetParameterTypeString_BoolParameter(BoolParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "System.Boolean";
         }
 
-        public void OnGetParameterTypeString_IntParameter(Kistl.App.Base.IntParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetParameterTypeString_IntParameter(IntParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "System.Int32";
         }
 
-        public void OnGetParameterTypeString_DateTimeParameter(Kistl.App.Base.DateTimeParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetParameterTypeString_DateTimeParameter(DateTimeParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "System.DateTime";
         }
 
-        public void OnGetParameterTypeString_ObjectParameter(Kistl.App.Base.ObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetParameterTypeString_ObjectParameter(ObjectParameter obj, MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
@@ -359,21 +363,19 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnGetParameterTypeString_CLRObjectParameter(Kistl.App.Base.CLRObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetParameterTypeString_CLRObjectParameter(CLRObjectParameter obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0}, {1}", obj.FullTypeName, obj.Assembly);
         }
 
         #endregion
 
-        #endregion
-
-        public void OnGetReturnParameter_Method(Kistl.App.Base.Method obj, Kistl.API.MethodReturnEventArgs<BaseParameter> e)
+        public void OnGetReturnParameter_Method(Method obj, MethodReturnEventArgs<BaseParameter> e)
         {
             e.Result = obj.Parameter.SingleOrDefault(param => param.IsReturnParameter);
         }
 
-        public void OnGetInheritedMethods_ObjectClass(Kistl.App.Base.ObjectClass obj, Kistl.API.MethodReturnEventArgs<IList<Method>> e)
+        public void OnGetInheritedMethods_ObjectClass(ObjectClass obj, MethodReturnEventArgs<IList<Method>> e)
         {
             ObjectClass baseObjectClass = obj.BaseObjectClass;
             if (baseObjectClass != null)
@@ -387,7 +389,7 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnAsType_TypeRef(TypeRef obj, Kistl.API.MethodReturnEventArgs<Type> e, bool throwOnError)
+        public void OnAsType_TypeRef(TypeRef obj, MethodReturnEventArgs<Type> e, bool throwOnError)
         {
             e.Result = Type.GetType(String.Format("{0}, {1}", obj.FullName, obj.Assembly.AssemblyName), throwOnError);
             if (obj.GenericArguments.Count > 0)
