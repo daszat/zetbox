@@ -138,7 +138,7 @@ namespace Kistl.App.Base
             e.Result = "System.DateTime";
         }
 
-        public void OnGetPropertyTypeString_GuidProperty(Kistl.App.Base.DateTimeProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnGetPropertyTypeString_GuidProperty(Kistl.App.Base.GuidProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = "System.Guid";
         }

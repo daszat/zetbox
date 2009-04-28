@@ -2219,7 +2219,7 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[122],
 });
 			DataStore[89].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8];
 			DataStore[89].DefaultModel = null;
-			DataStore[89].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
+			DataStore[89].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[89].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
 			DataStore[89].IsFrozenObject = true;

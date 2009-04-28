@@ -12,5 +12,12 @@ namespace Kistl.App.Base
     public interface IExportable  
     {
 
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+		System.Guid ExportGuid {
+			get;
+			set;
+		}
     }
 }

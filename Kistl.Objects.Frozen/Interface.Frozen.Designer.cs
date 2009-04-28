@@ -161,7 +161,8 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[113],
 			DataStore[88].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
 			DataStore[88].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[88].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
+			DataStore[88].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(1) {
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[251],
 });
 			DataStore[88].Seal();
 	

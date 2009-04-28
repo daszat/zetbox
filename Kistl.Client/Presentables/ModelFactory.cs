@@ -96,6 +96,10 @@ namespace Kistl.Client.Presentables
             {
                 return CreateSpecificModel<NullableValuePropertyModel<int>>(ctx, obj, p);
             }
+            else if (p is GuidProperty && !p.IsList)
+            {
+                return CreateSpecificModel<NullableValuePropertyModel<Guid>>(ctx, obj, p);
+            }
             else if (p is StringProperty)
             {
                 if (p.ID == 77) // MethodInvocation.MemberName
