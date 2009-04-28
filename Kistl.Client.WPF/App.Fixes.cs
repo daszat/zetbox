@@ -14,6 +14,7 @@ namespace Kistl.Client.WPF
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client.Presentables.Zeiterfassung;
+    using Kistl.Client.WPF.View.Zeiterfassung;
 
     /// <content>Contains various and temporary fixes needed to clean the database</content>
     public partial class App
@@ -120,10 +121,25 @@ namespace Kistl.Client.WPF
                     // lefmDesc.DefaultVisualType = VisualType.WorkspaceWindow;
                     // lefmDesc.Description = "A workspace for Leistungserfassung/work effort recording";
                     // lefmDesc.PresentableModelRef = typeof(LeistungserfassungsModel).ToRef(ctx);
+                    // 
                     // var lemDesc = ctx.Create<PresentableModelDescriptor>();
                     // lemDesc.DefaultVisualType = VisualType.Object;
                     // lemDesc.Description = "A model for LeistungsEinträge";
                     // lemDesc.PresentableModelRef = typeof(LeistungsEintragModel).ToRef(ctx);
+                    // 
+                    // var lev = ctx.Create<ViewDescriptor>();
+                    // lev.ControlRef = typeof(LeistungsEintragView).ToRef(ctx);
+                    // lev.Toolkit = Toolkit.WPF;
+                    // lev.VisualType = VisualType.Object;
+                    // lev.PresentedModelDescriptor = ctx.GetQuery<PresentableModelDescriptor>()
+                    //    .Single(o => o.PresentableModelRef.ID == typeof(LeistungsEintragModel).ToRef(ctx).ID);
+                    // 
+                    // var lv = ctx.Create<ViewDescriptor>();
+                    // lv.ControlRef = typeof(LeistungserfassungsView).ToRef(ctx);
+                    // lv.Toolkit = Toolkit.WPF;
+                    // lv.VisualType = VisualType.WorkspaceWindow;
+                    // lv.PresentedModelDescriptor = ctx.GetQuery<PresentableModelDescriptor>()
+                    //    .Single(o => o.PresentableModelRef.ID == typeof(LeistungserfassungsModel).ToRef(ctx).ID);
                     ctx.SubmitChanges();
                 }
             }

@@ -227,7 +227,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(165);
+		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(167);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new TypeRef__Implementation__Frozen(1);
@@ -559,6 +559,10 @@ namespace Kistl.App.Base
 			DataStore[563] = new TypeRef__Implementation__Frozen(563);
 
 			DataStore[564] = new TypeRef__Implementation__Frozen(564);
+
+			DataStore[565] = new TypeRef__Implementation__Frozen(565);
+
+			DataStore[566] = new TypeRef__Implementation__Frozen(566);
 
 		}
 
@@ -1613,6 +1617,18 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
 });
 			DataStore[564].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[13];
 			DataStore[564].Seal();
+			DataStore[565].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
+			DataStore[565].FullName = @"Kistl.Client.WPF.View.Zeiterfassung.LeistungserfassungsView";
+			DataStore[565].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
+});
+			DataStore[565].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[317];
+			DataStore[565].Seal();
+			DataStore[566].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
+			DataStore[566].FullName = @"Kistl.Client.WPF.View.Zeiterfassung.LeistungsEintragView";
+			DataStore[566].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
+});
+			DataStore[566].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
+			DataStore[566].Seal();
 	
 		}
 #region Serializer

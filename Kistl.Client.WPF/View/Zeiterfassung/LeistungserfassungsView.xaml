@@ -1,0 +1,17 @@
+﻿<Window x:Class="Kistl.Client.WPF.View.Zeiterfassung.LeistungserfassungsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:zfviews="clr-namespace:Kistl.Client.WPF.View.Zeiterfassung"
+        Title="LeistungserfassungsView"
+        Height="300"
+        Width="300">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <ToggleButton IsChecked="{Binding IsCurrentlyWorking}">Working?</ToggleButton>
+            <ComboBox ItemsSource="{Binding AvailableUsers}"
+                      SelectedItem="{Binding CurrentUser}" />
+        </StackPanel>
+        <ListBox ItemsSource="{Binding Leistungen}" />
+        <zfviews:LeistungsEintragView DataContext="{Binding CurrentEintrag}" />
+    </StackPanel>
+</Window>
