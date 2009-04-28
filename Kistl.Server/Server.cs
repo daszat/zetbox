@@ -9,6 +9,8 @@ using System.Threading;
 
 using Kistl.API.Configuration;
 using Kistl.API.Server;
+using Kistl.API;
+using System.IO;
 
 namespace Kistl.Server
 {
@@ -61,7 +63,7 @@ namespace Kistl.Server
         public void Stop()
         {
             Trace.TraceInformation("Stopping Server");
-            
+
             host.Close();
             hostStreams.Close();
 
@@ -149,14 +151,42 @@ namespace Kistl.Server
             Generators.Generator.GenerateAll();
         }
 
-        internal void Export()
+        internal void Export(string file, string[] namespaces)
         {
-            Packaging.Exporter.Export(@"c:\temp\KistlExport.xml", new string[] { "Kistl.App.Projekte" });
+            Packaging.Exporter.Export(file, namespaces);
         }
 
-        internal void Import()
+        internal void Import(string file)
         {
-            Packaging.Importer.Import(@"c:\temp\KistlExport.xml");
+            Packaging.Importer.Import(file);
+        }
+
+        internal void CheckSchema()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\schemareport.log"))
+                {
+                    report.SetLength(0);
+                    SchemaManagement.SchemaManager.CheckSchema(ctx, report);
+                }
+            }
+        }
+
+        internal void CheckSchema(string file)
+        {
+            using (IKistlContext ctx = new MemoryContext())
+            {
+                using (FileStream fs = File.OpenRead(file))
+                {
+                    Packaging.Importer.Import(ctx, fs);
+                    using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\schemareport.log"))
+                    {
+                        report.SetLength(0);
+                        SchemaManagement.SchemaManager.CheckSchema(ctx, report);
+                    }
+                }
+            }
         }
 
         #region IDisposable Members

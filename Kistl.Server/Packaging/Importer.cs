@@ -12,7 +12,7 @@ namespace Kistl.Server.Packaging
 {
     public class Importer
     {
-        public static void Import(System.IO.Stream s, IKistlContext ctx)
+        public static void Import(IKistlContext ctx, Stream s)
         {
             List<IPersistenceObject> objects = new List<IPersistenceObject>();
             using (XmlTextReader xml = new XmlTextReader(s))
@@ -96,7 +96,7 @@ namespace Kistl.Server.Packaging
                 {
                     using (FileStream fs = File.OpenRead(filename))
                     {
-                        Import(fs, ctx);
+                        Import(ctx, fs);
                     }
                 }
                 Trace.TraceInformation("Import finished");

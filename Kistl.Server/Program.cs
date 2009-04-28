@@ -8,6 +8,7 @@ using System.Diagnostics;
 
 using Kistl.API.Configuration;
 using Kistl.API.Server;
+using System.Collections;
 
 namespace Kistl.Server
 {
@@ -16,6 +17,17 @@ namespace Kistl.Server
     /// </summary>
     public sealed class Program
     {
+        private static void PrintHelp()
+        {
+            Console.WriteLine("Use: Kistl.Server [<configfile.xml>]");
+            Console.WriteLine("                  [-export <destfile.xml> <namespace> [<namespace> ...]");
+            Console.WriteLine("                  [-import <sourcefile.xml]");
+            Console.WriteLine("                  [-checkschema [<schema.xml>]]");
+            Console.WriteLine("                  [-generate]");
+            Console.WriteLine("                  [-database]");
+            Console.WriteLine("                  [-all]");
+        }
+
         static void Main(string[] args)
         {
             string configFilePath;
@@ -31,56 +43,88 @@ namespace Kistl.Server
             var appCtx = new ServerApplicationContext(config);
 
             Server server = new Server();
-
-            if (args.Length > 0)
+            IEnumerator<string> arg = args.ToList().GetEnumerator();
+            bool actiondone = false;
+            while (arg.MoveNext())
             {
-                bool actiondone = false;
-
-                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-export"))))
+                if (arg.Current == "-export")
                 {
+                    if (!arg.MoveNext()) { PrintHelp(); return; }
+                    string file = arg.Current;
+                    List<string> namespaces = new List<string>();
+                    while (arg.MoveNext())
+                    {
+                        if (!arg.Current.StartsWith("-"))
+                        {
+                            namespaces.Add(arg.Current);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    server.Export(file, namespaces.ToArray());
                     actiondone = true;
-                    server.Export();
                 }
 
                 if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-import"))))
                 {
+                    if (!arg.MoveNext()) { PrintHelp(); return; }
+                    string file = arg.Current;
+                    server.Import(file);
                     actiondone = true;
-                    server.Import();
+                }
+
+                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-checkschema"))))
+                {
+                    string file = "";
+                    if (arg.MoveNext() && !arg.Current.StartsWith("-"))
+                    {
+                        file = arg.Current;
+                        server.CheckSchema(file);
+                    }
+                    else
+                    {
+                        server.CheckSchema();
+                    }
+                    actiondone = true;
                 }
 
                 if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-all"))))
                 {
-                    actiondone = true;
                     server.GenerateAll();
+                    actiondone = true;
                 }
 
                 if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-generate"))))
                 {
-                    actiondone = true;
                     server.GenerateCode();
+                    actiondone = true;
                 }
 
                 if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-database"))))
                 {
-                    actiondone = true;
                     server.GenerateDatabase();
-                }
-
-                if (actiondone)
-                {
-                    Console.WriteLine("Hit the anykey to exit");
-                    Console.ReadKey();
-                    Console.WriteLine("Shutting down");
-                    return;
+                    actiondone = true;
                 }
             }
 
-            server.Start(config);
-            Console.WriteLine("Server started, press the anykey to exit");
-            Console.ReadKey();
-            Console.WriteLine("Shutting down");
+            if (actiondone)
+            {
+                Console.WriteLine("Hit the anykey to exit");
+                Console.ReadKey();
+                Console.WriteLine("Shutting down");
+            }
+            else
+            {
 
-            server.Stop();
+                server.Start(config);
+                Console.WriteLine("Server started, press the anykey to exit");
+                Console.ReadKey();
+                Console.WriteLine("Shutting down");
+
+                server.Stop();
+            }
         }
 
         /// <summary>

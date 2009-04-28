@@ -707,6 +707,8 @@
     <Compile Include="Generators\EntityFramework\Implementation\InheritanceStorageAssociationInfo.cs" />
     <Compile Include="Packaging\Exporter.cs" />
     <Compile Include="Packaging\Importer.cs" />
+    <Compile Include="SchemaManagement\SchemaManager.cs" />
+    <Compile Include="SchemaManagement\SchemaProvider.SQLServer\SchemaProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst">
