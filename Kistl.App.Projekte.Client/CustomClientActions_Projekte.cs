@@ -78,15 +78,15 @@ namespace Kistl.App.Projekte
             //xml.GesDauer = obj.Projekt.Kostentraeger.Sum(k => k.Taetigkeiten.Sum(t => t.Dauer)).ToString("n1");
 
             //xml.ZeitEntries = new List<RechnungXML.RechnungZeitEntry>();
-            //foreach (Kistl.App.Zeiterfassung.Zeitkonto z in obj.Projekt.Kostentraeger)
+            //foreach (Kistl.App.TimeRecords.WorkEffortAccount z in obj.Projekt.Kostentraeger)
             //{
-            //    foreach (Kistl.App.Zeiterfassung.Taetigkeit t in z.Taetigkeiten)
+            //    foreach (Kistl.App.TimeRecords.Taetigkeit t in z.Taetigkeiten)
             //    {
             //        xml.ZeitEntries.Add(new RechnungXML.RechnungZeitEntry()
             //        {
             //            Datum = t.Datum.ToShortDateString(),
             //            Dauer = t.Dauer.ToString("n1"),
-            //            Zeitkonto = z.Kontoname
+            //            WorkEffortAccount = z.Name
             //        });
             //    }
             //}

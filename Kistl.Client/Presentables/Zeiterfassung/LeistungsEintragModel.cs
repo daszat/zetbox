@@ -1,8 +1,8 @@
-// <copyright file="LeistungsEintragModel.cs" company="dasz.at OG">
+// <copyright file="WorkEffortModel.cs" company="dasz.at OG">
 //     Copyright (C) 2009 dasz.at OG. All rights reserved.
 // </copyright>
 
-namespace Kistl.Client.Presentables.Zeiterfassung
+namespace Kistl.Client.Presentables.TimeRecords
 {
     using System;
     using System.Collections.Generic;
@@ -11,67 +11,67 @@ namespace Kistl.Client.Presentables.Zeiterfassung
 
     using Kistl.API;
     using Kistl.App.Projekte;
-    using Kistl.App.Zeiterfassung;
+    using Kistl.App.TimeRecords;
 
     /// <summary>
-    /// A <see cref="DataObjectModel"/> for <see cref="LeistungsEintrag"/>.
+    /// A <see cref="DataObjectModel"/> for <see cref="WorkEffort"/>.
     /// </summary>
-    public class LeistungsEintragModel
+    public class WorkEffortModel
         : DataObjectModel
     {
-        /// <summary>The presented <see cref="LeistungsEintrag"/></summary>
-        private LeistungsEintrag eintrag;
+        /// <summary>The presented <see cref="WorkEffort"/></summary>
+        private WorkEffort eintrag;
 
         /// <summary>
-        /// Initializes a new instance of the LeistungsEintragModel class.
+        /// Initializes a new instance of the WorkEffortModel class.
         /// </summary>
         /// <param name="appCtx">which GuiApplicationContext to use</param>
         /// <param name="dataCtx">which <see cref="IDataContext"/> to use</param>
-        /// <param name="obj">the modelled <see cref="LeistungsEintrag"/></param>
-        public LeistungsEintragModel(
+        /// <param name="obj">the modelled <see cref="WorkEffort"/></param>
+        public WorkEffortModel(
             IGuiApplicationContext appCtx,
             IKistlContext dataCtx,
-            LeistungsEintrag obj)
+            WorkEffort obj)
             : base(appCtx, dataCtx, obj)
         {
             this.eintrag = obj;
         }
 
-        #region LeistungsEintrag Members
+        #region WorkEffort Members
 
-        /// <summary>Gets or sets the "Anfang"s value of the underlying LeistungsEintrag</summary>
-        public DateTime Anfang
+        /// <summary>Gets or sets the "From"s value of the underlying WorkEffort</summary>
+        public DateTime From
         {
-            get { return this.eintrag.Anfang; }
-            set { this.eintrag.Anfang = value; }
+            get { return this.eintrag.From; }
+            set { this.eintrag.From = value; }
         }
 
-        /// <summary>Gets or sets the "Bezeichnung"s value of the underlying LeistungsEintrag</summary>
-        public string Bezeichnung
+        /// <summary>Gets or sets the "Name"s value of the underlying WorkEffort</summary>
+        public new string Name
         {
-            get { return this.eintrag.Bezeichnung; }
-            set { this.eintrag.Bezeichnung = value; }
+            get { return this.eintrag.Name; }
+            set { this.eintrag.Name = value; }
         }
 
-        /// <summary>Gets or sets the "Ende"s value of the underlying LeistungsEintrag</summary>
-        public DateTime Ende
+        /// <summary>Gets or sets the "Thru"s value of the underlying WorkEffort</summary>
+        public DateTime Thru
         {
-            get { return this.eintrag.Ende; }
-            set { this.eintrag.Ende = value; }
+            get { return this.eintrag.Thru; }
+            set { this.eintrag.Thru = value; }
         }
 
-        /// <summary>Gets or sets the "Mitarbeiter"s value of the underlying LeistungsEintrag, wrapped in a DataObjectModel</summary>
+        /// <summary>Gets or sets the "Mitarbeiter"s value of the underlying WorkEffort, wrapped in a DataObjectModel</summary>
         public DataObjectModel Mitarbeiter
         {
             get { return (DataObjectModel)this.Factory.CreateDefaultModel(this.DataContext, this.eintrag.Mitarbeiter); }
             set { this.eintrag.Mitarbeiter = (Mitarbeiter)value.Object; }
         }
 
-        /// <summary>Gets or sets the "Notizen"s value of the underlying LeistungsEintrag</summary>
-        public string Notizen
+        /// <summary>Gets or sets the "Notizen"s value of the underlying WorkEffort</summary>
+        public string Notes
         {
-            get { return this.eintrag.Notizen; }
-            set { this.eintrag.Notizen = value; }
+            get { return this.eintrag.Notes; }
+            set { this.eintrag.Notes = value; }
         }
 
         #endregion

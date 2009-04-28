@@ -1,8 +1,8 @@
-﻿<Window x:Class="Kistl.Client.WPF.View.Zeiterfassung.LeistungserfassungsView"
+﻿<Window x:Class="Kistl.Client.WPF.View.TimeRecords.WorkEffortRecorderView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:zfviews="clr-namespace:Kistl.Client.WPF.View.Zeiterfassung"
-        Title="LeistungserfassungsView"
+        xmlns:zfviews="clr-namespace:Kistl.Client.WPF.View.TimeRecords"
+        Title="WorkEffortRecorderView"
         Height="300"
         Width="300">
     <StackPanel>
@@ -11,7 +11,7 @@
             <ComboBox ItemsSource="{Binding AvailableUsers}"
                       SelectedItem="{Binding CurrentUser}" />
         </StackPanel>
-        <ListBox ItemsSource="{Binding Leistungen}" />
-        <zfviews:LeistungsEintragView DataContext="{Binding CurrentEintrag}" />
+        <ListBox ItemsSource="{Binding Efforts}" />
+        <zfviews:WorkEffortView DataContext="{Binding CurrentEffort}" />
     </StackPanel>
 </Window>

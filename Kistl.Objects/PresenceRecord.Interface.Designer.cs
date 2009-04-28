@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Zeiterfassung
+namespace Kistl.App.TimeRecords
 {
     using System;
     using System.Collections.Generic;
@@ -9,27 +9,27 @@ namespace Kistl.App.Zeiterfassung
     /// <summary>
     /// 
     /// </summary>
-    public interface ArbeitszeitEintrag : IDataObject 
+    public interface PresenceRecord : IDataObject 
     {
 
         /// <summary>
-        /// Wann die Anwesenheit angefangen hat.
+        /// Point in time when the presence started.
         /// </summary>
-		DateTime Anfang {
+		DateTime From {
 			get;
 			set;
 		}
         /// <summary>
-        /// Wann die Anwesenheit geendet hat.
-        /// </summary>
-		DateTime Ende {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Welcher Mitarbeiter diese Arbeitszeit geleistet hat.
+        /// Which employee was present.
         /// </summary>
 		Kistl.App.Projekte.Mitarbeiter Mitarbeiter {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Point in time (inclusive) when the presence ended.
+        /// </summary>
+		DateTime Thru {
 			get;
 			set;
 		}

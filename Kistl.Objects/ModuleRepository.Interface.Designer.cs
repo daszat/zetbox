@@ -52,13 +52,13 @@ namespace Kistl.App
 			}
 		}
 		
-		/// <summary>Repository for Zeiterfassung</summary>
+		/// <summary>Repository for TimeRecords</summary>
 		/// 
-		public Kistl.App.Zeiterfassung.ZeiterfassungRepository Zeiterfassung
+		public Kistl.App.TimeRecords.TimeRecordsRepository TimeRecords
 		{
 			get
 			{
-				return new Kistl.App.Zeiterfassung.ZeiterfassungRepository(Context);
+				return new Kistl.App.TimeRecords.TimeRecordsRepository(Context);
 			}
 		}
 		

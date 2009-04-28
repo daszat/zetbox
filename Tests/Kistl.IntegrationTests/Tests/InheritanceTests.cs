@@ -57,22 +57,22 @@ namespace Kistl.IntegrationTests
 
             //using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
             //{
-            //    var list = ctx.GetQuery<Kistl.App.Zeiterfassung.Kostentraeger>().ToList();
+            //    var list = ctx.GetQuery<Kistl.App.TimeRecords.Kostentraeger>().ToList();
             //    Assert.That(list.Count, Is.GreaterThan(0));
 
-            //    Kistl.App.Zeiterfassung.Kostentraeger k = list[0];
+            //    Kistl.App.TimeRecords.Kostentraeger k = list[0];
             //    ID = k.ID;
-            //    maxStungen = k.MaxStunden = k.MaxStunden.HasValue ? k.MaxStunden.Value + 1.0 : 1.0;
+            //    maxStungen = k.BudgetHours = k.BudgetHours.HasValue ? k.BudgetHours.Value + 1.0 : 1.0;
 
             //    ctx.SubmitChanges();
             //}
 
             //using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
             //{
-            //    var k = ctx.GetQuery<Kistl.App.Zeiterfassung.Kostentraeger>().First(o => o.ID == ID);
+            //    var k = ctx.GetQuery<Kistl.App.TimeRecords.Kostentraeger>().First(o => o.ID == ID);
             //    Assert.That(k, Is.Not.Null);
-            //    Assert.That(k.MaxStunden.HasValue, Is.True);
-            //    Assert.That(k.MaxStunden.Value, Is.EqualTo(maxStungen));
+            //    Assert.That(k.BudgetHours.HasValue, Is.True);
+            //    Assert.That(k.BudgetHours.Value, Is.EqualTo(maxStungen));
             //}
         }
     }

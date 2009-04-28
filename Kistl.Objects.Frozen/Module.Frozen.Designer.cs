@@ -324,8 +324,8 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86],
 });
 			DataStore[3].Description = null;
-			DataStore[3].ModuleName = @"Zeiterfassung";
-			DataStore[3].Namespace = @"Kistl.App.Zeiterfassung";
+			DataStore[3].ModuleName = @"TimeRecords";
+			DataStore[3].Namespace = @"Kistl.App.TimeRecords";
 			DataStore[3].Seal();
 			DataStore[4].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(18) {
 Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[3],

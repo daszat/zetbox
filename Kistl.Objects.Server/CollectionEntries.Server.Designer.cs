@@ -1720,12 +1720,12 @@ namespace Kistl.App.GUI
     }
 }
 
-namespace Kistl.App.Zeiterfassung
+namespace Kistl.App.TimeRecords
 {
 	using Kistl.App.Projekte;
-    [EdmEntityType(NamespaceName="Model", Name="Zeitkonto_Mitarbeiter42CollectionEntry")]
-    [System.Diagnostics.DebuggerDisplay("Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__")]
-    public class Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Zeitkonto_Mitarbeiter42CollectionEntry
+    [EdmEntityType(NamespaceName="Model", Name="WorkEffortAccount_Mitarbeiter42CollectionEntry")]
+    [System.Diagnostics.DebuggerDisplay("WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__")]
+    public class WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, WorkEffortAccount_Mitarbeiter42CollectionEntry
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -1749,7 +1749,7 @@ namespace Kistl.App.Zeiterfassung
         }
         private int _ID;
         public int RelationID { get { return 42; } }
-        public IDataObject AObject { get { return A; } set { A = (Kistl.App.Zeiterfassung.Zeitkonto)value; } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.TimeRecords.WorkEffortAccount)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Projekte.Mitarbeiter)value; } }
 
         /// <summary>
@@ -1758,7 +1758,7 @@ namespace Kistl.App.Zeiterfassung
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Zeiterfassung.Zeitkonto A
+        public Kistl.App.TimeRecords.WorkEffortAccount A
         {
             get
             {
@@ -1769,7 +1769,7 @@ namespace Kistl.App.Zeiterfassung
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                A__Implementation__ = (Kistl.App.Zeiterfassung.Zeitkonto__Implementation__)value;
+                A__Implementation__ = (Kistl.App.TimeRecords.WorkEffortAccount__Implementation__)value;
             }
         }
         
@@ -1792,15 +1792,15 @@ namespace Kistl.App.Zeiterfassung
         }
         private int? _fk_A;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Mitarbeiter_Zeitkonto_42", "Zeitkonto")]
-        public Kistl.App.Zeiterfassung.Zeitkonto__Implementation__ A__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42", "WorkEffortAccount")]
+        public Kistl.App.TimeRecords.WorkEffortAccount__Implementation__ A__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Zeiterfassung.Zeitkonto__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.Zeitkonto__Implementation__>(
-                        "Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42",
-                        "Zeitkonto");
+                EntityReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__>(
+                        "Model.FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42",
+                        "WorkEffortAccount");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -1811,16 +1811,16 @@ namespace Kistl.App.Zeiterfassung
             }
             set
             {
-                EntityReference<Kistl.App.Zeiterfassung.Zeitkonto__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Zeiterfassung.Zeitkonto__Implementation__>(
-                        "Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42",
-                        "Zeitkonto");
+                EntityReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__>(
+                        "Model.FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42",
+                        "WorkEffortAccount");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Zeiterfassung.Zeitkonto__Implementation__)value;
+                r.Value = (Kistl.App.TimeRecords.WorkEffortAccount__Implementation__)value;
             }
         }
         
@@ -1865,14 +1865,14 @@ namespace Kistl.App.Zeiterfassung
         }
         private int? _fk_B;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42", "Mitarbeiter")]
+        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42",
+                        "Model.FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1886,7 +1886,7 @@ namespace Kistl.App.Zeiterfassung
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42",
+                        "Model.FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1950,13 +1950,13 @@ namespace Kistl.App.Zeiterfassung
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Zeitkonto_Mitarbeiter42CollectionEntry));
+			return new InterfaceType(typeof(WorkEffortAccount_Mitarbeiter42CollectionEntry));
 		}
 	
 		public override void ReloadReferences()
 		{
 			if (_fk_A.HasValue)
-				A__Implementation__ = (Kistl.App.Zeiterfassung.Zeitkonto__Implementation__)Context.Find<Kistl.App.Zeiterfassung.Zeitkonto>(_fk_A.Value);
+				A__Implementation__ = (Kistl.App.TimeRecords.WorkEffortAccount__Implementation__)Context.Find<Kistl.App.TimeRecords.WorkEffortAccount>(_fk_A.Value);
 			else
 				A__Implementation__ = null;
 
@@ -1970,8 +1970,8 @@ namespace Kistl.App.Zeiterfassung
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)obj;
-			var me = (Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)this;
+			var other = (WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__)obj;
+			var me = (WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;

@@ -1279,16 +1279,16 @@ namespace Kistl.App.GUI
     }
 }
 
-namespace Kistl.App.Zeiterfassung
+namespace Kistl.App.TimeRecords
 {
 	using Kistl.App.Projekte;
-    [System.Diagnostics.DebuggerDisplay("Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__")]
-    public class Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__ : BaseClientCollectionEntry, Zeitkonto_Mitarbeiter42CollectionEntry
+    [System.Diagnostics.DebuggerDisplay("WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__")]
+    public class WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__ : BaseClientCollectionEntry, WorkEffortAccount_Mitarbeiter42CollectionEntry
     {
     
 // ID is inherited
         public int RelationID { get { return 42; } }
-        public IDataObject AObject { get { return A; } set { A = (Kistl.App.Zeiterfassung.Zeitkonto)value; } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.TimeRecords.WorkEffortAccount)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Projekte.Mitarbeiter)value; } }
 
         /// <summary>
@@ -1297,12 +1297,12 @@ namespace Kistl.App.Zeiterfassung
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Zeiterfassung.Zeitkonto A
+        public Kistl.App.TimeRecords.WorkEffortAccount A
         {
             get
             {
                 if (fk_A.HasValue)
-                    return Context.Find<Kistl.App.Zeiterfassung.Zeitkonto>(fk_A.Value);
+                    return Context.Find<Kistl.App.TimeRecords.WorkEffortAccount>(fk_A.Value);
                 else
                     return null;
             }
@@ -1447,7 +1447,7 @@ namespace Kistl.App.Zeiterfassung
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Zeitkonto_Mitarbeiter42CollectionEntry));
+			return new InterfaceType(typeof(WorkEffortAccount_Mitarbeiter42CollectionEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -1458,8 +1458,8 @@ namespace Kistl.App.Zeiterfassung
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)obj;
-			var me = (Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)this;
+			var other = (WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__)obj;
+			var me = (WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;

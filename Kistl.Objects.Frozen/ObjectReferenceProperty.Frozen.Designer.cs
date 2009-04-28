@@ -1427,7 +1427,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[225],
 			DataStore[244].CategoryTags = @"Summary";
 			DataStore[244].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[244].Description = @"Welcher Mitarbeiter diese Arbeitszeit geleistet hat.";
+			DataStore[244].Description = @"Which employee was present.";
 			DataStore[244].IsIndexed = false;
 			DataStore[244].IsList = false;
 			DataStore[244].IsNullable = true;
@@ -1442,7 +1442,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[225],
 			DataStore[249].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[248],
 });
-			DataStore[249].Description = @"Der Mitarbeiter der diese Leistung erbracht hat.";
+			DataStore[249].Description = @"Which employee effected this work effort.";
 			DataStore[249].IsIndexed = false;
 			DataStore[249].IsList = false;
 			DataStore[249].IsNullable = false;

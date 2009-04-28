@@ -173,7 +173,7 @@ namespace Kistl.App.Base
 			DataStore[65].PropertyName = @"Auftragswert";
 			DataStore[65].ValueModelDescriptor = null;
 			DataStore[65].Seal();
-			DataStore[89].AltText = @"Maximal erlaubte Stundenanzahl";
+			DataStore[89].AltText = @"Number of currently allocated hours";
 			DataStore[89].CategoryTags = @"Summary,Main";
 			DataStore[89].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
@@ -183,10 +183,10 @@ namespace Kistl.App.Base
 			DataStore[89].IsNullable = true;
 			DataStore[89].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[89].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
-			DataStore[89].PropertyName = @"MaxStunden";
+			DataStore[89].PropertyName = @"BudgetHours";
 			DataStore[89].ValueModelDescriptor = null;
 			DataStore[89].Seal();
-			DataStore[90].AltText = @"Aktuell gebuchte Stunden";
+			DataStore[90].AltText = @"Number of already spent hours";
 			DataStore[90].CategoryTags = @"Summary,Main";
 			DataStore[90].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
@@ -196,7 +196,7 @@ namespace Kistl.App.Base
 			DataStore[90].IsNullable = true;
 			DataStore[90].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[90].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
-			DataStore[90].PropertyName = @"AktuelleStunden";
+			DataStore[90].PropertyName = @"SpentHours";
 			DataStore[90].ValueModelDescriptor = null;
 			DataStore[90].Seal();
 	

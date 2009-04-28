@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnotherTest.Client.Designer.cs" />
-    <Compile Include="ArbeitszeitEintrag.Client.Designer.cs" />
     <Compile Include="Assembly.Client.Designer.cs" />
     <Compile Include="Auftrag.Client.Designer.cs" />
     <Compile Include="BaseParameter.Client.Designer.cs" />
@@ -80,7 +79,6 @@
     <Compile Include="IsValidNamespaceConstraint.Client.Designer.cs" />
     <Compile Include="Kunde.Client.Designer.cs" />
     <Compile Include="LastTest.Client.Designer.cs" />
-    <Compile Include="LeistungsEintrag.Client.Designer.cs" />
     <Compile Include="Method.Client.Designer.cs" />
     <Compile Include="MethodInvocation.Client.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.Client.Designer.cs" />
@@ -91,6 +89,7 @@
     <Compile Include="ObjectClass.Client.Designer.cs" />
     <Compile Include="ObjectParameter.Client.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Client.Designer.cs" />
+    <Compile Include="PresenceRecord.Client.Designer.cs" />
     <Compile Include="PresentableModelDescriptor.Client.Designer.cs" />
     <Compile Include="PresenterInfo.Client.Designer.cs" />
     <Compile Include="Projekt.Client.Designer.cs" />
@@ -110,7 +109,8 @@
     <Compile Include="ValueTypeProperty.Client.Designer.cs" />
     <Compile Include="ViewDescriptor.Client.Designer.cs" />
     <Compile Include="Visual.Client.Designer.cs" />
-    <Compile Include="Zeitkonto.Client.Designer.cs" />
+    <Compile Include="WorkEffort.Client.Designer.cs" />
+    <Compile Include="WorkEffortAccount.Client.Designer.cs" />
     <Compile Include="CollectionEntries.Client.Designer.cs" />
     <Compile Include="TestPhoneStruct.Client.Designer.cs" />
     <Compile Include="AssemblyInfo.Client.cs" />

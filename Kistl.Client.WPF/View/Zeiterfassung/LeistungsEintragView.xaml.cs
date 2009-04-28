@@ -12,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Kistl.Client.WPF.View.Zeiterfassung
+namespace Kistl.Client.WPF.View.TimeRecords
 {
     /// <summary>
-    /// Interaction logic for LeistungsEintragView.xaml
+    /// Interaction logic for WorkEffortView.xaml
     /// </summary>
-    public partial class LeistungsEintragView : UserControl
+    public partial class WorkEffortView : UserControl
     {
-        public LeistungsEintragView()
+        public WorkEffortView()
         {
             InitializeComponent();
         }

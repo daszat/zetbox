@@ -574,7 +574,7 @@ namespace Kistl.App.Base
 			DataStore[1].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[1].Seal();
 			DataStore[2].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[2];
-			DataStore[2].FullName = @"Kistl.App.Zeiterfassung.CustomServerActions_Zeiterfassung";
+			DataStore[2].FullName = @"Kistl.App.TimeRecords.CustomServerActions_TimeRecords";
 			DataStore[2].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[2].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
@@ -598,7 +598,7 @@ namespace Kistl.App.Base
 			DataStore[5].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[5].Seal();
 			DataStore[6].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[1];
-			DataStore[6].FullName = @"Kistl.App.Zeiterfassung.CustomClientActions_Zeiterfassung";
+			DataStore[6].FullName = @"Kistl.App.TimeRecords.CustomClientActions_TimeRecords";
 			DataStore[6].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[6].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
@@ -1606,25 +1606,25 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
 			DataStore[562].Parent = null;
 			DataStore[562].Seal();
 			DataStore[563].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[563].FullName = @"Kistl.Client.Presentables.Zeiterfassung.LeistungsEintragModel";
+			DataStore[563].FullName = @"Kistl.Client.Presentables.TimeRecords.WorkEffortModel";
 			DataStore[563].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[563].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83];
 			DataStore[563].Seal();
 			DataStore[564].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[564].FullName = @"Kistl.Client.Presentables.Zeiterfassung.LeistungserfassungsModel";
+			DataStore[564].FullName = @"Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel";
 			DataStore[564].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[564].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[13];
 			DataStore[564].Seal();
 			DataStore[565].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
-			DataStore[565].FullName = @"Kistl.Client.WPF.View.Zeiterfassung.LeistungserfassungsView";
+			DataStore[565].FullName = @"Kistl.Client.WPF.View.TimeRecords.WorkEffortRecorderView";
 			DataStore[565].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[565].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[317];
 			DataStore[565].Seal();
 			DataStore[566].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
-			DataStore[566].FullName = @"Kistl.Client.WPF.View.Zeiterfassung.LeistungsEintragView";
+			DataStore[566].FullName = @"Kistl.Client.WPF.View.TimeRecords.WorkEffortView";
 			DataStore[566].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[566].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];

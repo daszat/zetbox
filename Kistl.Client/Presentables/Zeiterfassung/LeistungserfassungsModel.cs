@@ -1,8 +1,8 @@
-// <copyright file="LeistungserfassungsModel.cs" company="dasz.at OG">
+// <copyright file="WorkEffortRecorderModel.cs" company="dasz.at OG">
 //     Copyright (C) 2009 dasz.at OG. All rights reserved.
 // </copyright>
 
-namespace Kistl.Client.Presentables.Zeiterfassung
+namespace Kistl.Client.Presentables.TimeRecords
 {
     using System;
     using System.Collections.Generic;
@@ -13,23 +13,23 @@ namespace Kistl.Client.Presentables.Zeiterfassung
     using Kistl.API;
 
     /// <summary>
-    /// Aufbereitung des Zeiterfassungsmoduls für die Leistungserfassung.
+    /// Main workspace presenter of the TimeRecords module for recording work efforts.
     /// </summary>
-    /// Der Use-Case der von diesem PresentableModel abgedeckt wird ist die minuten-aktuelle
-    /// Leistungserfassung durch einen Mitarbeiter an seinem Bildschirmarbeitsplatz.
-    public class LeistungserfassungsModel
+    /// This <see cref="WorkspaceModel"/> implements the use case of capturing fine grained
+    /// work effort information "on the go" while employees are working on their PC.
+    public class WorkEffortRecorderModel
         : WorkspaceModel
     {
         /// <summary>
-        /// Initializes a new instance of the LeistungserfassungsModel class.
+        /// Initializes a new instance of the WorkEffortRecorderModel class.
         /// </summary>
-        /// <param name="appCtx">der zu verwendende GuiApplicationContext</param>
-        /// <param name="dataCtx">der zu verwendende Datenkontext</param>
-        public LeistungserfassungsModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        /// <param name="appCtx">the application context to use</param>
+        /// <param name="dataCtx">the data context to use</param>
+        public WorkEffortRecorderModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             this.AvailableUsers = new ObservableCollection<DataObjectModel>();
-            this.Leistungen = new ObservableCollection<LeistungsEintragModel>();
+            this.Efforts = new ObservableCollection<WorkEffortModel>();
         }
 
         /// <summary>Gets or sets the currently working user.</summary>
@@ -42,11 +42,11 @@ namespace Kistl.Client.Presentables.Zeiterfassung
         /// <summary>Gets or sets a value indicating whether the <see cref="CurrentUser"/> is currently on work time or not.</summary>
         public bool IsCurrentlyWorking { get; set; }
 
-        /// <summary>Gets a list of recorded <see cref="LeisungsEintrag"/> of the <see cref="CurrentUser"/>.</summary>
-        public ObservableCollection<LeistungsEintragModel> Leistungen { get; private set; }
+        /// <summary>Gets a list of recorded <see cref="WorkEffort"/> of the <see cref="CurrentUser"/>.</summary>
+        public ObservableCollection<WorkEffortModel> Efforts { get; private set; }
 
         /// <summary>Gets or sets the currently open <see cref="LeisungsEintrag"/>.</summary>
-        public LeistungsEintragModel CurrentEintrag { get; set; }
+        public WorkEffortModel CurrentEffort { get; set; }
 
         /// <summary>Gets the total time (in hours) the <see cref="CurrentUser"/> has worked today.</summary>
         public float TotalWorkTimeToday { get; private set; }

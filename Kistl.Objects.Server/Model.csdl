@@ -4,7 +4,6 @@
   
     <!-- EntitySets for all classes -->
     <EntitySet Name="AnotherTest" EntityType="Model.AnotherTest" />
-    <EntitySet Name="ArbeitszeitEintrag" EntityType="Model.ArbeitszeitEintrag" />
     <EntitySet Name="Assembly" EntityType="Model.Assembly" />
     <EntitySet Name="Auftrag" EntityType="Model.Auftrag" />
     <EntitySet Name="BaseParameter" EntityType="Model.BaseParameter" />
@@ -15,12 +14,12 @@
     <EntitySet Name="Icon" EntityType="Model.Icon" />
     <EntitySet Name="Kunde" EntityType="Model.Kunde" />
     <EntitySet Name="LastTest" EntityType="Model.LastTest" />
-    <EntitySet Name="LeistungsEintrag" EntityType="Model.LeistungsEintrag" />
     <EntitySet Name="Method" EntityType="Model.Method" />
     <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
     <EntitySet Name="Mitarbeiter" EntityType="Model.Mitarbeiter" />
     <EntitySet Name="Module" EntityType="Model.Module" />
     <EntitySet Name="Muhblah" EntityType="Model.Muhblah" />
+    <EntitySet Name="PresenceRecord" EntityType="Model.PresenceRecord" />
     <EntitySet Name="PresentableModelDescriptor" EntityType="Model.PresentableModelDescriptor" />
     <EntitySet Name="PresenterInfo" EntityType="Model.PresenterInfo" />
     <EntitySet Name="Projekt" EntityType="Model.Projekt" />
@@ -34,7 +33,8 @@
     <EntitySet Name="TypeRef" EntityType="Model.TypeRef" />
     <EntitySet Name="ViewDescriptor" EntityType="Model.ViewDescriptor" />
     <EntitySet Name="Visual" EntityType="Model.Visual" />
-    <EntitySet Name="Zeitkonto" EntityType="Model.Zeitkonto" />
+    <EntitySet Name="WorkEffort" EntityType="Model.WorkEffort" />
+    <EntitySet Name="WorkEffortAccount" EntityType="Model.WorkEffortAccount" />
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
     <EntitySet Name="ObjectClass_ImplementsInterfaces49CollectionEntry" EntityType="Model.ObjectClass_ImplementsInterfaces49CollectionEntry" />
     <AssociationSet Name="FK_ObjectClass_Interface_ObjectClass_49" Association="Model.FK_ObjectClass_Interface_ObjectClass_49" >
@@ -90,14 +90,14 @@
       <End Role="ContextMenu" EntitySet="Visual" />
       <End Role="CollectionEntry" EntitySet="Visual_ContextMenu60CollectionEntry" />
     </AssociationSet>
-    <EntitySet Name="Zeitkonto_Mitarbeiter42CollectionEntry" EntityType="Model.Zeitkonto_Mitarbeiter42CollectionEntry" />
-    <AssociationSet Name="FK_Zeitkonto_Mitarbeiter_Zeitkonto_42" Association="Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42" >
-      <End Role="Zeitkonto" EntitySet="Zeitkonto" />
-      <End Role="CollectionEntry" EntitySet="Zeitkonto_Mitarbeiter42CollectionEntry" />
+    <EntitySet Name="WorkEffortAccount_Mitarbeiter42CollectionEntry" EntityType="Model.WorkEffortAccount_Mitarbeiter42CollectionEntry" />
+    <AssociationSet Name="FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42" Association="Model.FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42" >
+      <End Role="WorkEffortAccount" EntitySet="WorkEffortAccount" />
+      <End Role="CollectionEntry" EntitySet="WorkEffortAccount_Mitarbeiter42CollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42" Association="Model.FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42" >
+    <AssociationSet Name="FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42" Association="Model.FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42" >
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
-      <End Role="CollectionEntry" EntitySet="Zeitkonto_Mitarbeiter42CollectionEntry" />
+      <End Role="CollectionEntry" EntitySet="WorkEffortAccount_Mitarbeiter42CollectionEntry" />
     </AssociationSet>
 
     <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
@@ -108,10 +108,6 @@
     </AssociationSet>
 
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
-    <AssociationSet Name="FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81" Association="Model.FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81" >
-      <End Role="Arbeitszeit" EntitySet="ArbeitszeitEintrag" />
-      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
-    </AssociationSet>
     <AssociationSet Name="FK_Auftrag_Kunde_Auftrag_34" Association="Model.FK_Auftrag_Kunde_Auftrag_34" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Kunde" EntitySet="Kunde" />
@@ -151,10 +147,6 @@
     <AssociationSet Name="FK_EnumerationProperty_Enumeration_EnumerationProperty_48" Association="Model.FK_EnumerationProperty_Enumeration_EnumerationProperty_48" >
       <End Role="EnumerationProperty" EntitySet="Property" />
       <End Role="Enumeration" EntitySet="DataType" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82" Association="Model.FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82" >
-      <End Role="LeistungsEintrag" EntitySet="LeistungsEintrag" />
-      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_BaseParameter_Method_44" Association="Model.FK_Method_BaseParameter_Method_44" >
       <End Role="Method" EntitySet="Method" />
@@ -203,6 +195,10 @@
     <AssociationSet Name="FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27" Association="Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27" >
       <End Role="ObjectReferenceProperty" EntitySet="Property" />
       <End Role="ReferenceObjectClass" EntitySet="DataType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresenceRecord_Mitarbeiter_PresenceRecord_81" Association="Model.FK_PresenceRecord_Mitarbeiter_PresenceRecord_81" >
+      <End Role="PresenceRecord" EntitySet="PresenceRecord" />
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
     <AssociationSet Name="FK_PresentableModelDescriptor_TypeRef_Descriptor_77" Association="Model.FK_PresentableModelDescriptor_TypeRef_Descriptor_77" >
       <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
@@ -292,6 +288,10 @@
       <End Role="Visual" EntitySet="Visual" />
       <End Role="Property" EntitySet="Property" />
     </AssociationSet>
+    <AssociationSet Name="FK_WorkEffort_Mitarbeiter_WorkEffort_82" Association="Model.FK_WorkEffort_Mitarbeiter_WorkEffort_82" >
+      <End Role="WorkEffort" EntitySet="WorkEffort" />
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+    </AssociationSet>
 
   </EntityContainer>
   
@@ -301,18 +301,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ArbeitszeitEintrag">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Anfang" Type="DateTime" Nullable="false" />
-    <Property Name="Ende" Type="DateTime" Nullable="false" />
-    <NavigationProperty Name="Mitarbeiter__Implementation__"
-                        Relationship="Model.FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81"
-                        FromRole="Arbeitszeit"
-                        ToRole="Mitarbeiter" />
   </EntityType>
   <EntityType Name="Assembly">
     <Key>
@@ -455,20 +443,6 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="LeistungsEintrag">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Bezeichnung" Type="String" Nullable="false" MaxLength="400" />
-    <Property Name="Notizen" Type="String" Nullable="false" MaxLength="4000" />
-    <Property Name="Anfang" Type="DateTime" Nullable="false" />
-    <Property Name="Ende" Type="DateTime" Nullable="false" />
-    <NavigationProperty Name="Mitarbeiter__Implementation__"
-                        Relationship="Model.FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82"
-                        FromRole="LeistungsEintrag"
-                        ToRole="Mitarbeiter" />
-  </EntityType>
   <EntityType Name="Method">
     <Key>
       <PropertyRef Name="ID" />
@@ -553,6 +527,18 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PresenceRecord">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="From" Type="DateTime" Nullable="false" />
+    <Property Name="Thru" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Mitarbeiter__Implementation__"
+                        Relationship="Model.FK_PresenceRecord_Mitarbeiter_PresenceRecord_81"
+                        FromRole="PresenceRecord"
+                        ToRole="Mitarbeiter" />
   </EntityType>
   <EntityType Name="PresentableModelDescriptor">
     <Key>
@@ -795,19 +781,33 @@
     <Property Name="Description" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="ControlType" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="Zeitkonto">
+  <EntityType Name="WorkEffort">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="400" />
+    <Property Name="Notes" Type="String" Nullable="false" MaxLength="4000" />
+    <Property Name="From" Type="DateTime" Nullable="false" />
+    <Property Name="Thru" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Mitarbeiter__Implementation__"
+                        Relationship="Model.FK_WorkEffort_Mitarbeiter_WorkEffort_82"
+                        FromRole="WorkEffort"
+                        ToRole="Mitarbeiter" />
+  </EntityType>
+  <EntityType Name="WorkEffortAccount">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Mitarbeiter__Implementation__"
-                        Relationship="Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42"
-                        FromRole="Zeitkonto"
+                        Relationship="Model.FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42"
+                        FromRole="WorkEffortAccount"
                         ToRole="CollectionEntry" />
-    <Property Name="Kontoname" Type="String" Nullable="false" MaxLength="200" />
-    <Property Name="MaxStunden" Type="Double" Nullable="true" />
-    <Property Name="AktuelleStunden" Type="Double" Nullable="true" />
-    <Property Name="Notizen" Type="String" Nullable="false" MaxLength="4000" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="BudgetHours" Type="Double" Nullable="true" />
+    <Property Name="SpentHours" Type="Double" Nullable="true" />
+    <Property Name="Notes" Type="String" Nullable="false" MaxLength="4000" />
   </EntityType>
 
   <!-- EntityTypes for all other classes -->
@@ -1173,12 +1173,12 @@
   </Association>
   
   <!--
-    Relation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_42
-    A: ZeroOrMore Zeitkonto as Zeitkonto
+    Relation: FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42
+    A: ZeroOrMore WorkEffortAccount as WorkEffortAccount
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
   -->
-  <EntityType Name="Zeitkonto_Mitarbeiter42CollectionEntry" >
+  <EntityType Name="WorkEffortAccount_Mitarbeiter42CollectionEntry" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1186,30 +1186,30 @@
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42"
+                        Relationship="Model.FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42"
                         FromRole="CollectionEntry"
-                        ToRole="Zeitkonto" />
+                        ToRole="WorkEffortAccount" />
 
     <!-- B -->
     <NavigationProperty Name="B__Implementation__"
-                        Relationship="Model.FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42"
+                        Relationship="Model.FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42"
                         FromRole="CollectionEntry"
                         ToRole="Mitarbeiter" />
   </EntityType>
-  <Association Name="FK_Zeitkonto_Mitarbeiter_Zeitkonto_42" >
-    <End Role="Zeitkonto"
-         Type="Model.Zeitkonto" 
+  <Association Name="FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42" >
+    <End Role="WorkEffortAccount"
+         Type="Model.WorkEffortAccount" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Zeitkonto_Mitarbeiter42CollectionEntry"
+         Type="Model.WorkEffortAccount_Mitarbeiter42CollectionEntry"
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42" >
+  <Association Name="FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42" >
     <End Role="Mitarbeiter"
          Type="Model.Mitarbeiter" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Zeitkonto_Mitarbeiter42CollectionEntry"
+         Type="Model.WorkEffortAccount_Mitarbeiter42CollectionEntry"
          Multiplicity="*" />
   </Association>
   
@@ -1241,14 +1241,6 @@
   </Association>
 
   <!-- Associations for all object-object relations without CollectionEntrys -->
-  <Association Name="FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81" >
-    <End Role="Arbeitszeit"
-         Type="Model.ArbeitszeitEintrag" 
-         Multiplicity="*" />
-    <End Role="Mitarbeiter"
-         Type="Model.Mitarbeiter" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_Auftrag_Kunde_Auftrag_34" >
     <End Role="Auftrag"
          Type="Model.Auftrag" 
@@ -1327,14 +1319,6 @@
          Multiplicity="*" />
     <End Role="Enumeration"
          Type="Model.Enumeration" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82" >
-    <End Role="LeistungsEintrag"
-         Type="Model.LeistungsEintrag" 
-         Multiplicity="*" />
-    <End Role="Mitarbeiter"
-         Type="Model.Mitarbeiter" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Method_BaseParameter_Method_44" >
@@ -1431,6 +1415,14 @@
          Multiplicity="*" />
     <End Role="ReferenceObjectClass"
          Type="Model.ObjectClass" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_PresenceRecord_Mitarbeiter_PresenceRecord_81" >
+    <End Role="PresenceRecord"
+         Type="Model.PresenceRecord" 
+         Multiplicity="*" />
+    <End Role="Mitarbeiter"
+         Type="Model.Mitarbeiter" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_PresentableModelDescriptor_TypeRef_Descriptor_77" >
@@ -1607,6 +1599,14 @@
          Multiplicity="*" />
     <End Role="Property"
          Type="Model.Property" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_WorkEffort_Mitarbeiter_WorkEffort_82" >
+    <End Role="WorkEffort"
+         Type="Model.WorkEffort" 
+         Multiplicity="*" />
+    <End Role="Mitarbeiter"
+         Type="Model.Mitarbeiter" 
          Multiplicity="0..1" />
   </Association>
 

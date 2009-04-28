@@ -203,13 +203,13 @@ namespace Kistl.App.Base
 			DataStore[238].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
 });
-			DataStore[238].Description = @"Wann die Anwesenheit angefangen hat.";
+			DataStore[238].Description = @"Point in time when the presence started.";
 			DataStore[238].IsIndexed = false;
 			DataStore[238].IsList = false;
 			DataStore[238].IsNullable = false;
 			DataStore[238].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[238].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
-			DataStore[238].PropertyName = @"Anfang";
+			DataStore[238].PropertyName = @"From";
 			DataStore[238].ValueModelDescriptor = null;
 			DataStore[238].Seal();
 			DataStore[239].AltText = null;
@@ -217,13 +217,13 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
 			DataStore[239].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[222],
 });
-			DataStore[239].Description = @"Wann die Anwesenheit geendet hat.";
+			DataStore[239].Description = @"Point in time (inclusive) when the presence ended.";
 			DataStore[239].IsIndexed = false;
 			DataStore[239].IsList = false;
 			DataStore[239].IsNullable = false;
 			DataStore[239].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[239].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
-			DataStore[239].PropertyName = @"Ende";
+			DataStore[239].PropertyName = @"Thru";
 			DataStore[239].ValueModelDescriptor = null;
 			DataStore[239].Seal();
 			DataStore[247].AltText = null;
@@ -231,13 +231,13 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[222],
 			DataStore[247].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[250],
 });
-			DataStore[247].Description = @"Wann diese Leistung begonnen wurde";
+			DataStore[247].Description = @"Point in time when the work effort started.";
 			DataStore[247].IsIndexed = false;
 			DataStore[247].IsList = false;
 			DataStore[247].IsNullable = false;
 			DataStore[247].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[247].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
-			DataStore[247].PropertyName = @"Anfang";
+			DataStore[247].PropertyName = @"From";
 			DataStore[247].ValueModelDescriptor = null;
 			DataStore[247].Seal();
 			DataStore[248].AltText = null;
@@ -245,13 +245,13 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[250],
 			DataStore[248].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[249],
 });
-			DataStore[248].Description = @"Wann diese Leistung beendet wurde.";
+			DataStore[248].Description = @"Point in time (inclusive) when the work effort ended.";
 			DataStore[248].IsIndexed = false;
 			DataStore[248].IsList = false;
 			DataStore[248].IsNullable = false;
 			DataStore[248].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[248].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
-			DataStore[248].PropertyName = @"Ende";
+			DataStore[248].PropertyName = @"Thru";
 			DataStore[248].ValueModelDescriptor = null;
 			DataStore[248].Seal();
 	

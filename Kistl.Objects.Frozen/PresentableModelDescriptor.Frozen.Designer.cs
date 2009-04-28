@@ -358,11 +358,11 @@ namespace Kistl.App.GUI
 			DataStore[33].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[10];
 			DataStore[33].Seal();
 			DataStore[37].DefaultVisualType = (VisualType)1;
-			DataStore[37].Description = @"A model for LeistungsEinträge";
+			DataStore[37].Description = @"A model for a single work effort";
 			DataStore[37].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[563];
 			DataStore[37].Seal();
 			DataStore[38].DefaultVisualType = (VisualType)24;
-			DataStore[38].Description = @"A workspace for Leistungserfassung/work effort recording";
+			DataStore[38].Description = @"A workspace for recording work efforts";
 			DataStore[38].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[564];
 			DataStore[38].Seal();
 	

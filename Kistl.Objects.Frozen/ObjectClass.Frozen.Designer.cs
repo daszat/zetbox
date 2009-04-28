@@ -1020,9 +1020,9 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[65],
 });
 			DataStore[19].TableName = @"Auftraege";
 			DataStore[19].Seal();
-			DataStore[20].ClassName = @"Zeitkonto";
+			DataStore[20].ClassName = @"WorkEffortAccount";
 			DataStore[20].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[12];
-			DataStore[20].Description = @"en:TimeAccount; Ein Konto für die Leistungserfassung. Es können nicht mehr als MaxStunden auf ein Konto gebucht werden.";
+			DataStore[20].Description = @"An account of work efforts. May be used to limit the hours being expended.";
 			DataStore[20].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[12],
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[45],
@@ -1049,7 +1049,7 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[237],
 			DataStore[20].IsSimpleObject = false;
 			DataStore[20].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(0) {
 });
-			DataStore[20].TableName = @"Zeitkonten";
+			DataStore[20].TableName = @"WorkEffortAccounts";
 			DataStore[20].Seal();
 			DataStore[26].ClassName = @"Kunde";
 			DataStore[26].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[6];
@@ -2145,7 +2145,7 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[233],
 });
 			DataStore[85].TableName = @"PresentableModelDescriptors";
 			DataStore[85].Seal();
-			DataStore[86].ClassName = @"ArbeitszeitEintrag";
+			DataStore[86].ClassName = @"PresenceRecord";
 			DataStore[86].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[13];
 			DataStore[86].Description = null;
 			DataStore[86].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
@@ -2170,11 +2170,11 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[244],
 			DataStore[86].IsSimpleObject = false;
 			DataStore[86].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(0) {
 });
-			DataStore[86].TableName = @"ArbeitszeitEinträge";
+			DataStore[86].TableName = @"PresenceRecords";
 			DataStore[86].Seal();
-			DataStore[87].ClassName = @"LeistungsEintrag";
+			DataStore[87].ClassName = @"WorkEffort";
 			DataStore[87].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[7];
-			DataStore[87].Description = @"Eine definierte Leistung eines Mitarbeiters, die auf ein Zeitkonto gebucht worden ist.";
+			DataStore[87].Description = @"A defined work effort of an employee.";
 			DataStore[87].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[87].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
@@ -2199,7 +2199,7 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[249],
 			DataStore[87].IsSimpleObject = false;
 			DataStore[87].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(0) {
 });
-			DataStore[87].TableName = @"LeistungsEinträge";
+			DataStore[87].TableName = @"WorkEfforts";
 			DataStore[87].Seal();
 	
 		}

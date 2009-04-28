@@ -13,8 +13,8 @@ namespace Kistl.Client.WPF
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
-    using Kistl.Client.Presentables.Zeiterfassung;
-    using Kistl.Client.WPF.View.Zeiterfassung;
+    using Kistl.Client.Presentables.TimeRecords;
+    using Kistl.Client.WPF.View.TimeRecords;
 
     /// <content>Contains various and temporary fixes needed to clean the database</content>
     public partial class App
@@ -120,26 +120,26 @@ namespace Kistl.Client.WPF
                     // var lefmDesc = ctx.Create<PresentableModelDescriptor>();
                     // lefmDesc.DefaultVisualType = VisualType.WorkspaceWindow;
                     // lefmDesc.Description = "A workspace for Leistungserfassung/work effort recording";
-                    // lefmDesc.PresentableModelRef = typeof(LeistungserfassungsModel).ToRef(ctx);
+                    // lefmDesc.PresentableModelRef = typeof(WorkEffortRecorderModel).ToRef(ctx);
                     // 
                     // var lemDesc = ctx.Create<PresentableModelDescriptor>();
                     // lemDesc.DefaultVisualType = VisualType.Object;
-                    // lemDesc.Description = "A model for LeistungsEinträge";
-                    // lemDesc.PresentableModelRef = typeof(LeistungsEintragModel).ToRef(ctx);
+                    // lemDesc.Description = "A model for WorkEfforts";
+                    // lemDesc.PresentableModelRef = typeof(WorkEffortModel).ToRef(ctx);
                     // 
                     // var lev = ctx.Create<ViewDescriptor>();
-                    // lev.ControlRef = typeof(LeistungsEintragView).ToRef(ctx);
+                    // lev.ControlRef = typeof(WorkEffortView).ToRef(ctx);
                     // lev.Toolkit = Toolkit.WPF;
                     // lev.VisualType = VisualType.Object;
                     // lev.PresentedModelDescriptor = ctx.GetQuery<PresentableModelDescriptor>()
-                    //    .Single(o => o.PresentableModelRef.ID == typeof(LeistungsEintragModel).ToRef(ctx).ID);
+                    //    .Single(o => o.PresentableModelRef.ID == typeof(WorkEffortModel).ToRef(ctx).ID);
                     // 
                     // var lv = ctx.Create<ViewDescriptor>();
-                    // lv.ControlRef = typeof(LeistungserfassungsView).ToRef(ctx);
+                    // lv.ControlRef = typeof(WorkEffortRecorderView).ToRef(ctx);
                     // lv.Toolkit = Toolkit.WPF;
                     // lv.VisualType = VisualType.WorkspaceWindow;
                     // lv.PresentedModelDescriptor = ctx.GetQuery<PresentableModelDescriptor>()
-                    //    .Single(o => o.PresentableModelRef.ID == typeof(LeistungserfassungsModel).ToRef(ctx).ID);
+                    //    .Single(o => o.PresentableModelRef.ID == typeof(WorkEffortRecorderModel).ToRef(ctx).ID);
                     ctx.SubmitChanges();
                 }
             }

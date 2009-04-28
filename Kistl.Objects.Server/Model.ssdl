@@ -14,7 +14,7 @@
     <EntitySet Name="Method" EntityType="Model.Store.Method" Table="Methods"/>
     <EntitySet Name="Module" EntityType="Model.Store.Module" Table="Modules"/>
     <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Table="Auftraege"/>
-    <EntitySet Name="Zeitkonto" EntityType="Model.Store.Zeitkonto" Table="Zeitkonten"/>
+    <EntitySet Name="WorkEffortAccount" EntityType="Model.Store.WorkEffortAccount" Table="WorkEffortAccounts"/>
     <EntitySet Name="Kunde" EntityType="Model.Store.Kunde" Table="Kunden"/>
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons"/>
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies"/>
@@ -37,8 +37,8 @@
     <EntitySet Name="RelationEnd" EntityType="Model.Store.RelationEnd" Table="RelationEnds"/>
     <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Table="ViewDescriptors"/>
     <EntitySet Name="PresentableModelDescriptor" EntityType="Model.Store.PresentableModelDescriptor" Table="PresentableModelDescriptors"/>
-    <EntitySet Name="ArbeitszeitEintrag" EntityType="Model.Store.ArbeitszeitEintrag" Table="ArbeitszeitEinträge"/>
-    <EntitySet Name="LeistungsEintrag" EntityType="Model.Store.LeistungsEintrag" Table="LeistungsEinträge"/>
+    <EntitySet Name="PresenceRecord" EntityType="Model.Store.PresenceRecord" Table="PresenceRecords"/>
+    <EntitySet Name="WorkEffort" EntityType="Model.Store.WorkEffort" Table="WorkEfforts"/>
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
     <EntitySet Name="ObjectClass" EntityType="Model.Store.ObjectClass" Table="ObjectClasses"/>
@@ -322,28 +322,24 @@
     </AssociationSet>
     
     <!-- 
-    Relation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_42
-    A: ZeroOrMore Zeitkonto as Zeitkonto
+    Relation: FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42
+    A: ZeroOrMore WorkEffortAccount as WorkEffortAccount
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Zeitkonto_Mitarbeiter42CollectionEntry" EntityType="Model.Store.Zeitkonto_Mitarbeiter42CollectionEntry" Table="Zeitkonten_MitarbeiterCollection" />
-    <AssociationSet Name="FK_Zeitkonto_Mitarbeiter_Zeitkonto_42" Association="Model.Store.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42" >
-      <End Role="Zeitkonto" EntitySet="Zeitkonto" />
-      <End Role="CollectionEntry" EntitySet="Zeitkonto_Mitarbeiter42CollectionEntry" />
+    <EntitySet Name="WorkEffortAccount_Mitarbeiter42CollectionEntry" EntityType="Model.Store.WorkEffortAccount_Mitarbeiter42CollectionEntry" Table="WorkEffortAccounts_MitarbeiterCollection" />
+    <AssociationSet Name="FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42" Association="Model.Store.FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42" >
+      <End Role="WorkEffortAccount" EntitySet="WorkEffortAccount" />
+      <End Role="CollectionEntry" EntitySet="WorkEffortAccount_Mitarbeiter42CollectionEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42" Association="Model.Store.FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42" >
-      <End Role="CollectionEntry" EntitySet="Zeitkonto_Mitarbeiter42CollectionEntry" />
+    <AssociationSet Name="FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42" Association="Model.Store.FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42" >
+      <End Role="CollectionEntry" EntitySet="WorkEffortAccount_Mitarbeiter42CollectionEntry" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
     
 
 
     <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->
-    <AssociationSet Name="FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81" Association="Model.Store.FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81" >
-      <End Role="Arbeitszeit" EntitySet="ArbeitszeitEintrag" />
-      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
-    </AssociationSet>
     <AssociationSet Name="FK_Auftrag_Kunde_Auftrag_34" Association="Model.Store.FK_Auftrag_Kunde_Auftrag_34" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Kunde" EntitySet="Kunde" />
@@ -383,10 +379,6 @@
     <AssociationSet Name="FK_EnumerationProperty_Enumeration_EnumerationProperty_48" Association="Model.Store.FK_EnumerationProperty_Enumeration_EnumerationProperty_48" >
       <End Role="EnumerationProperty" EntitySet="EnumerationProperty" />
       <End Role="Enumeration" EntitySet="Enumeration" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82" Association="Model.Store.FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82" >
-      <End Role="LeistungsEintrag" EntitySet="LeistungsEintrag" />
-      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_BaseParameter_Method_44" Association="Model.Store.FK_Method_BaseParameter_Method_44" >
       <End Role="Method" EntitySet="Method" />
@@ -435,6 +427,10 @@
     <AssociationSet Name="FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27" Association="Model.Store.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27" >
       <End Role="ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
       <End Role="ReferenceObjectClass" EntitySet="ObjectClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresenceRecord_Mitarbeiter_PresenceRecord_81" Association="Model.Store.FK_PresenceRecord_Mitarbeiter_PresenceRecord_81" >
+      <End Role="PresenceRecord" EntitySet="PresenceRecord" />
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
     <AssociationSet Name="FK_PresentableModelDescriptor_TypeRef_Descriptor_77" Association="Model.Store.FK_PresentableModelDescriptor_TypeRef_Descriptor_77" >
       <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
@@ -523,6 +519,10 @@
     <AssociationSet Name="FK_Visual_Property_Visual_56" Association="Model.Store.FK_Visual_Property_Visual_56" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="Property" EntitySet="Property" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkEffort_Mitarbeiter_WorkEffort_82" Association="Model.Store.FK_WorkEffort_Mitarbeiter_WorkEffort_82" >
+      <End Role="WorkEffort" EntitySet="WorkEffort" />
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
 
     <!-- EntitySets and AssociationSet for all object-value CollectionEntrys -->
@@ -686,15 +686,15 @@
     <Property Name="Auftragswert" Type="float" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="Zeitkonto">
+  <EntityType Name="WorkEffortAccount">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Kontoname" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="MaxStunden" Type="float" Nullable="true" />
-    <Property Name="AktuelleStunden" Type="float" Nullable="true" />
-    <Property Name="Notizen" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="BudgetHours" Type="float" Nullable="true" />
+    <Property Name="SpentHours" Type="float" Nullable="true" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Kunde">
@@ -1064,25 +1064,25 @@
     <Property Name="DefaultVisualType" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="ArbeitszeitEintrag">
+  <EntityType Name="PresenceRecord">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Anfang" Type="datetime" Nullable="false" />
-    <Property Name="Ende" Type="datetime" Nullable="false" />
+    <Property Name="From" Type="datetime" Nullable="false" />
+    <Property Name="Thru" Type="datetime" Nullable="false" />
     <Property Name="fk_Mitarbeiter" Type="int" />
   </EntityType>
 	
-  <EntityType Name="LeistungsEintrag">
+  <EntityType Name="WorkEffort">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Bezeichnung" Type="nvarchar" MaxLength="400" Nullable="false" />
-    <Property Name="Notizen" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="Anfang" Type="datetime" Nullable="false" />
-    <Property Name="Ende" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="400" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="From" Type="datetime" Nullable="false" />
+    <Property Name="Thru" Type="datetime" Nullable="false" />
     <Property Name="fk_Mitarbeiter" Type="int" />
   </EntityType>
 
@@ -1320,33 +1320,33 @@
   </Association>
 
 	
-  <EntityType Name="Zeitkonto_Mitarbeiter42CollectionEntry">
+  <EntityType Name="WorkEffortAccount_Mitarbeiter42CollectionEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Zeitkonto" Type="int" Nullable="true" />
+    <Property Name="fk_WorkEffortAccount" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="FK_Zeitkonto_Mitarbeiter_Zeitkonto_42">
-    <End Role="Zeitkonto" Type="Model.Store.Zeitkonto" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Zeitkonto_Mitarbeiter42CollectionEntry" Multiplicity="*" />
+  <Association Name="FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42">
+    <End Role="WorkEffortAccount" Type="Model.Store.WorkEffortAccount" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.WorkEffortAccount_Mitarbeiter42CollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Zeitkonto">
+      <Principal Role="WorkEffortAccount">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_Zeitkonto" />
+        <PropertyRef Name="fk_WorkEffortAccount" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42">
+  <Association Name="FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42">
     <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Zeitkonto_Mitarbeiter42CollectionEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.WorkEffortAccount_Mitarbeiter42CollectionEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Mitarbeiter">
         <PropertyRef Name="ID" />
@@ -1360,21 +1360,6 @@
 
 
   <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->
-
-  <Association Name="FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81">
-    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Arbeitszeit" Type="Model.Store.ArbeitszeitEintrag" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Mitarbeiter">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Arbeitszeit">
-        <PropertyRef Name="fk_Mitarbeiter" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
 
   <Association Name="FK_Auftrag_Kunde_Auftrag_34">
     <End Role="Kunde" Type="Model.Store.Kunde" Multiplicity="0..1" />
@@ -1521,21 +1506,6 @@
       </Principal>
       <Dependent Role="EnumerationProperty">
         <PropertyRef Name="fk_Enumeration" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82">
-    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="LeistungsEintrag" Type="Model.Store.LeistungsEintrag" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Mitarbeiter">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="LeistungsEintrag">
-        <PropertyRef Name="fk_Mitarbeiter" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1716,6 +1686,21 @@
       </Principal>
       <Dependent Role="ObjectReferenceProperty">
         <PropertyRef Name="fk_ReferenceObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_PresenceRecord_Mitarbeiter_PresenceRecord_81">
+    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="PresenceRecord" Type="Model.Store.PresenceRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mitarbeiter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PresenceRecord">
+        <PropertyRef Name="fk_Mitarbeiter" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2046,6 +2031,21 @@
       </Principal>
       <Dependent Role="Visual">
         <PropertyRef Name="fk_Property" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_WorkEffort_Mitarbeiter_WorkEffort_82">
+    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="WorkEffort" Type="Model.Store.WorkEffort" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mitarbeiter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkEffort">
+        <PropertyRef Name="fk_Mitarbeiter" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

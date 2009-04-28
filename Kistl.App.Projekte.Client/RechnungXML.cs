@@ -24,7 +24,7 @@ namespace Kistl.App.Projekte
         public class RechnungZeitEntry
         {
             public string Datum { get; set; }
-            public string Zeitkonto { get; set; }
+            public string WorkEffortAccount { get; set; }
             public string Dauer { get; set; }
         }
 

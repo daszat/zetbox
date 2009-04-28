@@ -227,13 +227,13 @@ namespace Kistl.Server.Tests
         //{
         //    using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
         //    {
-        //        var test = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
+        //        var test = from z in ctx.GetQuery<Kistl.App.TimeRecords.WorkEffortAccount>()
         //                   where z.Taetigkeiten.Select(tt => tt.Mitarbeiter.Geburtstag.HasValue && 
         //                       ((DateTime)tt.Mitarbeiter.Geburtstag) > new DateTime(1978, 1, 1)).Count() > 0
         //                   select z;
         //        foreach (var t in test)
         //        {
-        //            System.Diagnostics.Trace.WriteLine(string.Format("GetListWithParameterIllegal: {0}", t.Kontoname));
+        //            System.Diagnostics.Trace.WriteLine(string.Format("GetListWithParameterIllegal: {0}", t.Name));
         //        }
         //    }
         //}
@@ -243,8 +243,8 @@ namespace Kistl.Server.Tests
         {
             using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
             {
-                var test = from z in ctx.GetQuery<Kistl.App.Zeiterfassung.Zeitkonto>()
-                           select new { A = z.AktuelleStunden, B = z.MaxStunden };
+                var test = from z in ctx.GetQuery<Kistl.App.TimeRecords.WorkEffortAccount>()
+                           select new { A = z.SpentHours, B = z.BudgetHours };
                 foreach (var t in test)
                 {
                     System.Diagnostics.Trace.WriteLine(string.Format("GetListWithProjection: {0}", t.A));

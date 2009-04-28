@@ -485,7 +485,7 @@ namespace Kistl.App.Base
 			DataStore[11].Seal();
 			DataStore[12].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[6];
 			DataStore[12].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
-			DataStore[12].MemberName = @"OnToString_Zeitkonto";
+			DataStore[12].MemberName = @"OnToString_WorkEffortAccount";
 			DataStore[12].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[29];
 			DataStore[12].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[12].Seal();
@@ -611,7 +611,7 @@ namespace Kistl.App.Base
 			DataStore[37].Seal();
 			DataStore[45].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[2];
 			DataStore[45].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
-			DataStore[45].MemberName = @"OnPreSave_Zeitkonto";
+			DataStore[45].MemberName = @"OnPreSave_WorkEffortAccount";
 			DataStore[45].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[30];
 			DataStore[45].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[45].Seal();

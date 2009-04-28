@@ -124,14 +124,14 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Zeitkonto">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Zeitkonto)">
-	    <MappingFragment StoreEntitySet="Zeitkonto">
+    <EntitySetMapping Name="WorkEffortAccount">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkEffortAccount)">
+	    <MappingFragment StoreEntitySet="WorkEffortAccount">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="AktuelleStunden" ColumnName="AktuelleStunden" />
-<ScalarProperty Name="Kontoname" ColumnName="Kontoname" />
-<ScalarProperty Name="MaxStunden" ColumnName="MaxStunden" />
-<ScalarProperty Name="Notizen" ColumnName="Notizen" />
+<ScalarProperty Name="BudgetHours" ColumnName="BudgetHours" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="Notes" ColumnName="Notes" />
+<ScalarProperty Name="SpentHours" ColumnName="SpentHours" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -437,23 +437,23 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ArbeitszeitEintrag">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ArbeitszeitEintrag)">
-	    <MappingFragment StoreEntitySet="ArbeitszeitEintrag">
+    <EntitySetMapping Name="PresenceRecord">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PresenceRecord)">
+	    <MappingFragment StoreEntitySet="PresenceRecord">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Anfang" ColumnName="Anfang" />
-<ScalarProperty Name="Ende" ColumnName="Ende" />
+<ScalarProperty Name="From" ColumnName="From" />
+<ScalarProperty Name="Thru" ColumnName="Thru" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="LeistungsEintrag">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.LeistungsEintrag)">
-	    <MappingFragment StoreEntitySet="LeistungsEintrag">
+    <EntitySetMapping Name="WorkEffort">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkEffort)">
+	    <MappingFragment StoreEntitySet="WorkEffort">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Anfang" ColumnName="Anfang" />
-<ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
-<ScalarProperty Name="Ende" ColumnName="Ende" />
-<ScalarProperty Name="Notizen" ColumnName="Notizen" />
+<ScalarProperty Name="From" ColumnName="From" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="Notes" ColumnName="Notes" />
+<ScalarProperty Name="Thru" ColumnName="Thru" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -693,34 +693,34 @@
     </AssociationSetMapping>
 
     <!--
-    Relation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_42
-    A: ZeroOrMore Zeitkonto as Zeitkonto
+    Relation: FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42
+    A: ZeroOrMore WorkEffortAccount as WorkEffortAccount
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Zeitkonto_Mitarbeiter42CollectionEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Zeitkonto_Mitarbeiter42CollectionEntry)">
-        <MappingFragment StoreEntitySet="Zeitkonto_Mitarbeiter42CollectionEntry">
+    <EntitySetMapping Name="WorkEffortAccount_Mitarbeiter42CollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkEffortAccount_Mitarbeiter42CollectionEntry)">
+        <MappingFragment StoreEntitySet="WorkEffortAccount_Mitarbeiter42CollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Zeitkonto_Mitarbeiter_Zeitkonto_42"
-                           TypeName="Model.FK_Zeitkonto_Mitarbeiter_Zeitkonto_42"
-                           StoreEntitySet="Zeitkonto_Mitarbeiter42CollectionEntry" >
-      <EndProperty Name="Zeitkonto">
-        <ScalarProperty Name="ID" ColumnName="fk_Zeitkonto"/>
+    <AssociationSetMapping Name="FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42"
+                           TypeName="Model.FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42"
+                           StoreEntitySet="WorkEffortAccount_Mitarbeiter42CollectionEntry" >
+      <EndProperty Name="WorkEffortAccount">
+        <ScalarProperty Name="ID" ColumnName="fk_WorkEffortAccount"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_Zeitkonto" IsNull="false"/>
+      <Condition ColumnName="fk_WorkEffortAccount" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42"
-                           TypeName="Model.FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42"
-                           StoreEntitySet="Zeitkonto_Mitarbeiter42CollectionEntry" >
+    <AssociationSetMapping Name="FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42"
+                           TypeName="Model.FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42"
+                           StoreEntitySet="WorkEffortAccount_Mitarbeiter42CollectionEntry" >
       <EndProperty Name="Mitarbeiter">
         <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter"/>
       </EndProperty>
@@ -733,23 +733,6 @@
 
 
     <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->
-    <!--
-    Relation: FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81
-    A: ZeroOrMore ArbeitszeitEintrag as Arbeitszeit
-    B: One Mitarbeiter as Mitarbeiter
-    Preferred Storage: Left
-    -->
-    <AssociationSetMapping Name="FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81"
-                           TypeName="Model.FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81"
-                           StoreEntitySet="ArbeitszeitEintrag" >
-      <EndProperty Name="Mitarbeiter">
-        <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter"/>
-      </EndProperty>
-      <EndProperty Name="Arbeitszeit">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
-    </AssociationSetMapping>
     <!--
     Relation: FK_Auftrag_Kunde_Auftrag_34
     A: ZeroOrMore Auftrag as Auftrag
@@ -919,23 +902,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Enumeration" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82
-    A: ZeroOrMore LeistungsEintrag as LeistungsEintrag
-    B: One Mitarbeiter as Mitarbeiter
-    Preferred Storage: Left
-    -->
-    <AssociationSetMapping Name="FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82"
-                           TypeName="Model.FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82"
-                           StoreEntitySet="LeistungsEintrag" >
-      <EndProperty Name="Mitarbeiter">
-        <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter"/>
-      </EndProperty>
-      <EndProperty Name="LeistungsEintrag">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Method_BaseParameter_Method_44
@@ -1140,6 +1106,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_ReferenceObjectClass" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_PresenceRecord_Mitarbeiter_PresenceRecord_81
+    A: ZeroOrMore PresenceRecord as PresenceRecord
+    B: One Mitarbeiter as Mitarbeiter
+    Preferred Storage: Left
+    -->
+    <AssociationSetMapping Name="FK_PresenceRecord_Mitarbeiter_PresenceRecord_81"
+                           TypeName="Model.FK_PresenceRecord_Mitarbeiter_PresenceRecord_81"
+                           StoreEntitySet="PresenceRecord" >
+      <EndProperty Name="Mitarbeiter">
+        <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter"/>
+      </EndProperty>
+      <EndProperty Name="PresenceRecord">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_PresentableModelDescriptor_TypeRef_Descriptor_77
@@ -1514,6 +1497,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Property" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_WorkEffort_Mitarbeiter_WorkEffort_82
+    A: ZeroOrMore WorkEffort as WorkEffort
+    B: One Mitarbeiter as Mitarbeiter
+    Preferred Storage: Left
+    -->
+    <AssociationSetMapping Name="FK_WorkEffort_Mitarbeiter_WorkEffort_82"
+                           TypeName="Model.FK_WorkEffort_Mitarbeiter_WorkEffort_82"
+                           StoreEntitySet="WorkEffort" >
+      <EndProperty Name="Mitarbeiter">
+        <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter"/>
+      </EndProperty>
+      <EndProperty Name="WorkEffort">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
     </AssociationSetMapping>
 
     <!-- EntitySetMappings and AssociationSetMappings for ValueType lists -->

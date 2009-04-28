@@ -11,14 +11,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Kistl.Client.WPF.View.Zeiterfassung
+namespace Kistl.Client.WPF.View.TimeRecords
 {
     /// <summary>
-    /// Interaction logic for LeistungserfassungsView.xaml
+    /// Interaction logic for WorkEffortRecorderView.xaml
     /// </summary>
-    public partial class LeistungserfassungsView : Window
+    public partial class WorkEffortRecorderView : Window
     {
-        public LeistungserfassungsView()
+        public WorkEffortRecorderView()
         {
             InitializeComponent();
         }

@@ -30,7 +30,7 @@ namespace Kistl.App.GUI
 {
 }
 
-namespace Kistl.App.Zeiterfassung
+namespace Kistl.App.TimeRecords
 {
 	using Kistl.App.Projekte;
 }

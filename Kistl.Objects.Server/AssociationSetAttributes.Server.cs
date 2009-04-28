@@ -8,21 +8,6 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81
-    A: ZeroOrMore ArbeitszeitEintrag as Arbeitszeit
-    B: One Mitarbeiter as Mitarbeiter
-    Preferred Storage: Left
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_ArbeitszeitEintrag_Mitarbeiter_Arbeitszeit_81",
-    "Arbeitszeit", RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.ArbeitszeitEintrag__Implementation__),
-    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_Auftrag_Kunde_Auftrag_34
     A: ZeroOrMore Auftrag as Auftrag
     B: ZeroOrOne Kunde as Kunde
@@ -169,21 +154,6 @@ using Kistl.DALProvider.EF;
     "Model", "FK_EnumerationProperty_Enumeration_EnumerationProperty_48",
     "EnumerationProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumerationProperty__Implementation__),
     "Enumeration", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Enumeration__Implementation__)
-    )]
-
-
-	/*
-    Relation: FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82
-    A: ZeroOrMore LeistungsEintrag as LeistungsEintrag
-    B: One Mitarbeiter as Mitarbeiter
-    Preferred Storage: Left
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_LeistungsEintrag_Mitarbeiter_LeistungsEintrag_82",
-    "LeistungsEintrag", RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.LeistungsEintrag__Implementation__),
-    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__)
     )]
 
 
@@ -382,6 +352,21 @@ using Kistl.DALProvider.EF;
     "Model", "FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27",
     "ObjectReferenceProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__),
     "ReferenceObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_PresenceRecord_Mitarbeiter_PresenceRecord_81
+    A: ZeroOrMore PresenceRecord as PresenceRecord
+    B: One Mitarbeiter as Mitarbeiter
+    Preferred Storage: Left
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_PresenceRecord_Mitarbeiter_PresenceRecord_81",
+    "PresenceRecord", RelationshipMultiplicity.Many, typeof(Kistl.App.TimeRecords.PresenceRecord__Implementation__),
+    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__)
     )]
 
 
@@ -806,21 +791,36 @@ using Kistl.DALProvider.EF;
     )]
 
 	/*
-    Relation: FK_Zeitkonto_Mitarbeiter_Zeitkonto_42
-    A: ZeroOrMore Zeitkonto as Zeitkonto
+    Relation: FK_WorkEffort_Mitarbeiter_WorkEffort_82
+    A: ZeroOrMore WorkEffort as WorkEffort
+    B: One Mitarbeiter as Mitarbeiter
+    Preferred Storage: Left
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_WorkEffort_Mitarbeiter_WorkEffort_82",
+    "WorkEffort", RelationshipMultiplicity.Many, typeof(Kistl.App.TimeRecords.WorkEffort__Implementation__),
+    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42
+    A: ZeroOrMore WorkEffortAccount as WorkEffortAccount
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
 	*/
 
 // The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_Zeitkonto_Mitarbeiter_Zeitkonto_42",
-    "Zeitkonto", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Zeiterfassung.Zeitkonto__Implementation__),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)
+[assembly: EdmRelationship("Model", "FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42",
+    "WorkEffortAccount", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.TimeRecords.WorkEffortAccount__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.TimeRecords.WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__)
     )]
 // The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_Zeitkonto_Mitarbeiter_Mitarbeiter_42",
+[assembly: EdmRelationship("Model", "FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42",
     "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Zeiterfassung.Zeitkonto_Mitarbeiter42CollectionEntry__Implementation__)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.TimeRecords.WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__)
     )]
 
 

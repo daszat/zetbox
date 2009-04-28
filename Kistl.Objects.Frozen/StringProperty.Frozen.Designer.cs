@@ -587,19 +587,19 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[179],
 			DataStore[50].ValueModelDescriptor = null;
 			DataStore[50].Length = 200;
 			DataStore[50].Seal();
-			DataStore[52].AltText = @"Name des Zeiterfassungskontos";
+			DataStore[52].AltText = @"descriptive name of this account";
 			DataStore[52].CategoryTags = @"Summary,Main";
 			DataStore[52].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[136],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[178],
 });
-			DataStore[52].Description = @"Name des Zeiterfassungskontos";
+			DataStore[52].Description = @"Name des TimeRecordsskontos";
 			DataStore[52].IsIndexed = false;
 			DataStore[52].IsList = false;
 			DataStore[52].IsNullable = false;
 			DataStore[52].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[52].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
-			DataStore[52].PropertyName = @"Kontoname";
+			DataStore[52].PropertyName = @"Name";
 			DataStore[52].ValueModelDescriptor = null;
 			DataStore[52].Length = 200;
 			DataStore[52].Seal();
@@ -1156,13 +1156,13 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[229],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[217],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[224],
 });
-			DataStore[237].Description = @"Platz für Notizen";
+			DataStore[237].Description = @"Space for notes";
 			DataStore[237].IsIndexed = false;
 			DataStore[237].IsList = false;
 			DataStore[237].IsNullable = false;
 			DataStore[237].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[237].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
-			DataStore[237].PropertyName = @"Notizen";
+			DataStore[237].PropertyName = @"Notes";
 			DataStore[237].ValueModelDescriptor = null;
 			DataStore[237].Length = 4000;
 			DataStore[237].Seal();
@@ -1172,13 +1172,13 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[224],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[247],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[252],
 });
-			DataStore[245].Description = @"Eine kurze Überschrift, was gemacht wurde.";
+			DataStore[245].Description = @"A short label describing this work effort.";
 			DataStore[245].IsIndexed = false;
 			DataStore[245].IsList = false;
 			DataStore[245].IsNullable = false;
 			DataStore[245].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[245].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
-			DataStore[245].PropertyName = @"Bezeichnung";
+			DataStore[245].PropertyName = @"Name";
 			DataStore[245].ValueModelDescriptor = null;
 			DataStore[245].Length = 400;
 			DataStore[245].Seal();
@@ -1194,7 +1194,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[251],
 			DataStore[246].IsNullable = false;
 			DataStore[246].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[246].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
-			DataStore[246].PropertyName = @"Notizen";
+			DataStore[246].PropertyName = @"Notes";
 			DataStore[246].ValueModelDescriptor = null;
 			DataStore[246].Length = 4000;
 			DataStore[246].Seal();

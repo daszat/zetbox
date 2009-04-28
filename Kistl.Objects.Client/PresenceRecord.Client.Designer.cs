@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Zeiterfassung
+namespace Kistl.App.TimeRecords
 {
     using System;
     using System.Collections;
@@ -18,11 +18,11 @@ namespace Kistl.App.Zeiterfassung
     /// <summary>
     /// 
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("ArbeitszeitEintrag")]
-    public class ArbeitszeitEintrag__Implementation__ : BaseClientDataObject_ClientObjects, ArbeitszeitEintrag
+    [System.Diagnostics.DebuggerDisplay("PresenceRecord")]
+    public class PresenceRecord__Implementation__ : BaseClientDataObject_ClientObjects, PresenceRecord
     {
     
-		public ArbeitszeitEintrag__Implementation__()
+		public PresenceRecord__Implementation__()
 		{
             {
             }
@@ -30,55 +30,31 @@ namespace Kistl.App.Zeiterfassung
 
 
         /// <summary>
-        /// Wann die Anwesenheit angefangen hat.
+        /// Point in time when the presence started.
         /// </summary>
         // value type property
-        public virtual DateTime Anfang
+        public virtual DateTime From
         {
             get
             {
-                return _Anfang;
+                return _From;
             }
             set
             {
                 if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Anfang != value)
+                if (_From != value)
                 {
-					var __oldValue = _Anfang;
-                    NotifyPropertyChanging("Anfang", __oldValue, value);
-                    _Anfang = value;
-                    NotifyPropertyChanged("Anfang", __oldValue, value);
+					var __oldValue = _From;
+                    NotifyPropertyChanging("From", __oldValue, value);
+                    _From = value;
+                    NotifyPropertyChanged("From", __oldValue, value);
                 }
             }
         }
-        private DateTime _Anfang;
+        private DateTime _From;
 
         /// <summary>
-        /// Wann die Anwesenheit geendet hat.
-        /// </summary>
-        // value type property
-        public virtual DateTime Ende
-        {
-            get
-            {
-                return _Ende;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_Ende != value)
-                {
-					var __oldValue = _Ende;
-                    NotifyPropertyChanging("Ende", __oldValue, value);
-                    _Ende = value;
-                    NotifyPropertyChanged("Ende", __oldValue, value);
-                }
-            }
-        }
-        private DateTime _Ende;
-
-        /// <summary>
-        /// Welcher Mitarbeiter diese Arbeitszeit geleistet hat.
+        /// Which employee was present.
         /// </summary>
         // object reference property
         // implement the user-visible interface
@@ -139,20 +115,44 @@ namespace Kistl.App.Zeiterfassung
         }
         private int? _fk_Mitarbeiter;
 
+        /// <summary>
+        /// Point in time (inclusive) when the presence ended.
+        /// </summary>
+        // value type property
+        public virtual DateTime Thru
+        {
+            get
+            {
+                return _Thru;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Thru != value)
+                {
+					var __oldValue = _Thru;
+                    NotifyPropertyChanging("Thru", __oldValue, value);
+                    _Thru = value;
+                    NotifyPropertyChanged("Thru", __oldValue, value);
+                }
+            }
+        }
+        private DateTime _Thru;
+
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(ArbeitszeitEintrag));
+			return new InterfaceType(typeof(PresenceRecord));
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (ArbeitszeitEintrag)obj;
-			var otherImpl = (ArbeitszeitEintrag__Implementation__)obj;
-			var me = (ArbeitszeitEintrag)this;
+			var other = (PresenceRecord)obj;
+			var otherImpl = (PresenceRecord__Implementation__)obj;
+			var me = (PresenceRecord)this;
 
-			me.Anfang = other.Anfang;
-			me.Ende = other.Ende;
+			me.From = other.From;
+			me.Thru = other.Thru;
 			this.fk_Mitarbeiter = otherImpl.fk_Mitarbeiter;
 		}
 
@@ -168,47 +168,38 @@ namespace Kistl.App.Zeiterfassung
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_ArbeitszeitEintrag != null)
+            if (OnToString_PresenceRecord != null)
             {
-                OnToString_ArbeitszeitEintrag(this, e);
+                OnToString_PresenceRecord(this, e);
             }
             return e.Result;
         }
-        public event ToStringHandler<ArbeitszeitEintrag> OnToString_ArbeitszeitEintrag;
+        public event ToStringHandler<PresenceRecord> OnToString_PresenceRecord;
 
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ArbeitszeitEintrag != null) OnPreSave_ArbeitszeitEintrag(this);
+            if (OnPreSave_PresenceRecord != null) OnPreSave_PresenceRecord(this);
         }
-        public event ObjectEventHandler<ArbeitszeitEintrag> OnPreSave_ArbeitszeitEintrag;
+        public event ObjectEventHandler<PresenceRecord> OnPreSave_PresenceRecord;
 
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ArbeitszeitEintrag != null) OnPostSave_ArbeitszeitEintrag(this);
+            if (OnPostSave_PresenceRecord != null) OnPostSave_PresenceRecord(this);
         }
-        public event ObjectEventHandler<ArbeitszeitEintrag> OnPostSave_ArbeitszeitEintrag;
+        public event ObjectEventHandler<PresenceRecord> OnPostSave_PresenceRecord;
 
 
 		protected override string GetPropertyError(string propertyName) 
 		{
 			switch(propertyName)
 			{
-				case "Anfang":
+				case "From":
 				{
 					var errors = Context.Find<Kistl.App.Base.Property>(238).Constraints
-						.Where(c => !c.IsValid(this, this.Anfang))
-						.Select(c => c.GetErrorText(this, this.Anfang))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Ende":
-				{
-					var errors = Context.Find<Kistl.App.Base.Property>(239).Constraints
-						.Where(c => !c.IsValid(this, this.Ende))
-						.Select(c => c.GetErrorText(this, this.Ende))
+						.Where(c => !c.IsValid(this, this.From))
+						.Select(c => c.GetErrorText(this, this.From))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -218,6 +209,15 @@ namespace Kistl.App.Zeiterfassung
 					var errors = Context.Find<Kistl.App.Base.Property>(244).Constraints
 						.Where(c => !c.IsValid(this, this.Mitarbeiter))
 						.Select(c => c.GetErrorText(this, this.Mitarbeiter))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Thru":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(239).Constraints
+						.Where(c => !c.IsValid(this, this.Thru))
+						.Select(c => c.GetErrorText(this, this.Thru))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -246,33 +246,33 @@ namespace Kistl.App.Zeiterfassung
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this._Anfang, binStream);
-            BinarySerializer.ToStream(this._Ende, binStream);
+            BinarySerializer.ToStream(this._From, binStream);
             BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
+            BinarySerializer.ToStream(this._Thru, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Anfang, binStream);
-            BinarySerializer.FromStream(out this._Ende, binStream);
+            BinarySerializer.FromStream(out this._From, binStream);
             BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
+            BinarySerializer.FromStream(out this._Thru, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this._Anfang, xml, "Anfang", "Kistl.App.Zeiterfassung");
-            XmlStreamer.ToStream(this._Ende, xml, "Ende", "Kistl.App.Zeiterfassung");
+            XmlStreamer.ToStream(this._From, xml, "From", "Kistl.App.TimeRecords");
             XmlStreamer.ToStream(this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._Thru, xml, "Thru", "Kistl.App.TimeRecords");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._Anfang, xml, "Anfang", "Kistl.App.Zeiterfassung");
-            XmlStreamer.FromStream(ref this._Ende, xml, "Ende", "Kistl.App.Zeiterfassung");
+            XmlStreamer.FromStream(ref this._From, xml, "From", "Kistl.App.TimeRecords");
             XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._Thru, xml, "Thru", "Kistl.App.TimeRecords");
         }
 
 #endregion

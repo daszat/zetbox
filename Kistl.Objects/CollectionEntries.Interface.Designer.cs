@@ -85,16 +85,16 @@ namespace Kistl.App.GUI
 
     }
 }
-namespace Kistl.App.Zeiterfassung
+namespace Kistl.App.TimeRecords
 {
     using Kistl.API;
-    using Kistl.App.Zeiterfassung;
+    using Kistl.App.TimeRecords;
     using Kistl.App.Projekte;
 
     /// <summary>
     /// ObjectCollectionEntry for 
     /// </summary>
-    public interface Zeitkonto_Mitarbeiter42CollectionEntry : IRelationCollectionEntry<Zeitkonto, Mitarbeiter> 
+    public interface WorkEffortAccount_Mitarbeiter42CollectionEntry : IRelationCollectionEntry<WorkEffortAccount, Mitarbeiter> 
     {
 
     }
