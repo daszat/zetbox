@@ -214,13 +214,12 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
 			DataStore[238].Seal();
 			DataStore[239].AltText = null;
 			DataStore[239].CategoryTags = @"Summary";
-			DataStore[239].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[222],
+			DataStore[239].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[239].Description = @"Point in time (inclusive) when the presence ended.";
 			DataStore[239].IsIndexed = false;
 			DataStore[239].IsList = false;
-			DataStore[239].IsNullable = false;
+			DataStore[239].IsNullable = true;
 			DataStore[239].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[239].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
 			DataStore[239].PropertyName = @"Thru";
@@ -242,13 +241,12 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[250],
 			DataStore[247].Seal();
 			DataStore[248].AltText = null;
 			DataStore[248].CategoryTags = @"Summary";
-			DataStore[248].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[249],
+			DataStore[248].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[248].Description = @"Point in time (inclusive) when the work effort ended.";
 			DataStore[248].IsIndexed = false;
 			DataStore[248].IsList = false;
-			DataStore[248].IsNullable = false;
+			DataStore[248].IsNullable = true;
 			DataStore[248].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[248].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
 			DataStore[248].PropertyName = @"Thru";

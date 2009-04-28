@@ -221,7 +221,7 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-        public virtual DateTime Thru
+        public virtual DateTime? Thru
         {
             get
             {
@@ -239,7 +239,7 @@ namespace Kistl.App.TimeRecords
                 }
             }
         }
-        private DateTime _Thru;
+        private DateTime? _Thru;
 
 		public override InterfaceType GetInterfaceType()
 		{

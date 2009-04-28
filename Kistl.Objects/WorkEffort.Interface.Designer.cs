@@ -43,7 +43,7 @@ namespace Kistl.App.TimeRecords
         /// <summary>
         /// Point in time (inclusive) when the work effort ended.
         /// </summary>
-		DateTime Thru {
+		DateTime? Thru {
 			get;
 			set;
 		}

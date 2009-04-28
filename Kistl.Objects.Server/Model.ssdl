@@ -1078,7 +1078,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="From" Type="datetime" Nullable="false" />
-    <Property Name="Thru" Type="datetime" Nullable="false" />
+    <Property Name="Thru" Type="datetime" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" />
   </EntityType>
 	
@@ -1090,7 +1090,7 @@
     <Property Name="Name" Type="nvarchar" MaxLength="400" Nullable="false" />
     <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="From" Type="datetime" Nullable="false" />
-    <Property Name="Thru" Type="datetime" Nullable="false" />
+    <Property Name="Thru" Type="datetime" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" />
   </EntityType>
 	

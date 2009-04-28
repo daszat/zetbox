@@ -535,7 +535,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="From" Type="DateTime" Nullable="false" />
-    <Property Name="Thru" Type="DateTime" Nullable="false" />
+    <Property Name="Thru" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="Mitarbeiter__Implementation__"
                         Relationship="Model.FK_PresenceRecord_Mitarbeiter_PresenceRecord_81"
                         FromRole="PresenceRecord"
@@ -790,7 +790,7 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="400" />
     <Property Name="Notes" Type="String" Nullable="false" MaxLength="4000" />
     <Property Name="From" Type="DateTime" Nullable="false" />
-    <Property Name="Thru" Type="DateTime" Nullable="false" />
+    <Property Name="Thru" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="Mitarbeiter__Implementation__"
                         Relationship="Model.FK_WorkEffort_Mitarbeiter_WorkEffort_82"
                         FromRole="WorkEffort"

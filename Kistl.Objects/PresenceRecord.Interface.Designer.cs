@@ -29,7 +29,7 @@ namespace Kistl.App.TimeRecords
         /// <summary>
         /// Point in time (inclusive) when the presence ended.
         /// </summary>
-		DateTime Thru {
+		DateTime? Thru {
 			get;
 			set;
 		}

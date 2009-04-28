@@ -167,7 +167,7 @@ namespace Kistl.App.TimeRecords
         /// Point in time (inclusive) when the work effort ended.
         /// </summary>
         // value type property
-        public virtual DateTime Thru
+        public virtual DateTime? Thru
         {
             get
             {
@@ -185,7 +185,7 @@ namespace Kistl.App.TimeRecords
                 }
             }
         }
-        private DateTime _Thru;
+        private DateTime? _Thru;
 
 		public override InterfaceType GetInterfaceType()
 		{
