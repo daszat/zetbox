@@ -172,6 +172,7 @@ namespace Kistl.App.Base
 			DataStore[50].ClassName = @"TestEnum";
 			DataStore[50].DefaultIcon = null;
 			DataStore[50].Description = @"A TestEnum";
+			DataStore[50].ExportGuid = new Guid("67b48828-e7d2-4432-a942-88e96d74b40a");
 			DataStore[50].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[50].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
@@ -187,6 +188,7 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[3],
 			DataStore[53].ClassName = @"Toolkit";
 			DataStore[53].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[4];
 			DataStore[53].Description = null;
+			DataStore[53].ExportGuid = new Guid("803fb38d-f0d2-409c-9f15-30da4bdcf576");
 			DataStore[53].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[53].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
@@ -204,6 +206,7 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[77],
 			DataStore[55].ClassName = @"VisualType";
 			DataStore[55].DefaultIcon = null;
 			DataStore[55].Description = null;
+			DataStore[55].ExportGuid = new Guid("3567a11f-1809-44e8-bafe-ce0ccec7ea2a");
 			DataStore[55].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[55].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
@@ -244,6 +247,7 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[78],
 			DataStore[78].ClassName = @"StorageType";
 			DataStore[78].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[10];
 			DataStore[78].Description = @"Storage Type of a 1:1 Releation.";
+			DataStore[78].ExportGuid = new Guid("351a22e8-d047-4878-b6d3-3945489139a0");
 			DataStore[78].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[78].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
@@ -263,6 +267,7 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[68],
 			DataStore[81].ClassName = @"Multiplicity";
 			DataStore[81].DefaultIcon = null;
 			DataStore[81].Description = @"Describes the multiplicities of objects on RelationEnds";
+			DataStore[81].ExportGuid = new Guid("4f2b5005-672e-46ef-80ed-94b8cdd053db");
 			DataStore[81].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[81].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {

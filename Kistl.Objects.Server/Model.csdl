@@ -401,6 +401,7 @@
                         FromRole="InvokeOnObjectClass"
                         ToRole="MethodInvocations" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="EnumerationEntry">
     <Key>

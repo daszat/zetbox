@@ -15,7 +15,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Export Guid
         /// </summary>
-		System.Guid ExportGuid {
+		Guid ExportGuid {
 			get;
 			set;
 		}

@@ -126,6 +126,7 @@ namespace Kistl.App.Base
 			DataStore[48].ClassName = @"ITestInterface";
 			DataStore[48].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[1];
 			DataStore[48].Description = @"A Test Interface";
+			DataStore[48].ExportGuid = new Guid("c8ff9958-dd26-4a92-a049-7fa9d51d8bf2");
 			DataStore[48].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[48].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(1) {
@@ -141,6 +142,7 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[111],
 			DataStore[52].ClassName = @"IRenderer";
 			DataStore[52].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[2];
 			DataStore[52].Description = null;
+			DataStore[52].ExportGuid = new Guid("2e93e071-875a-41ee-a768-5d55c2683546");
 			DataStore[52].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[52].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
@@ -156,6 +158,7 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[113],
 			DataStore[88].ClassName = @"IExportable";
 			DataStore[88].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[10];
 			DataStore[88].Description = @"Marks a DataType as exportable";
+			DataStore[88].ExportGuid = new Guid("4ae6616a-eca3-47a5-b502-8e3c3913c2f0");
 			DataStore[88].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[88].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {

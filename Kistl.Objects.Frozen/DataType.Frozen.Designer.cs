@@ -99,6 +99,30 @@ namespace Kistl.App.Base
         private string _Description;
 
         /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
+
+        /// <summary>
         /// all implemented Methods in this DataType
         /// </summary>
         // object list property
@@ -297,6 +321,15 @@ namespace Kistl.App.Base
 					var errors = Context.Find<Kistl.App.Base.Property>(175).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ExportGuid":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(252).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
 					
 					return String.Join("; ", errors);

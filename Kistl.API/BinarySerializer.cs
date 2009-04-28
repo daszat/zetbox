@@ -137,6 +137,62 @@ namespace Kistl.API
 
         #endregion
 
+        #region Guid
+
+        /// <summary>
+        /// Serialize a DateTime
+        /// </summary>
+        /// <param name="val">Value to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStream(Guid val, BinaryWriter sw)
+        {
+            if (sw == null) throw new ArgumentNullException("sw");
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("Writing Guid {0}", val);
+            sw.Write(val.ToString());
+        }
+
+        /// <summary>
+        /// Deserialize a DateTime
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out Guid val, BinaryReader sr)
+        {
+            if (sr == null) throw new ArgumentNullException("sr");
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            val = new Guid(sr.ReadString());
+            SerializerTrace("read Guid {0}", val);
+        }
+
+        /// <summary>
+        /// Serialize a nullable DateTime. Format is: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Value to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStream(Guid? val, BinaryWriter sw)
+        {
+            if (sw == null) throw new ArgumentNullException("sw");
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("Writing Guid? {0}", val);
+            if (val.HasValue) { sw.Write(true); sw.Write(val.Value.ToString()); } else sw.Write(false);
+        }
+
+        /// <summary>
+        /// Deserialize a nullable DateTime, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out Guid? val, BinaryReader sr)
+        {
+            if (sr == null) throw new ArgumentNullException("sr");
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadBoolean() ? (Guid?)new Guid(sr.ReadString()) : null;
+            SerializerTrace("read Guid? {0}", val);
+        }
+
+        #endregion
+
         #region double
 
         /// <summary>

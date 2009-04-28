@@ -34,6 +34,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Export Guid
+        /// </summary>
+		Guid ExportGuid {
+			get;
+			set;
+		}
+        /// <summary>
         /// all implemented Methods in this DataType
         /// </summary>
 

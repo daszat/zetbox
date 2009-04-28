@@ -120,6 +120,7 @@ namespace Kistl.App.Base
 			DataStore[63].ClassName = @"TestPhoneStruct";
 			DataStore[63].DefaultIcon = null;
 			DataStore[63].Description = null;
+			DataStore[63].ExportGuid = new Guid("2510af08-089f-4252-8a98-ec84cb67bcb9");
 			DataStore[63].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[63].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {

@@ -755,6 +755,7 @@
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_DefaultIcon" Type="int" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="BaseParameter">

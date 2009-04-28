@@ -26,7 +26,15 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             PropertyInfo pi = obj.GetType().GetProperty(propName);
 
             if (pi == null)
-                throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            {
+                // TODO: Klären, ob das in der ersten Lesung OK ist
+                // Wenn eine Property gerade hinzugefügt wurde, kann der Frozen Context nicht mit Werten befüllt werden.
+                if (prop is ValueTypeProperty && !prop.IsNullable)
+                    return "default(" + prop.GetPropertyTypeString() + ")";
+                else
+                    return "null";
+                // throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            }
 
             object value = pi.GetValue(obj, null);
 
@@ -39,17 +47,21 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                 if (prop is EnumerationProperty)
                 {
                     var enumProp = (EnumerationProperty)prop;
-                    return String.Format("({0}){1}", enumProp.Enumeration.ClassName, value);
+                    return string.Format("({0}){1}", enumProp.Enumeration.ClassName, value);
                 }
                 else if (prop is ValueTypeProperty)
                 {
-                    if (pi.PropertyType == typeof(string))
+                    if (prop is StringProperty)
                     {
-                        return String.Format(@"@""{0}""", value.ToString().Replace("\"", "\"\""));
+                        return string.Format(@"@""{0}""", value.ToString().Replace("\"", "\"\""));
                     }
-                    else if (pi.PropertyType == typeof(bool))
+                    else if (prop is BoolProperty)
                     {
-                        return String.Format("{0}", value).ToLowerInvariant();
+                        return string.Format("{0}", value).ToLowerInvariant();
+                    }
+                    else if (prop is GuidProperty)
+                    {
+                        return string.Format("new Guid(\"{0}\")", value);
                     }
                     else
                     {

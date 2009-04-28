@@ -63,6 +63,34 @@ namespace Kistl.API
         }
         #endregion
 
+        #region Guid
+        public static void ToStream(Guid val, XmlWriter xml, string name, string ns)
+        {
+            xml.WriteElementString(name, ns, XmlConvert.ToString(val));
+        }
+        public static void ToStream(Guid? val, XmlWriter xml, string name, string ns)
+        {
+            if (!val.HasValue) return;
+            xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value));
+        }
+
+        public static void FromStream(ref Guid val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = new Guid(xml.ReadElementContentAsString());
+            }
+        }
+        public static void FromStream(ref Guid? val, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                val = new Guid(xml.ReadElementContentAsString());
+            }
+        }
+        #endregion
+
+
         #region double
         public static void ToStream(double val, XmlWriter xml, string name, string ns)
         {

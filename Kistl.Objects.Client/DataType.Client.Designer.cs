@@ -140,6 +140,30 @@ namespace Kistl.App.Base
         private string _Description;
 
         /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
+
+        /// <summary>
         /// all implemented Methods in this DataType
         /// </summary>
         // object list property
@@ -365,6 +389,7 @@ namespace Kistl.App.Base
 
 			me.ClassName = other.ClassName;
 			me.Description = other.Description;
+			me.ExportGuid = other.ExportGuid;
 			this.fk_DefaultIcon = otherImpl.fk_DefaultIcon;
 			this.fk_Module = otherImpl.fk_Module;
 		}
@@ -435,6 +460,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "ExportGuid":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(252).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "MethodInvocations":
 				{
 					var errors = Context.Find<Kistl.App.Base.Property>(80).Constraints
@@ -501,6 +535,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._ClassName, binStream);
             BinarySerializer.ToStream(this._fk_DefaultIcon, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._fk_Module, binStream);
         }
 
@@ -510,6 +545,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._ClassName, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultIcon, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
@@ -519,6 +555,7 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._ClassName, xml, "ClassName", "Kistl.App.Base");
             XmlStreamer.ToStream(this._fk_DefaultIcon, xml, "DefaultIcon", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.ToStream(this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
@@ -528,6 +565,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_DefaultIcon, xml, "DefaultIcon", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 

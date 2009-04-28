@@ -74,6 +74,10 @@ namespace Kistl.Server.Generators.Extensions
             {
                 return "DateTime" + (prop.IsNullable ? "?" : "");
             }
+            else if (prop is GuidProperty)
+            {
+                return "Guid" + (prop.IsNullable ? "?" : "");
+            }
             else if (prop is EnumerationProperty)
             {
                 return prop.GetPropertyTypeString() + (prop.IsNullable ? "?" : "");

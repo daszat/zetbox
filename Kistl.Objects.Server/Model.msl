@@ -183,6 +183,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Enumeration)">

@@ -259,6 +259,8 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                     return "bit";
                 if (t == typeof(DateTime))
                     return "datetime";
+                if (t == typeof(Guid))
+                    return "uniqueidentifier";
 
                 throw new DBTypeNotFoundException(clrType);
             }
