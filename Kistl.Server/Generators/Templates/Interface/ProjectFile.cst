@@ -19,6 +19,7 @@
     <AssemblyName><%= GetAssemblyName() %></AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <DocumentationFile>$(OutputPath)\<%= GetAssemblyName() %>.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
