@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Kistl.Client.WPF.View.TimeRecords.WorkEffortRecorderView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:zfviews="clr-namespace:Kistl.Client.WPF.View.TimeRecords"
+        xmlns:trviews="clr-namespace:Kistl.Client.WPF.View.TimeRecords"
         Title="WorkEffortRecorderView"
         Height="300"
         Width="300">
@@ -9,9 +9,11 @@
         <StackPanel Orientation="Horizontal">
             <ToggleButton IsChecked="{Binding IsCurrentlyWorking}">Working?</ToggleButton>
             <ComboBox ItemsSource="{Binding AvailableUsers}"
+                      ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                       SelectedItem="{Binding CurrentUser}" />
         </StackPanel>
         <ListBox ItemsSource="{Binding Efforts}" />
-        <zfviews:WorkEffortView DataContext="{Binding CurrentEffort}" />
+        <trviews:WorkEffortView DataContext="{Binding CurrentEffort}" />
+        <TextBlock Text="{Binding TotalWorkTimeToday}" />
     </StackPanel>
 </Window>

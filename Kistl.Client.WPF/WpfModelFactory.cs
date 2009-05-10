@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
+using System.Windows.Threading;
 
 using Kistl.API;
 using Kistl.API.Client;
+using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 using Kistl.Client.WPF.View;
-using System.Windows;
-using Kistl.Client.GUI;
 
 namespace Kistl.Client.WPF
 {
@@ -41,10 +42,10 @@ namespace Kistl.Client.WPF
             get { return Kistl.App.GUI.Toolkit.WPF; }
         }
 
-        protected override void ShowInView(object renderer, PresentableModel mdl, IView view, bool activate)
+        protected override void ShowInView(PresentableModel mdl, IView view, bool activate)
         {
             AppContext.UiThread.Verify();
-            
+
             if (view is Window)
             {
                 var viewControl = (Window)view;
@@ -59,8 +60,13 @@ namespace Kistl.Client.WPF
             }
         }
 
-        protected override object Renderer { get { return null; } }
-
+        public override void CreateTimer(TimeSpan tickLength, Action action)
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = tickLength;
+            timer.Tick += (obj, args) => action();
+            timer.Start();
+        }
     }
 
 }

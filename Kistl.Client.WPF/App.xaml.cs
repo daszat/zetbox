@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
@@ -31,6 +32,7 @@ namespace Kistl.Client.WPF
         }
 
         private static ServerDomainManager serverDomain;
+        private bool _timeRecorder = false;
 
         private string[] HandleCommandline(string[] args)
         {
@@ -68,14 +70,24 @@ namespace Kistl.Client.WPF
 
             using (TraceClient.TraceHelper.TraceMethodCall("Starting Client"))
             {
-                HandleCommandline(e.Args);
+                var args = HandleCommandline(e.Args);
+                _timeRecorder = args.Contains("-timerecorder");
 
                 //var debugger = AppContext.Factory.CreateSpecificModel<KistlDebuggerAsModel>(KistlContext.GetContext());
                 //AppContext.Factory.ShowModel(debugger, true);
 
-                FixupDatabase();
+                PresentableModel initialWorkspace;
+                if (_timeRecorder)
+                {
+                    initialWorkspace = AppContext.Factory.CreateSpecificModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel>(KistlContext.GetContext());
+                    AppContext.Factory.ShowModel(initialWorkspace, true);
+                }
+                else
+                {
+                    FixupDatabase();
 
-                var initialWorkspace = AppContext.Factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
+                    initialWorkspace = AppContext.Factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
+                }
                 AppContext.Factory.ShowModel(initialWorkspace, true);
             }
         }

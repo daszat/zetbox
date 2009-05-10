@@ -130,16 +130,19 @@ namespace Kistl.Client.Presentables
             ToolTip = "Commits outstanding changes to the data store.";
         }
 
+        /// <summary>
+        /// Returns true if no data was passed.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public override bool CanExecute(object data)
         {
             return data == null;
         }
 
-        public override void Execute(object data)
+        protected override void DoExecute(object data)
         {
-            Executing = true;
             DataContext.SubmitChanges();
-            Executing = false;
         }
 
     }

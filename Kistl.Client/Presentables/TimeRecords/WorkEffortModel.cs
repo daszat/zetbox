@@ -54,7 +54,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         }
 
         /// <summary>Gets or sets the "Thru"s value of the underlying WorkEffort</summary>
-        public DateTime Thru
+        public DateTime? Thru
         {
             get { return this.eintrag.Thru; }
             set { this.eintrag.Thru = value; }

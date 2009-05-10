@@ -21,12 +21,12 @@ namespace Kistl.Client.ASPNET.Toolkit
             get { return Kistl.App.GUI.Toolkit.ASPNET; }
         }
 
-        protected override object Renderer
+        protected override void ShowInView(PresentableModel mdl, IView view, bool activate)
         {
-            get { return null; }
+            throw new NotImplementedException();
         }
 
-        protected override void ShowInView(object renderer, PresentableModel mdl, IView view, bool activate)
+        public override void CreateTimer(TimeSpan tickLength, Action action)
         {
             throw new NotImplementedException();
         }

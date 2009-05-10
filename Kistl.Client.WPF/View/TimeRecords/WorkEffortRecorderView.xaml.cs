@@ -11,16 +11,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using Kistl.Client.GUI;
+using Kistl.Client.Presentables;
+
 namespace Kistl.Client.WPF.View.TimeRecords
 {
     /// <summary>
     /// Interaction logic for WorkEffortRecorderView.xaml
     /// </summary>
-    public partial class WorkEffortRecorderView : Window
+    public partial class WorkEffortRecorderView : Window, IView
     {
         public WorkEffortRecorderView()
         {
             InitializeComponent();
         }
+
+        #region IView Members
+
+        public void SetModel(PresentableModel mdl)
+        {
+            DataContext = mdl;
+        }
+
+        #endregion
     }
 }

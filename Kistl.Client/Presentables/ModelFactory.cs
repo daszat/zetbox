@@ -20,7 +20,6 @@ namespace Kistl.Client.Presentables
         protected IGuiApplicationContext AppContext { get; private set; }
 
         protected abstract Toolkit Toolkit { get; }
-        protected abstract object Renderer { get; }
 
         protected WorkspaceModel Workspace { get; private set; }
         protected virtual void OnWorkspaceCreated() { }
@@ -190,13 +189,15 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                ShowInView(Renderer, mdl, CreateDefaultView(mdl), activate);
+                ShowInView(mdl, CreateDefaultView(mdl), activate);
             }
         }
 
-        protected abstract void ShowInView(object renderer, PresentableModel mdl, IView view, bool activate);
+        protected abstract void ShowInView(PresentableModel mdl, IView view, bool activate);
 
         #endregion
+
+        public abstract void CreateTimer(TimeSpan tickLength, Action action);
     }
 
     internal sealed class ModelCache

@@ -41,10 +41,10 @@ namespace Kistl.Client.Forms
                 Application.Exit();
         }
 
-        protected override void ShowInView(object renderer, PresentableModel mdl, IView view, bool activate)
+        protected override void ShowInView(PresentableModel mdl, IView view, bool activate)
         {
             var control = (IFormsView)view;
-            control.SetRenderer((Renderer)renderer);
+            control.SetRenderer(_renderer);
             control.SetDataContext(mdl);
             control.Show();
             if (activate)
@@ -52,6 +52,10 @@ namespace Kistl.Client.Forms
         }
 
         private Renderer _renderer = new Renderer();
-        protected override object Renderer { get { return _renderer; } }
+
+        public override void CreateTimer(TimeSpan tickLength, Action action)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
