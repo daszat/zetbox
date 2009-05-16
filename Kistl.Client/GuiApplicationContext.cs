@@ -51,7 +51,7 @@ namespace Kistl.Client
         /// 
         /// </summary>
         /// <param name="config"></param>
-        /// <param name="tk">Das muss leider ein String sein, 
+        /// <param name="tkName">Das muss leider ein String sein, 
         /// weil die Enum in Kistl.Objects definiert ist. 
         /// Zum Zeitpunkt des Aufrufs des Constructors könnte 
         /// aber der Assembly Resolver noch nicht initialisiert 

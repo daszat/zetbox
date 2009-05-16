@@ -78,8 +78,19 @@ namespace Kistl.Server
             Trace.TraceInformation("Server stopped");
         }
 
-        public const string DefaultServiceUrl = "http://localhost:6666/KistlService";
-        public const string DefaultStreamsUrl = "http://localhost:6666/KistlServiceStreams";
+        private const string DefaultServiceUrl = "http://localhost:6666/KistlService";
+        private const string DefaultStreamsUrl = "http://localhost:6666/KistlServiceStreams";
+
+        public static string GetServiceUrl(KistlConfig cfg)
+        {
+            return String.IsNullOrEmpty(cfg.ServiceUrl) ? DefaultServiceUrl : cfg.ServiceUrl;
+        }
+
+        public static string GetStreamsUrl(KistlConfig cfg)
+        {
+            return String.IsNullOrEmpty(cfg.StreamsUrl) ? DefaultStreamsUrl : cfg.StreamsUrl;
+        }
+
         /// <summary>
         /// Führt den eigentlichen WCF Host start asynchron durch und 
         /// wartet bis er wieder gestopped wird.
@@ -91,14 +102,14 @@ namespace Kistl.Server
                 using (TraceClient.TraceHelper.TraceMethodCall("Starting WCF Server"))
                 {
                     host = new ServiceHost(typeof(Kistl.Server.KistlService),
-                        new Uri(String.IsNullOrEmpty(appCtx.Configuration.ServiceUrl) ? DefaultServiceUrl : appCtx.Configuration.ServiceUrl));
+                        new Uri(GetServiceUrl(appCtx.Configuration)));
                     host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
                     host.Faulted += new EventHandler(host_Faulted);
 
                     host.Open();
 
                     hostStreams = new ServiceHost(typeof(Kistl.Server.KistlServiceStreams),
-                        new Uri(String.IsNullOrEmpty(appCtx.Configuration.StreamsUrl) ? DefaultStreamsUrl : appCtx.Configuration.StreamsUrl));
+                        new Uri(GetStreamsUrl(appCtx.Configuration)));
                     hostStreams.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
                     hostStreams.Faulted += new EventHandler(host_Faulted);
 

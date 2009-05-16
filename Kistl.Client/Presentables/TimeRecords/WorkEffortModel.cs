@@ -26,7 +26,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// Initializes a new instance of the WorkEffortModel class.
         /// </summary>
         /// <param name="appCtx">which GuiApplicationContext to use</param>
-        /// <param name="dataCtx">which <see cref="IDataContext"/> to use</param>
+        /// <param name="dataCtx">which <see cref="IKistlContext"/> to use</param>
         /// <param name="obj">the modelled <see cref="WorkEffort"/></param>
         public WorkEffortModel(
             IGuiApplicationContext appCtx,

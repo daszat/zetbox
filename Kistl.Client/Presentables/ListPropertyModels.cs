@@ -19,20 +19,20 @@ namespace Kistl.Client.Presentables
     {
 
         /// <summary>
-        /// Adds the given item to the underlying value. Triggers <see cref="CollectionChanged"/>
-        /// on the <see cref="Value"/> when the change has propagated.
+        /// Adds the given item to the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
+        /// on the underlying <see cref="IReadOnlyValueModel&lt;X>.Value"/> property when the change has propagated.
         /// </summary>
         void AddItem(TElement item);
 
         /// <summary>
-        /// Remove the given item from the underlying value. Triggers <see cref="CollectionChanged"/>
-        /// on the <see cref="Value"/> when the change has propagated.
+        /// Remove the given item from the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
+        /// on the underlying <see cref="IReadOnlyValueModel&lt;X>.Value"/> property when the change has propagated.
         /// </summary>
         void RemoveItem(TElement item);
 
         /// <summary>
         /// Permanentely delete the given item from the data store.
-        /// Triggers <see cref="CollectionChanged"/> on the <see cref="Value"/> when the change has propagated.
+        /// Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/> on the underlying <see cref="IReadOnlyValueModel&lt;X>.Value"/> property when the change has propagated.
         /// </summary>
         void DeleteItem(TElement item);
 
@@ -154,7 +154,7 @@ namespace Kistl.Client.Presentables
     }
 
     /// <summary>
-    /// A simple <see cref="ReferenceListPropertyModel"/> where TElement doesn't need to be modelled.
+    /// A simple <see cref="ReferenceListPropertyModel&lt;A,B>"/> where TElement doesn't need to be modelled.
     /// This implies that TElement should not be an IDataObject
     /// </summary>
     /// <typeparam name="TElement"></typeparam>
@@ -193,7 +193,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// Convert a string into a TElement, should be overridden if the systems default conversion is not enough.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="str"></param>
         /// <returns></returns>
         protected virtual TElement ToItem(string str)
         {

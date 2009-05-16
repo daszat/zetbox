@@ -53,7 +53,8 @@ namespace Kistl.Client.Presentables
         /// </summary>
         protected IKistlContext DataContext { get; private set; }
 
-        /// <param name="dataCtx">The <see cref="IKistlContext"/> to use to access the current user's data session</param>
+        /// <param name="appCtx">The <see cref="IGuiApplicationContext"/> to access the current application context</param>
+        /// <param name="dataCtx">The <see cref="IKistlContext"/> to access the current user's data session</param>
         protected PresentableModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
         {
             IsInDesignMode = false;

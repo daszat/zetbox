@@ -21,7 +21,7 @@ namespace Kistl.Client.Presentables
         #region Public interface
 
         /// <summary>
-        /// A list of "active" <see cref="IDataObjects"/>
+        /// A list of "active" <see cref="IDataObject"/>s
         /// </summary>
         public ObservableCollection<DataObjectModel> RecentObjects { get; private set; }
 

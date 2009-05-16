@@ -117,8 +117,8 @@ namespace Kistl.Server
             }
             else
             {
-
                 server.Start(config);
+
                 Console.WriteLine("Server started, press the anykey to exit");
                 Console.ReadKey();
                 Console.WriteLine("Shutting down");

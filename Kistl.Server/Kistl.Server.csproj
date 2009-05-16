@@ -710,6 +710,7 @@
     <Compile Include="Packaging\Importer.cs" />
     <Compile Include="SchemaManagement\SchemaManager.cs" />
     <Compile Include="SchemaManagement\SchemaProvider.SQLServer\SchemaProvider.cs" />
+    <Compile Include="WcfNamespaceReservation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst">
