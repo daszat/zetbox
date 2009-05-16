@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
     <OutputPath>..\bin\Release\</OutputPath>
   </PropertyGroup>
+  <!-- Has to come later to receive correct $(OutputPath) -->
+  <PropertyGroup>
+     <DocumentationFile>$(OutputPath)\<%= GetAssemblyName() %>.xml</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <AdditionalReferencePath Include="$(OutputPath)" />
     <Reference Include="System" />

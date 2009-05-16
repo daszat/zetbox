@@ -147,7 +147,7 @@ namespace Kistl.App.Base
 			DataStore[18].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[18].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
 			DataStore[18].PropertyName = @"Aufwand";
-			DataStore[18].ValueModelDescriptor = null;
+			DataStore[18].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[11];
 			DataStore[18].Seal();
 			DataStore[23].AltText = null;
 			DataStore[23].CategoryTags = null;
@@ -160,7 +160,7 @@ namespace Kistl.App.Base
 			DataStore[23].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[23].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[23].PropertyName = @"AufwandGes";
-			DataStore[23].ValueModelDescriptor = null;
+			DataStore[23].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[11];
 			DataStore[23].Seal();
 			DataStore[65].AltText = @"Wert in EUR des Auftrages";
 			DataStore[65].CategoryTags = null;
@@ -173,7 +173,7 @@ namespace Kistl.App.Base
 			DataStore[65].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[65].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
 			DataStore[65].PropertyName = @"Auftragswert";
-			DataStore[65].ValueModelDescriptor = null;
+			DataStore[65].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[11];
 			DataStore[65].Seal();
 			DataStore[89].AltText = @"Number of currently allocated hours";
 			DataStore[89].CategoryTags = @"Summary,Main";
@@ -186,7 +186,7 @@ namespace Kistl.App.Base
 			DataStore[89].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[89].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
 			DataStore[89].PropertyName = @"BudgetHours";
-			DataStore[89].ValueModelDescriptor = null;
+			DataStore[89].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[11];
 			DataStore[89].Seal();
 			DataStore[90].AltText = @"Number of already spent hours";
 			DataStore[90].CategoryTags = @"Summary,Main";
@@ -199,7 +199,7 @@ namespace Kistl.App.Base
 			DataStore[90].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[90].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
 			DataStore[90].PropertyName = @"SpentHours";
-			DataStore[90].ValueModelDescriptor = null;
+			DataStore[90].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[11];
 			DataStore[90].Seal();
 	
 		}
