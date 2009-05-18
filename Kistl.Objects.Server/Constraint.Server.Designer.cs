@@ -61,7 +61,7 @@ namespace Kistl.App.Base
     Relation: FK_Property_Constraint_ConstrainedProperty_62
     A: One Property as ConstrainedProperty
     B: ZeroOrMore Constraint as Constraints
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object reference property
         // implement the user-visible interface

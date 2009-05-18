@@ -131,7 +131,7 @@ namespace Kistl.App.GUI
     Relation: FK_PresentableModelDescriptor_TypeRef_Descriptor_77
     A: ZeroOrMore PresentableModelDescriptor as Descriptor
     B: One TypeRef as PresentableModelRef
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

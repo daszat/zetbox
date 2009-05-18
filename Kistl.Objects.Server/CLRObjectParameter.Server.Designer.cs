@@ -41,7 +41,7 @@ namespace Kistl.App.Base
     Relation: FK_CLRObjectParameter_Assembly_CLRObjectParameter_46
     A: ZeroOrMore CLRObjectParameter as CLRObjectParameter
     B: ZeroOrOne Assembly as Assembly
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

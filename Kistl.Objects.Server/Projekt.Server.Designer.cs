@@ -61,7 +61,7 @@ namespace Kistl.App.Projekte
     Relation: FK_Projekt_Auftrag_Projekt_30
     A: ZeroOrOne Projekt as Projekt
     B: ZeroOrMore Auftrag as Auftraege
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object list property
         // implement the user-visible interface
@@ -236,7 +236,7 @@ namespace Kistl.App.Projekte
     Relation: FK_Projekt_Task_Projekt_22
     A: ZeroOrOne Projekt as Projekt
     B: ZeroOrMore Task as Tasks
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object list property
         // implement the user-visible interface

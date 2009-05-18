@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
     Relation: FK_Template_Assembly_Template_59
     A: ZeroOrMore Template as Template
     B: ZeroOrOne Assembly as DisplayedTypeAssembly
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -243,7 +243,7 @@ namespace Kistl.App.GUI
     Relation: FK_Template_Visual_Template_58
     A: ZeroOrMore Template as Template
     B: ZeroOrOne Visual as VisualTree
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

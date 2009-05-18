@@ -88,7 +88,7 @@ namespace Kistl.App.TimeRecords
     Relation: FK_WorkEffort_Mitarbeiter_WorkEffort_82
     A: ZeroOrMore WorkEffort as WorkEffort
     B: One Mitarbeiter as Mitarbeiter
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

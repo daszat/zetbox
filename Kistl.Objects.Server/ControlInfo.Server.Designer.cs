@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
     Relation: FK_ControlInfo_Assembly_ControlInfo_51
     A: ZeroOrMore ControlInfo as ControlInfo
     B: ZeroOrOne Assembly as Assembly
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

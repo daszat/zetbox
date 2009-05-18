@@ -14,16 +14,6 @@ namespace Kistl.App.Base
 		Replicate = 3,
 
 		/// <summary>
-		/// Deprecated alias for MergeIntoB
-		/// </summary>
-		Right = 2,
-
-		/// <summary>
-		/// Deprecated alias for MergeIntoA
-		/// </summary>
-		Left = 1,
-
-		/// <summary>
 		/// The relation information is stored with the A-side ObjectClass
 		/// </summary>
 		MergeIntoA = 1,

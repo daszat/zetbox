@@ -115,7 +115,7 @@ namespace Kistl.App.Base
     Relation: FK_Module_Assembly_Module_36
     A: One Module as Module
     B: ZeroOrMore Assembly as Assemblies
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object reference property
         // implement the user-visible interface

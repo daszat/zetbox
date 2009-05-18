@@ -61,7 +61,7 @@ namespace Kistl.App.Base
     Relation: FK_TypeRef_Assembly_TypeRef_65
     A: ZeroOrMore TypeRef as TypeRef
     B: ZeroOrOne Assembly as Assembly
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -216,7 +216,7 @@ namespace Kistl.App.Base
     Relation: FK_TypeRef_TypeRef_Child_79
     A: ZeroOrMore TypeRef as Child
     B: One TypeRef as Parent
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

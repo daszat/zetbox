@@ -208,7 +208,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(42);
+		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(40);
 		internal static void CreateInstances()
 		{
 			DataStore[2] = new EnumerationEntry__Implementation__Frozen(2);
@@ -262,10 +262,6 @@ namespace Kistl.App.Base
 			DataStore[59] = new EnumerationEntry__Implementation__Frozen(59);
 
 			DataStore[60] = new EnumerationEntry__Implementation__Frozen(60);
-
-			DataStore[61] = new EnumerationEntry__Implementation__Frozen(61);
-
-			DataStore[62] = new EnumerationEntry__Implementation__Frozen(62);
 
 			DataStore[63] = new EnumerationEntry__Implementation__Frozen(63);
 
@@ -428,16 +424,6 @@ namespace Kistl.App.Base
 			DataStore[60].Name = @"Replicate";
 			DataStore[60].Value = 3;
 			DataStore[60].Seal();
-			DataStore[61].Description = @"Deprecated alias for MergeIntoB";
-			DataStore[61].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
-			DataStore[61].Name = @"Right";
-			DataStore[61].Value = 2;
-			DataStore[61].Seal();
-			DataStore[62].Description = @"Deprecated alias for MergeIntoA";
-			DataStore[62].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
-			DataStore[62].Name = @"Left";
-			DataStore[62].Value = 1;
-			DataStore[62].Seal();
 			DataStore[63].Description = @"Required Element (exactly one)";
 			DataStore[63].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[81];
 			DataStore[63].Name = @"One";

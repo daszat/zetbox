@@ -225,7 +225,7 @@ namespace Kistl.App.GUI
     Relation: FK_Visual_Method_Visual_57
     A: ZeroOrMore Visual as Visual
     B: ZeroOrOne Method as Method
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -306,7 +306,7 @@ namespace Kistl.App.GUI
     Relation: FK_Visual_Property_Visual_56
     A: ZeroOrMore Visual as Visual
     B: ZeroOrOne Property as Property
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

@@ -41,7 +41,7 @@ namespace Kistl.App.Base
     Relation: FK_StructProperty_Struct_StructProperty_52
     A: ZeroOrMore StructProperty as StructProperty
     B: ZeroOrOne Struct as StructDefinition
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

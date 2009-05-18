@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
     Relation: FK_ViewDescriptor_TypeRef_View_76
     A: ZeroOrMore ViewDescriptor as View
     B: One TypeRef as ControlRef
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -142,7 +142,7 @@ namespace Kistl.App.GUI
     Relation: FK_ViewDescriptor_PresentableModelDescriptor_View_75
     A: ZeroOrMore ViewDescriptor as View
     B: One PresentableModelDescriptor as PresentedModelDescriptor
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

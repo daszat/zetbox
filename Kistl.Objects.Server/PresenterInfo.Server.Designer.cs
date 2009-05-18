@@ -104,7 +104,7 @@ namespace Kistl.App.GUI
     Relation: FK_PresenterInfo_Assembly_PresenterInfo_54
     A: ZeroOrMore PresenterInfo as PresenterInfo
     B: ZeroOrOne Assembly as DataAssembly
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -212,7 +212,7 @@ namespace Kistl.App.GUI
     Relation: FK_PresenterInfo_Assembly_PresenterInfo_53
     A: ZeroOrMore PresenterInfo as PresenterInfo
     B: ZeroOrOne Assembly as PresenterAssembly
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

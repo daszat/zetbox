@@ -115,7 +115,7 @@ namespace Kistl.App.Base
     Relation: FK_Property_Constraint_ConstrainedProperty_62
     A: One Property as ConstrainedProperty
     B: ZeroOrMore Constraint as Constraints
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object list property
         // implement the user-visible interface
@@ -270,7 +270,7 @@ namespace Kistl.App.Base
     Relation: FK_Property_Module_BaseProperty_37
     A: ZeroOrMore Property as BaseProperty
     B: ZeroOrOne Module as Module
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -351,7 +351,7 @@ namespace Kistl.App.Base
     Relation: FK_DataType_Property_ObjectClass_19
     A: One DataType as ObjectClass
     B: ZeroOrMore Property as Properties
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object reference property
         // implement the user-visible interface
@@ -459,7 +459,7 @@ namespace Kistl.App.Base
     Relation: FK_Property_PresentableModelDescriptor_Property_80
     A: ZeroOrMore Property as Property
     B: One PresentableModelDescriptor as ValueModelDescriptor
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

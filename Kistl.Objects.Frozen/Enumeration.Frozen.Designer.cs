@@ -257,10 +257,8 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[78],
 			DataStore[78].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[78].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
 });
-			DataStore[78].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(6) {
+			DataStore[78].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(4) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[60],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[61],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[62],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[66],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[67],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[68],

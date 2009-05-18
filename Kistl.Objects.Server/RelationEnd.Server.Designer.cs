@@ -61,7 +61,7 @@ namespace Kistl.App.Base
     Relation: FK_Relation_RelationEnd_Relation_71
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as A
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -142,7 +142,7 @@ namespace Kistl.App.Base
     Relation: FK_Relation_RelationEnd_Relation_72
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as B
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -293,7 +293,7 @@ namespace Kistl.App.Base
     Relation: FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74
     A: ZeroOrOne RelationEnd as RelationEnd
     B: ZeroOrOne ObjectReferenceProperty as Navigator
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -428,7 +428,7 @@ namespace Kistl.App.Base
     Relation: FK_RelationEnd_ObjectClass_RelationEnd_73
     A: ZeroOrMore RelationEnd as RelationEnd
     B: ZeroOrOne ObjectClass as Type
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

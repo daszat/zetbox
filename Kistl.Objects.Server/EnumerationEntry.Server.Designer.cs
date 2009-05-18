@@ -88,7 +88,7 @@ namespace Kistl.App.Base
     Relation: FK_Enumeration_EnumerationEntry_Enumeration_47
     A: One Enumeration as Enumeration
     B: ZeroOrMore EnumerationEntry as EnumerationEntries
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object reference property
         // implement the user-visible interface

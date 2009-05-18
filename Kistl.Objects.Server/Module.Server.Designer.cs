@@ -61,7 +61,7 @@ namespace Kistl.App.Base
     Relation: FK_Module_Assembly_Module_36
     A: One Module as Module
     B: ZeroOrMore Assembly as Assemblies
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object list property
         // implement the user-visible interface
@@ -108,7 +108,7 @@ namespace Kistl.App.Base
     Relation: FK_Module_DataType_Module_26
     A: One Module as Module
     B: ZeroOrMore DataType as DataTypes
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object list property
         // implement the user-visible interface

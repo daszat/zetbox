@@ -142,7 +142,7 @@ namespace Kistl.App.Base
     Relation: FK_Method_BaseParameter_Method_44
     A: One Method as Method
     B: ZeroOrMore BaseParameter as Parameter
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object reference property
         // implement the user-visible interface

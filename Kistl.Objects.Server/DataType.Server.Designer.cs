@@ -88,7 +88,7 @@ namespace Kistl.App.Base
     Relation: FK_DataType_Icon_DataType_35
     A: ZeroOrMore DataType as DataType
     B: ZeroOrOne Icon as DefaultIcon
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -223,7 +223,7 @@ namespace Kistl.App.Base
     Relation: FK_DataType_MethodInvocation_InvokeOnObjectClass_41
     A: One DataType as InvokeOnObjectClass
     B: ZeroOrMore MethodInvocation as MethodInvocations
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object list property
         // implement the user-visible interface
@@ -270,7 +270,7 @@ namespace Kistl.App.Base
     Relation: FK_DataType_Method_ObjectClass_25
     A: One DataType as ObjectClass
     B: ZeroOrMore Method as Methods
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object list property
         // implement the user-visible interface
@@ -317,7 +317,7 @@ namespace Kistl.App.Base
     Relation: FK_Module_DataType_Module_26
     A: One Module as Module
     B: ZeroOrMore DataType as DataTypes
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object reference property
         // implement the user-visible interface
@@ -398,7 +398,7 @@ namespace Kistl.App.Base
     Relation: FK_DataType_Property_ObjectClass_19
     A: One DataType as ObjectClass
     B: ZeroOrMore Property as Properties
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object list property
         // implement the user-visible interface

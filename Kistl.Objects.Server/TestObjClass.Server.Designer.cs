@@ -88,7 +88,7 @@ namespace Kistl.App.Test
     Relation: FK_TestObjClass_Kunde_TestObjClass_50
     A: ZeroOrMore TestObjClass as TestObjClass
     B: ZeroOrOne Kunde as ObjectProp
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

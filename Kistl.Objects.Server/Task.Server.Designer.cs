@@ -169,7 +169,7 @@ namespace Kistl.App.Projekte
     Relation: FK_Projekt_Task_Projekt_22
     A: ZeroOrOne Projekt as Projekt
     B: ZeroOrMore Task as Tasks
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object reference property
         // implement the user-visible interface

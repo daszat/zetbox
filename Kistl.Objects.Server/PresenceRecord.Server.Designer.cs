@@ -88,7 +88,7 @@ namespace Kistl.App.TimeRecords
     Relation: FK_PresenceRecord_Mitarbeiter_PresenceRecord_81
     A: ZeroOrMore PresenceRecord as PresenceRecord
     B: One Mitarbeiter as Mitarbeiter
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

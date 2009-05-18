@@ -41,7 +41,7 @@ namespace Kistl.App.Base
     Relation: FK_ObjectClass_ObjectClass_BaseObjectClass_24
     A: ZeroOrOne ObjectClass as BaseObjectClass
     B: ZeroOrMore ObjectClass as SubClasses
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object reference property
         // implement the user-visible interface
@@ -122,7 +122,7 @@ namespace Kistl.App.Base
     Relation: FK_ObjectClass_TypeRef_ObjectClass_70
     A: ZeroOrMore ObjectClass as ObjectClass
     B: ZeroOrOne TypeRef as DefaultModel
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -203,7 +203,7 @@ namespace Kistl.App.Base
     Relation: FK_ObjectClass_PresentableModelDescriptor_Presentable_78
     A: ZeroOrMore ObjectClass as Presentable
     B: One PresentableModelDescriptor as DefaultPresentableModelDescriptor
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -385,7 +385,7 @@ namespace Kistl.App.Base
     Relation: FK_ObjectClass_ObjectClass_BaseObjectClass_24
     A: ZeroOrOne ObjectClass as BaseObjectClass
     B: ZeroOrMore ObjectClass as SubClasses
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object list property
         // implement the user-visible interface

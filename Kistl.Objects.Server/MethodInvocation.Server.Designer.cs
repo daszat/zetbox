@@ -61,7 +61,7 @@ namespace Kistl.App.Base
     Relation: FK_MethodInvocation_TypeRef_MethodInvocation_67
     A: ZeroOrMore MethodInvocation as MethodInvocation
     B: ZeroOrOne TypeRef as Implementor
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
@@ -142,7 +142,7 @@ namespace Kistl.App.Base
     Relation: FK_DataType_MethodInvocation_InvokeOnObjectClass_41
     A: One DataType as InvokeOnObjectClass
     B: ZeroOrMore MethodInvocation as MethodInvocations
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object reference property
         // implement the user-visible interface
@@ -250,7 +250,7 @@ namespace Kistl.App.Base
     Relation: FK_Method_MethodInvocation_Method_39
     A: One Method as Method
     B: ZeroOrMore MethodInvocation as MethodInvokations
-    Preferred Storage: Right
+    Preferred Storage: MergeIntoB
     */
         // object reference property
         // implement the user-visible interface
@@ -331,7 +331,7 @@ namespace Kistl.App.Base
     Relation: FK_MethodInvocation_Module_MethodInvocation_40
     A: ZeroOrMore MethodInvocation as MethodInvocation
     B: ZeroOrOne Module as Module
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface

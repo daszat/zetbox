@@ -41,7 +41,7 @@ namespace Kistl.App.Base
     Relation: FK_ObjectParameter_DataType_ObjectParameter_45
     A: ZeroOrMore ObjectParameter as ObjectParameter
     B: ZeroOrOne DataType as DataType
-    Preferred Storage: Left
+    Preferred Storage: MergeIntoA
     */
         // object reference property
         // implement the user-visible interface
