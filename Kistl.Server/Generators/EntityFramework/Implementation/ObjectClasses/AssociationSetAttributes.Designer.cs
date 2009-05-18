@@ -44,7 +44,7 @@ foreach (var rel in ctx.GetQuery<Relation>().ToList().OrderBy(r => r.GetAssociat
 this.WriteObjects("\r\n");
 this.WriteObjects("	/*\r\n");
 #line 32 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
-CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 
 #line 34 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("	*/\r\n");

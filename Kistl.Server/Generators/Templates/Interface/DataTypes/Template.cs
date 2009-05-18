@@ -62,17 +62,17 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             if (!p.IsListProperty())
             {
                 bool isReadonly = p is StructProperty;
-                this.Host.CallTemplate("Interface.DataTypes.SimplePropertyTemplate", ctx, p, isReadonly);
+                Interface.DataTypes.SimplePropertyTemplate.Call(Host, ctx, p, isReadonly);
             }
             else
             {
-                this.Host.CallTemplate("Interface.DataTypes.SimplePropertyListTemplate", ctx, p);
+                Interface.DataTypes.SimplePropertyListTemplate.Call(Host, ctx, p);
             }
         }
 
         protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m)
         {
-            this.Host.CallTemplate("Interface.DataTypes.Method", ctx, m);
+            Interface.DataTypes.Method.Call(Host, ctx, m);
         }
 
         protected IEnumerable<Kistl.App.Base.Method> MethodsToGenerate()

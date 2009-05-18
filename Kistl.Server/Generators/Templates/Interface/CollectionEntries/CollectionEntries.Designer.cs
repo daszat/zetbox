@@ -43,7 +43,7 @@ foreach (var rel in ctx.GetQuery<Relation>()
 	    .ToList()
 	    .OrderBy(r => r.GetCollectionEntryClassName()))
 	{
-		this.CallTemplate("Interface.CollectionEntries.ObjectCollectionEntry", ctx, rel);
+		Interface.CollectionEntries.ObjectCollectionEntry.Call(Host, ctx, rel);
 	}
 
 
@@ -53,7 +53,7 @@ foreach (var rel in ctx.GetQuery<Relation>()
         .ThenBy(p => p.PropertyName))
 	{
 
-		this.CallTemplate("Interface.CollectionEntries.ValueCollectionEntry", ctx, prop);
+		Interface.CollectionEntries.ValueCollectionEntry.Call(Host, ctx, prop);
 	}
 
 

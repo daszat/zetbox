@@ -117,7 +117,7 @@
 %>
   <!--
 <%
-    CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+    Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 %>
   -->
   <EntityType Name="<%= rel.GetCollectionEntryClassName() %>" >

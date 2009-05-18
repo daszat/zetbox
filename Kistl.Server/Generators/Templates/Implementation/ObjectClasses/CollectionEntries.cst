@@ -47,7 +47,7 @@ namespace <%= rel.A.Type.Module.Namespace %>
 <%
 		}
 
-		this.CallTemplate("Implementation.CollectionEntries.ObjectCollectionEntry", ctx, rel);
+		Implementation.CollectionEntries.ObjectCollectionEntry.Call(Host, ctx, rel);
 %>
 }
 <%
@@ -65,7 +65,7 @@ namespace <%= rel.A.Type.Module.Namespace %>
 namespace <%= prop.ObjectClass.Module.Namespace %>
 {
 <%
-		this.CallTemplate("Implementation.CollectionEntries.ValueCollectionEntry", ctx, prop);
+		Implementation.CollectionEntries.ValueCollectionEntry.Call(Host, ctx, prop);
 %>
 }
 <%

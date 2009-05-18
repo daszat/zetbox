@@ -13,7 +13,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
     {
         protected override void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName)
         {
-            CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+            Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx,
                 MembersToSerialize,
                 propertyName, prop.GetAssociationName(), prop.ObjectClass.ClassName,
                 prop.ObjectClass.ClassName, prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix,

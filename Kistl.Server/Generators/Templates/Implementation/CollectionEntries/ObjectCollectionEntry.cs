@@ -14,6 +14,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
     public abstract partial class ObjectCollectionEntry
         : Template
     {
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, Relation rel)
+        {
+            host.CallTemplate("Implementation.CollectionEntries.ObjectCollectionEntry", ctx, rel);
+        }
+
         protected Relation rel { get; private set; }
 
         public ObjectCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)

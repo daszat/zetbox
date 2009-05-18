@@ -29,7 +29,7 @@ using Kistl.DALProvider.EF;
 
 	/*
 <%
-	CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+	Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 %>
 	*/
 <%

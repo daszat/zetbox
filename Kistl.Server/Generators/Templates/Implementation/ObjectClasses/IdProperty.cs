@@ -15,6 +15,10 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     public class IdProperty
         : NotifyingValueProperty
     {
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx)
+        {
+            host.CallTemplate("Implementation.ObjectClasses.IdProperty", ctx);
+        }
 
         public IdProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
             : base(_host, ctx,

@@ -17,7 +17,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
             RelationEnd relEnd = rel.GetEnd(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
-            CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+            Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx,
                 this.MembersToSerialize,
                 propertyName, rel.GetCollectionEntryAssociationName(endRole), relEnd.RoleName,
                 relEnd.Type.GetDataTypeString(), relEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,

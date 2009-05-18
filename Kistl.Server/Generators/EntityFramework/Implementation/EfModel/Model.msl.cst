@@ -39,7 +39,7 @@
 %>
     <!--
 <%
-    CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+    Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 %>
     -->
     <EntitySetMapping Name="<%= rel.GetCollectionEntryClassName() %>">
@@ -117,7 +117,7 @@
 %>
     <!--
 <%
-    CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+    Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 %>
     -->
     <AssociationSetMapping Name="<%= rel.GetAssociationName() %>"

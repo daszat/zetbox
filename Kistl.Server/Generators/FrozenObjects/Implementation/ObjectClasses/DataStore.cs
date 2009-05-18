@@ -8,11 +8,17 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Arebis.CodeGeneration;
 
 namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
 {
     public partial class DataStore
     {
+        public static void Call(IGenerationHost host, IKistlContext ctx, ObjectClass objClass)
+        {
+            host.CallTemplate("Implementation.ObjectClasses.DataStore", ctx, objClass);
+        }
+
         public static string GetPropertyValueAsCSharp(IDataObject obj, Property prop)
         {
             if (obj == null)

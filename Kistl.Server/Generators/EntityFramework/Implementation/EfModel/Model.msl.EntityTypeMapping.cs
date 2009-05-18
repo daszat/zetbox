@@ -5,14 +5,21 @@ using System.Text;
 
 using Kistl.App.Base;
 using Kistl.Server.Generators.Extensions;
+using Arebis.CodeGeneration;
+using Kistl.API;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 {
     public partial class ModelMslEntityTypeMapping
     {
+        public static void Call(IGenerationHost host, IKistlContext ctx, ObjectClass obj)
+        {
+            host.CallTemplate("Implementation.EfModel.ModelMslEntityTypeMapping", ctx, obj);
+        }
+
         protected virtual void ApplyEntityTypeMapping(ObjectClass obj)
         {
-            CallTemplate("Implementation.EfModel.ModelMslEntityTypeMapping", ctx, obj);
+            Call(Host, ctx, obj);
         }
 
         protected virtual void ApplyScalarProperty(Property prop, string parentName)

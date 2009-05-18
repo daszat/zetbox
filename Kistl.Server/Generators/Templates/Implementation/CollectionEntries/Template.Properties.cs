@@ -15,7 +15,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected virtual void ApplyIdPropertyTemplate()
         {
-            this.CallTemplate("Implementation.ObjectClasses.IdProperty", ctx);
+            Implementation.ObjectClasses.IdProperty.Call(Host, ctx);
         }
 
         protected abstract void ApplyAPropertyTemplate();
@@ -24,14 +24,14 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected virtual void ApplyAIndexPropertyTemplate()
         {
-            this.CallTemplate("Implementation.ObjectClasses.NotifyingValueTypeProperty", ctx,
-                "int?", "AIndex");
+            //Implementation.ObjectClasses.NotifyingValueTypeProperty.Call(Host, ctx,
+            //    "int?", "AIndex");
         }
 
         protected virtual void ApplyBIndexPropertyTemplate()
         {
-            this.CallTemplate("Implementation.ObjectClasses.NotifyingValueTypeProperty", ctx,
-                "int?", "BIndex");
+            //    Implementation.ObjectClasses.NotifyingValueTypeProperty.Call(Host, ctx,
+        //        "int?", "BIndex");
         }
 
 

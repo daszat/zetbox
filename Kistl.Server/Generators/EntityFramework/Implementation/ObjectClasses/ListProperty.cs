@@ -30,7 +30,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                 var rel = RelationExtensions.Lookup(ctx, orp);
                 var relEnd = rel.GetEnd(orp);
 
-                CallTemplate("Implementation.ObjectClasses.EfListWrapper", ctx,
+                Implementation.ObjectClasses.EfListWrapper.Call(Host, ctx,
                     name + Kistl.API.Helper.ImplementationSuffix,
                     rel.GetAssociationName(), relEnd.RoleName, relEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix);
             }

@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Kistl.Server.Generators.Templates.Implementation;
+using Arebis.CodeGeneration;
+using Kistl.API;
+using Kistl.App.Base;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
     public partial class EnumerationPropertyTemplate
     {
+        public static void Call(IGenerationHost host, IKistlContext ctx, Templates.Implementation.SerializationMembersList list, EnumerationProperty prop)
+        {
+            host.CallTemplate("Implementation.ObjectClasses.EnumerationPropertyTemplate", ctx,
+                list, prop);
+        }
+
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list)
         {
             if (list != null)

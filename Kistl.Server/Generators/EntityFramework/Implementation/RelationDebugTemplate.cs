@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Arebis.CodeGeneration;
+using Kistl.API;
+using Kistl.App.Base;
+
+namespace Kistl.Server.Generators.EntityFramework.Implementation
+{
+    public partial class RelationDebugTemplate
+    {
+        public static void Call(IGenerationHost host, IKistlContext ctx, Relation rel)
+        {
+            host.CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+        }
+    }
+}

@@ -59,7 +59,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             if (hasId)
             {
                 base.ApplyIDPropertyTemplate();
-                Host.CallTemplate("Implementation.ObjectClasses.IdProperty", ctx);
+                Implementation.ObjectClasses.IdProperty.Call(Host, ctx);
             }
         }
 
@@ -93,7 +93,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
         {
             this.WriteLine("        // enumeration property");
-            this.Host.CallTemplate("Implementation.ObjectClasses.EnumerationPropertyTemplate", ctx,
+            Implementation.ObjectClasses.EnumerationPropertyTemplate.Call(Host, ctx,
                 this.MembersToSerialize,
                 prop);
         }
@@ -101,7 +101,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyStructPropertyTemplate(StructProperty prop)
         {
             this.WriteLine("        // struct property");
-            this.Host.CallTemplate("Implementation.ObjectClasses.StructPropertyTemplate", ctx,
+            Implementation.ObjectClasses.StructPropertyTemplate.Call(Host, ctx,
                 this.MembersToSerialize,
                 prop);
         }
@@ -109,7 +109,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyValueTypeListTemplate(ValueTypeProperty prop)
         {
             this.WriteLine("        // value list property");
-            this.Host.CallTemplate("Implementation.ObjectClasses.ValueCollectionProperty", ctx,
+            Implementation.ObjectClasses.ValueCollectionProperty.Call(Host, ctx,
                 this.MembersToSerialize,
                 prop);
         }
@@ -128,11 +128,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             }
 
             this.WriteLine("    /*");
-            this.CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+            Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
             this.WriteLine("    */");
 
             this.WriteLine("        // object reference property");
-                this.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
+            Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx,
                     this.MembersToSerialize,
                     prop.PropertyName,
                     rel.GetAssociationName(), otherEnd.RoleName,
@@ -144,7 +144,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 
         protected override void ApplyCollectionEntryListTemplate(Relation rel, RelationEndRole endRole)
         {
-            this.CallTemplate("Implementation.ObjectClasses.CollectionEntryListProperty", ctx,
+            Implementation.ObjectClasses.CollectionEntryListProperty.Call(Host, ctx,
                 this.MembersToSerialize,
                 rel, endRole);
         }
@@ -153,7 +153,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         {
             // TODO: move debugging output into Templates
             this.WriteLine("    /*");
-            this.CallTemplate("Implementation.RelationDebugTemplate", ctx, RelationExtensions.Lookup(ctx, prop));
+            Implementation.RelationDebugTemplate.Call(Host, ctx, RelationExtensions.Lookup(ctx, prop));
             this.WriteLine("    */");
 
             base.ApplyObjectReferenceListTemplate(prop);
@@ -162,7 +162,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();
-            this.CallTemplate("Implementation.ObjectClasses.ReloadReferences", ctx, this.DataType);
+            Implementation.ObjectClasses.ReloadReferences.Call(Host, ctx, this.DataType);
         }
     }
 }

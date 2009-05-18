@@ -70,7 +70,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         /// <param name="relEnd"></param>
         protected virtual void ApplyObjectListPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
-            this.Host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty", ctx,
+            Implementation.ObjectClasses.ObjectListProperty.Call(Host, ctx,
                 this.MembersToSerialize,
                 rel, endRole);
         }
@@ -107,13 +107,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         protected override void ApplyApplyChangesFromMethod()
         {
             base.ApplyApplyChangesFromMethod();
-            this.Host.CallTemplate("Implementation.ObjectClasses.ApplyChangesFromMethod", ctx, this.DataType);
+            Implementation.ObjectClasses.ApplyChangesFromMethod.Call(Host, ctx, this.DataType);
         }
 
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();
-            this.Host.CallTemplate("Implementation.ObjectClasses.Tail", ctx, this.DataType);
+            Implementation.ObjectClasses.Tail.Call(Host, ctx, this.DataType);
         }
 
     }

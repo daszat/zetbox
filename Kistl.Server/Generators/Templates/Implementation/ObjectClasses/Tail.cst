@@ -42,5 +42,5 @@
         public event ObjectEventHandler<<%= cls.ClassName %>> OnPostSave_<%= cls.ClassName %>;
 
 <%
-	this.CallTemplate("Implementation.ObjectClasses.GetPropertyErrorTemplate", ctx, cls);
+	Implementation.ObjectClasses.GetPropertyErrorTemplate.Call(Host, ctx, cls);
 %>

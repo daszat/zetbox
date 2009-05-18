@@ -150,7 +150,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
 
         protected virtual void ApplyListProperty(Property prop, SerializationMembersList serList)
         {
-            this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx,
+            Implementation.ObjectClasses.ListProperty.Call(Host, ctx,
                 serList,
                 this.DataType,
                 prop.GetPropertyType(),

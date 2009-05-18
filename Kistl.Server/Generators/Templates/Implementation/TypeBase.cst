@@ -104,16 +104,16 @@ namespace <%= DataType.Module.Namespace %>
 #region Serializer
 
 <%
-		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 			SerializerDirection.ToStream, this.MembersToSerialize);
 		
-		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 			SerializerDirection.FromStream, this.MembersToSerialize);
 
-		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 			SerializerDirection.ToXmlStream, this.MembersToSerialize);
 		
-		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 			SerializerDirection.FromXmlStream, this.MembersToSerialize);
 %>
 

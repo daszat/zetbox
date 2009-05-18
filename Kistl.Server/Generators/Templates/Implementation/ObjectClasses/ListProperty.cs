@@ -5,11 +5,25 @@ using System.Linq;
 using System.Text;
 
 using Kistl.Server.Generators.Extensions;
+using Arebis.CodeGeneration;
+using Kistl.API;
+using Kistl.App.Base;
 
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
     public partial class ListProperty
     {
+        public static void Call(IGenerationHost host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serList,
+            DataType dataType, Type propertyType, string propertyName, Property prop)
+        {
+            host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx,
+                 serList,
+                 dataType,
+                 prop.GetPropertyType(),
+                 prop.PropertyName,
+                 prop);
+        }
+
         /// <summary>
         /// Is called to insert requisites into the containing class, like wrappers or similar.
         /// </summary>

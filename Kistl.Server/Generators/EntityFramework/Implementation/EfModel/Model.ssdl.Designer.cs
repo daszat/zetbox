@@ -79,7 +79,7 @@ foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
 #line 59 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
 this.WriteObjects("    <!-- \r\n");
 #line 61 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
-CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 
 #line 63 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
 this.WriteObjects("    -->\r\n");

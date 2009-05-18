@@ -65,7 +65,7 @@ this.WriteObjects("	using ",  rel.B.Type.Module.Namespace , ";\r\n");
 #line 48 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
 }
 
-		this.CallTemplate("Implementation.CollectionEntries.ObjectCollectionEntry", ctx, rel);
+		Implementation.CollectionEntries.ObjectCollectionEntry.Call(Host, ctx, rel);
 
 #line 52 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("}\r\n");
@@ -85,7 +85,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("namespace ",  prop.ObjectClass.Module.Namespace , "\r\n");
 this.WriteObjects("{\r\n");
 #line 68 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
-this.CallTemplate("Implementation.CollectionEntries.ValueCollectionEntry", ctx, prop);
+Implementation.CollectionEntries.ValueCollectionEntry.Call(Host, ctx, prop);
 
 #line 70 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("}\r\n");

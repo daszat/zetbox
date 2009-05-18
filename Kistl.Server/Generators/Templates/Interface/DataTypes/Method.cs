@@ -9,11 +9,17 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
+using Arebis.CodeGeneration;
 
 namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 {
     public partial class Method
     {
+        public static void Call(IGenerationHost host, IKistlContext ctx, Kistl.App.Base.Method m)
+        {
+            host.CallTemplate("Interface.DataTypes.Method", ctx, m);
+        }
+
         protected string GetModifiers()
         {
             MemberAttributes attrs = ModifyMethodAttributes(0);

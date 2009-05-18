@@ -100,7 +100,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
 
         protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m)
         {
-            this.Host.CallTemplate("Implementation.ObjectClasses.Method", ctx, this.DataType, m);
+            Implementation.ObjectClasses.Method.Call(Host, ctx, this.DataType, m);
         }
 
         /// <summary>

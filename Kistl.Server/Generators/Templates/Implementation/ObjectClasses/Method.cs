@@ -15,6 +15,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     public class Method
         : Kistl.Server.Generators.Templates.Interface.DataTypes.Method
     {
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, Kistl.API.IKistlContext ctx, DataType cls, Kistl.App.Base.Method m)
+        {
+            host.CallTemplate("Implementation.ObjectClasses.Method", ctx, cls, m);
+        }
+
         protected DataType DataType { get; private set; }
 
         public Method(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, DataType cls, Kistl.App.Base.Method m)
@@ -39,7 +44,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 
         protected override void ApplyBodyTemplate()
         {
-            Host.CallTemplate("Implementation.ObjectClasses.MethodBody", ctx, DataType, m);
+            Implementation.ObjectClasses.MethodBody.Call(Host, ctx, this.DataType, m);
         }
 
     }

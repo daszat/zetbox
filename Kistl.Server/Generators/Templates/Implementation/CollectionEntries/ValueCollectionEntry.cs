@@ -12,6 +12,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
     public abstract partial class ValueCollectionEntry
         : Template
     {
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, ValueTypeProperty prop)
+        {
+            host.CallTemplate("Implementation.CollectionEntries.ValueCollectionEntry", ctx, prop);
+        }
+
         protected ValueTypeProperty prop { get; private set; }
 
         public ValueCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ValueTypeProperty prop)

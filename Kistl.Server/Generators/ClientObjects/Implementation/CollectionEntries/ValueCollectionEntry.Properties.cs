@@ -11,8 +11,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
     {
         protected override void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName)
         {
-            this.CallTemplate("Implementation.CollectionEntries.ValueCollectionEntryParentReference",
-                ctx, MembersToSerialize, prop.ObjectClass.ClassName, propertyName);
+            Implementation.CollectionEntries.ValueCollectionEntryParentReference.Call(Host, ctx, 
+                MembersToSerialize, prop.ObjectClass.ClassName, propertyName);
         }
 
     }

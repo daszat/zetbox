@@ -7,7 +7,7 @@ using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
 
 
-namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
+namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cst")]
     public partial class AttachToContextTemplate : Kistl.Server.Generators.KistlCodeTemplate

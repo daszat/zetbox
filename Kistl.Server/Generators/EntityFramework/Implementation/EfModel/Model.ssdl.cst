@@ -58,7 +58,7 @@
 %>
     <!-- 
 <%
-    CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+    Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 %>
     -->
     <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= esTableName %>" />

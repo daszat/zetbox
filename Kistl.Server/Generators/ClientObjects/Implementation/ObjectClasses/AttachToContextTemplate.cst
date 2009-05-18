@@ -1,6 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Implementation.ObjectClasses.AttachToContextTemplate"
-	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.AttachToContextTemplate" 
+	ClassName="Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.AttachToContextTemplate" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>

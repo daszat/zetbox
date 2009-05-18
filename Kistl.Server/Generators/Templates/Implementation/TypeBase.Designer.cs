@@ -127,16 +127,16 @@ this.WriteObjects("\r\n");
 this.WriteObjects("#region Serializer\r\n");
 this.WriteObjects("\r\n");
 #line 107 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
-CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 			SerializerDirection.ToStream, this.MembersToSerialize);
 		
-		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 			SerializerDirection.FromStream, this.MembersToSerialize);
 
-		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 			SerializerDirection.ToXmlStream, this.MembersToSerialize);
 		
-		CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
+		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 			SerializerDirection.FromXmlStream, this.MembersToSerialize);
 
 #line 119 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"

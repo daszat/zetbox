@@ -59,9 +59,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         protected override void ApplyStructPropertyTemplate(StructProperty prop)
         {
             this.WriteLine("        // struct property");
-            this.Host.CallTemplate("Implementation.ObjectClasses.StructPropertyTemplate", ctx,
-                this.MembersToSerialize,
-                prop);
+            Implementation.ObjectClasses.StructPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop);
         }
 
         protected override void ApplyObjectListPropertyTemplate(Relation rel, RelationEndRole endRole)
@@ -98,14 +96,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         protected override void ApplyAttachToContextMethod()
         {
             base.ApplyAttachToContextMethod();
-            this.CallTemplate("Implementation.ObjectClasses.AttachToContextTemplate", ctx, DataType);
+            Implementation.ObjectClasses.AttachToContextTemplate.Call(Host, ctx, ObjectClass);
         }
 
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();
-            this.CallTemplate("Implementation.ObjectClasses.UpdateParentTemplate",
-                ctx, DataType);
+            Implementation.ObjectClasses.UpdateParentTemplate.Call(Host, ctx, DataType);
         }
     }
 }

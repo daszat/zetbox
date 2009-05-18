@@ -58,7 +58,7 @@ foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
 #line 40 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    <!--\r\n");
 #line 42 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
-CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 
 #line 44 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    -->\r\n");
@@ -142,7 +142,7 @@ foreach(var rel in ModelCsdl.GetRelationsWithoutSeparateStorage(ctx))
 #line 118 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    <!--\r\n");
 #line 120 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
-CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 
 #line 122 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    -->\r\n");

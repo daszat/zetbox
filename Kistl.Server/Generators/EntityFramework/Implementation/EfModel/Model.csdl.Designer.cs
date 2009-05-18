@@ -149,7 +149,7 @@ foreach(var rel in GetRelationsWithSeparateStorage(ctx))
 #line 118 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  <!--\r\n");
 #line 120 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
+Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 
 #line 122 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  -->\r\n");

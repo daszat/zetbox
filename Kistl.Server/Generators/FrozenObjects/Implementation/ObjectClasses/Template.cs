@@ -49,7 +49,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
 
         protected override void ApplyListProperty(Property prop, Templates.Implementation.SerializationMembersList serList)
         {
-            this.Host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx,
+            Implementation.ObjectClasses.ListProperty.Call(Host, ctx,
                  serList,
                  this.DataType,
                  prop.GetPropertyType(),
@@ -87,7 +87,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             // TODO: IsFrozen should be set if BaseClass.IsFrozen is set
             if (this.ObjectClass.IsFrozen())
             {
-                this.Host.CallTemplate("Implementation.ObjectClasses.DataStore", ctx, this.ObjectClass);
+                Implementation.ObjectClasses.DataStore.Call(Host, ctx, this.ObjectClass);
             }
         }
     }
