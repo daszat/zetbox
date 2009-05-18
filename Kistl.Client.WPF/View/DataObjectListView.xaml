@@ -26,6 +26,34 @@
               SelectedItem="{Binding SelectedItem}"
               ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
               MaxHeight="300"
-              MouseDoubleClick="ItemActivatedHandler" />
+              MouseDoubleClick="ItemActivatedHandler">
+        <ListView.View>
+            <GridView AllowsColumnReorder="True">
+                <GridViewColumn Header="Icon">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding IconPath}"
+                                   Width="14"
+                                   Height="14" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="ID">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ID}" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Name">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+            </GridView>
+        </ListView.View>
+    </ListView>
 
 </view:PropertyView>
