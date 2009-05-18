@@ -19,7 +19,7 @@ namespace Kistl.Client.WPF.View
         {
             if (item is DataObjectModel)
             {
-                PresentableModelDescriptor pmd = item.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor(); ;
+                PresentableModelDescriptor pmd = item.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor();
 
                 var vDesc = pmd.GetViewDescriptor(Toolkit.WPF, VisualType.ObjectListEntry);
 

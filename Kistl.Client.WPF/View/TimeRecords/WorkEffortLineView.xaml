@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.TimeRecords.WorkEffortLineView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UniformGrid Rows="1">
+        <TextBox Text="{Binding Name}" />
+
+        <TextBox Text="{Binding Notes}" />
+
+        <TextBox Text="{Binding From}" />
+
+        <TextBox Text="{Binding Thru}" />
+    </UniformGrid>
+</UserControl>
