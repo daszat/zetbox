@@ -32,7 +32,7 @@ namespace Kistl.App.Projekte
 
 
         /// <summary>
-        /// Adresse & Hausnummer
+        /// Adresse &amp; Hausnummer
         /// </summary>
         // value type property
         public virtual string Adresse

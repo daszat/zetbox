@@ -409,7 +409,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[194],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[190],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[196],
 });
-			DataStore[9].Description = null;
+			DataStore[9].Description = @"";
 			DataStore[9].IsIndexed = false;
 			DataStore[9].IsList = false;
 			DataStore[9].IsNullable = true;
@@ -471,7 +471,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[140],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[186],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[199],
 });
-			DataStore[30].Description = null;
+			DataStore[30].Description = @"";
 			DataStore[30].IsIndexed = false;
 			DataStore[30].IsList = false;
 			DataStore[30].IsNullable = false;
@@ -516,7 +516,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[184],
 			DataStore[41].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[183],
 });
-			DataStore[41].Description = null;
+			DataStore[41].Description = @"";
 			DataStore[41].IsIndexed = false;
 			DataStore[41].IsList = false;
 			DataStore[41].IsNullable = true;
@@ -626,7 +626,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[177],
 			DataStore[60].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[176],
 });
-			DataStore[60].Description = @"Adresse & Hausnummer";
+			DataStore[60].Description = @"Adresse &amp; Hausnummer";
 			DataStore[60].IsIndexed = false;
 			DataStore[60].IsList = false;
 			DataStore[60].IsNullable = true;
@@ -862,7 +862,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[160],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[90],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[159],
 });
-			DataStore[130].Description = @"Persons Name";
+			DataStore[130].Description = @"Person&apos;s Name";
 			DataStore[130].IsIndexed = false;
 			DataStore[130].IsList = false;
 			DataStore[130].IsNullable = false;
@@ -1089,13 +1089,13 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[209],
 			DataStore[184].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
 			DataStore[184].Length = 200;
 			DataStore[184].Seal();
-			DataStore[205].AltText = null;
+			DataStore[205].AltText = @"";
 			DataStore[205].CategoryTags = null;
 			DataStore[205].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[221],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[243],
 });
-			DataStore[205].Description = null;
+			DataStore[205].Description = @"";
 			DataStore[205].IsIndexed = false;
 			DataStore[205].IsList = false;
 			DataStore[205].IsNullable = false;
@@ -1111,7 +1111,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[243],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[220],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[239],
 });
-			DataStore[216].Description = @"This end's role name in the relation";
+			DataStore[216].Description = @"This end&apos;s role name in the relation";
 			DataStore[216].IsIndexed = false;
 			DataStore[216].IsList = false;
 			DataStore[216].IsNullable = false;

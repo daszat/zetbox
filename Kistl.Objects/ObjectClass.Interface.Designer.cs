@@ -47,7 +47,7 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// Setting this to true marks the instances of this class as "simple." At first this will only mean that they'll be displayed inline.
+        /// Setting this to true marks the instances of this class as &quot;simple.&quot; At first this will only mean that they'll be displayed inline.
         /// </summary>
 		bool IsSimpleObject {
 			get;

@@ -21,7 +21,7 @@ namespace Kistl.App.Test
 			set;
 		}
         /// <summary>
-        /// Persons Name
+        /// Person&apos;s Name
         /// </summary>
 		string PersonName {
 			get;

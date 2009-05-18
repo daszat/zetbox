@@ -14,7 +14,7 @@ namespace Kistl.App.Projekte
     {
 
         /// <summary>
-        /// Adresse & Hausnummer
+        /// Adresse &amp; Hausnummer
         /// </summary>
 		string Adresse {
 			get;

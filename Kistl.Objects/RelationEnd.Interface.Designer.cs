@@ -56,7 +56,7 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// This end's role name in the relation
+        /// This end&apos;s role name in the relation
         /// </summary>
 		string RoleName {
 			get;

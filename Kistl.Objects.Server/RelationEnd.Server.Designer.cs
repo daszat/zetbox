@@ -395,7 +395,7 @@ namespace Kistl.App.Base
         private int _Role;
 
         /// <summary>
-        /// This end's role name in the relation
+        /// This end&apos;s role name in the relation
         /// </summary>
         // value type property
         [XmlIgnore()]

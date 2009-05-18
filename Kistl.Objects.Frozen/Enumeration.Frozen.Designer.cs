@@ -189,7 +189,7 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[3],
 			DataStore[50].Seal();
 			DataStore[53].ClassName = @"Toolkit";
 			DataStore[53].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[4];
-			DataStore[53].Description = null;
+			DataStore[53].Description = @"";
 			DataStore[53].ExportGuid = new Guid("803fb38d-f0d2-409c-9f15-30da4bdcf576");
 			DataStore[53].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
@@ -207,7 +207,7 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[77],
 			DataStore[53].Seal();
 			DataStore[55].ClassName = @"VisualType";
 			DataStore[55].DefaultIcon = null;
-			DataStore[55].Description = null;
+			DataStore[55].Description = @"";
 			DataStore[55].ExportGuid = new Guid("3567a11f-1809-44e8-bafe-ce0ccec7ea2a");
 			DataStore[55].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });

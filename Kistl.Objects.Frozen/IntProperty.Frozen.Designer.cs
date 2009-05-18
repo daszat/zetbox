@@ -154,7 +154,7 @@ namespace Kistl.App.Base
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[147],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 });
-			DataStore[28].Description = null;
+			DataStore[28].Description = @"";
 			DataStore[28].IsIndexed = false;
 			DataStore[28].IsList = false;
 			DataStore[28].IsNullable = false;

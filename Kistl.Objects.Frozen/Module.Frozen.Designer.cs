@@ -303,7 +303,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[78],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[81],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[88],
 });
-			DataStore[1].Description = null;
+			DataStore[1].Description = @"";
 			DataStore[1].ModuleName = @"KistlBase";
 			DataStore[1].Namespace = @"Kistl.App.Base";
 			DataStore[1].Seal();
@@ -316,7 +316,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19],
 });
-			DataStore[2].Description = null;
+			DataStore[2].Description = @"";
 			DataStore[2].ModuleName = @"Projekte";
 			DataStore[2].Namespace = @"Kistl.App.Projekte";
 			DataStore[2].Seal();
@@ -327,7 +327,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86],
 });
-			DataStore[3].Description = null;
+			DataStore[3].Description = @"";
 			DataStore[3].ModuleName = @"TimeRecords";
 			DataStore[3].Namespace = @"Kistl.App.TimeRecords";
 			DataStore[3].Seal();
@@ -363,7 +363,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[53],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52],
 });
-			DataStore[4].Description = null;
+			DataStore[4].Description = @"";
 			DataStore[4].ModuleName = @"GUI";
 			DataStore[4].Namespace = @"Kistl.App.GUI";
 			DataStore[4].Seal();
@@ -379,7 +379,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48],
 });
-			DataStore[5].Description = null;
+			DataStore[5].Description = @"";
 			DataStore[5].ModuleName = @"TestModule";
 			DataStore[5].Namespace = @"Kistl.App.Test";
 			DataStore[5].Seal();

@@ -153,7 +153,7 @@ namespace Kistl.App.Base
 			DataStore[23].CategoryTags = null;
 			DataStore[23].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[23].Description = null;
+			DataStore[23].Description = @"";
 			DataStore[23].IsIndexed = false;
 			DataStore[23].IsList = false;
 			DataStore[23].IsNullable = true;

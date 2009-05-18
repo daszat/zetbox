@@ -55,7 +55,7 @@ namespace Kistl.App.Projekte
         private int _ID;
 
         /// <summary>
-        /// Adresse & Hausnummer
+        /// Adresse &amp; Hausnummer
         /// </summary>
         // value type property
         [XmlIgnore()]

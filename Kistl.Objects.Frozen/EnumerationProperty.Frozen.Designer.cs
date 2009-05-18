@@ -333,7 +333,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 			DataStore[210].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 });
-			DataStore[210].Description = null;
+			DataStore[210].Description = @"";
 			DataStore[210].IsIndexed = false;
 			DataStore[210].IsList = false;
 			DataStore[210].IsNullable = false;

@@ -80,7 +80,7 @@ namespace Kistl.App.GUI
         private string _Description;
 
         /// <summary>
-        /// The described CLR class' reference
+        /// The described CLR class&apos; reference
         /// </summary>
         // object reference property
         // implement the user-visible interface

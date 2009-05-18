@@ -165,7 +165,7 @@ namespace Kistl.App.Base
 			DataStore[11].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[143],
 });
-			DataStore[11].Description = null;
+			DataStore[11].Description = @"";
 			DataStore[11].IsIndexed = false;
 			DataStore[11].IsList = false;
 			DataStore[11].IsNullable = false;
@@ -179,7 +179,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[143],
 			DataStore[26].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[142],
 });
-			DataStore[26].Description = null;
+			DataStore[26].Description = @"";
 			DataStore[26].IsIndexed = false;
 			DataStore[26].IsList = false;
 			DataStore[26].IsNullable = false;
@@ -207,7 +207,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[117],
 			DataStore[94].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[111],
 });
-			DataStore[94].Description = @"Parameter wird als List<> generiert";
+			DataStore[94].Description = @"Parameter wird als List&lt;&gt; generiert";
 			DataStore[94].IsIndexed = false;
 			DataStore[94].IsList = false;
 			DataStore[94].IsNullable = false;
@@ -249,7 +249,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[96],
 			DataStore[119].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[93],
 });
-			DataStore[119].Description = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.";
+			DataStore[119].Description = @"Setting this to true marks the instances of this class as &quot;simple.&quot; At first this will only mean that they'll be displayed inline.";
 			DataStore[119].IsIndexed = false;
 			DataStore[119].IsList = false;
 			DataStore[119].IsNullable = false;

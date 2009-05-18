@@ -28,7 +28,7 @@ namespace Kistl.App.GUI
 			set;
 		}
         /// <summary>
-        /// The described CLR class' reference
+        /// The described CLR class&apos; reference
         /// </summary>
 		Kistl.App.Base.TypeRef PresentableModelRef {
 			get;

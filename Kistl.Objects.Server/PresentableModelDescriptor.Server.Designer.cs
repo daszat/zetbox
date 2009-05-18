@@ -125,7 +125,7 @@ namespace Kistl.App.GUI
         private string _Description;
 
         /// <summary>
-        /// The described CLR class' reference
+        /// The described CLR class&apos; reference
         /// </summary>
     /*
     Relation: FK_PresentableModelDescriptor_TypeRef_Descriptor_77

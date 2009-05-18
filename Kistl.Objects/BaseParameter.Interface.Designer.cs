@@ -21,7 +21,7 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// Parameter wird als List<> generiert
+        /// Parameter wird als List&lt;&gt; generiert
         /// </summary>
 		bool IsList {
 			get;

@@ -58,7 +58,7 @@ namespace Kistl.App.Test
         private DateTime? _Birthday;
 
         /// <summary>
-        /// Persons Name
+        /// Person&apos;s Name
         /// </summary>
         // value type property
         public virtual string PersonName

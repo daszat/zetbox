@@ -53,7 +53,7 @@ namespace Kistl.App.Base
         private string _Description;
 
         /// <summary>
-        /// Parameter wird als List<> generiert
+        /// Parameter wird als List&lt;&gt; generiert
         /// </summary>
         // value type property
         public virtual bool IsList

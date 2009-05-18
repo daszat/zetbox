@@ -281,7 +281,7 @@ namespace Kistl.App.Base
         private bool _IsFrozenObject;
 
         /// <summary>
-        /// Setting this to true marks the instances of this class as "simple." At first this will only mean that they'll be displayed inline.
+        /// Setting this to true marks the instances of this class as &quot;simple.&quot; At first this will only mean that they'll be displayed inline.
         /// </summary>
         // value type property
         public virtual bool IsSimpleObject
