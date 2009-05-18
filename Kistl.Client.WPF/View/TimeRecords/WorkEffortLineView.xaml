@@ -2,12 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <UniformGrid Rows="1">
-        <TextBox Text="{Binding Name}" />
+        <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
 
-        <TextBox Text="{Binding Notes}" />
+        <TextBox Text="{Binding Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
 
-        <TextBox Text="{Binding From}" />
+        <TextBox Text="{Binding From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
 
-        <TextBox Text="{Binding Thru}" />
+        <TextBox Text="{Binding Thru, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
     </UniformGrid>
 </UserControl>
