@@ -19,7 +19,7 @@ namespace Kistl.Client.Presentables.TimeRecords
     /// </summary>
     /// This <see cref="WorkspaceModel"/> implements the use case of capturing fine grained
     /// work effort information "on the go" while employees are working on their PC.
-    public sealed class WorkEffortRecorderModel
+    public sealed partial class WorkEffortRecorderModel
         : WorkspaceModel
     {
         /// <summary>
@@ -78,24 +78,42 @@ namespace Kistl.Client.Presentables.TimeRecords
 
         #endregion
 
-        #region IsCurrentlyWorking
+        #region IsCurrentlyPresent
 
-        /// <summary>The backing store for the <see cref="IsCurrentlyWorking"/> property.</summary>
-        private bool _isCurrentlyWorking = false;
+        /// <summary>The backing store for the <see cref="IsCurrentlyPresent"/> property.</summary>
+        private bool _isCurrentlyPresent = false;
 
-        /// <summary>Gets or sets a value indicating whether the <see cref="CurrentUser"/> is currently on work time or not.</summary>
-        public bool IsCurrentlyWorking
+        /// <summary>Gets or sets a value indicating whether the <see cref="CurrentUser"/> is currently on work time or not. Can only be set if there is a CurrentUser.</summary>
+        public bool IsCurrentlyPresent
         {
             get
             {
-                return _isCurrentlyWorking;
+                return _isCurrentlyPresent;
             }
             set
             {
-                if (_isCurrentlyWorking != value)
+                if (_isCurrentlyPresent != value && CurrentUser != null)
                 {
-                    _isCurrentlyWorking = value;
+                    _isCurrentlyPresent = value;
                     OnPropertyChanged("IsCurrentlyWorking");
+
+                    if (_isCurrentlyPresent == true)
+                    {
+                        PresenceRecord nowPresent = DataContext.Create<PresenceRecord>();
+                        nowPresent.From = DateTime.Now;
+                        nowPresent.Mitarbeiter = (Mitarbeiter)CurrentUser.Object;
+                        InitialisePresenceRecords();
+                        _presenceRecords.Add(nowPresent);
+                        DataContext.SubmitChanges();
+                    }
+                    else
+                    {
+                        PresenceRecord nowPresent = PresenceRecords.LastOrDefault(rec => rec.Thru == null);
+                        if (nowPresent != null)
+                        {
+                            nowPresent.Thru = DateTime.Now;
+                        }
+                    }
                 }
             }
         }
@@ -104,11 +122,14 @@ namespace Kistl.Client.Presentables.TimeRecords
 
         #region List of work efforts
 
-        /// <summary>The backing store for the <see cref="Efforts"/> property.</summary>
+        /// <summary>The backing store of the <see cref="Efforts"/> property.</summary>
         private ObservableCollection<WorkEffortModel> _efforts;
 
+        /// <summary>The read-only proxy for the backing store of the <see cref="Efforts"/> property.</summary>
+        private ReadOnlyObservableCollection<WorkEffortModel> _readOnlyEfforts;
+
         /// <summary>Gets a list of recorded <see cref="WorkEffort"/> of the <see cref="CurrentUser"/>.</summary>
-        public ObservableCollection<WorkEffortModel> Efforts
+        public ReadOnlyObservableCollection<WorkEffortModel> Efforts
         {
             get
             {
@@ -116,15 +137,17 @@ namespace Kistl.Client.Presentables.TimeRecords
                 {
                     _efforts = new ObservableCollection<WorkEffortModel>();
 
-                    // quick hack to update CurrentEffort, could be improved to only trigger if CurrentEffort _really_ changes
+                    // quick hack to update CurrentEffort
+                    // TODO: could be improved to only trigger if CurrentEffort _really_ changes
                     _efforts.CollectionChanged += (obj, args) =>
                     {
                         OnPropertyChanged("CurrentEffort");
                     };
 
                     ReloadEfforts();
+                    _readOnlyEfforts = new ReadOnlyObservableCollection<WorkEffortModel>(_efforts);
                 }
-                return _efforts;
+                return _readOnlyEfforts;
             }
         }
 
@@ -166,88 +189,103 @@ namespace Kistl.Client.Presentables.TimeRecords
 
         #endregion
 
+        #region List of PresenceRecords
+
+        /// <summary>The backing store for the <see cref="PresenceRecords"/> property.</summary>
+        private ObservableCollection<PresenceRecord> _presenceRecords;
+
+        /// <summary>The read-only proxy for the backing store of the <see cref="PresenceRecords"/> property.</summary>
+        private ReadOnlyObservableCollection<PresenceRecord> _readOnlyPresenceRecords;
+
+        /// <summary>Gets a list of recorded <see cref="PresenceRecord"/> of the <see cref="CurrentUser"/>.</summary>
+        public ReadOnlyObservableCollection<PresenceRecord> PresenceRecords
+        {
+            get
+            {
+                InitialisePresenceRecords();
+                return _readOnlyPresenceRecords;
+            }
+        }
+
+        /// <summary>
+        /// Ensure that the backing stores for <see cref="PresenceRecords"/> are initialised.
+        /// </summary>
+        private void InitialisePresenceRecords()
+        {
+            if (_presenceRecords == null)
+            {
+                _presenceRecords = new ObservableCollection<PresenceRecord>();
+                ReloadPresenceRecords();
+                _readOnlyPresenceRecords = new ReadOnlyObservableCollection<PresenceRecord>(_presenceRecords);
+            }
+        }
+
+        /// <summary>
+        /// Reload the <see cref="PresenceRecords"/> collection according to the <see cref="CurrentUser"/>. If no user is set, the PresenceRecords collection is cleared;
+        /// </summary>
+        private void ReloadPresenceRecords()
+        {
+            _presenceRecords.Clear();
+            if (CurrentUser != null)
+            {
+                var recordModels = DataContext.GetQuery<PresenceRecord>()
+                    .Where(o => o.Mitarbeiter.ID == CurrentUser.ID)
+                    .OrderBy(o => o.From);
+                    ////.Select(o => (WorkEffortModel)Factory.CreateDefaultModel(DataContext, o));
+
+                foreach (var pr in recordModels)
+                {
+                    _presenceRecords.Add(pr);
+                }
+            }
+        }
+
+        #endregion
+        
         #region Summary Values
 
         /// <summary>
-        /// Indicates whether the timer to update the various ticking time displays already was started.
+        /// Indicates whether the timer to update the TotalWorkTimeToday time display is started.
         /// </summary>
-        private bool _sumTimerStarted = false;
+        private bool _totalWorkTimeTodayTimerStarted = false;
 
         /// <summary>Gets the total time (in hours) the <see cref="CurrentUser"/> has worked today.</summary>
         public double TotalWorkTimeToday
         {
             get
             {
-                if (!_sumTimerStarted)
+                if (!_totalWorkTimeTodayTimerStarted)
                 {
                     // set flag before starting the timer to avoid any potential races
-                    _sumTimerStarted = true;
+                    _totalWorkTimeTodayTimerStarted = true;
                     this.Factory.CreateTimer(TimeSpan.FromMilliseconds(300), () => OnPropertyChanged("TotalWorkTimeToday"));
                 }
                 return Efforts.Sum(e => ((e.Thru ?? DateTime.Now) - e.From).TotalHours);
             }
         }
 
-        /// <summary>Gets the time (in hours) since the last break of the <see cref="CurrentUser"/>.</summary>
-        public float TimeSinceLastBreak { get; private set; }
-
-        #endregion
-
-        #region Commands
-
-        /// <summary>The backing store for the <see cref="StartNewWorkEffort"/> property.</summary>
-        private StartNewWorkEffortCommand _startNewWorkEffortCommand;
-
         /// <summary>
-        /// Gets a command to start a new work effort. If there is currently a <see cref="WorkEffort"/> open, it'll be closed.
+        /// Indicates whether the timer to update the TotalWorkTimeToday time display is started.
         /// </summary>
-        public ICommand StartNewWorkEffort
+        private bool _totalPresenceTimeTodayTimerStarted = false;
+
+        /// <summary>Gets the total time (in hours) the <see cref="CurrentUser"/> was present today.</summary>
+        public double TotalPresenceTimeToday
         {
             get
             {
-                if (_startNewWorkEffortCommand == null)
+                if (!_totalPresenceTimeTodayTimerStarted)
                 {
-                    _startNewWorkEffortCommand = new StartNewWorkEffortCommand(AppContext, DataContext, this);
+                    // set flag before starting the timer to avoid any potential races
+                    _totalPresenceTimeTodayTimerStarted = true;
+                    this.Factory.CreateTimer(TimeSpan.FromMilliseconds(300), () => OnPropertyChanged("TotalPresenceTimeToday"));
                 }
-                return _startNewWorkEffortCommand;
+                return PresenceRecords.Sum(e => ((e.Thru ?? DateTime.Now) - e.From).TotalHours);
             }
         }
 
-        /// <summary>
-        /// This <see cref="ICommand"/> takes care of closing any open work efforts of the current user and starts a new one.
-        /// </summary>
-        private class StartNewWorkEffortCommand : CommandModel
-        {
-            /// <summary>The <see cref="WorkEffortRecorderModel"/> to work on.</summary>
-            private WorkEffortRecorderModel _parent;
-
-            /// <summary>
-            /// Initializes a new instance of the StartNewWorkEffortCommand class.
-            /// </summary>
-            /// <param name="appCtx">the application context to use</param>
-            /// <param name="dataCtx">the data context to use</param>
-            /// <param name="parent">which <see cref="WorkEffortRecorderModel"/> to work on</param>
-            public StartNewWorkEffortCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, WorkEffortRecorderModel parent)
-                : base(appCtx, dataCtx)
-            {
-                _parent = parent;
-            }
-
-            /// <summary>
-            /// Whether or not this Command is applicable to the current state.
-            /// </summary>
-            /// <param name="data">may be <value>null</value> if no data is expected</param>
-            /// <returns>true if the command can execute with this <paramref name="data"/></returns>
-            public override bool CanExecute(object data)
-            {
-                throw new NotImplementedException();
-            }
-
-            protected override void DoExecute(object data)
-            {
-                throw new NotImplementedException();
-            }
-        }
+        /// <summary>Gets the time (in hours) since the last break of the <see cref="CurrentUser"/>.</summary>
+        public float TimeSinceLastBreak { get; private set; }
 
         #endregion
     }

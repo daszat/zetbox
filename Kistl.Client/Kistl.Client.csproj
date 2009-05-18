@@ -91,6 +91,7 @@
     <Compile Include="Presentables\Relations\RelationEndModel.cs" />
     <Compile Include="Presentables\Relations\RelationModel.cs" />
     <Compile Include="Presentables\SelectionTaskModel.cs" />
+    <Compile Include="Presentables\TimeRecords\WorkEffortRecorderModel.Commands.cs" />
     <Compile Include="Presentables\ValuePropertyModels.cs" />
     <Compile Include="Presentables\WorkspaceModel.cs" />
     <Compile Include="Presentables\TimeRecords\WorkEffortModel.cs" />

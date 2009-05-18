@@ -3,17 +3,47 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:trviews="clr-namespace:Kistl.Client.WPF.View.TimeRecords"
         Title="WorkEffortRecorderView"
-        Height="300"
-        Width="300">
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <ToggleButton IsChecked="{Binding IsCurrentlyWorking}">Working?</ToggleButton>
+        SizeToContent="WidthAndHeight">
+    <DockPanel>
+
+        <DockPanel DockPanel.Dock="Top">
+            <ToggleButton DockPanel.Dock="Left"
+                          IsChecked="{Binding IsCurrentlyPresent}">Present?</ToggleButton>
             <ComboBox ItemsSource="{Binding AvailableUsers}"
                       ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                       SelectedItem="{Binding CurrentUser}" />
+        </DockPanel>
+
+        <TextBox DockPanel.Dock="Top">Presence:</TextBox>
+        <ListBox ItemsSource="{Binding PresenceRecords}"
+                 MinHeight="100"
+                 DockPanel.Dock="Top" />
+        
+        <TextBox DockPanel.Dock="Top">Work Efforts:</TextBox>
+        <ListBox ItemsSource="{Binding Efforts}"
+                 MinHeight="100"
+                 DockPanel.Dock="Top" />
+
+
+        <StackPanel DockPanel.Dock="Bottom"
+                    Orientation="Horizontal">
+            <TextBlock Text="Total time worked today:" />
+            <TextBlock Text="{Binding TotalWorkTimeToday}" />
+            <TextBlock Text="h" />
         </StackPanel>
-        <ListBox ItemsSource="{Binding Efforts}" />
-        <trviews:WorkEffortView DataContext="{Binding CurrentEffort}" />
-        <TextBlock Text="{Binding TotalWorkTimeToday}" />
-    </StackPanel>
+        
+        <StackPanel DockPanel.Dock="Bottom"
+                    Orientation="Horizontal">
+            <TextBlock Text="Total time present today:" />
+            <TextBlock Text="{Binding TotalPresenceTimeToday}" />
+            <TextBlock Text="h" />
+        </StackPanel>
+        
+        <UniformGrid DockPanel.Dock="Bottom">
+            <Button Command="{Binding StartNewWorkEffort, Converter={StaticResource CommandConverter}}">New Work Effort</Button>
+        </UniformGrid>
+        
+        <trviews:WorkEffortView DataContext="{Binding CurrentEffort}"
+                                Margin="10" />
+    </DockPanel>
 </Window>
