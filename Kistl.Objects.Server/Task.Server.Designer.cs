@@ -190,23 +190,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Projekt
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Projekt != null)
-                {
-                    _fk_Projekt = Projekt.ID;
-                }
-                return _fk_Projekt;
-            }
-            set
-            {
-                _fk_Projekt = value;
-            }
-        }
         private int? _fk_Projekt;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Task_Projekt_22", "Projekt")]
@@ -364,7 +347,7 @@ namespace Kistl.App.Projekte
             BinarySerializer.ToStream(this._DatumBis, binStream);
             BinarySerializer.ToStream(this._DatumVon, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
-            BinarySerializer.ToStream(this.fk_Projekt, binStream);
+            BinarySerializer.ToStream(Projekt != null ? Projekt.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -374,11 +357,7 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromStream(out this._DatumBis, binStream);
             BinarySerializer.FromStream(out this._DatumVon, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
-            {
-                var tmp = this.fk_Projekt;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Projekt = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Projekt, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -388,7 +367,7 @@ namespace Kistl.App.Projekte
             XmlStreamer.ToStream(this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Projekt != null ? Projekt.ID : (int?)null, xml, "Projekt", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -398,11 +377,7 @@ namespace Kistl.App.Projekte
             XmlStreamer.FromStream(ref this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
-            {
-                var tmp = this.fk_Projekt;
-                XmlStreamer.FromStream(ref tmp, xml, "Projekt", "http://dasz.at/Kistl");
-                this.fk_Projekt = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
         }
 
 #endregion

@@ -62,23 +62,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ReferenceObjectClass
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && ReferenceObjectClass != null)
-                {
-                    _fk_ReferenceObjectClass = ReferenceObjectClass.ID;
-                }
-                return _fk_ReferenceObjectClass;
-            }
-            set
-            {
-                _fk_ReferenceObjectClass = value;
-            }
-        }
         private int? _fk_ReferenceObjectClass;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27", "ReferenceObjectClass")]
@@ -143,23 +126,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_RelationEnd
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && RelationEnd != null)
-                {
-                    _fk_RelationEnd = RelationEnd.ID;
-                }
-                return _fk_RelationEnd;
-            }
-            set
-            {
-                _fk_RelationEnd = value;
-            }
-        }
         private int? _fk_RelationEnd;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74", "RelationEnd")]
@@ -331,45 +297,29 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_ReferenceObjectClass, binStream);
-            BinarySerializer.ToStream(this.fk_RelationEnd, binStream);
+            BinarySerializer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(RelationEnd != null ? RelationEnd.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_ReferenceObjectClass;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_ReferenceObjectClass = tmp;
-            }
-            {
-                var tmp = this.fk_RelationEnd;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_RelationEnd = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_ReferenceObjectClass, binStream);
+            BinarySerializer.FromStream(out this._fk_RelationEnd, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_ReferenceObjectClass, xml, "ReferenceObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_RelationEnd, xml, "RelationEnd", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ID : (int?)null, xml, "ReferenceObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(RelationEnd != null ? RelationEnd.ID : (int?)null, xml, "RelationEnd", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_ReferenceObjectClass;
-                XmlStreamer.FromStream(ref tmp, xml, "ReferenceObjectClass", "http://dasz.at/Kistl");
-                this.fk_ReferenceObjectClass = tmp;
-            }
-            {
-                var tmp = this.fk_RelationEnd;
-                XmlStreamer.FromStream(ref tmp, xml, "RelationEnd", "http://dasz.at/Kistl");
-                this.fk_RelationEnd = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_ReferenceObjectClass, xml, "ReferenceObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_RelationEnd, xml, "RelationEnd", "http://dasz.at/Kistl");
         }
 
 #endregion

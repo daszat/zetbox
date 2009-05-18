@@ -62,23 +62,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_BaseObjectClass
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && BaseObjectClass != null)
-                {
-                    _fk_BaseObjectClass = BaseObjectClass.ID;
-                }
-                return _fk_BaseObjectClass;
-            }
-            set
-            {
-                _fk_BaseObjectClass = value;
-            }
-        }
         private int? _fk_BaseObjectClass;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_ObjectClass_BaseObjectClass_24", "BaseObjectClass")]
@@ -143,23 +126,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DefaultModel
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && DefaultModel != null)
-                {
-                    _fk_DefaultModel = DefaultModel.ID;
-                }
-                return _fk_DefaultModel;
-            }
-            set
-            {
-                _fk_DefaultModel = value;
-            }
-        }
         private int? _fk_DefaultModel;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_TypeRef_ObjectClass_70", "DefaultModel")]
@@ -224,23 +190,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DefaultPresentableModelDescriptor
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && DefaultPresentableModelDescriptor != null)
-                {
-                    _fk_DefaultPresentableModelDescriptor = DefaultPresentableModelDescriptor.ID;
-                }
-                return _fk_DefaultPresentableModelDescriptor;
-            }
-            set
-            {
-                _fk_DefaultPresentableModelDescriptor = value;
-            }
-        }
         private int? _fk_DefaultPresentableModelDescriptor;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_PresentableModelDescriptor_Presentable_78", "DefaultPresentableModelDescriptor")]
@@ -671,9 +620,9 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_BaseObjectClass, binStream);
-            BinarySerializer.ToStream(this.fk_DefaultModel, binStream);
-            BinarySerializer.ToStream(this.fk_DefaultPresentableModelDescriptor, binStream);
+            BinarySerializer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(DefaultModel != null ? DefaultModel.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
             BinarySerializer.ToStream(this._TableName, binStream);
@@ -682,21 +631,9 @@ namespace Kistl.App.Base
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_BaseObjectClass;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_BaseObjectClass = tmp;
-            }
-            {
-                var tmp = this.fk_DefaultModel;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_DefaultModel = tmp;
-            }
-            {
-                var tmp = this.fk_DefaultPresentableModelDescriptor;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_DefaultPresentableModelDescriptor = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
+            BinarySerializer.FromStream(out this._fk_DefaultModel, binStream);
+            BinarySerializer.FromStream(out this._fk_DefaultPresentableModelDescriptor, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
             BinarySerializer.FromStream(out this._TableName, binStream);
@@ -705,9 +642,9 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_DefaultModel, xml, "DefaultModel", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, xml, "BaseObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(DefaultModel != null ? DefaultModel.ID : (int?)null, xml, "DefaultModel", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
@@ -716,21 +653,9 @@ namespace Kistl.App.Base
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_BaseObjectClass;
-                XmlStreamer.FromStream(ref tmp, xml, "BaseObjectClass", "http://dasz.at/Kistl");
-                this.fk_BaseObjectClass = tmp;
-            }
-            {
-                var tmp = this.fk_DefaultModel;
-                XmlStreamer.FromStream(ref tmp, xml, "DefaultModel", "http://dasz.at/Kistl");
-                this.fk_DefaultModel = tmp;
-            }
-            {
-                var tmp = this.fk_DefaultPresentableModelDescriptor;
-                XmlStreamer.FromStream(ref tmp, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
-                this.fk_DefaultPresentableModelDescriptor = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_DefaultModel, xml, "DefaultModel", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");

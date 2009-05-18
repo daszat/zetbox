@@ -109,23 +109,6 @@ namespace Kistl.App.TimeRecords
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Mitarbeiter
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Mitarbeiter != null)
-                {
-                    _fk_Mitarbeiter = Mitarbeiter.ID;
-                }
-                return _fk_Mitarbeiter;
-            }
-            set
-            {
-                _fk_Mitarbeiter = value;
-            }
-        }
         private int? _fk_Mitarbeiter;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_WorkEffort_Mitarbeiter_WorkEffort_82", "Mitarbeiter")]
@@ -361,7 +344,7 @@ namespace Kistl.App.TimeRecords
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._From, binStream);
-            BinarySerializer.ToStream(this.fk_Mitarbeiter, binStream);
+            BinarySerializer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._Notes, binStream);
             BinarySerializer.ToStream(this._Thru, binStream);
@@ -371,11 +354,7 @@ namespace Kistl.App.TimeRecords
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._From, binStream);
-            {
-                var tmp = this.fk_Mitarbeiter;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Mitarbeiter = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._Notes, binStream);
             BinarySerializer.FromStream(out this._Thru, binStream);
@@ -385,7 +364,7 @@ namespace Kistl.App.TimeRecords
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this._From, xml, "From", "Kistl.App.TimeRecords");
-            XmlStreamer.ToStream(this.fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, xml, "Mitarbeiter", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.TimeRecords");
             XmlStreamer.ToStream(this._Notes, xml, "Notes", "Kistl.App.TimeRecords");
             XmlStreamer.ToStream(this._Thru, xml, "Thru", "Kistl.App.TimeRecords");
@@ -395,11 +374,7 @@ namespace Kistl.App.TimeRecords
         {
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._From, xml, "From", "Kistl.App.TimeRecords");
-            {
-                var tmp = this.fk_Mitarbeiter;
-                XmlStreamer.FromStream(ref tmp, xml, "Mitarbeiter", "http://dasz.at/Kistl");
-                this.fk_Mitarbeiter = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.TimeRecords");
             XmlStreamer.FromStream(ref this._Notes, xml, "Notes", "Kistl.App.TimeRecords");
             XmlStreamer.FromStream(ref this._Thru, xml, "Thru", "Kistl.App.TimeRecords");

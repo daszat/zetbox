@@ -62,23 +62,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Assembly
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Assembly != null)
-                {
-                    _fk_Assembly = Assembly.ID;
-                }
-                return _fk_Assembly;
-            }
-            set
-            {
-                _fk_Assembly = value;
-            }
-        }
         private int? _fk_Assembly;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_CLRObjectParameter_Assembly_CLRObjectParameter_46", "Assembly")]
@@ -273,36 +256,28 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_Assembly, binStream);
+            BinarySerializer.ToStream(Assembly != null ? Assembly.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._FullTypeName, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_Assembly;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Assembly = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Assembly, binStream);
             BinarySerializer.FromStream(out this._FullTypeName, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Assembly != null ? Assembly.ID : (int?)null, xml, "Assembly", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_Assembly;
-                XmlStreamer.FromStream(ref tmp, xml, "Assembly", "http://dasz.at/Kistl");
-                this.fk_Assembly = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
         }
 

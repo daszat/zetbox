@@ -136,23 +136,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Module
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Module != null)
-                {
-                    _fk_Module = Module.ID;
-                }
-                return _fk_Module;
-            }
-            set
-            {
-                _fk_Module = value;
-            }
-        }
         private int? _fk_Module;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Module_Assembly_Module_36", "Module")]
@@ -309,7 +292,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._AssemblyName, binStream);
             BinarySerializer.ToStream(this._IsClientAssembly, binStream);
-            BinarySerializer.ToStream(this.fk_Module, binStream);
+            BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -317,11 +300,7 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._AssemblyName, binStream);
             BinarySerializer.FromStream(out this._IsClientAssembly, binStream);
-            {
-                var tmp = this.fk_Module;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Module = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -329,7 +308,7 @@ namespace Kistl.App.Base
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsClientAssembly, xml, "IsClientAssembly", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.fk_Module, xml, "Module", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -337,11 +316,7 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsClientAssembly, xml, "IsClientAssembly", "Kistl.App.Base");
-            {
-                var tmp = this.fk_Module;
-                XmlStreamer.FromStream(ref tmp, xml, "Module", "http://dasz.at/Kistl");
-                this.fk_Module = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
 #endregion

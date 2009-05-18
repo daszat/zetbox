@@ -109,23 +109,6 @@ namespace Kistl.App.Test
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ObjectProp
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && ObjectProp != null)
-                {
-                    _fk_ObjectProp = ObjectProp.ID;
-                }
-                return _fk_ObjectProp;
-            }
-            set
-            {
-                _fk_ObjectProp = value;
-            }
-        }
         private int? _fk_ObjectProp;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TestObjClass_Kunde_TestObjClass_50", "ObjectProp")]
@@ -361,7 +344,7 @@ namespace Kistl.App.Test
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._MyIntProperty, binStream);
-            BinarySerializer.ToStream(this.fk_ObjectProp, binStream);
+            BinarySerializer.ToStream(ObjectProp != null ? ObjectProp.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._StringProp, binStream);
             BinarySerializer.ToStream((int)((TestObjClass)this).TestEnumProp, binStream);
         }
@@ -370,11 +353,7 @@ namespace Kistl.App.Test
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._MyIntProperty, binStream);
-            {
-                var tmp = this.fk_ObjectProp;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_ObjectProp = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
             BinarySerializer.FromStream(out this._StringProp, binStream);
             BinarySerializer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
         }
@@ -383,7 +362,7 @@ namespace Kistl.App.Test
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(ObjectProp != null ? ObjectProp.ID : (int?)null, xml, "ObjectProp", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "Kistl.App.Test");
             // TODO: Add XML Serializer here
         }
@@ -392,11 +371,7 @@ namespace Kistl.App.Test
         {
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
-            {
-                var tmp = this.fk_ObjectProp;
-                XmlStreamer.FromStream(ref tmp, xml, "ObjectProp", "http://dasz.at/Kistl");
-                this.fk_ObjectProp = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._StringProp, xml, "StringProp", "Kistl.App.Test");
             // TODO: Add XML Serializer here
         }

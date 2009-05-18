@@ -39,11 +39,10 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         {
 #line 21 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 string efName = name + Kistl.API.Helper.ImplementationSuffix;
-	string fkName = "fk_" + name;
 	string fkBackingName = "_fk_" + name;
 
 
-#line 26 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 25 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
@@ -62,28 +61,11 @@ this.WriteObjects("                ",  efName , " = (",  referencedImplementatio
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-this.WriteObjects("        // provide a way to directly access the foreign key int\r\n");
-this.WriteObjects("        public int? ",  fkName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) \r\n");
-this.WriteObjects("                    && ",  name , " != null)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  fkBackingName , " = ",  name , ".ID;\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("                return ",  fkBackingName , ";\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("            set\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                ",  fkBackingName , " = value;\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
 this.WriteObjects("        private int? ",  fkBackingName , ";\r\n");
-#line 63 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
-AddSerialization(serializationList, fkName);
+#line 45 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+AddSerialization(serializationList, name);
 
-#line 65 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 47 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // EF sees only this property\r\n");
 this.WriteObjects("        [EdmRelationshipNavigationProperty(\"Model\", \"",  associationName , "\", \"",  targetRoleName , "\")]\r\n");
 this.WriteObjects("        public ",  referencedImplementation , " ",  efName , "\r\n");
@@ -117,7 +99,7 @@ this.WriteObjects("                r.Value = (",  referencedImplementation , ")v
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-#line 99 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 81 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 string posStorageName = name + Kistl.API.Helper.PositionSuffix;
 
 	if (hasPositionStorage)
@@ -127,7 +109,7 @@ string posStorageName = name + Kistl.API.Helper.PositionSuffix;
 			"int?", posStorageName, "http://dasz.at/Kistl");
 	}
 
-#line 108 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 90 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        \r\n");
 
         }

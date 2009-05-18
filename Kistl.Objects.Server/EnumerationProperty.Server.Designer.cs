@@ -62,23 +62,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Enumeration
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Enumeration != null)
-                {
-                    _fk_Enumeration = Enumeration.ID;
-                }
-                return _fk_Enumeration;
-            }
-            set
-            {
-                _fk_Enumeration = value;
-            }
-        }
         private int? _fk_Enumeration;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_EnumerationProperty_Enumeration_EnumerationProperty_48", "Enumeration")]
@@ -236,33 +219,25 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_Enumeration, binStream);
+            BinarySerializer.ToStream(Enumeration != null ? Enumeration.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_Enumeration;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Enumeration = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Enumeration, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_Enumeration, xml, "Enumeration", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Enumeration != null ? Enumeration.ID : (int?)null, xml, "Enumeration", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_Enumeration;
-                XmlStreamer.FromStream(ref tmp, xml, "Enumeration", "http://dasz.at/Kistl");
-                this.fk_Enumeration = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Enumeration, xml, "Enumeration", "http://dasz.at/Kistl");
         }
 
 #endregion

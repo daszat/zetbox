@@ -82,23 +82,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DisplayedTypeAssembly
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && DisplayedTypeAssembly != null)
-                {
-                    _fk_DisplayedTypeAssembly = DisplayedTypeAssembly.ID;
-                }
-                return _fk_DisplayedTypeAssembly;
-            }
-            set
-            {
-                _fk_DisplayedTypeAssembly = value;
-            }
-        }
         private int? _fk_DisplayedTypeAssembly;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_Assembly_Template_59", "DisplayedTypeAssembly")]
@@ -264,23 +247,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_VisualTree
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && VisualTree != null)
-                {
-                    _fk_VisualTree = VisualTree.ID;
-                }
-                return _fk_VisualTree;
-            }
-            set
-            {
-                _fk_VisualTree = value;
-            }
-        }
         private int? _fk_VisualTree;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_58", "VisualTree")]
@@ -458,53 +424,37 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_DisplayedTypeAssembly, binStream);
+            BinarySerializer.ToStream(DisplayedTypeAssembly != null ? DisplayedTypeAssembly.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._DisplayedTypeFullName, binStream);
             BinarySerializer.ToStream(this._DisplayName, binStream);
-            BinarySerializer.ToStream(this.fk_VisualTree, binStream);
+            BinarySerializer.ToStream(VisualTree != null ? VisualTree.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_DisplayedTypeAssembly;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_DisplayedTypeAssembly = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_DisplayedTypeAssembly, binStream);
             BinarySerializer.FromStream(out this._DisplayedTypeFullName, binStream);
             BinarySerializer.FromStream(out this._DisplayName, binStream);
-            {
-                var tmp = this.fk_VisualTree;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_VisualTree = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_VisualTree, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(DisplayedTypeAssembly != null ? DisplayedTypeAssembly.ID : (int?)null, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._DisplayName, xml, "DisplayName", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.fk_VisualTree, xml, "VisualTree", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(VisualTree != null ? VisualTree.ID : (int?)null, xml, "VisualTree", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_DisplayedTypeAssembly;
-                XmlStreamer.FromStream(ref tmp, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
-                this.fk_DisplayedTypeAssembly = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._DisplayName, xml, "DisplayName", "Kistl.App.GUI");
-            {
-                var tmp = this.fk_VisualTree;
-                XmlStreamer.FromStream(ref tmp, xml, "VisualTree", "http://dasz.at/Kistl");
-                this.fk_VisualTree = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_VisualTree, xml, "VisualTree", "http://dasz.at/Kistl");
         }
 
 #endregion

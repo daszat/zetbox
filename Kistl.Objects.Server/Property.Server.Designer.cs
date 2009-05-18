@@ -291,23 +291,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Module
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Module != null)
-                {
-                    _fk_Module = Module.ID;
-                }
-                return _fk_Module;
-            }
-            set
-            {
-                _fk_Module = value;
-            }
-        }
         private int? _fk_Module;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Property_Module_BaseProperty_37", "Module")]
@@ -372,23 +355,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ObjectClass
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && ObjectClass != null)
-                {
-                    _fk_ObjectClass = ObjectClass.ID;
-                }
-                return _fk_ObjectClass;
-            }
-            set
-            {
-                _fk_ObjectClass = value;
-            }
-        }
         private int? _fk_ObjectClass;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_DataType_Property_ObjectClass_19", "ObjectClass")]
@@ -480,23 +446,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ValueModelDescriptor
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && ValueModelDescriptor != null)
-                {
-                    _fk_ValueModelDescriptor = ValueModelDescriptor.ID;
-                }
-                return _fk_ValueModelDescriptor;
-            }
-            set
-            {
-                _fk_ValueModelDescriptor = value;
-            }
-        }
         private int? _fk_ValueModelDescriptor;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Property_PresentableModelDescriptor_Property_80", "ValueModelDescriptor")]
@@ -767,10 +716,10 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._IsIndexed, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
             BinarySerializer.ToStream(this._IsNullable, binStream);
-            BinarySerializer.ToStream(this.fk_Module, binStream);
-            BinarySerializer.ToStream(this.fk_ObjectClass, binStream);
+            BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._PropertyName, binStream);
-            BinarySerializer.ToStream(this.fk_ValueModelDescriptor, binStream);
+            BinarySerializer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -782,22 +731,10 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._IsIndexed, binStream);
             BinarySerializer.FromStream(out this._IsList, binStream);
             BinarySerializer.FromStream(out this._IsNullable, binStream);
-            {
-                var tmp = this.fk_Module;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Module = tmp;
-            }
-            {
-                var tmp = this.fk_ObjectClass;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_ObjectClass = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
+            BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
             BinarySerializer.FromStream(out this._PropertyName, binStream);
-            {
-                var tmp = this.fk_ValueModelDescriptor;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_ValueModelDescriptor = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_ValueModelDescriptor, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -809,10 +746,10 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsNullable, xml, "IsNullable", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.fk_Module, xml, "Module", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_ObjectClass, xml, "ObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, xml, "ObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.fk_ValueModelDescriptor, xml, "ValueModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null, xml, "ValueModelDescriptor", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -824,22 +761,10 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsNullable, xml, "IsNullable", "Kistl.App.Base");
-            {
-                var tmp = this.fk_Module;
-                XmlStreamer.FromStream(ref tmp, xml, "Module", "http://dasz.at/Kistl");
-                this.fk_Module = tmp;
-            }
-            {
-                var tmp = this.fk_ObjectClass;
-                XmlStreamer.FromStream(ref tmp, xml, "ObjectClass", "http://dasz.at/Kistl");
-                this.fk_ObjectClass = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_ObjectClass, xml, "ObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
-            {
-                var tmp = this.fk_ValueModelDescriptor;
-                XmlStreamer.FromStream(ref tmp, xml, "ValueModelDescriptor", "http://dasz.at/Kistl");
-                this.fk_ValueModelDescriptor = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_ValueModelDescriptor, xml, "ValueModelDescriptor", "http://dasz.at/Kistl");
         }
 
 #endregion

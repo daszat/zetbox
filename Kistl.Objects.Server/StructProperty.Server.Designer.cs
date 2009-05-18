@@ -62,23 +62,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_StructDefinition
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && StructDefinition != null)
-                {
-                    _fk_StructDefinition = StructDefinition.ID;
-                }
-                return _fk_StructDefinition;
-            }
-            set
-            {
-                _fk_StructDefinition = value;
-            }
-        }
         private int? _fk_StructDefinition;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_StructProperty_Struct_StructProperty_52", "StructDefinition")]
@@ -236,33 +219,25 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_StructDefinition, binStream);
+            BinarySerializer.ToStream(StructDefinition != null ? StructDefinition.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_StructDefinition;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_StructDefinition = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_StructDefinition, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_StructDefinition, xml, "StructDefinition", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(StructDefinition != null ? StructDefinition.ID : (int?)null, xml, "StructDefinition", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_StructDefinition;
-                XmlStreamer.FromStream(ref tmp, xml, "StructDefinition", "http://dasz.at/Kistl");
-                this.fk_StructDefinition = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_StructDefinition, xml, "StructDefinition", "http://dasz.at/Kistl");
         }
 
 #endregion

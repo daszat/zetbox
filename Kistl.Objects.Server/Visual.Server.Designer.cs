@@ -246,23 +246,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Method
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Method != null)
-                {
-                    _fk_Method = Method.ID;
-                }
-                return _fk_Method;
-            }
-            set
-            {
-                _fk_Method = value;
-            }
-        }
         private int? _fk_Method;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Method_Visual_57", "Method")]
@@ -327,23 +310,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Property
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Property != null)
-                {
-                    _fk_Property = Property.ID;
-                }
-                return _fk_Property;
-            }
-            set
-            {
-                _fk_Property = value;
-            }
-        }
         private int? _fk_Property;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Property_Visual_56", "Property")]
@@ -511,8 +477,8 @@ namespace Kistl.App.GUI
             base.ToStream(binStream);
             BinarySerializer.ToStream((int)((Visual)this).ControlType, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this.fk_Method, binStream);
-            BinarySerializer.ToStream(this.fk_Property, binStream);
+            BinarySerializer.ToStream(Method != null ? Method.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(Property != null ? Property.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -520,16 +486,8 @@ namespace Kistl.App.GUI
             base.FromStream(binStream);
             BinarySerializer.FromStreamConverter(v => ((Visual)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
-            {
-                var tmp = this.fk_Method;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Method = tmp;
-            }
-            {
-                var tmp = this.fk_Property;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Property = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Method, binStream);
+            BinarySerializer.FromStream(out this._fk_Property, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -537,8 +495,8 @@ namespace Kistl.App.GUI
             base.ToStream(xml, modules);
             // TODO: Add XML Serializer here
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.fk_Method, xml, "Method", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Property, xml, "Property", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Method != null ? Method.ID : (int?)null, xml, "Method", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Property != null ? Property.ID : (int?)null, xml, "Property", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -546,16 +504,8 @@ namespace Kistl.App.GUI
             base.FromStream(xml);
             // TODO: Add XML Serializer here
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
-            {
-                var tmp = this.fk_Method;
-                XmlStreamer.FromStream(ref tmp, xml, "Method", "http://dasz.at/Kistl");
-                this.fk_Method = tmp;
-            }
-            {
-                var tmp = this.fk_Property;
-                XmlStreamer.FromStream(ref tmp, xml, "Property", "http://dasz.at/Kistl");
-                this.fk_Property = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Property, xml, "Property", "http://dasz.at/Kistl");
         }
 
 #endregion

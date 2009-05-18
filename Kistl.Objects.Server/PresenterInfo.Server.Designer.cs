@@ -125,23 +125,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DataAssembly
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && DataAssembly != null)
-                {
-                    _fk_DataAssembly = DataAssembly.ID;
-                }
-                return _fk_DataAssembly;
-            }
-            set
-            {
-                _fk_DataAssembly = value;
-            }
-        }
         private int? _fk_DataAssembly;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_Assembly_PresenterInfo_54", "DataAssembly")]
@@ -233,23 +216,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_PresenterAssembly
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && PresenterAssembly != null)
-                {
-                    _fk_PresenterAssembly = PresenterAssembly.ID;
-                }
-                return _fk_PresenterAssembly;
-            }
-            set
-            {
-                _fk_PresenterAssembly = value;
-            }
-        }
         private int? _fk_PresenterAssembly;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_Assembly_PresenterInfo_53", "PresenterAssembly")]
@@ -435,9 +401,9 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream((int)((PresenterInfo)this).ControlType, binStream);
-            BinarySerializer.ToStream(this.fk_DataAssembly, binStream);
+            BinarySerializer.ToStream(DataAssembly != null ? DataAssembly.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._DataTypeName, binStream);
-            BinarySerializer.ToStream(this.fk_PresenterAssembly, binStream);
+            BinarySerializer.ToStream(PresenterAssembly != null ? PresenterAssembly.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._PresenterTypeName, binStream);
         }
 
@@ -445,17 +411,9 @@ namespace Kistl.App.GUI
         {
             base.FromStream(binStream);
             BinarySerializer.FromStreamConverter(v => ((PresenterInfo)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
-            {
-                var tmp = this.fk_DataAssembly;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_DataAssembly = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_DataAssembly, binStream);
             BinarySerializer.FromStream(out this._DataTypeName, binStream);
-            {
-                var tmp = this.fk_PresenterAssembly;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_PresenterAssembly = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_PresenterAssembly, binStream);
             BinarySerializer.FromStream(out this._PresenterTypeName, binStream);
         }
 
@@ -463,9 +421,9 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml, modules);
             // TODO: Add XML Serializer here
-            XmlStreamer.ToStream(this.fk_DataAssembly, xml, "DataAssembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(DataAssembly != null ? DataAssembly.ID : (int?)null, xml, "DataAssembly", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._DataTypeName, xml, "DataTypeName", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.fk_PresenterAssembly, xml, "PresenterAssembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(PresenterAssembly != null ? PresenterAssembly.ID : (int?)null, xml, "PresenterAssembly", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._PresenterTypeName, xml, "PresenterTypeName", "Kistl.App.GUI");
         }
 
@@ -473,17 +431,9 @@ namespace Kistl.App.GUI
         {
             base.FromStream(xml);
             // TODO: Add XML Serializer here
-            {
-                var tmp = this.fk_DataAssembly;
-                XmlStreamer.FromStream(ref tmp, xml, "DataAssembly", "http://dasz.at/Kistl");
-                this.fk_DataAssembly = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_DataAssembly, xml, "DataAssembly", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._DataTypeName, xml, "DataTypeName", "Kistl.App.GUI");
-            {
-                var tmp = this.fk_PresenterAssembly;
-                XmlStreamer.FromStream(ref tmp, xml, "PresenterAssembly", "http://dasz.at/Kistl");
-                this.fk_PresenterAssembly = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_PresenterAssembly, xml, "PresenterAssembly", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._PresenterTypeName, xml, "PresenterTypeName", "Kistl.App.GUI");
         }
 

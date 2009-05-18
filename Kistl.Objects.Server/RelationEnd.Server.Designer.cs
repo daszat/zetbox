@@ -82,23 +82,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_AParent
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && AParent != null)
-                {
-                    _fk_AParent = AParent.ID;
-                }
-                return _fk_AParent;
-            }
-            set
-            {
-                _fk_AParent = value;
-            }
-        }
         private int? _fk_AParent;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_71", "Relation")]
@@ -163,23 +146,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_BParent
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && BParent != null)
-                {
-                    _fk_BParent = BParent.ID;
-                }
-                return _fk_BParent;
-            }
-            set
-            {
-                _fk_BParent = value;
-            }
-        }
         private int? _fk_BParent;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_72", "Relation")]
@@ -314,23 +280,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Navigator
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Navigator != null)
-                {
-                    _fk_Navigator = Navigator.ID;
-                }
-                return _fk_Navigator;
-            }
-            set
-            {
-                _fk_Navigator = value;
-            }
-        }
         private int? _fk_Navigator;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74", "Navigator")]
@@ -449,23 +398,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Type
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Type != null)
-                {
-                    _fk_Type = Type.ID;
-                }
-                return _fk_Type;
-            }
-            set
-            {
-                _fk_Type = value;
-            }
-        }
         private int? _fk_Type;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_ObjectClass_RelationEnd_73", "Type")]
@@ -661,85 +593,53 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_AParent, binStream);
-            BinarySerializer.ToStream(this.fk_BParent, binStream);
+            BinarySerializer.ToStream(AParent != null ? AParent.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(BParent != null ? BParent.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
             BinarySerializer.ToStream((int)((RelationEnd)this).Multiplicity, binStream);
-            BinarySerializer.ToStream(this.fk_Navigator, binStream);
+            BinarySerializer.ToStream(Navigator != null ? Navigator.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Role, binStream);
             BinarySerializer.ToStream(this._RoleName, binStream);
-            BinarySerializer.ToStream(this.fk_Type, binStream);
+            BinarySerializer.ToStream(Type != null ? Type.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_AParent;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_AParent = tmp;
-            }
-            {
-                var tmp = this.fk_BParent;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_BParent = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_AParent, binStream);
+            BinarySerializer.FromStream(out this._fk_BParent, binStream);
             BinarySerializer.FromStream(out this._HasPersistentOrder, binStream);
             BinarySerializer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, binStream);
-            {
-                var tmp = this.fk_Navigator;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Navigator = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Navigator, binStream);
             BinarySerializer.FromStream(out this._Role, binStream);
             BinarySerializer.FromStream(out this._RoleName, binStream);
-            {
-                var tmp = this.fk_Type;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Type = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Type, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_AParent, xml, "AParent", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_BParent, xml, "BParent", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(AParent != null ? AParent.ID : (int?)null, xml, "AParent", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(BParent != null ? BParent.ID : (int?)null, xml, "BParent", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             // TODO: Add XML Serializer here
-            XmlStreamer.ToStream(this.fk_Navigator, xml, "Navigator", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Navigator != null ? Navigator.ID : (int?)null, xml, "Navigator", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Role, xml, "Role", "Kistl.App.Base");
             XmlStreamer.ToStream(this._RoleName, xml, "RoleName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.fk_Type, xml, "Type", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Type != null ? Type.ID : (int?)null, xml, "Type", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_AParent;
-                XmlStreamer.FromStream(ref tmp, xml, "AParent", "http://dasz.at/Kistl");
-                this.fk_AParent = tmp;
-            }
-            {
-                var tmp = this.fk_BParent;
-                XmlStreamer.FromStream(ref tmp, xml, "BParent", "http://dasz.at/Kistl");
-                this.fk_BParent = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_AParent, xml, "AParent", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_BParent, xml, "BParent", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             // TODO: Add XML Serializer here
-            {
-                var tmp = this.fk_Navigator;
-                XmlStreamer.FromStream(ref tmp, xml, "Navigator", "http://dasz.at/Kistl");
-                this.fk_Navigator = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Navigator, xml, "Navigator", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Role, xml, "Role", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._RoleName, xml, "RoleName", "Kistl.App.Base");
-            {
-                var tmp = this.fk_Type;
-                XmlStreamer.FromStream(ref tmp, xml, "Type", "http://dasz.at/Kistl");
-                this.fk_Type = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "http://dasz.at/Kistl");
         }
 
 #endregion

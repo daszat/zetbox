@@ -109,23 +109,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Enumeration
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Enumeration != null)
-                {
-                    _fk_Enumeration = Enumeration.ID;
-                }
-                return _fk_Enumeration;
-            }
-            set
-            {
-                _fk_Enumeration = value;
-            }
-        }
         private int? _fk_Enumeration;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Enumeration_EnumerationEntry_Enumeration_47", "Enumeration")]
@@ -324,7 +307,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this.fk_Enumeration, binStream);
+            BinarySerializer.ToStream(Enumeration != null ? Enumeration.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._Value, binStream);
         }
@@ -333,11 +316,7 @@ namespace Kistl.App.Base
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
-            {
-                var tmp = this.fk_Enumeration;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Enumeration = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Enumeration, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._Value, binStream);
         }
@@ -346,7 +325,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.fk_Enumeration, xml, "Enumeration", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Enumeration != null ? Enumeration.ID : (int?)null, xml, "Enumeration", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Value, xml, "Value", "Kistl.App.Base");
         }
@@ -355,11 +334,7 @@ namespace Kistl.App.Base
         {
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            {
-                var tmp = this.fk_Enumeration;
-                XmlStreamer.FromStream(ref tmp, xml, "Enumeration", "http://dasz.at/Kistl");
-                this.fk_Enumeration = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Enumeration, xml, "Enumeration", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Value, xml, "Value", "Kistl.App.Base");
         }

@@ -19,7 +19,6 @@
 <%
 
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
-	string fkName = "fk_" + name;
 	string fkBackingName = "_fk_" + name;
 
 %>
@@ -41,26 +40,9 @@
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? <%= fkName %>
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && <%= name %> != null)
-                {
-                    <%= fkBackingName %> = <%= name %>.ID;
-                }
-                return <%= fkBackingName %>;
-            }
-            set
-            {
-                <%= fkBackingName %> = value;
-            }
-        }
         private int? <%= fkBackingName %>;
 <%
-        AddSerialization(serializationList, fkName);
+        AddSerialization(serializationList, name);
 %>
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "<%= associationName %>", "<%= targetRoleName %>")]

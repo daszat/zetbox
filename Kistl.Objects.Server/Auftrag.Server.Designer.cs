@@ -136,23 +136,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Kunde
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Kunde != null)
-                {
-                    _fk_Kunde = Kunde.ID;
-                }
-                return _fk_Kunde;
-            }
-            set
-            {
-                _fk_Kunde = value;
-            }
-        }
         private int? _fk_Kunde;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_Kunde_Auftrag_34", "Kunde")]
@@ -217,23 +200,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Mitarbeiter
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Mitarbeiter != null)
-                {
-                    _fk_Mitarbeiter = Mitarbeiter.ID;
-                }
-                return _fk_Mitarbeiter;
-            }
-            set
-            {
-                _fk_Mitarbeiter = value;
-            }
-        }
         private int? _fk_Mitarbeiter;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_Mitarbeiter_Auftrag_29", "Mitarbeiter")]
@@ -298,23 +264,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Projekt
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Projekt != null)
-                {
-                    _fk_Projekt = Projekt.ID;
-                }
-                return _fk_Projekt;
-            }
-            set
-            {
-                _fk_Projekt = value;
-            }
-        }
         private int? _fk_Projekt;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Auftrag_Projekt_30", "Projekt")]
@@ -499,9 +448,9 @@ namespace Kistl.App.Projekte
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Auftragsname, binStream);
             BinarySerializer.ToStream(this._Auftragswert, binStream);
-            BinarySerializer.ToStream(this.fk_Kunde, binStream);
-            BinarySerializer.ToStream(this.fk_Mitarbeiter, binStream);
-            BinarySerializer.ToStream(this.fk_Projekt, binStream);
+            BinarySerializer.ToStream(Kunde != null ? Kunde.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(Projekt != null ? Projekt.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -509,21 +458,9 @@ namespace Kistl.App.Projekte
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Auftragsname, binStream);
             BinarySerializer.FromStream(out this._Auftragswert, binStream);
-            {
-                var tmp = this.fk_Kunde;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Kunde = tmp;
-            }
-            {
-                var tmp = this.fk_Mitarbeiter;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Mitarbeiter = tmp;
-            }
-            {
-                var tmp = this.fk_Projekt;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Projekt = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Kunde, binStream);
+            BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
+            BinarySerializer.FromStream(out this._fk_Projekt, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -531,9 +468,9 @@ namespace Kistl.App.Projekte
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this._Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.fk_Kunde, xml, "Kunde", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Kunde != null ? Kunde.ID : (int?)null, xml, "Kunde", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Projekt != null ? Projekt.ID : (int?)null, xml, "Projekt", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -541,21 +478,9 @@ namespace Kistl.App.Projekte
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
-            {
-                var tmp = this.fk_Kunde;
-                XmlStreamer.FromStream(ref tmp, xml, "Kunde", "http://dasz.at/Kistl");
-                this.fk_Kunde = tmp;
-            }
-            {
-                var tmp = this.fk_Mitarbeiter;
-                XmlStreamer.FromStream(ref tmp, xml, "Mitarbeiter", "http://dasz.at/Kistl");
-                this.fk_Mitarbeiter = tmp;
-            }
-            {
-                var tmp = this.fk_Projekt;
-                XmlStreamer.FromStream(ref tmp, xml, "Projekt", "http://dasz.at/Kistl");
-                this.fk_Projekt = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Kunde, xml, "Kunde", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
         }
 
 #endregion

@@ -62,23 +62,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DataType
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && DataType != null)
-                {
-                    _fk_DataType = DataType.ID;
-                }
-                return _fk_DataType;
-            }
-            set
-            {
-                _fk_DataType = value;
-            }
-        }
         private int? _fk_DataType;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectParameter_DataType_ObjectParameter_45", "DataType")]
@@ -236,33 +219,25 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_DataType, binStream);
+            BinarySerializer.ToStream(DataType != null ? DataType.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_DataType;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_DataType = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_DataType, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_DataType, xml, "DataType", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(DataType != null ? DataType.ID : (int?)null, xml, "DataType", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_DataType;
-                XmlStreamer.FromStream(ref tmp, xml, "DataType", "http://dasz.at/Kistl");
-                this.fk_DataType = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_DataType, xml, "DataType", "http://dasz.at/Kistl");
         }
 
 #endregion

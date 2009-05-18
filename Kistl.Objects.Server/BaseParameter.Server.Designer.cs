@@ -163,23 +163,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Method
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Method != null)
-                {
-                    _fk_Method = Method.ID;
-                }
-                return _fk_Method;
-            }
-            set
-            {
-                _fk_Method = value;
-            }
-        }
         private int? _fk_Method;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Method_BaseParameter_Method_44", "Method")]
@@ -429,7 +412,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
             BinarySerializer.ToStream(this._IsReturnParameter, binStream);
-            BinarySerializer.ToStream(this.fk_Method, binStream);
+            BinarySerializer.ToStream(Method != null ? Method.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Method_pos, binStream);
             BinarySerializer.ToStream(this._ParameterName, binStream);
         }
@@ -440,11 +423,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._IsList, binStream);
             BinarySerializer.FromStream(out this._IsReturnParameter, binStream);
-            {
-                var tmp = this.fk_Method;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Method = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Method, binStream);
             BinarySerializer.FromStream(out this._Method_pos, binStream);
             BinarySerializer.FromStream(out this._ParameterName, binStream);
         }
@@ -455,7 +434,7 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.fk_Method, xml, "Method", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Method != null ? Method.ID : (int?)null, xml, "Method", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Method_pos, xml, "Method_pos", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
         }
@@ -466,11 +445,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
-            {
-                var tmp = this.fk_Method;
-                XmlStreamer.FromStream(ref tmp, xml, "Method", "http://dasz.at/Kistl");
-                this.fk_Method = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Method_pos, xml, "Method_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
         }

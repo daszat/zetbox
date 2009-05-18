@@ -27,7 +27,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         {
             // TODO: XML Namespace
             if (list != null)
-                list.Add("Implementation.ObjectClasses.SimplePropertySerialization", SerializerType.All, "http://dasz.at/Kistl", name, memberName);
+                list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.All, "http://dasz.at/Kistl", name, memberName);
         }
     }
 }

@@ -192,7 +192,7 @@
     </Compile>
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\ListProperty.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\Template.cs" />
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\IdProperty.cs" >
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\IdProperty.cs">
       <DependentUpon>IdProperty.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\GenerationHost.cs" />
@@ -416,7 +416,7 @@
     <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntry.Properties.cs" />
-    <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cs" >
+    <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cs">
       <DependentUpon>ValueCollectionEntryParentReference.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.Designer.cs">
@@ -424,7 +424,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ValueCollectionEntryParentReference.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cs" >
+    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cs">
       <DependentUpon>AttachToContextTemplate.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.Designer.cs">
@@ -442,19 +442,19 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cs" >
+    <Compile Include="Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cs">
       <DependentUpon>Model.csdl.EntityTypeFields.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\EfListWrapper.cs" >
+    <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\EfListWrapper.cs">
       <DependentUpon>EfListWrapper.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cs" >
+    <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cs">
       <DependentUpon>ReloadReferences.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\EntityFramework\Implementation\RelationDebugTemplate.cs" >
+    <Compile Include="Generators\EntityFramework\Implementation\RelationDebugTemplate.cs">
       <DependentUpon>RelationDebugTemplate.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cs" >
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cs">
       <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.Designer.cs">
@@ -462,7 +462,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cs" >
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cs">
       <DependentUpon>GetPropertyErrorTemplate.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.Designer.cs">
@@ -472,6 +472,11 @@
     </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\MethodBody.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\ObjectListProperty.cs" />
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObjectReferencePropertySerialization.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\StructSerialization.Designer.cs">
       <DependentUpon>StructSerialization.cst</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -672,7 +677,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SimplePropertySerialization.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\Tail.cs" >
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\Tail.cs">
       <DependentUpon>Tail.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\Tail.Designer.cs">
@@ -768,6 +773,10 @@
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectReferencePropertySerialization.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst">
       <Generator>Arebis Template Processor</Generator>

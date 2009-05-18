@@ -82,23 +82,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Implementor
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Implementor != null)
-                {
-                    _fk_Implementor = Implementor.ID;
-                }
-                return _fk_Implementor;
-            }
-            set
-            {
-                _fk_Implementor = value;
-            }
-        }
         private int? _fk_Implementor;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_TypeRef_MethodInvocation_67", "Implementor")]
@@ -163,23 +146,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_InvokeOnObjectClass
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && InvokeOnObjectClass != null)
-                {
-                    _fk_InvokeOnObjectClass = InvokeOnObjectClass.ID;
-                }
-                return _fk_InvokeOnObjectClass;
-            }
-            set
-            {
-                _fk_InvokeOnObjectClass = value;
-            }
-        }
         private int? _fk_InvokeOnObjectClass;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_DataType_MethodInvocation_InvokeOnObjectClass_41", "InvokeOnObjectClass")]
@@ -271,23 +237,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Method
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Method != null)
-                {
-                    _fk_Method = Method.ID;
-                }
-                return _fk_Method;
-            }
-            set
-            {
-                _fk_Method = value;
-            }
-        }
         private int? _fk_Method;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Method_MethodInvocation_Method_39", "Method")]
@@ -352,23 +301,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Module
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Module != null)
-                {
-                    _fk_Module = Module.ID;
-                }
-                return _fk_Module;
-            }
-            set
-            {
-                _fk_Module = value;
-            }
-        }
         private int? _fk_Module;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_Module_MethodInvocation_40", "Module")]
@@ -534,73 +466,41 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_Implementor, binStream);
-            BinarySerializer.ToStream(this.fk_InvokeOnObjectClass, binStream);
+            BinarySerializer.ToStream(Implementor != null ? Implementor.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(InvokeOnObjectClass != null ? InvokeOnObjectClass.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._MemberName, binStream);
-            BinarySerializer.ToStream(this.fk_Method, binStream);
-            BinarySerializer.ToStream(this.fk_Module, binStream);
+            BinarySerializer.ToStream(Method != null ? Method.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_Implementor;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Implementor = tmp;
-            }
-            {
-                var tmp = this.fk_InvokeOnObjectClass;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_InvokeOnObjectClass = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Implementor, binStream);
+            BinarySerializer.FromStream(out this._fk_InvokeOnObjectClass, binStream);
             BinarySerializer.FromStream(out this._MemberName, binStream);
-            {
-                var tmp = this.fk_Method;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Method = tmp;
-            }
-            {
-                var tmp = this.fk_Module;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Module = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Method, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_Implementor, xml, "Implementor", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Implementor != null ? Implementor.ID : (int?)null, xml, "Implementor", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(InvokeOnObjectClass != null ? InvokeOnObjectClass.ID : (int?)null, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._MemberName, xml, "MemberName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.fk_Method, xml, "Method", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_Module, xml, "Module", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Method != null ? Method.ID : (int?)null, xml, "Method", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_Implementor;
-                XmlStreamer.FromStream(ref tmp, xml, "Implementor", "http://dasz.at/Kistl");
-                this.fk_Implementor = tmp;
-            }
-            {
-                var tmp = this.fk_InvokeOnObjectClass;
-                XmlStreamer.FromStream(ref tmp, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
-                this.fk_InvokeOnObjectClass = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Implementor, xml, "Implementor", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._MemberName, xml, "MemberName", "Kistl.App.Base");
-            {
-                var tmp = this.fk_Method;
-                XmlStreamer.FromStream(ref tmp, xml, "Method", "http://dasz.at/Kistl");
-                this.fk_Method = tmp;
-            }
-            {
-                var tmp = this.fk_Module;
-                XmlStreamer.FromStream(ref tmp, xml, "Module", "http://dasz.at/Kistl");
-                this.fk_Module = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
 #endregion

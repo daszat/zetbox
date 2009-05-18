@@ -210,23 +210,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Module
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Module != null)
-                {
-                    _fk_Module = Module.ID;
-                }
-                return _fk_Module;
-            }
-            set
-            {
-                _fk_Module = value;
-            }
-        }
         private int? _fk_Module;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Method_Module_Method_38", "Module")]
@@ -291,23 +274,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ObjectClass
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && ObjectClass != null)
-                {
-                    _fk_ObjectClass = ObjectClass.ID;
-                }
-                return _fk_ObjectClass;
-            }
-            set
-            {
-                _fk_ObjectClass = value;
-            }
-        }
         private int? _fk_ObjectClass;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_DataType_Method_ObjectClass_25", "ObjectClass")]
@@ -555,8 +521,8 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._IsDisplayable, binStream);
             BinarySerializer.ToStream(this._MethodName, binStream);
-            BinarySerializer.ToStream(this.fk_Module, binStream);
-            BinarySerializer.ToStream(this.fk_ObjectClass, binStream);
+            BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -565,16 +531,8 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._IsDisplayable, binStream);
             BinarySerializer.FromStream(out this._MethodName, binStream);
-            {
-                var tmp = this.fk_Module;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Module = tmp;
-            }
-            {
-                var tmp = this.fk_ObjectClass;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_ObjectClass = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
+            BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -583,8 +541,8 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._MethodName, xml, "MethodName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.fk_Module, xml, "Module", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_ObjectClass, xml, "ObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, xml, "ObjectClass", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -593,16 +551,8 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._MethodName, xml, "MethodName", "Kistl.App.Base");
-            {
-                var tmp = this.fk_Module;
-                XmlStreamer.FromStream(ref tmp, xml, "Module", "http://dasz.at/Kistl");
-                this.fk_Module = tmp;
-            }
-            {
-                var tmp = this.fk_ObjectClass;
-                XmlStreamer.FromStream(ref tmp, xml, "ObjectClass", "http://dasz.at/Kistl");
-                this.fk_ObjectClass = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_ObjectClass, xml, "ObjectClass", "http://dasz.at/Kistl");
         }
 
 #endregion

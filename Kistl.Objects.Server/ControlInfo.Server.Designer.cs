@@ -82,23 +82,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Assembly
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Assembly != null)
-                {
-                    _fk_Assembly = Assembly.ID;
-                }
-                return _fk_Assembly;
-            }
-            set
-            {
-                _fk_Assembly = value;
-            }
-        }
         private int? _fk_Assembly;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ControlInfo_Assembly_ControlInfo_51", "Assembly")]
@@ -392,7 +375,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_Assembly, binStream);
+            BinarySerializer.ToStream(Assembly != null ? Assembly.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
             BinarySerializer.ToStream((int)((ControlInfo)this).ControlType, binStream);
             BinarySerializer.ToStream(this._IsContainer, binStream);
@@ -402,11 +385,7 @@ namespace Kistl.App.GUI
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_Assembly;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Assembly = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Assembly, binStream);
             BinarySerializer.FromStream(out this._ClassName, binStream);
             BinarySerializer.FromStreamConverter(v => ((ControlInfo)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._IsContainer, binStream);
@@ -416,7 +395,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Assembly != null ? Assembly.ID : (int?)null, xml, "Assembly", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._ClassName, xml, "ClassName", "Kistl.App.GUI");
             // TODO: Add XML Serializer here
             XmlStreamer.ToStream(this._IsContainer, xml, "IsContainer", "Kistl.App.GUI");
@@ -426,11 +405,7 @@ namespace Kistl.App.GUI
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_Assembly;
-                XmlStreamer.FromStream(ref tmp, xml, "Assembly", "http://dasz.at/Kistl");
-                this.fk_Assembly = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "Kistl.App.GUI");
             // TODO: Add XML Serializer here
             XmlStreamer.FromStream(ref this._IsContainer, xml, "IsContainer", "Kistl.App.GUI");

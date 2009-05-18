@@ -82,23 +82,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ControlRef
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && ControlRef != null)
-                {
-                    _fk_ControlRef = ControlRef.ID;
-                }
-                return _fk_ControlRef;
-            }
-            set
-            {
-                _fk_ControlRef = value;
-            }
-        }
         private int? _fk_ControlRef;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_TypeRef_View_76", "ControlRef")]
@@ -163,23 +146,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_PresentedModelDescriptor
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && PresentedModelDescriptor != null)
-                {
-                    _fk_PresentedModelDescriptor = PresentedModelDescriptor.ID;
-                }
-                return _fk_PresentedModelDescriptor;
-            }
-            set
-            {
-                _fk_PresentedModelDescriptor = value;
-            }
-        }
         private int? _fk_PresentedModelDescriptor;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_PresentableModelDescriptor_View_75", "PresentedModelDescriptor")]
@@ -413,8 +379,8 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_ControlRef, binStream);
-            BinarySerializer.ToStream(this.fk_PresentedModelDescriptor, binStream);
+            BinarySerializer.ToStream(ControlRef != null ? ControlRef.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(PresentedModelDescriptor != null ? PresentedModelDescriptor.ID : (int?)null, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).VisualType, binStream);
         }
@@ -422,16 +388,8 @@ namespace Kistl.App.GUI
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_ControlRef;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_ControlRef = tmp;
-            }
-            {
-                var tmp = this.fk_PresentedModelDescriptor;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_PresentedModelDescriptor = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_ControlRef, binStream);
+            BinarySerializer.FromStream(out this._fk_PresentedModelDescriptor, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, binStream);
         }
@@ -439,8 +397,8 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_ControlRef, xml, "ControlRef", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(ControlRef != null ? ControlRef.ID : (int?)null, xml, "ControlRef", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(PresentedModelDescriptor != null ? PresentedModelDescriptor.ID : (int?)null, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
             // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
         }
@@ -448,16 +406,8 @@ namespace Kistl.App.GUI
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_ControlRef;
-                XmlStreamer.FromStream(ref tmp, xml, "ControlRef", "http://dasz.at/Kistl");
-                this.fk_ControlRef = tmp;
-            }
-            {
-                var tmp = this.fk_PresentedModelDescriptor;
-                XmlStreamer.FromStream(ref tmp, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
-                this.fk_PresentedModelDescriptor = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_ControlRef, xml, "ControlRef", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
             // TODO: Add XML Serializer here
             // TODO: Add XML Serializer here
         }

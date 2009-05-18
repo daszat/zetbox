@@ -82,23 +82,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_A
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && A != null)
-                {
-                    _fk_A = A.ID;
-                }
-                return _fk_A;
-            }
-            set
-            {
-                _fk_A = value;
-            }
-        }
         private int? _fk_A;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_71", "A")]
@@ -163,23 +146,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_B
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && B != null)
-                {
-                    _fk_B = B.ID;
-                }
-                return _fk_B;
-            }
-            set
-            {
-                _fk_B = value;
-            }
-        }
         private int? _fk_B;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_72", "B")]
@@ -397,8 +363,8 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_A, binStream);
-            BinarySerializer.ToStream(this.fk_B, binStream);
+            BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
         }
@@ -406,16 +372,8 @@ namespace Kistl.App.Base
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_A;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_A = tmp;
-            }
-            {
-                var tmp = this.fk_B;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_B = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._fk_B, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
         }
@@ -423,8 +381,8 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this.fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             // TODO: Add XML Serializer here
         }
@@ -432,16 +390,8 @@ namespace Kistl.App.Base
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_A;
-                XmlStreamer.FromStream(ref tmp, xml, "A", "http://dasz.at/Kistl");
-                this.fk_A = tmp;
-            }
-            {
-                var tmp = this.fk_B;
-                XmlStreamer.FromStream(ref tmp, xml, "B", "http://dasz.at/Kistl");
-                this.fk_B = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             // TODO: Add XML Serializer here
         }

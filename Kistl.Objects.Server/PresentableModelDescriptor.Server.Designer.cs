@@ -152,23 +152,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_PresentableModelRef
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && PresentableModelRef != null)
-                {
-                    _fk_PresentableModelRef = PresentableModelRef.ID;
-                }
-                return _fk_PresentableModelRef;
-            }
-            set
-            {
-                _fk_PresentableModelRef = value;
-            }
-        }
         private int? _fk_PresentableModelRef;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_TypeRef_Descriptor_77", "PresentableModelRef")]
@@ -304,7 +287,7 @@ namespace Kistl.App.GUI
             base.ToStream(binStream);
             BinarySerializer.ToStream((int)((PresentableModelDescriptor)this).DefaultVisualType, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this.fk_PresentableModelRef, binStream);
+            BinarySerializer.ToStream(PresentableModelRef != null ? PresentableModelRef.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -312,11 +295,7 @@ namespace Kistl.App.GUI
             base.FromStream(binStream);
             BinarySerializer.FromStreamConverter(v => ((PresentableModelDescriptor)this).DefaultVisualType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
-            {
-                var tmp = this.fk_PresentableModelRef;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_PresentableModelRef = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_PresentableModelRef, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
@@ -324,7 +303,7 @@ namespace Kistl.App.GUI
             base.ToStream(xml, modules);
             // TODO: Add XML Serializer here
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.fk_PresentableModelRef, xml, "PresentableModelRef", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(PresentableModelRef != null ? PresentableModelRef.ID : (int?)null, xml, "PresentableModelRef", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -332,11 +311,7 @@ namespace Kistl.App.GUI
             base.FromStream(xml);
             // TODO: Add XML Serializer here
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
-            {
-                var tmp = this.fk_PresentableModelRef;
-                XmlStreamer.FromStream(ref tmp, xml, "PresentableModelRef", "http://dasz.at/Kistl");
-                this.fk_PresentableModelRef = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_PresentableModelRef, xml, "PresentableModelRef", "http://dasz.at/Kistl");
         }
 
 #endregion

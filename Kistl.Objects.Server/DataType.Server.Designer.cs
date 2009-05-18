@@ -109,23 +109,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DefaultIcon
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && DefaultIcon != null)
-                {
-                    _fk_DefaultIcon = DefaultIcon.ID;
-                }
-                return _fk_DefaultIcon;
-            }
-            set
-            {
-                _fk_DefaultIcon = value;
-            }
-        }
         private int? _fk_DefaultIcon;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_DataType_Icon_DataType_35", "DefaultIcon")]
@@ -338,23 +321,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Module
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && Module != null)
-                {
-                    _fk_Module = Module.ID;
-                }
-                return _fk_Module;
-            }
-            set
-            {
-                _fk_Module = value;
-            }
-        }
         private int? _fk_Module;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Module_DataType_Module_26", "Module")]
@@ -631,56 +597,40 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
-            BinarySerializer.ToStream(this.fk_DefaultIcon, binStream);
+            BinarySerializer.ToStream(DefaultIcon != null ? DefaultIcon.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
-            BinarySerializer.ToStream(this.fk_Module, binStream);
+            BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._ClassName, binStream);
-            {
-                var tmp = this.fk_DefaultIcon;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_DefaultIcon = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_DefaultIcon, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._ExportGuid, binStream);
-            {
-                var tmp = this.fk_Module;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_Module = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this._ClassName, xml, "ClassName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.fk_DefaultIcon, xml, "DefaultIcon", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(DefaultIcon != null ? DefaultIcon.ID : (int?)null, xml, "DefaultIcon", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.fk_Module, xml, "Module", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "Kistl.App.Base");
-            {
-                var tmp = this.fk_DefaultIcon;
-                XmlStreamer.FromStream(ref tmp, xml, "DefaultIcon", "http://dasz.at/Kistl");
-                this.fk_DefaultIcon = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_DefaultIcon, xml, "DefaultIcon", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            {
-                var tmp = this.fk_Module;
-                XmlStreamer.FromStream(ref tmp, xml, "Module", "http://dasz.at/Kistl");
-                this.fk_Module = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
 #endregion

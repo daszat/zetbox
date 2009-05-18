@@ -82,23 +82,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ConstrainedProperty
-        {
-            get
-            {
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged) 
-                    && ConstrainedProperty != null)
-                {
-                    _fk_ConstrainedProperty = ConstrainedProperty.ID;
-                }
-                return _fk_ConstrainedProperty;
-            }
-            set
-            {
-                _fk_ConstrainedProperty = value;
-            }
-        }
         private int? _fk_ConstrainedProperty;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Property_Constraint_ConstrainedProperty_62", "ConstrainedProperty")]
@@ -293,36 +276,28 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
             base.ToStream(binStream);
-            BinarySerializer.ToStream(this.fk_ConstrainedProperty, binStream);
+            BinarySerializer.ToStream(ConstrainedProperty != null ? ConstrainedProperty.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Reason, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             base.FromStream(binStream);
-            {
-                var tmp = this.fk_ConstrainedProperty;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.fk_ConstrainedProperty = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_ConstrainedProperty, binStream);
             BinarySerializer.FromStream(out this._Reason, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(this.fk_ConstrainedProperty, xml, "ConstrainedProperty", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(ConstrainedProperty != null ? ConstrainedProperty.ID : (int?)null, xml, "ConstrainedProperty", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            {
-                var tmp = this.fk_ConstrainedProperty;
-                XmlStreamer.FromStream(ref tmp, xml, "ConstrainedProperty", "http://dasz.at/Kistl");
-                this.fk_ConstrainedProperty = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_ConstrainedProperty, xml, "ConstrainedProperty", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
