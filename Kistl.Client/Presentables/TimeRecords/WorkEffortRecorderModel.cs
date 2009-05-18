@@ -95,7 +95,6 @@ namespace Kistl.Client.Presentables.TimeRecords
                 if (_isCurrentlyPresent != value && CurrentUser != null)
                 {
                     _isCurrentlyPresent = value;
-                    OnPropertyChanged("IsCurrentlyWorking");
 
                     if (_isCurrentlyPresent == true)
                     {
@@ -115,6 +114,7 @@ namespace Kistl.Client.Presentables.TimeRecords
                         }
                     }
                 }
+                OnPropertyChanged("IsCurrentlyWorking");
             }
         }
 
@@ -133,21 +133,29 @@ namespace Kistl.Client.Presentables.TimeRecords
         {
             get
             {
-                if (_efforts == null)
-                {
-                    _efforts = new ObservableCollection<WorkEffortModel>();
-
-                    // quick hack to update CurrentEffort
-                    // TODO: could be improved to only trigger if CurrentEffort _really_ changes
-                    _efforts.CollectionChanged += (obj, args) =>
-                    {
-                        OnPropertyChanged("CurrentEffort");
-                    };
-
-                    ReloadEfforts();
-                    _readOnlyEfforts = new ReadOnlyObservableCollection<WorkEffortModel>(_efforts);
-                }
+                InitialiseEfforts();
                 return _readOnlyEfforts;
+            }
+        }
+
+        /// <summary>
+        /// Ensure that the backing stores for <see cref="Efforts"/> are initialised.
+        /// </summary>
+        private void InitialiseEfforts()
+        {
+            if (_efforts == null)
+            {
+                _efforts = new ObservableCollection<WorkEffortModel>();
+
+                // quick hack to update CurrentEffort
+                // TODO: could be improved to only trigger if CurrentEffort _really_ changes
+                _efforts.CollectionChanged += (obj, args) =>
+                {
+                    OnPropertyChanged("CurrentEffort");
+                };
+
+                ReloadEfforts();
+                _readOnlyEfforts = new ReadOnlyObservableCollection<WorkEffortModel>(_efforts);
             }
         }
 
@@ -178,7 +186,15 @@ namespace Kistl.Client.Presentables.TimeRecords
             {
                 if (Efforts.Count > 0)
                 {
-                    return Efforts[Efforts.Count - 1];
+                    WorkEffortModel currentEffort = Efforts[Efforts.Count - 1];
+                    if (currentEffort.Thru == null)
+                    {
+                        return currentEffort;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
@@ -260,7 +276,9 @@ namespace Kistl.Client.Presentables.TimeRecords
                     _totalWorkTimeTodayTimerStarted = true;
                     this.Factory.CreateTimer(TimeSpan.FromMilliseconds(300), () => OnPropertyChanged("TotalWorkTimeToday"));
                 }
-                return Efforts.Sum(e => ((e.Thru ?? DateTime.Now) - e.From).TotalHours);
+                return Efforts
+                    .Where(e => e.From.Date == DateTime.Now.Date)
+                    .Sum(e => ((e.Thru ?? DateTime.Now) - e.From).TotalHours);
             }
         }
 
@@ -280,7 +298,9 @@ namespace Kistl.Client.Presentables.TimeRecords
                     _totalPresenceTimeTodayTimerStarted = true;
                     this.Factory.CreateTimer(TimeSpan.FromMilliseconds(300), () => OnPropertyChanged("TotalPresenceTimeToday"));
                 }
-                return PresenceRecords.Sum(e => ((e.Thru ?? DateTime.Now) - e.From).TotalHours);
+                return PresenceRecords
+                    .Where(e => e.From.Date == DateTime.Now.Date)
+                    .Sum(e => ((e.Thru ?? DateTime.Now) - e.From).TotalHours);
             }
         }
 

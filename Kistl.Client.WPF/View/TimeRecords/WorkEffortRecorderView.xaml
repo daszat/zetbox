@@ -38,11 +38,12 @@
             <TextBlock Text="{Binding TotalPresenceTimeToday}" />
             <TextBlock Text="h" />
         </StackPanel>
-        
-        <UniformGrid DockPanel.Dock="Bottom">
+
+        <UniformGrid DockPanel.Dock="Bottom" Columns="2">
             <Button Command="{Binding StartNewWorkEffort, Converter={StaticResource CommandConverter}}">New Work Effort</Button>
+            <Button Command="{Binding FinishWorkEffort, Converter={StaticResource CommandConverter}}">Finish Work Effort</Button>
         </UniformGrid>
-        
+
         <trviews:WorkEffortView DataContext="{Binding CurrentEffort}"
                                 Margin="10" />
     </DockPanel>
