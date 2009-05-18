@@ -16,6 +16,7 @@
 <%@ Parameter Name="referencedInterface" Type="String" %>
 <%@ Parameter Name="referencedImplementation" Type="String" %>
 <%@ Parameter Name="hasPositionStorage" Type="bool" %>
+<%@ Parameter Name="relDataTypeExportable" Type="bool" %>
 <%
 
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;

@@ -231,7 +231,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(DataType != null ? DataType.ID : (int?)null, xml, "DataType", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(DataType != null ? DataType.ExportGuid : (Guid?)null, xml, "DataType", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)

@@ -88,6 +88,17 @@ namespace Kistl.App.Extensions
         {
             return new InterfaceType(cls.GetDataType());
         }
+
+        public static bool ImplementsIExportable(this ObjectClass cls, IKistlContext ctx)
+        {
+            while (cls != null)
+            {
+                if (cls.ImplementsInterfaces.Contains(ctx.GetIExportableInterface()))
+                    return true;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
+        }
     }
 
 }

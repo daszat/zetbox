@@ -311,15 +311,13 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ID : (int?)null, xml, "ReferenceObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(RelationEnd != null ? RelationEnd.ID : (int?)null, xml, "RelationEnd", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ExportGuid : (Guid?)null, xml, "ReferenceObjectClass", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_ReferenceObjectClass, xml, "ReferenceObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_RelationEnd, xml, "RelationEnd", "http://dasz.at/Kistl");
         }
 
 #endregion

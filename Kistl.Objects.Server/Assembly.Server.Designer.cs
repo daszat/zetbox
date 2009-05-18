@@ -308,7 +308,6 @@ namespace Kistl.App.Base
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsClientAssembly, xml, "IsClientAssembly", "Kistl.App.Base");
-            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -316,7 +315,6 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsClientAssembly, xml, "IsClientAssembly", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
 #endregion

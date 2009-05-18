@@ -38,15 +38,17 @@
 	}
 	else if(direction == SerializerDirection.ToXmlStream)
 	{
+			if(!string.IsNullOrEmpty(xmlname)) {
 %>
             XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%	
+<%			}
 	}
 	else if(direction == SerializerDirection.FromXmlStream)
 	{
+			if(!string.IsNullOrEmpty(xmlname)) {
 %>
             XmlStreamer.FromStream(ref this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%	
+<%			}
 	}
 	else
 	{

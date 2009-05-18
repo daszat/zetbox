@@ -138,7 +138,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                     rel.GetAssociationName(), otherEnd.RoleName,
                     otherEnd.Type.GetDataTypeString(),
                     otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
-                    rel.NeedsPositionStorage((RelationEndRole)relEnd.Role)
+                    rel.NeedsPositionStorage((RelationEndRole)relEnd.Role),
+                    otherEnd.Type.ImplementsIExportable(ctx)
                     );
         }
 

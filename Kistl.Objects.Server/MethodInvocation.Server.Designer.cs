@@ -486,21 +486,15 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             base.ToStream(xml, modules);
-            XmlStreamer.ToStream(Implementor != null ? Implementor.ID : (int?)null, xml, "Implementor", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(InvokeOnObjectClass != null ? InvokeOnObjectClass.ID : (int?)null, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(InvokeOnObjectClass != null ? InvokeOnObjectClass.ExportGuid : (Guid?)null, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._MemberName, xml, "MemberName", "Kistl.App.Base");
-            XmlStreamer.ToStream(Method != null ? Method.ID : (int?)null, xml, "Method", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_Implementor, xml, "Implementor", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._MemberName, xml, "MemberName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
 #endregion

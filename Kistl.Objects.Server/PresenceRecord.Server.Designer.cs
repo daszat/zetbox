@@ -286,7 +286,6 @@ namespace Kistl.App.TimeRecords
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this._From, xml, "From", "Kistl.App.TimeRecords");
-            XmlStreamer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, xml, "Mitarbeiter", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Thru, xml, "Thru", "Kistl.App.TimeRecords");
         }
 
@@ -294,7 +293,6 @@ namespace Kistl.App.TimeRecords
         {
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._From, xml, "From", "Kistl.App.TimeRecords");
-            XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Thru, xml, "Thru", "Kistl.App.TimeRecords");
         }
 

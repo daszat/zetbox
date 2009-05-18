@@ -434,7 +434,6 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
-            XmlStreamer.ToStream(Method != null ? Method.ID : (int?)null, xml, "Method", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Method_pos, xml, "Method_pos", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
         }
@@ -445,7 +444,6 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Method_pos, xml, "Method_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
         }

@@ -362,7 +362,6 @@ namespace Kistl.App.Test
         {
             base.ToStream(xml, modules);
             XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
-            XmlStreamer.ToStream(ObjectProp != null ? ObjectProp.ID : (int?)null, xml, "ObjectProp", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "Kistl.App.Test");
             // TODO: Add XML Serializer here
         }
@@ -371,7 +370,6 @@ namespace Kistl.App.Test
         {
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._StringProp, xml, "StringProp", "Kistl.App.Test");
             // TODO: Add XML Serializer here
         }

@@ -47,10 +47,12 @@ namespace Kistl.Server.Packaging
 
                         xml.WriteAttributeString("date", XmlConvert.ToString(DateTime.Now, XmlDateTimeSerializationMode.Utc));
 
+                        var iexpIf = ctx.GetIExportableInterface();
+
                         foreach (var module in moduleList)
                         {
                             Trace.TraceInformation("  exporting {0}", module.ModuleName);
-                            foreach (var objClass in module.DataTypes.OfType<Kistl.App.Base.ObjectClass>()) // TODO: .Where(o => o.Implements("IExportable"))
+                            foreach (var objClass in module.DataTypes.OfType<Kistl.App.Base.ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf))) // TODO: .Where(o => o.Implements("IExportable"))
                             {
                                 Trace.TraceInformation("    {0} ", objClass.ClassName);
                                 foreach (IDataObject obj in ctx.GetQuery(new InterfaceType(objClass.GetDataType())))
@@ -68,6 +70,8 @@ namespace Kistl.Server.Packaging
                             foreach (var rel in ctx.GetQuery<Kistl.App.Base.Relation>().Where(r => r.A.Type.Module.ID == moduleID))
                             {
                                 if (rel.GetRelationType() != RelationType.n_m) continue;
+                                if (!rel.A.Type.ImplementsIExportable(ctx)) continue;
+                                if (!rel.B.Type.ImplementsIExportable(ctx)) continue;
 
                                 string ifTypeName = string.Format("{0}, {1}", rel.GetCollectionEntryFullName(), ApplicationContext.Current.InterfaceAssembly);
                                 Trace.TraceInformation("    {0} ", ifTypeName);

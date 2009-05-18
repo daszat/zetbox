@@ -25,6 +25,7 @@ namespace Kistl.Server.Packaging
                 {
                     if (xml.NodeType != XmlNodeType.Element) continue;
 
+                    // TODO: Change to GUID
                     int id;
                     if (int.TryParse(xml.GetAttribute("ID"), out id))
                     {
