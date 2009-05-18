@@ -49,7 +49,7 @@ foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => 
 			{
 
 #line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("			this.fk_",  prop.PropertyName , " = otherImpl.fk_",  prop.PropertyName , ";\r\n");
+this.WriteObjects("			this._fk_",  prop.PropertyName , " = otherImpl._fk_",  prop.PropertyName , ";\r\n");
 #line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 }
 

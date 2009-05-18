@@ -45,13 +45,12 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string efName = name + Kistl.API.Helper.ImplementationSuffix;
-            string fkName = "fk_" + name;
             string fkBackingName = "_fk_" + name;
 
             bool hasInverseNavigator = otherEnd.Navigator != null;
 
             Call(host, ctx, serializationList,
-                name, efName, fkName, fkBackingName,
+                name, efName, fkBackingName,
                 ownInterface, referencedInterface, 
                 rel, endRole,
                 hasInverseNavigator, rel.NeedsPositionStorage(endRole));
@@ -63,7 +62,6 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Templates.Implementation.SerializationMembersList serializationList,
             string name,
             string efName,
-            string fkName,
             string fkBackingName,
             string ownInterface,
             string referencedInterface,
@@ -73,7 +71,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             bool hasPositionStorage)
         {
             host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx, serializationList,
-                name, efName, fkName, fkBackingName, ownInterface, referencedInterface, rel, endRole, hasInverseNavigator, hasPositionStorage);
+                name, efName, fkBackingName, ownInterface, referencedInterface, rel, endRole, hasInverseNavigator, hasPositionStorage);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)

@@ -316,8 +316,8 @@ namespace Kistl.App.GUI
 
 			me.Toolkit = other.Toolkit;
 			me.VisualType = other.VisualType;
-			this.fk_ControlRef = otherImpl.fk_ControlRef;
-			this.fk_PresentedModelDescriptor = otherImpl.fk_PresentedModelDescriptor;
+			this._fk_ControlRef = otherImpl._fk_ControlRef;
+			this._fk_PresentedModelDescriptor = otherImpl._fk_PresentedModelDescriptor;
 		}
 
         // tail template

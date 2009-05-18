@@ -66,8 +66,8 @@ namespace Kistl.App.TimeRecords
         {
             get
             {
-                if (fk_Mitarbeiter.HasValue)
-                    return Context.Find<Kistl.App.Projekte.Mitarbeiter>(fk_Mitarbeiter.Value);
+                if (_fk_Mitarbeiter.HasValue)
+                    return Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
                 else
                     return null;
             }
@@ -96,25 +96,6 @@ namespace Kistl.App.TimeRecords
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Mitarbeiter
-        {
-            get
-            {
-                return _fk_Mitarbeiter;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Mitarbeiter != value)
-                {
-					var __oldValue = _fk_Mitarbeiter;
-                    NotifyPropertyChanging("Mitarbeiter", __oldValue, value);
-                    _fk_Mitarbeiter = value;
-                    NotifyPropertyChanged("Mitarbeiter", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Mitarbeiter;
 
         /// <summary>
@@ -205,7 +186,7 @@ namespace Kistl.App.TimeRecords
 			me.Name = other.Name;
 			me.Notes = other.Notes;
 			me.Thru = other.Thru;
-			this.fk_Mitarbeiter = otherImpl.fk_Mitarbeiter;
+			this._fk_Mitarbeiter = otherImpl._fk_Mitarbeiter;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -302,7 +283,7 @@ namespace Kistl.App.TimeRecords
 			switch(propertyName)
 			{
                 case "Mitarbeiter":
-                    fk_Mitarbeiter = id;
+                    _fk_Mitarbeiter = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

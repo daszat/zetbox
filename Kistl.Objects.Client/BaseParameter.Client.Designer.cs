@@ -114,8 +114,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_Method.HasValue)
-                    return Context.Find<Kistl.App.Base.Method>(fk_Method.Value);
+                if (_fk_Method.HasValue)
+                    return Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
                 else
                     return null;
             }
@@ -160,25 +160,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Method
-        {
-            get
-            {
-                return _fk_Method;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Method != value)
-                {
-					var __oldValue = _fk_Method;
-                    NotifyPropertyChanging("Method", __oldValue, value);
-                    _fk_Method = value;
-                    NotifyPropertyChanged("Method", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Method;
         public virtual int? Method_pos
         {
@@ -284,7 +265,7 @@ namespace Kistl.App.Base
 			me.IsList = other.IsList;
 			me.IsReturnParameter = other.IsReturnParameter;
 			me.ParameterName = other.ParameterName;
-			this.fk_Method = otherImpl.fk_Method;
+			this._fk_Method = otherImpl._fk_Method;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -381,7 +362,7 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "Method":
-                    fk_Method = id;
+                    _fk_Method = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

@@ -394,8 +394,8 @@ namespace Kistl.App.GUI
 
 			me.ControlType = other.ControlType;
 			me.Description = other.Description;
-			this.fk_Method = otherImpl.fk_Method;
-			this.fk_Property = otherImpl.fk_Property;
+			this._fk_Method = otherImpl._fk_Method;
+			this._fk_Property = otherImpl._fk_Property;
 		}
 
         // tail template

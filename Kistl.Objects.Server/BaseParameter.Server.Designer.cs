@@ -325,7 +325,7 @@ namespace Kistl.App.Base
 			me.IsList = other.IsList;
 			me.IsReturnParameter = other.IsReturnParameter;
 			me.ParameterName = other.ParameterName;
-			this.fk_Method = otherImpl.fk_Method;
+			this._fk_Method = otherImpl._fk_Method;
 		}
 
         // tail template

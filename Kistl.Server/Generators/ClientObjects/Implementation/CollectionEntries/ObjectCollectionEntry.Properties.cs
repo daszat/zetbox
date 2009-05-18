@@ -19,10 +19,10 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string backingName = propertyName + Kistl.API.Helper.ImplementationSuffix;
-            string fkName = "fk_" + propertyName;
+            string fkBackingName = "_fk_" + propertyName;
 
             ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx, MembersToSerialize,
-                propertyName, backingName, fkName, "_" + fkName,
+                propertyName, backingName, fkBackingName,
                 "/* not member of an interface, 'ownInterface' should not be used */", 
                 relEnd.Type.GetDataTypeString(), rel, endRole,
                 false, rel.NeedsPositionStorage(endRole));

@@ -90,8 +90,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_Module.HasValue)
-                    return Context.Find<Kistl.App.Base.Module>(fk_Module.Value);
+                if (_fk_Module.HasValue)
+                    return Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
                 else
                     return null;
             }
@@ -136,25 +136,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Module
-        {
-            get
-            {
-                return _fk_Module;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Module != value)
-                {
-					var __oldValue = _fk_Module;
-                    NotifyPropertyChanging("Module", __oldValue, value);
-                    _fk_Module = value;
-                    NotifyPropertyChanged("Module", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Module;
 
         /// <summary>
@@ -192,7 +173,7 @@ namespace Kistl.App.Base
 
 			me.AssemblyName = other.AssemblyName;
 			me.IsClientAssembly = other.IsClientAssembly;
-			this.fk_Module = otherImpl.fk_Module;
+			this._fk_Module = otherImpl._fk_Module;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -271,7 +252,7 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "Module":
-                    fk_Module = id;
+                    _fk_Module = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

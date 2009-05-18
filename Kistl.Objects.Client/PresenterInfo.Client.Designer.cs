@@ -66,8 +66,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_DataAssembly.HasValue)
-                    return Context.Find<Kistl.App.Base.Assembly>(fk_DataAssembly.Value);
+                if (_fk_DataAssembly.HasValue)
+                    return Context.Find<Kistl.App.Base.Assembly>(_fk_DataAssembly.Value);
                 else
                     return null;
             }
@@ -96,25 +96,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DataAssembly
-        {
-            get
-            {
-                return _fk_DataAssembly;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_DataAssembly != value)
-                {
-					var __oldValue = _fk_DataAssembly;
-                    NotifyPropertyChanging("DataAssembly", __oldValue, value);
-                    _fk_DataAssembly = value;
-                    NotifyPropertyChanged("DataAssembly", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_DataAssembly;
 
         /// <summary>
@@ -152,8 +133,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_PresenterAssembly.HasValue)
-                    return Context.Find<Kistl.App.Base.Assembly>(fk_PresenterAssembly.Value);
+                if (_fk_PresenterAssembly.HasValue)
+                    return Context.Find<Kistl.App.Base.Assembly>(_fk_PresenterAssembly.Value);
                 else
                     return null;
             }
@@ -182,25 +163,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_PresenterAssembly
-        {
-            get
-            {
-                return _fk_PresenterAssembly;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_PresenterAssembly != value)
-                {
-					var __oldValue = _fk_PresenterAssembly;
-                    NotifyPropertyChanging("PresenterAssembly", __oldValue, value);
-                    _fk_PresenterAssembly = value;
-                    NotifyPropertyChanged("PresenterAssembly", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_PresenterAssembly;
 
         /// <summary>
@@ -242,8 +204,8 @@ namespace Kistl.App.GUI
 			me.ControlType = other.ControlType;
 			me.DataTypeName = other.DataTypeName;
 			me.PresenterTypeName = other.PresenterTypeName;
-			this.fk_DataAssembly = otherImpl.fk_DataAssembly;
-			this.fk_PresenterAssembly = otherImpl.fk_PresenterAssembly;
+			this._fk_DataAssembly = otherImpl._fk_DataAssembly;
+			this._fk_PresenterAssembly = otherImpl._fk_PresenterAssembly;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -340,10 +302,10 @@ namespace Kistl.App.GUI
 			switch(propertyName)
 			{
                 case "DataAssembly":
-                    fk_DataAssembly = id;
+                    _fk_DataAssembly = id;
                     break;
                 case "PresenterAssembly":
-                    fk_PresenterAssembly = id;
+                    _fk_PresenterAssembly = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

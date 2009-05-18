@@ -197,7 +197,7 @@ namespace Kistl.App.Base
 			var me = (CLRObjectParameter)this;
 
 			me.FullTypeName = other.FullTypeName;
-			this.fk_Assembly = otherImpl.fk_Assembly;
+			this._fk_Assembly = otherImpl._fk_Assembly;
 		}
 
         // tail template

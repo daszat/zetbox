@@ -18,18 +18,39 @@ namespace Kistl.API.Client.Tests
             private static int MaxId = Helper.INVALIDID;
 
 
-            public TestObject Parent { get; set; }
-            public int? fk_Parent
+            public TestObject Parent 
             {
-                get { return Parent == null ? (int?)null : Parent.ID; }
-                private set
+                get
                 {
-                    if (value.HasValue)
-                        Parent = TestObject.Instances[value.Value];
+                    if (_fk_Parent.HasValue)
+                        return TestObject.Instances[_fk_Parent.Value];
                     else
-                        Parent = null;
+                        return null;
+                }
+                set
+                {
+                    if (value != null)
+                    {
+                        _fk_Parent = value.ID;
+                    }
+                    else
+                    {
+                        _fk_Parent = null;
+                    }
                 }
             }
+            public int? _fk_Parent;
+            //public int? fk_Parent
+            //{
+            //    get { return Parent == null ? (int?)null : Parent.ID; }
+            //    private set
+            //    {
+            //        if (value.HasValue)
+            //            Parent = TestObject.Instances[value.Value];
+            //        else
+            //            Parent = null;
+            //    }
+            //}
 
             public OneNRelationCollection<TestObject> Children { get; private set; }
 
@@ -50,7 +71,7 @@ namespace Kistl.API.Client.Tests
                 switch (propertyName)
                 {
                     case "Parent":
-                        fk_Parent = id;
+                        _fk_Parent = id;
                         break;
                     default:
                         base.UpdateParent(propertyName, id);

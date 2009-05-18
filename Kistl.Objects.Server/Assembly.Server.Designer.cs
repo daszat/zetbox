@@ -224,7 +224,7 @@ namespace Kistl.App.Base
 
 			me.AssemblyName = other.AssemblyName;
 			me.IsClientAssembly = other.IsClientAssembly;
-			this.fk_Module = otherImpl.fk_Module;
+			this._fk_Module = otherImpl._fk_Module;
 		}
 
         // tail template

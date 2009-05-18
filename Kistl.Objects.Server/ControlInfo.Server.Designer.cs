@@ -291,7 +291,7 @@ namespace Kistl.App.GUI
 			me.ControlType = other.ControlType;
 			me.IsContainer = other.IsContainer;
 			me.Platform = other.Platform;
-			this.fk_Assembly = otherImpl.fk_Assembly;
+			this._fk_Assembly = otherImpl._fk_Assembly;
 		}
 
         // tail template

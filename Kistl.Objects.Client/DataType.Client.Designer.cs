@@ -66,8 +66,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_DefaultIcon.HasValue)
-                    return Context.Find<Kistl.App.GUI.Icon>(fk_DefaultIcon.Value);
+                if (_fk_DefaultIcon.HasValue)
+                    return Context.Find<Kistl.App.GUI.Icon>(_fk_DefaultIcon.Value);
                 else
                     return null;
             }
@@ -96,25 +96,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DefaultIcon
-        {
-            get
-            {
-                return _fk_DefaultIcon;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_DefaultIcon != value)
-                {
-					var __oldValue = _fk_DefaultIcon;
-                    NotifyPropertyChanging("DefaultIcon", __oldValue, value);
-                    _fk_DefaultIcon = value;
-                    NotifyPropertyChanged("DefaultIcon", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_DefaultIcon;
 
         /// <summary>
@@ -236,8 +217,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_Module.HasValue)
-                    return Context.Find<Kistl.App.Base.Module>(fk_Module.Value);
+                if (_fk_Module.HasValue)
+                    return Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
                 else
                     return null;
             }
@@ -282,25 +263,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Module
-        {
-            get
-            {
-                return _fk_Module;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Module != value)
-                {
-					var __oldValue = _fk_Module;
-                    NotifyPropertyChanging("Module", __oldValue, value);
-                    _fk_Module = value;
-                    NotifyPropertyChanged("Module", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Module;
 
         /// <summary>
@@ -392,8 +354,8 @@ namespace Kistl.App.Base
 			me.ClassName = other.ClassName;
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
-			this.fk_DefaultIcon = otherImpl.fk_DefaultIcon;
-			this.fk_Module = otherImpl.fk_Module;
+			this._fk_DefaultIcon = otherImpl._fk_DefaultIcon;
+			this._fk_Module = otherImpl._fk_Module;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -517,10 +479,10 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "DefaultIcon":
-                    fk_DefaultIcon = id;
+                    _fk_DefaultIcon = id;
                     break;
                 case "Module":
-                    fk_Module = id;
+                    _fk_Module = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

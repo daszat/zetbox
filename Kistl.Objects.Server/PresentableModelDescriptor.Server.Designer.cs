@@ -219,7 +219,7 @@ namespace Kistl.App.GUI
 
 			me.DefaultVisualType = other.DefaultVisualType;
 			me.Description = other.Description;
-			this.fk_PresentableModelRef = otherImpl.fk_PresentableModelRef;
+			this._fk_PresentableModelRef = otherImpl._fk_PresentableModelRef;
 		}
 
         // tail template

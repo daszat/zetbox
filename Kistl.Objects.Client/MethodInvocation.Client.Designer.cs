@@ -42,8 +42,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_Implementor.HasValue)
-                    return Context.Find<Kistl.App.Base.TypeRef>(fk_Implementor.Value);
+                if (_fk_Implementor.HasValue)
+                    return Context.Find<Kistl.App.Base.TypeRef>(_fk_Implementor.Value);
                 else
                     return null;
             }
@@ -72,25 +72,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Implementor
-        {
-            get
-            {
-                return _fk_Implementor;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Implementor != value)
-                {
-					var __oldValue = _fk_Implementor;
-                    NotifyPropertyChanging("Implementor", __oldValue, value);
-                    _fk_Implementor = value;
-                    NotifyPropertyChanged("Implementor", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Implementor;
 
         /// <summary>
@@ -104,8 +85,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_InvokeOnObjectClass.HasValue)
-                    return Context.Find<Kistl.App.Base.DataType>(fk_InvokeOnObjectClass.Value);
+                if (_fk_InvokeOnObjectClass.HasValue)
+                    return Context.Find<Kistl.App.Base.DataType>(_fk_InvokeOnObjectClass.Value);
                 else
                     return null;
             }
@@ -150,25 +131,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_InvokeOnObjectClass
-        {
-            get
-            {
-                return _fk_InvokeOnObjectClass;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_InvokeOnObjectClass != value)
-                {
-					var __oldValue = _fk_InvokeOnObjectClass;
-                    NotifyPropertyChanging("InvokeOnObjectClass", __oldValue, value);
-                    _fk_InvokeOnObjectClass = value;
-                    NotifyPropertyChanged("InvokeOnObjectClass", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_InvokeOnObjectClass;
 
         /// <summary>
@@ -206,8 +168,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_Method.HasValue)
-                    return Context.Find<Kistl.App.Base.Method>(fk_Method.Value);
+                if (_fk_Method.HasValue)
+                    return Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
                 else
                     return null;
             }
@@ -252,25 +214,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Method
-        {
-            get
-            {
-                return _fk_Method;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Method != value)
-                {
-					var __oldValue = _fk_Method;
-                    NotifyPropertyChanging("Method", __oldValue, value);
-                    _fk_Method = value;
-                    NotifyPropertyChanged("Method", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Method;
 
         /// <summary>
@@ -284,8 +227,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_Module.HasValue)
-                    return Context.Find<Kistl.App.Base.Module>(fk_Module.Value);
+                if (_fk_Module.HasValue)
+                    return Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
                 else
                     return null;
             }
@@ -314,25 +257,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Module
-        {
-            get
-            {
-                return _fk_Module;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Module != value)
-                {
-					var __oldValue = _fk_Module;
-                    NotifyPropertyChanging("Module", __oldValue, value);
-                    _fk_Module = value;
-                    NotifyPropertyChanged("Module", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Module;
 
 		public override InterfaceType GetInterfaceType()
@@ -348,10 +272,10 @@ namespace Kistl.App.Base
 			var me = (MethodInvocation)this;
 
 			me.MemberName = other.MemberName;
-			this.fk_Implementor = otherImpl.fk_Implementor;
-			this.fk_InvokeOnObjectClass = otherImpl.fk_InvokeOnObjectClass;
-			this.fk_Method = otherImpl.fk_Method;
-			this.fk_Module = otherImpl.fk_Module;
+			this._fk_Implementor = otherImpl._fk_Implementor;
+			this._fk_InvokeOnObjectClass = otherImpl._fk_InvokeOnObjectClass;
+			this._fk_Method = otherImpl._fk_Method;
+			this._fk_Module = otherImpl._fk_Module;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -448,16 +372,16 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "Implementor":
-                    fk_Implementor = id;
+                    _fk_Implementor = id;
                     break;
                 case "InvokeOnObjectClass":
-                    fk_InvokeOnObjectClass = id;
+                    _fk_InvokeOnObjectClass = id;
                     break;
                 case "Method":
-                    fk_Method = id;
+                    _fk_Method = id;
                     break;
                 case "Module":
-                    fk_Module = id;
+                    _fk_Module = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

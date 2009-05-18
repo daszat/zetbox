@@ -17,7 +17,6 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 		protected Templates.Implementation.SerializationMembersList serializationList;
 		protected string name;
 		protected string efName;
-		protected string fkName;
 		protected string fkBackingName;
 		protected string ownInterface;
 		protected string referencedInterface;
@@ -27,14 +26,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 		protected bool hasPositionStorage;
 
 
-        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string efName, string fkName, string fkBackingName, string ownInterface, string referencedInterface, Relation rel, RelationEndRole endRole, bool hasInverseNavigator, bool hasPositionStorage)
+        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string efName, string fkBackingName, string ownInterface, string referencedInterface, Relation rel, RelationEndRole endRole, bool hasInverseNavigator, bool hasPositionStorage)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.serializationList = serializationList;
 			this.name = name;
 			this.efName = efName;
-			this.fkName = fkName;
 			this.fkBackingName = fkBackingName;
 			this.ownInterface = ownInterface;
 			this.referencedInterface = referencedInterface;
@@ -47,11 +45,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 26 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 25 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 RelationEnd relEnd = rel.GetEnd(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
-#line 29 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 28 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
@@ -59,8 +57,8 @@ this.WriteObjects("        public ",  referencedInterface , " ",  name , "\r\n")
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (",  fkName , ".HasValue)\r\n");
-this.WriteObjects("                    return Context.Find<",  referencedInterface , ">(",  fkName , ".Value);\r\n");
+this.WriteObjects("                if (",  fkBackingName , ".HasValue)\r\n");
+this.WriteObjects("                    return Context.Find<",  referencedInterface , ">(",  fkBackingName , ".Value);\r\n");
 this.WriteObjects("                else\r\n");
 this.WriteObjects("                    return null;\r\n");
 this.WriteObjects("            }\r\n");
@@ -84,14 +82,14 @@ this.WriteObjects("                \r\n");
 this.WriteObjects("				// next, set the local reference\r\n");
 this.WriteObjects("                ",  fkBackingName , " = value == null ? (int?)null : value.ID;\r\n");
 this.WriteObjects("				\r\n");
-#line 62 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 61 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 if (hasInverseNavigator)
     {
         var otherProp = otherEnd.Navigator;
         string otherName = otherProp.PropertyName;
 
 
-#line 68 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 67 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("				// now fixup redundant, inverse references\r\n");
 this.WriteObjects("				// The inverse navigator will also fire events when changed, so should \r\n");
 this.WriteObjects("				// only be touched after setting the local value above. \r\n");
@@ -99,80 +97,61 @@ this.WriteObjects("				// TODO: for complete correctness, the \"other\" Changing
 this.WriteObjects("				//       before the local value is changed\r\n");
 this.WriteObjects("				if (oldValue != null)\r\n");
 this.WriteObjects("				{\r\n");
-#line 76 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 75 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 if (otherProp.IsList)
         {
 			// TODO: check whether oldValue is loaded before potentially triggering a DB Call
 
-#line 80 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 79 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("					// remove from old list\r\n");
 this.WriteObjects("					(oldValue.",  otherName , " as OneNRelationCollection<",  ownInterface , ">).RemoveWithoutClearParent(this);\r\n");
-#line 83 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 82 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
         else
         {
 
-#line 87 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 86 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("					// unset old reference\r\n");
 this.WriteObjects("					oldValue.",  otherName , " = null;\r\n");
-#line 90 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 89 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 92 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 91 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("				}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                if (value != null)\r\n");
 this.WriteObjects("                {\r\n");
-#line 97 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 96 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 if (otherProp.IsList)
         {
 
-#line 100 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 99 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("					// add to new list\r\n");
 this.WriteObjects("					(value.",  otherName , " as OneNRelationCollection<",  ownInterface , ">).AddWithoutSetParent(this);\r\n");
-#line 103 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 102 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
         else
         {
 
-#line 107 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 106 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("					// set new reference\r\n");
 this.WriteObjects("                    value.",  otherName , " = this;\r\n");
-#line 110 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 109 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 112 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 111 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                }\r\n");
-#line 114 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 113 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 116 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 115 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("				// everything is done. fire the Changed event\r\n");
 this.WriteObjects("				NotifyPropertyChanged(\"",  name , "\", oldValue, value);\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-this.WriteObjects("        // provide a way to directly access the foreign key int\r\n");
-this.WriteObjects("        public int? ",  fkName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                return ",  fkBackingName , ";\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("            private set\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (IsReadonly) throw new ReadOnlyObjectException();\r\n");
-this.WriteObjects("                if (",  fkBackingName , " != value)\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("					var __oldValue = ",  fkBackingName , ";\r\n");
-this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", __oldValue, value);\r\n");
-this.WriteObjects("                    ",  fkBackingName , " = value;\r\n");
-this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", __oldValue, value);\r\n");
-this.WriteObjects("                }\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("        }\r\n");
 this.WriteObjects("        private int? ",  fkBackingName , ";\r\n");
-#line 142 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 122 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 AddSerialization(serializationList, fkBackingName);
 
 	string posStorageName = name + Kistl.API.Helper.PositionSuffix;

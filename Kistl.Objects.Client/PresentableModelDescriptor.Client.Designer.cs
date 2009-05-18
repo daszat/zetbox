@@ -90,8 +90,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_PresentableModelRef.HasValue)
-                    return Context.Find<Kistl.App.Base.TypeRef>(fk_PresentableModelRef.Value);
+                if (_fk_PresentableModelRef.HasValue)
+                    return Context.Find<Kistl.App.Base.TypeRef>(_fk_PresentableModelRef.Value);
                 else
                     return null;
             }
@@ -120,25 +120,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_PresentableModelRef
-        {
-            get
-            {
-                return _fk_PresentableModelRef;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_PresentableModelRef != value)
-                {
-					var __oldValue = _fk_PresentableModelRef;
-                    NotifyPropertyChanging("PresentableModelRef", __oldValue, value);
-                    _fk_PresentableModelRef = value;
-                    NotifyPropertyChanged("PresentableModelRef", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_PresentableModelRef;
 
 		public override InterfaceType GetInterfaceType()
@@ -155,7 +136,7 @@ namespace Kistl.App.GUI
 
 			me.DefaultVisualType = other.DefaultVisualType;
 			me.Description = other.Description;
-			this.fk_PresentableModelRef = otherImpl.fk_PresentableModelRef;
+			this._fk_PresentableModelRef = otherImpl._fk_PresentableModelRef;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -234,7 +215,7 @@ namespace Kistl.App.GUI
 			switch(propertyName)
 			{
                 case "PresentableModelRef":
-                    fk_PresentableModelRef = id;
+                    _fk_PresentableModelRef = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

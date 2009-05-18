@@ -90,8 +90,8 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (fk_Kunde.HasValue)
-                    return Context.Find<Kistl.App.Projekte.Kunde>(fk_Kunde.Value);
+                if (_fk_Kunde.HasValue)
+                    return Context.Find<Kistl.App.Projekte.Kunde>(_fk_Kunde.Value);
                 else
                     return null;
             }
@@ -120,25 +120,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Kunde
-        {
-            get
-            {
-                return _fk_Kunde;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Kunde != value)
-                {
-					var __oldValue = _fk_Kunde;
-                    NotifyPropertyChanging("Kunde", __oldValue, value);
-                    _fk_Kunde = value;
-                    NotifyPropertyChanged("Kunde", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Kunde;
 
         /// <summary>
@@ -152,8 +133,8 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (fk_Mitarbeiter.HasValue)
-                    return Context.Find<Kistl.App.Projekte.Mitarbeiter>(fk_Mitarbeiter.Value);
+                if (_fk_Mitarbeiter.HasValue)
+                    return Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
                 else
                     return null;
             }
@@ -182,25 +163,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Mitarbeiter
-        {
-            get
-            {
-                return _fk_Mitarbeiter;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Mitarbeiter != value)
-                {
-					var __oldValue = _fk_Mitarbeiter;
-                    NotifyPropertyChanging("Mitarbeiter", __oldValue, value);
-                    _fk_Mitarbeiter = value;
-                    NotifyPropertyChanged("Mitarbeiter", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Mitarbeiter;
 
         /// <summary>
@@ -214,8 +176,8 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (fk_Projekt.HasValue)
-                    return Context.Find<Kistl.App.Projekte.Projekt>(fk_Projekt.Value);
+                if (_fk_Projekt.HasValue)
+                    return Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
                 else
                     return null;
             }
@@ -260,25 +222,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Projekt
-        {
-            get
-            {
-                return _fk_Projekt;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Projekt != value)
-                {
-					var __oldValue = _fk_Projekt;
-                    NotifyPropertyChanging("Projekt", __oldValue, value);
-                    _fk_Projekt = value;
-                    NotifyPropertyChanged("Projekt", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Projekt;
 
         /// <summary>
@@ -316,9 +259,9 @@ namespace Kistl.App.Projekte
 
 			me.Auftragsname = other.Auftragsname;
 			me.Auftragswert = other.Auftragswert;
-			this.fk_Kunde = otherImpl.fk_Kunde;
-			this.fk_Mitarbeiter = otherImpl.fk_Mitarbeiter;
-			this.fk_Projekt = otherImpl.fk_Projekt;
+			this._fk_Kunde = otherImpl._fk_Kunde;
+			this._fk_Mitarbeiter = otherImpl._fk_Mitarbeiter;
+			this._fk_Projekt = otherImpl._fk_Projekt;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -415,13 +358,13 @@ namespace Kistl.App.Projekte
 			switch(propertyName)
 			{
                 case "Kunde":
-                    fk_Kunde = id;
+                    _fk_Kunde = id;
                     break;
                 case "Mitarbeiter":
-                    fk_Mitarbeiter = id;
+                    _fk_Mitarbeiter = id;
                     break;
                 case "Projekt":
-                    fk_Projekt = id;
+                    _fk_Projekt = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

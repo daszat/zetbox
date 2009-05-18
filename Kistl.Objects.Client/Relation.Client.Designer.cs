@@ -42,8 +42,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_A.HasValue)
-                    return Context.Find<Kistl.App.Base.RelationEnd>(fk_A.Value);
+                if (_fk_A.HasValue)
+                    return Context.Find<Kistl.App.Base.RelationEnd>(_fk_A.Value);
                 else
                     return null;
             }
@@ -88,25 +88,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_A
-        {
-            get
-            {
-                return _fk_A;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_A != value)
-                {
-					var __oldValue = _fk_A;
-                    NotifyPropertyChanging("A", __oldValue, value);
-                    _fk_A = value;
-                    NotifyPropertyChanged("A", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_A;
 
         /// <summary>
@@ -120,8 +101,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_B.HasValue)
-                    return Context.Find<Kistl.App.Base.RelationEnd>(fk_B.Value);
+                if (_fk_B.HasValue)
+                    return Context.Find<Kistl.App.Base.RelationEnd>(_fk_B.Value);
                 else
                     return null;
             }
@@ -166,25 +147,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_B
-        {
-            get
-            {
-                return _fk_B;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_B != value)
-                {
-					var __oldValue = _fk_B;
-                    NotifyPropertyChanging("B", __oldValue, value);
-                    _fk_B = value;
-                    NotifyPropertyChanged("B", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_B;
 
         /// <summary>
@@ -249,8 +211,8 @@ namespace Kistl.App.Base
 
 			me.Description = other.Description;
 			me.Storage = other.Storage;
-			this.fk_A = otherImpl.fk_A;
-			this.fk_B = otherImpl.fk_B;
+			this._fk_A = otherImpl._fk_A;
+			this._fk_B = otherImpl._fk_B;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -338,10 +300,10 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "A":
-                    fk_A = id;
+                    _fk_A = id;
                     break;
                 case "B":
-                    fk_B = id;
+                    _fk_B = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

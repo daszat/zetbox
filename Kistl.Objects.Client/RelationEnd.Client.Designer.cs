@@ -42,8 +42,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_AParent.HasValue)
-                    return Context.Find<Kistl.App.Base.Relation>(fk_AParent.Value);
+                if (_fk_AParent.HasValue)
+                    return Context.Find<Kistl.App.Base.Relation>(_fk_AParent.Value);
                 else
                     return null;
             }
@@ -88,25 +88,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_AParent
-        {
-            get
-            {
-                return _fk_AParent;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_AParent != value)
-                {
-					var __oldValue = _fk_AParent;
-                    NotifyPropertyChanging("AParent", __oldValue, value);
-                    _fk_AParent = value;
-                    NotifyPropertyChanged("AParent", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_AParent;
 
         /// <summary>
@@ -120,8 +101,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_BParent.HasValue)
-                    return Context.Find<Kistl.App.Base.Relation>(fk_BParent.Value);
+                if (_fk_BParent.HasValue)
+                    return Context.Find<Kistl.App.Base.Relation>(_fk_BParent.Value);
                 else
                     return null;
             }
@@ -166,25 +147,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_BParent
-        {
-            get
-            {
-                return _fk_BParent;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_BParent != value)
-                {
-					var __oldValue = _fk_BParent;
-                    NotifyPropertyChanging("BParent", __oldValue, value);
-                    _fk_BParent = value;
-                    NotifyPropertyChanged("BParent", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_BParent;
 
         /// <summary>
@@ -246,8 +208,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_Navigator.HasValue)
-                    return Context.Find<Kistl.App.Base.ObjectReferenceProperty>(fk_Navigator.Value);
+                if (_fk_Navigator.HasValue)
+                    return Context.Find<Kistl.App.Base.ObjectReferenceProperty>(_fk_Navigator.Value);
                 else
                     return null;
             }
@@ -292,25 +254,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Navigator
-        {
-            get
-            {
-                return _fk_Navigator;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Navigator != value)
-                {
-					var __oldValue = _fk_Navigator;
-                    NotifyPropertyChanging("Navigator", __oldValue, value);
-                    _fk_Navigator = value;
-                    NotifyPropertyChanged("Navigator", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Navigator;
 
         /// <summary>
@@ -372,8 +315,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_Type.HasValue)
-                    return Context.Find<Kistl.App.Base.ObjectClass>(fk_Type.Value);
+                if (_fk_Type.HasValue)
+                    return Context.Find<Kistl.App.Base.ObjectClass>(_fk_Type.Value);
                 else
                     return null;
             }
@@ -402,25 +345,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Type
-        {
-            get
-            {
-                return _fk_Type;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Type != value)
-                {
-					var __oldValue = _fk_Type;
-                    NotifyPropertyChanging("Type", __oldValue, value);
-                    _fk_Type = value;
-                    NotifyPropertyChanged("Type", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Type;
 
 		public override InterfaceType GetInterfaceType()
@@ -439,10 +363,10 @@ namespace Kistl.App.Base
 			me.Multiplicity = other.Multiplicity;
 			me.Role = other.Role;
 			me.RoleName = other.RoleName;
-			this.fk_AParent = otherImpl.fk_AParent;
-			this.fk_BParent = otherImpl.fk_BParent;
-			this.fk_Navigator = otherImpl.fk_Navigator;
-			this.fk_Type = otherImpl.fk_Type;
+			this._fk_AParent = otherImpl._fk_AParent;
+			this._fk_BParent = otherImpl._fk_BParent;
+			this._fk_Navigator = otherImpl._fk_Navigator;
+			this._fk_Type = otherImpl._fk_Type;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -566,10 +490,10 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "Navigator":
-                    fk_Navigator = id;
+                    _fk_Navigator = id;
                     break;
                 case "Type":
-                    fk_Type = id;
+                    _fk_Type = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

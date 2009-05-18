@@ -42,8 +42,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_Enumeration.HasValue)
-                    return Context.Find<Kistl.App.Base.Enumeration>(fk_Enumeration.Value);
+                if (_fk_Enumeration.HasValue)
+                    return Context.Find<Kistl.App.Base.Enumeration>(_fk_Enumeration.Value);
                 else
                     return null;
             }
@@ -72,25 +72,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Enumeration
-        {
-            get
-            {
-                return _fk_Enumeration;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Enumeration != value)
-                {
-					var __oldValue = _fk_Enumeration;
-                    NotifyPropertyChanging("Enumeration", __oldValue, value);
-                    _fk_Enumeration = value;
-                    NotifyPropertyChanged("Enumeration", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Enumeration;
 
         /// <summary>
@@ -147,7 +128,7 @@ namespace Kistl.App.Base
 			var otherImpl = (EnumerationProperty__Implementation__)obj;
 			var me = (EnumerationProperty)this;
 
-			this.fk_Enumeration = otherImpl.fk_Enumeration;
+			this._fk_Enumeration = otherImpl._fk_Enumeration;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -208,7 +189,7 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "Enumeration":
-                    fk_Enumeration = id;
+                    _fk_Enumeration = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

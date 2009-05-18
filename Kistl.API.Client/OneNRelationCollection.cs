@@ -104,7 +104,7 @@ namespace Kistl.API.Client
 
         private void SetPointerProperty(T item, int index)
         {
-            if (item.GetPropertyValue<int?>("fk_" + _propertyName) != _parent.ID)
+            if (item.GetPrivateFieldValue<int?>("_fk_" + _propertyName) != _parent.ID)
             {
                 (item as BaseClientDataObject).UpdateParent(_propertyName, _parent.ID);
             }
@@ -120,7 +120,7 @@ namespace Kistl.API.Client
 
         private void ClearPointerProperty(T item)
         {
-            if (item.GetPropertyValue<int?>("fk_" + _propertyName) != null)
+            if (item.GetPrivateFieldValue<int?>("_fk_" + _propertyName) != null)
             {
                 (item as BaseClientDataObject).UpdateParent(_propertyName, null);
             }

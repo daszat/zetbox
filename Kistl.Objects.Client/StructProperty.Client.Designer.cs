@@ -42,8 +42,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_StructDefinition.HasValue)
-                    return Context.Find<Kistl.App.Base.Struct>(fk_StructDefinition.Value);
+                if (_fk_StructDefinition.HasValue)
+                    return Context.Find<Kistl.App.Base.Struct>(_fk_StructDefinition.Value);
                 else
                     return null;
             }
@@ -72,25 +72,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_StructDefinition
-        {
-            get
-            {
-                return _fk_StructDefinition;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_StructDefinition != value)
-                {
-					var __oldValue = _fk_StructDefinition;
-                    NotifyPropertyChanging("StructDefinition", __oldValue, value);
-                    _fk_StructDefinition = value;
-                    NotifyPropertyChanged("StructDefinition", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_StructDefinition;
 
         /// <summary>
@@ -147,7 +128,7 @@ namespace Kistl.App.Base
 			var otherImpl = (StructProperty__Implementation__)obj;
 			var me = (StructProperty)this;
 
-			this.fk_StructDefinition = otherImpl.fk_StructDefinition;
+			this._fk_StructDefinition = otherImpl._fk_StructDefinition;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -208,7 +189,7 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "StructDefinition":
-                    fk_StructDefinition = id;
+                    _fk_StructDefinition = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

@@ -518,10 +518,10 @@ namespace Kistl.App.Base
 			me.Multiplicity = other.Multiplicity;
 			me.Role = other.Role;
 			me.RoleName = other.RoleName;
-			this.fk_AParent = otherImpl.fk_AParent;
-			this.fk_BParent = otherImpl.fk_BParent;
-			this.fk_Navigator = otherImpl.fk_Navigator;
-			this.fk_Type = otherImpl.fk_Type;
+			this._fk_AParent = otherImpl._fk_AParent;
+			this._fk_BParent = otherImpl._fk_BParent;
+			this._fk_Navigator = otherImpl._fk_Navigator;
+			this._fk_Type = otherImpl._fk_Type;
 		}
 
         // tail template

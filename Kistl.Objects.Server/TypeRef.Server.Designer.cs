@@ -325,8 +325,8 @@ namespace Kistl.App.Base
 			var me = (TypeRef)this;
 
 			me.FullName = other.FullName;
-			this.fk_Assembly = otherImpl.fk_Assembly;
-			this.fk_Parent = otherImpl.fk_Parent;
+			this._fk_Assembly = otherImpl._fk_Assembly;
+			this._fk_Parent = otherImpl._fk_Parent;
 		}
 
         // tail template

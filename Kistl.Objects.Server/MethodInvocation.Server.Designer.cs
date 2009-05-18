@@ -418,10 +418,10 @@ namespace Kistl.App.Base
 			var me = (MethodInvocation)this;
 
 			me.MemberName = other.MemberName;
-			this.fk_Implementor = otherImpl.fk_Implementor;
-			this.fk_InvokeOnObjectClass = otherImpl.fk_InvokeOnObjectClass;
-			this.fk_Method = otherImpl.fk_Method;
-			this.fk_Module = otherImpl.fk_Module;
+			this._fk_Implementor = otherImpl._fk_Implementor;
+			this._fk_InvokeOnObjectClass = otherImpl._fk_InvokeOnObjectClass;
+			this._fk_Method = otherImpl._fk_Method;
+			this._fk_Module = otherImpl._fk_Module;
 		}
 
         // tail template

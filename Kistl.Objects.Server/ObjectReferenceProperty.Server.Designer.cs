@@ -250,8 +250,8 @@ namespace Kistl.App.Base
 			var otherImpl = (ObjectReferenceProperty__Implementation__)obj;
 			var me = (ObjectReferenceProperty)this;
 
-			this.fk_ReferenceObjectClass = otherImpl.fk_ReferenceObjectClass;
-			this.fk_RelationEnd = otherImpl.fk_RelationEnd;
+			this._fk_ReferenceObjectClass = otherImpl._fk_ReferenceObjectClass;
+			this._fk_RelationEnd = otherImpl._fk_RelationEnd;
 		}
 
         // tail template

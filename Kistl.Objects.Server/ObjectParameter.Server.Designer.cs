@@ -169,7 +169,7 @@ namespace Kistl.App.Base
 			var otherImpl = (ObjectParameter__Implementation__)obj;
 			var me = (ObjectParameter)this;
 
-			this.fk_DataType = otherImpl.fk_DataType;
+			this._fk_DataType = otherImpl._fk_DataType;
 		}
 
         // tail template

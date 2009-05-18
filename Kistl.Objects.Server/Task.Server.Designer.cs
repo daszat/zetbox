@@ -259,7 +259,7 @@ namespace Kistl.App.Projekte
 			me.DatumBis = other.DatumBis;
 			me.DatumVon = other.DatumVon;
 			me.Name = other.Name;
-			this.fk_Projekt = otherImpl.fk_Projekt;
+			this._fk_Projekt = otherImpl._fk_Projekt;
 		}
 
         // tail template

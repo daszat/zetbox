@@ -42,8 +42,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_DataType.HasValue)
-                    return Context.Find<Kistl.App.Base.DataType>(fk_DataType.Value);
+                if (_fk_DataType.HasValue)
+                    return Context.Find<Kistl.App.Base.DataType>(_fk_DataType.Value);
                 else
                     return null;
             }
@@ -72,25 +72,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DataType
-        {
-            get
-            {
-                return _fk_DataType;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_DataType != value)
-                {
-					var __oldValue = _fk_DataType;
-                    NotifyPropertyChanging("DataType", __oldValue, value);
-                    _fk_DataType = value;
-                    NotifyPropertyChanged("DataType", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_DataType;
 
         /// <summary>
@@ -147,7 +128,7 @@ namespace Kistl.App.Base
 			var otherImpl = (ObjectParameter__Implementation__)obj;
 			var me = (ObjectParameter)this;
 
-			this.fk_DataType = otherImpl.fk_DataType;
+			this._fk_DataType = otherImpl._fk_DataType;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -208,7 +189,7 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "DataType":
-                    fk_DataType = id;
+                    _fk_DataType = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

@@ -42,8 +42,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_ControlRef.HasValue)
-                    return Context.Find<Kistl.App.Base.TypeRef>(fk_ControlRef.Value);
+                if (_fk_ControlRef.HasValue)
+                    return Context.Find<Kistl.App.Base.TypeRef>(_fk_ControlRef.Value);
                 else
                     return null;
             }
@@ -72,25 +72,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ControlRef
-        {
-            get
-            {
-                return _fk_ControlRef;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_ControlRef != value)
-                {
-					var __oldValue = _fk_ControlRef;
-                    NotifyPropertyChanging("ControlRef", __oldValue, value);
-                    _fk_ControlRef = value;
-                    NotifyPropertyChanged("ControlRef", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_ControlRef;
 
         /// <summary>
@@ -104,8 +85,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_PresentedModelDescriptor.HasValue)
-                    return Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(fk_PresentedModelDescriptor.Value);
+                if (_fk_PresentedModelDescriptor.HasValue)
+                    return Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_PresentedModelDescriptor.Value);
                 else
                     return null;
             }
@@ -134,25 +115,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_PresentedModelDescriptor
-        {
-            get
-            {
-                return _fk_PresentedModelDescriptor;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_PresentedModelDescriptor != value)
-                {
-					var __oldValue = _fk_PresentedModelDescriptor;
-                    NotifyPropertyChanging("PresentedModelDescriptor", __oldValue, value);
-                    _fk_PresentedModelDescriptor = value;
-                    NotifyPropertyChanged("PresentedModelDescriptor", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_PresentedModelDescriptor;
 
         /// <summary>
@@ -217,8 +179,8 @@ namespace Kistl.App.GUI
 
 			me.Toolkit = other.Toolkit;
 			me.VisualType = other.VisualType;
-			this.fk_ControlRef = otherImpl.fk_ControlRef;
-			this.fk_PresentedModelDescriptor = otherImpl.fk_PresentedModelDescriptor;
+			this._fk_ControlRef = otherImpl._fk_ControlRef;
+			this._fk_PresentedModelDescriptor = otherImpl._fk_PresentedModelDescriptor;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -306,10 +268,10 @@ namespace Kistl.App.GUI
 			switch(propertyName)
 			{
                 case "ControlRef":
-                    fk_ControlRef = id;
+                    _fk_ControlRef = id;
                     break;
                 case "PresentedModelDescriptor":
-                    fk_PresentedModelDescriptor = id;
+                    _fk_PresentedModelDescriptor = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

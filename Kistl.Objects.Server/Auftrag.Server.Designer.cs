@@ -386,9 +386,9 @@ namespace Kistl.App.Projekte
 
 			me.Auftragsname = other.Auftragsname;
 			me.Auftragswert = other.Auftragswert;
-			this.fk_Kunde = otherImpl.fk_Kunde;
-			this.fk_Mitarbeiter = otherImpl.fk_Mitarbeiter;
-			this.fk_Projekt = otherImpl.fk_Projekt;
+			this._fk_Kunde = otherImpl._fk_Kunde;
+			this._fk_Mitarbeiter = otherImpl._fk_Mitarbeiter;
+			this._fk_Projekt = otherImpl._fk_Projekt;
 		}
 
         // tail template

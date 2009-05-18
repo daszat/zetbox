@@ -30,8 +30,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_A.HasValue)
-                    return Context.Find<Kistl.App.Base.ObjectClass>(fk_A.Value);
+                if (_fk_A.HasValue)
+                    return Context.Find<Kistl.App.Base.ObjectClass>(_fk_A.Value);
                 else
                     return null;
             }
@@ -60,25 +60,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_A
-        {
-            get
-            {
-                return _fk_A;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_A != value)
-                {
-					var __oldValue = _fk_A;
-                    NotifyPropertyChanging("A", __oldValue, value);
-                    _fk_A = value;
-                    NotifyPropertyChanged("A", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_A;
         /// <summary>
         /// the B-side value of this CollectionEntry
@@ -90,8 +71,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_B.HasValue)
-                    return Context.Find<Kistl.App.Base.Interface>(fk_B.Value);
+                if (_fk_B.HasValue)
+                    return Context.Find<Kistl.App.Base.Interface>(_fk_B.Value);
                 else
                     return null;
             }
@@ -120,25 +101,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_B
-        {
-            get
-            {
-                return _fk_B;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_B != value)
-                {
-					var __oldValue = _fk_B;
-                    NotifyPropertyChanging("B", __oldValue, value);
-                    _fk_B = value;
-                    NotifyPropertyChanged("B", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_B;
 
 #region Serializer
@@ -220,8 +182,8 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (fk_A.HasValue)
-                    return Context.Find<Kistl.App.Projekte.Projekt>(fk_A.Value);
+                if (_fk_A.HasValue)
+                    return Context.Find<Kistl.App.Projekte.Projekt>(_fk_A.Value);
                 else
                     return null;
             }
@@ -250,25 +212,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_A
-        {
-            get
-            {
-                return _fk_A;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_A != value)
-                {
-					var __oldValue = _fk_A;
-                    NotifyPropertyChanging("A", __oldValue, value);
-                    _fk_A = value;
-                    NotifyPropertyChanged("A", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_A;
         public virtual int? A_pos
         {
@@ -299,8 +242,8 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (fk_B.HasValue)
-                    return Context.Find<Kistl.App.Projekte.Mitarbeiter>(fk_B.Value);
+                if (_fk_B.HasValue)
+                    return Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value);
                 else
                     return null;
             }
@@ -329,25 +272,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_B
-        {
-            get
-            {
-                return _fk_B;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_B != value)
-                {
-					var __oldValue = _fk_B;
-                    NotifyPropertyChanging("B", __oldValue, value);
-                    _fk_B = value;
-                    NotifyPropertyChanged("B", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_B;
         public virtual int? B_pos
         {
@@ -476,8 +400,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_A.HasValue)
-                    return Context.Find<Kistl.App.GUI.Template>(fk_A.Value);
+                if (_fk_A.HasValue)
+                    return Context.Find<Kistl.App.GUI.Template>(_fk_A.Value);
                 else
                     return null;
             }
@@ -506,25 +430,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_A
-        {
-            get
-            {
-                return _fk_A;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_A != value)
-                {
-					var __oldValue = _fk_A;
-                    NotifyPropertyChanging("A", __oldValue, value);
-                    _fk_A = value;
-                    NotifyPropertyChanged("A", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_A;
         /// <summary>
         /// the B-side value of this CollectionEntry
@@ -536,8 +441,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_B.HasValue)
-                    return Context.Find<Kistl.App.GUI.Visual>(fk_B.Value);
+                if (_fk_B.HasValue)
+                    return Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
                 else
                     return null;
             }
@@ -566,25 +471,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_B
-        {
-            get
-            {
-                return _fk_B;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_B != value)
-                {
-					var __oldValue = _fk_B;
-                    NotifyPropertyChanging("B", __oldValue, value);
-                    _fk_B = value;
-                    NotifyPropertyChanged("B", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_B;
 
 #region Serializer
@@ -666,8 +552,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_A.HasValue)
-                    return Context.Find<Kistl.App.Base.TypeRef>(fk_A.Value);
+                if (_fk_A.HasValue)
+                    return Context.Find<Kistl.App.Base.TypeRef>(_fk_A.Value);
                 else
                     return null;
             }
@@ -696,25 +582,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_A
-        {
-            get
-            {
-                return _fk_A;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_A != value)
-                {
-					var __oldValue = _fk_A;
-                    NotifyPropertyChanging("A", __oldValue, value);
-                    _fk_A = value;
-                    NotifyPropertyChanged("A", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_A;
         public virtual int? A_pos
         {
@@ -745,8 +612,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_B.HasValue)
-                    return Context.Find<Kistl.App.Base.TypeRef>(fk_B.Value);
+                if (_fk_B.HasValue)
+                    return Context.Find<Kistl.App.Base.TypeRef>(_fk_B.Value);
                 else
                     return null;
             }
@@ -775,25 +642,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_B
-        {
-            get
-            {
-                return _fk_B;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_B != value)
-                {
-					var __oldValue = _fk_B;
-                    NotifyPropertyChanging("B", __oldValue, value);
-                    _fk_B = value;
-                    NotifyPropertyChanged("B", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_B;
         public virtual int? B_pos
         {
@@ -922,8 +770,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_A.HasValue)
-                    return Context.Find<Kistl.App.GUI.Visual>(fk_A.Value);
+                if (_fk_A.HasValue)
+                    return Context.Find<Kistl.App.GUI.Visual>(_fk_A.Value);
                 else
                     return null;
             }
@@ -952,25 +800,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_A
-        {
-            get
-            {
-                return _fk_A;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_A != value)
-                {
-					var __oldValue = _fk_A;
-                    NotifyPropertyChanging("A", __oldValue, value);
-                    _fk_A = value;
-                    NotifyPropertyChanged("A", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_A;
         /// <summary>
         /// the B-side value of this CollectionEntry
@@ -982,8 +811,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_B.HasValue)
-                    return Context.Find<Kistl.App.GUI.Visual>(fk_B.Value);
+                if (_fk_B.HasValue)
+                    return Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
                 else
                     return null;
             }
@@ -1012,25 +841,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_B
-        {
-            get
-            {
-                return _fk_B;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_B != value)
-                {
-					var __oldValue = _fk_B;
-                    NotifyPropertyChanging("B", __oldValue, value);
-                    _fk_B = value;
-                    NotifyPropertyChanged("B", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_B;
 
 #region Serializer
@@ -1112,8 +922,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_A.HasValue)
-                    return Context.Find<Kistl.App.GUI.Visual>(fk_A.Value);
+                if (_fk_A.HasValue)
+                    return Context.Find<Kistl.App.GUI.Visual>(_fk_A.Value);
                 else
                     return null;
             }
@@ -1142,25 +952,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_A
-        {
-            get
-            {
-                return _fk_A;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_A != value)
-                {
-					var __oldValue = _fk_A;
-                    NotifyPropertyChanging("A", __oldValue, value);
-                    _fk_A = value;
-                    NotifyPropertyChanged("A", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_A;
         /// <summary>
         /// the B-side value of this CollectionEntry
@@ -1172,8 +963,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_B.HasValue)
-                    return Context.Find<Kistl.App.GUI.Visual>(fk_B.Value);
+                if (_fk_B.HasValue)
+                    return Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
                 else
                     return null;
             }
@@ -1202,25 +993,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_B
-        {
-            get
-            {
-                return _fk_B;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_B != value)
-                {
-					var __oldValue = _fk_B;
-                    NotifyPropertyChanging("B", __oldValue, value);
-                    _fk_B = value;
-                    NotifyPropertyChanged("B", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_B;
 
 #region Serializer
@@ -1303,8 +1075,8 @@ namespace Kistl.App.TimeRecords
         {
             get
             {
-                if (fk_A.HasValue)
-                    return Context.Find<Kistl.App.TimeRecords.WorkEffortAccount>(fk_A.Value);
+                if (_fk_A.HasValue)
+                    return Context.Find<Kistl.App.TimeRecords.WorkEffortAccount>(_fk_A.Value);
                 else
                     return null;
             }
@@ -1333,25 +1105,6 @@ namespace Kistl.App.TimeRecords
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_A
-        {
-            get
-            {
-                return _fk_A;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_A != value)
-                {
-					var __oldValue = _fk_A;
-                    NotifyPropertyChanging("A", __oldValue, value);
-                    _fk_A = value;
-                    NotifyPropertyChanged("A", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_A;
         /// <summary>
         /// the B-side value of this CollectionEntry
@@ -1363,8 +1116,8 @@ namespace Kistl.App.TimeRecords
         {
             get
             {
-                if (fk_B.HasValue)
-                    return Context.Find<Kistl.App.Projekte.Mitarbeiter>(fk_B.Value);
+                if (_fk_B.HasValue)
+                    return Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value);
                 else
                     return null;
             }
@@ -1393,25 +1146,6 @@ namespace Kistl.App.TimeRecords
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_B
-        {
-            get
-            {
-                return _fk_B;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_B != value)
-                {
-					var __oldValue = _fk_B;
-                    NotifyPropertyChanging("B", __oldValue, value);
-                    _fk_B = value;
-                    NotifyPropertyChanged("B", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_B;
 
 #region Serializer

@@ -42,8 +42,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_Assembly.HasValue)
-                    return Context.Find<Kistl.App.Base.Assembly>(fk_Assembly.Value);
+                if (_fk_Assembly.HasValue)
+                    return Context.Find<Kistl.App.Base.Assembly>(_fk_Assembly.Value);
                 else
                     return null;
             }
@@ -72,25 +72,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Assembly
-        {
-            get
-            {
-                return _fk_Assembly;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Assembly != value)
-                {
-					var __oldValue = _fk_Assembly;
-                    NotifyPropertyChanging("Assembly", __oldValue, value);
-                    _fk_Assembly = value;
-                    NotifyPropertyChanged("Assembly", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Assembly;
 
         /// <summary>
@@ -172,7 +153,7 @@ namespace Kistl.App.Base
 			var me = (CLRObjectParameter)this;
 
 			me.FullTypeName = other.FullTypeName;
-			this.fk_Assembly = otherImpl.fk_Assembly;
+			this._fk_Assembly = otherImpl._fk_Assembly;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -242,7 +223,7 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "Assembly":
-                    fk_Assembly = id;
+                    _fk_Assembly = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

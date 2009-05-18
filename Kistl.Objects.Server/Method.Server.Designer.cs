@@ -428,8 +428,8 @@ namespace Kistl.App.Base
 			me.Description = other.Description;
 			me.IsDisplayable = other.IsDisplayable;
 			me.MethodName = other.MethodName;
-			this.fk_Module = otherImpl.fk_Module;
-			this.fk_ObjectClass = otherImpl.fk_ObjectClass;
+			this._fk_Module = otherImpl._fk_Module;
+			this._fk_ObjectClass = otherImpl._fk_ObjectClass;
 		}
 
         // tail template

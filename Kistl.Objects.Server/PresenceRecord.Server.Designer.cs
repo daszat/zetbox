@@ -203,7 +203,7 @@ namespace Kistl.App.TimeRecords
 
 			me.From = other.From;
 			me.Thru = other.Thru;
-			this.fk_Mitarbeiter = otherImpl.fk_Mitarbeiter;
+			this._fk_Mitarbeiter = otherImpl._fk_Mitarbeiter;
 		}
 
         // tail template

@@ -42,8 +42,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_ReferenceObjectClass.HasValue)
-                    return Context.Find<Kistl.App.Base.ObjectClass>(fk_ReferenceObjectClass.Value);
+                if (_fk_ReferenceObjectClass.HasValue)
+                    return Context.Find<Kistl.App.Base.ObjectClass>(_fk_ReferenceObjectClass.Value);
                 else
                     return null;
             }
@@ -72,25 +72,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ReferenceObjectClass
-        {
-            get
-            {
-                return _fk_ReferenceObjectClass;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_ReferenceObjectClass != value)
-                {
-					var __oldValue = _fk_ReferenceObjectClass;
-                    NotifyPropertyChanging("ReferenceObjectClass", __oldValue, value);
-                    _fk_ReferenceObjectClass = value;
-                    NotifyPropertyChanged("ReferenceObjectClass", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_ReferenceObjectClass;
 
         /// <summary>
@@ -104,8 +85,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_RelationEnd.HasValue)
-                    return Context.Find<Kistl.App.Base.RelationEnd>(fk_RelationEnd.Value);
+                if (_fk_RelationEnd.HasValue)
+                    return Context.Find<Kistl.App.Base.RelationEnd>(_fk_RelationEnd.Value);
                 else
                     return null;
             }
@@ -150,25 +131,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_RelationEnd
-        {
-            get
-            {
-                return _fk_RelationEnd;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_RelationEnd != value)
-                {
-					var __oldValue = _fk_RelationEnd;
-                    NotifyPropertyChanging("RelationEnd", __oldValue, value);
-                    _fk_RelationEnd = value;
-                    NotifyPropertyChanged("RelationEnd", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_RelationEnd;
 
         /// <summary>
@@ -225,8 +187,8 @@ namespace Kistl.App.Base
 			var otherImpl = (ObjectReferenceProperty__Implementation__)obj;
 			var me = (ObjectReferenceProperty)this;
 
-			this.fk_ReferenceObjectClass = otherImpl.fk_ReferenceObjectClass;
-			this.fk_RelationEnd = otherImpl.fk_RelationEnd;
+			this._fk_ReferenceObjectClass = otherImpl._fk_ReferenceObjectClass;
+			this._fk_RelationEnd = otherImpl._fk_RelationEnd;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -296,7 +258,7 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "ReferenceObjectClass":
-                    fk_ReferenceObjectClass = id;
+                    _fk_ReferenceObjectClass = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

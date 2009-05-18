@@ -219,7 +219,7 @@ namespace Kistl.App.Base
 			var me = (Constraint)this;
 
 			me.Reason = other.Reason;
-			this.fk_ConstrainedProperty = otherImpl.fk_ConstrainedProperty;
+			this._fk_ConstrainedProperty = otherImpl._fk_ConstrainedProperty;
 		}
 
         // tail template

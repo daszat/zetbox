@@ -14,7 +14,6 @@
 <%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
 <%@ Parameter Name="name" Type="string" %>
 <%@ Parameter Name="efName" Type="string" %>
-<%@ Parameter Name="fkName" Type="string" %>
 <%@ Parameter Name="fkBackingName" Type="string" %>
 <%@ Parameter Name="ownInterface" Type="string" %>
 <%@ Parameter Name="referencedInterface" Type="string" %>
@@ -33,8 +32,8 @@
         {
             get
             {
-                if (<%= fkName %>.HasValue)
-                    return Context.Find<<%= referencedInterface %>>(<%= fkName %>.Value);
+                if (<%= fkBackingName %>.HasValue)
+                    return Context.Find<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
                 else
                     return null;
             }
@@ -118,25 +117,6 @@
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? <%= fkName %>
-        {
-            get
-            {
-                return <%= fkBackingName %>;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (<%= fkBackingName %> != value)
-                {
-					var __oldValue = <%= fkBackingName %>;
-                    NotifyPropertyChanging("<%= name %>", __oldValue, value);
-                    <%= fkBackingName %> = value;
-                    NotifyPropertyChanged("<%= name %>", __oldValue, value);
-                }
-            }
-        }
         private int? <%= fkBackingName %>;
 <%
     AddSerialization(serializationList, fkBackingName);

@@ -42,8 +42,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_ConstrainedProperty.HasValue)
-                    return Context.Find<Kistl.App.Base.Property>(fk_ConstrainedProperty.Value);
+                if (_fk_ConstrainedProperty.HasValue)
+                    return Context.Find<Kistl.App.Base.Property>(_fk_ConstrainedProperty.Value);
                 else
                     return null;
             }
@@ -88,25 +88,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ConstrainedProperty
-        {
-            get
-            {
-                return _fk_ConstrainedProperty;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_ConstrainedProperty != value)
-                {
-					var __oldValue = _fk_ConstrainedProperty;
-                    NotifyPropertyChanging("ConstrainedProperty", __oldValue, value);
-                    _fk_ConstrainedProperty = value;
-                    NotifyPropertyChanged("ConstrainedProperty", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_ConstrainedProperty;
 
         /// <summary>
@@ -190,7 +171,7 @@ namespace Kistl.App.Base
 			var me = (Constraint)this;
 
 			me.Reason = other.Reason;
-			this.fk_ConstrainedProperty = otherImpl.fk_ConstrainedProperty;
+			this._fk_ConstrainedProperty = otherImpl._fk_ConstrainedProperty;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -260,7 +241,7 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "ConstrainedProperty":
-                    fk_ConstrainedProperty = id;
+                    _fk_ConstrainedProperty = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

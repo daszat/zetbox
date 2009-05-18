@@ -328,8 +328,8 @@ namespace Kistl.App.GUI
 			me.ControlType = other.ControlType;
 			me.DataTypeName = other.DataTypeName;
 			me.PresenterTypeName = other.PresenterTypeName;
-			this.fk_DataAssembly = otherImpl.fk_DataAssembly;
-			this.fk_PresenterAssembly = otherImpl.fk_PresenterAssembly;
+			this._fk_DataAssembly = otherImpl._fk_DataAssembly;
+			this._fk_PresenterAssembly = otherImpl._fk_PresenterAssembly;
 		}
 
         // tail template

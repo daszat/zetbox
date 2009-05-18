@@ -66,8 +66,8 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (fk_ObjectProp.HasValue)
-                    return Context.Find<Kistl.App.Projekte.Kunde>(fk_ObjectProp.Value);
+                if (_fk_ObjectProp.HasValue)
+                    return Context.Find<Kistl.App.Projekte.Kunde>(_fk_ObjectProp.Value);
                 else
                     return null;
             }
@@ -96,25 +96,6 @@ namespace Kistl.App.Test
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_ObjectProp
-        {
-            get
-            {
-                return _fk_ObjectProp;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_ObjectProp != value)
-                {
-					var __oldValue = _fk_ObjectProp;
-                    NotifyPropertyChanging("ObjectProp", __oldValue, value);
-                    _fk_ObjectProp = value;
-                    NotifyPropertyChanged("ObjectProp", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_ObjectProp;
 
         /// <summary>
@@ -201,7 +182,7 @@ namespace Kistl.App.Test
 			me.MyIntProperty = other.MyIntProperty;
 			me.StringProp = other.StringProp;
 			me.TestEnumProp = other.TestEnumProp;
-			this.fk_ObjectProp = otherImpl.fk_ObjectProp;
+			this._fk_ObjectProp = otherImpl._fk_ObjectProp;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -289,7 +270,7 @@ namespace Kistl.App.Test
 			switch(propertyName)
 			{
                 case "ObjectProp":
-                    fk_ObjectProp = id;
+                    _fk_ObjectProp = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

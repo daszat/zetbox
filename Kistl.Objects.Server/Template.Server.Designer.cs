@@ -352,8 +352,8 @@ namespace Kistl.App.GUI
 
 			me.DisplayedTypeFullName = other.DisplayedTypeFullName;
 			me.DisplayName = other.DisplayName;
-			this.fk_DisplayedTypeAssembly = otherImpl.fk_DisplayedTypeAssembly;
-			this.fk_VisualTree = otherImpl.fk_VisualTree;
+			this._fk_DisplayedTypeAssembly = otherImpl._fk_DisplayedTypeAssembly;
+			this._fk_VisualTree = otherImpl._fk_VisualTree;
 		}
 
         // tail template

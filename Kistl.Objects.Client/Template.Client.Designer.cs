@@ -42,8 +42,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_DisplayedTypeAssembly.HasValue)
-                    return Context.Find<Kistl.App.Base.Assembly>(fk_DisplayedTypeAssembly.Value);
+                if (_fk_DisplayedTypeAssembly.HasValue)
+                    return Context.Find<Kistl.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
                 else
                     return null;
             }
@@ -72,25 +72,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DisplayedTypeAssembly
-        {
-            get
-            {
-                return _fk_DisplayedTypeAssembly;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_DisplayedTypeAssembly != value)
-                {
-					var __oldValue = _fk_DisplayedTypeAssembly;
-                    NotifyPropertyChanging("DisplayedTypeAssembly", __oldValue, value);
-                    _fk_DisplayedTypeAssembly = value;
-                    NotifyPropertyChanged("DisplayedTypeAssembly", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_DisplayedTypeAssembly;
 
         /// <summary>
@@ -175,8 +156,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_VisualTree.HasValue)
-                    return Context.Find<Kistl.App.GUI.Visual>(fk_VisualTree.Value);
+                if (_fk_VisualTree.HasValue)
+                    return Context.Find<Kistl.App.GUI.Visual>(_fk_VisualTree.Value);
                 else
                     return null;
             }
@@ -205,25 +186,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_VisualTree
-        {
-            get
-            {
-                return _fk_VisualTree;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_VisualTree != value)
-                {
-					var __oldValue = _fk_VisualTree;
-                    NotifyPropertyChanging("VisualTree", __oldValue, value);
-                    _fk_VisualTree = value;
-                    NotifyPropertyChanged("VisualTree", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_VisualTree;
 
         /// <summary>
@@ -261,8 +223,8 @@ namespace Kistl.App.GUI
 
 			me.DisplayedTypeFullName = other.DisplayedTypeFullName;
 			me.DisplayName = other.DisplayName;
-			this.fk_DisplayedTypeAssembly = otherImpl.fk_DisplayedTypeAssembly;
-			this.fk_VisualTree = otherImpl.fk_VisualTree;
+			this._fk_DisplayedTypeAssembly = otherImpl._fk_DisplayedTypeAssembly;
+			this._fk_VisualTree = otherImpl._fk_VisualTree;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -359,10 +321,10 @@ namespace Kistl.App.GUI
 			switch(propertyName)
 			{
                 case "DisplayedTypeAssembly":
-                    fk_DisplayedTypeAssembly = id;
+                    _fk_DisplayedTypeAssembly = id;
                     break;
                 case "VisualTree":
-                    fk_VisualTree = id;
+                    _fk_VisualTree = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

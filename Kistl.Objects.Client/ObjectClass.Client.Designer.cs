@@ -42,8 +42,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_BaseObjectClass.HasValue)
-                    return Context.Find<Kistl.App.Base.ObjectClass>(fk_BaseObjectClass.Value);
+                if (_fk_BaseObjectClass.HasValue)
+                    return Context.Find<Kistl.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
                 else
                     return null;
             }
@@ -88,25 +88,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_BaseObjectClass
-        {
-            get
-            {
-                return _fk_BaseObjectClass;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_BaseObjectClass != value)
-                {
-					var __oldValue = _fk_BaseObjectClass;
-                    NotifyPropertyChanging("BaseObjectClass", __oldValue, value);
-                    _fk_BaseObjectClass = value;
-                    NotifyPropertyChanged("BaseObjectClass", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_BaseObjectClass;
 
         /// <summary>
@@ -120,8 +101,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_DefaultModel.HasValue)
-                    return Context.Find<Kistl.App.Base.TypeRef>(fk_DefaultModel.Value);
+                if (_fk_DefaultModel.HasValue)
+                    return Context.Find<Kistl.App.Base.TypeRef>(_fk_DefaultModel.Value);
                 else
                     return null;
             }
@@ -150,25 +131,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DefaultModel
-        {
-            get
-            {
-                return _fk_DefaultModel;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_DefaultModel != value)
-                {
-					var __oldValue = _fk_DefaultModel;
-                    NotifyPropertyChanging("DefaultModel", __oldValue, value);
-                    _fk_DefaultModel = value;
-                    NotifyPropertyChanged("DefaultModel", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_DefaultModel;
 
         /// <summary>
@@ -182,8 +144,8 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (fk_DefaultPresentableModelDescriptor.HasValue)
-                    return Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(fk_DefaultPresentableModelDescriptor.Value);
+                if (_fk_DefaultPresentableModelDescriptor.HasValue)
+                    return Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_DefaultPresentableModelDescriptor.Value);
                 else
                     return null;
             }
@@ -212,25 +174,6 @@ namespace Kistl.App.Base
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_DefaultPresentableModelDescriptor
-        {
-            get
-            {
-                return _fk_DefaultPresentableModelDescriptor;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_DefaultPresentableModelDescriptor != value)
-                {
-					var __oldValue = _fk_DefaultPresentableModelDescriptor;
-                    NotifyPropertyChanging("DefaultPresentableModelDescriptor", __oldValue, value);
-                    _fk_DefaultPresentableModelDescriptor = value;
-                    NotifyPropertyChanged("DefaultPresentableModelDescriptor", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_DefaultPresentableModelDescriptor;
 
         /// <summary>
@@ -437,9 +380,9 @@ namespace Kistl.App.Base
 			me.IsFrozenObject = other.IsFrozenObject;
 			me.IsSimpleObject = other.IsSimpleObject;
 			me.TableName = other.TableName;
-			this.fk_BaseObjectClass = otherImpl.fk_BaseObjectClass;
-			this.fk_DefaultModel = otherImpl.fk_DefaultModel;
-			this.fk_DefaultPresentableModelDescriptor = otherImpl.fk_DefaultPresentableModelDescriptor;
+			this._fk_BaseObjectClass = otherImpl._fk_BaseObjectClass;
+			this._fk_DefaultModel = otherImpl._fk_DefaultModel;
+			this._fk_DefaultPresentableModelDescriptor = otherImpl._fk_DefaultPresentableModelDescriptor;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -563,13 +506,13 @@ namespace Kistl.App.Base
 			switch(propertyName)
 			{
                 case "BaseObjectClass":
-                    fk_BaseObjectClass = id;
+                    _fk_BaseObjectClass = id;
                     break;
                 case "DefaultModel":
-                    fk_DefaultModel = id;
+                    _fk_DefaultModel = id;
                     break;
                 case "DefaultPresentableModelDescriptor":
-                    fk_DefaultPresentableModelDescriptor = id;
+                    _fk_DefaultPresentableModelDescriptor = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

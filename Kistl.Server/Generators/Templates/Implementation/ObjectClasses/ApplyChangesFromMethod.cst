@@ -31,7 +31,7 @@
 			foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
 			{
 %>
-			this.fk_<%= prop.PropertyName %> = otherImpl.fk_<%= prop.PropertyName %>;
+			this._fk_<%= prop.PropertyName %> = otherImpl._fk_<%= prop.PropertyName %>;
 <%
 			}
 %>

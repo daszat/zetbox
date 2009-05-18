@@ -169,7 +169,7 @@ namespace Kistl.App.Base
 			var otherImpl = (EnumerationProperty__Implementation__)obj;
 			var me = (EnumerationProperty)this;
 
-			this.fk_Enumeration = otherImpl.fk_Enumeration;
+			this._fk_Enumeration = otherImpl._fk_Enumeration;
 		}
 
         // tail template

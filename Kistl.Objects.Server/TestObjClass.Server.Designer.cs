@@ -268,7 +268,7 @@ namespace Kistl.App.Test
 			me.MyIntProperty = other.MyIntProperty;
 			me.StringProp = other.StringProp;
 			me.TestEnumProp = other.TestEnumProp;
-			this.fk_ObjectProp = otherImpl.fk_ObjectProp;
+			this._fk_ObjectProp = otherImpl._fk_ObjectProp;
 		}
 
         // tail template

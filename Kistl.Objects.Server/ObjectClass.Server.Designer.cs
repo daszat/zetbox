@@ -531,9 +531,9 @@ namespace Kistl.App.Base
 			me.IsFrozenObject = other.IsFrozenObject;
 			me.IsSimpleObject = other.IsSimpleObject;
 			me.TableName = other.TableName;
-			this.fk_BaseObjectClass = otherImpl.fk_BaseObjectClass;
-			this.fk_DefaultModel = otherImpl.fk_DefaultModel;
-			this.fk_DefaultPresentableModelDescriptor = otherImpl.fk_DefaultPresentableModelDescriptor;
+			this._fk_BaseObjectClass = otherImpl._fk_BaseObjectClass;
+			this._fk_DefaultModel = otherImpl._fk_DefaultModel;
+			this._fk_DefaultPresentableModelDescriptor = otherImpl._fk_DefaultPresentableModelDescriptor;
 		}
 
         // tail template

@@ -169,7 +169,7 @@ namespace Kistl.App.Base
 			var otherImpl = (StructProperty__Implementation__)obj;
 			var me = (StructProperty)this;
 
-			this.fk_StructDefinition = otherImpl.fk_StructDefinition;
+			this._fk_StructDefinition = otherImpl._fk_StructDefinition;
 		}
 
         // tail template

@@ -231,7 +231,7 @@ namespace Kistl.App.Base
 			me.Description = other.Description;
 			me.Name = other.Name;
 			me.Value = other.Value;
-			this.fk_Enumeration = otherImpl.fk_Enumeration;
+			this._fk_Enumeration = otherImpl._fk_Enumeration;
 		}
 
         // tail template

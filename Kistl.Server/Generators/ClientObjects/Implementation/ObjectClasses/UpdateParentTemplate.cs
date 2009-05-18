@@ -28,11 +28,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 || (rel.Storage == StorageType.MergeIntoB && rel.B.Navigator == prop))
             {
                 string name = prop.PropertyName;
-                string fkName = "fk_" + name;
+                string fkBackingName = "_fk_" + name;
 
                 this.WriteObjects("                case \"", name, "\":");
                 this.WriteLine();
-                this.WriteObjects("                    ", fkName, " = id;");
+                this.WriteObjects("                    ", fkBackingName, " = id;");
                 this.WriteLine();
                 this.WriteObjects("                    break;");
                 this.WriteLine();

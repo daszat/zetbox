@@ -136,8 +136,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_Method.HasValue)
-                    return Context.Find<Kistl.App.Base.Method>(fk_Method.Value);
+                if (_fk_Method.HasValue)
+                    return Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
                 else
                     return null;
             }
@@ -166,25 +166,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Method
-        {
-            get
-            {
-                return _fk_Method;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Method != value)
-                {
-					var __oldValue = _fk_Method;
-                    NotifyPropertyChanging("Method", __oldValue, value);
-                    _fk_Method = value;
-                    NotifyPropertyChanged("Method", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Method;
 
         /// <summary>
@@ -198,8 +179,8 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (fk_Property.HasValue)
-                    return Context.Find<Kistl.App.Base.Property>(fk_Property.Value);
+                if (_fk_Property.HasValue)
+                    return Context.Find<Kistl.App.Base.Property>(_fk_Property.Value);
                 else
                     return null;
             }
@@ -228,25 +209,6 @@ namespace Kistl.App.GUI
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Property
-        {
-            get
-            {
-                return _fk_Property;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Property != value)
-                {
-					var __oldValue = _fk_Property;
-                    NotifyPropertyChanging("Property", __oldValue, value);
-                    _fk_Property = value;
-                    NotifyPropertyChanged("Property", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Property;
 
 		public override InterfaceType GetInterfaceType()
@@ -263,8 +225,8 @@ namespace Kistl.App.GUI
 
 			me.ControlType = other.ControlType;
 			me.Description = other.Description;
-			this.fk_Method = otherImpl.fk_Method;
-			this.fk_Property = otherImpl.fk_Property;
+			this._fk_Method = otherImpl._fk_Method;
+			this._fk_Property = otherImpl._fk_Property;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -370,10 +332,10 @@ namespace Kistl.App.GUI
 			switch(propertyName)
 			{
                 case "Method":
-                    fk_Method = id;
+                    _fk_Method = id;
                     break;
                 case "Property":
-                    fk_Property = id;
+                    _fk_Property = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

@@ -596,9 +596,9 @@ namespace Kistl.App.Base
 			me.IsList = other.IsList;
 			me.IsNullable = other.IsNullable;
 			me.PropertyName = other.PropertyName;
-			this.fk_Module = otherImpl.fk_Module;
-			this.fk_ObjectClass = otherImpl.fk_ObjectClass;
-			this.fk_ValueModelDescriptor = otherImpl.fk_ValueModelDescriptor;
+			this._fk_Module = otherImpl._fk_Module;
+			this._fk_ObjectClass = otherImpl._fk_ObjectClass;
+			this._fk_ValueModelDescriptor = otherImpl._fk_ValueModelDescriptor;
 		}
 
         // tail template

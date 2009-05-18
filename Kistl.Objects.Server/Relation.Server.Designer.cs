@@ -300,8 +300,8 @@ namespace Kistl.App.Base
 
 			me.Description = other.Description;
 			me.Storage = other.Storage;
-			this.fk_A = otherImpl.fk_A;
-			this.fk_B = otherImpl.fk_B;
+			this._fk_A = otherImpl._fk_A;
+			this._fk_B = otherImpl._fk_B;
 		}
 
         // tail template

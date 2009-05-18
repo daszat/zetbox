@@ -497,8 +497,8 @@ namespace Kistl.App.Base
 			me.ClassName = other.ClassName;
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
-			this.fk_DefaultIcon = otherImpl.fk_DefaultIcon;
-			this.fk_Module = otherImpl.fk_Module;
+			this._fk_DefaultIcon = otherImpl._fk_DefaultIcon;
+			this._fk_Module = otherImpl._fk_Module;
 		}
 
         // tail template

@@ -138,8 +138,8 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (fk_Projekt.HasValue)
-                    return Context.Find<Kistl.App.Projekte.Projekt>(fk_Projekt.Value);
+                if (_fk_Projekt.HasValue)
+                    return Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
                 else
                     return null;
             }
@@ -184,25 +184,6 @@ namespace Kistl.App.Projekte
             }
         }
         
-        // provide a way to directly access the foreign key int
-        public int? fk_Projekt
-        {
-            get
-            {
-                return _fk_Projekt;
-            }
-            private set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_fk_Projekt != value)
-                {
-					var __oldValue = _fk_Projekt;
-                    NotifyPropertyChanging("Projekt", __oldValue, value);
-                    _fk_Projekt = value;
-                    NotifyPropertyChanged("Projekt", __oldValue, value);
-                }
-            }
-        }
         private int? _fk_Projekt;
 
 		public override InterfaceType GetInterfaceType()
@@ -221,7 +202,7 @@ namespace Kistl.App.Projekte
 			me.DatumBis = other.DatumBis;
 			me.DatumVon = other.DatumVon;
 			me.Name = other.Name;
-			this.fk_Projekt = otherImpl.fk_Projekt;
+			this._fk_Projekt = otherImpl._fk_Projekt;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -318,7 +299,7 @@ namespace Kistl.App.Projekte
 			switch(propertyName)
 			{
                 case "Projekt":
-                    fk_Projekt = id;
+                    _fk_Projekt = id;
                     break;
 				default:
 					base.UpdateParent(propertyName, id);

@@ -259,7 +259,7 @@ namespace Kistl.App.TimeRecords
 			me.Name = other.Name;
 			me.Notes = other.Notes;
 			me.Thru = other.Thru;
-			this.fk_Mitarbeiter = otherImpl.fk_Mitarbeiter;
+			this._fk_Mitarbeiter = otherImpl._fk_Mitarbeiter;
 		}
 
         // tail template
