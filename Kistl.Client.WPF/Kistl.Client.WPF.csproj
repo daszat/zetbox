@@ -182,6 +182,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.Fixes.cs" />
+    <Compile Include="CommandAdapter.cs" />
+    <Compile Include="Converter\CommandConverter.cs" />
     <Compile Include="Converter\Converters.cs" />
     <Compile Include="Converter\DebugConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />

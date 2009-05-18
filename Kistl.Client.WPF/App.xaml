@@ -12,6 +12,7 @@
             <converter:GetTypeConverter x:Key="GetTypeConverter" />
             <converter:ValidityToBrushConverter x:Key="ValidityToBrushConverter" />
             <converter:DebugConverter x:Key="debug" />
+            <converter:CommandConverter x:Key="CommandConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="View/DefaultViews.xaml" />
             </ResourceDictionary.MergedDictionaries>
