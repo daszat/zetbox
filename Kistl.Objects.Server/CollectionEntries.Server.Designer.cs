@@ -748,7 +748,7 @@ namespace Kistl.App.Base
 {
     [EdmEntityType(NamespaceName="Model", Name="TypeRef_GenericArguments66CollectionEntry")]
     [System.Diagnostics.DebuggerDisplay("TypeRef_GenericArguments66CollectionEntry__Implementation__")]
-    public class TypeRef_GenericArguments66CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, TypeRef_GenericArguments66CollectionEntry
+    public class TypeRef_GenericArguments66CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, TypeRef_GenericArguments66CollectionEntry, Kistl.API.IExportableInternal
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -987,6 +987,32 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+			// TODO: Add GUID BackingStore!
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
+			// TODO: Add GUID BackingStore!
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");

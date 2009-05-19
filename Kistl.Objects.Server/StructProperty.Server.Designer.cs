@@ -244,6 +244,21 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_StructDefinition, xml, "StructDefinition", "Kistl.App.Base");
         }
 
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+            base.Export(xml, modules);
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(StructDefinition != null ? StructDefinition.ExportGuid : (Guid?)null, xml, "StructDefinition", "Kistl.App.Base");
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+			
+            base.MergeImport(xml);
+			// TODO: Add GUID BackingStore!
+            XmlStreamer.FromStream(ref this._fk_StructDefinition, xml, "StructDefinition", "Kistl.App.Base");
+        }
+
 #endregion
 
     }

@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="RelationEnd")]
     [System.Diagnostics.DebuggerDisplay("RelationEnd")]
-    public class RelationEnd__Implementation__ : BaseServerDataObject_EntityFramework, RelationEnd
+    public class RelationEnd__Implementation__ : BaseServerDataObject_EntityFramework, RelationEnd, Kistl.API.IExportableInternal
     {
     
 		public RelationEnd__Implementation__()
@@ -181,6 +181,33 @@ namespace Kistl.App.Base
         }
         
         
+
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
 
         /// <summary>
         /// Is true, if this RelationEnd persists the order of its elements
@@ -446,6 +473,7 @@ namespace Kistl.App.Base
 			var otherImpl = (RelationEnd__Implementation__)obj;
 			var me = (RelationEnd)this;
 
+			me.ExportGuid = other.ExportGuid;
 			me.HasPersistentOrder = other.HasPersistentOrder;
 			me.Multiplicity = other.Multiplicity;
 			me.Role = other.Role;
@@ -504,6 +532,15 @@ namespace Kistl.App.Base
 					var errors = Context.Find<Kistl.App.Base.Property>(223).Constraints
 						.Where(c => !c.IsValid(this, this.BParent))
 						.Select(c => c.GetErrorText(this, this.BParent))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ExportGuid":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(262).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -596,6 +633,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream);
             BinarySerializer.ToStream(AParent != null ? AParent.ID : (int?)null, binStream);
             BinarySerializer.ToStream(BParent != null ? BParent.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
             BinarySerializer.ToStream((int)((RelationEnd)this).Multiplicity, binStream);
             BinarySerializer.ToStream(Navigator != null ? Navigator.ID : (int?)null, binStream);
@@ -610,6 +648,7 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_AParent, binStream);
             BinarySerializer.FromStream(out this._fk_BParent, binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._HasPersistentOrder, binStream);
             BinarySerializer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, binStream);
             BinarySerializer.FromStream(out this._fk_Navigator, binStream);
@@ -624,8 +663,9 @@ namespace Kistl.App.Base
             base.ToStream(xml);
             XmlStreamer.ToStream(AParent != null ? AParent.ID : (int?)null, xml, "AParent", "Kistl.App.Base");
             XmlStreamer.ToStream(BParent != null ? BParent.ID : (int?)null, xml, "BParent", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            // TODO: Add XML Serializer here
+            XmlStreamer.ToStream((int)this.Multiplicity, xml, "Multiplicity", "Kistl.App.Base");
             XmlStreamer.ToStream(Navigator != null ? Navigator.ID : (int?)null, xml, "Navigator", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Role, xml, "Role", "Kistl.App.Base");
             XmlStreamer.ToStream(this._RoleName, xml, "RoleName", "Kistl.App.Base");
@@ -638,11 +678,48 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_AParent, xml, "AParent", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_BParent, xml, "BParent", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            // TODO: Add XML Serializer here
+            XmlStreamer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, xml, "Multiplicity", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Navigator, xml, "Navigator", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Role, xml, "Role", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._RoleName, xml, "RoleName", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.Base");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(AParent != null ? AParent.ExportGuid : (Guid?)null, xml, "AParent", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BParent != null ? BParent.ExportGuid : (Guid?)null, xml, "BParent", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.Multiplicity, xml, "Multiplicity", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Navigator != null ? Navigator.ExportGuid : (Guid?)null, xml, "Navigator", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Role, xml, "Role", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._RoleName, xml, "RoleName", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+			// TODO: Add GUID BackingStore!
+            XmlStreamer.FromStream(ref this._fk_AParent, xml, "AParent", "Kistl.App.Base");
+			// TODO: Add GUID BackingStore!
+            XmlStreamer.FromStream(ref this._fk_BParent, xml, "BParent", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
+            XmlStreamer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, xml, "Multiplicity", "Kistl.App.Base");
+			// TODO: Add GUID BackingStore!
+            XmlStreamer.FromStream(ref this._fk_Navigator, xml, "Navigator", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Role, xml, "Role", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._RoleName, xml, "RoleName", "Kistl.App.Base");
+			// TODO: Add GUID BackingStore!
             XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.Base");
         }
 

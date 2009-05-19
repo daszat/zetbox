@@ -228,6 +228,18 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_StructDefinition, xml, "StructDefinition", "http://dasz.at/Kistl");
         }
 
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+            base.Export(xml, modules);
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+			
+            base.MergeImport(xml);
+        }
+
 #endregion
 
     }

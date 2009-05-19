@@ -90,7 +90,6 @@ namespace Kistl.API
         }
         #endregion
 
-
         #region double
         public static void ToStream(double val, XmlWriter xml, string name, string ns)
         {
@@ -168,6 +167,14 @@ namespace Kistl.API
             if (xml.Name == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsInt();
+            }
+        }
+        public static void FromStreamConverter(Action<int> conv, XmlReader xml, string name, string ns)
+        {
+            if (xml.Name == name && xml.NamespaceURI == ns)
+            {
+                int val = xml.ReadElementContentAsInt();
+                conv(val);
             }
         }
         #endregion

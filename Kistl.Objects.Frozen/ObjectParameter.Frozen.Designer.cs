@@ -170,6 +170,7 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[10].Description = null;
+			DataStore[10].ExportGuid = default(System.Guid);
 			DataStore[10].IsList = false;
 			DataStore[10].IsReturnParameter = false;
 			DataStore[10].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
@@ -177,6 +178,7 @@ namespace Kistl.App.Base
 			DataStore[10].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
 			DataStore[10].Seal();
 			DataStore[26].Description = null;
+			DataStore[26].ExportGuid = default(System.Guid);
 			DataStore[26].IsList = false;
 			DataStore[26].IsReturnParameter = true;
 			DataStore[26].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[124];
@@ -184,6 +186,7 @@ namespace Kistl.App.Base
 			DataStore[26].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
 			DataStore[26].Seal();
 			DataStore[27].Description = null;
+			DataStore[27].ExportGuid = default(System.Guid);
 			DataStore[27].IsList = true;
 			DataStore[27].IsReturnParameter = true;
 			DataStore[27].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[125];
@@ -191,6 +194,7 @@ namespace Kistl.App.Base
 			DataStore[27].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
 			DataStore[27].Seal();
 			DataStore[36].Description = null;
+			DataStore[36].ExportGuid = default(System.Guid);
 			DataStore[36].IsList = false;
 			DataStore[36].IsReturnParameter = false;
 			DataStore[36].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[144];
@@ -214,6 +218,14 @@ namespace Kistl.App.Base
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

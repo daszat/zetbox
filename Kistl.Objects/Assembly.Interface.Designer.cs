@@ -21,6 +21,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Export Guid
+        /// </summary>
+		Guid ExportGuid {
+			get;
+			set;
+		}
+        /// <summary>
         /// Legt fest, ob es sich um ein Client-Assembly handelt.
         /// </summary>
 		bool IsClientAssembly {

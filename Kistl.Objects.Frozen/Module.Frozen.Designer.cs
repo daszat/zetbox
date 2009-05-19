@@ -20,7 +20,7 @@ namespace Kistl.App.Base
     /// Metadefinition Object for Modules.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Module")]
-    public class Module__Implementation__Frozen : BaseFrozenDataObject, Module
+    public class Module__Implementation__Frozen : BaseFrozenDataObject, Module, Kistl.API.IExportableInternal
     {
     
 		public Module__Implementation__Frozen()
@@ -97,6 +97,30 @@ namespace Kistl.App.Base
             }
         }
         private string _Description;
+
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
 
         /// <summary>
         /// Name des Moduls
@@ -212,6 +236,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "ExportGuid":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(260).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "ModuleName":
 				{
 					var errors = Context.Find<Kistl.App.Base.Property>(43).Constraints
@@ -304,6 +337,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[81],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[88],
 });
 			DataStore[1].Description = @"";
+			DataStore[1].ExportGuid = default(System.Guid);
 			DataStore[1].ModuleName = @"KistlBase";
 			DataStore[1].Namespace = @"Kistl.App.Base";
 			DataStore[1].Seal();
@@ -317,6 +351,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19],
 });
 			DataStore[2].Description = @"";
+			DataStore[2].ExportGuid = default(System.Guid);
 			DataStore[2].ModuleName = @"Projekte";
 			DataStore[2].Namespace = @"Kistl.App.Projekte";
 			DataStore[2].Seal();
@@ -328,6 +363,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86],
 });
 			DataStore[3].Description = @"";
+			DataStore[3].ExportGuid = default(System.Guid);
 			DataStore[3].ModuleName = @"TimeRecords";
 			DataStore[3].Namespace = @"Kistl.App.TimeRecords";
 			DataStore[3].Seal();
@@ -364,6 +400,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[53],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52],
 });
 			DataStore[4].Description = @"";
+			DataStore[4].ExportGuid = default(System.Guid);
 			DataStore[4].ModuleName = @"GUI";
 			DataStore[4].Namespace = @"Kistl.App.GUI";
 			DataStore[4].Seal();
@@ -380,6 +417,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48],
 });
 			DataStore[5].Description = @"";
+			DataStore[5].ExportGuid = default(System.Guid);
 			DataStore[5].ModuleName = @"TestModule";
 			DataStore[5].Namespace = @"Kistl.App.Test";
 			DataStore[5].Seal();
@@ -400,6 +438,14 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48],
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

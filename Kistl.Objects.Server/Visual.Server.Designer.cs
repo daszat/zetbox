@@ -496,7 +496,7 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(xml);
-            // TODO: Add XML Serializer here
+            XmlStreamer.ToStream((int)this.ControlType, xml, "ControlType", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.ToStream(Method != null ? Method.ID : (int?)null, xml, "Method", "Kistl.App.GUI");
             XmlStreamer.ToStream(Property != null ? Property.ID : (int?)null, xml, "Property", "Kistl.App.GUI");
@@ -506,7 +506,7 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(xml);
-            // TODO: Add XML Serializer here
+            XmlStreamer.FromStreamConverter(v => ((Visual)this).ControlType = (Kistl.App.GUI.VisualType)v, xml, "ControlType", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Property, xml, "Property", "Kistl.App.GUI");

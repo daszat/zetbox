@@ -35,6 +35,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Export Guid
+        /// </summary>
+		Guid ExportGuid {
+			get;
+			set;
+		}
+        /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
 		Kistl.App.Base.StorageType? Storage {

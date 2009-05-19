@@ -42,6 +42,7 @@
 <ScalarProperty Name="AltText" ColumnName="AltText" />
 <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsIndexed" ColumnName="IsIndexed" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />
 <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
@@ -105,6 +106,7 @@
 	    <MappingFragment StoreEntitySet="Method">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
 <ScalarProperty Name="MethodName" ColumnName="MethodName" />
 	    </MappingFragment>
@@ -115,6 +117,7 @@
 	    <MappingFragment StoreEntitySet="Module">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
 <ScalarProperty Name="Namespace" ColumnName="Namespace" />
 	    </MappingFragment>
@@ -165,6 +168,7 @@
 	    <MappingFragment StoreEntitySet="Assembly">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="AssemblyName" ColumnName="AssemblyName" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsClientAssembly" ColumnName="IsClientAssembly" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -173,6 +177,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.MethodInvocation)">
 	    <MappingFragment StoreEntitySet="MethodInvocation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="MemberName" ColumnName="MemberName" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -215,6 +220,7 @@
 	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />
 <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
 <ScalarProperty Name="Method_pos" ColumnName="fk_Method_pos" />
@@ -359,6 +365,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Constraint)">
 	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Reason" ColumnName="Reason" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -402,6 +409,7 @@
 	    <MappingFragment StoreEntitySet="Relation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Storage" ColumnName="Storage" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -410,6 +418,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef)">
 	    <MappingFragment StoreEntitySet="TypeRef">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="FullName" ColumnName="FullName" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -418,6 +427,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEnd)">
 	    <MappingFragment StoreEntitySet="RelationEnd">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
 <ScalarProperty Name="Multiplicity" ColumnName="Multiplicity" />
 <ScalarProperty Name="Role" ColumnName="Role" />

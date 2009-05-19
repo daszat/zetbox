@@ -21,7 +21,7 @@ namespace Kistl.App.Base
     /// Describes a Relation between two Object Classes
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Relation")]
-    public class Relation__Implementation__ : BaseClientDataObject_ClientObjects, Relation
+    public class Relation__Implementation__ : BaseClientDataObject_ClientObjects, Relation, Kistl.API.IExportableInternal
     {
     
 		public Relation__Implementation__()
@@ -174,6 +174,30 @@ namespace Kistl.App.Base
         private string _Description;
 
         /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
+
+        /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
         // enumeration property
@@ -210,6 +234,7 @@ namespace Kistl.App.Base
 			var me = (Relation)this;
 
 			me.Description = other.Description;
+			me.ExportGuid = other.ExportGuid;
 			me.Storage = other.Storage;
 			this._fk_A = otherImpl._fk_A;
 			this._fk_B = otherImpl._fk_B;
@@ -281,6 +306,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "ExportGuid":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(261).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "Storage":
 				{
 					var errors = Context.Find<Kistl.App.Base.Property>(183).Constraints
@@ -321,6 +355,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
         }
 
@@ -331,6 +366,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
         }
 
@@ -341,7 +377,8 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            // TODO: Add XML Serializer here
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.ToStream((int)this.Storage, xml, "Storage", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -351,7 +388,26 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            // TODO: Add XML Serializer here
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.Storage, xml, "Storage", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
         }
 
 #endregion

@@ -400,9 +400,9 @@ namespace Kistl.App.GUI
             base.ToStream(xml);
             XmlStreamer.ToStream(Assembly != null ? Assembly.ID : (int?)null, xml, "Assembly", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._ClassName, xml, "ClassName", "Kistl.App.GUI");
-            // TODO: Add XML Serializer here
+            XmlStreamer.ToStream((int)this.ControlType, xml, "ControlType", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._IsContainer, xml, "IsContainer", "Kistl.App.GUI");
-            // TODO: Add XML Serializer here
+            XmlStreamer.ToStream((int)this.Platform, xml, "Platform", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -411,9 +411,9 @@ namespace Kistl.App.GUI
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "Kistl.App.GUI");
-            // TODO: Add XML Serializer here
+            XmlStreamer.FromStreamConverter(v => ((ControlInfo)this).ControlType = (Kistl.App.GUI.VisualType)v, xml, "ControlType", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsContainer, xml, "IsContainer", "Kistl.App.GUI");
-            // TODO: Add XML Serializer here
+            XmlStreamer.FromStreamConverter(v => ((ControlInfo)this).Platform = (Kistl.App.GUI.Toolkit)v, xml, "Platform", "Kistl.App.GUI");
         }
 
 #endregion

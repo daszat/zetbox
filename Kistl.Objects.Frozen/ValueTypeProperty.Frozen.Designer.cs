@@ -136,6 +136,14 @@ namespace Kistl.App.Base
         {
             throw new NotImplementedException();
         }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
 
 #endregion
 

@@ -35,12 +35,18 @@
 			break;
 		case SerializerDirection.ToXmlStream:
 %>
-            // TODO: Add XML Serializer here
+            XmlStreamer.ToStream((int)this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
 		case SerializerDirection.FromXmlStream:
+		case SerializerDirection.MergeImport:
 %>
-            // TODO: Add XML Serializer here
+            XmlStreamer.FromStreamConverter(v => ((<%= interfaceName %>)this).<%= memberName %> = (<%= enumName %>)v, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%
+            break;
+		case SerializerDirection.Export:
+%>
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream((int)this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
 		default:

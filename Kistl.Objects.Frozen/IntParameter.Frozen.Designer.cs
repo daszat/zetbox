@@ -120,6 +120,7 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[2].Description = null;
+			DataStore[2].ExportGuid = default(System.Guid);
 			DataStore[2].IsList = false;
 			DataStore[2].IsReturnParameter = false;
 			DataStore[2].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
@@ -142,6 +143,14 @@ namespace Kistl.App.Base
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

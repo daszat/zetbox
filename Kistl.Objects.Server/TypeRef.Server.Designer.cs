@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="TypeRef")]
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
-    public class TypeRef__Implementation__ : BaseServerDataObject_EntityFramework, TypeRef
+    public class TypeRef__Implementation__ : BaseServerDataObject_EntityFramework, TypeRef, Kistl.API.IExportableInternal
     {
     
 		public TypeRef__Implementation__()
@@ -117,6 +117,33 @@ namespace Kistl.App.Base
         }
         
         
+
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
 
         /// <summary>
         /// 
@@ -290,6 +317,7 @@ namespace Kistl.App.Base
 			var otherImpl = (TypeRef__Implementation__)obj;
 			var me = (TypeRef)this;
 
+			me.ExportGuid = other.ExportGuid;
 			me.FullName = other.FullName;
 			this._fk_Assembly = otherImpl._fk_Assembly;
 			this._fk_Parent = otherImpl._fk_Parent;
@@ -334,6 +362,15 @@ namespace Kistl.App.Base
 					var errors = Context.Find<Kistl.App.Base.Property>(206).Constraints
 						.Where(c => !c.IsValid(this, this.Assembly))
 						.Select(c => c.GetErrorText(this, this.Assembly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ExportGuid":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(263).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -390,6 +427,7 @@ namespace Kistl.App.Base
 			
             base.ToStream(binStream);
             BinarySerializer.ToStream(Assembly != null ? Assembly.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._FullName, binStream);
             BinarySerializer.ToStream(Parent != null ? Parent.ID : (int?)null, binStream);
         }
@@ -399,6 +437,7 @@ namespace Kistl.App.Base
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Assembly, binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._FullName, binStream);
             BinarySerializer.FromStream(out this._fk_Parent, binStream);
         }
@@ -408,6 +447,7 @@ namespace Kistl.App.Base
 			
             base.ToStream(xml);
             XmlStreamer.ToStream(Assembly != null ? Assembly.ID : (int?)null, xml, "Assembly", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.ToStream(this._FullName, xml, "FullName", "Kistl.App.Base");
             XmlStreamer.ToStream(Parent != null ? Parent.ID : (int?)null, xml, "Parent", "Kistl.App.Base");
         }
@@ -417,7 +457,30 @@ namespace Kistl.App.Base
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Base");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Assembly != null ? Assembly.ExportGuid : (Guid?)null, xml, "Assembly", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._FullName, xml, "FullName", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Parent != null ? Parent.ExportGuid : (Guid?)null, xml, "Parent", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+			// TODO: Add GUID BackingStore!
+            XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "Kistl.App.Base");
+			// TODO: Add GUID BackingStore!
             XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Base");
         }
 

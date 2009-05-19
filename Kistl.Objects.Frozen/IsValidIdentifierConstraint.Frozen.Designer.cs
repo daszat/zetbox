@@ -135,21 +135,27 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[194].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[3];
+			DataStore[194].ExportGuid = default(System.Guid);
 			DataStore[194].Reason = null;
 			DataStore[194].Seal();
 			DataStore[195].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[1];
+			DataStore[195].ExportGuid = default(System.Guid);
 			DataStore[195].Reason = null;
 			DataStore[195].Seal();
 			DataStore[196].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[9];
+			DataStore[196].ExportGuid = default(System.Guid);
 			DataStore[196].Reason = null;
 			DataStore[196].Seal();
 			DataStore[199].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[30];
+			DataStore[199].ExportGuid = default(System.Guid);
 			DataStore[199].Reason = null;
 			DataStore[199].Seal();
 			DataStore[200].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[91];
+			DataStore[200].ExportGuid = default(System.Guid);
 			DataStore[200].Reason = null;
 			DataStore[200].Seal();
 			DataStore[201].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[136];
+			DataStore[201].ExportGuid = default(System.Guid);
 			DataStore[201].Reason = null;
 			DataStore[201].Seal();
 	
@@ -169,6 +175,14 @@ namespace Kistl.App.Base
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

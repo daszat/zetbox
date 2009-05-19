@@ -21,6 +21,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Export Guid
+        /// </summary>
+		Guid ExportGuid {
+			get;
+			set;
+		}
+        /// <summary>
         /// Shows this Method in th GUI
         /// </summary>
 		bool IsDisplayable {

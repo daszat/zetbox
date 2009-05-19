@@ -138,42 +138,49 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[1].Description = null;
+			DataStore[1].ExportGuid = default(System.Guid);
 			DataStore[1].IsList = false;
 			DataStore[1].IsReturnParameter = false;
 			DataStore[1].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
 			DataStore[1].ParameterName = @"TestString";
 			DataStore[1].Seal();
 			DataStore[3].Description = null;
+			DataStore[3].ExportGuid = default(System.Guid);
 			DataStore[3].IsList = false;
 			DataStore[3].IsReturnParameter = true;
 			DataStore[3].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
 			DataStore[3].ParameterName = @"ReturnParameter";
 			DataStore[3].Seal();
 			DataStore[5].Description = null;
+			DataStore[5].ExportGuid = default(System.Guid);
 			DataStore[5].IsList = false;
 			DataStore[5].IsReturnParameter = true;
 			DataStore[5].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[82];
 			DataStore[5].ParameterName = @"ReturnParameter";
 			DataStore[5].Seal();
 			DataStore[14].Description = null;
+			DataStore[14].ExportGuid = default(System.Guid);
 			DataStore[14].IsList = false;
 			DataStore[14].IsReturnParameter = false;
 			DataStore[14].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[96];
 			DataStore[14].ParameterName = @"message";
 			DataStore[14].Seal();
 			DataStore[23].Description = null;
+			DataStore[23].ExportGuid = default(System.Guid);
 			DataStore[23].IsList = false;
 			DataStore[23].IsReturnParameter = true;
 			DataStore[23].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[120];
 			DataStore[23].ParameterName = @"ReturnParameter";
 			DataStore[23].Seal();
 			DataStore[30].Description = null;
+			DataStore[30].ExportGuid = default(System.Guid);
 			DataStore[30].IsList = false;
 			DataStore[30].IsReturnParameter = true;
 			DataStore[30].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[139];
 			DataStore[30].ParameterName = @"result";
 			DataStore[30].Seal();
 			DataStore[33].Description = null;
+			DataStore[33].ExportGuid = default(System.Guid);
 			DataStore[33].IsList = false;
 			DataStore[33].IsReturnParameter = true;
 			DataStore[33].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[141];
@@ -196,6 +203,14 @@ namespace Kistl.App.Base
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

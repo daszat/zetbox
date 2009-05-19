@@ -203,21 +203,25 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[147].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[28];
+			DataStore[147].ExportGuid = default(System.Guid);
 			DataStore[147].Reason = @"Strings have to have at least one character.";
 			DataStore[147].Max = 4000;
 			DataStore[147].Min = 1;
 			DataStore[147].Seal();
 			DataStore[148].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[172];
+			DataStore[148].ExportGuid = default(System.Guid);
 			DataStore[148].Reason = @"strings in the database should not be longer than 4k";
 			DataStore[148].Max = 4000;
 			DataStore[148].Min = 0;
 			DataStore[148].Seal();
 			DataStore[149].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[173];
+			DataStore[149].ExportGuid = default(System.Guid);
 			DataStore[149].Reason = @"strings in the database should not be longer than 4k";
 			DataStore[149].Max = 4000;
 			DataStore[149].Min = 0;
 			DataStore[149].Seal();
 			DataStore[216].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[217];
+			DataStore[216].ExportGuid = default(System.Guid);
 			DataStore[216].Reason = @"RelationEndRole can only be 1 ('A') or 2 ('B')";
 			DataStore[216].Max = 2;
 			DataStore[216].Min = 1;
@@ -239,6 +243,14 @@ namespace Kistl.App.Base
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

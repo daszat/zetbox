@@ -230,6 +230,7 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[11].Description = null;
+			DataStore[11].ExportGuid = default(System.Guid);
 			DataStore[11].IsList = false;
 			DataStore[11].IsReturnParameter = false;
 			DataStore[11].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
@@ -238,6 +239,7 @@ namespace Kistl.App.Base
 			DataStore[11].FullTypeName = @"System.Guid";
 			DataStore[11].Seal();
 			DataStore[16].Description = null;
+			DataStore[16].ExportGuid = default(System.Guid);
 			DataStore[16].IsList = false;
 			DataStore[16].IsReturnParameter = false;
 			DataStore[16].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[97];
@@ -246,6 +248,7 @@ namespace Kistl.App.Base
 			DataStore[16].FullTypeName = @"Kistl.API.IDataObject";
 			DataStore[16].Seal();
 			DataStore[18].Description = null;
+			DataStore[18].ExportGuid = default(System.Guid);
 			DataStore[18].IsList = false;
 			DataStore[18].IsReturnParameter = false;
 			DataStore[18].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[98];
@@ -254,6 +257,7 @@ namespace Kistl.App.Base
 			DataStore[18].FullTypeName = @"Kistl.API.IKistlContext";
 			DataStore[18].Seal();
 			DataStore[19].Description = null;
+			DataStore[19].ExportGuid = default(System.Guid);
 			DataStore[19].IsList = false;
 			DataStore[19].IsReturnParameter = false;
 			DataStore[19].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[98];
@@ -262,6 +266,7 @@ namespace Kistl.App.Base
 			DataStore[19].FullTypeName = @"System.Type";
 			DataStore[19].Seal();
 			DataStore[20].Description = null;
+			DataStore[20].ExportGuid = default(System.Guid);
 			DataStore[20].IsList = false;
 			DataStore[20].IsReturnParameter = true;
 			DataStore[20].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[98];
@@ -270,6 +275,7 @@ namespace Kistl.App.Base
 			DataStore[20].FullTypeName = @"Kistl.API.IDataObject";
 			DataStore[20].Seal();
 			DataStore[21].Description = null;
+			DataStore[21].ExportGuid = default(System.Guid);
 			DataStore[21].IsList = false;
 			DataStore[21].IsReturnParameter = true;
 			DataStore[21].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[118];
@@ -278,6 +284,7 @@ namespace Kistl.App.Base
 			DataStore[21].FullTypeName = @"System.Type";
 			DataStore[21].Seal();
 			DataStore[24].Description = null;
+			DataStore[24].ExportGuid = default(System.Guid);
 			DataStore[24].IsList = false;
 			DataStore[24].IsReturnParameter = true;
 			DataStore[24].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[121];
@@ -286,6 +293,7 @@ namespace Kistl.App.Base
 			DataStore[24].FullTypeName = @"System.Type";
 			DataStore[24].Seal();
 			DataStore[25].Description = null;
+			DataStore[25].ExportGuid = default(System.Guid);
 			DataStore[25].IsList = false;
 			DataStore[25].IsReturnParameter = true;
 			DataStore[25].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[123];
@@ -294,6 +302,7 @@ namespace Kistl.App.Base
 			DataStore[25].FullTypeName = @"System.Type";
 			DataStore[25].Seal();
 			DataStore[28].Description = null;
+			DataStore[28].ExportGuid = default(System.Guid);
 			DataStore[28].IsList = false;
 			DataStore[28].IsReturnParameter = false;
 			DataStore[28].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
@@ -302,6 +311,7 @@ namespace Kistl.App.Base
 			DataStore[28].FullTypeName = @"System.Object";
 			DataStore[28].Seal();
 			DataStore[31].Description = null;
+			DataStore[31].ExportGuid = default(System.Guid);
 			DataStore[31].IsList = false;
 			DataStore[31].IsReturnParameter = false;
 			DataStore[31].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[139];
@@ -310,6 +320,7 @@ namespace Kistl.App.Base
 			DataStore[31].FullTypeName = @"System.Object";
 			DataStore[31].Seal();
 			DataStore[34].Description = null;
+			DataStore[34].ExportGuid = default(System.Guid);
 			DataStore[34].IsList = false;
 			DataStore[34].IsReturnParameter = false;
 			DataStore[34].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
@@ -318,6 +329,7 @@ namespace Kistl.App.Base
 			DataStore[34].FullTypeName = @"System.Object";
 			DataStore[34].Seal();
 			DataStore[35].Description = null;
+			DataStore[35].ExportGuid = default(System.Guid);
 			DataStore[35].IsList = false;
 			DataStore[35].IsReturnParameter = false;
 			DataStore[35].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[139];
@@ -326,6 +338,7 @@ namespace Kistl.App.Base
 			DataStore[35].FullTypeName = @"System.Object";
 			DataStore[35].Seal();
 			DataStore[37].Description = @"the referenced Type";
+			DataStore[37].ExportGuid = default(System.Guid);
 			DataStore[37].IsList = false;
 			DataStore[37].IsReturnParameter = true;
 			DataStore[37].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[151];
@@ -350,6 +363,14 @@ namespace Kistl.App.Base
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

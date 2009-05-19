@@ -168,6 +168,7 @@ namespace Kistl.App.Base
 			DataStore[131].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[131].Description = @"Mobile Phone Number";
+			DataStore[131].ExportGuid = default(System.Guid);
 			DataStore[131].IsIndexed = false;
 			DataStore[131].IsList = false;
 			DataStore[131].IsNullable = true;
@@ -182,6 +183,7 @@ namespace Kistl.App.Base
 			DataStore[132].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[132].Description = @"Office Phone Number";
+			DataStore[132].ExportGuid = default(System.Guid);
 			DataStore[132].IsIndexed = false;
 			DataStore[132].IsList = false;
 			DataStore[132].IsNullable = true;
@@ -208,6 +210,14 @@ namespace Kistl.App.Base
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

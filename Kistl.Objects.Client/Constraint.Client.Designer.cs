@@ -21,7 +21,7 @@ namespace Kistl.App.Base
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Constraint")]
-    public class Constraint__Implementation__ : BaseClientDataObject_ClientObjects, Constraint
+    public class Constraint__Implementation__ : BaseClientDataObject_ClientObjects, Constraint, Kistl.API.IExportableInternal
     {
     
 		public Constraint__Implementation__()
@@ -89,6 +89,30 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_ConstrainedProperty;
+
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
 
         /// <summary>
         /// The reason of this constraint
@@ -170,6 +194,7 @@ namespace Kistl.App.Base
 			var otherImpl = (Constraint__Implementation__)obj;
 			var me = (Constraint)this;
 
+			me.ExportGuid = other.ExportGuid;
 			me.Reason = other.Reason;
 			this._fk_ConstrainedProperty = otherImpl._fk_ConstrainedProperty;
 		}
@@ -222,6 +247,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "ExportGuid":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(256).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "Reason":
 				{
 					var errors = Context.Find<Kistl.App.Base.Property>(167).Constraints
@@ -257,6 +291,7 @@ namespace Kistl.App.Base
 			
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_ConstrainedProperty, binStream);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._Reason, binStream);
         }
 
@@ -265,6 +300,7 @@ namespace Kistl.App.Base
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ConstrainedProperty, binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._Reason, binStream);
         }
 
@@ -273,6 +309,7 @@ namespace Kistl.App.Base
 			
             base.ToStream(xml);
             XmlStreamer.ToStream(this._fk_ConstrainedProperty, xml, "ConstrainedProperty", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
@@ -281,6 +318,23 @@ namespace Kistl.App.Base
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_ConstrainedProperty, xml, "ConstrainedProperty", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "Kistl.App.Base");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Reason, xml, "Reason", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 

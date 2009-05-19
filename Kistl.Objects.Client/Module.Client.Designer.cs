@@ -21,7 +21,7 @@ namespace Kistl.App.Base
     /// Metadefinition Object for Modules.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Module")]
-    public class Module__Implementation__ : BaseClientDataObject_ClientObjects, Module
+    public class Module__Implementation__ : BaseClientDataObject_ClientObjects, Module, Kistl.API.IExportableInternal
     {
     
 		public Module__Implementation__()
@@ -116,6 +116,30 @@ namespace Kistl.App.Base
         private string _Description;
 
         /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
+
+        /// <summary>
         /// Name des Moduls
         /// </summary>
         // value type property
@@ -176,6 +200,7 @@ namespace Kistl.App.Base
 			var me = (Module)this;
 
 			me.Description = other.Description;
+			me.ExportGuid = other.ExportGuid;
 			me.ModuleName = other.ModuleName;
 			me.Namespace = other.Namespace;
 		}
@@ -246,6 +271,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "ExportGuid":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(260).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "ModuleName":
 				{
 					var errors = Context.Find<Kistl.App.Base.Property>(43).Constraints
@@ -287,6 +321,7 @@ namespace Kistl.App.Base
 			
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._ModuleName, binStream);
             BinarySerializer.ToStream(this._Namespace, binStream);
         }
@@ -296,6 +331,7 @@ namespace Kistl.App.Base
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._ModuleName, binStream);
             BinarySerializer.FromStream(out this._Namespace, binStream);
         }
@@ -305,6 +341,7 @@ namespace Kistl.App.Base
 			
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.ToStream(this._ModuleName, xml, "ModuleName", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Namespace, xml, "Namespace", "Kistl.App.Base");
         }
@@ -314,6 +351,29 @@ namespace Kistl.App.Base
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ModuleName, xml, "ModuleName", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Namespace, xml, "Namespace", "Kistl.App.Base");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ModuleName, xml, "ModuleName", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Namespace, xml, "Namespace", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ModuleName, xml, "ModuleName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Namespace, xml, "Namespace", "Kistl.App.Base");
         }

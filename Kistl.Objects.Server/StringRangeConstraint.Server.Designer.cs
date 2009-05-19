@@ -244,6 +244,24 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._MinLength, xml, "MinLength", "Kistl.App.Base");
         }
 
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+            base.Export(xml, modules);
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._MaxLength, xml, "MaxLength", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._MinLength, xml, "MinLength", "Kistl.App.Base");
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+			
+            base.MergeImport(xml);
+            XmlStreamer.FromStream(ref this._MaxLength, xml, "MaxLength", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._MinLength, xml, "MinLength", "Kistl.App.Base");
+        }
+
 #endregion
 
     }

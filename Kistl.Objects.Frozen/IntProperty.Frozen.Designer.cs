@@ -155,6 +155,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[147],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 });
 			DataStore[28].Description = @"";
+			DataStore[28].ExportGuid = default(System.Guid);
 			DataStore[28].IsIndexed = false;
 			DataStore[28].IsList = false;
 			DataStore[28].IsNullable = false;
@@ -168,6 +169,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 			DataStore[126].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[126].Description = @"test";
+			DataStore[126].ExportGuid = default(System.Guid);
 			DataStore[126].IsIndexed = false;
 			DataStore[126].IsList = false;
 			DataStore[126].IsNullable = true;
@@ -182,6 +184,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[89],
 });
 			DataStore[135].Description = @"The CLR value of this entry";
+			DataStore[135].ExportGuid = default(System.Guid);
 			DataStore[135].IsIndexed = false;
 			DataStore[135].IsList = false;
 			DataStore[135].IsNullable = false;
@@ -196,6 +199,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[89],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[76],
 });
 			DataStore[168].Description = @"The biggest value accepted by this constraint";
+			DataStore[168].ExportGuid = default(System.Guid);
 			DataStore[168].IsIndexed = false;
 			DataStore[168].IsList = false;
 			DataStore[168].IsNullable = false;
@@ -210,6 +214,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[76],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[75],
 });
 			DataStore[169].Description = @"The smallest value accepted by this constraint";
+			DataStore[169].ExportGuid = default(System.Guid);
 			DataStore[169].IsIndexed = false;
 			DataStore[169].IsList = false;
 			DataStore[169].IsNullable = false;
@@ -225,6 +230,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[148],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[151],
 });
 			DataStore[172].Description = @"The maximal length of this StringProperty";
+			DataStore[172].ExportGuid = default(System.Guid);
 			DataStore[172].IsIndexed = false;
 			DataStore[172].IsList = false;
 			DataStore[172].IsNullable = false;
@@ -240,6 +246,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[149],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[150],
 });
 			DataStore[173].Description = @"The minimal length of this StringProperty";
+			DataStore[173].ExportGuid = default(System.Guid);
 			DataStore[173].IsIndexed = false;
 			DataStore[173].IsList = false;
 			DataStore[173].IsNullable = false;
@@ -255,6 +262,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[216],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[238],
 });
 			DataStore[217].Description = @"Which RelationEndRole this End has";
+			DataStore[217].ExportGuid = default(System.Guid);
 			DataStore[217].IsIndexed = false;
 			DataStore[217].IsList = false;
 			DataStore[217].IsNullable = false;
@@ -280,6 +288,14 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[238],
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

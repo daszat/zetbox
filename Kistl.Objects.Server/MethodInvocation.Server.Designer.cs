@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="MethodInvocation")]
     [System.Diagnostics.DebuggerDisplay("MethodInvocation")]
-    public class MethodInvocation__Implementation__ : BaseServerDataObject_EntityFramework, MethodInvocation
+    public class MethodInvocation__Implementation__ : BaseServerDataObject_EntityFramework, MethodInvocation, Kistl.API.IExportableInternal
     {
     
 		public MethodInvocation__Implementation__()
@@ -53,6 +53,33 @@ namespace Kistl.App.Base
             }
         }
         private int _ID;
+
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
 
         /// <summary>
         /// The Type implementing this invocation
@@ -349,6 +376,7 @@ namespace Kistl.App.Base
 			var otherImpl = (MethodInvocation__Implementation__)obj;
 			var me = (MethodInvocation)this;
 
+			me.ExportGuid = other.ExportGuid;
 			me.MemberName = other.MemberName;
 			this._fk_Implementor = otherImpl._fk_Implementor;
 			this._fk_InvokeOnObjectClass = otherImpl._fk_InvokeOnObjectClass;
@@ -390,6 +418,15 @@ namespace Kistl.App.Base
 		{
 			switch(propertyName)
 			{
+				case "ExportGuid":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(259).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "Implementor":
 				{
 					var errors = Context.Find<Kistl.App.Base.Property>(208).Constraints
@@ -467,6 +504,7 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(Implementor != null ? Implementor.ID : (int?)null, binStream);
             BinarySerializer.ToStream(InvokeOnObjectClass != null ? InvokeOnObjectClass.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._MemberName, binStream);
@@ -478,6 +516,7 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_Implementor, binStream);
             BinarySerializer.FromStream(out this._fk_InvokeOnObjectClass, binStream);
             BinarySerializer.FromStream(out this._MemberName, binStream);
@@ -489,6 +528,7 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.ToStream(Implementor != null ? Implementor.ID : (int?)null, xml, "Implementor", "Kistl.App.Base");
             XmlStreamer.ToStream(InvokeOnObjectClass != null ? InvokeOnObjectClass.ID : (int?)null, xml, "InvokeOnObjectClass", "Kistl.App.Base");
             XmlStreamer.ToStream(this._MemberName, xml, "MemberName", "Kistl.App.Base");
@@ -500,10 +540,39 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Implementor, xml, "Implementor", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._MemberName, xml, "MemberName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Implementor != null ? Implementor.ExportGuid : (Guid?)null, xml, "Implementor", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(InvokeOnObjectClass != null ? InvokeOnObjectClass.ExportGuid : (Guid?)null, xml, "InvokeOnObjectClass", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._MemberName, xml, "MemberName", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Method != null ? Method.ExportGuid : (Guid?)null, xml, "Method", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			// TODO: Add GUID BackingStore!
+            XmlStreamer.FromStream(ref this._fk_Implementor, xml, "Implementor", "Kistl.App.Base");
+			// TODO: Add GUID BackingStore!
+            XmlStreamer.FromStream(ref this._fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._MemberName, xml, "MemberName", "Kistl.App.Base");
+			// TODO: Add GUID BackingStore!
+            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.Base");
+			// TODO: Add GUID BackingStore!
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
         }
 

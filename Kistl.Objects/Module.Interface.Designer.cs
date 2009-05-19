@@ -31,6 +31,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Export Guid
+        /// </summary>
+		Guid ExportGuid {
+			get;
+			set;
+		}
+        /// <summary>
         /// Name des Moduls
         /// </summary>
 		string ModuleName {

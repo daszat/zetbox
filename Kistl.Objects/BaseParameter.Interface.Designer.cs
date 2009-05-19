@@ -21,6 +21,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Export Guid
+        /// </summary>
+		Guid ExportGuid {
+			get;
+			set;
+		}
+        /// <summary>
         /// Parameter wird als List&lt;&gt; generiert
         /// </summary>
 		bool IsList {

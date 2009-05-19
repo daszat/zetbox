@@ -153,6 +153,7 @@ namespace Kistl.App.Base
 			DataStore[16].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[16].Description = @"Start Datum";
+			DataStore[16].ExportGuid = default(System.Guid);
 			DataStore[16].IsIndexed = false;
 			DataStore[16].IsList = false;
 			DataStore[16].IsNullable = true;
@@ -166,6 +167,7 @@ namespace Kistl.App.Base
 			DataStore[17].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[17].Description = @"Enddatum";
+			DataStore[17].ExportGuid = default(System.Guid);
 			DataStore[17].IsIndexed = false;
 			DataStore[17].IsList = false;
 			DataStore[17].IsNullable = true;
@@ -179,6 +181,7 @@ namespace Kistl.App.Base
 			DataStore[38].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[38].Description = @"Herzlichen Glückwunsch zum Geburtstag";
+			DataStore[38].ExportGuid = default(System.Guid);
 			DataStore[38].IsIndexed = false;
 			DataStore[38].IsList = false;
 			DataStore[38].IsNullable = true;
@@ -192,6 +195,7 @@ namespace Kistl.App.Base
 			DataStore[133].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[133].Description = @"Happy Birthday!";
+			DataStore[133].ExportGuid = default(System.Guid);
 			DataStore[133].IsIndexed = false;
 			DataStore[133].IsList = false;
 			DataStore[133].IsNullable = true;
@@ -206,6 +210,7 @@ namespace Kistl.App.Base
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
 });
 			DataStore[238].Description = @"Point in time when the presence started.";
+			DataStore[238].ExportGuid = default(System.Guid);
 			DataStore[238].IsIndexed = false;
 			DataStore[238].IsList = false;
 			DataStore[238].IsNullable = false;
@@ -219,6 +224,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
 			DataStore[239].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[239].Description = @"Point in time (inclusive) when the presence ended.";
+			DataStore[239].ExportGuid = default(System.Guid);
 			DataStore[239].IsIndexed = false;
 			DataStore[239].IsList = false;
 			DataStore[239].IsNullable = true;
@@ -233,6 +239,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[250],
 });
 			DataStore[247].Description = @"Point in time when the work effort started.";
+			DataStore[247].ExportGuid = default(System.Guid);
 			DataStore[247].IsIndexed = false;
 			DataStore[247].IsList = false;
 			DataStore[247].IsNullable = false;
@@ -246,6 +253,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[250],
 			DataStore[248].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[248].Description = @"Point in time (inclusive) when the work effort ended.";
+			DataStore[248].ExportGuid = default(System.Guid);
 			DataStore[248].IsIndexed = false;
 			DataStore[248].IsList = false;
 			DataStore[248].IsNullable = true;
@@ -271,6 +279,14 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[250],
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

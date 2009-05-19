@@ -313,6 +313,7 @@
                         ToRole="Module" />
     <Property Name="AssemblyName" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="IsClientAssembly" Type="Boolean" Nullable="false" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="Auftrag">
     <Key>
@@ -348,6 +349,7 @@
     <Property Name="IsList" Type="Boolean" Nullable="false" />
     <Property Name="IsReturnParameter" Type="Boolean" Nullable="false" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="Constraint">
     <Key>
@@ -359,6 +361,7 @@
                         Relationship="Model.FK_Property_Constraint_ConstrainedProperty_62"
                         FromRole="Constraints"
                         ToRole="ConstrainedProperty" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="ControlInfo">
     <Key>
@@ -468,6 +471,7 @@
     <Property Name="MethodName" Type="String" Nullable="false" MaxLength="100" />
     <Property Name="IsDisplayable" Type="Boolean" Nullable="false" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="MethodInvocation">
     <Key>
@@ -491,6 +495,7 @@
                         Relationship="Model.FK_MethodInvocation_TypeRef_MethodInvocation_67"
                         FromRole="MethodInvocation"
                         ToRole="Implementor" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
     <Key>
@@ -522,6 +527,7 @@
     <Property Name="Namespace" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="Muhblah">
     <Key>
@@ -619,6 +625,7 @@
                         Relationship="Model.FK_Property_PresentableModelDescriptor_Property_80"
                         FromRole="Property"
                         ToRole="ValueModelDescriptor" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="Relation">
     <Key>
@@ -635,6 +642,7 @@
                         Relationship="Model.FK_Relation_RelationEnd_Relation_72"
                         FromRole="Relation"
                         ToRole="B" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="RelationEnd">
     <Key>
@@ -661,6 +669,7 @@
                         Relationship="Model.FK_Relation_RelationEnd_Relation_71"
                         FromRole="A"
                         ToRole="Relation" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="Task">
     <Key>
@@ -741,6 +750,7 @@
                         Relationship="Model.FK_TypeRef_TypeRef_Child_79"
                         FromRole="Child"
                         ToRole="Parent" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="ViewDescriptor">
     <Key>

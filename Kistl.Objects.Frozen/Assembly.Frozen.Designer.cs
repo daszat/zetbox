@@ -20,7 +20,7 @@ namespace Kistl.App.Base
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Assembly")]
-    public class Assembly__Implementation__Frozen : BaseFrozenDataObject, Assembly
+    public class Assembly__Implementation__Frozen : BaseFrozenDataObject, Assembly, Kistl.API.IExportableInternal
     {
     
 		public Assembly__Implementation__Frozen()
@@ -51,6 +51,30 @@ namespace Kistl.App.Base
             }
         }
         private string _AssemblyName;
+
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
 
         /// <summary>
         /// Legt fest, ob es sich um ein Client-Assembly handelt.
@@ -169,6 +193,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "ExportGuid":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(255).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "IsClientAssembly":
 				{
 					var errors = Context.Find<Kistl.App.Base.Property>(83).Constraints
@@ -243,82 +276,102 @@ namespace Kistl.App.Base
 
 		internal static void FillDataStore() {
 			DataStore[1].AssemblyName = @"Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[1].ExportGuid = default(System.Guid);
 			DataStore[1].IsClientAssembly = true;
 			DataStore[1].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[1].Seal();
 			DataStore[2].AssemblyName = @"Kistl.App.Projekte.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[2].ExportGuid = default(System.Guid);
 			DataStore[2].IsClientAssembly = false;
 			DataStore[2].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[2].Seal();
 			DataStore[3].AssemblyName = @"Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[3].ExportGuid = default(System.Guid);
 			DataStore[3].IsClientAssembly = false;
 			DataStore[3].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[3].Seal();
 			DataStore[4].AssemblyName = @"Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[4].ExportGuid = default(System.Guid);
 			DataStore[4].IsClientAssembly = false;
 			DataStore[4].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[4].Seal();
 			DataStore[13].AssemblyName = @"Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[13].ExportGuid = default(System.Guid);
 			DataStore[13].IsClientAssembly = false;
 			DataStore[13].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[13].Seal();
 			DataStore[14].AssemblyName = @"Kistl.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[14].ExportGuid = default(System.Guid);
 			DataStore[14].IsClientAssembly = false;
 			DataStore[14].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[14].Seal();
 			DataStore[15].AssemblyName = @"Kistl.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[15].ExportGuid = default(System.Guid);
 			DataStore[15].IsClientAssembly = false;
 			DataStore[15].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[15].Seal();
 			DataStore[16].AssemblyName = @"Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[16].ExportGuid = default(System.Guid);
 			DataStore[16].IsClientAssembly = false;
 			DataStore[16].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[16].Seal();
 			DataStore[17].AssemblyName = @"Kistl.Client.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[17].ExportGuid = default(System.Guid);
 			DataStore[17].IsClientAssembly = false;
 			DataStore[17].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[17].Seal();
 			DataStore[18].AssemblyName = @"Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[18].ExportGuid = default(System.Guid);
 			DataStore[18].IsClientAssembly = false;
 			DataStore[18].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[18].Seal();
 			DataStore[29].AssemblyName = @"mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+			DataStore[29].ExportGuid = default(System.Guid);
 			DataStore[29].IsClientAssembly = false;
 			DataStore[29].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[29].Seal();
 			DataStore[30].AssemblyName = @"Kistl.API.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[30].ExportGuid = default(System.Guid);
 			DataStore[30].IsClientAssembly = false;
 			DataStore[30].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[30].Seal();
 			DataStore[31].AssemblyName = @"WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+			DataStore[31].ExportGuid = default(System.Guid);
 			DataStore[31].IsClientAssembly = false;
 			DataStore[31].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[31].Seal();
 			DataStore[32].AssemblyName = @"PresentationCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+			DataStore[32].ExportGuid = default(System.Guid);
 			DataStore[32].IsClientAssembly = false;
 			DataStore[32].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[32].Seal();
 			DataStore[33].AssemblyName = @"PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+			DataStore[33].ExportGuid = default(System.Guid);
 			DataStore[33].IsClientAssembly = false;
 			DataStore[33].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[33].Seal();
 			DataStore[34].AssemblyName = @"Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[34].ExportGuid = default(System.Guid);
 			DataStore[34].IsClientAssembly = false;
 			DataStore[34].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[34].Seal();
 			DataStore[35].AssemblyName = @"Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[35].ExportGuid = default(System.Guid);
 			DataStore[35].IsClientAssembly = false;
 			DataStore[35].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[35].Seal();
 			DataStore[36].AssemblyName = @"System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+			DataStore[36].ExportGuid = default(System.Guid);
 			DataStore[36].IsClientAssembly = false;
 			DataStore[36].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[36].Seal();
 			DataStore[37].AssemblyName = @"System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+			DataStore[37].ExportGuid = default(System.Guid);
 			DataStore[37].IsClientAssembly = false;
 			DataStore[37].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[37].Seal();
 			DataStore[38].AssemblyName = @"Kistl.Client.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+			DataStore[38].ExportGuid = default(System.Guid);
 			DataStore[38].IsClientAssembly = false;
 			DataStore[38].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[38].Seal();
@@ -339,6 +392,14 @@ namespace Kistl.App.Base
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

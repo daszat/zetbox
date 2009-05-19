@@ -606,6 +606,7 @@
     <Property Name="IsIndexed" Type="bit" Nullable="false" />
     <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
     <Property Name="fk_ValueModelDescriptor" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ValueTypeProperty">
@@ -633,6 +634,7 @@
     <Property Name="MethodName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="IsDisplayable" Type="bit" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="IntProperty">
@@ -679,6 +681,7 @@
     <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="ModuleName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Auftrag">
@@ -732,6 +735,7 @@
     <Property Name="fk_Module" Type="int" />
     <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="IsClientAssembly" Type="bit" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="MethodInvocation">
@@ -744,6 +748,7 @@
     <Property Name="fk_InvokeOnObjectClass" Type="int" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="fk_Implementor" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="DataType">
@@ -769,6 +774,7 @@
     <Property Name="IsList" Type="bit" Nullable="false" />
     <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="StringParameter">
@@ -969,6 +975,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Reason" Type="nvarchar" MaxLength="400" Nullable="true" />
     <Property Name="fk_ConstrainedProperty" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="NotNullableConstraint">
@@ -1026,6 +1033,7 @@
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="fk_A" Type="int" />
     <Property Name="fk_B" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="TypeRef">
@@ -1036,6 +1044,7 @@
     <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="fk_Assembly" Type="int" />
     <Property Name="fk_Parent" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="RelationEnd">
@@ -1049,6 +1058,7 @@
     <Property Name="fk_Navigator" Type="int" />
     <Property Name="Multiplicity" Type="int" Nullable="false" />
     <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ViewDescriptor">

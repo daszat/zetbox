@@ -670,6 +670,7 @@ namespace Kistl.App.Base
 			
             base.Export(xml, modules);
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultModel != null ? DefaultModel.ExportGuid : (Guid?)null, xml, "DefaultModel", "Kistl.App.GUI");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
 	
@@ -684,6 +685,8 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
 			// TODO: Add GUID BackingStore!
             XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
+			// TODO: Add GUID BackingStore!
+            XmlStreamer.FromStream(ref this._fk_DefaultModel, xml, "DefaultModel", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");

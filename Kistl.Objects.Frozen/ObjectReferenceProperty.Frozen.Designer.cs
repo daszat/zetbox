@@ -411,6 +411,7 @@ namespace Kistl.App.Base
 			DataStore[7].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[7].Description = @"Eigenschaften der Objektklasse";
+			DataStore[7].ExportGuid = default(System.Guid);
 			DataStore[7].IsIndexed = false;
 			DataStore[7].IsList = true;
 			DataStore[7].IsNullable = true;
@@ -426,6 +427,7 @@ namespace Kistl.App.Base
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 });
 			DataStore[8].Description = @"";
+			DataStore[8].ExportGuid = default(System.Guid);
 			DataStore[8].IsIndexed = false;
 			DataStore[8].IsList = false;
 			DataStore[8].IsNullable = false;
@@ -440,6 +442,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[14].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[14].Description = @"";
+			DataStore[14].ExportGuid = default(System.Guid);
 			DataStore[14].IsIndexed = false;
 			DataStore[14].IsList = true;
 			DataStore[14].IsNullable = true;
@@ -454,6 +457,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[19].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[19].Description = @"Verknüpfung zum Projekt";
+			DataStore[19].ExportGuid = default(System.Guid);
 			DataStore[19].IsIndexed = false;
 			DataStore[19].IsList = false;
 			DataStore[19].IsNullable = true;
@@ -468,6 +472,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[21].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[21].Description = @"Projekte des Mitarbeiters für die er Verantwortlich ist";
+			DataStore[21].ExportGuid = default(System.Guid);
 			DataStore[21].IsIndexed = true;
 			DataStore[21].IsList = true;
 			DataStore[21].IsNullable = true;
@@ -482,6 +487,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[22].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[22].Description = @"";
+			DataStore[22].ExportGuid = default(System.Guid);
 			DataStore[22].IsIndexed = true;
 			DataStore[22].IsList = true;
 			DataStore[22].IsNullable = true;
@@ -496,6 +502,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[25].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[25].Description = @"Pointer auf die Basisklasse";
+			DataStore[25].ExportGuid = default(System.Guid);
 			DataStore[25].IsIndexed = false;
 			DataStore[25].IsList = false;
 			DataStore[25].IsNullable = true;
@@ -510,6 +517,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 			DataStore[27].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[27].Description = @"Liste der vererbten Klassen";
+			DataStore[27].ExportGuid = default(System.Guid);
 			DataStore[27].IsIndexed = false;
 			DataStore[27].IsList = true;
 			DataStore[27].IsNullable = true;
@@ -525,6 +533,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[141],
 });
 			DataStore[29].Description = @"";
+			DataStore[29].ExportGuid = default(System.Guid);
 			DataStore[29].IsIndexed = false;
 			DataStore[29].IsList = false;
 			DataStore[29].IsNullable = false;
@@ -539,6 +548,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[141],
 			DataStore[31].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[31].Description = @"Liste aller Methoden der Objektklasse.";
+			DataStore[31].ExportGuid = default(System.Guid);
 			DataStore[31].IsIndexed = false;
 			DataStore[31].IsList = true;
 			DataStore[31].IsNullable = true;
@@ -553,6 +563,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[141],
 			DataStore[44].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[44].Description = @"Datentypendes Modules";
+			DataStore[44].ExportGuid = default(System.Guid);
 			DataStore[44].IsIndexed = false;
 			DataStore[44].IsList = true;
 			DataStore[44].IsNullable = true;
@@ -568,6 +579,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[141],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 });
 			DataStore[45].Description = @"Modul der Objektklasse";
+			DataStore[45].ExportGuid = default(System.Guid);
 			DataStore[45].IsIndexed = false;
 			DataStore[45].IsList = false;
 			DataStore[45].IsNullable = false;
@@ -583,6 +595,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[253],
 });
 			DataStore[46].Description = @"Pointer zur Objektklasse";
+			DataStore[46].ExportGuid = default(System.Guid);
 			DataStore[46].IsIndexed = false;
 			DataStore[46].IsList = false;
 			DataStore[46].IsNullable = false;
@@ -597,6 +610,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[253],
 			DataStore[49].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[49].Description = @"";
+			DataStore[49].ExportGuid = default(System.Guid);
 			DataStore[49].IsIndexed = false;
 			DataStore[49].IsList = false;
 			DataStore[49].IsNullable = true;
@@ -611,6 +625,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[253],
 			DataStore[51].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[51].Description = @"Projekt zum Auftrag";
+			DataStore[51].ExportGuid = default(System.Guid);
 			DataStore[51].IsIndexed = false;
 			DataStore[51].IsList = false;
 			DataStore[51].IsNullable = true;
@@ -625,6 +640,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[253],
 			DataStore[64].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[64].Description = @"Kunde des Projektes";
+			DataStore[64].ExportGuid = default(System.Guid);
 			DataStore[64].IsIndexed = false;
 			DataStore[64].IsList = false;
 			DataStore[64].IsNullable = true;
@@ -639,6 +655,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[253],
 			DataStore[67].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[67].Description = @"Aufträge";
+			DataStore[67].ExportGuid = default(System.Guid);
 			DataStore[67].IsIndexed = false;
 			DataStore[67].IsList = true;
 			DataStore[67].IsNullable = true;
@@ -653,6 +670,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[253],
 			DataStore[69].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[69].Description = @"Standard Icon wenn IIcon nicht implementiert ist";
+			DataStore[69].ExportGuid = default(System.Guid);
 			DataStore[69].IsIndexed = false;
 			DataStore[69].IsList = false;
 			DataStore[69].IsNullable = true;
@@ -668,6 +686,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[253],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[127],
 });
 			DataStore[70].Description = @"Module";
+			DataStore[70].ExportGuid = default(System.Guid);
 			DataStore[70].IsIndexed = false;
 			DataStore[70].IsList = false;
 			DataStore[70].IsNullable = false;
@@ -683,6 +702,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[127],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[125],
 });
 			DataStore[72].Description = @"Zugehörig zum Modul";
+			DataStore[72].ExportGuid = default(System.Guid);
 			DataStore[72].IsIndexed = false;
 			DataStore[72].IsList = false;
 			DataStore[72].IsNullable = false;
@@ -698,6 +718,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[125],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[124],
 });
 			DataStore[73].Description = @"Zugehörig zum Modul";
+			DataStore[73].ExportGuid = default(System.Guid);
 			DataStore[73].IsIndexed = false;
 			DataStore[73].IsList = false;
 			DataStore[73].IsNullable = false;
@@ -714,6 +735,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[123],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[193],
 });
 			DataStore[74].Description = @"Methode, die Aufgerufen wird";
+			DataStore[74].ExportGuid = default(System.Guid);
 			DataStore[74].IsIndexed = false;
 			DataStore[74].IsList = false;
 			DataStore[74].IsNullable = false;
@@ -729,6 +751,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[193],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[119],
 });
 			DataStore[78].Description = @"Zugehörig zum Modul";
+			DataStore[78].ExportGuid = default(System.Guid);
 			DataStore[78].IsIndexed = false;
 			DataStore[78].IsList = false;
 			DataStore[78].IsNullable = false;
@@ -744,6 +767,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[119],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 });
 			DataStore[79].Description = @"In dieser Objektklasse implementieren";
+			DataStore[79].ExportGuid = default(System.Guid);
 			DataStore[79].IsIndexed = false;
 			DataStore[79].IsList = false;
 			DataStore[79].IsNullable = false;
@@ -758,6 +782,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[80].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[80].Description = @"all implemented Methods in this DataType";
+			DataStore[80].ExportGuid = default(System.Guid);
 			DataStore[80].IsIndexed = false;
 			DataStore[80].IsList = true;
 			DataStore[80].IsNullable = true;
@@ -772,6 +797,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[81].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[81].Description = @"Methodenaufrufe implementiert in dieser Objekt Klasse";
+			DataStore[81].ExportGuid = default(System.Guid);
 			DataStore[81].IsIndexed = false;
 			DataStore[81].IsList = true;
 			DataStore[81].IsNullable = true;
@@ -786,6 +812,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[82].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[82].Description = @"Assemblies des Moduls";
+			DataStore[82].ExportGuid = default(System.Guid);
 			DataStore[82].IsIndexed = false;
 			DataStore[82].IsList = true;
 			DataStore[82].IsNullable = true;
@@ -800,6 +827,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 			DataStore[86].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[86].Description = @"Zugeordnete Mitarbeiter";
+			DataStore[86].ExportGuid = default(System.Guid);
 			DataStore[86].IsIndexed = false;
 			DataStore[86].IsList = true;
 			DataStore[86].IsNullable = true;
@@ -815,6 +843,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[113],
 });
 			DataStore[92].Description = @"Methode des Parameters";
+			DataStore[92].ExportGuid = default(System.Guid);
 			DataStore[92].IsIndexed = false;
 			DataStore[92].IsList = false;
 			DataStore[92].IsNullable = false;
@@ -829,6 +858,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[113],
 			DataStore[96].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[96].Description = @"Parameter der Methode";
+			DataStore[96].ExportGuid = default(System.Guid);
 			DataStore[96].IsIndexed = true;
 			DataStore[96].IsList = true;
 			DataStore[96].IsNullable = true;
@@ -844,6 +874,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[113],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[109],
 });
 			DataStore[97].Description = @"Kistl-Typ des Parameters";
+			DataStore[97].ExportGuid = default(System.Guid);
 			DataStore[97].IsIndexed = false;
 			DataStore[97].IsList = false;
 			DataStore[97].IsNullable = false;
@@ -858,6 +889,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[109],
 			DataStore[98].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[98].Description = @"Assembly des CLR Objektes, NULL für Default Assemblies";
+			DataStore[98].ExportGuid = default(System.Guid);
 			DataStore[98].IsIndexed = false;
 			DataStore[98].IsList = false;
 			DataStore[98].IsNullable = true;
@@ -873,6 +905,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[109],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[107],
 });
 			DataStore[100].Description = @"Übergeordnete Enumeration";
+			DataStore[100].ExportGuid = default(System.Guid);
 			DataStore[100].IsIndexed = false;
 			DataStore[100].IsList = false;
 			DataStore[100].IsNullable = false;
@@ -887,6 +920,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[107],
 			DataStore[103].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[103].Description = @"Einträge der Enumeration";
+			DataStore[103].ExportGuid = default(System.Guid);
 			DataStore[103].IsIndexed = false;
 			DataStore[103].IsList = true;
 			DataStore[103].IsNullable = true;
@@ -902,6 +936,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[107],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[106],
 });
 			DataStore[104].Description = @"Enumeration der Eigenschaft";
+			DataStore[104].ExportGuid = default(System.Guid);
 			DataStore[104].IsIndexed = false;
 			DataStore[104].IsList = false;
 			DataStore[104].IsNullable = false;
@@ -916,6 +951,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[106],
 			DataStore[105].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[105].Description = @"Interfaces der Objektklasse";
+			DataStore[105].ExportGuid = default(System.Guid);
 			DataStore[105].IsIndexed = false;
 			DataStore[105].IsList = true;
 			DataStore[105].IsNullable = true;
@@ -931,6 +967,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[106],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[104],
 });
 			DataStore[108].Description = @"Objektpointer für das Testinterface";
+			DataStore[108].ExportGuid = default(System.Guid);
 			DataStore[108].IsIndexed = false;
 			DataStore[108].IsList = false;
 			DataStore[108].IsNullable = false;
@@ -947,6 +984,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[104],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[100],
 });
 			DataStore[112].Description = @"testtest";
+			DataStore[112].ExportGuid = default(System.Guid);
 			DataStore[112].IsIndexed = false;
 			DataStore[112].IsList = false;
 			DataStore[112].IsNullable = false;
@@ -962,6 +1000,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[100],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[98],
 });
 			DataStore[114].Description = @"The assembly containing the Control";
+			DataStore[114].ExportGuid = default(System.Guid);
 			DataStore[114].IsIndexed = false;
 			DataStore[114].IsList = false;
 			DataStore[114].IsNullable = false;
@@ -977,6 +1016,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[98],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[91],
 });
 			DataStore[129].Description = @"Definition of this Struct";
+			DataStore[129].ExportGuid = default(System.Guid);
 			DataStore[129].IsIndexed = false;
 			DataStore[129].IsList = false;
 			DataStore[129].IsNullable = false;
@@ -992,6 +1032,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[91],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 });
 			DataStore[138].Description = @"Where to find the implementation of the Presenter";
+			DataStore[138].ExportGuid = default(System.Guid);
 			DataStore[138].IsIndexed = false;
 			DataStore[138].IsList = false;
 			DataStore[138].IsNullable = false;
@@ -1006,6 +1047,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 			DataStore[147].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[147].Description = @"The Assembly of the Data Type";
+			DataStore[147].ExportGuid = default(System.Guid);
 			DataStore[147].IsIndexed = false;
 			DataStore[147].IsList = false;
 			DataStore[147].IsNullable = true;
@@ -1020,6 +1062,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 			DataStore[151].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[151].Description = @"if this is a container, here are the visually contained/controlled children of this Visual";
+			DataStore[151].ExportGuid = default(System.Guid);
 			DataStore[151].IsIndexed = false;
 			DataStore[151].IsList = true;
 			DataStore[151].IsNullable = true;
@@ -1034,6 +1077,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 			DataStore[152].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[152].Description = @"The Property to display";
+			DataStore[152].ExportGuid = default(System.Guid);
 			DataStore[152].IsIndexed = false;
 			DataStore[152].IsList = false;
 			DataStore[152].IsNullable = true;
@@ -1049,6 +1093,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[81],
 });
 			DataStore[153].Description = @"The Method whose return value shoud be displayed";
+			DataStore[153].ExportGuid = default(System.Guid);
 			DataStore[153].IsIndexed = false;
 			DataStore[153].IsList = false;
 			DataStore[153].IsNullable = false;
@@ -1064,6 +1109,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[81],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[79],
 });
 			DataStore[155].Description = @"The visual representation of this Template";
+			DataStore[155].ExportGuid = default(System.Guid);
 			DataStore[155].IsIndexed = false;
 			DataStore[155].IsList = false;
 			DataStore[155].IsNullable = false;
@@ -1079,6 +1125,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[79],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 });
 			DataStore[163].Description = @"Assembly of the Type that is displayed with this Template";
+			DataStore[163].ExportGuid = default(System.Guid);
 			DataStore[163].IsIndexed = false;
 			DataStore[163].IsList = false;
 			DataStore[163].IsNullable = false;
@@ -1093,6 +1140,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 			DataStore[164].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[164].Description = @"The context menu for this Visual";
+			DataStore[164].ExportGuid = default(System.Guid);
 			DataStore[164].IsIndexed = false;
 			DataStore[164].IsList = true;
 			DataStore[164].IsNullable = true;
@@ -1107,6 +1155,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 			DataStore[165].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[165].Description = @"The main menu for this Template";
+			DataStore[165].ExportGuid = default(System.Guid);
 			DataStore[165].IsIndexed = false;
 			DataStore[165].IsList = true;
 			DataStore[165].IsNullable = true;
@@ -1121,6 +1170,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 			DataStore[170].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[170].Description = @"The list of constraints applying to this Property";
+			DataStore[170].ExportGuid = default(System.Guid);
 			DataStore[170].IsIndexed = false;
 			DataStore[170].IsList = true;
 			DataStore[170].IsNullable = true;
@@ -1136,6 +1186,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74],
 });
 			DataStore[171].Description = @"The property to be constrained";
+			DataStore[171].ExportGuid = default(System.Guid);
 			DataStore[171].IsIndexed = false;
 			DataStore[171].IsList = false;
 			DataStore[171].IsNullable = false;
@@ -1151,6 +1202,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[242],
 });
 			DataStore[206].Description = @"The assembly containing the referenced Type.";
+			DataStore[206].ExportGuid = default(System.Guid);
 			DataStore[206].IsIndexed = false;
 			DataStore[206].IsList = false;
 			DataStore[206].IsNullable = false;
@@ -1165,6 +1217,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[242],
 			DataStore[207].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[207].Description = @"list of type arguments";
+			DataStore[207].ExportGuid = default(System.Guid);
 			DataStore[207].IsIndexed = true;
 			DataStore[207].IsList = true;
 			DataStore[207].IsNullable = true;
@@ -1180,6 +1233,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[242],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[241],
 });
 			DataStore[208].Description = @"The Type implementing this invocation";
+			DataStore[208].ExportGuid = default(System.Guid);
 			DataStore[208].IsIndexed = false;
 			DataStore[208].IsList = false;
 			DataStore[208].IsNullable = false;
@@ -1195,6 +1249,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[241],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[213],
 });
 			DataStore[209].Description = @"";
+			DataStore[209].ExportGuid = default(System.Guid);
 			DataStore[209].IsIndexed = false;
 			DataStore[209].IsList = false;
 			DataStore[209].IsNullable = false;
@@ -1211,6 +1266,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[213],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 });
 			DataStore[211].Description = @"";
+			DataStore[211].ExportGuid = default(System.Guid);
 			DataStore[211].IsIndexed = false;
 			DataStore[211].IsList = false;
 			DataStore[211].IsNullable = false;
@@ -1226,6 +1282,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[212].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[212].Description = @"The default model to use for the UI";
+			DataStore[212].ExportGuid = default(System.Guid);
 			DataStore[212].IsIndexed = false;
 			DataStore[212].IsList = false;
 			DataStore[212].IsNullable = true;
@@ -1240,6 +1297,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[213].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[213].Description = @"The A-side of this Relation.";
+			DataStore[213].ExportGuid = default(System.Guid);
 			DataStore[213].IsIndexed = false;
 			DataStore[213].IsList = false;
 			DataStore[213].IsNullable = true;
@@ -1254,6 +1312,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 			DataStore[214].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[214].Description = @"The B-side of this Relation.";
+			DataStore[214].ExportGuid = default(System.Guid);
 			DataStore[214].IsIndexed = false;
 			DataStore[214].IsList = false;
 			DataStore[214].IsNullable = true;
@@ -1269,6 +1328,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[240],
 });
 			DataStore[215].Description = @"Specifies which type this End of the relation has. MUST NOT be null.";
+			DataStore[215].ExportGuid = default(System.Guid);
 			DataStore[215].IsIndexed = false;
 			DataStore[215].IsList = false;
 			DataStore[215].IsNullable = false;
@@ -1283,6 +1343,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[240],
 			DataStore[218].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[218].Description = @"The ORP to navigate FROM this end of the relation. MAY be null.";
+			DataStore[218].ExportGuid = default(System.Guid);
 			DataStore[218].IsIndexed = false;
 			DataStore[218].IsList = false;
 			DataStore[218].IsNullable = true;
@@ -1298,6 +1359,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[240],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[235],
 });
 			DataStore[222].Description = @"The RelationEnd describing this Property";
+			DataStore[222].ExportGuid = default(System.Guid);
 			DataStore[222].IsIndexed = false;
 			DataStore[222].IsList = false;
 			DataStore[222].IsNullable = false;
@@ -1312,6 +1374,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[235],
 			DataStore[223].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[223].Description = @"The Relation using this RelationEnd as B";
+			DataStore[223].ExportGuid = default(System.Guid);
 			DataStore[223].IsIndexed = false;
 			DataStore[223].IsList = false;
 			DataStore[223].IsNullable = true;
@@ -1326,6 +1389,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[235],
 			DataStore[224].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[224].Description = @"The Relation using this RelationEnd as A";
+			DataStore[224].ExportGuid = default(System.Guid);
 			DataStore[224].IsIndexed = false;
 			DataStore[224].IsList = false;
 			DataStore[224].IsNullable = true;
@@ -1341,6 +1405,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[235],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[234],
 });
 			DataStore[226].Description = @"The PresentableModel usable by this View";
+			DataStore[226].ExportGuid = default(System.Guid);
 			DataStore[226].IsIndexed = false;
 			DataStore[226].IsList = false;
 			DataStore[226].IsNullable = false;
@@ -1356,6 +1421,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[234],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[233],
 });
 			DataStore[227].Description = @"The control implementing this View";
+			DataStore[227].ExportGuid = default(System.Guid);
 			DataStore[227].IsIndexed = false;
 			DataStore[227].IsList = false;
 			DataStore[227].IsNullable = false;
@@ -1371,6 +1437,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[233],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[230],
 });
 			DataStore[231].Description = @"The described CLR class&apos; reference";
+			DataStore[231].ExportGuid = default(System.Guid);
 			DataStore[231].IsIndexed = false;
 			DataStore[231].IsList = false;
 			DataStore[231].IsNullable = false;
@@ -1386,6 +1453,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[230],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[227],
 });
 			DataStore[234].Description = @"The default PresentableModel to use for this ObjectClass";
+			DataStore[234].ExportGuid = default(System.Guid);
 			DataStore[234].IsIndexed = false;
 			DataStore[234].IsList = false;
 			DataStore[234].IsNullable = false;
@@ -1401,6 +1469,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[227],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[226],
 });
 			DataStore[235].Description = @"The TypeRef of the BaseClass of the referenced Type";
+			DataStore[235].ExportGuid = default(System.Guid);
 			DataStore[235].IsIndexed = false;
 			DataStore[235].IsList = false;
 			DataStore[235].IsNullable = false;
@@ -1416,6 +1485,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[226],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[225],
 });
 			DataStore[236].Description = @"The PresentableModel to use for values of this Property";
+			DataStore[236].ExportGuid = default(System.Guid);
 			DataStore[236].IsIndexed = false;
 			DataStore[236].IsList = false;
 			DataStore[236].IsNullable = false;
@@ -1430,6 +1500,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[225],
 			DataStore[244].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[244].Description = @"Which employee was present.";
+			DataStore[244].ExportGuid = default(System.Guid);
 			DataStore[244].IsIndexed = false;
 			DataStore[244].IsList = false;
 			DataStore[244].IsNullable = true;
@@ -1445,6 +1516,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[225],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[248],
 });
 			DataStore[249].Description = @"Which employee effected this work effort.";
+			DataStore[249].ExportGuid = default(System.Guid);
 			DataStore[249].IsIndexed = false;
 			DataStore[249].IsList = false;
 			DataStore[249].IsNullable = false;
@@ -1471,6 +1543,14 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[248],
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

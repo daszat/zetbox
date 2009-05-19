@@ -14,6 +14,13 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// Export Guid
+        /// </summary>
+		Guid ExportGuid {
+			get;
+			set;
+		}
+        /// <summary>
         /// The Type implementing this invocation
         /// </summary>
 		Kistl.App.Base.TypeRef Implementor {

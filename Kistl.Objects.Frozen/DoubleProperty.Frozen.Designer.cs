@@ -141,6 +141,7 @@ namespace Kistl.App.Base
 			DataStore[18].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[18].Description = @"Aufwand in Stunden";
+			DataStore[18].ExportGuid = default(System.Guid);
 			DataStore[18].IsIndexed = false;
 			DataStore[18].IsList = false;
 			DataStore[18].IsNullable = true;
@@ -154,6 +155,7 @@ namespace Kistl.App.Base
 			DataStore[23].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[23].Description = @"";
+			DataStore[23].ExportGuid = default(System.Guid);
 			DataStore[23].IsIndexed = false;
 			DataStore[23].IsList = false;
 			DataStore[23].IsNullable = true;
@@ -167,6 +169,7 @@ namespace Kistl.App.Base
 			DataStore[65].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[65].Description = @"Wert in EUR des Auftrages";
+			DataStore[65].ExportGuid = default(System.Guid);
 			DataStore[65].IsIndexed = false;
 			DataStore[65].IsList = false;
 			DataStore[65].IsNullable = true;
@@ -180,6 +183,7 @@ namespace Kistl.App.Base
 			DataStore[89].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[89].Description = @"Maximal erlaubte Stundenanzahl";
+			DataStore[89].ExportGuid = default(System.Guid);
 			DataStore[89].IsIndexed = false;
 			DataStore[89].IsList = false;
 			DataStore[89].IsNullable = true;
@@ -193,6 +197,7 @@ namespace Kistl.App.Base
 			DataStore[90].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[90].Description = @"Aktuell gebuchte Stunden";
+			DataStore[90].ExportGuid = default(System.Guid);
 			DataStore[90].IsIndexed = false;
 			DataStore[90].IsList = false;
 			DataStore[90].IsNullable = true;
@@ -218,6 +223,14 @@ namespace Kistl.App.Base
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public override void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

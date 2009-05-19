@@ -160,6 +160,18 @@ namespace Kistl.App.Base
             base.FromStream(xml);
         }
 
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+            base.Export(xml, modules);
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+			
+            base.MergeImport(xml);
+        }
+
 #endregion
 
     }

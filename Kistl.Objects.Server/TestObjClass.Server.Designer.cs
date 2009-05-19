@@ -367,7 +367,7 @@ namespace Kistl.App.Test
             XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
             XmlStreamer.ToStream(ObjectProp != null ? ObjectProp.ID : (int?)null, xml, "ObjectProp", "Kistl.App.Test");
             XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "Kistl.App.Test");
-            // TODO: Add XML Serializer here
+            XmlStreamer.ToStream((int)this.TestEnumProp, xml, "TestEnumProp", "Kistl.App.Test");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -377,7 +377,7 @@ namespace Kistl.App.Test
             XmlStreamer.FromStream(ref this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._fk_ObjectProp, xml, "ObjectProp", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._StringProp, xml, "StringProp", "Kistl.App.Test");
-            // TODO: Add XML Serializer here
+            XmlStreamer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, xml, "TestEnumProp", "Kistl.App.Test");
         }
 
 #endregion

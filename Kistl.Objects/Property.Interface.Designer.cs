@@ -40,6 +40,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Export Guid
+        /// </summary>
+		Guid ExportGuid {
+			get;
+			set;
+		}
+        /// <summary>
         /// Whether or not a list-valued property has a index
         /// </summary>
 		bool IsIndexed {
