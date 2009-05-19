@@ -153,7 +153,7 @@ namespace Kistl.App.Base
 			DataStore[16].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[16].Description = @"Start Datum";
-			DataStore[16].ExportGuid = default(System.Guid);
+			DataStore[16].ExportGuid = new Guid("1485a7b7-c4d5-456a-a18a-0c409c3eca8e");
 			DataStore[16].IsIndexed = false;
 			DataStore[16].IsList = false;
 			DataStore[16].IsNullable = true;
@@ -167,7 +167,7 @@ namespace Kistl.App.Base
 			DataStore[17].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[17].Description = @"Enddatum";
-			DataStore[17].ExportGuid = default(System.Guid);
+			DataStore[17].ExportGuid = new Guid("2b705496-388a-43a8-82e8-b17b652a55fc");
 			DataStore[17].IsIndexed = false;
 			DataStore[17].IsList = false;
 			DataStore[17].IsNullable = true;
@@ -181,7 +181,7 @@ namespace Kistl.App.Base
 			DataStore[38].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[38].Description = @"Herzlichen Glückwunsch zum Geburtstag";
-			DataStore[38].ExportGuid = default(System.Guid);
+			DataStore[38].ExportGuid = new Guid("b10bf288-1252-49c3-9129-cfabb1637c47");
 			DataStore[38].IsIndexed = false;
 			DataStore[38].IsList = false;
 			DataStore[38].IsNullable = true;
@@ -195,7 +195,7 @@ namespace Kistl.App.Base
 			DataStore[133].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[133].Description = @"Happy Birthday!";
-			DataStore[133].ExportGuid = default(System.Guid);
+			DataStore[133].ExportGuid = new Guid("bdcf86b8-4c47-4c50-b340-d9323344c7f0");
 			DataStore[133].IsIndexed = false;
 			DataStore[133].IsList = false;
 			DataStore[133].IsNullable = true;
@@ -210,7 +210,7 @@ namespace Kistl.App.Base
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
 });
 			DataStore[238].Description = @"Point in time when the presence started.";
-			DataStore[238].ExportGuid = default(System.Guid);
+			DataStore[238].ExportGuid = new Guid("3833e790-e2f2-43c6-b9c2-79dd4a03c8c6");
 			DataStore[238].IsIndexed = false;
 			DataStore[238].IsList = false;
 			DataStore[238].IsNullable = false;
@@ -224,7 +224,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
 			DataStore[239].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[239].Description = @"Point in time (inclusive) when the presence ended.";
-			DataStore[239].ExportGuid = default(System.Guid);
+			DataStore[239].ExportGuid = new Guid("17dabad9-a47e-46b8-a72e-b7616af0ceae");
 			DataStore[239].IsIndexed = false;
 			DataStore[239].IsList = false;
 			DataStore[239].IsNullable = true;
@@ -239,7 +239,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[250],
 });
 			DataStore[247].Description = @"Point in time when the work effort started.";
-			DataStore[247].ExportGuid = default(System.Guid);
+			DataStore[247].ExportGuid = new Guid("b169f505-9b5f-4e4e-ae25-a46bc9926c87");
 			DataStore[247].IsIndexed = false;
 			DataStore[247].IsList = false;
 			DataStore[247].IsNullable = false;
@@ -253,7 +253,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[250],
 			DataStore[248].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[248].Description = @"Point in time (inclusive) when the work effort ended.";
-			DataStore[248].ExportGuid = default(System.Guid);
+			DataStore[248].ExportGuid = new Guid("553440f1-3b22-402b-ba5b-355f21cc31d9");
 			DataStore[248].IsIndexed = false;
 			DataStore[248].IsList = false;
 			DataStore[248].IsNullable = true;

@@ -155,7 +155,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[147],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 });
 			DataStore[28].Description = @"";
-			DataStore[28].ExportGuid = default(System.Guid);
+			DataStore[28].ExportGuid = new Guid("3588888e-b280-4e8d-8a7b-53f452b81bf0");
 			DataStore[28].IsIndexed = false;
 			DataStore[28].IsList = false;
 			DataStore[28].IsNullable = false;
@@ -169,7 +169,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 			DataStore[126].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[126].Description = @"test";
-			DataStore[126].ExportGuid = default(System.Guid);
+			DataStore[126].ExportGuid = new Guid("29c0242b-cd1c-42b4-8ca0-be0a209afcbf");
 			DataStore[126].IsIndexed = false;
 			DataStore[126].IsList = false;
 			DataStore[126].IsNullable = true;
@@ -184,7 +184,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[89],
 });
 			DataStore[135].Description = @"The CLR value of this entry";
-			DataStore[135].ExportGuid = default(System.Guid);
+			DataStore[135].ExportGuid = new Guid("2fea1d2e-d5ed-457f-9828-4df8c3d3d3aa");
 			DataStore[135].IsIndexed = false;
 			DataStore[135].IsList = false;
 			DataStore[135].IsNullable = false;
@@ -199,7 +199,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[89],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[76],
 });
 			DataStore[168].Description = @"The biggest value accepted by this constraint";
-			DataStore[168].ExportGuid = default(System.Guid);
+			DataStore[168].ExportGuid = new Guid("dff43695-5b93-4378-a01d-94a82d29dcef");
 			DataStore[168].IsIndexed = false;
 			DataStore[168].IsList = false;
 			DataStore[168].IsNullable = false;
@@ -214,7 +214,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[76],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[75],
 });
 			DataStore[169].Description = @"The smallest value accepted by this constraint";
-			DataStore[169].ExportGuid = default(System.Guid);
+			DataStore[169].ExportGuid = new Guid("8afdbf66-c979-4c09-8872-1a44aa1dbf72");
 			DataStore[169].IsIndexed = false;
 			DataStore[169].IsList = false;
 			DataStore[169].IsNullable = false;
@@ -230,7 +230,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[148],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[151],
 });
 			DataStore[172].Description = @"The maximal length of this StringProperty";
-			DataStore[172].ExportGuid = default(System.Guid);
+			DataStore[172].ExportGuid = new Guid("17aa679d-72d0-480e-9bd9-b37f4eba1d68");
 			DataStore[172].IsIndexed = false;
 			DataStore[172].IsList = false;
 			DataStore[172].IsNullable = false;
@@ -246,7 +246,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[149],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[150],
 });
 			DataStore[173].Description = @"The minimal length of this StringProperty";
-			DataStore[173].ExportGuid = default(System.Guid);
+			DataStore[173].ExportGuid = new Guid("8d3e24f7-c8c8-4bb3-931e-d0452e7ee5b6");
 			DataStore[173].IsIndexed = false;
 			DataStore[173].IsList = false;
 			DataStore[173].IsNullable = false;
@@ -262,7 +262,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[216],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[238],
 });
 			DataStore[217].Description = @"Which RelationEndRole this End has";
-			DataStore[217].ExportGuid = default(System.Guid);
+			DataStore[217].ExportGuid = new Guid("377a7a10-b475-4259-8f35-a90d956f9331");
 			DataStore[217].IsIndexed = false;
 			DataStore[217].IsList = false;
 			DataStore[217].IsNullable = false;

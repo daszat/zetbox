@@ -617,6 +617,19 @@ namespace Kistl.API
                 action(i);
             }
         }
+
+        public static Guid ParseGuidValue(this string str)
+        {
+            if (string.IsNullOrEmpty(str)) return Guid.Empty;
+            try
+            {
+                return new Guid(str);
+            }
+            catch
+            {
+                return Guid.Empty;
+            }
+        }
     }
 
     /// <summary>

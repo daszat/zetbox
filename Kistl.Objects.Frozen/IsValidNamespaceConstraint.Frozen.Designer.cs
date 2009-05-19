@@ -121,7 +121,7 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[198].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[42];
-			DataStore[198].ExportGuid = default(System.Guid);
+			DataStore[198].ExportGuid = new Guid("2bcb81bd-5f50-44d6-b247-9938404e219b");
 			DataStore[198].Reason = null;
 			DataStore[198].Seal();
 	

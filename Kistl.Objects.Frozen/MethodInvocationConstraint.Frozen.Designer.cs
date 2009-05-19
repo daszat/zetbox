@@ -120,7 +120,7 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[193].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[74];
-			DataStore[193].ExportGuid = default(System.Guid);
+			DataStore[193].ExportGuid = new Guid("c7efdbc8-05fc-439e-ac38-ec850fac5fc3");
 			DataStore[193].Reason = @"Method.ObjectClass and InvokeOnObjectClass have to match.";
 			DataStore[193].Seal();
 	

@@ -126,21 +126,21 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[7].Description = null;
-			DataStore[7].ExportGuid = default(System.Guid);
+			DataStore[7].ExportGuid = new Guid("a5538f74-d4c6-498a-95c0-b526dddf86be");
 			DataStore[7].IsList = false;
 			DataStore[7].IsReturnParameter = false;
 			DataStore[7].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
 			DataStore[7].ParameterName = @"TestBool";
 			DataStore[7].Seal();
 			DataStore[29].Description = null;
-			DataStore[29].ExportGuid = default(System.Guid);
+			DataStore[29].ExportGuid = new Guid("be54ef68-8c8b-4b84-a03b-4f4a6c687606");
 			DataStore[29].IsList = false;
 			DataStore[29].IsReturnParameter = true;
 			DataStore[29].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
 			DataStore[29].ParameterName = @"return";
 			DataStore[29].Seal();
 			DataStore[38].Description = @"whether to return null (false) or throw an Exception (true) on error";
-			DataStore[38].ExportGuid = default(System.Guid);
+			DataStore[38].ExportGuid = new Guid("d66e8a92-2601-424f-8ca5-814a8dd9c8ce");
 			DataStore[38].IsList = false;
 			DataStore[38].IsReturnParameter = false;
 			DataStore[38].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[151];

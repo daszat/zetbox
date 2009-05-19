@@ -18,14 +18,17 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         {
             if (dataType is Kistl.App.Base.ObjectClass)
             {
+                ObjectClass cls = (ObjectClass)dataType;
+                // TODO: Continue here!
+                // string[] interfaces = cls.ImplementsInterfaces.Select(i => i.Module.Namespace + "." + i.ClassName).ToArray();
                 var baseClass = (dataType as Kistl.App.Base.ObjectClass).BaseObjectClass;
                 if (baseClass != null)
                 {
-                    return new string[] { baseClass.Module.Namespace + "." + baseClass.ClassName };
+                    return new string[] { baseClass.Module.Namespace + "." + baseClass.ClassName }; //.Concat(interfaces).ToArray();
                 }
                 else
                 {
-                    return new string[] { "IDataObject" };
+                    return new string[] { "IDataObject" }; //.Concat(interfaces).ToArray();
                 }
             }
             else if (dataType is Struct)

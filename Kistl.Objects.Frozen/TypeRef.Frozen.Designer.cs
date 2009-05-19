@@ -611,462 +611,462 @@ namespace Kistl.App.Base
 
 		internal static void FillDataStore() {
 			DataStore[1].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[1];
-			DataStore[1].ExportGuid = default(System.Guid);
+			DataStore[1].ExportGuid = new Guid("e954023a-9460-4a90-8ca3-12c109bb2e41");
 			DataStore[1].FullName = @"Kistl.App.Base.CustomClientActions_KistlBase";
 			DataStore[1].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[1].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[1].Seal();
 			DataStore[2].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[2];
-			DataStore[2].ExportGuid = default(System.Guid);
+			DataStore[2].ExportGuid = new Guid("31939aa7-e9d4-43da-aff4-279c944e722f");
 			DataStore[2].FullName = @"Kistl.App.TimeRecords.CustomServerActions_TimeRecords";
 			DataStore[2].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[2].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[2].Seal();
 			DataStore[3].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[2];
-			DataStore[3].ExportGuid = default(System.Guid);
+			DataStore[3].ExportGuid = new Guid("6b4687eb-fa7f-41fb-b772-541c7e18f173");
 			DataStore[3].FullName = @"Kistl.App.Projekte.CustomServerActions_Projekte";
 			DataStore[3].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[3].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[3].Seal();
 			DataStore[4].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[2];
-			DataStore[4].ExportGuid = default(System.Guid);
+			DataStore[4].ExportGuid = new Guid("ae4a2fc0-0eb9-4d85-b962-e81ad9afed86");
 			DataStore[4].FullName = @"Kistl.App.Base.CustomServerActions_KistlBase";
 			DataStore[4].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[4].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[4].Seal();
 			DataStore[5].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[1];
-			DataStore[5].ExportGuid = default(System.Guid);
+			DataStore[5].ExportGuid = new Guid("2f979c67-61ba-4173-838b-378e2224c337");
 			DataStore[5].FullName = @"Kistl.App.GUI.CustomClientActions_GUI";
 			DataStore[5].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[5].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[5].Seal();
 			DataStore[6].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[1];
-			DataStore[6].ExportGuid = default(System.Guid);
+			DataStore[6].ExportGuid = new Guid("a77fa1d1-9341-4300-a120-8ea17365642b");
 			DataStore[6].FullName = @"Kistl.App.TimeRecords.CustomClientActions_TimeRecords";
 			DataStore[6].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[6].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[6].Seal();
 			DataStore[8].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[1];
-			DataStore[8].ExportGuid = default(System.Guid);
+			DataStore[8].ExportGuid = new Guid("6a0bd457-600e-4062-bd5d-cf786d32afbb");
 			DataStore[8].FullName = @"Kistl.App.Projekte.CustomClientActions_Projekte";
 			DataStore[8].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[8].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[8].Seal();
 			DataStore[9].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[9].ExportGuid = default(System.Guid);
+			DataStore[9].ExportGuid = new Guid("98b741e5-2dd5-4221-b001-01de816ded70");
 			DataStore[9].FullName = @"Kistl.Client.Presentables.ModuleModel";
 			DataStore[9].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[9].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83];
 			DataStore[9].Seal();
 			DataStore[10].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[10].ExportGuid = default(System.Guid);
+			DataStore[10].ExportGuid = new Guid("da04f1a5-fb30-4786-b329-8f070083a4f6");
 			DataStore[10].FullName = @"Kistl.Client.Presentables.ObjectClassModel";
 			DataStore[10].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[10].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[11];
 			DataStore[10].Seal();
 			DataStore[11].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[11].ExportGuid = default(System.Guid);
+			DataStore[11].ExportGuid = new Guid("41b6d0a1-a2ae-4c68-8997-503db83319bc");
 			DataStore[11].FullName = @"Kistl.Client.Presentables.DataTypeModel";
 			DataStore[11].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[11].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83];
 			DataStore[11].Seal();
 			DataStore[12].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[12].ExportGuid = default(System.Guid);
+			DataStore[12].ExportGuid = new Guid("c9f71b76-a29a-46ce-9288-20263c83c7dd");
 			DataStore[12].FullName = @"Kistl.Client.Presentables.SaveContextCommand";
 			DataStore[12].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[12].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[45];
 			DataStore[12].Seal();
 			DataStore[13].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[13].ExportGuid = default(System.Guid);
+			DataStore[13].ExportGuid = new Guid("d9fe8f77-b156-4929-add8-38cc2fa546e8");
 			DataStore[13].FullName = @"Kistl.Client.Presentables.WorkspaceModel";
 			DataStore[13].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[13].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[13].Seal();
 			DataStore[14].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[14].ExportGuid = default(System.Guid);
+			DataStore[14].ExportGuid = new Guid("6fd1945a-790c-40d5-9a9c-f0e0eaa9b695");
 			DataStore[14].FullName = @"Kistl.Client.ClientExtensions";
 			DataStore[14].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[14].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[14].Seal();
 			DataStore[15].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[15].ExportGuid = default(System.Guid);
+			DataStore[15].ExportGuid = new Guid("117c6d76-559a-469a-8be3-efc2fcd753df");
 			DataStore[15].FullName = @"Kistl.Client.ClientHelper";
 			DataStore[15].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[15].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[15].Seal();
 			DataStore[16].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[16].ExportGuid = default(System.Guid);
+			DataStore[16].ExportGuid = new Guid("cd9797e0-ad1b-4dd7-b66b-1f2528f7a50c");
 			DataStore[16].FullName = @"Kistl.Client.Presentables.ActionModel";
 			DataStore[16].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[16].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[16].Seal();
 			DataStore[17].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[17].ExportGuid = default(System.Guid);
+			DataStore[17].ExportGuid = new Guid("85be3823-e778-4829-b214-69154c1e6164");
 			DataStore[17].FullName = @"Kistl.Client.Presentables.ObjectListModel";
 			DataStore[17].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[17].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[355];
 			DataStore[17].Seal();
 			DataStore[18].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[18].ExportGuid = default(System.Guid);
+			DataStore[18].ExportGuid = new Guid("312383a3-5c45-43cf-a032-5271792a4eec");
 			DataStore[18].FullName = @"Kistl.Client.Presentables.DataObjectSelectionTaskModel";
 			DataStore[18].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[18].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[357];
 			DataStore[18].Seal();
 			DataStore[23].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[23].ExportGuid = default(System.Guid);
+			DataStore[23].ExportGuid = new Guid("413cabb4-e306-4e6b-bd92-9216f092380e");
 			DataStore[23].FullName = @"Kistl.Client.ServerDomainManager";
 			DataStore[23].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[23].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[23].Seal();
 			DataStore[24].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[24].ExportGuid = default(System.Guid);
+			DataStore[24].ExportGuid = new Guid("91fdfdb4-7e1d-4949-952e-6da8c2b0ad48");
 			DataStore[24].FullName = @"Kistl.Client.Presentables.SynchronousThreadManager";
 			DataStore[24].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[24].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[24].Seal();
 			DataStore[25].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[25].ExportGuid = default(System.Guid);
+			DataStore[25].ExportGuid = new Guid("1067284c-7e5c-426d-b65d-7f46249ef266");
 			DataStore[25].FullName = @"Kistl.Client.Presentables.WPF.AsyncThreadManager";
 			DataStore[25].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[25].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[25].Seal();
 			DataStore[26].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[26].ExportGuid = default(System.Guid);
+			DataStore[26].ExportGuid = new Guid("ba90f359-b491-44f7-8949-d1b919b0ae05");
 			DataStore[26].FullName = @"Kistl.Client.Presentables.WPF.UiThreadManager";
 			DataStore[26].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[26].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[26].Seal();
 			DataStore[27].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[27].ExportGuid = default(System.Guid);
+			DataStore[27].ExportGuid = new Guid("64a9e92f-3461-43ac-b31d-780fd9c63977");
 			DataStore[27].FullName = @"Kistl.Client.Presentables.IThreadManager";
 			DataStore[27].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[27].Parent = null;
 			DataStore[27].Seal();
 			DataStore[31].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[31].ExportGuid = default(System.Guid);
+			DataStore[31].ExportGuid = new Guid("20efc010-a3ee-4bf8-83ae-0e2396a7fe17");
 			DataStore[31].FullName = @"Kistl.Client.TheseMethodsShouldBeImplementedOnKistlObjects";
 			DataStore[31].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[31].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[31].Seal();
 			DataStore[34].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[34].ExportGuid = default(System.Guid);
+			DataStore[34].ExportGuid = new Guid("59136763-5a94-4ae5-b9ab-6d679e86245a");
 			DataStore[34].FullName = @"Kistl.Client.Presentables.ObjectReferenceModel";
 			DataStore[34].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[34].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[374];
 			DataStore[34].Seal();
 			DataStore[39].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[39].ExportGuid = default(System.Guid);
+			DataStore[39].ExportGuid = new Guid("4f23f8fc-83cc-4376-bef1-15550d8f5bed");
 			DataStore[39].FullName = @"Kistl.Client.GUI.IView";
 			DataStore[39].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[39].Parent = null;
 			DataStore[39].Seal();
 			DataStore[40].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[40].ExportGuid = default(System.Guid);
+			DataStore[40].ExportGuid = new Guid("0de66862-2d4e-443f-86b2-992f5315ea29");
 			DataStore[40].FullName = @"Kistl.Client.Presentables.ModelState";
 			DataStore[40].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[40].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[300];
 			DataStore[40].Seal();
 			DataStore[41].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[41].ExportGuid = default(System.Guid);
+			DataStore[41].ExportGuid = new Guid("68c7ae8c-6fc6-4c67-877b-7a84efd47b55");
 			DataStore[41].FullName = @"Kistl.Client.Presentables.MethodInvocationModel";
 			DataStore[41].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[41].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83];
 			DataStore[41].Seal();
 			DataStore[45].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[45].ExportGuid = default(System.Guid);
+			DataStore[45].ExportGuid = new Guid("34a220b5-e8b0-481e-beed-8948acf5173e");
 			DataStore[45].FullName = @"Kistl.Client.Presentables.CommandModel";
 			DataStore[45].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[45].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[45].Seal();
 			DataStore[46].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[46].ExportGuid = default(System.Guid);
+			DataStore[46].ExportGuid = new Guid("b4994743-c3bd-4f6a-baac-8c3ce87cb4e7");
 			DataStore[46].FullName = @"Kistl.Client.Presentables.ICommand";
 			DataStore[46].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[46].Parent = null;
 			DataStore[46].Seal();
 			DataStore[47].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[47].ExportGuid = default(System.Guid);
+			DataStore[47].ExportGuid = new Guid("5c0fb6c6-e174-42f3-9d9d-ee23b4c06bc2");
 			DataStore[47].FullName = @"Kistl.Client.GuiApplicationContext";
 			DataStore[47].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[47].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[302];
 			DataStore[47].Seal();
 			DataStore[48].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[48].ExportGuid = default(System.Guid);
+			DataStore[48].ExportGuid = new Guid("b7a33d42-da6d-430d-8a37-962f4d6e0833");
 			DataStore[48].FullName = @"Kistl.Client.IGuiApplicationContext";
 			DataStore[48].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[48].Parent = null;
 			DataStore[48].Seal();
 			DataStore[81].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[81].ExportGuid = default(System.Guid);
+			DataStore[81].ExportGuid = new Guid("a2ef02e2-851b-4b34-bb7f-2a906dda177d");
 			DataStore[81].FullName = @"Kistl.Client.Presentables.ModelFactory";
 			DataStore[81].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[81].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[81].Seal();
 			DataStore[83].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[83].ExportGuid = default(System.Guid);
+			DataStore[83].ExportGuid = new Guid("a07f30a6-b920-4fef-98ac-53155791e804");
 			DataStore[83].FullName = @"Kistl.Client.Presentables.DataObjectModel";
 			DataStore[83].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[83].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[83].Seal();
 			DataStore[92].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[92].ExportGuid = default(System.Guid);
+			DataStore[92].ExportGuid = new Guid("1ddd8333-40b8-4b7e-a98a-83be2c4ad51e");
 			DataStore[92].FullName = @"Kistl.Client.Presentables.IClearableValue";
 			DataStore[92].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[92].Parent = null;
 			DataStore[92].Seal();
 			DataStore[94].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[94].ExportGuid = default(System.Guid);
+			DataStore[94].ExportGuid = new Guid("c8e36412-31de-4ea0-90a3-4d4392f1c3c8");
 			DataStore[94].FullName = @"Kistl.Client.Presentables.KistlContextModel";
 			DataStore[94].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[94].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[94].Seal();
 			DataStore[95].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[95].ExportGuid = default(System.Guid);
+			DataStore[95].ExportGuid = new Guid("266f79a3-9b2f-4779-a9ae-9702ccf53a5a");
 			DataStore[95].FullName = @"Kistl.Client.Presentables.KistlDebuggerAsModel";
 			DataStore[95].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[95].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[95].Seal();
 			DataStore[96].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[96].ExportGuid = default(System.Guid);
+			DataStore[96].ExportGuid = new Guid("6012afb5-9ef6-4552-9481-b46a39f8f54d");
 			DataStore[96].FullName = @"Kistl.Client.Presentables.PresentableModel";
 			DataStore[96].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[96].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[96].Seal();
 			DataStore[108].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13];
-			DataStore[108].ExportGuid = default(System.Guid);
+			DataStore[108].ExportGuid = new Guid("558fcf1b-9f5f-4510-92c1-0c7364ed6b12");
 			DataStore[108].FullName = @"Kistl.App.Base.Multiplicity";
 			DataStore[108].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[108].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[300];
 			DataStore[108].Seal();
 			DataStore[110].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13];
-			DataStore[110].ExportGuid = default(System.Guid);
+			DataStore[110].ExportGuid = new Guid("03387ef8-1025-47ca-aeec-b53264efd693");
 			DataStore[110].FullName = @"Kistl.App.Base.StorageType";
 			DataStore[110].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[110].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[300];
 			DataStore[110].Seal();
 			DataStore[112].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13];
-			DataStore[112].ExportGuid = default(System.Guid);
+			DataStore[112].ExportGuid = new Guid("77f2d68d-91a8-4639-8714-d9aca80d8562");
 			DataStore[112].FullName = @"Kistl.App.GUI.VisualType";
 			DataStore[112].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[112].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[300];
 			DataStore[112].Seal();
 			DataStore[114].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13];
-			DataStore[114].ExportGuid = default(System.Guid);
+			DataStore[114].ExportGuid = new Guid("17cbd863-666b-4c69-b40f-92ef5f5fef9d");
 			DataStore[114].FullName = @"Kistl.App.GUI.Toolkit";
 			DataStore[114].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[114].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[300];
 			DataStore[114].Seal();
 			DataStore[116].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13];
-			DataStore[116].ExportGuid = default(System.Guid);
+			DataStore[116].ExportGuid = new Guid("ea1df580-d4e4-421e-a449-f3d3fd5356c2");
 			DataStore[116].FullName = @"Kistl.App.Test.TestEnum";
 			DataStore[116].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[116].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[300];
 			DataStore[116].Seal();
 			DataStore[145].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[145].ExportGuid = default(System.Guid);
+			DataStore[145].ExportGuid = new Guid("e68bbcf2-0d0d-446a-bc1e-4791e904c3fb");
 			DataStore[145].FullName = @"Kistl.Client.WPF.View.KistlDebuggerView";
 			DataStore[145].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[145].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[317];
 			DataStore[145].Seal();
 			DataStore[146].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[146].ExportGuid = default(System.Guid);
+			DataStore[146].ExportGuid = new Guid("fc18b7ac-7673-4c6a-b3c0-7f016ecca3b2");
 			DataStore[146].FullName = @"Kistl.Client.WPF.View.ListValueView";
 			DataStore[146].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[146].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[319];
 			DataStore[146].Seal();
 			DataStore[147].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[147].ExportGuid = default(System.Guid);
+			DataStore[147].ExportGuid = new Guid("d1ea3d41-384e-4f72-940c-0471f2421082");
 			DataStore[147].FullName = @"Kistl.Client.WPF.View.EnumSelectionView";
 			DataStore[147].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[147].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[319];
 			DataStore[147].Seal();
 			DataStore[148].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[148].ExportGuid = default(System.Guid);
+			DataStore[148].ExportGuid = new Guid("937a06f5-8bdb-47e7-b30d-ef5e944e2eae");
 			DataStore[148].FullName = @"Kistl.Client.WPF.View.TextValueSelectionView";
 			DataStore[148].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[148].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[319];
 			DataStore[148].Seal();
 			DataStore[149].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[149].ExportGuid = default(System.Guid);
+			DataStore[149].ExportGuid = new Guid("a7c67d95-c198-47da-ad6d-af90e08137f7");
 			DataStore[149].FullName = @"Kistl.Client.WPF.View.ActionView";
 			DataStore[149].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[149].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
 			DataStore[149].Seal();
 			DataStore[150].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[150].ExportGuid = default(System.Guid);
+			DataStore[150].ExportGuid = new Guid("12084abf-1e98-4d04-b66d-fed4ea47d3c2");
 			DataStore[150].FullName = @"Kistl.Client.WPF.View.SelectionDialog";
 			DataStore[150].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[150].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[317];
 			DataStore[150].Seal();
 			DataStore[151].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[151].ExportGuid = default(System.Guid);
+			DataStore[151].ExportGuid = new Guid("58dc43e8-3fc4-46ce-b233-51459ebe4d2b");
 			DataStore[151].FullName = @"Kistl.Client.WPF.View.NullableBoolValueView";
 			DataStore[151].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[151].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[319];
 			DataStore[151].Seal();
 			DataStore[152].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[16];
-			DataStore[152].ExportGuid = default(System.Guid);
+			DataStore[152].ExportGuid = new Guid("5c6cddb5-ed40-4331-b8de-122748175b18");
 			DataStore[152].FullName = @"Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxViewLoader";
 			DataStore[152].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[152].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[320];
 			DataStore[152].Seal();
 			DataStore[153].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17];
-			DataStore[153].ExportGuid = default(System.Guid);
+			DataStore[153].ExportGuid = new Guid("c5b0021a-b59c-4e73-b756-60020da6ae3e");
 			DataStore[153].FullName = @"Kistl.Client.Forms.View.NullablePropertyTextBoxView";
 			DataStore[153].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[153].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[328];
 			DataStore[153].Seal();
 			DataStore[154].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[154].ExportGuid = default(System.Guid);
+			DataStore[154].ExportGuid = new Guid("852d2841-6918-4faf-a8ef-5d93a1e5d548");
 			DataStore[154].FullName = @"Kistl.Client.WPF.View.NullablePropertyTextBoxView";
 			DataStore[154].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[154].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[319];
 			DataStore[154].Seal();
 			DataStore[155].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[155].ExportGuid = default(System.Guid);
+			DataStore[155].ExportGuid = new Guid("92fb7c93-822b-41f7-b25b-dd44e0fb3516");
 			DataStore[155].FullName = @"Kistl.Client.WPF.View.DataObjectView";
 			DataStore[155].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[155].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
 			DataStore[155].Seal();
 			DataStore[156].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[16];
-			DataStore[156].ExportGuid = default(System.Guid);
+			DataStore[156].ExportGuid = new Guid("49ed1dda-5eb8-435e-a84f-3389db6b7d6e");
 			DataStore[156].FullName = @"Kistl.Client.ASPNET.Toolkit.View.DataObjectListViewLoader";
 			DataStore[156].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[156].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[320];
 			DataStore[156].Seal();
 			DataStore[157].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17];
-			DataStore[157].ExportGuid = default(System.Guid);
+			DataStore[157].ExportGuid = new Guid("9679c5f0-d0d6-47a1-b147-cbaa4a19d2d3");
 			DataStore[157].FullName = @"Kistl.Client.Forms.View.DataObjectListView";
 			DataStore[157].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[157].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[330];
 			DataStore[157].Seal();
 			DataStore[158].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[158].ExportGuid = default(System.Guid);
+			DataStore[158].ExportGuid = new Guid("4652082a-202d-4d20-a0d4-81a4f69ffb85");
 			DataStore[158].FullName = @"Kistl.Client.WPF.View.DataObjectListView";
 			DataStore[158].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[158].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[319];
 			DataStore[158].Seal();
 			DataStore[159].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[16];
-			DataStore[159].ExportGuid = default(System.Guid);
+			DataStore[159].ExportGuid = new Guid("e2570546-0fd2-4bab-b836-0fdb24491c33");
 			DataStore[159].FullName = @"Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceViewLoader";
 			DataStore[159].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[159].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[320];
 			DataStore[159].Seal();
 			DataStore[160].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17];
-			DataStore[160].ExportGuid = default(System.Guid);
+			DataStore[160].ExportGuid = new Guid("389bdb3b-0e04-41bc-ab80-4b0e63fc180c");
 			DataStore[160].FullName = @"Kistl.Client.Forms.View.DataObjectReferenceView";
 			DataStore[160].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[160].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[332];
 			DataStore[160].Seal();
 			DataStore[161].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[161].ExportGuid = default(System.Guid);
+			DataStore[161].ExportGuid = new Guid("0695b951-f3fe-4bf2-a9b7-f893c5bb7c1c");
 			DataStore[161].FullName = @"Kistl.Client.WPF.View.ObjectReferenceView";
 			DataStore[161].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[161].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[319];
 			DataStore[161].Seal();
 			DataStore[162].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[16];
-			DataStore[162].ExportGuid = default(System.Guid);
+			DataStore[162].ExportGuid = new Guid("5bc00f1b-d31b-422b-a8aa-dbd72fa6718b");
 			DataStore[162].FullName = @"Kistl.Client.ASPNET.Toolkit.View.DataObjectFullViewLoader";
 			DataStore[162].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[162].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[320];
 			DataStore[162].Seal();
 			DataStore[163].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17];
-			DataStore[163].ExportGuid = default(System.Guid);
+			DataStore[163].ExportGuid = new Guid("f1f3ab2a-0b82-4d34-8f9e-bf2a809f4e04");
 			DataStore[163].FullName = @"Kistl.Client.Forms.View.DataObjectFullView";
 			DataStore[163].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[163].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[334];
 			DataStore[163].Seal();
 			DataStore[164].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[164].ExportGuid = default(System.Guid);
+			DataStore[164].ExportGuid = new Guid("ba95fc85-c50f-494a-b4f0-5596ef38b7bf");
 			DataStore[164].FullName = @"Kistl.Client.WPF.View.DataObjectFullView";
 			DataStore[164].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[164].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
 			DataStore[164].Seal();
 			DataStore[165].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[16];
-			DataStore[165].ExportGuid = default(System.Guid);
+			DataStore[165].ExportGuid = new Guid("7fbe5664-1b3c-4176-a360-85b98009886c");
 			DataStore[165].FullName = @"Kistl.Client.ASPNET.Toolkit.View.WorkspaceViewLoader";
 			DataStore[165].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[165].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[320];
 			DataStore[165].Seal();
 			DataStore[166].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17];
-			DataStore[166].ExportGuid = default(System.Guid);
+			DataStore[166].ExportGuid = new Guid("cc9508ab-9700-47d9-a969-9d78db989c49");
 			DataStore[166].FullName = @"Kistl.Client.Forms.View.WorkspaceView";
 			DataStore[166].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[166].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[335];
 			DataStore[166].Seal();
 			DataStore[167].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[167].ExportGuid = default(System.Guid);
+			DataStore[167].ExportGuid = new Guid("28a89148-24d1-4cc9-accc-24cc7eb2dfde");
 			DataStore[167].FullName = @"Kistl.Client.WPF.View.WorkspaceView";
 			DataStore[167].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[167].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[317];
 			DataStore[167].Seal();
 			DataStore[273].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[273].ExportGuid = default(System.Guid);
+			DataStore[273].ExportGuid = new Guid("b664cb98-8a81-4a12-ab12-46ae2a7bb499");
 			DataStore[273].FullName = @"Kistl.Client.Presentables.EnumerationPropertyModel`1";
 			DataStore[273].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[108],
@@ -1074,7 +1074,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[108],
 			DataStore[273].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[424];
 			DataStore[273].Seal();
 			DataStore[274].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[274].ExportGuid = default(System.Guid);
+			DataStore[274].ExportGuid = new Guid("567b58ce-dced-4a54-bc05-1ed0dfe8943a");
 			DataStore[274].FullName = @"Kistl.Client.Presentables.EnumerationPropertyModel`1";
 			DataStore[274].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[110],
@@ -1082,7 +1082,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[110],
 			DataStore[274].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[429];
 			DataStore[274].Seal();
 			DataStore[275].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[275].ExportGuid = default(System.Guid);
+			DataStore[275].ExportGuid = new Guid("96ee55ea-57f8-40e4-a4c6-c60e39b9f35b");
 			DataStore[275].FullName = @"Kistl.Client.Presentables.EnumerationPropertyModel`1";
 			DataStore[275].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[112],
@@ -1090,7 +1090,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[112],
 			DataStore[275].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[434];
 			DataStore[275].Seal();
 			DataStore[276].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[276].ExportGuid = default(System.Guid);
+			DataStore[276].ExportGuid = new Guid("c597cf42-2788-4d9c-990b-ffffd2fe8a11");
 			DataStore[276].FullName = @"Kistl.Client.Presentables.EnumerationPropertyModel`1";
 			DataStore[276].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[114],
@@ -1098,7 +1098,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[114],
 			DataStore[276].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[439];
 			DataStore[276].Seal();
 			DataStore[277].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[277].ExportGuid = default(System.Guid);
+			DataStore[277].ExportGuid = new Guid("ec884659-371f-41bc-aeba-b9cd61d010df");
 			DataStore[277].FullName = @"Kistl.Client.Presentables.EnumerationPropertyModel`1";
 			DataStore[277].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[116],
@@ -1106,231 +1106,231 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[116],
 			DataStore[277].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[444];
 			DataStore[277].Seal();
 			DataStore[278].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18];
-			DataStore[278].ExportGuid = default(System.Guid);
+			DataStore[278].ExportGuid = new Guid("9c2c3f17-3445-46e0-8b76-fc11f15dfbf5");
 			DataStore[278].FullName = @"Kistl.Client.WPF.View.PropertyGroupBoxView";
 			DataStore[278].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[278].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[347];
 			DataStore[278].Seal();
 			DataStore[282].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17];
-			DataStore[282].ExportGuid = default(System.Guid);
+			DataStore[282].ExportGuid = new Guid("7852bc9a-ee8f-4e91-97e8-f863f52326b0");
 			DataStore[282].FullName = @"Kistl.Client.Forms.View.DataObjectReferenceView";
 			DataStore[282].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[282].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[332];
 			DataStore[282].Seal();
 			DataStore[283].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[283].ExportGuid = default(System.Guid);
+			DataStore[283].ExportGuid = new Guid("8314a3e7-5e20-47bd-ba61-c3e88eae2ffc");
 			DataStore[283].FullName = @"Kistl.Client.Presentables.PropertyGroupModel";
 			DataStore[283].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[283].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[283].Seal();
 			DataStore[295].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[295].ExportGuid = default(System.Guid);
+			DataStore[295].ExportGuid = new Guid("c51c8086-60b2-410e-96c4-c1a32c1f57ee");
 			DataStore[295].FullName = @"System.Object";
 			DataStore[295].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[295].Parent = null;
 			DataStore[295].Seal();
 			DataStore[299].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[299].ExportGuid = default(System.Guid);
+			DataStore[299].ExportGuid = new Guid("4a5b38e8-bca8-4061-8a70-69bbd593ddd8");
 			DataStore[299].FullName = @"System.ValueType";
 			DataStore[299].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[299].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[299].Seal();
 			DataStore[300].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[300].ExportGuid = default(System.Guid);
+			DataStore[300].ExportGuid = new Guid("80e14e91-1a63-4908-952f-9a3c3773c765");
 			DataStore[300].FullName = @"System.Enum";
 			DataStore[300].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[300].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[300].Seal();
 			DataStore[301].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[15];
-			DataStore[301].ExportGuid = default(System.Guid);
+			DataStore[301].ExportGuid = new Guid("25c0d6de-3768-4ebb-8210-4c789c869c1a");
 			DataStore[301].FullName = @"Kistl.API.ApplicationContext";
 			DataStore[301].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[301].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[301].Seal();
 			DataStore[302].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[30];
-			DataStore[302].ExportGuid = default(System.Guid);
+			DataStore[302].ExportGuid = new Guid("b732c334-a720-4796-ae97-9a2ccf636791");
 			DataStore[302].FullName = @"Kistl.API.Client.ClientApiContext";
 			DataStore[302].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[302].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[301];
 			DataStore[302].Seal();
 			DataStore[310].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[31];
-			DataStore[310].ExportGuid = default(System.Guid);
+			DataStore[310].ExportGuid = new Guid("df23dac1-96d9-41dc-9aeb-bbfbad1ad7cb");
 			DataStore[310].FullName = @"System.Windows.Threading.DispatcherObject";
 			DataStore[310].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[310].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[310].Seal();
 			DataStore[311].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[31];
-			DataStore[311].ExportGuid = default(System.Guid);
+			DataStore[311].ExportGuid = new Guid("5a505de5-8b19-48f1-bdb8-6865ce665876");
 			DataStore[311].FullName = @"System.Windows.DependencyObject";
 			DataStore[311].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[311].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[310];
 			DataStore[311].Seal();
 			DataStore[312].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[32];
-			DataStore[312].ExportGuid = default(System.Guid);
+			DataStore[312].ExportGuid = new Guid("69552e25-33e1-44b2-9b8c-da4a2f0a896b");
 			DataStore[312].FullName = @"System.Windows.Media.Visual";
 			DataStore[312].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[312].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[311];
 			DataStore[312].Seal();
 			DataStore[313].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[32];
-			DataStore[313].ExportGuid = default(System.Guid);
+			DataStore[313].ExportGuid = new Guid("cf64b9d6-50c4-4f49-a1ad-1dd0ad8c9b13");
 			DataStore[313].FullName = @"System.Windows.UIElement";
 			DataStore[313].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[313].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[312];
 			DataStore[313].Seal();
 			DataStore[314].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[33];
-			DataStore[314].ExportGuid = default(System.Guid);
+			DataStore[314].ExportGuid = new Guid("c12ccef7-55ee-454f-befb-e917d00ab79d");
 			DataStore[314].FullName = @"System.Windows.FrameworkElement";
 			DataStore[314].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[314].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[313];
 			DataStore[314].Seal();
 			DataStore[315].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[33];
-			DataStore[315].ExportGuid = default(System.Guid);
+			DataStore[315].ExportGuid = new Guid("669c40cb-5030-4ed1-a713-17470c92a596");
 			DataStore[315].FullName = @"System.Windows.Controls.Control";
 			DataStore[315].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[315].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[314];
 			DataStore[315].Seal();
 			DataStore[316].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[33];
-			DataStore[316].ExportGuid = default(System.Guid);
+			DataStore[316].ExportGuid = new Guid("950b505b-54b5-44ae-a155-c06c96727d0a");
 			DataStore[316].FullName = @"System.Windows.Controls.ContentControl";
 			DataStore[316].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[316].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[315];
 			DataStore[316].Seal();
 			DataStore[317].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[33];
-			DataStore[317].ExportGuid = default(System.Guid);
+			DataStore[317].ExportGuid = new Guid("ee07bd36-41ee-43df-8099-f4dd0c355902");
 			DataStore[317].FullName = @"System.Windows.Window";
 			DataStore[317].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[317].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[316];
 			DataStore[317].Seal();
 			DataStore[318].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[33];
-			DataStore[318].ExportGuid = default(System.Guid);
+			DataStore[318].ExportGuid = new Guid("1fda132a-a95c-4483-9f9d-1e952fa20245");
 			DataStore[318].FullName = @"System.Windows.Controls.UserControl";
 			DataStore[318].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[318].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[316];
 			DataStore[318].Seal();
 			DataStore[319].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[34];
-			DataStore[319].ExportGuid = default(System.Guid);
+			DataStore[319].ExportGuid = new Guid("b63e703b-9bbc-40cd-9dfd-e29bfb925826");
 			DataStore[319].FullName = @"Kistl.Client.WPF.View.PropertyView";
 			DataStore[319].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[319].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
 			DataStore[319].Seal();
 			DataStore[320].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[35];
-			DataStore[320].ExportGuid = default(System.Guid);
+			DataStore[320].ExportGuid = new Guid("1c81e7f3-f89e-4ea9-902a-5e33851d71b0");
 			DataStore[320].FullName = @"Kistl.Client.ASPNET.Toolkit.View.ViewLoader";
 			DataStore[320].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[320].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[320].Seal();
 			DataStore[321].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[321].ExportGuid = default(System.Guid);
+			DataStore[321].ExportGuid = new Guid("304f8741-7dfd-4949-afda-0844842c2356");
 			DataStore[321].FullName = @"System.MarshalByRefObject";
 			DataStore[321].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[321].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[321].Seal();
 			DataStore[322].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[36];
-			DataStore[322].ExportGuid = default(System.Guid);
+			DataStore[322].ExportGuid = new Guid("dedf1d31-e4e3-40ad-8ed5-a3df78137374");
 			DataStore[322].FullName = @"System.ComponentModel.Component";
 			DataStore[322].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[322].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[321];
 			DataStore[322].Seal();
 			DataStore[323].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[37];
-			DataStore[323].ExportGuid = default(System.Guid);
+			DataStore[323].ExportGuid = new Guid("249e5d3c-0dfb-4fe8-a67c-bf46b26c6923");
 			DataStore[323].FullName = @"System.Windows.Forms.Control";
 			DataStore[323].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[323].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[322];
 			DataStore[323].Seal();
 			DataStore[324].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[37];
-			DataStore[324].ExportGuid = default(System.Guid);
+			DataStore[324].ExportGuid = new Guid("f8d240ea-e7ff-43d1-bfc8-3d0840d85733");
 			DataStore[324].FullName = @"System.Windows.Forms.ScrollableControl";
 			DataStore[324].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[324].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[323];
 			DataStore[324].Seal();
 			DataStore[325].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[37];
-			DataStore[325].ExportGuid = default(System.Guid);
+			DataStore[325].ExportGuid = new Guid("a1254a60-8dfd-4928-8984-5ccf051da8e8");
 			DataStore[325].FullName = @"System.Windows.Forms.ContainerControl";
 			DataStore[325].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[325].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[324];
 			DataStore[325].Seal();
 			DataStore[326].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[37];
-			DataStore[326].ExportGuid = default(System.Guid);
+			DataStore[326].ExportGuid = new Guid("774e54d3-6017-4992-b380-b11538217cba");
 			DataStore[326].FullName = @"System.Windows.Forms.UserControl";
 			DataStore[326].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[326].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[325];
 			DataStore[326].Seal();
 			DataStore[328].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[38];
-			DataStore[328].ExportGuid = default(System.Guid);
+			DataStore[328].ExportGuid = new Guid("cf875c98-2ac3-421e-94ec-35c04f76172c");
 			DataStore[328].FullName = @"Kistl.Client.Forms.View.NullablePropertyTextBoxViewDesignerProxy";
 			DataStore[328].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[328].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[416];
 			DataStore[328].Seal();
 			DataStore[330].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[38];
-			DataStore[330].ExportGuid = default(System.Guid);
+			DataStore[330].ExportGuid = new Guid("d207fda2-1a03-4013-81a4-5d9d1d2c9821");
 			DataStore[330].FullName = @"Kistl.Client.Forms.View.DataObjectListViewDesignerProxy";
 			DataStore[330].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[330].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[418];
 			DataStore[330].Seal();
 			DataStore[332].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[38];
-			DataStore[332].ExportGuid = default(System.Guid);
+			DataStore[332].ExportGuid = new Guid("db1de821-5149-40eb-a79f-81bfb5b0ae4d");
 			DataStore[332].FullName = @"Kistl.Client.Forms.View.DataObjectReferenceViewDesignerProxy";
 			DataStore[332].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[332].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[419];
 			DataStore[332].Seal();
 			DataStore[334].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[38];
-			DataStore[334].ExportGuid = default(System.Guid);
+			DataStore[334].ExportGuid = new Guid("d9712828-6231-46fa-8cd2-07d8f33577b9");
 			DataStore[334].FullName = @"Kistl.Client.Forms.View.DataObjectFullViewDesignerProxy";
 			DataStore[334].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[334].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[420];
 			DataStore[334].Seal();
 			DataStore[335].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[37];
-			DataStore[335].ExportGuid = default(System.Guid);
+			DataStore[335].ExportGuid = new Guid("d5e69fd4-01d4-43e6-9fad-d9ec09475262");
 			DataStore[335].FullName = @"System.Windows.Forms.Form";
 			DataStore[335].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[335].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[325];
 			DataStore[335].Seal();
 			DataStore[346].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[33];
-			DataStore[346].ExportGuid = default(System.Guid);
+			DataStore[346].ExportGuid = new Guid("8d9e2188-e9ff-4e2c-8d9b-b471044a21d2");
 			DataStore[346].FullName = @"System.Windows.Controls.HeaderedContentControl";
 			DataStore[346].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[346].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[316];
 			DataStore[346].Seal();
 			DataStore[347].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[33];
-			DataStore[347].ExportGuid = default(System.Guid);
+			DataStore[347].ExportGuid = new Guid("f7493cb1-e0cc-4be0-8626-ef9c58290af8");
 			DataStore[347].FullName = @"System.Windows.Controls.GroupBox";
 			DataStore[347].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[347].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[346];
 			DataStore[347].Seal();
 			DataStore[354].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[354].ExportGuid = default(System.Guid);
+			DataStore[354].ExportGuid = new Guid("c71f7d2b-bd78-4eff-8122-214e29740625");
 			DataStore[354].FullName = @"System.Collections.Generic.ICollection`1";
 			DataStore[354].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83],
@@ -1338,7 +1338,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83],
 			DataStore[354].Parent = null;
 			DataStore[354].Seal();
 			DataStore[355].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[355].ExportGuid = default(System.Guid);
+			DataStore[355].ExportGuid = new Guid("c1af8bc5-ad75-4725-88d6-9e34294c7d6b");
 			DataStore[355].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[355].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[354],
@@ -1346,7 +1346,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[354],
 			DataStore[355].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[355].Seal();
 			DataStore[357].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[357].ExportGuid = default(System.Guid);
+			DataStore[357].ExportGuid = new Guid("1b3d6d7f-3f7e-4e78-baa6-3d9f2bf8c887");
 			DataStore[357].FullName = @"Kistl.Client.Presentables.SelectionTaskModel`1";
 			DataStore[357].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83],
@@ -1354,7 +1354,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83],
 			DataStore[357].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[357].Seal();
 			DataStore[374].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[374].ExportGuid = default(System.Guid);
+			DataStore[374].ExportGuid = new Guid("1d98088b-42c9-4a90-886f-814d5707c453");
 			DataStore[374].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[374].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83],
@@ -1362,7 +1362,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83],
 			DataStore[374].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[374].Seal();
 			DataStore[382].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[382].ExportGuid = default(System.Guid);
+			DataStore[382].ExportGuid = new Guid("7045df02-d480-4755-bf6d-2cae438dce1c");
 			DataStore[382].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[382].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
@@ -1370,14 +1370,14 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
 			DataStore[382].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[382].Seal();
 			DataStore[383].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[383].ExportGuid = default(System.Guid);
+			DataStore[383].ExportGuid = new Guid("ec63294b-6e2c-49c7-b925-7e263e8c1fcf");
 			DataStore[383].FullName = @"System.String";
 			DataStore[383].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[383].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
 			DataStore[383].Seal();
 			DataStore[384].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[384].ExportGuid = default(System.Guid);
+			DataStore[384].ExportGuid = new Guid("006ae4fa-804d-47a7-97d5-33d99a0ebb51");
 			DataStore[384].FullName = @"Kistl.Client.Presentables.ReferencePropertyModel`1";
 			DataStore[384].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
@@ -1385,7 +1385,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
 			DataStore[384].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[382];
 			DataStore[384].Seal();
 			DataStore[394].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[394].ExportGuid = default(System.Guid);
+			DataStore[394].ExportGuid = new Guid("a1c64886-b50d-4e06-b806-dc359e605626");
 			DataStore[394].FullName = @"Kistl.Client.Presentables.ChooseReferencePropertyModel`1";
 			DataStore[394].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
@@ -1393,7 +1393,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
 			DataStore[394].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[384];
 			DataStore[394].Seal();
 			DataStore[395].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[395].ExportGuid = default(System.Guid);
+			DataStore[395].ExportGuid = new Guid("e0f5d065-6411-479b-a56d-0eea1cd3a0c1");
 			DataStore[395].FullName = @"System.Nullable`1";
 			DataStore[395].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
@@ -1401,7 +1401,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
 			DataStore[395].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[395].Seal();
 			DataStore[396].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[396].ExportGuid = default(System.Guid);
+			DataStore[396].ExportGuid = new Guid("1758692e-7073-4841-add2-37b9421b0fb5");
 			DataStore[396].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[396].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[395],
@@ -1409,14 +1409,14 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[395],
 			DataStore[396].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[396].Seal();
 			DataStore[398].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[398].ExportGuid = default(System.Guid);
+			DataStore[398].ExportGuid = new Guid("858e1452-5e20-4c92-bc8d-7b2b925c5052");
 			DataStore[398].FullName = @"System.Int32";
 			DataStore[398].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[398].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[398].Seal();
 			DataStore[399].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[399].ExportGuid = default(System.Guid);
+			DataStore[399].ExportGuid = new Guid("2f35b21a-73c2-4e38-ab28-7ee2404684be");
 			DataStore[399].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1";
 			DataStore[399].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
@@ -1424,7 +1424,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
 			DataStore[399].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[396];
 			DataStore[399].Seal();
 			DataStore[400].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[400].ExportGuid = default(System.Guid);
+			DataStore[400].ExportGuid = new Guid("65528584-a977-4bdb-96d6-b128f5cca2ae");
 			DataStore[400].FullName = @"System.Nullable`1";
 			DataStore[400].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[403],
@@ -1432,7 +1432,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[403],
 			DataStore[400].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[400].Seal();
 			DataStore[401].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[401].ExportGuid = default(System.Guid);
+			DataStore[401].ExportGuid = new Guid("e8598d40-fe23-4a0a-b098-58b7bd483df8");
 			DataStore[401].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[401].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[400],
@@ -1440,14 +1440,14 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[400],
 			DataStore[401].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[401].Seal();
 			DataStore[403].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[403].ExportGuid = default(System.Guid);
+			DataStore[403].ExportGuid = new Guid("cdac9fc9-7317-46cc-bac4-d8d49cc81f80");
 			DataStore[403].FullName = @"System.Double";
 			DataStore[403].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[403].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[403].Seal();
 			DataStore[404].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[404].ExportGuid = default(System.Guid);
+			DataStore[404].ExportGuid = new Guid("f223c178-c447-40a8-960e-ffba6b8423af");
 			DataStore[404].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1";
 			DataStore[404].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[403],
@@ -1455,7 +1455,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[403],
 			DataStore[404].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[401];
 			DataStore[404].Seal();
 			DataStore[405].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[405].ExportGuid = default(System.Guid);
+			DataStore[405].ExportGuid = new Guid("0d25af45-d481-42b6-934b-061cced2df91");
 			DataStore[405].FullName = @"System.Nullable`1";
 			DataStore[405].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[408],
@@ -1463,7 +1463,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[408],
 			DataStore[405].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[405].Seal();
 			DataStore[406].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[406].ExportGuid = default(System.Guid);
+			DataStore[406].ExportGuid = new Guid("4fab9adf-16fd-410c-bbb0-ec317e59cfa0");
 			DataStore[406].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[406].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[405],
@@ -1471,14 +1471,14 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[405],
 			DataStore[406].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[406].Seal();
 			DataStore[408].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[408].ExportGuid = default(System.Guid);
+			DataStore[408].ExportGuid = new Guid("e0559b37-e9bc-4867-acff-2f86262cedc8");
 			DataStore[408].FullName = @"System.DateTime";
 			DataStore[408].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[408].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[408].Seal();
 			DataStore[409].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[409].ExportGuid = default(System.Guid);
+			DataStore[409].ExportGuid = new Guid("59ab4b8c-ab9f-461b-9b9c-7941a7b4a9fa");
 			DataStore[409].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1";
 			DataStore[409].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[408],
@@ -1486,7 +1486,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[408],
 			DataStore[409].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[406];
 			DataStore[409].Seal();
 			DataStore[410].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[410].ExportGuid = default(System.Guid);
+			DataStore[410].ExportGuid = new Guid("adfb5379-8cda-46a0-a5fa-bc3aee1866c7");
 			DataStore[410].FullName = @"System.Nullable`1";
 			DataStore[410].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[413],
@@ -1494,7 +1494,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[413],
 			DataStore[410].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[410].Seal();
 			DataStore[411].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[411].ExportGuid = default(System.Guid);
+			DataStore[411].ExportGuid = new Guid("71d65b2d-b3e0-4728-9b39-56cfcdbf44ea");
 			DataStore[411].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[411].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[410],
@@ -1502,14 +1502,14 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[410],
 			DataStore[411].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[411].Seal();
 			DataStore[413].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[413].ExportGuid = default(System.Guid);
+			DataStore[413].ExportGuid = new Guid("bd45e851-e071-463b-b7a9-c159f4a1bf15");
 			DataStore[413].FullName = @"System.Boolean";
 			DataStore[413].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[413].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[413].Seal();
 			DataStore[414].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[414].ExportGuid = default(System.Guid);
+			DataStore[414].ExportGuid = new Guid("69d2fcb4-d385-497d-8159-20c03157d5c0");
 			DataStore[414].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1";
 			DataStore[414].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[413],
@@ -1517,7 +1517,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[413],
 			DataStore[414].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[411];
 			DataStore[414].Seal();
 			DataStore[415].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[415].ExportGuid = default(System.Guid);
+			DataStore[415].ExportGuid = new Guid("dd8e872b-d813-4a8e-baa8-7c275f510aaf");
 			DataStore[415].FullName = @"Kistl.Client.Presentables.IValueModel`1";
 			DataStore[415].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
@@ -1525,7 +1525,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
 			DataStore[415].Parent = null;
 			DataStore[415].Seal();
 			DataStore[416].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17];
-			DataStore[416].ExportGuid = default(System.Guid);
+			DataStore[416].ExportGuid = new Guid("78a703f0-c9d1-4ef1-a8f6-6ae7c4afb807");
 			DataStore[416].FullName = @"Kistl.Client.Forms.View.FormsUserControl`1";
 			DataStore[416].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[415],
@@ -1533,7 +1533,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[415],
 			DataStore[416].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[326];
 			DataStore[416].Seal();
 			DataStore[418].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17];
-			DataStore[418].ExportGuid = default(System.Guid);
+			DataStore[418].ExportGuid = new Guid("e7f85846-d7c9-42fc-b5b5-2a8173b969b0");
 			DataStore[418].FullName = @"Kistl.Client.Forms.View.FormsUserControl`1";
 			DataStore[418].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[17],
@@ -1541,7 +1541,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[17],
 			DataStore[418].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[326];
 			DataStore[418].Seal();
 			DataStore[419].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17];
-			DataStore[419].ExportGuid = default(System.Guid);
+			DataStore[419].ExportGuid = new Guid("7124e68a-7206-4d98-8157-699b75470209");
 			DataStore[419].FullName = @"Kistl.Client.Forms.View.FormsUserControl`1";
 			DataStore[419].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[34],
@@ -1549,7 +1549,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[34],
 			DataStore[419].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[326];
 			DataStore[419].Seal();
 			DataStore[420].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17];
-			DataStore[420].ExportGuid = default(System.Guid);
+			DataStore[420].ExportGuid = new Guid("608b9387-4102-466d-bd8c-31082473589b");
 			DataStore[420].FullName = @"Kistl.Client.Forms.View.FormsUserControl`1";
 			DataStore[420].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83],
@@ -1557,7 +1557,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83],
 			DataStore[420].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[326];
 			DataStore[420].Seal();
 			DataStore[421].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[421].ExportGuid = default(System.Guid);
+			DataStore[421].ExportGuid = new Guid("54046e1b-63e7-4e76-ab27-797cdfce9c2d");
 			DataStore[421].FullName = @"System.Nullable`1";
 			DataStore[421].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[108],
@@ -1565,7 +1565,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[108],
 			DataStore[421].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[421].Seal();
 			DataStore[422].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[422].ExportGuid = default(System.Guid);
+			DataStore[422].ExportGuid = new Guid("57f6cd40-1ae9-447e-b025-668ea1d698e3");
 			DataStore[422].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[422].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[421],
@@ -1573,7 +1573,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[421],
 			DataStore[422].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[422].Seal();
 			DataStore[424].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[424].ExportGuid = default(System.Guid);
+			DataStore[424].ExportGuid = new Guid("1db9aa4d-c2be-452b-b548-ef2df41e40b5");
 			DataStore[424].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1";
 			DataStore[424].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[108],
@@ -1581,7 +1581,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[108],
 			DataStore[424].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[422];
 			DataStore[424].Seal();
 			DataStore[426].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[426].ExportGuid = default(System.Guid);
+			DataStore[426].ExportGuid = new Guid("8aa8247f-4205-4786-9ea0-4cce2b03808e");
 			DataStore[426].FullName = @"System.Nullable`1";
 			DataStore[426].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[110],
@@ -1589,7 +1589,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[110],
 			DataStore[426].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[426].Seal();
 			DataStore[427].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[427].ExportGuid = default(System.Guid);
+			DataStore[427].ExportGuid = new Guid("50531036-5dcd-414c-a5fa-7d22a63f44e6");
 			DataStore[427].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[427].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[426],
@@ -1597,7 +1597,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[426],
 			DataStore[427].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[427].Seal();
 			DataStore[429].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[429].ExportGuid = default(System.Guid);
+			DataStore[429].ExportGuid = new Guid("1387a0dc-37df-4520-ad54-4526e6d4148e");
 			DataStore[429].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1";
 			DataStore[429].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[110],
@@ -1605,7 +1605,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[110],
 			DataStore[429].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[427];
 			DataStore[429].Seal();
 			DataStore[431].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[431].ExportGuid = default(System.Guid);
+			DataStore[431].ExportGuid = new Guid("bffa699f-a48f-4e29-90de-a0ca19700087");
 			DataStore[431].FullName = @"System.Nullable`1";
 			DataStore[431].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[112],
@@ -1613,7 +1613,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[112],
 			DataStore[431].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[431].Seal();
 			DataStore[432].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[432].ExportGuid = default(System.Guid);
+			DataStore[432].ExportGuid = new Guid("0e06a99c-92a1-4de7-9b31-5a2052cce696");
 			DataStore[432].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[432].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[431],
@@ -1621,7 +1621,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[431],
 			DataStore[432].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[432].Seal();
 			DataStore[434].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[434].ExportGuid = default(System.Guid);
+			DataStore[434].ExportGuid = new Guid("e39e99f9-8da7-4df8-92dc-5eeeb4a25791");
 			DataStore[434].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1";
 			DataStore[434].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[112],
@@ -1629,7 +1629,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[112],
 			DataStore[434].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[432];
 			DataStore[434].Seal();
 			DataStore[436].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[436].ExportGuid = default(System.Guid);
+			DataStore[436].ExportGuid = new Guid("7589d72b-28db-4273-84b4-bb703c20200a");
 			DataStore[436].FullName = @"System.Nullable`1";
 			DataStore[436].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[114],
@@ -1637,7 +1637,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[114],
 			DataStore[436].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[436].Seal();
 			DataStore[437].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[437].ExportGuid = default(System.Guid);
+			DataStore[437].ExportGuid = new Guid("788101a3-efb6-4b4c-a371-64ec17288945");
 			DataStore[437].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[437].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[436],
@@ -1645,7 +1645,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[436],
 			DataStore[437].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[437].Seal();
 			DataStore[439].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[439].ExportGuid = default(System.Guid);
+			DataStore[439].ExportGuid = new Guid("74121a59-0018-439b-90ad-eb4c967278f4");
 			DataStore[439].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1";
 			DataStore[439].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[114],
@@ -1653,7 +1653,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[114],
 			DataStore[439].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[437];
 			DataStore[439].Seal();
 			DataStore[441].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[441].ExportGuid = default(System.Guid);
+			DataStore[441].ExportGuid = new Guid("337227d1-7707-4496-a4f9-f5bdf3d88b45");
 			DataStore[441].FullName = @"System.Nullable`1";
 			DataStore[441].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[116],
@@ -1661,7 +1661,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[116],
 			DataStore[441].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[441].Seal();
 			DataStore[442].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[442].ExportGuid = default(System.Guid);
+			DataStore[442].ExportGuid = new Guid("a5bb676b-e1a4-4b89-9662-d92eca9bd361");
 			DataStore[442].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[442].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[441],
@@ -1669,7 +1669,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[441],
 			DataStore[442].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[442].Seal();
 			DataStore[444].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[444].ExportGuid = default(System.Guid);
+			DataStore[444].ExportGuid = new Guid("00b70166-361a-4c24-b9d9-eaa4cad1c4a5");
 			DataStore[444].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1";
 			DataStore[444].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[116],
@@ -1677,14 +1677,14 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[116],
 			DataStore[444].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[442];
 			DataStore[444].Seal();
 			DataStore[447].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[15];
-			DataStore[447].ExportGuid = default(System.Guid);
+			DataStore[447].ExportGuid = new Guid("527370ff-ca5e-4c4f-a665-bd5483f1936f");
 			DataStore[447].FullName = @"Kistl.API.IDataObject";
 			DataStore[447].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[447].Parent = null;
 			DataStore[447].Seal();
 			DataStore[448].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[448].ExportGuid = default(System.Guid);
+			DataStore[448].ExportGuid = new Guid("03338e3b-2317-4e88-9858-a6a165dd57f9");
 			DataStore[448].FullName = @"Kistl.Client.Presentables.ObjectResultModel`1";
 			DataStore[448].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[447],
@@ -1692,7 +1692,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[447],
 			DataStore[448].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[560];
 			DataStore[448].Seal();
 			DataStore[449].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[449].ExportGuid = default(System.Guid);
+			DataStore[449].ExportGuid = new Guid("46af15ac-f0b1-415f-a47e-04f8d5c35b52");
 			DataStore[449].FullName = @"Kistl.Client.Presentables.MethodResultModel`1";
 			DataStore[449].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
@@ -1700,7 +1700,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
 			DataStore[449].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[449].Seal();
 			DataStore[450].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[450].ExportGuid = default(System.Guid);
+			DataStore[450].ExportGuid = new Guid("eda5fdba-d8e3-4a43-b69b-84d3617f105b");
 			DataStore[450].FullName = @"Kistl.Client.Presentables.ObjectResultModel`1";
 			DataStore[450].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
@@ -1708,7 +1708,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
 			DataStore[450].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[449];
 			DataStore[450].Seal();
 			DataStore[454].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[454].ExportGuid = default(System.Guid);
+			DataStore[454].ExportGuid = new Guid("b030fc3a-8022-4e46-97a3-7d9c3562c32e");
 			DataStore[454].FullName = @"Kistl.Client.Presentables.NullableResultModel`1";
 			DataStore[454].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
@@ -1716,7 +1716,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
 			DataStore[454].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[556];
 			DataStore[454].Seal();
 			DataStore[458].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[458].ExportGuid = default(System.Guid);
+			DataStore[458].ExportGuid = new Guid("e4266301-3554-46cb-bd25-f13f545dcffa");
 			DataStore[458].FullName = @"Kistl.Client.Presentables.NullableResultModel`1";
 			DataStore[458].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[403],
@@ -1724,7 +1724,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[403],
 			DataStore[458].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[557];
 			DataStore[458].Seal();
 			DataStore[462].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[462].ExportGuid = default(System.Guid);
+			DataStore[462].ExportGuid = new Guid("e57001ad-1e50-4d01-b5f7-5f7e0c27d2c8");
 			DataStore[462].FullName = @"Kistl.Client.Presentables.NullableResultModel`1";
 			DataStore[462].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[408],
@@ -1732,7 +1732,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[408],
 			DataStore[462].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[558];
 			DataStore[462].Seal();
 			DataStore[466].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[466].ExportGuid = default(System.Guid);
+			DataStore[466].ExportGuid = new Guid("8bdb8b68-0dc3-46ff-a7a0-00bcc96feb4a");
 			DataStore[466].FullName = @"Kistl.Client.Presentables.NullableResultModel`1";
 			DataStore[466].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[413],
@@ -1740,7 +1740,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[413],
 			DataStore[466].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[559];
 			DataStore[466].Seal();
 			DataStore[469].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[469].ExportGuid = default(System.Guid);
+			DataStore[469].ExportGuid = new Guid("ead4700a-df68-43fb-a197-dd94d3f5d629");
 			DataStore[469].FullName = @"System.Collections.Generic.ICollection`1";
 			DataStore[469].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
@@ -1748,7 +1748,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[383],
 			DataStore[469].Parent = null;
 			DataStore[469].Seal();
 			DataStore[470].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[470].ExportGuid = default(System.Guid);
+			DataStore[470].ExportGuid = new Guid("04a0d13e-0c1a-4024-8c45-c2bfc70e0ec5");
 			DataStore[470].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[470].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[469],
@@ -1756,7 +1756,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[469],
 			DataStore[470].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[470].Seal();
 			DataStore[556].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[556].ExportGuid = default(System.Guid);
+			DataStore[556].ExportGuid = new Guid("3abd5c28-0189-4710-9c60-ea460cf42259");
 			DataStore[556].FullName = @"Kistl.Client.Presentables.MethodResultModel`1";
 			DataStore[556].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[395],
@@ -1764,7 +1764,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[395],
 			DataStore[556].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[556].Seal();
 			DataStore[557].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[557].ExportGuid = default(System.Guid);
+			DataStore[557].ExportGuid = new Guid("293e8e3d-7693-4532-9e30-10e6b4260dfa");
 			DataStore[557].FullName = @"Kistl.Client.Presentables.MethodResultModel`1";
 			DataStore[557].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[400],
@@ -1772,7 +1772,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[400],
 			DataStore[557].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[557].Seal();
 			DataStore[558].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[558].ExportGuid = default(System.Guid);
+			DataStore[558].ExportGuid = new Guid("5ce764d1-e62f-4c41-9bc8-8289f4b54714");
 			DataStore[558].FullName = @"Kistl.Client.Presentables.MethodResultModel`1";
 			DataStore[558].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[405],
@@ -1780,7 +1780,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[405],
 			DataStore[558].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[558].Seal();
 			DataStore[559].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[559].ExportGuid = default(System.Guid);
+			DataStore[559].ExportGuid = new Guid("4c9a647b-c168-42e9-87fa-bccd782e5885");
 			DataStore[559].FullName = @"Kistl.Client.Presentables.MethodResultModel`1";
 			DataStore[559].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[410],
@@ -1788,7 +1788,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[410],
 			DataStore[559].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[559].Seal();
 			DataStore[560].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[560].ExportGuid = default(System.Guid);
+			DataStore[560].ExportGuid = new Guid("308dc904-c576-420a-bf19-85d1c1853d6c");
 			DataStore[560].FullName = @"Kistl.Client.Presentables.MethodResultModel`1";
 			DataStore[560].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[447],
@@ -1796,7 +1796,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[447],
 			DataStore[560].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[560].Seal();
 			DataStore[561].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[561].ExportGuid = default(System.Guid);
+			DataStore[561].ExportGuid = new Guid("849e5071-77f6-41de-a72f-12903ac9c497");
 			DataStore[561].FullName = @"System.Collections.Generic.ICollection`1";
 			DataStore[561].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[395],
@@ -1804,7 +1804,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[395],
 			DataStore[561].Parent = null;
 			DataStore[561].Seal();
 			DataStore[562].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[562].ExportGuid = default(System.Guid);
+			DataStore[562].ExportGuid = new Guid("69544b3c-96fb-48b3-a4ff-251d4e502859");
 			DataStore[562].FullName = @"System.Collections.Generic.ICollection`1";
 			DataStore[562].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
@@ -1812,35 +1812,35 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[398],
 			DataStore[562].Parent = null;
 			DataStore[562].Seal();
 			DataStore[563].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[563].ExportGuid = default(System.Guid);
+			DataStore[563].ExportGuid = new Guid("4b424049-d2b5-46b2-a88e-7fd330395838");
 			DataStore[563].FullName = @"Kistl.Client.Presentables.TimeRecords.WorkEffortModel";
 			DataStore[563].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[563].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83];
 			DataStore[563].Seal();
 			DataStore[564].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[564].ExportGuid = default(System.Guid);
+			DataStore[564].ExportGuid = new Guid("28114689-4fc3-44b6-b7f1-141dab6b78d9");
 			DataStore[564].FullName = @"Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel";
 			DataStore[564].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[564].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[13];
 			DataStore[564].Seal();
 			DataStore[565].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
-			DataStore[565].ExportGuid = default(System.Guid);
+			DataStore[565].ExportGuid = new Guid("24dc200e-ee3f-4df3-ab34-f8196c338fd5");
 			DataStore[565].FullName = @"Kistl.Client.WPF.View.TimeRecords.WorkEffortRecorderView";
 			DataStore[565].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[565].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[317];
 			DataStore[565].Seal();
 			DataStore[566].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
-			DataStore[566].ExportGuid = default(System.Guid);
+			DataStore[566].ExportGuid = new Guid("c431cb71-0a53-42cc-b8a7-3df5924fea84");
 			DataStore[566].FullName = @"Kistl.Client.WPF.View.TimeRecords.WorkEffortView";
 			DataStore[566].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[566].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
 			DataStore[566].Seal();
 			DataStore[567].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[567].ExportGuid = default(System.Guid);
+			DataStore[567].ExportGuid = new Guid("ab1aa1db-fe00-416a-b061-7ea6cd43b697");
 			DataStore[567].FullName = @"Kistl.Client.Presentables.PropertyModel`1";
 			DataStore[567].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[568],
@@ -1848,7 +1848,7 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[568],
 			DataStore[567].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[96];
 			DataStore[567].Seal();
 			DataStore[568].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[568].ExportGuid = default(System.Guid);
+			DataStore[568].ExportGuid = new Guid("3527d206-5197-4cbd-9792-85a12e2aea6e");
 			DataStore[568].FullName = @"System.Nullable`1";
 			DataStore[568].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[569],
@@ -1856,14 +1856,14 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[569],
 			DataStore[568].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[568].Seal();
 			DataStore[569].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29];
-			DataStore[569].ExportGuid = default(System.Guid);
+			DataStore[569].ExportGuid = new Guid("d9403577-df05-45ac-b468-e74a9f762c8a");
 			DataStore[569].FullName = @"System.Guid";
 			DataStore[569].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[569].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[299];
 			DataStore[569].Seal();
 			DataStore[570].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
-			DataStore[570].ExportGuid = default(System.Guid);
+			DataStore[570].ExportGuid = new Guid("7ea78a35-65a1-41f0-a0f0-da2dee7dd5bf");
 			DataStore[570].FullName = @"Kistl.Client.Presentables.NullableValuePropertyModel`1";
 			DataStore[570].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(1) {
 Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[569],

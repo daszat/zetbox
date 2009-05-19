@@ -67,7 +67,7 @@ namespace Kistl.Server
                     actiondone = true;
                 }
 
-                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-import"))))
+                if (arg.Current == "-import")
                 {
                     if (!arg.MoveNext()) { PrintHelp(); return; }
                     string file = arg.Current;
@@ -75,7 +75,7 @@ namespace Kistl.Server
                     actiondone = true;
                 }
 
-                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-checkschema"))))
+                if (arg.Current == "-checkschema")
                 {
                     string file = "";
                     if (arg.MoveNext() && !arg.Current.StartsWith("-"))
@@ -90,19 +90,19 @@ namespace Kistl.Server
                     actiondone = true;
                 }
 
-                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-all"))))
+                if (arg.Current == "-all")
                 {
                     server.GenerateAll();
                     actiondone = true;
                 }
 
-                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-generate"))))
+                if (arg.Current == "-generate")
                 {
                     server.GenerateCode();
                     actiondone = true;
                 }
 
-                if (!string.IsNullOrEmpty(args.FirstOrDefault(a => a.Contains("-database"))))
+                if (arg.Current == "-database")
                 {
                     server.GenerateDatabase();
                     actiondone = true;

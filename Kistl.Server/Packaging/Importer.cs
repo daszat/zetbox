@@ -26,8 +26,8 @@ namespace Kistl.Server.Packaging
                     if (xml.NodeType != XmlNodeType.Element) continue;
 
                     // TODO: Change to GUID
-                    int id;
-                    if (int.TryParse(xml.GetAttribute("ID"), out id))
+                    Guid exportGuid = xml.GetAttribute("ExportGuid").ParseGuidValue();
+                    if (exportGuid != Guid.Empty)
                     {
                         Trace.TraceInformation("found XMLNode: {0}", xml.Name);
                         string ifTypeName = string.Format("{0}.{1}, {2}", xml.NamespaceURI, xml.LocalName, ApplicationContext.Current.InterfaceAssembly);
@@ -44,11 +44,8 @@ namespace Kistl.Server.Packaging
                         // bzw: Wie komme ich an Objekte, wenn ich nur die Guid kenne - ich würde dann ein GetPersistenceObjectQuery brauchen??
                         // David: FindByGuid vielleicht?
                         IPersistenceObject obj;
-                        try
-                        {
-                            obj = ctx.FindPersistenceObject(ifType, id);
-                        }
-                        catch
+                        obj = (IPersistenceObject)ctx.GetQuery(ifType).Cast<Kistl.App.Base.IExportable>().FirstOrDefault(i => i.ExportGuid == exportGuid);
+                        if(obj == null)
                         {
                             if (typeof(IDataObject).IsAssignableFrom(ifType.Type))
                             {
@@ -62,7 +59,7 @@ namespace Kistl.Server.Packaging
                             {
                                 throw new NotSupportedException("Interfacetype " + ifTypeName + " is not supported");
                             }
-                            ((BasePersistenceObject)obj).ID = id;
+                            ((Kistl.App.Base.IExportable)obj).ExportGuid = exportGuid;
                         }
                         objects.Add(obj);
 

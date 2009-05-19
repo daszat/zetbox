@@ -129,28 +129,28 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[8].Description = null;
-			DataStore[8].ExportGuid = default(System.Guid);
+			DataStore[8].ExportGuid = new Guid("9200143f-437e-4c8d-9150-fcdb6c3e4e11");
 			DataStore[8].IsList = false;
 			DataStore[8].IsReturnParameter = false;
 			DataStore[8].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
 			DataStore[8].ParameterName = @"TestDateTime";
 			DataStore[8].Seal();
 			DataStore[9].Description = null;
-			DataStore[9].ExportGuid = default(System.Guid);
+			DataStore[9].ExportGuid = new Guid("9cf2824c-3570-4230-aa1a-c1146eb3226b");
 			DataStore[9].IsList = false;
 			DataStore[9].IsReturnParameter = true;
 			DataStore[9].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
 			DataStore[9].ParameterName = @"TestDateTimeReturn";
 			DataStore[9].Seal();
 			DataStore[12].Description = null;
-			DataStore[12].ExportGuid = default(System.Guid);
+			DataStore[12].ExportGuid = new Guid("ddd0bd0d-5e07-44fb-a9ce-e67fa232459c");
 			DataStore[12].IsList = false;
 			DataStore[12].IsReturnParameter = false;
 			DataStore[12].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[90];
 			DataStore[12].ParameterName = @"DateTimeParam";
 			DataStore[12].Seal();
 			DataStore[13].Description = null;
-			DataStore[13].ExportGuid = default(System.Guid);
+			DataStore[13].ExportGuid = new Guid("1e80ab18-5034-4835-a688-e4ea028a7116");
 			DataStore[13].IsList = false;
 			DataStore[13].IsReturnParameter = false;
 			DataStore[13].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[95];

@@ -337,7 +337,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[81],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[88],
 });
 			DataStore[1].Description = @"";
-			DataStore[1].ExportGuid = default(System.Guid);
+			DataStore[1].ExportGuid = new Guid("ef6d5bd8-5826-4ce6-a9ca-c8438ddde773");
 			DataStore[1].ModuleName = @"KistlBase";
 			DataStore[1].Namespace = @"Kistl.App.Base";
 			DataStore[1].Seal();
@@ -351,7 +351,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19],
 });
 			DataStore[2].Description = @"";
-			DataStore[2].ExportGuid = default(System.Guid);
+			DataStore[2].ExportGuid = new Guid("a56d9701-d98e-49ab-bd49-a491d09e2d46");
 			DataStore[2].ModuleName = @"Projekte";
 			DataStore[2].Namespace = @"Kistl.App.Projekte";
 			DataStore[2].Seal();
@@ -363,7 +363,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86],
 });
 			DataStore[3].Description = @"";
-			DataStore[3].ExportGuid = default(System.Guid);
+			DataStore[3].ExportGuid = new Guid("fb309065-8f8a-4f95-8794-9767c6b08f6c");
 			DataStore[3].ModuleName = @"TimeRecords";
 			DataStore[3].Namespace = @"Kistl.App.TimeRecords";
 			DataStore[3].Seal();
@@ -400,7 +400,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[53],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52],
 });
 			DataStore[4].Description = @"";
-			DataStore[4].ExportGuid = default(System.Guid);
+			DataStore[4].ExportGuid = new Guid("84f486f7-19fe-49ad-8e4a-6c05089e7684");
 			DataStore[4].ModuleName = @"GUI";
 			DataStore[4].Namespace = @"Kistl.App.GUI";
 			DataStore[4].Seal();
@@ -417,7 +417,7 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48],
 });
 			DataStore[5].Description = @"";
-			DataStore[5].ExportGuid = default(System.Guid);
+			DataStore[5].ExportGuid = new Guid("81e8ce31-65eb-46fe-ba86-de7452692d5b");
 			DataStore[5].ModuleName = @"TestModule";
 			DataStore[5].Namespace = @"Kistl.App.Test";
 			DataStore[5].Seal();

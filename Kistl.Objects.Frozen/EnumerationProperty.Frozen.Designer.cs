@@ -215,7 +215,7 @@ namespace Kistl.App.Base
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[102],
 });
 			DataStore[110].Description = @"Test Enumeration Property";
-			DataStore[110].ExportGuid = default(System.Guid);
+			DataStore[110].ExportGuid = new Guid("89470dda-4ac6-4bb4-9221-d16f80f8d95a");
 			DataStore[110].IsIndexed = false;
 			DataStore[110].IsList = false;
 			DataStore[110].IsNullable = false;
@@ -231,7 +231,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[102],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[101],
 });
 			DataStore[111].Description = @"Test Enum Property";
-			DataStore[111].ExportGuid = default(System.Guid);
+			DataStore[111].ExportGuid = new Guid("657b719f-dcda-4308-9587-4e2c10e7b60f");
 			DataStore[111].IsIndexed = false;
 			DataStore[111].IsList = false;
 			DataStore[111].IsNullable = false;
@@ -247,7 +247,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[101],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[99],
 });
 			DataStore[113].Description = @"The Toolkit used by this Renderer";
-			DataStore[113].ExportGuid = default(System.Guid);
+			DataStore[113].ExportGuid = new Guid("83ab9087-52a5-400d-9e41-bd46fb5e7957");
 			DataStore[113].IsIndexed = false;
 			DataStore[113].IsList = false;
 			DataStore[113].IsNullable = false;
@@ -263,7 +263,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[99],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[95],
 });
 			DataStore[117].Description = @"The toolkit of this Control.";
-			DataStore[117].ExportGuid = default(System.Guid);
+			DataStore[117].ExportGuid = new Guid("f6e9f880-7cec-4ddc-8f81-3ebda8838c81");
 			DataStore[117].IsIndexed = false;
 			DataStore[117].IsList = false;
 			DataStore[117].IsNullable = false;
@@ -279,7 +279,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[95],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[94],
 });
 			DataStore[118].Description = @"The type of Control of this implementation";
-			DataStore[118].ExportGuid = default(System.Guid);
+			DataStore[118].ExportGuid = new Guid("d3c3e9ac-59da-42c0-9865-8789353ab4e0");
 			DataStore[118].IsIndexed = false;
 			DataStore[118].IsList = false;
 			DataStore[118].IsNullable = false;
@@ -295,7 +295,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[94],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[87],
 });
 			DataStore[137].Description = @"which controls are handled by this Presenter";
-			DataStore[137].ExportGuid = default(System.Guid);
+			DataStore[137].ExportGuid = new Guid("bfb33f62-d829-4d17-b08e-363228c848a6");
 			DataStore[137].IsIndexed = false;
 			DataStore[137].IsList = false;
 			DataStore[137].IsNullable = false;
@@ -311,7 +311,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[87],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 });
 			DataStore[150].Description = @"Which visual is represented here";
-			DataStore[150].ExportGuid = default(System.Guid);
+			DataStore[150].ExportGuid = new Guid("bdeb28ac-665e-4bb6-8f7b-0ae983d77d56");
 			DataStore[150].IsIndexed = false;
 			DataStore[150].IsList = false;
 			DataStore[150].IsNullable = false;
@@ -326,7 +326,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 			DataStore[183].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[183].Description = @"Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.";
-			DataStore[183].ExportGuid = default(System.Guid);
+			DataStore[183].ExportGuid = new Guid("ba4f10fd-f7cf-4237-93a6-734e7e5c6b8a");
 			DataStore[183].IsIndexed = false;
 			DataStore[183].IsList = false;
 			DataStore[183].IsNullable = true;
@@ -342,7 +342,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 });
 			DataStore[210].Description = @"";
-			DataStore[210].ExportGuid = default(System.Guid);
+			DataStore[210].ExportGuid = new Guid("e2629849-b07b-4148-b1bd-5457d8e9c7fa");
 			DataStore[210].IsIndexed = false;
 			DataStore[210].IsList = false;
 			DataStore[210].IsNullable = false;
@@ -358,7 +358,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[214],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[237],
 });
 			DataStore[219].Description = @"Specifies how many instances may occur on this end of the relation.";
-			DataStore[219].ExportGuid = default(System.Guid);
+			DataStore[219].ExportGuid = new Guid("cdbcada8-4deb-4c4f-a7a4-24716b0a0ccd");
 			DataStore[219].IsIndexed = false;
 			DataStore[219].IsList = false;
 			DataStore[219].IsNullable = false;
@@ -374,7 +374,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[237],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[232],
 });
 			DataStore[228].Description = @"Which toolkit provides this View";
-			DataStore[228].ExportGuid = default(System.Guid);
+			DataStore[228].ExportGuid = new Guid("2a798728-d79d-471f-be51-1f488beb8dc1");
 			DataStore[228].IsIndexed = false;
 			DataStore[228].IsList = false;
 			DataStore[228].IsNullable = false;
@@ -390,7 +390,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[232],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[231],
 });
 			DataStore[229].Description = @"The visual type of this View";
-			DataStore[229].ExportGuid = default(System.Guid);
+			DataStore[229].ExportGuid = new Guid("af9c1a03-ce46-4719-96c0-c38287d26ac0");
 			DataStore[229].IsIndexed = false;
 			DataStore[229].IsList = false;
 			DataStore[229].IsNullable = false;
@@ -406,7 +406,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[231],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[228],
 });
 			DataStore[233].Description = @"The default visual type used for this PresentableModel";
-			DataStore[233].ExportGuid = default(System.Guid);
+			DataStore[233].ExportGuid = new Guid("2ab3364a-561c-40f3-a83a-731ce0f1e2de");
 			DataStore[233].IsIndexed = false;
 			DataStore[233].IsList = false;
 			DataStore[233].IsNullable = false;

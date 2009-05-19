@@ -120,7 +120,7 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[2].Description = null;
-			DataStore[2].ExportGuid = default(System.Guid);
+			DataStore[2].ExportGuid = new Guid("6c64e415-e5fd-4146-be0b-7aa9cf3727bd");
 			DataStore[2].IsList = false;
 			DataStore[2].IsReturnParameter = false;
 			DataStore[2].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];

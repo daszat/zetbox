@@ -203,25 +203,25 @@ namespace Kistl.App.Base
 
 		internal new static void FillDataStore() {
 			DataStore[147].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[28];
-			DataStore[147].ExportGuid = default(System.Guid);
+			DataStore[147].ExportGuid = new Guid("e5695d96-15aa-460f-be55-6c3fd7567d5e");
 			DataStore[147].Reason = @"Strings have to have at least one character.";
 			DataStore[147].Max = 4000;
 			DataStore[147].Min = 1;
 			DataStore[147].Seal();
 			DataStore[148].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[172];
-			DataStore[148].ExportGuid = default(System.Guid);
+			DataStore[148].ExportGuid = new Guid("04372ada-88c7-4ff8-8f28-ce76c3f736a3");
 			DataStore[148].Reason = @"strings in the database should not be longer than 4k";
 			DataStore[148].Max = 4000;
 			DataStore[148].Min = 0;
 			DataStore[148].Seal();
 			DataStore[149].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[173];
-			DataStore[149].ExportGuid = default(System.Guid);
+			DataStore[149].ExportGuid = new Guid("967f623c-dd56-4224-9544-322128b292d7");
 			DataStore[149].Reason = @"strings in the database should not be longer than 4k";
 			DataStore[149].Max = 4000;
 			DataStore[149].Min = 0;
 			DataStore[149].Seal();
 			DataStore[216].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[217];
-			DataStore[216].ExportGuid = default(System.Guid);
+			DataStore[216].ExportGuid = new Guid("368ded25-0fd0-4e68-bf71-0a56bd4ed681");
 			DataStore[216].Reason = @"RelationEndRole can only be 1 ('A') or 2 ('B')";
 			DataStore[216].Max = 2;
 			DataStore[216].Min = 1;

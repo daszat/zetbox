@@ -141,7 +141,7 @@ namespace Kistl.App.Base
 			DataStore[18].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[18].Description = @"Aufwand in Stunden";
-			DataStore[18].ExportGuid = default(System.Guid);
+			DataStore[18].ExportGuid = new Guid("a28f7536-9b8a-49ca-bc97-d28e1c2c4d3e");
 			DataStore[18].IsIndexed = false;
 			DataStore[18].IsList = false;
 			DataStore[18].IsNullable = true;
@@ -155,7 +155,7 @@ namespace Kistl.App.Base
 			DataStore[23].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[23].Description = @"";
-			DataStore[23].ExportGuid = default(System.Guid);
+			DataStore[23].ExportGuid = new Guid("a26cec7d-1e5c-44f5-9c56-92af595739eb");
 			DataStore[23].IsIndexed = false;
 			DataStore[23].IsList = false;
 			DataStore[23].IsNullable = true;
@@ -169,7 +169,7 @@ namespace Kistl.App.Base
 			DataStore[65].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[65].Description = @"Wert in EUR des Auftrages";
-			DataStore[65].ExportGuid = default(System.Guid);
+			DataStore[65].ExportGuid = new Guid("f252395f-7867-4299-9965-66f7a7b8f3c5");
 			DataStore[65].IsIndexed = false;
 			DataStore[65].IsList = false;
 			DataStore[65].IsNullable = true;
@@ -183,7 +183,7 @@ namespace Kistl.App.Base
 			DataStore[89].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[89].Description = @"Maximal erlaubte Stundenanzahl";
-			DataStore[89].ExportGuid = default(System.Guid);
+			DataStore[89].ExportGuid = new Guid("2f57b6c8-d798-43de-b9c8-29675ff0c65f");
 			DataStore[89].IsIndexed = false;
 			DataStore[89].IsList = false;
 			DataStore[89].IsNullable = true;
@@ -197,7 +197,7 @@ namespace Kistl.App.Base
 			DataStore[90].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[90].Description = @"Aktuell gebuchte Stunden";
-			DataStore[90].ExportGuid = default(System.Guid);
+			DataStore[90].ExportGuid = new Guid("f7816f8a-0b07-429c-9161-47ca495a2e41");
 			DataStore[90].IsIndexed = false;
 			DataStore[90].IsList = false;
 			DataStore[90].IsNullable = true;

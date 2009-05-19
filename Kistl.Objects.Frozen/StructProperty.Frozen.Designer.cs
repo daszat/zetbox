@@ -168,7 +168,7 @@ namespace Kistl.App.Base
 			DataStore[131].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[131].Description = @"Mobile Phone Number";
-			DataStore[131].ExportGuid = default(System.Guid);
+			DataStore[131].ExportGuid = new Guid("c9788c6f-e59b-4b4e-9222-1cc726961b20");
 			DataStore[131].IsIndexed = false;
 			DataStore[131].IsList = false;
 			DataStore[131].IsNullable = true;
@@ -183,7 +183,7 @@ namespace Kistl.App.Base
 			DataStore[132].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[132].Description = @"Office Phone Number";
-			DataStore[132].ExportGuid = default(System.Guid);
+			DataStore[132].ExportGuid = new Guid("f2e60b5a-767c-4369-b178-3397b22a3f7e");
 			DataStore[132].IsIndexed = false;
 			DataStore[132].IsList = false;
 			DataStore[132].IsNullable = true;
