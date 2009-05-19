@@ -11,12 +11,17 @@ namespace Kistl.Server.Generators.Templates.Implementation
         ToStream,
         FromXmlStream,
         ToXmlStream,
+        Export,
+        MergeImport,
     }
 
     public enum SerializerType
     {
         Binary = 0x01,
         Xml = 0x02,
-        All = 0x03,
+        ImportExport = 0x04,
+
+        Service = 0x03,
+        All = 0x07,
     }
 }

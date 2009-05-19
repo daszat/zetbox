@@ -306,6 +306,7 @@ namespace Kistl.App.Test
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Birthday, binStream);
             BinarySerializer.ToStream(this._PersonName, binStream);
@@ -315,6 +316,7 @@ namespace Kistl.App.Test
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Birthday, binStream);
             BinarySerializer.FromStream(out this._PersonName, binStream);
@@ -334,9 +336,10 @@ namespace Kistl.App.Test
 	        }
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
             XmlStreamer.ToStream(this._Birthday, xml, "Birthday", "Kistl.App.Test");
             XmlStreamer.ToStream(this._PersonName, xml, "PersonName", "Kistl.App.Test");
 			// TODO: Add XML Serializer here
@@ -345,6 +348,7 @@ namespace Kistl.App.Test
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Birthday, xml, "Birthday", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._PersonName, xml, "PersonName", "Kistl.App.Test");

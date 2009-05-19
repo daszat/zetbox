@@ -102,7 +102,8 @@ this.WriteObjects("        clutch for deploying generated assemblies always to t
 this.WriteObjects("        TODO: split OutputPath into DeployLocation (always absolute, depnding on Builder) and \r\n");
 this.WriteObjects("        OutputPath (always relative, dependent on Configuration)\r\n");
 this.WriteObjects("    -->\r\n");
-this.WriteObjects("    <Copy SourceFiles=\"$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).pdb\" DestinationFolder=\"C:\\temp\\KistlCodeGen\\bin\\Debug\" />\r\n");
+this.WriteObjects("    <!-- Arthur: Do _not_ deploy this assemblies. This will override generated assemblies \r\n");
+this.WriteObjects("    <Copy SourceFiles=\"$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).pdb\" DestinationFolder=\"C:\\temp\\KistlCodeGen\\bin\\Debug\" />-->\r\n");
 this.WriteObjects("  </Target>\r\n");
 this.WriteObjects("</Project>");
 

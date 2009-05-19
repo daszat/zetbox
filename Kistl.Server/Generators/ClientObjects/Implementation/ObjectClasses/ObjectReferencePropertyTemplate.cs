@@ -78,7 +78,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         {
             // TODO: XML Namespace
             if (list != null)
-                list.Add(SerializerType.All, "http://dasz.at/Kistl", name, memberName);
+            {
+                //if (relDataTypeExportable)
+                //{
+                    // list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.ImportExport, "http://dasz.at/Kistl", name, memberName);
+                //}
+                list.Add(SerializerType.Service, "http://dasz.at/Kistl", name, memberName);
+            }
         }
     }
 }

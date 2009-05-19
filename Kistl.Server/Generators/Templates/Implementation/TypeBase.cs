@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.Templates.Implementation
@@ -72,6 +73,10 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// <returns>The interfaces this class implements</returns>
         protected virtual string[] GetInterfaces()
         {
+            if (DataType is ObjectClass && ((ObjectClass)DataType).ImplementsIExportable(ctx, false))
+            {
+                return new string[] { this.DataType.ClassName, "Kistl.API.IExportableInternal" };
+            }
             return new string[] { this.DataType.ClassName };
         }
 

@@ -305,6 +305,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(Enumeration != null ? Enumeration.ID : (int?)null, binStream);
@@ -314,6 +315,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._fk_Enumeration, binStream);
@@ -321,17 +323,19 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._Value, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.ToStream(Enumeration != null ? Enumeration.ExportGuid : (Guid?)null, xml, "Enumeration", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Enumeration != null ? Enumeration.ID : (int?)null, xml, "Enumeration", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Value, xml, "Value", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Enumeration, xml, "Enumeration", "http://dasz.at/Kistl");

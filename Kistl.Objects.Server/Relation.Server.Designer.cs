@@ -362,6 +362,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -371,6 +372,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
@@ -378,16 +380,22 @@ namespace Kistl.App.Base
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             // TODO: Add XML Serializer here
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             // TODO: Add XML Serializer here
         }

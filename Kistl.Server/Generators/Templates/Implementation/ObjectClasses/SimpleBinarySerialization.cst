@@ -36,19 +36,17 @@
             BinarySerializer.<%= methodName %>(<%= modifier %>this.<%= memberName %>, <%= streamName %>);
 <%	
 	}
-	else if(direction == SerializerDirection.ToXmlStream)
+	else if(direction.In(SerializerDirection.ToXmlStream, SerializerDirection.Export))
 	{
-			if(!string.IsNullOrEmpty(xmlname)) {
 %>
             XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%			}
+<%			
 	}
-	else if(direction == SerializerDirection.FromXmlStream)
+	else if(direction.In(SerializerDirection.FromXmlStream, SerializerDirection.MergeImport))
 	{
-			if(!string.IsNullOrEmpty(xmlname)) {
 %>
             XmlStreamer.FromStream(ref this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%			}
+<%			
 	}
 	else
 	{

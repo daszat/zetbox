@@ -138,22 +138,38 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
+        }
+
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+            base.Export(xml, modules);
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+			
+            base.MergeImport(xml);
         }
 
 #endregion

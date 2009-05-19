@@ -196,7 +196,7 @@ namespace Kistl.API
             foreach (IStreamable obj in val)
             {
                 xml.WriteStartElement("CollectionEntry");
-                obj.ToStream(xml, new string[] { "*" });
+                obj.ToStream(xml);
                 xml.WriteEndElement();
             }
             xml.WriteEndElement();

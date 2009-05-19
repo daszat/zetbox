@@ -75,7 +75,6 @@ namespace Kistl.Server.Generators
                                 throw new ApplicationException(String.Format("Failed to compile {0}", gen.Caption));
                             }
                         }
-
                     }
                     finally
                     {

@@ -619,6 +619,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, binStream);
             BinarySerializer.ToStream(DefaultModel != null ? DefaultModel.ID : (int?)null, binStream);
@@ -630,6 +631,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultModel, binStream);
@@ -639,10 +641,13 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._TableName, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
-            XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "http://dasz.at/Kistl");
+			
+            base.ToStream(xml);
+            XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, xml, "BaseObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(DefaultModel != null ? DefaultModel.ID : (int?)null, xml, "DefaultModel", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
@@ -650,7 +655,31 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_DefaultModel, xml, "DefaultModel", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
+        }
+
+        public override void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+            base.Export(xml, modules);
+            XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
+        }
+
+        public override void MergeImport(System.Xml.XmlReader xml)
+        {
+			
+            base.MergeImport(xml);
+			// TODO: Add GUID BackingStore!
             XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");

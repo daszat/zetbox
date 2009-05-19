@@ -13,6 +13,8 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="direction" Type="SerializerDirection" %>
 <%@ Parameter Name="fields" Type="SerializationMembersList" %>
+<%@ Parameter Name="overrideAndCallBase" Type="bool" %>
+<%@ Parameter Name="writeExportGuidAttribute" Type="bool" %>
 
 <%
 	string methodName = direction.ToString();
@@ -26,17 +28,17 @@
 		case SerializerDirection.ToStream:
 			argType = "System.IO.BinaryWriter";
 			argName = "binStream";
+			methodName = "ToStream";
 			serType = SerializerType.Binary;
 			break;
 		case SerializerDirection.FromStream:
 			argType = "System.IO.BinaryReader";
 			argName = "binStream";
+			methodName = "FromStream";
 			serType = SerializerType.Binary;
 			break;
 		case SerializerDirection.ToXmlStream:
 			argType = "System.Xml.XmlWriter";
-			argModules = ", string[] modules";
-			callBaseWithModules = ", modules";
 			argName = "xml";
 			methodName = "ToStream";
 			serType = SerializerType.Xml;
@@ -47,15 +49,41 @@
 			methodName = "FromStream";
 			serType = SerializerType.Xml;
 			break;
+		case SerializerDirection.Export:
+			argType = "System.Xml.XmlWriter";
+			argModules = ", string[] modules";
+			callBaseWithModules = ", modules";
+			argName = "xml";
+			methodName = "Export";
+			serType = SerializerType.ImportExport;
+			break;
+		case SerializerDirection.MergeImport:
+			argType = "System.Xml.XmlReader";
+			argName = "xml";
+			methodName = "MergeImport";
+			serType = SerializerType.ImportExport;
+			break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");
 	}
 	
 %>
-        public override void <%= methodName %>(<%= argType %> <%= argName %><%= argModules %>)
+        public <%= overrideAndCallBase ? "override" : "virtual" %> void <%= methodName %>(<%= argType %> <%= argName %><%= argModules %>)
         {
+<%			
+	if(overrideAndCallBase)
+	{
+%>			
             base.<%= methodName %>(<%= argName %><%= callBaseWithModules %>);
 <%
+	}
+	else if(direction == SerializerDirection.Export && writeExportGuidAttribute)
+	{
+%>			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+<%
+	}
+
 	foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
 	{
 	    ApplySerializer(direction, serMember, argName);

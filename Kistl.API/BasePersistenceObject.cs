@@ -124,7 +124,20 @@ namespace Kistl.API
         /// </summary>
         /// <param name="xml">Stream to serialize to</param>
         /// <param name="modules">an array of module names to constrain the output</param>
+        [Obsolete]
         public virtual void ToStream(XmlWriter xml, string[] modules)
+        {
+            if (xml == null)
+                throw new ArgumentNullException("xml");
+
+            xml.WriteAttributeString("ID", this.ID.ToString());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xml"></param>
+        public virtual void ToStream(XmlWriter xml)
         {
             if (xml == null)
                 throw new ArgumentNullException("xml");

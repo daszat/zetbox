@@ -271,6 +271,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_ReferenceObjectClass, binStream);
             BinarySerializer.ToStream(this._fk_RelationEnd, binStream);
@@ -278,20 +279,23 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ReferenceObjectClass, binStream);
             BinarySerializer.FromStream(out this._fk_RelationEnd, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
             XmlStreamer.ToStream(this._fk_ReferenceObjectClass, xml, "ReferenceObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._fk_RelationEnd, xml, "RelationEnd", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_ReferenceObjectClass, xml, "ReferenceObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._fk_RelationEnd, xml, "RelationEnd", "http://dasz.at/Kistl");

@@ -318,6 +318,7 @@ namespace Kistl.App.GUI
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream((int)((PresenterInfo)this).ControlType, binStream);
             BinarySerializer.ToStream(this._fk_DataAssembly, binStream);
@@ -328,6 +329,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStreamConverter(v => ((PresenterInfo)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._fk_DataAssembly, binStream);
@@ -336,9 +338,10 @@ namespace Kistl.App.GUI
             BinarySerializer.FromStream(out this._PresenterTypeName, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
             // TODO: Add XML Serializer here
             XmlStreamer.ToStream(this._fk_DataAssembly, xml, "DataAssembly", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._DataTypeName, xml, "DataTypeName", "Kistl.App.GUI");
@@ -348,6 +351,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
             // TODO: Add XML Serializer here
             XmlStreamer.FromStream(ref this._fk_DataAssembly, xml, "DataAssembly", "http://dasz.at/Kistl");

@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntries
@@ -35,6 +36,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
             base.ApplyChangesFromBody();
             this.WriteLine("            me._fk_A = other._fk_A;");
             this.WriteLine("            me._fk_B = other._fk_B;");
+        }
+
+        protected override bool ImplementsIExportable()
+        {
+            return rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx);
         }
     }
 }

@@ -55,11 +55,11 @@ namespace Kistl.Server.Packaging
                             foreach (var objClass in module.DataTypes.OfType<Kistl.App.Base.ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf))) // TODO: .Where(o => o.Implements("IExportable"))
                             {
                                 Trace.TraceInformation("    {0} ", objClass.ClassName);
-                                foreach (IDataObject obj in ctx.GetQuery(new InterfaceType(objClass.GetDataType())))
+                                foreach (IExportableInternal obj in ctx.GetQuery(new InterfaceType(objClass.GetDataType())))
                                 {
                                     Console.Write(".");
                                     xml.WriteStartElement(objClass.ClassName, module.Namespace);
-                                    obj.ToStream(xml, moduleNamespaces);
+                                    obj.Export(xml, moduleNamespaces);
                                     xml.WriteEndElement();
                                 }
                                 Console.WriteLine();
@@ -85,11 +85,11 @@ namespace Kistl.Server.Packaging
                                 MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType }, new Type[] { typeof(int), typeof(RelationEndRole), typeof(IDataObject) });
                                 var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ID, RelationEndRole.A, null }));
 
-                                foreach (var obj in relations)
+                                foreach (IExportableInternal obj in relations)
                                 {
                                     Console.Write(".");
                                     xml.WriteStartElement(rel.GetCollectionEntryClassName(), rel.A.Type.Module.Namespace);
-                                    obj.ToStream(xml, moduleNamespaces);
+                                    obj.Export(xml, moduleNamespaces);
                                     xml.WriteEndElement();
                                 }
                             }

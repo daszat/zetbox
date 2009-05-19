@@ -11,8 +11,9 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
         : Templates.Implementation.ObjectClasses.SerializerTemplate
     {
 
-        public SerializerTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList fields)
-            : base(_host, ctx, direction, fields)
+        public SerializerTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList fields, 
+            bool overrideAndCallBase, bool writeExportGuidAttribute)
+            : base(_host, ctx, direction, fields, overrideAndCallBase, writeExportGuidAttribute)
         {
         }
 
@@ -34,7 +35,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             }
             else if (direction == SerializerDirection.ToXmlStream)
             {
-                this.WriteLine("        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)");
+                this.WriteLine("        public override void ToStream(System.Xml.XmlWriter xml)");
                 this.WriteLine("        {");
                 this.WriteLine("            throw new NotImplementedException();");
                 this.WriteLine("        }");
@@ -42,6 +43,20 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             else if (direction == SerializerDirection.FromXmlStream)
             {
                 this.WriteLine("        public override void FromStream(System.Xml.XmlReader xml)");
+                this.WriteLine("        {");
+                this.WriteLine("            throw new NotImplementedException();");
+                this.WriteLine("        }");
+            }
+            else if (direction == SerializerDirection.Export)
+            {
+                this.WriteLine("        public {0} void Export(System.Xml.XmlWriter xml, string[] modules)", overrideAndCallBase ? "override" : "virtual");
+                this.WriteLine("        {");
+                this.WriteLine("            throw new NotImplementedException();");
+                this.WriteLine("        }");
+            }
+            else if (direction == SerializerDirection.MergeImport)
+            {
+                this.WriteLine("        public {0} void MergeImport(System.Xml.XmlReader xml)", overrideAndCallBase ? "override" : "virtual");
                 this.WriteLine("        {");
                 this.WriteLine("            throw new NotImplementedException();");
                 this.WriteLine("        }");

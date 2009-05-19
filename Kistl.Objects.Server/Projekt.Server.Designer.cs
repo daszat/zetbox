@@ -395,6 +395,7 @@ namespace Kistl.App.Projekte
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._AufwandGes, binStream);
             BinarySerializer.ToStream(this._Kundenname, binStream);
@@ -403,15 +404,17 @@ namespace Kistl.App.Projekte
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._AufwandGes, binStream);
             BinarySerializer.FromStream(out this._Kundenname, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
             XmlStreamer.ToStream(this._AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
@@ -419,6 +422,7 @@ namespace Kistl.App.Projekte
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");

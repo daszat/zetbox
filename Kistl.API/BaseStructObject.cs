@@ -74,7 +74,13 @@ namespace Kistl.API
                 throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
         }
 
+        [Obsolete]
         public virtual void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        {
+            if (xml == null) throw new ArgumentNullException("xml");
+        }
+
+        public virtual void ToStream(System.Xml.XmlWriter xml)
         {
             if (xml == null) throw new ArgumentNullException("xml");
         }

@@ -134,6 +134,7 @@
         TODO: split OutputPath into DeployLocation (always absolute, depnding on Builder) and 
         OutputPath (always relative, dependent on Configuration)
     -->
-    <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).pdb" DestinationFolder="C:\temp\KistlCodeGen\bin\Debug" />
+    <!-- Arthur: Do _not_ deploy this assemblies. This will override generated assemblies 
+    <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).pdb" DestinationFolder="C:\temp\KistlCodeGen\bin\Debug" />-->
   </Target>
 </Project>

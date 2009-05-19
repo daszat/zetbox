@@ -228,6 +228,7 @@ namespace Kistl.App.TimeRecords
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._From, binStream);
             BinarySerializer.ToStream(this._fk_Mitarbeiter, binStream);
@@ -236,15 +237,17 @@ namespace Kistl.App.TimeRecords
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._From, binStream);
             BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
             BinarySerializer.FromStream(out this._Thru, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
             XmlStreamer.ToStream(this._From, xml, "From", "Kistl.App.TimeRecords");
             XmlStreamer.ToStream(this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Thru, xml, "Thru", "Kistl.App.TimeRecords");
@@ -252,6 +255,7 @@ namespace Kistl.App.TimeRecords
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._From, xml, "From", "Kistl.App.TimeRecords");
             XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");

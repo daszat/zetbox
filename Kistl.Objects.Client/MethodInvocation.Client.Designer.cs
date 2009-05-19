@@ -394,6 +394,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._fk_Implementor, binStream);
             BinarySerializer.ToStream(this._fk_InvokeOnObjectClass, binStream);
@@ -404,6 +405,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Implementor, binStream);
             BinarySerializer.FromStream(out this._fk_InvokeOnObjectClass, binStream);
@@ -412,9 +414,10 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
             XmlStreamer.ToStream(this._fk_Implementor, xml, "Implementor", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._MemberName, xml, "MemberName", "Kistl.App.Base");
@@ -424,6 +427,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_Implementor, xml, "Implementor", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "http://dasz.at/Kistl");

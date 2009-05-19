@@ -387,6 +387,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(Assembly != null ? Assembly.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._FullName, binStream);
@@ -395,22 +396,29 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Assembly, binStream);
             BinarySerializer.FromStream(out this._FullName, binStream);
             BinarySerializer.FromStream(out this._fk_Parent, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
+            XmlStreamer.ToStream(Assembly != null ? Assembly.ID : (int?)null, xml, "Assembly", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._FullName, xml, "FullName", "Kistl.App.Base");
+            XmlStreamer.ToStream(Parent != null ? Parent.ID : (int?)null, xml, "Parent", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "http://dasz.at/Kistl");
         }
 
 #endregion

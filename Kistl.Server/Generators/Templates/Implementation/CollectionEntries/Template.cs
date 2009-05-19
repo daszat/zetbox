@@ -20,9 +20,18 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         protected abstract void ApplyRelationIdPropertyTemplate();
         protected virtual void ApplyObjectGetterTemplate() { }
 
+        protected virtual bool ImplementsIExportable()
+        {
+            return false;
+        }
+
         /// <returns>The interfaces this class implements</returns>
         protected virtual string[] GetInterfaces()
         {
+            if (ImplementsIExportable())
+            {
+                return new string[] { GetCeInterface(), "Kistl.API.IExportableInternal" };
+            }
             return new string[] { GetCeInterface() };
         }
 

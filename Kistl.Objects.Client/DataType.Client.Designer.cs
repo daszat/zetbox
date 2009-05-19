@@ -21,7 +21,7 @@ namespace Kistl.App.Base
     /// Base Metadefinition Object for Objectclasses, Interfaces, Structs and Enumerations.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("DataType")]
-    public class DataType__Implementation__ : BaseClientDataObject_ClientObjects, DataType
+    public class DataType__Implementation__ : BaseClientDataObject_ClientObjects, DataType, Kistl.API.IExportableInternal
     {
     
 		public DataType__Implementation__()
@@ -495,6 +495,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._ClassName, binStream);
             BinarySerializer.ToStream(this._fk_DefaultIcon, binStream);
@@ -505,6 +506,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._ClassName, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultIcon, binStream);
@@ -513,9 +515,10 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
             XmlStreamer.ToStream(this._ClassName, xml, "ClassName", "Kistl.App.Base");
             XmlStreamer.ToStream(this._fk_DefaultIcon, xml, "DefaultIcon", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
@@ -525,12 +528,29 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_DefaultIcon, xml, "DefaultIcon", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+            XmlStreamer.ToStream(this._ClassName, xml, "ClassName", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
         }
 
 #endregion

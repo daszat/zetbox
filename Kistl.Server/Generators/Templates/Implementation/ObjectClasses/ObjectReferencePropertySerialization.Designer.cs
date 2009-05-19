@@ -50,19 +50,29 @@ this.WriteObjects("            BinarySerializer.FromStream(out this._fk_",  memb
 #line 30 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
 break;
 		case SerializerDirection.ToXmlStream:
-			if(!string.IsNullOrEmpty(xmlname)) {
 
-#line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            XmlStreamer.ToStream(",  memberName , " != null ? ",  memberName , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
+this.WriteObjects("            XmlStreamer.ToStream(",  memberName , " != null ? ",  memberName , ".ID : (int?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 35 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
-}
-            break;
+break;
 		case SerializerDirection.FromXmlStream:
-			if(!string.IsNullOrEmpty(xmlname))
 
-#line 40 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
+#line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
 this.WriteObjects("            XmlStreamer.FromStream(ref this._fk_",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 42 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
+#line 40 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
+break;
+		case SerializerDirection.Export:
+
+#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
+this.WriteObjects("            XmlStreamer.ToStream(",  memberName , " != null ? ",  memberName , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+#line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
+break;
+		case SerializerDirection.MergeImport: 
+
+#line 48 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
+this.WriteObjects("			// TODO: Add GUID BackingStore!\r\n");
+this.WriteObjects("            XmlStreamer.FromStream(ref this._fk_",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+#line 51 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
 break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");

@@ -28,10 +28,11 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             // TODO: XML Namespace
             if (list != null)
             {
-                if(relDataTypeExportable)
-                    list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.All, "http://dasz.at/Kistl", name, memberName);
-                else
-                    list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.All, null, null, memberName);
+                if (relDataTypeExportable)
+                {
+                    list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.ImportExport, "http://dasz.at/Kistl", name, memberName);
+                }
+                list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.Service, "http://dasz.at/Kistl", name, memberName);
             }
         }
     }

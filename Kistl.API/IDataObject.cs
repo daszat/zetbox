@@ -61,6 +61,25 @@ namespace Kistl.API
     }
 
     /// <summary>
+    /// Interface for Exporting/Importing Objects with XML
+    /// </summary>
+    public interface IExportableInternal
+    {
+        /// <summary>
+        /// Serialize this Object to a XmlWriter
+        /// </summary>
+        /// <param name="xml">XmlWriter to serialize to</param>
+        /// <param name="modules">a list of modules to filter the output</param>
+        void Export(XmlWriter xml, string[] modules);
+
+        /// <summary>
+        /// Deserialize this Object from a XmlReader
+        /// </summary>
+        /// <param name="xml">XmlReader to deserialize to.</param>
+        void MergeImport(XmlReader xml);
+    }
+
+    /// <summary>
     /// Objects implementing this interface can be streamed over a binary stream.
     /// </summary>
     public interface IStreamable
@@ -82,7 +101,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="xml">XmlWriter to serialize to</param>
         /// <param name="modules">a list of modules to filter the output</param>
-        void ToStream(XmlWriter xml, string[] modules);
+        void ToStream(XmlWriter xml);
 
         /// <summary>
         /// Deserialize this Object from a XmlReader

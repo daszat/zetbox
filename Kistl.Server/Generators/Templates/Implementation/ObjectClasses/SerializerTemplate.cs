@@ -9,10 +9,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
     public partial class SerializerTemplate
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList membersToSerialize)
+        public static void Call(IGenerationHost host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList membersToSerialize,
+            bool overrideAndCallBase, bool writeExportGuidAttribute)
         {
             host.CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx,
-                direction, membersToSerialize);
+                direction, membersToSerialize, overrideAndCallBase, writeExportGuidAttribute);
         }
 
         protected virtual void ApplySerializer(SerializerDirection direction, SerializationMember member, string streamName)

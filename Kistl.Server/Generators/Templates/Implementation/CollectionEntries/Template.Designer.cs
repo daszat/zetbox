@@ -82,18 +82,27 @@ this.WriteObjects("#region Serializer\r\n");
 this.WriteObjects("\r\n");
 #line 64 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-        Templates.Implementation.SerializerDirection.ToStream, this.MembersToSerialize);
+        Templates.Implementation.SerializerDirection.ToStream, this.MembersToSerialize, true, false);
     
     Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-        Templates.Implementation.SerializerDirection.FromStream, this.MembersToSerialize);
+        Templates.Implementation.SerializerDirection.FromStream, this.MembersToSerialize, true, false);
 
     Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-        Templates.Implementation.SerializerDirection.ToXmlStream, this.MembersToSerialize);
+        Templates.Implementation.SerializerDirection.ToXmlStream, this.MembersToSerialize, true, false);
     
     Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-        Templates.Implementation.SerializerDirection.FromXmlStream, this.MembersToSerialize);
+        Templates.Implementation.SerializerDirection.FromXmlStream, this.MembersToSerialize, true, false);
 
-#line 76 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+	if(ImplementsIExportable())
+	{
+		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+			Templates.Implementation.SerializerDirection.Export, this.MembersToSerialize, false, false);
+	    
+		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+			Templates.Implementation.SerializerDirection.MergeImport, this.MembersToSerialize, false, false);
+	}
+
+#line 85 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("#endregion\r\n");
 this.WriteObjects("\r\n");
@@ -104,10 +113,10 @@ this.WriteObjects("		}\r\n");
 this.WriteObjects("	\r\n");
 this.WriteObjects("		public override void ReloadReferences()\r\n");
 this.WriteObjects("		{\r\n");
-#line 87 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 96 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyReloadReferenceBody();
 
-#line 89 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 98 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("	\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
@@ -117,17 +126,17 @@ this.WriteObjects("			base.ApplyChangesFrom(obj);\r\n");
 this.WriteObjects("			var other = (",  GetCeClassName() , ")obj;\r\n");
 this.WriteObjects("			var me = (",  GetCeClassName() , ")this;\r\n");
 this.WriteObjects("			\r\n");
-#line 99 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 108 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyChangesFromBody();
 
-#line 101 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 110 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("		}		\r\n");
 this.WriteObjects("		\r\n");
 this.WriteObjects("		\r\n");
-#line 105 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 114 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyClassTailTemplate();
 
-#line 107 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 116 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 

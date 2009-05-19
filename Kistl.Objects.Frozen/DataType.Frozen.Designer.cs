@@ -20,7 +20,7 @@ namespace Kistl.App.Base
     /// Base Metadefinition Object for Objectclasses, Interfaces, Structs and Enumerations.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("DataType")]
-    public class DataType__Implementation__Frozen : BaseFrozenDataObject, DataType
+    public class DataType__Implementation__Frozen : BaseFrozenDataObject, DataType, Kistl.API.IExportableInternal
     {
     
 		public DataType__Implementation__Frozen()
@@ -399,11 +399,19 @@ namespace Kistl.App.Base
         {
             throw new NotImplementedException();
         }
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

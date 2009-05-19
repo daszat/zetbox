@@ -375,6 +375,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
@@ -386,6 +387,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._IsList, binStream);
@@ -395,9 +397,10 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._ParameterName, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
@@ -408,6 +411,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");

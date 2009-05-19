@@ -29,14 +29,23 @@
 <%
 			break;
 		case SerializerDirection.ToXmlStream:
-			if(!string.IsNullOrEmpty(xmlname)) {
 %>
-            XmlStreamer.ToStream(<%= memberName %> != null ? <%= memberName %>.ExportGuid : (Guid?)null, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%			}
+            XmlStreamer.ToStream(<%= memberName %> != null ? <%= memberName %>.ID : (int?)null, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%			
             break;
 		case SerializerDirection.FromXmlStream:
-			if(!string.IsNullOrEmpty(xmlname))
 %>
+            XmlStreamer.FromStream(ref this._fk_<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%
+            break;
+		case SerializerDirection.Export:
+%>
+            XmlStreamer.ToStream(<%= memberName %> != null ? <%= memberName %>.ExportGuid : (Guid?)null, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%			
+            break;
+		case SerializerDirection.MergeImport: 
+%>
+			// TODO: Add GUID BackingStore!
             XmlStreamer.FromStream(ref this._fk_<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;

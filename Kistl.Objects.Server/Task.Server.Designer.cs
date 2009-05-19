@@ -342,6 +342,7 @@ namespace Kistl.App.Projekte
 
         public override void ToStream(System.IO.BinaryWriter binStream)
         {
+			
             base.ToStream(binStream);
             BinarySerializer.ToStream(this._Aufwand, binStream);
             BinarySerializer.ToStream(this._DatumBis, binStream);
@@ -352,6 +353,7 @@ namespace Kistl.App.Projekte
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
+			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Aufwand, binStream);
             BinarySerializer.FromStream(out this._DatumBis, binStream);
@@ -360,22 +362,26 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromStream(out this._fk_Projekt, binStream);
         }
 
-        public override void ToStream(System.Xml.XmlWriter xml, string[] modules)
+        public override void ToStream(System.Xml.XmlWriter xml)
         {
-            base.ToStream(xml, modules);
+			
+            base.ToStream(xml);
             XmlStreamer.ToStream(this._Aufwand, xml, "Aufwand", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(Projekt != null ? Projekt.ID : (int?)null, xml, "Projekt", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
+			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Aufwand, xml, "Aufwand", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
         }
 
 #endregion

@@ -8,6 +8,7 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
@@ -105,16 +106,26 @@ namespace <%= DataType.Module.Namespace %>
 
 <%
 		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.ToStream, this.MembersToSerialize);
+			SerializerDirection.ToStream, this.MembersToSerialize, true, false);
 		
 		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.FromStream, this.MembersToSerialize);
+			SerializerDirection.FromStream, this.MembersToSerialize, true, false);
 
 		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.ToXmlStream, this.MembersToSerialize);
+			SerializerDirection.ToXmlStream, this.MembersToSerialize, true, false);
 		
 		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.FromXmlStream, this.MembersToSerialize);
+			SerializerDirection.FromXmlStream, this.MembersToSerialize, true, false);
+
+		if((DataType is ObjectClass) && ((ObjectClass)DataType).ImplementsIExportable(ctx))
+		{
+			ObjectClass cls = (ObjectClass)DataType;			
+			Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+				SerializerDirection.Export, this.MembersToSerialize, cls.BaseObjectClass != null, true);
+			
+			Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+				SerializerDirection.MergeImport, this.MembersToSerialize, cls.BaseObjectClass != null, true);
+		}
 %>
 
 #endregion

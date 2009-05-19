@@ -35,7 +35,7 @@ namespace Kistl.API.Server.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void ToStream_Null()
         {
-            obj.ToStream(null);
+            obj.ToStream((BinaryWriter)null);
         }
 
         [Test]
