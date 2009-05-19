@@ -622,28 +622,28 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(AParent != null ? AParent.ID : (int?)null, xml, "AParent", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(BParent != null ? BParent.ID : (int?)null, xml, "BParent", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(AParent != null ? AParent.ID : (int?)null, xml, "AParent", "Kistl.App.Base");
+            XmlStreamer.ToStream(BParent != null ? BParent.ID : (int?)null, xml, "BParent", "Kistl.App.Base");
             XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             // TODO: Add XML Serializer here
-            XmlStreamer.ToStream(Navigator != null ? Navigator.ID : (int?)null, xml, "Navigator", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Navigator != null ? Navigator.ID : (int?)null, xml, "Navigator", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Role, xml, "Role", "Kistl.App.Base");
             XmlStreamer.ToStream(this._RoleName, xml, "RoleName", "Kistl.App.Base");
-            XmlStreamer.ToStream(Type != null ? Type.ID : (int?)null, xml, "Type", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Type != null ? Type.ID : (int?)null, xml, "Type", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_AParent, xml, "AParent", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_BParent, xml, "BParent", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_AParent, xml, "AParent", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_BParent, xml, "BParent", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             // TODO: Add XML Serializer here
-            XmlStreamer.FromStream(ref this._fk_Navigator, xml, "Navigator", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Navigator, xml, "Navigator", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Role, xml, "Role", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._RoleName, xml, "RoleName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.Base");
         }
 
 #endregion

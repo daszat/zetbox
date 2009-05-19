@@ -36,10 +36,16 @@
             BinarySerializer.<%= methodName %>(<%= modifier %>this.<%= memberName %>, <%= streamName %>);
 <%	
 	}
-	else if(direction.In(SerializerDirection.ToXmlStream, SerializerDirection.Export))
+	else if(direction == SerializerDirection.ToXmlStream)
 	{
 %>
             XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%			
+	}
+	else if(direction == SerializerDirection.Export)
+	{
+%>	
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%			
 	}
 	else if(direction.In(SerializerDirection.FromXmlStream, SerializerDirection.MergeImport))

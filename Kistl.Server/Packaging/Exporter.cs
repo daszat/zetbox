@@ -52,14 +52,14 @@ namespace Kistl.Server.Packaging
                         foreach (var module in moduleList)
                         {
                             Trace.TraceInformation("  exporting {0}", module.ModuleName);
-                            foreach (var objClass in module.DataTypes.OfType<Kistl.App.Base.ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf))) // TODO: .Where(o => o.Implements("IExportable"))
+                            foreach (var objClass in module.DataTypes.OfType<Kistl.App.Base.ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf)))
                             {
                                 Trace.TraceInformation("    {0} ", objClass.ClassName);
-                                foreach (IExportableInternal obj in ctx.GetQuery(new InterfaceType(objClass.GetDataType())))
+                                foreach (var obj in ctx.GetQuery(new InterfaceType(objClass.GetDataType())))
                                 {
                                     Console.Write(".");
-                                    xml.WriteStartElement(objClass.ClassName, module.Namespace);
-                                    obj.Export(xml, moduleNamespaces);
+                                    xml.WriteStartElement(obj.GetObjectClass(ctx).ClassName, module.Namespace);
+                                    ((IExportableInternal)obj).Export(xml, moduleNamespaces);
                                     xml.WriteEndElement();
                                 }
                                 Console.WriteLine();

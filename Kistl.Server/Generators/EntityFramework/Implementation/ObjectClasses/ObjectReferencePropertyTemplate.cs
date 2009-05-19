@@ -14,25 +14,24 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList membersToSerialize,
             string propertyName, string collectionEntryAssociationName, string roleName,
-            string relDataTypeString, string relDataTypeStringImpl, bool needsPositionStorage, bool relDataTypeExportable)
+            string relDataTypeString, string relDataTypeStringImpl, bool needsPositionStorage, bool relDataTypeExportable, string moduleNamespace)
         {
             host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
                 membersToSerialize,
                 propertyName, collectionEntryAssociationName, roleName,
                 relDataTypeString, relDataTypeStringImpl,
-                needsPositionStorage, relDataTypeExportable);
+                needsPositionStorage, relDataTypeExportable, moduleNamespace);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
         {
-            // TODO: XML Namespace
             if (list != null)
             {
                 if (relDataTypeExportable)
                 {
-                    list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.ImportExport, "http://dasz.at/Kistl", name, memberName);
+                    list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.ImportExport, moduleNamespace, name, memberName);
                 }
-                list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.Service, "http://dasz.at/Kistl", name, memberName);
+                list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.Service, moduleNamespace, name, memberName);
             }
         }
     }

@@ -17,6 +17,7 @@
 <%@ Parameter Name="referencedImplementation" Type="String" %>
 <%@ Parameter Name="hasPositionStorage" Type="bool" %>
 <%@ Parameter Name="relDataTypeExportable" Type="bool" %>
+<%@ Parameter Name="moduleNamespace" Type="string" %>
 <%
 
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
@@ -85,7 +86,7 @@
 	{
 		Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
 		    serializationList,
-			"int?", posStorageName, "http://dasz.at/Kistl");
+			"int?", posStorageName, moduleNamespace);
 	}
 %>
         

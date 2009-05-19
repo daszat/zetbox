@@ -645,9 +645,9 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, xml, "BaseObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(DefaultModel != null ? DefaultModel.ID : (int?)null, xml, "DefaultModel", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
+            XmlStreamer.ToStream(DefaultModel != null ? DefaultModel.ID : (int?)null, xml, "DefaultModel", "Kistl.App.GUI");
+            XmlStreamer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
@@ -657,9 +657,9 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_DefaultModel, xml, "DefaultModel", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_DefaultModel, xml, "DefaultModel", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
@@ -669,10 +669,13 @@ namespace Kistl.App.Base
         {
 			
             base.Export(xml, modules);
-            XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -680,7 +683,7 @@ namespace Kistl.App.Base
 			
             base.MergeImport(xml);
 			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");

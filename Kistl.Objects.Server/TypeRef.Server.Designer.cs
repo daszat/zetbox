@@ -407,18 +407,18 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(Assembly != null ? Assembly.ID : (int?)null, xml, "Assembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Assembly != null ? Assembly.ID : (int?)null, xml, "Assembly", "Kistl.App.Base");
             XmlStreamer.ToStream(this._FullName, xml, "FullName", "Kistl.App.Base");
-            XmlStreamer.ToStream(Parent != null ? Parent.ID : (int?)null, xml, "Parent", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Parent != null ? Parent.ID : (int?)null, xml, "Parent", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Base");
         }
 
 #endregion

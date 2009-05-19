@@ -21,7 +21,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
                 this.MembersToSerialize,
                 propertyName, rel.GetCollectionEntryAssociationName(endRole), relEnd.RoleName,
                 relEnd.Type.GetDataTypeString(), relEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
-                rel.NeedsPositionStorage(endRole), ImplementsIExportable());
+                rel.NeedsPositionStorage(endRole), ImplementsIExportable(), relEnd.Type.Module.Namespace);
         }
 
         protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)
@@ -30,8 +30,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
 
             if (rel.NeedsPositionStorage(endRole))
             {
-                // TODO: XML Namespace
-                this.MembersToSerialize.Add(SerializerType.All, "http://dasz.at/Kistl", endRole + Kistl.API.Helper.PositionSuffix, "_" + endRole + Kistl.API.Helper.PositionSuffix);
+                this.MembersToSerialize.Add(SerializerType.All, relEnd.Type.Module.Namespace, endRole + Kistl.API.Helper.PositionSuffix, "_" + endRole + Kistl.API.Helper.PositionSuffix);
                 this.WriteObjects("public int? ", endRole, "Index { get { return ",
                     endRole, Kistl.API.Helper.PositionSuffix, "; } set { ",
                     endRole, Kistl.API.Helper.PositionSuffix, " = value; } }");

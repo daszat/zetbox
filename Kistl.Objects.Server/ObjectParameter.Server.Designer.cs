@@ -234,14 +234,14 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(DataType != null ? DataType.ID : (int?)null, xml, "DataType", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(DataType != null ? DataType.ID : (int?)null, xml, "DataType", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_DataType, xml, "DataType", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_DataType, xml, "DataType", "Kistl.App.Base");
         }
 
 #endregion

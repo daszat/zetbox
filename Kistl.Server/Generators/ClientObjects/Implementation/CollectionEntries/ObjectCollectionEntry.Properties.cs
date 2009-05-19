@@ -34,8 +34,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 
             if (rel.NeedsPositionStorage(endRole))
             {
-                // TODO: XML Namespace
-                this.MembersToSerialize.Add(SerializerType.All, "http://dasz.at/Kistl", endRole + Kistl.API.Helper.PositionSuffix, "_" + endRole + Kistl.API.Helper.PositionSuffix);
+                this.MembersToSerialize.Add(SerializerType.All, relEnd.Type.Module.Namespace, endRole + Kistl.API.Helper.PositionSuffix, "_" + endRole + Kistl.API.Helper.PositionSuffix);
                 this.WriteObjects("public int? ", endRole, "Index { get { return ",
                     endRole, Kistl.API.Helper.PositionSuffix, "; } set { ",
                     endRole, Kistl.API.Helper.PositionSuffix, " = value; } }");

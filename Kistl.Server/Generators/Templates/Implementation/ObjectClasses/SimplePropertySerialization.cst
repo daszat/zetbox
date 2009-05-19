@@ -34,20 +34,18 @@
 <%
 			break;
 		case SerializerDirection.ToXmlStream:
-			if(!string.IsNullOrEmpty(xmlname)) {
 %>
             XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%			}
+<%		
             break;
 		case SerializerDirection.FromXmlStream:
-			if(!string.IsNullOrEmpty(xmlname)) {
 %>
             {
                 var tmp = this.<%= memberName %>;
                 XmlStreamer.FromStream(ref tmp, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
                 this.<%= memberName %> = tmp;
             }
-<%			}
+<%			
             break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");

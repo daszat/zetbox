@@ -293,7 +293,7 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(ConstrainedProperty != null ? ConstrainedProperty.ID : (int?)null, xml, "ConstrainedProperty", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(ConstrainedProperty != null ? ConstrainedProperty.ID : (int?)null, xml, "ConstrainedProperty", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
@@ -301,7 +301,7 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_ConstrainedProperty, xml, "ConstrainedProperty", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_ConstrainedProperty, xml, "ConstrainedProperty", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 

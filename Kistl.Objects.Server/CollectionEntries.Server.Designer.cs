@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Linq;
 
 using Kistl.API;
     using Kistl.API.Server;
@@ -179,30 +180,30 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
-            XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "http://dasz.at/Kistl");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
 			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
 			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
 #endregion
@@ -470,24 +471,24 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
         }
 
 #endregion
@@ -695,16 +696,16 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
 #endregion
@@ -972,24 +973,24 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
         }
 
 #endregion
@@ -1197,16 +1198,16 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
 #endregion
@@ -1412,16 +1413,16 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
 #endregion
@@ -1628,16 +1629,16 @@ namespace Kistl.App.TimeRecords
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.TimeRecords");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Projekte");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.TimeRecords");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Projekte");
         }
 
 #endregion
@@ -1813,7 +1814,7 @@ public string Value { get { return B; } set { B = value; } }
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._B, xml, "B", "Kistl.App.Projekte");
         }
 
@@ -1821,7 +1822,7 @@ public string Value { get { return B; } set { B = value; } }
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._B, xml, "B", "Kistl.App.Projekte");
         }
 

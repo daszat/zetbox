@@ -306,7 +306,7 @@ namespace Kistl.App.GUI
             base.ToStream(xml);
             // TODO: Add XML Serializer here
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.ToStream(PresentableModelRef != null ? PresentableModelRef.ID : (int?)null, xml, "PresentableModelRef", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(PresentableModelRef != null ? PresentableModelRef.ID : (int?)null, xml, "PresentableModelRef", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -315,7 +315,7 @@ namespace Kistl.App.GUI
             base.FromStream(xml);
             // TODO: Add XML Serializer here
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_PresentableModelRef, xml, "PresentableModelRef", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_PresentableModelRef, xml, "PresentableModelRef", "Kistl.App.GUI");
         }
 
 #endregion

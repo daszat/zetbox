@@ -40,7 +40,7 @@
             break;
 		case SerializerDirection.Export:
 %>
-            XmlStreamer.ToStream(<%= memberName %> != null ? <%= memberName %>.ExportGuid : (Guid?)null, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(<%= memberName %> != null ? <%= memberName %>.ExportGuid : (Guid?)null, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%			
             break;
 		case SerializerDirection.MergeImport: 

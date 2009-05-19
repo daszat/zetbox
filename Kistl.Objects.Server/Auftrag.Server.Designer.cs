@@ -471,9 +471,9 @@ namespace Kistl.App.Projekte
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(Kunde != null ? Kunde.ID : (int?)null, xml, "Kunde", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, xml, "Mitarbeiter", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(Projekt != null ? Projekt.ID : (int?)null, xml, "Projekt", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(Kunde != null ? Kunde.ID : (int?)null, xml, "Kunde", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, xml, "Mitarbeiter", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(Projekt != null ? Projekt.ID : (int?)null, xml, "Projekt", "Kistl.App.Projekte");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -482,9 +482,9 @@ namespace Kistl.App.Projekte
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._fk_Kunde, xml, "Kunde", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Kunde, xml, "Kunde", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "Kistl.App.Projekte");
         }
 
 #endregion

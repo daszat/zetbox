@@ -234,14 +234,14 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(StructDefinition != null ? StructDefinition.ID : (int?)null, xml, "StructDefinition", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(StructDefinition != null ? StructDefinition.ID : (int?)null, xml, "StructDefinition", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_StructDefinition, xml, "StructDefinition", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_StructDefinition, xml, "StructDefinition", "Kistl.App.Base");
         }
 
 #endregion

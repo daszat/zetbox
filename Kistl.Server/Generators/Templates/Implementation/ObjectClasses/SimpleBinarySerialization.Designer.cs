@@ -56,19 +56,27 @@ if(direction == SerializerDirection.ToStream || direction == SerializerDirection
 this.WriteObjects("            BinarySerializer.",  methodName , "(",  modifier , "this.",  memberName , ", ",  streamName , ");\r\n");
 #line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
 }
-	else if(direction.In(SerializerDirection.ToXmlStream, SerializerDirection.Export))
+	else if(direction == SerializerDirection.ToXmlStream)
 	{
 
 #line 42 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
 this.WriteObjects("            XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 44 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
 }
+	else if(direction == SerializerDirection.Export)
+	{
+
+#line 47 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
+this.WriteObjects("	\r\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+#line 50 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
+}
 	else if(direction.In(SerializerDirection.FromXmlStream, SerializerDirection.MergeImport))
 	{
 
-#line 48 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
+#line 54 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
 this.WriteObjects("            XmlStreamer.FromStream(ref this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 50 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
+#line 56 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst"
 }
 	else
 	{

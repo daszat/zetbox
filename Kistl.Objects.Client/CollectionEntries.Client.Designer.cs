@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Linq;
 
 using Kistl.API;
     using Kistl.API.Client;
@@ -342,8 +343,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -354,8 +355,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
         }
 
 #endregion
@@ -720,8 +721,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -732,8 +733,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
         }
 
 #endregion

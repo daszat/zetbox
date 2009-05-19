@@ -35,7 +35,6 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 
         protected virtual void AddSerialization(SerializationMembersList list, string name)
         {
-            // TODO: XML Namespace
             if (list != null)
                 list.Add(SerializerType.All, modulenamespace, name, BackingMemberFromName(name));
         }

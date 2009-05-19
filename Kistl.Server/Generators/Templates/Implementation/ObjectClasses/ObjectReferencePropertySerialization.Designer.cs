@@ -64,7 +64,7 @@ break;
 		case SerializerDirection.Export:
 
 #line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("            XmlStreamer.ToStream(",  memberName , " != null ? ",  memberName , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(",  memberName , " != null ? ",  memberName , ".ExportGuid : (Guid?)null, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
 break;
 		case SerializerDirection.MergeImport: 

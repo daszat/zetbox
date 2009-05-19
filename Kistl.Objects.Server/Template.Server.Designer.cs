@@ -445,20 +445,20 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(DisplayedTypeAssembly != null ? DisplayedTypeAssembly.ID : (int?)null, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(DisplayedTypeAssembly != null ? DisplayedTypeAssembly.ID : (int?)null, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._DisplayName, xml, "DisplayName", "Kistl.App.GUI");
-            XmlStreamer.ToStream(VisualTree != null ? VisualTree.ID : (int?)null, xml, "VisualTree", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(VisualTree != null ? VisualTree.ID : (int?)null, xml, "VisualTree", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._DisplayName, xml, "DisplayName", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_VisualTree, xml, "VisualTree", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_VisualTree, xml, "VisualTree", "Kistl.App.GUI");
         }
 
 #endregion
