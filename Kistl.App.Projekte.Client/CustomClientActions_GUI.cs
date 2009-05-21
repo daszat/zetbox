@@ -40,8 +40,8 @@ namespace Kistl.App.GUI
 
         public void OnToString_PresentableModelDescriptor(PresentableModelDescriptor obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0} as {1}",
-                obj.PresentableModelRef == null ? "(no type)" : obj.PresentableModelRef.FullName,
+            e.Result = String.Format("{0} (default: {1})",
+                obj.PresentableModelRef == null ? "(no type)" : obj.PresentableModelRef.ToString(),
                 obj.DefaultVisualType);
         }
 

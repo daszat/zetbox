@@ -13,6 +13,7 @@ namespace Kistl.Client.WPF
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
+    using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.TimeRecords;
     using Kistl.Client.WPF.View.TimeRecords;
 
@@ -113,60 +114,47 @@ namespace Kistl.Client.WPF
         /// </summary>
         private static void CreateVariousDescriptors()
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("Creating various descriptors"))
-            {
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    // var lefmDesc = ctx.Create<PresentableModelDescriptor>();
-                    // lefmDesc.DefaultVisualType = VisualType.WorkspaceWindow;
-                    // lefmDesc.Description = "A workspace for Leistungserfassung/work effort recording";
-                    // lefmDesc.PresentableModelRef = typeof(WorkEffortRecorderModel).ToRef(ctx);
-                    // 
-                    // var lemDesc = ctx.Create<PresentableModelDescriptor>();
-                    // lemDesc.DefaultVisualType = VisualType.Object;
-                    // lemDesc.Description = "A model for WorkEfforts";
-                    // lemDesc.PresentableModelRef = typeof(WorkEffortModel).ToRef(ctx);
-                    // 
-                    // var lev = ctx.Create<ViewDescriptor>();
-                    // lev.ControlRef = typeof(WorkEffortView).ToRef(ctx);
-                    // lev.Toolkit = Toolkit.WPF;
-                    // lev.VisualType = VisualType.Object;
-                    // lev.PresentedModelDescriptor = ctx.GetQuery<PresentableModelDescriptor>()
-                    //    .Single(o => o.PresentableModelRef.ID == typeof(WorkEffortModel).ToRef(ctx).ID);
-                    // 
-                    // var lv = ctx.Create<ViewDescriptor>();
-                    // lv.ControlRef = typeof(WorkEffortRecorderView).ToRef(ctx);
-                    // lv.Toolkit = Toolkit.WPF;
-                    // lv.VisualType = VisualType.WorkspaceWindow;
-                    // lv.PresentedModelDescriptor = ctx.GetQuery<PresentableModelDescriptor>()
-                    //    .Single(o => o.PresentableModelRef.ID == typeof(WorkEffortRecorderModel).ToRef(ctx).ID);
+            //using (TraceClient.TraceHelper.TraceMethodCall("Creating various descriptors"))
+            //{
+            //    using (IKistlContext ctx = KistlContext.GetContext())
+            //    {
+            //        foreach (var t in new[] {
+            //            typeof(ChooseReferencePropertyModel<string>),
+            //            typeof(EnumerationPropertyModel<Multiplicity>),
+            //            typeof(EnumerationPropertyModel<StorageType>),
+            //            typeof(EnumerationPropertyModel<VisualType>),
+            //            typeof(EnumerationPropertyModel<Toolkit>),
+            //            typeof(EnumerationPropertyModel<Kistl.App.Test.TestEnum>),
+            //            typeof(NullableResultModel<bool>),
+            //            typeof(NullableResultModel<DateTime>),
+            //            typeof(NullableResultModel<double>),
+            //            typeof(NullableResultModel<int>),
+            //            typeof(NullableValuePropertyModel<bool>),
+            //            typeof(NullableValuePropertyModel<DateTime>),
+            //            typeof(NullableValuePropertyModel<double>),
+            //            typeof(NullableValuePropertyModel<Guid>),
+            //            //typeof(NullableValuePropertyModel<int>),
+            //            typeof(ObjectListModel),
+            //            typeof(ObjectReferenceModel),
+            //            typeof(ObjectResultModel<IDataObject>),
+            //            typeof(ObjectResultModel<string>),
+            //            typeof(ReferencePropertyModel<string>),
+            //        })
+            //        {
+            //            CreateViewDescriptorForPresentableModelType(ctx, t);
+            //        }
+            //        ctx.SubmitChanges();
+            //    }
+            //}
+        }
 
-                    //var desc = ctx.Create<PresentableModelDescriptor>();
-                    //desc.DefaultVisualType = VisualType.Guid;
-                    //desc.Description = "A GUID attribute";
-                    //desc.PresentableModelRef = typeof(Kistl.Client.Presentables.NullableValuePropertyModel<Guid>).ToRef(ctx);
-
-                    //var lv = ctx.Create<ViewDescriptor>();
-                    //lv.ControlRef = ctx.Find<TypeRef>(154);
-                    //lv.Toolkit = Toolkit.WPF;
-                    //lv.VisualType = VisualType.Guid;
-                    //lv.PresentedModelDescriptor = desc;
-
-                    //var lvForms = ctx.Create<ViewDescriptor>();
-                    //lvForms.ControlRef = ctx.Find<TypeRef>(153);
-                    //lvForms.Toolkit = Toolkit.WinForms;
-                    //lvForms.VisualType = VisualType.Guid;
-                    //lvForms.PresentedModelDescriptor = desc;
-
-                    //var lvAspNet = ctx.Create<ViewDescriptor>();
-                    //lvAspNet.ControlRef = ctx.Find<TypeRef>(152);
-                    //lvAspNet.Toolkit = Toolkit.ASPNET;
-                    //lvAspNet.VisualType = VisualType.Guid;
-                    //lvAspNet.PresentedModelDescriptor = desc;
-
-                    //ctx.SubmitChanges();
-                }
-            }
+        private static void CreateViewDescriptorForPresentableModelType(IKistlContext ctx, Type pvmt)
+        {
+            var vDesc = ctx.Create<ViewDescriptor>();
+            vDesc.ControlRef = typeof(Kistl.Client.WPF.View.GridCells.StringValue).ToRef(ctx);
+            vDesc.PresentedModelDescriptor = pvmt.ToRef(ctx).GetPresentableModelDescriptor();
+            vDesc.Toolkit = Toolkit.WPF;
+            vDesc.VisualType = VisualType.GridCell;
         }
 
         /// <summary>
@@ -174,9 +162,9 @@ namespace Kistl.Client.WPF
         /// </summary>
         private void FixupDatabase()
         {
-            FixNotNullableConstraints();
+            //FixNotNullableConstraints();
             CreateVariousDescriptors();
-            FixupTypeRefParents();
+            //FixupTypeRefParents();
         }
     }
 }

@@ -21,11 +21,17 @@
                  DockPanel.Dock="Top" />
 
         <TextBox DockPanel.Dock="Top">Work Efforts:</TextBox>
+        <ContentPresenter Content="{Binding Efforts}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                          MinHeight="100"
+                          DockPanel.Dock="Top" />
+        <!-- 
         <ListBox ItemsSource="{Binding Efforts}"
                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                  MinHeight="100"
                  DockPanel.Dock="Top" />
-
+        -->
+        
         <StackPanel DockPanel.Dock="Bottom"
                     Orientation="Horizontal">
             <TextBlock Text="Total time worked today:" />

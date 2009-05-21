@@ -84,6 +84,53 @@ namespace Kistl.Client.WPF.View
 
         #endregion
 
+        private void RefreshGridView(ObjectListModel model)
+        {
+            GridView view = new GridView() { AllowsColumnReorder = true };
+            ListView.View = view;
+            if (model.DisplayedColumns.ShowIcon)
+            {
+                view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("iconCellTemplate") });
+            }
+            if (model.DisplayedColumns.ShowId)
+            {
+                view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("idCellTemplate"), Header = "ID" });
+            }
+            if (model.DisplayedColumns.ShowName)
+            {
+                view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("nameCellTemplate"), Header = "Name" });
+            }
+            foreach (var desc in model.DisplayedColumns.Columns)
+            {
+                var col = new GridViewColumn() { Header = desc.Header };
 
+                DataTemplate result = new DataTemplate();
+                var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
+                cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.PropertyName)), Mode = BindingMode.OneWay });
+                cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("gridCellTemplateSelector"));
+                result.VisualTree = cpFef;
+                col.CellTemplate = result;
+                view.Columns.Add(col);
+            }
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == FrameworkElement.DataContextProperty && e.NewValue is ObjectListModel)
+            {
+                var model = (ObjectListModel)DataContext;
+                RefreshGridView(model);
+            }
+        }
+
+        private void ListView_Initialized(object sender, EventArgs e)
+        {
+            if (DataContext is ObjectListModel)
+            {
+                var model = (ObjectListModel)DataContext;
+                RefreshGridView(model);
+            }
+        }
     }
 }

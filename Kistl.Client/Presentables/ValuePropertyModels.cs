@@ -8,6 +8,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.GUI;
 
 namespace Kistl.Client.Presentables
 {
@@ -71,7 +72,7 @@ namespace Kistl.Client.Presentables
         bool AllowNullInput { get; }
     }
 
-    public abstract class PropertyModel<TValue> : PresentableModel, IDataErrorInfo
+    public abstract class PropertyModel<TValue> : PresentableModel, IPropertyValueModel, IDataErrorInfo
     {
         protected PropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -290,12 +291,15 @@ namespace Kistl.Client.Presentables
 
                 _valueCache = value;
 
-                Object.SetPropertyValue<Nullable<TValue>>(Property.PropertyName, value);
-                CheckConstraints();
+                if (!object.Equals(Object.GetPropertyValue<Nullable<TValue>>(Property.PropertyName), value))
+                {
+                    Object.SetPropertyValue<Nullable<TValue>>(Property.PropertyName, value);
+                    CheckConstraints();
 
-                OnPropertyChanged("Value");
-                OnPropertyChanged("IsNull");
-                OnPropertyChanged("HasValue");
+                    OnPropertyChanged("Value");
+                    OnPropertyChanged("IsNull");
+                    OnPropertyChanged("HasValue");
+                }
             }
         }
 
@@ -410,12 +414,15 @@ namespace Kistl.Client.Presentables
             {
                 _valueCache = value;
 
-                Object.SetPropertyValue<TValue>(Property.PropertyName, value);
-                CheckConstraints();
+                if (!object.Equals(Object.GetPropertyValue<TValue>(Property.PropertyName), value))
+                {
+                    Object.SetPropertyValue<TValue>(Property.PropertyName, value);
+                    CheckConstraints();
 
-                OnPropertyChanged("Value");
-                OnPropertyChanged("IsNull");
-                OnPropertyChanged("HasValue");
+                    OnPropertyChanged("Value");
+                    OnPropertyChanged("IsNull");
+                    OnPropertyChanged("HasValue");
+                }
             }
         }
 

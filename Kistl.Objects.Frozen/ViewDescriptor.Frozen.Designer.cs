@@ -208,7 +208,7 @@ namespace Kistl.App.GUI
         { }
 
 
-		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(70);
+		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(89);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new ViewDescriptor__Implementation__Frozen(1);
@@ -350,6 +350,44 @@ namespace Kistl.App.GUI
 			DataStore[69] = new ViewDescriptor__Implementation__Frozen(69);
 
 			DataStore[70] = new ViewDescriptor__Implementation__Frozen(70);
+
+			DataStore[71] = new ViewDescriptor__Implementation__Frozen(71);
+
+			DataStore[72] = new ViewDescriptor__Implementation__Frozen(72);
+
+			DataStore[73] = new ViewDescriptor__Implementation__Frozen(73);
+
+			DataStore[74] = new ViewDescriptor__Implementation__Frozen(74);
+
+			DataStore[75] = new ViewDescriptor__Implementation__Frozen(75);
+
+			DataStore[76] = new ViewDescriptor__Implementation__Frozen(76);
+
+			DataStore[77] = new ViewDescriptor__Implementation__Frozen(77);
+
+			DataStore[78] = new ViewDescriptor__Implementation__Frozen(78);
+
+			DataStore[79] = new ViewDescriptor__Implementation__Frozen(79);
+
+			DataStore[80] = new ViewDescriptor__Implementation__Frozen(80);
+
+			DataStore[81] = new ViewDescriptor__Implementation__Frozen(81);
+
+			DataStore[82] = new ViewDescriptor__Implementation__Frozen(82);
+
+			DataStore[83] = new ViewDescriptor__Implementation__Frozen(83);
+
+			DataStore[84] = new ViewDescriptor__Implementation__Frozen(84);
+
+			DataStore[85] = new ViewDescriptor__Implementation__Frozen(85);
+
+			DataStore[86] = new ViewDescriptor__Implementation__Frozen(86);
+
+			DataStore[87] = new ViewDescriptor__Implementation__Frozen(87);
+
+			DataStore[88] = new ViewDescriptor__Implementation__Frozen(88);
+
+			DataStore[89] = new ViewDescriptor__Implementation__Frozen(89);
 
 		}
 
@@ -704,6 +742,101 @@ namespace Kistl.App.GUI
 			DataStore[70].Toolkit = (Toolkit)0;
 			DataStore[70].VisualType = (VisualType)28;
 			DataStore[70].Seal();
+			DataStore[71].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[71].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
+			DataStore[71].Toolkit = (Toolkit)0;
+			DataStore[71].VisualType = (VisualType)28;
+			DataStore[71].Seal();
+			DataStore[72].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[72].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[16];
+			DataStore[72].Toolkit = (Toolkit)0;
+			DataStore[72].VisualType = (VisualType)28;
+			DataStore[72].Seal();
+			DataStore[73].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[73].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[14];
+			DataStore[73].Toolkit = (Toolkit)0;
+			DataStore[73].VisualType = (VisualType)28;
+			DataStore[73].Seal();
+			DataStore[74].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[74].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[74].Toolkit = (Toolkit)0;
+			DataStore[74].VisualType = (VisualType)28;
+			DataStore[74].Seal();
+			DataStore[75].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[75].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
+			DataStore[75].Toolkit = (Toolkit)0;
+			DataStore[75].VisualType = (VisualType)28;
+			DataStore[75].Seal();
+			DataStore[76].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[76].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
+			DataStore[76].Toolkit = (Toolkit)0;
+			DataStore[76].VisualType = (VisualType)28;
+			DataStore[76].Seal();
+			DataStore[77].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[77].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[11];
+			DataStore[77].Toolkit = (Toolkit)0;
+			DataStore[77].VisualType = (VisualType)28;
+			DataStore[77].Seal();
+			DataStore[78].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[78].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
+			DataStore[78].Toolkit = (Toolkit)0;
+			DataStore[78].VisualType = (VisualType)28;
+			DataStore[78].Seal();
+			DataStore[79].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[79].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
+			DataStore[79].Toolkit = (Toolkit)0;
+			DataStore[79].VisualType = (VisualType)28;
+			DataStore[79].Seal();
+			DataStore[80].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[80].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[17];
+			DataStore[80].Toolkit = (Toolkit)0;
+			DataStore[80].VisualType = (VisualType)28;
+			DataStore[80].Seal();
+			DataStore[81].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[81].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[18];
+			DataStore[81].Toolkit = (Toolkit)0;
+			DataStore[81].VisualType = (VisualType)28;
+			DataStore[81].Seal();
+			DataStore[82].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[82].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[19];
+			DataStore[82].Toolkit = (Toolkit)0;
+			DataStore[82].VisualType = (VisualType)28;
+			DataStore[82].Seal();
+			DataStore[83].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[83].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[20];
+			DataStore[83].Toolkit = (Toolkit)0;
+			DataStore[83].VisualType = (VisualType)28;
+			DataStore[83].Seal();
+			DataStore[84].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[84].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[25];
+			DataStore[84].Toolkit = (Toolkit)0;
+			DataStore[84].VisualType = (VisualType)28;
+			DataStore[84].Seal();
+			DataStore[85].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[85].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[85].Toolkit = (Toolkit)0;
+			DataStore[85].VisualType = (VisualType)28;
+			DataStore[85].Seal();
+			DataStore[86].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[86].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[23];
+			DataStore[86].Toolkit = (Toolkit)0;
+			DataStore[86].VisualType = (VisualType)28;
+			DataStore[86].Seal();
+			DataStore[87].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[87].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[22];
+			DataStore[87].Toolkit = (Toolkit)0;
+			DataStore[87].VisualType = (VisualType)28;
+			DataStore[87].Seal();
+			DataStore[88].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[88].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[21];
+			DataStore[88].Toolkit = (Toolkit)0;
+			DataStore[88].VisualType = (VisualType)28;
+			DataStore[88].Seal();
+			DataStore[89].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[89].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[8];
+			DataStore[89].Toolkit = (Toolkit)0;
+			DataStore[89].VisualType = (VisualType)28;
+			DataStore[89].Seal();
 	
 		}
 #region Serializer

@@ -70,12 +70,17 @@ namespace Kistl.Client.Presentables
             {
                 _valueCache = value;
 
-                Object.SetPropertyValue<IDataObject>(Property.PropertyName, _valueCache == null ? null : _valueCache.Object);
-                CheckConstraints();
+                var newPropertyValue = _valueCache == null ? null : _valueCache.Object;
 
-                OnPropertyChanged("Value");
-                OnPropertyChanged("HasValue");
-                OnPropertyChanged("IsNull");
+                if (!object.Equals(Object.GetPropertyValue<IDataObject>(Property.PropertyName), newPropertyValue))
+                {
+                    Object.SetPropertyValue<IDataObject>(Property.PropertyName, newPropertyValue);
+                    CheckConstraints();
+
+                    OnPropertyChanged("Value");
+                    OnPropertyChanged("HasValue");
+                    OnPropertyChanged("IsNull");
+                }
             }
         }
 
@@ -152,7 +157,11 @@ namespace Kistl.Client.Presentables
         protected override void GetPropertyValue()
         {
             IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.PropertyName);
-            Value = newValue == null ? null : (DataObjectModel)Factory.CreateDefaultModel(DataContext, newValue);
+            var newModel = newValue == null ? null : (DataObjectModel)Factory.CreateDefaultModel(DataContext, newValue);
+            if (Value != newModel)
+            {
+                Value = newModel;
+            }
         }
 
         private void FetchDomain()

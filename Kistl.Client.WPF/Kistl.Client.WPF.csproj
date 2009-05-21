@@ -103,6 +103,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\GridCells\StringValue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PropertyGroupBoxView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -216,20 +220,21 @@
     <Compile Include="View\ActionView.xaml.cs">
       <DependentUpon>ActionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GridCells\StringValue.xaml.cs">
+      <DependentUpon>StringValue.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PropertyGroupBoxView.xaml.cs">
       <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DataObjectListView.xaml.cs">
       <DependentUpon>DataObjectListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DefaultTemplateSelector.cs" />
     <Compile Include="View\EnumSelectionView.xaml.cs">
       <DependentUpon>EnumSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlDebuggerView.xaml.cs">
       <DependentUpon>KistlDebuggerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ListItemTemplateSelector.cs" />
     <Compile Include="SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
@@ -275,6 +280,7 @@
     <Compile Include="View\TimeRecords\WorkEffortRecorderView.xaml.cs">
       <DependentUpon>WorkEffortRecorderView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\VisualTypeTemplateSelector.cs" />
     <Compile Include="WpfModelFactory.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

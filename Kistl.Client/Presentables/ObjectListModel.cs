@@ -27,6 +27,8 @@ namespace Kistl.Client.Presentables
         {
             if (!prop.IsList)
                 throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list");
+
+            ReferencedClass = prop.ReferenceObjectClass;
         }
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
@@ -54,6 +56,30 @@ namespace Kistl.Client.Presentables
                         mdl => mdl.Object);
                 }
                 return _valueCache;
+            }
+        }
+
+        public ObjectClass ReferencedClass
+        {
+            get;
+            protected set;
+        }
+
+        public GridDisplayConfiguration DisplayedColumns
+        {
+            get
+            {
+                GridDisplayConfiguration result = new GridDisplayConfiguration() { ShowIcon = true, ShowId = true, ShowName = true };
+                var group = this.ReferencedClass.Properties.Where(p => (p.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
+                if (group.Count() == 0)
+                {
+                    group = this.ReferencedClass.Properties;
+                }
+
+                result.Columns = this.ReferencedClass.Properties
+                    .Select(p => new ColumnDisplayModel() { Header = p.PropertyName, PropertyName = p.PropertyName })
+                    .ToList();
+                return result;
             }
         }
 

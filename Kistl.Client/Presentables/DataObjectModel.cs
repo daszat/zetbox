@@ -69,6 +69,14 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        public LookupDictionary<string, PresentableModel> PropertyModelsByName
+        {
+            get
+            {
+                return new LookupDictionary<string, PresentableModel>(PropertyModels, mdl => ((IPropertyValueModel)mdl).Label);
+            }
+        }
+
         private ReadOnlyProjectedList<Method, PresentableModel> _methodResultsCache;
         public IReadOnlyList<PresentableModel> MethodResults
         {

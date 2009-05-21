@@ -6,6 +6,19 @@
                    xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                    xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                    ToolTip="{Binding ToolTip, Mode=OneWay}">
+    <view:PropertyView.Resources>
+        <DataTemplate x:Key="idCellTemplate">
+            <TextBlock Text="{Binding ID}" />
+        </DataTemplate>
+        <DataTemplate x:Key="iconCellTemplate">
+            <Image Source="{Binding IconPath}"
+                   Width="14"
+                   Height="14" />
+        </DataTemplate>
+        <DataTemplate x:Key="nameCellTemplate">
+            <TextBlock Text="{Binding Name}" />
+        </DataTemplate>
+    </view:PropertyView.Resources>
 
     <view:PropertyView.Label>
         <StackPanel Grid.Column="0">
@@ -22,38 +35,12 @@
         </StackPanel>
     </view:PropertyView.Label>
 
-    <ListView ItemsSource="{Binding Value, Mode=OneWay}"
+    <!-- configured from code, see ListView_Initialized() -->
+    <ListView x:Name="ListView"
+              ItemsSource="{Binding Value, Mode=OneWay}"
               SelectedItem="{Binding SelectedItem}"
-              ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
               MaxHeight="300"
-              MouseDoubleClick="ItemActivatedHandler">
-        <ListView.View>
-            <GridView AllowsColumnReorder="True">
-                <GridViewColumn Header="Icon">
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding IconPath}"
-                                   Width="14"
-                                   Height="14" />
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                </GridViewColumn>
-                <GridViewColumn Header="ID">
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding ID}" />
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                </GridViewColumn>
-                <GridViewColumn Header="Name">
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                </GridViewColumn>
-            </GridView>
-        </ListView.View>
-    </ListView>
+              MouseDoubleClick="ItemActivatedHandler"
+              Initialized="ListView_Initialized" />
 
 </view:PropertyView>

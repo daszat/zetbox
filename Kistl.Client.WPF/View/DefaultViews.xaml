@@ -16,6 +16,7 @@
         </Viewbox>
     </DataTemplate>
 
-    <view:DefaultTemplateSelector x:Key="defaultTemplateSelector" />
-    <view:ListItemTemplateSelector x:Key="listItemTemplateSelector" />
+    <view:VisualTypeTemplateSelector x:Key="defaultTemplateSelector" />
+    <view:VisualTypeTemplateSelector x:Key="listItemTemplateSelector" RequestedType="ObjectListEntry"/>
+    <view:VisualTypeTemplateSelector x:Key="gridCellTemplateSelector" RequestedType="GridCell"/>
 </ResourceDictionary>
