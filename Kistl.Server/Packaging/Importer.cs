@@ -14,6 +14,10 @@ namespace Kistl.Server.Packaging
     {
         public static void Import(IKistlContext ctx, Stream s)
         {
+            // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
+            var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().First();
+            Debug.WriteLine(testObj.ToString());
+
             List<IPersistenceObject> objects = new List<IPersistenceObject>();
             using (XmlTextReader xml = new XmlTextReader(s))
             {
@@ -40,11 +44,8 @@ namespace Kistl.Server.Packaging
 
                         InterfaceType ifType = new InterfaceType(t);
 
-                        // TODO: Change this!!! Frage: Soll FindPersistenceObject null liefern, wenn es ein Objekt nicht kennt?
-                        // bzw: Wie komme ich an Objekte, wenn ich nur die Guid kenne - ich würde dann ein GetPersistenceObjectQuery brauchen??
-                        // David: FindByGuid vielleicht?
                         IPersistenceObject obj;
-                        obj = (IPersistenceObject)ctx.GetQuery(ifType).Cast<Kistl.App.Base.IExportable>().FirstOrDefault(i => i.ExportGuid == exportGuid);
+                        obj = (IPersistenceObject)ctx.FindPersistenceObject(ifType, exportGuid);
                         if(obj == null)
                         {
                             if (typeof(IDataObject).IsAssignableFrom(ifType.Type))
@@ -75,7 +76,7 @@ namespace Kistl.Server.Packaging
                 }
             }
 
-            Trace.TraceInformation("Submitting changes");
+            Trace.TraceInformation("Reloading References");
             foreach (var obj in objects)
             {
                 obj.ReloadReferences();

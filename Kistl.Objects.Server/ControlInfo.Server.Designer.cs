@@ -83,6 +83,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_Assembly;
+        private Guid? _fk_guid_Assembly = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ControlInfo_Assembly_ControlInfo_51", "Assembly")]
         public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
@@ -364,7 +365,10 @@ namespace Kistl.App.GUI
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Assembly.HasValue)
+
+			if (_fk_guid_Assembly.HasValue)
+				Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_guid_Assembly.Value);
+			else if (_fk_Assembly.HasValue)
 				Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_Assembly.Value);
 			else
 				Assembly__Implementation__ = null;

@@ -22,6 +22,7 @@
 
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string fkBackingName = "_fk_" + name;
+	string fGuidkBackingName = "_fk_guid_" + name;
 
 %>
         // implement the user-visible interface
@@ -43,6 +44,7 @@
         }
         
         private int? <%= fkBackingName %>;
+        private Guid? <%= fGuidkBackingName %> = null;
 <%
         AddSerialization(serializationList, name);
 %>

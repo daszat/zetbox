@@ -83,6 +83,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_ControlRef;
+        private Guid? _fk_guid_ControlRef = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_TypeRef_View_76", "ControlRef")]
         public Kistl.App.Base.TypeRef__Implementation__ ControlRef__Implementation__
@@ -147,6 +148,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_PresentedModelDescriptor;
+        private Guid? _fk_guid_PresentedModelDescriptor = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_PresentableModelDescriptor_View_75", "PresentedModelDescriptor")]
         public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ PresentedModelDescriptor__Implementation__
@@ -364,11 +366,17 @@ namespace Kistl.App.GUI
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_PresentedModelDescriptor.HasValue)
+
+			if (_fk_guid_PresentedModelDescriptor.HasValue)
+				PresentedModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.PresentableModelDescriptor>(_fk_guid_PresentedModelDescriptor.Value);
+			else if (_fk_PresentedModelDescriptor.HasValue)
 				PresentedModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_PresentedModelDescriptor.Value);
 			else
 				PresentedModelDescriptor__Implementation__ = null;
-			if (_fk_ControlRef.HasValue)
+
+			if (_fk_guid_ControlRef.HasValue)
+				ControlRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_ControlRef.Value);
+			else if (_fk_ControlRef.HasValue)
 				ControlRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_ControlRef.Value);
 			else
 				ControlRef__Implementation__ = null;

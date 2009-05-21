@@ -63,6 +63,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_DataType;
+        private Guid? _fk_guid_DataType = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectParameter_DataType_ObjectParameter_45", "DataType")]
         public Kistl.App.Base.DataType__Implementation__ DataType__Implementation__
@@ -208,7 +209,10 @@ namespace Kistl.App.Base
 			base.ReloadReferences();
 			
 			// fix direct object references
-			if (_fk_DataType.HasValue)
+
+			if (_fk_guid_DataType.HasValue)
+				DataType__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_DataType.Value);
+			else if (_fk_DataType.HasValue)
 				DataType__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_DataType.Value);
 			else
 				DataType__Implementation__ = null;
@@ -255,8 +259,7 @@ namespace Kistl.App.Base
         {
 			
             base.MergeImport(xml);
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_DataType, xml, "DataType", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_DataType, xml, "DataType", "Kistl.App.Base");
         }
 
 #endregion

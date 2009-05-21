@@ -45,8 +45,7 @@
             break;
 		case SerializerDirection.MergeImport: 
 %>
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            XmlStreamer.FromStream(ref this._fk_guid_<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
 		default:

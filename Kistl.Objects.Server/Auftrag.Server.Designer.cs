@@ -137,6 +137,7 @@ namespace Kistl.App.Projekte
         }
         
         private int? _fk_Kunde;
+        private Guid? _fk_guid_Kunde = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_Kunde_Auftrag_34", "Kunde")]
         public Kistl.App.Projekte.Kunde__Implementation__ Kunde__Implementation__
@@ -201,6 +202,7 @@ namespace Kistl.App.Projekte
         }
         
         private int? _fk_Mitarbeiter;
+        private Guid? _fk_guid_Mitarbeiter = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_Mitarbeiter_Auftrag_29", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ Mitarbeiter__Implementation__
@@ -265,6 +267,7 @@ namespace Kistl.App.Projekte
         }
         
         private int? _fk_Projekt;
+        private Guid? _fk_guid_Projekt = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Auftrag_Projekt_30", "Projekt")]
         public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__
@@ -427,15 +430,24 @@ namespace Kistl.App.Projekte
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Mitarbeiter.HasValue)
+
+			if (_fk_guid_Mitarbeiter.HasValue)
+				Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_Mitarbeiter.Value);
+			else if (_fk_Mitarbeiter.HasValue)
 				Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
 			else
 				Mitarbeiter__Implementation__ = null;
-			if (_fk_Projekt.HasValue)
+
+			if (_fk_guid_Projekt.HasValue)
+				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_Projekt.Value);
+			else if (_fk_Projekt.HasValue)
 				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
 			else
 				Projekt__Implementation__ = null;
-			if (_fk_Kunde.HasValue)
+
+			if (_fk_guid_Kunde.HasValue)
+				Kunde__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_guid_Kunde.Value);
+			else if (_fk_Kunde.HasValue)
 				Kunde__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)Context.Find<Kistl.App.Projekte.Kunde>(_fk_Kunde.Value);
 			else
 				Kunde__Implementation__ = null;

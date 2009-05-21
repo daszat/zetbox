@@ -54,16 +54,12 @@ foreach(var prop in ctx.GetQuery<ObjectReferenceProperty>().Where(orp => !orp.Is
         string name = prop.PropertyName;
 		string efName = name + Kistl.API.Helper.ImplementationSuffix;
 		string fkBackingName = "_fk_" + name;
+		string fkGuidBackingName = "_fk_guid_" + name;
 
-#line 40 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
-this.WriteObjects("			if (",  fkBackingName , ".HasValue)\r\n");
-this.WriteObjects("				",  efName , " = (",  referencedImplementation , ")Context.Find<",  referencedInterface , ">(",  fkBackingName , ".Value);\r\n");
-this.WriteObjects("			else\r\n");
-this.WriteObjects("				",  efName , " = null;\r\n");
-#line 45 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
-}
+		ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, efName, fkBackingName, fkGuidBackingName);
+	}
 
-#line 47 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
+#line 44 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("		}");
 
         }

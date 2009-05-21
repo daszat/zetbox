@@ -153,6 +153,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_PresentableModelRef;
+        private Guid? _fk_guid_PresentableModelRef = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_TypeRef_Descriptor_77", "PresentableModelRef")]
         public Kistl.App.Base.TypeRef__Implementation__ PresentableModelRef__Implementation__
@@ -274,7 +275,10 @@ namespace Kistl.App.GUI
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_PresentableModelRef.HasValue)
+
+			if (_fk_guid_PresentableModelRef.HasValue)
+				PresentableModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_PresentableModelRef.Value);
+			else if (_fk_PresentableModelRef.HasValue)
 				PresentableModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_PresentableModelRef.Value);
 			else
 				PresentableModelRef__Implementation__ = null;

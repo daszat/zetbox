@@ -36,12 +36,9 @@
         string name = prop.PropertyName;
 		string efName = name + Kistl.API.Helper.ImplementationSuffix;
 		string fkBackingName = "_fk_" + name;
-%>
-			if (<%= fkBackingName %>.HasValue)
-				<%= efName %> = (<%= referencedImplementation %>)Context.Find<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
-			else
-				<%= efName %> = null;
-<%
+		string fkGuidBackingName = "_fk_guid_" + name;
+
+		ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, efName, fkBackingName, fkGuidBackingName);
 	}
 %>
 		}

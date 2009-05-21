@@ -110,6 +110,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_DefaultIcon;
+        private Guid? _fk_guid_DefaultIcon = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_DataType_Icon_DataType_35", "DefaultIcon")]
         public Kistl.App.GUI.Icon__Implementation__ DefaultIcon__Implementation__
@@ -322,6 +323,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Module;
+        private Guid? _fk_guid_Module = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Module_DataType_Module_26", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
@@ -581,11 +583,17 @@ namespace Kistl.App.Base
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Module.HasValue)
+
+			if (_fk_guid_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
+			else if (_fk_Module.HasValue)
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
 			else
 				Module__Implementation__ = null;
-			if (_fk_DefaultIcon.HasValue)
+
+			if (_fk_guid_DefaultIcon.HasValue)
+				DefaultIcon__Implementation__ = (Kistl.App.GUI.Icon__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_guid_DefaultIcon.Value);
+			else if (_fk_DefaultIcon.HasValue)
 				DefaultIcon__Implementation__ = (Kistl.App.GUI.Icon__Implementation__)Context.Find<Kistl.App.GUI.Icon>(_fk_DefaultIcon.Value);
 			else
 				DefaultIcon__Implementation__ = null;
@@ -655,8 +663,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
         }
 
 #endregion

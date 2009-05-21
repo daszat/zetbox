@@ -228,6 +228,16 @@ namespace Kistl.API
             return _objects.Lookup(ifType, ID);
         }
 
+        public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
+        {
+            return (T)FindPersistenceObject(new InterfaceType(typeof(T)), exportGuid);
+        }
+
+        public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
+        {
+            return (IPersistenceObject)_objects[ifType].OfType<IExportableInternal>().FirstOrDefault(o => o.ExportGuid == exportGuid);
+        }
+
         public IKistlContext GetReadonlyContext() { throw new NotImplementedException(); }
 
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;

@@ -110,6 +110,7 @@ namespace Kistl.App.Test
         }
         
         private int? _fk_ObjectProp;
+        private Guid? _fk_guid_ObjectProp = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TestObjClass_Kunde_TestObjClass_50", "ObjectProp")]
         public Kistl.App.Projekte.Kunde__Implementation__ ObjectProp__Implementation__
@@ -332,7 +333,10 @@ namespace Kistl.App.Test
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_ObjectProp.HasValue)
+
+			if (_fk_guid_ObjectProp.HasValue)
+				ObjectProp__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_guid_ObjectProp.Value);
+			else if (_fk_ObjectProp.HasValue)
 				ObjectProp__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)Context.Find<Kistl.App.Projekte.Kunde>(_fk_ObjectProp.Value);
 			else
 				ObjectProp__Implementation__ = null;

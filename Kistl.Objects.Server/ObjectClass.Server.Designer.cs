@@ -63,6 +63,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_BaseObjectClass;
+        private Guid? _fk_guid_BaseObjectClass = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_ObjectClass_BaseObjectClass_24", "BaseObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ BaseObjectClass__Implementation__
@@ -127,6 +128,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_DefaultModel;
+        private Guid? _fk_guid_DefaultModel = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_TypeRef_ObjectClass_70", "DefaultModel")]
         public Kistl.App.Base.TypeRef__Implementation__ DefaultModel__Implementation__
@@ -191,6 +193,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_DefaultPresentableModelDescriptor;
+        private Guid? _fk_guid_DefaultPresentableModelDescriptor = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_PresentableModelDescriptor_Presentable_78", "DefaultPresentableModelDescriptor")]
         public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ DefaultPresentableModelDescriptor__Implementation__
@@ -601,15 +604,24 @@ namespace Kistl.App.Base
 			base.ReloadReferences();
 			
 			// fix direct object references
-			if (_fk_BaseObjectClass.HasValue)
+
+			if (_fk_guid_BaseObjectClass.HasValue)
+				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value);
+			else if (_fk_BaseObjectClass.HasValue)
 				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
 			else
 				BaseObjectClass__Implementation__ = null;
-			if (_fk_DefaultModel.HasValue)
+
+			if (_fk_guid_DefaultModel.HasValue)
+				DefaultModel__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_DefaultModel.Value);
+			else if (_fk_DefaultModel.HasValue)
 				DefaultModel__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_DefaultModel.Value);
 			else
 				DefaultModel__Implementation__ = null;
-			if (_fk_DefaultPresentableModelDescriptor.HasValue)
+
+			if (_fk_guid_DefaultPresentableModelDescriptor.HasValue)
+				DefaultPresentableModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.PresentableModelDescriptor>(_fk_guid_DefaultPresentableModelDescriptor.Value);
+			else if (_fk_DefaultPresentableModelDescriptor.HasValue)
 				DefaultPresentableModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_DefaultPresentableModelDescriptor.Value);
 			else
 				DefaultPresentableModelDescriptor__Implementation__ = null;
@@ -683,10 +695,8 @@ namespace Kistl.App.Base
         {
 			
             base.MergeImport(xml);
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_DefaultModel, xml, "DefaultModel", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_DefaultModel, xml, "DefaultModel", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");

@@ -456,5 +456,38 @@ namespace Kistl.DALProvider.EF
                 }
             }
         }
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
+        {
+            try
+            {
+                // See Case 552
+                return (IPersistenceObject)this.GetType().FindGenericMethod("FindPersistenceObject", new Type[] { ifType.Type }, new Type[] { typeof(Guid) }).Invoke(this, new object[] { exportGuid });
+            }
+            catch (TargetInvocationException tiex)
+            {
+                // unwrap "business" exception
+                throw tiex.InnerException;
+            }
+        }
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        public override T FindPersistenceObject<T>(Guid exportGuid)
+        {
+            string sql = string.Format("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid = @guid", GetEntityName(typeof(T).ToImplementationType()));
+            return (T)AttachedObjects.OfType<T>().OfType<IExportableInternal>().SingleOrDefault(o => o.ExportGuid == exportGuid)
+                ?? _ctx.CreateQuery<T>(sql, new ObjectParameter("guid", exportGuid)).FirstOrDefault();
+        }
     }
 }

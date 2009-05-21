@@ -110,6 +110,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Enumeration;
+        private Guid? _fk_guid_Enumeration = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Enumeration_EnumerationEntry_Enumeration_47", "Enumeration")]
         public Kistl.App.Base.Enumeration__Implementation__ Enumeration__Implementation__
@@ -295,7 +296,10 @@ namespace Kistl.App.Base
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Enumeration.HasValue)
+
+			if (_fk_guid_Enumeration.HasValue)
+				Enumeration__Implementation__ = (Kistl.App.Base.Enumeration__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Enumeration>(_fk_guid_Enumeration.Value);
+			else if (_fk_Enumeration.HasValue)
 				Enumeration__Implementation__ = (Kistl.App.Base.Enumeration__Implementation__)Context.Find<Kistl.App.Base.Enumeration>(_fk_Enumeration.Value);
 			else
 				Enumeration__Implementation__ = null;

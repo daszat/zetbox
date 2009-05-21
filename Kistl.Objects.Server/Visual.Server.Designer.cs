@@ -247,6 +247,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_Method;
+        private Guid? _fk_guid_Method = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Method_Visual_57", "Method")]
         public Kistl.App.Base.Method__Implementation__ Method__Implementation__
@@ -311,6 +312,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_Property;
+        private Guid? _fk_guid_Property = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Property_Visual_56", "Property")]
         public Kistl.App.Base.Property__Implementation__ Property__Implementation__
@@ -460,11 +462,17 @@ namespace Kistl.App.GUI
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Property.HasValue)
+
+			if (_fk_guid_Property.HasValue)
+				Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_Property.Value);
+			else if (_fk_Property.HasValue)
 				Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_Property.Value);
 			else
 				Property__Implementation__ = null;
-			if (_fk_Method.HasValue)
+
+			if (_fk_guid_Method.HasValue)
+				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_Method.Value);
+			else if (_fk_Method.HasValue)
 				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
 			else
 				Method__Implementation__ = null;

@@ -19,6 +19,10 @@
     
 <%
     ApplyIdPropertyTemplate();
+	if(ImplementsIExportable())
+	{
+		ApplyExportGuidPropertyTemplate();
+    }
     ApplyRelationIdPropertyTemplate();
     ApplyObjectGetterTemplate();
 %>
@@ -76,10 +80,10 @@
 	if(ImplementsIExportable())
 	{
 		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			Templates.Implementation.SerializerDirection.Export, this.MembersToSerialize, false, false);
+			Templates.Implementation.SerializerDirection.Export, this.MembersToSerialize, false, true);
 	    
 		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			Templates.Implementation.SerializerDirection.MergeImport, this.MembersToSerialize, false, false);
+			Templates.Implementation.SerializerDirection.MergeImport, this.MembersToSerialize, false, true);
 	}
 %>
 

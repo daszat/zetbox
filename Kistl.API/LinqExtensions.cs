@@ -30,12 +30,12 @@ namespace Kistl.API
 
             IQueryable<T> x = queryable.Where<T>(
               Expression.Lambda<Func<T, bool>>(
-                Expression.Equal(Expression.Property(
-                  pe,
-                  pi),
-                  Expression.Constant(propertyValue, typeof(V)),
-                  false,
-                  typeof(T).GetMethod("op_Equality")),
+                Expression.Equal(
+                    Expression.Property(pe, pi),
+                    Expression.Constant(propertyValue, typeof(V)),
+                    false,
+                    typeof(T).GetMethod("op_Equality")
+                ),
               new ParameterExpression[] { pe }));
 
             return (x);

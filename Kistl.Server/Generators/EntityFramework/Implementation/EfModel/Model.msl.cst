@@ -46,7 +46,13 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.<%= rel.GetCollectionEntryClassName() %>)">
         <MappingFragment StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
-<%
+<% 
+		if(rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx))
+		{
+%>
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<%	
+		}
 		if (rel.NeedsPositionStorage(RelationEndRole.A))
 		{
 %>

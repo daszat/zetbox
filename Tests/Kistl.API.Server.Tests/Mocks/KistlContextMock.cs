@@ -101,5 +101,14 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
+        public override T FindPersistenceObject<T>(Guid exportGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

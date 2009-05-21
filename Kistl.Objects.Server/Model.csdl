@@ -946,6 +946,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
@@ -987,6 +989,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+	
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
@@ -1030,6 +1033,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+	
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
@@ -1071,6 +1075,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
@@ -1114,6 +1120,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+	
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
@@ -1155,6 +1162,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+	
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
@@ -1196,6 +1204,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+	
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"

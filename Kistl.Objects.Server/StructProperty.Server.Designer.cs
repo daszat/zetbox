@@ -63,6 +63,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_StructDefinition;
+        private Guid? _fk_guid_StructDefinition = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_StructProperty_Struct_StructProperty_52", "StructDefinition")]
         public Kistl.App.Base.Struct__Implementation__ StructDefinition__Implementation__
@@ -208,7 +209,10 @@ namespace Kistl.App.Base
 			base.ReloadReferences();
 			
 			// fix direct object references
-			if (_fk_StructDefinition.HasValue)
+
+			if (_fk_guid_StructDefinition.HasValue)
+				StructDefinition__Implementation__ = (Kistl.App.Base.Struct__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Struct>(_fk_guid_StructDefinition.Value);
+			else if (_fk_StructDefinition.HasValue)
 				StructDefinition__Implementation__ = (Kistl.App.Base.Struct__Implementation__)Context.Find<Kistl.App.Base.Struct>(_fk_StructDefinition.Value);
 			else
 				StructDefinition__Implementation__ = null;
@@ -255,8 +259,7 @@ namespace Kistl.App.Base
         {
 			
             base.MergeImport(xml);
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_StructDefinition, xml, "StructDefinition", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_StructDefinition, xml, "StructDefinition", "Kistl.App.Base");
         }
 
 #endregion

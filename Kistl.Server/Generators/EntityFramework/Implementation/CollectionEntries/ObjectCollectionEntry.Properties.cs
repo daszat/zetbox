@@ -46,28 +46,35 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
         {
             base.ApplyReloadReferenceBody();
 
-            ReloadReference(RelationEndRole.A);
+            ReloadReferences(RelationEndRole.A);
             this.WriteLine();
 
-            ReloadReference(RelationEndRole.B);
+            ReloadReferences(RelationEndRole.B);
         }
 
-        private void ReloadReference(RelationEndRole endRole)
+        private void ReloadReferences(RelationEndRole endRole)
         {
             RelationEnd relend = rel.GetEnd(endRole);
+            ObjectClasses.ReloadOneReference.Call(Host, ctx,
+                relend.Type.GetDataTypeString(),
+                relend.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
+                endRole.ToString(),
+                endRole.ToString() + Kistl.API.Helper.ImplementationSuffix,
+                "_fk_" + endRole.ToString(),
+                "_fk_guid_" + endRole.ToString());
 
-            this.WriteObjects("\t\t\tif (_fk_", endRole.ToString(), ".HasValue)");
-            this.WriteLine();
-            this.WriteObjects("\t\t\t\t", endRole.ToString(), "__Implementation__ = (",
-                    relend.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix, 
-                    ")Context.Find<",
-                    relend.Type.GetDataTypeString(),
-                    ">(_fk_", endRole.ToString(), ".Value);");
-            this.WriteLine();
-            this.WriteObjects("\t\t\telse");
-            this.WriteLine();
-            this.WriteObjects("\t\t\t\t", endRole.ToString(), "__Implementation__ = null;");
-            this.WriteLine();
+            //this.WriteObjects("\t\t\tif (_fk_", endRole.ToString(), ".HasValue)");
+            //this.WriteLine();
+            //this.WriteObjects("\t\t\t\t", endRole.ToString(), "__Implementation__ = (",
+            //        relend.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
+            //        ")Context.Find<",
+            //        relend.Type.GetDataTypeString(),
+            //        ">(_fk_", endRole.ToString(), ".Value);");
+            //this.WriteLine();
+            //this.WriteObjects("\t\t\telse");
+            //this.WriteLine();
+            //this.WriteObjects("\t\t\t\t", endRole.ToString(), "__Implementation__ = null;");
+            //this.WriteLine();
         }
 
     }

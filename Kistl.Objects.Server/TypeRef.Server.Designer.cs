@@ -83,6 +83,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Assembly;
+        private Guid? _fk_guid_Assembly = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_Assembly_TypeRef_65", "Assembly")]
         public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
@@ -248,6 +249,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Parent;
+        private Guid? _fk_guid_Parent = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_Child_79", "Parent")]
         public Kistl.App.Base.TypeRef__Implementation__ Parent__Implementation__
@@ -410,11 +412,17 @@ namespace Kistl.App.Base
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Assembly.HasValue)
+
+			if (_fk_guid_Assembly.HasValue)
+				Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_guid_Assembly.Value);
+			else if (_fk_Assembly.HasValue)
 				Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_Assembly.Value);
 			else
 				Assembly__Implementation__ = null;
-			if (_fk_Parent.HasValue)
+
+			if (_fk_guid_Parent.HasValue)
+				Parent__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_Parent.Value);
+			else if (_fk_Parent.HasValue)
 				Parent__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_Parent.Value);
 			else
 				Parent__Implementation__ = null;
@@ -476,12 +484,10 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Assembly, xml, "Assembly", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Parent, xml, "Parent", "Kistl.App.Base");
         }
 
 #endregion

@@ -125,6 +125,14 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+<% 
+	if(rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx))
+	{
+%>
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+<%	
+	}
+%>	
     
     <!-- A -->
     <NavigationProperty Name="A<%= Kistl.API.Helper.ImplementationSuffix %>"

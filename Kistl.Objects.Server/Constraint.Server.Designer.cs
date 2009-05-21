@@ -83,6 +83,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_ConstrainedProperty;
+        private Guid? _fk_guid_ConstrainedProperty = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Property_Constraint_ConstrainedProperty_62", "ConstrainedProperty")]
         public Kistl.App.Base.Property__Implementation__ ConstrainedProperty__Implementation__
@@ -302,7 +303,10 @@ namespace Kistl.App.Base
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_ConstrainedProperty.HasValue)
+
+			if (_fk_guid_ConstrainedProperty.HasValue)
+				ConstrainedProperty__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_ConstrainedProperty.Value);
+			else if (_fk_ConstrainedProperty.HasValue)
 				ConstrainedProperty__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_ConstrainedProperty.Value);
 			else
 				ConstrainedProperty__Implementation__ = null;
@@ -359,8 +363,7 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_ConstrainedProperty, xml, "ConstrainedProperty", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_ConstrainedProperty, xml, "ConstrainedProperty", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "Kistl.App.Base");
         }

@@ -18,6 +18,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             Implementation.ObjectClasses.IdProperty.Call(Host, ctx);
         }
 
+        protected virtual void ApplyExportGuidPropertyTemplate()
+        {
+            Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx, null, "Guid", "ExportGuid", "");
+        }
+
         protected abstract void ApplyAPropertyTemplate();
         protected abstract void ApplyBPropertyTemplate();
 

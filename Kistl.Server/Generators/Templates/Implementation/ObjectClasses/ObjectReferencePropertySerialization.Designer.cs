@@ -70,9 +70,8 @@ break;
 		case SerializerDirection.MergeImport: 
 
 #line 48 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
-this.WriteObjects("			// TODO: Add GUID BackingStore!\r\n");
-this.WriteObjects("            XmlStreamer.FromStream(ref this._fk_",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 51 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
+this.WriteObjects("            XmlStreamer.FromStream(ref this._fk_guid_",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+#line 50 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
 break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");

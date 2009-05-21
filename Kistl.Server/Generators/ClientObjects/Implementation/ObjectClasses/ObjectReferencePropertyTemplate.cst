@@ -15,6 +15,7 @@
 <%@ Parameter Name="name" Type="string" %>
 <%@ Parameter Name="efName" Type="string" %>
 <%@ Parameter Name="fkBackingName" Type="string" %>
+<%@ Parameter Name="fkGuidBackingName" Type="string" %>
 <%@ Parameter Name="ownInterface" Type="string" %>
 <%@ Parameter Name="referencedInterface" Type="string" %>
 <%@ Parameter Name="rel" Type="Relation" %>

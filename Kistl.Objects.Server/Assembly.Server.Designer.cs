@@ -164,6 +164,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Module;
+        private Guid? _fk_guid_Module = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Module_Assembly_Module_36", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
@@ -316,7 +317,10 @@ namespace Kistl.App.Base
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Module.HasValue)
+
+			if (_fk_guid_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
+			else if (_fk_Module.HasValue)
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
 			else
 				Module__Implementation__ = null;
@@ -382,8 +386,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsClientAssembly, xml, "IsClientAssembly", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
         }
 
 #endregion

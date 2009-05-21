@@ -144,6 +144,14 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+<% 
+		if(rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx))
+		{
+%>
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+<%	
+		}
+%>		
     <Property Name="<%= fkAName %>" Type="int" Nullable="true" />
 <%
 		if (rel.NeedsPositionStorage(RelationEndRole.A))

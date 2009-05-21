@@ -110,6 +110,7 @@ namespace Kistl.App.TimeRecords
         }
         
         private int? _fk_Mitarbeiter;
+        private Guid? _fk_guid_Mitarbeiter = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_WorkEffort_Mitarbeiter_WorkEffort_82", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ Mitarbeiter__Implementation__
@@ -332,7 +333,10 @@ namespace Kistl.App.TimeRecords
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Mitarbeiter.HasValue)
+
+			if (_fk_guid_Mitarbeiter.HasValue)
+				Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_Mitarbeiter.Value);
+			else if (_fk_Mitarbeiter.HasValue)
 				Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
 			else
 				Mitarbeiter__Implementation__ = null;

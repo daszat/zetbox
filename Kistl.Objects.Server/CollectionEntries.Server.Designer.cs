@@ -40,6 +40,28 @@ namespace Kistl.App.Base
             }
         }
         private int _ID;
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
         public int RelationID { get { return 49; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.Base.ObjectClass)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Base.Interface)value; } }
@@ -66,6 +88,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_Interface_ObjectClass_49", "ObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ A__Implementation__
@@ -122,6 +145,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_Interface_ImplementsInterfaces_49", "ImplementsInterfaces")]
         public Kistl.App.Base.Interface__Implementation__ B__Implementation__
@@ -194,16 +218,16 @@ namespace Kistl.App.Base
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
 
 #endregion
@@ -215,12 +239,18 @@ namespace Kistl.App.Base
 	
 		public override void ReloadReferences()
 		{
-			if (_fk_A.HasValue)
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
 				A__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_A.Value);
 			else
 				A__Implementation__ = null;
 
-			if (_fk_B.HasValue)
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Interface__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
 				B__Implementation__ = (Kistl.App.Base.Interface__Implementation__)Context.Find<Kistl.App.Base.Interface>(_fk_B.Value);
 			else
 				B__Implementation__ = null;
@@ -295,6 +325,7 @@ namespace Kistl.App.Projekte
         }
         
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Mitarbeiter_Projekte_23", "Projekte")]
         public Kistl.App.Projekte.Projekt__Implementation__ A__Implementation__
@@ -373,6 +404,7 @@ namespace Kistl.App.Projekte
         }
         
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Mitarbeiter_Mitarbeiter_23", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ B__Implementation__
@@ -500,12 +532,18 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 	
 		public override void ReloadReferences()
 		{
-			if (_fk_A.HasValue)
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
 				A__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.Find<Kistl.App.Projekte.Projekt>(_fk_A.Value);
 			else
 				A__Implementation__ = null;
 
-			if (_fk_B.HasValue)
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
 				B__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value);
 			else
 				B__Implementation__ = null;
@@ -582,6 +620,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_61", "Template")]
         public Kistl.App.GUI.Template__Implementation__ A__Implementation__
@@ -638,6 +677,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Menu_61", "Menu")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
@@ -717,12 +757,18 @@ namespace Kistl.App.GUI
 	
 		public override void ReloadReferences()
 		{
-			if (_fk_A.HasValue)
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Template__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Template>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
 				A__Implementation__ = (Kistl.App.GUI.Template__Implementation__)Context.Find<Kistl.App.GUI.Template>(_fk_A.Value);
 			else
 				A__Implementation__ = null;
 
-			if (_fk_B.HasValue)
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
 				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
 			else
 				B__Implementation__ = null;
@@ -771,6 +817,28 @@ namespace Kistl.App.Base
             }
         }
         private int _ID;
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
         public int RelationID { get { return 66; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.Base.TypeRef)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Base.TypeRef)value; } }
@@ -797,6 +865,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_TypeRef_66", "TypeRef")]
         public Kistl.App.Base.TypeRef__Implementation__ A__Implementation__
@@ -875,6 +944,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_GenericArguments_66", "GenericArguments")]
         public Kistl.App.Base.TypeRef__Implementation__ B__Implementation__
@@ -995,6 +1065,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
@@ -1009,11 +1081,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
@@ -1028,12 +1098,18 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 	
 		public override void ReloadReferences()
 		{
-			if (_fk_A.HasValue)
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
 				A__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_A.Value);
 			else
 				A__Implementation__ = null;
 
-			if (_fk_B.HasValue)
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
 				B__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_B.Value);
 			else
 				B__Implementation__ = null;
@@ -1110,6 +1186,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Visual_55", "Visual")]
         public Kistl.App.GUI.Visual__Implementation__ A__Implementation__
@@ -1166,6 +1243,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Children_55", "Children")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
@@ -1245,12 +1323,18 @@ namespace Kistl.App.GUI
 	
 		public override void ReloadReferences()
 		{
-			if (_fk_A.HasValue)
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
 				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_A.Value);
 			else
 				A__Implementation__ = null;
 
-			if (_fk_B.HasValue)
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
 				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
 			else
 				B__Implementation__ = null;
@@ -1325,6 +1409,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Visual_60", "Visual")]
         public Kistl.App.GUI.Visual__Implementation__ A__Implementation__
@@ -1381,6 +1466,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_ContextMenu_60", "ContextMenu")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
@@ -1460,12 +1546,18 @@ namespace Kistl.App.GUI
 	
 		public override void ReloadReferences()
 		{
-			if (_fk_A.HasValue)
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
 				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_A.Value);
 			else
 				A__Implementation__ = null;
 
-			if (_fk_B.HasValue)
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
 				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
 			else
 				B__Implementation__ = null;
@@ -1541,6 +1633,7 @@ namespace Kistl.App.TimeRecords
         }
         
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42", "WorkEffortAccount")]
         public Kistl.App.TimeRecords.WorkEffortAccount__Implementation__ A__Implementation__
@@ -1597,6 +1690,7 @@ namespace Kistl.App.TimeRecords
         }
         
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ B__Implementation__
@@ -1676,12 +1770,18 @@ namespace Kistl.App.TimeRecords
 	
 		public override void ReloadReferences()
 		{
-			if (_fk_A.HasValue)
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.TimeRecords.WorkEffortAccount__Implementation__)Context.FindPersistenceObject<Kistl.App.TimeRecords.WorkEffortAccount>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
 				A__Implementation__ = (Kistl.App.TimeRecords.WorkEffortAccount__Implementation__)Context.Find<Kistl.App.TimeRecords.WorkEffortAccount>(_fk_A.Value);
 			else
 				A__Implementation__ = null;
 
-			if (_fk_B.HasValue)
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
 				B__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value);
 			else
 				B__Implementation__ = null;
@@ -1754,6 +1854,7 @@ namespace Kistl.App.Projekte
         }
         
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Kunde_String_EMails", "Kunde")]
         public Kunde__Implementation__ A__Implementation__

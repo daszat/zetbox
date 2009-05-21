@@ -486,6 +486,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass_ImplementsInterfaces49CollectionEntry)">
         <MappingFragment StoreEntitySet="ObjectClass_ImplementsInterfaces49CollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -602,6 +603,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef_GenericArguments66CollectionEntry)">
         <MappingFragment StoreEntitySet="TypeRef_GenericArguments66CollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="A_pos" ColumnName="fk_TypeRef_pos" />
           <ScalarProperty Name="B_pos" ColumnName="fk_GenericArguments_pos" />
         </MappingFragment>

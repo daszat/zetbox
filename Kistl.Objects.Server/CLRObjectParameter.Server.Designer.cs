@@ -63,6 +63,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Assembly;
+        private Guid? _fk_guid_Assembly = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_CLRObjectParameter_Assembly_CLRObjectParameter_46", "Assembly")]
         public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
@@ -245,7 +246,10 @@ namespace Kistl.App.Base
 			base.ReloadReferences();
 			
 			// fix direct object references
-			if (_fk_Assembly.HasValue)
+
+			if (_fk_guid_Assembly.HasValue)
+				Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_guid_Assembly.Value);
+			else if (_fk_Assembly.HasValue)
 				Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_Assembly.Value);
 			else
 				Assembly__Implementation__ = null;
@@ -298,8 +302,7 @@ namespace Kistl.App.Base
         {
 			
             base.MergeImport(xml);
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Assembly, xml, "Assembly", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
         }
 

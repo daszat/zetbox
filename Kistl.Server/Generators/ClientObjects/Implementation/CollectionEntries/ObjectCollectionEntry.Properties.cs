@@ -20,9 +20,10 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 
             string backingName = propertyName + Kistl.API.Helper.ImplementationSuffix;
             string fkBackingName = "_fk_" + propertyName;
+            string fkGuidBackingName = "_fk_guid_" + propertyName;
 
             ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx, MembersToSerialize,
-                propertyName, backingName, fkBackingName,
+                propertyName, backingName, fkBackingName, fkGuidBackingName,
                 "/* not member of an interface, 'ownInterface' should not be used */", 
                 relEnd.Type.GetDataTypeString(), rel, endRole,
                 false, rel.NeedsPositionStorage(endRole));

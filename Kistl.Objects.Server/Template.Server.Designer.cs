@@ -83,6 +83,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_DisplayedTypeAssembly;
+        private Guid? _fk_guid_DisplayedTypeAssembly = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_Assembly_Template_59", "DisplayedTypeAssembly")]
         public Kistl.App.Base.Assembly__Implementation__ DisplayedTypeAssembly__Implementation__
@@ -248,6 +249,7 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_VisualTree;
+        private Guid? _fk_guid_VisualTree = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_58", "VisualTree")]
         public Kistl.App.GUI.Visual__Implementation__ VisualTree__Implementation__
@@ -409,11 +411,17 @@ namespace Kistl.App.GUI
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_VisualTree.HasValue)
+
+			if (_fk_guid_VisualTree.HasValue)
+				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_VisualTree.Value);
+			else if (_fk_VisualTree.HasValue)
 				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_VisualTree.Value);
 			else
 				VisualTree__Implementation__ = null;
-			if (_fk_DisplayedTypeAssembly.HasValue)
+
+			if (_fk_guid_DisplayedTypeAssembly.HasValue)
+				DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_guid_DisplayedTypeAssembly.Value);
+			else if (_fk_DisplayedTypeAssembly.HasValue)
 				DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
 			else
 				DisplayedTypeAssembly__Implementation__ = null;

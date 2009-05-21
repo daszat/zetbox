@@ -191,6 +191,7 @@ namespace Kistl.App.Projekte
         }
         
         private int? _fk_Projekt;
+        private Guid? _fk_guid_Projekt = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Task_Projekt_22", "Projekt")]
         public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__
@@ -332,7 +333,10 @@ namespace Kistl.App.Projekte
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Projekt.HasValue)
+
+			if (_fk_guid_Projekt.HasValue)
+				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_Projekt.Value);
+			else if (_fk_Projekt.HasValue)
 				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
 			else
 				Projekt__Implementation__ = null;

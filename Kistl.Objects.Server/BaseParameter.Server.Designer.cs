@@ -191,6 +191,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Method;
+        private Guid? _fk_guid_Method = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Method_BaseParameter_Method_44", "Method")]
         public Kistl.App.Base.Method__Implementation__ Method__Implementation__
@@ -435,7 +436,10 @@ namespace Kistl.App.Base
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Method.HasValue)
+
+			if (_fk_guid_Method.HasValue)
+				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_Method.Value);
+			else if (_fk_Method.HasValue)
 				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
 			else
 				Method__Implementation__ = null;
@@ -520,8 +524,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Method, xml, "Method", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Method_pos, xml, "Method_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
         }

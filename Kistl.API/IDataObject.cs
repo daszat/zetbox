@@ -65,6 +65,8 @@ namespace Kistl.API
     /// </summary>
     public interface IExportableInternal
     {
+        Guid ExportGuid { get; set; }
+
         /// <summary>
         /// Serialize this Object to a XmlWriter
         /// </summary>

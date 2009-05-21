@@ -318,7 +318,17 @@ namespace Kistl.App
         {
             throw new NotImplementedException();
         }
+        
+        public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
+        {
+            throw new NotImplementedException();
+        }
 
+        public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
+        {
+            throw new NotImplementedException();
+        }
+        
         IKistlContext IKistlContext.GetReadonlyContext() { throw new NotImplementedException(); }
 
         event GenericEventHandler<IPersistenceObject> IKistlContext.ObjectCreated

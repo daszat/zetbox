@@ -110,6 +110,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Implementor;
+        private Guid? _fk_guid_Implementor = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_TypeRef_MethodInvocation_67", "Implementor")]
         public Kistl.App.Base.TypeRef__Implementation__ Implementor__Implementation__
@@ -174,6 +175,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_InvokeOnObjectClass;
+        private Guid? _fk_guid_InvokeOnObjectClass = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_DataType_MethodInvocation_InvokeOnObjectClass_41", "InvokeOnObjectClass")]
         public Kistl.App.Base.DataType__Implementation__ InvokeOnObjectClass__Implementation__
@@ -265,6 +267,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Method;
+        private Guid? _fk_guid_Method = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Method_MethodInvocation_Method_39", "Method")]
         public Kistl.App.Base.Method__Implementation__ Method__Implementation__
@@ -329,6 +332,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Module;
+        private Guid? _fk_guid_Module = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_Module_MethodInvocation_40", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
@@ -480,19 +484,31 @@ namespace Kistl.App.Base
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Method.HasValue)
+
+			if (_fk_guid_Method.HasValue)
+				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_Method.Value);
+			else if (_fk_Method.HasValue)
 				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
 			else
 				Method__Implementation__ = null;
-			if (_fk_Module.HasValue)
+
+			if (_fk_guid_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
+			else if (_fk_Module.HasValue)
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
 			else
 				Module__Implementation__ = null;
-			if (_fk_InvokeOnObjectClass.HasValue)
+
+			if (_fk_guid_InvokeOnObjectClass.HasValue)
+				InvokeOnObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_InvokeOnObjectClass.Value);
+			else if (_fk_InvokeOnObjectClass.HasValue)
 				InvokeOnObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_InvokeOnObjectClass.Value);
 			else
 				InvokeOnObjectClass__Implementation__ = null;
-			if (_fk_Implementor.HasValue)
+
+			if (_fk_guid_Implementor.HasValue)
+				Implementor__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_Implementor.Value);
+			else if (_fk_Implementor.HasValue)
 				Implementor__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_Implementor.Value);
 			else
 				Implementor__Implementation__ = null;
@@ -565,15 +581,11 @@ namespace Kistl.App.Base
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_Implementor, xml, "Implementor", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Implementor, xml, "Implementor", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._MemberName, xml, "MemberName", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Method, xml, "Method", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
         }
 
 #endregion

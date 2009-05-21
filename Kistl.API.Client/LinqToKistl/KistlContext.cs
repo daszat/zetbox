@@ -513,6 +513,32 @@ namespace Kistl.API.Client
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// Note: This method is not supported on the client yet
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// Note: This method is not supported on the client
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
+        {
+            throw new NotSupportedException();
+        }
+
 
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 

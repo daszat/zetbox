@@ -1118,6 +1118,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+		
     <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
     <Property Name="fk_ImplementsInterfaces" Type="int" Nullable="true" />
   </EntityType>
@@ -1156,6 +1158,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+		
     <Property Name="fk_Projekt" Type="int" Nullable="true" />
     <Property Name="fk_Projekt_pos" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
@@ -1196,6 +1199,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+		
     <Property Name="fk_Template" Type="int" Nullable="true" />
     <Property Name="fk_Menu" Type="int" Nullable="true" />
   </EntityType>
@@ -1234,6 +1238,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+		
     <Property Name="fk_TypeRef" Type="int" Nullable="true" />
     <Property Name="fk_TypeRef_pos" Type="int" Nullable="true" />
     <Property Name="fk_GenericArguments" Type="int" Nullable="true" />
@@ -1274,6 +1280,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+		
     <Property Name="fk_Visual" Type="int" Nullable="true" />
     <Property Name="fk_Children" Type="int" Nullable="true" />
   </EntityType>
@@ -1312,6 +1319,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+		
     <Property Name="fk_Visual" Type="int" Nullable="true" />
     <Property Name="fk_ContextMenu" Type="int" Nullable="true" />
   </EntityType>
@@ -1350,6 +1358,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+		
     <Property Name="fk_WorkEffortAccount" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
   </EntityType>

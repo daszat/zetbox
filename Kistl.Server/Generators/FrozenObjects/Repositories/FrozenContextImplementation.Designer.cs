@@ -205,7 +205,17 @@ this.WriteObjects("        public IPersistenceObject FindPersistenceObject(Inter
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            throw new NotImplementedException();\r\n");
 this.WriteObjects("        }\r\n");
+this.WriteObjects("        \r\n");
+this.WriteObjects("        public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            throw new NotImplementedException();\r\n");
+this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
+this.WriteObjects("        public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            throw new NotImplementedException();\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("        \r\n");
 this.WriteObjects("        IKistlContext IKistlContext.GetReadonlyContext() { throw new NotImplementedException(); }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        event GenericEventHandler<IPersistenceObject> IKistlContext.ObjectCreated\r\n");

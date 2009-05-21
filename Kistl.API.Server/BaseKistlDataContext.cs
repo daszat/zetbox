@@ -245,7 +245,25 @@ namespace Kistl.API.Server
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public abstract T FindPersistenceObject<T>(int ID) where T : class, IPersistenceObject;        
+        public abstract T FindPersistenceObject<T>(int ID) where T : class, IPersistenceObject;
+
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid);
+        /// <summary>
+        /// Find the Persistence Object of the given type by an ExportGuid
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <returns>IPersistenceObject or null if the Object was not found.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public abstract T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject;
+
 
 
         public IKistlContext GetReadonlyContext()

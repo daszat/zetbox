@@ -63,6 +63,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_ReferenceObjectClass;
+        private Guid? _fk_guid_ReferenceObjectClass = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27", "ReferenceObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ ReferenceObjectClass__Implementation__
@@ -127,6 +128,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_RelationEnd;
+        private Guid? _fk_guid_RelationEnd = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74", "RelationEnd")]
         public Kistl.App.Base.RelationEnd__Implementation__ RelationEnd__Implementation__
@@ -282,11 +284,17 @@ namespace Kistl.App.Base
 			base.ReloadReferences();
 			
 			// fix direct object references
-			if (_fk_ReferenceObjectClass.HasValue)
+
+			if (_fk_guid_ReferenceObjectClass.HasValue)
+				ReferenceObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_ReferenceObjectClass.Value);
+			else if (_fk_ReferenceObjectClass.HasValue)
 				ReferenceObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_ReferenceObjectClass.Value);
 			else
 				ReferenceObjectClass__Implementation__ = null;
-			if (_fk_RelationEnd.HasValue)
+
+			if (_fk_guid_RelationEnd.HasValue)
+				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value);
+			else if (_fk_RelationEnd.HasValue)
 				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_RelationEnd.Value);
 			else
 				RelationEnd__Implementation__ = null;
@@ -338,10 +346,8 @@ namespace Kistl.App.Base
         {
 			
             base.MergeImport(xml);
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_ReferenceObjectClass, xml, "ReferenceObjectClass", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_ReferenceObjectClass, xml, "ReferenceObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
         }
 
 #endregion

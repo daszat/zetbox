@@ -83,6 +83,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_AParent;
+        private Guid? _fk_guid_AParent = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_71", "Relation")]
         public Kistl.App.Base.Relation__Implementation__ AParent__Implementation__
@@ -147,6 +148,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_BParent;
+        private Guid? _fk_guid_BParent = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_72", "Relation")]
         public Kistl.App.Base.Relation__Implementation__ BParent__Implementation__
@@ -308,6 +310,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Navigator;
+        private Guid? _fk_guid_Navigator = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74", "Navigator")]
         public Kistl.App.Base.ObjectReferenceProperty__Implementation__ Navigator__Implementation__
@@ -426,6 +429,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Type;
+        private Guid? _fk_guid_Type = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_ObjectClass_RelationEnd_73", "Type")]
         public Kistl.App.Base.ObjectClass__Implementation__ Type__Implementation__
@@ -607,19 +611,31 @@ namespace Kistl.App.Base
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_Type.HasValue)
+
+			if (_fk_guid_Type.HasValue)
+				Type__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_Type.Value);
+			else if (_fk_Type.HasValue)
 				Type__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_Type.Value);
 			else
 				Type__Implementation__ = null;
-			if (_fk_Navigator.HasValue)
+
+			if (_fk_guid_Navigator.HasValue)
+				Navigator__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectReferenceProperty>(_fk_guid_Navigator.Value);
+			else if (_fk_Navigator.HasValue)
 				Navigator__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)Context.Find<Kistl.App.Base.ObjectReferenceProperty>(_fk_Navigator.Value);
 			else
 				Navigator__Implementation__ = null;
-			if (_fk_BParent.HasValue)
+
+			if (_fk_guid_BParent.HasValue)
+				BParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Relation>(_fk_guid_BParent.Value);
+			else if (_fk_BParent.HasValue)
 				BParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)Context.Find<Kistl.App.Base.Relation>(_fk_BParent.Value);
 			else
 				BParent__Implementation__ = null;
-			if (_fk_AParent.HasValue)
+
+			if (_fk_guid_AParent.HasValue)
+				AParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Relation>(_fk_guid_AParent.Value);
+			else if (_fk_AParent.HasValue)
 				AParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)Context.Find<Kistl.App.Base.Relation>(_fk_AParent.Value);
 			else
 				AParent__Implementation__ = null;
@@ -708,19 +724,15 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_AParent, xml, "AParent", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_BParent, xml, "BParent", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_AParent, xml, "AParent", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_BParent, xml, "BParent", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, xml, "Multiplicity", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_Navigator, xml, "Navigator", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Navigator, xml, "Navigator", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Role, xml, "Role", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._RoleName, xml, "RoleName", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Type, xml, "Type", "Kistl.App.Base");
         }
 
 #endregion

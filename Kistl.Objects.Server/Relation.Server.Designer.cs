@@ -83,6 +83,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_71", "A")]
         public Kistl.App.Base.RelationEnd__Implementation__ A__Implementation__
@@ -147,6 +148,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_72", "B")]
         public Kistl.App.Base.RelationEnd__Implementation__ B__Implementation__
@@ -385,11 +387,17 @@ namespace Kistl.App.Base
 		public override void ReloadReferences()
 		{
 			// fix direct object references
-			if (_fk_A.HasValue)
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
 				A__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_A.Value);
 			else
 				A__Implementation__ = null;
-			if (_fk_B.HasValue)
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
 				B__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_B.Value);
 			else
 				B__Implementation__ = null;
@@ -456,10 +464,8 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-			// TODO: Add GUID BackingStore!
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
