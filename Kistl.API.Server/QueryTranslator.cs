@@ -244,7 +244,15 @@ namespace Kistl.API.Server
         {
             Expression e = base.Visit(m.Expression);
             string memberName = m.Member.Name;
-            Type declaringType = m.Member.DeclaringType.ToImplementationType();
+            Type declaringType;
+            if (e is ParameterExpression)
+            {
+                declaringType = e.Type;
+            }
+            else
+            {
+                declaringType = m.Member.DeclaringType.ToImplementationType();
+            }
             MemberExpression result;
             if (declaringType.GetMember(memberName).Length > 0 && declaringType.GetMember(memberName + Kistl.API.Helper.ImplementationSuffix).Length > 0)
             {

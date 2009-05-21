@@ -150,7 +150,7 @@ namespace Kistl.App.GUI
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        Kistl.App.GUI.VisualType ControlInfo.ControlType
+        public Kistl.App.GUI.VisualType ControlType
         {
             get
             {
@@ -162,9 +162,9 @@ namespace Kistl.App.GUI
                 if (_ControlType != value)
                 {
 					var __oldValue = _ControlType;
-                    NotifyPropertyChanging("ControlType", __oldValue, value);
+                    NotifyPropertyChanging("ControlType", "ControlType__Implementation__", __oldValue, value);
                     _ControlType = value;
-                    NotifyPropertyChanged("ControlType", __oldValue, value);
+                    NotifyPropertyChanged("ControlType", "ControlType__Implementation__", __oldValue, value);
                 }
             }
         }
@@ -175,15 +175,15 @@ namespace Kistl.App.GUI
         /// <summary>EF sees only this property, for ControlType</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int ControlType
+        public int ControlType__Implementation__
         {
             get
             {
-                return (int)((ControlInfo)this).ControlType;
+                return (int)this.ControlType;
             }
             set
             {
-                ((ControlInfo)this).ControlType = (Kistl.App.GUI.VisualType)value;
+                this.ControlType = (Kistl.App.GUI.VisualType)value;
             }
         }
         
@@ -220,7 +220,7 @@ namespace Kistl.App.GUI
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        Kistl.App.GUI.Toolkit ControlInfo.Platform
+        public Kistl.App.GUI.Toolkit Platform
         {
             get
             {
@@ -232,9 +232,9 @@ namespace Kistl.App.GUI
                 if (_Platform != value)
                 {
 					var __oldValue = _Platform;
-                    NotifyPropertyChanging("Platform", __oldValue, value);
+                    NotifyPropertyChanging("Platform", "Platform__Implementation__", __oldValue, value);
                     _Platform = value;
-                    NotifyPropertyChanged("Platform", __oldValue, value);
+                    NotifyPropertyChanged("Platform", "Platform__Implementation__", __oldValue, value);
                 }
             }
         }
@@ -245,15 +245,15 @@ namespace Kistl.App.GUI
         /// <summary>EF sees only this property, for Platform</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int Platform
+        public int Platform__Implementation__
         {
             get
             {
-                return (int)((ControlInfo)this).Platform;
+                return (int)this.Platform;
             }
             set
             {
-                ((ControlInfo)this).Platform = (Kistl.App.GUI.Toolkit)value;
+                this.Platform = (Kistl.App.GUI.Toolkit)value;
             }
         }
         

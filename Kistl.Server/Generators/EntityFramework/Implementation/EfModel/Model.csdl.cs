@@ -36,6 +36,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
             if (prop is EnumerationProperty)
             {
                 type = "Int32";
+                name += Kistl.API.Helper.ImplementationSuffix;
             }
             else
             {

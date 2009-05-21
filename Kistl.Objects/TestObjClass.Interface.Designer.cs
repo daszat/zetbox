@@ -10,7 +10,7 @@ namespace Kistl.App.Test
     /// <summary>
     /// 
     /// </summary>
-    public interface TestObjClass : IDataObject 
+    public interface TestObjClass : IDataObject, Kistl.App.Test.ITestInterface 
     {
 
         /// <summary>
@@ -20,31 +20,5 @@ namespace Kistl.App.Test
 			get;
 			set;
 		}
-        /// <summary>
-        /// testtest
-        /// </summary>
-		Kistl.App.Projekte.Kunde ObjectProp {
-			get;
-			set;
-		}
-        /// <summary>
-        /// String Property
-        /// </summary>
-		string StringProp {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Test Enumeration Property
-        /// </summary>
-		Kistl.App.Test.TestEnum TestEnumProp {
-			get;
-			set;
-		}
-        /// <summary>
-        /// testmethod
-        /// </summary>
-
-		 void TestMethod(System.DateTime DateTimeParamForTestMethod) ;
     }
 }

@@ -241,7 +241,7 @@ namespace Kistl.App.Base
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        Kistl.App.Base.Multiplicity RelationEnd.Multiplicity
+        public Kistl.App.Base.Multiplicity Multiplicity
         {
             get
             {
@@ -253,9 +253,9 @@ namespace Kistl.App.Base
                 if (_Multiplicity != value)
                 {
 					var __oldValue = _Multiplicity;
-                    NotifyPropertyChanging("Multiplicity", __oldValue, value);
+                    NotifyPropertyChanging("Multiplicity", "Multiplicity__Implementation__", __oldValue, value);
                     _Multiplicity = value;
-                    NotifyPropertyChanged("Multiplicity", __oldValue, value);
+                    NotifyPropertyChanged("Multiplicity", "Multiplicity__Implementation__", __oldValue, value);
                 }
             }
         }
@@ -266,15 +266,15 @@ namespace Kistl.App.Base
         /// <summary>EF sees only this property, for Multiplicity</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int Multiplicity
+        public int Multiplicity__Implementation__
         {
             get
             {
-                return (int)((RelationEnd)this).Multiplicity;
+                return (int)this.Multiplicity;
             }
             set
             {
-                ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)value;
+                this.Multiplicity = (Kistl.App.Base.Multiplicity)value;
             }
         }
         

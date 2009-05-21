@@ -187,7 +187,7 @@ namespace Kistl.App.GUI
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        Kistl.App.GUI.Toolkit ViewDescriptor.Toolkit
+        public Kistl.App.GUI.Toolkit Toolkit
         {
             get
             {
@@ -199,9 +199,9 @@ namespace Kistl.App.GUI
                 if (_Toolkit != value)
                 {
 					var __oldValue = _Toolkit;
-                    NotifyPropertyChanging("Toolkit", __oldValue, value);
+                    NotifyPropertyChanging("Toolkit", "Toolkit__Implementation__", __oldValue, value);
                     _Toolkit = value;
-                    NotifyPropertyChanged("Toolkit", __oldValue, value);
+                    NotifyPropertyChanged("Toolkit", "Toolkit__Implementation__", __oldValue, value);
                 }
             }
         }
@@ -212,15 +212,15 @@ namespace Kistl.App.GUI
         /// <summary>EF sees only this property, for Toolkit</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int Toolkit
+        public int Toolkit__Implementation__
         {
             get
             {
-                return (int)((ViewDescriptor)this).Toolkit;
+                return (int)this.Toolkit;
             }
             set
             {
-                ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)value;
+                this.Toolkit = (Kistl.App.GUI.Toolkit)value;
             }
         }
         
@@ -230,7 +230,7 @@ namespace Kistl.App.GUI
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        Kistl.App.GUI.VisualType ViewDescriptor.VisualType
+        public Kistl.App.GUI.VisualType VisualType
         {
             get
             {
@@ -242,9 +242,9 @@ namespace Kistl.App.GUI
                 if (_VisualType != value)
                 {
 					var __oldValue = _VisualType;
-                    NotifyPropertyChanging("VisualType", __oldValue, value);
+                    NotifyPropertyChanging("VisualType", "VisualType__Implementation__", __oldValue, value);
                     _VisualType = value;
-                    NotifyPropertyChanged("VisualType", __oldValue, value);
+                    NotifyPropertyChanged("VisualType", "VisualType__Implementation__", __oldValue, value);
                 }
             }
         }
@@ -255,15 +255,15 @@ namespace Kistl.App.GUI
         /// <summary>EF sees only this property, for VisualType</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int VisualType
+        public int VisualType__Implementation__
         {
             get
             {
-                return (int)((ViewDescriptor)this).VisualType;
+                return (int)this.VisualType;
             }
             set
             {
-                ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)value;
+                this.VisualType = (Kistl.App.GUI.VisualType)value;
             }
         }
         

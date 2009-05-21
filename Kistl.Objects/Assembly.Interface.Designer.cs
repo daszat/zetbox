@@ -10,20 +10,13 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
-    public interface Assembly : IDataObject 
+    public interface Assembly : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// Full Assemblyname eg. MyActions, Version=1.0.0.0
         /// </summary>
 		string AssemblyName {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Export Guid
-        /// </summary>
-		Guid ExportGuid {
 			get;
 			set;
 		}

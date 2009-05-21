@@ -53,7 +53,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                 if (prop is EnumerationProperty)
                 {
                     var enumProp = (EnumerationProperty)prop;
-                    return string.Format("({0}){1}", enumProp.Enumeration.ClassName, value);
+                    return string.Format("({0}){1}", enumProp.Enumeration.ClassName, (int)value);
                 }
                 else if (prop is ValueTypeProperty)
                 {

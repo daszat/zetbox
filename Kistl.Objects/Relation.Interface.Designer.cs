@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Describes a Relation between two Object Classes
     /// </summary>
-    public interface Relation : IDataObject 
+    public interface Relation : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
@@ -31,13 +31,6 @@ namespace Kistl.App.Base
         /// Description of this Relation
         /// </summary>
 		string Description {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Export Guid
-        /// </summary>
-		Guid ExportGuid {
 			get;
 			set;
 		}

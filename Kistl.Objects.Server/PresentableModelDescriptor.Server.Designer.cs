@@ -59,7 +59,7 @@ namespace Kistl.App.GUI
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        Kistl.App.GUI.VisualType PresentableModelDescriptor.DefaultVisualType
+        public Kistl.App.GUI.VisualType DefaultVisualType
         {
             get
             {
@@ -71,9 +71,9 @@ namespace Kistl.App.GUI
                 if (_DefaultVisualType != value)
                 {
 					var __oldValue = _DefaultVisualType;
-                    NotifyPropertyChanging("DefaultVisualType", __oldValue, value);
+                    NotifyPropertyChanging("DefaultVisualType", "DefaultVisualType__Implementation__", __oldValue, value);
                     _DefaultVisualType = value;
-                    NotifyPropertyChanged("DefaultVisualType", __oldValue, value);
+                    NotifyPropertyChanged("DefaultVisualType", "DefaultVisualType__Implementation__", __oldValue, value);
                 }
             }
         }
@@ -84,15 +84,15 @@ namespace Kistl.App.GUI
         /// <summary>EF sees only this property, for DefaultVisualType</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int DefaultVisualType
+        public int DefaultVisualType__Implementation__
         {
             get
             {
-                return (int)((PresentableModelDescriptor)this).DefaultVisualType;
+                return (int)this.DefaultVisualType;
             }
             set
             {
-                ((PresentableModelDescriptor)this).DefaultVisualType = (Kistl.App.GUI.VisualType)value;
+                this.DefaultVisualType = (Kistl.App.GUI.VisualType)value;
             }
         }
         

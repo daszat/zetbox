@@ -280,7 +280,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="MyIntProperty" ColumnName="MyIntProperty" />
 <ScalarProperty Name="StringProp" ColumnName="StringProp" />
-<ScalarProperty Name="TestEnumProp" ColumnName="TestEnumProp" />
+<ScalarProperty Name="TestEnumProp__Implementation__" ColumnName="TestEnumProp" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -289,9 +289,9 @@
 	    <MappingFragment StoreEntitySet="ControlInfo">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-<ScalarProperty Name="ControlType" ColumnName="ControlType" />
+<ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
 <ScalarProperty Name="IsContainer" ColumnName="IsContainer" />
-<ScalarProperty Name="Platform" ColumnName="Platform" />
+<ScalarProperty Name="Platform__Implementation__" ColumnName="Platform" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -337,7 +337,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.PresenterInfo)">
 	    <MappingFragment StoreEntitySet="PresenterInfo">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ControlType" ColumnName="ControlType" />
+<ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
 <ScalarProperty Name="DataTypeName" ColumnName="DataTypeName" />
 <ScalarProperty Name="PresenterTypeName" ColumnName="PresenterTypeName" />
 	    </MappingFragment>
@@ -347,7 +347,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Visual)">
 	    <MappingFragment StoreEntitySet="Visual">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ControlType" ColumnName="ControlType" />
+<ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -410,7 +410,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="Storage" ColumnName="Storage" />
+<ScalarProperty Name="Storage__Implementation__" ColumnName="Storage" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -429,7 +429,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
-<ScalarProperty Name="Multiplicity" ColumnName="Multiplicity" />
+<ScalarProperty Name="Multiplicity__Implementation__" ColumnName="Multiplicity" />
 <ScalarProperty Name="Role" ColumnName="Role" />
 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
 	    </MappingFragment>
@@ -439,8 +439,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor)">
 	    <MappingFragment StoreEntitySet="ViewDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Toolkit" ColumnName="Toolkit" />
-<ScalarProperty Name="VisualType" ColumnName="VisualType" />
+<ScalarProperty Name="Toolkit__Implementation__" ColumnName="Toolkit" />
+<ScalarProperty Name="VisualType__Implementation__" ColumnName="VisualType" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -448,7 +448,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.PresentableModelDescriptor)">
 	    <MappingFragment StoreEntitySet="PresentableModelDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="DefaultVisualType" ColumnName="DefaultVisualType" />
+<ScalarProperty Name="DefaultVisualType__Implementation__" ColumnName="DefaultVisualType" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 	    </MappingFragment>
       </EntityTypeMapping>

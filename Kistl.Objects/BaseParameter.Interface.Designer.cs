@@ -10,20 +10,13 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Parameter. This class is abstract.
     /// </summary>
-    public interface BaseParameter : IDataObject 
+    public interface BaseParameter : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// Description of this Parameter
         /// </summary>
 		string Description {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Export Guid
-        /// </summary>
-		Guid ExportGuid {
 			get;
 			set;
 		}

@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Describes one end of a relation between two object classes
     /// </summary>
-    public interface RelationEnd : IDataObject 
+    public interface RelationEnd : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
@@ -24,13 +24,6 @@ namespace Kistl.App.Base
         /// The Relation using this RelationEnd as B
         /// </summary>
 		Kistl.App.Base.Relation BParent {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Export Guid
-        /// </summary>
-		Guid ExportGuid {
 			get;
 			set;
 		}

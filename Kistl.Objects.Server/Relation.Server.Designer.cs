@@ -241,7 +241,7 @@ namespace Kistl.App.Base
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        Kistl.App.Base.StorageType? Relation.Storage
+        public Kistl.App.Base.StorageType? Storage
         {
             get
             {
@@ -253,9 +253,9 @@ namespace Kistl.App.Base
                 if (_Storage != value)
                 {
 					var __oldValue = _Storage;
-                    NotifyPropertyChanging("Storage", __oldValue, value);
+                    NotifyPropertyChanging("Storage", "Storage__Implementation__", __oldValue, value);
                     _Storage = value;
-                    NotifyPropertyChanged("Storage", __oldValue, value);
+                    NotifyPropertyChanged("Storage", "Storage__Implementation__", __oldValue, value);
                 }
             }
         }
@@ -266,15 +266,15 @@ namespace Kistl.App.Base
         /// <summary>EF sees only this property, for Storage</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int Storage
+        public int Storage__Implementation__
         {
             get
             {
-                return (int)((Relation)this).Storage;
+                return (int)this.Storage;
             }
             set
             {
-                ((Relation)this).Storage = (Kistl.App.Base.StorageType?)value;
+                this.Storage = (Kistl.App.Base.StorageType?)value;
             }
         }
         

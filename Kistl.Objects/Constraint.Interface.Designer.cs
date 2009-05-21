@@ -10,20 +10,13 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
-    public interface Constraint : IDataObject 
+    public interface Constraint : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// The property to be constrained
         /// </summary>
 		Kistl.App.Base.Property ConstrainedProperty {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Export Guid
-        /// </summary>
-		Guid ExportGuid {
 			get;
 			set;
 		}

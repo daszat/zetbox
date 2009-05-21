@@ -177,7 +177,7 @@ namespace Kistl.App.Test
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        Kistl.App.Test.TestEnum TestObjClass.TestEnumProp
+        public Kistl.App.Test.TestEnum TestEnumProp
         {
             get
             {
@@ -189,9 +189,9 @@ namespace Kistl.App.Test
                 if (_TestEnumProp != value)
                 {
 					var __oldValue = _TestEnumProp;
-                    NotifyPropertyChanging("TestEnumProp", __oldValue, value);
+                    NotifyPropertyChanging("TestEnumProp", "TestEnumProp__Implementation__", __oldValue, value);
                     _TestEnumProp = value;
-                    NotifyPropertyChanged("TestEnumProp", __oldValue, value);
+                    NotifyPropertyChanged("TestEnumProp", "TestEnumProp__Implementation__", __oldValue, value);
                 }
             }
         }
@@ -202,15 +202,15 @@ namespace Kistl.App.Test
         /// <summary>EF sees only this property, for TestEnumProp</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int TestEnumProp
+        public int TestEnumProp__Implementation__
         {
             get
             {
-                return (int)((TestObjClass)this).TestEnumProp;
+                return (int)this.TestEnumProp;
             }
             set
             {
-                ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)value;
+                this.TestEnumProp = (Kistl.App.Test.TestEnum)value;
             }
         }
         

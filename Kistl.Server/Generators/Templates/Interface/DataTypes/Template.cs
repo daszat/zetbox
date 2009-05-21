@@ -19,16 +19,15 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             if (dataType is Kistl.App.Base.ObjectClass)
             {
                 ObjectClass cls = (ObjectClass)dataType;
-                // TODO: Continue here!
-                // string[] interfaces = cls.ImplementsInterfaces.Select(i => i.Module.Namespace + "." + i.ClassName).ToArray();
+                string[] interfaces = cls.ImplementsInterfaces.Select(i => i.Module.Namespace + "." + i.ClassName).ToArray();
                 var baseClass = (dataType as Kistl.App.Base.ObjectClass).BaseObjectClass;
                 if (baseClass != null)
                 {
-                    return new string[] { baseClass.Module.Namespace + "." + baseClass.ClassName }; //.Concat(interfaces).ToArray();
+                    return new string[] { baseClass.Module.Namespace + "." + baseClass.ClassName }.Concat(interfaces).ToArray();
                 }
                 else
                 {
-                    return new string[] { "IDataObject" }; //.Concat(interfaces).ToArray();
+                    return new string[] { "IDataObject" }.Concat(interfaces).ToArray();
                 }
             }
             else if (dataType is Struct)
@@ -60,17 +59,74 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             }
         }
 
-        protected virtual void ApplyPropertyTemplate(Property p)
+        protected virtual void ApplyPropertyTemplate(Property prop)
         {
-            if (!p.IsListProperty())
+            if (!prop.IsListProperty())
             {
-                bool isReadonly = p is StructProperty;
-                Interface.DataTypes.SimplePropertyTemplate.Call(Host, ctx, p, isReadonly);
+                bool isReadonly = prop is StructProperty;
+                Interface.DataTypes.SimplePropertyTemplate.Call(Host, ctx, prop, isReadonly);
             }
             else
             {
-                Interface.DataTypes.SimplePropertyListTemplate.Call(Host, ctx, p);
+                Interface.DataTypes.SimplePropertyListTemplate.Call(Host, ctx, prop);
             }
+        }
+
+        /// <summary>
+        /// Check if Property was defined on a "ImplementsInterface" Interface
+        /// </summary>
+        /// <param name="prop">Property to check</param>
+        /// <returns>true if found in ImplementsIntercafe Collection</returns>
+        protected bool IsDeclaredInImplementsInterface(Property prop)
+        {
+            if (prop.ObjectClass is ObjectClass)
+            {
+                ObjectClass cls = (ObjectClass)prop.ObjectClass;
+                if (cls.ImplementsInterfaces.FirstOrDefault(c => c.Properties.FirstOrDefault(p => p.PropertyName == prop.PropertyName) != null) != null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Check if Method was defined on a "ImplementsInterface" Interface
+        /// </summary>
+        /// <param name="prop">Method to check</param>
+        /// <returns>true if found in ImplementsIntercafe Collection</returns>
+        protected bool IsDeclaredInImplementsInterface(Kistl.App.Base.Method meth)
+        {
+            if (meth.ObjectClass is ObjectClass)
+            {
+                ObjectClass cls = (ObjectClass)meth.ObjectClass;
+                List<Kistl.App.Base.Method> methods = new List<Kistl.App.Base.Method>();
+                foreach(var c in cls.ImplementsInterfaces)
+                {
+                    methods.AddRange(c.Methods.Where(m => m.MethodName == meth.MethodName));
+                }
+                foreach(var m in methods)
+                {
+                    if (m.Parameter.Count == meth.Parameter.Count)
+                    {
+                        bool paramSame = true;
+
+                        // TODO: Uncomment this when IList Poshandling works correctly
+                        //for (int i = 0; i < m.Parameter.Count; i++)
+                        //{
+                        //    if (   m.Parameter[i].GetParameterType() != meth.Parameter[i].GetParameterType() 
+                        //        || m.Parameter[i].IsReturnParameter != meth.Parameter[i].IsReturnParameter)
+                        //    {
+                        //        paramSame = false;
+                        //        break;
+                        //    }
+                        //}
+
+                        if (paramSame) return true;
+                    }
+                }
+            }
+            return false;
         }
 
         protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m)

@@ -332,9 +332,9 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[12],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[40],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[88],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[78],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[81],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[88],
 });
 			DataStore[1].Description = @"";
 			DataStore[1].ExportGuid = new Guid("ef6d5bd8-5826-4ce6-a9ca-c8438ddde773");
@@ -413,8 +413,8 @@ Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[61],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[60],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50],
 });
 			DataStore[5].Description = @"";
 			DataStore[5].ExportGuid = new Guid("81e8ce31-65eb-46fe-ba86-de7452692d5b");

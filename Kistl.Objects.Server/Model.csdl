@@ -374,8 +374,8 @@
                         ToRole="Assembly" />
     <Property Name="ClassName" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="IsContainer" Type="Boolean" Nullable="false" />
-    <Property Name="Platform" Type="Int32" Nullable="false" />
-    <Property Name="ControlType" Type="Int32" Nullable="false" />
+    <Property Name="Platform__Implementation__" Type="Int32" Nullable="false" />
+    <Property Name="ControlType__Implementation__" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="DataType">
     <Key>
@@ -557,14 +557,14 @@
                         FromRole="Descriptor"
                         ToRole="PresentableModelRef" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" />
-    <Property Name="DefaultVisualType" Type="Int32" Nullable="false" />
+    <Property Name="DefaultVisualType__Implementation__" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="PresenterInfo">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="ControlType" Type="Int32" Nullable="false" />
+    <Property Name="ControlType__Implementation__" Type="Int32" Nullable="false" />
     <NavigationProperty Name="PresenterAssembly__Implementation__"
                         Relationship="Model.FK_PresenterInfo_Assembly_PresenterInfo_53"
                         FromRole="PresenterInfo"
@@ -632,7 +632,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Storage" Type="Int32" Nullable="true" />
+    <Property Name="Storage__Implementation__" Type="Int32" Nullable="true" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <NavigationProperty Name="A__Implementation__"
                         Relationship="Model.FK_Relation_RelationEnd_Relation_71"
@@ -659,7 +659,7 @@
                         Relationship="Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74"
                         FromRole="RelationEnd"
                         ToRole="Navigator" />
-    <Property Name="Multiplicity" Type="Int32" Nullable="false" />
+    <Property Name="Multiplicity__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="BParent__Implementation__"
                         Relationship="Model.FK_Relation_RelationEnd_Relation_72"
@@ -729,7 +729,7 @@
                         FromRole="TestObjClass"
                         ToRole="ObjectProp" />
     <Property Name="StringProp" Type="String" Nullable="false" MaxLength="200" />
-    <Property Name="TestEnumProp" Type="Int32" Nullable="false" />
+    <Property Name="TestEnumProp__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="MyIntProperty" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="TypeRef">
@@ -765,8 +765,8 @@
                         Relationship="Model.FK_ViewDescriptor_TypeRef_View_76"
                         FromRole="View"
                         ToRole="ControlRef" />
-    <Property Name="Toolkit" Type="Int32" Nullable="false" />
-    <Property Name="VisualType" Type="Int32" Nullable="false" />
+    <Property Name="Toolkit__Implementation__" Type="Int32" Nullable="false" />
+    <Property Name="VisualType__Implementation__" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Visual">
     <Key>
@@ -790,7 +790,7 @@
                         FromRole="Visual"
                         ToRole="CollectionEntry" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="200" />
-    <Property Name="ControlType" Type="Int32" Nullable="false" />
+    <Property Name="ControlType__Implementation__" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="WorkEffort">
     <Key>

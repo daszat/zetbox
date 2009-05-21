@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Modules.
     /// </summary>
-    public interface Module : IDataObject 
+    public interface Module : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
@@ -27,13 +27,6 @@ namespace Kistl.App.Base
         /// Description of this Module
         /// </summary>
 		string Description {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Export Guid
-        /// </summary>
-		Guid ExportGuid {
 			get;
 			set;
 		}

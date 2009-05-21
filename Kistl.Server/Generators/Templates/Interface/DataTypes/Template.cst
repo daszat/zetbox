@@ -28,26 +28,32 @@ namespace <%= dataType.Module.Namespace %>
 <%
     foreach(Property p in dataType.Properties.OrderBy(p => p.PropertyName))
     {
+		if(!IsDeclaredInImplementsInterface(p))
+		{
 %>
 
         /// <summary>
         /// <%= p.Description %>
         /// </summary>
 <%
-        ApplyPropertyTemplate(p);
+			ApplyPropertyTemplate(p);
+        }
     }
 
 
 
     foreach(var m in MethodsToGenerate().OrderBy(m => m.MethodName))
     {
+		if(!IsDeclaredInImplementsInterface(m))
+		{
 %>
 
         /// <summary>
         /// <%= m.Description %>
         /// </summary>
 <%
-        ApplyMethodTemplate(m);
+			ApplyMethodTemplate(m);
+        }
     }
 %>
 

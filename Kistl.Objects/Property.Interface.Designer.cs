@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Properties. This class is abstract.
     /// </summary>
-    public interface Property : IDataObject 
+    public interface Property : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
@@ -36,13 +36,6 @@ namespace Kistl.App.Base
         /// Description of this Property
         /// </summary>
 		string Description {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Export Guid
-        /// </summary>
-		Guid ExportGuid {
 			get;
 			set;
 		}

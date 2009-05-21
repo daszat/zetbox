@@ -30,6 +30,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
             if (prop is EnumerationProperty)
             {
                 columnName = Construct.NestedColumnName(prop, parentName);
+                propertyName += Kistl.API.Helper.ImplementationSuffix;
             }
             else if (prop is ValueTypeProperty)
             {

@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Base Metadefinition Object for Objectclasses, Interfaces, Structs and Enumerations.
     /// </summary>
-    public interface DataType : IDataObject 
+    public interface DataType : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
@@ -31,13 +31,6 @@ namespace Kistl.App.Base
         /// Description of this DataType
         /// </summary>
 		string Description {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Export Guid
-        /// </summary>
-		Guid ExportGuid {
 			get;
 			set;
 		}

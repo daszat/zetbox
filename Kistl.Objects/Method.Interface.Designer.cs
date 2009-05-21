@@ -10,20 +10,13 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Methods.
     /// </summary>
-    public interface Method : IDataObject 
+    public interface Method : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// Description of this Method
         /// </summary>
 		string Description {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Export Guid
-        /// </summary>
-		Guid ExportGuid {
 			get;
 			set;
 		}

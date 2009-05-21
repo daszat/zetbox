@@ -153,7 +153,7 @@ namespace Kistl.App.GUI
         /// </summary>
         // enumeration property
         // implement the user-visible interface
-        Kistl.App.GUI.VisualType Visual.ControlType
+        public Kistl.App.GUI.VisualType ControlType
         {
             get
             {
@@ -165,9 +165,9 @@ namespace Kistl.App.GUI
                 if (_ControlType != value)
                 {
 					var __oldValue = _ControlType;
-                    NotifyPropertyChanging("ControlType", __oldValue, value);
+                    NotifyPropertyChanging("ControlType", "ControlType__Implementation__", __oldValue, value);
                     _ControlType = value;
-                    NotifyPropertyChanged("ControlType", __oldValue, value);
+                    NotifyPropertyChanged("ControlType", "ControlType__Implementation__", __oldValue, value);
                 }
             }
         }
@@ -178,15 +178,15 @@ namespace Kistl.App.GUI
         /// <summary>EF sees only this property, for ControlType</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int ControlType
+        public int ControlType__Implementation__
         {
             get
             {
-                return (int)((Visual)this).ControlType;
+                return (int)this.ControlType;
             }
             set
             {
-                ((Visual)this).ControlType = (Kistl.App.GUI.VisualType)value;
+                this.ControlType = (Kistl.App.GUI.VisualType)value;
             }
         }
         
