@@ -208,7 +208,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(40);
+		internal static Dictionary<int, EnumerationEntry__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationEntry__Implementation__Frozen>(41);
 		internal static void CreateInstances()
 		{
 			DataStore[2] = new EnumerationEntry__Implementation__Frozen(2);
@@ -290,6 +290,8 @@ namespace Kistl.App.Base
 			DataStore[77] = new EnumerationEntry__Implementation__Frozen(77);
 
 			DataStore[78] = new EnumerationEntry__Implementation__Frozen(78);
+
+			DataStore[79] = new EnumerationEntry__Implementation__Frozen(79);
 
 		}
 
@@ -494,6 +496,11 @@ namespace Kistl.App.Base
 			DataStore[78].Name = @"Guid";
 			DataStore[78].Value = 27;
 			DataStore[78].Seal();
+			DataStore[79].Description = @"display a value in a GridCell";
+			DataStore[79].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[79].Name = @"GridCell";
+			DataStore[79].Value = 28;
+			DataStore[79].Seal();
 	
 		}
 #region Serializer

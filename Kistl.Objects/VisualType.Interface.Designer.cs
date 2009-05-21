@@ -143,5 +143,10 @@ namespace Kistl.App.GUI
 		/// </summary>
 		Guid = 27,
 
+		/// <summary>
+		/// display a value in a GridCell
+		/// </summary>
+		GridCell = 28,
+
 	}
 }
