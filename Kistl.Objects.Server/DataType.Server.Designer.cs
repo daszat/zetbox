@@ -589,7 +589,7 @@ namespace Kistl.App.Base
 			{
 				case "ClassName":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(1).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(1).Constraints
 						.Where(c => !c.IsValid(this, this.ClassName))
 						.Select(c => c.GetErrorText(this, this.ClassName))
 						.ToArray();
@@ -598,7 +598,7 @@ namespace Kistl.App.Base
 				}
 				case "DefaultIcon":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(69).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(69).Constraints
 						.Where(c => !c.IsValid(this, this.DefaultIcon))
 						.Select(c => c.GetErrorText(this, this.DefaultIcon))
 						.ToArray();
@@ -607,7 +607,7 @@ namespace Kistl.App.Base
 				}
 				case "Description":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(175).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(175).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -616,7 +616,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(252).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(252).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -625,7 +625,7 @@ namespace Kistl.App.Base
 				}
 				case "MethodInvocations":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(80).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(80).Constraints
 						.Where(c => !c.IsValid(this, this.MethodInvocations))
 						.Select(c => c.GetErrorText(this, this.MethodInvocations))
 						.ToArray();
@@ -634,7 +634,7 @@ namespace Kistl.App.Base
 				}
 				case "Methods":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(31).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(31).Constraints
 						.Where(c => !c.IsValid(this, this.Methods))
 						.Select(c => c.GetErrorText(this, this.Methods))
 						.ToArray();
@@ -643,7 +643,7 @@ namespace Kistl.App.Base
 				}
 				case "Module":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(45).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(45).Constraints
 						.Where(c => !c.IsValid(this, this.Module))
 						.Select(c => c.GetErrorText(this, this.Module))
 						.ToArray();
@@ -652,7 +652,7 @@ namespace Kistl.App.Base
 				}
 				case "Properties":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(7).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(7).Constraints
 						.Where(c => !c.IsValid(this, this.Properties))
 						.Select(c => c.GetErrorText(this, this.Properties))
 						.ToArray();
@@ -661,7 +661,7 @@ namespace Kistl.App.Base
 				}
 				case "ShowIconInLists":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(265).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(265).Constraints
 						.Where(c => !c.IsValid(this, this.ShowIconInLists))
 						.Select(c => c.GetErrorText(this, this.ShowIconInLists))
 						.ToArray();
@@ -670,7 +670,7 @@ namespace Kistl.App.Base
 				}
 				case "ShowIdInLists":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(266).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(266).Constraints
 						.Where(c => !c.IsValid(this, this.ShowIdInLists))
 						.Select(c => c.GetErrorText(this, this.ShowIdInLists))
 						.ToArray();
@@ -679,7 +679,7 @@ namespace Kistl.App.Base
 				}
 				case "ShowNameInLists":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(264).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(264).Constraints
 						.Where(c => !c.IsValid(this, this.ShowNameInLists))
 						.Select(c => c.GetErrorText(this, this.ShowNameInLists))
 						.ToArray();

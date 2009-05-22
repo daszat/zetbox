@@ -159,7 +159,7 @@ namespace Kistl.App.Base
 			{
 				case "MaxLength":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(172).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(172).Constraints
 						.Where(c => !c.IsValid(this, this.MaxLength))
 						.Select(c => c.GetErrorText(this, this.MaxLength))
 						.ToArray();
@@ -168,7 +168,7 @@ namespace Kistl.App.Base
 				}
 				case "MinLength":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(173).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(173).Constraints
 						.Where(c => !c.IsValid(this, this.MinLength))
 						.Select(c => c.GetErrorText(this, this.MinLength))
 						.ToArray();

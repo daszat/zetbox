@@ -72,16 +72,6 @@ namespace Kistl.API.Client.Tests
             return result.Cast<IDataObject>();
         }
 
-        public IDataObject GetObject(InterfaceType ifType, int ID)
-        {
-            if (ifType == null) throw new ArgumentNullException("ifType");
-            if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("ifType", "Only TestObjClasses are allowed");
-
-            TestObjClass obj = new TestObjClass__Implementation__() { StringProp = "String " + ID };
-            obj.SetPrivatePropertyValue<int>("ID", ID);
-            return obj;
-        }
-
         public string HelloWorld(string name)
         {
             throw new NotImplementedException();

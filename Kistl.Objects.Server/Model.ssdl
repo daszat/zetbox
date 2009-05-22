@@ -665,6 +665,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_ReferenceObjectClass" Type="int" />
+    <Property Name="EagerLoading" Type="bit" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="DateTimeProperty">

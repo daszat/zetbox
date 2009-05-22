@@ -925,6 +925,7 @@
                         Relationship="Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74"
                         FromRole="Navigator"
                         ToRole="RelationEnd" />
+    <Property Name="EagerLoading" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="StringParameter" BaseType="Model.BaseParameter" >
   </EntityType>

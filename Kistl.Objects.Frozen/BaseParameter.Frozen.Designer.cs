@@ -257,7 +257,7 @@ namespace Kistl.App.Base
 			{
 				case "Description":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(177).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(177).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -266,7 +266,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(254).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(254).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -275,7 +275,7 @@ namespace Kistl.App.Base
 				}
 				case "IsList":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(94).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(94).Constraints
 						.Where(c => !c.IsValid(this, this.IsList))
 						.Select(c => c.GetErrorText(this, this.IsList))
 						.ToArray();
@@ -284,7 +284,7 @@ namespace Kistl.App.Base
 				}
 				case "IsReturnParameter":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(95).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(95).Constraints
 						.Where(c => !c.IsValid(this, this.IsReturnParameter))
 						.Select(c => c.GetErrorText(this, this.IsReturnParameter))
 						.ToArray();
@@ -293,7 +293,7 @@ namespace Kistl.App.Base
 				}
 				case "Method":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(92).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(92).Constraints
 						.Where(c => !c.IsValid(this, this.Method))
 						.Select(c => c.GetErrorText(this, this.Method))
 						.ToArray();
@@ -302,7 +302,7 @@ namespace Kistl.App.Base
 				}
 				case "ParameterName":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(91).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(91).Constraints
 						.Where(c => !c.IsValid(this, this.ParameterName))
 						.Select(c => c.GetErrorText(this, this.ParameterName))
 						.ToArray();

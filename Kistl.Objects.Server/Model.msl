@@ -52,6 +52,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">
 	    <MappingFragment StoreEntitySet="ObjectReferenceProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="EagerLoading" ColumnName="EagerLoading" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.StructProperty)">

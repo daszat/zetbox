@@ -323,7 +323,7 @@ namespace Kistl.App.Base
 			{
 				case "BaseObjectClass":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(25).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(25).Constraints
 						.Where(c => !c.IsValid(this, this.BaseObjectClass))
 						.Select(c => c.GetErrorText(this, this.BaseObjectClass))
 						.ToArray();
@@ -332,7 +332,7 @@ namespace Kistl.App.Base
 				}
 				case "DefaultModel":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(212).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(212).Constraints
 						.Where(c => !c.IsValid(this, this.DefaultModel))
 						.Select(c => c.GetErrorText(this, this.DefaultModel))
 						.ToArray();
@@ -341,7 +341,7 @@ namespace Kistl.App.Base
 				}
 				case "DefaultPresentableModelDescriptor":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(234).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(234).Constraints
 						.Where(c => !c.IsValid(this, this.DefaultPresentableModelDescriptor))
 						.Select(c => c.GetErrorText(this, this.DefaultPresentableModelDescriptor))
 						.ToArray();
@@ -350,7 +350,7 @@ namespace Kistl.App.Base
 				}
 				case "ImplementsInterfaces":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(105).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(105).Constraints
 						.Where(c => !c.IsValid(this, this.ImplementsInterfaces))
 						.Select(c => c.GetErrorText(this, this.ImplementsInterfaces))
 						.ToArray();
@@ -359,7 +359,7 @@ namespace Kistl.App.Base
 				}
 				case "IsFrozenObject":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(174).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(174).Constraints
 						.Where(c => !c.IsValid(this, this.IsFrozenObject))
 						.Select(c => c.GetErrorText(this, this.IsFrozenObject))
 						.ToArray();
@@ -368,7 +368,7 @@ namespace Kistl.App.Base
 				}
 				case "IsSimpleObject":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(119).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(119).Constraints
 						.Where(c => !c.IsValid(this, this.IsSimpleObject))
 						.Select(c => c.GetErrorText(this, this.IsSimpleObject))
 						.ToArray();
@@ -377,7 +377,7 @@ namespace Kistl.App.Base
 				}
 				case "SubClasses":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(27).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(27).Constraints
 						.Where(c => !c.IsValid(this, this.SubClasses))
 						.Select(c => c.GetErrorText(this, this.SubClasses))
 						.ToArray();
@@ -386,7 +386,7 @@ namespace Kistl.App.Base
 				}
 				case "TableName":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(3).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(3).Constraints
 						.Where(c => !c.IsValid(this, this.TableName))
 						.Select(c => c.GetErrorText(this, this.TableName))
 						.ToArray();
@@ -768,7 +768,7 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[253],
 });
 			DataStore[7].ShowIconInLists = true;
 			DataStore[7].ShowIdInLists = true;
-			DataStore[7].ShowNameInLists = true;
+			DataStore[7].ShowNameInLists = false;
 			DataStore[7].BaseObjectClass = null;
 			DataStore[7].DefaultModel = null;
 			DataStore[7].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
@@ -978,9 +978,10 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[17],
 			DataStore[14].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
 			DataStore[14].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[14].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(2) {
+			DataStore[14].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(3) {
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[46],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[222],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[269],
 });
 			DataStore[14].ShowIconInLists = true;
 			DataStore[14].ShowIdInLists = true;
@@ -1254,7 +1255,7 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[259],
 });
 			DataStore[30].ShowIconInLists = true;
 			DataStore[30].ShowIdInLists = true;
-			DataStore[30].ShowNameInLists = true;
+			DataStore[30].ShowNameInLists = false;
 			DataStore[30].BaseObjectClass = null;
 			DataStore[30].DefaultModel = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[41];
 			DataStore[30].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[31];

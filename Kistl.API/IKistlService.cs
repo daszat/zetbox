@@ -132,6 +132,8 @@ namespace Kistl.API
     /// <summary>
     /// Kist Stream Service Contract
     /// TODO: Add FaultContracts
+    /// TODO: Remove GetObject
+    /// TODO: Remove GetListOf
     /// </summary>
     [ServiceContract]
     public interface IKistlServiceStreams
@@ -141,6 +143,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
+        [Obsolete]
         [OperationContract]
         MemoryStream GetObject(MemoryStream msg);
 
@@ -186,6 +189,7 @@ namespace Kistl.API
     /// <summary>
     /// Servicekontrakt für das Kistl Service
     /// </summary>
+    [Obsolete]
     [ServiceContract]
     public interface IKistlService
     {
@@ -218,6 +222,7 @@ namespace Kistl.API
         /// <param name="type">ServerBL Typ als AssemblyQualifiedName</param>
         /// <param name="ID">ID des Objektes</param>
         /// <returns>XML</returns>
+        [Obsolete]
         [OperationContract]
         [FaultContract(typeof(Exception))]
         string GetObject(SerializableType type, int ID);

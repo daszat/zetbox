@@ -197,7 +197,7 @@ namespace Kistl.App.Base
 			{
 				case "Assembly":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(98).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(98).Constraints
 						.Where(c => !c.IsValid(this, this.Assembly))
 						.Select(c => c.GetErrorText(this, this.Assembly))
 						.ToArray();
@@ -206,7 +206,7 @@ namespace Kistl.App.Base
 				}
 				case "FullTypeName":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(99).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(99).Constraints
 						.Where(c => !c.IsValid(this, this.FullTypeName))
 						.Select(c => c.GetErrorText(this, this.FullTypeName))
 						.ToArray();

@@ -426,7 +426,7 @@ namespace Kistl.App.Base
 			{
 				case "BaseObjectClass":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(25).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(25).Constraints
 						.Where(c => !c.IsValid(this, this.BaseObjectClass))
 						.Select(c => c.GetErrorText(this, this.BaseObjectClass))
 						.ToArray();
@@ -435,7 +435,7 @@ namespace Kistl.App.Base
 				}
 				case "DefaultModel":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(212).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(212).Constraints
 						.Where(c => !c.IsValid(this, this.DefaultModel))
 						.Select(c => c.GetErrorText(this, this.DefaultModel))
 						.ToArray();
@@ -444,7 +444,7 @@ namespace Kistl.App.Base
 				}
 				case "DefaultPresentableModelDescriptor":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(234).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(234).Constraints
 						.Where(c => !c.IsValid(this, this.DefaultPresentableModelDescriptor))
 						.Select(c => c.GetErrorText(this, this.DefaultPresentableModelDescriptor))
 						.ToArray();
@@ -453,7 +453,7 @@ namespace Kistl.App.Base
 				}
 				case "ImplementsInterfaces":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(105).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(105).Constraints
 						.Where(c => !c.IsValid(this, this.ImplementsInterfaces))
 						.Select(c => c.GetErrorText(this, this.ImplementsInterfaces))
 						.ToArray();
@@ -462,7 +462,7 @@ namespace Kistl.App.Base
 				}
 				case "IsFrozenObject":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(174).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(174).Constraints
 						.Where(c => !c.IsValid(this, this.IsFrozenObject))
 						.Select(c => c.GetErrorText(this, this.IsFrozenObject))
 						.ToArray();
@@ -471,7 +471,7 @@ namespace Kistl.App.Base
 				}
 				case "IsSimpleObject":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(119).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(119).Constraints
 						.Where(c => !c.IsValid(this, this.IsSimpleObject))
 						.Select(c => c.GetErrorText(this, this.IsSimpleObject))
 						.ToArray();
@@ -480,7 +480,7 @@ namespace Kistl.App.Base
 				}
 				case "SubClasses":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(27).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(27).Constraints
 						.Where(c => !c.IsValid(this, this.SubClasses))
 						.Select(c => c.GetErrorText(this, this.SubClasses))
 						.ToArray();
@@ -489,7 +489,7 @@ namespace Kistl.App.Base
 				}
 				case "TableName":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(3).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(3).Constraints
 						.Where(c => !c.IsValid(this, this.TableName))
 						.Select(c => c.GetErrorText(this, this.TableName))
 						.ToArray();

@@ -18,7 +18,6 @@ namespace Kistl.API.Client
     {
         IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy);
         IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property);
-        IDataObject GetObject(InterfaceType ifType, int ID);
 
         IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects);
 
@@ -231,33 +230,6 @@ namespace Kistl.API.Client
 #else
                 string xml = service.GetListOf(type, ID, property);
                 return CurrentSerializer.ListFromXml(ctx, xml);
-#endif
-            }
-        }
-
-        public Kistl.API.IDataObject GetObject(InterfaceType ifType, int ID)
-        {
-            using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", ifType, ID))
-            {
-#if USE_STREAMS
-                KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
-                msg.Type = new SerializableType(ifType);
-                msg.ID = ID;
-                MemoryStream s = serviceStreams.GetObject(msg.ToStream());
-                BinaryReader sr = new BinaryReader(s);
-
-                SerializableType objType;
-                BinarySerializer.FromStream(out objType, sr);
-
-                s.Seek(0, SeekOrigin.Begin);
-
-                IDataObject obj = (IDataObject)objType.NewObject();
-                obj.FromStream(sr);
-
-                return (Kistl.API.IDataObject)obj;
-#else
-                string xml = service.GetObject(type, ID);
-                return CurrentSerializer.ObjectFromXml(ctx, xml);
 #endif
             }
         }

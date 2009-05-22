@@ -46,7 +46,7 @@ foreach(var property in properties)
 #line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cst"
 this.WriteObjects("				case \"",  propertyName , "\":\r\n");
 this.WriteObjects("				{\r\n");
-this.WriteObjects("					var errors = Context.Find<Kistl.App.Base.Property>(",  property.ID , ").Constraints\r\n");
+this.WriteObjects("					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(",  property.ID , ").Constraints\r\n");
 this.WriteObjects("						.Where(c => !c.IsValid(this, this.",  propertyName , "))\r\n");
 this.WriteObjects("						.Select(c => c.GetErrorText(this, this.",  propertyName , "))\r\n");
 this.WriteObjects("						.ToArray();\r\n");

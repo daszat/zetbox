@@ -103,6 +103,10 @@ namespace Kistl.API
 
         #endregion
 
+        public override string ToString()
+        {
+            return Type.ToString();
+        }
     }
 
     public struct ImplementationType
@@ -189,6 +193,11 @@ namespace Kistl.API
         public static bool operator !=(ImplementationType a, Type b) { return !a.Type.Equals(b); }
 
         #endregion
+
+        public override string ToString()
+        {
+            return Type.ToString();
+        }
 
     }
 

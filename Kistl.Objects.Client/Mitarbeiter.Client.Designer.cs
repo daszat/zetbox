@@ -231,7 +231,7 @@ namespace Kistl.App.Projekte
 			{
 				case "Geburtstag":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(38).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(38).Constraints
 						.Where(c => !c.IsValid(this, this.Geburtstag))
 						.Select(c => c.GetErrorText(this, this.Geburtstag))
 						.ToArray();
@@ -240,7 +240,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Name":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(20).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(20).Constraints
 						.Where(c => !c.IsValid(this, this.Name))
 						.Select(c => c.GetErrorText(this, this.Name))
 						.ToArray();
@@ -249,7 +249,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Projekte":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(21).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(21).Constraints
 						.Where(c => !c.IsValid(this, this.Projekte))
 						.Select(c => c.GetErrorText(this, this.Projekte))
 						.ToArray();
@@ -258,7 +258,7 @@ namespace Kistl.App.Projekte
 				}
 				case "SVNr":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(39).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(39).Constraints
 						.Where(c => !c.IsValid(this, this.SVNr))
 						.Select(c => c.GetErrorText(this, this.SVNr))
 						.ToArray();
@@ -267,7 +267,7 @@ namespace Kistl.App.Projekte
 				}
 				case "TelefonNummer":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(40).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(40).Constraints
 						.Where(c => !c.IsValid(this, this.TelefonNummer))
 						.Select(c => c.GetErrorText(this, this.TelefonNummer))
 						.ToArray();

@@ -35,6 +35,33 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Whether or not this reference should be loaded eagerly
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public virtual bool EagerLoading
+        {
+            get
+            {
+                return _EagerLoading;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_EagerLoading != value)
+                {
+					var __oldValue = _EagerLoading;
+                    NotifyPropertyChanging("EagerLoading", __oldValue, value);
+                    _EagerLoading = value;
+                    NotifyPropertyChanged("EagerLoading", __oldValue, value);
+                }
+            }
+        }
+        private bool _EagerLoading;
+
+        /// <summary>
         /// Pointer zur Objektklasse
         /// </summary>
     /*
@@ -218,6 +245,7 @@ namespace Kistl.App.Base
 			var otherImpl = (ObjectReferenceProperty__Implementation__)obj;
 			var me = (ObjectReferenceProperty)this;
 
+			me.EagerLoading = other.EagerLoading;
 			this._fk_ReferenceObjectClass = otherImpl._fk_ReferenceObjectClass;
 			this._fk_RelationEnd = otherImpl._fk_RelationEnd;
 		}
@@ -256,9 +284,18 @@ namespace Kistl.App.Base
 		{
 			switch(propertyName)
 			{
+				case "EagerLoading":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(269).Constraints
+						.Where(c => !c.IsValid(this, this.EagerLoading))
+						.Select(c => c.GetErrorText(this, this.EagerLoading))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "ReferenceObjectClass":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(46).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(46).Constraints
 						.Where(c => !c.IsValid(this, this.ReferenceObjectClass))
 						.Select(c => c.GetErrorText(this, this.ReferenceObjectClass))
 						.ToArray();
@@ -267,7 +304,7 @@ namespace Kistl.App.Base
 				}
 				case "RelationEnd":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(222).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(222).Constraints
 						.Where(c => !c.IsValid(this, this.RelationEnd))
 						.Select(c => c.GetErrorText(this, this.RelationEnd))
 						.ToArray();
@@ -306,6 +343,7 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(binStream);
+            BinarySerializer.ToStream(this._EagerLoading, binStream);
             BinarySerializer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ID : (int?)null, binStream);
             BinarySerializer.ToStream(RelationEnd != null ? RelationEnd.ID : (int?)null, binStream);
         }
@@ -314,6 +352,7 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._EagerLoading, binStream);
             BinarySerializer.FromStream(out this._fk_ReferenceObjectClass, binStream);
             BinarySerializer.FromStream(out this._fk_RelationEnd, binStream);
         }
@@ -322,6 +361,7 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
             XmlStreamer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ID : (int?)null, xml, "ReferenceObjectClass", "Kistl.App.Base");
             XmlStreamer.ToStream(RelationEnd != null ? RelationEnd.ID : (int?)null, xml, "RelationEnd", "Kistl.App.Base");
         }
@@ -330,6 +370,7 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ReferenceObjectClass, xml, "ReferenceObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
         }
@@ -338,6 +379,8 @@ namespace Kistl.App.Base
         {
 			
             base.Export(xml, modules);
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ExportGuid : (Guid?)null, xml, "ReferenceObjectClass", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(RelationEnd != null ? RelationEnd.ExportGuid : (Guid?)null, xml, "RelationEnd", "Kistl.App.Base");
         }
@@ -346,6 +389,7 @@ namespace Kistl.App.Base
         {
 			
             base.MergeImport(xml);
+            XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ReferenceObjectClass, xml, "ReferenceObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
         }

@@ -285,7 +285,7 @@ namespace Kistl.App.Projekte
 			{
 				case "Adresse":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(60).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(60).Constraints
 						.Where(c => !c.IsValid(this, this.Adresse))
 						.Select(c => c.GetErrorText(this, this.Adresse))
 						.ToArray();
@@ -294,7 +294,7 @@ namespace Kistl.App.Projekte
 				}
 				case "EMails":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(85).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(85).Constraints
 						.Where(c => !c.IsValid(this, this.EMails))
 						.Select(c => c.GetErrorText(this, this.EMails))
 						.ToArray();
@@ -303,7 +303,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Kundenname":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(59).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(59).Constraints
 						.Where(c => !c.IsValid(this, this.Kundenname))
 						.Select(c => c.GetErrorText(this, this.Kundenname))
 						.ToArray();
@@ -312,7 +312,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Land":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(63).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(63).Constraints
 						.Where(c => !c.IsValid(this, this.Land))
 						.Select(c => c.GetErrorText(this, this.Land))
 						.ToArray();
@@ -321,7 +321,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Ort":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(62).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(62).Constraints
 						.Where(c => !c.IsValid(this, this.Ort))
 						.Select(c => c.GetErrorText(this, this.Ort))
 						.ToArray();
@@ -330,7 +330,7 @@ namespace Kistl.App.Projekte
 				}
 				case "PLZ":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(61).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(61).Constraints
 						.Where(c => !c.IsValid(this, this.PLZ))
 						.Select(c => c.GetErrorText(this, this.PLZ))
 						.ToArray();

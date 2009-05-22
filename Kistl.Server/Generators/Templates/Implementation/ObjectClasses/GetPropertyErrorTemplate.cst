@@ -28,7 +28,7 @@
 %>
 				case "<%= propertyName %>":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(<%= property.ID %>).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(<%= property.ID %>).Constraints
 						.Where(c => !c.IsValid(this, this.<%= propertyName %>))
 						.Select(c => c.GetErrorText(this, this.<%= propertyName %>))
 						.ToArray();

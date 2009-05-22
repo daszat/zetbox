@@ -132,7 +132,7 @@ namespace Kistl.App.GUI
 			{
 				case "IconFile":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(68).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(68).Constraints
 						.Where(c => !c.IsValid(this, this.IconFile))
 						.Select(c => c.GetErrorText(this, this.IconFile))
 						.ToArray();

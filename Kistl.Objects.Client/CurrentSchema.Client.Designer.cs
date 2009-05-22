@@ -136,7 +136,7 @@ namespace Kistl.App.Base
 			{
 				case "Schema":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(267).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(267).Constraints
 						.Where(c => !c.IsValid(this, this.Schema))
 						.Select(c => c.GetErrorText(this, this.Schema))
 						.ToArray();
@@ -145,7 +145,7 @@ namespace Kistl.App.Base
 				}
 				case "Version":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(268).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(268).Constraints
 						.Where(c => !c.IsValid(this, this.Version))
 						.Select(c => c.GetErrorText(this, this.Version))
 						.ToArray();

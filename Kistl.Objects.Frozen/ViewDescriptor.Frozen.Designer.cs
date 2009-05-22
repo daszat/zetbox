@@ -165,7 +165,7 @@ namespace Kistl.App.GUI
 			{
 				case "ControlRef":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(227).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(227).Constraints
 						.Where(c => !c.IsValid(this, this.ControlRef))
 						.Select(c => c.GetErrorText(this, this.ControlRef))
 						.ToArray();
@@ -174,7 +174,7 @@ namespace Kistl.App.GUI
 				}
 				case "PresentedModelDescriptor":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(226).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(226).Constraints
 						.Where(c => !c.IsValid(this, this.PresentedModelDescriptor))
 						.Select(c => c.GetErrorText(this, this.PresentedModelDescriptor))
 						.ToArray();
@@ -183,7 +183,7 @@ namespace Kistl.App.GUI
 				}
 				case "Toolkit":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(228).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(228).Constraints
 						.Where(c => !c.IsValid(this, this.Toolkit))
 						.Select(c => c.GetErrorText(this, this.Toolkit))
 						.ToArray();
@@ -192,7 +192,7 @@ namespace Kistl.App.GUI
 				}
 				case "VisualType":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(229).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(229).Constraints
 						.Where(c => !c.IsValid(this, this.VisualType))
 						.Select(c => c.GetErrorText(this, this.VisualType))
 						.ToArray();

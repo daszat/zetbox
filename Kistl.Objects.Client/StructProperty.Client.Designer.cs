@@ -172,7 +172,7 @@ namespace Kistl.App.Base
 			{
 				case "StructDefinition":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(129).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(129).Constraints
 						.Where(c => !c.IsValid(this, this.StructDefinition))
 						.Select(c => c.GetErrorText(this, this.StructDefinition))
 						.ToArray();

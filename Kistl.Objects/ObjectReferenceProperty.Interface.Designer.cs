@@ -14,6 +14,13 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// Whether or not this reference should be loaded eagerly
+        /// </summary>
+		bool EagerLoading {
+			get;
+			set;
+		}
+        /// <summary>
         /// Pointer zur Objektklasse
         /// </summary>
 		Kistl.App.Base.ObjectClass ReferenceObjectClass {

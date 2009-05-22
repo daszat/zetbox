@@ -240,7 +240,7 @@ namespace Kistl.App.Base
 			{
 				case "ConstrainedProperty":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(171).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(171).Constraints
 						.Where(c => !c.IsValid(this, this.ConstrainedProperty))
 						.Select(c => c.GetErrorText(this, this.ConstrainedProperty))
 						.ToArray();
@@ -249,7 +249,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(256).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(256).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -258,7 +258,7 @@ namespace Kistl.App.Base
 				}
 				case "Reason":
 				{
-					var errors = Context.Find<Kistl.App.Base.Property>(167).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(167).Constraints
 						.Where(c => !c.IsValid(this, this.Reason))
 						.Select(c => c.GetErrorText(this, this.Reason))
 						.ToArray();
