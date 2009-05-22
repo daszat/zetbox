@@ -59,6 +59,10 @@ namespace Kistl.Server.Packaging
                                 {
                                     Console.Write(".");
                                     xml.WriteStartElement(obj.GetObjectClass(ctx).ClassName, module.Namespace);
+                                    if (((Kistl.App.Base.IExportable)obj).ExportGuid == Guid.Empty)
+                                    {
+                                        ((Kistl.App.Base.IExportable)obj).ExportGuid = Guid.NewGuid();
+                                    }
                                     ((IExportableInternal)obj).Export(xml, moduleNamespaces);
                                     xml.WriteEndElement();
                                 }
@@ -89,6 +93,10 @@ namespace Kistl.Server.Packaging
                                 {
                                     Console.Write(".");
                                     xml.WriteStartElement(rel.GetCollectionEntryClassName(), rel.A.Type.Module.Namespace);
+                                    if (((Kistl.App.Base.IExportable)obj).ExportGuid == Guid.Empty)
+                                    {
+                                        ((Kistl.App.Base.IExportable)obj).ExportGuid = Guid.NewGuid();
+                                    }
                                     obj.Export(xml, moduleNamespaces);
                                     xml.WriteEndElement();
                                 }
@@ -97,6 +105,9 @@ namespace Kistl.Server.Packaging
                         xml.WriteEndElement();
                         xml.WriteEndDocument();
                     }
+
+                    // Save ExportGuids
+                    ctx.SubmitChanges();
                 }
                 Trace.TraceInformation("Export finished");
             }

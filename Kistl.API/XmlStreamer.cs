@@ -22,14 +22,14 @@ namespace Kistl.API
 
         public static void FromStream(ref bool val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsBoolean();
             }
         }
         public static void FromStream(ref bool? val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsBoolean();
             }
@@ -49,14 +49,14 @@ namespace Kistl.API
 
         public static void FromStream(ref DateTime val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsDateTime();
             }
         }
         public static void FromStream(ref DateTime? val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsDateTime();
             }
@@ -76,14 +76,14 @@ namespace Kistl.API
 
         public static void FromStream(ref Guid val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = new Guid(xml.ReadElementContentAsString());
             }
         }
         public static void FromStream(ref Guid? val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = new Guid(xml.ReadElementContentAsString());
             }
@@ -103,14 +103,14 @@ namespace Kistl.API
 
         public static void FromStream(ref double val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsDouble();
             }
         }
         public static void FromStream(ref double? val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsDouble();
             }
@@ -130,14 +130,14 @@ namespace Kistl.API
 
         public static void FromStream(ref float val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsFloat();
             }
         }
         public static void FromStream(ref float? val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsFloat();
             }
@@ -157,21 +157,21 @@ namespace Kistl.API
 
         public static void FromStream(ref int val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsInt();
             }
         }
         public static void FromStream(ref int? val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsInt();
             }
         }
         public static void FromStreamConverter(Action<int> conv, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 int val = xml.ReadElementContentAsInt();
                 conv(val);
@@ -188,7 +188,7 @@ namespace Kistl.API
 
         public static void FromStream(ref string val, XmlReader xml, string name, string ns)
         {
-            if (xml.Name == name && xml.NamespaceURI == ns)
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsString();
             }

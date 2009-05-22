@@ -71,7 +71,21 @@ namespace Kistl.Server
                 {
                     StringBuilder warnings = new StringBuilder();
 
-                    foreach (ObjectClass baseObjClass in ctx.GetQuery<ObjectClass>())
+                    IEnumerable<ObjectClass> objectClasses = null;
+
+                    try
+                    {
+                        objectClasses = ctx.GetQuery<ObjectClass>().ToList();
+                    }
+                    catch
+                    {
+                        // OK, unable to load Objectclasses
+                        // This means that either the Database is empty or Schema is out of date
+                        // continue -> maybe the schema is beeing updated.
+                        return;
+                    }
+
+                    foreach (ObjectClass baseObjClass in objectClasses)
                     {
                         try
                         {

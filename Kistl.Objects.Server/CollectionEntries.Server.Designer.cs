@@ -17,7 +17,7 @@ namespace Kistl.App.Base
 {
     [EdmEntityType(NamespaceName="Model", Name="ObjectClass_ImplementsInterfaces49CollectionEntry")]
     [System.Diagnostics.DebuggerDisplay("ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__")]
-    public class ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ObjectClass_ImplementsInterfaces49CollectionEntry, Kistl.API.IExportableInternal
+    public class ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ObjectClass_ImplementsInterfaces49CollectionEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -794,7 +794,7 @@ namespace Kistl.App.Base
 {
     [EdmEntityType(NamespaceName="Model", Name="TypeRef_GenericArguments66CollectionEntry")]
     [System.Diagnostics.DebuggerDisplay("TypeRef_GenericArguments66CollectionEntry__Implementation__")]
-    public class TypeRef_GenericArguments66CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, TypeRef_GenericArguments66CollectionEntry, Kistl.API.IExportableInternal
+    public class TypeRef_GenericArguments66CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, TypeRef_GenericArguments66CollectionEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]

@@ -172,9 +172,21 @@ namespace Kistl.Server
             Packaging.Importer.Import(file);
         }
 
-        internal void CheckSchema()
+        internal void CheckSchemaFromCurrentMetaData()
         {
             using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\schemareport.log"))
+                {
+                    report.SetLength(0);
+                    SchemaManagement.SchemaManager.CheckSchema(ctx, report);
+                }
+            }
+        }
+
+        internal void CheckSchema()
+        {
+            using (IKistlContext ctx = SchemaManagement.SchemaManager.GetSavedSchema())
             {
                 using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\schemareport.log"))
                 {
@@ -199,6 +211,35 @@ namespace Kistl.Server
                 }
             }
         }
+
+        internal void UpdateSchema()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\updateschemareport.log"))
+                {
+                    report.SetLength(0);
+                    SchemaManagement.SchemaManager.UpdateSchema(ctx, report);
+                }
+            }
+        }
+
+        internal void UpdateSchema(string file)
+        {
+            using (IKistlContext ctx = new MemoryContext())
+            {
+                using (FileStream fs = File.OpenRead(file))
+                {
+                    Packaging.Importer.Import(ctx, fs);
+                    using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\updateschemareport.log"))
+                    {
+                        report.SetLength(0);
+                        SchemaManagement.SchemaManager.UpdateSchema(ctx, report);
+                    }
+                }
+            }
+        }
+
 
         #region IDisposable Members
         // TODO: implement Dispose Pattern after 

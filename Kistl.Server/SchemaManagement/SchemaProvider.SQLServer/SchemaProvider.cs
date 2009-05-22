@@ -50,6 +50,21 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             }
         }
 
+        public string GetSavedSchema()
+        {
+            if (!CheckTableExists("CurrentSchema")) return string.Empty;
+
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM CurrentSchema", db, tx);
+            int count = (int)cmd.ExecuteScalar();
+            if (count > 1)
+            {
+                throw new InvalidOperationException("There is more then one Schema saved in your Database");
+            }
+            if (count == 0) return string.Empty;
+            cmd = new SqlCommand("SELECT [Schema] FROM CurrentSchema", db, tx);
+            return (string)cmd.ExecuteScalar();
+        }
+
         public bool CheckTableExists(string tblName)
         {
             SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@table) AND type IN (N'U')", db, tx);

@@ -11,6 +11,8 @@ namespace Kistl.API.Server
         void CommitTransaction();
         void RollbackTransaction();
 
+        string GetSavedSchema();
+
         bool CheckTableExists(string tblName);
         bool CheckColumnExists(string tblName, string colName);
         bool CheckFKConstraintExists(string fkName);

@@ -290,7 +290,16 @@ namespace Kistl.DALProvider.EF
 
             saveList.OfType<IDataObject>().ForEach(obj => obj.NotifyPreSave());
 
-            int result = _ctx.SaveChanges();
+            int result = 0;
+            try
+            {
+                result = _ctx.SaveChanges();
+            }
+            catch (UpdateException updex)
+            {
+                Trace.TraceWarning(updex.ToString());
+                throw updex.InnerException;
+            }
 
             saveList.OfType<IDataObject>().ForEach(obj => obj.NotifyPostSave());
 
@@ -485,9 +494,14 @@ namespace Kistl.DALProvider.EF
         /// <returns>IPersistenceObject or null if the Object was not found.</returns>
         public override T FindPersistenceObject<T>(Guid exportGuid)
         {
-            string sql = string.Format("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid = @guid", GetEntityName(typeof(T).ToImplementationType()));
-            return (T)AttachedObjects.OfType<T>().OfType<IExportableInternal>().SingleOrDefault(o => o.ExportGuid == exportGuid)
-                ?? _ctx.CreateQuery<T>(sql, new ObjectParameter("guid", exportGuid)).FirstOrDefault();
+            T result = (T)AttachedObjects.OfType<T>().OfType<IExportableInternal>().SingleOrDefault(o => o.ExportGuid == exportGuid);
+            if (result == null)
+            {
+                string sql = string.Format("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid = @guid", GetEntityName(typeof(T).ToImplementationType()));
+                result = _ctx.CreateQuery<T>(sql, new ObjectParameter("guid", exportGuid)).FirstOrDefault();
+                result.AttachToContext(this);
+            }
+            return result;
         }
     }
 }

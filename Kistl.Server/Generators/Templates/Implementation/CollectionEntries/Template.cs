@@ -30,7 +30,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         {
             if (ImplementsIExportable())
             {
-                return new string[] { GetCeInterface(), "Kistl.API.IExportableInternal" };
+                return new string[] { GetCeInterface(), "Kistl.API.IExportableInternal", "Kistl.App.Base.IExportable" };
             }
             return new string[] { GetCeInterface() };
         }

@@ -15,8 +15,8 @@ namespace Kistl.Server.Packaging
         public static void Import(IKistlContext ctx, Stream s)
         {
             // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
-            var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().First();
-            Debug.WriteLine(testObj.ToString());
+            var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
+            Debug.WriteLine(testObj != null ? testObj.ToString() : "");
 
             List<IPersistenceObject> objects = new List<IPersistenceObject>();
             using (XmlTextReader xml = new XmlTextReader(s))
@@ -69,7 +69,7 @@ namespace Kistl.Server.Packaging
                         {
                             if (children.NodeType == XmlNodeType.Element)
                             {
-                                obj.FromStream(xml);
+                                ((IExportableInternal)obj).MergeImport(xml);
                             }
                         }
                     }
@@ -81,9 +81,6 @@ namespace Kistl.Server.Packaging
             {
                 obj.ReloadReferences();
             }
-
-            Trace.TraceInformation("Submitting changes");
-            ctx.SubmitChanges();
         }
 
         public static void Import(string filename)
@@ -97,6 +94,8 @@ namespace Kistl.Server.Packaging
                     {
                         Import(ctx, fs);
                     }
+                    Trace.TraceInformation("Submitting changes");
+                    ctx.SubmitChanges();
                 }
                 Trace.TraceInformation("Import finished");
             }

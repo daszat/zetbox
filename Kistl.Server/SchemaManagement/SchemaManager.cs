@@ -15,10 +15,39 @@ namespace Kistl.Server.SchemaManagement
 {
     public class SchemaManager
     {
+        #region Private Functions
         private static ISchemaProvider GetProvider()
         {
             return new SchemaProvider.SQLServer.SchemaProvider();
         }
+
+        private static void WriteReportHeader(TextWriter report, string reportName)
+        {
+            report.WriteLine("== {0} ==", reportName);
+            report.WriteLine("Date: {0}", DateTime.Now);
+            report.WriteLine("Database: {0}", ApplicationContext.Current.Configuration.Server.ConnectionString);
+            report.WriteLine();
+        }
+        #endregion
+
+        #region GetSavedSchema()
+        public static IKistlContext GetSavedSchema()
+        {
+            IKistlContext ctx = new MemoryContext();
+            using (ISchemaProvider db = GetProvider())
+            {
+                string schema = db.GetSavedSchema();
+                if (!string.IsNullOrEmpty(schema))
+                {
+                    using (var sr = new MemoryStream(ASCIIEncoding.Default.GetBytes(schema)))
+                    {
+                        Packaging.Importer.Import(ctx, sr);
+                    }
+                }
+            }
+            return ctx;
+        }
+        #endregion
 
         #region CheckSchema
         public static void CheckSchema(IKistlContext ctx, Stream reportStream)
@@ -27,18 +56,22 @@ namespace Kistl.Server.SchemaManagement
             {
                 using (TextWriter report = new StreamWriter(reportStream))
                 {
-                    report.WriteLine("== Schema Report ==");
-                    report.WriteLine("Date: {0}", DateTime.Now);
-                    report.WriteLine("Database: {0}", ApplicationContext.Current.Configuration.Server.ConnectionString);
-                    report.WriteLine();
+                    WriteReportHeader(report, "Check Schema Report");
 
-                    CheckTables(ctx, db, report);
-                    CheckExtraTables(ctx, db, report);
+                    if (ctx.GetQuery<Kistl.App.Base.ObjectClass>().Count() == 0)
+                    {
+                        report.WriteLine("** Error: Current Schema is empty");
+                    }
+                    else
+                    {
+                        CheckTables(ctx, db, report);
+                        CheckExtraTables(ctx, db, report);
 
-                    report.WriteLine();
+                        report.WriteLine();
 
-                    CheckRelations(ctx, db, report);
-                    CheckExtraRelations(ctx, db, report);
+                        CheckRelations(ctx, db, report);
+                        CheckExtraRelations(ctx, db, report);
+                    }
                 }
             }
         }
@@ -63,6 +96,21 @@ namespace Kistl.Server.SchemaManagement
                 if (!tableNames.Contains(tblName))
                 {
                     report.WriteLine("** Warning: Table \"{0}\" found in database but no ObjectClass was defined", tblName);
+                }
+            }
+        }
+
+        private static void CheckExtraColumns(ISchemaProvider db, TextWriter report, ObjectClass objClass)
+        {
+            List<string> columns = objClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).Select(p => p.PropertyName).ToList();
+
+            foreach (string propName in db.GetTableColumnNames(objClass.TableName))
+            {
+                if (propName == "ID") continue;
+                if (propName.StartsWith("fk_")) continue;
+                if (!columns.Contains(propName))
+                {
+                    report.WriteLine("    ** Warning: Column \"{0}\" found in database but no Property was defined", propName);
                 }
             }
         }
@@ -105,12 +153,13 @@ namespace Kistl.Server.SchemaManagement
             // Checking Tables
             foreach (ObjectClass objClass in ctx.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
-                report.WriteLine("Objectlass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
 
                 if (db.CheckTableExists(objClass.TableName))
                 {
                     report.WriteLine("  Table: {0}", objClass.TableName);
-                    CkeckColumns(db, report, objClass);
+                    CheckColumns(db, report, objClass);
+                    CheckExtraColumns(db, report, objClass);
                 }
                 else
                 {
@@ -119,7 +168,7 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private static void CkeckColumns(ISchemaProvider db, TextWriter report, ObjectClass objClass)
+        private static void CheckColumns(ISchemaProvider db, TextWriter report, ObjectClass objClass)
         {
             report.WriteLine("  Columns: ");
             foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>()
@@ -158,6 +207,22 @@ namespace Kistl.Server.SchemaManagement
                 else
                 {
                     report.WriteLine("    ** Warning: Column \"{0}\" is missing", colName);
+                }
+            }
+        }
+        #endregion
+
+        #region UpdateSchema
+        public static void UpdateSchema(IKistlContext schema, Stream reportStream)
+        {
+            using (ISchemaProvider db = GetProvider())
+            {
+                using (IKistlContext savedSchema = SchemaManagement.SchemaManager.GetSavedSchema())
+                {
+                    using (TextWriter report = new StreamWriter(reportStream))
+                    {
+                        WriteReportHeader(report, "Update Schema Report");
+                    }
                 }
             }
         }

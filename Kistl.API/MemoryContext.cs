@@ -76,9 +76,10 @@ namespace Kistl.API
 			return GetQuery(new InterfaceType(typeof(T))).Cast<T>();
 		}
 
+        private List<IDataObject> _emptyList = new List<IDataObject>();
         public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
-            return (_objects[ifType] ?? new List<IDataObject>()).AsQueryable().Cast<IDataObject>();
+            return (_objects[ifType] ?? _emptyList).AsQueryable().Cast<IDataObject>();
         }
         
         List<T> IKistlContext.GetListOf<T>(IDataObject obj, string propertyName)
@@ -114,7 +115,7 @@ namespace Kistl.API
             }
         }
 
-        public int SubmitChanges() { throw new NotImplementedException(); }
+        public int SubmitChanges() { throw new NotSupportedException(); }
 
         public bool IsDisposed { get { return false; } }
 
@@ -235,7 +236,9 @@ namespace Kistl.API
 
         public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
         {
-            return (IPersistenceObject)_objects[ifType].OfType<IExportableInternal>().FirstOrDefault(o => o.ExportGuid == exportGuid);
+            var query = _objects[ifType];
+            if (query == null) return null;
+            return (IPersistenceObject)query.Cast<IExportableInternal>().FirstOrDefault(o => o.ExportGuid == exportGuid);
         }
 
         public IKistlContext GetReadonlyContext() { throw new NotImplementedException(); }

@@ -20,11 +20,11 @@ namespace Kistl.Server
         private static void PrintHelp()
         {
             Console.WriteLine("Use: Kistl.Server [<configfile.xml>]");
-            Console.WriteLine("                  [-export <destfile.xml> <namespace> [<namespace> ...]");
-            Console.WriteLine("                  [-import <sourcefile.xml]");
-            Console.WriteLine("                  [-checkschema [<schema.xml>]]");
             Console.WriteLine("                  [-generate]");
-            Console.WriteLine("                  [-database]");
+            Console.WriteLine("                  [-export <destfile.xml> <namespace> [<namespace> ...]]");
+            Console.WriteLine("                  [-import <sourcefile.xml]");
+            Console.WriteLine("                  [-checkschema [meta | <schema.xml>]]");
+            Console.WriteLine("                  [-updateschema [<schema.xml>]]");
             Console.WriteLine("                  [-all]");
         }
 
@@ -78,10 +78,21 @@ namespace Kistl.Server
                 if (arg.Current == "-checkschema")
                 {
                     string file = "";
-                    if (arg.MoveNext() && !arg.Current.StartsWith("-"))
+                    if (arg.MoveNext())
                     {
-                        file = arg.Current;
-                        server.CheckSchema(file);
+                        if (arg.Current == "meta")
+                        {
+                            server.CheckSchemaFromCurrentMetaData();
+                        }
+                        else if (!arg.Current.StartsWith("-"))
+                        {
+                            file = arg.Current;
+                            server.CheckSchema(file);
+                        }
+                        else
+                        {
+                            PrintHelp();
+                        }
                     }
                     else
                     {
@@ -90,21 +101,31 @@ namespace Kistl.Server
                     actiondone = true;
                 }
 
+                if (arg.Current == "-updateschema")
+                {
+                    string file = "";
+                    if (arg.MoveNext() && !arg.Current.StartsWith("-"))
+                    {
+                        file = arg.Current;
+                        server.UpdateSchema(file);
+                    }
+                    else
+                    {
+                        server.UpdateSchema();
+                    }
+                    actiondone = true;
+                }
+
                 if (arg.Current == "-all")
                 {
-                    server.GenerateAll();
+                    //server.GenerateAll();
+                    Console.WriteLine("Not supported yet");
                     actiondone = true;
                 }
 
                 if (arg.Current == "-generate")
                 {
                     server.GenerateCode();
-                    actiondone = true;
-                }
-
-                if (arg.Current == "-database")
-                {
-                    server.GenerateDatabase();
                     actiondone = true;
                 }
             }
