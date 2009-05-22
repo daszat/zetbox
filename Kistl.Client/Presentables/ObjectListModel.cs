@@ -69,14 +69,14 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                GridDisplayConfiguration result = new GridDisplayConfiguration() { ShowIcon = true, ShowId = true, ShowName = true };
-                var group = this.ReferencedClass.Properties.Where(p => (p.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
+                GridDisplayConfiguration result = new GridDisplayConfiguration() { ShowIcon = Property.ShowIconInLists, ShowId = Property.ShowIdInLists, ShowName = Property.ShowNameInLists };
+                var group = this.ReferencedClass.GetAllProperties().Where(p => (p.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
                 if (group.Count() == 0)
                 {
-                    group = this.ReferencedClass.Properties;
+                    group = this.ReferencedClass.GetAllProperties();
                 }
 
-                result.Columns = this.ReferencedClass.Properties
+                result.Columns = group
                     .Select(p => new ColumnDisplayModel() { Header = p.PropertyName, PropertyName = p.PropertyName })
                     .ToList();
                 return result;

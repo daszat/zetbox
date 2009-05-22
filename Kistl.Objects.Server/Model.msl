@@ -47,6 +47,9 @@
 <ScalarProperty Name="IsList" ColumnName="IsList" />
 <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+<ScalarProperty Name="ShowIconInLists" ColumnName="ShowIconInLists" />
+<ScalarProperty Name="ShowIdInLists" ColumnName="ShowIdInLists" />
+<ScalarProperty Name="ShowNameInLists" ColumnName="ShowNameInLists" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">

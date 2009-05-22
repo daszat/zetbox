@@ -91,7 +91,7 @@ namespace Kistl.App.Extensions
 
         public static bool ImplementsIExportable(this ObjectClass cls, IKistlContext ctx, bool lookupInBase)
         {
-            if(!lookupInBase) return cls.ImplementsInterfaces.Contains(ctx.GetIExportableInterface());
+            if (!lookupInBase) return cls.ImplementsInterfaces.Contains(ctx.GetIExportableInterface());
             return ImplementsIExportable(cls, ctx);
         }
 
@@ -104,6 +104,22 @@ namespace Kistl.App.Extensions
                 cls = cls.BaseObjectClass;
             }
             return false;
+        }
+
+        public static IList<Property> GetAllProperties(this ObjectClass cls)
+        {
+            return cls.GetInheritedProperties().Concat(cls.Properties).ToList();
+        }
+
+        public static IList<Property> GetInheritedProperties(this ObjectClass cls)
+        {
+            var result = new List<Property>().AsEnumerable();
+            while (cls.BaseObjectClass != null)
+            {
+                result = cls.BaseObjectClass.Properties.Concat(result);
+                cls = cls.BaseObjectClass;
+            }
+            return result.ToList();
         }
     }
 

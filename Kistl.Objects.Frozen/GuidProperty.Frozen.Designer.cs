@@ -177,6 +177,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[255],
 			DataStore[251].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[251].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[88];
 			DataStore[251].PropertyName = @"ExportGuid";
+			DataStore[251].ShowIconInLists = true;
+			DataStore[251].ShowIdInLists = true;
+			DataStore[251].ShowNameInLists = true;
 			DataStore[251].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[251].Seal();
 			DataStore[252].AltText = @"Export Guid";
@@ -192,6 +195,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[254],
 			DataStore[252].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[252].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
 			DataStore[252].PropertyName = @"ExportGuid";
+			DataStore[252].ShowIconInLists = true;
+			DataStore[252].ShowIdInLists = true;
+			DataStore[252].ShowNameInLists = true;
 			DataStore[252].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[252].Seal();
 			DataStore[253].AltText = @"Export Guid";
@@ -207,6 +213,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[256],
 			DataStore[253].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[253].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
 			DataStore[253].PropertyName = @"ExportGuid";
+			DataStore[253].ShowIconInLists = true;
+			DataStore[253].ShowIdInLists = true;
+			DataStore[253].ShowNameInLists = true;
 			DataStore[253].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[253].Seal();
 			DataStore[254].AltText = @"Export Guid";
@@ -222,6 +231,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[257],
 			DataStore[254].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[254].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
 			DataStore[254].PropertyName = @"ExportGuid";
+			DataStore[254].ShowIconInLists = true;
+			DataStore[254].ShowIdInLists = true;
+			DataStore[254].ShowNameInLists = true;
 			DataStore[254].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[254].Seal();
 			DataStore[255].AltText = @"Export Guid";
@@ -237,6 +249,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[258],
 			DataStore[255].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[255].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
 			DataStore[255].PropertyName = @"ExportGuid";
+			DataStore[255].ShowIconInLists = true;
+			DataStore[255].ShowIdInLists = true;
+			DataStore[255].ShowNameInLists = true;
 			DataStore[255].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[255].Seal();
 			DataStore[256].AltText = @"Export Guid";
@@ -252,6 +267,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[259],
 			DataStore[256].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[256].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[69];
 			DataStore[256].PropertyName = @"ExportGuid";
+			DataStore[256].ShowIconInLists = true;
+			DataStore[256].ShowIdInLists = true;
+			DataStore[256].ShowNameInLists = true;
 			DataStore[256].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[256].Seal();
 			DataStore[257].AltText = @"Export Guid";
@@ -267,6 +285,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[260],
 			DataStore[257].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[257].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
 			DataStore[257].PropertyName = @"ExportGuid";
+			DataStore[257].ShowIconInLists = true;
+			DataStore[257].ShowIdInLists = true;
+			DataStore[257].ShowNameInLists = true;
 			DataStore[257].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[257].Seal();
 			DataStore[259].AltText = @"Export Guid";
@@ -282,6 +303,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[261],
 			DataStore[259].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[259].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[259].PropertyName = @"ExportGuid";
+			DataStore[259].ShowIconInLists = true;
+			DataStore[259].ShowIdInLists = true;
+			DataStore[259].ShowNameInLists = true;
 			DataStore[259].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[259].Seal();
 			DataStore[260].AltText = @"Export Guid";
@@ -297,6 +321,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[262],
 			DataStore[260].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[260].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
 			DataStore[260].PropertyName = @"ExportGuid";
+			DataStore[260].ShowIconInLists = true;
+			DataStore[260].ShowIdInLists = true;
+			DataStore[260].ShowNameInLists = true;
 			DataStore[260].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[260].Seal();
 			DataStore[261].AltText = @"Export Guid";
@@ -312,6 +339,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[263],
 			DataStore[261].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[261].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
 			DataStore[261].PropertyName = @"ExportGuid";
+			DataStore[261].ShowIconInLists = true;
+			DataStore[261].ShowIdInLists = true;
+			DataStore[261].ShowNameInLists = true;
 			DataStore[261].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[261].Seal();
 			DataStore[262].AltText = @"Export Guid";
@@ -327,6 +357,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[264],
 			DataStore[262].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[262].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
 			DataStore[262].PropertyName = @"ExportGuid";
+			DataStore[262].ShowIconInLists = true;
+			DataStore[262].ShowIdInLists = true;
+			DataStore[262].ShowNameInLists = true;
 			DataStore[262].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[262].Seal();
 			DataStore[263].AltText = @"Export Guid";
@@ -342,6 +375,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[265],
 			DataStore[263].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[263].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
 			DataStore[263].PropertyName = @"ExportGuid";
+			DataStore[263].ShowIconInLists = true;
+			DataStore[263].ShowIdInLists = true;
+			DataStore[263].ShowNameInLists = true;
 			DataStore[263].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[263].Seal();
 	

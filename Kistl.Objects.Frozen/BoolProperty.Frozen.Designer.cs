@@ -110,7 +110,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, BoolProperty__Implementation__Frozen> DataStore = new Dictionary<int, BoolProperty__Implementation__Frozen>(11);
+		internal new static Dictionary<int, BoolProperty__Implementation__Frozen> DataStore = new Dictionary<int, BoolProperty__Implementation__Frozen>(14);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[11] = 
@@ -157,11 +157,23 @@ namespace Kistl.App.Base
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[220] = 
 			DataStore[220] = new BoolProperty__Implementation__Frozen(220);
 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[264] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[264] = 
+			DataStore[264] = new BoolProperty__Implementation__Frozen(264);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[265] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[265] = 
+			DataStore[265] = new BoolProperty__Implementation__Frozen(265);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[266] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[266] = 
+			DataStore[266] = new BoolProperty__Implementation__Frozen(266);
+
 		}
 
 		internal new static void FillDataStore() {
 			DataStore[11].AltText = null;
-			DataStore[11].CategoryTags = @"DataModel";
+			DataStore[11].CategoryTags = @"DataModel,Summary";
 			DataStore[11].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[143],
 });
@@ -173,10 +185,13 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[143],
 			DataStore[11].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[11].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
 			DataStore[11].PropertyName = @"IsList";
+			DataStore[11].ShowIconInLists = true;
+			DataStore[11].ShowIdInLists = true;
+			DataStore[11].ShowNameInLists = true;
 			DataStore[11].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[11].Seal();
 			DataStore[26].AltText = null;
-			DataStore[26].CategoryTags = @"DataModel";
+			DataStore[26].CategoryTags = @"DataModel,Summary";
 			DataStore[26].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[142],
 });
@@ -188,6 +203,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[142],
 			DataStore[26].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[26].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
 			DataStore[26].PropertyName = @"IsNullable";
+			DataStore[26].ShowIconInLists = true;
+			DataStore[26].ShowIdInLists = true;
+			DataStore[26].ShowNameInLists = true;
 			DataStore[26].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[26].Seal();
 			DataStore[83].AltText = @"Legt fest, ob es sich um ein Client-Assembly handelt.";
@@ -203,6 +221,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[117],
 			DataStore[83].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[83].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
 			DataStore[83].PropertyName = @"IsClientAssembly";
+			DataStore[83].ShowIconInLists = true;
+			DataStore[83].ShowIdInLists = true;
+			DataStore[83].ShowNameInLists = true;
 			DataStore[83].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[83].Seal();
 			DataStore[94].AltText = @"Parameter wird als List<> generiert";
@@ -218,6 +239,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[111],
 			DataStore[94].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[94].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
 			DataStore[94].PropertyName = @"IsList";
+			DataStore[94].ShowIconInLists = true;
+			DataStore[94].ShowIdInLists = true;
+			DataStore[94].ShowNameInLists = true;
 			DataStore[94].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[94].Seal();
 			DataStore[95].AltText = @"Es darf nur ein Return Parameter angegeben werden";
@@ -233,6 +257,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[110],
 			DataStore[95].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[95].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
 			DataStore[95].PropertyName = @"IsReturnParameter";
+			DataStore[95].ShowIconInLists = true;
+			DataStore[95].ShowIdInLists = true;
+			DataStore[95].ShowNameInLists = true;
 			DataStore[95].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[95].Seal();
 			DataStore[116].AltText = @"Whether or not this Control can contain other Controls";
@@ -248,6 +275,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[96],
 			DataStore[116].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[116].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
 			DataStore[116].PropertyName = @"IsContainer";
+			DataStore[116].ShowIconInLists = true;
+			DataStore[116].ShowIdInLists = true;
+			DataStore[116].ShowNameInLists = true;
 			DataStore[116].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[116].Seal();
 			DataStore[119].AltText = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.";
@@ -263,6 +293,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[93],
 			DataStore[119].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[119].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[119].PropertyName = @"IsSimpleObject";
+			DataStore[119].ShowIconInLists = true;
+			DataStore[119].ShowIdInLists = true;
+			DataStore[119].ShowNameInLists = true;
 			DataStore[119].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[119].Seal();
 			DataStore[124].AltText = @"Shows this Method in th GUI";
@@ -278,6 +311,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[92],
 			DataStore[124].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[124].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
 			DataStore[124].PropertyName = @"IsDisplayable";
+			DataStore[124].ShowIconInLists = true;
+			DataStore[124].ShowIdInLists = true;
+			DataStore[124].ShowNameInLists = true;
 			DataStore[124].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[124].Seal();
 			DataStore[174].AltText = @"if true then all Instances appear in FozenContext.";
@@ -293,6 +329,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[202],
 			DataStore[174].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[174].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
 			DataStore[174].PropertyName = @"IsFrozenObject";
+			DataStore[174].ShowIconInLists = true;
+			DataStore[174].ShowIdInLists = true;
+			DataStore[174].ShowNameInLists = true;
 			DataStore[174].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[174].Seal();
 			DataStore[204].AltText = @"Whether or not a list-valued property has a index";
@@ -308,6 +347,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[244],
 			DataStore[204].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[204].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
 			DataStore[204].PropertyName = @"IsIndexed";
+			DataStore[204].ShowIconInLists = true;
+			DataStore[204].ShowIdInLists = true;
+			DataStore[204].ShowNameInLists = true;
 			DataStore[204].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[204].Seal();
 			DataStore[220].AltText = @"Is true, if this RelationEnd persists the order of its elements";
@@ -323,8 +365,62 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[236],
 			DataStore[220].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[220].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
 			DataStore[220].PropertyName = @"HasPersistentOrder";
+			DataStore[220].ShowIconInLists = true;
+			DataStore[220].ShowIdInLists = true;
+			DataStore[220].ShowNameInLists = true;
 			DataStore[220].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[220].Seal();
+			DataStore[264].AltText = null;
+			DataStore[264].CategoryTags = @"GUI";
+			DataStore[264].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[264].Description = null;
+			DataStore[264].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[264].IsIndexed = false;
+			DataStore[264].IsList = false;
+			DataStore[264].IsNullable = false;
+			DataStore[264].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[264].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
+			DataStore[264].PropertyName = @"ShowNameInLists";
+			DataStore[264].ShowIconInLists = true;
+			DataStore[264].ShowIdInLists = true;
+			DataStore[264].ShowNameInLists = true;
+			DataStore[264].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
+			DataStore[264].Seal();
+			DataStore[265].AltText = null;
+			DataStore[265].CategoryTags = @"GUI";
+			DataStore[265].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[265].Description = null;
+			DataStore[265].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[265].IsIndexed = false;
+			DataStore[265].IsList = false;
+			DataStore[265].IsNullable = false;
+			DataStore[265].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[265].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
+			DataStore[265].PropertyName = @"ShowIconInLists";
+			DataStore[265].ShowIconInLists = true;
+			DataStore[265].ShowIdInLists = true;
+			DataStore[265].ShowNameInLists = true;
+			DataStore[265].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[20];
+			DataStore[265].Seal();
+			DataStore[266].AltText = null;
+			DataStore[266].CategoryTags = @"GUI";
+			DataStore[266].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[266].Description = null;
+			DataStore[266].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[266].IsIndexed = false;
+			DataStore[266].IsList = false;
+			DataStore[266].IsNullable = false;
+			DataStore[266].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[266].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
+			DataStore[266].PropertyName = @"ShowIdInLists";
+			DataStore[266].ShowIconInLists = true;
+			DataStore[266].ShowIdInLists = true;
+			DataStore[266].ShowNameInLists = true;
+			DataStore[266].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[20];
+			DataStore[266].Seal();
 	
 		}
 #region Serializer

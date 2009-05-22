@@ -123,7 +123,7 @@ namespace Kistl.Client.Presentables
                     _propertyGroups = new ReadOnlyCollection<PropertyGroupModel>(
                         FetchPropertyList()
                             .SelectMany(p => (p.CategoryTags ?? "Uncategorised")
-                                                .Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                                                .Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
                                                 .Select(s => new { Category = s, Property = p }))
                             .GroupBy(x => x.Category, x => x.Property)
                             .OrderBy(group => group.Key)

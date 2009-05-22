@@ -88,19 +88,20 @@ namespace Kistl.Client.WPF.View
         {
             GridView view = new GridView() { AllowsColumnReorder = true };
             ListView.View = view;
-            if (model.DisplayedColumns.ShowIcon)
+            GridDisplayConfiguration cfg = model.DisplayedColumns;
+            if (cfg.ShowIcon)
             {
                 view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("iconCellTemplate") });
             }
-            if (model.DisplayedColumns.ShowId)
+            if (cfg.ShowId)
             {
                 view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("idCellTemplate"), Header = "ID" });
             }
-            if (model.DisplayedColumns.ShowName)
+            if (cfg.ShowName)
             {
                 view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("nameCellTemplate"), Header = "Name" });
             }
-            foreach (var desc in model.DisplayedColumns.Columns)
+            foreach (var desc in cfg.Columns)
             {
                 var col = new GridViewColumn() { Header = desc.Header };
 

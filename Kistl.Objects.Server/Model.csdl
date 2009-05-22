@@ -626,6 +626,9 @@
                         FromRole="Property"
                         ToRole="ValueModelDescriptor" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <Property Name="ShowNameInLists" Type="Boolean" Nullable="false" />
+    <Property Name="ShowIconInLists" Type="Boolean" Nullable="false" />
+    <Property Name="ShowIdInLists" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Relation">
     <Key>

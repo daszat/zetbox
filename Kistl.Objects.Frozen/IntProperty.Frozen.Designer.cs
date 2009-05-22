@@ -162,6 +162,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 			DataStore[28].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[28].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[9];
 			DataStore[28].PropertyName = @"Length";
+			DataStore[28].ShowIconInLists = true;
+			DataStore[28].ShowIdInLists = true;
+			DataStore[28].ShowNameInLists = true;
 			DataStore[28].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[28].Seal();
 			DataStore[126].AltText = @"test";
@@ -176,6 +179,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[212],
 			DataStore[126].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[126].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
 			DataStore[126].PropertyName = @"MyIntProperty";
+			DataStore[126].ShowIconInLists = true;
+			DataStore[126].ShowIdInLists = true;
+			DataStore[126].ShowNameInLists = true;
 			DataStore[126].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[126].Seal();
 			DataStore[135].AltText = @"The CLR value of this entry";
@@ -191,6 +197,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[89],
 			DataStore[135].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[135].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
 			DataStore[135].PropertyName = @"Value";
+			DataStore[135].ShowIconInLists = true;
+			DataStore[135].ShowIdInLists = true;
+			DataStore[135].ShowNameInLists = true;
 			DataStore[135].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[135].Seal();
 			DataStore[168].AltText = @"The biggest value accepted by this constraint";
@@ -206,6 +215,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[76],
 			DataStore[168].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[168].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[71];
 			DataStore[168].PropertyName = @"Max";
+			DataStore[168].ShowIconInLists = true;
+			DataStore[168].ShowIdInLists = true;
+			DataStore[168].ShowNameInLists = true;
 			DataStore[168].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[168].Seal();
 			DataStore[169].AltText = @"The smallest value accepted by this constraint";
@@ -221,6 +233,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[75],
 			DataStore[169].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[169].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[71];
 			DataStore[169].PropertyName = @"Min";
+			DataStore[169].ShowIconInLists = true;
+			DataStore[169].ShowIdInLists = true;
+			DataStore[169].ShowNameInLists = true;
 			DataStore[169].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[169].Seal();
 			DataStore[172].AltText = @"The maximal length of this StringProperty";
@@ -237,6 +252,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[151],
 			DataStore[172].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[172].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[73];
 			DataStore[172].PropertyName = @"MaxLength";
+			DataStore[172].ShowIconInLists = true;
+			DataStore[172].ShowIdInLists = true;
+			DataStore[172].ShowNameInLists = true;
 			DataStore[172].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[172].Seal();
 			DataStore[173].AltText = @"The minimal length of this StringProperty";
@@ -253,6 +271,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[150],
 			DataStore[173].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[173].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[73];
 			DataStore[173].PropertyName = @"MinLength";
+			DataStore[173].ShowIconInLists = true;
+			DataStore[173].ShowIdInLists = true;
+			DataStore[173].ShowNameInLists = true;
 			DataStore[173].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[173].Seal();
 			DataStore[217].AltText = @"Which RelationEndRole this End has";
@@ -269,6 +290,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[238],
 			DataStore[217].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[217].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
 			DataStore[217].PropertyName = @"Role";
+			DataStore[217].ShowIconInLists = true;
+			DataStore[217].ShowIdInLists = true;
+			DataStore[217].ShowNameInLists = true;
 			DataStore[217].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[217].Seal();
 	

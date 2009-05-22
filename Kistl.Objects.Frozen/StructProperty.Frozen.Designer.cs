@@ -175,6 +175,9 @@ namespace Kistl.App.Base
 			DataStore[131].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[131].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
 			DataStore[131].PropertyName = @"PhoneNumberMobile";
+			DataStore[131].ShowIconInLists = true;
+			DataStore[131].ShowIdInLists = true;
+			DataStore[131].ShowNameInLists = true;
 			DataStore[131].ValueModelDescriptor = null;
 			DataStore[131].StructDefinition = Kistl.App.Base.Struct__Implementation__Frozen.DataStore[63];
 			DataStore[131].Seal();
@@ -190,6 +193,9 @@ namespace Kistl.App.Base
 			DataStore[132].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[132].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
 			DataStore[132].PropertyName = @"PhoneNumberOffice";
+			DataStore[132].ShowIconInLists = true;
+			DataStore[132].ShowIdInLists = true;
+			DataStore[132].ShowNameInLists = true;
 			DataStore[132].ValueModelDescriptor = null;
 			DataStore[132].StructDefinition = Kistl.App.Base.Struct__Implementation__Frozen.DataStore[63];
 			DataStore[132].Seal();

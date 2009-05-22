@@ -160,6 +160,9 @@ namespace Kistl.App.Base
 			DataStore[16].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[16].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
 			DataStore[16].PropertyName = @"DatumVon";
+			DataStore[16].ShowIconInLists = true;
+			DataStore[16].ShowIdInLists = true;
+			DataStore[16].ShowNameInLists = true;
 			DataStore[16].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[16].Seal();
 			DataStore[17].AltText = @"Enddatum";
@@ -174,6 +177,9 @@ namespace Kistl.App.Base
 			DataStore[17].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[17].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
 			DataStore[17].PropertyName = @"DatumBis";
+			DataStore[17].ShowIconInLists = true;
+			DataStore[17].ShowIdInLists = true;
+			DataStore[17].ShowNameInLists = true;
 			DataStore[17].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[17].Seal();
 			DataStore[38].AltText = @"Herzlichen Glückwunsch zum Geburtstag";
@@ -188,6 +194,9 @@ namespace Kistl.App.Base
 			DataStore[38].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[38].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
 			DataStore[38].PropertyName = @"Geburtstag";
+			DataStore[38].ShowIconInLists = true;
+			DataStore[38].ShowIdInLists = true;
+			DataStore[38].ShowNameInLists = true;
 			DataStore[38].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[38].Seal();
 			DataStore[133].AltText = @"Happy Birthday!";
@@ -202,6 +211,9 @@ namespace Kistl.App.Base
 			DataStore[133].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[133].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
 			DataStore[133].PropertyName = @"Birthday";
+			DataStore[133].ShowIconInLists = true;
+			DataStore[133].ShowIdInLists = true;
+			DataStore[133].ShowNameInLists = true;
 			DataStore[133].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[133].Seal();
 			DataStore[238].AltText = null;
@@ -217,6 +229,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
 			DataStore[238].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[238].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
 			DataStore[238].PropertyName = @"From";
+			DataStore[238].ShowIconInLists = true;
+			DataStore[238].ShowIdInLists = true;
+			DataStore[238].ShowNameInLists = true;
 			DataStore[238].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[238].Seal();
 			DataStore[239].AltText = null;
@@ -231,6 +246,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[223],
 			DataStore[239].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[239].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
 			DataStore[239].PropertyName = @"Thru";
+			DataStore[239].ShowIconInLists = true;
+			DataStore[239].ShowIdInLists = true;
+			DataStore[239].ShowNameInLists = true;
 			DataStore[239].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[239].Seal();
 			DataStore[247].AltText = null;
@@ -246,6 +264,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[250],
 			DataStore[247].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[247].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
 			DataStore[247].PropertyName = @"From";
+			DataStore[247].ShowIconInLists = true;
+			DataStore[247].ShowIdInLists = true;
+			DataStore[247].ShowNameInLists = true;
 			DataStore[247].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[247].Seal();
 			DataStore[248].AltText = null;
@@ -260,6 +281,9 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[250],
 			DataStore[248].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
 			DataStore[248].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
 			DataStore[248].PropertyName = @"Thru";
+			DataStore[248].ShowIconInLists = true;
+			DataStore[248].ShowIdInLists = true;
+			DataStore[248].ShowNameInLists = true;
 			DataStore[248].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[248].Seal();
 	
