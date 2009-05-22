@@ -608,9 +608,6 @@
     <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
     <Property Name="fk_ValueModelDescriptor" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ShowNameInLists" Type="bit" Nullable="false" />
-    <Property Name="ShowIconInLists" Type="bit" Nullable="false" />
-    <Property Name="ShowIdInLists" Type="bit" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ValueTypeProperty">
@@ -765,6 +762,9 @@
     <Property Name="fk_DefaultIcon" Type="int" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ShowNameInLists" Type="bit" Nullable="false" />
+    <Property Name="ShowIconInLists" Type="bit" Nullable="false" />
+    <Property Name="ShowIdInLists" Type="bit" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="BaseParameter">

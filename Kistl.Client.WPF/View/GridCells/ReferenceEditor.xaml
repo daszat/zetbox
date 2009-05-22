@@ -1,0 +1,7 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.GridCells.ReferenceEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ComboBox ItemsSource="{Binding Domain, Mode=OneWay}"
+              ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+              SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+</UserControl>

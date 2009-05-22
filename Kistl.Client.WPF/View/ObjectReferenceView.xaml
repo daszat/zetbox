@@ -4,8 +4,7 @@
                    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
                    xmlns:view="clr-namespace:Kistl.Client.WPF.View"
                    xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-                   ToolTip="{Binding ToolTip, Mode=OneWay}"
-                   >
+                   ToolTip="{Binding ToolTip, Mode=OneWay}">
 
     <view:PropertyView.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -18,11 +17,8 @@
     <DockPanel>
         <CheckBox DockPanel.Dock="Left"
                   VerticalAlignment="Center"
+                  Visibility="{Binding AllowNullInput, Converter={StaticResource BooleanToVisibilityConverter}}"
                   IsChecked="{Binding HasValue, Mode=TwoWay}" />
-
-        <Button DockPanel.Dock="Right"
-                Visibility="{Binding AllowNullInput, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Click="ClearValueHandler">Clear Value</Button>
 
         <Button DockPanel.Dock="Right"
                 Click="OpenSelection"

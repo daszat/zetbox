@@ -448,87 +448,6 @@ namespace Kistl.App.Base
         private string _PropertyName;
 
         /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual bool ShowIconInLists
-        {
-            get
-            {
-                return _ShowIconInLists;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ShowIconInLists != value)
-                {
-					var __oldValue = _ShowIconInLists;
-                    NotifyPropertyChanging("ShowIconInLists", __oldValue, value);
-                    _ShowIconInLists = value;
-                    NotifyPropertyChanged("ShowIconInLists", __oldValue, value);
-                }
-            }
-        }
-        private bool _ShowIconInLists;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual bool ShowIdInLists
-        {
-            get
-            {
-                return _ShowIdInLists;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ShowIdInLists != value)
-                {
-					var __oldValue = _ShowIdInLists;
-                    NotifyPropertyChanging("ShowIdInLists", __oldValue, value);
-                    _ShowIdInLists = value;
-                    NotifyPropertyChanged("ShowIdInLists", __oldValue, value);
-                }
-            }
-        }
-        private bool _ShowIdInLists;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public virtual bool ShowNameInLists
-        {
-            get
-            {
-                return _ShowNameInLists;
-            }
-            set
-            {
-                if (IsReadonly) throw new ReadOnlyObjectException();
-                if (_ShowNameInLists != value)
-                {
-					var __oldValue = _ShowNameInLists;
-                    NotifyPropertyChanging("ShowNameInLists", __oldValue, value);
-                    _ShowNameInLists = value;
-                    NotifyPropertyChanged("ShowNameInLists", __oldValue, value);
-                }
-            }
-        }
-        private bool _ShowNameInLists;
-
-        /// <summary>
         /// The PresentableModel to use for values of this Property
         /// </summary>
     /*
@@ -657,9 +576,6 @@ namespace Kistl.App.Base
 			me.IsList = other.IsList;
 			me.IsNullable = other.IsNullable;
 			me.PropertyName = other.PropertyName;
-			me.ShowIconInLists = other.ShowIconInLists;
-			me.ShowIdInLists = other.ShowIdInLists;
-			me.ShowNameInLists = other.ShowNameInLists;
 			this._fk_Module = otherImpl._fk_Module;
 			this._fk_ObjectClass = otherImpl._fk_ObjectClass;
 			this._fk_ValueModelDescriptor = otherImpl._fk_ValueModelDescriptor;
@@ -798,33 +714,6 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
-				case "ShowIconInLists":
-				{
-					var errors = Context.Find<Kistl.App.Base.Property>(265).Constraints
-						.Where(c => !c.IsValid(this, this.ShowIconInLists))
-						.Select(c => c.GetErrorText(this, this.ShowIconInLists))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "ShowIdInLists":
-				{
-					var errors = Context.Find<Kistl.App.Base.Property>(266).Constraints
-						.Where(c => !c.IsValid(this, this.ShowIdInLists))
-						.Select(c => c.GetErrorText(this, this.ShowIdInLists))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "ShowNameInLists":
-				{
-					var errors = Context.Find<Kistl.App.Base.Property>(264).Constraints
-						.Where(c => !c.IsValid(this, this.ShowNameInLists))
-						.Select(c => c.GetErrorText(this, this.ShowNameInLists))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "ValueModelDescriptor":
 				{
 					var errors = Context.Find<Kistl.App.Base.Property>(236).Constraints
@@ -881,9 +770,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._PropertyName, binStream);
-            BinarySerializer.ToStream(this._ShowIconInLists, binStream);
-            BinarySerializer.ToStream(this._ShowIdInLists, binStream);
-            BinarySerializer.ToStream(this._ShowNameInLists, binStream);
             BinarySerializer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null, binStream);
         }
 
@@ -901,9 +787,6 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
             BinarySerializer.FromStream(out this._PropertyName, binStream);
-            BinarySerializer.FromStream(out this._ShowIconInLists, binStream);
-            BinarySerializer.FromStream(out this._ShowIdInLists, binStream);
-            BinarySerializer.FromStream(out this._ShowNameInLists, binStream);
             BinarySerializer.FromStream(out this._fk_ValueModelDescriptor, binStream);
         }
 
@@ -921,9 +804,6 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
             XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, xml, "ObjectClass", "Kistl.App.Base");
             XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._ShowIconInLists, xml, "ShowIconInLists", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowIdInLists, xml, "ShowIdInLists", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ShowNameInLists, xml, "ShowNameInLists", "Kistl.App.GUI");
             XmlStreamer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null, xml, "ValueModelDescriptor", "Kistl.App.GUI");
         }
 
@@ -941,9 +821,6 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ShowIconInLists, xml, "ShowIconInLists", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowIdInLists, xml, "ShowIdInLists", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowNameInLists, xml, "ShowNameInLists", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_ValueModelDescriptor, xml, "ValueModelDescriptor", "Kistl.App.GUI");
         }
 
@@ -969,12 +846,6 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
-	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ShowIconInLists, xml, "ShowIconInLists", "Kistl.App.GUI");
-	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ShowIdInLists, xml, "ShowIdInLists", "Kistl.App.GUI");
-	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ShowNameInLists, xml, "ShowNameInLists", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -989,9 +860,6 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ShowIconInLists, xml, "ShowIconInLists", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowIdInLists, xml, "ShowIdInLists", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ShowNameInLists, xml, "ShowNameInLists", "Kistl.App.GUI");
         }
 
 #endregion

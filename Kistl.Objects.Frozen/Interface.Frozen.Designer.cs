@@ -140,6 +140,9 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[107],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[108],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[111],
 });
+			DataStore[48].ShowIconInLists = true;
+			DataStore[48].ShowIdInLists = true;
+			DataStore[48].ShowNameInLists = true;
 			DataStore[48].Seal();
 			DataStore[52].ClassName = @"IRenderer";
 			DataStore[52].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[2];
@@ -156,6 +159,9 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[98],
 			DataStore[52].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(1) {
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[113],
 });
+			DataStore[52].ShowIconInLists = true;
+			DataStore[52].ShowIdInLists = true;
+			DataStore[52].ShowNameInLists = true;
 			DataStore[52].Seal();
 			DataStore[88].ClassName = @"IExportable";
 			DataStore[88].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[10];
@@ -169,6 +175,9 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[113],
 			DataStore[88].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(1) {
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[251],
 });
+			DataStore[88].ShowIconInLists = true;
+			DataStore[88].ShowIdInLists = true;
+			DataStore[88].ShowNameInLists = true;
 			DataStore[88].Seal();
 	
 		}

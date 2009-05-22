@@ -182,6 +182,9 @@ namespace Kistl.App.Base
 			DataStore[50].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[50].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
 });
+			DataStore[50].ShowIconInLists = true;
+			DataStore[50].ShowIdInLists = true;
+			DataStore[50].ShowNameInLists = true;
 			DataStore[50].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(2) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[2],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[3],
@@ -198,6 +201,9 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[3],
 			DataStore[53].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[53].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
 });
+			DataStore[53].ShowIconInLists = true;
+			DataStore[53].ShowIdInLists = true;
+			DataStore[53].ShowNameInLists = true;
 			DataStore[53].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(4) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[5],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[6],
@@ -216,6 +222,9 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[77],
 			DataStore[55].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[55].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
 });
+			DataStore[55].ShowIconInLists = true;
+			DataStore[55].ShowIdInLists = true;
+			DataStore[55].ShowNameInLists = true;
 			DataStore[55].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(28) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[40],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[41],
@@ -258,6 +267,9 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[79],
 			DataStore[78].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[78].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
 });
+			DataStore[78].ShowIconInLists = true;
+			DataStore[78].ShowIdInLists = true;
+			DataStore[78].ShowNameInLists = true;
 			DataStore[78].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(4) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[60],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[66],
@@ -276,6 +288,9 @@ Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[68],
 			DataStore[81].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[81].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
 });
+			DataStore[81].ShowIconInLists = true;
+			DataStore[81].ShowIdInLists = true;
+			DataStore[81].ShowNameInLists = true;
 			DataStore[81].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(3) {
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[63],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[64],

@@ -69,7 +69,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                GridDisplayConfiguration result = new GridDisplayConfiguration() { ShowIcon = Property.ShowIconInLists, ShowId = Property.ShowIdInLists, ShowName = Property.ShowNameInLists };
+                GridDisplayConfiguration result = new GridDisplayConfiguration() { ShowIcon = ReferencedClass.ShowIconInLists, ShowId = ReferencedClass.ShowIdInLists, ShowName = ReferencedClass.ShowNameInLists };
                 var group = this.ReferencedClass.GetAllProperties().Where(p => (p.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
                 if (group.Count() == 0)
                 {

@@ -132,6 +132,9 @@ namespace Kistl.App.Base
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[127],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[128],
 });
+			DataStore[63].ShowIconInLists = true;
+			DataStore[63].ShowIdInLists = true;
+			DataStore[63].ShowNameInLists = true;
 			DataStore[63].Seal();
 	
 		}

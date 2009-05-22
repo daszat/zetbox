@@ -57,6 +57,27 @@ namespace Kistl.App.Base
 
         ICollection<Kistl.App.Base.Property> Properties { get; }
         /// <summary>
+        /// 
+        /// </summary>
+		bool ShowIconInLists {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		bool ShowIdInLists {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		bool ShowNameInLists {
+			get;
+			set;
+		}
+        /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
 

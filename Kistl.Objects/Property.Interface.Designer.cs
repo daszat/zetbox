@@ -82,27 +82,6 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// 
-        /// </summary>
-		bool ShowIconInLists {
-			get;
-			set;
-		}
-        /// <summary>
-        /// 
-        /// </summary>
-		bool ShowIdInLists {
-			get;
-			set;
-		}
-        /// <summary>
-        /// 
-        /// </summary>
-		bool ShowNameInLists {
-			get;
-			set;
-		}
-        /// <summary>
         /// The PresentableModel to use for values of this Property
         /// </summary>
 		Kistl.App.GUI.PresentableModelDescriptor ValueModelDescriptor {

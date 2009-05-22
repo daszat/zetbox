@@ -737,7 +737,7 @@ namespace Kistl.App.GUI
 			DataStore[69].Toolkit = (Toolkit)0;
 			DataStore[69].VisualType = (VisualType)27;
 			DataStore[69].Seal();
-			DataStore[70].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[70].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[573];
 			DataStore[70].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[70].Toolkit = (Toolkit)0;
 			DataStore[70].VisualType = (VisualType)28;
@@ -757,7 +757,7 @@ namespace Kistl.App.GUI
 			DataStore[73].Toolkit = (Toolkit)0;
 			DataStore[73].VisualType = (VisualType)28;
 			DataStore[73].Seal();
-			DataStore[74].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[74].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[574];
 			DataStore[74].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
 			DataStore[74].Toolkit = (Toolkit)0;
 			DataStore[74].VisualType = (VisualType)28;
@@ -772,12 +772,12 @@ namespace Kistl.App.GUI
 			DataStore[76].Toolkit = (Toolkit)0;
 			DataStore[76].VisualType = (VisualType)28;
 			DataStore[76].Seal();
-			DataStore[77].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[77].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[573];
 			DataStore[77].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[11];
 			DataStore[77].Toolkit = (Toolkit)0;
 			DataStore[77].VisualType = (VisualType)28;
 			DataStore[77].Seal();
-			DataStore[78].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
+			DataStore[78].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[573];
 			DataStore[78].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[78].Toolkit = (Toolkit)0;
 			DataStore[78].VisualType = (VisualType)28;

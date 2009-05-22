@@ -33,12 +33,6 @@ namespace Kistl.Client.WPF.View
             model.OpenReference();
         }
 
-        private void ClearValueHandler(object sender, RoutedEventArgs e)
-        {
-            var mdl = (IClearableValue)DataContext;
-            mdl.ClearValue();
-        }
-
         private void CreateNewHandler(object sender, RoutedEventArgs e)
         {
             var model = (ObjectReferenceModel)DataContext;

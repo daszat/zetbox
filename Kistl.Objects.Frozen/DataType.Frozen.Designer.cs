@@ -218,6 +218,78 @@ namespace Kistl.App.Base
         private ReadOnlyCollection<Kistl.App.Base.Property> _Properties;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        public virtual bool ShowIconInLists
+        {
+            get
+            {
+                return _ShowIconInLists;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ShowIconInLists != value)
+                {
+					var __oldValue = _ShowIconInLists;
+                    NotifyPropertyChanging("ShowIconInLists", __oldValue, value);
+                    _ShowIconInLists = value;
+                    NotifyPropertyChanged("ShowIconInLists", __oldValue, value);
+                }
+            }
+        }
+        private bool _ShowIconInLists;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        public virtual bool ShowIdInLists
+        {
+            get
+            {
+                return _ShowIdInLists;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ShowIdInLists != value)
+                {
+					var __oldValue = _ShowIdInLists;
+                    NotifyPropertyChanging("ShowIdInLists", __oldValue, value);
+                    _ShowIdInLists = value;
+                    NotifyPropertyChanged("ShowIdInLists", __oldValue, value);
+                }
+            }
+        }
+        private bool _ShowIdInLists;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        public virtual bool ShowNameInLists
+        {
+            get
+            {
+                return _ShowNameInLists;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ShowNameInLists != value)
+                {
+					var __oldValue = _ShowNameInLists;
+                    NotifyPropertyChanging("ShowNameInLists", __oldValue, value);
+                    _ShowNameInLists = value;
+                    NotifyPropertyChanged("ShowNameInLists", __oldValue, value);
+                }
+            }
+        }
+        private bool _ShowNameInLists;
+
+        /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
 
@@ -368,6 +440,33 @@ namespace Kistl.App.Base
 					var errors = Context.Find<Kistl.App.Base.Property>(7).Constraints
 						.Where(c => !c.IsValid(this, this.Properties))
 						.Select(c => c.GetErrorText(this, this.Properties))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ShowIconInLists":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(265).Constraints
+						.Where(c => !c.IsValid(this, this.ShowIconInLists))
+						.Select(c => c.GetErrorText(this, this.ShowIconInLists))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ShowIdInLists":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(266).Constraints
+						.Where(c => !c.IsValid(this, this.ShowIdInLists))
+						.Select(c => c.GetErrorText(this, this.ShowIdInLists))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ShowNameInLists":
+				{
+					var errors = Context.Find<Kistl.App.Base.Property>(264).Constraints
+						.Where(c => !c.IsValid(this, this.ShowNameInLists))
+						.Select(c => c.GetErrorText(this, this.ShowNameInLists))
 						.ToArray();
 					
 					return String.Join("; ", errors);
