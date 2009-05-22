@@ -54,6 +54,7 @@
     <Compile Include="CLRObjectParameter.Interface.Designer.cs" />
     <Compile Include="Constraint.Interface.Designer.cs" />
     <Compile Include="ControlInfo.Interface.Designer.cs" />
+    <Compile Include="CurrentSchema.Interface.Designer.cs" />
     <Compile Include="DataType.Interface.Designer.cs" />
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
     <Compile Include="DateTimeProperty.Interface.Designer.cs" />

@@ -151,7 +151,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(53);
+		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(54);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[1] = 
@@ -365,6 +365,10 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[246] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[246] = 
 			DataStore[246] = new StringProperty__Implementation__Frozen(246);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[267] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[267] = 
+			DataStore[267] = new StringProperty__Implementation__Frozen(267);
 
 		}
 
@@ -819,7 +823,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[169],
 			DataStore[77].ShowIconInLists = true;
 			DataStore[77].ShowIdInLists = true;
 			DataStore[77].ShowNameInLists = true;
-			DataStore[77].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
+			DataStore[77].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[8];
 			DataStore[77].Length = 200;
 			DataStore[77].Seal();
 			DataStore[85].AltText = @"EMails des Kunden - können mehrere sein";
@@ -1314,7 +1318,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[239],
 			DataStore[216].Length = 200;
 			DataStore[216].Seal();
 			DataStore[225].AltText = null;
-			DataStore[225].CategoryTags = @"Description GUI";
+			DataStore[225].CategoryTags = @"Description, GUI, Summary";
 			DataStore[225].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[219],
 });
@@ -1412,6 +1416,24 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[251],
 			DataStore[246].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
 			DataStore[246].Length = 4000;
 			DataStore[246].Seal();
+			DataStore[267].AltText = null;
+			DataStore[267].CategoryTags = @"Main";
+			DataStore[267].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[267].Description = @"XML descriptor of the current schema";
+			DataStore[267].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[267].IsIndexed = false;
+			DataStore[267].IsList = false;
+			DataStore[267].IsNullable = false;
+			DataStore[267].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[267].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[90];
+			DataStore[267].PropertyName = @"Schema";
+			DataStore[267].ShowIconInLists = false;
+			DataStore[267].ShowIdInLists = false;
+			DataStore[267].ShowNameInLists = false;
+			DataStore[267].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
+			DataStore[267].Length = 4000;
+			DataStore[267].Seal();
 	
 		}
 #region Serializer

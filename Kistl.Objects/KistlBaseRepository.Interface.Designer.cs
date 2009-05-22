@@ -346,6 +346,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all CurrentSchema</summary>
+		/// Describes the currently loaded physical database schema
+		public IQueryable<CurrentSchema> CurrentSchema
+		{ 
+			get
+			{
+				return Context.GetQuery<CurrentSchema>();
+			}
+		}
+		
 		/// <summary>List of all Constraint</summary>
 		/// 
 		public IQueryable<Constraint> Constraints

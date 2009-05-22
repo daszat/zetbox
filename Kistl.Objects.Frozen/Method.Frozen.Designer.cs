@@ -360,7 +360,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, Method__Implementation__Frozen> DataStore = new Dictionary<int, Method__Implementation__Frozen>(122);
+		internal static Dictionary<int, Method__Implementation__Frozen> DataStore = new Dictionary<int, Method__Implementation__Frozen>(125);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new Method__Implementation__Frozen(1);
@@ -606,6 +606,12 @@ namespace Kistl.App.Base
 			DataStore[170] = new Method__Implementation__Frozen(170);
 
 			DataStore[171] = new Method__Implementation__Frozen(171);
+
+			DataStore[172] = new Method__Implementation__Frozen(172);
+
+			DataStore[173] = new Method__Implementation__Frozen(173);
+
+			DataStore[174] = new Method__Implementation__Frozen(174);
 
 		}
 
@@ -1974,7 +1980,8 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[113],
 			DataStore[162].Description = @"";
 			DataStore[162].ExportGuid = new Guid("d6a377ca-66e6-473d-a7e9-b0cdead60a4b");
 			DataStore[162].IsDisplayable = false;
-			DataStore[162].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[162].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[124],
 });
 			DataStore[162].MethodName = @"ToString";
 			DataStore[162].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
@@ -2082,6 +2089,39 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[120],
 			DataStore[171].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[171].Seal();
+			DataStore[172].Description = null;
+			DataStore[172].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[172].IsDisplayable = false;
+			DataStore[172].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[172].MethodName = @"ToString";
+			DataStore[172].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[172].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[90];
+			DataStore[172].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[172].Seal();
+			DataStore[173].Description = null;
+			DataStore[173].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[173].IsDisplayable = false;
+			DataStore[173].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[173].MethodName = @"PreSave";
+			DataStore[173].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[173].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[90];
+			DataStore[173].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[173].Seal();
+			DataStore[174].Description = null;
+			DataStore[174].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[174].IsDisplayable = false;
+			DataStore[174].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[174].MethodName = @"PostSave";
+			DataStore[174].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[174].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[90];
+			DataStore[174].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[174].Seal();
 	
 		}
 #region Serializer

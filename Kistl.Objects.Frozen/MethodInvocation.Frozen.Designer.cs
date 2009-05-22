@@ -274,7 +274,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(97);
+		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(98);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new MethodInvocation__Implementation__Frozen(1);
@@ -470,6 +470,8 @@ namespace Kistl.App.Base
 			DataStore[121] = new MethodInvocation__Implementation__Frozen(121);
 
 			DataStore[122] = new MethodInvocation__Implementation__Frozen(122);
+
+			DataStore[124] = new MethodInvocation__Implementation__Frozen(124);
 
 		}
 
@@ -1153,6 +1155,13 @@ namespace Kistl.App.Base
 			DataStore[122].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
 			DataStore[122].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[122].Seal();
+			DataStore[124].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[124].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
+			DataStore[124].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
+			DataStore[124].MemberName = @"OnToString_ViewDescriptor";
+			DataStore[124].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[162];
+			DataStore[124].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[124].Seal();
 	
 		}
 #region Serializer

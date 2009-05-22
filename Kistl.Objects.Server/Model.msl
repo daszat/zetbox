@@ -476,6 +476,15 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CurrentSchema">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CurrentSchema)">
+	    <MappingFragment StoreEntitySet="CurrentSchema">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Schema" ColumnName="Schema" />
+<ScalarProperty Name="Version" ColumnName="Version" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
 
 
     <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->

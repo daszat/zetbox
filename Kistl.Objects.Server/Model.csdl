@@ -9,6 +9,7 @@
     <EntitySet Name="BaseParameter" EntityType="Model.BaseParameter" />
     <EntitySet Name="Constraint" EntityType="Model.Constraint" />
     <EntitySet Name="ControlInfo" EntityType="Model.ControlInfo" />
+    <EntitySet Name="CurrentSchema" EntityType="Model.CurrentSchema" />
     <EntitySet Name="DataType" EntityType="Model.DataType" />
     <EntitySet Name="EnumerationEntry" EntityType="Model.EnumerationEntry" />
     <EntitySet Name="Icon" EntityType="Model.Icon" />
@@ -376,6 +377,14 @@
     <Property Name="IsContainer" Type="Boolean" Nullable="false" />
     <Property Name="Platform__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="ControlType__Implementation__" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CurrentSchema">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Schema" Type="String" Nullable="false" MaxLength="4000" />
+    <Property Name="Version" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="DataType">
     <Key>

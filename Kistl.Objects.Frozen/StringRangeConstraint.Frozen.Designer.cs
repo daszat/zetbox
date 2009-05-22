@@ -184,7 +184,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, StringRangeConstraint__Implementation__Frozen> DataStore = new Dictionary<int, StringRangeConstraint__Implementation__Frozen>(54);
+		internal new static Dictionary<int, StringRangeConstraint__Implementation__Frozen> DataStore = new Dictionary<int, StringRangeConstraint__Implementation__Frozen>(53);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[152] = 
@@ -231,9 +231,6 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[166] = 
 			DataStore[166] = new StringRangeConstraint__Implementation__Frozen(166);
-
-			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[167] = 
-			DataStore[167] = new StringRangeConstraint__Implementation__Frozen(167);
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[168] = 
 			DataStore[168] = new StringRangeConstraint__Implementation__Frozen(168);
@@ -442,12 +439,6 @@ namespace Kistl.App.Base
 			DataStore[166].MaxLength = 100;
 			DataStore[166].MinLength = 0;
 			DataStore[166].Seal();
-			DataStore[167].ConstrainedProperty = null;
-			DataStore[167].ExportGuid = new Guid("99fc721e-f4ff-4b3a-ab71-7581c3ba9325");
-			DataStore[167].Reason = null;
-			DataStore[167].MaxLength = 200;
-			DataStore[167].MinLength = 0;
-			DataStore[167].Seal();
 			DataStore[168].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[85];
 			DataStore[168].ExportGuid = new Guid("d23346da-59c9-4011-bc17-59f9f925fa78");
 			DataStore[168].Reason = null;

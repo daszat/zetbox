@@ -402,7 +402,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectClass__Implementation__Frozen> DataStore = new Dictionary<int, ObjectClass__Implementation__Frozen>(59);
+		internal new static Dictionary<int, ObjectClass__Implementation__Frozen> DataStore = new Dictionary<int, ObjectClass__Implementation__Frozen>(60);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2] = 
@@ -581,6 +581,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[89] = 
 			DataStore[89] = new ObjectClass__Implementation__Frozen(89);
+
+			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[90] = 
+			DataStore[90] = new ObjectClass__Implementation__Frozen(90);
 
 		}
 
@@ -2178,7 +2181,8 @@ Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
 			DataStore[83].DefaultIcon = null;
 			DataStore[83].Description = @"";
 			DataStore[83].ExportGuid = new Guid("ffda4604-1536-43b6-b951-f8753d5092ca");
-			DataStore[83].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[83].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[124],
 });
 			DataStore[83].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[160],
@@ -2314,6 +2318,33 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[122],
 });
 			DataStore[89].TableName = @"GuidProperties";
 			DataStore[89].Seal();
+			DataStore[90].ClassName = @"CurrentSchema";
+			DataStore[90].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[13];
+			DataStore[90].Description = @"Describes the currently loaded physical database schema";
+			DataStore[90].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[90].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[90].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[172],
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[173],
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[174],
+});
+			DataStore[90].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[90].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(2) {
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[267],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[268],
+});
+			DataStore[90].BaseObjectClass = null;
+			DataStore[90].DefaultModel = null;
+			DataStore[90].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
+			DataStore[90].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
+});
+			DataStore[90].IsFrozenObject = false;
+			DataStore[90].IsSimpleObject = false;
+			DataStore[90].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(0) {
+});
+			DataStore[90].TableName = @"CurrentSchema";
+			DataStore[90].Seal();
 	
 		}
 #region Serializer

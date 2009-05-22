@@ -71,6 +71,7 @@
     <Compile Include="CLRObjectParameter.Server.Designer.cs" />
     <Compile Include="Constraint.Server.Designer.cs" />
     <Compile Include="ControlInfo.Server.Designer.cs" />
+    <Compile Include="CurrentSchema.Server.Designer.cs" />
     <Compile Include="DataType.Server.Designer.cs" />
     <Compile Include="DateTimeParameter.Server.Designer.cs" />
     <Compile Include="DateTimeProperty.Server.Designer.cs" />

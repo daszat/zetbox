@@ -110,7 +110,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, IntProperty__Implementation__Frozen> DataStore = new Dictionary<int, IntProperty__Implementation__Frozen>(8);
+		internal new static Dictionary<int, IntProperty__Implementation__Frozen> DataStore = new Dictionary<int, IntProperty__Implementation__Frozen>(9);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[28] = 
@@ -144,6 +144,10 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[217] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[217] = 
 			DataStore[217] = new IntProperty__Implementation__Frozen(217);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[268] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[268] = 
+			DataStore[268] = new IntProperty__Implementation__Frozen(268);
 
 		}
 
@@ -295,6 +299,23 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[238],
 			DataStore[217].ShowNameInLists = true;
 			DataStore[217].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[217].Seal();
+			DataStore[268].AltText = null;
+			DataStore[268].CategoryTags = @"Summary";
+			DataStore[268].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[268].Description = @"Version number of this schema";
+			DataStore[268].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[268].IsIndexed = false;
+			DataStore[268].IsList = false;
+			DataStore[268].IsNullable = false;
+			DataStore[268].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[268].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[90];
+			DataStore[268].PropertyName = @"Version";
+			DataStore[268].ShowIconInLists = false;
+			DataStore[268].ShowIdInLists = false;
+			DataStore[268].ShowNameInLists = false;
+			DataStore[268].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[268].Seal();
 	
 		}
 #region Serializer

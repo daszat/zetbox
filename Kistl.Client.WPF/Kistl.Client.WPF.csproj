@@ -103,7 +103,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GridCells\BoolValue.xaml">
+    <Page Include="View\GridCells\BoolEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GridCells\StringEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,8 +228,11 @@
     <Compile Include="View\ActionView.xaml.cs">
       <DependentUpon>ActionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GridCells\BoolValue.xaml.cs">
-      <DependentUpon>BoolValue.xaml</DependentUpon>
+    <Compile Include="View\GridCells\BoolEditor.xaml.cs">
+      <DependentUpon>BoolEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GridCells\StringEditor.xaml.cs">
+      <DependentUpon>StringEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GridCells\StringValue.xaml.cs">
       <DependentUpon>StringValue.xaml</DependentUpon>

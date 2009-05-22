@@ -402,7 +402,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[236],
 			DataStore[265].ShowIconInLists = true;
 			DataStore[265].ShowIdInLists = true;
 			DataStore[265].ShowNameInLists = true;
-			DataStore[265].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[20];
+			DataStore[265].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[265].Seal();
 			DataStore[266].AltText = null;
 			DataStore[266].CategoryTags = @"GUI";
@@ -419,7 +419,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[236],
 			DataStore[266].ShowIconInLists = true;
 			DataStore[266].ShowIdInLists = true;
 			DataStore[266].ShowNameInLists = true;
-			DataStore[266].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[20];
+			DataStore[266].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[266].Seal();
 	
 		}

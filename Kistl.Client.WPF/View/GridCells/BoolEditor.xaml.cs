@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Kistl.Client.WPF.View.GridCells
 {
     /// <summary>
-    /// Interaction logic for BoolValue.xaml
+    /// Interaction logic for BoolEditor.xaml
     /// </summary>
-    public partial class BoolValue : UserControl
+    public partial class BoolEditor : UserControl
     {
-        public BoolValue()
+        public BoolEditor()
         {
             InitializeComponent();
         }

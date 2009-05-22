@@ -39,6 +39,7 @@
     <EntitySet Name="PresentableModelDescriptor" EntityType="Model.Store.PresentableModelDescriptor" Table="PresentableModelDescriptors"/>
     <EntitySet Name="PresenceRecord" EntityType="Model.Store.PresenceRecord" Table="PresenceRecords"/>
     <EntitySet Name="WorkEffort" EntityType="Model.Store.WorkEffort" Table="WorkEfforts"/>
+    <EntitySet Name="CurrentSchema" EntityType="Model.Store.CurrentSchema" Table="CurrentSchema"/>
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
     <EntitySet Name="ObjectClass" EntityType="Model.Store.ObjectClass" Table="ObjectClasses"/>
@@ -1112,6 +1113,15 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="CurrentSchema">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Schema" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Version" Type="int" Nullable="false" />
   </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->

@@ -184,7 +184,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(72);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(70);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
@@ -348,12 +348,6 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[208] = 
 			DataStore[208] = new ObjectReferenceProperty__Implementation__Frozen(208);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[209] = 
-			DataStore[209] = new ObjectReferenceProperty__Implementation__Frozen(209);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[211] = 
-			DataStore[211] = new ObjectReferenceProperty__Implementation__Frozen(211);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[212] = 
 			DataStore[212] = new ObjectReferenceProperty__Implementation__Frozen(212);
@@ -1405,46 +1399,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[241],
 			DataStore[208].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
 			DataStore[208].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[208].Seal();
-			DataStore[209].AltText = @"Which Layout is handled by this View";
-			DataStore[209].CategoryTags = null;
-			DataStore[209].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[213],
-});
-			DataStore[209].Description = @"";
-			DataStore[209].ExportGuid = new Guid("2b4a40ec-35eb-4dcc-8465-2340cd4a0dce");
-			DataStore[209].IsIndexed = false;
-			DataStore[209].IsList = false;
-			DataStore[209].IsNullable = false;
-			DataStore[209].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[209].ObjectClass = null;
-			DataStore[209].PropertyName = @"LayoutRef";
-			DataStore[209].ShowIconInLists = true;
-			DataStore[209].ShowIdInLists = true;
-			DataStore[209].ShowNameInLists = true;
-			DataStore[209].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[209].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[209].RelationEnd = null;
-			DataStore[209].Seal();
-			DataStore[211].AltText = @"the Type of a View for this Layout";
-			DataStore[211].CategoryTags = null;
-			DataStore[211].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[215],
-});
-			DataStore[211].Description = @"";
-			DataStore[211].ExportGuid = new Guid("8cd24319-dfb3-4ba9-a46f-931d23316520");
-			DataStore[211].IsIndexed = false;
-			DataStore[211].IsList = false;
-			DataStore[211].IsNullable = false;
-			DataStore[211].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[211].ObjectClass = null;
-			DataStore[211].PropertyName = @"ViewRef";
-			DataStore[211].ShowIconInLists = true;
-			DataStore[211].ShowIdInLists = true;
-			DataStore[211].ShowNameInLists = true;
-			DataStore[211].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[211].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[211].RelationEnd = null;
-			DataStore[211].Seal();
 			DataStore[212].AltText = @"The default model to use for the UI";
 			DataStore[212].CategoryTags = @"GUI";
 			DataStore[212].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
