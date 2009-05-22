@@ -18,6 +18,12 @@
         <DataTemplate x:Key="nameCellTemplate">
             <TextBlock Text="{Binding Name}" />
         </DataTemplate>
+
+        <!-- Force all grid cells to stretch -->
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+        </Style>
     </view:PropertyView.Resources>
 
     <view:PropertyView.Label>
