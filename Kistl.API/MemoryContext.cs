@@ -79,7 +79,7 @@ namespace Kistl.API
         private List<IDataObject> _emptyList = new List<IDataObject>();
         public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
-            return (_objects[ifType] ?? _emptyList).AsQueryable().Cast<IDataObject>();
+            return (_objects[ifType] ?? _emptyList).AsQueryable().AddOfType(ifType.Type).Cast<IDataObject>();
         }
         
         List<T> IKistlContext.GetListOf<T>(IDataObject obj, string propertyName)

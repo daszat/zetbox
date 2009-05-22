@@ -179,7 +179,10 @@ namespace Kistl.Server
                 using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\schemareport.log"))
                 {
                     report.SetLength(0);
-                    SchemaManagement.SchemaManager.CheckSchema(ctx, report);
+                    using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
+                    {
+                        mgr.CheckSchema();
+                    }
                 }
             }
         }
@@ -191,7 +194,10 @@ namespace Kistl.Server
                 using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\schemareport.log"))
                 {
                     report.SetLength(0);
-                    SchemaManagement.SchemaManager.CheckSchema(ctx, report);
+                    using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
+                    {
+                        mgr.CheckSchema();
+                    }
                 }
             }
         }
@@ -206,7 +212,10 @@ namespace Kistl.Server
                     using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\schemareport.log"))
                     {
                         report.SetLength(0);
-                        SchemaManagement.SchemaManager.CheckSchema(ctx, report);
+                        using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
+                        {
+                            mgr.CheckSchema();
+                        }
                     }
                 }
             }
@@ -219,7 +228,10 @@ namespace Kistl.Server
                 using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\updateschemareport.log"))
                 {
                     report.SetLength(0);
-                    SchemaManagement.SchemaManager.UpdateSchema(ctx, report);
+                    using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
+                    {
+                        mgr.UpdateSchema();
+                    }
                 }
             }
         }
@@ -234,7 +246,10 @@ namespace Kistl.Server
                     using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\updateschemareport.log"))
                     {
                         report.SetLength(0);
-                        SchemaManagement.SchemaManager.UpdateSchema(ctx, report);
+                        using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
+                        {
+                            mgr.UpdateSchema();
+                        }
                     }
                 }
             }

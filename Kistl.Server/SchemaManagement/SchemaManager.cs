@@ -13,15 +13,43 @@ using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.SchemaManagement
 {
-    public class SchemaManager
+    public class SchemaManager : IDisposable
     {
+        #region Fields
+        private IKistlContext schema;
+        private IKistlContext savedSchema;
+        private ISchemaProvider db;
+        private TextWriter report;
+        #endregion
+
+        #region Constructor
+        public SchemaManager(IKistlContext schema, Stream reportStream)
+        {
+            this.schema = schema;
+            report = new StreamWriter(reportStream);
+            db = GetProvider();
+        }
+        #endregion
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            // Do not dispose "schema" -> passed to this class
+            if(savedSchema != null) savedSchema.Dispose();
+            if(db != null) db.Dispose();
+            if (report != null) report.Dispose();
+        }
+
+        #endregion
+
         #region Private Functions
         private static ISchemaProvider GetProvider()
         {
             return new SchemaProvider.SQLServer.SchemaProvider();
         }
 
-        private static void WriteReportHeader(TextWriter report, string reportName)
+        private void WriteReportHeader(string reportName)
         {
             report.WriteLine("== {0} ==", reportName);
             report.WriteLine("Date: {0}", DateTime.Now);
@@ -50,46 +78,40 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region CheckSchema
-        public static void CheckSchema(IKistlContext ctx, Stream reportStream)
+        public void CheckSchema()
         {
-            using (ISchemaProvider db = GetProvider())
+            WriteReportHeader("Check Schema Report");
+
+            if (schema.GetQuery<Kistl.App.Base.ObjectClass>().Count() == 0)
             {
-                using (TextWriter report = new StreamWriter(reportStream))
-                {
-                    WriteReportHeader(report, "Check Schema Report");
+                report.WriteLine("** Error: Current Schema is empty");
+            }
+            else
+            {
+                CheckTables();
+                CheckExtraTables();
 
-                    if (ctx.GetQuery<Kistl.App.Base.ObjectClass>().Count() == 0)
-                    {
-                        report.WriteLine("** Error: Current Schema is empty");
-                    }
-                    else
-                    {
-                        CheckTables(ctx, db, report);
-                        CheckExtraTables(ctx, db, report);
+                report.WriteLine();
 
-                        report.WriteLine();
-
-                        CheckRelations(ctx, db, report);
-                        CheckExtraRelations(ctx, db, report);
-                    }
-                }
+                CheckRelations();
+                CheckExtraRelations();
             }
         }
 
-        private static void CheckExtraTables(IKistlContext ctx, ISchemaProvider db, TextWriter report)
+        private void CheckExtraTables()
         {
             // All ObjectClasses
-            List<string> tableNames = ctx.GetQuery<ObjectClass>().Select(o => o.TableName).ToList();
+            List<string> tableNames = schema.GetQuery<ObjectClass>().Select(o => o.TableName).ToList();
 
             // Add ValueTypeProperties
-            tableNames.AddRange(ctx.GetQuery<ValueTypeProperty>().Where(p => p.IsList).ToList()
+            tableNames.AddRange(schema.GetQuery<ValueTypeProperty>().Where(p => p.IsList).ToList()
                 .Select(p => ((ObjectClass)p.ObjectClass).TableName + "_" + p.PropertyName + "Collection"));
 
             // Add Relations with sep. Storage
-            tableNames.AddRange(ctx.GetQuery<Relation>()
+            tableNames.AddRange(schema.GetQuery<Relation>()
                             .Where(r => (int)r.Storage == (int)StorageType.Separate)
                             .ToList()
-                            .Select(r => r.GetCollectionEntryTableName(ctx)));
+                            .Select(r => r.GetCollectionEntryTableName(schema)));
 
             foreach (string tblName in db.GetTableNames())
             {
@@ -100,7 +122,7 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private static void CheckExtraColumns(ISchemaProvider db, TextWriter report, ObjectClass objClass)
+        private void CheckExtraColumns(ObjectClass objClass)
         {
             List<string> columns = objClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).Select(p => p.PropertyName).ToList();
 
@@ -115,9 +137,9 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private static void CheckExtraRelations(IKistlContext ctx, ISchemaProvider db, TextWriter report)
+        private void CheckExtraRelations()
         {
-            List<string> relations = ctx.GetQuery<Relation>().ToList().Select(r => r.GetAssociationName()).ToList();
+            List<string> relations = schema.GetQuery<Relation>().ToList().Select(r => r.GetAssociationName()).ToList();
 
             foreach (string relName in db.GetFKConstraintNames())
             {
@@ -128,11 +150,11 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private static void CheckRelations(IKistlContext ctx, ISchemaProvider db, TextWriter report)
+        private void CheckRelations()
         {
             report.WriteLine("Checking Relations");
             report.WriteLine("------------------");
-            foreach (Relation rel in ctx.GetQuery<Relation>())
+            foreach (Relation rel in schema.GetQuery<Relation>())
             {
                 string fkName = rel.GetAssociationName();
                 if (db.CheckFKConstraintExists(fkName))
@@ -146,20 +168,20 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private static void CheckTables(IKistlContext ctx, ISchemaProvider db, TextWriter report)
+        private void CheckTables()
         {
             report.WriteLine("Checking Tables & Columns");
             report.WriteLine("-------------------------");
             // Checking Tables
-            foreach (ObjectClass objClass in ctx.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
                 report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
 
                 if (db.CheckTableExists(objClass.TableName))
                 {
                     report.WriteLine("  Table: {0}", objClass.TableName);
-                    CheckColumns(db, report, objClass);
-                    CheckExtraColumns(db, report, objClass);
+                    CheckColumns(objClass);
+                    CheckExtraColumns(objClass);
                 }
                 else
                 {
@@ -168,7 +190,7 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private static void CheckColumns(ISchemaProvider db, TextWriter report, ObjectClass objClass)
+        private void CheckColumns(ObjectClass objClass)
         {
             report.WriteLine("  Columns: ");
             foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>()
@@ -213,19 +235,41 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region UpdateSchema
-        public static void UpdateSchema(IKistlContext schema, Stream reportStream)
+        public void UpdateSchema()
         {
-            using (ISchemaProvider db = GetProvider())
+            savedSchema = SchemaManagement.SchemaManager.GetSavedSchema();
+            WriteReportHeader("Update Schema Report");
+
+            UpdateTables();
+        }
+
+        private void UpdateTables()
+        {
+            report.WriteLine("Updating Tables & Columns");
+            report.WriteLine("-------------------------");
+            // Checking Tables
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
-                using (IKistlContext savedSchema = SchemaManagement.SchemaManager.GetSavedSchema())
+                report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                if (CheckCaseNewObjectClass(objClass))
                 {
-                    using (TextWriter report = new StreamWriter(reportStream))
-                    {
-                        WriteReportHeader(report, "Update Schema Report");
-                    }
+                    CaseNewObjectClass(objClass);
                 }
             }
         }
+
+        #region Cases
+        private bool CheckCaseNewObjectClass(ObjectClass objClass)
+        {
+            return savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid) == null;
+        }
+        private void CaseNewObjectClass(ObjectClass objClass)
+        {
+            report.WriteLine("  New Table: {0}", objClass.TableName);
+        }
         #endregion
+
+        #endregion
+
     }
 }
