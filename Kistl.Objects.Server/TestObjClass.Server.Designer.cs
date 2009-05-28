@@ -344,10 +344,10 @@ namespace Kistl.App.Test
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._MyIntProperty, binStream);
             BinarySerializer.ToStream(ObjectProp != null ? ObjectProp.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._StringProp, binStream);

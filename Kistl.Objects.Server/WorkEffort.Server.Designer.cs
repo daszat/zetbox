@@ -344,10 +344,10 @@ namespace Kistl.App.TimeRecords
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._From, binStream);
             BinarySerializer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Name, binStream);

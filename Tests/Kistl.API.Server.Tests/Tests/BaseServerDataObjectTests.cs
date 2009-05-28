@@ -97,7 +97,7 @@ namespace Kistl.API.Server.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void ToStream_to_null_fails()
         {
-            obj.ToStream((BinaryWriter)null);
+            obj.ToStream((BinaryWriter)null, null);
         }
 
         [Test]
@@ -108,7 +108,7 @@ namespace Kistl.API.Server.Tests
             BinaryReader sr = new BinaryReader(ms);
 
             InitialiseObject(obj);
-            obj.ToStream(sw);
+            obj.ToStream(sw, null);
 
             Assert.That(ms.Length, Is.GreaterThan(0));
             ms.Seek(0, SeekOrigin.Begin);
@@ -172,7 +172,7 @@ namespace Kistl.API.Server.Tests
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
-            obj.ToStream(sw);
+            obj.ToStream(sw, null);
 
             Assert.That(ms.Length, Is.GreaterThan(0));
 
@@ -197,7 +197,7 @@ namespace Kistl.API.Server.Tests
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
-            obj.ToStream(sw);
+            obj.ToStream(sw, null);
             ms.Seek(0, SeekOrigin.Begin);
 
             SerializableType t;

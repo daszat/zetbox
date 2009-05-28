@@ -24,7 +24,7 @@ namespace Kistl.API.Server.Mocks
 
         protected override void SetModified()
         {
-            
+
         }
 
         public override DataObjectState ObjectState
@@ -139,9 +139,9 @@ namespace Kistl.API.Server.Mocks
             };
         }
 
-        public override void ToStream(System.IO.BinaryWriter sw)
+        public override void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects)
         {
-            base.ToStream(sw);
+            base.ToStream(sw, auxObjects);
             int? id = this.BaseTestObjClass == null ? (int?)null : this.BaseTestObjClass.ID;
             BinarySerializer.ToStream(id, sw);
 

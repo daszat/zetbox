@@ -98,9 +98,9 @@ namespace Kistl.API.Client
             }
         }
 
-        public override void ToStream(BinaryWriter sw)
+        public override void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
         {
-            base.ToStream(sw);
+            base.ToStream(sw, auxObjects);
             BinarySerializer.ToStream((int)ObjectState, sw);
         }
 

@@ -39,8 +39,8 @@ this.WriteObjects("\r\n");
 string methodName = direction.ToString();
 	string argName;
 	string argType;
-	string argModules = "";
-	string callBaseWithModules = "";
+	string additionalArgs = "";
+	string callBaseWithAdditionalArgs = "";
 	SerializerType serType;
 	
 	switch(direction){
@@ -49,6 +49,8 @@ string methodName = direction.ToString();
 			argName = "binStream";
 			methodName = "ToStream";
 			serType = SerializerType.Binary;
+			additionalArgs = ", HashSet<IStreamable> auxObjects";
+			callBaseWithAdditionalArgs = ", auxObjects";
 			break;
 		case SerializerDirection.FromStream:
 			argType = "System.IO.BinaryReader";
@@ -70,8 +72,8 @@ string methodName = direction.ToString();
 			break;
 		case SerializerDirection.Export:
 			argType = "System.Xml.XmlWriter";
-			argModules = ", string[] modules";
-			callBaseWithModules = ", modules";
+			additionalArgs = ", string[] modules";
+			callBaseWithAdditionalArgs = ", modules";
 			argName = "xml";
 			methodName = "Export";
 			serType = SerializerType.ImportExport;
@@ -87,25 +89,25 @@ string methodName = direction.ToString();
 	}
 	
 
-#line 71 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
-this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " void ",  methodName , "(",  argType , " ",  argName , "",  argModules , ")\r\n");
+#line 73 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " void ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\r\n");
 this.WriteObjects("        {\r\n");
-#line 74 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 76 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 if(overrideAndCallBase)
 	{
 
-#line 76 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 78 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 this.WriteObjects("			\r\n");
-this.WriteObjects("            base.",  methodName , "(",  argName , "",  callBaseWithModules , ");\r\n");
-#line 79 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+this.WriteObjects("            base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\r\n");
+#line 81 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 }
 	else if(direction == SerializerDirection.Export && writeExportGuidAttribute)
 	{
 
-#line 82 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 84 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 this.WriteObjects("			\r\n");
 this.WriteObjects("			xml.WriteAttributeString(\"ExportGuid\", this.ExportGuid.ToString());\r\n");
-#line 85 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 87 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 }
 
 	foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
@@ -113,7 +115,7 @@ this.WriteObjects("			xml.WriteAttributeString(\"ExportGuid\", this.ExportGuid.T
 	    ApplySerializer(direction, serMember, argName);
 	}
 
-#line 92 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 94 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 this.WriteObjects("        }\r\n");
 
         }

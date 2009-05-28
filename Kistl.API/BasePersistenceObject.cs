@@ -91,23 +91,14 @@ using System.Collections.Generic;
         /// Base method for serializing this Object.
         /// </summary>
         /// <param name="sw">Stream to serialize to</param>
-        public virtual void ToStream(BinaryWriter sw)
+        /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
+        public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
 
             BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
             BinarySerializer.ToStream(this.ID, sw);
-        }
-
-        /// <summary>
-        /// Base method for serializing this Object.
-        /// </summary>
-        /// <param name="sw">Stream to serialize to</param>
-        /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
-        public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
-        {
-            this.ToStream(sw);
         }
 
         /// <summary>

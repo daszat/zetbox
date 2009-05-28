@@ -304,10 +304,10 @@ namespace Kistl.App.Test
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._Birthday, binStream);
             BinarySerializer.ToStream(this._PersonName, binStream);
 			BinarySerializer.ToStream(this.PhoneNumberMobile__Implementation__, binStream);

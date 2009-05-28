@@ -70,9 +70,9 @@ namespace Kistl.API.Server.Mocks
 
         #endregion
 
-        public override void ToStream(System.IO.BinaryWriter sw)
+        public override void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects)
         {
-            base.ToStream(sw);
+            base.ToStream(sw, auxObjects);
             BinarySerializer.ToStream(Value, sw);
         }
 

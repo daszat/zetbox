@@ -109,7 +109,7 @@ namespace Kistl.API.Client.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void ToStream_Null()
         {
-            obj.ToStream((BinaryWriter)null);
+            obj.ToStream((BinaryWriter)null, null);
         }
 
         [Test]
@@ -119,7 +119,7 @@ namespace Kistl.API.Client.Tests
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
-            obj.ToStream(sw);
+            obj.ToStream(sw, null);
 
             Assert.That(ms.Length, Is.GreaterThan(0));
 

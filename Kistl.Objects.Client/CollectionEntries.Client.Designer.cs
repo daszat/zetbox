@@ -107,10 +107,10 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
         }
@@ -311,10 +311,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
@@ -485,10 +485,10 @@ namespace Kistl.App.GUI
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
         }
@@ -689,10 +689,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
@@ -863,10 +863,10 @@ namespace Kistl.App.GUI
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
         }
@@ -1019,10 +1019,10 @@ namespace Kistl.App.GUI
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
         }
@@ -1176,10 +1176,10 @@ namespace Kistl.App.TimeRecords
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._fk_B, binStream);
         }
@@ -1329,10 +1329,10 @@ public string Value { get { return B; } set { B = value; } }
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._fk_A, binStream);
             BinarySerializer.ToStream(this._B, binStream);
         }

@@ -52,9 +52,9 @@ namespace Kistl.API.Client.Tests
             }
         }
 
-        public override void ToStream(System.IO.BinaryWriter sw)
+        public override void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects)
         {
-            base.ToStream(sw);
+            base.ToStream(sw, auxObjects);
             BinarySerializer.ToStream(this.Value, sw);
             BinarySerializer.ToStream(this.fk_Parent, sw);
         }

@@ -480,10 +480,10 @@ namespace Kistl.App.GUI
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream((int)((Visual)this).ControlType, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(Method != null ? Method.ID : (int?)null, binStream);

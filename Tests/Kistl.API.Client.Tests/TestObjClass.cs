@@ -161,9 +161,9 @@ namespace Kistl.API.Client.Tests
             };
         }
 
-        public override void ToStream(BinaryWriter sw)
+        public override void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
         {
-            base.ToStream(sw);
+            base.ToStream(sw, auxObjects);
             BinarySerializer.ToStream(this._StringProp, sw);
             BinarySerializer.ToStream(this._TestEnumProp, sw);
         }

@@ -20,8 +20,8 @@
 	string methodName = direction.ToString();
 	string argName;
 	string argType;
-	string argModules = "";
-	string callBaseWithModules = "";
+	string additionalArgs = "";
+	string callBaseWithAdditionalArgs = "";
 	SerializerType serType;
 	
 	switch(direction){
@@ -30,6 +30,8 @@
 			argName = "binStream";
 			methodName = "ToStream";
 			serType = SerializerType.Binary;
+			additionalArgs = ", HashSet<IStreamable> auxObjects";
+			callBaseWithAdditionalArgs = ", auxObjects";
 			break;
 		case SerializerDirection.FromStream:
 			argType = "System.IO.BinaryReader";
@@ -51,8 +53,8 @@
 			break;
 		case SerializerDirection.Export:
 			argType = "System.Xml.XmlWriter";
-			argModules = ", string[] modules";
-			callBaseWithModules = ", modules";
+			additionalArgs = ", string[] modules";
+			callBaseWithAdditionalArgs = ", modules";
 			argName = "xml";
 			methodName = "Export";
 			serType = SerializerType.ImportExport;
@@ -68,13 +70,13 @@
 	}
 	
 %>
-        public <%= overrideAndCallBase ? "override" : "virtual" %> void <%= methodName %>(<%= argType %> <%= argName %><%= argModules %>)
+        public <%= overrideAndCallBase ? "override" : "virtual" %> void <%= methodName %>(<%= argType %> <%= argName %><%= additionalArgs %>)
         {
 <%			
 	if(overrideAndCallBase)
 	{
 %>			
-            base.<%= methodName %>(<%= argName %><%= callBaseWithModules %>);
+            base.<%= methodName %>(<%= argName %><%= callBaseWithAdditionalArgs %>);
 <%
 	}
 	else if(direction == SerializerDirection.Export && writeExportGuidAttribute)

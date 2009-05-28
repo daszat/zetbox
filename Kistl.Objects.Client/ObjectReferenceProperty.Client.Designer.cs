@@ -303,10 +303,10 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._EagerLoading, binStream);
             BinarySerializer.ToStream(this._fk_ReferenceObjectClass, binStream);
             BinarySerializer.ToStream(this._fk_RelationEnd, binStream);

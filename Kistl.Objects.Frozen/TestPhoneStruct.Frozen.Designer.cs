@@ -7,7 +7,6 @@ namespace Kistl.App.Test
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.IO;
     using System.Linq;
     using System.Text;
     using System.Xml;
@@ -87,11 +86,11 @@ namespace Kistl.App.Test
 
 #region Serializer
 
-        public override void ToStream(BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream)
         {
             throw new NotImplementedException();
         }
-        public override void FromStream(BinaryReader binStream)
+        public override void FromStream(System.IO.BinaryReader binStream)
         {
             throw new NotImplementedException();
         }

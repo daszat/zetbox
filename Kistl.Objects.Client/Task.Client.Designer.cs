@@ -310,10 +310,10 @@ namespace Kistl.App.Projekte
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._Aufwand, binStream);
             BinarySerializer.ToStream(this._DatumBis, binStream);
             BinarySerializer.ToStream(this._DatumVon, binStream);

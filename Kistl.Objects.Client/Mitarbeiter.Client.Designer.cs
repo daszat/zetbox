@@ -292,10 +292,10 @@ namespace Kistl.App.Projekte
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
 			
-            base.ToStream(binStream);
+            base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._Geburtstag, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._SVNr, binStream);
