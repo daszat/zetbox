@@ -46,12 +46,7 @@ namespace Kistl.DALProvider.EF
     public class ServerObjectSetHandler
         : BaseServerObjectSetHandler
     {
-        /// <summary>
-        /// Implementiert den SetObject Befehl.
-        /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="xml"></param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public override IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects)
         {
             return base.SetObjects(ctx, objects);
