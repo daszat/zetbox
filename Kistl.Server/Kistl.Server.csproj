@@ -471,6 +471,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EagerLoadingSerialization.cst</DependentUpon>
     </Compile>
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\EagerObjectLoadingSerialization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EagerObjectLoadingSerialization.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cs">
       <DependentUpon>GetPropertyErrorTemplate.cst</DependentUpon>
     </Compile>
@@ -898,6 +903,10 @@
     <None Include="Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>GetPropertyErrorTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Implementation\ObjectClasses\EagerObjectLoadingSerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>EagerObjectLoadingSerialization.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Generators\Templates\Interface\README.txt" />
     <None Include="Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst">

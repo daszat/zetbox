@@ -140,7 +140,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                     otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
                     rel.NeedsPositionStorage((RelationEndRole)relEnd.Role),
                     otherEnd.Type.ImplementsIExportable(ctx),
-                    prop.Module.Namespace
+                    prop.Module.Namespace,
+                    relEnd.Navigator != null && relEnd.Navigator.EagerLoading
                     );
         }
 

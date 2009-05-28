@@ -14,13 +14,16 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList membersToSerialize,
             string propertyName, string collectionEntryAssociationName, string roleName,
-            string relDataTypeString, string relDataTypeStringImpl, bool needsPositionStorage, bool relDataTypeExportable, string moduleNamespace)
+            string relDataTypeString, string relDataTypeStringImpl, bool needsPositionStorage, 
+            bool relDataTypeExportable, string moduleNamespace,
+            bool eagerLoading)
         {
             host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
                 membersToSerialize,
                 propertyName, collectionEntryAssociationName, roleName,
                 relDataTypeString, relDataTypeStringImpl,
-                needsPositionStorage, relDataTypeExportable, moduleNamespace);
+                needsPositionStorage, relDataTypeExportable, moduleNamespace,
+                eagerLoading);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
@@ -32,6 +35,10 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                     list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.ImportExport, moduleNamespace, name, memberName);
                 }
                 list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.Service, moduleNamespace, name, memberName);
+                if (eagerLoading)
+                {
+                    list.Add("Implementation.ObjectClasses.EagerObjectLoadingSerialization", SerializerType.Binary, moduleNamespace, name, memberName);
+                }
             }
         }
     }

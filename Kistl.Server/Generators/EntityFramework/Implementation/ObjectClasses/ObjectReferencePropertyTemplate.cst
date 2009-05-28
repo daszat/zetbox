@@ -18,6 +18,7 @@
 <%@ Parameter Name="hasPositionStorage" Type="bool" %>
 <%@ Parameter Name="relDataTypeExportable" Type="bool" %>
 <%@ Parameter Name="moduleNamespace" Type="string" %>
+<%@ Parameter Name="eagerLoading" Type="bool" %>
 <%
 
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;

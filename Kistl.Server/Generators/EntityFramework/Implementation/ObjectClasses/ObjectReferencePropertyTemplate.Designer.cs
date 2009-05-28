@@ -21,9 +21,10 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 		protected bool hasPositionStorage;
 		protected bool relDataTypeExportable;
 		protected string moduleNamespace;
+		protected bool eagerLoading;
 
 
-        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, String name, String associationName, String targetRoleName, String referencedInterface, String referencedImplementation, bool hasPositionStorage, bool relDataTypeExportable, string moduleNamespace)
+        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, String name, String associationName, String targetRoleName, String referencedInterface, String referencedImplementation, bool hasPositionStorage, bool relDataTypeExportable, string moduleNamespace, bool eagerLoading)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -36,18 +37,19 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 			this.hasPositionStorage = hasPositionStorage;
 			this.relDataTypeExportable = relDataTypeExportable;
 			this.moduleNamespace = moduleNamespace;
+			this.eagerLoading = eagerLoading;
 
         }
         
         public override void Generate()
         {
-#line 23 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 24 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string fkBackingName = "_fk_" + name;
 	string fGuidkBackingName = "_fk_guid_" + name;
 
 
-#line 28 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 29 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
@@ -68,10 +70,10 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("        private int? ",  fkBackingName , ";\r\n");
 this.WriteObjects("        private Guid? ",  fGuidkBackingName , " = null;\r\n");
-#line 49 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 50 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 AddSerialization(serializationList, name);
 
-#line 51 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 52 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // EF sees only this property\r\n");
 this.WriteObjects("        [EdmRelationshipNavigationProperty(\"Model\", \"",  associationName , "\", \"",  targetRoleName , "\")]\r\n");
 this.WriteObjects("        public ",  referencedImplementation , " ",  efName , "\r\n");
@@ -105,7 +107,7 @@ this.WriteObjects("                r.Value = (",  referencedImplementation , ")v
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-#line 85 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 86 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 string posStorageName = name + Kistl.API.Helper.PositionSuffix;
 
 	if (hasPositionStorage)
@@ -115,7 +117,7 @@ string posStorageName = name + Kistl.API.Helper.PositionSuffix;
 			"int?", posStorageName, moduleNamespace);
 	}
 
-#line 94 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 95 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        \r\n");
 
         }

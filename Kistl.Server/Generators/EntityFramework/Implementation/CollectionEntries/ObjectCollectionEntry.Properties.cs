@@ -21,7 +21,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
                 this.MembersToSerialize,
                 propertyName, rel.GetCollectionEntryAssociationName(endRole), relEnd.RoleName,
                 relEnd.Type.GetDataTypeString(), relEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
-                rel.NeedsPositionStorage(endRole), ImplementsIExportable(), relEnd.Type.Module.Namespace);
+                rel.NeedsPositionStorage(endRole), ImplementsIExportable(), relEnd.Type.Module.Namespace,
+                relEnd.Navigator != null && relEnd.Navigator.EagerLoading);
         }
 
         protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)

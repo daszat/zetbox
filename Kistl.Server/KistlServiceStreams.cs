@@ -151,7 +151,7 @@ namespace Kistl.Server
             while (auxObjects.Count > 0)
             {
                 HashSet<IStreamable> secondTierAuxObjects = new HashSet<IStreamable>();
-                foreach (var aux in auxObjects)
+                foreach (var aux in auxObjects.Where(o => o != null))
                 {
                     BinarySerializer.ToStream(true, sw);
                     aux.ToStream(sw, secondTierAuxObjects);

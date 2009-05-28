@@ -718,6 +718,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._ClassName, binStream);
             BinarySerializer.ToStream(DefaultIcon != null ? DefaultIcon.ID : (int?)null, binStream);
+			auxObjects.Add(DefaultIcon);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
