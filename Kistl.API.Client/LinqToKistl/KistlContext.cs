@@ -180,7 +180,14 @@ namespace Kistl.API.Client
 
         public IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry
         {
-            var serverList = Proxy.Current.FetchRelation<T>(relationId, role, container);
+            List<IStreamable> auxObjects;
+            var serverList = Proxy.Current.FetchRelation<T>(relationId, role, container, out auxObjects);
+
+            foreach (IPersistenceObject obj in auxObjects)
+            {
+                this.Attach(obj);
+            }
+
             var result = new List<T>();
             foreach (IPersistenceObject obj in serverList)
             {

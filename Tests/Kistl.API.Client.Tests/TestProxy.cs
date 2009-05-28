@@ -21,11 +21,13 @@ namespace Kistl.API.Client.Tests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy)
+        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
             if (ifType == null) throw new ArgumentNullException("ifType");
             if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("ifType", "Only TestObjClasses are allowed");
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
+
+            auxObjects = new List<IStreamable>();
 
             List<TestObjClass> result = new List<TestObjClass>();
             result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 1 });
@@ -55,10 +57,11 @@ namespace Kistl.API.Client.Tests
             return result.Cast<IDataObject>();
         }
 
-        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property)
+        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             if (ifType == null) throw new ArgumentNullException("ifType");
             if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
+            auxObjects = new List<IStreamable>();
 
             List<TestObjClass> result = new List<TestObjClass>();
             if (ID == 1)
@@ -104,8 +107,9 @@ namespace Kistl.API.Client.Tests
             return result;
         }
 
-        public IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry
+        public IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationCollectionEntry
         {
+            auxObjects = new List<IStreamable>();
             return new List<T>();
         }
 

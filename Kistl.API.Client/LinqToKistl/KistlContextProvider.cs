@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.IO;
 using System.Reflection;
+using System.Text;
 
 // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
@@ -48,11 +48,18 @@ namespace Kistl.API.Client
 
         internal List<IDataObject> GetListOf(int ID, string propertyName)
         {
-            List<IDataObject> serviceResult = Proxy.Current.GetListOf(_type, ID, propertyName).Cast<IDataObject>().ToList();
+            List<IStreamable> auxObjects;
+            List<IDataObject> serviceResult = Proxy.Current.GetListOf(_type, ID, propertyName, out auxObjects).ToList();
             List<IDataObject> result = new List<IDataObject>();
-            foreach (Kistl.API.IDataObject obj in serviceResult)
+
+            foreach (IDataObject obj in serviceResult)
             {
                 result.Add((IDataObject)_context.Attach(obj));
+            }
+
+            foreach (IPersistenceObject obj in auxObjects)
+            {
+                _context.Attach(obj);
             }
 
             return result;
@@ -158,16 +165,16 @@ namespace Kistl.API.Client
 
         #endregion
 
-        private List<IDataObject> VisitAndCallService(Expression e)
+        private List<IDataObject> VisitAndCallService(Expression e, out List<IStreamable> auxObjects)
         {
             e = ConstantEvaluator.PartialEval(e);
             Visit(e);
-            return CallService();
+            return CallService(out auxObjects);
         }
 
-        private List<IDataObject> CallService()
+        private List<IDataObject> CallService(out List<IStreamable> auxObjects)
         {
-            return Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy).ToList();
+            return Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy, out auxObjects).ToList();
         }
 
         private void AddNewLocalObjects(InterfaceType ifType, IList result)
@@ -193,7 +200,14 @@ namespace Kistl.API.Client
         /// <returns></returns>
         internal T GetListCall<T>(Expression e)
         {
-            List<IDataObject> serviceResult = VisitAndCallService(e);
+            List<IStreamable> auxObjects;
+            List<IDataObject> serviceResult = VisitAndCallService(e, out auxObjects);
+            // prepare caches
+            foreach (IPersistenceObject obj in auxObjects)
+            {
+                _context.Attach(obj);
+            }
+
             MethodCallExpression me = e as MethodCallExpression;
 
             // Projection
@@ -243,11 +257,18 @@ namespace Kistl.API.Client
             AddNewLocalObjects(_type, result);
 
             // If nothing found or a List is expected -> goto Server
-            if (    result.Count == 0 ||
-                    e.IsMethodCallExpression("First") || 
+            if (result.Count == 0 ||
+                    e.IsMethodCallExpression("First") ||
                     e.IsMethodCallExpression("FirstOrDefault"))
             {
-                List<IDataObject> serviceResult = CallService();
+                List<IStreamable> auxObjects;
+                List<IDataObject> serviceResult = CallService(out auxObjects);
+                // prepare caches
+                foreach (IPersistenceObject obj in auxObjects)
+                {
+                    _context.Attach(obj);
+                }
+                
                 foreach (IDataObject obj in serviceResult)
                 {
                     result.Add((T)_context.Attach(obj));
@@ -314,7 +335,7 @@ namespace Kistl.API.Client
             }
             else if (m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("ThenBy"))
             {
-                if(_orderBy== null) _orderBy = new LinkedList<Expression>();
+                if (_orderBy == null) _orderBy = new LinkedList<Expression>();
                 _orderBy.AddFirst(m.Arguments[1]);
                 base.Visit(m.Arguments[0]);
             }
@@ -327,7 +348,7 @@ namespace Kistl.API.Client
                 _maxListCount = m.Arguments[1].GetExpressionValue<int>();
                 base.Visit(m.Arguments[0]);
             }
-            else if (   m.IsMethodCallExpression("First") ||
+            else if (m.IsMethodCallExpression("First") ||
                         m.IsMethodCallExpression("FirstOrDefault") ||
                         m.IsMethodCallExpression("Single") ||
                         m.IsMethodCallExpression("SingleOrDefault")

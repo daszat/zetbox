@@ -20,12 +20,13 @@ namespace Kistl.API.Client
     public interface IProxy
         : IDisposable
     {
-        IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy);
-        IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property);
+        IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects);
+        IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
 
         IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects);
 
-        IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry;
+        IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
+            where T : class, IRelationCollectionEntry;
 
         /// <summary>
         /// Generates Objects &amp; Database. Throws an Exception if failed.
@@ -161,7 +162,7 @@ namespace Kistl.API.Client
         /// </summary>
         private KistlServiceStreamsClient serviceStreams = new KistlServiceStreamsClient();
 
-        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy)
+        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(ifType.ToString()))
             {
@@ -173,7 +174,7 @@ namespace Kistl.API.Client
                 msg.OrderBy = orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o)).ToList() : new List<SerializableExpression>();
 
                 MemoryStream s = serviceStreams.GetList(msg.ToStream());
-                return ReceiveObjects(s).Cast<IDataObject>();
+                return ReceiveObjects(s, out auxObjects).Cast<IDataObject>();
 #else
                 string xml = service.GetList(type);
                 return CurrentSerializer.ListFromXml(ctx, xml);
@@ -181,8 +182,7 @@ namespace Kistl.API.Client
             }
         }
 
-
-        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property)
+        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", ifType, ID, property))
             {
@@ -192,7 +192,7 @@ namespace Kistl.API.Client
                 msg.ID = ID;
                 msg.Property = property;
                 MemoryStream s = serviceStreams.GetListOf(msg.ToStream());
-                return ReceiveObjects(s).Cast<IDataObject>();
+                return ReceiveObjects(s, out auxObjects).Cast<IDataObject>();
 
 #else
                 string xml = service.GetListOf(type, ID, property);
@@ -216,10 +216,12 @@ namespace Kistl.API.Client
                 }
                 BinarySerializer.ToStream(false, sw);
 
-                // Set Operation
                 MemoryStream s = serviceStreams.SetObjects(ms);
 
-                return ReceiveObjects(s).Cast<IPersistenceObject>();
+                // merge auxiliary objects into primary set objects result
+                List<IStreamable> auxObjects;
+                var results = ReceiveObjects(s, out auxObjects);
+                return results.Concat(auxObjects).Cast<IPersistenceObject>();
 #else
                 string xml = CurrentSerializer.XmlFromObject(obj);
                 xml = service.SetObject(type, xml);
@@ -228,7 +230,14 @@ namespace Kistl.API.Client
             }
         }
 
-        private static IEnumerable<IStreamable> ReceiveObjects(MemoryStream s)
+        private static IEnumerable<IStreamable> ReceiveObjects(MemoryStream s, out List<IStreamable> auxObjects)
+        {
+            var result = ReceiveObjectList(s);
+            auxObjects = ReceiveObjectList(s);
+            return result;
+        }
+
+        private static List<IStreamable> ReceiveObjectList(MemoryStream s)
         {
             BinaryReader sr = new BinaryReader(s);
 
@@ -249,42 +258,25 @@ namespace Kistl.API.Client
                 result.Add((IStreamable)obj);
                 BinarySerializer.FromStream(out cont, sr);
             }
-
             return result;
         }
 
-        public IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry
+        public IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
+            where T : class, IRelationCollectionEntry
         {
             using (TraceClient.TraceHelper.TraceMethodCall("Fetching relation"))
             {
                 //Trace.TraceWarning("FetchRelation(ID={0},role={1},parentId={2}): enter", relationId, role, parent.ID);
                 // TODO: could be implemented in generated properties
                 if (parent.ObjectState == DataObjectState.New)
-                    return new List<T>();
-
-                MemoryStream ms = serviceStreams.FetchRelation(relationId, (int)role, parent.ID);
-                //Trace.TraceWarning("FetchRelation(ID={0},role={1},parentId={2}): came back", relationId, role, parent.ID);
-                BinaryReader sr = new BinaryReader(ms);
-
-                List<T> result = new List<T>();
-                bool cont = true;
-                BinarySerializer.FromStream(out cont, sr);
-                while (cont)
                 {
-                    long pos = ms.Position;
-                    SerializableType objType;
-                    BinarySerializer.FromStream(out objType, sr);
-
-                    ms.Seek(pos, SeekOrigin.Begin);
-
-                    var obj = (IPersistenceObject)objType.NewObject();
-                    obj.FromStream(sr);
-
-                    result.Add((T)obj);
-                    BinarySerializer.FromStream(out cont, sr);
+                    auxObjects = new List<IStreamable>();
+                    return new List<T>();
                 }
 
-                return result;
+                MemoryStream ms = serviceStreams.FetchRelation(relationId, (int)role, parent.ID);
+
+                return ReceiveObjects(ms, out auxObjects).Cast<T>();
             }
         }
 
