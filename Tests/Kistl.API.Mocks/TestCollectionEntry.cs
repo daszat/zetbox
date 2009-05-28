@@ -55,7 +55,7 @@ namespace Kistl.API.Mocks
             BinarySerializer.FromStream(out _TestName, sr);
         }
 
-        public void ToStream(BinaryWriter sw, List<IStreamable> auxObjects)
+        public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
         {
             BinarySerializer.ToStream(ID, sw);
             BinarySerializer.ToStream(TestName, sw);

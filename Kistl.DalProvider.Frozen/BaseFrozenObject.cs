@@ -50,7 +50,7 @@ namespace Kistl.DalProvider.Frozen
             BinarySerializer.ToStream((int)ObjectState, sw);
         }
 
-        public virtual void ToStream(BinaryWriter sw, List<IStreamable> auxObjects)
+        public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
         {
             ToStream(sw);
         }

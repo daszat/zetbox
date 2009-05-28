@@ -105,7 +105,7 @@ using System.Collections.Generic;
         /// </summary>
         /// <param name="sw">Stream to serialize to</param>
         /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
-        public virtual void ToStream(BinaryWriter sw, List<IStreamable> auxObjects)
+        public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
         {
             this.ToStream(sw);
         }

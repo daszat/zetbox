@@ -24,7 +24,7 @@ namespace Kistl.API.Server
         /// <param name="filter">a Linq filter to apply</param>
         /// <param name="orderBy">a number of linq expressions to order by</param>
         /// <returns>the filtered and ordered list of objects, containing at most <paramref name="maxListCount"/> objects</returns>
-        IEnumerable GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy);
+        IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy);
 
         /// <summary>
         /// Return the list of objects referenced by the specified property.
@@ -33,7 +33,7 @@ namespace Kistl.API.Server
         /// <param name="ID">the ID of the referencing object</param>
         /// <param name="property">the name of the referencing property</param>
         /// <returns>the list of objects</returns>
-        IEnumerable GetListOf(IKistlContext ctx, int ID, string property);
+        IEnumerable<IStreamable> GetListOf(IKistlContext ctx, int ID, string property);
 
         /// <summary>
         /// return the specified object
@@ -170,7 +170,7 @@ namespace Kistl.API.Server
         {
         }
 
-        public IEnumerable GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy)
+        public IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy)
         {
             if (maxListCount > Kistl.API.Helper.MAXLISTCOUNT)
             {
@@ -195,7 +195,7 @@ namespace Kistl.API.Server
                 }
             }
 
-            return result.Take(maxListCount);
+            return result.Take(maxListCount).Cast<IStreamable>();
         }
 
         /// <summary>
@@ -207,14 +207,14 @@ namespace Kistl.API.Server
         /// <param name="ID"></param>
         /// <param name="property"></param>
         /// <returns>the list of values in the property</returns>
-        public IEnumerable GetListOf(IKistlContext ctx, int ID, string property)
+        public IEnumerable<IStreamable> GetListOf(IKistlContext ctx, int ID, string property)
         {
             if (ID <= API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
             T obj = GetObjectInstance(ctx, ID);
             if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
 
             IEnumerable list = (IEnumerable)obj.GetPropertyValue<IEnumerable>(property);
-            return list;
+            return list.Cast<IStreamable>();
         }
 
         /// <summary>

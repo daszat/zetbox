@@ -87,7 +87,7 @@ namespace Kistl.App.Test
 
 #region Serializer
 
-        public override void ToStream(BinaryWriter binStream, List<IStreamable> auxObjects)
+        public override void ToStream(BinaryWriter binStream)
         {
             throw new NotImplementedException();
         }
