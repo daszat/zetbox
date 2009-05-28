@@ -70,6 +70,8 @@
 	// the actual implementation class of the list's elements
 	string referencedImplementation = otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix;
 
+	// whether or not the collection will be eagerly loaded
+	bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 	
 %>
         // implement the user-visible interface
@@ -109,5 +111,5 @@
         private <%= wrapperClass %><<%= rel.A.Type.GetDataTypeString() %>, <%= rel.B.Type.GetDataTypeString() %>, <%= ceName %>> <%= wrapperName %>;
         
 <%
-        AddSerialization(serializationList, efName);
+        AddSerialization(serializationList, efName, eagerLoading);
 %>

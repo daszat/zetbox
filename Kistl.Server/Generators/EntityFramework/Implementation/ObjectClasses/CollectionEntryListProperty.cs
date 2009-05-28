@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.Server.Generators.Templates.Implementation;
+
 using Arebis.CodeGeneration;
+
 using Kistl.API;
 using Kistl.App.Base;
 
@@ -18,10 +19,14 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                 rel, endRole);
         }
 
-        protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
+        protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName, bool eagerLoading)
         {
             //if (list != null)
             //    list.Add("Implementation.ObjectClasses.CollectionSerialization", SerializerType.Xml, memberName);
+            if (list != null && eagerLoading)
+            {
+                list.Add("Implementation.ObjectClasses.EagerLoadingSerialization", Templates.Implementation.SerializerType.Binary, null, null, memberName);
+            }
         }
     }
 }

@@ -466,6 +466,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
     </Compile>
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EagerLoadingSerialization.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cs">
       <DependentUpon>GetPropertyErrorTemplate.cst</DependentUpon>
     </Compile>
@@ -781,6 +786,10 @@
     <None Include="Generators\EntityFramework\Implementation\ObjectClasses\ReloadOneReference.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ReloadOneReference.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>EagerLoadingSerialization.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
