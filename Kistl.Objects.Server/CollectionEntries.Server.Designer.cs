@@ -1023,6 +1023,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 			auxObjects.Add(A);
             BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+			auxObjects.Add(B);
             BinarySerializer.ToStream(this._B_pos, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(this._B_pos, binStream);

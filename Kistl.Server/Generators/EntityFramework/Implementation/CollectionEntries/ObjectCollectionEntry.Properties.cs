@@ -16,13 +16,15 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
         {
             RelationEnd relEnd = rel.GetEnd(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+            bool eagerLoading = (relEnd.Navigator != null && relEnd.Navigator.EagerLoading)
+                || (otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading);
 
             Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx,
                 this.MembersToSerialize,
                 propertyName, rel.GetCollectionEntryAssociationName(endRole), relEnd.RoleName,
                 relEnd.Type.GetDataTypeString(), relEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
                 rel.NeedsPositionStorage(endRole), ImplementsIExportable(), relEnd.Type.Module.Namespace,
-                relEnd.Navigator != null && relEnd.Navigator.EagerLoading);
+                eagerLoading);
         }
 
         protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)
