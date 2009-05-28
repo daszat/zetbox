@@ -3,18 +3,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using System.Diagnostics;
+
+using Kistl.API.Client.KistlService;
+using Kistl.API.Client.KistlServiceStreams;
 
 namespace Kistl.API.Client
 {
     /// <summary>
     /// Proxy Interface for IKistlService
     /// </summary>
-    public interface IProxy : IDisposable
+    public interface IProxy
+        : IDisposable
     {
         IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy);
         IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property);
@@ -24,7 +28,7 @@ namespace Kistl.API.Client
         IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry;
 
         /// <summary>
-        /// Generates Objects &amp; Database. Throws a Exception if failed.
+        /// Generates Objects &amp; Database. Throws an Exception if failed.
         /// </summary>
         void Generate();
 
@@ -34,12 +38,13 @@ namespace Kistl.API.Client
         /// <param name="name">A Name</param>
         /// <returns>"Hello " + name.</returns>
         // TODO: WTF?
+        [Obsolete]
         string HelloWorld(string name);
     }
 
 
     /// <summary>
-    /// Proxy Singelton
+    /// Proxy Singleton
     /// </summary>
     public static class Proxy
     {
@@ -76,14 +81,15 @@ namespace Kistl.API.Client
     /// <summary>
     /// Proxy Implementation
     /// </summary>
-    internal class ProxyImplementation : IProxy
+    internal class ProxyImplementation
+        : IProxy
     {
         #region XmlSerializer
         private interface IXmlSerializer
         {
             string XmlFromList(IEnumerable lst);
-            string XmlFromObject(Kistl.API.IDataObject obj);
-            Kistl.API.IDataObject ObjectFromXml(IKistlContext ctx, string xml);
+            string XmlFromObject(IDataObject obj);
+            IDataObject ObjectFromXml(IKistlContext ctx, string xml);
             IEnumerable ListFromXml(IKistlContext ctx, string xml);
         }
 
@@ -98,18 +104,18 @@ namespace Kistl.API.Client
                 return list.ToXmlString();
             }
 
-            public string XmlFromObject(Kistl.API.IDataObject obj)
+            public string XmlFromObject(IDataObject obj)
             {
                 XMLOBJECT result = new XMLOBJECT();
                 result.Object = obj;
                 return result.ToXmlString();
             }
 
-            public Kistl.API.IDataObject ObjectFromXml(IKistlContext ctx, string xml)
+            public IDataObject ObjectFromXml(IKistlContext ctx, string xml)
             {
-                Kistl.API.IDataObject obj = xml.FromXmlString<XMLOBJECT>().Object as Kistl.API.IDataObject;
+                IDataObject obj = xml.FromXmlString<XMLOBJECT>().Object as IDataObject;
                 if (ctx != null)
-                    obj = (Kistl.API.IDataObject)ctx.Attach(obj);
+                    obj = (IDataObject)ctx.Attach(obj);
                 return obj;
             }
 
@@ -129,8 +135,8 @@ namespace Kistl.API.Client
                 if (_CurrentSerializer == null)
                 {
                     Type t = typeof(XmlSerializer<,>);
-                    Type xmlCollection = Type.GetType("Kistl.API.XMLObjectCollection, Kistl.Objects.Client");
-                    Type xmlObj = Type.GetType("Kistl.API.XMLObject, Kistl.Objects.Client");
+                    Type xmlCollection = Type.GetType("XMLObjectCollection, Kistl.Objects.Client");
+                    Type xmlObj = Type.GetType("XMLObject, Kistl.Objects.Client");
 
                     Type result = t.MakeGenericType(xmlCollection, xmlObj);
 
@@ -147,15 +153,15 @@ namespace Kistl.API.Client
         /// WCF Proxy für das KistlService instanzieren.
         /// Konfiguration lt. app.config File
         /// </summary>
-        private KistlService.KistlServiceClient service = new KistlService.KistlServiceClient();
+        private KistlServiceClient service = new KistlServiceClient();
 
         /// <summary>
         /// WCF Proxy für das KistlServiceStreams instanzieren.
         /// Konfiguration lt. app.config File
         /// </summary>
-        private KistlServiceStreams.KistlServiceStreamsClient serviceStreams = new KistlServiceStreams.KistlServiceStreamsClient();
+        private KistlServiceStreamsClient serviceStreams = new KistlServiceStreamsClient();
 
-        public IEnumerable<Kistl.API.IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy)
+        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(ifType.ToString()))
             {
@@ -167,27 +173,7 @@ namespace Kistl.API.Client
                 msg.OrderBy = orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o)).ToList() : new List<SerializableExpression>();
 
                 MemoryStream s = serviceStreams.GetList(msg.ToStream());
-                BinaryReader sr = new BinaryReader(s);
-
-                List<Kistl.API.IDataObject> result = new List<Kistl.API.IDataObject>();
-                bool cont = true;
-                BinarySerializer.FromStream(out cont, sr);
-                while (cont)
-                {
-                    long pos = s.Position;
-                    SerializableType objType;
-                    BinarySerializer.FromStream(out objType, sr);
-
-                    s.Seek(pos, SeekOrigin.Begin);
-
-                    IDataObject obj = (IDataObject)objType.NewObject();
-                    obj.FromStream(sr);
-
-                    result.Add((Kistl.API.IDataObject)obj);
-                    BinarySerializer.FromStream(out cont, sr);
-                }
-
-                return result;
+                return ReceiveObjects(s).Cast<IDataObject>();
 #else
                 string xml = service.GetList(type);
                 return CurrentSerializer.ListFromXml(ctx, xml);
@@ -195,7 +181,8 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable<Kistl.API.IDataObject> GetListOf(InterfaceType ifType, int ID, string property)
+
+        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", ifType, ID, property))
             {
@@ -205,28 +192,8 @@ namespace Kistl.API.Client
                 msg.ID = ID;
                 msg.Property = property;
                 MemoryStream s = serviceStreams.GetListOf(msg.ToStream());
-                BinaryReader sr = new BinaryReader(s);
+                return ReceiveObjects(s).Cast<IDataObject>();
 
-                List<Kistl.API.IDataObject> result = new List<Kistl.API.IDataObject>();
-
-                bool cont;
-                BinarySerializer.FromStream(out cont, sr);
-                while (cont)
-                {
-                    long pos = s.Position;
-                    SerializableType objType;
-                    BinarySerializer.FromStream(out objType, sr);
-
-                    s.Seek(pos, SeekOrigin.Begin);
-
-                    IDataObject obj = (IDataObject)objType.NewObject();
-                    obj.FromStream(sr);
-
-                    result.Add((Kistl.API.IDataObject)obj);
-                    BinarySerializer.FromStream(out cont, sr);
-                }
-
-                return result;
 #else
                 string xml = service.GetListOf(type, ID, property);
                 return CurrentSerializer.ListFromXml(ctx, xml);
@@ -252,34 +219,38 @@ namespace Kistl.API.Client
                 // Set Operation
                 MemoryStream s = serviceStreams.SetObjects(ms);
 
-                // Deserialize
-                BinaryReader sr = new BinaryReader(s);
-
-                var result = new List<IPersistenceObject>();
-                bool @continue;
-                BinarySerializer.FromStream(out @continue, sr);
-                while (@continue)
-                {
-                    long pos = s.Position;
-                    SerializableType objType;
-                    BinarySerializer.FromStream(out objType, sr);
-
-                    s.Seek(pos, SeekOrigin.Begin);
-
-                    var obj = (IPersistenceObject)objType.NewObject();
-                    obj.FromStream(sr);
-                    result.Add(obj);
-                    BinarySerializer.FromStream(out @continue, sr);
-                }
-
-                return result;
-
+                return ReceiveObjects(s).Cast<IPersistenceObject>();
 #else
                 string xml = CurrentSerializer.XmlFromObject(obj);
                 xml = service.SetObject(type, xml);
                 return CurrentSerializer.ObjectFromXml(ctx, xml);
 #endif
             }
+        }
+
+        private static IEnumerable<IStreamable> ReceiveObjects(MemoryStream s)
+        {
+            BinaryReader sr = new BinaryReader(s);
+
+            List<IStreamable> result = new List<IStreamable>();
+            bool cont = true;
+            BinarySerializer.FromStream(out cont, sr);
+            while (cont)
+            {
+                long pos = s.Position;
+                SerializableType objType;
+                BinarySerializer.FromStream(out objType, sr);
+
+                s.Seek(pos, SeekOrigin.Begin);
+
+                IStreamable obj = (IStreamable)objType.NewObject();
+                obj.FromStream(sr);
+
+                result.Add((IStreamable)obj);
+                BinarySerializer.FromStream(out cont, sr);
+            }
+
+            return result;
         }
 
         public IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry
@@ -333,6 +304,7 @@ namespace Kistl.API.Client
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
+        [Obsolete]
         public string HelloWorld(string name)
         {
             using (TraceClient.TraceHelper.TraceMethodCall(name))
