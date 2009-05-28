@@ -195,7 +195,7 @@ namespace Kistl.API.Server
                 }
             }
 
-            return result.Take(maxListCount).Cast<IStreamable>();
+            return result.Take(maxListCount).ToList().Cast<IStreamable>();
         }
 
         /// <summary>
