@@ -35,14 +35,13 @@ namespace Kistl.Server
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType()).GetObject(ctx, m.ID);
-                        if (obj == null) throw new ArgumentOutOfRangeException("ID", string.Format("Object with ID {0} not found", m.ID));
+                        if (obj == null)
+                            throw new ArgumentOutOfRangeException("ID", string.Format("Object with ID {0} not found", m.ID));
+
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
 
-                        obj.ToStream(sw, null);
-
-                        result.Seek(0, SeekOrigin.Begin);
-                        return result;
+                        return SendObjects(new[] { obj }.AsEnumerable<IStreamable>());
                     }
                 }
             }
@@ -89,21 +88,11 @@ namespace Kistl.Server
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         // Set Operation
-                        var changedObjects = ServerObjectHandlerFactory.GetServerObjectSetHandler().SetObjects(ctx, objects);
-
-                        // Serialize back
-                        MemoryStream result = new MemoryStream();
-                        BinaryWriter sw = new BinaryWriter(result);
-
-                        foreach (var obj in changedObjects)
-                        {
-                            BinarySerializer.ToStream(true, sw);
-                            obj.ToStream(sw, null);
-                        }
-                        BinarySerializer.ToStream(false, sw);
-
-                        result.Seek(0, SeekOrigin.Begin);
-                        return result;
+                        var changedObjects = ServerObjectHandlerFactory
+                            .GetServerObjectSetHandler()
+                            .SetObjects(ctx, objects)
+                            .Cast<IStreamable>();
+                        return SendObjects(changedObjects);
                     }
                 }
             }
@@ -130,21 +119,12 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType())
+                        IEnumerable<IStreamable> lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType())
                             .GetList(ctx, m.MaxListCount,
                                 m.Filter != null ? SerializableExpression.ToExpression(m.Filter) : null,
                                 m.OrderBy != null ? m.OrderBy.Select(o => SerializableExpression.ToExpression(o)).ToList() : null);
-                        MemoryStream result = new MemoryStream();
-                        BinaryWriter sw = new BinaryWriter(result);
-                        foreach (IStreamable obj in lst)
-                        {
-                            BinarySerializer.ToStream(true, sw);
-                            obj.ToStream(sw, null);
-                        }
-                        BinarySerializer.ToStream(false, sw);
 
-                        result.Seek(0, SeekOrigin.Begin);
-                        return result;
+                        return SendObjects(lst);
                     }
                 }
             }
@@ -154,6 +134,62 @@ namespace Kistl.Server
                 // Never called, Handle errors throws an Exception
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Sends a list of auxiliary objects to the specified BinaryWriter while avoiding to send objects twice.
+        /// </summary>
+        /// <param name="sw">the stream to write to</param>
+        /// <param name="auxObjects">a set of objects to send; will not be modified by this call</param>
+        /// <param name="sentObjects">a set objects already sent; receives all newly sent objects too</param>
+        private static void SendAuxiliaryObjects(BinaryWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects)
+        {
+            // clone auxObjects to avoid modification
+            auxObjects = new HashSet<IStreamable>(auxObjects);
+            auxObjects.ExceptWith(sentObjects);
+            // send all eagerly loaded objects
+            while (auxObjects.Count > 0)
+            {
+                HashSet<IStreamable> secondTierAuxObjects = new HashSet<IStreamable>();
+                foreach (var aux in auxObjects)
+                {
+                    aux.ToStream(sw, secondTierAuxObjects);
+                    BinarySerializer.ToStream(true, sw);
+                    sentObjects.Add(aux);
+                }
+                // check whether new objects where eagerly loaded
+                secondTierAuxObjects.ExceptWith(sentObjects);
+                auxObjects = secondTierAuxObjects;
+            }
+            // finish list
+            BinarySerializer.ToStream(false, sw);
+        }
+
+        /// <summary>
+        /// Serializes a list of objects onto a <see cref="MemoryStream"/>.
+        /// </summary>
+        /// <param name="lst">the list of objects to send</param>
+        /// <returns>a memory stream containing all objects and all eagerly loaded auxiliary objects</returns>
+        private static MemoryStream SendObjects(IEnumerable<IStreamable> lst)
+        {
+            HashSet<IStreamable> sentObjects = new HashSet<IStreamable>();
+            HashSet<IStreamable> auxObjects = new HashSet<IStreamable>();
+
+            MemoryStream result = new MemoryStream();
+            BinaryWriter sw = new BinaryWriter(result);
+            foreach (IStreamable obj in lst)
+            {
+                BinarySerializer.ToStream(true, sw);
+                // don't check sentObjects here, because a list might contain items twice
+                obj.ToStream(sw, auxObjects);
+                sentObjects.Add(obj);
+            }
+            BinarySerializer.ToStream(false, sw);
+
+            SendAuxiliaryObjects(sw, auxObjects, sentObjects);
+
+            result.Seek(0, SeekOrigin.Begin);
+            return result;
         }
 
         /// <summary>
