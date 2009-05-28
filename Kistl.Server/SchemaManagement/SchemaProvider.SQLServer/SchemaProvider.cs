@@ -20,7 +20,7 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
 
         public void BeginTransaction()
         {
-            if (tx == null) throw new InvalidOperationException("Transaction is already running");
+            if (tx != null) throw new InvalidOperationException("Transaction is already running");
             tx = db.BeginTransaction();
         }
 
@@ -50,6 +50,29 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             }
         }
 
+        private string GetSqlTypeString(System.Data.DbType type)
+        {
+            switch (type)
+            {
+                case System.Data.DbType.Int32:
+                    return "int";
+                case System.Data.DbType.Double:
+                    return "float";
+                case System.Data.DbType.String:
+                    return "nvarchar";
+                case System.Data.DbType.Date:
+                    return "datetime";
+                case System.Data.DbType.DateTime:
+                    return "datetime";
+                case System.Data.DbType.Boolean:
+                    return "bit";
+                case System.Data.DbType.Guid:
+                    return "uniqueidentifier";
+                default:
+                    throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to an sql type string", type));
+            }
+        }
+
         public string GetSavedSchema()
         {
             if (!CheckTableExists("CurrentSchema")) return string.Empty;
@@ -63,6 +86,32 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             if (count == 0) return string.Empty;
             cmd = new SqlCommand("SELECT [Schema] FROM CurrentSchema", db, tx);
             return (string)cmd.ExecuteScalar();
+        }
+
+        /// <summary>
+        /// TODO: Was ist die Version?
+        /// </summary>
+        /// <param name="schema"></param>
+        public void SaveSchema(string schema)
+        {
+            if (!CheckTableExists("CurrentSchema")) throw new InvalidOperationException("Unable to save Schema. Schematable does not exist.");
+
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM [CurrentSchema]", db, tx);
+            int count = (int)cmd.ExecuteScalar();
+            if (count > 1)
+            {
+                throw new InvalidOperationException("There is more then one Schema saved in your Database");
+            }
+            if (count == 0)
+            {
+                cmd = new SqlCommand("INSERT INTO [CurrentSchema] ([Version], [Schema]) VALUES(1, @schema)", db, tx);
+            }
+            else
+            {
+                cmd = new SqlCommand("UPDATE [CurrentSchema] SET [Schema] = @schema, [Version] = [Version] + 1", db, tx);
+            }
+            cmd.Parameters.AddWithValue("@schema", schema);
+            cmd.ExecuteNonQuery();
         }
 
         public bool CheckTableExists(string tblName)
@@ -141,6 +190,50 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             {
                 while (rd.Read()) yield return rd.GetString(0);
             }
+        }
+
+        public void CreateTable(string tblName, bool idAsIdentityColumn)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("CREATE TABLE [{0}] ( ", tblName);
+            if (idAsIdentityColumn)
+            {
+                sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL, ");
+            }
+            else
+            {
+                sb.AppendLine("[ID] [int] NOT NULL, ");
+            }
+
+            sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", tblName);
+            sb.AppendLine();
+            sb.Append(")");
+
+            SqlCommand cmd = new SqlCommand(sb.ToString(), db, tx);
+            cmd.ExecuteNonQuery();
+        }
+
+        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            // TODO: Trick 17, temporäre Lösung
+            if (type == System.Data.DbType.String && size > 1000)
+            {
+                sb.AppendFormat("ALTER TABLE [{0}] ADD [{1}] {2} {3}", tblName, colName, 
+                    "ntext", 
+                    isNullable ? "NULL" : "NOT NULL");
+            }
+            else
+            {
+                sb.AppendFormat("ALTER TABLE [{0}] ADD [{1}] {2}{3} {4}", tblName, colName, 
+                    GetSqlTypeString(type),
+                    size > 0 ? string.Format("({0})", size) : "", 
+                    isNullable ? "NULL" : "NOT NULL");
+            }
+
+            SqlCommand cmd = new SqlCommand(sb.ToString(), db, tx);
+            cmd.ExecuteNonQuery();
         }
     }
 }

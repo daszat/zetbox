@@ -86,7 +86,9 @@ namespace Kistl.App.Extensions
 
         public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)
         {
-            return new InterfaceType(cls.GetDataType());
+            // TODO: During export schema, while creating a new Database, no custom actions are attached (Database is empty)
+            // return new InterfaceType(cls.GetDataType());
+            return new InterfaceType(Type.GetType(cls.Module.Namespace + "." + cls.ClassName + ", Kistl.Objects", true));
         }
 
         public static bool ImplementsIExportable(this ObjectClass cls, IKistlContext ctx, bool lookupInBase)

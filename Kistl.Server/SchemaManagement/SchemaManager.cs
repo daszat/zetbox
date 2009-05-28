@@ -36,8 +36,8 @@ namespace Kistl.Server.SchemaManagement
         public void Dispose()
         {
             // Do not dispose "schema" -> passed to this class
-            if(savedSchema != null) savedSchema.Dispose();
-            if(db != null) db.Dispose();
+            if (savedSchema != null) savedSchema.Dispose();
+            if (db != null) db.Dispose();
             if (report != null) report.Dispose();
         }
 
@@ -56,9 +56,49 @@ namespace Kistl.Server.SchemaManagement
             report.WriteLine("Database: {0}", ApplicationContext.Current.Configuration.Server.ConnectionString);
             report.WriteLine();
         }
+
+        private System.Data.DbType GetDbType(Property p)
+        {
+            if (p is ObjectReferenceProperty)
+            {
+                return System.Data.DbType.Int32;
+            }
+            else if (p is EnumerationProperty)
+            {
+                return System.Data.DbType.Int32;
+            }
+            else if (p is IntProperty)
+            {
+                return System.Data.DbType.Int32;
+            }
+            else if (p is StringProperty)
+            {
+                return System.Data.DbType.String;
+            }
+            else if (p is DoubleProperty)
+            {
+                return System.Data.DbType.Double;
+            }
+            else if (p is BoolProperty)
+            {
+                return System.Data.DbType.Boolean;
+            }
+            else if (p is DateTimeProperty)
+            {
+                return System.Data.DbType.DateTime;
+            }
+            else if (p is GuidProperty)
+            {
+                return System.Data.DbType.Guid;
+            }
+            else
+            {
+                throw new DBTypeNotFoundException(p);
+            }
+        }
         #endregion
 
-        #region GetSavedSchema()
+        #region SavedSchema
         public static IKistlContext GetSavedSchema()
         {
             IKistlContext ctx = new MemoryContext();
@@ -67,13 +107,23 @@ namespace Kistl.Server.SchemaManagement
                 string schema = db.GetSavedSchema();
                 if (!string.IsNullOrEmpty(schema))
                 {
-                    using (var sr = new MemoryStream(ASCIIEncoding.Default.GetBytes(schema)))
+                    using (var ms = new MemoryStream(ASCIIEncoding.Default.GetBytes(schema)))
                     {
-                        Packaging.Importer.Import(ctx, sr);
+                        Packaging.Importer.Import(ctx, ms);
                     }
                 }
             }
             return ctx;
+        }
+
+        private void SaveSchema(IKistlContext schema)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Packaging.Exporter.Export(schema, ms, new string[] { "Kistl.App.Base" });
+                string schemaStr = ASCIIEncoding.Default.GetString(ms.GetBuffer());
+                db.SaveSchema(schemaStr);
+            }
         }
         #endregion
 
@@ -237,10 +287,29 @@ namespace Kistl.Server.SchemaManagement
         #region UpdateSchema
         public void UpdateSchema()
         {
-            savedSchema = SchemaManagement.SchemaManager.GetSavedSchema();
+            savedSchema = GetSavedSchema();
             WriteReportHeader("Update Schema Report");
 
-            UpdateTables();
+            db.BeginTransaction();
+            try
+            {
+                UpdateTables();
+
+                SaveSchema(schema);
+
+                db.CommitTransaction();
+            }
+            catch (Exception ex)
+            {
+                db.RollbackTransaction();
+
+                report.WriteLine();
+                report.WriteLine("** ERROR:");
+                report.WriteLine(ex.ToString());
+                report.Flush();
+
+                throw;
+            }
         }
 
         private void UpdateTables()
@@ -255,10 +324,25 @@ namespace Kistl.Server.SchemaManagement
                 {
                     CaseNewObjectClass(objClass);
                 }
+
+                UpdateColumns(objClass);
+            }
+        }
+
+        private void UpdateColumns(ObjectClass objClass)
+        {
+            foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.HasStorage()))
+            {
+                if (CheckCaseNewValueTypeProperty(prop))
+                {
+                    CaseNewValueTypeProperty(prop);
+                }
             }
         }
 
         #region Cases
+
+        #region NewObjectClass
         private bool CheckCaseNewObjectClass(ObjectClass objClass)
         {
             return savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid) == null;
@@ -266,7 +350,23 @@ namespace Kistl.Server.SchemaManagement
         private void CaseNewObjectClass(ObjectClass objClass)
         {
             report.WriteLine("  New Table: {0}", objClass.TableName);
+            db.CreateTable(objClass.TableName, objClass.BaseObjectClass == null);
         }
+        #endregion
+
+        #region NewValueTypeProperty
+        private bool CheckCaseNewValueTypeProperty(ValueTypeProperty prop)
+        {
+            return savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
+        }
+        private void CaseNewValueTypeProperty(ValueTypeProperty prop)
+        {
+            report.WriteLine("    New ValueType Property: {0}", prop.PropertyName);
+            db.CreateColumn(((ObjectClass)prop.ObjectClass).TableName, prop.PropertyName, GetDbType(prop), 
+                prop is StringProperty ? ((StringProperty)prop).Length : 0 , prop.IsNullable);
+        }
+        #endregion
+
         #endregion
 
         #endregion

@@ -12,6 +12,7 @@ namespace Kistl.API.Server
         void RollbackTransaction();
 
         string GetSavedSchema();
+        void SaveSchema(string schema);
 
         bool CheckTableExists(string tblName);
         bool CheckColumnExists(string tblName, string colName);
@@ -23,5 +24,8 @@ namespace Kistl.API.Server
         IEnumerable<string> GetTableNames();
         IEnumerable<string> GetTableColumnNames(string tblName);
         IEnumerable<string> GetFKConstraintNames();
+
+        void CreateTable(string tblName, bool idAsIdentityColumn);
+        void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
     }
 }

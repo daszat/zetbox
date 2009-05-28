@@ -760,6 +760,7 @@
     <Compile Include="Generators\Templates\Interface\CollectionEntries\ValueCollectionEntry.cs" />
     <Compile Include="Packaging\Exporter.cs" />
     <Compile Include="Packaging\Importer.cs" />
+    <Compile Include="SchemaManagement\Exceptions.cs" />
     <Compile Include="SchemaManagement\SchemaManager.cs" />
     <Compile Include="SchemaManagement\SchemaProvider.SQLServer\SchemaProvider.cs" />
     <Compile Include="WcfNamespaceReservation.cs" />

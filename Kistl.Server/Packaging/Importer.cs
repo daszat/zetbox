@@ -33,7 +33,7 @@ namespace Kistl.Server.Packaging
                     Guid exportGuid = xml.GetAttribute("ExportGuid").ParseGuidValue();
                     if (exportGuid != Guid.Empty)
                     {
-                        Trace.TraceInformation("found XMLNode: {0}", xml.Name);
+                        Console.Write(".");
                         string ifTypeName = string.Format("{0}.{1}, {2}", xml.NamespaceURI, xml.LocalName, ApplicationContext.Current.InterfaceAssembly);
                         Type t = Type.GetType(ifTypeName);
                         if (t == null)
