@@ -153,8 +153,8 @@ namespace Kistl.Server
                 HashSet<IStreamable> secondTierAuxObjects = new HashSet<IStreamable>();
                 foreach (var aux in auxObjects)
                 {
-                    aux.ToStream(sw, secondTierAuxObjects);
                     BinarySerializer.ToStream(true, sw);
+                    aux.ToStream(sw, secondTierAuxObjects);
                     sentObjects.Add(aux);
                 }
                 // check whether new objects where eagerly loaded
@@ -208,18 +208,10 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(m.Type.GetSystemType()).GetListOf(ctx, m.ID, m.Property);
-                        MemoryStream result = new MemoryStream();
-                        BinaryWriter sw = new BinaryWriter(result);
-                        foreach (IDataObject obj in lst)
-                        {
-                            BinarySerializer.ToStream(true, sw);
-                            obj.ToStream(sw, null);
-                        }
-                        BinarySerializer.ToStream(false, sw);
-
-                        result.Seek(0, SeekOrigin.Begin);
-                        return result;
+                        IEnumerable<IStreamable> lst = ServerObjectHandlerFactory
+                            .GetServerObjectHandler(m.Type.GetSystemType())
+                            .GetListOf(ctx, m.ID, m.Property);
+                        return SendObjects(lst);
                     }
                 }
             }
@@ -258,17 +250,7 @@ namespace Kistl.Server
                             .GetServerCollectionHandler(rel.A.Type.GetDataType(), rel.B.Type.GetDataType(), endRole)
                             .GetCollectionEntries(ctx, relId, endRole, parentObjID);
 
-                        MemoryStream result = new MemoryStream();
-                        BinaryWriter sw = new BinaryWriter(result);
-                        foreach (var obj in lst)
-                        {
-                            BinarySerializer.ToStream(true, sw);
-                            obj.ToStream(sw, null);
-                        }
-                        BinarySerializer.ToStream(false, sw);
-
-                        result.Seek(0, SeekOrigin.Begin);
-                        return result;
+                        return SendObjects(lst.Cast<IStreamable>());
                     }
                 }
             }
