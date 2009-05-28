@@ -132,10 +132,6 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
                 "int", true, db, tx);
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
         public static string GetColumnStmt(Property p, string parentPropertyName)
         {
             StringBuilder sb = new StringBuilder();
@@ -225,11 +221,12 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
         #endregion
 
         #region GetDBType
+
         /// <summary>
-        /// Returns the coresponding database type of the given CLR Type
+        /// Returns the corresponding database type of the specified property.
         /// </summary>
-        /// <param name="clrType">CLR Type as string</param>
-        /// <returns>Databasetype</returns>
+        /// <param name="p">the property</param>
+        /// <returns>the database type as string</returns>
         public static string GetDBType(Property p)
         {
             if (p is ObjectReferenceProperty)

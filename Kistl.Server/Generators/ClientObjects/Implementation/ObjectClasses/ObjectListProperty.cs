@@ -39,7 +39,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         /// <param name="wrapperClass">the name of the wrapper class for wrapping the EntityCollection</param>
         /// <param name="exposedListType">which generic interface to use for the collection (IList or ICollection)</param>
         /// <param name="rel"></param>
-        /// <param name="relEnd"></param>
+        /// <param name="endRole"></param>
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
@@ -72,8 +72,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         /// <param name="wrapperClass">the name of the wrapper class for wrapping the EntityCollection</param>
         /// <param name="exposedListType">which generic interface to use for the collection (IList or ICollection)</param>
         /// <param name="rel"></param>
-        /// <param name="relEnd"></param>
-        /// <param name="otherEnd"></param>
+        /// <param name="endRole"></param>
         /// <param name="otherName"></param>
         /// <param name="referencedInterface">which Kistl interface this list contains</param>
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,

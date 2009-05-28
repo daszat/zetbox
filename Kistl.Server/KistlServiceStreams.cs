@@ -1,18 +1,30 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
 
 namespace Kistl.Server
 {
-    public class KistlServiceStreams : IKistlServiceStreams
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.App.Base;
+
+    /// <summary>
+    /// Implements the streaming WCF interface.
+    /// </summary>
+    public class KistlServiceStreams
+        : IKistlServiceStreams
     {
-        public System.IO.MemoryStream GetObject(System.IO.MemoryStream msg)
+        /// <summary>
+        /// Gets a single object from the datastore.
+        /// </summary>
+        /// <param name="msg">the message should containt only a Type and an ID</param>
+        /// <returns>a memory stream containing the serialized object, rewound to the beginning</returns>
+        /// <exception cref="ArgumentOutOfRangeException">when the specified object was not found</exception>
+        [Obsolete]
+        public MemoryStream GetObject(MemoryStream msg)
         {
             try
             {
@@ -42,7 +54,12 @@ namespace Kistl.Server
             }
         }
 
-        public System.IO.MemoryStream SetObjects(System.IO.MemoryStream msg)
+        /// <summary>
+        /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
+        /// </summary>
+        /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
+        /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
+        public MemoryStream SetObjects(MemoryStream msg)
         {
             try
             {
@@ -50,7 +67,7 @@ namespace Kistl.Server
                 using (TraceClient.TraceHelper.TraceMethodCall())
                 {
 
-                    System.IO.BinaryReader sr = new System.IO.BinaryReader(msg);
+                    BinaryReader sr = new BinaryReader(msg);
                     var objects = new List<IPersistenceObject>();
                     bool @continue;
                     BinarySerializer.FromStream(out @continue, sr);
@@ -61,7 +78,7 @@ namespace Kistl.Server
                         SerializableType objType;
                         BinarySerializer.FromStream(out objType, sr);
 
-                        msg.Seek(pos, System.IO.SeekOrigin.Begin);
+                        msg.Seek(pos, SeekOrigin.Begin);
 
                         var obj = (IPersistenceObject)objType.NewObject();
                         obj.FromStream(sr);
@@ -98,7 +115,12 @@ namespace Kistl.Server
             }
         }
 
-        public System.IO.MemoryStream GetList(System.IO.MemoryStream msg)
+        /// <summary>
+        /// Returns a list of objects from the datastore, matching the specified filters.
+        /// </summary>
+        /// <param name="msg">a KistlServiceStreamsMessage specifying the type and filters to use for the query</param>
+        /// <returns>the found objects</returns>
+        public MemoryStream GetList(MemoryStream msg)
         {
             try
             {
@@ -134,7 +156,13 @@ namespace Kistl.Server
             }
         }
 
-        public System.IO.MemoryStream GetListOf(System.IO.MemoryStream msg)
+        /// <summary>
+        /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
+        /// </summary>
+        /// <param name="msg">a KistlServiceStreamsMessage specifying the type, object and property to use for the query</param>
+        /// <returns>the referenced objects</returns>
+        [Obsolete]
+        public MemoryStream GetListOf(MemoryStream msg)
         {
             try
             {
@@ -167,13 +195,20 @@ namespace Kistl.Server
             }
         }
 
-
-        // TODO: korrekte Signatur ist FetchRelation(int relationId, int serializableRole, int parentObjID)
-        public System.IO.MemoryStream FetchRelation(int relId, int serializableRole, int ID)
+        /// <summary>
+        /// Fetches a list of CollectionEntry objects of the Relation 
+        /// <paramref name="relID"/> which are owned by the object with the 
+        /// ID <paramref name="ID"/> in the role <paramref name="role"/>.
+        /// </summary>
+        /// <param name="relId">the requested Relation</param>
+        /// <param name="serializableRole">the parent role (1 == A, 2 == B)</param>
+        /// <param name="parentObjID">the ID of the parent object</param>
+        /// <returns>the requested collection entries</returns>
+        public MemoryStream FetchRelation(int relId, int serializableRole, int parentObjID)
         {
             try
             {
-                using (TraceClient.TraceHelper.TraceMethodCall("relId = {0}, role = {1}, ID = {2}", relId, serializableRole, ID))
+                using (TraceClient.TraceHelper.TraceMethodCall("relId = {0}, role = {1}, parentObjID = {2}", relId, serializableRole, parentObjID))
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
@@ -185,7 +220,7 @@ namespace Kistl.Server
 
                         var lst = ServerObjectHandlerFactory
                             .GetServerCollectionHandler(rel.A.Type.GetDataType(), rel.B.Type.GetDataType(), endRole)
-                            .GetCollectionEntries(ctx, relId, endRole, ID);
+                            .GetCollectionEntries(ctx, relId, endRole, parentObjID);
 
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);

@@ -93,21 +93,21 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         /// <summary>
         /// Check if Method was defined on a "ImplementsInterface" Interface
         /// </summary>
-        /// <param name="prop">Method to check</param>
+        /// <param name="method">Method to check</param>
         /// <returns>true if found in ImplementsIntercafe Collection</returns>
-        protected bool IsDeclaredInImplementsInterface(Kistl.App.Base.Method meth)
+        protected bool IsDeclaredInImplementsInterface(Kistl.App.Base.Method method)
         {
-            if (meth.ObjectClass is ObjectClass)
+            if (method.ObjectClass is ObjectClass)
             {
-                ObjectClass cls = (ObjectClass)meth.ObjectClass;
+                ObjectClass cls = (ObjectClass)method.ObjectClass;
                 List<Kistl.App.Base.Method> methods = new List<Kistl.App.Base.Method>();
                 foreach(var c in cls.ImplementsInterfaces)
                 {
-                    methods.AddRange(c.Methods.Where(m => m.MethodName == meth.MethodName));
+                    methods.AddRange(c.Methods.Where(m => m.MethodName == method.MethodName));
                 }
                 foreach(var m in methods)
                 {
-                    if (m.Parameter.Count == meth.Parameter.Count)
+                    if (m.Parameter.Count == method.Parameter.Count)
                     {
                         bool paramSame = true;
 

@@ -67,7 +67,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         /// <summary>
         /// Call the ObjectListProperty template for a given RelationEnd
         /// </summary>
-        /// <param name="relEnd"></param>
+        /// <param name="rel"></param>
+        /// <param name="endRole"></param>
         protected virtual void ApplyObjectListPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
             Implementation.ObjectClasses.ObjectListProperty.Call(Host, ctx,
@@ -78,7 +79,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         /// <summary>
         /// Call the CollectionEntryListProperty template for a given RelationEnd
         /// </summary>
-        /// <param name="relEnd"></param>
+        /// <param name="rel"></param>
+        /// <param name="endRole"></param>
         protected virtual void ApplyCollectionEntryListTemplate(Relation rel, RelationEndRole endRole)
         {
             Implementation.ObjectClasses.CollectionEntryListProperty.Call(Host, ctx,

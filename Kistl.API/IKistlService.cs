@@ -139,38 +139,39 @@ namespace Kistl.API
     public interface IKistlServiceStreams
     {
         /// <summary>
-        /// 
+        /// Gets a single object from the datastore. This method is superseded by using GetList with a (o => o.ID == $id) filter.
         /// </summary>
-        /// <param name="msg"></param>
-        /// <returns></returns>
+        /// <param name="msg">the message should containt only a Type and an ID</param>
+        /// <returns>a memory stream containing the serialized object, rewound to the beginning</returns>
+        /// <exception cref="ArgumentOutOfRangeException">when the specified object was not found</exception>
         [Obsolete]
         [OperationContract]
         MemoryStream GetObject(MemoryStream msg);
 
         /// <summary>
-        /// 
+        /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
-        /// <param name="msg"></param>
-        /// <returns></returns>
+        /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
+        /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
         [OperationContract]
         MemoryStream SetObjects(MemoryStream msg);
 
         /// <summary>
-        /// 
+        /// Returns a list of objects from the datastore, matching the specified filters.
         /// </summary>
-        /// <param name="msg"></param>
-        /// <returns></returns>
+        /// <param name="msg">a KistlServiceStreamsMessage specifying the type and filters to use for the query</param>
+        /// <returns>the found objects</returns>
         [OperationContract]
         MemoryStream GetList(MemoryStream msg);
 
         /// <summary>
-        /// 
+        /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
         /// </summary>
-        /// <param name="msg"></param>
-        /// <returns></returns>
+        /// <param name="msg">a KistlServiceStreamsMessage specifying the type, object and property to use for the query</param>
+        /// <returns>the referenced objects</returns>
+        [Obsolete]
         [OperationContract]
         MemoryStream GetListOf(MemoryStream msg);
-
 
         /// <summary>
         /// Fetches a list of CollectionEntry objects of the Relation 
@@ -180,7 +181,7 @@ namespace Kistl.API
         /// <param name="relId">the requested Relation</param>
         /// <param name="role">the parent role (1 == A, 2 == B)</param>
         /// <param name="ID">the ID of the parent object</param>
-        /// <returns></returns>
+        /// <returns>the requested collection entries</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
         MemoryStream FetchRelation(int relId, int role, int ID);

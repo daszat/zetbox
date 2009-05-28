@@ -17,7 +17,9 @@ namespace Kistl.Server
     /// Implementierung des KistlServices
     /// Error are handled by the KistlServiceErrorHandler
     /// </summary>
-    public class KistlService : IKistlService
+    [Obsolete]
+    public class KistlService
+        : IKistlService
     {
         #region XmlSerializer
         private interface IXmlSerializer
@@ -75,10 +77,13 @@ namespace Kistl.Server
 
         /// <summary>
         /// Implementierung der GetList Methode
-        /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
+        /// Holt sich vom ObjektBroker das richtige Server BL Objekt &amp;
         /// delegiert den Aufruf weiter
         /// </summary>
         /// <param name="type"></param>
+        /// <param name="filter"></param>
+        /// <param name="maxListCount"></param>
+        /// <param name="orderBy"></param>
         /// <returns></returns>
         public string GetList(SerializableType type, int maxListCount, SerializableExpression filter, List<SerializableExpression> orderBy)
         {
@@ -106,7 +111,7 @@ namespace Kistl.Server
 
         /// <summary>
         /// Implementierung der GetListOf Methode
-        /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
+        /// Holt sich vom ObjektBroker das richtige Server BL Objekt &amp;
         /// delegiert den Aufruf weiter
         /// </summary>
         /// <param name="type"></param>
@@ -140,7 +145,7 @@ namespace Kistl.Server
 
         /// <summary>
         /// Implementierung der GetObject Methode
-        /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
+        /// Holt sich vom ObjektBroker das richtige Server BL Objekt &amp;
         /// delegiert den Aufruf weiter
         /// </summary>
         /// <param name="type"></param>
@@ -172,11 +177,11 @@ namespace Kistl.Server
 
         /// <summary>
         /// Implementierung der SetObject Methode
-        /// Holt sich vom ObjektBroker das richtige Server BL Objekt & 
+        /// Holt sich vom ObjektBroker das richtige Server BL Objekt &amp;
         /// delegiert den Aufruf weiter
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="obj"></param>
+        /// <param name="xmlObj"></param>
         /// <returns></returns>
         public string SetObject(SerializableType type, string xmlObj)
         {

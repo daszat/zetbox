@@ -27,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         }
 
         /// <summary>
-        /// Gets a set of <see cref="MethodAttributs"/> and returns an appropriate set for output.
+        /// Gets a set of <see cref="MemberAttributes"/> for this method and returns an appropriate set for output.
         /// </summary>
         protected virtual MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)
         {

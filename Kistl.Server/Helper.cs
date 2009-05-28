@@ -24,6 +24,7 @@ namespace Kistl.Server
         /// Handles an Error
         /// </summary>
         /// <param name="ex">Exception to handle</param>
+        /// <param name="throwFault">whether or not to throw a <see cref="FaultException"/></param>
         public static void HandleError(Exception ex, bool throwFault)
         {
             System.Diagnostics.Trace.TraceError(ex.ToString());

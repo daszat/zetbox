@@ -73,16 +73,21 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// the given parameters.
         /// </summary>
         /// <param name="templatename"></param>
-        /// <param name="membername"></param>
+        /// <param name="type"></param>
+        /// <param name="xmlns"></param>
+        /// <param name="xmlname"></param>
+        /// <param name="templateparams"></param>
         public void Add(string templatename, SerializerType type, string xmlns, string xmlname, params object[] templateparams)
         {
             this.Add(new SerializationMember(templatename, type, xmlns, xmlname, templateparams));
-        }       
-        
+        }
+
         /// <summary>
         /// Add a SimpleBinarySerialization entry for this membername
         /// </summary>
-        /// <param name="serializer"></param>
+        /// <param name="type"></param>
+        /// <param name="xmlns"></param>
+        /// <param name="xmlname"></param>
         /// <param name="membername"></param>
         public void Add(SerializerType type, string xmlns, string xmlname, string membername)
         {

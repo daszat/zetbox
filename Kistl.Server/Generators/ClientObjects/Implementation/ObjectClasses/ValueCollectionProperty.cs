@@ -51,10 +51,12 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         /// <param name="name">the name of the property to create</param>
         /// <param name="backingName">the name of the private backing store for the conversion wrapper list</param>
         /// <param name="backingCollectionType">the name of the wrapper class for wrapping the CollectionEntries</param>
-        /// <param name="exposedListType">which generic interface to use for the collection</param>
+        /// <param name="exposedCollectionInterface">which generic interface to use for the collection</param>
         /// <param name="thisInterface">which Kistl interface this is</param>
         /// <param name="referencedType">which type this list contains</param>
-        /// <param name="referencedCollectionEntry">collection entries in this list</param>
+        /// <param name="entryType">collection entries in this list</param>
+        /// <param name="providerCollectionType">the provider type of this collection</param>
+        /// <param name="underlyingCollectionName">how the underlying collection is called</param>
         public static void Call(
             Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,

@@ -101,14 +101,14 @@ namespace Kistl.Server
             {
                 using (TraceClient.TraceHelper.TraceMethodCall("Starting WCF Server"))
                 {
-                    host = new ServiceHost(typeof(Kistl.Server.KistlService),
+                    host = new ServiceHost(typeof(KistlService),
                         new Uri(GetServiceUrl(appCtx.Configuration)));
                     host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
                     host.Faulted += new EventHandler(host_Faulted);
 
                     host.Open();
 
-                    hostStreams = new ServiceHost(typeof(Kistl.Server.KistlServiceStreams),
+                    hostStreams = new ServiceHost(typeof(KistlServiceStreams),
                         new Uri(GetStreamsUrl(appCtx.Configuration)));
                     hostStreams.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
                     hostStreams.Faulted += new EventHandler(host_Faulted);
