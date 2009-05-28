@@ -5,6 +5,7 @@ namespace Kistl.API
     using System.IO;
     using System.Xml;
     using System.Diagnostics;
+using System.Collections.Generic;
 
     /// <summary>
     /// Implement basic functionality needed by all persistent objects.
@@ -97,6 +98,16 @@ namespace Kistl.API
 
             BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
             BinarySerializer.ToStream(this.ID, sw);
+        }
+
+        /// <summary>
+        /// Base method for serializing this Object.
+        /// </summary>
+        /// <param name="sw">Stream to serialize to</param>
+        /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
+        public virtual void ToStream(BinaryWriter sw, List<IStreamable> auxObjects)
+        {
+            this.ToStream(sw);
         }
 
         /// <summary>

@@ -57,6 +57,16 @@ namespace Kistl.API
         }
 
         /// <summary>
+        /// Base method for serializing this Object.
+        /// </summary>
+        /// <param name="sw">Stream to serialize to</param>
+        /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
+        public virtual void ToStream(BinaryWriter sw, List<IStreamable> auxObjects)
+        {
+            this.ToStream(sw);
+        }
+
+        /// <summary>
         /// reads a struct from the specified stream. Since structs have no 
         /// own identity the ParentObject has to be constructed somewhere else 
         /// using external means, e.g. by examining the position in the stream.

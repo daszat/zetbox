@@ -1,14 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace Kistl.API.Mocks
 {
-    public class TestCollectionEntry : IRelationCollectionEntry
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
+    public class TestCollectionEntry
+        : IRelationCollectionEntry
     {
-        private int _ID  = -1;
+        private int _ID = -1;
         public int ID { get { return _ID; } set { _ID = value; } }
         public bool IsReadonly { get; private set; }
 
@@ -46,13 +49,13 @@ namespace Kistl.API.Mocks
             ((TestCollectionEntry)obj).TestName = this.TestName;
         }
 
-        public void FromStream(System.IO.BinaryReader sr)
+        public void FromStream(BinaryReader sr)
         {
             BinarySerializer.FromStream(out _ID, sr);
             BinarySerializer.FromStream(out _TestName, sr);
         }
 
-        public void ToStream(System.IO.BinaryWriter sw)
+        public void ToStream(BinaryWriter sw, List<IStreamable> auxObjects)
         {
             BinarySerializer.ToStream(ID, sw);
             BinarySerializer.ToStream(TestName, sw);

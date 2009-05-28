@@ -1,14 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
 
 namespace Kistl.DalProvider.Frozen
 {
-    public abstract class BaseFrozenObject : IPersistenceObject
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+
+    public abstract class BaseFrozenObject
+        : IPersistenceObject
     {
         protected BaseFrozenObject()
         {
@@ -40,14 +43,19 @@ namespace Kistl.DalProvider.Frozen
 
         #region IStreamable Members
 
-        public virtual void ToStream(System.IO.BinaryWriter sw)
+        public virtual void ToStream(BinaryWriter sw)
         {
             BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
             BinarySerializer.ToStream(ID, sw);
             BinarySerializer.ToStream((int)ObjectState, sw);
         }
 
-        public virtual void FromStream(System.IO.BinaryReader sr)
+        public virtual void ToStream(BinaryWriter sw, List<IStreamable> auxObjects)
+        {
+            ToStream(sw);
+        }
+
+        public virtual void FromStream(BinaryReader sr)
         {
             throw new InvalidOperationException("Cannot deserialize to a frozen Object");
         }

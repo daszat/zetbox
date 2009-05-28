@@ -1,11 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
 
 namespace Kistl.API.Mocks
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
 
     public interface TestDataObject : IDataObject
     {
@@ -15,7 +16,8 @@ namespace Kistl.API.Mocks
     }
 
     [Serializable]
-    public class TestDataObject__Implementation__ : IDataObject, ICloneable, INotifyPropertyChanged, TestDataObject
+    public class TestDataObject__Implementation__
+        : IDataObject, ICloneable, INotifyPropertyChanged, TestDataObject
     {
         private int _ID;
         private string _StringProperty;
@@ -54,7 +56,7 @@ namespace Kistl.API.Mocks
             }
         }
 
-        public void ToStream(System.IO.BinaryWriter sw)
+        public void ToStream(BinaryWriter sw, List<IStreamable> auxObjects)
         {
             BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
             BinarySerializer.ToStream(ID, sw);
@@ -63,7 +65,7 @@ namespace Kistl.API.Mocks
             BinarySerializer.ToStream(BoolProperty, sw);
         }
 
-        public void FromStream(System.IO.BinaryReader sr)
+        public void FromStream(BinaryReader sr)
         {
             SerializableType type;
             BinarySerializer.FromStream(out type, sr);

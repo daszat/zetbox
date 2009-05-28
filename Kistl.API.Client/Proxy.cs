@@ -245,7 +245,7 @@ namespace Kistl.API.Client
                 foreach (var obj in objects)
                 {
                     BinarySerializer.ToStream(true, sw);
-                    obj.ToStream(sw);
+                    obj.ToStream(sw, null);
                 }
                 BinarySerializer.ToStream(false, sw);
 

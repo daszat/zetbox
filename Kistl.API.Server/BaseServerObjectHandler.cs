@@ -1,49 +1,46 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Data;
-using System.Data.Linq;
-using System.Xml;
-using System.Reflection;
-using System.ComponentModel;
-using Kistl.API;
-using Kistl.API.Server;
+
 
 namespace Kistl.API.Server
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+
+    using Kistl.API;
+
     /// <summary>
-    /// Interface für das Server BL Objekt.
+    /// This describes the common interface from the server frontend to the provider for servicing the common "Get" operations.
+    /// The actual implementation will be instantiated per-request and be passed the required type.
     /// </summary>
     public interface IServerObjectHandler
     {
         /// <summary>
-        /// 
+        /// Return a list of objects matching the specified parameters.
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="maxListCount"></param>
-        /// <param name="filter"></param>
-        /// <param name="orderBy"></param>
-        /// <returns></returns>
+        /// <param name="ctx">the server context to use for loading the objects</param>
+        /// <param name="maxListCount">how many objects to load at most</param>
+        /// <param name="filter">a Linq filter to apply</param>
+        /// <param name="orderBy">a number of linq expressions to order by</param>
+        /// <returns>the filtered and ordered list of objects, containing at most <paramref name="maxListCount"/> objects</returns>
         IEnumerable GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy);
 
         /// <summary>
-        /// Implementiert den GetListOf Befehl.
+        /// Return the list of objects referenced by the specified property.
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="ID"></param>
-        /// <param name="property"></param>
-        /// <returns></returns>
+        /// <param name="ctx">the server context to use for loading the objects</param>
+        /// <param name="ID">the ID of the referencing object</param>
+        /// <param name="property">the name of the referencing property</param>
+        /// <returns>the list of objects</returns>
         IEnumerable GetListOf(IKistlContext ctx, int ID, string property);
 
         /// <summary>
-        /// Implementiert den GetObject Befehl.
+        /// return the specified object
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="ID"></param>
-        /// <returns></returns>
+        /// <param name="ctx">the server context to use for loading the objects</param>
+        /// <param name="ID">the ID of the requested object</param>
+        /// <returns>the found object</returns>
         IDataObject GetObject(IKistlContext ctx, int ID);
     }
 

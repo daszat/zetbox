@@ -39,7 +39,7 @@ namespace Kistl.Server
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
 
-                        obj.ToStream(sw);
+                        obj.ToStream(sw, null);
 
                         result.Seek(0, SeekOrigin.Begin);
                         return result;
@@ -98,7 +98,7 @@ namespace Kistl.Server
                         foreach (var obj in changedObjects)
                         {
                             BinarySerializer.ToStream(true, sw);
-                            obj.ToStream(sw);
+                            obj.ToStream(sw, null);
                         }
                         BinarySerializer.ToStream(false, sw);
 
@@ -136,10 +136,10 @@ namespace Kistl.Server
                                 m.OrderBy != null ? m.OrderBy.Select(o => SerializableExpression.ToExpression(o)).ToList() : null);
                         MemoryStream result = new MemoryStream();
                         BinaryWriter sw = new BinaryWriter(result);
-                        foreach (IDataObject obj in lst)
+                        foreach (IStreamable obj in lst)
                         {
                             BinarySerializer.ToStream(true, sw);
-                            obj.ToStream(sw);
+                            obj.ToStream(sw, null);
                         }
                         BinarySerializer.ToStream(false, sw);
 
@@ -178,7 +178,7 @@ namespace Kistl.Server
                         foreach (IDataObject obj in lst)
                         {
                             BinarySerializer.ToStream(true, sw);
-                            obj.ToStream(sw);
+                            obj.ToStream(sw, null);
                         }
                         BinarySerializer.ToStream(false, sw);
 
@@ -227,7 +227,7 @@ namespace Kistl.Server
                         foreach (var obj in lst)
                         {
                             BinarySerializer.ToStream(true, sw);
-                            obj.ToStream(sw);
+                            obj.ToStream(sw, null);
                         }
                         BinarySerializer.ToStream(false, sw);
 

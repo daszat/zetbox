@@ -90,7 +90,8 @@ namespace Kistl.API
         /// Serialize this Object to a BinaryWriter
         /// </summary>
         /// <param name="sw">BinaryWriter to serialize to</param>
-        void ToStream(BinaryWriter sw);
+        /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
+        void ToStream(BinaryWriter sw, List<IStreamable> auxObjects);
 
         /// <summary>
         /// Deserialize this Object from a BinaryReader

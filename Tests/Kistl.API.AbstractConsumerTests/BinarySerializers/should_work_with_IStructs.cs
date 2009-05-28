@@ -9,7 +9,8 @@ using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests.BinarySerializers
 {
-    class MinimalStructTest : IStruct
+    class MinimalStructTest 
+        : IStruct
     {
         #region IStruct Members
 
@@ -32,7 +33,7 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
 
         #region IStreamable Members
 
-        public void ToStream(BinaryWriter sw)
+        public void ToStream(BinaryWriter sw, List<IStreamable> auxObjects)
         {
 
         }
