@@ -16,43 +16,20 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
         #region Association Names
 
-        private static string AssociationName(string parentClass, string childClass, string propertyName)
+        private static string InheritanceAssociationName(string parentClass, string childClass)
         {
-            return "FK_" + childClass + "_" + parentClass + "_" + propertyName;
+            return "FK_" + childClass + "_" + parentClass + "_ID";
         }
 
-        /// <summary>
-        /// TODO: This is only needed for ID Relations
-        /// </summary>
-        /// <param name="parentClass"></param>
-        /// <param name="childClass"></param>
-        /// <param name="propertyName"></param>
-        /// <returns></returns>
-        public static string AssociationName(TypeMoniker parentClass, TypeMoniker childClass, string propertyName)
+        public static string InheritanceAssociationName(TypeMoniker parentClass, TypeMoniker childClass)
         {
-            return AssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
+            return InheritanceAssociationName(parentClass.ClassName, childClass.ClassName);
         }
 
-        //public static string AssociationName(ObjectClass parentClass, ObjectClass childClass, string propertyName)
-        //{
-        //    return AssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
-        //}
-
-        //public static string AssociationName(ObjectClass parentClass, Property listProperty)
-        //{
-        //    return AssociationName(
-        //        parentClass.ClassName,
-        //        Construct.PropertyCollectionEntryType(listProperty).ClassName,
-        //        listProperty.PropertyName);
-        //}
-
-        //public static string AssociationName(ObjectClass parentClass, Property listProperty, string propertyName)
-        //{
-        //    return AssociationName(
-        //        parentClass.ClassName,
-        //        Construct.PropertyCollectionEntryType(listProperty).Classname,
-        //        propertyName);
-        //}
+        public static string InheritanceAssociationName(ObjectClass parentClass, ObjectClass childClass)
+        {
+            return InheritanceAssociationName(parentClass.ClassName, childClass.ClassName);
+        }
 
         #endregion
 

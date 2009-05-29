@@ -139,6 +139,12 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             return (int)cmd.ExecuteScalar() > 0;
         }
 
+        public bool CheckTableContainsData(string tblName)
+        {
+            SqlCommand cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM [{0}]", tblName), db, tx);
+            return (int)cmd.ExecuteScalar() > 0;
+        }
+
         public bool GetIsColumnNullable(string tblName, string colName)
         {
             SqlCommand cmd = new SqlCommand(@"SELECT c.is_nullable FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id

@@ -5,7 +5,7 @@ declare @tbl nvarchar(2000)
 print 'Dropping Contraints'
 
 declare fk_cursor cursor for 
-SELECT c.name, t.name FROM sys.objects c inner join sys.sysobjects t  on t.id = c.parent_object_id WHERE c.type IN (N'F')
+SELECT c.name, t.name FROM sys.objects c inner join sys.sysobjects t  on t.id = c.parent_object_id WHERE c.type IN (N'F') order by c.name
 open fk_cursor
 
 fetch next from fk_cursor
@@ -28,7 +28,7 @@ deallocate fk_cursor
 print 'Dropping Tables'
 
 declare fk_tbl cursor for 
-SELECT t.name FROM sys.sysobjects t WHERE t.type IN (N'U')
+SELECT t.name FROM sys.sysobjects t WHERE t.type IN (N'U') order by t.name
 open fk_tbl
 
 fetch next from fk_tbl

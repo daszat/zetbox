@@ -189,11 +189,32 @@ namespace Kistl.Server.SchemaManagement
 
         private void CheckExtraRelations()
         {
-            List<string> relations = schema.GetQuery<Relation>().ToList().Select(r => r.GetAssociationName()).ToList();
+            var relations = schema.GetQuery<Relation>().ToList();
+            List<string> relationNames = new List<string>();
+
+            relationNames.AddRange(relations.Where(r => r.GetRelationType() == RelationType.one_n).Select(r => r.GetAssociationName()));
+            foreach (var rel in relations.Where(r => r.GetRelationType() == RelationType.n_m))
+            {
+                relationNames.Add(rel.GetRelationAssociationName(RelationEndRole.A));
+                relationNames.Add(rel.GetRelationAssociationName(RelationEndRole.B));
+            }
+
+            foreach (var rel in relations.Where(r => r.GetRelationType() == RelationType.one_one))
+            {
+                if(rel.A.Navigator != null && rel.A.Navigator.HasStorage())
+                    relationNames.Add(rel.GetRelationAssociationName(RelationEndRole.A));
+                if (rel.B.Navigator != null && rel.B.Navigator.HasStorage())
+                    relationNames.Add(rel.GetRelationAssociationName(RelationEndRole.B));
+            }
+
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.BaseObjectClass != null))
+            {
+                relationNames.Add(Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass));
+            }
 
             foreach (string relName in db.GetFKConstraintNames())
             {
-                if (!relations.Contains(relName))
+                if (!relationNames.Contains(relName))
                 {
                     report.WriteLine("** Warning: Relation \"{0}\" found in database but no relation object was defined", relName);
                 }
@@ -206,15 +227,136 @@ namespace Kistl.Server.SchemaManagement
             report.WriteLine("------------------");
             foreach (Relation rel in schema.GetQuery<Relation>())
             {
-                string fkName = rel.GetAssociationName();
-                if (db.CheckFKConstraintExists(fkName))
+                string assocName = rel.GetAssociationName();
+                report.WriteLine("Relation: \"{0}\" \"{1} - {2}\"", assocName, rel.A.Type.ClassName, rel.B.Type.ClassName);
+                switch (rel.GetRelationType())
                 {
-                    report.WriteLine("Relation: \"{0}\" \"{1} - {2}\"", fkName, rel.A.Type.ClassName, rel.B.Type.ClassName);
+                    case RelationType.one_one:
+                        Check_1_1_RelationColumns(rel, rel.A, RelationEndRole.A);
+                        Check_1_1_RelationColumns(rel, rel.B, RelationEndRole.B);
+                        break;
+                    case RelationType.one_n:
+                        Check_1_N_RelationColumns(rel);
+                        break;
+                    case RelationType.n_m:
+                        Check_N_M_RelationColumns(rel);
+                        break;
                 }
-                else
+            }
+        }
+
+        private void Check_1_1_RelationColumns(Relation rel, RelationEnd relEnd, RelationEndRole role)
+        {
+            if (relEnd.Navigator != null && relEnd.Navigator.HasStorage())
+            {
+                string assocNameRole = rel.GetRelationAssociationName(role);
+                if (!db.CheckFKConstraintExists(assocNameRole))
                 {
-                    report.WriteLine("** Warning: Relation \"{0}\" \"{1} - {2}\" is missing", fkName, rel.A.Type.ClassName, rel.B.Type.ClassName);
+                    report.WriteLine("  ** Warning: FK Constraint '{0}' is missing", assocNameRole);
                 }
+                if (!db.CheckColumnExists(relEnd.Type.TableName, Construct.ForeignKeyColumnName(relEnd.Navigator)))
+                {
+                    report.WriteLine("  ** Warning: Navigator {0} is missing", role);
+                }
+                if (rel.NeedsPositionStorage(RelationEndRole.A) && !db.CheckColumnExists(relEnd.Type.TableName, Construct.ListPositionColumnName(relEnd.Navigator)))
+                {
+                    report.WriteLine("  ** Warning: Position Column {0} is missing", role);
+                }
+            }
+        }
+
+        private void Check_1_N_RelationColumns(Relation rel)
+        {
+            string assocName = rel.GetAssociationName();
+
+            ObjectReferenceProperty nav = null;
+            string tblName = "";
+            string refTblName = "";
+            bool isIndexed = false;
+            if (rel.A.Navigator != null && rel.A.Navigator.HasStorage())
+            {
+                nav = rel.A.Navigator;
+                tblName = rel.A.Type.TableName;
+                refTblName = rel.B.Type.TableName;
+                isIndexed = rel.NeedsPositionStorage(RelationEndRole.A);
+            }
+            else if (rel.B.Navigator != null && rel.B.Navigator.HasStorage())
+            {
+                nav = rel.B.Navigator;
+                tblName = rel.B.Type.TableName;
+                refTblName = rel.A.Type.TableName;
+                isIndexed = rel.NeedsPositionStorage(RelationEndRole.B);
+            }
+
+            if (nav == null)
+            {
+                report.WriteLine("  ** Warning: Relation has no Navigator");
+                return;
+            }
+
+            if (!db.CheckFKConstraintExists(assocName))
+            {
+                report.WriteLine("  ** Warning: FK Constraint '{0}' is missing", assocName);
+            }
+
+            string colName = Construct.ForeignKeyColumnName(nav);
+            if (!db.CheckColumnExists(tblName, colName))
+            {
+                report.WriteLine("  ** Warning: Navigator is missing");
+            }
+            if (isIndexed)
+            {
+                if (!db.CheckColumnExists(tblName, Construct.ListPositionColumnName(nav)))
+                {
+                    report.WriteLine("  ** Warning: Position Column is missing");
+                }
+            }
+        }
+
+        private void Check_N_M_RelationColumns(Relation rel)
+        {
+            string assocName = rel.GetAssociationName();
+
+            string tblName = rel.GetRelationTableName();
+            string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
+            string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+
+            if (!db.CheckTableExists(tblName))
+            {
+                report.WriteLine("  ** Warning: Relation table '{0}' is missing", tblName);
+                return;
+            }
+
+            if (!db.CheckFKConstraintExists(rel.GetRelationAssociationName(RelationEndRole.A)))
+            {
+                report.WriteLine("  ** Warning: FK Constraint '{0}' for A is missing", rel.GetRelationAssociationName(RelationEndRole.A));
+            }
+            if (!db.CheckFKConstraintExists(rel.GetRelationAssociationName(RelationEndRole.B)))
+            {
+                report.WriteLine("  ** Warning: FK Constraint '{0}' for B is missing", rel.GetRelationAssociationName(RelationEndRole.B));
+            }
+
+            if (!db.CheckColumnExists(tblName, fkAName))
+            {
+                report.WriteLine("  ** Warning: Navigator A '{0}' is missing", fkAName);
+            }
+            if (rel.NeedsPositionStorage(RelationEndRole.A) && !db.CheckColumnExists(tblName, fkAName + Kistl.API.Helper.PositionSuffix))
+            {
+                report.WriteLine("  ** Warning: Navigator A '{0}' Position column is missing", fkAName);
+            }
+
+            if (!db.CheckColumnExists(tblName, fkBName))
+            {
+                report.WriteLine("  ** Warning: Navigator B '{0}' is missing", fkBName);
+            }
+            if (rel.NeedsPositionStorage(RelationEndRole.B) && !db.CheckColumnExists(tblName, fkBName + Kistl.API.Helper.PositionSuffix))
+            {
+                report.WriteLine("  ** Warning: Navigator B '{0}' Position column is missing", fkBName);
+            }
+
+            if (rel.A.Type.ImplementsIExportable(schema) && rel.B.Type.ImplementsIExportable(schema) && !db.CheckColumnExists(tblName, "ExportGuid"))
+            {
+                report.WriteLine("  ** Warning: ExportGuid is missing", fkBName);
             }
         }
 
@@ -262,13 +404,23 @@ namespace Kistl.Server.SchemaManagement
                             prop.IsNullable ? "NULLABLE" : "NOT NULLABLE");
                         isOK = false;
                     }
-                    if (prop is StringProperty && db.GetColumnMaxLength(tblName, colName) != ((StringProperty)prop).Length)
+                    if (prop is StringProperty)
                     {
-                        if (isOK) report.WriteLine();
-                        report.WriteLine("      ** Warning: Column \"{0}\" length mismatch. Columns length is {1} but should be {2}", colName,
-                            db.GetColumnMaxLength(tblName, colName),
-                            ((StringProperty)prop).Length);
-                        isOK = false;
+                        StringProperty strProp = (StringProperty)prop;
+
+                        // TODO: Introduce TextProperty
+                        if (strProp.Length > 1000)
+                        {
+                            // TODO: Check if ntext
+                        }
+                        else if (db.GetColumnMaxLength(tblName, colName) != strProp.Length)
+                        {
+                            if (isOK) report.WriteLine();
+                            report.WriteLine("      ** Warning: Column \"{0}\" length mismatch. Columns length is {1} but should be {2}", colName,
+                                db.GetColumnMaxLength(tblName, colName),
+                                ((StringProperty)prop).Length);
+                            isOK = false;
+                        }
                     }
 
                     if (isOK)
@@ -295,6 +447,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 UpdateTables();
                 UpdateRelations();
+                UpdateInheritance();
 
                 SaveSchema(schema);
 
@@ -328,6 +481,7 @@ namespace Kistl.Server.SchemaManagement
 
                 UpdateColumns(objClass);
             }
+            report.WriteLine();
         }
 
         private void UpdateColumns(ObjectClass objClass)
@@ -372,6 +526,23 @@ namespace Kistl.Server.SchemaManagement
                     }
                 }
             }
+            report.WriteLine();
+        }
+
+        private void UpdateInheritance()
+        {
+            report.WriteLine("Updating Inheritance");
+            report.WriteLine("--------------------");
+
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            {
+                report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                if (CheckCaseNewObjectClassInheritance(objClass))
+                {
+                    CaseNewObjectClassInheritance(objClass);
+                }
+            }
+            report.WriteLine();
         }
 
         #region Cases
@@ -415,14 +586,14 @@ namespace Kistl.Server.SchemaManagement
             string tblName ="";
             string refTblName="";
             bool isIndexed = false;
-            if (rel.A.Navigator.HasStorage())
+            if (rel.A.Navigator != null && rel.A.Navigator.HasStorage())
             {
                 nav = rel.A.Navigator;
                 tblName = rel.A.Type.TableName;
                 refTblName = rel.B.Type.TableName;
                 isIndexed = rel.NeedsPositionStorage(RelationEndRole.A);
             }
-            else if (rel.B.Navigator.HasStorage())
+            else if (rel.B.Navigator != null && rel.B.Navigator.HasStorage())
             {
                 nav = rel.B.Navigator;
                 tblName = rel.B.Type.TableName;
@@ -492,25 +663,25 @@ namespace Kistl.Server.SchemaManagement
         }
         private void CaseNew_1_1_Relation(Relation rel)
         {
-            string assocName = rel.GetAssociationName();
-            report.WriteLine("  New 1:1 Relation: {0}", assocName);
+            report.WriteLine("  New 1:1 Relation: {0}", rel.GetAssociationName());
 
             if (rel.A.Navigator.HasStorage())
             {
-                CaseNew_1_1_Relation_CreateColumns(rel, assocName, rel.A, rel.B, RelationEndRole.A);
+                CaseNew_1_1_Relation_CreateColumns(rel, rel.A, rel.B, RelationEndRole.A);
             }
             // Difference to 1:N. 1:1 may have storage 'Replicate'
             if (rel.B.Navigator.HasStorage())
             {
-                CaseNew_1_1_Relation_CreateColumns(rel, assocName, rel.B, rel.A, RelationEndRole.B);
+                CaseNew_1_1_Relation_CreateColumns(rel, rel.B, rel.A, RelationEndRole.B);
             }
         }
 
-        private void CaseNew_1_1_Relation_CreateColumns(Relation rel, string assocName, RelationEnd end, RelationEnd otherEnd, RelationEndRole role)
+        private void CaseNew_1_1_Relation_CreateColumns(Relation rel, RelationEnd end, RelationEnd otherEnd, RelationEndRole role)
         {
             string tblName = end.Type.TableName;
             string refTblName = otherEnd.Type.TableName;
             string colName = Construct.ForeignKeyColumnName(end.Navigator);
+            string assocName = rel.GetRelationAssociationName(role);
 
             db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, end.Navigator.IsNullable);
             db.CreateFKConstraint(tblName, refTblName, colName, assocName);
@@ -519,6 +690,29 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.CreateColumn(tblName, Construct.ListPositionColumnName(end.Navigator), System.Data.DbType.Int32, 0, end.Navigator.IsNullable);
             }
+        }
+        #endregion
+
+        #region NewObjectClassInheritance
+        private bool CheckCaseNewObjectClassInheritance(ObjectClass objClass)
+        {
+            if (objClass.BaseObjectClass == null) return false;
+
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            return savedObjClass == null || savedObjClass.BaseObjectClass == null;
+        }
+        private void CaseNewObjectClassInheritance(ObjectClass objClass)
+        {
+            report.WriteLine("  New ObjectClass Inheritance: {0} -> {1}", objClass.ClassName, objClass.BaseObjectClass.ClassName);
+
+            string tblName = objClass.TableName;
+            if (db.CheckTableContainsData(tblName))
+            {
+                report.WriteLine("    ** Warning: Table '{0}' contains data. unable to add inheritence", tblName);
+                return;
+            }
+
+            db.CreateFKConstraint(tblName, objClass.BaseObjectClass.TableName, "ID", Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass));
         }
         #endregion
 

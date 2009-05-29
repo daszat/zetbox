@@ -17,6 +17,7 @@ namespace Kistl.API.Server
         bool CheckTableExists(string tblName);
         bool CheckColumnExists(string tblName, string colName);
         bool CheckFKConstraintExists(string fkName);
+        bool CheckTableContainsData(string tblName);
 
         bool GetIsColumnNullable(string tblName, string colName);
         int GetColumnMaxLength(string tblName, string colName);

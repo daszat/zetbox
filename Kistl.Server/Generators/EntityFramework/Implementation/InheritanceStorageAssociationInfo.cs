@@ -23,7 +23,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             Parent = Class.BaseObjectClass.GetTypeMoniker();
             Child = Class.GetTypeMoniker();
 
-            AssociationName = Construct.AssociationName(Parent, Child, "ID");
+            AssociationName = Construct.InheritanceAssociationName(Parent, Child);
 
             ParentRoleName = "A_" + Parent.ClassName;
             ChildRoleName = "B_" + Child.ClassName;

@@ -255,7 +255,7 @@
 		string parentRoleName = Construct.AssociationParentRoleName(parentType);
 		string childRoleName = Construct.AssociationChildRoleName(childType);
 %>
-  <Association Name="<%= Construct.AssociationName(parentType, childType, "ID") %>">
+  <Association Name="<%= Construct.InheritanceAssociationName(parentType, childType) %>">
     <End Role="<%= parentRoleName %>" Type="Model.Store.<%= parentType.ClassName %>" Multiplicity="1" />
     <End Role="<%= childRoleName %>" Type="Model.Store.<%= childType.ClassName %>" Multiplicity="0..1" />
     <ReferentialConstraint>
