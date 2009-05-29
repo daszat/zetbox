@@ -59,7 +59,7 @@ namespace Kistl.App.Base
         /// The assembly containing the referenced Type.
         /// </summary>
     /*
-    Relation: FK_TypeRef_Assembly_TypeRef_65
+    Relation: FK_TypeRef_has_Assembly
     A: ZeroOrMore TypeRef as TypeRef
     B: ZeroOrOne Assembly as Assembly
     Preferred Storage: MergeIntoA
@@ -87,14 +87,14 @@ namespace Kistl.App.Base
         private int? _fk_Assembly;
         private Guid? _fk_guid_Assembly = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_Assembly_TypeRef_65", "Assembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_has_Assembly", "Assembly")]
         public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_TypeRef_Assembly_TypeRef_65",
+                        "Model.FK_TypeRef_has_Assembly",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -108,7 +108,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_TypeRef_Assembly_TypeRef_65",
+                        "Model.FK_TypeRef_has_Assembly",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -181,7 +181,7 @@ namespace Kistl.App.Base
         /// list of type arguments
         /// </summary>
     /*
-    Relation: FK_TypeRef_TypeRef_TypeRef_66
+    Relation: FK_TypeRef_hasGenericArguments_TypeRef
     A: ZeroOrMore TypeRef as TypeRef
     B: ZeroOrMore TypeRef as GenericArguments
     Preferred Storage: Separate
@@ -197,7 +197,7 @@ namespace Kistl.App.Base
             {
                 if (_GenericArgumentsWrapper == null)
                 {
-                    _GenericArgumentsWrapper = new EntityRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__>(
+                    _GenericArgumentsWrapper = new EntityRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__>(
                             this,
                             GenericArguments__Implementation__);
                 }
@@ -205,14 +205,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_TypeRef_66", "CollectionEntry")]
-        public EntityCollection<Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__> GenericArguments__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_TypeRef_TypeRef", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__> GenericArguments__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__>(
-                        "Model.FK_TypeRef_TypeRef_TypeRef_66",
+                    .GetRelatedCollection<Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__>(
+                        "Model.FK_TypeRef_hasGenericArguments_TypeRef_TypeRef",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -222,14 +222,14 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_GenericArguments66CollectionEntry__Implementation__> _GenericArgumentsWrapper;
+        private EntityRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__> _GenericArgumentsWrapper;
 
 
         /// <summary>
         /// The TypeRef of the BaseClass of the referenced Type
         /// </summary>
     /*
-    Relation: FK_TypeRef_TypeRef_Child_79
+    Relation: FK_TypeRef_has_TypeRef
     A: ZeroOrMore TypeRef as Child
     B: One TypeRef as Parent
     Preferred Storage: MergeIntoA
@@ -257,14 +257,14 @@ namespace Kistl.App.Base
         private int? _fk_Parent;
         private Guid? _fk_guid_Parent = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_Child_79", "Parent")]
+        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_has_TypeRef", "Parent")]
         public Kistl.App.Base.TypeRef__Implementation__ Parent__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_TypeRef_Child_79",
+                        "Model.FK_TypeRef_has_TypeRef",
                         "Parent");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -278,7 +278,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_TypeRef_Child_79",
+                        "Model.FK_TypeRef_has_TypeRef",
                         "Parent");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

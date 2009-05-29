@@ -22,7 +22,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
         protected override void ApplyClassAttributeTemplate()
         {
             base.ApplyClassAttributeTemplate();
-            this.WriteObjects(@"    [EdmEntityType(NamespaceName=""Model"", Name=""", rel.GetCollectionEntryClassName(), @""")]");
+            this.WriteObjects(@"    [EdmEntityType(NamespaceName=""Model"", Name=""", rel.GetRelationClassName(), @""")]");
             this.WriteLine();
         }
 

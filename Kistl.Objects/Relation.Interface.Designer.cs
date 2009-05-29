@@ -35,9 +35,23 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Base.Module Module {
+			get;
+			set;
+		}
+        /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
 		Kistl.App.Base.StorageType? Storage {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Verb of this Relation
+        /// </summary>
+		string Verb {
 			get;
 			set;
 		}

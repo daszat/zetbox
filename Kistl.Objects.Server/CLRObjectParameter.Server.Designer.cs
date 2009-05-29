@@ -38,7 +38,7 @@ namespace Kistl.App.Base
         /// Assembly des CLR Objektes, NULL für Default Assemblies
         /// </summary>
     /*
-    Relation: FK_CLRObjectParameter_Assembly_CLRObjectParameter_46
+    Relation: FK_CLRObjectParameter_has_Assembly
     A: ZeroOrMore CLRObjectParameter as CLRObjectParameter
     B: ZeroOrOne Assembly as Assembly
     Preferred Storage: MergeIntoA
@@ -66,14 +66,14 @@ namespace Kistl.App.Base
         private int? _fk_Assembly;
         private Guid? _fk_guid_Assembly = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_CLRObjectParameter_Assembly_CLRObjectParameter_46", "Assembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_CLRObjectParameter_has_Assembly", "Assembly")]
         public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_CLRObjectParameter_Assembly_CLRObjectParameter_46",
+                        "Model.FK_CLRObjectParameter_has_Assembly",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -87,7 +87,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_CLRObjectParameter_Assembly_CLRObjectParameter_46",
+                        "Model.FK_CLRObjectParameter_has_Assembly",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

@@ -1162,7 +1162,7 @@ namespace Kistl.App.Base
 			DataStore[122].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[1];
 			DataStore[122].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[122].Seal();
-			DataStore[124].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[124].ExportGuid = new Guid("5082d730-e86e-47ae-a4c0-14792096c891");
 			DataStore[124].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
 			DataStore[124].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
 			DataStore[124].MemberName = @"OnToString_ViewDescriptor";

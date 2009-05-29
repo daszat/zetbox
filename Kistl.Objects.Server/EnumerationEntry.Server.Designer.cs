@@ -87,7 +87,7 @@ namespace Kistl.App.Base
         /// Übergeordnete Enumeration
         /// </summary>
     /*
-    Relation: FK_Enumeration_EnumerationEntry_Enumeration_47
+    Relation: FK_Enumeration_has_EnumerationEntry
     A: One Enumeration as Enumeration
     B: ZeroOrMore EnumerationEntry as EnumerationEntries
     Preferred Storage: MergeIntoB
@@ -115,14 +115,14 @@ namespace Kistl.App.Base
         private int? _fk_Enumeration;
         private Guid? _fk_guid_Enumeration = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Enumeration_EnumerationEntry_Enumeration_47", "Enumeration")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Enumeration_has_EnumerationEntry", "Enumeration")]
         public Kistl.App.Base.Enumeration__Implementation__ Enumeration__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Enumeration__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Enumeration__Implementation__>(
-                        "Model.FK_Enumeration_EnumerationEntry_Enumeration_47",
+                        "Model.FK_Enumeration_has_EnumerationEntry",
                         "Enumeration");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -136,7 +136,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Enumeration__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Enumeration__Implementation__>(
-                        "Model.FK_Enumeration_EnumerationEntry_Enumeration_47",
+                        "Model.FK_Enumeration_has_EnumerationEntry",
                         "Enumeration");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

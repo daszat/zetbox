@@ -136,17 +136,17 @@ namespace Kistl.App.GUI
 			{
 				if (_Menu == null)
 				{
-					Context.FetchRelation<Template_Menu61CollectionEntry__Implementation__>(61, RelationEndRole.A, this);
+					Context.FetchRelation<Template_hasMenu_Visual_RelationEntry__Implementation__>(61, RelationEndRole.A, this);
 					_Menu 
-						= new ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_Menu61CollectionEntry__Implementation__>(
+						= new ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_hasMenu_Visual_RelationEntry__Implementation__>(
 							this, 
-							new RelationshipFilterASideCollection<Template_Menu61CollectionEntry__Implementation__>(this.Context, this));
+							new RelationshipFilterASideCollection<Template_hasMenu_Visual_RelationEntry__Implementation__>(this.Context, this));
 				}
 				return _Menu;
 			}
 		}
 
-		private ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_Menu61CollectionEntry__Implementation__> _Menu;
+		private ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_hasMenu_Visual_RelationEntry__Implementation__> _Menu;
 
         /// <summary>
         /// The visual representation of this Template

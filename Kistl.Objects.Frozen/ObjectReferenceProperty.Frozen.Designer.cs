@@ -221,7 +221,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(70);
+		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(71);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
@@ -433,6 +433,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[249] = 
 			DataStore[249] = new ObjectReferenceProperty__Implementation__Frozen(249);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[271] = 
+			DataStore[271] = new ObjectReferenceProperty__Implementation__Frozen(271);
 
 		}
 
@@ -1593,6 +1596,23 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[248],
 			DataStore[249].EagerLoading = false;
 			DataStore[249].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
 			DataStore[249].Seal();
+			DataStore[271].AltText = null;
+			DataStore[271].CategoryTags = null;
+			DataStore[271].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[267],
+});
+			DataStore[271].Description = null;
+			DataStore[271].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[271].IsIndexed = false;
+			DataStore[271].IsList = false;
+			DataStore[271].IsNullable = false;
+			DataStore[271].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[271].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
+			DataStore[271].PropertyName = @"Module";
+			DataStore[271].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[271].EagerLoading = false;
+			DataStore[271].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
+			DataStore[271].Seal();
 	
 		}
 #region Serializer

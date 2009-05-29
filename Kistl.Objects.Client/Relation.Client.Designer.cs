@@ -202,6 +202,50 @@ namespace Kistl.App.Base
         private Guid _ExportGuid;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                if (_fk_Module.HasValue)
+                    return Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                
+                // shortcut noops
+                if (value == null && _fk_Module == null)
+					return;
+                else if (value != null && value.ID == _fk_Module)
+					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Module;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Module", oldValue, value);
+                
+				// next, set the local reference
+                _fk_Module = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Module", oldValue, value);
+            }
+        }
+        
+        private int? _fk_Module;
+
+        /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
         // enumeration property
@@ -226,6 +270,31 @@ namespace Kistl.App.Base
         }
         private Kistl.App.Base.StorageType? _Storage;
 
+        /// <summary>
+        /// Verb of this Relation
+        /// </summary>
+        // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual string Verb
+        {
+            get
+            {
+                return _Verb;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Verb != value)
+                {
+					var __oldValue = _Verb;
+                    NotifyPropertyChanging("Verb", __oldValue, value);
+                    _Verb = value;
+                    NotifyPropertyChanged("Verb", __oldValue, value);
+                }
+            }
+        }
+        private string _Verb;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Relation));
@@ -241,8 +310,10 @@ namespace Kistl.App.Base
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
 			me.Storage = other.Storage;
+			me.Verb = other.Verb;
 			this._fk_A = otherImpl._fk_A;
 			this._fk_B = otherImpl._fk_B;
+			this._fk_Module = otherImpl._fk_Module;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -321,11 +392,29 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "Module":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(271).Constraints
+						.Where(c => !c.IsValid(this, this.Module))
+						.Select(c => c.GetErrorText(this, this.Module))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "Storage":
 				{
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(183).Constraints
 						.Where(c => !c.IsValid(this, this.Storage))
 						.Select(c => c.GetErrorText(this, this.Storage))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Verb":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(270).Constraints
+						.Where(c => !c.IsValid(this, this.Verb))
+						.Select(c => c.GetErrorText(this, this.Verb))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -345,6 +434,9 @@ namespace Kistl.App.Base
                 case "B":
                     _fk_B = id;
                     break;
+                case "Module":
+                    _fk_Module = id;
+                    break;
 				default:
 					base.UpdateParent(propertyName, id);
 					break;
@@ -362,7 +454,9 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._fk_B, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
+            BinarySerializer.ToStream(this._Verb, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -373,7 +467,9 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_B, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
+            BinarySerializer.FromStream(out this._Verb, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -384,7 +480,9 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
             XmlStreamer.ToStream((int)this.Storage, xml, "Storage", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -395,7 +493,9 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
             XmlStreamer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -407,6 +507,8 @@ namespace Kistl.App.Base
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.Storage, xml, "Storage", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -414,6 +516,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
 #endregion

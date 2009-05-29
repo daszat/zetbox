@@ -131,7 +131,7 @@ namespace Kistl.App.GUI
         /// The described CLR class&apos; reference
         /// </summary>
     /*
-    Relation: FK_PresentableModelDescriptor_TypeRef_Descriptor_77
+    Relation: FK_PresentableModelDescriptor_has_TypeRef
     A: ZeroOrMore PresentableModelDescriptor as Descriptor
     B: One TypeRef as PresentableModelRef
     Preferred Storage: MergeIntoA
@@ -159,14 +159,14 @@ namespace Kistl.App.GUI
         private int? _fk_PresentableModelRef;
         private Guid? _fk_guid_PresentableModelRef = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_TypeRef_Descriptor_77", "PresentableModelRef")]
+        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_has_TypeRef", "PresentableModelRef")]
         public Kistl.App.Base.TypeRef__Implementation__ PresentableModelRef__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_TypeRef_Descriptor_77",
+                        "Model.FK_PresentableModelDescriptor_has_TypeRef",
                         "PresentableModelRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -180,7 +180,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_TypeRef_Descriptor_77",
+                        "Model.FK_PresentableModelDescriptor_has_TypeRef",
                         "PresentableModelRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

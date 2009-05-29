@@ -137,15 +137,15 @@ namespace Kistl.App.Base
 				if (_GenericArguments == null)
 				{
 					_GenericArguments 
-						= new ClientRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments66CollectionEntry__Implementation__>(
+						= new ClientRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__>(
 							this, 
-							new RelationshipFilterASideCollection<TypeRef_GenericArguments66CollectionEntry__Implementation__>(this.Context, this));
+							new RelationshipFilterASideCollection<TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__>(this.Context, this));
 				}
 				return _GenericArguments;
 			}
 		}
 
-		private ClientRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments66CollectionEntry__Implementation__> _GenericArguments;
+		private ClientRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__> _GenericArguments;
 
         /// <summary>
         /// The TypeRef of the BaseClass of the referenced Type

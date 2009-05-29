@@ -12,8 +12,8 @@ using Kistl.API;
 
 namespace Kistl.App.Base
 {
-    [System.Diagnostics.DebuggerDisplay("ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__")]
-    public class ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__ : BaseClientCollectionEntry, ObjectClass_ImplementsInterfaces49CollectionEntry
+    [System.Diagnostics.DebuggerDisplay("ObjectClass_implements_Interface_RelationEntry__Implementation__")]
+    public class ObjectClass_implements_Interface_RelationEntry__Implementation__ : BaseClientCollectionEntry, ObjectClass_implements_Interface_RelationEntry
     {
     
 // ID is inherited
@@ -145,7 +145,7 @@ namespace Kistl.App.Base
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(ObjectClass_ImplementsInterfaces49CollectionEntry));
+			return new InterfaceType(typeof(ObjectClass_implements_Interface_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -156,8 +156,8 @@ namespace Kistl.App.Base
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__)obj;
-			var me = (ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__)this;
+			var other = (ObjectClass_implements_Interface_RelationEntry__Implementation__)obj;
+			var me = (ObjectClass_implements_Interface_RelationEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -170,8 +170,8 @@ namespace Kistl.App.Base
 
 namespace Kistl.App.Projekte
 {
-    [System.Diagnostics.DebuggerDisplay("Projekt_Mitarbeiter23CollectionEntry__Implementation__")]
-    public class Projekt_Mitarbeiter23CollectionEntry__Implementation__ : BaseClientCollectionEntry, Projekt_Mitarbeiter23CollectionEntry
+    [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntry__Implementation__")]
+    public class Projekt_haben_Mitarbeiter_RelationEntry__Implementation__ : BaseClientCollectionEntry, Projekt_haben_Mitarbeiter_RelationEntry
     {
     
 // ID is inherited
@@ -369,7 +369,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Projekt_Mitarbeiter23CollectionEntry));
+			return new InterfaceType(typeof(Projekt_haben_Mitarbeiter_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -380,8 +380,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Projekt_Mitarbeiter23CollectionEntry__Implementation__)obj;
-			var me = (Projekt_Mitarbeiter23CollectionEntry__Implementation__)this;
+			var other = (Projekt_haben_Mitarbeiter_RelationEntry__Implementation__)obj;
+			var me = (Projekt_haben_Mitarbeiter_RelationEntry__Implementation__)this;
 			
             me.AIndex = other.AIndex;
             me.BIndex = other.BIndex;
@@ -396,8 +396,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 namespace Kistl.App.GUI
 {
-    [System.Diagnostics.DebuggerDisplay("Template_Menu61CollectionEntry__Implementation__")]
-    public class Template_Menu61CollectionEntry__Implementation__ : BaseClientCollectionEntry, Template_Menu61CollectionEntry
+    [System.Diagnostics.DebuggerDisplay("Template_hasMenu_Visual_RelationEntry__Implementation__")]
+    public class Template_hasMenu_Visual_RelationEntry__Implementation__ : BaseClientCollectionEntry, Template_hasMenu_Visual_RelationEntry
     {
     
 // ID is inherited
@@ -529,7 +529,7 @@ namespace Kistl.App.GUI
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Template_Menu61CollectionEntry));
+			return new InterfaceType(typeof(Template_hasMenu_Visual_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -540,8 +540,8 @@ namespace Kistl.App.GUI
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Template_Menu61CollectionEntry__Implementation__)obj;
-			var me = (Template_Menu61CollectionEntry__Implementation__)this;
+			var other = (Template_hasMenu_Visual_RelationEntry__Implementation__)obj;
+			var me = (Template_hasMenu_Visual_RelationEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -554,8 +554,8 @@ namespace Kistl.App.GUI
 
 namespace Kistl.App.Base
 {
-    [System.Diagnostics.DebuggerDisplay("TypeRef_GenericArguments66CollectionEntry__Implementation__")]
-    public class TypeRef_GenericArguments66CollectionEntry__Implementation__ : BaseClientCollectionEntry, TypeRef_GenericArguments66CollectionEntry
+    [System.Diagnostics.DebuggerDisplay("TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__")]
+    public class TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__ : BaseClientCollectionEntry, TypeRef_hasGenericArguments_TypeRef_RelationEntry
     {
     
 // ID is inherited
@@ -753,7 +753,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(TypeRef_GenericArguments66CollectionEntry));
+			return new InterfaceType(typeof(TypeRef_hasGenericArguments_TypeRef_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -764,8 +764,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (TypeRef_GenericArguments66CollectionEntry__Implementation__)obj;
-			var me = (TypeRef_GenericArguments66CollectionEntry__Implementation__)this;
+			var other = (TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__)obj;
+			var me = (TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__)this;
 			
             me.AIndex = other.AIndex;
             me.BIndex = other.BIndex;
@@ -780,8 +780,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 namespace Kistl.App.GUI
 {
-    [System.Diagnostics.DebuggerDisplay("Visual_Children55CollectionEntry__Implementation__")]
-    public class Visual_Children55CollectionEntry__Implementation__ : BaseClientCollectionEntry, Visual_Children55CollectionEntry
+    [System.Diagnostics.DebuggerDisplay("Visual_contains_Visual_RelationEntry__Implementation__")]
+    public class Visual_contains_Visual_RelationEntry__Implementation__ : BaseClientCollectionEntry, Visual_contains_Visual_RelationEntry
     {
     
 // ID is inherited
@@ -913,7 +913,7 @@ namespace Kistl.App.GUI
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Visual_Children55CollectionEntry));
+			return new InterfaceType(typeof(Visual_contains_Visual_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -924,8 +924,8 @@ namespace Kistl.App.GUI
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Visual_Children55CollectionEntry__Implementation__)obj;
-			var me = (Visual_Children55CollectionEntry__Implementation__)this;
+			var other = (Visual_contains_Visual_RelationEntry__Implementation__)obj;
+			var me = (Visual_contains_Visual_RelationEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -938,8 +938,8 @@ namespace Kistl.App.GUI
 
 namespace Kistl.App.GUI
 {
-    [System.Diagnostics.DebuggerDisplay("Visual_ContextMenu60CollectionEntry__Implementation__")]
-    public class Visual_ContextMenu60CollectionEntry__Implementation__ : BaseClientCollectionEntry, Visual_ContextMenu60CollectionEntry
+    [System.Diagnostics.DebuggerDisplay("Visual_hasContextMenu_Visual_RelationEntry__Implementation__")]
+    public class Visual_hasContextMenu_Visual_RelationEntry__Implementation__ : BaseClientCollectionEntry, Visual_hasContextMenu_Visual_RelationEntry
     {
     
 // ID is inherited
@@ -1071,7 +1071,7 @@ namespace Kistl.App.GUI
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Visual_ContextMenu60CollectionEntry));
+			return new InterfaceType(typeof(Visual_hasContextMenu_Visual_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -1082,8 +1082,8 @@ namespace Kistl.App.GUI
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Visual_ContextMenu60CollectionEntry__Implementation__)obj;
-			var me = (Visual_ContextMenu60CollectionEntry__Implementation__)this;
+			var other = (Visual_hasContextMenu_Visual_RelationEntry__Implementation__)obj;
+			var me = (Visual_hasContextMenu_Visual_RelationEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1097,8 +1097,8 @@ namespace Kistl.App.GUI
 namespace Kistl.App.TimeRecords
 {
 	using Kistl.App.Projekte;
-    [System.Diagnostics.DebuggerDisplay("WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__")]
-    public class WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__ : BaseClientCollectionEntry, WorkEffortAccount_Mitarbeiter42CollectionEntry
+    [System.Diagnostics.DebuggerDisplay("WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__")]
+    public class WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__ : BaseClientCollectionEntry, WorkEffortAccount_has_Mitarbeiter_RelationEntry
     {
     
 // ID is inherited
@@ -1230,7 +1230,7 @@ namespace Kistl.App.TimeRecords
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(WorkEffortAccount_Mitarbeiter42CollectionEntry));
+			return new InterfaceType(typeof(WorkEffortAccount_has_Mitarbeiter_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -1241,8 +1241,8 @@ namespace Kistl.App.TimeRecords
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__)obj;
-			var me = (WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__)this;
+			var other = (WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__)obj;
+			var me = (WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1255,8 +1255,8 @@ namespace Kistl.App.TimeRecords
 
 namespace Kistl.App.Projekte
 {
-    [System.Diagnostics.DebuggerDisplay("Kunde_EMailsCollectionEntry__Implementation__")]
-    public class Kunde_EMailsCollectionEntry__Implementation__ : BaseClientCollectionEntry, Kunde_EMailsCollectionEntry
+    [System.Diagnostics.DebuggerDisplay("Kunde_EMails_CollectionEntry__Implementation__")]
+    public class Kunde_EMails_CollectionEntry__Implementation__ : BaseClientCollectionEntry, Kunde_EMails_CollectionEntry
     {
     
 // ID is inherited
@@ -1384,7 +1384,7 @@ public string Value { get { return B; } set { B = value; } }
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Kunde_EMailsCollectionEntry));
+			return new InterfaceType(typeof(Kunde_EMails_CollectionEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -1395,8 +1395,8 @@ public string Value { get { return B; } set { B = value; } }
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Kunde_EMailsCollectionEntry__Implementation__)obj;
-			var me = (Kunde_EMailsCollectionEntry__Implementation__)this;
+			var other = (Kunde_EMails_CollectionEntry__Implementation__)obj;
+			var me = (Kunde_EMails_CollectionEntry__Implementation__)this;
 			
             me.B = other.B;
 		}		

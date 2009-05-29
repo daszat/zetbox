@@ -111,7 +111,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(106);
+		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(108);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74] = 
@@ -431,6 +431,12 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[265] = 
 			DataStore[265] = new NotNullableConstraint__Implementation__Frozen(265);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[266] = 
+			DataStore[266] = new NotNullableConstraint__Implementation__Frozen(266);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[267] = 
+			DataStore[267] = new NotNullableConstraint__Implementation__Frozen(267);
 
 		}
 
@@ -859,6 +865,14 @@ namespace Kistl.App.Base
 			DataStore[265].ExportGuid = new Guid("352b4949-d05e-40c6-b722-f3607e741101");
 			DataStore[265].Reason = null;
 			DataStore[265].Seal();
+			DataStore[266].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[270];
+			DataStore[266].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[266].Reason = @"Verb cannot be empty";
+			DataStore[266].Seal();
+			DataStore[267].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[271];
+			DataStore[267].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[267].Reason = @"Module cannot be empty";
+			DataStore[267].Seal();
 	
 		}
 #region Serializer

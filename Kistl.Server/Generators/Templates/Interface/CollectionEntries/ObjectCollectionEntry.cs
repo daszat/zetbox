@@ -28,7 +28,7 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
 
         protected override string GetCeClassName()
         {
-            return rel.GetCollectionEntryClassName();
+            return rel.GetRelationClassName();
         }
 
         protected override string GetCeInterface()

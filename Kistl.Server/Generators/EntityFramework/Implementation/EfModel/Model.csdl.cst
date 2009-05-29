@@ -29,9 +29,9 @@
 <%
     foreach(var rel in GetRelationsWithSeparateStorage(ctx))
     {
-        string entityName = rel.GetCollectionEntryClassName();
-        string assocNameA = rel.GetCollectionEntryAssociationName(RelationEndRole.A);
-        string assocNameB = rel.GetCollectionEntryAssociationName(RelationEndRole.B);
+        string entityName = rel.GetRelationClassName();
+        string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
+        string assocNameB = rel.GetRelationAssociationName(RelationEndRole.B);
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
     <AssociationSet Name="<%= assocNameA %>" Association="Model.<%= assocNameA %>" >
@@ -120,7 +120,7 @@
     Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 %>
   -->
-  <EntityType Name="<%= rel.GetCollectionEntryClassName() %>" >
+  <EntityType Name="<%= rel.GetRelationClassName() %>" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -136,7 +136,7 @@
     
     <!-- A -->
     <NavigationProperty Name="A<%= Kistl.API.Helper.ImplementationSuffix %>"
-                        Relationship="Model.<%= rel.GetCollectionEntryAssociationName(RelationEndRole.A) %>"
+                        Relationship="Model.<%= rel.GetRelationAssociationName(RelationEndRole.A) %>"
                         FromRole="CollectionEntry"
                         ToRole="<%= rel.A.RoleName %>" />
 <%
@@ -150,7 +150,7 @@
 
     <!-- B -->
     <NavigationProperty Name="B<%= Kistl.API.Helper.ImplementationSuffix %>"
-                        Relationship="Model.<%= rel.GetCollectionEntryAssociationName(RelationEndRole.B) %>"
+                        Relationship="Model.<%= rel.GetRelationAssociationName(RelationEndRole.B) %>"
                         FromRole="CollectionEntry"
                         ToRole="<%= rel.B.RoleName %>" />
 <%
@@ -162,20 +162,20 @@
         }
 %>
   </EntityType>
-  <Association Name="<%= rel.GetCollectionEntryAssociationName(RelationEndRole.A) %>" >
+  <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.A) %>" >
     <End Role="<%= rel.A.RoleName %>"
          Type="Model.<%= rel.A.Type.ClassName %>" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.<%= rel.GetCollectionEntryClassName() %>"
+         Type="Model.<%= rel.GetRelationClassName() %>"
          Multiplicity="*" />
   </Association>
-  <Association Name="<%= rel.GetCollectionEntryAssociationName(RelationEndRole.B) %>" >
+  <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.B) %>" >
     <End Role="<%= rel.B.RoleName %>"
          Type="Model.<%= rel.B.Type.ClassName %>" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.<%= rel.GetCollectionEntryClassName() %>"
+         Type="Model.<%= rel.GetRelationClassName() %>"
          Multiplicity="*" />
   </Association>
   

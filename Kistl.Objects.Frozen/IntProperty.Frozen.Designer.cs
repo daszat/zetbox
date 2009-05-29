@@ -281,7 +281,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[238],
 			DataStore[268].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[268].Description = @"Version number of this schema";
-			DataStore[268].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[268].ExportGuid = new Guid("193c24c4-5a42-418e-8ed8-6e1689beca50");
 			DataStore[268].IsIndexed = false;
 			DataStore[268].IsList = false;
 			DataStore[268].IsNullable = false;

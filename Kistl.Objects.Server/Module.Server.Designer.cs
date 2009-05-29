@@ -59,7 +59,7 @@ namespace Kistl.App.Base
         /// Assemblies des Moduls
         /// </summary>
     /*
-    Relation: FK_Module_Assembly_Module_36
+    Relation: FK_Module_has_Assembly
     A: One Module as Module
     B: ZeroOrMore Assembly as Assemblies
     Preferred Storage: MergeIntoB
@@ -82,14 +82,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Module_Assembly_Module_36", "Assemblies")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_has_Assembly", "Assemblies")]
         public EntityCollection<Kistl.App.Base.Assembly__Implementation__> Assemblies__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_Module_Assembly_Module_36",
+                        "Model.FK_Module_has_Assembly",
                         "Assemblies");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -107,7 +107,7 @@ namespace Kistl.App.Base
         /// Datentypendes Modules
         /// </summary>
     /*
-    Relation: FK_Module_DataType_Module_26
+    Relation: FK_Module_has_DataType
     A: One Module as Module
     B: ZeroOrMore DataType as DataTypes
     Preferred Storage: MergeIntoB
@@ -130,14 +130,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Module_DataType_Module_26", "DataTypes")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_has_DataType", "DataTypes")]
         public EntityCollection<Kistl.App.Base.DataType__Implementation__> DataTypes__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_Module_DataType_Module_26",
+                        "Model.FK_Module_has_DataType",
                         "DataTypes");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

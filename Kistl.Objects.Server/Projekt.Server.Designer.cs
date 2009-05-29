@@ -59,7 +59,7 @@ namespace Kistl.App.Projekte
         /// Aufträge
         /// </summary>
     /*
-    Relation: FK_Projekt_Auftrag_Projekt_30
+    Relation: FK_Projekt_has_Auftrag
     A: ZeroOrOne Projekt as Projekt
     B: ZeroOrMore Auftrag as Auftraege
     Preferred Storage: MergeIntoB
@@ -82,14 +82,14 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Auftrag_Projekt_30", "Auftraege")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_has_Auftrag", "Auftraege")]
         public EntityCollection<Kistl.App.Projekte.Auftrag__Implementation__> Auftraege__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Projekte.Auftrag__Implementation__>(
-                        "Model.FK_Projekt_Auftrag_Projekt_30",
+                        "Model.FK_Projekt_has_Auftrag",
                         "Auftraege");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -163,7 +163,7 @@ namespace Kistl.App.Projekte
         /// 
         /// </summary>
     /*
-    Relation: FK_Projekt_Mitarbeiter_Projekte_23
+    Relation: FK_Projekt_haben_Mitarbeiter
     A: ZeroOrMore Projekt as Projekte
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
@@ -179,7 +179,7 @@ namespace Kistl.App.Projekte
             {
                 if (_MitarbeiterWrapper == null)
                 {
-                    _MitarbeiterWrapper = new EntityRelationBSideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
+                    _MitarbeiterWrapper = new EntityRelationBSideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>(
                             this,
                             Mitarbeiter__Implementation__);
                 }
@@ -187,14 +187,14 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Mitarbeiter_Projekte_23", "CollectionEntry")]
-        public EntityCollection<Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__> Mitarbeiter__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_haben_Mitarbeiter_Projekte", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> Mitarbeiter__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
-                        "Model.FK_Projekt_Mitarbeiter_Projekte_23",
+                    .GetRelatedCollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>(
+                        "Model.FK_Projekt_haben_Mitarbeiter_Projekte",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -204,7 +204,7 @@ namespace Kistl.App.Projekte
                 return c;
             }
         }
-        private EntityRelationBSideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_Mitarbeiter23CollectionEntry__Implementation__> _MitarbeiterWrapper;
+        private EntityRelationBSideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> _MitarbeiterWrapper;
 
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace Kistl.App.Projekte
         /// 
         /// </summary>
     /*
-    Relation: FK_Projekt_Task_Projekt_22
+    Relation: FK_Projekt_has_Task
     A: ZeroOrOne Projekt as Projekt
     B: ZeroOrMore Task as Tasks
     Preferred Storage: MergeIntoB
@@ -262,14 +262,14 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Task_Projekt_22", "Tasks")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_has_Task", "Tasks")]
         public EntityCollection<Kistl.App.Projekte.Task__Implementation__> Tasks__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Projekte.Task__Implementation__>(
-                        "Model.FK_Projekt_Task_Projekt_22",
+                        "Model.FK_Projekt_has_Task",
                         "Tasks");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

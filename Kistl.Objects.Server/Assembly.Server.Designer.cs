@@ -143,7 +143,7 @@ namespace Kistl.App.Base
         /// Module
         /// </summary>
     /*
-    Relation: FK_Module_Assembly_Module_36
+    Relation: FK_Module_has_Assembly
     A: One Module as Module
     B: ZeroOrMore Assembly as Assemblies
     Preferred Storage: MergeIntoB
@@ -171,14 +171,14 @@ namespace Kistl.App.Base
         private int? _fk_Module;
         private Guid? _fk_guid_Module = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Module_Assembly_Module_36", "Module")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_has_Assembly", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Module_Assembly_Module_36",
+                        "Model.FK_Module_has_Assembly",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -192,7 +192,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Module_Assembly_Module_36",
+                        "Model.FK_Module_has_Assembly",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

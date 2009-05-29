@@ -21,23 +21,30 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             return "FK_" + childClass + "_" + parentClass + "_" + propertyName;
         }
 
+        /// <summary>
+        /// TODO: This is only needed for ID Relations
+        /// </summary>
+        /// <param name="parentClass"></param>
+        /// <param name="childClass"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         public static string AssociationName(TypeMoniker parentClass, TypeMoniker childClass, string propertyName)
         {
             return AssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
         }
 
-        public static string AssociationName(ObjectClass parentClass, ObjectClass childClass, string propertyName)
-        {
-            return AssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
-        }
+        //public static string AssociationName(ObjectClass parentClass, ObjectClass childClass, string propertyName)
+        //{
+        //    return AssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
+        //}
 
-        public static string AssociationName(ObjectClass parentClass, Property listProperty)
-        {
-            return AssociationName(
-                parentClass.ClassName,
-                Construct.PropertyCollectionEntryType(listProperty).ClassName,
-                listProperty.PropertyName);
-        }
+        //public static string AssociationName(ObjectClass parentClass, Property listProperty)
+        //{
+        //    return AssociationName(
+        //        parentClass.ClassName,
+        //        Construct.PropertyCollectionEntryType(listProperty).ClassName,
+        //        listProperty.PropertyName);
+        //}
 
         //public static string AssociationName(ObjectClass parentClass, Property listProperty, string propertyName)
         //{

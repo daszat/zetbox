@@ -70,7 +70,7 @@ namespace Kistl.DALProvider.EF
             var relEnd = rel.GetEnd(endRole);
             var relOtherEnd = rel.GetOtherEnd(relEnd);
             var parent = ctx.Find(new ImplementationType(typeof(PARENT)).ToInterfaceType(), parentId);
-            var ceType = Type.GetType(rel.GetCollectionEntryFullName() +
+            var ceType = Type.GetType(rel.GetRelationFullName() +
                 Kistl.API.Helper.ImplementationSuffix +
                 ", " + ApplicationContext.Current.ImplementationAssembly);
 
@@ -85,7 +85,7 @@ namespace Kistl.DALProvider.EF
         {
             var c = ((IEntityWithRelationships)(parent)).RelationshipManager
                     .GetRelatedCollection<IMPL>(
-                        "Model." + rel.GetCollectionEntryAssociationName(endRole),
+                        "Model." + rel.GetRelationAssociationName(endRole),
                         "CollectionEntry");
             if (parent.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                 && !c.IsLoaded)

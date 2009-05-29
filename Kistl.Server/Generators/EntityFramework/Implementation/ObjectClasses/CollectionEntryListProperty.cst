@@ -53,10 +53,10 @@
 	}
 
 	// the name of the CollectionEntry type
-	string ceName = rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix;
+	string ceName = rel.GetRelationFullName() + Kistl.API.Helper.ImplementationSuffix;
 
 	// the name of the EF association to the CollectionEntry
-	string assocName = rel.GetCollectionEntryAssociationName(endRole);
+	string assocName = rel.GetRelationAssociationName(endRole);
 	// this class' role name in this association
 	string roleName = relEnd.RoleName;
 	// this targeted role name 

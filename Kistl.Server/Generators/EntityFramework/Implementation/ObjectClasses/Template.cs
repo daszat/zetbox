@@ -118,7 +118,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         {
             var rel = RelationExtensions.Lookup(ctx, prop);
 
-            Debug.Assert(rel.A.Navigator.ID == prop.ID || rel.B.Navigator.ID == prop.ID);
+            // Navigator can be NULL
+            // Debug.Assert(rel.A.Navigator.ID == prop.ID || rel.B.Navigator.ID == prop.ID);
             RelationEnd relEnd = rel.GetEnd(prop);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 

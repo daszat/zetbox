@@ -87,7 +87,7 @@ namespace Kistl.App.Base
         /// Standard Icon wenn IIcon nicht implementiert ist
         /// </summary>
     /*
-    Relation: FK_DataType_Icon_DataType_35
+    Relation: FK_DataType_has_Icon
     A: ZeroOrMore DataType as DataType
     B: ZeroOrOne Icon as DefaultIcon
     Preferred Storage: MergeIntoA
@@ -115,14 +115,14 @@ namespace Kistl.App.Base
         private int? _fk_DefaultIcon;
         private Guid? _fk_guid_DefaultIcon = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_Icon_DataType_35", "DefaultIcon")]
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_has_Icon", "DefaultIcon")]
         public Kistl.App.GUI.Icon__Implementation__ DefaultIcon__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Icon__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Icon__Implementation__>(
-                        "Model.FK_DataType_Icon_DataType_35",
+                        "Model.FK_DataType_has_Icon",
                         "DefaultIcon");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -136,7 +136,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.GUI.Icon__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Icon__Implementation__>(
-                        "Model.FK_DataType_Icon_DataType_35",
+                        "Model.FK_DataType_has_Icon",
                         "DefaultIcon");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -209,7 +209,7 @@ namespace Kistl.App.Base
         /// all implemented Methods in this DataType
         /// </summary>
     /*
-    Relation: FK_DataType_MethodInvocation_InvokeOnObjectClass_41
+    Relation: FK_DataType_has_MethodInvocation
     A: One DataType as InvokeOnObjectClass
     B: ZeroOrMore MethodInvocation as MethodInvocations
     Preferred Storage: MergeIntoB
@@ -232,14 +232,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_MethodInvocation_InvokeOnObjectClass_41", "MethodInvocations")]
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_has_MethodInvocation", "MethodInvocations")]
         public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodInvocations__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.MethodInvocation__Implementation__>(
-                        "Model.FK_DataType_MethodInvocation_InvokeOnObjectClass_41",
+                        "Model.FK_DataType_has_MethodInvocation",
                         "MethodInvocations");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -257,7 +257,7 @@ namespace Kistl.App.Base
         /// Liste aller Methoden der Objektklasse.
         /// </summary>
     /*
-    Relation: FK_DataType_Method_ObjectClass_25
+    Relation: FK_DataType_has_Method
     A: One DataType as ObjectClass
     B: ZeroOrMore Method as Methods
     Preferred Storage: MergeIntoB
@@ -280,14 +280,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_Method_ObjectClass_25", "Methods")]
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_has_Method", "Methods")]
         public EntityCollection<Kistl.App.Base.Method__Implementation__> Methods__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_DataType_Method_ObjectClass_25",
+                        "Model.FK_DataType_has_Method",
                         "Methods");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -305,7 +305,7 @@ namespace Kistl.App.Base
         /// Modul der Objektklasse
         /// </summary>
     /*
-    Relation: FK_Module_DataType_Module_26
+    Relation: FK_Module_has_DataType
     A: One Module as Module
     B: ZeroOrMore DataType as DataTypes
     Preferred Storage: MergeIntoB
@@ -333,14 +333,14 @@ namespace Kistl.App.Base
         private int? _fk_Module;
         private Guid? _fk_guid_Module = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Module_DataType_Module_26", "Module")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_has_DataType", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Module_DataType_Module_26",
+                        "Model.FK_Module_has_DataType",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -354,7 +354,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Module_DataType_Module_26",
+                        "Model.FK_Module_has_DataType",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -371,7 +371,7 @@ namespace Kistl.App.Base
         /// Eigenschaften der Objektklasse
         /// </summary>
     /*
-    Relation: FK_DataType_Property_ObjectClass_19
+    Relation: FK_DataType_has_Property
     A: One DataType as ObjectClass
     B: ZeroOrMore Property as Properties
     Preferred Storage: MergeIntoB
@@ -394,14 +394,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_Property_ObjectClass_19", "Properties")]
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_has_Property", "Properties")]
         public EntityCollection<Kistl.App.Base.Property__Implementation__> Properties__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.Property__Implementation__>(
-                        "Model.FK_DataType_Property_ObjectClass_19",
+                        "Model.FK_DataType_has_Property",
                         "Properties");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

@@ -34,17 +34,17 @@
 <%
     foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
     {
-        string fkAName = rel.GetCollectionEntryFkColumnName(RelationEndRole.A);
-        string fkBName = rel.GetCollectionEntryFkColumnName(RelationEndRole.B);
+        string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
+        string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
 %>
     <!--
 <%
     Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 %>
     -->
-    <EntitySetMapping Name="<%= rel.GetCollectionEntryClassName() %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= rel.GetCollectionEntryClassName() %>)">
-        <MappingFragment StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>">
+    <EntitySetMapping Name="<%= rel.GetRelationClassName() %>">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= rel.GetRelationClassName() %>)">
+        <MappingFragment StoreEntitySet="<%= rel.GetRelationClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
 <% 
 		if(rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx))
@@ -71,9 +71,9 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="<%= rel.GetCollectionEntryAssociationName(RelationEndRole.A) %>"
-                           TypeName="Model.<%= rel.GetCollectionEntryAssociationName(RelationEndRole.A) %>"
-                           StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>" >
+    <AssociationSetMapping Name="<%= rel.GetRelationAssociationName(RelationEndRole.A) %>"
+                           TypeName="Model.<%= rel.GetRelationAssociationName(RelationEndRole.A) %>"
+                           StoreEntitySet="<%= rel.GetRelationClassName() %>" >
       <EndProperty Name="<%= rel.A.RoleName %>">
         <ScalarProperty Name="ID" ColumnName="<%= fkAName %>"/>
       </EndProperty>
@@ -83,9 +83,9 @@
       <Condition ColumnName="<%= fkAName %>" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="<%= rel.GetCollectionEntryAssociationName(RelationEndRole.B) %>"
-                           TypeName="Model.<%= rel.GetCollectionEntryAssociationName(RelationEndRole.B) %>"
-                           StoreEntitySet="<%= rel.GetCollectionEntryClassName() %>" >
+    <AssociationSetMapping Name="<%= rel.GetRelationAssociationName(RelationEndRole.B) %>"
+                           TypeName="Model.<%= rel.GetRelationAssociationName(RelationEndRole.B) %>"
+                           StoreEntitySet="<%= rel.GetRelationClassName() %>" >
       <EndProperty Name="<%= rel.B.RoleName %>">
         <ScalarProperty Name="ID" ColumnName="<%= fkBName %>"/>
       </EndProperty>

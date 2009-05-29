@@ -38,7 +38,7 @@ namespace Kistl.App.Base
         /// Definition of this Struct
         /// </summary>
     /*
-    Relation: FK_StructProperty_Struct_StructProperty_52
+    Relation: FK_StructProperty_has_Struct
     A: ZeroOrMore StructProperty as StructProperty
     B: ZeroOrOne Struct as StructDefinition
     Preferred Storage: MergeIntoA
@@ -66,14 +66,14 @@ namespace Kistl.App.Base
         private int? _fk_StructDefinition;
         private Guid? _fk_guid_StructDefinition = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_StructProperty_Struct_StructProperty_52", "StructDefinition")]
+        [EdmRelationshipNavigationProperty("Model", "FK_StructProperty_has_Struct", "StructDefinition")]
         public Kistl.App.Base.Struct__Implementation__ StructDefinition__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Struct__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Struct__Implementation__>(
-                        "Model.FK_StructProperty_Struct_StructProperty_52",
+                        "Model.FK_StructProperty_has_Struct",
                         "StructDefinition");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -87,7 +87,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Struct__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Struct__Implementation__>(
-                        "Model.FK_StructProperty_Struct_StructProperty_52",
+                        "Model.FK_StructProperty_has_Struct",
                         "StructDefinition");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

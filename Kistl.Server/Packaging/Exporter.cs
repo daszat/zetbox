@@ -93,7 +93,7 @@ namespace Kistl.Server.Packaging
                         if (!rel.A.Type.ImplementsIExportable(ctx)) continue;
                         if (!rel.B.Type.ImplementsIExportable(ctx)) continue;
 
-                        string ifTypeName = string.Format("{0}, {1}", rel.GetCollectionEntryFullName(), ApplicationContext.Current.InterfaceAssembly);
+                        string ifTypeName = string.Format("{0}, {1}", rel.GetRelationFullName(), ApplicationContext.Current.InterfaceAssembly);
                         Trace.TraceInformation("    {0} ", ifTypeName);
                         Type ifType = Type.GetType(ifTypeName);
                         if (ifType == null)
@@ -108,7 +108,7 @@ namespace Kistl.Server.Packaging
                         foreach (IExportableInternal obj in relations)
                         {
                             Console.Write(".");
-                            xml.WriteStartElement(rel.GetCollectionEntryClassName(), rel.A.Type.Module.Namespace);
+                            xml.WriteStartElement(rel.GetRelationClassName(), rel.A.Type.Module.Namespace);
                             if (((Kistl.App.Base.IExportable)obj).ExportGuid == Guid.Empty)
                             {
                                 ((Kistl.App.Base.IExportable)obj).ExportGuid = Guid.NewGuid();

@@ -153,7 +153,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(54);
+		internal new static Dictionary<int, StringProperty__Implementation__Frozen> DataStore = new Dictionary<int, StringProperty__Implementation__Frozen>(55);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[1] = 
@@ -371,6 +371,10 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[267] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[267] = 
 			DataStore[267] = new StringProperty__Implementation__Frozen(267);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[270] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[270] = 
+			DataStore[270] = new StringProperty__Implementation__Frozen(270);
 
 		}
 
@@ -1264,7 +1268,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[251],
 			DataStore[267].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[267].Description = @"XML descriptor of the current schema";
-			DataStore[267].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[267].ExportGuid = new Guid("175143b9-dd09-4b49-a633-e9cdb508c4c5");
 			DataStore[267].IsIndexed = false;
 			DataStore[267].IsList = false;
 			DataStore[267].IsNullable = false;
@@ -1274,6 +1278,22 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[251],
 			DataStore[267].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
 			DataStore[267].Length = 4000;
 			DataStore[267].Seal();
+			DataStore[270].AltText = null;
+			DataStore[270].CategoryTags = null;
+			DataStore[270].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[266],
+});
+			DataStore[270].Description = @"Verb of this Relation";
+			DataStore[270].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[270].IsIndexed = false;
+			DataStore[270].IsList = false;
+			DataStore[270].IsNullable = false;
+			DataStore[270].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[270].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
+			DataStore[270].PropertyName = @"Verb";
+			DataStore[270].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
+			DataStore[270].Length = 100;
+			DataStore[270].Seal();
 	
 		}
 #region Serializer

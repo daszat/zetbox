@@ -2251,12 +2251,14 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[146],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[147],
 });
 			DataStore[77].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[77].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(5) {
+			DataStore[77].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(7) {
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[183],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[184],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[213],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[214],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[261],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[270],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[271],
 });
 			DataStore[77].ShowIconInLists = true;
 			DataStore[77].ShowIdInLists = true;
@@ -2508,7 +2510,7 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[122],
 			DataStore[90].ClassName = @"CurrentSchema";
 			DataStore[90].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[13];
 			DataStore[90].Description = @"Describes the currently loaded physical database schema";
-			DataStore[90].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[90].ExportGuid = new Guid("b276a0f6-cc89-473d-9dce-2efcf3efdd37");
 			DataStore[90].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[90].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {

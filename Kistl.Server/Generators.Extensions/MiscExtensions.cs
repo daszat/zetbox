@@ -55,37 +55,26 @@ namespace Kistl.Server.Generators.Extensions
             throw new ArgumentOutOfRangeException("prop", "unknown ValueTypeProperty type: " + prop.GetType().FullName);
         }
 
-        #region CollectionEntry naming standards
-
-        public static string GetCollectionEntryClassName(this Relation rel)
+        #region Relation naming standards
+        public static string GetRelationClassName(this Relation rel)
         {
-            return String.Format("{0}_{1}{2}CollectionEntry", rel.A.Type.ClassName, rel.A.Navigator.PropertyName, rel.ID);
+            return String.Format("{0}_{1}_{2}_RelationEntry", rel.A.Type.ClassName, rel.Verb, rel.B.Type.ClassName);
         }
 
         /// <summary>
         /// Support "legacy" non-unique naming scheme
         /// </summary>
-        public static string GetCollectionEntryTableName(this Relation rel, IKistlContext ctx)
+        public static string GetRelationTableName(this Relation rel)
         {
-            return String.Format("{0}_{1}Collection", rel.A.Type.TableName, rel.A.Navigator.PropertyName);
+            return String.Format("{0}_{1}_{2}", rel.A.Type.TableName, rel.Verb, rel.B.Type.TableName);
         }
 
-        public static string GetCollectionEntryFullName(this Relation rel)
+        public static string GetRelationFullName(this Relation rel)
         {
-            return String.Format("{0}.{1}", rel.A.Type.Module.Namespace, rel.GetCollectionEntryClassName());
+            return String.Format("{0}.{1}", rel.A.Type.Module.Namespace, rel.GetRelationClassName());
         }
 
-        public static string GetCollectionEntryClassName(this ValueTypeProperty prop)
-        {
-            return String.Format("{0}_{1}CollectionEntry", prop.ObjectClass.ClassName, prop.PropertyName);
-        }
-
-        public static string GetCollectionEntryFullName(this ValueTypeProperty prop)
-        {
-            return String.Format("{0}.{1}", prop.ObjectClass.Module.Namespace, prop.GetCollectionEntryClassName());
-        }
-
-        public static string GetCollectionEntryFkColumnName(this Relation rel, RelationEndRole endRole)
+        public static string GetRelationFkColumnName(this Relation rel, RelationEndRole endRole)
         {
             var relEnd = rel.GetEnd(endRole);
             // legacy condition: if navigator exists, use his objectclass' name
@@ -100,7 +89,23 @@ namespace Kistl.Server.Generators.Extensions
                 return "fk_" + relEnd.RoleName;
             }
         }
+        #endregion
 
+        #region CollectionEntry naming standards
+        public static string GetCollectionEntryClassName(this ValueTypeProperty prop)
+        {
+            return String.Format("{0}_{1}_CollectionEntry", prop.ObjectClass.ClassName, prop.PropertyName);
+        }
+
+        public static string GetCollectionEntryTable(this ValueTypeProperty prop)
+        {
+            return String.Format("{0}_{1}Collection", ((ObjectClass)prop.ObjectClass).TableName, prop.PropertyName);
+        }
+
+        public static string GetCollectionEntryFullName(this ValueTypeProperty prop)
+        {
+            return String.Format("{0}.{1}", prop.ObjectClass.Module.Namespace, prop.GetCollectionEntryClassName());
+        }
         #endregion
     }
 }

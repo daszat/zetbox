@@ -92,17 +92,17 @@ namespace Kistl.App.Projekte
 			{
 				if (_Projekte == null)
 				{
-					Context.FetchRelation<Projekt_Mitarbeiter23CollectionEntry__Implementation__>(23, RelationEndRole.B, this);
+					Context.FetchRelation<Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>(23, RelationEndRole.B, this);
 					_Projekte 
-						= new ClientRelationASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__>(
+						= new ClientRelationASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>(
 							this, 
-							new RelationshipFilterBSideCollection<Projekt_Mitarbeiter23CollectionEntry__Implementation__>(this.Context, this));
+							new RelationshipFilterBSideCollection<Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>(this.Context, this));
 				}
 				return _Projekte;
 			}
 		}
 
-		private ClientRelationASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_Mitarbeiter23CollectionEntry__Implementation__> _Projekte;
+		private ClientRelationASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> _Projekte;
 
         /// <summary>
         /// NNNN TTMMYY

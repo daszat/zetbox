@@ -59,7 +59,7 @@ namespace Kistl.App.Base
         /// The A-side of this Relation.
         /// </summary>
     /*
-    Relation: FK_Relation_RelationEnd_Relation_71
+    Relation: FK_Relation_hasA_RelationEnd
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as A
     Preferred Storage: MergeIntoA
@@ -87,14 +87,14 @@ namespace Kistl.App.Base
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_71", "A")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Relation_hasA_RelationEnd", "A")]
         public Kistl.App.Base.RelationEnd__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_Relation_RelationEnd_Relation_71",
+                        "Model.FK_Relation_hasA_RelationEnd",
                         "A");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -108,7 +108,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_Relation_RelationEnd_Relation_71",
+                        "Model.FK_Relation_hasA_RelationEnd",
                         "A");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -125,7 +125,7 @@ namespace Kistl.App.Base
         /// The B-side of this Relation.
         /// </summary>
     /*
-    Relation: FK_Relation_RelationEnd_Relation_72
+    Relation: FK_Relation_hasB_RelationEnd
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as B
     Preferred Storage: MergeIntoA
@@ -153,14 +153,14 @@ namespace Kistl.App.Base
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Relation_RelationEnd_Relation_72", "B")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Relation_hasB_RelationEnd", "B")]
         public Kistl.App.Base.RelationEnd__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_Relation_RelationEnd_Relation_72",
+                        "Model.FK_Relation_hasB_RelationEnd",
                         "B");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -174,7 +174,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_Relation_RelationEnd_Relation_72",
+                        "Model.FK_Relation_hasB_RelationEnd",
                         "B");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -244,6 +244,72 @@ namespace Kistl.App.Base
         private Guid _ExportGuid;
 
         /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_Module_has_Relation
+    A: One Module as Module
+    B: ZeroOrMore Relation as Relation
+    Preferred Storage: MergeIntoB
+    */
+        // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                return Module__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_Module;
+        private Guid? _fk_guid_Module = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_has_Relation", "Module")]
+        public Kistl.App.Base.Module__Implementation__ Module__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Module__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
+                        "Model.FK_Module_has_Relation",
+                        "Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Module__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
+                        "Model.FK_Module_has_Relation",
+                        "Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Base.Module__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
         // enumeration property
@@ -287,6 +353,34 @@ namespace Kistl.App.Base
         }
         
 
+        /// <summary>
+        /// Verb of this Relation
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual string Verb
+        {
+            get
+            {
+                return _Verb;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_Verb != value)
+                {
+					var __oldValue = _Verb;
+                    NotifyPropertyChanging("Verb", __oldValue, value);
+                    _Verb = value;
+                    NotifyPropertyChanged("Verb", __oldValue, value);
+                }
+            }
+        }
+        private string _Verb;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Relation));
@@ -302,8 +396,10 @@ namespace Kistl.App.Base
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
 			me.Storage = other.Storage;
+			me.Verb = other.Verb;
 			this._fk_A = otherImpl._fk_A;
 			this._fk_B = otherImpl._fk_B;
+			this._fk_Module = otherImpl._fk_Module;
 		}
 
         // tail template
@@ -377,11 +473,29 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "Module":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(271).Constraints
+						.Where(c => !c.IsValid(this, this.Module))
+						.Select(c => c.GetErrorText(this, this.Module))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "Storage":
 				{
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(183).Constraints
 						.Where(c => !c.IsValid(this, this.Storage))
 						.Select(c => c.GetErrorText(this, this.Storage))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Verb":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(270).Constraints
+						.Where(c => !c.IsValid(this, this.Verb))
+						.Select(c => c.GetErrorText(this, this.Verb))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -408,6 +522,13 @@ namespace Kistl.App.Base
 				B__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_B.Value);
 			else
 				B__Implementation__ = null;
+
+			if (_fk_guid_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
+			else if (_fk_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+			else
+				Module__Implementation__ = null;
 		}
 #region Serializer
 
@@ -420,7 +541,9 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
+            BinarySerializer.ToStream(this._Verb, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -431,7 +554,9 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_B, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
+            BinarySerializer.FromStream(out this._Verb, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -442,7 +567,9 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
             XmlStreamer.ToStream((int)this.Storage, xml, "Storage", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -453,7 +580,9 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -466,7 +595,10 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.Storage, xml, "Storage", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -475,7 +607,9 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
 #endregion

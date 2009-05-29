@@ -49,7 +49,7 @@ this.WriteObjects("    using ",  ns , ";\r\n");
 	foreach (var rel in ctx.GetQuery<Relation>()
 	    .Where(r => (int)r.Storage == (int)StorageType.Separate)
 	    .ToList()
-	    .OrderBy(r => r.GetCollectionEntryClassName()))
+	    .OrderBy(r => r.GetRelationClassName()))
 	{
 
 

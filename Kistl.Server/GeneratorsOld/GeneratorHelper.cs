@@ -35,35 +35,35 @@ namespace Kistl.Server.GeneratorsOld.Helper
         #endregion
 
         #region GetAssociationName
-        private static string GetAssociationName(string parentClass, string childClass, string propertyName)
-        {
-            return "FK_" + childClass + "_" + parentClass + "_" + propertyName;
-        }
+        //private static string GetAssociationName(string parentClass, string childClass, string propertyName)
+        //{
+        //    return "FK_" + childClass + "_" + parentClass + "_" + propertyName;
+        //}
 
-        public static string GetAssociationName(TypeMoniker parentClass, TypeMoniker childClass, string propertyName)
-        {
-            return GetAssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
-        }
+        //public static string GetAssociationName(TypeMoniker parentClass, TypeMoniker childClass, string propertyName)
+        //{
+        //    return GetAssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
+        //}
 
-        public static string GetAssociationName(ObjectClass parentClass, ObjectClass childClass, string propertyName)
-        {
-            return GetAssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
-        }
+        //public static string GetAssociationName(ObjectClass parentClass, ObjectClass childClass, string propertyName)
+        //{
+        //    return GetAssociationName(parentClass.ClassName, childClass.ClassName, propertyName);
+        //}
 
-        public static string GetAssociationName(ObjectClass parentClass, Property listProperty)
-        {
-            return GetAssociationName(
-                parentClass.ClassName,
-                GeneratorHelper.GetPropertyCollectionObjectType(listProperty).ClassName,
-                listProperty.PropertyName);
-        }
-        public static string GetAssociationName(ObjectClass parentClass, Property listProperty, string propertyName)
-        {
-            return GetAssociationName(
-                parentClass.ClassName,
-                GeneratorHelper.GetPropertyCollectionObjectType(listProperty).ClassName,
-                propertyName);
-        }
+        //public static string GetAssociationName(ObjectClass parentClass, Property listProperty)
+        //{
+        //    return GetAssociationName(
+        //        parentClass.ClassName,
+        //        GeneratorHelper.GetPropertyCollectionObjectType(listProperty).ClassName,
+        //        listProperty.PropertyName);
+        //}
+        //public static string GetAssociationName(ObjectClass parentClass, Property listProperty, string propertyName)
+        //{
+        //    return GetAssociationName(
+        //        parentClass.ClassName,
+        //        GeneratorHelper.GetPropertyCollectionObjectType(listProperty).ClassName,
+        //        propertyName);
+        //}
         #endregion
 
         #region GetAssociationParentRoleName

@@ -87,7 +87,7 @@ namespace Kistl.App.TimeRecords
         /// Zugeordnete Mitarbeiter
         /// </summary>
     /*
-    Relation: FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42
+    Relation: FK_WorkEffortAccount_has_Mitarbeiter
     A: ZeroOrMore WorkEffortAccount as WorkEffortAccount
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
@@ -103,7 +103,7 @@ namespace Kistl.App.TimeRecords
             {
                 if (_MitarbeiterWrapper == null)
                 {
-                    _MitarbeiterWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.TimeRecords.WorkEffortAccount, Kistl.App.Projekte.Mitarbeiter, Kistl.App.TimeRecords.WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__>(
+                    _MitarbeiterWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.TimeRecords.WorkEffortAccount, Kistl.App.Projekte.Mitarbeiter, Kistl.App.TimeRecords.WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__>(
                             this,
                             Mitarbeiter__Implementation__);
                 }
@@ -111,14 +111,14 @@ namespace Kistl.App.TimeRecords
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42", "CollectionEntry")]
-        public EntityCollection<Kistl.App.TimeRecords.WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__> Mitarbeiter__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount", "CollectionEntry")]
+        public EntityCollection<Kistl.App.TimeRecords.WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__> Mitarbeiter__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.TimeRecords.WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__>(
-                        "Model.FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42",
+                    .GetRelatedCollection<Kistl.App.TimeRecords.WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__>(
+                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -128,7 +128,7 @@ namespace Kistl.App.TimeRecords
                 return c;
             }
         }
-        private EntityRelationBSideCollectionWrapper<Kistl.App.TimeRecords.WorkEffortAccount, Kistl.App.Projekte.Mitarbeiter, Kistl.App.TimeRecords.WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__> _MitarbeiterWrapper;
+        private EntityRelationBSideCollectionWrapper<Kistl.App.TimeRecords.WorkEffortAccount, Kistl.App.Projekte.Mitarbeiter, Kistl.App.TimeRecords.WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__> _MitarbeiterWrapper;
 
 
         /// <summary>

@@ -38,7 +38,7 @@ namespace Kistl.App.Base
         /// Einträge der Enumeration
         /// </summary>
     /*
-    Relation: FK_Enumeration_EnumerationEntry_Enumeration_47
+    Relation: FK_Enumeration_has_EnumerationEntry
     A: One Enumeration as Enumeration
     B: ZeroOrMore EnumerationEntry as EnumerationEntries
     Preferred Storage: MergeIntoB
@@ -61,14 +61,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Enumeration_EnumerationEntry_Enumeration_47", "EnumerationEntries")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Enumeration_has_EnumerationEntry", "EnumerationEntries")]
         public EntityCollection<Kistl.App.Base.EnumerationEntry__Implementation__> EnumerationEntries__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.EnumerationEntry__Implementation__>(
-                        "Model.FK_Enumeration_EnumerationEntry_Enumeration_47",
+                        "Model.FK_Enumeration_has_EnumerationEntry",
                         "EnumerationEntries");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

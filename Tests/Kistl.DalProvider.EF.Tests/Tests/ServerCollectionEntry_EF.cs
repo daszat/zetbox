@@ -18,7 +18,7 @@ namespace Kistl.DalProvider.EF.Tests
 {
     [TestFixture]
     public class ServerCollectionEntry_EF
-        : CollectionEntryTests<Kunde_EMailsCollectionEntry__Implementation__>
+        : CollectionEntryTests<Kunde_EMails_CollectionEntry__Implementation__>
     {
         public override void SetUp()
         {

@@ -59,7 +59,7 @@ namespace Kistl.App.GUI
         /// The assembly containing the Control
         /// </summary>
     /*
-    Relation: FK_ControlInfo_Assembly_ControlInfo_51
+    Relation: FK_ControlInfo_has_Assembly
     A: ZeroOrMore ControlInfo as ControlInfo
     B: ZeroOrOne Assembly as Assembly
     Preferred Storage: MergeIntoA
@@ -87,14 +87,14 @@ namespace Kistl.App.GUI
         private int? _fk_Assembly;
         private Guid? _fk_guid_Assembly = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ControlInfo_Assembly_ControlInfo_51", "Assembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ControlInfo_has_Assembly", "Assembly")]
         public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_ControlInfo_Assembly_ControlInfo_51",
+                        "Model.FK_ControlInfo_has_Assembly",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -108,7 +108,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_ControlInfo_Assembly_ControlInfo_51",
+                        "Model.FK_ControlInfo_has_Assembly",
                         "Assembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

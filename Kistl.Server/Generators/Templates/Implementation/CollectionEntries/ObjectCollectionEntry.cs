@@ -40,12 +40,12 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override string GetCeClassName()
         {
-            return rel.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
+            return rel.GetRelationClassName() + Kistl.API.Helper.ImplementationSuffix;
         }
 
         protected override string GetCeInterface()
         {
-            return rel.GetCollectionEntryClassName();
+            return rel.GetRelationClassName();
         }
 
         protected override bool IsOrdered()

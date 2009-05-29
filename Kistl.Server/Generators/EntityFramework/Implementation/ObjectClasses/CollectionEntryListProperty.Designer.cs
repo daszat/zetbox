@@ -9,7 +9,7 @@ using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst")]
     public partial class CollectionEntryListProperty : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
@@ -30,7 +30,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 19 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 19 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 RelationEnd relEnd = rel.GetEnd(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
@@ -68,10 +68,10 @@ RelationEnd relEnd = rel.GetEnd(endRole);
 	}
 
 	// the name of the CollectionEntry type
-	string ceName = rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix;
+	string ceName = rel.GetRelationFullName() + Kistl.API.Helper.ImplementationSuffix;
 
 	// the name of the EF association to the CollectionEntry
-	string assocName = rel.GetCollectionEntryAssociationName(endRole);
+	string assocName = rel.GetRelationAssociationName(endRole);
 	// this class' role name in this association
 	string roleName = relEnd.RoleName;
 	// this targeted role name 
@@ -92,7 +92,7 @@ RelationEnd relEnd = rel.GetEnd(endRole);
         || (otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading);
 
 
-#line 80 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 80 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 this.WriteObjects("		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
@@ -130,7 +130,7 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 118 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 118 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, efName, eagerLoading);
 
 

@@ -38,7 +38,7 @@ namespace Kistl.App.Base
         /// Enumeration der Eigenschaft
         /// </summary>
     /*
-    Relation: FK_EnumerationProperty_Enumeration_EnumerationProperty_48
+    Relation: FK_EnumerationProperty_has_Enumeration
     A: ZeroOrMore EnumerationProperty as EnumerationProperty
     B: ZeroOrOne Enumeration as Enumeration
     Preferred Storage: MergeIntoA
@@ -66,14 +66,14 @@ namespace Kistl.App.Base
         private int? _fk_Enumeration;
         private Guid? _fk_guid_Enumeration = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_EnumerationProperty_Enumeration_EnumerationProperty_48", "Enumeration")]
+        [EdmRelationshipNavigationProperty("Model", "FK_EnumerationProperty_has_Enumeration", "Enumeration")]
         public Kistl.App.Base.Enumeration__Implementation__ Enumeration__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Enumeration__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Enumeration__Implementation__>(
-                        "Model.FK_EnumerationProperty_Enumeration_EnumerationProperty_48",
+                        "Model.FK_EnumerationProperty_has_Enumeration",
                         "Enumeration");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -87,7 +87,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Enumeration__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Enumeration__Implementation__>(
-                        "Model.FK_EnumerationProperty_Enumeration_EnumerationProperty_48",
+                        "Model.FK_EnumerationProperty_has_Enumeration",
                         "Enumeration");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

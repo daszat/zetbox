@@ -21,7 +21,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
 
             Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx,
                 this.MembersToSerialize,
-                propertyName, rel.GetCollectionEntryAssociationName(endRole), relEnd.RoleName,
+                propertyName, rel.GetRelationAssociationName(endRole), relEnd.RoleName,
                 relEnd.Type.GetDataTypeString(), relEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
                 rel.NeedsPositionStorage(endRole), ImplementsIExportable(), relEnd.Type.Module.Namespace,
                 eagerLoading);

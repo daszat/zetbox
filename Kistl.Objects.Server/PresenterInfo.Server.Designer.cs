@@ -103,7 +103,7 @@ namespace Kistl.App.GUI
         /// The Assembly of the Data Type
         /// </summary>
     /*
-    Relation: FK_PresenterInfo_Assembly_PresenterInfo_54
+    Relation: FK_PresenterInfo_hasData_Assembly
     A: ZeroOrMore PresenterInfo as PresenterInfo
     B: ZeroOrOne Assembly as DataAssembly
     Preferred Storage: MergeIntoA
@@ -131,14 +131,14 @@ namespace Kistl.App.GUI
         private int? _fk_DataAssembly;
         private Guid? _fk_guid_DataAssembly = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_Assembly_PresenterInfo_54", "DataAssembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_hasData_Assembly", "DataAssembly")]
         public Kistl.App.Base.Assembly__Implementation__ DataAssembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_54",
+                        "Model.FK_PresenterInfo_hasData_Assembly",
                         "DataAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -152,7 +152,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_54",
+                        "Model.FK_PresenterInfo_hasData_Assembly",
                         "DataAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -197,7 +197,7 @@ namespace Kistl.App.GUI
         /// Where to find the implementation of the Presenter
         /// </summary>
     /*
-    Relation: FK_PresenterInfo_Assembly_PresenterInfo_53
+    Relation: FK_PresenterInfo_hasPresenter_Assembly
     A: ZeroOrMore PresenterInfo as PresenterInfo
     B: ZeroOrOne Assembly as PresenterAssembly
     Preferred Storage: MergeIntoA
@@ -225,14 +225,14 @@ namespace Kistl.App.GUI
         private int? _fk_PresenterAssembly;
         private Guid? _fk_guid_PresenterAssembly = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_Assembly_PresenterInfo_53", "PresenterAssembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_PresenterInfo_hasPresenter_Assembly", "PresenterAssembly")]
         public Kistl.App.Base.Assembly__Implementation__ PresenterAssembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_53",
+                        "Model.FK_PresenterInfo_hasPresenter_Assembly",
                         "PresenterAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -246,7 +246,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_PresenterInfo_Assembly_PresenterInfo_53",
+                        "Model.FK_PresenterInfo_hasPresenter_Assembly",
                         "PresenterAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

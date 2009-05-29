@@ -143,7 +143,7 @@ namespace Kistl.App.Base
         /// Methodenaufrufe implementiert in dieser Objekt Klasse
         /// </summary>
     /*
-    Relation: FK_Method_MethodInvocation_Method_39
+    Relation: FK_Method_has_MethodInvocation
     A: One Method as Method
     B: ZeroOrMore MethodInvocation as MethodInvokations
     Preferred Storage: MergeIntoB
@@ -166,14 +166,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Method_MethodInvocation_Method_39", "MethodInvokations")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Method_has_MethodInvocation", "MethodInvokations")]
         public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodInvokations__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.MethodInvocation__Implementation__>(
-                        "Model.FK_Method_MethodInvocation_Method_39",
+                        "Model.FK_Method_has_MethodInvocation",
                         "MethodInvokations");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -219,7 +219,7 @@ namespace Kistl.App.Base
         /// Zugehörig zum Modul
         /// </summary>
     /*
-    Relation: FK_Method_Module_Method_38
+    Relation: FK_Method_has_Module
     A: ZeroOrMore Method as Method
     B: ZeroOrOne Module as Module
     Preferred Storage: MergeIntoA
@@ -247,14 +247,14 @@ namespace Kistl.App.Base
         private int? _fk_Module;
         private Guid? _fk_guid_Module = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Method_Module_Method_38", "Module")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Method_has_Module", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Method_Module_Method_38",
+                        "Model.FK_Method_has_Module",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -268,7 +268,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Method_Module_Method_38",
+                        "Model.FK_Method_has_Module",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -285,7 +285,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
     /*
-    Relation: FK_DataType_Method_ObjectClass_25
+    Relation: FK_DataType_has_Method
     A: One DataType as ObjectClass
     B: ZeroOrMore Method as Methods
     Preferred Storage: MergeIntoB
@@ -313,14 +313,14 @@ namespace Kistl.App.Base
         private int? _fk_ObjectClass;
         private Guid? _fk_guid_ObjectClass = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_Method_ObjectClass_25", "ObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_has_Method", "ObjectClass")]
         public Kistl.App.Base.DataType__Implementation__ ObjectClass__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_DataType_Method_ObjectClass_25",
+                        "Model.FK_DataType_has_Method",
                         "ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -334,7 +334,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_DataType_Method_ObjectClass_25",
+                        "Model.FK_DataType_has_Method",
                         "ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -351,7 +351,7 @@ namespace Kistl.App.Base
         /// Parameter der Methode
         /// </summary>
     /*
-    Relation: FK_Method_BaseParameter_Method_44
+    Relation: FK_Method_has_BaseParameter
     A: One Method as Method
     B: ZeroOrMore BaseParameter as Parameter
     Preferred Storage: MergeIntoB
@@ -374,14 +374,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Method_BaseParameter_Method_44", "Parameter")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Method_has_BaseParameter", "Parameter")]
         public EntityCollection<Kistl.App.Base.BaseParameter__Implementation__> Parameter__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.BaseParameter__Implementation__>(
-                        "Model.FK_Method_BaseParameter_Method_44",
+                        "Model.FK_Method_has_BaseParameter",
                         "Parameter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

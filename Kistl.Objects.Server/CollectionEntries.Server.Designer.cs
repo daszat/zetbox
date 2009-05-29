@@ -15,9 +15,9 @@ using Kistl.API;
 
 namespace Kistl.App.Base
 {
-    [EdmEntityType(NamespaceName="Model", Name="ObjectClass_ImplementsInterfaces49CollectionEntry")]
-    [System.Diagnostics.DebuggerDisplay("ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__")]
-    public class ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ObjectClass_ImplementsInterfaces49CollectionEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    [EdmEntityType(NamespaceName="Model", Name="ObjectClass_implements_Interface_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("ObjectClass_implements_Interface_RelationEntry__Implementation__")]
+    public class ObjectClass_implements_Interface_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ObjectClass_implements_Interface_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -93,14 +93,14 @@ namespace Kistl.App.Base
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_Interface_ObjectClass_49", "ObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_implements_Interface_ObjectClass", "ObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectClass_Interface_ObjectClass_49",
+                        "Model.FK_ObjectClass_implements_Interface_ObjectClass",
                         "ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -114,7 +114,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectClass_Interface_ObjectClass_49",
+                        "Model.FK_ObjectClass_implements_Interface_ObjectClass",
                         "ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -151,14 +151,14 @@ namespace Kistl.App.Base
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_Interface_ImplementsInterfaces_49", "ImplementsInterfaces")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_implements_Interface_ImplementsInterfaces", "ImplementsInterfaces")]
         public Kistl.App.Base.Interface__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Interface__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Interface__Implementation__>(
-                        "Model.FK_ObjectClass_Interface_ImplementsInterfaces_49",
+                        "Model.FK_ObjectClass_implements_Interface_ImplementsInterfaces",
                         "ImplementsInterfaces");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -172,7 +172,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Interface__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Interface__Implementation__>(
-                        "Model.FK_ObjectClass_Interface_ImplementsInterfaces_49",
+                        "Model.FK_ObjectClass_implements_Interface_ImplementsInterfaces",
                         "ImplementsInterfaces");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -238,7 +238,7 @@ namespace Kistl.App.Base
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(ObjectClass_ImplementsInterfaces49CollectionEntry));
+			return new InterfaceType(typeof(ObjectClass_implements_Interface_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -264,8 +264,8 @@ namespace Kistl.App.Base
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__)obj;
-			var me = (ObjectClass_ImplementsInterfaces49CollectionEntry__Implementation__)this;
+			var other = (ObjectClass_implements_Interface_RelationEntry__Implementation__)obj;
+			var me = (ObjectClass_implements_Interface_RelationEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -278,9 +278,9 @@ namespace Kistl.App.Base
 
 namespace Kistl.App.Projekte
 {
-    [EdmEntityType(NamespaceName="Model", Name="Projekt_Mitarbeiter23CollectionEntry")]
-    [System.Diagnostics.DebuggerDisplay("Projekt_Mitarbeiter23CollectionEntry__Implementation__")]
-    public class Projekt_Mitarbeiter23CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Projekt_Mitarbeiter23CollectionEntry
+    [EdmEntityType(NamespaceName="Model", Name="Projekt_haben_Mitarbeiter_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntry__Implementation__")]
+    public class Projekt_haben_Mitarbeiter_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Projekt_haben_Mitarbeiter_RelationEntry
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -333,14 +333,14 @@ namespace Kistl.App.Projekte
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Mitarbeiter_Projekte_23", "Projekte")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_haben_Mitarbeiter_Projekte", "Projekte")]
         public Kistl.App.Projekte.Projekt__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_Mitarbeiter_Projekte_23",
+                        "Model.FK_Projekt_haben_Mitarbeiter_Projekte",
                         "Projekte");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -354,7 +354,7 @@ namespace Kistl.App.Projekte
             {
                 EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_Mitarbeiter_Projekte_23",
+                        "Model.FK_Projekt_haben_Mitarbeiter_Projekte",
                         "Projekte");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -414,14 +414,14 @@ namespace Kistl.App.Projekte
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_Mitarbeiter_Mitarbeiter_23", "Mitarbeiter")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_haben_Mitarbeiter_Mitarbeiter", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_Projekt_Mitarbeiter_Mitarbeiter_23",
+                        "Model.FK_Projekt_haben_Mitarbeiter_Mitarbeiter",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -435,7 +435,7 @@ namespace Kistl.App.Projekte
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_Projekt_Mitarbeiter_Mitarbeiter_23",
+                        "Model.FK_Projekt_haben_Mitarbeiter_Mitarbeiter",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -536,7 +536,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Projekt_Mitarbeiter23CollectionEntry));
+			return new InterfaceType(typeof(Projekt_haben_Mitarbeiter_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -562,8 +562,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Projekt_Mitarbeiter23CollectionEntry__Implementation__)obj;
-			var me = (Projekt_Mitarbeiter23CollectionEntry__Implementation__)this;
+			var other = (Projekt_haben_Mitarbeiter_RelationEntry__Implementation__)obj;
+			var me = (Projekt_haben_Mitarbeiter_RelationEntry__Implementation__)this;
 			
             me.AIndex = other.AIndex;
             me.BIndex = other.BIndex;
@@ -578,9 +578,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 namespace Kistl.App.GUI
 {
-    [EdmEntityType(NamespaceName="Model", Name="Template_Menu61CollectionEntry")]
-    [System.Diagnostics.DebuggerDisplay("Template_Menu61CollectionEntry__Implementation__")]
-    public class Template_Menu61CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Template_Menu61CollectionEntry
+    [EdmEntityType(NamespaceName="Model", Name="Template_hasMenu_Visual_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("Template_hasMenu_Visual_RelationEntry__Implementation__")]
+    public class Template_hasMenu_Visual_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Template_hasMenu_Visual_RelationEntry
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -633,14 +633,14 @@ namespace Kistl.App.GUI
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_61", "Template")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_hasMenu_Visual_Template", "Template")]
         public Kistl.App.GUI.Template__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Template__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Template__Implementation__>(
-                        "Model.FK_Template_Visual_Template_61",
+                        "Model.FK_Template_hasMenu_Visual_Template",
                         "Template");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -654,7 +654,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Template__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Template__Implementation__>(
-                        "Model.FK_Template_Visual_Template_61",
+                        "Model.FK_Template_hasMenu_Visual_Template",
                         "Template");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -691,14 +691,14 @@ namespace Kistl.App.GUI
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Menu_61", "Menu")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_hasMenu_Visual_Menu", "Menu")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Template_Visual_Menu_61",
+                        "Model.FK_Template_hasMenu_Visual_Menu",
                         "Menu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -712,7 +712,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Template_Visual_Menu_61",
+                        "Model.FK_Template_hasMenu_Visual_Menu",
                         "Menu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -764,7 +764,7 @@ namespace Kistl.App.GUI
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Template_Menu61CollectionEntry));
+			return new InterfaceType(typeof(Template_hasMenu_Visual_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -790,8 +790,8 @@ namespace Kistl.App.GUI
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Template_Menu61CollectionEntry__Implementation__)obj;
-			var me = (Template_Menu61CollectionEntry__Implementation__)this;
+			var other = (Template_hasMenu_Visual_RelationEntry__Implementation__)obj;
+			var me = (Template_hasMenu_Visual_RelationEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -804,9 +804,9 @@ namespace Kistl.App.GUI
 
 namespace Kistl.App.Base
 {
-    [EdmEntityType(NamespaceName="Model", Name="TypeRef_GenericArguments66CollectionEntry")]
-    [System.Diagnostics.DebuggerDisplay("TypeRef_GenericArguments66CollectionEntry__Implementation__")]
-    public class TypeRef_GenericArguments66CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, TypeRef_GenericArguments66CollectionEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    [EdmEntityType(NamespaceName="Model", Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__")]
+    public class TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, TypeRef_hasGenericArguments_TypeRef_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -882,14 +882,14 @@ namespace Kistl.App.Base
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_TypeRef_66", "TypeRef")]
+        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_TypeRef_TypeRef", "TypeRef")]
         public Kistl.App.Base.TypeRef__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_TypeRef_TypeRef_66",
+                        "Model.FK_TypeRef_hasGenericArguments_TypeRef_TypeRef",
                         "TypeRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -903,7 +903,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_TypeRef_TypeRef_66",
+                        "Model.FK_TypeRef_hasGenericArguments_TypeRef_TypeRef",
                         "TypeRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -963,14 +963,14 @@ namespace Kistl.App.Base
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_TypeRef_GenericArguments_66", "GenericArguments")]
+        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_TypeRef_GenericArguments", "GenericArguments")]
         public Kistl.App.Base.TypeRef__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_TypeRef_GenericArguments_66",
+                        "Model.FK_TypeRef_hasGenericArguments_TypeRef_GenericArguments",
                         "GenericArguments");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -984,7 +984,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_TypeRef_GenericArguments_66",
+                        "Model.FK_TypeRef_hasGenericArguments_TypeRef_GenericArguments",
                         "GenericArguments");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1113,7 +1113,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(TypeRef_GenericArguments66CollectionEntry));
+			return new InterfaceType(typeof(TypeRef_hasGenericArguments_TypeRef_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -1139,8 +1139,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (TypeRef_GenericArguments66CollectionEntry__Implementation__)obj;
-			var me = (TypeRef_GenericArguments66CollectionEntry__Implementation__)this;
+			var other = (TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__)obj;
+			var me = (TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__)this;
 			
             me.AIndex = other.AIndex;
             me.BIndex = other.BIndex;
@@ -1155,9 +1155,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 namespace Kistl.App.GUI
 {
-    [EdmEntityType(NamespaceName="Model", Name="Visual_Children55CollectionEntry")]
-    [System.Diagnostics.DebuggerDisplay("Visual_Children55CollectionEntry__Implementation__")]
-    public class Visual_Children55CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Visual_Children55CollectionEntry
+    [EdmEntityType(NamespaceName="Model", Name="Visual_contains_Visual_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("Visual_contains_Visual_RelationEntry__Implementation__")]
+    public class Visual_contains_Visual_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Visual_contains_Visual_RelationEntry
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -1210,14 +1210,14 @@ namespace Kistl.App.GUI
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Visual_55", "Visual")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_contains_Visual_Visual", "Visual")]
         public Kistl.App.GUI.Visual__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_Visual_Visual_55",
+                        "Model.FK_Visual_contains_Visual_Visual",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1231,7 +1231,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_Visual_Visual_55",
+                        "Model.FK_Visual_contains_Visual_Visual",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1268,14 +1268,14 @@ namespace Kistl.App.GUI
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Children_55", "Children")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_contains_Visual_Children", "Children")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_Visual_Children_55",
+                        "Model.FK_Visual_contains_Visual_Children",
                         "Children");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1289,7 +1289,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_Visual_Children_55",
+                        "Model.FK_Visual_contains_Visual_Children",
                         "Children");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1341,7 +1341,7 @@ namespace Kistl.App.GUI
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Visual_Children55CollectionEntry));
+			return new InterfaceType(typeof(Visual_contains_Visual_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -1367,8 +1367,8 @@ namespace Kistl.App.GUI
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Visual_Children55CollectionEntry__Implementation__)obj;
-			var me = (Visual_Children55CollectionEntry__Implementation__)this;
+			var other = (Visual_contains_Visual_RelationEntry__Implementation__)obj;
+			var me = (Visual_contains_Visual_RelationEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1381,9 +1381,9 @@ namespace Kistl.App.GUI
 
 namespace Kistl.App.GUI
 {
-    [EdmEntityType(NamespaceName="Model", Name="Visual_ContextMenu60CollectionEntry")]
-    [System.Diagnostics.DebuggerDisplay("Visual_ContextMenu60CollectionEntry__Implementation__")]
-    public class Visual_ContextMenu60CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Visual_ContextMenu60CollectionEntry
+    [EdmEntityType(NamespaceName="Model", Name="Visual_hasContextMenu_Visual_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("Visual_hasContextMenu_Visual_RelationEntry__Implementation__")]
+    public class Visual_hasContextMenu_Visual_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Visual_hasContextMenu_Visual_RelationEntry
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -1436,14 +1436,14 @@ namespace Kistl.App.GUI
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_Visual_60", "Visual")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_hasContextMenu_Visual_Visual", "Visual")]
         public Kistl.App.GUI.Visual__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_Visual_Visual_60",
+                        "Model.FK_Visual_hasContextMenu_Visual_Visual",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1457,7 +1457,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_Visual_Visual_60",
+                        "Model.FK_Visual_hasContextMenu_Visual_Visual",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1494,14 +1494,14 @@ namespace Kistl.App.GUI
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_Visual_ContextMenu_60", "ContextMenu")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_hasContextMenu_Visual_ContextMenu", "ContextMenu")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_Visual_ContextMenu_60",
+                        "Model.FK_Visual_hasContextMenu_Visual_ContextMenu",
                         "ContextMenu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1515,7 +1515,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_Visual_ContextMenu_60",
+                        "Model.FK_Visual_hasContextMenu_Visual_ContextMenu",
                         "ContextMenu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1567,7 +1567,7 @@ namespace Kistl.App.GUI
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Visual_ContextMenu60CollectionEntry));
+			return new InterfaceType(typeof(Visual_hasContextMenu_Visual_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -1593,8 +1593,8 @@ namespace Kistl.App.GUI
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Visual_ContextMenu60CollectionEntry__Implementation__)obj;
-			var me = (Visual_ContextMenu60CollectionEntry__Implementation__)this;
+			var other = (Visual_hasContextMenu_Visual_RelationEntry__Implementation__)obj;
+			var me = (Visual_hasContextMenu_Visual_RelationEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1608,9 +1608,9 @@ namespace Kistl.App.GUI
 namespace Kistl.App.TimeRecords
 {
 	using Kistl.App.Projekte;
-    [EdmEntityType(NamespaceName="Model", Name="WorkEffortAccount_Mitarbeiter42CollectionEntry")]
-    [System.Diagnostics.DebuggerDisplay("WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__")]
-    public class WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, WorkEffortAccount_Mitarbeiter42CollectionEntry
+    [EdmEntityType(NamespaceName="Model", Name="WorkEffortAccount_has_Mitarbeiter_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__")]
+    public class WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, WorkEffortAccount_has_Mitarbeiter_RelationEntry
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -1663,14 +1663,14 @@ namespace Kistl.App.TimeRecords
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42", "WorkEffortAccount")]
+        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount", "WorkEffortAccount")]
         public Kistl.App.TimeRecords.WorkEffortAccount__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__>(
-                        "Model.FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42",
+                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount",
                         "WorkEffortAccount");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1684,7 +1684,7 @@ namespace Kistl.App.TimeRecords
             {
                 EntityReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__>(
-                        "Model.FK_WorkEffortAccount_Mitarbeiter_WorkEffortAccount_42",
+                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount",
                         "WorkEffortAccount");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1721,14 +1721,14 @@ namespace Kistl.App.TimeRecords
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42", "Mitarbeiter")]
+        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_has_Mitarbeiter_Mitarbeiter", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42",
+                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_Mitarbeiter",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1742,7 +1742,7 @@ namespace Kistl.App.TimeRecords
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_WorkEffortAccount_Mitarbeiter_Mitarbeiter_42",
+                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_Mitarbeiter",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1794,7 +1794,7 @@ namespace Kistl.App.TimeRecords
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(WorkEffortAccount_Mitarbeiter42CollectionEntry));
+			return new InterfaceType(typeof(WorkEffortAccount_has_Mitarbeiter_RelationEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -1820,8 +1820,8 @@ namespace Kistl.App.TimeRecords
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__)obj;
-			var me = (WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__)this;
+			var other = (WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__)obj;
+			var me = (WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__)this;
 			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1834,8 +1834,8 @@ namespace Kistl.App.TimeRecords
 
 namespace Kistl.App.Projekte
 {
-    [EdmEntityType(NamespaceName="Model", Name="Kunde_EMailsCollectionEntry")]    [System.Diagnostics.DebuggerDisplay("Kunde_EMailsCollectionEntry__Implementation__")]
-    public class Kunde_EMailsCollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Kunde_EMailsCollectionEntry
+    [EdmEntityType(NamespaceName="Model", Name="Kunde_EMails_CollectionEntry")]    [System.Diagnostics.DebuggerDisplay("Kunde_EMails_CollectionEntry__Implementation__")]
+    public class Kunde_EMails_CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Kunde_EMails_CollectionEntry
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -1989,7 +1989,7 @@ public string Value { get { return B; } set { B = value; } }
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Kunde_EMailsCollectionEntry));
+			return new InterfaceType(typeof(Kunde_EMails_CollectionEntry));
 		}
 	
 		public override void ReloadReferences()
@@ -2004,8 +2004,8 @@ public string Value { get { return B; } set { B = value; } }
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Kunde_EMailsCollectionEntry__Implementation__)obj;
-			var me = (Kunde_EMailsCollectionEntry__Implementation__)this;
+			var other = (Kunde_EMails_CollectionEntry__Implementation__)obj;
+			var me = (Kunde_EMails_CollectionEntry__Implementation__)this;
 			
             me.B = other.B;
 		}		

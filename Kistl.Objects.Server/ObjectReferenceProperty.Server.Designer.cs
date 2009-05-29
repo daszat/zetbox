@@ -66,7 +66,7 @@ namespace Kistl.App.Base
         /// Pointer zur Objektklasse
         /// </summary>
     /*
-    Relation: FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27
+    Relation: FK_ObjectReferenceProperty_has_ObjectClass
     A: ZeroOrMore ObjectReferenceProperty as ObjectReferenceProperty
     B: ZeroOrOne ObjectClass as ReferenceObjectClass
     Preferred Storage: MergeIntoA
@@ -94,14 +94,14 @@ namespace Kistl.App.Base
         private int? _fk_ReferenceObjectClass;
         private Guid? _fk_guid_ReferenceObjectClass = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27", "ReferenceObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferenceProperty_has_ObjectClass", "ReferenceObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ ReferenceObjectClass__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27",
+                        "Model.FK_ObjectReferenceProperty_has_ObjectClass",
                         "ReferenceObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -115,7 +115,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectReferenceProperty_ObjectClass_ObjectReferenceProperty_27",
+                        "Model.FK_ObjectReferenceProperty_has_ObjectClass",
                         "ReferenceObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -132,7 +132,7 @@ namespace Kistl.App.Base
         /// The RelationEnd describing this Property
         /// </summary>
     /*
-    Relation: FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74
+    Relation: FK_RelationEnd_has_ObjectReferenceProperty
     A: ZeroOrOne RelationEnd as RelationEnd
     B: ZeroOrOne ObjectReferenceProperty as Navigator
     Preferred Storage: MergeIntoA
@@ -160,14 +160,14 @@ namespace Kistl.App.Base
         private int? _fk_RelationEnd;
         private Guid? _fk_guid_RelationEnd = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74", "RelationEnd")]
+        [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_has_ObjectReferenceProperty", "RelationEnd")]
         public Kistl.App.Base.RelationEnd__Implementation__ RelationEnd__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74",
+                        "Model.FK_RelationEnd_has_ObjectReferenceProperty",
                         "RelationEnd");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -181,7 +181,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_RelationEnd_ObjectReferenceProperty_RelationEnd_74",
+                        "Model.FK_RelationEnd_has_ObjectReferenceProperty",
                         "RelationEnd");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

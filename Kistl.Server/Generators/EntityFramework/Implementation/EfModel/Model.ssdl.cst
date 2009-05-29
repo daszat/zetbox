@@ -50,10 +50,10 @@
 <%
 	foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
 	{
-		string assocNameA = rel.GetCollectionEntryAssociationName(RelationEndRole.A);
-		string assocNameB = rel.GetCollectionEntryAssociationName(RelationEndRole.B);
-		string esName = rel.GetCollectionEntryClassName();
-		string esTableName = rel.GetCollectionEntryTableName(ctx);
+		string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
+		string assocNameB = rel.GetRelationAssociationName(RelationEndRole.B);
+		string esName = rel.GetRelationClassName();
+		string esTableName = rel.GetRelationTableName();
 		
 %>
     <!-- 
@@ -101,7 +101,7 @@
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
 %>
-    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= ((ObjectClass)prop.ObjectClass).TableName %>_<%= prop.PropertyName %>Collection" />
+    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
       <End Role="<%= prop.ObjectClass.ClassName %>" EntitySet="<%= prop.ObjectClass.ClassName %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
@@ -135,9 +135,9 @@
 <%
 	foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
 	{
-		string ceName = rel.GetCollectionEntryClassName();
-		string fkAName = rel.GetCollectionEntryFkColumnName(RelationEndRole.A);
-		string fkBName = rel.GetCollectionEntryFkColumnName(RelationEndRole.B);
+		string ceName = rel.GetRelationClassName();
+		string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
+		string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
 %>	
   <EntityType Name="<%= ceName %>">
     <Key>
@@ -173,7 +173,7 @@
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="<%= rel.GetCollectionEntryAssociationName(RelationEndRole.A) %>">
+  <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.A) %>">
     <End Role="<%= rel.A.RoleName %>" Type="Model.Store.<%= rel.A.Type.ClassName %>" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
     <ReferentialConstraint>
@@ -187,7 +187,7 @@
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="<%= rel.GetCollectionEntryAssociationName(RelationEndRole.B) %>">
+  <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.B) %>">
     <End Role="<%= rel.B.RoleName %>" Type="Model.Store.<%= rel.B.Type.ClassName %>" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
     <ReferentialConstraint>

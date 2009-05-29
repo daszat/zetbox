@@ -11,7 +11,7 @@ using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst")]
     public partial class ModelMsl : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
@@ -26,78 +26,78 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
         
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 16 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
 this.WriteObjects("<Mapping Space=\"C-S\" xmlns=\"urn:schemas-microsoft-com:windows:storage:mapping:CS\">\r\n");
 this.WriteObjects("  <EntityContainerMapping StorageEntityContainer=\"dbo\" CdmEntityContainer=\"Entities\">\r\n");
 this.WriteObjects("    \r\n");
 this.WriteObjects("    <!-- EntitySetMappings for classes -->\r\n");
-#line 22 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 22 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 foreach(var cls in ctx.GetBaseClasses())
     {
 
-#line 25 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 25 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    <EntitySetMapping Name=\"",  cls.ClassName , "\">\r\n");
-#line 26 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 26 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 ApplyEntityTypeMapping(cls); 
-#line 27 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 27 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    </EntitySetMapping>\r\n");
-#line 29 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 29 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
 
-#line 31 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 31 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->\r\n");
-#line 35 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 35 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
     {
-        string fkAName = rel.GetCollectionEntryFkColumnName(RelationEndRole.A);
-        string fkBName = rel.GetCollectionEntryFkColumnName(RelationEndRole.B);
+        string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
+        string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
 
-#line 40 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 40 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    <!--\r\n");
-#line 42 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 42 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 
-#line 44 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 44 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    -->\r\n");
-this.WriteObjects("    <EntitySetMapping Name=\"",  rel.GetCollectionEntryClassName() , "\">\r\n");
-this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  rel.GetCollectionEntryClassName() , ")\">\r\n");
-this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  rel.GetCollectionEntryClassName() , "\">\r\n");
+this.WriteObjects("    <EntitySetMapping Name=\"",  rel.GetRelationClassName() , "\">\r\n");
+this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  rel.GetRelationClassName() , ")\">\r\n");
+this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  rel.GetRelationClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
-#line 50 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 50 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 if(rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx))
 		{
 
-#line 53 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 53 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("		  <ScalarProperty Name=\"ExportGuid\" ColumnName=\"ExportGuid\" />\r\n");
-#line 55 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 55 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
 		if (rel.NeedsPositionStorage(RelationEndRole.A))
 		{
 
-#line 59 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 59 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("          <ScalarProperty Name=\"A",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"",  fkAName , "",  Kistl.API.Helper.PositionSuffix , "\" />\r\n");
-#line 61 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 61 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
 
 		if (rel.NeedsPositionStorage(RelationEndRole.B))
 		{
 
-#line 66 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 66 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("          <ScalarProperty Name=\"B",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"",  fkBName , "",  Kistl.API.Helper.PositionSuffix , "\" />\r\n");
-#line 68 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 68 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
 
-#line 70 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 70 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("        </MappingFragment>\r\n");
 this.WriteObjects("      </EntityTypeMapping>\r\n");
 this.WriteObjects("    </EntitySetMapping>\r\n");
 this.WriteObjects("    <!-- A to CollectionEntry -->\r\n");
-this.WriteObjects("    <AssociationSetMapping Name=\"",  rel.GetCollectionEntryAssociationName(RelationEndRole.A) , "\"\r\n");
-this.WriteObjects("                           TypeName=\"Model.",  rel.GetCollectionEntryAssociationName(RelationEndRole.A) , "\"\r\n");
-this.WriteObjects("                           StoreEntitySet=\"",  rel.GetCollectionEntryClassName() , "\" >\r\n");
+this.WriteObjects("    <AssociationSetMapping Name=\"",  rel.GetRelationAssociationName(RelationEndRole.A) , "\"\r\n");
+this.WriteObjects("                           TypeName=\"Model.",  rel.GetRelationAssociationName(RelationEndRole.A) , "\"\r\n");
+this.WriteObjects("                           StoreEntitySet=\"",  rel.GetRelationClassName() , "\" >\r\n");
 this.WriteObjects("      <EndProperty Name=\"",  rel.A.RoleName , "\">\r\n");
 this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"",  fkAName , "\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
@@ -107,9 +107,9 @@ this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <Condition ColumnName=\"",  fkAName , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
 this.WriteObjects("    <!-- B to CollectionEntry -->\r\n");
-this.WriteObjects("    <AssociationSetMapping Name=\"",  rel.GetCollectionEntryAssociationName(RelationEndRole.B) , "\"\r\n");
-this.WriteObjects("                           TypeName=\"Model.",  rel.GetCollectionEntryAssociationName(RelationEndRole.B) , "\"\r\n");
-this.WriteObjects("                           StoreEntitySet=\"",  rel.GetCollectionEntryClassName() , "\" >\r\n");
+this.WriteObjects("    <AssociationSetMapping Name=\"",  rel.GetRelationAssociationName(RelationEndRole.B) , "\"\r\n");
+this.WriteObjects("                           TypeName=\"Model.",  rel.GetRelationAssociationName(RelationEndRole.B) , "\"\r\n");
+this.WriteObjects("                           StoreEntitySet=\"",  rel.GetRelationClassName() , "\" >\r\n");
 this.WriteObjects("      <EndProperty Name=\"",  rel.B.RoleName , "\">\r\n");
 this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"",  fkBName , "\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
@@ -119,15 +119,15 @@ this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <Condition ColumnName=\"",  fkBName , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
 this.WriteObjects("\r\n");
-#line 99 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 99 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
     
 
-#line 102 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 102 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->\r\n");
-#line 106 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 106 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 foreach(var rel in ModelCsdl.GetRelationsWithoutSeparateStorage(ctx))
     {
         RelationEnd principal, dependent;
@@ -146,12 +146,12 @@ foreach(var rel in ModelCsdl.GetRelationsWithoutSeparateStorage(ctx))
                 throw new NotImplementedException();
         }
 
-#line 124 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 124 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    <!--\r\n");
-#line 126 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 126 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 
-#line 128 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 128 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    -->\r\n");
 this.WriteObjects("    <AssociationSetMapping Name=\"",  rel.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                           TypeName=\"Model.",  rel.GetAssociationName() , "\"\r\n");
@@ -164,36 +164,36 @@ this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\"/>\r\n")
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <Condition ColumnName=\"fk_",  principal.RoleName , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
-#line 141 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 141 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
     
 
-#line 144 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 144 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for ValueType lists -->\r\n");
-#line 147 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 147 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
         .ThenBy(p => p.PropertyName))
     { 
 
-#line 153 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 153 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    <EntitySetMapping Name=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
 this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  prop.GetCollectionEntryClassName() , ")\">\r\n");
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"B\" ColumnName=\"",  prop.PropertyName , "\" />\r\n");
-#line 159 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 159 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 if (prop.IsIndexed)
 		{
 
-#line 162 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 162 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("          <ScalarProperty Name=\"B",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"BIndex\" />\r\n");
-#line 164 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 164 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
 
-#line 166 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 166 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("        </MappingFragment>\r\n");
 this.WriteObjects("      </EntityTypeMapping>\r\n");
 this.WriteObjects("    </EntitySetMapping>\r\n");
@@ -208,11 +208,11 @@ this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\"/>\r\n")
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <Condition ColumnName=\"fk_",  prop.ObjectClass.ClassName , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
-#line 181 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 181 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 }
     
 
-#line 184 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
+#line 184 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("  </EntityContainerMapping>\r\n");
 this.WriteObjects("</Mapping>");

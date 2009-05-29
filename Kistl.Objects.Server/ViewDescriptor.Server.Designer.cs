@@ -59,7 +59,7 @@ namespace Kistl.App.GUI
         /// The control implementing this View
         /// </summary>
     /*
-    Relation: FK_ViewDescriptor_TypeRef_View_76
+    Relation: FK_ViewDescriptor_has_TypeRef
     A: ZeroOrMore ViewDescriptor as View
     B: One TypeRef as ControlRef
     Preferred Storage: MergeIntoA
@@ -87,14 +87,14 @@ namespace Kistl.App.GUI
         private int? _fk_ControlRef;
         private Guid? _fk_guid_ControlRef = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_TypeRef_View_76", "ControlRef")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_has_TypeRef", "ControlRef")]
         public Kistl.App.Base.TypeRef__Implementation__ ControlRef__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ViewDescriptor_TypeRef_View_76",
+                        "Model.FK_ViewDescriptor_has_TypeRef",
                         "ControlRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -108,7 +108,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ViewDescriptor_TypeRef_View_76",
+                        "Model.FK_ViewDescriptor_has_TypeRef",
                         "ControlRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -125,7 +125,7 @@ namespace Kistl.App.GUI
         /// The PresentableModel usable by this View
         /// </summary>
     /*
-    Relation: FK_ViewDescriptor_PresentableModelDescriptor_View_75
+    Relation: FK_ViewDescriptor_has_PresentableModelDescriptor
     A: ZeroOrMore ViewDescriptor as View
     B: One PresentableModelDescriptor as PresentedModelDescriptor
     Preferred Storage: MergeIntoA
@@ -153,14 +153,14 @@ namespace Kistl.App.GUI
         private int? _fk_PresentedModelDescriptor;
         private Guid? _fk_guid_PresentedModelDescriptor = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_PresentableModelDescriptor_View_75", "PresentedModelDescriptor")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_has_PresentableModelDescriptor", "PresentedModelDescriptor")]
         public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ PresentedModelDescriptor__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_ViewDescriptor_PresentableModelDescriptor_View_75",
+                        "Model.FK_ViewDescriptor_has_PresentableModelDescriptor",
                         "PresentedModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -174,7 +174,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_ViewDescriptor_PresentableModelDescriptor_View_75",
+                        "Model.FK_ViewDescriptor_has_PresentableModelDescriptor",
                         "PresentedModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

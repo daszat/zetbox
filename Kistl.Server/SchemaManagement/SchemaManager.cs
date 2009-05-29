@@ -155,13 +155,13 @@ namespace Kistl.Server.SchemaManagement
 
             // Add ValueTypeProperties
             tableNames.AddRange(schema.GetQuery<ValueTypeProperty>().Where(p => p.IsList).ToList()
-                .Select(p => ((ObjectClass)p.ObjectClass).TableName + "_" + p.PropertyName + "Collection"));
+                .Select(p => p.GetCollectionEntryTable()));
 
             // Add Relations with sep. Storage
             tableNames.AddRange(schema.GetQuery<Relation>()
                             .Where(r => (int)r.Storage == (int)StorageType.Separate)
                             .ToList()
-                            .Select(r => r.GetCollectionEntryTableName(schema)));
+                            .Select(r => r.GetRelationTableName()));
 
             foreach (string tblName in db.GetTableNames())
             {

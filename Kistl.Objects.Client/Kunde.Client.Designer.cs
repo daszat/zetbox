@@ -68,7 +68,7 @@ namespace Kistl.App.Projekte
 				if (_EMailsWrapper == null)
 				{
 				    _EMailsWrapper 
-				        = new ClientValueCollectionWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__, IList<Kunde_EMailsCollectionEntry__Implementation__>>(
+				        = new ClientValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry__Implementation__, IList<Kunde_EMails_CollectionEntry__Implementation__>>(
 							this.Context,
 				            this, 
 				            _EMails);
@@ -77,8 +77,8 @@ namespace Kistl.App.Projekte
 			}
 		}
 
-		private ClientValueCollectionWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__, IList<Kunde_EMailsCollectionEntry__Implementation__>> _EMailsWrapper;
-		private IList<Kunde_EMailsCollectionEntry__Implementation__> _EMails = new List<Kunde_EMailsCollectionEntry__Implementation__>();
+		private ClientValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry__Implementation__, IList<Kunde_EMails_CollectionEntry__Implementation__>> _EMailsWrapper;
+		private IList<Kunde_EMails_CollectionEntry__Implementation__> _EMails = new List<Kunde_EMails_CollectionEntry__Implementation__>();
 
         /// <summary>
         /// Name des Kunden

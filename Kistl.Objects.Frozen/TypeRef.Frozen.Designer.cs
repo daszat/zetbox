@@ -1885,28 +1885,28 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[569],
 			DataStore[570].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[567];
 			DataStore[570].Seal();
 			DataStore[571].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
-			DataStore[571].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[571].ExportGuid = new Guid("f62bf5a2-943e-4ff7-b2f8-02546b2aed8a");
 			DataStore[571].FullName = @"Kistl.Client.WPF.View.GridCells.StringValue";
 			DataStore[571].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[571].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
 			DataStore[571].Seal();
 			DataStore[572].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
-			DataStore[572].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[572].ExportGuid = new Guid("b6079dc3-e1f2-4fe9-986a-fb86207114ae");
 			DataStore[572].FullName = @"Kistl.Client.WPF.View.GridCells.BoolEditor";
 			DataStore[572].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[572].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
 			DataStore[572].Seal();
 			DataStore[573].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
-			DataStore[573].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[573].ExportGuid = new Guid("19527b3b-2f29-4c4d-869c-7e2cffe281c9");
 			DataStore[573].FullName = @"Kistl.Client.WPF.View.GridCells.StringEditor";
 			DataStore[573].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
 			DataStore[573].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
 			DataStore[573].Seal();
 			DataStore[574].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
-			DataStore[574].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[574].ExportGuid = new Guid("268210f3-c451-4b6f-a8fb-1db8409a00f7");
 			DataStore[574].FullName = @"Kistl.Client.WPF.View.GridCells.ReferenceEditor";
 			DataStore[574].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });

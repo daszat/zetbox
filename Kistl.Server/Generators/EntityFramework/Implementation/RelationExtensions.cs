@@ -19,7 +19,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         /// </summary>
         public static string GetAssociationName(this Relation rel)
         {
-            return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.Type.ClassName, rel.B.Type.ClassName, rel.A.RoleName, rel.ID);
+            return String.Format("FK_{0}_{1}_{2}", rel.A.Type.ClassName, rel.Verb, rel.B.Type.ClassName);
         }
 
         /// <summary>

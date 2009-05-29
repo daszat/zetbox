@@ -97,7 +97,7 @@ namespace Kistl.App.Projekte
             {
                 if (_EMailsWrapper == null)
                 {
-                    _EMailsWrapper = new EFValueCollectionWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__, EntityCollection<Kunde_EMailsCollectionEntry__Implementation__>>(
+                    _EMailsWrapper = new EFValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry__Implementation__, EntityCollection<Kunde_EMails_CollectionEntry__Implementation__>>(
 						this.Context,
                         this,
                         EMails__Implementation__);
@@ -107,12 +107,12 @@ namespace Kistl.App.Projekte
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_Kunde_String_EMails", "CollectionEntry")]
-        public EntityCollection<Kunde_EMailsCollectionEntry__Implementation__> EMails__Implementation__
+        public EntityCollection<Kunde_EMails_CollectionEntry__Implementation__> EMails__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kunde_EMailsCollectionEntry__Implementation__>(
+                    .GetRelatedCollection<Kunde_EMails_CollectionEntry__Implementation__>(
                         "Model.FK_Kunde_String_EMails",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -123,7 +123,7 @@ namespace Kistl.App.Projekte
                 return c;
             }
         }
-        private EFValueCollectionWrapper<Kunde, string, Kunde_EMailsCollectionEntry__Implementation__, EntityCollection<Kunde_EMailsCollectionEntry__Implementation__>> _EMailsWrapper;
+        private EFValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry__Implementation__, EntityCollection<Kunde_EMails_CollectionEntry__Implementation__>> _EMailsWrapper;
 
         /// <summary>
         /// Name des Kunden

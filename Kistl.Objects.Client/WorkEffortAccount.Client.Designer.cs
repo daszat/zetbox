@@ -67,17 +67,17 @@ namespace Kistl.App.TimeRecords
 			{
 				if (_Mitarbeiter == null)
 				{
-					Context.FetchRelation<WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__>(42, RelationEndRole.A, this);
+					Context.FetchRelation<WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__>(42, RelationEndRole.A, this);
 					_Mitarbeiter 
-						= new ClientRelationBSideCollectionWrapper<Kistl.App.TimeRecords.WorkEffortAccount, Kistl.App.Projekte.Mitarbeiter, WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__>(
+						= new ClientRelationBSideCollectionWrapper<Kistl.App.TimeRecords.WorkEffortAccount, Kistl.App.Projekte.Mitarbeiter, WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__>(
 							this, 
-							new RelationshipFilterASideCollection<WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__>(this.Context, this));
+							new RelationshipFilterASideCollection<WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__>(this.Context, this));
 				}
 				return _Mitarbeiter;
 			}
 		}
 
-		private ClientRelationBSideCollectionWrapper<Kistl.App.TimeRecords.WorkEffortAccount, Kistl.App.Projekte.Mitarbeiter, WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__> _Mitarbeiter;
+		private ClientRelationBSideCollectionWrapper<Kistl.App.TimeRecords.WorkEffortAccount, Kistl.App.Projekte.Mitarbeiter, WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__> _Mitarbeiter;
 
         /// <summary>
         /// Name des TimeRecordsskontos

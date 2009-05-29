@@ -59,7 +59,7 @@ namespace Kistl.App.GUI
         /// Assembly of the Type that is displayed with this Template
         /// </summary>
     /*
-    Relation: FK_Template_Assembly_Template_59
+    Relation: FK_Template_has_Assembly
     A: ZeroOrMore Template as Template
     B: ZeroOrOne Assembly as DisplayedTypeAssembly
     Preferred Storage: MergeIntoA
@@ -87,14 +87,14 @@ namespace Kistl.App.GUI
         private int? _fk_DisplayedTypeAssembly;
         private Guid? _fk_guid_DisplayedTypeAssembly = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_Assembly_Template_59", "DisplayedTypeAssembly")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_has_Assembly", "DisplayedTypeAssembly")]
         public Kistl.App.Base.Assembly__Implementation__ DisplayedTypeAssembly__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_Template_Assembly_Template_59",
+                        "Model.FK_Template_has_Assembly",
                         "DisplayedTypeAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -108,7 +108,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.Assembly__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_Template_Assembly_Template_59",
+                        "Model.FK_Template_has_Assembly",
                         "DisplayedTypeAssembly");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -181,7 +181,7 @@ namespace Kistl.App.GUI
         /// The main menu for this Template
         /// </summary>
     /*
-    Relation: FK_Template_Visual_Template_61
+    Relation: FK_Template_hasMenu_Visual
     A: ZeroOrMore Template as Template
     B: ZeroOrMore Visual as Menu
     Preferred Storage: Separate
@@ -197,7 +197,7 @@ namespace Kistl.App.GUI
             {
                 if (_MenuWrapper == null)
                 {
-                    _MenuWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__>(
+                    _MenuWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_hasMenu_Visual_RelationEntry__Implementation__>(
                             this,
                             Menu__Implementation__);
                 }
@@ -205,14 +205,14 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_61", "CollectionEntry")]
-        public EntityCollection<Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__> Menu__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_hasMenu_Visual_Template", "CollectionEntry")]
+        public EntityCollection<Kistl.App.GUI.Template_hasMenu_Visual_RelationEntry__Implementation__> Menu__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__>(
-                        "Model.FK_Template_Visual_Template_61",
+                    .GetRelatedCollection<Kistl.App.GUI.Template_hasMenu_Visual_RelationEntry__Implementation__>(
+                        "Model.FK_Template_hasMenu_Visual_Template",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -222,14 +222,14 @@ namespace Kistl.App.GUI
                 return c;
             }
         }
-        private EntityRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__> _MenuWrapper;
+        private EntityRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_hasMenu_Visual_RelationEntry__Implementation__> _MenuWrapper;
 
 
         /// <summary>
         /// The visual representation of this Template
         /// </summary>
     /*
-    Relation: FK_Template_Visual_Template_58
+    Relation: FK_Template_has_Visual
     A: ZeroOrMore Template as Template
     B: ZeroOrOne Visual as VisualTree
     Preferred Storage: MergeIntoA
@@ -257,14 +257,14 @@ namespace Kistl.App.GUI
         private int? _fk_VisualTree;
         private Guid? _fk_guid_VisualTree = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_Visual_Template_58", "VisualTree")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_has_Visual", "VisualTree")]
         public Kistl.App.GUI.Visual__Implementation__ VisualTree__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Template_Visual_Template_58",
+                        "Model.FK_Template_has_Visual",
                         "VisualTree");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -278,7 +278,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Template_Visual_Template_58",
+                        "Model.FK_Template_has_Visual",
                         "VisualTree");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

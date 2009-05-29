@@ -87,7 +87,7 @@ namespace Kistl.App.TimeRecords
         /// Which employee effected this work effort.
         /// </summary>
     /*
-    Relation: FK_WorkEffort_Mitarbeiter_WorkEffort_82
+    Relation: FK_WorkEffort_has_Mitarbeiter
     A: ZeroOrMore WorkEffort as WorkEffort
     B: One Mitarbeiter as Mitarbeiter
     Preferred Storage: MergeIntoA
@@ -115,14 +115,14 @@ namespace Kistl.App.TimeRecords
         private int? _fk_Mitarbeiter;
         private Guid? _fk_guid_Mitarbeiter = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffort_Mitarbeiter_WorkEffort_82", "Mitarbeiter")]
+        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffort_has_Mitarbeiter", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ Mitarbeiter__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_WorkEffort_Mitarbeiter_WorkEffort_82",
+                        "Model.FK_WorkEffort_has_Mitarbeiter",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -136,7 +136,7 @@ namespace Kistl.App.TimeRecords
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_WorkEffort_Mitarbeiter_WorkEffort_82",
+                        "Model.FK_WorkEffort_has_Mitarbeiter",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

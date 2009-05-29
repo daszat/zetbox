@@ -53,14 +53,14 @@ using Kistl.DALProvider.EF;
 %>
 
 // The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "<%= rel.GetCollectionEntryAssociationName(RelationEndRole.A) %>",
+[assembly: EdmRelationship("Model", "<%= rel.GetRelationAssociationName(RelationEndRole.A) %>",
     "<%= rel.A.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.A.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix %>),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(<%= rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(<%= rel.GetRelationFullName() + Kistl.API.Helper.ImplementationSuffix %>)
     )]
 // The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "<%= rel.GetCollectionEntryAssociationName(RelationEndRole.B) %>",
+[assembly: EdmRelationship("Model", "<%= rel.GetRelationAssociationName(RelationEndRole.B) %>",
     "<%= rel.B.RoleName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= rel.B.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix %>),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(<%= rel.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(<%= rel.GetRelationFullName() + Kistl.API.Helper.ImplementationSuffix %>)
     )]
 <%
 				break;

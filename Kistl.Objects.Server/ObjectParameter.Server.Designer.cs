@@ -38,7 +38,7 @@ namespace Kistl.App.Base
         /// Kistl-Typ des Parameters
         /// </summary>
     /*
-    Relation: FK_ObjectParameter_DataType_ObjectParameter_45
+    Relation: FK_ObjectParameter_has_DataType
     A: ZeroOrMore ObjectParameter as ObjectParameter
     B: ZeroOrOne DataType as DataType
     Preferred Storage: MergeIntoA
@@ -66,14 +66,14 @@ namespace Kistl.App.Base
         private int? _fk_DataType;
         private Guid? _fk_guid_DataType = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectParameter_DataType_ObjectParameter_45", "DataType")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectParameter_has_DataType", "DataType")]
         public Kistl.App.Base.DataType__Implementation__ DataType__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_ObjectParameter_DataType_ObjectParameter_45",
+                        "Model.FK_ObjectParameter_has_DataType",
                         "DataType");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -87,7 +87,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_ObjectParameter_DataType_ObjectParameter_45",
+                        "Model.FK_ObjectParameter_has_DataType",
                         "DataType");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
