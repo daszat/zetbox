@@ -19,6 +19,7 @@
 
 	var backingName = BackingMemberFromName(name);
 %>
+   		// <%= this.GetType() %>
         <%= GetModifiers() %> <%= GetPropertyTypeString() %> <%= name %>
         {
             get

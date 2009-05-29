@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.Base
         /// The Type implementing this invocation
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.TypeRef Implementor
         {
             get
@@ -80,6 +82,7 @@ namespace Kistl.App.Base
         /// In dieser Objektklasse implementieren
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.DataType InvokeOnObjectClass
         {
             get
@@ -104,6 +107,7 @@ namespace Kistl.App.Base
         /// Name des implementierenden Members
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string MemberName
         {
             get
@@ -128,6 +132,7 @@ namespace Kistl.App.Base
         /// Methode, die Aufgerufen wird
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.Method Method
         {
             get
@@ -152,6 +157,7 @@ namespace Kistl.App.Base
         /// Zugehörig zum Modul
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.Module Module
         {
             get
@@ -178,6 +184,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

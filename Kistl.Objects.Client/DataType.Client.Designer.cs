@@ -35,6 +35,7 @@ namespace Kistl.App.Base
         /// Der Name der Objektklasse
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string ClassName
         {
             get
@@ -59,6 +60,7 @@ namespace Kistl.App.Base
         /// Standard Icon wenn IIcon nicht implementiert ist
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -102,6 +104,7 @@ namespace Kistl.App.Base
         /// Description of this DataType
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Description
         {
             get
@@ -126,6 +129,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -150,6 +154,7 @@ namespace Kistl.App.Base
         /// all implemented Methods in this DataType
         /// </summary>
         // object list property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -161,9 +166,13 @@ namespace Kistl.App.Base
                 {
                     List<Kistl.App.Base.MethodInvocation> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodInvocations");
+                    {
+						serverList = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodInvocations");
+					}
                     else
+                    {
                         serverList = new List<Kistl.App.Base.MethodInvocation>();
+                    }
                         
                     _MethodInvocationsWrapper = new OneNRelationCollection<Kistl.App.Base.MethodInvocation>(
                         "InvokeOnObjectClass",
@@ -176,10 +185,12 @@ namespace Kistl.App.Base
         
         private OneNRelationCollection<Kistl.App.Base.MethodInvocation> _MethodInvocationsWrapper;
 
+
         /// <summary>
         /// Liste aller Methoden der Objektklasse.
         /// </summary>
         // object list property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -191,9 +202,13 @@ namespace Kistl.App.Base
                 {
                     List<Kistl.App.Base.Method> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.Method>(this, "Methods");
+                    {
+						serverList = Context.GetListOf<Kistl.App.Base.Method>(this, "Methods");
+					}
                     else
+                    {
                         serverList = new List<Kistl.App.Base.Method>();
+                    }
                         
                     _MethodsWrapper = new OneNRelationCollection<Kistl.App.Base.Method>(
                         "ObjectClass",
@@ -206,10 +221,12 @@ namespace Kistl.App.Base
         
         private OneNRelationCollection<Kistl.App.Base.Method> _MethodsWrapper;
 
+
         /// <summary>
         /// Modul der Objektklasse
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -269,6 +286,7 @@ namespace Kistl.App.Base
         /// Eigenschaften der Objektklasse
         /// </summary>
         // object list property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -280,9 +298,13 @@ namespace Kistl.App.Base
                 {
                     List<Kistl.App.Base.Property> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.Property>(this, "Properties");
+                    {
+						serverList = Context.GetListOf<Kistl.App.Base.Property>(this, "Properties");
+					}
                     else
+                    {
                         serverList = new List<Kistl.App.Base.Property>();
+                    }
                         
                     _PropertiesWrapper = new OneNRelationCollection<Kistl.App.Base.Property>(
                         "ObjectClass",
@@ -295,10 +317,12 @@ namespace Kistl.App.Base
         
         private OneNRelationCollection<Kistl.App.Base.Property> _PropertiesWrapper;
 
+
         /// <summary>
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool ShowIconInLists
         {
             get
@@ -323,6 +347,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool ShowIdInLists
         {
             get
@@ -347,6 +372,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool ShowNameInLists
         {
             get
@@ -439,6 +465,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

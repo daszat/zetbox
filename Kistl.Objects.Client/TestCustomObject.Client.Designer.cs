@@ -37,6 +37,7 @@ namespace Kistl.App.Test
         /// Happy Birthday!
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual DateTime? Birthday
         {
             get
@@ -61,6 +62,7 @@ namespace Kistl.App.Test
         /// Person&apos;s Name
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string PersonName
         {
             get
@@ -85,6 +87,7 @@ namespace Kistl.App.Test
         /// Mobile Phone Number
         /// </summary>
         // struct property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.StructPropertyTemplate
         // implement the user-visible interface
         public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
         {
@@ -111,6 +114,7 @@ namespace Kistl.App.Test
         /// Office Phone Number
         /// </summary>
         // struct property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.StructPropertyTemplate
         // implement the user-visible interface
         public Kistl.App.Test.TestPhoneStruct PhoneNumberOffice
         {
@@ -155,6 +159,7 @@ namespace Kistl.App.Test
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

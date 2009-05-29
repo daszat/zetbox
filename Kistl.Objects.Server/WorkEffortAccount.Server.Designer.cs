@@ -34,6 +34,7 @@ namespace Kistl.App.TimeRecords
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -61,6 +62,7 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual double? BudgetHours
         {
             get
@@ -91,6 +93,7 @@ namespace Kistl.App.TimeRecords
     Preferred Storage: Separate
     */
         // collection reference property
+		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.CollectionEntryListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -126,7 +129,7 @@ namespace Kistl.App.TimeRecords
             }
         }
         private EntityRelationBSideCollectionWrapper<Kistl.App.TimeRecords.WorkEffortAccount, Kistl.App.Projekte.Mitarbeiter, Kistl.App.TimeRecords.WorkEffortAccount_Mitarbeiter42CollectionEntry__Implementation__> _MitarbeiterWrapper;
-        
+
 
         /// <summary>
         /// Name des TimeRecordsskontos
@@ -135,6 +138,7 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Name
         {
             get
@@ -162,6 +166,7 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Notes
         {
             get
@@ -189,6 +194,7 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual double? SpentHours
         {
             get
@@ -228,6 +234,7 @@ namespace Kistl.App.TimeRecords
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

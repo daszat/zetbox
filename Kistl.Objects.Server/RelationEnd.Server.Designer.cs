@@ -34,6 +34,7 @@ namespace Kistl.App.Base
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -64,6 +65,7 @@ namespace Kistl.App.Base
     Preferred Storage: MergeIntoA
     */
         // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -129,6 +131,7 @@ namespace Kistl.App.Base
     Preferred Storage: MergeIntoA
     */
         // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -191,6 +194,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -218,6 +222,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool HasPersistentOrder
         {
             get
@@ -242,6 +247,7 @@ namespace Kistl.App.Base
         /// Specifies how many instances may occur on this end of the relation.
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Kistl.App.Base.Multiplicity Multiplicity
         {
@@ -291,6 +297,7 @@ namespace Kistl.App.Base
     Preferred Storage: MergeIntoA
     */
         // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -353,6 +360,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int Role
         {
             get
@@ -380,6 +388,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string RoleName
         {
             get
@@ -410,6 +419,7 @@ namespace Kistl.App.Base
     Preferred Storage: MergeIntoA
     */
         // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -489,6 +499,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

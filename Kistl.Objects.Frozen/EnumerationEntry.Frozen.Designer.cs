@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// Description of this Enumeration Entry
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Description
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.Base
         /// Übergeordnete Enumeration
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.Enumeration Enumeration
         {
             get
@@ -80,6 +82,7 @@ namespace Kistl.App.Base
         /// CLR name of this entry
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Name
         {
             get
@@ -104,6 +107,7 @@ namespace Kistl.App.Base
         /// The CLR value of this entry
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int Value
         {
             get
@@ -130,6 +134,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

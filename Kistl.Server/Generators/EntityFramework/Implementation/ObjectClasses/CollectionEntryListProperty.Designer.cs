@@ -38,6 +38,8 @@ RelationEnd relEnd = rel.GetEnd(endRole);
 	string name = otherEnd.RoleName;
 	// the ef-visible property's name
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
+	// the name of the IDs list
+	string idsListName = efName + "Ids";
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the other end
@@ -86,10 +88,12 @@ RelationEnd relEnd = rel.GetEnd(endRole);
 	string referencedImplementation = otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix;
 
 	// whether or not the collection will be eagerly loaded
-	bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
-	
+	bool eagerLoading = (relEnd.Navigator != null && relEnd.Navigator.EagerLoading)
+        || (otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading);
 
-#line 77 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+
+#line 80 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+this.WriteObjects("		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
@@ -125,8 +129,8 @@ this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , "> ",  wrapperName , ";\r\n");
-this.WriteObjects("        \r\n");
-#line 114 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+this.WriteObjects("\r\n");
+#line 118 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, efName, eagerLoading);
 
 

@@ -35,6 +35,7 @@ namespace Kistl.App.Base
         /// XML descriptor of the current schema
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Schema
         {
             get
@@ -59,6 +60,7 @@ namespace Kistl.App.Base
         /// Version number of this schema
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int Version
         {
             get
@@ -101,6 +103,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

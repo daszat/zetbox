@@ -40,9 +40,13 @@
 	// the actual implementation class of the list's elements
 	string referencedImplementation = otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix;
 
-	
+	// whether or not the collection will be eagerly loaded
+	bool eagerLoading = (relEnd.Navigator != null && relEnd.Navigator.EagerLoading)
+		|| (otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading);
+
 %>
-        // implement the user-visible interface
+   		// <%= this.GetType() %>
+	    // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public <%= exposedListType %><<%= referencedInterface %>> <%= name %>
@@ -83,4 +87,17 @@
         }
         private <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>> <%= wrapperName %>;
 
+<%
+	if (eagerLoading)
+	{
+%>
+		private List<int> <%= name %>Ids;
+<%
+	
+		if (serializationList != null)
+		{
+			serializationList.Add("Implementation.ObjectClasses.EagerLoadingSerialization", Templates.Implementation.SerializerType.Binary, null, null, name, true);
+		}
+	}
+%>
 

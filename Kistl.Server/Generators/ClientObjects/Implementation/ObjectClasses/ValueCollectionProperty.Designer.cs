@@ -50,7 +50,7 @@ AddSerialization(serializationList, underlyingCollectionName);
 
 
 #line 29 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
-this.WriteObjects("\r\n");
+this.WriteObjects("		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		public ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			get\r\n");

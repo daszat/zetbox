@@ -35,6 +35,7 @@ namespace Kistl.App.GUI
         /// which controls are handled by this Presenter
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.GUI.VisualType ControlType
         {
             get
@@ -59,6 +60,7 @@ namespace Kistl.App.GUI
         /// The Assembly of the Data Type
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -102,6 +104,7 @@ namespace Kistl.App.GUI
         /// The CLR namespace and class name of the Data Type
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string DataTypeName
         {
             get
@@ -126,6 +129,7 @@ namespace Kistl.App.GUI
         /// Where to find the implementation of the Presenter
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -169,6 +173,7 @@ namespace Kistl.App.GUI
         /// The CLR namespace and class name of the Presenter
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string PresenterTypeName
         {
             get
@@ -214,6 +219,7 @@ namespace Kistl.App.GUI
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

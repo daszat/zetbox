@@ -34,6 +34,7 @@ namespace Kistl.App.GUI
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -64,6 +65,7 @@ namespace Kistl.App.GUI
     Preferred Storage: MergeIntoA
     */
         // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -126,6 +128,7 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string DisplayedTypeFullName
         {
             get
@@ -153,6 +156,7 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string DisplayName
         {
             get
@@ -183,6 +187,7 @@ namespace Kistl.App.GUI
     Preferred Storage: Separate
     */
         // collection reference property
+		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.CollectionEntryListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -218,7 +223,7 @@ namespace Kistl.App.GUI
             }
         }
         private EntityRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_Menu61CollectionEntry__Implementation__> _MenuWrapper;
-        
+
 
         /// <summary>
         /// The visual representation of this Template
@@ -230,6 +235,7 @@ namespace Kistl.App.GUI
     Preferred Storage: MergeIntoA
     */
         // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -325,6 +331,7 @@ namespace Kistl.App.GUI
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

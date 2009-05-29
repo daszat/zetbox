@@ -36,6 +36,7 @@ namespace Kistl.App.Test
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -63,6 +64,7 @@ namespace Kistl.App.Test
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual DateTime? Birthday
         {
             get
@@ -90,6 +92,7 @@ namespace Kistl.App.Test
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string PersonName
         {
             get
@@ -114,6 +117,7 @@ namespace Kistl.App.Test
         /// Mobile Phone Number
         /// </summary>
         // struct property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.StructPropertyTemplate
         // implement the user-visible interface
         public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
         {
@@ -162,6 +166,7 @@ namespace Kistl.App.Test
         /// Office Phone Number
         /// </summary>
         // struct property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.StructPropertyTemplate
         // implement the user-visible interface
         public Kistl.App.Test.TestPhoneStruct PhoneNumberOffice
         {
@@ -223,6 +228,7 @@ namespace Kistl.App.Test
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

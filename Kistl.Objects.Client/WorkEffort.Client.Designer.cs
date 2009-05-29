@@ -35,6 +35,7 @@ namespace Kistl.App.TimeRecords
         /// Point in time when the work effort started.
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual DateTime From
         {
             get
@@ -59,6 +60,7 @@ namespace Kistl.App.TimeRecords
         /// Which employee effected this work effort.
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -102,6 +104,7 @@ namespace Kistl.App.TimeRecords
         /// A short label describing this work effort.
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Name
         {
             get
@@ -126,6 +129,7 @@ namespace Kistl.App.TimeRecords
         /// Space for notes
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Notes
         {
             get
@@ -150,6 +154,7 @@ namespace Kistl.App.TimeRecords
         /// Point in time (inclusive) when the work effort ended.
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual DateTime? Thru
         {
             get
@@ -195,6 +200,7 @@ namespace Kistl.App.TimeRecords
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

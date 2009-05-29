@@ -35,6 +35,7 @@ namespace Kistl.App.Projekte
         /// Aufwand in Stunden
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual double? Aufwand
         {
             get
@@ -59,6 +60,7 @@ namespace Kistl.App.Projekte
         /// Enddatum
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual DateTime? DatumBis
         {
             get
@@ -83,6 +85,7 @@ namespace Kistl.App.Projekte
         /// Start Datum
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual DateTime? DatumVon
         {
             get
@@ -107,6 +110,7 @@ namespace Kistl.App.Projekte
         /// Taskname
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Name
         {
             get
@@ -131,6 +135,7 @@ namespace Kistl.App.Projekte
         /// Verknüpfung zum Projekt
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -211,6 +216,7 @@ namespace Kistl.App.Projekte
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

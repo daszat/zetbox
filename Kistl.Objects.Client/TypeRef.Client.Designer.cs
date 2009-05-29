@@ -35,6 +35,7 @@ namespace Kistl.App.Base
         /// The assembly containing the referenced Type.
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -78,6 +79,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -102,6 +104,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string FullName
         {
             get
@@ -126,14 +129,13 @@ namespace Kistl.App.Base
         /// list of type arguments
         /// </summary>
         // collection reference property
-
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.CollectionEntryListProperty
 		public IList<Kistl.App.Base.TypeRef> GenericArguments
 		{
 			get
 			{
 				if (_GenericArguments == null)
 				{
-					Context.FetchRelation<TypeRef_GenericArguments66CollectionEntry__Implementation__>(66, RelationEndRole.A, this);
 					_GenericArguments 
 						= new ClientRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_GenericArguments66CollectionEntry__Implementation__>(
 							this, 
@@ -149,6 +151,7 @@ namespace Kistl.App.Base
         /// The TypeRef of the BaseClass of the referenced Type
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -234,6 +237,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()
@@ -343,6 +347,12 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._fk_Assembly, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._FullName, binStream);
+			{
+				foreach(var obj in GenericArguments)
+				{
+					auxObjects.Add(obj);
+				}
+			}
             BinarySerializer.ToStream(this._fk_Parent, binStream);
         }
 

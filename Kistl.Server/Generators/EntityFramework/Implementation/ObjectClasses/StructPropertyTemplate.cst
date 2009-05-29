@@ -21,6 +21,7 @@
 	string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
 
 %>
+   		// <%= this.GetType() %>
         // implement the user-visible interface
         public <%= structType %> <%= name %>
         {

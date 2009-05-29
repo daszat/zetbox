@@ -44,6 +44,7 @@
     AddSerialization(serializationList, efName);
 
 %>
+   		// <%= this.GetType() %>
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

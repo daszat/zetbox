@@ -35,6 +35,7 @@ namespace Kistl.App.Test
         /// test
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? MyIntProperty
         {
             get
@@ -59,6 +60,7 @@ namespace Kistl.App.Test
         /// testtest
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -102,6 +104,7 @@ namespace Kistl.App.Test
         /// String Property
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string StringProp
         {
             get
@@ -126,6 +129,7 @@ namespace Kistl.App.Test
         /// Test Enumeration Property
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Test.TestEnum TestEnumProp
         {
             get
@@ -191,6 +195,7 @@ namespace Kistl.App.Test
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

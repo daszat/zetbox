@@ -32,6 +32,7 @@ namespace Kistl.App.Test
         /// Enter Area Code
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string AreaCode
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.Test
         /// Enter a Number
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Number
         {
             get

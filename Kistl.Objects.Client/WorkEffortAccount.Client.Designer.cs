@@ -35,6 +35,7 @@ namespace Kistl.App.TimeRecords
         /// Maximal erlaubte Stundenanzahl
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual double? BudgetHours
         {
             get
@@ -59,7 +60,7 @@ namespace Kistl.App.TimeRecords
         /// Zugeordnete Mitarbeiter
         /// </summary>
         // collection reference property
-
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.CollectionEntryListProperty
 		public ICollection<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
 		{
 			get
@@ -82,6 +83,7 @@ namespace Kistl.App.TimeRecords
         /// Name des TimeRecordsskontos
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Name
         {
             get
@@ -106,6 +108,7 @@ namespace Kistl.App.TimeRecords
         /// Space for notes
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Notes
         {
             get
@@ -130,6 +133,7 @@ namespace Kistl.App.TimeRecords
         /// Aktuell gebuchte Stunden
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual double? SpentHours
         {
             get
@@ -174,6 +178,7 @@ namespace Kistl.App.TimeRecords
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

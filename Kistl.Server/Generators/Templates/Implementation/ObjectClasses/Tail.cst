@@ -13,6 +13,7 @@
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 
         // tail template
+   		// <%= this.GetType() %>
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

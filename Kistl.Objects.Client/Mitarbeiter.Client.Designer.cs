@@ -35,6 +35,7 @@ namespace Kistl.App.Projekte
         /// Herzlichen Glückwunsch zum Geburtstag
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual DateTime? Geburtstag
         {
             get
@@ -59,6 +60,7 @@ namespace Kistl.App.Projekte
         /// Vorname Nachname
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Name
         {
             get
@@ -83,7 +85,7 @@ namespace Kistl.App.Projekte
         /// Projekte des Mitarbeiters für die er Verantwortlich ist
         /// </summary>
         // collection reference property
-
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.CollectionEntryListProperty
 		public IList<Kistl.App.Projekte.Projekt> Projekte
 		{
 			get
@@ -106,6 +108,7 @@ namespace Kistl.App.Projekte
         /// NNNN TTMMYY
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string SVNr
         {
             get
@@ -130,6 +133,7 @@ namespace Kistl.App.Projekte
         /// +43 123 12345678
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string TelefonNummer
         {
             get
@@ -196,6 +200,7 @@ namespace Kistl.App.Projekte
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

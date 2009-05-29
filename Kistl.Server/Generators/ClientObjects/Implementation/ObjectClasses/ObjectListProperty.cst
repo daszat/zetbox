@@ -21,9 +21,18 @@
 <%@ Parameter Name="otherName" Type="string" %>
 <%@ Parameter Name="referencedInterface" Type="string" %>
 <%
-        RelationEnd relEnd = rel.GetEnd(endRole);
-        RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+    RelationEnd relEnd = rel.GetEnd(endRole);
+    RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+        
+    string idsListName = name + "Ids";
+	
+	// whether or not the collection will be eagerly loaded
+	bool eagerLoading = (relEnd.Navigator != null && relEnd.Navigator.EagerLoading)
+		|| (otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading);
+	        
 %>
+		// <%= this.GetType() %>
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -35,9 +44,18 @@
                 {
                     List<<%= referencedInterface %>> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<<%= referencedInterface %>>(this, "<%= name %>");
+                    {
+<% if (eagerLoading) { %>
+						serverList = <%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList();
+						<%= idsListName %> = null; // allow id list to be garbage collected
+<% } else { %>
+						serverList = Context.GetListOf<<%= referencedInterface %>>(this, "<%= name %>");
+<% } %>
+					}
                     else
+                    {
                         serverList = new List<<%= referencedInterface %>>();
+                    }
                         
                     <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>>(
                         "<%= otherName %>",
@@ -49,3 +67,14 @@
         }
         
         private <%= wrapperClass %><<%= referencedInterface %>> <%= wrapperName %>;
+
+<%
+	if (eagerLoading)
+	{
+%>
+		private List<int> <%= name %>Ids;
+<%
+	}
+
+    AddSerialization(serializationList, name, eagerLoading);
+%>

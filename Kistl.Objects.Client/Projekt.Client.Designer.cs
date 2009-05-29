@@ -35,6 +35,7 @@ namespace Kistl.App.Projekte
         /// Aufträge
         /// </summary>
         // object list property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -46,9 +47,13 @@ namespace Kistl.App.Projekte
                 {
                     List<Kistl.App.Projekte.Auftrag> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Projekte.Auftrag>(this, "Auftraege");
+                    {
+						serverList = Context.GetListOf<Kistl.App.Projekte.Auftrag>(this, "Auftraege");
+					}
                     else
+                    {
                         serverList = new List<Kistl.App.Projekte.Auftrag>();
+                    }
                         
                     _AuftraegeWrapper = new OneNRelationCollection<Kistl.App.Projekte.Auftrag>(
                         "Projekt",
@@ -61,10 +66,12 @@ namespace Kistl.App.Projekte
         
         private OneNRelationCollection<Kistl.App.Projekte.Auftrag> _AuftraegeWrapper;
 
+
         /// <summary>
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual double? AufwandGes
         {
             get
@@ -89,6 +96,7 @@ namespace Kistl.App.Projekte
         /// Bitte geben Sie den Kundennamen ein
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Kundenname
         {
             get
@@ -113,7 +121,7 @@ namespace Kistl.App.Projekte
         /// 
         /// </summary>
         // collection reference property
-
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.CollectionEntryListProperty
 		public IList<Kistl.App.Projekte.Mitarbeiter> Mitarbeiter
 		{
 			get
@@ -136,6 +144,7 @@ namespace Kistl.App.Projekte
         /// Projektname
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Name
         {
             get
@@ -160,6 +169,7 @@ namespace Kistl.App.Projekte
         /// 
         /// </summary>
         // object list property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -171,9 +181,13 @@ namespace Kistl.App.Projekte
                 {
                     List<Kistl.App.Projekte.Task> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Projekte.Task>(this, "Tasks");
+                    {
+						serverList = Context.GetListOf<Kistl.App.Projekte.Task>(this, "Tasks");
+					}
                     else
+                    {
                         serverList = new List<Kistl.App.Projekte.Task>();
+                    }
                         
                     _TasksWrapper = new OneNRelationCollection<Kistl.App.Projekte.Task>(
                         "Projekt",
@@ -185,6 +199,7 @@ namespace Kistl.App.Projekte
         }
         
         private OneNRelationCollection<Kistl.App.Projekte.Task> _TasksWrapper;
+
 
 		public override InterfaceType GetInterfaceType()
 		{
@@ -209,6 +224,7 @@ namespace Kistl.App.Projekte
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

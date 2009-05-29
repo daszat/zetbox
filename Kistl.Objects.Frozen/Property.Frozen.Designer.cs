@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string AltText
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.Base
         /// A space separated list of category names containing this Property
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string CategoryTags
         {
             get
@@ -80,6 +82,7 @@ namespace Kistl.App.Base
         /// The list of constraints applying to this Property
         /// </summary>
         // object list property
+   		// Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses.ListProperty
         public virtual ICollection<Kistl.App.Base.Constraint> Constraints
         {
             get
@@ -103,6 +106,7 @@ namespace Kistl.App.Base
         /// Description of this Property
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Description
         {
             get
@@ -127,6 +131,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -151,6 +156,7 @@ namespace Kistl.App.Base
         /// Whether or not a list-valued property has a index
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsIndexed
         {
             get
@@ -175,6 +181,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsList
         {
             get
@@ -199,6 +206,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsNullable
         {
             get
@@ -223,6 +231,7 @@ namespace Kistl.App.Base
         /// Zugehörig zum Modul
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.Module Module
         {
             get
@@ -247,6 +256,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.DataType ObjectClass
         {
             get
@@ -271,6 +281,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string PropertyName
         {
             get
@@ -295,6 +306,7 @@ namespace Kistl.App.Base
         /// The PresentableModel to use for values of this Property
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.GUI.PresentableModelDescriptor ValueModelDescriptor
         {
             get
@@ -365,6 +377,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

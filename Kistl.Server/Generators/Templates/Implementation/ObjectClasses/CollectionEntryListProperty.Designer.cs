@@ -24,9 +24,10 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected string providerCollectionType;
 		protected int relId;
 		protected RelationEndRole role;
+		protected bool eagerLoading;
 
 
-        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, int relId, RelationEndRole role)
+        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, int relId, RelationEndRole role, bool eagerLoading)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -42,20 +43,31 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.providerCollectionType = providerCollectionType;
 			this.relId = relId;
 			this.role = role;
+			this.eagerLoading = eagerLoading;
 
         }
         
         public override void Generate()
         {
-#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
-this.WriteObjects("\r\n");
+#line 25 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		public ",  exposedCollectionInterface , "<",  referencedInterface , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");
 this.WriteObjects("				if (",  backingName , " == null)\r\n");
 this.WriteObjects("				{\r\n");
+#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+// eagerly loaded relation already has the objects loaded
+	if (!eagerLoading)
+	{
+
+#line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 this.WriteObjects("					Context.FetchRelation<",  entryType , ">(",  relId , ", RelationEndRole.",  role , ", this);\r\n");
+#line 39 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+}
+
+#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 this.WriteObjects("					",  backingName , " \r\n");
 this.WriteObjects("						= new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ">(\r\n");
 this.WriteObjects("							this, \r\n");
@@ -66,6 +78,9 @@ this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , "> ",  backingName , ";\r\n");
+#line 52 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+AddSerialization(serializationList, name, eagerLoading);
+
 
         }
 

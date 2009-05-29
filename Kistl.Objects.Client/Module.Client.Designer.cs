@@ -35,6 +35,7 @@ namespace Kistl.App.Base
         /// Assemblies des Moduls
         /// </summary>
         // object list property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -46,9 +47,13 @@ namespace Kistl.App.Base
                 {
                     List<Kistl.App.Base.Assembly> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.Assembly>(this, "Assemblies");
+                    {
+						serverList = Context.GetListOf<Kistl.App.Base.Assembly>(this, "Assemblies");
+					}
                     else
+                    {
                         serverList = new List<Kistl.App.Base.Assembly>();
+                    }
                         
                     _AssembliesWrapper = new OneNRelationCollection<Kistl.App.Base.Assembly>(
                         "Module",
@@ -61,10 +66,12 @@ namespace Kistl.App.Base
         
         private OneNRelationCollection<Kistl.App.Base.Assembly> _AssembliesWrapper;
 
+
         /// <summary>
         /// Datentypendes Modules
         /// </summary>
         // object list property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -76,9 +83,13 @@ namespace Kistl.App.Base
                 {
                     List<Kistl.App.Base.DataType> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.DataType>(this, "DataTypes");
+                    {
+						serverList = Context.GetListOf<Kistl.App.Base.DataType>(this, "DataTypes");
+					}
                     else
+                    {
                         serverList = new List<Kistl.App.Base.DataType>();
+                    }
                         
                     _DataTypesWrapper = new OneNRelationCollection<Kistl.App.Base.DataType>(
                         "Module",
@@ -91,10 +102,12 @@ namespace Kistl.App.Base
         
         private OneNRelationCollection<Kistl.App.Base.DataType> _DataTypesWrapper;
 
+
         /// <summary>
         /// Description of this Module
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Description
         {
             get
@@ -119,6 +132,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -143,6 +157,7 @@ namespace Kistl.App.Base
         /// Name des Moduls
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string ModuleName
         {
             get
@@ -167,6 +182,7 @@ namespace Kistl.App.Base
         /// CLR Namespace des Moduls
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Namespace
         {
             get
@@ -211,6 +227,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

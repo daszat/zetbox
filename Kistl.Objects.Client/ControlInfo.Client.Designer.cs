@@ -35,6 +35,7 @@ namespace Kistl.App.GUI
         /// The assembly containing the Control
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -78,6 +79,7 @@ namespace Kistl.App.GUI
         /// The name of the class implementing this Control
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string ClassName
         {
             get
@@ -102,6 +104,7 @@ namespace Kistl.App.GUI
         /// The type of Control of this implementation
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.GUI.VisualType ControlType
         {
             get
@@ -126,6 +129,7 @@ namespace Kistl.App.GUI
         /// Whether or not this Control can contain other Controls
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsContainer
         {
             get
@@ -150,6 +154,7 @@ namespace Kistl.App.GUI
         /// The toolkit of this Control.
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.GUI.Toolkit Platform
         {
             get
@@ -195,6 +200,7 @@ namespace Kistl.App.GUI
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

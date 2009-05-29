@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// Description of this Method
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Description
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -80,6 +82,7 @@ namespace Kistl.App.Base
         /// Shows this Method in th GUI
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsDisplayable
         {
             get
@@ -104,6 +107,7 @@ namespace Kistl.App.Base
         /// Methodenaufrufe implementiert in dieser Objekt Klasse
         /// </summary>
         // object list property
+   		// Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses.ListProperty
         public virtual ICollection<Kistl.App.Base.MethodInvocation> MethodInvokations
         {
             get
@@ -127,6 +131,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string MethodName
         {
             get
@@ -151,6 +156,7 @@ namespace Kistl.App.Base
         /// Zugehörig zum Modul
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.Module Module
         {
             get
@@ -175,6 +181,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.DataType ObjectClass
         {
             get
@@ -199,6 +206,7 @@ namespace Kistl.App.Base
         /// Parameter der Methode
         /// </summary>
         // object list property
+   		// Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses.ListProperty
         public virtual IList<Kistl.App.Base.BaseParameter> Parameter
         {
             get
@@ -246,6 +254,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

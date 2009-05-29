@@ -62,12 +62,24 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             string providerCollectionType = (rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "IList<" : "ICollection<")
                 + entryType + ">";
 
+            bool eagerLoading = (relEnd.Navigator != null && relEnd.Navigator.EagerLoading)
+                || (otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading);
+
             host.CallTemplate("Implementation.ObjectClasses.CollectionEntryListProperty",
                 ctx, serializationList,
                 name, exposedCollectionInterface, referencedInterface,
                 backingName, backingCollectionType, aSideType, bSideType, entryType,
                 providerCollectionType,
-                rel.ID, endRole);
+                rel.ID, endRole,
+                eagerLoading);
+        }
+
+        protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName, bool eagerLoading)
+        {
+            if (list != null && eagerLoading)
+            {
+                list.Add("Implementation.ObjectClasses.EagerLoadingSerialization", Templates.Implementation.SerializerType.Binary, null, null, memberName, false);
+            }
         }
     }
 }

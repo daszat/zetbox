@@ -38,6 +38,7 @@ string interfaceName = prop.ObjectClass.ClassName;
 
 
 #line 25 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
+this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        public ",  enumType , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -76,7 +77,7 @@ this.WriteObjects("                this.",  name , " = (",  enumType , ")value;\
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-#line 64 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
+#line 65 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
 AddSerialization(serializationList);
 
 

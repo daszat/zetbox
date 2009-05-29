@@ -35,6 +35,7 @@ namespace Kistl.App.Base
         /// Description of this Method
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Description
         {
             get
@@ -59,6 +60,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -83,6 +85,7 @@ namespace Kistl.App.Base
         /// Shows this Method in th GUI
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsDisplayable
         {
             get
@@ -107,6 +110,7 @@ namespace Kistl.App.Base
         /// Methodenaufrufe implementiert in dieser Objekt Klasse
         /// </summary>
         // object list property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -118,9 +122,13 @@ namespace Kistl.App.Base
                 {
                     List<Kistl.App.Base.MethodInvocation> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodInvokations");
+                    {
+						serverList = Context.GetListOf<Kistl.App.Base.MethodInvocation>(this, "MethodInvokations");
+					}
                     else
+                    {
                         serverList = new List<Kistl.App.Base.MethodInvocation>();
+                    }
                         
                     _MethodInvokationsWrapper = new OneNRelationCollection<Kistl.App.Base.MethodInvocation>(
                         "Method",
@@ -133,10 +141,12 @@ namespace Kistl.App.Base
         
         private OneNRelationCollection<Kistl.App.Base.MethodInvocation> _MethodInvokationsWrapper;
 
+
         /// <summary>
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string MethodName
         {
             get
@@ -161,6 +171,7 @@ namespace Kistl.App.Base
         /// Zugehörig zum Modul
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -204,6 +215,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -263,6 +275,7 @@ namespace Kistl.App.Base
         /// Parameter der Methode
         /// </summary>
         // object list property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -274,9 +287,13 @@ namespace Kistl.App.Base
                 {
                     List<Kistl.App.Base.BaseParameter> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.BaseParameter>(this, "Parameter");
+                    {
+						serverList = Context.GetListOf<Kistl.App.Base.BaseParameter>(this, "Parameter");
+					}
                     else
+                    {
                         serverList = new List<Kistl.App.Base.BaseParameter>();
+                    }
                         
                     _ParameterWrapper = new OneNRelationCollection<Kistl.App.Base.BaseParameter>(
                         "Method",
@@ -288,6 +305,7 @@ namespace Kistl.App.Base
         }
         
         private OneNRelationCollection<Kistl.App.Base.BaseParameter> _ParameterWrapper;
+
 
         /// <summary>
         /// Returns the Return Parameter Meta Object of this Method Meta Object.
@@ -337,6 +355,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

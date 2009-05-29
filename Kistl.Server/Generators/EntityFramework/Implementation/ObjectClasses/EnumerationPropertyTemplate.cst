@@ -22,6 +22,7 @@
 	string enumType = prop.ReferencedTypeAsCSharp();
 
 %>
+   		// <%= this.GetType() %>
         // implement the user-visible interface
         public <%= enumType %> <%= name %>
         {

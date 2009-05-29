@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// Assemblies des Moduls
         /// </summary>
         // object list property
+   		// Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses.ListProperty
         public virtual ICollection<Kistl.App.Base.Assembly> Assemblies
         {
             get
@@ -55,6 +56,7 @@ namespace Kistl.App.Base
         /// Datentypendes Modules
         /// </summary>
         // object list property
+   		// Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses.ListProperty
         public virtual ICollection<Kistl.App.Base.DataType> DataTypes
         {
             get
@@ -78,6 +80,7 @@ namespace Kistl.App.Base
         /// Description of this Module
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Description
         {
             get
@@ -102,6 +105,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -126,6 +130,7 @@ namespace Kistl.App.Base
         /// Name des Moduls
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string ModuleName
         {
             get
@@ -150,6 +155,7 @@ namespace Kistl.App.Base
         /// CLR Namespace des Moduls
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Namespace
         {
             get
@@ -176,6 +182,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

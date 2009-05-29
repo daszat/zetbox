@@ -35,6 +35,7 @@ namespace Kistl.App.Base
         /// The Relation using this RelationEnd as A
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -94,6 +95,7 @@ namespace Kistl.App.Base
         /// The Relation using this RelationEnd as B
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -153,6 +155,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -177,6 +180,7 @@ namespace Kistl.App.Base
         /// Is true, if this RelationEnd persists the order of its elements
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool HasPersistentOrder
         {
             get
@@ -201,6 +205,7 @@ namespace Kistl.App.Base
         /// Specifies how many instances may occur on this end of the relation.
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.Multiplicity Multiplicity
         {
             get
@@ -225,6 +230,7 @@ namespace Kistl.App.Base
         /// The ORP to navigate FROM this end of the relation. MAY be null.
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -284,6 +290,7 @@ namespace Kistl.App.Base
         /// Which RelationEndRole this End has
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int Role
         {
             get
@@ -308,6 +315,7 @@ namespace Kistl.App.Base
         /// This end&apos;s role name in the relation
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string RoleName
         {
             get
@@ -332,6 +340,7 @@ namespace Kistl.App.Base
         /// Specifies which type this End of the relation has. MUST NOT be null.
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -400,6 +409,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

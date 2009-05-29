@@ -35,6 +35,7 @@ namespace Kistl.App.TimeRecords
         /// Point in time when the presence started.
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual DateTime From
         {
             get
@@ -59,6 +60,7 @@ namespace Kistl.App.TimeRecords
         /// Which employee was present.
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -102,6 +104,7 @@ namespace Kistl.App.TimeRecords
         /// Point in time (inclusive) when the presence ended.
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual DateTime? Thru
         {
             get
@@ -145,6 +148,7 @@ namespace Kistl.App.TimeRecords
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

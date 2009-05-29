@@ -93,5 +93,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 rel, endRole, otherName,
                 referencedInterface);
         }
+
+        protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName, bool eagerLoading)
+        {
+            if (list != null && eagerLoading)
+            {
+                list.Add("Implementation.ObjectClasses.EagerLoadingSerialization", Templates.Implementation.SerializerType.Binary, null, null, memberName, true);
+            }
+        }
     }
 }

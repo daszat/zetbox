@@ -35,6 +35,7 @@ namespace Kistl.App.Base
         /// Einträge der Enumeration
         /// </summary>
         // object list property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -46,9 +47,13 @@ namespace Kistl.App.Base
                 {
                     List<Kistl.App.Base.EnumerationEntry> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.EnumerationEntry>(this, "EnumerationEntries");
+                    {
+						serverList = Context.GetListOf<Kistl.App.Base.EnumerationEntry>(this, "EnumerationEntries");
+					}
                     else
+                    {
                         serverList = new List<Kistl.App.Base.EnumerationEntry>();
+                    }
                         
                     _EnumerationEntriesWrapper = new OneNRelationCollection<Kistl.App.Base.EnumerationEntry>(
                         "Enumeration",
@@ -60,6 +65,7 @@ namespace Kistl.App.Base
         }
         
         private OneNRelationCollection<Kistl.App.Base.EnumerationEntry> _EnumerationEntriesWrapper;
+
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
@@ -123,6 +129,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

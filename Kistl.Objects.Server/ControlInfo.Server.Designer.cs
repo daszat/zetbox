@@ -34,6 +34,7 @@ namespace Kistl.App.GUI
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -64,6 +65,7 @@ namespace Kistl.App.GUI
     Preferred Storage: MergeIntoA
     */
         // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -126,6 +128,7 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string ClassName
         {
             get
@@ -150,6 +153,7 @@ namespace Kistl.App.GUI
         /// The type of Control of this implementation
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Kistl.App.GUI.VisualType ControlType
         {
@@ -196,6 +200,7 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsContainer
         {
             get
@@ -220,6 +225,7 @@ namespace Kistl.App.GUI
         /// The toolkit of this Control.
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Kistl.App.GUI.Toolkit Platform
         {
@@ -279,6 +285,7 @@ namespace Kistl.App.GUI
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

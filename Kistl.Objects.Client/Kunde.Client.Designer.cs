@@ -35,6 +35,7 @@ namespace Kistl.App.Projekte
         /// Adresse &amp; Hausnummer
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Adresse
         {
             get
@@ -59,7 +60,7 @@ namespace Kistl.App.Projekte
         /// EMails des Kunden - können mehrere sein
         /// </summary>
         // value list property
-
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ValueCollectionProperty
 		public ICollection<string> EMails
 		{
 			get
@@ -83,6 +84,7 @@ namespace Kistl.App.Projekte
         /// Name des Kunden
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Kundenname
         {
             get
@@ -107,6 +109,7 @@ namespace Kistl.App.Projekte
         /// Land
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Land
         {
             get
@@ -131,6 +134,7 @@ namespace Kistl.App.Projekte
         /// Ort
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Ort
         {
             get
@@ -155,6 +159,7 @@ namespace Kistl.App.Projekte
         /// Postleitzahl
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string PLZ
         {
             get
@@ -201,6 +206,7 @@ namespace Kistl.App.Projekte
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

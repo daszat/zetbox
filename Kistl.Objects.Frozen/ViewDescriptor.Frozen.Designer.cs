@@ -32,6 +32,7 @@ namespace Kistl.App.GUI
         /// The control implementing this View
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.TypeRef ControlRef
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.GUI
         /// The PresentableModel usable by this View
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.GUI.PresentableModelDescriptor PresentedModelDescriptor
         {
             get
@@ -80,6 +82,7 @@ namespace Kistl.App.GUI
         /// Which toolkit provides this View
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.GUI.Toolkit Toolkit
         {
             get
@@ -104,6 +107,7 @@ namespace Kistl.App.GUI
         /// The visual type of this View
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.GUI.VisualType VisualType
         {
             get
@@ -130,6 +134,7 @@ namespace Kistl.App.GUI
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

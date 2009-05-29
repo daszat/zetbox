@@ -35,6 +35,7 @@ namespace Kistl.App.GUI
         /// Assembly of the Type that is displayed with this Template
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -78,6 +79,7 @@ namespace Kistl.App.GUI
         /// FullName of the Type that is displayed with this Template
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string DisplayedTypeFullName
         {
             get
@@ -102,6 +104,7 @@ namespace Kistl.App.GUI
         /// a short name to identify this Template to the user
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string DisplayName
         {
             get
@@ -126,7 +129,7 @@ namespace Kistl.App.GUI
         /// The main menu for this Template
         /// </summary>
         // collection reference property
-
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.CollectionEntryListProperty
 		public ICollection<Kistl.App.GUI.Visual> Menu
 		{
 			get
@@ -149,6 +152,7 @@ namespace Kistl.App.GUI
         /// The visual representation of this Template
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -233,6 +237,7 @@ namespace Kistl.App.GUI
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

@@ -22,6 +22,7 @@
 	string backingName = BackingMemberFromName(name);
 
 %>
+   		// <%= this.GetType() %>
         <%= GetModifiers() %> <%= type %> <%= name %>
         {
             get

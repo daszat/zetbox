@@ -24,6 +24,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -65,6 +66,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -180,6 +182,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -218,6 +221,7 @@ namespace Kistl.App.Projekte
         }
         
         private int? _fk_A;
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? A_pos
         {
             get
@@ -240,6 +244,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -278,6 +283,7 @@ namespace Kistl.App.Projekte
         }
         
         private int? _fk_B;
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? B_pos
         {
             get
@@ -402,6 +408,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -443,6 +450,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -558,6 +566,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -596,6 +605,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_A;
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? A_pos
         {
             get
@@ -618,6 +628,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -656,6 +667,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_B;
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? B_pos
         {
             get
@@ -780,6 +792,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -821,6 +834,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -936,6 +950,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -977,6 +992,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1093,6 +1109,7 @@ namespace Kistl.App.TimeRecords
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1134,6 +1151,7 @@ namespace Kistl.App.TimeRecords
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1305,6 +1323,7 @@ public Kunde Parent { get { return A; } set { A = value; } }
         /// the B-side value of this CollectionEntry
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string B
         {
             get

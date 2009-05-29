@@ -39,6 +39,7 @@ ApplyAttributesTemplate();
 	var backingName = BackingMemberFromName(name);
 
 #line 22 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  GetPropertyTypeString() , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
@@ -47,13 +48,13 @@ this.WriteObjects("                if (",  backingName , " == null)\r\n");
 this.WriteObjects("                    ",  backingName , " = ",  GetInitialisationExpression() , ";\r\n");
 this.WriteObjects("                return ",  backingName , ";\r\n");
 this.WriteObjects("            }\r\n");
-#line 31 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+#line 32 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 ApplySettor();
 
-#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+#line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  GetBackingTypeString() , " ",  backingName , ";\r\n");
-#line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+#line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 AddSerialization(serializationList, name);
 
 

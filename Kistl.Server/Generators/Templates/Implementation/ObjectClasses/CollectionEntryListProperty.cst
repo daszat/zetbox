@@ -21,14 +21,23 @@
 <%@ Parameter Name="providerCollectionType" Type="string" %>
 <%@ Parameter Name="relId" Type="int" %>
 <%@ Parameter Name="role" Type="RelationEndRole" %>
-
+<%@ Parameter Name="eagerLoading" Type="bool" %>
+   		// <%= this.GetType() %>
 		public <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
 		{
 			get
 			{
 				if (<%= backingName %> == null)
 				{
+<%
+	// eagerly loaded relation already has the objects loaded
+	if (!eagerLoading)
+	{
+%>
 					Context.FetchRelation<<%= entryType %>>(<%= relId %>, RelationEndRole.<%= role %>, this);
+<%
+	}
+%>
 					<%= backingName %> 
 						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>>(
 							this, 
@@ -39,3 +48,6 @@
 		}
 
 		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>> <%= backingName %>;
+<%
+        AddSerialization(serializationList, name, eagerLoading);
+%>

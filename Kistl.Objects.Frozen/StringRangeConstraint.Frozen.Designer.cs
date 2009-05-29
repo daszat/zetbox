@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// The maximal length of this StringProperty
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int MaxLength
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.Base
         /// The minimal length of this StringProperty
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int MinLength
         {
             get
@@ -124,6 +126,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

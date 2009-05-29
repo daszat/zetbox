@@ -35,7 +35,7 @@ namespace Kistl.App.GUI
         /// if this is a container, here are the visually contained/controlled children of this Visual
         /// </summary>
         // collection reference property
-
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.CollectionEntryListProperty
 		public ICollection<Kistl.App.GUI.Visual> Children
 		{
 			get
@@ -58,7 +58,7 @@ namespace Kistl.App.GUI
         /// The context menu for this Visual
         /// </summary>
         // collection reference property
-
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.CollectionEntryListProperty
 		public ICollection<Kistl.App.GUI.Visual> ContextMenu
 		{
 			get
@@ -81,6 +81,7 @@ namespace Kistl.App.GUI
         /// Which visual is represented here
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.GUI.VisualType ControlType
         {
             get
@@ -105,6 +106,7 @@ namespace Kistl.App.GUI
         /// A short description of the utility of this visual
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Description
         {
             get
@@ -129,6 +131,7 @@ namespace Kistl.App.GUI
         /// The Method whose return value shoud be displayed
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -172,6 +175,7 @@ namespace Kistl.App.GUI
         /// The Property to display
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -235,6 +239,7 @@ namespace Kistl.App.GUI
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

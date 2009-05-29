@@ -35,6 +35,7 @@ namespace Kistl.App.Base
         /// Description of this Parameter
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Description
         {
             get
@@ -59,6 +60,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -83,6 +85,7 @@ namespace Kistl.App.Base
         /// Parameter wird als List&lt;&gt; generiert
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsList
         {
             get
@@ -107,6 +110,7 @@ namespace Kistl.App.Base
         /// Es darf nur ein Return Parameter angegeben werden
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsReturnParameter
         {
             get
@@ -131,6 +135,7 @@ namespace Kistl.App.Base
         /// Methode des Parameters
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -185,6 +190,7 @@ namespace Kistl.App.Base
         }
         
         private int? _fk_Method;
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? Method_pos
         {
             get
@@ -209,6 +215,7 @@ namespace Kistl.App.Base
         /// Name des Parameter
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string ParameterName
         {
             get
@@ -299,6 +306,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

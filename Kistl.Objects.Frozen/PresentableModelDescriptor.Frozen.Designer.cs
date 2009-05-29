@@ -32,6 +32,7 @@ namespace Kistl.App.GUI
         /// The default visual type used for this PresentableModel
         /// </summary>
         // enumeration property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.GUI.VisualType DefaultVisualType
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.GUI
         /// describe this PresentableModel
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Description
         {
             get
@@ -80,6 +82,7 @@ namespace Kistl.App.GUI
         /// The described CLR class&apos; reference
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.TypeRef PresentableModelRef
         {
             get
@@ -106,6 +109,7 @@ namespace Kistl.App.GUI
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

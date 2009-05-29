@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// Pointer auf die Basisklasse
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.ObjectClass BaseObjectClass
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.Base
         /// The default model to use for the UI
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.TypeRef DefaultModel
         {
             get
@@ -80,6 +82,7 @@ namespace Kistl.App.Base
         /// The default PresentableModel to use for this ObjectClass
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.GUI.PresentableModelDescriptor DefaultPresentableModelDescriptor
         {
             get
@@ -104,6 +107,7 @@ namespace Kistl.App.Base
         /// Interfaces der Objektklasse
         /// </summary>
         // collection reference property
+   		// Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses.ListProperty
         public virtual ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
         {
             get
@@ -127,6 +131,7 @@ namespace Kistl.App.Base
         /// if true then all Instances appear in FozenContext.
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsFrozenObject
         {
             get
@@ -151,6 +156,7 @@ namespace Kistl.App.Base
         /// Setting this to true marks the instances of this class as &quot;simple.&quot; At first this will only mean that they'll be displayed inline.
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsSimpleObject
         {
             get
@@ -175,6 +181,7 @@ namespace Kistl.App.Base
         /// Liste der vererbten Klassen
         /// </summary>
         // object list property
+   		// Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses.ListProperty
         public virtual ICollection<Kistl.App.Base.ObjectClass> SubClasses
         {
             get
@@ -198,6 +205,7 @@ namespace Kistl.App.Base
         /// Tabellenname in der Datenbank
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string TableName
         {
             get
@@ -288,6 +296,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

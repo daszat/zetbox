@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// The assembly containing the referenced Type.
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.Assembly Assembly
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -80,6 +82,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string FullName
         {
             get
@@ -104,6 +107,7 @@ namespace Kistl.App.Base
         /// list of type arguments
         /// </summary>
         // collection reference property
+   		// Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses.ListProperty
         public virtual IList<Kistl.App.Base.TypeRef> GenericArguments
         {
             get
@@ -127,6 +131,7 @@ namespace Kistl.App.Base
         /// The TypeRef of the BaseClass of the referenced Type
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.TypeRef Parent
         {
             get
@@ -175,6 +180,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

@@ -29,6 +29,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 #line 14 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        // tail template\r\n");
+this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerHidden()]\r\n");
 this.WriteObjects("        public override string ToString()\r\n");
@@ -57,7 +58,7 @@ this.WriteObjects("            if (OnPostSave_",  cls.ClassName , " != null) OnP
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public event ObjectEventHandler<",  cls.ClassName , "> OnPostSave_",  cls.ClassName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+#line 46 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
 Implementation.ObjectClasses.GetPropertyErrorTemplate.Call(Host, ctx, cls);
 
 

@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// Einträge der Enumeration
         /// </summary>
         // object list property
+   		// Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses.ListProperty
         public virtual ICollection<Kistl.App.Base.EnumerationEntry> EnumerationEntries
         {
             get
@@ -99,6 +100,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

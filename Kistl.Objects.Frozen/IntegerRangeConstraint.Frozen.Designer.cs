@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// The biggest value accepted by this constraint
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int Max
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.Base
         /// The smallest value accepted by this constraint
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int Min
         {
             get
@@ -124,6 +126,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

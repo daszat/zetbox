@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// Assembly des CLR Objektes, NULL für Default Assemblies
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.Assembly Assembly
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.Base
         /// Name des CLR Datentypen
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string FullTypeName
         {
             get
@@ -124,6 +126,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

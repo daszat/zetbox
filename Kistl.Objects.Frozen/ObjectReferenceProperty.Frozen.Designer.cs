@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         /// Whether or not this reference should be loaded eagerly
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool EagerLoading
         {
             get
@@ -56,6 +57,7 @@ namespace Kistl.App.Base
         /// Pointer zur Objektklasse
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.ObjectClass ReferenceObjectClass
         {
             get
@@ -80,6 +82,7 @@ namespace Kistl.App.Base
         /// The RelationEnd describing this Property
         /// </summary>
         // object reference property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Kistl.App.Base.RelationEnd RelationEnd
         {
             get
@@ -148,6 +151,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

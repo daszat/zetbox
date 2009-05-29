@@ -35,6 +35,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string AltText
         {
             get
@@ -59,6 +60,7 @@ namespace Kistl.App.Base
         /// A space separated list of category names containing this Property
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string CategoryTags
         {
             get
@@ -83,6 +85,7 @@ namespace Kistl.App.Base
         /// The list of constraints applying to this Property
         /// </summary>
         // object list property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -94,9 +97,13 @@ namespace Kistl.App.Base
                 {
                     List<Kistl.App.Base.Constraint> serverList;
                     if (Helper.IsPersistedObject(this))
-                        serverList = Context.GetListOf<Kistl.App.Base.Constraint>(this, "Constraints");
+                    {
+						serverList = Context.GetListOf<Kistl.App.Base.Constraint>(this, "Constraints");
+					}
                     else
+                    {
                         serverList = new List<Kistl.App.Base.Constraint>();
+                    }
                         
                     _ConstraintsWrapper = new OneNRelationCollection<Kistl.App.Base.Constraint>(
                         "ConstrainedProperty",
@@ -109,10 +116,12 @@ namespace Kistl.App.Base
         
         private OneNRelationCollection<Kistl.App.Base.Constraint> _ConstraintsWrapper;
 
+
         /// <summary>
         /// Description of this Property
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string Description
         {
             get
@@ -137,6 +146,7 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
@@ -161,6 +171,7 @@ namespace Kistl.App.Base
         /// Whether or not a list-valued property has a index
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsIndexed
         {
             get
@@ -185,6 +196,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsList
         {
             get
@@ -209,6 +221,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual bool IsNullable
         {
             get
@@ -233,6 +246,7 @@ namespace Kistl.App.Base
         /// Zugehörig zum Modul
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -276,6 +290,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -335,6 +350,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string PropertyName
         {
             get
@@ -359,6 +375,7 @@ namespace Kistl.App.Base
         /// The PresentableModel to use for values of this Property
         /// </summary>
         // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -473,6 +490,7 @@ namespace Kistl.App.Base
 		}
 
         // tail template
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
         public override string ToString()

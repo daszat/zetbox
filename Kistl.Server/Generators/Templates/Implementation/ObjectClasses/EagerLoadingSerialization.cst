@@ -15,6 +15,7 @@
 <%@ Parameter Name="xmlnamespace" Type="string" %>
 <%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="collectionName" Type="string" %>
+<%@ Parameter Name="serializeIds" Type="bool" %>
 <%
 
 	switch(direction)
@@ -22,14 +23,37 @@
 		case SerializerDirection.ToStream:
 %>
 			{
+<% if (serializeIds) { %>
+				BinarySerializer.ToStream(<%= collectionName %>.Count, <%= streamName %>);
+<% } %>
 				foreach(var obj in <%= collectionName %>)
 				{
 					auxObjects.Add(obj);
+<% if (serializeIds) { %>
+					BinarySerializer.ToStream(obj.ID, <%= streamName %>);
+<% } %>
 				}
 			}
 <%
 			break;
 		case SerializerDirection.FromStream:
+			if (serializeIds)
+			{ 
+%>
+			{
+				int numElements;
+				BinarySerializer.FromStream(out numElements, <%= streamName %>);
+				<%= collectionName %>Ids = new List<int>(numElements);
+				while (numElements-- > 0) 
+				{
+					int id;
+					BinarySerializer.FromStream(out id, <%= streamName %>);
+					<%= collectionName %>Ids.Add(id);
+				}
+			}
+
+<%
+			}
 			break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");
