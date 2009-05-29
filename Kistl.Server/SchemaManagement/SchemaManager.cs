@@ -294,6 +294,7 @@ namespace Kistl.Server.SchemaManagement
             try
             {
                 UpdateTables();
+                UpdateRelations();
 
                 SaveSchema(schema);
 
@@ -316,7 +317,7 @@ namespace Kistl.Server.SchemaManagement
         {
             report.WriteLine("Updating Tables & Columns");
             report.WriteLine("-------------------------");
-            // Checking Tables
+
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
                 report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
@@ -336,6 +337,39 @@ namespace Kistl.Server.SchemaManagement
                 if (CheckCaseNewValueTypeProperty(prop))
                 {
                     CaseNewValueTypeProperty(prop);
+                }
+            }
+        }
+
+        private void UpdateRelations()
+        {
+            report.WriteLine("Updating Relations");
+            report.WriteLine("------------------");
+
+            foreach (Relation rel in schema.GetQuery<Relation>().OrderBy(r => r.Module.Namespace))
+            {
+                report.WriteLine("Relation: {0} ({1})", rel.GetAssociationName(), rel.GetRelationType());
+
+                if (rel.GetRelationType() == RelationType.one_n)
+                {
+                    if (CheckCaseNew_1_N_Relation(rel))
+                    {
+                        CaseNew_1_N_Relation(rel);
+                    }
+                }
+                else if (rel.GetRelationType() == RelationType.n_m)
+                {
+                    if (CheckCaseNew_N_M_Relation(rel))
+                    {
+                        CaseNew_N_M_Relation(rel);
+                    }
+                }
+                else if (rel.GetRelationType() == RelationType.one_one)
+                {
+                    if (CheckCaseNew_1_1_Relation(rel))
+                    {
+                        CaseNew_1_1_Relation(rel);
+                    }
                 }
             }
         }
@@ -362,8 +396,129 @@ namespace Kistl.Server.SchemaManagement
         private void CaseNewValueTypeProperty(ValueTypeProperty prop)
         {
             report.WriteLine("    New ValueType Property: {0}", prop.PropertyName);
-            db.CreateColumn(((ObjectClass)prop.ObjectClass).TableName, prop.PropertyName, GetDbType(prop), 
-                prop is StringProperty ? ((StringProperty)prop).Length : 0 , prop.IsNullable);
+            db.CreateColumn(((ObjectClass)prop.ObjectClass).TableName, prop.PropertyName, GetDbType(prop),
+                prop is StringProperty ? ((StringProperty)prop).Length : 0, prop.IsNullable);
+        }
+        #endregion
+
+        #region New_1_N_Relation
+        private bool CheckCaseNew_1_N_Relation(Relation rel)
+        {
+            return savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
+        }
+        private void CaseNew_1_N_Relation(Relation rel)
+        {
+            string assocName = rel.GetAssociationName();
+            report.WriteLine("  New 1:N Relation: {0}", assocName);
+
+            ObjectReferenceProperty nav = null;
+            string tblName ="";
+            string refTblName="";
+            bool isIndexed = false;
+            if (rel.A.Navigator.HasStorage())
+            {
+                nav = rel.A.Navigator;
+                tblName = rel.A.Type.TableName;
+                refTblName = rel.B.Type.TableName;
+                isIndexed = rel.NeedsPositionStorage(RelationEndRole.A);
+            }
+            else if (rel.B.Navigator.HasStorage())
+            {
+                nav = rel.B.Navigator;
+                tblName = rel.B.Type.TableName;
+                refTblName = rel.A.Type.TableName;
+                isIndexed = rel.NeedsPositionStorage(RelationEndRole.B);
+            }
+
+            if (nav == null)
+            {
+                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator", assocName);
+                return;
+            }
+
+            string colName = Construct.ForeignKeyColumnName(nav);
+            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, nav.IsNullable);
+            db.CreateFKConstraint(tblName, refTblName, colName, assocName);
+
+            if (isIndexed)
+            {
+                db.CreateColumn(tblName, Construct.ListPositionColumnName(nav), System.Data.DbType.Int32, 0, nav.IsNullable);
+            }
+        }
+        #endregion
+
+        #region New_N_M_Relation
+        private bool CheckCaseNew_N_M_Relation(Relation rel)
+        {
+            return savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
+        }
+        private void CaseNew_N_M_Relation(Relation rel)
+        {
+            string assocName = rel.GetAssociationName();
+            report.WriteLine("  New N:M Relation: {0}", assocName);
+
+            string tblName = rel.GetRelationTableName();
+		    string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
+		    string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+
+            db.CreateTable(tblName, true);
+
+            db.CreateColumn(tblName, fkAName, System.Data.DbType.Int32, 0, false);
+            if (rel.NeedsPositionStorage(RelationEndRole.A))
+            {
+                db.CreateColumn(tblName, fkAName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, true);
+            }
+
+            db.CreateColumn(tblName, fkBName, System.Data.DbType.Int32, 0, false);
+            if (rel.NeedsPositionStorage(RelationEndRole.B))
+            {
+                db.CreateColumn(tblName, fkBName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, true);
+            }
+
+            if (rel.A.Type.ImplementsIExportable(schema) && rel.B.Type.ImplementsIExportable(schema))
+            {
+                db.CreateColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, false);
+            }
+
+            db.CreateFKConstraint(tblName, rel.A.Type.TableName, fkAName, rel.GetRelationAssociationName(RelationEndRole.A));
+            db.CreateFKConstraint(tblName, rel.B.Type.TableName, fkBName, rel.GetRelationAssociationName(RelationEndRole.B));
+        }
+        #endregion
+
+        #region New_1_1_Relation
+        private bool CheckCaseNew_1_1_Relation(Relation rel)
+        {
+            return savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
+        }
+        private void CaseNew_1_1_Relation(Relation rel)
+        {
+            string assocName = rel.GetAssociationName();
+            report.WriteLine("  New 1:1 Relation: {0}", assocName);
+
+            if (rel.A.Navigator.HasStorage())
+            {
+                CaseNew_1_1_Relation_CreateColumns(rel, assocName, rel.A, rel.B, RelationEndRole.A);
+            }
+            // Difference to 1:N. 1:1 may have storage 'Replicate'
+            if (rel.B.Navigator.HasStorage())
+            {
+                CaseNew_1_1_Relation_CreateColumns(rel, assocName, rel.B, rel.A, RelationEndRole.B);
+            }
+        }
+
+        private void CaseNew_1_1_Relation_CreateColumns(Relation rel, string assocName, RelationEnd end, RelationEnd otherEnd, RelationEndRole role)
+        {
+            string tblName = end.Type.TableName;
+            string refTblName = otherEnd.Type.TableName;
+            string colName = Construct.ForeignKeyColumnName(end.Navigator);
+
+            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, end.Navigator.IsNullable);
+            db.CreateFKConstraint(tblName, refTblName, colName, assocName);
+
+            if (rel.NeedsPositionStorage(role))
+            {
+                db.CreateColumn(tblName, Construct.ListPositionColumnName(end.Navigator), System.Data.DbType.Int32, 0, end.Navigator.IsNullable);
+            }
         }
         #endregion
 

@@ -85,9 +85,8 @@ namespace Kistl.Server.Packaging
                         Console.WriteLine();
                     }
 
-                    // TODO: Use r.Module - if it's implemented
                     int moduleID = module.ID; // Dont ask
-                    foreach (var rel in ctx.GetQuery<Kistl.App.Base.Relation>().Where(r => r.A.Type.Module.ID == moduleID))
+                    foreach (var rel in ctx.GetQuery<Kistl.App.Base.Relation>().Where(r => r.Module.ID == moduleID))
                     {
                         if (rel.GetRelationType() != RelationType.n_m) continue;
                         if (!rel.A.Type.ImplementsIExportable(ctx)) continue;

@@ -152,16 +152,6 @@ namespace Kistl.Server
             Generators.Generator.GenerateCode();
         }
 
-        internal void GenerateDatabase()
-        {
-            Generators.Generator.GenerateDatabase();
-        }
-
-        internal void GenerateAll()
-        {
-            Generators.Generator.GenerateAll();
-        }
-
         internal void Export(string file, string[] namespaces)
         {
             Packaging.Exporter.Export(file, namespaces);

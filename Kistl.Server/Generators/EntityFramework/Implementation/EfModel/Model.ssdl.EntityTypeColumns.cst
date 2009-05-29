@@ -35,7 +35,7 @@
 			string propertyName = (p is ObjectReferenceProperty) 
 				? Construct.ForeignKeyColumnName((ObjectReferenceProperty)p, prefix) 
 				: Construct.NestedColumnName(p, prefix);
-			string sqlTypeName = GeneratorsOld.SQLServer.SQLServerHelper.GetDBType(p);
+			string sqlTypeName = GetDBType(p);
 			
 			string maxLengthAttr = "";
 			if (p is StringProperty)

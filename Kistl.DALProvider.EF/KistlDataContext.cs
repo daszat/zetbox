@@ -261,7 +261,7 @@ namespace Kistl.DALProvider.EF
                     new{State = EntityState.Added,      Label="Insert" },
                     new{State = EntityState.Modified,   Label="Update" },
                     new{State = EntityState.Deleted,    Label="Delete" },
-                    new{State = EntityState.Unchanged,  Label="Unchanged" },
+                    // new{State = EntityState.Unchanged,  Label="Unchanged" },
                 })
                 {
                     var debugList = _ctx.ObjectStateManager
@@ -273,6 +273,12 @@ namespace Kistl.DALProvider.EF
                         Trace.WriteLine(string.Format("{0}: {1} -> {2}", msgPair.Label, i.GetType(), i.ToString()));
                     }
                 }
+
+                Trace.WriteLine("");
+                Trace.WriteLine("  Added: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count());
+                Trace.WriteLine("  Modified: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Modified).Count());
+                Trace.WriteLine("  Deleted: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Deleted).Count());
+                Trace.WriteLine("  Unchanged: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Unchanged).Count());
 
                 Trace.WriteLine("************************* Submit Changes <<<< ******************************");
             }

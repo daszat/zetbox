@@ -15,7 +15,7 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
-using Kistl.Server.GeneratorsOld;
+//using Kistl.Server.GeneratorsOld;
 
 namespace Kistl.Server.Generators
 {
@@ -85,24 +85,24 @@ namespace Kistl.Server.Generators
             }
         }
 
-        public static void GenerateDatabase()
-        {
-            using (TraceClient.TraceHelper.TraceMethodCall())
-            {
-                var dbGenerator = DatabaseGeneratorFactory.GetGenerator();
+        //public static void GenerateDatabase()
+        //{
+        //    using (TraceClient.TraceHelper.TraceMethodCall())
+        //    {
+        //        var dbGenerator = DatabaseGeneratorFactory.GetGenerator();
 
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    dbGenerator.Generate(ctx);
-                }
-            }
-        }
+        //        using (IKistlContext ctx = KistlContext.GetContext())
+        //        {
+        //            dbGenerator.Generate(ctx);
+        //        }
+        //    }
+        //}
 
-        public static void GenerateAll()
-        {
-            GenerateCode();
-            GenerateDatabase();
-        }
+        //public static void GenerateAll()
+        //{
+        //    GenerateCode();
+        //    GenerateDatabase();
+        //}
 
         internal static TemplateGenerator GetTemplateGenerator(string providerTemplatePath,
             string template, string output, string targetdir, params object[] templateParameter)

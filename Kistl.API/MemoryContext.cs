@@ -73,13 +73,18 @@ namespace Kistl.API
 		public IQueryable<T> GetQuery<T>()
 			where T : class, IDataObject
 		{
-			return GetQuery(new InterfaceType(typeof(T))).Cast<T>();
+            return GetPersistenceObjectQuery(new InterfaceType(typeof(T))).Cast<T>();
 		}
 
-        private List<IDataObject> _emptyList = new List<IDataObject>();
         public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
-            return (_objects[ifType] ?? _emptyList).AsQueryable().AddOfType(ifType.Type).Cast<IDataObject>();
+            return GetPersistenceObjectQuery(ifType).Cast<IDataObject>();
+        }
+
+        private List<IPersistenceObject> _emptyList = new List<IPersistenceObject>();
+        private IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        {
+            return (_objects[ifType] ?? _emptyList).AsQueryable().AddOfType(ifType.Type).Cast<IPersistenceObject>();
         }
         
         List<T> IKistlContext.GetListOf<T>(IDataObject obj, string propertyName)
@@ -94,7 +99,14 @@ namespace Kistl.API
 
         public IList<T> FetchRelation<T>(int relId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry
 		{
-			throw new NotImplementedException();
+            if (parent == null)
+            {
+                return GetPersistenceObjectQuery(new InterfaceType(typeof(T))).Cast<T>().ToList();
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
 		}
 
         public IPersistenceObject ContainsObject(InterfaceType type, int ID)

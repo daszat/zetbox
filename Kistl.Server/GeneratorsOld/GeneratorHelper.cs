@@ -1,3 +1,4 @@
+#if DONOTUSE
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -213,3 +214,4 @@ namespace Kistl.Server.GeneratorsOld.Helper
         #endregion
     }
 }
+#endif

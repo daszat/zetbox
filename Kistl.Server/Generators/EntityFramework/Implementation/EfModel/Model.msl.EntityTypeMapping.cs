@@ -70,6 +70,5 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 
             this.WriteLine("</ComplexProperty>");
         }
-
     }
 }

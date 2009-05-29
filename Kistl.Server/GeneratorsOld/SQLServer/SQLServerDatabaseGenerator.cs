@@ -1,3 +1,4 @@
+#if DONOTUSE
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -259,3 +260,4 @@ namespace Kistl.Server.GeneratorsOld.SQLServer
         }
     }
 }
+#endif

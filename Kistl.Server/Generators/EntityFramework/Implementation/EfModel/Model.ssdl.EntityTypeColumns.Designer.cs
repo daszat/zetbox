@@ -10,7 +10,7 @@ using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst")]
     public partial class ModelSsdlEntityTypeColumns : Kistl.Server.Generators.KistlCodeTemplate
     {
 		protected IKistlContext ctx;
@@ -29,7 +29,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
         
         public override void Generate()
         {
-#line 19 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 19 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 /*
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
 	 */
@@ -49,7 +49,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 			string propertyName = (p is ObjectReferenceProperty) 
 				? Construct.ForeignKeyColumnName((ObjectReferenceProperty)p, prefix) 
 				: Construct.NestedColumnName(p, prefix);
-			string sqlTypeName = GeneratorsOld.SQLServer.SQLServerHelper.GetDBType(p);
+			string sqlTypeName = GetDBType(p);
 			
 			string maxLengthAttr = "";
 			if (p is StringProperty)
@@ -65,15 +65,15 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable.ToString().ToLowerInvariant());
 			}
 
-#line 54 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 54 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  nullableAttr , "/>\r\n");
-#line 57 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 57 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 if (p.NeedsPositionColumn())
 		    {
 
-#line 60 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 60 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 this.WriteObjects("    <Property Name=\"",  Construct.ListPositionColumnName(p, prefix) , "\" Type=\"int\" Nullable=\"true\" />\r\n");
-#line 62 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 62 "P:\kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
 		}
 	}

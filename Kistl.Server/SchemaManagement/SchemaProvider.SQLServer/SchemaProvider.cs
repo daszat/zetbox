@@ -235,5 +235,21 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             SqlCommand cmd = new SqlCommand(sb.ToString(), db, tx);
             cmd.ExecuteNonQuery();
         }
+
+        public void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName)
+        {
+            SqlCommand cmd = new SqlCommand(string.Format(@"ALTER TABLE [{0}]  WITH CHECK 
+                    ADD CONSTRAINT [{1}] FOREIGN KEY([{2}])
+                    REFERENCES [{3}] ([ID])",
+                   tblName,
+                   constraintName,
+                   colName,
+                   refTblName), db, tx); ;
+            cmd.ExecuteNonQuery();
+            cmd = new SqlCommand(string.Format(@"ALTER TABLE [{0}] CHECK CONSTRAINT [{1}]",
+                   tblName,
+                   constraintName), db, tx); ;
+            cmd.ExecuteNonQuery();
+        }
     }
 }
