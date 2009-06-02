@@ -41,15 +41,22 @@ namespace Kistl.Server.Packaging
             using (XmlTextWriter xml = new XmlTextWriter(s, Encoding.UTF8))
             {
                 var moduleList = new List<Kistl.App.Base.Module>();
-                foreach (var ns in moduleNamespaces)
+                if (moduleNamespaces.Contains("*"))
                 {
-                    var module = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Namespace == ns).FirstOrDefault();
-                    if (module == null)
+                    moduleList.AddRange(ctx.GetQuery<Kistl.App.Base.Module>());
+                }
+                else
+                {
+                    foreach (var ns in moduleNamespaces)
                     {
-                        Trace.TraceWarning("Module {0} not found", ns);
-                        continue;
+                        var module = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Namespace == ns).FirstOrDefault();
+                        if (module == null)
+                        {
+                            Trace.TraceWarning("Module {0} not found", ns);
+                            continue;
+                        }
+                        moduleList.Add(module);
                     }
-                    moduleList.Add(module);
                 }
 
                 xml.Formatting = Formatting.Indented;
@@ -74,7 +81,8 @@ namespace Kistl.Server.Packaging
                         foreach (var obj in ctx.GetQuery(objClass.GetDescribedInterfaceType()))
                         {
                             Console.Write(".");
-                            xml.WriteStartElement(obj.GetObjectClass(ctx).ClassName, module.Namespace);
+                            string typeName = obj.GetInterfaceType().Type.Name;
+                            xml.WriteStartElement(typeName, module.Namespace);
                             if (((Kistl.App.Base.IExportable)obj).ExportGuid == Guid.Empty)
                             {
                                 ((Kistl.App.Base.IExportable)obj).ExportGuid = Guid.NewGuid();

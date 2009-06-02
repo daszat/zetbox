@@ -141,6 +141,8 @@ namespace Kistl.Server.SchemaManagement
             else
             {
                 CheckTables();
+                report.WriteLine();
+
                 CheckExtraTables();
                 report.WriteLine();
 
@@ -178,6 +180,9 @@ namespace Kistl.Server.SchemaManagement
 
         private void CheckExtraTables()
         {
+            report.WriteLine("Checking extra Tables");
+            report.WriteLine("---------------------");
+
             // All ObjectClasses
             List<string> tableNames = schema.GetQuery<ObjectClass>().Select(o => o.TableName).ToList();
 
@@ -202,6 +207,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void CheckExtraColumns(ObjectClass objClass)
         {
+            report.WriteLine("  Extra Columns: ");
             List<string> columns = objClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).Select(p => p.PropertyName).ToList();
 
             foreach (string propName in db.GetTableColumnNames(objClass.TableName))
@@ -302,14 +308,8 @@ namespace Kistl.Server.SchemaManagement
                         db.CreateFKConstraint(tblName, refTblName, colName, assocName);
                     }
                 }
-                if (!db.CheckColumnExists(relEnd.Type.TableName, Construct.ForeignKeyColumnName(relEnd.Navigator)))
-                {
-                    report.WriteLine("  ** Warning: Navigator {0} is missing", role);
-                }
-                if (rel.NeedsPositionStorage(RelationEndRole.A) && !db.CheckColumnExists(relEnd.Type.TableName, Construct.ListPositionColumnName(relEnd.Navigator)))
-                {
-                    report.WriteLine("  ** Warning: Position Column {0} is missing", role);
-                }
+                // TODO: Dont use Navigator IsNullable! Check Multiplicity on RelationEnd. But first check Multiplicity in Schema
+                CheckColumn(relEnd.Type.TableName, Construct.ForeignKeyColumnName(relEnd.Navigator), System.Data.DbType.Int32, 0, relEnd.Navigator.IsNullable);
             }
         }
 
@@ -353,13 +353,10 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            if (!db.CheckColumnExists(tblName, colName))
+            CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, nav.IsNullable);
+            if (isIndexed)
             {
-                report.WriteLine("  ** Warning: Navigator is missing");
-            }
-            if (isIndexed && !db.CheckColumnExists(tblName, indexName))
-            {
-                report.WriteLine("  ** Warning: Index Column is missing");
+                CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, nav.IsNullable);
             }
             if (!isIndexed && db.CheckColumnExists(tblName, indexName))
             {
@@ -402,13 +399,10 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            if (!db.CheckColumnExists(tblName, fkAName))
+            CheckColumn(tblName, fkAName, System.Data.DbType.Int32, 0, false);
+            if (rel.NeedsPositionStorage(RelationEndRole.A))
             {
-                report.WriteLine("  ** Warning: Navigator A '{0}' is missing", fkAName);
-            }
-            if (rel.NeedsPositionStorage(RelationEndRole.A) && !db.CheckColumnExists(tblName, fkAIndex))
-            {
-                report.WriteLine("  ** Warning: Navigator A '{0}' Index Column is missing", fkAName);
+                CheckColumn(tblName, fkAIndex, System.Data.DbType.Int32, 0, false);
                 if (repair)
                 {
                     // TODO: Call case
@@ -423,13 +417,10 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            if (!db.CheckColumnExists(tblName, fkBName))
+            CheckColumn(tblName, fkBName, System.Data.DbType.Int32, 0, false);
+            if (rel.NeedsPositionStorage(RelationEndRole.B))
             {
-                report.WriteLine("  ** Warning: Navigator B '{0}' is missing", fkBName);
-            }
-            if (rel.NeedsPositionStorage(RelationEndRole.B) && !db.CheckColumnExists(tblName, fkBIndex))
-            {
-                report.WriteLine("  ** Warning: Navigator B '{0}' Index Column is missing", fkBName);
+                CheckColumn(tblName, fkBIndex, System.Data.DbType.Int32, 0, false);
                 if (repair)
                 {
                     // TODO: Call case
@@ -444,9 +435,9 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            if (rel.A.Type.ImplementsIExportable(schema) && rel.B.Type.ImplementsIExportable(schema) && !db.CheckColumnExists(tblName, "ExportGuid"))
+            if (rel.A.Type.ImplementsIExportable(schema) && rel.B.Type.ImplementsIExportable(schema))
             {
-                report.WriteLine("  ** Warning: ExportGuid is missing", fkBName);
+                CheckColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, false);
             }
         }
 
@@ -488,17 +479,11 @@ namespace Kistl.Server.SchemaManagement
                 if (db.CheckTableExists(tblName))
                 {
                     report.WriteLine("    {0}", prop.PropertyName);
-                    if (!db.CheckColumnExists(tblName, fkName))
+                    CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
+                    CheckColumn(tblName, valPropName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).Length : 0, false);
+                    if (prop.IsIndexed)
                     {
-                        report.WriteLine("      ** Warning: FK Column '{0}' is missing", fkName);
-                    }
-                    if (!db.CheckColumnExists(tblName, valPropName))
-                    {
-                        report.WriteLine("      ** Warning: Value Column '{0}' is missing", valPropName);
-                    }
-                    if (prop.IsIndexed && !db.CheckColumnExists(tblName, valPropIndexName))
-                    {
-                        report.WriteLine("      ** Warning: Index Column '{0}' is missing", valPropIndexName);
+                        CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
                     }
                     if (!prop.IsIndexed && db.CheckColumnExists(tblName, valPropIndexName))
                     {
@@ -524,6 +509,38 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
+        private void CheckColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable)
+        {
+            if (db.CheckColumnExists(tblName, colName))
+            {
+                // TODO: Add DataType Check
+                bool colIsNullable = db.GetIsColumnNullable(tblName, colName);
+                if (colIsNullable != isNullable)
+                {
+                    report.WriteLine("      ** Warning: Column '{0}'.'{1}' nullable mismatch. Column is {2} but should be {3}", tblName, colName,
+                        colIsNullable ? "NULLABLE" : "NOT NULLABLE",
+                        isNullable ? "NULLABLE" : "NOT NULLABLE");
+                }
+                if (type == System.Data.DbType.String)
+                {
+                    int colSize = db.GetColumnMaxLength(tblName, colName);
+                    // TODO: Introduce TextProperty
+                    if (size > 1000)
+                    {
+                        // TODO: Check if ntext
+                    }
+                    else if (colSize != size)
+                    {
+                        report.WriteLine("      ** Warning: Column '{0}'.'{1}' length mismatch. Columns length is {2} but should be {3}", tblName, colName, colSize, size);
+                    }
+                }
+            }
+            else
+            {
+                report.WriteLine("    ** Warning: Column '{0}'.'{1}' is missing", tblName, colName);
+            }
+        }
+
         private void CheckColumns(ObjectClass objClass)
         {
             report.WriteLine("  Columns: ");
@@ -533,37 +550,8 @@ namespace Kistl.Server.SchemaManagement
             {
                 string tblName = objClass.TableName;
                 string colName = prop.PropertyName;
-                if (db.CheckColumnExists(tblName, colName))
-                {
-                    report.WriteLine("    {0}", colName);
-                    // TODO: Add DataType Check
-                    if (db.GetIsColumnNullable(tblName, colName) != prop.IsNullable)
-                    {
-                        report.WriteLine("      ** Warning: Column \"{0}\" nullable mismatch. Column is {1} but should be {2}", colName,
-                            db.GetIsColumnNullable(tblName, colName) ? "NULLABLE" : "NOT NULLABLE",
-                            prop.IsNullable ? "NULLABLE" : "NOT NULLABLE");
-                    }
-                    if (prop is StringProperty)
-                    {
-                        StringProperty strProp = (StringProperty)prop;
-
-                        // TODO: Introduce TextProperty
-                        if (strProp.Length > 1000)
-                        {
-                            // TODO: Check if ntext
-                        }
-                        else if (db.GetColumnMaxLength(tblName, colName) != strProp.Length)
-                        {
-                            report.WriteLine("      ** Warning: Column \"{0}\" length mismatch. Columns length is {1} but should be {2}", colName,
-                                db.GetColumnMaxLength(tblName, colName),
-                                ((StringProperty)prop).Length);
-                        }
-                    }
-                }
-                else
-                {
-                    report.WriteLine("    ** Warning: Column \"{0}\" is missing", colName);
-                }
+                report.WriteLine("    {0}", colName);
+                CheckColumn(tblName, colName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).Length : 0, prop.IsNullable);
             }
         }
         #endregion
@@ -723,7 +711,7 @@ namespace Kistl.Server.SchemaManagement
         }
         private void CaseNewValueTypePropertyNotNullable(ValueTypeProperty prop)
         {
-            report.WriteLine("    New nullable ValueType Property: {0}", prop.PropertyName);
+            report.WriteLine("    New not nullable ValueType Property: {0}", prop.PropertyName);
             string tblName = ((ObjectClass)prop.ObjectClass).TableName;
             string colName = prop.PropertyName;
             if (!db.CheckTableContainsData(tblName))
@@ -733,7 +721,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                report.WriteLine("    ** Warning: unable to create new nullable ValueType Property '{0}' when table '{1}' contains data", colName, tblName);
+                report.WriteLine("    ** Warning: unable to create new not nullable ValueType Property '{0}' when table '{1}' contains data", colName, tblName);
             }
         }
         #endregion
@@ -880,6 +868,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (rel.NeedsPositionStorage(role))
             {
+                // TODO: Dont use Navigator IsNullable! Check Multiplicity on RelationEnd. But first check Multiplicity in Schema
                 db.CreateColumn(tblName, Construct.ListPositionColumnName(end.Navigator), System.Data.DbType.Int32, 0, end.Navigator.IsNullable);
             }
         }
