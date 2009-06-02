@@ -25,8 +25,10 @@ namespace Kistl.API.Client
             {
                 if (_ID != value)
                 {
-                    OnPropertyChanged("ID", _ID, value);
+                    NotifyPropertyChanging("ID", _ID, value);
+                    var oldVal = _ID;
                     _ID = value;
+                    NotifyPropertyChanged("ID", oldVal, value);
                 }
             }
         }
@@ -57,26 +59,26 @@ namespace Kistl.API.Client
             if (this.ObjectState == DataObjectState.Unmodified)
             {
                 var oldValue = this._ObjectState;
-                OnPropertyChanging("ObjectState", oldValue, DataObjectState.Modified);
+                NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.Modified);
                 this._ObjectState = DataObjectState.Modified;
-                OnPropertyChanged("ObjectState", oldValue, DataObjectState.Modified);
+                NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.Modified);
             }
         }
 
         internal void SetUnmodified()
         {
             var oldValue = this._ObjectState;
-            OnPropertyChanging("ObjectState", oldValue, DataObjectState.Unmodified);
+            NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.Unmodified);
             this._ObjectState = DataObjectState.Unmodified;
-            OnPropertyChanged("ObjectState", oldValue, DataObjectState.Unmodified);
+            NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.Unmodified);
         }
 
         internal void SetDeleted()
         {
             var oldValue = this._ObjectState;
-            OnPropertyChanging("ObjectState", oldValue, DataObjectState.Deleted);
+            NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.Deleted);
             this._ObjectState = DataObjectState.Deleted;
-            OnPropertyChanged("ObjectState", oldValue, DataObjectState.Deleted);
+            NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.Deleted);
         }
 
         public override void AttachToContext(IKistlContext ctx)

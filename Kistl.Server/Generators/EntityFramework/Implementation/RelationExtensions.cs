@@ -27,7 +27,10 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
         /// </summary>
         public static string GetAssociationName(this ValueTypeProperty prop)
         {
-            return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.ClassName, prop.GetPropertyTypeString().Split('.').Last(), prop.PropertyName);
+            // prop.GetPropertyTypeString().Split('.').Last()
+            // this does not work while creating a new Database - CustomAction Manager is not initialized
+            // due to lack of MethodInvocation information
+            return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.ClassName, "value", prop.PropertyName);
         }
 
         /// <summary>

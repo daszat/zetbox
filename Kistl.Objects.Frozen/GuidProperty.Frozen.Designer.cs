@@ -111,7 +111,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, GuidProperty__Implementation__Frozen> DataStore = new Dictionary<int, GuidProperty__Implementation__Frozen>(12);
+		internal new static Dictionary<int, GuidProperty__Implementation__Frozen> DataStore = new Dictionary<int, GuidProperty__Implementation__Frozen>(14);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[251] = 
@@ -161,6 +161,14 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[263] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[263] = 
 			DataStore[263] = new GuidProperty__Implementation__Frozen(263);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[272] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[272] = 
+			DataStore[272] = new GuidProperty__Implementation__Frozen(272);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[273] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[273] = 
+			DataStore[273] = new GuidProperty__Implementation__Frozen(273);
 
 		}
 
@@ -345,6 +353,36 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[265],
 			DataStore[263].PropertyName = @"ExportGuid";
 			DataStore[263].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[263].Seal();
+			DataStore[272].AltText = @"Export Guid";
+			DataStore[272].CategoryTags = @"Export";
+			DataStore[272].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[268],
+});
+			DataStore[272].Description = @"Export Guid";
+			DataStore[272].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[272].IsIndexed = false;
+			DataStore[272].IsList = false;
+			DataStore[272].IsNullable = false;
+			DataStore[272].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[272].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
+			DataStore[272].PropertyName = @"ExportGuid";
+			DataStore[272].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
+			DataStore[272].Seal();
+			DataStore[273].AltText = @"Export Guid";
+			DataStore[273].CategoryTags = @"Export";
+			DataStore[273].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[269],
+});
+			DataStore[273].Description = @"Export Guid";
+			DataStore[273].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[273].IsIndexed = false;
+			DataStore[273].IsList = false;
+			DataStore[273].IsNullable = false;
+			DataStore[273].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[273].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
+			DataStore[273].PropertyName = @"ExportGuid";
+			DataStore[273].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
+			DataStore[273].Seal();
 	
 		}
 #region Serializer

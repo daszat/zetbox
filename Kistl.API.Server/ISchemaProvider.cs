@@ -5,6 +5,12 @@ using System.Text;
 
 namespace Kistl.API.Server
 {
+    public class TableConstraintNamePair
+    {
+        public string TableName { get; set; }
+        public string ConstraintName { get; set; }
+    }
+
     public interface ISchemaProvider : IDisposable
     {
         void BeginTransaction();
@@ -24,10 +30,13 @@ namespace Kistl.API.Server
 
         IEnumerable<string> GetTableNames();
         IEnumerable<string> GetTableColumnNames(string tblName);
-        IEnumerable<string> GetFKConstraintNames();
+        IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
 
         void CreateTable(string tblName, bool idAsIdentityColumn);
         void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
         void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName);
+
+        void DropFKConstraint(string tblName, string fkName);
+        void DropColumn(string tblName, string colName);
     }
 }

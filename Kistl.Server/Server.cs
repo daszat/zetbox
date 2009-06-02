@@ -162,7 +162,7 @@ namespace Kistl.Server
             Packaging.Importer.Import(file);
         }
 
-        internal void CheckSchemaFromCurrentMetaData()
+        internal void CheckSchemaFromCurrentMetaData(bool withRepair)
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
@@ -171,13 +171,13 @@ namespace Kistl.Server
                     report.SetLength(0);
                     using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
                     {
-                        mgr.CheckSchema();
+                        mgr.CheckSchema(withRepair);
                     }
                 }
             }
         }
 
-        internal void CheckSchema()
+        internal void CheckSchema(bool withRepair)
         {
             using (IKistlContext ctx = SchemaManagement.SchemaManager.GetSavedSchema())
             {
@@ -186,13 +186,13 @@ namespace Kistl.Server
                     report.SetLength(0);
                     using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
                     {
-                        mgr.CheckSchema();
+                        mgr.CheckSchema(withRepair);
                     }
                 }
             }
         }
 
-        internal void CheckSchema(string file)
+        internal void CheckSchema(string file, bool withRepair)
         {
             using (IKistlContext ctx = new MemoryContext())
             {
@@ -204,7 +204,7 @@ namespace Kistl.Server
                         report.SetLength(0);
                         using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
                         {
-                            mgr.CheckSchema();
+                            mgr.CheckSchema(withRepair);
                         }
                     }
                 }

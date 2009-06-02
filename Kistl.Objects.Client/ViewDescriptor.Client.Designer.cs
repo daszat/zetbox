@@ -21,7 +21,7 @@ namespace Kistl.App.GUI
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor")]
-    public class ViewDescriptor__Implementation__ : BaseClientDataObject_ClientObjects, ViewDescriptor
+    public class ViewDescriptor__Implementation__ : BaseClientDataObject_ClientObjects, ViewDescriptor, Kistl.API.IExportableInternal
     {
     
 		public ViewDescriptor__Implementation__()
@@ -74,6 +74,31 @@ namespace Kistl.App.GUI
         }
         
         private int? _fk_ControlRef;
+
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
 
         /// <summary>
         /// The PresentableModel usable by this View
@@ -181,6 +206,7 @@ namespace Kistl.App.GUI
 			var otherImpl = (ViewDescriptor__Implementation__)obj;
 			var me = (ViewDescriptor)this;
 
+			me.ExportGuid = other.ExportGuid;
 			me.Toolkit = other.Toolkit;
 			me.VisualType = other.VisualType;
 			this._fk_ControlRef = otherImpl._fk_ControlRef;
@@ -232,6 +258,15 @@ namespace Kistl.App.GUI
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(227).Constraints
 						.Where(c => !c.IsValid(this, this.ControlRef))
 						.Select(c => c.GetErrorText(this, this.ControlRef))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ExportGuid":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(273).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -292,6 +327,7 @@ namespace Kistl.App.GUI
 			
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._fk_ControlRef, binStream);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._fk_PresentedModelDescriptor, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).VisualType, binStream);
@@ -302,6 +338,7 @@ namespace Kistl.App.GUI
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ControlRef, binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_PresentedModelDescriptor, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, binStream);
@@ -312,6 +349,7 @@ namespace Kistl.App.GUI
 			
             base.ToStream(xml);
             XmlStreamer.ToStream(this._fk_ControlRef, xml, "ControlRef", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
             XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
             XmlStreamer.ToStream((int)this.VisualType, xml, "VisualType", "Kistl.App.GUI");
@@ -322,7 +360,25 @@ namespace Kistl.App.GUI
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_ControlRef, xml, "ControlRef", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, xml, "Toolkit", "Kistl.App.GUI");
+            XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, xml, "VisualType", "Kistl.App.GUI");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.VisualType, xml, "VisualType", "Kistl.App.GUI");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, xml, "Toolkit", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, xml, "VisualType", "Kistl.App.GUI");
         }

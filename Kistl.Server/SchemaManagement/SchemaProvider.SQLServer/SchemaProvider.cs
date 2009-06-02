@@ -177,12 +177,12 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             }
         }
 
-        public IEnumerable<string> GetFKConstraintNames()
+        public IEnumerable<TableConstraintNamePair> GetFKConstraintNames()
         {
-            SqlCommand cmd = new SqlCommand("SELECT name FROM sys.objects WHERE type IN (N'F')", db, tx);
+            SqlCommand cmd = new SqlCommand("SELECT c.name, t.name FROM sys.objects c inner join sys.sysobjects t  on t.id = c.parent_object_id WHERE c.type IN (N'F') order by c.name", db, tx);
             using (SqlDataReader rd = cmd.ExecuteReader())
             {
-                while (rd.Read()) yield return rd.GetString(0);
+                while (rd.Read()) yield return new TableConstraintNamePair() { ConstraintName = rd.GetString(0), TableName = rd.GetString(1) };
             }
         }
 
@@ -255,6 +255,18 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             cmd = new SqlCommand(string.Format(@"ALTER TABLE [{0}] CHECK CONSTRAINT [{1}]",
                    tblName,
                    constraintName), db, tx); ;
+            cmd.ExecuteNonQuery();
+        }
+
+        public void DropFKConstraint(string tblName, string fkName)
+        {
+            SqlCommand cmd = new SqlCommand(string.Format("alter table [{0}] drop constraint [{1}]", tblName, fkName), db, tx);
+            cmd.ExecuteNonQuery();
+        }
+
+        public void DropColumn(string tblName, string colName)
+        {
+            SqlCommand cmd = new SqlCommand(string.Format("alter table [{0}] drop column [{1}]", tblName, colName), db, tx);
             cmd.ExecuteNonQuery();
         }
     }

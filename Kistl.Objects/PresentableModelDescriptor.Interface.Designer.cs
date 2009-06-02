@@ -10,7 +10,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    public interface PresentableModelDescriptor : IDataObject 
+    public interface PresentableModelDescriptor : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>

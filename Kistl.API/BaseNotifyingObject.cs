@@ -62,7 +62,7 @@ namespace Kistl.API
         {
             if (notifications == null)
             {
-                SetModified();
+                if (property != "ObjectState" && property != "ID") SetModified();
                 OnPropertyChanged(property, oldValue, newValue);
             }
             else
@@ -73,8 +73,9 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Fires PropertyChanging and PropertyChangingWithValue events
+        /// Fires PropertyChanging and PropertyChangingWithValue events.
         /// </summary>
+        /// <remarks>This method should not be called directy. Use NofityPropertyChanging.</remarks>
         /// <param name="property">Propertyname</param>
         /// <param name="oldValue">old value of the changed property</param>
         /// <param name="newValue">new value of the changed property</param>
@@ -90,6 +91,7 @@ namespace Kistl.API
         /// <summary>
         /// Fires PropertyChanged and PropertyChangedWithValue events
         /// </summary>
+        /// <remarks>This method should not be called directy. Use NofityPropertyChanging.</remarks>
         /// <param name="property">Propertyname</param>
         /// <param name="oldValue">old value of the changed property</param>
         /// <param name="newValue">new value of the changed property</param>

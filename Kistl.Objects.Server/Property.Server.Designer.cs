@@ -860,6 +860,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ExportGuid : (Guid?)null, xml, "ValueModelDescriptor", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -874,6 +875,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_ValueModelDescriptor, xml, "ValueModelDescriptor", "Kistl.App.GUI");
         }
 
 #endregion

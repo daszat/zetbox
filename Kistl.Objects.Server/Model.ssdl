@@ -539,7 +539,7 @@
 
     <!-- EntitySets and AssociationSet for all object-value CollectionEntrys -->
     <EntitySet Name="Kunde_EMails_CollectionEntry" EntityType="Model.Store.Kunde_EMails_CollectionEntry" Table="Kunden_EMailsCollection" />
-    <AssociationSet Name="FK_Kunde_String_EMails" Association="Model.Store.FK_Kunde_String_EMails" >
+    <AssociationSet Name="FK_Kunde_value_EMails" Association="Model.Store.FK_Kunde_value_EMails" >
       <End Role="Kunde" EntitySet="Kunde" />
       <End Role="CollectionEntry" EntitySet="Kunde_EMails_CollectionEntry" />
     </AssociationSet>
@@ -1081,6 +1081,7 @@
     <Property Name="fk_ControlRef" Type="int" />
     <Property Name="Toolkit" Type="int" Nullable="false" />
     <Property Name="VisualType" Type="int" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="PresentableModelDescriptor">
@@ -1091,6 +1092,7 @@
     <Property Name="fk_PresentableModelRef" Type="int" />
     <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="DefaultVisualType" Type="int" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="PresenceRecord">
@@ -2458,7 +2460,7 @@
       <Property Name="EMails" Type="nvarchar" MaxLength="200" />
     </EntityType>
 
-    <Association Name="FK_Kunde_String_EMails">
+    <Association Name="FK_Kunde_value_EMails">
       <End Role="Kunde" Type="Model.Store.Kunde" Multiplicity="0..1" />
       <End Role="CollectionEntry" Type="Model.Store.Kunde_EMails_CollectionEntry" Multiplicity="*" />
       <ReferentialConstraint>

@@ -106,14 +106,14 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Kunde_String_EMails", "CollectionEntry")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Kunde_value_EMails", "CollectionEntry")]
         public EntityCollection<Kunde_EMails_CollectionEntry__Implementation__> EMails__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kunde_EMails_CollectionEntry__Implementation__>(
-                        "Model.FK_Kunde_String_EMails",
+                        "Model.FK_Kunde_value_EMails",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

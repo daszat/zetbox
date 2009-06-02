@@ -505,7 +505,7 @@ namespace Kistl.DALProvider.EF
             {
                 string sql = string.Format("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid = @guid", GetEntityName(typeof(T).ToImplementationType()));
                 result = _ctx.CreateQuery<T>(sql, new ObjectParameter("guid", exportGuid)).FirstOrDefault();
-                result.AttachToContext(this);
+                if(result != null) result.AttachToContext(this);
             }
             return result;
         }

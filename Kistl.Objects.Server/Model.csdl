@@ -103,7 +103,7 @@
 
     <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
     <EntitySet Name="Kunde_EMails_CollectionEntry" EntityType="Model.Kunde_EMails_CollectionEntry" />
-    <AssociationSet Name="FK_Kunde_String_EMails" Association="Model.FK_Kunde_String_EMails" >
+    <AssociationSet Name="FK_Kunde_value_EMails" Association="Model.FK_Kunde_value_EMails" >
       <End Role="Kunde" EntitySet="Kunde" />
       <End Role="CollectionEntry" EntitySet="Kunde_EMails_CollectionEntry" />
     </AssociationSet>
@@ -453,7 +453,7 @@
     <Property Name="Ort" Type="String" Nullable="true" MaxLength="100" />
     <Property Name="Land" Type="String" Nullable="true" MaxLength="50" />
     <NavigationProperty Name="EMails__Implementation__"
-                        Relationship="Model.FK_Kunde_String_EMails"
+                        Relationship="Model.FK_Kunde_value_EMails"
                         FromRole="Kunde"
                         ToRole="CollectionEntry" />
   </EntityType>
@@ -574,6 +574,7 @@
                         ToRole="PresentableModelRef" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" />
     <Property Name="DefaultVisualType__Implementation__" Type="Int32" Nullable="false" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="PresenterInfo">
     <Key>
@@ -788,6 +789,7 @@
                         ToRole="ControlRef" />
     <Property Name="Toolkit__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="VisualType__Implementation__" Type="Int32" Nullable="false" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="Visual">
     <Key>
@@ -1269,13 +1271,13 @@
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_Kunde_String_EMails"
+                        Relationship="Model.FK_Kunde_value_EMails"
                         FromRole="CollectionEntry"
                         ToRole="Kunde" />
     <!-- B -->
     <Property Name="B" Type="String" Nullable="true" MaxLength="200" />
   </EntityType>
-  <Association Name="FK_Kunde_String_EMails" >
+  <Association Name="FK_Kunde_value_EMails" >
     <End Role="Kunde"
          Type="Model.Kunde" 
          Multiplicity="0..1" />

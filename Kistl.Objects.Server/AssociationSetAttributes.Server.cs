@@ -841,7 +841,7 @@ using Kistl.DALProvider.EF;
 
 // object-value association
 [assembly: EdmRelationship(
-    "Model", "FK_Kunde_String_EMails",
+    "Model", "FK_Kunde_value_EMails",
     "Kunde", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Kunde__Implementation__),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Kunde_EMails_CollectionEntry__Implementation__)
     )]

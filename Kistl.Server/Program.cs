@@ -19,13 +19,13 @@ namespace Kistl.Server
     {
         private static void PrintHelp()
         {
-            Console.WriteLine("Use: Kistl.Server [<configfile.xml>]");
-            Console.WriteLine("                  [-generate]");
-            Console.WriteLine("                  [-export <destfile.xml> <namespace> [<namespace> ...]]");
-            Console.WriteLine("                  [-import <sourcefile.xml]");
-            Console.WriteLine("                  [-checkschema [meta | <schema.xml>]]");
-            Console.WriteLine("                  [-updateschema [<schema.xml>]]");
-            Console.WriteLine("                  [-all]");
+            Console.WriteLine("Use: Kistl.Server <configfile.xml>");
+            Console.WriteLine("                  -generate");
+            Console.WriteLine("                  -export <destfile.xml> <namespace> [<namespace> ...]");
+            Console.WriteLine("                  -import <sourcefile.xml");
+            Console.WriteLine("                  -checkschema [meta | <schema.xml>]");
+            Console.WriteLine("                  -repairschema [meta | <schema.xml>]");
+            Console.WriteLine("                  -updateschema [<schema.xml>]");
         }
 
         static void Main(string[] args)
@@ -67,19 +67,20 @@ namespace Kistl.Server
                         actiondone = true;
                     }
 
-                    if (arg.Current == "-checkschema")
+                    if (arg.Current == "-checkschema" || arg.Current == "-repairschema")
                     {
+                        bool withRepair = arg.Current == "-repairschema";
                         string file = "";
                         if (arg.MoveNext())
                         {
                             if (arg.Current == "meta")
                             {
-                                server.CheckSchemaFromCurrentMetaData();
+                                server.CheckSchemaFromCurrentMetaData(withRepair);
                             }
                             else if (!arg.Current.StartsWith("-"))
                             {
                                 file = arg.Current;
-                                server.CheckSchema(file);
+                                server.CheckSchema(file, withRepair);
                             }
                             else
                             {
@@ -88,7 +89,7 @@ namespace Kistl.Server
                         }
                         else
                         {
-                            server.CheckSchema();
+                            server.CheckSchema(withRepair);
                         }
                         actiondone = true;
                     }
@@ -105,13 +106,6 @@ namespace Kistl.Server
                         {
                             server.UpdateSchema();
                         }
-                        actiondone = true;
-                    }
-
-                    if (arg.Current == "-all")
-                    {
-                        //server.GenerateAll();
-                        Console.WriteLine("Not supported yet");
                         actiondone = true;
                     }
 

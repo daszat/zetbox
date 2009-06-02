@@ -20,6 +20,7 @@ namespace Kistl.Server.SchemaManagement
         private IKistlContext savedSchema;
         private ISchemaProvider db;
         private TextWriter report;
+        private bool repair = false;
         #endregion
 
         #region Constructor
@@ -128,9 +129,10 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region CheckSchema
-        public void CheckSchema()
+        public void CheckSchema(bool withRepair)
         {
-            WriteReportHeader("Check Schema Report");
+            this.repair = withRepair;
+            WriteReportHeader(withRepair ? "Check Schema Report with repair" : "Check Schema Report");
 
             if (schema.GetQuery<Kistl.App.Base.ObjectClass>().Count() == 0)
             {
@@ -140,13 +142,39 @@ namespace Kistl.Server.SchemaManagement
             {
                 CheckTables();
                 CheckExtraTables();
-
                 report.WriteLine();
 
                 CheckRelations();
+                report.WriteLine();
+
+                CheckInheritance();
+                report.WriteLine();
+
                 CheckExtraRelations();
             }
         }
+
+        private void CheckInheritance()
+        {
+            report.WriteLine("Checking Inheritance");
+            report.WriteLine("--------------------");
+
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.BaseObjectClass != null).OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            {
+                report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                string assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
+                if (!db.CheckFKConstraintExists(assocName))
+                {
+                    report.WriteLine("** Warning: FK Contraint to BaseClass is missing");
+                    if (repair)
+                    {
+                        CaseNewObjectClassInheritance(objClass);
+                    }
+                }
+            }
+            report.WriteLine();
+        }
+
 
         private void CheckExtraTables()
         {
@@ -189,6 +217,9 @@ namespace Kistl.Server.SchemaManagement
 
         private void CheckExtraRelations()
         {
+            report.WriteLine("Checking extra Relations");
+            report.WriteLine("------------------------");
+
             var relations = schema.GetQuery<Relation>().ToList();
             List<string> relationNames = new List<string>();
 
@@ -212,11 +243,20 @@ namespace Kistl.Server.SchemaManagement
                 relationNames.Add(Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass));
             }
 
-            foreach (string relName in db.GetFKConstraintNames())
+            foreach (ValueTypeProperty prop in schema.GetQuery<ValueTypeProperty>().Where(p => p.IsList))
             {
-                if (!relationNames.Contains(relName))
+                relationNames.Add(prop.GetAssociationName());
+            }
+
+            foreach (var rel in db.GetFKConstraintNames())
+            {
+                if (!relationNames.Contains(rel.ConstraintName))
                 {
-                    report.WriteLine("** Warning: Relation \"{0}\" found in database but no relation object was defined", relName);
+                    report.WriteLine("** Warning: Relation '{0}' on table '{1}' found in database but no relation object was defined", rel.ConstraintName, rel.TableName);
+                    if (repair)
+                    {
+                        db.DropFKConstraint(rel.TableName, rel.ConstraintName);
+                    }
                 }
             }
         }
@@ -249,10 +289,18 @@ namespace Kistl.Server.SchemaManagement
         {
             if (relEnd.Navigator != null && relEnd.Navigator.HasStorage())
             {
-                string assocNameRole = rel.GetRelationAssociationName(role);
-                if (!db.CheckFKConstraintExists(assocNameRole))
+                string tblName = relEnd.Type.TableName;
+                string refTblName = rel.GetOtherEnd(relEnd).Type.TableName;
+                string colName = Construct.ForeignKeyColumnName(relEnd.Navigator);
+                string assocName = rel.GetRelationAssociationName(role);
+
+                if (!db.CheckFKConstraintExists(assocName))
                 {
-                    report.WriteLine("  ** Warning: FK Constraint '{0}' is missing", assocNameRole);
+                    report.WriteLine("  ** Warning: FK Constraint '{0}' is missing", assocName);
+                    if (repair)
+                    {
+                        db.CreateFKConstraint(tblName, refTblName, colName, assocName);
+                    }
                 }
                 if (!db.CheckColumnExists(relEnd.Type.TableName, Construct.ForeignKeyColumnName(relEnd.Navigator)))
                 {
@@ -294,22 +342,28 @@ namespace Kistl.Server.SchemaManagement
                 return;
             }
 
+            string colName = Construct.ForeignKeyColumnName(nav);
+            string indexName = Construct.ListPositionColumnName(nav);
             if (!db.CheckFKConstraintExists(assocName))
             {
                 report.WriteLine("  ** Warning: FK Constraint '{0}' is missing", assocName);
+                if (repair)
+                {
+                    db.CreateFKConstraint(tblName, refTblName, colName, assocName);
+                }
             }
 
-            string colName = Construct.ForeignKeyColumnName(nav);
             if (!db.CheckColumnExists(tblName, colName))
             {
                 report.WriteLine("  ** Warning: Navigator is missing");
             }
-            if (isIndexed)
+            if (isIndexed && !db.CheckColumnExists(tblName, indexName))
             {
-                if (!db.CheckColumnExists(tblName, Construct.ListPositionColumnName(nav)))
-                {
-                    report.WriteLine("  ** Warning: Position Column is missing");
-                }
+                report.WriteLine("  ** Warning: Index Column is missing");
+            }
+            if (!isIndexed && db.CheckColumnExists(tblName, indexName))
+            {
+                report.WriteLine("  ** Warning: Index Column exists but property is not indexed");
             }
         }
 
@@ -320,6 +374,10 @@ namespace Kistl.Server.SchemaManagement
             string tblName = rel.GetRelationTableName();
             string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
             string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
+            string assocAName = rel.GetRelationAssociationName(RelationEndRole.A);
+            string assocBName = rel.GetRelationAssociationName(RelationEndRole.B);
+            string fkAIndex = fkAName + Kistl.API.Helper.PositionSuffix;
+            string fkBIndex = fkBName + Kistl.API.Helper.PositionSuffix;
 
             if (!db.CheckTableExists(tblName))
             {
@@ -327,31 +385,63 @@ namespace Kistl.Server.SchemaManagement
                 return;
             }
 
-            if (!db.CheckFKConstraintExists(rel.GetRelationAssociationName(RelationEndRole.A)))
+            if (!db.CheckFKConstraintExists(assocAName))
             {
-                report.WriteLine("  ** Warning: FK Constraint '{0}' for A is missing", rel.GetRelationAssociationName(RelationEndRole.A));
+                report.WriteLine("  ** Warning: FK Constraint '{0}' for A is missing", assocAName);
+                if (repair)
+                {
+                    db.CreateFKConstraint(tblName, rel.A.Type.TableName, fkAName, assocAName);
+                }
             }
-            if (!db.CheckFKConstraintExists(rel.GetRelationAssociationName(RelationEndRole.B)))
+            if (!db.CheckFKConstraintExists(assocBName))
             {
-                report.WriteLine("  ** Warning: FK Constraint '{0}' for B is missing", rel.GetRelationAssociationName(RelationEndRole.B));
+                report.WriteLine("  ** Warning: FK Constraint '{0}' for B is missing", assocBName);
+                if (repair)
+                {
+                    db.CreateFKConstraint(tblName, rel.B.Type.TableName, fkBName, assocBName);
+                }
             }
 
             if (!db.CheckColumnExists(tblName, fkAName))
             {
                 report.WriteLine("  ** Warning: Navigator A '{0}' is missing", fkAName);
             }
-            if (rel.NeedsPositionStorage(RelationEndRole.A) && !db.CheckColumnExists(tblName, fkAName + Kistl.API.Helper.PositionSuffix))
+            if (rel.NeedsPositionStorage(RelationEndRole.A) && !db.CheckColumnExists(tblName, fkAIndex))
             {
-                report.WriteLine("  ** Warning: Navigator A '{0}' Position column is missing", fkAName);
+                report.WriteLine("  ** Warning: Navigator A '{0}' Index Column is missing", fkAName);
+                if (repair)
+                {
+                    // TODO: Call case
+                }
+            }
+            if (!rel.NeedsPositionStorage(RelationEndRole.A) && db.CheckColumnExists(tblName, fkAIndex))
+            {
+                report.WriteLine("  ** Warning: Navigator A '{0}' Index Column exists but property is not indexed", fkAName);
+                if (repair)
+                {
+                    // TODO: Call case
+                }
             }
 
             if (!db.CheckColumnExists(tblName, fkBName))
             {
                 report.WriteLine("  ** Warning: Navigator B '{0}' is missing", fkBName);
             }
-            if (rel.NeedsPositionStorage(RelationEndRole.B) && !db.CheckColumnExists(tblName, fkBName + Kistl.API.Helper.PositionSuffix))
+            if (rel.NeedsPositionStorage(RelationEndRole.B) && !db.CheckColumnExists(tblName, fkBIndex))
             {
-                report.WriteLine("  ** Warning: Navigator B '{0}' Position column is missing", fkBName);
+                report.WriteLine("  ** Warning: Navigator B '{0}' Index Column is missing", fkBName);
+                if (repair)
+                {
+                    // TODO: Call case
+                }
+            }
+            if (!rel.NeedsPositionStorage(RelationEndRole.B) && db.CheckColumnExists(tblName, fkBIndex))
+            {
+                report.WriteLine("  ** Warning: Navigator B '{0}' Index Column exists but property is not indexed", fkBName);
+                if (repair)
+                {
+                    // TODO: Call case
+                }
             }
 
             if (rel.A.Type.ImplementsIExportable(schema) && rel.B.Type.ImplementsIExportable(schema) && !db.CheckColumnExists(tblName, "ExportGuid"))
@@ -373,11 +463,63 @@ namespace Kistl.Server.SchemaManagement
                 {
                     report.WriteLine("  Table: {0}", objClass.TableName);
                     CheckColumns(objClass);
+                    CheckValueTypeCollections(objClass);
                     CheckExtraColumns(objClass);
                 }
                 else
                 {
-                    report.WriteLine("  ** Warning: Table \"{0}\" is missing", objClass.TableName);
+                    report.WriteLine("  ** Warning: Table '{0}' is missing", objClass.TableName);
+                }
+            }
+        }
+        private void CheckValueTypeCollections(ObjectClass objClass)
+        {
+            report.WriteLine("  ValueType Collections: ");
+            foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>()
+                .Where(p => p.IsList)
+                .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
+            {
+                string tblName = prop.GetCollectionEntryTable();
+                string fkName = "fk_" + prop.ObjectClass.ClassName;
+                string valPropName = prop.PropertyName;
+                string valPropIndexName = prop.PropertyName + "Index";
+                string assocName = prop.GetAssociationName();
+                string refTblName = objClass.TableName;
+                if (db.CheckTableExists(tblName))
+                {
+                    report.WriteLine("    {0}", prop.PropertyName);
+                    if (!db.CheckColumnExists(tblName, fkName))
+                    {
+                        report.WriteLine("      ** Warning: FK Column '{0}' is missing", fkName);
+                    }
+                    if (!db.CheckColumnExists(tblName, valPropName))
+                    {
+                        report.WriteLine("      ** Warning: Value Column '{0}' is missing", valPropName);
+                    }
+                    if (prop.IsIndexed && !db.CheckColumnExists(tblName, valPropIndexName))
+                    {
+                        report.WriteLine("      ** Warning: Index Column '{0}' is missing", valPropIndexName);
+                    }
+                    if (!prop.IsIndexed && db.CheckColumnExists(tblName, valPropIndexName))
+                    {
+                        report.WriteLine("      ** Warning: Index Column '{0}' exists but property is not indexed", valPropIndexName);
+                    }
+                    if (!db.CheckFKConstraintExists(assocName))
+                    {
+                        report.WriteLine("      ** Warning: FK Constraint is missing", prop.PropertyName);
+                        if (repair)
+                        {
+                            db.CreateFKConstraint(tblName, refTblName, fkName, assocName);
+                        }
+                    }
+                }
+                else
+                {
+                    report.WriteLine("    ** Warning: Table '{0}' for Property '{1}' is missing", tblName, prop.PropertyName);
+                    if (repair)
+                    {
+                        CaseNewValueTypePropertyList(prop);
+                    }
                 }
             }
         }
@@ -393,16 +535,13 @@ namespace Kistl.Server.SchemaManagement
                 string colName = prop.PropertyName;
                 if (db.CheckColumnExists(tblName, colName))
                 {
-                    report.Write("    {0}", colName);
+                    report.WriteLine("    {0}", colName);
                     // TODO: Add DataType Check
-                    bool isOK = true;
                     if (db.GetIsColumnNullable(tblName, colName) != prop.IsNullable)
                     {
-                        if (isOK) report.WriteLine();
                         report.WriteLine("      ** Warning: Column \"{0}\" nullable mismatch. Column is {1} but should be {2}", colName,
                             db.GetIsColumnNullable(tblName, colName) ? "NULLABLE" : "NOT NULLABLE",
                             prop.IsNullable ? "NULLABLE" : "NOT NULLABLE");
-                        isOK = false;
                     }
                     if (prop is StringProperty)
                     {
@@ -415,17 +554,10 @@ namespace Kistl.Server.SchemaManagement
                         }
                         else if (db.GetColumnMaxLength(tblName, colName) != strProp.Length)
                         {
-                            if (isOK) report.WriteLine();
                             report.WriteLine("      ** Warning: Column \"{0}\" length mismatch. Columns length is {1} but should be {2}", colName,
                                 db.GetColumnMaxLength(tblName, colName),
                                 ((StringProperty)prop).Length);
-                            isOK = false;
                         }
-                    }
-
-                    if (isOK)
-                    {
-                        report.WriteLine(" OK");
                     }
                 }
                 else
@@ -474,7 +606,7 @@ namespace Kistl.Server.SchemaManagement
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
                 report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
-                if (CheckCaseNewObjectClass(objClass))
+                if (IsCaseNewObjectClass(objClass))
                 {
                     CaseNewObjectClass(objClass);
                 }
@@ -488,9 +620,21 @@ namespace Kistl.Server.SchemaManagement
         {
             foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.HasStorage()))
             {
-                if (CheckCaseNewValueTypeProperty(prop))
+                if (IsCaseNewValueTypePropertyNullable(prop))
                 {
-                    CaseNewValueTypeProperty(prop);
+                    CaseNewValueTypePropertyNullable(prop);
+                }
+                if (IsCaseNewValueTypePropertyNotNullable(prop))
+                {
+                    CaseNewValueTypePropertyNotNullable(prop);
+                }
+            }
+
+            foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList))
+            {
+                if (IsCaseNewValueTypePropertyList(prop))
+                {
+                    CaseNewValueTypePropertyList(prop);
                 }
             }
         }
@@ -506,21 +650,21 @@ namespace Kistl.Server.SchemaManagement
 
                 if (rel.GetRelationType() == RelationType.one_n)
                 {
-                    if (CheckCaseNew_1_N_Relation(rel))
+                    if (IsCaseNew_1_N_Relation(rel))
                     {
                         CaseNew_1_N_Relation(rel);
                     }
                 }
                 else if (rel.GetRelationType() == RelationType.n_m)
                 {
-                    if (CheckCaseNew_N_M_Relation(rel))
+                    if (IsCaseNew_N_M_Relation(rel))
                     {
                         CaseNew_N_M_Relation(rel);
                     }
                 }
                 else if (rel.GetRelationType() == RelationType.one_one)
                 {
-                    if (CheckCaseNew_1_1_Relation(rel))
+                    if (IsCaseNew_1_1_Relation(rel))
                     {
                         CaseNew_1_1_Relation(rel);
                     }
@@ -537,7 +681,7 @@ namespace Kistl.Server.SchemaManagement
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
                 report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
-                if (CheckCaseNewObjectClassInheritance(objClass))
+                if (IsCaseNewObjectClassInheritance(objClass))
                 {
                     CaseNewObjectClassInheritance(objClass);
                 }
@@ -548,7 +692,7 @@ namespace Kistl.Server.SchemaManagement
         #region Cases
 
         #region NewObjectClass
-        private bool CheckCaseNewObjectClass(ObjectClass objClass)
+        private bool IsCaseNewObjectClass(ObjectClass objClass)
         {
             return savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid) == null;
         }
@@ -559,21 +703,69 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
-        #region NewValueTypeProperty
-        private bool CheckCaseNewValueTypeProperty(ValueTypeProperty prop)
+        #region NewValueTypeProperty nullable
+        private bool IsCaseNewValueTypePropertyNullable(ValueTypeProperty prop)
+        {
+            return prop.IsNullable && savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
+        }
+        private void CaseNewValueTypePropertyNullable(ValueTypeProperty prop)
+        {
+            report.WriteLine("    New nullable ValueType Property: {0}", prop.PropertyName);
+            db.CreateColumn(((ObjectClass)prop.ObjectClass).TableName, prop.PropertyName, GetDbType(prop),
+                prop is StringProperty ? ((StringProperty)prop).Length : 0, true);
+        }
+        #endregion
+
+        #region NewValueTypeProperty not nullable
+        private bool IsCaseNewValueTypePropertyNotNullable(ValueTypeProperty prop)
+        {
+            return !prop.IsNullable && savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
+        }
+        private void CaseNewValueTypePropertyNotNullable(ValueTypeProperty prop)
+        {
+            report.WriteLine("    New nullable ValueType Property: {0}", prop.PropertyName);
+            string tblName = ((ObjectClass)prop.ObjectClass).TableName;
+            string colName = prop.PropertyName;
+            if (!db.CheckTableContainsData(tblName))
+            {
+                db.CreateColumn(tblName, colName, GetDbType(prop),
+                    prop is StringProperty ? ((StringProperty)prop).Length : 0, false);
+            }
+            else
+            {
+                report.WriteLine("    ** Warning: unable to create new nullable ValueType Property '{0}' when table '{1}' contains data", colName, tblName);
+            }
+        }
+        #endregion
+
+        #region NewValueTypePropertyList
+        private bool IsCaseNewValueTypePropertyList(ValueTypeProperty prop)
         {
             return savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
         }
-        private void CaseNewValueTypeProperty(ValueTypeProperty prop)
+        private void CaseNewValueTypePropertyList(ValueTypeProperty prop)
         {
-            report.WriteLine("    New ValueType Property: {0}", prop.PropertyName);
-            db.CreateColumn(((ObjectClass)prop.ObjectClass).TableName, prop.PropertyName, GetDbType(prop),
-                prop is StringProperty ? ((StringProperty)prop).Length : 0, prop.IsNullable);
+            report.WriteLine("    New ValueType Property List: {0}", prop.PropertyName);
+            string tblName = prop.GetCollectionEntryTable();
+            string fkName = "fk_" + prop.ObjectClass.ClassName;
+            string valPropName = prop.PropertyName;
+            string valPropIndexName = prop.PropertyName + "Index";
+            string assocName = prop.GetAssociationName();
+
+            db.CreateTable(tblName, true);
+
+            db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
+            db.CreateColumn(tblName, valPropName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).Length : 0, false);
+            if (prop.IsIndexed)
+            {
+                db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
+            }
+            db.CreateFKConstraint(tblName, ((ObjectClass)prop.ObjectClass).TableName, fkName, prop.GetAssociationName());
         }
         #endregion
 
         #region New_1_N_Relation
-        private bool CheckCaseNew_1_N_Relation(Relation rel)
+        private bool IsCaseNew_1_N_Relation(Relation rel)
         {
             return savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
         }
@@ -619,7 +811,7 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region New_N_M_Relation
-        private bool CheckCaseNew_N_M_Relation(Relation rel)
+        private bool IsCaseNew_N_M_Relation(Relation rel)
         {
             return savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
         }
@@ -657,7 +849,7 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region New_1_1_Relation
-        private bool CheckCaseNew_1_1_Relation(Relation rel)
+        private bool IsCaseNew_1_1_Relation(Relation rel)
         {
             return savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid) == null;
         }
@@ -694,7 +886,7 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region NewObjectClassInheritance
-        private bool CheckCaseNewObjectClassInheritance(ObjectClass objClass)
+        private bool IsCaseNewObjectClassInheritance(ObjectClass objClass)
         {
             if (objClass.BaseObjectClass == null) return false;
 
@@ -703,16 +895,18 @@ namespace Kistl.Server.SchemaManagement
         }
         private void CaseNewObjectClassInheritance(ObjectClass objClass)
         {
-            report.WriteLine("  New ObjectClass Inheritance: {0} -> {1}", objClass.ClassName, objClass.BaseObjectClass.ClassName);
-
+            string assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
             string tblName = objClass.TableName;
+
+            report.WriteLine("  New ObjectClass Inheritance: {0} -> {1}: {2}", objClass.ClassName, objClass.BaseObjectClass.ClassName, assocName);
+
             if (db.CheckTableContainsData(tblName))
             {
-                report.WriteLine("    ** Warning: Table '{0}' contains data. unable to add inheritence", tblName);
+                report.WriteLine("    ** Warning: Table '{0}' contains data. Unable to add inheritence.", tblName);
                 return;
             }
 
-            db.CreateFKConstraint(tblName, objClass.BaseObjectClass.TableName, "ID", Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass));
+            db.CreateFKConstraint(tblName, objClass.BaseObjectClass.TableName, "ID", assocName);
         }
         #endregion
 

@@ -444,6 +444,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor)">
 	    <MappingFragment StoreEntitySet="ViewDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Toolkit__Implementation__" ColumnName="Toolkit" />
 <ScalarProperty Name="VisualType__Implementation__" ColumnName="VisualType" />
 	    </MappingFragment>
@@ -455,6 +456,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="DefaultVisualType__Implementation__" ColumnName="DefaultVisualType" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1574,8 +1576,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="FK_Kunde_String_EMails"
-                           TypeName="Model.FK_Kunde_String_EMails"
+    <AssociationSetMapping Name="FK_Kunde_value_EMails"
+                           TypeName="Model.FK_Kunde_value_EMails"
                            StoreEntitySet="Kunde_EMails_CollectionEntry" >
       <EndProperty Name="Kunde">
         <ScalarProperty Name="ID" ColumnName="fk_Kunde"/>

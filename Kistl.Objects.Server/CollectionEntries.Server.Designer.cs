@@ -1887,14 +1887,14 @@ namespace Kistl.App.Projekte
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Kunde_String_EMails", "Kunde")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Kunde_value_EMails", "Kunde")]
         public Kunde__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kunde__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kunde__Implementation__>(
-                        "Model.FK_Kunde_String_EMails",
+                        "Model.FK_Kunde_value_EMails",
                         "Kunde");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1908,7 +1908,7 @@ namespace Kistl.App.Projekte
             {
                 EntityReference<Kunde__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kunde__Implementation__>(
-                        "Model.FK_Kunde_String_EMails",
+                        "Model.FK_Kunde_value_EMails",
                         "Kunde");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
