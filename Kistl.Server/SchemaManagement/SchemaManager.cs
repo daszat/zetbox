@@ -361,6 +361,10 @@ namespace Kistl.Server.SchemaManagement
             if (!isIndexed && db.CheckColumnExists(tblName, indexName))
             {
                 report.WriteLine("  ** Warning: Index Column exists but property is not indexed");
+                if (repair)
+                {
+                    Case_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
+                }
             }
         }
 
@@ -642,6 +646,10 @@ namespace Kistl.Server.SchemaManagement
                     {
                         CaseNew_1_N_Relation(rel);
                     }
+                    if (IsCase_1_N_RelationChange_FromIndexed_To_NotIndexed(rel))
+                    {
+                        Case_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
+                    }
                 }
                 else if (rel.GetRelationType() == RelationType.n_m)
                 {
@@ -749,6 +757,42 @@ namespace Kistl.Server.SchemaManagement
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
             }
             db.CreateFKConstraint(tblName, ((ObjectClass)prop.ObjectClass).TableName, fkName, prop.GetAssociationName());
+        }
+        #endregion
+
+        #region 1_N_RelationChange_FromIndexed_To_NotIndexed
+        private bool IsCase_1_N_RelationChange_FromIndexed_To_NotIndexed(Relation rel)
+        {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (savedRel == null) return false;
+            return  (!rel.NeedsPositionStorage(RelationEndRole.A) && savedRel.NeedsPositionStorage(RelationEndRole.A)) ||
+                    (!rel.NeedsPositionStorage(RelationEndRole.B) && savedRel.NeedsPositionStorage(RelationEndRole.B));
+        }
+        private void Case_1_N_RelationChange_FromIndexed_To_NotIndexed(Relation rel)
+        {
+            string assocName = rel.GetAssociationName();
+            report.WriteLine("  Drop 1:N Relation Position Storage: {0}", assocName);
+
+            ObjectReferenceProperty nav = null;
+            string tblName = "";
+            if (rel.A.Navigator != null && rel.A.Navigator.HasStorage())
+            {
+                nav = rel.A.Navigator;
+                tblName = rel.A.Type.TableName;
+            }
+            else if (rel.B.Navigator != null && rel.B.Navigator.HasStorage())
+            {
+                nav = rel.B.Navigator;
+                tblName = rel.B.Type.TableName;
+            }
+
+            if (nav == null)
+            {
+                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator", assocName);
+                return;
+            }
+
+            db.DropColumn(tblName, Construct.ListPositionColumnName(nav));
         }
         #endregion
 

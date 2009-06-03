@@ -24,7 +24,7 @@ namespace Kistl.Server
             Console.WriteLine("                  -export <destfile.xml> <namespace> [<namespace> ...]");
             Console.WriteLine("                  -import <sourcefile.xml");
             Console.WriteLine("                  -checkschema [meta | <schema.xml>]");
-            Console.WriteLine("                  -repairschema [meta | <schema.xml>]");
+            Console.WriteLine("                  -repairschema");
             Console.WriteLine("                  -updateschema [<schema.xml>]");
         }
 
@@ -67,20 +67,19 @@ namespace Kistl.Server
                         actiondone = true;
                     }
 
-                    if (arg.Current == "-checkschema" || arg.Current == "-repairschema")
+                    if (arg.Current == "-checkschema")
                     {
-                        bool withRepair = arg.Current == "-repairschema";
                         string file = "";
                         if (arg.MoveNext())
                         {
                             if (arg.Current == "meta")
                             {
-                                server.CheckSchemaFromCurrentMetaData(withRepair);
+                                server.CheckSchemaFromCurrentMetaData(false);
                             }
                             else if (!arg.Current.StartsWith("-"))
                             {
                                 file = arg.Current;
-                                server.CheckSchema(file, withRepair);
+                                server.CheckSchema(file, false);
                             }
                             else
                             {
@@ -89,8 +88,14 @@ namespace Kistl.Server
                         }
                         else
                         {
-                            server.CheckSchema(withRepair);
+                            server.CheckSchema(false);
                         }
+                        actiondone = true;
+                    }
+
+                    if (arg.Current == "-repairschema")
+                    {
+                        server.CheckSchema(true);
                         actiondone = true;
                     }
 
