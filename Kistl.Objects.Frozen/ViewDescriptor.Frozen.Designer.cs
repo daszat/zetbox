@@ -1095,7 +1095,7 @@ namespace Kistl.App.GUI
 			DataStore[92].IsReadOnly = true;
 			DataStore[92].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[2];
 			DataStore[92].Toolkit = (Toolkit)0;
-			DataStore[92].VisualType = (VisualType)0;
+			DataStore[92].VisualType = (VisualType)24;
 			DataStore[92].Seal();
 	
 		}

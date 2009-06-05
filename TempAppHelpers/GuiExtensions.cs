@@ -23,7 +23,22 @@ namespace Kistl.App.Extensions
             this PresentableModelDescriptor pmd,
             Toolkit tk)
         {
-            return pmd.GetViewDescriptor(tk, pmd.DefaultVisualType);
+            return pmd.GetViewDescriptor(tk, pmd.DefaultVisualType, false);
+        }
+
+        /// <summary>
+        /// Looks up the ViewDesriptor matching the PresentableModel and Toolkit; 
+        /// uses the PresentableModelDescriptor's DefaultVisualType
+        /// </summary>
+        /// <param name="pmd"></param>
+        /// <param name="tk"></param>
+        /// <returns></returns>
+        public static ViewDescriptor GetDefaultViewDescriptor(
+            this PresentableModelDescriptor pmd,
+            Toolkit tk,
+            bool readOnly)
+        {
+            return pmd.GetViewDescriptor(tk, pmd.DefaultVisualType, readOnly);
         }
 
         /// <summary>
@@ -38,15 +53,32 @@ namespace Kistl.App.Extensions
             Toolkit tk,
             VisualType vt)
         {
-            PrimeCaches(tk);
-            var candidates = _vdCache[tk][vt].ToDictionary(obj => obj.PresentedModelDescriptor);
+            return pmd.GetViewDescriptor(tk, vt, false);
+        }
 
-            ViewDescriptor result = null;
-            while (result == null && pmd != null)
+        /// <summary>
+        /// Looks up the ViewDescriptor matching the PresentableModel, Toolkit and VisualType
+        /// </summary>
+        /// <param name="pmd"></param>
+        /// <param name="tk"></param>
+        /// <param name="vt"></param>
+        /// <returns></returns>
+        public static ViewDescriptor GetViewDescriptor(
+            this PresentableModelDescriptor pmd,
+            Toolkit tk,
+            VisualType vt,
+            bool readOnly)
+        {
+            PrimeCaches(tk);
+            var candidates = _vdCache[tk][vt].ToLookup(obj => obj.PresentedModelDescriptor);
+
+            List<ViewDescriptor> result = new List<ViewDescriptor>();
+            while (pmd != null)
             {
-                if (candidates.ContainsKey(pmd))
+                if (candidates.Contains(pmd))
                 {
-                    result = candidates[pmd];
+                    var test = candidates[pmd];
+                    result.AddRange(candidates[pmd]);
                 }
 
                 // crawl up the inheritance tree
@@ -54,7 +86,8 @@ namespace Kistl.App.Extensions
                     .GetPresentableModelDescriptor();
             }
 
-            return result;
+            // fall back to any available control, if we don't have one with matching read-only state
+            return result.FirstOrDefault(vd => vd.IsReadOnly == readOnly) ?? result.First();
         }
 
         public static PresentableModelDescriptor GetPresentableModelDescriptor(this TypeRef tr)
@@ -72,7 +105,7 @@ namespace Kistl.App.Extensions
         }
 
         private static Dictionary<int, PresentableModelDescriptor> _pmdCache = null;
-        private static Dictionary<Toolkit, ILookup<VisualType, ViewDescriptor>> _vdCache = null;
+        private static Dictionary<Toolkit, Dictionary<VisualType, List<ViewDescriptor>>> _vdCache = null;
 
         private static void PrimeCaches(Toolkit? tk)
         {
@@ -84,7 +117,7 @@ namespace Kistl.App.Extensions
             {
                 if (_vdCache == null)
                 {
-                    _vdCache = new Dictionary<Toolkit, ILookup<VisualType, ViewDescriptor>>();
+                    _vdCache = new Dictionary<Toolkit, Dictionary<VisualType, List<ViewDescriptor>>>();
                 }
                 if (!_vdCache.ContainsKey(tk.Value))
                 {
@@ -100,12 +133,13 @@ namespace Kistl.App.Extensions
                 .ToDictionary(obj => obj.PresentableModelRef.ID);
         }
 
-        private static ILookup<VisualType, ViewDescriptor> GetViewDescriptorByVisualTypeCache(Toolkit tk)
+        private static Dictionary<VisualType, List<ViewDescriptor>> GetViewDescriptorByVisualTypeCache(Toolkit tk)
         {
             return FrozenContext.Single
                 .GetQuery<ViewDescriptor>()
                 .Where(obj => obj.Toolkit == tk)
-                .ToLookup(obj => obj.VisualType);
+                .GroupBy(obj => obj.VisualType)
+                .ToDictionary(g => g.Key, g => g.ToList());
         }
     }
 }

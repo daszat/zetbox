@@ -28,6 +28,17 @@ namespace Kistl.Client.WPF.View
             InitializeComponent();
         }
 
+        private void ModuleTreeSelectedItemChangedHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var workspaceModel = Model;
+            var item = ModuleTree.SelectedItem as Kistl.Client.Presentables.DataObjectModel;
+            if (item != null)
+            {
+                workspaceModel.SelectedItem = item;
+            }
+
+        }
+
         #region IView Members
 
         /// <summary>

@@ -80,15 +80,13 @@ namespace Kistl.Client.WPF
                 if (_timeRecorder)
                 {
                     initialWorkspace = AppContext.Factory.CreateSpecificModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel>(KistlContext.GetContext());
-                    AppContext.Factory.ShowModel(initialWorkspace, true);
                 }
                 else
                 {
                     FixupDatabase();
-
                     initialWorkspace = AppContext.Factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
                 }
-                AppContext.Factory.ShowModel(initialWorkspace, true);
+                AppContext.Factory.ShowModel(initialWorkspace, true, true);
             }
         }
 

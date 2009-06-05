@@ -131,7 +131,7 @@ namespace Kistl.Client.Presentables
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
                 .GetPresentableModelDescriptor();
 
-            var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
+            var vDesc = pmd.GetDefaultViewDescriptor(Toolkit, readOnly);
             IView view = (IView)vDesc.ControlRef.Create();
             view.SetModel(mdl);
             return view;
