@@ -90,7 +90,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ControlType != value)
                 {
 					var __oldValue = _ControlType;
@@ -115,7 +115,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
 					var __oldValue = _Description;
@@ -147,7 +147,7 @@ namespace Kistl.App.GUI
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_Method == null)
@@ -191,7 +191,7 @@ namespace Kistl.App.GUI
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_Property == null)

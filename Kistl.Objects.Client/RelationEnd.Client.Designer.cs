@@ -51,7 +51,7 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_AParent == null)
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_BParent == null)
@@ -164,7 +164,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -189,7 +189,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_HasPersistentOrder != value)
                 {
 					var __oldValue = _HasPersistentOrder;
@@ -214,7 +214,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Multiplicity != value)
                 {
 					var __oldValue = _Multiplicity;
@@ -246,7 +246,7 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_Navigator == null)
@@ -299,7 +299,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Role != value)
                 {
 					var __oldValue = _Role;
@@ -324,7 +324,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_RoleName != value)
                 {
 					var __oldValue = _RoleName;
@@ -356,7 +356,7 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_Type == null)

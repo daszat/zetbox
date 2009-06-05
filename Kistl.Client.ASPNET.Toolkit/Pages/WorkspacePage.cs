@@ -43,7 +43,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         {
             Workspace = GuiApplicationContext.Current.Factory
                 .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
-            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(Workspace);
+            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(Workspace, false);
             Ctrl = (IWorkspaceView)loader.LoadControl(this);
             ctrlMainContent.Controls.Add((Control)Ctrl);
         }

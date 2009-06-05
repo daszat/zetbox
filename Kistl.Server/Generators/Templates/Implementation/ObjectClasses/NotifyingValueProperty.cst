@@ -31,7 +31,7 @@
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (<%= backingName %> != value)
                 {
 					var __oldValue = <%= backingName %>;

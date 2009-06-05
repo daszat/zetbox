@@ -44,7 +44,7 @@ namespace Kistl.App.TimeRecords
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_From != value)
                 {
 					var __oldValue = _From;
@@ -76,7 +76,7 @@ namespace Kistl.App.TimeRecords
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_Mitarbeiter == null)
@@ -113,7 +113,7 @@ namespace Kistl.App.TimeRecords
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Name != value)
                 {
 					var __oldValue = _Name;
@@ -138,7 +138,7 @@ namespace Kistl.App.TimeRecords
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Notes != value)
                 {
 					var __oldValue = _Notes;
@@ -163,7 +163,7 @@ namespace Kistl.App.TimeRecords
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Thru != value)
                 {
 					var __oldValue = _Thru;

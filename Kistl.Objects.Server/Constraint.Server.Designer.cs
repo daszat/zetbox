@@ -43,7 +43,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -79,7 +79,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 ConstrainedProperty__Implementation__ = (Kistl.App.Base.Property__Implementation__)value;
             }
         }
@@ -137,7 +137,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -165,7 +165,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Reason != value)
                 {
 					var __oldValue = _Reason;

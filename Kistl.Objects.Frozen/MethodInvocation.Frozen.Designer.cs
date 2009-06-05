@@ -41,7 +41,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -66,7 +66,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Implementor != value)
                 {
 					var __oldValue = _Implementor;
@@ -91,7 +91,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_InvokeOnObjectClass != value)
                 {
 					var __oldValue = _InvokeOnObjectClass;
@@ -116,7 +116,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_MemberName != value)
                 {
 					var __oldValue = _MemberName;
@@ -141,7 +141,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Method != value)
                 {
 					var __oldValue = _Method;
@@ -166,7 +166,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Module != value)
                 {
 					var __oldValue = _Module;

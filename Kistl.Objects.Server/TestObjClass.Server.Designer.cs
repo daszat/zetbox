@@ -43,7 +43,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -71,7 +71,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_MyIntProperty != value)
                 {
 					var __oldValue = _MyIntProperty;
@@ -107,7 +107,7 @@ namespace Kistl.App.Test
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 ObjectProp__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)value;
             }
         }
@@ -165,7 +165,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_StringProp != value)
                 {
 					var __oldValue = _StringProp;
@@ -191,7 +191,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_TestEnumProp != value)
                 {
 					var __oldValue = _TestEnumProp;

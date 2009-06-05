@@ -43,7 +43,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -79,7 +79,7 @@ namespace Kistl.App.GUI
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
@@ -137,7 +137,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_DisplayedTypeFullName != value)
                 {
 					var __oldValue = _DisplayedTypeFullName;
@@ -165,7 +165,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_DisplayName != value)
                 {
 					var __oldValue = _DisplayName;
@@ -249,7 +249,7 @@ namespace Kistl.App.GUI
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)value;
             }
         }

@@ -51,7 +51,7 @@ namespace Kistl.App.GUI
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_DisplayedTypeAssembly == null)
@@ -88,7 +88,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_DisplayedTypeFullName != value)
                 {
 					var __oldValue = _DisplayedTypeFullName;
@@ -113,7 +113,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_DisplayName != value)
                 {
 					var __oldValue = _DisplayName;
@@ -168,7 +168,7 @@ namespace Kistl.App.GUI
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_VisualTree == null)

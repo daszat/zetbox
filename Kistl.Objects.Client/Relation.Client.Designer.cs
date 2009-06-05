@@ -51,7 +51,7 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_A == null)
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_B == null)
@@ -164,7 +164,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
 					var __oldValue = _Description;
@@ -189,7 +189,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -221,7 +221,7 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_Module == null)
@@ -258,7 +258,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Storage != value)
                 {
 					var __oldValue = _Storage;
@@ -283,7 +283,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Verb != value)
                 {
 					var __oldValue = _Verb;

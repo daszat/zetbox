@@ -43,7 +43,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -79,7 +79,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
@@ -137,7 +137,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -165,7 +165,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_FullName != value)
                 {
 					var __oldValue = _FullName;
@@ -249,7 +249,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 Parent__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
             }
         }

@@ -51,7 +51,7 @@ namespace Kistl.App.GUI
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_ControlRef == null)
@@ -88,7 +88,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -99,6 +99,31 @@ namespace Kistl.App.GUI
             }
         }
         private Guid _ExportGuid;
+
+        /// <summary>
+        /// Indicates whether or not the described control is read-only or allows editing.
+        /// </summary>
+        // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual bool IsReadOnly
+        {
+            get
+            {
+                return _IsReadOnly;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsReadOnly != value)
+                {
+					var __oldValue = _IsReadOnly;
+                    NotifyPropertyChanging("IsReadOnly", __oldValue, value);
+                    _IsReadOnly = value;
+                    NotifyPropertyChanged("IsReadOnly", __oldValue, value);
+                }
+            }
+        }
+        private bool _IsReadOnly;
 
         /// <summary>
         /// The PresentableModel usable by this View
@@ -120,7 +145,7 @@ namespace Kistl.App.GUI
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_PresentedModelDescriptor == null)
@@ -157,7 +182,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Toolkit != value)
                 {
 					var __oldValue = _Toolkit;
@@ -182,7 +207,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_VisualType != value)
                 {
 					var __oldValue = _VisualType;
@@ -207,6 +232,7 @@ namespace Kistl.App.GUI
 			var me = (ViewDescriptor)this;
 
 			me.ExportGuid = other.ExportGuid;
+			me.IsReadOnly = other.IsReadOnly;
 			me.Toolkit = other.Toolkit;
 			me.VisualType = other.VisualType;
 			this._fk_ControlRef = otherImpl._fk_ControlRef;
@@ -271,6 +297,15 @@ namespace Kistl.App.GUI
 					
 					return String.Join("; ", errors);
 				}
+				case "IsReadOnly":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(274).Constraints
+						.Where(c => !c.IsValid(this, this.IsReadOnly))
+						.Select(c => c.GetErrorText(this, this.IsReadOnly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "PresentedModelDescriptor":
 				{
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(226).Constraints
@@ -328,6 +363,7 @@ namespace Kistl.App.GUI
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._fk_ControlRef, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(this._IsReadOnly, binStream);
             BinarySerializer.ToStream(this._fk_PresentedModelDescriptor, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).VisualType, binStream);
@@ -339,6 +375,7 @@ namespace Kistl.App.GUI
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ControlRef, binStream);
             BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            BinarySerializer.FromStream(out this._IsReadOnly, binStream);
             BinarySerializer.FromStream(out this._fk_PresentedModelDescriptor, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, binStream);
@@ -350,6 +387,7 @@ namespace Kistl.App.GUI
             base.ToStream(xml);
             XmlStreamer.ToStream(this._fk_ControlRef, xml, "ControlRef", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
             XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
             XmlStreamer.ToStream((int)this.VisualType, xml, "VisualType", "Kistl.App.GUI");
@@ -361,6 +399,7 @@ namespace Kistl.App.GUI
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_ControlRef, xml, "ControlRef", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, xml, "Toolkit", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, xml, "VisualType", "Kistl.App.GUI");
@@ -372,6 +411,8 @@ namespace Kistl.App.GUI
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.VisualType, xml, "VisualType", "Kistl.App.GUI");
         }
@@ -379,6 +420,7 @@ namespace Kistl.App.GUI
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, xml, "Toolkit", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, xml, "VisualType", "Kistl.App.GUI");
         }

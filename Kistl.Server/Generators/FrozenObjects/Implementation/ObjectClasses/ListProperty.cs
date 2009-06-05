@@ -33,7 +33,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
         {
             this.WriteLine("            internal set");
             this.WriteLine("            {");
-            this.WriteLine("                if (IsReadonly)");
+            this.WriteLine("                if (((IPersistenceObject)this).IsReadonly)");
             this.WriteLine("                {");
             this.WriteLine("                    throw new ReadOnlyObjectException();");
             this.WriteLine("                }");

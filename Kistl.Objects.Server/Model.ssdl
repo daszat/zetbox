@@ -603,7 +603,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_ObjectClass" Type="int" />
     <Property Name="fk_Module" Type="int" />
-    <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="IsList" Type="bit" Nullable="false" />
     <Property Name="IsNullable" Type="bit" Nullable="false" />
     <Property Name="AltText" Type="nvarchar" MaxLength="200" Nullable="true" />
@@ -1082,6 +1082,7 @@
     <Property Name="Toolkit" Type="int" Nullable="false" />
     <Property Name="VisualType" Type="int" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsReadOnly" Type="bit" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="PresentableModelDescriptor">

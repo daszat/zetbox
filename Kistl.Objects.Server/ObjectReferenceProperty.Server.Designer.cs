@@ -50,7 +50,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_EagerLoading != value)
                 {
 					var __oldValue = _EagerLoading;
@@ -86,7 +86,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 ReferenceObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)value;
             }
         }
@@ -152,7 +152,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)value;
             }
         }

@@ -126,7 +126,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         /// <param name="mdl"></param>
         /// <returns></returns>
-        public IView CreateDefaultView(PresentableModel mdl)
+        public IView CreateDefaultView(PresentableModel mdl, bool readOnly)
         {
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
                 .GetPresentableModelDescriptor();
@@ -139,6 +139,17 @@ namespace Kistl.Client.Presentables
 
         public void ShowModel(PresentableModel mdl, bool activate)
         {
+            ShowModel(mdl, activate, false);
+        }
+
+        /// <summary>
+        /// Shows the specified model. 
+        /// </summary>
+        /// <param name="mdl"></param>
+        /// <param name="activate"></param>
+        /// <param name="readOnly"></param>
+        public void ShowModel(PresentableModel mdl, bool activate, bool readOnly)
+        {
             if (mdl is DataObjectModel)
             {
                 // TODO improve multi-workspace facitilities
@@ -146,7 +157,7 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                ShowInView(mdl, CreateDefaultView(mdl), activate);
+                ShowInView(mdl, CreateDefaultView(mdl, readOnly), activate);
             }
         }
 
@@ -214,7 +225,7 @@ namespace Kistl.Client.Presentables
             public bool Equals(object[] x, object[] y)
             {
                 bool result = true;
-                
+
                 if (x.Length != y.Length)
                 {
                     return false;

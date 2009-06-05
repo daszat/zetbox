@@ -44,7 +44,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Auftragsname != value)
                 {
 					var __oldValue = _Auftragsname;
@@ -69,7 +69,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Auftragswert != value)
                 {
 					var __oldValue = _Auftragswert;
@@ -101,7 +101,7 @@ namespace Kistl.App.Projekte
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_Kunde == null)
@@ -145,7 +145,7 @@ namespace Kistl.App.Projekte
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_Mitarbeiter == null)
@@ -189,7 +189,7 @@ namespace Kistl.App.Projekte
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_Projekt == null)

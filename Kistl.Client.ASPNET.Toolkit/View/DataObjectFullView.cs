@@ -33,7 +33,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             PresentableModel mdl = (PresentableModel)e.Item.DataItem;
             Control divPlaceHolder = e.Item.FindControl("divPlaceHolder");
 
-            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(mdl);
+            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, false);
             divPlaceHolder.Controls.Add(loader.LoadControl(Page));
         }
 

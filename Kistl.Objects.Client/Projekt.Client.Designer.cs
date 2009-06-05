@@ -80,7 +80,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_AufwandGes != value)
                 {
 					var __oldValue = _AufwandGes;
@@ -105,7 +105,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Kundenname != value)
                 {
 					var __oldValue = _Kundenname;
@@ -153,7 +153,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Name != value)
                 {
 					var __oldValue = _Name;

@@ -41,7 +41,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
 					var __oldValue = _Description;
@@ -66,7 +66,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -91,7 +91,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsDisplayable != value)
                 {
 					var __oldValue = _IsDisplayable;
@@ -118,7 +118,7 @@ namespace Kistl.App.Base
             }
             internal set
             {
-                if (IsReadonly)
+                if (((IPersistenceObject)this).IsReadonly)
                 {
                     throw new ReadOnlyObjectException();
                 }
@@ -140,7 +140,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_MethodName != value)
                 {
 					var __oldValue = _MethodName;
@@ -165,7 +165,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Module != value)
                 {
 					var __oldValue = _Module;
@@ -190,7 +190,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ObjectClass != value)
                 {
 					var __oldValue = _ObjectClass;
@@ -217,7 +217,7 @@ namespace Kistl.App.Base
             }
             internal set
             {
-                if (IsReadonly)
+                if (((IPersistenceObject)this).IsReadonly)
                 {
                     throw new ReadOnlyObjectException();
                 }

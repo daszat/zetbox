@@ -43,7 +43,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -71,7 +71,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Auftragsname != value)
                 {
 					var __oldValue = _Auftragsname;
@@ -99,7 +99,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Auftragswert != value)
                 {
 					var __oldValue = _Auftragswert;
@@ -135,7 +135,7 @@ namespace Kistl.App.Projekte
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 Kunde__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)value;
             }
         }
@@ -201,7 +201,7 @@ namespace Kistl.App.Projekte
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
             }
         }
@@ -267,7 +267,7 @@ namespace Kistl.App.Projekte
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)value;
             }
         }

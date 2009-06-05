@@ -64,7 +64,7 @@ this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                // TODO: NotifyPropertyChanged()\r\n");
 this.WriteObjects("                // TODO: only accept EF objects from same Context\r\n");
-this.WriteObjects("                if (IsReadonly) throw new ReadOnlyObjectException();\r\n");
+this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
 this.WriteObjects("                ",  efName , " = (",  referencedImplementation , ")value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");

@@ -21,6 +21,13 @@ namespace Kistl.App.GUI
 			set;
 		}
         /// <summary>
+        /// Indicates whether or not the described control is read-only or allows editing.
+        /// </summary>
+		bool IsReadOnly {
+			get;
+			set;
+		}
+        /// <summary>
         /// The PresentableModel usable by this View
         /// </summary>
 		Kistl.App.GUI.PresentableModelDescriptor PresentedModelDescriptor {

@@ -43,7 +43,7 @@ namespace Kistl.App.Base
             }
             internal set
             {
-                if (IsReadonly)
+                if (((IPersistenceObject)this).IsReadonly)
                 {
                     throw new ReadOnlyObjectException();
                 }

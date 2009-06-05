@@ -43,7 +43,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ControlType != value)
                 {
 					var __oldValue = _ControlType;
@@ -123,7 +123,7 @@ namespace Kistl.App.GUI
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 DataAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
@@ -181,7 +181,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_DataTypeName != value)
                 {
 					var __oldValue = _DataTypeName;
@@ -217,7 +217,7 @@ namespace Kistl.App.GUI
             {
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 PresenterAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
@@ -275,7 +275,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_PresenterTypeName != value)
                 {
 					var __oldValue = _PresenterTypeName;

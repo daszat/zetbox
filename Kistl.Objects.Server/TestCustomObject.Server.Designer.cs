@@ -45,7 +45,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -73,7 +73,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Birthday != value)
                 {
 					var __oldValue = _Birthday;
@@ -101,7 +101,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_PersonName != value)
                 {
 					var __oldValue = _PersonName;
@@ -144,7 +144,7 @@ namespace Kistl.App.Test
                 if (value == null)
 					throw new ArgumentNullException("value");
                 
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (!object.Equals(_PhoneNumberMobile, value))
                 {
 					var __oldValue = _PhoneNumberMobile;
@@ -193,7 +193,7 @@ namespace Kistl.App.Test
                 if (value == null)
 					throw new ArgumentNullException("value");
                 
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (!object.Equals(_PhoneNumberOffice, value))
                 {
 					var __oldValue = _PhoneNumberOffice;

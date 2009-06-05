@@ -445,6 +445,7 @@
 	    <MappingFragment StoreEntitySet="ViewDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
 <ScalarProperty Name="Toolkit__Implementation__" ColumnName="Toolkit" />
 <ScalarProperty Name="VisualType__Implementation__" ColumnName="VisualType" />
 	    </MappingFragment>

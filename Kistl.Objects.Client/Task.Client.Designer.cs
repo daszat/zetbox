@@ -44,7 +44,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Aufwand != value)
                 {
 					var __oldValue = _Aufwand;
@@ -69,7 +69,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_DatumBis != value)
                 {
 					var __oldValue = _DatumBis;
@@ -94,7 +94,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_DatumVon != value)
                 {
 					var __oldValue = _DatumVon;
@@ -119,7 +119,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Name != value)
                 {
 					var __oldValue = _Name;
@@ -151,7 +151,7 @@ namespace Kistl.App.Projekte
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 
                 // shortcut noops
                 if (value == null && _fk_Projekt == null)

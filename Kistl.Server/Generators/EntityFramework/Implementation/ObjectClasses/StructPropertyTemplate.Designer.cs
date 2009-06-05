@@ -64,7 +64,7 @@ this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (value == null)\r\n");
 this.WriteObjects("					throw new ArgumentNullException(\"value\");\r\n");
 this.WriteObjects("                \r\n");
-this.WriteObjects("                if (IsReadonly) throw new ReadOnlyObjectException();\r\n");
+this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
 this.WriteObjects("                if (!object.Equals(",  backingName , ", value))\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var __oldValue = ",  backingName , ";\r\n");

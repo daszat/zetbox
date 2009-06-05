@@ -359,7 +359,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[265],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[268],
 });
 			DataStore[272].Description = @"Export Guid";
-			DataStore[272].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[272].ExportGuid = new Guid("77ce1e5b-f244-4279-af13-b3e75b55f933");
 			DataStore[272].IsIndexed = false;
 			DataStore[272].IsList = false;
 			DataStore[272].IsNullable = false;
@@ -374,7 +374,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[268],
 Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[269],
 });
 			DataStore[273].Description = @"Export Guid";
-			DataStore[273].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[273].ExportGuid = new Guid("94140a56-9fed-4d65-8c2c-cb8e658dff96");
 			DataStore[273].IsIndexed = false;
 			DataStore[273].IsList = false;
 			DataStore[273].IsNullable = false;

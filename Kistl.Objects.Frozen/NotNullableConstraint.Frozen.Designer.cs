@@ -880,11 +880,11 @@ namespace Kistl.App.Base
 			DataStore[267].Reason = @"Module cannot be empty";
 			DataStore[267].Seal();
 			DataStore[268].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[272];
-			DataStore[268].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[268].ExportGuid = new Guid("8cb0cbf9-1b18-427a-9635-4e8bd7595ad0");
 			DataStore[268].Reason = @"ExportGuid cannot be empty";
 			DataStore[268].Seal();
 			DataStore[269].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[273];
-			DataStore[269].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[269].ExportGuid = new Guid("1f57fcbb-016e-4fa3-9939-f2393653e99d");
 			DataStore[269].Reason = @"ExportGuid cannot be empty";
 			DataStore[269].Seal();
 	

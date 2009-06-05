@@ -111,7 +111,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, BoolProperty__Implementation__Frozen> DataStore = new Dictionary<int, BoolProperty__Implementation__Frozen>(15);
+		internal new static Dictionary<int, BoolProperty__Implementation__Frozen> DataStore = new Dictionary<int, BoolProperty__Implementation__Frozen>(16);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[11] = 
@@ -173,6 +173,10 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[269] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[269] = 
 			DataStore[269] = new BoolProperty__Implementation__Frozen(269);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[274] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[274] = 
+			DataStore[274] = new BoolProperty__Implementation__Frozen(274);
 
 		}
 
@@ -398,6 +402,20 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[236],
 			DataStore[269].PropertyName = @"EagerLoading";
 			DataStore[269].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[269].Seal();
+			DataStore[274].AltText = null;
+			DataStore[274].CategoryTags = null;
+			DataStore[274].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[274].Description = @"Indicates whether or not the described control is read-only or allows editing.";
+			DataStore[274].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[274].IsIndexed = false;
+			DataStore[274].IsList = false;
+			DataStore[274].IsNullable = false;
+			DataStore[274].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[274].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
+			DataStore[274].PropertyName = @"IsReadOnly";
+			DataStore[274].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
+			DataStore[274].Seal();
 	
 		}
 #region Serializer

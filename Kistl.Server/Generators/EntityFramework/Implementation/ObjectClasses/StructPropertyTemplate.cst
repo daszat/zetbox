@@ -48,7 +48,7 @@
                 if (value == null)
 					throw new ArgumentNullException("value");
                 
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (!object.Equals(<%= backingName %>, value))
                 {
 					var __oldValue = <%= backingName %>;

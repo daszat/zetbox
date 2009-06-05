@@ -41,7 +41,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_AreaCode != value)
                 {
 					var __oldValue = _AreaCode;
@@ -66,7 +66,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Number != value)
                 {
 					var __oldValue = _Number;

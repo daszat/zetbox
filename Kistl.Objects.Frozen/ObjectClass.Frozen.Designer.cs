@@ -41,7 +41,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_BaseObjectClass != value)
                 {
 					var __oldValue = _BaseObjectClass;
@@ -66,7 +66,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_DefaultModel != value)
                 {
 					var __oldValue = _DefaultModel;
@@ -91,7 +91,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_DefaultPresentableModelDescriptor != value)
                 {
 					var __oldValue = _DefaultPresentableModelDescriptor;
@@ -118,7 +118,7 @@ namespace Kistl.App.Base
             }
             internal set
             {
-                if (IsReadonly)
+                if (((IPersistenceObject)this).IsReadonly)
                 {
                     throw new ReadOnlyObjectException();
                 }
@@ -140,7 +140,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsFrozenObject != value)
                 {
 					var __oldValue = _IsFrozenObject;
@@ -165,7 +165,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsSimpleObject != value)
                 {
 					var __oldValue = _IsSimpleObject;
@@ -192,7 +192,7 @@ namespace Kistl.App.Base
             }
             internal set
             {
-                if (IsReadonly)
+                if (((IPersistenceObject)this).IsReadonly)
                 {
                     throw new ReadOnlyObjectException();
                 }
@@ -214,7 +214,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_TableName != value)
                 {
 					var __oldValue = _TableName;
@@ -2364,12 +2364,13 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[161],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[162],
 });
 			DataStore[83].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[83].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(5) {
+			DataStore[83].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(6) {
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[226],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[227],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[228],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[229],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[273],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[274],
 });
 			DataStore[83].ShowIconInLists = true;
 			DataStore[83].ShowIdInLists = true;
@@ -2442,7 +2443,7 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[244],
 			DataStore[86].ShowNameInLists = true;
 			DataStore[86].BaseObjectClass = null;
 			DataStore[86].DefaultModel = null;
-			DataStore[86].DefaultPresentableModelDescriptor = null;
+			DataStore[86].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[86].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
 			DataStore[86].IsFrozenObject = false;

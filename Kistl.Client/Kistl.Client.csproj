@@ -80,6 +80,7 @@
     <Compile Include="Presentables\ICommand.cs" />
     <Compile Include="Presentables\IPropertyModel.cs" />
     <Compile Include="Presentables\KistlDebuggerAsModel.cs" />
+    <Compile Include="Presentables\LauncherModel.cs" />
     <Compile Include="Presentables\ListPropertyModels.cs" />
     <Compile Include="Presentables\MethodInvocationModel.cs" />
     <Compile Include="Presentables\MethodResultModels.cs" />

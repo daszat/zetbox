@@ -46,7 +46,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Birthday != value)
                 {
 					var __oldValue = _Birthday;
@@ -71,7 +71,7 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_PersonName != value)
                 {
 					var __oldValue = _PersonName;

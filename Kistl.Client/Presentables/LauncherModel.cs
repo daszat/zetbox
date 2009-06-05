@@ -1,0 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Kistl.API;
+
+namespace Kistl.Client.Presentables
+{
+    public class LauncherModel
+        : PresentableModel
+    {
+        public LauncherModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+            : base(appCtx, dataCtx)
+        {
+        }
+    }
+}

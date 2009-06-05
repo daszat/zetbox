@@ -41,7 +41,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ControlRef != value)
                 {
 					var __oldValue = _ControlRef;
@@ -66,7 +66,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -77,6 +77,31 @@ namespace Kistl.App.GUI
             }
         }
         private Guid _ExportGuid;
+
+        /// <summary>
+        /// Indicates whether or not the described control is read-only or allows editing.
+        /// </summary>
+        // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual bool IsReadOnly
+        {
+            get
+            {
+                return _IsReadOnly;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsReadOnly != value)
+                {
+					var __oldValue = _IsReadOnly;
+                    NotifyPropertyChanging("IsReadOnly", __oldValue, value);
+                    _IsReadOnly = value;
+                    NotifyPropertyChanged("IsReadOnly", __oldValue, value);
+                }
+            }
+        }
+        private bool _IsReadOnly;
 
         /// <summary>
         /// The PresentableModel usable by this View
@@ -91,7 +116,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_PresentedModelDescriptor != value)
                 {
 					var __oldValue = _PresentedModelDescriptor;
@@ -116,7 +141,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Toolkit != value)
                 {
 					var __oldValue = _Toolkit;
@@ -141,7 +166,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_VisualType != value)
                 {
 					var __oldValue = _VisualType;
@@ -211,6 +236,15 @@ namespace Kistl.App.GUI
 					
 					return String.Join("; ", errors);
 				}
+				case "IsReadOnly":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(274).Constraints
+						.Where(c => !c.IsValid(this, this.IsReadOnly))
+						.Select(c => c.GetErrorText(this, this.IsReadOnly))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "PresentedModelDescriptor":
 				{
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(226).Constraints
@@ -247,7 +281,7 @@ namespace Kistl.App.GUI
         { }
 
 
-		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(89);
+		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(90);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new ViewDescriptor__Implementation__Frozen(1);
@@ -428,543 +462,641 @@ namespace Kistl.App.GUI
 
 			DataStore[90] = new ViewDescriptor__Implementation__Frozen(90);
 
+			DataStore[92] = new ViewDescriptor__Implementation__Frozen(92);
+
 		}
 
 		internal static void FillDataStore() {
 			DataStore[1].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[145];
-			DataStore[1].ExportGuid = default(System.Guid);
+			DataStore[1].ExportGuid = new Guid("8e771395-2eeb-42b7-b822-84b39fdf509f");
+			DataStore[1].IsReadOnly = false;
 			DataStore[1].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[1];
 			DataStore[1].Toolkit = (Toolkit)0;
 			DataStore[1].VisualType = (VisualType)22;
 			DataStore[1].Seal();
 			DataStore[2].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[165];
-			DataStore[2].ExportGuid = default(System.Guid);
+			DataStore[2].ExportGuid = new Guid("8ae71de4-a96b-4e4c-a4a4-0bee4dc625ce");
+			DataStore[2].IsReadOnly = false;
 			DataStore[2].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[2];
 			DataStore[2].Toolkit = (Toolkit)1;
 			DataStore[2].VisualType = (VisualType)24;
 			DataStore[2].Seal();
 			DataStore[3].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[166];
-			DataStore[3].ExportGuid = default(System.Guid);
+			DataStore[3].ExportGuid = new Guid("d24946e0-a4c1-4afa-8668-00cda6b8fa3a");
+			DataStore[3].IsReadOnly = false;
 			DataStore[3].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[2];
 			DataStore[3].Toolkit = (Toolkit)3;
 			DataStore[3].VisualType = (VisualType)24;
 			DataStore[3].Seal();
 			DataStore[4].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[167];
-			DataStore[4].ExportGuid = default(System.Guid);
+			DataStore[4].ExportGuid = new Guid("02dacd0b-c604-4311-b564-15b1ced9299f");
+			DataStore[4].IsReadOnly = false;
 			DataStore[4].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[2];
 			DataStore[4].Toolkit = (Toolkit)0;
 			DataStore[4].VisualType = (VisualType)24;
 			DataStore[4].Seal();
 			DataStore[5].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[150];
-			DataStore[5].ExportGuid = default(System.Guid);
+			DataStore[5].ExportGuid = new Guid("4b8a4590-690c-4e85-b10a-d0bf8f475c46");
+			DataStore[5].IsReadOnly = false;
 			DataStore[5].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[3];
 			DataStore[5].Toolkit = (Toolkit)0;
 			DataStore[5].VisualType = (VisualType)23;
 			DataStore[5].Seal();
 			DataStore[6].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[149];
-			DataStore[6].ExportGuid = default(System.Guid);
+			DataStore[6].ExportGuid = new Guid("b8cec662-195f-40ae-8d79-ab9f35540a2e");
+			DataStore[6].IsReadOnly = false;
 			DataStore[6].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[4];
 			DataStore[6].Toolkit = (Toolkit)0;
 			DataStore[6].VisualType = (VisualType)17;
 			DataStore[6].Seal();
 			DataStore[7].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[159];
-			DataStore[7].ExportGuid = default(System.Guid);
+			DataStore[7].ExportGuid = new Guid("a67a0d1d-1dff-45e1-83cc-621ed9d87115");
+			DataStore[7].IsReadOnly = false;
 			DataStore[7].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
 			DataStore[7].Toolkit = (Toolkit)1;
 			DataStore[7].VisualType = (VisualType)4;
 			DataStore[7].Seal();
 			DataStore[8].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[282];
-			DataStore[8].ExportGuid = default(System.Guid);
+			DataStore[8].ExportGuid = new Guid("7c695dfc-e689-445b-be94-296068752847");
+			DataStore[8].IsReadOnly = false;
 			DataStore[8].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
 			DataStore[8].Toolkit = (Toolkit)3;
 			DataStore[8].VisualType = (VisualType)4;
 			DataStore[8].Seal();
 			DataStore[9].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[161];
-			DataStore[9].ExportGuid = default(System.Guid);
+			DataStore[9].ExportGuid = new Guid("31d8374d-0565-4e4d-a1f8-6053e4832901");
+			DataStore[9].IsReadOnly = false;
 			DataStore[9].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
 			DataStore[9].Toolkit = (Toolkit)0;
 			DataStore[9].VisualType = (VisualType)4;
 			DataStore[9].Seal();
 			DataStore[10].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[156];
-			DataStore[10].ExportGuid = default(System.Guid);
+			DataStore[10].ExportGuid = new Guid("28b7ee49-f606-4807-a86a-b6fae4f8952f");
+			DataStore[10].IsReadOnly = false;
 			DataStore[10].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
 			DataStore[10].Toolkit = (Toolkit)1;
 			DataStore[10].VisualType = (VisualType)3;
 			DataStore[10].Seal();
 			DataStore[11].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[157];
-			DataStore[11].ExportGuid = default(System.Guid);
+			DataStore[11].ExportGuid = new Guid("1c75fb9c-8a35-43f9-8bbe-b7ae2d6ffc19");
+			DataStore[11].IsReadOnly = false;
 			DataStore[11].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
 			DataStore[11].Toolkit = (Toolkit)3;
 			DataStore[11].VisualType = (VisualType)3;
 			DataStore[11].Seal();
 			DataStore[12].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[158];
-			DataStore[12].ExportGuid = default(System.Guid);
+			DataStore[12].ExportGuid = new Guid("70669305-0ecf-4806-b1d9-a13e5893afad");
+			DataStore[12].IsReadOnly = false;
 			DataStore[12].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
 			DataStore[12].Toolkit = (Toolkit)0;
 			DataStore[12].VisualType = (VisualType)3;
 			DataStore[12].Seal();
 			DataStore[13].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[162];
-			DataStore[13].ExportGuid = default(System.Guid);
+			DataStore[13].ExportGuid = new Guid("23ed36e8-925e-4db8-a5b8-75bdc275d95e");
+			DataStore[13].IsReadOnly = false;
 			DataStore[13].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[13].Toolkit = (Toolkit)1;
 			DataStore[13].VisualType = (VisualType)1;
 			DataStore[13].Seal();
 			DataStore[14].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[163];
-			DataStore[14].ExportGuid = default(System.Guid);
+			DataStore[14].ExportGuid = new Guid("a3ac9eb0-db00-4db2-8b1b-fa3f7f46a90f");
+			DataStore[14].IsReadOnly = false;
 			DataStore[14].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[14].Toolkit = (Toolkit)3;
 			DataStore[14].VisualType = (VisualType)1;
 			DataStore[14].Seal();
 			DataStore[15].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[155];
-			DataStore[15].ExportGuid = default(System.Guid);
+			DataStore[15].ExportGuid = new Guid("a17d75a0-d0f9-49ae-a846-a72e65963ea3");
+			DataStore[15].IsReadOnly = false;
 			DataStore[15].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[15].Toolkit = (Toolkit)0;
 			DataStore[15].VisualType = (VisualType)21;
 			DataStore[15].Seal();
 			DataStore[16].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[164];
-			DataStore[16].ExportGuid = default(System.Guid);
+			DataStore[16].ExportGuid = new Guid("8fa28c18-ee3a-476c-a79d-d9ef61a943d8");
+			DataStore[16].IsReadOnly = false;
 			DataStore[16].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[16].Toolkit = (Toolkit)0;
 			DataStore[16].VisualType = (VisualType)1;
 			DataStore[16].Seal();
 			DataStore[17].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[148];
-			DataStore[17].ExportGuid = default(System.Guid);
+			DataStore[17].ExportGuid = new Guid("a58e047d-abac-4fb9-b9d0-9f5fbe238da5");
+			DataStore[17].IsReadOnly = false;
 			DataStore[17].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[8];
 			DataStore[17].Toolkit = (Toolkit)0;
 			DataStore[17].VisualType = (VisualType)26;
 			DataStore[17].Seal();
 			DataStore[18].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[146];
-			DataStore[18].ExportGuid = default(System.Guid);
+			DataStore[18].ExportGuid = new Guid("3fd9383c-ca6e-41dc-9dc1-3b24799f6871");
+			DataStore[18].IsReadOnly = false;
 			DataStore[18].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
 			DataStore[18].Toolkit = (Toolkit)0;
 			DataStore[18].VisualType = (VisualType)14;
 			DataStore[18].Seal();
 			DataStore[19].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[19].ExportGuid = default(System.Guid);
+			DataStore[19].ExportGuid = new Guid("7849bc8f-7fab-4206-8bbd-29846116e43e");
+			DataStore[19].IsReadOnly = false;
 			DataStore[19].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
 			DataStore[19].Toolkit = (Toolkit)1;
 			DataStore[19].VisualType = (VisualType)13;
 			DataStore[19].Seal();
 			DataStore[20].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[20].ExportGuid = default(System.Guid);
+			DataStore[20].ExportGuid = new Guid("b40c4296-aef6-45cb-8d87-7fc25d8dba80");
+			DataStore[20].IsReadOnly = false;
 			DataStore[20].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
 			DataStore[20].Toolkit = (Toolkit)3;
 			DataStore[20].VisualType = (VisualType)13;
 			DataStore[20].Seal();
 			DataStore[21].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[21].ExportGuid = default(System.Guid);
+			DataStore[21].ExportGuid = new Guid("42308536-6540-446c-858c-16caeed6a30f");
+			DataStore[21].IsReadOnly = false;
 			DataStore[21].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
 			DataStore[21].Toolkit = (Toolkit)0;
 			DataStore[21].VisualType = (VisualType)13;
 			DataStore[21].Seal();
 			DataStore[22].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[22].ExportGuid = default(System.Guid);
+			DataStore[22].ExportGuid = new Guid("0102974b-aa1b-4e11-9982-39019e77266e");
+			DataStore[22].IsReadOnly = false;
 			DataStore[22].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[22].Toolkit = (Toolkit)1;
 			DataStore[22].VisualType = (VisualType)13;
 			DataStore[22].Seal();
 			DataStore[23].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[23].ExportGuid = default(System.Guid);
+			DataStore[23].ExportGuid = new Guid("d28850d6-7af3-480f-8008-0f1acff83561");
+			DataStore[23].IsReadOnly = false;
 			DataStore[23].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[23].Toolkit = (Toolkit)3;
 			DataStore[23].VisualType = (VisualType)13;
 			DataStore[23].Seal();
 			DataStore[24].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[24].ExportGuid = default(System.Guid);
+			DataStore[24].ExportGuid = new Guid("07cd2f38-7ffb-423f-b31b-d0d3cd8dc24e");
+			DataStore[24].IsReadOnly = false;
 			DataStore[24].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[24].Toolkit = (Toolkit)0;
 			DataStore[24].VisualType = (VisualType)13;
 			DataStore[24].Seal();
 			DataStore[25].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[25].ExportGuid = default(System.Guid);
+			DataStore[25].ExportGuid = new Guid("74e02b55-d649-44bb-ac2e-05c00cbdf0e2");
+			DataStore[25].IsReadOnly = false;
 			DataStore[25].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[11];
 			DataStore[25].Toolkit = (Toolkit)1;
 			DataStore[25].VisualType = (VisualType)13;
 			DataStore[25].Seal();
 			DataStore[26].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[26].ExportGuid = default(System.Guid);
+			DataStore[26].ExportGuid = new Guid("0cb651ea-1ed0-4392-8ef1-3fbe63ec2858");
+			DataStore[26].IsReadOnly = false;
 			DataStore[26].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[11];
 			DataStore[26].Toolkit = (Toolkit)3;
 			DataStore[26].VisualType = (VisualType)13;
 			DataStore[26].Seal();
 			DataStore[27].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[27].ExportGuid = default(System.Guid);
+			DataStore[27].ExportGuid = new Guid("2316e5b4-b2e3-4eb0-b4d6-c1f14578b6a1");
+			DataStore[27].IsReadOnly = false;
 			DataStore[27].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[11];
 			DataStore[27].Toolkit = (Toolkit)0;
 			DataStore[27].VisualType = (VisualType)13;
 			DataStore[27].Seal();
 			DataStore[28].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[28].ExportGuid = default(System.Guid);
+			DataStore[28].ExportGuid = new Guid("71489267-5d51-4998-8c10-13fec631f806");
+			DataStore[28].IsReadOnly = false;
 			DataStore[28].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[28].Toolkit = (Toolkit)1;
 			DataStore[28].VisualType = (VisualType)13;
 			DataStore[28].Seal();
 			DataStore[29].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[29].ExportGuid = default(System.Guid);
+			DataStore[29].ExportGuid = new Guid("a8706c8a-fa6a-47ff-a63a-6a216966751e");
+			DataStore[29].IsReadOnly = false;
 			DataStore[29].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[29].Toolkit = (Toolkit)3;
 			DataStore[29].VisualType = (VisualType)13;
 			DataStore[29].Seal();
 			DataStore[30].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[30].ExportGuid = default(System.Guid);
+			DataStore[30].ExportGuid = new Guid("9c74aa99-6db8-45b5-8b18-e2c5d67b6fe4");
+			DataStore[30].IsReadOnly = false;
 			DataStore[30].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[30].Toolkit = (Toolkit)0;
 			DataStore[30].VisualType = (VisualType)13;
 			DataStore[30].Seal();
 			DataStore[31].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[31].ExportGuid = default(System.Guid);
+			DataStore[31].ExportGuid = new Guid("c41bef91-052c-4889-8e9c-4dcf40fba516");
+			DataStore[31].IsReadOnly = false;
 			DataStore[31].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[31].Toolkit = (Toolkit)1;
 			DataStore[31].VisualType = (VisualType)13;
 			DataStore[31].Seal();
 			DataStore[32].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[32].ExportGuid = default(System.Guid);
+			DataStore[32].ExportGuid = new Guid("7f9f7167-1e18-4e8d-aac7-a472f8c1c76f");
+			DataStore[32].IsReadOnly = false;
 			DataStore[32].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[32].Toolkit = (Toolkit)3;
 			DataStore[32].VisualType = (VisualType)13;
 			DataStore[32].Seal();
 			DataStore[33].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[151];
-			DataStore[33].ExportGuid = default(System.Guid);
+			DataStore[33].ExportGuid = new Guid("2699da6a-0fe8-4c91-ac62-00ca6f8359bb");
+			DataStore[33].IsReadOnly = false;
 			DataStore[33].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[33].Toolkit = (Toolkit)0;
 			DataStore[33].VisualType = (VisualType)5;
 			DataStore[33].Seal();
 			DataStore[34].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[278];
-			DataStore[34].ExportGuid = default(System.Guid);
+			DataStore[34].ExportGuid = new Guid("af750a10-d57e-4424-a0c7-2257b47c2b23");
+			DataStore[34].IsReadOnly = false;
 			DataStore[34].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[15];
 			DataStore[34].Toolkit = (Toolkit)0;
 			DataStore[34].VisualType = (VisualType)2;
 			DataStore[34].Seal();
 			DataStore[35].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[35].ExportGuid = default(System.Guid);
+			DataStore[35].ExportGuid = new Guid("d265b27e-c5f4-4f5e-9d2d-c0b23ca040b5");
+			DataStore[35].IsReadOnly = false;
 			DataStore[35].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[16];
 			DataStore[35].Toolkit = (Toolkit)1;
 			DataStore[35].VisualType = (VisualType)13;
 			DataStore[35].Seal();
 			DataStore[36].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[36].ExportGuid = default(System.Guid);
+			DataStore[36].ExportGuid = new Guid("6b7f2152-b5c6-42e8-bc24-f3f544449ea7");
+			DataStore[36].IsReadOnly = false;
 			DataStore[36].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[16];
 			DataStore[36].Toolkit = (Toolkit)3;
 			DataStore[36].VisualType = (VisualType)13;
 			DataStore[36].Seal();
 			DataStore[37].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[37].ExportGuid = default(System.Guid);
+			DataStore[37].ExportGuid = new Guid("75e6dab9-74f7-42f6-8fec-3b001bf5bf85");
+			DataStore[37].IsReadOnly = false;
 			DataStore[37].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[16];
 			DataStore[37].Toolkit = (Toolkit)0;
 			DataStore[37].VisualType = (VisualType)13;
 			DataStore[37].Seal();
 			DataStore[38].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[38].ExportGuid = default(System.Guid);
+			DataStore[38].ExportGuid = new Guid("6f14e178-c92b-4a86-aee5-623a4ecbc3d3");
+			DataStore[38].IsReadOnly = false;
 			DataStore[38].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[17];
 			DataStore[38].Toolkit = (Toolkit)1;
 			DataStore[38].VisualType = (VisualType)13;
 			DataStore[38].Seal();
 			DataStore[39].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[39].ExportGuid = default(System.Guid);
+			DataStore[39].ExportGuid = new Guid("2d420b75-5fb1-4739-b602-28367fa9e517");
+			DataStore[39].IsReadOnly = false;
 			DataStore[39].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[17];
 			DataStore[39].Toolkit = (Toolkit)3;
 			DataStore[39].VisualType = (VisualType)13;
 			DataStore[39].Seal();
 			DataStore[40].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[40].ExportGuid = default(System.Guid);
+			DataStore[40].ExportGuid = new Guid("02e540b7-3dfc-4007-8304-268f1b4cef40");
+			DataStore[40].IsReadOnly = false;
 			DataStore[40].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[17];
 			DataStore[40].Toolkit = (Toolkit)0;
 			DataStore[40].VisualType = (VisualType)13;
 			DataStore[40].Seal();
 			DataStore[41].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[41].ExportGuid = default(System.Guid);
+			DataStore[41].ExportGuid = new Guid("e34ec656-b2b9-4d54-b98d-a749123daae6");
+			DataStore[41].IsReadOnly = false;
 			DataStore[41].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[18];
 			DataStore[41].Toolkit = (Toolkit)1;
 			DataStore[41].VisualType = (VisualType)13;
 			DataStore[41].Seal();
 			DataStore[42].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[42].ExportGuid = default(System.Guid);
+			DataStore[42].ExportGuid = new Guid("9e36e354-b121-4d4d-ba18-a93ff064c53a");
+			DataStore[42].IsReadOnly = false;
 			DataStore[42].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[18];
 			DataStore[42].Toolkit = (Toolkit)3;
 			DataStore[42].VisualType = (VisualType)13;
 			DataStore[42].Seal();
 			DataStore[43].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[43].ExportGuid = default(System.Guid);
+			DataStore[43].ExportGuid = new Guid("41a9f73d-1ee1-4cb1-9494-13cc5eaaa5f3");
+			DataStore[43].IsReadOnly = false;
 			DataStore[43].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[18];
 			DataStore[43].Toolkit = (Toolkit)0;
 			DataStore[43].VisualType = (VisualType)13;
 			DataStore[43].Seal();
 			DataStore[44].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[44].ExportGuid = default(System.Guid);
+			DataStore[44].ExportGuid = new Guid("296dfe59-c059-43cf-8d3b-6b03f168825c");
+			DataStore[44].IsReadOnly = false;
 			DataStore[44].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[19];
 			DataStore[44].Toolkit = (Toolkit)1;
 			DataStore[44].VisualType = (VisualType)13;
 			DataStore[44].Seal();
 			DataStore[45].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[45].ExportGuid = default(System.Guid);
+			DataStore[45].ExportGuid = new Guid("00ea4d0d-061b-4438-9873-8fcb62ed14e7");
+			DataStore[45].IsReadOnly = false;
 			DataStore[45].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[19];
 			DataStore[45].Toolkit = (Toolkit)3;
 			DataStore[45].VisualType = (VisualType)13;
 			DataStore[45].Seal();
 			DataStore[46].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[46].ExportGuid = default(System.Guid);
+			DataStore[46].ExportGuid = new Guid("f01e2a40-ce04-4fb5-a0f2-4c234dba0bac");
+			DataStore[46].IsReadOnly = false;
 			DataStore[46].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[19];
 			DataStore[46].Toolkit = (Toolkit)0;
 			DataStore[46].VisualType = (VisualType)13;
 			DataStore[46].Seal();
 			DataStore[47].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[47].ExportGuid = default(System.Guid);
+			DataStore[47].ExportGuid = new Guid("e8bf5210-1d62-417a-9c64-1762e2b1486f");
+			DataStore[47].IsReadOnly = false;
 			DataStore[47].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[20];
 			DataStore[47].Toolkit = (Toolkit)1;
 			DataStore[47].VisualType = (VisualType)13;
 			DataStore[47].Seal();
 			DataStore[48].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[48].ExportGuid = default(System.Guid);
+			DataStore[48].ExportGuid = new Guid("be0bf52e-0e14-473a-8ba7-87d01183673d");
+			DataStore[48].IsReadOnly = false;
 			DataStore[48].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[20];
 			DataStore[48].Toolkit = (Toolkit)3;
 			DataStore[48].VisualType = (VisualType)13;
 			DataStore[48].Seal();
 			DataStore[49].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[151];
-			DataStore[49].ExportGuid = default(System.Guid);
+			DataStore[49].ExportGuid = new Guid("253b4c30-8868-4af4-8272-434097d64144");
+			DataStore[49].IsReadOnly = false;
 			DataStore[49].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[20];
 			DataStore[49].Toolkit = (Toolkit)0;
 			DataStore[49].VisualType = (VisualType)5;
 			DataStore[49].Seal();
 			DataStore[50].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[50].ExportGuid = default(System.Guid);
+			DataStore[50].ExportGuid = new Guid("c40a058e-3a3f-472f-a1b5-5a592b37e845");
+			DataStore[50].IsReadOnly = false;
 			DataStore[50].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[21];
 			DataStore[50].Toolkit = (Toolkit)1;
 			DataStore[50].VisualType = (VisualType)13;
 			DataStore[50].Seal();
 			DataStore[51].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[51].ExportGuid = default(System.Guid);
+			DataStore[51].ExportGuid = new Guid("8666231f-c280-4e8f-b0ea-e246485d7634");
+			DataStore[51].IsReadOnly = false;
 			DataStore[51].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[21];
 			DataStore[51].Toolkit = (Toolkit)3;
 			DataStore[51].VisualType = (VisualType)13;
 			DataStore[51].Seal();
 			DataStore[52].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[147];
-			DataStore[52].ExportGuid = default(System.Guid);
+			DataStore[52].ExportGuid = new Guid("66592d7b-6bad-4eb8-93a3-3203ff11ef4a");
+			DataStore[52].IsReadOnly = false;
 			DataStore[52].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[21];
 			DataStore[52].Toolkit = (Toolkit)0;
 			DataStore[52].VisualType = (VisualType)15;
 			DataStore[52].Seal();
 			DataStore[53].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[53].ExportGuid = default(System.Guid);
+			DataStore[53].ExportGuid = new Guid("58da1acb-55d8-4da8-a8ff-f6211d192ba4");
+			DataStore[53].IsReadOnly = false;
 			DataStore[53].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[22];
 			DataStore[53].Toolkit = (Toolkit)1;
 			DataStore[53].VisualType = (VisualType)13;
 			DataStore[53].Seal();
 			DataStore[54].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[54].ExportGuid = default(System.Guid);
+			DataStore[54].ExportGuid = new Guid("5e4e0e9b-c697-45ae-8e03-c678cc90b8b2");
+			DataStore[54].IsReadOnly = false;
 			DataStore[54].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[22];
 			DataStore[54].Toolkit = (Toolkit)3;
 			DataStore[54].VisualType = (VisualType)13;
 			DataStore[54].Seal();
 			DataStore[55].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[147];
-			DataStore[55].ExportGuid = default(System.Guid);
+			DataStore[55].ExportGuid = new Guid("2e448b60-755c-4fb5-9099-8cd0b4fcca64");
+			DataStore[55].IsReadOnly = false;
 			DataStore[55].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[22];
 			DataStore[55].Toolkit = (Toolkit)0;
 			DataStore[55].VisualType = (VisualType)15;
 			DataStore[55].Seal();
 			DataStore[56].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[56].ExportGuid = default(System.Guid);
+			DataStore[56].ExportGuid = new Guid("5c25efaf-1ec0-47dd-b70d-d8821cd23a6e");
+			DataStore[56].IsReadOnly = false;
 			DataStore[56].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[23];
 			DataStore[56].Toolkit = (Toolkit)1;
 			DataStore[56].VisualType = (VisualType)13;
 			DataStore[56].Seal();
 			DataStore[57].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[57].ExportGuid = default(System.Guid);
+			DataStore[57].ExportGuid = new Guid("f58d4744-98a2-4cf7-b05e-1076b8ceb37b");
+			DataStore[57].IsReadOnly = false;
 			DataStore[57].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[23];
 			DataStore[57].Toolkit = (Toolkit)3;
 			DataStore[57].VisualType = (VisualType)13;
 			DataStore[57].Seal();
 			DataStore[58].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[147];
-			DataStore[58].ExportGuid = default(System.Guid);
+			DataStore[58].ExportGuid = new Guid("6101e0d2-64b2-4166-81f2-af9846081695");
+			DataStore[58].IsReadOnly = false;
 			DataStore[58].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[23];
 			DataStore[58].Toolkit = (Toolkit)0;
 			DataStore[58].VisualType = (VisualType)15;
 			DataStore[58].Seal();
 			DataStore[59].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[59].ExportGuid = default(System.Guid);
+			DataStore[59].ExportGuid = new Guid("b6021713-ce43-4b97-9112-45016964c355");
+			DataStore[59].IsReadOnly = false;
 			DataStore[59].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[59].Toolkit = (Toolkit)1;
 			DataStore[59].VisualType = (VisualType)13;
 			DataStore[59].Seal();
 			DataStore[60].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[60].ExportGuid = default(System.Guid);
+			DataStore[60].ExportGuid = new Guid("e8e57bf6-f2c4-4c67-9ec3-df81cf85f631");
+			DataStore[60].IsReadOnly = false;
 			DataStore[60].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[60].Toolkit = (Toolkit)3;
 			DataStore[60].VisualType = (VisualType)13;
 			DataStore[60].Seal();
 			DataStore[61].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[147];
-			DataStore[61].ExportGuid = default(System.Guid);
+			DataStore[61].ExportGuid = new Guid("192702b5-0c7d-4ff5-a7a7-e74211562580");
+			DataStore[61].IsReadOnly = false;
 			DataStore[61].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[61].Toolkit = (Toolkit)0;
 			DataStore[61].VisualType = (VisualType)15;
 			DataStore[61].Seal();
 			DataStore[62].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[62].ExportGuid = default(System.Guid);
+			DataStore[62].ExportGuid = new Guid("235d9291-21bc-4718-97a7-577f359abe55");
+			DataStore[62].IsReadOnly = false;
 			DataStore[62].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[25];
 			DataStore[62].Toolkit = (Toolkit)1;
 			DataStore[62].VisualType = (VisualType)13;
 			DataStore[62].Seal();
 			DataStore[63].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[63].ExportGuid = default(System.Guid);
+			DataStore[63].ExportGuid = new Guid("f97925d0-630f-438e-99a0-0c6ddb8001f5");
+			DataStore[63].IsReadOnly = false;
 			DataStore[63].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[25];
 			DataStore[63].Toolkit = (Toolkit)3;
 			DataStore[63].VisualType = (VisualType)13;
 			DataStore[63].Seal();
 			DataStore[64].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[147];
-			DataStore[64].ExportGuid = default(System.Guid);
+			DataStore[64].ExportGuid = new Guid("2f23f732-aa79-4e01-b136-369b938cc21e");
+			DataStore[64].IsReadOnly = false;
 			DataStore[64].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[25];
 			DataStore[64].Toolkit = (Toolkit)0;
 			DataStore[64].VisualType = (VisualType)15;
 			DataStore[64].Seal();
 			DataStore[65].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[565];
-			DataStore[65].ExportGuid = default(System.Guid);
+			DataStore[65].ExportGuid = new Guid("1218bf45-d2a5-4a66-b75c-9224aedc14ae");
+			DataStore[65].IsReadOnly = false;
 			DataStore[65].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[38];
 			DataStore[65].Toolkit = (Toolkit)0;
 			DataStore[65].VisualType = (VisualType)24;
 			DataStore[65].Seal();
 			DataStore[66].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[566];
-			DataStore[66].ExportGuid = default(System.Guid);
+			DataStore[66].ExportGuid = new Guid("7530d91c-ed64-4337-af8f-3a2b82b738d1");
+			DataStore[66].IsReadOnly = false;
 			DataStore[66].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[37];
 			DataStore[66].Toolkit = (Toolkit)0;
 			DataStore[66].VisualType = (VisualType)1;
 			DataStore[66].Seal();
 			DataStore[67].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
-			DataStore[67].ExportGuid = default(System.Guid);
+			DataStore[67].ExportGuid = new Guid("b634f439-5e72-41d1-935f-18db80ef2ed9");
+			DataStore[67].IsReadOnly = false;
 			DataStore[67].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[67].Toolkit = (Toolkit)1;
 			DataStore[67].VisualType = (VisualType)27;
 			DataStore[67].Seal();
 			DataStore[68].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[153];
-			DataStore[68].ExportGuid = default(System.Guid);
+			DataStore[68].ExportGuid = new Guid("12bb52c4-d646-433d-92de-0ff4d9dd61f5");
+			DataStore[68].IsReadOnly = false;
 			DataStore[68].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[68].Toolkit = (Toolkit)3;
 			DataStore[68].VisualType = (VisualType)27;
 			DataStore[68].Seal();
 			DataStore[69].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[69].ExportGuid = default(System.Guid);
+			DataStore[69].ExportGuid = new Guid("ef91f0f1-4d92-44ba-92b9-bb638bb8fa35");
+			DataStore[69].IsReadOnly = false;
 			DataStore[69].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[69].Toolkit = (Toolkit)0;
 			DataStore[69].VisualType = (VisualType)27;
 			DataStore[69].Seal();
 			DataStore[70].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[573];
-			DataStore[70].ExportGuid = default(System.Guid);
+			DataStore[70].ExportGuid = new Guid("2d56fc58-a9b7-4f88-aa13-00d6bde234c6");
+			DataStore[70].IsReadOnly = false;
 			DataStore[70].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[70].Toolkit = (Toolkit)0;
 			DataStore[70].VisualType = (VisualType)28;
 			DataStore[70].Seal();
 			DataStore[71].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[573];
-			DataStore[71].ExportGuid = default(System.Guid);
+			DataStore[71].ExportGuid = new Guid("f62f951f-1ac3-4145-b2fa-7e2363d1281f");
+			DataStore[71].IsReadOnly = false;
 			DataStore[71].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[9];
 			DataStore[71].Toolkit = (Toolkit)0;
 			DataStore[71].VisualType = (VisualType)28;
 			DataStore[71].Seal();
 			DataStore[72].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[72].ExportGuid = default(System.Guid);
+			DataStore[72].ExportGuid = new Guid("fe63f61d-78da-4444-a1c6-08c10b08ca2d");
+			DataStore[72].IsReadOnly = false;
 			DataStore[72].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[16];
 			DataStore[72].Toolkit = (Toolkit)0;
 			DataStore[72].VisualType = (VisualType)28;
 			DataStore[72].Seal();
 			DataStore[73].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[73].ExportGuid = default(System.Guid);
+			DataStore[73].ExportGuid = new Guid("878d5374-b0f4-4311-8698-c554c3fd45f7");
+			DataStore[73].IsReadOnly = false;
 			DataStore[73].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[14];
 			DataStore[73].Toolkit = (Toolkit)0;
 			DataStore[73].VisualType = (VisualType)28;
 			DataStore[73].Seal();
 			DataStore[74].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[574];
-			DataStore[74].ExportGuid = default(System.Guid);
+			DataStore[74].ExportGuid = new Guid("82692cc1-fdb1-4299-839f-04e7db35561d");
+			DataStore[74].IsReadOnly = false;
 			DataStore[74].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
 			DataStore[74].Toolkit = (Toolkit)0;
 			DataStore[74].VisualType = (VisualType)28;
 			DataStore[74].Seal();
 			DataStore[75].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[75].ExportGuid = default(System.Guid);
+			DataStore[75].ExportGuid = new Guid("9b0a6948-21cd-41e3-99b5-455b9610db70");
+			DataStore[75].IsReadOnly = false;
 			DataStore[75].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
 			DataStore[75].Toolkit = (Toolkit)0;
 			DataStore[75].VisualType = (VisualType)28;
 			DataStore[75].Seal();
 			DataStore[76].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[76].ExportGuid = default(System.Guid);
+			DataStore[76].ExportGuid = new Guid("0e8aa314-6352-414a-9d72-368b76e6a53e");
+			DataStore[76].IsReadOnly = false;
 			DataStore[76].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
 			DataStore[76].Toolkit = (Toolkit)0;
 			DataStore[76].VisualType = (VisualType)28;
 			DataStore[76].Seal();
 			DataStore[77].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[573];
-			DataStore[77].ExportGuid = default(System.Guid);
+			DataStore[77].ExportGuid = new Guid("4580239b-c5fd-4093-8a07-9038a7f5af96");
+			DataStore[77].IsReadOnly = false;
 			DataStore[77].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[11];
 			DataStore[77].Toolkit = (Toolkit)0;
 			DataStore[77].VisualType = (VisualType)28;
 			DataStore[77].Seal();
 			DataStore[78].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[573];
-			DataStore[78].ExportGuid = default(System.Guid);
+			DataStore[78].ExportGuid = new Guid("c9a50d83-138e-485d-9941-2c7de7e63f8b");
+			DataStore[78].IsReadOnly = false;
 			DataStore[78].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[12];
 			DataStore[78].Toolkit = (Toolkit)0;
 			DataStore[78].VisualType = (VisualType)28;
 			DataStore[78].Seal();
 			DataStore[80].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[80].ExportGuid = default(System.Guid);
+			DataStore[80].ExportGuid = new Guid("72ce3557-ea04-40a9-877c-26923dad8f01");
+			DataStore[80].IsReadOnly = false;
 			DataStore[80].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[17];
 			DataStore[80].Toolkit = (Toolkit)0;
 			DataStore[80].VisualType = (VisualType)28;
 			DataStore[80].Seal();
 			DataStore[81].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[81].ExportGuid = default(System.Guid);
+			DataStore[81].ExportGuid = new Guid("dbe4107f-c3aa-488f-a30e-711aba991392");
+			DataStore[81].IsReadOnly = false;
 			DataStore[81].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[18];
 			DataStore[81].Toolkit = (Toolkit)0;
 			DataStore[81].VisualType = (VisualType)28;
 			DataStore[81].Seal();
 			DataStore[82].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[82].ExportGuid = default(System.Guid);
+			DataStore[82].ExportGuid = new Guid("4fef921d-2d7a-4ace-a0e8-02c5af07ed6b");
+			DataStore[82].IsReadOnly = false;
 			DataStore[82].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[19];
 			DataStore[82].Toolkit = (Toolkit)0;
 			DataStore[82].VisualType = (VisualType)28;
 			DataStore[82].Seal();
 			DataStore[83].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[83].ExportGuid = default(System.Guid);
+			DataStore[83].ExportGuid = new Guid("95436be1-72ee-4641-b966-8ca600573676");
+			DataStore[83].IsReadOnly = false;
 			DataStore[83].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[20];
 			DataStore[83].Toolkit = (Toolkit)0;
 			DataStore[83].VisualType = (VisualType)28;
 			DataStore[83].Seal();
 			DataStore[84].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[84].ExportGuid = default(System.Guid);
+			DataStore[84].ExportGuid = new Guid("ca42741c-44c0-4f6e-936d-9891f84db686");
+			DataStore[84].IsReadOnly = false;
 			DataStore[84].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[25];
 			DataStore[84].Toolkit = (Toolkit)0;
 			DataStore[84].VisualType = (VisualType)28;
 			DataStore[84].Seal();
 			DataStore[85].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[85].ExportGuid = default(System.Guid);
+			DataStore[85].ExportGuid = new Guid("49af9ae7-ebc4-4a54-8afe-96856a66a00e");
+			DataStore[85].IsReadOnly = false;
 			DataStore[85].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[85].Toolkit = (Toolkit)0;
 			DataStore[85].VisualType = (VisualType)28;
 			DataStore[85].Seal();
 			DataStore[86].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[86].ExportGuid = default(System.Guid);
+			DataStore[86].ExportGuid = new Guid("17511894-ca19-4739-9581-6883ffdec782");
+			DataStore[86].IsReadOnly = false;
 			DataStore[86].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[23];
 			DataStore[86].Toolkit = (Toolkit)0;
 			DataStore[86].VisualType = (VisualType)28;
 			DataStore[86].Seal();
 			DataStore[87].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[87].ExportGuid = default(System.Guid);
+			DataStore[87].ExportGuid = new Guid("3ccd189a-58f4-4ab2-8d54-d4bdc3d8facf");
+			DataStore[87].IsReadOnly = false;
 			DataStore[87].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[22];
 			DataStore[87].Toolkit = (Toolkit)0;
 			DataStore[87].VisualType = (VisualType)28;
 			DataStore[87].Seal();
 			DataStore[88].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[88].ExportGuid = default(System.Guid);
+			DataStore[88].ExportGuid = new Guid("a0238c00-3eb0-4cd7-b92e-085ddeae3d8b");
+			DataStore[88].IsReadOnly = false;
 			DataStore[88].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[21];
 			DataStore[88].Toolkit = (Toolkit)0;
 			DataStore[88].VisualType = (VisualType)28;
 			DataStore[88].Seal();
 			DataStore[89].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[571];
-			DataStore[89].ExportGuid = default(System.Guid);
+			DataStore[89].ExportGuid = new Guid("4d7f81db-8ab5-400a-9557-9cffa4c24f7d");
+			DataStore[89].IsReadOnly = false;
 			DataStore[89].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[8];
 			DataStore[89].Toolkit = (Toolkit)0;
 			DataStore[89].VisualType = (VisualType)28;
 			DataStore[89].Seal();
 			DataStore[90].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[572];
-			DataStore[90].ExportGuid = default(System.Guid);
+			DataStore[90].ExportGuid = new Guid("dfb5fb2c-4d35-4068-a718-29d1fb7a44e4");
+			DataStore[90].IsReadOnly = false;
 			DataStore[90].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[90].Toolkit = (Toolkit)0;
 			DataStore[90].VisualType = (VisualType)28;
 			DataStore[90].Seal();
+			DataStore[92].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[579];
+			DataStore[92].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[92].IsReadOnly = true;
+			DataStore[92].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[2];
+			DataStore[92].Toolkit = (Toolkit)0;
+			DataStore[92].VisualType = (VisualType)0;
+			DataStore[92].Seal();
 	
 		}
 #region Serializer

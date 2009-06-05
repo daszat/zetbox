@@ -48,7 +48,7 @@ this.WriteObjects("                return ",  backingName , ";\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (IsReadonly) throw new ReadOnlyObjectException();\r\n");
+this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
 this.WriteObjects("                if (",  backingName , " != value)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var __oldValue = ",  backingName , ";\r\n");

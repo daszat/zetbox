@@ -41,7 +41,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Length != value)
                 {
 					var __oldValue = _Length;
@@ -425,7 +425,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[196],
 			DataStore[9].ExportGuid = new Guid("8c474623-7e53-4ca6-a996-f3b5a8c72834");
 			DataStore[9].IsIndexed = false;
 			DataStore[9].IsList = false;
-			DataStore[9].IsNullable = true;
+			DataStore[9].IsNullable = false;
 			DataStore[9].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[9].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
 			DataStore[9].PropertyName = @"PropertyName";

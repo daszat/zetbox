@@ -56,7 +56,7 @@ namespace Kistl.App.Projekte
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
 
                 // shortcut noops
                 if (value == null && _fk_A == null)
@@ -87,7 +87,7 @@ namespace Kistl.App.Projekte
             }
             private set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_A != value)
                 {
                     var __oldValue = _fk_A;
@@ -106,7 +106,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_A_pos != value)
                 {
                     var __oldValue = _A_pos;
@@ -135,7 +135,7 @@ namespace Kistl.App.Projekte
             set
             {
                 // TODO: only accept objects from same Context
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
 
                 // shortcut noops
                 if (value == null && _fk_B == null)
@@ -166,7 +166,7 @@ namespace Kistl.App.Projekte
             }
             private set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_fk_B != value)
                 {
                     var __oldValue = _fk_B;
@@ -185,7 +185,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_B_pos != value)
                 {
                     var __oldValue = _B_pos;

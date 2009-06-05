@@ -59,22 +59,6 @@ namespace Kistl.Client.Presentables
         }
         private ObservableCollection<ModuleModel> _modulesCache;
 
-        private SaveContextCommand _saveCommand;
-        /// <summary>
-        /// This command submits all outstanding changes of this Workspace to the data store.
-        /// The parameter has to be <value>null</value>.
-        /// </summary>
-        public ICommand SaveCommand
-        {
-            get
-            {
-                if (_saveCommand == null)
-                    _saveCommand = Factory.CreateSpecificModel<SaveContextCommand>(DataContext);
-
-                return _saveCommand;
-            }
-        }
-
         private DataObjectModel _selectedItem;
         public DataObjectModel SelectedItem
         {
@@ -106,6 +90,26 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
+        #region Commands
+
+        private SaveContextCommand _saveCommand;
+        /// <summary>
+        /// This command submits all outstanding changes of this Workspace to the data store.
+        /// The parameter has to be <value>null</value>.
+        /// </summary>
+        public ICommand SaveCommand
+        {
+            get
+            {
+                if (_saveCommand == null)
+                    _saveCommand = Factory.CreateSpecificModel<SaveContextCommand>(DataContext);
+
+                return _saveCommand;
+            }
+        }
+
+        #endregion
+
         #region Utilities and UI callbacks
 
         private void LoadModules()
@@ -121,6 +125,10 @@ namespace Kistl.Client.Presentables
 
     }
 
+    /// <summary>
+    /// This command submits all outstanding changes of this Workspace to the data store.
+    /// The parameter has to be <value>null</value>.
+    /// </summary>
     public class SaveContextCommand : CommandModel
     {
         public SaveContextCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)

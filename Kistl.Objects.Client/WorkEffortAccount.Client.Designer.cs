@@ -44,7 +44,7 @@ namespace Kistl.App.TimeRecords
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_BudgetHours != value)
                 {
 					var __oldValue = _BudgetHours;
@@ -92,7 +92,7 @@ namespace Kistl.App.TimeRecords
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Name != value)
                 {
 					var __oldValue = _Name;
@@ -117,7 +117,7 @@ namespace Kistl.App.TimeRecords
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Notes != value)
                 {
 					var __oldValue = _Notes;
@@ -142,7 +142,7 @@ namespace Kistl.App.TimeRecords
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_SpentHours != value)
                 {
 					var __oldValue = _SpentHours;

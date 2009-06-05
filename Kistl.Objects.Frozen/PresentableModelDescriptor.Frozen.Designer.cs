@@ -41,7 +41,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_DefaultVisualType != value)
                 {
 					var __oldValue = _DefaultVisualType;
@@ -66,7 +66,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
 					var __oldValue = _Description;
@@ -91,7 +91,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -116,7 +116,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_PresentableModelRef != value)
                 {
 					var __oldValue = _PresentableModelRef;
@@ -285,162 +285,162 @@ namespace Kistl.App.GUI
 		internal static void FillDataStore() {
 			DataStore[1].DefaultVisualType = (VisualType)22;
 			DataStore[1].Description = @"A debugger window showing the used IKistlContexts and their AttachedObjects";
-			DataStore[1].ExportGuid = default(System.Guid);
+			DataStore[1].ExportGuid = new Guid("b1df266b-a841-4669-9199-a6a01f6dbfcc");
 			DataStore[1].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[95];
 			DataStore[1].Seal();
 			DataStore[2].DefaultVisualType = (VisualType)24;
 			DataStore[2].Description = @"A top-level window containing a Workspace, a visual representation for IKistlContext";
-			DataStore[2].ExportGuid = default(System.Guid);
+			DataStore[2].ExportGuid = new Guid("ffc833d5-a2a5-4cde-8335-6285973742d8");
 			DataStore[2].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[13];
 			DataStore[2].Seal();
 			DataStore[3].DefaultVisualType = (VisualType)23;
 			DataStore[3].Description = @"A task for the user: select an IDataObject from a list";
-			DataStore[3].ExportGuid = default(System.Guid);
+			DataStore[3].ExportGuid = new Guid("7ec25c1a-c819-4219-9432-af1fdb0aaf63");
 			DataStore[3].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[18];
 			DataStore[3].Seal();
 			DataStore[4].DefaultVisualType = (VisualType)17;
 			DataStore[4].Description = @"An action which can be triggered by the user";
-			DataStore[4].ExportGuid = default(System.Guid);
+			DataStore[4].ExportGuid = new Guid("3d779eaf-1c37-4c3b-822b-0b1af0926802");
 			DataStore[4].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[16];
 			DataStore[4].Seal();
 			DataStore[5].DefaultVisualType = (VisualType)4;
 			DataStore[5].Description = @"A reference to an IDataObject";
-			DataStore[5].ExportGuid = default(System.Guid);
+			DataStore[5].ExportGuid = new Guid("83aae6fd-0fae-4348-b313-737a6e751027");
 			DataStore[5].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[34];
 			DataStore[5].Seal();
 			DataStore[6].DefaultVisualType = (VisualType)3;
 			DataStore[6].Description = @"A list of IDataObjects";
-			DataStore[6].ExportGuid = default(System.Guid);
+			DataStore[6].ExportGuid = new Guid("9fce01fe-fd6d-4e21-8b55-08d5e38aea36");
 			DataStore[6].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[17];
 			DataStore[6].Seal();
 			DataStore[7].DefaultVisualType = (VisualType)1;
 			DataStore[7].Description = @"A complete IDataObject";
-			DataStore[7].ExportGuid = default(System.Guid);
+			DataStore[7].ExportGuid = new Guid("d8e95ac5-d46a-4dfa-a574-12ea299eadc4");
 			DataStore[7].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[83];
 			DataStore[7].Seal();
 			DataStore[8].DefaultVisualType = (VisualType)26;
 			DataStore[8].Description = @"Select a string value from a set of values";
-			DataStore[8].ExportGuid = default(System.Guid);
+			DataStore[8].ExportGuid = new Guid("d1135824-6e2a-41e7-a1db-83621b5de078");
 			DataStore[8].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[394];
 			DataStore[8].Seal();
 			DataStore[9].DefaultVisualType = (VisualType)13;
 			DataStore[9].Description = @"A string attribute";
-			DataStore[9].ExportGuid = default(System.Guid);
+			DataStore[9].ExportGuid = new Guid("975eee82-e7e1-4a12-ab43-d2e3bc3766e4");
 			DataStore[9].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[384];
 			DataStore[9].Seal();
 			DataStore[10].DefaultVisualType = (VisualType)13;
 			DataStore[10].Description = @"An integer attribute";
-			DataStore[10].ExportGuid = default(System.Guid);
+			DataStore[10].ExportGuid = new Guid("edaf9334-dc36-4778-aa33-1e5cdaeeb767");
 			DataStore[10].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[399];
 			DataStore[10].Seal();
 			DataStore[11].DefaultVisualType = (VisualType)13;
 			DataStore[11].Description = @"A floating point attribute";
-			DataStore[11].ExportGuid = default(System.Guid);
+			DataStore[11].ExportGuid = new Guid("3a3d0c1c-679e-4d4d-adeb-3ab260079ccb");
 			DataStore[11].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[404];
 			DataStore[11].Seal();
 			DataStore[12].DefaultVisualType = (VisualType)13;
 			DataStore[12].Description = @"A date and time attribute";
-			DataStore[12].ExportGuid = default(System.Guid);
+			DataStore[12].ExportGuid = new Guid("fc74b434-3801-4e4a-ab67-e65a9e014005");
 			DataStore[12].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[409];
 			DataStore[12].Seal();
 			DataStore[13].DefaultVisualType = (VisualType)5;
 			DataStore[13].Description = @"A simple true/false attribute";
-			DataStore[13].ExportGuid = default(System.Guid);
+			DataStore[13].ExportGuid = new Guid("09d1f453-d0d9-429e-88e7-e84b33de7c2e");
 			DataStore[13].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[414];
 			DataStore[13].Seal();
 			DataStore[14].DefaultVisualType = (VisualType)4;
 			DataStore[14].Description = @"A method returning an IDataObject reference";
-			DataStore[14].ExportGuid = default(System.Guid);
+			DataStore[14].ExportGuid = new Guid("c799b6bf-a1f7-4374-99df-3ebae6e52ef0");
 			DataStore[14].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[448];
 			DataStore[14].Seal();
 			DataStore[15].DefaultVisualType = (VisualType)2;
 			DataStore[15].Description = @"A group of properties";
-			DataStore[15].ExportGuid = default(System.Guid);
+			DataStore[15].ExportGuid = new Guid("ac2f4c88-333a-4917-a0b5-a39ad7ea991a");
 			DataStore[15].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[283];
 			DataStore[15].Seal();
 			DataStore[16].DefaultVisualType = (VisualType)13;
 			DataStore[16].Description = @"A method returning a string";
-			DataStore[16].ExportGuid = default(System.Guid);
+			DataStore[16].ExportGuid = new Guid("75aef030-0c25-4306-b6d2-ca8c7cd672dd");
 			DataStore[16].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[450];
 			DataStore[16].Seal();
 			DataStore[17].DefaultVisualType = (VisualType)13;
 			DataStore[17].Description = @"A method returning an integer value";
-			DataStore[17].ExportGuid = default(System.Guid);
+			DataStore[17].ExportGuid = new Guid("1f4e8593-5675-4f0a-9454-7cb888cfe6e1");
 			DataStore[17].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[454];
 			DataStore[17].Seal();
 			DataStore[18].DefaultVisualType = (VisualType)13;
 			DataStore[18].Description = @"A method returning a floating point value";
-			DataStore[18].ExportGuid = default(System.Guid);
+			DataStore[18].ExportGuid = new Guid("677a70dc-a7ec-4f41-9aae-9e87949489db");
 			DataStore[18].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[458];
 			DataStore[18].Seal();
 			DataStore[19].DefaultVisualType = (VisualType)13;
 			DataStore[19].Description = @"A method returning a date and time value";
-			DataStore[19].ExportGuid = default(System.Guid);
+			DataStore[19].ExportGuid = new Guid("e60611f1-025e-49f3-854e-c682127bc247");
 			DataStore[19].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[462];
 			DataStore[19].Seal();
 			DataStore[20].DefaultVisualType = (VisualType)5;
 			DataStore[20].Description = @"A method returning true or false";
-			DataStore[20].ExportGuid = default(System.Guid);
+			DataStore[20].ExportGuid = new Guid("ae255750-0147-4e61-9426-8b7232c927fc");
 			DataStore[20].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[466];
 			DataStore[20].Seal();
 			DataStore[21].DefaultVisualType = (VisualType)15;
 			DataStore[21].Description = @"An enumeration value for Multiplicity";
-			DataStore[21].ExportGuid = default(System.Guid);
+			DataStore[21].ExportGuid = new Guid("4b7ef800-2ddb-4b99-b0d4-aefd9373ba70");
 			DataStore[21].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[273];
 			DataStore[21].Seal();
 			DataStore[22].DefaultVisualType = (VisualType)15;
 			DataStore[22].Description = @"An enumeration value for StorageType";
-			DataStore[22].ExportGuid = default(System.Guid);
+			DataStore[22].ExportGuid = new Guid("0151803d-60f4-428a-8b69-a77b783bbc54");
 			DataStore[22].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[274];
 			DataStore[22].Seal();
 			DataStore[23].DefaultVisualType = (VisualType)15;
 			DataStore[23].Description = @"An enumeration value for VisualType";
-			DataStore[23].ExportGuid = default(System.Guid);
+			DataStore[23].ExportGuid = new Guid("0b8b98cf-a618-49e8-a2f3-9c3c6b9427ed");
 			DataStore[23].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[275];
 			DataStore[23].Seal();
 			DataStore[24].DefaultVisualType = (VisualType)15;
 			DataStore[24].Description = @"An enumeration value for Toolkit";
-			DataStore[24].ExportGuid = default(System.Guid);
+			DataStore[24].ExportGuid = new Guid("467887f3-194c-47b2-9441-c9929dca7d9f");
 			DataStore[24].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[276];
 			DataStore[24].Seal();
 			DataStore[25].DefaultVisualType = (VisualType)15;
 			DataStore[25].Description = @"An enumeration value for TestEnum";
-			DataStore[25].ExportGuid = default(System.Guid);
+			DataStore[25].ExportGuid = new Guid("4dad4724-51ca-4618-9ea5-58ac201eba8a");
 			DataStore[25].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[277];
 			DataStore[25].Seal();
 			DataStore[30].DefaultVisualType = (VisualType)1;
 			DataStore[30].Description = @"DataObjectModel with specific extensions for DataTypes";
-			DataStore[30].ExportGuid = default(System.Guid);
+			DataStore[30].ExportGuid = new Guid("0d3a2e45-9a49-4e29-afea-619baa8d3871");
 			DataStore[30].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[11];
 			DataStore[30].Seal();
 			DataStore[31].DefaultVisualType = (VisualType)1;
 			DataStore[31].Description = @"DataObjectModel with specific extensions for MethodInvocations";
-			DataStore[31].ExportGuid = default(System.Guid);
+			DataStore[31].ExportGuid = new Guid("caf3e708-2f31-4084-9957-ca11fccc1374");
 			DataStore[31].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[41];
 			DataStore[31].Seal();
 			DataStore[32].DefaultVisualType = (VisualType)1;
 			DataStore[32].Description = @"DataObjectModel with specific extensions for Modules";
-			DataStore[32].ExportGuid = default(System.Guid);
+			DataStore[32].ExportGuid = new Guid("84828181-4048-47a7-b526-01508b7a0fd0");
 			DataStore[32].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[9];
 			DataStore[32].Seal();
 			DataStore[33].DefaultVisualType = (VisualType)1;
 			DataStore[33].Description = @"DataObjectModel with specific extensions for ObjectClasses";
-			DataStore[33].ExportGuid = default(System.Guid);
+			DataStore[33].ExportGuid = new Guid("6b368136-addd-4e86-ad29-3d2158a00de5");
 			DataStore[33].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[10];
 			DataStore[33].Seal();
 			DataStore[37].DefaultVisualType = (VisualType)1;
 			DataStore[37].Description = @"A model for a single work effort";
-			DataStore[37].ExportGuid = default(System.Guid);
+			DataStore[37].ExportGuid = new Guid("b6dc8994-6930-4cf4-8cb7-7f18efe9ef68");
 			DataStore[37].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[563];
 			DataStore[37].Seal();
 			DataStore[38].DefaultVisualType = (VisualType)24;
 			DataStore[38].Description = @"A workspace for recording work efforts";
-			DataStore[38].ExportGuid = default(System.Guid);
+			DataStore[38].ExportGuid = new Guid("b4b23681-f63b-4aeb-9ecb-b258bd33be24");
 			DataStore[38].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[564];
 			DataStore[38].Seal();
 			DataStore[39].DefaultVisualType = (VisualType)27;
 			DataStore[39].Description = @"A GUID attribute";
-			DataStore[39].ExportGuid = default(System.Guid);
+			DataStore[39].ExportGuid = new Guid("2b6fb70f-a382-4057-a139-cc33333d619d");
 			DataStore[39].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[570];
 			DataStore[39].Seal();
 	

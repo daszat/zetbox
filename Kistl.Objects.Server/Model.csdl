@@ -627,7 +627,7 @@
                         Relationship="Model.FK_Property_has_Module"
                         FromRole="BaseProperty"
                         ToRole="Module" />
-    <Property Name="PropertyName" Type="String" Nullable="true" MaxLength="100" />
+    <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="100" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
     <Property Name="IsNullable" Type="Boolean" Nullable="false" />
     <Property Name="AltText" Type="String" Nullable="true" MaxLength="200" />
@@ -790,6 +790,7 @@
     <Property Name="Toolkit__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="VisualType__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <Property Name="IsReadOnly" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Visual">
     <Key>

@@ -68,7 +68,7 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                // TODO: only accept objects from same Context\r\n");
-this.WriteObjects("                if (IsReadonly) throw new ReadOnlyObjectException();\r\n");
+this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
 this.WriteObjects("                \r\n");
 this.WriteObjects("                // shortcut noops\r\n");
 this.WriteObjects("                if (value == null && ",  fkBackingName , " == null)\r\n");

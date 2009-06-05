@@ -41,7 +41,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_EagerLoading != value)
                 {
 					var __oldValue = _EagerLoading;
@@ -66,7 +66,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_ReferenceObjectClass != value)
                 {
 					var __oldValue = _ReferenceObjectClass;
@@ -91,7 +91,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (IsReadonly) throw new ReadOnlyObjectException();
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (_RelationEnd != value)
                 {
 					var __oldValue = _RelationEnd;
@@ -1538,7 +1538,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[226],
 			DataStore[235].ExportGuid = new Guid("f7ed21a0-9a41-40eb-b3ab-b35591f2edd7");
 			DataStore[235].IsIndexed = false;
 			DataStore[235].IsList = false;
-			DataStore[235].IsNullable = false;
+			DataStore[235].IsNullable = true;
 			DataStore[235].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[235].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
 			DataStore[235].PropertyName = @"Parent";
@@ -1555,7 +1555,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[225],
 			DataStore[236].ExportGuid = new Guid("84e0996a-081f-4a17-a34d-54cf23991301");
 			DataStore[236].IsIndexed = false;
 			DataStore[236].IsList = false;
-			DataStore[236].IsNullable = false;
+			DataStore[236].IsNullable = true;
 			DataStore[236].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[236].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
 			DataStore[236].PropertyName = @"ValueModelDescriptor";
