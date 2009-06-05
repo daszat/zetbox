@@ -20,6 +20,8 @@ namespace Kistl.Client.WPF
 
         public GuiApplicationContext AppContext { get; private set; }
 
+        public static new App Current { get { return (App)(Application.Current); } }
+
         /// <summary>
         ///  See http://dasz.at/index.php/2007/12/wpf-datetime-format/
         /// </summary>

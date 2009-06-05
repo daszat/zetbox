@@ -4,6 +4,7 @@
         xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
         xmlns:view="clr-namespace:Kistl.Client.WPF.View"
         xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+        xmlns:tr="clr-namespace:Kistl.Client.Presentables.TimeRecords;assembly=Kistl.Client"
         Title="dasLauncher"
         Height="600"
         Width="800">
@@ -23,8 +24,7 @@
             </Grid.RowDefinitions>
 
             <DockPanel Grid.Row="0">
-                <TreeView x:Name="ModuleTree"
-                          ItemsSource="{Binding Modules}"
+                <TreeView x:Name="ObjectTree"
                           BorderThickness="0"
                           SelectedItemChanged="ModuleTreeSelectedItemChangedHandler">
                     <TreeView.Resources>
@@ -35,6 +35,9 @@
                         <DataTemplate DataType="{x:Type client:DataObjectModel}">
                             <view:DataObjectView />
                         </DataTemplate>
+                        <DataTemplate DataType="{x:Type tr:Dashboard}">
+                            <TextBlock>Time Records</TextBlock>
+                        </DataTemplate>
                     </TreeView.Resources>
                     <!-- TODO: implement template selector which creates appropriate (hierarchical) 
                                    Templates with appropriate contents (replace DataObjectView with DataObjectLineLayout)
@@ -42,6 +45,10 @@
                             <view:ModuleTreeTemplateSelector />
                         </TreeView.ItemTemplateSelector>
                         -->
+                    <TreeViewItem Header="Browse"
+                                  ItemsSource="{Binding Modules}" />
+                    <TreeViewItem Header="Apps"
+                                  ItemsSource="{Binding Applications}" />
                 </TreeView>
             </DockPanel>
 
@@ -55,7 +62,7 @@
                 <TextBlock DockPanel.Dock="Top"
                            HorizontalAlignment="Center">Recent Objects:</TextBlock>
                 <ListBox ItemsSource="{Binding RecentObjects}"
-                         SelectedItem="{Binding SelectedItem}"
+                         SelectedItem="{Binding SelectedInstance}"
                          ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                          BorderThickness="0" />
             </DockPanel>
@@ -66,21 +73,30 @@
                       HorizontalAlignment="Stretch" />
 
         <DockPanel Grid.Column="2">
-            <TextBlock DockPanel.Dock="Top"
-                       HorizontalAlignment="Center">Existing Instances:</TextBlock>
-            <ListBox x:Name="ObjectList"
-                     ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}"
-                     SelectedItem="{Binding SelectedItem}"
-                     ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                     BorderThickness="0">
-                <ListBox.Template>
+            <DockPanel DockPanel.Dock="Top">
+                <TextBlock DockPanel.Dock="Left"
+                           HorizontalAlignment="Center">Search:</TextBlock>
+                <TextBox Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged}" />
+            </DockPanel>
+            <ListView x:Name="ObjectList"
+                      ItemsSource="{Binding InstancesFiltered}"
+                      SelectedItem="{Binding SelectedInstance}"
+                      ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                      BorderThickness="0">
+                <ListView.Template>
                     <ControlTemplate>
                         <ScrollViewer HorizontalScrollBarVisibility="Visible">
                             <StackPanel IsItemsHost="True" />
                         </ScrollViewer>
                     </ControlTemplate>
-                </ListBox.Template>
-            </ListBox>
+                </ListView.Template>
+                <ListView.Resources>
+                    <Style TargetType="ListViewItem">
+                        <EventSetter Event="MouseDoubleClick"
+                                     Handler="ObjectList_MouseDoubleClick" />
+                    </Style>
+                </ListView.Resources>
+            </ListView>
         </DockPanel>
     </Grid>
 </Window>

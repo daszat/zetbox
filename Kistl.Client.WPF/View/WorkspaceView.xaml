@@ -64,10 +64,14 @@
                               HorizontalAlignment="Stretch" />
 
                 <DockPanel Grid.Row="2">
-                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center">Existing Instances:</TextBlock>
+                    <DockPanel DockPanel.Dock="Top">
+                        <TextBlock DockPanel.Dock="Left"
+                                   HorizontalAlignment="Center">Search:</TextBlock>
+                        <TextBox Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged}" />
+                    </DockPanel>
                     <ListBox x:Name="ObjectList"
-                             ItemsSource="{Binding SelectedItem.Instances, ElementName=ModuleTree}"
-                             SelectedItem="{Binding SelectedItem}"
+                             ItemsSource="{Binding InstancesFiltered}"
+                             SelectedItem="{Binding SelectedInstance}"
                              ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                              BorderThickness="0">
                         <ListBox.Template>
@@ -87,7 +91,7 @@
                     <TextBlock DockPanel.Dock="Top"
                                HorizontalAlignment="Center">Recent Objects:</TextBlock>
                     <ListBox ItemsSource="{Binding RecentObjects}"
-                             SelectedItem="{Binding SelectedItem}"
+                             SelectedItem="{Binding SelectedInstance}"
                              ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                              BorderThickness="0" />
                 </DockPanel>
@@ -99,7 +103,7 @@
 
             <ContentPresenter Grid.Column="2"
                               Grid.IsSharedSizeScope="True"
-                              Content="{Binding SelectedItem}"
+                              Content="{Binding SelectedInstance}"
                               ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
         </Grid>
     </DockPanel>
