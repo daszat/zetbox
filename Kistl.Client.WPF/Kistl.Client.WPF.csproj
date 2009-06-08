@@ -163,6 +163,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\TimeRecords\Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\TimeRecords\WorkEffortLineView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -282,6 +286,9 @@
     </Compile>
     <Compile Include="View\TextValueSelectionView.xaml.cs">
       <DependentUpon>TextValueSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TimeRecords\Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TimeRecords\WorkEffortLineView.xaml.cs">
       <DependentUpon>WorkEffortLineView.xaml</DependentUpon>
