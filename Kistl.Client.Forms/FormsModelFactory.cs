@@ -10,7 +10,8 @@ using Kistl.Client.GUI;
 
 namespace Kistl.Client.Forms
 {
-    public class FormsModelFactory : ModelFactory
+    public class FormsModelFactory
+        : ModelFactory
     {
 
         private List<WorkspaceView> _workspaces = new List<WorkspaceView>();
@@ -54,6 +55,11 @@ namespace Kistl.Client.Forms
         private Renderer _renderer = new Renderer();
 
         public override void CreateTimer(TimeSpan tickLength, Action action)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetSourceFileNameFromUser(params string[] filters)
         {
             throw new NotImplementedException();
         }

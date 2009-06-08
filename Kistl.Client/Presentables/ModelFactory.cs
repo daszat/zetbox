@@ -124,8 +124,9 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// Creates a default View for the given PresentableModel.
         /// </summary>
-        /// <param name="mdl"></param>
-        /// <returns></returns>
+        /// <param name="mdl">the model to be viewed</param>
+        /// <param name="readOnly">a value indicating whether or not the view should be read only</param>
+        /// <returns>the configured view</returns>
         public IView CreateDefaultView(PresentableModel mdl, bool readOnly)
         {
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
@@ -165,8 +166,18 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
+        #region other gui infrastructure
+
         public abstract void CreateTimer(TimeSpan tickLength, Action action);
 
+        /// <summary>
+        /// Asks the user for a filename to load from.
+        /// </summary>
+        /// <param name="filter">a list of filters for files to display in the format of "Label|glob1[;glob2[;...]"</param>
+        /// <returns>the chosen file name or <code>String.Empty</code> if the user aborted the selection</returns>
+        public abstract string GetSourceFileNameFromUser(params string[] filter);
+
+        #endregion
 
         internal sealed class ModelCache
         {

@@ -1,35 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Threading;
-
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
-using Kistl.Client.WPF.View;
 
 namespace Kistl.Client.WPF
 {
-    public class Renderer
-    {
-        private static Renderer _current;
-        public static Renderer Current
-        {
-            get
-            {
-                if (_current == null)
-                    _current = new Renderer();
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Threading;
 
-                return _current;
-            }
-        }
+    using Kistl.Client.GUI;
+    using Kistl.Client.Presentables;
+    
+    using Microsoft.Win32;
 
-    }
-
-    public class WpfModelFactory : ModelFactory
+    public class WpfModelFactory
+        : ModelFactory
     {
 
         public WpfModelFactory(IGuiApplicationContext appCtx)
@@ -37,11 +22,13 @@ namespace Kistl.Client.WPF
         {
         }
 
+        /// <inheritdoc/>
         protected override Kistl.App.GUI.Toolkit Toolkit
         {
             get { return Kistl.App.GUI.Toolkit.WPF; }
         }
 
+        /// <inheritdoc/>
         protected override void ShowInView(PresentableModel mdl, IView view, bool activate)
         {
             AppContext.UiThread.Verify();
@@ -60,12 +47,37 @@ namespace Kistl.Client.WPF
             }
         }
 
+        /// <inheritdoc/>
         public override void CreateTimer(TimeSpan tickLength, Action action)
         {
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = tickLength;
             timer.Tick += (obj, args) => action();
             timer.Start();
+        }
+
+        /// <inheritdoc/>
+        public override string GetSourceFileNameFromUser(params string[] filter)
+        {
+            var dialog = new OpenFileDialog()
+            {
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DereferenceLinks = true,
+                Filter = String.Join("|", filter),
+                Multiselect = false,
+                ShowReadOnly = false,
+                ValidateNames = true,
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                return dialog.FileName;
+            }
+            else
+            {
+                return String.Empty;
+            }
         }
     }
 

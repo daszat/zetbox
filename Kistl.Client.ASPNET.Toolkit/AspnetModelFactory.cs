@@ -1,13 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.Client.Presentables;
-using Kistl.Client.GUI;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
-    public class AspnetModelFactory : ModelFactory
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.Client.GUI;
+    using Kistl.Client.Presentables;
+
+    /// <summary>
+    /// The ASP.NET implementation of a <see cref="ModelFactory"/>. Most 
+    /// methods are not implemented, since they would require impossible user 
+    /// interaction.
+    /// </summary>
+    public class AspnetModelFactory
+        : ModelFactory
     {
 
         public AspnetModelFactory(GuiApplicationContext appCtx)
@@ -27,6 +35,11 @@ namespace Kistl.Client.ASPNET.Toolkit
         }
 
         public override void CreateTimer(TimeSpan tickLength, Action action)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetSourceFileNameFromUser(params string[] filters)
         {
             throw new NotImplementedException();
         }
