@@ -1,24 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.GUI;
 
 namespace Kistl.App.Extensions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.GUI;
+
+    /// <summary>
+    /// A set of extension methods for the GUI module.
+    /// </summary>
     public static class GuiExtensions
     {
-
         /// <summary>
-        /// Looks up the ViewDesriptor matching the PresentableModel and Toolkit; 
+        /// Looks up the default ViewDesriptor matching the PresentableModel and Toolkit; 
         /// uses the PresentableModelDescriptor's DefaultVisualType
         /// </summary>
-        /// <param name="pmd"></param>
-        /// <param name="tk"></param>
-        /// <returns></returns>
+        /// <param name="pmd">the specified PresentableModelDescriptor</param>
+        /// <param name="tk">the specified Toolkit</param>
+        /// <returns>the default ViewDescriptor to display this PresentableModel with this Toolkit</returns>
         public static ViewDescriptor GetDefaultViewDescriptor(
             this PresentableModelDescriptor pmd,
             Toolkit tk)
@@ -27,12 +30,13 @@ namespace Kistl.App.Extensions
         }
 
         /// <summary>
-        /// Looks up the ViewDesriptor matching the PresentableModel and Toolkit; 
+        /// Looks up the default ViewDesriptor matching the PresentableModel and Toolkit; 
         /// uses the PresentableModelDescriptor's DefaultVisualType
         /// </summary>
-        /// <param name="pmd"></param>
-        /// <param name="tk"></param>
-        /// <returns></returns>
+        /// <param name="pmd">the specified PresentableModelDescriptor</param>
+        /// <param name="tk">the specified Toolkit</param>
+        /// <param name="readOnly">indicate whether or not a read-only view is searched</param>
+        /// <returns>the default ViewDescriptor to display this PresentableModel with this Toolkit</returns>
         public static ViewDescriptor GetDefaultViewDescriptor(
             this PresentableModelDescriptor pmd,
             Toolkit tk,
@@ -44,10 +48,10 @@ namespace Kistl.App.Extensions
         /// <summary>
         /// Looks up the ViewDescriptor matching the PresentableModel, Toolkit and VisualType
         /// </summary>
-        /// <param name="pmd"></param>
-        /// <param name="tk"></param>
-        /// <param name="vt"></param>
-        /// <returns></returns>
+        /// <param name="pmd">the specified PresentableModelDescriptor</param>
+        /// <param name="tk">the specified Toolkit</param>
+        /// <param name="vt">the specified VisualType</param>
+        /// <returns>the ViewDescriptor to display this PresentableModel with this Toolkit</returns>
         public static ViewDescriptor GetViewDescriptor(
             this PresentableModelDescriptor pmd,
             Toolkit tk,
@@ -59,12 +63,13 @@ namespace Kistl.App.Extensions
         /// <summary>
         /// Looks up the ViewDescriptor matching the PresentableModel, Toolkit and VisualType
         /// </summary>
-        /// <param name="pmd"></param>
-        /// <param name="tk"></param>
-        /// <param name="vt"></param>
-        /// <returns></returns>
+        /// <param name="self">the specified PresentableModelDescriptor</param>
+        /// <param name="tk">the specified Toolkit</param>
+        /// <param name="vt">the specified VisualType</param>
+        /// <param name="readOnly">indicate whether or not a read-only view is searched</param>
+        /// <returns>the ViewDescriptor to display this PresentableModel with this Toolkit</returns>
         public static ViewDescriptor GetViewDescriptor(
-            this PresentableModelDescriptor pmd,
+            this PresentableModelDescriptor self,
             Toolkit tk,
             VisualType vt,
             bool readOnly)
@@ -73,21 +78,53 @@ namespace Kistl.App.Extensions
             var candidates = _vdCache[tk][vt].ToLookup(obj => obj.PresentedModelDescriptor);
 
             List<ViewDescriptor> result = new List<ViewDescriptor>();
-            while (pmd != null)
+            foreach (var pmd in self.AndParents())
             {
                 if (candidates.Contains(pmd))
                 {
                     var test = candidates[pmd];
                     result.AddRange(candidates[pmd]);
                 }
-
-                // crawl up the inheritance tree
-                pmd = pmd.PresentableModelRef.Parent
-                    .GetPresentableModelDescriptor();
             }
 
             // fall back to any available control, if we don't have one with matching read-only state
             return result.FirstOrDefault(vd => vd.IsReadOnly == readOnly) ?? result.First();
+        }
+
+        /// <summary>
+        /// Returns a list of the specified PresentableModelDescriptor and its parents descriptors.
+        /// </summary>
+        /// <param name="pmd">the PresentableModelDescriptor to inspect</param>
+        /// <returns>a list, containing the requested PresentableModelDescriptors sorted by ascending inheritance</returns>
+        public static List<PresentableModelDescriptor> AndParents(this PresentableModelDescriptor pmd)
+        {
+            var result = new List<PresentableModelDescriptor>();
+            result.Add(pmd);
+            var parent = pmd.PresentableModelRef.Parent;
+            while (parent != null)
+            {
+                var parentDescriptor = parent.GetPresentableModelDescriptor();
+                if (parentDescriptor != null)
+                {
+                    result.Add(parentDescriptor);
+                }
+                parent = parent.Parent;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Retrieves a list of <see cref="ViewDescriptor"/>s matching the specified <see cref="PresentableModelDescriptor"/>
+        /// </summary>
+        /// <param name="pmd">the PresentableModelDescriptor to search for</param>
+        /// <returns>a unordered list of <see cref="ViewDescriptor"/>s</returns>
+        public static ICollection<ViewDescriptor> GetApplicableViewDescriptors(this PresentableModelDescriptor pmd)
+        {
+            var presentableModels = pmd.AndParents();
+            return _vdCache.Values
+                .SelectMany(sub => sub.Values.SelectMany(o => o))
+                .Where(vd => presentableModels.Contains(vd.PresentedModelDescriptor))
+                .ToList();
         }
 
         public static PresentableModelDescriptor GetPresentableModelDescriptor(this TypeRef tr)
@@ -98,7 +135,9 @@ namespace Kistl.App.Extensions
             while (result == null && tr != null)
             {
                 if (_pmdCache.ContainsKey(tr.ID))
+                {
                     result = _pmdCache[tr.ID];
+                }
                 tr = tr.Parent;
             }
             return result;

@@ -20,6 +20,11 @@ namespace Kistl.Client.Presentables
             _class = cls;
         }
 
+        public InterfaceType GetDescribedInterfaceType()
+        {
+            return _class.GetDescribedInterfaceType();
+        }
+
         #region Utilities and UI callbacks
 
         protected override void QueryHasInstances()

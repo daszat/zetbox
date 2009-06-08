@@ -119,6 +119,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\GUI\DashboardDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PropertyGroupBoxView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -210,8 +214,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.Fixes.cs" />
-    <Compile Include="CommandAdapter.cs" />
-    <Compile Include="Converter\CommandConverter.cs" />
+    <Compile Include="Commands\Converter.cs" />
+    <Compile Include="Commands\WrappedKistlCommand.cs" />
     <Compile Include="Converter\Converters.cs" />
     <Compile Include="Converter\DebugConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
@@ -237,6 +241,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Commands\SmartRoutedUICommand.cs" />
     <Compile Include="View\ActionView.xaml.cs">
       <DependentUpon>ActionView.xaml</DependentUpon>
     </Compile>
@@ -251,6 +256,9 @@
     </Compile>
     <Compile Include="View\GridCells\StringValue.xaml.cs">
       <DependentUpon>StringValue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GUI\DashboardDisplay.xaml.cs">
+      <DependentUpon>DashboardDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PropertyGroupBoxView.xaml.cs">
       <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>

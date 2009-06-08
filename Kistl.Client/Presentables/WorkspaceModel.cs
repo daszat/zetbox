@@ -7,6 +7,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Kistl.API.Client;
 
 namespace Kistl.Client.Presentables
 {
@@ -101,7 +102,6 @@ namespace Kistl.Client.Presentables
                         HistoryTouch(_selectedItem);
                     UpdateInstances();
                     OnPropertyChanged("SelectedItem");
-                    OnPropertyChanged("CreateNewInstanceEnabled");
                 }
             }
         }
@@ -122,7 +122,6 @@ namespace Kistl.Client.Presentables
                         HistoryTouch(_selectedInstance);
                     UpdateInstances();
                     OnPropertyChanged("SelectedInstance");
-                    OnPropertyChanged("CreateNewInstanceEnabled");
                 }
             }
         }
@@ -153,14 +152,40 @@ namespace Kistl.Client.Presentables
 
         #region Create New Instance
 
-        // TODO: replace with command
-        public bool CreateNewInstanceEnabled { get { return SelectedItem != null && SelectedItem.Object is ObjectClass; } }
-        public void CreateNewInstance()
+        private CreateNewInstanceCommand _createNewInstanceCommand = null;
+        /// <summary>
+        /// Creates a new instance of an <see cref="ObjectClass"/> and makes it the currently selected instance.
+        /// </summary>
+        public ICommand CreateNewInstanceCommand
         {
-            var obj = SelectedItem;
-            var objClass = (ObjectClass)obj.Object;
-            var created = (IDataObject)DataContext.Create(objClass.GetDescribedInterfaceType());
-            SelectedItem = (DataObjectModel)Factory.CreateDefaultModel(DataContext, created);
+            get
+            {
+                if (_createNewInstanceCommand == null)
+                {
+                    _createNewInstanceCommand = new CreateNewInstanceCommand(AppContext, DataContext, this);
+                }
+                return _createNewInstanceCommand;
+            }
+        }
+
+        #endregion
+
+        #region Create New Instance Externally
+
+        private static CreateNewInstanceExternallyCommand _createNewInstanceExternallyCommand = null;
+        /// <summary>
+        /// Creates a new instance of an <see cref="ObjectClass"/> and makes it the currently selected instance.
+        /// </summary>
+        public ICommand CreateNewInstanceExternallyCommand
+        {
+            get
+            {
+                if (_createNewInstanceExternallyCommand == null)
+                {
+                    _createNewInstanceExternallyCommand = new CreateNewInstanceExternallyCommand(AppContext, DataContext);
+                }
+                return _createNewInstanceExternallyCommand;
+            }
         }
 
         #endregion
@@ -200,6 +225,7 @@ namespace Kistl.Client.Presentables
 
         private void LoadApplications()
         {
+            this.Applications.Add(new GUI.DashboardModel(AppContext, DataContext));
             this.Applications.Add(new TimeRecords.Dashboard(AppContext, DataContext));
         }
 
@@ -275,7 +301,7 @@ namespace Kistl.Client.Presentables
     /// This command submits all outstanding changes of this Workspace to the data store.
     /// The parameter has to be <value>null</value>.
     /// </summary>
-    public class SaveContextCommand : CommandModel
+    internal class SaveContextCommand : CommandModel
     {
         public SaveContextCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
@@ -301,4 +327,74 @@ namespace Kistl.Client.Presentables
 
     }
 
+    /// <summary>
+    /// Creates a new instance of an <see cref="ObjectClass"/> and makes it the currently selected instance.
+    /// </summary>
+    internal class CreateNewInstanceCommand : CommandModel
+    {
+        public CreateNewInstanceCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, WorkspaceModel parent)
+            : base(appCtx, dataCtx)
+        {
+            Label = "New";
+            _parent = parent;
+        }
+
+        private WorkspaceModel _parent;
+
+        public override bool CanExecute(object data)
+        {
+            return DataContext != null
+                && !DataContext.IsReadonly
+                && _parent != null
+                && data != null
+                && data is ObjectClassModel;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            if (CanExecute(data))
+            {
+                var objectClass = data as ObjectClassModel;
+                var newObject = DataContext.Create(objectClass.GetDescribedInterfaceType());
+                var newModel = (DataObjectModel)Factory.CreateDefaultModel(DataContext, newObject);
+                _parent.HistoryTouch(newModel);
+                _parent.SelectedInstance = newModel;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Creates a new instance of an <see cref="ObjectClass"/> and opens it in a new WorkspaceView.
+    /// </summary>
+    internal class CreateNewInstanceExternallyCommand : CommandModel
+    {
+        public CreateNewInstanceExternallyCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+            : base(appCtx, dataCtx)
+        {
+            Label = "External New ...";
+        }
+
+        private WorkspaceModel _parent;
+
+        public override bool CanExecute(object data)
+        {
+            return data != null
+                && data is ObjectClassModel;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            if (CanExecute(data))
+            {
+                var objectClass = data as ObjectClassModel;
+                var externalCtx = KistlContext.GetContext();
+                var newWorkspace = new WorkspaceModel(AppContext, externalCtx);
+                var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());
+                var newModel = (DataObjectModel)Factory.CreateDefaultModel(externalCtx, newObject);
+                newWorkspace.HistoryTouch(newModel);
+                newWorkspace.SelectedInstance = newModel;
+                Factory.ShowModel(newWorkspace, true, false);
+            }
+        }
+    }
 }

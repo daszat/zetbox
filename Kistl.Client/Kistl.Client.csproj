@@ -76,9 +76,11 @@
     <Compile Include="Presentables\ColumnDisplayModel.cs" />
     <Compile Include="Presentables\DataObjectModel.cs" />
     <Compile Include="Presentables\DataTypeModel.cs" />
+    <Compile Include="Presentables\GUI\DashboardModel.cs" />
     <Compile Include="Presentables\IAsyncUiManager.cs" />
     <Compile Include="Presentables\ICommand.cs" />
     <Compile Include="Presentables\IPropertyModel.cs" />
+    <Compile Include="Presentables\KistlBase\AssemblyReferenceModel.cs" />
     <Compile Include="Presentables\KistlDebuggerAsModel.cs" />
     <Compile Include="Presentables\LauncherModel.cs" />
     <Compile Include="Presentables\ListPropertyModels.cs" />

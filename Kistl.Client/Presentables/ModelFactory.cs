@@ -29,13 +29,11 @@ namespace Kistl.Client.Presentables
         /// </summary>
         protected abstract Toolkit Toolkit { get; }
 
-        protected WorkspaceModel Workspace { get; private set; }
-        protected virtual void OnWorkspaceCreated() { }
-
         protected ModelFactory(IGuiApplicationContext appCtx)
         {
             AppContext = appCtx;
             AppContext.UiThread.Verify();
+            this.Workspaces = new Dictionary<IKistlContext, WorkspaceModel>();
         }
 
         #region Model Management
@@ -107,11 +105,10 @@ namespace Kistl.Client.Presentables
                 _cache.StoreModel(parameters, result);
             }
 
-            // save first workspace
-            if (typeof(WorkspaceModel).IsAssignableFrom(requestedType) && this.Workspace == null)
+            // save workspaces
+            if (typeof(WorkspaceModel).IsAssignableFrom(requestedType))
             {
-                this.Workspace = (WorkspaceModel)result;
-                OnWorkspaceCreated();
+                OnWorkspaceCreated(ctx, (WorkspaceModel)result);
             }
 
             return result;
@@ -151,18 +148,34 @@ namespace Kistl.Client.Presentables
         /// <param name="readOnly"></param>
         public void ShowModel(PresentableModel mdl, bool activate, bool readOnly)
         {
-            if (mdl is DataObjectModel)
+            if (mdl == null)
+                throw new ArgumentNullException("mdl");
+
+            var dom = mdl as DataObjectModel;
+
+            if (dom == null)
             {
-                // TODO improve multi-workspace facitilities
-                Workspace.SelectedItem = (DataObjectModel)mdl;
+                ShowInView(mdl, CreateDefaultView(mdl, readOnly), activate);
             }
             else
             {
-                ShowInView(mdl, CreateDefaultView(mdl, readOnly), activate);
+                Workspaces[dom.Object.Context].SelectedInstance = dom;
             }
         }
 
         protected abstract void ShowInView(PresentableModel mdl, IView view, bool activate);
+
+        #endregion
+
+        #region Workspace Management
+
+        protected Dictionary<IKistlContext, WorkspaceModel> Workspaces { get; private set; }
+
+        protected virtual void OnWorkspaceCreated(IKistlContext ctx, WorkspaceModel workspace)
+        {
+            // TODO: limit this reference to the lifetime of the context
+            this.Workspaces[ctx] = workspace;
+        }
 
         #endregion
 

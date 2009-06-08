@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.GUI.DashboardDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center">Available GUI Infrastructure</TextBlock>
+        <ListView DockPanel.Dock="Top"
+                  ItemsSource="{Binding PresentableModelDescriptors}"
+                  SelectedItem="{Binding SelectedPresentableModelDescriptor, UpdateSourceTrigger=PropertyChanged}" />
+        <DockPanel DockPanel.Dock="Top">
+            <TextBox DockPanel.Dock="Left">Default visual type:</TextBox>
+            <ContentPresenter Content="{Binding SelectedPresentableModelDescriptor.DefaultVisualType}" />
+        </DockPanel>
+        <ListView ItemsSource="{Binding DefaultViewDescriptors}" />
+        <ListView ItemsSource="{Binding ApplicableViewDescriptors}" />
+    </DockPanel>
+</UserControl>

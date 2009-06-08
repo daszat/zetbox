@@ -1,6 +1,7 @@
 ﻿<Application x:Class="Kistl.Client.WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
              xmlns:converter="clr-namespace:Kistl.Client.WPF.Converter"
              Startup="Application_Startup"
              Exit="Application_Exit"
@@ -12,7 +13,7 @@
             <converter:GetTypeConverter x:Key="GetTypeConverter" />
             <converter:ValidityToBrushConverter x:Key="ValidityToBrushConverter" />
             <converter:DebugConverter x:Key="debug" />
-            <converter:CommandConverter x:Key="CommandConverter" />
+            <commands:Converter x:Key="CommandConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="View/DefaultViews.xaml" />
             </ResourceDictionary.MergedDictionaries>

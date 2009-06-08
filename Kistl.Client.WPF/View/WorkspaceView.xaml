@@ -4,18 +4,20 @@
         xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
         xmlns:view="clr-namespace:Kistl.Client.WPF.View"
         xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+        xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
         Title="DesktopView"
         Height="600"
-        Width="800">
+        Width="800"
+        commands:SmartRoutedUICommand.IsCommandSink="True">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Command="view:WorkspaceView.Save"
                       CommandParameter="{Binding}" />
             <MenuItem Click="DeleteHandler"
                       Header="Delete" />
-            <MenuItem Click="NewHandler"
-                      Header="New"
-                      IsEnabled="{Binding CreateNewInstanceEnabled}" />
+            <MenuItem Header="{Binding CreateNewInstanceCommand.Label}"
+                      Command="{Binding CreateNewInstanceCommand, Converter={StaticResource CommandConverter}}"
+                      CommandParameter="{Binding SelectedItem}" />
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -27,9 +29,9 @@
             <!-- Navigation Tree and Lists -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="5" />
-                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="5" />
                     <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
