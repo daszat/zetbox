@@ -200,7 +200,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 if (!tableNames.Contains(tblName))
                 {
-                    report.WriteLine("** Warning: Table \"{0}\" found in database but no ObjectClass was defined", tblName);
+                    report.WriteLine("** Warning: Table '{0}' found in database but no ObjectClass was defined", tblName);
                 }
             }
         }
@@ -216,7 +216,7 @@ namespace Kistl.Server.SchemaManagement
                 if (propName.StartsWith("fk_")) continue;
                 if (!columns.Contains(propName))
                 {
-                    report.WriteLine("    ** Warning: Column \"{0}\" found in database but no Property was defined", propName);
+                    report.WriteLine("    ** Warning: Column '{0}' found in database but no Property was defined", propName);
                 }
             }
         }
@@ -507,7 +507,7 @@ namespace Kistl.Server.SchemaManagement
                     report.WriteLine("    ** Warning: Table '{0}' for Property '{1}' is missing", tblName, prop.PropertyName);
                     if (repair)
                     {
-                        CaseNewValueTypePropertyList(prop);
+                        CaseNewValueTypePropertyList(objClass, prop);
                     }
                 }
             }
@@ -602,31 +602,56 @@ namespace Kistl.Server.SchemaManagement
                 {
                     CaseNewObjectClass(objClass);
                 }
+                if (IsCaseRenameObjectClassTable(objClass))
+                {
+                    CaseRenameObjectClassTable(objClass);
+                }
 
-                UpdateColumns(objClass);
+                UpdateColumns(objClass, objClass.Properties, "");
             }
             report.WriteLine();
         }
 
-        private void UpdateColumns(ObjectClass objClass)
+        private void UpdateColumns(ObjectClass objClass, ICollection<Property> properties, string prefix)
         {
-            foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.HasStorage()))
+            foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.HasStorage()))
             {
                 if (IsCaseNewValueTypePropertyNullable(prop))
                 {
-                    CaseNewValueTypePropertyNullable(prop);
+                    CaseNewValueTypePropertyNullable(objClass, prop, prefix);
                 }
                 if (IsCaseNewValueTypePropertyNotNullable(prop))
                 {
-                    CaseNewValueTypePropertyNotNullable(prop);
+                    CaseNewValueTypePropertyNotNullable(objClass, prop, prefix);
+                }
+                if (IsCaseRenameValueTypePropertyName(prop))
+                {
+                    CaseRenameValueTypePropertyName(objClass, prop, prefix);
+                }
+                if (IsCaseMoveValueTypeProperty(prop))
+                {
+                    CaseMoveValueTypeProperty(objClass, prop, prefix);
                 }
             }
 
-            foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList))
+            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList && p.HasStorage()))
+            {
+                UpdateColumns(objClass, sprop.StructDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
+            }
+
+            foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => p.IsList))
             {
                 if (IsCaseNewValueTypePropertyList(prop))
                 {
-                    CaseNewValueTypePropertyList(prop);
+                    CaseNewValueTypePropertyList(objClass, prop);
+                }
+                if (IsCaseRenameValueTypePropertyListName(prop))
+                {
+                    CaseRenameValueTypePropertyListName(objClass, prop);
+                }
+                if (IsCaseMoveValueTypePropertyList(prop))
+                {
+                    CaseMoveValueTypePropertyList(objClass, prop);
                 }
             }
         }
@@ -650,12 +675,32 @@ namespace Kistl.Server.SchemaManagement
                     {
                         Case_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
                     }
+                    if (IsCase_1_N_RelationChange_FromNotIndexed_To_Indexed(rel))
+                    {
+                        Case_1_N_RelationChange_FromNotIndexed_To_Indexed(rel);
+                    }
                 }
                 else if (rel.GetRelationType() == RelationType.n_m)
                 {
                     if (IsCaseNew_N_M_Relation(rel))
                     {
                         CaseNew_N_M_Relation(rel);
+                    }
+                    if (IsCase_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A))
+                    {
+                        Case_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A);
+                    }
+                    if (IsCase_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B))
+                    {
+                        Case_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B);
+                    }
+                    if (IsCase_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A))
+                    {
+                        Case_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A);
+                    }
+                    if (IsCase_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B))
+                    {
+                        Case_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B);
                     }
                 }
                 else if (rel.GetRelationType() == RelationType.one_one)
@@ -681,6 +726,14 @@ namespace Kistl.Server.SchemaManagement
                 {
                     CaseNewObjectClassInheritance(objClass);
                 }
+                if (IsCaseChangeObjectClassInheritance(objClass))
+                {
+                    CaseChangeObjectClassInheritance(objClass);
+                }
+                if (IsCaseRemoveObjectClassInheritance(objClass))
+                {
+                    CaseRemoveObjectClassInheritance(objClass);
+                }
             }
             report.WriteLine();
         }
@@ -699,15 +752,58 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
+        #region RenameObjectClassTable
+        private bool IsCaseRenameObjectClassTable(ObjectClass objClass)
+        {
+            var saved = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            if (saved == null) return false;
+            return saved.TableName != objClass.TableName;
+        }
+        private void CaseRenameObjectClassTable(ObjectClass objClass)
+        {
+            var saved = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);            
+            report.WriteLine("  ** Warning: renaming a tablename from '{0}' to '{1}' is not supported yet", saved.TableName, objClass.TableName);
+        }
+        #endregion
+
+        #region RenameValueTypePropertyName
+        private bool IsCaseRenameValueTypePropertyName(ValueTypeProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            if (saved == null) return false;
+            return saved.PropertyName != prop.PropertyName;
+        }
+        private void CaseRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        {
+            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            report.WriteLine("  ** Warning: renaming a Property from '{0}' to '{1}' is not supported yet", saved.PropertyName, prop.PropertyName);
+        }
+        #endregion
+
+        #region MoveValueTypeProperty
+        private bool IsCaseMoveValueTypeProperty(ValueTypeProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            if (saved == null) return false;
+            return saved.ObjectClass.ExportGuid != prop.ObjectClass.ExportGuid;
+        }
+        private void CaseMoveValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        {
+            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            report.WriteLine("  ** Warning: moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
+        }
+        #endregion
+
         #region NewValueTypeProperty nullable
         private bool IsCaseNewValueTypePropertyNullable(ValueTypeProperty prop)
         {
             return prop.IsNullable && savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
         }
-        private void CaseNewValueTypePropertyNullable(ValueTypeProperty prop)
+        private void CaseNewValueTypePropertyNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            report.WriteLine("    New nullable ValueType Property: {0}", prop.PropertyName);
-            db.CreateColumn(((ObjectClass)prop.ObjectClass).TableName, prop.PropertyName, GetDbType(prop),
+            string colName = Construct.NestedColumnName(prop, prefix);
+            report.WriteLine("    New nullable ValueType Property: '{0}' ('{1}')", prop.PropertyName, colName);
+            db.CreateColumn(objClass.TableName, colName, GetDbType(prop),
                 prop is StringProperty ? ((StringProperty)prop).Length : 0, true);
         }
         #endregion
@@ -717,11 +813,11 @@ namespace Kistl.Server.SchemaManagement
         {
             return !prop.IsNullable && savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
         }
-        private void CaseNewValueTypePropertyNotNullable(ValueTypeProperty prop)
+        private void CaseNewValueTypePropertyNotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            report.WriteLine("    New not nullable ValueType Property: {0}", prop.PropertyName);
-            string tblName = ((ObjectClass)prop.ObjectClass).TableName;
-            string colName = prop.PropertyName;
+            string tblName = objClass.TableName;
+            string colName = Construct.NestedColumnName(prop, prefix);
+            report.WriteLine("    New not nullable ValueType Property: {0} ('{1}')", prop.PropertyName, colName);
             if (!db.CheckTableContainsData(tblName))
             {
                 db.CreateColumn(tblName, colName, GetDbType(prop),
@@ -734,12 +830,40 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
+        #region RenameValueTypePropertyListName
+        private bool IsCaseRenameValueTypePropertyListName(ValueTypeProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            if (saved == null) return false;
+            return saved.PropertyName != prop.PropertyName;
+        }
+        private void CaseRenameValueTypePropertyListName(ObjectClass objClass, ValueTypeProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            report.WriteLine("  ** Warning: renaming a Property from '{0}' to '{1}' is not supported yet", saved.PropertyName, prop.PropertyName);
+        }
+        #endregion
+
+        #region MoveValueTypePropertyList
+        private bool IsCaseMoveValueTypePropertyList(ValueTypeProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            if (saved == null) return false;
+            return saved.ObjectClass.ExportGuid != prop.ObjectClass.ExportGuid;
+        }
+        private void CaseMoveValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            report.WriteLine("  ** Warning: moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
+        }
+        #endregion
+
         #region NewValueTypePropertyList
         private bool IsCaseNewValueTypePropertyList(ValueTypeProperty prop)
         {
             return savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
         }
-        private void CaseNewValueTypePropertyList(ValueTypeProperty prop)
+        private void CaseNewValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
             report.WriteLine("    New ValueType Property List: {0}", prop.PropertyName);
             string tblName = prop.GetCollectionEntryTable();
@@ -756,7 +880,43 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
             }
-            db.CreateFKConstraint(tblName, ((ObjectClass)prop.ObjectClass).TableName, fkName, prop.GetAssociationName());
+            db.CreateFKConstraint(tblName, objClass.TableName, fkName, prop.GetAssociationName());
+        }
+        #endregion
+
+        #region 1_N_RelationChange_FromNotIndexed_To_Indexed
+        private bool IsCase_1_N_RelationChange_FromNotIndexed_To_Indexed(Relation rel)
+        {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (savedRel == null) return false;
+            return  (rel.NeedsPositionStorage(RelationEndRole.A) && !savedRel.NeedsPositionStorage(RelationEndRole.A)) ||
+                    (rel.NeedsPositionStorage(RelationEndRole.B) && !savedRel.NeedsPositionStorage(RelationEndRole.B));
+        }
+        private void Case_1_N_RelationChange_FromNotIndexed_To_Indexed(Relation rel)
+        {
+            string assocName = rel.GetAssociationName();
+            report.WriteLine("  Create 1:N Relation Position Storage: {0}", assocName);
+
+            ObjectReferenceProperty nav = null;
+            string tblName = "";
+            if (rel.A.Navigator != null && rel.A.Navigator.HasStorage())
+            {
+                nav = rel.A.Navigator;
+                tblName = rel.A.Type.TableName;
+            }
+            else if (rel.B.Navigator != null && rel.B.Navigator.HasStorage())
+            {
+                nav = rel.B.Navigator;
+                tblName = rel.B.Type.TableName;
+            }
+
+            if (nav == null)
+            {
+                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator", assocName);
+                return;
+            } 
+            
+            db.CreateColumn(tblName, Construct.ListPositionColumnName(nav), System.Data.DbType.Int32, 0, nav.IsNullable);
         }
         #endregion
 
@@ -839,6 +999,44 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.CreateColumn(tblName, Construct.ListPositionColumnName(nav), System.Data.DbType.Int32, 0, nav.IsNullable);
             }
+        }
+        #endregion
+
+        #region N_M_RelationChange_FromNotIndexed_To_Indexed
+        private bool IsCase_N_M_RelationChange_FromNotIndexed_To_Indexed(Relation rel, RelationEndRole role)
+        {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (savedRel == null) return false;
+            return rel.NeedsPositionStorage(role) && !savedRel.NeedsPositionStorage(role);
+        }
+        private void Case_N_M_RelationChange_FromNotIndexed_To_Indexed(Relation rel, RelationEndRole role)
+        {
+            string assocName = rel.GetAssociationName();
+            report.WriteLine("  Create N:M Relation {1} PositionStorage: {0}", assocName, role);
+
+            string tblName = rel.GetRelationTableName();
+            string fkName = rel.GetRelationFkColumnName(role);
+
+            db.CreateColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, true);
+        }
+        #endregion
+
+        #region N_M_RelationChange_FromIndexed_To_NotIndexed
+        private bool IsCase_N_M_RelationChange_FromIndexed_To_NotIndexed(Relation rel, RelationEndRole role)
+        {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (savedRel == null) return false;
+            return !rel.NeedsPositionStorage(role) && savedRel.NeedsPositionStorage(role);
+        }
+        private void Case_N_M_RelationChange_FromIndexed_To_NotIndexed(Relation rel, RelationEndRole role)
+        {
+            string assocName = rel.GetAssociationName();
+            report.WriteLine("  Drop N:M Relation {1} PositionStorage: {0}", assocName, role);
+
+            string tblName = rel.GetRelationTableName();
+            string fkName = rel.GetRelationFkColumnName(role);
+
+            db.DropColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix);
         }
         #endregion
 
@@ -940,6 +1138,37 @@ namespace Kistl.Server.SchemaManagement
             }
 
             db.CreateFKConstraint(tblName, objClass.BaseObjectClass.TableName, "ID", assocName);
+        }
+        #endregion
+
+        #region ChangeObjectClassInheritance
+        private bool IsCaseChangeObjectClassInheritance(ObjectClass objClass)
+        {
+            if (objClass.BaseObjectClass == null) return false;
+
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            if (savedObjClass == null) return false;
+
+            if (savedObjClass.BaseObjectClass == null) return false;
+            return savedObjClass.BaseObjectClass.ExportGuid != objClass.BaseObjectClass.ExportGuid;
+        }
+        private void CaseChangeObjectClassInheritance(ObjectClass objClass)
+        {
+            report.WriteLine("  ** Warning: Changing ObjectClass inheritance is not supported yet");
+        }
+        #endregion
+
+        #region RemoveObjectClassInheritance
+        private bool IsCaseRemoveObjectClassInheritance(ObjectClass objClass)
+        {
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            if (savedObjClass == null) return false;
+
+            return savedObjClass.BaseObjectClass != null && objClass.BaseObjectClass == null;
+        }
+        private void CaseRemoveObjectClassInheritance(ObjectClass objClass)
+        {
+            report.WriteLine("  ** Warning: Removing ObjectClass inheritance is not supported yet");
         }
         #endregion
 
