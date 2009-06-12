@@ -6,13 +6,11 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 
-namespace Kistl.Client.Presentables.Assemblies
+namespace Kistl.Client.Presentables.KistlBase
 {
-
     /// <summary>
     /// Models a <see cref="System.Type"/>. Contains references to the Assembly and the respective TypeRef.
     /// </summary>
-    [Obsolete]
     public class SystemTypeModel
         : PresentableModel
     {
@@ -53,7 +51,5 @@ namespace Kistl.Client.Presentables.Assemblies
         public ICommand CreateAssembly { get; private set; }
 
         #endregion
-
     }
-
 }

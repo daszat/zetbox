@@ -397,9 +397,25 @@ namespace Kistl.App.Base
         public void OnAsType_TypeRef(TypeRef obj, MethodReturnEventArgs<Type> e, bool throwOnError)
         {
             e.Result = Type.GetType(String.Format("{0}, {1}", obj.FullName, obj.Assembly.AssemblyName), throwOnError);
+            if (e.Result == null)
+            {
+                return;
+            }
             if (obj.GenericArguments.Count > 0)
             {
-                e.Result = e.Result.MakeGenericType(obj.GenericArguments.Select(tRef => tRef.AsType(throwOnError)).ToArray());
+                var args = obj.GenericArguments.Select(tRef => tRef.AsType(throwOnError)).ToArray();
+                if (args.Contains(null))
+                {
+                    if (throwOnError)
+                    {
+                        throw new InvalidOperationException("Cannot create Type: missing generic argument");
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                e.Result = e.Result.MakeGenericType(args);
             }
         }
 
@@ -408,16 +424,31 @@ namespace Kistl.App.Base
             var ctx = assembly.Context;
 
             // pre-load context
-            var oldTypes = ctx.GetQuery<TypeRef>().Where(tr => tr.Assembly.ID == assembly.ID);
+            var oldTypes = ctx.GetQuery<TypeRef>()
+                .Where(tr => tr.Assembly.ID == assembly.ID)
+                .ToList();
 
             // load all current references into the context
-            var newTypes = System.Reflection.Assembly.Load(assembly.AssemblyName).GetExportedTypes().Select(t => t.ToRef(ctx)).ToDictionary(tr => tr.ID);
+            var newTypes = System.Reflection.Assembly
+                .Load(assembly.AssemblyName)
+                .GetExportedTypes()
+                .Where(t => !t.IsGenericTypeDefinition)
+                .Select(t => t.ToRef(ctx))
+                .ToDictionary(tr => tr.ID);
 
             foreach (var tr in oldTypes)
             {
-                if (!newTypes.ContainsKey(tr.ID))
+                var type = tr.AsType(false);
+                if (type == null)
                 {
                     ctx.Delete(tr);
+                }
+                else if (!type.IsGenericType)
+                {
+                    if (!newTypes.ContainsKey(tr.ID))
+                    {
+                        ctx.Delete(tr);
+                    }
                 }
             }
 

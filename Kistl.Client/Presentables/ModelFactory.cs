@@ -125,7 +125,7 @@ namespace Kistl.Client.Presentables
         /// <param name="readOnly">a value indicating whether or not the view should be read only</param>
         /// <returns>the configured view</returns>
         public IView CreateDefaultView(PresentableModel mdl, bool readOnly)
-        {
+       { 
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
                 .GetPresentableModelDescriptor();
 

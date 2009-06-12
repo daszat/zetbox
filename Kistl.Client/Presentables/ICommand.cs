@@ -67,9 +67,16 @@ namespace Kistl.Client.Presentables
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
-        protected CommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        /// <param name="label">a label for this command</param>
+        protected CommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, string label)
             : base(appCtx, dataCtx)
         {
+            if (label == null)
+            {
+                throw new ArgumentNullException("label");
+            }
+
+            this.Label = label;
         }
 
         #region ICommand Members

@@ -213,7 +213,7 @@ namespace Kistl.App.GUI
         { }
 
 
-		internal static Dictionary<int, PresentableModelDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, PresentableModelDescriptor__Implementation__Frozen>(32);
+		internal static Dictionary<int, PresentableModelDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, PresentableModelDescriptor__Implementation__Frozen>(34);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new PresentableModelDescriptor__Implementation__Frozen(1);
@@ -279,6 +279,10 @@ namespace Kistl.App.GUI
 			DataStore[38] = new PresentableModelDescriptor__Implementation__Frozen(38);
 
 			DataStore[39] = new PresentableModelDescriptor__Implementation__Frozen(39);
+
+			DataStore[40] = new PresentableModelDescriptor__Implementation__Frozen(40);
+
+			DataStore[41] = new PresentableModelDescriptor__Implementation__Frozen(41);
 
 		}
 
@@ -443,6 +447,16 @@ namespace Kistl.App.GUI
 			DataStore[39].ExportGuid = new Guid("2b6fb70f-a382-4057-a139-cc33333d619d");
 			DataStore[39].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[570];
 			DataStore[39].Seal();
+			DataStore[40].DefaultVisualType = (VisualType)4;
+			DataStore[40].Description = @"A model for easier working with TypeRef valued Properties.";
+			DataStore[40].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[40].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[580];
+			DataStore[40].Seal();
+			DataStore[41].DefaultVisualType = (VisualType)1;
+			DataStore[41].Description = @"A basic DashBoard for the GUI module.";
+			DataStore[41].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[41].PresentableModelRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[616];
+			DataStore[41].Seal();
 	
 		}
 #region Serializer

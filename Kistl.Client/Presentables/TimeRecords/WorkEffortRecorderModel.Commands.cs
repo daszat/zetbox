@@ -51,7 +51,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             /// <param name="dataCtx">the data context to use</param>
             /// <param name="parent">which <see cref="WorkEffortRecorderModel"/> to work on</param>
             public StartNewWorkEffortCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, WorkEffortRecorderModel parent)
-                : base(appCtx, dataCtx)
+                : base(appCtx, dataCtx, "New Work Effort")
             {
                 if (parent == null)
                 {
@@ -124,7 +124,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             /// <param name="dataCtx">the data context to use</param>
             /// <param name="parent">which <see cref="WorkEffortRecorderModel"/> to work on</param>
             public FinishWorkEffortCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, WorkEffortRecorderModel parent)
-                : base(appCtx, dataCtx)
+                : base(appCtx, dataCtx, "Finish")
             {
                 if (parent == null)
                 {

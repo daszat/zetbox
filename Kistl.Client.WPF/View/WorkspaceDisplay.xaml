@@ -4,13 +4,13 @@
         xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
         xmlns:view="clr-namespace:Kistl.Client.WPF.View"
         xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
-        xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
         xmlns:tr="clr-namespace:Kistl.Client.Presentables.TimeRecords;assembly=Kistl.Client"
+        xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
+        commands:SmartRoutedUICommand.IsCommandSink="True"
         Title="dasLauncher"
         Height="600"
         Width="800"
-        Background="LightGray"
-        commands:SmartRoutedUICommand.IsCommandSink="True">
+        Background="LightGray">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="{Binding CreateNewInstanceExternallyCommand.Label}"
@@ -91,8 +91,7 @@
                     <TextBox Margin="5"
                              Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged}" />
                 </DockPanel>
-                <ListView x:Name="ObjectList"
-                          ItemsSource="{Binding InstancesFiltered}"
+                <ListView ItemsSource="{Binding InstancesFiltered}"
                           SelectedItem="{Binding SelectedInstance}"
                           ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                           BorderThickness="0">

@@ -20,6 +20,7 @@ namespace Kistl.Client.Presentables.KistlBase
             IDataObject referenceHolder, ObjectReferenceProperty prop)
             : base(appCtx, dataCtx, referenceHolder, prop)
         {
+            // TODO: use a static reference here
             if (prop.ReferenceObjectClass != DataContext.GetQuery<ObjectClass>().Where(oc => oc.ClassName == "Assembly"))
             {
                 throw new ArgumentOutOfRangeException("prop", "Can only handle Assembly References");
@@ -39,6 +40,5 @@ namespace Kistl.Client.Presentables.KistlBase
 
             this.Value = (DataObjectModel)Factory.CreateDefaultModel(DataContext, assemblyDescriptor);
         }
-
     }
 }

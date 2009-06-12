@@ -12,7 +12,17 @@ namespace Kistl.Client.Presentables
         : PresentableModel
         where TChoosable : PresentableModel
     {
-        public SelectionTaskModel(
+        /// <summary>
+        /// Initializes a new instance of the SelectionTaskModel class. This is protected since there 
+        /// is no PresentableModelDescriptor for this class. Instead, either use the
+        /// <see cref="DataObjectSelectionTaskModel"/> or inherit this for a specific type yourself and 
+        /// add your own PresentableModelDescriptor and View.
+        /// </summary>
+        /// <param name="appCtx"></param>
+        /// <param name="dataCtx"></param>
+        /// <param name="choices"></param>
+        /// <param name="callback"></param>
+        protected SelectionTaskModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IList<TChoosable> choices,
             Action<TChoosable> callback)

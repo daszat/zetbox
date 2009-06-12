@@ -1,8 +1,10 @@
-﻿<view:PropertyView x:Class="Kistl.Client.WPF.View.ObjectReferenceView"
+﻿<view:PropertyView x:Class="Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
                    xmlns:view="clr-namespace:Kistl.Client.WPF.View"
+                   xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
+                   commands:SmartRoutedUICommand.IsCommandSink="True"
                    ToolTip="{Binding ToolTip, Mode=OneWay}">
 
     <view:PropertyView.Resources>
@@ -22,17 +24,15 @@
 
         <Button DockPanel.Dock="Right"
                 Margin="3"
-                Click="OpenSelection"
-                IsEnabled="{Binding HasValue}">Open</Button>
+                Command="{Binding LoadTypeRefFromAssemblyFileCommand, Converter={StaticResource CommandConverter}}">From File ...</Button>
 
         <Button DockPanel.Dock="Right"
                 Margin="3"
-                Click="CreateNewHandler">New ...</Button>
+                Command="{Binding LoadTypeRefFromAssemblyRefCommand, Converter={StaticResource CommandConverter}}">From Assembly ...</Button>
 
         <ComboBox Margin="3"
                   ItemsSource="{Binding Domain, Mode=OneWay}"
                   ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                   SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
     </DockPanel>
-
 </view:PropertyView>

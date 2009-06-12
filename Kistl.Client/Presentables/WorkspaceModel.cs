@@ -16,7 +16,7 @@ namespace Kistl.Client.Presentables
         public WorkspaceModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
-            RecentObjects = new ObservableCollection<DataObjectModel>();
+            RecentObjects = new ObservableCollection<PresentableModel>();
         }
 
         #region Data
@@ -84,10 +84,13 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// A list of "active" <see cref="IDataObject"/>s
         /// </summary>
-        public ObservableCollection<DataObjectModel> RecentObjects { get; private set; }
+        public ObservableCollection<PresentableModel> RecentObjects { get; private set; }
 
-        private DataObjectModel _selectedItem;
-        public DataObjectModel SelectedItem
+        private PresentableModel _selectedItem;
+        /// <summary>
+        /// The last selected PresentableModel.
+        /// </summary>
+        public PresentableModel SelectedItem
         {
             get
             {
@@ -98,8 +101,12 @@ namespace Kistl.Client.Presentables
                 if (_selectedItem != value)
                 {
                     _selectedItem = value;
-                    if (_selectedItem != null)
-                        HistoryTouch(_selectedItem);
+                    if (_selectedItem is DataObjectModel)
+                    {
+                        HistoryTouch((DataObjectModel)_selectedItem);
+                        _selectedInstance = (DataObjectModel)_selectedItem;
+                        OnPropertyChanged("SelectedInstance");
+                    }
                     UpdateInstances();
                     OnPropertyChanged("SelectedItem");
                 }
@@ -107,6 +114,9 @@ namespace Kistl.Client.Presentables
         }
 
         private DataObjectModel _selectedInstance;
+        /// <summary>
+        /// The last selected DataObjectModel.
+        /// </summary>
         public DataObjectModel SelectedInstance
         {
             get
@@ -196,9 +206,10 @@ namespace Kistl.Client.Presentables
         /// registers a user contact with the mdl in this <see cref="WorkspaceModel"/>'s history
         /// </summary>
         /// <param name="mdl"></param>
-        public void HistoryTouch(DataObjectModel mdl)
+        public void HistoryTouch(PresentableModel mdl)
         {
             // fetch old SelectedItem to reestablish selection after modifying RecentObjects
+            var instance = SelectedInstance;
             var item = SelectedItem;
             if (!RecentObjects.Contains(mdl))
             {
@@ -206,6 +217,7 @@ namespace Kistl.Client.Presentables
             }
             // reestablish selection 
             SelectedItem = item;
+            SelectedInstance = instance;
         }
 
         #endregion
@@ -230,6 +242,16 @@ namespace Kistl.Client.Presentables
         }
 
         private void UpdateInstances()
+        {
+            if (this.Instances != null)
+            {
+                this.Instances = null;
+                OnPropertyChanged("Instances");
+                OnPropertyChanged("InstancesFiltered");
+            }
+        }
+
+        private void LoadInstances()
         {
             this.Instances = null;
             var dtm = this.SelectedItem as DataTypeModel;
@@ -304,9 +326,8 @@ namespace Kistl.Client.Presentables
     internal class SaveContextCommand : CommandModel
     {
         public SaveContextCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, "Save")
         {
-            Label = "Save";
             ToolTip = "Commits outstanding changes to the data store.";
         }
 
@@ -333,9 +354,8 @@ namespace Kistl.Client.Presentables
     internal class CreateNewInstanceCommand : CommandModel
     {
         public CreateNewInstanceCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, WorkspaceModel parent)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, "New")
         {
-            Label = "New";
             _parent = parent;
         }
 
@@ -369,12 +389,9 @@ namespace Kistl.Client.Presentables
     internal class CreateNewInstanceExternallyCommand : CommandModel
     {
         public CreateNewInstanceExternallyCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, "External New ...")
         {
-            Label = "External New ...";
         }
-
-        private WorkspaceModel _parent;
 
         public override bool CanExecute(object data)
         {
@@ -388,7 +405,7 @@ namespace Kistl.Client.Presentables
             {
                 var objectClass = data as ObjectClassModel;
                 var externalCtx = KistlContext.GetContext();
-                var newWorkspace = new WorkspaceModel(AppContext, externalCtx);
+                var newWorkspace = Factory.CreateSpecificModel<WorkspaceModel>(externalCtx);
                 var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());
                 var newModel = (DataObjectModel)Factory.CreateDefaultModel(externalCtx, newObject);
                 newWorkspace.HistoryTouch(newModel);

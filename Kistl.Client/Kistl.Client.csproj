@@ -80,7 +80,11 @@
     <Compile Include="Presentables\IAsyncUiManager.cs" />
     <Compile Include="Presentables\ICommand.cs" />
     <Compile Include="Presentables\IPropertyModel.cs" />
+    <Compile Include="Presentables\KistlBase\AssemblyModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyReferenceModel.cs" />
+    <Compile Include="Presentables\KistlBase\SystemTypeModel.cs" />
+    <Compile Include="Presentables\KistlBase\TypeRefPropertyModel.Commands.cs" />
+    <Compile Include="Presentables\KistlBase\TypeRefPropertyModel.cs" />
     <Compile Include="Presentables\KistlDebuggerAsModel.cs" />
     <Compile Include="Presentables\LauncherModel.cs" />
     <Compile Include="Presentables\ListPropertyModels.cs" />

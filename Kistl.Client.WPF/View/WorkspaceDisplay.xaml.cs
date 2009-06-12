@@ -33,11 +33,10 @@ namespace Kistl.Client.WPF.View
 
         private void ModuleTreeSelectedItemChangedHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var workspaceModel = Model;
-            var item = ObjectTree.SelectedItem as Kistl.Client.Presentables.DataObjectModel;
+            var item = ObjectTree.SelectedItem as Kistl.Client.Presentables.PresentableModel;
             if (item != null)
             {
-                workspaceModel.SelectedItem = item;
+                this.Model.SelectedItem = item;
             }
 
         }

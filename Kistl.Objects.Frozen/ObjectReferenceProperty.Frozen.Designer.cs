@@ -1491,7 +1491,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[233],
 			DataStore[227].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[227].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
 			DataStore[227].PropertyName = @"ControlRef";
-			DataStore[227].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[227].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[40];
 			DataStore[227].EagerLoading = false;
 			DataStore[227].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[227].Seal();
@@ -1508,7 +1508,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[230],
 			DataStore[231].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[231].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
 			DataStore[231].PropertyName = @"PresentableModelRef";
-			DataStore[231].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[231].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[40];
 			DataStore[231].EagerLoading = false;
 			DataStore[231].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[231].Seal();

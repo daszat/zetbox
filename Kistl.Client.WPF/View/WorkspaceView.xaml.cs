@@ -39,7 +39,7 @@ namespace Kistl.Client.WPF.View
         private void DeleteHandler(object sender, RoutedEventArgs e)
         {
             var workspaceModel = (WorkspaceModel)this.DataContext;
-            var item = workspaceModel.SelectedItem;
+            var item = workspaceModel.SelectedItem as DataObjectModel;
             if (item != null)
             {
                 item.Delete();
