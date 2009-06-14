@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Kistl.Server.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Kilst")]
+[assembly: AssemblyCompany("dasz.at OG")]
 [assembly: AssemblyProduct("Kistl.Server.Tests")]
-[assembly: AssemblyCopyright("Copyright © Kilst 2008")]
+[assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

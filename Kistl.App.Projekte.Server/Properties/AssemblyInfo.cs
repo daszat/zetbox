@@ -9,9 +9,9 @@ using System;
 [assembly: AssemblyTitle("Kistl.App.Projekte.Server")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Kilst")]
+[assembly: AssemblyCompany("dasz.at OG")]
 [assembly: AssemblyProduct("Kistl.App.Projekte.Server")]
-[assembly: AssemblyCopyright("Copyright © Kilst 2007")]
+[assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

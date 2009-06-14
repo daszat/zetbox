@@ -11,9 +11,9 @@ using System;
 [assembly: AssemblyTitle("Kistl.Client")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Money Inc.")]
+[assembly: AssemblyCompany("dasz.at OG")]
 [assembly: AssemblyProduct("Kistl.Client")]
-[assembly: AssemblyCopyright("Copyright © Money Inc. 2007")]
+[assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
