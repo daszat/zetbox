@@ -65,26 +65,48 @@
                 <GridSplitter Grid.Row="1"
                               HorizontalAlignment="Stretch" />
 
-                <DockPanel Grid.Row="2">
-                    <DockPanel DockPanel.Dock="Top">
-                        <TextBlock DockPanel.Dock="Left"
-                                   HorizontalAlignment="Center">Search:</TextBlock>
-                        <TextBox Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged}" />
-                    </DockPanel>
-                    <ListBox x:Name="ObjectList"
-                             ItemsSource="{Binding InstancesFiltered}"
-                             SelectedItem="{Binding SelectedInstance}"
-                             ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                             BorderThickness="0">
-                        <ListBox.Template>
-                            <ControlTemplate>
-                                <ScrollViewer HorizontalScrollBarVisibility="Visible">
-                                    <StackPanel IsItemsHost="True" />
-                                </ScrollViewer>
-                            </ControlTemplate>
-                        </ListBox.Template>
-                    </ListBox>
-                </DockPanel>
+                <ContentPresenter Grid.Row="2"
+                                  Content="{Binding SelectedItem}">
+                    <ContentPresenter.Resources>
+                        <DataTemplate DataType="{x:Type client:ObjectClassModel}">
+                            <DockPanel>
+                                <DockPanel DockPanel.Dock="Top">
+                                    <TextBlock DockPanel.Dock="Left"
+                                               HorizontalAlignment="Center">Search:</TextBlock>
+                                    <TextBox Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged}" />
+                                </DockPanel>
+                                <ListBox ItemsSource="{Binding InstancesFiltered}"
+                                         SelectedItem="{Binding DataContext.SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                         ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                                         BorderThickness="0">
+                                    <ListBox.Template>
+                                        <ControlTemplate>
+                                            <ScrollViewer HorizontalScrollBarVisibility="Visible">
+                                                <StackPanel IsItemsHost="True" />
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+                                </ListBox>
+                            </DockPanel>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type client:ModuleModel}">
+                            <DockPanel>
+                                <ListBox ItemsSource="{Binding ObjectClasses}"
+                                         SelectedItem="{Binding DataContext.SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                         ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                                         BorderThickness="0">
+                                    <ListBox.Template>
+                                        <ControlTemplate>
+                                            <ScrollViewer HorizontalScrollBarVisibility="Visible">
+                                                <StackPanel IsItemsHost="True" />
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+                                </ListBox>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ContentPresenter.Resources>
+                </ContentPresenter>
 
                 <GridSplitter Grid.Row="3"
                               HorizontalAlignment="Stretch" />
@@ -93,7 +115,7 @@
                     <TextBlock DockPanel.Dock="Top"
                                HorizontalAlignment="Center">Recent Objects:</TextBlock>
                     <ListBox ItemsSource="{Binding RecentObjects}"
-                             SelectedItem="{Binding SelectedInstance}"
+                             SelectedItem="{Binding SelectedItem}"
                              ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                              BorderThickness="0" />
                 </DockPanel>
@@ -105,7 +127,7 @@
 
             <ContentPresenter Grid.Column="2"
                               Grid.IsSharedSizeScope="True"
-                              Content="{Binding SelectedInstance}"
+                              Content="{Binding SelectedItem}"
                               ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
         </Grid>
     </DockPanel>

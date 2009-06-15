@@ -159,7 +159,7 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                Workspaces[dom.Object.Context].SelectedInstance = dom;
+                Workspaces[dom.Object.Context].SelectedItem = dom;
             }
         }
 

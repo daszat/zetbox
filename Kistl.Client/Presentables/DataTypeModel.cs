@@ -1,23 +1,37 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using Kistl.App.Base;
-using Kistl.API;
-using Kistl.API.Client;
-using System.Collections.Specialized;
 
 namespace Kistl.Client.Presentables
 {
-    public class DataTypeModel : DataObjectModel
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Client;
+    using Kistl.App.Base;
+
+    /// <summary>
+    /// Models the specialities of <see cref="DataType"/>s.
+    /// </summary>
+    public class DataTypeModel
+        : DataObjectModel
     {
+        /// <summary>
+        /// Initializes a new instance of the DataTypeModel class.
+        /// </summary>
+        /// <param name="appCtx">the application context to use</param>
+        /// <param name="dataCtx">the data context to use</param>
+        /// <param name="type">the data type to model</param>
         public DataTypeModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IGuiApplicationContext appCtx,
+            IKistlContext dataCtx,
             DataType type)
             : base(appCtx, dataCtx, type)
         {
             _type = type;
+
             // refresh Icon
             UpdateViewCache();
         }
@@ -30,6 +44,7 @@ namespace Kistl.Client.Presentables
             get
             {
                 QueryHasInstances();
+
                 // TODO: Wird auch in der Ableitung aufgerufen.
                 // Stateobjekt als IDisposable durchreichen
                 // aber dann braucht man einen ReferenceCounter - Uaaaaa
@@ -58,11 +73,42 @@ namespace Kistl.Client.Presentables
                 if (_instances == null)
                 {
                     _instances = new ObservableCollection<DataObjectModel>();
+
                     // As this is a "calculated" collection, only insider should modify this
-                    //_instances.CollectionChanged += _instances_CollectionChanged;
+                    ////_instances.CollectionChanged += _instances_CollectionChanged;
                     LoadInstances();
                 }
                 return _instances;
+            }
+        }
+
+        private string _instancesSearchString = String.Empty;
+        public string InstancesSearchString
+        {
+            get
+            {
+                return _instancesSearchString;
+            }
+            set
+            {
+                if (_instancesSearchString != value)
+                {
+                    _instancesSearchString = value;
+                    OnInstancesSearchStringChanged(_instancesSearchString);
+                }
+            }
+        }
+
+        private ReadOnlyObservableCollection<DataObjectModel> _instancesFiltered = null;
+        public ReadOnlyObservableCollection<DataObjectModel> InstancesFiltered
+        {
+            get
+            {
+                if (_instancesFiltered == null)
+                {
+                    ExecuteFilter();
+                }
+                return _instancesFiltered;
             }
         }
 
@@ -75,7 +121,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         protected virtual void QueryHasInstances()
         {
-             HasInstances = false; 
+            HasInstances = false;
         }
 
         /// <summary>
@@ -83,6 +129,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         protected virtual void LoadInstances()
         {
+            OnInstancesChanged();
         }
 
         /// <returns>the default icon of this <see cref="DataType"/></returns>
@@ -92,6 +139,51 @@ namespace Kistl.Client.Presentables
                 return _type.DefaultIcon;
             else
                 return null;
+        }
+
+        /// <summary>
+        /// Call this when the <see cref="Instances"/> property or its 
+        /// contents have changed. Override this to react on changes here.
+        /// </summary>
+        protected virtual void OnInstancesChanged()
+        {
+            OnPropertyChanged("Instances");
+            ExecuteFilter();
+        }
+
+        /// <summary>
+        /// Call this when the <see cref="InstancesSearchString"/> property 
+        /// has changed. Override this to react on changes here.
+        /// </summary>
+        protected virtual void OnInstancesSearchStringChanged(string oldValue)
+        {
+            OnPropertyChanged("InstancesSearchString");
+            ExecuteFilter();
+        }
+
+        /// <summary>
+        /// Create a fresh <see cref="InstancesFiltered"/> collection when something has changed.
+        /// </summary>
+        private void ExecuteFilter()
+        {
+            if (this.Instances == null)
+            {
+                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(new ObservableCollection<DataObjectModel>());
+            }
+            else if (InstancesSearchString == String.Empty)
+            {
+                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(this.Instances);
+            }
+            else
+            {
+                // poor man's full text search
+                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(
+                    new ObservableCollection<DataObjectModel>(
+                        this.Instances.Where(
+                            o => o.Name.Contains(this.InstancesSearchString)
+                            || o.ID.ToString().Contains(this.InstancesSearchString))));
+            }
+            OnPropertyChanged("InstancesFiltered");
         }
 
         #endregion

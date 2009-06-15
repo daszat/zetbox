@@ -74,7 +74,7 @@
                                HorizontalAlignment="Center">Recent Objects:</TextBlock>
                     <ListBox Margin="5"
                              ItemsSource="{Binding RecentObjects}"
-                             SelectedItem="{Binding SelectedInstance}"
+                             SelectedItem="{Binding SelectedItem}"
                              ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                              BorderThickness="0" />
                 </DockPanel>
@@ -84,32 +84,10 @@
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" />
 
-            <DockPanel Grid.Column="2">
-                <DockPanel DockPanel.Dock="Top">
-                    <TextBlock DockPanel.Dock="Left"
-                               Margin="5">Search:</TextBlock>
-                    <TextBox Margin="5"
-                             Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged}" />
-                </DockPanel>
-                <ListView ItemsSource="{Binding InstancesFiltered}"
-                          SelectedItem="{Binding SelectedInstance}"
-                          ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                          BorderThickness="0">
-                    <ListView.Template>
-                        <ControlTemplate>
-                            <ScrollViewer HorizontalScrollBarVisibility="Visible">
-                                <StackPanel IsItemsHost="True" />
-                            </ScrollViewer>
-                        </ControlTemplate>
-                    </ListView.Template>
-                    <ListView.Resources>
-                        <Style TargetType="ListViewItem">
-                            <EventSetter Event="MouseDoubleClick"
-                                         Handler="ObjectList_MouseDoubleClick" />
-                        </Style>
-                    </ListView.Resources>
-                </ListView>
-            </DockPanel>
+            <ContentPresenter Grid.Column="2"
+                              Grid.IsSharedSizeScope="True"
+                              Content="{Binding SelectedItem}"
+                              ContentTemplateSelector="{StaticResource readOnlyTemplateSelector}" />
         </Grid>
     </DockPanel>
 </Window>

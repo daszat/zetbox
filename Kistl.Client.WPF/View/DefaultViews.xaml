@@ -17,6 +17,7 @@
     </DataTemplate>
 
     <view:VisualTypeTemplateSelector x:Key="defaultTemplateSelector" />
+    <view:VisualTypeTemplateSelector x:Key="readOnlyTemplateSelector" ReadOnly="true"/>
     <view:VisualTypeTemplateSelector x:Key="listItemTemplateSelector" RequestedType="ObjectListEntry"/>
     <view:VisualTypeTemplateSelector x:Key="gridCellTemplateSelector" RequestedType="GridCell"/>
 </ResourceDictionary>

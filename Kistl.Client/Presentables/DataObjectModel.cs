@@ -140,6 +140,13 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        public LookupDictionary<string, PropertyGroupModel> PropertyGroupsByName
+        {
+            get
+            {
+                return new LookupDictionary<string, PropertyGroupModel>(PropertyGroups, mdl => mdl.Title);
+            }
+        }
 
         private string _toStringCache;
         public string Name

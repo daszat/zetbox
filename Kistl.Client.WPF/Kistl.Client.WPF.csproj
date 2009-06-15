@@ -123,6 +123,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\KistlBase\ObjectClassDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\KistlBase\TypeRefPropertyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -263,6 +267,9 @@
     </Compile>
     <Compile Include="View\GUI\DashboardDisplay.xaml.cs">
       <DependentUpon>DashboardDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\ObjectClassDisplay.xaml.cs">
+      <DependentUpon>ObjectClassDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\TypeRefPropertyView.xaml.cs">
       <DependentUpon>TypeRefPropertyView.xaml</DependentUpon>

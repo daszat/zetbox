@@ -41,6 +41,7 @@ namespace Kistl.Client.WPF.View
 
         }
 
+        [Obsolete("moved to ObjectClassDisplay")]
         private void ObjectList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var listItem = sender as ListViewItem;

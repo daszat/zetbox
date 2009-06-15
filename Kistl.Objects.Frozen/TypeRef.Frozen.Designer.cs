@@ -268,7 +268,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(227);
+		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(228);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new TypeRef__Implementation__Frozen(1);
@@ -724,6 +724,8 @@ namespace Kistl.App.Base
 			DataStore[630] = new TypeRef__Implementation__Frozen(630);
 
 			DataStore[631] = new TypeRef__Implementation__Frozen(631);
+
+			DataStore[632] = new TypeRef__Implementation__Frozen(632);
 
 		}
 
@@ -2380,6 +2382,13 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[569],
 });
 			DataStore[631].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[630];
 			DataStore[631].Seal();
+			DataStore[632].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
+			DataStore[632].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[632].FullName = @"Kistl.Client.WPF.View.KistlBase.ObjectClassDisplay";
+			DataStore[632].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
+});
+			DataStore[632].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
+			DataStore[632].Seal();
 	
 		}
 #region Serializer

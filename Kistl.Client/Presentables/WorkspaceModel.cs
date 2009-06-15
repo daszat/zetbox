@@ -58,30 +58,6 @@ namespace Kistl.Client.Presentables
         private ObservableCollection<PresentableModel> _applicationsCache;
 
         /// <summary>
-        /// Gets a list of instances of the currently selected item
-        /// </summary>
-        public ObservableCollection<DataObjectModel> Instances { get; private set; }
-
-        private string _instancesSearchString = String.Empty;
-        public string InstancesSearchString
-        {
-            get
-            {
-                return _instancesSearchString;
-            }
-            set
-            {
-                if (_instancesSearchString != value)
-                {
-                    _instancesSearchString = value;
-                    OnInstancesSearchStringChanged(_instancesSearchString);
-                }
-            }
-        }
-
-        public ReadOnlyObservableCollection<DataObjectModel> InstancesFiltered { get; private set; }
-
-        /// <summary>
         /// A list of "active" <see cref="IDataObject"/>s
         /// </summary>
         public ObservableCollection<PresentableModel> RecentObjects { get; private set; }
@@ -101,37 +77,7 @@ namespace Kistl.Client.Presentables
                 if (_selectedItem != value)
                 {
                     _selectedItem = value;
-                    if (_selectedItem is DataObjectModel)
-                    {
-                        HistoryTouch((DataObjectModel)_selectedItem);
-                        _selectedInstance = (DataObjectModel)_selectedItem;
-                        OnPropertyChanged("SelectedInstance");
-                    }
-                    UpdateInstances();
                     OnPropertyChanged("SelectedItem");
-                }
-            }
-        }
-
-        private DataObjectModel _selectedInstance;
-        /// <summary>
-        /// The last selected DataObjectModel.
-        /// </summary>
-        public DataObjectModel SelectedInstance
-        {
-            get
-            {
-                return _selectedInstance;
-            }
-            set
-            {
-                if (_selectedInstance != value)
-                {
-                    _selectedInstance = value;
-                    if (_selectedInstance != null)
-                        HistoryTouch(_selectedInstance);
-                    UpdateInstances();
-                    OnPropertyChanged("SelectedInstance");
                 }
             }
         }
@@ -209,7 +155,6 @@ namespace Kistl.Client.Presentables
         public void HistoryTouch(PresentableModel mdl)
         {
             // fetch old SelectedItem to reestablish selection after modifying RecentObjects
-            var instance = SelectedInstance;
             var item = SelectedItem;
             if (!RecentObjects.Contains(mdl))
             {
@@ -217,7 +162,6 @@ namespace Kistl.Client.Presentables
             }
             // reestablish selection 
             SelectedItem = item;
-            SelectedInstance = instance;
         }
 
         #endregion
@@ -241,65 +185,6 @@ namespace Kistl.Client.Presentables
             this.Applications.Add(new TimeRecords.Dashboard(AppContext, DataContext));
         }
 
-        private void UpdateInstances()
-        {
-            if (this.Instances != null)
-            {
-                this.Instances = null;
-                OnPropertyChanged("Instances");
-                OnPropertyChanged("InstancesFiltered");
-            }
-        }
-
-        private void LoadInstances()
-        {
-            this.Instances = null;
-            var dtm = this.SelectedItem as DataTypeModel;
-            if (dtm != null)
-            {
-                this.Instances = dtm.Instances;
-                if (!this.Instances.Contains(this.SelectedInstance))
-                {
-                    this.SelectedInstance = null;
-                }
-            }
-            OnInstancesChanged();
-        }
-
-        private void OnInstancesChanged()
-        {
-            OnPropertyChanged("Instances");
-            ExecuteFilter();
-        }
-
-        private void OnInstancesSearchStringChanged(string oldValue)
-        {
-            OnPropertyChanged("InstancesSearchString");
-            ExecuteFilter();
-        }
-
-        private void ExecuteFilter()
-        {
-            if (this.Instances == null)
-            {
-                this.InstancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(new ObservableCollection<DataObjectModel>());
-            }
-            else if (InstancesSearchString == String.Empty)
-            {
-                this.InstancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(this.Instances);
-            }
-            else
-            {
-                // poor man's full text search
-                this.InstancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(
-                    new ObservableCollection<DataObjectModel>(
-                        this.Instances.Where(
-                            o => o.Name.Contains(this.InstancesSearchString)
-                            || o.ID.ToString().Contains(this.InstancesSearchString))));
-            }
-            OnPropertyChanged("InstancesFiltered");
-        }
-
         #endregion
 
         /// <summary>
@@ -314,8 +199,8 @@ namespace Kistl.Client.Presentables
                 return;
 
             var here = DataContext.Find(other.GetInterfaceType(), other.ID);
-            SelectedInstance = (DataObjectModel)AppContext.Factory.CreateDefaultModel(DataContext, here);
-            HistoryTouch(SelectedInstance);
+            SelectedItem = AppContext.Factory.CreateDefaultModel(DataContext, here);
+            HistoryTouch(SelectedItem);
         }
     }
 
@@ -378,7 +263,7 @@ namespace Kistl.Client.Presentables
                 var newObject = DataContext.Create(objectClass.GetDescribedInterfaceType());
                 var newModel = (DataObjectModel)Factory.CreateDefaultModel(DataContext, newObject);
                 _parent.HistoryTouch(newModel);
-                _parent.SelectedInstance = newModel;
+                _parent.SelectedItem = newModel;
             }
         }
     }
@@ -409,7 +294,7 @@ namespace Kistl.Client.Presentables
                 var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());
                 var newModel = (DataObjectModel)Factory.CreateDefaultModel(externalCtx, newObject);
                 newWorkspace.HistoryTouch(newModel);
-                newWorkspace.SelectedInstance = newModel;
+                newWorkspace.SelectedItem = newModel;
                 Factory.ShowModel(newWorkspace, true, false);
             }
         }

@@ -8,12 +8,15 @@
                    HorizontalAlignment="Center">Available GUI Infrastructure</TextBlock>
         <ListView DockPanel.Dock="Top"
                   ItemsSource="{Binding PresentableModelDescriptors}"
+                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                   SelectedItem="{Binding SelectedPresentableModelDescriptor, UpdateSourceTrigger=PropertyChanged}" />
         <DockPanel DockPanel.Dock="Top">
             <TextBox DockPanel.Dock="Left">Default visual type:</TextBox>
             <ContentPresenter Content="{Binding SelectedPresentableModelDescriptor.DefaultVisualType}" />
         </DockPanel>
-        <ListView ItemsSource="{Binding DefaultViewDescriptors}" />
-        <ListView ItemsSource="{Binding ApplicableViewDescriptors}" />
+        <ListView ItemsSource="{Binding DefaultViewDescriptors}"
+                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}" />
+        <ListView ItemsSource="{Binding ApplicableViewDescriptors}"
+                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}" />
     </DockPanel>
 </UserControl>

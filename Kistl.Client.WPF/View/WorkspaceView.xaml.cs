@@ -60,7 +60,7 @@ namespace Kistl.Client.WPF.View
         private void ModuleTreeSelectedItemChangedHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var workspaceModel = (WorkspaceModel)this.DataContext;
-            var item = ModuleTree.SelectedItem as DataObjectModel;
+            var item = ModuleTree.SelectedItem as PresentableModel;
             if (item != null)
             {
                 workspaceModel.SelectedItem = item;

@@ -281,7 +281,7 @@ namespace Kistl.App.GUI
         { }
 
 
-		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(92);
+		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(93);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new ViewDescriptor__Implementation__Frozen(1);
@@ -467,6 +467,8 @@ namespace Kistl.App.GUI
 			DataStore[93] = new ViewDescriptor__Implementation__Frozen(93);
 
 			DataStore[94] = new ViewDescriptor__Implementation__Frozen(94);
+
+			DataStore[95] = new ViewDescriptor__Implementation__Frozen(95);
 
 		}
 
@@ -1115,6 +1117,13 @@ namespace Kistl.App.GUI
 			DataStore[94].Toolkit = (Toolkit)0;
 			DataStore[94].VisualType = (VisualType)1;
 			DataStore[94].Seal();
+			DataStore[95].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[632];
+			DataStore[95].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[95].IsReadOnly = true;
+			DataStore[95].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[33];
+			DataStore[95].Toolkit = (Toolkit)0;
+			DataStore[95].VisualType = (VisualType)1;
+			DataStore[95].Seal();
 	
 		}
 #region Serializer

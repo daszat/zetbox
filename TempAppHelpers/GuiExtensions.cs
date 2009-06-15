@@ -75,6 +75,10 @@ namespace Kistl.App.Extensions
             bool readOnly)
         {
             PrimeCaches(tk);
+            if (!_vdCache[tk].ContainsKey(vt))
+            {
+                return null;
+            }
             var candidates = _vdCache[tk][vt].ToLookup(obj => obj.PresentedModelDescriptor);
 
             List<ViewDescriptor> result = new List<ViewDescriptor>();
@@ -88,7 +92,7 @@ namespace Kistl.App.Extensions
             }
 
             // fall back to any available control, if we don't have one with matching read-only state
-            return result.FirstOrDefault(vd => vd.IsReadOnly == readOnly) ?? result.First();
+            return result.FirstOrDefault(vd => vd.IsReadOnly == readOnly) ?? result.FirstOrDefault();
         }
 
         /// <summary>
