@@ -16,6 +16,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
         /// <summary>
         /// Returns the association name for the given relation
+        /// TODO: Move to Relation Generated Object
         /// </summary>
         public static string GetAssociationName(this Relation rel)
         {
@@ -24,6 +25,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
         /// <summary>
         /// Returns the association name for the given ValueTypeProperty
+        /// TODO: Move to Relation Generated Object
         /// </summary>
         public static string GetAssociationName(this ValueTypeProperty prop)
         {
@@ -91,6 +93,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             }
         }
 
+        [Obsolete]
         internal static Relation Lookup(IKistlContext ctx, ObjectReferenceProperty prop)
         {
             return Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
