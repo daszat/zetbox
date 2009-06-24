@@ -34,6 +34,10 @@ namespace Kistl.Client.WPF.View
         public static DataTemplate SelectTemplate(PresentableModel mdl, VisualType? visualType, bool readOnly)
         {
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor();
+            if (pmd == null)
+            {
+                throw new ArgumentOutOfRangeException("mdl", "No matching PresentableModelDescriptor found");
+            }
 
             var visualDesc = visualType.HasValue 
                 ? pmd.GetViewDescriptor(Toolkit.WPF, visualType.Value, readOnly) 

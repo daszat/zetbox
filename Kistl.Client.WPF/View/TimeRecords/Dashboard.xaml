@@ -3,5 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              HorizontalContentAlignment="Center"
              VerticalContentAlignment="Center">
-    <TextBlock>Time Records Dashboard</TextBlock>
+    <StackPanel>
+        <TextBlock>Time Records Dashboard</TextBlock>
+        <Button Command="{Binding OpenRecorderCommand, Converter={StaticResource CommandConverter}}">Start recording</Button>
+    </StackPanel>
 </UserControl>

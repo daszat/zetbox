@@ -56,9 +56,11 @@
                         </TreeView.ItemTemplateSelector>
                         -->
                         <TreeViewItem Header="Browse"
-                                      ItemsSource="{Binding Modules}" />
+                                      ItemsSource="{Binding Modules}"
+                                      IsExpanded="True" />
                         <TreeViewItem Header="Apps"
-                                      ItemsSource="{Binding Applications}" />
+                                      ItemsSource="{Binding Applications}"
+                                      IsExpanded="True" />
                     </TreeView>
                 </DockPanel>
 
