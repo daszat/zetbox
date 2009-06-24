@@ -50,6 +50,8 @@ namespace Kistl.Client.Presentables.TimeRecords
                 if (_currentUser != value)
                 {
                     _currentUser = value;
+                    ReloadPresence();
+                    ReloadPresenceRecords();
                     ReloadEfforts();
                     OnPropertyChanged("CurrentUser");
                 }
@@ -80,6 +82,19 @@ namespace Kistl.Client.Presentables.TimeRecords
 
         #region IsCurrentlyPresent
 
+        private void ReloadPresence()
+        {
+            var currentPresence = DataContext.GetQuery<PresenceRecord>()
+                .Where(pr => pr.Mitarbeiter.ID == CurrentUser.ID && !pr.Thru.HasValue)
+                .SingleOrDefault();
+
+            if (currentPresence != null)
+            {
+                _isCurrentlyPresent = true;
+                OnPropertyChanged("IsCurrentlyPresent");
+            }
+        }
+
         /// <summary>The backing store for the <see cref="IsCurrentlyPresent"/> property.</summary>
         private bool _isCurrentlyPresent = false;
 
@@ -102,19 +117,19 @@ namespace Kistl.Client.Presentables.TimeRecords
                         nowPresent.From = DateTime.Now;
                         nowPresent.Mitarbeiter = (Mitarbeiter)CurrentUser.Object;
                         InitialisePresenceRecords();
-                        _presenceRecords.Add(nowPresent);
+                        _presenceRecords.Add((PresenceRecordModel)Factory.CreateDefaultModel(DataContext,nowPresent));
                         DataContext.SubmitChanges();
                     }
                     else
                     {
-                        PresenceRecord nowPresent = PresenceRecords.LastOrDefault(rec => rec.Thru == null);
+                        PresenceRecord nowPresent = PresenceRecords.Select(mdl => mdl.Entry).LastOrDefault(rec => rec.Thru == null);
                         if (nowPresent != null)
                         {
                             nowPresent.Thru = DateTime.Now;
                         }
                     }
                 }
-                OnPropertyChanged("IsCurrentlyWorking");
+                OnPropertyChanged("IsCurrentlyPresent");
             }
         }
 
@@ -208,13 +223,13 @@ namespace Kistl.Client.Presentables.TimeRecords
         #region List of PresenceRecords
 
         /// <summary>The backing store for the <see cref="PresenceRecords"/> property.</summary>
-        private ObservableCollection<PresenceRecord> _presenceRecords;
+        private ObservableCollection<PresenceRecordModel> _presenceRecords;
 
         /// <summary>The read-only proxy for the backing store of the <see cref="PresenceRecords"/> property.</summary>
-        private ReadOnlyObservableCollection<PresenceRecord> _readOnlyPresenceRecords;
+        private ReadOnlyObservableCollection<PresenceRecordModel> _readOnlyPresenceRecords;
 
         /// <summary>Gets a list of recorded <see cref="PresenceRecord"/> of the <see cref="CurrentUser"/>.</summary>
-        public ReadOnlyObservableCollection<PresenceRecord> PresenceRecords
+        public ReadOnlyObservableCollection<PresenceRecordModel> PresenceRecords
         {
             get
             {
@@ -230,9 +245,9 @@ namespace Kistl.Client.Presentables.TimeRecords
         {
             if (_presenceRecords == null)
             {
-                _presenceRecords = new ObservableCollection<PresenceRecord>();
+                _presenceRecords = new ObservableCollection<PresenceRecordModel>();
                 ReloadPresenceRecords();
-                _readOnlyPresenceRecords = new ReadOnlyObservableCollection<PresenceRecord>(_presenceRecords);
+                _readOnlyPresenceRecords = new ReadOnlyObservableCollection<PresenceRecordModel>(_presenceRecords);
             }
         }
 
@@ -251,7 +266,7 @@ namespace Kistl.Client.Presentables.TimeRecords
 
                 foreach (var pr in recordModels)
                 {
-                    _presenceRecords.Add(pr);
+                    _presenceRecords.Add((PresenceRecordModel)Factory.CreateDefaultModel(DataContext,pr));
                 }
             }
         }
@@ -299,6 +314,7 @@ namespace Kistl.Client.Presentables.TimeRecords
                     this.Factory.CreateTimer(TimeSpan.FromMilliseconds(300), () => OnPropertyChanged("TotalPresenceTimeToday"));
                 }
                 return PresenceRecords
+                    .Select(mdl => mdl.Entry)
                     .Where(e => e.From.Date == DateTime.Now.Date)
                     .Sum(e => ((e.Thru ?? DateTime.Now) - e.From).TotalHours);
             }
@@ -308,5 +324,6 @@ namespace Kistl.Client.Presentables.TimeRecords
         public float TimeSinceLastBreak { get; private set; }
 
         #endregion
+
     }
 }

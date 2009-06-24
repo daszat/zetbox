@@ -92,7 +92,14 @@ namespace Kistl.App.Extensions
             }
 
             // fall back to any available control, if we don't have one with matching read-only state
-            return result.FirstOrDefault(vd => vd.IsReadOnly == readOnly) ?? result.FirstOrDefault();
+            var viewDesc = result.FirstOrDefault(vd => vd.IsReadOnly == readOnly) ?? result.FirstOrDefault();
+
+            if (viewDesc.PresentedModelDescriptor != self)
+            {
+                System.Diagnostics.Trace.TraceWarning("Using ViewDescriptor for {0} instead of {1}", viewDesc.PresentedModelDescriptor, self);
+            }
+
+            return viewDesc;
         }
 
         /// <summary>

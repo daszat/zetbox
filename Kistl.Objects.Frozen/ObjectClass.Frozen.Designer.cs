@@ -2443,7 +2443,7 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[244],
 			DataStore[86].ShowNameInLists = true;
 			DataStore[86].BaseObjectClass = null;
 			DataStore[86].DefaultModel = null;
-			DataStore[86].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
+			DataStore[86].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[43];
 			DataStore[86].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
 			DataStore[86].IsFrozenObject = false;

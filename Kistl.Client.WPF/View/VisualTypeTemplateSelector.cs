@@ -14,6 +14,7 @@ namespace Kistl.Client.WPF.View
     using Kistl.App.GUI;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
+    using System.Diagnostics;
 
     /// <summary>
     /// A <see cref="DataTemplateSelector"/> to choose the appropriate
@@ -88,6 +89,7 @@ namespace Kistl.Client.WPF.View
             }
             else
             {
+                Trace.TraceWarning("No DataTemplate found for {0}", item);
                 return (DataTemplate)((FrameworkElement)container).FindResource("emptyTemplate");
             }
         }

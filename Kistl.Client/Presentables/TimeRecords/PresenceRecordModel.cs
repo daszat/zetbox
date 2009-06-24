@@ -7,6 +7,7 @@ namespace Kistl.Client.Presentables.TimeRecords
     using System.Text;
 
     using Kistl.API;
+    using Kistl.App.Projekte;
     using Kistl.App.TimeRecords;
 
     /// <summary>
@@ -15,8 +16,12 @@ namespace Kistl.Client.Presentables.TimeRecords
     public class PresenceRecordModel
         : DataObjectModel
     {
-        /// <summary>The presented <see cref="PresenceRecord"/></summary>
-        private PresenceRecord _entry;
+        /// <summary>Gets the presented <see cref="PresenceRecord"/></summary>
+        public PresenceRecord Entry
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Initializes a new instance of the PresenceRecordModel class.
@@ -30,21 +35,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             PresenceRecord obj)
             : base(appCtx, dataCtx, obj)
         {
-            this._entry = obj;
-            this._entry.PropertyChanged += (sender, args) =>
-            {
-                switch (args.PropertyName)
-                {
-                    case "Name":
-                    case "Notes":
-                    case "From":
-                    case "Thru":
-                    case "Mitarbeiter":
-                        OnPropertyChanged(args.PropertyName);
-                        break;
-                }
-            };
+            this.Entry = obj;
         }
-
     }
 }
