@@ -151,4 +151,25 @@ namespace Kistl.Client.WPF.Converter
             return Binding.DoNothing;
         }
     }
+
+    /// <summary>
+    /// Converts a number of hours into a readable string
+    /// </summary>
+    [ValueConversion(typeof(object), typeof(string))]
+    public class HourConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            double hours = (double)value;
+            return String.Format("{0:00}:{1:00}:{2:00}", (int)hours, ((int)(hours * 60)) % 60, ((int)(hours * 3600)) % 60);
+        }
+
+        public object ConvertBack(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            // Readonly
+            return Binding.DoNothing;
+        }
+    }
 }
