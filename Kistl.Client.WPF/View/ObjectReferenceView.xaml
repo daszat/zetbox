@@ -18,7 +18,7 @@
 
         <Button DockPanel.Dock="Right"
                 Margin="3"
-                Command="{Binding OpenSelectionCommand, Converter={StaticResource CommandConverter}}"
+                Command="{Binding OpenReferenceCommand, Converter={StaticResource CommandConverter}}"
                 IsEnabled="{Binding HasValue}">Open</Button>
 
         <Button DockPanel.Dock="Right"
