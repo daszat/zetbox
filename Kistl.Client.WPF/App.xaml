@@ -14,6 +14,7 @@
             <converter:ValidityToBrushConverter x:Key="ValidityToBrushConverter" />
             <converter:DebugConverter x:Key="debug" />
             <converter:HourConverter x:Key="HourConverter" />
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <commands:Converter x:Key="CommandConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="View/DefaultViews.xaml" />

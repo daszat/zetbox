@@ -89,7 +89,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
             cbListControl.DataValueField = "Moniker";
             cbListControl.DataTextField = "Text";
-            cbListControl.DataSource = Model.Domain.Select(i => new { Moniker = i.ToJSON(), Text = i.Name });
+            cbListControl.DataSource = Model.GetDomain().Select(i => new { Moniker = i.ToJSON(), Text = i.Name });
             cbListControl.DataBind();
 
             if (Model.AllowNullInput)

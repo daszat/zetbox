@@ -24,6 +24,7 @@
                  ItemsSource="{Binding Choices}"
                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                  MouseDoubleClick="ChoiceActivated"
+                 MaxHeight="400"
                  Style="{StaticResource addedMargins}" />
     </DockPanel>
 </Window>

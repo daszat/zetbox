@@ -6,10 +6,6 @@
                    xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                    ToolTip="{Binding ToolTip}">
 
-    <view:PropertyView.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    </view:PropertyView.Resources>
-
     <view:PropertyView.Label>
         <TextBlock Text="{Binding Label, Mode=OneWay}" />
     </view:PropertyView.Label>

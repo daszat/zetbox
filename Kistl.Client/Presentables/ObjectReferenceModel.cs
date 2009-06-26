@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
 
-    public class ObjectReferenceModel
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+
+    public partial class ObjectReferenceModel
         : PropertyModel<DataObjectModel>, IValueModel<DataObjectModel>
     {
         public ObjectReferenceModel(
@@ -84,72 +84,6 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        // TODO: make readonly for the view
-        private ObservableCollection<DataObjectModel> _domain;
-        public ObservableCollection<DataObjectModel> Domain
-        {
-            get
-            {
-                if (_domain == null)
-                {
-                    _domain = new ObservableCollection<DataObjectModel>();
-                    FetchDomain();
-                }
-                return _domain;
-            }
-        }
-
-        public void OpenReference()
-        {
-            if (Value != null)
-                Factory.ShowModel(Value, true);
-        }
-
-        /// <summary>
-        /// creates a new target and references it
-        /// </summary>
-        public void CreateNewItem(Action<DataObjectModel> onCreated)
-        {
-            ObjectClass baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
-
-            var children = new List<ObjectClass>() { baseclass };
-            CollectChildClasses(baseclass.ID, children);
-
-            if (children.Count == 1)
-            {
-                var targetType = baseclass.GetDescribedInterfaceType();
-                var item = this.DataContext.Create(targetType);
-                onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item));
-            }
-            else
-            {
-                // sort by name, create models
-                // TODO: filter non-instantiable classes
-                var childModels = children
-                    .OrderBy(oc => oc.ClassName)
-                    .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
-                    .ToList();
-
-                Factory.ShowModel(
-                    Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
-                        DataContext,
-                        childModels,
-                        new Action<DataObjectModel>(delegate(DataObjectModel chosen)
-                        {
-                            if (chosen != null)
-                            {
-                                var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
-                                var item = this.DataContext.Create(targetType);
-                                onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item));
-                            }
-                            else
-                            {
-                                onCreated(null);
-                            }
-                        })), true);
-            }
-        }
-
         #endregion
 
         #region Utilities and UI callbacks
@@ -164,18 +98,18 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private void FetchDomain()
+        public IList<DataObjectModel> GetDomain()
         {
-            Debug.Assert(_domain != null);
+            List<DataObjectModel> result = new List<DataObjectModel>();
 
-            //foreach (var obj in DataContext
-            //    .GetQuery(new InterfaceType(Property.GetPropertyType()))
-            //    .ToList() // TODO: remove this
-            //    .OrderBy(obj => obj.ToString()).ToList())
-            //{
-            //    _domain.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, obj));
-            //}
-
+            foreach (var obj in DataContext
+                .GetQuery(new InterfaceType(Property.GetPropertyType()))
+                .ToList() // TODO: remove this
+                .OrderBy(obj => obj.ToString()).ToList())
+            {
+                result.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, obj));
+            }
+            return result;
         }
 
         private void CollectChildClasses(int id, List<ObjectClass> children)

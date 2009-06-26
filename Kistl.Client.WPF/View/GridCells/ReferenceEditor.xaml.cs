@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View.GridCells
 {
@@ -22,6 +23,11 @@ namespace Kistl.Client.WPF.View.GridCells
         public ReferenceEditor()
         {
             InitializeComponent();
+        }
+
+        private void ClearValueHandler(object sender, RoutedEventArgs e)
+        {
+            ((ObjectReferenceModel)DataContext).Value = null;
         }
     }
 }

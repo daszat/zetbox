@@ -5,10 +5,6 @@
                    xmlns:view="clr-namespace:Kistl.Client.WPF.View"
                    ToolTip="{Binding ToolTip, Mode=OneWay}">
 
-    <view:PropertyView.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    </view:PropertyView.Resources>
-
     <view:PropertyView.Label>
         <TextBlock Text="{Binding Label, Mode=OneWay}" />
     </view:PropertyView.Label>
@@ -22,17 +18,21 @@
 
         <Button DockPanel.Dock="Right"
                 Margin="3"
-                Click="OpenSelection"
+                Command="{Binding OpenSelectionCommand, Converter={StaticResource CommandConverter}}"
                 IsEnabled="{Binding HasValue}">Open</Button>
 
         <Button DockPanel.Dock="Right"
                 Margin="3"
-                Click="CreateNewHandler">New ...</Button>
+                Command="{Binding CreateNewItemAndSetValueCommand, Converter={StaticResource CommandConverter}}">New ...</Button>
 
-        <ComboBox Margin="3"
-                  ItemsSource="{Binding Domain, Mode=OneWay}"
-                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                  SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+        <Button DockPanel.Dock="Right"
+                Margin="3"
+                Command="{Binding SelectValueCommand, Converter={StaticResource CommandConverter}}">Select ...</Button>
+
+        <ContentPresenter Margin="3"
+                          Content="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                          ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
+
     </DockPanel>
 
 </view:PropertyView>
