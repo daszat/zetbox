@@ -60,7 +60,7 @@ namespace Kistl.App.Extensions
         private static TypeRef ToFrozenRef(this Type t)
         {
             PrimeRefCache();
-            return LookupByType(FrozenContext.Single, _typeRefsByFullName[t.IsGenericType ? t.GetGenericTypeDefinition().FullName : t.FullName].AsQueryable(), t);
+            return LookupByType(FrozenContext.Single, _typeRefsByFullName[t.IsGenericType ? t.GetGenericTypeDefinition().FullName : t.FullName], t);
         }
 
         private static ILookup<string, TypeRef> _typeRefsByFullName;
@@ -74,6 +74,43 @@ namespace Kistl.App.Extensions
         }
 
         private static TypeRef LookupByType(IKistlContext ctx, IQueryable<TypeRef> source, Type t)
+        {
+            // TODO: think about and implement naked types (i.e. without arguments)
+            if (t.IsGenericTypeDefinition) throw new ArgumentOutOfRangeException("t");
+
+            if (t.IsGenericType)
+            {
+                string fullName = t.GetGenericTypeDefinition().FullName;
+                var args = t.GetGenericArguments().Select(arg => arg.ToRef(ctx)).ToArray();
+                var argsCount = args.Count();
+                foreach (var tRef in source.Where(tRef
+                    => tRef.Assembly.AssemblyName == t.Assembly.FullName
+                    && tRef.FullName == fullName
+                    && tRef.GenericArguments.Count == argsCount))
+                {
+                    bool equal = true;
+                    for (int i = 0; i < tRef.GenericArguments.Count; i++)
+                    {
+                        equal &= args[i] == tRef.GenericArguments[i];
+                        if (!equal)
+                            break;
+                    }
+                    if (equal)
+                        return tRef;
+                }
+                return null;
+            }
+            else
+            {
+                return source.SingleOrDefault(tRef
+                    => tRef.Assembly.AssemblyName == t.Assembly.FullName
+                    && tRef.FullName == t.FullName
+                    && tRef.GenericArguments.Count == 0);
+            }
+        }
+
+        // clone of LookupByType(IKistlContext, IQueryable<TypeRef>, Type) since this function takes 5ms per call when called with an IQueryable
+        private static TypeRef LookupByType(IKistlContext ctx, IEnumerable<TypeRef> source, Type t)
         {
             // TODO: think about and implement naked types (i.e. without arguments)
             if (t.IsGenericTypeDefinition) throw new ArgumentOutOfRangeException("t");

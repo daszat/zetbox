@@ -168,13 +168,13 @@ namespace Kistl.Client.Presentables
         {
             Debug.Assert(_domain != null);
 
-            foreach (var obj in DataContext
-                .GetQuery(new InterfaceType(Property.GetPropertyType()))
-                .ToList() // TODO: remove this
-                .OrderBy(obj => obj.ToString()).ToList())
-            {
-                _domain.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, obj));
-            }
+            //foreach (var obj in DataContext
+            //    .GetQuery(new InterfaceType(Property.GetPropertyType()))
+            //    .ToList() // TODO: remove this
+            //    .OrderBy(obj => obj.ToString()).ToList())
+            //{
+            //    _domain.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, obj));
+            //}
 
         }
 

@@ -57,14 +57,14 @@ namespace Kistl.Client.WPF.View
 
         #endregion
 
-        private void ModuleTreeSelectedItemChangedHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            var workspaceModel = (WorkspaceModel)this.DataContext;
-            var item = ModuleTree.SelectedItem as PresentableModel;
-            if (item != null)
-            {
-                workspaceModel.SelectedItem = item;
-            }
-        }
+        //private void ModuleTreeSelectedItemChangedHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
+        //{
+        //    var workspaceModel = (WorkspaceModel)this.DataContext;
+        //    var item = ModuleTree.SelectedItem as PresentableModel;
+        //    if (item != null)
+        //    {
+        //        workspaceModel.SelectedItem = item;
+        //    }
+        //}
     }
 }

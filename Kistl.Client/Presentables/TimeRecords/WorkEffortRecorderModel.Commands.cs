@@ -58,7 +58,17 @@ namespace Kistl.Client.Presentables.TimeRecords
                     throw new ArgumentNullException("parent");
                 }
                 _parent = parent;
-                _parent.PropertyChanged += (obj, args) => OnCanExecuteChanged();
+                _parent.PropertyChanged += (obj, args) =>
+                {
+                    switch (args.PropertyName)
+                    {
+                        case "CurrentUser":
+                        case "IsCurrentlyPresent":
+                        case "CurrentEffort":
+                            OnCanExecuteChanged();
+                            break;
+                    }
+                };
             }
 
             /// <summary>
@@ -131,7 +141,17 @@ namespace Kistl.Client.Presentables.TimeRecords
                     throw new ArgumentNullException("parent");
                 }
                 _parent = parent;
-                _parent.PropertyChanged += (obj, args) => OnCanExecuteChanged();
+                _parent.PropertyChanged += (obj, args) =>
+                {
+                    switch (args.PropertyName)
+                    {
+                        case "CurrentUser":
+                        case "IsCurrentlyPresent":
+                        case "CurrentEffort":
+                            OnCanExecuteChanged();
+                            break;
+                    }
+                };
             }
 
             /// <summary>

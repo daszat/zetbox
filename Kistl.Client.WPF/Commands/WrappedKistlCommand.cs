@@ -22,6 +22,7 @@ namespace Kistl.Client.WPF.Commands
             : base(cmd.Label, typeof(WrappedKistlCommand))
         {
             _command = cmd;
+            _command.CanExecuteChanged += (sender, args) => CommandManager.InvalidateRequerySuggested();
         }
 
         /// <summary>

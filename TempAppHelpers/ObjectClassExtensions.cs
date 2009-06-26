@@ -17,22 +17,27 @@ namespace Kistl.App.Extensions
         public static ObjectClass GetObjectClass(this IDataObject obj, Kistl.API.IKistlContext ctx)
         {
             Type type = obj.GetInterfaceType().Type;
-            IQueryable<ObjectClass> q;
+            ObjectClass result;
             if (ctx == FrozenContext.Single)
             {
                 // cache frozen classes by class name
-                if (_frozenClasses == null)
-                {
-                    _frozenClasses = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.ClassName);
-                }
-                q = _frozenClasses[type.Name].AsQueryable();
+                InitializeFrozenCache(ctx);
+                result = _frozenClasses[type.Name].First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
             }
             else
             {
-                q = ctx.GetQuery<ObjectClass>();
+                result = ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
             }
 
-            return q.First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
+            return result;
+        }
+
+        private static void InitializeFrozenCache(Kistl.API.IKistlContext ctx)
+        {
+            if (_frozenClasses == null)
+            {
+                _frozenClasses = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.ClassName);
+            }
         }
 
         public static ICollection<ObjectClass> GetObjectHierarchie(this ObjectClass objClass)

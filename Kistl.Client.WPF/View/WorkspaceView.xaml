@@ -26,101 +26,14 @@
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Navigation Tree and Lists -->
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="5" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="5" />
-                    <RowDefinition Height="2*" />
-                </Grid.RowDefinitions>
-
-                <DockPanel Grid.Row="0">
-                    <TreeView x:Name="ModuleTree"
-                              ItemsSource="{Binding Modules}"
-                              BorderThickness="0"
-                              SelectedItemChanged="ModuleTreeSelectedItemChangedHandler">
-                        <TreeView.Resources>
-                            <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
-                                                      ItemsSource="{Binding ObjectClasses}">
-                                <view:DataObjectView />
-                            </HierarchicalDataTemplate>
-                            <DataTemplate DataType="{x:Type client:DataTypeModel}">
-                                <view:DataObjectView />
-                            </DataTemplate>
-                        </TreeView.Resources>
-                        <!-- TODO: implement template selector which creates appropriate (hierarchical) 
-                                   Templates with appropriate contents (replace DataObjectView with DataObjectLineLayout)
-                        <TreeView.ItemTemplateSelector>
-                            <view:ModuleTreeTemplateSelector />
-                        </TreeView.ItemTemplateSelector>
-                        -->
-                    </TreeView>
-                </DockPanel>
-
-                <!-- overlay on the tree -->
-                <ctrls:LoadingIndicator Grid.Row="0" />
-
-                <GridSplitter Grid.Row="1"
-                              HorizontalAlignment="Stretch" />
-
-                <ContentPresenter Grid.Row="2"
-                                  Content="{Binding SelectedItem}">
-                    <ContentPresenter.Resources>
-                        <DataTemplate DataType="{x:Type client:ObjectClassModel}">
-                            <DockPanel>
-                                <DockPanel DockPanel.Dock="Top">
-                                    <TextBlock DockPanel.Dock="Left"
-                                               HorizontalAlignment="Center">Search:</TextBlock>
-                                    <TextBox Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged}" />
-                                </DockPanel>
-                                <ListBox ItemsSource="{Binding InstancesFiltered}"
-                                         SelectedItem="{Binding DataContext.SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                         ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                                         BorderThickness="0">
-                                    <ListBox.Template>
-                                        <ControlTemplate>
-                                            <ScrollViewer HorizontalScrollBarVisibility="Visible">
-                                                <StackPanel IsItemsHost="True" />
-                                            </ScrollViewer>
-                                        </ControlTemplate>
-                                    </ListBox.Template>
-                                </ListBox>
-                            </DockPanel>
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type client:ModuleModel}">
-                            <DockPanel>
-                                <ListBox ItemsSource="{Binding ObjectClasses}"
-                                         SelectedItem="{Binding DataContext.SelectedItem, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                         ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                                         BorderThickness="0">
-                                    <ListBox.Template>
-                                        <ControlTemplate>
-                                            <ScrollViewer HorizontalScrollBarVisibility="Visible">
-                                                <StackPanel IsItemsHost="True" />
-                                            </ScrollViewer>
-                                        </ControlTemplate>
-                                    </ListBox.Template>
-                                </ListBox>
-                            </DockPanel>
-                        </DataTemplate>
-                    </ContentPresenter.Resources>
-                </ContentPresenter>
-
-                <GridSplitter Grid.Row="3"
-                              HorizontalAlignment="Stretch" />
-
-                <DockPanel Grid.Row="4">
-                    <TextBlock DockPanel.Dock="Top"
-                               HorizontalAlignment="Center">Recent Objects:</TextBlock>
-                    <ListBox ItemsSource="{Binding RecentObjects}"
-                             SelectedItem="{Binding SelectedItem}"
-                             ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                             BorderThickness="0" />
-                </DockPanel>
-
-            </Grid>
+            <DockPanel Grid.Column="0">
+                <TextBlock DockPanel.Dock="Top"
+                           HorizontalAlignment="Center">Objects:</TextBlock>
+                <ListBox ItemsSource="{Binding RecentObjects}"
+                         SelectedItem="{Binding SelectedItem}"
+                         ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                         BorderThickness="0" />
+            </DockPanel>
 
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" />
