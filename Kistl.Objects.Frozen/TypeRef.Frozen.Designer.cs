@@ -268,7 +268,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(229);
+		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(230);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new TypeRef__Implementation__Frozen(1);
@@ -727,7 +727,9 @@ namespace Kistl.App.Base
 
 			DataStore[632] = new TypeRef__Implementation__Frozen(632);
 
-			DataStore[633] = new TypeRef__Implementation__Frozen(633);
+			DataStore[634] = new TypeRef__Implementation__Frozen(634);
+
+			DataStore[635] = new TypeRef__Implementation__Frozen(635);
 
 		}
 
@@ -2391,13 +2393,20 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[569],
 });
 			DataStore[632].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
 			DataStore[632].Seal();
-			DataStore[633].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
-			DataStore[633].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
-			DataStore[633].FullName = @"Kistl.Client.WPF.CustomControls.GridList";
-			DataStore[633].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
+			DataStore[634].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14];
+			DataStore[634].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[634].FullName = @"Kistl.Client.Presentables.KistlBase.ChooseMethodInvocationNamePropertyModel";
+			DataStore[634].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
 });
-			DataStore[633].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
-			DataStore[633].Seal();
+			DataStore[634].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[394];
+			DataStore[634].Seal();
+			DataStore[635].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
+			DataStore[635].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[635].FullName = @"Kistl.Client.WPF.Converter.HourConverter";
+			DataStore[635].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
+});
+			DataStore[635].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[295];
+			DataStore[635].Seal();
 	
 		}
 #region Serializer

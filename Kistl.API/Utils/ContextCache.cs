@@ -9,7 +9,8 @@ namespace Kistl.API.Utils
     /// <summary>
     /// Store IPersistenceObjects ordered by (root-)Type and ID for fast access within the KistlContextImpl
     /// </summary>
-    public class ContextCache : ICollection<IPersistenceObject>
+    public class ContextCache 
+        : ICollection<IPersistenceObject>
     {
 
         private IDictionary<Type, IDictionary<int, IPersistenceObject>> _objects = new Dictionary<Type, IDictionary<int, IPersistenceObject>>();
@@ -127,9 +128,10 @@ namespace Kistl.API.Utils
 
         public IEnumerator<IPersistenceObject> GetEnumerator()
         {
-            foreach (var typeList in _objects.Values)
+            // use ToList() to avoid concurrent modification exceptions
+            foreach (var typeList in _objects.Values.ToList())
             {
-                foreach (IPersistenceObject obj in typeList.Values)
+                foreach (IPersistenceObject obj in typeList.Values.ToList())
                 {
                     yield return obj;
                 }

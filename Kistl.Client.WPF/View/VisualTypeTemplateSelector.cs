@@ -82,6 +82,11 @@ namespace Kistl.Client.WPF.View
         /// <inheritdoc/>
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
+            if (item == null)
+            {
+                return (DataTemplate)((FrameworkElement)container).FindResource("nullTemplate");
+            }
+
             var model = item as PresentableModel;
             if (model != null)
             {

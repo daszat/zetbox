@@ -290,6 +290,27 @@ namespace Kistl.App.Base
 
 
 
+        /// <summary>
+        /// Implements all available interfaces as Properties and Methods
+        /// </summary>
+
+		public virtual void ImplementInterfaces() 
+		{
+            // base.ImplementInterfaces();
+            if (OnImplementInterfaces_ObjectClass != null)
+            {
+				OnImplementInterfaces_ObjectClass(this);
+			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on ObjectClass.ImplementInterfaces");
+			}
+        }
+		public delegate void ImplementInterfaces_Handler<T>(T obj);
+		public event ImplementInterfaces_Handler<ObjectClass> OnImplementInterfaces_ObjectClass;
+
+
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(ObjectClass));
@@ -605,11 +626,12 @@ namespace Kistl.App.Base
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[28],
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[81],
 });
-			DataStore[2].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(4) {
+			DataStore[2].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(5) {
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[4],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[5],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[6],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[125],
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[175],
 });
 			DataStore[2].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[2].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(8) {
@@ -1248,10 +1270,11 @@ Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
 			DataStore[30].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[6],
 });
-			DataStore[30].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
+			DataStore[30].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(4) {
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[43],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[44],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[45],
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[177],
 });
 			DataStore[30].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[30].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(6) {

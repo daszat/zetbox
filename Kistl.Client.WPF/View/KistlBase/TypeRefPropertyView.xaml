@@ -24,11 +24,10 @@
 
         <Button DockPanel.Dock="Right"
                 Margin="3"
-                Command="{Binding LoadTypeRefFromAssemblyRefCommand, Converter={StaticResource CommandConverter}}">From Assembly ...</Button>
-
-        <ComboBox Margin="3"
-                  ItemsSource="{Binding Domain, Mode=OneWay}"
-                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                  SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                Command="{Binding LoadTypeRefFromAssemblyRefCommand, Converter={StaticResource CommandConverter}}">From AssemblyRef ...</Button>
+        
+        <ContentPresenter Margin="3"
+                          Content="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                          ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
     </DockPanel>
 </view:PropertyView>

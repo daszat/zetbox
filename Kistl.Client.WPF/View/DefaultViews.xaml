@@ -15,6 +15,10 @@
                      Fill="White" />
         </Viewbox>
     </DataTemplate>
+    
+    <DataTemplate x:Key="nullTemplate">
+        <TextBlock FontWeight="Bold">(null)</TextBlock>
+    </DataTemplate>
 
     <view:VisualTypeTemplateSelector x:Key="defaultTemplateSelector" />
     <view:VisualTypeTemplateSelector x:Key="readOnlyTemplateSelector" ReadOnly="true"/>

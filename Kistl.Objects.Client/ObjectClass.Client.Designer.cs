@@ -377,6 +377,27 @@ namespace Kistl.App.Base
 
 
 
+        /// <summary>
+        /// Implements all available interfaces as Properties and Methods
+        /// </summary>
+
+		public virtual void ImplementInterfaces() 
+		{
+            // base.ImplementInterfaces();
+            if (OnImplementInterfaces_ObjectClass != null)
+            {
+				OnImplementInterfaces_ObjectClass(this);
+			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on ObjectClass.ImplementInterfaces");
+			}
+        }
+		public delegate void ImplementInterfaces_Handler<T>(T obj);
+		public event ImplementInterfaces_Handler<ObjectClass> OnImplementInterfaces_ObjectClass;
+
+
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(ObjectClass));

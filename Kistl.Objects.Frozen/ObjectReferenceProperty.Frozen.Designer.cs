@@ -1327,7 +1327,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[241],
 			DataStore[208].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[208].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[208].PropertyName = @"Implementor";
-			DataStore[208].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[208].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[40];
 			DataStore[208].EagerLoading = false;
 			DataStore[208].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
 			DataStore[208].Seal();

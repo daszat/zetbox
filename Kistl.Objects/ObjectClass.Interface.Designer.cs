@@ -70,5 +70,10 @@ namespace Kistl.App.Base
         /// </summary>
 
 		 IList<Kistl.App.Base.Method> GetInheritedMethods() ;
+        /// <summary>
+        /// Implements all available interfaces as Properties and Methods
+        /// </summary>
+
+		 void ImplementInterfaces() ;
     }
 }

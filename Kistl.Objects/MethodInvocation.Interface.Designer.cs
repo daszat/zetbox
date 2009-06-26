@@ -48,5 +48,10 @@ namespace Kistl.App.Base
 			get;
 			set;
 		}
+        /// <summary>
+        /// 
+        /// </summary>
+
+		 string GetCodeTemplate() ;
     }
 }

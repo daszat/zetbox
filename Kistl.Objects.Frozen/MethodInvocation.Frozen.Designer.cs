@@ -178,6 +178,28 @@ namespace Kistl.App.Base
         }
         private Kistl.App.Base.Module _Module;
 
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual string GetCodeTemplate() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetCodeTemplate_MethodInvocation != null)
+            {
+                OnGetCodeTemplate_MethodInvocation(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on MethodInvocation.GetCodeTemplate");
+            }
+            return e.Result;
+        }
+		public delegate void GetCodeTemplate_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+		public event GetCodeTemplate_Handler<MethodInvocation> OnGetCodeTemplate_MethodInvocation;
+
+
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(MethodInvocation));

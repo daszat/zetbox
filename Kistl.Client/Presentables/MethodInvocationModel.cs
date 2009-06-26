@@ -21,6 +21,7 @@ namespace Kistl.Client.Presentables
         {
             _invocation = mdl;
             _invocation.PropertyChanged += InvocationPropertyChanged;
+            UpdateMemberNamePossibilities();
         }
 
         #region Utilities and UI callbacks
