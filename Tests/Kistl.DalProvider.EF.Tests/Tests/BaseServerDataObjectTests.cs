@@ -36,7 +36,6 @@ namespace Kistl.DalProvider.EF.Tests
             obj.BaseObjectClass = null;
             obj.ClassName = "testclassname";
             obj.DefaultIcon = null;
-            obj.DefaultModel = null;
             obj.Description = "testclassdescription";
             obj.ImplementsInterfaces.Clear();
             obj.IsFrozenObject = false;
@@ -98,7 +97,6 @@ namespace Kistl.DalProvider.EF.Tests
                 Assert.That(result.BaseObjectClass, Is.EqualTo(obj.BaseObjectClass));
                 Assert.That(result.ClassName, Is.EqualTo(obj.ClassName));
                 Assert.That(result.DefaultIcon, Is.EqualTo(obj.DefaultIcon));
-                Assert.That(result.DefaultModel, Is.EqualTo(obj.DefaultModel));
                 Assert.That(result.Description, Is.EqualTo(obj.Description));
                 Assert.That((ICollection)result.ImplementsInterfaces, Is.EquivalentTo((ICollection)obj.ImplementsInterfaces));
                 Assert.That(result.IsFrozenObject, Is.EqualTo(obj.IsFrozenObject));

@@ -13,29 +13,6 @@ namespace Kistl.Client.Mocks
 {
     public static class MockFactory
     {
-        public static ControlInfo CreateControlInfo(Mockery m, VisualType visualType, bool isContainer, Type testType)
-        {
-            var result = m.NewMock<ControlInfo>();
-
-            Stub.On(result)
-                .GetProperty("Platform")
-                .Will(Return.Value(Toolkit.TEST));
-
-            Stub.On(result)
-                .GetProperty("ControlType")
-                .Will(Return.Value(visualType));
-
-            Stub.On(result)
-                .GetProperty("IsContainer")
-                .Will(Return.Value(isContainer));
-
-            Stub.On(result)
-                .GetProperty("ClassName")
-                .Will(Return.Value(testType.FullName));
-
-            return result;
-        }
-
         public static ObjectReferenceProperty CreateObjectReferenceProperty(
             Mockery m,
             string propertyName

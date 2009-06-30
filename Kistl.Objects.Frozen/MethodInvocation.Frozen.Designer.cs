@@ -325,7 +325,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(101);
+		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(99);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new MethodInvocation__Implementation__Frozen(1);
@@ -468,8 +468,6 @@ namespace Kistl.App.Base
 
 			DataStore[93] = new MethodInvocation__Implementation__Frozen(93);
 
-			DataStore[94] = new MethodInvocation__Implementation__Frozen(94);
-
 			DataStore[95] = new MethodInvocation__Implementation__Frozen(95);
 
 			DataStore[96] = new MethodInvocation__Implementation__Frozen(96);
@@ -481,8 +479,6 @@ namespace Kistl.App.Base
 			DataStore[99] = new MethodInvocation__Implementation__Frozen(99);
 
 			DataStore[100] = new MethodInvocation__Implementation__Frozen(100);
-
-			DataStore[101] = new MethodInvocation__Implementation__Frozen(101);
 
 			DataStore[102] = new MethodInvocation__Implementation__Frozen(102);
 
@@ -1023,13 +1019,6 @@ namespace Kistl.App.Base
 			DataStore[93].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
 			DataStore[93].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[93].Seal();
-			DataStore[94].ExportGuid = new Guid("267f1386-adf5-4d62-afc1-3305cb6e44d8");
-			DataStore[94].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
-			DataStore[94].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
-			DataStore[94].MemberName = @"OnToString_ControlInfo";
-			DataStore[94].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[141];
-			DataStore[94].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[94].Seal();
 			DataStore[95].ExportGuid = new Guid("fd839d8e-3c9c-4fab-9a6a-2a0332055b56");
 			DataStore[95].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[1];
 			DataStore[95].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[73];
@@ -1072,13 +1061,6 @@ namespace Kistl.App.Base
 			DataStore[100].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[135];
 			DataStore[100].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[100].Seal();
-			DataStore[101].ExportGuid = new Guid("5f5a9563-0a8a-4cb8-a51e-a8fae4a98348");
-			DataStore[101].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
-			DataStore[101].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
-			DataStore[101].MemberName = @"OnToString_PresenterInfo";
-			DataStore[101].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[126];
-			DataStore[101].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[101].Seal();
 			DataStore[102].ExportGuid = new Guid("523c7fc1-7d9a-47d2-aa1e-815056b038b5");
 			DataStore[102].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[5];
 			DataStore[102].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];

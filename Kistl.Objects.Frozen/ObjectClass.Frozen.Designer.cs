@@ -54,31 +54,6 @@ namespace Kistl.App.Base
         private Kistl.App.Base.ObjectClass _BaseObjectClass;
 
         /// <summary>
-        /// The default model to use for the UI
-        /// </summary>
-        // object reference property
-   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
-        public virtual Kistl.App.Base.TypeRef DefaultModel
-        {
-            get
-            {
-                return _DefaultModel;
-            }
-            set
-            {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (_DefaultModel != value)
-                {
-					var __oldValue = _DefaultModel;
-                    NotifyPropertyChanging("DefaultModel", __oldValue, value);
-                    _DefaultModel = value;
-                    NotifyPropertyChanged("DefaultModel", __oldValue, value);
-                }
-            }
-        }
-        private Kistl.App.Base.TypeRef _DefaultModel;
-
-        /// <summary>
         /// The default PresentableModel to use for this ObjectClass
         /// </summary>
         // object reference property
@@ -360,15 +335,6 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
-				case "DefaultModel":
-				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(212).Constraints
-						.Where(c => !c.IsValid(this, this.DefaultModel))
-						.Select(c => c.GetErrorText(this, this.DefaultModel))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "DefaultPresentableModelDescriptor":
 				{
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(234).Constraints
@@ -432,7 +398,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, ObjectClass__Implementation__Frozen> DataStore = new Dictionary<int, ObjectClass__Implementation__Frozen>(60);
+		internal new static Dictionary<int, ObjectClass__Implementation__Frozen> DataStore = new Dictionary<int, ObjectClass__Implementation__Frozen>(58);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2] = 
@@ -537,9 +503,6 @@ namespace Kistl.App.Base
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51] = 
 			DataStore[51] = new ObjectClass__Implementation__Frozen(51);
 
-			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54] = 
-			DataStore[54] = new ObjectClass__Implementation__Frozen(54);
-
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58] = 
 			DataStore[58] = new ObjectClass__Implementation__Frozen(58);
 
@@ -557,9 +520,6 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[64] = 
 			DataStore[64] = new ObjectClass__Implementation__Frozen(64);
-
-			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66] = 
-			DataStore[66] = new ObjectClass__Implementation__Frozen(66);
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67] = 
 			DataStore[67] = new ObjectClass__Implementation__Frozen(67);
@@ -635,21 +595,19 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[125],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[175],
 });
 			DataStore[2].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[2].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(8) {
+			DataStore[2].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(7) {
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[27],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[25],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[3],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[105],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[119],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[174],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[212],
 Kistl.App.Base.Property__Implementation__Frozen.DataStore[234],
 });
 			DataStore[2].ShowIconInLists = true;
 			DataStore[2].ShowIdInLists = true;
 			DataStore[2].ShowNameInLists = true;
 			DataStore[2].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[2].DefaultModel = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[10];
 			DataStore[2].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[33];
 			DataStore[2].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -685,7 +643,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[48],
 			DataStore[3].ShowIdInLists = true;
 			DataStore[3].ShowNameInLists = true;
 			DataStore[3].BaseObjectClass = null;
-			DataStore[3].DefaultModel = null;
 			DataStore[3].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[3].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -720,7 +677,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[18],
 			DataStore[4].ShowIdInLists = true;
 			DataStore[4].ShowNameInLists = true;
 			DataStore[4].BaseObjectClass = null;
-			DataStore[4].DefaultModel = null;
 			DataStore[4].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[4].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -755,7 +711,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[40],
 			DataStore[6].ShowIdInLists = true;
 			DataStore[6].ShowNameInLists = true;
 			DataStore[6].BaseObjectClass = null;
-			DataStore[6].DefaultModel = null;
 			DataStore[6].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[6].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -802,7 +757,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[253],
 			DataStore[7].ShowIdInLists = true;
 			DataStore[7].ShowNameInLists = false;
 			DataStore[7].BaseObjectClass = null;
-			DataStore[7].DefaultModel = null;
 			DataStore[7].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[7].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -831,7 +785,6 @@ Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8],
 			DataStore[8].ShowIdInLists = true;
 			DataStore[8].ShowNameInLists = true;
 			DataStore[8].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
-			DataStore[8].DefaultModel = null;
 			DataStore[8].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[8].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -866,7 +819,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[28],
 			DataStore[9].ShowIdInLists = true;
 			DataStore[9].ShowNameInLists = true;
 			DataStore[9].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8];
-			DataStore[9].DefaultModel = null;
 			DataStore[9].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[9].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -906,7 +858,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[257],
 			DataStore[10].ShowIdInLists = true;
 			DataStore[10].ShowNameInLists = true;
 			DataStore[10].BaseObjectClass = null;
-			DataStore[10].DefaultModel = null;
 			DataStore[10].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[10].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -934,7 +885,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[32],
 			DataStore[11].ShowIdInLists = true;
 			DataStore[11].ShowNameInLists = true;
 			DataStore[11].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8];
-			DataStore[11].DefaultModel = null;
 			DataStore[11].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[11].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -961,7 +911,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[33],
 			DataStore[12].ShowIdInLists = true;
 			DataStore[12].ShowNameInLists = true;
 			DataStore[12].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8];
-			DataStore[12].DefaultModel = null;
 			DataStore[12].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[12].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -988,7 +937,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[34],
 			DataStore[13].ShowIdInLists = true;
 			DataStore[13].ShowNameInLists = true;
 			DataStore[13].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8];
-			DataStore[13].DefaultModel = null;
 			DataStore[13].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[13].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1019,7 +967,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[269],
 			DataStore[14].ShowIdInLists = true;
 			DataStore[14].ShowNameInLists = true;
 			DataStore[14].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
-			DataStore[14].DefaultModel = null;
 			DataStore[14].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[14].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1046,7 +993,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[35],
 			DataStore[15].ShowIdInLists = true;
 			DataStore[15].ShowNameInLists = true;
 			DataStore[15].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8];
-			DataStore[15].DefaultModel = null;
 			DataStore[15].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[15].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1081,7 +1027,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[260],
 			DataStore[18].ShowIdInLists = true;
 			DataStore[18].ShowNameInLists = false;
 			DataStore[18].BaseObjectClass = null;
-			DataStore[18].DefaultModel = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[9];
 			DataStore[18].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[32];
 			DataStore[18].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -1118,7 +1063,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[65],
 			DataStore[19].ShowIdInLists = true;
 			DataStore[19].ShowNameInLists = true;
 			DataStore[19].BaseObjectClass = null;
-			DataStore[19].DefaultModel = null;
 			DataStore[19].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[19].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1153,7 +1097,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[237],
 			DataStore[20].ShowIdInLists = true;
 			DataStore[20].ShowNameInLists = true;
 			DataStore[20].BaseObjectClass = null;
-			DataStore[20].DefaultModel = null;
 			DataStore[20].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[20].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1188,7 +1131,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[85],
 			DataStore[26].ShowIdInLists = true;
 			DataStore[26].ShowNameInLists = true;
 			DataStore[26].BaseObjectClass = null;
-			DataStore[26].DefaultModel = null;
 			DataStore[26].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[26].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1218,7 +1160,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[68],
 			DataStore[27].ShowIdInLists = true;
 			DataStore[27].ShowNameInLists = true;
 			DataStore[27].BaseObjectClass = null;
-			DataStore[27].DefaultModel = null;
 			DataStore[27].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[27].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1253,7 +1194,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[255],
 			DataStore[29].ShowIdInLists = true;
 			DataStore[29].ShowNameInLists = true;
 			DataStore[29].BaseObjectClass = null;
-			DataStore[29].DefaultModel = null;
 			DataStore[29].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[29].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -1293,7 +1233,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[259],
 			DataStore[30].ShowIdInLists = true;
 			DataStore[30].ShowNameInLists = false;
 			DataStore[30].BaseObjectClass = null;
-			DataStore[30].DefaultModel = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[41];
 			DataStore[30].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[31];
 			DataStore[30].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -1340,7 +1279,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[266],
 			DataStore[33].ShowIdInLists = true;
 			DataStore[33].ShowNameInLists = false;
 			DataStore[33].BaseObjectClass = null;
-			DataStore[33].DefaultModel = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[11];
 			DataStore[33].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[30];
 			DataStore[33].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -1385,7 +1323,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[254],
 			DataStore[36].ShowIdInLists = true;
 			DataStore[36].ShowNameInLists = true;
 			DataStore[36].BaseObjectClass = null;
-			DataStore[36].DefaultModel = null;
 			DataStore[36].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[36].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -1420,7 +1357,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[50],
 			DataStore[37].ShowIdInLists = true;
 			DataStore[37].ShowNameInLists = true;
 			DataStore[37].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
-			DataStore[37].DefaultModel = null;
 			DataStore[37].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[37].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1447,7 +1383,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[51],
 			DataStore[38].ShowIdInLists = true;
 			DataStore[38].ShowNameInLists = true;
 			DataStore[38].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
-			DataStore[38].DefaultModel = null;
 			DataStore[38].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[38].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1474,7 +1409,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[53],
 			DataStore[39].ShowIdInLists = true;
 			DataStore[39].ShowNameInLists = true;
 			DataStore[39].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
-			DataStore[39].DefaultModel = null;
 			DataStore[39].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[39].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1501,7 +1435,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[56],
 			DataStore[40].ShowIdInLists = true;
 			DataStore[40].ShowNameInLists = true;
 			DataStore[40].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
-			DataStore[40].DefaultModel = null;
 			DataStore[40].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[40].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1528,7 +1461,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[57],
 			DataStore[41].ShowIdInLists = true;
 			DataStore[41].ShowNameInLists = true;
 			DataStore[41].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
-			DataStore[41].DefaultModel = null;
 			DataStore[41].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[41].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1558,7 +1490,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[97],
 			DataStore[42].ShowIdInLists = true;
 			DataStore[42].ShowNameInLists = true;
 			DataStore[42].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
-			DataStore[42].DefaultModel = null;
 			DataStore[42].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[42].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1587,7 +1518,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[99],
 			DataStore[43].ShowIdInLists = true;
 			DataStore[43].ShowNameInLists = true;
 			DataStore[43].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
-			DataStore[43].DefaultModel = null;
 			DataStore[43].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[43].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1612,7 +1542,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[99],
 			DataStore[44].ShowIdInLists = true;
 			DataStore[44].ShowNameInLists = true;
 			DataStore[44].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[44].DefaultModel = null;
 			DataStore[44].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[44].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1642,7 +1571,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[103],
 			DataStore[45].ShowIdInLists = true;
 			DataStore[45].ShowNameInLists = true;
 			DataStore[45].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[45].DefaultModel = null;
 			DataStore[45].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[45].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1675,7 +1603,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[178],
 			DataStore[46].ShowIdInLists = true;
 			DataStore[46].ShowNameInLists = true;
 			DataStore[46].BaseObjectClass = null;
-			DataStore[46].DefaultModel = null;
 			DataStore[46].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[46].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1703,7 +1630,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[104],
 			DataStore[47].ShowIdInLists = true;
 			DataStore[47].ShowNameInLists = true;
 			DataStore[47].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8];
-			DataStore[47].DefaultModel = null;
 			DataStore[47].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[47].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1736,7 +1662,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[126],
 			DataStore[51].ShowIdInLists = true;
 			DataStore[51].ShowNameInLists = true;
 			DataStore[51].BaseObjectClass = null;
-			DataStore[51].DefaultModel = null;
 			DataStore[51].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[51].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[48],
@@ -1747,40 +1672,6 @@ Kistl.App.Base.Interface__Implementation__Frozen.DataStore[48],
 });
 			DataStore[51].TableName = @"TestObjClasses";
 			DataStore[51].Seal();
-			DataStore[54].ClassName = @"ControlInfo";
-			DataStore[54].DefaultIcon = null;
-			DataStore[54].Description = @"";
-			DataStore[54].ExportGuid = new Guid("91cd6ed9-536a-4636-aa93-af7c02f2adb4");
-			DataStore[54].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[94],
-});
-			DataStore[54].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[141],
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[142],
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[143],
-});
-			DataStore[54].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[54].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(5) {
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[114],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[115],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[116],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[117],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[118],
-});
-			DataStore[54].ShowIconInLists = true;
-			DataStore[54].ShowIdInLists = true;
-			DataStore[54].ShowNameInLists = true;
-			DataStore[54].BaseObjectClass = null;
-			DataStore[54].DefaultModel = null;
-			DataStore[54].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
-			DataStore[54].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
-});
-			DataStore[54].IsFrozenObject = false;
-			DataStore[54].IsSimpleObject = false;
-			DataStore[54].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(0) {
-});
-			DataStore[54].TableName = @"ControlInfos";
-			DataStore[54].Seal();
 			DataStore[58].ClassName = @"TestCustomObject";
 			DataStore[58].DefaultIcon = null;
 			DataStore[58].Description = @"";
@@ -1803,7 +1694,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[133],
 			DataStore[58].ShowIdInLists = true;
 			DataStore[58].ShowNameInLists = true;
 			DataStore[58].BaseObjectClass = null;
-			DataStore[58].DefaultModel = null;
 			DataStore[58].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[58].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1831,7 +1721,6 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[111],
 			DataStore[59].ShowIdInLists = true;
 			DataStore[59].ShowNameInLists = true;
 			DataStore[59].BaseObjectClass = null;
-			DataStore[59].DefaultModel = null;
 			DataStore[59].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[59].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1859,7 +1748,6 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[114],
 			DataStore[60].ShowIdInLists = true;
 			DataStore[60].ShowNameInLists = true;
 			DataStore[60].BaseObjectClass = null;
-			DataStore[60].DefaultModel = null;
 			DataStore[60].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[60].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1887,7 +1775,6 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[117],
 			DataStore[61].ShowIdInLists = true;
 			DataStore[61].ShowNameInLists = true;
 			DataStore[61].BaseObjectClass = null;
-			DataStore[61].DefaultModel = null;
 			DataStore[61].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[61].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1912,7 +1799,6 @@ Kistl.App.Base.Method__Implementation__Frozen.DataStore[117],
 			DataStore[62].ShowIdInLists = true;
 			DataStore[62].ShowNameInLists = true;
 			DataStore[62].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[62].DefaultModel = null;
 			DataStore[62].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[62].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1940,7 +1826,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[129],
 			DataStore[64].ShowIdInLists = true;
 			DataStore[64].ShowNameInLists = true;
 			DataStore[64].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
-			DataStore[64].DefaultModel = null;
 			DataStore[64].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[64].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -1950,40 +1835,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[129],
 });
 			DataStore[64].TableName = @"StructProperties";
 			DataStore[64].Seal();
-			DataStore[66].ClassName = @"PresenterInfo";
-			DataStore[66].DefaultIcon = null;
-			DataStore[66].Description = @"";
-			DataStore[66].ExportGuid = new Guid("25a4040e-87fe-416d-bed5-111fa1c9cce1");
-			DataStore[66].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[101],
-});
-			DataStore[66].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(3) {
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[126],
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[127],
-Kistl.App.Base.Method__Implementation__Frozen.DataStore[128],
-});
-			DataStore[66].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[66].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(5) {
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[137],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[138],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[139],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[147],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[148],
-});
-			DataStore[66].ShowIconInLists = true;
-			DataStore[66].ShowIdInLists = true;
-			DataStore[66].ShowNameInLists = true;
-			DataStore[66].BaseObjectClass = null;
-			DataStore[66].DefaultModel = null;
-			DataStore[66].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
-			DataStore[66].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
-});
-			DataStore[66].IsFrozenObject = false;
-			DataStore[66].IsSimpleObject = false;
-			DataStore[66].SubClasses = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.ObjectClass>(new List<Kistl.App.Base.ObjectClass>(0) {
-});
-			DataStore[66].TableName = @"PresenterInfos";
-			DataStore[66].Seal();
 			DataStore[67].ClassName = @"Visual";
 			DataStore[67].DefaultIcon = null;
 			DataStore[67].Description = @"";
@@ -2009,7 +1860,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[150],
 			DataStore[67].ShowIdInLists = true;
 			DataStore[67].ShowNameInLists = true;
 			DataStore[67].BaseObjectClass = null;
-			DataStore[67].DefaultModel = null;
 			DataStore[67].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[67].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -2044,7 +1894,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[162],
 			DataStore[68].ShowIdInLists = true;
 			DataStore[68].ShowNameInLists = true;
 			DataStore[68].BaseObjectClass = null;
-			DataStore[68].DefaultModel = null;
 			DataStore[68].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[68].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -2078,7 +1927,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[256],
 			DataStore[69].ShowIdInLists = true;
 			DataStore[69].ShowNameInLists = true;
 			DataStore[69].BaseObjectClass = null;
-			DataStore[69].DefaultModel = null;
 			DataStore[69].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[69].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -2112,7 +1960,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[89],
 			DataStore[70].ShowIdInLists = true;
 			DataStore[70].ShowNameInLists = true;
 			DataStore[70].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[69];
-			DataStore[70].DefaultModel = null;
 			DataStore[70].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[70].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -2142,7 +1989,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[169],
 			DataStore[71].ShowIdInLists = true;
 			DataStore[71].ShowNameInLists = true;
 			DataStore[71].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[69];
-			DataStore[71].DefaultModel = null;
 			DataStore[71].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[71].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -2172,7 +2018,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[173],
 			DataStore[73].ShowIdInLists = true;
 			DataStore[73].ShowNameInLists = true;
 			DataStore[73].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[69];
-			DataStore[73].DefaultModel = null;
 			DataStore[73].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[73].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -2200,7 +2045,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[98],
 			DataStore[74].ShowIdInLists = true;
 			DataStore[74].ShowNameInLists = true;
 			DataStore[74].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[69];
-			DataStore[74].DefaultModel = null;
 			DataStore[74].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[74].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -2228,7 +2072,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[105],
 			DataStore[75].ShowIdInLists = true;
 			DataStore[75].ShowNameInLists = true;
 			DataStore[75].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[69];
-			DataStore[75].DefaultModel = null;
 			DataStore[75].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[75].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -2255,7 +2098,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[107],
 			DataStore[76].ShowIdInLists = true;
 			DataStore[76].ShowNameInLists = true;
 			DataStore[76].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[75];
-			DataStore[76].DefaultModel = null;
 			DataStore[76].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[76].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -2291,7 +2133,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[271],
 			DataStore[77].ShowIdInLists = true;
 			DataStore[77].ShowNameInLists = true;
 			DataStore[77].BaseObjectClass = null;
-			DataStore[77].DefaultModel = null;
 			DataStore[77].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[77].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -2328,7 +2169,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[263],
 			DataStore[79].ShowIdInLists = true;
 			DataStore[79].ShowNameInLists = true;
 			DataStore[79].BaseObjectClass = null;
-			DataStore[79].DefaultModel = null;
 			DataStore[79].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[79].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -2367,7 +2207,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[262],
 			DataStore[82].ShowIdInLists = true;
 			DataStore[82].ShowNameInLists = true;
 			DataStore[82].BaseObjectClass = null;
-			DataStore[82].DefaultModel = null;
 			DataStore[82].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[82].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -2403,7 +2242,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[274],
 			DataStore[83].ShowIdInLists = true;
 			DataStore[83].ShowNameInLists = true;
 			DataStore[83].BaseObjectClass = null;
-			DataStore[83].DefaultModel = null;
 			DataStore[83].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[83].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -2437,7 +2275,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[272],
 			DataStore[85].ShowIdInLists = true;
 			DataStore[85].ShowNameInLists = true;
 			DataStore[85].BaseObjectClass = null;
-			DataStore[85].DefaultModel = null;
 			DataStore[85].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[85].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(1) {
 Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
@@ -2469,7 +2306,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[244],
 			DataStore[86].ShowIdInLists = true;
 			DataStore[86].ShowNameInLists = true;
 			DataStore[86].BaseObjectClass = null;
-			DataStore[86].DefaultModel = null;
 			DataStore[86].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[43];
 			DataStore[86].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -2502,7 +2338,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[249],
 			DataStore[87].ShowIdInLists = true;
 			DataStore[87].ShowNameInLists = true;
 			DataStore[87].BaseObjectClass = null;
-			DataStore[87].DefaultModel = null;
 			DataStore[87].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[37];
 			DataStore[87].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -2529,7 +2364,6 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[122],
 			DataStore[89].ShowIdInLists = true;
 			DataStore[89].ShowNameInLists = true;
 			DataStore[89].BaseObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8];
-			DataStore[89].DefaultModel = null;
 			DataStore[89].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[89].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });
@@ -2559,7 +2393,6 @@ Kistl.App.Base.Property__Implementation__Frozen.DataStore[268],
 			DataStore[90].ShowIdInLists = false;
 			DataStore[90].ShowNameInLists = false;
 			DataStore[90].BaseObjectClass = null;
-			DataStore[90].DefaultModel = null;
 			DataStore[90].DefaultPresentableModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[7];
 			DataStore[90].ImplementsInterfaces = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Interface>(new List<Kistl.App.Base.Interface>(0) {
 });

@@ -92,50 +92,6 @@ namespace Kistl.App.Base
         private int? _fk_BaseObjectClass;
 
         /// <summary>
-        /// The default model to use for the UI
-        /// </summary>
-        // object reference property
-		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef DefaultModel
-        {
-            get
-            {
-                if (_fk_DefaultModel.HasValue)
-                    return Context.Find<Kistl.App.Base.TypeRef>(_fk_DefaultModel.Value);
-                else
-                    return null;
-            }
-            set
-            {
-                // TODO: only accept objects from same Context
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                
-                // shortcut noops
-                if (value == null && _fk_DefaultModel == null)
-					return;
-                else if (value != null && value.ID == _fk_DefaultModel)
-					return;
-			           
-	            // cache old value to remove inverse references later
-                var oldValue = DefaultModel;
-
-				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("DefaultModel", oldValue, value);
-                
-				// next, set the local reference
-                _fk_DefaultModel = value == null ? (int?)null : value.ID;
-				
-				// everything is done. fire the Changed event
-				NotifyPropertyChanged("DefaultModel", oldValue, value);
-            }
-        }
-        
-        private int? _fk_DefaultModel;
-
-        /// <summary>
         /// The default PresentableModel to use for this ObjectClass
         /// </summary>
         // object reference property
@@ -414,7 +370,6 @@ namespace Kistl.App.Base
 			me.IsSimpleObject = other.IsSimpleObject;
 			me.TableName = other.TableName;
 			this._fk_BaseObjectClass = otherImpl._fk_BaseObjectClass;
-			this._fk_DefaultModel = otherImpl._fk_DefaultModel;
 			this._fk_DefaultPresentableModelDescriptor = otherImpl._fk_DefaultPresentableModelDescriptor;
 		}
 
@@ -463,15 +418,6 @@ namespace Kistl.App.Base
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(25).Constraints
 						.Where(c => !c.IsValid(this, this.BaseObjectClass))
 						.Select(c => c.GetErrorText(this, this.BaseObjectClass))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "DefaultModel":
-				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(212).Constraints
-						.Where(c => !c.IsValid(this, this.DefaultModel))
-						.Select(c => c.GetErrorText(this, this.DefaultModel))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -542,9 +488,6 @@ namespace Kistl.App.Base
                 case "BaseObjectClass":
                     _fk_BaseObjectClass = id;
                     break;
-                case "DefaultModel":
-                    _fk_DefaultModel = id;
-                    break;
                 case "DefaultPresentableModelDescriptor":
                     _fk_DefaultPresentableModelDescriptor = id;
                     break;
@@ -562,7 +505,6 @@ namespace Kistl.App.Base
 			
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._fk_BaseObjectClass, binStream);
-            BinarySerializer.ToStream(this._fk_DefaultModel, binStream);
             BinarySerializer.ToStream(this._fk_DefaultPresentableModelDescriptor, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
@@ -574,7 +516,6 @@ namespace Kistl.App.Base
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
-            BinarySerializer.FromStream(out this._fk_DefaultModel, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultPresentableModelDescriptor, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
@@ -586,7 +527,6 @@ namespace Kistl.App.Base
 			
             base.ToStream(xml);
             XmlStreamer.ToStream(this._fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_DefaultModel, xml, "DefaultModel", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
@@ -598,7 +538,6 @@ namespace Kistl.App.Base
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_DefaultModel, xml, "DefaultModel", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");

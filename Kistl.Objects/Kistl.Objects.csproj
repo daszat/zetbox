@@ -53,7 +53,6 @@
     <Compile Include="BoolProperty.Interface.Designer.cs" />
     <Compile Include="CLRObjectParameter.Interface.Designer.cs" />
     <Compile Include="Constraint.Interface.Designer.cs" />
-    <Compile Include="ControlInfo.Interface.Designer.cs" />
     <Compile Include="CurrentSchema.Interface.Designer.cs" />
     <Compile Include="DataType.Interface.Designer.cs" />
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
@@ -85,7 +84,6 @@
     <Compile Include="ObjectReferenceProperty.Interface.Designer.cs" />
     <Compile Include="PresenceRecord.Interface.Designer.cs" />
     <Compile Include="PresentableModelDescriptor.Interface.Designer.cs" />
-    <Compile Include="PresenterInfo.Interface.Designer.cs" />
     <Compile Include="Projekt.Interface.Designer.cs" />
     <Compile Include="Property.Interface.Designer.cs" />
     <Compile Include="Relation.Interface.Designer.cs" />

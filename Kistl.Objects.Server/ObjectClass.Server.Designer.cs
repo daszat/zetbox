@@ -101,72 +101,6 @@ namespace Kistl.App.Base
         
 
         /// <summary>
-        /// The default model to use for the UI
-        /// </summary>
-    /*
-    Relation: FK_ObjectClass_has_TypeRef
-    A: ZeroOrMore ObjectClass as ObjectClass
-    B: ZeroOrOne TypeRef as DefaultModel
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef DefaultModel
-        {
-            get
-            {
-                return DefaultModel__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                DefaultModel__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
-            }
-        }
-        
-        private int? _fk_DefaultModel;
-        private Guid? _fk_guid_DefaultModel = null;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_has_TypeRef", "DefaultModel")]
-        public Kistl.App.Base.TypeRef__Implementation__ DefaultModel__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ObjectClass_has_TypeRef",
-                        "DefaultModel");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
-                }
-                return r.Value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ObjectClass_has_TypeRef",
-                        "DefaultModel");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                r.Value = (Kistl.App.Base.TypeRef__Implementation__)value;
-            }
-        }
-        
-        
-
-        /// <summary>
         /// The default PresentableModel to use for this ObjectClass
         /// </summary>
     /*
@@ -513,7 +447,6 @@ namespace Kistl.App.Base
 			me.IsSimpleObject = other.IsSimpleObject;
 			me.TableName = other.TableName;
 			this._fk_BaseObjectClass = otherImpl._fk_BaseObjectClass;
-			this._fk_DefaultModel = otherImpl._fk_DefaultModel;
 			this._fk_DefaultPresentableModelDescriptor = otherImpl._fk_DefaultPresentableModelDescriptor;
 		}
 
@@ -557,15 +490,6 @@ namespace Kistl.App.Base
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(25).Constraints
 						.Where(c => !c.IsValid(this, this.BaseObjectClass))
 						.Select(c => c.GetErrorText(this, this.BaseObjectClass))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "DefaultModel":
-				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(212).Constraints
-						.Where(c => !c.IsValid(this, this.DefaultModel))
-						.Select(c => c.GetErrorText(this, this.DefaultModel))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -642,13 +566,6 @@ namespace Kistl.App.Base
 			else
 				BaseObjectClass__Implementation__ = null;
 
-			if (_fk_guid_DefaultModel.HasValue)
-				DefaultModel__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_DefaultModel.Value);
-			else if (_fk_DefaultModel.HasValue)
-				DefaultModel__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_DefaultModel.Value);
-			else
-				DefaultModel__Implementation__ = null;
-
 			if (_fk_guid_DefaultPresentableModelDescriptor.HasValue)
 				DefaultPresentableModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.PresentableModelDescriptor>(_fk_guid_DefaultPresentableModelDescriptor.Value);
 			else if (_fk_DefaultPresentableModelDescriptor.HasValue)
@@ -664,7 +581,6 @@ namespace Kistl.App.Base
 			
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(DefaultModel != null ? DefaultModel.ID : (int?)null, binStream);
             BinarySerializer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
@@ -676,7 +592,6 @@ namespace Kistl.App.Base
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
-            BinarySerializer.FromStream(out this._fk_DefaultModel, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultPresentableModelDescriptor, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
@@ -688,7 +603,6 @@ namespace Kistl.App.Base
 			
             base.ToStream(xml);
             XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.ToStream(DefaultModel != null ? DefaultModel.ID : (int?)null, xml, "DefaultModel", "Kistl.App.GUI");
             XmlStreamer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
@@ -700,7 +614,6 @@ namespace Kistl.App.Base
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_DefaultModel, xml, "DefaultModel", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
@@ -712,7 +625,6 @@ namespace Kistl.App.Base
 			
             base.Export(xml, modules);
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultModel != null ? DefaultModel.ExportGuid : (Guid?)null, xml, "DefaultModel", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
@@ -727,7 +639,6 @@ namespace Kistl.App.Base
 			
             base.MergeImport(xml);
             XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultModel, xml, "DefaultModel", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");

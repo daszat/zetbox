@@ -111,7 +111,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, StringParameter__Implementation__Frozen> DataStore = new Dictionary<int, StringParameter__Implementation__Frozen>(9);
+		internal new static Dictionary<int, StringParameter__Implementation__Frozen> DataStore = new Dictionary<int, StringParameter__Implementation__Frozen>(8);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[1] = 
@@ -131,9 +131,6 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[30] = 
 			DataStore[30] = new StringParameter__Implementation__Frozen(30);
-
-			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[33] = 
-			DataStore[33] = new StringParameter__Implementation__Frozen(33);
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[40] = 
 			DataStore[40] = new StringParameter__Implementation__Frozen(40);
@@ -186,13 +183,6 @@ namespace Kistl.App.Base
 			DataStore[30].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[139];
 			DataStore[30].ParameterName = @"result";
 			DataStore[30].Seal();
-			DataStore[33].Description = null;
-			DataStore[33].ExportGuid = new Guid("b42c2a64-aa35-4f17-83f2-12bc1b3361fb");
-			DataStore[33].IsList = false;
-			DataStore[33].IsReturnParameter = true;
-			DataStore[33].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[141];
-			DataStore[33].ParameterName = @"result";
-			DataStore[33].Seal();
 			DataStore[40].Description = @"a C# code fragment, usable as skeleton for implementing the target of this MethodInvocatoin";
 			DataStore[40].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
 			DataStore[40].IsList = false;

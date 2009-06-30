@@ -8,7 +8,6 @@
     <EntitySet Name="Auftrag" EntityType="Model.Auftrag" />
     <EntitySet Name="BaseParameter" EntityType="Model.BaseParameter" />
     <EntitySet Name="Constraint" EntityType="Model.Constraint" />
-    <EntitySet Name="ControlInfo" EntityType="Model.ControlInfo" />
     <EntitySet Name="CurrentSchema" EntityType="Model.CurrentSchema" />
     <EntitySet Name="DataType" EntityType="Model.DataType" />
     <EntitySet Name="EnumerationEntry" EntityType="Model.EnumerationEntry" />
@@ -22,7 +21,6 @@
     <EntitySet Name="Muhblah" EntityType="Model.Muhblah" />
     <EntitySet Name="PresenceRecord" EntityType="Model.PresenceRecord" />
     <EntitySet Name="PresentableModelDescriptor" EntityType="Model.PresentableModelDescriptor" />
-    <EntitySet Name="PresenterInfo" EntityType="Model.PresenterInfo" />
     <EntitySet Name="Projekt" EntityType="Model.Projekt" />
     <EntitySet Name="Property" EntityType="Model.Property" />
     <EntitySet Name="Relation" EntityType="Model.Relation" />
@@ -121,10 +119,6 @@
       <End Role="CLRObjectParameter" EntitySet="BaseParameter" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_ControlInfo_has_Assembly" Association="Model.FK_ControlInfo_has_Assembly" >
-      <End Role="ControlInfo" EntitySet="ControlInfo" />
-      <End Role="Assembly" EntitySet="Assembly" />
-    </AssociationSet>
     <AssociationSet Name="FK_DataType_has_Icon" Association="Model.FK_DataType_has_Icon" >
       <End Role="DataType" EntitySet="DataType" />
       <End Role="DefaultIcon" EntitySet="Icon" />
@@ -189,10 +183,6 @@
       <End Role="Presentable" EntitySet="DataType" />
       <End Role="DefaultPresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_has_TypeRef" Association="Model.FK_ObjectClass_has_TypeRef" >
-      <End Role="ObjectClass" EntitySet="DataType" />
-      <End Role="DefaultModel" EntitySet="TypeRef" />
-    </AssociationSet>
     <AssociationSet Name="FK_ObjectParameter_has_DataType" Association="Model.FK_ObjectParameter_has_DataType" >
       <End Role="ObjectParameter" EntitySet="BaseParameter" />
       <End Role="DataType" EntitySet="DataType" />
@@ -208,14 +198,6 @@
     <AssociationSet Name="FK_PresentableModelDescriptor_has_TypeRef" Association="Model.FK_PresentableModelDescriptor_has_TypeRef" >
       <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
       <End Role="PresentableModelRef" EntitySet="TypeRef" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PresenterInfo_hasData_Assembly" Association="Model.FK_PresenterInfo_hasData_Assembly" >
-      <End Role="PresenterInfo" EntitySet="PresenterInfo" />
-      <End Role="DataAssembly" EntitySet="Assembly" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PresenterInfo_hasPresenter_Assembly" Association="Model.FK_PresenterInfo_hasPresenter_Assembly" >
-      <End Role="PresenterInfo" EntitySet="PresenterInfo" />
-      <End Role="PresenterAssembly" EntitySet="Assembly" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_has_Auftrag" Association="Model.FK_Projekt_has_Auftrag" >
       <End Role="Projekt" EntitySet="Projekt" />
@@ -367,20 +349,6 @@
                         FromRole="Constraints"
                         ToRole="ConstrainedProperty" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ControlInfo">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Assembly__Implementation__"
-                        Relationship="Model.FK_ControlInfo_has_Assembly"
-                        FromRole="ControlInfo"
-                        ToRole="Assembly" />
-    <Property Name="ClassName" Type="String" Nullable="false" MaxLength="200" />
-    <Property Name="IsContainer" Type="Boolean" Nullable="false" />
-    <Property Name="Platform__Implementation__" Type="Int32" Nullable="false" />
-    <Property Name="ControlType__Implementation__" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="CurrentSchema">
     <Key>
@@ -575,23 +543,6 @@
     <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" />
     <Property Name="DefaultVisualType__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
-  </EntityType>
-  <EntityType Name="PresenterInfo">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="ControlType__Implementation__" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="PresenterAssembly__Implementation__"
-                        Relationship="Model.FK_PresenterInfo_hasPresenter_Assembly"
-                        FromRole="PresenterInfo"
-                        ToRole="PresenterAssembly" />
-    <Property Name="PresenterTypeName" Type="String" Nullable="false" MaxLength="200" />
-    <NavigationProperty Name="DataAssembly__Implementation__"
-                        Relationship="Model.FK_PresenterInfo_hasData_Assembly"
-                        FromRole="PresenterInfo"
-                        ToRole="DataAssembly" />
-    <Property Name="DataTypeName" Type="String" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -913,10 +864,6 @@
                         ToRole="CollectionEntry" />
     <Property Name="IsSimpleObject" Type="Boolean" Nullable="false" />
     <Property Name="IsFrozenObject" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="DefaultModel__Implementation__"
-                        Relationship="Model.FK_ObjectClass_has_TypeRef"
-                        FromRole="ObjectClass"
-                        ToRole="DefaultModel" />
     <NavigationProperty Name="DefaultPresentableModelDescriptor__Implementation__"
                         Relationship="Model.FK_ObjectClass_has_PresentableModelDescriptor"
                         FromRole="Presentable"
@@ -1312,14 +1259,6 @@
          Type="Model.Assembly" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ControlInfo_has_Assembly" >
-    <End Role="ControlInfo"
-         Type="Model.ControlInfo" 
-         Multiplicity="*" />
-    <End Role="Assembly"
-         Type="Model.Assembly" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_DataType_has_Icon" >
     <End Role="DataType"
          Type="Model.DataType" 
@@ -1448,14 +1387,6 @@
          Type="Model.PresentableModelDescriptor" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ObjectClass_has_TypeRef" >
-    <End Role="ObjectClass"
-         Type="Model.ObjectClass" 
-         Multiplicity="*" />
-    <End Role="DefaultModel"
-         Type="Model.TypeRef" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_ObjectParameter_has_DataType" >
     <End Role="ObjectParameter"
          Type="Model.ObjectParameter" 
@@ -1486,22 +1417,6 @@
          Multiplicity="*" />
     <End Role="PresentableModelRef"
          Type="Model.TypeRef" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_PresenterInfo_hasData_Assembly" >
-    <End Role="PresenterInfo"
-         Type="Model.PresenterInfo" 
-         Multiplicity="*" />
-    <End Role="DataAssembly"
-         Type="Model.Assembly" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_PresenterInfo_hasPresenter_Assembly" >
-    <End Role="PresenterInfo"
-         Type="Model.PresenterInfo" 
-         Multiplicity="*" />
-    <End Role="PresenterAssembly"
-         Type="Model.Assembly" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Projekt_has_Auftrag" >

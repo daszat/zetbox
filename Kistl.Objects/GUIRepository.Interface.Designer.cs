@@ -46,16 +46,6 @@ namespace Kistl.App.GUI
 			}
 		}
 		
-		/// <summary>List of all PresenterInfo</summary>
-		/// 
-		public IQueryable<PresenterInfo> PresenterInfos
-		{ 
-			get
-			{
-				return Context.GetQuery<PresenterInfo>();
-			}
-		}
-		
 		/// <summary>List of all PresentableModelDescriptor</summary>
 		/// 
 		public IQueryable<PresentableModelDescriptor> PresentableModelDescriptors
@@ -73,16 +63,6 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<Icon>();
-			}
-		}
-		
-		/// <summary>List of all ControlInfo</summary>
-		/// 
-		public IQueryable<ControlInfo> ControlInfos
-		{ 
-			get
-			{
-				return Context.GetQuery<ControlInfo>();
 			}
 		}
 		

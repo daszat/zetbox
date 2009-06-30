@@ -21,13 +21,6 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// The default model to use for the UI
-        /// </summary>
-		Kistl.App.Base.TypeRef DefaultModel {
-			get;
-			set;
-		}
-        /// <summary>
         /// The default PresentableModel to use for this ObjectClass
         /// </summary>
 		Kistl.App.GUI.PresentableModelDescriptor DefaultPresentableModelDescriptor {

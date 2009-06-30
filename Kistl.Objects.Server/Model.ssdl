@@ -23,12 +23,10 @@
     <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Table="BaseParameters"/>
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries"/>
     <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Table="TestObjClasses"/>
-    <EntitySet Name="ControlInfo" EntityType="Model.Store.ControlInfo" Table="ControlInfos"/>
     <EntitySet Name="TestCustomObject" EntityType="Model.Store.TestCustomObject" Table="TestCustomObjects"/>
     <EntitySet Name="Muhblah" EntityType="Model.Store.Muhblah" Table="Muhblas"/>
     <EntitySet Name="AnotherTest" EntityType="Model.Store.AnotherTest" Table="AnotherTests"/>
     <EntitySet Name="LastTest" EntityType="Model.Store.LastTest" Table="LastTests"/>
-    <EntitySet Name="PresenterInfo" EntityType="Model.Store.PresenterInfo" Table="PresenterInfos"/>
     <EntitySet Name="Visual" EntityType="Model.Store.Visual" Table="Visuals"/>
     <EntitySet Name="Template" EntityType="Model.Store.Template" Table="Templates"/>
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Table="Constraints"/>
@@ -360,10 +358,6 @@
       <End Role="CLRObjectParameter" EntitySet="CLRObjectParameter" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_ControlInfo_has_Assembly" Association="Model.Store.FK_ControlInfo_has_Assembly" >
-      <End Role="ControlInfo" EntitySet="ControlInfo" />
-      <End Role="Assembly" EntitySet="Assembly" />
-    </AssociationSet>
     <AssociationSet Name="FK_DataType_has_Icon" Association="Model.Store.FK_DataType_has_Icon" >
       <End Role="DataType" EntitySet="DataType" />
       <End Role="DefaultIcon" EntitySet="Icon" />
@@ -428,10 +422,6 @@
       <End Role="Presentable" EntitySet="ObjectClass" />
       <End Role="DefaultPresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_has_TypeRef" Association="Model.Store.FK_ObjectClass_has_TypeRef" >
-      <End Role="ObjectClass" EntitySet="ObjectClass" />
-      <End Role="DefaultModel" EntitySet="TypeRef" />
-    </AssociationSet>
     <AssociationSet Name="FK_ObjectParameter_has_DataType" Association="Model.Store.FK_ObjectParameter_has_DataType" >
       <End Role="ObjectParameter" EntitySet="ObjectParameter" />
       <End Role="DataType" EntitySet="DataType" />
@@ -447,14 +437,6 @@
     <AssociationSet Name="FK_PresentableModelDescriptor_has_TypeRef" Association="Model.Store.FK_PresentableModelDescriptor_has_TypeRef" >
       <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
       <End Role="PresentableModelRef" EntitySet="TypeRef" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PresenterInfo_hasData_Assembly" Association="Model.Store.FK_PresenterInfo_hasData_Assembly" >
-      <End Role="PresenterInfo" EntitySet="PresenterInfo" />
-      <End Role="DataAssembly" EntitySet="Assembly" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PresenterInfo_hasPresenter_Assembly" Association="Model.Store.FK_PresenterInfo_hasPresenter_Assembly" >
-      <End Role="PresenterInfo" EntitySet="PresenterInfo" />
-      <End Role="PresenterAssembly" EntitySet="Assembly" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_has_Auftrag" Association="Model.Store.FK_Projekt_has_Auftrag" >
       <End Role="Projekt" EntitySet="Projekt" />
@@ -559,7 +541,6 @@
     <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="IsSimpleObject" Type="bit" Nullable="false" />
     <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
-    <Property Name="fk_DefaultModel" Type="int" />
     <Property Name="fk_DefaultPresentableModelDescriptor" Type="int" />
   </EntityType>
 	
@@ -882,18 +863,6 @@
     <Property Name="MyIntProperty" Type="int" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="ControlInfo">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Assembly" Type="int" />
-    <Property Name="ClassName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="IsContainer" Type="bit" Nullable="false" />
-    <Property Name="Platform" Type="int" Nullable="false" />
-    <Property Name="ControlType" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="TestCustomObject">
     <Key>
       <PropertyRef Name="ID" />
@@ -941,18 +910,6 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_StructDefinition" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="PresenterInfo">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ControlType" Type="int" Nullable="false" />
-    <Property Name="fk_PresenterAssembly" Type="int" />
-    <Property Name="PresenterTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_DataAssembly" Type="int" />
-    <Property Name="DataTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Visual">
@@ -1463,21 +1420,6 @@
   </Association>
 
 
-  <Association Name="FK_ControlInfo_has_Assembly">
-    <End Role="Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="ControlInfo" Type="Model.Store.ControlInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Assembly">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ControlInfo">
-        <PropertyRef Name="fk_Assembly" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_DataType_has_Icon">
     <End Role="DefaultIcon" Type="Model.Store.Icon" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -1718,21 +1660,6 @@
   </Association>
 
 
-  <Association Name="FK_ObjectClass_has_TypeRef">
-    <End Role="DefaultModel" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DefaultModel">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ObjectClass">
-        <PropertyRef Name="fk_DefaultModel" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_ObjectParameter_has_DataType">
     <End Role="DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -1788,36 +1715,6 @@
       </Principal>
       <Dependent Role="Descriptor">
         <PropertyRef Name="fk_PresentableModelRef" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_PresenterInfo_hasData_Assembly">
-    <End Role="DataAssembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="PresenterInfo" Type="Model.Store.PresenterInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DataAssembly">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PresenterInfo">
-        <PropertyRef Name="fk_DataAssembly" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_PresenterInfo_hasPresenter_Assembly">
-    <End Role="PresenterAssembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="PresenterInfo" Type="Model.Store.PresenterInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PresenterAssembly">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PresenterInfo">
-        <PropertyRef Name="fk_PresenterAssembly" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

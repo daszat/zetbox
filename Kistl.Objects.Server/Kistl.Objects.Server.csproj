@@ -70,7 +70,6 @@
     <Compile Include="BoolProperty.Server.Designer.cs" />
     <Compile Include="CLRObjectParameter.Server.Designer.cs" />
     <Compile Include="Constraint.Server.Designer.cs" />
-    <Compile Include="ControlInfo.Server.Designer.cs" />
     <Compile Include="CurrentSchema.Server.Designer.cs" />
     <Compile Include="DataType.Server.Designer.cs" />
     <Compile Include="DateTimeParameter.Server.Designer.cs" />
@@ -102,7 +101,6 @@
     <Compile Include="ObjectReferenceProperty.Server.Designer.cs" />
     <Compile Include="PresenceRecord.Server.Designer.cs" />
     <Compile Include="PresentableModelDescriptor.Server.Designer.cs" />
-    <Compile Include="PresenterInfo.Server.Designer.cs" />
     <Compile Include="Projekt.Server.Designer.cs" />
     <Compile Include="Property.Server.Designer.cs" />
     <Compile Include="Relation.Server.Designer.cs" />

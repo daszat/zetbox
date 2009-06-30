@@ -66,7 +66,6 @@
     <Compile Include="BoolProperty.Client.Designer.cs" />
     <Compile Include="CLRObjectParameter.Client.Designer.cs" />
     <Compile Include="Constraint.Client.Designer.cs" />
-    <Compile Include="ControlInfo.Client.Designer.cs" />
     <Compile Include="CurrentSchema.Client.Designer.cs" />
     <Compile Include="DataType.Client.Designer.cs" />
     <Compile Include="DateTimeParameter.Client.Designer.cs" />
@@ -98,7 +97,6 @@
     <Compile Include="ObjectReferenceProperty.Client.Designer.cs" />
     <Compile Include="PresenceRecord.Client.Designer.cs" />
     <Compile Include="PresentableModelDescriptor.Client.Designer.cs" />
-    <Compile Include="PresenterInfo.Client.Designer.cs" />
     <Compile Include="Projekt.Client.Designer.cs" />
     <Compile Include="Property.Client.Designer.cs" />
     <Compile Include="Relation.Client.Designer.cs" />

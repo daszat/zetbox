@@ -53,21 +53,6 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_ControlInfo_has_Assembly
-    A: ZeroOrMore ControlInfo as ControlInfo
-    B: ZeroOrOne Assembly as Assembly
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_ControlInfo_has_Assembly",
-    "ControlInfo", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlInfo__Implementation__),
-    "Assembly", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_DataType_has_Icon
     A: ZeroOrMore DataType as DataType
     B: ZeroOrOne Icon as DefaultIcon
@@ -308,21 +293,6 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_ObjectClass_has_TypeRef
-    A: ZeroOrMore ObjectClass as ObjectClass
-    B: ZeroOrOne TypeRef as DefaultModel
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_ObjectClass_has_TypeRef",
-    "ObjectClass", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass__Implementation__),
-    "DefaultModel", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_ObjectClass_implements_Interface
     A: ZeroOrMore ObjectClass as ObjectClass
     B: ZeroOrMore Interface as ImplementsInterfaces
@@ -397,36 +367,6 @@ using Kistl.DALProvider.EF;
     "Model", "FK_PresentableModelDescriptor_has_TypeRef",
     "Descriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresentableModelDescriptor__Implementation__),
     "PresentableModelRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
-    )]
-
-
-	/*
-    Relation: FK_PresenterInfo_hasData_Assembly
-    A: ZeroOrMore PresenterInfo as PresenterInfo
-    B: ZeroOrOne Assembly as DataAssembly
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_PresenterInfo_hasData_Assembly",
-    "PresenterInfo", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresenterInfo__Implementation__),
-    "DataAssembly", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly__Implementation__)
-    )]
-
-
-	/*
-    Relation: FK_PresenterInfo_hasPresenter_Assembly
-    A: ZeroOrMore PresenterInfo as PresenterInfo
-    B: ZeroOrOne Assembly as PresenterAssembly
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_PresenterInfo_hasPresenter_Assembly",
-    "PresenterInfo", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresenterInfo__Implementation__),
-    "PresenterAssembly", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly__Implementation__)
     )]
 
 

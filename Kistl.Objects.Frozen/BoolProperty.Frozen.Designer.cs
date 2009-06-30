@@ -111,7 +111,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, BoolProperty__Implementation__Frozen> DataStore = new Dictionary<int, BoolProperty__Implementation__Frozen>(16);
+		internal new static Dictionary<int, BoolProperty__Implementation__Frozen> DataStore = new Dictionary<int, BoolProperty__Implementation__Frozen>(15);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[11] = 
@@ -133,10 +133,6 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[95] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[95] = 
 			DataStore[95] = new BoolProperty__Implementation__Frozen(95);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[116] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[116] = 
-			DataStore[116] = new BoolProperty__Implementation__Frozen(116);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[119] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[119] = 
@@ -256,21 +252,6 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[110],
 			DataStore[95].PropertyName = @"IsReturnParameter";
 			DataStore[95].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
 			DataStore[95].Seal();
-			DataStore[116].AltText = @"Whether or not this Control can contain other Controls";
-			DataStore[116].CategoryTags = null;
-			DataStore[116].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[96],
-});
-			DataStore[116].Description = @"Whether or not this Control can contain other Controls";
-			DataStore[116].ExportGuid = new Guid("90f6cf7e-2da3-4d73-9684-157f6a614bf3");
-			DataStore[116].IsIndexed = false;
-			DataStore[116].IsList = false;
-			DataStore[116].IsNullable = false;
-			DataStore[116].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[116].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
-			DataStore[116].PropertyName = @"IsContainer";
-			DataStore[116].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[13];
-			DataStore[116].Seal();
 			DataStore[119].AltText = @"Setting this to true marks the instances of this class as ""simple."" At first this will only mean that they'll be displayed inline.";
 			DataStore[119].CategoryTags = @"DataModel";
 			DataStore[119].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {

@@ -288,17 +288,6 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ControlInfo">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ControlInfo)">
-	    <MappingFragment StoreEntitySet="ControlInfo">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ClassName" ColumnName="ClassName" />
-<ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
-<ScalarProperty Name="IsContainer" ColumnName="IsContainer" />
-<ScalarProperty Name="Platform__Implementation__" ColumnName="Platform" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TestCustomObject">
       <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObject)">
 	    <MappingFragment StoreEntitySet="TestCustomObject">
@@ -334,16 +323,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.LastTest)">
 	    <MappingFragment StoreEntitySet="LastTest">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PresenterInfo">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.PresenterInfo)">
-	    <MappingFragment StoreEntitySet="PresenterInfo">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
-<ScalarProperty Name="DataTypeName" ColumnName="DataTypeName" />
-<ScalarProperty Name="PresenterTypeName" ColumnName="PresenterTypeName" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -820,23 +799,6 @@
       <Condition ColumnName="fk_Assembly" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ControlInfo_has_Assembly
-    A: ZeroOrMore ControlInfo as ControlInfo
-    B: ZeroOrOne Assembly as Assembly
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_ControlInfo_has_Assembly"
-                           TypeName="Model.FK_ControlInfo_has_Assembly"
-                           StoreEntitySet="ControlInfo" >
-      <EndProperty Name="Assembly">
-        <ScalarProperty Name="ID" ColumnName="fk_Assembly"/>
-      </EndProperty>
-      <EndProperty Name="ControlInfo">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Assembly" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_DataType_has_Icon
     A: ZeroOrMore DataType as DataType
     B: ZeroOrOne Icon as DefaultIcon
@@ -1109,23 +1071,6 @@
       <Condition ColumnName="fk_DefaultPresentableModelDescriptor" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ObjectClass_has_TypeRef
-    A: ZeroOrMore ObjectClass as ObjectClass
-    B: ZeroOrOne TypeRef as DefaultModel
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_ObjectClass_has_TypeRef"
-                           TypeName="Model.FK_ObjectClass_has_TypeRef"
-                           StoreEntitySet="ObjectClass" >
-      <EndProperty Name="DefaultModel">
-        <ScalarProperty Name="ID" ColumnName="fk_DefaultModel"/>
-      </EndProperty>
-      <EndProperty Name="ObjectClass">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_DefaultModel" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_ObjectParameter_has_DataType
     A: ZeroOrMore ObjectParameter as ObjectParameter
     B: ZeroOrOne DataType as DataType
@@ -1192,40 +1137,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_PresentableModelRef" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_PresenterInfo_hasData_Assembly
-    A: ZeroOrMore PresenterInfo as PresenterInfo
-    B: ZeroOrOne Assembly as DataAssembly
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_PresenterInfo_hasData_Assembly"
-                           TypeName="Model.FK_PresenterInfo_hasData_Assembly"
-                           StoreEntitySet="PresenterInfo" >
-      <EndProperty Name="DataAssembly">
-        <ScalarProperty Name="ID" ColumnName="fk_DataAssembly"/>
-      </EndProperty>
-      <EndProperty Name="PresenterInfo">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_DataAssembly" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_PresenterInfo_hasPresenter_Assembly
-    A: ZeroOrMore PresenterInfo as PresenterInfo
-    B: ZeroOrOne Assembly as PresenterAssembly
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_PresenterInfo_hasPresenter_Assembly"
-                           TypeName="Model.FK_PresenterInfo_hasPresenter_Assembly"
-                           StoreEntitySet="PresenterInfo" >
-      <EndProperty Name="PresenterAssembly">
-        <ScalarProperty Name="ID" ColumnName="fk_PresenterAssembly"/>
-      </EndProperty>
-      <EndProperty Name="PresenterInfo">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_PresenterAssembly" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Projekt_has_Auftrag

@@ -33,11 +33,6 @@ namespace Kistl.App.GUI
             }
         }
 
-        public void OnToString_ControlInfo(ControlInfo obj, MethodReturnEventArgs<string> e)
-        {
-            e.Result = String.Format("{0}: {1} implemented by {2} from {3}", obj.Platform, obj.ControlType, obj.ClassName, obj.Assembly);
-        }
-
         public void OnToString_PresentableModelDescriptor(PresentableModelDescriptor obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0} (default: {1})",
@@ -45,10 +40,6 @@ namespace Kistl.App.GUI
                 obj.DefaultVisualType);
         }
 
-        public void OnToString_PresenterInfo(PresenterInfo obj, MethodReturnEventArgs<string> e)
-        {
-            e.Result = String.Format("{0} implemented by {1} from {2}", obj.ControlType, obj.PresenterTypeName, obj.PresenterAssembly);
-        }
 
         public void OnPrepareDefault_Template(Template obj, ObjectClass cls)
         {
