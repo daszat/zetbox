@@ -111,7 +111,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(105);
+		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(106);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74] = 
@@ -428,6 +428,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[274] = 
 			DataStore[274] = new NotNullableConstraint__Implementation__Frozen(274);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[275] = 
+			DataStore[275] = new NotNullableConstraint__Implementation__Frozen(275);
 
 		}
 
@@ -852,6 +855,10 @@ namespace Kistl.App.Base
 			DataStore[274].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
 			DataStore[274].Reason = null;
 			DataStore[274].Seal();
+			DataStore[275].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[280];
+			DataStore[275].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[275].Reason = null;
+			DataStore[275].Seal();
 	
 		}
 #region Serializer

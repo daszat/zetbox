@@ -274,6 +274,7 @@
 	    <MappingFragment StoreEntitySet="EnumerationEntry">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="Value" ColumnName="Value" />
 	    </MappingFragment>

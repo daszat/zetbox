@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="EnumerationEntry")]
     [System.Diagnostics.DebuggerDisplay("EnumerationEntry")]
-    public class EnumerationEntry__Implementation__ : BaseServerDataObject_EntityFramework, EnumerationEntry
+    public class EnumerationEntry__Implementation__ : BaseServerDataObject_EntityFramework, EnumerationEntry, Kistl.API.IExportableInternal
     {
     
 		public EnumerationEntry__Implementation__()
@@ -150,6 +150,34 @@ namespace Kistl.App.Base
         
 
         /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
+
+        /// <summary>
         /// CLR name of this entry
         /// </summary>
         // value type property
@@ -218,6 +246,7 @@ namespace Kistl.App.Base
 			var me = (EnumerationEntry)this;
 
 			me.Description = other.Description;
+			me.ExportGuid = other.ExportGuid;
 			me.Name = other.Name;
 			me.Value = other.Value;
 			this._fk_Enumeration = otherImpl._fk_Enumeration;
@@ -276,6 +305,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "ExportGuid":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(280).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "Name":
 				{
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(136).Constraints
@@ -319,6 +357,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(Enumeration != null ? Enumeration.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._Value, binStream);
         }
@@ -329,6 +368,7 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._fk_Enumeration, binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._Value, binStream);
         }
@@ -339,6 +379,7 @@ namespace Kistl.App.Base
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(Enumeration != null ? Enumeration.ID : (int?)null, xml, "Enumeration", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Value, xml, "Value", "Kistl.App.Base");
         }
@@ -349,6 +390,31 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Enumeration, xml, "Enumeration", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Value, xml, "Value", "Kistl.App.Base");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Enumeration != null ? Enumeration.ExportGuid : (Guid?)null, xml, "Enumeration", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Value, xml, "Value", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Enumeration, xml, "Enumeration", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Value, xml, "Value", "Kistl.App.Base");
         }

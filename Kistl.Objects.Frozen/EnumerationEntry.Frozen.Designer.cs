@@ -20,7 +20,7 @@ namespace Kistl.App.Base
     /// Metadefinition Object for an Enumeration Entry.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("EnumerationEntry")]
-    public class EnumerationEntry__Implementation__Frozen : BaseFrozenDataObject, EnumerationEntry
+    public class EnumerationEntry__Implementation__Frozen : BaseFrozenDataObject, EnumerationEntry, Kistl.API.IExportableInternal
     {
     
 		public EnumerationEntry__Implementation__Frozen()
@@ -77,6 +77,31 @@ namespace Kistl.App.Base
             }
         }
         private Kistl.App.Base.Enumeration _Enumeration;
+
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
 
         /// <summary>
         /// CLR name of this entry
@@ -182,6 +207,15 @@ namespace Kistl.App.Base
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(100).Constraints
 						.Where(c => !c.IsValid(this, this.Enumeration))
 						.Select(c => c.GetErrorText(this, this.Enumeration))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ExportGuid":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(280).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -303,206 +337,247 @@ namespace Kistl.App.Base
 		internal static void FillDataStore() {
 			DataStore[2].Description = @"First Test Entry";
 			DataStore[2].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[50];
+			DataStore[2].ExportGuid = default(System.Guid);
 			DataStore[2].Name = @"First";
 			DataStore[2].Value = 0;
 			DataStore[2].Seal();
 			DataStore[3].Description = @"Second Test Entry";
 			DataStore[3].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[50];
+			DataStore[3].ExportGuid = default(System.Guid);
 			DataStore[3].Name = @"Second";
 			DataStore[3].Value = 1;
 			DataStore[3].Seal();
 			DataStore[5].Description = @"WPF Toolkit";
 			DataStore[5].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
+			DataStore[5].ExportGuid = default(System.Guid);
 			DataStore[5].Name = @"WPF";
 			DataStore[5].Value = 0;
 			DataStore[5].Seal();
 			DataStore[6].Description = @"ASPNET Toolkit";
 			DataStore[6].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
+			DataStore[6].ExportGuid = default(System.Guid);
 			DataStore[6].Name = @"ASPNET";
 			DataStore[6].Value = 1;
 			DataStore[6].Seal();
 			DataStore[7].Description = @"TEST Toolkit";
 			DataStore[7].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
+			DataStore[7].ExportGuid = default(System.Guid);
 			DataStore[7].Name = @"TEST";
 			DataStore[7].Value = 2;
 			DataStore[7].Seal();
 			DataStore[40].Description = @"";
 			DataStore[40].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[40].ExportGuid = default(System.Guid);
 			DataStore[40].Name = @"SimpleObjectList";
 			DataStore[40].Value = 16;
 			DataStore[40].Seal();
 			DataStore[41].Description = @"display a value from an Enumeration";
 			DataStore[41].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[41].ExportGuid = default(System.Guid);
 			DataStore[41].Name = @"Enumeration";
 			DataStore[41].Value = 15;
 			DataStore[41].Seal();
 			DataStore[42].Description = @"";
 			DataStore[42].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[42].ExportGuid = default(System.Guid);
 			DataStore[42].Name = @"StringList";
 			DataStore[42].Value = 14;
 			DataStore[42].Seal();
 			DataStore[43].Description = @"";
 			DataStore[43].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[43].ExportGuid = default(System.Guid);
 			DataStore[43].Name = @"String";
 			DataStore[43].Value = 13;
 			DataStore[43].Seal();
 			DataStore[44].Description = @"";
 			DataStore[44].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[44].ExportGuid = default(System.Guid);
 			DataStore[44].Name = @"IntegerList";
 			DataStore[44].Value = 12;
 			DataStore[44].Seal();
 			DataStore[45].Description = @"";
 			DataStore[45].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[45].ExportGuid = default(System.Guid);
 			DataStore[45].Name = @"Integer";
 			DataStore[45].Value = 11;
 			DataStore[45].Seal();
 			DataStore[46].Description = @"";
 			DataStore[46].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[46].ExportGuid = default(System.Guid);
 			DataStore[46].Name = @"DoubleList";
 			DataStore[46].Value = 10;
 			DataStore[46].Seal();
 			DataStore[47].Description = @"";
 			DataStore[47].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[47].ExportGuid = default(System.Guid);
 			DataStore[47].Name = @"Double";
 			DataStore[47].Value = 9;
 			DataStore[47].Seal();
 			DataStore[48].Description = @"a list of date/time values";
 			DataStore[48].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[48].ExportGuid = default(System.Guid);
 			DataStore[48].Name = @"DateTimeList";
 			DataStore[48].Value = 8;
 			DataStore[48].Seal();
 			DataStore[49].Description = @"a date/time value";
 			DataStore[49].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[49].ExportGuid = default(System.Guid);
 			DataStore[49].Name = @"DateTime";
 			DataStore[49].Value = 7;
 			DataStore[49].Seal();
 			DataStore[50].Description = @"a list of booleans";
 			DataStore[50].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[50].ExportGuid = default(System.Guid);
 			DataStore[50].Name = @"BooleanList";
 			DataStore[50].Value = 6;
 			DataStore[50].Seal();
 			DataStore[51].Description = @"a boolean";
 			DataStore[51].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[51].ExportGuid = default(System.Guid);
 			DataStore[51].Name = @"Boolean";
 			DataStore[51].Value = 5;
 			DataStore[51].Seal();
 			DataStore[52].Description = @"A reference to an object";
 			DataStore[52].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[52].ExportGuid = default(System.Guid);
 			DataStore[52].Name = @"ObjectReference";
 			DataStore[52].Value = 4;
 			DataStore[52].Seal();
 			DataStore[53].Description = @"A list of objects";
 			DataStore[53].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[53].ExportGuid = default(System.Guid);
 			DataStore[53].Name = @"ObjectList";
 			DataStore[53].Value = 3;
 			DataStore[53].Seal();
 			DataStore[54].Description = @"A group of properties";
 			DataStore[54].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[54].ExportGuid = default(System.Guid);
 			DataStore[54].Name = @"PropertyGroup";
 			DataStore[54].Value = 2;
 			DataStore[54].Seal();
 			DataStore[55].Description = @"A full view of the object";
 			DataStore[55].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[55].ExportGuid = default(System.Guid);
 			DataStore[55].Name = @"Object";
 			DataStore[55].Value = 1;
 			DataStore[55].Seal();
 			DataStore[56].Description = @"The renderer class is no actual ""View"", but neverthe less needs to be found";
 			DataStore[56].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[56].ExportGuid = default(System.Guid);
 			DataStore[56].Name = @"Renderer";
 			DataStore[56].Value = 0;
 			DataStore[56].Seal();
 			DataStore[57].Description = @"";
 			DataStore[57].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[57].ExportGuid = default(System.Guid);
 			DataStore[57].Name = @"MenuGroup";
 			DataStore[57].Value = 18;
 			DataStore[57].Seal();
 			DataStore[58].Description = @"";
 			DataStore[58].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[58].ExportGuid = default(System.Guid);
 			DataStore[58].Name = @"MenuItem";
 			DataStore[58].Value = 17;
 			DataStore[58].Seal();
 			DataStore[59].Description = @"";
 			DataStore[59].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[59].ExportGuid = default(System.Guid);
 			DataStore[59].Name = @"TemplateEditor";
 			DataStore[59].Value = 19;
 			DataStore[59].Seal();
 			DataStore[60].Description = @"The relation information is stored on both sides of the Relation";
 			DataStore[60].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
+			DataStore[60].ExportGuid = default(System.Guid);
 			DataStore[60].Name = @"Replicate";
 			DataStore[60].Value = 3;
 			DataStore[60].Seal();
 			DataStore[63].Description = @"Required Element (exactly one)";
 			DataStore[63].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[81];
+			DataStore[63].ExportGuid = default(System.Guid);
 			DataStore[63].Name = @"One";
 			DataStore[63].Value = 2;
 			DataStore[63].Seal();
 			DataStore[64].Description = @"Optional Element (zero or one)";
 			DataStore[64].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[81];
+			DataStore[64].ExportGuid = default(System.Guid);
 			DataStore[64].Name = @"ZeroOrOne";
 			DataStore[64].Value = 1;
 			DataStore[64].Seal();
 			DataStore[65].Description = @"Optional List Element (zero or more)";
 			DataStore[65].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[81];
+			DataStore[65].ExportGuid = default(System.Guid);
 			DataStore[65].Name = @"ZeroOrMore";
 			DataStore[65].Value = 3;
 			DataStore[65].Seal();
 			DataStore[66].Description = @"The relation information is stored with the A-side ObjectClass";
 			DataStore[66].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
+			DataStore[66].ExportGuid = default(System.Guid);
 			DataStore[66].Name = @"MergeIntoA";
 			DataStore[66].Value = 1;
 			DataStore[66].Seal();
 			DataStore[67].Description = @"The relation information is stored with the B-side ObjectClass";
 			DataStore[67].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
+			DataStore[67].ExportGuid = default(System.Guid);
 			DataStore[67].Name = @"MergeIntoB";
 			DataStore[67].Value = 2;
 			DataStore[67].Seal();
 			DataStore[68].Description = @"The relation information is stored in a separate entity";
 			DataStore[68].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
+			DataStore[68].ExportGuid = default(System.Guid);
 			DataStore[68].Name = @"Separate";
 			DataStore[68].Value = 4;
 			DataStore[68].Seal();
 			DataStore[69].Description = @"Displays an Integer with a slider instead of a text box";
 			DataStore[69].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[69].ExportGuid = default(System.Guid);
 			DataStore[69].Name = @"IntegerSlider";
 			DataStore[69].Value = 20;
 			DataStore[69].Seal();
 			DataStore[70].Description = @"An object as entry of a list";
 			DataStore[70].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[70].ExportGuid = default(System.Guid);
 			DataStore[70].Name = @"ObjectListEntry";
 			DataStore[70].Value = 21;
 			DataStore[70].Seal();
 			DataStore[71].Description = @"The debugger window for displaying the active contexts";
 			DataStore[71].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[71].ExportGuid = default(System.Guid);
 			DataStore[71].Name = @"KistlDebugger";
 			DataStore[71].Value = 22;
 			DataStore[71].Seal();
 			DataStore[74].Description = @"A task for the user: select a value from a list";
 			DataStore[74].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[74].ExportGuid = default(System.Guid);
 			DataStore[74].Name = @"SelectionTaskDialog";
 			DataStore[74].Value = 23;
 			DataStore[74].Seal();
 			DataStore[75].Description = @"A top-level window containing a Workspace, a visual representation for IKistlContext";
 			DataStore[75].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[75].ExportGuid = default(System.Guid);
 			DataStore[75].Name = @"WorkspaceWindow";
 			DataStore[75].Value = 24;
 			DataStore[75].Seal();
 			DataStore[76].Description = @"Select a string from a aset of values";
 			DataStore[76].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[76].ExportGuid = default(System.Guid);
 			DataStore[76].Name = @"StringSelection";
 			DataStore[76].Value = 26;
 			DataStore[76].Seal();
 			DataStore[77].Description = @"Windows Forms Toolkit";
 			DataStore[77].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
+			DataStore[77].ExportGuid = default(System.Guid);
 			DataStore[77].Name = @"WinForms";
 			DataStore[77].Value = 3;
 			DataStore[77].Seal();
 			DataStore[78].Description = @"";
 			DataStore[78].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[78].ExportGuid = default(System.Guid);
 			DataStore[78].Name = @"Guid";
 			DataStore[78].Value = 27;
 			DataStore[78].Seal();
 			DataStore[79].Description = @"display a value in a GridCell";
 			DataStore[79].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
+			DataStore[79].ExportGuid = default(System.Guid);
 			DataStore[79].Name = @"GridCell";
 			DataStore[79].Value = 28;
 			DataStore[79].Seal();
@@ -523,6 +598,14 @@ namespace Kistl.App.Base
             throw new NotImplementedException();
         }
         public override void FromStream(System.Xml.XmlReader xml)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            throw new NotImplementedException();
+        }
+        public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }

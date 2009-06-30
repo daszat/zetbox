@@ -414,6 +414,7 @@
     <Property Name="Value" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
   <EntityType Name="Icon">
     <Key>
