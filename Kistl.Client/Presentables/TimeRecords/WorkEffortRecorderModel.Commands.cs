@@ -93,6 +93,7 @@ namespace Kistl.Client.Presentables.TimeRecords
                 effortModel.From = DateTime.Now;
                 _parent.InitialiseEfforts();
                 _parent._efforts.Add(effortModel);
+                _parent.SelectedEffort = effortModel;
                 DataContext.SubmitChanges();
             }
         }

@@ -171,8 +171,9 @@ namespace Kistl.Client.Presentables.TimeRecords
                     OnPropertyChanged("CurrentEffort");
                 };
 
-                ReloadEfforts();
                 _readOnlyEfforts = new ReadOnlyObservableCollection<WorkEffortModel>(_efforts);
+
+                ReloadEfforts();
             }
         }
 
@@ -193,6 +194,7 @@ namespace Kistl.Client.Presentables.TimeRecords
                     _efforts.Add(wem);
                 }
             }
+            SelectedEffort = CurrentEffort ?? _efforts.LastOrDefault();
             OnPropertyChanged("CurrentEffort");
         }
 
@@ -201,6 +203,11 @@ namespace Kistl.Client.Presentables.TimeRecords
         {
             get
             {
+                if (Efforts == null)
+                {
+                    return null;
+                }
+
                 if (Efforts.Count > 0)
                 {
                     WorkEffortModel currentEffort = Efforts[Efforts.Count - 1];
@@ -216,6 +223,29 @@ namespace Kistl.Client.Presentables.TimeRecords
                 else
                 {
                     return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// The backing store for the <see cref="SelectedEffort"/> property.
+        /// </summary>
+        private WorkEffortModel _selectedEffort;
+
+        /// <summary>Gets the currently selected <see cref="WorkEffort"/>.</summary>
+        public WorkEffortModel SelectedEffort
+        {
+            get
+            {
+                return _selectedEffort;
+            }
+            set
+            {
+                if (_selectedEffort != value)
+                {
+                    _selectedEffort = value;
+                    DataContext.SubmitChanges();
+                    OnPropertyChanged("SelectedEffort");
                 }
             }
         }

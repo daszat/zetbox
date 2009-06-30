@@ -46,6 +46,7 @@
         <TextBox DockPanel.Dock="Top">Work Efforts:</TextBox>
         <ListView ItemsSource="{Binding Efforts}"
                   ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                  SelectedItem="{Binding SelectedEffort}"
                   MinHeight="100"
                   MaxHeight="200"
                   DockPanel.Dock="Top" >
@@ -96,7 +97,7 @@
             <Button Command="{Binding FinishWorkEffort, Converter={StaticResource CommandConverter}}">Finish Work Effort</Button>
         </UniformGrid>
 
-        <trviews:WorkEffortView DataContext="{Binding CurrentEffort}"
+        <trviews:WorkEffortView DataContext="{Binding SelectedEffort}"
                                 Margin="10" />
     </DockPanel>
 </Window>

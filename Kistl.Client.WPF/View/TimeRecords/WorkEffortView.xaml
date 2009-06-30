@@ -22,7 +22,8 @@
         <TextBox Grid.Row="1"
                  Grid.Column="0"
                  Grid.ColumnSpan="2"
-                 Text="{Binding Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                 Text="{Binding Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                 AcceptsReturn="True" />
 
         <TextBox Grid.Row="2"
                  Grid.Column="0"
