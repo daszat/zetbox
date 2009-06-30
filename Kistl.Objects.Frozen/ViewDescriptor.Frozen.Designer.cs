@@ -281,7 +281,7 @@ namespace Kistl.App.GUI
         { }
 
 
-		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(94);
+		internal static Dictionary<int, ViewDescriptor__Implementation__Frozen> DataStore = new Dictionary<int, ViewDescriptor__Implementation__Frozen>(96);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new ViewDescriptor__Implementation__Frozen(1);
@@ -356,25 +356,17 @@ namespace Kistl.App.GUI
 
 			DataStore[36] = new ViewDescriptor__Implementation__Frozen(36);
 
-			DataStore[37] = new ViewDescriptor__Implementation__Frozen(37);
-
 			DataStore[38] = new ViewDescriptor__Implementation__Frozen(38);
 
 			DataStore[39] = new ViewDescriptor__Implementation__Frozen(39);
-
-			DataStore[40] = new ViewDescriptor__Implementation__Frozen(40);
 
 			DataStore[41] = new ViewDescriptor__Implementation__Frozen(41);
 
 			DataStore[42] = new ViewDescriptor__Implementation__Frozen(42);
 
-			DataStore[43] = new ViewDescriptor__Implementation__Frozen(43);
-
 			DataStore[44] = new ViewDescriptor__Implementation__Frozen(44);
 
 			DataStore[45] = new ViewDescriptor__Implementation__Frozen(45);
-
-			DataStore[46] = new ViewDescriptor__Implementation__Frozen(46);
 
 			DataStore[47] = new ViewDescriptor__Implementation__Frozen(47);
 
@@ -471,6 +463,18 @@ namespace Kistl.App.GUI
 			DataStore[95] = new ViewDescriptor__Implementation__Frozen(95);
 
 			DataStore[96] = new ViewDescriptor__Implementation__Frozen(96);
+
+			DataStore[97] = new ViewDescriptor__Implementation__Frozen(97);
+
+			DataStore[98] = new ViewDescriptor__Implementation__Frozen(98);
+
+			DataStore[99] = new ViewDescriptor__Implementation__Frozen(99);
+
+			DataStore[100] = new ViewDescriptor__Implementation__Frozen(100);
+
+			DataStore[101] = new ViewDescriptor__Implementation__Frozen(101);
+
+			DataStore[102] = new ViewDescriptor__Implementation__Frozen(102);
 
 		}
 
@@ -727,13 +731,6 @@ namespace Kistl.App.GUI
 			DataStore[36].Toolkit = (Toolkit)3;
 			DataStore[36].VisualType = (VisualType)13;
 			DataStore[36].Seal();
-			DataStore[37].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[37].ExportGuid = new Guid("75e6dab9-74f7-42f6-8fec-3b001bf5bf85");
-			DataStore[37].IsReadOnly = false;
-			DataStore[37].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[16];
-			DataStore[37].Toolkit = (Toolkit)0;
-			DataStore[37].VisualType = (VisualType)13;
-			DataStore[37].Seal();
 			DataStore[38].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
 			DataStore[38].ExportGuid = new Guid("6f14e178-c92b-4a86-aee5-623a4ecbc3d3");
 			DataStore[38].IsReadOnly = false;
@@ -748,13 +745,6 @@ namespace Kistl.App.GUI
 			DataStore[39].Toolkit = (Toolkit)3;
 			DataStore[39].VisualType = (VisualType)13;
 			DataStore[39].Seal();
-			DataStore[40].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[40].ExportGuid = new Guid("02e540b7-3dfc-4007-8304-268f1b4cef40");
-			DataStore[40].IsReadOnly = false;
-			DataStore[40].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[17];
-			DataStore[40].Toolkit = (Toolkit)0;
-			DataStore[40].VisualType = (VisualType)13;
-			DataStore[40].Seal();
 			DataStore[41].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
 			DataStore[41].ExportGuid = new Guid("e34ec656-b2b9-4d54-b98d-a749123daae6");
 			DataStore[41].IsReadOnly = false;
@@ -769,13 +759,6 @@ namespace Kistl.App.GUI
 			DataStore[42].Toolkit = (Toolkit)3;
 			DataStore[42].VisualType = (VisualType)13;
 			DataStore[42].Seal();
-			DataStore[43].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[43].ExportGuid = new Guid("41a9f73d-1ee1-4cb1-9494-13cc5eaaa5f3");
-			DataStore[43].IsReadOnly = false;
-			DataStore[43].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[18];
-			DataStore[43].Toolkit = (Toolkit)0;
-			DataStore[43].VisualType = (VisualType)13;
-			DataStore[43].Seal();
 			DataStore[44].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
 			DataStore[44].ExportGuid = new Guid("296dfe59-c059-43cf-8d3b-6b03f168825c");
 			DataStore[44].IsReadOnly = false;
@@ -790,13 +773,6 @@ namespace Kistl.App.GUI
 			DataStore[45].Toolkit = (Toolkit)3;
 			DataStore[45].VisualType = (VisualType)13;
 			DataStore[45].Seal();
-			DataStore[46].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[154];
-			DataStore[46].ExportGuid = new Guid("f01e2a40-ce04-4fb5-a0f2-4c234dba0bac");
-			DataStore[46].IsReadOnly = false;
-			DataStore[46].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[19];
-			DataStore[46].Toolkit = (Toolkit)0;
-			DataStore[46].VisualType = (VisualType)13;
-			DataStore[46].Seal();
 			DataStore[47].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[152];
 			DataStore[47].ExportGuid = new Guid("e8bf5210-1d62-417a-9c64-1762e2b1486f");
 			DataStore[47].IsReadOnly = false;
@@ -1133,6 +1109,48 @@ namespace Kistl.App.GUI
 			DataStore[96].Toolkit = (Toolkit)0;
 			DataStore[96].VisualType = (VisualType)1;
 			DataStore[96].Seal();
+			DataStore[97].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[643];
+			DataStore[97].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[97].IsReadOnly = true;
+			DataStore[97].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[16];
+			DataStore[97].Toolkit = (Toolkit)0;
+			DataStore[97].VisualType = (VisualType)13;
+			DataStore[97].Seal();
+			DataStore[98].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[643];
+			DataStore[98].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[98].IsReadOnly = true;
+			DataStore[98].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[20];
+			DataStore[98].Toolkit = (Toolkit)0;
+			DataStore[98].VisualType = (VisualType)5;
+			DataStore[98].Seal();
+			DataStore[99].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[643];
+			DataStore[99].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[99].IsReadOnly = true;
+			DataStore[99].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[19];
+			DataStore[99].Toolkit = (Toolkit)0;
+			DataStore[99].VisualType = (VisualType)7;
+			DataStore[99].Seal();
+			DataStore[100].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[643];
+			DataStore[100].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[100].IsReadOnly = true;
+			DataStore[100].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[18];
+			DataStore[100].Toolkit = (Toolkit)0;
+			DataStore[100].VisualType = (VisualType)9;
+			DataStore[100].Seal();
+			DataStore[101].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[643];
+			DataStore[101].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[101].IsReadOnly = true;
+			DataStore[101].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[17];
+			DataStore[101].Toolkit = (Toolkit)0;
+			DataStore[101].VisualType = (VisualType)11;
+			DataStore[101].Seal();
+			DataStore[102].ControlRef = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[643];
+			DataStore[102].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[102].IsReadOnly = true;
+			DataStore[102].PresentedModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[39];
+			DataStore[102].Toolkit = (Toolkit)0;
+			DataStore[102].VisualType = (VisualType)27;
+			DataStore[102].Seal();
 	
 		}
 #region Serializer

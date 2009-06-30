@@ -369,7 +369,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, Method__Implementation__Frozen> DataStore = new Dictionary<int, Method__Implementation__Frozen>(127);
+		internal static Dictionary<int, Method__Implementation__Frozen> DataStore = new Dictionary<int, Method__Implementation__Frozen>(128);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new Method__Implementation__Frozen(1);
@@ -625,6 +625,8 @@ namespace Kistl.App.Base
 			DataStore[175] = new Method__Implementation__Frozen(175);
 
 			DataStore[177] = new Method__Implementation__Frozen(177);
+
+			DataStore[178] = new Method__Implementation__Frozen(178);
 
 		}
 
@@ -2138,7 +2140,8 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[120],
 			DataStore[175].Description = @"Implements all available interfaces as Properties and Methods";
 			DataStore[175].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
 			DataStore[175].IsDisplayable = true;
-			DataStore[175].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[175].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[125],
 });
 			DataStore[175].MethodName = @"ImplementInterfaces";
 			DataStore[175].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
@@ -2148,8 +2151,9 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[120],
 			DataStore[175].Seal();
 			DataStore[177].Description = null;
 			DataStore[177].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
-			DataStore[177].IsDisplayable = false;
-			DataStore[177].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[177].IsDisplayable = true;
+			DataStore[177].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[127],
 });
 			DataStore[177].MethodName = @"GetCodeTemplate";
 			DataStore[177].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
@@ -2158,6 +2162,19 @@ Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[120],
 Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[40],
 });
 			DataStore[177].Seal();
+			DataStore[178].Description = null;
+			DataStore[178].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[178].IsDisplayable = true;
+			DataStore[178].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[126],
+});
+			DataStore[178].MethodName = @"GetMemberName";
+			DataStore[178].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[178].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[178].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[41],
+});
+			DataStore[178].Seal();
 	
 		}
 #region Serializer

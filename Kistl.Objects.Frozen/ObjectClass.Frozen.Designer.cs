@@ -622,9 +622,10 @@ namespace Kistl.App.Base
 			DataStore[2].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[11];
 			DataStore[2].Description = @"Metadefinition Object for ObjectClasses.";
 			DataStore[2].ExportGuid = new Guid("20888dfc-1fbc-47c8-9f3c-c6a30a5c0048");
-			DataStore[2].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
+			DataStore[2].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(3) {
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[28],
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[81],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[125],
 });
 			DataStore[2].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(5) {
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[4],
@@ -1267,14 +1268,17 @@ Kistl.App.Base.Interface__Implementation__Frozen.DataStore[88],
 			DataStore[30].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[2];
 			DataStore[30].Description = @"Metadefinition Object for a MethodInvocation on a Method of a DataType.";
 			DataStore[30].ExportGuid = new Guid("f6e7bb30-3adf-4d49-a80c-6ea7b589afa7");
-			DataStore[30].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+			DataStore[30].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(3) {
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[6],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[127],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[126],
 });
-			DataStore[30].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(4) {
+			DataStore[30].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(5) {
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[43],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[44],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[45],
 Kistl.App.Base.Method__Implementation__Frozen.DataStore[177],
+Kistl.App.Base.Method__Implementation__Frozen.DataStore[178],
 });
 			DataStore[30].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
 			DataStore[30].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(6) {

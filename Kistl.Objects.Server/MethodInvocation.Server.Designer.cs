@@ -397,6 +397,28 @@ namespace Kistl.App.Base
 
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual string GetMemberName() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetMemberName_MethodInvocation != null)
+            {
+                OnGetMemberName_MethodInvocation(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on MethodInvocation.GetMemberName");
+            }
+            return e.Result;
+        }
+		public delegate void GetMemberName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+		public event GetMemberName_Handler<MethodInvocation> OnGetMemberName_MethodInvocation;
+
+
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(MethodInvocation));

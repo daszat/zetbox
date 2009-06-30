@@ -212,7 +212,7 @@ namespace Kistl.API.Client
                 foreach (var obj in objects)
                 {
                     BinarySerializer.ToStream(true, sw);
-                    obj.ToStream(sw, null);
+                    obj.ToStream(sw, new HashSet<IStreamable>());
                 }
                 BinarySerializer.ToStream(false, sw);
 

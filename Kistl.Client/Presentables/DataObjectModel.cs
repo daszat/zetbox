@@ -290,23 +290,23 @@ namespace Kistl.Client.Presentables
             {
                 return (Factory.CreateSpecificModel<NullableResultModel<Boolean>>(DataContext, _object, pm));
             }
-            else if (pm is DateTimeParameter && !retParam.IsList)
+            else if (retParam is DateTimeParameter && !retParam.IsList)
             {
                 return (Factory.CreateSpecificModel<NullableResultModel<DateTime>>(DataContext, _object, pm));
             }
-            else if (pm is DoubleParameter && !retParam.IsList)
+            else if (retParam is DoubleParameter && !retParam.IsList)
             {
                 return (Factory.CreateSpecificModel<NullableResultModel<Double>>(DataContext, _object, pm));
             }
-            else if (pm is IntParameter && !retParam.IsList)
+            else if (retParam is IntParameter && !retParam.IsList)
             {
                 return (Factory.CreateSpecificModel<NullableResultModel<int>>(DataContext, _object, pm));
             }
-            else if (pm is StringParameter && !retParam.IsList)
+            else if (retParam is StringParameter && !retParam.IsList)
             {
                 return (Factory.CreateSpecificModel<ObjectResultModel<string>>(DataContext, _object, pm));
             }
-            else if (pm is ObjectParameter && !retParam.IsList)
+            else if (retParam is ObjectParameter && !retParam.IsList)
             {
                 return (Factory.CreateSpecificModel<ObjectResultModel<IDataObject>>(DataContext, _object, pm));
             }

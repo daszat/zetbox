@@ -35,6 +35,8 @@ namespace Kistl.Client.Presentables
                 // fetches already generated model from cache
                 _memberNameModel = (ChooseReferencePropertyModel<string>)Factory.CreatePropertyValueModel(DataContext, Object, _memberNameProperty);
 
+            if (_invocation.Implementor == null) return;
+
             var possibleValues = _invocation
                 .Implementor.AsType(true)
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)

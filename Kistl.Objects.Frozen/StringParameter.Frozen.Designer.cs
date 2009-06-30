@@ -111,7 +111,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, StringParameter__Implementation__Frozen> DataStore = new Dictionary<int, StringParameter__Implementation__Frozen>(8);
+		internal new static Dictionary<int, StringParameter__Implementation__Frozen> DataStore = new Dictionary<int, StringParameter__Implementation__Frozen>(9);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[1] = 
@@ -137,6 +137,9 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[40] = 
 			DataStore[40] = new StringParameter__Implementation__Frozen(40);
+
+			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[41] = 
+			DataStore[41] = new StringParameter__Implementation__Frozen(41);
 
 		}
 
@@ -197,6 +200,13 @@ namespace Kistl.App.Base
 			DataStore[40].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[177];
 			DataStore[40].ParameterName = @"result";
 			DataStore[40].Seal();
+			DataStore[41].Description = @"Returns the Member Name of this MethodInvocation";
+			DataStore[41].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[41].IsList = false;
+			DataStore[41].IsReturnParameter = true;
+			DataStore[41].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[178];
+			DataStore[41].ParameterName = @"ReturnValue";
+			DataStore[41].Seal();
 	
 		}
 #region Serializer

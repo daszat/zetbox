@@ -200,6 +200,28 @@ namespace Kistl.App.Base
 
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual string GetMemberName() 
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetMemberName_MethodInvocation != null)
+            {
+                OnGetMemberName_MethodInvocation(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on MethodInvocation.GetMemberName");
+            }
+            return e.Result;
+        }
+		public delegate void GetMemberName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+		public event GetMemberName_Handler<MethodInvocation> OnGetMemberName_MethodInvocation;
+
+
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(MethodInvocation));
@@ -303,7 +325,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(98);
+		internal static Dictionary<int, MethodInvocation__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocation__Implementation__Frozen>(101);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new MethodInvocation__Implementation__Frozen(1);
@@ -501,6 +523,12 @@ namespace Kistl.App.Base
 			DataStore[122] = new MethodInvocation__Implementation__Frozen(122);
 
 			DataStore[124] = new MethodInvocation__Implementation__Frozen(124);
+
+			DataStore[125] = new MethodInvocation__Implementation__Frozen(125);
+
+			DataStore[126] = new MethodInvocation__Implementation__Frozen(126);
+
+			DataStore[127] = new MethodInvocation__Implementation__Frozen(127);
 
 		}
 
@@ -1191,6 +1219,27 @@ namespace Kistl.App.Base
 			DataStore[124].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[162];
 			DataStore[124].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
 			DataStore[124].Seal();
+			DataStore[125].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[125].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[1];
+			DataStore[125].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
+			DataStore[125].MemberName = @"OnImplementInterfaces_ObjectClass";
+			DataStore[125].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[175];
+			DataStore[125].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[125].Seal();
+			DataStore[126].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[126].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[1];
+			DataStore[126].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[126].MemberName = @"OnGetMemberName_MethodInvocation";
+			DataStore[126].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[178];
+			DataStore[126].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[126].Seal();
+			DataStore[127].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[127].Implementor = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[1];
+			DataStore[127].InvokeOnObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[127].MemberName = @"OnGetCodeTemplate_MethodInvocation";
+			DataStore[127].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[177];
+			DataStore[127].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[127].Seal();
 	
 		}
 #region Serializer

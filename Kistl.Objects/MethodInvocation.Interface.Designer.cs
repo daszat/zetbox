@@ -53,5 +53,10 @@ namespace Kistl.App.Base
         /// </summary>
 
 		 string GetCodeTemplate() ;
+        /// <summary>
+        /// 
+        /// </summary>
+
+		 string GetMemberName() ;
     }
 }
