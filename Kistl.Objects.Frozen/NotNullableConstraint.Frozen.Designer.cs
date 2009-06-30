@@ -111,7 +111,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(101);
+		internal new static Dictionary<int, NotNullableConstraint__Implementation__Frozen> DataStore = new Dictionary<int, NotNullableConstraint__Implementation__Frozen>(105);
 		internal new static void CreateInstances()
 		{
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74] = 
@@ -416,6 +416,18 @@ namespace Kistl.App.Base
 
 			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[269] = 
 			DataStore[269] = new NotNullableConstraint__Implementation__Frozen(269);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[270] = 
+			DataStore[270] = new NotNullableConstraint__Implementation__Frozen(270);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[271] = 
+			DataStore[271] = new NotNullableConstraint__Implementation__Frozen(271);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[273] = 
+			DataStore[273] = new NotNullableConstraint__Implementation__Frozen(273);
+
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[274] = 
+			DataStore[274] = new NotNullableConstraint__Implementation__Frozen(274);
 
 		}
 
@@ -824,6 +836,22 @@ namespace Kistl.App.Base
 			DataStore[269].ExportGuid = new Guid("1f57fcbb-016e-4fa3-9939-f2393653e99d");
 			DataStore[269].Reason = @"ExportGuid cannot be empty";
 			DataStore[269].Seal();
+			DataStore[270].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[275];
+			DataStore[270].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[270].Reason = null;
+			DataStore[270].Seal();
+			DataStore[271].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[276];
+			DataStore[271].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[271].Reason = @"Module cannot be empty";
+			DataStore[271].Seal();
+			DataStore[273].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[278];
+			DataStore[273].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[273].Reason = null;
+			DataStore[273].Seal();
+			DataStore[274].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[279];
+			DataStore[274].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[274].Reason = null;
+			DataStore[274].Seal();
 	
 		}
 #region Serializer

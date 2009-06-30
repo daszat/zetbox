@@ -126,6 +126,50 @@ namespace Kistl.App.GUI
         private bool _IsReadOnly;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                if (_fk_Module.HasValue)
+                    return Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                
+                // shortcut noops
+                if (value == null && _fk_Module == null)
+					return;
+                else if (value != null && value.ID == _fk_Module)
+					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Module;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Module", oldValue, value);
+                
+				// next, set the local reference
+                _fk_Module = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Module", oldValue, value);
+            }
+        }
+        
+        private int? _fk_Module;
+
+        /// <summary>
         /// The PresentableModel usable by this View
         /// </summary>
         // object reference property
@@ -236,6 +280,7 @@ namespace Kistl.App.GUI
 			me.Toolkit = other.Toolkit;
 			me.VisualType = other.VisualType;
 			this._fk_ControlRef = otherImpl._fk_ControlRef;
+			this._fk_Module = otherImpl._fk_Module;
 			this._fk_PresentedModelDescriptor = otherImpl._fk_PresentedModelDescriptor;
 		}
 
@@ -306,6 +351,15 @@ namespace Kistl.App.GUI
 					
 					return String.Join("; ", errors);
 				}
+				case "Module":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(279).Constraints
+						.Where(c => !c.IsValid(this, this.Module))
+						.Select(c => c.GetErrorText(this, this.Module))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "PresentedModelDescriptor":
 				{
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(226).Constraints
@@ -345,6 +399,9 @@ namespace Kistl.App.GUI
                 case "ControlRef":
                     _fk_ControlRef = id;
                     break;
+                case "Module":
+                    _fk_Module = id;
+                    break;
                 case "PresentedModelDescriptor":
                     _fk_PresentedModelDescriptor = id;
                     break;
@@ -364,6 +421,7 @@ namespace Kistl.App.GUI
             BinarySerializer.ToStream(this._fk_ControlRef, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._IsReadOnly, binStream);
+            BinarySerializer.ToStream(this._fk_Module, binStream);
             BinarySerializer.ToStream(this._fk_PresentedModelDescriptor, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).VisualType, binStream);
@@ -376,6 +434,7 @@ namespace Kistl.App.GUI
             BinarySerializer.FromStream(out this._fk_ControlRef, binStream);
             BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._IsReadOnly, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_PresentedModelDescriptor, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, binStream);
@@ -388,6 +447,7 @@ namespace Kistl.App.GUI
             XmlStreamer.ToStream(this._fk_ControlRef, xml, "ControlRef", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
             XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
             XmlStreamer.ToStream((int)this.VisualType, xml, "VisualType", "Kistl.App.GUI");
@@ -400,6 +460,7 @@ namespace Kistl.App.GUI
             XmlStreamer.FromStream(ref this._fk_ControlRef, xml, "ControlRef", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "http://dasz.at/Kistl");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, xml, "Toolkit", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, xml, "VisualType", "Kistl.App.GUI");

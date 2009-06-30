@@ -143,6 +143,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Icon_has_Module
+    A: ZeroOrMore Icon as Icon
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Icon_has_Module",
+    "Icon", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.Icon__Implementation__),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Method_has_BaseParameter
     A: One Method as Method
     B: ZeroOrMore BaseParameter as Parameter
@@ -352,6 +367,21 @@ using Kistl.DALProvider.EF;
     "Model", "FK_PresenceRecord_has_Mitarbeiter",
     "PresenceRecord", RelationshipMultiplicity.Many, typeof(Kistl.App.TimeRecords.PresenceRecord__Implementation__),
     "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_PresentableModelDescriptor_has_Module
+    A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_PresentableModelDescriptor_has_Module",
+    "PresentableModelDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresentableModelDescriptor__Implementation__),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
     )]
 
 
@@ -648,6 +678,21 @@ using Kistl.DALProvider.EF;
     "GenericArguments", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__)
     )]
+
+	/*
+    Relation: FK_ViewDescriptor_has_Module
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_ViewDescriptor_has_Module",
+    "ViewDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
+    )]
+
 
 	/*
     Relation: FK_ViewDescriptor_has_PresentableModelDescriptor

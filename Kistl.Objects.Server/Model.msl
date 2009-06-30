@@ -160,6 +160,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Icon)">
 	    <MappingFragment StoreEntitySet="Icon">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IconFile" ColumnName="IconFile" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -901,6 +902,23 @@
       <Condition ColumnName="fk_Enumeration" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Icon_has_Module
+    A: ZeroOrMore Icon as Icon
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Icon_has_Module"
+                           TypeName="Model.FK_Icon_has_Module"
+                           StoreEntitySet="Icon" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="Icon">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Method_has_BaseParameter
     A: One Method as Method
     B: ZeroOrMore BaseParameter as Parameter
@@ -1120,6 +1138,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_PresentableModelDescriptor_has_Module
+    A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_PresentableModelDescriptor_has_Module"
+                           TypeName="Model.FK_PresentableModelDescriptor_has_Module"
+                           StoreEntitySet="PresentableModelDescriptor" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="PresentableModelDescriptor">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_PresentableModelDescriptor_has_TypeRef
@@ -1392,6 +1427,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Parent" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_ViewDescriptor_has_Module
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_ViewDescriptor_has_Module"
+                           TypeName="Model.FK_ViewDescriptor_has_Module"
+                           StoreEntitySet="ViewDescriptor" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="ViewDescriptor">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ViewDescriptor_has_PresentableModelDescriptor

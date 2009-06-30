@@ -28,6 +28,13 @@ namespace Kistl.App.GUI
 			set;
 		}
         /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Base.Module Module {
+			get;
+			set;
+		}
+        /// <summary>
         /// The described CLR class&apos; reference
         /// </summary>
 		Kistl.App.Base.TypeRef PresentableModelRef {

@@ -21,7 +21,7 @@ namespace Kistl.App.GUI
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Icon")]
-    public class Icon__Implementation__ : BaseClientDataObject_ClientObjects, Icon
+    public class Icon__Implementation__ : BaseClientDataObject_ClientObjects, Icon, Kistl.API.IExportableInternal
     {
     
 		public Icon__Implementation__()
@@ -30,6 +30,31 @@ namespace Kistl.App.GUI
             }
         }
 
+
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+   		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                return _ExportGuid;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
+                    _ExportGuid = value;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+                }
+            }
+        }
+        private Guid _ExportGuid;
 
         /// <summary>
         /// Filename of the Icon
@@ -56,6 +81,50 @@ namespace Kistl.App.GUI
         }
         private string _IconFile;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // object reference property
+		// Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                if (_fk_Module.HasValue)
+                    return Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+                else
+                    return null;
+            }
+            set
+            {
+                // TODO: only accept objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                
+                // shortcut noops
+                if (value == null && _fk_Module == null)
+					return;
+                else if (value != null && value.ID == _fk_Module)
+					return;
+			           
+	            // cache old value to remove inverse references later
+                var oldValue = Module;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("Module", oldValue, value);
+                
+				// next, set the local reference
+                _fk_Module = value == null ? (int?)null : value.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("Module", oldValue, value);
+            }
+        }
+        
+        private int? _fk_Module;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Icon));
@@ -68,7 +137,9 @@ namespace Kistl.App.GUI
 			var otherImpl = (Icon__Implementation__)obj;
 			var me = (Icon)this;
 
+			me.ExportGuid = other.ExportGuid;
 			me.IconFile = other.IconFile;
+			this._fk_Module = otherImpl._fk_Module;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -111,11 +182,29 @@ namespace Kistl.App.GUI
 		{
 			switch(propertyName)
 			{
+				case "ExportGuid":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(275).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "IconFile":
 				{
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(68).Constraints
 						.Where(c => !c.IsValid(this, this.IconFile))
 						.Select(c => c.GetErrorText(this, this.IconFile))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Module":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(276).Constraints
+						.Where(c => !c.IsValid(this, this.Module))
+						.Select(c => c.GetErrorText(this, this.Module))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -129,6 +218,9 @@ namespace Kistl.App.GUI
 		{
 			switch(propertyName)
 			{
+                case "Module":
+                    _fk_Module = id;
+                    break;
 				default:
 					base.UpdateParent(propertyName, id);
 					break;
@@ -142,27 +234,51 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._IconFile, binStream);
+            BinarySerializer.ToStream(this._fk_Module, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
 			
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._IconFile, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
 			
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IconFile, xml, "IconFile", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IconFile, xml, "IconFile", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IconFile, xml, "IconFile", "Kistl.App.GUI");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IconFile, xml, "IconFile", "Kistl.App.GUI");
         }
 

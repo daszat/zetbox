@@ -28,6 +28,13 @@ namespace Kistl.App.GUI
 			set;
 		}
         /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Base.Module Module {
+			get;
+			set;
+		}
+        /// <summary>
         /// The PresentableModel usable by this View
         /// </summary>
 		Kistl.App.GUI.PresentableModelDescriptor PresentedModelDescriptor {

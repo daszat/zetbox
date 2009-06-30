@@ -147,17 +147,20 @@ namespace Kistl.App.Base
 
         public void OnToString_Relation(Relation obj, MethodReturnEventArgs<string> e)
         {
-            try
+            if (obj.A == null ||
+                obj.B == null ||
+                obj.A.Type == null ||
+                obj.B.Type == null)
+            {
+                e.Result = "invalid Relation";
+            }
+            else
             {
                 e.Result = String.Format("Relation: {0}({1}) : {2}({3})",
                     obj.A.RoleName,
                     obj.A.Type.ClassName,
                     obj.B.RoleName,
                     obj.B.Type.ClassName);
-            }
-            catch (NullReferenceException)
-            {
-                e.Result = "invalid Relation";
             }
         }
 
@@ -456,6 +459,68 @@ namespace Kistl.App.Base
 
         public void OnImplementInterfaces_ObjectClass(ObjectClass objClass)
         {
+            IKistlContext ctx = objClass.Context;
+
+            foreach (var iface in objClass.ImplementsInterfaces)
+            {
+                foreach (var prop in iface.Properties)
+                {
+                    if (!objClass.Properties.Select(p => p.PropertyName).Contains(prop.PropertyName))
+                    {
+                        // Add Property
+                        var newProp = (Property)ctx.Create(prop.GetInterfaceType());
+                        objClass.Properties.Add(newProp);
+                        newProp.PropertyName = prop.PropertyName;
+                        newProp.AltText = prop.AltText;
+                        newProp.CategoryTags = prop.CategoryTags;
+                        newProp.Description = prop.Description;
+                        newProp.IsIndexed = prop.IsIndexed;
+                        newProp.IsList = prop.IsList;
+                        newProp.IsNullable = prop.IsNullable;
+                        newProp.Module = prop.Module;
+                        newProp.ValueModelDescriptor = prop.ValueModelDescriptor;
+
+                        if (prop is StringProperty)
+                        {
+                            ((StringProperty)newProp).Length = ((StringProperty)prop).Length;
+                        }
+
+                        // Copy Constrains
+                        foreach (var c in prop.Constraints)
+                        {
+                            var newC = (Constraint)ctx.Create(c.GetInterfaceType());
+                            newProp.Constraints.Add(newC);
+                            newC.Reason = c.Reason;
+                        }
+                    }
+                }
+
+                foreach (Method meth in iface.Methods)
+                {
+                    // TODO: Wenn das sortieren von Parametern funktioniert müssen auch die Parameter
+                    // der Methode geprüft werden
+                    // TODO: evtl. IsDeclaredInImplementsInterface aus dem Generator verallgemeinern & benutzen
+                    if (!objClass.Methods.Select(m => m.MethodName).Contains(meth.MethodName))
+                    {
+                        Method newMeth = (Method)ctx.Create(meth.GetInterfaceType());
+                        objClass.Methods.Add(newMeth);
+                        newMeth.MethodName = meth.MethodName;
+                        newMeth.IsDisplayable = meth.IsDisplayable;
+                        newMeth.Module = meth.Module;
+
+                        foreach (var param in meth.Parameter)
+                        {
+                            var newParam = (BaseParameter)ctx.Create(param.GetInterfaceType());
+                            newMeth.Parameter.Add(newParam);
+
+                            newParam.ParameterName = param.ParameterName;
+                            newParam.Description = param.Description;
+                            newParam.IsList = param.IsList;
+                            newParam.IsReturnParameter = param.IsReturnParameter;
+                        }
+                    }
+                }
+            }
         }
 
         public void OnGetCodeTemplate_MethodInvocation(MethodInvocation mi, MethodReturnEventArgs<string> e)
@@ -488,7 +553,7 @@ namespace Kistl.App.Base
 
             e.Result = sb.ToString();
         }
-        
+
         public void OnGetMemberName_MethodInvocation(MethodInvocation mi, MethodReturnEventArgs<string> e)
         {
             StringBuilder sb = new StringBuilder();

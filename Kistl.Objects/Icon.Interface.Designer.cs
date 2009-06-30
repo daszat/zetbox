@@ -10,13 +10,20 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    public interface Icon : IDataObject 
+    public interface Icon : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
         /// Filename of the Icon
         /// </summary>
 		string IconFile {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Base.Module Module {
 			get;
 			set;
 		}

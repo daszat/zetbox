@@ -382,6 +382,10 @@
       <End Role="EnumerationProperty" EntitySet="EnumerationProperty" />
       <End Role="Enumeration" EntitySet="Enumeration" />
     </AssociationSet>
+    <AssociationSet Name="FK_Icon_has_Module" Association="Model.Store.FK_Icon_has_Module" >
+      <End Role="Icon" EntitySet="Icon" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
     <AssociationSet Name="FK_Method_has_BaseParameter" Association="Model.Store.FK_Method_has_BaseParameter" >
       <End Role="Method" EntitySet="Method" />
       <End Role="Parameter" EntitySet="BaseParameter" />
@@ -433,6 +437,10 @@
     <AssociationSet Name="FK_PresenceRecord_has_Mitarbeiter" Association="Model.Store.FK_PresenceRecord_has_Mitarbeiter" >
       <End Role="PresenceRecord" EntitySet="PresenceRecord" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresentableModelDescriptor_has_Module" Association="Model.Store.FK_PresentableModelDescriptor_has_Module" >
+      <End Role="PresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
+      <End Role="Module" EntitySet="Module" />
     </AssociationSet>
     <AssociationSet Name="FK_PresentableModelDescriptor_has_TypeRef" Association="Model.Store.FK_PresentableModelDescriptor_has_TypeRef" >
       <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
@@ -497,6 +505,10 @@
     <AssociationSet Name="FK_TypeRef_has_TypeRef" Association="Model.Store.FK_TypeRef_has_TypeRef" >
       <End Role="Child" EntitySet="TypeRef" />
       <End Role="Parent" EntitySet="TypeRef" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_has_Module" Association="Model.Store.FK_ViewDescriptor_has_Module" >
+      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
+      <End Role="Module" EntitySet="Module" />
     </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_has_PresentableModelDescriptor" Association="Model.Store.FK_ViewDescriptor_has_PresentableModelDescriptor" >
       <End Role="View" EntitySet="ViewDescriptor" />
@@ -712,6 +724,8 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="IconFile" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
   </EntityType>
 	
   <EntityType Name="Assembly">
@@ -1040,6 +1054,7 @@
     <Property Name="VisualType" Type="int" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsReadOnly" Type="bit" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
   </EntityType>
 	
   <EntityType Name="PresentableModelDescriptor">
@@ -1051,6 +1066,7 @@
     <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="DefaultVisualType" Type="int" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
   </EntityType>
 	
   <EntityType Name="PresenceRecord">
@@ -1510,6 +1526,21 @@
   </Association>
 
 
+  <Association Name="FK_Icon_has_Module">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Icon" Type="Model.Store.Icon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Icon">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Method_has_BaseParameter">
     <End Role="Method" Type="Model.Store.Method" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -1700,6 +1731,21 @@
       </Principal>
       <Dependent Role="PresenceRecord">
         <PropertyRef Name="fk_Mitarbeiter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_PresentableModelDescriptor_has_Module">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="PresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PresentableModelDescriptor">
+        <PropertyRef Name="fk_Module" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1940,6 +1986,21 @@
       </Principal>
       <Dependent Role="Child">
         <PropertyRef Name="fk_Parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_ViewDescriptor_has_Module">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="ViewDescriptor" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ViewDescriptor">
+        <PropertyRef Name="fk_Module" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

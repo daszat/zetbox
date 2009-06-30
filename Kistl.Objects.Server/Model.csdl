@@ -143,6 +143,10 @@
       <End Role="EnumerationProperty" EntitySet="Property" />
       <End Role="Enumeration" EntitySet="DataType" />
     </AssociationSet>
+    <AssociationSet Name="FK_Icon_has_Module" Association="Model.FK_Icon_has_Module" >
+      <End Role="Icon" EntitySet="Icon" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
     <AssociationSet Name="FK_Method_has_BaseParameter" Association="Model.FK_Method_has_BaseParameter" >
       <End Role="Method" EntitySet="Method" />
       <End Role="Parameter" EntitySet="BaseParameter" />
@@ -194,6 +198,10 @@
     <AssociationSet Name="FK_PresenceRecord_has_Mitarbeiter" Association="Model.FK_PresenceRecord_has_Mitarbeiter" >
       <End Role="PresenceRecord" EntitySet="PresenceRecord" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresentableModelDescriptor_has_Module" Association="Model.FK_PresentableModelDescriptor_has_Module" >
+      <End Role="PresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
+      <End Role="Module" EntitySet="Module" />
     </AssociationSet>
     <AssociationSet Name="FK_PresentableModelDescriptor_has_TypeRef" Association="Model.FK_PresentableModelDescriptor_has_TypeRef" >
       <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
@@ -258,6 +266,10 @@
     <AssociationSet Name="FK_TypeRef_has_TypeRef" Association="Model.FK_TypeRef_has_TypeRef" >
       <End Role="Child" EntitySet="TypeRef" />
       <End Role="Parent" EntitySet="TypeRef" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_has_Module" Association="Model.FK_ViewDescriptor_has_Module" >
+      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
+      <End Role="Module" EntitySet="Module" />
     </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_has_PresentableModelDescriptor" Association="Model.FK_ViewDescriptor_has_PresentableModelDescriptor" >
       <End Role="View" EntitySet="ViewDescriptor" />
@@ -409,6 +421,11 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="IconFile" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Module__Implementation__"
+                        Relationship="Model.FK_Icon_has_Module"
+                        FromRole="Icon"
+                        ToRole="Module" />
   </EntityType>
   <EntityType Name="Kunde">
     <Key>
@@ -543,6 +560,10 @@
     <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" />
     <Property Name="DefaultVisualType__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Module__Implementation__"
+                        Relationship="Model.FK_PresentableModelDescriptor_has_Module"
+                        FromRole="PresentableModelDescriptor"
+                        ToRole="Module" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -742,6 +763,10 @@
     <Property Name="VisualType__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="IsReadOnly" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Module__Implementation__"
+                        Relationship="Model.FK_ViewDescriptor_has_Module"
+                        FromRole="ViewDescriptor"
+                        ToRole="Module" />
   </EntityType>
   <EntityType Name="Visual">
     <Key>
@@ -1307,6 +1332,14 @@
          Type="Model.Enumeration" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_Icon_has_Module" >
+    <End Role="Icon"
+         Type="Model.Icon" 
+         Multiplicity="*" />
+    <End Role="Module"
+         Type="Model.Module" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Method_has_BaseParameter" >
     <End Role="Method"
          Type="Model.Method" 
@@ -1409,6 +1442,14 @@
          Multiplicity="*" />
     <End Role="Mitarbeiter"
          Type="Model.Mitarbeiter" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_PresentableModelDescriptor_has_Module" >
+    <End Role="PresentableModelDescriptor"
+         Type="Model.PresentableModelDescriptor" 
+         Multiplicity="*" />
+    <End Role="Module"
+         Type="Model.Module" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_PresentableModelDescriptor_has_TypeRef" >
@@ -1537,6 +1578,14 @@
          Multiplicity="*" />
     <End Role="Parent"
          Type="Model.TypeRef" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_ViewDescriptor_has_Module" >
+    <End Role="ViewDescriptor"
+         Type="Model.ViewDescriptor" 
+         Multiplicity="*" />
+    <End Role="Module"
+         Type="Model.Module" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ViewDescriptor_has_PresentableModelDescriptor" >

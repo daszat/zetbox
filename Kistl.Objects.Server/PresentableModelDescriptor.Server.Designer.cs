@@ -156,6 +156,72 @@ namespace Kistl.App.GUI
         private Guid _ExportGuid;
 
         /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_PresentableModelDescriptor_has_Module
+    A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                return Module__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_Module;
+        private Guid? _fk_guid_Module = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_has_Module", "Module")]
+        public Kistl.App.Base.Module__Implementation__ Module__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Module__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
+                        "Model.FK_PresentableModelDescriptor_has_Module",
+                        "Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Module__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
+                        "Model.FK_PresentableModelDescriptor_has_Module",
+                        "Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Base.Module__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
         /// The described CLR class&apos; reference
         /// </summary>
     /*
@@ -236,6 +302,7 @@ namespace Kistl.App.GUI
 			me.DefaultVisualType = other.DefaultVisualType;
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
+			this._fk_Module = otherImpl._fk_Module;
 			this._fk_PresentableModelRef = otherImpl._fk_PresentableModelRef;
 		}
 
@@ -301,6 +368,15 @@ namespace Kistl.App.GUI
 					
 					return String.Join("; ", errors);
 				}
+				case "Module":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(278).Constraints
+						.Where(c => !c.IsValid(this, this.Module))
+						.Select(c => c.GetErrorText(this, this.Module))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "PresentableModelRef":
 				{
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(231).Constraints
@@ -325,6 +401,13 @@ namespace Kistl.App.GUI
 				PresentableModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_PresentableModelRef.Value);
 			else
 				PresentableModelRef__Implementation__ = null;
+
+			if (_fk_guid_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
+			else if (_fk_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+			else
+				Module__Implementation__ = null;
 		}
 #region Serializer
 
@@ -336,6 +419,7 @@ namespace Kistl.App.GUI
             BinarySerializer.ToStream((int)((PresentableModelDescriptor)this).DefaultVisualType, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(PresentableModelRef != null ? PresentableModelRef.ID : (int?)null, binStream);
         }
 
@@ -346,6 +430,7 @@ namespace Kistl.App.GUI
             BinarySerializer.FromStreamConverter(v => ((PresentableModelDescriptor)this).DefaultVisualType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_PresentableModelRef, binStream);
         }
 
@@ -356,6 +441,7 @@ namespace Kistl.App.GUI
             XmlStreamer.ToStream((int)this.DefaultVisualType, xml, "DefaultVisualType", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.ToStream(PresentableModelRef != null ? PresentableModelRef.ID : (int?)null, xml, "PresentableModelRef", "Kistl.App.GUI");
         }
 
@@ -366,6 +452,7 @@ namespace Kistl.App.GUI
             XmlStreamer.FromStreamConverter(v => ((PresentableModelDescriptor)this).DefaultVisualType = (Kistl.App.GUI.VisualType)v, xml, "DefaultVisualType", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_PresentableModelRef, xml, "PresentableModelRef", "Kistl.App.GUI");
         }
 
@@ -378,6 +465,7 @@ namespace Kistl.App.GUI
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(PresentableModelRef != null ? PresentableModelRef.ExportGuid : (Guid?)null, xml, "PresentableModelRef", "Kistl.App.GUI");
         }
 
@@ -386,6 +474,7 @@ namespace Kistl.App.GUI
             XmlStreamer.FromStreamConverter(v => ((PresentableModelDescriptor)this).DefaultVisualType = (Kistl.App.GUI.VisualType)v, xml, "DefaultVisualType", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_PresentableModelRef, xml, "PresentableModelRef", "Kistl.App.GUI");
         }
 
