@@ -84,6 +84,10 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        public override string Name
+        {
+            get { return Value == null ? "(null)" : "Reference to " + Value.Name; }
+        }
         #endregion
 
         #region Utilities and UI callbacks

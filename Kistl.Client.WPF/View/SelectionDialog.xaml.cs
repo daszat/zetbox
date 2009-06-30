@@ -62,5 +62,10 @@ namespace Kistl.Client.WPF.View
         }
 
         #endregion
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            filterTextBox.Focus();
+        }
     }
 }

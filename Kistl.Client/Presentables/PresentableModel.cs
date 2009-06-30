@@ -83,6 +83,10 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        /// <summary>
+        /// A common "name" of this Model. May be used for generic filtering or displaying.
+        /// </summary>
+        public abstract string Name { get; }
 
         #endregion
 

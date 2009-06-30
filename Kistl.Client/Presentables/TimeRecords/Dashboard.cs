@@ -38,6 +38,11 @@ namespace Kistl.Client.Presentables.TimeRecords
                 return _openRecorderCommand;
             }
         }
+
+        public override string Name
+        {
+            get { return "Timerecord's Dashboard"; }
+        }
     }
 
     internal class OpenRecorderCommand

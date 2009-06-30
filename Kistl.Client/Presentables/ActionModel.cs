@@ -31,6 +31,11 @@ namespace Kistl.Client.Presentables
         // TODO: proxying implementations might block on that
         public string ToolTip { get { return Method.Description; } }
 
+        public override string Name
+        {
+            get { return Label; }
+        }
+
         /// <summary>
         /// Execute the modelled Method. The callback will be called 
         /// back on the UI thread after the execution has finished.

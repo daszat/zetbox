@@ -222,6 +222,12 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        public override string Name
+        {
+            get { return Label; }
+        }
+
         #endregion
+
     }
 }

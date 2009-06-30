@@ -91,5 +91,10 @@ namespace Kistl.Client.Presentables.GUI
 
         public ReadOnlyObservableCollection<DataObjectModel> ApplicableViewDescriptors { get; private set; }
 
+
+        public override string Name
+        {
+            get { return "GUI Dashboard"; }
+        }
     }
 }

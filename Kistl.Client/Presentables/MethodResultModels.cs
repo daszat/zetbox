@@ -9,7 +9,8 @@ using System.ComponentModel;
 namespace Kistl.Client.Presentables
 {
 
-    public abstract class MethodResultModel<TValue> : PresentableModel
+    public abstract class MethodResultModel<TValue>
+        : PresentableModel
     {
         protected MethodResultModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -34,6 +35,11 @@ namespace Kistl.Client.Presentables
 
         public abstract TValue Value { get; protected set; }
 
+        public override string Name
+        {
+            get { return Label; }
+        }
+        
         #endregion
 
         #region Utilities and UI callbacks
@@ -78,6 +84,7 @@ namespace Kistl.Client.Presentables
 
         protected IDataObject Object { get; private set; }
         protected Method Method { get; private set; }
+
 
     }
 

@@ -11,7 +11,8 @@ using Kistl.API.Client;
 
 namespace Kistl.Client.Presentables
 {
-    public class WorkspaceModel : PresentableModel
+    public class WorkspaceModel
+        : PresentableModel
     {
         public WorkspaceModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
@@ -201,6 +202,11 @@ namespace Kistl.Client.Presentables
             var here = DataContext.Find(other.GetInterfaceType(), other.ID);
             SelectedItem = AppContext.Factory.CreateDefaultModel(DataContext, here);
             HistoryTouch(SelectedItem);
+        }
+
+        public override string Name
+        {
+            get { return "Workspace"; }
         }
     }
 

@@ -88,11 +88,8 @@ namespace Kistl.Client.Presentables.TimeRecords
                 .Where(pr => pr.Mitarbeiter.ID == CurrentUser.ID && !pr.Thru.HasValue)
                 .SingleOrDefault();
 
-            if (currentPresence != null)
-            {
-                _isCurrentlyPresent = true;
-                OnPropertyChanged("IsCurrentlyPresent");
-            }
+            _isCurrentlyPresent = (currentPresence != null);
+            OnPropertyChanged("IsCurrentlyPresent");
         }
 
         /// <summary>The backing store for the <see cref="IsCurrentlyPresent"/> property.</summary>
@@ -111,21 +108,26 @@ namespace Kistl.Client.Presentables.TimeRecords
                 {
                     _isCurrentlyPresent = value;
 
-                    if (_isCurrentlyPresent == true)
+                    if (_isCurrentlyPresent)
                     {
                         PresenceRecord nowPresent = DataContext.Create<PresenceRecord>();
                         nowPresent.From = DateTime.Now;
                         nowPresent.Mitarbeiter = (Mitarbeiter)CurrentUser.Object;
                         InitialisePresenceRecords();
-                        _presenceRecords.Add((PresenceRecordModel)Factory.CreateDefaultModel(DataContext,nowPresent));
+                        _presenceRecords.Add((PresenceRecordModel)Factory.CreateDefaultModel(DataContext, nowPresent));
                         DataContext.SubmitChanges();
                     }
                     else
                     {
+                        var closingDate = DateTime.Now;
+                        if (CurrentEffort != null)
+                        {
+                            CurrentEffort.Thru = closingDate;
+                        }
                         PresenceRecord nowPresent = PresenceRecords.Select(mdl => mdl.Entry).LastOrDefault(rec => rec.Thru == null);
                         if (nowPresent != null)
                         {
-                            nowPresent.Thru = DateTime.Now;
+                            nowPresent.Thru = closingDate;
                         }
                     }
                 }
@@ -183,7 +185,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             if (CurrentUser != null)
             {
                 var effortModels = DataContext.GetQuery<WorkEffort>()
-                    .Where(o => o.Mitarbeiter.ID == CurrentUser.ID)
+                    .Where(o => o.Mitarbeiter.ID == CurrentUser.ID && (o.From > DateTime.Today || !o.Thru.HasValue || (o.Thru.HasValue && o.Thru.Value > DateTime.Today)))
                     .Select(o => (WorkEffortModel)Factory.CreateDefaultModel(DataContext, o));
 
                 foreach (var wem in effortModels)
@@ -260,19 +262,18 @@ namespace Kistl.Client.Presentables.TimeRecords
             if (CurrentUser != null)
             {
                 var recordModels = DataContext.GetQuery<PresenceRecord>()
-                    .Where(o => o.Mitarbeiter.ID == CurrentUser.ID)
+                    .Where(o => o.Mitarbeiter.ID == CurrentUser.ID && (o.From > DateTime.Today || !o.Thru.HasValue || (o.Thru.HasValue && o.Thru.Value > DateTime.Today)))
                     .OrderBy(o => o.From);
-                    ////.Select(o => (WorkEffortModel)Factory.CreateDefaultModel(DataContext, o));
 
                 foreach (var pr in recordModels)
                 {
-                    _presenceRecords.Add((PresenceRecordModel)Factory.CreateDefaultModel(DataContext,pr));
+                    _presenceRecords.Add((PresenceRecordModel)Factory.CreateDefaultModel(DataContext, pr));
                 }
             }
         }
 
         #endregion
-        
+
         #region Summary Values
 
         /// <summary>

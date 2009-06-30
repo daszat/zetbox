@@ -72,7 +72,8 @@ namespace Kistl.Client.Presentables
         bool AllowNullInput { get; }
     }
 
-    public abstract class PropertyModel<TValue> : PresentableModel, IPropertyValueModel, IDataErrorInfo
+    public abstract class PropertyModel<TValue>
+        : PresentableModel, IPropertyValueModel, IDataErrorInfo
     {
         protected PropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -112,6 +113,11 @@ namespace Kistl.Client.Presentables
                     ? "[Design Mode ACTIVE] This property has some value that could be edited here."
                     : Property.AltText;
             }
+        }
+
+        public override string Name
+        {
+            get { return Label; }
         }
 
         #endregion
@@ -220,6 +226,7 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
+
     }
 
     public class NullableValuePropertyModel<TValue>

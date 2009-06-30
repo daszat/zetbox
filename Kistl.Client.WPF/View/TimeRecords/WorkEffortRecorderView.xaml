@@ -21,6 +21,7 @@
         <ListView ItemsSource="{Binding PresenceRecords}"
                   ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                   MinHeight="100"
+                  MaxHeight="200"
                   DockPanel.Dock="Top">
             <ListView.View>
                 <GridView>
@@ -43,17 +44,38 @@
         </ListView>
 
         <TextBox DockPanel.Dock="Top">Work Efforts:</TextBox>
-        <ContentPresenter Content="{Binding Efforts}"
-                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
-                          MinHeight="100"
-                          DockPanel.Dock="Top" />
-        <!-- 
-        <ListBox ItemsSource="{Binding Efforts}"
-                 ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                 MinHeight="100"
-                 DockPanel.Dock="Top" />
-        -->
-
+        <ListView ItemsSource="{Binding Efforts}"
+                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                  MinHeight="100"
+                  MaxHeight="200"
+                  DockPanel.Dock="Top" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="From">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding From}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Thru">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Thru}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Title">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
         <StackPanel DockPanel.Dock="Bottom"
                     Orientation="Horizontal">
             <TextBlock Text="Total time worked today:" />

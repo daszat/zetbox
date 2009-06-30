@@ -13,5 +13,10 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx)
         {
         }
+
+        public override string Name
+        {
+            get { return "Launcher"; }
+        }
     }
 }

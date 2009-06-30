@@ -50,6 +50,12 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         public ICommand CreateAssembly { get; private set; }
 
+        /// <inheritdoc />
+        public override string Name
+        {
+            get { return Value.FullName; }
+        }
+
         #endregion
     }
 }

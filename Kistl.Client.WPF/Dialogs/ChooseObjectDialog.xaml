@@ -1,36 +1,35 @@
-﻿<Window 
-    x:Class="Kistl.Client.WPF.Dialogs.ChooseObjectDialog"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Choose Object" Height="300" Width="300"
-    x:Name="Self"
-    Loaded="Window_Loaded"
-    >
-    <DockPanel>
-        <DockPanel
-            DockPanel.Dock="Top"
-            Margin="0,0,0,3"
-            >
+﻿<Window x:Class="Kistl.Client.WPF.Dialogs.ChooseObjectDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Choose Object"
+        Height="300"
+        Width="300"
+        x:Name="Self"
+        Loaded="Window_Loaded"
+        ResizeMode="CanResize"
+        SizeToContent="WidthAndHeight">
+    <DockPanel LastChildFill="True">
+        <DockPanel DockPanel.Dock="Top"
+                   Margin="0,0,0,3">
             <Label DockPanel.Dock="Left">Search:</Label>
-            <TextBox
-                x:Name="txtFilterString"
-                Text="{Binding ElementName=Self,Path=FilterString,UpdateSourceTrigger=PropertyChanged}"
-                TabIndex="1"
-                />
+            <TextBox x:Name="txtFilterString"
+                     Text="{Binding ElementName=Self,Path=FilterString,UpdateSourceTrigger=PropertyChanged}"
+                     TabIndex="1" />
         </DockPanel>
-        <ToolBar
-            DockPanel.Dock="Bottom"
-            Margin="0,3,0,0"
-            >
-            <Button IsDefault="True" Click="Select_Click" TabIndex="3">Select</Button>
-            <Button Click="New_Click" TabIndex="4">New</Button>
-            <Button IsCancel="True" TabIndex="5">Cancel</Button>
+        <ToolBar DockPanel.Dock="Bottom"
+                 Margin="0,3,0,0">
+            <Button IsDefault="True"
+                    Click="Select_Click"
+                    TabIndex="3">Select</Button>
+            <Button Click="New_Click"
+                    TabIndex="4">New</Button>
+            <Button IsCancel="True"
+                    TabIndex="5">Cancel</Button>
         </ToolBar>
-        <ListView
-            x:Name="lstObjects"
-            MouseDoubleClick="lstObjects_MouseDoubleClick"
-            SelectionMode="Single" 
-            TabIndex="2"
-            />
+        <ListView x:Name="lstObjects"
+                  MouseDoubleClick="lstObjects_MouseDoubleClick"
+                  SelectionMode="Single"
+                  TabIndex="2"
+                  MaxWidth="400" />
     </DockPanel>
 </Window>

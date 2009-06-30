@@ -10,7 +10,8 @@ using Kistl.API;
 namespace Kistl.Client.Presentables
 {
 
-    public class KistlDebuggerAsModel : PresentableModel, IKistlContextDebugger
+    public class KistlDebuggerAsModel 
+        : PresentableModel, IKistlContextDebugger
     {
 
         public KistlDebuggerAsModel(IGuiApplicationContext appCtx, IDebuggingKistlContext dataCtx)
@@ -48,6 +49,11 @@ namespace Kistl.Client.Presentables
                 }
                 return _disposedCtxView;
             }
+        }
+
+        public override string Name
+        {
+            get { return this.GetType().Name; }
         }
 
         #endregion
@@ -220,5 +226,9 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
+        public override string Name
+        {
+            get { return "KistlContext"; }
+        }
     }
 }

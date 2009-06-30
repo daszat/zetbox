@@ -28,7 +28,7 @@ namespace Kistl.Client.Presentables
             Action<TChoosable> callback)
             : base(appCtx, dataCtx)
         {
-            _choices = new ReadOnlyCollection<TChoosable>(choices);
+            _choices = _filteredChoices = new ReadOnlyCollection<TChoosable>(choices);
             _callback = callback;
         }
 
@@ -39,6 +39,14 @@ namespace Kistl.Client.Presentables
             get
             {
                 return _choices;
+            }
+        }
+
+        public ReadOnlyCollection<TChoosable> FilteredChoices
+        {
+            get
+            {
+                return _filteredChoices;
             }
         }
 
@@ -54,10 +62,50 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        private string _filter;
+        public string Filter
+        {
+            get { return _filter; }
+            set
+            {
+                if (_filter != value)
+                {
+                    _filter = value;
+                    OnFilterChanged();
+                }
+            }
+        }
+
+        protected virtual void OnFilterChanged()
+        {
+            OnPropertyChanged("Filter");
+            FilterChoices();
+        }
+
+        private void FilterChoices()
+        {
+            if (String.IsNullOrEmpty(_filter))
+            {
+                _filteredChoices = _choices;
+            }
+            else
+            {
+                string filter = _filter.ToLowerInvariant();
+                _filteredChoices = new ReadOnlyCollection<TChoosable>(_choices.Where(o => o.Name.ToLowerInvariant().Contains(filter)).ToList());
+            }
+            OnPropertyChanged("FilteredChoices");
+        }
+
         #endregion
 
         private ReadOnlyCollection<TChoosable> _choices;
+        private ReadOnlyCollection<TChoosable> _filteredChoices;
         private Action<TChoosable> _callback;
+
+        public override string Name
+        {
+            get { return "Choose object of Type " + typeof(TChoosable).Name; }
+        }
     }
 
     public class DataObjectSelectionTaskModel : SelectionTaskModel<DataObjectModel>

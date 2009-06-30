@@ -2,14 +2,26 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Choose Object"
-        SizeToContent="WidthAndHeight">
+        ResizeMode="CanResize"
+        SizeToContent="WidthAndHeight"
+        Loaded="OnLoaded">
     <Window.Resources>
         <Style x:Key="addedMargins">
             <Setter Property="FrameworkElement.Margin"
                     Value="5" />
         </Style>
     </Window.Resources>
-    <DockPanel Style="{StaticResource addedMargins}">
+    <DockPanel Style="{StaticResource addedMargins}"
+               LastChildFill="True">
+
+        <DockPanel DockPanel.Dock="Top"
+                   Margin="0,0,0,3">
+            <Label DockPanel.Dock="Left">Search:</Label>
+            <TextBox x:Name="filterTextBox"
+                     Text="{Binding Path=Filter, UpdateSourceTrigger=PropertyChanged}"
+                     TabIndex="1" />
+        </DockPanel>
+
         <UniformGrid DockPanel.Dock="Bottom"
                      Style="{StaticResource addedMargins}"
                      Rows="1">
@@ -20,11 +32,13 @@
                     Click="CancelClickHandler"
                     Style="{StaticResource addedMargins}">Cancel</Button>
         </UniformGrid>
+
         <ListBox x:Name="choicesList"
-                 ItemsSource="{Binding Choices}"
+                 ItemsSource="{Binding FilteredChoices}"
                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                  MouseDoubleClick="ChoiceActivated"
                  MaxHeight="400"
                  Style="{StaticResource addedMargins}" />
+
     </DockPanel>
 </Window>

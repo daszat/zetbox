@@ -18,7 +18,8 @@ namespace Kistl.Client.Presentables
     /// <summary>
     /// Proxies a whole IDataObject
     /// </summary>
-    public class DataObjectModel : PresentableModel
+    public class DataObjectModel 
+        : PresentableModel
     {
 
         //public static DataObjectModel CreateDesignMock()
@@ -149,19 +150,20 @@ namespace Kistl.Client.Presentables
         }
 
         private string _toStringCache;
-        public string Name
+        public override string Name
         {
             get
             {
                 return _toStringCache;
             }
-            private set
+        }
+
+        private void SetName(string value)
+        {
+            if (value != _toStringCache)
             {
-                if (value != _toStringCache)
-                {
-                    _toStringCache = value;
-                    OnPropertyChanged("Name");
-                }
+                _toStringCache = value;
+                OnPropertyChanged("Name");
             }
         }
 
