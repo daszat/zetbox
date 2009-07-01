@@ -96,7 +96,10 @@ namespace Kistl.App.Extensions
 
             if (viewDesc != null && viewDesc.PresentedModelDescriptor != self)
             {
-                System.Diagnostics.Trace.TraceWarning("Using ViewDescriptor for {0} instead of {1}", viewDesc.PresentedModelDescriptor, self);
+                System.Diagnostics.Trace.TraceWarning("Using inherited {0} ViewDescriptor from {1} for {2}",
+                    vt,
+                    viewDesc.PresentedModelDescriptor,
+                    self);
             }
 
             return viewDesc;

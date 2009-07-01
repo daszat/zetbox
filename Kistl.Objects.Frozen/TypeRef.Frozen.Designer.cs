@@ -268,7 +268,7 @@ namespace Kistl.App.Base
         { }
 
 
-		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(240);
+		internal static Dictionary<int, TypeRef__Implementation__Frozen> DataStore = new Dictionary<int, TypeRef__Implementation__Frozen>(242);
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new TypeRef__Implementation__Frozen(1);
@@ -750,6 +750,10 @@ namespace Kistl.App.Base
 			DataStore[644] = new TypeRef__Implementation__Frozen(644);
 
 			DataStore[645] = new TypeRef__Implementation__Frozen(645);
+
+			DataStore[646] = new TypeRef__Implementation__Frozen(646);
+
+			DataStore[647] = new TypeRef__Implementation__Frozen(647);
 
 		}
 
@@ -2499,6 +2503,20 @@ Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[569],
 });
 			DataStore[645].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[644];
 			DataStore[645].Seal();
+			DataStore[646].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
+			DataStore[646].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[646].FullName = @"Kistl.Client.WPF.View.Relations.RelationView";
+			DataStore[646].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
+});
+			DataStore[646].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
+			DataStore[646].Seal();
+			DataStore[647].Assembly = Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4];
+			DataStore[647].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[647].FullName = @"Kistl.Client.WPF.View.Relations.RelationEndView";
+			DataStore[647].GenericArguments = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.TypeRef>(new List<Kistl.App.Base.TypeRef>(0) {
+});
+			DataStore[647].Parent = Kistl.App.Base.TypeRef__Implementation__Frozen.DataStore[318];
+			DataStore[647].Seal();
 	
 		}
 #region Serializer

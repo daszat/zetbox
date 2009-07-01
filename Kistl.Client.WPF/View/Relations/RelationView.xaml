@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.Relations.RelationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
+             xmlns:rels="clr-namespace:Kistl.Client.WPF.View.Relations">
+
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top"
+                 ItemsSource="{Binding Actions}"
+                 ItemTemplateSelector="{StaticResource defaultTemplateSelector}" />
+
+        <DockPanel DockPanel.Dock="Top">
+            <Image DockPanel.Dock="Left"
+                   Source="{Binding IconPath}"
+                   Margin="4,2,2,2"
+                   Width="14"
+                   Height="14" />
+            <TextBlock Text="{Binding LongName}"
+                       HorizontalAlignment="Center"
+                       FontWeight="Bold" />
+        </DockPanel>
+
+        <ctrls:LoadingIndicator DockPanel.Dock="Top" />
+
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+            <DockPanel>
+
+                <GroupBox DockPanel.Dock="Top"
+                          Header="Summary"
+                          Margin="5">
+                    <DockPanel>
+                        <ContentPresenter DockPanel.Dock="Top"
+                                          Margin="5,0,5,0"
+                                          Content="{Binding PropertyModelsByName[Description]}"
+                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+
+                        <ContentPresenter DockPanel.Dock="Top"
+                                          Margin="5,0,5,0"
+                                          Content="{Binding PropertyModelsByName[Storage]}"
+                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                    </DockPanel>
+                </GroupBox>
+
+                <Grid DockPanel.Dock="Top"
+                      Margin="5,0,5,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               FontWeight="Bold">A</TextBlock>
+                    <TextBox Grid.Row="0"
+                             Grid.Column="1"
+                             Text="{Binding A.RoleName.Value}" />
+                    <TextBox Grid.Row="0"
+                             Grid.Column="2"
+                             Grid.ColumnSpan="2"
+                             Text="{Binding PropertyModelsByName[Verb].Value}" />
+                    <TextBox Grid.Row="0"
+                             Grid.Column="4"
+                             Text="{Binding B.RoleName.Value}" />
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="5"
+                               HorizontalAlignment="Center"
+                               FontWeight="Bold">B</TextBlock>
+
+                    <rels:RelationEndView Grid.Row="1"
+                                          Grid.Column="0"
+                                          Grid.ColumnSpan="3"
+                                          DataContext="{Binding A}" />
+                    <rels:RelationEndView Grid.Row="1"
+                                          Grid.Column="3"
+                                          Grid.ColumnSpan="3"
+                                          DataContext="{Binding B}" />
+                </Grid>
+            </DockPanel>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

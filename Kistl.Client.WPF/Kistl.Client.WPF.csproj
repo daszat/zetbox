@@ -171,6 +171,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Relations\RelationEndView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Relations\RelationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\SelectionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -310,6 +318,12 @@
       <DependentUpon>NullableBoolValueView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PropertyView.cs" />
+    <Compile Include="View\Relations\RelationEndView.xaml.cs">
+      <DependentUpon>RelationEndView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Relations\RelationView.xaml.cs">
+      <DependentUpon>RelationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SelectionDialog.xaml.cs">
       <DependentUpon>SelectionDialog.xaml</DependentUpon>
     </Compile>

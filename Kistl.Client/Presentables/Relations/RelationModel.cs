@@ -20,15 +20,34 @@ namespace Kistl.Client.Presentables.Relations
             : base(appCtx, dataCtx, rel)
         {
             _relation = rel;
+            _relation.PropertyChanged += (sender, args) => OnPropertyChanged(args.PropertyName);
         }
 
         #region Public interface
 
-        public RelationEndModel A { get; private set; }
+        public RelationEndModel A
+        {
+            get
+            {
+                return (RelationEndModel)Factory.CreateDefaultModel(DataContext, _relation.A);
+            }
+        }
 
-        public RelationEndModel B { get; private set; }
+        public RelationEndModel B
+        {
+            get
+            {
+                return (RelationEndModel)Factory.CreateDefaultModel(DataContext, _relation.B);
+            }
+        }
 
-        public PropertyModel<string> Description { get; private set; }
+        public PropertyModel<string> Description
+        {
+            get
+            {
+                return (PropertyModel<string>)this.PropertyModelsByName["Description"];
+            }
+        }
 
         #endregion
 

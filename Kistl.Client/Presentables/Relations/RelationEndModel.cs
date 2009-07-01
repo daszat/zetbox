@@ -23,8 +23,13 @@ namespace Kistl.Client.Presentables.Relations
 
         #region Public interface
 
-        public PropertyModel<string> RoleName { get; private set; }
-
+        public PropertyModel<string> RoleName
+        {
+            get
+            {
+                return (PropertyModel<string>)this.PropertyModelsByName["RoleName"];
+            }
+        }
         public DataObjectModel Navigator { get; private set; }
 
         public ICommand CreateNavigatorCommand { get; private set; }
