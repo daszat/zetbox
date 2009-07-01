@@ -9,7 +9,7 @@ namespace Kistl.App.Extensions
     {
         public static Kistl.App.Base.Interface GetIExportableInterface(this Kistl.API.IKistlContext ctx)
         {
-            return ctx.GetQuery<Kistl.App.Base.Interface>().First(o => o.ClassName == "IExportable" && o.Module.ModuleName == "KistlBase");
+            return ctx.GetQuery<Kistl.App.Base.Interface>().First(o => o.ClassName == "IExportable" && o.Module.ModuleName == "KistlBase"); 
         }
     }
 }

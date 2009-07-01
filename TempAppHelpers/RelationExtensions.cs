@@ -45,7 +45,8 @@ namespace Kistl.App.Extensions
 
         public static Relation Lookup(IKistlContext ctx, ObjectReferenceProperty prop)
         {
-            return ctx.GetQuery<Relation>().ToList().Where(rel => rel.A.Navigator == prop || rel.B.Navigator == prop).FirstOrDefault();
+            if(prop.RelationEnd == null) return null;
+            return prop.RelationEnd.AParent ?? prop.RelationEnd.BParent;
         }
 
         public static RelationType GetRelationType(this Relation rel)

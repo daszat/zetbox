@@ -123,8 +123,8 @@ namespace Kistl.Server
 
                 if (actiondone)
                 {
-                    Console.WriteLine("Hit the anykey to exit");
-                    Console.ReadKey();
+                    //Console.WriteLine("Hit the anykey to exit");
+                    //Console.ReadKey();
                     Console.WriteLine("Shutting down");
                 }
                 else

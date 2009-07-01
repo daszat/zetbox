@@ -96,18 +96,18 @@ namespace Kistl.App.Extensions
             return new InterfaceType(Type.GetType(cls.Module.Namespace + "." + cls.ClassName + ", Kistl.Objects", true));
         }
 
-        public static bool ImplementsIExportable(this ObjectClass cls, IKistlContext ctx, bool lookupInBase)
+        public static bool ImplementsIExportable(this ObjectClass cls, IKistlContext ctx)
         {
-            if (!lookupInBase) return cls.ImplementsInterfaces.Contains(ctx.GetIExportableInterface());
-            return ImplementsIExportable(cls, ctx);
+            return ImplementsIExportable(cls, ctx, true);
         }
 
-        public static bool ImplementsIExportable(this ObjectClass cls, IKistlContext ctx)
+        public static bool ImplementsIExportable(this ObjectClass cls, IKistlContext ctx, bool lookupInBase)
         {
             while (cls != null)
             {
-                if (cls.ImplementsInterfaces.Contains(ctx.GetIExportableInterface()))
+                if (cls.ImplementsInterfaces.Count(o => o.ClassName == "IExportable" && o.Module.ModuleName == "KistlBase") == 1)
                     return true;
+                if (!lookupInBase) return false;
                 cls = cls.BaseObjectClass;
             }
             return false;

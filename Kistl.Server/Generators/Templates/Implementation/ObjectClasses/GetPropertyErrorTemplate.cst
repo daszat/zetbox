@@ -13,7 +13,7 @@
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 
 <%
-	var properties = ctx.GetQuery<Property>().Where(p => p.ObjectClass.ID == cls.ID).OrderBy(p => p.PropertyName).ToList();
+	var properties = cls.Properties.OrderBy(p => p.PropertyName).ToList();
 	if (properties.Count > 0) {
 %>
 		protected override string GetPropertyError(string propertyName) 
