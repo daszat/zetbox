@@ -840,23 +840,23 @@ namespace Kistl.App.Base
 			DataStore[269].Reason = @"ExportGuid cannot be empty";
 			DataStore[269].Seal();
 			DataStore[270].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[275];
-			DataStore[270].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[270].ExportGuid = new Guid("8d7d9f63-b7ae-45a1-8c9a-ef8d3676f7b5");
 			DataStore[270].Reason = null;
 			DataStore[270].Seal();
 			DataStore[271].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[276];
-			DataStore[271].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[271].ExportGuid = new Guid("9f54459d-43d6-4069-abe3-971ad2457113");
 			DataStore[271].Reason = @"Module cannot be empty";
 			DataStore[271].Seal();
 			DataStore[273].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[278];
-			DataStore[273].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[273].ExportGuid = new Guid("e4397224-e3fb-41d0-a160-4d912723182e");
 			DataStore[273].Reason = null;
 			DataStore[273].Seal();
 			DataStore[274].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[279];
-			DataStore[274].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[274].ExportGuid = new Guid("3b05cd35-0abf-48c0-b999-11cdbb49f3cc");
 			DataStore[274].Reason = null;
 			DataStore[274].Seal();
 			DataStore[275].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[280];
-			DataStore[275].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[275].ExportGuid = new Guid("cc6a76fa-c579-494b-889a-0efd309e7512");
 			DataStore[275].Reason = null;
 			DataStore[275].Seal();
 	

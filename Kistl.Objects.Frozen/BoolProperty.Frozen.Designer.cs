@@ -388,7 +388,7 @@ Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[236],
 			DataStore[274].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
 			DataStore[274].Description = @"Indicates whether or not the described control is read-only or allows editing.";
-			DataStore[274].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[274].ExportGuid = new Guid("14136519-487a-4e35-83f3-64eda3de1cd4");
 			DataStore[274].IsIndexed = false;
 			DataStore[274].IsList = false;
 			DataStore[274].IsNullable = false;

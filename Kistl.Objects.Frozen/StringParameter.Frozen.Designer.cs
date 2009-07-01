@@ -184,14 +184,14 @@ namespace Kistl.App.Base
 			DataStore[30].ParameterName = @"result";
 			DataStore[30].Seal();
 			DataStore[40].Description = @"a C# code fragment, usable as skeleton for implementing the target of this MethodInvocatoin";
-			DataStore[40].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[40].ExportGuid = new Guid("533bcb48-b41f-4f46-868c-c2dbffe36cde");
 			DataStore[40].IsList = false;
 			DataStore[40].IsReturnParameter = true;
 			DataStore[40].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[177];
 			DataStore[40].ParameterName = @"result";
 			DataStore[40].Seal();
 			DataStore[41].Description = @"Returns the Member Name of this MethodInvocation";
-			DataStore[41].ExportGuid = new Guid("00000000-0000-0000-0000-000000000000");
+			DataStore[41].ExportGuid = new Guid("2a71d345-3a19-4318-83ea-23ff03734127");
 			DataStore[41].IsList = false;
 			DataStore[41].IsReturnParameter = true;
 			DataStore[41].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[178];
