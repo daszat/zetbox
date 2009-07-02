@@ -257,22 +257,24 @@ namespace Kistl.DALProvider.EF
             {
                 Trace.WriteLine("************************* >>>> Submit Changes ******************************");
 
-                foreach (var msgPair in new[]{
-                    new{State = EntityState.Added,      Label="Insert" },
-                    new{State = EntityState.Modified,   Label="Update" },
-                    new{State = EntityState.Deleted,    Label="Delete" },
-                    // new{State = EntityState.Unchanged,  Label="Unchanged" },
-                })
-                {
-                    var debugList = _ctx.ObjectStateManager
-                        .GetObjectStateEntries(msgPair.State)
-                        .Where(e => e.Entity != null)
-                        .Select(e => e.Entity);
-                    foreach (var i in debugList)
-                    {
-                        Trace.WriteLine(string.Format("{0}: {1} -> {2}", msgPair.Label, i.GetType(), i.ToString()));
-                    }
-                }
+                #region Details
+                //foreach (var msgPair in new[]{
+                //    new{State = EntityState.Added,      Label="Insert" },
+                //    new{State = EntityState.Modified,   Label="Update" },
+                //    new{State = EntityState.Deleted,    Label="Delete" },
+                //    // new{State = EntityState.Unchanged,  Label="Unchanged" },
+                //})
+                //{
+                //    var debugList = _ctx.ObjectStateManager
+                //        .GetObjectStateEntries(msgPair.State)
+                //        .Where(e => e.Entity != null)
+                //        .Select(e => e.Entity);
+                //    foreach (var i in debugList)
+                //    {
+                //        Trace.WriteLine(string.Format("{0}: {1} -> {2}", msgPair.Label, i.GetType(), i.ToString()));
+                //    }
+                //}
+                #endregion
 
                 Trace.WriteLine("");
                 Trace.WriteLine("  Added: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count());

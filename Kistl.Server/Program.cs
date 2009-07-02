@@ -28,6 +28,40 @@ namespace Kistl.Server
             Console.WriteLine("                  -updateschema [<schema.xml>]");
         }
 
+        private class CmdLineArg
+        {
+            public CmdLineArg(string cmd)
+            {
+                Command = cmd;
+                Arguments = new List<string>();
+            }
+
+            public string Command { get; set; }
+            public IList<string> Arguments { get; private set; }
+        }
+
+        private static IEnumerable<CmdLineArg> SplitCommandLine(string[] args)
+        {
+            List<CmdLineArg> result = new List<CmdLineArg>();
+
+            CmdLineArg current = null;
+            foreach (string a in args)
+            {
+                if (a.StartsWith("-"))
+                {
+                    if (current != null) result.Add(current);
+                    current = new CmdLineArg(a);
+                }
+                else if (current != null)
+                {
+                    current.Arguments.Add(a);
+                }
+            }
+            if (current != null) result.Add(current);
+
+            return result;
+        }
+
         static void Main(string[] args)
         {
             try
@@ -35,89 +69,85 @@ namespace Kistl.Server
                 var config = InitApplicationContext(args);
 
                 Server server = new Server();
-                IEnumerator<string> arg = args.ToList().GetEnumerator();
                 bool actiondone = false;
-                while (arg.MoveNext())
+                foreach (CmdLineArg arg in SplitCommandLine(args))
                 {
-                    if (arg.Current == "-export")
+                    if (arg.Command == "-export" && arg.Arguments.Count > 1)
                     {
-                        if (!arg.MoveNext()) { PrintHelp(); return; }
-                        string file = arg.Current;
+                        string file = arg.Arguments[0];
                         List<string> namespaces = new List<string>();
-                        while (arg.MoveNext())
+                        for (int i = 1; i < arg.Arguments.Count; i++)
                         {
-                            if (!arg.Current.StartsWith("-"))
-                            {
-                                namespaces.Add(arg.Current);
-                            }
-                            else
-                            {
-                                break;
-                            }
+                            namespaces.Add(arg.Arguments[i]);
                         }
                         server.Export(file, namespaces.ToArray());
                         actiondone = true;
                     }
-
-                    if (arg.Current == "-import")
+                    else if (arg.Command == "-import" && arg.Arguments.Count == 1)
                     {
-                        if (!arg.MoveNext()) { PrintHelp(); return; }
-                        string file = arg.Current;
+                        string file = arg.Arguments[0];
                         server.Import(file);
                         actiondone = true;
                     }
-
-                    if (arg.Current == "-checkschema")
+                    else if (arg.Command == "-checkschema")
                     {
                         string file = "";
-                        if (arg.MoveNext())
+                        if (arg.Arguments.Count == 0)
                         {
-                            if (arg.Current == "meta")
+                            server.CheckSchema(false);
+                        }
+                        else if (arg.Arguments.Count == 1)
+                        {
+                            if (arg.Arguments[0] == "meta")
                             {
                                 server.CheckSchemaFromCurrentMetaData(false);
                             }
-                            else if (!arg.Current.StartsWith("-"))
-                            {
-                                file = arg.Current;
-                                server.CheckSchema(file, false);
-                            }
                             else
                             {
-                                PrintHelp();
+                                file = arg.Arguments[0];
+                                server.CheckSchema(file, false);
                             }
                         }
                         else
                         {
-                            server.CheckSchema(false);
+                            PrintHelp();
+                            return;
                         }
                         actiondone = true;
                     }
-
-                    if (arg.Current == "-repairschema")
+                    else if (arg.Command == "-repairschema" && arg.Arguments.Count == 0)
                     {
                         server.CheckSchema(true);
                         actiondone = true;
                     }
-
-                    if (arg.Current == "-updateschema")
+                    else if (arg.Command == "-updateschema")
                     {
                         string file = "";
-                        if (arg.MoveNext() && !arg.Current.StartsWith("-"))
+                        if (arg.Arguments.Count == 0)
                         {
-                            file = arg.Current;
+                            server.UpdateSchema();
+                        }
+                        else if (arg.Arguments.Count == 1)
+                        {
+                            file = arg.Arguments[0];
                             server.UpdateSchema(file);
                         }
                         else
                         {
-                            server.UpdateSchema();
+                            PrintHelp();
+                            return;
                         }
                         actiondone = true;
                     }
-
-                    if (arg.Current == "-generate")
+                    else if (arg.Command == "-generate" && arg.Arguments.Count == 0)
                     {
                         server.GenerateCode();
                         actiondone = true;
+                    }
+                    else
+                    {
+                        PrintHelp();
+                        return;
                     }
                 }
 
