@@ -253,6 +253,19 @@ namespace Kistl.API
             return (IPersistenceObject)query.Cast<IExportableInternal>().FirstOrDefault(o => o.ExportGuid == exportGuid);
         }
 
+        public IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
+        {
+            var query = _objects[ifType];
+            if (query == null) return null;
+            return query.Cast<IExportableInternal>().Where(o => exportGuids.Contains(o.ExportGuid)).Cast<IPersistenceObject>().AsEnumerable();
+        }
+
+        public IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
+        {
+            return FindPersistenceObjects(new InterfaceType(typeof(T)), exportGuids).Cast<T>();
+        }
+
+
         public IKistlContext GetReadonlyContext() { throw new NotImplementedException(); }
 
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;

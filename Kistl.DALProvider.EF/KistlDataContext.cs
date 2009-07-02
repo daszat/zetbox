@@ -507,7 +507,56 @@ namespace Kistl.DALProvider.EF
             {
                 string sql = string.Format("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid = @guid", GetEntityName(typeof(T).ToImplementationType()));
                 result = _ctx.CreateQuery<T>(sql, new ObjectParameter("guid", exportGuid)).FirstOrDefault();
-                if(result != null) result.AttachToContext(this);
+                if (result != null) result.AttachToContext(this);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Find Persistence Objects of the given type by ExportGuids
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <returns>A List of IPersistenceObject.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public override IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
+        {
+            try
+            {
+                // See Case 552
+                return ((IEnumerable)this.GetType().FindGenericMethod("FindPersistenceObjects", new Type[] { ifType.Type }, new Type[] { typeof(IEnumerable<Guid>) })
+                    .Invoke(this, new object[] { exportGuids })).Cast<IPersistenceObject>();
+            }
+            catch (TargetInvocationException tiex)
+            {
+                // unwrap "business" exception
+                throw tiex.InnerException;
+            }
+        }
+
+        /// <summary>
+        /// Find Persistence Objects of the given type by ExportGuids
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <returns>A List of IPersistenceObject.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public override IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids)
+        {
+            if (exportGuids.Count() == 0) return new List<T>();
+
+            StringBuilder sql = new StringBuilder();
+            sql.AppendFormat("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid IN {{", GetEntityName(typeof(T).ToImplementationType()));
+            foreach (Guid g in exportGuids)
+            {
+                sql.AppendFormat("Guid'{0}',", g);
+            }
+            sql.Remove(sql.Length - 1, 1);
+            sql.Append("}");
+            IEnumerable<T> result = _ctx.CreateQuery<T>(sql.ToString()).ToList();
+            foreach (IPersistenceObject obj in result)
+            {
+                obj.AttachToContext(this);
             }
             return result;
         }

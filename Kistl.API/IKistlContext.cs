@@ -222,6 +222,23 @@ namespace Kistl.API
         T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject;
 
         /// <summary>
+        /// Find Persistence Objects of the given type by ExportGuids
+        /// </summary>
+        /// <param name="ifType">Object Type of the Object to find.</param>
+        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <returns>A List of IPersistenceObject.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids);
+        /// <summary>
+        /// Find Persistence Objects of the given type by ExportGuids
+        /// </summary>
+        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
+        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <returns>A List of IPersistenceObject.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
+
+        /// <summary>
         /// Creates a read-only context connected to the same data source as this IKistlContext.
         /// </summary>
         /// <returns>a read-only context of the same source as this context</returns>

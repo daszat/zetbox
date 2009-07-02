@@ -67,7 +67,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Kistl.Client.ASPNET", "Kist
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "60511"
+		VWDPort = "62689"
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{9B65F71F-98A5-4744-B45F-9C5D99F99D23}"
