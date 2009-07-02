@@ -62,6 +62,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>Frozen List of all ConsistentNavigatorConstraint</summary>
+		/// Checks whether a Navigator on a RelationEnd is consistent with the Relation's definition
+		public static IQueryable<ConsistentNavigatorConstraint> ConsistentNavigatorConstraints
+		{ 
+			get
+			{
+				return ConsistentNavigatorConstraint__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<ConsistentNavigatorConstraint>();
+			}
+		}
+		
 		/// <summary>Frozen List of all Constraint</summary>
 		/// 
 		public static IQueryable<Constraint> Constraints
@@ -390,6 +400,7 @@ namespace Kistl.App.Base
 				BoolParameter__Implementation__Frozen.CreateInstances();
 				BoolProperty__Implementation__Frozen.CreateInstances();
 				CLRObjectParameter__Implementation__Frozen.CreateInstances();
+				ConsistentNavigatorConstraint__Implementation__Frozen.CreateInstances();
 				Constraint__Implementation__Frozen.CreateInstances();
 				DataType__Implementation__Frozen.CreateInstances();
 				DateTimeParameter__Implementation__Frozen.CreateInstances();
@@ -432,6 +443,7 @@ namespace Kistl.App.Base
 				BoolParameter__Implementation__Frozen.FillDataStore();
 				BoolProperty__Implementation__Frozen.FillDataStore();
 				CLRObjectParameter__Implementation__Frozen.FillDataStore();
+				ConsistentNavigatorConstraint__Implementation__Frozen.FillDataStore();
 				Constraint__Implementation__Frozen.FillDataStore();
 				DataType__Implementation__Frozen.FillDataStore();
 				DateTimeParameter__Implementation__Frozen.FillDataStore();

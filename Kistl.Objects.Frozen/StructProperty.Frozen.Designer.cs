@@ -137,7 +137,7 @@ namespace Kistl.App.Base
 			{
 				case "StructDefinition":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(129).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(85).Constraints
 						.Where(c => !c.IsValid(this, this.StructDefinition))
 						.Select(c => c.GetErrorText(this, this.StructDefinition))
 						.ToArray();
@@ -156,45 +156,45 @@ namespace Kistl.App.Base
 		internal new static Dictionary<int, StructProperty__Implementation__Frozen> DataStore = new Dictionary<int, StructProperty__Implementation__Frozen>(2);
 		internal new static void CreateInstances()
 		{
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[131] = 
-			DataStore[131] = new StructProperty__Implementation__Frozen(131);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[1] = 
+			DataStore[1] = new StructProperty__Implementation__Frozen(1);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[132] = 
-			DataStore[132] = new StructProperty__Implementation__Frozen(132);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[2] = 
+			DataStore[2] = new StructProperty__Implementation__Frozen(2);
 
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[131].AltText = @"Mobile Phone Number";
-			DataStore[131].CategoryTags = null;
-			DataStore[131].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[1].AltText = @"Office Phone Number";
+			DataStore[1].CategoryTags = null;
+			DataStore[1].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[131].Description = @"Mobile Phone Number";
-			DataStore[131].ExportGuid = new Guid("c9788c6f-e59b-4b4e-9222-1cc726961b20");
-			DataStore[131].IsIndexed = false;
-			DataStore[131].IsList = false;
-			DataStore[131].IsNullable = true;
-			DataStore[131].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[131].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
-			DataStore[131].PropertyName = @"PhoneNumberMobile";
-			DataStore[131].ValueModelDescriptor = null;
-			DataStore[131].StructDefinition = Kistl.App.Base.Struct__Implementation__Frozen.DataStore[63];
-			DataStore[131].Seal();
-			DataStore[132].AltText = @"Office Phone Number";
-			DataStore[132].CategoryTags = null;
-			DataStore[132].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[1].Description = @"Office Phone Number";
+			DataStore[1].ExportGuid = new Guid("f2e60b5a-767c-4369-b178-3397b22a3f7e");
+			DataStore[1].IsIndexed = false;
+			DataStore[1].IsList = false;
+			DataStore[1].IsNullable = true;
+			DataStore[1].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[1].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[15];
+			DataStore[1].PropertyName = @"PhoneNumberOffice";
+			DataStore[1].ValueModelDescriptor = null;
+			DataStore[1].StructDefinition = Kistl.App.Base.Struct__Implementation__Frozen.DataStore[16];
+			DataStore[1].Seal();
+			DataStore[2].AltText = @"Mobile Phone Number";
+			DataStore[2].CategoryTags = null;
+			DataStore[2].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[132].Description = @"Office Phone Number";
-			DataStore[132].ExportGuid = new Guid("f2e60b5a-767c-4369-b178-3397b22a3f7e");
-			DataStore[132].IsIndexed = false;
-			DataStore[132].IsList = false;
-			DataStore[132].IsNullable = true;
-			DataStore[132].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[132].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
-			DataStore[132].PropertyName = @"PhoneNumberOffice";
-			DataStore[132].ValueModelDescriptor = null;
-			DataStore[132].StructDefinition = Kistl.App.Base.Struct__Implementation__Frozen.DataStore[63];
-			DataStore[132].Seal();
+			DataStore[2].Description = @"Mobile Phone Number";
+			DataStore[2].ExportGuid = new Guid("c9788c6f-e59b-4b4e-9222-1cc726961b20");
+			DataStore[2].IsIndexed = false;
+			DataStore[2].IsList = false;
+			DataStore[2].IsNullable = true;
+			DataStore[2].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[2].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[15];
+			DataStore[2].PropertyName = @"PhoneNumberMobile";
+			DataStore[2].ValueModelDescriptor = null;
+			DataStore[2].StructDefinition = Kistl.App.Base.Struct__Implementation__Frozen.DataStore[16];
+			DataStore[2].Seal();
 	
 		}
 #region Serializer

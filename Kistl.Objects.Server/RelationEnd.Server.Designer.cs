@@ -535,7 +535,7 @@ namespace Kistl.App.Base
 			{
 				case "AParent":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(224).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(122).Constraints
 						.Where(c => !c.IsValid(this, this.AParent))
 						.Select(c => c.GetErrorText(this, this.AParent))
 						.ToArray();
@@ -544,7 +544,7 @@ namespace Kistl.App.Base
 				}
 				case "BParent":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(223).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(121).Constraints
 						.Where(c => !c.IsValid(this, this.BParent))
 						.Select(c => c.GetErrorText(this, this.BParent))
 						.ToArray();
@@ -553,7 +553,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(262).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(148).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -562,7 +562,7 @@ namespace Kistl.App.Base
 				}
 				case "HasPersistentOrder":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(220).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(143).Constraints
 						.Where(c => !c.IsValid(this, this.HasPersistentOrder))
 						.Select(c => c.GetErrorText(this, this.HasPersistentOrder))
 						.ToArray();
@@ -571,7 +571,7 @@ namespace Kistl.App.Base
 				}
 				case "Multiplicity":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(219).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(174).Constraints
 						.Where(c => !c.IsValid(this, this.Multiplicity))
 						.Select(c => c.GetErrorText(this, this.Multiplicity))
 						.ToArray();
@@ -580,7 +580,7 @@ namespace Kistl.App.Base
 				}
 				case "Navigator":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(218).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(125).Constraints
 						.Where(c => !c.IsValid(this, this.Navigator))
 						.Select(c => c.GetErrorText(this, this.Navigator))
 						.ToArray();
@@ -589,7 +589,7 @@ namespace Kistl.App.Base
 				}
 				case "Role":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(217).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(157).Constraints
 						.Where(c => !c.IsValid(this, this.Role))
 						.Select(c => c.GetErrorText(this, this.Role))
 						.ToArray();
@@ -598,7 +598,7 @@ namespace Kistl.App.Base
 				}
 				case "RoleName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(216).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(34).Constraints
 						.Where(c => !c.IsValid(this, this.RoleName))
 						.Select(c => c.GetErrorText(this, this.RoleName))
 						.ToArray();
@@ -607,7 +607,7 @@ namespace Kistl.App.Base
 				}
 				case "Type":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(215).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(124).Constraints
 						.Where(c => !c.IsValid(this, this.Type))
 						.Select(c => c.GetErrorText(this, this.Type))
 						.ToArray();
@@ -623,20 +623,6 @@ namespace Kistl.App.Base
 		{
 			// fix direct object references
 
-			if (_fk_guid_Type.HasValue)
-				Type__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_Type.Value);
-			else if (_fk_Type.HasValue)
-				Type__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_Type.Value);
-			else
-				Type__Implementation__ = null;
-
-			if (_fk_guid_Navigator.HasValue)
-				Navigator__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectReferenceProperty>(_fk_guid_Navigator.Value);
-			else if (_fk_Navigator.HasValue)
-				Navigator__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)Context.Find<Kistl.App.Base.ObjectReferenceProperty>(_fk_Navigator.Value);
-			else
-				Navigator__Implementation__ = null;
-
 			if (_fk_guid_BParent.HasValue)
 				BParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Relation>(_fk_guid_BParent.Value);
 			else if (_fk_BParent.HasValue)
@@ -650,6 +636,20 @@ namespace Kistl.App.Base
 				AParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)Context.Find<Kistl.App.Base.Relation>(_fk_AParent.Value);
 			else
 				AParent__Implementation__ = null;
+
+			if (_fk_guid_Type.HasValue)
+				Type__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_Type.Value);
+			else if (_fk_Type.HasValue)
+				Type__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_Type.Value);
+			else
+				Type__Implementation__ = null;
+
+			if (_fk_guid_Navigator.HasValue)
+				Navigator__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectReferenceProperty>(_fk_guid_Navigator.Value);
+			else if (_fk_Navigator.HasValue)
+				Navigator__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)Context.Find<Kistl.App.Base.ObjectReferenceProperty>(_fk_Navigator.Value);
+			else
+				Navigator__Implementation__ = null;
 		}
 #region Serializer
 
@@ -664,6 +664,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
             BinarySerializer.ToStream((int)((RelationEnd)this).Multiplicity, binStream);
             BinarySerializer.ToStream(Navigator != null ? Navigator.ID : (int?)null, binStream);
+			auxObjects.Add(Navigator);
             BinarySerializer.ToStream(this._Role, binStream);
             BinarySerializer.ToStream(this._RoleName, binStream);
             BinarySerializer.ToStream(Type != null ? Type.ID : (int?)null, binStream);

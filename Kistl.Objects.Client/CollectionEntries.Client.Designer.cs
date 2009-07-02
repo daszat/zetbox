@@ -17,7 +17,7 @@ namespace Kistl.App.Base
     {
     
 // ID is inherited
-        public int RelationID { get { return 49; } }
+        public int RelationID { get { return 51; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.Base.ObjectClass)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Base.Interface)value; } }
 
@@ -175,7 +175,7 @@ namespace Kistl.App.Projekte
     {
     
 // ID is inherited
-        public int RelationID { get { return 23; } }
+        public int RelationID { get { return 34; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.Projekte.Projekt)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Projekte.Mitarbeiter)value; } }
 
@@ -401,7 +401,7 @@ namespace Kistl.App.GUI
     {
     
 // ID is inherited
-        public int RelationID { get { return 61; } }
+        public int RelationID { get { return 4; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.GUI.Template)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.GUI.Visual)value; } }
 
@@ -559,7 +559,7 @@ namespace Kistl.App.Base
     {
     
 // ID is inherited
-        public int RelationID { get { return 66; } }
+        public int RelationID { get { return 9; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.Base.TypeRef)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Base.TypeRef)value; } }
 
@@ -785,7 +785,7 @@ namespace Kistl.App.GUI
     {
     
 // ID is inherited
-        public int RelationID { get { return 55; } }
+        public int RelationID { get { return 23; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.GUI.Visual)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.GUI.Visual)value; } }
 
@@ -943,7 +943,7 @@ namespace Kistl.App.GUI
     {
     
 // ID is inherited
-        public int RelationID { get { return 60; } }
+        public int RelationID { get { return 43; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.GUI.Visual)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.GUI.Visual)value; } }
 
@@ -1102,7 +1102,7 @@ namespace Kistl.App.TimeRecords
     {
     
 // ID is inherited
-        public int RelationID { get { return 42; } }
+        public int RelationID { get { return 36; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.TimeRecords.WorkEffortAccount)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Projekte.Mitarbeiter)value; } }
 

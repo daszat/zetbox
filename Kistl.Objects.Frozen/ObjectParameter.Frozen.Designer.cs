@@ -137,7 +137,7 @@ namespace Kistl.App.Base
 			{
 				case "DataType":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(97).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(103).Constraints
 						.Where(c => !c.IsValid(this, this.DataType))
 						.Select(c => c.GetErrorText(this, this.DataType))
 						.ToArray();
@@ -156,53 +156,53 @@ namespace Kistl.App.Base
 		internal new static Dictionary<int, ObjectParameter__Implementation__Frozen> DataStore = new Dictionary<int, ObjectParameter__Implementation__Frozen>(4);
 		internal new static void CreateInstances()
 		{
-			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[10] = 
-			DataStore[10] = new ObjectParameter__Implementation__Frozen(10);
+			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[5] = 
+			DataStore[5] = new ObjectParameter__Implementation__Frozen(5);
 
-			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[26] = 
-			DataStore[26] = new ObjectParameter__Implementation__Frozen(26);
+			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[17] = 
+			DataStore[17] = new ObjectParameter__Implementation__Frozen(17);
 
-			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[27] = 
-			DataStore[27] = new ObjectParameter__Implementation__Frozen(27);
+			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[22] = 
+			DataStore[22] = new ObjectParameter__Implementation__Frozen(22);
 
-			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[36] = 
-			DataStore[36] = new ObjectParameter__Implementation__Frozen(36);
+			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[28] = 
+			DataStore[28] = new ObjectParameter__Implementation__Frozen(28);
 
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[10].Description = null;
-			DataStore[10].ExportGuid = new Guid("1fa8c4d8-83a5-42b9-848d-c113951fe49f");
-			DataStore[10].IsList = false;
-			DataStore[10].IsReturnParameter = false;
-			DataStore[10].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
-			DataStore[10].ParameterName = @"TestObjectParameter";
-			DataStore[10].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
-			DataStore[10].Seal();
-			DataStore[26].Description = null;
-			DataStore[26].ExportGuid = new Guid("95a488c0-e4fc-479d-8d88-786c8d364694");
-			DataStore[26].IsList = false;
-			DataStore[26].IsReturnParameter = true;
-			DataStore[26].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[124];
-			DataStore[26].ParameterName = @"Result";
-			DataStore[26].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
-			DataStore[26].Seal();
-			DataStore[27].Description = null;
-			DataStore[27].ExportGuid = new Guid("d4869404-976b-4853-84fd-72403d4ea6e2");
-			DataStore[27].IsList = true;
-			DataStore[27].IsReturnParameter = true;
-			DataStore[27].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[125];
-			DataStore[27].ParameterName = @"Result";
-			DataStore[27].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
-			DataStore[27].Seal();
-			DataStore[36].Description = null;
-			DataStore[36].ExportGuid = new Guid("c0ee1435-955b-4ed8-b633-d4165a56b048");
-			DataStore[36].IsList = false;
-			DataStore[36].IsReturnParameter = false;
-			DataStore[36].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[144];
-			DataStore[36].ParameterName = @"cls";
-			DataStore[36].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
-			DataStore[36].Seal();
+			DataStore[5].Description = null;
+			DataStore[5].ExportGuid = new Guid("c0ee1435-955b-4ed8-b633-d4165a56b048");
+			DataStore[5].IsList = false;
+			DataStore[5].IsReturnParameter = false;
+			DataStore[5].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[19];
+			DataStore[5].ParameterName = @"cls";
+			DataStore[5].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[5].Seal();
+			DataStore[17].Description = null;
+			DataStore[17].ExportGuid = new Guid("d4869404-976b-4853-84fd-72403d4ea6e2");
+			DataStore[17].IsList = true;
+			DataStore[17].IsReturnParameter = true;
+			DataStore[17].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[104];
+			DataStore[17].ParameterName = @"Result";
+			DataStore[17].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[49];
+			DataStore[17].Seal();
+			DataStore[22].Description = null;
+			DataStore[22].ExportGuid = new Guid("95a488c0-e4fc-479d-8d88-786c8d364694");
+			DataStore[22].IsList = false;
+			DataStore[22].IsReturnParameter = true;
+			DataStore[22].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[58];
+			DataStore[22].ParameterName = @"Result";
+			DataStore[22].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[35];
+			DataStore[22].Seal();
+			DataStore[28].Description = null;
+			DataStore[28].ExportGuid = new Guid("1fa8c4d8-83a5-42b9-848d-c113951fe49f");
+			DataStore[28].IsList = false;
+			DataStore[28].IsReturnParameter = false;
+			DataStore[28].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[122];
+			DataStore[28].ParameterName = @"TestObjectParameter";
+			DataStore[28].DataType = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
+			DataStore[28].Seal();
 	
 		}
 #region Serializer

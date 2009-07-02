@@ -114,29 +114,29 @@ namespace Kistl.App.Base
 		internal new static Dictionary<int, Struct__Implementation__Frozen> DataStore = new Dictionary<int, Struct__Implementation__Frozen>(1);
 		internal new static void CreateInstances()
 		{
-			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63] = 
-			DataStore[63] = new Struct__Implementation__Frozen(63);
+			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[16] = 
+			DataStore[16] = new Struct__Implementation__Frozen(16);
 
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[63].ClassName = @"TestPhoneStruct";
-			DataStore[63].DefaultIcon = null;
-			DataStore[63].Description = @"";
-			DataStore[63].ExportGuid = new Guid("2510af08-089f-4252-8a98-ec84cb67bcb9");
-			DataStore[63].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[16].ClassName = @"TestPhoneStruct";
+			DataStore[16].DefaultIcon = null;
+			DataStore[16].Description = @"";
+			DataStore[16].ExportGuid = new Guid("2510af08-089f-4252-8a98-ec84cb67bcb9");
+			DataStore[16].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[63].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
+			DataStore[16].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
-			DataStore[63].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[63].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(2) {
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[127],
-Kistl.App.Base.Property__Implementation__Frozen.DataStore[128],
+			DataStore[16].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[16].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(2) {
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[19],
+Kistl.App.Base.Property__Implementation__Frozen.DataStore[21],
 });
-			DataStore[63].ShowIconInLists = true;
-			DataStore[63].ShowIdInLists = true;
-			DataStore[63].ShowNameInLists = true;
-			DataStore[63].Seal();
+			DataStore[16].ShowIconInLists = true;
+			DataStore[16].ShowIdInLists = true;
+			DataStore[16].ShowNameInLists = true;
+			DataStore[16].Seal();
 	
 		}
 #region Serializer

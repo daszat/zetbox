@@ -14,14 +14,14 @@ namespace Kistl.App.Base
 		One = 2,
 
 		/// <summary>
-		/// Optional Element (zero or one)
-		/// </summary>
-		ZeroOrOne = 1,
-
-		/// <summary>
 		/// Optional List Element (zero or more)
 		/// </summary>
 		ZeroOrMore = 3,
+
+		/// <summary>
+		/// Optional Element (zero or one)
+		/// </summary>
+		ZeroOrOne = 1,
 
 	}
 }

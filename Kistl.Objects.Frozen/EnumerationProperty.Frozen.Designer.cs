@@ -137,7 +137,7 @@ namespace Kistl.App.Base
 			{
 				case "Enumeration":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(104).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(88).Constraints
 						.Where(c => !c.IsValid(this, this.Enumeration))
 						.Select(c => c.GetErrorText(this, this.Enumeration))
 						.ToArray();
@@ -156,188 +156,188 @@ namespace Kistl.App.Base
 		internal new static Dictionary<int, EnumerationProperty__Implementation__Frozen> DataStore = new Dictionary<int, EnumerationProperty__Implementation__Frozen>(9);
 		internal new static void CreateInstances()
 		{
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[110] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[110] = 
-			DataStore[110] = new EnumerationProperty__Implementation__Frozen(110);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[174] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[174] = 
+			DataStore[174] = new EnumerationProperty__Implementation__Frozen(174);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[111] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[111] = 
-			DataStore[111] = new EnumerationProperty__Implementation__Frozen(111);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[176] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[176] = 
+			DataStore[176] = new EnumerationProperty__Implementation__Frozen(176);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[113] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[113] = 
-			DataStore[113] = new EnumerationProperty__Implementation__Frozen(113);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[177] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[177] = 
+			DataStore[177] = new EnumerationProperty__Implementation__Frozen(177);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[150] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[150] = 
-			DataStore[150] = new EnumerationProperty__Implementation__Frozen(150);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[178] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[178] = 
+			DataStore[178] = new EnumerationProperty__Implementation__Frozen(178);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[179] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[179] = 
+			DataStore[179] = new EnumerationProperty__Implementation__Frozen(179);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[180] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[180] = 
+			DataStore[180] = new EnumerationProperty__Implementation__Frozen(180);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[181] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[181] = 
+			DataStore[181] = new EnumerationProperty__Implementation__Frozen(181);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[183] = 
 			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[183] = 
 			DataStore[183] = new EnumerationProperty__Implementation__Frozen(183);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[219] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[219] = 
-			DataStore[219] = new EnumerationProperty__Implementation__Frozen(219);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[228] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[228] = 
-			DataStore[228] = new EnumerationProperty__Implementation__Frozen(228);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[229] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[229] = 
-			DataStore[229] = new EnumerationProperty__Implementation__Frozen(229);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[233] = 
-			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[233] = 
-			DataStore[233] = new EnumerationProperty__Implementation__Frozen(233);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[186] = 
+			Kistl.App.Base.ValueTypeProperty__Implementation__Frozen.DataStore[186] = 
+			DataStore[186] = new EnumerationProperty__Implementation__Frozen(186);
 
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[110].AltText = @"Test Enumeration Property";
-			DataStore[110].CategoryTags = null;
-			DataStore[110].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[102],
+			DataStore[174].AltText = @"Specifies how many instances may occur on this end of the relation.";
+			DataStore[174].CategoryTags = null;
+			DataStore[174].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[165],
 });
-			DataStore[110].Description = @"Test Enumeration Property";
-			DataStore[110].ExportGuid = new Guid("89470dda-4ac6-4bb4-9221-d16f80f8d95a");
-			DataStore[110].IsIndexed = false;
-			DataStore[110].IsList = false;
-			DataStore[110].IsNullable = false;
-			DataStore[110].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[110].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
-			DataStore[110].PropertyName = @"TestEnumProp";
-			DataStore[110].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[25];
-			DataStore[110].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[50];
-			DataStore[110].Seal();
-			DataStore[111].AltText = @"Test Enum Property";
-			DataStore[111].CategoryTags = null;
-			DataStore[111].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[101],
+			DataStore[174].Description = @"Specifies how many instances may occur on this end of the relation.";
+			DataStore[174].ExportGuid = new Guid("cdbcada8-4deb-4c4f-a7a4-24716b0a0ccd");
+			DataStore[174].IsIndexed = false;
+			DataStore[174].IsList = false;
+			DataStore[174].IsNullable = false;
+			DataStore[174].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[174].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
+			DataStore[174].PropertyName = @"Multiplicity";
+			DataStore[174].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[36];
+			DataStore[174].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[4];
+			DataStore[174].Seal();
+			DataStore[176].AltText = @"Storagetype for 1:1 Relations";
+			DataStore[176].CategoryTags = null;
+			DataStore[176].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[111].Description = @"Test Enum Property";
-			DataStore[111].ExportGuid = new Guid("657b719f-dcda-4308-9587-4e2c10e7b60f");
-			DataStore[111].IsIndexed = false;
-			DataStore[111].IsList = false;
-			DataStore[111].IsNullable = false;
-			DataStore[111].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[111].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48];
-			DataStore[111].PropertyName = @"TestEnumProp";
-			DataStore[111].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[25];
-			DataStore[111].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[50];
-			DataStore[111].Seal();
-			DataStore[113].AltText = @"The Toolkit used by this Renderer";
-			DataStore[113].CategoryTags = null;
-			DataStore[113].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[99],
+			DataStore[176].Description = @"Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.";
+			DataStore[176].ExportGuid = new Guid("ba4f10fd-f7cf-4237-93a6-734e7e5c6b8a");
+			DataStore[176].IsIndexed = false;
+			DataStore[176].IsList = false;
+			DataStore[176].IsNullable = true;
+			DataStore[176].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[176].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63];
+			DataStore[176].PropertyName = @"Storage";
+			DataStore[176].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[38];
+			DataStore[176].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[64];
+			DataStore[176].Seal();
+			DataStore[177].AltText = null;
+			DataStore[177].CategoryTags = @"Summary";
+			DataStore[177].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[164],
 });
-			DataStore[113].Description = @"The Toolkit used by this Renderer";
-			DataStore[113].ExportGuid = new Guid("83ab9087-52a5-400d-9e41-bd46fb5e7957");
-			DataStore[113].IsIndexed = false;
-			DataStore[113].IsList = false;
-			DataStore[113].IsNullable = false;
-			DataStore[113].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[113].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52];
-			DataStore[113].PropertyName = @"Platform";
-			DataStore[113].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
-			DataStore[113].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
-			DataStore[113].Seal();
-			DataStore[150].AltText = @"Which visual is represented here";
-			DataStore[150].CategoryTags = null;
-			DataStore[150].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
+			DataStore[177].Description = @"The visual type of this View";
+			DataStore[177].ExportGuid = new Guid("af9c1a03-ce46-4719-96c0-c38287d26ac0");
+			DataStore[177].IsIndexed = false;
+			DataStore[177].IsList = false;
+			DataStore[177].IsNullable = false;
+			DataStore[177].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[177].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
+			DataStore[177].PropertyName = @"VisualType";
+			DataStore[177].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[35];
+			DataStore[177].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[19];
+			DataStore[177].Seal();
+			DataStore[178].AltText = @"Which visual is represented here";
+			DataStore[178].CategoryTags = null;
+			DataStore[178].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[166],
 });
-			DataStore[150].Description = @"Which visual is represented here";
-			DataStore[150].ExportGuid = new Guid("bdeb28ac-665e-4bb6-8f7b-0ae983d77d56");
-			DataStore[150].IsIndexed = false;
-			DataStore[150].IsList = false;
-			DataStore[150].IsNullable = false;
-			DataStore[150].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[150].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
-			DataStore[150].PropertyName = @"ControlType";
-			DataStore[150].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[23];
-			DataStore[150].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
-			DataStore[150].Seal();
-			DataStore[183].AltText = @"Storagetype for 1:1 Relations";
+			DataStore[178].Description = @"Which visual is represented here";
+			DataStore[178].ExportGuid = new Guid("bdeb28ac-665e-4bb6-8f7b-0ae983d77d56");
+			DataStore[178].IsIndexed = false;
+			DataStore[178].IsList = false;
+			DataStore[178].IsNullable = false;
+			DataStore[178].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[178].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
+			DataStore[178].PropertyName = @"ControlType";
+			DataStore[178].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[35];
+			DataStore[178].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[19];
+			DataStore[178].Seal();
+			DataStore[179].AltText = null;
+			DataStore[179].CategoryTags = @"Summary,Main";
+			DataStore[179].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[168],
+});
+			DataStore[179].Description = @"The default visual type used for this PresentableModel";
+			DataStore[179].ExportGuid = new Guid("2ab3364a-561c-40f3-a83a-731ce0f1e2de");
+			DataStore[179].IsIndexed = false;
+			DataStore[179].IsList = false;
+			DataStore[179].IsNullable = false;
+			DataStore[179].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[179].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[8];
+			DataStore[179].PropertyName = @"DefaultVisualType";
+			DataStore[179].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[35];
+			DataStore[179].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[19];
+			DataStore[179].Seal();
+			DataStore[180].AltText = @"The Toolkit used by this Renderer";
+			DataStore[180].CategoryTags = null;
+			DataStore[180].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[158],
+});
+			DataStore[180].Description = @"The Toolkit used by this Renderer";
+			DataStore[180].ExportGuid = new Guid("83ab9087-52a5-400d-9e41-bd46fb5e7957");
+			DataStore[180].IsIndexed = false;
+			DataStore[180].IsList = false;
+			DataStore[180].IsNullable = false;
+			DataStore[180].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[180].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45];
+			DataStore[180].PropertyName = @"Platform";
+			DataStore[180].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[34];
+			DataStore[180].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
+			DataStore[180].Seal();
+			DataStore[181].AltText = null;
+			DataStore[181].CategoryTags = @"Summary";
+			DataStore[181].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[159],
+});
+			DataStore[181].Description = @"Which toolkit provides this View";
+			DataStore[181].ExportGuid = new Guid("2a798728-d79d-471f-be51-1f488beb8dc1");
+			DataStore[181].IsIndexed = false;
+			DataStore[181].IsList = false;
+			DataStore[181].IsNullable = false;
+			DataStore[181].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[181].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
+			DataStore[181].PropertyName = @"Toolkit";
+			DataStore[181].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[34];
+			DataStore[181].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
+			DataStore[181].Seal();
+			DataStore[183].AltText = @"Test Enumeration Property";
 			DataStore[183].CategoryTags = null;
-			DataStore[183].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[183].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[157],
 });
-			DataStore[183].Description = @"Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.";
-			DataStore[183].ExportGuid = new Guid("ba4f10fd-f7cf-4237-93a6-734e7e5c6b8a");
+			DataStore[183].Description = @"Test Enumeration Property";
+			DataStore[183].ExportGuid = new Guid("89470dda-4ac6-4bb4-9221-d16f80f8d95a");
 			DataStore[183].IsIndexed = false;
 			DataStore[183].IsList = false;
-			DataStore[183].IsNullable = true;
-			DataStore[183].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[183].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
-			DataStore[183].PropertyName = @"Storage";
-			DataStore[183].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[22];
-			DataStore[183].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[78];
+			DataStore[183].IsNullable = false;
+			DataStore[183].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[183].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
+			DataStore[183].PropertyName = @"TestEnumProp";
+			DataStore[183].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[31];
+			DataStore[183].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[14];
 			DataStore[183].Seal();
-			DataStore[219].AltText = @"Specifies how many instances may occur on this end of the relation.";
-			DataStore[219].CategoryTags = null;
-			DataStore[219].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[237],
+			DataStore[186].AltText = @"Test Enum Property";
+			DataStore[186].CategoryTags = null;
+			DataStore[186].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[161],
 });
-			DataStore[219].Description = @"Specifies how many instances may occur on this end of the relation.";
-			DataStore[219].ExportGuid = new Guid("cdbcada8-4deb-4c4f-a7a4-24716b0a0ccd");
-			DataStore[219].IsIndexed = false;
-			DataStore[219].IsList = false;
-			DataStore[219].IsNullable = false;
-			DataStore[219].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[219].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
-			DataStore[219].PropertyName = @"Multiplicity";
-			DataStore[219].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[21];
-			DataStore[219].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[81];
-			DataStore[219].Seal();
-			DataStore[228].AltText = null;
-			DataStore[228].CategoryTags = @"Summary";
-			DataStore[228].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[232],
-});
-			DataStore[228].Description = @"Which toolkit provides this View";
-			DataStore[228].ExportGuid = new Guid("2a798728-d79d-471f-be51-1f488beb8dc1");
-			DataStore[228].IsIndexed = false;
-			DataStore[228].IsList = false;
-			DataStore[228].IsNullable = false;
-			DataStore[228].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[228].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
-			DataStore[228].PropertyName = @"Toolkit";
-			DataStore[228].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
-			DataStore[228].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[53];
-			DataStore[228].Seal();
-			DataStore[229].AltText = null;
-			DataStore[229].CategoryTags = @"Summary";
-			DataStore[229].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[231],
-});
-			DataStore[229].Description = @"The visual type of this View";
-			DataStore[229].ExportGuid = new Guid("af9c1a03-ce46-4719-96c0-c38287d26ac0");
-			DataStore[229].IsIndexed = false;
-			DataStore[229].IsList = false;
-			DataStore[229].IsNullable = false;
-			DataStore[229].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[229].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
-			DataStore[229].PropertyName = @"VisualType";
-			DataStore[229].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[23];
-			DataStore[229].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
-			DataStore[229].Seal();
-			DataStore[233].AltText = null;
-			DataStore[233].CategoryTags = @"Summary,Main";
-			DataStore[233].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[228],
-});
-			DataStore[233].Description = @"The default visual type used for this PresentableModel";
-			DataStore[233].ExportGuid = new Guid("2ab3364a-561c-40f3-a83a-731ce0f1e2de");
-			DataStore[233].IsIndexed = false;
-			DataStore[233].IsList = false;
-			DataStore[233].IsNullable = false;
-			DataStore[233].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[233].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
-			DataStore[233].PropertyName = @"DefaultVisualType";
-			DataStore[233].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[23];
-			DataStore[233].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[55];
-			DataStore[233].Seal();
+			DataStore[186].Description = @"Test Enum Property";
+			DataStore[186].ExportGuid = new Guid("657b719f-dcda-4308-9587-4e2c10e7b60f");
+			DataStore[186].IsIndexed = false;
+			DataStore[186].IsList = false;
+			DataStore[186].IsNullable = false;
+			DataStore[186].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[186].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
+			DataStore[186].PropertyName = @"TestEnumProp";
+			DataStore[186].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[31];
+			DataStore[186].Enumeration = Kistl.App.Base.Enumeration__Implementation__Frozen.DataStore[14];
+			DataStore[186].Seal();
 	
 		}
 #region Serializer

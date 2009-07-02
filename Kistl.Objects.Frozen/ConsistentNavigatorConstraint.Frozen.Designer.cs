@@ -17,13 +17,13 @@ namespace Kistl.App.Base
     using Kistl.DalProvider.Frozen;
 
     /// <summary>
-    /// 
+    /// Checks whether a Navigator on a RelationEnd is consistent with the Relation's definition
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("MethodInvocationConstraint")]
-    public class MethodInvocationConstraint__Implementation__Frozen : Kistl.App.Base.Constraint__Implementation__Frozen, MethodInvocationConstraint
+    [System.Diagnostics.DebuggerDisplay("ConsistentNavigatorConstraint")]
+    public class ConsistentNavigatorConstraint__Implementation__Frozen : Kistl.App.Base.Constraint__Implementation__Frozen, ConsistentNavigatorConstraint
     {
     
-		public MethodInvocationConstraint__Implementation__Frozen()
+		public ConsistentNavigatorConstraint__Implementation__Frozen()
 		{
         }
 
@@ -35,9 +35,9 @@ namespace Kistl.App.Base
 		public override string GetErrorText(System.Object constrainedObject, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<string>();
-            if (OnGetErrorText_MethodInvocationConstraint != null)
+            if (OnGetErrorText_ConsistentNavigatorConstraint != null)
             {
-                OnGetErrorText_MethodInvocationConstraint(this, e, constrainedObject, constrainedValue);
+                OnGetErrorText_ConsistentNavigatorConstraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
@@ -45,7 +45,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetErrorText_Handler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint;
+		public event GetErrorText_Handler<ConsistentNavigatorConstraint> OnGetErrorText_ConsistentNavigatorConstraint;
 
 
 
@@ -56,9 +56,9 @@ namespace Kistl.App.Base
 		public override bool IsValid(System.Object constrainedObject, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<bool>();
-            if (OnIsValid_MethodInvocationConstraint != null)
+            if (OnIsValid_ConsistentNavigatorConstraint != null)
             {
-                OnIsValid_MethodInvocationConstraint(this, e, constrainedObject, constrainedValue);
+                OnIsValid_ConsistentNavigatorConstraint(this, e, constrainedObject, constrainedValue);
             }
             else
             {
@@ -66,13 +66,13 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event IsValid_Handler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint;
+		public event IsValid_Handler<ConsistentNavigatorConstraint> OnIsValid_ConsistentNavigatorConstraint;
 
 
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(MethodInvocationConstraint));
+			return new InterfaceType(typeof(ConsistentNavigatorConstraint));
 		}
 
         // tail template
@@ -83,47 +83,47 @@ namespace Kistl.App.Base
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_MethodInvocationConstraint != null)
+            if (OnToString_ConsistentNavigatorConstraint != null)
             {
-                OnToString_MethodInvocationConstraint(this, e);
+                OnToString_ConsistentNavigatorConstraint(this, e);
             }
             return e.Result;
         }
-        public event ToStringHandler<MethodInvocationConstraint> OnToString_MethodInvocationConstraint;
+        public event ToStringHandler<ConsistentNavigatorConstraint> OnToString_ConsistentNavigatorConstraint;
 
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_MethodInvocationConstraint != null) OnPreSave_MethodInvocationConstraint(this);
+            if (OnPreSave_ConsistentNavigatorConstraint != null) OnPreSave_ConsistentNavigatorConstraint(this);
         }
-        public event ObjectEventHandler<MethodInvocationConstraint> OnPreSave_MethodInvocationConstraint;
+        public event ObjectEventHandler<ConsistentNavigatorConstraint> OnPreSave_ConsistentNavigatorConstraint;
 
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_MethodInvocationConstraint != null) OnPostSave_MethodInvocationConstraint(this);
+            if (OnPostSave_ConsistentNavigatorConstraint != null) OnPostSave_ConsistentNavigatorConstraint(this);
         }
-        public event ObjectEventHandler<MethodInvocationConstraint> OnPostSave_MethodInvocationConstraint;
+        public event ObjectEventHandler<ConsistentNavigatorConstraint> OnPostSave_ConsistentNavigatorConstraint;
 
 
-        internal MethodInvocationConstraint__Implementation__Frozen(int id)
+        internal ConsistentNavigatorConstraint__Implementation__Frozen(int id)
             : base(id)
         { }
 
 
-		internal new static Dictionary<int, MethodInvocationConstraint__Implementation__Frozen> DataStore = new Dictionary<int, MethodInvocationConstraint__Implementation__Frozen>(1);
+		internal new static Dictionary<int, ConsistentNavigatorConstraint__Implementation__Frozen> DataStore = new Dictionary<int, ConsistentNavigatorConstraint__Implementation__Frozen>(1);
 		internal new static void CreateInstances()
 		{
-			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[20] = 
-			DataStore[20] = new MethodInvocationConstraint__Implementation__Frozen(20);
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[169] = 
+			DataStore[169] = new ConsistentNavigatorConstraint__Implementation__Frozen(169);
 
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[20].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[102];
-			DataStore[20].ExportGuid = new Guid("c7efdbc8-05fc-439e-ac38-ec850fac5fc3");
-			DataStore[20].Reason = @"Method.ObjectClass and InvokeOnObjectClass have to match.";
-			DataStore[20].Seal();
+			DataStore[169].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[125];
+			DataStore[169].ExportGuid = new Guid("8e88ca54-52d1-4a7f-a93e-112a31222285");
+			DataStore[169].Reason = @"Navigator must be consistent with RelationEnd information";
+			DataStore[169].Seal();
 	
 		}
 #region Serializer

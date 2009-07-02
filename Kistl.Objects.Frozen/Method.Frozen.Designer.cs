@@ -290,7 +290,7 @@ namespace Kistl.App.Base
 			{
 				case "Description":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(180).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(37).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -299,7 +299,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(257).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(110).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -308,7 +308,7 @@ namespace Kistl.App.Base
 				}
 				case "IsDisplayable":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(124).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(146).Constraints
 						.Where(c => !c.IsValid(this, this.IsDisplayable))
 						.Select(c => c.GetErrorText(this, this.IsDisplayable))
 						.ToArray();
@@ -317,7 +317,7 @@ namespace Kistl.App.Base
 				}
 				case "MethodInvokations":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(81).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(49).Constraints
 						.Where(c => !c.IsValid(this, this.MethodInvokations))
 						.Select(c => c.GetErrorText(this, this.MethodInvokations))
 						.ToArray();
@@ -326,7 +326,7 @@ namespace Kistl.App.Base
 				}
 				case "MethodName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(30).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(80).Constraints
 						.Where(c => !c.IsValid(this, this.MethodName))
 						.Select(c => c.GetErrorText(this, this.MethodName))
 						.ToArray();
@@ -335,7 +335,7 @@ namespace Kistl.App.Base
 				}
 				case "Module":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(73).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(98).Constraints
 						.Where(c => !c.IsValid(this, this.Module))
 						.Select(c => c.GetErrorText(this, this.Module))
 						.ToArray();
@@ -344,7 +344,7 @@ namespace Kistl.App.Base
 				}
 				case "ObjectClass":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(29).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(161).Constraints
 						.Where(c => !c.IsValid(this, this.ObjectClass))
 						.Select(c => c.GetErrorText(this, this.ObjectClass))
 						.ToArray();
@@ -353,7 +353,7 @@ namespace Kistl.App.Base
 				}
 				case "Parameter":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(96).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(46).Constraints
 						.Where(c => !c.IsValid(this, this.Parameter))
 						.Select(c => c.GetErrorText(this, this.Parameter))
 						.ToArray();
@@ -373,6 +373,8 @@ namespace Kistl.App.Base
 		internal static void CreateInstances()
 		{
 			DataStore[1] = new Method__Implementation__Frozen(1);
+
+			DataStore[2] = new Method__Implementation__Frozen(2);
 
 			DataStore[3] = new Method__Implementation__Frozen(3);
 
@@ -430,6 +432,12 @@ namespace Kistl.App.Base
 
 			DataStore[30] = new Method__Implementation__Frozen(30);
 
+			DataStore[31] = new Method__Implementation__Frozen(31);
+
+			DataStore[32] = new Method__Implementation__Frozen(32);
+
+			DataStore[33] = new Method__Implementation__Frozen(33);
+
 			DataStore[34] = new Method__Implementation__Frozen(34);
 
 			DataStore[35] = new Method__Implementation__Frozen(35);
@@ -454,11 +462,71 @@ namespace Kistl.App.Base
 
 			DataStore[45] = new Method__Implementation__Frozen(45);
 
+			DataStore[46] = new Method__Implementation__Frozen(46);
+
+			DataStore[47] = new Method__Implementation__Frozen(47);
+
+			DataStore[48] = new Method__Implementation__Frozen(48);
+
+			DataStore[49] = new Method__Implementation__Frozen(49);
+
+			DataStore[50] = new Method__Implementation__Frozen(50);
+
+			DataStore[51] = new Method__Implementation__Frozen(51);
+
+			DataStore[52] = new Method__Implementation__Frozen(52);
+
+			DataStore[53] = new Method__Implementation__Frozen(53);
+
+			DataStore[54] = new Method__Implementation__Frozen(54);
+
+			DataStore[55] = new Method__Implementation__Frozen(55);
+
+			DataStore[56] = new Method__Implementation__Frozen(56);
+
+			DataStore[57] = new Method__Implementation__Frozen(57);
+
+			DataStore[58] = new Method__Implementation__Frozen(58);
+
+			DataStore[59] = new Method__Implementation__Frozen(59);
+
+			DataStore[60] = new Method__Implementation__Frozen(60);
+
+			DataStore[61] = new Method__Implementation__Frozen(61);
+
+			DataStore[62] = new Method__Implementation__Frozen(62);
+
+			DataStore[63] = new Method__Implementation__Frozen(63);
+
+			DataStore[64] = new Method__Implementation__Frozen(64);
+
+			DataStore[65] = new Method__Implementation__Frozen(65);
+
+			DataStore[66] = new Method__Implementation__Frozen(66);
+
+			DataStore[67] = new Method__Implementation__Frozen(67);
+
+			DataStore[68] = new Method__Implementation__Frozen(68);
+
+			DataStore[69] = new Method__Implementation__Frozen(69);
+
+			DataStore[70] = new Method__Implementation__Frozen(70);
+
+			DataStore[71] = new Method__Implementation__Frozen(71);
+
+			DataStore[72] = new Method__Implementation__Frozen(72);
+
+			DataStore[73] = new Method__Implementation__Frozen(73);
+
 			DataStore[74] = new Method__Implementation__Frozen(74);
 
 			DataStore[75] = new Method__Implementation__Frozen(75);
 
 			DataStore[76] = new Method__Implementation__Frozen(76);
+
+			DataStore[77] = new Method__Implementation__Frozen(77);
+
+			DataStore[78] = new Method__Implementation__Frozen(78);
 
 			DataStore[79] = new Method__Implementation__Frozen(79);
 
@@ -490,6 +558,8 @@ namespace Kistl.App.Base
 
 			DataStore[93] = new Method__Implementation__Frozen(93);
 
+			DataStore[94] = new Method__Implementation__Frozen(94);
+
 			DataStore[95] = new Method__Implementation__Frozen(95);
 
 			DataStore[96] = new Method__Implementation__Frozen(96);
@@ -497,6 +567,20 @@ namespace Kistl.App.Base
 			DataStore[97] = new Method__Implementation__Frozen(97);
 
 			DataStore[98] = new Method__Implementation__Frozen(98);
+
+			DataStore[99] = new Method__Implementation__Frozen(99);
+
+			DataStore[100] = new Method__Implementation__Frozen(100);
+
+			DataStore[101] = new Method__Implementation__Frozen(101);
+
+			DataStore[102] = new Method__Implementation__Frozen(102);
+
+			DataStore[103] = new Method__Implementation__Frozen(103);
+
+			DataStore[104] = new Method__Implementation__Frozen(104);
+
+			DataStore[105] = new Method__Implementation__Frozen(105);
 
 			DataStore[106] = new Method__Implementation__Frozen(106);
 
@@ -524,1576 +608,1495 @@ namespace Kistl.App.Base
 
 			DataStore[118] = new Method__Implementation__Frozen(118);
 
+			DataStore[119] = new Method__Implementation__Frozen(119);
+
 			DataStore[120] = new Method__Implementation__Frozen(120);
 
 			DataStore[121] = new Method__Implementation__Frozen(121);
 
-			DataStore[123] = new Method__Implementation__Frozen(123);
-
-			DataStore[124] = new Method__Implementation__Frozen(124);
-
-			DataStore[125] = new Method__Implementation__Frozen(125);
-
-			DataStore[129] = new Method__Implementation__Frozen(129);
-
-			DataStore[130] = new Method__Implementation__Frozen(130);
-
-			DataStore[131] = new Method__Implementation__Frozen(131);
-
-			DataStore[132] = new Method__Implementation__Frozen(132);
-
-			DataStore[133] = new Method__Implementation__Frozen(133);
-
-			DataStore[134] = new Method__Implementation__Frozen(134);
-
-			DataStore[135] = new Method__Implementation__Frozen(135);
-
-			DataStore[136] = new Method__Implementation__Frozen(136);
-
-			DataStore[137] = new Method__Implementation__Frozen(137);
-
-			DataStore[138] = new Method__Implementation__Frozen(138);
-
-			DataStore[139] = new Method__Implementation__Frozen(139);
-
-			DataStore[144] = new Method__Implementation__Frozen(144);
-
-			DataStore[145] = new Method__Implementation__Frozen(145);
-
-			DataStore[146] = new Method__Implementation__Frozen(146);
-
-			DataStore[147] = new Method__Implementation__Frozen(147);
-
-			DataStore[148] = new Method__Implementation__Frozen(148);
-
-			DataStore[149] = new Method__Implementation__Frozen(149);
-
-			DataStore[150] = new Method__Implementation__Frozen(150);
-
-			DataStore[151] = new Method__Implementation__Frozen(151);
-
-			DataStore[155] = new Method__Implementation__Frozen(155);
-
-			DataStore[157] = new Method__Implementation__Frozen(157);
-
-			DataStore[158] = new Method__Implementation__Frozen(158);
-
-			DataStore[159] = new Method__Implementation__Frozen(159);
-
-			DataStore[160] = new Method__Implementation__Frozen(160);
-
-			DataStore[161] = new Method__Implementation__Frozen(161);
-
-			DataStore[162] = new Method__Implementation__Frozen(162);
-
-			DataStore[163] = new Method__Implementation__Frozen(163);
-
-			DataStore[164] = new Method__Implementation__Frozen(164);
-
-			DataStore[165] = new Method__Implementation__Frozen(165);
-
-			DataStore[166] = new Method__Implementation__Frozen(166);
-
-			DataStore[167] = new Method__Implementation__Frozen(167);
-
-			DataStore[168] = new Method__Implementation__Frozen(168);
-
-			DataStore[169] = new Method__Implementation__Frozen(169);
-
-			DataStore[170] = new Method__Implementation__Frozen(170);
-
-			DataStore[171] = new Method__Implementation__Frozen(171);
-
-			DataStore[172] = new Method__Implementation__Frozen(172);
-
-			DataStore[173] = new Method__Implementation__Frozen(173);
-
-			DataStore[174] = new Method__Implementation__Frozen(174);
-
-			DataStore[175] = new Method__Implementation__Frozen(175);
-
-			DataStore[177] = new Method__Implementation__Frozen(177);
-
-			DataStore[178] = new Method__Implementation__Frozen(178);
+			DataStore[122] = new Method__Implementation__Frozen(122);
 
 		}
 
 		internal static void FillDataStore() {
-			DataStore[1].Description = @"Returns the String representation of this Property Meta Object.";
-			DataStore[1].ExportGuid = new Guid("a9c1a6ff-ddb2-41a5-9ad0-460b8adea977");
-			DataStore[1].IsDisplayable = true;
-			DataStore[1].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(20) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[20],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[21],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[22],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[23],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[24],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[26],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[31],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[32],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[33],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[34],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[35],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[37],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[64],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[65],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[82],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[83],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[115],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[116],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[121],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[122],
+			DataStore[1].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[1].ExportGuid = new Guid("8df9b35f-2859-45a4-a68b-e294d9a759e5");
+			DataStore[1].IsDisplayable = false;
+			DataStore[1].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[1].MethodName = @"GetPropertyTypeString";
-			DataStore[1].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[1].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
-			DataStore[1].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[3],
+			DataStore[1].MethodName = @"ToString";
+			DataStore[1].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[1].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[11];
+			DataStore[1].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[1].Seal();
-			DataStore[3].Description = @"Testmethode zum Erstellen von Rechnungen mit Word";
-			DataStore[3].ExportGuid = new Guid("07b6746b-586f-43fb-ae7e-317cd1ace4bf");
-			DataStore[3].IsDisplayable = true;
-			DataStore[3].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[19],
+			DataStore[2].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[2].ExportGuid = new Guid("22e9873f-4f85-4e7e-ae98-8e101bff9e83");
+			DataStore[2].IsDisplayable = false;
+			DataStore[2].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[3].MethodName = @"RechnungErstellen";
+			DataStore[2].MethodName = @"PostSave";
+			DataStore[2].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[2].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[11];
+			DataStore[2].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[2].Seal();
+			DataStore[3].Description = @"";
+			DataStore[3].ExportGuid = new Guid("116f7c88-1972-4a12-a732-463981a36b34");
+			DataStore[3].IsDisplayable = false;
+			DataStore[3].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[96],
+});
+			DataStore[3].MethodName = @"ToString";
 			DataStore[3].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
-			DataStore[3].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
+			DataStore[3].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[8];
 			DataStore[3].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[3].Seal();
-			DataStore[4].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[4].ExportGuid = new Guid("462ba70e-0ad9-4648-bc52-affe08d96323");
+			DataStore[4].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[4].ExportGuid = new Guid("cc6add40-8c70-4729-bad5-b7f1b486aeb6");
 			DataStore[4].IsDisplayable = false;
 			DataStore[4].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[4].MethodName = @"PostSave";
-			DataStore[4].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[4].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
+			DataStore[4].MethodName = @"PreSave";
+			DataStore[4].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[4].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[11];
 			DataStore[4].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[4].Seal();
 			DataStore[5].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[5].ExportGuid = new Guid("3b60b40f-0ae1-4b82-8eda-7b86648bd46d");
+			DataStore[5].ExportGuid = new Guid("446112ed-b960-4faf-a802-28516949a1d0");
 			DataStore[5].IsDisplayable = false;
-			DataStore[5].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[5],
+			DataStore[5].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[5].MethodName = @"ToString";
-			DataStore[5].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[5].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
+			DataStore[5].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[5].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[12];
 			DataStore[5].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[5].Seal();
-			DataStore[6].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[6].ExportGuid = new Guid("36da6be6-490a-4284-a58f-d6ac54e0871f");
+			DataStore[6].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[6].ExportGuid = new Guid("037c1ed1-37d7-4142-bb77-a4bfb8682839");
 			DataStore[6].IsDisplayable = false;
-			DataStore[6].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[28],
+			DataStore[6].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[6].MethodName = @"PreSave";
-			DataStore[6].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[6].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
+			DataStore[6].MethodName = @"PostSave";
+			DataStore[6].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[6].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[12];
 			DataStore[6].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[6].Seal();
-			DataStore[7].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[7].ExportGuid = new Guid("12f061e3-155a-4c1d-8a0f-6281d93b2dd2");
+			DataStore[7].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[7].ExportGuid = new Guid("221fc474-9d41-4020-9b23-9bf6b62b78f1");
 			DataStore[7].IsDisplayable = false;
 			DataStore[7].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[7].MethodName = @"PostSave";
-			DataStore[7].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[7].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
+			DataStore[7].MethodName = @"PreSave";
+			DataStore[7].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[7].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[12];
 			DataStore[7].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[7].Seal();
-			DataStore[8].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[8].ExportGuid = new Guid("e3c26739-6d36-48af-b7c8-0dea1e95d481");
+			DataStore[8].Description = @"";
+			DataStore[8].ExportGuid = new Guid("14359316-9ee0-4971-a13a-089ef222ec1f");
 			DataStore[8].IsDisplayable = false;
 			DataStore[8].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[1],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[21],
 });
 			DataStore[8].MethodName = @"ToString";
-			DataStore[8].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[8].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[8].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[8].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[8].Seal();
-			DataStore[9].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[9].ExportGuid = new Guid("a6793e04-3be9-40a8-8326-6ab35d41e286");
+			DataStore[9].Description = @"";
+			DataStore[9].ExportGuid = new Guid("212de77d-2fe9-4500-a42d-4712d7011513");
 			DataStore[9].IsDisplayable = false;
-			DataStore[9].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[29],
+			DataStore[9].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[9].MethodName = @"PreSave";
-			DataStore[9].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[9].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
+			DataStore[9].MethodName = @"PostSave";
+			DataStore[9].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[9].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[8];
 			DataStore[9].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[9].Seal();
-			DataStore[10].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[10].ExportGuid = new Guid("2880b747-86ae-4190-89d9-17eb73679bd4");
+			DataStore[10].Description = @"";
+			DataStore[10].ExportGuid = new Guid("869cbcce-c822-4b86-89ce-bcb11a7b2bb6");
 			DataStore[10].IsDisplayable = false;
-			DataStore[10].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[10].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(8) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[2],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[3],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[5],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[17],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[24],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[28],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[29],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[102],
 });
-			DataStore[10].MethodName = @"PostSave";
-			DataStore[10].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[10].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
-			DataStore[10].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[10].MethodName = @"IsValid";
+			DataStore[10].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[10].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
+			DataStore[10].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(3) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[2],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[1],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[3],
 });
 			DataStore[10].Seal();
 			DataStore[11].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[11].ExportGuid = new Guid("58e0713d-ff39-4b2f-9c67-7a431a23cecb");
+			DataStore[11].ExportGuid = new Guid("8be7722e-a164-4428-9940-546cb9006754");
 			DataStore[11].IsDisplayable = false;
-			DataStore[11].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+			DataStore[11].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(6) {
 Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[4],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[7],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[18],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[26],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[30],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[100],
 });
 			DataStore[11].MethodName = @"ToString";
-			DataStore[11].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[11].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
+			DataStore[11].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[11].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
 			DataStore[11].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[11].Seal();
-			DataStore[12].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[12].ExportGuid = new Guid("c237dd74-2b0a-4401-bd3c-0bb0c9a56d4f");
+			DataStore[12].Description = @"";
+			DataStore[12].ExportGuid = new Guid("53e9616d-684b-467d-b6c8-89457034cc62");
 			DataStore[12].IsDisplayable = false;
-			DataStore[12].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[30],
+			DataStore[12].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[12].MethodName = @"PreSave";
-			DataStore[12].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[12].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
+			DataStore[12].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[12].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[12].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[12].Seal();
-			DataStore[13].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[13].ExportGuid = new Guid("224eb140-9775-4581-a1b9-0f641c387888");
+			DataStore[13].Description = @"";
+			DataStore[13].ExportGuid = new Guid("c79b99e8-4b0c-4bbb-b8d4-feae09c5f2a7");
 			DataStore[13].IsDisplayable = false;
 			DataStore[13].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[13].MethodName = @"PostSave";
-			DataStore[13].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[13].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
+			DataStore[13].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[13].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
 			DataStore[13].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[13].Seal();
-			DataStore[14].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[14].ExportGuid = new Guid("58c48d95-c9fa-4680-88a3-841160e9e829");
+			DataStore[14].Description = @"";
+			DataStore[14].ExportGuid = new Guid("2056bc89-f6c6-4c27-96aa-12790af6fb24");
 			DataStore[14].IsDisplayable = false;
-			DataStore[14].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[17],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[119],
+			DataStore[14].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(6) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[1],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[6],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[23],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[25],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[27],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[101],
 });
-			DataStore[14].MethodName = @"ToString";
-			DataStore[14].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[14].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
-			DataStore[14].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[14].MethodName = @"GetErrorText";
+			DataStore[14].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[14].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
+			DataStore[14].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(3) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[4],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[6],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[7],
 });
 			DataStore[14].Seal();
-			DataStore[15].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[15].ExportGuid = new Guid("44412b16-8116-49dc-ac5b-94fdfb8f37dd");
+			DataStore[15].Description = @"";
+			DataStore[15].ExportGuid = new Guid("244fd20f-7562-43b2-8c74-76bf176f5f69");
 			DataStore[15].IsDisplayable = false;
 			DataStore[15].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[15].MethodName = @"PreSave";
-			DataStore[15].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[15].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
+			DataStore[15].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[15].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[8];
 			DataStore[15].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[15].Seal();
-			DataStore[16].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[16].ExportGuid = new Guid("0ad9d18b-9d12-41a7-8622-19f2bc8c08bd");
+			DataStore[16].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[16].ExportGuid = new Guid("f08f3262-d4a1-4002-9c2b-e1c01e334a90");
 			DataStore[16].IsDisplayable = false;
 			DataStore[16].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[16].MethodName = @"PostSave";
-			DataStore[16].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[16].MethodName = @"PreSave";
+			DataStore[16].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[16].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
 			DataStore[16].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[16].Seal();
-			DataStore[17].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[17].ExportGuid = new Guid("c0fa86cd-6ed0-4477-8ece-a505221b51f1");
+			DataStore[17].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[17].ExportGuid = new Guid("888d7974-13e3-4aad-b7ff-ebcae977eb44");
 			DataStore[17].IsDisplayable = false;
-			DataStore[17].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[2],
+			DataStore[17].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[17].MethodName = @"ToString";
-			DataStore[17].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[17].MethodName = @"PostSave";
+			DataStore[17].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[17].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
 			DataStore[17].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[17].Seal();
 			DataStore[18].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[18].ExportGuid = new Guid("f96aa058-87eb-4488-b678-cd48dddfa97d");
+			DataStore[18].ExportGuid = new Guid("a3e127c5-154b-4ae8-83c3-8641845ebdeb");
 			DataStore[18].IsDisplayable = false;
 			DataStore[18].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[18].MethodName = @"PreSave";
-			DataStore[18].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[18].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
+			DataStore[18].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[18].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[13];
 			DataStore[18].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[18].Seal();
-			DataStore[19].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[19].ExportGuid = new Guid("8b6e6d6d-2b58-4675-9fbd-fb9cd0c2cab9");
-			DataStore[19].IsDisplayable = false;
-			DataStore[19].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[19].Description = @"";
+			DataStore[19].ExportGuid = new Guid("80e69c37-0297-4d0c-be08-158ab7a919ff");
+			DataStore[19].IsDisplayable = true;
+			DataStore[19].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[90],
 });
-			DataStore[19].MethodName = @"PostSave";
-			DataStore[19].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[19].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
-			DataStore[19].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[19].MethodName = @"PrepareDefault";
+			DataStore[19].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[19].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[17];
+			DataStore[19].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[5],
 });
 			DataStore[19].Seal();
-			DataStore[20].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[20].ExportGuid = new Guid("fdac7e4e-c83f-48b4-99bc-203094af6822");
+			DataStore[20].Description = @"";
+			DataStore[20].ExportGuid = new Guid("09fc8d6c-2abb-4aab-8a96-9e85a98c8879");
 			DataStore[20].IsDisplayable = false;
-			DataStore[20].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[9],
+			DataStore[20].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[20].MethodName = @"ToString";
-			DataStore[20].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[20].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
+			DataStore[20].MethodName = @"PreSave";
+			DataStore[20].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[20].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
 			DataStore[20].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[20].Seal();
 			DataStore[21].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[21].ExportGuid = new Guid("3fbd3ccf-5ed8-4200-8ef9-fc8e1a02444a");
+			DataStore[21].ExportGuid = new Guid("9a200b36-c9be-4e8a-bf6d-b98cacab62c5");
 			DataStore[21].IsDisplayable = false;
-			DataStore[21].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[63],
+			DataStore[21].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[21].MethodName = @"PreSave";
-			DataStore[21].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[21].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
+			DataStore[21].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[21].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[17];
 			DataStore[21].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[21].Seal();
 			DataStore[22].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[22].ExportGuid = new Guid("f1d2c2ef-417f-4c0c-9405-ab2741472d89");
+			DataStore[22].ExportGuid = new Guid("9ffc17d1-6fd2-42f5-84a4-5b4ea92caa7a");
 			DataStore[22].IsDisplayable = false;
 			DataStore[22].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[22].MethodName = @"PostSave";
-			DataStore[22].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[22].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
+			DataStore[22].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[22].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[17];
 			DataStore[22].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[22].Seal();
-			DataStore[23].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[23].ExportGuid = new Guid("d347e78c-8447-49d1-9fd0-b1e8a247a172");
+			DataStore[23].Description = @"";
+			DataStore[23].ExportGuid = new Guid("1c5a3190-16d9-42ec-9502-486b88edd406");
 			DataStore[23].IsDisplayable = false;
-			DataStore[23].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[10],
+			DataStore[23].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[23].MethodName = @"ToString";
-			DataStore[23].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[23].MethodName = @"PostSave";
+			DataStore[23].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[23].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
 			DataStore[23].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[23].Seal();
-			DataStore[24].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[24].ExportGuid = new Guid("83fd5e3a-f432-407b-837f-5e118ea076c6");
+			DataStore[24].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[24].ExportGuid = new Guid("c32efc1f-b1d4-474f-b0d1-2d4262781e46");
 			DataStore[24].IsDisplayable = false;
 			DataStore[24].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[24].MethodName = @"PreSave";
-			DataStore[24].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[24].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
+			DataStore[24].MethodName = @"PostSave";
+			DataStore[24].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[24].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
 			DataStore[24].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[24].Seal();
-			DataStore[25].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[25].ExportGuid = new Guid("5da7d75f-db67-4212-8c4b-e4e2f11b7ec4");
+			DataStore[25].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[25].ExportGuid = new Guid("5a686d39-0880-49a6-a6eb-c355cdf23299");
 			DataStore[25].IsDisplayable = false;
 			DataStore[25].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[25].MethodName = @"PostSave";
-			DataStore[25].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[25].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
+			DataStore[25].MethodName = @"PreSave";
+			DataStore[25].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[25].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
 			DataStore[25].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[25].Seal();
-			DataStore[26].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[26].ExportGuid = new Guid("f6b89a1d-3690-449f-a263-dd819bca71b0");
+			DataStore[26].Description = @"";
+			DataStore[26].ExportGuid = new Guid("d6a377ca-66e6-473d-a7e9-b0cdead60a4b");
 			DataStore[26].IsDisplayable = false;
 			DataStore[26].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[11],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[99],
 });
 			DataStore[26].MethodName = @"ToString";
-			DataStore[26].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[26].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
+			DataStore[26].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[26].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
 			DataStore[26].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[26].Seal();
-			DataStore[27].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[27].ExportGuid = new Guid("750b2239-a9c0-4545-bca5-a3f63404fb78");
+			DataStore[27].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[27].ExportGuid = new Guid("c5e8aa2f-33a4-4f85-a51b-e7860e1cf068");
 			DataStore[27].IsDisplayable = false;
-			DataStore[27].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[27].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[97],
 });
-			DataStore[27].MethodName = @"PreSave";
-			DataStore[27].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[27].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
+			DataStore[27].MethodName = @"ToString";
+			DataStore[27].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[27].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
 			DataStore[27].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[27].Seal();
-			DataStore[28].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[28].ExportGuid = new Guid("1ae41a97-b201-47b6-ab5e-367434754856");
+			DataStore[28].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[28].ExportGuid = new Guid("4497e829-e3c3-47ee-9ccd-7c6c0adfe880");
 			DataStore[28].IsDisplayable = false;
 			DataStore[28].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[28].MethodName = @"PostSave";
-			DataStore[28].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[28].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
+			DataStore[28].MethodName = @"PreSave";
+			DataStore[28].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[28].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[15];
 			DataStore[28].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[28].Seal();
-			DataStore[29].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[29].ExportGuid = new Guid("08f8382a-2604-43f7-b5b6-2e4ded0b64b9");
+			DataStore[29].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[29].ExportGuid = new Guid("7a12f380-a8a6-4519-abc2-3ca78aa328ea");
 			DataStore[29].IsDisplayable = false;
-			DataStore[29].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[12],
+			DataStore[29].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[29].MethodName = @"ToString";
-			DataStore[29].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[29].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
+			DataStore[29].MethodName = @"PostSave";
+			DataStore[29].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[29].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[13];
 			DataStore[29].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[29].Seal();
-			DataStore[30].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[30].ExportGuid = new Guid("b8d8840d-001f-4a08-b881-fe286073a9ce");
+			DataStore[30].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[30].ExportGuid = new Guid("5e3fdc13-b4e8-4ff3-88b0-f4faba4b20c2");
 			DataStore[30].IsDisplayable = false;
-			DataStore[30].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[45],
+			DataStore[30].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[30].MethodName = @"PreSave";
-			DataStore[30].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[30].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
+			DataStore[30].MethodName = @"ToString";
+			DataStore[30].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[30].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[13];
 			DataStore[30].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[30].Seal();
+			DataStore[31].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[31].ExportGuid = new Guid("2a053aba-cd8b-4884-b07f-604d2ea2b1e3");
+			DataStore[31].IsDisplayable = false;
+			DataStore[31].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[31].MethodName = @"ToString";
+			DataStore[31].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[31].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[15];
+			DataStore[31].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[31].Seal();
+			DataStore[32].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[32].ExportGuid = new Guid("1cb6f35d-68e8-4536-8b6d-1ce2cd4d1218");
+			DataStore[32].IsDisplayable = false;
+			DataStore[32].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[32].MethodName = @"ToString";
+			DataStore[32].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[32].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[17];
+			DataStore[32].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[32].Seal();
+			DataStore[33].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[33].ExportGuid = new Guid("fa736d90-0368-41c2-8184-f688f000a9a3");
+			DataStore[33].IsDisplayable = false;
+			DataStore[33].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[33].MethodName = @"PostSave";
+			DataStore[33].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[33].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[15];
+			DataStore[33].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[33].Seal();
 			DataStore[34].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[34].ExportGuid = new Guid("5dbabf3a-ccb5-4fe5-bd1c-cf414f16b7d2");
+			DataStore[34].ExportGuid = new Guid("2880b747-86ae-4190-89d9-17eb73679bd4");
 			DataStore[34].IsDisplayable = false;
 			DataStore[34].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[34].MethodName = @"PostSave";
-			DataStore[34].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[34].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26];
+			DataStore[34].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[34].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[22];
 			DataStore[34].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[34].Seal();
-			DataStore[35].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[35].ExportGuid = new Guid("09844b3f-dd1d-44a3-875b-7c2a0dc00061");
+			DataStore[35].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[35].ExportGuid = new Guid("5dbabf3a-ccb5-4fe5-bd1c-cf414f16b7d2");
 			DataStore[35].IsDisplayable = false;
-			DataStore[35].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[14],
+			DataStore[35].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[35].MethodName = @"ToString";
-			DataStore[35].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[35].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26];
+			DataStore[35].MethodName = @"PostSave";
+			DataStore[35].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[35].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48];
 			DataStore[35].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[35].Seal();
 			DataStore[36].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[36].ExportGuid = new Guid("b8ad511e-a8ac-4fa6-b345-95add0c531d0");
+			DataStore[36].ExportGuid = new Guid("83fd5e3a-f432-407b-837f-5e118ea076c6");
 			DataStore[36].IsDisplayable = false;
 			DataStore[36].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[36].MethodName = @"PreSave";
-			DataStore[36].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[36].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26];
+			DataStore[36].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[36].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47];
 			DataStore[36].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[36].Seal();
 			DataStore[37].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[37].ExportGuid = new Guid("b075469b-54cf-4d91-8c7c-82840e0a7acf");
+			DataStore[37].ExportGuid = new Guid("8b6e6d6d-2b58-4675-9fbd-fb9cd0c2cab9");
 			DataStore[37].IsDisplayable = false;
 			DataStore[37].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[37].MethodName = @"PostSave";
-			DataStore[37].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[37].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[27];
+			DataStore[37].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[37].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[49];
 			DataStore[37].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[37].Seal();
-			DataStore[38].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[38].ExportGuid = new Guid("240df30c-9d8e-468f-a82b-192946d08029");
+			DataStore[38].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[38].ExportGuid = new Guid("750b2239-a9c0-4545-bca5-a3f63404fb78");
 			DataStore[38].IsDisplayable = false;
-			DataStore[38].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[15],
+			DataStore[38].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[38].MethodName = @"ToString";
-			DataStore[38].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[38].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[27];
+			DataStore[38].MethodName = @"PreSave";
+			DataStore[38].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[38].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
 			DataStore[38].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[38].Seal();
-			DataStore[39].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[39].ExportGuid = new Guid("56fe8d0d-5f03-4b03-83a6-5e6e57f27e02");
+			DataStore[39].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[39].ExportGuid = new Guid("09844b3f-dd1d-44a3-875b-7c2a0dc00061");
 			DataStore[39].IsDisplayable = false;
-			DataStore[39].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[39].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[45],
 });
-			DataStore[39].MethodName = @"PreSave";
-			DataStore[39].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[39].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[27];
+			DataStore[39].MethodName = @"ToString";
+			DataStore[39].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[39].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48];
 			DataStore[39].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[39].Seal();
-			DataStore[40].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[40].ExportGuid = new Guid("c2b4a0b8-a8cd-4f8a-8395-fdf239f4fcf3");
+			DataStore[40].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[40].ExportGuid = new Guid("b8ad511e-a8ac-4fa6-b345-95add0c531d0");
 			DataStore[40].IsDisplayable = false;
 			DataStore[40].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[40].MethodName = @"PostSave";
-			DataStore[40].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[40].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
+			DataStore[40].MethodName = @"PreSave";
+			DataStore[40].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[40].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48];
 			DataStore[40].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[40].Seal();
 			DataStore[41].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[41].ExportGuid = new Guid("dd77ef1e-2122-4da9-9c35-21de9e23890d");
+			DataStore[41].ExportGuid = new Guid("58e0713d-ff39-4b2f-9c67-7a431a23cecb");
 			DataStore[41].IsDisplayable = false;
 			DataStore[41].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[16],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[39],
 });
 			DataStore[41].MethodName = @"ToString";
-			DataStore[41].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[41].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
+			DataStore[41].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[41].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[22];
 			DataStore[41].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[41].Seal();
-			DataStore[42].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[42].ExportGuid = new Guid("99a21155-965d-4f10-9253-7502343fe803");
-			DataStore[42].IsDisplayable = false;
-			DataStore[42].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[42].Description = @"Testmethode zum Erstellen von Rechnungen mit Word";
+			DataStore[42].ExportGuid = new Guid("07b6746b-586f-43fb-ae7e-317cd1ace4bf");
+			DataStore[42].IsDisplayable = true;
+			DataStore[42].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[44],
 });
-			DataStore[42].MethodName = @"PreSave";
+			DataStore[42].MethodName = @"RechnungErstellen";
 			DataStore[42].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[42].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
+			DataStore[42].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
 			DataStore[42].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[42].Seal();
 			DataStore[43].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[43].ExportGuid = new Guid("3fb6522d-0423-4fd4-afae-0027f8a7f4fc");
+			DataStore[43].ExportGuid = new Guid("5da7d75f-db67-4212-8c4b-e4e2f11b7ec4");
 			DataStore[43].IsDisplayable = false;
 			DataStore[43].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[43].MethodName = @"PostSave";
-			DataStore[43].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[43].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[43].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[43].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
 			DataStore[43].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[43].Seal();
 			DataStore[44].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[44].ExportGuid = new Guid("8aaf37a7-14b3-4118-b17d-24595a0bc008");
+			DataStore[44].ExportGuid = new Guid("f6b89a1d-3690-449f-a263-dd819bca71b0");
 			DataStore[44].IsDisplayable = false;
 			DataStore[44].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[6],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[42],
 });
 			DataStore[44].MethodName = @"ToString";
-			DataStore[44].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[44].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[44].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[44].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
 			DataStore[44].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[44].Seal();
-			DataStore[45].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[45].ExportGuid = new Guid("cc95f806-75eb-4c93-a50c-4c2cb1a27ddc");
+			DataStore[45].Description = @"";
+			DataStore[45].ExportGuid = new Guid("b8a84c7c-31fe-403c-be69-4e67c5afb5bf");
 			DataStore[45].IsDisplayable = false;
 			DataStore[45].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[45].MethodName = @"PreSave";
-			DataStore[45].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[45].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[45].MethodName = @"PostSave";
+			DataStore[45].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[45].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[23];
 			DataStore[45].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[45].Seal();
-			DataStore[74].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[74].ExportGuid = new Guid("a90eb5bd-8ce6-4234-bdd7-2d012440cb80");
+			DataStore[46].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[46].ExportGuid = new Guid("c237dd74-2b0a-4401-bd3c-0bb0c9a56d4f");
+			DataStore[46].IsDisplayable = false;
+			DataStore[46].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[84],
+});
+			DataStore[46].MethodName = @"PreSave";
+			DataStore[46].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[46].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[22];
+			DataStore[46].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[46].Seal();
+			DataStore[47].Description = @"";
+			DataStore[47].ExportGuid = new Guid("5dc1d052-9471-415f-a2ff-d7e6bdb392a4");
+			DataStore[47].IsDisplayable = false;
+			DataStore[47].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[47].MethodName = @"PreSave";
+			DataStore[47].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[47].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[23];
+			DataStore[47].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[47].Seal();
+			DataStore[48].Description = @"";
+			DataStore[48].ExportGuid = new Guid("e4fa2c31-6590-4a44-8c62-4bd62c2b9e4f");
+			DataStore[48].IsDisplayable = false;
+			DataStore[48].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[48].MethodName = @"ToString";
+			DataStore[48].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[48].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[23];
+			DataStore[48].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[48].Seal();
+			DataStore[49].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[49].ExportGuid = new Guid("f713f370-657c-4827-bb20-b9bf1cab2f2a");
+			DataStore[49].IsDisplayable = false;
+			DataStore[49].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[49].MethodName = @"PostSave";
+			DataStore[49].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[49].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[21];
+			DataStore[49].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[49].Seal();
+			DataStore[50].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[50].ExportGuid = new Guid("84479312-f094-4281-8b7a-313e241b5719");
+			DataStore[50].IsDisplayable = false;
+			DataStore[50].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[50].MethodName = @"PostSave";
+			DataStore[50].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[50].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
+			DataStore[50].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[50].Seal();
+			DataStore[51].Description = @"testmethod";
+			DataStore[51].ExportGuid = new Guid("4d28b129-0786-4add-bddd-ff026c107f5e");
+			DataStore[51].IsDisplayable = true;
+			DataStore[51].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[51].MethodName = @"TestMethod";
+			DataStore[51].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[51].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
+			DataStore[51].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[31],
+});
+			DataStore[51].Seal();
+			DataStore[52].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[52].ExportGuid = new Guid("7e6774ad-ab16-451d-8a73-113ac6a71d4b");
+			DataStore[52].IsDisplayable = false;
+			DataStore[52].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[52].MethodName = @"PreSave";
+			DataStore[52].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[52].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
+			DataStore[52].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[52].Seal();
+			DataStore[53].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[53].ExportGuid = new Guid("588cd551-328c-4c73-85a2-64883bbbe71d");
+			DataStore[53].IsDisplayable = false;
+			DataStore[53].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[53].MethodName = @"ToString";
+			DataStore[53].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[53].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
+			DataStore[53].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[53].Seal();
+			DataStore[54].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[54].ExportGuid = new Guid("56fe8d0d-5f03-4b03-83a6-5e6e57f27e02");
+			DataStore[54].IsDisplayable = false;
+			DataStore[54].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[54].MethodName = @"PreSave";
+			DataStore[54].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[54].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52];
+			DataStore[54].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[54].Seal();
+			DataStore[55].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[55].ExportGuid = new Guid("ce8176e6-952c-492c-840f-f15979b100e5");
+			DataStore[55].IsDisplayable = false;
+			DataStore[55].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[11],
+});
+			DataStore[55].MethodName = @"ToString";
+			DataStore[55].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[55].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[21];
+			DataStore[55].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[55].Seal();
+			DataStore[56].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[56].ExportGuid = new Guid("b075469b-54cf-4d91-8c7c-82840e0a7acf");
+			DataStore[56].IsDisplayable = false;
+			DataStore[56].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[56].MethodName = @"PostSave";
+			DataStore[56].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[56].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52];
+			DataStore[56].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[56].Seal();
+			DataStore[57].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[57].ExportGuid = new Guid("240df30c-9d8e-468f-a82b-192946d08029");
+			DataStore[57].IsDisplayable = false;
+			DataStore[57].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[83],
+});
+			DataStore[57].MethodName = @"ToString";
+			DataStore[57].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[57].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52];
+			DataStore[57].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[57].Seal();
+			DataStore[58].Description = @"Returns the Return Parameter Meta Object of this Method Meta Object.";
+			DataStore[58].ExportGuid = new Guid("687f24ab-be66-4ac8-8d43-b033cf05455d");
+			DataStore[58].IsDisplayable = true;
+			DataStore[58].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[14],
+});
+			DataStore[58].MethodName = @"GetReturnParameter";
+			DataStore[58].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[58].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[49];
+			DataStore[58].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[22],
+});
+			DataStore[58].Seal();
+			DataStore[59].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[59].ExportGuid = new Guid("3fb6522d-0423-4fd4-afae-0027f8a7f4fc");
+			DataStore[59].IsDisplayable = false;
+			DataStore[59].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[59].MethodName = @"PostSave";
+			DataStore[59].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[59].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50];
+			DataStore[59].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[59].Seal();
+			DataStore[60].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[60].ExportGuid = new Guid("fdac7e4e-c83f-48b4-99bc-203094af6822");
+			DataStore[60].IsDisplayable = false;
+			DataStore[60].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[31],
+});
+			DataStore[60].MethodName = @"ToString";
+			DataStore[60].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[60].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[49];
+			DataStore[60].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[60].Seal();
+			DataStore[61].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[61].ExportGuid = new Guid("3fbd3ccf-5ed8-4200-8ef9-fc8e1a02444a");
+			DataStore[61].IsDisplayable = false;
+			DataStore[61].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[71],
+});
+			DataStore[61].MethodName = @"PreSave";
+			DataStore[61].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[61].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[49];
+			DataStore[61].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[61].Seal();
+			DataStore[62].Description = null;
+			DataStore[62].ExportGuid = new Guid("3a22f806-b740-4f92-bb5f-9564bd2bdd90");
+			DataStore[62].IsDisplayable = true;
+			DataStore[62].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[82],
+});
+			DataStore[62].MethodName = @"GetCodeTemplate";
+			DataStore[62].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[62].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50];
+			DataStore[62].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[12],
+});
+			DataStore[62].Seal();
+			DataStore[63].Description = null;
+			DataStore[63].ExportGuid = new Guid("674ffef4-fa90-44b5-af9d-2369794df1e8");
+			DataStore[63].IsDisplayable = true;
+			DataStore[63].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[85],
+});
+			DataStore[63].MethodName = @"GetMemberName";
+			DataStore[63].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[63].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50];
+			DataStore[63].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[13],
+});
+			DataStore[63].Seal();
+			DataStore[64].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[64].ExportGuid = new Guid("8aaf37a7-14b3-4118-b17d-24595a0bc008");
+			DataStore[64].IsDisplayable = false;
+			DataStore[64].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[32],
+});
+			DataStore[64].MethodName = @"ToString";
+			DataStore[64].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[64].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50];
+			DataStore[64].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[64].Seal();
+			DataStore[65].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[65].ExportGuid = new Guid("cc95f806-75eb-4c93-a50c-4c2cb1a27ddc");
+			DataStore[65].IsDisplayable = false;
+			DataStore[65].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[65].MethodName = @"PreSave";
+			DataStore[65].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[65].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50];
+			DataStore[65].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[65].Seal();
+			DataStore[66].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[66].ExportGuid = new Guid("fb9396ef-02a2-4a50-896d-4d8b88abaa20");
+			DataStore[66].IsDisplayable = false;
+			DataStore[66].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[66].MethodName = @"PreSave";
+			DataStore[66].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[66].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26];
+			DataStore[66].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[66].Seal();
+			DataStore[67].Description = null;
+			DataStore[67].ExportGuid = new Guid("761fdc58-066d-47a1-be23-7312e5ae4d11");
+			DataStore[67].IsDisplayable = false;
+			DataStore[67].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[67].MethodName = @"ToString";
+			DataStore[67].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[67].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[38];
+			DataStore[67].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[67].Seal();
+			DataStore[68].Description = @"";
+			DataStore[68].ExportGuid = new Guid("d77a3b06-be2f-4d71-96b2-c3905df83b2b");
+			DataStore[68].IsDisplayable = false;
+			DataStore[68].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[68].MethodName = @"PostSave";
+			DataStore[68].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[68].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[37];
+			DataStore[68].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[68].Seal();
+			DataStore[69].Description = null;
+			DataStore[69].ExportGuid = new Guid("bf531fd6-4acf-4965-83d3-e8e2a6e38078");
+			DataStore[69].IsDisplayable = false;
+			DataStore[69].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[69].MethodName = @"PostSave";
+			DataStore[69].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[69].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[38];
+			DataStore[69].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[69].Seal();
+			DataStore[70].Description = null;
+			DataStore[70].ExportGuid = new Guid("d2869eb7-ba9a-425c-8715-124dbdc9822e");
+			DataStore[70].IsDisplayable = false;
+			DataStore[70].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[70].MethodName = @"PreSave";
+			DataStore[70].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[70].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[38];
+			DataStore[70].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[70].Seal();
+			DataStore[71].Description = @"Regenerates the stored list of TypeRefs from the loaded assembly";
+			DataStore[71].ExportGuid = new Guid("818507bf-73f7-4e57-9730-ba3c42ddc418");
+			DataStore[71].IsDisplayable = true;
+			DataStore[71].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[22],
+});
+			DataStore[71].MethodName = @"RegenerateTypeRefs";
+			DataStore[71].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[71].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[71].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[71].Seal();
+			DataStore[72].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[72].ExportGuid = new Guid("99a21155-965d-4f10-9253-7502343fe803");
+			DataStore[72].IsDisplayable = false;
+			DataStore[72].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[72].MethodName = @"PreSave";
+			DataStore[72].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[72].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[72].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[72].Seal();
+			DataStore[73].Description = @"";
+			DataStore[73].ExportGuid = new Guid("1edd2a6f-5f08-44d2-a6f9-a5064ea6ae05");
+			DataStore[73].IsDisplayable = false;
+			DataStore[73].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[73].MethodName = @"ToString";
+			DataStore[73].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[73].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[37];
+			DataStore[73].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[73].Seal();
+			DataStore[74].Description = @"";
+			DataStore[74].ExportGuid = new Guid("4e9f29da-7e5d-460c-a12c-8078c0be085e");
 			DataStore[74].IsDisplayable = false;
 			DataStore[74].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[74].MethodName = @"ToString";
-			DataStore[74].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[74].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
+			DataStore[74].MethodName = @"PreSave";
+			DataStore[74].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[74].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[37];
 			DataStore[74].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[74].Seal();
-			DataStore[75].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[75].ExportGuid = new Guid("6f5acdb5-e439-44e4-978c-bcecf01979ac");
+			DataStore[75].Description = @"";
+			DataStore[75].ExportGuid = new Guid("033f91ab-9870-466c-a403-e7430d777f30");
 			DataStore[75].IsDisplayable = false;
 			DataStore[75].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[75].MethodName = @"PreSave";
-			DataStore[75].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[75].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
-			DataStore[75].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[75].MethodName = @"ShowMessage";
+			DataStore[75].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[75].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45];
+			DataStore[75].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[14],
 });
 			DataStore[75].Seal();
-			DataStore[76].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[76].ExportGuid = new Guid("2f1b878a-2e75-4a28-855c-038ea402a147");
+			DataStore[76].Description = @"";
+			DataStore[76].ExportGuid = new Guid("e81ddadd-8f10-45b4-b891-662a1cfd5f36");
 			DataStore[76].IsDisplayable = false;
 			DataStore[76].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[76].MethodName = @"PostSave";
-			DataStore[76].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[76].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
+			DataStore[76].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[76].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
 			DataStore[76].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[76].Seal();
-			DataStore[79].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[79].ExportGuid = new Guid("6df3da83-92f4-4f08-a073-9af9acd679f1");
+			DataStore[77].Description = @"get the referenced <see cref=""System.Type""/>";
+			DataStore[77].ExportGuid = new Guid("f99da656-46fc-4846-8655-10f534a00102");
+			DataStore[77].IsDisplayable = false;
+			DataStore[77].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[16],
+});
+			DataStore[77].MethodName = @"AsType";
+			DataStore[77].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[77].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
+			DataStore[77].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(2) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[11],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[8],
+});
+			DataStore[77].Seal();
+			DataStore[78].Description = @"";
+			DataStore[78].ExportGuid = new Guid("7c84c750-4d64-49eb-b02a-1ed9814a5836");
+			DataStore[78].IsDisplayable = false;
+			DataStore[78].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[19],
+});
+			DataStore[78].MethodName = @"ToString";
+			DataStore[78].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[78].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
+			DataStore[78].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[78].Seal();
+			DataStore[79].Description = @"";
+			DataStore[79].ExportGuid = new Guid("9eca3db8-3fa3-42bc-b074-8b6d4d26b934");
 			DataStore[79].IsDisplayable = false;
-			DataStore[79].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[62],
+			DataStore[79].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[79].MethodName = @"PreSave";
-			DataStore[79].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[79].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[79].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[79].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
 			DataStore[79].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[79].Seal();
-			DataStore[80].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[80].ExportGuid = new Guid("a42ba745-446d-47f2-a157-e42bf8ce21c0");
+			DataStore[80].Description = @"";
+			DataStore[80].ExportGuid = new Guid("4871f987-0022-4c79-a773-aa669b9d8d04");
 			DataStore[80].IsDisplayable = false;
-			DataStore[80].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[49],
+			DataStore[80].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[80].MethodName = @"ToString";
-			DataStore[80].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[80].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
-			DataStore[80].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[80].MethodName = @"ChooseObject";
+			DataStore[80].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[80].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45];
+			DataStore[80].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(3) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[9],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[10],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[19],
 });
 			DataStore[80].Seal();
-			DataStore[81].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[81].ExportGuid = new Guid("0ea403f0-c6dd-4019-b64f-3e84e8c74ca5");
+			DataStore[81].Description = @"";
+			DataStore[81].ExportGuid = new Guid("9225943b-38fb-45f1-a9a8-68a0b6f7e2c7");
 			DataStore[81].IsDisplayable = false;
 			DataStore[81].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[81].MethodName = @"PostSave";
-			DataStore[81].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[81].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
-			DataStore[81].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[81].MethodName = @"ShowObject";
+			DataStore[81].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[81].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45];
+			DataStore[81].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[20],
 });
 			DataStore[81].Seal();
-			DataStore[82].Description = @"Returns the String representation of this Method-Parameter Meta Object.";
-			DataStore[82].ExportGuid = new Guid("32f8f8f2-6546-46ed-8f8a-c8c6ac11dc67");
+			DataStore[82].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[82].ExportGuid = new Guid("f1d2c2ef-417f-4c0c-9405-ab2741472d89");
 			DataStore[82].IsDisplayable = false;
-			DataStore[82].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(14) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[47],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[48],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[50],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[51],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[52],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[53],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[54],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[55],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[56],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[57],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[58],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[59],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[60],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[61],
+			DataStore[82].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[82].MethodName = @"GetParameterTypeString";
-			DataStore[82].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[82].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
-			DataStore[82].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[5],
+			DataStore[82].MethodName = @"PostSave";
+			DataStore[82].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[82].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47];
+			DataStore[82].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[82].Seal();
-			DataStore[83].Description = @"";
-			DataStore[83].ExportGuid = new Guid("447088b9-ea3e-4c72-b1fe-761d430c4003");
+			DataStore[83].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[83].ExportGuid = new Guid("d347e78c-8447-49d1-9fd0-b1e8a247a172");
 			DataStore[83].IsDisplayable = false;
-			DataStore[83].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[83].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[34],
 });
-			DataStore[83].MethodName = @"TestMethodForParameter";
+			DataStore[83].MethodName = @"ToString";
 			DataStore[83].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
-			DataStore[83].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
-			DataStore[83].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(8) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[7],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[11],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[8],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[6],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[2],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[10],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[1],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[9],
+			DataStore[83].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47];
+			DataStore[83].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[83].Seal();
 			DataStore[84].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[84].ExportGuid = new Guid("fb9396ef-02a2-4a50-896d-4d8b88abaa20");
+			DataStore[84].ExportGuid = new Guid("44412b16-8116-49dc-ac5b-94fdfb8f37dd");
 			DataStore[84].IsDisplayable = false;
 			DataStore[84].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[84].MethodName = @"PreSave";
-			DataStore[84].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[84].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45];
+			DataStore[84].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[84].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[84].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[84].Seal();
 			DataStore[85].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[85].ExportGuid = new Guid("c7dfdb25-f52b-4e00-b0a0-0c9293412479");
+			DataStore[85].ExportGuid = new Guid("58c48d95-c9fa-4680-88a3-841160e9e829");
 			DataStore[85].IsDisplayable = false;
-			DataStore[85].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[66],
+			DataStore[85].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[36],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[86],
 });
 			DataStore[85].MethodName = @"ToString";
-			DataStore[85].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[85].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45];
+			DataStore[85].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[85].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
 			DataStore[85].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[85].Seal();
 			DataStore[86].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[86].ExportGuid = new Guid("a4aa6dfa-d725-4320-8959-b8677390788f");
+			DataStore[86].ExportGuid = new Guid("1ae41a97-b201-47b6-ab5e-367434754856");
 			DataStore[86].IsDisplayable = false;
 			DataStore[86].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[86].MethodName = @"PostSave";
-			DataStore[86].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[86].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45];
+			DataStore[86].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[86].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[34];
 			DataStore[86].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[86].Seal();
-			DataStore[87].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[87].ExportGuid = new Guid("4969e35b-2517-4b27-8b64-b35feb59fb50");
+			DataStore[87].Description = @"Returns the resulting Type of this Property Meta Object.";
+			DataStore[87].ExportGuid = new Guid("b024fc8a-4e17-4212-acfe-94cc79bf35fd");
 			DataStore[87].IsDisplayable = false;
-			DataStore[87].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[87].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[75],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[87],
 });
-			DataStore[87].MethodName = @"PreSave";
-			DataStore[87].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[87].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
-			DataStore[87].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[87].MethodName = @"GetPropertyType";
+			DataStore[87].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[87].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[87].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[21],
 });
 			DataStore[87].Seal();
-			DataStore[88].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[88].ExportGuid = new Guid("ce8176e6-952c-492c-840f-f15979b100e5");
+			DataStore[88].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[88].ExportGuid = new Guid("a4aa6dfa-d725-4320-8959-b8677390788f");
 			DataStore[88].IsDisplayable = false;
-			DataStore[88].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[67],
+			DataStore[88].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[88].MethodName = @"ToString";
-			DataStore[88].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[88].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
+			DataStore[88].MethodName = @"PostSave";
+			DataStore[88].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[88].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26];
 			DataStore[88].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[88].Seal();
-			DataStore[89].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[89].ExportGuid = new Guid("f713f370-657c-4827-bb20-b9bf1cab2f2a");
+			DataStore[89].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[89].ExportGuid = new Guid("c7dfdb25-f52b-4e00-b0a0-0c9293412479");
 			DataStore[89].IsDisplayable = false;
-			DataStore[89].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[89].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[50],
 });
-			DataStore[89].MethodName = @"PostSave";
-			DataStore[89].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[89].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
+			DataStore[89].MethodName = @"ToString";
+			DataStore[89].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[89].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26];
 			DataStore[89].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[89].Seal();
-			DataStore[90].Description = @"";
-			DataStore[90].ExportGuid = new Guid("9e198988-498a-4936-8546-0a599b6cc613");
-			DataStore[90].IsDisplayable = true;
+			DataStore[90].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[90].ExportGuid = new Guid("224eb140-9775-4581-a1b9-0f641c387888");
+			DataStore[90].IsDisplayable = false;
 			DataStore[90].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[90].MethodName = @"TestMethod";
-			DataStore[90].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[90].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48];
-			DataStore[90].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[12],
+			DataStore[90].MethodName = @"PostSave";
+			DataStore[90].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[90].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[90].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[90].Seal();
-			DataStore[91].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[91].ExportGuid = new Guid("7e6774ad-ab16-451d-8a73-113ac6a71d4b");
-			DataStore[91].IsDisplayable = false;
-			DataStore[91].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[91].Description = @"Returns the String representation of this Property Meta Object.";
+			DataStore[91].ExportGuid = new Guid("a9c1a6ff-ddb2-41a5-9ad0-460b8adea977");
+			DataStore[91].IsDisplayable = true;
+			DataStore[91].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(20) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[8],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[35],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[51],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[54],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[55],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[56],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[57],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[60],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[61],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[68],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[72],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[73],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[74],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[78],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[89],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[91],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[92],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[93],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[94],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[95],
 });
-			DataStore[91].MethodName = @"PreSave";
-			DataStore[91].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[91].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
-			DataStore[91].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[91].MethodName = @"GetPropertyTypeString";
+			DataStore[91].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[91].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[91].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[18],
 });
 			DataStore[91].Seal();
 			DataStore[92].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[92].ExportGuid = new Guid("588cd551-328c-4c73-85a2-64883bbbe71d");
+			DataStore[92].ExportGuid = new Guid("08f8382a-2604-43f7-b5b6-2e4ded0b64b9");
 			DataStore[92].IsDisplayable = false;
-			DataStore[92].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[92].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[43],
 });
 			DataStore[92].MethodName = @"ToString";
-			DataStore[92].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[92].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
+			DataStore[92].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[92].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[34];
 			DataStore[92].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[92].Seal();
-			DataStore[93].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[93].ExportGuid = new Guid("84479312-f094-4281-8b7a-313e241b5719");
+			DataStore[93].Description = @"Returns the resulting Type of this Method-Parameter Meta Object.";
+			DataStore[93].ExportGuid = new Guid("41b67886-d514-4ee3-949e-54a0aed86eac");
 			DataStore[93].IsDisplayable = false;
-			DataStore[93].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[93].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(4) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[12],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[15],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[76],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[79],
 });
-			DataStore[93].MethodName = @"PostSave";
-			DataStore[93].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[93].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
-			DataStore[93].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[93].MethodName = @"GetParameterType";
+			DataStore[93].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[93].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[35];
+			DataStore[93].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[15],
 });
 			DataStore[93].Seal();
-			DataStore[95].Description = @"testmethod";
-			DataStore[95].ExportGuid = new Guid("4d28b129-0786-4add-bddd-ff026c107f5e");
-			DataStore[95].IsDisplayable = true;
-			DataStore[95].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[94].Description = @"Returns the String representation of this Method-Parameter Meta Object.";
+			DataStore[94].ExportGuid = new Guid("32f8f8f2-6546-46ed-8f8a-c8c6ac11dc67");
+			DataStore[94].IsDisplayable = false;
+			DataStore[94].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(14) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[46],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[47],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[48],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[49],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[52],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[53],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[58],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[62],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[63],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[65],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[66],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[67],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[69],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[70],
 });
-			DataStore[95].MethodName = @"TestMethod";
-			DataStore[95].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[95].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
-			DataStore[95].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[13],
+			DataStore[94].MethodName = @"GetParameterTypeString";
+			DataStore[94].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[94].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[35];
+			DataStore[94].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[16],
+});
+			DataStore[94].Seal();
+			DataStore[95].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[95].ExportGuid = new Guid("dd77ef1e-2122-4da9-9c35-21de9e23890d");
+			DataStore[95].IsDisplayable = false;
+			DataStore[95].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[37],
+});
+			DataStore[95].MethodName = @"ToString";
+			DataStore[95].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[95].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[95].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[95].Seal();
-			DataStore[96].Description = @"";
-			DataStore[96].ExportGuid = new Guid("033f91ab-9870-466c-a403-e7430d777f30");
+			DataStore[96].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[96].ExportGuid = new Guid("c2b4a0b8-a8cd-4f8a-8395-fdf239f4fcf3");
 			DataStore[96].IsDisplayable = false;
 			DataStore[96].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[96].MethodName = @"ShowMessage";
-			DataStore[96].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[96].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52];
-			DataStore[96].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[14],
+			DataStore[96].MethodName = @"PostSave";
+			DataStore[96].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[96].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[96].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[96].Seal();
-			DataStore[97].Description = @"";
-			DataStore[97].ExportGuid = new Guid("9225943b-38fb-45f1-a9a8-68a0b6f7e2c7");
+			DataStore[97].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[97].ExportGuid = new Guid("6df3da83-92f4-4f08-a073-9af9acd679f1");
 			DataStore[97].IsDisplayable = false;
-			DataStore[97].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[97].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[64],
 });
-			DataStore[97].MethodName = @"ShowObject";
-			DataStore[97].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[97].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52];
-			DataStore[97].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[16],
+			DataStore[97].MethodName = @"PreSave";
+			DataStore[97].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[97].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[35];
+			DataStore[97].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[97].Seal();
-			DataStore[98].Description = @"";
-			DataStore[98].ExportGuid = new Guid("4871f987-0022-4c79-a773-aa669b9d8d04");
+			DataStore[98].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[98].ExportGuid = new Guid("b8d8840d-001f-4a08-b881-fe286073a9ce");
 			DataStore[98].IsDisplayable = false;
-			DataStore[98].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[98].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[38],
 });
-			DataStore[98].MethodName = @"ChooseObject";
-			DataStore[98].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[98].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52];
-			DataStore[98].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(3) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[18],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[19],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[20],
+			DataStore[98].MethodName = @"PreSave";
+			DataStore[98].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[98].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[34];
+			DataStore[98].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[98].Seal();
-			DataStore[106].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[106].ExportGuid = new Guid("4497e829-e3c3-47ee-9ccd-7c6c0adfe880");
+			DataStore[99].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[99].ExportGuid = new Guid("0ea403f0-c6dd-4019-b64f-3e84e8c74ca5");
+			DataStore[99].IsDisplayable = false;
+			DataStore[99].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[99].MethodName = @"PostSave";
+			DataStore[99].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[99].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[35];
+			DataStore[99].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[99].Seal();
+			DataStore[100].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[100].ExportGuid = new Guid("a42ba745-446d-47f2-a157-e42bf8ce21c0");
+			DataStore[100].IsDisplayable = false;
+			DataStore[100].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[59],
+});
+			DataStore[100].MethodName = @"ToString";
+			DataStore[100].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[100].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[35];
+			DataStore[100].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[100].Seal();
+			DataStore[101].Description = @"";
+			DataStore[101].ExportGuid = new Guid("6583bdca-419d-4c18-b041-82ef35948d29");
+			DataStore[101].IsDisplayable = false;
+			DataStore[101].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[20],
+});
+			DataStore[101].MethodName = @"ToString";
+			DataStore[101].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[101].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63];
+			DataStore[101].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[101].Seal();
+			DataStore[102].Description = @"";
+			DataStore[102].ExportGuid = new Guid("93e2bb4a-7e4d-44ab-aef1-e0bce3866f3d");
+			DataStore[102].IsDisplayable = false;
+			DataStore[102].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[102].MethodName = @"PostSave";
+			DataStore[102].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[102].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63];
+			DataStore[102].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[102].Seal();
+			DataStore[103].Description = @"";
+			DataStore[103].ExportGuid = new Guid("be25e5f7-2b44-45e1-9932-d7434f444763");
+			DataStore[103].IsDisplayable = false;
+			DataStore[103].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[103].MethodName = @"PreSave";
+			DataStore[103].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[103].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63];
+			DataStore[103].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[103].Seal();
+			DataStore[104].Description = @"";
+			DataStore[104].ExportGuid = new Guid("9bf53e7a-3546-4a30-9446-ededdde3dbde");
+			DataStore[104].IsDisplayable = true;
+			DataStore[104].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[13],
+});
+			DataStore[104].MethodName = @"GetInheritedMethods";
+			DataStore[104].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[104].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[104].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[17],
+});
+			DataStore[104].Seal();
+			DataStore[105].Description = @"Implements all available interfaces as Properties and Methods";
+			DataStore[105].ExportGuid = new Guid("7742e3af-1038-4dd1-91b2-164a2cecb330");
+			DataStore[105].IsDisplayable = true;
+			DataStore[105].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[88],
+});
+			DataStore[105].MethodName = @"ImplementInterfaces";
+			DataStore[105].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[105].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[105].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[105].Seal();
+			DataStore[106].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[106].ExportGuid = new Guid("a90eb5bd-8ce6-4234-bdd7-2d012440cb80");
 			DataStore[106].IsDisplayable = false;
 			DataStore[106].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[106].MethodName = @"PreSave";
-			DataStore[106].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[106].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
+			DataStore[106].MethodName = @"ToString";
+			DataStore[106].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[106].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
 			DataStore[106].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[106].Seal();
-			DataStore[107].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[107].ExportGuid = new Guid("2a053aba-cd8b-4884-b07f-604d2ea2b1e3");
+			DataStore[107].Description = @"Returns the resulting Type of this Datatype Meta Object.";
+			DataStore[107].ExportGuid = new Guid("826c3b7c-c266-48cf-a715-5e39d675642c");
 			DataStore[107].IsDisplayable = false;
-			DataStore[107].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[107].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[10],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[77],
 });
-			DataStore[107].MethodName = @"ToString";
-			DataStore[107].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[107].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
-			DataStore[107].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[107].MethodName = @"GetDataType";
+			DataStore[107].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[107].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
+			DataStore[107].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[30],
 });
 			DataStore[107].Seal();
-			DataStore[108].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[108].ExportGuid = new Guid("fa736d90-0368-41c2-8184-f688f000a9a3");
+			DataStore[108].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[108].ExportGuid = new Guid("6f5acdb5-e439-44e4-978c-bcecf01979ac");
 			DataStore[108].IsDisplayable = false;
 			DataStore[108].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[108].MethodName = @"PostSave";
-			DataStore[108].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[108].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58];
+			DataStore[108].MethodName = @"PreSave";
+			DataStore[108].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[108].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
 			DataStore[108].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[108].Seal();
-			DataStore[109].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[109].ExportGuid = new Guid("a3e127c5-154b-4ae8-83c3-8641845ebdeb");
+			DataStore[109].Description = @"Returns the String representation of this Datatype Meta Object.";
+			DataStore[109].ExportGuid = new Guid("615d770c-ede8-4f0a-bcca-a254c99da892");
 			DataStore[109].IsDisplayable = false;
-			DataStore[109].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[109].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[9],
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[80],
 });
-			DataStore[109].MethodName = @"PreSave";
-			DataStore[109].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[109].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
-			DataStore[109].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[109].MethodName = @"GetDataTypeString";
+			DataStore[109].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[109].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
+			DataStore[109].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[29],
 });
 			DataStore[109].Seal();
-			DataStore[110].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[110].ExportGuid = new Guid("5e3fdc13-b4e8-4ff3-88b0-f4faba4b20c2");
+			DataStore[110].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[110].ExportGuid = new Guid("4969e35b-2517-4b27-8b64-b35feb59fb50");
 			DataStore[110].IsDisplayable = false;
 			DataStore[110].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[110].MethodName = @"ToString";
-			DataStore[110].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[110].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[110].MethodName = @"PreSave";
+			DataStore[110].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[110].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[21];
 			DataStore[110].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[110].Seal();
 			DataStore[111].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[111].ExportGuid = new Guid("7a12f380-a8a6-4519-abc2-3ca78aa328ea");
+			DataStore[111].ExportGuid = new Guid("2f1b878a-2e75-4a28-855c-038ea402a147");
 			DataStore[111].IsDisplayable = false;
 			DataStore[111].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[111].MethodName = @"PostSave";
-			DataStore[111].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[111].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[111].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[111].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
 			DataStore[111].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[111].Seal();
 			DataStore[112].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[112].ExportGuid = new Guid("cc6add40-8c70-4729-bad5-b7f1b486aeb6");
+			DataStore[112].ExportGuid = new Guid("a6793e04-3be9-40a8-8326-6ab35d41e286");
 			DataStore[112].IsDisplayable = false;
-			DataStore[112].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[112].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[81],
 });
 			DataStore[112].MethodName = @"PreSave";
-			DataStore[112].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[112].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[60];
+			DataStore[112].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[112].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55];
 			DataStore[112].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[112].Seal();
-			DataStore[113].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[113].ExportGuid = new Guid("8df9b35f-2859-45a4-a68b-e294d9a759e5");
+			DataStore[113].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[113].ExportGuid = new Guid("0ad9d18b-9d12-41a7-8622-19f2bc8c08bd");
 			DataStore[113].IsDisplayable = false;
 			DataStore[113].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[113].MethodName = @"ToString";
-			DataStore[113].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[113].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[60];
+			DataStore[113].MethodName = @"PostSave";
+			DataStore[113].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[113].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[56];
 			DataStore[113].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[113].Seal();
-			DataStore[114].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[114].ExportGuid = new Guid("22e9873f-4f85-4e7e-ae98-8e101bff9e83");
+			DataStore[114].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[114].ExportGuid = new Guid("e3c26739-6d36-48af-b7c8-0dea1e95d481");
 			DataStore[114].IsDisplayable = false;
-			DataStore[114].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[114].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[41],
 });
-			DataStore[114].MethodName = @"PostSave";
-			DataStore[114].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[114].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[60];
+			DataStore[114].MethodName = @"ToString";
+			DataStore[114].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[114].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55];
 			DataStore[114].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[114].Seal();
-			DataStore[115].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[115].ExportGuid = new Guid("221fc474-9d41-4020-9b23-9bf6b62b78f1");
-			DataStore[115].IsDisplayable = false;
+			DataStore[115].Description = @"";
+			DataStore[115].ExportGuid = new Guid("9e198988-498a-4936-8546-0a599b6cc613");
+			DataStore[115].IsDisplayable = true;
 			DataStore[115].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[115].MethodName = @"PreSave";
-			DataStore[115].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[115].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[61];
-			DataStore[115].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+			DataStore[115].MethodName = @"TestMethod";
+			DataStore[115].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[115].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
+			DataStore[115].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[32],
 });
 			DataStore[115].Seal();
-			DataStore[116].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[116].ExportGuid = new Guid("446112ed-b960-4faf-a802-28516949a1d0");
+			DataStore[116].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[116].ExportGuid = new Guid("12f061e3-155a-4c1d-8a0f-6281d93b2dd2");
 			DataStore[116].IsDisplayable = false;
 			DataStore[116].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[116].MethodName = @"ToString";
-			DataStore[116].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[116].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[61];
+			DataStore[116].MethodName = @"PostSave";
+			DataStore[116].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[116].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55];
 			DataStore[116].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[116].Seal();
-			DataStore[117].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[117].ExportGuid = new Guid("037c1ed1-37d7-4142-bb77-a4bfb8682839");
+			DataStore[117].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[117].ExportGuid = new Guid("c0fa86cd-6ed0-4477-8ece-a505221b51f1");
 			DataStore[117].IsDisplayable = false;
-			DataStore[117].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[117].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[40],
 });
-			DataStore[117].MethodName = @"PostSave";
-			DataStore[117].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[117].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[61];
+			DataStore[117].MethodName = @"ToString";
+			DataStore[117].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[117].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[56];
 			DataStore[117].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[117].Seal();
-			DataStore[118].Description = @"Returns the resulting Type of this Property Meta Object.";
-			DataStore[118].ExportGuid = new Guid("b024fc8a-4e17-4212-acfe-94cc79bf35fd");
+			DataStore[118].Description = @"Autogenerated! Returns a String that represents the current Object.";
+			DataStore[118].ExportGuid = new Guid("3b60b40f-0ae1-4b82-8eda-7b86648bd46d");
 			DataStore[118].IsDisplayable = false;
-			DataStore[118].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[117],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[118],
+			DataStore[118].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[33],
 });
-			DataStore[118].MethodName = @"GetPropertyType";
-			DataStore[118].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[118].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
-			DataStore[118].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[21],
+			DataStore[118].MethodName = @"ToString";
+			DataStore[118].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[118].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[118].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[118].Seal();
-			DataStore[120].Description = @"Returns the String representation of this Datatype Meta Object.";
-			DataStore[120].ExportGuid = new Guid("615d770c-ede8-4f0a-bcca-a254c99da892");
-			DataStore[120].IsDisplayable = false;
-			DataStore[120].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[74],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[75],
+			DataStore[119].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[119].ExportGuid = new Guid("36da6be6-490a-4284-a58f-d6ac54e0871f");
+			DataStore[119].IsDisplayable = false;
+			DataStore[119].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
+Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[98],
 });
-			DataStore[120].MethodName = @"GetDataTypeString";
-			DataStore[120].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[120].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
-			DataStore[120].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[23],
+			DataStore[119].MethodName = @"PreSave";
+			DataStore[119].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[119].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[119].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
+});
+			DataStore[119].Seal();
+			DataStore[120].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
+			DataStore[120].ExportGuid = new Guid("462ba70e-0ad9-4648-bc52-affe08d96323");
+			DataStore[120].IsDisplayable = false;
+			DataStore[120].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[120].MethodName = @"PostSave";
+			DataStore[120].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[120].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[120].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[120].Seal();
-			DataStore[121].Description = @"Returns the resulting Type of this Datatype Meta Object.";
-			DataStore[121].ExportGuid = new Guid("826c3b7c-c266-48cf-a715-5e39d675642c");
+			DataStore[121].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
+			DataStore[121].ExportGuid = new Guid("f96aa058-87eb-4488-b678-cd48dddfa97d");
 			DataStore[121].IsDisplayable = false;
-			DataStore[121].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(2) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[72],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[73],
+			DataStore[121].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[121].MethodName = @"GetDataType";
-			DataStore[121].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[121].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
-			DataStore[121].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[24],
+			DataStore[121].MethodName = @"PreSave";
+			DataStore[121].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[121].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[56];
+			DataStore[121].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
 });
 			DataStore[121].Seal();
-			DataStore[123].Description = @"Returns the resulting Type of this Method-Parameter Meta Object.";
-			DataStore[123].ExportGuid = new Guid("41b67886-d514-4ee3-949e-54a0aed86eac");
-			DataStore[123].IsDisplayable = false;
-			DataStore[123].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(4) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[76],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[77],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[78],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[79],
+			DataStore[122].Description = @"";
+			DataStore[122].ExportGuid = new Guid("447088b9-ea3e-4c72-b1fe-761d430c4003");
+			DataStore[122].IsDisplayable = false;
+			DataStore[122].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[123].MethodName = @"GetParameterType";
-			DataStore[123].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[123].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
-			DataStore[123].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[25],
-});
-			DataStore[123].Seal();
-			DataStore[124].Description = @"Returns the Return Parameter Meta Object of this Method Meta Object.";
-			DataStore[124].ExportGuid = new Guid("687f24ab-be66-4ac8-8d43-b033cf05455d");
-			DataStore[124].IsDisplayable = true;
-			DataStore[124].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[80],
-});
-			DataStore[124].MethodName = @"GetReturnParameter";
-			DataStore[124].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[124].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
-			DataStore[124].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
+			DataStore[122].MethodName = @"TestMethodForParameter";
+			DataStore[122].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[122].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[56];
+			DataStore[122].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(8) {
 Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[26],
-});
-			DataStore[124].Seal();
-			DataStore[125].Description = @"";
-			DataStore[125].ExportGuid = new Guid("9bf53e7a-3546-4a30-9446-ededdde3dbde");
-			DataStore[125].IsDisplayable = true;
-			DataStore[125].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[81],
-});
-			DataStore[125].MethodName = @"GetInheritedMethods";
-			DataStore[125].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[125].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
-			DataStore[125].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
 Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[27],
-});
-			DataStore[125].Seal();
-			DataStore[129].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[129].ExportGuid = new Guid("c5e8aa2f-33a4-4f85-a51b-e7860e1cf068");
-			DataStore[129].IsDisplayable = false;
-			DataStore[129].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[103],
-});
-			DataStore[129].MethodName = @"ToString";
-			DataStore[129].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[129].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
-			DataStore[129].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[129].Seal();
-			DataStore[130].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[130].ExportGuid = new Guid("c32efc1f-b1d4-474f-b0d1-2d4262781e46");
-			DataStore[130].IsDisplayable = false;
-			DataStore[130].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[130].MethodName = @"PostSave";
-			DataStore[130].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[130].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
-			DataStore[130].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[130].Seal();
-			DataStore[131].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[131].ExportGuid = new Guid("5a686d39-0880-49a6-a6eb-c355cdf23299");
-			DataStore[131].IsDisplayable = false;
-			DataStore[131].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[131].MethodName = @"PreSave";
-			DataStore[131].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[131].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
-			DataStore[131].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[131].Seal();
-			DataStore[132].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[132].ExportGuid = new Guid("1cb6f35d-68e8-4536-8b6d-1ce2cd4d1218");
-			DataStore[132].IsDisplayable = false;
-			DataStore[132].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[132].MethodName = @"ToString";
-			DataStore[132].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[132].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
-			DataStore[132].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[132].Seal();
-			DataStore[133].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[133].ExportGuid = new Guid("9a200b36-c9be-4e8a-bf6d-b98cacab62c5");
-			DataStore[133].IsDisplayable = false;
-			DataStore[133].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[133].MethodName = @"PreSave";
-			DataStore[133].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[133].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
-			DataStore[133].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[133].Seal();
-			DataStore[134].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[134].ExportGuid = new Guid("9ffc17d1-6fd2-42f5-84a4-5b4ea92caa7a");
-			DataStore[134].IsDisplayable = false;
-			DataStore[134].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[134].MethodName = @"PostSave";
-			DataStore[134].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[134].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
-			DataStore[134].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[134].Seal();
-			DataStore[135].Description = @"";
-			DataStore[135].ExportGuid = new Guid("869cbcce-c822-4b86-89ce-bcb11a7b2bb6");
-			DataStore[135].IsDisplayable = false;
-			DataStore[135].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(7) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[87],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[88],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[93],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[97],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[100],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[104],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[107],
-});
-			DataStore[135].MethodName = @"IsValid";
-			DataStore[135].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[135].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[69];
-			DataStore[135].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(3) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[29],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[34],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[24],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[25],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[33],
 Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[28],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[34],
+Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[23],
 });
-			DataStore[135].Seal();
-			DataStore[136].Description = @"Autogenerated! Returns a String that represents the current Object.";
-			DataStore[136].ExportGuid = new Guid("8be7722e-a164-4428-9940-546cb9006754");
-			DataStore[136].IsDisplayable = false;
-			DataStore[136].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(5) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[90],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[91],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[95],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[99],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[106],
-});
-			DataStore[136].MethodName = @"ToString";
-			DataStore[136].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[136].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[69];
-			DataStore[136].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[136].Seal();
-			DataStore[137].Description = @"Autogenerated! Method is called by the Context before a commit occurs.";
-			DataStore[137].ExportGuid = new Guid("f08f3262-d4a1-4002-9c2b-e1c01e334a90");
-			DataStore[137].IsDisplayable = false;
-			DataStore[137].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[137].MethodName = @"PreSave";
-			DataStore[137].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[137].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[69];
-			DataStore[137].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[137].Seal();
-			DataStore[138].Description = @"Autogenerated! Method is called by the Context after a commit occurs.";
-			DataStore[138].ExportGuid = new Guid("888d7974-13e3-4aad-b7ff-ebcae977eb44");
-			DataStore[138].IsDisplayable = false;
-			DataStore[138].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[138].MethodName = @"PostSave";
-			DataStore[138].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[138].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[69];
-			DataStore[138].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[138].Seal();
-			DataStore[139].Description = @"";
-			DataStore[139].ExportGuid = new Guid("2056bc89-f6c6-4c27-96aa-12790af6fb24");
-			DataStore[139].IsDisplayable = false;
-			DataStore[139].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(5) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[89],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[92],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[96],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[98],
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[105],
-});
-			DataStore[139].MethodName = @"GetErrorText";
-			DataStore[139].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[139].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[69];
-			DataStore[139].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(3) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[30],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[35],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[31],
-});
-			DataStore[139].Seal();
-			DataStore[144].Description = @"";
-			DataStore[144].ExportGuid = new Guid("80e69c37-0297-4d0c-be08-158ab7a919ff");
-			DataStore[144].IsDisplayable = true;
-			DataStore[144].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[102],
-});
-			DataStore[144].MethodName = @"PrepareDefault";
-			DataStore[144].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[144].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
-			DataStore[144].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[36],
-});
-			DataStore[144].Seal();
-			DataStore[145].Description = @"";
-			DataStore[145].ExportGuid = new Guid("be25e5f7-2b44-45e1-9932-d7434f444763");
-			DataStore[145].IsDisplayable = false;
-			DataStore[145].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[145].MethodName = @"PreSave";
-			DataStore[145].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[145].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
-			DataStore[145].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[145].Seal();
-			DataStore[146].Description = @"";
-			DataStore[146].ExportGuid = new Guid("6583bdca-419d-4c18-b041-82ef35948d29");
-			DataStore[146].IsDisplayable = false;
-			DataStore[146].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[114],
-});
-			DataStore[146].MethodName = @"ToString";
-			DataStore[146].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[146].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
-			DataStore[146].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[146].Seal();
-			DataStore[147].Description = @"";
-			DataStore[147].ExportGuid = new Guid("93e2bb4a-7e4d-44ab-aef1-e0bce3866f3d");
-			DataStore[147].IsDisplayable = false;
-			DataStore[147].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[147].MethodName = @"PostSave";
-			DataStore[147].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[147].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
-			DataStore[147].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[147].Seal();
-			DataStore[148].Description = @"";
-			DataStore[148].ExportGuid = new Guid("7c84c750-4d64-49eb-b02a-1ed9814a5836");
-			DataStore[148].IsDisplayable = false;
-			DataStore[148].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[109],
-});
-			DataStore[148].MethodName = @"ToString";
-			DataStore[148].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[148].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
-			DataStore[148].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[148].Seal();
-			DataStore[149].Description = @"";
-			DataStore[149].ExportGuid = new Guid("9eca3db8-3fa3-42bc-b074-8b6d4d26b934");
-			DataStore[149].IsDisplayable = false;
-			DataStore[149].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[149].MethodName = @"PreSave";
-			DataStore[149].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[149].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
-			DataStore[149].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[149].Seal();
-			DataStore[150].Description = @"";
-			DataStore[150].ExportGuid = new Guid("e81ddadd-8f10-45b4-b891-662a1cfd5f36");
-			DataStore[150].IsDisplayable = false;
-			DataStore[150].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[150].MethodName = @"PostSave";
-			DataStore[150].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[150].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
-			DataStore[150].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[150].Seal();
-			DataStore[151].Description = @"get the referenced <see cref=""System.Type""/>";
-			DataStore[151].ExportGuid = new Guid("f99da656-46fc-4846-8655-10f534a00102");
-			DataStore[151].IsDisplayable = false;
-			DataStore[151].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[108],
-});
-			DataStore[151].MethodName = @"AsType";
-			DataStore[151].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[151].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
-			DataStore[151].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(2) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[37],
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[38],
-});
-			DataStore[151].Seal();
-			DataStore[155].Description = @"Regenerates the stored list of TypeRefs from the loaded assembly";
-			DataStore[155].ExportGuid = new Guid("818507bf-73f7-4e57-9730-ba3c42ddc418");
-			DataStore[155].IsDisplayable = true;
-			DataStore[155].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[111],
-});
-			DataStore[155].MethodName = @"RegenerateTypeRefs";
-			DataStore[155].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[155].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
-			DataStore[155].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[155].Seal();
-			DataStore[157].Description = @"";
-			DataStore[157].ExportGuid = new Guid("14359316-9ee0-4971-a13a-089ef222ec1f");
-			DataStore[157].IsDisplayable = false;
-			DataStore[157].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[113],
-});
-			DataStore[157].MethodName = @"ToString";
-			DataStore[157].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[157].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
-			DataStore[157].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[157].Seal();
-			DataStore[158].Description = @"";
-			DataStore[158].ExportGuid = new Guid("c79b99e8-4b0c-4bbb-b8d4-feae09c5f2a7");
-			DataStore[158].IsDisplayable = false;
-			DataStore[158].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[158].MethodName = @"PostSave";
-			DataStore[158].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[158].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
-			DataStore[158].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[158].Seal();
-			DataStore[159].Description = @"";
-			DataStore[159].ExportGuid = new Guid("53e9616d-684b-467d-b6c8-89457034cc62");
-			DataStore[159].IsDisplayable = false;
-			DataStore[159].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[159].MethodName = @"PreSave";
-			DataStore[159].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[159].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
-			DataStore[159].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[159].Seal();
-			DataStore[160].Description = @"";
-			DataStore[160].ExportGuid = new Guid("09fc8d6c-2abb-4aab-8a96-9e85a98c8879");
-			DataStore[160].IsDisplayable = false;
-			DataStore[160].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[160].MethodName = @"PreSave";
-			DataStore[160].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[160].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
-			DataStore[160].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[160].Seal();
-			DataStore[161].Description = @"";
-			DataStore[161].ExportGuid = new Guid("1c5a3190-16d9-42ec-9502-486b88edd406");
-			DataStore[161].IsDisplayable = false;
-			DataStore[161].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[161].MethodName = @"PostSave";
-			DataStore[161].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[161].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
-			DataStore[161].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[161].Seal();
-			DataStore[162].Description = @"";
-			DataStore[162].ExportGuid = new Guid("d6a377ca-66e6-473d-a7e9-b0cdead60a4b");
-			DataStore[162].IsDisplayable = false;
-			DataStore[162].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[124],
-});
-			DataStore[162].MethodName = @"ToString";
-			DataStore[162].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[162].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
-			DataStore[162].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[162].Seal();
-			DataStore[163].Description = @"";
-			DataStore[163].ExportGuid = new Guid("244fd20f-7562-43b2-8c74-76bf176f5f69");
-			DataStore[163].IsDisplayable = false;
-			DataStore[163].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[163].MethodName = @"PreSave";
-			DataStore[163].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[163].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
-			DataStore[163].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[163].Seal();
-			DataStore[164].Description = @"";
-			DataStore[164].ExportGuid = new Guid("212de77d-2fe9-4500-a42d-4712d7011513");
-			DataStore[164].IsDisplayable = false;
-			DataStore[164].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[164].MethodName = @"PostSave";
-			DataStore[164].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[164].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
-			DataStore[164].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[164].Seal();
-			DataStore[165].Description = @"";
-			DataStore[165].ExportGuid = new Guid("116f7c88-1972-4a12-a732-463981a36b34");
-			DataStore[165].IsDisplayable = false;
-			DataStore[165].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[120],
-});
-			DataStore[165].MethodName = @"ToString";
-			DataStore[165].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[165].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
-			DataStore[165].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[165].Seal();
-			DataStore[166].Description = @"";
-			DataStore[166].ExportGuid = new Guid("4e9f29da-7e5d-460c-a12c-8078c0be085e");
-			DataStore[166].IsDisplayable = false;
-			DataStore[166].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[166].MethodName = @"PreSave";
-			DataStore[166].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[166].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
-			DataStore[166].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[166].Seal();
-			DataStore[167].Description = @"";
-			DataStore[167].ExportGuid = new Guid("1edd2a6f-5f08-44d2-a6f9-a5064ea6ae05");
-			DataStore[167].IsDisplayable = false;
-			DataStore[167].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[167].MethodName = @"ToString";
-			DataStore[167].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[167].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
-			DataStore[167].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[167].Seal();
-			DataStore[168].Description = @"";
-			DataStore[168].ExportGuid = new Guid("d77a3b06-be2f-4d71-96b2-c3905df83b2b");
-			DataStore[168].IsDisplayable = false;
-			DataStore[168].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[168].MethodName = @"PostSave";
-			DataStore[168].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[168].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
-			DataStore[168].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[168].Seal();
-			DataStore[169].Description = @"";
-			DataStore[169].ExportGuid = new Guid("5dc1d052-9471-415f-a2ff-d7e6bdb392a4");
-			DataStore[169].IsDisplayable = false;
-			DataStore[169].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[169].MethodName = @"PreSave";
-			DataStore[169].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[169].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
-			DataStore[169].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[169].Seal();
-			DataStore[170].Description = @"";
-			DataStore[170].ExportGuid = new Guid("e4fa2c31-6590-4a44-8c62-4bd62c2b9e4f");
-			DataStore[170].IsDisplayable = false;
-			DataStore[170].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[170].MethodName = @"ToString";
-			DataStore[170].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[170].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
-			DataStore[170].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[170].Seal();
-			DataStore[171].Description = @"";
-			DataStore[171].ExportGuid = new Guid("b8a84c7c-31fe-403c-be69-4e67c5afb5bf");
-			DataStore[171].IsDisplayable = false;
-			DataStore[171].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[171].MethodName = @"PostSave";
-			DataStore[171].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[171].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
-			DataStore[171].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[171].Seal();
-			DataStore[172].Description = null;
-			DataStore[172].ExportGuid = new Guid("761fdc58-066d-47a1-be23-7312e5ae4d11");
-			DataStore[172].IsDisplayable = false;
-			DataStore[172].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[172].MethodName = @"ToString";
-			DataStore[172].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[172].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[90];
-			DataStore[172].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[172].Seal();
-			DataStore[173].Description = null;
-			DataStore[173].ExportGuid = new Guid("d2869eb7-ba9a-425c-8715-124dbdc9822e");
-			DataStore[173].IsDisplayable = false;
-			DataStore[173].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[173].MethodName = @"PreSave";
-			DataStore[173].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[173].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[90];
-			DataStore[173].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[173].Seal();
-			DataStore[174].Description = null;
-			DataStore[174].ExportGuid = new Guid("bf531fd6-4acf-4965-83d3-e8e2a6e38078");
-			DataStore[174].IsDisplayable = false;
-			DataStore[174].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[174].MethodName = @"PostSave";
-			DataStore[174].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[174].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[90];
-			DataStore[174].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[174].Seal();
-			DataStore[175].Description = @"Implements all available interfaces as Properties and Methods";
-			DataStore[175].ExportGuid = new Guid("7742e3af-1038-4dd1-91b2-164a2cecb330");
-			DataStore[175].IsDisplayable = true;
-			DataStore[175].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[125],
-});
-			DataStore[175].MethodName = @"ImplementInterfaces";
-			DataStore[175].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[175].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
-			DataStore[175].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(0) {
-});
-			DataStore[175].Seal();
-			DataStore[177].Description = null;
-			DataStore[177].ExportGuid = new Guid("3a22f806-b740-4f92-bb5f-9564bd2bdd90");
-			DataStore[177].IsDisplayable = true;
-			DataStore[177].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[127],
-});
-			DataStore[177].MethodName = @"GetCodeTemplate";
-			DataStore[177].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[177].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
-			DataStore[177].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[40],
-});
-			DataStore[177].Seal();
-			DataStore[178].Description = null;
-			DataStore[178].ExportGuid = new Guid("674ffef4-fa90-44b5-af9d-2369794df1e8");
-			DataStore[178].IsDisplayable = true;
-			DataStore[178].MethodInvokations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(1) {
-Kistl.App.Base.MethodInvocation__Implementation__Frozen.DataStore[126],
-});
-			DataStore[178].MethodName = @"GetMemberName";
-			DataStore[178].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[178].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
-			DataStore[178].Parameter = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.BaseParameter>(new List<Kistl.App.Base.BaseParameter>(1) {
-Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[41],
-});
-			DataStore[178].Seal();
+			DataStore[122].Seal();
 	
 		}
 #region Serializer

@@ -136,7 +136,7 @@ namespace Kistl.App.Base
 			{
 				case "EnumerationEntries":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(103).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(53).Constraints
 						.Where(c => !c.IsValid(this, this.EnumerationEntries))
 						.Select(c => c.GetErrorText(this, this.EnumerationEntries))
 						.ToArray();
@@ -155,150 +155,150 @@ namespace Kistl.App.Base
 		internal new static Dictionary<int, Enumeration__Implementation__Frozen> DataStore = new Dictionary<int, Enumeration__Implementation__Frozen>(5);
 		internal new static void CreateInstances()
 		{
-			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50] = 
-			DataStore[50] = new Enumeration__Implementation__Frozen(50);
+			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4] = 
+			DataStore[4] = new Enumeration__Implementation__Frozen(4);
+
+			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14] = 
+			DataStore[14] = new Enumeration__Implementation__Frozen(14);
+
+			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19] = 
+			DataStore[19] = new Enumeration__Implementation__Frozen(19);
 
 			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[53] = 
 			DataStore[53] = new Enumeration__Implementation__Frozen(53);
 
-			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55] = 
-			DataStore[55] = new Enumeration__Implementation__Frozen(55);
-
-			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[78] = 
-			DataStore[78] = new Enumeration__Implementation__Frozen(78);
-
-			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[81] = 
-			DataStore[81] = new Enumeration__Implementation__Frozen(81);
+			Kistl.App.Base.DataType__Implementation__Frozen.DataStore[64] = 
+			DataStore[64] = new Enumeration__Implementation__Frozen(64);
 
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[50].ClassName = @"TestEnum";
-			DataStore[50].DefaultIcon = null;
-			DataStore[50].Description = @"A TestEnum";
-			DataStore[50].ExportGuid = new Guid("67b48828-e7d2-4432-a942-88e96d74b40a");
-			DataStore[50].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[4].ClassName = @"Multiplicity";
+			DataStore[4].DefaultIcon = null;
+			DataStore[4].Description = @"Describes the multiplicities of objects on RelationEnds";
+			DataStore[4].ExportGuid = new Guid("4f2b5005-672e-46ef-80ed-94b8cdd053db");
+			DataStore[4].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[50].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
+			DataStore[4].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
-			DataStore[50].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[50].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
+			DataStore[4].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[4].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
 });
-			DataStore[50].ShowIconInLists = true;
-			DataStore[50].ShowIdInLists = true;
-			DataStore[50].ShowNameInLists = true;
-			DataStore[50].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(2) {
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[2],
+			DataStore[4].ShowIconInLists = true;
+			DataStore[4].ShowIdInLists = true;
+			DataStore[4].ShowNameInLists = true;
+			DataStore[4].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(3) {
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[1],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[3],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[4],
 });
-			DataStore[50].Seal();
+			DataStore[4].Seal();
+			DataStore[14].ClassName = @"TestEnum";
+			DataStore[14].DefaultIcon = null;
+			DataStore[14].Description = @"A TestEnum";
+			DataStore[14].ExportGuid = new Guid("67b48828-e7d2-4432-a942-88e96d74b40a");
+			DataStore[14].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[14].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
+});
+			DataStore[14].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[14].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
+});
+			DataStore[14].ShowIconInLists = true;
+			DataStore[14].ShowIdInLists = true;
+			DataStore[14].ShowNameInLists = true;
+			DataStore[14].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(2) {
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[13],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[14],
+});
+			DataStore[14].Seal();
+			DataStore[19].ClassName = @"VisualType";
+			DataStore[19].DefaultIcon = null;
+			DataStore[19].Description = @"";
+			DataStore[19].ExportGuid = new Guid("3567a11f-1809-44e8-bafe-ce0ccec7ea2a");
+			DataStore[19].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+});
+			DataStore[19].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
+});
+			DataStore[19].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[19].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
+});
+			DataStore[19].ShowIconInLists = true;
+			DataStore[19].ShowIdInLists = true;
+			DataStore[19].ShowNameInLists = true;
+			DataStore[19].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(28) {
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[2],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[5],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[6],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[7],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[8],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[9],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[10],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[11],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[12],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[15],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[16],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[17],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[18],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[19],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[20],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[21],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[22],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[23],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[24],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[25],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[26],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[27],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[28],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[29],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[30],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[31],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[32],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[33],
+});
+			DataStore[19].Seal();
 			DataStore[53].ClassName = @"Toolkit";
-			DataStore[53].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[4];
+			DataStore[53].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[13];
 			DataStore[53].Description = @"";
 			DataStore[53].ExportGuid = new Guid("803fb38d-f0d2-409c-9f15-30da4bdcf576");
 			DataStore[53].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
 			DataStore[53].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
-			DataStore[53].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[53].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[53].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
 });
 			DataStore[53].ShowIconInLists = true;
 			DataStore[53].ShowIdInLists = true;
 			DataStore[53].ShowNameInLists = true;
 			DataStore[53].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(4) {
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[5],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[6],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[7],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[77],
-});
-			DataStore[53].Seal();
-			DataStore[55].ClassName = @"VisualType";
-			DataStore[55].DefaultIcon = null;
-			DataStore[55].Description = @"";
-			DataStore[55].ExportGuid = new Guid("3567a11f-1809-44e8-bafe-ce0ccec7ea2a");
-			DataStore[55].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[55].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
-});
-			DataStore[55].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[55].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
-});
-			DataStore[55].ShowIconInLists = true;
-			DataStore[55].ShowIdInLists = true;
-			DataStore[55].ShowNameInLists = true;
-			DataStore[55].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(28) {
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[34],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[36],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[40],
 Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[41],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[42],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[43],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[44],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[45],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[46],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[47],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[48],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[49],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[50],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[51],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[52],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[53],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[54],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[55],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[56],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[57],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[58],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[59],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[69],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[70],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[71],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[74],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[75],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[76],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[78],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[79],
 });
-			DataStore[55].Seal();
-			DataStore[78].ClassName = @"StorageType";
-			DataStore[78].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[10];
-			DataStore[78].Description = @"Storage Type of a 1:1 Releation.";
-			DataStore[78].ExportGuid = new Guid("351a22e8-d047-4878-b6d3-3945489139a0");
-			DataStore[78].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
+			DataStore[53].Seal();
+			DataStore[64].ClassName = @"StorageType";
+			DataStore[64].DefaultIcon = Kistl.App.GUI.Icon__Implementation__Frozen.DataStore[7];
+			DataStore[64].Description = @"Storage Type of a 1:1 Releation.";
+			DataStore[64].ExportGuid = new Guid("351a22e8-d047-4878-b6d3-3945489139a0");
+			DataStore[64].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
 });
-			DataStore[78].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
+			DataStore[64].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
 });
-			DataStore[78].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[78].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
+			DataStore[64].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[64].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
 });
-			DataStore[78].ShowIconInLists = true;
-			DataStore[78].ShowIdInLists = true;
-			DataStore[78].ShowNameInLists = true;
-			DataStore[78].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(4) {
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[60],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[66],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[67],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[68],
+			DataStore[64].ShowIconInLists = true;
+			DataStore[64].ShowIdInLists = true;
+			DataStore[64].ShowNameInLists = true;
+			DataStore[64].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(4) {
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[35],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[37],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[38],
+Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[39],
 });
-			DataStore[78].Seal();
-			DataStore[81].ClassName = @"Multiplicity";
-			DataStore[81].DefaultIcon = null;
-			DataStore[81].Description = @"Describes the multiplicities of objects on RelationEnds";
-			DataStore[81].ExportGuid = new Guid("4f2b5005-672e-46ef-80ed-94b8cdd053db");
-			DataStore[81].MethodInvocations = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.MethodInvocation>(new List<Kistl.App.Base.MethodInvocation>(0) {
-});
-			DataStore[81].Methods = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Method>(new List<Kistl.App.Base.Method>(0) {
-});
-			DataStore[81].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[81].Properties = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Property>(new List<Kistl.App.Base.Property>(0) {
-});
-			DataStore[81].ShowIconInLists = true;
-			DataStore[81].ShowIdInLists = true;
-			DataStore[81].ShowNameInLists = true;
-			DataStore[81].EnumerationEntries = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.EnumerationEntry>(new List<Kistl.App.Base.EnumerationEntry>(3) {
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[63],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[64],
-Kistl.App.Base.EnumerationEntry__Implementation__Frozen.DataStore[65],
-});
-			DataStore[81].Seal();
+			DataStore[64].Seal();
 	
 		}
 #region Serializer

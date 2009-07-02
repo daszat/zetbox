@@ -136,7 +136,7 @@ namespace Kistl.App.GUI
 			{
 				if (_Menu == null)
 				{
-					Context.FetchRelation<Template_hasMenu_Visual_RelationEntry__Implementation__>(61, RelationEndRole.A, this);
+					Context.FetchRelation<Template_hasMenu_Visual_RelationEntry__Implementation__>(4, RelationEndRole.A, this);
 					_Menu 
 						= new ClientRelationBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_hasMenu_Visual_RelationEntry__Implementation__>(
 							this, 
@@ -273,7 +273,7 @@ namespace Kistl.App.GUI
 			{
 				case "DisplayedTypeAssembly":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(163).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(95).Constraints
 						.Where(c => !c.IsValid(this, this.DisplayedTypeAssembly))
 						.Select(c => c.GetErrorText(this, this.DisplayedTypeAssembly))
 						.ToArray();
@@ -282,7 +282,7 @@ namespace Kistl.App.GUI
 				}
 				case "DisplayedTypeFullName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(162).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(4).Constraints
 						.Where(c => !c.IsValid(this, this.DisplayedTypeFullName))
 						.Select(c => c.GetErrorText(this, this.DisplayedTypeFullName))
 						.ToArray();
@@ -291,7 +291,7 @@ namespace Kistl.App.GUI
 				}
 				case "DisplayName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(154).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(6).Constraints
 						.Where(c => !c.IsValid(this, this.DisplayName))
 						.Select(c => c.GetErrorText(this, this.DisplayName))
 						.ToArray();
@@ -300,7 +300,7 @@ namespace Kistl.App.GUI
 				}
 				case "Menu":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(165).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(51).Constraints
 						.Where(c => !c.IsValid(this, this.Menu))
 						.Select(c => c.GetErrorText(this, this.Menu))
 						.ToArray();
@@ -309,7 +309,7 @@ namespace Kistl.App.GUI
 				}
 				case "VisualTree":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(155).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(94).Constraints
 						.Where(c => !c.IsValid(this, this.VisualTree))
 						.Select(c => c.GetErrorText(this, this.VisualTree))
 						.ToArray();

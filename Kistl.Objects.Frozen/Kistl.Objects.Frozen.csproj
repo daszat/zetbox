@@ -59,6 +59,7 @@
     <Compile Include="BoolParameter.Frozen.Designer.cs" />
     <Compile Include="BoolProperty.Frozen.Designer.cs" />
     <Compile Include="CLRObjectParameter.Frozen.Designer.cs" />
+    <Compile Include="ConsistentNavigatorConstraint.Frozen.Designer.cs" />
     <Compile Include="Constraint.Frozen.Designer.cs" />
     <Compile Include="DataType.Frozen.Designer.cs" />
     <Compile Include="DateTimeParameter.Frozen.Designer.cs" />

@@ -190,7 +190,7 @@ namespace Kistl.App.Base
 				}
 				case "MinLength":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(173).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(171).Constraints
 						.Where(c => !c.IsValid(this, this.MinLength))
 						.Select(c => c.GetErrorText(this, this.MinLength))
 						.ToArray();

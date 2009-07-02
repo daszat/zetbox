@@ -9,9 +9,9 @@ namespace Kistl.App.Base
     public enum StorageType
     {
 		/// <summary>
-		/// The relation information is stored on both sides of the Relation
+		/// The relation information is stored in a separate entity
 		/// </summary>
-		Replicate = 3,
+		Separate = 4,
 
 		/// <summary>
 		/// The relation information is stored with the A-side ObjectClass
@@ -24,9 +24,9 @@ namespace Kistl.App.Base
 		MergeIntoB = 2,
 
 		/// <summary>
-		/// The relation information is stored in a separate entity
+		/// The relation information is stored on both sides of the Relation
 		/// </summary>
-		Separate = 4,
+		Replicate = 3,
 
 	}
 }

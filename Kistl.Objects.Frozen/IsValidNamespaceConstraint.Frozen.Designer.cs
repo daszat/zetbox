@@ -114,17 +114,17 @@ namespace Kistl.App.Base
 		internal new static Dictionary<int, IsValidNamespaceConstraint__Implementation__Frozen> DataStore = new Dictionary<int, IsValidNamespaceConstraint__Implementation__Frozen>(1);
 		internal new static void CreateInstances()
 		{
-			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[198] = 
-			Kistl.App.Base.IsValidIdentifierConstraint__Implementation__Frozen.DataStore[198] = 
-			DataStore[198] = new IsValidNamespaceConstraint__Implementation__Frozen(198);
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[84] = 
+			Kistl.App.Base.IsValidIdentifierConstraint__Implementation__Frozen.DataStore[84] = 
+			DataStore[84] = new IsValidNamespaceConstraint__Implementation__Frozen(84);
 
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[198].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[42];
-			DataStore[198].ExportGuid = new Guid("2bcb81bd-5f50-44d6-b247-9938404e219b");
-			DataStore[198].Reason = null;
-			DataStore[198].Seal();
+			DataStore[84].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[67];
+			DataStore[84].ExportGuid = new Guid("2bcb81bd-5f50-44d6-b247-9938404e219b");
+			DataStore[84].Reason = null;
+			DataStore[84].Seal();
 	
 		}
 #region Serializer

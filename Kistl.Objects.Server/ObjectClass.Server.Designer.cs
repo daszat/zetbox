@@ -487,7 +487,7 @@ namespace Kistl.App.Base
 			{
 				case "BaseObjectClass":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(25).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(162).Constraints
 						.Where(c => !c.IsValid(this, this.BaseObjectClass))
 						.Select(c => c.GetErrorText(this, this.BaseObjectClass))
 						.ToArray();
@@ -496,7 +496,7 @@ namespace Kistl.App.Base
 				}
 				case "DefaultPresentableModelDescriptor":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(234).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(130).Constraints
 						.Where(c => !c.IsValid(this, this.DefaultPresentableModelDescriptor))
 						.Select(c => c.GetErrorText(this, this.DefaultPresentableModelDescriptor))
 						.ToArray();
@@ -505,7 +505,7 @@ namespace Kistl.App.Base
 				}
 				case "ImplementsInterfaces":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(105).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(54).Constraints
 						.Where(c => !c.IsValid(this, this.ImplementsInterfaces))
 						.Select(c => c.GetErrorText(this, this.ImplementsInterfaces))
 						.ToArray();
@@ -514,7 +514,7 @@ namespace Kistl.App.Base
 				}
 				case "IsFrozenObject":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(174).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(147).Constraints
 						.Where(c => !c.IsValid(this, this.IsFrozenObject))
 						.Select(c => c.GetErrorText(this, this.IsFrozenObject))
 						.ToArray();
@@ -523,7 +523,7 @@ namespace Kistl.App.Base
 				}
 				case "IsSimpleObject":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(119).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(132).Constraints
 						.Where(c => !c.IsValid(this, this.IsSimpleObject))
 						.Select(c => c.GetErrorText(this, this.IsSimpleObject))
 						.ToArray();
@@ -532,7 +532,7 @@ namespace Kistl.App.Base
 				}
 				case "SubClasses":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(27).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(64).Constraints
 						.Where(c => !c.IsValid(this, this.SubClasses))
 						.Select(c => c.GetErrorText(this, this.SubClasses))
 						.ToArray();
@@ -541,7 +541,7 @@ namespace Kistl.App.Base
 				}
 				case "TableName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(3).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(75).Constraints
 						.Where(c => !c.IsValid(this, this.TableName))
 						.Select(c => c.GetErrorText(this, this.TableName))
 						.ToArray();
@@ -559,19 +559,19 @@ namespace Kistl.App.Base
 			
 			// fix direct object references
 
-			if (_fk_guid_BaseObjectClass.HasValue)
-				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value);
-			else if (_fk_BaseObjectClass.HasValue)
-				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
-			else
-				BaseObjectClass__Implementation__ = null;
-
 			if (_fk_guid_DefaultPresentableModelDescriptor.HasValue)
 				DefaultPresentableModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.PresentableModelDescriptor>(_fk_guid_DefaultPresentableModelDescriptor.Value);
 			else if (_fk_DefaultPresentableModelDescriptor.HasValue)
 				DefaultPresentableModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_DefaultPresentableModelDescriptor.Value);
 			else
 				DefaultPresentableModelDescriptor__Implementation__ = null;
+
+			if (_fk_guid_BaseObjectClass.HasValue)
+				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value);
+			else if (_fk_BaseObjectClass.HasValue)
+				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
+			else
+				BaseObjectClass__Implementation__ = null;
 		}
 #region Serializer
 

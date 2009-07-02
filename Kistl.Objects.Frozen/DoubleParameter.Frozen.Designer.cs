@@ -114,19 +114,19 @@ namespace Kistl.App.Base
 		internal new static Dictionary<int, DoubleParameter__Implementation__Frozen> DataStore = new Dictionary<int, DoubleParameter__Implementation__Frozen>(1);
 		internal new static void CreateInstances()
 		{
-			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[6] = 
-			DataStore[6] = new DoubleParameter__Implementation__Frozen(6);
+			Kistl.App.Base.BaseParameter__Implementation__Frozen.DataStore[25] = 
+			DataStore[25] = new DoubleParameter__Implementation__Frozen(25);
 
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[6].Description = null;
-			DataStore[6].ExportGuid = new Guid("bdb9baf5-8e78-4721-b97a-8d60997cfd01");
-			DataStore[6].IsList = false;
-			DataStore[6].IsReturnParameter = false;
-			DataStore[6].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[83];
-			DataStore[6].ParameterName = @"TestDouble";
-			DataStore[6].Seal();
+			DataStore[25].Description = null;
+			DataStore[25].ExportGuid = new Guid("bdb9baf5-8e78-4721-b97a-8d60997cfd01");
+			DataStore[25].IsList = false;
+			DataStore[25].IsReturnParameter = false;
+			DataStore[25].Method = Kistl.App.Base.Method__Implementation__Frozen.DataStore[122];
+			DataStore[25].ParameterName = @"TestDouble";
+			DataStore[25].Seal();
 	
 		}
 #region Serializer

@@ -9,14 +9,14 @@ namespace Kistl.App.Test
     public enum TestEnum
     {
 		/// <summary>
-		/// First Test Entry
-		/// </summary>
-		First = 0,
-
-		/// <summary>
 		/// Second Test Entry
 		/// </summary>
 		Second = 1,
+
+		/// <summary>
+		/// First Test Entry
+		/// </summary>
+		First = 0,
 
 	}
 }

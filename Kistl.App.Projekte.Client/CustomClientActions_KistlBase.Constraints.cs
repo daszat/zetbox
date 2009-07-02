@@ -110,7 +110,7 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnToString_IntegerRangeConstraint(IntegerRangeConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public void OnToString_IntegerRangeConstraint(IntegerRangeConstraint obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0} <= {1} <= {2}", obj.Min, obj.ConstrainedProperty.PropertyName, obj.Max);
         }
@@ -261,6 +261,36 @@ namespace Kistl.App.Base
         {
             e.Result = "Method names, property names, enum names etc. must be valid names.";
         }
+        #endregion
+
+        #region ConsistentNavigatorConstraint
+
+        public void OnIsValid_ConsistentNavigatorConstraint(
+                   ConsistentNavigatorConstraint obj,
+                   MethodReturnEventArgs<bool> e,
+                   object constrainedObjectParam,
+                   object constrainedValueParam)
+        {
+            var relEnd = (RelationEnd)constrainedObjectParam;
+            var orp = (ObjectReferenceProperty)constrainedValueParam;
+        }
+
+        public void OnGetErrorText_ConsistentNavigatorConstraint(
+            ConsistentNavigatorConstraint obj,
+            MethodReturnEventArgs<string> e,
+            object constrainedObjectParam,
+            object constrainedValueParam)
+        {
+            var relEnd = (RelationEnd)constrainedObjectParam;
+            var orp = (ObjectReferenceProperty)constrainedValueParam;
+
+        }
+
+        public void OnToString_ConsistentNavigatorConstraint(ConsistentNavigatorConstraint obj, MethodReturnEventArgs<string> e)
+        {
+
+        }
+
         #endregion
     }
 

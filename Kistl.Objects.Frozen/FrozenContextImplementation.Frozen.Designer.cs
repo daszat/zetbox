@@ -64,6 +64,8 @@ namespace Kistl.App
 				return Kistl.App.Base.BoolProperty__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.CLRObjectParameter))
 				return Kistl.App.Base.CLRObjectParameter__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
+			if (ifType == typeof(Kistl.App.Base.ConsistentNavigatorConstraint))
+				return Kistl.App.Base.ConsistentNavigatorConstraint__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.Constraint))
 				return Kistl.App.Base.Constraint__Implementation__Frozen.DataStore.Values.AsQueryable().Cast<IDataObject>();
 			if (ifType == typeof(Kistl.App.Base.DataType))
@@ -164,6 +166,7 @@ namespace Kistl.App
 					.Concat(GetQuery<Kistl.App.Base.BoolParameter>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.BoolProperty>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.CLRObjectParameter>().Cast<IPersistenceObject>())
+					.Concat(GetQuery<Kistl.App.Base.ConsistentNavigatorConstraint>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.Constraint>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.DataType>().Cast<IPersistenceObject>())
 					.Concat(GetQuery<Kistl.App.Base.DateTimeParameter>().Cast<IPersistenceObject>())
@@ -236,6 +239,8 @@ namespace Kistl.App
 				return Kistl.App.Base.BoolProperty__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.CLRObjectParameter))
 				return Kistl.App.Base.CLRObjectParameter__Implementation__Frozen.DataStore[ID];
+			if (ifType == typeof(Kistl.App.Base.ConsistentNavigatorConstraint))
+				return Kistl.App.Base.ConsistentNavigatorConstraint__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.Constraint))
 				return Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[ID];
 			if (ifType == typeof(Kistl.App.Base.DataType))

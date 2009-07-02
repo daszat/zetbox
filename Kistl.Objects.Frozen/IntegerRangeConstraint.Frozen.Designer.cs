@@ -162,7 +162,7 @@ namespace Kistl.App.Base
 			{
 				case "Max":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(168).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(166).Constraints
 						.Where(c => !c.IsValid(this, this.Max))
 						.Select(c => c.GetErrorText(this, this.Max))
 						.ToArray();
@@ -171,7 +171,7 @@ namespace Kistl.App.Base
 				}
 				case "Min":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(169).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(173).Constraints
 						.Where(c => !c.IsValid(this, this.Min))
 						.Select(c => c.GetErrorText(this, this.Min))
 						.ToArray();
@@ -190,45 +190,45 @@ namespace Kistl.App.Base
 		internal new static Dictionary<int, IntegerRangeConstraint__Implementation__Frozen> DataStore = new Dictionary<int, IntegerRangeConstraint__Implementation__Frozen>(4);
 		internal new static void CreateInstances()
 		{
-			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[147] = 
-			DataStore[147] = new IntegerRangeConstraint__Implementation__Frozen(147);
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[92] = 
+			DataStore[92] = new IntegerRangeConstraint__Implementation__Frozen(92);
 
-			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[148] = 
-			DataStore[148] = new IntegerRangeConstraint__Implementation__Frozen(148);
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[104] = 
+			DataStore[104] = new IntegerRangeConstraint__Implementation__Frozen(104);
 
-			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[149] = 
-			DataStore[149] = new IntegerRangeConstraint__Implementation__Frozen(149);
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[106] = 
+			DataStore[106] = new IntegerRangeConstraint__Implementation__Frozen(106);
 
-			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[216] = 
-			DataStore[216] = new IntegerRangeConstraint__Implementation__Frozen(216);
+			Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[110] = 
+			DataStore[110] = new IntegerRangeConstraint__Implementation__Frozen(110);
 
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[147].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[28];
-			DataStore[147].ExportGuid = new Guid("e5695d96-15aa-460f-be55-6c3fd7567d5e");
-			DataStore[147].Reason = @"Strings have to have at least one character.";
-			DataStore[147].Max = 4000;
-			DataStore[147].Min = 1;
-			DataStore[147].Seal();
-			DataStore[148].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[172];
-			DataStore[148].ExportGuid = new Guid("04372ada-88c7-4ff8-8f28-ce76c3f736a3");
-			DataStore[148].Reason = @"strings in the database should not be longer than 4k";
-			DataStore[148].Max = 4000;
-			DataStore[148].Min = 0;
-			DataStore[148].Seal();
-			DataStore[149].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[173];
-			DataStore[149].ExportGuid = new Guid("967f623c-dd56-4224-9544-322128b292d7");
-			DataStore[149].Reason = @"strings in the database should not be longer than 4k";
-			DataStore[149].Max = 4000;
-			DataStore[149].Min = 0;
-			DataStore[149].Seal();
-			DataStore[216].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[217];
-			DataStore[216].ExportGuid = new Guid("368ded25-0fd0-4e68-bf71-0a56bd4ed681");
-			DataStore[216].Reason = @"RelationEndRole can only be 1 ('A') or 2 ('B')";
-			DataStore[216].Max = 2;
-			DataStore[216].Min = 1;
-			DataStore[216].Seal();
+			DataStore[92].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[157];
+			DataStore[92].ExportGuid = new Guid("368ded25-0fd0-4e68-bf71-0a56bd4ed681");
+			DataStore[92].Reason = @"RelationEndRole can only be 1 ('A') or 2 ('B')";
+			DataStore[92].Max = 2;
+			DataStore[92].Min = 1;
+			DataStore[92].Seal();
+			DataStore[104].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[171];
+			DataStore[104].ExportGuid = new Guid("967f623c-dd56-4224-9544-322128b292d7");
+			DataStore[104].Reason = @"strings in the database should not be longer than 4k";
+			DataStore[104].Max = 4000;
+			DataStore[104].Min = 0;
+			DataStore[104].Seal();
+			DataStore[106].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[169];
+			DataStore[106].ExportGuid = new Guid("e5695d96-15aa-460f-be55-6c3fd7567d5e");
+			DataStore[106].Reason = @"Strings have to have at least one character.";
+			DataStore[106].Max = 4000;
+			DataStore[106].Min = 1;
+			DataStore[106].Seal();
+			DataStore[110].ConstrainedProperty = Kistl.App.Base.Property__Implementation__Frozen.DataStore[172];
+			DataStore[110].ExportGuid = new Guid("04372ada-88c7-4ff8-8f28-ce76c3f736a3");
+			DataStore[110].Reason = @"strings in the database should not be longer than 4k";
+			DataStore[110].Max = 4000;
+			DataStore[110].Min = 0;
+			DataStore[110].Seal();
 	
 		}
 #region Serializer

@@ -218,7 +218,7 @@ namespace Kistl.App.Base
 			{
 				case "Assemblies":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(82).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(47).Constraints
 						.Where(c => !c.IsValid(this, this.Assemblies))
 						.Select(c => c.GetErrorText(this, this.Assemblies))
 						.ToArray();
@@ -227,7 +227,7 @@ namespace Kistl.App.Base
 				}
 				case "DataTypes":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(44).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(60).Constraints
 						.Where(c => !c.IsValid(this, this.DataTypes))
 						.Select(c => c.GetErrorText(this, this.DataTypes))
 						.ToArray();
@@ -236,7 +236,7 @@ namespace Kistl.App.Base
 				}
 				case "Description":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(179).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(10).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -245,7 +245,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(260).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(156).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -254,7 +254,7 @@ namespace Kistl.App.Base
 				}
 				case "ModuleName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(43).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(65).Constraints
 						.Where(c => !c.IsValid(this, this.ModuleName))
 						.Select(c => c.GetErrorText(this, this.ModuleName))
 						.ToArray();
@@ -263,7 +263,7 @@ namespace Kistl.App.Base
 				}
 				case "Namespace":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(42).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(67).Constraints
 						.Where(c => !c.IsValid(this, this.Namespace))
 						.Select(c => c.GetErrorText(this, this.Namespace))
 						.ToArray();
@@ -295,137 +295,138 @@ namespace Kistl.App.Base
 		}
 
 		internal static void FillDataStore() {
-			DataStore[1].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(2) {
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[1],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[2],
+			DataStore[1].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0) {
 });
-			DataStore[1].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(43) {
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[8],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[64],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[62],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[73],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[9],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[37],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[42],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[70],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[74],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[76],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[75],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[11],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[38],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[44],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[71],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[89],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[13],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[39],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[15],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[41],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[90],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[69],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[43],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[12],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[40],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[88],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[78],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[81],
+			DataStore[1].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(5) {
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[22],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[56],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25],
 });
 			DataStore[1].Description = @"";
-			DataStore[1].ExportGuid = new Guid("ef6d5bd8-5826-4ce6-a9ca-c8438ddde773");
-			DataStore[1].ModuleName = @"KistlBase";
-			DataStore[1].Namespace = @"Kistl.App.Base";
+			DataStore[1].ExportGuid = new Guid("a56d9701-d98e-49ab-bd49-a491d09e2d46");
+			DataStore[1].ModuleName = @"Projekte";
+			DataStore[1].Namespace = @"Kistl.App.Projekte";
 			DataStore[1].Seal();
-			DataStore[2].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0) {
+			DataStore[2].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(2) {
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[15],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[16],
 });
-			DataStore[2].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(5) {
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4],
+			DataStore[2].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(44) {
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[31],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[57],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[9],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[32],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[42],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[60],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[41],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[1],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[49],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[5],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[27],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[43],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[62],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[21],
 Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[44],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[61],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[40],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[38],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[24],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[28],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[39],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[35],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[65],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[64],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4],
 });
 			DataStore[2].Description = @"";
-			DataStore[2].ExportGuid = new Guid("a56d9701-d98e-49ab-bd49-a491d09e2d46");
-			DataStore[2].ModuleName = @"Projekte";
-			DataStore[2].Namespace = @"Kistl.App.Projekte";
+			DataStore[2].ExportGuid = new Guid("ef6d5bd8-5826-4ce6-a9ca-c8438ddde773");
+			DataStore[2].ModuleName = @"KistlBase";
+			DataStore[2].Namespace = @"Kistl.App.Base";
 			DataStore[2].Seal();
 			DataStore[3].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0) {
 });
 			DataStore[3].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(3) {
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[34],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[23],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[37],
 });
 			DataStore[3].Description = @"";
 			DataStore[3].ExportGuid = new Guid("fb309065-8f8a-4f95-8794-9767c6b08f6c");
 			DataStore[3].ModuleName = @"TimeRecords";
 			DataStore[3].Namespace = @"Kistl.App.TimeRecords";
 			DataStore[3].Seal();
-			DataStore[4].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(18) {
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[3],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[15],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[16],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[29],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[30],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[31],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[32],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[33],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[34],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[35],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[36],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[37],
-Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[38],
+			DataStore[4].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0) {
 });
 			DataStore[4].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(8) {
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[27],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[53],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[15],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[13],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[12],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[11],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[16],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14],
 });
 			DataStore[4].Description = @"";
-			DataStore[4].ExportGuid = new Guid("84f486f7-19fe-49ad-8e4a-6c05089e7684");
-			DataStore[4].ModuleName = @"GUI";
-			DataStore[4].Namespace = @"Kistl.App.GUI";
+			DataStore[4].ExportGuid = new Guid("81e8ce31-65eb-46fe-ba86-de7452692d5b");
+			DataStore[4].ModuleName = @"TestModule";
+			DataStore[4].Namespace = @"Kistl.App.Test";
 			DataStore[4].Seal();
-			DataStore[5].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(0) {
+			DataStore[5].Assemblies = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Assembly>(new List<Kistl.App.Base.Assembly>(18) {
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[1],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[2],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[3],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[4],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[5],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[6],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[7],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[8],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[9],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[10],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[11],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[12],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[13],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[14],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[17],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[18],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[19],
+Kistl.App.Base.Assembly__Implementation__Frozen.DataStore[20],
 });
 			DataStore[5].DataTypes = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.DataType>(new List<Kistl.App.Base.DataType>(8) {
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[58],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[61],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[60],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48],
-Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[17],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[8],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[53],
+Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45],
 });
 			DataStore[5].Description = @"";
-			DataStore[5].ExportGuid = new Guid("81e8ce31-65eb-46fe-ba86-de7452692d5b");
-			DataStore[5].ModuleName = @"TestModule";
-			DataStore[5].Namespace = @"Kistl.App.Test";
+			DataStore[5].ExportGuid = new Guid("84f486f7-19fe-49ad-8e4a-6c05089e7684");
+			DataStore[5].ModuleName = @"GUI";
+			DataStore[5].Namespace = @"Kistl.App.GUI";
 			DataStore[5].Seal();
 	
 		}

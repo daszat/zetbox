@@ -27,8 +27,8 @@ namespace Kistl.App.Test
 		public TestCustomObject__Implementation__()
 		{
             {
-                _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberMobile");
                 _PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberOffice");
+                _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberMobile");
             }
         }
 
@@ -195,7 +195,7 @@ namespace Kistl.App.Test
 			{
 				case "Birthday":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(133).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(139).Constraints
 						.Where(c => !c.IsValid(this, this.Birthday))
 						.Select(c => c.GetErrorText(this, this.Birthday))
 						.ToArray();
@@ -204,7 +204,7 @@ namespace Kistl.App.Test
 				}
 				case "PersonName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(130).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(20).Constraints
 						.Where(c => !c.IsValid(this, this.PersonName))
 						.Select(c => c.GetErrorText(this, this.PersonName))
 						.ToArray();
@@ -213,7 +213,7 @@ namespace Kistl.App.Test
 				}
 				case "PhoneNumberMobile":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(131).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(2).Constraints
 						.Where(c => !c.IsValid(this, this.PhoneNumberMobile))
 						.Select(c => c.GetErrorText(this, this.PhoneNumberMobile))
 						.ToArray();
@@ -222,7 +222,7 @@ namespace Kistl.App.Test
 				}
 				case "PhoneNumberOffice":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(132).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(1).Constraints
 						.Where(c => !c.IsValid(this, this.PhoneNumberOffice))
 						.Select(c => c.GetErrorText(this, this.PhoneNumberOffice))
 						.ToArray();

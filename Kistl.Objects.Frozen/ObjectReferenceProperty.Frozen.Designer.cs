@@ -187,7 +187,7 @@ namespace Kistl.App.Base
 			{
 				case "EagerLoading":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(269).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(150).Constraints
 						.Where(c => !c.IsValid(this, this.EagerLoading))
 						.Select(c => c.GetErrorText(this, this.EagerLoading))
 						.ToArray();
@@ -196,7 +196,7 @@ namespace Kistl.App.Base
 				}
 				case "ReferenceObjectClass":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(46).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(163).Constraints
 						.Where(c => !c.IsValid(this, this.ReferenceObjectClass))
 						.Select(c => c.GetErrorText(this, this.ReferenceObjectClass))
 						.ToArray();
@@ -205,7 +205,7 @@ namespace Kistl.App.Base
 				}
 				case "RelationEnd":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(222).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(123).Constraints
 						.Where(c => !c.IsValid(this, this.RelationEnd))
 						.Select(c => c.GetErrorText(this, this.RelationEnd))
 						.ToArray();
@@ -224,71 +224,59 @@ namespace Kistl.App.Base
 		internal new static Dictionary<int, ObjectReferenceProperty__Implementation__Frozen> DataStore = new Dictionary<int, ObjectReferenceProperty__Implementation__Frozen>(70);
 		internal new static void CreateInstances()
 		{
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[7] = 
-			DataStore[7] = new ObjectReferenceProperty__Implementation__Frozen(7);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[8] = 
-			DataStore[8] = new ObjectReferenceProperty__Implementation__Frozen(8);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[14] = 
-			DataStore[14] = new ObjectReferenceProperty__Implementation__Frozen(14);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[19] = 
-			DataStore[19] = new ObjectReferenceProperty__Implementation__Frozen(19);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[21] = 
-			DataStore[21] = new ObjectReferenceProperty__Implementation__Frozen(21);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[22] = 
-			DataStore[22] = new ObjectReferenceProperty__Implementation__Frozen(22);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[25] = 
-			DataStore[25] = new ObjectReferenceProperty__Implementation__Frozen(25);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[27] = 
-			DataStore[27] = new ObjectReferenceProperty__Implementation__Frozen(27);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[29] = 
-			DataStore[29] = new ObjectReferenceProperty__Implementation__Frozen(29);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[31] = 
-			DataStore[31] = new ObjectReferenceProperty__Implementation__Frozen(31);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[44] = 
-			DataStore[44] = new ObjectReferenceProperty__Implementation__Frozen(44);
-
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[45] = 
 			DataStore[45] = new ObjectReferenceProperty__Implementation__Frozen(45);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[46] = 
 			DataStore[46] = new ObjectReferenceProperty__Implementation__Frozen(46);
 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[47] = 
+			DataStore[47] = new ObjectReferenceProperty__Implementation__Frozen(47);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[48] = 
+			DataStore[48] = new ObjectReferenceProperty__Implementation__Frozen(48);
+
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[49] = 
 			DataStore[49] = new ObjectReferenceProperty__Implementation__Frozen(49);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[50] = 
+			DataStore[50] = new ObjectReferenceProperty__Implementation__Frozen(50);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[51] = 
 			DataStore[51] = new ObjectReferenceProperty__Implementation__Frozen(51);
 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[52] = 
+			DataStore[52] = new ObjectReferenceProperty__Implementation__Frozen(52);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[53] = 
+			DataStore[53] = new ObjectReferenceProperty__Implementation__Frozen(53);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[54] = 
+			DataStore[54] = new ObjectReferenceProperty__Implementation__Frozen(54);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[55] = 
+			DataStore[55] = new ObjectReferenceProperty__Implementation__Frozen(55);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[56] = 
+			DataStore[56] = new ObjectReferenceProperty__Implementation__Frozen(56);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[57] = 
+			DataStore[57] = new ObjectReferenceProperty__Implementation__Frozen(57);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[60] = 
+			DataStore[60] = new ObjectReferenceProperty__Implementation__Frozen(60);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[61] = 
+			DataStore[61] = new ObjectReferenceProperty__Implementation__Frozen(61);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[62] = 
+			DataStore[62] = new ObjectReferenceProperty__Implementation__Frozen(62);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[63] = 
+			DataStore[63] = new ObjectReferenceProperty__Implementation__Frozen(63);
+
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[64] = 
 			DataStore[64] = new ObjectReferenceProperty__Implementation__Frozen(64);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[67] = 
-			DataStore[67] = new ObjectReferenceProperty__Implementation__Frozen(67);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[69] = 
-			DataStore[69] = new ObjectReferenceProperty__Implementation__Frozen(69);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[70] = 
-			DataStore[70] = new ObjectReferenceProperty__Implementation__Frozen(70);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[72] = 
-			DataStore[72] = new ObjectReferenceProperty__Implementation__Frozen(72);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[73] = 
-			DataStore[73] = new ObjectReferenceProperty__Implementation__Frozen(73);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[74] = 
-			DataStore[74] = new ObjectReferenceProperty__Implementation__Frozen(74);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[78] = 
 			DataStore[78] = new ObjectReferenceProperty__Implementation__Frozen(78);
@@ -296,20 +284,38 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[79] = 
 			DataStore[79] = new ObjectReferenceProperty__Implementation__Frozen(79);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[80] = 
-			DataStore[80] = new ObjectReferenceProperty__Implementation__Frozen(80);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[81] = 
-			DataStore[81] = new ObjectReferenceProperty__Implementation__Frozen(81);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[82] = 
-			DataStore[82] = new ObjectReferenceProperty__Implementation__Frozen(82);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[85] = 
+			DataStore[85] = new ObjectReferenceProperty__Implementation__Frozen(85);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[86] = 
 			DataStore[86] = new ObjectReferenceProperty__Implementation__Frozen(86);
 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[87] = 
+			DataStore[87] = new ObjectReferenceProperty__Implementation__Frozen(87);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[88] = 
+			DataStore[88] = new ObjectReferenceProperty__Implementation__Frozen(88);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[89] = 
+			DataStore[89] = new ObjectReferenceProperty__Implementation__Frozen(89);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[90] = 
+			DataStore[90] = new ObjectReferenceProperty__Implementation__Frozen(90);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[91] = 
+			DataStore[91] = new ObjectReferenceProperty__Implementation__Frozen(91);
+
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[92] = 
 			DataStore[92] = new ObjectReferenceProperty__Implementation__Frozen(92);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[93] = 
+			DataStore[93] = new ObjectReferenceProperty__Implementation__Frozen(93);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[94] = 
+			DataStore[94] = new ObjectReferenceProperty__Implementation__Frozen(94);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[95] = 
+			DataStore[95] = new ObjectReferenceProperty__Implementation__Frozen(95);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[96] = 
 			DataStore[96] = new ObjectReferenceProperty__Implementation__Frozen(96);
@@ -320,8 +326,17 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[98] = 
 			DataStore[98] = new ObjectReferenceProperty__Implementation__Frozen(98);
 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[99] = 
+			DataStore[99] = new ObjectReferenceProperty__Implementation__Frozen(99);
+
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[100] = 
 			DataStore[100] = new ObjectReferenceProperty__Implementation__Frozen(100);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[101] = 
+			DataStore[101] = new ObjectReferenceProperty__Implementation__Frozen(101);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[102] = 
+			DataStore[102] = new ObjectReferenceProperty__Implementation__Frozen(102);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[103] = 
 			DataStore[103] = new ObjectReferenceProperty__Implementation__Frozen(103);
@@ -332,26 +347,77 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[105] = 
 			DataStore[105] = new ObjectReferenceProperty__Implementation__Frozen(105);
 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[106] = 
+			DataStore[106] = new ObjectReferenceProperty__Implementation__Frozen(106);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[107] = 
+			DataStore[107] = new ObjectReferenceProperty__Implementation__Frozen(107);
+
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[108] = 
 			DataStore[108] = new ObjectReferenceProperty__Implementation__Frozen(108);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[111] = 
+			DataStore[111] = new ObjectReferenceProperty__Implementation__Frozen(111);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[112] = 
 			DataStore[112] = new ObjectReferenceProperty__Implementation__Frozen(112);
 
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[113] = 
+			DataStore[113] = new ObjectReferenceProperty__Implementation__Frozen(113);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[120] = 
+			DataStore[120] = new ObjectReferenceProperty__Implementation__Frozen(120);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[121] = 
+			DataStore[121] = new ObjectReferenceProperty__Implementation__Frozen(121);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[122] = 
+			DataStore[122] = new ObjectReferenceProperty__Implementation__Frozen(122);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[123] = 
+			DataStore[123] = new ObjectReferenceProperty__Implementation__Frozen(123);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[124] = 
+			DataStore[124] = new ObjectReferenceProperty__Implementation__Frozen(124);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[125] = 
+			DataStore[125] = new ObjectReferenceProperty__Implementation__Frozen(125);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[126] = 
+			DataStore[126] = new ObjectReferenceProperty__Implementation__Frozen(126);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[127] = 
+			DataStore[127] = new ObjectReferenceProperty__Implementation__Frozen(127);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[128] = 
+			DataStore[128] = new ObjectReferenceProperty__Implementation__Frozen(128);
+
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[129] = 
 			DataStore[129] = new ObjectReferenceProperty__Implementation__Frozen(129);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[151] = 
-			DataStore[151] = new ObjectReferenceProperty__Implementation__Frozen(151);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[130] = 
+			DataStore[130] = new ObjectReferenceProperty__Implementation__Frozen(130);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[152] = 
-			DataStore[152] = new ObjectReferenceProperty__Implementation__Frozen(152);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[131] = 
+			DataStore[131] = new ObjectReferenceProperty__Implementation__Frozen(131);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[153] = 
-			DataStore[153] = new ObjectReferenceProperty__Implementation__Frozen(153);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[154] = 
+			DataStore[154] = new ObjectReferenceProperty__Implementation__Frozen(154);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[155] = 
 			DataStore[155] = new ObjectReferenceProperty__Implementation__Frozen(155);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[159] = 
+			DataStore[159] = new ObjectReferenceProperty__Implementation__Frozen(159);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[160] = 
+			DataStore[160] = new ObjectReferenceProperty__Implementation__Frozen(160);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[161] = 
+			DataStore[161] = new ObjectReferenceProperty__Implementation__Frozen(161);
+
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[162] = 
+			DataStore[162] = new ObjectReferenceProperty__Implementation__Frozen(162);
 
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[163] = 
 			DataStore[163] = new ObjectReferenceProperty__Implementation__Frozen(163);
@@ -359,1242 +425,1177 @@ namespace Kistl.App.Base
 			Kistl.App.Base.Property__Implementation__Frozen.DataStore[164] = 
 			DataStore[164] = new ObjectReferenceProperty__Implementation__Frozen(164);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[165] = 
-			DataStore[165] = new ObjectReferenceProperty__Implementation__Frozen(165);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[175] = 
+			DataStore[175] = new ObjectReferenceProperty__Implementation__Frozen(175);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[170] = 
-			DataStore[170] = new ObjectReferenceProperty__Implementation__Frozen(170);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[182] = 
+			DataStore[182] = new ObjectReferenceProperty__Implementation__Frozen(182);
 
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[171] = 
-			DataStore[171] = new ObjectReferenceProperty__Implementation__Frozen(171);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[206] = 
-			DataStore[206] = new ObjectReferenceProperty__Implementation__Frozen(206);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[207] = 
-			DataStore[207] = new ObjectReferenceProperty__Implementation__Frozen(207);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[208] = 
-			DataStore[208] = new ObjectReferenceProperty__Implementation__Frozen(208);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[213] = 
-			DataStore[213] = new ObjectReferenceProperty__Implementation__Frozen(213);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[214] = 
-			DataStore[214] = new ObjectReferenceProperty__Implementation__Frozen(214);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[215] = 
-			DataStore[215] = new ObjectReferenceProperty__Implementation__Frozen(215);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[218] = 
-			DataStore[218] = new ObjectReferenceProperty__Implementation__Frozen(218);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[222] = 
-			DataStore[222] = new ObjectReferenceProperty__Implementation__Frozen(222);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[223] = 
-			DataStore[223] = new ObjectReferenceProperty__Implementation__Frozen(223);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[224] = 
-			DataStore[224] = new ObjectReferenceProperty__Implementation__Frozen(224);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[226] = 
-			DataStore[226] = new ObjectReferenceProperty__Implementation__Frozen(226);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[227] = 
-			DataStore[227] = new ObjectReferenceProperty__Implementation__Frozen(227);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[231] = 
-			DataStore[231] = new ObjectReferenceProperty__Implementation__Frozen(231);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[234] = 
-			DataStore[234] = new ObjectReferenceProperty__Implementation__Frozen(234);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[235] = 
-			DataStore[235] = new ObjectReferenceProperty__Implementation__Frozen(235);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[236] = 
-			DataStore[236] = new ObjectReferenceProperty__Implementation__Frozen(236);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[244] = 
-			DataStore[244] = new ObjectReferenceProperty__Implementation__Frozen(244);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[249] = 
-			DataStore[249] = new ObjectReferenceProperty__Implementation__Frozen(249);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[271] = 
-			DataStore[271] = new ObjectReferenceProperty__Implementation__Frozen(271);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[276] = 
-			DataStore[276] = new ObjectReferenceProperty__Implementation__Frozen(276);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[278] = 
-			DataStore[278] = new ObjectReferenceProperty__Implementation__Frozen(278);
-
-			Kistl.App.Base.Property__Implementation__Frozen.DataStore[279] = 
-			DataStore[279] = new ObjectReferenceProperty__Implementation__Frozen(279);
+			Kistl.App.Base.Property__Implementation__Frozen.DataStore[185] = 
+			DataStore[185] = new ObjectReferenceProperty__Implementation__Frozen(185);
 
 		}
 
 		internal new static void FillDataStore() {
-			DataStore[7].AltText = @"Eigenschaften der Objektklasse";
-			DataStore[7].CategoryTags = @"DataModel";
-			DataStore[7].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[45].AltText = @"Zugeordnete Mitarbeiter";
+			DataStore[45].CategoryTags = @"Main";
+			DataStore[45].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[7].Description = @"Eigenschaften der Objektklasse";
-			DataStore[7].ExportGuid = new Guid("e7d91162-0aa8-4fe3-9e29-d0519781ceb7");
-			DataStore[7].IsIndexed = false;
-			DataStore[7].IsList = true;
-			DataStore[7].IsNullable = true;
-			DataStore[7].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[7].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
-			DataStore[7].PropertyName = @"Properties";
-			DataStore[7].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[7].EagerLoading = false;
-			DataStore[7].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
-			DataStore[7].Seal();
-			DataStore[8].AltText = null;
-			DataStore[8].CategoryTags = @"DataModel";
-			DataStore[8].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[144],
-});
-			DataStore[8].Description = @"";
-			DataStore[8].ExportGuid = new Guid("bdaacacd-c8cb-45cf-a329-28f942337273");
-			DataStore[8].IsIndexed = false;
-			DataStore[8].IsList = false;
-			DataStore[8].IsNullable = false;
-			DataStore[8].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[8].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
-			DataStore[8].PropertyName = @"ObjectClass";
-			DataStore[8].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[8].EagerLoading = false;
-			DataStore[8].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[8].Seal();
-			DataStore[14].AltText = null;
-			DataStore[14].CategoryTags = null;
-			DataStore[14].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[14].Description = @"";
-			DataStore[14].ExportGuid = new Guid("f6ff71b0-ccaf-4c7d-8e2b-1210a9df4b0f");
-			DataStore[14].IsIndexed = false;
-			DataStore[14].IsList = true;
-			DataStore[14].IsNullable = true;
-			DataStore[14].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
-			DataStore[14].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
-			DataStore[14].PropertyName = @"Tasks";
-			DataStore[14].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[14].EagerLoading = false;
-			DataStore[14].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[4];
-			DataStore[14].Seal();
-			DataStore[19].AltText = @"Verknüpfung zum Projekt";
-			DataStore[19].CategoryTags = null;
-			DataStore[19].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[19].Description = @"Verknüpfung zum Projekt";
-			DataStore[19].ExportGuid = new Guid("5545ba8a-3e89-4b22-bd66-c12f3622ace0");
-			DataStore[19].IsIndexed = false;
-			DataStore[19].IsList = false;
-			DataStore[19].IsNullable = true;
-			DataStore[19].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
-			DataStore[19].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[4];
-			DataStore[19].PropertyName = @"Projekt";
-			DataStore[19].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[19].EagerLoading = false;
-			DataStore[19].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
-			DataStore[19].Seal();
-			DataStore[21].AltText = @"Projekte des Mitarbeiters für die er Verantwortlich ist";
-			DataStore[21].CategoryTags = null;
-			DataStore[21].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[21].Description = @"Projekte des Mitarbeiters für die er Verantwortlich ist";
-			DataStore[21].ExportGuid = new Guid("1abb5a1b-ba9f-4b75-b6ea-3d28be877b7c");
-			DataStore[21].IsIndexed = true;
-			DataStore[21].IsList = true;
-			DataStore[21].IsNullable = true;
-			DataStore[21].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
-			DataStore[21].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
-			DataStore[21].PropertyName = @"Projekte";
-			DataStore[21].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[21].EagerLoading = false;
-			DataStore[21].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
-			DataStore[21].Seal();
-			DataStore[22].AltText = null;
-			DataStore[22].CategoryTags = null;
-			DataStore[22].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[22].Description = @"";
-			DataStore[22].ExportGuid = new Guid("3e60fe29-ac50-4232-bbeb-af023ede02f6");
-			DataStore[22].IsIndexed = true;
-			DataStore[22].IsList = true;
-			DataStore[22].IsNullable = true;
-			DataStore[22].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
-			DataStore[22].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
-			DataStore[22].PropertyName = @"Mitarbeiter";
-			DataStore[22].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[22].EagerLoading = false;
-			DataStore[22].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
-			DataStore[22].Seal();
-			DataStore[25].AltText = @"Pointer auf die Basisklasse";
-			DataStore[25].CategoryTags = @"DataModel";
-			DataStore[25].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[25].Description = @"Pointer auf die Basisklasse";
-			DataStore[25].ExportGuid = new Guid("ad060d41-bc7a-41b8-a3e3-ec9302c8c714");
-			DataStore[25].IsIndexed = false;
-			DataStore[25].IsList = false;
-			DataStore[25].IsNullable = true;
-			DataStore[25].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[25].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
-			DataStore[25].PropertyName = @"BaseObjectClass";
-			DataStore[25].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[25].EagerLoading = false;
-			DataStore[25].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
-			DataStore[25].Seal();
-			DataStore[27].AltText = @"Liste der vererbten Klassen";
-			DataStore[27].CategoryTags = @"DataModel";
-			DataStore[27].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[27].Description = @"Liste der vererbten Klassen";
-			DataStore[27].ExportGuid = new Guid("0914de6e-966c-46fc-9359-e4da6c3608b1");
-			DataStore[27].IsIndexed = false;
-			DataStore[27].IsList = true;
-			DataStore[27].IsNullable = true;
-			DataStore[27].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[27].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
-			DataStore[27].PropertyName = @"SubClasses";
-			DataStore[27].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[27].EagerLoading = false;
-			DataStore[27].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
-			DataStore[27].Seal();
-			DataStore[29].AltText = null;
-			DataStore[29].CategoryTags = @"Summary";
-			DataStore[29].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[141],
-});
-			DataStore[29].Description = @"";
-			DataStore[29].ExportGuid = new Guid("9afc74a4-4eeb-4c39-879c-eacc8f369fa7");
-			DataStore[29].IsIndexed = false;
-			DataStore[29].IsList = false;
-			DataStore[29].IsNullable = false;
-			DataStore[29].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[29].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
-			DataStore[29].PropertyName = @"ObjectClass";
-			DataStore[29].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[29].EagerLoading = false;
-			DataStore[29].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[29].Seal();
-			DataStore[31].AltText = @"Liste aller Methoden der Objektklasse.";
-			DataStore[31].CategoryTags = @"DataModel";
-			DataStore[31].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[31].Description = @"Liste aller Methoden der Objektklasse.";
-			DataStore[31].ExportGuid = new Guid("e9f8a1f1-a5ed-44a6-bbf3-9b040766f19f");
-			DataStore[31].IsIndexed = false;
-			DataStore[31].IsList = true;
-			DataStore[31].IsNullable = true;
-			DataStore[31].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[31].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
-			DataStore[31].PropertyName = @"Methods";
-			DataStore[31].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[31].EagerLoading = false;
-			DataStore[31].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
-			DataStore[31].Seal();
-			DataStore[44].AltText = @"Datentypendes Modules";
-			DataStore[44].CategoryTags = @"Main";
-			DataStore[44].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[44].Description = @"Datentypendes Modules";
-			DataStore[44].ExportGuid = new Guid("a1711984-5263-4407-ac67-6e4123954976");
-			DataStore[44].IsIndexed = false;
-			DataStore[44].IsList = true;
-			DataStore[44].IsNullable = true;
-			DataStore[44].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[44].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
-			DataStore[44].PropertyName = @"DataTypes";
-			DataStore[44].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[44].EagerLoading = false;
-			DataStore[44].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
-			DataStore[44].Seal();
-			DataStore[45].AltText = @"Modul der Objektklasse";
-			DataStore[45].CategoryTags = @"Summary,MetaData";
-			DataStore[45].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
-});
-			DataStore[45].Description = @"Modul der Objektklasse";
-			DataStore[45].ExportGuid = new Guid("4e1fb30b-e528-4968-95b0-f3a38eafe643");
+			DataStore[45].Description = @"Zugeordnete Mitarbeiter";
+			DataStore[45].ExportGuid = new Guid("21ed2b37-6e10-4aff-b4c1-554a1cc0e967");
 			DataStore[45].IsIndexed = false;
-			DataStore[45].IsList = false;
-			DataStore[45].IsNullable = false;
-			DataStore[45].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[45].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
-			DataStore[45].PropertyName = @"Module";
-			DataStore[45].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[45].IsList = true;
+			DataStore[45].IsNullable = true;
+			DataStore[45].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[45].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[34];
+			DataStore[45].PropertyName = @"Mitarbeiter";
+			DataStore[45].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[45].EagerLoading = false;
-			DataStore[45].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
+			DataStore[45].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[56];
 			DataStore[45].Seal();
-			DataStore[46].AltText = @"Pointer zur Objektklasse";
+			DataStore[46].AltText = @"Parameter der Methode";
 			DataStore[46].CategoryTags = @"Main";
-			DataStore[46].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[253],
+			DataStore[46].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[46].Description = @"Pointer zur Objektklasse";
-			DataStore[46].ExportGuid = new Guid("1d0ac841-129a-41d9-8f7b-026216db5b6d");
-			DataStore[46].IsIndexed = false;
-			DataStore[46].IsList = false;
-			DataStore[46].IsNullable = false;
-			DataStore[46].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[46].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
-			DataStore[46].PropertyName = @"ReferenceObjectClass";
-			DataStore[46].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[46].Description = @"Parameter der Methode";
+			DataStore[46].ExportGuid = new Guid("8dace0a9-6db1-458d-b054-ace4a3d906c2");
+			DataStore[46].IsIndexed = true;
+			DataStore[46].IsList = true;
+			DataStore[46].IsNullable = true;
+			DataStore[46].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[46].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[49];
+			DataStore[46].PropertyName = @"Parameter";
+			DataStore[46].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[46].EagerLoading = false;
-			DataStore[46].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
+			DataStore[46].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[35];
 			DataStore[46].Seal();
-			DataStore[49].AltText = null;
-			DataStore[49].CategoryTags = null;
+			DataStore[47].AltText = @"Assemblies des Moduls";
+			DataStore[47].CategoryTags = @"Main";
+			DataStore[47].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[47].Description = @"Assemblies des Moduls";
+			DataStore[47].ExportGuid = new Guid("cab23a85-a179-475c-a70f-77789e2a2907");
+			DataStore[47].IsIndexed = false;
+			DataStore[47].IsList = true;
+			DataStore[47].IsNullable = true;
+			DataStore[47].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[47].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47];
+			DataStore[47].PropertyName = @"Assemblies";
+			DataStore[47].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[47].EagerLoading = false;
+			DataStore[47].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
+			DataStore[47].Seal();
+			DataStore[48].AltText = @"all implemented Methods in this DataType";
+			DataStore[48].CategoryTags = @"DataModel";
+			DataStore[48].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[48].Description = @"all implemented Methods in this DataType";
+			DataStore[48].ExportGuid = new Guid("0f8a3e8b-29f6-49eb-99ba-f55ca1e161e9");
+			DataStore[48].IsIndexed = false;
+			DataStore[48].IsList = true;
+			DataStore[48].IsNullable = true;
+			DataStore[48].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[48].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
+			DataStore[48].PropertyName = @"MethodInvocations";
+			DataStore[48].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[48].EagerLoading = false;
+			DataStore[48].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[50];
+			DataStore[48].Seal();
+			DataStore[49].AltText = @"Methodenaufrufe implementiert in dieser Objekt Klasse";
+			DataStore[49].CategoryTags = @"Main";
 			DataStore[49].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[49].Description = @"";
-			DataStore[49].ExportGuid = new Guid("5b57288b-835a-459e-8532-9f47e17ab2b5");
+			DataStore[49].Description = @"Methodenaufrufe implementiert in dieser Objekt Klasse";
+			DataStore[49].ExportGuid = new Guid("dc2bd380-6e63-4a44-bcc3-192780f80606");
 			DataStore[49].IsIndexed = false;
-			DataStore[49].IsList = false;
+			DataStore[49].IsList = true;
 			DataStore[49].IsNullable = true;
 			DataStore[49].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
-			DataStore[49].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
-			DataStore[49].PropertyName = @"Mitarbeiter";
-			DataStore[49].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[49].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[49];
+			DataStore[49].PropertyName = @"MethodInvokations";
+			DataStore[49].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[49].EagerLoading = false;
-			DataStore[49].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
+			DataStore[49].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[50];
 			DataStore[49].Seal();
-			DataStore[51].AltText = @"Projekt zum Auftrag";
+			DataStore[50].AltText = @"The context menu for this Visual";
+			DataStore[50].CategoryTags = null;
+			DataStore[50].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[50].Description = @"The context menu for this Visual";
+			DataStore[50].ExportGuid = new Guid("7b18f26e-0f3f-4554-b469-1029bd4ca10b");
+			DataStore[50].IsIndexed = false;
+			DataStore[50].IsList = true;
+			DataStore[50].IsNullable = true;
+			DataStore[50].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[50].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
+			DataStore[50].PropertyName = @"ContextMenu";
+			DataStore[50].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[50].EagerLoading = false;
+			DataStore[50].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[20];
+			DataStore[50].Seal();
+			DataStore[51].AltText = @"The main menu for this Template";
 			DataStore[51].CategoryTags = null;
 			DataStore[51].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[51].Description = @"Projekt zum Auftrag";
-			DataStore[51].ExportGuid = new Guid("a0ad574a-356b-4962-a98d-c305b1289154");
+			DataStore[51].Description = @"The main menu for this Template";
+			DataStore[51].ExportGuid = new Guid("5e9612d5-019a-416b-a2e2-dfc9674a50f6");
 			DataStore[51].IsIndexed = false;
-			DataStore[51].IsList = false;
+			DataStore[51].IsList = true;
 			DataStore[51].IsNullable = true;
-			DataStore[51].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
-			DataStore[51].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
-			DataStore[51].PropertyName = @"Projekt";
-			DataStore[51].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[51].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[51].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[17];
+			DataStore[51].PropertyName = @"Menu";
+			DataStore[51].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[51].EagerLoading = false;
-			DataStore[51].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
+			DataStore[51].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[20];
 			DataStore[51].Seal();
-			DataStore[64].AltText = @"Kunde des Projektes";
-			DataStore[64].CategoryTags = null;
+			DataStore[52].AltText = @"if this is a container, here are the visually contained/controlled children of this Visual";
+			DataStore[52].CategoryTags = null;
+			DataStore[52].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[52].Description = @"if this is a container, here are the visually contained/controlled children of this Visual";
+			DataStore[52].ExportGuid = new Guid("9f69c3bd-e274-4639-b30c-8d2a9599917b");
+			DataStore[52].IsIndexed = false;
+			DataStore[52].IsList = true;
+			DataStore[52].IsNullable = true;
+			DataStore[52].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[52].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
+			DataStore[52].PropertyName = @"Children";
+			DataStore[52].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[52].EagerLoading = false;
+			DataStore[52].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[20];
+			DataStore[52].Seal();
+			DataStore[53].AltText = @"Einträge der Enumeration";
+			DataStore[53].CategoryTags = null;
+			DataStore[53].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[53].Description = @"Einträge der Enumeration";
+			DataStore[53].ExportGuid = new Guid("1619c8a7-b969-4c05-851c-7a2545cda484");
+			DataStore[53].IsIndexed = false;
+			DataStore[53].IsList = true;
+			DataStore[53].IsNullable = true;
+			DataStore[53].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[53].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[26];
+			DataStore[53].PropertyName = @"EnumerationEntries";
+			DataStore[53].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[53].EagerLoading = false;
+			DataStore[53].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[21];
+			DataStore[53].Seal();
+			DataStore[54].AltText = @"Interfaces der Objektklasse";
+			DataStore[54].CategoryTags = @"DataModel";
+			DataStore[54].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[54].Description = @"Interfaces der Objektklasse";
+			DataStore[54].ExportGuid = new Guid("a9ec04c2-0807-4d6c-a96a-824d13e5c571");
+			DataStore[54].IsIndexed = false;
+			DataStore[54].IsList = true;
+			DataStore[54].IsNullable = true;
+			DataStore[54].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[54].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[54].PropertyName = @"ImplementsInterfaces";
+			DataStore[54].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[54].EagerLoading = false;
+			DataStore[54].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
+			DataStore[54].Seal();
+			DataStore[55].AltText = null;
+			DataStore[55].CategoryTags = null;
+			DataStore[55].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[55].Description = @"";
+			DataStore[55].ExportGuid = new Guid("f6ff71b0-ccaf-4c7d-8e2b-1210a9df4b0f");
+			DataStore[55].IsIndexed = false;
+			DataStore[55].IsList = true;
+			DataStore[55].IsNullable = true;
+			DataStore[55].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[55].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55];
+			DataStore[55].PropertyName = @"Tasks";
+			DataStore[55].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[55].EagerLoading = false;
+			DataStore[55].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[22];
+			DataStore[55].Seal();
+			DataStore[56].AltText = @"Projekte des Mitarbeiters für die er Verantwortlich ist";
+			DataStore[56].CategoryTags = null;
+			DataStore[56].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[56].Description = @"Projekte des Mitarbeiters für die er Verantwortlich ist";
+			DataStore[56].ExportGuid = new Guid("1abb5a1b-ba9f-4b75-b6ea-3d28be877b7c");
+			DataStore[56].IsIndexed = true;
+			DataStore[56].IsList = true;
+			DataStore[56].IsNullable = true;
+			DataStore[56].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[56].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[56];
+			DataStore[56].PropertyName = @"Projekte";
+			DataStore[56].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[56].EagerLoading = false;
+			DataStore[56].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[55];
+			DataStore[56].Seal();
+			DataStore[57].AltText = @"Eigenschaften der Objektklasse";
+			DataStore[57].CategoryTags = @"DataModel";
+			DataStore[57].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[57].Description = @"Eigenschaften der Objektklasse";
+			DataStore[57].ExportGuid = new Guid("e7d91162-0aa8-4fe3-9e29-d0519781ceb7");
+			DataStore[57].IsIndexed = false;
+			DataStore[57].IsList = true;
+			DataStore[57].IsNullable = true;
+			DataStore[57].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[57].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
+			DataStore[57].PropertyName = @"Properties";
+			DataStore[57].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[57].EagerLoading = false;
+			DataStore[57].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[30];
+			DataStore[57].Seal();
+			DataStore[60].AltText = @"Datentypendes Modules";
+			DataStore[60].CategoryTags = @"Main";
+			DataStore[60].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[60].Description = @"Datentypendes Modules";
+			DataStore[60].ExportGuid = new Guid("a1711984-5263-4407-ac67-6e4123954976");
+			DataStore[60].IsIndexed = false;
+			DataStore[60].IsList = true;
+			DataStore[60].IsNullable = true;
+			DataStore[60].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[60].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47];
+			DataStore[60].PropertyName = @"DataTypes";
+			DataStore[60].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[60].EagerLoading = false;
+			DataStore[60].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[66];
+			DataStore[60].Seal();
+			DataStore[61].AltText = @"Aufträge";
+			DataStore[61].CategoryTags = null;
+			DataStore[61].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[61].Description = @"Aufträge";
+			DataStore[61].ExportGuid = new Guid("30a1d8b6-4db5-45a0-a9a8-531472a9107e");
+			DataStore[61].IsIndexed = false;
+			DataStore[61].IsList = true;
+			DataStore[61].IsNullable = true;
+			DataStore[61].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[61].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55];
+			DataStore[61].PropertyName = @"Auftraege";
+			DataStore[61].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[61].EagerLoading = false;
+			DataStore[61].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[25];
+			DataStore[61].Seal();
+			DataStore[62].AltText = @"Liste aller Methoden der Objektklasse.";
+			DataStore[62].CategoryTags = @"DataModel";
+			DataStore[62].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[62].Description = @"Liste aller Methoden der Objektklasse.";
+			DataStore[62].ExportGuid = new Guid("e9f8a1f1-a5ed-44a6-bbf3-9b040766f19f");
+			DataStore[62].IsIndexed = false;
+			DataStore[62].IsList = true;
+			DataStore[62].IsNullable = true;
+			DataStore[62].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[62].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
+			DataStore[62].PropertyName = @"Methods";
+			DataStore[62].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[62].EagerLoading = false;
+			DataStore[62].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[49];
+			DataStore[62].Seal();
+			DataStore[63].AltText = null;
+			DataStore[63].CategoryTags = null;
+			DataStore[63].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[63].Description = @"";
+			DataStore[63].ExportGuid = new Guid("3e60fe29-ac50-4232-bbeb-af023ede02f6");
+			DataStore[63].IsIndexed = true;
+			DataStore[63].IsList = true;
+			DataStore[63].IsNullable = true;
+			DataStore[63].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[63].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[55];
+			DataStore[63].PropertyName = @"Mitarbeiter";
+			DataStore[63].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[63].EagerLoading = false;
+			DataStore[63].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[56];
+			DataStore[63].Seal();
+			DataStore[64].AltText = @"Liste der vererbten Klassen";
+			DataStore[64].CategoryTags = @"DataModel";
 			DataStore[64].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[64].Description = @"Kunde des Projektes";
-			DataStore[64].ExportGuid = new Guid("57c977da-c113-4ce6-9484-3828f74c4193");
+			DataStore[64].Description = @"Liste der vererbten Klassen";
+			DataStore[64].ExportGuid = new Guid("0914de6e-966c-46fc-9359-e4da6c3608b1");
 			DataStore[64].IsIndexed = false;
-			DataStore[64].IsList = false;
+			DataStore[64].IsList = true;
 			DataStore[64].IsNullable = true;
 			DataStore[64].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
-			DataStore[64].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[19];
-			DataStore[64].PropertyName = @"Kunde";
-			DataStore[64].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[64].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[64].PropertyName = @"SubClasses";
+			DataStore[64].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[64].EagerLoading = false;
-			DataStore[64].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
+			DataStore[64].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[59];
 			DataStore[64].Seal();
-			DataStore[67].AltText = @"Aufträge";
-			DataStore[67].CategoryTags = null;
-			DataStore[67].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[78].AltText = @"The list of constraints applying to this Property";
+			DataStore[78].CategoryTags = @"DataModel";
+			DataStore[78].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[67].Description = @"Aufträge";
-			DataStore[67].ExportGuid = new Guid("30a1d8b6-4db5-45a0-a9a8-531472a9107e");
-			DataStore[67].IsIndexed = false;
-			DataStore[67].IsList = true;
-			DataStore[67].IsNullable = true;
-			DataStore[67].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
-			DataStore[67].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
-			DataStore[67].PropertyName = @"Auftraege";
-			DataStore[67].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[67].EagerLoading = false;
-			DataStore[67].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[19];
-			DataStore[67].Seal();
-			DataStore[69].AltText = @"Standard Icon wenn IIcon nicht implementiert ist";
-			DataStore[69].CategoryTags = @"Summary,Description, GUI";
-			DataStore[69].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[69].Description = @"Standard Icon wenn IIcon nicht implementiert ist";
-			DataStore[69].ExportGuid = new Guid("b1402cda-de87-4b2a-bd65-a950b8dd7a9f");
-			DataStore[69].IsIndexed = false;
-			DataStore[69].IsList = false;
-			DataStore[69].IsNullable = true;
-			DataStore[69].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[69].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
-			DataStore[69].PropertyName = @"DefaultIcon";
-			DataStore[69].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[69].EagerLoading = true;
-			DataStore[69].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[27];
-			DataStore[69].Seal();
-			DataStore[70].AltText = @"Module";
-			DataStore[70].CategoryTags = null;
-			DataStore[70].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[127],
-});
-			DataStore[70].Description = @"Module";
-			DataStore[70].ExportGuid = new Guid("8d579192-717e-4f2c-90ed-1c066255e270");
-			DataStore[70].IsIndexed = false;
-			DataStore[70].IsList = false;
-			DataStore[70].IsNullable = false;
-			DataStore[70].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[70].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[29];
-			DataStore[70].PropertyName = @"Module";
-			DataStore[70].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[70].EagerLoading = false;
-			DataStore[70].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[70].Seal();
-			DataStore[72].AltText = @"Zugehörig zum Modul";
-			DataStore[72].CategoryTags = @"MetaData";
-			DataStore[72].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[125],
-});
-			DataStore[72].Description = @"Zugehörig zum Modul";
-			DataStore[72].ExportGuid = new Guid("2105acf5-0b98-4d0b-9be4-049a502a4f03");
-			DataStore[72].IsIndexed = false;
-			DataStore[72].IsList = false;
-			DataStore[72].IsNullable = false;
-			DataStore[72].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[72].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
-			DataStore[72].PropertyName = @"Module";
-			DataStore[72].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[72].EagerLoading = false;
-			DataStore[72].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[72].Seal();
-			DataStore[73].AltText = @"Zugehörig zum Modul";
-			DataStore[73].CategoryTags = @"Summary";
-			DataStore[73].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[124],
-});
-			DataStore[73].Description = @"Zugehörig zum Modul";
-			DataStore[73].ExportGuid = new Guid("51640f6f-b2ae-4f26-915e-fda5a2c060a6");
-			DataStore[73].IsIndexed = false;
-			DataStore[73].IsList = false;
-			DataStore[73].IsNullable = false;
-			DataStore[73].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[73].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
-			DataStore[73].PropertyName = @"Module";
-			DataStore[73].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[73].EagerLoading = false;
-			DataStore[73].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[73].Seal();
-			DataStore[74].AltText = @"Methode, die Aufgerufen wird";
-			DataStore[74].CategoryTags = @"Summary";
-			DataStore[74].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[123],
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[193],
-});
-			DataStore[74].Description = @"Methode, die Aufgerufen wird";
-			DataStore[74].ExportGuid = new Guid("b9db3b3b-d00d-479f-843f-6d41704eb079");
-			DataStore[74].IsIndexed = false;
-			DataStore[74].IsList = false;
-			DataStore[74].IsNullable = false;
-			DataStore[74].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[74].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
-			DataStore[74].PropertyName = @"Method";
-			DataStore[74].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[74].EagerLoading = false;
-			DataStore[74].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
-			DataStore[74].Seal();
-			DataStore[78].AltText = @"Zugehörig zum Modul";
-			DataStore[78].CategoryTags = @"Summary";
-			DataStore[78].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[119],
-});
-			DataStore[78].Description = @"Zugehörig zum Modul";
-			DataStore[78].ExportGuid = new Guid("b959b313-2063-4391-bb97-14ac85d5dff0");
+			DataStore[78].Description = @"The list of constraints applying to this Property";
+			DataStore[78].ExportGuid = new Guid("fd8f14da-e647-48cb-8593-3a30984f5c96");
 			DataStore[78].IsIndexed = false;
-			DataStore[78].IsList = false;
-			DataStore[78].IsNullable = false;
-			DataStore[78].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[78].IsList = true;
+			DataStore[78].IsNullable = true;
+			DataStore[78].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
 			DataStore[78].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
-			DataStore[78].PropertyName = @"Module";
-			DataStore[78].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[78].PropertyName = @"Constraints";
+			DataStore[78].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
 			DataStore[78].EagerLoading = false;
-			DataStore[78].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
+			DataStore[78].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
 			DataStore[78].Seal();
-			DataStore[79].AltText = @"In dieser Objektklasse implementieren";
-			DataStore[79].CategoryTags = @"Summary";
-			DataStore[79].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[118],
+			DataStore[79].AltText = @"list of type arguments";
+			DataStore[79].CategoryTags = null;
+			DataStore[79].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[79].Description = @"In dieser Objektklasse implementieren";
-			DataStore[79].ExportGuid = new Guid("94e98a50-cad2-4779-8c50-e4922d653781");
-			DataStore[79].IsIndexed = false;
-			DataStore[79].IsList = false;
-			DataStore[79].IsNullable = false;
-			DataStore[79].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[79].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
-			DataStore[79].PropertyName = @"InvokeOnObjectClass";
-			DataStore[79].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[79].EagerLoading = false;
-			DataStore[79].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
+			DataStore[79].Description = @"list of type arguments";
+			DataStore[79].ExportGuid = new Guid("443e3370-b1f4-46e8-9779-1a8d9ba1c8a6");
+			DataStore[79].IsIndexed = true;
+			DataStore[79].IsList = true;
+			DataStore[79].IsNullable = true;
+			DataStore[79].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[79].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
+			DataStore[79].PropertyName = @"GenericArguments";
+			DataStore[79].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[10];
+			DataStore[79].EagerLoading = true;
+			DataStore[79].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[46];
 			DataStore[79].Seal();
-			DataStore[80].AltText = @"all implemented Methods in this DataType";
-			DataStore[80].CategoryTags = @"DataModel";
-			DataStore[80].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[85].AltText = @"Definition of this Struct";
+			DataStore[85].CategoryTags = null;
+			DataStore[85].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[80],
 });
-			DataStore[80].Description = @"all implemented Methods in this DataType";
-			DataStore[80].ExportGuid = new Guid("0f8a3e8b-29f6-49eb-99ba-f55ca1e161e9");
-			DataStore[80].IsIndexed = false;
-			DataStore[80].IsList = true;
-			DataStore[80].IsNullable = true;
-			DataStore[80].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[80].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[33];
-			DataStore[80].PropertyName = @"MethodInvocations";
-			DataStore[80].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[80].EagerLoading = false;
-			DataStore[80].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[30];
-			DataStore[80].Seal();
-			DataStore[81].AltText = @"Methodenaufrufe implementiert in dieser Objekt Klasse";
-			DataStore[81].CategoryTags = @"Main";
-			DataStore[81].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[81].Description = @"Methodenaufrufe implementiert in dieser Objekt Klasse";
-			DataStore[81].ExportGuid = new Guid("dc2bd380-6e63-4a44-bcc3-192780f80606");
-			DataStore[81].IsIndexed = false;
-			DataStore[81].IsList = true;
-			DataStore[81].IsNullable = true;
-			DataStore[81].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[81].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
-			DataStore[81].PropertyName = @"MethodInvokations";
-			DataStore[81].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[81].EagerLoading = false;
-			DataStore[81].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[30];
-			DataStore[81].Seal();
-			DataStore[82].AltText = @"Assemblies des Moduls";
-			DataStore[82].CategoryTags = @"Main";
-			DataStore[82].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[82].Description = @"Assemblies des Moduls";
-			DataStore[82].ExportGuid = new Guid("cab23a85-a179-475c-a70f-77789e2a2907");
-			DataStore[82].IsIndexed = false;
-			DataStore[82].IsList = true;
-			DataStore[82].IsNullable = true;
-			DataStore[82].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[82].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
-			DataStore[82].PropertyName = @"Assemblies";
-			DataStore[82].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[82].EagerLoading = false;
-			DataStore[82].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
-			DataStore[82].Seal();
-			DataStore[86].AltText = @"Zugeordnete Mitarbeiter";
-			DataStore[86].CategoryTags = @"Main";
+			DataStore[85].Description = @"Definition of this Struct";
+			DataStore[85].ExportGuid = new Guid("0d78c157-c106-4728-9af2-7992da7c935d");
+			DataStore[85].IsIndexed = false;
+			DataStore[85].IsList = false;
+			DataStore[85].IsNullable = false;
+			DataStore[85].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[85].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[57];
+			DataStore[85].PropertyName = @"StructDefinition";
+			DataStore[85].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[85].EagerLoading = false;
+			DataStore[85].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[68];
+			DataStore[85].Seal();
+			DataStore[86].AltText = @"The Property to display";
+			DataStore[86].CategoryTags = null;
 			DataStore[86].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[86].Description = @"Zugeordnete Mitarbeiter";
-			DataStore[86].ExportGuid = new Guid("21ed2b37-6e10-4aff-b4c1-554a1cc0e967");
+			DataStore[86].Description = @"The Property to display";
+			DataStore[86].ExportGuid = new Guid("a432e3ff-61ed-4726-8559-f34516181065");
 			DataStore[86].IsIndexed = false;
-			DataStore[86].IsList = true;
+			DataStore[86].IsList = false;
 			DataStore[86].IsNullable = true;
-			DataStore[86].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[86].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
 			DataStore[86].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
-			DataStore[86].PropertyName = @"Mitarbeiter";
-			DataStore[86].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
+			DataStore[86].PropertyName = @"Property";
+			DataStore[86].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[86].EagerLoading = false;
-			DataStore[86].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
+			DataStore[86].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[30];
 			DataStore[86].Seal();
-			DataStore[92].AltText = @"Methode des Parameters";
-			DataStore[92].CategoryTags = null;
-			DataStore[92].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[113],
+			DataStore[87].AltText = @"testtest";
+			DataStore[87].CategoryTags = null;
+			DataStore[87].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
 });
-			DataStore[92].Description = @"Methode des Parameters";
-			DataStore[92].ExportGuid = new Guid("29d7eba7-6b87-438a-910d-1a2bf17d8215");
+			DataStore[87].Description = @"testtest";
+			DataStore[87].ExportGuid = new Guid("e93b3fc2-2fc9-4577-9a93-a51ed2a4190f");
+			DataStore[87].IsIndexed = false;
+			DataStore[87].IsList = false;
+			DataStore[87].IsNullable = false;
+			DataStore[87].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[87].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
+			DataStore[87].PropertyName = @"ObjectProp";
+			DataStore[87].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[87].EagerLoading = false;
+			DataStore[87].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[48];
+			DataStore[87].Seal();
+			DataStore[88].AltText = @"Enumeration der Eigenschaft";
+			DataStore[88].CategoryTags = null;
+			DataStore[88].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[78],
+});
+			DataStore[88].Description = @"Enumeration der Eigenschaft";
+			DataStore[88].ExportGuid = new Guid("1144c061-3610-495f-b8b4-951058bb0c23");
+			DataStore[88].IsIndexed = false;
+			DataStore[88].IsList = false;
+			DataStore[88].IsNullable = false;
+			DataStore[88].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[88].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[62];
+			DataStore[88].PropertyName = @"Enumeration";
+			DataStore[88].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[88].EagerLoading = false;
+			DataStore[88].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
+			DataStore[88].Seal();
+			DataStore[89].AltText = @"Objektpointer für das Testinterface";
+			DataStore[89].CategoryTags = null;
+			DataStore[89].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[86],
+});
+			DataStore[89].Description = @"Objektpointer für das Testinterface";
+			DataStore[89].ExportGuid = new Guid("8abd5f26-3d12-4b48-8a2b-16adbb97d845");
+			DataStore[89].IsIndexed = false;
+			DataStore[89].IsList = false;
+			DataStore[89].IsNullable = false;
+			DataStore[89].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
+			DataStore[89].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[54];
+			DataStore[89].PropertyName = @"ObjectProp";
+			DataStore[89].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[89].EagerLoading = false;
+			DataStore[89].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[48];
+			DataStore[89].RelationEnd = null;
+			DataStore[89].Seal();
+			DataStore[90].AltText = @"The Method whose return value shoud be displayed";
+			DataStore[90].CategoryTags = null;
+			DataStore[90].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[82],
+});
+			DataStore[90].Description = @"The Method whose return value shoud be displayed";
+			DataStore[90].ExportGuid = new Guid("0b55b2ba-3ac0-4631-8a73-1e8846c8e9b1");
+			DataStore[90].IsIndexed = false;
+			DataStore[90].IsList = false;
+			DataStore[90].IsNullable = false;
+			DataStore[90].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[90].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[20];
+			DataStore[90].PropertyName = @"Method";
+			DataStore[90].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[90].EagerLoading = false;
+			DataStore[90].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[49];
+			DataStore[90].Seal();
+			DataStore[91].AltText = @"The assembly containing the referenced Type.";
+			DataStore[91].CategoryTags = null;
+			DataStore[91].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[76],
+});
+			DataStore[91].Description = @"The assembly containing the referenced Type.";
+			DataStore[91].ExportGuid = new Guid("885bfa97-3d43-48bb-a0aa-1049298714ff");
+			DataStore[91].IsIndexed = false;
+			DataStore[91].IsList = false;
+			DataStore[91].IsNullable = false;
+			DataStore[91].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[91].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
+			DataStore[91].PropertyName = @"Assembly";
+			DataStore[91].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[91].EagerLoading = false;
+			DataStore[91].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
+			DataStore[91].Seal();
+			DataStore[92].AltText = @"The A-side of this Relation.";
+			DataStore[92].CategoryTags = null;
+			DataStore[92].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[92].Description = @"The A-side of this Relation.";
+			DataStore[92].ExportGuid = new Guid("d4429d3c-8fd1-468e-88d5-17abfd658d04");
 			DataStore[92].IsIndexed = false;
 			DataStore[92].IsList = false;
-			DataStore[92].IsNullable = false;
-			DataStore[92].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[92].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
-			DataStore[92].PropertyName = @"Method";
-			DataStore[92].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[92].IsNullable = true;
+			DataStore[92].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[92].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63];
+			DataStore[92].PropertyName = @"A";
+			DataStore[92].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[92].EagerLoading = false;
-			DataStore[92].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
+			DataStore[92].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
 			DataStore[92].Seal();
-			DataStore[96].AltText = @"Parameter der Methode";
-			DataStore[96].CategoryTags = @"Main";
-			DataStore[96].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[93].AltText = @"The property to be constrained";
+			DataStore[93].CategoryTags = null;
+			DataStore[93].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[68],
 });
-			DataStore[96].Description = @"Parameter der Methode";
-			DataStore[96].ExportGuid = new Guid("8dace0a9-6db1-458d-b054-ace4a3d906c2");
-			DataStore[96].IsIndexed = true;
-			DataStore[96].IsList = true;
-			DataStore[96].IsNullable = true;
-			DataStore[96].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[96].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[10];
-			DataStore[96].PropertyName = @"Parameter";
-			DataStore[96].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
+			DataStore[93].Description = @"The property to be constrained";
+			DataStore[93].ExportGuid = new Guid("438b9307-fb40-4afe-a66f-a5762c41e14b");
+			DataStore[93].IsIndexed = false;
+			DataStore[93].IsList = false;
+			DataStore[93].IsNullable = false;
+			DataStore[93].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[93].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[6];
+			DataStore[93].PropertyName = @"ConstrainedProperty";
+			DataStore[93].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[93].EagerLoading = false;
+			DataStore[93].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[30];
+			DataStore[93].Seal();
+			DataStore[94].AltText = @"The visual representation of this Template";
+			DataStore[94].CategoryTags = null;
+			DataStore[94].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[67],
+});
+			DataStore[94].Description = @"The visual representation of this Template";
+			DataStore[94].ExportGuid = new Guid("5d2880a4-716a-4bdc-aaa9-379c006e7ed4");
+			DataStore[94].IsIndexed = false;
+			DataStore[94].IsList = false;
+			DataStore[94].IsNullable = false;
+			DataStore[94].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[94].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[17];
+			DataStore[94].PropertyName = @"VisualTree";
+			DataStore[94].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[94].EagerLoading = false;
+			DataStore[94].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[20];
+			DataStore[94].Seal();
+			DataStore[95].AltText = @"Assembly of the Type that is displayed with this Template";
+			DataStore[95].CategoryTags = null;
+			DataStore[95].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[75],
+});
+			DataStore[95].Description = @"Assembly of the Type that is displayed with this Template";
+			DataStore[95].ExportGuid = new Guid("c81105da-97e4-4685-af88-792c68e55a17");
+			DataStore[95].IsIndexed = false;
+			DataStore[95].IsList = false;
+			DataStore[95].IsNullable = false;
+			DataStore[95].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[95].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[17];
+			DataStore[95].PropertyName = @"DisplayedTypeAssembly";
+			DataStore[95].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[95].EagerLoading = false;
+			DataStore[95].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
+			DataStore[95].Seal();
+			DataStore[96].AltText = @"Übergeordnete Enumeration";
+			DataStore[96].CategoryTags = null;
+			DataStore[96].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[73],
+});
+			DataStore[96].Description = @"Übergeordnete Enumeration";
+			DataStore[96].ExportGuid = new Guid("115c3bfb-72fd-46f2-81fe-74ce1cfa1874");
+			DataStore[96].IsIndexed = false;
+			DataStore[96].IsList = false;
+			DataStore[96].IsNullable = false;
+			DataStore[96].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[96].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[21];
+			DataStore[96].PropertyName = @"Enumeration";
+			DataStore[96].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[96].EagerLoading = false;
-			DataStore[96].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
+			DataStore[96].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
 			DataStore[96].Seal();
-			DataStore[97].AltText = @"Kistl-Typ des Parameters";
-			DataStore[97].CategoryTags = null;
+			DataStore[97].AltText = @"Zugehörig zum Modul";
+			DataStore[97].CategoryTags = @"MetaData";
 			DataStore[97].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[109],
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[72],
 });
-			DataStore[97].Description = @"Kistl-Typ des Parameters";
-			DataStore[97].ExportGuid = new Guid("9bd64c60-7282-47f0-8069-528a175fcc92");
+			DataStore[97].Description = @"Zugehörig zum Modul";
+			DataStore[97].ExportGuid = new Guid("2105acf5-0b98-4d0b-9be4-049a502a4f03");
 			DataStore[97].IsIndexed = false;
 			DataStore[97].IsList = false;
 			DataStore[97].IsNullable = false;
-			DataStore[97].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[97].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[42];
-			DataStore[97].PropertyName = @"DataType";
-			DataStore[97].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[97].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[97].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[97].PropertyName = @"Module";
+			DataStore[97].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[97].EagerLoading = false;
-			DataStore[97].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[33];
+			DataStore[97].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[47];
 			DataStore[97].Seal();
-			DataStore[98].AltText = @"Assembly des CLR Objektes, NULL für Default Assemblies";
-			DataStore[98].CategoryTags = null;
-			DataStore[98].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[98].AltText = @"Zugehörig zum Modul";
+			DataStore[98].CategoryTags = @"Summary";
+			DataStore[98].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[16],
 });
-			DataStore[98].Description = @"Assembly des CLR Objektes, NULL für Default Assemblies";
-			DataStore[98].ExportGuid = new Guid("304b34ac-b581-40ce-826c-0fc0cab93bb6");
+			DataStore[98].Description = @"Zugehörig zum Modul";
+			DataStore[98].ExportGuid = new Guid("51640f6f-b2ae-4f26-915e-fda5a2c060a6");
 			DataStore[98].IsIndexed = false;
 			DataStore[98].IsList = false;
-			DataStore[98].IsNullable = true;
-			DataStore[98].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[98].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[43];
-			DataStore[98].PropertyName = @"Assembly";
-			DataStore[98].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[98].IsNullable = false;
+			DataStore[98].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[98].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[49];
+			DataStore[98].PropertyName = @"Module";
+			DataStore[98].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[98].EagerLoading = false;
-			DataStore[98].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
+			DataStore[98].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[47];
 			DataStore[98].Seal();
-			DataStore[100].AltText = @"Übergeordnete Enumeration";
-			DataStore[100].CategoryTags = null;
-			DataStore[100].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[107],
+			DataStore[99].AltText = @"Module";
+			DataStore[99].CategoryTags = null;
+			DataStore[99].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[15],
 });
-			DataStore[100].Description = @"Übergeordnete Enumeration";
-			DataStore[100].ExportGuid = new Guid("115c3bfb-72fd-46f2-81fe-74ce1cfa1874");
+			DataStore[99].Description = @"Module";
+			DataStore[99].ExportGuid = new Guid("8d579192-717e-4f2c-90ed-1c066255e270");
+			DataStore[99].IsIndexed = false;
+			DataStore[99].IsList = false;
+			DataStore[99].IsNullable = false;
+			DataStore[99].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[99].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[36];
+			DataStore[99].PropertyName = @"Module";
+			DataStore[99].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[99].EagerLoading = false;
+			DataStore[99].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[47];
+			DataStore[99].Seal();
+			DataStore[100].AltText = @"Kunde des Projektes";
+			DataStore[100].CategoryTags = null;
+			DataStore[100].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[100].Description = @"Kunde des Projektes";
+			DataStore[100].ExportGuid = new Guid("57c977da-c113-4ce6-9484-3828f74c4193");
 			DataStore[100].IsIndexed = false;
 			DataStore[100].IsList = false;
-			DataStore[100].IsNullable = false;
+			DataStore[100].IsNullable = true;
 			DataStore[100].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[100].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
-			DataStore[100].PropertyName = @"Enumeration";
-			DataStore[100].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[100].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
+			DataStore[100].PropertyName = @"Kunde";
+			DataStore[100].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[100].EagerLoading = false;
-			DataStore[100].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[45];
+			DataStore[100].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[48];
 			DataStore[100].Seal();
-			DataStore[103].AltText = @"Einträge der Enumeration";
+			DataStore[101].AltText = @"Standard Icon wenn IIcon nicht implementiert ist";
+			DataStore[101].CategoryTags = @"Summary,Description, GUI";
+			DataStore[101].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[101].Description = @"Standard Icon wenn IIcon nicht implementiert ist";
+			DataStore[101].ExportGuid = new Guid("b1402cda-de87-4b2a-bd65-a950b8dd7a9f");
+			DataStore[101].IsIndexed = false;
+			DataStore[101].IsList = false;
+			DataStore[101].IsNullable = true;
+			DataStore[101].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[101].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
+			DataStore[101].PropertyName = @"DefaultIcon";
+			DataStore[101].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[101].EagerLoading = true;
+			DataStore[101].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[52];
+			DataStore[101].Seal();
+			DataStore[102].AltText = @"Methode, die Aufgerufen wird";
+			DataStore[102].CategoryTags = @"Summary";
+			DataStore[102].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(2) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[20],
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[22],
+});
+			DataStore[102].Description = @"Methode, die Aufgerufen wird";
+			DataStore[102].ExportGuid = new Guid("b9db3b3b-d00d-479f-843f-6d41704eb079");
+			DataStore[102].IsIndexed = false;
+			DataStore[102].IsList = false;
+			DataStore[102].IsNullable = false;
+			DataStore[102].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[102].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50];
+			DataStore[102].PropertyName = @"Method";
+			DataStore[102].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[102].EagerLoading = false;
+			DataStore[102].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[49];
+			DataStore[102].Seal();
+			DataStore[103].AltText = @"Kistl-Typ des Parameters";
 			DataStore[103].CategoryTags = null;
-			DataStore[103].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[103].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[19],
 });
-			DataStore[103].Description = @"Einträge der Enumeration";
-			DataStore[103].ExportGuid = new Guid("1619c8a7-b969-4c05-851c-7a2545cda484");
+			DataStore[103].Description = @"Kistl-Typ des Parameters";
+			DataStore[103].ExportGuid = new Guid("9bd64c60-7282-47f0-8069-528a175fcc92");
 			DataStore[103].IsIndexed = false;
-			DataStore[103].IsList = true;
-			DataStore[103].IsNullable = true;
-			DataStore[103].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[103].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[45];
-			DataStore[103].PropertyName = @"EnumerationEntries";
-			DataStore[103].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
+			DataStore[103].IsList = false;
+			DataStore[103].IsNullable = false;
+			DataStore[103].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[103].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[41];
+			DataStore[103].PropertyName = @"DataType";
+			DataStore[103].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[103].EagerLoading = false;
-			DataStore[103].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[46];
+			DataStore[103].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[66];
 			DataStore[103].Seal();
-			DataStore[104].AltText = @"Enumeration der Eigenschaft";
+			DataStore[104].AltText = @"Assembly des CLR Objektes, NULL für Default Assemblies";
 			DataStore[104].CategoryTags = null;
-			DataStore[104].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[106],
+			DataStore[104].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[104].Description = @"Enumeration der Eigenschaft";
-			DataStore[104].ExportGuid = new Guid("1144c061-3610-495f-b8b4-951058bb0c23");
+			DataStore[104].Description = @"Assembly des CLR Objektes, NULL für Default Assemblies";
+			DataStore[104].ExportGuid = new Guid("304b34ac-b581-40ce-826c-0fc0cab93bb6");
 			DataStore[104].IsIndexed = false;
 			DataStore[104].IsList = false;
-			DataStore[104].IsNullable = false;
-			DataStore[104].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[104].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[47];
-			DataStore[104].PropertyName = @"Enumeration";
-			DataStore[104].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[104].IsNullable = true;
+			DataStore[104].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[104].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[24];
+			DataStore[104].PropertyName = @"Assembly";
+			DataStore[104].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[104].EagerLoading = false;
-			DataStore[104].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[45];
+			DataStore[104].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[36];
 			DataStore[104].Seal();
-			DataStore[105].AltText = @"Interfaces der Objektklasse";
-			DataStore[105].CategoryTags = @"DataModel";
-			DataStore[105].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[105].AltText = @"Methode des Parameters";
+			DataStore[105].CategoryTags = null;
+			DataStore[105].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[6],
 });
-			DataStore[105].Description = @"Interfaces der Objektklasse";
-			DataStore[105].ExportGuid = new Guid("a9ec04c2-0807-4d6c-a96a-824d13e5c571");
+			DataStore[105].Description = @"Methode des Parameters";
+			DataStore[105].ExportGuid = new Guid("29d7eba7-6b87-438a-910d-1a2bf17d8215");
 			DataStore[105].IsIndexed = false;
-			DataStore[105].IsList = true;
-			DataStore[105].IsNullable = true;
-			DataStore[105].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[105].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
-			DataStore[105].PropertyName = @"ImplementsInterfaces";
-			DataStore[105].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
+			DataStore[105].IsList = false;
+			DataStore[105].IsNullable = false;
+			DataStore[105].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[105].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[35];
+			DataStore[105].PropertyName = @"Method";
+			DataStore[105].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[105].EagerLoading = false;
-			DataStore[105].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[44];
+			DataStore[105].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[49];
 			DataStore[105].Seal();
-			DataStore[108].AltText = @"Objektpointer für das Testinterface";
-			DataStore[108].CategoryTags = null;
-			DataStore[108].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[104],
+			DataStore[106].AltText = @"Zugehörig zum Modul";
+			DataStore[106].CategoryTags = @"Summary";
+			DataStore[106].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[2],
 });
-			DataStore[108].Description = @"Objektpointer für das Testinterface";
-			DataStore[108].ExportGuid = new Guid("8abd5f26-3d12-4b48-8a2b-16adbb97d845");
+			DataStore[106].Description = @"Zugehörig zum Modul";
+			DataStore[106].ExportGuid = new Guid("b959b313-2063-4391-bb97-14ac85d5dff0");
+			DataStore[106].IsIndexed = false;
+			DataStore[106].IsList = false;
+			DataStore[106].IsNullable = false;
+			DataStore[106].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[106].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50];
+			DataStore[106].PropertyName = @"Module";
+			DataStore[106].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[106].EagerLoading = false;
+			DataStore[106].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[47];
+			DataStore[106].Seal();
+			DataStore[107].AltText = @"In dieser Objektklasse implementieren";
+			DataStore[107].CategoryTags = @"Summary";
+			DataStore[107].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[10],
+});
+			DataStore[107].Description = @"In dieser Objektklasse implementieren";
+			DataStore[107].ExportGuid = new Guid("94e98a50-cad2-4779-8c50-e4922d653781");
+			DataStore[107].IsIndexed = false;
+			DataStore[107].IsList = false;
+			DataStore[107].IsNullable = false;
+			DataStore[107].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[107].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50];
+			DataStore[107].PropertyName = @"InvokeOnObjectClass";
+			DataStore[107].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[107].EagerLoading = false;
+			DataStore[107].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[66];
+			DataStore[107].Seal();
+			DataStore[108].AltText = @"The B-side of this Relation.";
+			DataStore[108].CategoryTags = null;
+			DataStore[108].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[108].Description = @"The B-side of this Relation.";
+			DataStore[108].ExportGuid = new Guid("20331803-079e-471e-ae45-f4d004aef48e");
 			DataStore[108].IsIndexed = false;
 			DataStore[108].IsList = false;
-			DataStore[108].IsNullable = false;
-			DataStore[108].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[108].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[48];
-			DataStore[108].PropertyName = @"ObjectProp";
-			DataStore[108].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[108].IsNullable = true;
+			DataStore[108].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[108].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63];
+			DataStore[108].PropertyName = @"B";
+			DataStore[108].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[108].EagerLoading = false;
-			DataStore[108].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
-			DataStore[108].RelationEnd = null;
+			DataStore[108].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
 			DataStore[108].Seal();
-			DataStore[112].AltText = @"testtest";
-			DataStore[112].CategoryTags = null;
-			DataStore[112].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[100],
+			DataStore[111].AltText = null;
+			DataStore[111].CategoryTags = @"MetaData";
+			DataStore[111].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[36],
 });
-			DataStore[112].Description = @"testtest";
-			DataStore[112].ExportGuid = new Guid("e93b3fc2-2fc9-4577-9a93-a51ed2a4190f");
+			DataStore[111].Description = null;
+			DataStore[111].ExportGuid = new Guid("25da3568-f362-4441-841e-7c163b10b983");
+			DataStore[111].IsIndexed = false;
+			DataStore[111].IsList = false;
+			DataStore[111].IsNullable = false;
+			DataStore[111].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[111].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
+			DataStore[111].PropertyName = @"Module";
+			DataStore[111].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[111].EagerLoading = false;
+			DataStore[111].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[47];
+			DataStore[111].Seal();
+			DataStore[112].AltText = null;
+			DataStore[112].CategoryTags = @"MetaData";
+			DataStore[112].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[35],
+});
+			DataStore[112].Description = null;
+			DataStore[112].ExportGuid = new Guid("052273ac-706a-446b-bb86-83c726ee66d6");
 			DataStore[112].IsIndexed = false;
 			DataStore[112].IsList = false;
 			DataStore[112].IsNullable = false;
 			DataStore[112].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
-			DataStore[112].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[51];
-			DataStore[112].PropertyName = @"ObjectProp";
-			DataStore[112].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[112].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[52];
+			DataStore[112].PropertyName = @"Module";
+			DataStore[112].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[112].EagerLoading = false;
-			DataStore[112].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[26];
+			DataStore[112].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[47];
 			DataStore[112].Seal();
-			DataStore[129].AltText = @"Definition of this Struct";
-			DataStore[129].CategoryTags = null;
-			DataStore[129].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[91],
+			DataStore[113].AltText = null;
+			DataStore[113].CategoryTags = @"MetaData";
+			DataStore[113].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[43],
 });
-			DataStore[129].Description = @"Definition of this Struct";
-			DataStore[129].ExportGuid = new Guid("0d78c157-c106-4728-9af2-7992da7c935d");
+			DataStore[113].Description = null;
+			DataStore[113].ExportGuid = new Guid("0b7135d3-dedc-4091-a0c4-690c1b4a2b6d");
+			DataStore[113].IsIndexed = false;
+			DataStore[113].IsList = false;
+			DataStore[113].IsNullable = false;
+			DataStore[113].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[113].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[8];
+			DataStore[113].PropertyName = @"Module";
+			DataStore[113].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[113].EagerLoading = false;
+			DataStore[113].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[47];
+			DataStore[113].Seal();
+			DataStore[120].AltText = null;
+			DataStore[120].CategoryTags = null;
+			DataStore[120].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[29],
+});
+			DataStore[120].Description = null;
+			DataStore[120].ExportGuid = new Guid("2a1a99a4-7dd5-4244-913f-06315f3de831");
+			DataStore[120].IsIndexed = false;
+			DataStore[120].IsList = false;
+			DataStore[120].IsNullable = false;
+			DataStore[120].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[120].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[63];
+			DataStore[120].PropertyName = @"Module";
+			DataStore[120].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[120].EagerLoading = false;
+			DataStore[120].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[47];
+			DataStore[120].Seal();
+			DataStore[121].AltText = null;
+			DataStore[121].CategoryTags = null;
+			DataStore[121].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[121].Description = @"The Relation using this RelationEnd as B";
+			DataStore[121].ExportGuid = new Guid("521ea0ba-ae3b-4a60-ae28-f366b3ee78f1");
+			DataStore[121].IsIndexed = false;
+			DataStore[121].IsList = false;
+			DataStore[121].IsNullable = true;
+			DataStore[121].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[121].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
+			DataStore[121].PropertyName = @"BParent";
+			DataStore[121].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[121].EagerLoading = false;
+			DataStore[121].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[63];
+			DataStore[121].Seal();
+			DataStore[122].AltText = null;
+			DataStore[122].CategoryTags = null;
+			DataStore[122].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[122].Description = @"The Relation using this RelationEnd as A";
+			DataStore[122].ExportGuid = new Guid("dd6057d0-78bb-4242-9670-ec6c09bd4d92");
+			DataStore[122].IsIndexed = false;
+			DataStore[122].IsList = false;
+			DataStore[122].IsNullable = true;
+			DataStore[122].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[122].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
+			DataStore[122].PropertyName = @"AParent";
+			DataStore[122].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[122].EagerLoading = false;
+			DataStore[122].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[63];
+			DataStore[122].Seal();
+			DataStore[123].AltText = null;
+			DataStore[123].CategoryTags = @"Main";
+			DataStore[123].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[132],
+});
+			DataStore[123].Description = @"The RelationEnd describing this Property";
+			DataStore[123].ExportGuid = new Guid("63ba109d-92c6-4ced-980b-0a52aabfaec0");
+			DataStore[123].IsIndexed = false;
+			DataStore[123].IsList = false;
+			DataStore[123].IsNullable = false;
+			DataStore[123].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[123].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[60];
+			DataStore[123].PropertyName = @"RelationEnd";
+			DataStore[123].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[123].EagerLoading = false;
+			DataStore[123].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[3];
+			DataStore[123].Seal();
+			DataStore[124].AltText = @"Specifies which type this End of the relation has. MUST NOT be null.";
+			DataStore[124].CategoryTags = null;
+			DataStore[124].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[137],
+});
+			DataStore[124].Description = @"Specifies which type this End of the relation has. MUST NOT be null.";
+			DataStore[124].ExportGuid = new Guid("d4bfc4e0-6b57-49f0-91fd-b0de428484e0");
+			DataStore[124].IsIndexed = false;
+			DataStore[124].IsList = false;
+			DataStore[124].IsNullable = false;
+			DataStore[124].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[124].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
+			DataStore[124].PropertyName = @"Type";
+			DataStore[124].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[124].EagerLoading = false;
+			DataStore[124].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[59];
+			DataStore[124].Seal();
+			DataStore[125].AltText = @"The ORP to navigate FROM this end of the relation. MAY be null.";
+			DataStore[125].CategoryTags = null;
+			DataStore[125].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[169],
+});
+			DataStore[125].Description = @"The ORP to navigate FROM this end of the relation. MAY be null.";
+			DataStore[125].ExportGuid = new Guid("6b25eaab-f746-47ec-a91e-f92ec6fccada");
+			DataStore[125].IsIndexed = false;
+			DataStore[125].IsList = false;
+			DataStore[125].IsNullable = true;
+			DataStore[125].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[125].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[3];
+			DataStore[125].PropertyName = @"Navigator";
+			DataStore[125].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[125].EagerLoading = true;
+			DataStore[125].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[60];
+			DataStore[125].Seal();
+			DataStore[126].AltText = null;
+			DataStore[126].CategoryTags = @"Main";
+			DataStore[126].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[136],
+});
+			DataStore[126].Description = @"The PresentableModel usable by this View";
+			DataStore[126].ExportGuid = new Guid("ca6bc98d-ce9c-43c1-ba6b-93cb99c2e3e0");
+			DataStore[126].IsIndexed = false;
+			DataStore[126].IsList = false;
+			DataStore[126].IsNullable = false;
+			DataStore[126].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[126].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
+			DataStore[126].PropertyName = @"PresentedModelDescriptor";
+			DataStore[126].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[126].EagerLoading = false;
+			DataStore[126].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8];
+			DataStore[126].Seal();
+			DataStore[127].AltText = null;
+			DataStore[127].CategoryTags = @"Summary";
+			DataStore[127].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[127].Description = @"Which employee was present.";
+			DataStore[127].ExportGuid = new Guid("b67880d2-37b0-436f-8628-6637fbe19e31");
+			DataStore[127].IsIndexed = false;
+			DataStore[127].IsList = false;
+			DataStore[127].IsNullable = true;
+			DataStore[127].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[127].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[37];
+			DataStore[127].PropertyName = @"Mitarbeiter";
+			DataStore[127].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[127].EagerLoading = false;
+			DataStore[127].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[56];
+			DataStore[127].Seal();
+			DataStore[128].AltText = null;
+			DataStore[128].CategoryTags = @"Summary";
+			DataStore[128].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[125],
+});
+			DataStore[128].Description = @"Which employee effected this work effort.";
+			DataStore[128].ExportGuid = new Guid("720f5bcf-5654-4114-8fba-f57fb7bd48ea");
+			DataStore[128].IsIndexed = false;
+			DataStore[128].IsList = false;
+			DataStore[128].IsNullable = false;
+			DataStore[128].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
+			DataStore[128].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[23];
+			DataStore[128].PropertyName = @"Mitarbeiter";
+			DataStore[128].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[128].EagerLoading = false;
+			DataStore[128].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[56];
+			DataStore[128].Seal();
+			DataStore[129].AltText = null;
+			DataStore[129].CategoryTags = @"Main";
+			DataStore[129].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[123],
+});
+			DataStore[129].Description = @"The PresentableModel to use for values of this Property";
+			DataStore[129].ExportGuid = new Guid("84e0996a-081f-4a17-a34d-54cf23991301");
 			DataStore[129].IsIndexed = false;
 			DataStore[129].IsList = false;
-			DataStore[129].IsNullable = false;
-			DataStore[129].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[129].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[64];
-			DataStore[129].PropertyName = @"StructDefinition";
-			DataStore[129].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[129].IsNullable = true;
+			DataStore[129].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[129].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[129].PropertyName = @"ValueModelDescriptor";
+			DataStore[129].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[129].EagerLoading = false;
-			DataStore[129].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[62];
+			DataStore[129].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8];
 			DataStore[129].Seal();
-			DataStore[151].AltText = @"if this is a container, here are the visually contained/controlled children of this Visual";
-			DataStore[151].CategoryTags = null;
-			DataStore[151].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[130].AltText = null;
+			DataStore[130].CategoryTags = @"Main";
+			DataStore[130].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[129],
 });
-			DataStore[151].Description = @"if this is a container, here are the visually contained/controlled children of this Visual";
-			DataStore[151].ExportGuid = new Guid("9f69c3bd-e274-4639-b30c-8d2a9599917b");
-			DataStore[151].IsIndexed = false;
-			DataStore[151].IsList = true;
-			DataStore[151].IsNullable = true;
-			DataStore[151].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[151].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
-			DataStore[151].PropertyName = @"Children";
-			DataStore[151].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[151].EagerLoading = false;
-			DataStore[151].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
-			DataStore[151].Seal();
-			DataStore[152].AltText = @"The Property to display";
-			DataStore[152].CategoryTags = null;
-			DataStore[152].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[130].Description = @"The default PresentableModel to use for this ObjectClass";
+			DataStore[130].ExportGuid = new Guid("11adedb9-d32a-4da9-b986-0534e65df760");
+			DataStore[130].IsIndexed = false;
+			DataStore[130].IsList = false;
+			DataStore[130].IsNullable = false;
+			DataStore[130].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[130].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[130].PropertyName = @"DefaultPresentableModelDescriptor";
+			DataStore[130].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[130].EagerLoading = false;
+			DataStore[130].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[8];
+			DataStore[130].Seal();
+			DataStore[131].AltText = null;
+			DataStore[131].CategoryTags = null;
+			DataStore[131].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[127],
 });
-			DataStore[152].Description = @"The Property to display";
-			DataStore[152].ExportGuid = new Guid("a432e3ff-61ed-4726-8559-f34516181065");
-			DataStore[152].IsIndexed = false;
-			DataStore[152].IsList = false;
-			DataStore[152].IsNullable = true;
-			DataStore[152].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[152].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
-			DataStore[152].PropertyName = @"Property";
-			DataStore[152].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[152].EagerLoading = false;
-			DataStore[152].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
-			DataStore[152].Seal();
-			DataStore[153].AltText = @"The Method whose return value shoud be displayed";
-			DataStore[153].CategoryTags = null;
-			DataStore[153].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[81],
+			DataStore[131].Description = @"The TypeRef of the BaseClass of the referenced Type";
+			DataStore[131].ExportGuid = new Guid("f7ed21a0-9a41-40eb-b3ab-b35591f2edd7");
+			DataStore[131].IsIndexed = false;
+			DataStore[131].IsList = false;
+			DataStore[131].IsNullable = true;
+			DataStore[131].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[131].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[46];
+			DataStore[131].PropertyName = @"Parent";
+			DataStore[131].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[131].EagerLoading = false;
+			DataStore[131].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[46];
+			DataStore[131].Seal();
+			DataStore[154].AltText = @"Projekt zum Auftrag";
+			DataStore[154].CategoryTags = null;
+			DataStore[154].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[153].Description = @"The Method whose return value shoud be displayed";
-			DataStore[153].ExportGuid = new Guid("0b55b2ba-3ac0-4631-8a73-1e8846c8e9b1");
-			DataStore[153].IsIndexed = false;
-			DataStore[153].IsList = false;
-			DataStore[153].IsNullable = false;
-			DataStore[153].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[153].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
-			DataStore[153].PropertyName = @"Method";
-			DataStore[153].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[153].EagerLoading = false;
-			DataStore[153].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[10];
-			DataStore[153].Seal();
-			DataStore[155].AltText = @"The visual representation of this Template";
+			DataStore[154].Description = @"Projekt zum Auftrag";
+			DataStore[154].ExportGuid = new Guid("a0ad574a-356b-4962-a98d-c305b1289154");
+			DataStore[154].IsIndexed = false;
+			DataStore[154].IsList = false;
+			DataStore[154].IsNullable = true;
+			DataStore[154].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[154].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
+			DataStore[154].PropertyName = @"Projekt";
+			DataStore[154].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[154].EagerLoading = false;
+			DataStore[154].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[55];
+			DataStore[154].Seal();
+			DataStore[155].AltText = null;
 			DataStore[155].CategoryTags = null;
-			DataStore[155].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[79],
+			DataStore[155].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[155].Description = @"The visual representation of this Template";
-			DataStore[155].ExportGuid = new Guid("5d2880a4-716a-4bdc-aaa9-379c006e7ed4");
+			DataStore[155].Description = @"";
+			DataStore[155].ExportGuid = new Guid("5b57288b-835a-459e-8532-9f47e17ab2b5");
 			DataStore[155].IsIndexed = false;
 			DataStore[155].IsList = false;
-			DataStore[155].IsNullable = false;
-			DataStore[155].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[155].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
-			DataStore[155].PropertyName = @"VisualTree";
-			DataStore[155].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[155].IsNullable = true;
+			DataStore[155].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[155].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[25];
+			DataStore[155].PropertyName = @"Mitarbeiter";
+			DataStore[155].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[155].EagerLoading = false;
-			DataStore[155].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
+			DataStore[155].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[56];
 			DataStore[155].Seal();
-			DataStore[163].AltText = @"Assembly of the Type that is displayed with this Template";
-			DataStore[163].CategoryTags = null;
-			DataStore[163].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[77],
+			DataStore[159].AltText = null;
+			DataStore[159].CategoryTags = @"DataModel";
+			DataStore[159].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[113],
 });
-			DataStore[163].Description = @"Assembly of the Type that is displayed with this Template";
-			DataStore[163].ExportGuid = new Guid("c81105da-97e4-4685-af88-792c68e55a17");
+			DataStore[159].Description = @"";
+			DataStore[159].ExportGuid = new Guid("bdaacacd-c8cb-45cf-a329-28f942337273");
+			DataStore[159].IsIndexed = false;
+			DataStore[159].IsList = false;
+			DataStore[159].IsNullable = false;
+			DataStore[159].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[159].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
+			DataStore[159].PropertyName = @"ObjectClass";
+			DataStore[159].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[159].EagerLoading = false;
+			DataStore[159].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[66];
+			DataStore[159].Seal();
+			DataStore[160].AltText = @"Modul der Objektklasse";
+			DataStore[160].CategoryTags = @"Summary,MetaData";
+			DataStore[160].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[114],
+});
+			DataStore[160].Description = @"Modul der Objektklasse";
+			DataStore[160].ExportGuid = new Guid("4e1fb30b-e528-4968-95b0-f3a38eafe643");
+			DataStore[160].IsIndexed = false;
+			DataStore[160].IsList = false;
+			DataStore[160].IsNullable = false;
+			DataStore[160].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[160].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[66];
+			DataStore[160].PropertyName = @"Module";
+			DataStore[160].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[160].EagerLoading = false;
+			DataStore[160].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[47];
+			DataStore[160].Seal();
+			DataStore[161].AltText = null;
+			DataStore[161].CategoryTags = @"Summary";
+			DataStore[161].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[119],
+});
+			DataStore[161].Description = @"";
+			DataStore[161].ExportGuid = new Guid("9afc74a4-4eeb-4c39-879c-eacc8f369fa7");
+			DataStore[161].IsIndexed = false;
+			DataStore[161].IsList = false;
+			DataStore[161].IsNullable = false;
+			DataStore[161].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[161].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[49];
+			DataStore[161].PropertyName = @"ObjectClass";
+			DataStore[161].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[161].EagerLoading = false;
+			DataStore[161].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[66];
+			DataStore[161].Seal();
+			DataStore[162].AltText = @"Pointer auf die Basisklasse";
+			DataStore[162].CategoryTags = @"DataModel";
+			DataStore[162].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+});
+			DataStore[162].Description = @"Pointer auf die Basisklasse";
+			DataStore[162].ExportGuid = new Guid("ad060d41-bc7a-41b8-a3e3-ec9302c8c714");
+			DataStore[162].IsIndexed = false;
+			DataStore[162].IsList = false;
+			DataStore[162].IsNullable = true;
+			DataStore[162].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[162].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[59];
+			DataStore[162].PropertyName = @"BaseObjectClass";
+			DataStore[162].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
+			DataStore[162].EagerLoading = false;
+			DataStore[162].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[59];
+			DataStore[162].Seal();
+			DataStore[163].AltText = @"Pointer zur Objektklasse";
+			DataStore[163].CategoryTags = @"Main";
+			DataStore[163].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[120],
+});
+			DataStore[163].Description = @"Pointer zur Objektklasse";
+			DataStore[163].ExportGuid = new Guid("1d0ac841-129a-41d9-8f7b-026216db5b6d");
 			DataStore[163].IsIndexed = false;
 			DataStore[163].IsList = false;
 			DataStore[163].IsNullable = false;
-			DataStore[163].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[163].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
-			DataStore[163].PropertyName = @"DisplayedTypeAssembly";
-			DataStore[163].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
+			DataStore[163].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[163].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[60];
+			DataStore[163].PropertyName = @"ReferenceObjectClass";
+			DataStore[163].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[163].EagerLoading = false;
-			DataStore[163].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
+			DataStore[163].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[59];
 			DataStore[163].Seal();
-			DataStore[164].AltText = @"The context menu for this Visual";
+			DataStore[164].AltText = @"Verknüpfung zum Projekt";
 			DataStore[164].CategoryTags = null;
 			DataStore[164].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
 });
-			DataStore[164].Description = @"The context menu for this Visual";
-			DataStore[164].ExportGuid = new Guid("7b18f26e-0f3f-4554-b469-1029bd4ca10b");
+			DataStore[164].Description = @"Verknüpfung zum Projekt";
+			DataStore[164].ExportGuid = new Guid("5545ba8a-3e89-4b22-bd66-c12f3622ace0");
 			DataStore[164].IsIndexed = false;
-			DataStore[164].IsList = true;
+			DataStore[164].IsList = false;
 			DataStore[164].IsNullable = true;
-			DataStore[164].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[164].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[67];
-			DataStore[164].PropertyName = @"ContextMenu";
-			DataStore[164].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
+			DataStore[164].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
+			DataStore[164].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[22];
+			DataStore[164].PropertyName = @"Projekt";
+			DataStore[164].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[24];
 			DataStore[164].EagerLoading = false;
-			DataStore[164].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
+			DataStore[164].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[55];
 			DataStore[164].Seal();
-			DataStore[165].AltText = @"The main menu for this Template";
-			DataStore[165].CategoryTags = null;
-			DataStore[165].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[175].AltText = null;
+			DataStore[175].CategoryTags = @"Main";
+			DataStore[175].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[167],
 });
-			DataStore[165].Description = @"The main menu for this Template";
-			DataStore[165].ExportGuid = new Guid("5e9612d5-019a-416b-a2e2-dfc9674a50f6");
-			DataStore[165].IsIndexed = false;
-			DataStore[165].IsList = true;
-			DataStore[165].IsNullable = true;
-			DataStore[165].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[165].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[68];
-			DataStore[165].PropertyName = @"Menu";
-			DataStore[165].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[165].EagerLoading = false;
-			DataStore[165].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[67];
-			DataStore[165].Seal();
-			DataStore[170].AltText = @"The list of constraints applying to this Property";
-			DataStore[170].CategoryTags = @"DataModel";
-			DataStore[170].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
+			DataStore[175].Description = @"The described CLR class&apos; reference";
+			DataStore[175].ExportGuid = new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b");
+			DataStore[175].IsIndexed = false;
+			DataStore[175].IsList = false;
+			DataStore[175].IsNullable = false;
+			DataStore[175].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[175].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[8];
+			DataStore[175].PropertyName = @"PresentableModelRef";
+			DataStore[175].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[32];
+			DataStore[175].EagerLoading = false;
+			DataStore[175].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[46];
+			DataStore[175].Seal();
+			DataStore[182].AltText = null;
+			DataStore[182].CategoryTags = @"Main";
+			DataStore[182].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[156],
 });
-			DataStore[170].Description = @"The list of constraints applying to this Property";
-			DataStore[170].ExportGuid = new Guid("fd8f14da-e647-48cb-8593-3a30984f5c96");
-			DataStore[170].IsIndexed = false;
-			DataStore[170].IsList = true;
-			DataStore[170].IsNullable = true;
-			DataStore[170].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[170].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
-			DataStore[170].PropertyName = @"Constraints";
-			DataStore[170].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[170].EagerLoading = false;
-			DataStore[170].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[69];
-			DataStore[170].Seal();
-			DataStore[171].AltText = @"The property to be constrained";
-			DataStore[171].CategoryTags = null;
-			DataStore[171].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[74],
+			DataStore[182].Description = @"The control implementing this View";
+			DataStore[182].ExportGuid = new Guid("eff6276d-975b-4a0d-bd3c-ad76af2189c3");
+			DataStore[182].IsIndexed = false;
+			DataStore[182].IsList = false;
+			DataStore[182].IsNullable = false;
+			DataStore[182].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[5];
+			DataStore[182].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[18];
+			DataStore[182].PropertyName = @"ControlRef";
+			DataStore[182].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[32];
+			DataStore[182].EagerLoading = false;
+			DataStore[182].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[46];
+			DataStore[182].Seal();
+			DataStore[185].AltText = @"The Type implementing this invocation";
+			DataStore[185].CategoryTags = @"Summary";
+			DataStore[185].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
+Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[160],
 });
-			DataStore[171].Description = @"The property to be constrained";
-			DataStore[171].ExportGuid = new Guid("438b9307-fb40-4afe-a66f-a5762c41e14b");
-			DataStore[171].IsIndexed = false;
-			DataStore[171].IsList = false;
-			DataStore[171].IsNullable = false;
-			DataStore[171].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[171].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[69];
-			DataStore[171].PropertyName = @"ConstrainedProperty";
-			DataStore[171].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[171].EagerLoading = false;
-			DataStore[171].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[7];
-			DataStore[171].Seal();
-			DataStore[206].AltText = @"The assembly containing the referenced Type.";
-			DataStore[206].CategoryTags = null;
-			DataStore[206].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[242],
-});
-			DataStore[206].Description = @"The assembly containing the referenced Type.";
-			DataStore[206].ExportGuid = new Guid("885bfa97-3d43-48bb-a0aa-1049298714ff");
-			DataStore[206].IsIndexed = false;
-			DataStore[206].IsList = false;
-			DataStore[206].IsNullable = false;
-			DataStore[206].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[206].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
-			DataStore[206].PropertyName = @"Assembly";
-			DataStore[206].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[206].EagerLoading = false;
-			DataStore[206].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[29];
-			DataStore[206].Seal();
-			DataStore[207].AltText = @"list of type arguments";
-			DataStore[207].CategoryTags = null;
-			DataStore[207].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[207].Description = @"list of type arguments";
-			DataStore[207].ExportGuid = new Guid("443e3370-b1f4-46e8-9779-1a8d9ba1c8a6");
-			DataStore[207].IsIndexed = true;
-			DataStore[207].IsList = true;
-			DataStore[207].IsNullable = true;
-			DataStore[207].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[207].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
-			DataStore[207].PropertyName = @"GenericArguments";
-			DataStore[207].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[6];
-			DataStore[207].EagerLoading = true;
-			DataStore[207].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[207].Seal();
-			DataStore[208].AltText = @"The Type implementing this invocation";
-			DataStore[208].CategoryTags = @"Summary";
-			DataStore[208].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[241],
-});
-			DataStore[208].Description = @"The Type implementing this invocation";
-			DataStore[208].ExportGuid = new Guid("521868ca-503c-409e-bfa5-2e9d887d0a19");
-			DataStore[208].IsIndexed = false;
-			DataStore[208].IsList = false;
-			DataStore[208].IsNullable = false;
-			DataStore[208].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[208].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[30];
-			DataStore[208].PropertyName = @"Implementor";
-			DataStore[208].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[40];
-			DataStore[208].EagerLoading = false;
-			DataStore[208].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[208].Seal();
-			DataStore[213].AltText = @"The A-side of this Relation.";
-			DataStore[213].CategoryTags = null;
-			DataStore[213].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[213].Description = @"The A-side of this Relation.";
-			DataStore[213].ExportGuid = new Guid("d4429d3c-8fd1-468e-88d5-17abfd658d04");
-			DataStore[213].IsIndexed = false;
-			DataStore[213].IsList = false;
-			DataStore[213].IsNullable = true;
-			DataStore[213].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[213].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
-			DataStore[213].PropertyName = @"A";
-			DataStore[213].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[213].EagerLoading = false;
-			DataStore[213].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[82];
-			DataStore[213].Seal();
-			DataStore[214].AltText = @"The B-side of this Relation.";
-			DataStore[214].CategoryTags = null;
-			DataStore[214].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[214].Description = @"The B-side of this Relation.";
-			DataStore[214].ExportGuid = new Guid("20331803-079e-471e-ae45-f4d004aef48e");
-			DataStore[214].IsIndexed = false;
-			DataStore[214].IsList = false;
-			DataStore[214].IsNullable = true;
-			DataStore[214].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[214].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
-			DataStore[214].PropertyName = @"B";
-			DataStore[214].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[214].EagerLoading = false;
-			DataStore[214].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[82];
-			DataStore[214].Seal();
-			DataStore[215].AltText = @"Specifies which type this End of the relation has. MUST NOT be null.";
-			DataStore[215].CategoryTags = null;
-			DataStore[215].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[240],
-});
-			DataStore[215].Description = @"Specifies which type this End of the relation has. MUST NOT be null.";
-			DataStore[215].ExportGuid = new Guid("d4bfc4e0-6b57-49f0-91fd-b0de428484e0");
-			DataStore[215].IsIndexed = false;
-			DataStore[215].IsList = false;
-			DataStore[215].IsNullable = false;
-			DataStore[215].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[215].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
-			DataStore[215].PropertyName = @"Type";
-			DataStore[215].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[215].EagerLoading = false;
-			DataStore[215].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[2];
-			DataStore[215].Seal();
-			DataStore[218].AltText = @"The ORP to navigate FROM this end of the relation. MAY be null.";
-			DataStore[218].CategoryTags = null;
-			DataStore[218].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[218].Description = @"The ORP to navigate FROM this end of the relation. MAY be null.";
-			DataStore[218].ExportGuid = new Guid("6b25eaab-f746-47ec-a91e-f92ec6fccada");
-			DataStore[218].IsIndexed = false;
-			DataStore[218].IsList = false;
-			DataStore[218].IsNullable = true;
-			DataStore[218].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[218].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
-			DataStore[218].PropertyName = @"Navigator";
-			DataStore[218].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[218].EagerLoading = false;
-			DataStore[218].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[14];
-			DataStore[218].Seal();
-			DataStore[222].AltText = null;
-			DataStore[222].CategoryTags = @"Main";
-			DataStore[222].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[235],
-});
-			DataStore[222].Description = @"The RelationEnd describing this Property";
-			DataStore[222].ExportGuid = new Guid("63ba109d-92c6-4ced-980b-0a52aabfaec0");
-			DataStore[222].IsIndexed = false;
-			DataStore[222].IsList = false;
-			DataStore[222].IsNullable = false;
-			DataStore[222].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[222].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[14];
-			DataStore[222].PropertyName = @"RelationEnd";
-			DataStore[222].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[222].EagerLoading = false;
-			DataStore[222].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[82];
-			DataStore[222].Seal();
-			DataStore[223].AltText = null;
-			DataStore[223].CategoryTags = null;
-			DataStore[223].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[223].Description = @"The Relation using this RelationEnd as B";
-			DataStore[223].ExportGuid = new Guid("521ea0ba-ae3b-4a60-ae28-f366b3ee78f1");
-			DataStore[223].IsIndexed = false;
-			DataStore[223].IsList = false;
-			DataStore[223].IsNullable = true;
-			DataStore[223].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[223].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
-			DataStore[223].PropertyName = @"BParent";
-			DataStore[223].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[223].EagerLoading = false;
-			DataStore[223].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[77];
-			DataStore[223].Seal();
-			DataStore[224].AltText = null;
-			DataStore[224].CategoryTags = null;
-			DataStore[224].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[224].Description = @"The Relation using this RelationEnd as A";
-			DataStore[224].ExportGuid = new Guid("dd6057d0-78bb-4242-9670-ec6c09bd4d92");
-			DataStore[224].IsIndexed = false;
-			DataStore[224].IsList = false;
-			DataStore[224].IsNullable = true;
-			DataStore[224].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[224].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[82];
-			DataStore[224].PropertyName = @"AParent";
-			DataStore[224].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[224].EagerLoading = false;
-			DataStore[224].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[77];
-			DataStore[224].Seal();
-			DataStore[226].AltText = null;
-			DataStore[226].CategoryTags = @"Main";
-			DataStore[226].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[234],
-});
-			DataStore[226].Description = @"The PresentableModel usable by this View";
-			DataStore[226].ExportGuid = new Guid("ca6bc98d-ce9c-43c1-ba6b-93cb99c2e3e0");
-			DataStore[226].IsIndexed = false;
-			DataStore[226].IsList = false;
-			DataStore[226].IsNullable = false;
-			DataStore[226].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[226].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
-			DataStore[226].PropertyName = @"PresentedModelDescriptor";
-			DataStore[226].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[226].EagerLoading = false;
-			DataStore[226].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[85];
-			DataStore[226].Seal();
-			DataStore[227].AltText = null;
-			DataStore[227].CategoryTags = @"Main";
-			DataStore[227].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[233],
-});
-			DataStore[227].Description = @"The control implementing this View";
-			DataStore[227].ExportGuid = new Guid("eff6276d-975b-4a0d-bd3c-ad76af2189c3");
-			DataStore[227].IsIndexed = false;
-			DataStore[227].IsList = false;
-			DataStore[227].IsNullable = false;
-			DataStore[227].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[227].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
-			DataStore[227].PropertyName = @"ControlRef";
-			DataStore[227].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[40];
-			DataStore[227].EagerLoading = false;
-			DataStore[227].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[227].Seal();
-			DataStore[231].AltText = null;
-			DataStore[231].CategoryTags = @"Main";
-			DataStore[231].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[230],
-});
-			DataStore[231].Description = @"The described CLR class&apos; reference";
-			DataStore[231].ExportGuid = new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b");
-			DataStore[231].IsIndexed = false;
-			DataStore[231].IsList = false;
-			DataStore[231].IsNullable = false;
-			DataStore[231].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[231].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
-			DataStore[231].PropertyName = @"PresentableModelRef";
-			DataStore[231].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[40];
-			DataStore[231].EagerLoading = false;
-			DataStore[231].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[231].Seal();
-			DataStore[234].AltText = null;
-			DataStore[234].CategoryTags = @"Main";
-			DataStore[234].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[227],
-});
-			DataStore[234].Description = @"The default PresentableModel to use for this ObjectClass";
-			DataStore[234].ExportGuid = new Guid("11adedb9-d32a-4da9-b986-0534e65df760");
-			DataStore[234].IsIndexed = false;
-			DataStore[234].IsList = false;
-			DataStore[234].IsNullable = false;
-			DataStore[234].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[234].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[2];
-			DataStore[234].PropertyName = @"DefaultPresentableModelDescriptor";
-			DataStore[234].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[234].EagerLoading = false;
-			DataStore[234].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[85];
-			DataStore[234].Seal();
-			DataStore[235].AltText = null;
-			DataStore[235].CategoryTags = null;
-			DataStore[235].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[226],
-});
-			DataStore[235].Description = @"The TypeRef of the BaseClass of the referenced Type";
-			DataStore[235].ExportGuid = new Guid("f7ed21a0-9a41-40eb-b3ab-b35591f2edd7");
-			DataStore[235].IsIndexed = false;
-			DataStore[235].IsList = false;
-			DataStore[235].IsNullable = true;
-			DataStore[235].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[235].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[79];
-			DataStore[235].PropertyName = @"Parent";
-			DataStore[235].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[235].EagerLoading = false;
-			DataStore[235].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[79];
-			DataStore[235].Seal();
-			DataStore[236].AltText = null;
-			DataStore[236].CategoryTags = @"Main";
-			DataStore[236].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[225],
-});
-			DataStore[236].Description = @"The PresentableModel to use for values of this Property";
-			DataStore[236].ExportGuid = new Guid("84e0996a-081f-4a17-a34d-54cf23991301");
-			DataStore[236].IsIndexed = false;
-			DataStore[236].IsList = false;
-			DataStore[236].IsNullable = true;
-			DataStore[236].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[236].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[7];
-			DataStore[236].PropertyName = @"ValueModelDescriptor";
-			DataStore[236].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[236].EagerLoading = false;
-			DataStore[236].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[85];
-			DataStore[236].Seal();
-			DataStore[244].AltText = null;
-			DataStore[244].CategoryTags = @"Summary";
-			DataStore[244].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(0) {
-});
-			DataStore[244].Description = @"Which employee was present.";
-			DataStore[244].ExportGuid = new Guid("b67880d2-37b0-436f-8628-6637fbe19e31");
-			DataStore[244].IsIndexed = false;
-			DataStore[244].IsList = false;
-			DataStore[244].IsNullable = true;
-			DataStore[244].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[244].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[86];
-			DataStore[244].PropertyName = @"Mitarbeiter";
-			DataStore[244].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[244].EagerLoading = false;
-			DataStore[244].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
-			DataStore[244].Seal();
-			DataStore[249].AltText = null;
-			DataStore[249].CategoryTags = @"Summary";
-			DataStore[249].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[248],
-});
-			DataStore[249].Description = @"Which employee effected this work effort.";
-			DataStore[249].ExportGuid = new Guid("720f5bcf-5654-4114-8fba-f57fb7bd48ea");
-			DataStore[249].IsIndexed = false;
-			DataStore[249].IsList = false;
-			DataStore[249].IsNullable = false;
-			DataStore[249].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[3];
-			DataStore[249].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[87];
-			DataStore[249].PropertyName = @"Mitarbeiter";
-			DataStore[249].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[249].EagerLoading = false;
-			DataStore[249].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[6];
-			DataStore[249].Seal();
-			DataStore[271].AltText = null;
-			DataStore[271].CategoryTags = null;
-			DataStore[271].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[267],
-});
-			DataStore[271].Description = null;
-			DataStore[271].ExportGuid = new Guid("2a1a99a4-7dd5-4244-913f-06315f3de831");
-			DataStore[271].IsIndexed = false;
-			DataStore[271].IsList = false;
-			DataStore[271].IsNullable = false;
-			DataStore[271].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[1];
-			DataStore[271].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[77];
-			DataStore[271].PropertyName = @"Module";
-			DataStore[271].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[271].EagerLoading = false;
-			DataStore[271].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[271].Seal();
-			DataStore[276].AltText = null;
-			DataStore[276].CategoryTags = @"MetaData";
-			DataStore[276].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[271],
-});
-			DataStore[276].Description = null;
-			DataStore[276].ExportGuid = new Guid("052273ac-706a-446b-bb86-83c726ee66d6");
-			DataStore[276].IsIndexed = false;
-			DataStore[276].IsList = false;
-			DataStore[276].IsNullable = false;
-			DataStore[276].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[276].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[27];
-			DataStore[276].PropertyName = @"Module";
-			DataStore[276].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[276].EagerLoading = false;
-			DataStore[276].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[276].Seal();
-			DataStore[278].AltText = null;
-			DataStore[278].CategoryTags = @"MetaData";
-			DataStore[278].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[273],
-});
-			DataStore[278].Description = null;
-			DataStore[278].ExportGuid = new Guid("0b7135d3-dedc-4091-a0c4-690c1b4a2b6d");
-			DataStore[278].IsIndexed = false;
-			DataStore[278].IsList = false;
-			DataStore[278].IsNullable = false;
-			DataStore[278].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[278].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[85];
-			DataStore[278].PropertyName = @"Module";
-			DataStore[278].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[278].EagerLoading = false;
-			DataStore[278].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[278].Seal();
-			DataStore[279].AltText = null;
-			DataStore[279].CategoryTags = @"MetaData";
-			DataStore[279].Constraints = new System.Collections.ObjectModel.ReadOnlyCollection<Kistl.App.Base.Constraint>(new List<Kistl.App.Base.Constraint>(1) {
-Kistl.App.Base.Constraint__Implementation__Frozen.DataStore[274],
-});
-			DataStore[279].Description = null;
-			DataStore[279].ExportGuid = new Guid("25da3568-f362-4441-841e-7c163b10b983");
-			DataStore[279].IsIndexed = false;
-			DataStore[279].IsList = false;
-			DataStore[279].IsNullable = false;
-			DataStore[279].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[4];
-			DataStore[279].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[83];
-			DataStore[279].PropertyName = @"Module";
-			DataStore[279].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[5];
-			DataStore[279].EagerLoading = false;
-			DataStore[279].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[18];
-			DataStore[279].Seal();
+			DataStore[185].Description = @"The Type implementing this invocation";
+			DataStore[185].ExportGuid = new Guid("521868ca-503c-409e-bfa5-2e9d887d0a19");
+			DataStore[185].IsIndexed = false;
+			DataStore[185].IsList = false;
+			DataStore[185].IsNullable = false;
+			DataStore[185].Module = Kistl.App.Base.Module__Implementation__Frozen.DataStore[2];
+			DataStore[185].ObjectClass = Kistl.App.Base.DataType__Implementation__Frozen.DataStore[50];
+			DataStore[185].PropertyName = @"Implementor";
+			DataStore[185].ValueModelDescriptor = Kistl.App.GUI.PresentableModelDescriptor__Implementation__Frozen.DataStore[32];
+			DataStore[185].EagerLoading = false;
+			DataStore[185].ReferenceObjectClass = Kistl.App.Base.ObjectClass__Implementation__Frozen.DataStore[46];
+			DataStore[185].Seal();
 	
 		}
 #region Serializer
