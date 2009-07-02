@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Kistl.API;
 
 namespace Kistl.Server.Generators.FrozenObjects
 {
@@ -17,6 +18,36 @@ namespace Kistl.Server.Generators.FrozenObjects
         public override string BaseName { get { return "Frozen"; } }
         public override string ProjectGuid { get { return "{CA615374-AEA3-4187-BF73-584CCD082766}"; } }
 
+        public static IDictionary<Type, IEnumerable<IDataObject>> FrozenInstances { get; private set; }
+
+        public override string Generate(Kistl.API.IKistlContext ctx, string basePath)
+        {
+            var frozenBaseClasses = ctx.GetQuery<ObjectClass>().Where(o => o.BaseObjectClass == null && o.IsFrozenObject);
+
+            var instances = new List<IDataObject>();
+            foreach (var objClass in frozenBaseClasses)
+            {
+                try
+                {
+                    instances.AddRange(ctx.GetQuery(objClass.GetDescribedInterfaceType()));
+                }
+                catch (TypeLoadException ex)
+                {
+                    // TODO: Offensichtlich ist der Datentyp neu -> Fehler ignorieren
+                    Console.WriteLine("** WARNING: DataStore, cls.GetDescribedInterfaceType()");
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+
+            FrozenInstances = instances.GroupBy(o => o.GetInterfaceType().Type).ToDictionary(grp => grp.Key, grp => grp.AsEnumerable());
+
+            var result = base.Generate(ctx, basePath);
+
+            FrozenInstances = null;
+            
+            return result;
+        }
+        
         protected override string Generate_ObjectClass(Kistl.API.IKistlContext ctx, ObjectClass objClass)
         {
             if (objClass.IsFrozen())

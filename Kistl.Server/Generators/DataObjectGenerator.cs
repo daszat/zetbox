@@ -13,7 +13,7 @@ namespace Kistl.Server.Generators
     {
         private string codeBasePath = "";
 
-        public string Generate(Kistl.API.IKistlContext ctx, string basePath)
+        public virtual string Generate(Kistl.API.IKistlContext ctx, string basePath)
         {
             codeBasePath = Path.Combine(basePath, TargetNameSpace);
             Directory.CreateDirectory(codeBasePath);

@@ -43,7 +43,7 @@ this.WriteObjects("			\r\n");
 #line 26 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("			// fix direct object references\r\n");
 #line 28 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
-foreach(var prop in ctx.GetQuery<ObjectReferenceProperty>().Where(orp => !orp.IsList && orp.ObjectClass.ID == cls.ID))
+foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(orp => !orp.IsList))
 	{
 		Relation rel = RelationExtensions.Lookup(ctx, prop);
 		RelationEnd relEnd = rel.GetEnd(prop);

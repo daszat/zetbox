@@ -11,25 +11,35 @@
 <%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 <%
-	InterfaceType t;
+	
+	// list of all instances of exactly this class
+	//var instanceList = ctx.GetQuery(t)
+	//    .ToList() // remove this, if possible
+	//    .Where(o => o.GetInterfaceType() == t)
+	//    .OrderBy(o => o.ID)
+	//    .ToList(); // cache sorted list, not expensive query
+	
+	IEnumerable<IDataObject> instanceList = null;
+	
 	try
 	{
-		t = cls.GetDescribedInterfaceType();
+		InterfaceType t = cls.GetDescribedInterfaceType();
+		if(FreezingGenerator.FrozenInstances.ContainsKey(t.Type))
+		{
+			instanceList = FreezingGenerator.FrozenInstances[t.Type].OrderBy(o => o.ID);
+		}
+		else
+		{
+			instanceList = new List<IDataObject>();
+		}
 	}
 	catch(TypeLoadException ex)
 	{
 		// TODO: Offensichtlich ist der Datentyp neu -> Fehler ignorieren
 		Console.WriteLine("** WARNING: DataStore, cls.GetDescribedInterfaceType()");
 		Console.WriteLine(ex.ToString());
-		return;
+		instanceList = new List<IDataObject>();
 	}
-	
-	// list of all instances of exactly this class
-	var instanceList = ctx.GetQuery(t)
-	    .ToList() // remove this, if possible
-	    .Where(o => o.GetInterfaceType() == t)
-	    .OrderBy(o => o.ID)
-	    .ToList(); // cache sorted list, not expensive query
 %>
 
 

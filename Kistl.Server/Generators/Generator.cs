@@ -148,19 +148,19 @@ namespace Kistl.Server.Generators
                    select s;
         }
 
-        public static IEnumerable<Property> GetCollectionProperties(Kistl.API.IKistlContext ctx)
-        {
-            return (from p in ctx.GetQuery<Property>()
-                    where p.ObjectClass is ObjectClass && p.IsList
-                    select p).ToList().Where(p => p.HasStorage());
-        }
+        //public static IEnumerable<Property> GetCollectionProperties(Kistl.API.IKistlContext ctx)
+        //{
+        //    return (from p in ctx.GetQuery<Property>()
+        //            where p.ObjectClass is ObjectClass && p.IsList
+        //            select p).ToList().Where(p => p.HasStorage());
+        //}
 
-        public static IEnumerable<ObjectReferenceProperty> GetObjectReferenceProperties(Kistl.API.IKistlContext ctx)
-        {
-            return (from p in ctx.GetQuery<ObjectReferenceProperty>()
-                    where p.ObjectClass is ObjectClass
-                    select p).ToList().Where(p => p.HasStorage());
-        }
+        //public static IEnumerable<ObjectReferenceProperty> GetObjectReferenceProperties(Kistl.API.IKistlContext ctx)
+        //{
+        //    return (from p in ctx.GetQuery<ObjectReferenceProperty>()
+        //            where p.ObjectClass is ObjectClass
+        //            select p).ToList().Where(p => p.HasStorage());
+        //}
         #endregion
     }
 
