@@ -107,7 +107,7 @@ namespace Kistl.Server.SchemaManagement
             IKistlContext ctx = new MemoryContext();
             using (ISchemaProvider db = GetProvider())
             {
-                string schema = db.GetSavedSchema();
+                string schema = db.GetSavedSchema().TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
                 if (!string.IsNullOrEmpty(schema))
                 {
                     using (var ms = new MemoryStream(ASCIIEncoding.Default.GetBytes(schema)))

@@ -256,7 +256,7 @@ namespace Kistl.API
         public IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
         {
             var query = _objects[ifType];
-            if (query == null) return null;
+            if (query == null) return new List<IPersistenceObject>();
             return query.Cast<IExportableInternal>().Where(o => exportGuids.Contains(o.ExportGuid)).Cast<IPersistenceObject>().AsEnumerable();
         }
 
