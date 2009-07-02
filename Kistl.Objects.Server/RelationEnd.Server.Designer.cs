@@ -722,8 +722,6 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(AParent != null ? AParent.ExportGuid : (Guid?)null, xml, "AParent", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BParent != null ? BParent.ExportGuid : (Guid?)null, xml, "BParent", "Kistl.App.Base");
 	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.Multiplicity, xml, "Multiplicity", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Navigator != null ? Navigator.ExportGuid : (Guid?)null, xml, "Navigator", "Kistl.App.Base");

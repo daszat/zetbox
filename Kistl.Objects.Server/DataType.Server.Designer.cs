@@ -791,8 +791,6 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultIcon != null ? DefaultIcon.ExportGuid : (Guid?)null, xml, "DefaultIcon", "Kistl.App.GUI");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ShowIconInLists, xml, "ShowIconInLists", "Kistl.App.GUI");

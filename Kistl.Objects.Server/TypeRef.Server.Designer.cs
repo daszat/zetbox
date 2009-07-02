@@ -489,8 +489,6 @@ namespace Kistl.App.Base
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Assembly != null ? Assembly.ExportGuid : (Guid?)null, xml, "Assembly", "Kistl.App.Base");
 	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._FullName, xml, "FullName", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Parent != null ? Parent.ExportGuid : (Guid?)null, xml, "Parent", "Kistl.App.Base");
         }

@@ -112,10 +112,15 @@ this.WriteObjects("			xml.WriteAttributeString(\"ExportGuid\", this.ExportGuid.T
 
 	foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
 	{
+		if (direction == SerializerDirection.Export && serMember.XmlName == "ExportGuid")
+		{
+		    System.Diagnostics.Trace.TraceInformation("Not Exporting ExportGuid Property");
+			continue;
+		}
 	    ApplySerializer(direction, serMember, argName);
 	}
 
-#line 94 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
+#line 99 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
 this.WriteObjects("        }\r\n");
 
         }

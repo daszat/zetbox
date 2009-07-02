@@ -620,8 +620,6 @@ namespace Kistl.App.Base
         {
 			
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
-	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Implementor != null ? Implementor.ExportGuid : (Guid?)null, xml, "Implementor", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(InvokeOnObjectClass != null ? InvokeOnObjectClass.ExportGuid : (Guid?)null, xml, "InvokeOnObjectClass", "Kistl.App.Base");
 	

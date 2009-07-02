@@ -889,6 +889,7 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>UpdateParentTemplate.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Database\Database.xml" />
     <Content Include="Generators\EntityFramework\Implementation\README 1-N.txt" />
     <Content Include="Generators\EntityFramework\Implementation\README N-M.txt" />
     <None Include="Generators\EntityFramework\Implementation\RelationDebugTemplate.cst">

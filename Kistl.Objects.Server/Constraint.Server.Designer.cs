@@ -361,8 +361,6 @@ namespace Kistl.App.Base
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ConstrainedProperty != null ? ConstrainedProperty.ExportGuid : (Guid?)null, xml, "ConstrainedProperty", "Kistl.App.Base");
 	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 

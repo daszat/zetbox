@@ -463,8 +463,6 @@ namespace Kistl.App.GUI
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.DefaultVisualType, xml, "DefaultVisualType", "Kistl.App.GUI");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
-	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(PresentableModelRef != null ? PresentableModelRef.ExportGuid : (Guid?)null, xml, "PresentableModelRef", "Kistl.App.GUI");
         }

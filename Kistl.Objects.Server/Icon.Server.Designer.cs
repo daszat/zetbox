@@ -316,8 +316,6 @@ namespace Kistl.App.GUI
 			
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
 	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-	
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IconFile, xml, "IconFile", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
         }
