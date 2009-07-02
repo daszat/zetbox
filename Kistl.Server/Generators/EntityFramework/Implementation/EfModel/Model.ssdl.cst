@@ -96,7 +96,7 @@
 	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.ClassName)
-		.OrderBy(p => p.PropertyName))
+		.ThenBy(p => p.PropertyName))
 	{
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
@@ -125,7 +125,11 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" <%= (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : "" %>/>
 <%
-		ApplyEntityTypeColumnDefs(cls.Properties.OfType<Property>().ToList().Where(p => p.IsList == false && p.HasStorage()));
+		ApplyEntityTypeColumnDefs(cls.Properties.OfType<Property>()
+			.OrderBy(p => p.ObjectClass.ClassName)
+			.ThenBy(p => p.PropertyName)
+			.ToList()
+			.Where(p => p.IsList == false && p.HasStorage()));
 %>
   </EntityType>
 <%	}
@@ -276,7 +280,7 @@
 	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.ClassName)
-		.OrderBy(p => p.PropertyName))
+		.ThenBy(p => p.PropertyName))
 	{
 		string assocName = prop.GetAssociationName();
 		

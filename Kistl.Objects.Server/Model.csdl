@@ -458,6 +458,7 @@
                         Relationship="Model.FK_DataType_has_Method"
                         FromRole="Methods"
                         ToRole="ObjectClass" />
+    <Property Name="MethodName" Type="String" Nullable="false" MaxLength="100" />
     <NavigationProperty Name="Module__Implementation__"
                         Relationship="Model.FK_Method_has_Module"
                         FromRole="Method"
@@ -470,7 +471,6 @@
                         Relationship="Model.FK_Method_has_BaseParameter"
                         FromRole="Method"
                         ToRole="Parameter" />
-    <Property Name="MethodName" Type="String" Nullable="false" MaxLength="100" />
     <Property Name="IsDisplayable" Type="Boolean" Nullable="false" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
@@ -484,6 +484,7 @@
                         Relationship="Model.FK_Method_has_MethodInvocation"
                         FromRole="MethodInvokations"
                         ToRole="Method" />
+    <Property Name="MemberName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Module__Implementation__"
                         Relationship="Model.FK_MethodInvocation_has_Module"
                         FromRole="MethodInvocation"
@@ -492,7 +493,6 @@
                         Relationship="Model.FK_DataType_has_MethodInvocation"
                         FromRole="MethodInvocations"
                         ToRole="InvokeOnObjectClass" />
-    <Property Name="MemberName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Implementor__Implementation__"
                         Relationship="Model.FK_MethodInvocation_has_TypeRef"
                         FromRole="MethodInvocation"
@@ -504,11 +504,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="100" />
     <NavigationProperty Name="Projekte__Implementation__"
                         Relationship="Model.FK_Projekt_haben_Mitarbeiter_Mitarbeiter"
                         FromRole="Mitarbeiter"
                         ToRole="CollectionEntry" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="100" />
     <Property Name="Geburtstag" Type="DateTime" Nullable="true" />
     <Property Name="SVNr" Type="String" Nullable="true" MaxLength="20" />
     <Property Name="TelefonNummer" Type="String" Nullable="true" MaxLength="50" />
@@ -518,6 +518,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Namespace" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="DataTypes__Implementation__"
                         Relationship="Model.FK_Module_has_DataType"
                         FromRole="Module"
@@ -526,8 +528,6 @@
                         Relationship="Model.FK_Module_has_Assembly"
                         FromRole="Module"
                         ToRole="Assemblies" />
-    <Property Name="Namespace" Type="String" Nullable="false" MaxLength="200" />
-    <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
   </EntityType>
@@ -571,21 +571,21 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Tasks__Implementation__"
-                        Relationship="Model.FK_Projekt_has_Task"
-                        FromRole="Projekt"
-                        ToRole="Tasks" />
     <NavigationProperty Name="Mitarbeiter__Implementation__"
                         Relationship="Model.FK_Projekt_haben_Mitarbeiter_Projekte"
                         FromRole="Projekte"
                         ToRole="CollectionEntry" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="100" />
+    <NavigationProperty Name="Tasks__Implementation__"
+                        Relationship="Model.FK_Projekt_has_Task"
+                        FromRole="Projekt"
+                        ToRole="Tasks" />
+    <Property Name="AufwandGes" Type="Double" Nullable="true" />
+    <Property Name="Kundenname" Type="String" Nullable="true" MaxLength="100" />
     <NavigationProperty Name="Auftraege__Implementation__"
                         Relationship="Model.FK_Projekt_has_Auftrag"
                         FromRole="Projekt"
                         ToRole="Auftraege" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="100" />
-    <Property Name="AufwandGes" Type="Double" Nullable="true" />
-    <Property Name="Kundenname" Type="String" Nullable="true" MaxLength="100" />
   </EntityType>
   <EntityType Name="Property">
     <Key>
@@ -596,14 +596,14 @@
                         Relationship="Model.FK_DataType_has_Property"
                         FromRole="Properties"
                         ToRole="ObjectClass" />
-    <NavigationProperty Name="Module__Implementation__"
-                        Relationship="Model.FK_Property_has_Module"
-                        FromRole="BaseProperty"
-                        ToRole="Module" />
     <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="100" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
     <Property Name="IsNullable" Type="Boolean" Nullable="false" />
     <Property Name="AltText" Type="String" Nullable="true" MaxLength="200" />
+    <NavigationProperty Name="Module__Implementation__"
+                        Relationship="Model.FK_Property_has_Module"
+                        FromRole="BaseProperty"
+                        ToRole="Module" />
     <NavigationProperty Name="Constraints__Implementation__"
                         Relationship="Model.FK_Property_has_Constraint"
                         FromRole="ConstrainedProperty"
@@ -671,24 +671,26 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Projekt__Implementation__"
-                        Relationship="Model.FK_Projekt_has_Task"
-                        FromRole="Tasks"
-                        ToRole="Projekt" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="100" />
     <Property Name="DatumVon" Type="DateTime" Nullable="true" />
     <Property Name="DatumBis" Type="DateTime" Nullable="true" />
     <Property Name="Aufwand" Type="Double" Nullable="true" />
+    <NavigationProperty Name="Projekt__Implementation__"
+                        Relationship="Model.FK_Projekt_has_Task"
+                        FromRole="Tasks"
+                        ToRole="Projekt" />
   </EntityType>
   <EntityType Name="Template">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="VisualTree__Implementation__"
                         Relationship="Model.FK_Template_has_Visual"
                         FromRole="Template"
                         ToRole="VisualTree" />
+    <Property Name="DisplayedTypeFullName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="DisplayedTypeAssembly__Implementation__"
                         Relationship="Model.FK_Template_has_Assembly"
                         FromRole="Template"
@@ -697,8 +699,6 @@
                         Relationship="Model.FK_Template_hasMenu_Visual_Template"
                         FromRole="Template"
                         ToRole="CollectionEntry" />
-    <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="200" />
-    <Property Name="DisplayedTypeFullName" Type="String" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="TestCustomObject">
     <Key>
@@ -719,12 +719,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="StringProp" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="TestEnumProp__Implementation__" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ObjectProp__Implementation__"
                         Relationship="Model.FK_TestObjClass_has_Kunde"
                         FromRole="TestObjClass"
                         ToRole="ObjectProp" />
-    <Property Name="StringProp" Type="String" Nullable="false" MaxLength="200" />
-    <Property Name="TestEnumProp__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="MyIntProperty" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="TypeRef">
@@ -774,6 +774,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="ControlType__Implementation__" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Children__Implementation__"
                         Relationship="Model.FK_Visual_contains_Visual_Visual"
                         FromRole="Visual"
@@ -790,8 +792,6 @@
                         Relationship="Model.FK_Visual_hasContextMenu_Visual_Visual"
                         FromRole="Visual"
                         ToRole="CollectionEntry" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="200" />
-    <Property Name="ControlType__Implementation__" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="WorkEffort">
     <Key>
@@ -812,11 +812,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Mitarbeiter__Implementation__"
                         Relationship="Model.FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount"
                         FromRole="WorkEffortAccount"
                         ToRole="CollectionEntry" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="BudgetHours" Type="Double" Nullable="true" />
     <Property Name="SpentHours" Type="Double" Nullable="true" />
     <Property Name="Notes" Type="String" Nullable="false" MaxLength="4000" />
@@ -875,15 +875,15 @@
   <EntityType Name="NotNullableConstraint" BaseType="Model.Constraint" >
   </EntityType>
   <EntityType Name="ObjectClass" BaseType="Model.DataType" >
-    <NavigationProperty Name="SubClasses__Implementation__"
-                        Relationship="Model.FK_ObjectClass_has_ObjectClass"
-                        FromRole="BaseObjectClass"
-                        ToRole="SubClasses" />
+    <Property Name="TableName" Type="String" Nullable="false" MaxLength="100" />
     <NavigationProperty Name="BaseObjectClass__Implementation__"
                         Relationship="Model.FK_ObjectClass_has_ObjectClass"
                         FromRole="SubClasses"
                         ToRole="BaseObjectClass" />
-    <Property Name="TableName" Type="String" Nullable="false" MaxLength="100" />
+    <NavigationProperty Name="SubClasses__Implementation__"
+                        Relationship="Model.FK_ObjectClass_has_ObjectClass"
+                        FromRole="BaseObjectClass"
+                        ToRole="SubClasses" />
     <NavigationProperty Name="ImplementsInterfaces__Implementation__"
                         Relationship="Model.FK_ObjectClass_implements_Interface_ObjectClass"
                         FromRole="ObjectClass"
