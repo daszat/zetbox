@@ -273,6 +273,8 @@ namespace Kistl.App.Base
         {
             var relEnd = (RelationEnd)constrainedObjectParam;
             var orp = (ObjectReferenceProperty)constrainedValueParam;
+
+            e.Result = false;
         }
 
         public void OnGetErrorText_ConsistentNavigatorConstraint(

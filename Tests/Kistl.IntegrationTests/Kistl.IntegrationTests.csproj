@@ -113,10 +113,6 @@
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
       <Name>Kistl.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Objects.Client\Kistl.Objects.Client.csproj">
-      <Project>{80F37FB5-66C6-45F2-9E2A-F787B141D66C}</Project>
-      <Name>Kistl.Objects.Client</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects</Name>
@@ -134,9 +130,6 @@
       <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
       <Name>Kistl.API.Tests</Name>
     </ProjectReference>
-    <Folder Include="Tests\Presentables" />
-    <Folder Include="Tests\Presentables\ObjectReferenceModels" />
-    <Folder Include="Tests\TypeRefs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

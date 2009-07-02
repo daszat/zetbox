@@ -13,7 +13,8 @@ namespace Kistl.DalProvider.Frozen.Tests
     {
         protected override Kistl.API.IKistlContext GetContext()
         {
-            return new Kistl.App.FrozenContextImplementation();
+            //return new Kistl.App.FrozenContextImplementation();
+            throw new NotImplementedException();
         }
     }
 }

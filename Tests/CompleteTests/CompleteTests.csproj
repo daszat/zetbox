@@ -69,10 +69,6 @@
       <Project>{2C899579-BF78-442B-8810-8C7E7A2CA212}</Project>
       <Name>Kistl.Client.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Objects.Client\Kistl.Objects.Client.csproj">
-      <Project>{80F37FB5-66C6-45F2-9E2A-F787B141D66C}</Project>
-      <Name>Kistl.Objects.Client</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Kistl.API.Client.Tests\Kistl.API.Client.Tests.csproj">
       <Project>{382F1331-A177-4B38-A3E7-6D1B9A0F812B}</Project>
       <Name>Kistl.API.Client.Tests</Name>

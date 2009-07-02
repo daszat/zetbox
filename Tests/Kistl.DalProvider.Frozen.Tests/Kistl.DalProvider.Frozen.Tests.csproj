@@ -64,10 +64,6 @@
       <Project>{F3B74A4A-BE0C-4BC2-BE32-D1A1D179B4F7}</Project>
       <Name>Kistl.DalProvider.Frozen</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Objects.Frozen\Kistl.Objects.Frozen.csproj">
-      <Project>{CA615374-AEA3-4187-BF73-584CCD082766}</Project>
-      <Name>Kistl.Objects.Frozen</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects</Name>
