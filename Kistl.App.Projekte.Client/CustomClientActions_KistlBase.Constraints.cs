@@ -7,6 +7,7 @@ using System.Xml;
 
 using Kistl.API;
 using Kistl.API.Client;
+using Kistl.App.Extensions;
 
 namespace Kistl.App.Base
 {
@@ -274,7 +275,25 @@ namespace Kistl.App.Base
             var relEnd = (RelationEnd)constrainedObjectParam;
             var orp = (ObjectReferenceProperty)constrainedValueParam;
 
-            e.Result = false;
+            e.Result = true;
+
+            switch (relEnd.Multiplicity)
+            {
+                case Multiplicity.One:
+                    e.Result &= orp.Constraints.OfType<NotNullableConstraint>().Count() > 0;
+                    break;
+                case Multiplicity.ZeroOrMore:
+                    e.Result &= orp.Constraints.OfType<NotNullableConstraint>().Count() == 0;
+                    e.Result &= orp.IsList;
+                    break;
+                case Multiplicity.ZeroOrOne:
+                    e.Result &= orp.Constraints.OfType<NotNullableConstraint>().Count() == 0;
+                    break;
+            }
+
+            e.Result &= relEnd.HasPersistentOrder == (orp.IsList && orp.IsIndexed);
+            e.Result &= relEnd.Type == orp.ObjectClass;
+            e.Result &= (relEnd.AParent ?? relEnd.BParent).GetOtherEnd(relEnd).Type == orp.ReferenceObjectClass;
         }
 
         public void OnGetErrorText_ConsistentNavigatorConstraint(
@@ -286,11 +305,58 @@ namespace Kistl.App.Base
             var relEnd = (RelationEnd)constrainedObjectParam;
             var orp = (ObjectReferenceProperty)constrainedValueParam;
 
+            var result = new List<string>();
+
+            switch (relEnd.Multiplicity)
+            {
+                case Multiplicity.One:
+                    if (orp.Constraints.OfType<NotNullableConstraint>().Count() == 0)
+                    {
+                        result.Add("Navigator should have NotNullableConstraint because Multiplicity is One");
+                    }
+                    break;
+                case Multiplicity.ZeroOrMore:
+                    if (orp.Constraints.OfType<NotNullableConstraint>().Count() > 0)
+                    {
+                        result.Add("Navigator should not have NotNullableConstraint because Multiplicity is ZeroOrMore");
+                    }
+                    if (!orp.IsList)
+                    {
+                        result.Add("Navigator should have IsList set because Multiplicity is ZeroOrMore");
+                    }
+                    break;
+                case Multiplicity.ZeroOrOne:
+                    if (orp.Constraints.OfType<NotNullableConstraint>().Count() > 0)
+                    {
+                        result.Add("Navigator should not have NotNullableConstraint because Multiplicity is ZeroOrOne");
+                    }
+                    break;
+            }
+
+            if (relEnd.HasPersistentOrder != orp.IsIndexed)
+            {
+                result.Add("Navigator should IsIndexed set because HasPersistentOrder is set");
+            }
+
+            if (relEnd.Type != orp.ObjectClass)
+            {
+                result.Add(String.Format("Navigator is attached to {0} but should be attached to {1}",
+                    orp.ObjectClass,
+                    relEnd.Type));
+            }
+            if ((relEnd.AParent ?? relEnd.BParent).GetOtherEnd(relEnd).Type != orp.ReferenceObjectClass)
+            {
+                result.Add(String.Format("Navigator is references {0} but should reference {1}",
+                    orp.ReferenceObjectClass,
+                    (relEnd.AParent ?? relEnd.BParent).GetOtherEnd(relEnd).Type));
+            }
+
+            e.Result = String.Join("\n", result.ToArray());
         }
 
         public void OnToString_ConsistentNavigatorConstraint(ConsistentNavigatorConstraint obj, MethodReturnEventArgs<string> e)
         {
-
+            e.Result = "The navigator should be consistent with the defining RelationEnd.";
         }
 
         #endregion

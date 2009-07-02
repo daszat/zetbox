@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:Projekte="Kistl.App.Projekte" xmlns:KistlBase="Kistl.App.Base" xmlns:TimeRecords="Kistl.App.TimeRecords" xmlns:TestModule="Kistl.App.Test" xmlns:GUI="Kistl.App.GUI" date="2009-07-02T13:39:47.0584776Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:Projekte="Kistl.App.Projekte" xmlns:KistlBase="Kistl.App.Base" xmlns:TimeRecords="Kistl.App.TimeRecords" xmlns:TestModule="Kistl.App.Test" xmlns:GUI="Kistl.App.GUI" date="2009-07-02T14:38:19.7747376Z">
   <KistlBase:RelationEnd ExportGuid="3e102702-2123-4d7b-930d-0336c31a2c1a">
     <KistlBase:BParent>8b41ffa4-8ffa-4d96-b4e5-708188045c71</KistlBase:BParent>
     <KistlBase:ExportGuid>3e102702-2123-4d7b-930d-0336c31a2c1a</KistlBase:ExportGuid>
@@ -1836,6 +1836,10 @@
     <KistlBase:ExportGuid>8e88ca54-52d1-4a7f-a93e-112a31222285</KistlBase:ExportGuid>
     <KistlBase:Reason>Navigator must be consistent with RelationEnd information</KistlBase:Reason>
   </KistlBase:ConsistentNavigatorConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="f83b5148-d0ee-496c-ad22-7d3bd5ffe2a0">
+    <KistlBase:ConstrainedProperty>0f8a3e8b-29f6-49eb-99ba-f55ca1e161e9</KistlBase:ConstrainedProperty>
+    <KistlBase:ExportGuid>f83b5148-d0ee-496c-ad22-7d3bd5ffe2a0</KistlBase:ExportGuid>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:EnumerationEntry ExportGuid="d0d79537-03cc-4eaa-a41a-840825eaa814">
     <KistlBase:Description>Required Element (exactly one)</KistlBase:Description>
     <KistlBase:Enumeration>4f2b5005-672e-46ef-80ed-94b8cdd053db</KistlBase:Enumeration>
