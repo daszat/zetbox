@@ -1,3 +1,3 @@
 @echo off
 
-bin\debug\Kistl.Server.exe TestConfig.xml -updateschema c:\temp\KistlExport.xml
+bin\debug\Kistl.Server.exe -updateschema
