@@ -157,6 +157,7 @@ namespace Kistl.App.Base
         }
         private EntityCollectionWrapper<Kistl.App.Base.Constraint, Kistl.App.Base.Constraint__Implementation__> _ConstraintsWrapper;
 
+		private List<int> ConstraintsIds;
 
 
         /// <summary>
@@ -776,6 +777,14 @@ namespace Kistl.App.Base
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._AltText, binStream);
             BinarySerializer.ToStream(this._CategoryTags, binStream);
+			{
+				BinarySerializer.ToStream(Constraints.Count, binStream);
+				foreach(var obj in Constraints)
+				{
+					auxObjects.Add(obj);
+					BinarySerializer.ToStream(obj.ID, binStream);
+				}
+			}
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._IsIndexed, binStream);
@@ -793,6 +802,18 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._AltText, binStream);
             BinarySerializer.FromStream(out this._CategoryTags, binStream);
+			{
+				int numElements;
+				BinarySerializer.FromStream(out numElements, binStream);
+				ConstraintsIds = new List<int>(numElements);
+				while (numElements-- > 0) 
+				{
+					int id;
+					BinarySerializer.FromStream(out id, binStream);
+					ConstraintsIds.Add(id);
+				}
+			}
+
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._IsIndexed, binStream);

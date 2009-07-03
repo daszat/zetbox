@@ -313,6 +313,27 @@ namespace Kistl.App.Base
 
 
 
+        /// <summary>
+        /// Update the Parent property to the currently loaded assemblies' state
+        /// </summary>
+
+		public virtual void UpdateParent() 
+		{
+            // base.UpdateParent();
+            if (OnUpdateParent_TypeRef != null)
+            {
+				OnUpdateParent_TypeRef(this);
+			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on TypeRef.UpdateParent");
+			}
+        }
+		public delegate void UpdateParent_Handler<T>(T obj);
+		public event UpdateParent_Handler<TypeRef> OnUpdateParent_TypeRef;
+
+
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(TypeRef));
@@ -442,6 +463,7 @@ namespace Kistl.App.Base
 			
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(Assembly != null ? Assembly.ID : (int?)null, binStream);
+			auxObjects.Add(Assembly);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._FullName, binStream);
 			{

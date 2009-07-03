@@ -538,7 +538,9 @@ namespace Kistl.App.Base
 			
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+			auxObjects.Add(A);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+			auxObjects.Add(B);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);

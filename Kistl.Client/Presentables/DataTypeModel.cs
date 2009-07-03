@@ -180,7 +180,7 @@ namespace Kistl.Client.Presentables
                 _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(
                     new ObservableCollection<DataObjectModel>(
                         this.Instances.Where(
-                            o => o.Name.Contains(this.InstancesSearchString)
+                            o => o.Name.ToLowerInvariant().Contains(this.InstancesSearchString.ToLowerInvariant())
                             || o.ID.ToString().Contains(this.InstancesSearchString))));
             }
             OnPropertyChanged("InstancesFiltered");

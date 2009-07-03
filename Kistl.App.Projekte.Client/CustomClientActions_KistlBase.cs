@@ -460,6 +460,11 @@ namespace Kistl.App.Base
 
         }
 
+        public void OnUpdateParent_TypeRef(TypeRef obj)
+        {
+            obj.Parent = obj.AsType(true).BaseType.ToRef(obj.Context);
+        }
+
         public void OnImplementInterfaces_ObjectClass(ObjectClass objClass)
         {
             IKistlContext ctx = objClass.Context;

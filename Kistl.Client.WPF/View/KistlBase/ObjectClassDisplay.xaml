@@ -8,9 +8,13 @@
                           Content="{Binding PropertyGroupsByName[Summary]}"
                           ContentTemplateSelector="{StaticResource readOnlyTemplateSelector}" />
 
+        <TextBox DockPanel.Dock="Top"
+                 Margin="10"
+                 Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+        
         <ListView Margin="10"
                   BorderThickness="0"
-                  ItemsSource="{Binding Instances}"
+                  ItemsSource="{Binding InstancesFiltered}"
                   ItemTemplateSelector="{StaticResource listItemTemplateSelector}">
             
             <ListView.Template>

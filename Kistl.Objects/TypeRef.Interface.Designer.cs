@@ -44,5 +44,10 @@ namespace Kistl.App.Base
         /// </summary>
 
 		 System.Type AsType(System.Boolean throwOnError) ;
+        /// <summary>
+        /// Update the Parent property to the currently loaded assemblies' state
+        /// </summary>
+
+		 void UpdateParent() ;
     }
 }
