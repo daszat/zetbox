@@ -63,7 +63,7 @@
     <Compile Include="Mocks\ClientApplicationContextMock.cs" />
     <Compile Include="Mocks\MitarbeiterMock.cs" />
     <Compile Include="Mocks\ProjektMock.cs" />
-    <Compile Include="Mocks\Projekt_Mitarbeiter23CollectionEntryMock.cs" />
+    <Compile Include="Mocks\Projekt_haben_Mitarbeiter_RelationEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
     <Compile Include="TestObjClass.cs" />
