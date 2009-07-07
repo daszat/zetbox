@@ -71,7 +71,7 @@ namespace Kistl.Server.Generators.Extensions
 
         public static string GetRelationFullName(this Relation rel)
         {
-            return String.Format("{0}.{1}", rel.A.Type.Module.Namespace, rel.GetRelationClassName());
+            return String.Format("{0}.{1}", rel.Module.Namespace, rel.GetRelationClassName());
         }
 
         public static string GetRelationFkColumnName(this Relation rel, RelationEndRole endRole)

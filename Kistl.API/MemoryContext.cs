@@ -15,9 +15,9 @@ namespace Kistl.API
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
-        
+
         public IPersistenceObject Attach(IPersistenceObject obj)
-		{
+        {
             if (obj == null) throw new ArgumentNullException("obj");
 
             // Handle created Objects
@@ -54,7 +54,7 @@ namespace Kistl.API
         }
 
         public void Detach(IPersistenceObject obj)
-		{
+        {
             if (obj == null) throw new ArgumentNullException("obj");
             if (!_objects.Contains(obj)) throw new InvalidOperationException("This Object does not belong to this context");
 
@@ -63,42 +63,47 @@ namespace Kistl.API
         }
 
         public void Delete(IPersistenceObject obj)
-		{
+        {
             if (obj == null) throw new ArgumentNullException("obj");
             if (obj.Context != this) throw new InvalidOperationException("The Object does not belong to the current Context");
             //((BasePersistenceObject)obj).SetDeleted();
             OnObjectDeleted(obj);
         }
 
-		public IQueryable<T> GetQuery<T>()
-			where T : class, IDataObject
-		{
+        public IQueryable<T> GetQuery<T>()
+            where T : class, IDataObject
+        {
             return GetPersistenceObjectQuery(new InterfaceType(typeof(T))).Cast<T>();
-		}
+        }
 
         public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
             return GetPersistenceObjectQuery(ifType).Cast<IDataObject>();
         }
 
+        public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
+        {
+            return GetPersistenceObjectQuery(new InterfaceType(typeof(T))).Cast<T>();
+        }
+
         private List<IPersistenceObject> _emptyList = new List<IPersistenceObject>();
-        private IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             return (_objects[ifType] ?? _emptyList).AsQueryable().AddOfType(ifType.Type).Cast<IPersistenceObject>();
         }
-        
+
         List<T> IKistlContext.GetListOf<T>(IDataObject obj, string propertyName)
-		{
-			throw new NotImplementedException();
-		}
-		
+        {
+            throw new NotImplementedException();
+        }
+
         public List<T> GetListOf<T>(InterfaceType ifType, int ID, string propertyName) where T : class, IDataObject
-		{
-			throw new NotImplementedException();
-		}
+        {
+            throw new NotImplementedException();
+        }
 
         public IList<T> FetchRelation<T>(int relId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry
-		{
+        {
             if (parent == null)
             {
                 return GetPersistenceObjectQuery(new InterfaceType(typeof(T))).Cast<T>().ToList();
@@ -107,11 +112,11 @@ namespace Kistl.API
             {
                 throw new NotImplementedException();
             }
-		}
+        }
 
         public IPersistenceObject ContainsObject(InterfaceType type, int ID)
         {
-			return Find(type, ID);
+            return Find(type, ID);
         }
 
         /// <summary>
@@ -287,6 +292,6 @@ namespace Kistl.API
             }
         }
 
-        public virtual void Dispose() {}
+        public virtual void Dispose() { }
     }
 }

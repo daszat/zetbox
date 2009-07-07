@@ -34,6 +34,17 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
+        public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        {
+            throw new NotImplementedException();
+        }
+
+
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             throw new NotImplementedException();

@@ -144,6 +144,28 @@ namespace Kistl.API.Client
         }
 
         /// <summary>
+        /// Returns a PersistenceObject Query by T
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <returns>IQueryable</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
+        {
+            throw new NotSupportedException("A Query against IPersistenceObjects is not supported on the client");
+        }
+
+        /// <summary>
+        /// Returns a PersistenceObject Query by InterfaceType
+        /// </summary>
+        /// <param name="ifType">the interface to look for</param>
+        /// <returns>IQueryable</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        {
+            throw new NotSupportedException("A Query against IPersistenceObjects is not supported on the client");
+        }
+
+        /// <summary>
         /// Returns the List referenced by the given PropertyName.
         /// </summary>
         /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>

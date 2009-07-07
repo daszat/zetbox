@@ -162,6 +162,16 @@ namespace Kistl.Server
             Packaging.Importer.Import(file);
         }
 
+        internal void Publish(string file, string[] namespaces)
+        {
+            Packaging.Exporter.Publish(file, namespaces);
+        }
+
+        internal void Deploy(string file)
+        {
+            Packaging.Importer.Deploy(file);
+        }
+
         internal void CheckSchemaFromCurrentMetaData(bool withRepair)
         {
             using (IKistlContext ctx = KistlContext.GetContext())

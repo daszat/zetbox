@@ -58,12 +58,28 @@ namespace Kistl.API
         IQueryable<IDataObject> GetQuery(InterfaceType ifType);
 
         /// <summary>
+        /// Returns a PersistenceObject Query by T
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <returns>IQueryable</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject;
+        /// <summary>
+        /// Returns a PersistenceObject Query by InterfaceType
+        /// </summary>
+        /// <param name="ifType">the interface to look for</param>
+        /// <returns>IQueryable</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType);
+
+        /// <summary>
         /// Returns the List referenced by the given PropertyName.
         /// </summary>
         /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
         /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
         /// <returns>A List of Objects</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject;
         /// <summary>
         /// Returns the List referenced by the given Type, ID and PropertyName.
@@ -73,6 +89,7 @@ namespace Kistl.API
         /// <param name="ID">ID of the Object which holds the ObjectReferenceProperty</param>
         /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
         /// <returns>A List of Objects</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         List<T> GetListOf<T>(InterfaceType ifType, int ID, string propertyName) where T : class, IDataObject;
 
         /// <summary>
@@ -85,6 +102,7 @@ namespace Kistl.API
         /// <param name="role">Specifies how to interpret the container</param>
         /// <param name="container">The container of the requested collection</param>
         /// <returns></returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry;
 
         /// <summary>
@@ -95,8 +113,10 @@ namespace Kistl.API
         /// <returns>If ID is InvalidID (Object is not inititalized) then an Exception will be thrown.
         /// If the Object is already in that Context, the Object Instace is returned.
         /// If the Object is not in that Context, null is returned.</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IPersistenceObject ContainsObject(InterfaceType type, int ID);
 
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IEnumerable<IPersistenceObject> AttachedObjects { get; }
 
         /// <summary>

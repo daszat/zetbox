@@ -13,6 +13,11 @@ namespace Kistl.Server.Packaging
 {
     public class Importer
     {
+        public static void Deploy(string filename)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void Import(string filename)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())

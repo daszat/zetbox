@@ -21,6 +21,8 @@ namespace Kistl.Server
         {
             Console.WriteLine("Use: Kistl.Server <configfile.xml>");
             Console.WriteLine("                  -generate");
+            Console.WriteLine("                  -publish <destfile.xml> <namespace> [<namespace> ...]");
+            Console.WriteLine("                  -deploy <sourcefile.xml");
             Console.WriteLine("                  -export <destfile.xml> <namespace> [<namespace> ...]");
             Console.WriteLine("                  -import <sourcefile.xml");
             Console.WriteLine("                  -checkschema [meta | <schema.xml>]");
@@ -87,6 +89,23 @@ namespace Kistl.Server
                     {
                         string file = arg.Arguments[0];
                         server.Import(file);
+                        actiondone = true;
+                    }
+                    else if (arg.Command == "-publish" && arg.Arguments.Count > 1)
+                    {
+                        string file = arg.Arguments[0];
+                        List<string> namespaces = new List<string>();
+                        for (int i = 1; i < arg.Arguments.Count; i++)
+                        {
+                            namespaces.Add(arg.Arguments[i]);
+                        }
+                        server.Publish(file, namespaces.ToArray());
+                        actiondone = true;
+                    }
+                    else if (arg.Command == "-deploy" && arg.Arguments.Count == 1)
+                    {
+                        string file = arg.Arguments[0];
+                        server.Deploy(file);
                         actiondone = true;
                     }
                     else if (arg.Command == "-checkschema")

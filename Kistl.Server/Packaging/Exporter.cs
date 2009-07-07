@@ -12,11 +12,32 @@ using Kistl.API.Server;
 using Kistl.API.Utils;
 using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
+using System.Collections;
 
 namespace Kistl.Server.Packaging
 {
     public class Exporter
     {
+        public static void Publish(string filename, string[] moduleNamespaces)
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall())
+            {
+                Trace.TraceInformation("Starting Publish for Modules {0}", string.Join(", ", moduleNamespaces));
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    using (FileStream fs = File.OpenWrite(filename))
+                    {
+                        fs.SetLength(0);
+                        Publish(ctx, fs, moduleNamespaces);
+                    }
+
+                    // Save ExportGuids
+                    ctx.SubmitChanges();
+                }
+                Trace.TraceInformation("Export finished");
+            }
+        }
+
         public static void Export(string filename, string[] moduleNamespaces)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
@@ -37,42 +58,68 @@ namespace Kistl.Server.Packaging
             }
         }
 
+        public static void Publish(IKistlContext ctx, Stream s, string[] moduleNamespaces)
+        {
+            using (XmlTextWriter xml = new XmlTextWriter(s, Encoding.UTF8))
+            {
+                var moduleList = GetModules(ctx, moduleNamespaces);
+                WriteStartDocument(xml, new Kistl.App.Base.Module[] 
+                        { 
+                            ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Namespace == "Kistl.App.Base"),
+                            ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Namespace == "Kistl.App.GUI"),
+                        });
+
+                var propNamespaces = new string[] { "Kistl.App.Base", "Kistl.App.GUI" };
+
+                foreach (var module in moduleList)
+                {
+                    int moduleID = module.ID;
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.Module>().Where(i => i.ID == moduleID), propNamespaces);
+
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.DataType>().Where(i => i.Module.ID == moduleID), propNamespaces);
+                    Publish(ctx, xml, ctx.GetPersistenceObjectQuery<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntry>().Where(i => i.A.Module.ID == moduleID || i.B.Module.ID == moduleID), propNamespaces);
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.Property>().Where(i => i.Module.ID == moduleID), propNamespaces);
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.Relation>().Where(i => i.Module.ID == moduleID), propNamespaces);
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.RelationEnd>().Where(i => i.AParent.Module.ID == moduleID || i.BParent.Module.ID == moduleID), propNamespaces);
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.EnumerationEntry>().Where(i => i.Enumeration.Module.ID == moduleID), propNamespaces);
+
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.Method>().Where(i => i.Module.ID == moduleID), propNamespaces);
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.BaseParameter>().Where(i => i.Method.Module.ID == moduleID), propNamespaces);
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.MethodInvocation>().Where(i => i.Module.ID == moduleID), propNamespaces);
+
+                    // TODO: Add Module to Constraint
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID), propNamespaces);
+
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.Assembly>().Where(i => i.Module.ID == moduleID), propNamespaces);
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.Base.TypeRef>().Where(i => i.Assembly.Module.ID == moduleID), propNamespaces);
+                    Publish(ctx, xml, ctx.GetPersistenceObjectQuery<Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry>().Where(i => i.A.Assembly.Module.ID == moduleID || i.B.Assembly.Module.ID == moduleID), propNamespaces);
+
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.GUI.Icon>().Where(i => i.Module.ID == moduleID), propNamespaces);
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.GUI.PresentableModelDescriptor>().Where(i => i.Module.ID == moduleID), propNamespaces);
+                    Publish(ctx, xml, ctx.GetQuery<Kistl.App.GUI.ViewDescriptor>().Where(i => i.Module.ID == moduleID), propNamespaces);
+                }
+            }
+        }
+
+        private static void Publish<T>(IKistlContext ctx, XmlTextWriter xml, IEnumerable<T> objects, string[] propNamespaces) where T : IPersistenceObject
+        {
+            Type type = typeof(T);
+            Trace.TraceInformation("  exporting {0} ", type.FullName);
+            foreach (T obj in objects)
+            {
+                Console.Write(".");
+                ExportObject(xml, obj, type.Namespace, type.Name, propNamespaces);
+            }
+        }
+
         public static void Export(IKistlContext ctx, Stream s, string[] moduleNamespaces)
         {
             using (XmlTextWriter xml = new XmlTextWriter(s, Encoding.UTF8))
             {
-                var moduleList = new List<Kistl.App.Base.Module>();
-                if (moduleNamespaces.Contains("*"))
-                {
-                    moduleList.AddRange(ctx.GetQuery<Kistl.App.Base.Module>());
-                }
-                else
-                {
-                    foreach (var ns in moduleNamespaces)
-                    {
-                        var module = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Namespace == ns).FirstOrDefault();
-                        if (module == null)
-                        {
-                            Trace.TraceWarning("Module {0} not found", ns);
-                            continue;
-                        }
-                        moduleList.Add(module);
-                    }
-                }
-
-                xml.Formatting = Formatting.Indented;
-                xml.WriteStartDocument();
-                xml.WriteStartElement("KistlPackaging");
-                xml.WriteAttributeString("xmlns", "http://dasz.at/Kistl");
-                foreach (var module in moduleList)
-                {
-                    xml.WriteAttributeString("xmlns", module.ModuleName, null, module.Namespace);
-                }
-
-                xml.WriteAttributeString("date", XmlConvert.ToString(DateTime.Now, XmlDateTimeSerializationMode.Utc));
+                var moduleList = GetModules(ctx, moduleNamespaces);
+                WriteStartDocument(xml, moduleList);
 
                 var iexpIf = ctx.GetIExportableInterface();
-
                 foreach (var module in moduleList)
                 {
                     Trace.TraceInformation("  exporting {0}", module.ModuleName);
@@ -82,14 +129,7 @@ namespace Kistl.Server.Packaging
                         foreach (var obj in ctx.GetQuery(objClass.GetDescribedInterfaceType()))
                         {
                             Console.Write(".");
-                            string typeName = obj.GetInterfaceType().Type.Name;
-                            xml.WriteStartElement(typeName, module.Namespace);
-                            if (((Kistl.App.Base.IExportable)obj).ExportGuid == Guid.Empty)
-                            {
-                                ((Kistl.App.Base.IExportable)obj).ExportGuid = Guid.NewGuid();
-                            }
-                            ((IExportableInternal)obj).Export(xml, moduleNamespaces);
-                            xml.WriteEndElement();
+                            ExportObject(xml, obj, module.Namespace, obj.GetInterfaceType().Type.Name, moduleNamespaces);
                         }
                         Console.WriteLine();
                     }
@@ -113,16 +153,10 @@ namespace Kistl.Server.Packaging
                         MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType }, new Type[] { typeof(int), typeof(RelationEndRole), typeof(IDataObject) });
                         var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ID, RelationEndRole.A, null }));
 
-                        foreach (IExportableInternal obj in relations)
+                        foreach (var obj in relations)
                         {
                             Console.Write(".");
-                            xml.WriteStartElement(rel.GetRelationClassName(), rel.A.Type.Module.Namespace);
-                            if (((Kistl.App.Base.IExportable)obj).ExportGuid == Guid.Empty)
-                            {
-                                ((Kistl.App.Base.IExportable)obj).ExportGuid = Guid.NewGuid();
-                            }
-                            obj.Export(xml, moduleNamespaces);
-                            xml.WriteEndElement();
+                            ExportObject(xml, obj, rel.Module.Namespace, rel.GetRelationClassName(), moduleNamespaces);
                         }
                     }
                 }
@@ -130,5 +164,55 @@ namespace Kistl.Server.Packaging
                 xml.WriteEndDocument();
             }
         }
+
+        #region Xml/Export private Methods
+        private static void ExportObject(XmlTextWriter xml, IPersistenceObject obj, string typeNamespace, string typeName, string[] propNamespaces)
+        {
+            xml.WriteStartElement(typeName, typeNamespace);
+            if (((Kistl.App.Base.IExportable)obj).ExportGuid == Guid.Empty)
+            {
+                ((Kistl.App.Base.IExportable)obj).ExportGuid = Guid.NewGuid();
+            }
+            ((IExportableInternal)obj).Export(xml, propNamespaces);
+            xml.WriteEndElement();
+        }
+
+        private static void WriteStartDocument(XmlTextWriter xml, IEnumerable<Kistl.App.Base.Module> moduleList)
+        {
+            xml.Formatting = Formatting.Indented;
+            xml.WriteStartDocument();
+            xml.WriteStartElement("KistlPackaging");
+            xml.WriteAttributeString("xmlns", "http://dasz.at/Kistl");
+            foreach (var module in moduleList)
+            {
+                xml.WriteAttributeString("xmlns", module.ModuleName, null, module.Namespace);
+            }
+
+            xml.WriteAttributeString("date", XmlConvert.ToString(DateTime.Now, XmlDateTimeSerializationMode.Utc));
+        }
+
+        private static List<Kistl.App.Base.Module> GetModules(IKistlContext ctx, string[] moduleNamespaces)
+        {
+            var moduleList = new List<Kistl.App.Base.Module>();
+            if (moduleNamespaces.Contains("*"))
+            {
+                moduleList.AddRange(ctx.GetQuery<Kistl.App.Base.Module>());
+            }
+            else
+            {
+                foreach (var ns in moduleNamespaces)
+                {
+                    var module = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Namespace == ns).FirstOrDefault();
+                    if (module == null)
+                    {
+                        Trace.TraceWarning("Module {0} not found", ns);
+                        continue;
+                    }
+                    moduleList.Add(module);
+                }
+            }
+            return moduleList;
+        }
+        #endregion
     }
 }
