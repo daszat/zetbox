@@ -1,21 +1,63 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-using Kistl.Server;
-using Kistl.API.Server;
 
 namespace Kistl.Server.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.App.Projekte;
+    using Kistl.Server;
+
+    using NUnit.Framework;
+    using NUnit.Framework.Constraints;
+
     [TestFixture]
     public class ObjectTests
     {
         [SetUp]
         public void SetUp()
         {
-            //CacheController<Kistl.API.IDataObject>.Current.Clear();
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var ma1 = ctx.Create<Mitarbeiter>();
+                ma1.Geburtstag = new DateTime(1970, 10, 22);
+                ma1.Name = "Testmitarbeiter Blaha";
+
+                var ma2 = ctx.Create<Mitarbeiter>();
+                ma2.Geburtstag = new DateTime(1971, 9, 23);
+                ma2.Name = "Testmitarbeiter Foobar";
+
+                var prj1 = ctx.Create<Projekt>();
+                prj1.Mitarbeiter.Add(ma1);
+                prj1.Mitarbeiter.Add(ma2);
+                prj1.Name = "blubb";
+
+                var prj2 = ctx.Create<Projekt>();
+                prj2.Mitarbeiter.Add(ma1);
+                prj2.Name = "flubb";
+                var task1 = ctx.Create<Task>();
+                task1.Projekt = prj2;
+
+                var task2 = ctx.Create<Task>();
+                task2.Projekt = prj2;
+
+                ctx.SubmitChanges();
+            }
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                ctx.GetQuery<Mitarbeiter>().ForEach(obj => ctx.Delete(obj));
+                ctx.GetQuery<Projekt>().ForEach(obj => ctx.Delete(obj));
+                ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
+                ctx.SubmitChanges();
+            }
         }
 
         [Test]
@@ -42,7 +84,6 @@ namespace Kistl.Server.Tests
                 Assert.That(object.ReferenceEquals(obj1, obj2), "Obj1 & Obj2 are different Objects");
             }
         }
-
 
         [Test]
         public void GetListOf()
@@ -93,8 +134,6 @@ namespace Kistl.Server.Tests
                 ctx.SubmitChanges();
             }
 
-            //CacheController<Kistl.API.IDataObject>.Current.Clear();
-
             using (Kistl.API.IKistlContext checkctx = KistlContext.GetContext())
             {
                 var obj = checkctx.GetQuery<Kistl.App.Projekte.Task>().First(o => o.ID == ID);
@@ -125,8 +164,6 @@ namespace Kistl.Server.Tests
                 ID = obj.ID;
                 Assert.That(ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
             }
-
-            //CacheController<Kistl.API.IDataObject>.Current.Clear();
 
             using (Kistl.API.IKistlContext checkctx = KistlContext.GetContext())
             {

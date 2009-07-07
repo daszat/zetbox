@@ -15,6 +15,59 @@ namespace Kistl.API.AbstractConsumerTests
     {
         protected abstract IKistlContext GetContext();
 
+        [SetUp]
+        public void SetUp()
+        {
+            using (var ctx = GetContext())
+            {
+                var kunde = ctx.Create<Kunde>();
+                kunde.EMails.Add("office@example.com");
+                kunde.EMails.Add("privat@example.com");
+                kunde.Kundenname = "com Kunde";
+                kunde.PLZ = "1111";
+
+                kunde = ctx.Create<Kunde>();
+                kunde.EMails.Add("office@example.net");
+                kunde.Kundenname = "net Kunde";
+                kunde.PLZ = "2222";
+
+                kunde = ctx.Create<Kunde>();
+                kunde.Kundenname = "empty Kunde";
+                kunde.PLZ = "3333";
+
+                kunde = ctx.Create<Kunde>();
+                kunde.EMails.Add("office@example.org");
+                kunde.EMails.Add("privat@example.org");
+                kunde.EMails.Add("muh@example.org");
+                kunde.EMails.Add("blah@example.org");
+                kunde.Kundenname = "org Kunde";
+                kunde.PLZ = "4444";
+
+                var prj = ctx.Create<Projekt>();
+                prj.Name = "Kistl";
+
+                var task1 = ctx.Create<Task>();
+                task1.Projekt = prj;
+
+                var task2 = ctx.Create<Task>();
+                task2.Projekt = prj;
+
+                ctx.SubmitChanges();
+            }
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            using (var ctx = GetContext())
+            {
+                ctx.GetQuery<Kunde>().ForEach(obj => ctx.Delete(obj));
+                ctx.GetQuery<Projekt>().ForEach(obj => ctx.Delete(obj));
+                ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
+                ctx.SubmitChanges();
+            }
+        }
+
         [Test]
         public void value_lists_should_have_elements()
         {
@@ -163,7 +216,7 @@ namespace Kistl.API.AbstractConsumerTests
             using (IKistlContext ctx = GetContext())
             {
                 var k = ctx.GetQuery<Kunde>().First();
-                mail = "UnitTest" + DateTime.Now + "@dasz.at";
+                mail = "UnitTest" + DateTime.Now + "@example.com";
                 ID = k.ID;
                 k.EMails.Add(mail);
                 Assert.That(mail, Is.Not.EqualTo(""));
@@ -194,7 +247,7 @@ namespace Kistl.API.AbstractConsumerTests
                 {
                     if (k.EMails.Count > 0)
                     {
-                        mail = "UnitTest" + DateTime.Now + "@dasz.at";
+                        mail = "UnitTest" + DateTime.Now + "@example.com";
                         //k.EMails[0] = mail;
                         ID = k.ID;
                         break;

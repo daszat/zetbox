@@ -8,6 +8,7 @@ using Kistl.API.Server;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
+using Kistl.App.Projekte;
 
 namespace Kistl.Server.Tests
 {
@@ -17,6 +18,37 @@ namespace Kistl.Server.Tests
         [SetUp]
         public void SetUp()
         {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var ma1 = ctx.Create<Mitarbeiter>();
+                ma1.Geburtstag = new DateTime(1970, 10, 22);
+                ma1.Name = "Testmitarbeiter Blaha";
+                
+                var ma2 = ctx.Create<Mitarbeiter>();
+                ma2.Geburtstag = new DateTime(1971, 9, 23);
+                ma2.Name = "Testmitarbeiter Foobar";
+
+                var prj1 = ctx.Create<Projekt>();
+                prj1.Mitarbeiter.Add(ma1);
+                prj1.Mitarbeiter.Add(ma2);
+                prj1.Name = "blubb";
+
+                var prj2 = ctx.Create<Projekt>();
+                prj2.Mitarbeiter.Add(ma1);
+                prj2.Name = "flubb";
+
+                ctx.SubmitChanges();
+            }
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                ctx.GetQuery<Mitarbeiter>().ForEach(obj => ctx.Delete(obj));
+                ctx.GetQuery<Projekt>().ForEach(obj => ctx.Delete(obj));
+            }
         }
 
         #region Set Relation once
