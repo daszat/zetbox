@@ -19,6 +19,7 @@
     <string>P:\Kistl\bin\Debug</string>
     <string>P:\Kistl\Kistl.Objects\bin\Debug</string>
     <string>P:\Kistl\Kistl.Objects.Server\bin\Debug</string>
-    <string>P:\Kistl\Kistl.Objects.Frozen\bin\Debug</string>
+    <!-- Fallback path for CC.net on srv2008 -->
+    <string>C:\CruiseControlData\Kistl\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>
