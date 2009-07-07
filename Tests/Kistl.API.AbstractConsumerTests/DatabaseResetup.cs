@@ -23,38 +23,7 @@ namespace Kistl.API.AbstractConsumerTests
 
         protected void ResetDatabase(KistlConfig config)
         {
-            Assert.That(config.Server.ConnectionString, Text.Contains("_test"), "test databases should be marked with '_test' in the connection string");
-
-            try
-            {
-                Trace.TraceInformation("Resetting Database");
-                using (var db = new SqlConnection(config.Server.ConnectionString))
-                {
-                    db.Open();
-                    var scriptStream = new StreamReader(typeof(Kistl.Server.Helper).Assembly.GetManifestResourceStream(CurrentDbScript));
-                    var databaseScript = scriptStream.ReadToEnd();
-                    using (var tx = db.BeginTransaction())
-                    {
-                        foreach (var cmdString in Regex.Split(databaseScript, "\r?\nGO\r?\n").Where(s => !String.IsNullOrEmpty(s)))
-                        {
-                            using (var cmd = new SqlCommand(cmdString, db, tx))
-                            {
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
-                        tx.Commit();
-                    }
-                }
-                Trace.TraceInformation("Done Resetting Database");
-            }
-            catch (Exception error)
-            {
-                Trace.TraceError("Error ({0}) while resetting database: {1}", error.GetType().Name, error.Message);
-                Trace.TraceError(error.ToString());
-                Trace.TraceError(error.StackTrace);
-
-                throw error;
-            }
+            // we now depend on the DataImport.cmd to create a proper database for testing
         }
 
     }
