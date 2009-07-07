@@ -15,8 +15,6 @@ namespace Kistl.DalProvider.Frozen.Mocks
         public FrozenApplicationContextMock()
             : base(HostType.None, KistlConfig.FromFile("Kistl.DalProvider.Frozen.Tests.Config.xml"))
         {
-            //this.SetAssemblies(typeof(FrozenContextImplementation).Assembly.FullName);
-            throw new NotImplementedException();
         }
 
         internal void SetAssemblies(string p)
