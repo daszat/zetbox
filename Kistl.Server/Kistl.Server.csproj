@@ -754,7 +754,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Database\Database.sql" />
+    <None Include="Database\Database.sql" />
+    <None Include="Database\Scripts\DropFKConstraints.sql" />
+    <EmbeddedResource Include="Database\Scripts\DropTables.sql" />
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>AttachToContextTemplate.Designer.cs</LastGenOutput>
