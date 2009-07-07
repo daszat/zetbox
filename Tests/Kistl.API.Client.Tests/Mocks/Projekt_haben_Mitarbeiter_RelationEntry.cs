@@ -8,8 +8,8 @@ using Kistl.API;
 
 namespace Kistl.App.Projekte
 {
-    [System.Diagnostics.DebuggerDisplay("Projekt_Mitarbeiter23CollectionEntry__Implementation__")]
-    public class Projekt_Mitarbeiter23CollectionEntry__Implementation__ : BaseClientCollectionEntry, Projekt_haben_Mitarbeiter_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntry")]
+    public class Projekt_haben_Mitarbeiter_RelationEntry__Implementation__ : BaseClientCollectionEntry, Projekt_haben_Mitarbeiter_RelationEntry
     {
 
         // ID is inherited
