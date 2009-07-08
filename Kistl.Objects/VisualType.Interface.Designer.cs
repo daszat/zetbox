@@ -9,69 +9,19 @@ namespace Kistl.App.GUI
     public enum VisualType
     {
 		/// <summary>
-		/// display a value in a GridCell
+		/// The renderer class is no actual "View", but neverthe less needs to be found
 		/// </summary>
-		GridCell = 28,
+		Renderer = 0,
 
 		/// <summary>
-		/// A top-level window containing a Workspace, a visual representation for IKistlContext
+		/// A full view of the object
 		/// </summary>
-		WorkspaceWindow = 24,
+		Object = 1,
 
 		/// <summary>
-		/// A task for the user: select a value from a list
+		/// A group of properties
 		/// </summary>
-		SelectionTaskDialog = 23,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		Guid = 27,
-
-		/// <summary>
-		/// Select a string from a aset of values
-		/// </summary>
-		StringSelection = 26,
-
-		/// <summary>
-		/// display a value from an Enumeration
-		/// </summary>
-		Enumeration = 15,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		StringList = 14,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		MenuItem = 17,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		SimpleObjectList = 16,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		String = 13,
-
-		/// <summary>
-		/// 
-		/// </summary>
-		IntegerList = 12,
-
-		/// <summary>
-		/// a boolean
-		/// </summary>
-		Boolean = 5,
-
-		/// <summary>
-		/// a list of booleans
-		/// </summary>
-		BooleanList = 6,
+		PropertyGroup = 2,
 
 		/// <summary>
 		/// A list of objects
@@ -84,14 +34,14 @@ namespace Kistl.App.GUI
 		ObjectReference = 4,
 
 		/// <summary>
-		/// 
+		/// a boolean
 		/// </summary>
-		Double = 9,
+		Boolean = 5,
 
 		/// <summary>
-		/// 
+		/// a list of booleans
 		/// </summary>
-		DoubleList = 10,
+		BooleanList = 6,
 
 		/// <summary>
 		/// a date/time value
@@ -104,39 +54,14 @@ namespace Kistl.App.GUI
 		DateTimeList = 8,
 
 		/// <summary>
-		/// A group of properties
+		/// 
 		/// </summary>
-		PropertyGroup = 2,
-
-		/// <summary>
-		/// Displays an Integer with a slider instead of a text box
-		/// </summary>
-		IntegerSlider = 20,
+		Double = 9,
 
 		/// <summary>
 		/// 
 		/// </summary>
-		TemplateEditor = 19,
-
-		/// <summary>
-		/// The debugger window for displaying the active contexts
-		/// </summary>
-		KistlDebugger = 22,
-
-		/// <summary>
-		/// An object as entry of a list
-		/// </summary>
-		ObjectListEntry = 21,
-
-		/// <summary>
-		/// The renderer class is no actual "View", but neverthe less needs to be found
-		/// </summary>
-		Renderer = 0,
-
-		/// <summary>
-		/// A full view of the object
-		/// </summary>
-		Object = 1,
+		DoubleList = 10,
 
 		/// <summary>
 		/// 
@@ -146,7 +71,82 @@ namespace Kistl.App.GUI
 		/// <summary>
 		/// 
 		/// </summary>
+		IntegerList = 12,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		String = 13,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		StringList = 14,
+
+		/// <summary>
+		/// display a value from an Enumeration
+		/// </summary>
+		Enumeration = 15,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		SimpleObjectList = 16,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		MenuItem = 17,
+
+		/// <summary>
+		/// 
+		/// </summary>
 		MenuGroup = 18,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		TemplateEditor = 19,
+
+		/// <summary>
+		/// Displays an Integer with a slider instead of a text box
+		/// </summary>
+		IntegerSlider = 20,
+
+		/// <summary>
+		/// An object as entry of a list
+		/// </summary>
+		ObjectListEntry = 21,
+
+		/// <summary>
+		/// The debugger window for displaying the active contexts
+		/// </summary>
+		KistlDebugger = 22,
+
+		/// <summary>
+		/// A task for the user: select a value from a list
+		/// </summary>
+		SelectionTaskDialog = 23,
+
+		/// <summary>
+		/// A top-level window containing a Workspace, a visual representation for IKistlContext
+		/// </summary>
+		WorkspaceWindow = 24,
+
+		/// <summary>
+		/// Select a string from a aset of values
+		/// </summary>
+		StringSelection = 26,
+
+		/// <summary>
+		/// 
+		/// </summary>
+		Guid = 27,
+
+		/// <summary>
+		/// display a value in a GridCell
+		/// </summary>
+		GridCell = 28,
 
 	}
 }

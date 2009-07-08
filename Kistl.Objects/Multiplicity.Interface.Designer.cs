@@ -9,6 +9,11 @@ namespace Kistl.App.Base
     public enum Multiplicity
     {
 		/// <summary>
+		/// Optional Element (zero or one)
+		/// </summary>
+		ZeroOrOne = 1,
+
+		/// <summary>
 		/// Required Element (exactly one)
 		/// </summary>
 		One = 2,
@@ -17,11 +22,6 @@ namespace Kistl.App.Base
 		/// Optional List Element (zero or more)
 		/// </summary>
 		ZeroOrMore = 3,
-
-		/// <summary>
-		/// Optional Element (zero or one)
-		/// </summary>
-		ZeroOrOne = 1,
 
 	}
 }
