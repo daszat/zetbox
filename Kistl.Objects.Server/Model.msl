@@ -3,15 +3,78 @@
   <EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="Entities">
     
     <!-- EntitySetMappings for classes -->
-    <EntitySetMapping Name="RelationEnd">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEnd)">
-	    <MappingFragment StoreEntitySet="RelationEnd">
+    <EntitySetMapping Name="AnotherTest">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AnotherTest)">
+	    <MappingFragment StoreEntitySet="AnotherTest">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Assembly">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Assembly)">
+	    <MappingFragment StoreEntitySet="Assembly">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="AssemblyName" ColumnName="AssemblyName" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
-<ScalarProperty Name="Multiplicity__Implementation__" ColumnName="Multiplicity" />
-<ScalarProperty Name="Role" ColumnName="Role" />
-<ScalarProperty Name="RoleName" ColumnName="RoleName" />
+<ScalarProperty Name="IsClientAssembly" ColumnName="IsClientAssembly" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Auftrag">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Auftrag)">
+	    <MappingFragment StoreEntitySet="Auftrag">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Auftragsname" ColumnName="Auftragsname" />
+<ScalarProperty Name="Auftragswert" ColumnName="Auftragswert" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BaseParameter">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameter)">
+	    <MappingFragment StoreEntitySet="BaseParameter">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="IsList" ColumnName="IsList" />
+<ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
+<ScalarProperty Name="Method_pos" ColumnName="fk_Method_pos" />
+<ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolParameter)">
+	    <MappingFragment StoreEntitySet="BoolParameter">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CLRObjectParameter)">
+	    <MappingFragment StoreEntitySet="CLRObjectParameter">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="FullTypeName" ColumnName="FullTypeName" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DateTimeParameter)">
+	    <MappingFragment StoreEntitySet="DateTimeParameter">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DoubleParameter)">
+	    <MappingFragment StoreEntitySet="DoubleParameter">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.IntParameter)">
+	    <MappingFragment StoreEntitySet="IntParameter">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectParameter)">
+	    <MappingFragment StoreEntitySet="ObjectParameter">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringParameter)">
+	    <MappingFragment StoreEntitySet="StringParameter">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -63,80 +126,48 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PresentableModelDescriptor">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.PresentableModelDescriptor)">
-	    <MappingFragment StoreEntitySet="PresentableModelDescriptor">
+    <EntitySetMapping Name="CurrentSchema">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CurrentSchema)">
+	    <MappingFragment StoreEntitySet="CurrentSchema">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="DefaultVisualType__Implementation__" ColumnName="DefaultVisualType" />
+<ScalarProperty Name="Schema" ColumnName="Schema" />
+<ScalarProperty Name="Version" ColumnName="Version" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DataType">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DataType)">
+	    <MappingFragment StoreEntitySet="DataType">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ClassName" ColumnName="ClassName" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="ShowIconInLists" ColumnName="ShowIconInLists" />
+<ScalarProperty Name="ShowIdInLists" ColumnName="ShowIdInLists" />
+<ScalarProperty Name="ShowNameInLists" ColumnName="ShowNameInLists" />
 	    </MappingFragment>
       </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AnotherTest">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.AnotherTest)">
-	    <MappingFragment StoreEntitySet="AnotherTest">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Enumeration)">
+	    <MappingFragment StoreEntitySet="Enumeration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LastTest">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.LastTest)">
-	    <MappingFragment StoreEntitySet="LastTest">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Interface)">
+	    <MappingFragment StoreEntitySet="Interface">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Muhblah">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Muhblah)">
-	    <MappingFragment StoreEntitySet="Muhblah">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass)">
+	    <MappingFragment StoreEntitySet="ObjectClass">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="IsFrozenObject" ColumnName="IsFrozenObject" />
+<ScalarProperty Name="IsSimpleObject" ColumnName="IsSimpleObject" />
+<ScalarProperty Name="TableName" ColumnName="TableName" />
 	    </MappingFragment>
       </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestCustomObject">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObject)">
-	    <MappingFragment StoreEntitySet="TestCustomObject">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Struct)">
+	    <MappingFragment StoreEntitySet="Struct">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Birthday" ColumnName="Birthday" />
-<ScalarProperty Name="PersonName" ColumnName="PersonName" />
-<ComplexProperty Name="PhoneNumberMobile__Implementation__" TypeName="Model.TestPhoneStruct">
-<ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
-<ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
-</ComplexProperty>
-<ComplexProperty Name="PhoneNumberOffice__Implementation__" TypeName="Model.TestPhoneStruct">
-<ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
-<ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
-</ComplexProperty>
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Template">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Template)">
-	    <MappingFragment StoreEntitySet="Template">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="DisplayedTypeFullName" ColumnName="DisplayedTypeFullName" />
-<ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ViewDescriptor">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor)">
-	    <MappingFragment StoreEntitySet="ViewDescriptor">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
-<ScalarProperty Name="Toolkit__Implementation__" ColumnName="Toolkit" />
-<ScalarProperty Name="VisualType__Implementation__" ColumnName="VisualType" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Visual">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Visual)">
-	    <MappingFragment StoreEntitySet="Visual">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
-<ScalarProperty Name="Description" ColumnName="Description" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -151,34 +182,109 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Task">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Task)">
-	    <MappingFragment StoreEntitySet="Task">
+    <EntitySetMapping Name="Icon">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Icon)">
+	    <MappingFragment StoreEntitySet="Icon">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Aufwand" ColumnName="Aufwand" />
-<ScalarProperty Name="DatumBis" ColumnName="DatumBis" />
-<ScalarProperty Name="DatumVon" ColumnName="DatumVon" />
-<ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="IconFile" ColumnName="IconFile" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="WorkEffort">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkEffort)">
-	    <MappingFragment StoreEntitySet="WorkEffort">
+    <EntitySetMapping Name="Kunde">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde)">
+	    <MappingFragment StoreEntitySet="Kunde">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Adresse" ColumnName="Adresse" />
+<ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
+<ScalarProperty Name="Land" ColumnName="Land" />
+<ScalarProperty Name="Ort" ColumnName="Ort" />
+<ScalarProperty Name="PLZ" ColumnName="PLZ" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LastTest">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.LastTest)">
+	    <MappingFragment StoreEntitySet="LastTest">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Method">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Method)">
+	    <MappingFragment StoreEntitySet="Method">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
+<ScalarProperty Name="MethodName" ColumnName="MethodName" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MethodInvocation">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MethodInvocation)">
+	    <MappingFragment StoreEntitySet="MethodInvocation">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="MemberName" ColumnName="MemberName" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mitarbeiter">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Mitarbeiter)">
+	    <MappingFragment StoreEntitySet="Mitarbeiter">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Geburtstag" ColumnName="Geburtstag" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="SVNr" ColumnName="SVNr" />
+<ScalarProperty Name="TelefonNummer" ColumnName="TelefonNummer" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Module">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Module)">
+	    <MappingFragment StoreEntitySet="Module">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+<ScalarProperty Name="Namespace" ColumnName="Namespace" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Muhblah">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Muhblah)">
+	    <MappingFragment StoreEntitySet="Muhblah">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PresenceRecord">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PresenceRecord)">
+	    <MappingFragment StoreEntitySet="PresenceRecord">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="From" ColumnName="From" />
-<ScalarProperty Name="Name" ColumnName="Name" />
-<ScalarProperty Name="Notes" ColumnName="Notes" />
 <ScalarProperty Name="Thru" ColumnName="Thru" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Auftrag">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Auftrag)">
-	    <MappingFragment StoreEntitySet="Auftrag">
+    <EntitySetMapping Name="PresentableModelDescriptor">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PresentableModelDescriptor)">
+	    <MappingFragment StoreEntitySet="PresentableModelDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Auftragsname" ColumnName="Auftragsname" />
-<ScalarProperty Name="Auftragswert" ColumnName="Auftragswert" />
+<ScalarProperty Name="DefaultVisualType__Implementation__" ColumnName="DefaultVisualType" />
+<ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projekt">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt)">
+	    <MappingFragment StoreEntitySet="Projekt">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="AufwandGes" ColumnName="AufwandGes" />
+<ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
+<ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -249,143 +355,63 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="WorkEffortAccount">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkEffortAccount)">
-	    <MappingFragment StoreEntitySet="WorkEffortAccount">
+    <EntitySetMapping Name="Relation">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Relation)">
+	    <MappingFragment StoreEntitySet="Relation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="BudgetHours" ColumnName="BudgetHours" />
+<ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="Storage__Implementation__" ColumnName="Storage" />
+<ScalarProperty Name="Verb" ColumnName="Verb" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RelationEnd">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEnd)">
+	    <MappingFragment StoreEntitySet="RelationEnd">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
+<ScalarProperty Name="Multiplicity__Implementation__" ColumnName="Multiplicity" />
+<ScalarProperty Name="Role" ColumnName="Role" />
+<ScalarProperty Name="RoleName" ColumnName="RoleName" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Task">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Task)">
+	    <MappingFragment StoreEntitySet="Task">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Aufwand" ColumnName="Aufwand" />
+<ScalarProperty Name="DatumBis" ColumnName="DatumBis" />
+<ScalarProperty Name="DatumVon" ColumnName="DatumVon" />
 <ScalarProperty Name="Name" ColumnName="Name" />
-<ScalarProperty Name="Notes" ColumnName="Notes" />
-<ScalarProperty Name="SpentHours" ColumnName="SpentHours" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BaseParameter">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameter)">
-	    <MappingFragment StoreEntitySet="BaseParameter">
+    <EntitySetMapping Name="Template">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Template)">
+	    <MappingFragment StoreEntitySet="Template">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Description" ColumnName="Description" />
-<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="IsList" ColumnName="IsList" />
-<ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
-<ScalarProperty Name="Method_pos" ColumnName="fk_Method_pos" />
-<ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.BoolParameter)">
-	    <MappingFragment StoreEntitySet="BoolParameter">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CLRObjectParameter)">
-	    <MappingFragment StoreEntitySet="CLRObjectParameter">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="FullTypeName" ColumnName="FullTypeName" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DateTimeParameter)">
-	    <MappingFragment StoreEntitySet="DateTimeParameter">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DoubleParameter)">
-	    <MappingFragment StoreEntitySet="DoubleParameter">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.IntParameter)">
-	    <MappingFragment StoreEntitySet="IntParameter">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectParameter)">
-	    <MappingFragment StoreEntitySet="ObjectParameter">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StringParameter)">
-	    <MappingFragment StoreEntitySet="StringParameter">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="DisplayedTypeFullName" ColumnName="DisplayedTypeFullName" />
+<ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Assembly">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Assembly)">
-	    <MappingFragment StoreEntitySet="Assembly">
+    <EntitySetMapping Name="TestCustomObject">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObject)">
+	    <MappingFragment StoreEntitySet="TestCustomObject">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="AssemblyName" ColumnName="AssemblyName" />
-<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="IsClientAssembly" ColumnName="IsClientAssembly" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PresenceRecord">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.PresenceRecord)">
-	    <MappingFragment StoreEntitySet="PresenceRecord">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="From" ColumnName="From" />
-<ScalarProperty Name="Thru" ColumnName="Thru" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CurrentSchema">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CurrentSchema)">
-	    <MappingFragment StoreEntitySet="CurrentSchema">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Schema" ColumnName="Schema" />
-<ScalarProperty Name="Version" ColumnName="Version" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TypeRef">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef)">
-	    <MappingFragment StoreEntitySet="TypeRef">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="FullName" ColumnName="FullName" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Module">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Module)">
-	    <MappingFragment StoreEntitySet="Module">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Description" ColumnName="Description" />
-<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
-<ScalarProperty Name="Namespace" ColumnName="Namespace" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Kunde">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde)">
-	    <MappingFragment StoreEntitySet="Kunde">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Adresse" ColumnName="Adresse" />
-<ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
-<ScalarProperty Name="Land" ColumnName="Land" />
-<ScalarProperty Name="Ort" ColumnName="Ort" />
-<ScalarProperty Name="PLZ" ColumnName="PLZ" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Method">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Method)">
-	    <MappingFragment StoreEntitySet="Method">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Description" ColumnName="Description" />
-<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
-<ScalarProperty Name="MethodName" ColumnName="MethodName" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MethodInvocation">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.MethodInvocation)">
-	    <MappingFragment StoreEntitySet="MethodInvocation">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="MemberName" ColumnName="MemberName" />
+<ScalarProperty Name="Birthday" ColumnName="Birthday" />
+<ScalarProperty Name="PersonName" ColumnName="PersonName" />
+<ComplexProperty Name="PhoneNumberMobile__Implementation__" TypeName="Model.TestPhoneStruct">
+<ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
+<ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
+</ComplexProperty>
+<ComplexProperty Name="PhoneNumberOffice__Implementation__" TypeName="Model.TestPhoneStruct">
+<ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
+<ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
+</ComplexProperty>
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -399,80 +425,54 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Icon">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Icon)">
-	    <MappingFragment StoreEntitySet="Icon">
+    <EntitySetMapping Name="TypeRef">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef)">
+	    <MappingFragment StoreEntitySet="TypeRef">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="IconFile" ColumnName="IconFile" />
+<ScalarProperty Name="FullName" ColumnName="FullName" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Projekt">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt)">
-	    <MappingFragment StoreEntitySet="Projekt">
+    <EntitySetMapping Name="ViewDescriptor">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor)">
+	    <MappingFragment StoreEntitySet="ViewDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="AufwandGes" ColumnName="AufwandGes" />
-<ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
-<ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
+<ScalarProperty Name="Toolkit__Implementation__" ColumnName="Toolkit" />
+<ScalarProperty Name="VisualType__Implementation__" ColumnName="VisualType" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Mitarbeiter">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Mitarbeiter)">
-	    <MappingFragment StoreEntitySet="Mitarbeiter">
+    <EntitySetMapping Name="Visual">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Visual)">
+	    <MappingFragment StoreEntitySet="Visual">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Geburtstag" ColumnName="Geburtstag" />
-<ScalarProperty Name="Name" ColumnName="Name" />
-<ScalarProperty Name="SVNr" ColumnName="SVNr" />
-<ScalarProperty Name="TelefonNummer" ColumnName="TelefonNummer" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Relation">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Relation)">
-	    <MappingFragment StoreEntitySet="Relation">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
 <ScalarProperty Name="Description" ColumnName="Description" />
-<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="Storage__Implementation__" ColumnName="Storage" />
-<ScalarProperty Name="Verb" ColumnName="Verb" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DataType">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DataType)">
-	    <MappingFragment StoreEntitySet="DataType">
+    <EntitySetMapping Name="WorkEffort">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkEffort)">
+	    <MappingFragment StoreEntitySet="WorkEffort">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ClassName" ColumnName="ClassName" />
-<ScalarProperty Name="Description" ColumnName="Description" />
-<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="ShowIconInLists" ColumnName="ShowIconInLists" />
-<ScalarProperty Name="ShowIdInLists" ColumnName="ShowIdInLists" />
-<ScalarProperty Name="ShowNameInLists" ColumnName="ShowNameInLists" />
+<ScalarProperty Name="From" ColumnName="From" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="Notes" ColumnName="Notes" />
+<ScalarProperty Name="Thru" ColumnName="Thru" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Enumeration)">
-	    <MappingFragment StoreEntitySet="Enumeration">
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkEffortAccount">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkEffortAccount)">
+	    <MappingFragment StoreEntitySet="WorkEffortAccount">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Interface)">
-	    <MappingFragment StoreEntitySet="Interface">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass)">
-	    <MappingFragment StoreEntitySet="ObjectClass">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="IsFrozenObject" ColumnName="IsFrozenObject" />
-<ScalarProperty Name="IsSimpleObject" ColumnName="IsSimpleObject" />
-<ScalarProperty Name="TableName" ColumnName="TableName" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Struct)">
-	    <MappingFragment StoreEntitySet="Struct">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="BudgetHours" ColumnName="BudgetHours" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="Notes" ColumnName="Notes" />
+<ScalarProperty Name="SpentHours" ColumnName="SpentHours" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

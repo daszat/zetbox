@@ -21,7 +21,7 @@
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
 	 */
 
-	foreach(var p in properties)
+	foreach(var p in properties.OrderBy(p => p.PropertyName))
 	{
 		// TODO: implement IsNullable everywhere
 		if (p is ObjectReferenceProperty)

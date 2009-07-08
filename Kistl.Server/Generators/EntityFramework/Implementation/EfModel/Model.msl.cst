@@ -19,7 +19,7 @@
     
     <!-- EntitySetMappings for classes -->
 <%
-    foreach(var cls in ctx.GetBaseClasses())
+    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
     {
 %>
     <EntitySetMapping Name="<%= cls.ClassName %>">

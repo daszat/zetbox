@@ -23,7 +23,7 @@
 
     <!-- EntitySets for all Base Classes -->
 <%	
-	foreach(var cls in ctx.GetBaseClasses())
+	foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
 	{
 %>
     <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
@@ -32,7 +32,7 @@
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
 <%	
-	foreach(var cls in ctx.GetDerivedClasses())
+	foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.ClassName))
 	{
 		var info = new InheritanceStorageAssociationInfo(cls);
 %>
@@ -251,7 +251,7 @@
 
   <!-- derived->base ObjectClass references -->
 <%
-	foreach(var cls in ctx.GetDerivedClasses())
+	foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.ClassName))
 	{
 		TypeMoniker parentType = cls.BaseObjectClass.GetTypeMoniker();
 		TypeMoniker childType = cls.GetTypeMoniker();

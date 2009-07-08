@@ -7,44 +7,142 @@
   <EntityContainer Name="dbo">
 
     <!-- EntitySets for all Base Classes -->
-    <EntitySet Name="RelationEnd" EntityType="Model.Store.RelationEnd" Table="RelationEnds"/>
-    <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Table="Constraints"/>
-    <EntitySet Name="PresentableModelDescriptor" EntityType="Model.Store.PresentableModelDescriptor" Table="PresentableModelDescriptors"/>
     <EntitySet Name="AnotherTest" EntityType="Model.Store.AnotherTest" Table="AnotherTests"/>
-    <EntitySet Name="LastTest" EntityType="Model.Store.LastTest" Table="LastTests"/>
-    <EntitySet Name="Muhblah" EntityType="Model.Store.Muhblah" Table="Muhblas"/>
-    <EntitySet Name="TestCustomObject" EntityType="Model.Store.TestCustomObject" Table="TestCustomObjects"/>
-    <EntitySet Name="Template" EntityType="Model.Store.Template" Table="Templates"/>
-    <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Table="ViewDescriptors"/>
-    <EntitySet Name="Visual" EntityType="Model.Store.Visual" Table="Visuals"/>
-    <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries"/>
-    <EntitySet Name="Task" EntityType="Model.Store.Task" Table="Tasks"/>
-    <EntitySet Name="WorkEffort" EntityType="Model.Store.WorkEffort" Table="WorkEfforts"/>
-    <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Table="Auftraege"/>
-    <EntitySet Name="Property" EntityType="Model.Store.Property" Table="Properties"/>
-    <EntitySet Name="WorkEffortAccount" EntityType="Model.Store.WorkEffortAccount" Table="WorkEffortAccounts"/>
-    <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Table="BaseParameters"/>
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies"/>
-    <EntitySet Name="PresenceRecord" EntityType="Model.Store.PresenceRecord" Table="PresenceRecords"/>
+    <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Table="Auftraege"/>
+    <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Table="BaseParameters"/>
+    <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Table="Constraints"/>
     <EntitySet Name="CurrentSchema" EntityType="Model.Store.CurrentSchema" Table="CurrentSchema"/>
-    <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Table="TypeRefs"/>
-    <EntitySet Name="Module" EntityType="Model.Store.Module" Table="Modules"/>
+    <EntitySet Name="DataType" EntityType="Model.Store.DataType" Table="DataTypes"/>
+    <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries"/>
+    <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons"/>
     <EntitySet Name="Kunde" EntityType="Model.Store.Kunde" Table="Kunden"/>
+    <EntitySet Name="LastTest" EntityType="Model.Store.LastTest" Table="LastTests"/>
     <EntitySet Name="Method" EntityType="Model.Store.Method" Table="Methods"/>
     <EntitySet Name="MethodInvocation" EntityType="Model.Store.MethodInvocation" Table="MethodInvocations"/>
-    <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Table="TestObjClasses"/>
-    <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons"/>
-    <EntitySet Name="Projekt" EntityType="Model.Store.Projekt" Table="Projekte"/>
     <EntitySet Name="Mitarbeiter" EntityType="Model.Store.Mitarbeiter" Table="Mitarbeiter"/>
+    <EntitySet Name="Module" EntityType="Model.Store.Module" Table="Modules"/>
+    <EntitySet Name="Muhblah" EntityType="Model.Store.Muhblah" Table="Muhblas"/>
+    <EntitySet Name="PresenceRecord" EntityType="Model.Store.PresenceRecord" Table="PresenceRecords"/>
+    <EntitySet Name="PresentableModelDescriptor" EntityType="Model.Store.PresentableModelDescriptor" Table="PresentableModelDescriptors"/>
+    <EntitySet Name="Projekt" EntityType="Model.Store.Projekt" Table="Projekte"/>
+    <EntitySet Name="Property" EntityType="Model.Store.Property" Table="Properties"/>
     <EntitySet Name="Relation" EntityType="Model.Store.Relation" Table="Relations"/>
-    <EntitySet Name="DataType" EntityType="Model.Store.DataType" Table="DataTypes"/>
+    <EntitySet Name="RelationEnd" EntityType="Model.Store.RelationEnd" Table="RelationEnds"/>
+    <EntitySet Name="Task" EntityType="Model.Store.Task" Table="Tasks"/>
+    <EntitySet Name="Template" EntityType="Model.Store.Template" Table="Templates"/>
+    <EntitySet Name="TestCustomObject" EntityType="Model.Store.TestCustomObject" Table="TestCustomObjects"/>
+    <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Table="TestObjClasses"/>
+    <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Table="TypeRefs"/>
+    <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Table="ViewDescriptors"/>
+    <EntitySet Name="Visual" EntityType="Model.Store.Visual" Table="Visuals"/>
+    <EntitySet Name="WorkEffort" EntityType="Model.Store.WorkEffort" Table="WorkEfforts"/>
+    <EntitySet Name="WorkEffortAccount" EntityType="Model.Store.WorkEffortAccount" Table="WorkEffortAccounts"/>
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
-    <EntitySet Name="MethodInvocationConstraint" EntityType="Model.Store.MethodInvocationConstraint" Table="MethodInvocationConstraints"/>
+    <EntitySet Name="BoolParameter" EntityType="Model.Store.BoolParameter" Table="BoolParameters"/>
+    <!-- inherits from BaseParameter -->
+    <AssociationSet Name="FK_BoolParameter_BaseParameter_ID" Association="Model.Store.FK_BoolParameter_BaseParameter_ID" >
+      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
+      <End Role="B_BoolParameter" EntitySet="BoolParameter" />
+    </AssociationSet>
+    
+    <EntitySet Name="BoolProperty" EntityType="Model.Store.BoolProperty" Table="BoolProperties"/>
+    <!-- inherits from ValueTypeProperty -->
+    <AssociationSet Name="FK_BoolProperty_ValueTypeProperty_ID" Association="Model.Store.FK_BoolProperty_ValueTypeProperty_ID" >
+      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
+      <End Role="B_BoolProperty" EntitySet="BoolProperty" />
+    </AssociationSet>
+    
+    <EntitySet Name="CLRObjectParameter" EntityType="Model.Store.CLRObjectParameter" Table="CLRObjectParameters"/>
+    <!-- inherits from BaseParameter -->
+    <AssociationSet Name="FK_CLRObjectParameter_BaseParameter_ID" Association="Model.Store.FK_CLRObjectParameter_BaseParameter_ID" >
+      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
+      <End Role="B_CLRObjectParameter" EntitySet="CLRObjectParameter" />
+    </AssociationSet>
+    
+    <EntitySet Name="ConsistentNavigatorConstraint" EntityType="Model.Store.ConsistentNavigatorConstraint" Table="ConsistentNavigatorConstraints"/>
     <!-- inherits from Constraint -->
-    <AssociationSet Name="FK_MethodInvocationConstraint_Constraint_ID" Association="Model.Store.FK_MethodInvocationConstraint_Constraint_ID" >
+    <AssociationSet Name="FK_ConsistentNavigatorConstraint_Constraint_ID" Association="Model.Store.FK_ConsistentNavigatorConstraint_Constraint_ID" >
       <End Role="A_Constraint" EntitySet="Constraint" />
-      <End Role="B_MethodInvocationConstraint" EntitySet="MethodInvocationConstraint" />
+      <End Role="B_ConsistentNavigatorConstraint" EntitySet="ConsistentNavigatorConstraint" />
+    </AssociationSet>
+    
+    <EntitySet Name="DateTimeParameter" EntityType="Model.Store.DateTimeParameter" Table="DateTimeParameters"/>
+    <!-- inherits from BaseParameter -->
+    <AssociationSet Name="FK_DateTimeParameter_BaseParameter_ID" Association="Model.Store.FK_DateTimeParameter_BaseParameter_ID" >
+      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
+      <End Role="B_DateTimeParameter" EntitySet="DateTimeParameter" />
+    </AssociationSet>
+    
+    <EntitySet Name="DateTimeProperty" EntityType="Model.Store.DateTimeProperty" Table="DateTimeProperties"/>
+    <!-- inherits from ValueTypeProperty -->
+    <AssociationSet Name="FK_DateTimeProperty_ValueTypeProperty_ID" Association="Model.Store.FK_DateTimeProperty_ValueTypeProperty_ID" >
+      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
+      <End Role="B_DateTimeProperty" EntitySet="DateTimeProperty" />
+    </AssociationSet>
+    
+    <EntitySet Name="DoubleParameter" EntityType="Model.Store.DoubleParameter" Table="DoubleParameters"/>
+    <!-- inherits from BaseParameter -->
+    <AssociationSet Name="FK_DoubleParameter_BaseParameter_ID" Association="Model.Store.FK_DoubleParameter_BaseParameter_ID" >
+      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
+      <End Role="B_DoubleParameter" EntitySet="DoubleParameter" />
+    </AssociationSet>
+    
+    <EntitySet Name="DoubleProperty" EntityType="Model.Store.DoubleProperty" Table="DoubleProperties"/>
+    <!-- inherits from ValueTypeProperty -->
+    <AssociationSet Name="FK_DoubleProperty_ValueTypeProperty_ID" Association="Model.Store.FK_DoubleProperty_ValueTypeProperty_ID" >
+      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
+      <End Role="B_DoubleProperty" EntitySet="DoubleProperty" />
+    </AssociationSet>
+    
+    <EntitySet Name="Enumeration" EntityType="Model.Store.Enumeration" Table="Enumerations"/>
+    <!-- inherits from DataType -->
+    <AssociationSet Name="FK_Enumeration_DataType_ID" Association="Model.Store.FK_Enumeration_DataType_ID" >
+      <End Role="A_DataType" EntitySet="DataType" />
+      <End Role="B_Enumeration" EntitySet="Enumeration" />
+    </AssociationSet>
+    
+    <EntitySet Name="EnumerationProperty" EntityType="Model.Store.EnumerationProperty" Table="EnumerationProperties"/>
+    <!-- inherits from ValueTypeProperty -->
+    <AssociationSet Name="FK_EnumerationProperty_ValueTypeProperty_ID" Association="Model.Store.FK_EnumerationProperty_ValueTypeProperty_ID" >
+      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
+      <End Role="B_EnumerationProperty" EntitySet="EnumerationProperty" />
+    </AssociationSet>
+    
+    <EntitySet Name="GuidProperty" EntityType="Model.Store.GuidProperty" Table="GuidProperties"/>
+    <!-- inherits from ValueTypeProperty -->
+    <AssociationSet Name="FK_GuidProperty_ValueTypeProperty_ID" Association="Model.Store.FK_GuidProperty_ValueTypeProperty_ID" >
+      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
+      <End Role="B_GuidProperty" EntitySet="GuidProperty" />
+    </AssociationSet>
+    
+    <EntitySet Name="IntegerRangeConstraint" EntityType="Model.Store.IntegerRangeConstraint" Table="IntegerRangeConstraints"/>
+    <!-- inherits from Constraint -->
+    <AssociationSet Name="FK_IntegerRangeConstraint_Constraint_ID" Association="Model.Store.FK_IntegerRangeConstraint_Constraint_ID" >
+      <End Role="A_Constraint" EntitySet="Constraint" />
+      <End Role="B_IntegerRangeConstraint" EntitySet="IntegerRangeConstraint" />
+    </AssociationSet>
+    
+    <EntitySet Name="Interface" EntityType="Model.Store.Interface" Table="Interfaces"/>
+    <!-- inherits from DataType -->
+    <AssociationSet Name="FK_Interface_DataType_ID" Association="Model.Store.FK_Interface_DataType_ID" >
+      <End Role="A_DataType" EntitySet="DataType" />
+      <End Role="B_Interface" EntitySet="Interface" />
+    </AssociationSet>
+    
+    <EntitySet Name="IntParameter" EntityType="Model.Store.IntParameter" Table="IntParameters"/>
+    <!-- inherits from BaseParameter -->
+    <AssociationSet Name="FK_IntParameter_BaseParameter_ID" Association="Model.Store.FK_IntParameter_BaseParameter_ID" >
+      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
+      <End Role="B_IntParameter" EntitySet="IntParameter" />
+    </AssociationSet>
+    
+    <EntitySet Name="IntProperty" EntityType="Model.Store.IntProperty" Table="IntProperties"/>
+    <!-- inherits from ValueTypeProperty -->
+    <AssociationSet Name="FK_IntProperty_ValueTypeProperty_ID" Association="Model.Store.FK_IntProperty_ValueTypeProperty_ID" >
+      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
+      <End Role="B_IntProperty" EntitySet="IntProperty" />
     </AssociationSet>
     
     <EntitySet Name="IsValidIdentifierConstraint" EntityType="Model.Store.IsValidIdentifierConstraint" Table="IsValidIdentifierConstraints"/>
@@ -61,137 +159,18 @@
       <End Role="B_IsValidNamespaceConstraint" EntitySet="IsValidNamespaceConstraint" />
     </AssociationSet>
     
+    <EntitySet Name="MethodInvocationConstraint" EntityType="Model.Store.MethodInvocationConstraint" Table="MethodInvocationConstraints"/>
+    <!-- inherits from Constraint -->
+    <AssociationSet Name="FK_MethodInvocationConstraint_Constraint_ID" Association="Model.Store.FK_MethodInvocationConstraint_Constraint_ID" >
+      <End Role="A_Constraint" EntitySet="Constraint" />
+      <End Role="B_MethodInvocationConstraint" EntitySet="MethodInvocationConstraint" />
+    </AssociationSet>
+    
     <EntitySet Name="NotNullableConstraint" EntityType="Model.Store.NotNullableConstraint" Table="NotNullableConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_NotNullableConstraint_Constraint_ID" Association="Model.Store.FK_NotNullableConstraint_Constraint_ID" >
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_NotNullableConstraint" EntitySet="NotNullableConstraint" />
-    </AssociationSet>
-    
-    <EntitySet Name="StringRangeConstraint" EntityType="Model.Store.StringRangeConstraint" Table="StringRangeConstraints"/>
-    <!-- inherits from Constraint -->
-    <AssociationSet Name="FK_StringRangeConstraint_Constraint_ID" Association="Model.Store.FK_StringRangeConstraint_Constraint_ID" >
-      <End Role="A_Constraint" EntitySet="Constraint" />
-      <End Role="B_StringRangeConstraint" EntitySet="StringRangeConstraint" />
-    </AssociationSet>
-    
-    <EntitySet Name="IntegerRangeConstraint" EntityType="Model.Store.IntegerRangeConstraint" Table="IntegerRangeConstraints"/>
-    <!-- inherits from Constraint -->
-    <AssociationSet Name="FK_IntegerRangeConstraint_Constraint_ID" Association="Model.Store.FK_IntegerRangeConstraint_Constraint_ID" >
-      <End Role="A_Constraint" EntitySet="Constraint" />
-      <End Role="B_IntegerRangeConstraint" EntitySet="IntegerRangeConstraint" />
-    </AssociationSet>
-    
-    <EntitySet Name="CLRObjectParameter" EntityType="Model.Store.CLRObjectParameter" Table="CLRObjectParameters"/>
-    <!-- inherits from BaseParameter -->
-    <AssociationSet Name="FK_CLRObjectParameter_BaseParameter_ID" Association="Model.Store.FK_CLRObjectParameter_BaseParameter_ID" >
-      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
-      <End Role="B_CLRObjectParameter" EntitySet="CLRObjectParameter" />
-    </AssociationSet>
-    
-    <EntitySet Name="Enumeration" EntityType="Model.Store.Enumeration" Table="Enumerations"/>
-    <!-- inherits from DataType -->
-    <AssociationSet Name="FK_Enumeration_DataType_ID" Association="Model.Store.FK_Enumeration_DataType_ID" >
-      <End Role="A_DataType" EntitySet="DataType" />
-      <End Role="B_Enumeration" EntitySet="Enumeration" />
-    </AssociationSet>
-    
-    <EntitySet Name="IntProperty" EntityType="Model.Store.IntProperty" Table="IntProperties"/>
-    <!-- inherits from ValueTypeProperty -->
-    <AssociationSet Name="FK_IntProperty_ValueTypeProperty_ID" Association="Model.Store.FK_IntProperty_ValueTypeProperty_ID" >
-      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
-      <End Role="B_IntProperty" EntitySet="IntProperty" />
-    </AssociationSet>
-    
-    <EntitySet Name="BoolProperty" EntityType="Model.Store.BoolProperty" Table="BoolProperties"/>
-    <!-- inherits from ValueTypeProperty -->
-    <AssociationSet Name="FK_BoolProperty_ValueTypeProperty_ID" Association="Model.Store.FK_BoolProperty_ValueTypeProperty_ID" >
-      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
-      <End Role="B_BoolProperty" EntitySet="BoolProperty" />
-    </AssociationSet>
-    
-    <EntitySet Name="DoubleProperty" EntityType="Model.Store.DoubleProperty" Table="DoubleProperties"/>
-    <!-- inherits from ValueTypeProperty -->
-    <AssociationSet Name="FK_DoubleProperty_ValueTypeProperty_ID" Association="Model.Store.FK_DoubleProperty_ValueTypeProperty_ID" >
-      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
-      <End Role="B_DoubleProperty" EntitySet="DoubleProperty" />
-    </AssociationSet>
-    
-    <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties"/>
-    <!-- inherits from Property -->
-    <AssociationSet Name="FK_ValueTypeProperty_Property_ID" Association="Model.Store.FK_ValueTypeProperty_Property_ID" >
-      <End Role="A_Property" EntitySet="Property" />
-      <End Role="B_ValueTypeProperty" EntitySet="ValueTypeProperty" />
-    </AssociationSet>
-    
-    <EntitySet Name="StringProperty" EntityType="Model.Store.StringProperty" Table="StringProperties"/>
-    <!-- inherits from ValueTypeProperty -->
-    <AssociationSet Name="FK_StringProperty_ValueTypeProperty_ID" Association="Model.Store.FK_StringProperty_ValueTypeProperty_ID" >
-      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
-      <End Role="B_StringProperty" EntitySet="StringProperty" />
-    </AssociationSet>
-    
-    <EntitySet Name="ConsistentNavigatorConstraint" EntityType="Model.Store.ConsistentNavigatorConstraint" Table="ConsistentNavigatorConstraints"/>
-    <!-- inherits from Constraint -->
-    <AssociationSet Name="FK_ConsistentNavigatorConstraint_Constraint_ID" Association="Model.Store.FK_ConsistentNavigatorConstraint_Constraint_ID" >
-      <End Role="A_Constraint" EntitySet="Constraint" />
-      <End Role="B_ConsistentNavigatorConstraint" EntitySet="ConsistentNavigatorConstraint" />
-    </AssociationSet>
-    
-    <EntitySet Name="BoolParameter" EntityType="Model.Store.BoolParameter" Table="BoolParameters"/>
-    <!-- inherits from BaseParameter -->
-    <AssociationSet Name="FK_BoolParameter_BaseParameter_ID" Association="Model.Store.FK_BoolParameter_BaseParameter_ID" >
-      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
-      <End Role="B_BoolParameter" EntitySet="BoolParameter" />
-    </AssociationSet>
-    
-    <EntitySet Name="DateTimeParameter" EntityType="Model.Store.DateTimeParameter" Table="DateTimeParameters"/>
-    <!-- inherits from BaseParameter -->
-    <AssociationSet Name="FK_DateTimeParameter_BaseParameter_ID" Association="Model.Store.FK_DateTimeParameter_BaseParameter_ID" >
-      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
-      <End Role="B_DateTimeParameter" EntitySet="DateTimeParameter" />
-    </AssociationSet>
-    
-    <EntitySet Name="ObjectParameter" EntityType="Model.Store.ObjectParameter" Table="ObjectParameters"/>
-    <!-- inherits from BaseParameter -->
-    <AssociationSet Name="FK_ObjectParameter_BaseParameter_ID" Association="Model.Store.FK_ObjectParameter_BaseParameter_ID" >
-      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
-      <End Role="B_ObjectParameter" EntitySet="ObjectParameter" />
-    </AssociationSet>
-    
-    <EntitySet Name="StringParameter" EntityType="Model.Store.StringParameter" Table="StringParameters"/>
-    <!-- inherits from BaseParameter -->
-    <AssociationSet Name="FK_StringParameter_BaseParameter_ID" Association="Model.Store.FK_StringParameter_BaseParameter_ID" >
-      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
-      <End Role="B_StringParameter" EntitySet="StringParameter" />
-    </AssociationSet>
-    
-    <EntitySet Name="IntParameter" EntityType="Model.Store.IntParameter" Table="IntParameters"/>
-    <!-- inherits from BaseParameter -->
-    <AssociationSet Name="FK_IntParameter_BaseParameter_ID" Association="Model.Store.FK_IntParameter_BaseParameter_ID" >
-      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
-      <End Role="B_IntParameter" EntitySet="IntParameter" />
-    </AssociationSet>
-    
-    <EntitySet Name="DoubleParameter" EntityType="Model.Store.DoubleParameter" Table="DoubleParameters"/>
-    <!-- inherits from BaseParameter -->
-    <AssociationSet Name="FK_DoubleParameter_BaseParameter_ID" Association="Model.Store.FK_DoubleParameter_BaseParameter_ID" >
-      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
-      <End Role="B_DoubleParameter" EntitySet="DoubleParameter" />
-    </AssociationSet>
-    
-    <EntitySet Name="StructProperty" EntityType="Model.Store.StructProperty" Table="StructProperties"/>
-    <!-- inherits from Property -->
-    <AssociationSet Name="FK_StructProperty_Property_ID" Association="Model.Store.FK_StructProperty_Property_ID" >
-      <End Role="A_Property" EntitySet="Property" />
-      <End Role="B_StructProperty" EntitySet="StructProperty" />
-    </AssociationSet>
-    
-    <EntitySet Name="GuidProperty" EntityType="Model.Store.GuidProperty" Table="GuidProperties"/>
-    <!-- inherits from ValueTypeProperty -->
-    <AssociationSet Name="FK_GuidProperty_ValueTypeProperty_ID" Association="Model.Store.FK_GuidProperty_ValueTypeProperty_ID" >
-      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
-      <End Role="B_GuidProperty" EntitySet="GuidProperty" />
     </AssociationSet>
     
     <EntitySet Name="ObjectClass" EntityType="Model.Store.ObjectClass" Table="ObjectClasses"/>
@@ -201,6 +180,13 @@
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
     
+    <EntitySet Name="ObjectParameter" EntityType="Model.Store.ObjectParameter" Table="ObjectParameters"/>
+    <!-- inherits from BaseParameter -->
+    <AssociationSet Name="FK_ObjectParameter_BaseParameter_ID" Association="Model.Store.FK_ObjectParameter_BaseParameter_ID" >
+      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
+      <End Role="B_ObjectParameter" EntitySet="ObjectParameter" />
+    </AssociationSet>
+    
     <EntitySet Name="ObjectReferenceProperty" EntityType="Model.Store.ObjectReferenceProperty" Table="ObjectReferenceProperties"/>
     <!-- inherits from Property -->
     <AssociationSet Name="FK_ObjectReferenceProperty_Property_ID" Association="Model.Store.FK_ObjectReferenceProperty_Property_ID" >
@@ -208,25 +194,25 @@
       <End Role="B_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
     </AssociationSet>
     
-    <EntitySet Name="DateTimeProperty" EntityType="Model.Store.DateTimeProperty" Table="DateTimeProperties"/>
-    <!-- inherits from ValueTypeProperty -->
-    <AssociationSet Name="FK_DateTimeProperty_ValueTypeProperty_ID" Association="Model.Store.FK_DateTimeProperty_ValueTypeProperty_ID" >
-      <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
-      <End Role="B_DateTimeProperty" EntitySet="DateTimeProperty" />
+    <EntitySet Name="StringParameter" EntityType="Model.Store.StringParameter" Table="StringParameters"/>
+    <!-- inherits from BaseParameter -->
+    <AssociationSet Name="FK_StringParameter_BaseParameter_ID" Association="Model.Store.FK_StringParameter_BaseParameter_ID" >
+      <End Role="A_BaseParameter" EntitySet="BaseParameter" />
+      <End Role="B_StringParameter" EntitySet="StringParameter" />
     </AssociationSet>
     
-    <EntitySet Name="EnumerationProperty" EntityType="Model.Store.EnumerationProperty" Table="EnumerationProperties"/>
+    <EntitySet Name="StringProperty" EntityType="Model.Store.StringProperty" Table="StringProperties"/>
     <!-- inherits from ValueTypeProperty -->
-    <AssociationSet Name="FK_EnumerationProperty_ValueTypeProperty_ID" Association="Model.Store.FK_EnumerationProperty_ValueTypeProperty_ID" >
+    <AssociationSet Name="FK_StringProperty_ValueTypeProperty_ID" Association="Model.Store.FK_StringProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
-      <End Role="B_EnumerationProperty" EntitySet="EnumerationProperty" />
+      <End Role="B_StringProperty" EntitySet="StringProperty" />
     </AssociationSet>
     
-    <EntitySet Name="Interface" EntityType="Model.Store.Interface" Table="Interfaces"/>
-    <!-- inherits from DataType -->
-    <AssociationSet Name="FK_Interface_DataType_ID" Association="Model.Store.FK_Interface_DataType_ID" >
-      <End Role="A_DataType" EntitySet="DataType" />
-      <End Role="B_Interface" EntitySet="Interface" />
+    <EntitySet Name="StringRangeConstraint" EntityType="Model.Store.StringRangeConstraint" Table="StringRangeConstraints"/>
+    <!-- inherits from Constraint -->
+    <AssociationSet Name="FK_StringRangeConstraint_Constraint_ID" Association="Model.Store.FK_StringRangeConstraint_Constraint_ID" >
+      <End Role="A_Constraint" EntitySet="Constraint" />
+      <End Role="B_StringRangeConstraint" EntitySet="StringRangeConstraint" />
     </AssociationSet>
     
     <EntitySet Name="Struct" EntityType="Model.Store.Struct" Table="Structs"/>
@@ -234,6 +220,20 @@
     <AssociationSet Name="FK_Struct_DataType_ID" Association="Model.Store.FK_Struct_DataType_ID" >
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Struct" EntitySet="Struct" />
+    </AssociationSet>
+    
+    <EntitySet Name="StructProperty" EntityType="Model.Store.StructProperty" Table="StructProperties"/>
+    <!-- inherits from Property -->
+    <AssociationSet Name="FK_StructProperty_Property_ID" Association="Model.Store.FK_StructProperty_Property_ID" >
+      <End Role="A_Property" EntitySet="Property" />
+      <End Role="B_StructProperty" EntitySet="StructProperty" />
+    </AssociationSet>
+    
+    <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties"/>
+    <!-- inherits from Property -->
+    <AssociationSet Name="FK_ValueTypeProperty_Property_ID" Association="Model.Store.FK_ValueTypeProperty_Property_ID" >
+      <End Role="A_Property" EntitySet="Property" />
+      <End Role="B_ValueTypeProperty" EntitySet="ValueTypeProperty" />
     </AssociationSet>
     
 
@@ -551,14 +551,49 @@
 
   <!-- EntityTypes for all classes -->
 	
-  <EntityType Name="MethodInvocationConstraint">
+  <EntityType Name="NotNullableConstraint">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="Constraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ConstrainedProperty" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Reason" Type="nvarchar" MaxLength="400" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="StringRangeConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="MaxLength" Type="int" Nullable="false" />
+    <Property Name="MinLength" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="IntegerRangeConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Max" Type="int" Nullable="false" />
+    <Property Name="Min" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="IsValidIdentifierConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="MethodInvocationConstraint">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -586,68 +621,7 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="Constraint">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_ConstrainedProperty" Type="int" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Reason" Type="nvarchar" MaxLength="400" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="NotNullableConstraint">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="PresentableModelDescriptor">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="DefaultVisualType" Type="int" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
-    <Property Name="fk_PresentableModelRef" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="StringRangeConstraint">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="MaxLength" Type="int" Nullable="false" />
-    <Property Name="MinLength" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="IntegerRangeConstraint">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Max" Type="int" Nullable="false" />
-    <Property Name="Min" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="AnotherTest">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-  </EntityType>
-	
-  <EntityType Name="LastTest">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-  </EntityType>
-	
-  <EntityType Name="Muhblah">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -665,6 +639,43 @@
     <Property Name="PhoneNumberMobile_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
     <Property Name="PhoneNumberOffice_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
     <Property Name="PhoneNumberOffice_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="LastTest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+  </EntityType>
+	
+  <EntityType Name="Muhblah">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+  </EntityType>
+	
+  <EntityType Name="PresentableModelDescriptor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DefaultVisualType" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="fk_PresentableModelRef" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="Visual">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ControlType" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_Method" Type="int" />
+    <Property Name="fk_Property" Type="int" />
   </EntityType>
 	
   <EntityType Name="Template">
@@ -692,15 +703,70 @@
     <Property Name="VisualType" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="Visual">
+  <EntityType Name="Projekt">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ControlType" Type="int" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="AufwandGes" Type="float" Nullable="true" />
+    <Property Name="Kundenname" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="TestObjClass">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MyIntProperty" Type="int" Nullable="true" />
+    <Property Name="fk_ObjectProp" Type="int" />
+    <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="TestEnumProp" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Mitarbeiter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Geburtstag" Type="datetime" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="SVNr" Type="nvarchar" MaxLength="20" Nullable="true" />
+    <Property Name="TelefonNummer" Type="nvarchar" MaxLength="50" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="CLRObjectParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_Assembly" Type="int" />
+    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="WorkEffortAccount">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BudgetHours" Type="float" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="SpentHours" Type="float" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="BaseParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
     <Property Name="fk_Method" Type="int" />
-    <Property Name="fk_Property" Type="int" />
+    <Property Name="fk_Method_pos" Type="int" Nullable="true" />
+    <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="EnumerationEntry">
@@ -713,39 +779,6 @@
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Value" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Task">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Aufwand" Type="float" Nullable="true" />
-    <Property Name="DatumBis" Type="datetime" Nullable="true" />
-    <Property Name="DatumVon" Type="datetime" Nullable="true" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="fk_Projekt" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="WorkEffort">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="From" Type="datetime" Nullable="false" />
-    <Property Name="fk_Mitarbeiter" Type="int" />
-    <Property Name="Name" Type="nvarchar" MaxLength="400" Nullable="false" />
-    <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="Thru" Type="datetime" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="CLRObjectParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_Assembly" Type="int" />
-    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Auftrag">
@@ -767,18 +800,111 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="IntProperty">
+  <EntityType Name="MethodInvocation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_Implementor" Type="int" />
+    <Property Name="fk_InvokeOnObjectClass" Type="int" />
+    <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_Method" Type="int" />
+    <Property Name="fk_Module" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="ConsistentNavigatorConstraint">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="BoolProperty">
+  <EntityType Name="Assembly">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsClientAssembly" Type="bit" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="TypeRef">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Assembly" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_Parent" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="Method">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsDisplayable" Type="bit" Nullable="false" />
+    <Property Name="MethodName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="fk_ObjectClass" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="Kunde">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Adresse" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="Kundenname" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Module">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ModuleName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="PresenceRecord">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="From" Type="datetime" Nullable="false" />
+    <Property Name="fk_Mitarbeiter" Type="int" />
+    <Property Name="Thru" Type="datetime" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="CurrentSchema">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Schema" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Version" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Icon">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IconFile" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
   </EntityType>
 	
   <EntityType Name="DoubleProperty">
@@ -813,246 +939,25 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="StringProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Length" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ConsistentNavigatorConstraint">
+  <EntityType Name="Struct">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="WorkEffortAccount">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="BudgetHours" Type="float" Nullable="true" />
-    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="SpentHours" Type="float" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="BaseParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IsList" Type="bit" Nullable="false" />
-    <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
-    <Property Name="fk_Method" Type="int" />
-    <Property Name="fk_Method_pos" Type="int" Nullable="true" />
-    <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Assembly">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IsClientAssembly" Type="bit" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="PresenceRecord">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="From" Type="datetime" Nullable="false" />
-    <Property Name="fk_Mitarbeiter" Type="int" />
-    <Property Name="Thru" Type="datetime" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="CurrentSchema">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Schema" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="Version" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="BoolParameter">
+  <EntityType Name="IntProperty">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="DateTimeParameter">
+  <EntityType Name="BoolProperty">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ObjectParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_DataType" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="StringParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="IntParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="DoubleParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="TypeRef">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Assembly" Type="int" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_Parent" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="Module">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="ModuleName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Kunde">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Adresse" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="Kundenname" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
-    <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Method">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IsDisplayable" Type="bit" Nullable="false" />
-    <Property Name="MethodName" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
-    <Property Name="fk_ObjectClass" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="MethodInvocation">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_Implementor" Type="int" />
-    <Property Name="fk_InvokeOnObjectClass" Type="int" />
-    <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_Method" Type="int" />
-    <Property Name="fk_Module" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="TestObjClass">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="MyIntProperty" Type="int" Nullable="true" />
-    <Property Name="fk_ObjectProp" Type="int" />
-    <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="TestEnumProp" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Icon">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IconFile" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="Projekt">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="AufwandGes" Type="float" Nullable="true" />
-    <Property Name="Kundenname" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="Mitarbeiter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Geburtstag" Type="datetime" Nullable="true" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="SVNr" Type="nvarchar" MaxLength="20" Nullable="true" />
-    <Property Name="TelefonNummer" Type="nvarchar" MaxLength="50" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="StructProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_StructDefinition" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="GuidProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ObjectClass">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_BaseObjectClass" Type="int" />
-    <Property Name="fk_DefaultPresentableModelDescriptor" Type="int" />
-    <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
-    <Property Name="IsSimpleObject" Type="bit" Nullable="false" />
-    <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ObjectReferenceProperty">
@@ -1077,6 +982,72 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_Enumeration" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="StringProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Length" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="StructProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_StructDefinition" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="GuidProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="StringParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="IntParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="DoubleParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="BoolParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="DateTimeParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="ObjectParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_DataType" Type="int" />
   </EntityType>
 	
   <EntityType Name="Relation">
@@ -1115,11 +1086,40 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="Struct">
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Aufwand" Type="float" Nullable="true" />
+    <Property Name="DatumBis" Type="datetime" Nullable="true" />
+    <Property Name="DatumVon" Type="datetime" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="fk_Projekt" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="WorkEffort">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="From" Type="datetime" Nullable="false" />
+    <Property Name="fk_Mitarbeiter" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="400" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Thru" Type="datetime" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="ObjectClass">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_BaseObjectClass" Type="int" />
+    <Property Name="fk_DefaultPresentableModelDescriptor" Type="int" />
+    <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
+    <Property Name="IsSimpleObject" Type="bit" Nullable="false" />
+    <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
@@ -2098,14 +2098,182 @@
 
 
   <!-- derived->base ObjectClass references -->
-  <Association Name="FK_MethodInvocationConstraint_Constraint_ID">
+  <Association Name="FK_BoolParameter_BaseParameter_ID">
+    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
+    <End Role="B_BoolParameter" Type="Model.Store.BoolParameter" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_BaseParameter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_BoolParameter">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BoolProperty_ValueTypeProperty_ID">
+    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
+    <End Role="B_BoolProperty" Type="Model.Store.BoolProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ValueTypeProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_BoolProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLRObjectParameter_BaseParameter_ID">
+    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
+    <End Role="B_CLRObjectParameter" Type="Model.Store.CLRObjectParameter" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_BaseParameter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_CLRObjectParameter">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConsistentNavigatorConstraint_Constraint_ID">
     <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
-    <End Role="B_MethodInvocationConstraint" Type="Model.Store.MethodInvocationConstraint" Multiplicity="0..1" />
+    <End Role="B_ConsistentNavigatorConstraint" Type="Model.Store.ConsistentNavigatorConstraint" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="A_Constraint">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_MethodInvocationConstraint">
+      <Dependent Role="B_ConsistentNavigatorConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DateTimeParameter_BaseParameter_ID">
+    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
+    <End Role="B_DateTimeParameter" Type="Model.Store.DateTimeParameter" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_BaseParameter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_DateTimeParameter">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DateTimeProperty_ValueTypeProperty_ID">
+    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
+    <End Role="B_DateTimeProperty" Type="Model.Store.DateTimeProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ValueTypeProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_DateTimeProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DoubleParameter_BaseParameter_ID">
+    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
+    <End Role="B_DoubleParameter" Type="Model.Store.DoubleParameter" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_BaseParameter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_DoubleParameter">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DoubleProperty_ValueTypeProperty_ID">
+    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
+    <End Role="B_DoubleProperty" Type="Model.Store.DoubleProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ValueTypeProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_DoubleProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enumeration_DataType_ID">
+    <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
+    <End Role="B_Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_DataType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Enumeration">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EnumerationProperty_ValueTypeProperty_ID">
+    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
+    <End Role="B_EnumerationProperty" Type="Model.Store.EnumerationProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ValueTypeProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_EnumerationProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GuidProperty_ValueTypeProperty_ID">
+    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
+    <End Role="B_GuidProperty" Type="Model.Store.GuidProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ValueTypeProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_GuidProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntegerRangeConstraint_Constraint_ID">
+    <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
+    <End Role="B_IntegerRangeConstraint" Type="Model.Store.IntegerRangeConstraint" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_Constraint">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_IntegerRangeConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Interface_DataType_ID">
+    <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
+    <End Role="B_Interface" Type="Model.Store.Interface" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_DataType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Interface">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntParameter_BaseParameter_ID">
+    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
+    <End Role="B_IntParameter" Type="Model.Store.IntParameter" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_BaseParameter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_IntParameter">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntProperty_ValueTypeProperty_ID">
+    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
+    <End Role="B_IntProperty" Type="Model.Store.IntProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ValueTypeProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_IntProperty">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -2134,6 +2302,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_MethodInvocationConstraint_Constraint_ID">
+    <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
+    <End Role="B_MethodInvocationConstraint" Type="Model.Store.MethodInvocationConstraint" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_Constraint">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_MethodInvocationConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_NotNullableConstraint_Constraint_ID">
     <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
     <End Role="B_NotNullableConstraint" Type="Model.Store.NotNullableConstraint" Multiplicity="0..1" />
@@ -2142,222 +2322,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_NotNullableConstraint">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StringRangeConstraint_Constraint_ID">
-    <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
-    <End Role="B_StringRangeConstraint" Type="Model.Store.StringRangeConstraint" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_Constraint">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_StringRangeConstraint">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IntegerRangeConstraint_Constraint_ID">
-    <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
-    <End Role="B_IntegerRangeConstraint" Type="Model.Store.IntegerRangeConstraint" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_Constraint">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_IntegerRangeConstraint">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CLRObjectParameter_BaseParameter_ID">
-    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
-    <End Role="B_CLRObjectParameter" Type="Model.Store.CLRObjectParameter" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_BaseParameter">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_CLRObjectParameter">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Enumeration_DataType_ID">
-    <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
-    <End Role="B_Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_DataType">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_Enumeration">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IntProperty_ValueTypeProperty_ID">
-    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
-    <End Role="B_IntProperty" Type="Model.Store.IntProperty" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ValueTypeProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_IntProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BoolProperty_ValueTypeProperty_ID">
-    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
-    <End Role="B_BoolProperty" Type="Model.Store.BoolProperty" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ValueTypeProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_BoolProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DoubleProperty_ValueTypeProperty_ID">
-    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
-    <End Role="B_DoubleProperty" Type="Model.Store.DoubleProperty" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ValueTypeProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_DoubleProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ValueTypeProperty_Property_ID">
-    <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
-    <End Role="B_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_Property">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ValueTypeProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StringProperty_ValueTypeProperty_ID">
-    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
-    <End Role="B_StringProperty" Type="Model.Store.StringProperty" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ValueTypeProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_StringProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ConsistentNavigatorConstraint_Constraint_ID">
-    <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
-    <End Role="B_ConsistentNavigatorConstraint" Type="Model.Store.ConsistentNavigatorConstraint" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_Constraint">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ConsistentNavigatorConstraint">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_BoolParameter_BaseParameter_ID">
-    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
-    <End Role="B_BoolParameter" Type="Model.Store.BoolParameter" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_BaseParameter">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_BoolParameter">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DateTimeParameter_BaseParameter_ID">
-    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
-    <End Role="B_DateTimeParameter" Type="Model.Store.DateTimeParameter" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_BaseParameter">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_DateTimeParameter">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ObjectParameter_BaseParameter_ID">
-    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
-    <End Role="B_ObjectParameter" Type="Model.Store.ObjectParameter" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_BaseParameter">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ObjectParameter">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StringParameter_BaseParameter_ID">
-    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
-    <End Role="B_StringParameter" Type="Model.Store.StringParameter" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_BaseParameter">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_StringParameter">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IntParameter_BaseParameter_ID">
-    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
-    <End Role="B_IntParameter" Type="Model.Store.IntParameter" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_BaseParameter">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_IntParameter">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DoubleParameter_BaseParameter_ID">
-    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
-    <End Role="B_DoubleParameter" Type="Model.Store.DoubleParameter" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_BaseParameter">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_DoubleParameter">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StructProperty_Property_ID">
-    <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
-    <End Role="B_StructProperty" Type="Model.Store.StructProperty" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_Property">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_StructProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_GuidProperty_ValueTypeProperty_ID">
-    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
-    <End Role="B_GuidProperty" Type="Model.Store.GuidProperty" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ValueTypeProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_GuidProperty">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -2374,6 +2338,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ObjectParameter_BaseParameter_ID">
+    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
+    <End Role="B_ObjectParameter" Type="Model.Store.ObjectParameter" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_BaseParameter">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ObjectParameter">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ObjectReferenceProperty_Property_ID">
     <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
     <End Role="B_ObjectReferenceProperty" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
@@ -2386,38 +2362,38 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DateTimeProperty_ValueTypeProperty_ID">
-    <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
-    <End Role="B_DateTimeProperty" Type="Model.Store.DateTimeProperty" Multiplicity="0..1" />
+  <Association Name="FK_StringParameter_BaseParameter_ID">
+    <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
+    <End Role="B_StringParameter" Type="Model.Store.StringParameter" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="A_ValueTypeProperty">
+      <Principal Role="A_BaseParameter">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_DateTimeProperty">
+      <Dependent Role="B_StringParameter">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_EnumerationProperty_ValueTypeProperty_ID">
+  <Association Name="FK_StringProperty_ValueTypeProperty_ID">
     <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
-    <End Role="B_EnumerationProperty" Type="Model.Store.EnumerationProperty" Multiplicity="0..1" />
+    <End Role="B_StringProperty" Type="Model.Store.StringProperty" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="A_ValueTypeProperty">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_EnumerationProperty">
+      <Dependent Role="B_StringProperty">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Interface_DataType_ID">
-    <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
-    <End Role="B_Interface" Type="Model.Store.Interface" Multiplicity="0..1" />
+  <Association Name="FK_StringRangeConstraint_Constraint_ID">
+    <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
+    <End Role="B_StringRangeConstraint" Type="Model.Store.StringRangeConstraint" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="A_DataType">
+      <Principal Role="A_Constraint">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="B_Interface">
+      <Dependent Role="B_StringRangeConstraint">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -2430,6 +2406,30 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_Struct">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StructProperty_Property_ID">
+    <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
+    <End Role="B_StructProperty" Type="Model.Store.StructProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_Property">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_StructProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ValueTypeProperty_Property_ID">
+    <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
+    <End Role="B_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_Property">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ValueTypeProperty">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

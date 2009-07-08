@@ -37,7 +37,7 @@ this.WriteObjects("  <EntityContainer Name=\"dbo\">\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets for all Base Classes -->\r\n");
 #line 26 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
-foreach(var cls in ctx.GetBaseClasses())
+foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
 	{
 
 #line 29 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
@@ -49,7 +49,7 @@ this.WriteObjects("    <EntitySet Name=\"",  cls.ClassName , "\" EntityType=\"Mo
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets for all derived classes and their inheritance AssociationSets -->\r\n");
 #line 35 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
-foreach(var cls in ctx.GetDerivedClasses())
+foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.ClassName))
 	{
 		var info = new InheritanceStorageAssociationInfo(cls);
 
@@ -295,7 +295,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- derived->base ObjectClass references -->\r\n");
 #line 254 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
-foreach(var cls in ctx.GetDerivedClasses())
+foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.ClassName))
 	{
 		TypeMoniker parentType = cls.BaseObjectClass.GetTypeMoniker();
 		TypeMoniker childType = cls.GetTypeMoniker();
