@@ -15,7 +15,77 @@ namespace Kistl.Server.Packaging
     {
         public static void Deploy(string filename)
         {
-            throw new NotImplementedException();
+            using (TraceClient.TraceHelper.TraceMethodCall())
+            {
+                Trace.TraceInformation("Starting Deployment from {0}", filename);
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    using (FileStream fs = File.OpenRead(filename))
+                    {
+                        Deploy(ctx, fs);
+                    }
+                    Trace.TraceInformation("Submitting changes");
+                    ctx.SubmitChanges();
+                }
+                Trace.TraceInformation("Deployment finished");
+            }
+        }
+
+        public static void Deploy(IKistlContext ctx, Stream s)
+        {
+            // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
+            var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
+            Debug.WriteLine(testObj != null ? testObj.ToString() : "");
+
+            Dictionary<Guid, IPersistenceObject> currentObjects = new Dictionary<Guid, IPersistenceObject>();
+            using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
+            {
+                Console.WriteLine("Loading namespaces");
+                var namespaces = LoadModuleNamespaces(xml);
+                if (namespaces.Count() == 0) throw new InvalidOperationException("No modules found in import file");
+
+                foreach (var ns in namespaces)
+                {
+                    Console.WriteLine("Prefeching objects for {0}", ns); 
+                    var module = ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Namespace == ns);
+                    foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
+                    {
+                        currentObjects[obj.Key] = obj.Value;
+                    }
+                }
+            }
+
+            s.Seek(0, SeekOrigin.Begin);
+            Dictionary<Guid, IPersistenceObject> importedObjects = new Dictionary<Guid, IPersistenceObject>();
+            using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
+            {
+                Console.WriteLine("Loading");
+
+                // Find Root Element
+                while (xml.Read() && xml.NodeType != XmlNodeType.Element && xml.LocalName != "KistlPackaging" && xml.NamespaceURI != "http://dasz.at/Kistl") ;
+
+                // Read content
+                while (xml.Read())
+                {
+                    if (xml.NodeType != XmlNodeType.Element) continue;
+                    var obj = ImportElement(ctx, currentObjects, xml);
+                    if (obj == null) throw new InvalidOperationException("Invalid import format");
+                    importedObjects[((IExportableInternal)obj).ExportGuid] = obj;
+                }
+            }
+
+            Trace.TraceInformation("Reloading References");
+            foreach (var obj in importedObjects.Values)
+            {
+                obj.ReloadReferences();
+            }
+
+            var objectsToDelete = currentObjects.Where(p => !importedObjects.ContainsKey(p.Key));
+            Trace.TraceInformation("Deleting {0} objects marked for deletion", objectsToDelete.Count());
+            foreach (var pairToDelete in objectsToDelete)
+            {
+                ctx.Delete(pairToDelete.Value);
+            }
         }
 
         public static void Import(string filename)
@@ -129,7 +199,26 @@ namespace Kistl.Server.Packaging
             return guids;
         }
 
-        private static void ImportElement(IKistlContext ctx, Dictionary<Guid, IPersistenceObject> objects, XmlReader xml)
+        private static IEnumerable<string> LoadModuleNamespaces(XmlReader xml)
+        {
+            IList<string> namespaces = new List<string>();
+            XPathDocument doc = new XPathDocument(xml);
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
+            nsmgr.AddNamespace("KistlBase", "Kistl.App.Base");
+            XPathNavigator nav = doc.CreateNavigator();
+            XPathNodeIterator it = nav.Select("//KistlBase:Module/KistlBase:Namespace", nsmgr);
+
+            while (it.MoveNext())
+            {
+                Console.Write(".");
+                namespaces.Add(it.Current.Value);
+            }
+
+            Console.WriteLine();
+            return namespaces;
+        }
+
+        private static IPersistenceObject ImportElement(IKistlContext ctx, Dictionary<Guid, IPersistenceObject> objects, XmlReader xml)
         {
             Guid exportGuid = xml.GetAttribute("ExportGuid").ParseGuidValue();
             if (exportGuid != Guid.Empty)
@@ -140,7 +229,7 @@ namespace Kistl.Server.Packaging
                 if (t == null)
                 {
                     Trace.TraceWarning("Type {0} not found", ifTypeName);
-                    return;
+                    return null;
                 }
 
                 InterfaceType ifType = new InterfaceType(t);
@@ -156,6 +245,12 @@ namespace Kistl.Server.Packaging
                         ((IExportableInternal)obj).MergeImport(xml);
                     }
                 }
+
+                return obj;
+            }
+            else
+            {
+                return null;
             }
         }
 

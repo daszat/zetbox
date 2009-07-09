@@ -923,6 +923,7 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Repository.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Packaging\PackagingHelper.cs" />
     <Compile Include="SchemaManagement\SchemaManager.CheckSchema.cs" />
     <Compile Include="SchemaManagement\SchemaManager.UpdateSchema.cs" />
   </ItemGroup>
