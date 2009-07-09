@@ -90,7 +90,6 @@
 	{
 		if (direction == SerializerDirection.Export && serMember.XmlName == "ExportGuid")
 		{
-		    System.Diagnostics.Trace.TraceInformation("Not Exporting ExportGuid Property");
 			continue;
 		}
 	    ApplySerializer(direction, serMember, argName);
