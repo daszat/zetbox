@@ -259,15 +259,21 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             cmd.ExecuteNonQuery();
         }
 
-        public void DropFKConstraint(string tblName, string fkName)
+        public void DropTable(string tblName)
         {
-            SqlCommand cmd = new SqlCommand(string.Format("alter table [{0}] drop constraint [{1}]", tblName, fkName), db, tx);
+            SqlCommand cmd = new SqlCommand(string.Format("DROP TABLE [{0}]", tblName), db, tx);
             cmd.ExecuteNonQuery();
         }
 
         public void DropColumn(string tblName, string colName)
         {
-            SqlCommand cmd = new SqlCommand(string.Format("alter table [{0}] drop column [{1}]", tblName, colName), db, tx);
+            SqlCommand cmd = new SqlCommand(string.Format("ALTER TABLE [{0}] DROP COLUMN [{1}]", tblName, colName), db, tx);
+            cmd.ExecuteNonQuery();
+        }
+
+        public void DropFKConstraint(string tblName, string fkName)
+        {
+            SqlCommand cmd = new SqlCommand(string.Format("ALTER TABLE [{0}] DROP CONSTRAINT [{1}]", tblName, fkName), db, tx);
             cmd.ExecuteNonQuery();
         }
     }

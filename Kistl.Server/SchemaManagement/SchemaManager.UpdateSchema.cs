@@ -17,7 +17,6 @@ namespace Kistl.Server.SchemaManagement
 	{
         public void UpdateSchema()
         {
-            savedSchema = GetSavedSchema();
             WriteReportHeader("Update Schema Report");
 
             db.BeginTransaction();
@@ -26,6 +25,9 @@ namespace Kistl.Server.SchemaManagement
                 UpdateTables();
                 UpdateRelations();
                 UpdateInheritance();
+
+                UpdateDeletedRelations();
+                UpdateDeletedTables();
 
                 SaveSchema(schema);
 
@@ -44,6 +46,23 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
+        private void UpdateDeletedTables()
+        {
+            report.WriteLine("Updating deleted Tables");
+            report.WriteLine("-----------------------");
+
+            foreach (ObjectClass objClass in Case.savedSchema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            {
+                report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                if (Case.IsDeleteObjectClass(objClass))
+                {
+                    Case.DoDeleteObjectClass(objClass);
+                }
+            }
+            report.WriteLine();
+        }
+
+
         private void UpdateTables()
         {
             report.WriteLine("Updating Tables & Columns");
@@ -52,13 +71,13 @@ namespace Kistl.Server.SchemaManagement
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
                 report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
-                if (IsCaseNewObjectClass(objClass))
+                if (Case.IsNewObjectClass(objClass))
                 {
-                    CaseNewObjectClass(objClass);
+                    Case.DoNewObjectClass(objClass);
                 }
-                if (IsCaseRenameObjectClassTable(objClass))
+                if (Case.IsRenameObjectClassTable(objClass))
                 {
-                    CaseRenameObjectClassTable(objClass);
+                    Case.DoRenameObjectClassTable(objClass);
                 }
 
                 UpdateColumns(objClass, objClass.Properties, "");
@@ -70,21 +89,21 @@ namespace Kistl.Server.SchemaManagement
         {
             foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.HasStorage()))
             {
-                if (IsCaseNewValueTypePropertyNullable(prop))
+                if (Case.IsNewValueTypePropertyNullable(prop))
                 {
-                    CaseNewValueTypePropertyNullable(objClass, prop, prefix);
+                    Case.DoNewValueTypePropertyNullable(objClass, prop, prefix);
                 }
-                if (IsCaseNewValueTypePropertyNotNullable(prop))
+                if (Case.IsNewValueTypePropertyNotNullable(prop))
                 {
-                    CaseNewValueTypePropertyNotNullable(objClass, prop, prefix);
+                    Case.DoNewValueTypePropertyNotNullable(objClass, prop, prefix);
                 }
-                if (IsCaseRenameValueTypePropertyName(prop))
+                if (Case.IsRenameValueTypePropertyName(prop))
                 {
-                    CaseRenameValueTypePropertyName(objClass, prop, prefix);
+                    Case.DoRenameValueTypePropertyName(objClass, prop, prefix);
                 }
-                if (IsCaseMoveValueTypeProperty(prop))
+                if (Case.IsMoveValueTypeProperty(prop))
                 {
-                    CaseMoveValueTypeProperty(objClass, prop, prefix);
+                    Case.DoMoveValueTypeProperty(objClass, prop, prefix);
                 }
             }
 
@@ -95,19 +114,53 @@ namespace Kistl.Server.SchemaManagement
 
             foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => p.IsList))
             {
-                if (IsCaseNewValueTypePropertyList(prop))
+                if (Case.IsNewValueTypePropertyList(prop))
                 {
-                    CaseNewValueTypePropertyList(objClass, prop);
+                    Case.DoNewValueTypePropertyList(objClass, prop);
                 }
-                if (IsCaseRenameValueTypePropertyListName(prop))
+                if (Case.IsRenameValueTypePropertyListName(prop))
                 {
-                    CaseRenameValueTypePropertyListName(objClass, prop);
+                    Case.DoRenameValueTypePropertyListName(objClass, prop);
                 }
-                if (IsCaseMoveValueTypePropertyList(prop))
+                if (Case.IsMoveValueTypePropertyList(prop))
                 {
-                    CaseMoveValueTypePropertyList(objClass, prop);
+                    Case.DoMoveValueTypePropertyList(objClass, prop);
                 }
             }
+        }
+
+        private void UpdateDeletedRelations()
+        {
+            report.WriteLine("Updating deleted Relations");
+            report.WriteLine("--------------------------");
+
+            foreach (Relation rel in Case.savedSchema.GetQuery<Relation>().OrderBy(r => r.Module.Namespace))
+            {
+                report.WriteLine("Relation: {0} ({1})", rel.GetAssociationName(), rel.GetRelationType());
+
+                if (rel.GetRelationType() == RelationType.one_n)
+                {
+                    if (Case.IsDelete_1_N_Relation(rel))
+                    {
+                        Case.DoDelete_1_N_Relation(rel);
+                    }
+                }
+                else if (rel.GetRelationType() == RelationType.n_m)
+                {
+                    if (Case.IsDelete_N_M_Relation(rel))
+                    {
+                        Case.DoDelete_N_M_Relation(rel);
+                    }
+                }
+                else if (rel.GetRelationType() == RelationType.one_one)
+                {
+                    if (Case.IsDelete_1_1_Relation(rel))
+                    {
+                        Case.DoDelete_1_1_Relation(rel);
+                    }
+                }
+            }
+            report.WriteLine();
         }
 
         private void UpdateRelations()
@@ -121,47 +174,47 @@ namespace Kistl.Server.SchemaManagement
 
                 if (rel.GetRelationType() == RelationType.one_n)
                 {
-                    if (IsCaseNew_1_N_Relation(rel))
+                    if (Case.IsNew_1_N_Relation(rel))
                     {
-                        CaseNew_1_N_Relation(rel);
+                        Case.DoNew_1_N_Relation(rel);
                     }
-                    if (IsCase_1_N_RelationChange_FromIndexed_To_NotIndexed(rel))
+                    if (Case.Is_1_N_RelationChange_FromIndexed_To_NotIndexed(rel))
                     {
-                        Case_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
+                        Case.Do_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
                     }
-                    if (IsCase_1_N_RelationChange_FromNotIndexed_To_Indexed(rel))
+                    if (Case.Is_1_N_RelationChange_FromNotIndexed_To_Indexed(rel))
                     {
-                        Case_1_N_RelationChange_FromNotIndexed_To_Indexed(rel);
+                        Case.Do_1_N_RelationChange_FromNotIndexed_To_Indexed(rel);
                     }
                 }
                 else if (rel.GetRelationType() == RelationType.n_m)
                 {
-                    if (IsCaseNew_N_M_Relation(rel))
+                    if (Case.IsNew_N_M_Relation(rel))
                     {
-                        CaseNew_N_M_Relation(rel);
+                        Case.DoNew_N_M_Relation(rel);
                     }
-                    if (IsCase_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A))
+                    if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A))
                     {
-                        Case_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A);
+                        Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A);
                     }
-                    if (IsCase_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B))
+                    if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B))
                     {
-                        Case_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B);
+                        Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B);
                     }
-                    if (IsCase_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A))
+                    if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A))
                     {
-                        Case_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A);
+                        Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A);
                     }
-                    if (IsCase_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B))
+                    if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B))
                     {
-                        Case_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B);
+                        Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B);
                     }
                 }
                 else if (rel.GetRelationType() == RelationType.one_one)
                 {
-                    if (IsCaseNew_1_1_Relation(rel))
+                    if (Case.IsNew_1_1_Relation(rel))
                     {
-                        CaseNew_1_1_Relation(rel);
+                        Case.DoNew_1_1_Relation(rel);
                     }
                 }
             }
@@ -176,17 +229,17 @@ namespace Kistl.Server.SchemaManagement
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
                 report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
-                if (IsCaseNewObjectClassInheritance(objClass))
+                if (Case.IsNewObjectClassInheritance(objClass))
                 {
-                    CaseNewObjectClassInheritance(objClass);
+                    Case.DoNewObjectClassInheritance(objClass);
                 }
-                if (IsCaseChangeObjectClassInheritance(objClass))
+                if (Case.IsChangeObjectClassInheritance(objClass))
                 {
-                    CaseChangeObjectClassInheritance(objClass);
+                    Case.DoChangeObjectClassInheritance(objClass);
                 }
-                if (IsCaseRemoveObjectClassInheritance(objClass))
+                if (Case.IsRemoveObjectClassInheritance(objClass))
                 {
-                    CaseRemoveObjectClassInheritance(objClass);
+                    Case.DoRemoveObjectClassInheritance(objClass);
                 }
             }
             report.WriteLine();

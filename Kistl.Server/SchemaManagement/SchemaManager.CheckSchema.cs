@@ -56,7 +56,7 @@ namespace Kistl.Server.SchemaManagement
                     report.WriteLine("** Warning: FK Contraint to BaseClass is missing");
                     if (repair)
                     {
-                        CaseNewObjectClassInheritance(objClass);
+                        Case.DoNewObjectClassInheritance(objClass);
                     }
                 }
             }
@@ -91,10 +91,21 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
+        private void GetExistingColumnNames(ObjectClass objClass, ICollection<Property> properties, string prefix, List<string> columns)
+        {
+            columns.AddRange(properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.HasStorage()).Select(p => Construct.NestedColumnName(p, prefix)).ToArray());
+
+            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList && p.HasStorage()))
+            {
+                GetExistingColumnNames(objClass, sprop.StructDefinition.Properties, Construct.NestedColumnName(sprop, prefix), columns);
+            }
+        }
+
         private void CheckExtraColumns(ObjectClass objClass)
         {
             report.WriteLine("  Extra Columns: ");
-            List<string> columns = objClass.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).Select(p => p.PropertyName).ToList();
+            List<string> columns = new List<string>();
+            GetExistingColumnNames(objClass, objClass.Properties, "", columns);
 
             foreach (string propName in db.GetTableColumnNames(objClass.TableName))
             {
@@ -249,7 +260,7 @@ namespace Kistl.Server.SchemaManagement
                 report.WriteLine("  ** Warning: Index Column exists but property is not indexed");
                 if (repair)
                 {
-                    Case_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
+                    Case.Do_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
                 }
             }
         }
@@ -343,7 +354,7 @@ namespace Kistl.Server.SchemaManagement
                 if (db.CheckTableExists(objClass.TableName))
                 {
                     report.WriteLine("  Table: {0}", objClass.TableName);
-                    CheckColumns(objClass);
+                    CheckColumns(objClass, objClass.Properties, "");
                     CheckValueTypeCollections(objClass);
                     CheckExtraColumns(objClass);
                 }
@@ -393,7 +404,7 @@ namespace Kistl.Server.SchemaManagement
                     report.WriteLine("    ** Warning: Table '{0}' for Property '{1}' is missing", tblName, prop.PropertyName);
                     if (repair)
                     {
-                        CaseNewValueTypePropertyList(objClass, prop);
+                        Case.DoNewValueTypePropertyList(objClass, prop);
                     }
                 }
             }
@@ -431,20 +442,23 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void CheckColumns(ObjectClass objClass)
+        private void CheckColumns(ObjectClass objClass, ICollection<Property> properties, string prefix)
         {
             report.WriteLine("  Columns: ");
-            foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>()
-                .Where(p => !p.IsList)
+            foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>()
+                .Where(p => !p.IsList && p.HasStorage())
                 .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
             {
                 string tblName = objClass.TableName;
-                string colName = prop.PropertyName;
+                string colName = Construct.NestedColumnName(prop, prefix);
                 report.WriteLine("    {0}", colName);
                 CheckColumn(tblName, colName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).Length : 0, prop.IsNullable);
             }
 
-            // TODO: Struct
+            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList && p.HasStorage()))
+            {
+                CheckColumns(objClass, sprop.StructDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
+            }
         }
     }
 }
