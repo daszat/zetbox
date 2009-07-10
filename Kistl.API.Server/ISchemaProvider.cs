@@ -36,7 +36,8 @@ namespace Kistl.API.Server
         void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
         void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade);
 
-        void DropFKConstraint(string tblName, string fkName);
+        void DropTable(string tblName);
         void DropColumn(string tblName, string colName);
+        void DropFKConstraint(string tblName, string fkName);
     }
 }
