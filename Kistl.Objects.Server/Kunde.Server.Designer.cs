@@ -374,7 +374,6 @@ namespace Kistl.App.Projekte
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Adresse, binStream);
-            BinarySerializer.FromStreamCollectionEntries(this.EMails__Implementation__, binStream);
             BinarySerializer.FromStream(out this._Kundenname, binStream);
             BinarySerializer.FromStream(out this._Land, binStream);
             BinarySerializer.FromStream(out this._Ort, binStream);

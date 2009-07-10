@@ -15,18 +15,25 @@ namespace Kistl.API.AbstractConsumerTests.Structs
     {
         public abstract IKistlContext GetContext();
 
+        public virtual TestCustomObject GetObject()
+        {
+            return ctx.GetQuery<TestCustomObject>().First();
+        }
+
         protected IKistlContext ctx;
         protected TestCustomObject obj;
+
+
 
         [SetUp]
         public void InitTestObjects()
         {
             ctx = GetContext();
-            obj = (TestCustomObject)ctx.GetQuery<TestCustomObject>().First();
+            obj = GetObject();
         }
 
         [TearDown]
-        public void DisposeContext()
+        public virtual void DisposeContext()
         {
             ctx.Dispose();
         }

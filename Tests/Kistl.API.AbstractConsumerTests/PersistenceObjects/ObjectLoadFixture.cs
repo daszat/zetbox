@@ -31,7 +31,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [TearDown]
-        public void DisposeContext()
+        public virtual void DisposeContext()
         {
             if (ctx != null)
                 ctx.Dispose();

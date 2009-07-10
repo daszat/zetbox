@@ -17,10 +17,62 @@ namespace Kistl.IntegrationTests
     [TestFixture]
     public class ObjectTests
     {
+        private const string ProjectName1 = "Project 1";
+        private const string ProjectName2 = "Project 2";
+        private const int Project1TaskCount = 10;
+        private const int Project2TaskCount = 5;
+        private const int TaskCount = Project1TaskCount + Project2TaskCount;
+
+        private int Project1ID = -1;
+        private int Project2ID = -1;
+
         [SetUp]
         public void SetUp()
         {
-            //CacheController<Kistl.API.IDataObject>.Current.Clear();
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                Projekt prj1 = ctx.Create<Projekt>();
+                prj1.Name = ProjectName1;
+
+                Projekt prj2 = ctx.Create<Projekt>();
+                prj2.Name = ProjectName2;
+
+                for (int i = 0; i < Project1TaskCount; i++)
+                {
+                    SetUpCreateTask(ctx, prj1, i);
+                }
+
+                for (int i = 0; i < Project2TaskCount; i++)
+                {
+                    SetUpCreateTask(ctx, prj2, i);
+                }
+
+                ctx.SubmitChanges();
+
+                Project1ID = prj1.ID;
+                Project2ID = prj2.ID;
+            }
+        }
+
+        private void SetUpCreateTask(IKistlContext ctx, Projekt prj, int i)
+        {
+            Task t = ctx.Create<Task>();
+            t.Name = prj.Name + " - Task " + (i + 1);
+            t.DatumVon = DateTime.Today.AddDays(i);
+            t.DatumBis = DateTime.Today.AddDays(2 * i);
+            t.Aufwand = (i + 1);
+            prj.Tasks.Add(t);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                ctx.GetQuery<Projekt>().ForEach(obj => ctx.Delete(obj));
+                ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
+                ctx.SubmitChanges();
+            }
         }
 
         [Test]
@@ -28,8 +80,8 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var obj = ctx.GetQuery<ObjectClass>().Single(o => o.ID == 2);
-                Assert.That(obj.ID, Is.EqualTo(2));
+                var obj = ctx.GetQuery<Projekt>().Single(o => o.ID == Project1ID);
+                Assert.That(obj.Name, Is.EqualTo(ProjectName1));
             }
         }
 
@@ -38,11 +90,11 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var obj1 = ctx.GetQuery<ObjectClass>().Single(o => o.ID == 2);
-                Assert.That(obj1.ID, Is.EqualTo(2));
+                var obj1 = ctx.GetQuery<Projekt>().Single(o => o.ID == Project1ID);
+                Assert.That(obj1.Name, Is.EqualTo(ProjectName1));
 
-                var obj2 = ctx.GetQuery<ObjectClass>().Single(o => o.ID == 2);
-                Assert.That(obj2.ID, Is.EqualTo(2));
+                var obj2 = ctx.GetQuery<Projekt>().Single(o => o.ID == Project1ID);
+                Assert.That(obj2.Name, Is.EqualTo(ProjectName1));
 
                 Assert.That(object.ReferenceEquals(obj1, obj2), "Obj1 & Obj2 are different Objects");
             }
@@ -60,17 +112,7 @@ namespace Kistl.IntegrationTests
                 {
                     count += prj.Tasks.Count;
                 }
-                Assert.That(count, Is.GreaterThan(0));
-            }
-        }
-
-        [Test]
-        public void GetListOf_List()
-        {
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var list = ctx.GetQuery<Mitarbeiter>().ToList();
-                Assert.That(list.Any(ma => ma.Projekte.Count > 0), "no projects assigned");
+                Assert.That(count, Is.EqualTo(TaskCount));
             }
         }
 
@@ -81,7 +123,7 @@ namespace Kistl.IntegrationTests
             int ID;
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery<Kistl.App.Projekte.Task>().ToList();
+                var list = ctx.GetQuery<Task>().ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
                 var obj = list[0];
 
@@ -92,8 +134,6 @@ namespace Kistl.IntegrationTests
 
                 ctx.SubmitChanges();
             }
-
-            //CacheController<Kistl.API.IDataObject>.Current.Clear();
 
             using (IKistlContext checkctx = KistlContext.GetContext())
             {
@@ -112,7 +152,7 @@ namespace Kistl.IntegrationTests
             Projekt p;
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                p = ctx.GetQuery<Projekt>().ToList()[0];
+                p = ctx.GetQuery<Projekt>().First(prj => prj.Name == ProjectName1);
                 var obj = ctx.Create<Task>();
 
                 obj.Name = "NUnit Test Task";
@@ -125,8 +165,6 @@ namespace Kistl.IntegrationTests
                 ID = obj.ID;
                 Assert.That(ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
             }
-
-            //CacheController<Kistl.API.IDataObject>.Current.Clear();
 
             using (IKistlContext checkctx = KistlContext.GetContext())
             {

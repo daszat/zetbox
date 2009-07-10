@@ -923,6 +923,9 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Repository.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionSerialization.cs" />
+    <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\CollectionSerialization.cs" />
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cs" />
     <Compile Include="Packaging\PackagingHelper.cs" />
     <Compile Include="SchemaManagement\SchemaManager.CheckSchema.cs" />
     <Compile Include="SchemaManagement\SchemaManager.UpdateSchema.cs" />

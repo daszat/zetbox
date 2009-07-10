@@ -17,23 +17,26 @@
 <%@ Parameter Name="collectionName" Type="string" %>
 <%
 
-    string methodName = direction.ToString().Replace("Xml", "");
-    
-	switch(direction)
+	if(ShouldSerialize())
 	{
-		case SerializerDirection.ToStream:
-		case SerializerDirection.FromStream:
+		string methodName = direction.ToString().Replace("Xml", "");
+	    
+		switch(direction)
+		{
+			case SerializerDirection.ToStream:
+			case SerializerDirection.FromStream:
 %>
             BinarySerializer.<%= methodName %>CollectionEntries(this.<%= collectionName %>, <%= streamName %>);
 <%
-			break;
-		case SerializerDirection.ToXmlStream:
-		case SerializerDirection.FromXmlStream:
+				break;
+			case SerializerDirection.ToXmlStream:
+			case SerializerDirection.FromXmlStream:
 %>
             XmlStreamer.<%= methodName %>CollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
-			break;
-		default:
-			throw new ArgumentOutOfRangeException("direction");
+				break;
+			default:
+				throw new ArgumentOutOfRangeException("direction");
+		}
 	}
 %>
