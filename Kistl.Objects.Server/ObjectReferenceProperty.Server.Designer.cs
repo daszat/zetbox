@@ -290,7 +290,7 @@ namespace Kistl.App.Base
 			{
 				case "EagerLoading":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(150).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(73).Constraints
 						.Where(c => !c.IsValid(this, this.EagerLoading))
 						.Select(c => c.GetErrorText(this, this.EagerLoading))
 						.ToArray();
@@ -299,7 +299,7 @@ namespace Kistl.App.Base
 				}
 				case "ReferenceObjectClass":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(163).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(130).Constraints
 						.Where(c => !c.IsValid(this, this.ReferenceObjectClass))
 						.Select(c => c.GetErrorText(this, this.ReferenceObjectClass))
 						.ToArray();
@@ -308,7 +308,7 @@ namespace Kistl.App.Base
 				}
 				case "RelationEnd":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(123).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(131).Constraints
 						.Where(c => !c.IsValid(this, this.RelationEnd))
 						.Select(c => c.GetErrorText(this, this.RelationEnd))
 						.ToArray();
@@ -326,19 +326,19 @@ namespace Kistl.App.Base
 			
 			// fix direct object references
 
-			if (_fk_guid_RelationEnd.HasValue)
-				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value);
-			else if (_fk_RelationEnd.HasValue)
-				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_RelationEnd.Value);
-			else
-				RelationEnd__Implementation__ = null;
-
 			if (_fk_guid_ReferenceObjectClass.HasValue)
 				ReferenceObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_ReferenceObjectClass.Value);
 			else if (_fk_ReferenceObjectClass.HasValue)
 				ReferenceObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_ReferenceObjectClass.Value);
 			else
 				ReferenceObjectClass__Implementation__ = null;
+
+			if (_fk_guid_RelationEnd.HasValue)
+				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value);
+			else if (_fk_RelationEnd.HasValue)
+				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_RelationEnd.Value);
+			else
+				RelationEnd__Implementation__ = null;
 		}
 #region Serializer
 

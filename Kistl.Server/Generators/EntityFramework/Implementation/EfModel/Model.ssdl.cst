@@ -316,7 +316,9 @@
     </EntityType>
 
     <Association Name="<%= prop.GetAssociationName() %>">
-      <End Role="<%= containerTypeName %>" Type="Model.Store.<%= containerTypeName %>" Multiplicity="0..1" />
+      <End Role="<%= containerTypeName %>" Type="Model.Store.<%= containerTypeName %>" Multiplicity="0..1">
+        <OnDelete Action="Cascade" />
+      </End>
       <End Role="CollectionEntry" Type="Model.Store.<%= entryTypeName %>" Multiplicity="*" />
       <ReferentialConstraint>
         <Principal Role="<%= containerTypeName %>">

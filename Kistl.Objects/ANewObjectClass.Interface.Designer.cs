@@ -10,8 +10,15 @@ namespace Kistl.App.Test
     /// <summary>
     /// 
     /// </summary>
-    public interface LastTest : IDataObject 
+    public interface ANewObjectClass : IDataObject 
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
+		string TestString {
+			get;
+			set;
+		}
     }
 }

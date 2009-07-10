@@ -34,7 +34,7 @@ namespace Kistl.API.Server
 
         void CreateTable(string tblName, bool idAsIdentityColumn);
         void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
-        void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName);
+        void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade);
 
         void DropFKConstraint(string tblName, string fkName);
         void DropColumn(string tblName, string colName);

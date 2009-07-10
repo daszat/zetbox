@@ -46,16 +46,6 @@ namespace Kistl.App.Test
 			}
 		}
 		
-		/// <summary>List of all LastTest</summary>
-		/// 
-		public IQueryable<LastTest> LastTests
-		{ 
-			get
-			{
-				return Context.GetQuery<LastTest>();
-			}
-		}
-		
 		/// <summary>List of all AnotherTest</summary>
 		/// 
 		public IQueryable<AnotherTest> AnotherTests
@@ -63,6 +53,16 @@ namespace Kistl.App.Test
 			get
 			{
 				return Context.GetQuery<AnotherTest>();
+			}
+		}
+		
+		/// <summary>List of all ANewObjectClass</summary>
+		/// 
+		public IQueryable<ANewObjectClass> NewObjectClasses
+		{ 
+			get
+			{
+				return Context.GetQuery<ANewObjectClass>();
 			}
 		}
 		

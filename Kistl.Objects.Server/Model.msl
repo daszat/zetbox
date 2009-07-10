@@ -3,6 +3,14 @@
   <EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="Entities">
     
     <!-- EntitySetMappings for classes -->
+    <EntitySetMapping Name="ANewObjectClass">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ANewObjectClass)">
+	    <MappingFragment StoreEntitySet="ANewObjectClass">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="TestString" ColumnName="TestString" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="AnotherTest">
       <EntityTypeMapping TypeName="IsTypeOf(Model.AnotherTest)">
 	    <MappingFragment StoreEntitySet="AnotherTest">
@@ -200,13 +208,6 @@
 <ScalarProperty Name="Land" ColumnName="Land" />
 <ScalarProperty Name="Ort" ColumnName="Ort" />
 <ScalarProperty Name="PLZ" ColumnName="PLZ" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LastTest">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.LastTest)">
-	    <MappingFragment StoreEntitySet="LastTest">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

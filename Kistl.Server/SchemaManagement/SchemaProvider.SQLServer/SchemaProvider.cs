@@ -173,7 +173,7 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             SqlCommand cmd = new SqlCommand("SELECT name FROM sys.objects WHERE type IN (N'U') AND name <> 'sysdiagrams'", db, tx);
             using (SqlDataReader rd = cmd.ExecuteReader())
             {
-                while(rd.Read()) yield return rd.GetString(0);
+                while (rd.Read()) yield return rd.GetString(0);
             }
         }
 
@@ -226,15 +226,15 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             // TODO: Trick 17, temporäre Lösung
             if (type == System.Data.DbType.String && size > 1000)
             {
-                sb.AppendFormat("ALTER TABLE [{0}] ADD [{1}] {2} {3}", tblName, colName, 
-                    "ntext", 
+                sb.AppendFormat("ALTER TABLE [{0}] ADD [{1}] {2} {3}", tblName, colName,
+                    "ntext",
                     isNullable ? "NULL" : "NOT NULL");
             }
             else
             {
-                sb.AppendFormat("ALTER TABLE [{0}] ADD [{1}] {2}{3} {4}", tblName, colName, 
+                sb.AppendFormat("ALTER TABLE [{0}] ADD [{1}] {2}{3} {4}", tblName, colName,
                     GetSqlTypeString(type),
-                    size > 0 ? string.Format("({0})", size) : "", 
+                    size > 0 ? string.Format("({0})", size) : "",
                     isNullable ? "NULL" : "NOT NULL");
             }
 
@@ -242,15 +242,16 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             cmd.ExecuteNonQuery();
         }
 
-        public void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName)
+        public void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade)
         {
             SqlCommand cmd = new SqlCommand(string.Format(@"ALTER TABLE [{0}]  WITH CHECK 
                     ADD CONSTRAINT [{1}] FOREIGN KEY([{2}])
-                    REFERENCES [{3}] ([ID])",
+                    REFERENCES [{3}] ([ID]){4}",
                    tblName,
                    constraintName,
                    colName,
-                   refTblName), db, tx); ;
+                   refTblName,
+                   onDeleteCascade ? @" ON DELETE CASCADE" : String.Empty), db, tx); ;
             cmd.ExecuteNonQuery();
             cmd = new SqlCommand(string.Format(@"ALTER TABLE [{0}] CHECK CONSTRAINT [{1}]",
                    tblName,

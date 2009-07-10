@@ -272,7 +272,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
             }
-            db.CreateFKConstraint(tblName, objClass.TableName, fkName, prop.GetAssociationName());
+            db.CreateFKConstraint(tblName, objClass.TableName, fkName, prop.GetAssociationName(), true);
         }
         #endregion
 
@@ -385,7 +385,7 @@ namespace Kistl.Server.SchemaManagement
 
             string colName = Construct.ForeignKeyColumnName(nav);
             db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, nav.IsNullable);
-            db.CreateFKConstraint(tblName, refTblName, colName, assocName);
+            db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
 
             if (isIndexed)
             {
@@ -465,8 +465,8 @@ namespace Kistl.Server.SchemaManagement
                 db.CreateColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, false);
             }
 
-            db.CreateFKConstraint(tblName, rel.A.Type.TableName, fkAName, rel.GetRelationAssociationName(RelationEndRole.A));
-            db.CreateFKConstraint(tblName, rel.B.Type.TableName, fkBName, rel.GetRelationAssociationName(RelationEndRole.B));
+            db.CreateFKConstraint(tblName, rel.A.Type.TableName, fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+            db.CreateFKConstraint(tblName, rel.B.Type.TableName, fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
         }
         #endregion
 
@@ -498,7 +498,7 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetRelationAssociationName(role);
 
             db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, end.Navigator.IsNullable);
-            db.CreateFKConstraint(tblName, refTblName, colName, assocName);
+            db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
 
             if (rel.NeedsPositionStorage(role))
             {
@@ -529,7 +529,7 @@ namespace Kistl.Server.SchemaManagement
                 return;
             }
 
-            db.CreateFKConstraint(tblName, objClass.BaseObjectClass.TableName, "ID", assocName);
+            db.CreateFKConstraint(tblName, objClass.BaseObjectClass.TableName, "ID", assocName, false);
         }
         #endregion
 

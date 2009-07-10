@@ -632,7 +632,7 @@ namespace Kistl.App.Base
 			{
 				case "AltText":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(69).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(154).Constraints
 						.Where(c => !c.IsValid(this, this.AltText))
 						.Select(c => c.GetErrorText(this, this.AltText))
 						.ToArray();
@@ -641,7 +641,7 @@ namespace Kistl.App.Base
 				}
 				case "CategoryTags":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(35).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(162).Constraints
 						.Where(c => !c.IsValid(this, this.CategoryTags))
 						.Select(c => c.GetErrorText(this, this.CategoryTags))
 						.ToArray();
@@ -650,7 +650,7 @@ namespace Kistl.App.Base
 				}
 				case "Constraints":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(78).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(50).Constraints
 						.Where(c => !c.IsValid(this, this.Constraints))
 						.Select(c => c.GetErrorText(this, this.Constraints))
 						.ToArray();
@@ -659,7 +659,7 @@ namespace Kistl.App.Base
 				}
 				case "Description":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(13).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(95).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -668,7 +668,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(116).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(9).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -677,7 +677,7 @@ namespace Kistl.App.Base
 				}
 				case "IsIndexed":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(145).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(77).Constraints
 						.Where(c => !c.IsValid(this, this.IsIndexed))
 						.Select(c => c.GetErrorText(this, this.IsIndexed))
 						.ToArray();
@@ -686,7 +686,7 @@ namespace Kistl.App.Base
 				}
 				case "IsList":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(32).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(78).Constraints
 						.Where(c => !c.IsValid(this, this.IsList))
 						.Select(c => c.GetErrorText(this, this.IsList))
 						.ToArray();
@@ -695,7 +695,7 @@ namespace Kistl.App.Base
 				}
 				case "IsNullable":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(33).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(76).Constraints
 						.Where(c => !c.IsValid(this, this.IsNullable))
 						.Select(c => c.GetErrorText(this, this.IsNullable))
 						.ToArray();
@@ -704,7 +704,7 @@ namespace Kistl.App.Base
 				}
 				case "Module":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(97).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(149).Constraints
 						.Where(c => !c.IsValid(this, this.Module))
 						.Select(c => c.GetErrorText(this, this.Module))
 						.ToArray();
@@ -713,7 +713,7 @@ namespace Kistl.App.Base
 				}
 				case "ObjectClass":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(159).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(134).Constraints
 						.Where(c => !c.IsValid(this, this.ObjectClass))
 						.Select(c => c.GetErrorText(this, this.ObjectClass))
 						.ToArray();
@@ -722,7 +722,7 @@ namespace Kistl.App.Base
 				}
 				case "PropertyName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(76).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(100).Constraints
 						.Where(c => !c.IsValid(this, this.PropertyName))
 						.Select(c => c.GetErrorText(this, this.PropertyName))
 						.ToArray();
@@ -731,7 +731,7 @@ namespace Kistl.App.Base
 				}
 				case "ValueModelDescriptor":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(129).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(165).Constraints
 						.Where(c => !c.IsValid(this, this.ValueModelDescriptor))
 						.Select(c => c.GetErrorText(this, this.ValueModelDescriptor))
 						.ToArray();
@@ -747,6 +747,13 @@ namespace Kistl.App.Base
 		{
 			// fix direct object references
 
+			if (_fk_guid_ObjectClass.HasValue)
+				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_ObjectClass.Value);
+			else if (_fk_ObjectClass.HasValue)
+				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_ObjectClass.Value);
+			else
+				ObjectClass__Implementation__ = null;
+
 			if (_fk_guid_Module.HasValue)
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
 			else if (_fk_Module.HasValue)
@@ -760,13 +767,6 @@ namespace Kistl.App.Base
 				ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_ValueModelDescriptor.Value);
 			else
 				ValueModelDescriptor__Implementation__ = null;
-
-			if (_fk_guid_ObjectClass.HasValue)
-				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_ObjectClass.Value);
-			else if (_fk_ObjectClass.HasValue)
-				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_ObjectClass.Value);
-			else
-				ObjectClass__Implementation__ = null;
 		}
 #region Serializer
 

@@ -367,7 +367,7 @@ namespace Kistl.App.GUI
 			{
 				case "DisplayedTypeAssembly":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(95).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(136).Constraints
 						.Where(c => !c.IsValid(this, this.DisplayedTypeAssembly))
 						.Select(c => c.GetErrorText(this, this.DisplayedTypeAssembly))
 						.ToArray();
@@ -376,7 +376,7 @@ namespace Kistl.App.GUI
 				}
 				case "DisplayedTypeFullName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(4).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(90).Constraints
 						.Where(c => !c.IsValid(this, this.DisplayedTypeFullName))
 						.Select(c => c.GetErrorText(this, this.DisplayedTypeFullName))
 						.ToArray();
@@ -385,7 +385,7 @@ namespace Kistl.App.GUI
 				}
 				case "DisplayName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(6).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(91).Constraints
 						.Where(c => !c.IsValid(this, this.DisplayName))
 						.Select(c => c.GetErrorText(this, this.DisplayName))
 						.ToArray();
@@ -394,7 +394,7 @@ namespace Kistl.App.GUI
 				}
 				case "Menu":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(51).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(47).Constraints
 						.Where(c => !c.IsValid(this, this.Menu))
 						.Select(c => c.GetErrorText(this, this.Menu))
 						.ToArray();
@@ -403,7 +403,7 @@ namespace Kistl.App.GUI
 				}
 				case "VisualTree":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(94).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(166).Constraints
 						.Where(c => !c.IsValid(this, this.VisualTree))
 						.Select(c => c.GetErrorText(this, this.VisualTree))
 						.ToArray();
@@ -419,19 +419,19 @@ namespace Kistl.App.GUI
 		{
 			// fix direct object references
 
-			if (_fk_guid_VisualTree.HasValue)
-				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_VisualTree.Value);
-			else if (_fk_VisualTree.HasValue)
-				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_VisualTree.Value);
-			else
-				VisualTree__Implementation__ = null;
-
 			if (_fk_guid_DisplayedTypeAssembly.HasValue)
 				DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_guid_DisplayedTypeAssembly.Value);
 			else if (_fk_DisplayedTypeAssembly.HasValue)
 				DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
 			else
 				DisplayedTypeAssembly__Implementation__ = null;
+
+			if (_fk_guid_VisualTree.HasValue)
+				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_VisualTree.Value);
+			else if (_fk_VisualTree.HasValue)
+				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_VisualTree.Value);
+			else
+				VisualTree__Implementation__ = null;
 		}
 #region Serializer
 

@@ -194,7 +194,7 @@ namespace Kistl.App.Base
 			{
 				case "DataType":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(103).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(144).Constraints
 						.Where(c => !c.IsValid(this, this.DataType))
 						.Select(c => c.GetErrorText(this, this.DataType))
 						.ToArray();

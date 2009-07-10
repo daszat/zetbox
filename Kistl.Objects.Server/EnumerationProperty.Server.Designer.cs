@@ -194,7 +194,7 @@ namespace Kistl.App.Base
 			{
 				case "Enumeration":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(88).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(146).Constraints
 						.Where(c => !c.IsValid(this, this.Enumeration))
 						.Select(c => c.GetErrorText(this, this.Enumeration))
 						.ToArray();

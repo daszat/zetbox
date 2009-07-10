@@ -64,7 +64,7 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-        public int RelationID { get { return 51; } }
+        public int RelationID { get { return 44; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.Base.ObjectClass)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Base.Interface)value; } }
 
@@ -304,7 +304,7 @@ namespace Kistl.App.Projekte
             }
         }
         private int _ID;
-        public int RelationID { get { return 34; } }
+        public int RelationID { get { return 6; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.Projekte.Projekt)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Projekte.Mitarbeiter)value; } }
 
@@ -604,7 +604,7 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
-        public int RelationID { get { return 4; } }
+        public int RelationID { get { return 29; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.GUI.Template)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.GUI.Visual)value; } }
 
@@ -853,7 +853,7 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-        public int RelationID { get { return 9; } }
+        public int RelationID { get { return 36; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.Base.TypeRef)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Base.TypeRef)value; } }
 
@@ -1181,7 +1181,7 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
-        public int RelationID { get { return 23; } }
+        public int RelationID { get { return 24; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.GUI.Visual)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.GUI.Visual)value; } }
 
@@ -1407,7 +1407,7 @@ namespace Kistl.App.GUI
             }
         }
         private int _ID;
-        public int RelationID { get { return 43; } }
+        public int RelationID { get { return 21; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.GUI.Visual)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.GUI.Visual)value; } }
 
@@ -1634,7 +1634,7 @@ namespace Kistl.App.TimeRecords
             }
         }
         private int _ID;
-        public int RelationID { get { return 36; } }
+        public int RelationID { get { return 15; } }
         public IDataObject AObject { get { return A; } set { A = (Kistl.App.TimeRecords.WorkEffortAccount)value; } }
         public IDataObject BObject { get { return B; } set { B = (Kistl.App.Projekte.Mitarbeiter)value; } }
 

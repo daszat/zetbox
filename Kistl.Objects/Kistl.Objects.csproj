@@ -45,6 +45,7 @@
     <Reference Include="Kistl.API" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ANewObjectClass.Interface.Designer.cs" />
     <Compile Include="AnotherTest.Interface.Designer.cs" />
     <Compile Include="Assembly.Interface.Designer.cs" />
     <Compile Include="Auftrag.Interface.Designer.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="IsValidIdentifierConstraint.Interface.Designer.cs" />
     <Compile Include="IsValidNamespaceConstraint.Interface.Designer.cs" />
     <Compile Include="Kunde.Interface.Designer.cs" />
-    <Compile Include="LastTest.Interface.Designer.cs" />
     <Compile Include="Method.Interface.Designer.cs" />
     <Compile Include="MethodInvocation.Interface.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.Interface.Designer.cs" />

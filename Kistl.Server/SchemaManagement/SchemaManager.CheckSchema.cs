@@ -191,7 +191,7 @@ namespace Kistl.Server.SchemaManagement
                     report.WriteLine("  ** Warning: FK Constraint '{0}' is missing", assocName);
                     if (repair)
                     {
-                        db.CreateFKConstraint(tblName, refTblName, colName, assocName);
+                        db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
                     }
                 }
                 // TODO: Dont use Navigator IsNullable! Check Multiplicity on RelationEnd. But first check Multiplicity in Schema
@@ -235,7 +235,7 @@ namespace Kistl.Server.SchemaManagement
                 report.WriteLine("  ** Warning: FK Constraint '{0}' is missing", assocName);
                 if (repair)
                 {
-                    db.CreateFKConstraint(tblName, refTblName, colName, assocName);
+                    db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
                 }
             }
 
@@ -277,7 +277,7 @@ namespace Kistl.Server.SchemaManagement
                 report.WriteLine("  ** Warning: FK Constraint '{0}' for A is missing", assocAName);
                 if (repair)
                 {
-                    db.CreateFKConstraint(tblName, rel.A.Type.TableName, fkAName, assocAName);
+                    db.CreateFKConstraint(tblName, rel.A.Type.TableName, fkAName, assocAName, false);
                 }
             }
             if (!db.CheckFKConstraintExists(assocBName))
@@ -285,7 +285,7 @@ namespace Kistl.Server.SchemaManagement
                 report.WriteLine("  ** Warning: FK Constraint '{0}' for B is missing", assocBName);
                 if (repair)
                 {
-                    db.CreateFKConstraint(tblName, rel.B.Type.TableName, fkBName, assocBName);
+                    db.CreateFKConstraint(tblName, rel.B.Type.TableName, fkBName, assocBName, false);
                 }
             }
 
@@ -384,7 +384,7 @@ namespace Kistl.Server.SchemaManagement
                         report.WriteLine("      ** Warning: FK Constraint is missing", prop.PropertyName);
                         if (repair)
                         {
-                            db.CreateFKConstraint(tblName, refTblName, fkName, assocName);
+                            db.CreateFKConstraint(tblName, refTblName, fkName, assocName, true);
                         }
                     }
                 }

@@ -3,6 +3,7 @@
   <EntityContainer Name="Entities">
   
     <!-- EntitySets for all classes -->
+    <EntitySet Name="ANewObjectClass" EntityType="Model.ANewObjectClass" />
     <EntitySet Name="AnotherTest" EntityType="Model.AnotherTest" />
     <EntitySet Name="Assembly" EntityType="Model.Assembly" />
     <EntitySet Name="Auftrag" EntityType="Model.Auftrag" />
@@ -13,7 +14,6 @@
     <EntitySet Name="EnumerationEntry" EntityType="Model.EnumerationEntry" />
     <EntitySet Name="Icon" EntityType="Model.Icon" />
     <EntitySet Name="Kunde" EntityType="Model.Kunde" />
-    <EntitySet Name="LastTest" EntityType="Model.LastTest" />
     <EntitySet Name="Method" EntityType="Model.Method" />
     <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
     <EntitySet Name="Mitarbeiter" EntityType="Model.Mitarbeiter" />
@@ -295,6 +295,13 @@
   </EntityContainer>
   
   <!-- EntityTypes for all base classes -->
+  <EntityType Name="ANewObjectClass">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="TestString" Type="String" Nullable="true" MaxLength="100" />
+  </EntityType>
   <EntityType Name="AnotherTest">
     <Key>
       <PropertyRef Name="ID" />
@@ -442,12 +449,6 @@
     <Property Name="Land" Type="String" Nullable="true" MaxLength="50" />
     <Property Name="Ort" Type="String" Nullable="true" MaxLength="100" />
     <Property Name="PLZ" Type="String" Nullable="false" MaxLength="10" />
-  </EntityType>
-  <EntityType Name="LastTest">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Method">
     <Key>
