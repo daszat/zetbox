@@ -46,7 +46,7 @@ namespace Kistl.Server.Packaging
 
                 foreach (var ns in namespaces)
                 {
-                    Console.WriteLine("Prefeching objects for {0}", ns); 
+                    Console.WriteLine("Prefeching objects for {0}", ns);
                     var module = ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Namespace == ns);
                     foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
                     {
@@ -69,7 +69,7 @@ namespace Kistl.Server.Packaging
                 {
                     if (xml.NodeType != XmlNodeType.Element) continue;
                     var obj = ImportElement(ctx, currentObjects, xml);
-                    if (obj == null) throw new InvalidOperationException("Invalid import format");
+                    if (obj == null) throw new InvalidOperationException("Invalid import format: ImportElement returned NULL");
                     importedObjects[((IExportableInternal)obj).ExportGuid] = obj;
                 }
             }

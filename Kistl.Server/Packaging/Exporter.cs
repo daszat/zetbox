@@ -141,6 +141,7 @@ namespace Kistl.Server.Packaging
         {
             Type t = obj.GetInterfaceType().Type;
             xml.WriteStartElement(t.Name, t.Namespace);
+            // TODO: Let a Constructor do that job
             if (((Kistl.App.Base.IExportable)obj).ExportGuid == Guid.Empty)
             {
                 ((Kistl.App.Base.IExportable)obj).ExportGuid = Guid.NewGuid();
@@ -168,7 +169,7 @@ namespace Kistl.Server.Packaging
             var moduleList = new List<Kistl.App.Base.Module>();
             if (moduleNamespaces.Contains("*"))
             {
-                moduleList.AddRange(ctx.GetQuery<Kistl.App.Base.Module>());
+                moduleList.AddRange(ctx.GetQuery<Kistl.App.Base.Module>().OrderBy(m => m.Namespace));
             }
             else
             {
