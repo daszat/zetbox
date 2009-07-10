@@ -33,9 +33,16 @@ namespace Kistl.Server.Packaging
 
         public static void Deploy(IKistlContext ctx, Stream s)
         {
-            // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
-            var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
-            Debug.WriteLine(testObj != null ? testObj.ToString() : "");
+            try
+            {
+                // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
+                var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
+                Debug.WriteLine(testObj != null ? testObj.ToString() : "");
+            }
+            catch
+            {
+                // Ignore
+            }
 
             Dictionary<Guid, IPersistenceObject> currentObjects = new Dictionary<Guid, IPersistenceObject>();
             using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
@@ -47,10 +54,17 @@ namespace Kistl.Server.Packaging
                 foreach (var ns in namespaces)
                 {
                     Console.WriteLine("Prefeching objects for {0}", ns);
-                    var module = ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Namespace == ns);
-                    foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
+                    var module = ctx.GetQuery<Kistl.App.Base.Module>().FirstOrDefault(m => m.Namespace == ns);
+                    if (module != null)
                     {
-                        currentObjects[obj.Key] = obj.Value;
+                        foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
+                        {
+                            currentObjects[obj.Key] = obj.Value;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Found new Module '{0}' in XML", ns);
                     }
                 }
             }
@@ -108,9 +122,16 @@ namespace Kistl.Server.Packaging
 
         public static void Import(IKistlContext ctx, Stream s)
         {
-            // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
-            var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
-            Debug.WriteLine(testObj != null ? testObj.ToString() : "");
+            try
+            {
+                // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
+                var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
+                Debug.WriteLine(testObj != null ? testObj.ToString() : "");
+            }
+            catch
+            {
+                // Ignore
+            }
 
             Dictionary<Guid, IPersistenceObject> objects = new Dictionary<Guid, IPersistenceObject>();
             using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
