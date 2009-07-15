@@ -26,7 +26,7 @@ namespace Kistl.DalProvider.EF.Tests
         int secondId;
 
         [SetUp]
-        public void SetUp()
+        public new void SetUp()
         {
             var appCtx = new ServerApiContextMock();
 
@@ -39,8 +39,11 @@ namespace Kistl.DalProvider.EF.Tests
                 {
                     var newObj = ctx.Create<TestObjClass>();
                     newObj.ObjectProp = ctx.GetQuery<Kunde>().First();
+                    newObj.StringProp = "blah" + list.Count;
                     list.Add(newObj);
                 }
+
+                ctx.SubmitChanges();
 
                 firstId = list[0].ID;
                 list[0].StringProp = "First";

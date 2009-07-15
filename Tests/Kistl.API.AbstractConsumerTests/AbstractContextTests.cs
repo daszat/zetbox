@@ -65,6 +65,28 @@ namespace Kistl.API.AbstractConsumerTests
 
     public abstract class AbstractContextTests : AbstractReadonlyContextTests
     {
+        [SetUp]
+        public void SetUp()
+        {
+            using (var ctx = GetContext())
+            {
+                ProjectDataFixture.DeleteData(ctx);
+                ctx.GetQuery<TestObjClass>().ForEach(obj => { obj.ObjectProp = null; ctx.Delete(obj); });
+                ProjectDataFixture.CreateTestData(ctx);
+                ctx.SubmitChanges();
+            }
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            using (var ctx = GetContext())
+            {
+                ProjectDataFixture.DeleteData(ctx);
+                ctx.GetQuery<TestObjClass>().ForEach(obj => { obj.ObjectProp = null; ctx.Delete(obj); });
+                ctx.SubmitChanges();
+            }
+        }
 
         [Test]
         public void should_find_new_objects()
