@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.API.AbstractConsumerTests;
 using Kistl.API.Client;
 using Kistl.App.Base;
 using Kistl.App.Projekte;
@@ -14,12 +15,8 @@ namespace Kistl.IntegrationTests
 {
     [TestFixture]
     public class RelationTests
+        : ProjectDataFixture
     {
-        [SetUp]
-        public void SetUp()
-        {
-        }
-
         #region Set Relation once
 
         #region 1:1
@@ -63,7 +60,7 @@ namespace Kistl.IntegrationTests
         #endregion
 
         #region Change Relation
-        
+
         #region n:m
         [Test]
         public void Change_Relation_n_m_Set_n_With_Remove()
@@ -302,5 +299,11 @@ namespace Kistl.IntegrationTests
         }
 
         #endregion
+
+        /// <inheritdoc/>
+        protected override IKistlContext GetContext()
+        {
+            return KistlContext.GetContext();
+        }
     }
 }

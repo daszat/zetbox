@@ -54,7 +54,7 @@ namespace Kistl.Server.Tests
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 ctx.GetQuery<Mitarbeiter>().ForEach(obj => ctx.Delete(obj));
-                ctx.GetQuery<Projekt>().ForEach(obj => ctx.Delete(obj));
+                ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); obj.Tasks.Clear(); ctx.Delete(obj); });
                 ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
                 ctx.SubmitChanges();
             }
