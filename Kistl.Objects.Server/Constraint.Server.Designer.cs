@@ -324,7 +324,9 @@ namespace Kistl.App.Base
 			
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(ConstrainedProperty != null ? ConstrainedProperty.ID : (int?)null, binStream);
-			auxObjects.Add(ConstrainedProperty);
+			if (auxObjects != null) {
+				auxObjects.Add(ConstrainedProperty);
+			}
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._Reason, binStream);
         }

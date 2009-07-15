@@ -463,13 +463,17 @@ namespace Kistl.App.Base
 			
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(Assembly != null ? Assembly.ID : (int?)null, binStream);
-			auxObjects.Add(Assembly);
+			if (auxObjects != null) {
+				auxObjects.Add(Assembly);
+			}
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(this._FullName, binStream);
 			{
 				foreach(var obj in GenericArguments__Implementation__)
 				{
-					auxObjects.Add(obj);
+					if (auxObjects != null) {
+						auxObjects.Add(obj);
+					}
 				}
 			}
             BinarySerializer.ToStream(Parent != null ? Parent.ID : (int?)null, binStream);

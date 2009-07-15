@@ -40,8 +40,10 @@ switch(direction)
 		case SerializerDirection.ToStream:
 
 #line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerObjectLoadingSerialization.cst"
-this.WriteObjects("			auxObjects.Add(",  propertyName , ");\r\n");
-#line 26 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerObjectLoadingSerialization.cst"
+this.WriteObjects("			if (auxObjects != null) {\r\n");
+this.WriteObjects("				auxObjects.Add(",  propertyName , ");\r\n");
+this.WriteObjects("			}\r\n");
+#line 28 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerObjectLoadingSerialization.cst"
 break;
 		case SerializerDirection.FromStream:
 			break;

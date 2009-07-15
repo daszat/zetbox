@@ -28,7 +28,9 @@
 <% } %>
 				foreach(var obj in <%= collectionName %>)
 				{
-					auxObjects.Add(obj);
+					if (auxObjects != null) {
+						auxObjects.Add(obj);
+					}
 <% if (serializeIds) { %>
 					BinarySerializer.ToStream(obj.ID, <%= streamName %>);
 <% } %>

@@ -21,7 +21,9 @@
 	{
 		case SerializerDirection.ToStream:
 %>
-			auxObjects.Add(<%= propertyName %>);
+			if (auxObjects != null) {
+				auxObjects.Add(<%= propertyName %>);
+			}
 <%
 			break;
 		case SerializerDirection.FromStream:

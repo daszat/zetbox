@@ -1,21 +1,58 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Test;
-
-using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Test;
+
+    using NUnit.Framework;
 
     public abstract class ObjectLoadFixture
     {
-        public abstract IKistlContext GetContext();
 
-        public virtual TestCustomObject GetObject()
+        [SetUp]
+        public void SetUp()
+        {
+            CreateObject();
+            ctx = GetContext();
+            obj = GetObject();
+        }
+
+        [TearDown]
+        public virtual void TearDown()
+        {
+            if (ctx != null)
+                ctx.Dispose();
+            DestroyObjects();
+        }
+
+        protected abstract IKistlContext GetContext();
+
+        protected virtual void CreateObject()
+        {
+            using (var ctx = GetContext())
+            {
+                var newObject = ctx.Create<TestCustomObject>();
+                newObject.Birthday = new DateTime(1960, 12, 24);
+                newObject.PersonName = "Testname";
+                ctx.SubmitChanges();
+            }
+        }
+
+        protected virtual void DestroyObjects()
+        {
+            using (var ctx = GetContext())
+            {
+                ctx.GetQuery<TestCustomObject>().ForEach(obj => ctx.Delete(obj));
+                ctx.SubmitChanges();
+            }
+        }
+
+        protected virtual TestCustomObject GetObject()
         {
             return ctx.GetQuery<TestCustomObject>().First();
         }
@@ -23,19 +60,6 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         protected IKistlContext ctx { get; private set; }
         protected TestCustomObject obj { get; private set; }
 
-        [SetUp]
-        public void InitTestObjects()
-        {
-            ctx = GetContext();
-            obj = GetObject();
-        }
-
-        [TearDown]
-        public virtual void DisposeContext()
-        {
-            if (ctx != null)
-                ctx.Dispose();
-        }
     }
 
 }

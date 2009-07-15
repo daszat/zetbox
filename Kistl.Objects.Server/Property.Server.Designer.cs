@@ -781,7 +781,9 @@ namespace Kistl.App.Base
 				BinarySerializer.ToStream(Constraints.Count, binStream);
 				foreach(var obj in Constraints)
 				{
-					auxObjects.Add(obj);
+					if (auxObjects != null) {
+						auxObjects.Add(obj);
+					}
 					BinarySerializer.ToStream(obj.ID, binStream);
 				}
 			}

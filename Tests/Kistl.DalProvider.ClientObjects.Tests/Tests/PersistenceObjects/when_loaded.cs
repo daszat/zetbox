@@ -16,7 +16,7 @@ namespace Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects
         : Kistl.API.AbstractConsumerTests.PersistenceObjects.when_loaded
     {
 
-        public override IKistlContext GetContext()
+        protected override IKistlContext GetContext()
         {
             return KistlContext.GetContext();
         }

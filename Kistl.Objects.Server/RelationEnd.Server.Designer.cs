@@ -664,7 +664,9 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
             BinarySerializer.ToStream((int)((RelationEnd)this).Multiplicity, binStream);
             BinarySerializer.ToStream(Navigator != null ? Navigator.ID : (int?)null, binStream);
-			auxObjects.Add(Navigator);
+			if (auxObjects != null) {
+				auxObjects.Add(Navigator);
+			}
             BinarySerializer.ToStream(this._Role, binStream);
             BinarySerializer.ToStream(this._RoleName, binStream);
             BinarySerializer.ToStream(Type != null ? Type.ID : (int?)null, binStream);

@@ -28,15 +28,13 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
             }
         }
 
-
         [Test]
         public void should_be_modified()
         {
             Assume.That(obj.PersonName, Is.Not.EqualTo(testName));
+            Assert.That(obj.ObjectState, Is.Not.EqualTo(DataObjectState.Modified), "object already modified at begin of test");
             obj.PersonName = testName;
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified), "object didn't notice change to property");
         }
-
     }
-
 }

@@ -15,7 +15,7 @@ namespace Kistl.DalProvider.EF.Tests.BaseServerDataObjects
     public class when_changed
         : Kistl.API.AbstractConsumerTests.PersistenceObjects.when_changed
     {
-        public override IKistlContext GetContext()
+        protected override IKistlContext GetContext()
         {
             return KistlContext.GetContext();
         }
