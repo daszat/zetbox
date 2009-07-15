@@ -59,7 +59,7 @@ namespace Kistl.Server.Packaging
                     {
                         foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
                         {
-                            currentObjects[obj.Key] = obj.Value;
+                            currentObjects[((Kistl.App.Base.IExportable)obj).ExportGuid] = obj;
                         }
                     }
                     else

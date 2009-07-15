@@ -53,8 +53,7 @@ namespace Kistl.Server.Packaging
 
                 foreach (var module in moduleList)
                 {
-                    var objects = PackagingHelper.GetMetaObjects(ctx, module);
-                    foreach (IPersistenceObject obj in objects.Values)
+                    foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
                     {
                         Console.Write(".");
                         ExportObject(xml, obj, propNamespaces);
