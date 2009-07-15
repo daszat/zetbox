@@ -242,7 +242,9 @@ namespace Kistl.API.Server
 
         protected override MemberExpression VisitMemberAccess(MemberExpression m)
         {
+            // e might be null if m.Member is a static reference
             Expression e = base.Visit(m.Expression);
+            
             string memberName = m.Member.Name;
             Type declaringType;
             if (e is ParameterExpression)
@@ -261,7 +263,8 @@ namespace Kistl.API.Server
             else
             {
                 MemberInfo member = m.Member;
-                if (!member.DeclaringType.IsAssignableFrom(e.Type))
+                // If this is not a static access AND the member type and expression type do not match, fixup the MemberInfo
+                if (e != null && !member.DeclaringType.IsAssignableFrom(e.Type))
                 {
                     member = e.Type.GetMember(m.Member.Name).Single();
                 }
