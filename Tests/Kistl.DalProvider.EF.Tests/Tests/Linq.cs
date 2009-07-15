@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.API.AbstractConsumerTests;
 using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.App.Projekte;
@@ -18,6 +19,7 @@ namespace Kistl.DalProvider.EF.Tests
 {
     [TestFixture]
     public class Linq
+        : ProjectDataFixture
     {
 
         IKistlContext ctx;
@@ -59,8 +61,13 @@ namespace Kistl.DalProvider.EF.Tests
                 ctx.Dispose();
                 ctx = null;
             }
-        }
 
+            using (var localCtx = GetContext())
+            {
+                localCtx.GetQuery<TestObjClass>().ForEach(obj => { obj.ObjectProp = null; localCtx.Delete(obj); });
+                localCtx.SubmitChanges();
+            }
+        }
 
         [Test]
         public void Where_filters_correctly()
@@ -91,6 +98,9 @@ namespace Kistl.DalProvider.EF.Tests
             Assert.That(linqResult, Is.EqualTo(localResult));
         }
 
-
+        protected override IKistlContext GetContext()
+        {
+            return KistlContext.GetContext();
+        }
     }
 }
