@@ -382,6 +382,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<TypeRef> OnPostSave_TypeRef;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_TypeRef != null) OnCreated_TypeRef(this);
+        }
+        public event ObjectEventHandler<TypeRef> OnCreated_TypeRef;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_TypeRef != null) OnDeleting_TypeRef(this);
+        }
+        public event ObjectEventHandler<TypeRef> OnDeleting_TypeRef;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

@@ -268,6 +268,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<Constraint> OnPostSave_Constraint;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Constraint != null) OnCreated_Constraint(this);
+        }
+        public event ObjectEventHandler<Constraint> OnCreated_Constraint;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Constraint != null) OnDeleting_Constraint(this);
+        }
+        public event ObjectEventHandler<Constraint> OnDeleting_Constraint;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

@@ -149,6 +149,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<StringProperty> OnPostSave_StringProperty;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_StringProperty != null) OnCreated_StringProperty(this);
+        }
+        public event ObjectEventHandler<StringProperty> OnCreated_StringProperty;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_StringProperty != null) OnDeleting_StringProperty(this);
+        }
+        public event ObjectEventHandler<StringProperty> OnDeleting_StringProperty;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

@@ -448,6 +448,20 @@ namespace Kistl.App.GUI
         }
         public event ObjectEventHandler<ViewDescriptor> OnPostSave_ViewDescriptor;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_ViewDescriptor != null) OnCreated_ViewDescriptor(this);
+        }
+        public event ObjectEventHandler<ViewDescriptor> OnCreated_ViewDescriptor;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_ViewDescriptor != null) OnDeleting_ViewDescriptor(this);
+        }
+        public event ObjectEventHandler<ViewDescriptor> OnDeleting_ViewDescriptor;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

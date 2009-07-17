@@ -330,6 +330,20 @@ namespace Kistl.App.Projekte
         }
         public event ObjectEventHandler<Projekt> OnPostSave_Projekt;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Projekt != null) OnCreated_Projekt(this);
+        }
+        public event ObjectEventHandler<Projekt> OnCreated_Projekt;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Projekt != null) OnDeleting_Projekt(this);
+        }
+        public event ObjectEventHandler<Projekt> OnDeleting_Projekt;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

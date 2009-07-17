@@ -360,6 +360,20 @@ namespace Kistl.App.GUI
         }
         public event ObjectEventHandler<Template> OnPostSave_Template;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Template != null) OnCreated_Template(this);
+        }
+        public event ObjectEventHandler<Template> OnCreated_Template;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Template != null) OnDeleting_Template(this);
+        }
+        public event ObjectEventHandler<Template> OnDeleting_Template;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

@@ -51,6 +51,10 @@ namespace Kistl.API.Server
         public virtual void Delete(IPersistenceObject obj)
         {
             OnObjectDeleted(obj);
+            if (obj is IDataObject)
+            {
+                ((IDataObject)obj).NotifyDeleting();
+            }
         }
 
         /// <summary>
@@ -145,6 +149,10 @@ namespace Kistl.API.Server
             IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
             Attach(obj);
             OnObjectCreated(obj);
+            if (obj is IDataObject)
+            {
+                ((IDataObject)obj).NotifyCreated();
+            }
             return obj;
         }
 

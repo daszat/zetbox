@@ -285,6 +285,20 @@ namespace Kistl.App.Projekte
         }
         public event ObjectEventHandler<Mitarbeiter> OnPostSave_Mitarbeiter;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Mitarbeiter != null) OnCreated_Mitarbeiter(this);
+        }
+        public event ObjectEventHandler<Mitarbeiter> OnCreated_Mitarbeiter;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Mitarbeiter != null) OnDeleting_Mitarbeiter(this);
+        }
+        public event ObjectEventHandler<Mitarbeiter> OnDeleting_Mitarbeiter;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

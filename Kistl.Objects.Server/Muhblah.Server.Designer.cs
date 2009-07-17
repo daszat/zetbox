@@ -99,6 +99,20 @@ namespace Kistl.App.Test
         }
         public event ObjectEventHandler<Muhblah> OnPostSave_Muhblah;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Muhblah != null) OnCreated_Muhblah(this);
+        }
+        public event ObjectEventHandler<Muhblah> OnCreated_Muhblah;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Muhblah != null) OnDeleting_Muhblah(this);
+        }
+        public event ObjectEventHandler<Muhblah> OnDeleting_Muhblah;
+
 
 
 		public override void ReloadReferences()

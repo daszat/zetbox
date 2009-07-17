@@ -8,6 +8,34 @@ namespace Kistl.App.Base
 {
     public class CustomServerActions_KistlBase
     {
+        #region EnsureDefaultMethods
+        private void CheckDefaultMethod(Kistl.App.Base.ObjectClass obj, string methodName, Kistl.App.Base.Module kistlModule)
+        {
+            var m = obj.Methods.SingleOrDefault(i => i.MethodName == methodName && i.Module == kistlModule);
+            if (m == null)
+            {
+                m = obj.Context.Create<Kistl.App.Base.Method>();
+                m.MethodName = methodName;
+                m.Module = kistlModule;
+                obj.Methods.Add(m);
+            }
+        }
+
+        private void EnsureDefaultMethods(Kistl.App.Base.ObjectClass obj)
+        {
+            // Only for BaseClasses
+            if (obj.BaseObjectClass == null)
+            {
+                Kistl.App.Base.Module kistlModule = obj.Context.GetQuery<Kistl.App.Base.Module>().First(md => md.ModuleName == "KistlBase");
+                CheckDefaultMethod(obj, "ToString", kistlModule);
+                CheckDefaultMethod(obj, "PreSave", kistlModule);
+                CheckDefaultMethod(obj, "PostSave", kistlModule);
+                CheckDefaultMethod(obj, "Created", kistlModule);
+                CheckDefaultMethod(obj, "Deleting", kistlModule);
+            }
+        }
+        #endregion
+
         #region Save
         public void OnPreSave_ObjectClass(Kistl.App.Base.ObjectClass obj)
         {
@@ -16,38 +44,7 @@ namespace Kistl.App.Base
                 throw new ArgumentException(string.Format("ClassName {0} has some illegal chars", obj.ClassName));
             }
 
-            // Only for BaseClasses
-            if (obj.BaseObjectClass == null)
-            {
-                Kistl.App.Base.Module kistlModule = obj.Context.GetQuery<Kistl.App.Base.Module>().First(md => md.ModuleName == "KistlBase");
-                Kistl.App.Base.Method m;
-                m = obj.Methods.SingleOrDefault(i => i.MethodName == "ToString" && i.Module == kistlModule);
-                if (m == null)
-                {
-                    m = obj.Context.Create<Kistl.App.Base.Method>();
-                    m.MethodName = "ToString";
-                    m.Module = kistlModule;
-                    obj.Methods.Add(m);
-                }
-
-                m = obj.Methods.SingleOrDefault(i => i.MethodName == "PreSave" && i.Module == kistlModule);
-                if (m == null)
-                {
-                    m = obj.Context.Create<Kistl.App.Base.Method>();
-                    m.MethodName = "PreSave";
-                    m.Module = kistlModule;
-                    obj.Methods.Add(m);
-                }
-
-                m = obj.Methods.SingleOrDefault(i => i.MethodName == "PostSave" && i.Module == kistlModule);
-                if (m == null)
-                {
-                    m = obj.Context.Create<Kistl.App.Base.Method>();
-                    m.MethodName = "PostSave";
-                    m.Module = kistlModule;
-                    obj.Methods.Add(m);
-                }
-            }
+            EnsureDefaultMethods(obj);
         }
 
         public void OnPreSave_BaseParameter(Kistl.App.Base.BaseParameter obj)

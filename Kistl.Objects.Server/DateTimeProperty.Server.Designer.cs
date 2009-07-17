@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DateTimeProperty> OnPostSave_DateTimeProperty;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_DateTimeProperty != null) OnCreated_DateTimeProperty(this);
+        }
+        public event ObjectEventHandler<DateTimeProperty> OnCreated_DateTimeProperty;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_DateTimeProperty != null) OnDeleting_DateTimeProperty(this);
+        }
+        public event ObjectEventHandler<DateTimeProperty> OnDeleting_DateTimeProperty;
+
 
 
 		public override void ReloadReferences()

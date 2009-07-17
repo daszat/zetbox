@@ -187,6 +187,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<EnumerationProperty> OnPostSave_EnumerationProperty;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_EnumerationProperty != null) OnCreated_EnumerationProperty(this);
+        }
+        public event ObjectEventHandler<EnumerationProperty> OnCreated_EnumerationProperty;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_EnumerationProperty != null) OnDeleting_EnumerationProperty(this);
+        }
+        public event ObjectEventHandler<EnumerationProperty> OnDeleting_EnumerationProperty;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

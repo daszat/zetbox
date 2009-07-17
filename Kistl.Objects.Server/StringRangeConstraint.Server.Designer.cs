@@ -178,6 +178,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<StringRangeConstraint> OnPostSave_StringRangeConstraint;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_StringRangeConstraint != null) OnCreated_StringRangeConstraint(this);
+        }
+        public event ObjectEventHandler<StringRangeConstraint> OnCreated_StringRangeConstraint;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_StringRangeConstraint != null) OnDeleting_StringRangeConstraint(this);
+        }
+        public event ObjectEventHandler<StringRangeConstraint> OnDeleting_StringRangeConstraint;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

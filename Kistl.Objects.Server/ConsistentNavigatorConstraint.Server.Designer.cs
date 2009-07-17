@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<ConsistentNavigatorConstraint> OnPostSave_ConsistentNavigatorConstraint;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_ConsistentNavigatorConstraint != null) OnCreated_ConsistentNavigatorConstraint(this);
+        }
+        public event ObjectEventHandler<ConsistentNavigatorConstraint> OnCreated_ConsistentNavigatorConstraint;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_ConsistentNavigatorConstraint != null) OnDeleting_ConsistentNavigatorConstraint(this);
+        }
+        public event ObjectEventHandler<ConsistentNavigatorConstraint> OnDeleting_ConsistentNavigatorConstraint;
+
 
 
 		public override void ReloadReferences()

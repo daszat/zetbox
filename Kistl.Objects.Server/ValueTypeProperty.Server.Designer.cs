@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<ValueTypeProperty> OnPostSave_ValueTypeProperty;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_ValueTypeProperty != null) OnCreated_ValueTypeProperty(this);
+        }
+        public event ObjectEventHandler<ValueTypeProperty> OnCreated_ValueTypeProperty;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_ValueTypeProperty != null) OnDeleting_ValueTypeProperty(this);
+        }
+        public event ObjectEventHandler<ValueTypeProperty> OnDeleting_ValueTypeProperty;
+
 
 
 		public override void ReloadReferences()

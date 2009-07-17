@@ -469,6 +469,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<MethodInvocation> OnPostSave_MethodInvocation;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_MethodInvocation != null) OnCreated_MethodInvocation(this);
+        }
+        public event ObjectEventHandler<MethodInvocation> OnCreated_MethodInvocation;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_MethodInvocation != null) OnDeleting_MethodInvocation(this);
+        }
+        public event ObjectEventHandler<MethodInvocation> OnDeleting_MethodInvocation;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

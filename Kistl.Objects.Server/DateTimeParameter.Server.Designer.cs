@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DateTimeParameter> OnPostSave_DateTimeParameter;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_DateTimeParameter != null) OnCreated_DateTimeParameter(this);
+        }
+        public event ObjectEventHandler<DateTimeParameter> OnCreated_DateTimeParameter;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_DateTimeParameter != null) OnDeleting_DateTimeParameter(this);
+        }
+        public event ObjectEventHandler<DateTimeParameter> OnDeleting_DateTimeParameter;
+
 
 
 		public override void ReloadReferences()

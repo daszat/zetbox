@@ -200,5 +200,13 @@ namespace Kistl.API.Mocks
         public void NotifyPostSave()
         {
         }
+
+        public void NotifyCreated()
+        {
+        }
+
+        public void NotifyDeleting()
+        {
+        }
     }
 }

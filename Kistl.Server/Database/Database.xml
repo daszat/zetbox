@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-07-15T12:00:52.5622984Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-07-17T14:10:31.0827809Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -153,6 +153,15 @@
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>DateTimeProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
+  <KistlBase:Enumeration ExportGuid="2b0b1986-0337-4d90-ad59-bc9d1ad82b2b">
+    <KistlBase:ClassName>DeploymentRestriction</KistlBase:ClassName>
+    <GUI:DefaultIcon>1b618ac3-cd62-4425-8bb3-4dba99172b1a</GUI:DefaultIcon>
+    <KistlBase:Description>Deployment restriction for items</KistlBase:Description>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+  </KistlBase:Enumeration>
   <KistlBase:ObjectClass ExportGuid="74aa31e4-4dcf-46d5-a8b4-aa02b82bd2df">
     <KistlBase:ClassName>DoubleParameter</KistlBase:ClassName>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
@@ -2682,6 +2691,24 @@
     <KistlBase:RoleName>Parent</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
+  <KistlBase:EnumerationEntry ExportGuid="3561d68c-cbdb-42b6-b755-d8fedcf8dc24">
+    <KistlBase:Description>Item is deployed only on the client</KistlBase:Description>
+    <KistlBase:Enumeration>2b0b1986-0337-4d90-ad59-bc9d1ad82b2b</KistlBase:Enumeration>
+    <KistlBase:Name>ClientOnly</KistlBase:Name>
+    <KistlBase:Value>1</KistlBase:Value>
+  </KistlBase:EnumerationEntry>
+  <KistlBase:EnumerationEntry ExportGuid="4ce23bf4-9852-4a73-87db-45f40f22a37e">
+    <KistlBase:Description>No deployment restriction. Item is deployed on the server and client</KistlBase:Description>
+    <KistlBase:Enumeration>2b0b1986-0337-4d90-ad59-bc9d1ad82b2b</KistlBase:Enumeration>
+    <KistlBase:Name>None</KistlBase:Name>
+    <KistlBase:Value>0</KistlBase:Value>
+  </KistlBase:EnumerationEntry>
+  <KistlBase:EnumerationEntry ExportGuid="93625455-7181-4764-9562-23bba3771d29">
+    <KistlBase:Description>Item is deployed only on the server</KistlBase:Description>
+    <KistlBase:Enumeration>2b0b1986-0337-4d90-ad59-bc9d1ad82b2b</KistlBase:Enumeration>
+    <KistlBase:Name>ServerOnly</KistlBase:Name>
+    <KistlBase:Value>2</KistlBase:Value>
+  </KistlBase:EnumerationEntry>
   <KistlBase:EnumerationEntry ExportGuid="d0d79537-03cc-4eaa-a41a-840825eaa814">
     <KistlBase:Description>Required Element (exactly one)</KistlBase:Description>
     <KistlBase:Enumeration>4f2b5005-672e-46ef-80ed-94b8cdd053db</KistlBase:Enumeration>
@@ -10140,14 +10167,14 @@
   <KistlBase:NotNullableConstraint ExportGuid="d4098f61-81aa-4003-aa9a-4fabd8af93ce">
     <KistlBase:ConstrainedProperty>720f5bcf-5654-4114-8fba-f57fb7bd48ea</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="11e9acfc-73b0-4010-b93b-e23030e77dbd">
-    <KistlBase:ConstrainedProperty>a96df76c-c45c-4d21-8221-8c7deaac4814</KistlBase:ConstrainedProperty>
-  </KistlBase:NotNullableConstraint>
   <KistlBase:StringRangeConstraint ExportGuid="8a89b37e-bcff-4aa7-a6e3-6612a3ee98f4">
     <KistlBase:ConstrainedProperty>a96df76c-c45c-4d21-8221-8c7deaac4814</KistlBase:ConstrainedProperty>
     <KistlBase:MaxLength>400</KistlBase:MaxLength>
     <KistlBase:MinLength>0</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="11e9acfc-73b0-4010-b93b-e23030e77dbd">
+    <KistlBase:ConstrainedProperty>a96df76c-c45c-4d21-8221-8c7deaac4814</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:StringRangeConstraint ExportGuid="dc6ae076-e73f-4d2f-9f19-342c5fc69bee">
     <KistlBase:ConstrainedProperty>1744a31b-a1c3-4e7c-834c-504521240478</KistlBase:ConstrainedProperty>
     <KistlBase:MaxLength>4000</KistlBase:MaxLength>
@@ -10164,12 +10191,12 @@
     <KistlBase:MaxLength>200</KistlBase:MaxLength>
     <KistlBase:MinLength>0</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="b07940bf-ed6b-4fc9-815e-a397933897c9">
-    <KistlBase:ConstrainedProperty>79c8188d-d8e2-41b7-82c9-08f384fd6b68</KistlBase:ConstrainedProperty>
-  </KistlBase:NotNullableConstraint>
   <KistlBase:StringRangeConstraint ExportGuid="91b2db4b-a391-4321-af1b-8e9322cd0e70">
     <KistlBase:ConstrainedProperty>79c8188d-d8e2-41b7-82c9-08f384fd6b68</KistlBase:ConstrainedProperty>
     <KistlBase:MaxLength>4000</KistlBase:MaxLength>
     <KistlBase:MinLength>0</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="b07940bf-ed6b-4fc9-815e-a397933897c9">
+    <KistlBase:ConstrainedProperty>79c8188d-d8e2-41b7-82c9-08f384fd6b68</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
 </KistlPackaging>

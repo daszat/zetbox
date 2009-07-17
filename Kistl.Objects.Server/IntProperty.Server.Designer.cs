@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<IntProperty> OnPostSave_IntProperty;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_IntProperty != null) OnCreated_IntProperty(this);
+        }
+        public event ObjectEventHandler<IntProperty> OnCreated_IntProperty;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_IntProperty != null) OnDeleting_IntProperty(this);
+        }
+        public event ObjectEventHandler<IntProperty> OnDeleting_IntProperty;
+
 
 
 		public override void ReloadReferences()

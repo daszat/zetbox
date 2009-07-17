@@ -58,7 +58,21 @@ this.WriteObjects("            if (OnPostSave_",  cls.ClassName , " != null) OnP
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public event ObjectEventHandler<",  cls.ClassName , "> OnPostSave_",  cls.ClassName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 46 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+this.WriteObjects("        public override void NotifyCreated()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            base.NotifyCreated();\r\n");
+this.WriteObjects("            if (OnCreated_",  cls.ClassName , " != null) OnCreated_",  cls.ClassName , "(this);\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("        public event ObjectEventHandler<",  cls.ClassName , "> OnCreated_",  cls.ClassName , ";\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        public override void NotifyDeleting()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            base.NotifyDeleting();\r\n");
+this.WriteObjects("            if (OnDeleting_",  cls.ClassName , " != null) OnDeleting_",  cls.ClassName , "(this);\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("        public event ObjectEventHandler<",  cls.ClassName , "> OnDeleting_",  cls.ClassName , ";\r\n");
+this.WriteObjects("\r\n");
+#line 60 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
 Implementation.ObjectClasses.GetPropertyErrorTemplate.Call(Host, ctx, cls);
 
 

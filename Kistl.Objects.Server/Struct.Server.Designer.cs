@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<Struct> OnPostSave_Struct;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Struct != null) OnCreated_Struct(this);
+        }
+        public event ObjectEventHandler<Struct> OnCreated_Struct;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Struct != null) OnDeleting_Struct(this);
+        }
+        public event ObjectEventHandler<Struct> OnDeleting_Struct;
+
 
 
 		public override void ReloadReferences()

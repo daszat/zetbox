@@ -311,6 +311,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<Module> OnPostSave_Module;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Module != null) OnCreated_Module(this);
+        }
+        public event ObjectEventHandler<Module> OnCreated_Module;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Module != null) OnDeleting_Module(this);
+        }
+        public event ObjectEventHandler<Module> OnDeleting_Module;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

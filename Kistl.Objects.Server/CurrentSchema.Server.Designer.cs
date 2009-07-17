@@ -157,6 +157,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<CurrentSchema> OnPostSave_CurrentSchema;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_CurrentSchema != null) OnCreated_CurrentSchema(this);
+        }
+        public event ObjectEventHandler<CurrentSchema> OnCreated_CurrentSchema;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_CurrentSchema != null) OnDeleting_CurrentSchema(this);
+        }
+        public event ObjectEventHandler<CurrentSchema> OnDeleting_CurrentSchema;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

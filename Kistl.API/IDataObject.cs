@@ -204,6 +204,16 @@ namespace Kistl.API
         /// Fires an Event after an Object is saved.
         /// </summary>
         void NotifyPostSave();
+
+        /// <summary>
+        /// Fires an Event after an Object is created.
+        /// </summary>
+        void NotifyCreated();
+
+        /// <summary>
+        /// Fires an Event before an Object is deleted.
+        /// </summary>
+        void NotifyDeleting();
     }
 
     /// <summary>

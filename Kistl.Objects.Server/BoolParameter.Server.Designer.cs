@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<BoolParameter> OnPostSave_BoolParameter;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_BoolParameter != null) OnCreated_BoolParameter(this);
+        }
+        public event ObjectEventHandler<BoolParameter> OnCreated_BoolParameter;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_BoolParameter != null) OnDeleting_BoolParameter(this);
+        }
+        public event ObjectEventHandler<BoolParameter> OnDeleting_BoolParameter;
+
 
 
 		public override void ReloadReferences()

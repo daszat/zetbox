@@ -178,6 +178,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<IntegerRangeConstraint> OnPostSave_IntegerRangeConstraint;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_IntegerRangeConstraint != null) OnCreated_IntegerRangeConstraint(this);
+        }
+        public event ObjectEventHandler<IntegerRangeConstraint> OnCreated_IntegerRangeConstraint;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_IntegerRangeConstraint != null) OnDeleting_IntegerRangeConstraint(this);
+        }
+        public event ObjectEventHandler<IntegerRangeConstraint> OnDeleting_IntegerRangeConstraint;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

@@ -105,6 +105,10 @@ namespace Kistl.API.Server.Mocks
 
         public event ObjectEventHandler<TestObjClass> OnPostSave_TestObjClass;
 
+        public event ObjectEventHandler<TestObjClass> OnCreated_TestObjClass;
+
+        public event ObjectEventHandler<TestObjClass> OnDeleting_TestObjClass;
+
         public event TestMethod_Handler<TestObjClass> OnTestMethod_TestObjClass;
 
         [System.Diagnostics.DebuggerHidden()]
@@ -129,6 +133,18 @@ namespace Kistl.API.Server.Mocks
         {
             base.NotifyPostSave();
             if (OnPostSave_TestObjClass != null) OnPostSave_TestObjClass(this);
+        }
+
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_TestObjClass != null) OnCreated_TestObjClass(this);
+        }
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_TestObjClass != null) OnDeleting_TestObjClass(this);
         }
 
         public virtual void TestMethod(System.DateTime DateTimeParamForTestMethod)

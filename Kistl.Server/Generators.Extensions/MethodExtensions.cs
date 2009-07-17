@@ -10,14 +10,16 @@ namespace Kistl.Server.Generators.Extensions
     public static class MethodExtensions
     {
         /// <summary>
-        /// returns true if the Method is one of the "default" methods, "ToString", "PreSave" or "PostSave".
+        /// returns true if the Method is one of the "default" methods, "ToString", "PreSave", "PostSave", "Created" or "Deleting".
         /// </summary>
         public static bool IsDefaultMethod(this Method method)
         {
             return (method.Module.ModuleName == "KistlBase")
                 && (method.MethodName == "ToString"
                     || method.MethodName == "PreSave"
-                    || method.MethodName == "PostSave");
+                    || method.MethodName == "PostSave"
+                    || method.MethodName == "Created"
+                    || method.MethodName == "Deleting");
         }
 
         public static string GetParameterDefinitions(this Method method)

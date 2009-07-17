@@ -42,6 +42,20 @@
         }
         public event ObjectEventHandler<<%= cls.ClassName %>> OnPostSave_<%= cls.ClassName %>;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_<%= cls.ClassName %> != null) OnCreated_<%= cls.ClassName %>(this);
+        }
+        public event ObjectEventHandler<<%= cls.ClassName %>> OnCreated_<%= cls.ClassName %>;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_<%= cls.ClassName %> != null) OnDeleting_<%= cls.ClassName %>(this);
+        }
+        public event ObjectEventHandler<<%= cls.ClassName %>> OnDeleting_<%= cls.ClassName %>;
+
 <%
 	Implementation.ObjectClasses.GetPropertyErrorTemplate.Call(Host, ctx, cls);
 %>

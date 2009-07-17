@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<Interface> OnPostSave_Interface;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Interface != null) OnCreated_Interface(this);
+        }
+        public event ObjectEventHandler<Interface> OnCreated_Interface;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Interface != null) OnDeleting_Interface(this);
+        }
+        public event ObjectEventHandler<Interface> OnDeleting_Interface;
+
 
 
 		public override void ReloadReferences()

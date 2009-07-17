@@ -283,6 +283,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<ObjectReferenceProperty> OnPostSave_ObjectReferenceProperty;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_ObjectReferenceProperty != null) OnCreated_ObjectReferenceProperty(this);
+        }
+        public event ObjectEventHandler<ObjectReferenceProperty> OnCreated_ObjectReferenceProperty;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_ObjectReferenceProperty != null) OnDeleting_ObjectReferenceProperty(this);
+        }
+        public event ObjectEventHandler<ObjectReferenceProperty> OnDeleting_ObjectReferenceProperty;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

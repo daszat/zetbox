@@ -282,6 +282,20 @@ namespace Kistl.App.Projekte
         }
         public event ObjectEventHandler<Task> OnPostSave_Task;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Task != null) OnCreated_Task(this);
+        }
+        public event ObjectEventHandler<Task> OnCreated_Task;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Task != null) OnDeleting_Task(this);
+        }
+        public event ObjectEventHandler<Task> OnDeleting_Task;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

@@ -290,6 +290,20 @@ namespace Kistl.App.Test
         }
         public event ObjectEventHandler<TestObjClass> OnPostSave_TestObjClass;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_TestObjClass != null) OnCreated_TestObjClass(this);
+        }
+        public event ObjectEventHandler<TestObjClass> OnCreated_TestObjClass;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_TestObjClass != null) OnDeleting_TestObjClass(this);
+        }
+        public event ObjectEventHandler<TestObjClass> OnDeleting_TestObjClass;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

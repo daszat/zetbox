@@ -187,6 +187,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<ObjectParameter> OnPostSave_ObjectParameter;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_ObjectParameter != null) OnCreated_ObjectParameter(this);
+        }
+        public event ObjectEventHandler<ObjectParameter> OnCreated_ObjectParameter;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_ObjectParameter != null) OnDeleting_ObjectParameter(this);
+        }
+        public event ObjectEventHandler<ObjectParameter> OnDeleting_ObjectParameter;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

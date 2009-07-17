@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<IsValidIdentifierConstraint> OnPostSave_IsValidIdentifierConstraint;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_IsValidIdentifierConstraint != null) OnCreated_IsValidIdentifierConstraint(this);
+        }
+        public event ObjectEventHandler<IsValidIdentifierConstraint> OnCreated_IsValidIdentifierConstraint;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_IsValidIdentifierConstraint != null) OnDeleting_IsValidIdentifierConstraint(this);
+        }
+        public event ObjectEventHandler<IsValidIdentifierConstraint> OnDeleting_IsValidIdentifierConstraint;
+
 
 
 		public override void ReloadReferences()

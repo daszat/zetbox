@@ -286,6 +286,20 @@ namespace Kistl.App.Projekte
         }
         public event ObjectEventHandler<Kunde> OnPostSave_Kunde;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Kunde != null) OnCreated_Kunde(this);
+        }
+        public event ObjectEventHandler<Kunde> OnCreated_Kunde;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Kunde != null) OnDeleting_Kunde(this);
+        }
+        public event ObjectEventHandler<Kunde> OnDeleting_Kunde;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

@@ -625,6 +625,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<Property> OnPostSave_Property;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Property != null) OnCreated_Property(this);
+        }
+        public event ObjectEventHandler<Property> OnCreated_Property;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Property != null) OnDeleting_Property(this);
+        }
+        public event ObjectEventHandler<Property> OnDeleting_Property;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

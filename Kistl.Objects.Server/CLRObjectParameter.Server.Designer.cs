@@ -216,6 +216,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<CLRObjectParameter> OnPostSave_CLRObjectParameter;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_CLRObjectParameter != null) OnCreated_CLRObjectParameter(this);
+        }
+        public event ObjectEventHandler<CLRObjectParameter> OnCreated_CLRObjectParameter;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_CLRObjectParameter != null) OnDeleting_CLRObjectParameter(this);
+        }
+        public event ObjectEventHandler<CLRObjectParameter> OnDeleting_CLRObjectParameter;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

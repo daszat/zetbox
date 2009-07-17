@@ -336,6 +336,20 @@ namespace Kistl.App.GUI
         }
         public event ObjectEventHandler<PresentableModelDescriptor> OnPostSave_PresentableModelDescriptor;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_PresentableModelDescriptor != null) OnCreated_PresentableModelDescriptor(this);
+        }
+        public event ObjectEventHandler<PresentableModelDescriptor> OnCreated_PresentableModelDescriptor;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_PresentableModelDescriptor != null) OnDeleting_PresentableModelDescriptor(this);
+        }
+        public event ObjectEventHandler<PresentableModelDescriptor> OnDeleting_PresentableModelDescriptor;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

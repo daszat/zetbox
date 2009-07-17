@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<GuidProperty> OnPostSave_GuidProperty;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_GuidProperty != null) OnCreated_GuidProperty(this);
+        }
+        public event ObjectEventHandler<GuidProperty> OnCreated_GuidProperty;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_GuidProperty != null) OnDeleting_GuidProperty(this);
+        }
+        public event ObjectEventHandler<GuidProperty> OnDeleting_GuidProperty;
+
 
 
 		public override void ReloadReferences()

@@ -403,6 +403,20 @@ namespace Kistl.App.GUI
         }
         public event ObjectEventHandler<Visual> OnPostSave_Visual;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Visual != null) OnCreated_Visual(this);
+        }
+        public event ObjectEventHandler<Visual> OnCreated_Visual;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Visual != null) OnDeleting_Visual(this);
+        }
+        public event ObjectEventHandler<Visual> OnDeleting_Visual;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<MethodInvocationConstraint> OnPostSave_MethodInvocationConstraint;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_MethodInvocationConstraint != null) OnCreated_MethodInvocationConstraint(this);
+        }
+        public event ObjectEventHandler<MethodInvocationConstraint> OnCreated_MethodInvocationConstraint;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_MethodInvocationConstraint != null) OnDeleting_MethodInvocationConstraint(this);
+        }
+        public event ObjectEventHandler<MethodInvocationConstraint> OnDeleting_MethodInvocationConstraint;
+
 
 
 		public override void ReloadReferences()

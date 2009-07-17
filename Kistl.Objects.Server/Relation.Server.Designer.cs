@@ -432,6 +432,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<Relation> OnPostSave_Relation;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Relation != null) OnCreated_Relation(this);
+        }
+        public event ObjectEventHandler<Relation> OnCreated_Relation;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Relation != null) OnDeleting_Relation(this);
+        }
+        public event ObjectEventHandler<Relation> OnDeleting_Relation;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

@@ -379,6 +379,20 @@ namespace Kistl.App.Projekte
         }
         public event ObjectEventHandler<Auftrag> OnPostSave_Auftrag;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Auftrag != null) OnCreated_Auftrag(this);
+        }
+        public event ObjectEventHandler<Auftrag> OnCreated_Auftrag;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Auftrag != null) OnDeleting_Auftrag(this);
+        }
+        public event ObjectEventHandler<Auftrag> OnDeleting_Auftrag;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

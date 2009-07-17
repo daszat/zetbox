@@ -224,6 +224,20 @@ namespace Kistl.App.GUI
         }
         public event ObjectEventHandler<Icon> OnPostSave_Icon;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_Icon != null) OnCreated_Icon(this);
+        }
+        public event ObjectEventHandler<Icon> OnCreated_Icon;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_Icon != null) OnDeleting_Icon(this);
+        }
+        public event ObjectEventHandler<Icon> OnDeleting_Icon;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

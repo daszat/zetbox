@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<IntParameter> OnPostSave_IntParameter;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_IntParameter != null) OnCreated_IntParameter(this);
+        }
+        public event ObjectEventHandler<IntParameter> OnCreated_IntParameter;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_IntParameter != null) OnDeleting_IntParameter(this);
+        }
+        public event ObjectEventHandler<IntParameter> OnDeleting_IntParameter;
+
 
 
 		public override void ReloadReferences()

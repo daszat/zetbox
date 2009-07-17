@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<NotNullableConstraint> OnPostSave_NotNullableConstraint;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_NotNullableConstraint != null) OnCreated_NotNullableConstraint(this);
+        }
+        public event ObjectEventHandler<NotNullableConstraint> OnCreated_NotNullableConstraint;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_NotNullableConstraint != null) OnDeleting_NotNullableConstraint(this);
+        }
+        public event ObjectEventHandler<NotNullableConstraint> OnDeleting_NotNullableConstraint;
+
 
 
 		public override void ReloadReferences()

@@ -263,6 +263,20 @@ namespace Kistl.App.TimeRecords
         }
         public event ObjectEventHandler<WorkEffortAccount> OnPostSave_WorkEffortAccount;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_WorkEffortAccount != null) OnCreated_WorkEffortAccount(this);
+        }
+        public event ObjectEventHandler<WorkEffortAccount> OnCreated_WorkEffortAccount;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_WorkEffortAccount != null) OnDeleting_WorkEffortAccount(this);
+        }
+        public event ObjectEventHandler<WorkEffortAccount> OnDeleting_WorkEffortAccount;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

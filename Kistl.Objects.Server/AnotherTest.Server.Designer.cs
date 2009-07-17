@@ -99,6 +99,20 @@ namespace Kistl.App.Test
         }
         public event ObjectEventHandler<AnotherTest> OnPostSave_AnotherTest;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_AnotherTest != null) OnCreated_AnotherTest(this);
+        }
+        public event ObjectEventHandler<AnotherTest> OnCreated_AnotherTest;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_AnotherTest != null) OnDeleting_AnotherTest(this);
+        }
+        public event ObjectEventHandler<AnotherTest> OnDeleting_AnotherTest;
+
 
 
 		public override void ReloadReferences()

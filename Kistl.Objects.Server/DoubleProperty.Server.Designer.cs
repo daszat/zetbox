@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DoubleProperty> OnPostSave_DoubleProperty;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_DoubleProperty != null) OnCreated_DoubleProperty(this);
+        }
+        public event ObjectEventHandler<DoubleProperty> OnCreated_DoubleProperty;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_DoubleProperty != null) OnDeleting_DoubleProperty(this);
+        }
+        public event ObjectEventHandler<DoubleProperty> OnDeleting_DoubleProperty;
+
 
 
 		public override void ReloadReferences()

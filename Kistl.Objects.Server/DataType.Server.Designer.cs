@@ -595,6 +595,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DataType> OnPostSave_DataType;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_DataType != null) OnCreated_DataType(this);
+        }
+        public event ObjectEventHandler<DataType> OnCreated_DataType;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_DataType != null) OnDeleting_DataType(this);
+        }
+        public event ObjectEventHandler<DataType> OnDeleting_DataType;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

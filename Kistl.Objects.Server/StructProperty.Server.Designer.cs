@@ -187,6 +187,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<StructProperty> OnPostSave_StructProperty;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_StructProperty != null) OnCreated_StructProperty(this);
+        }
+        public event ObjectEventHandler<StructProperty> OnCreated_StructProperty;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_StructProperty != null) OnDeleting_StructProperty(this);
+        }
+        public event ObjectEventHandler<StructProperty> OnDeleting_StructProperty;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

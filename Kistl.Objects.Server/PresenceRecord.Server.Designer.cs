@@ -224,6 +224,20 @@ namespace Kistl.App.TimeRecords
         }
         public event ObjectEventHandler<PresenceRecord> OnPostSave_PresenceRecord;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_PresenceRecord != null) OnCreated_PresenceRecord(this);
+        }
+        public event ObjectEventHandler<PresenceRecord> OnCreated_PresenceRecord;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_PresenceRecord != null) OnDeleting_PresenceRecord(this);
+        }
+        public event ObjectEventHandler<PresenceRecord> OnDeleting_PresenceRecord;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{

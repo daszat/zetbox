@@ -120,6 +120,20 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DoubleParameter> OnPostSave_DoubleParameter;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_DoubleParameter != null) OnCreated_DoubleParameter(this);
+        }
+        public event ObjectEventHandler<DoubleParameter> OnCreated_DoubleParameter;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_DoubleParameter != null) OnDeleting_DoubleParameter(this);
+        }
+        public event ObjectEventHandler<DoubleParameter> OnDeleting_DoubleParameter;
+
 
 
 		public override void ReloadReferences()

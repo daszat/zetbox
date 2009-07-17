@@ -257,6 +257,20 @@ namespace Kistl.App.Test
         }
         public event ObjectEventHandler<TestCustomObject> OnPostSave_TestCustomObject;
 
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_TestCustomObject != null) OnCreated_TestCustomObject(this);
+        }
+        public event ObjectEventHandler<TestCustomObject> OnCreated_TestCustomObject;
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_TestCustomObject != null) OnDeleting_TestCustomObject(this);
+        }
+        public event ObjectEventHandler<TestCustomObject> OnDeleting_TestCustomObject;
+
 
 		protected override string GetPropertyError(string propertyName) 
 		{
