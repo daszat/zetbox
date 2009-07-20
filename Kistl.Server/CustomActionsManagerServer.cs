@@ -103,7 +103,7 @@ namespace Kistl.Server
                                 {
                                     try
                                     {
-                                        if (mi.Implementor.Assembly.IsClientAssembly) continue;
+                                        if (mi.Implementor.Assembly.DeploymentRestrictions == DeploymentRestriction.ClientOnly) continue;
 
                                         // as noted above, no methods are 
                                         // attached yet, so TypeRef.AsType() 

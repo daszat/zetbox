@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-07-17T14:10:31.0827809Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-07-20T11:23:44.3903449Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -665,6 +665,18 @@
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
+  <KistlBase:EnumerationProperty ExportGuid="8458ea0d-04ca-48db-88ed-7d36e7e93b58">
+    <KistlBase:AltText>Deployment restrictions for this assembly</KistlBase:AltText>
+    <KistlBase:Description>Deployment restrictions for this assembly</KistlBase:Description>
+    <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:IsNullable>true</KistlBase:IsNullable>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:ObjectClass>a590a975-66e5-421c-aa97-7ab3169e0e9b</KistlBase:ObjectClass>
+    <KistlBase:PropertyName>DeploymentRestrictions</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
+    <KistlBase:Enumeration>2b0b1986-0337-4d90-ad59-bc9d1ad82b2b</KistlBase:Enumeration>
+  </KistlBase:EnumerationProperty>
   <KistlBase:GuidProperty ExportGuid="9c1ddbcf-24b9-47cb-a27d-043fc47e4002">
     <KistlBase:AltText>Export Guid</KistlBase:AltText>
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
@@ -677,17 +689,6 @@
     <KistlBase:PropertyName>ExportGuid</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
   </KistlBase:GuidProperty>
-  <KistlBase:BoolProperty ExportGuid="d6b0af6c-b0ed-40be-b8dd-76d2379989f5">
-    <KistlBase:AltText>Legt fest, ob es sich um ein Client-Assembly handelt.</KistlBase:AltText>
-    <KistlBase:Description>Legt fest, ob es sich um ein Client-Assembly handelt.</KistlBase:Description>
-    <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
-    <KistlBase:IsList>false</KistlBase:IsList>
-    <KistlBase:IsNullable>false</KistlBase:IsNullable>
-    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:ObjectClass>a590a975-66e5-421c-aa97-7ab3169e0e9b</KistlBase:ObjectClass>
-    <KistlBase:PropertyName>IsClientAssembly</KistlBase:PropertyName>
-    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
-  </KistlBase:BoolProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="8d579192-717e-4f2c-90ed-1c066255e270">
     <KistlBase:AltText>Module</KistlBase:AltText>
     <KistlBase:Description>Module</KistlBase:Description>
@@ -4305,11 +4306,12 @@
   <KistlBase:NotNullableConstraint ExportGuid="c78c15aa-0053-4534-b8f6-d1fe89041309">
     <KistlBase:ConstrainedProperty>9a9dbd59-6816-4d25-9ef2-da84b96bf454</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="97526242-ef36-473d-ba3d-1bfcade48839">
+    <KistlBase:ConstrainedProperty>8458ea0d-04ca-48db-88ed-7d36e7e93b58</KistlBase:ConstrainedProperty>
+    <KistlBase:Reason>DeploymentRestrictions may not be empty</KistlBase:Reason>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="c599a54b-354f-453a-83b2-1b2e9f29ea26">
     <KistlBase:ConstrainedProperty>9c1ddbcf-24b9-47cb-a27d-043fc47e4002</KistlBase:ConstrainedProperty>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="0aa19f66-3744-4715-ad2c-1e403798b616">
-    <KistlBase:ConstrainedProperty>d6b0af6c-b0ed-40be-b8dd-76d2379989f5</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="1325e296-44e0-4f44-9612-23a036f9aa5f">
     <KistlBase:ConstrainedProperty>8d579192-717e-4f2c-90ed-1c066255e270</KistlBase:ConstrainedProperty>
@@ -4361,6 +4363,9 @@
     <KistlBase:MaxLength>400</KistlBase:MaxLength>
     <KistlBase:MinLength>0</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
+  <KistlBase:IsValidIdentifierConstraint ExportGuid="c0facd37-aec9-4716-b969-339b2fc361d5">
+    <KistlBase:ConstrainedProperty>083bbf12-aac6-4f5f-802a-d3701550bc84</KistlBase:ConstrainedProperty>
+  </KistlBase:IsValidIdentifierConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="4bf7cf4b-bc50-4a2d-8686-6f9b2480cee7">
     <KistlBase:ConstrainedProperty>083bbf12-aac6-4f5f-802a-d3701550bc84</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
@@ -4370,9 +4375,6 @@
     <KistlBase:MaxLength>51</KistlBase:MaxLength>
     <KistlBase:MinLength>1</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
-  <KistlBase:IsValidIdentifierConstraint ExportGuid="c0facd37-aec9-4716-b969-339b2fc361d5">
-    <KistlBase:ConstrainedProperty>083bbf12-aac6-4f5f-802a-d3701550bc84</KistlBase:ConstrainedProperty>
-  </KistlBase:IsValidIdentifierConstraint>
   <KistlBase:StringRangeConstraint ExportGuid="b7bb2f92-c1e4-405f-bcb3-6de8969d134d">
     <KistlBase:ConstrainedProperty>2cffd4f2-cb84-4f39-9bd1-19fd2e160bad</KistlBase:ConstrainedProperty>
     <KistlBase:MaxLength>200</KistlBase:MaxLength>
@@ -4469,13 +4471,13 @@
     <KistlBase:MaxLength>200</KistlBase:MaxLength>
     <KistlBase:MinLength>0</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="7d7e5d84-1d67-4ab4-bfe6-e660fff6a153">
-    <KistlBase:ConstrainedProperty>b9db3b3b-d00d-479f-843f-6d41704eb079</KistlBase:ConstrainedProperty>
-  </KistlBase:NotNullableConstraint>
   <KistlBase:MethodInvocationConstraint ExportGuid="c7efdbc8-05fc-439e-ac38-ec850fac5fc3">
     <KistlBase:ConstrainedProperty>b9db3b3b-d00d-479f-843f-6d41704eb079</KistlBase:ConstrainedProperty>
     <KistlBase:Reason>Method.ObjectClass and InvokeOnObjectClass have to match.</KistlBase:Reason>
   </KistlBase:MethodInvocationConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="7d7e5d84-1d67-4ab4-bfe6-e660fff6a153">
+    <KistlBase:ConstrainedProperty>b9db3b3b-d00d-479f-843f-6d41704eb079</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="6dc35b4f-819a-4e92-b5dd-935fc0d5e82b">
     <KistlBase:ConstrainedProperty>b959b313-2063-4391-bb97-14ac85d5dff0</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
@@ -4509,14 +4511,14 @@
   <KistlBase:NotNullableConstraint ExportGuid="2cf03dce-7f66-4f85-968f-708ebd1819f4">
     <KistlBase:ConstrainedProperty>13c33710-ea02-4621-ad50-294a1f36b07d</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="191153b3-3cb3-45ae-95d2-4ad0fdb48620">
-    <KistlBase:ConstrainedProperty>2a5e5111-199c-4dce-8369-ce35ee741568</KistlBase:ConstrainedProperty>
-  </KistlBase:NotNullableConstraint>
   <KistlBase:StringRangeConstraint ExportGuid="3216b626-121c-477a-b457-b4f2a347fd5c">
     <KistlBase:ConstrainedProperty>2a5e5111-199c-4dce-8369-ce35ee741568</KistlBase:ConstrainedProperty>
     <KistlBase:MaxLength>100</KistlBase:MaxLength>
     <KistlBase:MinLength>1</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="191153b3-3cb3-45ae-95d2-4ad0fdb48620">
+    <KistlBase:ConstrainedProperty>2a5e5111-199c-4dce-8369-ce35ee741568</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:IsValidIdentifierConstraint ExportGuid="6aa150ce-666b-4823-ae6f-6df3c2d569a2">
     <KistlBase:ConstrainedProperty>2a5e5111-199c-4dce-8369-ce35ee741568</KistlBase:ConstrainedProperty>
   </KistlBase:IsValidIdentifierConstraint>
@@ -4619,16 +4621,16 @@
   <KistlBase:NotNullableConstraint ExportGuid="ceda48e9-575c-44e3-99e5-3e0ee6a95506">
     <KistlBase:ConstrainedProperty>d4bfc4e0-6b57-49f0-91fd-b0de428484e0</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="c9459199-02a0-4ca2-b475-56b935449659">
+    <KistlBase:ConstrainedProperty>3588888e-b280-4e8d-8a7b-53f452b81bf0</KistlBase:ConstrainedProperty>
+    <KistlBase:Reason>Cannot create legal O/R mapping without length</KistlBase:Reason>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:IntegerRangeConstraint ExportGuid="e5695d96-15aa-460f-be55-6c3fd7567d5e">
     <KistlBase:ConstrainedProperty>3588888e-b280-4e8d-8a7b-53f452b81bf0</KistlBase:ConstrainedProperty>
     <KistlBase:Reason>Strings have to have at least one character.</KistlBase:Reason>
     <KistlBase:Max>4000</KistlBase:Max>
     <KistlBase:Min>1</KistlBase:Min>
   </KistlBase:IntegerRangeConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="c9459199-02a0-4ca2-b475-56b935449659">
-    <KistlBase:ConstrainedProperty>3588888e-b280-4e8d-8a7b-53f452b81bf0</KistlBase:ConstrainedProperty>
-    <KistlBase:Reason>Cannot create legal O/R mapping without length</KistlBase:Reason>
-  </KistlBase:NotNullableConstraint>
   <KistlBase:IntegerRangeConstraint ExportGuid="04372ada-88c7-4ff8-8f28-ce76c3f736a3">
     <KistlBase:ConstrainedProperty>17aa679d-72d0-480e-9bd9-b37f4eba1d68</KistlBase:ConstrainedProperty>
     <KistlBase:Reason>strings in the database should not be longer than 4k</KistlBase:Reason>
@@ -4669,12 +4671,12 @@
   </KistlBase:NotNullableConstraint>
   <KistlBase:Assembly ExportGuid="8937dfc1-288e-49ca-a6c6-701e9c230b07">
     <KistlBase:AssemblyName>Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>true</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="9acf0b2c-a4a1-4418-99b8-3ec69157c3f0">
     <KistlBase:AssemblyName>Kistl.App.Projekte.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>2</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:TypeRef ExportGuid="e954023a-9460-4a90-8ca3-12c109bb2e41">
@@ -4829,6 +4831,24 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>41b6d0a1-a2ae-4c68-8997-503db83319bc</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
+  <GUI:PresentableModelDescriptor ExportGuid="a6ff986c-a485-4c4d-947c-e59d14112ec2">
+    <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
+    <GUI:Description>An enumeration value for generic enumerations</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:PresentableModelRef>48cdd708-4699-4da7-9cb0-83b2a8209c95</GUI:PresentableModelRef>
+  </GUI:PresentableModelDescriptor>
+  <GUI:PresentableModelDescriptor ExportGuid="467887f3-194c-47b2-9441-c9929dca7d9f">
+    <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
+    <GUI:Description>An enumeration value for Toolkit</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:PresentableModelRef>c597cf42-2788-4d9c-990b-ffffd2fe8a11</GUI:PresentableModelRef>
+  </GUI:PresentableModelDescriptor>
+  <GUI:PresentableModelDescriptor ExportGuid="0b8b98cf-a618-49e8-a2f3-9c3c6b9427ed">
+    <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
+    <GUI:Description>An enumeration value for VisualType</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:PresentableModelRef>96ee55ea-57f8-40e4-a4c6-c60e39b9f35b</GUI:PresentableModelRef>
+  </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="4b7ef800-2ddb-4b99-b0d4-aefd9373ba70">
     <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
     <GUI:Description>An enumeration value for Multiplicity</GUI:Description>
@@ -4846,18 +4866,6 @@
     <GUI:Description>An enumeration value for StorageType</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>567b58ce-dced-4a54-bc05-1ed0dfe8943a</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="467887f3-194c-47b2-9441-c9929dca7d9f">
-    <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
-    <GUI:Description>An enumeration value for Toolkit</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>c597cf42-2788-4d9c-990b-ffffd2fe8a11</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="0b8b98cf-a618-49e8-a2f3-9c3c6b9427ed">
-    <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
-    <GUI:Description>An enumeration value for VisualType</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>96ee55ea-57f8-40e4-a4c6-c60e39b9f35b</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="6d40b091-3c20-4371-9bc2-dc12fe2f552f">
     <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
@@ -7059,67 +7067,67 @@
   </KistlBase:NotNullableConstraint>
   <KistlBase:Assembly ExportGuid="ba51f88e-57df-49cb-a907-b25e1091487b">
     <KistlBase:AssemblyName>Kistl.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>0</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="15b6b4c4-6a16-485a-aa55-017b0c76fc56">
     <KistlBase:AssemblyName>Kistl.API.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="ccb4bfc9-d76a-43be-963e-bc3712e6b405">
     <KistlBase:AssemblyName>Kistl.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="eb5c0841-a9bb-4262-bb9a-5aed5a7086c7">
     <KistlBase:AssemblyName>Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="62afd077-5c95-46ce-8daa-ffda715ad3f5">
     <KistlBase:AssemblyName>Kistl.Client.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="157c1754-6eed-49f7-883b-ae2543bafd7e">
     <KistlBase:AssemblyName>Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="242a1ea6-e8e1-420c-824d-0d2707ece25d">
     <KistlBase:AssemblyName>Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>0</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="59dbd4ab-f5d2-455f-8181-acffe0fcec0b">
     <KistlBase:AssemblyName>mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>0</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="c218dca0-cb1a-4d74-aaf0-0180604c4f4c">
     <KistlBase:AssemblyName>PresentationCore, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="8ab0933e-9dda-4ae5-9cd8-d87aefe9b555">
     <KistlBase:AssemblyName>PresentationFramework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="1f064a7c-8424-4cea-b640-6a8ad0c31324">
     <KistlBase:AssemblyName>System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>0</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="2c8b4516-93cd-4a11-92ec-6c4d90cad8ac">
     <KistlBase:AssemblyName>System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="331a8ad3-8ca2-411c-9823-5f6ab2acfdcb">
     <KistlBase:AssemblyName>WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</KistlBase:AssemblyName>
-    <KistlBase:IsClientAssembly>false</KistlBase:IsClientAssembly>
+    <KistlBase:DeploymentRestrictions>0</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:Assembly>
   <KistlBase:TypeRef ExportGuid="25c0d6de-3768-4ebb-8210-4c789c869c1a">
@@ -7212,6 +7220,11 @@
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:FullName>Kistl.Client.Presentables.DataTypeModel</KistlBase:FullName>
     <KistlBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="48cdd708-4699-4da7-9cb0-83b2a8209c95">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:FullName>Kistl.Client.Presentables.EnumerationPropertyModel</KistlBase:FullName>
+    <KistlBase:Parent>2f35b21a-73c2-4e38-ab28-7ee2404684be</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="c597cf42-2788-4d9c-990b-ffffd2fe8a11">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>

@@ -21,9 +21,9 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// Legt fest, ob es sich um ein Client-Assembly handelt.
+        /// Deployment restrictions for this assembly
         /// </summary>
-		bool IsClientAssembly {
+		Kistl.App.Base.DeploymentRestriction? DeploymentRestrictions {
 			get;
 			set;
 		}

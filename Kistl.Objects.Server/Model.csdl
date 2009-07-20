@@ -314,8 +314,8 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="AssemblyName" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="DeploymentRestrictions__Implementation__" Type="Int32" Nullable="true" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
-    <Property Name="IsClientAssembly" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Module__Implementation__"
                         Relationship="Model.FK_Module_has_Assembly"
                         FromRole="Assemblies"

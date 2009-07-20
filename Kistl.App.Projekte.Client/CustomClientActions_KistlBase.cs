@@ -94,7 +94,7 @@ namespace Kistl.App.Base
             if (Helper.IsPersistedObject(obj))
             {
                 e.Result = String.Format("{0} {1}.{2}",
-                    obj.Implementor.Assembly.IsClientAssembly ? "[Client]" : "[Server]",
+                    obj.Implementor.Assembly.DeploymentRestrictions,
                     obj.InvokeOnObjectClass == null ? "unattached" : obj.InvokeOnObjectClass.ClassName,
                     obj.Method == null ? "unattached" : obj.Method.MethodName);
             }

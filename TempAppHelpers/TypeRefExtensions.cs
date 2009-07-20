@@ -166,7 +166,7 @@ namespace Kistl.App.Extensions
                 result = ctx.Create<Assembly>();
                 result.AssemblyName = ass.FullName;
                 result.Module = ctx.GetQuery<Module>().Single(m => m.ModuleName == "KistlBase");
-                result.IsClientAssembly = true;
+                result.DeploymentRestrictions = DeploymentRestriction.ClientOnly;
             }
             return result;
         }

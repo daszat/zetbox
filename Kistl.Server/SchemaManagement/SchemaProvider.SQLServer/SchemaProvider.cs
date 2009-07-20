@@ -26,14 +26,20 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
 
         public void CommitTransaction()
         {
-            tx.Commit();
-            tx = null;
+            if (tx != null)
+            {
+                tx.Commit();
+                tx = null;
+            }
         }
 
         public void RollbackTransaction()
         {
-            tx.Rollback();
-            tx = null;
+            if (tx != null)
+            {
+                tx.Rollback();
+                tx = null;
+            }
         }
 
         public void Dispose()

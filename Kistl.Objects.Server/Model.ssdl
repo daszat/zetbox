@@ -817,8 +817,8 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="DeploymentRestrictions" Type="int" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IsClientAssembly" Type="bit" Nullable="false" />
     <Property Name="fk_Module" Type="int" />
   </EntityType>
 	

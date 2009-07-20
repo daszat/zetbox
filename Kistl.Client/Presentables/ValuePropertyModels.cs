@@ -491,4 +491,29 @@ namespace Kistl.Client.Presentables
         #endregion
     }
 
+    public class EnumerationPropertyModel
+        : NullableValuePropertyModel<int>
+    {
+        public EnumerationPropertyModel(
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IDataObject obj, EnumerationProperty prop)
+            : base(appCtx, dataCtx, obj, prop)
+        {
+            this.PossibleValues = new ReadOnlyCollection<int>(prop.Enumeration.EnumerationEntries.Select(e => e.Value).ToList());
+            this.PossibleStringValues = new ReadOnlyCollection<string>(prop.Enumeration.EnumerationEntries.Select(e => e.Name).ToList());
+        }
+
+        #region Public Interface
+
+        public ReadOnlyCollection<int> PossibleValues { get; private set; }
+
+        /// <summary>
+        /// Gets a list of strings representing possible values.
+        /// Please use the strings's index to lookup the actual Value in <see cref="PossibleValues"/>.
+        /// </summary>
+        public ReadOnlyCollection<string> PossibleStringValues { get; private set; }
+
+        #endregion
+    }
+
 }

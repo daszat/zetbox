@@ -84,6 +84,50 @@ namespace Kistl.App.Base
         private string _AssemblyName;
 
         /// <summary>
+        /// Deployment restrictions for this assembly
+        /// </summary>
+        // enumeration property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.EnumerationPropertyTemplate
+        // implement the user-visible interface
+        public Kistl.App.Base.DeploymentRestriction? DeploymentRestrictions
+        {
+            get
+            {
+                return _DeploymentRestrictions;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (_DeploymentRestrictions != value)
+                {
+					var __oldValue = _DeploymentRestrictions;
+                    NotifyPropertyChanging("DeploymentRestrictions", "DeploymentRestrictions__Implementation__", __oldValue, value);
+                    _DeploymentRestrictions = value;
+                    NotifyPropertyChanged("DeploymentRestrictions", "DeploymentRestrictions__Implementation__", __oldValue, value);
+                }
+            }
+        }
+        
+        /// <summary>backing store for DeploymentRestrictions</summary>
+        private Kistl.App.Base.DeploymentRestriction? _DeploymentRestrictions;
+        
+        /// <summary>EF sees only this property, for DeploymentRestrictions</summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int DeploymentRestrictions__Implementation__
+        {
+            get
+            {
+                return (int)this.DeploymentRestrictions;
+            }
+            set
+            {
+                this.DeploymentRestrictions = (Kistl.App.Base.DeploymentRestriction?)value;
+            }
+        }
+        
+
+        /// <summary>
         /// Export Guid
         /// </summary>
         // value type property
@@ -110,34 +154,6 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-
-        /// <summary>
-        /// Legt fest, ob es sich um ein Client-Assembly handelt.
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
-        public virtual bool IsClientAssembly
-        {
-            get
-            {
-                return _IsClientAssembly;
-            }
-            set
-            {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (_IsClientAssembly != value)
-                {
-					var __oldValue = _IsClientAssembly;
-                    NotifyPropertyChanging("IsClientAssembly", __oldValue, value);
-                    _IsClientAssembly = value;
-                    NotifyPropertyChanged("IsClientAssembly", __oldValue, value);
-                }
-            }
-        }
-        private bool _IsClientAssembly;
 
         /// <summary>
         /// Module
@@ -239,8 +255,8 @@ namespace Kistl.App.Base
 			var me = (Assembly)this;
 
 			me.AssemblyName = other.AssemblyName;
+			me.DeploymentRestrictions = other.DeploymentRestrictions;
 			me.ExportGuid = other.ExportGuid;
-			me.IsClientAssembly = other.IsClientAssembly;
 			this._fk_Module = otherImpl._fk_Module;
 		}
 
@@ -302,20 +318,20 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "DeploymentRestrictions":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(188).Constraints
+						.Where(c => !c.IsValid(this, this.DeploymentRestrictions))
+						.Select(c => c.GetErrorText(this, this.DeploymentRestrictions))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "ExportGuid":
 				{
 					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(8).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "IsClientAssembly":
-				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(71).Constraints
-						.Where(c => !c.IsValid(this, this.IsClientAssembly))
-						.Select(c => c.GetErrorText(this, this.IsClientAssembly))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -353,8 +369,8 @@ namespace Kistl.App.Base
 			
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._AssemblyName, binStream);
+            BinarySerializer.ToStream((int)((Assembly)this).DeploymentRestrictions, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
-            BinarySerializer.ToStream(this._IsClientAssembly, binStream);
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
         }
 
@@ -363,8 +379,8 @@ namespace Kistl.App.Base
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._AssemblyName, binStream);
+            BinarySerializer.FromStreamConverter(v => ((Assembly)this).DeploymentRestrictions = (Kistl.App.Base.DeploymentRestriction)v, binStream);
             BinarySerializer.FromStream(out this._ExportGuid, binStream);
-            BinarySerializer.FromStream(out this._IsClientAssembly, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
@@ -373,8 +389,8 @@ namespace Kistl.App.Base
 			
             base.ToStream(xml);
             XmlStreamer.ToStream(this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
+            XmlStreamer.ToStream((int)this.DeploymentRestrictions, xml, "DeploymentRestrictions", "Kistl.App.Base");
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._IsClientAssembly, xml, "IsClientAssembly", "Kistl.App.Base");
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
         }
 
@@ -383,8 +399,8 @@ namespace Kistl.App.Base
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
+            XmlStreamer.FromStreamConverter(v => ((Assembly)this).DeploymentRestrictions = (Kistl.App.Base.DeploymentRestriction)v, xml, "DeploymentRestrictions", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsClientAssembly, xml, "IsClientAssembly", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
         }
 
@@ -394,16 +410,15 @@ namespace Kistl.App.Base
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
-	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsClientAssembly, xml, "IsClientAssembly", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.DeploymentRestrictions, xml, "DeploymentRestrictions", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
+            XmlStreamer.FromStreamConverter(v => ((Assembly)this).DeploymentRestrictions = (Kistl.App.Base.DeploymentRestriction)v, xml, "DeploymentRestrictions", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsClientAssembly, xml, "IsClientAssembly", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
         }
 
