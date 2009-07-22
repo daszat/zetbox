@@ -43,7 +43,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -231,7 +231,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_MemberName != value)
                 {
 					var __oldValue = _MemberName;

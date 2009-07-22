@@ -46,6 +46,16 @@ namespace Kistl.App.Test
 			}
 		}
 		
+		/// <summary>List of all Company</summary>
+		/// Describes a Company
+		public IQueryable<Company> Companies
+		{ 
+			get
+			{
+				return Context.GetQuery<Company>();
+			}
+		}
+		
 		/// <summary>List of all AnotherTest</summary>
 		/// 
 		public IQueryable<AnotherTest> AnotherTests

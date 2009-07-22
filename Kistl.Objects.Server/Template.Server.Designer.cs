@@ -43,7 +43,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -137,7 +137,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DisplayedTypeFullName != value)
                 {
 					var __oldValue = _DisplayedTypeFullName;
@@ -165,7 +165,7 @@ namespace Kistl.App.GUI
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DisplayName != value)
                 {
 					var __oldValue = _DisplayName;

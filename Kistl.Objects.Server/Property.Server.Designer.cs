@@ -43,7 +43,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_AltText != value)
                 {
 					var __oldValue = _AltText;
@@ -99,7 +99,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_CategoryTags != value)
                 {
 					var __oldValue = _CategoryTags;
@@ -176,7 +176,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
 					var __oldValue = _Description;
@@ -204,7 +204,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -232,7 +232,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsIndexed != value)
                 {
 					var __oldValue = _IsIndexed;
@@ -260,7 +260,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsList != value)
                 {
 					var __oldValue = _IsList;
@@ -288,7 +288,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsNullable != value)
                 {
 					var __oldValue = _IsNullable;
@@ -448,7 +448,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_PropertyName != value)
                 {
 					var __oldValue = _PropertyName;

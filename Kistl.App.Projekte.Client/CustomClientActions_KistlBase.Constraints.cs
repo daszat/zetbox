@@ -48,18 +48,6 @@ namespace Kistl.App.Base
             e.Result = String.IsNullOrEmpty(obj.Reason) ? "Value must be set" : String.Format("Value must be set: {0}", obj.Reason);
         }
 
-        public void OnToString_NotNullableConstraint(NotNullableConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            if (obj.ConstrainedProperty == null)
-            {
-                e.Result = String.Format("The ConstrainedProperty should not be NULL");
-            }
-            else
-            {
-                e.Result = String.Format("{0} should not be NULL", obj.ConstrainedProperty.PropertyName);
-            }
-        }
-
         #endregion
 
         #region IntegerRangeConstraint
@@ -111,10 +99,6 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnToString_IntegerRangeConstraint(IntegerRangeConstraint obj, MethodReturnEventArgs<string> e)
-        {
-            e.Result = String.Format("{0} <= {1} <= {2}", obj.Min, obj.ConstrainedProperty.PropertyName, obj.Max);
-        }
 
         #endregion
 
@@ -161,27 +145,7 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnToString_StringRangeConstraint(StringRangeConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            // Only display min if there is an actual restriction.
-            if (obj.MinLength > 0)
-            {
-                e.Result = String.Format("{0} should have at least {1} and at most {2} characters",
-                    obj.ConstrainedProperty == null
-                        ? "a property"
-                        : obj.ConstrainedProperty.PropertyName,
-                    obj.MinLength,
-                    obj.MaxLength);
-            }
-            else
-            {
-                e.Result = String.Format("{0} should have at most {1} characters",
-                    obj.ConstrainedProperty == null
-                        ? "a property"
-                        : obj.ConstrainedProperty.PropertyName,
-                    obj.MaxLength);
-            }
-        }
+
 
         #endregion
 
@@ -212,10 +176,6 @@ namespace Kistl.App.Base
                 constrainedObject.InvokeOnObjectClass);
         }
 
-        public void OnToString_MethodInvocationConstraint(MethodInvocationConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            e.Result = "MethodIvocation's Method.ObjectClass should be assignable from InvokeOnObjectClass";
-        }
 
         #endregion
 
@@ -258,10 +218,6 @@ namespace Kistl.App.Base
             e.Result = string.Format("'{0}' is not a valid identifier", constrainedValueParam);
         }
 
-        public void OnToString_IsValidIdentifierConstraint(IsValidIdentifierConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
-        {
-            e.Result = "Method names, property names, enum names etc. must be valid names.";
-        }
         #endregion
 
         #region ConsistentNavigatorConstraint
@@ -356,10 +312,6 @@ namespace Kistl.App.Base
             e.Result = String.Join("\n", result.ToArray());
         }
 
-        public void OnToString_ConsistentNavigatorConstraint(ConsistentNavigatorConstraint obj, MethodReturnEventArgs<string> e)
-        {
-            e.Result = "The navigator should be consistent with the defining Relation.";
-        }
 
         #endregion
     }

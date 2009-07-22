@@ -8,6 +8,7 @@
     <EntitySet Name="Assembly" EntityType="Model.Assembly" />
     <EntitySet Name="Auftrag" EntityType="Model.Auftrag" />
     <EntitySet Name="BaseParameter" EntityType="Model.BaseParameter" />
+    <EntitySet Name="Company" EntityType="Model.Company" />
     <EntitySet Name="Constraint" EntityType="Model.Constraint" />
     <EntitySet Name="CurrentSchema" EntityType="Model.CurrentSchema" />
     <EntitySet Name="DataType" EntityType="Model.DataType" />
@@ -356,6 +357,13 @@
                         ToRole="Method" />
     <Property Name="Method_pos" Type="Int32" Nullable="true" />
     <Property Name="ParameterName" Type="String" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
   </EntityType>
   <EntityType Name="Constraint">
     <Key>

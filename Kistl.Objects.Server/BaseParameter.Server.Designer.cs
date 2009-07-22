@@ -43,7 +43,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
 					var __oldValue = _Description;
@@ -99,7 +99,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsList != value)
                 {
 					var __oldValue = _IsList;
@@ -155,7 +155,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsReturnParameter != value)
                 {
 					var __oldValue = _IsReturnParameter;
@@ -243,7 +243,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Method_pos != value)
                 {
 					var __oldValue = _Method_pos;
@@ -272,7 +272,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ParameterName != value)
                 {
 					var __oldValue = _ParameterName;

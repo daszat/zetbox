@@ -50,7 +50,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Max != value)
                 {
 					var __oldValue = _Max;
@@ -78,7 +78,7 @@ namespace Kistl.App.Base
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Min != value)
                 {
 					var __oldValue = _Min;

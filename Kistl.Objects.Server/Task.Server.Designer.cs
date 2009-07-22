@@ -43,7 +43,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
@@ -71,7 +71,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Aufwand != value)
                 {
 					var __oldValue = _Aufwand;
@@ -99,7 +99,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DatumBis != value)
                 {
 					var __oldValue = _DatumBis;
@@ -127,7 +127,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_DatumVon != value)
                 {
 					var __oldValue = _DatumVon;
@@ -155,7 +155,7 @@ namespace Kistl.App.Projekte
             }
             set
             {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Name != value)
                 {
 					var __oldValue = _Name;

@@ -70,6 +70,7 @@
     <Compile Include="BoolParameter.Server.Designer.cs" />
     <Compile Include="BoolProperty.Server.Designer.cs" />
     <Compile Include="CLRObjectParameter.Server.Designer.cs" />
+    <Compile Include="Company.Server.Designer.cs" />
     <Compile Include="ConsistentNavigatorConstraint.Server.Designer.cs" />
     <Compile Include="Constraint.Server.Designer.cs" />
     <Compile Include="CurrentSchema.Server.Designer.cs" />

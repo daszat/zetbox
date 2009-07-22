@@ -284,6 +284,10 @@ namespace Kistl.API.Client
             IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
             Attach(obj);
             OnObjectCreated(obj);
+            if (obj is IDataObject)
+            {
+                ((IDataObject)obj).NotifyCreated();
+            }
             return obj;
         }
 
@@ -380,8 +384,14 @@ namespace Kistl.API.Client
             CheckDisposed();
             if (obj == null) throw new ArgumentNullException("obj");
             if (obj.Context != this) throw new InvalidOperationException("The Object does not belong to the current Context");
+
             ((BaseClientPersistenceObject)obj).SetDeleted();
+
             OnObjectDeleted(obj);
+            if (obj is IDataObject)
+            {
+                ((IDataObject)obj).NotifyDeleting();
+            }
         }
 
         /// <summary>
@@ -423,6 +433,11 @@ namespace Kistl.API.Client
                 objectsToDetach.Add(obj);
             }
 
+            var notifySaveList = objectsToSubmit.OfType<IDataObject>().Where(o => o.ObjectState.In(DataObjectState.New, DataObjectState.Modified));
+
+            // Fire PreSave
+            notifySaveList.ForEach(o => o.NotifyPreSave());
+
             // Submit to server
             var objectsFromServer = Proxy.Current.SetObjects(objectsToSubmit.Cast<IPersistenceObject>());
 
@@ -461,6 +476,9 @@ namespace Kistl.API.Client
             changedObjects.ForEach(obj => this.Attach(obj));
 
             changedObjects.ForEach(obj => obj.PlaybackNotifications());
+
+            // Fire PostSave
+            notifySaveList.ForEach(o => o.NotifyPostSave());
 
             return objectsToSubmit.Count;
         }

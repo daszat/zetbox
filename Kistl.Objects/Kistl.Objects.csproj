@@ -53,6 +53,7 @@
     <Compile Include="BoolParameter.Interface.Designer.cs" />
     <Compile Include="BoolProperty.Interface.Designer.cs" />
     <Compile Include="CLRObjectParameter.Interface.Designer.cs" />
+    <Compile Include="Company.Interface.Designer.cs" />
     <Compile Include="ConsistentNavigatorConstraint.Interface.Designer.cs" />
     <Compile Include="Constraint.Interface.Designer.cs" />
     <Compile Include="CurrentSchema.Interface.Designer.cs" />

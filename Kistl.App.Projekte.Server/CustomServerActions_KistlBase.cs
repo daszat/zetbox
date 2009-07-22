@@ -8,45 +8,7 @@ namespace Kistl.App.Base
 {
     public class CustomServerActions_KistlBase
     {
-        #region EnsureDefaultMethods
-        private void CheckDefaultMethod(Kistl.App.Base.ObjectClass obj, string methodName, Kistl.App.Base.Module kistlModule)
-        {
-            var m = obj.Methods.SingleOrDefault(i => i.MethodName == methodName && i.Module == kistlModule);
-            if (m == null)
-            {
-                m = obj.Context.Create<Kistl.App.Base.Method>();
-                m.MethodName = methodName;
-                m.Module = kistlModule;
-                obj.Methods.Add(m);
-            }
-        }
-
-        private void EnsureDefaultMethods(Kistl.App.Base.ObjectClass obj)
-        {
-            // Only for BaseClasses
-            if (obj.BaseObjectClass == null)
-            {
-                Kistl.App.Base.Module kistlModule = obj.Context.GetQuery<Kistl.App.Base.Module>().First(md => md.ModuleName == "KistlBase");
-                CheckDefaultMethod(obj, "ToString", kistlModule);
-                CheckDefaultMethod(obj, "PreSave", kistlModule);
-                CheckDefaultMethod(obj, "PostSave", kistlModule);
-                CheckDefaultMethod(obj, "Created", kistlModule);
-                CheckDefaultMethod(obj, "Deleting", kistlModule);
-            }
-        }
-        #endregion
-
         #region Save
-        public void OnPreSave_ObjectClass(Kistl.App.Base.ObjectClass obj)
-        {
-            if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.ClassName))
-            {
-                throw new ArgumentException(string.Format("ClassName {0} has some illegal chars", obj.ClassName));
-            }
-
-            EnsureDefaultMethods(obj);
-        }
-
         public void OnPreSave_BaseParameter(Kistl.App.Base.BaseParameter obj)
         {
             if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.ParameterName))

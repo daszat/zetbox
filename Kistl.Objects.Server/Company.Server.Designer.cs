@@ -20,14 +20,14 @@ namespace Kistl.App.Test
     using System.Data.Objects.DataClasses;
 
     /// <summary>
-    /// 
+    /// Describes a Company
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="AnotherTest")]
-    [System.Diagnostics.DebuggerDisplay("AnotherTest")]
-    public class AnotherTest__Implementation__ : BaseServerDataObject_EntityFramework, AnotherTest
+    [EdmEntityType(NamespaceName="Model", Name="Company")]
+    [System.Diagnostics.DebuggerDisplay("Company")]
+    public class Company__Implementation__ : BaseServerDataObject_EntityFramework, Company
     {
     
-		public AnotherTest__Implementation__()
+		public Company__Implementation__()
 		{
             {
             }
@@ -55,18 +55,47 @@ namespace Kistl.App.Test
         }
         private int _ID;
 
+        /// <summary>
+        /// Company name
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Name != value)
+                {
+					var __oldValue = _Name;
+                    NotifyPropertyChanging("Name", __oldValue, value);
+                    _Name = value;
+                    NotifyPropertyChanged("Name", __oldValue, value);
+                }
+            }
+        }
+        private string _Name;
+
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(AnotherTest));
+			return new InterfaceType(typeof(Company));
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (AnotherTest)obj;
-			var otherImpl = (AnotherTest__Implementation__)obj;
-			var me = (AnotherTest)this;
+			var other = (Company)obj;
+			var otherImpl = (Company__Implementation__)obj;
+			var me = (Company)this;
 
+			me.Name = other.Name;
 		}
 
         // tail template
@@ -77,43 +106,60 @@ namespace Kistl.App.Test
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_AnotherTest != null)
+            if (OnToString_Company != null)
             {
-                OnToString_AnotherTest(this, e);
+                OnToString_Company(this, e);
             }
             return e.Result;
         }
-        public event ToStringHandler<AnotherTest> OnToString_AnotherTest;
+        public event ToStringHandler<Company> OnToString_Company;
 
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_AnotherTest != null) OnPreSave_AnotherTest(this);
+            if (OnPreSave_Company != null) OnPreSave_Company(this);
         }
-        public event ObjectEventHandler<AnotherTest> OnPreSave_AnotherTest;
+        public event ObjectEventHandler<Company> OnPreSave_Company;
 
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_AnotherTest != null) OnPostSave_AnotherTest(this);
+            if (OnPostSave_Company != null) OnPostSave_Company(this);
         }
-        public event ObjectEventHandler<AnotherTest> OnPostSave_AnotherTest;
+        public event ObjectEventHandler<Company> OnPostSave_Company;
 
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_AnotherTest != null) OnCreated_AnotherTest(this);
+            if (OnCreated_Company != null) OnCreated_Company(this);
         }
-        public event ObjectEventHandler<AnotherTest> OnCreated_AnotherTest;
+        public event ObjectEventHandler<Company> OnCreated_Company;
 
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_AnotherTest != null) OnDeleting_AnotherTest(this);
+            if (OnDeleting_Company != null) OnDeleting_Company(this);
         }
-        public event ObjectEventHandler<AnotherTest> OnDeleting_AnotherTest;
+        public event ObjectEventHandler<Company> OnDeleting_Company;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "Name":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(189).Constraints
+						.Where(c => !c.IsValid(this, this.Name))
+						.Select(c => c.GetErrorText(this, this.Name))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{
@@ -126,24 +172,28 @@ namespace Kistl.App.Test
         {
 			
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(this._Name, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
 			
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
 			
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Test");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Test");
         }
 
 #endregion

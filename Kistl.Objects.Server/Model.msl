@@ -86,6 +86,14 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Company">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Company)">
+	    <MappingFragment StoreEntitySet="Company">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Constraint">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Constraint)">
 	    <MappingFragment StoreEntitySet="Constraint">

@@ -18,8 +18,8 @@
         <Button DockPanel.Dock="Right"
                 Visibility="{Binding AllowNullInput, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Click="ClearValueHandler">Clear Value</Button>
-        <ComboBox ItemsSource="{Binding PossibleValues, Mode=OneWay}"
-                  SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+        <ComboBox ItemsSource="{Binding PossibleValues, Mode=OneWay}" DisplayMemberPath="Value" SelectedValuePath="Key"
+                  SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
     </DockPanel>
 
 </view:PropertyView>

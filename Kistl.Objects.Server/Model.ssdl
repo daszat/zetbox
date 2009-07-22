@@ -12,6 +12,7 @@
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies"/>
     <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Table="Auftraege"/>
     <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Table="BaseParameters"/>
+    <EntitySet Name="Company" EntityType="Model.Store.Company" Table="Companies"/>
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Table="Constraints"/>
     <EntitySet Name="CurrentSchema" EntityType="Model.Store.CurrentSchema" Table="CurrentSchema"/>
     <EntitySet Name="DataType" EntityType="Model.Store.DataType" Table="DataTypes"/>
@@ -1121,6 +1122,14 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->

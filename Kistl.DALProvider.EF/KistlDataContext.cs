@@ -304,13 +304,13 @@ namespace Kistl.DALProvider.EF
             }
 #endif
 
-            var saveList = _ctx.ObjectStateManager
+            var notifySaveList = _ctx.ObjectStateManager
                 .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
                 .Select(e => e.Entity)
-                .OfType<IPersistenceObject>()
+                .OfType<IDataObject>()
                 .ToList();
 
-            saveList.OfType<IDataObject>().ForEach(obj => obj.NotifyPreSave());
+            notifySaveList.ForEach(obj => obj.NotifyPreSave());
 
             int result = 0;
             try
@@ -323,7 +323,7 @@ namespace Kistl.DALProvider.EF
                 throw updex.InnerException;
             }
 
-            saveList.OfType<IDataObject>().ForEach(obj => obj.NotifyPostSave());
+            notifySaveList.ForEach(obj => obj.NotifyPostSave());
 
             return result;
         }

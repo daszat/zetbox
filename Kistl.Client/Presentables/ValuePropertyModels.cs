@@ -300,7 +300,7 @@ namespace Kistl.Client.Presentables
 
                 if (!object.Equals(GetPropertyValue(), value))
                 {
-                    Object.SetPropertyValue<Nullable<TValue>>(Property.PropertyName, value);
+                    SetPropertyValue(value);
                     CheckConstraints();
 
                     OnPropertyChanged("Value");
@@ -346,6 +346,15 @@ namespace Kistl.Client.Presentables
         protected virtual TValue? GetPropertyValue()
         {
             return Object.GetPropertyValue<Nullable<TValue>>(Property.PropertyName);
+        }
+
+        /// <summary>
+        /// Loads the Value from the object.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual void SetPropertyValue(TValue? val)
+        {
+            Object.SetPropertyValue<Nullable<TValue>>(Property.PropertyName, val);
         }
 
         #endregion
@@ -483,19 +492,13 @@ namespace Kistl.Client.Presentables
             IDataObject obj, EnumerationProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
-            this.PossibleValues = new ReadOnlyCollection<TValue>(Enum.GetValues(typeof(TValue)).Cast<TValue>().ToList());
-            this.PossibleStringValues = new ReadOnlyCollection<string>(this.PossibleValues.Select(v => v.ToString()).ToList());
+            this.PossibleValues = new ReadOnlyCollection<KeyValuePair<TValue, string>>(Enum.GetValues(typeof(TValue))
+                .Cast<TValue>().Select(e => new KeyValuePair<TValue, string>(e, e.ToString())).ToList());
         }
 
         #region Public Interface
 
-        public ReadOnlyCollection<TValue> PossibleValues { get; private set; }
-
-        /// <summary>
-        /// Gets a list of strings representing possible values.
-        /// Please use the strings's index to lookup the actual Value in <see cref="PossibleValues"/>.
-        /// </summary>
-        public ReadOnlyCollection<string> PossibleStringValues { get; private set; }
+        public ReadOnlyCollection<KeyValuePair<TValue, string>> PossibleValues { get; private set; }
 
         #endregion
     }
@@ -508,19 +511,12 @@ namespace Kistl.Client.Presentables
             IDataObject obj, EnumerationProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
-            this.PossibleValues = new ReadOnlyCollection<int>(prop.Enumeration.EnumerationEntries.Select(e => e.Value).ToList());
-            this.PossibleStringValues = new ReadOnlyCollection<string>(prop.Enumeration.EnumerationEntries.Select(e => e.Name).ToList());
+            this.PossibleValues = new ReadOnlyCollection<KeyValuePair<int, string>>(prop.Enumeration.EnumerationEntries.Select(e => new KeyValuePair<int, string>(e.Value, e.Name)).ToList());
         }
 
         #region Public Interface
 
-        public ReadOnlyCollection<int> PossibleValues { get; private set; }
-
-        /// <summary>
-        /// Gets a list of strings representing possible values.
-        /// Please use the strings's index to lookup the actual Value in <see cref="PossibleValues"/>.
-        /// </summary>
-        public ReadOnlyCollection<string> PossibleStringValues { get; private set; }
+        public ReadOnlyCollection<KeyValuePair<int, string>> PossibleValues { get; private set; }
 
         #endregion
 
@@ -538,6 +534,19 @@ namespace Kistl.Client.Presentables
             {
                 return (int)val;
             }
+        }
+
+        protected override void SetPropertyValue(int? val)
+        {
+            // Work around the fact that the conversion from enumeration to int? is not possible.
+            if (val == null)
+            {
+                Object.SetPropertyValue<object>(Property.PropertyName, null);
+            }
+            else
+            {
+                Object.SetPropertyValue<object>(Property.PropertyName, Enum.ToObject(((EnumerationProperty)Property).Enumeration.GetDataType(), val));
+            } 
         }
 
         #endregion

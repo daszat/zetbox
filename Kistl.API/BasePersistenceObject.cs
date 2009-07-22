@@ -21,7 +21,7 @@ using System.Collections.Generic;
         /// <summary>
         /// Gets a value indicating whether values of this object can be set. This is only a shorthand for asking the context for read-only status.
         /// </summary>
-        bool IPersistenceObject.IsReadonly
+        public bool IsReadonly
         {
             get { return this.Context != null ? this.Context.IsReadonly : false; }
         }
