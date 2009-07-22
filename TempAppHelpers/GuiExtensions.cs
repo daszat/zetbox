@@ -94,7 +94,13 @@ namespace Kistl.App.Extensions
             // fall back to any available control, if we don't have one with matching read-only state
             var viewDesc = result.FirstOrDefault(vd => vd.IsReadOnly == readOnly) ?? result.FirstOrDefault();
 
-            if (viewDesc != null && viewDesc.PresentedModelDescriptor != self)
+            if (viewDesc == null)
+            {
+                System.Diagnostics.Trace.TraceWarning("Found no {0} ViewDescriptor for {1}",
+                    vt,
+                    self);
+            }
+            else if (viewDesc.PresentedModelDescriptor != self)
             {
                 System.Diagnostics.Trace.TraceWarning("Using inherited {0} ViewDescriptor from {1} for {2}",
                     vt,
