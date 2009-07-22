@@ -92,7 +92,7 @@ namespace Kistl.Client.Presentables
 
         #region Utilities and UI callbacks
 
-        protected override void GetPropertyValue()
+        protected override void UpdatePropertyValue()
         {
             IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.PropertyName);
             var newModel = newValue == null ? null : (DataObjectModel)Factory.CreateDefaultModel(DataContext, newValue);

@@ -211,7 +211,7 @@ namespace Kistl.Client.Presentables
 
         #region Utilities and UI callbacks
 
-        protected override void GetPropertyValue()
+        protected override void UpdatePropertyValue()
         {
         }
 

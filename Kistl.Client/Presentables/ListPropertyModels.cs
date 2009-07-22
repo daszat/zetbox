@@ -147,7 +147,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         protected abstract void DeleteItemFromDataStore(TElement mdl);
 
-        protected override void GetPropertyValue()
+        protected override void UpdatePropertyValue()
         {
             // AsyncList takes care of all that
         }

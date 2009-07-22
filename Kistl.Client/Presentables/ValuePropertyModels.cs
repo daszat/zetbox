@@ -91,7 +91,7 @@ namespace Kistl.Client.Presentables
             this.Property.PropertyChanged += this.PropertyPropertyChangedHandler;
             this.Object.PropertyChanged += this.ObjectPropertyChangedHandler;
 
-            this.GetPropertyValue();
+            this.UpdatePropertyValue();
             this.CheckConstraints();
         }
 
@@ -125,9 +125,9 @@ namespace Kistl.Client.Presentables
         #region Utilities and UI callbacks
 
         /// <summary>
-        /// Loads the Value from the object into the cache.
+        /// Updates the Value in the cache.
         /// </summary>
-        protected abstract void GetPropertyValue();
+        protected abstract void UpdatePropertyValue();
 
         /// <summary>
         /// Checks constraints on the object and puts the results into the cache.
@@ -145,7 +145,7 @@ namespace Kistl.Client.Presentables
         {
             if (e.PropertyName == Property.PropertyName)
             {
-                this.GetPropertyValue();
+                this.UpdatePropertyValue();
             }
 
             // TODO: ask constraints about dependencies and reduce check frequency on object changes
@@ -298,7 +298,7 @@ namespace Kistl.Client.Presentables
 
                 _valueCache = value;
 
-                if (!object.Equals(Object.GetPropertyValue<Nullable<TValue>>(Property.PropertyName), value))
+                if (!object.Equals(GetPropertyValue(), value))
                 {
                     Object.SetPropertyValue<Nullable<TValue>>(Property.PropertyName, value);
                     CheckConstraints();
@@ -334,9 +334,18 @@ namespace Kistl.Client.Presentables
 
         #region Utilities and UI callbacks
 
-        protected override void GetPropertyValue()
+        protected override void UpdatePropertyValue()
         {
-            this.Value = Object.GetPropertyValue<Nullable<TValue>>(Property.PropertyName);
+            this.Value = GetPropertyValue();
+        }
+
+        /// <summary>
+        /// Loads the Value from the object.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual TValue? GetPropertyValue()
+        {
+            return Object.GetPropertyValue<Nullable<TValue>>(Property.PropertyName);
         }
 
         #endregion
@@ -437,7 +446,7 @@ namespace Kistl.Client.Presentables
 
         #region Utilities and UI callbacks
 
-        protected override void GetPropertyValue()
+        protected override void UpdatePropertyValue()
         {
             this.Value = Object.GetPropertyValue<TValue>(Property.PropertyName);
         }
@@ -512,6 +521,24 @@ namespace Kistl.Client.Presentables
         /// Please use the strings's index to lookup the actual Value in <see cref="PossibleValues"/>.
         /// </summary>
         public ReadOnlyCollection<string> PossibleStringValues { get; private set; }
+
+        #endregion
+
+        #region Utilities and UI callbacks
+
+        protected override int? GetPropertyValue()
+        {
+            // Work around the fact that the conversion from enumeration to int? is not possible.
+            object val = Object.GetPropertyValue<object>(Property.PropertyName);
+            if (val == null)
+            {
+                return null;
+            }
+            else
+            {
+                return (int)val;
+            }
+        }
 
         #endregion
     }
