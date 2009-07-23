@@ -400,7 +400,7 @@ namespace Kistl.App.Projekte
 			{
 				case "Auftragsname":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(88).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(24).Constraints
 						.Where(c => !c.IsValid(this, this.Auftragsname))
 						.Select(c => c.GetErrorText(this, this.Auftragsname))
 						.ToArray();
@@ -409,7 +409,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Auftragswert":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(115).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(55).Constraints
 						.Where(c => !c.IsValid(this, this.Auftragswert))
 						.Select(c => c.GetErrorText(this, this.Auftragswert))
 						.ToArray();
@@ -418,7 +418,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Kunde":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(167).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(108).Constraints
 						.Where(c => !c.IsValid(this, this.Kunde))
 						.Select(c => c.GetErrorText(this, this.Kunde))
 						.ToArray();
@@ -427,7 +427,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Mitarbeiter":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(173).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(109).Constraints
 						.Where(c => !c.IsValid(this, this.Mitarbeiter))
 						.Select(c => c.GetErrorText(this, this.Mitarbeiter))
 						.ToArray();
@@ -436,7 +436,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Projekt":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(164).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(116).Constraints
 						.Where(c => !c.IsValid(this, this.Projekt))
 						.Select(c => c.GetErrorText(this, this.Projekt))
 						.ToArray();
@@ -452,13 +452,6 @@ namespace Kistl.App.Projekte
 		{
 			// fix direct object references
 
-			if (_fk_guid_Projekt.HasValue)
-				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_Projekt.Value);
-			else if (_fk_Projekt.HasValue)
-				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
-			else
-				Projekt__Implementation__ = null;
-
 			if (_fk_guid_Kunde.HasValue)
 				Kunde__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_guid_Kunde.Value);
 			else if (_fk_Kunde.HasValue)
@@ -472,6 +465,13 @@ namespace Kistl.App.Projekte
 				Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
 			else
 				Mitarbeiter__Implementation__ = null;
+
+			if (_fk_guid_Projekt.HasValue)
+				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_Projekt.Value);
+			else if (_fk_Projekt.HasValue)
+				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
+			else
+				Projekt__Implementation__ = null;
 		}
 #region Serializer
 

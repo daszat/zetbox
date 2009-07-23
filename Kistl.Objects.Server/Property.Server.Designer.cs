@@ -161,6 +161,72 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Property can have a default value
+        /// </summary>
+    /*
+    Relation: FK_Property_has_DefaultPropertyValue
+    A: One Property as Property
+    B: ZeroOrOne DefaultPropertyValue as DefaultValue
+    Preferred Storage: MergeIntoB
+    */
+        // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.DefaultPropertyValue DefaultValue
+        {
+            get
+            {
+                return DefaultValue__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                DefaultValue__Implementation__ = (Kistl.App.Base.DefaultPropertyValue__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_DefaultValue;
+        private Guid? _fk_guid_DefaultValue = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_DefaultPropertyValue", "DefaultValue")]
+        public Kistl.App.Base.DefaultPropertyValue__Implementation__ DefaultValue__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.DefaultPropertyValue__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DefaultPropertyValue__Implementation__>(
+                        "Model.FK_Property_has_DefaultPropertyValue",
+                        "DefaultValue");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                return r.Value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.DefaultPropertyValue__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DefaultPropertyValue__Implementation__>(
+                        "Model.FK_Property_has_DefaultPropertyValue",
+                        "DefaultValue");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                r.Value = (Kistl.App.Base.DefaultPropertyValue__Implementation__)value;
+            }
+        }
+        
+        
+
+        /// <summary>
         /// Description of this Property
         /// </summary>
         // value type property
@@ -590,6 +656,7 @@ namespace Kistl.App.Base
 			me.IsList = other.IsList;
 			me.IsNullable = other.IsNullable;
 			me.PropertyName = other.PropertyName;
+			this._fk_DefaultValue = otherImpl._fk_DefaultValue;
 			this._fk_Module = otherImpl._fk_Module;
 			this._fk_ObjectClass = otherImpl._fk_ObjectClass;
 			this._fk_ValueModelDescriptor = otherImpl._fk_ValueModelDescriptor;
@@ -627,6 +694,15 @@ namespace Kistl.App.Base
 
         public override void NotifyCreated()
         {
+            try
+            {
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(161).DefaultValue.GetDefaultValue();
+            }
+            catch (NotImplementedException)
+            {
+                // TODO: Find a better way to ignore bootstrap errors.
+                // During bootstrapping no MethodInvocation is registred
+            }
             base.NotifyCreated();
             if (OnCreated_Property != null) OnCreated_Property(this);
         }
@@ -646,7 +722,7 @@ namespace Kistl.App.Base
 			{
 				case "AltText":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(154).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(9).Constraints
 						.Where(c => !c.IsValid(this, this.AltText))
 						.Select(c => c.GetErrorText(this, this.AltText))
 						.ToArray();
@@ -655,7 +731,7 @@ namespace Kistl.App.Base
 				}
 				case "CategoryTags":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(162).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(33).Constraints
 						.Where(c => !c.IsValid(this, this.CategoryTags))
 						.Select(c => c.GetErrorText(this, this.CategoryTags))
 						.ToArray();
@@ -664,16 +740,25 @@ namespace Kistl.App.Base
 				}
 				case "Constraints":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(50).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(64).Constraints
 						.Where(c => !c.IsValid(this, this.Constraints))
 						.Select(c => c.GetErrorText(this, this.Constraints))
 						.ToArray();
 					
 					return String.Join("; ", errors);
 				}
+				case "DefaultValue":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(84).Constraints
+						.Where(c => !c.IsValid(this, this.DefaultValue))
+						.Select(c => c.GetErrorText(this, this.DefaultValue))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "Description":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(95).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(34).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -682,7 +767,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(9).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(161).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -691,7 +776,7 @@ namespace Kistl.App.Base
 				}
 				case "IsIndexed":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(77).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(44).Constraints
 						.Where(c => !c.IsValid(this, this.IsIndexed))
 						.Select(c => c.GetErrorText(this, this.IsIndexed))
 						.ToArray();
@@ -700,7 +785,7 @@ namespace Kistl.App.Base
 				}
 				case "IsList":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(78).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(45).Constraints
 						.Where(c => !c.IsValid(this, this.IsList))
 						.Select(c => c.GetErrorText(this, this.IsList))
 						.ToArray();
@@ -709,7 +794,7 @@ namespace Kistl.App.Base
 				}
 				case "IsNullable":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(76).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(43).Constraints
 						.Where(c => !c.IsValid(this, this.IsNullable))
 						.Select(c => c.GetErrorText(this, this.IsNullable))
 						.ToArray();
@@ -718,7 +803,7 @@ namespace Kistl.App.Base
 				}
 				case "Module":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(149).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(91).Constraints
 						.Where(c => !c.IsValid(this, this.Module))
 						.Select(c => c.GetErrorText(this, this.Module))
 						.ToArray();
@@ -727,7 +812,7 @@ namespace Kistl.App.Base
 				}
 				case "ObjectClass":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(134).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(92).Constraints
 						.Where(c => !c.IsValid(this, this.ObjectClass))
 						.Select(c => c.GetErrorText(this, this.ObjectClass))
 						.ToArray();
@@ -736,7 +821,7 @@ namespace Kistl.App.Base
 				}
 				case "PropertyName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(100).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(32).Constraints
 						.Where(c => !c.IsValid(this, this.PropertyName))
 						.Select(c => c.GetErrorText(this, this.PropertyName))
 						.ToArray();
@@ -745,7 +830,7 @@ namespace Kistl.App.Base
 				}
 				case "ValueModelDescriptor":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(165).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(125).Constraints
 						.Where(c => !c.IsValid(this, this.ValueModelDescriptor))
 						.Select(c => c.GetErrorText(this, this.ValueModelDescriptor))
 						.ToArray();
@@ -761,12 +846,12 @@ namespace Kistl.App.Base
 		{
 			// fix direct object references
 
-			if (_fk_guid_ObjectClass.HasValue)
-				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_ObjectClass.Value);
-			else if (_fk_ObjectClass.HasValue)
-				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_ObjectClass.Value);
+			if (_fk_guid_DefaultValue.HasValue)
+				DefaultValue__Implementation__ = (Kistl.App.Base.DefaultPropertyValue__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DefaultPropertyValue>(_fk_guid_DefaultValue.Value);
+			else if (_fk_DefaultValue.HasValue)
+				DefaultValue__Implementation__ = (Kistl.App.Base.DefaultPropertyValue__Implementation__)Context.Find<Kistl.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value);
 			else
-				ObjectClass__Implementation__ = null;
+				DefaultValue__Implementation__ = null;
 
 			if (_fk_guid_Module.HasValue)
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
@@ -774,6 +859,13 @@ namespace Kistl.App.Base
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
 			else
 				Module__Implementation__ = null;
+
+			if (_fk_guid_ObjectClass.HasValue)
+				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_ObjectClass.Value);
+			else if (_fk_ObjectClass.HasValue)
+				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_ObjectClass.Value);
+			else
+				ObjectClass__Implementation__ = null;
 
 			if (_fk_guid_ValueModelDescriptor.HasValue)
 				ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.PresentableModelDescriptor>(_fk_guid_ValueModelDescriptor.Value);
@@ -800,6 +892,10 @@ namespace Kistl.App.Base
 					}
 					BinarySerializer.ToStream(obj.ID, binStream);
 				}
+			}
+            BinarySerializer.ToStream(DefaultValue != null ? DefaultValue.ID : (int?)null, binStream);
+			if (auxObjects != null) {
+				auxObjects.Add(DefaultValue);
 			}
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
@@ -830,6 +926,7 @@ namespace Kistl.App.Base
 				}
 			}
 
+            BinarySerializer.FromStream(out this._fk_DefaultValue, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._IsIndexed, binStream);
@@ -847,6 +944,7 @@ namespace Kistl.App.Base
             base.ToStream(xml);
             XmlStreamer.ToStream(this._AltText, xml, "AltText", "Kistl.App.Base");
             XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
+            XmlStreamer.ToStream(DefaultValue != null ? DefaultValue.ID : (int?)null, xml, "DefaultValue", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
@@ -864,6 +962,7 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._AltText, xml, "AltText", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_DefaultValue, xml, "DefaultValue", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
@@ -883,6 +982,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._AltText, xml, "AltText", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(DefaultValue != null ? DefaultValue.ExportGuid : (Guid?)null, xml, "DefaultValue", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
 	
@@ -902,6 +1002,7 @@ namespace Kistl.App.Base
         {
             XmlStreamer.FromStream(ref this._AltText, xml, "AltText", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_DefaultValue, xml, "DefaultValue", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");

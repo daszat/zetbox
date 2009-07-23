@@ -7,6 +7,7 @@ namespace Kistl.API.Mocks
     using System.IO;
     using System.Linq;
     using System.Text;
+using System.Xml.Serialization;
 
     public interface TestDataObject : IDataObject
     {
@@ -132,6 +133,7 @@ namespace Kistl.API.Mocks
         }
 
         private IKistlContext _context = null;
+        [XmlIgnore]
         public IKistlContext Context
         {
             get
@@ -164,15 +166,18 @@ namespace Kistl.API.Mocks
         }
 
 
+        [XmlIgnore]
         public bool IsAttached
         {
             get { throw new NotImplementedException(); }
         }
 
+        [XmlIgnore]
         public bool IsReadonly { get; private set; }
 
         #region IDataErrorInfo Members
 
+        [XmlIgnore]
         string IDataErrorInfo.this[string columnName]
         {
             get
@@ -181,6 +186,7 @@ namespace Kistl.API.Mocks
             }
         }
 
+        [XmlIgnore]
         string IDataErrorInfo.Error
         {
             get { throw new NotImplementedException(); }

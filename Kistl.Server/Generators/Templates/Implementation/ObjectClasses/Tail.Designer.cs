@@ -60,6 +60,33 @@ this.WriteObjects("        public event ObjectEventHandler<",  cls.ClassName , "
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override void NotifyCreated()\r\n");
 this.WriteObjects("        {\r\n");
+#line 47 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+if(cls.Properties.Count(p => p.DefaultValue != null) > 0)
+			{
+
+#line 50 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+this.WriteObjects("            try\r\n");
+this.WriteObjects("            {\r\n");
+#line 53 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+foreach (var prop in cls.Properties.Where(p => p.DefaultValue != null))
+				{
+
+#line 56 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+this.WriteObjects("				this.",  prop.PropertyName , " = (",  prop.ReferencedTypeAsCSharp() , ")FrozenContext.Single.Find<Kistl.App.Base.Property>(",  prop.ID , ").DefaultValue.GetDefaultValue();\r\n");
+#line 58 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+}
+
+#line 60 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+this.WriteObjects("            }\r\n");
+this.WriteObjects("            catch (NotImplementedException)\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                // TODO: Find a better way to ignore bootstrap errors.\r\n");
+this.WriteObjects("                // During bootstrapping no MethodInvocation is registred\r\n");
+this.WriteObjects("            }\r\n");
+#line 67 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+}
+
+#line 69 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
 this.WriteObjects("            base.NotifyCreated();\r\n");
 this.WriteObjects("            if (OnCreated_",  cls.ClassName , " != null) OnCreated_",  cls.ClassName , "(this);\r\n");
 this.WriteObjects("        }\r\n");
@@ -72,7 +99,7 @@ this.WriteObjects("            if (OnDeleting_",  cls.ClassName , " != null) OnD
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public event ObjectEventHandler<",  cls.ClassName , "> OnDeleting_",  cls.ClassName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 60 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+#line 82 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
 Implementation.ObjectClasses.GetPropertyErrorTemplate.Call(Host, ctx, cls);
 
 

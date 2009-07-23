@@ -44,6 +44,28 @@
 
         public override void NotifyCreated()
         {
+<%			if(cls.Properties.Count(p => p.DefaultValue != null) > 0)
+			{
+%>
+            try
+            {
+<%
+				foreach (var prop in cls.Properties.Where(p => p.DefaultValue != null))
+				{
+%>
+				this.<%= prop.PropertyName %> = (<%= prop.ReferencedTypeAsCSharp() %>)FrozenContext.Single.Find<Kistl.App.Base.Property>(<%= prop.ID %>).DefaultValue.GetDefaultValue();
+<%
+				}
+%>
+            }
+            catch (NotImplementedException)
+            {
+                // TODO: Find a better way to ignore bootstrap errors.
+                // During bootstrapping no MethodInvocation is registred
+            }
+<%
+			}
+%>
             base.NotifyCreated();
             if (OnCreated_<%= cls.ClassName %> != null) OnCreated_<%= cls.ClassName %>(this);
         }

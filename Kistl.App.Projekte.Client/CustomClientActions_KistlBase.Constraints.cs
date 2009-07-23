@@ -234,23 +234,26 @@ namespace Kistl.App.Base
 
             e.Result = true;
 
-            switch (otherEnd.Multiplicity)
+            if (orp != null)
             {
-                case Multiplicity.One:
-                    e.Result &= orp.Constraints.OfType<NotNullableConstraint>().Count() > 0;
-                    break;
-                case Multiplicity.ZeroOrMore:
-                    e.Result &= orp.Constraints.OfType<NotNullableConstraint>().Count() == 0;
-                    e.Result &= orp.IsList;
-                    break;
-                case Multiplicity.ZeroOrOne:
-                    e.Result &= orp.Constraints.OfType<NotNullableConstraint>().Count() == 0;
-                    break;
-            }
+                switch (otherEnd.Multiplicity)
+                {
+                    case Multiplicity.One:
+                        e.Result &= orp.Constraints.OfType<NotNullableConstraint>().Count() > 0;
+                        break;
+                    case Multiplicity.ZeroOrMore:
+                        e.Result &= orp.Constraints.OfType<NotNullableConstraint>().Count() == 0;
+                        e.Result &= orp.IsList;
+                        break;
+                    case Multiplicity.ZeroOrOne:
+                        e.Result &= orp.Constraints.OfType<NotNullableConstraint>().Count() == 0;
+                        break;
+                }
 
-            e.Result &= otherEnd.HasPersistentOrder == (orp.IsList && orp.IsIndexed);
-            e.Result &= relEnd.Type == orp.ObjectClass;
-            e.Result &= otherEnd.Type == orp.ReferenceObjectClass;
+                e.Result &= otherEnd.HasPersistentOrder == (orp.IsList && orp.IsIndexed);
+                e.Result &= relEnd.Type == orp.ObjectClass;
+                e.Result &= otherEnd.Type == orp.ReferenceObjectClass;
+            }
         }
 
         public void OnGetErrorText_ConsistentNavigatorConstraint(
@@ -265,48 +268,51 @@ namespace Kistl.App.Base
 
             var result = new List<string>();
 
-            switch (otherEnd.Multiplicity)
+            if (orp != null)
             {
-                case Multiplicity.One:
-                    if (orp.Constraints.OfType<NotNullableConstraint>().Count() == 0)
-                    {
-                        result.Add("Navigator should have NotNullableConstraint because Multiplicity of opposite RelationEnd is One");
-                    }
-                    break;
-                case Multiplicity.ZeroOrMore:
-                    if (orp.Constraints.OfType<NotNullableConstraint>().Count() > 0)
-                    {
-                        result.Add("Navigator should not have NotNullableConstraint because Multiplicity of opposite RelationEnd is ZeroOrMore");
-                    }
-                    if (!orp.IsList)
-                    {
-                        result.Add("Navigator should have IsList set because Multiplicity of opposite RelationEnd is ZeroOrMore");
-                    }
-                    break;
-                case Multiplicity.ZeroOrOne:
-                    if (orp.Constraints.OfType<NotNullableConstraint>().Count() > 0)
-                    {
-                        result.Add("Navigator should not have NotNullableConstraint because Multiplicity of opposite RelationEnd is ZeroOrOne");
-                    }
-                    break;
-            }
+                switch (otherEnd.Multiplicity)
+                {
+                    case Multiplicity.One:
+                        if (orp.Constraints.OfType<NotNullableConstraint>().Count() == 0)
+                        {
+                            result.Add("Navigator should have NotNullableConstraint because Multiplicity of opposite RelationEnd is One");
+                        }
+                        break;
+                    case Multiplicity.ZeroOrMore:
+                        if (orp.Constraints.OfType<NotNullableConstraint>().Count() > 0)
+                        {
+                            result.Add("Navigator should not have NotNullableConstraint because Multiplicity of opposite RelationEnd is ZeroOrMore");
+                        }
+                        if (!orp.IsList)
+                        {
+                            result.Add("Navigator should have IsList set because Multiplicity of opposite RelationEnd is ZeroOrMore");
+                        }
+                        break;
+                    case Multiplicity.ZeroOrOne:
+                        if (orp.Constraints.OfType<NotNullableConstraint>().Count() > 0)
+                        {
+                            result.Add("Navigator should not have NotNullableConstraint because Multiplicity of opposite RelationEnd is ZeroOrOne");
+                        }
+                        break;
+                }
 
-            if (otherEnd.HasPersistentOrder != orp.IsIndexed)
-            {
-                result.Add("Navigator should IsIndexed set because HasPersistentOrder of opposite RelationEnd is set");
-            }
+                if (otherEnd.HasPersistentOrder != orp.IsIndexed)
+                {
+                    result.Add("Navigator should IsIndexed set because HasPersistentOrder of opposite RelationEnd is set");
+                }
 
-            if (relEnd.Type != orp.ObjectClass)
-            {
-                result.Add(String.Format("Navigator is attached to {0} but should be attached to {1}",
-                    orp.ObjectClass,
-                    relEnd.Type));
-            }
-            if (otherEnd.Type != orp.ReferenceObjectClass)
-            {
-                result.Add(String.Format("Navigator is references {0} but should reference {1}",
-                    orp.ReferenceObjectClass,
-                    (relEnd.AParent ?? relEnd.BParent).GetOtherEnd(relEnd).Type));
+                if (relEnd.Type != orp.ObjectClass)
+                {
+                    result.Add(String.Format("Navigator is attached to {0} but should be attached to {1}",
+                        orp.ObjectClass,
+                        relEnd.Type));
+                }
+                if (otherEnd.Type != orp.ReferenceObjectClass)
+                {
+                    result.Add(String.Format("Navigator is references {0} but should reference {1}",
+                        orp.ReferenceObjectClass,
+                        (relEnd.AParent ?? relEnd.BParent).GetOtherEnd(relEnd).Type));
+                }
             }
 
             e.Result = String.Join("\n", result.ToArray());

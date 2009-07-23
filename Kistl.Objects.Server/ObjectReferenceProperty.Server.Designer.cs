@@ -304,7 +304,7 @@ namespace Kistl.App.Base
 			{
 				case "EagerLoading":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(73).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(57).Constraints
 						.Where(c => !c.IsValid(this, this.EagerLoading))
 						.Select(c => c.GetErrorText(this, this.EagerLoading))
 						.ToArray();
@@ -313,7 +313,7 @@ namespace Kistl.App.Base
 				}
 				case "ReferenceObjectClass":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(130).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(82).Constraints
 						.Where(c => !c.IsValid(this, this.ReferenceObjectClass))
 						.Select(c => c.GetErrorText(this, this.ReferenceObjectClass))
 						.ToArray();
@@ -322,7 +322,7 @@ namespace Kistl.App.Base
 				}
 				case "RelationEnd":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(131).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(83).Constraints
 						.Where(c => !c.IsValid(this, this.RelationEnd))
 						.Select(c => c.GetErrorText(this, this.RelationEnd))
 						.ToArray();

@@ -597,6 +597,15 @@ namespace Kistl.App.Base
 
         public override void NotifyCreated()
         {
+            try
+            {
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(176).DefaultValue.GetDefaultValue();
+            }
+            catch (NotImplementedException)
+            {
+                // TODO: Find a better way to ignore bootstrap errors.
+                // During bootstrapping no MethodInvocation is registred
+            }
             base.NotifyCreated();
             if (OnCreated_DataType != null) OnCreated_DataType(this);
         }
@@ -616,7 +625,7 @@ namespace Kistl.App.Base
 			{
 				case "ClassName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(163).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(15).Constraints
 						.Where(c => !c.IsValid(this, this.ClassName))
 						.Select(c => c.GetErrorText(this, this.ClassName))
 						.ToArray();
@@ -625,7 +634,7 @@ namespace Kistl.App.Base
 				}
 				case "DefaultIcon":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(140).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(121).Constraints
 						.Where(c => !c.IsValid(this, this.DefaultIcon))
 						.Select(c => c.GetErrorText(this, this.DefaultIcon))
 						.ToArray();
@@ -634,7 +643,7 @@ namespace Kistl.App.Base
 				}
 				case "Description":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(160).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(18).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -643,7 +652,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(17).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(176).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -652,7 +661,7 @@ namespace Kistl.App.Base
 				}
 				case "MethodInvocations":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(55).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(74).Constraints
 						.Where(c => !c.IsValid(this, this.MethodInvocations))
 						.Select(c => c.GetErrorText(this, this.MethodInvocations))
 						.ToArray();
@@ -661,7 +670,7 @@ namespace Kistl.App.Base
 				}
 				case "Methods":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(49).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(75).Constraints
 						.Where(c => !c.IsValid(this, this.Methods))
 						.Select(c => c.GetErrorText(this, this.Methods))
 						.ToArray();
@@ -670,7 +679,7 @@ namespace Kistl.App.Base
 				}
 				case "Module":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(148).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(95).Constraints
 						.Where(c => !c.IsValid(this, this.Module))
 						.Select(c => c.GetErrorText(this, this.Module))
 						.ToArray();
@@ -679,7 +688,7 @@ namespace Kistl.App.Base
 				}
 				case "Properties":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(43).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(73).Constraints
 						.Where(c => !c.IsValid(this, this.Properties))
 						.Select(c => c.GetErrorText(this, this.Properties))
 						.ToArray();
@@ -688,7 +697,7 @@ namespace Kistl.App.Base
 				}
 				case "ShowIconInLists":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(61).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(42).Constraints
 						.Where(c => !c.IsValid(this, this.ShowIconInLists))
 						.Select(c => c.GetErrorText(this, this.ShowIconInLists))
 						.ToArray();
@@ -697,7 +706,7 @@ namespace Kistl.App.Base
 				}
 				case "ShowIdInLists":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(64).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(49).Constraints
 						.Where(c => !c.IsValid(this, this.ShowIdInLists))
 						.Select(c => c.GetErrorText(this, this.ShowIdInLists))
 						.ToArray();
@@ -706,7 +715,7 @@ namespace Kistl.App.Base
 				}
 				case "ShowNameInLists":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(67).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(50).Constraints
 						.Where(c => !c.IsValid(this, this.ShowNameInLists))
 						.Select(c => c.GetErrorText(this, this.ShowNameInLists))
 						.ToArray();
@@ -722,19 +731,19 @@ namespace Kistl.App.Base
 		{
 			// fix direct object references
 
-			if (_fk_guid_DefaultIcon.HasValue)
-				DefaultIcon__Implementation__ = (Kistl.App.GUI.Icon__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_guid_DefaultIcon.Value);
-			else if (_fk_DefaultIcon.HasValue)
-				DefaultIcon__Implementation__ = (Kistl.App.GUI.Icon__Implementation__)Context.Find<Kistl.App.GUI.Icon>(_fk_DefaultIcon.Value);
-			else
-				DefaultIcon__Implementation__ = null;
-
 			if (_fk_guid_Module.HasValue)
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
 			else if (_fk_Module.HasValue)
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
 			else
 				Module__Implementation__ = null;
+
+			if (_fk_guid_DefaultIcon.HasValue)
+				DefaultIcon__Implementation__ = (Kistl.App.GUI.Icon__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Icon>(_fk_guid_DefaultIcon.Value);
+			else if (_fk_DefaultIcon.HasValue)
+				DefaultIcon__Implementation__ = (Kistl.App.GUI.Icon__Implementation__)Context.Find<Kistl.App.GUI.Icon>(_fk_DefaultIcon.Value);
+			else
+				DefaultIcon__Implementation__ = null;
 		}
 #region Serializer
 

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomCommonActions_KistlBase.DefaultPropertyValues.cs" />
     <Compile Include="CustomCommonActions_KistlBase.cs" />
     <Compile Include="CustomCommonActions_KistlBase.Constraints.cs" />
     <Compile Include="CustomCommonActions_KistlBase.ToString.cs" />

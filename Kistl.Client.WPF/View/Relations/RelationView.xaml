@@ -33,6 +33,11 @@
                                           Margin="5,0,5,0"
                                           Content="{Binding PropertyModelsByName[Description]}"
                                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                        
+                        <ContentPresenter DockPanel.Dock="Top"
+                                          Margin="5,0,5,0"
+                                          Content="{Binding PropertyModelsByName[Module]}"
+                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
 
                         <ContentPresenter DockPanel.Dock="Top"
                                           Margin="5,0,5,0"

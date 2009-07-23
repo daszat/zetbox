@@ -156,6 +156,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all NewGuidDefaultValue</summary>
+		/// Creates a new Guid
+		public IQueryable<NewGuidDefaultValue> NewGuidDefaultValues
+		{ 
+			get
+			{
+				return Context.GetQuery<NewGuidDefaultValue>();
+			}
+		}
+		
 		/// <summary>List of all Module</summary>
 		/// Metadefinition Object for Modules.
 		public IQueryable<Module> Modules
@@ -313,6 +323,16 @@ namespace Kistl.App.Base
 			get
 			{
 				return Context.GetQuery<DoubleParameter>();
+			}
+		}
+		
+		/// <summary>List of all DefaultPropertyValue</summary>
+		/// 
+		public IQueryable<DefaultPropertyValue> DefaultPropertyValues
+		{ 
+			get
+			{
+				return Context.GetQuery<DefaultPropertyValue>();
 			}
 		}
 		

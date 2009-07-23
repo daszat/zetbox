@@ -190,6 +190,7 @@ namespace Kistl.Server
             catch (Exception ex)
             {
                 System.Diagnostics.Trace.TraceError("Server Application failed: \n" + ex.ToString());
+                Console.ReadKey();
             }
         }
 

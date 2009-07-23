@@ -248,7 +248,7 @@ namespace Kistl.Client.Presentables
             var errors = GetErrors().ToArray();
             if (errors.Length > 0)
             {
-                throw new InvalidOperationException("Cannot save due to the following errors: " + String.Join("\n", errors));
+                // throw new InvalidOperationException("Cannot save due to the following errors: " + String.Join("\n", errors));
             }
             DataContext.SubmitChanges();
         }

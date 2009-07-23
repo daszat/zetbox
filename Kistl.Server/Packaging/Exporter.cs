@@ -140,10 +140,9 @@ namespace Kistl.Server.Packaging
         {
             Type t = obj.GetInterfaceType().Type;
             xml.WriteStartElement(t.Name, t.Namespace);
-            // TODO: Let a Constructor do that job
             if (((Kistl.App.Base.IExportable)obj).ExportGuid == Guid.Empty)
             {
-                ((Kistl.App.Base.IExportable)obj).ExportGuid = Guid.NewGuid();
+                throw new InvalidOperationException(string.Format("At least one object of type {0} has an empty ExportGuid", t.FullName));
             }
             ((IExportableInternal)obj).Export(xml, propNamespaces);
             xml.WriteEndElement();

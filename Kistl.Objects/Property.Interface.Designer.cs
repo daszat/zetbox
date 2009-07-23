@@ -33,6 +33,13 @@ namespace Kistl.App.Base
 
         ICollection<Kistl.App.Base.Constraint> Constraints { get; }
         /// <summary>
+        /// Property can have a default value
+        /// </summary>
+		Kistl.App.Base.DefaultPropertyValue DefaultValue {
+			get;
+			set;
+		}
+        /// <summary>
         /// Description of this Property
         /// </summary>
 		string Description {

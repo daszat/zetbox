@@ -424,7 +424,7 @@ namespace Kistl.App.GUI
 			{
 				case "Children":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(41).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(61).Constraints
 						.Where(c => !c.IsValid(this, this.Children))
 						.Select(c => c.GetErrorText(this, this.Children))
 						.ToArray();
@@ -433,7 +433,7 @@ namespace Kistl.App.GUI
 				}
 				case "ContextMenu":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(44).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(62).Constraints
 						.Where(c => !c.IsValid(this, this.ContextMenu))
 						.Select(c => c.GetErrorText(this, this.ContextMenu))
 						.ToArray();
@@ -442,7 +442,7 @@ namespace Kistl.App.GUI
 				}
 				case "ControlType":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(184).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(190).Constraints
 						.Where(c => !c.IsValid(this, this.ControlType))
 						.Select(c => c.GetErrorText(this, this.ControlType))
 						.ToArray();
@@ -451,7 +451,7 @@ namespace Kistl.App.GUI
 				}
 				case "Description":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(82).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(54).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -460,7 +460,7 @@ namespace Kistl.App.GUI
 				}
 				case "Method":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(137).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(112).Constraints
 						.Where(c => !c.IsValid(this, this.Method))
 						.Select(c => c.GetErrorText(this, this.Method))
 						.ToArray();
@@ -469,7 +469,7 @@ namespace Kistl.App.GUI
 				}
 				case "Property":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(174).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(107).Constraints
 						.Where(c => !c.IsValid(this, this.Property))
 						.Select(c => c.GetErrorText(this, this.Property))
 						.ToArray();
@@ -485,19 +485,19 @@ namespace Kistl.App.GUI
 		{
 			// fix direct object references
 
-			if (_fk_guid_Method.HasValue)
-				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_Method.Value);
-			else if (_fk_Method.HasValue)
-				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
-			else
-				Method__Implementation__ = null;
-
 			if (_fk_guid_Property.HasValue)
 				Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_Property.Value);
 			else if (_fk_Property.HasValue)
 				Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_Property.Value);
 			else
 				Property__Implementation__ = null;
+
+			if (_fk_guid_Method.HasValue)
+				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_Method.Value);
+			else if (_fk_Method.HasValue)
+				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
+			else
+				Method__Implementation__ = null;
 		}
 #region Serializer
 

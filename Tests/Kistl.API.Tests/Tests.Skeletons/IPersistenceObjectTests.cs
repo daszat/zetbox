@@ -21,25 +21,6 @@ namespace Kistl.API.Tests.Skeletons
         }
 
         [Test]
-        public void should_be_attached_after_attaching()
-        {
-            Assert.Ignore("Cannot get context without Kistl.API.{Client,Server} reference");
-            //using (var ctx = ????.GetContext())
-            //{
-            //    ctx.Attach(obj);
-            //    Assert.That(obj.IsAttached, Is.False);
-            //}
-        }
-
-        [Test]
-        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
-        public void ObjectState_should_be_New_when_created()
-        {
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-        }
-
-
-        [Test]
         public void should_roundtrip_IPersistenceObject_correctly()
         {
             T result = SerializationRoundtrip(obj);
@@ -48,17 +29,6 @@ namespace Kistl.API.Tests.Skeletons
             // [Ignore("Obsolete, DAL Provider will manage ObjectState")]
             // Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
         }
-
-        [Test]
-        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
-        /// ObjectState is just for serialization....
-        public void ObjectState_CreatedObject_Modified()
-        {
-            obj.NotifyPropertyChanged("test", null, null);
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-        }
-
-
     }
 
 }

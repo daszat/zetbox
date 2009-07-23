@@ -245,7 +245,7 @@ namespace Kistl.App.TimeRecords
 			{
 				case "From":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(24).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(172).Constraints
 						.Where(c => !c.IsValid(this, this.From))
 						.Select(c => c.GetErrorText(this, this.From))
 						.ToArray();
@@ -254,7 +254,7 @@ namespace Kistl.App.TimeRecords
 				}
 				case "Mitarbeiter":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(155).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(114).Constraints
 						.Where(c => !c.IsValid(this, this.Mitarbeiter))
 						.Select(c => c.GetErrorText(this, this.Mitarbeiter))
 						.ToArray();
@@ -263,7 +263,7 @@ namespace Kistl.App.TimeRecords
 				}
 				case "Thru":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(52).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(173).Constraints
 						.Where(c => !c.IsValid(this, this.Thru))
 						.Select(c => c.GetErrorText(this, this.Thru))
 						.ToArray();

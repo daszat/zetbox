@@ -464,6 +464,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Property_has_DefaultPropertyValue
+    A: One Property as Property
+    B: ZeroOrOne DefaultPropertyValue as DefaultValue
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Property_has_DefaultPropertyValue",
+    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Property__Implementation__),
+    "DefaultValue", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DefaultPropertyValue__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Property_has_Module
     A: ZeroOrMore Property as BaseProperty
     B: ZeroOrOne Module as Module

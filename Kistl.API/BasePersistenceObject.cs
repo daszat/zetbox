@@ -6,6 +6,7 @@ namespace Kistl.API
     using System.Xml;
     using System.Diagnostics;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
     /// <summary>
     /// Implement basic functionality needed by all persistent objects.
@@ -21,6 +22,7 @@ using System.Collections.Generic;
         /// <summary>
         /// Gets a value indicating whether values of this object can be set. This is only a shorthand for asking the context for read-only status.
         /// </summary>
+        [XmlIgnore]
         public bool IsReadonly
         {
             get { return this.Context != null ? this.Context.IsReadonly : false; }
@@ -29,11 +31,13 @@ using System.Collections.Generic;
         /// <summary>
         /// Gets the <see cref="IKistlContext"/> containing this object.
         /// </summary>
+        [XmlIgnore]
         public IKistlContext Context { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether or not this object is attached to a context.
         /// </summary>
+        [XmlIgnore]
         public abstract bool IsAttached { get; }
 
         /// <summary>
@@ -191,6 +195,7 @@ using System.Collections.Generic;
         /// <value>String.Empty</value> if there is nothing to report.
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        [XmlIgnore]
         string IDataErrorInfo.Error
         {
             get
@@ -214,6 +219,7 @@ using System.Collections.Generic;
         /// <returns>The error message for the property. Returns 
         /// <value>String.Empty</value> if there is nothing to report.</returns>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        [XmlIgnore]
         string IDataErrorInfo.this[string columnName]
         {
             get

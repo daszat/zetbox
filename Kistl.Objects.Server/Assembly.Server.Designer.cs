@@ -292,6 +292,15 @@ namespace Kistl.App.Base
 
         public override void NotifyCreated()
         {
+            try
+            {
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(168).DefaultValue.GetDefaultValue();
+            }
+            catch (NotImplementedException)
+            {
+                // TODO: Find a better way to ignore bootstrap errors.
+                // During bootstrapping no MethodInvocation is registred
+            }
             base.NotifyCreated();
             if (OnCreated_Assembly != null) OnCreated_Assembly(this);
         }
@@ -311,7 +320,7 @@ namespace Kistl.App.Base
 			{
 				case "AssemblyName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(158).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(40).Constraints
 						.Where(c => !c.IsValid(this, this.AssemblyName))
 						.Select(c => c.GetErrorText(this, this.AssemblyName))
 						.ToArray();
@@ -320,7 +329,7 @@ namespace Kistl.App.Base
 				}
 				case "DeploymentRestrictions":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(188).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(180).Constraints
 						.Where(c => !c.IsValid(this, this.DeploymentRestrictions))
 						.Select(c => c.GetErrorText(this, this.DeploymentRestrictions))
 						.ToArray();
@@ -329,7 +338,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(8).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(168).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -338,7 +347,7 @@ namespace Kistl.App.Base
 				}
 				case "Module":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(151).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(97).Constraints
 						.Where(c => !c.IsValid(this, this.Module))
 						.Select(c => c.GetErrorText(this, this.Module))
 						.ToArray();

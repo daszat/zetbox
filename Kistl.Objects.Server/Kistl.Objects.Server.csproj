@@ -77,6 +77,7 @@
     <Compile Include="DataType.Server.Designer.cs" />
     <Compile Include="DateTimeParameter.Server.Designer.cs" />
     <Compile Include="DateTimeProperty.Server.Designer.cs" />
+    <Compile Include="DefaultPropertyValue.Server.Designer.cs" />
     <Compile Include="DoubleParameter.Server.Designer.cs" />
     <Compile Include="DoubleProperty.Server.Designer.cs" />
     <Compile Include="Enumeration.Server.Designer.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Mitarbeiter.Server.Designer.cs" />
     <Compile Include="Module.Server.Designer.cs" />
     <Compile Include="Muhblah.Server.Designer.cs" />
+    <Compile Include="NewGuidDefaultValue.Server.Designer.cs" />
     <Compile Include="NotNullableConstraint.Server.Designer.cs" />
     <Compile Include="ObjectClass.Server.Designer.cs" />
     <Compile Include="ObjectParameter.Server.Designer.cs" />

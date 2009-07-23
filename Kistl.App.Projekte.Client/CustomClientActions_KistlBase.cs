@@ -323,6 +323,14 @@ namespace Kistl.App.Base
                             newProp.Constraints.Add(newC);
                             newC.Reason = c.Reason;
                         }
+
+                        // Copy Default Value
+                        if (prop.DefaultValue != null)
+                        {
+                            var dv = prop.DefaultValue;
+                            var newDV = (DefaultPropertyValue)ctx.Create(dv.GetInterfaceType());
+                            newProp.DefaultValue = newDV;
+                        }
                     }
                 }
 

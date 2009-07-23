@@ -70,22 +70,6 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
-        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
-        public void ObjectState_should_be_new_after_init()
-        {
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-        }
-
-        // TODO: WTF? Please explain
-        [Test]
-        [Ignore("Obsolete, DAL Provider will manage ObjectState")]
-        public void ObjectState_should_be_Unmodified_after_setting_ID()
-        {
-            obj.ID = 10;
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-        }
-
-        [Test]
         public void NotifyPropertyChanged_ing()
         {
             obj.NotifyPropertyChanging("StringProp", null, null);

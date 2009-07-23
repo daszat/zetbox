@@ -25,16 +25,16 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var rel = ctx.Create<Kistl.App.Base.Relation>();
-                Assert.That(rel.A, Is.Null);
+                var prop = ctx.Create<Kistl.App.Base.Property>();
+                Assert.That(prop.DefaultValue, Is.Null);
 
-                var end = ctx.Create<Kistl.App.Base.RelationEnd>();
-                Assert.That(end.AParent, Is.Null);
+                var dv = ctx.Create<Kistl.App.Base.NewGuidDefaultValue>();
+                Assert.That(dv.Property, Is.Null);
 
-                rel.A = end;
+                prop.DefaultValue = dv;
 
-                Assert.That(rel.A, Is.SameAs(end));
-                Assert.That(end.AParent, Is.SameAs(rel));
+                Assert.That(prop.DefaultValue, Is.SameAs(dv));
+                Assert.That(dv.Property, Is.SameAs(prop));
             }
         }
 
@@ -43,16 +43,16 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var rel = ctx.Create<Kistl.App.Base.Relation>();
-                Assert.That(rel.A, Is.Null);
+                var prop = ctx.Create<Kistl.App.Base.Property>();
+                Assert.That(prop.DefaultValue, Is.Null);
 
-                var end = ctx.Create<Kistl.App.Base.RelationEnd>();
-                Assert.That(end.AParent, Is.Null);
+                var dv = ctx.Create<Kistl.App.Base.NewGuidDefaultValue>();
+                Assert.That(dv.Property, Is.Null);
 
-                end.AParent = rel;
+                dv.Property = prop;
 
-                Assert.That(rel.A, Is.SameAs(end));
-                Assert.That(end.AParent, Is.SameAs(rel));
+                Assert.That(prop.DefaultValue, Is.SameAs(dv));
+                Assert.That(dv.Property, Is.SameAs(prop));
             }
         }
         #endregion

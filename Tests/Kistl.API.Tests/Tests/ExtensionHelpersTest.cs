@@ -26,13 +26,16 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        [Ignore("XML Serialization dysfunctional")]
         public void XmlString()
         {
             string xml = obj.ToXmlString();
             TestDataObject result = xml.FromXmlString<TestDataObject__Implementation__>();
 
-            Assert.That(result, Is.EqualTo(obj));
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.ID, Is.EqualTo(obj.ID));
+            Assert.That(result.BoolProperty, Is.EqualTo(obj.BoolProperty));
+            Assert.That(result.IntProperty, Is.EqualTo(obj.IntProperty));
+            Assert.That(result.StringProperty, Is.EqualTo(obj.StringProperty));
         }
 
         [Test]

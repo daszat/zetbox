@@ -187,6 +187,19 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DefaultPropertyValue">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DefaultPropertyValue)">
+	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NewGuidDefaultValue)">
+	    <MappingFragment StoreEntitySet="NewGuidDefaultValue">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="EnumerationEntry">
       <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationEntry)">
 	    <MappingFragment StoreEntitySet="EnumerationEntry">
@@ -1238,6 +1251,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_ConstrainedProperty" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Property_has_DefaultPropertyValue
+    A: One Property as Property
+    B: ZeroOrOne DefaultPropertyValue as DefaultValue
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_Property_has_DefaultPropertyValue"
+                           TypeName="Model.FK_Property_has_DefaultPropertyValue"
+                           StoreEntitySet="DefaultPropertyValue" >
+      <EndProperty Name="Property">
+        <ScalarProperty Name="ID" ColumnName="fk_Property"/>
+      </EndProperty>
+      <EndProperty Name="DefaultValue">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Property" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Property_has_Module

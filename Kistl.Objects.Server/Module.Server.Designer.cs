@@ -313,6 +313,15 @@ namespace Kistl.App.Base
 
         public override void NotifyCreated()
         {
+            try
+            {
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(157).DefaultValue.GetDefaultValue();
+            }
+            catch (NotImplementedException)
+            {
+                // TODO: Find a better way to ignore bootstrap errors.
+                // During bootstrapping no MethodInvocation is registred
+            }
             base.NotifyCreated();
             if (OnCreated_Module != null) OnCreated_Module(this);
         }
@@ -332,7 +341,7 @@ namespace Kistl.App.Base
 			{
 				case "Assemblies":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(53).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(80).Constraints
 						.Where(c => !c.IsValid(this, this.Assemblies))
 						.Select(c => c.GetErrorText(this, this.Assemblies))
 						.ToArray();
@@ -341,7 +350,7 @@ namespace Kistl.App.Base
 				}
 				case "DataTypes":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(51).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(78).Constraints
 						.Where(c => !c.IsValid(this, this.DataTypes))
 						.Select(c => c.GetErrorText(this, this.DataTypes))
 						.ToArray();
@@ -350,7 +359,7 @@ namespace Kistl.App.Base
 				}
 				case "Description":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(92).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(6).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -359,7 +368,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(19).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(157).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -368,7 +377,7 @@ namespace Kistl.App.Base
 				}
 				case "ModuleName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(102).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(7).Constraints
 						.Where(c => !c.IsValid(this, this.ModuleName))
 						.Select(c => c.GetErrorText(this, this.ModuleName))
 						.ToArray();
@@ -377,7 +386,7 @@ namespace Kistl.App.Base
 				}
 				case "Namespace":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(98).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(8).Constraints
 						.Where(c => !c.IsValid(this, this.Namespace))
 						.Select(c => c.GetErrorText(this, this.Namespace))
 						.ToArray();

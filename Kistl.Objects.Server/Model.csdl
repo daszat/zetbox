@@ -12,6 +12,7 @@
     <EntitySet Name="Constraint" EntityType="Model.Constraint" />
     <EntitySet Name="CurrentSchema" EntityType="Model.CurrentSchema" />
     <EntitySet Name="DataType" EntityType="Model.DataType" />
+    <EntitySet Name="DefaultPropertyValue" EntityType="Model.DefaultPropertyValue" />
     <EntitySet Name="EnumerationEntry" EntityType="Model.EnumerationEntry" />
     <EntitySet Name="Icon" EntityType="Model.Icon" />
     <EntitySet Name="Kunde" EntityType="Model.Kunde" />
@@ -220,6 +221,10 @@
       <End Role="ConstrainedProperty" EntitySet="Property" />
       <End Role="Constraints" EntitySet="Constraint" />
     </AssociationSet>
+    <AssociationSet Name="FK_Property_has_DefaultPropertyValue" Association="Model.FK_Property_has_DefaultPropertyValue" >
+      <End Role="Property" EntitySet="Property" />
+      <End Role="DefaultValue" EntitySet="DefaultPropertyValue" />
+    </AssociationSet>
     <AssociationSet Name="FK_Property_has_Module" Association="Model.FK_Property_has_Module" >
       <End Role="BaseProperty" EntitySet="Property" />
       <End Role="Module" EntitySet="Module" />
@@ -417,6 +422,17 @@
     <Property Name="ShowIdInLists" Type="Boolean" Nullable="false" />
     <Property Name="ShowNameInLists" Type="Boolean" Nullable="false" />
   </EntityType>
+  <EntityType Name="DefaultPropertyValue">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Property__Implementation__"
+                        Relationship="Model.FK_Property_has_DefaultPropertyValue"
+                        FromRole="DefaultValue"
+                        ToRole="Property" />
+  </EntityType>
   <EntityType Name="EnumerationEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -607,6 +623,10 @@
                         Relationship="Model.FK_Property_has_Constraint"
                         FromRole="ConstrainedProperty"
                         ToRole="Constraints" />
+    <NavigationProperty Name="DefaultValue__Implementation__"
+                        Relationship="Model.FK_Property_has_DefaultPropertyValue"
+                        FromRole="Property"
+                        ToRole="DefaultValue" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="IsIndexed" Type="Boolean" Nullable="false" />
@@ -882,6 +902,8 @@
   <EntityType Name="IsValidNamespaceConstraint" BaseType="Model.IsValidIdentifierConstraint" >
   </EntityType>
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint" >
+  </EntityType>
+  <EntityType Name="NewGuidDefaultValue" BaseType="Model.DefaultPropertyValue" >
   </EntityType>
   <EntityType Name="NotNullableConstraint" BaseType="Model.Constraint" >
   </EntityType>
@@ -1495,6 +1517,14 @@
     <End Role="Constraints"
          Type="Model.Constraint" 
          Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Property_has_DefaultPropertyValue" >
+    <End Role="Property"
+         Type="Model.Property" 
+         Multiplicity="0..1" />
+    <End Role="DefaultValue"
+         Type="Model.DefaultPropertyValue" 
+         Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Property_has_Module" >
     <End Role="BaseProperty"

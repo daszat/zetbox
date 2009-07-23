@@ -170,7 +170,7 @@ namespace Kistl.App.Base
 			{
 				case "Length":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(68).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(140).Constraints
 						.Where(c => !c.IsValid(this, this.Length))
 						.Select(c => c.GetErrorText(this, this.Length))
 						.ToArray();

@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
-    <Compile Include="Tests\GeneratorTests.cs" />
     <Compile Include="Tests\GetListTests.cs" />
     <Compile Include="Tests\InheritanceTests.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />

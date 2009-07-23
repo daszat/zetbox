@@ -60,6 +60,7 @@
     <Compile Include="DataType.Interface.Designer.cs" />
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
     <Compile Include="DateTimeProperty.Interface.Designer.cs" />
+    <Compile Include="DefaultPropertyValue.Interface.Designer.cs" />
     <Compile Include="DoubleParameter.Interface.Designer.cs" />
     <Compile Include="DoubleProperty.Interface.Designer.cs" />
     <Compile Include="Enumeration.Interface.Designer.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Mitarbeiter.Interface.Designer.cs" />
     <Compile Include="Module.Interface.Designer.cs" />
     <Compile Include="Muhblah.Interface.Designer.cs" />
+    <Compile Include="NewGuidDefaultValue.Interface.Designer.cs" />
     <Compile Include="NotNullableConstraint.Interface.Designer.cs" />
     <Compile Include="ObjectClass.Interface.Designer.cs" />
     <Compile Include="ObjectParameter.Interface.Designer.cs" />

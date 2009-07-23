@@ -27,7 +27,7 @@ namespace Kistl.Server.Packaging
                 .OrderBy(i => i.ObjectClass.ClassName).ThenBy(i => i.PropertyName));
             AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.Relation>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.A.Type.ClassName).ThenBy(i => i.Verb).ThenBy(i => i.B.Type.ClassName));
-            AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.RelationEnd>().Where(i => i.AParent.Module.ID == moduleID || i.BParent.Module.ID == moduleID)
+            AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.RelationEnd>().Where(i => (i.AParent != null && i.AParent.Module.ID == moduleID) || (i.BParent != null && i.BParent.Module.ID == moduleID))
                 .OrderBy(i => i.Type.ClassName));
             AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.EnumerationEntry>().Where(i => i.Enumeration.Module.ID == moduleID)
                 .OrderBy(i => i.Enumeration.ClassName).ThenBy(i => i.Name));
@@ -39,9 +39,13 @@ namespace Kistl.Server.Packaging
             AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.MethodInvocation>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.InvokeOnObjectClass.ClassName).ThenBy(i => i.Method.MethodName).ThenBy(i => i.Implementor.FullName).ThenBy(i => i.MemberName));
 
-            // TODO: Add Module to Constraint
+            // TODO: Add Module to Constraint - or should that not be changable by other modules?
             AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID)
                 .OrderBy(i => i.ConstrainedProperty.ObjectClass.ClassName).ThenBy(i => i.ConstrainedProperty.PropertyName));
+
+            // TODO: Add Module to DefaultPropertyValue - or should that not be changable by other modules?
+            AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.DefaultPropertyValue>().Where(i => i.Property.Module.ID == moduleID)
+                .OrderBy(i => i.Property.ObjectClass.ClassName).ThenBy(i => i.Property.PropertyName));
 
             AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.Assembly>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.AssemblyName));
@@ -63,16 +67,14 @@ namespace Kistl.Server.Packaging
         private static void AddMetaObjects<T>(IList<IPersistenceObject> result, IOrderedQueryable<T> objects)
             where T : IPersistenceObject
         {
-            // TODO: Let a Constructor do this job
-            foreach (var exportable in objects.ToList().Cast<IExportable>().Where(o => o.ExportGuid == Guid.Empty))
-            {
-                exportable.ExportGuid = Guid.NewGuid();
-            }
-
             // TODO: always do a final stabilisation sort by ExportGuid
             // currently doesn't work, since EF doesn't like the cast
             foreach (IPersistenceObject obj in objects) //.ThenBy(o => ((IExportable)o).ExportGuid))
             {
+                if (((IExportable)obj).ExportGuid == Guid.Empty)
+                {
+                    throw new InvalidOperationException(string.Format("At least one object of type {0} has an empty ExportGuid", typeof(T).FullName));
+                }
                 result.Add(obj);
             }
         }
