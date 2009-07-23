@@ -195,8 +195,15 @@ using System.Collections.Generic;
         {
             get
             {
-                if (this.IsValid()) return "";
-                else return "This object has errors.";
+                if (this.IsValid())
+                {
+                    return String.Empty;
+                }
+                else
+                {
+                    // TODO: implement a way to get all error messages from all properties of this object.
+                    return "This object has errors.";
+                }
             }
         }
 

@@ -8,6 +8,7 @@ using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.API.Client;
+using System.ComponentModel;
 
 namespace Kistl.Client.Presentables
 {
@@ -222,6 +223,16 @@ namespace Kistl.Client.Presentables
             ToolTip = "Commits outstanding changes to the data store.";
         }
 
+        private bool CheckValidity()
+        {
+            var errors = GetErrors();
+            return true; // GetErrors().Count() == 0;
+        }
+
+        private IEnumerable<string> GetErrors()
+        {
+            return DataContext.AttachedObjects.OfType<IDataErrorInfo>().Select(o => o.Error).Where(s => !String.IsNullOrEmpty(s));
+        }
         /// <summary>
         /// Returns true if no data was passed.
         /// </summary>
@@ -229,11 +240,16 @@ namespace Kistl.Client.Presentables
         /// <returns></returns>
         public override bool CanExecute(object data)
         {
-            return data == null;
+            return data == null && CheckValidity();
         }
 
         protected override void DoExecute(object data)
         {
+            var errors = GetErrors().ToArray();
+            if (errors.Length > 0)
+            {
+                throw new InvalidOperationException("Cannot save due to the following errors: " + String.Join("\n", errors));
+            }
             DataContext.SubmitChanges();
         }
 
