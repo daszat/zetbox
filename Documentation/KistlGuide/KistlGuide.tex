@@ -1,0 +1,57 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage{fancyhdr}
+\usepackage[pdftex]{graphicx}
+
+\begin{document}
+
+\addtolength{\textheight}{2cm}
+\addtolength{\topmargin}{-1cm}
+
+\newenvironment{CS}{\tt\begin{tabbing}\nopagebreak}{\end{tabbing}}
+\newcommand{\kw}{\it}
+\newcommand{\new}{\bf}
+\newcommand{\comment}{\it}
+
+\title{Kistl\\Guide}
+\author{Arthur Zaczek}
+\author{David Schmitt}
+
+\pagestyle{empty}
+
+\include{TitlePage}
+
+\tableofcontents
+
+\setlength{\headheight}{15pt}
+
+\pagestyle{fancy}
+
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+
+% \include{einleitung}
+% \include{grundlagen}
+% \include{ausfuehrung}
+
+% Literatur
+% \begin{thebibliography}{99}
+
+% \bibitem{cpp} Bjarne Stroustrup, The C++ Programming Language,
+% Special Edition, 2000, AT\&T Labs, ISBN 0-201-70073-5
+
+% \bibitem{COM} Guy Eddon, Henry Eddon, Inside Distibuted COM,
+% 1998, Microsoft Press, ISBN 3-86063-459-3
+
+% \bibitem{ActiveX} Adam Denning, ActiveX Controls Inside Out,
+% Second Edition, 1997, Microsoft Press, ISBN 1-57231-350-1
+
+% \bibitem{WIN32API} Richard J. Simon, Win32 Programmierung,
+% Band 1, 1996, SAMS, ISBN 3-8272-4502-8
+
+% \end{thebibliography}
+
+\listoffigures
+
+\include{Appendix}
+
+\end{document}
