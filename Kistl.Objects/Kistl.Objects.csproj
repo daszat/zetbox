@@ -90,6 +90,7 @@
     <Compile Include="PresentableModelDescriptor.Interface.Designer.cs" />
     <Compile Include="Projekt.Interface.Designer.cs" />
     <Compile Include="Property.Interface.Designer.cs" />
+    <Compile Include="PropertyInvocation.Interface.Designer.cs" />
     <Compile Include="Relation.Interface.Designer.cs" />
     <Compile Include="RelationEnd.Interface.Designer.cs" />
     <Compile Include="StringParameter.Interface.Designer.cs" />
@@ -109,10 +110,12 @@
     <Compile Include="WorkEffortAccount.Interface.Designer.cs" />
     <Compile Include="CollectionEntries.Interface.Designer.cs" />
     <Compile Include="IExportable.Interface.Designer.cs" />
+    <Compile Include="IInvocation.Interface.Designer.cs" />
     <Compile Include="IRenderer.Interface.Designer.cs" />
     <Compile Include="ITestInterface.Interface.Designer.cs" />
     <Compile Include="DeploymentRestriction.Interface.Designer.cs" />
     <Compile Include="Multiplicity.Interface.Designer.cs" />
+    <Compile Include="PropertyInvocationType.Interface.Designer.cs" />
     <Compile Include="StorageType.Interface.Designer.cs" />
     <Compile Include="TestEnum.Interface.Designer.cs" />
     <Compile Include="Toolkit.Interface.Designer.cs" />

@@ -19,11 +19,13 @@
 <%@ Parameter Name="relDataTypeExportable" Type="bool" %>
 <%@ Parameter Name="moduleNamespace" Type="string" %>
 <%@ Parameter Name="eagerLoading" Type="bool" %>
+<%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%
 
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string fkBackingName = "_fk_" + name;
 	string fGuidkBackingName = "_fk_guid_" + name;
+	string eventName = "On" + name;
 
 %>
    		// <%= this.GetType() %>
@@ -66,7 +68,21 @@
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+<%
+				if(callGetterSetterEvents)
+				{
+%>
+				if(<%= eventName %>_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(__value);
+					<%= eventName %>_Getter(this, e);
+					__value = (<%= referencedImplementation %>)e.Result;
+				}
+<%
+				}
+%>
+                return __value;
             }
             set
             {
@@ -79,7 +95,35 @@
                 {
                     r.Load(); 
                 }
-                r.Value = (<%= referencedImplementation %>)value;
+                <%= referencedInterface %> __oldValue = (<%= referencedInterface %>)r.Value;
+                <%= referencedInterface %> __newValue = (<%= referencedInterface %>)value;
+
+<%
+				if(callGetterSetterEvents)
+				{
+%>
+                if(<%= eventName %>_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
+					<%= eventName %>_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+<%
+				}
+%>
+                r.Value = (<%= referencedImplementation %>)__newValue;
+<%
+				if(callGetterSetterEvents)
+				{
+%>
+                if(<%= eventName %>_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
+					<%= eventName %>_PostSetter(this, e);
+                }
+<%
+				}
+%>                                
             }
         }
         

@@ -25,6 +25,7 @@
     <EntitySet Name="PresentableModelDescriptor" EntityType="Model.PresentableModelDescriptor" />
     <EntitySet Name="Projekt" EntityType="Model.Projekt" />
     <EntitySet Name="Property" EntityType="Model.Property" />
+    <EntitySet Name="PropertyInvocation" EntityType="Model.PropertyInvocation" />
     <EntitySet Name="Relation" EntityType="Model.Relation" />
     <EntitySet Name="RelationEnd" EntityType="Model.RelationEnd" />
     <EntitySet Name="Task" EntityType="Model.Task" />
@@ -232,6 +233,14 @@
     <AssociationSet Name="FK_Property_has_PresentableModelDescriptor" Association="Model.FK_Property_has_PresentableModelDescriptor" >
       <End Role="Property" EntitySet="Property" />
       <End Role="ValueModelDescriptor" EntitySet="PresentableModelDescriptor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Property_has_PropertyInvocation" Association="Model.FK_Property_has_PropertyInvocation" >
+      <End Role="InvokeOnProperty" EntitySet="Property" />
+      <End Role="Invocations" EntitySet="PropertyInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PropertyInvocation_has_TypeRef" Association="Model.FK_PropertyInvocation_has_TypeRef" >
+      <End Role="PropertyInvocation" EntitySet="PropertyInvocation" />
+      <End Role="Implementor" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_Relation_hasA_RelationEnd" Association="Model.FK_Relation_hasA_RelationEnd" >
       <End Role="Relation" EntitySet="Relation" />
@@ -629,6 +638,10 @@
                         ToRole="DefaultValue" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Invocations__Implementation__"
+                        Relationship="Model.FK_Property_has_PropertyInvocation"
+                        FromRole="InvokeOnProperty"
+                        ToRole="Invocations" />
     <Property Name="IsIndexed" Type="Boolean" Nullable="false" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
     <Property Name="IsNullable" Type="Boolean" Nullable="false" />
@@ -645,6 +658,23 @@
                         Relationship="Model.FK_Property_has_PresentableModelDescriptor"
                         FromRole="Property"
                         ToRole="ValueModelDescriptor" />
+  </EntityType>
+  <EntityType Name="PropertyInvocation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Implementor__Implementation__"
+                        Relationship="Model.FK_PropertyInvocation_has_TypeRef"
+                        FromRole="PropertyInvocation"
+                        ToRole="Implementor" />
+    <Property Name="InvocationType__Implementation__" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="InvokeOnProperty__Implementation__"
+                        Relationship="Model.FK_Property_has_PropertyInvocation"
+                        FromRole="Invocations"
+                        ToRole="InvokeOnProperty" />
+    <Property Name="MemberName" Type="String" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="Relation">
     <Key>
@@ -1540,6 +1570,22 @@
          Multiplicity="*" />
     <End Role="ValueModelDescriptor"
          Type="Model.PresentableModelDescriptor" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Property_has_PropertyInvocation" >
+    <End Role="InvokeOnProperty"
+         Type="Model.Property" 
+         Multiplicity="0..1" />
+    <End Role="Invocations"
+         Type="Model.PropertyInvocation" 
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_PropertyInvocation_has_TypeRef" >
+    <End Role="PropertyInvocation"
+         Type="Model.PropertyInvocation" 
+         Multiplicity="*" />
+    <End Role="Implementor"
+         Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Relation_hasA_RelationEnd" >

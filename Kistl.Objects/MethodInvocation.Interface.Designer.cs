@@ -10,27 +10,13 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for a MethodInvocation on a Method of a DataType.
     /// </summary>
-    public interface MethodInvocation : IDataObject, Kistl.App.Base.IExportable 
+    public interface MethodInvocation : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IInvocation 
     {
 
-        /// <summary>
-        /// The Type implementing this invocation
-        /// </summary>
-		Kistl.App.Base.TypeRef Implementor {
-			get;
-			set;
-		}
         /// <summary>
         /// In dieser Objektklasse implementieren
         /// </summary>
 		Kistl.App.Base.DataType InvokeOnObjectClass {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Name des implementierenden Members
-        /// </summary>
-		string MemberName {
 			get;
 			set;
 		}
@@ -48,15 +34,5 @@ namespace Kistl.App.Base
 			get;
 			set;
 		}
-        /// <summary>
-        /// 
-        /// </summary>
-
-		 string GetCodeTemplate() ;
-        /// <summary>
-        /// 
-        /// </summary>
-
-		 string GetMemberName() ;
     }
 }

@@ -290,4 +290,103 @@ namespace Kistl.API
     /// <typeparam name="T">Type of the implementing Object.</typeparam>
     /// <param name="obj">>Object that has fired this Event.</param>
     public delegate void ObjectEventHandler<T>(T obj) where T : IDataObject;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="V"></typeparam>
+    public class PropertyGetterEventArgs<V>
+    {
+        public PropertyGetterEventArgs(V orignal)
+        {
+            this.Original = orignal;
+            this.Result = orignal;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public V Original { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public V Result { get; set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="V"></typeparam>
+    public class PropertyPreSetterEventArgs<V>
+    {
+        public PropertyPreSetterEventArgs(V oldVal, V newVal)
+        {
+            this.OldValue = oldVal;
+            this.NewValue = newVal;
+            this.Result = newVal;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public V OldValue { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public V NewValue { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public V Result { get; set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="V"></typeparam>
+    public class PropertyPostSetterEventArgs<V>
+    {
+        public PropertyPostSetterEventArgs(V oldVal, V newVal)
+        {
+            this.OldValue = oldVal;
+            this.NewValue = newVal;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public V OldValue { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public V NewValue { get; private set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>No Template restictions. Can be called on a Class or Struct</remarks>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="V"></typeparam>
+    /// <param name="obj"></param>
+    /// <param name="e"></param>
+    public delegate void PropertyGetterHandler<T, V>(T obj, PropertyGetterEventArgs<V> e);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>No Template restictions. Can be called on a Class or Struct</remarks>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="V"></typeparam>
+    /// <param name="obj"></param>
+    /// <param name="e"></param>
+    public delegate void PropertyPreSetterHandler<T, V>(T obj, PropertyPreSetterEventArgs<V> e);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>No Template restictions. Can be called on a Class or Struct</remarks>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="V"></typeparam>
+    /// <param name="obj"></param>
+    /// <param name="e"></param>
+    public delegate void PropertyPostSetterHandler<T, V>(T obj, PropertyPostSetterEventArgs<V> e);
 }

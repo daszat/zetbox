@@ -106,6 +106,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all PropertyInvocation</summary>
+		/// 
+		public IQueryable<PropertyInvocation> PropertyInvocations
+		{ 
+			get
+			{
+				return Context.GetQuery<PropertyInvocation>();
+			}
+		}
+		
 		/// <summary>List of all Property</summary>
 		/// Metadefinition Object for Properties. This class is abstract.
 		public IQueryable<Property> Properties

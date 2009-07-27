@@ -14,8 +14,8 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
     public partial class ListProperty
         : Templates.Implementation.ObjectClasses.ListProperty
     {
-        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, DataType containingType, Type type, String name, Property property)
-            : base(_host, ctx, serializationList, containingType, type, name, property)
+        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, DataType containingType, String name, Property property)
+            : base(_host, ctx, serializationList, containingType, name, property)
         {
         }
 

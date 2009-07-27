@@ -377,6 +377,16 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PropertyInvocation">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PropertyInvocation)">
+	    <MappingFragment StoreEntitySet="PropertyInvocation">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="InvocationType__Implementation__" ColumnName="InvocationType" />
+<ScalarProperty Name="MemberName" ColumnName="MemberName" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Relation">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Relation)">
 	    <MappingFragment StoreEntitySet="Relation">
@@ -1302,6 +1312,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_ValueModelDescriptor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Property_has_PropertyInvocation
+    A: One Property as InvokeOnProperty
+    B: ZeroOrMore PropertyInvocation as Invocations
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_Property_has_PropertyInvocation"
+                           TypeName="Model.FK_Property_has_PropertyInvocation"
+                           StoreEntitySet="PropertyInvocation" >
+      <EndProperty Name="InvokeOnProperty">
+        <ScalarProperty Name="ID" ColumnName="fk_InvokeOnProperty"/>
+      </EndProperty>
+      <EndProperty Name="Invocations">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_InvokeOnProperty" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_PropertyInvocation_has_TypeRef
+    A: ZeroOrMore PropertyInvocation as PropertyInvocation
+    B: One TypeRef as Implementor
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_PropertyInvocation_has_TypeRef"
+                           TypeName="Model.FK_PropertyInvocation_has_TypeRef"
+                           StoreEntitySet="PropertyInvocation" >
+      <EndProperty Name="Implementor">
+        <ScalarProperty Name="ID" ColumnName="fk_Implementor"/>
+      </EndProperty>
+      <EndProperty Name="PropertyInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Implementor" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Relation_hasA_RelationEnd

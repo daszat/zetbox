@@ -14,12 +14,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     public partial class ListProperty
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serList,
-            DataType dataType, Type propertyType, string propertyName, Property prop)
+            DataType dataType, string propertyName, Property prop)
         {
             host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx,
                  serList,
                  dataType,
-                 prop.GetPropertyType(),
                  prop.PropertyName,
                  prop);
         }

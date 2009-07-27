@@ -149,55 +149,67 @@ namespace Kistl.Client
             {
                 foreach (MethodInvocation mi in objClass.MethodInvocations)
                 {
-                    try
+                    CreateInvokeInfo(warnings, objType, mi, "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
+                }
+
+                foreach (Property prop in objClass.Properties)
+                {
+                    foreach (PropertyInvocation pi in prop.Invocations)
                     {
-                        if (mi.Implementor.Assembly.DeploymentRestrictions == DeploymentRestriction.ServerOnly) continue;
-
-                        // as noted above, no methods are 
-                        // attached yet, so TypeRef.AsType() 
-                        // and TypeRef.ToString() would be 
-                        // nice, but aren't available yet.
-                        Type t = Type.GetType(mi.Implementor.FullName + ", " + mi.Implementor.Assembly.AssemblyName);
-                        if (t == null)
-                        {
-                            warnings.AppendLine(string.Format("Warning: Type {0}, {1} not found", mi.Implementor.FullName, mi.Implementor.Assembly.AssemblyName));
-                            return;
-                        }
-
-                        MethodInfo clrMethod = t.GetMethod(mi.MemberName);
-                        if (clrMethod == null)
-                        {
-                            warnings.AppendLine(string.Format("Warning: CLR Method {0} not found", mi.MemberName));
-                            return;
-                        }
-
-                        EventInfo ei = objType.GetEvent(
-                            "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
-
-                        if (ei == null)
-                        {
-                            warnings.AppendLine(string.Format("Warning: CLR Event On{0}_{1} not found", mi.Method.MethodName, mi.InvokeOnObjectClass.ClassName));
-                            return;
-                        }
-
-                        InvokeInfo ii = new InvokeInfo()
-                        {
-                            CLRMethod = clrMethod,
-                            Instance = Activator.CreateInstance(t),
-                            CLREvent = ei
-                        };
-
-                        if (!customAction.ContainsKey(objType))
-                        {
-                            customAction.Add(objType, new List<InvokeInfo>());
-                        }
-                        customAction[objType].Add(ii);
-                    }
-                    catch (Exception ex)
-                    {
-                        warnings.AppendLine(ex.Message);
+                        CreateInvokeInfo(warnings, objType, pi, "On" + prop.PropertyName + "_" + pi.InvocationType);
                     }
                 }
+            }
+        }
+
+        private void CreateInvokeInfo(StringBuilder warnings, Type objType, IInvocation invoke, string eventName)
+        {
+            try
+            {
+                if (invoke.Implementor.Assembly.DeploymentRestrictions == DeploymentRestriction.ServerOnly) return;
+
+                // as noted above, no methods are 
+                // attached yet, so TypeRef.AsType() 
+                // and TypeRef.ToString() would be 
+                // nice, but aren't available yet.
+                Type t = Type.GetType(invoke.Implementor.FullName + ", " + invoke.Implementor.Assembly.AssemblyName);
+                if (t == null)
+                {
+                    warnings.AppendLine(string.Format("Warning: Type {0}, {1} not found", invoke.Implementor.FullName, invoke.Implementor.Assembly.AssemblyName));
+                    return;
+                }
+
+                MethodInfo clrMethod = t.GetMethod(invoke.MemberName);
+                if (clrMethod == null)
+                {
+                    warnings.AppendLine(string.Format("Warning: CLR Method {0} not found", invoke.MemberName));
+                    return;
+                }
+
+                EventInfo ei = objType.GetEvent(eventName);
+
+                if (ei == null)
+                {
+                    warnings.AppendLine(string.Format("Warning: CLR Event {0} not found", eventName));
+                    return;
+                }
+
+                InvokeInfo ii = new InvokeInfo()
+                {
+                    CLRMethod = clrMethod,
+                    Instance = Activator.CreateInstance(t),
+                    CLREvent = ei
+                };
+
+                if (!customAction.ContainsKey(objType))
+                {
+                    customAction.Add(objType, new List<InvokeInfo>());
+                }
+                customAction[objType].Add(ii);
+            }
+            catch (Exception ex)
+            {
+                warnings.AppendLine(ex.Message);
             }
         }
     }

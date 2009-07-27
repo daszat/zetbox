@@ -11,7 +11,6 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="SerializationMembersList" %>
 <%@ Parameter Name="containingType" Type="DataType" %>
-<%@ Parameter Name="type" Type="Type" %>
 <%@ Parameter Name="name" Type="String" %>
 <%@ Parameter Name="property" Type="Property" %>
 <%

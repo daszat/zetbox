@@ -11,6 +11,7 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
 <%@ Parameter Name="prop" Type="EnumerationProperty" %>
+<%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%
 
 	string interfaceName = prop.ObjectClass.ClassName;
@@ -20,6 +21,7 @@
 	string backingName = "_" + name;
 
 	string enumType = prop.ReferencedTypeAsCSharp();
+	string eventName = "On" + name;
 
 %>
    		// <%= this.GetType() %>
@@ -28,17 +30,62 @@
         {
             get
             {
-                return <%= backingName %>;
-            }
+<%
+				if(callGetterSetterEvents)
+				{
+%>
+				var __value = <%= backingName %>;
+				if(<%= eventName %>_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<<%= enumType %>>(__value);
+					<%= eventName %>_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
+<% 
+				}
+				else
+				{
+%>
+				return <%= backingName %>;
+<%
+				}
+%>            }
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (<%= backingName %> != value)
                 {
 					var __oldValue = <%= backingName %>;
-                    NotifyPropertyChanging("<%= name %>", "<%= efName %>", __oldValue, value);
+					var __newValue = value;
+<%
+					if(callGetterSetterEvents)
+					{
+%>
+                    if(<%= eventName %>_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<<%= enumType %>>(__oldValue, __newValue);
+						<%= eventName %>_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+<%
+					}
+%>					
+                    NotifyPropertyChanging("<%= name %>", "<%= efName %>", __oldValue, __newValue);
                     <%= backingName %> = value;
-                    NotifyPropertyChanged("<%= name %>", "<%= efName %>", __oldValue, value);
+                    NotifyPropertyChanged("<%= name %>", "<%= efName %>", __oldValue, __newValue);
+<%
+					if(callGetterSetterEvents)
+					{
+%>
+                    if(<%= eventName %>_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<<%= enumType %>>(__oldValue, __newValue);
+						<%= eventName %>_PostSetter(this, e);
+                    }
+<%
+					}
+%>                    
                 }
             }
         }

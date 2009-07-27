@@ -17,7 +17,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
-            ObjectReferenceProperty prop)
+            ObjectReferenceProperty prop, bool callGetterSetterEvents)
         {
             Debug.Assert(!prop.IsList);
 
@@ -28,7 +28,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             var rel = RelationExtensions.Lookup(ctx, prop);
             var endRole = (RelationEndRole)rel.GetEnd(prop).Role;
             Call(host, ctx, serializationList,
-                name, ownInterface, referencedInterface, rel, endRole);
+                name, ownInterface, referencedInterface, rel, endRole, callGetterSetterEvents);
 
         }
 
@@ -39,7 +39,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string ownInterface,
             string referencedInterface,
             Relation rel,
-            RelationEndRole endRole)
+            RelationEndRole endRole, bool callGetterSetterEvents)
         {
             RelationEnd relEnd = rel.GetEnd(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
@@ -54,7 +54,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 name, efName, fkBackingName, fkGuidBackingName,
                 ownInterface, referencedInterface, 
                 rel, endRole,
-                hasInverseNavigator, rel.NeedsPositionStorage(endRole));
+                hasInverseNavigator, rel.NeedsPositionStorage(endRole), callGetterSetterEvents);
         }
 
 
@@ -70,10 +70,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Relation rel,
             RelationEndRole endRole,
             bool hasInverseNavigator,
-            bool hasPositionStorage)
+            bool hasPositionStorage,
+            bool callGetterSetterEvents)
         {
             host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx, serializationList,
-                name, efName, fkBackingName, fkGuidBackingName, ownInterface, referencedInterface, rel, endRole, hasInverseNavigator, hasPositionStorage);
+                name, efName, fkBackingName, fkGuidBackingName, ownInterface, referencedInterface, rel, endRole, hasInverseNavigator, hasPositionStorage, callGetterSetterEvents);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)

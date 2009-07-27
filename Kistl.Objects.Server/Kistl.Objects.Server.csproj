@@ -107,6 +107,7 @@
     <Compile Include="PresentableModelDescriptor.Server.Designer.cs" />
     <Compile Include="Projekt.Server.Designer.cs" />
     <Compile Include="Property.Server.Designer.cs" />
+    <Compile Include="PropertyInvocation.Server.Designer.cs" />
     <Compile Include="Relation.Server.Designer.cs" />
     <Compile Include="RelationEnd.Server.Designer.cs" />
     <Compile Include="StringParameter.Server.Designer.cs" />

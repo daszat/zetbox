@@ -436,7 +436,7 @@ namespace Kistl.App.Base
         {
             try
             {
-				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(165).DefaultValue.GetDefaultValue();
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(30).DefaultValue.GetDefaultValue();
             }
             catch (NotImplementedException)
             {
@@ -462,7 +462,7 @@ namespace Kistl.App.Base
 			{
 				case "A":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(93).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(22).Constraints
 						.Where(c => !c.IsValid(this, this.A))
 						.Select(c => c.GetErrorText(this, this.A))
 						.ToArray();
@@ -471,7 +471,7 @@ namespace Kistl.App.Base
 				}
 				case "B":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(88).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(26).Constraints
 						.Where(c => !c.IsValid(this, this.B))
 						.Select(c => c.GetErrorText(this, this.B))
 						.ToArray();
@@ -480,7 +480,7 @@ namespace Kistl.App.Base
 				}
 				case "Description":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(30).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(161).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -489,7 +489,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(165).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(30).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -498,7 +498,7 @@ namespace Kistl.App.Base
 				}
 				case "Module":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(89).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(150).Constraints
 						.Where(c => !c.IsValid(this, this.Module))
 						.Select(c => c.GetErrorText(this, this.Module))
 						.ToArray();
@@ -516,7 +516,7 @@ namespace Kistl.App.Base
 				}
 				case "Verb":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(31).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(81).Constraints
 						.Where(c => !c.IsValid(this, this.Verb))
 						.Select(c => c.GetErrorText(this, this.Verb))
 						.ToArray();
@@ -532,6 +532,13 @@ namespace Kistl.App.Base
 		{
 			// fix direct object references
 
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
 			if (_fk_guid_B.HasValue)
 				B__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_B.Value);
 			else if (_fk_B.HasValue)
@@ -545,13 +552,6 @@ namespace Kistl.App.Base
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
 			else
 				Module__Implementation__ = null;
-
-			if (_fk_guid_A.HasValue)
-				A__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_A.Value);
-			else if (_fk_A.HasValue)
-				A__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_A.Value);
-			else
-				A__Implementation__ = null;
 		}
 #region Serializer
 

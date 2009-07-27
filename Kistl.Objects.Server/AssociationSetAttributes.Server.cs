@@ -509,6 +509,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Property_has_PropertyInvocation
+    A: One Property as InvokeOnProperty
+    B: ZeroOrMore PropertyInvocation as Invocations
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Property_has_PropertyInvocation",
+    "InvokeOnProperty", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Property__Implementation__),
+    "Invocations", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyInvocation__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_PropertyInvocation_has_TypeRef
+    A: ZeroOrMore PropertyInvocation as PropertyInvocation
+    B: One TypeRef as Implementor
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_PropertyInvocation_has_TypeRef",
+    "PropertyInvocation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyInvocation__Implementation__),
+    "Implementor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Relation_hasA_RelationEnd
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as A

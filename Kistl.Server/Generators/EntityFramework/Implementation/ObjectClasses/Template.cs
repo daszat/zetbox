@@ -95,7 +95,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             this.WriteLine("        // enumeration property");
             Implementation.ObjectClasses.EnumerationPropertyTemplate.Call(Host, ctx,
                 this.MembersToSerialize,
-                prop);
+                prop, true);
         }
 
         protected override void ApplyStructPropertyTemplate(StructProperty prop)
@@ -142,8 +142,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                     rel.NeedsPositionStorage((RelationEndRole)relEnd.Role),
                     otherEnd.Type.ImplementsIExportable(ctx),
                     prop.Module.Namespace,
-                    relEnd.Navigator != null && relEnd.Navigator.EagerLoading
-                    );
+                    relEnd.Navigator != null && relEnd.Navigator.EagerLoading,
+                    true);
         }
 
         protected override void ApplyCollectionEntryListTemplate(Relation rel, RelationEndRole endRole)

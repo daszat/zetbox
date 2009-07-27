@@ -24,7 +24,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
                 propertyName, rel.GetRelationAssociationName(endRole), relEnd.RoleName,
                 relEnd.Type.GetDataTypeString(), relEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
                 rel.NeedsPositionStorage(endRole), ImplementsIExportable(), relEnd.Type.Module.Namespace,
-                eagerLoading);
+                eagerLoading, false);
         }
 
         protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)

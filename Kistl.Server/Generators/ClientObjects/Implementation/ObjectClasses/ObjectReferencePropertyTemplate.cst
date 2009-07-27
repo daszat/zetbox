@@ -22,9 +22,11 @@
 <%@ Parameter Name="endRole" Type="RelationEndRole" %>
 <%@ Parameter Name="hasInverseNavigator" Type="bool" %>
 <%@ Parameter Name="hasPositionStorage" Type="bool" %>
+<%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%
     RelationEnd relEnd = rel.GetEnd(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+	string eventName = "On" + name;
 %>
 		// <%= this.GetType() %>
         // implement the user-visible interface
@@ -34,10 +36,27 @@
         {
             get
             {
+				<%= referencedInterface %> __value;
                 if (<%= fkBackingName %>.HasValue)
-                    return Context.Find<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
+                    __value = Context.Find<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
                 else
-                    return null;
+                    __value = null;
+
+<%
+				if(callGetterSetterEvents)
+				{
+%>
+				if(<%= eventName %>_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(__value);
+					<%= eventName %>_Getter(this, e);
+					__value = e.Result;
+				}
+<%
+				}
+%>
+                    
+                return __value;
             }
             set
             {
@@ -51,13 +70,28 @@
 					return;
 			           
 	            // cache old value to remove inverse references later
-                var oldValue = <%= name %>;
+                var __oldValue = <%= name %>;
+				var __newValue = value;
 
 				// Changing Event fires before anything is touched
-				NotifyPropertyChanging("<%= name %>", oldValue, value);
+				NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
+				
+<%
+				if(callGetterSetterEvents)
+				{
+%>
+                if(<%= eventName %>_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
+					<%= eventName %>_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+<%
+				}
+%>
                 
 				// next, set the local reference
-                <%= fkBackingName %> = value == null ? (int?)null : value.ID;
+                <%= fkBackingName %> = __newValue == null ? (int?)null : __newValue.ID;
 				
 <%
     if (hasInverseNavigator)
@@ -71,42 +105,42 @@
 				// only be touched after setting the local value above. 
 				// TODO: for complete correctness, the "other" Changing event should also fire 
 				//       before the local value is changed
-				if (oldValue != null)
+				if (__oldValue != null)
 				{
 <%
         if (otherProp.IsList)
         {
-			// TODO: check whether oldValue is loaded before potentially triggering a DB Call
+			// TODO: check whether __oldValue is loaded before potentially triggering a DB Call
 %>
 					// remove from old list
-					(oldValue.<%= otherName %> as OneNRelationCollection<<%= ownInterface %>>).RemoveWithoutClearParent(this);
+					(__oldValue.<%= otherName %> as OneNRelationCollection<<%= ownInterface %>>).RemoveWithoutClearParent(this);
 <%
         }
         else
         {
 %>
 					// unset old reference
-					oldValue.<%= otherName %> = null;
+					__oldValue.<%= otherName %> = null;
 <%
         }
 %>
 				}
 
-                if (value != null)
+                if (__newValue != null)
                 {
 <%
         if (otherProp.IsList)
         {
 %>
 					// add to new list
-					(value.<%= otherName %> as OneNRelationCollection<<%= ownInterface %>>).AddWithoutSetParent(this);
+					(__newValue.<%= otherName %> as OneNRelationCollection<<%= ownInterface %>>).AddWithoutSetParent(this);
 <%
         }
         else
         {
 %>
 					// set new reference
-                    value.<%= otherName %> = this;
+                    __newValue.<%= otherName %> = this;
 <%
         }
 %>
@@ -115,7 +149,20 @@
     }
 %>
 				// everything is done. fire the Changed event
-				NotifyPropertyChanged("<%= name %>", oldValue, value);
+				NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
+
+<%
+				if(callGetterSetterEvents)
+				{
+%>
+                if(<%= eventName %>_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
+					<%= eventName %>_PostSetter(this, e);
+                }
+<%
+				}
+%>                
             }
         }
         

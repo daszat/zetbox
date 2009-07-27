@@ -18,7 +18,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
                 propertyName, prop.GetAssociationName(), prop.ObjectClass.ClassName,
                 prop.ObjectClass.ClassName, prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix,
                 false, false, prop.Module.Namespace,
-                false);
+                false, false);
 
         }
 

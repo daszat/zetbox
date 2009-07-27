@@ -10,8 +10,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     public class NotifyingValueProperty
         : Templates.Implementation.ObjectClasses.NotifyingValueProperty
     {
-        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList list, string type, string name, string moduleNamespace)
-            : base(_host, ctx, list, type, name, moduleNamespace)
+        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList list, string type, string name, bool callGetterSetterEvents, string moduleNamespace)
+            : base(_host, ctx, list, type, name, callGetterSetterEvents, moduleNamespace)
         {
 
         }

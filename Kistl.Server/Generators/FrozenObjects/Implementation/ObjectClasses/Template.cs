@@ -52,7 +52,6 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             Implementation.ObjectClasses.ListProperty.Call(Host, ctx,
                  serList,
                  this.DataType,
-                 prop.GetPropertyType(),
                  prop.PropertyName,
                  prop);
         }

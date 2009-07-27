@@ -12,6 +12,7 @@
 <%@ Parameter Name="serializationList" Type="SerializationMembersList" %>
 <%@ Parameter Name="type" Type="string" %>
 <%@ Parameter Name="name" Type="String" %>
+<%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%@ Parameter Name="modulenamespace" Type="String" %>
 <%
 
@@ -20,6 +21,7 @@
 	ApplyAttributesTemplate();
 
 	string backingName = BackingMemberFromName(name);
+	string eventName = "On" + name;
 
 %>
    		// <%= this.GetType() %>
@@ -27,7 +29,27 @@
         {
             get
             {
-                return <%= backingName %>;
+<%
+				if(callGetterSetterEvents)
+				{
+%>
+				var __value = <%= backingName %>;
+				if(<%= eventName %>_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<<%= type %>>(__value);
+					<%= eventName %>_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
+<% 
+				}
+				else
+				{
+%>
+				return <%= backingName %>;
+<%
+				}
+%>
             }
             set
             {
@@ -35,9 +57,36 @@
                 if (<%= backingName %> != value)
                 {
 					var __oldValue = <%= backingName %>;
-                    NotifyPropertyChanging("<%= name %>", __oldValue, value);
-                    <%= backingName %> = value;
-                    NotifyPropertyChanged("<%= name %>", __oldValue, value);
+					var __newValue = value;
+<%
+					if(callGetterSetterEvents)
+					{
+%>
+                    if(<%= eventName %>_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<<%= type %>>(__oldValue, __newValue);
+						<%= eventName %>_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+<%
+					}
+%>
+                    NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
+                    <%= backingName %> = __newValue;
+                    NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
+
+<%
+					if(callGetterSetterEvents)
+					{
+%>
+                    if(<%= eventName %>_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<<%= type %>>(__oldValue, __newValue);
+						<%= eventName %>_PostSetter(this, e);
+                    }
+<%
+					}
+%>
                 }
             }
         }

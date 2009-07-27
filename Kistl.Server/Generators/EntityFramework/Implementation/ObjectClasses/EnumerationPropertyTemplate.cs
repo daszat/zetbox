@@ -11,10 +11,10 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 {
     public partial class EnumerationPropertyTemplate
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, Templates.Implementation.SerializationMembersList list, EnumerationProperty prop)
+        public static void Call(IGenerationHost host, IKistlContext ctx, Templates.Implementation.SerializationMembersList list, EnumerationProperty prop, bool callGetterSetterEvents)
         {
             host.CallTemplate("Implementation.ObjectClasses.EnumerationPropertyTemplate", ctx,
-                list, prop);
+                list, prop, callGetterSetterEvents);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list)

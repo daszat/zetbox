@@ -14,18 +14,16 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected IKistlContext ctx;
 		protected SerializationMembersList serializationList;
 		protected DataType containingType;
-		protected Type type;
 		protected String name;
 		protected Property property;
 
 
-        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializationMembersList serializationList, DataType containingType, Type type, String name, Property property)
+        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializationMembersList serializationList, DataType containingType, String name, Property property)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.serializationList = serializationList;
 			this.containingType = containingType;
-			this.type = type;
 			this.name = name;
 			this.property = property;
 
@@ -33,12 +31,12 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 ApplyAttributesTemplate();
 
 	var backingName = BackingMemberFromName(name);
 
-#line 22 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+#line 21 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  GetPropertyTypeString() , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -48,13 +46,13 @@ this.WriteObjects("                if (",  backingName , " == null)\r\n");
 this.WriteObjects("                    ",  backingName , " = ",  GetInitialisationExpression() , ";\r\n");
 this.WriteObjects("                return ",  backingName , ";\r\n");
 this.WriteObjects("            }\r\n");
-#line 32 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+#line 31 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 ApplySettor();
 
-#line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  GetBackingTypeString() , " ",  backingName , ";\r\n");
-#line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
+#line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ListProperty.cst"
 AddSerialization(serializationList, name);
 
 

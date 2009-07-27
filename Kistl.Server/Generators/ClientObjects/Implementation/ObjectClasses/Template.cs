@@ -53,7 +53,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             this.WriteLine("        // object reference property");
             Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(
                 Host, ctx, this.MembersToSerialize,
-                prop);
+                prop, true);
         }
 
         protected override void ApplyStructPropertyTemplate(StructProperty prop)

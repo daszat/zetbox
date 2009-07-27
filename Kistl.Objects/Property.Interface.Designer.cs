@@ -47,6 +47,11 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// 
+        /// </summary>
+
+        ICollection<Kistl.App.Base.PropertyInvocation> Invocations { get; }
+        /// <summary>
         /// Whether or not a list-valued property has a index
         /// </summary>
 		bool IsIndexed {
