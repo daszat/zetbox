@@ -1,0 +1,36 @@
+\chapter{Programming}
+
+This chapter describes the various ways and pieces the Kistl system is
+programmed and customized.
+
+\section{Objects}
+
+\section{Modules}
+
+\section{Enhancing Kistl's inner workings}
+
+\subsection{Database Providers}
+
+\section{Graphical User Interface}
+
+Like other subsystems, the GUI core is designed to be platform
+independent. Therefore only the "outermost" shell contains toolkit
+specific code.
+
+\subsection{Architecture}
+
+The GUI is modeled after the Model-View-ViewModel architecture. The
+\emph{Model} represents the underlying data structures and business
+logic. It is provided by the generated classes from the actual
+datamodel. \emph{View Models} provide display specific functionality
+like formatting, transient state holding and implementing the user's
+possible actions. They always inherit from
+\texttt{Kistl.Client.Presentables.PresentableModel}. Common
+implementations reside in the \texttt{Kistl.Client.Presentables}
+namespace. Finally, \emph{Views} (editors and displays) are the actual
+components taking care of showing content to the user and converting the
+users keypresses and clicks into calls on the view models interface.
+Views are toolkit\footnote{Toolkits are GUI libraries like GTK\# or
+Windows Forms.} specific and reside in the toolkit's respective
+assembly.
+
