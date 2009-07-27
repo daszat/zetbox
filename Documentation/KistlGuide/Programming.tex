@@ -22,15 +22,104 @@ specific code.
 The GUI is modeled after the Model-View-ViewModel architecture. The
 \emph{Model} represents the underlying data structures and business
 logic. It is provided by the generated classes from the actual
-datamodel. \emph{View Models} provide display specific functionality
-like formatting, transient state holding and implementing the user's
-possible actions. They always inherit from
-\texttt{Kistl.Client.Presentables.PresentableModel}. Common
-implementations reside in the \texttt{Kistl.Client.Presentables}
-namespace. Finally, \emph{Views} (editors and displays) are the actual
-components taking care of showing content to the user and converting the
-users keypresses and clicks into calls on the view models interface.
-Views are toolkit\footnote{Toolkits are GUI libraries like GTK\# or
-Windows Forms.} specific and reside in the toolkit's respective
-assembly.
+datamodel. \emph{View Models} or \emph{presentable} models provide
+display specific functionality like formatting, transient state holding
+and implementing the user's possible actions. They always inherit from
+\emph{Kistl.Client.Presentables.PresentableModel}.
+Common implementations reside in the
+\emph{Kistl.Client.Presentables} namespace. Finally,
+\emph{Views} (editors and displays) are the actual components taking
+care of showing content to the user and converting the users keypresses
+and clicks into calls on the view models interface.  Views are
+toolkit\footnote{Toolkits are GUI libraries like WPF, GTK\# or Windows
+Forms but can also be implemented by more complex providers such as
+ASP.NET.} specific and reside in the toolkit's respective assembly.
+
+This architecture decouples the actual functionality of the Model and
+the View Model completly from the inner workings of a toolkit and
+thereby maximise the reuse of code between different clients.
+
+\subsection{Plumbing}
+
+The three layers are connected through two sets of descriptors. The
+\emph{PresentableModelDescriptor}s contain information about the
+available View Models and their preferred way of being displayed. The
+\emph{ViewDescriptor}s link \emph{PresentableModelDescriptor}s with
+the controls capable of displaying them.
+
+\subsubsection{Presentable Model Descriptors}
+
+Currently there exist three major types of View Models. 
+
+\begin{description}
+
+\item[\emph{DataObjectModel}s]{represent a complete data object;
+provide standardised access to properties; provide non-standard Views
+with additional functionality; selected via
+\emph{ObjectClass.DefaultPresentableModelDescriptor}}
+
+\item[\emph{ValueModel}s]{represent a specific piece of data;
+representations of Properties are selected via
+\emph{Property.ValueModelDescriptor}; method results are currently
+created directly via \emph{Factory.CreateSpecificModel}}
+
+\item[other Presentables]{represent objects in the View which do not
+have persistent representations, like dialogs or wizards; always
+created by calling \emph{Factory.CreateSpecificModel}}
+
+\end{description} 
+
+\subsubsection{View Descriptors}
+
+These descriptors list the available Views by Toolkit and which subset
+of Presentables they are able to work with.
+
+\subsubsection{Control Kind}
+
+The \emph{ControlKind} specifies the toolkit-independent kind or type of
+control that should display a given Presentable. While the View
+specifies the Control Kind it implements the Presentable requests a
+specific Kind to be displayed via the
+\emph{PresentableModelDescriptor.DefaultControlKind} value.
+
+In special situations this default value can be overridden. For example,
+the metadata of a property contains a \emph{RequestedControlKind} which
+is used instead of the \emph{DefaultControlKind} when present. If there
+is no View matching the requested Kind, the infrastructure may either
+fall back to the default control kind, or use a similar control kind
+from higher up in the hierarchy.
+
+Typical kinds of controls:
+
+\begin{description}
+
+\item[WorkspaceWindow] {the top-level control within which all user
+interaction happens}
+
+\item[SelectionTaskDialog] {a dialog letting the user select something
+from a longer list of items}
+
+\item[ObjectView] {display the modeled object in full}
+
+\item[ObjectListEntry] {display the modeled object as item in a list}
+
+\item[TextEntry] {lets the user edit a property as text}
+
+\item[IntegerSlider] {lets the user edit a number with a slider}
+
+\item[YesNoCheckbox] {a simple yes/no checkbox}
+
+\item[YesNoOtherText] {radio buttons allowing one to select either "yes",
+"no" or a TextEntry field}
+
+\item[ExtendedYesNoCheckbox] {a checkbox with additional text as label}
+
+\end{description}
+
+Control Kinds can also be used to configure the actual control. This
+possibility should be used sparingly as a control should instead seek to
+infer its configuration from the underlying Presentable. For example, an
+integer slider control should lookup the minimal and maximal allowed
+values in the underlying \emph{IntegerRangeConstraint} while an
+ExtendedYesNoCheckbox has no other place to retrieve the new label.
 
