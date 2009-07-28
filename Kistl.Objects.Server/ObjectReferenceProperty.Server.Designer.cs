@@ -46,7 +46,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _EagerLoading;
+				var __value = _EagerLoading;
+				if(OnEagerLoading_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<bool>(__value);
+					OnEagerLoading_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -54,14 +61,29 @@ namespace Kistl.App.Base
                 if (_EagerLoading != value)
                 {
 					var __oldValue = _EagerLoading;
-                    NotifyPropertyChanging("EagerLoading", __oldValue, value);
-                    _EagerLoading = value;
-                    NotifyPropertyChanged("EagerLoading", __oldValue, value);
+					var __newValue = value;
+                    if(OnEagerLoading_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+						OnEagerLoading_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("EagerLoading", __oldValue, __newValue);
+                    _EagerLoading = __newValue;
+                    NotifyPropertyChanged("EagerLoading", __oldValue, __newValue);
+
+                    if(OnEagerLoading_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+						OnEagerLoading_PostSetter(this, e);
+                    }
                 }
             }
         }
         private bool _EagerLoading;
-
+		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PostSetter;
         /// <summary>
         /// Pointer zur Objektklasse
         /// </summary>
@@ -109,7 +131,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnReferenceObjectClass_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.ObjectClass>(__value);
+					OnReferenceObjectClass_Getter(this, e);
+					__value = (Kistl.App.Base.ObjectClass__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -122,12 +151,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.ObjectClass__Implementation__)value;
+                Kistl.App.Base.ObjectClass __oldValue = (Kistl.App.Base.ObjectClass)r.Value;
+                Kistl.App.Base.ObjectClass __newValue = (Kistl.App.Base.ObjectClass)value;
+
+                if(OnReferenceObjectClass_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.ObjectClass>(__oldValue, __newValue);
+					OnReferenceObjectClass_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.ObjectClass__Implementation__)__newValue;
+                if(OnReferenceObjectClass_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.ObjectClass>(__oldValue, __newValue);
+					OnReferenceObjectClass_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferenceObjectClass_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferenceObjectClass_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferenceObjectClass_PostSetter;
         /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
@@ -175,7 +221,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnRelationEnd_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.RelationEnd>(__value);
+					OnRelationEnd_Getter(this, e);
+					__value = (Kistl.App.Base.RelationEnd__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -188,12 +241,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.RelationEnd__Implementation__)value;
+                Kistl.App.Base.RelationEnd __oldValue = (Kistl.App.Base.RelationEnd)r.Value;
+                Kistl.App.Base.RelationEnd __newValue = (Kistl.App.Base.RelationEnd)value;
+
+                if(OnRelationEnd_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.RelationEnd>(__oldValue, __newValue);
+					OnRelationEnd_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.RelationEnd__Implementation__)__newValue;
+                if(OnRelationEnd_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.RelationEnd>(__oldValue, __newValue);
+					OnRelationEnd_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>

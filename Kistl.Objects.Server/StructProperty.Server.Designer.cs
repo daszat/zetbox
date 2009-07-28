@@ -81,7 +81,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnStructDefinition_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Struct>(__value);
+					OnStructDefinition_Getter(this, e);
+					__value = (Kistl.App.Base.Struct__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -94,12 +101,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.Struct__Implementation__)value;
+                Kistl.App.Base.Struct __oldValue = (Kistl.App.Base.Struct)r.Value;
+                Kistl.App.Base.Struct __newValue = (Kistl.App.Base.Struct)value;
+
+                if(OnStructDefinition_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Struct>(__oldValue, __newValue);
+					OnStructDefinition_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.Struct__Implementation__)__newValue;
+                if(OnStructDefinition_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Struct>(__oldValue, __newValue);
+					OnStructDefinition_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>

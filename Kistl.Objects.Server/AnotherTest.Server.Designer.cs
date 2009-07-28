@@ -39,7 +39,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Test
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }

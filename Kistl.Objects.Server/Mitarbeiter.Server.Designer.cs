@@ -39,7 +39,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Projekte
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -67,7 +69,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _Geburtstag;
+				var __value = _Geburtstag;
+				if(OnGeburtstag_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<DateTime?>(__value);
+					OnGeburtstag_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -75,14 +84,29 @@ namespace Kistl.App.Projekte
                 if (_Geburtstag != value)
                 {
 					var __oldValue = _Geburtstag;
-                    NotifyPropertyChanging("Geburtstag", __oldValue, value);
-                    _Geburtstag = value;
-                    NotifyPropertyChanged("Geburtstag", __oldValue, value);
+					var __newValue = value;
+                    if(OnGeburtstag_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+						OnGeburtstag_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Geburtstag", __oldValue, __newValue);
+                    _Geburtstag = __newValue;
+                    NotifyPropertyChanged("Geburtstag", __oldValue, __newValue);
+
+                    if(OnGeburtstag_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+						OnGeburtstag_PostSetter(this, e);
+                    }
                 }
             }
         }
         private DateTime? _Geburtstag;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime?> OnGeburtstag_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime?> OnGeburtstag_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime?> OnGeburtstag_PostSetter;
         /// <summary>
         /// Vorname Nachname
         /// </summary>
@@ -95,7 +119,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _Name;
+				var __value = _Name;
+				if(OnName_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnName_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -103,14 +134,29 @@ namespace Kistl.App.Projekte
                 if (_Name != value)
                 {
 					var __oldValue = _Name;
-                    NotifyPropertyChanging("Name", __oldValue, value);
-                    _Name = value;
-                    NotifyPropertyChanged("Name", __oldValue, value);
+					var __newValue = value;
+                    if(OnName_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnName_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Name", __oldValue, __newValue);
+                    _Name = __newValue;
+                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+
+                    if(OnName_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnName_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Name;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnName_PostSetter;
         /// <summary>
         /// Projekte des Mitarbeiters für die er Verantwortlich ist
         /// </summary>
@@ -171,7 +217,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _SVNr;
+				var __value = _SVNr;
+				if(OnSVNr_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnSVNr_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -179,14 +232,29 @@ namespace Kistl.App.Projekte
                 if (_SVNr != value)
                 {
 					var __oldValue = _SVNr;
-                    NotifyPropertyChanging("SVNr", __oldValue, value);
-                    _SVNr = value;
-                    NotifyPropertyChanged("SVNr", __oldValue, value);
+					var __newValue = value;
+                    if(OnSVNr_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnSVNr_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("SVNr", __oldValue, __newValue);
+                    _SVNr = __newValue;
+                    NotifyPropertyChanged("SVNr", __oldValue, __newValue);
+
+                    if(OnSVNr_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnSVNr_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _SVNr;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnSVNr_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnSVNr_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnSVNr_PostSetter;
         /// <summary>
         /// +43 123 12345678
         /// </summary>
@@ -199,7 +267,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _TelefonNummer;
+				var __value = _TelefonNummer;
+				if(OnTelefonNummer_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnTelefonNummer_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -207,14 +282,29 @@ namespace Kistl.App.Projekte
                 if (_TelefonNummer != value)
                 {
 					var __oldValue = _TelefonNummer;
-                    NotifyPropertyChanging("TelefonNummer", __oldValue, value);
-                    _TelefonNummer = value;
-                    NotifyPropertyChanged("TelefonNummer", __oldValue, value);
+					var __newValue = value;
+                    if(OnTelefonNummer_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnTelefonNummer_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("TelefonNummer", __oldValue, __newValue);
+                    _TelefonNummer = __newValue;
+                    NotifyPropertyChanged("TelefonNummer", __oldValue, __newValue);
+
+                    if(OnTelefonNummer_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnTelefonNummer_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _TelefonNummer;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnTelefonNummer_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnTelefonNummer_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, string> OnTelefonNummer_PostSetter;
         /// <summary>
         /// 
         /// </summary>

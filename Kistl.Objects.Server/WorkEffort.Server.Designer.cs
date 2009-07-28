@@ -39,7 +39,7 @@ namespace Kistl.App.TimeRecords
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.TimeRecords
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -67,7 +69,14 @@ namespace Kistl.App.TimeRecords
         {
             get
             {
-                return _From;
+				var __value = _From;
+				if(OnFrom_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<DateTime>(__value);
+					OnFrom_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -75,14 +84,29 @@ namespace Kistl.App.TimeRecords
                 if (_From != value)
                 {
 					var __oldValue = _From;
-                    NotifyPropertyChanging("From", __oldValue, value);
-                    _From = value;
-                    NotifyPropertyChanged("From", __oldValue, value);
+					var __newValue = value;
+                    if(OnFrom_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
+						OnFrom_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("From", __oldValue, __newValue);
+                    _From = __newValue;
+                    NotifyPropertyChanged("From", __oldValue, __newValue);
+
+                    if(OnFrom_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
+						OnFrom_PostSetter(this, e);
+                    }
                 }
             }
         }
         private DateTime _From;
-
+		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_PostSetter;
         /// <summary>
         /// Which employee effected this work effort.
         /// </summary>
@@ -130,7 +154,14 @@ namespace Kistl.App.TimeRecords
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnMitarbeiter_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Projekte.Mitarbeiter>(__value);
+					OnMitarbeiter_Getter(this, e);
+					__value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -143,12 +174,29 @@ namespace Kistl.App.TimeRecords
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
+                Kistl.App.Projekte.Mitarbeiter __oldValue = (Kistl.App.Projekte.Mitarbeiter)r.Value;
+                Kistl.App.Projekte.Mitarbeiter __newValue = (Kistl.App.Projekte.Mitarbeiter)value;
+
+                if(OnMitarbeiter_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Projekte.Mitarbeiter>(__oldValue, __newValue);
+					OnMitarbeiter_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)__newValue;
+                if(OnMitarbeiter_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Projekte.Mitarbeiter>(__oldValue, __newValue);
+					OnMitarbeiter_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PostSetter;
         /// <summary>
         /// A short label describing this work effort.
         /// </summary>
@@ -161,7 +209,14 @@ namespace Kistl.App.TimeRecords
         {
             get
             {
-                return _Name;
+				var __value = _Name;
+				if(OnName_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnName_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -169,14 +224,29 @@ namespace Kistl.App.TimeRecords
                 if (_Name != value)
                 {
 					var __oldValue = _Name;
-                    NotifyPropertyChanging("Name", __oldValue, value);
-                    _Name = value;
-                    NotifyPropertyChanged("Name", __oldValue, value);
+					var __newValue = value;
+                    if(OnName_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnName_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Name", __oldValue, __newValue);
+                    _Name = __newValue;
+                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+
+                    if(OnName_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnName_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Name;
-
+		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_PostSetter;
         /// <summary>
         /// Space for notes
         /// </summary>
@@ -189,7 +259,14 @@ namespace Kistl.App.TimeRecords
         {
             get
             {
-                return _Notes;
+				var __value = _Notes;
+				if(OnNotes_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnNotes_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -197,14 +274,29 @@ namespace Kistl.App.TimeRecords
                 if (_Notes != value)
                 {
 					var __oldValue = _Notes;
-                    NotifyPropertyChanging("Notes", __oldValue, value);
-                    _Notes = value;
-                    NotifyPropertyChanged("Notes", __oldValue, value);
+					var __newValue = value;
+                    if(OnNotes_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnNotes_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Notes", __oldValue, __newValue);
+                    _Notes = __newValue;
+                    NotifyPropertyChanged("Notes", __oldValue, __newValue);
+
+                    if(OnNotes_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnNotes_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Notes;
-
+		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_PostSetter;
         /// <summary>
         /// Point in time (inclusive) when the work effort ended.
         /// </summary>
@@ -217,7 +309,14 @@ namespace Kistl.App.TimeRecords
         {
             get
             {
-                return _Thru;
+				var __value = _Thru;
+				if(OnThru_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<DateTime?>(__value);
+					OnThru_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -225,14 +324,29 @@ namespace Kistl.App.TimeRecords
                 if (_Thru != value)
                 {
 					var __oldValue = _Thru;
-                    NotifyPropertyChanging("Thru", __oldValue, value);
-                    _Thru = value;
-                    NotifyPropertyChanged("Thru", __oldValue, value);
+					var __newValue = value;
+                    if(OnThru_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+						OnThru_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Thru", __oldValue, __newValue);
+                    _Thru = __newValue;
+                    NotifyPropertyChanged("Thru", __oldValue, __newValue);
+
+                    if(OnThru_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+						OnThru_PostSetter(this, e);
+                    }
                 }
             }
         }
         private DateTime? _Thru;
-
+		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(WorkEffort));

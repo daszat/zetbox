@@ -39,7 +39,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Base
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -163,7 +165,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _Description;
+				var __value = _Description;
+				if(OnDescription_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnDescription_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -171,14 +180,29 @@ namespace Kistl.App.Base
                 if (_Description != value)
                 {
 					var __oldValue = _Description;
-                    NotifyPropertyChanging("Description", __oldValue, value);
-                    _Description = value;
-                    NotifyPropertyChanged("Description", __oldValue, value);
+					var __newValue = value;
+                    if(OnDescription_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnDescription_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Description", __oldValue, __newValue);
+                    _Description = __newValue;
+                    NotifyPropertyChanged("Description", __oldValue, __newValue);
+
+                    if(OnDescription_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnDescription_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Description;
-
+		public event PropertyGetterHandler<Kistl.App.Base.Module, string> OnDescription_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnDescription_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnDescription_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -191,7 +215,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ExportGuid;
+				var __value = _ExportGuid;
+				if(OnExportGuid_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Guid>(__value);
+					OnExportGuid_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -199,14 +230,29 @@ namespace Kistl.App.Base
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
-                    _ExportGuid = value;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+					var __newValue = value;
+                    if(OnExportGuid_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+						OnExportGuid_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
+                    if(OnExportGuid_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+						OnExportGuid_PostSetter(this, e);
+                    }
                 }
             }
         }
         private Guid _ExportGuid;
-
+		public event PropertyGetterHandler<Kistl.App.Base.Module, Guid> OnExportGuid_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Module, Guid> OnExportGuid_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Module, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// Name des Moduls
         /// </summary>
@@ -219,7 +265,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ModuleName;
+				var __value = _ModuleName;
+				if(OnModuleName_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnModuleName_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -227,14 +280,29 @@ namespace Kistl.App.Base
                 if (_ModuleName != value)
                 {
 					var __oldValue = _ModuleName;
-                    NotifyPropertyChanging("ModuleName", __oldValue, value);
-                    _ModuleName = value;
-                    NotifyPropertyChanged("ModuleName", __oldValue, value);
+					var __newValue = value;
+                    if(OnModuleName_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnModuleName_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("ModuleName", __oldValue, __newValue);
+                    _ModuleName = __newValue;
+                    NotifyPropertyChanged("ModuleName", __oldValue, __newValue);
+
+                    if(OnModuleName_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnModuleName_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _ModuleName;
-
+		public event PropertyGetterHandler<Kistl.App.Base.Module, string> OnModuleName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnModuleName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnModuleName_PostSetter;
         /// <summary>
         /// CLR Namespace des Moduls
         /// </summary>
@@ -247,7 +315,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _Namespace;
+				var __value = _Namespace;
+				if(OnNamespace_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnNamespace_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -255,14 +330,29 @@ namespace Kistl.App.Base
                 if (_Namespace != value)
                 {
 					var __oldValue = _Namespace;
-                    NotifyPropertyChanging("Namespace", __oldValue, value);
-                    _Namespace = value;
-                    NotifyPropertyChanged("Namespace", __oldValue, value);
+					var __newValue = value;
+                    if(OnNamespace_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnNamespace_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Namespace", __oldValue, __newValue);
+                    _Namespace = __newValue;
+                    NotifyPropertyChanged("Namespace", __oldValue, __newValue);
+
+                    if(OnNamespace_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnNamespace_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Namespace;
-
+		public event PropertyGetterHandler<Kistl.App.Base.Module, string> OnNamespace_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnNamespace_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnNamespace_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Module));

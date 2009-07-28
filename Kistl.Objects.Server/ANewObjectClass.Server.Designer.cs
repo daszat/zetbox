@@ -39,7 +39,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Test
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -67,7 +69,14 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _TestString;
+				var __value = _TestString;
+				if(OnTestString_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnTestString_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -75,14 +84,29 @@ namespace Kistl.App.Test
                 if (_TestString != value)
                 {
 					var __oldValue = _TestString;
-                    NotifyPropertyChanging("TestString", __oldValue, value);
-                    _TestString = value;
-                    NotifyPropertyChanged("TestString", __oldValue, value);
+					var __newValue = value;
+                    if(OnTestString_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnTestString_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("TestString", __oldValue, __newValue);
+                    _TestString = __newValue;
+                    NotifyPropertyChanged("TestString", __oldValue, __newValue);
+
+                    if(OnTestString_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnTestString_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _TestString;
-
+		public event PropertyGetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(ANewObjectClass));

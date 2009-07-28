@@ -39,7 +39,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Base
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -67,7 +69,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _Schema;
+				var __value = _Schema;
+				if(OnSchema_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnSchema_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -75,14 +84,29 @@ namespace Kistl.App.Base
                 if (_Schema != value)
                 {
 					var __oldValue = _Schema;
-                    NotifyPropertyChanging("Schema", __oldValue, value);
-                    _Schema = value;
-                    NotifyPropertyChanged("Schema", __oldValue, value);
+					var __newValue = value;
+                    if(OnSchema_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnSchema_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Schema", __oldValue, __newValue);
+                    _Schema = __newValue;
+                    NotifyPropertyChanged("Schema", __oldValue, __newValue);
+
+                    if(OnSchema_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnSchema_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Schema;
-
+		public event PropertyGetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_PostSetter;
         /// <summary>
         /// Version number of this schema
         /// </summary>
@@ -95,7 +119,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _Version;
+				var __value = _Version;
+				if(OnVersion_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<int>(__value);
+					OnVersion_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -103,14 +134,29 @@ namespace Kistl.App.Base
                 if (_Version != value)
                 {
 					var __oldValue = _Version;
-                    NotifyPropertyChanging("Version", __oldValue, value);
-                    _Version = value;
-                    NotifyPropertyChanged("Version", __oldValue, value);
+					var __newValue = value;
+                    if(OnVersion_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
+						OnVersion_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Version", __oldValue, __newValue);
+                    _Version = __newValue;
+                    NotifyPropertyChanged("Version", __oldValue, __newValue);
+
+                    if(OnVersion_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
+						OnVersion_PostSetter(this, e);
+                    }
                 }
             }
         }
         private int _Version;
-
+		public event PropertyGetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(CurrentSchema));

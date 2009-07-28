@@ -44,7 +44,14 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _AreaCode;
+				var __value = _AreaCode;
+				if(OnAreaCode_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnAreaCode_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -52,14 +59,29 @@ namespace Kistl.App.Test
                 if (_AreaCode != value)
                 {
 					var __oldValue = _AreaCode;
-                    NotifyPropertyChanging("AreaCode", __oldValue, value);
-                    _AreaCode = value;
-                    NotifyPropertyChanged("AreaCode", __oldValue, value);
+					var __newValue = value;
+                    if(OnAreaCode_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnAreaCode_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("AreaCode", __oldValue, __newValue);
+                    _AreaCode = __newValue;
+                    NotifyPropertyChanged("AreaCode", __oldValue, __newValue);
+
+                    if(OnAreaCode_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnAreaCode_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _AreaCode;
-
+		public event PropertyGetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_PostSetter;
         /// <summary>
         /// Enter a Number
         /// </summary>
@@ -72,7 +94,14 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _Number;
+				var __value = _Number;
+				if(OnNumber_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnNumber_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -80,14 +109,29 @@ namespace Kistl.App.Test
                 if (_Number != value)
                 {
 					var __oldValue = _Number;
-                    NotifyPropertyChanging("Number", __oldValue, value);
-                    _Number = value;
-                    NotifyPropertyChanged("Number", __oldValue, value);
+					var __newValue = value;
+                    if(OnNumber_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnNumber_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Number", __oldValue, __newValue);
+                    _Number = __newValue;
+                    NotifyPropertyChanged("Number", __oldValue, __newValue);
+
+                    if(OnNumber_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnNumber_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Number;
-
+		public event PropertyGetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(TestPhoneStruct));

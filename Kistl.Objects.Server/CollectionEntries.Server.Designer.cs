@@ -26,7 +26,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -34,9 +34,11 @@ namespace Kistl.App.Base
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -49,7 +51,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ExportGuid;
+				return _ExportGuid;
             }
             set
             {
@@ -57,9 +59,11 @@ namespace Kistl.App.Base
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
-                    _ExportGuid = value;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
             }
         }
@@ -108,7 +112,8 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -121,7 +126,11 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.ObjectClass__Implementation__)value;
+                Kistl.App.Base.ObjectClass __oldValue = (Kistl.App.Base.ObjectClass)r.Value;
+                Kistl.App.Base.ObjectClass __newValue = (Kistl.App.Base.ObjectClass)value;
+
+                r.Value = (Kistl.App.Base.ObjectClass__Implementation__)__newValue;
+                                
             }
         }
         
@@ -166,7 +175,8 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -179,7 +189,11 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.Interface__Implementation__)value;
+                Kistl.App.Base.Interface __oldValue = (Kistl.App.Base.Interface)r.Value;
+                Kistl.App.Base.Interface __newValue = (Kistl.App.Base.Interface)value;
+
+                r.Value = (Kistl.App.Base.Interface__Implementation__)__newValue;
+                                
             }
         }
         
@@ -289,7 +303,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -297,9 +311,11 @@ namespace Kistl.App.Projekte
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -348,7 +364,8 @@ namespace Kistl.App.Projekte
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -361,7 +378,11 @@ namespace Kistl.App.Projekte
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Projekte.Projekt__Implementation__)value;
+                Kistl.App.Projekte.Projekt __oldValue = (Kistl.App.Projekte.Projekt)r.Value;
+                Kistl.App.Projekte.Projekt __newValue = (Kistl.App.Projekte.Projekt)value;
+
+                r.Value = (Kistl.App.Projekte.Projekt__Implementation__)__newValue;
+                                
             }
         }
         
@@ -373,7 +394,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _A_pos;
+				return _A_pos;
             }
             set
             {
@@ -381,9 +402,11 @@ namespace Kistl.App.Projekte
                 if (_A_pos != value)
                 {
 					var __oldValue = _A_pos;
-                    NotifyPropertyChanging("A_pos", __oldValue, value);
-                    _A_pos = value;
-                    NotifyPropertyChanged("A_pos", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("A_pos", __oldValue, __newValue);
+                    _A_pos = __newValue;
+                    NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+
                 }
             }
         }
@@ -429,7 +452,8 @@ namespace Kistl.App.Projekte
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -442,7 +466,11 @@ namespace Kistl.App.Projekte
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
+                Kistl.App.Projekte.Mitarbeiter __oldValue = (Kistl.App.Projekte.Mitarbeiter)r.Value;
+                Kistl.App.Projekte.Mitarbeiter __newValue = (Kistl.App.Projekte.Mitarbeiter)value;
+
+                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)__newValue;
+                                
             }
         }
         
@@ -454,7 +482,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _B_pos;
+				return _B_pos;
             }
             set
             {
@@ -462,9 +490,11 @@ namespace Kistl.App.Projekte
                 if (_B_pos != value)
                 {
 					var __oldValue = _B_pos;
-                    NotifyPropertyChanging("B_pos", __oldValue, value);
-                    _B_pos = value;
-                    NotifyPropertyChanged("B_pos", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("B_pos", __oldValue, __newValue);
+                    _B_pos = __newValue;
+                    NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+
                 }
             }
         }
@@ -589,7 +619,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -597,9 +627,11 @@ namespace Kistl.App.GUI
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -648,7 +680,8 @@ namespace Kistl.App.GUI
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -661,7 +694,11 @@ namespace Kistl.App.GUI
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.GUI.Template__Implementation__)value;
+                Kistl.App.GUI.Template __oldValue = (Kistl.App.GUI.Template)r.Value;
+                Kistl.App.GUI.Template __newValue = (Kistl.App.GUI.Template)value;
+
+                r.Value = (Kistl.App.GUI.Template__Implementation__)__newValue;
+                                
             }
         }
         
@@ -706,7 +743,8 @@ namespace Kistl.App.GUI
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -719,7 +757,11 @@ namespace Kistl.App.GUI
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.GUI.Visual__Implementation__)value;
+                Kistl.App.GUI.Visual __oldValue = (Kistl.App.GUI.Visual)r.Value;
+                Kistl.App.GUI.Visual __newValue = (Kistl.App.GUI.Visual)value;
+
+                r.Value = (Kistl.App.GUI.Visual__Implementation__)__newValue;
+                                
             }
         }
         
@@ -815,7 +857,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -823,9 +865,11 @@ namespace Kistl.App.Base
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -838,7 +882,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ExportGuid;
+				return _ExportGuid;
             }
             set
             {
@@ -846,9 +890,11 @@ namespace Kistl.App.Base
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
-                    _ExportGuid = value;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
                 }
             }
         }
@@ -897,7 +943,8 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -910,7 +957,11 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.TypeRef__Implementation__)value;
+                Kistl.App.Base.TypeRef __oldValue = (Kistl.App.Base.TypeRef)r.Value;
+                Kistl.App.Base.TypeRef __newValue = (Kistl.App.Base.TypeRef)value;
+
+                r.Value = (Kistl.App.Base.TypeRef__Implementation__)__newValue;
+                                
             }
         }
         
@@ -922,7 +973,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _A_pos;
+				return _A_pos;
             }
             set
             {
@@ -930,9 +981,11 @@ namespace Kistl.App.Base
                 if (_A_pos != value)
                 {
 					var __oldValue = _A_pos;
-                    NotifyPropertyChanging("A_pos", __oldValue, value);
-                    _A_pos = value;
-                    NotifyPropertyChanged("A_pos", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("A_pos", __oldValue, __newValue);
+                    _A_pos = __newValue;
+                    NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+
                 }
             }
         }
@@ -978,7 +1031,8 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -991,7 +1045,11 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.TypeRef__Implementation__)value;
+                Kistl.App.Base.TypeRef __oldValue = (Kistl.App.Base.TypeRef)r.Value;
+                Kistl.App.Base.TypeRef __newValue = (Kistl.App.Base.TypeRef)value;
+
+                r.Value = (Kistl.App.Base.TypeRef__Implementation__)__newValue;
+                                
             }
         }
         
@@ -1003,7 +1061,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _B_pos;
+				return _B_pos;
             }
             set
             {
@@ -1011,9 +1069,11 @@ namespace Kistl.App.Base
                 if (_B_pos != value)
                 {
 					var __oldValue = _B_pos;
-                    NotifyPropertyChanging("B_pos", __oldValue, value);
-                    _B_pos = value;
-                    NotifyPropertyChanged("B_pos", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("B_pos", __oldValue, __newValue);
+                    _B_pos = __newValue;
+                    NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+
                 }
             }
         }
@@ -1170,7 +1230,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -1178,9 +1238,11 @@ namespace Kistl.App.GUI
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -1229,7 +1291,8 @@ namespace Kistl.App.GUI
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -1242,7 +1305,11 @@ namespace Kistl.App.GUI
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.GUI.Visual__Implementation__)value;
+                Kistl.App.GUI.Visual __oldValue = (Kistl.App.GUI.Visual)r.Value;
+                Kistl.App.GUI.Visual __newValue = (Kistl.App.GUI.Visual)value;
+
+                r.Value = (Kistl.App.GUI.Visual__Implementation__)__newValue;
+                                
             }
         }
         
@@ -1287,7 +1354,8 @@ namespace Kistl.App.GUI
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -1300,7 +1368,11 @@ namespace Kistl.App.GUI
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.GUI.Visual__Implementation__)value;
+                Kistl.App.GUI.Visual __oldValue = (Kistl.App.GUI.Visual)r.Value;
+                Kistl.App.GUI.Visual __newValue = (Kistl.App.GUI.Visual)value;
+
+                r.Value = (Kistl.App.GUI.Visual__Implementation__)__newValue;
+                                
             }
         }
         
@@ -1396,7 +1468,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -1404,9 +1476,11 @@ namespace Kistl.App.GUI
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -1455,7 +1529,8 @@ namespace Kistl.App.GUI
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -1468,7 +1543,11 @@ namespace Kistl.App.GUI
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.GUI.Visual__Implementation__)value;
+                Kistl.App.GUI.Visual __oldValue = (Kistl.App.GUI.Visual)r.Value;
+                Kistl.App.GUI.Visual __newValue = (Kistl.App.GUI.Visual)value;
+
+                r.Value = (Kistl.App.GUI.Visual__Implementation__)__newValue;
+                                
             }
         }
         
@@ -1513,7 +1592,8 @@ namespace Kistl.App.GUI
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -1526,7 +1606,11 @@ namespace Kistl.App.GUI
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.GUI.Visual__Implementation__)value;
+                Kistl.App.GUI.Visual __oldValue = (Kistl.App.GUI.Visual)r.Value;
+                Kistl.App.GUI.Visual __newValue = (Kistl.App.GUI.Visual)value;
+
+                r.Value = (Kistl.App.GUI.Visual__Implementation__)__newValue;
+                                
             }
         }
         
@@ -1623,7 +1707,7 @@ namespace Kistl.App.TimeRecords
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -1631,9 +1715,11 @@ namespace Kistl.App.TimeRecords
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -1682,7 +1768,8 @@ namespace Kistl.App.TimeRecords
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -1695,7 +1782,11 @@ namespace Kistl.App.TimeRecords
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.TimeRecords.WorkEffortAccount__Implementation__)value;
+                Kistl.App.TimeRecords.WorkEffortAccount __oldValue = (Kistl.App.TimeRecords.WorkEffortAccount)r.Value;
+                Kistl.App.TimeRecords.WorkEffortAccount __newValue = (Kistl.App.TimeRecords.WorkEffortAccount)value;
+
+                r.Value = (Kistl.App.TimeRecords.WorkEffortAccount__Implementation__)__newValue;
+                                
             }
         }
         
@@ -1740,7 +1831,8 @@ namespace Kistl.App.TimeRecords
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -1753,7 +1845,11 @@ namespace Kistl.App.TimeRecords
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
+                Kistl.App.Projekte.Mitarbeiter __oldValue = (Kistl.App.Projekte.Mitarbeiter)r.Value;
+                Kistl.App.Projekte.Mitarbeiter __newValue = (Kistl.App.Projekte.Mitarbeiter)value;
+
+                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)__newValue;
+                                
             }
         }
         
@@ -1848,7 +1944,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -1856,9 +1952,11 @@ namespace Kistl.App.Projekte
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -1906,7 +2004,8 @@ namespace Kistl.App.Projekte
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+                return __value;
             }
             set
             {
@@ -1919,7 +2018,11 @@ namespace Kistl.App.Projekte
                 {
                     r.Load(); 
                 }
-                r.Value = (Kunde__Implementation__)value;
+                Kunde __oldValue = (Kunde)r.Value;
+                Kunde __newValue = (Kunde)value;
+
+                r.Value = (Kunde__Implementation__)__newValue;
+                                
             }
         }
         
@@ -1937,7 +2040,7 @@ public Kunde Parent { get { return A; } set { A = value; } }
         {
             get
             {
-                return _B;
+				return _B;
             }
             set
             {
@@ -1945,9 +2048,11 @@ public Kunde Parent { get { return A; } set { A = value; } }
                 if (_B != value)
                 {
 					var __oldValue = _B;
-                    NotifyPropertyChanging("B", __oldValue, value);
-                    _B = value;
-                    NotifyPropertyChanged("B", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("B", __oldValue, __newValue);
+                    _B = __newValue;
+                    NotifyPropertyChanged("B", __oldValue, __newValue);
+
                 }
             }
         }

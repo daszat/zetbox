@@ -39,7 +39,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Projekte
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -67,7 +69,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _Auftragsname;
+				var __value = _Auftragsname;
+				if(OnAuftragsname_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnAuftragsname_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -75,14 +84,29 @@ namespace Kistl.App.Projekte
                 if (_Auftragsname != value)
                 {
 					var __oldValue = _Auftragsname;
-                    NotifyPropertyChanging("Auftragsname", __oldValue, value);
-                    _Auftragsname = value;
-                    NotifyPropertyChanged("Auftragsname", __oldValue, value);
+					var __newValue = value;
+                    if(OnAuftragsname_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnAuftragsname_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Auftragsname", __oldValue, __newValue);
+                    _Auftragsname = __newValue;
+                    NotifyPropertyChanged("Auftragsname", __oldValue, __newValue);
+
+                    if(OnAuftragsname_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnAuftragsname_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Auftragsname;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_PostSetter;
         /// <summary>
         /// Wert in EUR des Auftrages
         /// </summary>
@@ -95,7 +119,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _Auftragswert;
+				var __value = _Auftragswert;
+				if(OnAuftragswert_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<double?>(__value);
+					OnAuftragswert_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -103,14 +134,29 @@ namespace Kistl.App.Projekte
                 if (_Auftragswert != value)
                 {
 					var __oldValue = _Auftragswert;
-                    NotifyPropertyChanging("Auftragswert", __oldValue, value);
-                    _Auftragswert = value;
-                    NotifyPropertyChanged("Auftragswert", __oldValue, value);
+					var __newValue = value;
+                    if(OnAuftragswert_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
+						OnAuftragswert_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Auftragswert", __oldValue, __newValue);
+                    _Auftragswert = __newValue;
+                    NotifyPropertyChanged("Auftragswert", __oldValue, __newValue);
+
+                    if(OnAuftragswert_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
+						OnAuftragswert_PostSetter(this, e);
+                    }
                 }
             }
         }
         private double? _Auftragswert;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_PostSetter;
         /// <summary>
         /// Kunde des Projektes
         /// </summary>
@@ -158,7 +204,14 @@ namespace Kistl.App.Projekte
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnKunde_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Projekte.Kunde>(__value);
+					OnKunde_Getter(this, e);
+					__value = (Kistl.App.Projekte.Kunde__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -171,12 +224,29 @@ namespace Kistl.App.Projekte
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Projekte.Kunde__Implementation__)value;
+                Kistl.App.Projekte.Kunde __oldValue = (Kistl.App.Projekte.Kunde)r.Value;
+                Kistl.App.Projekte.Kunde __newValue = (Kistl.App.Projekte.Kunde)value;
+
+                if(OnKunde_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Projekte.Kunde>(__oldValue, __newValue);
+					OnKunde_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Projekte.Kunde__Implementation__)__newValue;
+                if(OnKunde_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Projekte.Kunde>(__oldValue, __newValue);
+					OnKunde_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Kunde> OnKunde_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Kunde> OnKunde_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Kunde> OnKunde_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -224,7 +294,14 @@ namespace Kistl.App.Projekte
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnMitarbeiter_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Projekte.Mitarbeiter>(__value);
+					OnMitarbeiter_Getter(this, e);
+					__value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -237,12 +314,29 @@ namespace Kistl.App.Projekte
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
+                Kistl.App.Projekte.Mitarbeiter __oldValue = (Kistl.App.Projekte.Mitarbeiter)r.Value;
+                Kistl.App.Projekte.Mitarbeiter __newValue = (Kistl.App.Projekte.Mitarbeiter)value;
+
+                if(OnMitarbeiter_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Projekte.Mitarbeiter>(__oldValue, __newValue);
+					OnMitarbeiter_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Projekte.Mitarbeiter__Implementation__)__newValue;
+                if(OnMitarbeiter_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Projekte.Mitarbeiter>(__oldValue, __newValue);
+					OnMitarbeiter_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PostSetter;
         /// <summary>
         /// Projekt zum Auftrag
         /// </summary>
@@ -290,7 +384,14 @@ namespace Kistl.App.Projekte
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnProjekt_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Projekte.Projekt>(__value);
+					OnProjekt_Getter(this, e);
+					__value = (Kistl.App.Projekte.Projekt__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -303,12 +404,29 @@ namespace Kistl.App.Projekte
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Projekte.Projekt__Implementation__)value;
+                Kistl.App.Projekte.Projekt __oldValue = (Kistl.App.Projekte.Projekt)r.Value;
+                Kistl.App.Projekte.Projekt __newValue = (Kistl.App.Projekte.Projekt)value;
+
+                if(OnProjekt_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Projekte.Projekt>(__oldValue, __newValue);
+					OnProjekt_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Projekte.Projekt__Implementation__)__newValue;
+                if(OnProjekt_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Projekte.Projekt>(__oldValue, __newValue);
+					OnProjekt_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_PostSetter;
         /// <summary>
         /// Testmethode zum Erstellen von Rechnungen mit Word
         /// </summary>

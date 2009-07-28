@@ -39,7 +39,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.GUI
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -102,7 +104,14 @@ namespace Kistl.App.GUI
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnDisplayedTypeAssembly_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Assembly>(__value);
+					OnDisplayedTypeAssembly_Getter(this, e);
+					__value = (Kistl.App.Base.Assembly__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -115,12 +124,29 @@ namespace Kistl.App.GUI
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.Assembly__Implementation__)value;
+                Kistl.App.Base.Assembly __oldValue = (Kistl.App.Base.Assembly)r.Value;
+                Kistl.App.Base.Assembly __newValue = (Kistl.App.Base.Assembly)value;
+
+                if(OnDisplayedTypeAssembly_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Assembly>(__oldValue, __newValue);
+					OnDisplayedTypeAssembly_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.Assembly__Implementation__)__newValue;
+                if(OnDisplayedTypeAssembly_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Assembly>(__oldValue, __newValue);
+					OnDisplayedTypeAssembly_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_PostSetter;
         /// <summary>
         /// FullName of the Type that is displayed with this Template
         /// </summary>
@@ -133,7 +159,14 @@ namespace Kistl.App.GUI
         {
             get
             {
-                return _DisplayedTypeFullName;
+				var __value = _DisplayedTypeFullName;
+				if(OnDisplayedTypeFullName_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnDisplayedTypeFullName_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -141,14 +174,29 @@ namespace Kistl.App.GUI
                 if (_DisplayedTypeFullName != value)
                 {
 					var __oldValue = _DisplayedTypeFullName;
-                    NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, value);
-                    _DisplayedTypeFullName = value;
-                    NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, value);
+					var __newValue = value;
+                    if(OnDisplayedTypeFullName_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnDisplayedTypeFullName_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, __newValue);
+                    _DisplayedTypeFullName = __newValue;
+                    NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, __newValue);
+
+                    if(OnDisplayedTypeFullName_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnDisplayedTypeFullName_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _DisplayedTypeFullName;
-
+		public event PropertyGetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_PostSetter;
         /// <summary>
         /// a short name to identify this Template to the user
         /// </summary>
@@ -161,7 +209,14 @@ namespace Kistl.App.GUI
         {
             get
             {
-                return _DisplayName;
+				var __value = _DisplayName;
+				if(OnDisplayName_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnDisplayName_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -169,14 +224,29 @@ namespace Kistl.App.GUI
                 if (_DisplayName != value)
                 {
 					var __oldValue = _DisplayName;
-                    NotifyPropertyChanging("DisplayName", __oldValue, value);
-                    _DisplayName = value;
-                    NotifyPropertyChanged("DisplayName", __oldValue, value);
+					var __newValue = value;
+                    if(OnDisplayName_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnDisplayName_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
+                    _DisplayName = __newValue;
+                    NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
+
+                    if(OnDisplayName_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnDisplayName_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _DisplayName;
-
+		public event PropertyGetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_PostSetter;
         /// <summary>
         /// The main menu for this Template
         /// </summary>
@@ -272,7 +342,14 @@ namespace Kistl.App.GUI
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnVisualTree_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.GUI.Visual>(__value);
+					OnVisualTree_Getter(this, e);
+					__value = (Kistl.App.GUI.Visual__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -285,12 +362,29 @@ namespace Kistl.App.GUI
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.GUI.Visual__Implementation__)value;
+                Kistl.App.GUI.Visual __oldValue = (Kistl.App.GUI.Visual)r.Value;
+                Kistl.App.GUI.Visual __newValue = (Kistl.App.GUI.Visual)value;
+
+                if(OnVisualTree_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.Visual>(__oldValue, __newValue);
+					OnVisualTree_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.GUI.Visual__Implementation__)__newValue;
+                if(OnVisualTree_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.Visual>(__oldValue, __newValue);
+					OnVisualTree_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_PostSetter;
         /// <summary>
         /// 
         /// </summary>

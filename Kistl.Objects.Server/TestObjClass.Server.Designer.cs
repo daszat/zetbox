@@ -39,7 +39,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Test
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -67,7 +69,14 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _MyIntProperty;
+				var __value = _MyIntProperty;
+				if(OnMyIntProperty_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<int?>(__value);
+					OnMyIntProperty_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -75,14 +84,29 @@ namespace Kistl.App.Test
                 if (_MyIntProperty != value)
                 {
 					var __oldValue = _MyIntProperty;
-                    NotifyPropertyChanging("MyIntProperty", __oldValue, value);
-                    _MyIntProperty = value;
-                    NotifyPropertyChanged("MyIntProperty", __oldValue, value);
+					var __newValue = value;
+                    if(OnMyIntProperty_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<int?>(__oldValue, __newValue);
+						OnMyIntProperty_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("MyIntProperty", __oldValue, __newValue);
+                    _MyIntProperty = __newValue;
+                    NotifyPropertyChanged("MyIntProperty", __oldValue, __newValue);
+
+                    if(OnMyIntProperty_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
+						OnMyIntProperty_PostSetter(this, e);
+                    }
                 }
             }
         }
         private int? _MyIntProperty;
-
+		public event PropertyGetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_PostSetter;
         /// <summary>
         /// testtest
         /// </summary>
@@ -130,7 +154,14 @@ namespace Kistl.App.Test
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnObjectProp_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Projekte.Kunde>(__value);
+					OnObjectProp_Getter(this, e);
+					__value = (Kistl.App.Projekte.Kunde__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -143,12 +174,29 @@ namespace Kistl.App.Test
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Projekte.Kunde__Implementation__)value;
+                Kistl.App.Projekte.Kunde __oldValue = (Kistl.App.Projekte.Kunde)r.Value;
+                Kistl.App.Projekte.Kunde __newValue = (Kistl.App.Projekte.Kunde)value;
+
+                if(OnObjectProp_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Projekte.Kunde>(__oldValue, __newValue);
+					OnObjectProp_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Projekte.Kunde__Implementation__)__newValue;
+                if(OnObjectProp_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Projekte.Kunde>(__oldValue, __newValue);
+					OnObjectProp_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_PostSetter;
         /// <summary>
         /// String Property
         /// </summary>
@@ -161,7 +209,14 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _StringProp;
+				var __value = _StringProp;
+				if(OnStringProp_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnStringProp_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -169,14 +224,29 @@ namespace Kistl.App.Test
                 if (_StringProp != value)
                 {
 					var __oldValue = _StringProp;
-                    NotifyPropertyChanging("StringProp", __oldValue, value);
-                    _StringProp = value;
-                    NotifyPropertyChanged("StringProp", __oldValue, value);
+					var __newValue = value;
+                    if(OnStringProp_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnStringProp_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("StringProp", __oldValue, __newValue);
+                    _StringProp = __newValue;
+                    NotifyPropertyChanged("StringProp", __oldValue, __newValue);
+
+                    if(OnStringProp_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnStringProp_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _StringProp;
-
+		public event PropertyGetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_PostSetter;
         /// <summary>
         /// Test Enumeration Property
         /// </summary>
@@ -187,7 +257,14 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _TestEnumProp;
+				var __value = _TestEnumProp;
+				if(OnTestEnumProp_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Test.TestEnum>(__value);
+					OnTestEnumProp_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -195,9 +272,23 @@ namespace Kistl.App.Test
                 if (_TestEnumProp != value)
                 {
 					var __oldValue = _TestEnumProp;
-                    NotifyPropertyChanging("TestEnumProp", "TestEnumProp__Implementation__", __oldValue, value);
+					var __newValue = value;
+                    if(OnTestEnumProp_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Kistl.App.Test.TestEnum>(__oldValue, __newValue);
+						OnTestEnumProp_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+					
+                    NotifyPropertyChanging("TestEnumProp", "TestEnumProp__Implementation__", __oldValue, __newValue);
                     _TestEnumProp = value;
-                    NotifyPropertyChanged("TestEnumProp", "TestEnumProp__Implementation__", __oldValue, value);
+                    NotifyPropertyChanged("TestEnumProp", "TestEnumProp__Implementation__", __oldValue, __newValue);
+                    if(OnTestEnumProp_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Kistl.App.Test.TestEnum>(__oldValue, __newValue);
+						OnTestEnumProp_PostSetter(this, e);
+                    }
+                    
                 }
             }
         }
@@ -220,7 +311,9 @@ namespace Kistl.App.Test
             }
         }
         
-
+		public event PropertyGetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_PostSetter;
         /// <summary>
         /// testmethod
         /// </summary>

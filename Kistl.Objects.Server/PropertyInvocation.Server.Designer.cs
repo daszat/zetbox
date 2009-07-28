@@ -39,7 +39,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Base
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -67,7 +69,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ExportGuid;
+				var __value = _ExportGuid;
+				if(OnExportGuid_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Guid>(__value);
+					OnExportGuid_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -75,14 +84,29 @@ namespace Kistl.App.Base
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
-                    _ExportGuid = value;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+					var __newValue = value;
+                    if(OnExportGuid_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+						OnExportGuid_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
+                    if(OnExportGuid_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+						OnExportGuid_PostSetter(this, e);
+                    }
                 }
             }
         }
         private Guid _ExportGuid;
-
+		public event PropertyGetterHandler<Kistl.App.Base.PropertyInvocation, Guid> OnExportGuid_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.PropertyInvocation, Guid> OnExportGuid_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.PropertyInvocation, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// The Type implementing this invocation
         /// </summary>
@@ -130,7 +154,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnImplementor_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.TypeRef>(__value);
+					OnImplementor_Getter(this, e);
+					__value = (Kistl.App.Base.TypeRef__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -143,12 +174,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.TypeRef__Implementation__)value;
+                Kistl.App.Base.TypeRef __oldValue = (Kistl.App.Base.TypeRef)r.Value;
+                Kistl.App.Base.TypeRef __newValue = (Kistl.App.Base.TypeRef)value;
+
+                if(OnImplementor_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.TypeRef>(__oldValue, __newValue);
+					OnImplementor_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.TypeRef__Implementation__)__newValue;
+                if(OnImplementor_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.TypeRef>(__oldValue, __newValue);
+					OnImplementor_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.PropertyInvocation, Kistl.App.Base.TypeRef> OnImplementor_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.PropertyInvocation, Kistl.App.Base.TypeRef> OnImplementor_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.PropertyInvocation, Kistl.App.Base.TypeRef> OnImplementor_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -159,7 +207,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _InvocationType;
+				var __value = _InvocationType;
+				if(OnInvocationType_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.PropertyInvocationType>(__value);
+					OnInvocationType_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -167,9 +222,23 @@ namespace Kistl.App.Base
                 if (_InvocationType != value)
                 {
 					var __oldValue = _InvocationType;
-                    NotifyPropertyChanging("InvocationType", "InvocationType__Implementation__", __oldValue, value);
+					var __newValue = value;
+                    if(OnInvocationType_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Kistl.App.Base.PropertyInvocationType>(__oldValue, __newValue);
+						OnInvocationType_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+					
+                    NotifyPropertyChanging("InvocationType", "InvocationType__Implementation__", __oldValue, __newValue);
                     _InvocationType = value;
-                    NotifyPropertyChanged("InvocationType", "InvocationType__Implementation__", __oldValue, value);
+                    NotifyPropertyChanged("InvocationType", "InvocationType__Implementation__", __oldValue, __newValue);
+                    if(OnInvocationType_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Kistl.App.Base.PropertyInvocationType>(__oldValue, __newValue);
+						OnInvocationType_PostSetter(this, e);
+                    }
+                    
                 }
             }
         }
@@ -192,7 +261,9 @@ namespace Kistl.App.Base
             }
         }
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.PropertyInvocation, Kistl.App.Base.PropertyInvocationType> OnInvocationType_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.PropertyInvocation, Kistl.App.Base.PropertyInvocationType> OnInvocationType_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.PropertyInvocation, Kistl.App.Base.PropertyInvocationType> OnInvocationType_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -240,7 +311,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnInvokeOnProperty_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Property>(__value);
+					OnInvokeOnProperty_Getter(this, e);
+					__value = (Kistl.App.Base.Property__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -253,12 +331,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.Property__Implementation__)value;
+                Kistl.App.Base.Property __oldValue = (Kistl.App.Base.Property)r.Value;
+                Kistl.App.Base.Property __newValue = (Kistl.App.Base.Property)value;
+
+                if(OnInvokeOnProperty_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Property>(__oldValue, __newValue);
+					OnInvokeOnProperty_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.Property__Implementation__)__newValue;
+                if(OnInvokeOnProperty_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Property>(__oldValue, __newValue);
+					OnInvokeOnProperty_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.PropertyInvocation, Kistl.App.Base.Property> OnInvokeOnProperty_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.PropertyInvocation, Kistl.App.Base.Property> OnInvokeOnProperty_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.PropertyInvocation, Kistl.App.Base.Property> OnInvokeOnProperty_PostSetter;
         /// <summary>
         /// Name des implementierenden Members
         /// </summary>
@@ -271,7 +366,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _MemberName;
+				var __value = _MemberName;
+				if(OnMemberName_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnMemberName_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -279,14 +381,29 @@ namespace Kistl.App.Base
                 if (_MemberName != value)
                 {
 					var __oldValue = _MemberName;
-                    NotifyPropertyChanging("MemberName", __oldValue, value);
-                    _MemberName = value;
-                    NotifyPropertyChanged("MemberName", __oldValue, value);
+					var __newValue = value;
+                    if(OnMemberName_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnMemberName_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("MemberName", __oldValue, __newValue);
+                    _MemberName = __newValue;
+                    NotifyPropertyChanged("MemberName", __oldValue, __newValue);
+
+                    if(OnMemberName_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnMemberName_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _MemberName;
-
+		public event PropertyGetterHandler<Kistl.App.Base.PropertyInvocation, string> OnMemberName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.PropertyInvocation, string> OnMemberName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.PropertyInvocation, string> OnMemberName_PostSetter;
         /// <summary>
         /// 
         /// </summary>

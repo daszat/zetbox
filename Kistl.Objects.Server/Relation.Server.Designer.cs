@@ -39,7 +39,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Base
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -102,7 +104,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnA_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.RelationEnd>(__value);
+					OnA_Getter(this, e);
+					__value = (Kistl.App.Base.RelationEnd__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -115,12 +124,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.RelationEnd__Implementation__)value;
+                Kistl.App.Base.RelationEnd __oldValue = (Kistl.App.Base.RelationEnd)r.Value;
+                Kistl.App.Base.RelationEnd __newValue = (Kistl.App.Base.RelationEnd)value;
+
+                if(OnA_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.RelationEnd>(__oldValue, __newValue);
+					OnA_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.RelationEnd__Implementation__)__newValue;
+                if(OnA_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.RelationEnd>(__oldValue, __newValue);
+					OnA_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnA_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnA_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnA_PostSetter;
         /// <summary>
         /// The B-side of this Relation.
         /// </summary>
@@ -168,7 +194,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnB_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.RelationEnd>(__value);
+					OnB_Getter(this, e);
+					__value = (Kistl.App.Base.RelationEnd__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -181,12 +214,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.RelationEnd__Implementation__)value;
+                Kistl.App.Base.RelationEnd __oldValue = (Kistl.App.Base.RelationEnd)r.Value;
+                Kistl.App.Base.RelationEnd __newValue = (Kistl.App.Base.RelationEnd)value;
+
+                if(OnB_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.RelationEnd>(__oldValue, __newValue);
+					OnB_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.RelationEnd__Implementation__)__newValue;
+                if(OnB_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.RelationEnd>(__oldValue, __newValue);
+					OnB_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnB_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnB_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnB_PostSetter;
         /// <summary>
         /// Description of this Relation
         /// </summary>
@@ -199,7 +249,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _Description;
+				var __value = _Description;
+				if(OnDescription_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnDescription_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -207,14 +264,29 @@ namespace Kistl.App.Base
                 if (_Description != value)
                 {
 					var __oldValue = _Description;
-                    NotifyPropertyChanging("Description", __oldValue, value);
-                    _Description = value;
-                    NotifyPropertyChanged("Description", __oldValue, value);
+					var __newValue = value;
+                    if(OnDescription_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnDescription_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Description", __oldValue, __newValue);
+                    _Description = __newValue;
+                    NotifyPropertyChanged("Description", __oldValue, __newValue);
+
+                    if(OnDescription_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnDescription_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Description;
-
+		public event PropertyGetterHandler<Kistl.App.Base.Relation, string> OnDescription_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, string> OnDescription_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, string> OnDescription_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -227,7 +299,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ExportGuid;
+				var __value = _ExportGuid;
+				if(OnExportGuid_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Guid>(__value);
+					OnExportGuid_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -235,14 +314,29 @@ namespace Kistl.App.Base
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
-                    _ExportGuid = value;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+					var __newValue = value;
+                    if(OnExportGuid_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+						OnExportGuid_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
+                    if(OnExportGuid_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+						OnExportGuid_PostSetter(this, e);
+                    }
                 }
             }
         }
         private Guid _ExportGuid;
-
+		public event PropertyGetterHandler<Kistl.App.Base.Relation, Guid> OnExportGuid_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Guid> OnExportGuid_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -290,7 +384,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnModule_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Module>(__value);
+					OnModule_Getter(this, e);
+					__value = (Kistl.App.Base.Module__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -303,12 +404,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.Module__Implementation__)value;
+                Kistl.App.Base.Module __oldValue = (Kistl.App.Base.Module)r.Value;
+                Kistl.App.Base.Module __newValue = (Kistl.App.Base.Module)value;
+
+                if(OnModule_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Module>(__oldValue, __newValue);
+					OnModule_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.Module__Implementation__)__newValue;
+                if(OnModule_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Module>(__oldValue, __newValue);
+					OnModule_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Module> OnModule_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Module> OnModule_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Module> OnModule_PostSetter;
         /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
@@ -319,7 +437,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _Storage;
+				var __value = _Storage;
+				if(OnStorage_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.StorageType?>(__value);
+					OnStorage_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -327,9 +452,23 @@ namespace Kistl.App.Base
                 if (_Storage != value)
                 {
 					var __oldValue = _Storage;
-                    NotifyPropertyChanging("Storage", "Storage__Implementation__", __oldValue, value);
+					var __newValue = value;
+                    if(OnStorage_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Kistl.App.Base.StorageType?>(__oldValue, __newValue);
+						OnStorage_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+					
+                    NotifyPropertyChanging("Storage", "Storage__Implementation__", __oldValue, __newValue);
                     _Storage = value;
-                    NotifyPropertyChanged("Storage", "Storage__Implementation__", __oldValue, value);
+                    NotifyPropertyChanged("Storage", "Storage__Implementation__", __oldValue, __newValue);
+                    if(OnStorage_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Kistl.App.Base.StorageType?>(__oldValue, __newValue);
+						OnStorage_PostSetter(this, e);
+                    }
+                    
                 }
             }
         }
@@ -352,7 +491,9 @@ namespace Kistl.App.Base
             }
         }
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType?> OnStorage_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType?> OnStorage_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType?> OnStorage_PostSetter;
         /// <summary>
         /// Verb of this Relation
         /// </summary>
@@ -365,7 +506,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _Verb;
+				var __value = _Verb;
+				if(OnVerb_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnVerb_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -373,14 +521,29 @@ namespace Kistl.App.Base
                 if (_Verb != value)
                 {
 					var __oldValue = _Verb;
-                    NotifyPropertyChanging("Verb", __oldValue, value);
-                    _Verb = value;
-                    NotifyPropertyChanged("Verb", __oldValue, value);
+					var __newValue = value;
+                    if(OnVerb_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnVerb_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Verb", __oldValue, __newValue);
+                    _Verb = __newValue;
+                    NotifyPropertyChanged("Verb", __oldValue, __newValue);
+
+                    if(OnVerb_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnVerb_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Verb;
-
+		public event PropertyGetterHandler<Kistl.App.Base.Relation, string> OnVerb_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, string> OnVerb_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, string> OnVerb_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Relation));

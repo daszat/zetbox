@@ -39,7 +39,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Projekte
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -67,7 +69,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _Adresse;
+				var __value = _Adresse;
+				if(OnAdresse_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnAdresse_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -75,14 +84,29 @@ namespace Kistl.App.Projekte
                 if (_Adresse != value)
                 {
 					var __oldValue = _Adresse;
-                    NotifyPropertyChanging("Adresse", __oldValue, value);
-                    _Adresse = value;
-                    NotifyPropertyChanged("Adresse", __oldValue, value);
+					var __newValue = value;
+                    if(OnAdresse_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnAdresse_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Adresse", __oldValue, __newValue);
+                    _Adresse = __newValue;
+                    NotifyPropertyChanged("Adresse", __oldValue, __newValue);
+
+                    if(OnAdresse_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnAdresse_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Adresse;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnAdresse_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnAdresse_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnAdresse_PostSetter;
         /// <summary>
         /// EMails des Kunden - können mehrere sein
         /// </summary>
@@ -137,7 +161,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _Kundenname;
+				var __value = _Kundenname;
+				if(OnKundenname_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnKundenname_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -145,14 +176,29 @@ namespace Kistl.App.Projekte
                 if (_Kundenname != value)
                 {
 					var __oldValue = _Kundenname;
-                    NotifyPropertyChanging("Kundenname", __oldValue, value);
-                    _Kundenname = value;
-                    NotifyPropertyChanged("Kundenname", __oldValue, value);
+					var __newValue = value;
+                    if(OnKundenname_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnKundenname_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Kundenname", __oldValue, __newValue);
+                    _Kundenname = __newValue;
+                    NotifyPropertyChanged("Kundenname", __oldValue, __newValue);
+
+                    if(OnKundenname_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnKundenname_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Kundenname;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnKundenname_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnKundenname_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnKundenname_PostSetter;
         /// <summary>
         /// Land
         /// </summary>
@@ -165,7 +211,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _Land;
+				var __value = _Land;
+				if(OnLand_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnLand_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -173,14 +226,29 @@ namespace Kistl.App.Projekte
                 if (_Land != value)
                 {
 					var __oldValue = _Land;
-                    NotifyPropertyChanging("Land", __oldValue, value);
-                    _Land = value;
-                    NotifyPropertyChanged("Land", __oldValue, value);
+					var __newValue = value;
+                    if(OnLand_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnLand_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Land", __oldValue, __newValue);
+                    _Land = __newValue;
+                    NotifyPropertyChanged("Land", __oldValue, __newValue);
+
+                    if(OnLand_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnLand_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Land;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnLand_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnLand_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnLand_PostSetter;
         /// <summary>
         /// Ort
         /// </summary>
@@ -193,7 +261,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _Ort;
+				var __value = _Ort;
+				if(OnOrt_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnOrt_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -201,14 +276,29 @@ namespace Kistl.App.Projekte
                 if (_Ort != value)
                 {
 					var __oldValue = _Ort;
-                    NotifyPropertyChanging("Ort", __oldValue, value);
-                    _Ort = value;
-                    NotifyPropertyChanged("Ort", __oldValue, value);
+					var __newValue = value;
+                    if(OnOrt_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnOrt_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Ort", __oldValue, __newValue);
+                    _Ort = __newValue;
+                    NotifyPropertyChanged("Ort", __oldValue, __newValue);
+
+                    if(OnOrt_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnOrt_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Ort;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnOrt_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnOrt_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnOrt_PostSetter;
         /// <summary>
         /// Postleitzahl
         /// </summary>
@@ -221,7 +311,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _PLZ;
+				var __value = _PLZ;
+				if(OnPLZ_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnPLZ_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -229,14 +326,29 @@ namespace Kistl.App.Projekte
                 if (_PLZ != value)
                 {
 					var __oldValue = _PLZ;
-                    NotifyPropertyChanging("PLZ", __oldValue, value);
-                    _PLZ = value;
-                    NotifyPropertyChanged("PLZ", __oldValue, value);
+					var __newValue = value;
+                    if(OnPLZ_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnPLZ_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("PLZ", __oldValue, __newValue);
+                    _PLZ = __newValue;
+                    NotifyPropertyChanged("PLZ", __oldValue, __newValue);
+
+                    if(OnPLZ_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnPLZ_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _PLZ;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Kunde));

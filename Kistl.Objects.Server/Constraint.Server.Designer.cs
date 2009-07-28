@@ -39,7 +39,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Base
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -102,7 +104,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnConstrainedProperty_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Property>(__value);
+					OnConstrainedProperty_Getter(this, e);
+					__value = (Kistl.App.Base.Property__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -115,12 +124,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.Property__Implementation__)value;
+                Kistl.App.Base.Property __oldValue = (Kistl.App.Base.Property)r.Value;
+                Kistl.App.Base.Property __newValue = (Kistl.App.Base.Property)value;
+
+                if(OnConstrainedProperty_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Property>(__oldValue, __newValue);
+					OnConstrainedProperty_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.Property__Implementation__)__newValue;
+                if(OnConstrainedProperty_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Property>(__oldValue, __newValue);
+					OnConstrainedProperty_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Property> OnConstrainedProperty_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Property> OnConstrainedProperty_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Property> OnConstrainedProperty_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -133,7 +159,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _ExportGuid;
+				var __value = _ExportGuid;
+				if(OnExportGuid_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Guid>(__value);
+					OnExportGuid_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -141,14 +174,29 @@ namespace Kistl.App.Base
                 if (_ExportGuid != value)
                 {
 					var __oldValue = _ExportGuid;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, value);
-                    _ExportGuid = value;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, value);
+					var __newValue = value;
+                    if(OnExportGuid_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+						OnExportGuid_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
+                    if(OnExportGuid_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+						OnExportGuid_PostSetter(this, e);
+                    }
                 }
             }
         }
         private Guid _ExportGuid;
-
+		public event PropertyGetterHandler<Kistl.App.Base.Constraint, Guid> OnExportGuid_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Guid> OnExportGuid_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// The reason of this constraint
         /// </summary>
@@ -161,7 +209,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _Reason;
+				var __value = _Reason;
+				if(OnReason_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnReason_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -169,14 +224,29 @@ namespace Kistl.App.Base
                 if (_Reason != value)
                 {
 					var __oldValue = _Reason;
-                    NotifyPropertyChanging("Reason", __oldValue, value);
-                    _Reason = value;
-                    NotifyPropertyChanged("Reason", __oldValue, value);
+					var __newValue = value;
+                    if(OnReason_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnReason_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Reason", __oldValue, __newValue);
+                    _Reason = __newValue;
+                    NotifyPropertyChanged("Reason", __oldValue, __newValue);
+
+                    if(OnReason_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnReason_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Reason;
-
+		public event PropertyGetterHandler<Kistl.App.Base.Constraint, string> OnReason_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Constraint, string> OnReason_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Constraint, string> OnReason_PostSetter;
         /// <summary>
         /// 
         /// </summary>

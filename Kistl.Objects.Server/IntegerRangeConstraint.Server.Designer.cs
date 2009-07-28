@@ -46,7 +46,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _Max;
+				var __value = _Max;
+				if(OnMax_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<int>(__value);
+					OnMax_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -54,14 +61,29 @@ namespace Kistl.App.Base
                 if (_Max != value)
                 {
 					var __oldValue = _Max;
-                    NotifyPropertyChanging("Max", __oldValue, value);
-                    _Max = value;
-                    NotifyPropertyChanged("Max", __oldValue, value);
+					var __newValue = value;
+                    if(OnMax_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
+						OnMax_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Max", __oldValue, __newValue);
+                    _Max = __newValue;
+                    NotifyPropertyChanged("Max", __oldValue, __newValue);
+
+                    if(OnMax_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
+						OnMax_PostSetter(this, e);
+                    }
                 }
             }
         }
         private int _Max;
-
+		public event PropertyGetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_PostSetter;
         /// <summary>
         /// The smallest value accepted by this constraint
         /// </summary>
@@ -74,7 +96,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _Min;
+				var __value = _Min;
+				if(OnMin_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<int>(__value);
+					OnMin_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -82,14 +111,29 @@ namespace Kistl.App.Base
                 if (_Min != value)
                 {
 					var __oldValue = _Min;
-                    NotifyPropertyChanging("Min", __oldValue, value);
-                    _Min = value;
-                    NotifyPropertyChanged("Min", __oldValue, value);
+					var __newValue = value;
+                    if(OnMin_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
+						OnMin_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Min", __oldValue, __newValue);
+                    _Min = __newValue;
+                    NotifyPropertyChanged("Min", __oldValue, __newValue);
+
+                    if(OnMin_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
+						OnMin_PostSetter(this, e);
+                    }
                 }
             }
         }
         private int _Min;
-
+		public event PropertyGetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_PostSetter;
         /// <summary>
         /// 
         /// </summary>

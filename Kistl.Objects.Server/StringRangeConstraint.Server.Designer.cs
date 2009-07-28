@@ -46,7 +46,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _MaxLength;
+				var __value = _MaxLength;
+				if(OnMaxLength_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<int>(__value);
+					OnMaxLength_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -54,14 +61,29 @@ namespace Kistl.App.Base
                 if (_MaxLength != value)
                 {
 					var __oldValue = _MaxLength;
-                    NotifyPropertyChanging("MaxLength", __oldValue, value);
-                    _MaxLength = value;
-                    NotifyPropertyChanged("MaxLength", __oldValue, value);
+					var __newValue = value;
+                    if(OnMaxLength_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
+						OnMaxLength_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("MaxLength", __oldValue, __newValue);
+                    _MaxLength = __newValue;
+                    NotifyPropertyChanged("MaxLength", __oldValue, __newValue);
+
+                    if(OnMaxLength_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
+						OnMaxLength_PostSetter(this, e);
+                    }
                 }
             }
         }
         private int _MaxLength;
-
+		public event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_PostSetter;
         /// <summary>
         /// The minimal length of this StringProperty
         /// </summary>
@@ -74,7 +96,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _MinLength;
+				var __value = _MinLength;
+				if(OnMinLength_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<int>(__value);
+					OnMinLength_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -82,14 +111,29 @@ namespace Kistl.App.Base
                 if (_MinLength != value)
                 {
 					var __oldValue = _MinLength;
-                    NotifyPropertyChanging("MinLength", __oldValue, value);
-                    _MinLength = value;
-                    NotifyPropertyChanged("MinLength", __oldValue, value);
+					var __newValue = value;
+                    if(OnMinLength_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
+						OnMinLength_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("MinLength", __oldValue, __newValue);
+                    _MinLength = __newValue;
+                    NotifyPropertyChanged("MinLength", __oldValue, __newValue);
+
+                    if(OnMinLength_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
+						OnMinLength_PostSetter(this, e);
+                    }
                 }
             }
         }
         private int _MinLength;
-
+		public event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PostSetter;
         /// <summary>
         /// 
         /// </summary>

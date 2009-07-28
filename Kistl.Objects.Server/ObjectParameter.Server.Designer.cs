@@ -81,7 +81,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnDataType_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.DataType>(__value);
+					OnDataType_Getter(this, e);
+					__value = (Kistl.App.Base.DataType__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -94,12 +101,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.DataType__Implementation__)value;
+                Kistl.App.Base.DataType __oldValue = (Kistl.App.Base.DataType)r.Value;
+                Kistl.App.Base.DataType __newValue = (Kistl.App.Base.DataType)value;
+
+                if(OnDataType_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.DataType>(__oldValue, __newValue);
+					OnDataType_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.DataType__Implementation__)__newValue;
+                if(OnDataType_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.DataType>(__oldValue, __newValue);
+					OnDataType_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>

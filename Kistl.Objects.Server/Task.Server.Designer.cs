@@ -39,7 +39,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -47,9 +47,11 @@ namespace Kistl.App.Projekte
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -67,7 +69,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _Aufwand;
+				var __value = _Aufwand;
+				if(OnAufwand_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<double?>(__value);
+					OnAufwand_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -75,14 +84,29 @@ namespace Kistl.App.Projekte
                 if (_Aufwand != value)
                 {
 					var __oldValue = _Aufwand;
-                    NotifyPropertyChanging("Aufwand", __oldValue, value);
-                    _Aufwand = value;
-                    NotifyPropertyChanged("Aufwand", __oldValue, value);
+					var __newValue = value;
+                    if(OnAufwand_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
+						OnAufwand_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Aufwand", __oldValue, __newValue);
+                    _Aufwand = __newValue;
+                    NotifyPropertyChanged("Aufwand", __oldValue, __newValue);
+
+                    if(OnAufwand_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
+						OnAufwand_PostSetter(this, e);
+                    }
                 }
             }
         }
         private double? _Aufwand;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Task, double?> OnAufwand_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Task, double?> OnAufwand_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Task, double?> OnAufwand_PostSetter;
         /// <summary>
         /// Enddatum
         /// </summary>
@@ -95,7 +119,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _DatumBis;
+				var __value = _DatumBis;
+				if(OnDatumBis_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<DateTime?>(__value);
+					OnDatumBis_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -103,14 +134,29 @@ namespace Kistl.App.Projekte
                 if (_DatumBis != value)
                 {
 					var __oldValue = _DatumBis;
-                    NotifyPropertyChanging("DatumBis", __oldValue, value);
-                    _DatumBis = value;
-                    NotifyPropertyChanged("DatumBis", __oldValue, value);
+					var __newValue = value;
+                    if(OnDatumBis_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+						OnDatumBis_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("DatumBis", __oldValue, __newValue);
+                    _DatumBis = __newValue;
+                    NotifyPropertyChanged("DatumBis", __oldValue, __newValue);
+
+                    if(OnDatumBis_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+						OnDatumBis_PostSetter(this, e);
+                    }
                 }
             }
         }
         private DateTime? _DatumBis;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumBis_PostSetter;
         /// <summary>
         /// Start Datum
         /// </summary>
@@ -123,7 +169,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _DatumVon;
+				var __value = _DatumVon;
+				if(OnDatumVon_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<DateTime?>(__value);
+					OnDatumVon_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -131,14 +184,29 @@ namespace Kistl.App.Projekte
                 if (_DatumVon != value)
                 {
 					var __oldValue = _DatumVon;
-                    NotifyPropertyChanging("DatumVon", __oldValue, value);
-                    _DatumVon = value;
-                    NotifyPropertyChanged("DatumVon", __oldValue, value);
+					var __newValue = value;
+                    if(OnDatumVon_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+						OnDatumVon_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("DatumVon", __oldValue, __newValue);
+                    _DatumVon = __newValue;
+                    NotifyPropertyChanged("DatumVon", __oldValue, __newValue);
+
+                    if(OnDatumVon_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+						OnDatumVon_PostSetter(this, e);
+                    }
                 }
             }
         }
         private DateTime? _DatumVon;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_PostSetter;
         /// <summary>
         /// Taskname
         /// </summary>
@@ -151,7 +219,14 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                return _Name;
+				var __value = _Name;
+				if(OnName_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnName_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -159,14 +234,29 @@ namespace Kistl.App.Projekte
                 if (_Name != value)
                 {
 					var __oldValue = _Name;
-                    NotifyPropertyChanging("Name", __oldValue, value);
-                    _Name = value;
-                    NotifyPropertyChanged("Name", __oldValue, value);
+					var __newValue = value;
+                    if(OnName_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnName_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Name", __oldValue, __newValue);
+                    _Name = __newValue;
+                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+
+                    if(OnName_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnName_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _Name;
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Task, string> OnName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Task, string> OnName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Task, string> OnName_PostSetter;
         /// <summary>
         /// Verknüpfung zum Projekt
         /// </summary>
@@ -214,7 +304,14 @@ namespace Kistl.App.Projekte
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnProjekt_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Projekte.Projekt>(__value);
+					OnProjekt_Getter(this, e);
+					__value = (Kistl.App.Projekte.Projekt__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -227,12 +324,29 @@ namespace Kistl.App.Projekte
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Projekte.Projekt__Implementation__)value;
+                Kistl.App.Projekte.Projekt __oldValue = (Kistl.App.Projekte.Projekt)r.Value;
+                Kistl.App.Projekte.Projekt __newValue = (Kistl.App.Projekte.Projekt)value;
+
+                if(OnProjekt_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Projekte.Projekt>(__oldValue, __newValue);
+					OnProjekt_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Projekte.Projekt__Implementation__)__newValue;
+                if(OnProjekt_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Projekte.Projekt>(__oldValue, __newValue);
+					OnProjekt_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Projekte.Task, Kistl.App.Projekte.Projekt> OnProjekt_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Projekte.Projekt> OnProjekt_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Projekte.Projekt> OnProjekt_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Task));

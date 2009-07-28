@@ -53,6 +53,11 @@ namespace Kistl.App.Base
         {
             EnsureDefaultMethods(obj);
         }
+
+        public void OnBaseObjectClass_PostSetter_ObjectClass(Kistl.App.Base.ObjectClass obj, PropertyPostSetterEventArgs<Kistl.App.Base.ObjectClass> e)
+        {
+            EnsureDefaultMethods(obj);
+        }
         #endregion
 
         #region Relation
@@ -65,5 +70,106 @@ namespace Kistl.App.Base
             obj.B.Role = (int)RelationEndRole.B;
         }
         #endregion
+
+        #region PropertyInvocation
+        public void OnGetCodeTemplate_PropertyInvocation(Kistl.App.Base.PropertyInvocation obj, MethodReturnEventArgs<System.String> e)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("public void {0}(", obj.GetMemberName());
+
+            if (obj.InvokeOnProperty != null && obj.InvokeOnProperty.ObjectClass != null && obj.InvokeOnProperty.ObjectClass.Module != null)
+            {
+                sb.AppendFormat("{0}.{1} obj", obj.InvokeOnProperty.ObjectClass.Module.Namespace, obj.InvokeOnProperty.ObjectClass.ClassName);
+            }
+            else
+            {
+                sb.AppendFormat("<<TYPE>> obj", obj.InvokeOnProperty.ObjectClass.Module.Namespace, obj.InvokeOnProperty.ObjectClass.ClassName);
+            }
+
+            string propType = obj.InvokeOnProperty != null ? obj.InvokeOnProperty.GetPropertyTypeString() : "<<TYPE>>";
+
+            switch (obj.InvocationType)
+            {
+                case PropertyInvocationType.Getter:
+                    sb.AppendFormat(", PropertyGetterEventArgs<{0}> e", propType);
+                    break;
+                case PropertyInvocationType.PreSetter:
+                    sb.AppendFormat(", PropertyPreSetterEventArgs<{0}> e", propType);
+                    break;
+                case PropertyInvocationType.PostSetter:
+                    sb.AppendFormat(", PropertyPostSetterEventArgs<{0}> e", propType);
+                    break;
+            }
+
+            sb.AppendLine(")");
+            sb.AppendLine("{");
+            sb.AppendLine("}");
+
+            e.Result = sb.ToString();
+        }
+        public void OnGetMemberName_PropertyInvocation(Kistl.App.Base.PropertyInvocation obj, MethodReturnEventArgs<System.String> e)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("On");
+            sb.Append(obj.InvokeOnProperty != null ? obj.InvokeOnProperty.PropertyName : "<<PROPERTYNAME>>");
+            sb.Append("_");
+            sb.Append(obj.InvocationType.ToString());
+            sb.Append("_");
+            sb.Append(obj.InvokeOnProperty != null && obj.InvokeOnProperty.ObjectClass != null ? obj.InvokeOnProperty.ObjectClass.ClassName : "<<OBJECTCLASSNAME>>");
+
+            e.Result = sb.ToString();
+        }
+        #endregion
+
+        #region MethodInvocation
+        public void OnGetCodeTemplate_MethodInvocation(MethodInvocation mi, MethodReturnEventArgs<string> e)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("public void {0}(", mi.GetMemberName());
+
+            if (mi.InvokeOnObjectClass != null)
+            {
+                sb.AppendFormat("{0}.{1} obj", mi.InvokeOnObjectClass.Module != null ? mi.InvokeOnObjectClass.Module.Namespace : "", mi.InvokeOnObjectClass.ClassName);
+            }
+            else
+            {
+                sb.AppendFormat("<<TYPE>> obj", mi.InvokeOnObjectClass.Module != null ? mi.InvokeOnObjectClass.Module.Namespace : "", mi.InvokeOnObjectClass.ClassName);
+            }
+
+            if (mi.Method != null)
+            {
+                var returnParam = mi.Method.GetReturnParameter();
+                if (returnParam != null)
+                {
+                    sb.AppendFormat(", MethodReturnEventArgs<{0}> e", returnParam.GetParameterTypeString());
+                }
+
+                foreach (var param in mi.Method.Parameter.Where(p => !p.IsReturnParameter))
+                {
+                    sb.AppendFormat(", {0} {1}", param.GetParameterTypeString(), param.ParameterName);
+                }
+            }
+
+            sb.AppendLine(")");
+            sb.AppendLine("{");
+            sb.AppendLine("}");
+
+            e.Result = sb.ToString();
+        }
+
+        public void OnGetMemberName_MethodInvocation(MethodInvocation mi, MethodReturnEventArgs<string> e)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("On");
+            sb.Append(mi.Method != null ? mi.Method.MethodName : "<<METHODNAME>>");
+            sb.Append("_");
+            sb.Append(mi.InvokeOnObjectClass != null ? mi.InvokeOnObjectClass.ClassName : "<<OBJECTCLASSNAME>>");
+
+            e.Result = sb.ToString();
+        }        
+        #endregion
+
     }
 }

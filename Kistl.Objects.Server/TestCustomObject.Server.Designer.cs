@@ -41,7 +41,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _ID;
+				return _ID;
             }
             set
             {
@@ -49,9 +49,11 @@ namespace Kistl.App.Test
                 if (_ID != value)
                 {
 					var __oldValue = _ID;
-                    NotifyPropertyChanging("ID", __oldValue, value);
-                    _ID = value;
-                    NotifyPropertyChanged("ID", __oldValue, value);
+					var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+
                 }
             }
         }
@@ -69,7 +71,14 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _Birthday;
+				var __value = _Birthday;
+				if(OnBirthday_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<DateTime?>(__value);
+					OnBirthday_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -77,14 +86,29 @@ namespace Kistl.App.Test
                 if (_Birthday != value)
                 {
 					var __oldValue = _Birthday;
-                    NotifyPropertyChanging("Birthday", __oldValue, value);
-                    _Birthday = value;
-                    NotifyPropertyChanged("Birthday", __oldValue, value);
+					var __newValue = value;
+                    if(OnBirthday_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+						OnBirthday_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Birthday", __oldValue, __newValue);
+                    _Birthday = __newValue;
+                    NotifyPropertyChanged("Birthday", __oldValue, __newValue);
+
+                    if(OnBirthday_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+						OnBirthday_PostSetter(this, e);
+                    }
                 }
             }
         }
         private DateTime? _Birthday;
-
+		public event PropertyGetterHandler<Kistl.App.Test.TestCustomObject, DateTime?> OnBirthday_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, DateTime?> OnBirthday_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.TestCustomObject, DateTime?> OnBirthday_PostSetter;
         /// <summary>
         /// Person&apos;s Name
         /// </summary>
@@ -97,7 +121,14 @@ namespace Kistl.App.Test
         {
             get
             {
-                return _PersonName;
+				var __value = _PersonName;
+				if(OnPersonName_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnPersonName_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -105,14 +136,29 @@ namespace Kistl.App.Test
                 if (_PersonName != value)
                 {
 					var __oldValue = _PersonName;
-                    NotifyPropertyChanging("PersonName", __oldValue, value);
-                    _PersonName = value;
-                    NotifyPropertyChanged("PersonName", __oldValue, value);
+					var __newValue = value;
+                    if(OnPersonName_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnPersonName_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("PersonName", __oldValue, __newValue);
+                    _PersonName = __newValue;
+                    NotifyPropertyChanged("PersonName", __oldValue, __newValue);
+
+                    if(OnPersonName_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnPersonName_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _PersonName;
-
+		public event PropertyGetterHandler<Kistl.App.Test.TestCustomObject, string> OnPersonName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, string> OnPersonName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.TestCustomObject, string> OnPersonName_PostSetter;
         /// <summary>
         /// Mobile Phone Number
         /// </summary>

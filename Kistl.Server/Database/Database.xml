@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-07-27T17:11:31.3977776Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-07-28T11:08:51.5573882Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -502,7 +502,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>PropertyInvocations</KistlBase:TableName>
   </KistlBase:ObjectClass>
@@ -4541,14 +4541,14 @@
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
   </KistlBase:MethodInvocation>
   <KistlBase:MethodInvocation ExportGuid="f9e157ab-04ad-4b23-837d-67b53e7cf8cd">
-    <KistlBase:Implementor>e954023a-9460-4a90-8ca3-12c109bb2e41</KistlBase:Implementor>
+    <KistlBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</KistlBase:Implementor>
     <KistlBase:InvokeOnObjectClass>f6e7bb30-3adf-4d49-a80c-6ea7b589afa7</KistlBase:InvokeOnObjectClass>
     <KistlBase:MemberName>OnGetCodeTemplate_MethodInvocation</KistlBase:MemberName>
     <KistlBase:Method>3a22f806-b740-4f92-bb5f-9564bd2bdd90</KistlBase:Method>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
   </KistlBase:MethodInvocation>
   <KistlBase:MethodInvocation ExportGuid="08d7cf9d-45cc-4f80-af25-bf2807eaa102">
-    <KistlBase:Implementor>e954023a-9460-4a90-8ca3-12c109bb2e41</KistlBase:Implementor>
+    <KistlBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</KistlBase:Implementor>
     <KistlBase:InvokeOnObjectClass>f6e7bb30-3adf-4d49-a80c-6ea7b589afa7</KistlBase:InvokeOnObjectClass>
     <KistlBase:MemberName>OnGetMemberName_MethodInvocation</KistlBase:MemberName>
     <KistlBase:Method>674ffef4-fa90-44b5-af9d-2369794df1e8</KistlBase:Method>
@@ -4734,6 +4734,20 @@
     <KistlBase:InvokeOnObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:InvokeOnObjectClass>
     <KistlBase:MemberName>OnToString_Property</KistlBase:MemberName>
     <KistlBase:Method>58c48d95-c9fa-4680-88a3-841160e9e829</KistlBase:Method>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+  </KistlBase:MethodInvocation>
+  <KistlBase:MethodInvocation ExportGuid="58ee47cf-f1c6-4005-8472-b3cb8e481106">
+    <KistlBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</KistlBase:Implementor>
+    <KistlBase:InvokeOnObjectClass>24defe28-fc33-4f74-bf69-395ffa7a74f5</KistlBase:InvokeOnObjectClass>
+    <KistlBase:MemberName>OnGetCodeTemplate_PropertyInvocation</KistlBase:MemberName>
+    <KistlBase:Method>d3a332ef-b9b6-41a3-982b-615824b29ec4</KistlBase:Method>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+  </KistlBase:MethodInvocation>
+  <KistlBase:MethodInvocation ExportGuid="3a6e6120-cb95-494f-8e14-f2fe10dd6d61">
+    <KistlBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</KistlBase:Implementor>
+    <KistlBase:InvokeOnObjectClass>24defe28-fc33-4f74-bf69-395ffa7a74f5</KistlBase:InvokeOnObjectClass>
+    <KistlBase:MemberName>OnGetMemberName_PropertyInvocation</KistlBase:MemberName>
+    <KistlBase:Method>0a93c893-f1f1-406a-b91b-77c0685dab4c</KistlBase:Method>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
   </KistlBase:MethodInvocation>
   <KistlBase:MethodInvocation ExportGuid="95df6a7b-96d1-46ec-b292-66ad16acd13b">

@@ -46,7 +46,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _Length;
+				var __value = _Length;
+				if(OnLength_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<int>(__value);
+					OnLength_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -54,14 +61,29 @@ namespace Kistl.App.Base
                 if (_Length != value)
                 {
 					var __oldValue = _Length;
-                    NotifyPropertyChanging("Length", __oldValue, value);
-                    _Length = value;
-                    NotifyPropertyChanged("Length", __oldValue, value);
+					var __newValue = value;
+                    if(OnLength_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
+						OnLength_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Length", __oldValue, __newValue);
+                    _Length = __newValue;
+                    NotifyPropertyChanged("Length", __oldValue, __newValue);
+
+                    if(OnLength_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
+						OnLength_PostSetter(this, e);
+                    }
                 }
             }
         }
         private int _Length;
-
+		public event PropertyGetterHandler<Kistl.App.Base.StringProperty, int> OnLength_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.StringProperty, int> OnLength_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.StringProperty, int> OnLength_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>

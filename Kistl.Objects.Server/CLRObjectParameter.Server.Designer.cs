@@ -81,7 +81,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnAssembly_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Assembly>(__value);
+					OnAssembly_Getter(this, e);
+					__value = (Kistl.App.Base.Assembly__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -94,12 +101,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.Assembly__Implementation__)value;
+                Kistl.App.Base.Assembly __oldValue = (Kistl.App.Base.Assembly)r.Value;
+                Kistl.App.Base.Assembly __newValue = (Kistl.App.Base.Assembly)value;
+
+                if(OnAssembly_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Assembly>(__oldValue, __newValue);
+					OnAssembly_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.Assembly__Implementation__)__newValue;
+                if(OnAssembly_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Assembly>(__oldValue, __newValue);
+					OnAssembly_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.Assembly> OnAssembly_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.Assembly> OnAssembly_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.Assembly> OnAssembly_PostSetter;
         /// <summary>
         /// Name des CLR Datentypen
         /// </summary>
@@ -112,7 +136,14 @@ namespace Kistl.App.Base
         {
             get
             {
-                return _FullTypeName;
+				var __value = _FullTypeName;
+				if(OnFullTypeName_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnFullTypeName_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -120,14 +151,29 @@ namespace Kistl.App.Base
                 if (_FullTypeName != value)
                 {
 					var __oldValue = _FullTypeName;
-                    NotifyPropertyChanging("FullTypeName", __oldValue, value);
-                    _FullTypeName = value;
-                    NotifyPropertyChanged("FullTypeName", __oldValue, value);
+					var __newValue = value;
+                    if(OnFullTypeName_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnFullTypeName_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("FullTypeName", __oldValue, __newValue);
+                    _FullTypeName = __newValue;
+                    NotifyPropertyChanged("FullTypeName", __oldValue, __newValue);
+
+                    if(OnFullTypeName_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnFullTypeName_PostSetter(this, e);
+                    }
                 }
             }
         }
         private string _FullTypeName;
-
+		public event PropertyGetterHandler<Kistl.App.Base.CLRObjectParameter, string> OnFullTypeName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.CLRObjectParameter, string> OnFullTypeName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.CLRObjectParameter, string> OnFullTypeName_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>

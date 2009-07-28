@@ -362,47 +362,6 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnGetCodeTemplate_MethodInvocation(MethodInvocation mi, MethodReturnEventArgs<string> e)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("public void {0}", mi.GetMemberName());
-
-            if (mi.InvokeOnObjectClass != null)
-            {
-                sb.AppendFormat("({0}.{1} obj", mi.InvokeOnObjectClass.Module != null ? mi.InvokeOnObjectClass.Module.Namespace : "", mi.InvokeOnObjectClass.ClassName);
-            }
-
-            if (mi.Method != null)
-            {
-                var returnParam = mi.Method.GetReturnParameter();
-                if (returnParam != null)
-                {
-                    sb.AppendFormat(", MethodReturnEventArgs<{0}> e", returnParam.GetParameterTypeString());
-                }
-
-                foreach (var param in mi.Method.Parameter.Where(p => !p.IsReturnParameter))
-                {
-                    sb.AppendFormat(", {0} {1}", param.GetParameterTypeString(), param.ParameterName);
-                }
-            }
-
-            sb.AppendLine(")");
-            sb.AppendLine("{");
-            sb.AppendLine("}");
-
-            e.Result = sb.ToString();
-        }
-
-        public void OnGetMemberName_MethodInvocation(MethodInvocation mi, MethodReturnEventArgs<string> e)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append("On");
-            sb.Append(mi.Method != null ? mi.Method.MethodName : "");
-            sb.Append("_");
-            sb.Append(mi.InvokeOnObjectClass != null ? mi.InvokeOnObjectClass.ClassName : "");
-
-            e.Result = sb.ToString();
-        }
+        
     }
 }

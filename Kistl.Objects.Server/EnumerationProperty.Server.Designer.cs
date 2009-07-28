@@ -81,7 +81,14 @@ namespace Kistl.App.Base
                     r.Load(); 
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
-                return r.Value;
+                var __value = r.Value;
+				if(OnEnumeration_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Enumeration>(__value);
+					OnEnumeration_Getter(this, e);
+					__value = (Kistl.App.Base.Enumeration__Implementation__)e.Result;
+				}
+                return __value;
             }
             set
             {
@@ -94,12 +101,29 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                r.Value = (Kistl.App.Base.Enumeration__Implementation__)value;
+                Kistl.App.Base.Enumeration __oldValue = (Kistl.App.Base.Enumeration)r.Value;
+                Kistl.App.Base.Enumeration __newValue = (Kistl.App.Base.Enumeration)value;
+
+                if(OnEnumeration_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Enumeration>(__oldValue, __newValue);
+					OnEnumeration_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.Enumeration__Implementation__)__newValue;
+                if(OnEnumeration_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Enumeration>(__oldValue, __newValue);
+					OnEnumeration_PostSetter(this, e);
+                }
+                                
             }
         }
         
         
-
+		public event PropertyGetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
