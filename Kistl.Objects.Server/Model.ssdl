@@ -573,6 +573,96 @@
 
   <!-- EntityTypes for all classes -->
 	
+  <EntityType Name="ANewObjectClass">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TestString" Type="nvarchar" MaxLength="100" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="AnotherTest">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+  </EntityType>
+	
+  <EntityType Name="Assembly">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="DeploymentRestrictions" Type="int" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="Auftrag">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Auftragsname" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="Auftragswert" Type="float" Nullable="true" />
+    <Property Name="fk_Kunde" Type="int" />
+    <Property Name="fk_Mitarbeiter" Type="int" />
+    <Property Name="fk_Projekt" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="BaseParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
+    <Property Name="fk_Method" Type="int" />
+    <Property Name="fk_Method_pos" Type="int" Nullable="true" />
+    <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="BoolParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="BoolProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="CLRObjectParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_Assembly" Type="int" />
+    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="ConsistentNavigatorConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="Constraint">
     <Key>
       <PropertyRef Name="ID" />
@@ -583,139 +673,13 @@
     <Property Name="Reason" Type="nvarchar" MaxLength="400" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="IntegerRangeConstraint">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Max" Type="int" Nullable="false" />
-    <Property Name="Min" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ViewDescriptor">
+  <EntityType Name="CurrentSchema">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_ControlRef" Type="int" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IsReadOnly" Type="bit" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
-    <Property Name="fk_PresentedModelDescriptor" Type="int" />
-    <Property Name="Toolkit" Type="int" Nullable="false" />
-    <Property Name="VisualType" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Template">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_DisplayedTypeAssembly" Type="int" />
-    <Property Name="DisplayedTypeFullName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="DisplayName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_VisualTree" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="Visual">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ControlType" Type="int" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_Method" Type="int" />
-    <Property Name="fk_Property" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="PresentableModelDescriptor">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="DefaultVisualType" Type="int" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
-    <Property Name="fk_PresentableModelRef" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="AnotherTest">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-  </EntityType>
-	
-  <EntityType Name="StringRangeConstraint">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="MaxLength" Type="int" Nullable="false" />
-    <Property Name="MinLength" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="TestCustomObject">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Birthday" Type="datetime" Nullable="true" />
-    <Property Name="PersonName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="PhoneNumberMobile_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
-    <Property Name="PhoneNumberMobile_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
-    <Property Name="PhoneNumberOffice_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
-    <Property Name="PhoneNumberOffice_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="Muhblah">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-  </EntityType>
-	
-  <EntityType Name="MethodInvocationConstraint">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="NotNullableConstraint">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="IsValidNamespaceConstraint">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="RelationEnd">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
-    <Property Name="Multiplicity" Type="int" Nullable="false" />
-    <Property Name="fk_Navigator" Type="int" />
-    <Property Name="Role" Type="int" Nullable="false" />
-    <Property Name="RoleName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_Type" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="IsValidIdentifierConstraint">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Schema" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Version" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="DataType">
@@ -733,11 +697,141 @@
     <Property Name="ShowNameInLists" Type="bit" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="DateTimeParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="DateTimeProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="DefaultPropertyValue">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_Property" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="DoubleParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="DoubleProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Enumeration">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="EnumerationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="fk_Enumeration" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Value" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="EnumerationProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_Enumeration" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="GuidProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Icon">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IconFile" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="IntegerRangeConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Max" Type="int" Nullable="false" />
+    <Property Name="Min" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="Interface">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="IntParameter">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="IntProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="IsValidIdentifierConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="IsValidNamespaceConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Kunde">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Adresse" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="Kundenname" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Method">
@@ -766,15 +860,22 @@
     <Property Name="fk_Module" Type="int" />
   </EntityType>
 	
-  <EntityType Name="TypeRef">
+  <EntityType Name="MethodInvocationConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Mitarbeiter">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Assembly" Type="int" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_Parent" Type="int" />
+    <Property Name="Geburtstag" Type="datetime" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="SVNr" Type="nvarchar" MaxLength="20" Nullable="true" />
+    <Property Name="TelefonNummer" Type="nvarchar" MaxLength="50" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Module">
@@ -786,6 +887,27 @@
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ModuleName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Muhblah">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+  </EntityType>
+	
+  <EntityType Name="NewGuidDefaultValue">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="NotNullableConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ObjectClass">
@@ -800,135 +922,21 @@
     <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="Relation">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_A" Type="int" />
-    <Property Name="fk_B" Type="int" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
-    <Property Name="Storage" Type="int" Nullable="true" />
-    <Property Name="Verb" Type="nvarchar" MaxLength="100" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Struct">
+  <EntityType Name="ObjectParameter">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_DataType" Type="int" />
   </EntityType>
 	
-  <EntityType Name="Kunde">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Adresse" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="Kundenname" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
-    <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Assembly">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="DeploymentRestrictions" Type="int" Nullable="true" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="ConsistentNavigatorConstraint">
+  <EntityType Name="ObjectReferenceProperty">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Enumeration">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="EnumerationEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="fk_Enumeration" Type="int" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Value" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Auftrag">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Auftragsname" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="Auftragswert" Type="float" Nullable="true" />
-    <Property Name="fk_Kunde" Type="int" />
-    <Property Name="fk_Mitarbeiter" Type="int" />
-    <Property Name="fk_Projekt" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="Projekt">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="AufwandGes" Type="float" Nullable="true" />
-    <Property Name="Kundenname" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="Mitarbeiter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Geburtstag" Type="datetime" Nullable="true" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="SVNr" Type="nvarchar" MaxLength="20" Nullable="true" />
-    <Property Name="TelefonNummer" Type="nvarchar" MaxLength="50" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="TestObjClass">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="MyIntProperty" Type="int" Nullable="true" />
-    <Property Name="fk_ObjectProp" Type="int" />
-    <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="TestEnumProp" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="CurrentSchema">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Schema" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="Version" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ANewObjectClass">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="TestString" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="EagerLoading" Type="bit" Nullable="false" />
+    <Property Name="fk_ReferenceObjectClass" Type="int" />
   </EntityType>
 	
   <EntityType Name="PresenceRecord">
@@ -941,90 +949,26 @@
     <Property Name="Thru" Type="datetime" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="DoubleProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="EnumerationProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_Enumeration" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="GuidProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="WorkEffortAccount">
+  <EntityType Name="PresentableModelDescriptor">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="BudgetHours" Type="float" Nullable="true" />
-    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="SpentHours" Type="float" Nullable="true" />
+    <Property Name="DefaultVisualType" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="fk_PresentableModelRef" Type="int" />
   </EntityType>
 	
-  <EntityType Name="BoolProperty">
+  <EntityType Name="Projekt">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="DateTimeProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="StringProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Length" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="StructProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_StructDefinition" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="ValueTypeProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="IntProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ObjectReferenceProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="EagerLoading" Type="bit" Nullable="false" />
-    <Property Name="fk_ReferenceObjectClass" Type="int" />
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AufwandGes" Type="float" Nullable="true" />
+    <Property Name="Kundenname" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Property">
@@ -1045,25 +989,83 @@
     <Property Name="fk_ValueModelDescriptor" Type="int" />
   </EntityType>
 	
-  <EntityType Name="BaseParameter">
+  <EntityType Name="PropertyInvocation">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IsList" Type="bit" Nullable="false" />
-    <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
-    <Property Name="fk_Method" Type="int" />
-    <Property Name="fk_Method_pos" Type="int" Nullable="true" />
-    <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="fk_Implementor" Type="int" />
+    <Property Name="InvocationType" Type="int" Nullable="false" />
+    <Property Name="fk_InvokeOnProperty" Type="int" />
+    <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="BoolParameter">
+  <EntityType Name="Relation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_A" Type="int" />
+    <Property Name="fk_B" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="Storage" Type="int" Nullable="true" />
+    <Property Name="Verb" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="RelationEnd">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
+    <Property Name="Multiplicity" Type="int" Nullable="false" />
+    <Property Name="fk_Navigator" Type="int" />
+    <Property Name="Role" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_Type" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="StringParameter">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="StringProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Length" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="StringRangeConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="MaxLength" Type="int" Nullable="false" />
+    <Property Name="MinLength" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Struct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="StructProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_StructDefinition" Type="int" />
   </EntityType>
 	
   <EntityType Name="Task">
@@ -1078,6 +1080,84 @@
     <Property Name="fk_Projekt" Type="int" />
   </EntityType>
 	
+  <EntityType Name="Template">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_DisplayedTypeAssembly" Type="int" />
+    <Property Name="DisplayedTypeFullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_VisualTree" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="TestCustomObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Birthday" Type="datetime" Nullable="true" />
+    <Property Name="PersonName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="PhoneNumberMobile_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="PhoneNumberMobile_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="PhoneNumberOffice_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="PhoneNumberOffice_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="TestObjClass">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MyIntProperty" Type="int" Nullable="true" />
+    <Property Name="fk_ObjectProp" Type="int" />
+    <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="TestEnumProp" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="TypeRef">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Assembly" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_Parent" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="ValueTypeProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="ViewDescriptor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ControlRef" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsReadOnly" Type="bit" Nullable="false" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="fk_PresentedModelDescriptor" Type="int" />
+    <Property Name="Toolkit" Type="int" Nullable="false" />
+    <Property Name="VisualType" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Visual">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ControlType" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fk_Method" Type="int" />
+    <Property Name="fk_Property" Type="int" />
+  </EntityType>
+	
   <EntityType Name="WorkEffort">
     <Key>
       <PropertyRef Name="ID" />
@@ -1090,95 +1170,15 @@
     <Property Name="Thru" Type="datetime" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="Icon">
+  <EntityType Name="WorkEffortAccount">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IconFile" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="IntParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ObjectParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_DataType" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="StringParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="CLRObjectParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_Assembly" Type="int" />
-    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="DateTimeParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="DoubleParameter">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Company">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="DefaultPropertyValue">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_Property" Type="int" />
-  </EntityType>
-	
-  <EntityType Name="NewGuidDefaultValue">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="PropertyInvocation">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_Implementor" Type="int" />
-    <Property Name="InvocationType" Type="int" Nullable="false" />
-    <Property Name="fk_InvokeOnProperty" Type="int" />
-    <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="BudgetHours" Type="float" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="SpentHours" Type="float" Nullable="true" />
   </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->

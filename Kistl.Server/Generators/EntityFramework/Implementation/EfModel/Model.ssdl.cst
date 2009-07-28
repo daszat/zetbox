@@ -116,7 +116,8 @@
 
   <!-- EntityTypes for all classes -->
 <%
-	foreach(var cls in ctx.GetQuery<ObjectClass>())
+	foreach(var cls in ctx.GetQuery<ObjectClass>()
+		.OrderBy(cls => cls.ClassName))
 	{
 %>	
   <EntityType Name="<%= cls.ClassName %>">
