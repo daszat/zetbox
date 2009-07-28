@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-07-28T11:08:51.5573882Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-07-28T12:30:30.8643882Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -4855,6 +4855,12 @@
     <KistlBase:Method>09f139c2-6b61-4606-a3a3-77b2296d79b8</KistlBase:Method>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
   </KistlBase:MethodInvocation>
+  <KistlBase:PropertyInvocation ExportGuid="3c355459-6e5c-4628-9f2b-33747a6ce2d3">
+    <KistlBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</KistlBase:Implementor>
+    <KistlBase:InvocationType>3</KistlBase:InvocationType>
+    <KistlBase:InvokeOnProperty>ad060d41-bc7a-41b8-a3e3-ec9302c8c714</KistlBase:InvokeOnProperty>
+    <KistlBase:MemberName>OnBaseObjectClass_PostSetter_ObjectClass</KistlBase:MemberName>
+  </KistlBase:PropertyInvocation>
   <KistlBase:StringRangeConstraint ExportGuid="33b4207b-fc81-4e99-a27f-d3b7e24dc06d">
     <KistlBase:ConstrainedProperty>9a9dbd59-6816-4d25-9ef2-da84b96bf454</KistlBase:ConstrainedProperty>
     <KistlBase:MaxLength>200</KistlBase:MaxLength>

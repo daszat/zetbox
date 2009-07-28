@@ -38,6 +38,8 @@ namespace Kistl.Server.Packaging
                 .OrderBy(i => i.Method.ObjectClass.ClassName).ThenBy(i => i.Method.MethodName).ThenBy(i => i.ParameterName));
             AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.MethodInvocation>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.InvokeOnObjectClass.ClassName).ThenBy(i => i.Method.MethodName).ThenBy(i => i.Implementor.FullName).ThenBy(i => i.MemberName));
+            AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.PropertyInvocation>().Where(i => i.InvokeOnProperty.Module.ID == moduleID)
+                .OrderBy(i => i.InvokeOnProperty.PropertyName).ThenBy(i => i.Implementor.FullName).ThenBy(i => i.MemberName));
 
             // TODO: Add Module to Constraint - or should that not be changable by other modules?
             AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID)

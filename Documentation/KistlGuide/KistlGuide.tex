@@ -2,13 +2,17 @@
 \usepackage{fancyhdr}
 \usepackage[pdftex]{graphicx}
 \usepackage[pdftex,colorlinks,bookmarksopen]{hyperref}
+\usepackage{color}
+\usepackage{framed}
+\usepackage{listings}
 
 \begin{document}
 
 \addtolength{\textheight}{2cm}
 \addtolength{\topmargin}{-1cm}
 
-\newenvironment{CS}{\tt\begin{tabbing}\nopagebreak}{\end{tabbing}}
+\lstnewenvironment{CS}{\lstset{language=[Sharp]C,frame=single,belowskip=0.5cm,breaklines=true,prebreak=\ldots}}{}
+
 \newcommand{\kw}{\it}
 \newcommand{\new}{\bf}
 \newcommand{\comment}{\it}
@@ -33,6 +37,7 @@
 \include{Introduction}
 % \include{Basics}
 \include{Programming}
+\include{Packaging}
 % \include{ServerAdministration}
 
 % Literature
