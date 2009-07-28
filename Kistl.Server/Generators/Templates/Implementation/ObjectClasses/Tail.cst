@@ -58,6 +58,11 @@
 				}
 %>
             }
+            catch (TypeLoadException)
+            {
+                // TODO: Find a better way to ignore bootstrap errors.
+                // During bootstrapping no MethodInvocation is registred
+            }
             catch (NotImplementedException)
             {
                 // TODO: Find a better way to ignore bootstrap errors.

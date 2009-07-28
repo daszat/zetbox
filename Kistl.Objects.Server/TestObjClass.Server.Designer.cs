@@ -404,7 +404,7 @@ namespace Kistl.App.Test
 			{
 				case "MyIntProperty":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(18).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(101).Constraints
 						.Where(c => !c.IsValid(this, this.MyIntProperty))
 						.Select(c => c.GetErrorText(this, this.MyIntProperty))
 						.ToArray();
@@ -413,7 +413,7 @@ namespace Kistl.App.Test
 				}
 				case "ObjectProp":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(157).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(34).Constraints
 						.Where(c => !c.IsValid(this, this.ObjectProp))
 						.Select(c => c.GetErrorText(this, this.ObjectProp))
 						.ToArray();
@@ -422,7 +422,7 @@ namespace Kistl.App.Test
 				}
 				case "StringProp":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(108).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(166).Constraints
 						.Where(c => !c.IsValid(this, this.StringProp))
 						.Select(c => c.GetErrorText(this, this.StringProp))
 						.ToArray();
@@ -431,7 +431,7 @@ namespace Kistl.App.Test
 				}
 				case "TestEnumProp":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(182).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(195).Constraints
 						.Where(c => !c.IsValid(this, this.TestEnumProp))
 						.Select(c => c.GetErrorText(this, this.TestEnumProp))
 						.ToArray();

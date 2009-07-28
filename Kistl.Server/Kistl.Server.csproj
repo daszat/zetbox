@@ -236,11 +236,6 @@
       <DependentUpon>ListProperty.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\Method.cs" />
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\MethodBody.Designer.cs">
-      <DependentUpon>MethodBody.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Generators\TemplateFactory.cs" />
     <Compile Include="Generators\TemplateGenerator.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cs">
@@ -298,8 +293,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\MethodBody.cst">
+      <LastGenOutput>MethodBody.Designer.cs</LastGenOutput>
       <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>MethodBody.cs</LastGenOutput>
     </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst">
       <Generator>Arebis Template Processor</Generator>
@@ -930,7 +925,12 @@
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionSerialization.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\CollectionSerialization.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cs" />
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\PropertyInvocationsTemplate.cs" >
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\MethodBody.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MethodBody.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\PropertyInvocationsTemplate.cs">
       <DependentUpon>PropertyInvocationsTemplate.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\PropertyInvocationsTemplate.Designer.cs">

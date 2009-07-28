@@ -609,7 +609,12 @@ namespace Kistl.App.Base
         {
             try
             {
-				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(5).DefaultValue.GetDefaultValue();
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(130).DefaultValue.GetDefaultValue();
+            }
+            catch (TypeLoadException)
+            {
+                // TODO: Find a better way to ignore bootstrap errors.
+                // During bootstrapping no MethodInvocation is registred
             }
             catch (NotImplementedException)
             {
@@ -635,7 +640,7 @@ namespace Kistl.App.Base
 			{
 				case "Description":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(159).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(156).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -644,7 +649,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(5).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(130).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -653,7 +658,7 @@ namespace Kistl.App.Base
 				}
 				case "IsDisplayable":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(62).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(93).Constraints
 						.Where(c => !c.IsValid(this, this.IsDisplayable))
 						.Select(c => c.GetErrorText(this, this.IsDisplayable))
 						.ToArray();
@@ -662,7 +667,7 @@ namespace Kistl.App.Base
 				}
 				case "MethodInvokations":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(56).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(57).Constraints
 						.Where(c => !c.IsValid(this, this.MethodInvokations))
 						.Select(c => c.GetErrorText(this, this.MethodInvokations))
 						.ToArray();
@@ -671,7 +676,7 @@ namespace Kistl.App.Base
 				}
 				case "MethodName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(101).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(151).Constraints
 						.Where(c => !c.IsValid(this, this.MethodName))
 						.Select(c => c.GetErrorText(this, this.MethodName))
 						.ToArray();
@@ -680,7 +685,7 @@ namespace Kistl.App.Base
 				}
 				case "Module":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(147).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(70).Constraints
 						.Where(c => !c.IsValid(this, this.Module))
 						.Select(c => c.GetErrorText(this, this.Module))
 						.ToArray();
@@ -689,7 +694,7 @@ namespace Kistl.App.Base
 				}
 				case "ObjectClass":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(133).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(71).Constraints
 						.Where(c => !c.IsValid(this, this.ObjectClass))
 						.Select(c => c.GetErrorText(this, this.ObjectClass))
 						.ToArray();
@@ -698,7 +703,7 @@ namespace Kistl.App.Base
 				}
 				case "Parameter":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(42).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(60).Constraints
 						.Where(c => !c.IsValid(this, this.Parameter))
 						.Select(c => c.GetErrorText(this, this.Parameter))
 						.ToArray();
@@ -714,19 +719,19 @@ namespace Kistl.App.Base
 		{
 			// fix direct object references
 
-			if (_fk_guid_ObjectClass.HasValue)
-				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_ObjectClass.Value);
-			else if (_fk_ObjectClass.HasValue)
-				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_ObjectClass.Value);
-			else
-				ObjectClass__Implementation__ = null;
-
 			if (_fk_guid_Module.HasValue)
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
 			else if (_fk_Module.HasValue)
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
 			else
 				Module__Implementation__ = null;
+
+			if (_fk_guid_ObjectClass.HasValue)
+				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_ObjectClass.Value);
+			else if (_fk_ObjectClass.HasValue)
+				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_ObjectClass.Value);
+			else
+				ObjectClass__Implementation__ = null;
 		}
 #region Serializer
 

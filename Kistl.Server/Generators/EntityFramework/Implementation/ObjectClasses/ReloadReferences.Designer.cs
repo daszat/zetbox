@@ -43,7 +43,10 @@ this.WriteObjects("			\r\n");
 #line 26 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("			// fix direct object references\r\n");
 #line 28 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
-foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(orp => !orp.IsList))
+foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
+		.Where(orp => !orp.IsList)
+		.OrderBy(orp => orp.ObjectClass.ClassName)
+		.ThenBy(orp => orp.PropertyName))
 	{
 		Relation rel = RelationExtensions.Lookup(ctx, prop);
 		RelationEnd relEnd = rel.GetEnd(prop);
@@ -59,7 +62,7 @@ foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(orp =
 		ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, efName, fkBackingName, fkGuidBackingName);
 	}
 
-#line 44 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
+#line 47 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("		}");
 
         }
