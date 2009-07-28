@@ -24,7 +24,7 @@ namespace Kistl.Server
             Console.WriteLine("                  -publish <destfile.xml> <namespace> [<namespace> ...]");
             Console.WriteLine("                  -deploy <sourcefile.xml");
             Console.WriteLine("                  -export <destfile.xml> <namespace> [<namespace> ...]");
-            Console.WriteLine("                  -import <sourcefile.xml");
+            Console.WriteLine("                  -import <sourcefile.xml>");
             Console.WriteLine("                  -checkschema [meta | <schema.xml>]");
             Console.WriteLine("                  -repairschema");
             Console.WriteLine("                  -updateschema [<schema.xml>]");
