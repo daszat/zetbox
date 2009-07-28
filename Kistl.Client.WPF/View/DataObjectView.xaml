@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls">
     <DockPanel>
-        <Image Source="{Binding IconPath}"
+        <Image Source="{Binding Converter={StaticResource IconConverter}}"
                Width="14"
                Height="14" />
         <StackPanel Orientation="Horizontal">

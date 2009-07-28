@@ -11,7 +11,7 @@
             <TextBlock Text="{Binding ID}" />
         </DataTemplate>
         <DataTemplate x:Key="iconCellTemplate">
-            <Image Source="{Binding IconPath}"
+            <Image Source="{Binding Converter={StaticResource IconConverter}}"
                    Width="14"
                    Height="14" />
         </DataTemplate>

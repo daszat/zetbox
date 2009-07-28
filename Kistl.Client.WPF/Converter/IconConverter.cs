@@ -1,13 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Data;
-using Kistl.API.Client;
-using Kistl.API;
 
 namespace Kistl.Client.WPF.Converter
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows.Data;
+
+    using Kistl.API;
+    using Kistl.API.Client;
+
     [ValueConversion(typeof(IDataObject), typeof(string))]
     public class IconConverter : IValueConverter
     {
@@ -30,7 +32,9 @@ namespace Kistl.Client.WPF.Converter
                     return GetIconPath(objClass.DefaultIcon.IconFile);
                 }
                 else
-                    return "";
+                {
+                    return Binding.DoNothing;
+                }
             }
             else if (value is Kistl.App.GUI.Icon)
             {
@@ -46,11 +50,16 @@ namespace Kistl.Client.WPF.Converter
                 }
                 else
                 {
-                    return "";
+                    return Binding.DoNothing;
                 }
             }
+            else if (value is Kistl.Client.Presentables.DataObjectModel)
+            {
+                string path = (value as Kistl.Client.Presentables.DataObjectModel).IconPath;
+                return String.IsNullOrEmpty(path) ? Binding.DoNothing : path;
+            }
 
-            return "";
+            return GetIconPath("error.ico");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

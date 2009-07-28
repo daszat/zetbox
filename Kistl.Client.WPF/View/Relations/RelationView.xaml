@@ -11,7 +11,7 @@
 
         <DockPanel DockPanel.Dock="Top">
             <Image DockPanel.Dock="Left"
-                   Source="{Binding IconPath}"
+                   Source="{Binding Converter={StaticResource IconConverter}}"
                    Margin="4,2,2,2"
                    Width="14"
                    Height="14" />
