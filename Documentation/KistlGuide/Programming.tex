@@ -123,3 +123,51 @@ integer slider control should lookup the minimal and maximal allowed
 values in the underlying \emph{IntegerRangeConstraint} while an
 ExtendedYesNoCheckbox has no other place to retrieve the new label.
 
+
+\section{Core Kistl Development Environment}
+
+\subsection{Preparing a clean local build}
+
+%% TODO: Replace this with one shell script.
+%% TODO: This description is buggy, as it currently only creates empty
+%%       tables
+
+First, it is necessary to have a clean build environment. Use
+\emph{subst} to create a drive \emph{P:} where your subversion checkout
+resides in a directory called \emph{Kistl}. Be sure to delete the
+contents of your \emph{CodeGenPath}\footnote{Typically
+\emph{C:$\backslash$temp$\backslash$KistlCodeGen}} as well as any old
+artifacts from your working directory\footnote{Use e.g. TortoiseSVN's
+"Show ignored files" option to find cruft}. Clean your database by
+calling the \emph{!KillDatabase.cmd} in the project's root.
+
+Now build the solution. This will create the necessary artifacts to
+bootstrap the database.
+
+The \emph{!CreateDatabase.cmd} will now use the freshly built server
+executable to update the (empty) schema in the database to the current
+\emph{Database.xml}.
+
+Finally you can run \emph{!DeployAll.cmd} to generate the frozen and
+client objects.
+
+Now the environment is ready for programming.
+
+\subsection{Merging local and remote changes}
+
+When the subversion repository has changed the \emph{Database.xml} while
+local changes were made to the schema, it is necessary to merge them
+before comitting.
+
+After fetching and merging the update from the subversion repository,
+the local \emph{Database.xml} has changes which are not yet in the
+database. Running \emph{!DeployAll.cmd} updadates the SQL-schema and
+produces a new set of generated assemblies in the \emph{CodeGenPath}.
+After testing that the merge was successful, use \emph{GetCodeGen.cmd}
+to update the working directory with the newly generated bootstrapping
+code.
+
+Now the working directory is ready for check in.
+
+
+
