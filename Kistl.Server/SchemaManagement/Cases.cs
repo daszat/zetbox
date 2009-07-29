@@ -521,12 +521,12 @@ namespace Kistl.Server.SchemaManagement
         {
             report.WriteLine("  New 1:1 Relation: {0}", rel.GetAssociationName());
 
-            if (rel.A.Navigator.HasStorage())
+            if (rel.Storage == StorageType.MergeIntoA || rel.Storage == StorageType.Replicate)
             {
                 New_1_1_Relation_CreateColumns(rel, rel.A, rel.B, RelationEndRole.A);
             }
-            // Difference to 1:N. 1:1 may have storage 'Replicate'
-            if (rel.B.Navigator.HasStorage())
+
+            if (rel.Storage == StorageType.MergeIntoB || rel.Storage == StorageType.Replicate)
             {
                 New_1_1_Relation_CreateColumns(rel, rel.B, rel.A, RelationEndRole.B);
             }

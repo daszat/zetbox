@@ -9,6 +9,7 @@ namespace Kistl.App.Extensions
 {
     public static class PropertyExtensions
     {
+        [Obsolete("Storage of a Property is defined by the containing Relation")]
         public static bool HasStorage(this Property bp)
         {
             if (bp is ObjectReferenceProperty)
