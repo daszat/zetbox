@@ -142,6 +142,13 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ControlKind">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ControlKind)">
+	    <MappingFragment StoreEntitySet="ControlKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CurrentSchema">
       <EntityTypeMapping TypeName="IsTypeOf(Model.CurrentSchema)">
 	    <MappingFragment StoreEntitySet="CurrentSchema">
@@ -437,12 +444,12 @@
 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
 <ComplexProperty Name="PhoneNumberMobile__Implementation__" TypeName="Model.TestPhoneStruct">
-<ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
 <ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
+<ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
 </ComplexProperty>
 <ComplexProperty Name="PhoneNumberOffice__Implementation__" TypeName="Model.TestPhoneStruct">
-<ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
 <ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
+<ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
 </ComplexProperty>
 	    </MappingFragment>
       </EntityTypeMapping>

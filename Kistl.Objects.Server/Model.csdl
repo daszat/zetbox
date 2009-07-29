@@ -10,6 +10,7 @@
     <EntitySet Name="BaseParameter" EntityType="Model.BaseParameter" />
     <EntitySet Name="Company" EntityType="Model.Company" />
     <EntitySet Name="Constraint" EntityType="Model.Constraint" />
+    <EntitySet Name="ControlKind" EntityType="Model.ControlKind" />
     <EntitySet Name="CurrentSchema" EntityType="Model.CurrentSchema" />
     <EntitySet Name="DataType" EntityType="Model.DataType" />
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.DefaultPropertyValue" />
@@ -390,6 +391,12 @@
                         ToRole="ConstrainedProperty" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="Reason" Type="String" Nullable="true" MaxLength="400" />
+  </EntityType>
+  <EntityType Name="ControlKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="CurrentSchema">
     <Key>

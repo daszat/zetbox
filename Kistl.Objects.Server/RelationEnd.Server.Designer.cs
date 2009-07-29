@@ -741,7 +741,7 @@ namespace Kistl.App.Base
         {
             try
             {
-				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(110).DefaultValue.GetDefaultValue();
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(76).DefaultValue.GetDefaultValue();
             }
             catch (TypeLoadException)
             {
@@ -772,7 +772,7 @@ namespace Kistl.App.Base
 			{
 				case "AParent":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(7).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(137).Constraints
 						.Where(c => !c.IsValid(this, this.AParent))
 						.Select(c => c.GetErrorText(this, this.AParent))
 						.ToArray();
@@ -781,7 +781,7 @@ namespace Kistl.App.Base
 				}
 				case "BParent":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(4).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(138).Constraints
 						.Where(c => !c.IsValid(this, this.BParent))
 						.Select(c => c.GetErrorText(this, this.BParent))
 						.ToArray();
@@ -790,7 +790,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(110).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(76).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -799,7 +799,7 @@ namespace Kistl.App.Base
 				}
 				case "HasPersistentOrder":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(83).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(58).Constraints
 						.Where(c => !c.IsValid(this, this.HasPersistentOrder))
 						.Select(c => c.GetErrorText(this, this.HasPersistentOrder))
 						.ToArray();
@@ -808,7 +808,7 @@ namespace Kistl.App.Base
 				}
 				case "Multiplicity":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(190).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(181).Constraints
 						.Where(c => !c.IsValid(this, this.Multiplicity))
 						.Select(c => c.GetErrorText(this, this.Multiplicity))
 						.ToArray();
@@ -817,7 +817,7 @@ namespace Kistl.App.Base
 				}
 				case "Navigator":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(10).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(133).Constraints
 						.Where(c => !c.IsValid(this, this.Navigator))
 						.Select(c => c.GetErrorText(this, this.Navigator))
 						.ToArray();
@@ -826,7 +826,7 @@ namespace Kistl.App.Base
 				}
 				case "Role":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(97).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(39).Constraints
 						.Where(c => !c.IsValid(this, this.Role))
 						.Select(c => c.GetErrorText(this, this.Role))
 						.ToArray();
@@ -835,7 +835,7 @@ namespace Kistl.App.Base
 				}
 				case "RoleName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(142).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(94).Constraints
 						.Where(c => !c.IsValid(this, this.RoleName))
 						.Select(c => c.GetErrorText(this, this.RoleName))
 						.ToArray();
@@ -844,7 +844,7 @@ namespace Kistl.App.Base
 				}
 				case "Type":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(8).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(134).Constraints
 						.Where(c => !c.IsValid(this, this.Type))
 						.Select(c => c.GetErrorText(this, this.Type))
 						.ToArray();

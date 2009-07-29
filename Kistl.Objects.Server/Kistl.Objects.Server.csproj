@@ -73,6 +73,7 @@
     <Compile Include="Company.Server.Designer.cs" />
     <Compile Include="ConsistentNavigatorConstraint.Server.Designer.cs" />
     <Compile Include="Constraint.Server.Designer.cs" />
+    <Compile Include="ControlKind.Server.Designer.cs" />
     <Compile Include="CurrentSchema.Server.Designer.cs" />
     <Compile Include="DataType.Server.Designer.cs" />
     <Compile Include="DateTimeParameter.Server.Designer.cs" />

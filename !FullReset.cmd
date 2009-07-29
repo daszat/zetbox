@@ -28,6 +28,11 @@ cd ..
 
 rem refresh local code
 GetCodeGen.cmd
+
+rem rebuild with newly generated code
+C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Kistl.Complete.sln
+IF ERRORLEVEL 1 GOTO FAIL
+
 GOTO EOF
 
 :FAIL

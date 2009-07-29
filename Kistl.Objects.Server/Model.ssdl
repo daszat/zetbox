@@ -14,6 +14,7 @@
     <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Table="BaseParameters"/>
     <EntitySet Name="Company" EntityType="Model.Store.Company" Table="Companies"/>
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Table="Constraints"/>
+    <EntitySet Name="ControlKind" EntityType="Model.Store.ControlKind" Table="ControlKinds"/>
     <EntitySet Name="CurrentSchema" EntityType="Model.Store.CurrentSchema" Table="CurrentSchema"/>
     <EntitySet Name="DataType" EntityType="Model.Store.DataType" Table="DataTypes"/>
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.Store.DefaultPropertyValue" Table="DefaultPropertyValues"/>
@@ -673,6 +674,13 @@
     <Property Name="Reason" Type="nvarchar" MaxLength="400" Nullable="true" />
   </EntityType>
 	
+  <EntityType Name="ControlKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+  </EntityType>
+	
   <EntityType Name="CurrentSchema">
     <Key>
       <PropertyRef Name="ID" />
@@ -1098,10 +1106,10 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Birthday" Type="datetime" Nullable="true" />
     <Property Name="PersonName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="PhoneNumberMobile_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
     <Property Name="PhoneNumberMobile_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
-    <Property Name="PhoneNumberOffice_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="PhoneNumberMobile_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
     <Property Name="PhoneNumberOffice_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="PhoneNumberOffice_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="TestObjClass">
