@@ -128,28 +128,12 @@ ExtendedYesNoCheckbox has no other place to retrieve the new label.
 
 \subsection{Preparing a clean local build}
 
-%% TODO: Replace this with one shell script.
-%% TODO: This description is buggy, as it currently only creates empty
-%%       tables
-
 First, it is necessary to have a clean build environment. Use
-\emph{subst} to create a drive \emph{P:} where your subversion checkout
-resides in a directory called \emph{Kistl}. Be sure to delete the
-contents of your \emph{CodeGenPath}\footnote{Typically
-\emph{C:$\backslash$temp$\backslash$KistlCodeGen}} as well as any old
-artifacts from your working directory\footnote{Use e.g. TortoiseSVN's
-"Show ignored files" option to find cruft}. Clean your database by
-calling the \emph{!KillDatabase.cmd} in the project's root.
+\emph{subst} to create a drive \emph{P:} where your checkout
+resides in a directory called \emph{Kistl}.
 
-Now build the solution. This will create the necessary artifacts to
-bootstrap the database.
-
-The \emph{!CreateDatabase.cmd} will now use the freshly built server
-executable to update the (empty) schema in the database to the current
-\emph{Database.xml}. Now all tables are ready to be filled with data.
-
-Finally you can run \emph{!DeployAll.cmd} to populate the database and
-generate the frozen and client object assemblies.
+The \emph{!FullReset.cmd} will bring the database and the bootstrapping
+code up to the current \emph{Database.xml}'s content.
 
 Now the environment is ready for programming.
 
