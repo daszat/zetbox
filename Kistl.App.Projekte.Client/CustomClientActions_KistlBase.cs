@@ -308,7 +308,8 @@ namespace Kistl.App.Base
                         newProp.IsIndexed = prop.IsIndexed;
                         newProp.IsList = prop.IsList;
                         newProp.IsNullable = prop.IsNullable;
-                        newProp.Module = prop.Module;
+                        // put the new property into the module of the class
+                        newProp.Module = objClass.Module;
                         newProp.ValueModelDescriptor = prop.ValueModelDescriptor;
 
                         if (prop is StringProperty)
@@ -345,7 +346,8 @@ namespace Kistl.App.Base
                         objClass.Methods.Add(newMeth);
                         newMeth.MethodName = meth.MethodName;
                         newMeth.IsDisplayable = meth.IsDisplayable;
-                        newMeth.Module = meth.Module;
+                        // put the new method into the module of the class
+                        newMeth.Module = objClass.Module;
 
                         foreach (var param in meth.Parameter)
                         {

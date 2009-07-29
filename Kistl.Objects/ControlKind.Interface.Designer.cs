@@ -10,8 +10,15 @@ namespace Kistl.App.GUI
     /// <summary>
     /// The ControlKind specifies the toolkit-independent kind or type of control that should display a given Presentable.
     /// </summary>
-    public interface ControlKind : IDataObject 
+    public interface ControlKind : IDataObject, Kistl.App.Base.IExportable 
     {
 
+        /// <summary>
+        /// The name of this ControlKind
+        /// </summary>
+		string Name {
+			get;
+			set;
+		}
     }
 }

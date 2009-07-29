@@ -43,8 +43,8 @@ namespace Kistl.Server.Packaging
                 .OrderBy(i => i.InvokeOnProperty.PropertyName).ThenBy(i => i.Implementor.FullName).ThenBy(i => i.MemberName));
 
             // TODO: Add Module to Constraint - or should that not be changable by other modules?
-            AddMetaObjects(result, ctx.GetQuery<Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID)
-                .OrderBy(i => i.ConstrainedProperty.ObjectClass.ClassName).ThenBy(i => i.ConstrainedProperty.PropertyName));
+            AddMetaObjects(result, ctx.GetQuery<Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
+                .OrderBy(i => i.ConstrainedProperty.ObjectClass.ClassName).ThenBy(i => i.ConstrainedProperty.PropertyName).ThenBy(i => i.GetInterfaceType().Type.Name).ThenBy(i => i.ExportGuid));
 
             // TODO: Add Module to DefaultPropertyValue - or should that not be changable by other modules?
             AddMetaObjects(result, ctx.GetQuery<DefaultPropertyValue>().Where(i => i.Property.Module.ID == moduleID)

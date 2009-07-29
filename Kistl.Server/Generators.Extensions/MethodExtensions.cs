@@ -14,12 +14,17 @@ namespace Kistl.Server.Generators.Extensions
         /// </summary>
         public static bool IsDefaultMethod(this Method method)
         {
-            return (method.Module.ModuleName == "KistlBase")
-                && (method.MethodName == "ToString"
-                    || method.MethodName == "PreSave"
-                    || method.MethodName == "PostSave"
-                    || method.MethodName == "Created"
-                    || method.MethodName == "Deleting");
+            switch (method.MethodName)
+            {
+                case "ToString":
+                case "PreSave":
+                case "PostSave":
+                case "Created":
+                case "Deleting":
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         public static string GetParameterDefinitions(this Method method)

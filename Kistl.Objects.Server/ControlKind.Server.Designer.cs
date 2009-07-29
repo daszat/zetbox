@@ -24,7 +24,7 @@ namespace Kistl.App.GUI
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="ControlKind")]
     [System.Diagnostics.DebuggerDisplay("ControlKind")]
-    public class ControlKind__Implementation__ : BaseServerDataObject_EntityFramework, ControlKind
+    public class ControlKind__Implementation__ : BaseServerDataObject_EntityFramework, ControlKind, Kistl.API.IExportableInternal
     {
     
 		public ControlKind__Implementation__()
@@ -57,6 +57,106 @@ namespace Kistl.App.GUI
         }
         private int _ID;
 
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+				var __value = _ExportGuid;
+				if(OnExportGuid_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Guid>(__value);
+					OnExportGuid_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+					var __oldValue = _ExportGuid;
+					var __newValue = value;
+                    if(OnExportGuid_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+						OnExportGuid_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+
+                    if(OnExportGuid_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+						OnExportGuid_PostSetter(this, e);
+                    }
+                }
+            }
+        }
+        private Guid _ExportGuid;
+		public event PropertyGetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PostSetter;
+        /// <summary>
+        /// The name of this ControlKind
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual string Name
+        {
+            get
+            {
+				var __value = _Name;
+				if(OnName_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<string>(__value);
+					OnName_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Name != value)
+                {
+					var __oldValue = _Name;
+					var __newValue = value;
+                    if(OnName_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+						OnName_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+                    NotifyPropertyChanging("Name", __oldValue, __newValue);
+                    _Name = __newValue;
+                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+
+                    if(OnName_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+						OnName_PostSetter(this, e);
+                    }
+                }
+            }
+        }
+        private string _Name;
+		public event PropertyGetterHandler<Kistl.App.GUI.ControlKind, string> OnName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, string> OnName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, string> OnName_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(ControlKind));
@@ -69,6 +169,8 @@ namespace Kistl.App.GUI
 			var otherImpl = (ControlKind__Implementation__)obj;
 			var me = (ControlKind)this;
 
+			me.ExportGuid = other.ExportGuid;
+			me.Name = other.Name;
 		}
 
         // tail template
@@ -103,6 +205,20 @@ namespace Kistl.App.GUI
 
         public override void NotifyCreated()
         {
+            try
+            {
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(201).DefaultValue.GetDefaultValue();
+            }
+            catch (TypeLoadException)
+            {
+                // TODO: Find a better way to ignore bootstrap errors.
+                // During bootstrapping no MethodInvocation is registred
+            }
+            catch (NotImplementedException)
+            {
+                // TODO: Find a better way to ignore bootstrap errors.
+                // During bootstrapping no MethodInvocation is registred
+            }
             base.NotifyCreated();
             if (OnCreated_ControlKind != null) OnCreated_ControlKind(this);
         }
@@ -116,6 +232,32 @@ namespace Kistl.App.GUI
         public event ObjectEventHandler<ControlKind> OnDeleting_ControlKind;
 
 
+		protected override string GetPropertyError(string propertyName) 
+		{
+			switch(propertyName)
+			{
+				case "ExportGuid":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(201).Constraints
+						.Where(c => !c.IsValid(this, this.ExportGuid))
+						.Select(c => c.GetErrorText(this, this.ExportGuid))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Name":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(200).Constraints
+						.Where(c => !c.IsValid(this, this.Name))
+						.Select(c => c.GetErrorText(this, this.Name))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				default:
+					return base.GetPropertyError(propertyName);
+			}
+		}
 
 		public override void ReloadReferences()
 		{
@@ -128,24 +270,46 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(this._Name, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
 			
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
 			
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.GUI");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+			
+			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.GUI");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.GUI");
         }
 
 #endregion

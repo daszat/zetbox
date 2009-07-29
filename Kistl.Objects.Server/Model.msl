@@ -146,6 +146,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ControlKind)">
 	    <MappingFragment StoreEntitySet="ControlKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

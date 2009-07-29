@@ -397,6 +397,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="64" />
   </EntityType>
   <EntityType Name="CurrentSchema">
     <Key>
