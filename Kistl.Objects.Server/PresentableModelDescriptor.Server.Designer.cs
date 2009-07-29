@@ -58,6 +58,96 @@ namespace Kistl.App.GUI
         private int _ID;
 
         /// <summary>
+        /// The default ControlKind to use for this Presentable.
+        /// </summary>
+    /*
+    Relation: FK_PresentableModelDescriptor_has_ControlKind
+    A: ZeroOrOne PresentableModelDescriptor as Presentable
+    B: ZeroOrOne ControlKind as DefaultKind
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.ControlKind DefaultKind
+        {
+            get
+            {
+                return DefaultKind__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                DefaultKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_DefaultKind;
+        private Guid? _fk_guid_DefaultKind = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_has_ControlKind", "DefaultKind")]
+        public Kistl.App.GUI.ControlKind__Implementation__ DefaultKind__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
+                        "Model.FK_PresentableModelDescriptor_has_ControlKind",
+                        "DefaultKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnDefaultKind_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.GUI.ControlKind>(__value);
+					OnDefaultKind_Getter(this, e);
+					__value = (Kistl.App.GUI.ControlKind__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
+                        "Model.FK_PresentableModelDescriptor_has_ControlKind",
+                        "DefaultKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.GUI.ControlKind __oldValue = (Kistl.App.GUI.ControlKind)r.Value;
+                Kistl.App.GUI.ControlKind __newValue = (Kistl.App.GUI.ControlKind)value;
+
+                if(OnDefaultKind_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+					OnDefaultKind_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.GUI.ControlKind__Implementation__)__newValue;
+                if(OnDefaultKind_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+					OnDefaultKind_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PostSetter;
+        /// <summary>
         /// The default visual type used for this PresentableModel
         /// </summary>
         // enumeration property
@@ -419,6 +509,7 @@ namespace Kistl.App.GUI
 			me.DefaultVisualType = other.DefaultVisualType;
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
+			this._fk_DefaultKind = otherImpl._fk_DefaultKind;
 			this._fk_Module = otherImpl._fk_Module;
 			this._fk_PresentableModelRef = otherImpl._fk_PresentableModelRef;
 		}
@@ -457,7 +548,7 @@ namespace Kistl.App.GUI
         {
             try
             {
-				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(60).DefaultValue.GetDefaultValue();
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(28).DefaultValue.GetDefaultValue();
             }
             catch (TypeLoadException)
             {
@@ -486,9 +577,18 @@ namespace Kistl.App.GUI
 		{
 			switch(propertyName)
 			{
+				case "DefaultKind":
+				{
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(108).Constraints
+						.Where(c => !c.IsValid(this, this.DefaultKind))
+						.Select(c => c.GetErrorText(this, this.DefaultKind))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "DefaultVisualType":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(181).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(188).Constraints
 						.Where(c => !c.IsValid(this, this.DefaultVisualType))
 						.Select(c => c.GetErrorText(this, this.DefaultVisualType))
 						.ToArray();
@@ -497,7 +597,7 @@ namespace Kistl.App.GUI
 				}
 				case "Description":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(89).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(80).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -506,7 +606,7 @@ namespace Kistl.App.GUI
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(60).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(28).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -515,7 +615,7 @@ namespace Kistl.App.GUI
 				}
 				case "Module":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(140).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(99).Constraints
 						.Where(c => !c.IsValid(this, this.Module))
 						.Select(c => c.GetErrorText(this, this.Module))
 						.ToArray();
@@ -524,7 +624,7 @@ namespace Kistl.App.GUI
 				}
 				case "PresentableModelRef":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(194).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(196).Constraints
 						.Where(c => !c.IsValid(this, this.PresentableModelRef))
 						.Select(c => c.GetErrorText(this, this.PresentableModelRef))
 						.ToArray();
@@ -539,6 +639,13 @@ namespace Kistl.App.GUI
 		public override void ReloadReferences()
 		{
 			// fix direct object references
+
+			if (_fk_guid_DefaultKind.HasValue)
+				DefaultKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultKind.Value);
+			else if (_fk_DefaultKind.HasValue)
+				DefaultKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.Find<Kistl.App.GUI.ControlKind>(_fk_DefaultKind.Value);
+			else
+				DefaultKind__Implementation__ = null;
 
 			if (_fk_guid_Module.HasValue)
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
@@ -561,6 +668,10 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(DefaultKind != null ? DefaultKind.ID : (int?)null, binStream);
+			if (auxObjects != null) {
+				auxObjects.Add(DefaultKind);
+			}
             BinarySerializer.ToStream((int)((PresentableModelDescriptor)this).DefaultVisualType, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
@@ -572,6 +683,7 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_DefaultKind, binStream);
             BinarySerializer.FromStreamConverter(v => ((PresentableModelDescriptor)this).DefaultVisualType = (Kistl.App.GUI.VisualType)v, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._ExportGuid, binStream);
@@ -583,6 +695,7 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(xml);
+            XmlStreamer.ToStream(DefaultKind != null ? DefaultKind.ID : (int?)null, xml, "DefaultKind", "Kistl.App.GUI");
             XmlStreamer.ToStream((int)this.DefaultVisualType, xml, "DefaultVisualType", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
@@ -594,6 +707,7 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_DefaultKind, xml, "DefaultKind", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((PresentableModelDescriptor)this).DefaultVisualType = (Kistl.App.GUI.VisualType)v, xml, "DefaultVisualType", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
@@ -605,6 +719,7 @@ namespace Kistl.App.GUI
         {
 			
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultKind != null ? DefaultKind.ExportGuid : (Guid?)null, xml, "DefaultKind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.DefaultVisualType, xml, "DefaultVisualType", "Kistl.App.GUI");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
@@ -614,6 +729,7 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            XmlStreamer.FromStream(ref this._fk_guid_DefaultKind, xml, "DefaultKind", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((PresentableModelDescriptor)this).DefaultVisualType = (Kistl.App.GUI.VisualType)v, xml, "DefaultVisualType", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");

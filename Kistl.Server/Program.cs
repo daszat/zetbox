@@ -163,6 +163,12 @@ namespace Kistl.Server
                         server.GenerateCode();
                         actiondone = true;
                     }
+                    else if (arg.Command == "-fix" && arg.Arguments.Count == 0)
+                    {
+                        // hidden command to execute ad-hoc fixes against the database
+                        server.RunFixes();
+                        actiondone = true;
+                    }
                     else
                     {
                         PrintHelp();

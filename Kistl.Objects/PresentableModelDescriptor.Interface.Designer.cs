@@ -14,6 +14,13 @@ namespace Kistl.App.GUI
     {
 
         /// <summary>
+        /// The default ControlKind to use for this Presentable.
+        /// </summary>
+		Kistl.App.GUI.ControlKind DefaultKind {
+			get;
+			set;
+		}
+        /// <summary>
         /// The default visual type used for this PresentableModel
         /// </summary>
 		Kistl.App.GUI.VisualType DefaultVisualType {

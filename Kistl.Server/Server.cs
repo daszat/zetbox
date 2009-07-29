@@ -11,6 +11,8 @@ using Kistl.API.Configuration;
 using Kistl.API.Server;
 using Kistl.API;
 using System.IO;
+using Kistl.App.Base;
+using Kistl.App.GUI;
 
 namespace Kistl.Server
 {
@@ -252,6 +254,32 @@ namespace Kistl.Server
                         }
                     }
                 }
+            }
+        }
+
+        internal void RunFixes()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var mapping = new Dictionary<int, ControlKind>();
+                foreach (var visualType in ctx.GetQuery<EnumerationEntry>().Where(ee => ee.Enumeration.ClassName == "VisualType"))
+                {
+                    var controlKind = ctx.Create<ControlKind>();
+                    controlKind.Name = visualType.Name;
+                    mapping[visualType.Value] = controlKind;
+                }
+
+                foreach (var presentableDesc in ctx.GetQuery<PresentableModelDescriptor>())
+                {
+                    presentableDesc.DefaultKind = mapping[(int)presentableDesc.DefaultVisualType];
+                }
+
+                foreach (var viewDesc in ctx.GetQuery<ViewDescriptor>())
+                {
+                    viewDesc.Kind = mapping[(int)viewDesc.VisualType];
+                }
+
+                ctx.SubmitChanges();
             }
         }
 

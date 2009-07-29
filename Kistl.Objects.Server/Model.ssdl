@@ -456,6 +456,10 @@
       <End Role="PresenceRecord" EntitySet="PresenceRecord" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
+    <AssociationSet Name="FK_PresentableModelDescriptor_has_ControlKind" Association="Model.Store.FK_PresentableModelDescriptor_has_ControlKind" >
+      <End Role="Presentable" EntitySet="PresentableModelDescriptor" />
+      <End Role="DefaultKind" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_PresentableModelDescriptor_has_Module" Association="Model.Store.FK_PresentableModelDescriptor_has_Module" >
       <End Role="PresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
       <End Role="Module" EntitySet="Module" />
@@ -547,6 +551,10 @@
     <AssociationSet Name="FK_ViewDescriptor_has_TypeRef" Association="Model.Store.FK_ViewDescriptor_has_TypeRef" >
       <End Role="View" EntitySet="ViewDescriptor" />
       <End Role="ControlRef" EntitySet="TypeRef" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_isof_ControlKind" Association="Model.Store.FK_ViewDescriptor_isof_ControlKind" >
+      <End Role="Control" EntitySet="ViewDescriptor" />
+      <End Role="Kind" EntitySet="ControlKind" />
     </AssociationSet>
     <AssociationSet Name="FK_Visual_has_Method" Association="Model.Store.FK_Visual_has_Method" >
       <End Role="Visual" EntitySet="Visual" />
@@ -964,6 +972,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_DefaultKind" Type="int" />
     <Property Name="DefaultVisualType" Type="int" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
@@ -1151,6 +1160,7 @@
     <Property Name="fk_ControlRef" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsReadOnly" Type="bit" Nullable="false" />
+    <Property Name="fk_Kind" Type="int" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_PresentedModelDescriptor" Type="int" />
     <Property Name="Toolkit" Type="int" Nullable="false" />
@@ -1820,6 +1830,21 @@
   </Association>
 
 
+  <Association Name="FK_PresentableModelDescriptor_has_ControlKind">
+    <End Role="DefaultKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Presentable" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DefaultKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Presentable">
+        <PropertyRef Name="fk_DefaultKind" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_PresentableModelDescriptor_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2160,6 +2185,21 @@
       </Principal>
       <Dependent Role="View">
         <PropertyRef Name="fk_ControlRef" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_ViewDescriptor_isof_ControlKind">
+    <End Role="Kind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Control" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Control">
+        <PropertyRef Name="fk_Kind" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

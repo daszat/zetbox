@@ -30,6 +30,13 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+		Kistl.App.GUI.ControlKind Kind {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
 		Kistl.App.Base.Module Module {
 			get;
 			set;

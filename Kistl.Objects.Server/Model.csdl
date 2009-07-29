@@ -203,6 +203,10 @@
       <End Role="PresenceRecord" EntitySet="PresenceRecord" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
+    <AssociationSet Name="FK_PresentableModelDescriptor_has_ControlKind" Association="Model.FK_PresentableModelDescriptor_has_ControlKind" >
+      <End Role="Presentable" EntitySet="PresentableModelDescriptor" />
+      <End Role="DefaultKind" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_PresentableModelDescriptor_has_Module" Association="Model.FK_PresentableModelDescriptor_has_Module" >
       <End Role="PresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
       <End Role="Module" EntitySet="Module" />
@@ -294,6 +298,10 @@
     <AssociationSet Name="FK_ViewDescriptor_has_TypeRef" Association="Model.FK_ViewDescriptor_has_TypeRef" >
       <End Role="View" EntitySet="ViewDescriptor" />
       <End Role="ControlRef" EntitySet="TypeRef" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_isof_ControlKind" Association="Model.FK_ViewDescriptor_isof_ControlKind" >
+      <End Role="Control" EntitySet="ViewDescriptor" />
+      <End Role="Kind" EntitySet="ControlKind" />
     </AssociationSet>
     <AssociationSet Name="FK_Visual_has_Method" Association="Model.FK_Visual_has_Method" >
       <End Role="Visual" EntitySet="Visual" />
@@ -597,6 +605,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DefaultKind__Implementation__"
+                        Relationship="Model.FK_PresentableModelDescriptor_has_ControlKind"
+                        FromRole="Presentable"
+                        ToRole="DefaultKind" />
     <Property Name="DefaultVisualType__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
@@ -826,6 +838,10 @@
                         ToRole="ControlRef" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="IsReadOnly" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Kind__Implementation__"
+                        Relationship="Model.FK_ViewDescriptor_isof_ControlKind"
+                        FromRole="Control"
+                        ToRole="Kind" />
     <NavigationProperty Name="Module__Implementation__"
                         Relationship="Model.FK_ViewDescriptor_has_Module"
                         FromRole="ViewDescriptor"
@@ -1517,6 +1533,14 @@
          Type="Model.Mitarbeiter" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_PresentableModelDescriptor_has_ControlKind" >
+    <End Role="Presentable"
+         Type="Model.PresentableModelDescriptor" 
+         Multiplicity="0..1" />
+    <End Role="DefaultKind"
+         Type="Model.ControlKind" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_PresentableModelDescriptor_has_Module" >
     <End Role="PresentableModelDescriptor"
          Type="Model.PresentableModelDescriptor" 
@@ -1699,6 +1723,14 @@
          Multiplicity="*" />
     <End Role="ControlRef"
          Type="Model.TypeRef" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_ViewDescriptor_isof_ControlKind" >
+    <End Role="Control"
+         Type="Model.ViewDescriptor" 
+         Multiplicity="0..1" />
+    <End Role="Kind"
+         Type="Model.ControlKind" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Visual_has_Method" >

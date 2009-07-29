@@ -1187,6 +1187,23 @@
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_PresentableModelDescriptor_has_ControlKind
+    A: ZeroOrOne PresentableModelDescriptor as Presentable
+    B: ZeroOrOne ControlKind as DefaultKind
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_PresentableModelDescriptor_has_ControlKind"
+                           TypeName="Model.FK_PresentableModelDescriptor_has_ControlKind"
+                           StoreEntitySet="PresentableModelDescriptor" >
+      <EndProperty Name="DefaultKind">
+        <ScalarProperty Name="ID" ColumnName="fk_DefaultKind"/>
+      </EndProperty>
+      <EndProperty Name="Presentable">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_DefaultKind" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_PresentableModelDescriptor_has_Module
     A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
     B: ZeroOrOne Module as Module
@@ -1576,6 +1593,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_ControlRef" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_ViewDescriptor_isof_ControlKind
+    A: ZeroOrOne ViewDescriptor as Control
+    B: ZeroOrOne ControlKind as Kind
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_ViewDescriptor_isof_ControlKind"
+                           TypeName="Model.FK_ViewDescriptor_isof_ControlKind"
+                           StoreEntitySet="ViewDescriptor" >
+      <EndProperty Name="Kind">
+        <ScalarProperty Name="ID" ColumnName="fk_Kind"/>
+      </EndProperty>
+      <EndProperty Name="Control">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Kind" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Visual_has_Method

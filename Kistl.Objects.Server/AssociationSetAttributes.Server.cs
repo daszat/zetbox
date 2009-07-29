@@ -371,6 +371,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_PresentableModelDescriptor_has_ControlKind
+    A: ZeroOrOne PresentableModelDescriptor as Presentable
+    B: ZeroOrOne ControlKind as DefaultKind
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_PresentableModelDescriptor_has_ControlKind",
+    "Presentable", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.PresentableModelDescriptor__Implementation__),
+    "DefaultKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKind__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_PresentableModelDescriptor_has_Module
     A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
     B: ZeroOrOne Module as Module
@@ -766,6 +781,21 @@ using Kistl.DALProvider.EF;
     "Model", "FK_ViewDescriptor_has_TypeRef",
     "View", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
     "ControlRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_ViewDescriptor_isof_ControlKind
+    A: ZeroOrOne ViewDescriptor as Control
+    B: ZeroOrOne ControlKind as Kind
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_ViewDescriptor_isof_ControlKind",
+    "Control", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
+    "Kind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKind__Implementation__)
     )]
 
 

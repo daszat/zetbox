@@ -63,7 +63,11 @@ namespace Kistl.Server.Packaging
                 .OrderBy(i => i.PresentableModelRef.Assembly.AssemblyName).ThenBy(i => i.PresentableModelRef.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<ViewDescriptor>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.ControlRef.Assembly.AssemblyName).ThenBy(i => i.ControlRef.FullName).ThenBy(i => i.ExportGuid));
-
+            if (module.ModuleName == "GUI")
+            {
+                AddMetaObjects(result, ctx.GetQuery<ControlKind>()// TODO: .Where(i => i.Module.ID == moduleID)
+                    .OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
+            }
             return result;
         }
 
