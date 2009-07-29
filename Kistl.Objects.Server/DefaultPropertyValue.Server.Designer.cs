@@ -269,7 +269,7 @@ namespace Kistl.App.Base
         {
             try
             {
-				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(73).DefaultValue.GetDefaultValue();
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(40).DefaultValue.GetDefaultValue();
             }
             catch (TypeLoadException)
             {
@@ -300,7 +300,7 @@ namespace Kistl.App.Base
 			{
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(73).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(40).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -309,7 +309,7 @@ namespace Kistl.App.Base
 				}
 				case "Property":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(23).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(183).Constraints
 						.Where(c => !c.IsValid(this, this.Property))
 						.Select(c => c.GetErrorText(this, this.Property))
 						.ToArray();

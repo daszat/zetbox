@@ -243,7 +243,7 @@ namespace Kistl.App.Base
 			{
 				case "Max":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(37).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(5).Constraints
 						.Where(c => !c.IsValid(this, this.Max))
 						.Select(c => c.GetErrorText(this, this.Max))
 						.ToArray();
@@ -252,7 +252,7 @@ namespace Kistl.App.Base
 				}
 				case "Min":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(34).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(9).Constraints
 						.Where(c => !c.IsValid(this, this.Min))
 						.Select(c => c.GetErrorText(this, this.Min))
 						.ToArray();
