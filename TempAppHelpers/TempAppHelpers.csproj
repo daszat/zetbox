@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseCustomActionsManager.cs" />
     <Compile Include="GuiExtensions.cs" />
     <Compile Include="KistlContextExtensions.cs" />
     <Compile Include="MultiplicityExtensions.cs" />
