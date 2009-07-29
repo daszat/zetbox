@@ -1,21 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Xml;
-
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.API.Utils;
-using Kistl.App.Extensions;
-using Kistl.Server.Generators.Extensions;
-using System.Collections;
 
 namespace Kistl.Server.Packaging
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using System.Xml;
+
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Server.Generators.Extensions;
+
     public class Exporter
     {
         public static void Publish(string filename, string[] moduleNamespaces)
@@ -93,10 +95,10 @@ namespace Kistl.Server.Packaging
                 foreach (var module in moduleList)
                 {
                     Trace.TraceInformation("  exporting {0}", module.ModuleName);
-                    foreach (var objClass in module.DataTypes.OfType<Kistl.App.Base.ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf)))
+                    foreach (var objClass in module.DataTypes.OfType<ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf)))
                     {
                         Trace.TraceInformation("    {0} ", objClass.ClassName);
-                        foreach (var obj in ctx.GetQuery(objClass.GetDescribedInterfaceType()))
+                        foreach (var obj in ctx.GetQuery(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
                         {
                             Console.Write(".");
                             ExportObject(xml, obj, moduleNamespaces);
@@ -105,7 +107,7 @@ namespace Kistl.Server.Packaging
                     }
 
                     int moduleID = module.ID; // Dont ask
-                    foreach (var rel in ctx.GetQuery<Kistl.App.Base.Relation>().Where(r => r.Module.ID == moduleID))
+                    foreach (var rel in ctx.GetQuery<Relation>().Where(r => r.Module.ID == moduleID))
                     {
                         if (rel.GetRelationType() != RelationType.n_m) continue;
                         if (!rel.A.Type.ImplementsIExportable(ctx)) continue;
@@ -123,7 +125,7 @@ namespace Kistl.Server.Packaging
                         MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType }, new Type[] { typeof(int), typeof(RelationEndRole), typeof(IDataObject) });
                         var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ID, RelationEndRole.A, null }));
 
-                        foreach (var obj in relations)
+                        foreach (var obj in relations.OrderBy(obj => ((IExportable)obj).ExportGuid))
                         {
                             Console.Write(".");
                             ExportObject(xml, obj, moduleNamespaces);
@@ -140,7 +142,7 @@ namespace Kistl.Server.Packaging
         {
             Type t = obj.GetInterfaceType().Type;
             xml.WriteStartElement(t.Name, t.Namespace);
-            if (((Kistl.App.Base.IExportable)obj).ExportGuid == Guid.Empty)
+            if (((IExportable)obj).ExportGuid == Guid.Empty)
             {
                 throw new InvalidOperationException(string.Format("At least one object of type {0} has an empty ExportGuid", t.FullName));
             }

@@ -28,7 +28,7 @@ namespace Kistl.Server.Packaging
             AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.Relation>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.A.Type.ClassName).ThenBy(i => i.Verb).ThenBy(i => i.B.Type.ClassName));
             AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.RelationEnd>().Where(i => (i.AParent != null && i.AParent.Module.ID == moduleID) || (i.BParent != null && i.BParent.Module.ID == moduleID))
-                .OrderBy(i => i.Type.ClassName));
+                .OrderBy(i => i.Type.ClassName).ThenBy(i => i.RoleName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<Kistl.App.Base.EnumerationEntry>().Where(i => i.Enumeration.Module.ID == moduleID)
                 .OrderBy(i => i.Enumeration.ClassName).ThenBy(i => i.Name));
 
