@@ -58,12 +58,12 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
                 );
 
             string newParent = Construct.NestedColumnName(prop, parentName);
-            foreach (var subProp in prop.StructDefinition.Properties.OfType<Property>().Where(p => !p.IsList))
+            foreach (var subProp in prop.StructDefinition.Properties.OfType<Property>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {
                 ApplyScalarProperty(subProp, newParent);
             }
 
-            foreach (var subProp in prop.StructDefinition.Properties.OfType<StructProperty>().Where(p => !p.IsList))
+            foreach (var subProp in prop.StructDefinition.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {
                 ApplyComplexProperty(subProp, newParent);
             }

@@ -27,7 +27,7 @@
 		if (p is StructProperty)
 		{
 			ApplyEntityTypeColumnDefs(
-				((StructProperty)p).StructDefinition.Properties.Cast<Property>(),
+				((StructProperty)p).StructDefinition.Properties.Cast<Property>().OrderBy(prop => prop.PropertyName),
 				Construct.NestedColumnName(p, prefix));
 		}
 		else

@@ -444,12 +444,12 @@
 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
 <ComplexProperty Name="PhoneNumberMobile__Implementation__" TypeName="Model.TestPhoneStruct">
-<ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
+<ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
 </ComplexProperty>
 <ComplexProperty Name="PhoneNumberOffice__Implementation__" TypeName="Model.TestPhoneStruct">
-<ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
+<ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
 </ComplexProperty>
 	    </MappingFragment>
       </EntityTypeMapping>
