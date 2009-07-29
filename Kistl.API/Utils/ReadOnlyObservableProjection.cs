@@ -63,9 +63,17 @@ namespace Kistl.API.Utils
                         e.OldStartingIndex));
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
-                        e.OldItems.Cast<TInput>().Select(this.Selector).ToList(),
-                        e.OldStartingIndex));
+                    if (e.OldStartingIndex != -1)
+                    {
+                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
+                            e.OldItems.Cast<TInput>().Select(this.Selector).ToList(),
+                            e.OldStartingIndex));
+                    }
+                    else
+                    {
+                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
+                               e.OldItems.Cast<TInput>().Select(this.Selector).ToList()));
+                    }
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
