@@ -39,7 +39,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         protected virtual string GetInheritance()
         {
             string baseClass = GetCeBaseClassName();
-            string[] interfaces = GetInterfaces();
+            string[] interfaces = GetInterfaces().OrderBy(s => s).ToArray();
             if (!String.IsNullOrEmpty(baseClass) && interfaces.Length > 0)
             {
                 return ": " + baseClass + ", " + String.Join(", ", interfaces);

@@ -48,7 +48,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         /// <returns>a string defining the inheritance relations of this class</returns>
         protected virtual string GetInheritance()
         {
-            string[] interfaces = GetInterfaces();
+            string[] interfaces = GetInterfaces().OrderBy(s => s).ToArray();
             if (interfaces.Length > 0)
             {
                 return ": " + String.Join(", ", interfaces);
@@ -101,11 +101,11 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             {
                 ObjectClass cls = (ObjectClass)method.ObjectClass;
                 List<Kistl.App.Base.Method> methods = new List<Kistl.App.Base.Method>();
-                foreach(var c in cls.ImplementsInterfaces)
+                foreach (var c in cls.ImplementsInterfaces)
                 {
                     methods.AddRange(c.Methods.Where(m => m.MethodName == method.MethodName));
                 }
-                foreach(var m in methods)
+                foreach (var m in methods)
                 {
                     if (m.Parameter.Count == method.Parameter.Count)
                     {

@@ -53,16 +53,16 @@ namespace Kistl.Server.Packaging
             AddMetaObjects(result, ctx.GetQuery<Assembly>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.AssemblyName));
             AddMetaObjects(result, ctx.GetQuery<TypeRef>().Where(i => i.Assembly.Module.ID == moduleID)
-                .OrderBy(i => i.Assembly.AssemblyName).ThenBy(i => i.FullName));
+                .OrderBy(i => i.Assembly.AssemblyName).ThenBy(i => i.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetPersistenceObjectQuery<TypeRef_hasGenericArguments_TypeRef_RelationEntry>().Where(i => i.A.Assembly.Module.ID == moduleID || i.B.Assembly.Module.ID == moduleID)
-                .OrderBy(i => i.A.Assembly.AssemblyName).ThenBy(i => i.B.Assembly.AssemblyName));
+                .OrderBy(i => i.A.Assembly.AssemblyName).ThenBy(i => i.B.Assembly.AssemblyName).ThenBy(i => i.A.FullName).ThenBy(i => i.B.FullName).ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
             AddMetaObjects(result, ctx.GetQuery<Icon>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.IconFile));
             AddMetaObjects(result, ctx.GetQuery<PresentableModelDescriptor>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.PresentableModelRef.Assembly.AssemblyName).ThenBy(i => i.PresentableModelRef.FullName));
+                .OrderBy(i => i.PresentableModelRef.Assembly.AssemblyName).ThenBy(i => i.PresentableModelRef.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<ViewDescriptor>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.ControlRef.Assembly.AssemblyName).ThenBy(i => i.ControlRef.FullName));
+                .OrderBy(i => i.ControlRef.Assembly.AssemblyName).ThenBy(i => i.ControlRef.FullName).ThenBy(i => i.ExportGuid));
 
             return result;
         }
