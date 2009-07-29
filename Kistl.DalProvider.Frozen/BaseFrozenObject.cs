@@ -135,6 +135,8 @@ namespace Kistl.DalProvider.Frozen
         protected BaseFrozenDataObject(int id)
             : base(id)
         {
+            // This cannot happen here, since the ActionsManager is not yet initialized.
+            // ApplicationContext.Current.CustomActionsManager.AttachEvents(this);
         }
 
         /// <summary>
