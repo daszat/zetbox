@@ -324,7 +324,7 @@ namespace Kistl.App.Test
 			{
 				case "Birthday":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(117).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(164).Constraints
 						.Where(c => !c.IsValid(this, this.Birthday))
 						.Select(c => c.GetErrorText(this, this.Birthday))
 						.ToArray();
@@ -333,7 +333,7 @@ namespace Kistl.App.Test
 				}
 				case "PersonName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(126).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(108).Constraints
 						.Where(c => !c.IsValid(this, this.PersonName))
 						.Select(c => c.GetErrorText(this, this.PersonName))
 						.ToArray();

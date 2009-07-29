@@ -51,7 +51,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("    using Kistl.API;\r\n");
 this.WriteObjects("\r\n");
 #line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
-foreach(string ns in GetAdditionalImports())
+foreach(string ns in GetAdditionalImports().OrderBy(s => s))
     {
 
 #line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"

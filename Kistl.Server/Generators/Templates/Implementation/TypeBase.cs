@@ -84,7 +84,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
         protected virtual string GetInheritance()
         {
             string baseClass = GetBaseClass();
-            string[] interfaces = GetInterfaces();
+            string[] interfaces = GetInterfaces().OrderBy(s => s).ToArray();
             if (!String.IsNullOrEmpty(baseClass) && interfaces.Length > 0)
             {
                 return ": " + baseClass + ", " + String.Join(", ", interfaces);

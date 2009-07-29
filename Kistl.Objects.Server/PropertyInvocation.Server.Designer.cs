@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="PropertyInvocation")]
     [System.Diagnostics.DebuggerDisplay("PropertyInvocation")]
-    public class PropertyInvocation__Implementation__ : BaseServerDataObject_EntityFramework, PropertyInvocation, Kistl.API.IExportableInternal
+    public class PropertyInvocation__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, PropertyInvocation
     {
     
 		public PropertyInvocation__Implementation__()
@@ -501,7 +501,7 @@ namespace Kistl.App.Base
         {
             try
             {
-				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(80).DefaultValue.GetDefaultValue();
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(78).DefaultValue.GetDefaultValue();
             }
             catch (TypeLoadException)
             {
@@ -532,7 +532,7 @@ namespace Kistl.App.Base
 			{
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(80).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(78).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -541,7 +541,7 @@ namespace Kistl.App.Base
 				}
 				case "Implementor":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(192).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(189).Constraints
 						.Where(c => !c.IsValid(this, this.Implementor))
 						.Select(c => c.GetErrorText(this, this.Implementor))
 						.ToArray();
@@ -550,7 +550,7 @@ namespace Kistl.App.Base
 				}
 				case "InvocationType":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(194).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(193).Constraints
 						.Where(c => !c.IsValid(this, this.InvocationType))
 						.Select(c => c.GetErrorText(this, this.InvocationType))
 						.ToArray();
@@ -559,7 +559,7 @@ namespace Kistl.App.Base
 				}
 				case "InvokeOnProperty":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(151).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(152).Constraints
 						.Where(c => !c.IsValid(this, this.InvokeOnProperty))
 						.Select(c => c.GetErrorText(this, this.InvokeOnProperty))
 						.ToArray();
@@ -568,7 +568,7 @@ namespace Kistl.App.Base
 				}
 				case "MemberName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(189).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(196).Constraints
 						.Where(c => !c.IsValid(this, this.MemberName))
 						.Select(c => c.GetErrorText(this, this.MemberName))
 						.ToArray();

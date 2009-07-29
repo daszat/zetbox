@@ -24,7 +24,7 @@ namespace Kistl.App.Test
     /// </summary>
     [EdmComplexType(NamespaceName="Model", Name="TestPhoneStruct")]
     [System.Diagnostics.DebuggerDisplay("TestPhoneStruct")]
-    public class TestPhoneStruct__Implementation__ : BaseServerStructObject_EntityFramework, TestPhoneStruct, IStruct
+    public class TestPhoneStruct__Implementation__ : BaseServerStructObject_EntityFramework, IStruct, TestPhoneStruct
     {
     
 		public TestPhoneStruct__Implementation__()

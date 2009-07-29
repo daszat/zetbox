@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
-    public interface PropertyInvocation : IDataObject, Kistl.App.Base.IInvocation, Kistl.App.Base.IExportable 
+    public interface PropertyInvocation : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IInvocation 
     {
 
         /// <summary>

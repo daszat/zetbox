@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="TypeRef")]
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
-    public class TypeRef__Implementation__ : BaseServerDataObject_EntityFramework, TypeRef, Kistl.API.IExportableInternal
+    public class TypeRef__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, TypeRef
     {
     
 		public TypeRef__Implementation__()
@@ -480,7 +480,7 @@ namespace Kistl.App.Base
         {
             try
             {
-				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(77).DefaultValue.GetDefaultValue();
+				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(62).DefaultValue.GetDefaultValue();
             }
             catch (TypeLoadException)
             {
@@ -511,7 +511,7 @@ namespace Kistl.App.Base
 			{
 				case "Assembly":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(142).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(135).Constraints
 						.Where(c => !c.IsValid(this, this.Assembly))
 						.Select(c => c.GetErrorText(this, this.Assembly))
 						.ToArray();
@@ -520,7 +520,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(77).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(62).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -529,7 +529,7 @@ namespace Kistl.App.Base
 				}
 				case "FullName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(85).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(93).Constraints
 						.Where(c => !c.IsValid(this, this.FullName))
 						.Select(c => c.GetErrorText(this, this.FullName))
 						.ToArray();
@@ -538,7 +538,7 @@ namespace Kistl.App.Base
 				}
 				case "GenericArguments":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(16).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(6).Constraints
 						.Where(c => !c.IsValid(this, this.GenericArguments))
 						.Select(c => c.GetErrorText(this, this.GenericArguments))
 						.ToArray();
@@ -547,7 +547,7 @@ namespace Kistl.App.Base
 				}
 				case "Parent":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(143).Constraints
+					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(142).Constraints
 						.Where(c => !c.IsValid(this, this.Parent))
 						.Select(c => c.GetErrorText(this, this.Parent))
 						.ToArray();

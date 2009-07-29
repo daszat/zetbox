@@ -35,7 +35,7 @@ namespace <%= DataType.Module.Namespace %>
     using Kistl.API;
 
 <%
-    foreach(string ns in GetAdditionalImports())
+    foreach(string ns in GetAdditionalImports().OrderBy(s => s))
     {
 %>
     using <%= ns %>;
