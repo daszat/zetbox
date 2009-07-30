@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-07-29T18:40:12.7408464Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-07-30T10:38:31.8278928Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -950,7 +950,7 @@
   </KistlBase:IntProperty>
   <KistlBase:StringProperty ExportGuid="083bbf12-aac6-4f5f-802a-d3701550bc84">
     <KistlBase:AltText>Der Name der Objektklasse</KistlBase:AltText>
-    <KistlBase:CategoryTags>Summary,DataModel, Description</KistlBase:CategoryTags>
+    <KistlBase:CategoryTags>Summary,DataModel</KistlBase:CategoryTags>
     <KistlBase:Description>Der Name der Objektklasse</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -963,7 +963,7 @@
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="2cffd4f2-cb84-4f39-9bd1-19fd2e160bad">
     <KistlBase:AltText>Description of this DataType</KistlBase:AltText>
-    <KistlBase:CategoryTags>Description</KistlBase:CategoryTags>
+    <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
     <KistlBase:Description>Description of this DataType</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1019,7 +1019,7 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="4e1fb30b-e528-4968-95b0-f3a38eafe643">
     <KistlBase:AltText>Modul der Objektklasse</KistlBase:AltText>
-    <KistlBase:CategoryTags>Summary,MetaData</KistlBase:CategoryTags>
+    <KistlBase:CategoryTags>Summary,DataModel</KistlBase:CategoryTags>
     <KistlBase:Description>Modul der Objektklasse</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -5413,6 +5413,11 @@
     <KistlBase:FullName>Kistl.App.Base.CustomCommonActions_KistlBase</KistlBase:FullName>
     <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="819d1c4b-f442-4115-bd9e-db1bee166a07">
+    <KistlBase:Assembly>ac417690-2bab-4e7f-ab1b-b8afefe6aebf</KistlBase:Assembly>
+    <KistlBase:FullName>Kistl.App.Gui.Common.ControlKindActions</KistlBase:FullName>
+    <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="ae4a2fc0-0eb9-4d85-b962-e81ad9afed86">
     <KistlBase:Assembly>9acf0b2c-a4a1-4418-99b8-3ec69157c3f0</KistlBase:Assembly>
     <KistlBase:FullName>Kistl.App.Base.CustomServerActions_KistlBase</KistlBase:FullName>
@@ -6550,8 +6555,8 @@
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultPresentableModelDescriptor>
+    <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
+    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>ControlKinds</KistlBase:TableName>
@@ -6673,7 +6678,7 @@
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="b1402cda-de87-4b2a-bd65-a950b8dd7a9f">
     <KistlBase:AltText>Standard Icon wenn IIcon nicht implementiert ist</KistlBase:AltText>
-    <KistlBase:CategoryTags>Summary,Description, GUI</KistlBase:CategoryTags>
+    <KistlBase:CategoryTags>Summary,GUI</KistlBase:CategoryTags>
     <KistlBase:Description>Standard Icon wenn IIcon nicht implementiert ist</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -6766,7 +6771,7 @@
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
   </KistlBase:BoolProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="11adedb9-d32a-4da9-b986-0534e65df760">
-    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
+    <KistlBase:CategoryTags>GUI</KistlBase:CategoryTags>
     <KistlBase:Description>The default PresentableModel to use for this ObjectClass</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -7789,6 +7794,13 @@
     <KistlBase:ParameterName>cls</KistlBase:ParameterName>
     <KistlBase:DataType>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:DataType>
   </KistlBase:ObjectParameter>
+  <KistlBase:MethodInvocation ExportGuid="cbf54d78-c799-416a-a2bc-e6839e26a63a">
+    <KistlBase:Implementor>819d1c4b-f442-4115-bd9e-db1bee166a07</KistlBase:Implementor>
+    <KistlBase:InvokeOnObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:InvokeOnObjectClass>
+    <KistlBase:MemberName>OnToString</KistlBase:MemberName>
+    <KistlBase:Method>f2abcd3c-6b48-40f3-a600-4b21a9255c46</KistlBase:Method>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+  </KistlBase:MethodInvocation>
   <KistlBase:MethodInvocation ExportGuid="69d046b9-cfcc-4280-8008-17bcc613af85">
     <KistlBase:Implementor>2f979c67-61ba-4173-838b-378e2224c337</KistlBase:Implementor>
     <KistlBase:InvokeOnObjectClass>78b6f354-013b-4129-a390-7f3a5a5e28e9</KistlBase:InvokeOnObjectClass>
