@@ -15,15 +15,15 @@ namespace Kistl.App.Base
         #region ObjectClass
 
         #region EnsureDefaultMethods
-        private void CheckDefaultMethod(ObjectClass obj, string methodName, Module kistlModule)
+        private void CheckDefaultMethod(ObjectClass obj, string methodName)
         {
-            var m = obj.Methods.SingleOrDefault(i => i.MethodName == methodName && i.Module == kistlModule);
+            var m = obj.Methods.SingleOrDefault(i => i.MethodName == methodName);
             if (m == null && obj.BaseObjectClass == null)
             {
                 // Only for BaseClasses
                 m = obj.Context.Create<Method>();
                 m.MethodName = methodName;
-                m.Module = kistlModule;
+                m.Module = obj.Module;
                 obj.Methods.Add(m);
             }
             else if (m != null && obj.BaseObjectClass != null)
@@ -35,12 +35,11 @@ namespace Kistl.App.Base
 
         private void EnsureDefaultMethods(ObjectClass obj)
         {
-            Module kistlModule = obj.Context.GetQuery<Module>().First(md => md.ModuleName == "KistlBase");
-            CheckDefaultMethod(obj, "ToString", kistlModule);
-            CheckDefaultMethod(obj, "PreSave", kistlModule);
-            CheckDefaultMethod(obj, "PostSave", kistlModule);
-            CheckDefaultMethod(obj, "Created", kistlModule);
-            CheckDefaultMethod(obj, "Deleting", kistlModule);
+            CheckDefaultMethod(obj, "ToString");
+            CheckDefaultMethod(obj, "PreSave");
+            CheckDefaultMethod(obj, "PostSave");
+            CheckDefaultMethod(obj, "Created");
+            CheckDefaultMethod(obj, "Deleting");
         }
         #endregion
 
@@ -134,7 +133,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                sb.AppendFormat("<<TYPE>> obj", mi.InvokeOnObjectClass.Module != null ? mi.InvokeOnObjectClass.Module.Namespace : "", mi.InvokeOnObjectClass.ClassName);
+                sb.Append("<<TYPE>> obj");
             }
 
             if (mi.Method != null)

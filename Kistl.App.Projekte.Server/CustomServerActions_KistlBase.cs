@@ -16,7 +16,7 @@ namespace Kistl.App.Base
                 throw new ArgumentException(string.Format("ParameterName {0} has some illegal chars", obj.ParameterName));
             }
 
-            // TODO: => ValidationFramework
+            // TODO: replace with constraint
             if (obj.Method != null && obj.Method.Parameter.Count(p => p.IsReturnParameter) > 1)
             {
                 throw new ArgumentException(string.Format("Method {0}.{1}.{2} has more then one Return Parameter", 
@@ -28,6 +28,7 @@ namespace Kistl.App.Base
 
         public void OnPreSave_Method(Kistl.App.Base.Method obj)
         {
+            // TODO: replace with constraint
             if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.MethodName))
             {
                 throw new ArgumentException(string.Format("MethodName {0} has some illegal chars", obj.MethodName));
