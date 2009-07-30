@@ -37,6 +37,8 @@ namespace Kistl.Client.Presentables
 
             if (_invocation.Implementor == null) return;
 
+            if (_invocation.Implementor.AsType(false) == null) return;
+
             var possibleValues = _invocation
                 .Implementor.AsType(true)
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
