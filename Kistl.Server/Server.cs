@@ -1,30 +1,34 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.ServiceModel;
-using System.Text;
-using System.Threading;
-
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.GUI;
 
 namespace Kistl.Server
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.ServiceModel;
+    using System.Threading;
+
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Server;
+    using Kistl.App.Base;
+    using Kistl.App.GUI;
+
     /// <summary>
     /// Serversteuerung
     /// </summary>
-    public class Server : MarshalByRefObject, Kistl.API.IKistlAppDomain, IDisposable
+    public class Server
+        : MarshalByRefObject, IKistlAppDomain, IDisposable
     {
         /// <summary>
         /// WCF Service Host
         /// </summary>
         private ServiceHost host = null;
+
+        /// <summary>
+        /// WCF Streams Service Host
+        /// </summary>
         private ServiceHost hostStreams = null;
 
         /// <summary>
@@ -33,21 +37,23 @@ namespace Kistl.Server
         private Thread serviceThread = null;
 
         /// <summary>
-        /// Nur zum signalisieren des Serverstarts.
+        /// Only to signal the server start
         /// </summary>
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
-        private ServerApplicationContext appCtx;
         /// <summary>
-        /// Server starten, Methode blockiert bis zum Serverstart. 
-        /// Nach 20 sec. wird der start jedoch beendet.
+        /// The local Application Context
+        /// </summary>
+        private ServerApplicationContext appCtx;
+
+        /// <summary>
+        /// Starts the WCF Server in the background. If the server hasn't started successfully within 40 seconds, it is aborted and an InvalidOperationException is thrown.
         /// </summary>
         public void Start(KistlConfig config)
         {
             using (TraceClient.TraceHelper.TraceMethodCall("Starting Server"))
             {
-                // re-use application context if available
-                appCtx = ServerApplicationContext.Current ?? new ServerApplicationContext(config);
+                Init(config);
 
                 serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
                 serviceThread.Start();
@@ -60,7 +66,17 @@ namespace Kistl.Server
         }
 
         /// <summary>
-        /// Stops the Server
+        /// Initialises the configuration of the server.
+        /// </summary>
+        /// <param name="config"></param>
+        public void Init(KistlConfig config)
+        {
+            // re-use application context if available
+            appCtx = ServerApplicationContext.Current ?? new ServerApplicationContext(config);
+        }
+
+        /// <summary>
+        /// Stops the WCF Server.
         /// </summary>
         public void Stop()
         {
@@ -141,7 +157,7 @@ namespace Kistl.Server
 
         private void host_Faulted(object sender, EventArgs e)
         {
-            Trace.TraceWarning("Host faulted");
+            Trace.TraceWarning("Host faulted: " + e);
         }
 
         private void host_UnknownMessageReceived(object sender, UnknownMessageReceivedEventArgs e)
@@ -149,7 +165,7 @@ namespace Kistl.Server
             Trace.TraceWarning("UnknownMessageReceived: {0}", e.Message.ToString());
         }
 
-        internal void GenerateCode()
+        public void GenerateCode()
         {
             Generators.Generator.GenerateCode();
         }
@@ -169,7 +185,7 @@ namespace Kistl.Server
             Packaging.Exporter.Publish(file, namespaces);
         }
 
-        internal void Deploy(string file)
+        public void Deploy(string file)
         {
             Packaging.Importer.Deploy(file);
         }
@@ -189,7 +205,7 @@ namespace Kistl.Server
             }
         }
 
-        internal void CheckSchema(bool withRepair)
+        public void CheckSchema(bool withRepair)
         {
             using (IKistlContext ctx = SchemaManagement.SchemaManager.GetSavedSchema())
             {
@@ -223,7 +239,7 @@ namespace Kistl.Server
             }
         }
 
-        internal void UpdateSchema()
+        public void UpdateSchema()
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
@@ -238,7 +254,7 @@ namespace Kistl.Server
             }
         }
 
-        internal void UpdateSchema(string file)
+        public void UpdateSchema(string file)
         {
             using (IKistlContext ctx = new MemoryContext())
             {
