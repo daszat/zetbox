@@ -519,8 +519,9 @@ namespace Kistl.DALProvider.EF
             T result = (T)AttachedObjects.OfType<T>().OfType<IExportableInternal>().SingleOrDefault(o => o.ExportGuid == exportGuid);
             if (result == null)
             {
+                GetListHack<T>();
                 string sql = string.Format("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid = @guid", GetEntityName(typeof(T).ToImplementationType()));
-                result = _ctx.CreateQuery<T>(sql, new ObjectParameter("guid", exportGuid)).FirstOrDefault();
+                result = _ctx.CreateQuery<BaseServerDataObject_EntityFramework>(sql, new ObjectParameter("guid", exportGuid)).FirstOrDefault() as T;
                 if (result != null) result.AttachToContext(this);
             }
             return result;
