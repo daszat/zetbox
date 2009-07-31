@@ -40,7 +40,7 @@ namespace Kistl.IntegrationTests
             }
             catch (Exception error)
             {
-                Trace.TraceError("Error ({0}) while initialising Integretation Tests: {1}", error.GetType().Name, error.Message);
+                Trace.TraceError("Error ({0}) while initialising Integration Tests: {1}", error.GetType().Name, error.Message);
                 Trace.TraceError(error.ToString());
                 Trace.TraceError(error.StackTrace);
 
