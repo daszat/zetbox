@@ -66,10 +66,11 @@ namespace Kistl.Server
 
         static void Main(string[] args)
         {
+            bool waitForKey = false;
             try
             {
                 var config = InitApplicationContext(args);
-
+                
                 Server server = new Server();
                 bool actiondone = false;
                 foreach (CmdLineArg arg in SplitCommandLine(args))
@@ -169,6 +170,10 @@ namespace Kistl.Server
                         server.RunFixes();
                         actiondone = true;
                     }
+                    else if (arg.Command == "-wait")
+                    {
+                        waitForKey = true;
+                    }
                     else
                     {
                         PrintHelp();
@@ -178,8 +183,11 @@ namespace Kistl.Server
 
                 if (actiondone)
                 {
-                    //Console.WriteLine("Hit the anykey to exit");
-                    //Console.ReadKey();
+                    if (waitForKey)
+                    {
+                        Console.WriteLine("Hit the anykey to exit");
+                        Console.ReadKey();
+                    }
                     Console.WriteLine("Shutting down");
                 }
                 else
@@ -196,6 +204,11 @@ namespace Kistl.Server
             catch (Exception ex)
             {
                 System.Diagnostics.Trace.TraceError("Server Application failed: \n" + ex.ToString());
+                if (waitForKey)
+                {
+                    Console.WriteLine("Hit the anykey to exit");
+                    Console.ReadKey();
+                }
             }
         }
 
