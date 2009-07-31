@@ -72,7 +72,6 @@
     <Compile Include="LinqToKistl\KistlContext.cs" />
     <Compile Include="LinqToKistl\KistlContextQuery.cs" />
     <Compile Include="LinqToKistl\KistlContextProvider.cs" />
-    <Compile Include="LinqToKistl\RelationshipManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy.cs" />
     <Compile Include="Service References\KistlServiceStreams\Reference.cs">
