@@ -21,12 +21,11 @@ namespace Kistl.API.AbstractConsumerTests
         protected void ResetDatabase(KistlConfig config)
         {
             string basePath = @"..\..\..\..\Kistl.Server";
-            Console.WriteLine("Killing Database");
             Assert.That(config.Server.ConnectionString, Text.Contains("_test"), "test databases should be marked with '_test' in the connection string");
 
             try
             {
-                Trace.TraceInformation("Resetting Database");
+                Trace.TraceInformation("Killing Database");
                 using (var db = new SqlConnection(config.Server.ConnectionString))
                 {
                     db.Open();
@@ -44,23 +43,85 @@ namespace Kistl.API.AbstractConsumerTests
                         tx.Commit();
                     }
                 }
-                Trace.TraceInformation("Done Resetting Database");
+                Trace.TraceInformation("Done Killing Database");
             }
             catch (Exception error)
             {
-                Trace.TraceError("Error ({0}) while resetting database: {1}", error.GetType().Name, error.Message);
+                Trace.TraceError("Error ({0}) while killing database: {1}", error.GetType().Name, error.Message);
                 Trace.TraceError(error.ToString());
                 Trace.TraceError(error.StackTrace);
 
                 throw error;
             }
 
-            Console.WriteLine("Filling Database");
-            Console.WriteLine(Environment.CurrentDirectory);
-            Process.Start(basePath + @"\bin\Debug\Kistl.Server.exe", String.Format(@"{0} -updateschema {1}\Database\Database.xml -import {1}\Database\Database.xml -checkschema", config.ConfigFilePath, basePath)).WaitForExit();
-            Console.WriteLine("Generate Source");
-            Process.Start(basePath + @"\bin\Debug\Kistl.Server.exe", String.Format(@"{0} -generate", config.ConfigFilePath)).WaitForExit();
+            Trace.TraceInformation(Environment.CurrentDirectory);
+            Trace.TraceInformation("Using config: " + config.ConfigFilePath);
+
+            LoadSchema(config, basePath);
+            LoadData(config, basePath);
+            GenerateSource(config, basePath);
         }
 
+        private static void LoadSchema(KistlConfig config, string basePath)
+        {
+            AppDomain initializer = null;
+            try
+            {
+                Trace.TraceInformation("Loading Schema");
+                initializer = AppDomain.CreateDomain("DatabaseResetup1", null, basePath, @"bin\Debug", true);
+                var server = (Kistl.Server.Server)initializer.CreateInstanceAndUnwrap(typeof(Kistl.Server.Server).Assembly.FullName, typeof(Kistl.Server.Server).FullName);
+                server.Init(config);
+                server.UpdateSchema(basePath + @"\Database\Database.xml");
+            }
+            finally
+            {
+                if (initializer != null)
+                {
+                    AppDomain.Unload(initializer);
+                }
+            }
+        }
+
+        private static void LoadData(KistlConfig config, string basePath)
+        {
+            AppDomain domain = null;
+            try
+            {
+                Trace.TraceInformation("Loading Data");
+                domain = AppDomain.CreateDomain("DatabaseResetup2", null, basePath, @"bin\Debug", true);
+                var server = (Kistl.Server.Server)domain.CreateInstanceAndUnwrap(typeof(Kistl.Server.Server).Assembly.FullName, typeof(Kistl.Server.Server).FullName);
+                server.Init(config);
+                server.Deploy(basePath + @"\Database\Database.xml");
+                server.UpdateSchema();
+                server.CheckSchema(false);
+            }
+            finally
+            {
+                if (domain != null)
+                {
+                    AppDomain.Unload(domain);
+                }
+            }
+        }
+
+        private static void GenerateSource(KistlConfig config, string basePath)
+        {
+            AppDomain domain = null;
+            try
+            {
+                Trace.TraceInformation("Generating Source");
+                domain = AppDomain.CreateDomain("DatabaseResetup3", null, basePath, @"bin\Debug", true);
+                var server = (Kistl.Server.Server)domain.CreateInstanceAndUnwrap(typeof(Kistl.Server.Server).Assembly.FullName, typeof(Kistl.Server.Server).FullName);
+                server.Init(config);
+                server.GenerateCode();
+            }
+            finally
+            {
+                if (domain != null)
+                {
+                    AppDomain.Unload(domain);
+                }
+            }
+        }
     }
 }
