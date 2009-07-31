@@ -55,7 +55,7 @@ namespace Kistl.API
                 {
                     try
                     {
-                        Type t = Type.GetType("Kistl.App.FrozenContextImplementation, Kistl.Objects.Frozen", true);
+                        Type t = Type.GetType("Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen", true);
                         _single = (IKistlContext)Activator.CreateInstance(t);
                     }
                     catch (Exception ex)

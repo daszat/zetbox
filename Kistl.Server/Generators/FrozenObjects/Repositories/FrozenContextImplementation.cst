@@ -17,15 +17,12 @@ using System.Linq;
 
 using Kistl.API;
 
-namespace Kistl.App
+namespace Kistl.DalProvider.Frozen
 {
 
-	public class FrozenContextImplementation : IKistlContext
+	public class FrozenContextImplementation
+		: BaseFrozenContext
 	{
-		public FrozenContextImplementation()
-		{
-		}
-
 		static FrozenContextImplementation()
 		{
 <%
@@ -47,29 +44,12 @@ namespace Kistl.App
 %>
 		}
 		
-
-		IPersistenceObject IKistlContext.Attach(IPersistenceObject obj)
-		{
-			throw new NotImplementedException();
-		}
-		
-		void IKistlContext.Detach(IPersistenceObject obj)
-		{
-			throw new NotImplementedException();
-		}
-
-		void IKistlContext.Delete(IPersistenceObject obj)
-		{
-			throw new ReadOnlyContextException();
-		}
-
-		public IQueryable<T> GetQuery<T>()
-			where T : class, IDataObject
+		public override IQueryable<T> GetQuery<T>()
 		{
 			return GetQuery(new InterfaceType(typeof(T))).Cast<T>();
 		}
 
-		public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
+		public override IQueryable<IDataObject> GetQuery(InterfaceType ifType)
 		{
 <%
 	foreach(var module in modulesWithFrozenClasses)
@@ -87,47 +67,7 @@ namespace Kistl.App
 			throw new NotImplementedException();
 		}
 		
-		public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
-		{
-			throw new NotImplementedException();
-		}
-		
-        public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
-        {
-			throw new NotImplementedException();
-        }
-
-		List<T> IKistlContext.GetListOf<T>(IDataObject obj, string propertyName)
-		{
-			throw new NotImplementedException();
-		}
-		
-        List<T> IKistlContext.GetListOf<T>(InterfaceType ifType, int ID, string propertyName)
-		{
-			throw new NotImplementedException();
-		}
-		
-		IList<T> IKistlContext.FetchRelation<T>(int relId, RelationEndRole role, IDataObject parent)
-		{
-			throw new NotImplementedException();
-		}
-
-        IPersistenceObject IKistlContext.ContainsObject(InterfaceType type, int ID)
-        {
-			return Find(type, ID);
-        }
-        
-        IQueryable<T> IKistlContext.GetPersistenceObjectQuery<T>()
-        {
-			throw new NotImplementedException();
-        }
-        
-        IQueryable<IPersistenceObject> IKistlContext.GetPersistenceObjectQuery(InterfaceType ifType)
-        {
-			throw new NotImplementedException();
-        }
-
-        public IEnumerable<IPersistenceObject> AttachedObjects
+        public override IEnumerable<IPersistenceObject> AttachedObjects
         {
 			get
 			{
@@ -147,25 +87,7 @@ namespace Kistl.App
 			}
 		}
 
-        int IKistlContext.SubmitChanges() { throw new NotImplementedException(); }
-
-        bool IKistlContext.IsDisposed { get { return false; } }
-
-        bool IKistlContext.IsReadonly { get { return true; } }
-
-        IDataObject IKistlContext.Create(InterfaceType ifType) { throw new ReadOnlyContextException(); }
-        T IKistlContext.Create<T>() { throw new ReadOnlyContextException(); }
-        
-        IRelationCollectionEntry IKistlContext.CreateRelationCollectionEntry(InterfaceType ifType) { throw new ReadOnlyContextException(); }
-        T IKistlContext.CreateRelationCollectionEntry<T>() { throw new ReadOnlyContextException(); }
-
-        IValueCollectionEntry IKistlContext.CreateValueCollectionEntry(InterfaceType ifType) { throw new ReadOnlyContextException(); }
-        T IKistlContext.CreateValueCollectionEntry<T>() { throw new ReadOnlyContextException(); }
-		
-        IStruct IKistlContext.CreateStruct(InterfaceType ifType) { throw new ReadOnlyContextException(); }
-        T IKistlContext.CreateStruct<T>() { throw new ReadOnlyContextException(); }
-
-        public IDataObject Find(InterfaceType ifType, int ID)
+        public override IDataObject Find(InterfaceType ifType, int ID)
 		{
 <%
 	foreach(var module in modulesWithFrozenClasses)
@@ -183,62 +105,9 @@ namespace Kistl.App
 			throw new NotImplementedException();
 		}
 
-        public T Find<T>(int ID)
-			where T : class, IDataObject
+        public override T Find<T>(int ID)
         {
 			return (T)Find(new InterfaceType(typeof(T)), ID);
         }
-
-        public T FindPersistenceObject<T>(int ID) where T : class, IPersistenceObject
-        {
-            throw new NotImplementedException();
-        }
-
-        public IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
-        {
-            throw new NotImplementedException();
-        }
-        
-        public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
-        {
-            throw new NotImplementedException();
-        }
-
-        public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
-        {
-            throw new NotImplementedException();
-        }
-        
-        public IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
-        {
-            throw new NotImplementedException();
-        }
-        
-        IKistlContext IKistlContext.GetReadonlyContext() { throw new NotImplementedException(); }
-
-        event GenericEventHandler<IPersistenceObject> IKistlContext.ObjectCreated
-        {
-			add { throw new ReadOnlyContextException(); }
-			remove { throw new ReadOnlyContextException(); }
-		}
-
-        /// <summary>
-        /// Is fired when an object is deleted in this Context.
-        /// The delted object is passed as Data.
-        /// </summary>
-        event GenericEventHandler<IPersistenceObject> IKistlContext.ObjectDeleted
-        {
-			add { throw new ReadOnlyContextException(); }
-			remove { throw new ReadOnlyContextException(); }
-		}
-		
-		public virtual void Dispose() {}
-	
 	}
-	
 }
