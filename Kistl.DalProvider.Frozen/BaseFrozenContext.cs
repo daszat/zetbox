@@ -151,9 +151,6 @@ namespace Kistl.DalProvider.Frozen
         }
 
         /// <summary>Not implemented.</summary>
-        IKistlContext IKistlContext.GetReadonlyContext() { throw new NotImplementedException(); }
-
-        /// <summary>Not implemented.</summary>
         event GenericEventHandler<IPersistenceObject> IKistlContext.ObjectCreated
         {
             add { throw new ReadOnlyContextException(); }

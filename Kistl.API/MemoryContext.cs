@@ -270,9 +270,6 @@ namespace Kistl.API
             return FindPersistenceObjects(new InterfaceType(typeof(T)), exportGuids).Cast<T>();
         }
 
-
-        public IKistlContext GetReadonlyContext() { throw new NotImplementedException(); }
-
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
         public event GenericEventHandler<IPersistenceObject> ObjectDeleted;
 

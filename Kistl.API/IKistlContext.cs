@@ -259,19 +259,6 @@ namespace Kistl.API
         IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
 
         /// <summary>
-        /// Creates a read-only context connected to the same data source as this IKistlContext.
-        /// </summary>
-        /// <returns>a read-only context of the same source as this context</returns>
-        /// 
-        /// Objects fetched from this context cannot be modfied. 
-        /// 
-        /// Implementations are explicitly allowed to re-use one read-only context for all calls
-        /// to this function for performance reasons.
-        /// Implementations are required to return the same read-only context on successive calls 
-        /// of GetReadonlyContext() on a single IKistlContext.
-        IKistlContext GetReadonlyContext();
-
-        /// <summary>
         /// Is fired when an object is created in this Context.
         /// The newly created object is passed as Data.
         /// </summary>

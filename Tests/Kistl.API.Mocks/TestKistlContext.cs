@@ -161,11 +161,6 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
-        public IKistlContext GetReadonlyContext()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool IsReadonly { get { return false; } }
 
         public void NotifyObjectCreated()

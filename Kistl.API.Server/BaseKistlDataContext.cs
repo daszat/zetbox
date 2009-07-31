@@ -308,15 +308,6 @@ namespace Kistl.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public abstract IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
 
-
-
-        public IKistlContext GetReadonlyContext()
-        {
-            // TODO: actually create a ThreadStatic read-only variant of this to allow for a common cache
-            //return this;
-            return FrozenContext.Single;
-        }
-
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 
         protected virtual void OnObjectCreated(IPersistenceObject obj)

@@ -631,13 +631,6 @@ namespace Kistl.API.Client
             }
         }
 
-        public IKistlContext GetReadonlyContext()
-        {
-            // TODO: actually create a ThreadStatic read-only variant of this to allow for a common cache
-            // return this;
-            return FrozenContext.Single;
-        }
-
         #region IDebuggingKistlContext Members
 
         public StackTrace CreatedAt { get; private set; }
