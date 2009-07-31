@@ -15,7 +15,7 @@ namespace Kistl.API.Mocks
         public int ID { get { return _ID; } set { _ID = value; } }
         public bool IsReadonly { get; private set; }
 
-        public int RelationID { get { return -1; } }
+        public Guid RelationID { get { return Guid.NewGuid(); } }
         public IDataObject AObject { get; set; }
         public IDataObject BObject { get; set; }
 

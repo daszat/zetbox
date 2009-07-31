@@ -107,7 +107,7 @@ namespace Kistl.API.Client.Tests
             return result;
         }
 
-        public IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationCollectionEntry
+        public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationCollectionEntry
         {
             auxObjects = new List<IStreamable>();
             return new List<T>();

@@ -122,8 +122,8 @@ namespace Kistl.Server.Packaging
                             continue;
                         }
 
-                        MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType }, new Type[] { typeof(int), typeof(RelationEndRole), typeof(IDataObject) });
-                        var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ID, RelationEndRole.A, null }));
+                        MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType }, new Type[] { typeof(Guid), typeof(RelationEndRole), typeof(IDataObject) });
+                        var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ExportGuid, RelationEndRole.A, null }));
 
                         foreach (var obj in relations.OrderBy(obj => ((IExportable)obj).ExportGuid))
                         {

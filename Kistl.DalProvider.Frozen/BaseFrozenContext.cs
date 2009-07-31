@@ -130,7 +130,7 @@ namespace Kistl.DalProvider.Frozen
         }
 
         /// <summary>Not implemented.</summary>
-        IList<T> IKistlContext.FetchRelation<T>(int relId, RelationEndRole role, IDataObject parent)
+        IList<T> IKistlContext.FetchRelation<T>(Guid relId, RelationEndRole role, IDataObject parent)
         {
             throw new NotImplementedException();
         }

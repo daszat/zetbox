@@ -29,7 +29,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override void ApplyRelationIdPropertyTemplate()
         {
-            this.WriteLine("        public int RelationID {{ get {{ return {0}; }} }}", rel.ID);
+            this.WriteLine("        public Guid RelationID {{ get {{ return new Guid(\"{0}\"); }} }}", rel.ExportGuid);
         }
 
         protected override void ApplyObjectGetterTemplate()

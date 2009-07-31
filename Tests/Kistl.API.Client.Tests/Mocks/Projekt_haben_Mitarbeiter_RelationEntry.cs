@@ -13,7 +13,7 @@ namespace Kistl.App.Projekte
     {
 
         // ID is inherited
-        public int RelationID { get { return 23; } }
+        public Guid RelationID { get { return Guid.Empty; } }
         public IDataObject AObject
         {
             get

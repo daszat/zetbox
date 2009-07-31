@@ -193,14 +193,14 @@ namespace Kistl.API.Client
             return ((KistlContextProvider)query.Provider).GetListOf(ID, propertyName).Cast<T>().ToList();
         }
 
-        internal IList<IRelationCollectionEntry> FetchRelation(ImplementationType imType, int relationId, RelationEndRole role, IDataObject container)
+        internal IList<IRelationCollectionEntry> FetchRelation(ImplementationType imType, Guid relationId, RelationEndRole role, IDataObject container)
         {
-            object result = this.GetType().FindGenericMethod("FetchRelation", new Type[] { imType.Type }, new Type[] { typeof(int), typeof(RelationEndRole), typeof(IDataObject) })
+            object result = this.GetType().FindGenericMethod("FetchRelation", new Type[] { imType.Type }, new Type[] { typeof(Guid), typeof(RelationEndRole), typeof(IDataObject) })
                 .Invoke(this, new object[] { relationId, role, container });
             return Kistl.API.Utils.MagicCollectionFactory.WrapAsList<IRelationCollectionEntry>(result);
         }
 
-        public IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry
+        public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry
         {
             List<IStreamable> auxObjects;
             var serverList = Proxy.Current.FetchRelation<T>(relationId, role, container, out auxObjects);

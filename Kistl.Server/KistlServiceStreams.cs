@@ -232,7 +232,7 @@ namespace Kistl.Server
         /// <param name="serializableRole">the parent role (1 == A, 2 == B)</param>
         /// <param name="parentObjID">the ID of the parent object</param>
         /// <returns>the requested collection entries</returns>
-        public MemoryStream FetchRelation(int relId, int serializableRole, int parentObjID)
+        public MemoryStream FetchRelation(Guid relId, int serializableRole, int parentObjID)
         {
             try
             {
@@ -241,7 +241,7 @@ namespace Kistl.Server
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         var endRole = (RelationEndRole)serializableRole;
-                        Relation rel = ctx.Find<Relation>(relId);
+                        Relation rel = ctx.FindPersistenceObject<Relation>(relId);
 
                         var ifType = typeof(IRelationCollectionEntry<,>);
                         var ceType = ifType.MakeGenericType(rel.A.Type.GetDataType(), rel.B.Type.GetDataType());

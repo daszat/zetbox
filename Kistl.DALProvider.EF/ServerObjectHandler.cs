@@ -63,10 +63,10 @@ namespace Kistl.DALProvider.EF
 
         public IEnumerable<IRelationCollectionEntry> GetCollectionEntries(
             IKistlContext ctx,
-            int relId, RelationEndRole endRole,
+            Guid relId, RelationEndRole endRole,
             int parentId)
         {
-            var rel = ctx.Find<Relation>(relId);
+            var rel = ctx.FindPersistenceObject<Relation>(relId);
             var relEnd = rel.GetEnd(endRole);
             var relOtherEnd = rel.GetOtherEnd(relEnd);
             var parent = ctx.Find(new ImplementationType(typeof(PARENT)).ToInterfaceType(), parentId);

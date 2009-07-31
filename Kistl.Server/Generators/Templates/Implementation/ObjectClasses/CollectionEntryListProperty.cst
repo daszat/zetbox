@@ -19,7 +19,7 @@
 <%@ Parameter Name="bSideType" Type="string" %>
 <%@ Parameter Name="entryType" Type="string" %>
 <%@ Parameter Name="providerCollectionType" Type="string" %>
-<%@ Parameter Name="relId" Type="int" %>
+<%@ Parameter Name="relId" Type="Guid" %>
 <%@ Parameter Name="role" Type="RelationEndRole" %>
 <%@ Parameter Name="eagerLoading" Type="bool" %>
    		// <%= this.GetType() %>
@@ -34,7 +34,7 @@
 	if (!eagerLoading)
 	{
 %>
-					Context.FetchRelation<<%= entryType %>>(<%= relId %>, RelationEndRole.<%= role %>, this);
+					Context.FetchRelation<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
 <%
 	}
 %>

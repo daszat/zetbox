@@ -70,7 +70,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
                 name, exposedCollectionInterface, referencedInterface,
                 backingName, backingCollectionType, aSideType, bSideType, entryType,
                 providerCollectionType,
-                rel.ID, endRole,
+                rel.ExportGuid, endRole,
                 eagerLoading);
         }
 

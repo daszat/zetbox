@@ -184,7 +184,7 @@ namespace Kistl.API
         /// <returns>the requested collection entries</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream FetchRelation(int relId, int role, int ID);
+        MemoryStream FetchRelation(Guid relId, int role, int ID);
     }
 
     /// <summary>
@@ -247,7 +247,7 @@ namespace Kistl.API
         /// <returns></returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        string FetchRelation(SerializableType ceType, int role, int ID);
+        string FetchRelation(SerializableType ceType, int role, Guid ID);
 
         /// <summary>
         /// Instructs the Server to generate Objects &amp; Database. Throws an Exception on failures.

@@ -103,7 +103,7 @@ namespace Kistl.API
         /// <param name="container">The container of the requested collection</param>
         /// <returns></returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry;
+        IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.

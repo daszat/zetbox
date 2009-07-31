@@ -93,7 +93,7 @@ namespace Kistl.App.Projekte
             {
                 if (_Mitarbeiter == null)
                 {
-                    Context.FetchRelation<Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>(23, RelationEndRole.A, this);
+                    Context.FetchRelation<Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>(Guid.Empty, RelationEndRole.A, this);
                     _Mitarbeiter
                         = new ClientRelationBSideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>(
                             this,

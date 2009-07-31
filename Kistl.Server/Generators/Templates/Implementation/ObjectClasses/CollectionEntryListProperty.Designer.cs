@@ -22,12 +22,12 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected string bSideType;
 		protected string entryType;
 		protected string providerCollectionType;
-		protected int relId;
+		protected Guid relId;
 		protected RelationEndRole role;
 		protected bool eagerLoading;
 
 
-        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, int relId, RelationEndRole role, bool eagerLoading)
+        public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, Guid relId, RelationEndRole role, bool eagerLoading)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -63,7 +63,7 @@ this.WriteObjects("				{\r\n");
 	{
 
 #line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
-this.WriteObjects("					Context.FetchRelation<",  entryType , ">(",  relId , ", RelationEndRole.",  role , ", this);\r\n");
+this.WriteObjects("					Context.FetchRelation<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
 #line 39 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 }
 

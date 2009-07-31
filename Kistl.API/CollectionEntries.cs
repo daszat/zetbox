@@ -1,6 +1,8 @@
 
 namespace Kistl.API
 {
+    using System;
+
     /// <summary>
     /// Asserts that the Relation "RelationID" contains the tuple (AObject, BObject).
     /// </summary>
@@ -8,7 +10,7 @@ namespace Kistl.API
         : IPersistenceObject
     {
         /// <summary>Gets the ID of the relation.</summary>
-        int RelationID { get; }
+        Guid RelationID { get; }
 
         /// <summary>Gets or sets the A-side object.</summary>
         IDataObject AObject { get; set; }

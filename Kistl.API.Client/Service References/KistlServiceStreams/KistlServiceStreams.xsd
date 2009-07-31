@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:6666/KistlServiceStreams?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
+  <xs:import schemaLocation="http://localhost:6666/KistlServiceStreams?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:element name="GetObject">
     <xs:complexType>
       <xs:sequence>
@@ -60,7 +61,7 @@
   <xs:element name="FetchRelation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="relId" type="xs:int" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="relId" type="q9:guid" />
         <xs:element minOccurs="0" name="role" type="xs:int" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
       </xs:sequence>
@@ -69,7 +70,7 @@
   <xs:element name="FetchRelationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="FetchRelationResult" nillable="true" type="q9:MemoryStream" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="FetchRelationResult" nillable="true" type="q10:MemoryStream" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

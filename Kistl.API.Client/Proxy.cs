@@ -25,7 +25,7 @@ namespace Kistl.API.Client
 
         IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects);
 
-        IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
+        IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationCollectionEntry;
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace Kistl.API.Client
             return result;
         }
 
-        public IEnumerable<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
+        public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationCollectionEntry
         {
             using (TraceClient.TraceHelper.TraceMethodCall("Fetching relation"))

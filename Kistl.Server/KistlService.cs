@@ -209,7 +209,7 @@ namespace Kistl.Server
             }
         }
 
-        public string FetchRelation(SerializableType ceType, int role, int ID)
+        public string FetchRelation(SerializableType ceType, int role, Guid ID)
         {
             try
             {

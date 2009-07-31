@@ -216,7 +216,7 @@ namespace Kistl.DALProvider.EF
         /// <param name="role"></param>
         /// <param name="parent"></param>
         /// <returns></returns>
-        public override IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent)
+        public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent)
         {
             if (parent == null)
             {

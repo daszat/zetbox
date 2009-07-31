@@ -102,7 +102,7 @@ namespace Kistl.API
             throw new NotImplementedException();
         }
 
-        public IList<T> FetchRelation<T>(int relId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry
+        public IList<T> FetchRelation<T>(Guid relId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry
         {
             if (parent == null)
             {

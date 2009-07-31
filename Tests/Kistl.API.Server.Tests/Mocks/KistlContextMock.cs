@@ -106,7 +106,7 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public override IList<T> FetchRelation<T>(int relationId, RelationEndRole role, IDataObject parent)
+        public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent)
         {
             throw new NotImplementedException();
         }
