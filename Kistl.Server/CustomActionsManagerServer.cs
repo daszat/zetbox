@@ -23,7 +23,15 @@ namespace Kistl.Server
         {
             using (var ctx = KistlContext.GetContext())
             {
-                InitializeProvider(ctx, String.Empty, ServerApplicationContext.Current.ImplementationAssembly);
+                try
+                {
+                    InitializeProvider(ctx, String.Empty, ServerApplicationContext.Current.ImplementationAssembly);
+                }
+                catch { 
+                    // Avoid errors while bootstrapping
+                    // TODO: avoid errors ONLY while bootstrapping
+                    Trace.TraceError("Error while trying to initialise CustomServerActions");
+                }
             }
         }
 
