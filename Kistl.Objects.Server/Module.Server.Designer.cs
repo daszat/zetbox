@@ -405,7 +405,7 @@ namespace Kistl.App.Base
         {
             try
             {
-				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(23).DefaultValue.GetDefaultValue();
+				this.ExportGuid = (Guid)FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("75e3db82-220c-474e-973a-ceb65fd8386d")).DefaultValue.GetDefaultValue();
             }
             catch (TypeLoadException)
             {
@@ -436,7 +436,7 @@ namespace Kistl.App.Base
 			{
 				case "Assemblies":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(132).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("cab23a85-a179-475c-a70f-77789e2a2907")).Constraints
 						.Where(c => !c.IsValid(this, this.Assemblies))
 						.Select(c => c.GetErrorText(this, this.Assemblies))
 						.ToArray();
@@ -445,7 +445,7 @@ namespace Kistl.App.Base
 				}
 				case "DataTypes":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(133).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("a1711984-5263-4407-ac67-6e4123954976")).Constraints
 						.Where(c => !c.IsValid(this, this.DataTypes))
 						.Select(c => c.GetErrorText(this, this.DataTypes))
 						.ToArray();
@@ -454,7 +454,7 @@ namespace Kistl.App.Base
 				}
 				case "Description":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(44).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("79408b86-1731-42ad-89b2-ed5c567fbf8a")).Constraints
 						.Where(c => !c.IsValid(this, this.Description))
 						.Select(c => c.GetErrorText(this, this.Description))
 						.ToArray();
@@ -463,7 +463,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(23).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("75e3db82-220c-474e-973a-ceb65fd8386d")).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -472,7 +472,7 @@ namespace Kistl.App.Base
 				}
 				case "ModuleName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(42).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("63facb30-d8f7-42f6-8c14-85933d5f94b8")).Constraints
 						.Where(c => !c.IsValid(this, this.ModuleName))
 						.Select(c => c.GetErrorText(this, this.ModuleName))
 						.ToArray();
@@ -481,7 +481,7 @@ namespace Kistl.App.Base
 				}
 				case "Namespace":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(43).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("36d2b9e7-d6b9-4a9c-a363-7e059a637919")).Constraints
 						.Where(c => !c.IsValid(this, this.Namespace))
 						.Select(c => c.GetErrorText(this, this.Namespace))
 						.ToArray();

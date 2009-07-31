@@ -475,7 +475,7 @@ namespace Kistl.App.GUI
 			{
 				case "DisplayedTypeAssembly":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(91).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c81105da-97e4-4685-af88-792c68e55a17")).Constraints
 						.Where(c => !c.IsValid(this, this.DisplayedTypeAssembly))
 						.Select(c => c.GetErrorText(this, this.DisplayedTypeAssembly))
 						.ToArray();
@@ -484,7 +484,7 @@ namespace Kistl.App.GUI
 				}
 				case "DisplayedTypeFullName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(84).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("4b683aa1-45a9-4c5e-80e7-0ff30f5b798c")).Constraints
 						.Where(c => !c.IsValid(this, this.DisplayedTypeFullName))
 						.Select(c => c.GetErrorText(this, this.DisplayedTypeFullName))
 						.ToArray();
@@ -493,7 +493,7 @@ namespace Kistl.App.GUI
 				}
 				case "DisplayName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(85).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("4fc51781-b0fe-495c-91a1-90e484345515")).Constraints
 						.Where(c => !c.IsValid(this, this.DisplayName))
 						.Select(c => c.GetErrorText(this, this.DisplayName))
 						.ToArray();
@@ -502,7 +502,7 @@ namespace Kistl.App.GUI
 				}
 				case "Menu":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(113).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5e9612d5-019a-416b-a2e2-dfc9674a50f6")).Constraints
 						.Where(c => !c.IsValid(this, this.Menu))
 						.Select(c => c.GetErrorText(this, this.Menu))
 						.ToArray();
@@ -511,7 +511,7 @@ namespace Kistl.App.GUI
 				}
 				case "VisualTree":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(92).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5d2880a4-716a-4bdc-aaa9-379c006e7ed4")).Constraints
 						.Where(c => !c.IsValid(this, this.VisualTree))
 						.Select(c => c.GetErrorText(this, this.VisualTree))
 						.ToArray();

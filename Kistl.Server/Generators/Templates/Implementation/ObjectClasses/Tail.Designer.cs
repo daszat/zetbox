@@ -72,7 +72,7 @@ foreach (var prop in cls.Properties.Where(p => p.DefaultValue != null))
 				{
 
 #line 56 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
-this.WriteObjects("				this.",  prop.PropertyName , " = (",  prop.ReferencedTypeAsCSharp() , ")FrozenContext.Single.Find<Kistl.App.Base.Property>(",  prop.ID , ").DefaultValue.GetDefaultValue();\r\n");
+this.WriteObjects("				this.",  prop.PropertyName , " = (",  prop.ReferencedTypeAsCSharp() , ")FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid(\"",  prop.ExportGuid , "\")).DefaultValue.GetDefaultValue();\r\n");
 #line 58 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
 }
 

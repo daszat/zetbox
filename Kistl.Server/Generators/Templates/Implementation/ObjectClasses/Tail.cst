@@ -53,7 +53,7 @@
 				foreach (var prop in cls.Properties.Where(p => p.DefaultValue != null))
 				{
 %>
-				this.<%= prop.PropertyName %> = (<%= prop.ReferencedTypeAsCSharp() %>)FrozenContext.Single.Find<Kistl.App.Base.Property>(<%= prop.ID %>).DefaultValue.GetDefaultValue();
+				this.<%= prop.PropertyName %> = (<%= prop.ReferencedTypeAsCSharp() %>)FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("<%= prop.ExportGuid %>")).DefaultValue.GetDefaultValue();
 <%
 				}
 %>

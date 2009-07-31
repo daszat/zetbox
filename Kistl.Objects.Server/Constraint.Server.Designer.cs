@@ -342,7 +342,7 @@ namespace Kistl.App.Base
         {
             try
             {
-				this.ExportGuid = (Guid)FrozenContext.Single.Find<Kistl.App.Base.Property>(31).DefaultValue.GetDefaultValue();
+				this.ExportGuid = (Guid)FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8da6d02c-9d9e-4db8-91ee-24a3fd1c74e1")).DefaultValue.GetDefaultValue();
             }
             catch (TypeLoadException)
             {
@@ -373,7 +373,7 @@ namespace Kistl.App.Base
 			{
 				case "ConstrainedProperty":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(175).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("438b9307-fb40-4afe-a66f-a5762c41e14b")).Constraints
 						.Where(c => !c.IsValid(this, this.ConstrainedProperty))
 						.Select(c => c.GetErrorText(this, this.ConstrainedProperty))
 						.ToArray();
@@ -382,7 +382,7 @@ namespace Kistl.App.Base
 				}
 				case "ExportGuid":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(31).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8da6d02c-9d9e-4db8-91ee-24a3fd1c74e1")).Constraints
 						.Where(c => !c.IsValid(this, this.ExportGuid))
 						.Select(c => c.GetErrorText(this, this.ExportGuid))
 						.ToArray();
@@ -391,7 +391,7 @@ namespace Kistl.App.Base
 				}
 				case "Reason":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(58).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("49f759b3-de60-4cee-be06-c712e901c24e")).Constraints
 						.Where(c => !c.IsValid(this, this.Reason))
 						.Select(c => c.GetErrorText(this, this.Reason))
 						.ToArray();

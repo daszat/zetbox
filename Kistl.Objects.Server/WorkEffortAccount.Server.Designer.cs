@@ -374,7 +374,7 @@ namespace Kistl.App.TimeRecords
 			{
 				case "BudgetHours":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(161).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("2f57b6c8-d798-43de-b9c8-29675ff0c65f")).Constraints
 						.Where(c => !c.IsValid(this, this.BudgetHours))
 						.Select(c => c.GetErrorText(this, this.BudgetHours))
 						.ToArray();
@@ -383,7 +383,7 @@ namespace Kistl.App.TimeRecords
 				}
 				case "Mitarbeiter":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(120).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("21ed2b37-6e10-4aff-b4c1-554a1cc0e967")).Constraints
 						.Where(c => !c.IsValid(this, this.Mitarbeiter))
 						.Select(c => c.GetErrorText(this, this.Mitarbeiter))
 						.ToArray();
@@ -392,7 +392,7 @@ namespace Kistl.App.TimeRecords
 				}
 				case "Name":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(19).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("763b0b46-8309-4532-ba98-36575f02a1d1")).Constraints
 						.Where(c => !c.IsValid(this, this.Name))
 						.Select(c => c.GetErrorText(this, this.Name))
 						.ToArray();
@@ -401,7 +401,7 @@ namespace Kistl.App.TimeRecords
 				}
 				case "Notes":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(20).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("79c8188d-d8e2-41b7-82c9-08f384fd6b68")).Constraints
 						.Where(c => !c.IsValid(this, this.Notes))
 						.Select(c => c.GetErrorText(this, this.Notes))
 						.ToArray();
@@ -410,7 +410,7 @@ namespace Kistl.App.TimeRecords
 				}
 				case "SpentHours":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(177).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("f7816f8a-0b07-429c-9161-47ca495a2e41")).Constraints
 						.Where(c => !c.IsValid(this, this.SpentHours))
 						.Select(c => c.GetErrorText(this, this.SpentHours))
 						.ToArray();

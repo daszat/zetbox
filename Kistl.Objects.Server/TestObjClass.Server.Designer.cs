@@ -404,7 +404,7 @@ namespace Kistl.App.Test
 			{
 				case "MyIntProperty":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(34).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("29c0242b-cd1c-42b4-8ca0-be0a209afcbf")).Constraints
 						.Where(c => !c.IsValid(this, this.MyIntProperty))
 						.Select(c => c.GetErrorText(this, this.MyIntProperty))
 						.ToArray();
@@ -413,7 +413,7 @@ namespace Kistl.App.Test
 				}
 				case "ObjectProp":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(129).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e93b3fc2-2fc9-4577-9a93-a51ed2a4190f")).Constraints
 						.Where(c => !c.IsValid(this, this.ObjectProp))
 						.Select(c => c.GetErrorText(this, this.ObjectProp))
 						.ToArray();
@@ -422,7 +422,7 @@ namespace Kistl.App.Test
 				}
 				case "StringProp":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(4).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c9a3769e-7a53-4e1d-b894-72dc1b4e9aea")).Constraints
 						.Where(c => !c.IsValid(this, this.StringProp))
 						.Select(c => c.GetErrorText(this, this.StringProp))
 						.ToArray();
@@ -431,7 +431,7 @@ namespace Kistl.App.Test
 				}
 				case "TestEnumProp":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(193).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("89470dda-4ac6-4bb4-9221-d16f80f8d95a")).Constraints
 						.Where(c => !c.IsValid(this, this.TestEnumProp))
 						.Select(c => c.GetErrorText(this, this.TestEnumProp))
 						.ToArray();

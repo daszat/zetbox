@@ -192,7 +192,7 @@ namespace Kistl.App.Base
 			{
 				case "Length":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(8).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("3588888e-b280-4e8d-8a7b-53f452b81bf0")).Constraints
 						.Where(c => !c.IsValid(this, this.Length))
 						.Select(c => c.GetErrorText(this, this.Length))
 						.ToArray();

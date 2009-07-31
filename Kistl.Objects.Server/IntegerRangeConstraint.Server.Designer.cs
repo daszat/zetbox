@@ -243,7 +243,7 @@ namespace Kistl.App.Base
 			{
 				case "Max":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(5).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("dff43695-5b93-4378-a01d-94a82d29dcef")).Constraints
 						.Where(c => !c.IsValid(this, this.Max))
 						.Select(c => c.GetErrorText(this, this.Max))
 						.ToArray();
@@ -252,7 +252,7 @@ namespace Kistl.App.Base
 				}
 				case "Min":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(9).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8afdbf66-c979-4c09-8872-1a44aa1dbf72")).Constraints
 						.Where(c => !c.IsValid(this, this.Min))
 						.Select(c => c.GetErrorText(this, this.Min))
 						.ToArray();

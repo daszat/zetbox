@@ -396,7 +396,7 @@ namespace Kistl.App.Projekte
 			{
 				case "Geburtstag":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(141).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b10bf288-1252-49c3-9129-cfabb1637c47")).Constraints
 						.Where(c => !c.IsValid(this, this.Geburtstag))
 						.Select(c => c.GetErrorText(this, this.Geburtstag))
 						.ToArray();
@@ -405,7 +405,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Name":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(65).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5aab79fd-3083-4ce1-a558-ed1449ecddce")).Constraints
 						.Where(c => !c.IsValid(this, this.Name))
 						.Select(c => c.GetErrorText(this, this.Name))
 						.ToArray();
@@ -414,7 +414,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Projekte":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(122).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1abb5a1b-ba9f-4b75-b6ea-3d28be877b7c")).Constraints
 						.Where(c => !c.IsValid(this, this.Projekte))
 						.Select(c => c.GetErrorText(this, this.Projekte))
 						.ToArray();
@@ -423,7 +423,7 @@ namespace Kistl.App.Projekte
 				}
 				case "SVNr":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(69).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("505988c4-dd50-4a0f-be21-a360b25e7d7d")).Constraints
 						.Where(c => !c.IsValid(this, this.SVNr))
 						.Select(c => c.GetErrorText(this, this.SVNr))
 						.ToArray();
@@ -432,7 +432,7 @@ namespace Kistl.App.Projekte
 				}
 				case "TelefonNummer":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(73).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("73230333-f975-4f0b-9dd3-e850b48d9c13")).Constraints
 						.Where(c => !c.IsValid(this, this.TelefonNummer))
 						.Select(c => c.GetErrorText(this, this.TelefonNummer))
 						.ToArray();

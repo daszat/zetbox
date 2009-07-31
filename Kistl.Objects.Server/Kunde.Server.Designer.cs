@@ -419,7 +419,7 @@ namespace Kistl.App.Projekte
 			{
 				case "Adresse":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(82).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("7ba07561-15f4-495a-b2eb-59006e4210e5")).Constraints
 						.Where(c => !c.IsValid(this, this.Adresse))
 						.Select(c => c.GetErrorText(this, this.Adresse))
 						.ToArray();
@@ -428,7 +428,7 @@ namespace Kistl.App.Projekte
 				}
 				case "EMails":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(3).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1d0f6da6-4b69-48d7-9e94-bfb5466654b9")).Constraints
 						.Where(c => !c.IsValid(this, this.EMails))
 						.Select(c => c.GetErrorText(this, this.EMails))
 						.ToArray();
@@ -437,7 +437,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Kundenname":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(67).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("2817a845-b2d5-43ed-b0f1-5a6692a62183")).Constraints
 						.Where(c => !c.IsValid(this, this.Kundenname))
 						.Select(c => c.GetErrorText(this, this.Kundenname))
 						.ToArray();
@@ -446,7 +446,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Land":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(68).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c01afb40-9f28-494f-9058-9d0eca79a125")).Constraints
 						.Where(c => !c.IsValid(this, this.Land))
 						.Select(c => c.GetErrorText(this, this.Land))
 						.ToArray();
@@ -455,7 +455,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Ort":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(66).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5281cbe0-8f63-4a2d-bb9e-2ee04588202d")).Constraints
 						.Where(c => !c.IsValid(this, this.Ort))
 						.Select(c => c.GetErrorText(this, this.Ort))
 						.ToArray();
@@ -464,7 +464,7 @@ namespace Kistl.App.Projekte
 				}
 				case "PLZ":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(64).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("cafb4b93-4a1a-4753-8ec0-c65936a0d129")).Constraints
 						.Where(c => !c.IsValid(this, this.PLZ))
 						.Select(c => c.GetErrorText(this, this.PLZ))
 						.ToArray();

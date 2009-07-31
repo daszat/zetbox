@@ -324,7 +324,7 @@ namespace Kistl.App.Test
 			{
 				case "Birthday":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(138).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("bdcf86b8-4c47-4c50-b340-d9323344c7f0")).Constraints
 						.Where(c => !c.IsValid(this, this.Birthday))
 						.Select(c => c.GetErrorText(this, this.Birthday))
 						.ToArray();
@@ -333,7 +333,7 @@ namespace Kistl.App.Test
 				}
 				case "PersonName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(14).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("bd501a1f-a0a3-4ddf-b6c2-8fdc9ffdfabd")).Constraints
 						.Where(c => !c.IsValid(this, this.PersonName))
 						.Select(c => c.GetErrorText(this, this.PersonName))
 						.ToArray();
@@ -342,7 +342,7 @@ namespace Kistl.App.Test
 				}
 				case "PhoneNumberMobile":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(1).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c9788c6f-e59b-4b4e-9222-1cc726961b20")).Constraints
 						.Where(c => !c.IsValid(this, this.PhoneNumberMobile))
 						.Select(c => c.GetErrorText(this, this.PhoneNumberMobile))
 						.ToArray();
@@ -351,7 +351,7 @@ namespace Kistl.App.Test
 				}
 				case "PhoneNumberOffice":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(2).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("f2e60b5a-767c-4369-b178-3397b22a3f7e")).Constraints
 						.Where(c => !c.IsValid(this, this.PhoneNumberOffice))
 						.Select(c => c.GetErrorText(this, this.PhoneNumberOffice))
 						.ToArray();

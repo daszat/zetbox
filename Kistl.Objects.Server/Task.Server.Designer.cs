@@ -417,7 +417,7 @@ namespace Kistl.App.Projekte
 			{
 				case "Aufwand":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(145).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("a28f7536-9b8a-49ca-bc97-d28e1c2c4d3e")).Constraints
 						.Where(c => !c.IsValid(this, this.Aufwand))
 						.Select(c => c.GetErrorText(this, this.Aufwand))
 						.ToArray();
@@ -426,7 +426,7 @@ namespace Kistl.App.Projekte
 				}
 				case "DatumBis":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(142).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("2b705496-388a-43a8-82e8-b17b652a55fc")).Constraints
 						.Where(c => !c.IsValid(this, this.DatumBis))
 						.Select(c => c.GetErrorText(this, this.DatumBis))
 						.ToArray();
@@ -435,7 +435,7 @@ namespace Kistl.App.Projekte
 				}
 				case "DatumVon":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(140).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1485a7b7-c4d5-456a-a18a-0c409c3eca8e")).Constraints
 						.Where(c => !c.IsValid(this, this.DatumVon))
 						.Select(c => c.GetErrorText(this, this.DatumVon))
 						.ToArray();
@@ -444,7 +444,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Name":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(70).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("91595e02-411c-40f2-ab83-4cced76e954d")).Constraints
 						.Where(c => !c.IsValid(this, this.Name))
 						.Select(c => c.GetErrorText(this, this.Name))
 						.ToArray();
@@ -453,7 +453,7 @@ namespace Kistl.App.Projekte
 				}
 				case "Projekt":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(95).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5545ba8a-3e89-4b22-bd66-c12f3622ace0")).Constraints
 						.Where(c => !c.IsValid(this, this.Projekt))
 						.Select(c => c.GetErrorText(this, this.Projekt))
 						.ToArray();

@@ -232,7 +232,7 @@ namespace Kistl.App.Base
 			{
 				case "DataType":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(163).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("9bd64c60-7282-47f0-8069-528a175fcc92")).Constraints
 						.Where(c => !c.IsValid(this, this.DataType))
 						.Select(c => c.GetErrorText(this, this.DataType))
 						.ToArray();

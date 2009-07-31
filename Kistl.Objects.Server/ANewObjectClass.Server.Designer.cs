@@ -173,7 +173,7 @@ namespace Kistl.App.Test
 			{
 				case "TestString":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(71).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e7371fa9-cd18-4cdc-91c3-a73c0984a019")).Constraints
 						.Where(c => !c.IsValid(this, this.TestString))
 						.Select(c => c.GetErrorText(this, this.TestString))
 						.ToArray();

@@ -283,7 +283,7 @@ namespace Kistl.App.Base
 			{
 				case "Assembly":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(174).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("304b34ac-b581-40ce-826c-0fc0cab93bb6")).Constraints
 						.Where(c => !c.IsValid(this, this.Assembly))
 						.Select(c => c.GetErrorText(this, this.Assembly))
 						.ToArray();
@@ -292,7 +292,7 @@ namespace Kistl.App.Base
 				}
 				case "FullTypeName":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(54).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("7aa087db-ef36-4a93-9bc8-e0e34c9d4d4b")).Constraints
 						.Where(c => !c.IsValid(this, this.FullTypeName))
 						.Select(c => c.GetErrorText(this, this.FullTypeName))
 						.ToArray();

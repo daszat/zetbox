@@ -232,7 +232,7 @@ namespace Kistl.App.Base
 			{
 				case "StructDefinition":
 				{
-					var errors = FrozenContext.Single.Find<Kistl.App.Base.Property>(102).Constraints
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("0d78c157-c106-4728-9af2-7992da7c935d")).Constraints
 						.Where(c => !c.IsValid(this, this.StructDefinition))
 						.Select(c => c.GetErrorText(this, this.StructDefinition))
 						.ToArray();
