@@ -12,6 +12,7 @@ namespace Kistl.DalProvider.Frozen
     /// </summary>
     public abstract class BaseFrozenContext : IKistlContext
     {
+
         /// <inheritdoc/>
         public abstract IQueryable<T> GetQuery<T>() where T : class, IDataObject;
 
@@ -27,6 +28,64 @@ namespace Kistl.DalProvider.Frozen
         /// <inheritdoc/>
         public abstract T Find<T>(int ID) where T : class, IDataObject;
 
+        /// <inheritdoc/>
+        public T FindPersistenceObject<T>(Guid exportGuid)
+            where T : class, IPersistenceObject
+        {
+            if (_guidCache.ContainsKey(exportGuid))
+            {
+                return (T)_guidCache[exportGuid];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <inheritdoc/>
+        public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
+        {
+            if (_guidCache.ContainsKey(exportGuid))
+            {
+                return _guidCache[exportGuid];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <inheritdoc/>
+        IPersistenceObject IKistlContext.ContainsObject(InterfaceType type, int ID)
+        {
+            return Find(type, ID);
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether or not this Context is disposed. Always false.
+        /// </summary>
+        bool IKistlContext.IsDisposed { get { return false; } }
+
+        /// <summary>
+        /// Gets a value indicating whether or not this Context is read only. Always true.
+        /// </summary>
+        bool IKistlContext.IsReadonly { get { return true; } }
+
+        #region GUID Cache
+
+        private static IDictionary<Guid, IPersistenceObject> _guidCache;
+        protected static void InitialiseGuidCache(IEnumerable<IPersistenceObject> objs)
+        {
+            // Do the casting dance to do all the work on initialisation
+            // then the lookup/find doesn't have to cast
+            _guidCache = objs.OfType<IExportableInternal>()
+                .Cast<IPersistenceObject>()
+                .ToDictionary(ex => ((IExportableInternal)ex).ExportGuid);
+        }
+
+        #endregion
+
+        #region not implemented stuff
 
         /// <summary>Not implemented.</summary>
         IPersistenceObject IKistlContext.Attach(IPersistenceObject obj)
@@ -76,23 +135,8 @@ namespace Kistl.DalProvider.Frozen
             throw new NotImplementedException();
         }
 
-        IPersistenceObject IKistlContext.ContainsObject(InterfaceType type, int ID)
-        {
-            return Find(type, ID);
-        }
-
         /// <summary>Not implemented.</summary>
         int IKistlContext.SubmitChanges() { throw new NotImplementedException(); }
-
-        /// <summary>
-        /// Gets a value indicating whether or not this Context is disposed. Always false.
-        /// </summary>
-        bool IKistlContext.IsDisposed { get { return false; } }
-
-        /// <summary>
-        /// Gets a value indicating whether or not this Context is read only. Always true.
-        /// </summary>
-        bool IKistlContext.IsReadonly { get { return true; } }
 
         /// <summary>Not implemented.</summary>
         IDataObject IKistlContext.Create(InterfaceType ifType) { throw new ReadOnlyContextException(); }
@@ -127,25 +171,13 @@ namespace Kistl.DalProvider.Frozen
         }
 
         /// <summary>Not implemented.</summary>
-        public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
+        IEnumerable<IPersistenceObject> IKistlContext.FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>Not implemented.</summary>
-        public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>Not implemented.</summary>
-        public IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>Not implemented.</summary>
-        public IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
+        IEnumerable<T> IKistlContext.FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids)
         {
             throw new NotImplementedException();
         }
@@ -165,6 +197,8 @@ namespace Kistl.DalProvider.Frozen
         }
 
         /// <summary>Not implemented.</summary>
-        public virtual void Dispose() { }
+        void IDisposable.Dispose() { }
+
+        #endregion
     }
 }

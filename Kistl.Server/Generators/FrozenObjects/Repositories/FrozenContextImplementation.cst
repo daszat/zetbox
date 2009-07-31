@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.Frozen
 	foreach(var module in modulesWithFrozenClasses)
 	{
 %>
-				<%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository.CreateInstances();
+			<%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository.CreateInstances();
 <%
 	}
 %>
@@ -38,10 +38,11 @@ namespace Kistl.DalProvider.Frozen
 	foreach(var module in modulesWithFrozenClasses)
 	{
 %>
-				<%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository.FillDataStore();
+			<%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository.FillDataStore();
 <%
 	}
 %>
+			InitialiseGuidCache(GetAttachedObjects()); 
 		}
 		
 		public override IQueryable<T> GetQuery<T>()
@@ -71,7 +72,12 @@ namespace Kistl.DalProvider.Frozen
         {
 			get
 			{
-				return new List<IPersistenceObject>(0)
+				return GetAttachedObjects();
+			}
+		}
+		
+		private static IEnumerable<IPersistenceObject> GetAttachedObjects() {
+			return new List<IPersistenceObject>(0)
 <%
 	foreach(var module in modulesWithFrozenClasses)
 	{
@@ -79,12 +85,12 @@ namespace Kistl.DalProvider.Frozen
         foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.ClassName))
 		{
 %>
-					.Concat(GetQuery<<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>>().Cast<IPersistenceObject>())
+				.Concat(<%= frozenCls.Module.Namespace %>.<%= Implementation.ObjectClasses.Template.GetClassName(frozenCls) %>.DataStore.Values.AsQueryable().Cast<IPersistenceObject>())
 <%
 		}
 	}
-%>;
-			}
+%>
+				.Distinct();
 		}
 
         public override IDataObject Find(InterfaceType ifType, int ID)
