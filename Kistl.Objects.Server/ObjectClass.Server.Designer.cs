@@ -461,6 +461,28 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PostSetter;
         /// <summary>
+        /// Implements the "Create new Relation" use case
+        /// </summary>
+
+		public virtual Kistl.App.Base.Relation CreateRelation() 
+        {
+            var e = new MethodReturnEventArgs<Kistl.App.Base.Relation>();
+            if (OnCreateRelation_ObjectClass != null)
+            {
+                OnCreateRelation_ObjectClass(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on ObjectClass.CreateRelation");
+            }
+            return e.Result;
+        }
+		public delegate void CreateRelation_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.Relation> ret);
+		public event CreateRelation_Handler<ObjectClass> OnCreateRelation_ObjectClass;
+
+
+
+        /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
 

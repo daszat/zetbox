@@ -57,6 +57,17 @@ namespace Kistl.App.Base
         {
             EnsureDefaultMethods(obj);
         }
+
+        public void OnCreateRelation_ObjectClass(ObjectClass obj, MethodReturnEventArgs<Relation> e)
+        {
+            e.Result = obj.Context.Create<Relation>();
+            e.Result.A = obj.Context.Create<RelationEnd>();
+            e.Result.A.Type = obj;
+            e.Result.A.Role = (int)RelationEndRole.A;
+            e.Result.B = obj.Context.Create<RelationEnd>();
+            e.Result.B.Role = (int)RelationEndRole.B;
+        }
+
         #endregion
 
         #region Relation
@@ -167,7 +178,7 @@ namespace Kistl.App.Base
             sb.Append(mi.InvokeOnObjectClass != null ? mi.InvokeOnObjectClass.ClassName : "<<OBJECTCLASSNAME>>");
 
             e.Result = sb.ToString();
-        }        
+        }
         #endregion
 
     }

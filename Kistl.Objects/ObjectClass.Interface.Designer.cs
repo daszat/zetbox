@@ -59,6 +59,11 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Implements the "Create new Relation" use case
+        /// </summary>
+
+		 Kistl.App.Base.Relation CreateRelation() ;
+        /// <summary>
         /// 
         /// </summary>
 

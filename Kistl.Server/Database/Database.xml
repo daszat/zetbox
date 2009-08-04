@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-07-31T08:35:41.5838829Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-08-04T10:58:11.3463937Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -3434,6 +3434,13 @@
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:ObjectClass>
   </KistlBase:Method>
+  <KistlBase:Method ExportGuid="25b5656a-2b52-4c51-a635-7f49ca478552">
+    <KistlBase:Description>Implements the "Create new Relation" use case</KistlBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <KistlBase:MethodName>CreateRelation</KistlBase:MethodName>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:ObjectClass>
+  </KistlBase:Method>
   <KistlBase:Method ExportGuid="9bf53e7a-3546-4a30-9446-ededdde3dbde">
     <KistlBase:Description />
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
@@ -3760,6 +3767,15 @@
     <KistlBase:Method_pos>0</KistlBase:Method_pos>
     <KistlBase:ParameterName>ReturnValue</KistlBase:ParameterName>
   </KistlBase:StringParameter>
+  <KistlBase:ObjectParameter ExportGuid="3b5f4f2b-802c-49cd-91ba-8442b31f1f86">
+    <KistlBase:Description>The newly created Relation</KistlBase:Description>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:IsReturnParameter>true</KistlBase:IsReturnParameter>
+    <KistlBase:Method>25b5656a-2b52-4c51-a635-7f49ca478552</KistlBase:Method>
+    <KistlBase:Method_pos>0</KistlBase:Method_pos>
+    <KistlBase:ParameterName>result</KistlBase:ParameterName>
+    <KistlBase:DataType>1c0e894f-4eb4-422f-8094-3095735b4917</KistlBase:DataType>
+  </KistlBase:ObjectParameter>
   <KistlBase:ObjectParameter ExportGuid="d4869404-976b-4853-84fd-72403d4ea6e2">
     <KistlBase:IsList>true</KistlBase:IsList>
     <KistlBase:IsReturnParameter>true</KistlBase:IsReturnParameter>
@@ -4241,6 +4257,13 @@
     <KistlBase:InvokeOnObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:InvokeOnObjectClass>
     <KistlBase:MemberName>OnCreated_ObjectClass</KistlBase:MemberName>
     <KistlBase:Method>2e692975-10da-4330-a21e-484d73508922</KistlBase:Method>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+  </KistlBase:MethodInvocation>
+  <KistlBase:MethodInvocation ExportGuid="2972fe92-1b57-45c8-aa90-101c9634395d">
+    <KistlBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</KistlBase:Implementor>
+    <KistlBase:InvokeOnObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:InvokeOnObjectClass>
+    <KistlBase:MemberName>OnCreateRelation_ObjectClass</KistlBase:MemberName>
+    <KistlBase:Method>25b5656a-2b52-4c51-a635-7f49ca478552</KistlBase:Method>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
   </KistlBase:MethodInvocation>
   <KistlBase:MethodInvocation ExportGuid="b47c766c-c8ad-4884-8a70-6d07280c8c49">
