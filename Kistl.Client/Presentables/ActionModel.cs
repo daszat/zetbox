@@ -44,7 +44,11 @@ namespace Kistl.Client.Presentables
         public void Execute(Action callback)
         {
             MethodInfo info = Object.GetType().FindMethod(Method.MethodName, new Type[] { });
-            info.Invoke(Object, new object[] { });
+            IDataObject result = info.Invoke(Object, new object[] { }) as IDataObject;
+            if (result != null && result.Context == DataContext)
+            {
+                this.Factory.ShowModel(this.Factory.CreateDefaultModel(DataContext, (IDataObject)result), true);
+            }
             if (callback != null)
                 callback();
         }
