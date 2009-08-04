@@ -18,7 +18,7 @@ namespace Kistl.Client.Presentables
     /// <summary>
     /// Proxies a whole IDataObject
     /// </summary>
-    public class DataObjectModel 
+    public class DataObjectModel
         : PresentableModel
     {
 
@@ -245,7 +245,8 @@ namespace Kistl.Client.Presentables
                 foreach (Method m in cls.Methods.Where(m =>
                     m.IsDisplayable
                     && m.Parameter.Count == 1
-                    && m.Parameter.Single().IsReturnParameter))
+                    && m.Parameter.Single().IsReturnParameter
+                    && !(m.Parameter.Single() is ObjectParameter))) // Could be a CreateRelatedUseCase, and we don't want to go around creating new objects
                 {
                     methods.Add(m);
                 }
@@ -262,9 +263,12 @@ namespace Kistl.Client.Presentables
             var actions = new List<Method>();
             while (cls != null)
             {
-                cls.Methods
-                    .Where(m => m.IsDisplayable && m.Parameter.Count == 0)
-                    .ForEach<Method>(m => actions.Add(m));
+                actions.AddRange(cls.Methods
+                    .Where(m => m.IsDisplayable 
+                        && (m.Parameter.Count == 0 
+                        || (m.Parameter.Count == 1 
+                            && m.Parameter.Single().IsReturnParameter 
+                            && m.MethodName.StartsWith("Create")))));
 
                 cls = cls.BaseObjectClass;
             }
@@ -277,7 +281,7 @@ namespace Kistl.Client.Presentables
         {
             foreach (var action in methods)
             {
-                Debug.Assert(action.Parameter.Count == 0);
+                //Debug.Assert(action.Parameter.Count == 0);
                 _actionsCache.Add(Factory.CreateSpecificModel<ActionModel>(DataContext, _object, action));
             }
         }
