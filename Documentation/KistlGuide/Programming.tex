@@ -5,6 +5,46 @@ programmed and customized.
 
 \section{Objects}
 
+\subsection{ObjectClass}
+
+\subsection{Relation}
+
+\subsection{Additional Metadata}
+
+The object model is intended to be very rich and provide the various
+subsystems with meta data directly from the \emph{ObjectClass}.
+
+This section describes the various pieces of this meta data.
+
+\subsubsection{New related objects}
+
+A \emph{CreateRelatedUseCase} describes the use case of creating a new
+object related to the "current" instance. One such use case would be
+e.\,g.~"create a new \emph{Relation} from the current ObjectClass."
+
+Such use cases are described with \emph{CreateRelatedUseCase} objects:
+
+\begin{CS}
+interface CreateRelatedUseCase
+{
+	string Label;
+	Method Action;
+	Relation AffectedRelation; // optional
+}
+\end{CS}
+
+The \emph{Action} will be called when the user requests an execution of
+this use case. This method doesn't take any parameters and returns the
+newly created object. The infrastructure on the client will cause the
+returned object to be displayed to the user. The business logic should
+already have filled out the property values according to the use case.
+The name of the method should start with "Create".
+
+If the optional \emph{AffectedRelation} is specified, one of its ends it
+must match the \emph{ObjectClass} of the \emph{Method}. This relation
+can then be used to identify controls in the UI where the action can be
+placed.
+
 \section{Modules}
 
 \section{Enhancing Kistl's inner workings}
