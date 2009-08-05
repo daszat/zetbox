@@ -66,6 +66,22 @@ namespace Kistl.App.Base
             e.Result.A.Role = (int)RelationEndRole.A;
             e.Result.B = obj.Context.Create<RelationEnd>();
             e.Result.B.Role = (int)RelationEndRole.B;
+            e.Result.Module = obj.Module;
+        }
+
+        public void OnCreateMethod_ObjectClass(ObjectClass obj, MethodReturnEventArgs<Method> e)
+        {
+            e.Result = obj.Context.Create<Method>();
+            e.Result.Module = obj.Module;
+            e.Result.ObjectClass = obj;
+        }
+
+        public void OnCreateMethodInvocation_Method(Kistl.App.Base.Method obj, MethodReturnEventArgs<Kistl.App.Base.MethodInvocation> e)
+        {
+            e.Result = obj.Context.Create<MethodInvocation>();
+            e.Result.InvokeOnObjectClass = obj.ObjectClass;
+            e.Result.Method = obj;
+            e.Result.Module = obj.Module;
         }
 
         #endregion

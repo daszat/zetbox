@@ -534,6 +534,28 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual Kistl.App.Base.MethodInvocation CreateMethodInvocation() 
+        {
+            var e = new MethodReturnEventArgs<Kistl.App.Base.MethodInvocation>();
+            if (OnCreateMethodInvocation_Method != null)
+            {
+                OnCreateMethodInvocation_Method(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Method.CreateMethodInvocation");
+            }
+            return e.Result;
+        }
+		public delegate void CreateMethodInvocation_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.MethodInvocation> ret);
+		public event CreateMethodInvocation_Handler<Method> OnCreateMethodInvocation_Method;
+
+
+
+        /// <summary>
         /// Returns the Return Parameter Meta Object of this Method Meta Object.
         /// </summary>
 

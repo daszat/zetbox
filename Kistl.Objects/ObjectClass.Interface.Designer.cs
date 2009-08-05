@@ -59,6 +59,11 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Creates a new Method for this class
+        /// </summary>
+
+		 Kistl.App.Base.Method CreateMethod() ;
+        /// <summary>
         /// Implements the "Create new Relation" use case
         /// </summary>
 

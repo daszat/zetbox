@@ -59,6 +59,11 @@ namespace Kistl.App.Base
 
         IList<Kistl.App.Base.BaseParameter> Parameter { get; }
         /// <summary>
+        /// 
+        /// </summary>
+
+		 Kistl.App.Base.MethodInvocation CreateMethodInvocation() ;
+        /// <summary>
         /// Returns the Return Parameter Meta Object of this Method Meta Object.
         /// </summary>
 

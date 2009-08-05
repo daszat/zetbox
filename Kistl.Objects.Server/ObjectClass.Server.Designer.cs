@@ -461,6 +461,28 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PostSetter;
         /// <summary>
+        /// Creates a new Method for this class
+        /// </summary>
+
+		public virtual Kistl.App.Base.Method CreateMethod() 
+        {
+            var e = new MethodReturnEventArgs<Kistl.App.Base.Method>();
+            if (OnCreateMethod_ObjectClass != null)
+            {
+                OnCreateMethod_ObjectClass(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on ObjectClass.CreateMethod");
+            }
+            return e.Result;
+        }
+		public delegate void CreateMethod_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.Method> ret);
+		public event CreateMethod_Handler<ObjectClass> OnCreateMethod_ObjectClass;
+
+
+
+        /// <summary>
         /// Implements the "Create new Relation" use case
         /// </summary>
 
