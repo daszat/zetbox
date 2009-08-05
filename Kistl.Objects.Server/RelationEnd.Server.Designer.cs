@@ -684,6 +684,28 @@ namespace Kistl.App.Base
 		public event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectClass> OnType_Getter;
 		public event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectClass> OnType_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectClass> OnType_PostSetter;
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual Kistl.App.Base.ObjectReferenceProperty CreateNavigator() 
+        {
+            var e = new MethodReturnEventArgs<Kistl.App.Base.ObjectReferenceProperty>();
+            if (OnCreateNavigator_RelationEnd != null)
+            {
+                OnCreateNavigator_RelationEnd(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on RelationEnd.CreateNavigator");
+            }
+            return e.Result;
+        }
+		public delegate void CreateNavigator_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.ObjectReferenceProperty> ret);
+		public event CreateNavigator_Handler<RelationEnd> OnCreateNavigator_RelationEnd;
+
+
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(RelationEnd));

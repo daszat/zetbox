@@ -69,5 +69,10 @@ namespace Kistl.App.Base
 			get;
 			set;
 		}
+        /// <summary>
+        /// 
+        /// </summary>
+
+		 Kistl.App.Base.ObjectReferenceProperty CreateNavigator() ;
     }
 }

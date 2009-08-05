@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
 
 using Kistl.API;
-using System.Diagnostics;
+using Kistl.App.GUI;
 
 namespace Kistl.App.Base
 {
@@ -82,6 +83,27 @@ namespace Kistl.App.Base
             e.Result.InvokeOnObjectClass = obj.ObjectClass;
             e.Result.Method = obj;
             e.Result.Module = obj.Module;
+        }
+
+        public void OnCreateNavigator_RelationEnd(RelationEnd obj, MethodReturnEventArgs<ObjectReferenceProperty> e)
+        {
+            e.Result = obj.Context.Create<ObjectReferenceProperty>();
+            e.Result.AltText = "";
+            e.Result.CategoryTags = "";
+            e.Result.ObjectClass = obj.Type;
+            e.Result.PropertyName = obj.RoleName;
+            e.Result.RelationEnd = obj;
+
+            if (obj.AParent != null)
+            {
+                e.Result.Module = obj.AParent.Module;
+                e.Result.ReferenceObjectClass = obj.AParent.B.Type;
+            }
+            if (obj.BParent != null)
+            {
+                e.Result.Module = obj.BParent.Module;
+                e.Result.ReferenceObjectClass = obj.BParent.A.Type;
+            }
         }
 
         #endregion

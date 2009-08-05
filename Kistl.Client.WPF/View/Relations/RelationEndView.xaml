@@ -35,6 +35,11 @@
                                   Margin="5,0,5,0"
                                   Content="{Binding PropertyModelsByName[Navigator]}"
                                   ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+            
+                <ToolBar DockPanel.Dock="Top"
+                         ItemsSource="{Binding Actions}"
+                         ItemTemplateSelector="{StaticResource defaultTemplateSelector}" />
+
             </DockPanel>
         </GroupBox>
     </DockPanel>
