@@ -29,8 +29,6 @@ namespace Kistl.App.TimeRecords
     
 		public WorkEffort__Implementation__()
 		{
-            {
-            }
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]

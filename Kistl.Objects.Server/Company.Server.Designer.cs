@@ -29,8 +29,6 @@ namespace Kistl.App.Test
     
 		public Company__Implementation__()
 		{
-            {
-            }
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]

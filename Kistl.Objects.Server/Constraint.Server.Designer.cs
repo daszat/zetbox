@@ -29,8 +29,6 @@ namespace Kistl.App.Base
     
 		public Constraint__Implementation__()
 		{
-            {
-            }
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]

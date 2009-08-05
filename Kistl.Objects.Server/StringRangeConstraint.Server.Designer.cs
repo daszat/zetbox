@@ -29,8 +29,6 @@ namespace Kistl.App.Base
     
 		public StringRangeConstraint__Implementation__()
 		{
-            {
-            }
         }
 
 

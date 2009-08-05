@@ -29,8 +29,6 @@ namespace Kistl.App.Test
     
 		public ANewObjectClass__Implementation__()
 		{
-            {
-            }
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]

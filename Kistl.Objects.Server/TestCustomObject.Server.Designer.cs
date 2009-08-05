@@ -29,10 +29,10 @@ namespace Kistl.App.Test
     
 		public TestCustomObject__Implementation__()
 		{
-            {
-                _PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberMobile");
-                _PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberOffice");
-            }
+			{
+				_PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberMobile");
+				_PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberOffice");
+			}
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]

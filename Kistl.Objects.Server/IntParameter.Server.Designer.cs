@@ -29,8 +29,6 @@ namespace Kistl.App.Base
     
 		public IntParameter__Implementation__()
 		{
-            {
-            }
         }
 
 

@@ -29,8 +29,6 @@ namespace Kistl.App.Base
     
 		public DoubleProperty__Implementation__()
 		{
-            {
-            }
         }
 
 

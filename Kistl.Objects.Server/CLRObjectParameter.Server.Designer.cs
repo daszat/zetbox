@@ -29,8 +29,6 @@ namespace Kistl.App.Base
     
 		public CLRObjectParameter__Implementation__()
 		{
-            {
-            }
         }
 
 

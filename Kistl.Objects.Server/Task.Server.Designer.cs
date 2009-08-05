@@ -29,8 +29,6 @@ namespace Kistl.App.Projekte
     
 		public Task__Implementation__()
 		{
-            {
-            }
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]

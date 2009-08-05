@@ -29,8 +29,6 @@ namespace Kistl.App.GUI
     
 		public PresentableModelDescriptor__Implementation__()
 		{
-            {
-            }
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]

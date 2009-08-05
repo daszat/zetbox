@@ -29,8 +29,6 @@ namespace Kistl.App.TimeRecords
     
 		public PresenceRecord__Implementation__()
 		{
-            {
-            }
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]

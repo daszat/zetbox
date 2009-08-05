@@ -28,19 +28,22 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected override void ApplyConstructorTemplate()
         {
             base.ApplyConstructorTemplate();
-            this.WriteObjects("            {");
-            this.WriteLine();
-            foreach (var prop in DataType.Properties.OfType<StructProperty>())
+            if (DataType.Properties.OfType<StructProperty>().Count() > 0)
             {
-                string name = prop.PropertyName;
-                string backingName = "_" + name;
-                string structType = prop.GetPropertyTypeString();
-                string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
-                this.WriteObjects("                ", backingName, " = new ", structImplementationType, "(this, \"", name, "\");");
+                this.WriteObjects("\t\t\t{");
+                this.WriteLine();
+                foreach (var prop in DataType.Properties.OfType<StructProperty>().OrderBy(p => p.PropertyName))
+                {
+                    string name = prop.PropertyName;
+                    string backingName = "_" + name;
+                    string structType = prop.GetPropertyTypeString();
+                    string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
+                    this.WriteObjects("\t\t\t\t", backingName, " = new ", structImplementationType, "(this, \"", name, "\");");
+                    this.WriteLine();
+                }
+                this.WriteObjects("\t\t\t}");
                 this.WriteLine();
             }
-            this.WriteObjects("            }");
-            this.WriteLine();
         }
 
         protected override void ApplyIDPropertyTemplate()

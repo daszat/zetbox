@@ -29,8 +29,6 @@ namespace Kistl.App.Base
     
 		public DateTimeProperty__Implementation__()
 		{
-            {
-            }
         }
 
 

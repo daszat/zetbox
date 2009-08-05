@@ -29,8 +29,6 @@ namespace Kistl.App.Base
     
 		public IntProperty__Implementation__()
 		{
-            {
-            }
         }
 
 

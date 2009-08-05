@@ -29,8 +29,6 @@ namespace Kistl.App.GUI
     
 		public Icon__Implementation__()
 		{
-            {
-            }
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]

@@ -29,8 +29,6 @@ namespace Kistl.App.Base
     
 		public ObjectClass__Implementation__()
 		{
-            {
-            }
         }
 
 
