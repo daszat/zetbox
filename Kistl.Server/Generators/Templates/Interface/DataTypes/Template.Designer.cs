@@ -59,7 +59,7 @@ ApplyPropertyTemplate(p);
 
 
 
-    foreach(var m in MethodsToGenerate().OrderBy(m => m.MethodName))
+    foreach(var m in MethodsToGenerate().OrderByDefault())
     {
 		if(!IsDeclaredInImplementsInterface(m))
 		{

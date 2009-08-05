@@ -100,7 +100,7 @@ this.WriteObjects("        /// </summary>\r\n");
 ApplyPropertyTemplate(p);
         }
 
-        foreach(var m in MethodsToGenerate().OrderBy(m => m.MethodName))
+        foreach(var m in MethodsToGenerate().OrderByDefault())
         {
 
 #line 86 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
