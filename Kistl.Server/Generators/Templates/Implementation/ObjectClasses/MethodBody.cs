@@ -10,9 +10,9 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
     public partial class MethodBody
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, DataType dataType, Kistl.App.Base.Method m)
+        public static void Call(IGenerationHost host, IKistlContext ctx, DataType dataType, Kistl.App.Base.Method m, int index)
         {
-            host.CallTemplate("Implementation.ObjectClasses.MethodBody", ctx, dataType, m);
+            host.CallTemplate("Implementation.ObjectClasses.MethodBody", ctx, dataType, m, index);
         }
     }
 }

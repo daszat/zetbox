@@ -59,22 +59,26 @@ ApplyPropertyTemplate(p);
 
 
 
-    foreach(var m in MethodsToGenerate().OrderByDefault())
+    foreach(var mg in MethodsToGenerate().GroupBy(m => m.MethodName).OrderBy(mg => mg.Key))
     {
-		if(!IsDeclaredInImplementsInterface(m))
+		int index = 0;
+		foreach(var m in mg.OrderByDefault())
 		{
+			if(!IsDeclaredInImplementsInterface(m))
+			{
 
-#line 50 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
+#line 53 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  m.Description , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 55 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
-ApplyMethodTemplate(m);
+#line 58 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
+ApplyMethodTemplate(m, index++);
+			}
         }
     }
 
-#line 59 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
+#line 63 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("}");

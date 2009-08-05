@@ -129,9 +129,9 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             return false;
         }
 
-        protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m)
+        protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m, int index)
         {
-            Interface.DataTypes.Method.Call(Host, ctx, m);
+            Interface.DataTypes.Method.Call(Host, ctx, m, index);
         }
 
         protected IEnumerable<Kistl.App.Base.Method> MethodsToGenerate()

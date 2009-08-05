@@ -14,13 +14,15 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
     {
 		protected IKistlContext ctx;
 		protected Kistl.App.Base.Method m;
+		protected int index;
 
 
-        public Method(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.Method m)
+        public Method(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.Method m, int index)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.m = m;
+			this.index = index;
 
         }
         
@@ -28,9 +30,9 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         {
 #line 13 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
 this.WriteObjects("\r\n");
-#line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
 this.WriteObjects("		",  GetModifiers() , " ",  GetReturnType() , " ",  m.MethodName , "(",  GetParameterDefinitions() , ") ");
-#line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
 ApplyBodyTemplate(); 
 
         }

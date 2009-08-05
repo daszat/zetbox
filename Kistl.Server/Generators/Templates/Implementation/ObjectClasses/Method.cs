@@ -15,15 +15,20 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     public class Method
         : Kistl.Server.Generators.Templates.Interface.DataTypes.Method
     {
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, Kistl.API.IKistlContext ctx, DataType cls, Kistl.App.Base.Method m)
+        internal static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, DataType cls, Kistl.App.Base.Method m, int index)
         {
-            host.CallTemplate("Implementation.ObjectClasses.Method", ctx, cls, m);
+            host.CallTemplate("Implementation.ObjectClasses.Method", ctx, cls, m, index);
+        }
+
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, DataType cls, Kistl.App.Base.Method m)
+        {
+            Call(host, ctx, cls, m, 0);
         }
 
         protected DataType DataType { get; private set; }
 
-        public Method(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, DataType cls, Kistl.App.Base.Method m)
-            : base(_host, ctx, m)
+        public Method(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, DataType cls, Kistl.App.Base.Method m, int index)
+            : base(_host, ctx, m, index)
         {
             this.DataType = cls;
         }
@@ -44,8 +49,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 
         protected override void ApplyBodyTemplate()
         {
-            Implementation.ObjectClasses.MethodBody.Call(Host, ctx, this.DataType, m);
+            Implementation.ObjectClasses.MethodBody.Call(Host, ctx, this.DataType, m, this.index);
         }
-
     }
 }

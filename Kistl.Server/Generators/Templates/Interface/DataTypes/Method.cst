@@ -13,4 +13,5 @@
 
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="m" Type="Kistl.App.Base.Method" %>
+<%@ Parameter Name="index" Type="int" %>
 		<%= GetModifiers() %> <%= GetReturnType() %> <%= m.MethodName %>(<%= GetParameterDefinitions() %>) <% ApplyBodyTemplate(); %>

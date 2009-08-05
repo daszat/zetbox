@@ -100,34 +100,38 @@ this.WriteObjects("        /// </summary>\r\n");
 ApplyPropertyTemplate(p);
         }
 
-        foreach(var m in MethodsToGenerate().OrderByDefault())
+        foreach(var mg in MethodsToGenerate().GroupBy(m => m.MethodName).OrderBy(mg => mg.Key))
         {
+			int index = 0;
+			foreach(var m in mg.OrderByDefault())
+			{
 
-#line 86 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 89 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  m.Description , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 91 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
-ApplyMethodTemplate(m);
+#line 94 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+ApplyMethodTemplate(m, index++);
+			}
         }
 
-#line 94 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 98 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("		public override InterfaceType GetInterfaceType()\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			return new InterfaceType(typeof(",  DataType.ClassName , "));\r\n");
 this.WriteObjects("		}\r\n");
-#line 100 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 104 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyApplyChangesFromMethod();
 		ApplyAttachToContextMethod();
         ApplyClassTailTemplate();
 
-#line 104 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 108 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("#region Serializer\r\n");
 this.WriteObjects("\r\n");
-#line 108 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 112 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 			SerializerDirection.ToStream, this.MembersToSerialize, true, false);
 		
@@ -150,16 +154,16 @@ Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 				SerializerDirection.MergeImport, this.MembersToSerialize, cls.BaseObjectClass != null, true);
 		}
 
-#line 130 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 134 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("#endregion\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");
-#line 136 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 140 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyNamespaceTailTemplate();
 
-#line 138 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 142 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("}");
 

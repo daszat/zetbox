@@ -13,10 +13,12 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="dt" Type="Kistl.App.Base.DataType" %>
 <%@ Parameter Name="m" Type="Kistl.App.Base.Method" %>
+<%@ Parameter Name="index" Type="int" %>
 <%
 
-	string delegateName = m.MethodName + "_Handler";
-	string eventName = "On" + m.MethodName + "_" + dt.ClassName;
+	string indexSuffix = index == 0 ? String.Empty : index.ToString();
+	string delegateName = m.MethodName + indexSuffix + "_Handler";
+	string eventName = "On" + m.MethodName + indexSuffix + "_" + dt.ClassName;
 	var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
 	string parameterDefs = m.GetParameterDefinitions();
@@ -32,6 +34,7 @@
 	    // add leading comma for later usage
 		argumentDefs = ", " + argumentDefs;	
 	}
+	
 
 	if (returnParam == null)
 	{
