@@ -57,7 +57,7 @@ namespace Kistl.Server.Generators.Extensions
 
         public static IOrderedEnumerable<Method> OrderByDefault(this IEnumerable<Method> methods)
         {
-            return methods.OrderBy(m => m.MethodName).ThenBy(m => m.Parameter.Count).ThenBy(m => String.Join("|", m.Parameter.Select(p => p.ParameterName).ToArray()));
+            return methods.OrderBy(m => m.MethodName).ThenBy(m => m.Parameter.Count).ThenBy(m => String.Join("|", m.Parameter.Select(p => p.GetParameterTypeString()).ToArray()));
         }
     }
 }
