@@ -35,7 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
-
+		[EventBasedMethod("OnGetParameterType_BoolParameter")]
 		public override System.Type GetParameterType() 
         {
             var e = new MethodReturnEventArgs<System.Type>();
@@ -56,7 +56,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
         /// </summary>
-
+		[EventBasedMethod("OnGetParameterTypeString_BoolParameter")]
 		public override string GetParameterTypeString() 
         {
             var e = new MethodReturnEventArgs<string>();

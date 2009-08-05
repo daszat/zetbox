@@ -49,7 +49,6 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-
 		 void PrepareDefault(Kistl.App.Base.ObjectClass cls) ;
     }
 }

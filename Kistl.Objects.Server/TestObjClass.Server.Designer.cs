@@ -315,7 +315,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// testmethod
         /// </summary>
-
+		[EventBasedMethod("OnTestMethod_TestObjClass")]
 		public virtual void TestMethod(System.DateTime DateTimeParamForTestMethod) 
 		{
             // base.TestMethod();

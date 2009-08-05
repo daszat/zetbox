@@ -61,22 +61,18 @@ namespace Kistl.App.Base
         /// <summary>
         /// Creates a new Method for this class
         /// </summary>
-
 		 Kistl.App.Base.Method CreateMethod() ;
         /// <summary>
         /// Implements the "Create new Relation" use case
         /// </summary>
-
 		 Kistl.App.Base.Relation CreateRelation() ;
         /// <summary>
         /// 
         /// </summary>
-
 		 IList<Kistl.App.Base.Method> GetInheritedMethods() ;
         /// <summary>
         /// Implements all available interfaces as Properties and Methods
         /// </summary>
-
 		 void ImplementInterfaces() ;
     }
 }

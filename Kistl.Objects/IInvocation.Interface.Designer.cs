@@ -30,12 +30,10 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
 		 string GetCodeTemplate() ;
         /// <summary>
         /// 
         /// </summary>
-
 		 string GetMemberName() ;
     }
 }

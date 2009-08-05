@@ -386,7 +386,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnPrepareDefault_Template")]
 		public virtual void PrepareDefault(Kistl.App.Base.ObjectClass cls) 
 		{
             // base.PrepareDefault();

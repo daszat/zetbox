@@ -518,7 +518,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnGetCodeTemplate_MethodInvocation")]
 		public virtual string GetCodeTemplate() 
         {
             var e = new MethodReturnEventArgs<string>();
@@ -540,7 +540,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnGetMemberName_MethodInvocation")]
 		public virtual string GetMemberName() 
         {
             var e = new MethodReturnEventArgs<string>();

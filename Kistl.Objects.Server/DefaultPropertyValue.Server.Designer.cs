@@ -198,7 +198,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// GetDefaultValue
         /// </summary>
-
+		[EventBasedMethod("OnGetDefaultValue_DefaultPropertyValue")]
 		public virtual System.Object GetDefaultValue() 
         {
             var e = new MethodReturnEventArgs<System.Object>();

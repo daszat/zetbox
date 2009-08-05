@@ -61,12 +61,10 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
 		 Kistl.App.Base.MethodInvocation CreateMethodInvocation() ;
         /// <summary>
         /// Returns the Return Parameter Meta Object of this Method Meta Object.
         /// </summary>
-
 		 Kistl.App.Base.BaseParameter GetReturnParameter() ;
     }
 }

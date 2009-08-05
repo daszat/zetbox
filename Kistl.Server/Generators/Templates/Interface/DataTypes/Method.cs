@@ -19,6 +19,8 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             host.CallTemplate("Interface.DataTypes.Method", ctx, m, index);
         }
 
+        protected virtual IEnumerable<string> GetMethodAttributes() { return new string[] { }; }
+
         protected string GetModifiers()
         {
             MemberAttributes attrs = ModifyMethodAttributes(0);
@@ -58,7 +60,8 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             return m.GetParameterDefinitions();
         }
 
-        protected virtual void ApplyBodyTemplate() {
+        protected virtual void ApplyBodyTemplate()
+        {
             Host.WriteOutput(";");
         }
     }

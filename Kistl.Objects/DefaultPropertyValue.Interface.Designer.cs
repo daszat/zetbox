@@ -23,7 +23,6 @@ namespace Kistl.App.Base
         /// <summary>
         /// GetDefaultValue
         /// </summary>
-
 		 System.Object GetDefaultValue() ;
     }
 }

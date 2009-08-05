@@ -534,7 +534,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnCreateMethodInvocation_Method")]
 		public virtual Kistl.App.Base.MethodInvocation CreateMethodInvocation() 
         {
             var e = new MethodReturnEventArgs<Kistl.App.Base.MethodInvocation>();
@@ -556,7 +556,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the Return Parameter Meta Object of this Method Meta Object.
         /// </summary>
-
+		[EventBasedMethod("OnGetReturnParameter_Method")]
 		public virtual Kistl.App.Base.BaseParameter GetReturnParameter() 
         {
             var e = new MethodReturnEventArgs<Kistl.App.Base.BaseParameter>();

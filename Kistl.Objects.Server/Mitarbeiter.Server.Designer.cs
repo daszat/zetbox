@@ -306,7 +306,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnTestMethodForParameter_Mitarbeiter")]
 		public virtual DateTime TestMethodForParameter(System.Boolean TestBool, System.Guid TestCLRObjectParameter, System.DateTime TestDateTime, System.Double TestDouble, System.Int32 TestInt, Kistl.App.Projekte.Auftrag TestObjectParameter, System.String TestString) 
         {
             var e = new MethodReturnEventArgs<DateTime>();

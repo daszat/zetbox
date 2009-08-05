@@ -35,7 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
-
+		[EventBasedMethod("OnGetPropertyType_BoolProperty")]
 		public override System.Type GetPropertyType() 
         {
             var e = new MethodReturnEventArgs<System.Type>();
@@ -56,7 +56,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
         /// </summary>
-
+		[EventBasedMethod("OnGetPropertyTypeString_BoolProperty")]
 		public override string GetPropertyTypeString() 
         {
             var e = new MethodReturnEventArgs<string>();

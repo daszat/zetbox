@@ -35,7 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnGetErrorText_IsValidIdentifierConstraint")]
 		public override string GetErrorText(System.Object constrainedObject, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<string>();
@@ -56,7 +56,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnIsValid_IsValidIdentifierConstraint")]
 		public override bool IsValid(System.Object constrainedObject, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<bool>();

@@ -386,7 +386,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// get the referenced <see cref="System.Type"/>
         /// </summary>
-
+		[EventBasedMethod("OnAsType_TypeRef")]
 		public virtual System.Type AsType(System.Boolean throwOnError) 
         {
             var e = new MethodReturnEventArgs<System.Type>();
@@ -408,7 +408,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Update the Parent property to the currently loaded assemblies' state
         /// </summary>
-
+		[EventBasedMethod("OnUpdateParent_TypeRef")]
 		public virtual void UpdateParent() 
 		{
             // base.UpdateParent();

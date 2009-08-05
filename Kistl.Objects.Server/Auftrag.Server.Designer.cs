@@ -428,7 +428,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Testmethode zum Erstellen von Rechnungen mit Word
         /// </summary>
-
+		[EventBasedMethod("OnRechnungErstellen_Auftrag")]
 		public virtual void RechnungErstellen() 
 		{
             // base.RechnungErstellen();

@@ -51,7 +51,6 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Testmethode zum Erstellen von Rechnungen mit Word
         /// </summary>
-
 		 void RechnungErstellen() ;
     }
 }

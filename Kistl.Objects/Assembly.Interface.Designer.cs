@@ -37,7 +37,6 @@ namespace Kistl.App.Base
         /// <summary>
         /// Regenerates the stored list of TypeRefs from the loaded assembly
         /// </summary>
-
 		 void RegenerateTypeRefs() ;
     }
 }

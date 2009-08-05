@@ -682,7 +682,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
-
+		[EventBasedMethod("OnGetDataType_DataType")]
 		public virtual System.Type GetDataType() 
         {
             var e = new MethodReturnEventArgs<System.Type>();
@@ -704,7 +704,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the String representation of this Datatype Meta Object.
         /// </summary>
-
+		[EventBasedMethod("OnGetDataTypeString_DataType")]
 		public virtual string GetDataTypeString() 
         {
             var e = new MethodReturnEventArgs<string>();

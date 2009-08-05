@@ -28,11 +28,18 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         
         public override void Generate()
         {
-#line 13 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
-this.WriteObjects("\r\n");
 #line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
+foreach(var attr in GetMethodAttributes())
+	{
+
+#line 20 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
+this.WriteObjects("		",  attr , "\r\n");
+#line 22 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
+}
+
+#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
 this.WriteObjects("		",  GetModifiers() , " ",  GetReturnType() , " ",  m.MethodName , "(",  GetParameterDefinitions() , ") ");
-#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
+#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
 ApplyBodyTemplate(); 
 
         }

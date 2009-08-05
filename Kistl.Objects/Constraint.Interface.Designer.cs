@@ -30,12 +30,10 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
 		 string GetErrorText(System.Object constrainedObject, System.Object constrainedValue) ;
         /// <summary>
         /// 
         /// </summary>
-
 		 bool IsValid(System.Object constrainedObject, System.Object constrainedValue) ;
     }
 }

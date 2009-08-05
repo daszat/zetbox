@@ -248,7 +248,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnGetErrorText_Constraint")]
 		public virtual string GetErrorText(System.Object constrainedObject, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<string>();
@@ -270,7 +270,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnIsValid_Constraint")]
 		public virtual bool IsValid(System.Object constrainedObject, System.Object constrainedValue) 
         {
             var e = new MethodReturnEventArgs<bool>();

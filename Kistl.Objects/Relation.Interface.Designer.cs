@@ -58,27 +58,22 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
 		 Kistl.App.Base.RelationEnd GetEnd(Kistl.App.Base.ObjectReferenceProperty prop) ;
         /// <summary>
         /// 
         /// </summary>
-
 		 Kistl.App.Base.RelationEnd GetEndFromRole(Kistl.API.RelationEndRole role) ;
         /// <summary>
         /// 
         /// </summary>
-
 		 Kistl.App.Base.RelationEnd GetOtherEnd(Kistl.App.Base.RelationEnd relEnd) ;
         /// <summary>
         /// 
         /// </summary>
-
 		 Kistl.API.RelationType GetRelationType() ;
         /// <summary>
         /// 
         /// </summary>
-
 		 bool NeedsPositionStorage(Kistl.API.RelationEndRole endRole) ;
     }
 }

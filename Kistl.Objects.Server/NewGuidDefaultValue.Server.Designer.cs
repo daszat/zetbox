@@ -35,7 +35,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// GetDefaultValue
         /// </summary>
-
+		[EventBasedMethod("OnGetDefaultValue_NewGuidDefaultValue")]
 		public override System.Object GetDefaultValue() 
         {
             var e = new MethodReturnEventArgs<System.Object>();

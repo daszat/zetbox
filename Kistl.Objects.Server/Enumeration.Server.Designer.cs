@@ -83,7 +83,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
-
+		[EventBasedMethod("OnGetDataType_Enumeration")]
 		public override System.Type GetDataType() 
         {
             var e = new MethodReturnEventArgs<System.Type>();
@@ -104,7 +104,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the String representation of this Datatype Meta Object.
         /// </summary>
-
+		[EventBasedMethod("OnGetDataTypeString_Enumeration")]
 		public override string GetDataTypeString() 
         {
             var e = new MethodReturnEventArgs<string>();

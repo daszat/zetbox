@@ -461,7 +461,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Creates a new Method for this class
         /// </summary>
-
+		[EventBasedMethod("OnCreateMethod_ObjectClass")]
 		public virtual Kistl.App.Base.Method CreateMethod() 
         {
             var e = new MethodReturnEventArgs<Kistl.App.Base.Method>();
@@ -483,7 +483,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Implements the "Create new Relation" use case
         /// </summary>
-
+		[EventBasedMethod("OnCreateRelation_ObjectClass")]
 		public virtual Kistl.App.Base.Relation CreateRelation() 
         {
             var e = new MethodReturnEventArgs<Kistl.App.Base.Relation>();
@@ -505,7 +505,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
-
+		[EventBasedMethod("OnGetDataType_ObjectClass")]
 		public override System.Type GetDataType() 
         {
             var e = new MethodReturnEventArgs<System.Type>();
@@ -526,7 +526,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the String representation of this Datatype Meta Object.
         /// </summary>
-
+		[EventBasedMethod("OnGetDataTypeString_ObjectClass")]
 		public override string GetDataTypeString() 
         {
             var e = new MethodReturnEventArgs<string>();
@@ -547,7 +547,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnGetInheritedMethods_ObjectClass")]
 		public virtual IList<Kistl.App.Base.Method> GetInheritedMethods() 
         {
             var e = new MethodReturnEventArgs<IList<Kistl.App.Base.Method>>();
@@ -569,7 +569,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Implements all available interfaces as Properties and Methods
         /// </summary>
-
+		[EventBasedMethod("OnImplementInterfaces_ObjectClass")]
 		public virtual void ImplementInterfaces() 
 		{
             // base.ImplementInterfaces();

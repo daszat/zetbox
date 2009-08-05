@@ -80,12 +80,10 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
-
 		 System.Type GetDataType() ;
         /// <summary>
         /// Returns the String representation of this Datatype Meta Object.
         /// </summary>
-
 		 string GetDataTypeString() ;
     }
 }

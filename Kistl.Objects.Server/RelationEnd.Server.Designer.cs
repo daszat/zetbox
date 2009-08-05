@@ -685,7 +685,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnCreateNavigator_RelationEnd")]
 		public virtual Kistl.App.Base.ObjectReferenceProperty CreateNavigator() 
         {
             var e = new MethodReturnEventArgs<Kistl.App.Base.ObjectReferenceProperty>();

@@ -103,12 +103,10 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
-
 		 System.Type GetPropertyType() ;
         /// <summary>
         /// Returns the String representation of this Property Meta Object.
         /// </summary>
-
 		 string GetPropertyTypeString() ;
     }
 }

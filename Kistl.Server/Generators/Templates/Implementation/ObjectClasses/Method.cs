@@ -33,6 +33,14 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             this.DataType = cls;
         }
 
+        protected override IEnumerable<string> GetMethodAttributes()
+        {
+            string indexSuffix = index == 0 ? String.Empty : index.ToString();
+            string eventName = "On" + m.MethodName + indexSuffix + "_" + this.DataType.ClassName;
+            
+            return base.GetMethodAttributes().Concat(new[] { String.Format("[EventBasedMethod(\"{0}\")]", eventName) });
+        }
+
         protected override System.CodeDom.MemberAttributes ModifyMethodAttributes(System.CodeDom.MemberAttributes methodAttributes)
         {
             var result = base.ModifyMethodAttributes(methodAttributes) | MemberAttributes.Public;

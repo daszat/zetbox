@@ -51,12 +51,10 @@ namespace Kistl.App.Base
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
-
 		 System.Type GetParameterType() ;
         /// <summary>
         /// Returns the String representation of this Method-Parameter Meta Object.
         /// </summary>
-
 		 string GetParameterTypeString() ;
     }
 }

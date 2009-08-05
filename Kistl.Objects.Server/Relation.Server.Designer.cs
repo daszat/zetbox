@@ -545,7 +545,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnGetEnd_Relation")]
 		public virtual Kistl.App.Base.RelationEnd GetEnd(Kistl.App.Base.ObjectReferenceProperty prop) 
         {
             var e = new MethodReturnEventArgs<Kistl.App.Base.RelationEnd>();
@@ -567,7 +567,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnGetEndFromRole_Relation")]
 		public virtual Kistl.App.Base.RelationEnd GetEndFromRole(Kistl.API.RelationEndRole role) 
         {
             var e = new MethodReturnEventArgs<Kistl.App.Base.RelationEnd>();
@@ -589,7 +589,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnGetOtherEnd_Relation")]
 		public virtual Kistl.App.Base.RelationEnd GetOtherEnd(Kistl.App.Base.RelationEnd relEnd) 
         {
             var e = new MethodReturnEventArgs<Kistl.App.Base.RelationEnd>();
@@ -611,7 +611,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnGetRelationType_Relation")]
 		public virtual Kistl.API.RelationType GetRelationType() 
         {
             var e = new MethodReturnEventArgs<Kistl.API.RelationType>();
@@ -633,7 +633,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-
+		[EventBasedMethod("OnNeedsPositionStorage_Relation")]
 		public virtual bool NeedsPositionStorage(Kistl.API.RelationEndRole endRole) 
         {
             var e = new MethodReturnEventArgs<bool>();

@@ -23,17 +23,14 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-
 		 Kistl.API.IDataObject ChooseObject(Kistl.API.IKistlContext ctx, System.Type objectType) ;
         /// <summary>
         /// 
         /// </summary>
-
 		 void ShowMessage(System.String message) ;
         /// <summary>
         /// 
         /// </summary>
-
 		 void ShowObject(Kistl.API.IDataObject obj) ;
     }
 }
