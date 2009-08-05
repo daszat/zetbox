@@ -193,7 +193,25 @@ namespace Kistl.App.Extensions
             {
                 foreach (MethodInvocation mi in objClass.MethodInvocations)
                 {
-                    CreateInvokeInfo(warnings, objType, mi, "On" + mi.Method.MethodName + "_" + mi.InvokeOnObjectClass.ClassName);
+                    Type[] paramTypes = mi.Method.Parameter
+                        .Where(p => !p.IsReturnParameter)
+                        .Select(p => p.GuessParameterType())
+                        .ToArray();
+                    MethodInfo methodInfo = objType.FindMethod(mi.Method.MethodName, paramTypes);
+                    if (methodInfo == null)
+                    {
+                        warnings.AppendFormat(
+                            "Couldn't find method '{0}.{1}' with parameters: {2}\n",
+                            mi.InvokeOnObjectClass.ClassName,
+                            mi.Method.MethodName,
+                            String.Join(", ", paramTypes.Select(t => t == null ? "null" : t.FullName).ToArray()));
+                        methodInfo = objType.FindMethod("Notify" + mi.Method.MethodName, paramTypes);
+                    }
+                    else
+                    {
+                        var attr = (EventBasedMethodAttribute)methodInfo.GetCustomAttributes(typeof(EventBasedMethodAttribute), false).Single();
+                        CreateInvokeInfo(warnings, objType, mi, attr.EventName);
+                    }
                 }
 
                 foreach (Property prop in objClass.Properties)

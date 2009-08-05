@@ -17,10 +17,10 @@ namespace Kistl.Server.Generators.Extensions
             switch (method.MethodName)
             {
                 case "ToString":
-                case "PreSave":
-                case "PostSave":
-                case "Created":
-                case "Deleting":
+                case "NotifyPreSave":
+                case "NotifyPostSave":
+                case "NotifyCreated":
+                case "NotifyDeleting":
                     return true;
                 default:
                     return false;

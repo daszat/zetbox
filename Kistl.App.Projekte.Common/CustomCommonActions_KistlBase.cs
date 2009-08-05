@@ -38,10 +38,10 @@ namespace Kistl.App.Base
         private void EnsureDefaultMethods(ObjectClass obj)
         {
             CheckDefaultMethod(obj, "ToString");
-            CheckDefaultMethod(obj, "PreSave");
-            CheckDefaultMethod(obj, "PostSave");
-            CheckDefaultMethod(obj, "Created");
-            CheckDefaultMethod(obj, "Deleting");
+            CheckDefaultMethod(obj, "NotifyPreSave");
+            CheckDefaultMethod(obj, "NotifyPostSave");
+            CheckDefaultMethod(obj, "NotifyCreated");
+            CheckDefaultMethod(obj, "NotifyDeleting");
         }
         #endregion
 

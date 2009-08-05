@@ -49,6 +49,7 @@
     <Compile Include="GuiExtensions.cs" />
     <Compile Include="KistlContextExtensions.cs" />
     <Compile Include="MultiplicityExtensions.cs" />
+    <Compile Include="ParameterExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyExtensions.cs" />
     <Compile Include="RelationExtensions.cs" />
