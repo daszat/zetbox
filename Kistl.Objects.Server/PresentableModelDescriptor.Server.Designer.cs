@@ -516,6 +516,7 @@ namespace Kistl.App.GUI
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_PresentableModelDescriptor")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -528,6 +529,7 @@ namespace Kistl.App.GUI
         }
         public event ToStringHandler<PresentableModelDescriptor> OnToString_PresentableModelDescriptor;
 
+        [EventBasedMethod("OnPreSave_PresentableModelDescriptor")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -535,6 +537,7 @@ namespace Kistl.App.GUI
         }
         public event ObjectEventHandler<PresentableModelDescriptor> OnPreSave_PresentableModelDescriptor;
 
+        [EventBasedMethod("OnPostSave_PresentableModelDescriptor")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -542,6 +545,7 @@ namespace Kistl.App.GUI
         }
         public event ObjectEventHandler<PresentableModelDescriptor> OnPostSave_PresentableModelDescriptor;
 
+        [EventBasedMethod("OnCreated_PresentableModelDescriptor")]
         public override void NotifyCreated()
         {
             try
@@ -563,6 +567,7 @@ namespace Kistl.App.GUI
         }
         public event ObjectEventHandler<PresentableModelDescriptor> OnCreated_PresentableModelDescriptor;
 
+        [EventBasedMethod("OnDeleting_PresentableModelDescriptor")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

@@ -92,6 +92,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_Interface")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -104,6 +105,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<Interface> OnToString_Interface;
 
+        [EventBasedMethod("OnPreSave_Interface")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -111,6 +113,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<Interface> OnPreSave_Interface;
 
+        [EventBasedMethod("OnPostSave_Interface")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -118,6 +121,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<Interface> OnPostSave_Interface;
 
+        [EventBasedMethod("OnCreated_Interface")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -125,6 +129,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<Interface> OnCreated_Interface;
 
+        [EventBasedMethod("OnDeleting_Interface")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

@@ -92,6 +92,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_GuidProperty")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -104,6 +105,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<GuidProperty> OnToString_GuidProperty;
 
+        [EventBasedMethod("OnPreSave_GuidProperty")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -111,6 +113,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<GuidProperty> OnPreSave_GuidProperty;
 
+        [EventBasedMethod("OnPostSave_GuidProperty")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -118,6 +121,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<GuidProperty> OnPostSave_GuidProperty;
 
+        [EventBasedMethod("OnCreated_GuidProperty")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -125,6 +129,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<GuidProperty> OnCreated_GuidProperty;
 
+        [EventBasedMethod("OnDeleting_GuidProperty")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

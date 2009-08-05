@@ -325,6 +325,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_ObjectReferenceProperty")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -337,6 +338,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<ObjectReferenceProperty> OnToString_ObjectReferenceProperty;
 
+        [EventBasedMethod("OnPreSave_ObjectReferenceProperty")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -344,6 +346,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<ObjectReferenceProperty> OnPreSave_ObjectReferenceProperty;
 
+        [EventBasedMethod("OnPostSave_ObjectReferenceProperty")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -351,6 +354,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<ObjectReferenceProperty> OnPostSave_ObjectReferenceProperty;
 
+        [EventBasedMethod("OnCreated_ObjectReferenceProperty")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -358,6 +362,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<ObjectReferenceProperty> OnCreated_ObjectReferenceProperty;
 
+        [EventBasedMethod("OnDeleting_ObjectReferenceProperty")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

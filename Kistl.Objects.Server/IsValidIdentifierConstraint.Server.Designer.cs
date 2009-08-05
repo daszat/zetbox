@@ -92,6 +92,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_IsValidIdentifierConstraint")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -104,6 +105,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<IsValidIdentifierConstraint> OnToString_IsValidIdentifierConstraint;
 
+        [EventBasedMethod("OnPreSave_IsValidIdentifierConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -111,6 +113,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<IsValidIdentifierConstraint> OnPreSave_IsValidIdentifierConstraint;
 
+        [EventBasedMethod("OnPostSave_IsValidIdentifierConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -118,6 +121,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<IsValidIdentifierConstraint> OnPostSave_IsValidIdentifierConstraint;
 
+        [EventBasedMethod("OnCreated_IsValidIdentifierConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -125,6 +129,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<IsValidIdentifierConstraint> OnCreated_IsValidIdentifierConstraint;
 
+        [EventBasedMethod("OnDeleting_IsValidIdentifierConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

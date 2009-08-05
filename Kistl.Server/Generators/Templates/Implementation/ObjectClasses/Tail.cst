@@ -16,6 +16,7 @@
    		// <%= this.GetType() %>
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_<%= cls.ClassName %>")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -28,6 +29,7 @@
         }
         public event ToStringHandler<<%= cls.ClassName %>> OnToString_<%= cls.ClassName %>;
 
+        [EventBasedMethod("OnPreSave_<%= cls.ClassName %>")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -35,6 +37,7 @@
         }
         public event ObjectEventHandler<<%= cls.ClassName %>> OnPreSave_<%= cls.ClassName %>;
 
+        [EventBasedMethod("OnPostSave_<%= cls.ClassName %>")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -42,6 +45,7 @@
         }
         public event ObjectEventHandler<<%= cls.ClassName %>> OnPostSave_<%= cls.ClassName %>;
 
+        [EventBasedMethod("OnCreated_<%= cls.ClassName %>")]
         public override void NotifyCreated()
         {
 <%			if(cls.Properties.Count(p => p.DefaultValue != null) > 0)
@@ -76,6 +80,7 @@
         }
         public event ObjectEventHandler<<%= cls.ClassName %>> OnCreated_<%= cls.ClassName %>;
 
+        [EventBasedMethod("OnDeleting_<%= cls.ClassName %>")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

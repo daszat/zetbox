@@ -237,6 +237,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_DefaultPropertyValue")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -249,6 +250,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<DefaultPropertyValue> OnToString_DefaultPropertyValue;
 
+        [EventBasedMethod("OnPreSave_DefaultPropertyValue")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -256,6 +258,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DefaultPropertyValue> OnPreSave_DefaultPropertyValue;
 
+        [EventBasedMethod("OnPostSave_DefaultPropertyValue")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -263,6 +266,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DefaultPropertyValue> OnPostSave_DefaultPropertyValue;
 
+        [EventBasedMethod("OnCreated_DefaultPropertyValue")]
         public override void NotifyCreated()
         {
             try
@@ -284,6 +288,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DefaultPropertyValue> OnCreated_DefaultPropertyValue;
 
+        [EventBasedMethod("OnDeleting_DefaultPropertyValue")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

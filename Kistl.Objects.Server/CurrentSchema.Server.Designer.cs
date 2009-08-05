@@ -175,6 +175,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_CurrentSchema")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -187,6 +188,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<CurrentSchema> OnToString_CurrentSchema;
 
+        [EventBasedMethod("OnPreSave_CurrentSchema")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -194,6 +196,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<CurrentSchema> OnPreSave_CurrentSchema;
 
+        [EventBasedMethod("OnPostSave_CurrentSchema")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -201,6 +204,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<CurrentSchema> OnPostSave_CurrentSchema;
 
+        [EventBasedMethod("OnCreated_CurrentSchema")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -208,6 +212,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<CurrentSchema> OnCreated_CurrentSchema;
 
+        [EventBasedMethod("OnDeleting_CurrentSchema")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

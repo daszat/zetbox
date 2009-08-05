@@ -71,6 +71,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_NewGuidDefaultValue")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -83,6 +84,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<NewGuidDefaultValue> OnToString_NewGuidDefaultValue;
 
+        [EventBasedMethod("OnPreSave_NewGuidDefaultValue")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -90,6 +92,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<NewGuidDefaultValue> OnPreSave_NewGuidDefaultValue;
 
+        [EventBasedMethod("OnPostSave_NewGuidDefaultValue")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -97,6 +100,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<NewGuidDefaultValue> OnPostSave_NewGuidDefaultValue;
 
+        [EventBasedMethod("OnCreated_NewGuidDefaultValue")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -104,6 +108,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<NewGuidDefaultValue> OnCreated_NewGuidDefaultValue;
 
+        [EventBasedMethod("OnDeleting_NewGuidDefaultValue")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

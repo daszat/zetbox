@@ -266,6 +266,7 @@ namespace Kistl.App.TimeRecords
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_PresenceRecord")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -278,6 +279,7 @@ namespace Kistl.App.TimeRecords
         }
         public event ToStringHandler<PresenceRecord> OnToString_PresenceRecord;
 
+        [EventBasedMethod("OnPreSave_PresenceRecord")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -285,6 +287,7 @@ namespace Kistl.App.TimeRecords
         }
         public event ObjectEventHandler<PresenceRecord> OnPreSave_PresenceRecord;
 
+        [EventBasedMethod("OnPostSave_PresenceRecord")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -292,6 +295,7 @@ namespace Kistl.App.TimeRecords
         }
         public event ObjectEventHandler<PresenceRecord> OnPostSave_PresenceRecord;
 
+        [EventBasedMethod("OnCreated_PresenceRecord")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -299,6 +303,7 @@ namespace Kistl.App.TimeRecords
         }
         public event ObjectEventHandler<PresenceRecord> OnCreated_PresenceRecord;
 
+        [EventBasedMethod("OnDeleting_PresenceRecord")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

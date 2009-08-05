@@ -183,6 +183,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_EnumerationProperty")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -195,6 +196,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<EnumerationProperty> OnToString_EnumerationProperty;
 
+        [EventBasedMethod("OnPreSave_EnumerationProperty")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -202,6 +204,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<EnumerationProperty> OnPreSave_EnumerationProperty;
 
+        [EventBasedMethod("OnPostSave_EnumerationProperty")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -209,6 +212,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<EnumerationProperty> OnPostSave_EnumerationProperty;
 
+        [EventBasedMethod("OnCreated_EnumerationProperty")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -216,6 +220,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<EnumerationProperty> OnCreated_EnumerationProperty;
 
+        [EventBasedMethod("OnDeleting_EnumerationProperty")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

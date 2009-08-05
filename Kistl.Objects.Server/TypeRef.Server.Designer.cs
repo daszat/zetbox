@@ -448,6 +448,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_TypeRef")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -460,6 +461,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<TypeRef> OnToString_TypeRef;
 
+        [EventBasedMethod("OnPreSave_TypeRef")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -467,6 +469,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<TypeRef> OnPreSave_TypeRef;
 
+        [EventBasedMethod("OnPostSave_TypeRef")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -474,6 +477,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<TypeRef> OnPostSave_TypeRef;
 
+        [EventBasedMethod("OnCreated_TypeRef")]
         public override void NotifyCreated()
         {
             try
@@ -495,6 +499,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<TypeRef> OnCreated_TypeRef;
 
+        [EventBasedMethod("OnDeleting_TypeRef")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

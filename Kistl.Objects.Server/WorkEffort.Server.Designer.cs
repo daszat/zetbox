@@ -368,6 +368,7 @@ namespace Kistl.App.TimeRecords
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_WorkEffort")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -380,6 +381,7 @@ namespace Kistl.App.TimeRecords
         }
         public event ToStringHandler<WorkEffort> OnToString_WorkEffort;
 
+        [EventBasedMethod("OnPreSave_WorkEffort")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -387,6 +389,7 @@ namespace Kistl.App.TimeRecords
         }
         public event ObjectEventHandler<WorkEffort> OnPreSave_WorkEffort;
 
+        [EventBasedMethod("OnPostSave_WorkEffort")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -394,6 +397,7 @@ namespace Kistl.App.TimeRecords
         }
         public event ObjectEventHandler<WorkEffort> OnPostSave_WorkEffort;
 
+        [EventBasedMethod("OnCreated_WorkEffort")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -401,6 +405,7 @@ namespace Kistl.App.TimeRecords
         }
         public event ObjectEventHandler<WorkEffort> OnCreated_WorkEffort;
 
+        [EventBasedMethod("OnDeleting_WorkEffort")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

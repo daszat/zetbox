@@ -194,6 +194,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_StringRangeConstraint")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -206,6 +207,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<StringRangeConstraint> OnToString_StringRangeConstraint;
 
+        [EventBasedMethod("OnPreSave_StringRangeConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -213,6 +215,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<StringRangeConstraint> OnPreSave_StringRangeConstraint;
 
+        [EventBasedMethod("OnPostSave_StringRangeConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -220,6 +223,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<StringRangeConstraint> OnPostSave_StringRangeConstraint;
 
+        [EventBasedMethod("OnCreated_StringRangeConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -227,6 +231,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<StringRangeConstraint> OnCreated_StringRangeConstraint;
 
+        [EventBasedMethod("OnDeleting_StringRangeConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

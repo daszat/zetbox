@@ -234,6 +234,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_CLRObjectParameter")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -246,6 +247,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<CLRObjectParameter> OnToString_CLRObjectParameter;
 
+        [EventBasedMethod("OnPreSave_CLRObjectParameter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -253,6 +255,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<CLRObjectParameter> OnPreSave_CLRObjectParameter;
 
+        [EventBasedMethod("OnPostSave_CLRObjectParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -260,6 +263,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<CLRObjectParameter> OnPostSave_CLRObjectParameter;
 
+        [EventBasedMethod("OnCreated_CLRObjectParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -267,6 +271,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<CLRObjectParameter> OnCreated_CLRObjectParameter;
 
+        [EventBasedMethod("OnDeleting_CLRObjectParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

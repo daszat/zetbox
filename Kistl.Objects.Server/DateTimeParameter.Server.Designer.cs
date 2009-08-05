@@ -92,6 +92,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_DateTimeParameter")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -104,6 +105,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<DateTimeParameter> OnToString_DateTimeParameter;
 
+        [EventBasedMethod("OnPreSave_DateTimeParameter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -111,6 +113,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DateTimeParameter> OnPreSave_DateTimeParameter;
 
+        [EventBasedMethod("OnPostSave_DateTimeParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -118,6 +121,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DateTimeParameter> OnPostSave_DateTimeParameter;
 
+        [EventBasedMethod("OnCreated_DateTimeParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -125,6 +129,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DateTimeParameter> OnCreated_DateTimeParameter;
 
+        [EventBasedMethod("OnDeleting_DateTimeParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

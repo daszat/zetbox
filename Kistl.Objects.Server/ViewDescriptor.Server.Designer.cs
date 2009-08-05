@@ -675,6 +675,7 @@ namespace Kistl.App.GUI
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_ViewDescriptor")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -687,6 +688,7 @@ namespace Kistl.App.GUI
         }
         public event ToStringHandler<ViewDescriptor> OnToString_ViewDescriptor;
 
+        [EventBasedMethod("OnPreSave_ViewDescriptor")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -694,6 +696,7 @@ namespace Kistl.App.GUI
         }
         public event ObjectEventHandler<ViewDescriptor> OnPreSave_ViewDescriptor;
 
+        [EventBasedMethod("OnPostSave_ViewDescriptor")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -701,6 +704,7 @@ namespace Kistl.App.GUI
         }
         public event ObjectEventHandler<ViewDescriptor> OnPostSave_ViewDescriptor;
 
+        [EventBasedMethod("OnCreated_ViewDescriptor")]
         public override void NotifyCreated()
         {
             try
@@ -722,6 +726,7 @@ namespace Kistl.App.GUI
         }
         public event ObjectEventHandler<ViewDescriptor> OnCreated_ViewDescriptor;
 
+        [EventBasedMethod("OnDeleting_ViewDescriptor")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

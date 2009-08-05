@@ -92,6 +92,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_DoubleParameter")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -104,6 +105,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<DoubleParameter> OnToString_DoubleParameter;
 
+        [EventBasedMethod("OnPreSave_DoubleParameter")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -111,6 +113,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DoubleParameter> OnPreSave_DoubleParameter;
 
+        [EventBasedMethod("OnPostSave_DoubleParameter")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -118,6 +121,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DoubleParameter> OnPostSave_DoubleParameter;
 
+        [EventBasedMethod("OnCreated_DoubleParameter")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -125,6 +129,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<DoubleParameter> OnCreated_DoubleParameter;
 
+        [EventBasedMethod("OnDeleting_DoubleParameter")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

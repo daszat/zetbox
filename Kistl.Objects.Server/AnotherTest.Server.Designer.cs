@@ -73,6 +73,7 @@ namespace Kistl.App.Test
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_AnotherTest")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -85,6 +86,7 @@ namespace Kistl.App.Test
         }
         public event ToStringHandler<AnotherTest> OnToString_AnotherTest;
 
+        [EventBasedMethod("OnPreSave_AnotherTest")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -92,6 +94,7 @@ namespace Kistl.App.Test
         }
         public event ObjectEventHandler<AnotherTest> OnPreSave_AnotherTest;
 
+        [EventBasedMethod("OnPostSave_AnotherTest")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -99,6 +102,7 @@ namespace Kistl.App.Test
         }
         public event ObjectEventHandler<AnotherTest> OnPostSave_AnotherTest;
 
+        [EventBasedMethod("OnCreated_AnotherTest")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -106,6 +110,7 @@ namespace Kistl.App.Test
         }
         public event ObjectEventHandler<AnotherTest> OnCreated_AnotherTest;
 
+        [EventBasedMethod("OnDeleting_AnotherTest")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

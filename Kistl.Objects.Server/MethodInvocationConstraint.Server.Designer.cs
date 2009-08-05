@@ -92,6 +92,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_MethodInvocationConstraint")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -104,6 +105,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<MethodInvocationConstraint> OnToString_MethodInvocationConstraint;
 
+        [EventBasedMethod("OnPreSave_MethodInvocationConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -111,6 +113,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<MethodInvocationConstraint> OnPreSave_MethodInvocationConstraint;
 
+        [EventBasedMethod("OnPostSave_MethodInvocationConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -118,6 +121,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<MethodInvocationConstraint> OnPostSave_MethodInvocationConstraint;
 
+        [EventBasedMethod("OnCreated_MethodInvocationConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -125,6 +129,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<MethodInvocationConstraint> OnCreated_MethodInvocationConstraint;
 
+        [EventBasedMethod("OnDeleting_MethodInvocationConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();

@@ -92,6 +92,7 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_ConsistentNavigatorConstraint")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
@@ -104,6 +105,7 @@ namespace Kistl.App.Base
         }
         public event ToStringHandler<ConsistentNavigatorConstraint> OnToString_ConsistentNavigatorConstraint;
 
+        [EventBasedMethod("OnPreSave_ConsistentNavigatorConstraint")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
@@ -111,6 +113,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<ConsistentNavigatorConstraint> OnPreSave_ConsistentNavigatorConstraint;
 
+        [EventBasedMethod("OnPostSave_ConsistentNavigatorConstraint")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
@@ -118,6 +121,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<ConsistentNavigatorConstraint> OnPostSave_ConsistentNavigatorConstraint;
 
+        [EventBasedMethod("OnCreated_ConsistentNavigatorConstraint")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
@@ -125,6 +129,7 @@ namespace Kistl.App.Base
         }
         public event ObjectEventHandler<ConsistentNavigatorConstraint> OnCreated_ConsistentNavigatorConstraint;
 
+        [EventBasedMethod("OnDeleting_ConsistentNavigatorConstraint")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
