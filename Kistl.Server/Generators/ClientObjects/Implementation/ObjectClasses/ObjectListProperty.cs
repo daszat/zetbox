@@ -49,7 +49,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Relation rel,
             RelationEndRole endRole)
         {
-            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string wrapperName = "_" + name + "Wrapper";

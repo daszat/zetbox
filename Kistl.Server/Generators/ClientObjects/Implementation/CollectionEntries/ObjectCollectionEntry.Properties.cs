@@ -15,7 +15,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
     {
         protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
         {
-            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string backingName = propertyName + Kistl.API.Helper.ImplementationSuffix;
@@ -31,7 +31,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 
         protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
-            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
 
             if (rel.NeedsPositionStorage(endRole))
             {

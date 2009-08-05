@@ -7,6 +7,7 @@ using System.Text;
 using System.Xml;
 
 using Kistl.API;
+using Kistl.App.Extensions;
 using Kistl.App.GUI;
 
 namespace Kistl.App.Base
@@ -87,22 +88,20 @@ namespace Kistl.App.Base
 
         public void OnCreateNavigator_RelationEnd(RelationEnd obj, MethodReturnEventArgs<ObjectReferenceProperty> e)
         {
+            Relation rel = obj.AParent ?? obj.BParent;
+            RelationEnd other = null; // rel.GetOtherEnd(obj);
+            
             e.Result = obj.Context.Create<ObjectReferenceProperty>();
             e.Result.AltText = "";
             e.Result.CategoryTags = "";
             e.Result.ObjectClass = obj.Type;
-            e.Result.PropertyName = obj.RoleName;
             e.Result.RelationEnd = obj;
+            e.Result.Module = rel.Module;
 
-            if (obj.AParent != null)
+            if (other != null)
             {
-                e.Result.Module = obj.AParent.Module;
-                e.Result.ReferenceObjectClass = obj.AParent.B.Type;
-            }
-            if (obj.BParent != null)
-            {
-                e.Result.Module = obj.BParent.Module;
-                e.Result.ReferenceObjectClass = obj.BParent.A.Type;
+                e.Result.ReferenceObjectClass = other.Type;
+                e.Result.PropertyName = other.RoleName;
             }
         }
 

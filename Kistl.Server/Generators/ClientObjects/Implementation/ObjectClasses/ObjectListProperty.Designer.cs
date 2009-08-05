@@ -44,7 +44,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         public override void Generate()
         {
 #line 25 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
-RelationEnd relEnd = rel.GetEnd(endRole);
+RelationEnd relEnd = rel.GetEndFromRole(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
         
     string idsListName = name + "Ids";

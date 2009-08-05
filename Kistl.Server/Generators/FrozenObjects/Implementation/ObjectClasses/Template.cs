@@ -58,13 +58,13 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
 
         protected override void ApplyObjectListPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
-            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
             ApplyListProperty(relEnd.Navigator, MembersToSerialize);
         }
 
         protected override void ApplyCollectionEntryListTemplate(Relation rel, RelationEndRole endRole)
         {
-            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
             ApplyListProperty(relEnd.Navigator, MembersToSerialize);
         }
 

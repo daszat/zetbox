@@ -25,7 +25,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             Templates.Implementation.SerializationMembersList serializationList,
             Relation rel, RelationEndRole endRole)
         {
-            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string name = relEnd.Navigator.PropertyName;

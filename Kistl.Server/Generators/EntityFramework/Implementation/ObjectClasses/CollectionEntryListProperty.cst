@@ -16,7 +16,7 @@
 <%@ Parameter Name="endRole" Type="RelationEndRole" %>
 <%
 
-    RelationEnd relEnd = rel.GetEnd(endRole);
+    RelationEnd relEnd = rel.GetEndFromRole(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
 	// the name of the property to create

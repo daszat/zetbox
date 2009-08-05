@@ -19,7 +19,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
 
         protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
         {
-            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
@@ -35,7 +35,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
 
         protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
-            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
 
             if (rel.NeedsPositionStorage(endRole))
             {

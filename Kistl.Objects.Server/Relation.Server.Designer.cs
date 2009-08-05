@@ -542,6 +542,116 @@ namespace Kistl.App.Base
 		public event PropertyGetterHandler<Kistl.App.Base.Relation, string> OnVerb_Getter;
 		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, string> OnVerb_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, string> OnVerb_PostSetter;
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual Kistl.App.Base.RelationEnd GetEnd(Kistl.App.Base.ObjectReferenceProperty prop) 
+        {
+            var e = new MethodReturnEventArgs<Kistl.App.Base.RelationEnd>();
+            if (OnGetEnd_Relation != null)
+            {
+                OnGetEnd_Relation(this, e, prop);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Relation.GetEnd");
+            }
+            return e.Result;
+        }
+		public delegate void GetEnd_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.RelationEnd> ret, Kistl.App.Base.ObjectReferenceProperty prop);
+		public event GetEnd_Handler<Relation> OnGetEnd_Relation;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual Kistl.App.Base.RelationEnd GetEndFromRole(Kistl.API.RelationEndRole role) 
+        {
+            var e = new MethodReturnEventArgs<Kistl.App.Base.RelationEnd>();
+            if (OnGetEndFromRole_Relation != null)
+            {
+                OnGetEndFromRole_Relation(this, e, role);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Relation.GetEndFromRole");
+            }
+            return e.Result;
+        }
+		public delegate void GetEndFromRole_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.RelationEnd> ret, Kistl.API.RelationEndRole role);
+		public event GetEndFromRole_Handler<Relation> OnGetEndFromRole_Relation;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual Kistl.App.Base.RelationEnd GetOtherEnd(Kistl.App.Base.RelationEnd relEnd) 
+        {
+            var e = new MethodReturnEventArgs<Kistl.App.Base.RelationEnd>();
+            if (OnGetOtherEnd_Relation != null)
+            {
+                OnGetOtherEnd_Relation(this, e, relEnd);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Relation.GetOtherEnd");
+            }
+            return e.Result;
+        }
+		public delegate void GetOtherEnd_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.RelationEnd> ret, Kistl.App.Base.RelationEnd relEnd);
+		public event GetOtherEnd_Handler<Relation> OnGetOtherEnd_Relation;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual Kistl.API.RelationType GetRelationType() 
+        {
+            var e = new MethodReturnEventArgs<Kistl.API.RelationType>();
+            if (OnGetRelationType_Relation != null)
+            {
+                OnGetRelationType_Relation(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Relation.GetRelationType");
+            }
+            return e.Result;
+        }
+		public delegate void GetRelationType_Handler<T>(T obj, MethodReturnEventArgs<Kistl.API.RelationType> ret);
+		public event GetRelationType_Handler<Relation> OnGetRelationType_Relation;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+		public virtual bool NeedsPositionStorage(Kistl.API.RelationEndRole endRole) 
+        {
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnNeedsPositionStorage_Relation != null)
+            {
+                OnNeedsPositionStorage_Relation(this, e, endRole);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Relation.NeedsPositionStorage");
+            }
+            return e.Result;
+        }
+		public delegate void NeedsPositionStorage_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, Kistl.API.RelationEndRole endRole);
+		public event NeedsPositionStorage_Handler<Relation> OnNeedsPositionStorage_Relation;
+
+
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Relation));

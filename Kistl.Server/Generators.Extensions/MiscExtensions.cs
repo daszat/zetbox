@@ -76,7 +76,7 @@ namespace Kistl.Server.Generators.Extensions
 
         public static string GetRelationFkColumnName(this Relation rel, RelationEndRole endRole)
         {
-            var relEnd = rel.GetEnd(endRole);
+            var relEnd = rel.GetEndFromRole(endRole);
             // legacy condition: if navigator exists, use his objectclass' name
             // See Kistl.Server.GeneratorsOld.Helper.GeneratorHelper.CalcForeignKeyColumnName()
             // TODO: remove this after reworking the SQL Generator to use Relations

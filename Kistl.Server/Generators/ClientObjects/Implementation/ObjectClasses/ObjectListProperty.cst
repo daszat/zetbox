@@ -22,7 +22,7 @@
 <%@ Parameter Name="referencedInterface" Type="string" %>
 <%
 
-    RelationEnd relEnd = rel.GetEnd(endRole);
+    RelationEnd relEnd = rel.GetEndFromRole(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
         
     string idsListName = name + "Ids";

@@ -31,7 +31,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectListProperty.cst"
-RelationEnd relEnd = rel.GetEnd(endRole);
+RelationEnd relEnd = rel.GetEndFromRole(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
 	// the name of the property to create

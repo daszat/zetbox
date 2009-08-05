@@ -66,7 +66,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         {
             Implementation.ObjectClasses.ObjectListProperty.Call(Host, ctx,
                  this.MembersToSerialize,
-                 rel.GetEnd(endRole).Navigator as ObjectReferenceProperty);
+                 rel.GetEndFromRole(endRole).Navigator as ObjectReferenceProperty);
         }
 
         protected override void ApplyValueTypeListTemplate(ValueTypeProperty prop)

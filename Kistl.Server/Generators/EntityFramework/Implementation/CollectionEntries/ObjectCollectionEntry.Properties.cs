@@ -14,7 +14,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
     {
         protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
         {
-            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
             bool eagerLoading = (relEnd.Navigator != null && relEnd.Navigator.EagerLoading)
                 || (otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading);
@@ -29,7 +29,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
 
         protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
-            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
 
             if (rel.NeedsPositionStorage(endRole))
             {
@@ -57,7 +57,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
 
         private void ReloadReferences(RelationEndRole endRole)
         {
-            RelationEnd relend = rel.GetEnd(endRole);
+            RelationEnd relend = rel.GetEndFromRole(endRole);
             ObjectClasses.ReloadOneReference.Call(Host, ctx,
                 relend.Type.GetDataTypeString(),
                 relend.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,

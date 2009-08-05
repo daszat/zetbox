@@ -41,7 +41,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Relation rel,
             RelationEndRole endRole, bool callGetterSetterEvents)
         {
-            RelationEnd relEnd = rel.GetEnd(endRole);
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string efName = name + Kistl.API.Helper.ImplementationSuffix;

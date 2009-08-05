@@ -67,7 +67,7 @@ namespace Kistl.DALProvider.EF
             int parentId)
         {
             var rel = ctx.FindPersistenceObject<Relation>(relId);
-            var relEnd = rel.GetEnd(endRole);
+            var relEnd = rel.GetEndFromRole(endRole);
             var relOtherEnd = rel.GetOtherEnd(relEnd);
             var parent = ctx.Find(new ImplementationType(typeof(PARENT)).ToInterfaceType(), parentId);
             var ceType = Type.GetType(rel.GetRelationFullName() +

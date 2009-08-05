@@ -24,7 +24,7 @@
 <%@ Parameter Name="hasPositionStorage" Type="bool" %>
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%
-    RelationEnd relEnd = rel.GetEnd(endRole);
+    RelationEnd relEnd = rel.GetEndFromRole(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 	string eventName = "On" + name;
 %>
