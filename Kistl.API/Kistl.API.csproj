@@ -105,6 +105,7 @@
     <Compile Include="BasePersistenceObject.cs" />
     <Compile Include="BaseStructObject.cs" />
     <Compile Include="BaseValueCollectionWrapper.cs" />
+    <Compile Include="EventBasedMethodAttribute.cs" />
     <Compile Include="MemoryContext.cs" />
     <Compile Include="RelationEndRole.cs" />
     <Compile Include="SerializableExpression.Visitors.cs" />
