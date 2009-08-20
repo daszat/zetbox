@@ -99,8 +99,7 @@ namespace Kistl.API
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceWarning("Error when trying to load frozen context: {0}", frozenAssemblyName);
-                    Trace.TraceWarning(ex.ToString());
+                    Trace.TraceWarning("Error when trying to load frozen context: {0}: {1}", frozenAssemblyName, ex.Message);
                     return null;
                 }
             }
