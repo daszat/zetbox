@@ -53,11 +53,13 @@
 %>
             try
             {
+				Kistl.App.Base.Property p = null;
 <%
 				foreach (var prop in cls.Properties.Where(p => p.DefaultValue != null))
 				{
 %>
-				this.<%= prop.PropertyName %> = (<%= prop.ReferencedTypeAsCSharp() %>)FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("<%= prop.ExportGuid %>")).DefaultValue.GetDefaultValue();
+				p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("<%= prop.ExportGuid %>"));
+				if(p != null && p.DefaultValue != null) { this.<%= prop.PropertyName %> = (<%= prop.ReferencedTypeAsCSharp() %>)p.DefaultValue.GetDefaultValue(); } else { System.Diagnostics.Trace.TraceWarning("<%= string.Format("Unable to get default value for property '{0}.{1}'", prop.ObjectClass.ClassName, prop.PropertyName) %>"); }
 <%
 				}
 %>
