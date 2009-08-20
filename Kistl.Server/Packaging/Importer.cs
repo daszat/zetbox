@@ -102,7 +102,7 @@ namespace Kistl.Server.Packaging
             }
         }
 
-        public static void Import(string filename)
+        public static void LoadFromXml(string filename)
         {
             using (TraceClient.TraceHelper.TraceMethodCall())
             {
@@ -111,7 +111,7 @@ namespace Kistl.Server.Packaging
                 {
                     using (FileStream fs = File.OpenRead(filename))
                     {
-                        Import(ctx, fs);
+                        LoadFromXml(ctx, fs);
                     }
                     Trace.TraceInformation("Submitting changes");
                     ctx.SubmitChanges();
@@ -120,7 +120,7 @@ namespace Kistl.Server.Packaging
             }
         }
 
-        public static void Import(IKistlContext ctx, Stream s)
+        public static void LoadFromXml(IKistlContext ctx, Stream s)
         {
             try
             {

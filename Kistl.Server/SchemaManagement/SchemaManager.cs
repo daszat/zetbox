@@ -114,7 +114,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     using (var ms = new MemoryStream(ASCIIEncoding.Default.GetBytes(schema)))
                     {
-                        Packaging.Importer.Import(ctx, ms);
+                        Packaging.Importer.LoadFromXml(ctx, ms);
                     }
                 }
             }

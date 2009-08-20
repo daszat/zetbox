@@ -185,7 +185,7 @@ namespace Kistl.Server
 
         internal void Import(string file)
         {
-            Packaging.Importer.Import(file);
+            Packaging.Importer.LoadFromXml(file);
         }
 
         internal void Publish(string file, string[] namespaces)
@@ -234,7 +234,7 @@ namespace Kistl.Server
             {
                 using (FileStream fs = File.OpenRead(file))
                 {
-                    Packaging.Importer.Import(ctx, fs);
+                    Packaging.Importer.LoadFromXml(ctx, fs);
                     using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\schemareport.log"))
                     {
                         report.SetLength(0);
@@ -275,7 +275,7 @@ namespace Kistl.Server
                         ServerApplicationContext.Current.LoadNoopActionsManager(ctx);
                     }
                     
-                    Packaging.Importer.Import(ctx, fs);
+                    Packaging.Importer.LoadFromXml(ctx, fs);
 
                     if (bootstrapping)
                     {
