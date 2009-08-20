@@ -31,7 +31,8 @@ namespace Kistl.App.Base
             else if (m != null && obj.BaseObjectClass != null)
             {
                 // Delete if BaseClass is declared
-                obj.Context.Delete(m);
+                // TODO: Move MethodInvocations to base class' method
+                // obj.Context.Delete(m);
             }
         }
 

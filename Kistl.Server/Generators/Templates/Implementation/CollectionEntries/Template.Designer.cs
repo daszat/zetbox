@@ -117,10 +117,12 @@ this.WriteObjects("		}\r\n");
 this.WriteObjects("	\r\n");
 this.WriteObjects("		public override void ReloadReferences()\r\n");
 this.WriteObjects("		{\r\n");
-#line 100 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+this.WriteObjects("			// Do not reload references if the current object has been deleted.\r\n");
+this.WriteObjects("			if(obj.ObjectState == DataObjectState.Deleted) return;\r\n");
+#line 102 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyReloadReferenceBody();
 
-#line 102 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 104 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("	\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
@@ -130,17 +132,17 @@ this.WriteObjects("			base.ApplyChangesFrom(obj);\r\n");
 this.WriteObjects("			var other = (",  GetCeClassName() , ")obj;\r\n");
 this.WriteObjects("			var me = (",  GetCeClassName() , ")this;\r\n");
 this.WriteObjects("			\r\n");
-#line 112 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 114 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyChangesFromBody();
 
-#line 114 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 116 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("		}		\r\n");
 this.WriteObjects("		\r\n");
 this.WriteObjects("		\r\n");
-#line 118 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 120 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyClassTailTemplate();
 
-#line 120 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 122 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 

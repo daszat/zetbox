@@ -50,15 +50,12 @@ namespace Kistl.API
 
         /// <summary>
         /// Sets the initialised ICustomsActionManager, which shall be used 
-        /// for the database context. This method may only be called if there 
-        /// is no current ICustomActionsManager or it is a NoopActionsManager.
+        /// for the database context.
         /// </summary>
         /// <param name="manager">the new manager to use</param>
         protected void SetCustomActionsManager(ICustomActionsManager manager)
         {
-            if (this.CustomActionsManager != null && !(this.CustomActionsManager is NoopActionsManager) )
-                throw new InvalidOperationException("CustomActionsManager already initialised");
-
+            // Reinitializaton is needed for execution of multiple commands in the same process
             this.CustomActionsManager = manager;
         }
 

@@ -234,6 +234,8 @@ namespace Kistl.Server
 
         private static void XmlFallbackInitialisation(string file)
         {
+            ServerApplicationContext.Current.LoadNoopActionsManager();
+
             var memCtx = new MemoryContext();
             Packaging.Importer.LoadFromXml(memCtx, file);
             FrozenContext.RegisterFallback(memCtx);
