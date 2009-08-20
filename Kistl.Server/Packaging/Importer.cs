@@ -295,10 +295,14 @@ namespace Kistl.Server.Packaging
                 IPersistenceObject obj;
                 if (typeof(IDataObject).IsAssignableFrom(ifType.Type))
                 {
+                    // TODO: Replace this with Activator.CreateInstance(GetSystemType().ToImplementationType()); like on SerializableType
+                    // Case #1196
                     obj = ctx.Create(ifType);
                 }
                 else if (typeof(IRelationCollectionEntry).IsAssignableFrom(ifType.Type))
                 {
+                    // TODO: Replace this with Activator.CreateInstance(GetSystemType().ToImplementationType()); like on SerializableType
+                    // Case #1196
                     obj = ctx.CreateRelationCollectionEntry(ifType);
                 }
                 else
