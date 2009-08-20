@@ -374,6 +374,7 @@ namespace Kistl.App.Extensions
     /// <summary>
     /// A small container holding necessary infos for caching Invokations
     /// </summary>
+    [DebuggerDisplay("Invoke {CLRMethod} on {Instance} using {CLREvent}")]
     public class InvokeInfo
     {
         public MethodInfo CLRMethod { get; set; }
