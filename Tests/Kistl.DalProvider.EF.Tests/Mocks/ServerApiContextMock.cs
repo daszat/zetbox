@@ -18,5 +18,10 @@ namespace Kistl.DalProvider.EF.Mocks
             InterfaceAssembly = Assembly.GetAssembly(typeof(Kistl.App.Base.Assembly)).FullName;
             ImplementationAssembly = Assembly.GetAssembly(typeof(Kistl.App.Base.Assembly__Implementation__)).FullName;
         }
+
+        public override void LoadFrozenActions(Kistl.API.IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -16,5 +16,10 @@ namespace Kistl.API.Server.Mocks
             SetCustomActionsManager(new CustomActionsManagerAPITest());
             ImplementationAssembly = InterfaceAssembly = Assembly.GetAssembly(this.GetType()).FullName;
         }
+
+        public override void LoadFrozenActions(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

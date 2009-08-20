@@ -9,6 +9,7 @@ using System.Threading;
 
 using Kistl.API.Configuration;
 using Kistl.API.Server;
+using Kistl.API;
 
 namespace Kistl.Server
 {
@@ -77,6 +78,7 @@ namespace Kistl.Server
                 {
                     if (arg.Command == "-export" && arg.Arguments.Count > 1)
                     {
+                        DefaultInitialisation();
                         string file = arg.Arguments[0];
                         List<string> namespaces = new List<string>();
                         for (int i = 1; i < arg.Arguments.Count; i++)
@@ -88,12 +90,14 @@ namespace Kistl.Server
                     }
                     else if (arg.Command == "-import" && arg.Arguments.Count == 1)
                     {
+                        DefaultInitialisation();
                         string file = arg.Arguments[0];
                         server.Import(file);
                         actiondone = true;
                     }
                     else if (arg.Command == "-publish" && arg.Arguments.Count > 1)
                     {
+                        DefaultInitialisation();
                         string file = arg.Arguments[0];
                         List<string> namespaces = new List<string>();
                         for (int i = 1; i < arg.Arguments.Count; i++)
@@ -106,11 +110,16 @@ namespace Kistl.Server
                     else if (arg.Command == "-deploy" && arg.Arguments.Count == 1)
                     {
                         string file = arg.Arguments[0];
+
+                        XmlFallbackInitialisation(file);
+
                         server.Deploy(file);
                         actiondone = true;
                     }
                     else if (arg.Command == "-checkschema")
                     {
+                        DefaultInitialisation();
+
                         string file = "";
                         if (arg.Arguments.Count == 0)
                         {
@@ -137,6 +146,8 @@ namespace Kistl.Server
                     }
                     else if (arg.Command == "-repairschema" && arg.Arguments.Count == 0)
                     {
+                        DefaultInitialisation();
+
                         server.CheckSchema(true);
                         actiondone = true;
                     }
@@ -145,11 +156,13 @@ namespace Kistl.Server
                         string file = "";
                         if (arg.Arguments.Count == 0)
                         {
+                            DefaultInitialisation();
                             server.UpdateSchema();
                         }
                         else if (arg.Arguments.Count == 1)
                         {
                             file = arg.Arguments[0];
+                            XmlFallbackInitialisation(file);
                             server.UpdateSchema(file);
                         }
                         else
@@ -161,11 +174,13 @@ namespace Kistl.Server
                     }
                     else if (arg.Command == "-generate" && arg.Arguments.Count == 0)
                     {
+                        DbFallbackInitialisation();
                         server.GenerateCode();
                         actiondone = true;
                     }
                     else if (arg.Command == "-fix" && arg.Arguments.Count == 0)
                     {
+                        DefaultInitialisation();
                         // hidden command to execute ad-hoc fixes against the database
                         server.RunFixes();
                         actiondone = true;
@@ -192,6 +207,8 @@ namespace Kistl.Server
                 }
                 else
                 {
+                    DefaultInitialisation();
+
                     server.Start(config);
 
                     Console.WriteLine("Server started, press the anykey to exit");
@@ -212,6 +229,28 @@ namespace Kistl.Server
             }
         }
 
+        private static void XmlFallbackInitialisation(string file)
+        {
+            var memCtx = new MemoryContext();
+            Packaging.Importer.LoadFromXml(memCtx, file);
+            FrozenContext.RegisterFallback(memCtx);
+
+            ServerApplicationContext.Current.LoadDefaultActionsManager();
+        }
+
+        private static void DbFallbackInitialisation()
+        {
+            ServerApplicationContext.Current.LoadNoopActionsManager();
+            FrozenContext.RegisterFallback(KistlContext.GetContext());
+            ServerApplicationContext.Current.LoadDefaultActionsManager();
+        }
+
+        private static void DefaultInitialisation()
+        {
+            // FrozenContext must be available as assembly
+            ServerApplicationContext.Current.LoadDefaultActionsManager();
+        }
+
         private static KistlConfig InitApplicationContext(string[] args)
         {
             string configFilePath;
@@ -225,7 +264,6 @@ namespace Kistl.Server
             }
             var config = KistlConfig.FromFile(configFilePath);
             var appCtx = new ServerApplicationContext(config);
-            ServerApplicationContext.Current.LoadDefaultActionsManager();
             return config;
         }
     }

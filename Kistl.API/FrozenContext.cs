@@ -67,7 +67,7 @@ namespace Kistl.API
             {
                 if (!_haveTriedLoading)
                 {
-                    TryInit(true);
+                    TryInit();
                 }
                 var result = _single ?? _fallback;
                 if (result == null)
@@ -84,40 +84,28 @@ namespace Kistl.API
         /// <summary>
         /// Tries to initialise the FrozenContext singleton.
         /// </summary>
-        /// <param name="shouldThrow">whether or not the method should throw an exception</param>
-        /// <returns>the initialised frozen context or null, if shouldThrow is false and the FrozenContext could not be initialised</returns>
-        /// <exception cref="TypeLoadException">if shouldThrow is true and the FrozenContext could not be loaded</exception>
-        public static IKistlContext TryInit(bool shouldThrow)
+        /// <returns>the initialised frozen context or null</returns>
+        private static IKistlContext TryInit()
         {
+            const string frozenAssemblyName="Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen";
             if (!_haveTriedLoading)
             {
                 try
                 {
                     _haveTriedLoading = true;
-                    Type t = Type.GetType("Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen", true);
+                    Type t = Type.GetType(frozenAssemblyName, true);
                     _single = (IKistlContext)Activator.CreateInstance(t);
+                    ApplicationContext.Current.LoadFrozenActions(_single);
                 }
                 catch (Exception ex)
                 {
-                    if (shouldThrow)
-                    {
-                        throw new TypeLoadException("Unable to load FrozenContext", ex);
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    Trace.TraceWarning("Error when trying to load frozen context: {0}", frozenAssemblyName);
+                    Trace.TraceWarning(ex.ToString());
+                    return null;
                 }
             }
 
-            if (shouldThrow && _single == null)
-            {
-                throw new TypeLoadException("Unable to load FrozenContext");
-            }
-            else
-            {
-                return _single;
-            }
+            return _single;
         }
 
         /// <summary>

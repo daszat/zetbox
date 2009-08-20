@@ -63,6 +63,12 @@ namespace Kistl.API
         }
 
         /// <summary>
+        /// Loads an appropriate frozen custom actions manager for this IKistlContext.
+        /// </summary>
+        /// <param name="ctx"></param>
+        public abstract void LoadFrozenActions(IKistlContext ctx);
+
+        /// <summary>
         /// Create a context with the given HostType and load the configuration from 
         /// the given path. If no path is given, DefaultConfig.xml in the current 
         /// working directory is used.

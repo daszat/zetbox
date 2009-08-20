@@ -120,6 +120,19 @@ namespace Kistl.Server.Packaging
             }
         }
 
+        public static void LoadFromXml(IKistlContext ctx, string filename)
+        {
+            using (TraceClient.TraceHelper.TraceMethodCall())
+            {
+                Trace.TraceInformation("Starting Import from {0}", filename);
+                using (FileStream fs = File.OpenRead(filename))
+                {
+                    LoadFromXml(ctx, fs);
+                }
+                Trace.TraceInformation("Import finished");
+            }
+        }
+
         public static void LoadFromXml(IKistlContext ctx, Stream s)
         {
             try
@@ -301,6 +314,6 @@ namespace Kistl.Server.Packaging
             }
         }
 
-        
+
     }
 }

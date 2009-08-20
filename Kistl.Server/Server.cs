@@ -195,22 +195,7 @@ namespace Kistl.Server
 
         public void Deploy(string file)
         {
-            bool bootstrapping = false;
-            if (ServerApplicationContext.Current.CustomActionsManager == null)
-            {
-                ServerApplicationContext.Current.LoadNoopActionsManager(null);
-                bootstrapping = true;
-            }
-
             Packaging.Importer.Deploy(file);
-            
-            if (bootstrapping)
-            {
-                using (var ctx = KistlContext.GetContext())
-                {
-                    ServerApplicationContext.Current.LoadActionsManager(ctx);
-                }
-            }
         }
 
         internal void CheckSchemaFromCurrentMetaData(bool withRepair)
@@ -283,24 +268,7 @@ namespace Kistl.Server
             {
                 using (FileStream fs = File.OpenRead(file))
                 {
-                    bool bootstrapping = ServerApplicationContext.Current.CustomActionsManager == null;
-
-                    if (bootstrapping)
-                    {
-                        ServerApplicationContext.Current.LoadNoopActionsManager(ctx);
-                    }
-
                     Packaging.Importer.LoadFromXml(ctx, fs);
-
-                    if (bootstrapping)
-                    {
-                        ServerApplicationContext.Current.LoadActionsManager(ctx);
-                        // finish initialising this MemoryContext
-                        foreach (var obj in ctx.AttachedObjects.OfType<IDataObject>())
-                        {
-                            ServerApplicationContext.Current.CustomActionsManager.AttachEvents(obj);
-                        }
-                    }
 
                     using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\updateschemareport.log"))
                     {

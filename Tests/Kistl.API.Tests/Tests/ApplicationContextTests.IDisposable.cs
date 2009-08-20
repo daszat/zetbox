@@ -35,6 +35,11 @@ namespace Kistl.API.Tests
                 base.DisposeNativeResources();
                 disposeUnmanaged();
             }
+
+            public override void LoadFrozenActions(IKistlContext ctx)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         [Test]

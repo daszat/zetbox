@@ -37,15 +37,9 @@ namespace Kistl.Server
 
         internal void LoadDefaultActionsManager()
         {
-            var frozenCtx = FrozenContext.TryInit(false);
-            if (frozenCtx != null)
-            {
-                var fam = new FrozenActionsManagerServer();
-                fam.Init(frozenCtx);
-                var cams = new CustomActionsManagerServer();
-                cams.Init(frozenCtx);
-                this.SetCustomActionsManager(cams);
-            }
+            var cams = new CustomActionsManagerServer();
+            cams.Init(FrozenContext.Single);
+            this.SetCustomActionsManager(cams);
         }
 
         internal void LoadActionsManager(IKistlContext ctx)
@@ -55,9 +49,15 @@ namespace Kistl.Server
             this.SetCustomActionsManager(cams);
         }
 
-        internal void LoadNoopActionsManager(IKistlContext ctx)
+        internal void LoadNoopActionsManager()
         {
             this.SetCustomActionsManager(new NoopActionsManager());
+        }
+
+        public override void LoadFrozenActions(IKistlContext ctx)
+        {
+            var fam = new FrozenActionsManagerServer();
+            fam.Init(ctx);
         }
     }
 }

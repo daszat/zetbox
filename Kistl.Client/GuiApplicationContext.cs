@@ -61,12 +61,8 @@ namespace Kistl.Client
             : base(config)
         {
             GuiApplicationContext.Current = this;
-            
+
             SetCustomActionsManager(new CustomActionsManagerClient());
-            
-            var fam = new FrozenActionsManagerClient();
-            fam.Init(FrozenContext.Single);
-            
             CustomActionsManager.Init(FrozenContext.Single);
 
             Toolkit tk = (Toolkit)Enum.Parse(typeof(Toolkit), tkName, true);
@@ -106,6 +102,13 @@ namespace Kistl.Client
                 default:
                     throw new NotImplementedException();
             }
+        }
+
+        /// <inheritdoc />
+        public override void LoadFrozenActions(IKistlContext ctx)
+        {
+            var fam = new FrozenActionsManagerClient();
+            fam.Init(ctx);
         }
 
         public IRenderer Renderer { get; private set; }

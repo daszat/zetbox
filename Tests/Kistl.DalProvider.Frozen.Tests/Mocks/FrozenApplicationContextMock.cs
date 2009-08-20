@@ -21,5 +21,10 @@ namespace Kistl.DalProvider.Frozen.Mocks
         {
             InterfaceAssembly = ImplementationAssembly = p;
         }
+
+        public override void LoadFrozenActions(IKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
