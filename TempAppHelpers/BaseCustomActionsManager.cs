@@ -3,6 +3,8 @@ namespace Kistl.App.Extensions
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
     using System.Text;
@@ -17,24 +19,47 @@ namespace Kistl.App.Extensions
         : ICustomActionsManager
     {
         /// <summary>
-        /// A small container holding necessary infos for caching Invokations
+        /// Gets or sets a value indicating that initializing is done
         /// </summary>
-        private class InvokeInfo
+        protected InvocationCache Cache { get; set; }
+
+        /// <summary>
+        /// Gets or sets the extra suffix which is used to create the implementation class' name.
+        /// </summary>
+        protected string ExtraSuffix { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the assembly containing the implementation classes.
+        /// </summary>
+        protected string ImplementationAssembly { get; set; }
+
+        /// <summary>
+        /// Initialises a new instance of the BaseCustomActionsManager class 
+        /// using the specified extra suffix and implementation assembly name.
+        /// </summary>
+        /// <param name="extraSuffix"></param>
+        /// <param name="implementationAssembly"></param>
+        protected BaseCustomActionsManager(string extraSuffix, string implementationAssembly)
         {
-            public MethodInfo CLRMethod { get; set; }
-            public object Instance { get; set; }
-            public EventInfo CLREvent { get; set; }
+            ExtraSuffix = extraSuffix;
+            ImplementationAssembly = implementationAssembly;
         }
 
         /// <summary>
-        /// List of Custom Actions
+        /// Initializes this CustomActionsManager
         /// </summary>
-        private Dictionary<Type, List<InvokeInfo>> customAction = new Dictionary<Type, List<InvokeInfo>>();
-
-        /// <summary>
-        /// Indicates that initializing is done
-        /// </summary>
-        private bool initialized = false;
+        public virtual void Init(IKistlContext ctx)
+        {
+            if (Cache != null) { return; }
+            var warnings = new StringBuilder();
+            Cache = new InvocationCache(IsAcceptableDeploymentRestriction);
+            Cache.InitializeCache(ctx, ExtraSuffix, ImplementationAssembly, ObjectClassFilter, warnings);
+            // TODO create and use Logging API in the cache to invert control here and remove clumsy ProcessWarnings calls
+            if (warnings.Length > 0)
+            {
+                ProcessWarnings(warnings.ToString());
+            }
+        }
 
         /// <summary>
         /// Attach using Metadata
@@ -42,102 +67,25 @@ namespace Kistl.App.Extensions
         /// see Unsubscribing at http://msdn2.microsoft.com/en-us/library/ms366768.aspx
         /// </summary>
         /// <param name="obj">the object on which to attach events</param>
-        public void AttachEvents(IDataObject obj)
+        public virtual void AttachEvents(IDataObject obj)
         {
-            if (!initialized)
-            {
-                return;
-            }
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
+            // defer attaching if there is no cache
+            if (Cache == null) { return; }
 
             var key = obj.GetType();
 
             // New Method
-            if (customAction.ContainsKey(key))
+            foreach (InvokeInfo ii in Cache.Lookup(key))
             {
-                foreach (InvokeInfo ii in customAction[key])
-                {
-                    // TODO: Fix Case 316
-                    Delegate newDelegate = Delegate.CreateDelegate(
-                        ii.CLREvent.EventHandlerType,
-                        ii.Instance,
-                        ii.CLRMethod);
+                // TODO: Fix Case 316
+                Delegate newDelegate = Delegate.CreateDelegate(
+                    ii.CLREvent.EventHandlerType,
+                    ii.Instance,
+                    ii.CLRMethod);
 
-                    ii.CLREvent.AddEventHandler(obj, newDelegate);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Initializes this CustomActionsManager
-        /// </summary>
-        public void Init()
-        {
-            try
-            {
-                InitCore();
-            }
-            finally
-            {
-                initialized = true;
-            }
-
-            InitFrozen();
-        }
-
-        /// <summary>
-        /// By default, intializes the Provider using the ImplementationAssembly, no extra suffix and the FrozenContext as meta store.
-        /// Override this to specialize intialization.
-        /// </summary>
-        protected virtual void InitCore()
-        {
-            InitializeProvider(FrozenContext.Single, String.Empty, ApplicationContext.Current.ImplementationAssembly);
-        }
-
-        /// <summary>
-        /// Override this to modify behaviour for the frozen context.
-        /// </summary>
-        /// This is called after initializing everything else
-        protected virtual void InitFrozen()
-        {
-            foreach (IDataObject obj in FrozenContext.Single.AttachedObjects.OfType<IDataObject>())
-            {
-                AttachEvents(obj);
-            }
-        }
-
-        /// <summary>
-        /// Initializes caches for the provider of the given Context
-        /// </summary>
-        /// <param name="metaCtx">the context used to access the meta data</param>
-        /// <param name="extraSuffix">an extra suffix to put into the created implementation class names</param>
-        /// <param name="assemblyName">the name of the assembly to load implementation classes from</param>
-        protected void InitializeProvider(IKistlContext metaCtx, string extraSuffix, string assemblyName)
-        {
-            // some shortcuts
-            var classes = metaCtx.GetQuery<ObjectClass>();
-
-            StringBuilder warnings = new StringBuilder();
-
-            foreach (ObjectClass baseObjClass in classes)
-            {
-                try
-                {
-                    CreateInvokeInfosForAssembly(warnings, baseObjClass, extraSuffix, assemblyName);
-                    if (baseObjClass.IsFrozen())
-                    {
-                        CreateInvokeInfosForAssembly(warnings, baseObjClass, "Frozen", "Kistl.Objects.Frozen");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    warnings.AppendLine(ex.Message);
-                }
-            }
-
-            // TODO create and use Logging API to invert control here
-            if (warnings.Length > 0)
-            {
-                ProcessWarnings(warnings.ToString());
+                ii.CLREvent.AddEventHandler(obj, newDelegate);
             }
         }
 
@@ -147,20 +95,160 @@ namespace Kistl.App.Extensions
         /// <param name="warnings">a human readable string containing the warnings</param>
         protected virtual void ProcessWarnings(string warnings)
         {
-            // do nothing
+            Trace.TraceWarning(warnings);
         }
 
-        ///// <summary>
-        ///// Override this method to modify the acceptable DeploymentRestrictions. By default only None is accepted.
-        ///// </summary>
-        ///// <param name="r">the restriction to check</param>
-        ///// <returns>whether or not the given deployment restriction is acceptable for the implementor</returns>
-        //protected virtual bool IsAcceptableDeploymentRestriction(DeploymentRestriction r)
-        //{
-        //    return r == DeploymentRestriction.None;
-        //}
-
+        /// <summary>
+        /// Override this method to modify the acceptable DeploymentRestrictions. By default only None is accepted.
+        /// </summary>
+        /// <param name="r">the restriction to check (This parameter is int because <see cref="DeploymentRestriction"/> might not yet be loaded)</param>
+        /// <returns>whether or not the given deployment restriction is acceptable for the implementor</returns>
         protected abstract bool IsAcceptableDeploymentRestriction(int r);
+
+        /// <summary>
+        /// Retruns true on ObjectClasses that should be managed
+        /// </summary>
+        /// <param name="cls"></param>
+        /// <returns>true</returns>
+        protected virtual bool ObjectClassFilter(ObjectClass cls) { return true; }
+    }
+
+    /// <summary>
+    /// A CustomActionsManager for the FrozenContext.
+    /// </summary>
+    public abstract class FrozenActionsManager
+        : BaseCustomActionsManager
+    {
+        /// <summary>
+        /// Gets a value indicating whether the frozen actions are already initialised.
+        /// </summary>
+        public static bool IsInitialised { get; private set; }
+
+        static FrozenActionsManager()
+        {
+            IsInitialised = false;
+        }
+
+        /// <summary>
+        /// Initialises a new instane of the FrozenActionsManager.
+        /// </summary>
+        protected FrozenActionsManager()
+            : base("Frozen", "Kistl.Objects.Frozen")
+        {
+        }
+
+        /// <inheritdoc/>
+        public override void Init(IKistlContext ctx)
+        {
+            if (!IsInitialised)
+            {
+                try
+                {
+                    base.Init(ctx);
+                }
+                finally
+                {
+                    // try only once
+                    IsInitialised = true;
+                }
+
+                try
+                {
+                    // attach all frozen objects
+                    foreach (IDataObject obj in FrozenContext.Single.AttachedObjects.OfType<IDataObject>())
+                    {
+                        AttachEvents(obj);
+                    }
+                }
+                finally
+                {
+                    // drop cache
+                    Cache = null;
+                }
+            }
+        }
+
+        public override void AttachEvents(IDataObject obj)
+        {
+            if (IsInitialised)
+            {
+                base.AttachEvents(obj);
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override bool ObjectClassFilter(ObjectClass cls)
+        {
+            return cls.IsFrozen();
+        }
+    }
+
+    public sealed class InvocationCache
+    {
+        public InvocationCache(Func<int, bool> isAcceptableDeploymentRestriction)
+        {
+            this.IsAcceptableDeploymentRestriction = isAcceptableDeploymentRestriction;
+        }
+
+        /// <summary>
+        /// A filter for <see cref="DeploymentRestriction"/>s on Implementors
+        /// </summary>
+        private Func<int, bool> IsAcceptableDeploymentRestriction;
+
+        /// <summary>
+        /// List of Custom Actions
+        /// </summary>
+        private Dictionary<Type, List<InvokeInfo>> _cache = new Dictionary<Type, List<InvokeInfo>>();
+
+        /// <summary>
+        /// An empty list of InvokeInfos
+        /// </summary>
+        private static ReadOnlyCollection<InvokeInfo> Empty = new List<InvokeInfo>().AsReadOnly();
+
+        /// <summary>
+        /// Returns the list of InvokeInfos for the given Type or an empty list if the Type is not cached.
+        /// </summary>
+        /// <param name="t">the type to lookup</param>
+        /// <returns></returns>
+        public ReadOnlyCollection<InvokeInfo> Lookup(Type t)
+        {
+            if (_cache.ContainsKey(t))
+            {
+                return _cache[t].AsReadOnly();
+            }
+            else
+            {
+                return Empty;
+            }
+        }
+
+        /// <summary>
+        /// Initializes caches for the provider of the given Context
+        /// </summary>
+        /// <param name="metaCtx">the context used to access the meta data</param>
+        /// <param name="extraSuffix">an extra suffix to put into the created implementation class names</param>
+        /// <param name="assemblyName">the name of the assembly to load implementation classes from</param>
+        public void InitializeCache(IKistlContext metaCtx, string extraSuffix, string assemblyName, Func<ObjectClass, bool> filter, StringBuilder warnings)
+        {
+            if (filter == null) { throw new ArgumentNullException("filter"); }
+
+            foreach (ObjectClass baseObjClass in metaCtx.GetQuery<ObjectClass>())
+            {
+                try
+                {
+                    if (filter == null || filter(baseObjClass))
+                    {
+                        CreateInvokeInfosForAssembly(warnings, baseObjClass, extraSuffix, assemblyName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    warnings.AppendLine(ex.Message);
+                }
+            }
+        }
+
+        #region Walk through objectclass and create InvocationInfos
 
         private void CreateInvokeInfosForAssembly(StringBuilder warnings, ObjectClass baseObjClass, string extraSuffix, string assemblyName)
         {
@@ -267,16 +355,29 @@ namespace Kistl.App.Extensions
                     CLREvent = ei
                 };
 
-                if (!customAction.ContainsKey(objType))
+                if (!_cache.ContainsKey(objType))
                 {
-                    customAction.Add(objType, new List<InvokeInfo>());
+                    _cache.Add(objType, new List<InvokeInfo>());
                 }
-                customAction[objType].Add(ii);
+                _cache[objType].Add(ii);
             }
             catch (Exception ex)
             {
                 warnings.AppendLine(ex.Message);
             }
         }
+
+        #endregion
+
+    }
+
+    /// <summary>
+    /// A small container holding necessary infos for caching Invokations
+    /// </summary>
+    public class InvokeInfo
+    {
+        public MethodInfo CLRMethod { get; set; }
+        public object Instance { get; set; }
+        public EventInfo CLREvent { get; set; }
     }
 }

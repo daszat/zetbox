@@ -21,12 +21,12 @@ namespace Kistl.API.Server.Mocks
             attachedObjects.Clear();
         }
 
-        public void AttachEvents(Kistl.API.IDataObject obj)
+        public void AttachEvents(IDataObject obj)
         {
             attachedObjects.Add(obj);
         }
 
-        public void Init()
+        public void Init(IKistlContext ctx)
         {
             Reset();
         }

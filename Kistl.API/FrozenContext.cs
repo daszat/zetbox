@@ -45,29 +45,65 @@ namespace Kistl.API
         private static IKistlContext _single = null;
 
         /// <summary>
+        /// A value indicating whether loading the frozen context was already tried.
+        /// </summary>
+        private static bool _haveTriedLoading = false;
+
+        /// <summary>
         /// Gets the FrozenContext singleton. This is loaded on demand.
         /// </summary>
         public static IKistlContext Single
         {
             get
             {
-                if (_single == null)
+                if (!_haveTriedLoading)
                 {
-                    try
-                    {
-                        Type t = Type.GetType("Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen", true);
-                        _single = (IKistlContext)Activator.CreateInstance(t);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new TypeLoadException("Unable to load FrozenContext", ex);
-                    }
+                    TryInit(true);
                     if (_single == null)
                     {
-                        // something strange happened.
+                        // something strange happened: no context loaded AND no exception thrown
                         throw new TypeLoadException("Unable to load frozen context");
                     }
                 }
+                return _single;
+            }
+        }
+
+        /// <summary>
+        /// Tries to initialise the FrozenContext singleton.
+        /// </summary>
+        /// <param name="shouldThrow">whether or not the method should throw an exception</param>
+        /// <returns>the initialised frozen context or null, if shouldThrow is false and the FrozenContext could not be initialised</returns>
+        /// <exception cref="TypeLoadException">if shouldThrow is true and the FrozenContext could not be loaded</exception>
+        public static IKistlContext TryInit(bool shouldThrow)
+        {
+            if (!_haveTriedLoading)
+            {
+                try
+                {
+                    _haveTriedLoading = true;
+                    Type t = Type.GetType("Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen", true);
+                    _single = (IKistlContext)Activator.CreateInstance(t);
+                }
+                catch (Exception ex)
+                {
+                    if (shouldThrow)
+                    {
+                        throw new TypeLoadException("Unable to load FrozenContext", ex);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+
+            if (shouldThrow && _single == null)
+            {
+                throw new TypeLoadException("Unable to load FrozenContext");
+            }
+            else
+            {
                 return _single;
             }
         }

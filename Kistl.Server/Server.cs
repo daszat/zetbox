@@ -72,7 +72,15 @@ namespace Kistl.Server
         public void Init(KistlConfig config)
         {
             // re-use application context if available
-            appCtx = ServerApplicationContext.Current ?? new ServerApplicationContext(config);
+            if (ServerApplicationContext.Current == null)
+            {
+                using (var ctx = KistlContext.GetContext())
+                {
+                    appCtx = new ServerApplicationContext(config);
+                    appCtx.LoadDefaultActionsManager();
+                }
+            }
+            appCtx = ServerApplicationContext.Current;
         }
 
         /// <summary>
@@ -260,7 +268,25 @@ namespace Kistl.Server
             {
                 using (FileStream fs = File.OpenRead(file))
                 {
+                    bool bootstrapping = ServerApplicationContext.Current.CustomActionsManager == null;
+
+                    if(bootstrapping)
+                    {
+                        ServerApplicationContext.Current.LoadNoopActionsManager(ctx);
+                    }
+                    
                     Packaging.Importer.Import(ctx, fs);
+
+                    if (bootstrapping)
+                    {
+                        ServerApplicationContext.Current.LoadActionsManager(ctx);
+                        // finish initialising this MemoryContext
+                        foreach (var obj in ctx.AttachedObjects.OfType<IDataObject>())
+                        {
+                            ServerApplicationContext.Current.CustomActionsManager.AttachEvents(obj);
+                        }
+                    }
+
                     using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\updateschemareport.log"))
                     {
                         report.SetLength(0);
@@ -298,7 +324,6 @@ namespace Kistl.Server
                 ctx.SubmitChanges();
             }
         }
-
 
         #region IDisposable Members
         // TODO: implement Dispose Pattern after 

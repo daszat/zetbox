@@ -15,7 +15,7 @@ namespace Kistl.Client.Mocks
             // ignore
         }
 
-        public void Init()
+        public void Init(IKistlContext ctx)
         {
             // ignore
         }

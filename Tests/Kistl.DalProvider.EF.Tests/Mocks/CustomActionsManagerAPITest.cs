@@ -26,7 +26,7 @@ namespace Kistl.DalProvider.EF.Mocks
             attachedObjects.Add(obj);
         }
 
-        public void Init()
+        public void Init(IKistlContext ctx)
         {
             Reset();
         }

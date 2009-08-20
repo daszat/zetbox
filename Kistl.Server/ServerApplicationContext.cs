@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Remoting.Lifetime;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.API.Server;
 
 namespace Kistl.Server
 {
+    using System;
+    using System.Reflection;
+
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Server;
+
     public class ServerApplicationContext : ServerApiContext
     {
         public static new ServerApplicationContext Current { get; private set; }
@@ -18,8 +15,6 @@ namespace Kistl.Server
         public ServerApplicationContext(KistlConfig config)
             : base(config)
         {
-            ServerApplicationContext.Current = this;
-
             var interfaceAssembly = Assembly.Load("Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
             if (interfaceAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects Assembly, no Entity Framework Metadata will be loaded");
@@ -37,8 +32,32 @@ namespace Kistl.Server
             if (reflectedServerAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly for reflection, no Entity Framework Metadata will be loaded");
 
-            SetCustomActionsManager(new CustomActionsManagerServer());
+            ServerApplicationContext.Current = this;
         }
 
+        internal void LoadDefaultActionsManager()
+        {
+            var frozenCtx = FrozenContext.TryInit(false);
+            if (frozenCtx != null)
+            {
+                var fam = new FrozenActionsManagerServer();
+                fam.Init(frozenCtx);
+                var cams = new CustomActionsManagerServer();
+                cams.Init(frozenCtx);
+                this.SetCustomActionsManager(cams);
+            }
+        }
+
+        internal void LoadActionsManager(IKistlContext ctx)
+        {
+            var cams = new CustomActionsManagerServer();
+            cams.Init(ctx);
+            this.SetCustomActionsManager(cams);
+        }
+
+        internal void LoadNoopActionsManager(IKistlContext ctx)
+        {
+            this.SetCustomActionsManager(new NoopActionsManager());
+        }
     }
 }

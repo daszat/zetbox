@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Kistl.API;
 
 namespace Kistl.API.Client.Mocks
 {
-    public class CustomActionsManagerAPITest : Kistl.API.ICustomActionsManager
+    public class CustomActionsManagerAPITest : ICustomActionsManager
     {
         private List<IDataObject> attachedObjects = new List<IDataObject>();
 
@@ -25,7 +26,7 @@ namespace Kistl.API.Client.Mocks
             attachedObjects.Add(obj);
         }
 
-        public void Init()
+        public void Init(IKistlContext ctx)
         {
             Reset();
         }

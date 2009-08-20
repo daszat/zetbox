@@ -70,7 +70,7 @@ namespace Kistl.Server
             try
             {
                 var config = InitApplicationContext(args);
-                
+
                 Server server = new Server();
                 bool actiondone = false;
                 foreach (CmdLineArg arg in SplitCommandLine(args))
@@ -225,6 +225,7 @@ namespace Kistl.Server
             }
             var config = KistlConfig.FromFile(configFilePath);
             var appCtx = new ServerApplicationContext(config);
+            ServerApplicationContext.Current.LoadDefaultActionsManager();
             return config;
         }
     }

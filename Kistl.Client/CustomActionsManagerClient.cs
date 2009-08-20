@@ -4,6 +4,7 @@ namespace Kistl.Client
     using System;
     using System.Linq;
 
+    using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
 
@@ -13,6 +14,11 @@ namespace Kistl.Client
     internal class CustomActionsManagerClient
         : BaseCustomActionsManager
     {
+        internal CustomActionsManagerClient()
+            : base(String.Empty, ApplicationContext.Current.ImplementationAssembly)
+        {
+        }
+
         /// <summary>
         /// Displays the warnings to the user.
         /// </summary>
@@ -36,4 +42,15 @@ namespace Kistl.Client
             return r == (int)DeploymentRestriction.ClientOnly || r == (int)DeploymentRestriction.None;
         }
     }
+
+    public class FrozenActionsManagerClient
+        : FrozenActionsManager
+    {
+        /// <inheritdoc/>
+        protected override bool IsAcceptableDeploymentRestriction(int r)
+        {
+            return r == (int)DeploymentRestriction.ClientOnly || r == (int)DeploymentRestriction.None;
+        }
+    }
+
 }

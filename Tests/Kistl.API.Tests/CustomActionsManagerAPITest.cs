@@ -12,7 +12,7 @@ namespace Kistl.API.Tests
             // Do nothing!
         }
 
-        public void Init()
+        public void Init(IKistlContext ctx)
         {
             // Do nothing!
         }

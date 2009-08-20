@@ -1,16 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.API.Configuration;
-using Kistl.App.GUI;
-using Kistl.Client.Presentables;
 
 namespace Kistl.Client
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Client;
+    using Kistl.API.Configuration;
+    using Kistl.App.GUI;
+    using Kistl.Client.Presentables;
+
     public interface IGuiApplicationContext
     {
         /// <summary>
@@ -60,9 +61,13 @@ namespace Kistl.Client
             : base(config)
         {
             GuiApplicationContext.Current = this;
+            
             SetCustomActionsManager(new CustomActionsManagerClient());
-
-            // this.Renderer = KistlGUIContext.CreateRenderer(tk);
+            
+            var fam = new FrozenActionsManagerClient();
+            fam.Init(FrozenContext.Single);
+            
+            CustomActionsManager.Init(FrozenContext.Single);
 
             Toolkit tk = (Toolkit)Enum.Parse(typeof(Toolkit), tkName, true);
             // TODO: replace by fetching TypeRefs from the Store
@@ -110,7 +115,6 @@ namespace Kistl.Client
         /// </summary>
         public IKistlContext GuiDataContext { get { return Kistl.API.FrozenContext.Single; } }
 
-        //private IKistlContext _guiDataContextCache;
         /// <summary>
         /// A <see cref="IKistlContext"/> for the GUI internals
         /// </summary>
@@ -130,15 +134,14 @@ namespace Kistl.Client
         /// </summary>
         public ModelFactory Factory { get; private set; }
 
-
         /// <summary>
         /// A <see cref="IThreadManager"/> for the UI Thread
         /// </summary>
         public IThreadManager UiThread { get; private set; }
+
         /// <summary>
         /// A <see cref="IThreadManager"/> for asynchronous Tasks
         /// </summary>
         public IThreadManager AsyncThread { get; private set; }
-
     }
 }
