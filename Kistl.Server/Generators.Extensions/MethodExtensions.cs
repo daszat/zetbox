@@ -10,7 +10,7 @@ namespace Kistl.Server.Generators.Extensions
     public static class MethodExtensions
     {
         /// <summary>
-        /// returns true if the Method is one of the "default" methods, "ToString", "PreSave", "PostSave", "Created" or "Deleting".
+        /// returns true if the Method is one of the "default" methods, "ToString", "NotifyPreSave", "NotifyPostSave", "NotifyCreated" or "NotifyDeleting".
         /// </summary>
         public static bool IsDefaultMethod(this Method method)
         {
