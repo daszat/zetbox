@@ -65,7 +65,7 @@ namespace Kistl.Server
             return result;
         }
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             bool waitForKey = false;
             try
@@ -140,7 +140,7 @@ namespace Kistl.Server
                         else
                         {
                             PrintHelp();
-                            return;
+                            return 1; 
                         }
                         actiondone = true;
                     }
@@ -168,7 +168,7 @@ namespace Kistl.Server
                         else
                         {
                             PrintHelp();
-                            return;
+                            return 1;
                         }
                         actiondone = true;
                     }
@@ -192,7 +192,7 @@ namespace Kistl.Server
                     else
                     {
                         PrintHelp();
-                        return;
+                        return 1;
                     }
                 }
 
@@ -217,6 +217,8 @@ namespace Kistl.Server
 
                     server.Stop();
                 }
+
+                return 0;
             }
             catch (Exception ex)
             {
@@ -226,6 +228,7 @@ namespace Kistl.Server
                     Console.WriteLine("Hit the anykey to exit");
                     Console.ReadKey();
                 }
+                return 1;
             }
         }
 
