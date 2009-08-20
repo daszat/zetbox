@@ -293,7 +293,6 @@ namespace Kistl.App.Extensions
                             mi.InvokeOnObjectClass.ClassName,
                             mi.Method.MethodName,
                             String.Join(", ", paramTypes.Select(t => t == null ? "null" : t.FullName).ToArray()));
-                        methodInfo = objType.FindMethod("Notify" + mi.Method.MethodName, paramTypes);
                     }
                     else
                     {

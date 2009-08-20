@@ -195,7 +195,22 @@ namespace Kistl.Server
 
         public void Deploy(string file)
         {
+            bool bootstrapping = false;
+            if (ServerApplicationContext.Current.CustomActionsManager == null)
+            {
+                ServerApplicationContext.Current.LoadNoopActionsManager(null);
+                bootstrapping = true;
+            }
+
             Packaging.Importer.Deploy(file);
+            
+            if (bootstrapping)
+            {
+                using (var ctx = KistlContext.GetContext())
+                {
+                    ServerApplicationContext.Current.LoadActionsManager(ctx);
+                }
+            }
         }
 
         internal void CheckSchemaFromCurrentMetaData(bool withRepair)
@@ -270,11 +285,11 @@ namespace Kistl.Server
                 {
                     bool bootstrapping = ServerApplicationContext.Current.CustomActionsManager == null;
 
-                    if(bootstrapping)
+                    if (bootstrapping)
                     {
                         ServerApplicationContext.Current.LoadNoopActionsManager(ctx);
                     }
-                    
+
                     Packaging.Importer.LoadFromXml(ctx, fs);
 
                     if (bootstrapping)
