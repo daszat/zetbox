@@ -18,7 +18,24 @@ namespace Kistl.API.Server
         {
             if (ApplicationContext.Current.HostType != HostType.Server) throw new InvalidOperationException("A BaseServerPersistenceObject can only exist on a server");
             ClientObjectState = DataObjectState.NotDeserialized;
+            var trace = new System.Diagnostics.StackTrace(true);
+            _constructTrace = String.Join("\n", 
+                trace
+                .GetFrames()
+                .Select(frm => String.Format(
+                    "  at {0}.{1} ({2}:{3})",
+                    frm.GetMethod().ReflectedType.FullName,
+                    frm.GetMethod().Name,
+                    frm.GetFileName(),
+                    frm.GetFileLineNumber()))
+                .ToArray());
         }
+
+        /// <summary>
+        /// A private field storing the stracktrace where the object was constructed.
+        /// </summary>
+        private string _constructTrace;
+
 
         public DataObjectState ClientObjectState { get; set; }
 
