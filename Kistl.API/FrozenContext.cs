@@ -3,6 +3,7 @@ namespace Kistl.API
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
 
@@ -45,12 +46,20 @@ namespace Kistl.API
         private static IKistlContext _single = null;
 
         /// <summary>
+        /// A fallback context, if the Frozen assembly is not available.
+        /// </summary>
+        private static IKistlContext _fallback = null;
+
+        /// <summary>
         /// A value indicating whether loading the frozen context was already tried.
         /// </summary>
         private static bool _haveTriedLoading = false;
 
         /// <summary>
-        /// Gets the FrozenContext singleton. This is loaded on demand.
+        /// Gets the FrozenContext singleton. This is loaded on demand. If no 
+        /// frozen context provider/assembly is available an optionally 
+        /// registered fallback is used instead. If neither is available, an 
+        /// InvalidOperationException is thrown.
         /// </summary>
         public static IKistlContext Single
         {
@@ -59,13 +68,16 @@ namespace Kistl.API
                 if (!_haveTriedLoading)
                 {
                     TryInit(true);
-                    if (_single == null)
-                    {
-                        // something strange happened: no context loaded AND no exception thrown
-                        throw new TypeLoadException("Unable to load frozen context");
-                    }
                 }
-                return _single;
+                var result = _single ?? _fallback;
+                if (result == null)
+                {
+                    const string errorMessage = "Frozen.Single called without frozen context assembly or fallback";
+                    Trace.TraceError(errorMessage);
+                    Debug.Assert(false, errorMessage);
+                    throw new InvalidOperationException(errorMessage);
+                }
+                return result;
             }
         }
 
@@ -106,6 +118,23 @@ namespace Kistl.API
             {
                 return _single;
             }
+        }
+
+        /// <summary>
+        /// Registeres a IKistlContext as fallback which can be used if the frozen context assembly is not available. This is especially useful while bootstrapping.
+        /// </summary>
+        /// <param name="ctx">the context to use as fallback</param>
+        public static void RegisterFallback(IKistlContext ctx)
+        {
+            if (ctx == null)
+            {
+                throw new ArgumentNullException("ctx");
+            }
+            if (_fallback != null)
+            {
+                Trace.TraceWarning("Replacing FrozenContext fallback.");
+            }
+            _fallback = ctx;
         }
     }
 }
