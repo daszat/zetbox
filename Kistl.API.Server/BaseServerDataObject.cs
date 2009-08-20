@@ -24,7 +24,7 @@ namespace Kistl.API.Server
                 .GetFrames()
                 .Select(frm => String.Format(
                     "  at {0}.{1} ({2}:{3})",
-                    frm.GetMethod().ReflectedType.FullName,
+                    frm.GetMethod().ReflectedType != null ? frm.GetMethod().ReflectedType.FullName : "<not a type>",
                     frm.GetMethod().Name,
                     frm.GetFileName(),
                     frm.GetFileLineNumber()))
