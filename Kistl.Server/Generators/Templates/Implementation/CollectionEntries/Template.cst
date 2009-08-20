@@ -97,7 +97,8 @@
 		public override void ReloadReferences()
 		{
 			// Do not reload references if the current object has been deleted.
-			if(obj.ObjectState == DataObjectState.Deleted) return;
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
 <%
     ApplyReloadReferenceBody();
 %>

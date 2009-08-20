@@ -31,18 +31,21 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 this.WriteObjects("\r\n");
 this.WriteObjects("		public override void ReloadReferences()\r\n");
 this.WriteObjects("		{\r\n");
-#line 19 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
+this.WriteObjects("			// Do not reload references if the current object has been deleted.\r\n");
+this.WriteObjects("			// TODO: enable when MemoryContext uses MemoryDataObjects\r\n");
+this.WriteObjects("			//if (this.ObjectState == DataObjectState.Deleted) return;\r\n");
+#line 22 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
 if (cls.BaseObjectClass != null) {
 
-#line 21 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
+#line 24 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("			base.ReloadReferences();\r\n");
 this.WriteObjects("			\r\n");
-#line 24 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
+#line 27 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
 }
 
-#line 26 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
+#line 29 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("			// fix direct object references\r\n");
-#line 28 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
+#line 31 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
 foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
 		.Where(orp => !orp.IsList)
 		.OrderBy(orp => orp.ObjectClass.ClassName)
@@ -62,7 +65,7 @@ foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
 		ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, efName, fkBackingName, fkGuidBackingName);
 	}
 
-#line 47 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
+#line 50 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("		}");
 
         }

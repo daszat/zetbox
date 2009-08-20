@@ -257,6 +257,9 @@ namespace Kistl.App.Base
 	
 		public override void ReloadReferences()
 		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
 
 			if (_fk_guid_A.HasValue)
 				A__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_A.Value);
@@ -571,6 +574,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 	
 		public override void ReloadReferences()
 		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
 
 			if (_fk_guid_A.HasValue)
 				A__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_A.Value);
@@ -811,6 +817,9 @@ namespace Kistl.App.GUI
 	
 		public override void ReloadReferences()
 		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
 
 			if (_fk_guid_A.HasValue)
 				A__Implementation__ = (Kistl.App.GUI.Template__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Template>(_fk_guid_A.Value);
@@ -1182,6 +1191,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 	
 		public override void ReloadReferences()
 		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
 
 			if (_fk_guid_A.HasValue)
 				A__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_A.Value);
@@ -1422,6 +1434,9 @@ namespace Kistl.App.GUI
 	
 		public override void ReloadReferences()
 		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
 
 			if (_fk_guid_A.HasValue)
 				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_A.Value);
@@ -1660,6 +1675,9 @@ namespace Kistl.App.GUI
 	
 		public override void ReloadReferences()
 		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
 
 			if (_fk_guid_A.HasValue)
 				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_A.Value);
@@ -1899,6 +1917,9 @@ namespace Kistl.App.TimeRecords
 	
 		public override void ReloadReferences()
 		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
 
 			if (_fk_guid_A.HasValue)
 				A__Implementation__ = (Kistl.App.TimeRecords.WorkEffortAccount__Implementation__)Context.FindPersistenceObject<Kistl.App.TimeRecords.WorkEffortAccount>(_fk_guid_A.Value);
@@ -2103,6 +2124,9 @@ public string Value { get { return B; } set { B = value; } }
 	
 		public override void ReloadReferences()
 		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
 			if (_fk_A.HasValue)
 				A__Implementation__ = (Kunde__Implementation__)Context.Find<Kunde>(_fk_A.Value);
 			else

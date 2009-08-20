@@ -237,8 +237,9 @@ namespace Kistl.Server
             ServerApplicationContext.Current.LoadNoopActionsManager();
 
             var memCtx = new MemoryContext();
-            Packaging.Importer.LoadFromXml(memCtx, file);
+            // register empty context first, to avoid errors when trying to load defaultvalues
             FrozenContext.RegisterFallback(memCtx);
+            Packaging.Importer.LoadFromXml(memCtx, file);
 
             ServerApplicationContext.Current.LoadDefaultActionsManager();
         }

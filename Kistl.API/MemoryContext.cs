@@ -67,7 +67,12 @@ namespace Kistl.API
             if (obj == null) throw new ArgumentNullException("obj");
             if (obj.Context != this) throw new InvalidOperationException("The Object does not belong to the current Context");
             //((BasePersistenceObject)obj).SetDeleted();
+            // TODO: Implement Delete on Memory Context
             OnObjectDeleted(obj);
+            if (obj is IDataObject)
+            {
+                ((IDataObject)obj).NotifyDeleting();
+            }
         }
 
         public IQueryable<T> GetQuery<T>()
@@ -202,6 +207,10 @@ namespace Kistl.API
             IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
             Attach(obj);
             OnObjectCreated(obj);
+            if (obj is IDataObject)
+            {
+                ((IDataObject)obj).NotifyCreated();
+            }
             return obj;
         }
 

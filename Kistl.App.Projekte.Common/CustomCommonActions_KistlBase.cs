@@ -19,21 +19,21 @@ namespace Kistl.App.Base
         #region EnsureDefaultMethods
         private void CheckDefaultMethod(ObjectClass obj, string methodName)
         {
-            var m = obj.Methods.SingleOrDefault(i => i.MethodName == methodName);
-            if (m == null && obj.BaseObjectClass == null)
-            {
-                // Only for BaseClasses
-                m = obj.Context.Create<Method>();
-                m.MethodName = methodName;
-                m.Module = obj.Module;
-                obj.Methods.Add(m);
-            }
-            else if (m != null && obj.BaseObjectClass != null)
-            {
-                // Delete if BaseClass is declared
-                // TODO: Move MethodInvocations to base class' method
-                // obj.Context.Delete(m);
-            }
+            //var m = obj.Methods.SingleOrDefault(i => i.MethodName == methodName);
+            //if (m == null && obj.BaseObjectClass == null)
+            //{
+            //    // Only for BaseClasses
+            //    m = obj.Context.Create<Method>();
+            //    m.MethodName = methodName;
+            //    m.Module = obj.Module;
+            //    obj.Methods.Add(m);
+            //}
+            //else if (m != null && obj.BaseObjectClass != null)
+            //{
+            //    // Delete if BaseClass is declared
+            //    // TODO: Move MethodInvocations to base class' method
+            //    // obj.Context.Delete(m);
+            //}
         }
 
         private void EnsureDefaultMethods(ObjectClass obj)
@@ -111,11 +111,11 @@ namespace Kistl.App.Base
         #region Relation
         public void OnCreated_Relation(Kistl.App.Base.Relation obj)
         {
-            obj.A = obj.Context.Create<RelationEnd>();
-            obj.B = obj.Context.Create<RelationEnd>();
+            //obj.A = obj.Context.Create<RelationEnd>();
+            //obj.B = obj.Context.Create<RelationEnd>();
 
-            obj.A.Role = (int)RelationEndRole.A;
-            obj.B.Role = (int)RelationEndRole.B;
+            //obj.A.Role = (int)RelationEndRole.A;
+            //obj.B.Role = (int)RelationEndRole.B;
         }
         #endregion
 

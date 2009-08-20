@@ -633,7 +633,9 @@ namespace Kistl.App.Base
         {
             try
             {
-				this.ExportGuid = (Guid)FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("842eb3fc-3c8f-47d6-a59f-225c75ec2439")).DefaultValue.GetDefaultValue();
+				Kistl.App.Base.Property p = null;
+				p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("842eb3fc-3c8f-47d6-a59f-225c75ec2439"));
+				if(p != null && p.DefaultValue != null) { this.ExportGuid = (Guid)p.DefaultValue.GetDefaultValue(); } else { System.Diagnostics.Trace.TraceWarning("Unable to get default value for property 'Method.ExportGuid'"); }
             }
             catch (TypeLoadException)
             {
@@ -742,6 +744,9 @@ namespace Kistl.App.Base
 
 		public override void ReloadReferences()
 		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
 			// fix direct object references
 
 			if (_fk_guid_Module.HasValue)

@@ -118,11 +118,12 @@ this.WriteObjects("	\r\n");
 this.WriteObjects("		public override void ReloadReferences()\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			// Do not reload references if the current object has been deleted.\r\n");
-this.WriteObjects("			if(obj.ObjectState == DataObjectState.Deleted) return;\r\n");
-#line 102 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+this.WriteObjects("			// TODO: enable when MemoryContext uses MemoryDataObjects\r\n");
+this.WriteObjects("			//if (this.ObjectState == DataObjectState.Deleted) return;\r\n");
+#line 103 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyReloadReferenceBody();
 
-#line 104 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 105 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("	\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
@@ -132,17 +133,17 @@ this.WriteObjects("			base.ApplyChangesFrom(obj);\r\n");
 this.WriteObjects("			var other = (",  GetCeClassName() , ")obj;\r\n");
 this.WriteObjects("			var me = (",  GetCeClassName() , ")this;\r\n");
 this.WriteObjects("			\r\n");
-#line 114 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 115 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyChangesFromBody();
 
-#line 116 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 117 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("		}		\r\n");
 this.WriteObjects("		\r\n");
 this.WriteObjects("		\r\n");
-#line 120 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 121 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 ApplyClassTailTemplate();
 
-#line 122 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
+#line 123 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 
