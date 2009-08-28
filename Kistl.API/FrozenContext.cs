@@ -72,10 +72,14 @@ namespace Kistl.API
                 var result = _single ?? _fallback;
                 if (result == null)
                 {
-                    const string errorMessage = "Frozen.Single called without frozen context assembly or fallback";
-                    Trace.TraceError(errorMessage);
-                    Debug.Assert(false, errorMessage);
-                    throw new InvalidOperationException(errorMessage);
+                    // Now we're in a bind: we've got no frozen context or 
+                    // fallback, but need to finish initialisation. Therefore 
+                    // we use the current database as stand-in for the 
+                    // frozen context. Hopefully we have data there and 
+                    // performance isn't tooooo bad :)
+                    Trace.TraceError("Frozen.Single called without frozen context assembly or fallback.");
+                    Trace.TraceError("Falling back to direct database access. Expect poor performance.");
+                    // TODO: Case 1211: Move KistlContext.GetContext from Kistl.Api.{Client,Server} into the API proper and use the config file to find the right context.
                 }
                 return result;
             }

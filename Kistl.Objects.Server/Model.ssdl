@@ -72,6 +72,13 @@
       <End Role="B_ConsistentNavigatorConstraint" EntitySet="ConsistentNavigatorConstraint" />
     </AssociationSet>
     
+    <EntitySet Name="ControlKindClass" EntityType="Model.Store.ControlKindClass" Table="ControlKindClasses"/>
+    <!-- inherits from ObjectClass -->
+    <AssociationSet Name="FK_ControlKindClass_ObjectClass_ID" Association="Model.Store.FK_ControlKindClass_ObjectClass_ID" >
+      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
+      <End Role="B_ControlKindClass" EntitySet="ControlKindClass" />
+    </AssociationSet>
+    
     <EntitySet Name="DateTimeParameter" EntityType="Model.Store.DateTimeParameter" Table="DateTimeParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_DateTimeParameter_BaseParameter_ID" Association="Model.Store.FK_DateTimeParameter_BaseParameter_ID" >
@@ -249,6 +256,22 @@
     
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
+    <!-- 
+    Relation: FK_ControlKindClass_supports_TypeRef
+    A: ZeroOrMore ControlKindClass as ControlKindClass
+    B: ZeroOrMore TypeRef as SupportedInterfaces
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="ControlKindClass_supports_TypeRef_RelationEntry" EntityType="Model.Store.ControlKindClass_supports_TypeRef_RelationEntry" Table="ControlKindClasses_supports_TypeRefs" />
+    <AssociationSet Name="FK_ControlKindClass_supports_TypeRef_ControlKindClass" Association="Model.Store.FK_ControlKindClass_supports_TypeRef_ControlKindClass" >
+      <End Role="ControlKindClass" EntitySet="ControlKindClass" />
+      <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ControlKindClass_supports_TypeRef_SupportedInterfaces" Association="Model.Store.FK_ControlKindClass_supports_TypeRef_SupportedInterfaces" >
+      <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
+      <End Role="SupportedInterfaces" EntitySet="TypeRef" />
+    </AssociationSet>
+    
     <!-- 
     Relation: FK_ObjectClass_implements_Interface
     A: ZeroOrMore ObjectClass as ObjectClass
@@ -689,6 +712,13 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="ControlKindClass">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="CurrentSchema">
@@ -1202,6 +1232,46 @@
   </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
+	
+  <EntityType Name="ControlKindClass_supports_TypeRef_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+		
+    <Property Name="fk_ControlKindClass" Type="int" Nullable="true" />
+    <Property Name="fk_SupportedInterfaces" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_ControlKindClass_supports_TypeRef_ControlKindClass">
+    <End Role="ControlKindClass" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.ControlKindClass_supports_TypeRef_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ControlKindClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_ControlKindClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_ControlKindClass_supports_TypeRef_SupportedInterfaces">
+    <End Role="SupportedInterfaces" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.ControlKindClass_supports_TypeRef_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupportedInterfaces">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_SupportedInterfaces" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
 	
   <EntityType Name="ObjectClass_implements_Interface_RelationEntry">
     <Key>
@@ -2296,6 +2366,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_ConsistentNavigatorConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ControlKindClass_ObjectClass_ID">
+    <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="1" />
+    <End Role="B_ControlKindClass" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ControlKindClass">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

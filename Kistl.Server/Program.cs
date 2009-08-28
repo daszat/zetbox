@@ -253,7 +253,10 @@ namespace Kistl.Server
 
         private static void DefaultInitialisation()
         {
-            // FrozenContext must be available as assembly
+            // TODO: Remove the fallback registration after Case 1211 is fixed
+            ServerApplicationContext.Current.LoadNoopActionsManager();
+            FrozenContext.RegisterFallback(KistlContext.GetContext());
+            // end-TODO
             ServerApplicationContext.Current.LoadDefaultActionsManager();
         }
 

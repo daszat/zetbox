@@ -39,6 +39,15 @@
     <EntitySet Name="WorkEffort" EntityType="Model.WorkEffort" />
     <EntitySet Name="WorkEffortAccount" EntityType="Model.WorkEffortAccount" />
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
+    <EntitySet Name="ControlKindClass_supports_TypeRef_RelationEntry" EntityType="Model.ControlKindClass_supports_TypeRef_RelationEntry" />
+    <AssociationSet Name="FK_ControlKindClass_supports_TypeRef_ControlKindClass" Association="Model.FK_ControlKindClass_supports_TypeRef_ControlKindClass" >
+      <End Role="ControlKindClass" EntitySet="DataType" />
+      <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ControlKindClass_supports_TypeRef_SupportedInterfaces" Association="Model.FK_ControlKindClass_supports_TypeRef_SupportedInterfaces" >
+      <End Role="SupportedInterfaces" EntitySet="TypeRef" />
+      <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="ObjectClass_implements_Interface_RelationEntry" EntityType="Model.ObjectClass_implements_Interface_RelationEntry" />
     <AssociationSet Name="FK_ObjectClass_implements_Interface_ObjectClass" Association="Model.FK_ObjectClass_implements_Interface_ObjectClass" >
       <End Role="ObjectClass" EntitySet="DataType" />
@@ -920,6 +929,12 @@
   </EntityType>
   <EntityType Name="ConsistentNavigatorConstraint" BaseType="Model.Constraint" >
   </EntityType>
+  <EntityType Name="ControlKindClass" BaseType="Model.ObjectClass" >
+    <NavigationProperty Name="SupportedInterfaces__Implementation__"
+                        Relationship="Model.FK_ControlKindClass_supports_TypeRef_ControlKindClass"
+                        FromRole="ControlKindClass"
+                        ToRole="CollectionEntry" />
+  </EntityType>
   <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter" >
   </EntityType>
   <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty" >
@@ -1021,6 +1036,49 @@
   </EntityType>
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
+  <!--
+    Relation: FK_ControlKindClass_supports_TypeRef
+    A: ZeroOrMore ControlKindClass as ControlKindClass
+    B: ZeroOrMore TypeRef as SupportedInterfaces
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="ControlKindClass_supports_TypeRef_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_ControlKindClass_supports_TypeRef_ControlKindClass"
+                        FromRole="CollectionEntry"
+                        ToRole="ControlKindClass" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_ControlKindClass_supports_TypeRef_SupportedInterfaces"
+                        FromRole="CollectionEntry"
+                        ToRole="SupportedInterfaces" />
+  </EntityType>
+  <Association Name="FK_ControlKindClass_supports_TypeRef_ControlKindClass" >
+    <End Role="ControlKindClass"
+         Type="Model.ControlKindClass" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.ControlKindClass_supports_TypeRef_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_ControlKindClass_supports_TypeRef_SupportedInterfaces" >
+    <End Role="SupportedInterfaces"
+         Type="Model.TypeRef" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.ControlKindClass_supports_TypeRef_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
   <!--
     Relation: FK_ObjectClass_implements_Interface
     A: ZeroOrMore ObjectClass as ObjectClass

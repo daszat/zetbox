@@ -53,6 +53,24 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_ControlKindClass_supports_TypeRef
+    A: ZeroOrMore ControlKindClass as ControlKindClass
+    B: ZeroOrMore TypeRef as SupportedInterfaces
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_ControlKindClass_supports_TypeRef_ControlKindClass",
+    "ControlKindClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindClass__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlKindClass_supports_TypeRef_RelationEntry__Implementation__)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_ControlKindClass_supports_TypeRef_SupportedInterfaces",
+    "SupportedInterfaces", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlKindClass_supports_TypeRef_RelationEntry__Implementation__)
+    )]
+
+	/*
     Relation: FK_DataType_has_Icon
     A: ZeroOrMore DataType as DataType
     B: ZeroOrOne Icon as DefaultIcon

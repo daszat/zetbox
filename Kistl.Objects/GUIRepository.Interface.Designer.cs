@@ -66,6 +66,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all ControlKindClass</summary>
+		/// Extended MetaClass for defining supported interfaces of ControlKinds
+		public IQueryable<ControlKindClass> ControlKindClasses
+		{ 
+			get
+			{
+				return Context.GetQuery<ControlKindClass>();
+			}
+		}
+		
 		/// <summary>List of all ControlKind</summary>
 		/// The ControlKind specifies the toolkit-independent kind or type of control that should display a given Presentable.
 		public IQueryable<ControlKind> ControlKinds

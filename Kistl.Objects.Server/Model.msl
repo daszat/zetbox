@@ -190,6 +190,11 @@
 <ScalarProperty Name="TableName" ColumnName="TableName" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ControlKindClass)">
+	    <MappingFragment StoreEntitySet="ControlKindClass">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Struct)">
 	    <MappingFragment StoreEntitySet="Struct">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -520,6 +525,45 @@
 
 
     <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->
+    <!--
+    Relation: FK_ControlKindClass_supports_TypeRef
+    A: ZeroOrMore ControlKindClass as ControlKindClass
+    B: ZeroOrMore TypeRef as SupportedInterfaces
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="ControlKindClass_supports_TypeRef_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ControlKindClass_supports_TypeRef_RelationEntry)">
+        <MappingFragment StoreEntitySet="ControlKindClass_supports_TypeRef_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_ControlKindClass_supports_TypeRef_ControlKindClass"
+                           TypeName="Model.FK_ControlKindClass_supports_TypeRef_ControlKindClass"
+                           StoreEntitySet="ControlKindClass_supports_TypeRef_RelationEntry" >
+      <EndProperty Name="ControlKindClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ControlKindClass"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ControlKindClass" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_ControlKindClass_supports_TypeRef_SupportedInterfaces"
+                           TypeName="Model.FK_ControlKindClass_supports_TypeRef_SupportedInterfaces"
+                           StoreEntitySet="ControlKindClass_supports_TypeRef_RelationEntry" >
+      <EndProperty Name="SupportedInterfaces">
+        <ScalarProperty Name="ID" ColumnName="fk_SupportedInterfaces"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_SupportedInterfaces" IsNull="false"/>
+    </AssociationSetMapping>
+
     <!--
     Relation: FK_ObjectClass_implements_Interface
     A: ZeroOrMore ObjectClass as ObjectClass
