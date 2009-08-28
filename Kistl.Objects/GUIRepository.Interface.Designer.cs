@@ -126,6 +126,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all LabelKind</summary>
+		/// A simple read-only label
+		public IQueryable<LabelKind> LabelKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<LabelKind>();
+			}
+		}
+		
 		/// <summary>List of all Icon</summary>
 		/// 
 		public IQueryable<Icon> Icons

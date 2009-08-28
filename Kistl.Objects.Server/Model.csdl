@@ -979,6 +979,8 @@
   </EntityType>
   <EntityType Name="IsValidNamespaceConstraint" BaseType="Model.IsValidIdentifierConstraint" >
   </EntityType>
+  <EntityType Name="LabelKind" BaseType="Model.ControlKind" >
+  </EntityType>
   <EntityType Name="LauncherKind" BaseType="Model.ControlKind" >
   </EntityType>
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint" >

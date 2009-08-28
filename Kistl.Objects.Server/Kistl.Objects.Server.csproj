@@ -98,6 +98,7 @@
     <Compile Include="IsValidIdentifierConstraint.Server.Designer.cs" />
     <Compile Include="IsValidNamespaceConstraint.Server.Designer.cs" />
     <Compile Include="Kunde.Server.Designer.cs" />
+    <Compile Include="LabelKind.Server.Designer.cs" />
     <Compile Include="LauncherKind.Server.Designer.cs" />
     <Compile Include="Method.Server.Designer.cs" />
     <Compile Include="MethodInvocation.Server.Designer.cs" />

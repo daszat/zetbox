@@ -198,6 +198,13 @@
       <End Role="B_IsValidNamespaceConstraint" EntitySet="IsValidNamespaceConstraint" />
     </AssociationSet>
     
+    <EntitySet Name="LabelKind" EntityType="Model.Store.LabelKind" Table="LabelKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_LabelKind_ControlKind_ID" Association="Model.Store.FK_LabelKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_LabelKind" EntitySet="LabelKind" />
+    </AssociationSet>
+    
     <EntitySet Name="LauncherKind" EntityType="Model.Store.LauncherKind" Table="LauncherKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_LauncherKind_ControlKind_ID" Association="Model.Store.FK_LauncherKind_ControlKind_ID" >
@@ -985,6 +992,13 @@
     <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
     <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="LabelKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="LauncherKind">
@@ -2736,6 +2750,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_IsValidNamespaceConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LabelKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_LabelKind" Type="Model.Store.LabelKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_LabelKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

@@ -170,6 +170,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.LabelKind)">
+	    <MappingFragment StoreEntitySet="LabelKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.LauncherKind)">
 	    <MappingFragment StoreEntitySet="LauncherKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
