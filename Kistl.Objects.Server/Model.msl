@@ -150,6 +150,61 @@
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CheckboxKind)">
+	    <MappingFragment StoreEntitySet="CheckboxKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DataObjectKind)">
+	    <MappingFragment StoreEntitySet="DataObjectKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DataObjectSelectionTaskKind)">
+	    <MappingFragment StoreEntitySet="DataObjectSelectionTaskKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationSelectorKind)">
+	    <MappingFragment StoreEntitySet="EnumerationSelectorKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.LauncherKind)">
+	    <MappingFragment StoreEntitySet="LauncherKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectListKind)">
+	    <MappingFragment StoreEntitySet="ObjectListKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectRefKind)">
+	    <MappingFragment StoreEntitySet="ObjectRefKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PropertyGroupKind)">
+	    <MappingFragment StoreEntitySet="PropertyGroupKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringSelectorKind)">
+	    <MappingFragment StoreEntitySet="StringSelectorKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TextboxKind)">
+	    <MappingFragment StoreEntitySet="TextboxKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.WorkspaceKind)">
+	    <MappingFragment StoreEntitySet="WorkspaceKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CurrentSchema">
       <EntityTypeMapping TypeName="IsTypeOf(Model.CurrentSchema)">

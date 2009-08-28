@@ -58,6 +58,13 @@
       <End Role="B_BoolProperty" EntitySet="BoolProperty" />
     </AssociationSet>
     
+    <EntitySet Name="CheckboxKind" EntityType="Model.Store.CheckboxKind" Table="CheckboxKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_CheckboxKind_ControlKind_ID" Association="Model.Store.FK_CheckboxKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_CheckboxKind" EntitySet="CheckboxKind" />
+    </AssociationSet>
+    
     <EntitySet Name="CLRObjectParameter" EntityType="Model.Store.CLRObjectParameter" Table="CLRObjectParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_CLRObjectParameter_BaseParameter_ID" Association="Model.Store.FK_CLRObjectParameter_BaseParameter_ID" >
@@ -77,6 +84,20 @@
     <AssociationSet Name="FK_ControlKindClass_ObjectClass_ID" Association="Model.Store.FK_ControlKindClass_ObjectClass_ID" >
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_ControlKindClass" EntitySet="ControlKindClass" />
+    </AssociationSet>
+    
+    <EntitySet Name="DataObjectKind" EntityType="Model.Store.DataObjectKind" Table="DataObjectKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_DataObjectKind_ControlKind_ID" Association="Model.Store.FK_DataObjectKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_DataObjectKind" EntitySet="DataObjectKind" />
+    </AssociationSet>
+    
+    <EntitySet Name="DataObjectSelectionTaskKind" EntityType="Model.Store.DataObjectSelectionTaskKind" Table="DataObjectSelectionTaskKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_DataObjectSelectionTaskKind_ControlKind_ID" Association="Model.Store.FK_DataObjectSelectionTaskKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_DataObjectSelectionTaskKind" EntitySet="DataObjectSelectionTaskKind" />
     </AssociationSet>
     
     <EntitySet Name="DateTimeParameter" EntityType="Model.Store.DateTimeParameter" Table="DateTimeParameters"/>
@@ -119,6 +140,13 @@
     <AssociationSet Name="FK_EnumerationProperty_ValueTypeProperty_ID" Association="Model.Store.FK_EnumerationProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_EnumerationProperty" EntitySet="EnumerationProperty" />
+    </AssociationSet>
+    
+    <EntitySet Name="EnumerationSelectorKind" EntityType="Model.Store.EnumerationSelectorKind" Table="EnumerationSelectorKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_EnumerationSelectorKind_ControlKind_ID" Association="Model.Store.FK_EnumerationSelectorKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_EnumerationSelectorKind" EntitySet="EnumerationSelectorKind" />
     </AssociationSet>
     
     <EntitySet Name="GuidProperty" EntityType="Model.Store.GuidProperty" Table="GuidProperties"/>
@@ -170,6 +198,13 @@
       <End Role="B_IsValidNamespaceConstraint" EntitySet="IsValidNamespaceConstraint" />
     </AssociationSet>
     
+    <EntitySet Name="LauncherKind" EntityType="Model.Store.LauncherKind" Table="LauncherKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_LauncherKind_ControlKind_ID" Association="Model.Store.FK_LauncherKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_LauncherKind" EntitySet="LauncherKind" />
+    </AssociationSet>
+    
     <EntitySet Name="MethodInvocationConstraint" EntityType="Model.Store.MethodInvocationConstraint" Table="MethodInvocationConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_MethodInvocationConstraint_Constraint_ID" Association="Model.Store.FK_MethodInvocationConstraint_Constraint_ID" >
@@ -198,6 +233,13 @@
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
     
+    <EntitySet Name="ObjectListKind" EntityType="Model.Store.ObjectListKind" Table="ObjectListKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_ObjectListKind_ControlKind_ID" Association="Model.Store.FK_ObjectListKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_ObjectListKind" EntitySet="ObjectListKind" />
+    </AssociationSet>
+    
     <EntitySet Name="ObjectParameter" EntityType="Model.Store.ObjectParameter" Table="ObjectParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_ObjectParameter_BaseParameter_ID" Association="Model.Store.FK_ObjectParameter_BaseParameter_ID" >
@@ -210,6 +252,20 @@
     <AssociationSet Name="FK_ObjectReferenceProperty_Property_ID" Association="Model.Store.FK_ObjectReferenceProperty_Property_ID" >
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
+    </AssociationSet>
+    
+    <EntitySet Name="ObjectRefKind" EntityType="Model.Store.ObjectRefKind" Table="ObjectRefKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_ObjectRefKind_ControlKind_ID" Association="Model.Store.FK_ObjectRefKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_ObjectRefKind" EntitySet="ObjectRefKind" />
+    </AssociationSet>
+    
+    <EntitySet Name="PropertyGroupKind" EntityType="Model.Store.PropertyGroupKind" Table="PropertyGroupKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_PropertyGroupKind_ControlKind_ID" Association="Model.Store.FK_PropertyGroupKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_PropertyGroupKind" EntitySet="PropertyGroupKind" />
     </AssociationSet>
     
     <EntitySet Name="StringParameter" EntityType="Model.Store.StringParameter" Table="StringParameters"/>
@@ -233,6 +289,13 @@
       <End Role="B_StringRangeConstraint" EntitySet="StringRangeConstraint" />
     </AssociationSet>
     
+    <EntitySet Name="StringSelectorKind" EntityType="Model.Store.StringSelectorKind" Table="StringSelectorKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_StringSelectorKind_ControlKind_ID" Association="Model.Store.FK_StringSelectorKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_StringSelectorKind" EntitySet="StringSelectorKind" />
+    </AssociationSet>
+    
     <EntitySet Name="Struct" EntityType="Model.Store.Struct" Table="Structs"/>
     <!-- inherits from DataType -->
     <AssociationSet Name="FK_Struct_DataType_ID" Association="Model.Store.FK_Struct_DataType_ID" >
@@ -247,11 +310,25 @@
       <End Role="B_StructProperty" EntitySet="StructProperty" />
     </AssociationSet>
     
+    <EntitySet Name="TextboxKind" EntityType="Model.Store.TextboxKind" Table="TextboxKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_TextboxKind_ControlKind_ID" Association="Model.Store.FK_TextboxKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_TextboxKind" EntitySet="TextboxKind" />
+    </AssociationSet>
+    
     <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties"/>
     <!-- inherits from Property -->
     <AssociationSet Name="FK_ValueTypeProperty_Property_ID" Association="Model.Store.FK_ValueTypeProperty_Property_ID" >
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_ValueTypeProperty" EntitySet="ValueTypeProperty" />
+    </AssociationSet>
+    
+    <EntitySet Name="WorkspaceKind" EntityType="Model.Store.WorkspaceKind" Table="WorkspaceKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_WorkspaceKind_ControlKind_ID" Association="Model.Store.FK_WorkspaceKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_WorkspaceKind" EntitySet="WorkspaceKind" />
     </AssociationSet>
     
 
@@ -671,6 +748,13 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="CheckboxKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="CLRObjectParameter">
     <Key>
       <PropertyRef Name="ID" />
@@ -728,6 +812,20 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Schema" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="Version" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="DataObjectKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="DataObjectSelectionTaskKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="DataType">
@@ -809,6 +907,13 @@
     <Property Name="fk_Enumeration" Type="int" />
   </EntityType>
 	
+  <EntityType Name="EnumerationSelectorKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="GuidProperty">
     <Key>
       <PropertyRef Name="ID" />
@@ -880,6 +985,13 @@
     <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
     <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="LauncherKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Method">
@@ -970,6 +1082,13 @@
     <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="ObjectListKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="ObjectParameter">
     <Key>
       <PropertyRef Name="ID" />
@@ -985,6 +1104,13 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="EagerLoading" Type="bit" Nullable="false" />
     <Property Name="fk_ReferenceObjectClass" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="ObjectRefKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="PresenceRecord">
@@ -1036,6 +1162,13 @@
     <Property Name="fk_ObjectClass" Type="int" />
     <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="fk_ValueModelDescriptor" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="PropertyGroupKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="PropertyInvocation">
@@ -1102,6 +1235,13 @@
     <Property Name="MinLength" Type="int" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="StringSelectorKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="Struct">
     <Key>
       <PropertyRef Name="ID" />
@@ -1162,6 +1302,13 @@
     <Property Name="fk_ObjectProp" Type="int" />
     <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="TestEnumProp" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="TextboxKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="TypeRef">
@@ -1229,6 +1376,13 @@
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="SpentHours" Type="float" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="WorkspaceKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
@@ -2346,6 +2500,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CheckboxKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_CheckboxKind" Type="Model.Store.CheckboxKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_CheckboxKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CLRObjectParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_CLRObjectParameter" Type="Model.Store.CLRObjectParameter" Multiplicity="0..1" />
@@ -2378,6 +2544,30 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_ControlKindClass">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataObjectKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_DataObjectKind" Type="Model.Store.DataObjectKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_DataObjectKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataObjectSelectionTaskKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_DataObjectSelectionTaskKind" Type="Model.Store.DataObjectSelectionTaskKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_DataObjectSelectionTaskKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -2450,6 +2640,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_EnumerationProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EnumerationSelectorKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_EnumerationSelectorKind" Type="Model.Store.EnumerationSelectorKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_EnumerationSelectorKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -2538,6 +2740,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_LauncherKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_LauncherKind" Type="Model.Store.LauncherKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_LauncherKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_MethodInvocationConstraint_Constraint_ID">
     <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
     <End Role="B_MethodInvocationConstraint" Type="Model.Store.MethodInvocationConstraint" Multiplicity="0..1" />
@@ -2586,6 +2800,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ObjectListKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_ObjectListKind" Type="Model.Store.ObjectListKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ObjectListKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ObjectParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_ObjectParameter" Type="Model.Store.ObjectParameter" Multiplicity="0..1" />
@@ -2606,6 +2832,30 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_ObjectReferenceProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjectRefKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_ObjectRefKind" Type="Model.Store.ObjectRefKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ObjectRefKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PropertyGroupKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_PropertyGroupKind" Type="Model.Store.PropertyGroupKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_PropertyGroupKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -2646,6 +2896,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StringSelectorKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_StringSelectorKind" Type="Model.Store.StringSelectorKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_StringSelectorKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Struct_DataType_ID">
     <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
     <End Role="B_Struct" Type="Model.Store.Struct" Multiplicity="0..1" />
@@ -2670,6 +2932,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TextboxKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_TextboxKind" Type="Model.Store.TextboxKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_TextboxKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ValueTypeProperty_Property_ID">
     <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
     <End Role="B_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="0..1" />
@@ -2678,6 +2952,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_ValueTypeProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkspaceKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_WorkspaceKind" Type="Model.Store.WorkspaceKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_WorkspaceKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

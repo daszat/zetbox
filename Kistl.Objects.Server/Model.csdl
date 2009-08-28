@@ -920,6 +920,8 @@
   </EntityType>
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" >
   </EntityType>
+  <EntityType Name="CheckboxKind" BaseType="Model.ControlKind" >
+  </EntityType>
   <EntityType Name="CLRObjectParameter" BaseType="Model.BaseParameter" >
     <NavigationProperty Name="Assembly__Implementation__"
                         Relationship="Model.FK_CLRObjectParameter_has_Assembly"
@@ -934,6 +936,10 @@
                         Relationship="Model.FK_ControlKindClass_supports_TypeRef_ControlKindClass"
                         FromRole="ControlKindClass"
                         ToRole="CollectionEntry" />
+  </EntityType>
+  <EntityType Name="DataObjectKind" BaseType="Model.ControlKind" >
+  </EntityType>
+  <EntityType Name="DataObjectSelectionTaskKind" BaseType="Model.ControlKind" >
   </EntityType>
   <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter" >
   </EntityType>
@@ -955,6 +961,8 @@
                         FromRole="EnumerationProperty"
                         ToRole="Enumeration" />
   </EntityType>
+  <EntityType Name="EnumerationSelectorKind" BaseType="Model.ControlKind" >
+  </EntityType>
   <EntityType Name="GuidProperty" BaseType="Model.ValueTypeProperty" >
   </EntityType>
   <EntityType Name="IntegerRangeConstraint" BaseType="Model.Constraint" >
@@ -970,6 +978,8 @@
   <EntityType Name="IsValidIdentifierConstraint" BaseType="Model.Constraint" >
   </EntityType>
   <EntityType Name="IsValidNamespaceConstraint" BaseType="Model.IsValidIdentifierConstraint" >
+  </EntityType>
+  <EntityType Name="LauncherKind" BaseType="Model.ControlKind" >
   </EntityType>
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint" >
   </EntityType>
@@ -998,6 +1008,8 @@
                         ToRole="SubClasses" />
     <Property Name="TableName" Type="String" Nullable="false" MaxLength="100" />
   </EntityType>
+  <EntityType Name="ObjectListKind" BaseType="Model.ControlKind" >
+  </EntityType>
   <EntityType Name="ObjectParameter" BaseType="Model.BaseParameter" >
     <NavigationProperty Name="DataType__Implementation__"
                         Relationship="Model.FK_ObjectParameter_has_DataType"
@@ -1015,6 +1027,10 @@
                         FromRole="Navigator"
                         ToRole="RelationEnd" />
   </EntityType>
+  <EntityType Name="ObjectRefKind" BaseType="Model.ControlKind" >
+  </EntityType>
+  <EntityType Name="PropertyGroupKind" BaseType="Model.ControlKind" >
+  </EntityType>
   <EntityType Name="StringParameter" BaseType="Model.BaseParameter" >
   </EntityType>
   <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty" >
@@ -1024,6 +1040,8 @@
     <Property Name="MaxLength" Type="Int32" Nullable="false" />
     <Property Name="MinLength" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="StringSelectorKind" BaseType="Model.ControlKind" >
+  </EntityType>
   <EntityType Name="Struct" BaseType="Model.DataType" >
   </EntityType>
   <EntityType Name="StructProperty" BaseType="Model.Property" >
@@ -1032,7 +1050,11 @@
                         FromRole="StructProperty"
                         ToRole="StructDefinition" />
   </EntityType>
+  <EntityType Name="TextboxKind" BaseType="Model.ControlKind" >
+  </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" >
+  </EntityType>
+  <EntityType Name="WorkspaceKind" BaseType="Model.ControlKind" >
   </EntityType>
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->

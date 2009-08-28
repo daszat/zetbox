@@ -16,6 +16,16 @@ namespace Kistl.App.GUI
 		
 		public IKistlContext Context { get; private set; }
 		
+		/// <summary>List of all WorkspaceKind</summary>
+		/// The basic workspace where multiple objects can be edited
+		public IQueryable<WorkspaceKind> WorkspaceKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<WorkspaceKind>();
+			}
+		}
+		
 		/// <summary>List of all Visual</summary>
 		/// 
 		public IQueryable<Visual> Visuals
@@ -36,6 +46,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all TextboxKind</summary>
+		/// A textbox-like control
+		public IQueryable<TextboxKind> TextboxKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<TextboxKind>();
+			}
+		}
+		
 		/// <summary>List of all Template</summary>
 		/// 
 		public IQueryable<Template> Templates
@@ -43,6 +63,26 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<Template>();
+			}
+		}
+		
+		/// <summary>List of all StringSelectorKind</summary>
+		/// Select a string fron a set of values
+		public IQueryable<StringSelectorKind> StringSelectorKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<StringSelectorKind>();
+			}
+		}
+		
+		/// <summary>List of all PropertyGroupKind</summary>
+		/// Displays a group of properties from a data object
+		public IQueryable<PropertyGroupKind> PropertyGroupKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<PropertyGroupKind>();
 			}
 		}
 		
@@ -56,6 +96,36 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all ObjectRefKind</summary>
+		/// A control managing a reference to an object
+		public IQueryable<ObjectRefKind> ObjectRefKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<ObjectRefKind>();
+			}
+		}
+		
+		/// <summary>List of all ObjectListKind</summary>
+		/// A control managing a list of objects
+		public IQueryable<ObjectListKind> ObjectListKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<ObjectListKind>();
+			}
+		}
+		
+		/// <summary>List of all LauncherKind</summary>
+		/// The first openend window where applications can be selected and the object tree browsed
+		public IQueryable<LauncherKind> LauncherKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<LauncherKind>();
+			}
+		}
+		
 		/// <summary>List of all Icon</summary>
 		/// 
 		public IQueryable<Icon> Icons
@@ -63,6 +133,36 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<Icon>();
+			}
+		}
+		
+		/// <summary>List of all EnumerationSelectorKind</summary>
+		/// Select a value fron an Enumeration
+		public IQueryable<EnumerationSelectorKind> EnumerationSelectorKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<EnumerationSelectorKind>();
+			}
+		}
+		
+		/// <summary>List of all DataObjectSelectionTaskKind</summary>
+		/// Choose a data object from a set of values
+		public IQueryable<DataObjectSelectionTaskKind> DataObjectSelectionTaskKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<DataObjectSelectionTaskKind>();
+			}
+		}
+		
+		/// <summary>List of all DataObjectKind</summary>
+		/// Displays a complete DataObject with all its properties
+		public IQueryable<DataObjectKind> DataObjectKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<DataObjectKind>();
 			}
 		}
 		
@@ -83,6 +183,16 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<ControlKind>();
+			}
+		}
+		
+		/// <summary>List of all CheckboxKind</summary>
+		/// Select a boolean value with a checkbox
+		public IQueryable<CheckboxKind> CheckboxKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<CheckboxKind>();
 			}
 		}
 		
