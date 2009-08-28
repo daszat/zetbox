@@ -10,7 +10,7 @@ namespace Kistl.Client.Presentables
 {
 
     public abstract class MethodResultModel<TValue>
-        : PresentableModel
+        : PresentableModel, IReadOnlyValueModel<string>
     {
         protected MethodResultModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables
         {
             get { return Label; }
         }
-        
+
         #endregion
 
         #region Utilities and UI callbacks
@@ -85,7 +85,20 @@ namespace Kistl.Client.Presentables
         protected IDataObject Object { get; private set; }
         protected Method Method { get; private set; }
 
+        #region IReadOnlyValueModel<string> Members
 
+        public abstract bool HasValue { get; }
+        public abstract bool IsNull { get; }
+
+        string IReadOnlyValueModel<string>.Value
+        {
+            get
+            {
+                return HasValue ? Value.ToString() : "(null)";
+            }
+        }
+
+        #endregion
     }
 
     public class NullableResultModel<TValue>
@@ -102,12 +115,12 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// Whether or not the method returned a value. <seealso cref="IsNull"/>
         /// </summary>
-        public bool HasValue { get { return _valueCache.HasValue; } }
+        public override bool HasValue { get { return _valueCache.HasValue; } }
 
         /// <summary>
         /// Whether or not the method returned null. <seealso cref="HasValue"/>
         /// </summary>
-        public bool IsNull { get { return !_valueCache.HasValue; } }
+        public override bool IsNull { get { return !_valueCache.HasValue; } }
 
         private Nullable<TValue> _valueCache;
 
@@ -116,7 +129,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public override Nullable<TValue> Value
         {
-            get {return _valueCache; }
+            get { return _valueCache; }
             protected set
             {
                 if (!_valueCache.HasValue && !value.HasValue)
@@ -142,12 +155,12 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// Whether or not the method returned a value. <seealso cref="IsNull"/>
         /// </summary>
-        public bool HasValue { get { return Value != null; } }
+        public override bool HasValue { get { return Value != null; } }
 
         /// <summary>
         /// Whether or not the method returned null. <seealso cref="HasValue"/>
         /// </summary>
-        public bool IsNull { get { return Value == null; } }
+        public override bool IsNull { get { return Value == null; } }
 
         private TValue _valueCache;
 
