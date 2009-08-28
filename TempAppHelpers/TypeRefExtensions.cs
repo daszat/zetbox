@@ -102,7 +102,8 @@ namespace Kistl.App.Extensions
             }
             else
             {
-                return source.SingleOrDefault(tRef
+                // ToList: Workaround Case 1212
+                return source.ToList().SingleOrDefault(tRef
                     => tRef.Assembly.AssemblyName == t.Assembly.FullName
                     && tRef.FullName == t.FullName
                     && tRef.GenericArguments.Count == 0);
@@ -152,7 +153,8 @@ namespace Kistl.App.Extensions
         /// </summary>
         public static Assembly ToRefOrDefault(this System.Reflection.Assembly ass, IKistlContext ctx)
         {
-            return ctx.GetQuery<Assembly>().SingleOrDefault(a => a.AssemblyName == ass.FullName);
+            // ToList: Workaround Case 1212
+            return ctx.GetQuery<Assembly>().ToList().SingleOrDefault(a => a.AssemblyName == ass.FullName);
         }
 
         /// <summary>
