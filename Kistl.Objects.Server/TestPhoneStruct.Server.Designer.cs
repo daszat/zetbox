@@ -39,41 +39,42 @@ namespace Kistl.App.Test
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string AreaCode
         {
             get
             {
-				var __value = _AreaCode;
-				if(OnAreaCode_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<string>(__value);
-					OnAreaCode_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _AreaCode;
+                if (OnAreaCode_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnAreaCode_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_AreaCode != value)
                 {
-					var __oldValue = _AreaCode;
-					var __newValue = value;
+                    var __oldValue = _AreaCode;
+                    var __newValue = value;
                     if(OnAreaCode_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-						OnAreaCode_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnAreaCode_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("AreaCode", __oldValue, __newValue);
                     _AreaCode = __newValue;
                     NotifyPropertyChanged("AreaCode", __oldValue, __newValue);
-
                     if(OnAreaCode_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-						OnAreaCode_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnAreaCode_PostSetter(this, __e);
                     }
                 }
             }
@@ -89,41 +90,42 @@ namespace Kistl.App.Test
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string Number
         {
             get
             {
-				var __value = _Number;
-				if(OnNumber_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<string>(__value);
-					OnNumber_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Number;
+                if (OnNumber_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnNumber_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Number != value)
                 {
-					var __oldValue = _Number;
-					var __newValue = value;
+                    var __oldValue = _Number;
+                    var __newValue = value;
                     if(OnNumber_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-						OnNumber_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnNumber_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Number", __oldValue, __newValue);
                     _Number = __newValue;
                     NotifyPropertyChanged("Number", __oldValue, __newValue);
-
                     if(OnNumber_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-						OnNumber_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnNumber_PostSetter(this, __e);
                     }
                 }
             }

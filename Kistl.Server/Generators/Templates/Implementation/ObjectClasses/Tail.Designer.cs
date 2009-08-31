@@ -64,40 +64,6 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        [EventBasedMethod(\"OnCreated_",  cls.ClassName , "\")]\r\n");
 this.WriteObjects("        public override void NotifyCreated()\r\n");
 this.WriteObjects("        {\r\n");
-#line 51 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
-if(cls.Properties.Count(p => p.DefaultValue != null) > 0)
-			{
-
-#line 54 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
-this.WriteObjects("            try\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("				Kistl.App.Base.Property p = null;\r\n");
-#line 58 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
-foreach (var prop in cls.Properties.Where(p => p.DefaultValue != null))
-				{
-
-#line 61 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
-this.WriteObjects("				p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid(\"",  prop.ExportGuid , "\"));\r\n");
-this.WriteObjects("				if(p != null && p.DefaultValue != null) { this.",  prop.PropertyName , " = (",  prop.ReferencedTypeAsCSharp() , ")p.DefaultValue.GetDefaultValue(); } else { System.Diagnostics.Trace.TraceWarning(\"",  string.Format("Unable to get default value for property '{0}.{1}'", prop.ObjectClass.ClassName, prop.PropertyName) , "\"); }\r\n");
-#line 64 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
-}
-
-#line 66 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
-this.WriteObjects("            }\r\n");
-this.WriteObjects("            catch (TypeLoadException)\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                // TODO: Find a better way to ignore bootstrap errors.\r\n");
-this.WriteObjects("                // During bootstrapping no MethodInvocation is registred\r\n");
-this.WriteObjects("            }\r\n");
-this.WriteObjects("            catch (NotImplementedException)\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                // TODO: Find a better way to ignore bootstrap errors.\r\n");
-this.WriteObjects("                // During bootstrapping no MethodInvocation is registred\r\n");
-this.WriteObjects("            }\r\n");
-#line 78 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
-}
-
-#line 80 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
 this.WriteObjects("            base.NotifyCreated();\r\n");
 this.WriteObjects("            if (OnCreated_",  cls.ClassName , " != null) OnCreated_",  cls.ClassName , "(this);\r\n");
 this.WriteObjects("        }\r\n");
@@ -111,7 +77,7 @@ this.WriteObjects("            if (OnDeleting_",  cls.ClassName , " != null) OnD
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public event ObjectEventHandler<",  cls.ClassName , "> OnDeleting_",  cls.ClassName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 94 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+#line 65 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
 Implementation.ObjectClasses.GetPropertyErrorTemplate.Call(Host, ctx, cls);
 
 

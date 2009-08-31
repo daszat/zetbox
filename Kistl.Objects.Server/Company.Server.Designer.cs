@@ -32,24 +32,26 @@ namespace Kistl.App.Test
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -62,41 +64,42 @@ namespace Kistl.App.Test
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string Name
         {
             get
             {
-				var __value = _Name;
-				if(OnName_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<string>(__value);
-					OnName_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Name;
+                if (OnName_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnName_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Name != value)
                 {
-					var __oldValue = _Name;
-					var __newValue = value;
+                    var __oldValue = _Name;
+                    var __newValue = value;
                     if(OnName_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-						OnName_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-
                     if(OnName_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-						OnName_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PostSetter(this, __e);
                     }
                 }
             }

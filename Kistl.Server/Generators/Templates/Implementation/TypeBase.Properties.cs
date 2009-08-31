@@ -152,10 +152,8 @@ namespace Kistl.Server.Generators.Templates.Implementation
 
         protected virtual void ApplyNotifyingValueProperty(Property prop, SerializationMembersList serList)
         {
-            Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
-                serList,
-                prop.ReferencedTypeAsCSharp(),
-                prop.PropertyName, true, prop.Module.Namespace);
+            Templates.Implementation.ObjectClasses.NotifyingDataProperty.Call(Host, ctx,
+                serList, prop);
         }
 
         protected virtual void ApplyListProperty(Property prop, SerializationMembersList serList)

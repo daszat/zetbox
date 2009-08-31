@@ -129,41 +129,42 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string FullTypeName
         {
             get
             {
-				var __value = _FullTypeName;
-				if(OnFullTypeName_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<string>(__value);
-					OnFullTypeName_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _FullTypeName;
+                if (OnFullTypeName_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnFullTypeName_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_FullTypeName != value)
                 {
-					var __oldValue = _FullTypeName;
-					var __newValue = value;
+                    var __oldValue = _FullTypeName;
+                    var __newValue = value;
                     if(OnFullTypeName_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-						OnFullTypeName_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnFullTypeName_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("FullTypeName", __oldValue, __newValue);
                     _FullTypeName = __newValue;
                     NotifyPropertyChanged("FullTypeName", __oldValue, __newValue);
-
                     if(OnFullTypeName_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-						OnFullTypeName_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnFullTypeName_PostSetter(this, __e);
                     }
                 }
             }

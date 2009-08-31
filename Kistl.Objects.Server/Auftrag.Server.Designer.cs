@@ -32,24 +32,26 @@ namespace Kistl.App.Projekte
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -62,41 +64,42 @@ namespace Kistl.App.Projekte
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string Auftragsname
         {
             get
             {
-				var __value = _Auftragsname;
-				if(OnAuftragsname_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<string>(__value);
-					OnAuftragsname_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Auftragsname;
+                if (OnAuftragsname_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnAuftragsname_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Auftragsname != value)
                 {
-					var __oldValue = _Auftragsname;
-					var __newValue = value;
+                    var __oldValue = _Auftragsname;
+                    var __newValue = value;
                     if(OnAuftragsname_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-						OnAuftragsname_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnAuftragsname_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Auftragsname", __oldValue, __newValue);
                     _Auftragsname = __newValue;
                     NotifyPropertyChanged("Auftragsname", __oldValue, __newValue);
-
                     if(OnAuftragsname_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-						OnAuftragsname_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnAuftragsname_PostSetter(this, __e);
                     }
                 }
             }
@@ -112,41 +115,42 @@ namespace Kistl.App.Projekte
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual double? Auftragswert
         {
             get
             {
-				var __value = _Auftragswert;
-				if(OnAuftragswert_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<double?>(__value);
-					OnAuftragswert_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Auftragswert;
+                if (OnAuftragswert_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<double?>(__result);
+                    OnAuftragswert_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Auftragswert != value)
                 {
-					var __oldValue = _Auftragswert;
-					var __newValue = value;
+                    var __oldValue = _Auftragswert;
+                    var __newValue = value;
                     if(OnAuftragswert_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
-						OnAuftragswert_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
+                        OnAuftragswert_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Auftragswert", __oldValue, __newValue);
                     _Auftragswert = __newValue;
                     NotifyPropertyChanged("Auftragswert", __oldValue, __newValue);
-
                     if(OnAuftragswert_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
-						OnAuftragswert_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
+                        OnAuftragswert_PostSetter(this, __e);
                     }
                 }
             }

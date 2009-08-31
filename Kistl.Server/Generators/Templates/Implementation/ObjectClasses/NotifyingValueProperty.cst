@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Implementation.ObjectClasses.NotifyingValueProperty"
-	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty" 
-	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+    Name="Implementation.ObjectClasses.NotifyingValueProperty"
+    ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty" 
+    Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
@@ -12,85 +12,49 @@
 <%@ Parameter Name="serializationList" Type="SerializationMembersList" %>
 <%@ Parameter Name="type" Type="string" %>
 <%@ Parameter Name="name" Type="String" %>
-<%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%@ Parameter Name="modulenamespace" Type="String" %>
 <%
 
-	ApplyRequisitesTemplate();
+    ApplyRequisitesTemplate();
 
-	ApplyAttributesTemplate();
+    ApplyAttributesTemplate();
 
-	string backingName = BackingMemberFromName(name);
-	string eventName = "On" + name;
+    string backingName = BackingMemberFromName(name);
 
 %>
-   		// <%= this.GetType() %>
+           // <%= this.GetType() %>
         <%= GetModifiers() %> <%= type %> <%= name %>
         {
             get
             {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = <%= backingName %>;
 <%
-				if(callGetterSetterEvents)
-				{
+    ApplyOnGetTemplate();
 %>
-				var __value = <%= backingName %>;
-				if(<%= eventName %>_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<<%= type %>>(__value);
-					<%= eventName %>_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
-<% 
-				}
-				else
-				{
-%>
-				return <%= backingName %>;
-<%
-				}
-%>
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (<%= backingName %> != value)
                 {
-					var __oldValue = <%= backingName %>;
-					var __newValue = value;
+                    var __oldValue = <%= backingName %>;
+                    var __newValue = value;
 <%
-					if(callGetterSetterEvents)
-					{
-%>
-                    if(<%= eventName %>_PreSetter != null)
-                    {
-						var e = new PropertyPreSetterEventArgs<<%= type %>>(__oldValue, __newValue);
-						<%= eventName %>_PreSetter(this, e);
-						__newValue = e.Result;
-                    }
-<%
-					}
+    ApplyPreSetTemplate();
 %>
                     NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
                     <%= backingName %> = __newValue;
                     NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
-
 <%
-					if(callGetterSetterEvents)
-					{
-%>
-                    if(<%= eventName %>_PostSetter != null)
-                    {
-						var e = new PropertyPostSetterEventArgs<<%= type %>>(__oldValue, __newValue);
-						<%= eventName %>_PostSetter(this, e);
-                    }
-<%
-					}
+    ApplyPostSetTemplate();
 %>
                 }
             }
         }
         private <%= type %> <%= backingName %>;
 <%
-	AddSerialization(serializationList, name);
+    AddSerialization(serializationList, name);
 %>

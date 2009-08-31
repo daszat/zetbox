@@ -20,7 +20,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected virtual void ApplyExportGuidPropertyTemplate()
         {
-            Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx, null, "Guid", "ExportGuid", "");
+            // TODO: apply proper modulenamespace
+            Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx, this.MembersToSerialize, "Guid", "ExportGuid", "");
         }
 
         protected abstract void ApplyAPropertyTemplate();
@@ -36,7 +37,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         protected virtual void ApplyBIndexPropertyTemplate()
         {
             //    Implementation.ObjectClasses.NotifyingValueTypeProperty.Call(Host, ctx,
-        //        "int?", "BIndex");
+            //        "int?", "BIndex");
         }
 
 

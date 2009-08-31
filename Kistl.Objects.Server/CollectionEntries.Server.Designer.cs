@@ -22,24 +22,26 @@ namespace Kistl.App.GUI
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -47,24 +49,26 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
             {
-				return _ExportGuid;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
-					var __oldValue = _ExportGuid;
-					var __newValue = value;
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-
                 }
             }
         }
@@ -207,6 +211,7 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -215,6 +220,7 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
         }
@@ -223,6 +229,7 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
         }
@@ -231,6 +238,7 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
@@ -245,6 +253,7 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
@@ -302,24 +311,26 @@ namespace Kistl.App.Base
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -327,24 +338,26 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
             {
-				return _ExportGuid;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
-					var __oldValue = _ExportGuid;
-					var __newValue = value;
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-
                 }
             }
         }
@@ -487,6 +500,7 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -495,6 +509,7 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
         }
@@ -503,6 +518,7 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
         }
@@ -511,6 +527,7 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
@@ -525,6 +542,7 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
@@ -582,24 +600,26 @@ namespace Kistl.App.GUI
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -607,24 +627,26 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
             {
-				return _ExportGuid;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
-					var __oldValue = _ExportGuid;
-					var __newValue = value;
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-
                 }
             }
         }
@@ -767,6 +789,7 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -775,6 +798,7 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
         }
@@ -783,6 +807,7 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.GUI");
         }
@@ -791,6 +816,7 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
         }
@@ -805,6 +831,7 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
         }
@@ -862,24 +889,26 @@ namespace Kistl.App.Projekte
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -953,24 +982,26 @@ namespace Kistl.App.Projekte
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? A_pos
         {
             get
             {
-				return _A_pos;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _A_pos;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_A_pos != value)
                 {
-					var __oldValue = _A_pos;
-					var __newValue = value;
+                    var __oldValue = _A_pos;
+                    var __newValue = value;
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
-
                 }
             }
         }
@@ -1041,24 +1072,26 @@ namespace Kistl.App.Projekte
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? B_pos
         {
             get
             {
-				return _B_pos;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _B_pos;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_B_pos != value)
                 {
-					var __oldValue = _B_pos;
-					var __newValue = value;
+                    var __oldValue = _B_pos;
+                    var __newValue = value;
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
-
                 }
             }
         }
@@ -1181,24 +1214,26 @@ namespace Kistl.App.GUI
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -1422,24 +1457,26 @@ namespace Kistl.App.Base
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -1447,24 +1484,26 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual Guid ExportGuid
         {
             get
             {
-				return _ExportGuid;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
-					var __oldValue = _ExportGuid;
-					var __newValue = value;
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-
                 }
             }
         }
@@ -1538,24 +1577,26 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? A_pos
         {
             get
             {
-				return _A_pos;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _A_pos;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_A_pos != value)
                 {
-					var __oldValue = _A_pos;
-					var __newValue = value;
+                    var __oldValue = _A_pos;
+                    var __newValue = value;
                     NotifyPropertyChanging("A_pos", __oldValue, __newValue);
                     _A_pos = __newValue;
                     NotifyPropertyChanged("A_pos", __oldValue, __newValue);
-
                 }
             }
         }
@@ -1626,24 +1667,26 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? B_pos
         {
             get
             {
-				return _B_pos;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _B_pos;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_B_pos != value)
                 {
-					var __oldValue = _B_pos;
-					var __newValue = value;
+                    var __oldValue = _B_pos;
+                    var __newValue = value;
                     NotifyPropertyChanging("B_pos", __oldValue, __newValue);
                     _B_pos = __newValue;
                     NotifyPropertyChanged("B_pos", __oldValue, __newValue);
-
                 }
             }
         }
@@ -1667,6 +1710,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
 			
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(A);
@@ -1685,6 +1729,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
 			
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._A_pos, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
@@ -1697,6 +1742,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
 			
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
@@ -1709,6 +1755,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
 			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
@@ -1735,6 +1782,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
@@ -1798,24 +1846,26 @@ namespace Kistl.App.GUI
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -2039,24 +2089,26 @@ namespace Kistl.App.GUI
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -2281,24 +2333,26 @@ namespace Kistl.App.TimeRecords
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -2521,24 +2575,26 @@ namespace Kistl.App.Projekte
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -2617,24 +2673,26 @@ public Kunde Parent { get { return A; } set { A = value; } }
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string B
         {
             get
             {
-				return _B;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _B;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_B != value)
                 {
-					var __oldValue = _B;
-					var __newValue = value;
+                    var __oldValue = _B;
+                    var __newValue = value;
                     NotifyPropertyChanging("B", __oldValue, __newValue);
                     _B = __newValue;
                     NotifyPropertyChanged("B", __oldValue, __newValue);
-
                 }
             }
         }

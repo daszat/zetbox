@@ -32,24 +32,26 @@ namespace Kistl.App.Base
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -59,44 +61,56 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+        private bool _isExportGuidSet = false;
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual Guid ExportGuid
         {
             get
             {
-				var __value = _ExportGuid;
-				if(OnExportGuid_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Guid>(__value);
-					OnExportGuid_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (!_isExportGuidSet) {
+                    var __p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e672de1a-e0f4-4613-9d1f-121ba543c2ec"));
+                    if (__p != null) {
+                        _isExportGuidSet = true;
+                        __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
+                    } else {
+                        System.Diagnostics.Trace.TraceWarning("Unable to get default value for property 'DefaultPropertyValue.ExportGuid'");
+                    }
+                }
+                if (OnExportGuid_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Guid>(__result);
+                    OnExportGuid_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
-					var __oldValue = _ExportGuid;
-					var __newValue = value;
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    _isExportGuidSet = true;
                     if(OnExportGuid_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
-						OnExportGuid_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-
                     if(OnExportGuid_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
-						OnExportGuid_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PostSetter(this, __e);
                     }
                 }
             }
@@ -269,22 +283,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnCreated_DefaultPropertyValue")]
         public override void NotifyCreated()
         {
-            try
-            {
-				Kistl.App.Base.Property p = null;
-				p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e672de1a-e0f4-4613-9d1f-121ba543c2ec"));
-				if(p != null && p.DefaultValue != null) { this.ExportGuid = (Guid)p.DefaultValue.GetDefaultValue(); } else { System.Diagnostics.Trace.TraceWarning("Unable to get default value for property 'DefaultPropertyValue.ExportGuid'"); }
-            }
-            catch (TypeLoadException)
-            {
-                // TODO: Find a better way to ignore bootstrap errors.
-                // During bootstrapping no MethodInvocation is registred
-            }
-            catch (NotImplementedException)
-            {
-                // TODO: Find a better way to ignore bootstrap errors.
-                // During bootstrapping no MethodInvocation is registred
-            }
             base.NotifyCreated();
             if (OnCreated_DefaultPropertyValue != null) OnCreated_DefaultPropertyValue(this);
         }

@@ -32,24 +32,26 @@ namespace Kistl.App.Base
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -62,41 +64,42 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string Description
         {
             get
             {
-				var __value = _Description;
-				if(OnDescription_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<string>(__value);
-					OnDescription_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Description;
+                if (OnDescription_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnDescription_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Description != value)
                 {
-					var __oldValue = _Description;
-					var __newValue = value;
+                    var __oldValue = _Description;
+                    var __newValue = value;
                     if(OnDescription_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-						OnDescription_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnDescription_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
-
                     if(OnDescription_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-						OnDescription_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnDescription_PostSetter(this, __e);
                     }
                 }
             }
@@ -109,44 +112,56 @@ namespace Kistl.App.Base
         /// Export Guid
         /// </summary>
         // value type property
+        private bool _isExportGuidSet = false;
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual Guid ExportGuid
         {
             get
             {
-				var __value = _ExportGuid;
-				if(OnExportGuid_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Guid>(__value);
-					OnExportGuid_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (!_isExportGuidSet) {
+                    var __p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("842eb3fc-3c8f-47d6-a59f-225c75ec2439"));
+                    if (__p != null) {
+                        _isExportGuidSet = true;
+                        __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
+                    } else {
+                        System.Diagnostics.Trace.TraceWarning("Unable to get default value for property 'Method.ExportGuid'");
+                    }
+                }
+                if (OnExportGuid_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Guid>(__result);
+                    OnExportGuid_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ExportGuid != value)
                 {
-					var __oldValue = _ExportGuid;
-					var __newValue = value;
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    _isExportGuidSet = true;
                     if(OnExportGuid_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
-						OnExportGuid_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-
                     if(OnExportGuid_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
-						OnExportGuid_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PostSetter(this, __e);
                     }
                 }
             }
@@ -162,41 +177,42 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual bool IsDisplayable
         {
             get
             {
-				var __value = _IsDisplayable;
-				if(OnIsDisplayable_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<bool>(__value);
-					OnIsDisplayable_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _IsDisplayable;
+                if (OnIsDisplayable_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnIsDisplayable_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_IsDisplayable != value)
                 {
-					var __oldValue = _IsDisplayable;
-					var __newValue = value;
+                    var __oldValue = _IsDisplayable;
+                    var __newValue = value;
                     if(OnIsDisplayable_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
-						OnIsDisplayable_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsDisplayable_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("IsDisplayable", __oldValue, __newValue);
                     _IsDisplayable = __newValue;
                     NotifyPropertyChanged("IsDisplayable", __oldValue, __newValue);
-
                     if(OnIsDisplayable_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
-						OnIsDisplayable_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsDisplayable_PostSetter(this, __e);
                     }
                 }
             }
@@ -260,41 +276,42 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string MethodName
         {
             get
             {
-				var __value = _MethodName;
-				if(OnMethodName_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<string>(__value);
-					OnMethodName_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _MethodName;
+                if (OnMethodName_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnMethodName_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_MethodName != value)
                 {
-					var __oldValue = _MethodName;
-					var __newValue = value;
+                    var __oldValue = _MethodName;
+                    var __newValue = value;
                     if(OnMethodName_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-						OnMethodName_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnMethodName_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("MethodName", __oldValue, __newValue);
                     _MethodName = __newValue;
                     NotifyPropertyChanged("MethodName", __oldValue, __newValue);
-
                     if(OnMethodName_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-						OnMethodName_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnMethodName_PostSetter(this, __e);
                     }
                 }
             }
@@ -631,22 +648,6 @@ namespace Kistl.App.Base
         [EventBasedMethod("OnCreated_Method")]
         public override void NotifyCreated()
         {
-            try
-            {
-				Kistl.App.Base.Property p = null;
-				p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("842eb3fc-3c8f-47d6-a59f-225c75ec2439"));
-				if(p != null && p.DefaultValue != null) { this.ExportGuid = (Guid)p.DefaultValue.GetDefaultValue(); } else { System.Diagnostics.Trace.TraceWarning("Unable to get default value for property 'Method.ExportGuid'"); }
-            }
-            catch (TypeLoadException)
-            {
-                // TODO: Find a better way to ignore bootstrap errors.
-                // During bootstrapping no MethodInvocation is registred
-            }
-            catch (NotImplementedException)
-            {
-                // TODO: Find a better way to ignore bootstrap errors.
-                // During bootstrapping no MethodInvocation is registred
-            }
             base.NotifyCreated();
             if (OnCreated_Method != null) OnCreated_Method(this);
         }

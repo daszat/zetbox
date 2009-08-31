@@ -39,41 +39,42 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual int Max
         {
             get
             {
-				var __value = _Max;
-				if(OnMax_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<int>(__value);
-					OnMax_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Max;
+                if (OnMax_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<int>(__result);
+                    OnMax_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Max != value)
                 {
-					var __oldValue = _Max;
-					var __newValue = value;
+                    var __oldValue = _Max;
+                    var __newValue = value;
                     if(OnMax_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
-						OnMax_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
+                        OnMax_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Max", __oldValue, __newValue);
                     _Max = __newValue;
                     NotifyPropertyChanged("Max", __oldValue, __newValue);
-
                     if(OnMax_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
-						OnMax_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
+                        OnMax_PostSetter(this, __e);
                     }
                 }
             }
@@ -89,41 +90,42 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual int Min
         {
             get
             {
-				var __value = _Min;
-				if(OnMin_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<int>(__value);
-					OnMin_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Min;
+                if (OnMin_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<int>(__result);
+                    OnMin_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Min != value)
                 {
-					var __oldValue = _Min;
-					var __newValue = value;
+                    var __oldValue = _Min;
+                    var __newValue = value;
                     if(OnMin_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
-						OnMin_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
+                        OnMin_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Min", __oldValue, __newValue);
                     _Min = __newValue;
                     NotifyPropertyChanged("Min", __oldValue, __newValue);
-
                     if(OnMin_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
-						OnMin_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
+                        OnMin_PostSetter(this, __e);
                     }
                 }
             }

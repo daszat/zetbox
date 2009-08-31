@@ -39,41 +39,42 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual bool EagerLoading
         {
             get
             {
-				var __value = _EagerLoading;
-				if(OnEagerLoading_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<bool>(__value);
-					OnEagerLoading_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _EagerLoading;
+                if (OnEagerLoading_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnEagerLoading_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_EagerLoading != value)
                 {
-					var __oldValue = _EagerLoading;
-					var __newValue = value;
+                    var __oldValue = _EagerLoading;
+                    var __newValue = value;
                     if(OnEagerLoading_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
-						OnEagerLoading_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnEagerLoading_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("EagerLoading", __oldValue, __newValue);
                     _EagerLoading = __newValue;
                     NotifyPropertyChanged("EagerLoading", __oldValue, __newValue);
-
                     if(OnEagerLoading_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
-						OnEagerLoading_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnEagerLoading_PostSetter(this, __e);
                     }
                 }
             }

@@ -32,24 +32,26 @@ namespace Kistl.App.TimeRecords
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
             {
-				return _ID;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_ID != value)
                 {
-					var __oldValue = _ID;
-					var __newValue = value;
+                    var __oldValue = _ID;
+                    var __newValue = value;
                     NotifyPropertyChanging("ID", __oldValue, __newValue);
                     _ID = __newValue;
                     NotifyPropertyChanged("ID", __oldValue, __newValue);
-
                 }
             }
         }
@@ -62,41 +64,42 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual double? BudgetHours
         {
             get
             {
-				var __value = _BudgetHours;
-				if(OnBudgetHours_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<double?>(__value);
-					OnBudgetHours_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _BudgetHours;
+                if (OnBudgetHours_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<double?>(__result);
+                    OnBudgetHours_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_BudgetHours != value)
                 {
-					var __oldValue = _BudgetHours;
-					var __newValue = value;
+                    var __oldValue = _BudgetHours;
+                    var __newValue = value;
                     if(OnBudgetHours_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
-						OnBudgetHours_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
+                        OnBudgetHours_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("BudgetHours", __oldValue, __newValue);
                     _BudgetHours = __newValue;
                     NotifyPropertyChanged("BudgetHours", __oldValue, __newValue);
-
                     if(OnBudgetHours_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
-						OnBudgetHours_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
+                        OnBudgetHours_PostSetter(this, __e);
                     }
                 }
             }
@@ -160,41 +163,42 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string Name
         {
             get
             {
-				var __value = _Name;
-				if(OnName_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<string>(__value);
-					OnName_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Name;
+                if (OnName_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnName_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Name != value)
                 {
-					var __oldValue = _Name;
-					var __newValue = value;
+                    var __oldValue = _Name;
+                    var __newValue = value;
                     if(OnName_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-						OnName_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-
                     if(OnName_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-						OnName_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PostSetter(this, __e);
                     }
                 }
             }
@@ -210,41 +214,42 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string Notes
         {
             get
             {
-				var __value = _Notes;
-				if(OnNotes_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<string>(__value);
-					OnNotes_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Notes;
+                if (OnNotes_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnNotes_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Notes != value)
                 {
-					var __oldValue = _Notes;
-					var __newValue = value;
+                    var __oldValue = _Notes;
+                    var __newValue = value;
                     if(OnNotes_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-						OnNotes_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnNotes_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Notes", __oldValue, __newValue);
                     _Notes = __newValue;
                     NotifyPropertyChanged("Notes", __oldValue, __newValue);
-
                     if(OnNotes_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-						OnNotes_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnNotes_PostSetter(this, __e);
                     }
                 }
             }
@@ -260,41 +265,42 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual double? SpentHours
         {
             get
             {
-				var __value = _SpentHours;
-				if(OnSpentHours_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<double?>(__value);
-					OnSpentHours_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _SpentHours;
+                if (OnSpentHours_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<double?>(__result);
+                    OnSpentHours_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_SpentHours != value)
                 {
-					var __oldValue = _SpentHours;
-					var __newValue = value;
+                    var __oldValue = _SpentHours;
+                    var __newValue = value;
                     if(OnSpentHours_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
-						OnSpentHours_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
+                        OnSpentHours_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("SpentHours", __oldValue, __newValue);
                     _SpentHours = __newValue;
                     NotifyPropertyChanged("SpentHours", __oldValue, __newValue);
-
                     if(OnSpentHours_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
-						OnSpentHours_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
+                        OnSpentHours_PostSetter(this, __e);
                     }
                 }
             }

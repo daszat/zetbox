@@ -14,14 +14,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx, SerializationMembersList serializationList, string type, string name, string modulenamespace)
         {
-            Call(host, ctx, serializationList, type, name, false, modulenamespace);
-        }
-
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx, SerializationMembersList serializationList, string type, string name, bool callGetterSetterEvents, string modulenamespace)
-        {
             host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty",
-                ctx, serializationList, type, name, callGetterSetterEvents, modulenamespace);
+                ctx, serializationList, type, name, modulenamespace);
         }
 
         /// <summary>
@@ -58,5 +52,9 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         {
             return methodAttributes;
         }
+
+        protected virtual void ApplyOnGetTemplate() { }
+        protected virtual void ApplyPreSetTemplate() { }
+        protected virtual void ApplyPostSetTemplate() { }
     }
 }

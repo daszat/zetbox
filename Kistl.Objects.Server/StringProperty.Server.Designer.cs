@@ -39,41 +39,42 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual int Length
         {
             get
             {
-				var __value = _Length;
-				if(OnLength_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<int>(__value);
-					OnLength_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Length;
+                if (OnLength_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<int>(__result);
+                    OnLength_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (_Length != value)
                 {
-					var __oldValue = _Length;
-					var __newValue = value;
+                    var __oldValue = _Length;
+                    var __newValue = value;
                     if(OnLength_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
-						OnLength_PreSetter(this, e);
-						__newValue = e.Result;
+                        var __e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
+                        OnLength_PreSetter(this, __e);
+                        __newValue = __e.Result;
                     }
                     NotifyPropertyChanging("Length", __oldValue, __newValue);
                     _Length = __newValue;
                     NotifyPropertyChanged("Length", __oldValue, __newValue);
-
                     if(OnLength_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
-						OnLength_PostSetter(this, e);
+                        var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
+                        OnLength_PostSetter(this, __e);
                     }
                 }
             }
