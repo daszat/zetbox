@@ -65,5 +65,10 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             }
         }
 
+        protected override bool ImplementsIExportable()
+        {
+            return rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx);
+        }
+
     }
 }

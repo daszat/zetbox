@@ -38,9 +38,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
             this.WriteLine("            me._fk_B = other._fk_B;");
         }
 
-        protected override bool ImplementsIExportable()
-        {
-            return rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx);
-        }
+
     }
 }
