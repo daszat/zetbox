@@ -150,6 +150,11 @@
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ActionKind)">
+	    <MappingFragment StoreEntitySet="ActionKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.CheckboxKind)">
 	    <MappingFragment StoreEntitySet="CheckboxKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -1699,13 +1704,13 @@
       <Condition ColumnName="fk_ControlRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ViewDescriptor_isof_ControlKind
-    A: ZeroOrOne ViewDescriptor as Control
-    B: ZeroOrOne ControlKind as Kind
+    Relation: FK_ViewDescriptor_isof_ControlKindClass
+    A: ZeroOrMore ViewDescriptor as Control
+    B: ZeroOrOne ControlKindClass as Kind
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_ViewDescriptor_isof_ControlKind"
-                           TypeName="Model.FK_ViewDescriptor_isof_ControlKind"
+    <AssociationSetMapping Name="FK_ViewDescriptor_isof_ControlKindClass"
+                           TypeName="Model.FK_ViewDescriptor_isof_ControlKindClass"
                            StoreEntitySet="ViewDescriptor" >
       <EndProperty Name="Kind">
         <ScalarProperty Name="ID" ColumnName="fk_Kind"/>

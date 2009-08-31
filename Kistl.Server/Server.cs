@@ -13,6 +13,7 @@ namespace Kistl.Server
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.App.Base;
+    using Kistl.App.Extensions;
     using Kistl.App.GUI;
 
     /// <summary>
@@ -286,26 +287,54 @@ namespace Kistl.Server
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var mapping = new Dictionary<int, ControlKind>();
-                foreach (var visualType in ctx.GetQuery<EnumerationEntry>().Where(ee => ee.Enumeration.ClassName == "VisualType"))
-                {
-                    var controlKind = ctx.Create<ControlKind>();
-                    controlKind.Name = visualType.Name;
-                    mapping[visualType.Value] = controlKind;
-                }
+                //var baseClass = ctx.GetQuery<ControlKindClass>().Where(cls => cls.ClassName == "ControlKind").ToList().Single();
+                //var guiModule = ctx.GetQuery<Module>().Where(mod => mod.ModuleName == "GUI").ToList().Single();
+                //var trModule = ctx.GetQuery<Module>().Where(mod => mod.ModuleName == "TimeRecords").ToList().Single();
 
-                foreach (var presentableDesc in ctx.GetQuery<PresentableModelDescriptor>())
-                {
-                    presentableDesc.DefaultKind = mapping[(int)presentableDesc.DefaultVisualType];
-                }
+                //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
+                //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
 
-                foreach (var viewDesc in ctx.GetQuery<ViewDescriptor>())
-                {
-                    viewDesc.Kind = mapping[(int)viewDesc.VisualType];
-                }
+                //CreateCkc(ctx, baseClass, guiModule, "MenuItemKind", "A command used in a menu",
+                //    new[] { typeof(Kistl.Client.Presentables.ActionModel) });
+
+                //CreateCkc(ctx, baseClass, trModule, "TimeRecordsDashboardKind", "A dashboard for the TimeRecords module",
+                //    new[] { typeof(Kistl.Client.Presentables.TimeRecords.Dashboard) });
+
+                //CreateCkc(ctx, baseClass, trModule, "WorkEffortKind", "A specialized control for WorkEfforts",
+                //    new[] { typeof(Kistl.Client.Presentables.TimeRecords.WorkEffortModel) });
+
+                //CreateCkc(ctx, baseClass, guiModule, "GuiDashboardKind", "A dashboard for the GUI module",
+                //    new[] { typeof(Kistl.Client.Presentables.GUI.DashboardModel) });
+
+                //CreateCkc(ctx, baseClass, guiModule, "RelationKind", "A specialized control for Relations",
+                //    new[] { typeof(Kistl.Client.Presentables.Relations.RelationModel) });
+
+                //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
+                //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
+
+                //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
+                //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
 
                 ctx.SubmitChanges();
             }
+        }
+
+        private static void CreateCkc(IKistlContext ctx, ControlKindClass baseClass, Module guiModule, string className, string description, Type[] supportedTypes)
+        {
+            var roStringKind = ctx.Create<ControlKindClass>();
+            roStringKind.BaseObjectClass = baseClass;
+            roStringKind.ClassName = className;
+            roStringKind.DefaultPresentableModelDescriptor = baseClass.DefaultPresentableModelDescriptor;
+            roStringKind.Description = description;
+            roStringKind.Module = guiModule;
+            roStringKind.ShowIconInLists = baseClass.ShowIconInLists;
+            roStringKind.ShowIdInLists = baseClass.ShowIdInLists;
+            roStringKind.ShowNameInLists = baseClass.ShowNameInLists;
+            foreach (var t in supportedTypes)
+            {
+                roStringKind.SupportedInterfaces.Add(t.ToRef(ctx));
+            }
+            roStringKind.TableName = className + "s";
         }
 
         #region IDisposable Members

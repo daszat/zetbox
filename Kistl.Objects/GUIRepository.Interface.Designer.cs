@@ -206,6 +206,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all ActionKind</summary>
+		/// Represent an user action or menu item
+		public IQueryable<ActionKind> ActionKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<ActionKind>();
+			}
+		}
+		
 	
 	}
 	

@@ -249,9 +249,9 @@ namespace Kistl.App.GUI
         /// 
         /// </summary>
     /*
-    Relation: FK_ViewDescriptor_isof_ControlKind
-    A: ZeroOrOne ViewDescriptor as Control
-    B: ZeroOrOne ControlKind as Kind
+    Relation: FK_ViewDescriptor_isof_ControlKindClass
+    A: ZeroOrMore ViewDescriptor as Control
+    B: ZeroOrOne ControlKindClass as Kind
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -259,7 +259,7 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.ControlKind Kind
+        public Kistl.App.GUI.ControlKindClass Kind
         {
             get
             {
@@ -270,21 +270,21 @@ namespace Kistl.App.GUI
                 // TODO: NotifyPropertyChanged()
                 // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                Kind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)value;
+                Kind__Implementation__ = (Kistl.App.GUI.ControlKindClass__Implementation__)value;
             }
         }
         
         private int? _fk_Kind;
         private Guid? _fk_guid_Kind = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_isof_ControlKind", "Kind")]
-        public Kistl.App.GUI.ControlKind__Implementation__ Kind__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_isof_ControlKindClass", "Kind")]
+        public Kistl.App.GUI.ControlKindClass__Implementation__ Kind__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
-                        "Model.FK_ViewDescriptor_isof_ControlKind",
+                EntityReference<Kistl.App.GUI.ControlKindClass__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindClass__Implementation__>(
+                        "Model.FK_ViewDescriptor_isof_ControlKindClass",
                         "Kind");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -295,36 +295,36 @@ namespace Kistl.App.GUI
                 var __value = r.Value;
 				if(OnKind_Getter != null)
 				{
-					var e = new PropertyGetterEventArgs<Kistl.App.GUI.ControlKind>(__value);
+					var e = new PropertyGetterEventArgs<Kistl.App.GUI.ControlKindClass>(__value);
 					OnKind_Getter(this, e);
-					__value = (Kistl.App.GUI.ControlKind__Implementation__)e.Result;
+					__value = (Kistl.App.GUI.ControlKindClass__Implementation__)e.Result;
 				}
                 return __value;
             }
             set
             {
-                EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
-                        "Model.FK_ViewDescriptor_isof_ControlKind",
+                EntityReference<Kistl.App.GUI.ControlKindClass__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindClass__Implementation__>(
+                        "Model.FK_ViewDescriptor_isof_ControlKindClass",
                         "Kind");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
                     r.Load(); 
                 }
-                Kistl.App.GUI.ControlKind __oldValue = (Kistl.App.GUI.ControlKind)r.Value;
-                Kistl.App.GUI.ControlKind __newValue = (Kistl.App.GUI.ControlKind)value;
+                Kistl.App.GUI.ControlKindClass __oldValue = (Kistl.App.GUI.ControlKindClass)r.Value;
+                Kistl.App.GUI.ControlKindClass __newValue = (Kistl.App.GUI.ControlKindClass)value;
 
                 if(OnKind_PreSetter != null)
                 {
-					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ControlKindClass>(__oldValue, __newValue);
 					OnKind_PreSetter(this, e);
 					__newValue = e.Result;
                 }
-                r.Value = (Kistl.App.GUI.ControlKind__Implementation__)__newValue;
+                r.Value = (Kistl.App.GUI.ControlKindClass__Implementation__)__newValue;
                 if(OnKind_PostSetter != null)
                 {
-					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ControlKindClass>(__oldValue, __newValue);
 					OnKind_PostSetter(this, e);
                 }
                                 
@@ -332,9 +332,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKind> OnKind_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKind> OnKind_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKind> OnKind_PostSetter;
+		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKindClass> OnKind_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKindClass> OnKind_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKindClass> OnKind_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -833,9 +833,9 @@ namespace Kistl.App.GUI
 				ControlRef__Implementation__ = null;
 
 			if (_fk_guid_Kind.HasValue)
-				Kind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_Kind.Value);
+				Kind__Implementation__ = (Kistl.App.GUI.ControlKindClass__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKindClass>(_fk_guid_Kind.Value);
 			else if (_fk_Kind.HasValue)
-				Kind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.Find<Kistl.App.GUI.ControlKind>(_fk_Kind.Value);
+				Kind__Implementation__ = (Kistl.App.GUI.ControlKindClass__Implementation__)Context.Find<Kistl.App.GUI.ControlKindClass>(_fk_Kind.Value);
 			else
 				Kind__Implementation__ = null;
 

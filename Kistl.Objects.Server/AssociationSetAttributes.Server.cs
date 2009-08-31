@@ -803,17 +803,17 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_ViewDescriptor_isof_ControlKind
-    A: ZeroOrOne ViewDescriptor as Control
-    B: ZeroOrOne ControlKind as Kind
+    Relation: FK_ViewDescriptor_isof_ControlKindClass
+    A: ZeroOrMore ViewDescriptor as Control
+    B: ZeroOrOne ControlKindClass as Kind
     Preferred Storage: MergeIntoA
 	*/
 
 // basic association
 [assembly: EdmRelationship(
-    "Model", "FK_ViewDescriptor_isof_ControlKind",
-    "Control", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
-    "Kind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKind__Implementation__)
+    "Model", "FK_ViewDescriptor_isof_ControlKindClass",
+    "Control", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
+    "Kind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindClass__Implementation__)
     )]
 
 

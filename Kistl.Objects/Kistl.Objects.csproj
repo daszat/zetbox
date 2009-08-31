@@ -45,6 +45,7 @@
     <Reference Include="Kistl.API" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionKind.Interface.Designer.cs" />
     <Compile Include="ANewObjectClass.Interface.Designer.cs" />
     <Compile Include="AnotherTest.Interface.Designer.cs" />
     <Compile Include="Assembly.Interface.Designer.cs" />

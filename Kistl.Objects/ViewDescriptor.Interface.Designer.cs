@@ -30,7 +30,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-		Kistl.App.GUI.ControlKind Kind {
+		Kistl.App.GUI.ControlKindClass Kind {
 			get;
 			set;
 		}

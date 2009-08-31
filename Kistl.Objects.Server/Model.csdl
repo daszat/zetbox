@@ -308,9 +308,9 @@
       <End Role="View" EntitySet="ViewDescriptor" />
       <End Role="ControlRef" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_isof_ControlKind" Association="Model.FK_ViewDescriptor_isof_ControlKind" >
+    <AssociationSet Name="FK_ViewDescriptor_isof_ControlKindClass" Association="Model.FK_ViewDescriptor_isof_ControlKindClass" >
       <End Role="Control" EntitySet="ViewDescriptor" />
-      <End Role="Kind" EntitySet="ControlKind" />
+      <End Role="Kind" EntitySet="DataType" />
     </AssociationSet>
     <AssociationSet Name="FK_Visual_has_Method" Association="Model.FK_Visual_has_Method" >
       <End Role="Visual" EntitySet="Visual" />
@@ -415,7 +415,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="64" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="64" />
   </EntityType>
   <EntityType Name="CurrentSchema">
     <Key>
@@ -848,7 +848,7 @@
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="IsReadOnly" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Kind__Implementation__"
-                        Relationship="Model.FK_ViewDescriptor_isof_ControlKind"
+                        Relationship="Model.FK_ViewDescriptor_isof_ControlKindClass"
                         FromRole="Control"
                         ToRole="Kind" />
     <NavigationProperty Name="Module__Implementation__"
@@ -916,6 +916,8 @@
   </EntityType>
 
   <!-- EntityTypes for all other classes -->
+  <EntityType Name="ActionKind" BaseType="Model.ControlKind" >
+  </EntityType>
   <EntityType Name="BoolParameter" BaseType="Model.BaseParameter" >
   </EntityType>
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" >
@@ -1807,12 +1809,12 @@
          Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ViewDescriptor_isof_ControlKind" >
+  <Association Name="FK_ViewDescriptor_isof_ControlKindClass" >
     <End Role="Control"
          Type="Model.ViewDescriptor" 
-         Multiplicity="0..1" />
+         Multiplicity="*" />
     <End Role="Kind"
-         Type="Model.ControlKind" 
+         Type="Model.ControlKindClass" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Visual_has_Method" >

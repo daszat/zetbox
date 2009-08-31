@@ -44,6 +44,13 @@
     <EntitySet Name="WorkEffortAccount" EntityType="Model.Store.WorkEffortAccount" Table="WorkEffortAccounts"/>
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
+    <EntitySet Name="ActionKind" EntityType="Model.Store.ActionKind" Table="ActionKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_ActionKind_ControlKind_ID" Association="Model.Store.FK_ActionKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_ActionKind" EntitySet="ActionKind" />
+    </AssociationSet>
+    
     <EntitySet Name="BoolParameter" EntityType="Model.Store.BoolParameter" Table="BoolParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_BoolParameter_BaseParameter_ID" Association="Model.Store.FK_BoolParameter_BaseParameter_ID" >
@@ -659,9 +666,9 @@
       <End Role="View" EntitySet="ViewDescriptor" />
       <End Role="ControlRef" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_isof_ControlKind" Association="Model.Store.FK_ViewDescriptor_isof_ControlKind" >
+    <AssociationSet Name="FK_ViewDescriptor_isof_ControlKindClass" Association="Model.Store.FK_ViewDescriptor_isof_ControlKindClass" >
       <End Role="Control" EntitySet="ViewDescriptor" />
-      <End Role="Kind" EntitySet="ControlKind" />
+      <End Role="Kind" EntitySet="ControlKindClass" />
     </AssociationSet>
     <AssociationSet Name="FK_Visual_has_Method" Association="Model.Store.FK_Visual_has_Method" >
       <End Role="Visual" EntitySet="Visual" />
@@ -688,6 +695,13 @@
   </EntityContainer>
 
   <!-- EntityTypes for all classes -->
+	
+  <EntityType Name="ActionKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
 	
   <EntityType Name="ANewObjectClass">
     <Key>
@@ -802,7 +816,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="ControlKindClass">
@@ -2428,8 +2442,8 @@
   </Association>
 
 
-  <Association Name="FK_ViewDescriptor_isof_ControlKind">
-    <End Role="Kind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+  <Association Name="FK_ViewDescriptor_isof_ControlKindClass">
+    <End Role="Kind" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Control" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2490,6 +2504,18 @@
 
 
   <!-- derived->base ObjectClass references -->
+  <Association Name="FK_ActionKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_ActionKind" Type="Model.Store.ActionKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ActionKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_BoolParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_BoolParameter" Type="Model.Store.BoolParameter" Multiplicity="0..1" />
