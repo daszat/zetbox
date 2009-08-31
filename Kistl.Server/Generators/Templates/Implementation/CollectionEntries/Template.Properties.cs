@@ -20,8 +20,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected virtual void ApplyExportGuidPropertyTemplate()
         {
-            // TODO: apply proper modulenamespace
-            Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx, this.MembersToSerialize, "Guid", "ExportGuid", "");
+            ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize);
         }
 
         protected abstract void ApplyAPropertyTemplate();

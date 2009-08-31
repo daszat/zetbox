@@ -49,7 +49,7 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntries.ExportGuidProperty
         public virtual Guid ExportGuid
         {
             get
@@ -57,6 +57,9 @@ namespace Kistl.App.GUI
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
+                if (_ExportGuid == Guid.Empty) {
+                    _ExportGuid = Guid.NewGuid();
+                }
                 return __result;
             }
             set
@@ -338,7 +341,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntries.ExportGuidProperty
         public virtual Guid ExportGuid
         {
             get
@@ -346,6 +349,9 @@ namespace Kistl.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
+                if (_ExportGuid == Guid.Empty) {
+                    _ExportGuid = Guid.NewGuid();
+                }
                 return __result;
             }
             set
@@ -627,7 +633,7 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntries.ExportGuidProperty
         public virtual Guid ExportGuid
         {
             get
@@ -635,6 +641,9 @@ namespace Kistl.App.GUI
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
+                if (_ExportGuid == Guid.Empty) {
+                    _ExportGuid = Guid.NewGuid();
+                }
                 return __result;
             }
             set
@@ -1484,7 +1493,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntries.ExportGuidProperty
         public virtual Guid ExportGuid
         {
             get
@@ -1492,6 +1501,9 @@ namespace Kistl.App.Base
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
+                if (_ExportGuid == Guid.Empty) {
+                    _ExportGuid = Guid.NewGuid();
+                }
                 return __result;
             }
             set
