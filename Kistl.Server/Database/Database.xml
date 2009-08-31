@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-08-31T12:21:32.4241384Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-08-31T13:25:52.5776134Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -6410,7 +6410,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>ActionKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6424,7 +6424,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>CheckboxKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6437,7 +6437,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>ControlKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6465,7 +6465,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>DataObjectKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6479,7 +6479,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>DataObjectSelectionTaskKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6493,7 +6493,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>EnumerationSelectorKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6529,7 +6529,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>LabelKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6543,7 +6543,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>LauncherKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6557,7 +6557,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>ObjectListKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6571,7 +6571,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>ObjectRefKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6597,7 +6597,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>PropertyGroupKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6611,7 +6611,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>StringSelectorKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6637,7 +6637,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>TextboxKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
@@ -6692,7 +6692,7 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>WorkspaceKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
