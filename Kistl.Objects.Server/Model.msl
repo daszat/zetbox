@@ -674,6 +674,45 @@
     </AssociationSetMapping>
 
     <!--
+    Relation: FK_PresentableModelDescriptor_displayedBy_ControlKind
+    A: ZeroOrMore PresentableModelDescriptor as Presentable
+    B: ZeroOrMore ControlKind as SecondaryControlKinds
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry)">
+        <MappingFragment StoreEntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable"
+                           TypeName="Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable"
+                           StoreEntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" >
+      <EndProperty Name="Presentable">
+        <ScalarProperty Name="ID" ColumnName="fk_PresentableModelDescriptor"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_PresentableModelDescriptor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds"
+                           TypeName="Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds"
+                           StoreEntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" >
+      <EndProperty Name="SecondaryControlKinds">
+        <ScalarProperty Name="ID" ColumnName="fk_SecondaryControlKinds"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_SecondaryControlKinds" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
     Relation: FK_Projekt_haben_Mitarbeiter
     A: ZeroOrMore Projekt as Projekte
     B: ZeroOrMore Mitarbeiter as Mitarbeiter

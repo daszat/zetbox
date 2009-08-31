@@ -108,17 +108,6 @@ namespace Kistl.App.Base
 
         #endregion
 
-        #region Relation
-        public void OnCreated_Relation(Kistl.App.Base.Relation obj)
-        {
-            //obj.A = obj.Context.Create<RelationEnd>();
-            //obj.B = obj.Context.Create<RelationEnd>();
-
-            //obj.A.Role = (int)RelationEndRole.A;
-            //obj.B.Role = (int)RelationEndRole.B;
-        }
-        #endregion
-
         #region PropertyInvocation
         public void OnGetCodeTemplate_PropertyInvocation(Kistl.App.Base.PropertyInvocation obj, MethodReturnEventArgs<System.String> e)
         {

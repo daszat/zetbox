@@ -387,6 +387,22 @@
     </AssociationSet>
     
     <!-- 
+    Relation: FK_PresentableModelDescriptor_displayedBy_ControlKind
+    A: ZeroOrMore PresentableModelDescriptor as Presentable
+    B: ZeroOrMore ControlKind as SecondaryControlKinds
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" EntityType="Model.Store.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" Table="PresentableModelDescriptors_displayedBy_ControlKinds" />
+    <AssociationSet Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable" Association="Model.Store.FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable" >
+      <End Role="Presentable" EntitySet="PresentableModelDescriptor" />
+      <End Role="CollectionEntry" EntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds" Association="Model.Store.FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds" >
+      <End Role="CollectionEntry" EntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" />
+      <End Role="SecondaryControlKinds" EntitySet="ControlKind" />
+    </AssociationSet>
+    
+    <!-- 
     Relation: FK_Projekt_haben_Mitarbeiter
     A: ZeroOrMore Projekt as Projekte
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
@@ -1504,6 +1520,46 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_ImplementsInterfaces" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+		
+    <Property Name="fk_PresentableModelDescriptor" Type="int" Nullable="true" />
+    <Property Name="fk_SecondaryControlKinds" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable">
+    <End Role="Presentable" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Presentable">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_PresentableModelDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds">
+    <End Role="SecondaryControlKinds" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecondaryControlKinds">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_SecondaryControlKinds" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

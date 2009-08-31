@@ -389,6 +389,24 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_PresentableModelDescriptor_displayedBy_ControlKind
+    A: ZeroOrMore PresentableModelDescriptor as Presentable
+    B: ZeroOrMore ControlKind as SecondaryControlKinds
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable",
+    "Presentable", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.PresentableModelDescriptor__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds",
+    "SecondaryControlKinds", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKind__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__)
+    )]
+
+	/*
     Relation: FK_PresentableModelDescriptor_has_ControlKind
     A: ZeroOrOne PresentableModelDescriptor as Presentable
     B: ZeroOrOne ControlKind as DefaultKind

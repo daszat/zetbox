@@ -48,5 +48,10 @@ namespace Kistl.App.GUI
 			get;
 			set;
 		}
+        /// <summary>
+        /// 
+        /// </summary>
+
+        ICollection<Kistl.App.GUI.ControlKind> SecondaryControlKinds { get; }
     }
 }

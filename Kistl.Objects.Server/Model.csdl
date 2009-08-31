@@ -57,6 +57,15 @@
       <End Role="ImplementsInterfaces" EntitySet="DataType" />
       <End Role="CollectionEntry" EntitySet="ObjectClass_implements_Interface_RelationEntry" />
     </AssociationSet>
+    <EntitySet Name="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" EntityType="Model.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" />
+    <AssociationSet Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable" Association="Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable" >
+      <End Role="Presentable" EntitySet="PresentableModelDescriptor" />
+      <End Role="CollectionEntry" EntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds" Association="Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds" >
+      <End Role="SecondaryControlKinds" EntitySet="ControlKind" />
+      <End Role="CollectionEntry" EntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="Projekt_haben_Mitarbeiter_RelationEntry" EntityType="Model.Projekt_haben_Mitarbeiter_RelationEntry" />
     <AssociationSet Name="FK_Projekt_haben_Mitarbeiter_Projekte" Association="Model.FK_Projekt_haben_Mitarbeiter_Projekte" >
       <End Role="Projekte" EntitySet="Projekt" />
@@ -629,6 +638,10 @@
                         Relationship="Model.FK_PresentableModelDescriptor_has_TypeRef"
                         FromRole="Descriptor"
                         ToRole="PresentableModelRef" />
+    <NavigationProperty Name="SecondaryControlKinds__Implementation__"
+                        Relationship="Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable"
+                        FromRole="Presentable"
+                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -1147,6 +1160,49 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.ObjectClass_implements_Interface_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
+    Relation: FK_PresentableModelDescriptor_displayedBy_ControlKind
+    A: ZeroOrMore PresentableModelDescriptor as Presentable
+    B: ZeroOrMore ControlKind as SecondaryControlKinds
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable"
+                        FromRole="CollectionEntry"
+                        ToRole="Presentable" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds"
+                        FromRole="CollectionEntry"
+                        ToRole="SecondaryControlKinds" />
+  </EntityType>
+  <Association Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable" >
+    <End Role="Presentable"
+         Type="Model.PresentableModelDescriptor" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds" >
+    <End Role="SecondaryControlKinds"
+         Type="Model.ControlKind" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry"
          Multiplicity="*" />
   </Association>
   

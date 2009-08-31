@@ -492,6 +492,54 @@ namespace Kistl.App.GUI
 		public event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_Getter;
 		public event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_PostSetter;
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_PresentableModelDescriptor_displayedBy_ControlKind
+    A: ZeroOrMore PresentableModelDescriptor as Presentable
+    B: ZeroOrMore ControlKind as SecondaryControlKinds
+    Preferred Storage: Separate
+    */
+        // collection reference property
+		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.CollectionEntryListProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.GUI.ControlKind> SecondaryControlKinds
+        {
+            get
+            {
+                if (_SecondaryControlKindsWrapper == null)
+                {
+                    _SecondaryControlKindsWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind, Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__>(
+                            this,
+                            SecondaryControlKinds__Implementation__);
+                }
+                return _SecondaryControlKindsWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable", "CollectionEntry")]
+        public EntityCollection<Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__> SecondaryControlKinds__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__>(
+                        "Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityRelationBSideCollectionWrapper<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind, Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__> _SecondaryControlKindsWrapper;
+
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(PresentableModelDescriptor));
@@ -632,6 +680,15 @@ namespace Kistl.App.GUI
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b")).Constraints
 						.Where(c => !c.IsValid(this, this.PresentableModelRef))
 						.Select(c => c.GetErrorText(this, this.PresentableModelRef))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "SecondaryControlKinds":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5e2e007c-2e90-4ba6-9c9d-46e62b662ff9")).Constraints
+						.Where(c => !c.IsValid(this, this.SecondaryControlKinds))
+						.Select(c => c.GetErrorText(this, this.SecondaryControlKinds))
 						.ToArray();
 					
 					return String.Join("; ", errors);
