@@ -946,12 +946,29 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_AParent, binStream);
             BinarySerializer.FromStream(out this._fk_BParent, binStream);
-            BinarySerializer.FromStream(out this._ExportGuid, binStream);
-            BinarySerializer.FromStream(out this._HasPersistentOrder, binStream);
+            {
+                var tmp = this._ExportGuid;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._HasPersistentOrder;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._HasPersistentOrder = tmp;
+            }
             BinarySerializer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, binStream);
             BinarySerializer.FromStream(out this._fk_Navigator, binStream);
-            BinarySerializer.FromStream(out this._Role, binStream);
-            BinarySerializer.FromStream(out this._RoleName, binStream);
+            {
+                var tmp = this._Role;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Role = tmp;
+            }
+            {
+                var tmp = this._RoleName;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._RoleName = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_Type, binStream);
         }
 
@@ -976,12 +993,29 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_AParent, xml, "AParent", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_BParent, xml, "BParent", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._HasPersistentOrder;
+                XmlStreamer.FromStream(ref tmp, xml, "HasPersistentOrder", "Kistl.App.Base");
+                this._HasPersistentOrder = tmp;
+            }
             XmlStreamer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, xml, "Multiplicity", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Navigator, xml, "Navigator", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Role, xml, "Role", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._RoleName, xml, "RoleName", "Kistl.App.Base");
+            {
+                var tmp = this._Role;
+                XmlStreamer.FromStream(ref tmp, xml, "Role", "Kistl.App.Base");
+                this._Role = tmp;
+            }
+            {
+                var tmp = this._RoleName;
+                XmlStreamer.FromStream(ref tmp, xml, "RoleName", "Kistl.App.Base");
+                this._RoleName = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.Base");
         }
 
@@ -1006,12 +1040,29 @@ namespace Kistl.App.Base
         {
             XmlStreamer.FromStream(ref this._fk_guid_AParent, xml, "AParent", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_BParent, xml, "BParent", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._HasPersistentOrder;
+                XmlStreamer.FromStream(ref tmp, xml, "HasPersistentOrder", "Kistl.App.Base");
+                this._HasPersistentOrder = tmp;
+            }
             XmlStreamer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, xml, "Multiplicity", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Navigator, xml, "Navigator", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Role, xml, "Role", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._RoleName, xml, "RoleName", "Kistl.App.Base");
+            {
+                var tmp = this._Role;
+                XmlStreamer.FromStream(ref tmp, xml, "Role", "Kistl.App.Base");
+                this._Role = tmp;
+            }
+            {
+                var tmp = this._RoleName;
+                XmlStreamer.FromStream(ref tmp, xml, "RoleName", "Kistl.App.Base");
+                this._RoleName = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_guid_Type, xml, "Type", "Kistl.App.Base");
         }
 

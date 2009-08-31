@@ -523,10 +523,27 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._ExportGuid, binStream);
-            BinarySerializer.FromStream(out this._ModuleName, binStream);
-            BinarySerializer.FromStream(out this._Namespace, binStream);
+            {
+                var tmp = this._Description;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Description = tmp;
+            }
+            {
+                var tmp = this._ExportGuid;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._ModuleName;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._ModuleName = tmp;
+            }
+            {
+                var tmp = this._Namespace;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Namespace = tmp;
+            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -543,10 +560,27 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ModuleName, xml, "ModuleName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Namespace, xml, "Namespace", "Kistl.App.Base");
+            {
+                var tmp = this._Description;
+                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
+                this._Description = tmp;
+            }
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._ModuleName;
+                XmlStreamer.FromStream(ref tmp, xml, "ModuleName", "Kistl.App.Base");
+                this._ModuleName = tmp;
+            }
+            {
+                var tmp = this._Namespace;
+                XmlStreamer.FromStream(ref tmp, xml, "Namespace", "Kistl.App.Base");
+                this._Namespace = tmp;
+            }
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -563,10 +597,27 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ModuleName, xml, "ModuleName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Namespace, xml, "Namespace", "Kistl.App.Base");
+            {
+                var tmp = this._Description;
+                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
+                this._Description = tmp;
+            }
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._ModuleName;
+                XmlStreamer.FromStream(ref tmp, xml, "ModuleName", "Kistl.App.Base");
+                this._ModuleName = tmp;
+            }
+            {
+                var tmp = this._Namespace;
+                XmlStreamer.FromStream(ref tmp, xml, "Namespace", "Kistl.App.Base");
+                this._Namespace = tmp;
+            }
         }
 
 #endregion

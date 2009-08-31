@@ -621,7 +621,11 @@ namespace Kistl.App.GUI
 			
             base.FromStream(binStream);
             BinarySerializer.FromStreamConverter(v => ((Visual)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
-            BinarySerializer.FromStream(out this._Description, binStream);
+            {
+                var tmp = this._Description;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Description = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_Method, binStream);
             BinarySerializer.FromStream(out this._fk_Property, binStream);
         }
@@ -641,7 +645,11 @@ namespace Kistl.App.GUI
 			
             base.FromStream(xml);
             XmlStreamer.FromStreamConverter(v => ((Visual)this).ControlType = (Kistl.App.GUI.VisualType)v, xml, "ControlType", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
+            {
+                var tmp = this._Description;
+                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.GUI");
+                this._Description = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Property, xml, "Property", "Kistl.App.GUI");
         }

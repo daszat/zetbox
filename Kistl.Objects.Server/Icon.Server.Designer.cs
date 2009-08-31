@@ -393,8 +393,17 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._ExportGuid, binStream);
-            BinarySerializer.FromStream(out this._IconFile, binStream);
+            {
+                var tmp = this._ExportGuid;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._IconFile;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._IconFile = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
 
@@ -411,8 +420,17 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IconFile, xml, "IconFile", "Kistl.App.GUI");
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._IconFile;
+                XmlStreamer.FromStream(ref tmp, xml, "IconFile", "Kistl.App.GUI");
+                this._IconFile = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
         }
 
@@ -427,8 +445,17 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IconFile, xml, "IconFile", "Kistl.App.GUI");
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._IconFile;
+                XmlStreamer.FromStream(ref tmp, xml, "IconFile", "Kistl.App.GUI");
+                this._IconFile = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
         }
 

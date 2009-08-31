@@ -356,7 +356,12 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            {
+                var tmp = this._ExportGuid;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
             BinarySerializer.FromStream(out this._fk_Property, binStream);
         }
 
@@ -372,7 +377,12 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
             XmlStreamer.FromStream(ref this._fk_Property, xml, "Property", "Kistl.App.Base");
         }
 
@@ -385,7 +395,12 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
             XmlStreamer.FromStream(ref this._fk_guid_Property, xml, "Property", "Kistl.App.Base");
         }
 

@@ -212,7 +212,11 @@ namespace Kistl.App.Test
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._TestString, binStream);
+            {
+                var tmp = this._TestString;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._TestString = tmp;
+            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -226,7 +230,11 @@ namespace Kistl.App.Test
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._TestString, xml, "TestString", "Kistl.App.Test");
+            {
+                var tmp = this._TestString;
+                XmlStreamer.FromStream(ref tmp, xml, "TestString", "Kistl.App.Test");
+                this._TestString = tmp;
+            }
         }
 
 #endregion

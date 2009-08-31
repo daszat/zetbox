@@ -477,10 +477,26 @@ namespace Kistl.App.Projekte
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Geburtstag, binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStream(out this._SVNr, binStream);
-            BinarySerializer.FromStream(out this._TelefonNummer, binStream);
+            {
+                var tmp = this._Geburtstag;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Geburtstag = tmp;
+            }
+            {
+                var tmp = this._Name;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Name = tmp;
+            }
+            {
+                var tmp = this._SVNr;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._SVNr = tmp;
+            }
+            {
+                var tmp = this._TelefonNummer;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._TelefonNummer = tmp;
+            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -497,10 +513,26 @@ namespace Kistl.App.Projekte
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._Geburtstag, xml, "Geburtstag", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._SVNr, xml, "SVNr", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._TelefonNummer, xml, "TelefonNummer", "Kistl.App.Projekte");
+            {
+                var tmp = this._Geburtstag;
+                XmlStreamer.FromStream(ref tmp, xml, "Geburtstag", "Kistl.App.Projekte");
+                this._Geburtstag = tmp;
+            }
+            {
+                var tmp = this._Name;
+                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Projekte");
+                this._Name = tmp;
+            }
+            {
+                var tmp = this._SVNr;
+                XmlStreamer.FromStream(ref tmp, xml, "SVNr", "Kistl.App.Projekte");
+                this._SVNr = tmp;
+            }
+            {
+                var tmp = this._TelefonNummer;
+                XmlStreamer.FromStream(ref tmp, xml, "TelefonNummer", "Kistl.App.Projekte");
+                this._TelefonNummer = tmp;
+            }
         }
 
 #endregion

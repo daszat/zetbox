@@ -447,7 +447,11 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._EagerLoading, binStream);
+            {
+                var tmp = this._EagerLoading;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._EagerLoading = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_ReferenceObjectClass, binStream);
             BinarySerializer.FromStream(out this._fk_RelationEnd, binStream);
         }
@@ -465,7 +469,11 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
+            {
+                var tmp = this._EagerLoading;
+                XmlStreamer.FromStream(ref tmp, xml, "EagerLoading", "Kistl.App.Base");
+                this._EagerLoading = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_ReferenceObjectClass, xml, "ReferenceObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
         }
@@ -484,7 +492,11 @@ namespace Kistl.App.Base
         {
 			
             base.MergeImport(xml);
-            XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
+            {
+                var tmp = this._EagerLoading;
+                XmlStreamer.FromStream(ref tmp, xml, "EagerLoading", "Kistl.App.Base");
+                this._EagerLoading = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_guid_ReferenceObjectClass, xml, "ReferenceObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
         }

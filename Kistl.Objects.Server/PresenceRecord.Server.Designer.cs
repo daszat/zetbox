@@ -382,9 +382,17 @@ namespace Kistl.App.TimeRecords
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._From, binStream);
+            {
+                var tmp = this._From;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._From = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
-            BinarySerializer.FromStream(out this._Thru, binStream);
+            {
+                var tmp = this._Thru;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Thru = tmp;
+            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -400,9 +408,17 @@ namespace Kistl.App.TimeRecords
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._From, xml, "From", "Kistl.App.TimeRecords");
+            {
+                var tmp = this._From;
+                XmlStreamer.FromStream(ref tmp, xml, "From", "Kistl.App.TimeRecords");
+                this._From = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "Kistl.App.TimeRecords");
-            XmlStreamer.FromStream(ref this._Thru, xml, "Thru", "Kistl.App.TimeRecords");
+            {
+                var tmp = this._Thru;
+                XmlStreamer.FromStream(ref tmp, xml, "Thru", "Kistl.App.TimeRecords");
+                this._Thru = tmp;
+            }
         }
 
 #endregion

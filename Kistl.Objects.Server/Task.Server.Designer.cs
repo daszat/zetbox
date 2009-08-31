@@ -506,10 +506,26 @@ namespace Kistl.App.Projekte
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Aufwand, binStream);
-            BinarySerializer.FromStream(out this._DatumBis, binStream);
-            BinarySerializer.FromStream(out this._DatumVon, binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
+            {
+                var tmp = this._Aufwand;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Aufwand = tmp;
+            }
+            {
+                var tmp = this._DatumBis;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._DatumBis = tmp;
+            }
+            {
+                var tmp = this._DatumVon;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._DatumVon = tmp;
+            }
+            {
+                var tmp = this._Name;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Name = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_Projekt, binStream);
         }
 
@@ -528,10 +544,26 @@ namespace Kistl.App.Projekte
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._Aufwand, xml, "Aufwand", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
+            {
+                var tmp = this._Aufwand;
+                XmlStreamer.FromStream(ref tmp, xml, "Aufwand", "Kistl.App.Projekte");
+                this._Aufwand = tmp;
+            }
+            {
+                var tmp = this._DatumBis;
+                XmlStreamer.FromStream(ref tmp, xml, "DatumBis", "Kistl.App.Projekte");
+                this._DatumBis = tmp;
+            }
+            {
+                var tmp = this._DatumVon;
+                XmlStreamer.FromStream(ref tmp, xml, "DatumVon", "Kistl.App.Projekte");
+                this._DatumVon = tmp;
+            }
+            {
+                var tmp = this._Name;
+                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Projekte");
+                this._Name = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "Kistl.App.Projekte");
         }
 

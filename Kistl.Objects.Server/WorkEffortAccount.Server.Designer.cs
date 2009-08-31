@@ -455,10 +455,26 @@ namespace Kistl.App.TimeRecords
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._BudgetHours, binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStream(out this._Notes, binStream);
-            BinarySerializer.FromStream(out this._SpentHours, binStream);
+            {
+                var tmp = this._BudgetHours;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._BudgetHours = tmp;
+            }
+            {
+                var tmp = this._Name;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Name = tmp;
+            }
+            {
+                var tmp = this._Notes;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Notes = tmp;
+            }
+            {
+                var tmp = this._SpentHours;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._SpentHours = tmp;
+            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -475,10 +491,26 @@ namespace Kistl.App.TimeRecords
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._BudgetHours, xml, "BudgetHours", "Kistl.App.TimeRecords");
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.TimeRecords");
-            XmlStreamer.FromStream(ref this._Notes, xml, "Notes", "Kistl.App.TimeRecords");
-            XmlStreamer.FromStream(ref this._SpentHours, xml, "SpentHours", "Kistl.App.TimeRecords");
+            {
+                var tmp = this._BudgetHours;
+                XmlStreamer.FromStream(ref tmp, xml, "BudgetHours", "Kistl.App.TimeRecords");
+                this._BudgetHours = tmp;
+            }
+            {
+                var tmp = this._Name;
+                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.TimeRecords");
+                this._Name = tmp;
+            }
+            {
+                var tmp = this._Notes;
+                XmlStreamer.FromStream(ref tmp, xml, "Notes", "Kistl.App.TimeRecords");
+                this._Notes = tmp;
+            }
+            {
+                var tmp = this._SpentHours;
+                XmlStreamer.FromStream(ref tmp, xml, "SpentHours", "Kistl.App.TimeRecords");
+                this._SpentHours = tmp;
+            }
         }
 
 #endregion

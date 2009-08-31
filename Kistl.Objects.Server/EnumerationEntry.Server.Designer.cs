@@ -517,11 +517,28 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Description, binStream);
+            {
+                var tmp = this._Description;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Description = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_Enumeration, binStream);
-            BinarySerializer.FromStream(out this._ExportGuid, binStream);
-            BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStream(out this._Value, binStream);
+            {
+                var tmp = this._ExportGuid;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._Name;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Name = tmp;
+            }
+            {
+                var tmp = this._Value;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Value = tmp;
+            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -539,11 +556,28 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            {
+                var tmp = this._Description;
+                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
+                this._Description = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_Enumeration, xml, "Enumeration", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Value, xml, "Value", "Kistl.App.Base");
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._Name;
+                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Base");
+                this._Name = tmp;
+            }
+            {
+                var tmp = this._Value;
+                XmlStreamer.FromStream(ref tmp, xml, "Value", "Kistl.App.Base");
+                this._Value = tmp;
+            }
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -561,11 +595,28 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            {
+                var tmp = this._Description;
+                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
+                this._Description = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_guid_Enumeration, xml, "Enumeration", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Value, xml, "Value", "Kistl.App.Base");
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._Name;
+                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Base");
+                this._Name = tmp;
+            }
+            {
+                var tmp = this._Value;
+                XmlStreamer.FromStream(ref tmp, xml, "Value", "Kistl.App.Base");
+                this._Value = tmp;
+            }
         }
 
 #endregion

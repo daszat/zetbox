@@ -867,11 +867,24 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
-            BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            {
+                var tmp = this._Description;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Description = tmp;
+            }
+            {
+                var tmp = this._ExportGuid;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
-            BinarySerializer.FromStream(out this._Verb, binStream);
+            {
+                var tmp = this._Verb;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Verb = tmp;
+            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -893,11 +906,24 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            {
+                var tmp = this._Description;
+                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
+                this._Description = tmp;
+            }
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
+            {
+                var tmp = this._Verb;
+                XmlStreamer.FromStream(ref tmp, xml, "Verb", "Kistl.App.Base");
+                this._Verb = tmp;
+            }
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -918,11 +944,24 @@ namespace Kistl.App.Base
         {
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            {
+                var tmp = this._Description;
+                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
+                this._Description = tmp;
+            }
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
+            {
+                var tmp = this._Verb;
+                XmlStreamer.FromStream(ref tmp, xml, "Verb", "Kistl.App.Base");
+                this._Verb = tmp;
+            }
         }
 
 #endregion

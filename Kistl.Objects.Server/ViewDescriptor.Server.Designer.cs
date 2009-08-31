@@ -877,8 +877,17 @@ namespace Kistl.App.GUI
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ControlRef, binStream);
-            BinarySerializer.FromStream(out this._ExportGuid, binStream);
-            BinarySerializer.FromStream(out this._IsReadOnly, binStream);
+            {
+                var tmp = this._ExportGuid;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._IsReadOnly;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._IsReadOnly = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_Kind, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_PresentedModelDescriptor, binStream);
@@ -905,8 +914,17 @@ namespace Kistl.App.GUI
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_ControlRef, xml, "ControlRef", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._IsReadOnly;
+                XmlStreamer.FromStream(ref tmp, xml, "IsReadOnly", "Kistl.App.GUI");
+                this._IsReadOnly = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_Kind, xml, "Kind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "Kistl.App.GUI");
@@ -931,8 +949,17 @@ namespace Kistl.App.GUI
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._fk_guid_ControlRef, xml, "ControlRef", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._IsReadOnly;
+                XmlStreamer.FromStream(ref tmp, xml, "IsReadOnly", "Kistl.App.GUI");
+                this._IsReadOnly = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_guid_Kind, xml, "Kind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "Kistl.App.GUI");

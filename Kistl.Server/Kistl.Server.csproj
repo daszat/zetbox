@@ -653,11 +653,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CollectionEntries.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SimpleBinarySerialization.cst</DependentUpon>
-    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -771,6 +766,10 @@
     <None Include="Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>EagerLoadingSerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Implementation\ObjectClasses\NotifyingDataPropertySerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>NotifyingDataPropertySerialization.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
@@ -890,10 +889,6 @@
       <LastGenOutput>EagerObjectLoadingSerialization.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Generators\Templates\Interface\README.txt" />
-    <None Include="Generators\Templates\Implementation\ObjectClasses\SimpleBinarySerialization.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>SimpleBinarySerialization.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\SimplePropertySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SimplePropertySerialization.Designer.cs</LastGenOutput>
@@ -938,6 +933,11 @@
       <DependentUpon>MethodBody.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\NotifyingDataProperty.cs" />
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\NotifyingDataPropertySerialization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotifyingDataPropertySerialization.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\PropertyInvocationsTemplate.cs">
       <DependentUpon>PropertyInvocationsTemplate.cst</DependentUpon>
     </Compile>

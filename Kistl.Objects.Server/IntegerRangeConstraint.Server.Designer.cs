@@ -293,8 +293,16 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Max, binStream);
-            BinarySerializer.FromStream(out this._Min, binStream);
+            {
+                var tmp = this._Max;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Max = tmp;
+            }
+            {
+                var tmp = this._Min;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Min = tmp;
+            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -309,8 +317,16 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._Max, xml, "Max", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Min, xml, "Min", "Kistl.App.Base");
+            {
+                var tmp = this._Max;
+                XmlStreamer.FromStream(ref tmp, xml, "Max", "Kistl.App.Base");
+                this._Max = tmp;
+            }
+            {
+                var tmp = this._Min;
+                XmlStreamer.FromStream(ref tmp, xml, "Min", "Kistl.App.Base");
+                this._Min = tmp;
+            }
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -327,8 +343,16 @@ namespace Kistl.App.Base
         {
 			
             base.MergeImport(xml);
-            XmlStreamer.FromStream(ref this._Max, xml, "Max", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Min, xml, "Min", "Kistl.App.Base");
+            {
+                var tmp = this._Max;
+                XmlStreamer.FromStream(ref tmp, xml, "Max", "Kistl.App.Base");
+                this._Max = tmp;
+            }
+            {
+                var tmp = this._Min;
+                XmlStreamer.FromStream(ref tmp, xml, "Min", "Kistl.App.Base");
+                this._Min = tmp;
+            }
         }
 
 #endregion

@@ -481,9 +481,17 @@ namespace Kistl.App.Test
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._MyIntProperty, binStream);
+            {
+                var tmp = this._MyIntProperty;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._MyIntProperty = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
-            BinarySerializer.FromStream(out this._StringProp, binStream);
+            {
+                var tmp = this._StringProp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._StringProp = tmp;
+            }
             BinarySerializer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
         }
 
@@ -501,9 +509,17 @@ namespace Kistl.App.Test
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
+            {
+                var tmp = this._MyIntProperty;
+                XmlStreamer.FromStream(ref tmp, xml, "MyIntProperty", "Kistl.App.Test");
+                this._MyIntProperty = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_ObjectProp, xml, "ObjectProp", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._StringProp, xml, "StringProp", "Kistl.App.Test");
+            {
+                var tmp = this._StringProp;
+                XmlStreamer.FromStream(ref tmp, xml, "StringProp", "Kistl.App.Test");
+                this._StringProp = tmp;
+            }
             XmlStreamer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, xml, "TestEnumProp", "Kistl.App.Test");
         }
 

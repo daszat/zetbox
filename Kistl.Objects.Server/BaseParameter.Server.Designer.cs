@@ -651,13 +651,38 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Description, binStream);
-            BinarySerializer.FromStream(out this._ExportGuid, binStream);
-            BinarySerializer.FromStream(out this._IsList, binStream);
-            BinarySerializer.FromStream(out this._IsReturnParameter, binStream);
+            {
+                var tmp = this._Description;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Description = tmp;
+            }
+            {
+                var tmp = this._ExportGuid;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._IsList;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._IsList = tmp;
+            }
+            {
+                var tmp = this._IsReturnParameter;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._IsReturnParameter = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_Method, binStream);
-            BinarySerializer.FromStream(out this._Method_pos, binStream);
-            BinarySerializer.FromStream(out this._ParameterName, binStream);
+            {
+                var tmp = this._Method_pos;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._Method_pos = tmp;
+            }
+            {
+                var tmp = this._ParameterName;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._ParameterName = tmp;
+            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -677,13 +702,38 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
+            {
+                var tmp = this._Description;
+                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
+                this._Description = tmp;
+            }
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._IsList;
+                XmlStreamer.FromStream(ref tmp, xml, "IsList", "Kistl.App.Base");
+                this._IsList = tmp;
+            }
+            {
+                var tmp = this._IsReturnParameter;
+                XmlStreamer.FromStream(ref tmp, xml, "IsReturnParameter", "Kistl.App.Base");
+                this._IsReturnParameter = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Method_pos, xml, "Method_pos", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
+            {
+                var tmp = this._Method_pos;
+                XmlStreamer.FromStream(ref tmp, xml, "Method_pos", "Kistl.App.Base");
+                this._Method_pos = tmp;
+            }
+            {
+                var tmp = this._ParameterName;
+                XmlStreamer.FromStream(ref tmp, xml, "ParameterName", "Kistl.App.Base");
+                this._ParameterName = tmp;
+            }
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -705,13 +755,38 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
+            {
+                var tmp = this._Description;
+                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
+                this._Description = tmp;
+            }
+            {
+                var tmp = this._ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this._ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                var tmp = this._IsList;
+                XmlStreamer.FromStream(ref tmp, xml, "IsList", "Kistl.App.Base");
+                this._IsList = tmp;
+            }
+            {
+                var tmp = this._IsReturnParameter;
+                XmlStreamer.FromStream(ref tmp, xml, "IsReturnParameter", "Kistl.App.Base");
+                this._IsReturnParameter = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_guid_Method, xml, "Method", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Method_pos, xml, "Method_pos", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
+            {
+                var tmp = this._Method_pos;
+                XmlStreamer.FromStream(ref tmp, xml, "Method_pos", "Kistl.App.Base");
+                this._Method_pos = tmp;
+            }
+            {
+                var tmp = this._ParameterName;
+                XmlStreamer.FromStream(ref tmp, xml, "ParameterName", "Kistl.App.Base");
+                this._ParameterName = tmp;
+            }
         }
 
 #endregion
