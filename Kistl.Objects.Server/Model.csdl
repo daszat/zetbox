@@ -1035,6 +1035,8 @@
   </EntityType>
   <EntityType Name="PropertyGroupKind" BaseType="Model.ControlKind" >
   </EntityType>
+  <EntityType Name="SingleLineDataObjectKind" BaseType="Model.ControlKind" >
+  </EntityType>
   <EntityType Name="StringParameter" BaseType="Model.BaseParameter" >
   </EntityType>
   <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty" >

@@ -105,6 +105,7 @@
     <Compile Include="PropertyInvocation.Interface.Designer.cs" />
     <Compile Include="Relation.Interface.Designer.cs" />
     <Compile Include="RelationEnd.Interface.Designer.cs" />
+    <Compile Include="SingleLineDataObjectKind.Interface.Designer.cs" />
     <Compile Include="StringParameter.Interface.Designer.cs" />
     <Compile Include="StringProperty.Interface.Designer.cs" />
     <Compile Include="StringRangeConstraint.Interface.Designer.cs" />

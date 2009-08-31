@@ -76,6 +76,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all SingleLineDataObjectKind</summary>
+		/// Presents a data object in a single line
+		public IQueryable<SingleLineDataObjectKind> SingleLineDataObjectKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<SingleLineDataObjectKind>();
+			}
+		}
+		
 		/// <summary>List of all PropertyGroupKind</summary>
 		/// Displays a group of properties from a data object
 		public IQueryable<PropertyGroupKind> PropertyGroupKinds

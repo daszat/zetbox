@@ -200,6 +200,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SingleLineDataObjectKind)">
+	    <MappingFragment StoreEntitySet="SingleLineDataObjectKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.StringSelectorKind)">
 	    <MappingFragment StoreEntitySet="StringSelectorKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />

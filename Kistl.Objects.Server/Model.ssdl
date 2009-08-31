@@ -282,6 +282,13 @@
       <End Role="B_PropertyGroupKind" EntitySet="PropertyGroupKind" />
     </AssociationSet>
     
+    <EntitySet Name="SingleLineDataObjectKind" EntityType="Model.Store.SingleLineDataObjectKind" Table="SingleLineDataObjectKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_SingleLineDataObjectKind_ControlKind_ID" Association="Model.Store.FK_SingleLineDataObjectKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_SingleLineDataObjectKind" EntitySet="SingleLineDataObjectKind" />
+    </AssociationSet>
+    
     <EntitySet Name="StringParameter" EntityType="Model.Store.StringParameter" Table="StringParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_StringParameter_BaseParameter_ID" Association="Model.Store.FK_StringParameter_BaseParameter_ID" >
@@ -1237,6 +1244,13 @@
     <Property Name="Role" Type="int" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="fk_Type" Type="int" />
+  </EntityType>
+	
+  <EntityType Name="SingleLineDataObjectKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="StringParameter">
@@ -2908,6 +2922,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_PropertyGroupKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SingleLineDataObjectKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_SingleLineDataObjectKind" Type="Model.Store.SingleLineDataObjectKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_SingleLineDataObjectKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

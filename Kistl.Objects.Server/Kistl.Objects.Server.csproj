@@ -122,6 +122,7 @@
     <Compile Include="PropertyInvocation.Server.Designer.cs" />
     <Compile Include="Relation.Server.Designer.cs" />
     <Compile Include="RelationEnd.Server.Designer.cs" />
+    <Compile Include="SingleLineDataObjectKind.Server.Designer.cs" />
     <Compile Include="StringParameter.Server.Designer.cs" />
     <Compile Include="StringProperty.Server.Designer.cs" />
     <Compile Include="StringRangeConstraint.Server.Designer.cs" />
