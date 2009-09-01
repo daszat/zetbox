@@ -63,6 +63,7 @@
     <Compile Include="CurrentSchema.Interface.Designer.cs" />
     <Compile Include="DataObjectKind.Interface.Designer.cs" />
     <Compile Include="DataObjectSelectionTaskKind.Interface.Designer.cs" />
+    <Compile Include="DataObjectSummaryKind.Interface.Designer.cs" />
     <Compile Include="DataType.Interface.Designer.cs" />
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
     <Compile Include="DateTimeProperty.Interface.Designer.cs" />

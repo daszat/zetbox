@@ -955,6 +955,8 @@
   </EntityType>
   <EntityType Name="DataObjectSelectionTaskKind" BaseType="Model.ControlKind" >
   </EntityType>
+  <EntityType Name="DataObjectSummaryKind" BaseType="Model.ControlKind" >
+  </EntityType>
   <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter" >
   </EntityType>
   <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty" >

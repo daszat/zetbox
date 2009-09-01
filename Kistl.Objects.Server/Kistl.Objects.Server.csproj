@@ -80,6 +80,7 @@
     <Compile Include="CurrentSchema.Server.Designer.cs" />
     <Compile Include="DataObjectKind.Server.Designer.cs" />
     <Compile Include="DataObjectSelectionTaskKind.Server.Designer.cs" />
+    <Compile Include="DataObjectSummaryKind.Server.Designer.cs" />
     <Compile Include="DataType.Server.Designer.cs" />
     <Compile Include="DateTimeParameter.Server.Designer.cs" />
     <Compile Include="DateTimeProperty.Server.Designer.cs" />

@@ -169,6 +169,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DataObjectSummaryKind)">
+	    <MappingFragment StoreEntitySet="DataObjectSummaryKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationSelectorKind)">
 	    <MappingFragment StoreEntitySet="EnumerationSelectorKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />

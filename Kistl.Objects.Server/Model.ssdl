@@ -107,6 +107,13 @@
       <End Role="B_DataObjectSelectionTaskKind" EntitySet="DataObjectSelectionTaskKind" />
     </AssociationSet>
     
+    <EntitySet Name="DataObjectSummaryKind" EntityType="Model.Store.DataObjectSummaryKind" Table="DataObjectSummaryKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_DataObjectSummaryKind_ControlKind_ID" Association="Model.Store.FK_DataObjectSummaryKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_DataObjectSummaryKind" EntitySet="DataObjectSummaryKind" />
+    </AssociationSet>
+    
     <EntitySet Name="DateTimeParameter" EntityType="Model.Store.DateTimeParameter" Table="DateTimeParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_DateTimeParameter_BaseParameter_ID" Association="Model.Store.FK_DateTimeParameter_BaseParameter_ID" >
@@ -865,6 +872,13 @@
   </EntityType>
 	
   <EntityType Name="DataObjectSelectionTaskKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="DataObjectSummaryKind">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2677,6 +2691,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_DataObjectSelectionTaskKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DataObjectSummaryKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_DataObjectSummaryKind" Type="Model.Store.DataObjectSummaryKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_DataObjectSummaryKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

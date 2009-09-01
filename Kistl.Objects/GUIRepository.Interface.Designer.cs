@@ -166,6 +166,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all DataObjectSummaryKind</summary>
+		/// 
+		public IQueryable<DataObjectSummaryKind> DataObjectSummaryKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<DataObjectSummaryKind>();
+			}
+		}
+		
 		/// <summary>List of all DataObjectSelectionTaskKind</summary>
 		/// Choose a data object from a set of values
 		public IQueryable<DataObjectSelectionTaskKind> DataObjectSelectionTaskKinds
