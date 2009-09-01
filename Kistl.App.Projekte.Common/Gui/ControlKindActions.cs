@@ -27,14 +27,7 @@ namespace Kistl.App.Gui.Common
                 return;
             }
 
-            if (String.IsNullOrEmpty(kind.Name))
-            {
-                e.Result = "Unnamed ControlKind";
-            }
-            else
-            {
-                e.Result = "ControlKind: " + kind.Name;
-            }
+            e.Result = kind.GetInterfaceType().Type.Name;
         }
     }
 }

@@ -119,57 +119,6 @@ namespace Kistl.App.GUI
 		public event PropertyGetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_Getter;
 		public event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PostSetter;
-        /// <summary>
-        /// The name of this ControlKind
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual string Name
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _Name;
-                if (OnName_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnName_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_Name != value)
-                {
-                    var __oldValue = _Name;
-                    var __newValue = value;
-                    if(OnName_PreSetter != null)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnName_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("Name", __oldValue, __newValue);
-                    _Name = __newValue;
-                    NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if(OnName_PostSetter != null)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnName_PostSetter(this, __e);
-                    }
-                }
-            }
-        }
-        private string _Name;
-		public event PropertyGetterHandler<Kistl.App.GUI.ControlKind, string> OnName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, string> OnName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, string> OnName_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(ControlKind));
@@ -183,7 +132,6 @@ namespace Kistl.App.GUI
 			var me = (ControlKind)this;
 
 			me.ExportGuid = other.ExportGuid;
-			me.Name = other.Name;
 		}
 
         // tail template
@@ -249,15 +197,6 @@ namespace Kistl.App.GUI
 					
 					return String.Join("; ", errors);
 				}
-				case "Name":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1b762959-859a-4406-ac69-2d8dbdd27792")).Constraints
-						.Where(c => !c.IsValid(this, this.Name))
-						.Select(c => c.GetErrorText(this, this.Name))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				default:
 					return base.GetPropertyError(propertyName);
 			}
@@ -278,7 +217,6 @@ namespace Kistl.App.GUI
 			
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
-            BinarySerializer.ToStream(this._Name, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -291,11 +229,6 @@ namespace Kistl.App.GUI
                 this._ExportGuid = tmp;
                 this._isExportGuidSet = true;
             }
-            {
-                var tmp = this._Name;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Name = tmp;
-            }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -303,7 +236,6 @@ namespace Kistl.App.GUI
 			
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -316,19 +248,12 @@ namespace Kistl.App.GUI
                 this._ExportGuid = tmp;
                 this._isExportGuidSet = true;
             }
-            {
-                var tmp = this._Name;
-                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.GUI");
-                this._Name = tmp;
-            }
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
 			
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
-	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -338,11 +263,6 @@ namespace Kistl.App.GUI
                 XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
                 this._ExportGuid = tmp;
                 this._isExportGuidSet = true;
-            }
-            {
-                var tmp = this._Name;
-                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.GUI");
-                this._Name = tmp;
             }
         }
 

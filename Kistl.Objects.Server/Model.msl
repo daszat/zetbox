@@ -147,7 +147,6 @@
 	    <MappingFragment StoreEntitySet="ControlKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ActionKind)">

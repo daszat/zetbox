@@ -13,12 +13,5 @@ namespace Kistl.App.GUI
     public interface ControlKind : IDataObject, Kistl.App.Base.IExportable 
     {
 
-        /// <summary>
-        /// The name of this ControlKind
-        /// </summary>
-		string Name {
-			get;
-			set;
-		}
     }
 }

@@ -66,7 +66,8 @@ namespace Kistl.Server.Packaging
             if (module.ModuleName == "GUI")
             {
                 AddMetaObjects(result, ctx.GetQuery<ControlKind>()// TODO: .Where(i => i.Module.ID == moduleID)
-                    .OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
+                    .ToList().AsQueryable() // TODO: remove this workaround
+                    .OrderBy(i => i.GetInterfaceType().Type.FullName).ThenBy(i => i.ExportGuid));
             }
             return result;
         }

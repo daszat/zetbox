@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T06:38:15.6627443Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T06:50:20.3137443Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -6726,18 +6726,6 @@
     <KistlBase:A>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:StringProperty ExportGuid="1b762959-859a-4406-ac69-2d8dbdd27792">
-    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:Description>The name of this ControlKind</KistlBase:Description>
-    <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
-    <KistlBase:IsList>false</KistlBase:IsList>
-    <KistlBase:IsNullable>true</KistlBase:IsNullable>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:ObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:ObjectClass>
-    <KistlBase:PropertyName>Name</KistlBase:PropertyName>
-    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>64</KistlBase:Length>
-  </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="883a2f71-78ae-4978-8d76-904a2237cc25">
     <KistlBase:AltText />
     <KistlBase:CategoryTags />
@@ -8081,10 +8069,6 @@
     <KistlBase:Method>c5e8aa2f-33a4-4f85-a51b-e7860e1cf068</KistlBase:Method>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:MethodInvocation>
-  <KistlBase:IsValidIdentifierConstraint ExportGuid="10e408f2-f029-49a9-8d9f-54030f2ee087">
-    <KistlBase:ConstrainedProperty>1b762959-859a-4406-ac69-2d8dbdd27792</KistlBase:ConstrainedProperty>
-    <KistlBase:Reason>This Name may be used as an identifier when generating code.</KistlBase:Reason>
-  </KistlBase:IsValidIdentifierConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="5b02e68e-9df4-4a9c-8a14-eb18c4756dfd">
     <KistlBase:ConstrainedProperty>cdbdfc01-5faa-416b-960f-2eb220f268fe</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
@@ -9958,31 +9942,31 @@
     <KistlBase:A_pos>2147483647</KistlBase:A_pos>
     <KistlBase:B_pos>0</KistlBase:B_pos>
   </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
-  <GUI:TextboxKind ExportGuid="200f0be5-9f23-4ddb-9a00-0133b4fc295d" />
+  <GUI:ActionKind ExportGuid="1a8577e8-06da-457c-b587-ec2caf640433" />
+  <GUI:CheckboxKind ExportGuid="12b829e1-abab-43f3-99ea-e33cd383d7e6" />
   <GUI:DataObjectKind ExportGuid="06bf9adc-c5bc-4552-abdc-18a96c527962" />
+  <GUI:DataObjectKind ExportGuid="4149c816-b593-4346-93e4-eb4bba99fab4" />
+  <GUI:DataObjectKind ExportGuid="a31b5081-88c2-4661-964b-7917578e0711" />
+  <GUI:DataObjectKind ExportGuid="c86d56f3-52c5-4864-ae26-b102cd61ffb6" />
+  <GUI:DataObjectKind ExportGuid="f0010cd6-9256-46ff-9629-5a707fa25158" />
+  <GUI:DataObjectSelectionTaskKind ExportGuid="18c0afa2-61bc-4ecb-b1e9-47b33b294573" />
+  <GUI:EnumerationSelectorKind ExportGuid="11f18fd3-ce10-4d48-8508-e6f3ba857921" />
+  <GUI:EnumerationSelectorKind ExportGuid="15cd6017-aed7-4524-901f-9208e7cb30f9" />
+  <GUI:EnumerationSelectorKind ExportGuid="9d414225-460a-4c54-8e36-e368804e387f" />
+  <GUI:EnumerationSelectorKind ExportGuid="baeca2ae-4fec-4e3f-bbc2-c447e5732d70" />
+  <GUI:EnumerationSelectorKind ExportGuid="c75b73c1-db35-493f-9e11-7bfdd244884d" />
+  <GUI:EnumerationSelectorKind ExportGuid="fbe2a9e8-3690-4d8b-9cdd-4f5fc4b0778b" />
   <GUI:ObjectListKind ExportGuid="9731f312-8ce4-4c2d-8d95-1923256dc9b8" />
   <GUI:ObjectRefKind ExportGuid="0a2cda2d-18d9-4cfc-9d54-1fa1616a7a65" />
-  <GUI:PropertyGroupKind ExportGuid="d9fb7cec-b71f-48f1-a591-216de253c7d1" />
-  <GUI:TextboxKind ExportGuid="2377807c-605b-4e64-9c74-361d3ea6f353" />
-  <GUI:DataObjectSelectionTaskKind ExportGuid="18c0afa2-61bc-4ecb-b1e9-47b33b294573" />
-  <GUI:EnumerationSelectorKind ExportGuid="fbe2a9e8-3690-4d8b-9cdd-4f5fc4b0778b" />
-  <GUI:DataObjectKind ExportGuid="f0010cd6-9256-46ff-9629-5a707fa25158" />
-  <GUI:StringSelectorKind ExportGuid="b64fb189-27af-4141-be27-5a7f723882c9" />
-  <GUI:TextboxKind ExportGuid="227dcbce-4905-4337-a6a0-720c9d218ab7" />
-  <GUI:DataObjectKind ExportGuid="a31b5081-88c2-4661-964b-7917578e0711" />
-  <GUI:WorkspaceKind ExportGuid="329837fd-1146-48b2-9f4e-79aec8958b1e" />
-  <GUI:EnumerationSelectorKind ExportGuid="c75b73c1-db35-493f-9e11-7bfdd244884d" />
-  <GUI:ObjectRefKind ExportGuid="b86945ed-9edc-42ca-9ca5-8124fbf47b5c" />
-  <GUI:EnumerationSelectorKind ExportGuid="15cd6017-aed7-4524-901f-9208e7cb30f9" />
-  <GUI:DataObjectKind ExportGuid="c86d56f3-52c5-4864-ae26-b102cd61ffb6" />
-  <GUI:EnumerationSelectorKind ExportGuid="baeca2ae-4fec-4e3f-bbc2-c447e5732d70" />
   <GUI:ObjectRefKind ExportGuid="34164b34-70d8-4665-a31e-cb7d44fd47fd" />
-  <GUI:CheckboxKind ExportGuid="12b829e1-abab-43f3-99ea-e33cd383d7e6" />
-  <GUI:EnumerationSelectorKind ExportGuid="9d414225-460a-4c54-8e36-e368804e387f" />
+  <GUI:ObjectRefKind ExportGuid="b86945ed-9edc-42ca-9ca5-8124fbf47b5c" />
+  <GUI:PropertyGroupKind ExportGuid="d9fb7cec-b71f-48f1-a591-216de253c7d1" />
+  <GUI:StringSelectorKind ExportGuid="b64fb189-27af-4141-be27-5a7f723882c9" />
+  <GUI:TextboxKind ExportGuid="200f0be5-9f23-4ddb-9a00-0133b4fc295d" />
+  <GUI:TextboxKind ExportGuid="227dcbce-4905-4337-a6a0-720c9d218ab7" />
+  <GUI:TextboxKind ExportGuid="2377807c-605b-4e64-9c74-361d3ea6f353" />
   <GUI:TextboxKind ExportGuid="2686036b-b3c9-45b9-9361-e452d69cdc09" />
-  <GUI:EnumerationSelectorKind ExportGuid="11f18fd3-ce10-4d48-8508-e6f3ba857921" />
-  <GUI:DataObjectKind ExportGuid="4149c816-b593-4346-93e4-eb4bba99fab4" />
-  <GUI:ActionKind ExportGuid="1a8577e8-06da-457c-b587-ec2caf640433" />
+  <GUI:WorkspaceKind ExportGuid="329837fd-1146-48b2-9f4e-79aec8958b1e" />
   <KistlBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <KistlBase:Description />
     <KistlBase:ModuleName>Projekte</KistlBase:ModuleName>

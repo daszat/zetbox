@@ -839,7 +839,6 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="ControlKindClass">
