@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T12:08:28.1614746Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T12:53:51.137675Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -6154,6 +6154,7 @@
   <GUI:ViewDescriptor ExportGuid="c479b0e0-e199-4905-853a-a2361d38884b">
     <GUI:ControlRef>18c4efb5-c283-44f2-81bf-c0b70e97b79f</GUI:ControlRef>
     <GUI:IsReadOnly>true</GUI:IsReadOnly>
+    <GUI:Kind>6603c126-83ec-4861-b7d1-d692ec96cc5e</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
@@ -9965,6 +9966,7 @@
   <GUI:DataObjectKind ExportGuid="c86d56f3-52c5-4864-ae26-b102cd61ffb6" />
   <GUI:DataObjectKind ExportGuid="f0010cd6-9256-46ff-9629-5a707fa25158" />
   <GUI:DataObjectSelectionTaskKind ExportGuid="18c0afa2-61bc-4ecb-b1e9-47b33b294573" />
+  <GUI:DataObjectSummaryKind ExportGuid="c2b9dfc5-0744-430c-9373-bcd98f783180" />
   <GUI:EnumerationSelectorKind ExportGuid="11f18fd3-ce10-4d48-8508-e6f3ba857921" />
   <GUI:EnumerationSelectorKind ExportGuid="15cd6017-aed7-4524-901f-9208e7cb30f9" />
   <GUI:EnumerationSelectorKind ExportGuid="9d414225-460a-4c54-8e36-e368804e387f" />
@@ -9984,11 +9986,15 @@
   <GUI:TextboxKind ExportGuid="2377807c-605b-4e64-9c74-361d3ea6f353" />
   <GUI:TextboxKind ExportGuid="2686036b-b3c9-45b9-9361-e452d69cdc09" />
   <GUI:WorkspaceKind ExportGuid="329837fd-1146-48b2-9f4e-79aec8958b1e" />
-  <GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="c80c750f-a0fe-4f59-88d2-3e8d7973cc42">
+  <GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="ddba1bc9-bfa6-4438-bf71-78787a4fd9bf">
+    <GUI:A>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:A>
+    <GUI:B>c2b9dfc5-0744-430c-9373-bcd98f783180</GUI:B>
+  </GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>
+  <GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="95feca0a-90c9-45bf-bf8b-b1799c019fcc">
     <GUI:A>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:A>
     <GUI:B>66e080be-471d-4dc5-9850-25bedbdfc76e</GUI:B>
   </GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>
-  <GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="477869e2-fd4c-4fb1-9ec6-4a9737c927d8">
+  <GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="62639600-0b92-4f0c-a547-855151e44bed">
     <GUI:A>ffc833d5-a2a5-4cde-8335-6285973742d8</GUI:A>
     <GUI:B>90d5ff7f-0c82-4278-bb8d-49c240f6bc2c</GUI:B>
   </GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>
