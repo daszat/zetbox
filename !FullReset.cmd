@@ -31,15 +31,28 @@ IF ERRORLEVEL 1 GOTO FAIL
 cd ..
 
 rem refresh local code
-GetCodeGen.cmd
+rem *********** Interface *********** 
+xcopy /y .\Kistl.Objects\*.* .\Backup\Kistl.Objects\
+
+del /Q .\Kistl.Objects\*.*
+
+xcopy /y C:\temp\KistlCodeGen\Kistl.Objects\*.* .\Kistl.Objects
+
+rem *********** Server *********** 
+xcopy /y .\Kistl.Objects.Server\*.* .\Backup\Kistl.Objects.Server\
+
+del /Q .\Kistl.Objects.Server\*.*
+
+xcopy /y C:\temp\KistlCodeGen\Kistl.Objects.Server\*.* .\Kistl.Objects.Server
 
 rem rebuild with newly generated code
 C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Kistl.Complete.sln
 IF ERRORLEVEL 1 GOTO FAIL
 
+echo Success.
 GOTO EOF
 
 :FAIL
 echo Aborting reset.
-pause
 :EOF
+pause
