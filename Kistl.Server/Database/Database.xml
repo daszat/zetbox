@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T06:50:20.3137443Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T08:01:39.4787044Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -6381,7 +6381,7 @@
   <GUI:ViewDescriptor ExportGuid="2eaa5517-915d-4242-9ce1-91cff16b6046">
     <GUI:ControlRef>857d0acf-6eac-49b5-9940-4f7fb6b81549</GUI:ControlRef>
     <GUI:IsReadOnly>true</GUI:IsReadOnly>
-    <GUI:Kind>4fdf9e9c-a21c-40ab-84c2-16b2c7b7ec5f</GUI:Kind>
+    <GUI:Kind>a012a762-5d8b-4aec-b396-e262cf30f9f9</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>ffc833d5-a2a5-4cde-8335-6285973742d8</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
@@ -6861,6 +6861,7 @@
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
   </KistlBase:BoolProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="b535115c-b847-479d-bdea-a7994ae6eeca">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
     <KistlBase:Description>The default ControlKind to use for this Presentable.</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -6939,7 +6940,7 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="5e2e007c-2e90-4ba6-9c9d-46e62b662ff9">
     <KistlBase:AltText />
-    <KistlBase:CategoryTags />
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>true</KistlBase:IsList>
     <KistlBase:IsNullable>false</KistlBase:IsNullable>
@@ -9956,6 +9957,7 @@
   <GUI:EnumerationSelectorKind ExportGuid="baeca2ae-4fec-4e3f-bbc2-c447e5732d70" />
   <GUI:EnumerationSelectorKind ExportGuid="c75b73c1-db35-493f-9e11-7bfdd244884d" />
   <GUI:EnumerationSelectorKind ExportGuid="fbe2a9e8-3690-4d8b-9cdd-4f5fc4b0778b" />
+  <GUI:LauncherKind ExportGuid="90d5ff7f-0c82-4278-bb8d-49c240f6bc2c" />
   <GUI:ObjectListKind ExportGuid="9731f312-8ce4-4c2d-8d95-1923256dc9b8" />
   <GUI:ObjectRefKind ExportGuid="0a2cda2d-18d9-4cfc-9d54-1fa1616a7a65" />
   <GUI:ObjectRefKind ExportGuid="34164b34-70d8-4665-a31e-cb7d44fd47fd" />
