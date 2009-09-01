@@ -66,8 +66,12 @@ namespace Kistl.Server.Packaging
             if (module.ModuleName == "GUI")
             {
                 AddMetaObjects(result, ctx.GetQuery<ControlKind>()// TODO: .Where(i => i.Module.ID == moduleID)
-                    .ToList().AsQueryable() // TODO: remove this workaround
+                    .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()
                     .OrderBy(i => i.GetInterfaceType().Type.FullName).ThenBy(i => i.ExportGuid));
+                AddMetaObjects(result, ctx.GetPersistenceObjectQuery<PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>()
+                    .ToList().AsQueryable() // TODO: remove this workaround for GetType()
+                    .OrderBy(i => i.A.PresentableModelRef.Assembly.AssemblyName).ThenBy(i => i.A.PresentableModelRef.FullName)
+                    .ThenBy(i => i.B.GetType().FullName));
             }
             return result;
         }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T09:00:55.8617087Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T11:23:00.4947023Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -9964,12 +9964,21 @@
   <GUI:ObjectRefKind ExportGuid="34164b34-70d8-4665-a31e-cb7d44fd47fd" />
   <GUI:ObjectRefKind ExportGuid="b86945ed-9edc-42ca-9ca5-8124fbf47b5c" />
   <GUI:PropertyGroupKind ExportGuid="d9fb7cec-b71f-48f1-a591-216de253c7d1" />
+  <GUI:SingleLineDataObjectKind ExportGuid="66e080be-471d-4dc5-9850-25bedbdfc76e" />
   <GUI:StringSelectorKind ExportGuid="b64fb189-27af-4141-be27-5a7f723882c9" />
   <GUI:TextboxKind ExportGuid="200f0be5-9f23-4ddb-9a00-0133b4fc295d" />
   <GUI:TextboxKind ExportGuid="227dcbce-4905-4337-a6a0-720c9d218ab7" />
   <GUI:TextboxKind ExportGuid="2377807c-605b-4e64-9c74-361d3ea6f353" />
   <GUI:TextboxKind ExportGuid="2686036b-b3c9-45b9-9361-e452d69cdc09" />
   <GUI:WorkspaceKind ExportGuid="329837fd-1146-48b2-9f4e-79aec8958b1e" />
+  <GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="c80c750f-a0fe-4f59-88d2-3e8d7973cc42">
+    <GUI:A>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:A>
+    <GUI:B>66e080be-471d-4dc5-9850-25bedbdfc76e</GUI:B>
+  </GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>
+  <GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="477869e2-fd4c-4fb1-9ec6-4a9737c927d8">
+    <GUI:A>ffc833d5-a2a5-4cde-8335-6285973742d8</GUI:A>
+    <GUI:B>90d5ff7f-0c82-4278-bb8d-49c240f6bc2c</GUI:B>
+  </GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>
   <KistlBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <KistlBase:Description />
     <KistlBase:ModuleName>Projekte</KistlBase:ModuleName>
