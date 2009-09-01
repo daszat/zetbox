@@ -27,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             base.ApplyOnGetTemplate();
 
             this.WriteObjects("                if (", BackingMemberFromName(name), " == Guid.Empty) {\r\n");
-            this.WriteObjects("                    ", BackingMemberFromName(name), " = Guid.NewGuid();\r\n");
+            this.WriteObjects("                    __result = ", BackingMemberFromName(name), " = Guid.NewGuid();\r\n");
             this.WriteObjects("                }\r\n");
         }
     }

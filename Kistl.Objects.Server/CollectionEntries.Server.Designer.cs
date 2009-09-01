@@ -58,7 +58,7 @@ namespace Kistl.App.GUI
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (_ExportGuid == Guid.Empty) {
-                    _ExportGuid = Guid.NewGuid();
+                    __result = _ExportGuid = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -362,7 +362,7 @@ namespace Kistl.App.Base
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (_ExportGuid == Guid.Empty) {
-                    _ExportGuid = Guid.NewGuid();
+                    __result = _ExportGuid = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -666,7 +666,7 @@ namespace Kistl.App.GUI
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (_ExportGuid == Guid.Empty) {
-                    _ExportGuid = Guid.NewGuid();
+                    __result = _ExportGuid = Guid.NewGuid();
                 }
                 return __result;
             }
@@ -1570,7 +1570,7 @@ namespace Kistl.App.Base
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (_ExportGuid == Guid.Empty) {
-                    _ExportGuid = Guid.NewGuid();
+                    __result = _ExportGuid = Guid.NewGuid();
                 }
                 return __result;
             }
