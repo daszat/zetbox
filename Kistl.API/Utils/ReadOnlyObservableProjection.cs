@@ -71,8 +71,8 @@ namespace Kistl.API.Utils
                     }
                     else
                     {
-                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
-                               e.OldItems.Cast<TInput>().Select(this.Selector).ToList()));
+                        // without oldIndex, we have to reset the state of the list.
+                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                     }
                     break;
                 case NotifyCollectionChangedAction.Replace:
