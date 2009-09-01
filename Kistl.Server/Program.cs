@@ -70,6 +70,8 @@ namespace Kistl.Server
         {
             Logging.Configure();
 
+            Logging.Log.Info("Starting Kistl Server");
+
             bool waitForKey = false;
             try
             {
@@ -206,7 +208,7 @@ namespace Kistl.Server
                         Console.WriteLine("Hit the anykey to exit");
                         Console.ReadKey();
                     }
-                    Console.WriteLine("Shutting down");
+                    Logging.Log.Info("Shutting down");
                 }
                 else
                 {
@@ -216,7 +218,7 @@ namespace Kistl.Server
 
                     Console.WriteLine("Server started, press the anykey to exit");
                     Console.ReadKey();
-                    Console.WriteLine("Shutting down");
+                    Logging.Log.Info("Shutting down");
 
                     server.Stop();
                 }

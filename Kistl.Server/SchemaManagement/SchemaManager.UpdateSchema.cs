@@ -10,6 +10,7 @@ using Kistl.App.Extensions;
 using Kistl.Server.Generators.EntityFramework.Implementation;
 using Kistl.Server.Generators.Extensions;
 using Kistl.Server.Generators;
+using Kistl.API.Utils;
 
 namespace Kistl.Server.SchemaManagement
 {
@@ -17,32 +18,35 @@ namespace Kistl.Server.SchemaManagement
 	{
         public void UpdateSchema()
         {
-            WriteReportHeader("Update Schema Report");
-
-            db.BeginTransaction();
-            try
+            using (Logging.Log.TraceMethodCall())
             {
-                UpdateTables();
-                UpdateRelations();
-                UpdateInheritance();
+                WriteReportHeader("Update Schema Report");
 
-                UpdateDeletedRelations();
-                UpdateDeletedTables();
+                db.BeginTransaction();
+                try
+                {
+                    UpdateTables();
+                    UpdateRelations();
+                    UpdateInheritance();
 
-                db.CommitTransaction();
+                    UpdateDeletedRelations();
+                    UpdateDeletedTables();
 
-                SaveSchema(schema);
-            }
-            catch (Exception ex)
-            {
-                db.RollbackTransaction();
+                    db.CommitTransaction();
 
-                report.WriteLine();
-                report.WriteLine("** ERROR:");
-                report.WriteLine(ex.ToString());
-                report.Flush();
+                    SaveSchema(schema);
+                }
+                catch (Exception ex)
+                {
+                    db.RollbackTransaction();
 
-                throw;
+                    report.WriteLine();
+                    report.WriteLine("** ERROR:");
+                    report.WriteLine(ex.ToString());
+                    report.Flush();
+
+                    throw;
+                }
             }
         }
 

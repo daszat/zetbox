@@ -22,114 +22,114 @@ namespace Kistl.Server.Packaging
     {
         public static void Publish(string filename, string[] moduleNamespaces)
         {
-            using (Logging.Log.TraceMethodCall())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                Logging.Log.InfoFormat("Starting Publish for Modules {0}", string.Join(", ", moduleNamespaces));
-                using (IKistlContext ctx = KistlContext.GetContext())
+                using (FileStream fs = File.OpenWrite(filename))
                 {
-                    using (FileStream fs = File.OpenWrite(filename))
-                    {
-                        fs.SetLength(0);
-                        Publish(ctx, fs, moduleNamespaces);
-                    }
-
-                    // Save ExportGuids
-                    ctx.SubmitChanges();
+                    fs.SetLength(0);
+                    Publish(ctx, fs, moduleNamespaces);
                 }
-                Logging.Log.Info("Export finished");
+
+                // Save ExportGuids
+                ctx.SubmitChanges();
             }
         }
 
         public static void Publish(IKistlContext ctx, Stream s, string[] moduleNamespaces)
         {
-            using (XmlTextWriter xml = new XmlTextWriter(s, Encoding.UTF8))
+            using (Logging.Log.TraceMethodCall())
             {
-                var moduleList = GetModules(ctx, moduleNamespaces);
-                WriteStartDocument(xml, new Kistl.App.Base.Module[] 
+                Logging.Log.InfoFormat("Starting Publish for Modules {0}", string.Join(", ", moduleNamespaces));
+                using (XmlTextWriter xml = new XmlTextWriter(s, Encoding.UTF8))
+                {
+                    var moduleList = GetModules(ctx, moduleNamespaces);
+                    WriteStartDocument(xml, new Kistl.App.Base.Module[] 
                         { 
                             ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Namespace == "Kistl.App.Base"),
                             ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Namespace == "Kistl.App.GUI"),
                         });
 
-                var propNamespaces = new string[] { "Kistl.App.Base", "Kistl.App.GUI" };
+                    var propNamespaces = new string[] { "Kistl.App.Base", "Kistl.App.GUI" };
 
-                foreach (var module in moduleList)
-                {
-                    foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
+                    foreach (var module in moduleList)
                     {
-                        ExportObject(xml, obj, propNamespaces);
+                        foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
+                        {
+                            ExportObject(xml, obj, propNamespaces);
+                        }
                     }
-                }
-            }
-        }
-
-        public static void Export(string filename, string[] moduleNamespaces)
-        {
-            using (Logging.Log.TraceMethodCall())
-            {
-                Logging.Log.InfoFormat("Starting Export for Modules {0}", string.Join(", ", moduleNamespaces));
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    using (FileStream fs = File.OpenWrite(filename))
-                    {
-                        fs.SetLength(0);
-                        Export(ctx, fs, moduleNamespaces);
-                    }
-
-                    // Save ExportGuids
-                    ctx.SubmitChanges();
                 }
                 Logging.Log.Info("Export finished");
             }
         }
 
+        public static void Export(string filename, string[] moduleNamespaces)
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                using (FileStream fs = File.OpenWrite(filename))
+                {
+                    fs.SetLength(0);
+                    Export(ctx, fs, moduleNamespaces);
+                }
+
+                // Save ExportGuids
+                ctx.SubmitChanges();
+            }
+        }
+
         public static void Export(IKistlContext ctx, Stream s, string[] moduleNamespaces)
         {
-            using (XmlTextWriter xml = new XmlTextWriter(s, Encoding.UTF8))
+            using (Logging.Log.TraceMethodCall())
             {
-                var moduleList = GetModules(ctx, moduleNamespaces);
-                WriteStartDocument(xml, moduleList);
-
-                var iexpIf = ctx.GetIExportableInterface();
-                foreach (var module in moduleList)
+                Logging.Log.InfoFormat("Starting Export for Modules {0}", string.Join(", ", moduleNamespaces));
+                using (XmlTextWriter xml = new XmlTextWriter(s, Encoding.UTF8))
                 {
-                    Logging.Log.InfoFormat("  exporting {0}", module.ModuleName);
-                    foreach (var objClass in module.DataTypes.OfType<ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf)))
+                    var moduleList = GetModules(ctx, moduleNamespaces);
+                    WriteStartDocument(xml, moduleList);
+
+                    var iexpIf = ctx.GetIExportableInterface();
+                    foreach (var module in moduleList)
                     {
-                        Logging.Log.InfoFormat("    {0} ", objClass.ClassName);
-                        foreach (var obj in ctx.GetQuery(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
+                        Logging.Log.InfoFormat("  exporting {0}", module.ModuleName);
+                        foreach (var objClass in module.DataTypes.OfType<ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf)))
                         {
-                            ExportObject(xml, obj, moduleNamespaces);
+                            Logging.Log.InfoFormat("    {0} ", objClass.ClassName);
+                            foreach (var obj in ctx.GetQuery(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
+                            {
+                                ExportObject(xml, obj, moduleNamespaces);
+                            }
+                        }
+
+                        int moduleID = module.ID; // Dont ask
+                        foreach (var rel in ctx.GetQuery<Relation>().Where(r => r.Module.ID == moduleID))
+                        {
+                            if (rel.GetRelationType() != RelationType.n_m) continue;
+                            if (!rel.A.Type.ImplementsIExportable(ctx)) continue;
+                            if (!rel.B.Type.ImplementsIExportable(ctx)) continue;
+
+                            string ifTypeName = string.Format("{0}, {1}", rel.GetRelationFullName(), ApplicationContext.Current.InterfaceAssembly);
+                            Logging.Log.InfoFormat("    {0} ", ifTypeName);
+                            Type ifType = Type.GetType(ifTypeName);
+                            if (ifType == null)
+                            {
+                                Logging.Log.WarnFormat("RelationType {0} not found", ifTypeName);
+                                continue;
+                            }
+
+                            MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType }, new Type[] { typeof(Guid), typeof(RelationEndRole), typeof(IDataObject) });
+                            var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ExportGuid, RelationEndRole.A, null }));
+
+                            foreach (var obj in relations.OrderBy(obj => ((IExportable)obj).ExportGuid))
+                            {
+                                ExportObject(xml, obj, moduleNamespaces);
+                            }
                         }
                     }
-
-                    int moduleID = module.ID; // Dont ask
-                    foreach (var rel in ctx.GetQuery<Relation>().Where(r => r.Module.ID == moduleID))
-                    {
-                        if (rel.GetRelationType() != RelationType.n_m) continue;
-                        if (!rel.A.Type.ImplementsIExportable(ctx)) continue;
-                        if (!rel.B.Type.ImplementsIExportable(ctx)) continue;
-
-                        string ifTypeName = string.Format("{0}, {1}", rel.GetRelationFullName(), ApplicationContext.Current.InterfaceAssembly);
-                        Logging.Log.InfoFormat("    {0} ", ifTypeName);
-                        Type ifType = Type.GetType(ifTypeName);
-                        if (ifType == null)
-                        {
-                            Logging.Log.WarnFormat("RelationType {0} not found", ifTypeName);
-                            continue;
-                        }
-
-                        MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType }, new Type[] { typeof(Guid), typeof(RelationEndRole), typeof(IDataObject) });
-                        var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ExportGuid, RelationEndRole.A, null }));
-
-                        foreach (var obj in relations.OrderBy(obj => ((IExportable)obj).ExportGuid))
-                        {
-                            ExportObject(xml, obj, moduleNamespaces);
-                        }
-                    }
-                }
-                xml.WriteEndElement();
-                xml.WriteEndDocument();
+                    xml.WriteEndElement();
+                    xml.WriteEndDocument();
+                } 
+                Logging.Log.Info("Export finished");
             }
         }
 

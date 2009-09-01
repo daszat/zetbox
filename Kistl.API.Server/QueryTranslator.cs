@@ -7,6 +7,7 @@ using System.Collections;
 using System.Reflection;
 using System.Collections.ObjectModel;
 using Kistl.API;
+using Kistl.API.Utils;
 
 namespace Kistl.API.Server
 {
@@ -108,6 +109,11 @@ namespace Kistl.API.Server
         {
             if (expression == null) throw new ArgumentNullException("expression");
 
+            if (Logging.Linq.IsDebugEnabled)
+            {
+                Logging.Linq.Debug(expression.ToString());
+            }
+
             Expression translated = this.Visit(expression);
 
             object result = _source.Provider.Execute(translated);
@@ -121,6 +127,12 @@ namespace Kistl.API.Server
         internal IEnumerable ExecuteEnumerable(Expression expression)
         {
             if (expression == null) throw new ArgumentNullException("expression");
+
+            if (Logging.Linq.IsDebugEnabled)
+            {
+                Logging.Linq.Debug(expression.ToString());
+            }
+
             Expression translated = this.Visit(expression);
 
             IQueryable newQuery = _source.Provider.CreateQuery(translated);

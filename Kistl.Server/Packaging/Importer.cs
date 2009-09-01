@@ -16,167 +16,162 @@ namespace Kistl.Server.Packaging
     {
         public static void Deploy(string filename)
         {
-            using (Logging.Log.TraceMethodCall())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                Logging.Log.InfoFormat("Starting Deployment from {0}", filename);
-                using (IKistlContext ctx = KistlContext.GetContext())
+                using (FileStream fs = File.OpenRead(filename))
                 {
-                    using (FileStream fs = File.OpenRead(filename))
-                    {
-                        Deploy(ctx, fs);
-                    }
-                    Logging.Log.Info("Submitting changes");
-                    ctx.SubmitChanges();
+                    Deploy(ctx, fs);
                 }
-                Logging.Log.Info("Deployment finished");
+                Logging.Log.Info("Submitting changes");
+                ctx.SubmitChanges();
             }
         }
 
         public static void Deploy(IKistlContext ctx, Stream s)
         {
-            try
+            using (Logging.Log.TraceMethodCall())
             {
-                // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
-                var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
-                Debug.WriteLine(testObj != null ? testObj.ToString() : "");
-            }
-            catch
-            {
-                // Ignore
-            }
-
-            Dictionary<Guid, IPersistenceObject> currentObjects = new Dictionary<Guid, IPersistenceObject>();
-            using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
-            {
-                Logging.Log.Info("Loading namespaces");
-                var namespaces = LoadModuleNamespaces(xml);
-                if (namespaces.Count() == 0) throw new InvalidOperationException("No modules found in import file");
-
-                foreach (var ns in namespaces)
+                Logging.Log.InfoFormat("Starting Deployment from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
+                try
                 {
-                    Logging.Log.InfoFormat("Prefeching objects for {0}", ns);
-                    var module = ctx.GetQuery<Kistl.App.Base.Module>().FirstOrDefault(m => m.Namespace == ns);
-                    if (module != null)
+                    // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
+                    var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
+                    Debug.WriteLine(testObj != null ? testObj.ToString() : "");
+                }
+                catch
+                {
+                    // Ignore
+                }
+
+                Dictionary<Guid, IPersistenceObject> currentObjects = new Dictionary<Guid, IPersistenceObject>();
+                using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
+                {
+                    Logging.Log.Info("Loading namespaces");
+                    var namespaces = LoadModuleNamespaces(xml);
+                    if (namespaces.Count() == 0) throw new InvalidOperationException("No modules found in import file");
+
+                    foreach (var ns in namespaces)
                     {
-                        foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
+                        Logging.Log.InfoFormat("Prefeching objects for {0}", ns);
+                        var module = ctx.GetQuery<Kistl.App.Base.Module>().FirstOrDefault(m => m.Namespace == ns);
+                        if (module != null)
                         {
-                            currentObjects[((Kistl.App.Base.IExportable)obj).ExportGuid] = obj;
+                            foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
+                            {
+                                currentObjects[((Kistl.App.Base.IExportable)obj).ExportGuid] = obj;
+                            }
+                        }
+                        else
+                        {
+                            Logging.Log.InfoFormat("Found new Module '{0}' in XML", ns);
                         }
                     }
-                    else
+                }
+
+                s.Seek(0, SeekOrigin.Begin);
+                Dictionary<Guid, IPersistenceObject> importedObjects = new Dictionary<Guid, IPersistenceObject>();
+                using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
+                {
+                    Logging.Log.Info("Loading");
+
+                    // Find Root Element
+                    while (xml.Read() && xml.NodeType != XmlNodeType.Element && xml.LocalName != "KistlPackaging" && xml.NamespaceURI != "http://dasz.at/Kistl") ;
+
+                    // Read content
+                    while (xml.Read())
                     {
-                        Logging.Log.InfoFormat("Found new Module '{0}' in XML", ns);
+                        if (xml.NodeType != XmlNodeType.Element) continue;
+                        var obj = ImportElement(ctx, currentObjects, xml);
+                        if (obj == null) throw new InvalidOperationException("Invalid import format: ImportElement returned NULL");
+                        importedObjects[((IExportableInternal)obj).ExportGuid] = obj;
                     }
                 }
-            }
 
-            s.Seek(0, SeekOrigin.Begin);
-            Dictionary<Guid, IPersistenceObject> importedObjects = new Dictionary<Guid, IPersistenceObject>();
-            using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
-            {
-                Logging.Log.Info("Loading");
-
-                // Find Root Element
-                while (xml.Read() && xml.NodeType != XmlNodeType.Element && xml.LocalName != "KistlPackaging" && xml.NamespaceURI != "http://dasz.at/Kistl") ;
-
-                // Read content
-                while (xml.Read())
+                Logging.Log.Info("Reloading References");
+                foreach (var obj in importedObjects.Values)
                 {
-                    if (xml.NodeType != XmlNodeType.Element) continue;
-                    var obj = ImportElement(ctx, currentObjects, xml);
-                    if (obj == null) throw new InvalidOperationException("Invalid import format: ImportElement returned NULL");
-                    importedObjects[((IExportableInternal)obj).ExportGuid] = obj;
+                    obj.ReloadReferences();
                 }
-            }
 
-            Logging.Log.Info("Reloading References");
-            foreach (var obj in importedObjects.Values)
-            {
-                obj.ReloadReferences();
-            }
-
-            var objectsToDelete = currentObjects.Where(p => !importedObjects.ContainsKey(p.Key));
-            Logging.Log.InfoFormat("Deleting {0} objects marked for deletion", objectsToDelete.Count());
-            foreach (var pairToDelete in objectsToDelete)
-            {
-                ctx.Delete(pairToDelete.Value);
+                var objectsToDelete = currentObjects.Where(p => !importedObjects.ContainsKey(p.Key));
+                Logging.Log.InfoFormat("Deleting {0} objects marked for deletion", objectsToDelete.Count());
+                foreach (var pairToDelete in objectsToDelete)
+                {
+                    ctx.Delete(pairToDelete.Value);
+                }
+                Logging.Log.Info("Deployment finished");
             }
         }
 
         public static void LoadFromXml(string filename)
         {
-            using (Logging.Log.TraceMethodCall())
+            using (IKistlContext ctx = KistlContext.GetContext())
             {
-                Logging.Log.InfoFormat("Starting Import from {0}", filename);
-                using (IKistlContext ctx = KistlContext.GetContext())
+                using (FileStream fs = File.OpenRead(filename))
                 {
-                    using (FileStream fs = File.OpenRead(filename))
-                    {
-                        LoadFromXml(ctx, fs);
-                    }
-                    Logging.Log.Info("Submitting changes");
-                    ctx.SubmitChanges();
+                    LoadFromXml(ctx, fs);
                 }
-                Logging.Log.Info("Import finished");
+                Logging.Log.Info("Submitting changes");
+                ctx.SubmitChanges();
             }
         }
 
         public static void LoadFromXml(IKistlContext ctx, string filename)
         {
-            using (Logging.Log.TraceMethodCall())
+            using (FileStream fs = File.OpenRead(filename))
             {
-                Logging.Log.InfoFormat("Starting Import from {0}", filename);
-                using (FileStream fs = File.OpenRead(filename))
-                {
-                    LoadFromXml(ctx, fs);
-                }
-                Logging.Log.Info("Import finished");
+                LoadFromXml(ctx, fs);
             }
         }
 
         public static void LoadFromXml(IKistlContext ctx, Stream s)
         {
-            try
+            using (Logging.Log.TraceMethodCall())
             {
-                // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
-                var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
-                Debug.WriteLine(testObj != null ? testObj.ToString() : "");
-            }
-            catch
-            {
-                // Ignore
-            }
-
-            Dictionary<Guid, IPersistenceObject> objects = new Dictionary<Guid, IPersistenceObject>();
-            using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
-            {
-                Logging.Log.Info("Loading Export Guids");
-                Dictionary<Type, List<Guid>> guids = LoadGuids(xml);
-
-                Logging.Log.Info("Prefeching Objects");
-                PreFetchObjects(ctx, objects, guids);
-            }
-            s.Seek(0, SeekOrigin.Begin);
-            using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
-            {
-
-                Logging.Log.Info("Loading");
-
-                // Find Root Element
-                while (xml.Read() && xml.NodeType != XmlNodeType.Element && xml.LocalName != "KistlPackaging" && xml.NamespaceURI != "http://dasz.at/Kistl") ;
-
-                // Read content
-                while (xml.Read())
+                Logging.Log.InfoFormat("Starting Import from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
+                try
                 {
-                    if (xml.NodeType != XmlNodeType.Element) continue;
-                    ImportElement(ctx, objects, xml);
+                    // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
+                    var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
+                    Debug.WriteLine(testObj != null ? testObj.ToString() : "");
                 }
-            }
+                catch
+                {
+                    // Ignore
+                }
 
-            Logging.Log.Info("Reloading References");
-            foreach (var obj in objects.Values)
-            {
-                obj.ReloadReferences();
+                Dictionary<Guid, IPersistenceObject> objects = new Dictionary<Guid, IPersistenceObject>();
+                using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
+                {
+                    Logging.Log.Info("Loading Export Guids");
+                    Dictionary<Type, List<Guid>> guids = LoadGuids(xml);
+
+                    Logging.Log.Info("Prefeching Objects");
+                    PreFetchObjects(ctx, objects, guids);
+                }
+                s.Seek(0, SeekOrigin.Begin);
+                using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
+                {
+
+                    Logging.Log.Info("Loading");
+
+                    // Find Root Element
+                    while (xml.Read() && xml.NodeType != XmlNodeType.Element && xml.LocalName != "KistlPackaging" && xml.NamespaceURI != "http://dasz.at/Kistl") ;
+
+                    // Read content
+                    while (xml.Read())
+                    {
+                        if (xml.NodeType != XmlNodeType.Element) continue;
+                        ImportElement(ctx, objects, xml);
+                    }
+                }
+
+                Logging.Log.Info("Reloading References");
+                foreach (var obj in objects.Values)
+                {
+                    obj.ReloadReferences();
+                }
+                Logging.Log.Info("Import finished");
             }
         }
 
@@ -186,7 +181,7 @@ namespace Kistl.Server.Packaging
             foreach (Type t in guids.Keys)
             {
                 IEnumerable<IPersistenceObject> result = ctx.FindPersistenceObjects(new InterfaceType(t), guids[t]);
-                Logging.Log.InfoFormat("{0}: XML: {1}, Storage: {2}", t.FullName, guids[t].Count, result.Count());
+                Logging.Log.DebugFormat("{0}: XML: {1}, Storage: {2}", t.FullName, guids[t].Count, result.Count());
 
                 foreach (IPersistenceObject obj in result)
                 {

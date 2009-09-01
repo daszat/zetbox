@@ -11,6 +11,7 @@ using Kistl.Server.Generators.Extensions;
 using Kistl.Server.Generators;
 // TODO: Das gehört angeschaut.
 using Kistl.Server.Generators.EntityFramework.Implementation;
+using Kistl.API.Utils;
 
 namespace Kistl.Server.SchemaManagement
 {
@@ -123,11 +124,14 @@ namespace Kistl.Server.SchemaManagement
 
         private void SaveSchema(IKistlContext schema)
         {
-            using (var ms = new MemoryStream())
+            using (Logging.Log.TraceMethodCall())
             {
-                Packaging.Exporter.Publish(schema, ms, new string[] { "*" });
-                string schemaStr = ASCIIEncoding.Default.GetString(ms.GetBuffer());
-                db.SaveSchema(schemaStr);
+                using (var ms = new MemoryStream())
+                {
+                    Packaging.Exporter.Publish(schema, ms, new string[] { "*" });
+                    string schemaStr = ASCIIEncoding.Default.GetString(ms.GetBuffer());
+                    db.SaveSchema(schemaStr);
+                }
             }
         }
         #endregion

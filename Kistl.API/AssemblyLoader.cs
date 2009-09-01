@@ -127,14 +127,14 @@ namespace Kistl.API
         internal static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (AssemblyLoader.SearchPath.Count <= 0) return null;
-            Logging.Log.InfoFormat("Resolving Assembly {0}", args.Name);
+            Logging.Log.DebugFormat("Resolving Assembly {0}", args.Name);
             return LoadAssemblyByName(args.Name, false);
         }
 
         internal static Assembly ReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (AssemblyLoader.SearchPath.Count <= 0) return null;
-            Logging.Log.InfoFormat("Resolving Assembly {0} for reflection", args.Name);
+            Logging.Log.DebugFormat("Resolving Assembly {0} for reflection", args.Name);
             return LoadAssemblyByName(args.Name, true);
         }
 
@@ -220,7 +220,7 @@ namespace Kistl.API
                 // the folder should have been cleared on initialisation and once
                 // an assembly is loaded, we cannot re-load the assembly anyways.
                 string targetDll = Path.Combine(TargetAssemblyFolder, baseName + ".dll");
-                Logging.Log.InfoFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : "");
+                Logging.Log.DebugFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : "");
                 try
                 {
                     if (!File.Exists(targetDll))

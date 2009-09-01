@@ -11,6 +11,8 @@ namespace Kistl.API.Utils
     public static class Logging
     {
         private static ILog _logger = null;
+        private static ILog _facade = null;
+        private static ILog _linq = null;
 
         public static ILog Log
         {
@@ -21,6 +23,30 @@ namespace Kistl.API.Utils
                     _logger = LogManager.GetLogger("");
                 }
                 return _logger;
+            }
+        }
+
+        public static ILog Facade
+        {
+            get
+            {
+                if (_facade == null)
+                {
+                    _facade = LogManager.GetLogger("Facade");
+                }
+                return _facade;
+            }
+        }
+
+        public static ILog Linq
+        {
+            get
+            {
+                if (_linq == null)
+                {
+                    _linq = LogManager.GetLogger("Linq");
+                }
+                return _linq;
             }
         }
 
@@ -49,20 +75,26 @@ namespace Kistl.API.Utils
             private Stopwatch watch = new Stopwatch();
 
             /// <summary>
+            /// Logger
+            /// </summary>
+            protected ILog _log;
+
+            /// <summary>
             /// Constructs a new TraceMethodCallContext - internal
             /// </summary>
             /// <param name="method">Methodname</param>
             /// <param name="msg">Message</param>
-            internal TraceMethodCallContext(string method, string msg)
+            internal TraceMethodCallContext(ILog log, string method, string msg)
             {
-                if (Log.IsDebugEnabled)
+                _log = log;
+                if (_log.IsDebugEnabled)
                 {
                     this.Method = method;
                     this.Message = msg;
                     if (string.IsNullOrEmpty(Message))
-                        Log.InfoFormat(">> {0}", Method);
+                        _log.InfoFormat(">> {0}", Method);
                     else
-                        Log.InfoFormat(">> {0}: {1}", Method, Message);
+                        _log.InfoFormat(">> {0}: {1}", Method, Message);
                     watch.Start();
                 }
             }
@@ -72,13 +104,13 @@ namespace Kistl.API.Utils
             /// </summary>
             public void Dispose()
             {
-                if (Log.IsDebugEnabled)
+                if (_log.IsDebugEnabled)
                 {
                     watch.Stop();
                     if (string.IsNullOrEmpty(Message))
-                        Log.InfoFormat("<< {0:n0}ms {1}", watch.ElapsedMilliseconds, Method);
+                        _log.InfoFormat("<< {0:n0}ms {1}", watch.ElapsedMilliseconds, Method);
                     else
-                        Log.InfoFormat("<< {0:n0}ms {1}: {2}", watch.ElapsedMilliseconds, Method, Message);
+                        _log.InfoFormat("<< {0:n0}ms {1}: {2}", watch.ElapsedMilliseconds, Method, Message);
                 }
             }
         }
@@ -113,7 +145,7 @@ namespace Kistl.API.Utils
             {
                 if (log.IsDebugEnabled)
                 {
-                    return new TraceMethodCallContext(GetCallingMethodName(log), "");
+                    return new TraceMethodCallContext(log, GetCallingMethodName(log), "");
                 }
                 else
                 {
@@ -122,7 +154,7 @@ namespace Kistl.API.Utils
             }
             catch
             {
-                return new TraceMethodCallContext("<unknown Method>", "");
+                return new TraceMethodCallContext(log, "<unknown Method>", "");
             }
         }
 
@@ -138,7 +170,7 @@ namespace Kistl.API.Utils
             {
                 if (log.IsDebugEnabled)
                 {
-                    return new TraceMethodCallContext(GetCallingMethodName(log), msg);
+                    return new TraceMethodCallContext(log, GetCallingMethodName(log), msg);
                 }
                 else
                 {
@@ -147,7 +179,7 @@ namespace Kistl.API.Utils
             }
             catch
             {
-                return new TraceMethodCallContext("<unknown Method>", msg);
+                return new TraceMethodCallContext(log, "<unknown Method>", msg);
             }
         }
 
@@ -164,7 +196,7 @@ namespace Kistl.API.Utils
             {
                 if (log.IsDebugEnabled)
                 {
-                    return new TraceMethodCallContext(GetCallingMethodName(log), string.Format(format, p));
+                    return new TraceMethodCallContext(log, GetCallingMethodName(log), string.Format(format, p));
                 }
                 else
                 {
@@ -173,7 +205,7 @@ namespace Kistl.API.Utils
             }
             catch
             {
-                return new TraceMethodCallContext("<unknown Method>", string.Format(format, p));
+                return new TraceMethodCallContext(log, "<unknown Method>", string.Format(format, p));
             }
         }
     }

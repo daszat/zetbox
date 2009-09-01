@@ -165,7 +165,7 @@ namespace Kistl.API.Client
 
         public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
-            using (Logging.Log.TraceMethodCall(ifType.ToString()))
+            using (Logging.Facade.TraceMethodCall(ifType.ToString()))
             {
 #if USE_STREAMS
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
@@ -185,7 +185,7 @@ namespace Kistl.API.Client
 
         public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
-            using (Logging.Log.TraceMethodCall("{0} [{1}].{2}", ifType, ID, property))
+            using (Logging.Facade.TraceMethodCall("{0} [{1}].{2}", ifType, ID, property))
             {
 #if USE_STREAMS
                 KistlServiceStreamsMessage msg = new KistlServiceStreamsMessage();
@@ -204,7 +204,7 @@ namespace Kistl.API.Client
 
         public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects)
         {
-            using (Logging.Log.TraceMethodCall())
+            using (Logging.Facade.TraceMethodCall())
             {
 #if USE_STREAMS
                 // Serialize
@@ -265,7 +265,7 @@ namespace Kistl.API.Client
         public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationCollectionEntry
         {
-            using (Logging.Log.TraceMethodCall("Fetching relation"))
+            using (Logging.Facade.TraceMethodCall("Fetching relation"))
             {
                 //Trace.TraceWarning("FetchRelation(ID={0},role={1},parentId={2}): enter", relationId, role, parent.ID);
                 // TODO: could be implemented in generated properties
@@ -286,7 +286,7 @@ namespace Kistl.API.Client
         /// </summary>
         public void Generate()
         {
-            using (Logging.Log.TraceMethodCall())
+            using (Logging.Facade.TraceMethodCall())
             {
                 service.Generate();
             }
@@ -300,7 +300,7 @@ namespace Kistl.API.Client
         [Obsolete]
         public string HelloWorld(string name)
         {
-            using (Logging.Log.TraceMethodCall(name))
+            using (Logging.Facade.TraceMethodCall(name))
             {
                 return service.HelloWorld(name);
             }

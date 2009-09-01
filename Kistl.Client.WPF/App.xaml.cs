@@ -69,6 +69,7 @@ namespace Kistl.Client.WPF
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            Logging.Configure();
             //SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 5);
 
             using (Logging.Log.TraceMethodCall("Starting Client"))

@@ -10,6 +10,7 @@ using Kistl.App.Extensions;
 using Kistl.Server.Generators.EntityFramework.Implementation;
 using Kistl.Server.Generators.Extensions;
 using Kistl.Server.Generators;
+using Kistl.API.Utils;
 
 namespace Kistl.Server.SchemaManagement
 {
@@ -17,28 +18,31 @@ namespace Kistl.Server.SchemaManagement
     {
         public void CheckSchema(bool withRepair)
         {
-            this.repair = withRepair;
-            WriteReportHeader(withRepair ? "Check Schema Report with repair" : "Check Schema Report");
-
-            if (schema.GetQuery<Kistl.App.Base.ObjectClass>().Count() == 0)
+            using (Logging.Log.TraceMethodCall())
             {
-                report.WriteLine("** Error: Current Schema is empty");
-            }
-            else
-            {
-                CheckTables();
-                report.WriteLine();
+                this.repair = withRepair;
+                WriteReportHeader(withRepair ? "Check Schema Report with repair" : "Check Schema Report");
 
-                CheckExtraTables();
-                report.WriteLine();
+                if (schema.GetQuery<Kistl.App.Base.ObjectClass>().Count() == 0)
+                {
+                    report.WriteLine("** Error: Current Schema is empty");
+                }
+                else
+                {
+                    CheckTables();
+                    report.WriteLine();
 
-                CheckRelations();
-                report.WriteLine();
+                    CheckExtraTables();
+                    report.WriteLine();
 
-                CheckInheritance();
-                report.WriteLine();
+                    CheckRelations();
+                    report.WriteLine();
 
-                CheckExtraRelations();
+                    CheckInheritance();
+                    report.WriteLine();
+
+                    CheckExtraRelations();
+                }
             }
         }
 

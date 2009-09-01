@@ -201,6 +201,11 @@ namespace Kistl.API.Client
         /// <returns></returns>
         internal T GetListCall<T>(Expression e)
         {
+            if (Logging.Linq.IsDebugEnabled)
+            {
+                Logging.Linq.Debug(e.ToString());
+            }
+
             List<IStreamable> auxObjects;
             List<IDataObject> serviceResult = VisitAndCallService(e, out auxObjects);
             // prepare caches
@@ -250,6 +255,11 @@ namespace Kistl.API.Client
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
         internal T GetObjectCall<T>(Expression e)
         {
+            if (Logging.Linq.IsDebugEnabled)
+            {
+                Logging.Linq.Debug(e.ToString());
+            }
+
             // Visit
             e = ConstantEvaluator.PartialEval(e);
             Visit(e);
@@ -301,13 +311,11 @@ namespace Kistl.API.Client
         #region IQueryProvider Members
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            Logging.Log.DebugFormat("CreateQuery {0}", expression.ToString());
             return (IQueryable<TElement>)new KistlContextQuery<TElement>(_context, _type, this, expression);
         }
 
         public IQueryable CreateQuery(Expression expression)
         {
-            Logging.Log.DebugFormat("CreateQuery {0}", expression.ToString());
             Type elementType = expression.Type.FindElementTypes().First();
             return (IQueryable)Activator.CreateInstance(typeof(KistlContextQuery<>)
                 .MakeGenericType(elementType), new object[] { _context, _type, this, expression });

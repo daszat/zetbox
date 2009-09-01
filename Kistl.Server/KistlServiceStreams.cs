@@ -31,7 +31,7 @@ namespace Kistl.Server
             {
                 msg.Seek(0, SeekOrigin.Begin);
                 KistlServiceStreamsMessage m = new KistlServiceStreamsMessage(msg);
-                using (Logging.Log.TraceMethodCall(m.Type.ToString()))
+                using (Logging.Facade.TraceMethodCall(m.Type.ToString()))
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
@@ -64,7 +64,7 @@ namespace Kistl.Server
             try
             {
                 msg.Seek(0, SeekOrigin.Begin);
-                using (Logging.Log.TraceMethodCall())
+                using (Logging.Facade.TraceMethodCall())
                 {
 
                     BinaryReader sr = new BinaryReader(msg);
@@ -116,7 +116,7 @@ namespace Kistl.Server
             {
                 msg.Seek(0, SeekOrigin.Begin);
                 KistlServiceStreamsMessage m = new KistlServiceStreamsMessage(msg);
-                using (Logging.Log.TraceMethodCall(m.Type.ToString()))
+                using (Logging.Facade.TraceMethodCall(m.Type.ToString()))
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
@@ -205,7 +205,7 @@ namespace Kistl.Server
             {
                 msg.Seek(0, SeekOrigin.Begin);
                 KistlServiceStreamsMessage m = new KistlServiceStreamsMessage(msg);
-                using (Logging.Log.TraceMethodCall(m.Type.ToString()))
+                using (Logging.Facade.TraceMethodCall(m.Type.ToString()))
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
@@ -237,7 +237,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (Logging.Log.TraceMethodCall("relId = {0}, role = {1}, parentObjID = {2}", relId, serializableRole, parentObjID))
+                using (Logging.Facade.TraceMethodCall("relId = {0}, role = {1}, parentObjID = {2}", relId, serializableRole, parentObjID))
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
