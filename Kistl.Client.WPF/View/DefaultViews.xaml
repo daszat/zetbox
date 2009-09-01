@@ -22,12 +22,10 @@
 
     <view:VisualTypeTemplateSelector x:Key="defaultTemplateSelector" />
     <view:VisualTypeTemplateSelector x:Key="listItemTemplateSelector"
-                                     RequestedType="ObjectListEntry"
                                      RequestedKind="Kistl.App.GUI.SingleLineDataObjectKind" />
     <!--<view:VisualTypeTemplateSelector x:Key="gridCellTemplateSelector"
                                      RequestedType="GridCell"
                                      RequestedKind="FAIL" />-->
     <view:VisualTypeTemplateSelector x:Key="summaryTemplateSelector"
-                                     RequestedType="GridCell"
                                      RequestedKind="Kistl.App.GUI.DataObjectSummaryKind" />
 </ResourceDictionary>

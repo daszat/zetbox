@@ -597,73 +597,6 @@ namespace Kistl.App.GUI
 		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_Getter;
 		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PostSetter;
-        /// <summary>
-        /// The visual type of this View
-        /// </summary>
-        // enumeration property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.EnumerationPropertyTemplate
-        // implement the user-visible interface
-        public Kistl.App.GUI.VisualType VisualType
-        {
-            get
-            {
-				var __value = _VisualType;
-				if(OnVisualType_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Kistl.App.GUI.VisualType>(__value);
-					OnVisualType_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
-            }
-            set
-            {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (_VisualType != value)
-                {
-					var __oldValue = _VisualType;
-					var __newValue = value;
-                    if(OnVisualType_PreSetter != null)
-                    {
-						var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.VisualType>(__oldValue, __newValue);
-						OnVisualType_PreSetter(this, e);
-						__newValue = e.Result;
-                    }
-					
-                    NotifyPropertyChanging("VisualType", "VisualType__Implementation__", __oldValue, __newValue);
-                    _VisualType = value;
-                    NotifyPropertyChanged("VisualType", "VisualType__Implementation__", __oldValue, __newValue);
-                    if(OnVisualType_PostSetter != null)
-                    {
-						var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.VisualType>(__oldValue, __newValue);
-						OnVisualType_PostSetter(this, e);
-                    }
-                    
-                }
-            }
-        }
-        
-        /// <summary>backing store for VisualType</summary>
-        private Kistl.App.GUI.VisualType _VisualType;
-        
-        /// <summary>EF sees only this property, for VisualType</summary>
-        [XmlIgnore()]
-        [EdmScalarProperty()]
-        public int VisualType__Implementation__
-        {
-            get
-            {
-                return (int)this.VisualType;
-            }
-            set
-            {
-                this.VisualType = (Kistl.App.GUI.VisualType)value;
-            }
-        }
-        
-		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.VisualType> OnVisualType_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.VisualType> OnVisualType_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.VisualType> OnVisualType_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(ViewDescriptor));
@@ -679,7 +612,6 @@ namespace Kistl.App.GUI
 			me.ExportGuid = other.ExportGuid;
 			me.IsReadOnly = other.IsReadOnly;
 			me.Toolkit = other.Toolkit;
-			me.VisualType = other.VisualType;
 			this._fk_ControlRef = otherImpl._fk_ControlRef;
 			this._fk_Kind = otherImpl._fk_Kind;
 			this._fk_Module = otherImpl._fk_Module;
@@ -803,15 +735,6 @@ namespace Kistl.App.GUI
 					
 					return String.Join("; ", errors);
 				}
-				case "VisualType":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("af9c1a03-ce46-4719-96c0-c38287d26ac0")).Constraints
-						.Where(c => !c.IsValid(this, this.VisualType))
-						.Select(c => c.GetErrorText(this, this.VisualType))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				default:
 					return base.GetPropertyError(propertyName);
 			}
@@ -869,7 +792,6 @@ namespace Kistl.App.GUI
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(PresentedModelDescriptor != null ? PresentedModelDescriptor.ID : (int?)null, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
-            BinarySerializer.ToStream((int)((ViewDescriptor)this).VisualType, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -892,7 +814,6 @@ namespace Kistl.App.GUI
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_PresentedModelDescriptor, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
-            BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -906,7 +827,6 @@ namespace Kistl.App.GUI
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.ToStream(PresentedModelDescriptor != null ? PresentedModelDescriptor.ID : (int?)null, xml, "PresentedModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
-            XmlStreamer.ToStream((int)this.VisualType, xml, "VisualType", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -929,7 +849,6 @@ namespace Kistl.App.GUI
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, xml, "Toolkit", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, xml, "VisualType", "Kistl.App.GUI");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -943,7 +862,6 @@ namespace Kistl.App.GUI
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(PresentedModelDescriptor != null ? PresentedModelDescriptor.ExportGuid : (Guid?)null, xml, "PresentedModelDescriptor", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.VisualType, xml, "VisualType", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -964,7 +882,6 @@ namespace Kistl.App.GUI
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, xml, "Toolkit", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).VisualType = (Kistl.App.GUI.VisualType)v, xml, "VisualType", "Kistl.App.GUI");
         }
 
 #endregion

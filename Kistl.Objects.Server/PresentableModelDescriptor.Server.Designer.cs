@@ -148,73 +148,6 @@ namespace Kistl.App.GUI
 		public event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PostSetter;
         /// <summary>
-        /// The default visual type used for this PresentableModel
-        /// </summary>
-        // enumeration property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.EnumerationPropertyTemplate
-        // implement the user-visible interface
-        public Kistl.App.GUI.VisualType DefaultVisualType
-        {
-            get
-            {
-				var __value = _DefaultVisualType;
-				if(OnDefaultVisualType_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Kistl.App.GUI.VisualType>(__value);
-					OnDefaultVisualType_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
-            }
-            set
-            {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (_DefaultVisualType != value)
-                {
-					var __oldValue = _DefaultVisualType;
-					var __newValue = value;
-                    if(OnDefaultVisualType_PreSetter != null)
-                    {
-						var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.VisualType>(__oldValue, __newValue);
-						OnDefaultVisualType_PreSetter(this, e);
-						__newValue = e.Result;
-                    }
-					
-                    NotifyPropertyChanging("DefaultVisualType", "DefaultVisualType__Implementation__", __oldValue, __newValue);
-                    _DefaultVisualType = value;
-                    NotifyPropertyChanged("DefaultVisualType", "DefaultVisualType__Implementation__", __oldValue, __newValue);
-                    if(OnDefaultVisualType_PostSetter != null)
-                    {
-						var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.VisualType>(__oldValue, __newValue);
-						OnDefaultVisualType_PostSetter(this, e);
-                    }
-                    
-                }
-            }
-        }
-        
-        /// <summary>backing store for DefaultVisualType</summary>
-        private Kistl.App.GUI.VisualType _DefaultVisualType;
-        
-        /// <summary>EF sees only this property, for DefaultVisualType</summary>
-        [XmlIgnore()]
-        [EdmScalarProperty()]
-        public int DefaultVisualType__Implementation__
-        {
-            get
-            {
-                return (int)this.DefaultVisualType;
-            }
-            set
-            {
-                this.DefaultVisualType = (Kistl.App.GUI.VisualType)value;
-            }
-        }
-        
-		public event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.VisualType> OnDefaultVisualType_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.VisualType> OnDefaultVisualType_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.VisualType> OnDefaultVisualType_PostSetter;
-        /// <summary>
         /// describe this PresentableModel
         /// </summary>
         // value type property
@@ -567,7 +500,6 @@ namespace Kistl.App.GUI
 			var otherImpl = (PresentableModelDescriptor__Implementation__)obj;
 			var me = (PresentableModelDescriptor)this;
 
-			me.DefaultVisualType = other.DefaultVisualType;
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
 			this._fk_DefaultKind = otherImpl._fk_DefaultKind;
@@ -634,15 +566,6 @@ namespace Kistl.App.GUI
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b535115c-b847-479d-bdea-a7994ae6eeca")).Constraints
 						.Where(c => !c.IsValid(this, this.DefaultKind))
 						.Select(c => c.GetErrorText(this, this.DefaultKind))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "DefaultVisualType":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("2ab3364a-561c-40f3-a83a-731ce0f1e2de")).Constraints
-						.Where(c => !c.IsValid(this, this.DefaultVisualType))
-						.Select(c => c.GetErrorText(this, this.DefaultVisualType))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -736,7 +659,6 @@ namespace Kistl.App.GUI
 			if (auxObjects != null) {
 				auxObjects.Add(DefaultKind);
 			}
-            BinarySerializer.ToStream((int)((PresentableModelDescriptor)this).DefaultVisualType, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
@@ -748,7 +670,6 @@ namespace Kistl.App.GUI
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_DefaultKind, binStream);
-            BinarySerializer.FromStreamConverter(v => ((PresentableModelDescriptor)this).DefaultVisualType = (Kistl.App.GUI.VisualType)v, binStream);
             {
                 var tmp = this._Description;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -769,7 +690,6 @@ namespace Kistl.App.GUI
 			
             base.ToStream(xml);
             XmlStreamer.ToStream(DefaultKind != null ? DefaultKind.ID : (int?)null, xml, "DefaultKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream((int)this.DefaultVisualType, xml, "DefaultVisualType", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
@@ -781,7 +701,6 @@ namespace Kistl.App.GUI
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_DefaultKind, xml, "DefaultKind", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((PresentableModelDescriptor)this).DefaultVisualType = (Kistl.App.GUI.VisualType)v, xml, "DefaultVisualType", "Kistl.App.GUI");
             {
                 var tmp = this._Description;
                 XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.GUI");
@@ -802,7 +721,6 @@ namespace Kistl.App.GUI
 			
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultKind != null ? DefaultKind.ExportGuid : (Guid?)null, xml, "DefaultKind", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.DefaultVisualType, xml, "DefaultVisualType", "Kistl.App.GUI");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
@@ -812,7 +730,6 @@ namespace Kistl.App.GUI
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._fk_guid_DefaultKind, xml, "DefaultKind", "Kistl.App.GUI");
-            XmlStreamer.FromStreamConverter(v => ((PresentableModelDescriptor)this).DefaultVisualType = (Kistl.App.GUI.VisualType)v, xml, "DefaultVisualType", "Kistl.App.GUI");
             {
                 var tmp = this._Description;
                 XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.GUI");

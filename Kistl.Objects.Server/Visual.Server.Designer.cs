@@ -154,73 +154,6 @@ namespace Kistl.App.GUI
 
 
         /// <summary>
-        /// Which visual is represented here
-        /// </summary>
-        // enumeration property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.EnumerationPropertyTemplate
-        // implement the user-visible interface
-        public Kistl.App.GUI.VisualType ControlType
-        {
-            get
-            {
-				var __value = _ControlType;
-				if(OnControlType_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Kistl.App.GUI.VisualType>(__value);
-					OnControlType_Getter(this, e);
-					__value = e.Result;
-				}
-                return __value;
-            }
-            set
-            {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (_ControlType != value)
-                {
-					var __oldValue = _ControlType;
-					var __newValue = value;
-                    if(OnControlType_PreSetter != null)
-                    {
-						var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.VisualType>(__oldValue, __newValue);
-						OnControlType_PreSetter(this, e);
-						__newValue = e.Result;
-                    }
-					
-                    NotifyPropertyChanging("ControlType", "ControlType__Implementation__", __oldValue, __newValue);
-                    _ControlType = value;
-                    NotifyPropertyChanged("ControlType", "ControlType__Implementation__", __oldValue, __newValue);
-                    if(OnControlType_PostSetter != null)
-                    {
-						var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.VisualType>(__oldValue, __newValue);
-						OnControlType_PostSetter(this, e);
-                    }
-                    
-                }
-            }
-        }
-        
-        /// <summary>backing store for ControlType</summary>
-        private Kistl.App.GUI.VisualType _ControlType;
-        
-        /// <summary>EF sees only this property, for ControlType</summary>
-        [XmlIgnore()]
-        [EdmScalarProperty()]
-        public int ControlType__Implementation__
-        {
-            get
-            {
-                return (int)this.ControlType;
-            }
-            set
-            {
-                this.ControlType = (Kistl.App.GUI.VisualType)value;
-            }
-        }
-        
-		public event PropertyGetterHandler<Kistl.App.GUI.Visual, Kistl.App.GUI.VisualType> OnControlType_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.Visual, Kistl.App.GUI.VisualType> OnControlType_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.Visual, Kistl.App.GUI.VisualType> OnControlType_PostSetter;
-        /// <summary>
         /// A short description of the utility of this visual
         /// </summary>
         // value type property
@@ -463,7 +396,6 @@ namespace Kistl.App.GUI
 			var otherImpl = (Visual__Implementation__)obj;
 			var me = (Visual)this;
 
-			me.ControlType = other.ControlType;
 			me.Description = other.Description;
 			this._fk_Method = otherImpl._fk_Method;
 			this._fk_Property = otherImpl._fk_Property;
@@ -541,15 +473,6 @@ namespace Kistl.App.GUI
 					
 					return String.Join("; ", errors);
 				}
-				case "ControlType":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("bdeb28ac-665e-4bb6-8f7b-0ae983d77d56")).Constraints
-						.Where(c => !c.IsValid(this, this.ControlType))
-						.Select(c => c.GetErrorText(this, this.ControlType))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "Description":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8d3b7c91-2bbf-4dcf-bc37-318dc0fda92d")).Constraints
@@ -610,7 +533,6 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(binStream, auxObjects);
-            BinarySerializer.ToStream((int)((Visual)this).ControlType, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(Method != null ? Method.ID : (int?)null, binStream);
             BinarySerializer.ToStream(Property != null ? Property.ID : (int?)null, binStream);
@@ -620,7 +542,6 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(binStream);
-            BinarySerializer.FromStreamConverter(v => ((Visual)this).ControlType = (Kistl.App.GUI.VisualType)v, binStream);
             {
                 var tmp = this._Description;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -634,7 +555,6 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream((int)this.ControlType, xml, "ControlType", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.ToStream(Method != null ? Method.ID : (int?)null, xml, "Method", "Kistl.App.GUI");
             XmlStreamer.ToStream(Property != null ? Property.ID : (int?)null, xml, "Property", "Kistl.App.GUI");
@@ -644,7 +564,6 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(xml);
-            XmlStreamer.FromStreamConverter(v => ((Visual)this).ControlType = (Kistl.App.GUI.VisualType)v, xml, "ControlType", "Kistl.App.GUI");
             {
                 var tmp = this._Description;
                 XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.GUI");

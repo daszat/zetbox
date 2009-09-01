@@ -4,19 +4,13 @@
 
 namespace Kistl.Client.WPF
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
 
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.App.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.TimeRecords;
-    using Kistl.Client.WPF.View.TimeRecords;
-    using Kistl.API.Utils;
 
     /// <content>Contains various and temporary fixes needed to clean the database</content>
     public partial class App
@@ -111,60 +105,11 @@ namespace Kistl.Client.WPF
         }
 
         /// <summary>
-        /// Create various descriptors for work in progress.
-        /// </summary>
-        private static void CreateVariousDescriptors()
-        {
-            //using (Logging.TraceMethodCall("Creating various descriptors"))
-            //{
-            //    using (IKistlContext ctx = KistlContext.GetContext())
-            //    {
-            //        foreach (var t in new[] {
-            //            typeof(ChooseReferencePropertyModel<string>),
-            //            typeof(EnumerationPropertyModel<Multiplicity>),
-            //            typeof(EnumerationPropertyModel<StorageType>),
-            //            typeof(EnumerationPropertyModel<VisualType>),
-            //            typeof(EnumerationPropertyModel<Toolkit>),
-            //            typeof(EnumerationPropertyModel<Kistl.App.Test.TestEnum>),
-            //            typeof(NullableResultModel<bool>),
-            //            typeof(NullableResultModel<DateTime>),
-            //            typeof(NullableResultModel<double>),
-            //            typeof(NullableResultModel<int>),
-            //            typeof(NullableValuePropertyModel<bool>),
-            //            typeof(NullableValuePropertyModel<DateTime>),
-            //            typeof(NullableValuePropertyModel<double>),
-            //            typeof(NullableValuePropertyModel<Guid>),
-            //            //typeof(NullableValuePropertyModel<int>),
-            //            typeof(ObjectListModel),
-            //            typeof(ObjectReferenceModel),
-            //            typeof(ObjectResultModel<IDataObject>),
-            //            typeof(ObjectResultModel<string>),
-            //            typeof(ReferencePropertyModel<string>),
-            //        })
-            //        {
-            //            CreateViewDescriptorForPresentableModelType(ctx, t);
-            //        }
-            //        ctx.SubmitChanges();
-            //    }
-            //}
-        }
-
-        private static void CreateViewDescriptorForPresentableModelType(IKistlContext ctx, Type pvmt)
-        {
-            var vDesc = ctx.Create<ViewDescriptor>();
-            vDesc.ControlRef = typeof(Kistl.Client.WPF.View.GridCells.StringValue).ToRef(ctx);
-            vDesc.PresentedModelDescriptor = pvmt.ToRef(ctx).GetPresentableModelDescriptor();
-            vDesc.Toolkit = Toolkit.WPF;
-            vDesc.VisualType = VisualType.GridCell;
-        }
-
-        /// <summary>
         /// Calls currently needed Database fixes
         /// </summary>
         private void FixupDatabase()
         {
             //FixNotNullableConstraints();
-            CreateVariousDescriptors();
             //FixupTypeRefParents();
         }
     }

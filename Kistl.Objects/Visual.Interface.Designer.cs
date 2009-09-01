@@ -24,13 +24,6 @@ namespace Kistl.App.GUI
 
         ICollection<Kistl.App.GUI.Visual> ContextMenu { get; }
         /// <summary>
-        /// Which visual is represented here
-        /// </summary>
-		Kistl.App.GUI.VisualType ControlType {
-			get;
-			set;
-		}
-        /// <summary>
         /// A short description of the utility of this visual
         /// </summary>
 		string Description {

@@ -136,7 +136,6 @@
     <Compile Include="StorageType.Interface.Designer.cs" />
     <Compile Include="TestEnum.Interface.Designer.cs" />
     <Compile Include="Toolkit.Interface.Designer.cs" />
-    <Compile Include="VisualType.Interface.Designer.cs" />
     <Compile Include="TestPhoneStruct.Interface.Designer.cs" />
     <Compile Include="AssemblyInfo.Interface.cs" />
     <Compile Include="ModuleRepository.Interface.Designer.cs" />

@@ -626,7 +626,6 @@
                         Relationship="Model.FK_PresentableModelDescriptor_has_ControlKind"
                         FromRole="Presentable"
                         ToRole="DefaultKind" />
-    <Property Name="DefaultVisualType__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <NavigationProperty Name="Module__Implementation__"
@@ -872,7 +871,6 @@
                         FromRole="View"
                         ToRole="PresentedModelDescriptor" />
     <Property Name="Toolkit__Implementation__" Type="Int32" Nullable="false" />
-    <Property Name="VisualType__Implementation__" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Visual">
     <Key>
@@ -887,7 +885,6 @@
                         Relationship="Model.FK_Visual_hasContextMenu_Visual_Visual"
                         FromRole="Visual"
                         ToRole="CollectionEntry" />
-    <Property Name="ControlType__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Method__Implementation__"
                         Relationship="Model.FK_Visual_has_Method"

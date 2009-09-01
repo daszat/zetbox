@@ -21,13 +21,6 @@ namespace Kistl.App.GUI
 			set;
 		}
         /// <summary>
-        /// The default visual type used for this PresentableModel
-        /// </summary>
-		Kistl.App.GUI.VisualType DefaultVisualType {
-			get;
-			set;
-		}
-        /// <summary>
         /// describe this PresentableModel
         /// </summary>
 		string Description {

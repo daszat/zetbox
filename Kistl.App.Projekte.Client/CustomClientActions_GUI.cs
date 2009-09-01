@@ -5,7 +5,6 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
-using Kistl.App.GUI.Hacks;
 using Kistl.API.Client;
 
 namespace Kistl.App.GUI
@@ -21,15 +20,15 @@ namespace Kistl.App.GUI
         {
             if (obj.Method != null)
             {
-                e.Result = String.Format("Method Visual: {0} for {1}", obj.ControlType, obj.Method);
+                e.Result = String.Format("Method Visual: {0}", obj.Method);
             }
             else if (obj.Property != null)
             {
-                e.Result = String.Format("Property Visual: {0} for {1}", obj.ControlType, obj.Property);
+                e.Result = String.Format("Property Visual: {0}", obj.Property);
             }
             else
             {
-                e.Result = String.Format("Other Visual: {0}, ", obj.ControlType, obj.Description);
+                e.Result = String.Format("Other Visual: {0}", obj.Description);
             }
         }
 
@@ -37,7 +36,7 @@ namespace Kistl.App.GUI
         {
             e.Result = String.Format("{0} (default: {1})",
                 obj.PresentableModelRef == null ? "(no type)" : obj.PresentableModelRef.ToString(),
-                obj.DefaultVisualType);
+                obj.DefaultKind);
         }
 
 
@@ -47,14 +46,14 @@ namespace Kistl.App.GUI
             obj.DisplayedTypeAssembly = obj.Context.GetQuery<Assembly>().Where(assembly => assembly.AssemblyName == displayedType.Assembly.FullName).SingleOrDefault();
             obj.DisplayedTypeFullName = displayedType.FullName;
             obj.DisplayName = String.Format("Default Template for {0}", displayedType.Name);
-            obj.VisualTree = TemplateHelper.CreateDefaultVisualTree(obj.Context, cls);
+            //obj.VisualTree = TemplateHelper.CreateDefaultVisualTree(obj.Context, cls);
         }
 
         public void OnToString_ViewDescriptor(ViewDescriptor obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0}/{1} View of {2}",
                 obj.Toolkit,
-                obj.VisualType,
+                obj.Kind != null ? obj.Kind.ClassName : "(unknown kind)",
                 obj.PresentedModelDescriptor == null || obj.PresentedModelDescriptor.PresentableModelRef == null
                     ? "(none)"
                     : obj.PresentedModelDescriptor.PresentableModelRef.ToString());

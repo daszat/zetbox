@@ -1193,7 +1193,6 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_DefaultKind" Type="int" />
-    <Property Name="DefaultVisualType" Type="int" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_Module" Type="int" />
@@ -1412,7 +1411,6 @@
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_PresentedModelDescriptor" Type="int" />
     <Property Name="Toolkit" Type="int" Nullable="false" />
-    <Property Name="VisualType" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Visual">
@@ -1420,7 +1418,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ControlType" Type="int" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="fk_Method" Type="int" />
     <Property Name="fk_Property" Type="int" />

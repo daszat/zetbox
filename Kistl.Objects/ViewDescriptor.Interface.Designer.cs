@@ -55,12 +55,5 @@ namespace Kistl.App.GUI
 			get;
 			set;
 		}
-        /// <summary>
-        /// The visual type of this View
-        /// </summary>
-		Kistl.App.GUI.VisualType VisualType {
-			get;
-			set;
-		}
     }
 }

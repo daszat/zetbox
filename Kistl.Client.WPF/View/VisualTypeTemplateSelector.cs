@@ -15,6 +15,7 @@ namespace Kistl.Client.WPF.View
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
     using System.Diagnostics;
+    using Kistl.API.Utils;
 
     /// <summary>
     /// A <see cref="DataTemplateSelector"/> to choose the appropriate
@@ -36,10 +37,15 @@ namespace Kistl.Client.WPF.View
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor();
             if (pmd == null)
             {
-                throw new ArgumentOutOfRangeException("mdl", "No matching PresentableModelDescriptor found");
+                Logging.Log.ErrorFormat("No matching PresentableModelDescriptor found for {0}", mdl.GetType());
+                return null;
             }
 
             ViewDescriptor visualDesc = LookupSecondaryViewDescriptor(pmd, controlKindClassName);
+            if (visualDesc == null)
+            {
+                return null;
+            }
 
             DataTemplate result = new DataTemplate();
             if (visualDesc != null)
@@ -76,7 +82,8 @@ namespace Kistl.Client.WPF.View
                         }
                         else
                         {
-                            throw new ArgumentOutOfRangeException("controlKindClassName", "Couldn't find matching controlKind");
+                            Logging.Log.WarnFormat("Couldn't find matching controlKind: '{0}'", controlKindClassName);
+                            visualDesc = null;
                         }
                     }
                     else
@@ -93,16 +100,6 @@ namespace Kistl.Client.WPF.View
         /// </summary>
         public VisualTypeTemplateSelector()
         {
-            RequestedType = null;
-        }
-
-        /// <summary>
-        /// Gets or sets the kind of view to use. To select the default view, leave this property at its default null value.
-        /// </summary>
-        public VisualType? RequestedType
-        {
-            get;
-            set;
         }
 
         /// <summary>
@@ -122,15 +119,16 @@ namespace Kistl.Client.WPF.View
                 return (DataTemplate)((FrameworkElement)container).FindResource("nullTemplate");
             }
 
-            if (String.IsNullOrEmpty(RequestedKind) != (null == RequestedType))
-            {
-                throw new InvalidOperationException("Cannot SelectTemplate with status mismatch between RequestedValue and RequestedKind");
-            }
-
             var model = item as PresentableModel;
+            DataTemplate result = null;
             if (model != null)
             {
-                return VisualTypeTemplateSelector.SelectTemplate(model, RequestedKind);
+                result = VisualTypeTemplateSelector.SelectTemplate(model, RequestedKind);
+            }
+
+            if (result != null)
+            {
+                return result;
             }
             else
             {

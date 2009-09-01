@@ -382,7 +382,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.PresentableModelDescriptor)">
 	    <MappingFragment StoreEntitySet="PresentableModelDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="DefaultVisualType__Implementation__" ColumnName="DefaultVisualType" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 	    </MappingFragment>
@@ -561,7 +560,6 @@
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
 <ScalarProperty Name="Toolkit__Implementation__" ColumnName="Toolkit" />
-<ScalarProperty Name="VisualType__Implementation__" ColumnName="VisualType" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -569,7 +567,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Visual)">
 	    <MappingFragment StoreEntitySet="Visual">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ControlType__Implementation__" ColumnName="ControlType" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 	    </MappingFragment>
       </EntityTypeMapping>

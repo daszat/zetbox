@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T12:53:51.137675Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T14:06:09.2865541Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -5317,259 +5317,220 @@
   </GUI:Icon>
   <GUI:PresentableModelDescriptor ExportGuid="3d779eaf-1c37-4c3b-822b-0b1af0926802">
     <GUI:DefaultKind>1a8577e8-06da-457c-b587-ec2caf640433</GUI:DefaultKind>
-    <GUI:DefaultVisualType>17</GUI:DefaultVisualType>
     <GUI:Description>An action which can be triggered by the user</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>cd9797e0-ad1b-4dd7-b66b-1f2528f7a50c</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="d1135824-6e2a-41e7-a1db-83621b5de078">
     <GUI:DefaultKind>34164b34-70d8-4665-a31e-cb7d44fd47fd</GUI:DefaultKind>
-    <GUI:DefaultVisualType>26</GUI:DefaultVisualType>
     <GUI:Description>Select a string value from a set of values</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>a1c64886-b50d-4e06-b806-dc359e605626</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="d8e95ac5-d46a-4dfa-a574-12ea299eadc4">
     <GUI:DefaultKind>f0010cd6-9256-46ff-9629-5a707fa25158</GUI:DefaultKind>
-    <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
     <GUI:Description>A complete IDataObject</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>a07f30a6-b920-4fef-98ac-53155791e804</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="7ec25c1a-c819-4219-9432-af1fdb0aaf63">
     <GUI:DefaultKind>18c0afa2-61bc-4ecb-b1e9-47b33b294573</GUI:DefaultKind>
-    <GUI:DefaultVisualType>23</GUI:DefaultVisualType>
     <GUI:Description>A task for the user: select an IDataObject from a list</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>312383a3-5c45-43cf-a032-5271792a4eec</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="0d3a2e45-9a49-4e29-afea-619baa8d3871">
     <GUI:DefaultKind>4149c816-b593-4346-93e4-eb4bba99fab4</GUI:DefaultKind>
-    <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
     <GUI:Description>DataObjectModel with specific extensions for DataTypes</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>41b6d0a1-a2ae-4c68-8997-503db83319bc</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="a6ff986c-a485-4c4d-947c-e59d14112ec2">
     <GUI:DefaultKind>9d414225-460a-4c54-8e36-e368804e387f</GUI:DefaultKind>
-    <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
     <GUI:Description>An enumeration value for generic enumerations</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>48cdd708-4699-4da7-9cb0-83b2a8209c95</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="4dad4724-51ca-4618-9ea5-58ac201eba8a">
     <GUI:DefaultKind>15cd6017-aed7-4524-901f-9208e7cb30f9</GUI:DefaultKind>
-    <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
     <GUI:Description>An enumeration value for TestEnum</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>ec884659-371f-41bc-aeba-b9cd61d010df</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="0b8b98cf-a618-49e8-a2f3-9c3c6b9427ed">
     <GUI:DefaultKind>baeca2ae-4fec-4e3f-bbc2-c447e5732d70</GUI:DefaultKind>
-    <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
     <GUI:Description>An enumeration value for VisualType</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>96ee55ea-57f8-40e4-a4c6-c60e39b9f35b</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="0151803d-60f4-428a-8b69-a77b783bbc54">
     <GUI:DefaultKind>c75b73c1-db35-493f-9e11-7bfdd244884d</GUI:DefaultKind>
-    <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
     <GUI:Description>An enumeration value for StorageType</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>567b58ce-dced-4a54-bc05-1ed0dfe8943a</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="4b7ef800-2ddb-4b99-b0d4-aefd9373ba70">
     <GUI:DefaultKind>fbe2a9e8-3690-4d8b-9cdd-4f5fc4b0778b</GUI:DefaultKind>
-    <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
     <GUI:Description>An enumeration value for Multiplicity</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>b664cb98-8a81-4a12-ab12-46ae2a7bb499</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="467887f3-194c-47b2-9441-c9929dca7d9f">
     <GUI:DefaultKind>11f18fd3-ce10-4d48-8508-e6f3ba857921</GUI:DefaultKind>
-    <GUI:DefaultVisualType>15</GUI:DefaultVisualType>
     <GUI:Description>An enumeration value for Toolkit</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>c597cf42-2788-4d9c-990b-ffffd2fe8a11</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="6d40b091-3c20-4371-9bc2-dc12fe2f552f">
-    <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
     <GUI:Description>A basic DashBoard for the GUI module.</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>f9521a1c-77dc-4af5-ba5d-f41a4761c612</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="d96d030e-eebe-4b7f-8b55-dca30cbd4bde">
     <GUI:DefaultKind>0a2cda2d-18d9-4cfc-9d54-1fa1616a7a65</GUI:DefaultKind>
-    <GUI:DefaultVisualType>4</GUI:DefaultVisualType>
     <GUI:Description>A model for easier working with TypeRef valued Properties.</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>e36fd933-69a1-404d-a09e-93f4ecb88d31</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="b1df266b-a841-4669-9199-a6a01f6dbfcc">
-    <GUI:DefaultVisualType>22</GUI:DefaultVisualType>
     <GUI:Description>A debugger window showing the used IKistlContexts and their AttachedObjects</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>266f79a3-9b2f-4779-a9ae-9702ccf53a5a</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="caf3e708-2f31-4084-9957-ca11fccc1374">
     <GUI:DefaultKind>a31b5081-88c2-4661-964b-7917578e0711</GUI:DefaultKind>
-    <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
     <GUI:Description>DataObjectModel with specific extensions for MethodInvocations</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>68c7ae8c-6fc6-4c67-877b-7a84efd47b55</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="84828181-4048-47a7-b526-01508b7a0fd0">
     <GUI:DefaultKind>c86d56f3-52c5-4864-ae26-b102cd61ffb6</GUI:DefaultKind>
-    <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
     <GUI:Description>DataObjectModel with specific extensions for Modules</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>98b741e5-2dd5-4221-b001-01de816ded70</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="1f4e8593-5675-4f0a-9454-7cb888cfe6e1">
-    <GUI:DefaultVisualType>13</GUI:DefaultVisualType>
     <GUI:Description>A method returning an integer value</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>b030fc3a-8022-4e46-97a3-7d9c3562c32e</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="ae255750-0147-4e61-9426-8b7232c927fc">
-    <GUI:DefaultVisualType>5</GUI:DefaultVisualType>
     <GUI:Description>A method returning true or false</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>8bdb8b68-0dc3-46ff-a7a0-00bcc96feb4a</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="677a70dc-a7ec-4f41-9aae-9e87949489db">
-    <GUI:DefaultVisualType>13</GUI:DefaultVisualType>
     <GUI:Description>A method returning a floating point value</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>e4266301-3554-46cb-bd25-f13f545dcffa</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="e60611f1-025e-49f3-854e-c682127bc247">
-    <GUI:DefaultVisualType>13</GUI:DefaultVisualType>
     <GUI:Description>A method returning a date and time value</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>e57001ad-1e50-4d01-b5f7-5f7e0c27d2c8</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="edaf9334-dc36-4778-aa33-1e5cdaeeb767">
     <GUI:DefaultKind>2377807c-605b-4e64-9c74-361d3ea6f353</GUI:DefaultKind>
-    <GUI:DefaultVisualType>13</GUI:DefaultVisualType>
     <GUI:Description>An integer attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>2f35b21a-73c2-4e38-ab28-7ee2404684be</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="3a3d0c1c-679e-4d4d-adeb-3ab260079ccb">
     <GUI:DefaultKind>2686036b-b3c9-45b9-9361-e452d69cdc09</GUI:DefaultKind>
-    <GUI:DefaultVisualType>13</GUI:DefaultVisualType>
     <GUI:Description>A floating point attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>f223c178-c447-40a8-960e-ffba6b8423af</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="2b6fb70f-a382-4057-a139-cc33333d619d">
     <GUI:DefaultKind>200f0be5-9f23-4ddb-9a00-0133b4fc295d</GUI:DefaultKind>
-    <GUI:DefaultVisualType>27</GUI:DefaultVisualType>
     <GUI:Description>A GUID attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>7ea78a35-65a1-41f0-a0f0-da2dee7dd5bf</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="fc74b434-3801-4e4a-ab67-e65a9e014005">
     <GUI:DefaultKind>227dcbce-4905-4337-a6a0-720c9d218ab7</GUI:DefaultKind>
-    <GUI:DefaultVisualType>13</GUI:DefaultVisualType>
     <GUI:Description>A date and time attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>59ab4b8c-ab9f-461b-9b9c-7941a7b4a9fa</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="09d1f453-d0d9-429e-88e7-e84b33de7c2e">
     <GUI:DefaultKind>12b829e1-abab-43f3-99ea-e33cd383d7e6</GUI:DefaultKind>
-    <GUI:DefaultVisualType>5</GUI:DefaultVisualType>
     <GUI:Description>A simple true/false attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>69d2fcb4-d385-497d-8159-20c03157d5c0</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="6b368136-addd-4e86-ad29-3d2158a00de5">
     <GUI:DefaultKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:DefaultKind>
-    <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
     <GUI:Description>DataObjectModel with specific extensions for ObjectClasses</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>da04f1a5-fb30-4786-b329-8f070083a4f6</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="9fce01fe-fd6d-4e21-8b55-08d5e38aea36">
     <GUI:DefaultKind>9731f312-8ce4-4c2d-8d95-1923256dc9b8</GUI:DefaultKind>
-    <GUI:DefaultVisualType>3</GUI:DefaultVisualType>
     <GUI:Description>A list of IDataObjects</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>85be3823-e778-4829-b214-69154c1e6164</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="83aae6fd-0fae-4348-b313-737a6e751027">
     <GUI:DefaultKind>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:DefaultKind>
-    <GUI:DefaultVisualType>4</GUI:DefaultVisualType>
     <GUI:Description>A reference to an IDataObject</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>59136763-5a94-4ae5-b9ab-6d679e86245a</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="c799b6bf-a1f7-4374-99df-3ebae6e52ef0">
-    <GUI:DefaultVisualType>4</GUI:DefaultVisualType>
     <GUI:Description>A method returning an IDataObject reference</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>03338e3b-2317-4e88-9858-a6a165dd57f9</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="75aef030-0c25-4306-b6d2-ca8c7cd672dd">
-    <GUI:DefaultVisualType>13</GUI:DefaultVisualType>
     <GUI:Description>A method returning a string</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>eda5fdba-d8e3-4a43-b69b-84d3617f105b</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="ac2f4c88-333a-4917-a0b5-a39ad7ea991a">
     <GUI:DefaultKind>d9fb7cec-b71f-48f1-a591-216de253c7d1</GUI:DefaultKind>
-    <GUI:DefaultVisualType>2</GUI:DefaultVisualType>
     <GUI:Description>A group of properties</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>8314a3e7-5e20-47bd-ba61-c3e88eae2ffc</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="975eee82-e7e1-4a12-ab43-d2e3bc3766e4">
     <GUI:DefaultKind>b64fb189-27af-4141-be27-5a7f723882c9</GUI:DefaultKind>
-    <GUI:DefaultVisualType>13</GUI:DefaultVisualType>
     <GUI:Description>A string attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>006ae4fa-804d-47a7-97d5-33d99a0ebb51</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="d4d5ae35-104d-4445-b0a9-2d49ae5f7716">
-    <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
     <GUI:Description>RelationEditor</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>b2054c43-2acd-46de-a8b9-d3b4189fcbe8</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="225bfb18-82fc-429d-81ff-e1ba738fdbc7">
-    <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
     <GUI:Description>Releation Editor</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>e4de1cc8-9d31-41e5-96c8-ae99cf725486</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="8023e937-5827-4056-b0c0-ffb5bf061dfd">
-    <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
     <GUI:Description>A dashboard for the TimeRecords module</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>935f01dd-da91-426f-8afa-b469aec0be09</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="382050bb-706b-4812-b23b-133833d72d55">
-    <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
     <GUI:Description>just a wrapper</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>1be9e966-ddec-4d9a-bdce-a3e2a380bfcc</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="b6dc8994-6930-4cf4-8cb7-7f18efe9ef68">
-    <GUI:DefaultVisualType>1</GUI:DefaultVisualType>
     <GUI:Description>A model for a single work effort</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>4b424049-d2b5-46b2-a88e-7fd330395838</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="b4b23681-f63b-4aeb-9ecb-b258bd33be24">
-    <GUI:DefaultVisualType>24</GUI:DefaultVisualType>
     <GUI:Description>A workspace for recording work efforts</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>28114689-4fc3-44b6-b7f1-141dab6b78d9</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="ffc833d5-a2a5-4cde-8335-6285973742d8">
     <GUI:DefaultKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:DefaultKind>
-    <GUI:DefaultVisualType>24</GUI:DefaultVisualType>
     <GUI:Description>A top-level window containing a Workspace, a visual representation for IKistlContext</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>d9fe8f77-b156-4929-add8-38cc2fa546e8</GUI:PresentableModelRef>
@@ -5580,7 +5541,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>1</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="28b7ee49-f606-4807-a86a-b6fae4f8952f">
     <GUI:ControlRef>49ed1dda-5eb8-435e-a84f-3389db6b7d6e</GUI:ControlRef>
@@ -5588,7 +5548,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>3</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a67a0d1d-1dff-45e1-83cc-621ed9d87115">
     <GUI:ControlRef>e2570546-0fd2-4bab-b836-0fdb24491c33</GUI:ControlRef>
@@ -5596,7 +5555,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>4</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="74e02b55-d649-44bb-ac2e-05c00cbdf0e2">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5604,7 +5562,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="71489267-5d51-4998-8c10-13fec631f806">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5612,7 +5569,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="e8bf5210-1d62-417a-9c64-1762e2b1486f">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5620,7 +5576,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>ae255750-0147-4e61-9426-8b7232c927fc</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b634f439-5e72-41d1-935f-18db80ef2ed9">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5628,7 +5583,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>27</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="7849bc8f-7fab-4206-8bbd-29846116e43e">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5636,7 +5590,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="0102974b-aa1b-4e11-9982-39019e77266e">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5644,7 +5597,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b6021713-ce43-4b97-9112-45016964c355">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5652,7 +5604,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>467887f3-194c-47b2-9441-c9929dca7d9f</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="c41bef91-052c-4889-8e9c-4dcf40fba516">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5660,7 +5611,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="235d9291-21bc-4718-97a7-577f359abe55">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5668,7 +5618,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>4dad4724-51ca-4618-9ea5-58ac201eba8a</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="c40a058e-3a3f-472f-a1b5-5a592b37e845">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5676,7 +5625,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>4b7ef800-2ddb-4b99-b0d4-aefd9373ba70</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="6f14e178-c92b-4a86-aee5-623a4ecbc3d3">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5684,7 +5632,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>1f4e8593-5675-4f0a-9454-7cb888cfe6e1</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="296dfe59-c059-43cf-8d3b-6b03f168825c">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5692,7 +5639,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>e60611f1-025e-49f3-854e-c682127bc247</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="e34ec656-b2b9-4d54-b98d-a749123daae6">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5700,7 +5646,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>677a70dc-a7ec-4f41-9aae-9e87949489db</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="d265b27e-c5f4-4f5e-9d2d-c0b23ca040b5">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5708,7 +5653,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>75aef030-0c25-4306-b6d2-ca8c7cd672dd</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="5c25efaf-1ec0-47dd-b70d-d8821cd23a6e">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5716,7 +5660,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>0b8b98cf-a618-49e8-a2f3-9c3c6b9427ed</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="58da1acb-55d8-4da8-a8ff-f6211d192ba4">
     <GUI:ControlRef>5c6cddb5-ed40-4331-b8de-122748175b18</GUI:ControlRef>
@@ -5724,7 +5667,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>0151803d-60f4-428a-8b69-a77b783bbc54</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="8ae71de4-a96b-4e4c-a4a4-0bee4dc625ce">
     <GUI:ControlRef>7fbe5664-1b3c-4176-a360-85b98009886c</GUI:ControlRef>
@@ -5732,7 +5674,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>ffc833d5-a2a5-4cde-8335-6285973742d8</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>1</GUI:Toolkit>
-    <GUI:VisualType>24</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a3ac9eb0-db00-4db2-8b1b-fa3f7f46a90f">
     <GUI:ControlRef>f1f3ab2a-0b82-4d34-8f9e-bf2a809f4e04</GUI:ControlRef>
@@ -5740,7 +5681,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>1</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="1c75fb9c-8a35-43f9-8bbe-b7ae2d6ffc19">
     <GUI:ControlRef>9679c5f0-d0d6-47a1-b147-cbaa4a19d2d3</GUI:ControlRef>
@@ -5748,7 +5688,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>3</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="7c695dfc-e689-445b-be94-296068752847">
     <GUI:ControlRef>7852bc9a-ee8f-4e91-97e8-f863f52326b0</GUI:ControlRef>
@@ -5756,7 +5695,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>4</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="f97925d0-630f-438e-99a0-0c6ddb8001f5">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5764,7 +5702,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>4dad4724-51ca-4618-9ea5-58ac201eba8a</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="d28850d6-7af3-480f-8008-0f1acff83561">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5772,7 +5709,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="12bb52c4-d646-433d-92de-0ff4d9dd61f5">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5780,7 +5716,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>27</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="f58d4744-98a2-4cf7-b05e-1076b8ceb37b">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5788,7 +5723,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>0b8b98cf-a618-49e8-a2f3-9c3c6b9427ed</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2d420b75-5fb1-4739-b602-28367fa9e517">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5796,7 +5730,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>1f4e8593-5675-4f0a-9454-7cb888cfe6e1</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="0cb651ea-1ed0-4392-8ef1-3fbe63ec2858">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5804,7 +5737,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a8706c8a-fa6a-47ff-a63a-6a216966751e">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5812,7 +5744,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b40c4296-aef6-45cb-8d87-7fc25d8dba80">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5820,7 +5751,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="be0bf52e-0e14-473a-8ba7-87d01183673d">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5828,7 +5758,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>ae255750-0147-4e61-9426-8b7232c927fc</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="00ea4d0d-061b-4438-9873-8fcb62ed14e7">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5836,7 +5765,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>e60611f1-025e-49f3-854e-c682127bc247</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="7f9f7167-1e18-4e8d-aac7-a472f8c1c76f">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5844,7 +5772,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="9e36e354-b121-4d4d-ba18-a93ff064c53a">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5852,7 +5779,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>677a70dc-a7ec-4f41-9aae-9e87949489db</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="5e4e0e9b-c697-45ae-8e03-c678cc90b8b2">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5860,7 +5786,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>0151803d-60f4-428a-8b69-a77b783bbc54</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="e8e57bf6-f2c4-4c67-9ec3-df81cf85f631">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5868,7 +5793,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>467887f3-194c-47b2-9441-c9929dca7d9f</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="8666231f-c280-4e8f-b0ea-e246485d7634">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5876,7 +5800,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>4b7ef800-2ddb-4b99-b0d4-aefd9373ba70</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="6b7f2152-b5c6-42e8-bc24-f3f544449ea7">
     <GUI:ControlRef>c5b0021a-b59c-4e73-b756-60020da6ae3e</GUI:ControlRef>
@@ -5884,7 +5807,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>75aef030-0c25-4306-b6d2-ca8c7cd672dd</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="d24946e0-a4c1-4afa-8668-00cda6b8fa3a">
     <GUI:ControlRef>cc9508ab-9700-47d9-a969-9d78db989c49</GUI:ControlRef>
@@ -5892,7 +5814,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>ffc833d5-a2a5-4cde-8335-6285973742d8</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>3</GUI:Toolkit>
-    <GUI:VisualType>24</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b8cec662-195f-40ae-8d79-ab9f35540a2e">
     <GUI:ControlRef>a7c67d95-c198-47da-ad6d-af90e08137f7</GUI:ControlRef>
@@ -5900,7 +5821,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>3d779eaf-1c37-4c3b-822b-0b1af0926802</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>17</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="8fa28c18-ee3a-476c-a79d-d9ef61a943d8">
     <GUI:ControlRef>ba95fc85-c50f-494a-b4f0-5596ef38b7bf</GUI:ControlRef>
@@ -5909,7 +5829,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>1</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="70669305-0ecf-4806-b1d9-a13e5893afad">
     <GUI:ControlRef>4652082a-202d-4d20-a0d4-81a4f69ffb85</GUI:ControlRef>
@@ -5918,7 +5837,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>3</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a17d75a0-d0f9-49ae-a846-a72e65963ea3">
     <GUI:ControlRef>92fb7c93-822b-41f7-b25b-dd44e0fb3516</GUI:ControlRef>
@@ -5927,7 +5845,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>21</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="66592d7b-6bad-4eb8-93a3-3203ff11ef4a">
     <GUI:ControlRef>d1ea3d41-384e-4f72-940c-0471f2421082</GUI:ControlRef>
@@ -5936,7 +5853,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>4b7ef800-2ddb-4b99-b0d4-aefd9373ba70</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>15</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2f23f732-aa79-4e01-b136-369b938cc21e">
     <GUI:ControlRef>d1ea3d41-384e-4f72-940c-0471f2421082</GUI:ControlRef>
@@ -5945,7 +5861,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>4dad4724-51ca-4618-9ea5-58ac201eba8a</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>15</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="09c4372e-a01a-417a-a69b-54c6f9427b5f">
     <GUI:ControlRef>d1ea3d41-384e-4f72-940c-0471f2421082</GUI:ControlRef>
@@ -5954,7 +5869,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>15</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2e448b60-755c-4fb5-9099-8cd0b4fcca64">
     <GUI:ControlRef>d1ea3d41-384e-4f72-940c-0471f2421082</GUI:ControlRef>
@@ -5963,7 +5877,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>0151803d-60f4-428a-8b69-a77b783bbc54</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>15</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="6101e0d2-64b2-4166-81f2-af9846081695">
     <GUI:ControlRef>d1ea3d41-384e-4f72-940c-0471f2421082</GUI:ControlRef>
@@ -5972,7 +5885,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>0b8b98cf-a618-49e8-a2f3-9c3c6b9427ed</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>15</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="192702b5-0c7d-4ff5-a7a7-e74211562580">
     <GUI:ControlRef>d1ea3d41-384e-4f72-940c-0471f2421082</GUI:ControlRef>
@@ -5981,7 +5893,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>467887f3-194c-47b2-9441-c9929dca7d9f</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>15</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="dfb5fb2c-4d35-4068-a718-29d1fb7a44e4">
     <GUI:ControlRef>b6079dc3-e1f2-4fe9-986a-fb86207114ae</GUI:ControlRef>
@@ -5989,7 +5900,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="82692cc1-fdb1-4299-839f-04e7db35561d">
     <GUI:ControlRef>268210f3-c451-4b6f-a8fb-1db8409a00f7</GUI:ControlRef>
@@ -5997,7 +5907,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2d56fc58-a9b7-4f88-aa13-00d6bde234c6">
     <GUI:ControlRef>19527b3b-2f29-4c4d-869c-7e2cffe281c9</GUI:ControlRef>
@@ -6005,7 +5914,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="c9a50d83-138e-485d-9941-2c7de7e63f8b">
     <GUI:ControlRef>19527b3b-2f29-4c4d-869c-7e2cffe281c9</GUI:ControlRef>
@@ -6013,7 +5921,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="f62f951f-1ac3-4145-b2fa-7e2363d1281f">
     <GUI:ControlRef>19527b3b-2f29-4c4d-869c-7e2cffe281c9</GUI:ControlRef>
@@ -6021,7 +5928,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="4580239b-c5fd-4093-8a07-9038a7f5af96">
     <GUI:ControlRef>19527b3b-2f29-4c4d-869c-7e2cffe281c9</GUI:ControlRef>
@@ -6029,7 +5935,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="4fef921d-2d7a-4ace-a0e8-02c5af07ed6b">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6037,7 +5942,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>e60611f1-025e-49f3-854e-c682127bc247</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a0238c00-3eb0-4cd7-b92e-085ddeae3d8b">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6045,7 +5949,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>4b7ef800-2ddb-4b99-b0d4-aefd9373ba70</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="fe63f61d-78da-4444-a1c6-08c10b08ca2d">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6053,7 +5956,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>75aef030-0c25-4306-b6d2-ca8c7cd672dd</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="72ce3557-ea04-40a9-877c-26923dad8f01">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6061,7 +5963,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>1f4e8593-5675-4f0a-9454-7cb888cfe6e1</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="0e8aa314-6352-414a-9d72-368b76e6a53e">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6069,7 +5970,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="9b0a6948-21cd-41e3-99b5-455b9610db70">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6077,7 +5977,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="17511894-ca19-4739-9581-6883ffdec782">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6085,7 +5984,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>0b8b98cf-a618-49e8-a2f3-9c3c6b9427ed</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="dbe4107f-c3aa-488f-a30e-711aba991392">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6093,7 +5991,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>677a70dc-a7ec-4f41-9aae-9e87949489db</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="95436be1-72ee-4641-b966-8ca600573676">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6101,7 +5998,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>ae255750-0147-4e61-9426-8b7232c927fc</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="49af9ae7-ebc4-4a54-8afe-96856a66a00e">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6109,7 +6005,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>467887f3-194c-47b2-9441-c9929dca7d9f</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="ca42741c-44c0-4f6e-936d-9891f84db686">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6117,7 +6012,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>4dad4724-51ca-4618-9ea5-58ac201eba8a</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="4d7f81db-8ab5-400a-9557-9cffa4c24f7d">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6125,7 +6019,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>d1135824-6e2a-41e7-a1db-83621b5de078</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="878d5374-b0f4-4311-8698-c554c3fd45f7">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6133,7 +6026,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>c799b6bf-a1f7-4374-99df-3ebae6e52ef0</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="3ccd189a-58f4-4ab2-8d54-d4bdc3d8facf">
     <GUI:ControlRef>f62bf5a2-943e-4ff7-b2f8-02546b2aed8a</GUI:ControlRef>
@@ -6141,7 +6033,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>0151803d-60f4-428a-8b69-a77b783bbc54</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>28</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="8edab29f-a79b-4120-ac48-df130152b4f0">
     <GUI:ControlRef>7c38e2a6-75c1-4c2a-897b-f33573133b46</GUI:ControlRef>
@@ -6149,7 +6040,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>6d40b091-3c20-4371-9bc2-dc12fe2f552f</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>1</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="c479b0e0-e199-4905-853a-a2361d38884b">
     <GUI:ControlRef>18c4efb5-c283-44f2-81bf-c0b70e97b79f</GUI:ControlRef>
@@ -6158,7 +6048,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>1</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="3c49a270-8757-4651-af75-0d232d5dd333">
     <GUI:ControlRef>3e9153f9-1a71-4c1e-9022-948aa7db6e11</GUI:ControlRef>
@@ -6167,7 +6056,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>27</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="96a23aee-8185-41da-b487-60122fbc9d43">
     <GUI:ControlRef>3e9153f9-1a71-4c1e-9022-948aa7db6e11</GUI:ControlRef>
@@ -6176,7 +6064,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>e60611f1-025e-49f3-854e-c682127bc247</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>7</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="bf9831a9-613e-47cc-b64e-854c41af7820">
     <GUI:ControlRef>3e9153f9-1a71-4c1e-9022-948aa7db6e11</GUI:ControlRef>
@@ -6185,7 +6072,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>75aef030-0c25-4306-b6d2-ca8c7cd672dd</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="4dd84136-50b5-42b3-8b48-b69edb974c50">
     <GUI:ControlRef>3e9153f9-1a71-4c1e-9022-948aa7db6e11</GUI:ControlRef>
@@ -6194,7 +6080,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>677a70dc-a7ec-4f41-9aae-9e87949489db</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>9</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="135ea2bd-3c52-4d74-a190-cf0c90622a44">
     <GUI:ControlRef>3e9153f9-1a71-4c1e-9022-948aa7db6e11</GUI:ControlRef>
@@ -6203,7 +6088,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>ae255750-0147-4e61-9426-8b7232c927fc</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>5</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="1aab82e3-7b3e-4363-8f41-f876bbe0ba1e">
     <GUI:ControlRef>3e9153f9-1a71-4c1e-9022-948aa7db6e11</GUI:ControlRef>
@@ -6212,7 +6096,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>1f4e8593-5675-4f0a-9454-7cb888cfe6e1</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>11</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="82c0bcbd-2184-4c36-adaf-60ad5e984dee">
     <GUI:ControlRef>46a2ac8e-1d19-40e1-bca9-37834962ef95</GUI:ControlRef>
@@ -6221,7 +6104,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>d96d030e-eebe-4b7f-8b55-dca30cbd4bde</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>4</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="8e771395-2eeb-42b7-b822-84b39fdf509f">
     <GUI:ControlRef>e68bbcf2-0d0d-446a-bc1e-4791e904c3fb</GUI:ControlRef>
@@ -6229,7 +6111,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>b1df266b-a841-4669-9199-a6a01f6dbfcc</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>22</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="3fd9383c-ca6e-41dc-9dc1-3b24799f6871">
     <GUI:ControlRef>fc18b7ac-7673-4c6a-b3c0-7f016ecca3b2</GUI:ControlRef>
@@ -6237,7 +6118,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>14</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2699da6a-0fe8-4c91-ac62-00ca6f8359bb">
     <GUI:ControlRef>58dc43e8-3fc4-46ce-b233-51459ebe4d2b</GUI:ControlRef>
@@ -6246,7 +6126,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>5</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="253b4c30-8868-4af4-8272-434097d64144">
     <GUI:ControlRef>58dc43e8-3fc4-46ce-b233-51459ebe4d2b</GUI:ControlRef>
@@ -6255,7 +6134,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>ae255750-0147-4e61-9426-8b7232c927fc</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>5</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="42308536-6540-446c-858c-16caeed6a30f">
     <GUI:ControlRef>852d2841-6918-4faf-a8ef-5d93a1e5d548</GUI:ControlRef>
@@ -6264,7 +6142,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="ef91f0f1-4d92-44ba-92b9-bb638bb8fa35">
     <GUI:ControlRef>852d2841-6918-4faf-a8ef-5d93a1e5d548</GUI:ControlRef>
@@ -6273,7 +6150,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>27</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2316e5b4-b2e3-4eb0-b4d6-c1f14578b6a1">
     <GUI:ControlRef>852d2841-6918-4faf-a8ef-5d93a1e5d548</GUI:ControlRef>
@@ -6282,7 +6158,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b5804989-e1bb-4669-9c53-d050ed4c7773">
     <GUI:ControlRef>852d2841-6918-4faf-a8ef-5d93a1e5d548</GUI:ControlRef>
@@ -6291,7 +6166,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>11</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="07cd2f38-7ffb-423f-b31b-d0d3cd8dc24e">
     <GUI:ControlRef>852d2841-6918-4faf-a8ef-5d93a1e5d548</GUI:ControlRef>
@@ -6300,7 +6174,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="9c74aa99-6db8-45b5-8b18-e2c5d67b6fe4">
     <GUI:ControlRef>852d2841-6918-4faf-a8ef-5d93a1e5d548</GUI:ControlRef>
@@ -6309,7 +6182,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>13</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="31d8374d-0565-4e4d-a1f8-6053e4832901">
     <GUI:ControlRef>0695b951-f3fe-4bf2-a9b7-f893c5bb7c1c</GUI:ControlRef>
@@ -6318,7 +6190,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>4</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="af750a10-d57e-4424-a0c7-2257b47c2b23">
     <GUI:ControlRef>9c2c3f17-3445-46e0-8b76-fc11f15dfbf5</GUI:ControlRef>
@@ -6327,7 +6198,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>ac2f4c88-333a-4917-a0b5-a39ad7ea991a</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>2</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b1a38e67-9315-454d-812d-9819386968e7">
     <GUI:ControlRef>7364ee0c-a700-430d-9176-e4eef9f51581</GUI:ControlRef>
@@ -6335,7 +6205,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>225bfb18-82fc-429d-81ff-e1ba738fdbc7</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>1</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="4b8a4590-690c-4e85-b10a-d0bf8f475c46">
     <GUI:ControlRef>12084abf-1e98-4d04-b66d-fed4ea47d3c2</GUI:ControlRef>
@@ -6344,7 +6213,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>7ec25c1a-c819-4219-9432-af1fdb0aaf63</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>23</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a58e047d-abac-4fb9-b9d0-9f5fbe238da5">
     <GUI:ControlRef>937a06f5-8bdb-47e7-b30d-ef5e944e2eae</GUI:ControlRef>
@@ -6353,7 +6221,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>d1135824-6e2a-41e7-a1db-83621b5de078</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>26</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="dcb6b52b-4098-4cda-b69d-475d76f7691a">
     <GUI:ControlRef>149112da-d92b-40e3-b225-269966e8e957</GUI:ControlRef>
@@ -6361,7 +6228,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>8023e937-5827-4056-b0c0-ffb5bf061dfd</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>1</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="1218bf45-d2a5-4a66-b75c-9224aedc14ae">
     <GUI:ControlRef>24dc200e-ee3f-4df3-ab34-f8196c338fd5</GUI:ControlRef>
@@ -6369,7 +6235,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>b4b23681-f63b-4aeb-9ecb-b258bd33be24</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>24</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="7530d91c-ed64-4337-af8f-3a2b82b738d1">
     <GUI:ControlRef>c431cb71-0a53-42cc-b8a7-3df5924fea84</GUI:ControlRef>
@@ -6377,7 +6242,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>b6dc8994-6930-4cf4-8cb7-7f18efe9ef68</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>1</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2eaa5517-915d-4242-9ce1-91cff16b6046">
     <GUI:ControlRef>857d0acf-6eac-49b5-9940-4f7fb6b81549</GUI:ControlRef>
@@ -6386,7 +6250,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>ffc833d5-a2a5-4cde-8335-6285973742d8</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>24</GUI:VisualType>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="02dacd0b-c604-4311-b564-15b1ced9299f">
     <GUI:ControlRef>28a89148-24d1-4cc9-accc-24cc7eb2dfde</GUI:ControlRef>
@@ -6395,7 +6258,6 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentedModelDescriptor>ffc833d5-a2a5-4cde-8335-6285973742d8</GUI:PresentedModelDescriptor>
     <GUI:Toolkit>0</GUI:Toolkit>
-    <GUI:VisualType>24</GUI:VisualType>
   </GUI:ViewDescriptor>
   <KistlBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <KistlBase:Description />
@@ -6703,14 +6565,6 @@
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>Visuals</KistlBase:TableName>
   </KistlBase:ObjectClass>
-  <KistlBase:Enumeration ExportGuid="3567a11f-1809-44e8-bafe-ce0ccec7ea2a">
-    <KistlBase:ClassName>VisualType</KistlBase:ClassName>
-    <KistlBase:Description />
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
-    <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-  </KistlBase:Enumeration>
   <GUI:ControlKindClass ExportGuid="4fdf9e9c-a21c-40ab-84c2-16b2c7b7ec5f">
     <KistlBase:ClassName>WorkspaceKind</KistlBase:ClassName>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
@@ -6889,18 +6743,6 @@
     <KistlBase:ReferenceObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:ReferenceObjectClass>
     <KistlBase:RelationEnd>5588cece-c696-40be-9142-80053efd4e29</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
-  <KistlBase:EnumerationProperty ExportGuid="2ab3364a-561c-40f3-a83a-731ce0f1e2de">
-    <KistlBase:CategoryTags>Summary,Main</KistlBase:CategoryTags>
-    <KistlBase:Description>The default visual type used for this PresentableModel</KistlBase:Description>
-    <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
-    <KistlBase:IsList>false</KistlBase:IsList>
-    <KistlBase:IsNullable>false</KistlBase:IsNullable>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-    <KistlBase:PropertyName>DefaultVisualType</KistlBase:PropertyName>
-    <GUI:ValueModelDescriptor>0b8b98cf-a618-49e8-a2f3-9c3c6b9427ed</GUI:ValueModelDescriptor>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-  </KistlBase:EnumerationProperty>
   <KistlBase:StringProperty ExportGuid="93e25648-50f9-40d8-8753-e5dadab68e1d">
     <KistlBase:CategoryTags>Summary,Main</KistlBase:CategoryTags>
     <KistlBase:Description>describe this PresentableModel</KistlBase:Description>
@@ -7135,18 +6977,6 @@
     <GUI:ValueModelDescriptor>467887f3-194c-47b2-9441-c9929dca7d9f</GUI:ValueModelDescriptor>
     <KistlBase:Enumeration>803fb38d-f0d2-409c-9f15-30da4bdcf576</KistlBase:Enumeration>
   </KistlBase:EnumerationProperty>
-  <KistlBase:EnumerationProperty ExportGuid="af9c1a03-ce46-4719-96c0-c38287d26ac0">
-    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:Description>The visual type of this View</KistlBase:Description>
-    <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
-    <KistlBase:IsList>false</KistlBase:IsList>
-    <KistlBase:IsNullable>false</KistlBase:IsNullable>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:ObjectClass>
-    <KistlBase:PropertyName>VisualType</KistlBase:PropertyName>
-    <GUI:ValueModelDescriptor>0b8b98cf-a618-49e8-a2f3-9c3c6b9427ed</GUI:ValueModelDescriptor>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-  </KistlBase:EnumerationProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="9f69c3bd-e274-4639-b30c-8d2a9599917b">
     <KistlBase:AltText>if this is a container, here are the visually contained/controlled children of this Visual</KistlBase:AltText>
     <KistlBase:Description>if this is a container, here are the visually contained/controlled children of this Visual</KistlBase:Description>
@@ -7175,18 +7005,6 @@
     <KistlBase:ReferenceObjectClass>98790e5d-808f-4e0b-8a1a-b304839f07ab</KistlBase:ReferenceObjectClass>
     <KistlBase:RelationEnd>3f3e2222-09b0-422c-b985-199ba526d5f8</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
-  <KistlBase:EnumerationProperty ExportGuid="bdeb28ac-665e-4bb6-8f7b-0ae983d77d56">
-    <KistlBase:AltText>Which visual is represented here</KistlBase:AltText>
-    <KistlBase:Description>Which visual is represented here</KistlBase:Description>
-    <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
-    <KistlBase:IsList>false</KistlBase:IsList>
-    <KistlBase:IsNullable>false</KistlBase:IsNullable>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:ObjectClass>98790e5d-808f-4e0b-8a1a-b304839f07ab</KistlBase:ObjectClass>
-    <KistlBase:PropertyName>ControlType</KistlBase:PropertyName>
-    <GUI:ValueModelDescriptor>0b8b98cf-a618-49e8-a2f3-9c3c6b9427ed</GUI:ValueModelDescriptor>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-  </KistlBase:EnumerationProperty>
   <KistlBase:StringProperty ExportGuid="8d3b7c91-2bbf-4dcf-bc37-318dc0fda92d">
     <KistlBase:AltText>A short description of the utility of this visual</KistlBase:AltText>
     <KistlBase:Description>A short description of the utility of this visual</KistlBase:Description>
@@ -7665,174 +7483,6 @@
     <KistlBase:Name>WPF</KistlBase:Name>
     <KistlBase:Value>0</KistlBase:Value>
   </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="e01f0c3a-01a6-430f-9c3b-16793e8f5542">
-    <KistlBase:Description>a boolean</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>Boolean</KistlBase:Name>
-    <KistlBase:Value>5</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="3b0bbff2-6157-4c80-9259-573fdb9bdafb">
-    <KistlBase:Description>a list of booleans</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>BooleanList</KistlBase:Name>
-    <KistlBase:Value>6</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="2a4ae776-7824-4ad0-856f-913313211c45">
-    <KistlBase:Description>a date/time value</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>DateTime</KistlBase:Name>
-    <KistlBase:Value>7</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="0d0203dd-d0cd-40a0-a8d5-45731ba33ce7">
-    <KistlBase:Description>a list of date/time values</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>DateTimeList</KistlBase:Name>
-    <KistlBase:Value>8</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="d937b52f-40fe-46eb-b5fc-fd41b8eb1a16">
-    <KistlBase:Description />
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>Double</KistlBase:Name>
-    <KistlBase:Value>9</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="94c3aad0-22ba-4145-a9f3-abd3a1a9bd58">
-    <KistlBase:Description />
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>DoubleList</KistlBase:Name>
-    <KistlBase:Value>10</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="c5472764-388d-444c-8193-f19e20cb7bca">
-    <KistlBase:Description>display a value from an Enumeration</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>Enumeration</KistlBase:Name>
-    <KistlBase:Value>15</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="b55cabf2-e6c5-4d5d-ae02-94359dfb1b9c">
-    <KistlBase:Description>display a value in a GridCell</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>GridCell</KistlBase:Name>
-    <KistlBase:Value>28</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="b93e2c33-1156-46d1-a1ee-05bcc18210f0">
-    <KistlBase:Description />
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>Guid</KistlBase:Name>
-    <KistlBase:Value>27</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="e90ae4b4-4639-4956-a5e7-170f69f5fa4b">
-    <KistlBase:Description />
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>Integer</KistlBase:Name>
-    <KistlBase:Value>11</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="7ea2eda5-fda5-4098-9deb-a9869ab2de12">
-    <KistlBase:Description />
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>IntegerList</KistlBase:Name>
-    <KistlBase:Value>12</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="edee8b53-2444-4c77-a024-e8af3341f802">
-    <KistlBase:Description>Displays an Integer with a slider instead of a text box</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>IntegerSlider</KistlBase:Name>
-    <KistlBase:Value>20</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="5a95817a-25e4-466d-9e91-fd3da40abbdb">
-    <KistlBase:Description>The debugger window for displaying the active contexts</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>KistlDebugger</KistlBase:Name>
-    <KistlBase:Value>22</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="6c8d6f55-86de-4d38-9a0d-c8a649f9fd84">
-    <KistlBase:Description />
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>MenuGroup</KistlBase:Name>
-    <KistlBase:Value>18</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="2daecd44-168e-4964-8aa5-5e01fff1d09e">
-    <KistlBase:Description />
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>MenuItem</KistlBase:Name>
-    <KistlBase:Value>17</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="1fc7bb39-87ee-47c0-9345-f3a72737460e">
-    <KistlBase:Description>A full view of the object</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>Object</KistlBase:Name>
-    <KistlBase:Value>1</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="1607e5a9-996f-4d98-8bee-1971dc8a73f5">
-    <KistlBase:Description>A list of objects</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>ObjectList</KistlBase:Name>
-    <KistlBase:Value>3</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="43a846c6-bb67-4dbf-9ccf-f71dbc28bd07">
-    <KistlBase:Description>An object as entry of a list</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>ObjectListEntry</KistlBase:Name>
-    <KistlBase:Value>21</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="cfc34584-4937-42e0-b933-0734a283eb25">
-    <KistlBase:Description>A reference to an object</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>ObjectReference</KistlBase:Name>
-    <KistlBase:Value>4</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="47e610df-6832-4a9a-ab83-8252c8eab693">
-    <KistlBase:Description>A group of properties</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>PropertyGroup</KistlBase:Name>
-    <KistlBase:Value>2</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="2713ab07-ec28-4a57-a077-1cb339eff0a3">
-    <KistlBase:Description>The renderer class is no actual "View", but neverthe less needs to be found</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>Renderer</KistlBase:Name>
-    <KistlBase:Value>0</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="37f226ce-89a1-4b7d-abb1-8c65a348fa88">
-    <KistlBase:Description>A task for the user: select a value from a list</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>SelectionTaskDialog</KistlBase:Name>
-    <KistlBase:Value>23</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="448cb71c-787f-42a0-ab17-2f3335ea5e6e">
-    <KistlBase:Description />
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>SimpleObjectList</KistlBase:Name>
-    <KistlBase:Value>16</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="d758ceb4-e745-42fd-86ac-b651cfe8cd49">
-    <KistlBase:Description />
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>String</KistlBase:Name>
-    <KistlBase:Value>13</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="b0e35424-cef2-4353-b263-69352e5f12d1">
-    <KistlBase:Description />
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>StringList</KistlBase:Name>
-    <KistlBase:Value>14</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="47483a88-cabc-49c4-8fb7-a32cfeca3ea8">
-    <KistlBase:Description>Select a string from a aset of values</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>StringSelection</KistlBase:Name>
-    <KistlBase:Value>26</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="b995f2d4-23ee-4845-813b-0886857ce0cc">
-    <KistlBase:Description />
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>TemplateEditor</KistlBase:Name>
-    <KistlBase:Value>19</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="f2b0610d-d2c2-4819-b608-fb7abb871240">
-    <KistlBase:Description>A top-level window containing a Workspace, a visual representation for IKistlContext</KistlBase:Description>
-    <KistlBase:Enumeration>3567a11f-1809-44e8-bafe-ce0ccec7ea2a</KistlBase:Enumeration>
-    <KistlBase:Name>WorkspaceWindow</KistlBase:Name>
-    <KistlBase:Value>24</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
   <KistlBase:Method ExportGuid="8cec2c7d-d172-414b-8bab-2075e63dd2ba">
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <KistlBase:MethodName>NotifyCreated</KistlBase:MethodName>
@@ -8109,9 +7759,6 @@
   <KistlBase:NotNullableConstraint ExportGuid="fa02149f-23d6-4643-b4ef-67dcc46c041e">
     <KistlBase:ConstrainedProperty>edc853d3-0d02-4492-9159-c548c7713e9b</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="0407e4cc-2432-4a7a-9699-96affef22e57">
-    <KistlBase:ConstrainedProperty>2ab3364a-561c-40f3-a83a-731ce0f1e2de</KistlBase:ConstrainedProperty>
-  </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="757f243b-b2b0-4696-a0ce-daef8641f2f7">
     <KistlBase:ConstrainedProperty>93e25648-50f9-40d8-8753-e5dadab68e1d</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
@@ -8170,12 +7817,6 @@
   </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="3f15b9a2-5fc3-46fa-91b3-5cbc5dafc98e">
     <KistlBase:ConstrainedProperty>2a798728-d79d-471f-be51-1f488beb8dc1</KistlBase:ConstrainedProperty>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="113da634-8baa-4968-88cf-d599f817f4ea">
-    <KistlBase:ConstrainedProperty>af9c1a03-ce46-4719-96c0-c38287d26ac0</KistlBase:ConstrainedProperty>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="fa92cbb3-7800-4466-8c7c-66084146ec8b">
-    <KistlBase:ConstrainedProperty>bdeb28ac-665e-4bb6-8f7b-0ae983d77d56</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="82b789d5-b0e6-4ce8-8e9d-f47488e35aa9">
     <KistlBase:ConstrainedProperty>8d3b7c91-2bbf-4dcf-bc37-318dc0fda92d</KistlBase:ConstrainedProperty>

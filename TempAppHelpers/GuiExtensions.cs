@@ -28,8 +28,15 @@ namespace Kistl.App.Extensions
             this PresentableModelDescriptor pmd,
             Toolkit tk)
         {
-            var defaultKind = pmd.AndParents().Select(p => p.DefaultKind).First(dk => dk != null);
-            return pmd.GetViewDescriptor(tk, defaultKind);
+            var defaultKind = pmd.AndParents().Select(p => p.DefaultKind).FirstOrDefault(dk => dk != null);
+            if (defaultKind != null)
+            {
+                return pmd.GetViewDescriptor(tk, defaultKind);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
