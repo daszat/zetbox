@@ -6,7 +6,7 @@
         <ContentPresenter DockPanel.Dock="Top"
                           Margin="10"
                           Content="{Binding PropertyGroupsByName[Summary]}"
-                          ContentTemplateSelector="{StaticResource readOnlyTemplateSelector}" />
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
 
         <TextBox DockPanel.Dock="Top"
                  Margin="10"

@@ -64,14 +64,14 @@ namespace Kistl.Client.Presentables.GUI
 
         private void UpdateApplicableViewDescriptors()
         {
-            ApplicableViewDescriptors = new ReadOnlyObservableCollection<DataObjectModel>(
-                new ObservableCollection<DataObjectModel>(
-                    PresentableModelDescriptors
-                        .Select(dom => dom.Object)
-                        .OfType<PresentableModelDescriptor>()
-                        .SelectMany(pmd => pmd.GetApplicableViewDescriptors())
-                        .Select(vd => (DataObjectModel)Factory.CreateDefaultModel(DataContext, vd))
-                        .ToList()));
+            //ApplicableViewDescriptors = new ReadOnlyObservableCollection<DataObjectModel>(
+            //    new ObservableCollection<DataObjectModel>(
+            //        PresentableModelDescriptors
+            //            .Select(dom => dom.Object)
+            //            .OfType<PresentableModelDescriptor>()
+            //            .SelectMany(pmd => pmd.GetApplicableViewDescriptors())
+            //            .Select(vd => (DataObjectModel)Factory.CreateDefaultModel(DataContext, vd))
+            //            .ToList()));
         }
 
         private void UpdateDefaultViewDescriptors()

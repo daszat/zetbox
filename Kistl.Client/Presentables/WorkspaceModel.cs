@@ -317,7 +317,7 @@ namespace Kistl.Client.Presentables
                 var newModel = (DataObjectModel)Factory.CreateDefaultModel(externalCtx, newObject);
                 newWorkspace.HistoryTouch(newModel);
                 newWorkspace.SelectedItem = newModel;
-                Factory.ShowModel(newWorkspace, true, false);
+                Factory.ShowModel(newWorkspace, true);
             }
         }
     }

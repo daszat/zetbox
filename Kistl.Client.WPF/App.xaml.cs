@@ -8,8 +8,9 @@ using System.Windows.Threading;
 using Kistl.API;
 using Kistl.API.Client;
 using Kistl.API.Configuration;
-using Kistl.Client.Presentables;
 using Kistl.API.Utils;
+using Kistl.App.GUI;
+using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF
 {
@@ -35,7 +36,6 @@ namespace Kistl.Client.WPF
         }
 
         private static ServerDomainManager serverDomain;
-        private bool _timeRecorder = false;
 
         private string[] HandleCommandline(string[] args)
         {
@@ -75,22 +75,10 @@ namespace Kistl.Client.WPF
             using (Logging.Log.TraceMethodCall("Starting Client"))
             {
                 var args = HandleCommandline(e.Args);
-                _timeRecorder = args.Contains("-timerecorder");
-
-                //var debugger = AppContext.Factory.CreateSpecificModel<KistlDebuggerAsModel>(KistlContext.GetContext());
-                //AppContext.Factory.ShowModel(debugger, true);
-
-                PresentableModel initialWorkspace;
-                if (_timeRecorder)
-                {
-                    initialWorkspace = AppContext.Factory.CreateSpecificModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel>(KistlContext.GetContext());
-                }
-                else
-                {
-                    FixupDatabase();
-                    initialWorkspace = AppContext.Factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
-                }
-                AppContext.Factory.ShowModel(initialWorkspace, true, true);
+                // delegate all business logic into another class, which 
+                // allows us to load the Kistl.Objects assemblies _boefore_ 
+                // they are needed.
+                Launcher.Execute(AppContext, args);
             }
         }
 

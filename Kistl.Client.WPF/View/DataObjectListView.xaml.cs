@@ -103,15 +103,16 @@ namespace Kistl.Client.WPF.View
             }
             foreach (var desc in cfg.Columns)
             {
-                var col = new GridViewColumn() { Header = desc.Header };
+                // TODO: use default controls after moving labeling to infrastructure
+                //var col = new GridViewColumn() { Header = desc.Header };
 
-                DataTemplate result = new DataTemplate();
-                var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
-                cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.PropertyName)), Mode = BindingMode.OneWay });
-                cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("gridCellTemplateSelector"));
-                result.VisualTree = cpFef;
-                col.CellTemplate = result;
-                view.Columns.Add(col);
+                //DataTemplate result = new DataTemplate();
+                //var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
+                //cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.PropertyName)), Mode = BindingMode.OneWay });
+                //cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("gridCellTemplateSelector"));
+                //result.VisualTree = cpFef;
+                //col.CellTemplate = result;
+                //view.Columns.Add(col);
             }
         }
 

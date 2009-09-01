@@ -20,6 +20,11 @@ namespace Kistl.Client
         IKistlContext MetaContext { get; }
 
         /// <summary>
+        /// A non-persisted <see cref="IKistlContext"/> for transient objects
+        /// </summary>
+        IKistlContext TransientContext { get; }
+
+        /// <summary>
         /// The <see cref="ModelFactory"/> of this GUI.
         /// </summary>
         ModelFactory Factory { get; }
@@ -114,11 +119,6 @@ namespace Kistl.Client
         public IRenderer Renderer { get; private set; }
 
         /// <summary>
-        /// A read-only <see cref="IKistlContext"/> to access meta data
-        /// </summary>
-        public IKistlContext GuiDataContext { get { return Kistl.API.FrozenContext.Single; } }
-
-        /// <summary>
         /// A <see cref="IKistlContext"/> for the GUI internals
         /// </summary>
         public IKistlContext MetaContext
@@ -126,9 +126,22 @@ namespace Kistl.Client
             get
             {
                 return FrozenContext.Single;
-                //if (_guiDataContextCache == null)
-                //    _guiDataContextCache = KistlContext.GetContext();
-                //return _guiDataContextCache;
+            }
+        }
+
+        /// <summary>
+        /// private backing store for the <see cref="TransientContext"/> property.
+        /// </summary>
+        private MemoryContext _transientContextCache;
+
+        /// <inheritdoc/>
+        public IKistlContext TransientContext
+        {
+            get
+            {
+                if (_transientContextCache == null)
+                    _transientContextCache = new MemoryContext();
+                return _transientContextCache;
             }
         }
 

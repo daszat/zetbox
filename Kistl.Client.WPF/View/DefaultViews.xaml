@@ -15,13 +15,19 @@
                      Fill="White" />
         </Viewbox>
     </DataTemplate>
-    
+
     <DataTemplate x:Key="nullTemplate">
         <TextBlock FontWeight="Bold">(null)</TextBlock>
     </DataTemplate>
 
     <view:VisualTypeTemplateSelector x:Key="defaultTemplateSelector" />
-    <view:VisualTypeTemplateSelector x:Key="readOnlyTemplateSelector" ReadOnly="true"/>
-    <view:VisualTypeTemplateSelector x:Key="listItemTemplateSelector" RequestedType="ObjectListEntry"/>
-    <view:VisualTypeTemplateSelector x:Key="gridCellTemplateSelector" RequestedType="GridCell"/>
+    <view:VisualTypeTemplateSelector x:Key="listItemTemplateSelector"
+                                     RequestedType="ObjectListEntry"
+                                     RequestedKind="Kistl.App.GUI.SingleLineDataObjectKind" />
+    <!--<view:VisualTypeTemplateSelector x:Key="gridCellTemplateSelector"
+                                     RequestedType="GridCell"
+                                     RequestedKind="FAIL" />-->
+    <view:VisualTypeTemplateSelector x:Key="summaryTemplateSelector"
+                                     RequestedType="GridCell"
+                                     RequestedKind="Kistl.App.GUI.DataObjectSummaryKind" />
 </ResourceDictionary>

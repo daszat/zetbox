@@ -54,7 +54,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             var factory = App.Current.AppContext.Factory;
             var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
             newWorkspace.ShowForeignModel(dataObject);
-            factory.ShowModel(newWorkspace, true, false);
+            factory.ShowModel(newWorkspace, true);
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)
@@ -65,7 +65,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             {
                 newWorkspace.ShowForeignModel(item);
             }
-            factory.ShowModel(newWorkspace, true, false);
+            factory.ShowModel(newWorkspace, true);
         }
     }
 }

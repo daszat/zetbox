@@ -89,7 +89,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         ChooseTypeRefFromAssembly(chosen.Object as Kistl.App.Base.Assembly);
                     }
                 }));
-            Factory.ShowModel(selectionTask, true, false);
+            Factory.ShowModel(selectionTask, true);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         this.Parent.Value = chosen;
                     }
                 }));
-            Factory.ShowModel(selectionTask, true, false);
+            Factory.ShowModel(selectionTask, true);
         }
 
     }

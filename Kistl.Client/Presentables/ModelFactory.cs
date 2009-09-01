@@ -124,20 +124,38 @@ namespace Kistl.Client.Presentables
         /// <param name="mdl">the model to be viewed</param>
         /// <param name="readOnly">a value indicating whether or not the view should be read only</param>
         /// <returns>the configured view</returns>
-        public IView CreateDefaultView(PresentableModel mdl, bool readOnly)
+        public IView CreateDefaultView(PresentableModel mdl)
         {
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
                 .GetPresentableModelDescriptor();
 
-            var vDesc = pmd.GetDefaultViewDescriptor(Toolkit, readOnly);
+            var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
             IView view = (IView)vDesc.ControlRef.Create();
             view.SetModel(mdl);
             return view;
         }
 
-        public void ShowModel(PresentableModel mdl, bool activate)
+        /// <summary>
+        /// Creates a specific View for the given PresentableModel.
+        /// </summary>
+        /// <param name="mdl">the model to be viewed</param>
+        /// <param name="kind">the kind of view to create</param>
+        /// <param name="readOnly">a value indicating whether or not the view should be read only</param>
+        /// <returns>the configured view</returns>
+        public IView CreateSpecificView(PresentableModel mdl, ControlKind kind)
         {
-            ShowModel(mdl, activate, false);
+            PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
+                .GetPresentableModelDescriptor();
+
+            var vDesc = pmd.GetViewDescriptor(Toolkit, kind);
+            IView view = (IView)vDesc.ControlRef.Create();
+            view.SetModel(mdl);
+            return view;
+        }
+
+        public void ShowModel(PresentableModel mdl, ControlKind kind, bool activate)
+        {
+            ShowInView(mdl, CreateSpecificView(mdl, kind), activate);
         }
 
         /// <summary>
@@ -145,8 +163,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         /// <param name="mdl"></param>
         /// <param name="activate"></param>
-        /// <param name="readOnly"></param>
-        public void ShowModel(PresentableModel mdl, bool activate, bool readOnly)
+        public void ShowModel(PresentableModel mdl, bool activate)
         {
             if (mdl == null)
                 throw new ArgumentNullException("mdl");
@@ -155,7 +172,7 @@ namespace Kistl.Client.Presentables
 
             if (dom == null)
             {
-                ShowInView(mdl, CreateDefaultView(mdl, readOnly), activate);
+                ShowInView(mdl, CreateDefaultView(mdl), activate);
             }
             else
             {

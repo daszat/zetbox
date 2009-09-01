@@ -167,7 +167,7 @@ namespace Kistl.Client.Presentables
                             Value = chosen;
                         }
                     }));
-            Factory.ShowModel(selectionTask, true, false);
+            Factory.ShowModel(selectionTask, true);
         }
 
         private SelectValueCommandModel _SelectValueCommand;

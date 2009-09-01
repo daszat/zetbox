@@ -29,10 +29,9 @@ namespace Kistl.Client.WPF.View
         /// according to the specified parameters.
         /// </summary>
         /// <param name="mdl">the model to display</param>
-        /// <param name="visualType">which kind of view to use</param>
-        /// <param name="readOnly">whether or not the view should be read-only</param>
+        /// <param name="controlKindClassName">which kind of view to use</param>
         /// <returns>a DataTemplate capable of displaying the specified model</returns>
-        public static DataTemplate SelectTemplate(PresentableModel mdl, VisualType? visualType, bool readOnly)
+        public static DataTemplate SelectTemplate(PresentableModel mdl, string controlKindClassName)
         {
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor();
             if (pmd == null)
@@ -40,9 +39,7 @@ namespace Kistl.Client.WPF.View
                 throw new ArgumentOutOfRangeException("mdl", "No matching PresentableModelDescriptor found");
             }
 
-            var visualDesc = visualType.HasValue 
-                ? pmd.GetViewDescriptor(Toolkit.WPF, visualType.Value, readOnly) 
-                : pmd.GetDefaultViewDescriptor(Toolkit.WPF, readOnly);
+            ViewDescriptor visualDesc = LookupSecondaryViewDescriptor(pmd, controlKindClassName);
 
             DataTemplate result = new DataTemplate();
             if (visualDesc != null)
@@ -52,13 +49,51 @@ namespace Kistl.Client.WPF.View
             return result;
         }
 
+        private static ViewDescriptor LookupSecondaryViewDescriptor(PresentableModelDescriptor pmd, string controlKindClassName)
+        {
+            ViewDescriptor visualDesc;
+            if (String.IsNullOrEmpty(controlKindClassName))
+            {
+                visualDesc = pmd.GetDefaultViewDescriptor(Toolkit.WPF);
+            }
+            else
+            {
+                var ckcInterface = new InterfaceType(Type.GetType(controlKindClassName + "," + GuiApplicationContext.Current.InterfaceAssembly, true));
+                if (pmd.DefaultKind.GetInterfaceType() == ckcInterface)
+                {
+                    visualDesc = pmd.GetDefaultViewDescriptor(Toolkit.WPF);
+                }
+                else
+                {
+                    ControlKind controlKind = pmd.SecondaryControlKinds.Where(ck => ck.GetInterfaceType() == ckcInterface).SingleOrDefault();
+                    if (controlKind == null && pmd.PresentableModelRef.Parent != null)
+                    {
+                        var parentDescriptor = pmd.PresentableModelRef.Parent.GetPresentableModelDescriptor();
+                        if (parentDescriptor != null)
+                        {
+                            // recursively iterate up the inheritance tree
+                            visualDesc = LookupSecondaryViewDescriptor(parentDescriptor, controlKindClassName);
+                        }
+                        else
+                        {
+                            throw new ArgumentOutOfRangeException("controlKindClassName", "Couldn't find matching controlKind");
+                        }
+                    }
+                    else
+                    {
+                        visualDesc = pmd.GetViewDescriptor(Toolkit.WPF, controlKind);
+                    }
+                }
+            }
+            return visualDesc;
+        }
+
         /// <summary>
         /// Initializes a new instance of the VisualTypeTemplateSelector class.
         /// </summary>
         public VisualTypeTemplateSelector()
         {
             RequestedType = null;
-            ReadOnly = false;
         }
 
         /// <summary>
@@ -71,9 +106,9 @@ namespace Kistl.Client.WPF.View
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether read-only views should be preferred.
+        /// Gets or sets the kind of view to use. To select the default view, leave this property at its default null value.
         /// </summary>
-        public bool ReadOnly
+        public string RequestedKind
         {
             get;
             set;
@@ -87,10 +122,15 @@ namespace Kistl.Client.WPF.View
                 return (DataTemplate)((FrameworkElement)container).FindResource("nullTemplate");
             }
 
+            if (String.IsNullOrEmpty(RequestedKind) != (null == RequestedType))
+            {
+                throw new InvalidOperationException("Cannot SelectTemplate with status mismatch between RequestedValue and RequestedKind");
+            }
+
             var model = item as PresentableModel;
             if (model != null)
             {
-                return VisualTypeTemplateSelector.SelectTemplate(model, this.RequestedType, ReadOnly);
+                return VisualTypeTemplateSelector.SelectTemplate(model, RequestedKind);
             }
             else
             {

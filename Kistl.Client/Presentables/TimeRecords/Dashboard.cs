@@ -61,7 +61,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         protected override void DoExecute(object data)
         {
             var initialWorkspace = AppContext.Factory.CreateSpecificModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel>(KistlContext.GetContext());
-            AppContext.Factory.ShowModel(initialWorkspace, true, false);
+            AppContext.Factory.ShowModel(initialWorkspace, true);
         }
     }
 

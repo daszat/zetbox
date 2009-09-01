@@ -55,7 +55,7 @@ namespace Kistl.Client.WPF.View
             var factory = App.Current.AppContext.Factory;
             var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
             newWorkspace.ShowForeignModel(dataObject);
-            factory.ShowModel(newWorkspace, true, false);
+            factory.ShowModel(newWorkspace, true);
         }
 
         #region IView Members

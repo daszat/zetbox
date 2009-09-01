@@ -64,7 +64,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             Model.RecentObjects.Add(obj);
 
             // Load View
-            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(obj, false);
+            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(obj);
             var ctrl = loader.LoadControl(Page);
 
             // Add to Tab Page

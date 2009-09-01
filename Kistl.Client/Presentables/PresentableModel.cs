@@ -150,14 +150,14 @@ namespace Kistl.Client.Presentables
     {
         #region IGuiApplicationContext Members
 
-        public IKistlContext GuiDataContext
-        {
-            get { throw new InvalidOperationException("No data access allowed in Design mode"); }
-        }
-
         public IKistlContext MetaContext
         {
             get { throw new InvalidOperationException("No data access operations allowed in Design mode"); }
+        }
+
+        public IKistlContext TransientContext
+        {
+            get { throw new InvalidOperationException("No transient data operations allowed in Design mode"); }
         }
 
         public ModelFactory Factory

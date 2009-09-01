@@ -89,7 +89,7 @@
             <ContentPresenter Grid.Column="2"
                               Grid.IsSharedSizeScope="True"
                               Content="{Binding SelectedItem}"
-                              ContentTemplateSelector="{StaticResource readOnlyTemplateSelector}" />
+                              ContentTemplateSelector="{StaticResource summaryTemplateSelector}" />
         </Grid>
     </DockPanel>
 </Window>
