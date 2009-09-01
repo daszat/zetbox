@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T08:01:39.4787044Z">
+<KistlPackaging xmlns="http://dasz.at/Kistl" xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-01T09:00:55.8617087Z">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -6604,13 +6604,14 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="bbd088cc-c68c-46de-a89e-6e1e6f768245">
     <KistlBase:ClassName>SingleLineDataObjectKind</KistlBase:ClassName>
+    <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Presents a data object in a single line</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>SingleLineDataObjectKinds</KistlBase:TableName>
