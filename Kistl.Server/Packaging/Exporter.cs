@@ -42,6 +42,7 @@ namespace Kistl.Server.Packaging
                 Logging.Log.InfoFormat("Starting Publish for Modules {0}", string.Join(", ", moduleNamespaces));
                 using (XmlWriter xml = XmlTextWriter.Create(s, new XmlWriterSettings() { Indent = true, CloseOutput = false, Encoding = Encoding.UTF8 }))
                 {
+                    Logging.Log.Debug("Loading modulelist");
                     var moduleList = GetModules(ctx, moduleNamespaces);
                     WriteStartDocument(xml, new Kistl.App.Base.Module[] 
                         { 
@@ -53,10 +54,26 @@ namespace Kistl.Server.Packaging
 
                     foreach (var module in moduleList)
                     {
-                        foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
+                        Logging.Log.DebugFormat("Publishing objects for module {0}", module.ModuleName);
+                        var objects = PackagingHelper.GetMetaObjects(ctx, module);
+
+                        Stopwatch watch = new Stopwatch();
+                        watch.Start();
+
+                        int counter = 0;
+                        foreach (var obj in objects)
                         {
                             ExportObject(xml, obj, propNamespaces);
+
+                            counter++;
+                            if (watch.ElapsedMilliseconds > 1000)
+                            {
+                                watch.Reset();
+                                watch.Start();
+                                Logging.Log.DebugFormat("{0:n0}% finished", (double)counter / (double)objects.Count * 100.0);
+                            }
                         }
+                        Logging.Log.Debug("100% finished");
                     }
                 }
                 Logging.Log.Info("Export finished");
