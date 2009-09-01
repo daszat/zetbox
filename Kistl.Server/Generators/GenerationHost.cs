@@ -8,6 +8,7 @@ using System.Text;
 
 using Arebis.CodeGeneration;
 using Arebis.CodeGenerator.Templated;
+using Kistl.API.Utils;
 
 namespace Kistl.Server.Generators
 {
@@ -173,32 +174,7 @@ namespace Kistl.Server.Generators
 
         public void Log(string fmt, params object[] args)
         {
-            string timestamp = DateTime.Now.ToString();
-            try
-            {
-                if (logfile == null)
-                    Console.WriteLine(String.Format(timestamp + " " + fmt, args));
-                else
-                {
-                    StreamWriter writer = File.AppendText(this.logfile);
-                    try
-                    {
-                        writer.WriteLine(String.Format(timestamp + " " + fmt, args));
-                    }
-                    finally
-                    {
-                        writer.Close();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                try
-                {
-                    Console.WriteLine(timestamp + " Attempt to log message \"" + fmt + "\" failed: " + ex.Message);
-                }
-                catch (Exception) { }
-            }
+            Logging.Log.InfoFormat(fmt, args);
         }
 
         public void Dispose()

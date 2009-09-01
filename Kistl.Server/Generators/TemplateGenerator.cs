@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 
 using Arebis.CodeGenerator.Templated;
+using Kistl.API.Utils;
 
 namespace Kistl.Server.Generators
 {
@@ -76,15 +77,15 @@ namespace Kistl.Server.Generators
             }
             catch (CompilationFailedException ex)
             {
-                Console.WriteLine(String.Format("Compilation failed for file: {0}", ex.Filename));
+                Logging.Log.Warn(string.Format("Compilation failed for file: {0}", ex.Filename), ex);
                 foreach (CompilerError err in ex.Errors)
                 {
-                    Console.WriteLine(String.Format("{0} {1}: {2}\r\n  \"{3}\", line #{4}",
+                    Logging.Log.WarnFormat("{0} {1}: {2}\r\n  \"{3}\", line #{4}",
                         err.IsWarning ? "Warning" : "Error",
                         err.ErrorNumber,
                         err.ErrorText,
                         err.FileName,
-                        err.Line));
+                        err.Line);
                 }
                 throw;
             }

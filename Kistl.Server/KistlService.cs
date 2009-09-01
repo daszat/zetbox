@@ -10,6 +10,7 @@ using Kistl.API;
 using System.Diagnostics;
 using System.ServiceModel.Dispatcher;
 using System.ServiceModel;
+using Kistl.API.Utils;
 
 namespace Kistl.Server
 {
@@ -89,7 +90,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (TraceClient.TraceHelper.TraceMethodCall(type.ToString()))
+                using (Logging.Log.TraceMethodCall(type.ToString()))
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
@@ -126,7 +127,7 @@ namespace Kistl.Server
                 if (ID <= API.Helper.INVALIDID) throw new ArgumentOutOfRangeException("ID");
                 if (string.IsNullOrEmpty(property)) throw new ArgumentNullException("property");
 
-                using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
+                using (Logging.Log.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
@@ -158,7 +159,7 @@ namespace Kistl.Server
                 if (type == null) throw new ArgumentNullException("type");
                 if (ID <= API.Helper.INVALIDID) throw new ArgumentOutOfRangeException("ID");
 
-                using (TraceClient.TraceHelper.TraceMethodCall("{0} [{1}]", type, ID))
+                using (Logging.Log.TraceMethodCall("{0} [{1}]", type, ID))
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
@@ -190,7 +191,7 @@ namespace Kistl.Server
                 if (type == null) throw new ArgumentNullException("type");
                 if (string.IsNullOrEmpty(xmlObj)) throw new ArgumentNullException("xmlObj");
 
-                using (TraceClient.TraceHelper.TraceMethodCall("{0}", type))
+                using (Logging.Log.TraceMethodCall("{0}", type))
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
@@ -216,7 +217,7 @@ namespace Kistl.Server
                 if (ceType == null) throw new ArgumentNullException("ceType");
                 if (role != 1 && role != 2) throw new ArgumentOutOfRangeException("role");
 
-                using (TraceClient.TraceHelper.TraceMethodCall("{0}", ceType))
+                using (Logging.Log.TraceMethodCall("{0}", ceType))
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
@@ -239,7 +240,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (TraceClient.TraceHelper.TraceMethodCall())
+                using (Logging.Log.TraceMethodCall())
                 {
                     Generators.Generator.GenerateCode();
                     // Generators.Generator.GenerateDatabase();
@@ -260,7 +261,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (TraceClient.TraceHelper.TraceMethodCall(name))
+                using (Logging.Log.TraceMethodCall(name))
                 {
                     return "Hello " + name;
                 }

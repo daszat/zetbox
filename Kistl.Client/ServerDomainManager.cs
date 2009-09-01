@@ -7,6 +7,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Client;
 using Kistl.API.Configuration;
+using Kistl.API.Utils;
 
 namespace Kistl.Client
 {
@@ -29,7 +30,7 @@ namespace Kistl.Client
 
         public void Start(KistlConfig config)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("Starting AppDomain for Server"))
+            using (Logging.Log.TraceMethodCall("Starting AppDomain for Server"))
             {
                 serverDomain = AppDomain.CreateDomain("ServerAppDomain",
                     AppDomain.CurrentDomain.Evidence,
@@ -65,7 +66,7 @@ namespace Kistl.Client
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Trace.TraceError(ex.ToString());
+                        Logging.Log.Warn("Error during shutdown", ex);
                     }
                 }
                 serverManager = null;

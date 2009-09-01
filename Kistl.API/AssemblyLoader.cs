@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 
 using Kistl.API.Configuration;
+using Kistl.API.Utils;
 
 namespace Kistl.API
 {
@@ -88,11 +89,11 @@ namespace Kistl.API
             try
             {
                 Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
-                Trace.TraceInformation("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
+                Logging.Log.InfoFormat("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
             }
             catch (Exception ex)
             {
-                Trace.TraceWarning("Couldn't clean TargetAssemblyFolder {0}: {1}", AssemblyLoader.TargetAssemblyFolder, ex.ToString());
+                Logging.Log.WarnFormat("Couldn't clean TargetAssemblyFolder {0}: {1}", AssemblyLoader.TargetAssemblyFolder, ex.ToString());
             }
         }
 
@@ -126,18 +127,14 @@ namespace Kistl.API
         internal static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (AssemblyLoader.SearchPath.Count <= 0) return null;
-            // Do not call Trace.WriteLine! A TraceListener might want to load XML Serializers.dll and
-            // this would lead to a StackOverflow due to recursion.
-            Trace.TraceInformation("Resolving Assembly {0}", args.Name);
+            Logging.Log.InfoFormat("Resolving Assembly {0}", args.Name);
             return LoadAssemblyByName(args.Name, false);
         }
 
         internal static Assembly ReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (AssemblyLoader.SearchPath.Count <= 0) return null;
-            // Do not call Trace.WriteLine! A TraceListener might want to load XML Serializers.dll and
-            // this would lead to a StackOverflow due to recursion.
-            Trace.TraceInformation("Resolving Assembly {0} for reflection", args.Name);
+            Logging.Log.InfoFormat("Resolving Assembly {0} for reflection", args.Name);
             return LoadAssemblyByName(args.Name, true);
         }
 
@@ -223,7 +220,7 @@ namespace Kistl.API
                 // the folder should have been cleared on initialisation and once
                 // an assembly is loaded, we cannot re-load the assembly anyways.
                 string targetDll = Path.Combine(TargetAssemblyFolder, baseName + ".dll");
-                Trace.TraceInformation("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : "");
+                Logging.Log.InfoFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : "");
                 try
                 {
                     if (!File.Exists(targetDll))
@@ -240,7 +237,7 @@ namespace Kistl.API
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceError(ex.ToString());
+                    Logging.Log.Warn("Error loading assembly", ex);
                 }
                 Assembly result = null;
 
@@ -263,7 +260,7 @@ namespace Kistl.API
                     //}
                 }
                 if (result == null)
-                    Trace.TraceError(String.Format("Cannot load {0}", baseName));
+                    Logging.Log.WarnFormat("Cannot load {0}", baseName);
                 return result;
             }
         }

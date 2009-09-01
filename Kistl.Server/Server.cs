@@ -15,6 +15,7 @@ namespace Kistl.Server
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
+    using Kistl.API.Utils;
 
     /// <summary>
     /// Serversteuerung
@@ -52,7 +53,7 @@ namespace Kistl.Server
         /// </summary>
         public void Start(KistlConfig config)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("Starting Server"))
+            using (Logging.Log.TraceMethodCall("Starting Server"))
             {
                 Init(config);
 
@@ -89,20 +90,20 @@ namespace Kistl.Server
         /// </summary>
         public void Stop()
         {
-            Trace.TraceInformation("Stopping Server");
+            Logging.Log.Info("Stopping Server");
 
             host.Close();
             hostStreams.Close();
 
             if (!serviceThread.Join(5000))
             {
-                Trace.TraceInformation("Server did not stopped, aborting");
+                Logging.Log.Info("Server did not stopped, aborting");
                 serviceThread.Abort();
             }
             serviceThread = null;
             serverStarted.Close();
 
-            Trace.TraceInformation("Server stopped");
+            Logging.Log.Info("Server stopped");
         }
 
         private const string DefaultServiceUrl = "http://localhost:6666/KistlService";
@@ -126,7 +127,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (TraceClient.TraceHelper.TraceMethodCall("Starting WCF Server"))
+                using (Logging.Log.TraceMethodCall("Starting WCF Server"))
                 {
                     host = new ServiceHost(typeof(KistlService),
                         new Uri(GetServiceUrl(appCtx.Configuration)));
@@ -145,33 +146,30 @@ namespace Kistl.Server
                     serverStarted.Set();
                 }
 
-                Trace.TraceInformation("WCF Server started");
+                Logging.Log.Info("WCF Server started");
 
                 while (host.State == CommunicationState.Opened)
                 {
                     Thread.Sleep(100);
                 }
 
-                Trace.TraceInformation("WCF Server: Hosts closed, exiting WCF thread");
+                Logging.Log.Info("WCF Server: Hosts closed, exiting WCF thread");
             }
             catch (Exception error)
             {
-                Trace.TraceError("Unhandled exception ({0}) while running the WCF Server: {1}", error.GetType().Name, error.Message);
-                Trace.TraceError(error.ToString());
-                Trace.TraceError(error.StackTrace);
-
+                Logging.Log.Error("Unhandled exception while running WCF Server", error);
                 throw error;
             }
         }
 
         private void host_Faulted(object sender, EventArgs e)
         {
-            Trace.TraceWarning("Host faulted: " + e);
+            Logging.Log.Warn("Host faulted: " + e);
         }
 
         private void host_UnknownMessageReceived(object sender, UnknownMessageReceivedEventArgs e)
         {
-            Trace.TraceWarning("UnknownMessageReceived: {0}", e.Message.ToString());
+            Logging.Log.WarnFormat("UnknownMessageReceived: {0}", e.Message);
         }
 
         public void GenerateCode()

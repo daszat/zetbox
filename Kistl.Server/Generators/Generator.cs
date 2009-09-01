@@ -15,6 +15,7 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
+using Kistl.API.Utils;
 //using Kistl.Server.GeneratorsOld;
 
 namespace Kistl.Server.Generators
@@ -25,9 +26,9 @@ namespace Kistl.Server.Generators
         {
             //MoveNewRelationToDb();
             //TranslateRelations();
-            using (TraceClient.TraceHelper.TraceMethodCall())
+            using (Logging.Log.TraceMethodCall())
             {
-                Trace.TraceInformation("Generating Code");
+                Logging.Log.Info("Generating Code");
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     var generators = new[]{
@@ -84,25 +85,6 @@ namespace Kistl.Server.Generators
                 }
             }
         }
-
-        //public static void GenerateDatabase()
-        //{
-        //    using (TraceClient.TraceHelper.TraceMethodCall())
-        //    {
-        //        var dbGenerator = DatabaseGeneratorFactory.GetGenerator();
-
-        //        using (IKistlContext ctx = KistlContext.GetContext())
-        //        {
-        //            dbGenerator.Generate(ctx);
-        //        }
-        //    }
-        //}
-
-        //public static void GenerateAll()
-        //{
-        //    GenerateCode();
-        //    GenerateDatabase();
-        //}
 
         internal static TemplateGenerator GetTemplateGenerator(string providerTemplatePath,
             string template, string output, string targetdir, params object[] templateParameter)

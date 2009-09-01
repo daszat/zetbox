@@ -11,6 +11,7 @@ using Kistl.API.Server;
 using System.Reflection;
 using System.Diagnostics;
 using System.Data;
+using Kistl.API.Utils;
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 
@@ -269,7 +270,7 @@ namespace Kistl.DALProvider.EF
                 .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted)
                 .Count() > 0)
             {
-                Trace.WriteLine("************************* >>>> Submit Changes ******************************");
+                Logging.Log.Info("************************* >>>> Submit Changes ******************************");
 
                 #region Details
                 //foreach (var msgPair in new[]{
@@ -285,22 +286,22 @@ namespace Kistl.DALProvider.EF
                 //        .Select(e => e.Entity);
                 //    foreach (var i in debugList)
                 //    {
-                //        Trace.WriteLine(string.Format("{0}: {1} -> {2}", msgPair.Label, i.GetType(), i.ToString()));
+                //        Logging.Log.InfoFormat("{0}: {1} -> {2}", msgPair.Label, i.GetType(), i.ToString());
                 //    }
                 //}
+                // Logging.Log.Info("");
                 #endregion
 
-                Trace.WriteLine("");
-                Trace.WriteLine("  Added: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count());
-                Trace.WriteLine("  Modified: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Modified).Count());
-                Trace.WriteLine("  Deleted: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Deleted).Count());
-                Trace.WriteLine("  Unchanged: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Unchanged).Count());
+                Logging.Log.Info("  Added: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count());
+                Logging.Log.Info("  Modified: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Modified).Count());
+                Logging.Log.Info("  Deleted: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Deleted).Count());
+                Logging.Log.Info("  Unchanged: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Unchanged).Count());
 
-                Trace.WriteLine("************************* Submit Changes <<<< ******************************");
+                Logging.Log.Info("************************* Submit Changes <<<< ******************************");
             }
             else
             {
-                Trace.WriteLine("**** >>>> Empty Submit Changes <<<< ****");
+                Logging.Log.Info("**** >>>> Empty Submit Changes <<<< ****");
             }
 #endif
 
@@ -319,7 +320,7 @@ namespace Kistl.DALProvider.EF
             }
             catch (UpdateException updex)
             {
-                Trace.TraceWarning(updex.ToString());
+                Logging.Log.Warn("Error during SubmitChanges", updex);
                 throw updex.InnerException;
             }
 

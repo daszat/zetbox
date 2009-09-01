@@ -6,6 +6,7 @@ namespace Kistl.API
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
+    using Kistl.API.Utils;
 
     /// <summary>
     /// This exception is thrown when someone tries to modify a read only context.
@@ -77,8 +78,8 @@ namespace Kistl.API
                     // we use the current database as stand-in for the 
                     // frozen context. Hopefully we have data there and 
                     // performance isn't tooooo bad :)
-                    Trace.TraceError("Frozen.Single called without frozen context assembly or fallback.");
-                    Trace.TraceError("Falling back to direct database access. Expect poor performance.");
+                    Logging.Log.Warn("Frozen.Single called without frozen context assembly or fallback.");
+                    Logging.Log.Warn("Falling back to direct database access. Expect poor performance.");
                     // TODO: Case 1211: Move KistlContext.GetContext from Kistl.Api.{Client,Server} into the API proper and use the config file to find the right context.
                 }
                 return result;
@@ -103,7 +104,7 @@ namespace Kistl.API
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceWarning("Error when trying to load frozen context: {0}: {1}", frozenAssemblyName, ex.Message);
+                    Logging.Log.Warn(string.Format("Error when trying to load frozen context: {0}", frozenAssemblyName), ex);
                     return null;
                 }
             }
@@ -123,7 +124,7 @@ namespace Kistl.API
             }
             if (_fallback != null)
             {
-                Trace.TraceWarning("Replacing FrozenContext fallback.");
+                Logging.Log.Warn("Replacing FrozenContext fallback.");
             }
             _fallback = ctx;
         }

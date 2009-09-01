@@ -9,6 +9,7 @@ using Kistl.API;
 using Kistl.API.Client;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Kistl.API.Utils;
 
 namespace Kistl.Client
 {
@@ -66,7 +67,7 @@ namespace Kistl.Client
             {
                 if (_ObjectClasses == null)
                 {
-                    using (TraceClient.TraceHelper.TraceMethodCall("Getting Object Classes"))
+                    using (Logging.Log.TraceMethodCall("Getting Object Classes"))
                     {
                         // Prefetch Modules
                         //_ObjectClasses = _fetchContext.GetQuery<Kistl.App.Base.ObjectClass>()
@@ -96,29 +97,6 @@ namespace Kistl.Client
                 return _ObjectClasses;
             }
         }
-
-        //private static void FetchModules()
-        //{
-        //    lock (typeof(Helper))
-        //    {
-        //        if (_Modules == null)
-        //        {
-        //            using (TraceClient.TraceHelper.TraceMethodCall("Getting Modules"))
-        //            {
-        //                _Modules = _fetchContext.GetQuery<Kistl.App.Base.Module>().ToDictionary(m => m.ModuleName);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //public static Dictionary<string, Kistl.App.Base.Module> Modules
-        //{
-        //    get
-        //    {
-        //        FetchModules();
-        //        return _Modules;
-        //    }
-        //}
     }
 
     public static class ClientExtensions

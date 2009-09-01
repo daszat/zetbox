@@ -6,6 +6,7 @@ using System.Text;
 using Kistl.API.Client.Mocks;
 
 using NUnit.Framework;
+using Kistl.API.Utils;
 
 namespace Kistl.API.Client.Tests
 {
@@ -18,7 +19,7 @@ namespace Kistl.API.Client.Tests
         [SetUp]
         public void SetUp()
         {
-            System.Diagnostics.Trace.WriteLine("KistlContextTests.SetUp() is called");
+            Logging.Log.Info("KistlContextTests.SetUp() is called");
 
             var testCtx = new ClientApplicationContextMock();
 

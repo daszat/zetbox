@@ -6,6 +6,7 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.API;
 using System.Diagnostics;
+using Kistl.API.Utils;
 
 namespace Kistl.Server
 {
@@ -27,8 +28,7 @@ namespace Kistl.Server
         /// <param name="throwFault">whether or not to throw a <see cref="FaultException"/></param>
         public static void HandleError(Exception ex, bool throwFault)
         {
-            System.Diagnostics.Trace.TraceError(ex.ToString());
-            System.Console.WriteLine(ex.ToString());
+            Logging.Log.Error(ex.ToString());
             if (throwFault)
             {
                 if (ex is System.Data.UpdateException && ex.InnerException != null)

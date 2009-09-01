@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using Kistl.API.Utils;
 
 namespace Kistl.API
 {
@@ -20,7 +21,7 @@ namespace Kistl.API
         [Conditional("DEBUG_SERIALIZATION")]
         private static void SerializerTrace(string fmt, params object[] args)
         {
-            Trace.TraceInformation(fmt, args);
+            Logging.Log.InfoFormat(fmt, args);
         }
 
         #region bool

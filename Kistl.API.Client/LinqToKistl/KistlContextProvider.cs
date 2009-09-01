@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Kistl.API.Utils;
 
 // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
@@ -300,13 +301,13 @@ namespace Kistl.API.Client
         #region IQueryProvider Members
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            System.Diagnostics.Trace.WriteLine(string.Format("CreateQuery {0}", expression.ToString()));
+            Logging.Log.DebugFormat("CreateQuery {0}", expression.ToString());
             return (IQueryable<TElement>)new KistlContextQuery<TElement>(_context, _type, this, expression);
         }
 
         public IQueryable CreateQuery(Expression expression)
         {
-            System.Diagnostics.Trace.WriteLine(string.Format("CreateQuery {0}", expression.ToString()));
+            Logging.Log.DebugFormat("CreateQuery {0}", expression.ToString());
             Type elementType = expression.Type.FindElementTypes().First();
             return (IQueryable)Activator.CreateInstance(typeof(KistlContextQuery<>)
                 .MakeGenericType(elementType), new object[] { _context, _type, this, expression });

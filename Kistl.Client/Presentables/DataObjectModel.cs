@@ -318,7 +318,7 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                Trace.TraceWarning("No model for property: '{0}' of Type '{1}'", pm, pm.GetType());
+                Logging.Log.WarnFormat("No model for property: '{0}' of Type '{1}'", pm, pm.GetType());
                 return null;
             }
         }

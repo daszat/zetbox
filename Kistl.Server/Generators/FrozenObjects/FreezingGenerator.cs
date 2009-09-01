@@ -6,6 +6,7 @@ using System.Text;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.API;
+using Kistl.API.Utils;
 
 namespace Kistl.Server.Generators.FrozenObjects
 {
@@ -34,8 +35,7 @@ namespace Kistl.Server.Generators.FrozenObjects
                 catch (TypeLoadException ex)
                 {
                     // TODO: Offensichtlich ist der Datentyp neu -> Fehler ignorieren
-                    Console.WriteLine("** WARNING: DataStore, cls.GetDescribedInterfaceType()");
-                    Console.WriteLine(ex.ToString());
+                    Logging.Log.Warn("DataStore, cls.GetDescribedInterfaceType()", ex);
                 }
             }
 

@@ -8,6 +8,7 @@ using System.Xml;
 using Kistl.API;
 using Kistl.App.Extensions;
 using System.Diagnostics;
+using Kistl.API.Utils;
 
 namespace Kistl.App.Base
 {
@@ -269,7 +270,7 @@ namespace Kistl.App.Base
                 if (type == null)
                 {
                     // TODO: delete+cascade here
-                    Trace.TraceWarning("Should delete " + tr.FullName);
+                    Logging.Log.Warn("Should delete " + tr.FullName);
                     ////ctx.Delete(tr);
                 }
                 else if (!type.IsGenericType)

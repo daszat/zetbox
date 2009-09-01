@@ -10,6 +10,7 @@ using System.Threading;
 using Kistl.API.Configuration;
 using Kistl.API.Server;
 using Kistl.API;
+using Kistl.API.Utils;
 
 namespace Kistl.Server
 {
@@ -67,6 +68,8 @@ namespace Kistl.Server
 
         static int Main(string[] args)
         {
+            Logging.Configure();
+
             bool waitForKey = false;
             try
             {
@@ -222,7 +225,7 @@ namespace Kistl.Server
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Trace.TraceError("Server Application failed: \n" + ex.ToString());
+                Logging.Log.Error("Server Application failed:", ex);
                 if (waitForKey)
                 {
                     Console.WriteLine("Hit the anykey to exit");

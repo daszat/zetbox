@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using Kistl.API.Utils;
 
 namespace Kistl.API.Client
 {
@@ -61,7 +62,7 @@ namespace Kistl.API.Client
             Key k = new Key(type, ID);
             if (_cache.ContainsKey(k))
             {
-                Trace.WriteLineIf(TraceClient.TraceHelper.TraceLevel.TraceVerbose, string.Format("Cachehit {0} [{1}]", type, ID));
+                Logging.Log.DebugFormat("Cachehit {0} [{1}]", type, ID);
                 return _cache[k];
             }
             else

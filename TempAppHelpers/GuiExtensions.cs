@@ -9,6 +9,7 @@ namespace Kistl.App.Extensions
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.GUI;
+    using Kistl.API.Utils;
 
     /// <summary>
     /// A set of extension methods for the GUI module.
@@ -96,16 +97,11 @@ namespace Kistl.App.Extensions
 
             if (viewDesc == null)
             {
-                System.Diagnostics.Trace.TraceWarning("Found no {0} ViewDescriptor for {1}",
-                    vt,
-                    self);
+                Logging.Log.WarnFormat("Found no {0} ViewDescriptor for {1}", vt, self);
             }
             else if (viewDesc.PresentedModelDescriptor != self)
             {
-                System.Diagnostics.Trace.TraceWarning("Using inherited {0} ViewDescriptor from {1} for {2}",
-                    vt,
-                    viewDesc.PresentedModelDescriptor,
-                    self);
+                Logging.Log.WarnFormat("Using inherited {0} ViewDescriptor from {1} for {2}", vt, viewDesc.PresentedModelDescriptor, self);
             }
 
             return viewDesc;

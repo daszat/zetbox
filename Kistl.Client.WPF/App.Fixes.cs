@@ -16,6 +16,7 @@ namespace Kistl.Client.WPF
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.TimeRecords;
     using Kistl.Client.WPF.View.TimeRecords;
+    using Kistl.API.Utils;
 
     /// <content>Contains various and temporary fixes needed to clean the database</content>
     public partial class App
@@ -25,7 +26,7 @@ namespace Kistl.Client.WPF
         /// </summary>
         private static void FixNotNullableConstraints()
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("Fixing NotNullableConstraints"))
+            using (Logging.Log.TraceMethodCall("Fixing NotNullableConstraints"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
@@ -72,7 +73,7 @@ namespace Kistl.Client.WPF
         /// </summary>
         private static void FixupTypeRefParents()
         {
-            using (TraceClient.TraceHelper.TraceMethodCall("FixupTypeRefParents"))
+            using (Logging.Log.TraceMethodCall("FixupTypeRefParents"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
@@ -114,7 +115,7 @@ namespace Kistl.Client.WPF
         /// </summary>
         private static void CreateVariousDescriptors()
         {
-            //using (TraceClient.TraceHelper.TraceMethodCall("Creating various descriptors"))
+            //using (Logging.TraceMethodCall("Creating various descriptors"))
             //{
             //    using (IKistlContext ctx = KistlContext.GetContext())
             //    {

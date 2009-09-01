@@ -8,6 +8,7 @@ using Kistl.API.Server;
 using System.Xml;
 using System.IO;
 using System.Xml.XPath;
+using Kistl.API.Utils;
 
 namespace Kistl.Server.Packaging
 {
@@ -15,19 +16,19 @@ namespace Kistl.Server.Packaging
     {
         public static void Deploy(string filename)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall())
+            using (Logging.Log.TraceMethodCall())
             {
-                Trace.TraceInformation("Starting Deployment from {0}", filename);
+                Logging.Log.InfoFormat("Starting Deployment from {0}", filename);
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     using (FileStream fs = File.OpenRead(filename))
                     {
                         Deploy(ctx, fs);
                     }
-                    Trace.TraceInformation("Submitting changes");
+                    Logging.Log.Info("Submitting changes");
                     ctx.SubmitChanges();
                 }
-                Trace.TraceInformation("Deployment finished");
+                Logging.Log.Info("Deployment finished");
             }
         }
 
@@ -47,13 +48,13 @@ namespace Kistl.Server.Packaging
             Dictionary<Guid, IPersistenceObject> currentObjects = new Dictionary<Guid, IPersistenceObject>();
             using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
             {
-                Console.WriteLine("Loading namespaces");
+                Logging.Log.Info("Loading namespaces");
                 var namespaces = LoadModuleNamespaces(xml);
                 if (namespaces.Count() == 0) throw new InvalidOperationException("No modules found in import file");
 
                 foreach (var ns in namespaces)
                 {
-                    Console.WriteLine("Prefeching objects for {0}", ns);
+                    Logging.Log.InfoFormat("Prefeching objects for {0}", ns);
                     var module = ctx.GetQuery<Kistl.App.Base.Module>().FirstOrDefault(m => m.Namespace == ns);
                     if (module != null)
                     {
@@ -64,7 +65,7 @@ namespace Kistl.Server.Packaging
                     }
                     else
                     {
-                        Console.WriteLine("Found new Module '{0}' in XML", ns);
+                        Logging.Log.InfoFormat("Found new Module '{0}' in XML", ns);
                     }
                 }
             }
@@ -73,7 +74,7 @@ namespace Kistl.Server.Packaging
             Dictionary<Guid, IPersistenceObject> importedObjects = new Dictionary<Guid, IPersistenceObject>();
             using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
             {
-                Console.WriteLine("Loading");
+                Logging.Log.Info("Loading");
 
                 // Find Root Element
                 while (xml.Read() && xml.NodeType != XmlNodeType.Element && xml.LocalName != "KistlPackaging" && xml.NamespaceURI != "http://dasz.at/Kistl") ;
@@ -88,14 +89,14 @@ namespace Kistl.Server.Packaging
                 }
             }
 
-            Trace.TraceInformation("Reloading References");
+            Logging.Log.Info("Reloading References");
             foreach (var obj in importedObjects.Values)
             {
                 obj.ReloadReferences();
             }
 
             var objectsToDelete = currentObjects.Where(p => !importedObjects.ContainsKey(p.Key));
-            Trace.TraceInformation("Deleting {0} objects marked for deletion", objectsToDelete.Count());
+            Logging.Log.InfoFormat("Deleting {0} objects marked for deletion", objectsToDelete.Count());
             foreach (var pairToDelete in objectsToDelete)
             {
                 ctx.Delete(pairToDelete.Value);
@@ -104,32 +105,32 @@ namespace Kistl.Server.Packaging
 
         public static void LoadFromXml(string filename)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall())
+            using (Logging.Log.TraceMethodCall())
             {
-                Trace.TraceInformation("Starting Import from {0}", filename);
+                Logging.Log.InfoFormat("Starting Import from {0}", filename);
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     using (FileStream fs = File.OpenRead(filename))
                     {
                         LoadFromXml(ctx, fs);
                     }
-                    Trace.TraceInformation("Submitting changes");
+                    Logging.Log.Info("Submitting changes");
                     ctx.SubmitChanges();
                 }
-                Trace.TraceInformation("Import finished");
+                Logging.Log.Info("Import finished");
             }
         }
 
         public static void LoadFromXml(IKistlContext ctx, string filename)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall())
+            using (Logging.Log.TraceMethodCall())
             {
-                Trace.TraceInformation("Starting Import from {0}", filename);
+                Logging.Log.InfoFormat("Starting Import from {0}", filename);
                 using (FileStream fs = File.OpenRead(filename))
                 {
                     LoadFromXml(ctx, fs);
                 }
-                Trace.TraceInformation("Import finished");
+                Logging.Log.Info("Import finished");
             }
         }
 
@@ -149,17 +150,17 @@ namespace Kistl.Server.Packaging
             Dictionary<Guid, IPersistenceObject> objects = new Dictionary<Guid, IPersistenceObject>();
             using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
             {
-                Console.WriteLine("Loading Export Guids");
+                Logging.Log.Info("Loading Export Guids");
                 Dictionary<Type, List<Guid>> guids = LoadGuids(xml);
 
-                Console.WriteLine("Prefeching Objects");
+                Logging.Log.Info("Prefeching Objects");
                 PreFetchObjects(ctx, objects, guids);
             }
             s.Seek(0, SeekOrigin.Begin);
             using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
             {
 
-                Console.WriteLine("Loading");
+                Logging.Log.Info("Loading");
 
                 // Find Root Element
                 while (xml.Read() && xml.NodeType != XmlNodeType.Element && xml.LocalName != "KistlPackaging" && xml.NamespaceURI != "http://dasz.at/Kistl") ;
@@ -172,7 +173,7 @@ namespace Kistl.Server.Packaging
                 }
             }
 
-            Trace.TraceInformation("Reloading References");
+            Logging.Log.Info("Reloading References");
             foreach (var obj in objects.Values)
             {
                 obj.ReloadReferences();
@@ -181,19 +182,17 @@ namespace Kistl.Server.Packaging
 
         private static void PreFetchObjects(IKistlContext ctx, Dictionary<Guid, IPersistenceObject> objects, Dictionary<Type, List<Guid>> guids)
         {
+            Logging.Log.Info("Prefetching Objects");
             foreach (Type t in guids.Keys)
             {
-                Console.Write("{0}: {1}", t.FullName, guids[t].Count);
                 IEnumerable<IPersistenceObject> result = ctx.FindPersistenceObjects(new InterfaceType(t), guids[t]);
-                Console.WriteLine(" -> {0}", result.Count());
+                Logging.Log.InfoFormat("{0}: XML: {1}, Storage: {2}", t.FullName, guids[t].Count, result.Count());
 
                 foreach (IPersistenceObject obj in result)
                 {
                     objects.Add(((IExportableInternal)obj).ExportGuid, obj);
                 }
             }
-            Console.WriteLine();
-
         }
 
         private static Dictionary<Type, List<Guid>> LoadGuids(XmlReader xml)
@@ -206,7 +205,6 @@ namespace Kistl.Server.Packaging
 
             while (it.MoveNext())
             {
-                Console.Write(".");
                 string ns = it.Current.NamespaceURI;
                 string tn = it.Current.LocalName;
                 if (it.Current.MoveToAttribute("ExportGuid", ""))
@@ -214,7 +212,6 @@ namespace Kistl.Server.Packaging
                     Guid exportGuid = it.Current.Value.ParseGuidValue();
                     if (exportGuid != Guid.Empty)
                     {
-                        Console.Write(".");
                         string ifTypeName = string.Format("{0}.{1}, {2}", ns, tn, ApplicationContext.Current.InterfaceAssembly);
                         Type t = Type.GetType(ifTypeName);
                         if (t != null)
@@ -224,12 +221,11 @@ namespace Kistl.Server.Packaging
                         }
                         else
                         {
-                            Trace.TraceWarning("Type {0} not found", ifTypeName);
+                            Logging.Log.WarnFormat("Type {0} not found", ifTypeName);
                         }
                     }
                 }
             }
-            Console.WriteLine();
             return guids;
         }
 
@@ -244,11 +240,9 @@ namespace Kistl.Server.Packaging
 
             while (it.MoveNext())
             {
-                Console.Write(".");
                 namespaces.Add(it.Current.Value);
             }
 
-            Console.WriteLine();
             return namespaces;
         }
 
@@ -257,12 +251,11 @@ namespace Kistl.Server.Packaging
             Guid exportGuid = xml.GetAttribute("ExportGuid").ParseGuidValue();
             if (exportGuid != Guid.Empty)
             {
-                Console.Write(".");
                 string ifTypeName = string.Format("{0}.{1}, {2}", xml.NamespaceURI, xml.LocalName, ApplicationContext.Current.InterfaceAssembly);
                 Type t = Type.GetType(ifTypeName);
                 if (t == null)
                 {
-                    Trace.TraceWarning("Type {0} not found", ifTypeName);
+                    Logging.Log.WarnFormat("Type {0} not found", ifTypeName);
                     return null;
                 }
 

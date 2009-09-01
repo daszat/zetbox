@@ -11,6 +11,7 @@ namespace Kistl.App.Extensions
 
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.API.Utils;
 
     /// <summary>
     /// A utility class implementing basic operations and caching needed by all CustomActionsManagers.
@@ -95,7 +96,7 @@ namespace Kistl.App.Extensions
         /// <param name="warnings">a human readable string containing the warnings</param>
         protected virtual void ProcessWarnings(string warnings)
         {
-            Trace.TraceWarning(warnings);
+            Logging.Log.Warn(warnings);
         }
 
         /// <summary>

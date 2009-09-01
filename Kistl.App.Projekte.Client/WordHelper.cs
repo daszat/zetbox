@@ -6,6 +6,7 @@ using System.IO;
 using System.IO.Packaging;
 using System.Xml;
 using System.Collections;
+using Kistl.API.Utils;
 
 namespace Kistl.App.Projekte
 {
@@ -30,9 +31,7 @@ namespace Kistl.App.Projekte
             }
             catch (IOException ex)
             {
-                Console.WriteLine("An exception was thrown while trying to open file " + filename);
-                Console.WriteLine("Exception is: ");
-                Console.WriteLine(ex.ToString());
+                Logging.Log.Warn("An exception was thrown while trying to open file " + filename, ex);
                 throw ex;
             }
         }

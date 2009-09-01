@@ -9,6 +9,7 @@ using Kistl.API;
 using Kistl.API.Client;
 using Kistl.API.Configuration;
 using Kistl.Client.Presentables;
+using Kistl.API.Utils;
 
 namespace Kistl.Client.WPF
 {
@@ -70,7 +71,7 @@ namespace Kistl.Client.WPF
         {
             //SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 5);
 
-            using (TraceClient.TraceHelper.TraceMethodCall("Starting Client"))
+            using (Logging.Log.TraceMethodCall("Starting Client"))
             {
                 var args = HandleCommandline(e.Args);
                 _timeRecorder = args.Contains("-timerecorder");

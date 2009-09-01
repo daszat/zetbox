@@ -22,9 +22,9 @@ namespace Kistl.Server.Packaging
     {
         public static void Publish(string filename, string[] moduleNamespaces)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall())
+            using (Logging.Log.TraceMethodCall())
             {
-                Trace.TraceInformation("Starting Publish for Modules {0}", string.Join(", ", moduleNamespaces));
+                Logging.Log.InfoFormat("Starting Publish for Modules {0}", string.Join(", ", moduleNamespaces));
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     using (FileStream fs = File.OpenWrite(filename))
@@ -36,7 +36,7 @@ namespace Kistl.Server.Packaging
                     // Save ExportGuids
                     ctx.SubmitChanges();
                 }
-                Trace.TraceInformation("Export finished");
+                Logging.Log.Info("Export finished");
             }
         }
 
@@ -57,7 +57,6 @@ namespace Kistl.Server.Packaging
                 {
                     foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
                     {
-                        Console.Write(".");
                         ExportObject(xml, obj, propNamespaces);
                     }
                 }
@@ -66,9 +65,9 @@ namespace Kistl.Server.Packaging
 
         public static void Export(string filename, string[] moduleNamespaces)
         {
-            using (TraceClient.TraceHelper.TraceMethodCall())
+            using (Logging.Log.TraceMethodCall())
             {
-                Trace.TraceInformation("Starting Export for Modules {0}", string.Join(", ", moduleNamespaces));
+                Logging.Log.InfoFormat("Starting Export for Modules {0}", string.Join(", ", moduleNamespaces));
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     using (FileStream fs = File.OpenWrite(filename))
@@ -80,7 +79,7 @@ namespace Kistl.Server.Packaging
                     // Save ExportGuids
                     ctx.SubmitChanges();
                 }
-                Trace.TraceInformation("Export finished");
+                Logging.Log.Info("Export finished");
             }
         }
 
@@ -94,16 +93,14 @@ namespace Kistl.Server.Packaging
                 var iexpIf = ctx.GetIExportableInterface();
                 foreach (var module in moduleList)
                 {
-                    Trace.TraceInformation("  exporting {0}", module.ModuleName);
+                    Logging.Log.InfoFormat("  exporting {0}", module.ModuleName);
                     foreach (var objClass in module.DataTypes.OfType<ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf)))
                     {
-                        Trace.TraceInformation("    {0} ", objClass.ClassName);
+                        Logging.Log.InfoFormat("    {0} ", objClass.ClassName);
                         foreach (var obj in ctx.GetQuery(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
                         {
-                            Console.Write(".");
                             ExportObject(xml, obj, moduleNamespaces);
                         }
-                        Console.WriteLine();
                     }
 
                     int moduleID = module.ID; // Dont ask
@@ -114,11 +111,11 @@ namespace Kistl.Server.Packaging
                         if (!rel.B.Type.ImplementsIExportable(ctx)) continue;
 
                         string ifTypeName = string.Format("{0}, {1}", rel.GetRelationFullName(), ApplicationContext.Current.InterfaceAssembly);
-                        Trace.TraceInformation("    {0} ", ifTypeName);
+                        Logging.Log.InfoFormat("    {0} ", ifTypeName);
                         Type ifType = Type.GetType(ifTypeName);
                         if (ifType == null)
                         {
-                            Trace.TraceWarning("RelationType {0} not found", ifTypeName);
+                            Logging.Log.WarnFormat("RelationType {0} not found", ifTypeName);
                             continue;
                         }
 
@@ -127,7 +124,6 @@ namespace Kistl.Server.Packaging
 
                         foreach (var obj in relations.OrderBy(obj => ((IExportable)obj).ExportGuid))
                         {
-                            Console.Write(".");
                             ExportObject(xml, obj, moduleNamespaces);
                         }
                     }
@@ -178,7 +174,7 @@ namespace Kistl.Server.Packaging
                     var module = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Namespace == ns).FirstOrDefault();
                     if (module == null)
                     {
-                        Trace.TraceWarning("Module {0} not found", ns);
+                        Logging.Log.WarnFormat("Module {0} not found", ns);
                         continue;
                     }
                     moduleList.Add(module);
