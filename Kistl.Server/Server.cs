@@ -248,8 +248,19 @@ namespace Kistl.Server
 
         public void UpdateSchema()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = new MemoryContext())
             {
+                // decouple database context
+                using (IKistlContext dbctx = KistlContext.GetContext())
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        Packaging.Exporter.Publish(dbctx, ms, new string[] { "*" });
+                        ms.Seek(0, SeekOrigin.Begin);
+                        Packaging.Importer.LoadFromXml(ctx, ms);
+                    }
+                }
+
                 using (FileStream report = File.OpenWrite(@"C:\temp\KistlCodeGen\updateschemareport.log"))
                 {
                     report.SetLength(0);

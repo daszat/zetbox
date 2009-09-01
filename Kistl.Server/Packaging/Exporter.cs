@@ -40,7 +40,7 @@ namespace Kistl.Server.Packaging
             using (Logging.Log.TraceMethodCall())
             {
                 Logging.Log.InfoFormat("Starting Publish for Modules {0}", string.Join(", ", moduleNamespaces));
-                using (XmlTextWriter xml = new XmlTextWriter(s, Encoding.UTF8))
+                using (XmlWriter xml = XmlTextWriter.Create(s, new XmlWriterSettings() { Indent = true, CloseOutput = false, Encoding = Encoding.UTF8 }))
                 {
                     var moduleList = GetModules(ctx, moduleNamespaces);
                     WriteStartDocument(xml, new Kistl.App.Base.Module[] 
@@ -83,7 +83,7 @@ namespace Kistl.Server.Packaging
             using (Logging.Log.TraceMethodCall())
             {
                 Logging.Log.InfoFormat("Starting Export for Modules {0}", string.Join(", ", moduleNamespaces));
-                using (XmlTextWriter xml = new XmlTextWriter(s, Encoding.UTF8))
+                using (XmlWriter xml = XmlTextWriter.Create(s, new XmlWriterSettings() { Indent = true, CloseOutput = false, Encoding = Encoding.UTF8 }))
                 {
                     var moduleList = GetModules(ctx, moduleNamespaces);
                     WriteStartDocument(xml, moduleList);
@@ -128,13 +128,13 @@ namespace Kistl.Server.Packaging
                     }
                     xml.WriteEndElement();
                     xml.WriteEndDocument();
-                } 
+                }
                 Logging.Log.Info("Export finished");
             }
         }
 
         #region Xml/Export private Methods
-        private static void ExportObject(XmlTextWriter xml, IPersistenceObject obj, string[] propNamespaces)
+        private static void ExportObject(XmlWriter xml, IPersistenceObject obj, string[] propNamespaces)
         {
             Type t = obj.GetInterfaceType().Type;
             xml.WriteStartElement(t.Name, t.Namespace);
@@ -146,12 +146,10 @@ namespace Kistl.Server.Packaging
             xml.WriteEndElement();
         }
 
-        private static void WriteStartDocument(XmlTextWriter xml, IEnumerable<Kistl.App.Base.Module> moduleList)
+        private static void WriteStartDocument(XmlWriter xml, IEnumerable<Kistl.App.Base.Module> moduleList)
         {
-            xml.Formatting = Formatting.Indented;
             xml.WriteStartDocument();
-            xml.WriteStartElement("KistlPackaging");
-            xml.WriteAttributeString("xmlns", "http://dasz.at/Kistl");
+            xml.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
             foreach (var module in moduleList)
             {
                 xml.WriteAttributeString("xmlns", module.ModuleName, null, module.Namespace);

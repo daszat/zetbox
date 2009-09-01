@@ -32,9 +32,9 @@ namespace Kistl.Server.SchemaManagement
                     UpdateDeletedRelations();
                     UpdateDeletedTables();
 
-                    db.CommitTransaction();
-
                     SaveSchema(schema);
+
+                    db.CommitTransaction();
                 }
                 catch (Exception ex)
                 {
