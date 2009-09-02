@@ -51,12 +51,12 @@ namespace Kistl.App.GUI
 
         public void OnToString_ViewDescriptor(ViewDescriptor obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0}/{1} View of {2}",
+            e.Result = String.Format("{0}/{1}: {2}",
                 obj.Toolkit,
                 obj.Kind != null ? obj.Kind.ClassName : "(unknown kind)",
-                obj.PresentedModelDescriptor == null || obj.PresentedModelDescriptor.PresentableModelRef == null
+                obj.ControlRef == null
                     ? "(none)"
-                    : obj.PresentedModelDescriptor.PresentableModelRef.ToString());
+                    : obj.ControlRef.ToString());
         }
 
     }
