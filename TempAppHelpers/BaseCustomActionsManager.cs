@@ -316,7 +316,7 @@ namespace Kistl.App.Extensions
         {
             try
             {
-                var restr = invoke.Implementor.Assembly.DeploymentRestrictions ?? DeploymentRestriction.None;
+                var restr = invoke.Implementor.Assembly.DeploymentRestrictions;
                 if (!IsAcceptableDeploymentRestriction((int)restr))
                 {
                     return;

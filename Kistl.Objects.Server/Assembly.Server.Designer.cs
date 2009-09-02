@@ -114,14 +114,14 @@ namespace Kistl.App.Base
         // enumeration property
    		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.EnumerationPropertyTemplate
         // implement the user-visible interface
-        public Kistl.App.Base.DeploymentRestriction? DeploymentRestrictions
+        public Kistl.App.Base.DeploymentRestriction DeploymentRestrictions
         {
             get
             {
 				var __value = _DeploymentRestrictions;
 				if(OnDeploymentRestrictions_Getter != null)
 				{
-					var e = new PropertyGetterEventArgs<Kistl.App.Base.DeploymentRestriction?>(__value);
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.DeploymentRestriction>(__value);
 					OnDeploymentRestrictions_Getter(this, e);
 					__value = e.Result;
 				}
@@ -136,7 +136,7 @@ namespace Kistl.App.Base
 					var __newValue = value;
                     if(OnDeploymentRestrictions_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Kistl.App.Base.DeploymentRestriction?>(__oldValue, __newValue);
+						var e = new PropertyPreSetterEventArgs<Kistl.App.Base.DeploymentRestriction>(__oldValue, __newValue);
 						OnDeploymentRestrictions_PreSetter(this, e);
 						__newValue = e.Result;
                     }
@@ -146,7 +146,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanged("DeploymentRestrictions", "DeploymentRestrictions__Implementation__", __oldValue, __newValue);
                     if(OnDeploymentRestrictions_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Kistl.App.Base.DeploymentRestriction?>(__oldValue, __newValue);
+						var e = new PropertyPostSetterEventArgs<Kistl.App.Base.DeploymentRestriction>(__oldValue, __newValue);
 						OnDeploymentRestrictions_PostSetter(this, e);
                     }
                     
@@ -155,7 +155,7 @@ namespace Kistl.App.Base
         }
         
         /// <summary>backing store for DeploymentRestrictions</summary>
-        private Kistl.App.Base.DeploymentRestriction? _DeploymentRestrictions;
+        private Kistl.App.Base.DeploymentRestriction _DeploymentRestrictions;
         
         /// <summary>EF sees only this property, for DeploymentRestrictions</summary>
         [XmlIgnore()]
@@ -168,13 +168,13 @@ namespace Kistl.App.Base
             }
             set
             {
-                this.DeploymentRestrictions = (Kistl.App.Base.DeploymentRestriction?)value;
+                this.DeploymentRestrictions = (Kistl.App.Base.DeploymentRestriction)value;
             }
         }
         
-		public event PropertyGetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.DeploymentRestriction?> OnDeploymentRestrictions_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.DeploymentRestriction?> OnDeploymentRestrictions_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.DeploymentRestriction?> OnDeploymentRestrictions_PostSetter;
+		public event PropertyGetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.DeploymentRestriction> OnDeploymentRestrictions_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.DeploymentRestriction> OnDeploymentRestrictions_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.DeploymentRestriction> OnDeploymentRestrictions_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>

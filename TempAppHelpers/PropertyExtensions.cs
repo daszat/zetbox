@@ -39,11 +39,35 @@ namespace Kistl.App.Extensions
                 // TODO: n:m darf nicht an eine Seite gebunden sein
                 || (type == RelationType.n_m && rel.A.Navigator == p);
         }
-        public static RelationType GetRelationType(this ObjectReferenceProperty p)
+
+        public static bool IsNullable(this Property p)
         {
-            Relation rel = RelationExtensions.Lookup(p.Context, p);
-            if (rel == null) return p.IsList ? RelationType.n_m : RelationType.one_n;
-            return rel.GetRelationType();
+            if (p is ObjectReferenceProperty)
+            {
+                return IsNullable((ObjectReferenceProperty)p);
+            }
+            else
+            {
+                return p.Constraints.OfType<NotNullableConstraint>().Count() == 0;
+            }
+        }
+
+        private static bool IsNullable(this ObjectReferenceProperty p)
+        {
+            var relEnd = p.RelationEnd;
+            var rel = relEnd.GetParent();
+            var otherEnd = rel.GetOtherEnd(relEnd);
+
+            switch (otherEnd.Multiplicity)
+            {
+                case Multiplicity.ZeroOrOne:
+                    return true;
+                case Multiplicity.One:
+                case Multiplicity.ZeroOrMore:
+                    return false;
+                default:
+                    throw new InvalidOperationException("Property has unknown RelationEnd.Multiplicity");
+            }
         }
     }
 }

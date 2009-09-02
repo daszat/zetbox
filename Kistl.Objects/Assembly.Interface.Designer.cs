@@ -23,7 +23,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Deployment restrictions for this assembly
         /// </summary>
-		Kistl.App.Base.DeploymentRestriction? DeploymentRestrictions {
+		Kistl.App.Base.DeploymentRestriction DeploymentRestrictions {
 			get;
 			set;
 		}

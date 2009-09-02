@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-02T15:36:56.6741516Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-02T16:08:37.8799476Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -752,7 +752,7 @@
     <KistlBase:Description>Deployment restrictions for this assembly</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
-    <KistlBase:IsNullable>true</KistlBase:IsNullable>
+    <KistlBase:IsNullable>false</KistlBase:IsNullable>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>a590a975-66e5-421c-aa97-7ab3169e0e9b</KistlBase:ObjectClass>
     <KistlBase:PropertyName>DeploymentRestrictions</KistlBase:PropertyName>
@@ -983,7 +983,7 @@
     <KistlBase:Description>all implemented Methods in this DataType</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>true</KistlBase:IsList>
-    <KistlBase:IsNullable>true</KistlBase:IsNullable>
+    <KistlBase:IsNullable>false</KistlBase:IsNullable>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:ObjectClass>
     <KistlBase:PropertyName>MethodInvocations</KistlBase:PropertyName>
@@ -1231,7 +1231,7 @@
     <KistlBase:Description>Methodenaufrufe implementiert in dieser Objekt Klasse</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>true</KistlBase:IsList>
-    <KistlBase:IsNullable>true</KistlBase:IsNullable>
+    <KistlBase:IsNullable>false</KistlBase:IsNullable>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>ef79c0b9-55e0-45ad-8233-1ff8f852661f</KistlBase:ObjectClass>
     <KistlBase:PropertyName>MethodInvokations</KistlBase:PropertyName>
@@ -4582,6 +4582,12 @@
   <KistlBase:NotNullableConstraint ExportGuid="8f6c87f4-c422-4403-bf49-db1a7b570f1f">
     <KistlBase:ConstrainedProperty>758d8eba-b458-4cd4-98a8-e08713912654</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="3840b865-b905-49b6-8ac8-19fe9facb76d">
+    <KistlBase:ConstrainedProperty>175143b9-dd09-4b49-a633-e9cdb508c4c5</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="0cd3c17f-6d8d-4685-8908-fd103d4f91a5">
+    <KistlBase:ConstrainedProperty>193c24c4-5a42-418e-8ed8-6e1689beca50</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:IsValidIdentifierConstraint ExportGuid="c0facd37-aec9-4716-b969-339b2fc361d5">
     <KistlBase:ConstrainedProperty>083bbf12-aac6-4f5f-802a-d3701550bc84</KistlBase:ConstrainedProperty>
   </KistlBase:IsValidIdentifierConstraint>
@@ -4673,6 +4679,9 @@
   </KistlBase:StringRangeConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="0657525f-e876-42bd-b50c-d28613f3809a">
     <KistlBase:ConstrainedProperty>842eb3fc-3c8f-47d6-a59f-225c75ec2439</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="cf43a8dc-dcc0-4757-bc08-ff10cca68759">
+    <KistlBase:ConstrainedProperty>dc2bd380-6e63-4a44-bcc3-192780f80606</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
   <KistlBase:IsValidIdentifierConstraint ExportGuid="533b99b1-63d8-4c73-8856-7714c86fd828">
     <KistlBase:ConstrainedProperty>88de8421-488e-452e-8289-33074054b22f</KistlBase:ConstrainedProperty>
@@ -4766,6 +4775,9 @@
     <KistlBase:ConstrainedProperty>41da7ae6-aff7-44cf-83be-6150bf7578fd</KistlBase:ConstrainedProperty>
     <KistlBase:Reason>The placeholder needs a referenced ObjectClass</KistlBase:Reason>
   </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="872a7571-7317-4ccc-8015-6755deca35b1">
+    <KistlBase:ConstrainedProperty>373f0036-42d6-41e2-a2a4-74462537f426</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="991e12d8-4a9d-4f5b-b100-e6a1e678fb26">
     <KistlBase:ConstrainedProperty>63ba109d-92c6-4ced-980b-0a52aabfaec0</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
@@ -4800,6 +4812,9 @@
   <KistlBase:IsValidIdentifierConstraint ExportGuid="033a551a-4325-4e2b-8533-0ef28b043215">
     <KistlBase:ConstrainedProperty>8c474623-7e53-4ca6-a996-f3b5a8c72834</KistlBase:ConstrainedProperty>
   </KistlBase:IsValidIdentifierConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="d9eb01cc-15a8-4801-b455-f2f943614259">
+    <KistlBase:ConstrainedProperty>8c474623-7e53-4ca6-a996-f3b5a8c72834</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:StringRangeConstraint ExportGuid="9f8f82dc-0fb6-41b3-bddc-453c4eb67542">
     <KistlBase:ConstrainedProperty>8c474623-7e53-4ca6-a996-f3b5a8c72834</KistlBase:ConstrainedProperty>
     <KistlBase:MaxLength>100</KistlBase:MaxLength>
@@ -6144,7 +6159,7 @@
     <KistlBase:Description>The PresentableModel to use for values of this Property</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
-    <KistlBase:IsNullable>true</KistlBase:IsNullable>
+    <KistlBase:IsNullable>false</KistlBase:IsNullable>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:ObjectClass>
     <KistlBase:PropertyName>ValueModelDescriptor</KistlBase:PropertyName>
@@ -6986,6 +7001,15 @@
     <KistlBase:Method>c5e8aa2f-33a4-4f85-a51b-e7860e1cf068</KistlBase:Method>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:MethodInvocation>
+  <KistlBase:NotNullableConstraint ExportGuid="38618a7b-7863-422e-a9af-772ba0a3a7ec">
+    <KistlBase:ConstrainedProperty>d5b0ff20-10c1-40ce-b18e-9846dc5d0b60</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="55db4121-6bce-4f9d-8548-90f6beed1da5">
+    <KistlBase:ConstrainedProperty>220925a1-ed82-4b08-a3fa-af31bda7f40e</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="f932cad3-dfdc-478c-a70b-ef8d59a64535">
+    <KistlBase:ConstrainedProperty>60e64ab1-830d-4c20-9d2e-17049738e9c4</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="5b02e68e-9df4-4a9c-8a14-eb18c4756dfd">
     <KistlBase:ConstrainedProperty>cdbdfc01-5faa-416b-960f-2eb220f268fe</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
@@ -7027,6 +7051,9 @@
   </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="6d82fced-ed0f-45c9-8b54-0e2cfee2af4c">
     <KistlBase:ConstrainedProperty>554288d1-f5f4-4b22-908b-01525a1d0f9b</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="2392bfd1-b160-44de-b803-d5429b9545c7">
+    <KistlBase:ConstrainedProperty>5e2e007c-2e90-4ba6-9c9d-46e62b662ff9</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="c05fca0d-3b4c-451e-a080-b9d9af14340d">
     <KistlBase:ConstrainedProperty>84e0996a-081f-4a17-a34d-54cf23991301</KistlBase:ConstrainedProperty>
