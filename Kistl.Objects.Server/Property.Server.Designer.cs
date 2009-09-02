@@ -334,11 +334,11 @@ namespace Kistl.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                    _isExportGuidSet = true;
                 if (_ExportGuid != value)
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    _isExportGuidSet = true;
                     if(OnExportGuid_PreSetter != null)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -1185,7 +1185,10 @@ namespace Kistl.App.Base
 				auxObjects.Add(DefaultValue);
 			}
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.ToStream(this._ExportGuid, binStream);
+			}
             BinarySerializer.ToStream(this._IsIndexed, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
             BinarySerializer.ToStream(this._IsNullable, binStream);
@@ -1199,11 +1202,7 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._CategoryTags;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._CategoryTags = tmp;
-            }
+            BinarySerializer.FromStream(out this._CategoryTags, binStream);
 			{
 				int numElements;
 				BinarySerializer.FromStream(out numElements, binStream);
@@ -1217,39 +1216,17 @@ namespace Kistl.App.Base
 			}
 
             BinarySerializer.FromStream(out this._fk_DefaultValue, binStream);
-            {
-                var tmp = this._Description;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
-            {
-                var tmp = this._IsIndexed;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._IsIndexed = tmp;
-            }
-            {
-                var tmp = this._IsList;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._IsList = tmp;
-            }
-            {
-                var tmp = this._IsNullable;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._IsNullable = tmp;
-            }
+            BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.FromStream(out this._ExportGuid, binStream);
+			}
+            BinarySerializer.FromStream(out this._IsIndexed, binStream);
+            BinarySerializer.FromStream(out this._IsList, binStream);
+            BinarySerializer.FromStream(out this._IsNullable, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
-            {
-                var tmp = this._PropertyName;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._PropertyName = tmp;
-            }
+            BinarySerializer.FromStream(out this._PropertyName, binStream);
             BinarySerializer.FromStream(out this._fk_ValueModelDescriptor, binStream);
         }
 
@@ -1260,7 +1237,10 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             XmlStreamer.ToStream(DefaultValue != null ? DefaultValue.ID : (int?)null, xml, "DefaultValue", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
             XmlStreamer.ToStream(this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsNullable, xml, "IsNullable", "Kistl.App.Base");
@@ -1274,45 +1254,19 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._CategoryTags;
-                XmlStreamer.FromStream(ref tmp, xml, "CategoryTags", "Kistl.App.Base");
-                this._CategoryTags = tmp;
-            }
+            XmlStreamer.FromStream(ref this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_DefaultValue, xml, "DefaultValue", "Kistl.App.Base");
-            {
-                var tmp = this._Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
-            {
-                var tmp = this._IsIndexed;
-                XmlStreamer.FromStream(ref tmp, xml, "IsIndexed", "Kistl.App.Base");
-                this._IsIndexed = tmp;
-            }
-            {
-                var tmp = this._IsList;
-                XmlStreamer.FromStream(ref tmp, xml, "IsList", "Kistl.App.Base");
-                this._IsList = tmp;
-            }
-            {
-                var tmp = this._IsNullable;
-                XmlStreamer.FromStream(ref tmp, xml, "IsNullable", "Kistl.App.Base");
-                this._IsNullable = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
+            XmlStreamer.FromStream(ref this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsNullable, xml, "IsNullable", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
-            {
-                var tmp = this._PropertyName;
-                XmlStreamer.FromStream(ref tmp, xml, "PropertyName", "Kistl.App.Base");
-                this._PropertyName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ValueModelDescriptor, xml, "ValueModelDescriptor", "Kistl.App.GUI");
         }
 
@@ -1340,45 +1294,17 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            {
-                var tmp = this._CategoryTags;
-                XmlStreamer.FromStream(ref tmp, xml, "CategoryTags", "Kistl.App.Base");
-                this._CategoryTags = tmp;
-            }
+            XmlStreamer.FromStream(ref this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultValue, xml, "DefaultValue", "Kistl.App.Base");
-            {
-                var tmp = this._Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
-            {
-                var tmp = this._IsIndexed;
-                XmlStreamer.FromStream(ref tmp, xml, "IsIndexed", "Kistl.App.Base");
-                this._IsIndexed = tmp;
-            }
-            {
-                var tmp = this._IsList;
-                XmlStreamer.FromStream(ref tmp, xml, "IsList", "Kistl.App.Base");
-                this._IsList = tmp;
-            }
-            {
-                var tmp = this._IsNullable;
-                XmlStreamer.FromStream(ref tmp, xml, "IsNullable", "Kistl.App.Base");
-                this._IsNullable = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            this._isExportGuidSet = true;
+            XmlStreamer.FromStream(ref this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsNullable, xml, "IsNullable", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
-            {
-                var tmp = this._PropertyName;
-                XmlStreamer.FromStream(ref tmp, xml, "PropertyName", "Kistl.App.Base");
-                this._PropertyName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ValueModelDescriptor, xml, "ValueModelDescriptor", "Kistl.App.GUI");
         }
 

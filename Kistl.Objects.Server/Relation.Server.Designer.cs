@@ -324,11 +324,11 @@ namespace Kistl.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                    _isExportGuidSet = true;
                 if (_ExportGuid != value)
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    _isExportGuidSet = true;
                     if(OnExportGuid_PreSetter != null)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -855,7 +855,10 @@ namespace Kistl.App.Base
 				auxObjects.Add(B);
 			}
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.ToStream(this._ExportGuid, binStream);
+			}
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
             BinarySerializer.ToStream(this._Verb, binStream);
@@ -867,24 +870,14 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
-            {
-                var tmp = this._Description;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.FromStream(out this._ExportGuid, binStream);
+			}
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
-            {
-                var tmp = this._Verb;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Verb = tmp;
-            }
+            BinarySerializer.FromStream(out this._Verb, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -894,7 +887,10 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
             XmlStreamer.ToStream((int)this.Storage, xml, "Storage", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Verb, xml, "Verb", "Kistl.App.Base");
@@ -906,24 +902,14 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            {
-                var tmp = this._Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
-            {
-                var tmp = this._Verb;
-                XmlStreamer.FromStream(ref tmp, xml, "Verb", "Kistl.App.Base");
-                this._Verb = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -944,24 +930,12 @@ namespace Kistl.App.Base
         {
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-            {
-                var tmp = this._Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, xml, "Storage", "Kistl.App.Base");
-            {
-                var tmp = this._Verb;
-                XmlStreamer.FromStream(ref tmp, xml, "Verb", "Kistl.App.Base");
-                this._Verb = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
 #endregion

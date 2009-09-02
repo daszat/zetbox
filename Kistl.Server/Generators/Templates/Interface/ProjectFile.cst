@@ -19,7 +19,6 @@
     <AssemblyName><%= GetAssemblyName() %></AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <DocumentationFile>$(OutputPath)\<%= GetAssemblyName() %>.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,7 +40,9 @@
   </PropertyGroup>
   <!-- Has to come later to receive correct $(OutputPath) -->
   <PropertyGroup>
-     <DocumentationFile>$(OutputPath)\<%= GetAssemblyName() %>.xml</DocumentationFile>
+<%
+	ApplyAdditionalProperties();
+%>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalReferencePath Include="$(OutputPath)" />

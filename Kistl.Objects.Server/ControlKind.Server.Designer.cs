@@ -93,11 +93,11 @@ namespace Kistl.App.GUI
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                    _isExportGuidSet = true;
                 if (_ExportGuid != value)
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    _isExportGuidSet = true;
                     if(OnExportGuid_PreSetter != null)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -216,38 +216,40 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(binStream, auxObjects);
-            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.ToStream(this._ExportGuid, binStream);
+			}
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.FromStream(out this._ExportGuid, binStream);
+			}
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -258,12 +260,8 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            this._isExportGuidSet = true;
         }
 
 #endregion

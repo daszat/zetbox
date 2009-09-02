@@ -340,11 +340,7 @@ namespace Kistl.App.Base
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Assembly, binStream);
-            {
-                var tmp = this._FullTypeName;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._FullTypeName = tmp;
-            }
+            BinarySerializer.FromStream(out this._FullTypeName, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -360,11 +356,7 @@ namespace Kistl.App.Base
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "Kistl.App.Base");
-            {
-                var tmp = this._FullTypeName;
-                XmlStreamer.FromStream(ref tmp, xml, "FullTypeName", "Kistl.App.Base");
-                this._FullTypeName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -381,11 +373,7 @@ namespace Kistl.App.Base
 			
             base.MergeImport(xml);
             XmlStreamer.FromStream(ref this._fk_guid_Assembly, xml, "Assembly", "Kistl.App.Base");
-            {
-                var tmp = this._FullTypeName;
-                XmlStreamer.FromStream(ref tmp, xml, "FullTypeName", "Kistl.App.Base");
-                this._FullTypeName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
         }
 
 #endregion

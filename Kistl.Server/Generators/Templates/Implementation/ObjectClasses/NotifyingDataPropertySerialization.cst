@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Implementation.ObjectClasses.NotifyingDataPropertySerialization"
-	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataPropertySerialization" 
-	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+    Name="Implementation.ObjectClasses.NotifyingDataPropertySerialization"
+    ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataPropertySerialization" 
+    Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -15,62 +15,36 @@
 <%@ Parameter Name="xmlnamespace" Type="string" %>
 <%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="backingStoreName" Type="string" %>
-<%@ Parameter Name="hasDefaultValue" Type="bool" %>
-<%@ Parameter Name="isSetFlagName" Type="string" %>
 <%
-	switch(direction)
-	{
-		case SerializerDirection.ToStream:
+    switch(direction)
+    {
+        case SerializerDirection.ToStream:
 %>
             BinarySerializer.ToStream(this.<%= backingStoreName %>, <%= streamName %>);
 <%
-			break;
-		case SerializerDirection.FromStream:
-		    // use type-inference to get right "tmp" type
+            break;
+        case SerializerDirection.FromStream:
 %>
-            {
-                var tmp = this.<%= backingStoreName %>;
-                BinarySerializer.FromStream(out tmp, <%= streamName %>);
-                this.<%= backingStoreName %> = tmp;
+            BinarySerializer.FromStream(out this.<%= backingStoreName %>, <%= streamName %>);
 <%
-			if (hasDefaultValue) {
-%>
-                this.<%= isSetFlagName %> = true;
-<%
-			}
-%>
-            }
-<%
-			break;
-		case SerializerDirection.ToXmlStream:
+            break;
+        case SerializerDirection.ToXmlStream:
 %>
             XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%		
+<%        
             break;
-		case SerializerDirection.FromXmlStream:
-		case SerializerDirection.MergeImport:
-		    // use type-inference to get right "tmp" type
+        case SerializerDirection.FromXmlStream:
+        case SerializerDirection.MergeImport:
 %>
-            {
-                var tmp = this.<%= backingStoreName %>;
-                XmlStreamer.FromStream(ref tmp, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-                this.<%= backingStoreName %> = tmp;
-<%
-			if (hasDefaultValue) {
-%>
-                this.<%= isSetFlagName %> = true;
-<%
-			}
-%>
-            }
-<%			
+            XmlStreamer.FromStream(ref this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%            
             break;
-		case SerializerDirection.Export:
-%>	
+        case SerializerDirection.Export:
+%>    
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%			
-			break;
-		default:
-			throw new ArgumentOutOfRangeException("direction");
-	}
+<%            
+            break;
+        default:
+            throw new ArgumentOutOfRangeException("direction");
+    }
 %>

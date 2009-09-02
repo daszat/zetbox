@@ -285,11 +285,11 @@ namespace Kistl.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                    _isExportGuidSet = true;
                 if (_ExportGuid != value)
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    _isExportGuidSet = true;
                     if(OnExportGuid_PreSetter != null)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -956,7 +956,10 @@ namespace Kistl.App.Base
 				auxObjects.Add(DefaultIcon);
 			}
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.ToStream(this._ExportGuid, binStream);
+			}
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._ShowIconInLists, binStream);
             BinarySerializer.ToStream(this._ShowIdInLists, binStream);
@@ -967,39 +970,17 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._ClassName;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ClassName = tmp;
-            }
+            BinarySerializer.FromStream(out this._ClassName, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultIcon, binStream);
-            {
-                var tmp = this._Description;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.FromStream(out this._ExportGuid, binStream);
+			}
             BinarySerializer.FromStream(out this._fk_Module, binStream);
-            {
-                var tmp = this._ShowIconInLists;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ShowIconInLists = tmp;
-            }
-            {
-                var tmp = this._ShowIdInLists;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ShowIdInLists = tmp;
-            }
-            {
-                var tmp = this._ShowNameInLists;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ShowNameInLists = tmp;
-            }
+            BinarySerializer.FromStream(out this._ShowIconInLists, binStream);
+            BinarySerializer.FromStream(out this._ShowIdInLists, binStream);
+            BinarySerializer.FromStream(out this._ShowNameInLists, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -1009,7 +990,10 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._ClassName, xml, "ClassName", "Kistl.App.Base");
             XmlStreamer.ToStream(DefaultIcon != null ? DefaultIcon.ID : (int?)null, xml, "DefaultIcon", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
             XmlStreamer.ToStream(this._ShowIconInLists, xml, "ShowIconInLists", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._ShowIdInLists, xml, "ShowIdInLists", "Kistl.App.GUI");
@@ -1020,39 +1004,17 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._ClassName;
-                XmlStreamer.FromStream(ref tmp, xml, "ClassName", "Kistl.App.Base");
-                this._ClassName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_DefaultIcon, xml, "DefaultIcon", "Kistl.App.GUI");
-            {
-                var tmp = this._Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
-            {
-                var tmp = this._ShowIconInLists;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowIconInLists", "Kistl.App.GUI");
-                this._ShowIconInLists = tmp;
-            }
-            {
-                var tmp = this._ShowIdInLists;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowIdInLists", "Kistl.App.GUI");
-                this._ShowIdInLists = tmp;
-            }
-            {
-                var tmp = this._ShowNameInLists;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowNameInLists", "Kistl.App.GUI");
-                this._ShowNameInLists = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ShowIconInLists, xml, "ShowIconInLists", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._ShowIdInLists, xml, "ShowIdInLists", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._ShowNameInLists, xml, "ShowNameInLists", "Kistl.App.GUI");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -1075,39 +1037,15 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            {
-                var tmp = this._ClassName;
-                XmlStreamer.FromStream(ref tmp, xml, "ClassName", "Kistl.App.Base");
-                this._ClassName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ClassName, xml, "ClassName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultIcon, xml, "DefaultIcon", "Kistl.App.GUI");
-            {
-                var tmp = this._Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.Base");
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
-            {
-                var tmp = this._ShowIconInLists;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowIconInLists", "Kistl.App.GUI");
-                this._ShowIconInLists = tmp;
-            }
-            {
-                var tmp = this._ShowIdInLists;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowIdInLists", "Kistl.App.GUI");
-                this._ShowIdInLists = tmp;
-            }
-            {
-                var tmp = this._ShowNameInLists;
-                XmlStreamer.FromStream(ref tmp, xml, "ShowNameInLists", "Kistl.App.GUI");
-                this._ShowNameInLists = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ShowIconInLists, xml, "ShowIconInLists", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._ShowIdInLists, xml, "ShowIdInLists", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._ShowNameInLists, xml, "ShowNameInLists", "Kistl.App.GUI");
         }
 
 #endregion

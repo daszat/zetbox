@@ -507,21 +507,9 @@ namespace Kistl.App.Projekte
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._AufwandGes;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._AufwandGes = tmp;
-            }
-            {
-                var tmp = this._Kundenname;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Kundenname = tmp;
-            }
-            {
-                var tmp = this._Name;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Name = tmp;
-            }
+            BinarySerializer.FromStream(out this._AufwandGes, binStream);
+            BinarySerializer.FromStream(out this._Kundenname, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -537,21 +525,9 @@ namespace Kistl.App.Projekte
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._AufwandGes;
-                XmlStreamer.FromStream(ref tmp, xml, "AufwandGes", "Kistl.App.Projekte");
-                this._AufwandGes = tmp;
-            }
-            {
-                var tmp = this._Kundenname;
-                XmlStreamer.FromStream(ref tmp, xml, "Kundenname", "Kistl.App.Projekte");
-                this._Kundenname = tmp;
-            }
-            {
-                var tmp = this._Name;
-                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Projekte");
-                this._Name = tmp;
-            }
+            XmlStreamer.FromStream(ref this._AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
         }
 
 #endregion

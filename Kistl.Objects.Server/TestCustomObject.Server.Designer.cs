@@ -396,16 +396,8 @@ namespace Kistl.App.Test
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._Birthday;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Birthday = tmp;
-            }
-            {
-                var tmp = this._PersonName;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._PersonName = tmp;
-            }
+            BinarySerializer.FromStream(out this._Birthday, binStream);
+            BinarySerializer.FromStream(out this._PersonName, binStream);
 			{
 				// trick compiler into generating correct temporary variable
 				var tmp = this.PhoneNumberMobile__Implementation__;
@@ -436,16 +428,8 @@ namespace Kistl.App.Test
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._Birthday;
-                XmlStreamer.FromStream(ref tmp, xml, "Birthday", "Kistl.App.Test");
-                this._Birthday = tmp;
-            }
-            {
-                var tmp = this._PersonName;
-                XmlStreamer.FromStream(ref tmp, xml, "PersonName", "Kistl.App.Test");
-                this._PersonName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Birthday, xml, "Birthday", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._PersonName, xml, "PersonName", "Kistl.App.Test");
 			// TODO: Add XML Serializer here
 			// TODO: Add XML Serializer here
         }

@@ -164,6 +164,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEditorKind)">
+	    <MappingFragment StoreEntitySet="RelationEditorKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.DataObjectSelectionTaskKind)">
 	    <MappingFragment StoreEntitySet="DataObjectSelectionTaskKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -194,8 +199,18 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectRefGridCellKind)">
+	    <MappingFragment StoreEntitySet="ObjectRefGridCellKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectRefKind)">
 	    <MappingFragment StoreEntitySet="ObjectRefKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRefRefKind)">
+	    <MappingFragment StoreEntitySet="TypeRefRefKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -557,7 +572,6 @@
 	    <MappingFragment StoreEntitySet="ViewDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
 <ScalarProperty Name="Toolkit__Implementation__" ColumnName="Toolkit" />
 	    </MappingFragment>
       </EntityTypeMapping>

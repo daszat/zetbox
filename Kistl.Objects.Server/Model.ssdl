@@ -275,6 +275,13 @@
       <End Role="B_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
     </AssociationSet>
     
+    <EntitySet Name="ObjectRefGridCellKind" EntityType="Model.Store.ObjectRefGridCellKind" Table="ObjectRefGridCellKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_ObjectRefGridCellKind_ControlKind_ID" Association="Model.Store.FK_ObjectRefGridCellKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_ObjectRefGridCellKind" EntitySet="ObjectRefGridCellKind" />
+    </AssociationSet>
+    
     <EntitySet Name="ObjectRefKind" EntityType="Model.Store.ObjectRefKind" Table="ObjectRefKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_ObjectRefKind_ControlKind_ID" Association="Model.Store.FK_ObjectRefKind_ControlKind_ID" >
@@ -287,6 +294,13 @@
     <AssociationSet Name="FK_PropertyGroupKind_ControlKind_ID" Association="Model.Store.FK_PropertyGroupKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_PropertyGroupKind" EntitySet="PropertyGroupKind" />
+    </AssociationSet>
+    
+    <EntitySet Name="RelationEditorKind" EntityType="Model.Store.RelationEditorKind" Table="RelationEditorKinds"/>
+    <!-- inherits from DataObjectKind -->
+    <AssociationSet Name="FK_RelationEditorKind_DataObjectKind_ID" Association="Model.Store.FK_RelationEditorKind_DataObjectKind_ID" >
+      <End Role="A_DataObjectKind" EntitySet="DataObjectKind" />
+      <End Role="B_RelationEditorKind" EntitySet="RelationEditorKind" />
     </AssociationSet>
     
     <EntitySet Name="SingleLineDataObjectKind" EntityType="Model.Store.SingleLineDataObjectKind" Table="SingleLineDataObjectKinds"/>
@@ -343,6 +357,13 @@
     <AssociationSet Name="FK_TextboxKind_ControlKind_ID" Association="Model.Store.FK_TextboxKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_TextboxKind" EntitySet="TextboxKind" />
+    </AssociationSet>
+    
+    <EntitySet Name="TypeRefRefKind" EntityType="Model.Store.TypeRefRefKind" Table="TypeRefRefKinds"/>
+    <!-- inherits from ObjectRefKind -->
+    <AssociationSet Name="FK_TypeRefRefKind_ObjectRefKind_ID" Association="Model.Store.FK_TypeRefRefKind_ObjectRefKind_ID" >
+      <End Role="A_ObjectRefKind" EntitySet="ObjectRefKind" />
+      <End Role="B_TypeRefRefKind" EntitySet="TypeRefRefKind" />
     </AssociationSet>
     
     <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties"/>
@@ -1170,6 +1191,13 @@
     <Property Name="fk_ReferenceObjectClass" Type="int" />
   </EntityType>
 	
+  <EntityType Name="ObjectRefGridCellKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="ObjectRefKind">
     <Key>
       <PropertyRef Name="ID" />
@@ -1258,6 +1286,13 @@
     <Property Name="fk_Module" Type="int" />
     <Property Name="Storage" Type="int" Nullable="true" />
     <Property Name="Verb" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="RelationEditorKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="RelationEnd">
@@ -1392,6 +1427,13 @@
     <Property Name="fk_Parent" Type="int" />
   </EntityType>
 	
+  <EntityType Name="TypeRefRefKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="ValueTypeProperty">
     <Key>
       <PropertyRef Name="ID" />
@@ -1406,7 +1448,6 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_ControlRef" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IsReadOnly" Type="bit" Nullable="false" />
     <Property Name="fk_Kind" Type="int" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="Toolkit" Type="int" Nullable="false" />
@@ -2979,6 +3020,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ObjectRefGridCellKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_ObjectRefGridCellKind" Type="Model.Store.ObjectRefGridCellKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ObjectRefGridCellKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ObjectRefKind_ControlKind_ID">
     <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
     <End Role="B_ObjectRefKind" Type="Model.Store.ObjectRefKind" Multiplicity="0..1" />
@@ -2999,6 +3052,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_PropertyGroupKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RelationEditorKind_DataObjectKind_ID">
+    <End Role="A_DataObjectKind" Type="Model.Store.DataObjectKind" Multiplicity="1" />
+    <End Role="B_RelationEditorKind" Type="Model.Store.RelationEditorKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_DataObjectKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_RelationEditorKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -3095,6 +3160,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_TextboxKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TypeRefRefKind_ObjectRefKind_ID">
+    <End Role="A_ObjectRefKind" Type="Model.Store.ObjectRefKind" Multiplicity="1" />
+    <End Role="B_TypeRefRefKind" Type="Model.Store.TypeRefRefKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ObjectRefKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_TypeRefRefKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

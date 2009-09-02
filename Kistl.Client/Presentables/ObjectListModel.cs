@@ -84,7 +84,7 @@ namespace Kistl.Client.Presentables
                 }
 
                 result.Columns = group
-                    .Select(p => new ColumnDisplayModel() { Header = p.PropertyName, PropertyName = p.PropertyName, ControlKind = p.ValueModelDescriptor.DefaultKind/*GridCell*/ })
+                    .Select(p => new ColumnDisplayModel() { Header = p.PropertyName, PropertyName = p.PropertyName, ControlKind = p.ValueModelDescriptor.GetDefaultGridCellKind() })
                     .ToList();
                 return result;
             }

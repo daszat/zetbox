@@ -231,11 +231,7 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._Length;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Length = tmp;
-            }
+            BinarySerializer.FromStream(out this._Length, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -249,11 +245,7 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._Length;
-                XmlStreamer.FromStream(ref tmp, xml, "Length", "Kistl.App.Base");
-                this._Length = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Length, xml, "Length", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -268,11 +260,7 @@ namespace Kistl.App.Base
         {
 			
             base.MergeImport(xml);
-            {
-                var tmp = this._Length;
-                XmlStreamer.FromStream(ref tmp, xml, "Length", "Kistl.App.Base");
-                this._Length = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Length, xml, "Length", "Kistl.App.Base");
         }
 
 #endregion

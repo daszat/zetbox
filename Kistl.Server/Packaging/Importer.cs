@@ -257,7 +257,6 @@ namespace Kistl.Server.Packaging
                 InterfaceType ifType = new InterfaceType(t);
 
                 IPersistenceObject obj = FindObject(ctx, objects, exportGuid, ifType);
-                ((Kistl.App.Base.IExportable)obj).ExportGuid = exportGuid;
 
                 var children = xml.ReadSubtree();
                 while (children.Read())
@@ -298,6 +297,7 @@ namespace Kistl.Server.Packaging
                     throw new NotSupportedException("Interfacetype " + ifType.Type.FullName + " is not supported");
                 }
                 objects[exportGuid] = obj;
+                ((Kistl.App.Base.IExportable)obj).ExportGuid = exportGuid;
                 return obj;
             }
             else

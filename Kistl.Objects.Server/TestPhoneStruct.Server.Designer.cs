@@ -158,16 +158,8 @@ namespace Kistl.App.Test
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._AreaCode;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._AreaCode = tmp;
-            }
-            {
-                var tmp = this._Number;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Number = tmp;
-            }
+            BinarySerializer.FromStream(out this._AreaCode, binStream);
+            BinarySerializer.FromStream(out this._Number, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -182,16 +174,8 @@ namespace Kistl.App.Test
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._AreaCode;
-                XmlStreamer.FromStream(ref tmp, xml, "AreaCode", "Kistl.App.Test");
-                this._AreaCode = tmp;
-            }
-            {
-                var tmp = this._Number;
-                XmlStreamer.FromStream(ref tmp, xml, "Number", "Kistl.App.Test");
-                this._Number = tmp;
-            }
+            XmlStreamer.FromStream(ref this._AreaCode, xml, "AreaCode", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._Number, xml, "Number", "Kistl.App.Test");
         }
 
 #endregion

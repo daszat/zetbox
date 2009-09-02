@@ -619,16 +619,8 @@ namespace Kistl.App.Projekte
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._Auftragsname;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Auftragsname = tmp;
-            }
-            {
-                var tmp = this._Auftragswert;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Auftragswert = tmp;
-            }
+            BinarySerializer.FromStream(out this._Auftragsname, binStream);
+            BinarySerializer.FromStream(out this._Auftragswert, binStream);
             BinarySerializer.FromStream(out this._fk_Kunde, binStream);
             BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
             BinarySerializer.FromStream(out this._fk_Projekt, binStream);
@@ -649,16 +641,8 @@ namespace Kistl.App.Projekte
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._Auftragsname;
-                XmlStreamer.FromStream(ref tmp, xml, "Auftragsname", "Kistl.App.Projekte");
-                this._Auftragsname = tmp;
-            }
-            {
-                var tmp = this._Auftragswert;
-                XmlStreamer.FromStream(ref tmp, xml, "Auftragswert", "Kistl.App.Projekte");
-                this._Auftragswert = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_Kunde, xml, "Kunde", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "Kistl.App.Projekte");

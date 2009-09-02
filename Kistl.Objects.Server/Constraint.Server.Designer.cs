@@ -183,11 +183,11 @@ namespace Kistl.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                    _isExportGuidSet = true;
                 if (_ExportGuid != value)
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    _isExportGuidSet = true;
                     if(OnExportGuid_PreSetter != null)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -432,7 +432,10 @@ namespace Kistl.App.Base
 			if (auxObjects != null) {
 				auxObjects.Add(ConstrainedProperty);
 			}
-            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.ToStream(this._ExportGuid, binStream);
+			}
             BinarySerializer.ToStream(this._Reason, binStream);
         }
 
@@ -441,17 +444,11 @@ namespace Kistl.App.Base
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ConstrainedProperty, binStream);
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
-            {
-                var tmp = this._Reason;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Reason = tmp;
-            }
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.FromStream(out this._ExportGuid, binStream);
+			}
+            BinarySerializer.FromStream(out this._Reason, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -459,7 +456,10 @@ namespace Kistl.App.Base
 			
             base.ToStream(xml);
             XmlStreamer.ToStream(ConstrainedProperty != null ? ConstrainedProperty.ID : (int?)null, xml, "ConstrainedProperty", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
             XmlStreamer.ToStream(this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
@@ -468,17 +468,11 @@ namespace Kistl.App.Base
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_ConstrainedProperty, xml, "ConstrainedProperty", "Kistl.App.Base");
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
-            {
-                var tmp = this._Reason;
-                XmlStreamer.FromStream(ref tmp, xml, "Reason", "Kistl.App.Base");
-                this._Reason = tmp;
-            }
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
+            XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -493,17 +487,9 @@ namespace Kistl.App.Base
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._fk_guid_ConstrainedProperty, xml, "ConstrainedProperty", "Kistl.App.Base");
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
-            {
-                var tmp = this._Reason;
-                XmlStreamer.FromStream(ref tmp, xml, "Reason", "Kistl.App.Base");
-                this._Reason = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            this._isExportGuidSet = true;
+            XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
 #endregion

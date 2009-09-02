@@ -51,6 +51,18 @@ namespace Kistl.App.Extensions
         }
 
         /// <summary>
+        /// Returns the default control kind for use in grid cells of a given PresentableModelDescriptor.
+        /// </summary>
+        /// <param name="pmd"></param>
+        /// <returns></returns>
+        public static ControlKind GetDefaultGridCellKind(this PresentableModelDescriptor pmd)
+        {
+            return pmd.AndParents().Select(p => p.DefaultGridCellKind).FirstOrDefault(dk => dk != null) ?? pmd.GetDefaultKind();
+        }
+
+
+
+        /// <summary>
         /// Look up the ViewDescriptor for this presentable model and ControlKind
         /// </summary>
         /// <param name="self"></param>

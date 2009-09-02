@@ -860,7 +860,6 @@
                         FromRole="View"
                         ToRole="ControlRef" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
-    <Property Name="IsReadOnly" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Kind__Implementation__"
                         Relationship="Model.FK_ViewDescriptor_isof_ControlKindClass"
                         FromRole="Control"
@@ -1041,9 +1040,13 @@
                         FromRole="Navigator"
                         ToRole="RelationEnd" />
   </EntityType>
+  <EntityType Name="ObjectRefGridCellKind" BaseType="Model.ControlKind" >
+  </EntityType>
   <EntityType Name="ObjectRefKind" BaseType="Model.ControlKind" >
   </EntityType>
   <EntityType Name="PropertyGroupKind" BaseType="Model.ControlKind" >
+  </EntityType>
+  <EntityType Name="RelationEditorKind" BaseType="Model.DataObjectKind" >
   </EntityType>
   <EntityType Name="SingleLineDataObjectKind" BaseType="Model.ControlKind" >
   </EntityType>
@@ -1067,6 +1070,8 @@
                         ToRole="StructDefinition" />
   </EntityType>
   <EntityType Name="TextboxKind" BaseType="Model.ControlKind" >
+  </EntityType>
+  <EntityType Name="TypeRefRefKind" BaseType="Model.ObjectRefKind" >
   </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" >
   </EntityType>

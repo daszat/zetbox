@@ -85,6 +85,7 @@ namespace Kistl.Server.SchemaManagement
                 }
 
                 UpdateColumns(objClass, objClass.Properties, "");
+                UpdateDeletedColumns(objClass, "");
             }
             report.WriteLine();
         }
@@ -129,6 +130,17 @@ namespace Kistl.Server.SchemaManagement
                 if (Case.IsMoveValueTypePropertyList(prop))
                 {
                     Case.DoMoveValueTypePropertyList(objClass, prop);
+                }
+            }
+        }
+
+        private void UpdateDeletedColumns(ObjectClass objClass, string prefix)
+        {
+            foreach (ValueTypeProperty prop in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid && !p.IsList && p.HasStorage()))
+            {
+                if (Case.IsDeleteValueTypeProperty(prop))
+                {
+                    Case.DoDeleteValueTypeProperty(objClass, prop, prefix);
                 }
             }
         }

@@ -93,11 +93,11 @@ namespace Kistl.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                    _isExportGuidSet = true;
                 if (_ExportGuid != value)
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    _isExportGuidSet = true;
                     if(OnExportGuid_PreSetter != null)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -749,7 +749,10 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(binStream, auxObjects);
-            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.ToStream(this._ExportGuid, binStream);
+			}
             BinarySerializer.ToStream(Implementor != null ? Implementor.ID : (int?)null, binStream);
             BinarySerializer.ToStream(InvokeOnObjectClass != null ? InvokeOnObjectClass.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._MemberName, binStream);
@@ -761,19 +764,13 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.FromStream(out this._ExportGuid, binStream);
+			}
             BinarySerializer.FromStream(out this._fk_Implementor, binStream);
             BinarySerializer.FromStream(out this._fk_InvokeOnObjectClass, binStream);
-            {
-                var tmp = this._MemberName;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._MemberName = tmp;
-            }
+            BinarySerializer.FromStream(out this._MemberName, binStream);
             BinarySerializer.FromStream(out this._fk_Method, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
         }
@@ -782,7 +779,10 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
             XmlStreamer.ToStream(Implementor != null ? Implementor.ID : (int?)null, xml, "Implementor", "Kistl.App.Base");
             XmlStreamer.ToStream(InvokeOnObjectClass != null ? InvokeOnObjectClass.ID : (int?)null, xml, "InvokeOnObjectClass", "Kistl.App.Base");
             XmlStreamer.ToStream(this._MemberName, xml, "MemberName", "Kistl.App.Base");
@@ -794,19 +794,13 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
+            if (this._isExportGuidSet) {
+				XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+			}
             XmlStreamer.FromStream(ref this._fk_Implementor, xml, "Implementor", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "Kistl.App.Base");
-            {
-                var tmp = this._MemberName;
-                XmlStreamer.FromStream(ref tmp, xml, "MemberName", "Kistl.App.Base");
-                this._MemberName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._MemberName, xml, "MemberName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
         }
@@ -825,19 +819,11 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._fk_guid_Implementor, xml, "Implementor", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_InvokeOnObjectClass, xml, "InvokeOnObjectClass", "Kistl.App.Base");
-            {
-                var tmp = this._MemberName;
-                XmlStreamer.FromStream(ref tmp, xml, "MemberName", "Kistl.App.Base");
-                this._MemberName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._MemberName, xml, "MemberName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Method, xml, "Method", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
         }

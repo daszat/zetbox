@@ -15,5 +15,11 @@ namespace Kistl.Server.Generators.Interfaces.Implementation
             : base(_host, ctx, projectGuid, fileNames)
         {
         }
+
+        protected override void ApplyAdditionalProperties()
+        {
+            base.ApplyAdditionalProperties();
+            this.WriteObjects("     <DocumentationFile>$(OutputPath)\\", GetAssemblyName(), ".xml</DocumentationFile>\r\n");
+        }
     }
 }

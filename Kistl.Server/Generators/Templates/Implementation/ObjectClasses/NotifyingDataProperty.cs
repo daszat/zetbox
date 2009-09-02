@@ -74,13 +74,21 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             this.WriteObjects("                }\r\n");
         }
 
+        protected override void ApplyOnAllSetTemplate()
+        {
+            base.ApplyOnAllSetTemplate();
+            if (HasDefaultValue)
+            {
+                // this has to happen before the value comparison, because we 
+                // need to flag the *intent* of setting this property
+                this.WriteObjects("                ", IsSetFlagName, " = true;\r\n");
+            }
+        }
+
         protected override void ApplyPreSetTemplate()
         {
             base.ApplyPreSetTemplate();
-            if (HasDefaultValue)
-            {
-                this.WriteObjects("                    ", IsSetFlagName, " = true;\r\n");
-            }
+           
             this.WriteObjects("                    if(", EventName, "_PreSetter != null)\r\n");
             this.WriteObjects("                    {\r\n");
             this.WriteObjects("                        var __e = new PropertyPreSetterEventArgs<", type, ">(__oldValue, __newValue);\r\n");
@@ -112,7 +120,23 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         {
             if (list != null)
             {
-                list.Add(new SerializationMember("Implementation.ObjectClasses.NotifyingDataPropertySerialization", SerializerType.All, _prop.Module.Namespace, name, BackingMemberFromName(name), HasDefaultValue, IsSetFlagName));
+                if (HasDefaultValue)
+                {
+                    list.Add(new SerializationMember("Implementation.ObjectClasses.NotifyingDataPropertyWithDefaultSerialization",
+                        SerializerType.All,
+                        _prop.Module.Namespace,
+                        name,
+                        BackingMemberFromName(name),
+                        IsSetFlagName));
+                }
+                else
+                {
+                    list.Add(new SerializationMember("Implementation.ObjectClasses.NotifyingDataPropertySerialization",
+                        SerializerType.All,
+                        _prop.Module.Namespace,
+                        name,
+                        BackingMemberFromName(name)));
+                }
             }
         }
     }

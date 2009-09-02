@@ -38,6 +38,9 @@
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+<%
+    ApplyOnAllSetTemplate();
+%>
                 if (<%= backingName %> != value)
                 {
                     var __oldValue = <%= backingName %>;

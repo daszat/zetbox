@@ -324,11 +324,11 @@ namespace Kistl.App.GUI
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                    _isExportGuidSet = true;
                 if (_ExportGuid != value)
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    _isExportGuidSet = true;
                     if(OnExportGuid_PreSetter != null)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -771,7 +771,10 @@ namespace Kistl.App.GUI
 				auxObjects.Add(DefaultKind);
 			}
             BinarySerializer.ToStream(this._Description, binStream);
-            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.ToStream(this._ExportGuid, binStream);
+			}
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(PresentableModelRef != null ? PresentableModelRef.ID : (int?)null, binStream);
         }
@@ -782,17 +785,11 @@ namespace Kistl.App.GUI
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_DefaultGridCellKind, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultKind, binStream);
-            {
-                var tmp = this._Description;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.FromStream(out this._ExportGuid, binStream);
+			}
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_PresentableModelRef, binStream);
         }
@@ -804,7 +801,10 @@ namespace Kistl.App.GUI
             XmlStreamer.ToStream(DefaultGridCellKind != null ? DefaultGridCellKind.ID : (int?)null, xml, "DefaultGridCellKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(DefaultKind != null ? DefaultKind.ID : (int?)null, xml, "DefaultKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
+            if (this._isExportGuidSet) {
+				XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+			}
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.ToStream(PresentableModelRef != null ? PresentableModelRef.ID : (int?)null, xml, "PresentableModelRef", "Kistl.App.GUI");
         }
@@ -815,17 +815,11 @@ namespace Kistl.App.GUI
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_DefaultGridCellKind, xml, "DefaultGridCellKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_DefaultKind, xml, "DefaultKind", "Kistl.App.GUI");
-            {
-                var tmp = this._Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.GUI");
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
+            if (this._isExportGuidSet) {
+				XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+			}
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_PresentableModelRef, xml, "PresentableModelRef", "Kistl.App.GUI");
         }
@@ -846,17 +840,9 @@ namespace Kistl.App.GUI
         {
             XmlStreamer.FromStream(ref this._fk_guid_DefaultGridCellKind, xml, "DefaultGridCellKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultKind, xml, "DefaultKind", "Kistl.App.GUI");
-            {
-                var tmp = this._Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.GUI");
-                this._Description = tmp;
-            }
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_PresentableModelRef, xml, "PresentableModelRef", "Kistl.App.GUI");
         }

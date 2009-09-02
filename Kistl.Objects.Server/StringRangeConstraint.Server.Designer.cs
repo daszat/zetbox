@@ -293,16 +293,8 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._MaxLength;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._MaxLength = tmp;
-            }
-            {
-                var tmp = this._MinLength;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._MinLength = tmp;
-            }
+            BinarySerializer.FromStream(out this._MaxLength, binStream);
+            BinarySerializer.FromStream(out this._MinLength, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -317,16 +309,8 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._MaxLength;
-                XmlStreamer.FromStream(ref tmp, xml, "MaxLength", "Kistl.App.Base");
-                this._MaxLength = tmp;
-            }
-            {
-                var tmp = this._MinLength;
-                XmlStreamer.FromStream(ref tmp, xml, "MinLength", "Kistl.App.Base");
-                this._MinLength = tmp;
-            }
+            XmlStreamer.FromStream(ref this._MaxLength, xml, "MaxLength", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._MinLength, xml, "MinLength", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -343,16 +327,8 @@ namespace Kistl.App.Base
         {
 			
             base.MergeImport(xml);
-            {
-                var tmp = this._MaxLength;
-                XmlStreamer.FromStream(ref tmp, xml, "MaxLength", "Kistl.App.Base");
-                this._MaxLength = tmp;
-            }
-            {
-                var tmp = this._MinLength;
-                XmlStreamer.FromStream(ref tmp, xml, "MinLength", "Kistl.App.Base");
-                this._MinLength = tmp;
-            }
+            XmlStreamer.FromStream(ref this._MaxLength, xml, "MaxLength", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._MinLength, xml, "MinLength", "Kistl.App.Base");
         }
 
 #endregion

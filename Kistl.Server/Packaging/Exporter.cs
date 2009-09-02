@@ -29,9 +29,6 @@ namespace Kistl.Server.Packaging
                     fs.SetLength(0);
                     Publish(ctx, fs, moduleNamespaces);
                 }
-
-                // Save ExportGuids
-                ctx.SubmitChanges();
             }
         }
 

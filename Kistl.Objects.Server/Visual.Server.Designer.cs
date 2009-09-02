@@ -542,11 +542,7 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._Description;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Description = tmp;
-            }
+            BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._fk_Method, binStream);
             BinarySerializer.FromStream(out this._fk_Property, binStream);
         }
@@ -564,11 +560,7 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._Description;
-                XmlStreamer.FromStream(ref tmp, xml, "Description", "Kistl.App.GUI");
-                this._Description = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Property, xml, "Property", "Kistl.App.GUI");
         }

@@ -21,13 +21,6 @@ namespace Kistl.App.GUI
 			set;
 		}
         /// <summary>
-        /// Indicates whether or not the described control is read-only or allows editing.
-        /// </summary>
-		bool IsReadOnly {
-			get;
-			set;
-		}
-        /// <summary>
         /// 
         /// </summary>
 		Kistl.App.GUI.ControlKindClass Kind {

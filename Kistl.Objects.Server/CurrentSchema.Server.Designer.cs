@@ -274,16 +274,8 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._Schema;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Schema = tmp;
-            }
-            {
-                var tmp = this._Version;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Version = tmp;
-            }
+            BinarySerializer.FromStream(out this._Schema, binStream);
+            BinarySerializer.FromStream(out this._Version, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -298,16 +290,8 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._Schema;
-                XmlStreamer.FromStream(ref tmp, xml, "Schema", "Kistl.App.Base");
-                this._Schema = tmp;
-            }
-            {
-                var tmp = this._Version;
-                XmlStreamer.FromStream(ref tmp, xml, "Version", "Kistl.App.Base");
-                this._Version = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Schema, xml, "Schema", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Version, xml, "Version", "Kistl.App.Base");
         }
 
 #endregion

@@ -175,7 +175,7 @@ namespace Kistl.Client.Presentables
                 case "PropertyName":
                     OnPropertyChanged("Label");
                     break;
-                case "AltText":
+                case "Description":
                     OnPropertyChanged("ToolTip");
                     break;
             }

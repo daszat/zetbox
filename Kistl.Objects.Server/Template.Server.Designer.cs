@@ -569,16 +569,8 @@ namespace Kistl.App.GUI
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_DisplayedTypeAssembly, binStream);
-            {
-                var tmp = this._DisplayedTypeFullName;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._DisplayedTypeFullName = tmp;
-            }
-            {
-                var tmp = this._DisplayName;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._DisplayName = tmp;
-            }
+            BinarySerializer.FromStream(out this._DisplayedTypeFullName, binStream);
+            BinarySerializer.FromStream(out this._DisplayName, binStream);
             BinarySerializer.FromStream(out this._fk_VisualTree, binStream);
         }
 
@@ -597,16 +589,8 @@ namespace Kistl.App.GUI
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
-            {
-                var tmp = this._DisplayedTypeFullName;
-                XmlStreamer.FromStream(ref tmp, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
-                this._DisplayedTypeFullName = tmp;
-            }
-            {
-                var tmp = this._DisplayName;
-                XmlStreamer.FromStream(ref tmp, xml, "DisplayName", "Kistl.App.GUI");
-                this._DisplayName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._DisplayName, xml, "DisplayName", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_VisualTree, xml, "VisualTree", "Kistl.App.GUI");
         }
 

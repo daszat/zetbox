@@ -774,21 +774,9 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultPresentableModelDescriptor, binStream);
-            {
-                var tmp = this._IsFrozenObject;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._IsFrozenObject = tmp;
-            }
-            {
-                var tmp = this._IsSimpleObject;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._IsSimpleObject = tmp;
-            }
-            {
-                var tmp = this._TableName;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._TableName = tmp;
-            }
+            BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
+            BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
+            BinarySerializer.FromStream(out this._TableName, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -808,21 +796,9 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
-            {
-                var tmp = this._IsFrozenObject;
-                XmlStreamer.FromStream(ref tmp, xml, "IsFrozenObject", "Kistl.App.Base");
-                this._IsFrozenObject = tmp;
-            }
-            {
-                var tmp = this._IsSimpleObject;
-                XmlStreamer.FromStream(ref tmp, xml, "IsSimpleObject", "Kistl.App.GUI");
-                this._IsSimpleObject = tmp;
-            }
-            {
-                var tmp = this._TableName;
-                XmlStreamer.FromStream(ref tmp, xml, "TableName", "Kistl.App.Base");
-                this._TableName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -845,21 +821,9 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
-            {
-                var tmp = this._IsFrozenObject;
-                XmlStreamer.FromStream(ref tmp, xml, "IsFrozenObject", "Kistl.App.Base");
-                this._IsFrozenObject = tmp;
-            }
-            {
-                var tmp = this._IsSimpleObject;
-                XmlStreamer.FromStream(ref tmp, xml, "IsSimpleObject", "Kistl.App.GUI");
-                this._IsSimpleObject = tmp;
-            }
-            {
-                var tmp = this._TableName;
-                XmlStreamer.FromStream(ref tmp, xml, "TableName", "Kistl.App.Base");
-                this._TableName = tmp;
-            }
+            XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
         }
 
 #endregion

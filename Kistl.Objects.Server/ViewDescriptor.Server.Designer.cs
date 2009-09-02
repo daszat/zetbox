@@ -183,11 +183,11 @@ namespace Kistl.App.GUI
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                    _isExportGuidSet = true;
                 if (_ExportGuid != value)
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    _isExportGuidSet = true;
                     if(OnExportGuid_PreSetter != null)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
@@ -209,57 +209,6 @@ namespace Kistl.App.GUI
 		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_Getter;
 		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_PostSetter;
-        /// <summary>
-        /// Indicates whether or not the described control is read-only or allows editing.
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual bool IsReadOnly
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _IsReadOnly;
-                if (OnIsReadOnly_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<bool>(__result);
-                    OnIsReadOnly_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_IsReadOnly != value)
-                {
-                    var __oldValue = _IsReadOnly;
-                    var __newValue = value;
-                    if(OnIsReadOnly_PreSetter != null)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnIsReadOnly_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("IsReadOnly", __oldValue, __newValue);
-                    _IsReadOnly = __newValue;
-                    NotifyPropertyChanged("IsReadOnly", __oldValue, __newValue);
-                    if(OnIsReadOnly_PostSetter != null)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnIsReadOnly_PostSetter(this, __e);
-                    }
-                }
-            }
-        }
-        private bool _IsReadOnly;
-		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, bool> OnIsReadOnly_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, bool> OnIsReadOnly_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, bool> OnIsReadOnly_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -520,7 +469,6 @@ namespace Kistl.App.GUI
 			var me = (ViewDescriptor)this;
 
 			me.ExportGuid = other.ExportGuid;
-			me.IsReadOnly = other.IsReadOnly;
 			me.Toolkit = other.Toolkit;
 			this._fk_ControlRef = otherImpl._fk_ControlRef;
 			this._fk_Kind = otherImpl._fk_Kind;
@@ -599,15 +547,6 @@ namespace Kistl.App.GUI
 					
 					return String.Join("; ", errors);
 				}
-				case "IsReadOnly":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("14136519-487a-4e35-83f3-64eda3de1cd4")).Constraints
-						.Where(c => !c.IsValid(this, this.IsReadOnly))
-						.Select(c => c.GetErrorText(this, this.IsReadOnly))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "Kind":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b7548d0b-f503-47fc-9808-52c491b8f2dd")).Constraints
@@ -676,8 +615,10 @@ namespace Kistl.App.GUI
 			
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(ControlRef != null ? ControlRef.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._ExportGuid, binStream);
-            BinarySerializer.ToStream(this._IsReadOnly, binStream);
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.ToStream(this._ExportGuid, binStream);
+			}
             BinarySerializer.ToStream(Kind != null ? Kind.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(Kind);
@@ -691,17 +632,10 @@ namespace Kistl.App.GUI
 			
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ControlRef, binStream);
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
-            {
-                var tmp = this._IsReadOnly;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._IsReadOnly = tmp;
-            }
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+				BinarySerializer.FromStream(out this._ExportGuid, binStream);
+			}
             BinarySerializer.FromStream(out this._fk_Kind, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
@@ -712,8 +646,10 @@ namespace Kistl.App.GUI
 			
             base.ToStream(xml);
             XmlStreamer.ToStream(ControlRef != null ? ControlRef.ID : (int?)null, xml, "ControlRef", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
+            if (this._isExportGuidSet) {
+				XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+			}
             XmlStreamer.ToStream(Kind != null ? Kind.ID : (int?)null, xml, "Kind", "Kistl.App.GUI");
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
@@ -724,17 +660,10 @@ namespace Kistl.App.GUI
 			
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_ControlRef, xml, "ControlRef", "Kistl.App.GUI");
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
-            {
-                var tmp = this._IsReadOnly;
-                XmlStreamer.FromStream(ref tmp, xml, "IsReadOnly", "Kistl.App.GUI");
-                this._IsReadOnly = tmp;
-            }
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
+            if (this._isExportGuidSet) {
+				XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+			}
             XmlStreamer.FromStream(ref this._fk_Kind, xml, "Kind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, xml, "Toolkit", "Kistl.App.GUI");
@@ -745,8 +674,6 @@ namespace Kistl.App.GUI
 			
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ControlRef != null ? ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Kistl.App.GUI");
-	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Kind != null ? Kind.ExportGuid : (Guid?)null, xml, "Kind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
@@ -755,17 +682,8 @@ namespace Kistl.App.GUI
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._fk_guid_ControlRef, xml, "ControlRef", "Kistl.App.GUI");
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.GUI");
-                this._ExportGuid = tmp;
-                this._isExportGuidSet = true;
-            }
-            {
-                var tmp = this._IsReadOnly;
-                XmlStreamer.FromStream(ref tmp, xml, "IsReadOnly", "Kistl.App.GUI");
-                this._IsReadOnly = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
+            this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._fk_guid_Kind, xml, "Kind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, xml, "Toolkit", "Kistl.App.GUI");

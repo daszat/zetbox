@@ -46,6 +46,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all TypeRefRefKind</summary>
+		/// A specifc ObjectRefKind for selecting TypeRefs
+		public IQueryable<TypeRefRefKind> TypeRefRefKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<TypeRefRefKind>();
+			}
+		}
+		
 		/// <summary>List of all TextboxKind</summary>
 		/// A textbox-like control
 		public IQueryable<TextboxKind> TextboxKinds
@@ -86,6 +96,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all RelationEditorKind</summary>
+		/// A special editor for relations
+		public IQueryable<RelationEditorKind> RelationEditorKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<RelationEditorKind>();
+			}
+		}
+		
 		/// <summary>List of all PropertyGroupKind</summary>
 		/// Displays a group of properties from a data object
 		public IQueryable<PropertyGroupKind> PropertyGroupKinds
@@ -113,6 +133,16 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<ObjectRefKind>();
+			}
+		}
+		
+		/// <summary>List of all ObjectRefGridCellKind</summary>
+		/// 
+		public IQueryable<ObjectRefGridCellKind> ObjectRefGridCellKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<ObjectRefGridCellKind>();
 			}
 		}
 		

@@ -512,31 +512,11 @@ namespace Kistl.App.Projekte
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._Adresse;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Adresse = tmp;
-            }
-            {
-                var tmp = this._Kundenname;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Kundenname = tmp;
-            }
-            {
-                var tmp = this._Land;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Land = tmp;
-            }
-            {
-                var tmp = this._Ort;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Ort = tmp;
-            }
-            {
-                var tmp = this._PLZ;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._PLZ = tmp;
-            }
+            BinarySerializer.FromStream(out this._Adresse, binStream);
+            BinarySerializer.FromStream(out this._Kundenname, binStream);
+            BinarySerializer.FromStream(out this._Land, binStream);
+            BinarySerializer.FromStream(out this._Ort, binStream);
+            BinarySerializer.FromStream(out this._PLZ, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -555,32 +535,12 @@ namespace Kistl.App.Projekte
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._Adresse;
-                XmlStreamer.FromStream(ref tmp, xml, "Adresse", "Kistl.App.Projekte");
-                this._Adresse = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Adresse, xml, "Adresse", "Kistl.App.Projekte");
             XmlStreamer.FromStreamCollectionEntries(this.EMails__Implementation__, xml, "EMails", "Kistl.App.Projekte");
-            {
-                var tmp = this._Kundenname;
-                XmlStreamer.FromStream(ref tmp, xml, "Kundenname", "Kistl.App.Projekte");
-                this._Kundenname = tmp;
-            }
-            {
-                var tmp = this._Land;
-                XmlStreamer.FromStream(ref tmp, xml, "Land", "Kistl.App.Projekte");
-                this._Land = tmp;
-            }
-            {
-                var tmp = this._Ort;
-                XmlStreamer.FromStream(ref tmp, xml, "Ort", "Kistl.App.Projekte");
-                this._Ort = tmp;
-            }
-            {
-                var tmp = this._PLZ;
-                XmlStreamer.FromStream(ref tmp, xml, "PLZ", "Kistl.App.Projekte");
-                this._PLZ = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Land, xml, "Land", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Ort, xml, "Ort", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._PLZ, xml, "PLZ", "Kistl.App.Projekte");
         }
 
 #endregion

@@ -54,6 +54,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         }
 
         protected virtual void ApplyOnGetTemplate() { }
+        protected virtual void ApplyOnAllSetTemplate() { }
         protected virtual void ApplyPreSetTemplate() { }
         protected virtual void ApplyPostSetTemplate() { }
     }

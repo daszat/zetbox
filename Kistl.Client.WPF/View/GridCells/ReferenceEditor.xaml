@@ -6,20 +6,21 @@
                 Margin="1"
                 Visibility="{Binding AllowNullInput, Converter={StaticResource BooleanToVisibilityConverter}}"
                 IsEnabled="{Binding HasValue}"
+                ToolTip="Clear value (set null)"
                 Click="ClearValueHandler">x</Button>
 
         <Button DockPanel.Dock="Right"
                 Margin="1"
+                ToolTip="Create new item"
                 Command="{Binding CreateNewItemAndSetValueCommand, Converter={StaticResource CommandConverter}}">+</Button>
 
         <Button DockPanel.Dock="Right"
                 Margin="1"
+                ToolTip="Add existing item"
                 Command="{Binding SelectValueCommand, Converter={StaticResource CommandConverter}}">*</Button>
 
         <ContentPresenter Margin="3"
                           Content="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                           ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
-
     </DockPanel>
-
 </UserControl>

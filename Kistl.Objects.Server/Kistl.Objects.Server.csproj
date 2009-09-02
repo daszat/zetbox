@@ -114,6 +114,7 @@
     <Compile Include="ObjectListKind.Server.Designer.cs" />
     <Compile Include="ObjectParameter.Server.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Server.Designer.cs" />
+    <Compile Include="ObjectRefGridCellKind.Server.Designer.cs" />
     <Compile Include="ObjectRefKind.Server.Designer.cs" />
     <Compile Include="PresenceRecord.Server.Designer.cs" />
     <Compile Include="PresentableModelDescriptor.Server.Designer.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="PropertyGroupKind.Server.Designer.cs" />
     <Compile Include="PropertyInvocation.Server.Designer.cs" />
     <Compile Include="Relation.Server.Designer.cs" />
+    <Compile Include="RelationEditorKind.Server.Designer.cs" />
     <Compile Include="RelationEnd.Server.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Server.Designer.cs" />
     <Compile Include="StringParameter.Server.Designer.cs" />
@@ -136,6 +138,7 @@
     <Compile Include="TestObjClass.Server.Designer.cs" />
     <Compile Include="TextboxKind.Server.Designer.cs" />
     <Compile Include="TypeRef.Server.Designer.cs" />
+    <Compile Include="TypeRefRefKind.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
     <Compile Include="ViewDescriptor.Server.Designer.cs" />
     <Compile Include="Visual.Server.Designer.cs" />
