@@ -120,6 +120,22 @@ namespace Kistl.Client.Presentables
             get { return Label; }
         }
 
+        public PresentableModel Model
+        {
+            get
+            {
+                return this;
+            }
+        }
+
+        public ControlKind RequestedKind
+        {
+            get
+            {
+                return Property.ValueModelDescriptor.DefaultKind;
+            }
+        }
+
         #endregion
 
         #region Utilities and UI callbacks

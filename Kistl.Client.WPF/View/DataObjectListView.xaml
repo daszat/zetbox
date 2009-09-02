@@ -26,27 +26,23 @@
         </Style>
     </view:PropertyView.Resources>
 
-    <view:PropertyView.Label>
-        <StackPanel Grid.Column="0">
+    <DockPanel>
+        <WrapPanel DockPanel.Dock="Top"
+                   Orientation="Horizontal">
             <TextBlock Text="{Binding Label, Mode=OneWay}" />
             <ctrls:LoadingIndicator />
-            <Button Margin="1,4,1,1"
-                    Click="AddNewHandler">Add new ...</Button>
-            <Button Margin="1,1,1,4"
-                    Click="AddExistingItemHandler">Add existing ...</Button>
-            <Button Margin="1"
-                    Click="RemoveHandler">Remove selection from list</Button>
-            <Button Margin="1"
-                    Click="DeleteHandler">Delete selection from data store</Button>
-        </StackPanel>
-    </view:PropertyView.Label>
+            <Button Click="AddNewHandler">Add new ...</Button>
+            <Button Click="AddExistingItemHandler">Add existing ...</Button>
+            <Button Click="RemoveHandler">Remove selection from list</Button>
+            <Button Click="DeleteHandler">Delete selection from data store</Button>
+        </WrapPanel>
 
-    <!-- configured from code, see ListView_Initialized() -->
-    <ListView x:Name="ListView"
-              ItemsSource="{Binding Value, Mode=OneWay}"
-              SelectedItem="{Binding SelectedItem}"
-              MaxHeight="300"
-              MouseDoubleClick="ItemActivatedHandler"
-              Initialized="ListView_Initialized" />
-
+        <!-- configured from code, see ListView_Initialized() -->
+        <ListView x:Name="ListView"
+                  ItemsSource="{Binding Value, Mode=OneWay}"
+                  SelectedItem="{Binding SelectedItem}"
+                  MaxHeight="300"
+                  MouseDoubleClick="ItemActivatedHandler"
+                  Initialized="ListView_Initialized" />
+    </DockPanel>
 </view:PropertyView>

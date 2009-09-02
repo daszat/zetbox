@@ -5,9 +5,7 @@ namespace Kistl.Client.Presentables
 
     using Kistl.App.GUI;
 
-    public interface IPropertyValueModel
+    public interface IPropertyValueModel : ILabeledViewModel
     {
-        string Label { get; }
-        string ToolTip { get; }
     }
 }

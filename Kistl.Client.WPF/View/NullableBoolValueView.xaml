@@ -6,10 +6,6 @@
                    xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                    ToolTip="{Binding ToolTip}">
 
-    <view:PropertyView.Label>
-        <TextBlock Text="{Binding Label, Mode=OneWay}" />   
-    </view:PropertyView.Label>
-
     <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
               IsThreeState="{Binding AllowNullInput, Mode=OneWay}"
               ToolTip="{Binding ToolTip}" />

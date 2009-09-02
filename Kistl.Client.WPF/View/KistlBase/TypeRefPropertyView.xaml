@@ -7,10 +7,6 @@
                    commands:SmartRoutedUICommand.IsCommandSink="True"
                    ToolTip="{Binding ToolTip, Mode=OneWay}">
 
-    <view:PropertyView.Label>
-        <TextBlock Text="{Binding Label, Mode=OneWay}" />
-    </view:PropertyView.Label>
-
     <DockPanel>
         <CheckBox DockPanel.Dock="Left"
                   Margin="3"

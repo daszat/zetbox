@@ -135,6 +135,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\LabeledView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PropertyGroupBoxView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -289,6 +293,9 @@
     </Compile>
     <Compile Include="View\KistlBase\TypeRefPropertyView.xaml.cs">
       <DependentUpon>TypeRefPropertyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LabeledView.xaml.cs">
+      <DependentUpon>LabeledView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PropertyGroupBoxView.xaml.cs">
       <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>

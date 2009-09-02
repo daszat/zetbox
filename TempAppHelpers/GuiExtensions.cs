@@ -28,15 +28,26 @@ namespace Kistl.App.Extensions
             this PresentableModelDescriptor pmd,
             Toolkit tk)
         {
-            var defaultKind = pmd.AndParents().Select(p => p.DefaultKind).FirstOrDefault(dk => dk != null);
+            var defaultKind = GetDefaultKind(pmd);
             if (defaultKind != null)
             {
                 return pmd.GetViewDescriptor(tk, defaultKind);
             }
             else
             {
+                Logging.Log.WarnFormat("No default control kind for {0} found.", pmd.PresentableModelRef.ToString());
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Returns the default control kind of a given PresentableModelDescriptor.
+        /// </summary>
+        /// <param name="pmd"></param>
+        /// <returns></returns>
+        public static ControlKind GetDefaultKind(this PresentableModelDescriptor pmd)
+        {
+            return pmd.AndParents().Select(p => p.DefaultKind).FirstOrDefault(dk => dk != null);
         }
 
         /// <summary>

@@ -7,19 +7,17 @@
                    xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                    ToolTip="{Binding ToolTip, Mode=OneWay}">
 
-    <view:PropertyView.Label>
-        <StackPanel Grid.Column="0">
+    <DockPanel>
+        <WrapPanel DockPanel.Dock="Top"
+                   Orientation="Horizontal">
             <TextBlock Text="{Binding Label, Mode=OneWay}" />
             <ctrls:LoadingIndicator />
-            <Button Margin="1,4,1,1"
-                    Click="AddNewHandler">Add new ...</Button>
-            <Button Margin="1"
-                    Click="RemoveHandler">Remove selection from list</Button>
-        </StackPanel>
-    </view:PropertyView.Label>
+            <Button Click="AddNewHandler">Add new ...</Button>
+            <Button Click="RemoveHandler">Remove selection from list</Button>
+        </WrapPanel>
 
-    <ListView ItemsSource="{Binding Value, Mode=OneWay}"
-              SelectedItem="{Binding SelectedItem}"
-              MaxHeight="300" />
-
+        <ListView ItemsSource="{Binding Value, Mode=OneWay}"
+                  SelectedItem="{Binding SelectedItem}"
+                  MaxHeight="300" />
+    </DockPanel>
 </view:PropertyView>

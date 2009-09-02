@@ -5,9 +5,6 @@
                    xmlns:view="clr-namespace:Kistl.Client.WPF.View"
                    xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                    ToolTip="{Binding ToolTip}">
-    <view:PropertyView.Label>
-        <TextBlock Text="{Binding Label, Mode=OneWay}" />
-    </view:PropertyView.Label>
 
     <kevin:InfoTextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                        TextBoxInfo="{Binding ToolTip}" />
