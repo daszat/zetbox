@@ -92,7 +92,8 @@ namespace Kistl.Client.WPF.View
             else
             {
                 var ckcInterface = new InterfaceType(Type.GetType(controlKindClassName + "," + GuiApplicationContext.Current.InterfaceAssembly, true));
-                if (pmd.DefaultKind.GetInterfaceType() == ckcInterface)
+                var defaultKind = pmd.GetDefaultKind();
+                if (defaultKind != null && defaultKind.GetInterfaceType() == ckcInterface)
                 {
                     visualDesc = pmd.GetDefaultViewDescriptor(Toolkit.WPF);
                 }
