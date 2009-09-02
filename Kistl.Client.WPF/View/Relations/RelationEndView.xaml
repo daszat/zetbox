@@ -1,7 +1,8 @@
 ﻿<UserControl x:Class="Kistl.Client.WPF.View.Relations.RelationEndView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls">
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
+             xmlns:view="clr-namespace:Kistl.Client.WPF.View">
 
     <DockPanel>
 
@@ -11,31 +12,26 @@
                   Header="Details"
                   Margin="5,0">
             <DockPanel LastChildFill="False">
-                <ContentPresenter DockPanel.Dock="Top"
+                <view:LabeledView DockPanel.Dock="Top"
                                   Margin="5,0,5,0"
-                                  Content="{Binding PropertyModelsByName[Type]}"
-                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                                  DataContext="{Binding PropertyModelsByName[Type]}" />
 
-                <ContentPresenter DockPanel.Dock="Top"
+                <view:LabeledView DockPanel.Dock="Top"
                                   Margin="5,0,5,0"
-                                  Content="{Binding PropertyModelsByName[Role]}"
-                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                                  DataContext="{Binding PropertyModelsByName[Role]}" />
 
-                <ContentPresenter DockPanel.Dock="Top"
+                <view:LabeledView DockPanel.Dock="Top"
                                   Margin="5,0,5,0"
-                                  Content="{Binding PropertyModelsByName[Multiplicity]}"
-                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                                  DataContext="{Binding PropertyModelsByName[Multiplicity]}" />
 
-                <ContentPresenter DockPanel.Dock="Top"
+                <view:LabeledView DockPanel.Dock="Top"
                                   Margin="5,0,5,0"
-                                  Content="{Binding PropertyModelsByName[HasPersistentOrder]}"
-                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                                  DataContext="{Binding PropertyModelsByName[HasPersistentOrder]}" />
 
-                <ContentPresenter DockPanel.Dock="Top"
+                <view:LabeledView DockPanel.Dock="Top"
                                   Margin="5,0,5,0"
-                                  Content="{Binding PropertyModelsByName[Navigator]}"
-                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-            
+                                  DataContext="{Binding PropertyModelsByName[Navigator]}" />
+
                 <ToolBar DockPanel.Dock="Top"
                          ItemsSource="{Binding Actions}"
                          ItemTemplateSelector="{StaticResource defaultTemplateSelector}" />
