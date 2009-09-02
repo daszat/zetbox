@@ -600,6 +600,10 @@
       <End Role="PresenceRecord" EntitySet="PresenceRecord" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
+    <AssociationSet Name="FK_PresentableModelDescriptor_displayedInGridBy_ControlKind" Association="Model.Store.FK_PresentableModelDescriptor_displayedInGridBy_ControlKind" >
+      <End Role="PresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
+      <End Role="DefaultGridCellKind" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_PresentableModelDescriptor_has_ControlKind" Association="Model.Store.FK_PresentableModelDescriptor_has_ControlKind" >
       <End Role="Presentable" EntitySet="PresentableModelDescriptor" />
       <End Role="DefaultKind" EntitySet="ControlKind" />
@@ -1188,6 +1192,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_DefaultGridCellKind" Type="int" />
     <Property Name="fk_DefaultKind" Type="int" />
     <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
@@ -1210,7 +1215,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="AltText" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
@@ -2152,6 +2156,21 @@
       </Principal>
       <Dependent Role="PresenceRecord">
         <PropertyRef Name="fk_Mitarbeiter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_PresentableModelDescriptor_displayedInGridBy_ControlKind">
+    <End Role="DefaultGridCellKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="PresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DefaultGridCellKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PresentableModelDescriptor">
+        <PropertyRef Name="fk_DefaultGridCellKind" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

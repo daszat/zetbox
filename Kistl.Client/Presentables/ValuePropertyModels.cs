@@ -111,7 +111,7 @@ namespace Kistl.Client.Presentables
             {
                 return IsInDesignMode
                     ? "[Design Mode ACTIVE] This property has some value that could be edited here."
-                    : Property.AltText;
+                    : Property.Description;
             }
         }
 

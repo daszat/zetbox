@@ -303,7 +303,6 @@ namespace Kistl.App.Base
                         var newProp = (Property)ctx.Create(prop.GetInterfaceType());
                         objClass.Properties.Add(newProp);
                         newProp.PropertyName = prop.PropertyName;
-                        newProp.AltText = prop.AltText;
                         newProp.CategoryTags = prop.CategoryTags;
                         newProp.Description = prop.Description;
                         newProp.IsIndexed = prop.IsIndexed;

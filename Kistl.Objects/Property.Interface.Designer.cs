@@ -14,13 +14,6 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// 
-        /// </summary>
-		string AltText {
-			get;
-			set;
-		}
-        /// <summary>
         /// A space separated list of category names containing this Property
         /// </summary>
 		string CategoryTags {

@@ -58,6 +58,96 @@ namespace Kistl.App.GUI
         private int _ID;
 
         /// <summary>
+        /// The default ControlKind for displaying this model in a GridCell
+        /// </summary>
+    /*
+    Relation: FK_PresentableModelDescriptor_displayedInGridBy_ControlKind
+    A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
+    B: ZeroOrOne ControlKind as DefaultGridCellKind
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.ControlKind DefaultGridCellKind
+        {
+            get
+            {
+                return DefaultGridCellKind__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                DefaultGridCellKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_DefaultGridCellKind;
+        private Guid? _fk_guid_DefaultGridCellKind = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_displayedInGridBy_ControlKind", "DefaultGridCellKind")]
+        public Kistl.App.GUI.ControlKind__Implementation__ DefaultGridCellKind__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
+                        "Model.FK_PresentableModelDescriptor_displayedInGridBy_ControlKind",
+                        "DefaultGridCellKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnDefaultGridCellKind_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.GUI.ControlKind>(__value);
+					OnDefaultGridCellKind_Getter(this, e);
+					__value = (Kistl.App.GUI.ControlKind__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
+                        "Model.FK_PresentableModelDescriptor_displayedInGridBy_ControlKind",
+                        "DefaultGridCellKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.GUI.ControlKind __oldValue = (Kistl.App.GUI.ControlKind)r.Value;
+                Kistl.App.GUI.ControlKind __newValue = (Kistl.App.GUI.ControlKind)value;
+
+                if(OnDefaultGridCellKind_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+					OnDefaultGridCellKind_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.GUI.ControlKind__Implementation__)__newValue;
+                if(OnDefaultGridCellKind_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+					OnDefaultGridCellKind_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_PostSetter;
+        /// <summary>
         /// The default ControlKind to use for this Presentable.
         /// </summary>
     /*
@@ -502,6 +592,7 @@ namespace Kistl.App.GUI
 
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
+			this._fk_DefaultGridCellKind = otherImpl._fk_DefaultGridCellKind;
 			this._fk_DefaultKind = otherImpl._fk_DefaultKind;
 			this._fk_Module = otherImpl._fk_Module;
 			this._fk_PresentableModelRef = otherImpl._fk_PresentableModelRef;
@@ -561,6 +652,15 @@ namespace Kistl.App.GUI
 		{
 			switch(propertyName)
 			{
+				case "DefaultGridCellKind":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("6c744476-35e0-4cef-a221-f02abc81566c")).Constraints
+						.Where(c => !c.IsValid(this, this.DefaultGridCellKind))
+						.Select(c => c.GetErrorText(this, this.DefaultGridCellKind))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "DefaultKind":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b535115c-b847-479d-bdea-a7994ae6eeca")).Constraints
@@ -627,6 +727,13 @@ namespace Kistl.App.GUI
 			//if (this.ObjectState == DataObjectState.Deleted) return;
 			// fix direct object references
 
+			if (_fk_guid_DefaultGridCellKind.HasValue)
+				DefaultGridCellKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultGridCellKind.Value);
+			else if (_fk_DefaultGridCellKind.HasValue)
+				DefaultGridCellKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.Find<Kistl.App.GUI.ControlKind>(_fk_DefaultGridCellKind.Value);
+			else
+				DefaultGridCellKind__Implementation__ = null;
+
 			if (_fk_guid_DefaultKind.HasValue)
 				DefaultKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultKind.Value);
 			else if (_fk_DefaultKind.HasValue)
@@ -655,6 +762,10 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(DefaultGridCellKind != null ? DefaultGridCellKind.ID : (int?)null, binStream);
+			if (auxObjects != null) {
+				auxObjects.Add(DefaultGridCellKind);
+			}
             BinarySerializer.ToStream(DefaultKind != null ? DefaultKind.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(DefaultKind);
@@ -669,6 +780,7 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_DefaultGridCellKind, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultKind, binStream);
             {
                 var tmp = this._Description;
@@ -689,6 +801,7 @@ namespace Kistl.App.GUI
         {
 			
             base.ToStream(xml);
+            XmlStreamer.ToStream(DefaultGridCellKind != null ? DefaultGridCellKind.ID : (int?)null, xml, "DefaultGridCellKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(DefaultKind != null ? DefaultKind.ID : (int?)null, xml, "DefaultKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
@@ -700,6 +813,7 @@ namespace Kistl.App.GUI
         {
 			
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_DefaultGridCellKind, xml, "DefaultGridCellKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_DefaultKind, xml, "DefaultKind", "Kistl.App.GUI");
             {
                 var tmp = this._Description;
@@ -720,6 +834,7 @@ namespace Kistl.App.GUI
         {
 			
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultGridCellKind != null ? DefaultGridCellKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellKind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultKind != null ? DefaultKind.ExportGuid : (Guid?)null, xml, "DefaultKind", "Kistl.App.GUI");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
@@ -729,6 +844,7 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            XmlStreamer.FromStream(ref this._fk_guid_DefaultGridCellKind, xml, "DefaultGridCellKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultKind, xml, "DefaultKind", "Kistl.App.GUI");
             {
                 var tmp = this._Description;

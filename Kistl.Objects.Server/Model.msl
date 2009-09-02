@@ -401,7 +401,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="AltText" ColumnName="AltText" />
 <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
@@ -1339,6 +1338,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_PresentableModelDescriptor_displayedInGridBy_ControlKind
+    A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
+    B: ZeroOrOne ControlKind as DefaultGridCellKind
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_PresentableModelDescriptor_displayedInGridBy_ControlKind"
+                           TypeName="Model.FK_PresentableModelDescriptor_displayedInGridBy_ControlKind"
+                           StoreEntitySet="PresentableModelDescriptor" >
+      <EndProperty Name="DefaultGridCellKind">
+        <ScalarProperty Name="ID" ColumnName="fk_DefaultGridCellKind"/>
+      </EndProperty>
+      <EndProperty Name="PresentableModelDescriptor">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_DefaultGridCellKind" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_PresentableModelDescriptor_has_ControlKind

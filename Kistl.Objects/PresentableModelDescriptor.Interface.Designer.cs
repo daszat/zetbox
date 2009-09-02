@@ -14,6 +14,13 @@ namespace Kistl.App.GUI
     {
 
         /// <summary>
+        /// The default ControlKind for displaying this model in a GridCell
+        /// </summary>
+		Kistl.App.GUI.ControlKind DefaultGridCellKind {
+			get;
+			set;
+		}
+        /// <summary>
         /// The default ControlKind to use for this Presentable.
         /// </summary>
 		Kistl.App.GUI.ControlKind DefaultKind {

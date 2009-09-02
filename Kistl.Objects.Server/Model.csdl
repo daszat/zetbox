@@ -221,6 +221,10 @@
       <End Role="PresenceRecord" EntitySet="PresenceRecord" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
+    <AssociationSet Name="FK_PresentableModelDescriptor_displayedInGridBy_ControlKind" Association="Model.FK_PresentableModelDescriptor_displayedInGridBy_ControlKind" >
+      <End Role="PresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
+      <End Role="DefaultGridCellKind" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_PresentableModelDescriptor_has_ControlKind" Association="Model.FK_PresentableModelDescriptor_has_ControlKind" >
       <End Role="Presentable" EntitySet="PresentableModelDescriptor" />
       <End Role="DefaultKind" EntitySet="ControlKind" />
@@ -618,6 +622,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DefaultGridCellKind__Implementation__"
+                        Relationship="Model.FK_PresentableModelDescriptor_displayedInGridBy_ControlKind"
+                        FromRole="PresentableModelDescriptor"
+                        ToRole="DefaultGridCellKind" />
     <NavigationProperty Name="DefaultKind__Implementation__"
                         Relationship="Model.FK_PresentableModelDescriptor_has_ControlKind"
                         FromRole="Presentable"
@@ -663,7 +671,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="AltText" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="CategoryTags" Type="String" Nullable="true" MaxLength="4000" />
     <NavigationProperty Name="Constraints__Implementation__"
                         Relationship="Model.FK_Property_has_Constraint"
@@ -1663,6 +1670,14 @@
          Multiplicity="*" />
     <End Role="Mitarbeiter"
          Type="Model.Mitarbeiter" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_PresentableModelDescriptor_displayedInGridBy_ControlKind" >
+    <End Role="PresentableModelDescriptor"
+         Type="Model.PresentableModelDescriptor" 
+         Multiplicity="*" />
+    <End Role="DefaultGridCellKind"
+         Type="Model.ControlKind" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_PresentableModelDescriptor_has_ControlKind" >

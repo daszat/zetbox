@@ -58,57 +58,6 @@ namespace Kistl.App.Base
         private int _ID;
 
         /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual string AltText
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _AltText;
-                if (OnAltText_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnAltText_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_AltText != value)
-                {
-                    var __oldValue = _AltText;
-                    var __newValue = value;
-                    if(OnAltText_PreSetter != null)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnAltText_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("AltText", __oldValue, __newValue);
-                    _AltText = __newValue;
-                    NotifyPropertyChanged("AltText", __oldValue, __newValue);
-                    if(OnAltText_PostSetter != null)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnAltText_PostSetter(this, __e);
-                    }
-                }
-            }
-        }
-        private string _AltText;
-		public event PropertyGetterHandler<Kistl.App.Base.Property, string> OnAltText_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Property, string> OnAltText_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Property, string> OnAltText_PostSetter;
-        /// <summary>
         /// A space separated list of category names containing this Property
         /// </summary>
         // value type property
@@ -989,7 +938,6 @@ namespace Kistl.App.Base
 			var otherImpl = (Property__Implementation__)obj;
 			var me = (Property)this;
 
-			me.AltText = other.AltText;
 			me.CategoryTags = other.CategoryTags;
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
@@ -1057,15 +1005,6 @@ namespace Kistl.App.Base
 		{
 			switch(propertyName)
 			{
-				case "AltText":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("d5412422-270c-4e98-a67d-00bde83b7766")).Constraints
-						.Where(c => !c.IsValid(this, this.AltText))
-						.Select(c => c.GetErrorText(this, this.AltText))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "CategoryTags":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("13418a59-a804-4bc7-88ed-4d3509940301")).Constraints
@@ -1230,7 +1169,6 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(binStream, auxObjects);
-            BinarySerializer.ToStream(this._AltText, binStream);
             BinarySerializer.ToStream(this._CategoryTags, binStream);
 			{
 				BinarySerializer.ToStream(Constraints.Count, binStream);
@@ -1261,11 +1199,6 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(binStream);
-            {
-                var tmp = this._AltText;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._AltText = tmp;
-            }
             {
                 var tmp = this._CategoryTags;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -1324,7 +1257,6 @@ namespace Kistl.App.Base
         {
 			
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._AltText, xml, "AltText", "Kistl.App.Base");
             XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             XmlStreamer.ToStream(DefaultValue != null ? DefaultValue.ID : (int?)null, xml, "DefaultValue", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
@@ -1342,11 +1274,6 @@ namespace Kistl.App.Base
         {
 			
             base.FromStream(xml);
-            {
-                var tmp = this._AltText;
-                XmlStreamer.FromStream(ref tmp, xml, "AltText", "Kistl.App.Base");
-                this._AltText = tmp;
-            }
             {
                 var tmp = this._CategoryTags;
                 XmlStreamer.FromStream(ref tmp, xml, "CategoryTags", "Kistl.App.Base");
@@ -1394,8 +1321,6 @@ namespace Kistl.App.Base
 			
 			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
 	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._AltText, xml, "AltText", "Kistl.App.Base");
-	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(DefaultValue != null ? DefaultValue.ExportGuid : (Guid?)null, xml, "DefaultValue", "Kistl.App.Base");
 	
@@ -1415,11 +1340,6 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            {
-                var tmp = this._AltText;
-                XmlStreamer.FromStream(ref tmp, xml, "AltText", "Kistl.App.Base");
-                this._AltText = tmp;
-            }
             {
                 var tmp = this._CategoryTags;
                 XmlStreamer.FromStream(ref tmp, xml, "CategoryTags", "Kistl.App.Base");

@@ -64,12 +64,20 @@ namespace Kistl.App.Base
         public void OnCreateRelation_ObjectClass(ObjectClass obj, MethodReturnEventArgs<Relation> e)
         {
             e.Result = obj.Context.Create<Relation>();
-            e.Result.A = obj.Context.Create<RelationEnd>();
+            e.Result.Module = obj.Module;
+
+            if (e.Result.A == null)
+            {
+                e.Result.A = obj.Context.Create<RelationEnd>();
+            }
             e.Result.A.Type = obj;
             e.Result.A.Role = (int)RelationEndRole.A;
-            e.Result.B = obj.Context.Create<RelationEnd>();
+           
+            if (e.Result.B == null)
+            {
+                e.Result.B = obj.Context.Create<RelationEnd>();
+            }
             e.Result.B.Role = (int)RelationEndRole.B;
-            e.Result.Module = obj.Module;
         }
 
         public void OnCreateMethod_ObjectClass(ObjectClass obj, MethodReturnEventArgs<Method> e)
@@ -91,9 +99,8 @@ namespace Kistl.App.Base
         {
             Relation rel = obj.AParent ?? obj.BParent;
             RelationEnd other = null; // rel.GetOtherEnd(obj);
-            
+
             e.Result = obj.Context.Create<ObjectReferenceProperty>();
-            e.Result.AltText = "";
             e.Result.CategoryTags = "";
             e.Result.ObjectClass = obj.Type;
             e.Result.RelationEnd = obj;
