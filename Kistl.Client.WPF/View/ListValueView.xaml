@@ -4,8 +4,7 @@
                    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
                    xmlns:view="clr-namespace:Kistl.Client.WPF.View"
                    xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
-                   ToolTip="{Binding ToolTip, Mode=OneWay}">
+                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client">
 
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top"
@@ -17,6 +16,7 @@
 
         <ListView ItemsSource="{Binding Value, Mode=OneWay}"
                   SelectedItem="{Binding SelectedItem}"
+                  MinHeight="50"
                   MaxHeight="300" />
     </DockPanel>
 </view:PropertyView>
