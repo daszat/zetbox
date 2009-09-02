@@ -14,7 +14,7 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// The Type implementing this invocation
+        /// The type implementing this invocation
         /// </summary>
 		Kistl.App.Base.TypeRef Implementor {
 			get;

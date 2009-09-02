@@ -359,6 +359,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass
+    A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjectReferencePlaceholderProperty
+    B: One ObjectClass as ReferencedObjectClass
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass",
+    "ObjectReferencePlaceholderProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferencePlaceholderProperty__Implementation__),
+    "ReferencedObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_ObjectReferenceProperty_has_ObjectClass
     A: ZeroOrMore ObjectReferenceProperty as ObjectReferenceProperty
     B: ZeroOrOne ObjectClass as ReferenceObjectClass

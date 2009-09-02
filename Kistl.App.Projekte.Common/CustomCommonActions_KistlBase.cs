@@ -71,7 +71,7 @@ namespace Kistl.App.Base
                 e.Result.A = obj.Context.Create<RelationEnd>();
             }
             e.Result.A.Type = obj;
-           
+
             if (e.Result.B == null)
             {
                 e.Result.B = obj.Context.Create<RelationEnd>();
@@ -213,5 +213,23 @@ namespace Kistl.App.Base
         }
         #endregion
 
+        #region GetPropertyTypeString
+        public void OnGetPropertyTypeString_ObjectReferencePlaceholderProperty(ObjectReferencePlaceholderProperty obj, MethodReturnEventArgs<string> e)
+        {
+            if (obj.ReferencedObjectClass == null)
+            {
+                e.Result = "Empty ObjectReferencePlaceholderProperty";
+                return;
+            }
+
+            if (obj.ReferencedObjectClass.Module == null)
+            {
+                e.Result = "Invalid ReferencedObjectClass (no module)";
+                return;
+            }
+
+            e.Result = obj.ReferencedObjectClass.Module.Namespace + "." + obj.ReferencedObjectClass.ClassName;
+        }
+        #endregion
     }
 }

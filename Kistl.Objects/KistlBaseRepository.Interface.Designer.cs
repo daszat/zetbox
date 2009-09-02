@@ -136,6 +136,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all ObjectReferencePlaceholderProperty</summary>
+		/// A placeholder for data object references in interfaces
+		public IQueryable<ObjectReferencePlaceholderProperty> ObjectReferencePlaceholderProperties
+		{ 
+			get
+			{
+				return Context.GetQuery<ObjectReferencePlaceholderProperty>();
+			}
+		}
+		
 		/// <summary>List of all ObjectParameter</summary>
 		/// Metadefinition Object for Object Parameter.
 		public IQueryable<ObjectParameter> ObjectParameters

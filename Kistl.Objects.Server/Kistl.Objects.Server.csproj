@@ -111,6 +111,7 @@
     <Compile Include="ObjectClass.Server.Designer.cs" />
     <Compile Include="ObjectListKind.Server.Designer.cs" />
     <Compile Include="ObjectParameter.Server.Designer.cs" />
+    <Compile Include="ObjectReferencePlaceholderProperty.Server.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Server.Designer.cs" />
     <Compile Include="ObjectRefGridCellKind.Server.Designer.cs" />
     <Compile Include="ObjectRefKind.Server.Designer.cs" />

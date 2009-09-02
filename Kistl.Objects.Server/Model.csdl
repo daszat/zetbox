@@ -213,6 +213,10 @@
       <End Role="ObjectParameter" EntitySet="BaseParameter" />
       <End Role="DataType" EntitySet="DataType" />
     </AssociationSet>
+    <AssociationSet Name="FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass" Association="Model.FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass" >
+      <End Role="ObjectReferencePlaceholderProperty" EntitySet="Property" />
+      <End Role="ReferencedObjectClass" EntitySet="DataType" />
+    </AssociationSet>
     <AssociationSet Name="FK_ObjectReferenceProperty_has_ObjectClass" Association="Model.FK_ObjectReferenceProperty_has_ObjectClass" >
       <End Role="ObjectReferenceProperty" EntitySet="Property" />
       <End Role="ReferenceObjectClass" EntitySet="DataType" />
@@ -1028,6 +1032,12 @@
                         FromRole="ObjectParameter"
                         ToRole="DataType" />
   </EntityType>
+  <EntityType Name="ObjectReferencePlaceholderProperty" BaseType="Model.Property" >
+    <NavigationProperty Name="ReferencedObjectClass__Implementation__"
+                        Relationship="Model.FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass"
+                        FromRole="ObjectReferencePlaceholderProperty"
+                        ToRole="ReferencedObjectClass" />
+  </EntityType>
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property" >
     <Property Name="EagerLoading" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ReferenceObjectClass__Implementation__"
@@ -1658,6 +1668,14 @@
          Multiplicity="*" />
     <End Role="DataType"
          Type="Model.DataType" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass" >
+    <End Role="ObjectReferencePlaceholderProperty"
+         Type="Model.ObjectReferencePlaceholderProperty" 
+         Multiplicity="*" />
+    <End Role="ReferencedObjectClass"
+         Type="Model.ObjectClass" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ObjectReferenceProperty_has_ObjectClass" >

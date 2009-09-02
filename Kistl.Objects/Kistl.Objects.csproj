@@ -95,6 +95,7 @@
     <Compile Include="ObjectClass.Interface.Designer.cs" />
     <Compile Include="ObjectListKind.Interface.Designer.cs" />
     <Compile Include="ObjectParameter.Interface.Designer.cs" />
+    <Compile Include="ObjectReferencePlaceholderProperty.Interface.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Interface.Designer.cs" />
     <Compile Include="ObjectRefGridCellKind.Interface.Designer.cs" />
     <Compile Include="ObjectRefKind.Interface.Designer.cs" />

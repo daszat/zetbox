@@ -425,6 +425,11 @@
 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferencePlaceholderProperty)">
+	    <MappingFragment StoreEntitySet="ObjectReferencePlaceholderProperty">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">
 	    <MappingFragment StoreEntitySet="ObjectReferenceProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -1317,6 +1322,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_DataType" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass
+    A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjectReferencePlaceholderProperty
+    B: One ObjectClass as ReferencedObjectClass
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass"
+                           TypeName="Model.FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass"
+                           StoreEntitySet="ObjectReferencePlaceholderProperty" >
+      <EndProperty Name="ReferencedObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ReferencedObjectClass"/>
+      </EndProperty>
+      <EndProperty Name="ObjectReferencePlaceholderProperty">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ReferencedObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ObjectReferenceProperty_has_ObjectClass
