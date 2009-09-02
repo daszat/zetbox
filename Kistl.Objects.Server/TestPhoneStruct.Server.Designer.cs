@@ -148,7 +148,7 @@ namespace Kistl.App.Test
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._AreaCode, binStream);
             BinarySerializer.ToStream(this._Number, binStream);
@@ -156,7 +156,7 @@ namespace Kistl.App.Test
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._AreaCode, binStream);
             BinarySerializer.FromStream(out this._Number, binStream);
@@ -164,7 +164,7 @@ namespace Kistl.App.Test
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(this._AreaCode, xml, "AreaCode", "Kistl.App.Test");
             XmlStreamer.ToStream(this._Number, xml, "Number", "Kistl.App.Test");
@@ -172,7 +172,7 @@ namespace Kistl.App.Test
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._AreaCode, xml, "AreaCode", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._Number, xml, "Number", "Kistl.App.Test");

@@ -212,7 +212,7 @@ namespace Kistl.App.GUI
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
@@ -221,7 +221,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             {
                 var tmp = this._ExportGuid;
@@ -234,7 +234,7 @@ namespace Kistl.App.GUI
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
@@ -243,7 +243,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             {
                 var tmp = this._ExportGuid;
@@ -256,8 +256,8 @@ namespace Kistl.App.GUI
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
-			
-			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+            
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
         }
@@ -516,7 +516,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
@@ -525,7 +525,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             {
                 var tmp = this._ExportGuid;
@@ -538,7 +538,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
@@ -547,7 +547,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             {
                 var tmp = this._ExportGuid;
@@ -560,8 +560,8 @@ namespace Kistl.App.Base
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
-			
-			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+            
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
         }
@@ -820,7 +820,7 @@ namespace Kistl.App.GUI
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
@@ -829,7 +829,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             {
                 var tmp = this._ExportGuid;
@@ -842,7 +842,7 @@ namespace Kistl.App.GUI
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
@@ -851,7 +851,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             {
                 var tmp = this._ExportGuid;
@@ -864,8 +864,8 @@ namespace Kistl.App.GUI
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
-			
-			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+            
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
         }
@@ -1158,7 +1158,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
@@ -1170,7 +1170,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             {
@@ -1198,7 +1198,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
@@ -1210,7 +1210,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Projekte");
             {
@@ -1451,7 +1451,7 @@ namespace Kistl.App.GUI
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -1459,7 +1459,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
@@ -1467,7 +1467,7 @@ namespace Kistl.App.GUI
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.GUI");
@@ -1475,7 +1475,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
@@ -1788,7 +1788,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
@@ -1807,7 +1807,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             {
                 var tmp = this._ExportGuid;
@@ -1840,7 +1840,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
@@ -1853,7 +1853,7 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             {
                 var tmp = this._ExportGuid;
@@ -1886,8 +1886,8 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
-			
-			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+            
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
@@ -2146,7 +2146,7 @@ namespace Kistl.App.GUI
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -2154,7 +2154,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
@@ -2162,7 +2162,7 @@ namespace Kistl.App.GUI
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.GUI");
@@ -2170,7 +2170,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
@@ -2389,7 +2389,7 @@ namespace Kistl.App.GUI
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -2397,7 +2397,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
@@ -2405,7 +2405,7 @@ namespace Kistl.App.GUI
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.GUI");
@@ -2413,7 +2413,7 @@ namespace Kistl.App.GUI
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
@@ -2633,7 +2633,7 @@ namespace Kistl.App.TimeRecords
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -2641,7 +2641,7 @@ namespace Kistl.App.TimeRecords
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
@@ -2649,7 +2649,7 @@ namespace Kistl.App.TimeRecords
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.TimeRecords");
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Projekte");
@@ -2657,7 +2657,7 @@ namespace Kistl.App.TimeRecords
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.TimeRecords");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Projekte");
@@ -2844,7 +2844,7 @@ public string Value { get { return B; } set { B = value; } }
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._B, binStream);
@@ -2852,7 +2852,7 @@ public string Value { get { return B; } set { B = value; } }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             {
@@ -2864,7 +2864,7 @@ public string Value { get { return B; } set { B = value; } }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._B, xml, "B", "Kistl.App.Projekte");
@@ -2872,7 +2872,7 @@ public string Value { get { return B; } set { B = value; } }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Projekte");
             {

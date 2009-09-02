@@ -436,7 +436,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._EagerLoading, binStream);
             BinarySerializer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ID : (int?)null, binStream);
@@ -445,7 +445,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._EagerLoading, binStream);
             BinarySerializer.FromStream(out this._fk_ReferenceObjectClass, binStream);
@@ -454,7 +454,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
             XmlStreamer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ID : (int?)null, xml, "ReferenceObjectClass", "Kistl.App.Base");
@@ -463,7 +463,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ReferenceObjectClass, xml, "ReferenceObjectClass", "Kistl.App.Base");
@@ -472,9 +472,9 @@ namespace Kistl.App.Base
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
-			
+            
             base.Export(xml, modules);
-	
+    
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ExportGuid : (Guid?)null, xml, "ReferenceObjectClass", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(RelationEnd != null ? RelationEnd.ExportGuid : (Guid?)null, xml, "RelationEnd", "Kistl.App.Base");
@@ -482,7 +482,7 @@ namespace Kistl.App.Base
 
         public override void MergeImport(System.Xml.XmlReader xml)
         {
-			
+            
             base.MergeImport(xml);
             XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ReferenceObjectClass, xml, "ReferenceObjectClass", "Kistl.App.Base");

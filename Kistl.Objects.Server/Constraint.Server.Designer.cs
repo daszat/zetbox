@@ -183,7 +183,7 @@ namespace Kistl.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                    _isExportGuidSet = true;
+                _isExportGuidSet = true;
                 if (_ExportGuid != value)
                 {
                     var __oldValue = _ExportGuid;
@@ -426,7 +426,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(ConstrainedProperty != null ? ConstrainedProperty.ID : (int?)null, binStream);
 			if (auxObjects != null) {
@@ -434,53 +434,53 @@ namespace Kistl.App.Base
 			}
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
-				BinarySerializer.ToStream(this._ExportGuid, binStream);
-			}
+                BinarySerializer.ToStream(this._ExportGuid, binStream);
+            }
             BinarySerializer.ToStream(this._Reason, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ConstrainedProperty, binStream);
             BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
-				BinarySerializer.FromStream(out this._ExportGuid, binStream);
-			}
+                BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            }
             BinarySerializer.FromStream(out this._Reason, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(ConstrainedProperty != null ? ConstrainedProperty.ID : (int?)null, xml, "ConstrainedProperty", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
-				XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-			}
+                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            }
             XmlStreamer.ToStream(this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_ConstrainedProperty, xml, "ConstrainedProperty", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
-				XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-			}
+                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            }
             XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
-			
-			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+            
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ConstrainedProperty != null ? ConstrainedProperty.ExportGuid : (Guid?)null, xml, "ConstrainedProperty", "Kistl.App.Base");
-	
+    
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 

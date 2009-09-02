@@ -506,7 +506,6 @@
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
 <ScalarProperty Name="Multiplicity__Implementation__" ColumnName="Multiplicity" />
-<ScalarProperty Name="Role" ColumnName="Role" />
 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
 	    </MappingFragment>
       </EntityTypeMapping>

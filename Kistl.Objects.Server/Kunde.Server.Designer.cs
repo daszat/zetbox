@@ -498,7 +498,7 @@ namespace Kistl.App.Projekte
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._Adresse, binStream);
             BinarySerializer.ToStreamCollectionEntries(this.EMails__Implementation__, binStream);
@@ -510,7 +510,7 @@ namespace Kistl.App.Projekte
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Adresse, binStream);
             BinarySerializer.FromStream(out this._Kundenname, binStream);
@@ -521,7 +521,7 @@ namespace Kistl.App.Projekte
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Adresse, xml, "Adresse", "Kistl.App.Projekte");
             XmlStreamer.ToStreamCollectionEntries(this.EMails__Implementation__, xml, "EMails", "Kistl.App.Projekte");
@@ -533,7 +533,7 @@ namespace Kistl.App.Projekte
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Adresse, xml, "Adresse", "Kistl.App.Projekte");
             XmlStreamer.FromStreamCollectionEntries(this.EMails__Implementation__, xml, "EMails", "Kistl.App.Projekte");

@@ -1304,7 +1304,6 @@
     <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
     <Property Name="Multiplicity" Type="int" Nullable="false" />
     <Property Name="fk_Navigator" Type="int" />
-    <Property Name="Role" Type="int" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="fk_Type" Type="int" />
   </EntityType>

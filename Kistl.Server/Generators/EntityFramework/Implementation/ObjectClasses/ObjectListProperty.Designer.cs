@@ -41,14 +41,14 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "EntityListWrapper" : "EntityCollectionWrapper";
+	string wrapperClass = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "EntityListWrapper" : "EntityCollectionWrapper";
 	
 	// the name of the EF association
 	string assocName = rel.GetAssociationName();
 	string targetRoleName = otherEnd.RoleName;
 
 	// which generic interface to use for the collection
-	string exposedListType = rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "IList" : "ICollection";
+	string exposedListType = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection";
 
 	// which Kistl interface this is 
 	string thisInterface = relEnd.Type.GetDataTypeString();
@@ -77,7 +77,7 @@ this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClas
 this.WriteObjects("                            this.Context, ",  efName , "");
 #line 60 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ObjectListProperty.cst"
 // TODO: improve this!
-	if (rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role))
+	if (rel.NeedsPositionStorage(otherEnd.GetRole()))
 	{
 		this.WriteObjects(", \"", relEnd.RoleName, "\"");
 	}

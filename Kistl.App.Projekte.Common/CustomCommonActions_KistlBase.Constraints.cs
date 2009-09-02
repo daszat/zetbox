@@ -27,7 +27,7 @@ namespace Kistl.App.Base
 
         public void OnToString_IntegerRangeConstraint(IntegerRangeConstraint obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0} <= {1} <= {2}", obj.Min, obj.ConstrainedProperty.PropertyName, obj.Max);
+            e.Result = String.Format("{0} <= {1} <= {2}", obj.Min, obj.ConstrainedProperty == null ? "(no property)" : obj.ConstrainedProperty.PropertyName, obj.Max);
         }
         
         public void OnToString_StringRangeConstraint(StringRangeConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)

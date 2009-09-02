@@ -50,7 +50,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 
 #line 38 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  p.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
-this.WriteObjects("                        Relationship=\"Model.",  rel.GetRelationAssociationName((RelationEndRole)relEnd.Role) , "\"\r\n");
+this.WriteObjects("                        Relationship=\"Model.",  rel.GetRelationAssociationName(relEnd.GetRole()) , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  relEnd.RoleName , "\"\r\n");
 this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
 #line 43 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
@@ -64,7 +64,7 @@ this.WriteObjects("                        Relationship=\"Model.",  rel.GetAssoc
 this.WriteObjects("                        FromRole=\"",  relEnd.RoleName , "\"\r\n");
 this.WriteObjects("                        ToRole=\"",  otherEnd.RoleName , "\" />\r\n");
 #line 53 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
-if (rel.NeedsPositionStorage((RelationEndRole)relEnd.Role))
+if (rel.NeedsPositionStorage(relEnd.GetRole()))
 				{
 
 #line 56 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"

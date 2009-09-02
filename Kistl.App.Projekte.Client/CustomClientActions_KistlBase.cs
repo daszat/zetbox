@@ -367,10 +367,7 @@ namespace Kistl.App.Base
         public void OnNotifyCreated_Relation(Relation obj)
         {
             obj.A = obj.Context.Create<RelationEnd>();
-            obj.A.Role = (int)RelationEndRole.A;
-
             obj.B = obj.Context.Create<RelationEnd>();
-            obj.B.Role = (int)RelationEndRole.B;
         }
     }
 }

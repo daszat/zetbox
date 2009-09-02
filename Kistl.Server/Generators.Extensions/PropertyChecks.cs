@@ -70,7 +70,7 @@ namespace Kistl.Server.Generators.Extensions
             {
                 var rel = RelationExtensions.Lookup(p.Context, p);
                 var relEnd = rel.GetEnd(p);
-                result = rel.NeedsPositionStorage((RelationEndRole)relEnd.Role);
+                result = rel.NeedsPositionStorage(relEnd.GetRole());
             }
             return result;
         }
@@ -84,8 +84,8 @@ namespace Kistl.Server.Generators.Extensions
                 var p = (ObjectReferenceProperty)prop;
                 var rel = RelationExtensions.Lookup(p.Context, p);
                 var relEnd = rel.GetEnd(p);
-                var relOtherEnd = rel.GetOtherEnd(relEnd);
-                if (rel.NeedsPositionStorage((RelationEndRole)relOtherEnd.Role))
+                var otherEnd = rel.GetOtherEnd(relEnd);
+                if (rel.NeedsPositionStorage(otherEnd.GetRole()))
                 {
                     isIndexed = true;
                 }

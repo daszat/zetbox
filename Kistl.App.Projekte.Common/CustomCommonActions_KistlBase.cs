@@ -71,13 +71,11 @@ namespace Kistl.App.Base
                 e.Result.A = obj.Context.Create<RelationEnd>();
             }
             e.Result.A.Type = obj;
-            e.Result.A.Role = (int)RelationEndRole.A;
            
             if (e.Result.B == null)
             {
                 e.Result.B = obj.Context.Create<RelationEnd>();
             }
-            e.Result.B.Role = (int)RelationEndRole.B;
         }
 
         public void OnCreateMethod_ObjectClass(ObjectClass obj, MethodReturnEventArgs<Method> e)

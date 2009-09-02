@@ -26,7 +26,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string referencedInterface = prop.ReferenceObjectClass.Module.Namespace + "." + prop.ReferenceObjectClass.ClassName;
 
             var rel = RelationExtensions.Lookup(ctx, prop);
-            var endRole = (RelationEndRole)rel.GetEnd(prop).Role;
+            var endRole = rel.GetEnd(prop).GetRole();
             Call(host, ctx, serializationList,
                 name, ownInterface, referencedInterface, rel, endRole, callGetterSetterEvents);
 

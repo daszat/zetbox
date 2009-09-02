@@ -607,12 +607,12 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region DeleteValueTypeProperty
-        internal bool IsDeleteValueTypeProperty(ValueTypeProperty prop)
+        public bool IsDeleteValueTypeProperty(ValueTypeProperty prop)
         {
             return schema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
         }
 
-        internal void DoDeleteValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        public void DoDeleteValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             string tblName = objClass.TableName;
             string colName = Construct.NestedColumnName(prop, prefix);

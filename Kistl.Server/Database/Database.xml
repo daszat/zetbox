@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-02T12:59:48.0926228Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-02T13:47:30.1848222Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -522,7 +522,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <GUI:DefaultPresentableModelDescriptor>225bfb18-82fc-429d-81ff-e1ba738fdbc7</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>Relations</KistlBase:TableName>
   </KistlBase:ObjectClass>
@@ -534,7 +534,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <GUI:DefaultPresentableModelDescriptor>d4d5ae35-104d-4445-b0a9-2d49ae5f7716</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>RelationEnds</KistlBase:TableName>
   </KistlBase:ObjectClass>
@@ -1777,6 +1777,7 @@
     <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="d4429d3c-8fd1-468e-88d5-17abfd658d04">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
     <KistlBase:Description>The A-side of this Relation.</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1790,6 +1791,7 @@
     <KistlBase:RelationEnd>c9a3cd17-11a9-487e-b9af-c8e88c9e51de</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="20331803-079e-471e-ae45-f4d004aef48e">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
     <KistlBase:Description>The B-side of this Relation.</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1803,6 +1805,7 @@
     <KistlBase:RelationEnd>148a4638-801e-4fe8-ac83-cea08114076e</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:StringProperty ExportGuid="56948ee3-f1a7-44c3-956a-9baa863c5092">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:Description>Description of this Relation</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1814,7 +1817,7 @@
     <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="1e600012-3b35-4dc6-af28-1f858b095a15">
-    <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
     <KistlBase:DefaultValue>7099a399-42f5-470b-859f-f16847d617b3</KistlBase:DefaultValue>
     <KistlBase:Description>Export Guid</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
@@ -1826,6 +1829,7 @@
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
   </KistlBase:GuidProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="2a1a99a4-7dd5-4244-913f-06315f3de831">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
     <KistlBase:IsNullable>false</KistlBase:IsNullable>
@@ -1838,6 +1842,7 @@
     <KistlBase:RelationEnd>c7417001-4504-40e9-9f1c-b10373dfb7c1</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:EnumerationProperty ExportGuid="ba4f10fd-f7cf-4237-93a6-734e7e5c6b8a">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:Description>Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1849,6 +1854,7 @@
     <KistlBase:Enumeration>351a22e8-d047-4878-b6d3-3945489139a0</KistlBase:Enumeration>
   </KistlBase:EnumerationProperty>
   <KistlBase:StringProperty ExportGuid="cd7a8de3-a1bf-4043-93d9-d9874b40bb69">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:Description>Verb of this Relation</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1860,6 +1866,7 @@
     <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="dd6057d0-78bb-4242-9670-ec6c09bd4d92">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
     <KistlBase:Description>The Relation using this RelationEnd as A</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1873,6 +1880,7 @@
     <KistlBase:RelationEnd>385711ad-5e97-40e9-9d1e-27dc1a60c8c5</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="521ea0ba-ae3b-4a60-ae28-f366b3ee78f1">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
     <KistlBase:Description>The Relation using this RelationEnd as B</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1886,7 +1894,7 @@
     <KistlBase:RelationEnd>944c5542-0371-4839-b66c-7f15ba291f7e</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:GuidProperty ExportGuid="4bbe4a44-dc99-4455-9c03-ae78903fcee2">
-    <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
     <KistlBase:DefaultValue>8314cea3-d577-49da-9e33-7a11130d61c5</KistlBase:DefaultValue>
     <KistlBase:Description>Export Guid</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
@@ -1898,6 +1906,7 @@
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
   </KistlBase:GuidProperty>
   <KistlBase:BoolProperty ExportGuid="edd8d122-7b58-4bbb-bf00-33caa8b69cc2">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:Description>Is true, if this RelationEnd persists the order of its elements</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1908,6 +1917,7 @@
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
   </KistlBase:BoolProperty>
   <KistlBase:EnumerationProperty ExportGuid="cdbcada8-4deb-4c4f-a7a4-24716b0a0ccd">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:Description>Specifies how many instances may occur on this end of the relation.</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1919,6 +1929,7 @@
     <KistlBase:Enumeration>4f2b5005-672e-46ef-80ed-94b8cdd053db</KistlBase:Enumeration>
   </KistlBase:EnumerationProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="6b25eaab-f746-47ec-a91e-f92ec6fccada">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
     <KistlBase:Description>The ORP to navigate FROM this end of the relation. MAY be null.</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1931,17 +1942,8 @@
     <KistlBase:ReferenceObjectClass>f1baf69c-a341-4a3a-b321-e782e1458e87</KistlBase:ReferenceObjectClass>
     <KistlBase:RelationEnd>d3e1601d-da4c-4dfa-b99b-5fd43f8fecd6</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
-  <KistlBase:IntProperty ExportGuid="377a7a10-b475-4259-8f35-a90d956f9331">
-    <KistlBase:Description>Which RelationEndRole this End has</KistlBase:Description>
-    <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
-    <KistlBase:IsList>false</KistlBase:IsList>
-    <KistlBase:IsNullable>false</KistlBase:IsNullable>
-    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:ObjectClass>07817322-d4b9-4dd8-8464-bcb6745fef34</KistlBase:ObjectClass>
-    <KistlBase:PropertyName>Role</KistlBase:PropertyName>
-    <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
-  </KistlBase:IntProperty>
   <KistlBase:StringProperty ExportGuid="b32efbfc-5212-44e7-b25f-f4724b63cbee">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:Description>This end&amp;apos;s role name in the relation</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -1953,6 +1955,7 @@
     <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="d4bfc4e0-6b57-49f0-91fd-b0de428484e0">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:Description>Specifies which type this End of the relation has. MUST NOT be null.</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -2321,7 +2324,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>8d579192-717e-4f2c-90ed-1c066255e270</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Assemblies</KistlBase:RoleName>
     <KistlBase:Type>a590a975-66e5-421c-aa97-7ab3169e0e9b</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2329,7 +2331,6 @@
     <KistlBase:BParent>c10b1abc-3786-40f6-8c8c-dccdd8dc03ef</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Assembly</KistlBase:RoleName>
     <KistlBase:Type>a590a975-66e5-421c-aa97-7ab3169e0e9b</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2337,7 +2338,6 @@
     <KistlBase:BParent>7958f200-b54a-4826-b9f8-15245a520ad3</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Assembly</KistlBase:RoleName>
     <KistlBase:Type>a590a975-66e5-421c-aa97-7ab3169e0e9b</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2346,7 +2346,6 @@
     <KistlBase:HasPersistentOrder>true</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>29d7eba7-6b87-438a-910d-1a2bf17d8215</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Parameter</KistlBase:RoleName>
     <KistlBase:Type>63b8e3f7-e663-4fde-a09a-64ca876586bd</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2355,7 +2354,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>304b34ac-b581-40ce-826c-0fc0cab93bb6</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>CLRObjectParameter</KistlBase:RoleName>
     <KistlBase:Type>012dfab4-934b-443e-853a-11a5da5b0627</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2364,7 +2362,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>438b9307-fb40-4afe-a66f-a5762c41e14b</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Constraints</KistlBase:RoleName>
     <KistlBase:Type>ac1d5ac9-d909-438f-a4f5-f64ea6904944</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2372,7 +2369,6 @@
     <KistlBase:BParent>a6a30705-15ad-4a3a-b624-23305fe2807a</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>DataType</KistlBase:RoleName>
     <KistlBase:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2381,7 +2377,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>b1402cda-de87-4b2a-bd65-a950b8dd7a9f</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>DataType</KistlBase:RoleName>
     <KistlBase:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2390,7 +2385,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>4e1fb30b-e528-4968-95b0-f3a38eafe643</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>DataTypes</KistlBase:RoleName>
     <KistlBase:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2399,7 +2393,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>0f8a3e8b-29f6-49eb-99ba-f55ca1e161e9</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>InvokeOnObjectClass</KistlBase:RoleName>
     <KistlBase:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2408,7 +2401,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>e9f8a1f1-a5ed-44a6-bbf3-9b040766f19f</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>ObjectClass</KistlBase:RoleName>
     <KistlBase:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2417,7 +2409,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>e7d91162-0aa8-4fe3-9e29-d0519781ceb7</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>ObjectClass</KistlBase:RoleName>
     <KistlBase:Type>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2426,7 +2417,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>a2451b2f-2430-4de4-81a6-3d5ac9f0138f</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>DefaultValue</KistlBase:RoleName>
     <KistlBase:Type>74785c72-3271-4fb7-95fc-86b0baa09c8e</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2435,7 +2425,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>1619c8a7-b969-4c05-851c-7a2545cda484</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Enumeration</KistlBase:RoleName>
     <KistlBase:Type>ee475de2-d626-49e9-9e40-6bb12cb026d4</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2443,7 +2432,6 @@
     <KistlBase:BParent>f85ff30f-0907-4e28-806e-a7f1aac98acb</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Enumeration</KistlBase:RoleName>
     <KistlBase:Type>ee475de2-d626-49e9-9e40-6bb12cb026d4</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2452,7 +2440,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>115c3bfb-72fd-46f2-81fe-74ce1cfa1874</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>EnumerationEntries</KistlBase:RoleName>
     <KistlBase:Type>6365c62d-60a6-4fa3-9c78-370ffcc50478</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2461,7 +2448,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>1144c061-3610-495f-b8b4-951058bb0c23</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>EnumerationProperty</KistlBase:RoleName>
     <KistlBase:Type>19a8d9f0-4de6-4cc9-a75d-c1499e3a103b</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2469,7 +2455,6 @@
     <KistlBase:BParent>eb852cc4-3977-42b9-9fcd-3a8c60aa49ac</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>DefaultIcon</KistlBase:RoleName>
     <KistlBase:Type>78b6f354-013b-4129-a390-7f3a5a5e28e9</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2477,7 +2462,6 @@
     <KistlBase:BParent>692c1064-37a2-4be3-a81e-4cb91f673aa3</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>ImplementsInterfaces</KistlBase:RoleName>
     <KistlBase:Type>7ea88d99-88f0-44a7-b0a3-da725e57595d</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2486,7 +2470,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>8dace0a9-6db1-458d-b054-ace4a3d906c2</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Method</KistlBase:RoleName>
     <KistlBase:Type>ef79c0b9-55e0-45ad-8233-1ff8f852661f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2495,7 +2478,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>51640f6f-b2ae-4f26-915e-fda5a2c060a6</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Method</KistlBase:RoleName>
     <KistlBase:Type>ef79c0b9-55e0-45ad-8233-1ff8f852661f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2504,7 +2486,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>dc2bd380-6e63-4a44-bcc3-192780f80606</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Method</KistlBase:RoleName>
     <KistlBase:Type>ef79c0b9-55e0-45ad-8233-1ff8f852661f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2513,7 +2494,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>9afc74a4-4eeb-4c39-879c-eacc8f369fa7</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Methods</KistlBase:RoleName>
     <KistlBase:Type>ef79c0b9-55e0-45ad-8233-1ff8f852661f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2522,7 +2502,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>521868ca-503c-409e-bfa5-2e9d887d0a19</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>MethodInvocation</KistlBase:RoleName>
     <KistlBase:Type>f6e7bb30-3adf-4d49-a80c-6ea7b589afa7</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2531,7 +2510,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>b959b313-2063-4391-bb97-14ac85d5dff0</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>MethodInvocation</KistlBase:RoleName>
     <KistlBase:Type>f6e7bb30-3adf-4d49-a80c-6ea7b589afa7</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2540,7 +2518,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>94e98a50-cad2-4779-8c50-e4922d653781</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>MethodInvocations</KistlBase:RoleName>
     <KistlBase:Type>f6e7bb30-3adf-4d49-a80c-6ea7b589afa7</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2549,7 +2526,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>b9db3b3b-d00d-479f-843f-6d41704eb079</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>MethodInvokations</KistlBase:RoleName>
     <KistlBase:Type>f6e7bb30-3adf-4d49-a80c-6ea7b589afa7</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2557,7 +2533,6 @@
     <KistlBase:BParent>bffae7c3-c5f3-4139-ae96-577f4c9fed8f</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Module</KistlBase:RoleName>
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2565,7 +2540,6 @@
     <KistlBase:BParent>379b7181-a832-431f-a48d-ef1dd1996414</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Module</KistlBase:RoleName>
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2574,7 +2548,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>cab23a85-a179-475c-a70f-77789e2a2907</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Module</KistlBase:RoleName>
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2583,7 +2556,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>a1711984-5263-4407-ac67-6e4123954976</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Module</KistlBase:RoleName>
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2591,7 +2563,6 @@
     <KistlBase:BParent>b251ee8c-2821-441e-b631-d215c006f1c8</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Module</KistlBase:RoleName>
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2599,7 +2570,6 @@
     <KistlBase:AParent>1c91bee2-397b-44f3-8346-313a8e2ba127</KistlBase:AParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Module</KistlBase:RoleName>
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2608,7 +2578,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>0914de6e-966c-46fc-9359-e4da6c3608b1</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>BaseObjectClass</KistlBase:RoleName>
     <KistlBase:Type>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2617,7 +2586,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>a9ec04c2-0807-4d6c-a96a-824d13e5c571</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>ObjectClass</KistlBase:RoleName>
     <KistlBase:Type>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2626,7 +2594,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>11adedb9-d32a-4da9-b986-0534e65df760</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Presentable</KistlBase:RoleName>
     <KistlBase:Type>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2634,7 +2601,6 @@
     <KistlBase:BParent>29b2b281-979e-470c-80fc-e6d9a0d58846</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>ReferenceObjectClass</KistlBase:RoleName>
     <KistlBase:Type>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2643,7 +2609,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>ad060d41-bc7a-41b8-a3e3-ec9302c8c714</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>SubClasses</KistlBase:RoleName>
     <KistlBase:Type>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2651,7 +2616,6 @@
     <KistlBase:BParent>1d8d8e0b-cb0d-4746-a4c5-85c8f399e00a</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Type</KistlBase:RoleName>
     <KistlBase:Type>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2660,7 +2624,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>9bd64c60-7282-47f0-8069-528a175fcc92</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>ObjectParameter</KistlBase:RoleName>
     <KistlBase:Type>3fb8bf11-cab6-478f-b9b8-3f6d70a70d37</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2669,7 +2632,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>63ba109d-92c6-4ced-980b-0a52aabfaec0</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Navigator</KistlBase:RoleName>
     <KistlBase:Type>f1baf69c-a341-4a3a-b321-e782e1458e87</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2678,7 +2640,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>1d0ac841-129a-41d9-8f7b-026216db5b6d</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>ObjectReferenceProperty</KistlBase:RoleName>
     <KistlBase:Type>f1baf69c-a341-4a3a-b321-e782e1458e87</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2686,7 +2647,6 @@
     <KistlBase:BParent>1ae94c81-3359-45e8-b97a-b61add91abba</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>DefaultPresentableModelDescriptor</KistlBase:RoleName>
     <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2694,7 +2654,6 @@
     <KistlBase:BParent>3437ea5d-d926-4a0b-a848-9dafedf7ad6a</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>ValueModelDescriptor</KistlBase:RoleName>
     <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2703,7 +2662,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>2105acf5-0b98-4d0b-9be4-049a502a4f03</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>BaseProperty</KistlBase:RoleName>
     <KistlBase:Type>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2712,7 +2670,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>fd8f14da-e647-48cb-8593-3a30984f5c96</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>ConstrainedProperty</KistlBase:RoleName>
     <KistlBase:Type>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2721,7 +2678,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>dddba981-ca47-4995-a9cc-d649bf5dd8a3</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>InvokeOnProperty</KistlBase:RoleName>
     <KistlBase:Type>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2730,7 +2686,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>bdaacacd-c8cb-45cf-a329-28f942337273</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Properties</KistlBase:RoleName>
     <KistlBase:Type>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2739,7 +2694,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>84e0996a-081f-4a17-a34d-54cf23991301</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Property</KistlBase:RoleName>
     <KistlBase:Type>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2748,7 +2702,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>590d6a36-2e4b-41bd-a51e-298aba90ce72</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Property</KistlBase:RoleName>
     <KistlBase:Type>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2757,7 +2710,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>b966b081-54c5-440d-b163-df5761c3d4b1</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Invocations</KistlBase:RoleName>
     <KistlBase:Type>24defe28-fc33-4f74-bf69-395ffa7a74f5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2766,7 +2718,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>00bfc51e-ea0e-4de1-9c56-ea8ccc0131c8</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>PropertyInvocation</KistlBase:RoleName>
     <KistlBase:Type>24defe28-fc33-4f74-bf69-395ffa7a74f5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2775,7 +2726,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>2a1a99a4-7dd5-4244-913f-06315f3de831</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Relation</KistlBase:RoleName>
     <KistlBase:Type>1c0e894f-4eb4-422f-8094-3095735b4917</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2784,7 +2734,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>d4429d3c-8fd1-468e-88d5-17abfd658d04</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Relation</KistlBase:RoleName>
     <KistlBase:Type>1c0e894f-4eb4-422f-8094-3095735b4917</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2793,7 +2742,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>20331803-079e-471e-ae45-f4d004aef48e</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Relation</KistlBase:RoleName>
     <KistlBase:Type>1c0e894f-4eb4-422f-8094-3095735b4917</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2802,7 +2750,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>dd6057d0-78bb-4242-9670-ec6c09bd4d92</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>A</KistlBase:RoleName>
     <KistlBase:Type>07817322-d4b9-4dd8-8464-bcb6745fef34</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2811,7 +2758,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>521ea0ba-ae3b-4a60-ae28-f366b3ee78f1</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>B</KistlBase:RoleName>
     <KistlBase:Type>07817322-d4b9-4dd8-8464-bcb6745fef34</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2820,7 +2766,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>d4bfc4e0-6b57-49f0-91fd-b0de428484e0</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>RelationEnd</KistlBase:RoleName>
     <KistlBase:Type>07817322-d4b9-4dd8-8464-bcb6745fef34</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2829,7 +2774,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>6b25eaab-f746-47ec-a91e-f92ec6fccada</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>RelationEnd</KistlBase:RoleName>
     <KistlBase:Type>07817322-d4b9-4dd8-8464-bcb6745fef34</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2837,7 +2781,6 @@
     <KistlBase:BParent>cbc99fc5-2b15-4829-b4ae-bc8e38e767a8</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>StructDefinition</KistlBase:RoleName>
     <KistlBase:Type>2cb3f778-dd6a-46c7-ad2b-5f8691313035</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2846,7 +2789,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>0d78c157-c106-4728-9af2-7992da7c935d</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>StructProperty</KistlBase:RoleName>
     <KistlBase:Type>7b5ba73f-91f4-4542-9542-4f418b5c109f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2855,7 +2797,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>f7ed21a0-9a41-40eb-b3ab-b35591f2edd7</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Child</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2863,7 +2804,6 @@
     <KistlBase:BParent>8b41ffa4-8ffa-4d96-b4e5-708188045c71</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>true</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>GenericArguments</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2871,7 +2811,6 @@
     <KistlBase:BParent>dc9013af-8758-40b4-8f52-c2c8683a13e0</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Implementor</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2879,7 +2818,6 @@
     <KistlBase:BParent>7fa78e0e-c9bb-4ce2-ae74-262174f48b45</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Implementor</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2887,7 +2825,6 @@
     <KistlBase:BParent>2094dc91-456b-4cdf-ac0c-bf97f5c85a7e</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Parent</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2896,7 +2833,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>885bfa97-3d43-48bb-a0aa-1049298714ff</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>TypeRef</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -2905,7 +2841,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>443e3370-b1f4-46e8-9779-1a8d9ba1c8a6</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>TypeRef</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -4943,15 +4878,6 @@
     <KistlBase:ConstrainedProperty>6b25eaab-f746-47ec-a91e-f92ec6fccada</KistlBase:ConstrainedProperty>
     <KistlBase:Reason>Navigator must be consistent with RelationEnd information</KistlBase:Reason>
   </KistlBase:ConsistentNavigatorConstraint>
-  <KistlBase:IntegerRangeConstraint ExportGuid="368ded25-0fd0-4e68-bf71-0a56bd4ed681">
-    <KistlBase:ConstrainedProperty>377a7a10-b475-4259-8f35-a90d956f9331</KistlBase:ConstrainedProperty>
-    <KistlBase:Reason>RelationEndRole can only be 1 ('A') or 2 ('B')</KistlBase:Reason>
-    <KistlBase:Max>2</KistlBase:Max>
-    <KistlBase:Min>1</KistlBase:Min>
-  </KistlBase:IntegerRangeConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="bd50f224-90c9-40f1-9981-46e6aa90cf3b">
-    <KistlBase:ConstrainedProperty>377a7a10-b475-4259-8f35-a90d956f9331</KistlBase:ConstrainedProperty>
-  </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="c5e2a150-eaae-4fac-8c06-7bb4685fdce2">
     <KistlBase:ConstrainedProperty>b32efbfc-5212-44e7-b25f-f4724b63cbee</KistlBase:ConstrainedProperty>
   </KistlBase:NotNullableConstraint>
@@ -6577,7 +6503,6 @@
     <KistlBase:BParent>0e64ccd9-2f72-489a-83a4-095f949fdee3</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>DisplayedTypeAssembly</KistlBase:RoleName>
     <KistlBase:Type>a590a975-66e5-421c-aa97-7ab3169e0e9b</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6585,7 +6510,6 @@
     <KistlBase:BParent>0a03215f-1c1a-4a44-892d-86642eefe9f1</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>DefaultGridCellKind</KistlBase:RoleName>
     <KistlBase:Type>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6593,7 +6517,6 @@
     <KistlBase:BParent>cc835258-6ada-4f3f-839e-7f276ded995a</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>DefaultKind</KistlBase:RoleName>
     <KistlBase:Type>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6601,7 +6524,6 @@
     <KistlBase:BParent>5404456a-4527-4e40-a660-b4a5e96e4a47</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>SecondaryControlKinds</KistlBase:RoleName>
     <KistlBase:Type>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6610,7 +6532,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>883a2f71-78ae-4978-8d76-904a2237cc25</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>ControlKindClass</KistlBase:RoleName>
     <KistlBase:Type>c0c6369e-90cd-4e14-ad5c-a45e9e782e2f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6618,7 +6539,6 @@
     <KistlBase:BParent>b4911f1f-d707-4b14-9b7e-b6c6fd49a640</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Kind</KistlBase:RoleName>
     <KistlBase:Type>c0c6369e-90cd-4e14-ad5c-a45e9e782e2f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6627,7 +6547,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>052273ac-706a-446b-bb86-83c726ee66d6</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Icon</KistlBase:RoleName>
     <KistlBase:Type>78b6f354-013b-4129-a390-7f3a5a5e28e9</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6635,7 +6554,6 @@
     <KistlBase:BParent>304c9a1e-7365-45ee-a685-348fd76f10e7</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Method</KistlBase:RoleName>
     <KistlBase:Type>ef79c0b9-55e0-45ad-8233-1ff8f852661f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6643,7 +6561,6 @@
     <KistlBase:BParent>a1360ce2-ecd5-4660-9b4d-3a2dc3919344</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Module</KistlBase:RoleName>
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6651,7 +6568,6 @@
     <KistlBase:BParent>557dbc1c-2a38-4c77-8544-264a95307980</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Module</KistlBase:RoleName>
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6659,7 +6575,6 @@
     <KistlBase:BParent>51b089fa-edd9-4a1b-9f4c-ccfdaad76856</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Module</KistlBase:RoleName>
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6668,7 +6583,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>554288d1-f5f4-4b22-908b-01525a1d0f9b</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Descriptor</KistlBase:RoleName>
     <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6677,7 +6591,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>5e2e007c-2e90-4ba6-9c9d-46e62b662ff9</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Presentable</KistlBase:RoleName>
     <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6686,7 +6599,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>b535115c-b847-479d-bdea-a7994ae6eeca</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Presentable</KistlBase:RoleName>
     <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6695,7 +6607,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>6c744476-35e0-4cef-a221-f02abc81566c</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>PresentableModelDescriptor</KistlBase:RoleName>
     <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6704,7 +6615,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>0b7135d3-dedc-4091-a0c4-690c1b4a2b6d</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>PresentableModelDescriptor</KistlBase:RoleName>
     <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6712,7 +6622,6 @@
     <KistlBase:BParent>73178882-7f93-444b-bf93-75db193904cf</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Property</KistlBase:RoleName>
     <KistlBase:Type>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6721,7 +6630,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>c81105da-97e4-4685-af88-792c68e55a17</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Template</KistlBase:RoleName>
     <KistlBase:Type>c677d3fe-7dfe-4ea5-91e0-d1b0df9118be</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6730,7 +6638,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>5e9612d5-019a-416b-a2e2-dfc9674a50f6</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Template</KistlBase:RoleName>
     <KistlBase:Type>c677d3fe-7dfe-4ea5-91e0-d1b0df9118be</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6739,7 +6646,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>5d2880a4-716a-4bdc-aaa9-379c006e7ed4</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Template</KistlBase:RoleName>
     <KistlBase:Type>c677d3fe-7dfe-4ea5-91e0-d1b0df9118be</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6747,7 +6653,6 @@
     <KistlBase:BParent>6c1c4c7c-7f0c-4c80-a937-ed6af8774d3f</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>ControlRef</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6755,7 +6660,6 @@
     <KistlBase:BParent>9d771d87-3b28-4e5e-be33-ea71028e1720</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>PresentableModelRef</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6763,7 +6667,6 @@
     <KistlBase:BParent>0ded88ab-da47-4e72-83bc-5e409b81e0d1</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>SupportedInterfaces</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6772,7 +6675,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>b7548d0b-f503-47fc-9808-52c491b8f2dd</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Control</KistlBase:RoleName>
     <KistlBase:Type>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6781,7 +6683,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>eff6276d-975b-4a0d-bd3c-ad76af2189c3</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>View</KistlBase:RoleName>
     <KistlBase:Type>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6790,7 +6691,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>25da3568-f362-4441-841e-7c163b10b983</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>ViewDescriptor</KistlBase:RoleName>
     <KistlBase:Type>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6798,7 +6698,6 @@
     <KistlBase:BParent>4d4e1ffd-f362-40e2-9fe1-0711ded83241</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Children</KistlBase:RoleName>
     <KistlBase:Type>98790e5d-808f-4e0b-8a1a-b304839f07ab</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6806,7 +6705,6 @@
     <KistlBase:BParent>358c14b9-fef5-495d-8d44-04e84186830e</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>ContextMenu</KistlBase:RoleName>
     <KistlBase:Type>98790e5d-808f-4e0b-8a1a-b304839f07ab</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6814,7 +6712,6 @@
     <KistlBase:BParent>81ff3089-57da-478c-8be5-fd23abc222a2</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Menu</KistlBase:RoleName>
     <KistlBase:Type>98790e5d-808f-4e0b-8a1a-b304839f07ab</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6823,7 +6720,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>a432e3ff-61ed-4726-8559-f34516181065</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Visual</KistlBase:RoleName>
     <KistlBase:Type>98790e5d-808f-4e0b-8a1a-b304839f07ab</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6832,7 +6728,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>7b18f26e-0f3f-4554-b469-1029bd4ca10b</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Visual</KistlBase:RoleName>
     <KistlBase:Type>98790e5d-808f-4e0b-8a1a-b304839f07ab</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6841,7 +6736,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>0b55b2ba-3ac0-4631-8a73-1e8846c8e9b1</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Visual</KistlBase:RoleName>
     <KistlBase:Type>98790e5d-808f-4e0b-8a1a-b304839f07ab</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6850,7 +6744,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>9f69c3bd-e274-4639-b30c-8d2a9599917b</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Visual</KistlBase:RoleName>
     <KistlBase:Type>98790e5d-808f-4e0b-8a1a-b304839f07ab</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -6858,7 +6751,6 @@
     <KistlBase:BParent>299a4cf9-3f3e-4b89-b6ba-6b163b4e5dc0</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>VisualTree</KistlBase:RoleName>
     <KistlBase:Type>98790e5d-808f-4e0b-8a1a-b304839f07ab</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -9474,7 +9366,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>a0ad574a-356b-4962-a98d-c305b1289154</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Auftraege</KistlBase:RoleName>
     <KistlBase:Type>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -9483,7 +9374,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>5b57288b-835a-459e-8532-9f47e17ab2b5</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Auftrag</KistlBase:RoleName>
     <KistlBase:Type>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -9492,7 +9382,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>57c977da-c113-4ce6-9484-3828f74c4193</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Auftrag</KistlBase:RoleName>
     <KistlBase:Type>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -9500,7 +9389,6 @@
     <KistlBase:BParent>c0c472d1-95b3-4588-812b-0d41c6e692b5</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Kunde</KistlBase:RoleName>
     <KistlBase:Type>b9ddd097-4f45-40c5-87e9-7331ab58727c</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -9508,7 +9396,6 @@
     <KistlBase:BParent>4964faf9-ebae-4287-91f8-6d2112a5921c</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Mitarbeiter</KistlBase:RoleName>
     <KistlBase:Type>77933a20-338a-4961-b751-62ffa0a75c6a</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -9517,7 +9404,6 @@
     <KistlBase:HasPersistentOrder>true</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>1abb5a1b-ba9f-4b75-b6ea-3d28be877b7c</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Mitarbeiter</KistlBase:RoleName>
     <KistlBase:Type>77933a20-338a-4961-b751-62ffa0a75c6a</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -9526,7 +9412,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>30a1d8b6-4db5-45a0-a9a8-531472a9107e</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Projekt</KistlBase:RoleName>
     <KistlBase:Type>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -9535,7 +9420,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>f6ff71b0-ccaf-4c7d-8e2b-1210a9df4b0f</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Projekt</KistlBase:RoleName>
     <KistlBase:Type>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -9544,7 +9428,6 @@
     <KistlBase:HasPersistentOrder>true</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>3e60fe29-ac50-4232-bbeb-af023ede02f6</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>Projekte</KistlBase:RoleName>
     <KistlBase:Type>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -9553,7 +9436,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>5545ba8a-3e89-4b22-bd66-c12f3622ace0</KistlBase:Navigator>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Tasks</KistlBase:RoleName>
     <KistlBase:Type>3fbb42ca-a084-491d-9135-85ed24f1ef78</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -10142,7 +10024,6 @@
     <KistlBase:BParent>9d44eac8-2470-4373-a2bf-df3bc16d3454</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>ObjectProp</KistlBase:RoleName>
     <KistlBase:Type>b9ddd097-4f45-40c5-87e9-7331ab58727c</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -10151,7 +10032,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>e93b3fc2-2fc9-4577-9a93-a51ed2a4190f</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>TestObjClass</KistlBase:RoleName>
     <KistlBase:Type>19f38f05-e88e-44c6-bfdf-d502b3632028</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -10610,7 +10490,6 @@
     <KistlBase:BParent>f6d98929-883a-4457-a49f-157324bd5ae3</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Mitarbeiter</KistlBase:RoleName>
     <KistlBase:Type>77933a20-338a-4961-b751-62ffa0a75c6a</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -10618,7 +10497,6 @@
     <KistlBase:BParent>7db412de-b90b-48ba-8340-1e6ac8c8fbaf</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Mitarbeiter</KistlBase:RoleName>
     <KistlBase:Type>77933a20-338a-4961-b751-62ffa0a75c6a</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -10626,7 +10504,6 @@
     <KistlBase:BParent>3963b6bc-bb5a-4615-b4db-56eecd9d3f97</KistlBase:BParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:Role>2</KistlBase:Role>
     <KistlBase:RoleName>Mitarbeiter</KistlBase:RoleName>
     <KistlBase:Type>77933a20-338a-4961-b751-62ffa0a75c6a</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -10635,7 +10512,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>b67880d2-37b0-436f-8628-6637fbe19e31</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>PresenceRecord</KistlBase:RoleName>
     <KistlBase:Type>b22c93cd-75c6-4fa9-8b06-9c4b3f5c818f</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -10644,7 +10520,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>720f5bcf-5654-4114-8fba-f57fb7bd48ea</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>WorkEffort</KistlBase:RoleName>
     <KistlBase:Type>dff456e5-f5a6-4da7-afdd-f4ea2a9e7a7a</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -10653,7 +10528,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>21ed2b37-6e10-4aff-b4c1-554a1cc0e967</KistlBase:Navigator>
-    <KistlBase:Role>1</KistlBase:Role>
     <KistlBase:RoleName>WorkEffortAccount</KistlBase:RoleName>
     <KistlBase:Type>15268915-6b8f-4884-9b7e-5975e0768301</KistlBase:Type>
   </KistlBase:RelationEnd>

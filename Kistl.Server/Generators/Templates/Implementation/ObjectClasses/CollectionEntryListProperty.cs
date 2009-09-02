@@ -29,28 +29,28 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string name = relEnd.Navigator.PropertyName;
-            string exposedCollectionInterface = rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "IList" : "ICollection";
+            string exposedCollectionInterface = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection";
             string referencedInterface = otherEnd.Type.GetDataTypeString();
             string backingName = "_" + name;
             string backingCollectionType = "undefined wrapper class";
-            if (rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role))
+            if (rel.NeedsPositionStorage(otherEnd.GetRole()))
             {
-                if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
+                if (otherEnd.GetRole() == RelationEndRole.A)
                 {
                     backingCollectionType = "ClientRelationASideListWrapper";
                 }
-                else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
+                else if (otherEnd.GetRole() == RelationEndRole.B)
                 {
                     backingCollectionType = "ClientRelationBSideListWrapper";
                 }
             }
             else
             {
-                if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
+                if (otherEnd.GetRole() == RelationEndRole.A)
                 {
                     backingCollectionType = "ClientRelationASideCollectionWrapper";
                 }
-                else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
+                else if (otherEnd.GetRole() == RelationEndRole.B)
                 {
                     backingCollectionType = "ClientRelationBSideCollectionWrapper";
                 }
@@ -59,7 +59,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             string aSideType = rel.A.Type.GetDataTypeString();
             string bSideType = rel.B.Type.GetDataTypeString();
             string entryType = rel.GetRelationClassName() + Kistl.API.Helper.ImplementationSuffix;
-            string providerCollectionType = (rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "IList<" : "ICollection<")
+            string providerCollectionType = (rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList<" : "ICollection<")
                 + entryType + ">";
 
             bool eagerLoading = (relEnd.Navigator != null && relEnd.Navigator.EagerLoading)

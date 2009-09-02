@@ -762,7 +762,6 @@
                         Relationship="Model.FK_RelationEnd_has_ObjectReferenceProperty"
                         FromRole="RelationEnd"
                         ToRole="Navigator" />
-    <Property Name="Role" Type="Int32" Nullable="false" />
     <Property Name="RoleName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Type__Implementation__"
                         Relationship="Model.FK_RelationEnd_has_ObjectClass"

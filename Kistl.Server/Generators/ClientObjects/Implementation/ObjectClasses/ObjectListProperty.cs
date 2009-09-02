@@ -24,9 +24,9 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             var rel = RelationExtensions.Lookup(ctx, prop);
             var relEnd = rel.GetEnd(prop);
             var otherEnd = rel.GetOtherEnd(relEnd);
-            string exposedListType = rel.NeedsPositionStorage((RelationEndRole)otherEnd.Role) ? "IList" : "ICollection";
+            string exposedListType = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection";
 
-            Call(host, ctx, serializationList, name, wrapperClass, exposedListType, rel, (RelationEndRole)relEnd.Role);
+            Call(host, ctx, serializationList, name, wrapperClass, exposedListType, rel, relEnd.GetRole());
         }
 
         /// <summary>

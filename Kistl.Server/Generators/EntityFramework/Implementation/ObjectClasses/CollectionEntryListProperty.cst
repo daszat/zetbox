@@ -33,22 +33,22 @@
 	string wrapperClass = "undefined wrapper class";
     if (rel.NeedsPositionStorage(endRole))
 	{
-	    if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
+	    if (otherEnd.GetRole() == RelationEndRole.A)
 	    {
 	        wrapperClass = "EntityRelationASideListWrapper";
 	    }
-	    else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
+	    else if (otherEnd.GetRole() == RelationEndRole.B)
 	    {
 	        wrapperClass = "EntityRelationBSideListWrapper";
 	    }
 	}
 	else
 	{
-	    if ((RelationEndRole)otherEnd.Role == RelationEndRole.A)
+	    if (otherEnd.GetRole() == RelationEndRole.A)
 	    {
 	        wrapperClass = "EntityRelationASideCollectionWrapper";
 	    }
-	    else if ((RelationEndRole)otherEnd.Role == RelationEndRole.B)
+	    else if (otherEnd.GetRole() == RelationEndRole.B)
 	    {
 	        wrapperClass = "EntityRelationBSideCollectionWrapper";
 	    }

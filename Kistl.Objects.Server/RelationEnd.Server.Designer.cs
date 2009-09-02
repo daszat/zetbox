@@ -273,7 +273,7 @@ namespace Kistl.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                    _isExportGuidSet = true;
+                _isExportGuidSet = true;
                 if (_ExportGuid != value)
                 {
                     var __oldValue = _ExportGuid;
@@ -508,57 +508,6 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectReferenceProperty> OnNavigator_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectReferenceProperty> OnNavigator_PostSetter;
         /// <summary>
-        /// Which RelationEndRole this End has
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual int Role
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _Role;
-                if (OnRole_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<int>(__result);
-                    OnRole_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_Role != value)
-                {
-                    var __oldValue = _Role;
-                    var __newValue = value;
-                    if(OnRole_PreSetter != null)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
-                        OnRole_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("Role", __oldValue, __newValue);
-                    _Role = __newValue;
-                    NotifyPropertyChanged("Role", __oldValue, __newValue);
-                    if(OnRole_PostSetter != null)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
-                        OnRole_PostSetter(this, __e);
-                    }
-                }
-            }
-        }
-        private int _Role;
-		public event PropertyGetterHandler<Kistl.App.Base.RelationEnd, int> OnRole_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, int> OnRole_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, int> OnRole_PostSetter;
-        /// <summary>
         /// This end&apos;s role name in the relation
         /// </summary>
         // value type property
@@ -736,7 +685,6 @@ namespace Kistl.App.Base
 			me.ExportGuid = other.ExportGuid;
 			me.HasPersistentOrder = other.HasPersistentOrder;
 			me.Multiplicity = other.Multiplicity;
-			me.Role = other.Role;
 			me.RoleName = other.RoleName;
 			this._fk_AParent = otherImpl._fk_AParent;
 			this._fk_BParent = otherImpl._fk_BParent;
@@ -852,15 +800,6 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
-				case "Role":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("377a7a10-b475-4259-8f35-a90d956f9331")).Constraints
-						.Where(c => !c.IsValid(this, this.Role))
-						.Select(c => c.GetErrorText(this, this.Role))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "RoleName":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b32efbfc-5212-44e7-b25f-f4724b63cbee")).Constraints
@@ -924,92 +863,86 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(AParent != null ? AParent.ID : (int?)null, binStream);
             BinarySerializer.ToStream(BParent != null ? BParent.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
-				BinarySerializer.ToStream(this._ExportGuid, binStream);
-			}
+                BinarySerializer.ToStream(this._ExportGuid, binStream);
+            }
             BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
             BinarySerializer.ToStream((int)((RelationEnd)this).Multiplicity, binStream);
             BinarySerializer.ToStream(Navigator != null ? Navigator.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(Navigator);
 			}
-            BinarySerializer.ToStream(this._Role, binStream);
             BinarySerializer.ToStream(this._RoleName, binStream);
             BinarySerializer.ToStream(Type != null ? Type.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_AParent, binStream);
             BinarySerializer.FromStream(out this._fk_BParent, binStream);
             BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
-				BinarySerializer.FromStream(out this._ExportGuid, binStream);
-			}
+                BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            }
             BinarySerializer.FromStream(out this._HasPersistentOrder, binStream);
             BinarySerializer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, binStream);
             BinarySerializer.FromStream(out this._fk_Navigator, binStream);
-            BinarySerializer.FromStream(out this._Role, binStream);
             BinarySerializer.FromStream(out this._RoleName, binStream);
             BinarySerializer.FromStream(out this._fk_Type, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(AParent != null ? AParent.ID : (int?)null, xml, "AParent", "Kistl.App.Base");
             XmlStreamer.ToStream(BParent != null ? BParent.ID : (int?)null, xml, "BParent", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
-				XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-			}
+                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            }
             XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             XmlStreamer.ToStream((int)this.Multiplicity, xml, "Multiplicity", "Kistl.App.Base");
             XmlStreamer.ToStream(Navigator != null ? Navigator.ID : (int?)null, xml, "Navigator", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._Role, xml, "Role", "Kistl.App.Base");
             XmlStreamer.ToStream(this._RoleName, xml, "RoleName", "Kistl.App.Base");
             XmlStreamer.ToStream(Type != null ? Type.ID : (int?)null, xml, "Type", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_AParent, xml, "AParent", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_BParent, xml, "BParent", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
-				XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-			}
+                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            }
             XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, xml, "Multiplicity", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Navigator, xml, "Navigator", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Role, xml, "Role", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._RoleName, xml, "RoleName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
-			
-			xml.WriteAttributeString("ExportGuid", this.ExportGuid.ToString());
+            
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(AParent != null ? AParent.ExportGuid : (Guid?)null, xml, "AParent", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BParent != null ? BParent.ExportGuid : (Guid?)null, xml, "BParent", "Kistl.App.Base");
-	
+    
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.Multiplicity, xml, "Multiplicity", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Navigator != null ? Navigator.ExportGuid : (Guid?)null, xml, "Navigator", "Kistl.App.Base");
-	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Role, xml, "Role", "Kistl.App.Base");
-	
+    
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._RoleName, xml, "RoleName", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Kistl.App.Base");
         }
@@ -1023,7 +956,6 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, xml, "Multiplicity", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Navigator, xml, "Navigator", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._Role, xml, "Role", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._RoleName, xml, "RoleName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Type, xml, "Type", "Kistl.App.Base");
         }

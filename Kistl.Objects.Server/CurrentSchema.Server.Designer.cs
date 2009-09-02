@@ -264,7 +264,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._Schema, binStream);
             BinarySerializer.ToStream(this._Version, binStream);
@@ -272,7 +272,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Schema, binStream);
             BinarySerializer.FromStream(out this._Version, binStream);
@@ -280,7 +280,7 @@ namespace Kistl.App.Base
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Schema, xml, "Schema", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Version, xml, "Version", "Kistl.App.Base");
@@ -288,7 +288,7 @@ namespace Kistl.App.Base
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Schema, xml, "Schema", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Version, xml, "Version", "Kistl.App.Base");

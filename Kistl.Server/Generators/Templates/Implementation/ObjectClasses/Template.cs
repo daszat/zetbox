@@ -53,11 +53,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
                 case StorageType.Replicate:
                     // simple and direct reference
                     this.WriteLine("        // object list property");
-                    ApplyObjectListPropertyTemplate(rel, (RelationEndRole)relEnd.Role);
+                    ApplyObjectListPropertyTemplate(rel, relEnd.GetRole());
                     break;
                 case StorageType.Separate:
                     this.WriteLine("        // collection reference property");
-                    ApplyCollectionEntryListTemplate(rel, (RelationEndRole)relEnd.Role);
+                    ApplyCollectionEntryListTemplate(rel, relEnd.GetRole());
                     break;
                 default:
                     throw new NotImplementedException("unknown StorageHint for ObjectReferenceProperty[IsList == true]");

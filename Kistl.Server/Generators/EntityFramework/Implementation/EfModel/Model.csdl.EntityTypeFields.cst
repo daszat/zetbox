@@ -36,7 +36,7 @@
 				Debug.Assert(relEnd != null);
 %>
     <NavigationProperty Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
-                        Relationship="Model.<%= rel.GetRelationAssociationName((RelationEndRole)relEnd.Role) %>"
+                        Relationship="Model.<%= rel.GetRelationAssociationName(relEnd.GetRole()) %>"
                         FromRole="<%= relEnd.RoleName %>"
                         ToRole="CollectionEntry" />
 <%
@@ -50,7 +50,7 @@
                         ToRole="<%= otherEnd.RoleName %>" />
 <%
 
-				if (rel.NeedsPositionStorage((RelationEndRole)relEnd.Role))
+				if (rel.NeedsPositionStorage(relEnd.GetRole()))
 				{
 %>
     <Property Name="<%= p.PropertyName + Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="true" />

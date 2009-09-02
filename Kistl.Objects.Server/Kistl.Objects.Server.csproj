@@ -11,7 +11,6 @@
     <AssemblyName>Kistl.Objects.Server</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <DocumentationFile>$(OutputPath)\Kistl.Objects.Server.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,7 +32,6 @@
   </PropertyGroup>
   <!-- Has to come later to receive correct $(OutputPath) -->
   <PropertyGroup>
-     <DocumentationFile>$(OutputPath)\Kistl.Objects.Server.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalReferencePath Include="$(OutputPath)" />

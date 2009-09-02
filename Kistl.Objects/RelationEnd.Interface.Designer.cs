@@ -49,13 +49,6 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// Which RelationEndRole this End has
-        /// </summary>
-		int Role {
-			get;
-			set;
-		}
-        /// <summary>
         /// This end&apos;s role name in the relation
         /// </summary>
 		string RoleName {

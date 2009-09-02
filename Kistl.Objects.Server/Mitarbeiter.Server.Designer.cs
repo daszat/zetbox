@@ -465,7 +465,7 @@ namespace Kistl.App.Projekte
 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
         {
-			
+            
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._Geburtstag, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
@@ -475,7 +475,7 @@ namespace Kistl.App.Projekte
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
-			
+            
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Geburtstag, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
@@ -485,7 +485,7 @@ namespace Kistl.App.Projekte
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
-			
+            
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Geburtstag, xml, "Geburtstag", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
@@ -495,7 +495,7 @@ namespace Kistl.App.Projekte
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
-			
+            
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Geburtstag, xml, "Geburtstag", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");

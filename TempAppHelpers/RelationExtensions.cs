@@ -12,7 +12,7 @@ namespace Kistl.App.Extensions
     {
         public static Relation Lookup(IKistlContext ctx, ObjectReferenceProperty prop)
         {
-            if(prop.RelationEnd == null) return null;
+            if (prop.RelationEnd == null) return null;
             return prop.RelationEnd.AParent ?? prop.RelationEnd.BParent;
         }
 
@@ -24,6 +24,15 @@ namespace Kistl.App.Extensions
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
 
             return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.Type.ClassName, rel.Verb, rel.B.Type.ClassName, relEnd.RoleName);
+        }
+
+        public static RelationEndRole GetRole(this RelationEnd relEnd)
+        {
+            if (relEnd.AParent == null && relEnd.BParent == null)
+            {
+                throw new ArgumentOutOfRangeException("relEnd", "RelationEnd not connected to any parent");
+            }
+            return relEnd.AParent != null ? RelationEndRole.A : RelationEndRole.B;
         }
     }
 }
