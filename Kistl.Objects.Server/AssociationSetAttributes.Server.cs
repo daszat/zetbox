@@ -374,21 +374,6 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_ObjectReferenceProperty_has_ObjectClass
-    A: ZeroOrMore ObjectReferenceProperty as ObjectReferenceProperty
-    B: ZeroOrOne ObjectClass as ReferenceObjectClass
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_ObjectReferenceProperty_has_ObjectClass",
-    "ObjectReferenceProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectReferenceProperty__Implementation__),
-    "ReferenceObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_PresenceRecord_has_Mitarbeiter
     A: ZeroOrMore PresenceRecord as PresenceRecord
     B: One Mitarbeiter as Mitarbeiter

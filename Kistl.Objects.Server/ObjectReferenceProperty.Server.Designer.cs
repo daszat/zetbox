@@ -84,96 +84,6 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PostSetter;
         /// <summary>
-        /// Pointer zur Objektklasse
-        /// </summary>
-    /*
-    Relation: FK_ObjectReferenceProperty_has_ObjectClass
-    A: ZeroOrMore ObjectReferenceProperty as ObjectReferenceProperty
-    B: ZeroOrOne ObjectClass as ReferenceObjectClass
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.ObjectClass ReferenceObjectClass
-        {
-            get
-            {
-                return ReferenceObjectClass__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                ReferenceObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)value;
-            }
-        }
-        
-        private int? _fk_ReferenceObjectClass;
-        private Guid? _fk_guid_ReferenceObjectClass = null;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferenceProperty_has_ObjectClass", "ReferenceObjectClass")]
-        public Kistl.App.Base.ObjectClass__Implementation__ ReferenceObjectClass__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectReferenceProperty_has_ObjectClass",
-                        "ReferenceObjectClass");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
-                }
-                var __value = r.Value;
-				if(OnReferenceObjectClass_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Kistl.App.Base.ObjectClass>(__value);
-					OnReferenceObjectClass_Getter(this, e);
-					__value = (Kistl.App.Base.ObjectClass__Implementation__)e.Result;
-				}
-                return __value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectReferenceProperty_has_ObjectClass",
-                        "ReferenceObjectClass");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                Kistl.App.Base.ObjectClass __oldValue = (Kistl.App.Base.ObjectClass)r.Value;
-                Kistl.App.Base.ObjectClass __newValue = (Kistl.App.Base.ObjectClass)value;
-
-                if(OnReferenceObjectClass_PreSetter != null)
-                {
-					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.ObjectClass>(__oldValue, __newValue);
-					OnReferenceObjectClass_PreSetter(this, e);
-					__newValue = e.Result;
-                }
-                r.Value = (Kistl.App.Base.ObjectClass__Implementation__)__newValue;
-                if(OnReferenceObjectClass_PostSetter != null)
-                {
-					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.ObjectClass>(__oldValue, __newValue);
-					OnReferenceObjectClass_PostSetter(this, e);
-                }
-                                
-            }
-        }
-        
-        
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferenceObjectClass_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferenceObjectClass_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferenceObjectClass_PostSetter;
-        /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
     /*
@@ -318,7 +228,6 @@ namespace Kistl.App.Base
 			var me = (ObjectReferenceProperty)this;
 
 			me.EagerLoading = other.EagerLoading;
-			this._fk_ReferenceObjectClass = otherImpl._fk_ReferenceObjectClass;
 			this._fk_RelationEnd = otherImpl._fk_RelationEnd;
 		}
 
@@ -385,15 +294,6 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
-				case "ReferenceObjectClass":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1d0ac841-129a-41d9-8f7b-026216db5b6d")).Constraints
-						.Where(c => !c.IsValid(this, this.ReferenceObjectClass))
-						.Select(c => c.GetErrorText(this, this.ReferenceObjectClass))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "RelationEnd":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("63ba109d-92c6-4ced-980b-0a52aabfaec0")).Constraints
@@ -417,13 +317,6 @@ namespace Kistl.App.Base
 			
 			// fix direct object references
 
-			if (_fk_guid_ReferenceObjectClass.HasValue)
-				ReferenceObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_ReferenceObjectClass.Value);
-			else if (_fk_ReferenceObjectClass.HasValue)
-				ReferenceObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_ReferenceObjectClass.Value);
-			else
-				ReferenceObjectClass__Implementation__ = null;
-
 			if (_fk_guid_RelationEnd.HasValue)
 				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value);
 			else if (_fk_RelationEnd.HasValue)
@@ -439,7 +332,6 @@ namespace Kistl.App.Base
             
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._EagerLoading, binStream);
-            BinarySerializer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ID : (int?)null, binStream);
             BinarySerializer.ToStream(RelationEnd != null ? RelationEnd.ID : (int?)null, binStream);
         }
 
@@ -448,7 +340,6 @@ namespace Kistl.App.Base
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._EagerLoading, binStream);
-            BinarySerializer.FromStream(out this._fk_ReferenceObjectClass, binStream);
             BinarySerializer.FromStream(out this._fk_RelationEnd, binStream);
         }
 
@@ -457,7 +348,6 @@ namespace Kistl.App.Base
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
-            XmlStreamer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ID : (int?)null, xml, "ReferenceObjectClass", "Kistl.App.Base");
             XmlStreamer.ToStream(RelationEnd != null ? RelationEnd.ID : (int?)null, xml, "RelationEnd", "Kistl.App.Base");
         }
 
@@ -466,7 +356,6 @@ namespace Kistl.App.Base
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_ReferenceObjectClass, xml, "ReferenceObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
         }
 
@@ -476,7 +365,6 @@ namespace Kistl.App.Base
             base.Export(xml, modules);
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ReferenceObjectClass != null ? ReferenceObjectClass.ExportGuid : (Guid?)null, xml, "ReferenceObjectClass", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(RelationEnd != null ? RelationEnd.ExportGuid : (Guid?)null, xml, "RelationEnd", "Kistl.App.Base");
         }
 
@@ -485,7 +373,6 @@ namespace Kistl.App.Base
             
             base.MergeImport(xml);
             XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_ReferenceObjectClass, xml, "ReferenceObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
         }
 

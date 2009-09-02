@@ -77,10 +77,10 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                 else if (prop is ObjectReferenceProperty)
                 {
                     var orp = (ObjectReferenceProperty)prop;
-                    if (orp.ReferenceObjectClass.IsFrozen())
+                    if (orp.GetReferencedObjectClass().IsFrozen())
                     {
-                        string referencedType = String.Format("{0}.{1}", orp.ReferenceObjectClass.Module.Namespace, Template.GetClassName(orp.ReferenceObjectClass));
-                        string referencedInterface = String.Format("{0}.{1}", orp.ReferenceObjectClass.Module.Namespace, orp.ReferenceObjectClass.ClassName);
+                        string referencedType = String.Format("{0}.{1}", orp.GetReferencedObjectClass().Module.Namespace, Template.GetClassName(orp.GetReferencedObjectClass()));
+                        string referencedInterface = String.Format("{0}.{1}", orp.GetReferencedObjectClass().Module.Namespace, orp.GetReferencedObjectClass().ClassName);
                         if (orp.IsList)
                         {
                             // TODO: sort this list either by persistent order or ID to get consistent ordering across generations

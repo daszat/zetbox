@@ -217,10 +217,6 @@
       <End Role="ObjectReferencePlaceholderProperty" EntitySet="Property" />
       <End Role="ReferencedObjectClass" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectReferenceProperty_has_ObjectClass" Association="Model.FK_ObjectReferenceProperty_has_ObjectClass" >
-      <End Role="ObjectReferenceProperty" EntitySet="Property" />
-      <End Role="ReferenceObjectClass" EntitySet="DataType" />
-    </AssociationSet>
     <AssociationSet Name="FK_PresenceRecord_has_Mitarbeiter" Association="Model.FK_PresenceRecord_has_Mitarbeiter" >
       <End Role="PresenceRecord" EntitySet="PresenceRecord" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
@@ -1040,10 +1036,6 @@
   </EntityType>
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property" >
     <Property Name="EagerLoading" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="ReferenceObjectClass__Implementation__"
-                        Relationship="Model.FK_ObjectReferenceProperty_has_ObjectClass"
-                        FromRole="ObjectReferenceProperty"
-                        ToRole="ReferenceObjectClass" />
     <NavigationProperty Name="RelationEnd__Implementation__"
                         Relationship="Model.FK_RelationEnd_has_ObjectReferenceProperty"
                         FromRole="Navigator"
@@ -1675,14 +1667,6 @@
          Type="Model.ObjectReferencePlaceholderProperty" 
          Multiplicity="*" />
     <End Role="ReferencedObjectClass"
-         Type="Model.ObjectClass" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_ObjectReferenceProperty_has_ObjectClass" >
-    <End Role="ObjectReferenceProperty"
-         Type="Model.ObjectReferenceProperty" 
-         Multiplicity="*" />
-    <End Role="ReferenceObjectClass"
          Type="Model.ObjectClass" 
          Multiplicity="0..1" />
   </Association>

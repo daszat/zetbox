@@ -8,6 +8,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.App.Extensions;
 
     public class TypeRefPropertyModel
            : ObjectReferenceModel
@@ -18,7 +19,7 @@ namespace Kistl.Client.Presentables.KistlBase
             : base(appCtx, dataCtx, referenceHolder, prop)
         {
             // TODO: use a static reference here
-            if (prop.ReferenceObjectClass.ClassName != "TypeRef")
+            if (prop.GetReferencedObjectClass().ClassName != "TypeRef")
             {
                 throw new ArgumentOutOfRangeException("prop", "Can only handle TypeRef References");
             }

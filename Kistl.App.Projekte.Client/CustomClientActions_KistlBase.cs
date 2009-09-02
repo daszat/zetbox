@@ -68,7 +68,7 @@ namespace Kistl.App.Base
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
             {
-                ObjectClass objClass = obj.ReferenceObjectClass;
+                ObjectClass objClass = obj.GetReferencedObjectClass();
                 if (objClass == null)
                 {
                     e.Result = "(null)";

@@ -106,7 +106,6 @@ namespace Kistl.App.Base
 
             if (other != null)
             {
-                e.Result.ReferenceObjectClass = other.Type;
                 e.Result.PropertyName = other.RoleName;
             }
         }

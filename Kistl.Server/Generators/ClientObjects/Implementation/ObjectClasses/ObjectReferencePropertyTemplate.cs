@@ -23,7 +23,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
             string name = prop.PropertyName;
             string ownInterface = prop.ObjectClass.GetDataTypeString();
-            string referencedInterface = prop.ReferenceObjectClass.Module.Namespace + "." + prop.ReferenceObjectClass.ClassName;
+            string referencedInterface = prop.GetReferencedObjectClass().Module.Namespace + "." + prop.GetReferencedObjectClass().ClassName;
 
             var rel = RelationExtensions.Lookup(ctx, prop);
             var endRole = rel.GetEnd(prop).GetRole();

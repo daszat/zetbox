@@ -624,10 +624,6 @@
       <End Role="ObjectReferencePlaceholderProperty" EntitySet="ObjectReferencePlaceholderProperty" />
       <End Role="ReferencedObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectReferenceProperty_has_ObjectClass" Association="Model.Store.FK_ObjectReferenceProperty_has_ObjectClass" >
-      <End Role="ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
-      <End Role="ReferenceObjectClass" EntitySet="ObjectClass" />
-    </AssociationSet>
     <AssociationSet Name="FK_PresenceRecord_has_Mitarbeiter" Association="Model.Store.FK_PresenceRecord_has_Mitarbeiter" >
       <End Role="PresenceRecord" EntitySet="PresenceRecord" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
@@ -1207,7 +1203,6 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="EagerLoading" Type="bit" Nullable="false" />
-    <Property Name="fk_ReferenceObjectClass" Type="int" />
   </EntityType>
 	
   <EntityType Name="ObjectRefGridCellKind">
@@ -2200,21 +2195,6 @@
       </Principal>
       <Dependent Role="ObjectReferencePlaceholderProperty">
         <PropertyRef Name="fk_ReferencedObjectClass" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_ObjectReferenceProperty_has_ObjectClass">
-    <End Role="ReferenceObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="ObjectReferenceProperty" Type="Model.Store.ObjectReferenceProperty" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ReferenceObjectClass">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ObjectReferenceProperty">
-        <PropertyRef Name="fk_ReferenceObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

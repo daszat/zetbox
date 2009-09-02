@@ -28,7 +28,7 @@ namespace Kistl.Client.Presentables
             if (!prop.IsList)
                 throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list");
 
-            ReferencedClass = prop.ReferenceObjectClass;
+            ReferencedClass = prop.GetReferencedObjectClass();
         }
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
@@ -127,7 +127,7 @@ namespace Kistl.Client.Presentables
         /// </example>
         public void CreateNewItem(Action<DataObjectModel> onCreated)
         {
-            ObjectClass baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
+            ObjectClass baseclass = ((ObjectReferenceProperty)this.Property).GetReferencedObjectClass();
 
             var children = new List<ObjectClass>() { baseclass };
             CollectChildClasses(baseclass.ID, children);
@@ -177,7 +177,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public void AddExistingItem()
         {
-            var baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass.GetDescribedInterfaceType();
+            var baseclass = ((ObjectReferenceProperty)this.Property).GetReferencedObjectClass().GetDescribedInterfaceType();
             var instances = DataContext.GetQuery(baseclass).ToList(); // TODO: remove superfluous ToList
             var instanceModels = instances
                 .OrderBy(i => i.ToString())

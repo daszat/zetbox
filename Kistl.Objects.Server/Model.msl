@@ -1341,23 +1341,6 @@
       <Condition ColumnName="fk_ReferencedObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ObjectReferenceProperty_has_ObjectClass
-    A: ZeroOrMore ObjectReferenceProperty as ObjectReferenceProperty
-    B: ZeroOrOne ObjectClass as ReferenceObjectClass
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_ObjectReferenceProperty_has_ObjectClass"
-                           TypeName="Model.FK_ObjectReferenceProperty_has_ObjectClass"
-                           StoreEntitySet="ObjectReferenceProperty" >
-      <EndProperty Name="ReferenceObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_ReferenceObjectClass"/>
-      </EndProperty>
-      <EndProperty Name="ObjectReferenceProperty">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ReferenceObjectClass" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_PresenceRecord_has_Mitarbeiter
     A: ZeroOrMore PresenceRecord as PresenceRecord
     B: One Mitarbeiter as Mitarbeiter

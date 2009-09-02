@@ -66,7 +66,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public void CreateNewItemAndSetValue(Action<DataObjectModel> onCreated)
         {
-            ObjectClass baseclass = ((ObjectReferenceProperty)this.Property).ReferenceObjectClass;
+            ObjectClass baseclass = ((ObjectReferenceProperty)this.Property).GetReferencedObjectClass();
 
             var children = new List<ObjectClass>() { baseclass };
             CollectChildClasses(baseclass.ID, children);

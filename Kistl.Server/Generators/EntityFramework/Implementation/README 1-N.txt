@@ -24,7 +24,7 @@ assemblies.IsIndexed = false;
 assemblies.IsNullable = true;
 assemblies.IsList = true;
 assemblies.ObjectClass = moduleCls;
-assemblies.ReferenceObjectClass = assemblyCls;
+assemblies.GetReferencedObjectClass() = assemblyCls;
 
 // 70       
 var module = ctx.Create<ObjectReferenceProperty>();
@@ -33,7 +33,7 @@ module.IsNullable = false;
 module.IsList = false;
 module.PropertyName = "Module";
 assemblies.ObjectClass = assemblyCls;
-assemblies.ReferenceObjectClass = moduleCls;
+assemblies.GetReferencedObjectClass() = moduleCls;
 
 var rel = ctx.Create<Relation>();
 rel.Storage = StorageType.Right; // See Case 765, why this is just bollocks.

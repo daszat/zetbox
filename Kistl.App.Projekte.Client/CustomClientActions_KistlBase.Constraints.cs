@@ -252,7 +252,7 @@ namespace Kistl.App.Base
 
                 e.Result &= otherEnd.HasPersistentOrder == (orp.IsList && orp.IsIndexed);
                 e.Result &= relEnd.Type == orp.ObjectClass;
-                e.Result &= otherEnd.Type == orp.ReferenceObjectClass;
+                e.Result &= otherEnd.Type == orp.GetReferencedObjectClass();
             }
         }
 
@@ -307,10 +307,10 @@ namespace Kistl.App.Base
                         orp.ObjectClass,
                         relEnd.Type));
                 }
-                if (otherEnd.Type != orp.ReferenceObjectClass)
+                if (otherEnd.Type != orp.GetReferencedObjectClass())
                 {
                     result.Add(String.Format("Navigator is references {0} but should reference {1}",
-                        orp.ReferenceObjectClass,
+                        orp.GetReferencedObjectClass(),
                         (relEnd.AParent ?? relEnd.BParent).GetOtherEnd(relEnd).Type));
                 }
             }

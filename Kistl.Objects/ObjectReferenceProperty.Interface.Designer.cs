@@ -21,13 +21,6 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// Pointer zur Objektklasse
-        /// </summary>
-		Kistl.App.Base.ObjectClass ReferenceObjectClass {
-			get;
-			set;
-		}
-        /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
 		Kistl.App.Base.RelationEnd RelationEnd {

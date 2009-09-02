@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Kistl.API.Server;
+using Kistl.App.Extensions;
 
 namespace Kistl.App.Base
 {
@@ -111,7 +113,7 @@ namespace Kistl.App.Base
 
         public void OnGetPropertyTypeString_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.ReferenceObjectClass.Module.Namespace + "." + obj.ReferenceObjectClass.ClassName;
+            e.Result = obj.GetReferencedObjectClass().Module.Namespace + "." + obj.GetReferencedObjectClass().ClassName;
         }
 
         public void OnGetPropertyTypeString_StructProperty(Kistl.App.Base.StructProperty obj, Kistl.API.MethodReturnEventArgs<string> e)

@@ -34,5 +34,18 @@ namespace Kistl.App.Extensions
             }
             return relEnd.AParent != null ? RelationEndRole.A : RelationEndRole.B;
         }
+
+        public static Relation GetParent(this RelationEnd relEnd)
+        {
+            return relEnd.AParent ?? relEnd.BParent;
+        }
+
+        public static ObjectClass GetReferencedObjectClass(this ObjectReferenceProperty prop)
+        {
+            var rel = prop.RelationEnd.GetParent();
+            var relEnd = prop.RelationEnd;
+            var otherEnd = rel.GetOtherEnd(relEnd);
+            return otherEnd.Type;
+        }
     }
 }
