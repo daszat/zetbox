@@ -123,7 +123,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyGroups = new ReadOnlyCollection<PropertyGroupModel>(
                         FetchPropertyList()
-                            .SelectMany(p => (p.CategoryTags ?? "Uncategorised")
+                            .SelectMany(p => (String.IsNullOrEmpty(p.CategoryTags) ? "Uncategorised" : p.CategoryTags)
                                                 .Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
                                                 .Select(s => new { Category = s, Property = p }))
                             .GroupBy(x => x.Category, x => x.Property)
@@ -264,10 +264,10 @@ namespace Kistl.Client.Presentables
             while (cls != null)
             {
                 actions.AddRange(cls.Methods
-                    .Where(m => m.IsDisplayable 
-                        && (m.Parameter.Count == 0 
-                        || (m.Parameter.Count == 1 
-                            && m.Parameter.Single().IsReturnParameter 
+                    .Where(m => m.IsDisplayable
+                        && (m.Parameter.Count == 0
+                        || (m.Parameter.Count == 1
+                            && m.Parameter.Single().IsReturnParameter
                             && m.MethodName.StartsWith("Create")))));
 
                 cls = cls.BaseObjectClass;
