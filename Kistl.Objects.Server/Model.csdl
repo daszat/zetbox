@@ -309,10 +309,6 @@
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_has_PresentableModelDescriptor" Association="Model.FK_ViewDescriptor_has_PresentableModelDescriptor" >
-      <End Role="View" EntitySet="ViewDescriptor" />
-      <End Role="PresentedModelDescriptor" EntitySet="PresentableModelDescriptor" />
-    </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_has_TypeRef" Association="Model.FK_ViewDescriptor_has_TypeRef" >
       <End Role="View" EntitySet="ViewDescriptor" />
       <End Role="ControlRef" EntitySet="TypeRef" />
@@ -866,10 +862,6 @@
                         Relationship="Model.FK_ViewDescriptor_has_Module"
                         FromRole="ViewDescriptor"
                         ToRole="Module" />
-    <NavigationProperty Name="PresentedModelDescriptor__Implementation__"
-                        Relationship="Model.FK_ViewDescriptor_has_PresentableModelDescriptor"
-                        FromRole="View"
-                        ToRole="PresentedModelDescriptor" />
     <Property Name="Toolkit__Implementation__" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Visual">
@@ -1847,14 +1839,6 @@
          Multiplicity="*" />
     <End Role="Module"
          Type="Model.Module" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_ViewDescriptor_has_PresentableModelDescriptor" >
-    <End Role="View"
-         Type="Model.ViewDescriptor" 
-         Multiplicity="*" />
-    <End Role="PresentedModelDescriptor"
-         Type="Model.PresentableModelDescriptor" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ViewDescriptor_has_TypeRef" >

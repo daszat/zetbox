@@ -441,96 +441,6 @@ namespace Kistl.App.GUI
 		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
         /// <summary>
-        /// The PresentableModel usable by this View
-        /// </summary>
-    /*
-    Relation: FK_ViewDescriptor_has_PresentableModelDescriptor
-    A: ZeroOrMore ViewDescriptor as View
-    B: One PresentableModelDescriptor as PresentedModelDescriptor
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.PresentableModelDescriptor PresentedModelDescriptor
-        {
-            get
-            {
-                return PresentedModelDescriptor__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                PresentedModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)value;
-            }
-        }
-        
-        private int? _fk_PresentedModelDescriptor;
-        private Guid? _fk_guid_PresentedModelDescriptor = null;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_has_PresentableModelDescriptor", "PresentedModelDescriptor")]
-        public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ PresentedModelDescriptor__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_ViewDescriptor_has_PresentableModelDescriptor",
-                        "PresentedModelDescriptor");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
-                }
-                var __value = r.Value;
-				if(OnPresentedModelDescriptor_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Kistl.App.GUI.PresentableModelDescriptor>(__value);
-					OnPresentedModelDescriptor_Getter(this, e);
-					__value = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)e.Result;
-				}
-                return __value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_ViewDescriptor_has_PresentableModelDescriptor",
-                        "PresentedModelDescriptor");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                Kistl.App.GUI.PresentableModelDescriptor __oldValue = (Kistl.App.GUI.PresentableModelDescriptor)r.Value;
-                Kistl.App.GUI.PresentableModelDescriptor __newValue = (Kistl.App.GUI.PresentableModelDescriptor)value;
-
-                if(OnPresentedModelDescriptor_PreSetter != null)
-                {
-					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.PresentableModelDescriptor>(__oldValue, __newValue);
-					OnPresentedModelDescriptor_PreSetter(this, e);
-					__newValue = e.Result;
-                }
-                r.Value = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)__newValue;
-                if(OnPresentedModelDescriptor_PostSetter != null)
-                {
-					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.PresentableModelDescriptor>(__oldValue, __newValue);
-					OnPresentedModelDescriptor_PostSetter(this, e);
-                }
-                                
-            }
-        }
-        
-        
-		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.PresentableModelDescriptor> OnPresentedModelDescriptor_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.PresentableModelDescriptor> OnPresentedModelDescriptor_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.PresentableModelDescriptor> OnPresentedModelDescriptor_PostSetter;
-        /// <summary>
         /// Which toolkit provides this View
         /// </summary>
         // enumeration property
@@ -615,7 +525,6 @@ namespace Kistl.App.GUI
 			this._fk_ControlRef = otherImpl._fk_ControlRef;
 			this._fk_Kind = otherImpl._fk_Kind;
 			this._fk_Module = otherImpl._fk_Module;
-			this._fk_PresentedModelDescriptor = otherImpl._fk_PresentedModelDescriptor;
 		}
 
         // tail template
@@ -717,15 +626,6 @@ namespace Kistl.App.GUI
 					
 					return String.Join("; ", errors);
 				}
-				case "PresentedModelDescriptor":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("ca6bc98d-ce9c-43c1-ba6b-93cb99c2e3e0")).Constraints
-						.Where(c => !c.IsValid(this, this.PresentedModelDescriptor))
-						.Select(c => c.GetErrorText(this, this.PresentedModelDescriptor))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "Toolkit":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("2a798728-d79d-471f-be51-1f488beb8dc1")).Constraints
@@ -767,13 +667,6 @@ namespace Kistl.App.GUI
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
 			else
 				Module__Implementation__ = null;
-
-			if (_fk_guid_PresentedModelDescriptor.HasValue)
-				PresentedModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.PresentableModelDescriptor>(_fk_guid_PresentedModelDescriptor.Value);
-			else if (_fk_PresentedModelDescriptor.HasValue)
-				PresentedModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_PresentedModelDescriptor.Value);
-			else
-				PresentedModelDescriptor__Implementation__ = null;
 		}
 #region Serializer
 
@@ -790,7 +683,6 @@ namespace Kistl.App.GUI
 				auxObjects.Add(Kind);
 			}
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(PresentedModelDescriptor != null ? PresentedModelDescriptor.ID : (int?)null, binStream);
             BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
         }
 
@@ -812,7 +704,6 @@ namespace Kistl.App.GUI
             }
             BinarySerializer.FromStream(out this._fk_Kind, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
-            BinarySerializer.FromStream(out this._fk_PresentedModelDescriptor, binStream);
             BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
         }
 
@@ -825,7 +716,6 @@ namespace Kistl.App.GUI
             XmlStreamer.ToStream(this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
             XmlStreamer.ToStream(Kind != null ? Kind.ID : (int?)null, xml, "Kind", "Kistl.App.GUI");
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.ToStream(PresentedModelDescriptor != null ? PresentedModelDescriptor.ID : (int?)null, xml, "PresentedModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
         }
 
@@ -847,7 +737,6 @@ namespace Kistl.App.GUI
             }
             XmlStreamer.FromStream(ref this._fk_Kind, xml, "Kind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, xml, "Toolkit", "Kistl.App.GUI");
         }
 
@@ -860,7 +749,6 @@ namespace Kistl.App.GUI
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsReadOnly, xml, "IsReadOnly", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Kind != null ? Kind.ExportGuid : (Guid?)null, xml, "Kind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(PresentedModelDescriptor != null ? PresentedModelDescriptor.ExportGuid : (Guid?)null, xml, "PresentedModelDescriptor", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
         }
 
@@ -880,7 +768,6 @@ namespace Kistl.App.GUI
             }
             XmlStreamer.FromStream(ref this._fk_guid_Kind, xml, "Kind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_PresentedModelDescriptor, xml, "PresentedModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, xml, "Toolkit", "Kistl.App.GUI");
         }
 

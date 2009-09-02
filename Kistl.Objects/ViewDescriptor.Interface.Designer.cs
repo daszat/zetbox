@@ -42,13 +42,6 @@ namespace Kistl.App.GUI
 			set;
 		}
         /// <summary>
-        /// The PresentableModel usable by this View
-        /// </summary>
-		Kistl.App.GUI.PresentableModelDescriptor PresentedModelDescriptor {
-			get;
-			set;
-		}
-        /// <summary>
         /// Which toolkit provides this View
         /// </summary>
 		Kistl.App.GUI.Toolkit Toolkit {

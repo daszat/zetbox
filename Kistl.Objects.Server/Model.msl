@@ -1715,23 +1715,6 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ViewDescriptor_has_PresentableModelDescriptor
-    A: ZeroOrMore ViewDescriptor as View
-    B: One PresentableModelDescriptor as PresentedModelDescriptor
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_ViewDescriptor_has_PresentableModelDescriptor"
-                           TypeName="Model.FK_ViewDescriptor_has_PresentableModelDescriptor"
-                           StoreEntitySet="ViewDescriptor" >
-      <EndProperty Name="PresentedModelDescriptor">
-        <ScalarProperty Name="ID" ColumnName="fk_PresentedModelDescriptor"/>
-      </EndProperty>
-      <EndProperty Name="View">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_PresentedModelDescriptor" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_ViewDescriptor_has_TypeRef
     A: ZeroOrMore ViewDescriptor as View
     B: One TypeRef as ControlRef

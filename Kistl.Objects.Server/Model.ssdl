@@ -688,10 +688,6 @@
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_has_PresentableModelDescriptor" Association="Model.Store.FK_ViewDescriptor_has_PresentableModelDescriptor" >
-      <End Role="View" EntitySet="ViewDescriptor" />
-      <End Role="PresentedModelDescriptor" EntitySet="PresentableModelDescriptor" />
-    </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_has_TypeRef" Association="Model.Store.FK_ViewDescriptor_has_TypeRef" >
       <End Role="View" EntitySet="ViewDescriptor" />
       <End Role="ControlRef" EntitySet="TypeRef" />
@@ -1409,7 +1405,6 @@
     <Property Name="IsReadOnly" Type="bit" Nullable="false" />
     <Property Name="fk_Kind" Type="int" />
     <Property Name="fk_Module" Type="int" />
-    <Property Name="fk_PresentedModelDescriptor" Type="int" />
     <Property Name="Toolkit" Type="int" Nullable="false" />
   </EntityType>
 	
@@ -2487,21 +2482,6 @@
       </Principal>
       <Dependent Role="ViewDescriptor">
         <PropertyRef Name="fk_Module" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_ViewDescriptor_has_PresentableModelDescriptor">
-    <End Role="PresentedModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="View" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PresentedModelDescriptor">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="View">
-        <PropertyRef Name="fk_PresentedModelDescriptor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
