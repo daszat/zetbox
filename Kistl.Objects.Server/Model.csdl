@@ -688,7 +688,6 @@
                         ToRole="Invocations" />
     <Property Name="IsIndexed" Type="Boolean" Nullable="false" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
-    <Property Name="IsNullable" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Module__Implementation__"
                         Relationship="Model.FK_Property_has_Module"
                         FromRole="BaseProperty"
@@ -739,7 +738,7 @@
                         Relationship="Model.FK_Module_has_Relation"
                         FromRole="Relation"
                         ToRole="Module" />
-    <Property Name="Storage__Implementation__" Type="Int32" Nullable="true" />
+    <Property Name="Storage__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="Verb" Type="String" Nullable="false" MaxLength="100" />
   </EntityType>
   <EntityType Name="RelationEnd">

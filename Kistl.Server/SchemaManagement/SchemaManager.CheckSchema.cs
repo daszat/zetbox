@@ -220,7 +220,7 @@ namespace Kistl.Server.SchemaManagement
 
             RelationEnd relEnd, otherEnd;
 
-            switch (rel.Storage.Value)
+            switch (rel.Storage)
             {
                 case StorageType.MergeIntoA:
                     relEnd = rel.A;
@@ -231,7 +231,7 @@ namespace Kistl.Server.SchemaManagement
                     relEnd = rel.B;
                     break;
                 default:
-                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage.Value);
+                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
                     return;
             }
 
@@ -429,6 +429,20 @@ namespace Kistl.Server.SchemaManagement
                     report.WriteLine("      ** Warning: Column '{0}'.'{1}' nullable mismatch. Column is {2} but should be {3}", tblName, colName,
                         colIsNullable ? "NULLABLE" : "NOT NULLABLE",
                         isNullable ? "NULLABLE" : "NOT NULLABLE");
+
+                    if (repair)
+                    {
+                        if (isNullable || (!isNullable && !db.CheckColumnContainsNulls(tblName, colName)))
+                        {
+                            // not calling case because we already have all neccessary information
+                            db.AlterColumn(tblName, colName, type, size, isNullable);
+                            report.WriteLine("      ** Fixed.");
+                        }
+                        else if (!isNullable && db.CheckColumnContainsNulls(tblName, colName))
+                        {
+                            report.WriteLine("      ** Warning: column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+                        }
+                    }
                 }
                 if (type == System.Data.DbType.String)
                 {

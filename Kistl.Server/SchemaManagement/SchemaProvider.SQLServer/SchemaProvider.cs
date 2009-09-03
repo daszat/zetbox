@@ -151,6 +151,12 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             return (int)cmd.ExecuteScalar() > 0;
         }
 
+        public bool CheckColumnContainsNulls(string tblName, string colName)
+        {
+            SqlCommand cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM [{0}] WHERE [{1}] IS NULL", tblName, colName), db, tx);
+            return (int)cmd.ExecuteScalar() > 0;
+        }
+
         public bool GetIsColumnNullable(string tblName, string colName)
         {
             SqlCommand cmd = new SqlCommand(@"SELECT c.is_nullable FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
@@ -227,18 +233,30 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
 
         public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable)
         {
+            DoColumn(true, tblName, colName, type, size, isNullable);
+        }
+
+        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable)
+        {
+            DoColumn(false, tblName, colName, type, size, isNullable);
+        }
+
+        private void DoColumn(bool add, string tblName, string colName, System.Data.DbType type, int size, bool isNullable)
+        {
             StringBuilder sb = new StringBuilder();
+
+            string addOrAlter = add ? "ADD" : "ALTER COLUMN";
 
             // TODO: Trick 17, temporäre Lösung
             if (type == System.Data.DbType.String && size > 1000)
             {
-                sb.AppendFormat("ALTER TABLE [{0}] ADD [{1}] {2} {3}", tblName, colName,
+                sb.AppendFormat("ALTER TABLE [{0}] {1} [{2}] {3} {4}", tblName, addOrAlter, colName,
                     "ntext",
                     isNullable ? "NULL" : "NOT NULL");
             }
             else
             {
-                sb.AppendFormat("ALTER TABLE [{0}] ADD [{1}] {2}{3} {4}", tblName, colName,
+                sb.AppendFormat("ALTER TABLE [{0}] {1}  [{2}] {3}{4} {5}", tblName, addOrAlter, colName,
                     GetSqlTypeString(type),
                     size > 0 ? string.Format("({0})", size) : "",
                     isNullable ? "NULL" : "NOT NULL");
@@ -247,6 +265,7 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             SqlCommand cmd = new SqlCommand(sb.ToString(), db, tx);
             cmd.ExecuteNonQuery();
         }
+
 
         public void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade)
         {
@@ -282,5 +301,8 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             SqlCommand cmd = new SqlCommand(string.Format("ALTER TABLE [{0}] DROP CONSTRAINT [{1}]", tblName, fkName), db, tx);
             cmd.ExecuteNonQuery();
         }
+
+
+
     }
 }

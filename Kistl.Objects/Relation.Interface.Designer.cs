@@ -44,7 +44,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
-		Kistl.App.Base.StorageType? Storage {
+		Kistl.App.Base.StorageType Storage {
 			get;
 			set;
 		}

@@ -421,7 +421,6 @@
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsIndexed" ColumnName="IsIndexed" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />
-<ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
 	    </MappingFragment>
       </EntityTypeMapping>

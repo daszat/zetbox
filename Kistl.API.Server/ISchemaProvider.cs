@@ -24,6 +24,7 @@ namespace Kistl.API.Server
         bool CheckColumnExists(string tblName, string colName);
         bool CheckFKConstraintExists(string fkName);
         bool CheckTableContainsData(string tblName);
+        bool CheckColumnContainsNulls(string tblName, string colName);
 
         bool GetIsColumnNullable(string tblName, string colName);
         int GetColumnMaxLength(string tblName, string colName);
@@ -34,10 +35,12 @@ namespace Kistl.API.Server
 
         void CreateTable(string tblName, bool idAsIdentityColumn);
         void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
+        void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
         void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade);
 
         void DropTable(string tblName);
         void DropColumn(string tblName, string colName);
         void DropFKConstraint(string tblName, string fkName);
+
     }
 }

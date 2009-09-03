@@ -511,57 +511,6 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.Property, bool> OnIsList_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.Property, bool> OnIsList_PostSetter;
         /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual bool IsNullable
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _IsNullable;
-                if (OnIsNullable_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<bool>(__result);
-                    OnIsNullable_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_IsNullable != value)
-                {
-                    var __oldValue = _IsNullable;
-                    var __newValue = value;
-                    if(OnIsNullable_PreSetter != null)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnIsNullable_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("IsNullable", __oldValue, __newValue);
-                    _IsNullable = __newValue;
-                    NotifyPropertyChanged("IsNullable", __oldValue, __newValue);
-                    if(OnIsNullable_PostSetter != null)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
-                        OnIsNullable_PostSetter(this, __e);
-                    }
-                }
-            }
-        }
-        private bool _IsNullable;
-		public event PropertyGetterHandler<Kistl.App.Base.Property, bool> OnIsNullable_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Property, bool> OnIsNullable_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Property, bool> OnIsNullable_PostSetter;
-        /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
     /*
@@ -943,7 +892,6 @@ namespace Kistl.App.Base
 			me.ExportGuid = other.ExportGuid;
 			me.IsIndexed = other.IsIndexed;
 			me.IsList = other.IsList;
-			me.IsNullable = other.IsNullable;
 			me.PropertyName = other.PropertyName;
 			this._fk_DefaultValue = otherImpl._fk_DefaultValue;
 			this._fk_Module = otherImpl._fk_Module;
@@ -1077,15 +1025,6 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
-				case "IsNullable":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("6aa68dc6-d7f3-4809-89bb-e7474df0bde4")).Constraints
-						.Where(c => !c.IsValid(this, this.IsNullable))
-						.Select(c => c.GetErrorText(this, this.IsNullable))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "Module":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("2105acf5-0b98-4d0b-9be4-049a502a4f03")).Constraints
@@ -1191,7 +1130,6 @@ namespace Kistl.App.Base
             }
             BinarySerializer.ToStream(this._IsIndexed, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
-            BinarySerializer.ToStream(this._IsNullable, binStream);
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._PropertyName, binStream);
@@ -1223,7 +1161,6 @@ namespace Kistl.App.Base
             }
             BinarySerializer.FromStream(out this._IsIndexed, binStream);
             BinarySerializer.FromStream(out this._IsList, binStream);
-            BinarySerializer.FromStream(out this._IsNullable, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
             BinarySerializer.FromStream(out this._PropertyName, binStream);
@@ -1243,7 +1180,6 @@ namespace Kistl.App.Base
             }
             XmlStreamer.ToStream(this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._IsNullable, xml, "IsNullable", "Kistl.App.Base");
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
             XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, xml, "ObjectClass", "Kistl.App.Base");
             XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
@@ -1263,7 +1199,6 @@ namespace Kistl.App.Base
             }
             XmlStreamer.FromStream(ref this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsNullable, xml, "IsNullable", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
@@ -1283,8 +1218,6 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
-    
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsNullable, xml, "IsNullable", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Kistl.App.Base");
     
@@ -1301,7 +1234,6 @@ namespace Kistl.App.Base
             this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._IsIndexed, xml, "IsIndexed", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._IsNullable, xml, "IsNullable", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");

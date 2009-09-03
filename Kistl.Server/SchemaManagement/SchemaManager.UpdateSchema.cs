@@ -110,6 +110,14 @@ namespace Kistl.Server.SchemaManagement
                 {
                     Case.DoMoveValueTypeProperty(objClass, prop, prefix);
                 }
+                if (Case.IsChangeValueTypeProperty_To_NotNullable(prop))
+                {
+                    Case.DoChangeValueTypeProperty_To_NotNullable(objClass, prop, prefix);
+                }
+                if (Case.IsChangeValueTypeProperty_To_Nullable(prop))
+                {
+                    Case.DoChangeValueTypeProperty_To_Nullable(objClass, prop, prefix);
+                }
             }
 
             foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList && p.HasStorage()))
@@ -202,6 +210,14 @@ namespace Kistl.Server.SchemaManagement
                     {
                         Case.Do_1_N_RelationChange_FromNotIndexed_To_Indexed(rel);
                     }
+                    if (Case.Is_1_N_RelationChange_FromNullable_To_NotNullable(rel))
+                    {
+                        Case.Do_1_N_RelationChange_FromNullable_To_NotNullable(rel);
+                    }
+                    if (Case.Is_1_N_RelationChange_FromNotNullable_To_Nullable(rel))
+                    {
+                        Case.Do_1_N_RelationChange_FromNotNullable_To_Nullable(rel);
+                    }
                 }
                 else if (rel.GetRelationType() == RelationType.n_m)
                 {
@@ -231,6 +247,24 @@ namespace Kistl.Server.SchemaManagement
                     if (Case.IsNew_1_1_Relation(rel))
                     {
                         Case.DoNew_1_1_Relation(rel);
+                    }
+
+                    if (Case.Is1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A))
+                    {
+                        Case.Do1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A);
+                    }
+                    if (Case.Is1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B))
+                    {
+                        Case.Do1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B);
+                    }
+
+                    if (Case.Is1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A))
+                    {
+                        Case.Do1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A);
+                    }
+                    if (Case.Is1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B))
+                    {
+                        Case.Do1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
                     }
                 }
             }

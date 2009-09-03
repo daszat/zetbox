@@ -446,14 +446,14 @@ namespace Kistl.App.Base
         // enumeration property
    		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.EnumerationPropertyTemplate
         // implement the user-visible interface
-        public Kistl.App.Base.StorageType? Storage
+        public Kistl.App.Base.StorageType Storage
         {
             get
             {
 				var __value = _Storage;
 				if(OnStorage_Getter != null)
 				{
-					var e = new PropertyGetterEventArgs<Kistl.App.Base.StorageType?>(__value);
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.StorageType>(__value);
 					OnStorage_Getter(this, e);
 					__value = e.Result;
 				}
@@ -468,7 +468,7 @@ namespace Kistl.App.Base
 					var __newValue = value;
                     if(OnStorage_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Kistl.App.Base.StorageType?>(__oldValue, __newValue);
+						var e = new PropertyPreSetterEventArgs<Kistl.App.Base.StorageType>(__oldValue, __newValue);
 						OnStorage_PreSetter(this, e);
 						__newValue = e.Result;
                     }
@@ -478,7 +478,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanged("Storage", "Storage__Implementation__", __oldValue, __newValue);
                     if(OnStorage_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Kistl.App.Base.StorageType?>(__oldValue, __newValue);
+						var e = new PropertyPostSetterEventArgs<Kistl.App.Base.StorageType>(__oldValue, __newValue);
 						OnStorage_PostSetter(this, e);
                     }
                     
@@ -487,7 +487,7 @@ namespace Kistl.App.Base
         }
         
         /// <summary>backing store for Storage</summary>
-        private Kistl.App.Base.StorageType? _Storage;
+        private Kistl.App.Base.StorageType _Storage;
         
         /// <summary>EF sees only this property, for Storage</summary>
         [XmlIgnore()]
@@ -500,13 +500,13 @@ namespace Kistl.App.Base
             }
             set
             {
-                this.Storage = (Kistl.App.Base.StorageType?)value;
+                this.Storage = (Kistl.App.Base.StorageType)value;
             }
         }
         
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType?> OnStorage_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType?> OnStorage_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType?> OnStorage_PostSetter;
+		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType> OnStorage_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType> OnStorage_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType> OnStorage_PostSetter;
         /// <summary>
         /// Verb of this Relation
         /// </summary>

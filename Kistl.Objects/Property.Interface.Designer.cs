@@ -59,13 +59,6 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// 
-        /// </summary>
-		bool IsNullable {
-			get;
-			set;
-		}
-        /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
 		Kistl.App.Base.Module Module {

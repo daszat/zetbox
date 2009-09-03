@@ -158,6 +158,47 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
+        #region ChangeValueTypeProperty_To_NotNullable
+        public bool IsChangeValueTypeProperty_To_NotNullable(ValueTypeProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            if (saved == null) return false;
+            return saved.IsNullable() && !prop.IsNullable();
+        }
+        public void DoChangeValueTypeProperty_To_NotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        {
+            string tblName = objClass.TableName;
+            string colName = Construct.NestedColumnName(prop, prefix);
+
+            if (db.CheckColumnContainsNulls(tblName, colName))
+            {
+                report.WriteLine("    ** Warning: column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+            }
+            else
+            {
+                db.AlterColumn(tblName, colName, SchemaManager.GetDbType(prop),
+                    prop is StringProperty ? ((StringProperty)prop).Length : 0, prop.IsNullable());
+            }
+        }
+        #endregion
+
+        #region ChangeValueTypeProperty_To_Nullable
+        public bool IsChangeValueTypeProperty_To_Nullable(ValueTypeProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
+            if (saved == null) return false;
+            return !saved.IsNullable() && prop.IsNullable();
+        }
+        public void DoChangeValueTypeProperty_To_Nullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        {
+            string tblName = objClass.TableName;
+            string colName = Construct.NestedColumnName(prop, prefix);
+
+            db.AlterColumn(tblName, colName, SchemaManager.GetDbType(prop),
+                prop is StringProperty ? ((StringProperty)prop).Length : 0, prop.IsNullable());
+        }
+        #endregion
+
         #region RenameValueTypePropertyListName
         public bool IsRenameValueTypePropertyListName(ValueTypeProperty prop)
         {
@@ -227,7 +268,7 @@ namespace Kistl.Server.SchemaManagement
 
             RelationEnd relEnd, otherEnd;
 
-            switch (rel.Storage.Value)
+            switch (rel.Storage)
             {
                 case StorageType.MergeIntoA:
                     relEnd = rel.A;
@@ -238,13 +279,13 @@ namespace Kistl.Server.SchemaManagement
                     relEnd = rel.B;
                     break;
                 default:
-                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage.Value);
+                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
                     return;
             }
 
             ObjectReferenceProperty nav = relEnd.Navigator;
             string tblName = relEnd.Type.TableName;
-            
+
             if (nav == null)
             {
                 report.WriteLine("    ** Warning: Relation '{0}' has no Navigator on the storage side", assocName);
@@ -288,6 +329,101 @@ namespace Kistl.Server.SchemaManagement
             }
 
             db.DropColumn(tblName, Construct.ListPositionColumnName(nav));
+        }
+        #endregion
+
+        #region 1_N_RelationChange_FromNotNullable_To_Nullable
+        public bool Is_1_N_RelationChange_FromNotNullable_To_Nullable(Relation rel)
+        {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (savedRel == null) return false;
+            return (rel.A.IsNullable() && !savedRel.A.IsNullable()) ||
+                    (rel.B.IsNullable() && !savedRel.B.IsNullable());
+        }
+        public void Do_1_N_RelationChange_FromNotNullable_To_Nullable(Relation rel)
+        {
+            string assocName = rel.GetAssociationName();
+            report.WriteLine("  Make 1:N relation optional: {0}", assocName);
+
+            RelationEnd relEnd, otherEnd;
+
+            switch (rel.Storage)
+            {
+                case StorageType.MergeIntoA:
+                    relEnd = rel.A;
+                    otherEnd = rel.B;
+                    break;
+                case StorageType.MergeIntoB:
+                    otherEnd = rel.A;
+                    relEnd = rel.B;
+                    break;
+                default:
+                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
+                    return;
+            }
+
+            ObjectReferenceProperty nav = relEnd.Navigator;
+            if (nav == null)
+            {
+                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator on the storage side", assocName);
+                return;
+            }
+
+            string tblName = relEnd.Type.TableName;
+            string colName = Construct.ForeignKeyColumnName(nav);
+
+            db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+        }
+        #endregion
+
+        #region 1_N_RelationChange_FromNullable_To_NotNullable
+        public bool Is_1_N_RelationChange_FromNullable_To_NotNullable(Relation rel)
+        {
+            var savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (savedRel == null) return false;
+            return (!rel.A.IsNullable() && savedRel.A.IsNullable()) ||
+                    (!rel.B.IsNullable() && savedRel.B.IsNullable());
+        }
+        public void Do_1_N_RelationChange_FromNullable_To_NotNullable(Relation rel)
+        {
+            string assocName = rel.GetAssociationName();
+            report.WriteLine("  Make 1:N relation mandatory: {0}", assocName);
+
+            RelationEnd relEnd, otherEnd;
+
+            switch (rel.Storage)
+            {
+                case StorageType.MergeIntoA:
+                    relEnd = rel.A;
+                    otherEnd = rel.B;
+                    break;
+                case StorageType.MergeIntoB:
+                    otherEnd = rel.A;
+                    relEnd = rel.B;
+                    break;
+                default:
+                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
+                    return;
+            }
+
+            ObjectReferenceProperty nav = relEnd.Navigator;
+            if (nav == null)
+            {
+                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator", assocName);
+                return;
+            }
+
+            string tblName = relEnd.Type.TableName;
+            string colName = Construct.ForeignKeyColumnName(nav);
+
+            if (db.CheckColumnContainsNulls(tblName, colName))
+            {
+                report.WriteLine("    ** Warning: column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+            }
+            else
+            {
+                db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+            }
         }
         #endregion
 
@@ -349,7 +485,7 @@ namespace Kistl.Server.SchemaManagement
 
             RelationEnd relEnd, otherEnd;
 
-            switch (rel.Storage.Value)
+            switch (rel.Storage)
             {
                 case StorageType.MergeIntoA:
                     relEnd = rel.A;
@@ -360,7 +496,7 @@ namespace Kistl.Server.SchemaManagement
                     relEnd = rel.B;
                     break;
                 default:
-                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage.Value);
+                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
                     return;
             }
 
@@ -376,8 +512,8 @@ namespace Kistl.Server.SchemaManagement
             }
 
             string colName = Construct.ForeignKeyColumnName(nav);
-            string indexName = Construct.ListPositionColumnName(nav); 
-            
+            string indexName = Construct.ListPositionColumnName(nav);
+
             db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
 
@@ -557,6 +693,63 @@ namespace Kistl.Server.SchemaManagement
             if (rel.NeedsPositionStorage(role))
             {
                 report.WriteLine("    ** Warning: 1:1 Relation should never need position storage, but this one does!");
+            }
+        }
+        #endregion
+
+        #region 1_1_RelationChange_FromNullable_To_NotNullable
+        public bool Is1_1_RelationChange_FromNullable_To_NotNullable(Relation rel, RelationEndRole role)
+        {
+            Relation savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (savedRel == null)
+            {
+                return false;
+            }
+            return savedRel.GetOtherEndFromRole(role).IsNullable() && !rel.GetOtherEndFromRole(role).IsNullable()
+                && ((rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
+                    || (rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B)
+                    || (rel.Storage == StorageType.Replicate));
+        }
+        public void Do1_1_RelationChange_FromNullable_To_NotNullable(Relation rel, RelationEndRole role)
+        {
+            RelationEnd relEnd = rel.GetEndFromRole(role);
+            RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
+
+            string tblName = relEnd.Type.TableName;
+            string colName = Construct.ForeignKeyColumnName(relEnd.Navigator);
+
+            db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+        }
+        #endregion
+
+        #region 1_1_RelationChange_FromNotNullable_To_Nullable
+        public bool Is1_1_RelationChange_FromNotNullable_To_Nullable(Relation rel, RelationEndRole role)
+        {
+            Relation savedRel = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (savedRel == null)
+            {
+                return false;
+            }
+            return !savedRel.GetOtherEndFromRole(role).IsNullable() && rel.GetOtherEndFromRole(role).IsNullable()
+                && ((rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
+                    || (rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B)
+                    || (rel.Storage == StorageType.Replicate));
+        }
+        public void Do1_1_RelationChange_FromNotNullable_To_Nullable(Relation rel, RelationEndRole role)
+        {
+            RelationEnd relEnd = rel.GetEndFromRole(role);
+            RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
+
+            string tblName = relEnd.Type.TableName;
+            string colName = Construct.ForeignKeyColumnName(relEnd.Navigator);
+
+            if (db.CheckColumnContainsNulls(tblName, colName))
+            {
+                report.WriteLine("    ** Warning: column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+            }
+            else
+            {
+                db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             }
         }
         #endregion

@@ -52,5 +52,18 @@ namespace Kistl.App.Extensions
         {
             return relEnd.Multiplicity.LowerBound() == 0;
         }
+
+        public static RelationEnd GetOtherEndFromRole(this Relation rel, RelationEndRole role)
+        {
+            switch (role)
+            {
+                case RelationEndRole.A:
+                    return rel.B;
+                case RelationEndRole.B:
+                    return rel.A;
+                default:
+                    throw new ArgumentOutOfRangeException("role", String.Format("unknown RelationEndRole '{0}'", role));
+            }
+        }
     }
 }

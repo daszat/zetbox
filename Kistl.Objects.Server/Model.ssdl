@@ -1262,7 +1262,6 @@
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsIndexed" Type="bit" Nullable="false" />
     <Property Name="IsList" Type="bit" Nullable="false" />
-    <Property Name="IsNullable" Type="bit" Nullable="false" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_ObjectClass" Type="int" />
     <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -1298,7 +1297,7 @@
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_Module" Type="int" />
-    <Property Name="Storage" Type="int" Nullable="true" />
+    <Property Name="Storage" Type="int" Nullable="false" />
     <Property Name="Verb" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
