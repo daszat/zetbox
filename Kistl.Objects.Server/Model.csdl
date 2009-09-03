@@ -737,7 +737,7 @@
                         FromRole="Relation"
                         ToRole="Module" />
     <Property Name="Storage__Implementation__" Type="Int32" Nullable="false" />
-    <Property Name="Verb" Type="String" Nullable="false" MaxLength="4000" />
+    <Property Name="Verb" Type="String" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="RelationEnd">
     <Key>

@@ -1298,7 +1298,7 @@
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Storage" Type="int" Nullable="false" />
-    <Property Name="Verb" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Verb" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="RelationEditorKind">
