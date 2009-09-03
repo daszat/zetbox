@@ -126,11 +126,21 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" <%= (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : "" %>/>
 <%
-		ApplyEntityTypeColumnDefs(cls.Properties.OfType<Property>()
+		ApplyEntityTypeColumnDefs(cls.Properties.OfType<ObjectReferenceProperty>()
 			.OrderBy(p => p.ObjectClass.ClassName)
 			.ThenBy(p => p.PropertyName)
-			.ToList()
-			.Where(p => p.IsList == false && p.HasStorage()));
+			.Where(p => !p.IsList() && p.HasStorage())
+			.Cast<Property>());
+		ApplyEntityTypeColumnDefs(cls.Properties.OfType<ValueTypeProperty>()
+			.OrderBy(p => p.ObjectClass.ClassName)
+			.ThenBy(p => p.PropertyName)
+			.Where(p => !p.IsList)
+			.Cast<Property>());
+		ApplyEntityTypeColumnDefs(cls.Properties.OfType<StructProperty>()
+			.OrderBy(p => p.ObjectClass.ClassName)
+			.ThenBy(p => p.PropertyName)
+			.Where(p => !p.IsList)
+			.Cast<Property>());
 %>
   </EntityType>
 <%	}
@@ -307,7 +317,7 @@
       <Property Name="fk_<%= containerTypeName %>" Type="int" Nullable="true" />
       <Property Name="<%= prop.PropertyName %>" Type="<%= itemTypeName %>" <%= constraint %>/>
 <%
-		if (prop.IsIndexed)
+		if (prop.HasPersistentOrder)
 		{
 %>
     <Property Name="<%= prop.PropertyName %>Index" Type="int" Nullable="true" />

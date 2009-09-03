@@ -156,7 +156,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="B" ColumnName="<%= prop.PropertyName %>" />
 <%
-		if (prop.IsIndexed)
+		if (prop.HasPersistentOrder)
 		{
 %>
           <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="BIndex" />

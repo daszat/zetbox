@@ -25,7 +25,7 @@ namespace Kistl.Client.Presentables
             IDataObject referenceHolder, ObjectReferenceProperty prop)
             : base(appCtx, dataCtx, referenceHolder, prop)
         {
-            if (!prop.IsList)
+            if (!prop.IsList())
                 throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list");
 
             ReferencedClass = prop.GetReferencedObjectClass();

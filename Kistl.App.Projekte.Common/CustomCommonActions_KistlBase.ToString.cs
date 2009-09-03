@@ -142,7 +142,8 @@ namespace Kistl.App.Base
                 e.Result = String.Format("Property {0}", obj.ID);
             }
 
-            if (obj.IsList) e.Result += " [0..n]";
+            // TODO: fix in overrides for struct/valuetype and objectreference*
+            //if (obj.IsList) e.Result += " [0..n]";
         }
 
         public void OnToString_Relation(Relation obj, MethodReturnEventArgs<string> e)

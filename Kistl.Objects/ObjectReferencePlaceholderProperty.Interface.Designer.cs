@@ -14,6 +14,20 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// Whether or not the list has a persistent ordering of elements
+        /// </summary>
+		bool HasPersistentOrder {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Whether or not this property placeholder is list valued
+        /// </summary>
+		bool IsList {
+			get;
+			set;
+		}
+        /// <summary>
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
 		Kistl.App.Base.ObjectClass ReferencedObjectClass {

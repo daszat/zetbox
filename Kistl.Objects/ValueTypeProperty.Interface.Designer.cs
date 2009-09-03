@@ -13,5 +13,19 @@ namespace Kistl.App.Base
     public interface ValueTypeProperty : Kistl.App.Base.Property 
     {
 
+        /// <summary>
+        /// Whether or not a list-valued property has a index
+        /// </summary>
+		bool HasPersistentOrder {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		bool IsList {
+			get;
+			set;
+		}
     }
 }

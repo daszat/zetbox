@@ -42,5 +42,6 @@ namespace Kistl.API.Server
         void DropColumn(string tblName, string colName);
         void DropFKConstraint(string tblName, string fkName);
 
+        void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName);
     }
 }

@@ -32,7 +32,7 @@ namespace Kistl.App.Extensions
 
             RelationType type = rel.GetRelationType();
             return
-                (type == RelationType.one_n && p.IsList == false)
+                (type == RelationType.one_n && p.IsList() == false)
                 || (type == RelationType.one_one && rel.Storage == StorageType.Replicate)
                 || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoA && rel.A.Navigator == p)
                 || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoB && rel.B.Navigator == p)
@@ -78,6 +78,14 @@ namespace Kistl.App.Extensions
             return constraint == null ? 4000 : constraint.MaxLength;
         }
 
+        public static bool IsList(this ObjectReferenceProperty prop)
+        {
+            RelationEnd relEnd = prop.RelationEnd;
+            Relation rel = relEnd.GetParent();
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+            return otherEnd.Multiplicity.UpperBound() > 1;
+        }
 
     }
 }

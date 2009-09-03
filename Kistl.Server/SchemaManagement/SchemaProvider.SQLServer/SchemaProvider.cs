@@ -302,7 +302,11 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             cmd.ExecuteNonQuery();
         }
 
-
-
+        public void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName)
+        {
+            SqlCommand cmd = new SqlCommand(string.Format("UPDATE dest SET dest.[{0}] = src.[{1}] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.ID",
+                colName, srcColName, tblName, srcTblName), db, tx);
+            cmd.ExecuteNonQuery();
+        }
     }
 }

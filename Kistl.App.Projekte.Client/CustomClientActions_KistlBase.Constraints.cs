@@ -229,7 +229,7 @@ namespace Kistl.App.Base
                    object constrainedValueParam)
         {
             var relEnd = (RelationEnd)constrainedObjectParam;
-            var otherEnd = (relEnd.AParent ?? relEnd.BParent).GetOtherEnd(relEnd);
+            var otherEnd = relEnd.GetParent().GetOtherEnd(relEnd);
             var orp = (ObjectReferenceProperty)constrainedValueParam;
 
             e.Result = true;
@@ -243,16 +243,13 @@ namespace Kistl.App.Base
                         break;
                     case Multiplicity.ZeroOrMore:
                         e.Result &= orp.Constraints.OfType<NotNullableConstraint>().Count() == 0;
-                        e.Result &= orp.IsList;
                         break;
                     case Multiplicity.ZeroOrOne:
                         e.Result &= orp.Constraints.OfType<NotNullableConstraint>().Count() == 0;
                         break;
                 }
 
-                e.Result &= otherEnd.HasPersistentOrder == (orp.IsList && orp.IsIndexed);
                 e.Result &= relEnd.Type == orp.ObjectClass;
-                e.Result &= otherEnd.Type == orp.GetReferencedObjectClass();
             }
         }
 
@@ -283,10 +280,6 @@ namespace Kistl.App.Base
                         {
                             result.Add("Navigator should not have NotNullableConstraint because Multiplicity of opposite RelationEnd is ZeroOrMore");
                         }
-                        if (!orp.IsList)
-                        {
-                            result.Add("Navigator should have IsList set because Multiplicity of opposite RelationEnd is ZeroOrMore");
-                        }
                         break;
                     case Multiplicity.ZeroOrOne:
                         if (orp.Constraints.OfType<NotNullableConstraint>().Count() > 0)
@@ -296,22 +289,11 @@ namespace Kistl.App.Base
                         break;
                 }
 
-                if (otherEnd.HasPersistentOrder != orp.IsIndexed)
-                {
-                    result.Add("Navigator should IsIndexed set because HasPersistentOrder of opposite RelationEnd is set");
-                }
-
                 if (relEnd.Type != orp.ObjectClass)
                 {
                     result.Add(String.Format("Navigator is attached to {0} but should be attached to {1}",
                         orp.ObjectClass,
                         relEnd.Type));
-                }
-                if (otherEnd.Type != orp.GetReferencedObjectClass())
-                {
-                    result.Add(String.Format("Navigator is references {0} but should reference {1}",
-                        orp.GetReferencedObjectClass(),
-                        (relEnd.AParent ?? relEnd.BParent).GetOtherEnd(relEnd).Type));
                 }
             }
 

@@ -3,6 +3,7 @@ using System.Linq;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
 
@@ -26,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 14 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("		public override void ApplyChangesFrom(IPersistenceObject obj)\r\n");
 this.WriteObjects("		{\r\n");
@@ -35,17 +36,16 @@ this.WriteObjects("			var other = (",  cls.ClassName , ")obj;\r\n");
 this.WriteObjects("			var otherImpl = (",  cls.ClassName + Kistl.API.Helper.ImplementationSuffix , ")obj;\r\n");
 this.WriteObjects("			var me = (",  cls.ClassName , ")this;\r\n");
 this.WriteObjects("\r\n");
-#line 23 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
 			{
 
-#line 26 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 27 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("			me.",  prop.PropertyName , " = other.",  prop.PropertyName , ";\r\n");
-#line 28 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 }
 
-#line 31 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
-foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+			foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.PropertyName))
 			{
 
 #line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"

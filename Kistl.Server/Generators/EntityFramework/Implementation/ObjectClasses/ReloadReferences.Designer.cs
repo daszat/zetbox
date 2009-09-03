@@ -47,7 +47,7 @@ this.WriteObjects("			\r\n");
 this.WriteObjects("			// fix direct object references\r\n");
 #line 31 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ReloadReferences.cst"
 foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
-		.Where(orp => !orp.IsList)
+		.Where(orp => !orp.IsList())
 		.OrderBy(orp => orp.ObjectClass.ClassName)
 		.ThenBy(orp => orp.PropertyName))
 	{

@@ -390,11 +390,11 @@ namespace Kistl.Server.SchemaManagement
                     report.WriteLine("    {0}", prop.PropertyName);
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
                     CheckColumn(tblName, valPropName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
-                    if (prop.IsIndexed)
+                    if (prop.HasPersistentOrder)
                     {
                         CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
                     }
-                    if (!prop.IsIndexed && db.CheckColumnExists(tblName, valPropIndexName))
+                    if (!prop.HasPersistentOrder && db.CheckColumnExists(tblName, valPropIndexName))
                     {
                         report.WriteLine("      ** Warning: Index Column '{0}' exists but property is not indexed", valPropIndexName);
                     }

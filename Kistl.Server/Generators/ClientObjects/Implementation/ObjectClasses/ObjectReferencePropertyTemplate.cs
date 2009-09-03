@@ -19,7 +19,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Templates.Implementation.SerializationMembersList serializationList,
             ObjectReferenceProperty prop, bool callGetterSetterEvents)
         {
-            Debug.Assert(!prop.IsList);
+            Debug.Assert(!prop.IsList());
 
             string name = prop.PropertyName;
             string ownInterface = prop.ObjectClass.GetDataTypeString();

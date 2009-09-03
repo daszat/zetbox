@@ -81,7 +81,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                     {
                         string referencedType = String.Format("{0}.{1}", orp.GetReferencedObjectClass().Module.Namespace, Template.GetClassName(orp.GetReferencedObjectClass()));
                         string referencedInterface = String.Format("{0}.{1}", orp.GetReferencedObjectClass().Module.Namespace, orp.GetReferencedObjectClass().ClassName);
-                        if (orp.IsList)
+                        if (orp.IsList())
                         {
                             // TODO: sort this list either by persistent order or ID to get consistent ordering across generations
                             var items = ((ICollection)value).Cast<IDataObject>();

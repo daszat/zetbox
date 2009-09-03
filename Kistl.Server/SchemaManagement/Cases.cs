@@ -118,7 +118,71 @@ namespace Kistl.Server.SchemaManagement
         public void DoMoveValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
-            report.WriteLine("  ** Warning: moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
+
+            // TODO: What will happen if the object hierarchie is also changed?
+            var movedUp = IsParentOf(objClass, (ObjectClass)saved.ObjectClass);
+            var movedDown = IsParentOf((ObjectClass)saved.ObjectClass, objClass);
+
+            var tblName = objClass.TableName;
+            var srcTblName = ((ObjectClass)saved.ObjectClass).TableName;
+            var colName = Construct.NestedColumnName(prop, prefix);
+            var srcColName = Construct.NestedColumnName(saved, prefix); // TODO: What if prefix has changed
+            var dbType = SchemaManager.GetDbType(prop);
+            var size = prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0;
+
+            if (movedUp)
+            {
+                report.WriteLine("  Moving property '{0}' from '{1}' up to '{2}'", prop.PropertyName, saved.ObjectClass.ClassName, objClass.ClassName);
+                db.CreateColumn(tblName, colName, dbType, size, true);
+
+                db.CopyColumnData(srcTblName, srcColName, tblName, colName);
+
+                if (!prop.IsNullable())
+                {
+                    if (db.CheckColumnContainsNulls(tblName, colName))
+                    {
+                        report.WriteLine("    ** Warning: column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+                    }
+                    else
+                    {
+                        db.AlterColumn(tblName, colName, dbType, size, prop.IsNullable());
+                    }
+                }
+
+                db.DropColumn(srcTblName, srcColName);
+            }
+            else if (movedDown)
+            {
+                report.WriteLine("  Moving property '{0}' from '{1}' down to '{2}' (dataloss possible)", prop.PropertyName, saved.ObjectClass.ClassName, objClass.ClassName);
+                db.CreateColumn(tblName, colName, dbType, size, true);
+
+                db.CopyColumnData(srcTblName, srcColName, tblName, colName);
+
+                if (!prop.IsNullable())
+                {
+                    db.AlterColumn(tblName, colName, dbType, size, prop.IsNullable());
+                }
+
+                db.DropColumn(srcTblName, srcColName);
+            }
+            else
+            {
+                report.WriteLine("  ** Warning: moving a Property from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy.", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
+            }
+        }
+
+        private static bool IsParentOf(ObjectClass objClass, ObjectClass child)
+        {
+            var cls = child;
+            while (cls != null)
+            {
+                if (cls.ExportGuid == objClass.ExportGuid)
+                {
+                    return true;
+                }
+                cls = cls.BaseObjectClass;
+            }
+            return false;
         }
         #endregion
 
@@ -145,15 +209,17 @@ namespace Kistl.Server.SchemaManagement
         {
             string tblName = objClass.TableName;
             string colName = Construct.NestedColumnName(prop, prefix);
+            var dbType = SchemaManager.GetDbType(prop);
+            var size = prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0;
             report.WriteLine("    New not nullable ValueType Property: {0} ('{1}')", prop.PropertyName, colName);
             if (!db.CheckTableContainsData(tblName))
             {
-                db.CreateColumn(tblName, colName, SchemaManager.GetDbType(prop),
-                    prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
+                db.CreateColumn(tblName, colName, dbType, size, false);
             }
             else
             {
-                report.WriteLine("    ** Warning: unable to create new not nullable ValueType Property '{0}' when table '{1}' contains data", colName, tblName);
+                db.CreateColumn(tblName, colName, dbType, size, true);
+                report.WriteLine("    ** Warning: unable to create new not nullable ValueType Property '{0}' when table '{1}' contains data. Created nullable column instead.", colName, tblName);
             }
         }
         #endregion
@@ -245,7 +311,7 @@ namespace Kistl.Server.SchemaManagement
 
             db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
             db.CreateColumn(tblName, valPropName, SchemaManager.GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
-            if (prop.IsIndexed)
+            if (prop.HasPersistentOrder)
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
             }
@@ -514,7 +580,7 @@ namespace Kistl.Server.SchemaManagement
             string colName = Construct.ForeignKeyColumnName(nav);
             string indexName = Construct.ListPositionColumnName(nav);
 
-            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+            CreateNotNullableColumn(otherEnd, tblName, colName); 
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
 
             if (isIndexed)
@@ -687,12 +753,27 @@ namespace Kistl.Server.SchemaManagement
             string colName = Construct.ForeignKeyColumnName(relEnd.Navigator);
             string assocName = rel.GetRelationAssociationName(role);
 
-            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+            CreateNotNullableColumn(otherEnd, tblName, colName);
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
 
             if (rel.NeedsPositionStorage(role))
             {
                 report.WriteLine("    ** Warning: 1:1 Relation should never need position storage, but this one does!");
+            }
+        }
+
+        private void CreateNotNullableColumn(RelationEnd otherEnd, string tblName, string colName)
+        {
+            report.WriteLine("    Creating new 1:1 fk column '{0}.{1}'", tblName, colName);
+
+            if (otherEnd.IsNullable() || !db.CheckTableContainsData(tblName))
+            {
+                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+            }
+            else
+            {
+                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, true);
+                report.WriteLine("    ** Warning: Unable to create NOT NULL column, since table contains data. Created nullable column instead");
             }
         }
         #endregion

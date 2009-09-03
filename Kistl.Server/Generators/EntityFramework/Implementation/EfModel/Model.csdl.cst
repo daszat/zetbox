@@ -208,7 +208,7 @@
     <!-- B -->
     <%= PlainPropertyDefinitionFromValueType(prop, "B") %>
 <%
-        if (prop.IsIndexed)
+        if (prop.HasPersistentOrder)
         {
 %>
     <Property Name="B<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />

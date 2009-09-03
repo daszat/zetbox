@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.Templates.Implementation
@@ -19,7 +20,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
         {
             if (p is EnumerationProperty)
             {
-                if (p.IsList)
+                if (((EnumerationProperty)p).IsList)
                 {
                     ApplyEnumerationListTemplate((EnumerationProperty)p);
                 }
@@ -31,7 +32,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
             }
             else if (p is ObjectReferenceProperty)
             {
-                if (p.IsList)
+                if (((ObjectReferenceProperty)p).IsList())
                 {
                     ApplyObjectReferenceListTemplate((ObjectReferenceProperty)p);
                 }
@@ -43,7 +44,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
             }
             else if (p is StructProperty)
             {
-                if (p.IsList)
+                if (((StructProperty)p).IsList)
                 {
                     ApplyStructListTemplate((StructProperty)p);
                 }
@@ -55,7 +56,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
             }
             else if (p is ValueTypeProperty)
             {
-                if (p.IsList)
+                if (((ValueTypeProperty)p).IsList)
                 {
                     ApplyValueTypeListTemplate((ValueTypeProperty)p);
                 }
@@ -67,15 +68,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
             }
             else
             {
-                if (p.IsList)
-                {
-                    ApplyOtherListTemplate(p);
-                }
-                else
-                {
-                    ApplyOtherPropertyTemplate(p);
-                    // what other??
-                }
+                throw new ArgumentOutOfRangeException("p", String.Format("unknown property type '{0}'", p.GetType().ToString()));
             }
         }
 

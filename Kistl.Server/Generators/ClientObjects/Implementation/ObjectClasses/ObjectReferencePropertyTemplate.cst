@@ -108,7 +108,7 @@
 				if (__oldValue != null)
 				{
 <%
-        if (otherProp.IsList)
+        if (otherProp.IsList())
         {
 			// TODO: check whether __oldValue is loaded before potentially triggering a DB Call
 %>
@@ -129,7 +129,7 @@
                 if (__newValue != null)
                 {
 <%
-        if (otherProp.IsList)
+        if (otherProp.IsList())
         {
 %>
 					// add to new list

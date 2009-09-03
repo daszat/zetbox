@@ -41,11 +41,11 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameter)">
 	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Method_pos" ColumnName="fk_Method_pos" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />
 <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
-<ScalarProperty Name="Method_pos" ColumnName="fk_Method_pos" />
 <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -419,14 +419,14 @@
 <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="IsIndexed" ColumnName="IsIndexed" />
-<ScalarProperty Name="IsList" ColumnName="IsList" />
 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferencePlaceholderProperty)">
 	    <MappingFragment StoreEntitySet="ObjectReferencePlaceholderProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
+<ScalarProperty Name="IsList" ColumnName="IsList" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferenceProperty)">
@@ -438,11 +438,15 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.StructProperty)">
 	    <MappingFragment StoreEntitySet="StructProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
+<ScalarProperty Name="IsList" ColumnName="IsList" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ValueTypeProperty)">
 	    <MappingFragment StoreEntitySet="ValueTypeProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
+<ScalarProperty Name="IsList" ColumnName="IsList" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.BoolProperty)">

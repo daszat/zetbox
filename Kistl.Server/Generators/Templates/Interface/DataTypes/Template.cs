@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
 
@@ -61,14 +63,30 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 
         protected virtual void ApplyPropertyTemplate(Property prop)
         {
-            if (!prop.IsListProperty())
+            bool isReadOnly = false;
+            bool isList = false;
+
+            if (prop is ValueTypeProperty)
             {
-                bool isReadonly = prop is StructProperty;
-                Interface.DataTypes.SimplePropertyTemplate.Call(Host, ctx, prop, isReadonly);
+                isList = ((ValueTypeProperty)prop).IsList;
+            }
+            else if (prop is StructProperty)
+            {
+                isReadOnly = true;
+                isList = ((StructProperty)prop).IsList;
+            }
+            else if (prop is ObjectReferenceProperty)
+            {
+                isList = ((ObjectReferenceProperty)prop).IsList();
+            }
+
+            if (isList)
+            {
+                Interface.DataTypes.SimplePropertyListTemplate.Call(Host, ctx, prop);
             }
             else
             {
-                Interface.DataTypes.SimplePropertyListTemplate.Call(Host, ctx, prop);
+                Interface.DataTypes.SimplePropertyTemplate.Call(Host, ctx, prop, isReadOnly);
             }
         }
 

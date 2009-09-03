@@ -781,10 +781,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Module" Type="int" />
     <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="DeploymentRestrictions" Type="int" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
   </EntityType>
 	
   <EntityType Name="Auftrag">
@@ -792,11 +792,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Auftragsname" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="Auftragswert" Type="float" Nullable="true" />
     <Property Name="fk_Kunde" Type="int" />
     <Property Name="fk_Mitarbeiter" Type="int" />
     <Property Name="fk_Projekt" Type="int" />
+    <Property Name="Auftragsname" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="Auftragswert" Type="float" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="BaseParameter">
@@ -804,12 +804,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Method" Type="int" />
+    <Property Name="fk_Method_pos" Type="int" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsList" Type="bit" Nullable="false" />
     <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
-    <Property Name="fk_Method" Type="int" />
-    <Property Name="fk_Method_pos" Type="int" Nullable="true" />
     <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
@@ -918,11 +918,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ClassName" Type="nvarchar" MaxLength="51" Nullable="false" />
     <Property Name="fk_DefaultIcon" Type="int" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="51" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
     <Property Name="ShowIconInLists" Type="bit" Nullable="false" />
     <Property Name="ShowIdInLists" Type="bit" Nullable="false" />
     <Property Name="ShowNameInLists" Type="bit" Nullable="false" />
@@ -947,8 +947,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_Property" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="DoubleParameter">
@@ -977,8 +977,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="fk_Enumeration" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Value" Type="int" Nullable="false" />
@@ -1011,9 +1011,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Module" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IconFile" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
   </EntityType>
 	
   <EntityType Name="IntegerRangeConstraint">
@@ -1091,12 +1091,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="fk_ObjectClass" Type="int" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsDisplayable" Type="bit" Nullable="false" />
     <Property Name="MethodName" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
-    <Property Name="fk_ObjectClass" Type="int" />
   </EntityType>
 	
   <EntityType Name="MethodInvocation">
@@ -1104,12 +1104,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_Implementor" Type="int" />
     <Property Name="fk_InvokeOnObjectClass" Type="int" />
-    <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="fk_Method" Type="int" />
     <Property Name="fk_Module" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="MethodInvocationConstraint">
@@ -1195,6 +1195,8 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_ReferencedObjectClass" Type="int" />
+    <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ObjectReferenceProperty">
@@ -1224,8 +1226,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="From" Type="datetime" Nullable="false" />
     <Property Name="fk_Mitarbeiter" Type="int" />
+    <Property Name="From" Type="datetime" Nullable="false" />
     <Property Name="Thru" Type="datetime" Nullable="true" />
   </EntityType>
 	
@@ -1236,10 +1238,10 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_DefaultGridCellKind" Type="int" />
     <Property Name="fk_DefaultKind" Type="int" />
-    <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_PresentableModelRef" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Projekt">
@@ -1257,15 +1259,13 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="fk_ObjectClass" Type="int" />
+    <Property Name="fk_ValueModelDescriptor" Type="int" />
     <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="IsIndexed" Type="bit" Nullable="false" />
-    <Property Name="IsList" Type="bit" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
-    <Property Name="fk_ObjectClass" Type="int" />
     <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="fk_ValueModelDescriptor" Type="int" />
   </EntityType>
 	
   <EntityType Name="PropertyGroupKind">
@@ -1280,10 +1280,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_Implementor" Type="int" />
-    <Property Name="InvocationType" Type="int" Nullable="false" />
     <Property Name="fk_InvokeOnProperty" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="InvocationType" Type="int" Nullable="false" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
@@ -1294,9 +1294,9 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_A" Type="int" />
     <Property Name="fk_B" Type="int" />
+    <Property Name="fk_Module" Type="int" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_Module" Type="int" />
     <Property Name="Storage" Type="int" Nullable="false" />
     <Property Name="Verb" Type="nvarchar" MaxLength="4000" Nullable="false" />
   </EntityType>
@@ -1313,12 +1313,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Navigator" Type="int" />
+    <Property Name="fk_Type" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
     <Property Name="Multiplicity" Type="int" Nullable="false" />
-    <Property Name="fk_Navigator" Type="int" />
     <Property Name="RoleName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_Type" Type="int" />
   </EntityType>
 	
   <EntityType Name="SingleLineDataObjectKind">
@@ -1371,6 +1371,8 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_StructDefinition" Type="int" />
+    <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Task">
@@ -1378,11 +1380,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Projekt" Type="int" />
     <Property Name="Aufwand" Type="float" Nullable="true" />
     <Property Name="DatumBis" Type="datetime" Nullable="true" />
     <Property Name="DatumVon" Type="datetime" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="fk_Projekt" Type="int" />
   </EntityType>
 	
   <EntityType Name="Template">
@@ -1391,9 +1393,9 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_DisplayedTypeAssembly" Type="int" />
+    <Property Name="fk_VisualTree" Type="int" />
     <Property Name="DisplayedTypeFullName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="DisplayName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_VisualTree" Type="int" />
   </EntityType>
 	
   <EntityType Name="TestCustomObject">
@@ -1414,8 +1416,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="MyIntProperty" Type="int" Nullable="true" />
     <Property Name="fk_ObjectProp" Type="int" />
+    <Property Name="MyIntProperty" Type="int" Nullable="true" />
     <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="TestEnumProp" Type="int" Nullable="false" />
   </EntityType>
@@ -1433,9 +1435,9 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Assembly" Type="int" />
+    <Property Name="fk_Parent" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="fk_Parent" Type="int" />
   </EntityType>
 	
   <EntityType Name="TypeRefRefKind">
@@ -1450,6 +1452,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ViewDescriptor">
@@ -1458,9 +1462,9 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_ControlRef" Type="int" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_Kind" Type="int" />
     <Property Name="fk_Module" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Toolkit" Type="int" Nullable="false" />
   </EntityType>
 	
@@ -1469,9 +1473,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="fk_Method" Type="int" />
     <Property Name="fk_Property" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="WorkEffort">
@@ -1479,8 +1483,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="From" Type="datetime" Nullable="false" />
     <Property Name="fk_Mitarbeiter" Type="int" />
+    <Property Name="From" Type="datetime" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="400" Nullable="false" />
     <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="Thru" Type="datetime" Nullable="true" />

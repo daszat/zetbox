@@ -4,6 +4,7 @@ using System.Linq;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
 
@@ -27,25 +28,30 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
         
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
 this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  cls.ClassName , ")\">\r\n");
 this.WriteObjects("	    <MappingFragment StoreEntitySet=\"",  cls.ClassName , "\">\r\n");
 this.WriteObjects("	      <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
-#line 20 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
-foreach(var prop in cls.Properties.OfType<Property>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+#line 21 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
+foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.PropertyName))
 		{
 			ApplyScalarProperty(prop, "");
 		}
-
+		
+		foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+		{
+			ApplyScalarProperty(prop, "");
+		}
+		
 		foreach(var prop in cls.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
 		{
 			ApplyComplexProperty(prop, "");
 		}
 
-#line 30 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
+#line 36 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
 this.WriteObjects("	    </MappingFragment>\r\n");
 this.WriteObjects("      </EntityTypeMapping>\r\n");
-#line 33 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
+#line 39 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
 foreach(var subCls in cls.SubClasses.OrderBy(c => c.ClassName))
 	{
 		ApplyEntityTypeMapping(subCls);	

@@ -295,17 +295,18 @@ namespace Kistl.App.Base
 
             foreach (var iface in objClass.ImplementsInterfaces)
             {
-                foreach (var prop in iface.Properties)
+                // TODO: implement structs and ObjectReferencePlaceholderProperties too
+                foreach (var prop in iface.Properties.OfType<ValueTypeProperty>())
                 {
                     if (!objClass.Properties.Select(p => p.PropertyName).Contains(prop.PropertyName))
                     {
                         // Add Property
-                        var newProp = (Property)ctx.Create(prop.GetInterfaceType());
+                        var newProp = (ValueTypeProperty)ctx.Create(prop.GetInterfaceType());
                         objClass.Properties.Add(newProp);
                         newProp.PropertyName = prop.PropertyName;
                         newProp.CategoryTags = prop.CategoryTags;
                         newProp.Description = prop.Description;
-                        newProp.IsIndexed = prop.IsIndexed;
+                        newProp.HasPersistentOrder = prop.HasPersistentOrder;
                         newProp.IsList = prop.IsList;
                         // put the new property into the module of the class
                         newProp.Module = objClass.Module;

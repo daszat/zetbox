@@ -25,14 +25,14 @@
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = (prop.IsIndexed ? "EFValueListWrapper" : "EFValueCollectionWrapper");
+	string wrapperClass = (prop.HasPersistentOrder ? "EFValueListWrapper" : "EFValueCollectionWrapper");
 	
 	// the name of the EF association
 	string assocName = prop.GetAssociationName();
 	string targetRoleName = "CollectionEntry";
 
 	// which generic interface to use for the collection
-	string exposedListType = prop.IsIndexed ? "IList" : "ICollection";
+	string exposedListType = prop.HasPersistentOrder ? "IList" : "ICollection";
 
 	// which Kistl interface this is 
 	string thisInterface = prop.ObjectClass.ClassName;

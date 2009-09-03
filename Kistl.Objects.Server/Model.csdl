@@ -686,8 +686,6 @@
                         Relationship="Model.FK_Property_has_PropertyInvocation"
                         FromRole="InvokeOnProperty"
                         ToRole="Invocations" />
-    <Property Name="IsIndexed" Type="Boolean" Nullable="false" />
-    <Property Name="IsList" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Module__Implementation__"
                         Relationship="Model.FK_Property_has_Module"
                         FromRole="BaseProperty"
@@ -1028,6 +1026,8 @@
                         ToRole="DataType" />
   </EntityType>
   <EntityType Name="ObjectReferencePlaceholderProperty" BaseType="Model.Property" >
+    <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
+    <Property Name="IsList" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ReferencedObjectClass__Implementation__"
                         Relationship="Model.FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass"
                         FromRole="ObjectReferencePlaceholderProperty"
@@ -1063,6 +1063,8 @@
   <EntityType Name="Struct" BaseType="Model.DataType" >
   </EntityType>
   <EntityType Name="StructProperty" BaseType="Model.Property" >
+    <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
+    <Property Name="IsList" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="StructDefinition__Implementation__"
                         Relationship="Model.FK_StructProperty_has_Struct"
                         FromRole="StructProperty"
@@ -1073,6 +1075,8 @@
   <EntityType Name="TypeRefRefKind" BaseType="Model.ObjectRefKind" >
   </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" >
+    <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
+    <Property Name="IsList" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="WorkspaceKind" BaseType="Model.ControlKind" >
   </EntityType>

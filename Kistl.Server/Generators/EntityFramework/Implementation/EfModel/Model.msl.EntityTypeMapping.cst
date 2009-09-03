@@ -9,6 +9,7 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
@@ -17,11 +18,16 @@
 	    <MappingFragment StoreEntitySet="<%= cls.ClassName %>">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <%
-		foreach(var prop in cls.Properties.OfType<Property>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+		foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.PropertyName))
 		{
 			ApplyScalarProperty(prop, "");
 		}
-
+		
+		foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+		{
+			ApplyScalarProperty(prop, "");
+		}
+		
 		foreach(var prop in cls.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
 		{
 			ApplyComplexProperty(prop, "");

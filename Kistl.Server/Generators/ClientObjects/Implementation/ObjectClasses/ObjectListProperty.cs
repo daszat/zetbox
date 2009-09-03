@@ -17,7 +17,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Templates.Implementation.SerializationMembersList serializationList,
             ObjectReferenceProperty prop)
         {
-            Debug.Assert(prop.IsList);
+            Debug.Assert(prop.IsList());
 
             string name = prop.PropertyName;
             string wrapperClass = "OneNRelationCollection";

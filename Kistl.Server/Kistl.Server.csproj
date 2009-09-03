@@ -115,14 +115,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Generators\EntityFramework\Implementation\EfModel\Model.msl.CollectionEntryEntityTypeMapping.cs">
-      <DependentUpon>Model.msl.CollectionEntryEntityTypeMapping.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Generators\EntityFramework\Implementation\EfModel\Model.msl.CollectionEntryEntityTypeMapping.Designer.cs">
-      <DependentUpon>Model.msl.CollectionEntryEntityTypeMapping.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Generators\EntityFramework\Implementation\EfModel\Model.msl.cs">
       <DependentUpon>Model.msl.cst</DependentUpon>
     </Compile>
@@ -344,10 +336,6 @@
     <None Include="Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Model.ssdl.EntityTypeColumns.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Generators\EntityFramework\Implementation\EfModel\Model.msl.CollectionEntryEntityTypeMapping.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>Model.msl.CollectionEntryEntityTypeMapping.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst">
       <Generator>Arebis Template Processor</Generator>

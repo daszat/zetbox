@@ -16,49 +16,44 @@ namespace Kistl.Server.Generators.Extensions
             return prop.IsObjectReferencePropertyList() || prop.IsObjectReferencePropertySingle() || prop.IsValueTypePropertyList();
         }
 
-        public static bool IsListProperty(this Property prop)
-        {
-            return prop.IsList;
-        }
-
         public static bool IsValueTypePropertySingle(this Property prop)
         {
-            return prop is ValueTypeProperty && !prop.IsList;
+            return prop is ValueTypeProperty && !((ValueTypeProperty)prop).IsList;
         }
 
         public static bool IsValueTypePropertyList(this Property prop)
         {
-            return prop is ValueTypeProperty && prop.IsList;
+            return prop is ValueTypeProperty && ((ValueTypeProperty)prop).IsList;
         }
 
         public static bool IsEnumerationPropertySingle(this Property prop)
         {
-            return prop is EnumerationProperty && !prop.IsList;
+            return prop is EnumerationProperty && !((ValueTypeProperty)prop).IsList;
         }
 
         public static bool IsEnumerationPropertyPropertyList(this Property prop)
         {
-            return prop is EnumerationProperty && prop.IsList;
+            return prop is EnumerationProperty && ((ValueTypeProperty)prop).IsList;
         }
 
         public static bool IsObjectReferencePropertySingle(this Property prop)
         {
-            return prop is ObjectReferenceProperty && !prop.IsList;
+            return prop is ObjectReferenceProperty && !((ObjectReferenceProperty)prop).IsList();
         }
 
         public static bool IsObjectReferencePropertyList(this Property prop)
         {
-            return prop is ObjectReferenceProperty && prop.IsList;
+            return prop is ObjectReferenceProperty && ((ObjectReferenceProperty)prop).IsList();
         }
 
         public static bool IsStructPropertySingle(this Property prop)
         {
-            return prop is StructProperty && !prop.IsList;
+            return prop is StructProperty && !((StructProperty)prop).IsList;
         }
 
         public static bool IsStructPropertyPropertyList(this Property prop)
         {
-            return prop is StructProperty && prop.IsList;
+            return prop is StructProperty && ((StructProperty)prop).IsList;
         }
 
         public static bool NeedsPositionColumn(this Property prop)
@@ -90,9 +85,13 @@ namespace Kistl.Server.Generators.Extensions
                     isIndexed = true;
                 }
             }
-            else
+            else if (prop is ValueTypeProperty)
             {
-                isIndexed = prop.IsIndexed;
+                isIndexed = ((ValueTypeProperty)prop).HasPersistentOrder;
+            }
+            else if (prop is StructProperty)
+            {
+                isIndexed = ((StructProperty)prop).HasPersistentOrder;
             }
 
             if (isIndexed)

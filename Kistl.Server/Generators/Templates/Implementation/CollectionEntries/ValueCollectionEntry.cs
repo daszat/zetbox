@@ -47,7 +47,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override bool IsOrdered()
         {
-            return prop.IsIndexed;
+            return prop.HasPersistentOrder;
         }
 
         protected override void ApplyChangesFromBody()

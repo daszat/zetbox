@@ -13,10 +13,5 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
         {
             Implementation.EfModel.ModelMslEntityTypeMapping.Call(Host, ctx, obj);
         }
-
-        protected virtual void ApplyCollectionEntryEntityTypeMapping(Property listProp)
-        {
-            Implementation.EfModel.ModelMslCollectionEntryEntityTypeMapping.Call(Host, ctx, listProp);
-        }
     }
 }

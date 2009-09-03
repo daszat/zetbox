@@ -33,6 +33,108 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Whether or not the list has a persistent ordering of elements
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual bool HasPersistentOrder
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _HasPersistentOrder;
+                if (OnHasPersistentOrder_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnHasPersistentOrder_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_HasPersistentOrder != value)
+                {
+                    var __oldValue = _HasPersistentOrder;
+                    var __newValue = value;
+                    if(OnHasPersistentOrder_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnHasPersistentOrder_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
+                    _HasPersistentOrder = __newValue;
+                    NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
+                    if(OnHasPersistentOrder_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnHasPersistentOrder_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private bool _HasPersistentOrder;
+		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PostSetter;
+        /// <summary>
+        /// Whether or not this property placeholder is list valued
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual bool IsList
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _IsList;
+                if (OnIsList_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnIsList_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsList != value)
+                {
+                    var __oldValue = _IsList;
+                    var __newValue = value;
+                    if(OnIsList_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsList_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("IsList", __oldValue, __newValue);
+                    _IsList = __newValue;
+                    NotifyPropertyChanged("IsList", __oldValue, __newValue);
+                    if(OnIsList_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsList_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private bool _IsList;
+		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PostSetter;
+        /// <summary>
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
     /*
@@ -176,6 +278,8 @@ namespace Kistl.App.Base
 			var otherImpl = (ObjectReferencePlaceholderProperty__Implementation__)obj;
 			var me = (ObjectReferencePlaceholderProperty)this;
 
+			me.HasPersistentOrder = other.HasPersistentOrder;
+			me.IsList = other.IsList;
 			this._fk_ReferencedObjectClass = otherImpl._fk_ReferencedObjectClass;
 		}
 
@@ -233,6 +337,24 @@ namespace Kistl.App.Base
 		{
 			switch(propertyName)
 			{
+				case "HasPersistentOrder":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("7e52aa2a-aa3a-4f5b-8171-c6c2f364108b")).Constraints
+						.Where(c => !c.IsValid(this, this.HasPersistentOrder))
+						.Select(c => c.GetErrorText(this, this.HasPersistentOrder))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "IsList":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("52692870-0bd4-47b6-99dc-eb8bf4238f24")).Constraints
+						.Where(c => !c.IsValid(this, this.IsList))
+						.Select(c => c.GetErrorText(this, this.IsList))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "ReferencedObjectClass":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("41da7ae6-aff7-44cf-83be-6150bf7578fd")).Constraints
@@ -270,6 +392,8 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
+            BinarySerializer.ToStream(this._IsList, binStream);
             BinarySerializer.ToStream(ReferencedObjectClass != null ? ReferencedObjectClass.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(ReferencedObjectClass);
@@ -280,6 +404,8 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._HasPersistentOrder, binStream);
+            BinarySerializer.FromStream(out this._IsList, binStream);
             BinarySerializer.FromStream(out this._fk_ReferencedObjectClass, binStream);
         }
 
@@ -287,6 +413,8 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.ToStream(ReferencedObjectClass != null ? ReferencedObjectClass.ID : (int?)null, xml, "ReferencedObjectClass", "Kistl.App.Base");
         }
 
@@ -294,6 +422,8 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ReferencedObjectClass, xml, "ReferencedObjectClass", "Kistl.App.Base");
         }
 
@@ -301,6 +431,10 @@ namespace Kistl.App.Base
         {
             
             base.Export(xml, modules);
+    
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
+    
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ReferencedObjectClass != null ? ReferencedObjectClass.ExportGuid : (Guid?)null, xml, "ReferencedObjectClass", "Kistl.App.Base");
         }
 
@@ -308,6 +442,8 @@ namespace Kistl.App.Base
         {
             
             base.MergeImport(xml);
+            XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ReferencedObjectClass, xml, "ReferencedObjectClass", "Kistl.App.Base");
         }
 

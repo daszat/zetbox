@@ -24,9 +24,9 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
             string name = prop.PropertyName;
             string backingName = "_" + name + "Wrapper";
-            string backingCollectionType = (prop.IsIndexed ? "ClientValueListWrapper" : "ClientValueCollectionWrapper");
+            string backingCollectionType = (prop.HasPersistentOrder ? "ClientValueListWrapper" : "ClientValueCollectionWrapper");
 
-            string exposedCollectionInterface = prop.IsIndexed ? "IList" : "ICollection";
+            string exposedCollectionInterface = prop.HasPersistentOrder ? "IList" : "ICollection";
 
             string thisInterface = prop.ObjectClass.ClassName;
             string referencedType = prop.ReferencedTypeAsCSharp();

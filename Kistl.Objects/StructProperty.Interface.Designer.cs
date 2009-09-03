@@ -14,6 +14,20 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// Whether or not the list has a persistent ordering of elements
+        /// </summary>
+		bool HasPersistentOrder {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Whether or not this struct property is list valued
+        /// </summary>
+		bool IsList {
+			get;
+			set;
+		}
+        /// <summary>
         /// Definition of this Struct
         /// </summary>
 		Kistl.App.Base.Struct StructDefinition {

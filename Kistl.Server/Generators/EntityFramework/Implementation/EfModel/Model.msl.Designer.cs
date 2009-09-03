@@ -185,7 +185,7 @@ this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  prop.GetCollect
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"B\" ColumnName=\"",  prop.PropertyName , "\" />\r\n");
 #line 159 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"
-if (prop.IsIndexed)
+if (prop.HasPersistentOrder)
 		{
 
 #line 162 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.cst"

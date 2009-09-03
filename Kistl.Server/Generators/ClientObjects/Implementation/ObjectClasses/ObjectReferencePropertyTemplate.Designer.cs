@@ -140,7 +140,7 @@ this.WriteObjects("				//       before the local value is changed\r\n");
 this.WriteObjects("				if (__oldValue != null)\r\n");
 this.WriteObjects("				{\r\n");
 #line 111 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
-if (otherProp.IsList)
+if (otherProp.IsList())
         {
 			// TODO: check whether __oldValue is loaded before potentially triggering a DB Call
 
@@ -164,7 +164,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("                if (__newValue != null)\r\n");
 this.WriteObjects("                {\r\n");
 #line 132 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
-if (otherProp.IsList)
+if (otherProp.IsList())
         {
 
 #line 135 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"

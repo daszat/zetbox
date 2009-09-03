@@ -250,7 +250,7 @@ this.WriteObjects("                        ToRole=\"",  prop.ObjectClass.ClassNa
 this.WriteObjects("    <!-- B -->\r\n");
 this.WriteObjects("    ",  PlainPropertyDefinitionFromValueType(prop, "B") , "\r\n");
 #line 211 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
-if (prop.IsIndexed)
+if (prop.HasPersistentOrder)
         {
 
 #line 214 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.csdl.cst"
