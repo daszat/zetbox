@@ -31,21 +31,8 @@ public partial class View_WorkspaceView : Kistl.Client.ASPNET.Toolkit.View.Works
     {
         get { return listInstances; }
     }
-    protected override AjaxDataControls.DataList listRecentObjectsCtrl
-    {
-        get { return listRecentObjects; }
-    }
     protected override Control containerCtrl
     {
         get { return container; }
     }
-    protected override AjaxControlToolkit.TabContainer tabObjectsControl
-    {
-        get { return tabObjects; }
-    }
-    protected override HiddenField hdObjectsControl
-    {
-        get { return hdObjects; }
-    }
-
 }

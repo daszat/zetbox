@@ -29,6 +29,8 @@
             <a href="#" commandName="item">Select</a> <span id="text"></span>
         </ItemTemplate>
     </adc:DataList>
+</div>
+<div style="float: left; min-width: 600px; border: solid 1px black;">
     <div id="divLoadingInstances" style="display: none;">
         <strong>Instances:</strong>
         <br />
@@ -43,27 +45,4 @@
             <a href="#" commandName="item">Select</a> <span id="text"></span>
         </ItemTemplate>
     </adc:DataList>
-    <div>
-        <adc:DataList ID="listRecentObjects" runat="server" DataKeyField="ID" CssClass="ItemTable">
-            <HeaderTemplate>
-                <strong>Recent Objects</strong>
-            </HeaderTemplate>
-            <ItemTemplate>
-                <%-- Attention! Reformating could change the attribute "commandName" to lowercase! --%>
-                <a href="#" commandName="item">Select</a> <span id="text"></span>
-            </ItemTemplate>
-        </adc:DataList>
-    </div>
-</div>
-<div style="float: left; min-width: 600px; border: solid 1px black;">
-    <asp:UpdatePanel ID="WorkspaceUpdatePanel" runat="server">
-        <ContentTemplate>
-            <asp:HiddenField ID="hdObjects" runat="server" />
-            <ajaxToolkit:TabContainer ID="tabObjects" runat="server" ScrollBars="Auto">
-            </ajaxToolkit:TabContainer>
-        </ContentTemplate>
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="JavascriptRenderer" />
-        </Triggers>
-    </asp:UpdatePanel>
 </div>

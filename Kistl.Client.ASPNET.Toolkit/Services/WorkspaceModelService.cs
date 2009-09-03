@@ -39,8 +39,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         [OperationContract]
         public List<JavaScriptObjectMoniker> GetInstances(int objectClassID)
         {
-            // TODO: Das geht so nicht mit dem Model
-            // Jetzt selbst implementieren
+            // Dont use model - directly selecting is faster
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var objClass = ctx.Find<ObjectClass>(objectClassID);

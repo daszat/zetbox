@@ -14,6 +14,7 @@ using System.Web.UI.HtmlControls;
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
+    [ControlLocation("~/View/DataObjectReferenceView.ascx")]
     public abstract class DataObjectReferenceView : System.Web.UI.UserControl, IView, IScriptControl
     {
         protected ObjectReferenceModel Model { get; private set; }

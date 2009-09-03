@@ -8,6 +8,24 @@ namespace Kistl.Client.ASPNET.Toolkit
 
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
+    using Kistl.App.Extensions;
+    using System.Web;
+    using System.Web.UI;
+
+    [AttributeUsage(AttributeTargets.Class)]
+    public class ControlLocation : Attribute
+    {
+        public ControlLocation()
+        {
+        }
+
+        public ControlLocation(string virtPath)
+        {
+            VirtualPath = virtPath;
+        }
+
+        public string VirtualPath { get; set; }
+    }
 
     /// <summary>
     /// The ASP.NET implementation of a <see cref="ModelFactory"/>. Most 
@@ -27,6 +45,22 @@ namespace Kistl.Client.ASPNET.Toolkit
         protected override Kistl.App.GUI.Toolkit Toolkit
         {
             get { return Kistl.App.GUI.Toolkit.ASPNET; }
+        }
+
+        protected override IView CreateView(Kistl.App.GUI.ViewDescriptor vDesc)
+        {
+            var type = vDesc.ControlRef.AsType(true);
+            var loc = (ControlLocation)type.GetCustomAttributes(typeof(ControlLocation), true).FirstOrDefault();
+            if (loc != null)
+            {
+                var page = HttpContext.Current.CurrentHandler as Page;
+                if (page == null) throw new InvalidOperationException("Unable to create a View while not processing a System.Web.UI.Page");
+                return (IView)page.LoadControl(loc.VirtualPath);
+            }
+            else
+            {
+                return base.CreateView(vDesc);
+            }
         }
 
         protected override void ShowInView(PresentableModel mdl, IView view, bool activate)

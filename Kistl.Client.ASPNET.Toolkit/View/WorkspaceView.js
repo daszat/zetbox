@@ -12,7 +12,6 @@ Kistl.Client.ASPNET.View.WorkspaceView = function(element) {
     this._listModules = null;
     this._listObjectClasses = null;
     this._listInstances = null;
-    this._listRecentObjects = null;
     this._tabObjectsControl = null;
 
     // Handler
@@ -41,7 +40,6 @@ Kistl.Client.ASPNET.View.WorkspaceView.prototype = {
         this._listModules.add_itemDataBound(this._onOnItemDataBoundHandler);
         this._listObjectClasses.add_itemDataBound(this._onOnItemDataBoundHandler);
         this._listInstances.add_itemDataBound(this._onOnItemDataBoundHandler);
-        this._listRecentObjects.add_itemDataBound(this._onOnItemDataBoundHandler);
 
         // Service Event Handler
         this._onServiceCompleted_GetModulesHandler = Function.createDelegate(this, this._onServiceCompleted_GetModules);
@@ -83,12 +81,6 @@ Kistl.Client.ASPNET.View.WorkspaceView.prototype = {
     set_ListInstances: function(val) {
         this._listInstances = val;
     },
-    get_ListRecentObjects: function() {
-        return this._listRecentObjects;
-    },
-    set_ListRecentObjects: function(val) {
-        this._listRecentObjects = val;
-    },    
     // Methods
     BindModules: function() {
         $get("divLoadingModules").style.display = "block";

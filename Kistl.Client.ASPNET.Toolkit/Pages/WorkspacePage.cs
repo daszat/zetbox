@@ -18,21 +18,15 @@ using Kistl.Client;
 using Kistl.Client.ASPNET.Toolkit;
 using Kistl.Client.ASPNET.Toolkit.View;
 using Kistl.Client.Presentables;
+using Kistl.Client.GUI;
 
 namespace Kistl.Client.ASPNET.Toolkit.Pages
 {
-    // TODO: Move to David
-    public interface IWorkspaceView
-    {
-        void ShowObject(DataObjectModel obj);
-    }
-
-    public abstract class WorkspacePage : System.Web.UI.Page , IWorkspaceView
+    public abstract class WorkspacePage : System.Web.UI.Page
     {
         protected abstract Control ctrlMainContent { get; }
 
         protected WorkspaceModel Workspace;
-        protected IWorkspaceView Ctrl;
 
         public WorkspacePage()
         {
@@ -43,14 +37,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         {
             Workspace = GuiApplicationContext.Current.Factory
                 .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
-            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(Workspace);
-            Ctrl = (IWorkspaceView)loader.LoadControl(this);
-            ctrlMainContent.Controls.Add((Control)Ctrl);
-        }
-
-        public void ShowObject(DataObjectModel obj)
-        {
-            Ctrl.ShowObject(obj);
+            ctrlMainContent.Controls.Add((Control)GuiApplicationContext.Current.Factory.CreateDefaultView(Workspace));
         }
     }
 }

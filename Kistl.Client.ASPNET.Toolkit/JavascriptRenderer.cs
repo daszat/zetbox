@@ -88,15 +88,15 @@ namespace Kistl.Client.ASPNET.Toolkit
                 case actionShowObject:
                     {
                         DataObjectModel obj = hdArgument.FromJSON(KistlContextManagerModule.KistlContext);
-                        if (HttpContext.Current.CurrentHandler is IWorkspaceView)
-                        {
-                            IWorkspaceView page = (IWorkspaceView)HttpContext.Current.CurrentHandler;
-                            page.ShowObject(obj);
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException("ShowObject can only be executed on a IWorkspaceView Page");
-                        }
+                        //if (HttpContext.Current.CurrentHandler is IWorkspaceView)
+                        //{
+                        //    IWorkspaceView page = (IWorkspaceView)HttpContext.Current.CurrentHandler;
+                        //    page.ShowObject(obj);
+                        //}
+                        //else
+                        //{
+                        //    throw new InvalidOperationException("ShowObject can only be executed on a IWorkspaceView Page");
+                        //}
                         break;
                     }
                 default:

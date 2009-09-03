@@ -9,6 +9,7 @@ using System.Web.UI;
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
+    [ControlLocation("~/View/DataObjectFullView.ascx")]
     public abstract class DataObjectFullView : System.Web.UI.UserControl, IView
     {
         protected DataObjectModel Model { get; private set; }
@@ -33,8 +34,8 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             PresentableModel mdl = (PresentableModel)e.Item.DataItem;
             Control divPlaceHolder = e.Item.FindControl("divPlaceHolder");
 
-            var loader = (IViewLoader)GuiApplicationContext.Current.Factory.CreateDefaultView(mdl);
-            divPlaceHolder.Controls.Add(loader.LoadControl(Page));
+            var ctrl = (IView)GuiApplicationContext.Current.Factory.CreateDefaultView(mdl);
+            divPlaceHolder.Controls.Add((Control)ctrl);
         }
 
         public void SetModel(PresentableModel mdl)

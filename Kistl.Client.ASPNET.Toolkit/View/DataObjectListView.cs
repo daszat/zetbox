@@ -14,6 +14,7 @@ using Kistl.API;
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
+    [ControlLocation("~/View/DataObjectListView.ascx")]
     public abstract class DataObjectListView : System.Web.UI.UserControl, IView, IScriptControl
     {
         protected abstract Label lbCtrl {get;}
