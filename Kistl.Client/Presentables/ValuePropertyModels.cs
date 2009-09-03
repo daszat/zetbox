@@ -8,6 +8,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.App.GUI;
 
 namespace Kistl.Client.Presentables
@@ -254,7 +255,7 @@ namespace Kistl.Client.Presentables
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
-            this.AllowNullInput = prop.IsNullable;
+            this.AllowNullInput = prop.IsNullable();
         }
 
         #region Public Interface
@@ -401,7 +402,7 @@ namespace Kistl.Client.Presentables
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
-            this.AllowNullInput = prop.IsNullable;
+            this.AllowNullInput = prop.IsNullable();
         }
 
         #region Public Interface

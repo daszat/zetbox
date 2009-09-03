@@ -24,7 +24,7 @@ impl.PropertyName = "ImplementsInterfaces";
 impl.GetReferencedObjectClass() = interf;
 impl.ObjectClass = cls;
 impl.IsIndexed = false;
-impl.IsNullable = true;
+impl.Constraints.Add(ctx.Create<NotNullableConstraint>());
 impl.IsList = true;
 
 

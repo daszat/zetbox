@@ -58,16 +58,7 @@ namespace Kistl.App.Extensions
             var rel = relEnd.GetParent();
             var otherEnd = rel.GetOtherEnd(relEnd);
 
-            switch (otherEnd.Multiplicity)
-            {
-                case Multiplicity.ZeroOrOne:
-                    return true;
-                case Multiplicity.One:
-                case Multiplicity.ZeroOrMore:
-                    return false;
-                default:
-                    throw new InvalidOperationException("Property has unknown RelationEnd.Multiplicity");
-            }
+            return otherEnd.IsNullable();
         }
     }
 }

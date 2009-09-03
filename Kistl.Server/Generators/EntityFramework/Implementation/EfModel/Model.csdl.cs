@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
@@ -50,7 +51,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
             }
 
             return String.Format("<Property Name=\"{0}\" Type=\"{1}\" Nullable=\"{2}\" {3}/>",
-                name, type, prop.IsNullable.ToString().ToLowerInvariant(), maxlength);
+                name, type, prop.IsNullable().ToString().ToLowerInvariant(), maxlength);
         }
 
         protected virtual void ApplyEntityTypeFieldDefs(IEnumerable<Property> properties)

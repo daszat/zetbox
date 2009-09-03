@@ -197,7 +197,8 @@ namespace Kistl.Server.SchemaManagement
             if (relEnd.Navigator != null && relEnd.Navigator.HasStorage())
             {
                 string tblName = relEnd.Type.TableName;
-                string refTblName = rel.GetOtherEnd(relEnd).Type.TableName;
+                RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+                string refTblName = otherEnd.Type.TableName;
                 string colName = Construct.ForeignKeyColumnName(relEnd.Navigator);
                 string assocName = rel.GetRelationAssociationName(role);
 
@@ -209,8 +210,7 @@ namespace Kistl.Server.SchemaManagement
                         db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
                     }
                 }
-                // TODO: Dont use Navigator IsNullable! Check Multiplicity on RelationEnd. But first check Multiplicity in Schema
-                CheckColumn(relEnd.Type.TableName, Construct.ForeignKeyColumnName(relEnd.Navigator), System.Data.DbType.Int32, 0, relEnd.Navigator.IsNullable);
+                CheckColumn(relEnd.Type.TableName, Construct.ForeignKeyColumnName(relEnd.Navigator), System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             }
         }
 
@@ -218,33 +218,37 @@ namespace Kistl.Server.SchemaManagement
         {
             string assocName = rel.GetAssociationName();
 
-            ObjectReferenceProperty nav = null;
-            string tblName = "";
-            string refTblName = "";
-            bool isIndexed = false;
-            if (rel.A.Navigator != null && rel.A.Navigator.HasStorage())
+            RelationEnd relEnd, otherEnd;
+
+            switch (rel.Storage.Value)
             {
-                nav = rel.A.Navigator;
-                tblName = rel.A.Type.TableName;
-                refTblName = rel.B.Type.TableName;
-                isIndexed = rel.NeedsPositionStorage(RelationEndRole.A);
+                case StorageType.MergeIntoA:
+                    relEnd = rel.A;
+                    otherEnd = rel.B;
+                    break;
+                case StorageType.MergeIntoB:
+                    otherEnd = rel.A;
+                    relEnd = rel.B;
+                    break;
+                default:
+                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage.Value);
+                    return;
             }
-            else if (rel.B.Navigator != null && rel.B.Navigator.HasStorage())
-            {
-                nav = rel.B.Navigator;
-                tblName = rel.B.Type.TableName;
-                refTblName = rel.A.Type.TableName;
-                isIndexed = rel.NeedsPositionStorage(RelationEndRole.B);
-            }
+
+            ObjectReferenceProperty nav = relEnd.Navigator;
+            string tblName = relEnd.Type.TableName;
+            string refTblName = otherEnd.Type.TableName;
+            bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
 
             if (nav == null)
             {
-                report.WriteLine("  ** Warning: Relation has no Navigator");
+                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator", assocName);
                 return;
             }
 
             string colName = Construct.ForeignKeyColumnName(nav);
             string indexName = Construct.ListPositionColumnName(nav);
+
             if (!db.CheckFKConstraintExists(assocName))
             {
                 report.WriteLine("  ** Warning: FK Constraint '{0}' is missing", assocName);
@@ -254,10 +258,10 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, nav.IsNullable);
+            CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             if (isIndexed)
             {
-                CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, nav.IsNullable);
+                CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             }
             if (!isIndexed && db.CheckColumnExists(tblName, indexName))
             {
@@ -456,7 +460,7 @@ namespace Kistl.Server.SchemaManagement
                 string tblName = objClass.TableName;
                 string colName = Construct.NestedColumnName(prop, prefix);
                 report.WriteLine("    {0}", colName);
-                CheckColumn(tblName, colName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).Length : 0, prop.IsNullable);
+                CheckColumn(tblName, colName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).Length : 0, prop.IsNullable());
             }
 
             foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList && p.HasStorage()))

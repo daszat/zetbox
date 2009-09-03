@@ -62,7 +62,7 @@ namespace Kistl.Client.Presentables
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
-            //AllowNullInput = prop.IsNullable;
+            //AllowNullInput = prop.IsNullable();
         }
 
         #region Public Interface and IReadOnlyValueModel<IList<TValue>> Members

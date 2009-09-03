@@ -20,7 +20,7 @@ namespace Kistl.Client.Presentables
             IDataObject referenceHolder, ObjectReferenceProperty prop)
             : base(appCtx, dataCtx, referenceHolder, prop)
         {
-            AllowNullInput = prop.IsNullable;
+            AllowNullInput = prop.IsNullable();
         }
 
         #region Public Interface

@@ -47,5 +47,10 @@ namespace Kistl.App.Extensions
             var otherEnd = rel.GetOtherEnd(relEnd);
             return otherEnd.Type;
         }
+
+        public static bool IsNullable(this RelationEnd relEnd)
+        {
+            return relEnd.Multiplicity.LowerBound() == 0;
+        }
     }
 }

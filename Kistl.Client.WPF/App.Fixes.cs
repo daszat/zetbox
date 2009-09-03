@@ -16,53 +16,6 @@ namespace Kistl.Client.WPF
     public partial class App
     {
         /// <summary>
-        /// Creates and deletes NotNullableConstraints according to the Property.IsNullable flag.
-        /// </summary>
-        private static void FixNotNullableConstraints()
-        {
-            using (Logging.Log.TraceMethodCall("Fixing NotNullableConstraints"))
-            {
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    // Apply a NotNullableConstraint as appropriate
-                    foreach (var prop in ctx.GetQuery<Property>())
-                    {
-                        var currentNotNullableConstraint = prop.Constraints.OfType<NotNullableConstraint>().SingleOrDefault();
-                        bool hasNullableConstraint = currentNotNullableConstraint != null;
-                        if (prop.IsNullable && hasNullableConstraint)
-                        {
-                            prop.Constraints.Remove(currentNotNullableConstraint);
-                            ctx.Delete(currentNotNullableConstraint);
-                            System.Console.Out.WriteLine("Removed obsolete NotNullableConstraint");
-                        }
-                        else if (!prop.IsNullable && !hasNullableConstraint)
-                        {
-                            prop.Constraints.Add(ctx.Create<NotNullableConstraint>());
-                            System.Console.Out.WriteLine("Added missing NotNullableConstraint");
-                        }
-                    }
-
-                    // synchronize Stringproperty's Length
-                    foreach (var prop in ctx.GetQuery<StringProperty>())
-                    {
-                        var currentStringRangeConstraint = prop.Constraints.OfType<StringRangeConstraint>().SingleOrDefault();
-
-                        if (currentStringRangeConstraint == null)
-                        {
-                            currentStringRangeConstraint = ctx.Create<StringRangeConstraint>();
-                            currentStringRangeConstraint.MinLength = 0;
-                            prop.Constraints.Add(currentStringRangeConstraint);
-                        }
-
-                        currentStringRangeConstraint.MaxLength = prop.Length;
-                    }
-
-                    ctx.SubmitChanges();
-                }
-            }
-        }
-
-        /// <summary>
         /// Fix broken TypeRefs.
         /// </summary>
         private static void FixupTypeRefParents()

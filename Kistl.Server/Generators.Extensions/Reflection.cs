@@ -3,7 +3,9 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Server.Generators.Extensions
 {
@@ -60,27 +62,27 @@ namespace Kistl.Server.Generators.Extensions
         {
             if (prop is BoolProperty)
             {
-                return "bool" + (prop.IsNullable ? "?" : "");
+                return "bool" + (prop.IsNullable() ? "?" : "");
             }
             else if (prop is IntProperty)
             {
-                return "int" + (prop.IsNullable ? "?" : "");
+                return "int" + (prop.IsNullable() ? "?" : "");
             }
             else if (prop is DoubleProperty)
             {
-                return "double" + (prop.IsNullable ? "?" : "");
+                return "double" + (prop.IsNullable() ? "?" : "");
             }
             else if (prop is DateTimeProperty)
             {
-                return "DateTime" + (prop.IsNullable ? "?" : "");
+                return "DateTime" + (prop.IsNullable() ? "?" : "");
             }
             else if (prop is GuidProperty)
             {
-                return "Guid" + (prop.IsNullable ? "?" : "");
+                return "Guid" + (prop.IsNullable() ? "?" : "");
             }
             else if (prop is EnumerationProperty)
             {
-                return prop.GetPropertyTypeString() + (prop.IsNullable ? "?" : "");
+                return prop.GetPropertyTypeString() + (prop.IsNullable() ? "?" : "");
             }
             else if (prop is StringProperty)
             {
@@ -97,24 +99,20 @@ namespace Kistl.Server.Generators.Extensions
             string result;
             if (param is BoolParameter)
             {
-                result = "bool"; // +(param.IsNullable ? "?" : "");
+                result = "bool"; 
             }
             else if (param is IntParameter)
             {
-                result = "int"; // + (param.IsNullable ? "?" : "");
+                result = "int"; 
             }
             else if (param is DoubleParameter)
             {
-                result = "double"; // + (param.IsNullable ? "?" : "");
+                result = "double"; 
             }
             else if (param is DateTimeParameter)
             {
-                result = "DateTime"; // + (param.IsNullable ? "?" : "");
+                result = "DateTime";
             }
-            //else if (param is EnumerationParameter)
-            //{
-            //    result = param.GetPropertyTypeString(); // + (param.IsNullable ? "?" : "");
-            //}
             else if (param is StringParameter)
             {
                 result = "string";

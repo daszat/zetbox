@@ -9,25 +9,18 @@ namespace Kistl.App.Extensions
 {
     public static class MultiplicityExtensions
     {
-        public static Multiplicity ToMultiplicity(this Property prop)
+        public static int LowerBound(this Multiplicity m)
         {
-            if (prop.IsList && prop.IsNullable)
+            switch (m)
             {
-                return Multiplicity.ZeroOrMore;
+                case Multiplicity.One:
+                    return 1;
+                case Multiplicity.ZeroOrOne:
+                case Multiplicity.ZeroOrMore:
+                    return 0;
+                default:
+                    throw new ArgumentOutOfRangeException("m", "unknown value");
             }
-            else if (prop.IsList && !prop.IsNullable)
-            {
-                throw new InvalidOperationException();
-            }
-            else if (!prop.IsList && prop.IsNullable)
-            {
-                return Multiplicity.ZeroOrOne;
-            }
-            else if (!prop.IsList && !prop.IsNullable)
-            {
-                return Multiplicity.One;
-            }
-            throw new InvalidOperationException();
         }
 
         public static int UpperBound(this Multiplicity m)

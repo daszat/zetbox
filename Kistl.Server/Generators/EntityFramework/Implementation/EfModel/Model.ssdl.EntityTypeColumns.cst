@@ -9,6 +9,7 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
@@ -48,7 +49,7 @@
 			if (p.IsValueTypePropertySingle())
 			{
 				// must have one space at the end
-				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable.ToString().ToLowerInvariant());
+				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable().ToString().ToLowerInvariant());
 			}
 %>
     <Property Name="<%= propertyName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= nullableAttr %>/>

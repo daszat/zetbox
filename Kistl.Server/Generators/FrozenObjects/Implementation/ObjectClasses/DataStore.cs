@@ -35,7 +35,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             {
                 // TODO: Klären, ob das in der ersten Lesung OK ist
                 // Wenn eine Property gerade hinzugefügt wurde, kann der Frozen Context nicht mit Werten befüllt werden.
-                if (prop is ValueTypeProperty && !prop.IsNullable)
+                if (prop is ValueTypeProperty && !prop.IsNullable())
                     return "default(" + prop.GetPropertyTypeString() + ")";
                 else
                     return "null";

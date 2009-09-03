@@ -21,7 +21,7 @@ moduleCls.TableName = "Modules";
 var assemblies = ctx.Create<ObjectReferenceProperty>();
 assemblies.PropertyName = "Assemblies";
 assemblies.IsIndexed = false;
-assemblies.IsNullable = true;
+assemblies.Constraints.Add(ctx.Create<NotNullableConstraint>());
 assemblies.IsList = true;
 assemblies.ObjectClass = moduleCls;
 assemblies.GetReferencedObjectClass() = assemblyCls;
@@ -29,7 +29,6 @@ assemblies.GetReferencedObjectClass() = assemblyCls;
 // 70       
 var module = ctx.Create<ObjectReferenceProperty>();
 module.IsIndexed = false;
-module.IsNullable = false;
 module.IsList = false;
 module.PropertyName = "Module";
 assemblies.ObjectClass = assemblyCls;

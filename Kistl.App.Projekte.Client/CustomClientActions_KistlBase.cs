@@ -307,7 +307,6 @@ namespace Kistl.App.Base
                         newProp.Description = prop.Description;
                         newProp.IsIndexed = prop.IsIndexed;
                         newProp.IsList = prop.IsList;
-                        newProp.IsNullable = prop.IsNullable;
                         // put the new property into the module of the class
                         newProp.Module = objClass.Module;
                         newProp.ValueModelDescriptor = prop.ValueModelDescriptor;

@@ -125,7 +125,7 @@ namespace Kistl.Server.SchemaManagement
         #region NewValueTypeProperty nullable
         public bool IsNewValueTypePropertyNullable(ValueTypeProperty prop)
         {
-            return prop.IsNullable && savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
+            return prop.IsNullable() && savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
         }
         public void DoNewValueTypePropertyNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
@@ -139,7 +139,7 @@ namespace Kistl.Server.SchemaManagement
         #region NewValueTypeProperty not nullable
         public bool IsNewValueTypePropertyNotNullable(ValueTypeProperty prop)
         {
-            return !prop.IsNullable && savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
+            return !prop.IsNullable() && savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
         }
         public void DoNewValueTypePropertyNotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
@@ -225,26 +225,33 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
             report.WriteLine("  Create 1:N Relation Position Storage: {0}", assocName);
 
-            ObjectReferenceProperty nav = null;
-            string tblName = "";
-            if (rel.A.Navigator != null && rel.A.Navigator.HasStorage())
+            RelationEnd relEnd, otherEnd;
+
+            switch (rel.Storage.Value)
             {
-                nav = rel.A.Navigator;
-                tblName = rel.A.Type.TableName;
-            }
-            else if (rel.B.Navigator != null && rel.B.Navigator.HasStorage())
-            {
-                nav = rel.B.Navigator;
-                tblName = rel.B.Type.TableName;
+                case StorageType.MergeIntoA:
+                    relEnd = rel.A;
+                    otherEnd = rel.B;
+                    break;
+                case StorageType.MergeIntoB:
+                    otherEnd = rel.A;
+                    relEnd = rel.B;
+                    break;
+                default:
+                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage.Value);
+                    return;
             }
 
+            ObjectReferenceProperty nav = relEnd.Navigator;
+            string tblName = relEnd.Type.TableName;
+            
             if (nav == null)
             {
-                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator", assocName);
+                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator on the storage side", assocName);
                 return;
             }
 
-            db.CreateColumn(tblName, Construct.ListPositionColumnName(nav), System.Data.DbType.Int32, 0, nav.IsNullable);
+            db.CreateColumn(tblName, Construct.ListPositionColumnName(nav), System.Data.DbType.Int32, 0, otherEnd.IsNullable());
         }
         #endregion
 
@@ -340,24 +347,27 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
             report.WriteLine("  New 1:N Relation: {0}", assocName);
 
-            ObjectReferenceProperty nav = null;
-            string tblName = "";
-            string refTblName = "";
-            bool isIndexed = false;
-            if (rel.A.Navigator != null && rel.A.Navigator.HasStorage())
+            RelationEnd relEnd, otherEnd;
+
+            switch (rel.Storage.Value)
             {
-                nav = rel.A.Navigator;
-                tblName = rel.A.Type.TableName;
-                refTblName = rel.B.Type.TableName;
-                isIndexed = rel.NeedsPositionStorage(RelationEndRole.A);
+                case StorageType.MergeIntoA:
+                    relEnd = rel.A;
+                    otherEnd = rel.B;
+                    break;
+                case StorageType.MergeIntoB:
+                    otherEnd = rel.A;
+                    relEnd = rel.B;
+                    break;
+                default:
+                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage.Value);
+                    return;
             }
-            else if (rel.B.Navigator != null && rel.B.Navigator.HasStorage())
-            {
-                nav = rel.B.Navigator;
-                tblName = rel.B.Type.TableName;
-                refTblName = rel.A.Type.TableName;
-                isIndexed = rel.NeedsPositionStorage(RelationEndRole.B);
-            }
+
+            ObjectReferenceProperty nav = relEnd.Navigator;
+            string tblName = relEnd.Type.TableName;
+            string refTblName = otherEnd.Type.TableName;
+            bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
 
             if (nav == null)
             {
@@ -366,12 +376,14 @@ namespace Kistl.Server.SchemaManagement
             }
 
             string colName = Construct.ForeignKeyColumnName(nav);
-            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, nav.IsNullable);
+            string indexName = Construct.ListPositionColumnName(nav); 
+            
+            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
 
             if (isIndexed)
             {
-                db.CreateColumn(tblName, Construct.ListPositionColumnName(nav), System.Data.DbType.Int32, 0, nav.IsNullable);
+                db.CreateColumn(tblName, indexName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             }
         }
         #endregion
@@ -532,20 +544,19 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void New_1_1_Relation_CreateColumns(Relation rel, RelationEnd end, RelationEnd otherEnd, RelationEndRole role)
+        private void New_1_1_Relation_CreateColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
         {
-            string tblName = end.Type.TableName;
+            string tblName = relEnd.Type.TableName;
             string refTblName = otherEnd.Type.TableName;
-            string colName = Construct.ForeignKeyColumnName(end.Navigator);
+            string colName = Construct.ForeignKeyColumnName(relEnd.Navigator);
             string assocName = rel.GetRelationAssociationName(role);
 
-            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, end.Navigator.IsNullable);
+            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
 
             if (rel.NeedsPositionStorage(role))
             {
-                // TODO: Dont use Navigator IsNullable! Check Multiplicity on RelationEnd. But first check Multiplicity in Schema
-                db.CreateColumn(tblName, Construct.ListPositionColumnName(end.Navigator), System.Data.DbType.Int32, 0, end.Navigator.IsNullable);
+                report.WriteLine("    ** Warning: 1:1 Relation should never need position storage, but this one does!");
             }
         }
         #endregion
