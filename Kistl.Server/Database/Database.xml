@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-03T13:19:46.9500669Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-03T13:46:24.2245963Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -8779,6 +8779,7 @@
     <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
     <KistlBase:ObjectClass>b9ddd097-4f45-40c5-87e9-7331ab58727c</KistlBase:ObjectClass>
     <KistlBase:PropertyName>EMails</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>true</KistlBase:IsList>
   </KistlBase:StringProperty>
@@ -9555,6 +9556,7 @@
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
     <KistlBase:ObjectClass>de155110-79cc-4dac-89d6-0916608be1fb</KistlBase:ObjectClass>
     <KistlBase:PropertyName>PhoneNumberMobile</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>d1135824-6e2a-41e7-a1db-83621b5de078</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
     <KistlBase:StructDefinition>2510af08-089f-4252-8a98-ec84cb67bcb9</KistlBase:StructDefinition>
@@ -9564,6 +9566,7 @@
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
     <KistlBase:ObjectClass>de155110-79cc-4dac-89d6-0916608be1fb</KistlBase:ObjectClass>
     <KistlBase:PropertyName>PhoneNumberOffice</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>d1135824-6e2a-41e7-a1db-83621b5de078</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
     <KistlBase:StructDefinition>2510af08-089f-4252-8a98-ec84cb67bcb9</KistlBase:StructDefinition>
