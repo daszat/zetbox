@@ -130,9 +130,19 @@ namespace Kistl.Client.Presentables
                 .GetPresentableModelDescriptor();
 
             var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
-            IView view = (IView)vDesc.ControlRef.Create();
+            IView view = CreateView(vDesc);
             view.SetModel(mdl);
             return view;
+        }
+
+        /// <summary>
+        /// Creates a view from a view descriptor. By default it just creates a new instance of the ControlRef
+        /// </summary>
+        /// <param name="vDesc">the descriptor describing the view</param>
+        /// <returns>a newly created view</returns>
+        protected virtual IView CreateView(ViewDescriptor vDesc)
+        {
+            return (IView)vDesc.ControlRef.Create();
         }
 
         /// <summary>
@@ -148,7 +158,7 @@ namespace Kistl.Client.Presentables
                 .GetPresentableModelDescriptor();
 
             var vDesc = pmd.GetViewDescriptor(Toolkit, kind);
-            IView view = (IView)vDesc.ControlRef.Create();
+            IView view = CreateView(vDesc);
             view.SetModel(mdl);
             return view;
         }
