@@ -314,7 +314,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_TypeRef_has_TypeRef
     A: ZeroOrMore TypeRef as Child
-    B: One TypeRef as Parent
+    B: ZeroOrOne TypeRef as Parent
     Preferred Storage: MergeIntoA
     */
         // object reference property
