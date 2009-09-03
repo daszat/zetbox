@@ -342,7 +342,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="TestString" Type="String" Nullable="true" MaxLength="100" />
+    <Property Name="TestString" Type="String" Nullable="true" MaxLength="4000" />
   </EntityType>
   <EntityType Name="AnotherTest">
     <Key>
@@ -404,7 +404,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="4000" />
   </EntityType>
   <EntityType Name="Constraint">
     <Key>
@@ -739,7 +739,7 @@
                         FromRole="Relation"
                         ToRole="Module" />
     <Property Name="Storage__Implementation__" Type="Int32" Nullable="false" />
-    <Property Name="Verb" Type="String" Nullable="false" MaxLength="100" />
+    <Property Name="Verb" Type="String" Nullable="false" MaxLength="4000" />
   </EntityType>
   <EntityType Name="RelationEnd">
     <Key>
@@ -1053,7 +1053,6 @@
   <EntityType Name="StringParameter" BaseType="Model.BaseParameter" >
   </EntityType>
   <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty" >
-    <Property Name="Length" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="StringRangeConstraint" BaseType="Model.Constraint" >
     <Property Name="MaxLength" Type="Int32" Nullable="false" />

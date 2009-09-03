@@ -60,5 +60,24 @@ namespace Kistl.App.Extensions
 
             return otherEnd.IsNullable();
         }
+
+        public static bool HasLengthConstraint(this StringProperty prop)
+        {
+            return prop.Constraints.OfType<StringRangeConstraint>().Count() > 0;
+        }
+
+        public static StringRangeConstraint GetLengthConstraint(this StringProperty prop)
+        {
+            return prop.Constraints.OfType<StringRangeConstraint>().FirstOrDefault();
+        }
+
+        public static int GetMaxLength(this StringProperty prop)
+        {
+            StringRangeConstraint constraint = prop.GetLengthConstraint();
+            // create unconstrained maxLength if no constrain is specified
+            return constraint == null ? 4000 : constraint.MaxLength;
+        }
+
+
     }
 }

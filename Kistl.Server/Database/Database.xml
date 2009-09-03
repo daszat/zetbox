@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-03T10:09:13.8820155Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-03T10:45:30.98131Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -745,7 +745,6 @@
     <KistlBase:ObjectClass>a590a975-66e5-421c-aa97-7ab3169e0e9b</KistlBase:ObjectClass>
     <KistlBase:PropertyName>AssemblyName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:EnumerationProperty ExportGuid="8458ea0d-04ca-48db-88ed-7d36e7e93b58">
     <KistlBase:Description>Deployment restrictions for this assembly</KistlBase:Description>
@@ -787,7 +786,6 @@
     <KistlBase:ObjectClass>63b8e3f7-e663-4fde-a09a-64ca876586bd</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Description</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="74265fbf-2340-4828-82fa-cff4a0d18ffa">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
@@ -837,7 +835,6 @@
     <KistlBase:ObjectClass>63b8e3f7-e663-4fde-a09a-64ca876586bd</KistlBase:ObjectClass>
     <KistlBase:PropertyName>ParameterName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="304b34ac-b581-40ce-826c-0fc0cab93bb6">
     <KistlBase:Description>Assembly des CLR Objektes, NULL für Default Assemblies</KistlBase:Description>
@@ -858,7 +855,6 @@
     <KistlBase:ObjectClass>012dfab4-934b-443e-853a-11a5da5b0627</KistlBase:ObjectClass>
     <KistlBase:PropertyName>FullTypeName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="438b9307-fb40-4afe-a66f-a5762c41e14b">
     <KistlBase:Description>The property to be constrained</KistlBase:Description>
@@ -890,7 +886,6 @@
     <KistlBase:ObjectClass>ac1d5ac9-d909-438f-a4f5-f64ea6904944</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Reason</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>400</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="758d8eba-b458-4cd4-98a8-e08713912654">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
@@ -912,7 +907,6 @@
     <KistlBase:ObjectClass>b276a0f6-cc89-473d-9dce-2efcf3efdd37</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Schema</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>4000</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:IntProperty ExportGuid="193c24c4-5a42-418e-8ed8-6e1689beca50">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
@@ -933,7 +927,6 @@
     <KistlBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:ObjectClass>
     <KistlBase:PropertyName>ClassName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>51</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="2cffd4f2-cb84-4f39-9bd1-19fd2e160bad">
     <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
@@ -944,7 +937,6 @@
     <KistlBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Description</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="1fdb011e-2098-4077-b5e9-dd2eeafa727c">
     <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
@@ -1046,7 +1038,6 @@
     <KistlBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Description</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="115c3bfb-72fd-46f2-81fe-74ce1cfa1874">
     <KistlBase:Description>Übergeordnete Enumeration</KistlBase:Description>
@@ -1078,7 +1069,6 @@
     <KistlBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Name</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:IntProperty ExportGuid="2fea1d2e-d5ed-457f-9828-4df8c3d3d3aa">
     <KistlBase:Description>The CLR value of this entry</KistlBase:Description>
@@ -1142,7 +1132,6 @@
     <KistlBase:ObjectClass>0999effb-c645-45e1-b3c2-5654530d0acb</KistlBase:ObjectClass>
     <KistlBase:PropertyName>MemberName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>d1135824-6e2a-41e7-a1db-83621b5de078</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:IntProperty ExportGuid="dff43695-5b93-4378-a01d-94a82d29dcef">
     <KistlBase:Description>The biggest value accepted by this constraint</KistlBase:Description>
@@ -1171,7 +1160,6 @@
     <KistlBase:ObjectClass>ef79c0b9-55e0-45ad-8233-1ff8f852661f</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Description</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="842eb3fc-3c8f-47d6-a59f-225c75ec2439">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
@@ -1205,7 +1193,6 @@
     <KistlBase:ObjectClass>ef79c0b9-55e0-45ad-8233-1ff8f852661f</KistlBase:ObjectClass>
     <KistlBase:PropertyName>MethodName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="51640f6f-b2ae-4f26-915e-fda5a2c060a6">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
@@ -1287,7 +1274,6 @@
     <KistlBase:ObjectClass>f6e7bb30-3adf-4d49-a80c-6ea7b589afa7</KistlBase:ObjectClass>
     <KistlBase:PropertyName>MemberName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>d1135824-6e2a-41e7-a1db-83621b5de078</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="b9db3b3b-d00d-479f-843f-6d41704eb079">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
@@ -1346,7 +1332,6 @@
     <KistlBase:ObjectClass>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Description</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="75e3db82-220c-474e-973a-ceb65fd8386d">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
@@ -1368,7 +1353,6 @@
     <KistlBase:ObjectClass>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:ObjectClass>
     <KistlBase:PropertyName>ModuleName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="36d2b9e7-d6b9-4a9c-a363-7e059a637919">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
@@ -1379,7 +1363,6 @@
     <KistlBase:ObjectClass>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Namespace</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="ad060d41-bc7a-41b8-a3e3-ec9302c8c714">
     <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
@@ -1436,7 +1419,6 @@
     <KistlBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:ObjectClass>
     <KistlBase:PropertyName>TableName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="9bd64c60-7282-47f0-8069-528a175fcc92">
     <KistlBase:Description>Kistl-Typ des Parameters</KistlBase:Description>
@@ -1492,7 +1474,6 @@
     <KistlBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:ObjectClass>
     <KistlBase:PropertyName>CategoryTags</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>4000</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="fd8f14da-e647-48cb-8593-3a30984f5c96">
     <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
@@ -1527,7 +1508,6 @@
     <KistlBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Description</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="ca0a099d-3f4c-4604-8303-d751e57041bb">
     <KistlBase:CategoryTags>MetaData</KistlBase:CategoryTags>
@@ -1604,7 +1584,6 @@
     <KistlBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:ObjectClass>
     <KistlBase:PropertyName>PropertyName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="e7504464-5cf0-4906-b12b-bbcf0deb789c">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
@@ -1657,7 +1636,6 @@
     <KistlBase:ObjectClass>24defe28-fc33-4f74-bf69-395ffa7a74f5</KistlBase:ObjectClass>
     <KistlBase:PropertyName>MemberName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>d1135824-6e2a-41e7-a1db-83621b5de078</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="d4429d3c-8fd1-468e-88d5-17abfd658d04">
     <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
@@ -1692,7 +1670,6 @@
     <KistlBase:ObjectClass>1c0e894f-4eb4-422f-8094-3095735b4917</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Description</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="1e600012-3b35-4dc6-af28-1f858b095a15">
     <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
@@ -1736,7 +1713,6 @@
     <KistlBase:ObjectClass>1c0e894f-4eb4-422f-8094-3095735b4917</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Verb</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="dd6057d0-78bb-4242-9670-ec6c09bd4d92">
     <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
@@ -1815,7 +1791,6 @@
     <KistlBase:ObjectClass>07817322-d4b9-4dd8-8464-bcb6745fef34</KistlBase:ObjectClass>
     <KistlBase:PropertyName>RoleName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="d4bfc4e0-6b57-49f0-91fd-b0de428484e0">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
@@ -1829,16 +1804,6 @@
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>01dbe471-358c-4d50-84e0-3ad8f3ea2756</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
-  <KistlBase:IntProperty ExportGuid="3588888e-b280-4e8d-8a7b-53f452b81bf0">
-    <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
-    <KistlBase:Description />
-    <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
-    <KistlBase:IsList>false</KistlBase:IsList>
-    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:ObjectClass>539d6b20-f0cb-461b-b087-a522fec6c838</KistlBase:ObjectClass>
-    <KistlBase:PropertyName>Length</KistlBase:PropertyName>
-    <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
-  </KistlBase:IntProperty>
   <KistlBase:IntProperty ExportGuid="17aa679d-72d0-480e-9bd9-b37f4eba1d68">
     <KistlBase:Description>The maximal length of this StringProperty</KistlBase:Description>
     <KistlBase:IsIndexed>false</KistlBase:IsIndexed>
@@ -1898,7 +1863,6 @@
     <KistlBase:ObjectClass>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:ObjectClass>
     <KistlBase:PropertyName>FullName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="443e3370-b1f4-46e8-9779-1a8d9ba1c8a6">
     <KistlBase:Description>list of type arguments</KistlBase:Description>
@@ -4715,7 +4679,7 @@
   </KistlBase:NotNullableConstraint>
   <KistlBase:StringRangeConstraint ExportGuid="5351f5ca-2a02-44cf-854c-ed869114d2b3">
     <KistlBase:ConstrainedProperty>6f46b94a-9ab7-44cd-bf36-f13e940f51a3</KistlBase:ConstrainedProperty>
-    <KistlBase:MaxLength>0</KistlBase:MaxLength>
+    <KistlBase:MaxLength>200</KistlBase:MaxLength>
     <KistlBase:MinLength>0</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
   <KistlBase:StringRangeConstraint ExportGuid="8d4ed43a-62d6-45fd-b3e3-cfb60e11da6e">
@@ -4760,16 +4724,6 @@
   </KistlBase:StringRangeConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="ceda48e9-575c-44e3-99e5-3e0ee6a95506">
     <KistlBase:ConstrainedProperty>d4bfc4e0-6b57-49f0-91fd-b0de428484e0</KistlBase:ConstrainedProperty>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:IntegerRangeConstraint ExportGuid="e5695d96-15aa-460f-be55-6c3fd7567d5e">
-    <KistlBase:ConstrainedProperty>3588888e-b280-4e8d-8a7b-53f452b81bf0</KistlBase:ConstrainedProperty>
-    <KistlBase:Reason>Strings have to have at least one character.</KistlBase:Reason>
-    <KistlBase:Max>4000</KistlBase:Max>
-    <KistlBase:Min>1</KistlBase:Min>
-  </KistlBase:IntegerRangeConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="c9459199-02a0-4ca2-b475-56b935449659">
-    <KistlBase:ConstrainedProperty>3588888e-b280-4e8d-8a7b-53f452b81bf0</KistlBase:ConstrainedProperty>
-    <KistlBase:Reason>Cannot create legal O/R mapping without length</KistlBase:Reason>
   </KistlBase:NotNullableConstraint>
   <KistlBase:IntegerRangeConstraint ExportGuid="04372ada-88c7-4ff8-8f28-ce76c3f736a3">
     <KistlBase:ConstrainedProperty>17aa679d-72d0-480e-9bd9-b37f4eba1d68</KistlBase:ConstrainedProperty>
@@ -5882,7 +5836,6 @@
     <KistlBase:ObjectClass>78b6f354-013b-4129-a390-7f3a5a5e28e9</KistlBase:ObjectClass>
     <KistlBase:PropertyName>IconFile</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="052273ac-706a-446b-bb86-83c726ee66d6">
     <KistlBase:CategoryTags>MetaData</KistlBase:CategoryTags>
@@ -5970,7 +5923,6 @@
     <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Description</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>4000</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:GuidProperty ExportGuid="77ce1e5b-f244-4279-af13-b3e75b55f933">
     <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
@@ -6048,7 +6000,6 @@
     <KistlBase:ObjectClass>c677d3fe-7dfe-4ea5-91e0-d1b0df9118be</KistlBase:ObjectClass>
     <KistlBase:PropertyName>DisplayedTypeFullName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="4fc51781-b0fe-495c-91a1-90e484345515">
     <KistlBase:Description>a short name to identify this Template to the user</KistlBase:Description>
@@ -6058,7 +6009,6 @@
     <KistlBase:ObjectClass>c677d3fe-7dfe-4ea5-91e0-d1b0df9118be</KistlBase:ObjectClass>
     <KistlBase:PropertyName>DisplayName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="5e9612d5-019a-416b-a2e2-dfc9674a50f6">
     <KistlBase:Description>The main menu for this Template</KistlBase:Description>
@@ -6168,7 +6118,6 @@
     <KistlBase:ObjectClass>98790e5d-808f-4e0b-8a1a-b304839f07ab</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Description</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="0b55b2ba-3ac0-4631-8a73-1e8846c8e9b1">
     <KistlBase:Description>The Method whose return value shoud be displayed</KistlBase:Description>
@@ -8858,7 +8807,6 @@
     <KistlBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Auftragsname</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:DoubleProperty ExportGuid="f252395f-7867-4299-9965-66f7a7b8f3c5">
     <KistlBase:Description>Wert in EUR des Auftrages</KistlBase:Description>
@@ -8910,7 +8858,6 @@
     <KistlBase:ObjectClass>b9ddd097-4f45-40c5-87e9-7331ab58727c</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Adresse</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="1d0f6da6-4b69-48d7-9e94-bfb5466654b9">
     <KistlBase:Description>EMails des Kunden - können mehrere sein</KistlBase:Description>
@@ -8919,7 +8866,6 @@
     <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
     <KistlBase:ObjectClass>b9ddd097-4f45-40c5-87e9-7331ab58727c</KistlBase:ObjectClass>
     <KistlBase:PropertyName>EMails</KistlBase:PropertyName>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="2817a845-b2d5-43ed-b0f1-5a6692a62183">
     <KistlBase:Description>Name des Kunden</KistlBase:Description>
@@ -8929,7 +8875,6 @@
     <KistlBase:ObjectClass>b9ddd097-4f45-40c5-87e9-7331ab58727c</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Kundenname</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="c01afb40-9f28-494f-9058-9d0eca79a125">
     <KistlBase:Description>Land</KistlBase:Description>
@@ -8939,7 +8884,6 @@
     <KistlBase:ObjectClass>b9ddd097-4f45-40c5-87e9-7331ab58727c</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Land</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>50</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="5281cbe0-8f63-4a2d-bb9e-2ee04588202d">
     <KistlBase:Description>Ort</KistlBase:Description>
@@ -8949,7 +8893,6 @@
     <KistlBase:ObjectClass>b9ddd097-4f45-40c5-87e9-7331ab58727c</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Ort</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="cafb4b93-4a1a-4753-8ec0-c65936a0d129">
     <KistlBase:Description>Postleitzahl</KistlBase:Description>
@@ -8959,7 +8902,6 @@
     <KistlBase:ObjectClass>b9ddd097-4f45-40c5-87e9-7331ab58727c</KistlBase:ObjectClass>
     <KistlBase:PropertyName>PLZ</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>10</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:DateTimeProperty ExportGuid="b10bf288-1252-49c3-9129-cfabb1637c47">
     <KistlBase:Description>Herzlichen Glückwunsch zum Geburtstag</KistlBase:Description>
@@ -8978,7 +8920,6 @@
     <KistlBase:ObjectClass>77933a20-338a-4961-b751-62ffa0a75c6a</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Name</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="1abb5a1b-ba9f-4b75-b6ea-3d28be877b7c">
     <KistlBase:Description>Projekte des Mitarbeiters für die er Verantwortlich ist</KistlBase:Description>
@@ -8999,7 +8940,6 @@
     <KistlBase:ObjectClass>77933a20-338a-4961-b751-62ffa0a75c6a</KistlBase:ObjectClass>
     <KistlBase:PropertyName>SVNr</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>20</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="73230333-f975-4f0b-9dd3-e850b48d9c13">
     <KistlBase:Description>+43 123 12345678</KistlBase:Description>
@@ -9009,7 +8949,6 @@
     <KistlBase:ObjectClass>77933a20-338a-4961-b751-62ffa0a75c6a</KistlBase:ObjectClass>
     <KistlBase:PropertyName>TelefonNummer</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>50</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="30a1d8b6-4db5-45a0-a9a8-531472a9107e">
     <KistlBase:Description>Aufträge</KistlBase:Description>
@@ -9039,7 +8978,6 @@
     <KistlBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Kundenname</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="3e60fe29-ac50-4232-bbeb-af023ede02f6">
     <KistlBase:Description />
@@ -9060,7 +8998,6 @@
     <KistlBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Name</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="f6ff71b0-ccaf-4c7d-8e2b-1210a9df4b0f">
     <KistlBase:Description />
@@ -9108,7 +9045,6 @@
     <KistlBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Name</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="5545ba8a-3e89-4b22-bd66-c12f3622ace0">
     <KistlBase:Description>Verknüpfung zum Projekt</KistlBase:Description>
@@ -9652,7 +9588,6 @@
     <KistlBase:ObjectClass>798887f9-2d21-4d02-a143-bf1cbe07469b</KistlBase:ObjectClass>
     <KistlBase:PropertyName>TestString</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="4a038e35-fffb-4ba7-8009-1954c317a799">
     <KistlBase:Description>Company name</KistlBase:Description>
@@ -9662,7 +9597,6 @@
     <KistlBase:ObjectClass>352a4ade-1dca-4d28-9630-66bbcc1622ea</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Name</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>100</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:ObjectReferencePlaceholderProperty ExportGuid="bd5c671d-c81f-4f13-9ee8-158ea4892d24">
     <KistlBase:Description>Objektpointer für das Testinterface</KistlBase:Description>
@@ -9682,7 +9616,6 @@
     <KistlBase:ObjectClass>c8ff9958-dd26-4a92-a049-7fa9d51d8bf2</KistlBase:ObjectClass>
     <KistlBase:PropertyName>StringProp</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:EnumerationProperty ExportGuid="657b719f-dcda-4308-9587-4e2c10e7b60f">
     <KistlBase:Description>Test Enum Property</KistlBase:Description>
@@ -9711,7 +9644,6 @@
     <KistlBase:ObjectClass>de155110-79cc-4dac-89d6-0916608be1fb</KistlBase:ObjectClass>
     <KistlBase:PropertyName>PersonName</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StructProperty ExportGuid="c9788c6f-e59b-4b4e-9222-1cc726961b20">
     <KistlBase:Description>Mobile Phone Number</KistlBase:Description>
@@ -9759,7 +9691,6 @@
     <KistlBase:ObjectClass>19f38f05-e88e-44c6-bfdf-d502b3632028</KistlBase:ObjectClass>
     <KistlBase:PropertyName>StringProp</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:EnumerationProperty ExportGuid="89470dda-4ac6-4bb4-9221-d16f80f8d95a">
     <KistlBase:Description>Test Enumeration Property</KistlBase:Description>
@@ -9779,7 +9710,6 @@
     <KistlBase:ObjectClass>2510af08-089f-4252-8a98-ec84cb67bcb9</KistlBase:ObjectClass>
     <KistlBase:PropertyName>AreaCode</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>50</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="d2f60356-2244-46f3-b0a0-2dcfd76005bc">
     <KistlBase:Description>Enter a Number</KistlBase:Description>
@@ -9789,7 +9719,6 @@
     <KistlBase:ObjectClass>2510af08-089f-4252-8a98-ec84cb67bcb9</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Number</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>50</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:Relation ExportGuid="9d44eac8-2470-4373-a2bf-df3bc16d3454">
     <KistlBase:A>738de243-fdf1-43f7-8b14-4f960aa2f622</KistlBase:A>
@@ -10148,7 +10077,6 @@
     <KistlBase:ObjectClass>dff456e5-f5a6-4da7-afdd-f4ea2a9e7a7a</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Name</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>400</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="1744a31b-a1c3-4e7c-834c-504521240478">
     <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
@@ -10159,7 +10087,6 @@
     <KistlBase:ObjectClass>dff456e5-f5a6-4da7-afdd-f4ea2a9e7a7a</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Notes</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>4000</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:DateTimeProperty ExportGuid="553440f1-3b22-402b-ba5b-355f21cc31d9">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
@@ -10202,7 +10129,6 @@
     <KistlBase:ObjectClass>15268915-6b8f-4884-9b7e-5975e0768301</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Name</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>200</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:StringProperty ExportGuid="79c8188d-d8e2-41b7-82c9-08f384fd6b68">
     <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
@@ -10213,7 +10139,6 @@
     <KistlBase:ObjectClass>15268915-6b8f-4884-9b7e-5975e0768301</KistlBase:ObjectClass>
     <KistlBase:PropertyName>Notes</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:Length>4000</KistlBase:Length>
   </KistlBase:StringProperty>
   <KistlBase:DoubleProperty ExportGuid="f7816f8a-0b07-429c-9161-47ca495a2e41">
     <KistlBase:CategoryTags>Summary,Main</KistlBase:CategoryTags>

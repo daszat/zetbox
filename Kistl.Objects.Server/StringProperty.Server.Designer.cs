@@ -33,57 +33,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual int Length
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _Length;
-                if (OnLength_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<int>(__result);
-                    OnLength_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_Length != value)
-                {
-                    var __oldValue = _Length;
-                    var __newValue = value;
-                    if(OnLength_PreSetter != null)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
-                        OnLength_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("Length", __oldValue, __newValue);
-                    _Length = __newValue;
-                    NotifyPropertyChanged("Length", __oldValue, __newValue);
-                    if(OnLength_PostSetter != null)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
-                        OnLength_PostSetter(this, __e);
-                    }
-                }
-            }
-        }
-        private int _Length;
-		public event PropertyGetterHandler<Kistl.App.Base.StringProperty, int> OnLength_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.StringProperty, int> OnLength_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.StringProperty, int> OnLength_PostSetter;
-        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 		[EventBasedMethod("OnGetPropertyType_StringProperty")]
@@ -137,7 +86,6 @@ namespace Kistl.App.Base
 			var otherImpl = (StringProperty__Implementation__)obj;
 			var me = (StringProperty)this;
 
-			me.Length = other.Length;
 		}
 
         // tail template
@@ -190,23 +138,6 @@ namespace Kistl.App.Base
         public event ObjectEventHandler<StringProperty> OnDeleting_StringProperty;
 
 
-		protected override string GetPropertyError(string propertyName) 
-		{
-			switch(propertyName)
-			{
-				case "Length":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("3588888e-b280-4e8d-8a7b-53f452b81bf0")).Constraints
-						.Where(c => !c.IsValid(this, this.Length))
-						.Select(c => c.GetErrorText(this, this.Length))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
-		}
 
 		public override void ReloadReferences()
 		{
@@ -224,43 +155,36 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(binStream, auxObjects);
-            BinarySerializer.ToStream(this._Length, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._Length, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._Length, xml, "Length", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._Length, xml, "Length", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             base.Export(xml, modules);
-    
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Length, xml, "Length", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             
             base.MergeImport(xml);
-            XmlStreamer.FromStream(ref this._Length, xml, "Length", "Kistl.App.Base");
         }
 
 #endregion

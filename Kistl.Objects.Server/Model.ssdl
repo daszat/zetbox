@@ -766,7 +766,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="TestString" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="TestString" Type="nvarchar" MaxLength="4000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="AnotherTest">
@@ -848,7 +848,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="4000" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ConsistentNavigatorConstraint">
@@ -1298,7 +1298,7 @@
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="Storage" Type="int" Nullable="false" />
-    <Property Name="Verb" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Verb" Type="nvarchar" MaxLength="4000" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="RelationEditorKind">
@@ -1340,7 +1340,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Length" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="StringRangeConstraint">

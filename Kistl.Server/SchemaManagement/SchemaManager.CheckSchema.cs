@@ -389,7 +389,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     report.WriteLine("    {0}", prop.PropertyName);
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
-                    CheckColumn(tblName, valPropName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).Length : 0, false);
+                    CheckColumn(tblName, valPropName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
                     if (prop.IsIndexed)
                     {
                         CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
@@ -474,7 +474,7 @@ namespace Kistl.Server.SchemaManagement
                 string tblName = objClass.TableName;
                 string colName = Construct.NestedColumnName(prop, prefix);
                 report.WriteLine("    {0}", colName);
-                CheckColumn(tblName, colName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).Length : 0, prop.IsNullable());
+                CheckColumn(tblName, colName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, prop.IsNullable());
             }
 
             foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList && p.HasStorage()))

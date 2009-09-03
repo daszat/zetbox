@@ -47,7 +47,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 
             if (prop is StringProperty)
             {
-                maxlength = String.Format("MaxLength=\"{0}\" ", ((StringProperty)prop).Length.ToString());
+                maxlength = String.Format("MaxLength=\"{0}\" ", ((StringProperty)prop).GetMaxLength());
             }
 
             return String.Format("<Property Name=\"{0}\" Type=\"{1}\" Nullable=\"{2}\" {3}/>",

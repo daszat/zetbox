@@ -132,7 +132,7 @@ namespace Kistl.Server.SchemaManagement
             string colName = Construct.NestedColumnName(prop, prefix);
             report.WriteLine("    New nullable ValueType Property: '{0}' ('{1}')", prop.PropertyName, colName);
             db.CreateColumn(objClass.TableName, colName, SchemaManager.GetDbType(prop),
-                prop is StringProperty ? ((StringProperty)prop).Length : 0, true);
+                prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, true);
         }
         #endregion
 
@@ -149,7 +149,7 @@ namespace Kistl.Server.SchemaManagement
             if (!db.CheckTableContainsData(tblName))
             {
                 db.CreateColumn(tblName, colName, SchemaManager.GetDbType(prop),
-                    prop is StringProperty ? ((StringProperty)prop).Length : 0, false);
+                    prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
             }
             else
             {
@@ -177,7 +177,7 @@ namespace Kistl.Server.SchemaManagement
             else
             {
                 db.AlterColumn(tblName, colName, SchemaManager.GetDbType(prop),
-                    prop is StringProperty ? ((StringProperty)prop).Length : 0, prop.IsNullable());
+                    prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, prop.IsNullable());
             }
         }
         #endregion
@@ -195,7 +195,7 @@ namespace Kistl.Server.SchemaManagement
             string colName = Construct.NestedColumnName(prop, prefix);
 
             db.AlterColumn(tblName, colName, SchemaManager.GetDbType(prop),
-                prop is StringProperty ? ((StringProperty)prop).Length : 0, prop.IsNullable());
+                prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, prop.IsNullable());
         }
         #endregion
 
@@ -244,7 +244,7 @@ namespace Kistl.Server.SchemaManagement
             db.CreateTable(tblName, true);
 
             db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
-            db.CreateColumn(tblName, valPropName, SchemaManager.GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).Length : 0, false);
+            db.CreateColumn(tblName, valPropName, SchemaManager.GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
             if (prop.IsIndexed)
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);

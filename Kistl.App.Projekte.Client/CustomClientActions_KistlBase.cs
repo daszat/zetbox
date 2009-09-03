@@ -311,11 +311,6 @@ namespace Kistl.App.Base
                         newProp.Module = objClass.Module;
                         newProp.ValueModelDescriptor = prop.ValueModelDescriptor;
 
-                        if (prop is StringProperty)
-                        {
-                            ((StringProperty)newProp).Length = ((StringProperty)prop).Length;
-                        }
-
                         // Copy Constrains
                         foreach (var c in prop.Constraints)
                         {

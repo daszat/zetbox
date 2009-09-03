@@ -478,7 +478,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.StringProperty)">
 	    <MappingFragment StoreEntitySet="StringProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Length" ColumnName="Length" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -13,12 +13,5 @@ namespace Kistl.App.Base
     public interface StringProperty : Kistl.App.Base.ValueTypeProperty 
     {
 
-        /// <summary>
-        /// 
-        /// </summary>
-		int Length {
-			get;
-			set;
-		}
     }
 }

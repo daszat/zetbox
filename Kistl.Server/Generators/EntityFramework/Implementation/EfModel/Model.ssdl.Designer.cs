@@ -342,7 +342,7 @@ foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		string constraint = "";
 		if (prop is StringProperty) {
 			var sProp = (StringProperty)prop;
-			constraint += String.Format("MaxLength=\"{0}\" ", sProp.Length);
+			constraint += String.Format("MaxLength=\"{0}\" ", sProp.GetMaxLength());
 		}
 
 
