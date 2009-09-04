@@ -7,6 +7,7 @@ using System.Web;
 
 using Kistl.API;
 using Kistl.API.Configuration;
+using Kistl.API.Utils;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
@@ -43,6 +44,8 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             if (GuiApplicationContext.Current == null)
             {
+                Logging.Configure();
+
                 var config = KistlConfig.FromFile(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]));
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
                 var appCtx = new GuiApplicationContext(config, "ASPNET");

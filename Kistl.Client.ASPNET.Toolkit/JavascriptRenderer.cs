@@ -88,6 +88,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 case actionShowObject:
                     {
                         DataObjectModel obj = hdArgument.FromJSON(KistlContextManagerModule.KistlContext);
+                        GuiApplicationContext.Current.Factory.ShowModel(obj, true);
                         //if (HttpContext.Current.CurrentHandler is IWorkspaceView)
                         //{
                         //    IWorkspaceView page = (IWorkspaceView)HttpContext.Current.CurrentHandler;

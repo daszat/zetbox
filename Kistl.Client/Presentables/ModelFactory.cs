@@ -130,6 +130,7 @@ namespace Kistl.Client.Presentables
                 .GetPresentableModelDescriptor();
 
             var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
+            if (vDesc == null) return null;
             IView view = CreateView(vDesc);
             view.SetModel(mdl);
             return view;
@@ -158,6 +159,8 @@ namespace Kistl.Client.Presentables
                 .GetPresentableModelDescriptor();
 
             var vDesc = pmd.GetViewDescriptor(Toolkit, kind);
+            if (vDesc == null) return null;
+
             IView view = CreateView(vDesc);
             view.SetModel(mdl);
             return view;

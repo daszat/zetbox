@@ -17,7 +17,6 @@ namespace Kistl.Client.ASPNET.Toolkit.View
     [ControlLocation("~/View/DataObjectListView.ascx")]
     public abstract class DataObjectListView : System.Web.UI.UserControl, IView, IScriptControl
     {
-        protected abstract Label lbCtrl {get;}
         protected abstract HiddenField HdItemsControl { get; }
         protected abstract AjaxDataControls.DataList LstItemsControl { get; }
         protected abstract Control ContainerControl { get; }
@@ -54,7 +53,6 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-            lbCtrl.Text = Model.Label;
             HdItemsControl.Value = Model.Value.ToJSONArray();
 
             ScriptManager scriptManager = ScriptManager.GetCurrent(Page);

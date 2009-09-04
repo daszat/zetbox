@@ -18,7 +18,6 @@ namespace Kistl.Client.ASPNET.Toolkit.View
     public abstract class DataObjectReferenceView : System.Web.UI.UserControl, IView, IScriptControl
     {
         protected ObjectReferenceModel Model { get; private set; }
-        protected abstract Label lbCtrl { get; }
 
         protected abstract Control ContainerControl { get; }
         protected abstract DropDownList cbListControl { get; }
@@ -85,8 +84,6 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-
-            lbCtrl.Text = Model.Label;
 
             cbListControl.DataValueField = "Moniker";
             cbListControl.DataTextField = "Text";

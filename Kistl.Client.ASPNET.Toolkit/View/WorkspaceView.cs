@@ -12,7 +12,7 @@ using Kistl.Client.ASPNET.Toolkit.Pages;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 
-[assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.WorkspaceView.js", "text/javascript")] 
+[assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.WorkspaceView.js", "text/javascript")]
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
@@ -20,10 +20,10 @@ namespace Kistl.Client.ASPNET.Toolkit.View
     public abstract class WorkspaceView : System.Web.UI.UserControl, IView, IScriptControl
     {
         protected WorkspaceModel Model { get; private set; }
-        protected abstract AjaxDataControls.DataList listModulesCtrl { get; }
-        protected abstract AjaxDataControls.DataList listObjectClassesCtrl { get; }
-        protected abstract AjaxDataControls.DataList listInstancesCtrl { get; }
         protected abstract Control containerCtrl { get; }
+        protected abstract HiddenField hdObjectsControl { get; }
+        protected abstract Repeater repObjectsCtrl { get; }
+        protected abstract Control containerObjectsCtrl { get; }
 
         public WorkspaceView()
         {
@@ -32,17 +32,86 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
         void WorkspaceView_Init(object sender, EventArgs e)
         {
+            repObjectsCtrl.ItemDataBound += new RepeaterItemEventHandler(repObjectsCtrl_ItemDataBound);
+
+            foreach (var item in Objects)
+            {
+                GuiApplicationContext.Current.Factory.ShowModel(item, false);
+            }
         }
- 
+
         public void SetModel(PresentableModel mdl)
         {
             Model = (WorkspaceModel)mdl;
+            Model.RecentObjects.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(RecentObjects_CollectionChanged);
         }
+
+        void RecentObjects_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                foreach (DataObjectModel mdl in e.NewItems)
+                {
+                    GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, containerObjectsCtrl);
+                }
+            }
+        }
+
+        #region Binding
+        void repObjectsCtrl_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType.In(ListItemType.Item, ListItemType.AlternatingItem))
+            {
+                var data = (DataObjectModel)e.Item.DataItem;
+                var litText = (Literal)e.Item.FindControl("litText");
+                litText.Text = data.LongName;
+            }
+        }
+        #endregion
+
+        #region Object Management
+        List<DataObjectModel> _Objects;
+        public List<DataObjectModel> Objects
+        {
+            get
+            {
+                if (_Objects == null)
+                {
+                    if (!IsPostBack)
+                    {
+                        _Objects = new List<DataObjectModel>();
+                        // Parse Request
+                        var type = Request["type"];
+                        var id = Convert.ToInt32(Request["id"]);
+
+                        InterfaceType ifType = new InterfaceType(Type.GetType(type + ", " + ApplicationContext.Current.InterfaceAssembly));
+                        IDataObject obj = (IDataObject)KistlContextManagerModule.KistlContext.Find(ifType, id);
+
+                        _Objects.Add(GuiApplicationContext.Current.Factory.CreateSpecificModel<DataObjectModel>(KistlContextManagerModule.KistlContext, obj));
+                    }
+                    else
+                    {
+                        // We are to early! So we need to parse the Request Variable directly
+                        // If anyone knows a better way -> pls. get in touch with me.
+                        _Objects = Request[hdObjectsControl.UniqueID].FromJSONArray(KistlContextManagerModule.KistlContext)
+                                        .ToList();
+                    }
+                }
+
+                return _Objects;
+            }
+        }
+        #endregion
 
         #region Render
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
+
+            repObjectsCtrl.DataSource = Model.RecentObjects;
+            repObjectsCtrl.DataBind();
+
+            hdObjectsControl.Value = Model.RecentObjects.Cast<DataObjectModel>().ToJSONArray();
 
             ScriptManager scriptManager = ScriptManager.GetCurrent(Page);
             if (scriptManager == null) throw new InvalidOperationException("ScriptManager required on the page.");
@@ -65,10 +134,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         public IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
             var desc = new ScriptControlDescriptor("Kistl.Client.ASPNET.View.WorkspaceView", containerCtrl.ClientID);
-            desc.AddComponentProperty("ListModules", listModulesCtrl.ClientID);
-            desc.AddComponentProperty("ListObjectClasses", listObjectClassesCtrl.ClientID);
-            desc.AddComponentProperty("ListInstances", listInstancesCtrl.ClientID);
-            yield return desc; 
+            yield return desc;
         }
 
         public IEnumerable<ScriptReference> GetScriptReferences()

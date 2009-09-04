@@ -19,29 +19,25 @@ using Kistl.Client.ASPNET.Toolkit;
 using Kistl.Client.ASPNET.Toolkit.View;
 using Kistl.Client.Presentables;
 using Kistl.Client.GUI;
+using Kistl.App.GUI;
 
 namespace Kistl.Client.ASPNET.Toolkit.Pages
 {
-    public abstract class WorkspacePage : System.Web.UI.Page
+    public abstract class LauncherPage : System.Web.UI.Page
     {
         protected abstract Control ctrlMainContent { get; }
 
-        public WorkspacePage()
+        public LauncherPage()
         {
-            this.Init += new EventHandler(WorkspacePage_Init);
+            this.Init += new EventHandler(LauncherPage_Init);
         }
 
-        void WorkspacePage_Init(object sender, EventArgs e)
+        void LauncherPage_Init(object sender, EventArgs e)
         {
             var mdl = GuiApplicationContext.Current.Factory
                 .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
-
-            GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, ctrlMainContent);
-        }
-
-        protected override void OnPreRender(EventArgs e)
-        {
-            base.OnPreRender(e);
+            LauncherKind launcher = GuiApplicationContext.Current.TransientContext.Create<LauncherKind>();
+            ctrlMainContent.Controls.Add((Control)GuiApplicationContext.Current.Factory.CreateSpecificView(mdl, launcher));
         }
     }
 }

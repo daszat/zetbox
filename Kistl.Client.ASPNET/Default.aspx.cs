@@ -16,10 +16,10 @@ using Kistl.Client;
 using Kistl.Client.Presentables;
 using Kistl.Client.ASPNET.Toolkit;
 
-public partial class _Default : System.Web.UI.Page
+public partial class _Default : Kistl.Client.ASPNET.Toolkit.Pages.LauncherPage
 {
-    protected void Page_Load(object sender, EventArgs e)
+    protected override Control ctrlMainContent
     {
-        Response.Redirect("~/Workspace.aspx");
+        get { return divMainContent; }
     }
 }

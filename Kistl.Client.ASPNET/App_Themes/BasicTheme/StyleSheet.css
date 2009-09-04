@@ -78,6 +78,16 @@ a.MainMenuItem :visited
 	color: #A00;
 }
 
+input.Control
+{
+	width: 300px;
+}
+
+select.Control
+{
+	width: 300px;
+}
+
 div.Dialog
 {
 	background: white;
@@ -105,27 +115,6 @@ div.ObjectPanelChildren
 	opacity:0.7;
 }
 
-div.Control
-{
-	clear: left;
-	margin-bottom: 10px;
-}
-
-input.Control, select.Control
-{
-  display: block;
-  float: left;
-  width: 300px; 
-}
-
-label 
-{ 
-  display: block;
-  float: left;
-  width: 150px; 
-  font-weight: bold;
-}
-
 .ItemTable 
 {
 	border-width: 1px;
@@ -133,6 +122,7 @@ label
 	border-color: gray;
 	border-collapse: collapse;
 	background-color: white;
+	width:300px;
 }	
 .ItemTable td 
 {

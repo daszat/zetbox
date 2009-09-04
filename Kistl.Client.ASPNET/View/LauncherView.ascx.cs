@@ -11,29 +11,26 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_DataObjectReferenceView : Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView
+public partial class View_LauncherView : Kistl.Client.ASPNET.Toolkit.View.LauchnerView
 {
     protected void Page_Load(object sender, EventArgs e)
     {
 
     }
 
-    protected override DropDownList cbListControl
+    protected override AjaxDataControls.DataList listModulesCtrl
     {
-        get { return cbList; }
+        get { return listModules; }
     }
-
-    protected override HtmlControl btnNewControl
+    protected override AjaxDataControls.DataList listObjectClassesCtrl
     {
-        get { return btnNew; }
+        get { return listObjectClasses; }
     }
-
-    protected override HtmlControl btnOpenControl
+    protected override AjaxDataControls.DataList listInstancesCtrl
     {
-        get { return btnOpen; }
+        get { return listInstances; }
     }
-
-    protected override Control ContainerControl
+    protected override Control containerCtrl
     {
         get { return container; }
     }

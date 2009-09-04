@@ -74,6 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspnetModelFactory.cs" />
+    <Compile Include="Pages\LauncherPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\WorkspacePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -95,7 +98,16 @@
     <Compile Include="View\DataObjectReferenceView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="View\LabeledView.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\LauchnerView.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="View\NullablePropertyTextBoxView.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\PropertyGroupBoxView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\WorkspaceView.cs">
@@ -139,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\WorkspaceView.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\LauncherView.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

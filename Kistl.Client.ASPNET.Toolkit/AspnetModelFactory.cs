@@ -11,6 +11,7 @@ namespace Kistl.Client.ASPNET.Toolkit
     using Kistl.App.Extensions;
     using System.Web;
     using System.Web.UI;
+    using Kistl.App.GUI;
 
     [AttributeUsage(AttributeTargets.Class)]
     public class ControlLocation : Attribute
@@ -76,6 +77,25 @@ namespace Kistl.Client.ASPNET.Toolkit
         public override string GetSourceFileNameFromUser(params string[] filters)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public static class AspnetModelFactoryExtensions
+    {
+        public static IView CreateDefaultView(this ModelFactory self, PresentableModel mdl, Control container)
+        {
+            return AddControl(container, self.CreateDefaultView(mdl));
+        }
+
+        public static IView CreateSpecificView(this ModelFactory self, PresentableModel mdl, ControlKind kind, Control container)
+        {
+            return AddControl(container, self.CreateSpecificView(mdl, kind));
+        }
+
+        private static IView AddControl(Control container, IView ctrl)
+        {
+            container.Controls.Add((Control)ctrl ?? new System.Web.UI.WebControls.Literal() { Text = "Unable to load Control" });
+            return ctrl;
         }
     }
 }

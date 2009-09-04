@@ -11,16 +11,20 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_NullablePropertyTextBoxView : Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxView
+public partial class View_LabeledView : Kistl.Client.ASPNET.Toolkit.View.LabeledView
 {
     protected void Page_Load(object sender, EventArgs e)
     {
 
-
     }
 
-    protected override TextBox txtCtrl
+    protected override Label lbCtrl
     {
-        get { return txtString; }
+        get { return lb; }
+    }
+
+    protected override Control containerCtrl
+    {
+        get { return container; }
     }
 }

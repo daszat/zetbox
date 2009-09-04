@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Kistl.Client.Presentables;
-using Kistl.Client.GUI;
 using System.Web.UI.WebControls;
 using System.Web.UI;
+
+using Kistl.Client.Presentables;
+using Kistl.Client.GUI;
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
@@ -25,7 +26,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         {
             litTitleCtrl.Text = Model.Name;
             repPropertiesCtrl.ItemDataBound += new RepeaterItemEventHandler(repProperties_OnItemDataBound);
-            repPropertiesCtrl.DataSource = Model.PropertyModels;
+            repPropertiesCtrl.DataSource = Model.PropertyGroups;
             repPropertiesCtrl.DataBind();
         }
 
@@ -34,8 +35,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             PresentableModel mdl = (PresentableModel)e.Item.DataItem;
             Control divPlaceHolder = e.Item.FindControl("divPlaceHolder");
 
-            var ctrl = (IView)GuiApplicationContext.Current.Factory.CreateDefaultView(mdl);
-            divPlaceHolder.Controls.Add((Control)ctrl);
+            GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, divPlaceHolder);
         }
 
         public void SetModel(PresentableModel mdl)

@@ -18,11 +18,6 @@ public partial class View_DataObjectListView : Kistl.Client.ASPNET.Toolkit.View.
 
     }
 
-    protected override Label lbCtrl
-    {
-        get { return lbLabel; }
-    }
-
     protected override HiddenField HdItemsControl
     {
         get { return hdItems; }

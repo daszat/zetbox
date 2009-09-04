@@ -19,20 +19,23 @@ public partial class View_WorkspaceView : Kistl.Client.ASPNET.Toolkit.View.Works
     {        
     }
 
-    protected override AjaxDataControls.DataList listModulesCtrl
-    {
-        get { return listModules; }
-    }
-    protected override AjaxDataControls.DataList listObjectClassesCtrl
-    {
-        get { return listObjectClasses; }
-    }
-    protected override AjaxDataControls.DataList listInstancesCtrl
-    {
-        get { return listInstances; }
-    }
     protected override Control containerCtrl
     {
         get { return container; }
+    }
+
+    protected override HiddenField hdObjectsControl
+    {
+        get { return hdObjects; }
+    }
+
+    protected override Repeater repObjectsCtrl
+    {
+        get { return repObjects; }
+    }
+
+    protected override Control containerObjectsCtrl
+    {
+        get { return containerObjects; }
     }
 }

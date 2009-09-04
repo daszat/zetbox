@@ -8,11 +8,15 @@ using System.Web.UI.WebControls;
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
+    [ControlLocation("~/View/NullablePropertyTextBoxView.ascx")]
     public abstract class NullablePropertyTextBoxView : System.Web.UI.UserControl, IView
     {
         protected IValueModel<String> Model { get; private set; }
-        protected abstract Label lbCtrl { get; }
         protected abstract TextBox txtCtrl { get; }
+
+        public NullablePropertyTextBoxView()
+        {
+        }
 
         public void SetModel(PresentableModel mdl)
         {
@@ -22,7 +26,6 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-            lbCtrl.Text = Model.Label;
             txtCtrl.Text = Model.Value;
         }
     }

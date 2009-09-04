@@ -11,16 +11,20 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class View_NullablePropertyTextBoxView : Kistl.Client.ASPNET.Toolkit.View.NullablePropertyTextBoxView
+public partial class View_PropertyGroupBoxView : Kistl.Client.ASPNET.Toolkit.View.PropertyGroupBoxView
 {
     protected void Page_Load(object sender, EventArgs e)
     {
 
-
     }
 
-    protected override TextBox txtCtrl
+    protected override Panel panelCtrl
     {
-        get { return txtString; }
+        get { return panel; }
+    }
+
+    protected override Repeater repPropertiesCtrl
+    {
+        get { return repProperties; }
     }
 }
