@@ -110,8 +110,11 @@ namespace Kistl.DALProvider.EF
         /// <returns>EntitySet Name</returns>
         private string GetEntityName(Type type)
         {
+            if (type == null) throw new ArgumentNullException("type");
             Type rootType = GetRootType(type);
-            return rootType.Name.Remove(rootType.Name.Length - Kistl.API.Helper.ImplementationSuffix.Length, Kistl.API.Helper.ImplementationSuffix.Length); // ImplementationSuffix
+            if (rootType == null) throw new ArgumentOutOfRangeException("type", string.Format("Unable to find root type of '{0}'", type.FullName));
+
+            return rootType.Name.Remove(rootType.Name.Length - Kistl.API.Helper.ImplementationSuffix.Length, Kistl.API.Helper.ImplementationSuffix.Length);
         }
 
         /// <summary>

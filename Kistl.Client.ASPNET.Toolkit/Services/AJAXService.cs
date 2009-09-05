@@ -18,10 +18,17 @@ namespace Kistl.Client.ASPNET.Toolkit
         [OperationContract]
         public List<JavaScriptObjectMoniker> GetList(SerializableType type)
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            try
             {
-                return ctx.GetQuery(type.GetInterfaceType())
-                    .Select(i => new JavaScriptObjectMoniker(ctx, i)).ToList();
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    return ctx.GetQuery(type.GetInterfaceType())
+                        .Select(i => new JavaScriptObjectMoniker(ctx, i)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException(ex.Message);
             }
         }
     }

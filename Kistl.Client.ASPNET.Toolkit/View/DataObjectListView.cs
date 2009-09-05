@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using Kistl.Client.Presentables;
-using Kistl.Client.GUI;
-using System.Web.UI.WebControls;
 using System.Web.UI;
-using System.Collections.ObjectModel;
+using System.Web.UI.WebControls;
+
 using Kistl.API;
+using Kistl.App.Extensions;
+using Kistl.Client.GUI;
+using Kistl.Client.Presentables;
 
 [assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.DataObjectListView.js", "text/javascript")] 
-
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
@@ -86,7 +87,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             desc.AddElementProperty("Items", HdItemsControl.ClientID);
             desc.AddElementProperty("LnkAdd", LnkAddControl.ClientID);
             desc.AddElementProperty("LnkNew", LnkNewControl.ClientID);
-            desc.AddProperty("Type", new SerializableType(new InterfaceType(typeof(IDataObject))));
+            desc.AddProperty("Type", new SerializableType(Model.ReferencedClass.GetDescribedInterfaceType()));
             yield return desc;
         }
 

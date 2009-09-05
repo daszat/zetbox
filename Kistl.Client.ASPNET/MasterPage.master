@@ -42,8 +42,15 @@
         </div>
     </div>
     <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
+        <asp:UpdatePanel ID="WorkspaceUpdatePanel" runat="server">
+            <ContentTemplate>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="JavascriptRenderer" />
+            </Triggers>
+        </asp:UpdatePanel>
     </div>
     </form>
 </body>

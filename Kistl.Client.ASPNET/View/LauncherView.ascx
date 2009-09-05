@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="LauncherView.ascx.cs"
     Inherits="View_LauncherView" %>
 <div id="container" runat="server">
-    <div style="float: left; width: 300px; margin-right: 10px;">
+    <div style="float: left; width: 300px; margin-right: 10px;overflow:scroll;">
         <div id="divLoadingModules" style="display: none;">
             <strong>Modules:</strong>
             <br />

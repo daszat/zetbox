@@ -11,6 +11,7 @@ using Kistl.API;
 using Kistl.Client.ASPNET.Toolkit.Pages;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
+using System.Web.UI.HtmlControls;
 
 [assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.WorkspaceView.js", "text/javascript")]
 
@@ -25,6 +26,9 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         protected abstract Repeater repObjectsCtrl { get; }
         protected abstract Control containerObjectsCtrl { get; }
 
+        private List<Control> _controlsAdded = new List<Control>();
+        private HiddenField _currentIndexCtrl = null;
+
         public WorkspaceView()
         {
             this.Init += new EventHandler(WorkspaceView_Init);
@@ -33,10 +37,18 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         void WorkspaceView_Init(object sender, EventArgs e)
         {
             repObjectsCtrl.ItemDataBound += new RepeaterItemEventHandler(repObjectsCtrl_ItemDataBound);
+            _currentIndexCtrl = new HiddenField();
+            _currentIndexCtrl.ID = "hdCurrentIndex";
+            containerCtrl.Controls.Add(_currentIndexCtrl);
 
             foreach (var item in Objects)
             {
                 GuiApplicationContext.Current.Factory.ShowModel(item, false);
+            }
+
+            if (!IsPostBack)
+            {
+                CurrentIndex = 0;
             }
         }
 
@@ -52,7 +64,13 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             {
                 foreach (DataObjectModel mdl in e.NewItems)
                 {
-                    GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, containerObjectsCtrl);
+                    var container = new HtmlGenericControl("div");
+                    container.ID = "mdlContainer" + Model.RecentObjects.IndexOf(mdl);
+                    container.Attributes.Add("display", "node");
+                    containerObjectsCtrl.Controls.Add(container);
+
+                    var ctrl = (Control)GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, container);
+                    _controlsAdded.Add(container);
                 }
             }
         }
@@ -64,12 +82,27 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             {
                 var data = (DataObjectModel)e.Item.DataItem;
                 var litText = (Literal)e.Item.FindControl("litText");
+                var container = (IAttributeAccessor)e.Item.FindControl("container");
+
                 litText.Text = data.LongName;
+                container.SetAttribute("onclick", string.Format("javascript: $find('{0}').SetObjectVisible({1});", containerCtrl.ClientID, e.Item.ItemIndex));
             }
         }
         #endregion
 
-        #region Object Management
+        #region State Management
+        public int CurrentIndex
+        {
+            get
+            {
+                return Convert.ToInt32(_currentIndexCtrl.Value);
+            }
+            set
+            {
+                _currentIndexCtrl.Value = value.ToString();
+            }
+        }
+
         List<DataObjectModel> _Objects;
         public List<DataObjectModel> Objects
         {
@@ -113,6 +146,8 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
             hdObjectsControl.Value = Model.RecentObjects.Cast<DataObjectModel>().ToJSONArray();
 
+            CurrentIndex = Model.RecentObjects.IndexOf(Model.SelectedItem);
+
             ScriptManager scriptManager = ScriptManager.GetCurrent(Page);
             if (scriptManager == null) throw new InvalidOperationException("ScriptManager required on the page.");
             scriptManager.RegisterScriptControl(this);
@@ -134,6 +169,8 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         public IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
             var desc = new ScriptControlDescriptor("Kistl.Client.ASPNET.View.WorkspaceView", containerCtrl.ClientID);
+            desc.AddProperty("ListObjects", _controlsAdded.Select(i => i.ClientID).ToList());
+            desc.AddElementProperty("CurrentIndexCtrl", _currentIndexCtrl.ClientID);
             yield return desc;
         }
 

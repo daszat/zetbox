@@ -98,10 +98,16 @@
     <Compile Include="View\DataObjectReferenceView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="View\EnumSelectionView.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="View\LabeledView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\LauchnerView.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\NullableBoolValueView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\NullablePropertyTextBoxView.cs">

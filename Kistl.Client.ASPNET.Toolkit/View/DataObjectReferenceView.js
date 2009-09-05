@@ -8,9 +8,9 @@
 Type.registerNamespace("Kistl.Client.ASPNET");
 
 Kistl.Client.ASPNET.ObjectReferencePropertyControl = function(element) {
-// Private Fields
-this._list = null;
+    // Private Fields
     this._lnkOpen = null;
+    this._valueCtrl = null;
     this._type = null;
 
     // Handler
@@ -26,24 +26,35 @@ Kistl.Client.ASPNET.ObjectReferencePropertyControl.prototype = {
 
         this._onLnkOpenClickHandler = Function.createDelegate(this, this._onLnkOpenClick);
         $addHandler(this._lnkOpen, "click", this._onLnkOpenClickHandler);
-        
+
     },
     // Dispose
     dispose: function() {
         Kistl.Client.ASPNET.ObjectReferencePropertyControl.callBaseMethod(this, 'dispose');
     },
     // public Properties
-    get_List: function() {
-        return this._list;
-    },
-    set_List: function(val) {
-        this._list = val;
-    },
     get_LnkOpen: function() {
         return this._lnkOpen;
     },
     set_LnkOpen: function(val) {
         this._lnkOpen = val;
+    },
+    get_ValueCtrl: function() {
+        return this._valueCtrl;
+    },
+    set_ValueCtrl: function(val) {
+        this._valueCtrl = val;
+    },
+    get_Value: function() {
+        if (this._valueCtrl.value == '') return null;
+        return Sys.Serialization.JavaScriptSerializer.deserialize(this._valueCtrl.value);
+    },
+    set_Value: function(val) {
+        if (val == null) {
+            this._valueCtrl.value = '';
+        } else {
+            this._valueCtrl.value = Sys.Serialization.JavaScriptSerializer.serialize(val);
+        }
     },
     get_Type: function() {
         return this._type;
@@ -53,9 +64,10 @@ Kistl.Client.ASPNET.ObjectReferencePropertyControl.prototype = {
     },
     // Events
     _onLnkOpenClick: function() {
-        var obj = Sys.Serialization.JavaScriptSerializer.deserialize(this._list.value);
+        var obj = this.get_Value();
+        if (obj == null) return;
         Kistl.JavascriptRenderer.showObject(obj);
-    }    
+    }
 }
 
 Kistl.Client.ASPNET.ObjectReferencePropertyControl.registerClass('Kistl.Client.ASPNET.ObjectReferencePropertyControl', Sys.UI.Control);

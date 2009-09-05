@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-04T16:55:04.523Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-09-05T12:35:31.8188Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -7497,6 +7497,11 @@
     <KistlBase:FullName>Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView</KistlBase:FullName>
     <KistlBase:Parent>a5c6aa56-6ad1-4b81-855c-df62ad953397</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="53444743-6813-4fdd-8c1e-2b868aaabfc9">
+    <KistlBase:Assembly>eb5c0841-a9bb-4262-bb9a-5aed5a7086c7</KistlBase:Assembly>
+    <KistlBase:FullName>Kistl.Client.ASPNET.Toolkit.View.EnumSelectionView</KistlBase:FullName>
+    <KistlBase:Parent>a5c6aa56-6ad1-4b81-855c-df62ad953397</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="e7b4afe1-a1d3-4386-a77a-e939460de6ad">
     <KistlBase:Assembly>eb5c0841-a9bb-4262-bb9a-5aed5a7086c7</KistlBase:Assembly>
     <KistlBase:FullName>Kistl.Client.ASPNET.Toolkit.View.LabeledView</KistlBase:FullName>
@@ -7505,6 +7510,11 @@
   <KistlBase:TypeRef ExportGuid="8a6b4152-a7b8-4cda-87a4-31f74b8f528a">
     <KistlBase:Assembly>eb5c0841-a9bb-4262-bb9a-5aed5a7086c7</KistlBase:Assembly>
     <KistlBase:FullName>Kistl.Client.ASPNET.Toolkit.View.LauchnerView</KistlBase:FullName>
+    <KistlBase:Parent>a5c6aa56-6ad1-4b81-855c-df62ad953397</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="b20eb2ec-5fee-4236-a4ec-1cd1e78c7597">
+    <KistlBase:Assembly>eb5c0841-a9bb-4262-bb9a-5aed5a7086c7</KistlBase:Assembly>
+    <KistlBase:FullName>Kistl.Client.ASPNET.Toolkit.View.NullableBoolValueView</KistlBase:FullName>
     <KistlBase:Parent>a5c6aa56-6ad1-4b81-855c-df62ad953397</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="cd208407-0852-4d6b-9495-989067765916">
@@ -8702,6 +8712,12 @@
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="d9ad5202-d1be-474f-a11a-a1f7e91a09ce">
+    <GUI:ControlRef>53444743-6813-4fdd-8c1e-2b868aaabfc9</GUI:ControlRef>
+    <GUI:Kind>add058e1-2a72-4663-a0c4-9b79cd1d4537</GUI:Kind>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>1</GUI:Toolkit>
+  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="8393395f-4cc0-4efe-815a-54dff7ef4c16">
     <GUI:ControlRef>e7b4afe1-a1d3-4386-a77a-e939460de6ad</GUI:ControlRef>
     <GUI:Kind>e39e18d2-c7a7-4ed6-9542-4d76177c7521</GUI:Kind>
@@ -8711,6 +8727,12 @@
   <GUI:ViewDescriptor ExportGuid="f05ea0f0-274a-4faf-ac6b-5700eb8a98f3">
     <GUI:ControlRef>8a6b4152-a7b8-4cda-87a4-31f74b8f528a</GUI:ControlRef>
     <GUI:Kind>a012a762-5d8b-4aec-b396-e262cf30f9f9</GUI:Kind>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>1</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="31b6f79b-947a-48be-b310-68068550764e">
+    <GUI:ControlRef>b20eb2ec-5fee-4236-a4ec-1cd1e78c7597</GUI:ControlRef>
+    <GUI:Kind>b3f3e922-4fce-4c33-824d-40d47381e3cd</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>

@@ -6,6 +6,7 @@ using Kistl.Client.Presentables;
 using Kistl.Client.GUI;
 using System.Web.UI;
 using Kistl.API;
+using Kistl.App.Extensions;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 
@@ -19,10 +20,12 @@ namespace Kistl.Client.ASPNET.Toolkit.View
     {
         protected ObjectReferenceModel Model { get; private set; }
 
-        protected abstract Control ContainerControl { get; }
-        protected abstract DropDownList cbListControl { get; }
-        protected abstract HtmlControl btnNewControl { get; }
-        protected abstract HtmlControl btnOpenControl { get; }
+        protected abstract Control containerCtrl { get; }
+        protected abstract Label lbItemCtrl { get; }
+        protected abstract HtmlControl btnNewCtrl { get; }
+        protected abstract HtmlControl btnOpenCtrl { get; }
+
+        private HiddenField _valueCtrl = null;
 
         public DataObjectReferenceView()
         {
@@ -31,12 +34,10 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
         void DataObjectReferenceView_Init(object sender, EventArgs e)
         {
-            cbListControl.SelectedIndexChanged += new EventHandler(cbList_OnSelectedIndexChanged);
-        }
+            _valueCtrl = new HiddenField();
+            _valueCtrl.ID = "hdValue";
+            containerCtrl.Controls.Add(_valueCtrl);
 
-        protected void cbList_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
 
         public void SetModel(PresentableModel mdl)
@@ -47,10 +48,10 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         public System.Collections.Generic.IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
             ScriptControlDescriptor desc = new ScriptControlDescriptor("Kistl.Client.ASPNET.ObjectReferencePropertyControl",
-                ContainerControl.ClientID);
-            desc.AddElementProperty("List", cbListControl.ClientID);
-            desc.AddElementProperty("LnkOpen", btnOpenControl.ClientID);
-            desc.AddProperty("Type", new SerializableType(new InterfaceType(typeof(IDataObject))));
+                containerCtrl.ClientID);
+            desc.AddElementProperty("LnkOpen", btnOpenCtrl.ClientID);
+            desc.AddElementProperty("ValueCtrl", _valueCtrl.ClientID);
+            desc.AddProperty("Type", new SerializableType(Model.ReferencedClass.GetDescribedInterfaceType()));
             yield return desc;
         }
 
@@ -68,14 +69,14 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         {
             get
             {
-                string moniker = cbListControl.SelectedValue;
+                string moniker = _valueCtrl.Value;
                 if (string.IsNullOrEmpty(moniker))
                 {
                     return null;
                 }
                 else
                 {
-                    return (IDataObject)KistlContextManagerModule.KistlContext.Find(new InterfaceType(typeof(IDataObject)),
+                    return (IDataObject)KistlContextManagerModule.KistlContext.Find(Model.ReferencedClass.GetDescribedInterfaceType(),
                         moniker.FromJSON(KistlContextManagerModule.KistlContext).ID);
                 }
             }            
@@ -85,20 +86,12 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         {
             base.OnPreRender(e);
 
-            cbListControl.DataValueField = "Moniker";
-            cbListControl.DataTextField = "Text";
-            cbListControl.DataSource = Model.GetDomain().Select(i => new { Moniker = i.ToJSON(), Text = i.Name });
-            cbListControl.DataBind();
+            lbItemCtrl.Text = Model.Value != null ? Model.Value.LongName : "";
 
-            if (Model.AllowNullInput)
-            {
-                cbListControl.Items.Insert(0, new ListItem("", ""));
-            }
+            btnNewCtrl.Attributes.Add("onclick", string.Format("javascript: Kistl.JavascriptRenderer.showObject(Kistl.JavascriptRenderer.newObject({0}));",
+                Model.ReferencedClass.GetDescribedInterfaceType().ToJSON()));
 
-            cbListControl.SelectedValue = Model.Value != null ? Model.Value.ToJSON() : "";
-
-            btnNewControl.Attributes.Add("onclick", string.Format("javascript: Kistl.JavascriptRenderer.showObject(Kistl.JavascriptRenderer.newObject({0}));",
-                new InterfaceType(typeof(IDataObject)).ToJSON()));
+            _valueCtrl.Value = Model.Value != null ? Model.Value.ToJSON() : "";
 
             ScriptManager scriptManager = ScriptManager.GetCurrent(Page);
             if (scriptManager == null)

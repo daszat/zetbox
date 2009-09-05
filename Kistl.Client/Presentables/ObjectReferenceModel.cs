@@ -21,9 +21,16 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx, referenceHolder, prop)
         {
             AllowNullInput = prop.IsNullable();
+            ReferencedClass = prop.GetReferencedObjectClass();
         }
 
         #region Public Interface
+
+        public ObjectClass ReferencedClass
+        {
+            get;
+            protected set;
+        }
 
         public bool HasValue
         {

@@ -8,7 +8,7 @@
                 <ul>
             </HeaderTemplate>
             <ItemTemplate>
-                <li>
+                <li id="container" runat="server">
                     <asp:Literal ID="litText" runat="server" />
                 </li>
             </ItemTemplate>
