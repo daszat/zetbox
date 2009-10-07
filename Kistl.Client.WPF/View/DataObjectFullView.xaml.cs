@@ -21,23 +21,13 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for DataObjectFullView.xaml
     /// </summary>
-    public partial class DataObjectFullView : UserControl, IView
+    public partial class DataObjectFullView : UserControl
     {
 
         public DataObjectFullView()
         {
             InitializeComponent();
         }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = mdl;
-        }
-
-        #endregion
-
     }
 
 }

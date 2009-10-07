@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspnetModelFactory.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="Pages\LauncherPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -107,6 +108,9 @@
     <Compile Include="View\LauchnerView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="View\ModelUserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="View\NullableBoolValueView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -114,6 +118,12 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\PropertyGroupBoxView.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Relations\RelationEndView.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Relations\RelationView.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\WorkspaceView.cs">

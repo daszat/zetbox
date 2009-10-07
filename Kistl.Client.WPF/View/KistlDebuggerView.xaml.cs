@@ -19,20 +19,11 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for KistlDebuggerView.xaml
     /// </summary>
-    public partial class KistlDebuggerView : Window, IView
+    public partial class KistlDebuggerView : Window
     {
         public KistlDebuggerView()
         {
             InitializeComponent();
         }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = (KistlDebuggerAsModel)mdl;
-        }
-
-        #endregion
     }
 }

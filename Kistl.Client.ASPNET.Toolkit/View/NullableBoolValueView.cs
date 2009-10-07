@@ -9,20 +9,14 @@ using System.Web.UI.WebControls;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/NullableBoolValueView.ascx")]
-    public abstract class NullableBoolValueView : System.Web.UI.UserControl, IView
+    public abstract class NullableBoolValueView : ModelUserControl<NullableValuePropertyModel<bool>>
     {
-        protected NullableValuePropertyModel<bool> Model { get; private set; }
         protected abstract RadioButton rbTrueCtrl { get; }
         protected abstract RadioButton rbFalseCtrl { get; }
         protected abstract RadioButton rbNullCtrl { get; }
 
         public NullableBoolValueView()
         {
-        }
-
-        public void SetModel(PresentableModel mdl)
-        {
-            Model = (NullableValuePropertyModel<bool>)mdl;
         }
 
         protected override void OnPreRender(EventArgs e)

@@ -16,10 +16,8 @@ using System.Web.UI.HtmlControls;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/DataObjectReferenceView.ascx")]
-    public abstract class DataObjectReferenceView : System.Web.UI.UserControl, IView, IScriptControl
+    public abstract class DataObjectReferenceView : ModelUserControl<ObjectReferenceModel>, IScriptControl
     {
-        protected ObjectReferenceModel Model { get; private set; }
-
         protected abstract Control containerCtrl { get; }
         protected abstract Label lbItemCtrl { get; }
         protected abstract HtmlControl btnNewCtrl { get; }
@@ -38,11 +36,6 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             _valueCtrl.ID = "hdValue";
             containerCtrl.Controls.Add(_valueCtrl);
 
-        }
-
-        public void SetModel(PresentableModel mdl)
-        {
-            Model = (ObjectReferenceModel)mdl;
         }
 
         public System.Collections.Generic.IEnumerable<ScriptDescriptor> GetScriptDescriptors()

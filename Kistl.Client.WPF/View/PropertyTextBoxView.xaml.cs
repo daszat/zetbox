@@ -20,20 +20,11 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for PropertyTextBoxView.xaml
     /// </summary>
-    public partial class PropertyTextBoxView : PropertyView, IView
+    public partial class PropertyTextBoxView : PropertyView
     {
         public PropertyTextBoxView()
         {
             InitializeComponent();
         }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = mdl;
-        }
-
-        #endregion
     }
 }

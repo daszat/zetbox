@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
     /// </summary>
-    public partial class DataObjectListView : PropertyView, IView
+    public partial class DataObjectListView : PropertyView
     {
 
         public DataObjectListView()
@@ -73,16 +73,7 @@ namespace Kistl.Client.WPF.View
             {
                 model.ActivateItem(model.SelectedItem, true);
             }
-        }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = (ObjectListModel)mdl;
-        }
-
-        #endregion
+        }        
 
         private void RefreshGridView(ObjectListModel model)
         {

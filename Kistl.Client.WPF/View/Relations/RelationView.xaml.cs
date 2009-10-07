@@ -21,23 +21,13 @@ namespace Kistl.Client.WPF.View.Relations
     /// <summary>
     /// Interaction logic for DataObjectFullView.xaml
     /// </summary>
-    public partial class RelationView : UserControl, IView
+    public partial class RelationView : UserControl
     {
 
         public RelationView()
         {
             InitializeComponent();
-        }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = mdl;
-        }
-
-        #endregion
-
+        }    
     }
 
 }

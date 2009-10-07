@@ -48,7 +48,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             get { return Kistl.App.GUI.Toolkit.ASPNET; }
         }
 
-        protected override IView CreateView(Kistl.App.GUI.ViewDescriptor vDesc)
+        protected override object CreateView(Kistl.App.GUI.ViewDescriptor vDesc)
         {
             var type = vDesc.ControlRef.AsType(true);
             var loc = (ControlLocation)type.GetCustomAttributes(typeof(ControlLocation), true).FirstOrDefault();
@@ -64,7 +64,21 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
 
-        protected override void ShowInView(PresentableModel mdl, IView view, bool activate)
+        public override object CreateDefaultView(PresentableModel mdl)
+        {
+            IView view = (IView)base.CreateDefaultView(mdl);
+            view.SetModel(mdl);
+            return view;
+        }
+
+        public override object CreateSpecificView(PresentableModel mdl, ControlKind kind)
+        {
+            IView view = (IView)base.CreateSpecificView(mdl, kind);
+            view.SetModel(mdl);
+            return view;
+        }
+
+        protected override void ShowInView(PresentableModel mdl, object view, bool activate)
         {
             throw new NotImplementedException();
         }
@@ -82,17 +96,17 @@ namespace Kistl.Client.ASPNET.Toolkit
 
     public static class AspnetModelFactoryExtensions
     {
-        public static IView CreateDefaultView(this ModelFactory self, PresentableModel mdl, Control container)
+        public static object CreateDefaultView(this ModelFactory self, PresentableModel mdl, Control container)
         {
             return AddControl(container, self.CreateDefaultView(mdl));
         }
 
-        public static IView CreateSpecificView(this ModelFactory self, PresentableModel mdl, ControlKind kind, Control container)
+        public static object CreateSpecificView(this ModelFactory self, PresentableModel mdl, ControlKind kind, Control container)
         {
             return AddControl(container, self.CreateSpecificView(mdl, kind));
         }
 
-        private static IView AddControl(Control container, IView ctrl)
+        private static object AddControl(Control container, object ctrl)
         {
             container.Controls.Add((Control)ctrl ?? new System.Web.UI.WebControls.Literal() { Text = "Unable to load Control" });
             return ctrl;

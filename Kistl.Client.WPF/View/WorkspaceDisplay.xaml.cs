@@ -21,7 +21,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for WorkspaceDisplay.xaml, a read-only display of a <see cref="Kistl.Client.Presentables.WorkspaceModel"/>.
     /// </summary>
-    public partial class WorkspaceDisplay : Window, Kistl.Client.GUI.IView
+    public partial class WorkspaceDisplay : Window
     {
         /// <summary>
         /// Initializes a new instance of the WorkspaceDisplay class.
@@ -58,8 +58,6 @@ namespace Kistl.Client.WPF.View
             factory.ShowModel(newWorkspace, true);
         }
 
-        #region IView Members
-
         /// <summary>
         /// Gets or sets the displayed model. Uses the DataContext as backing store.
         /// </summary>
@@ -68,18 +66,5 @@ namespace Kistl.Client.WPF.View
             get { return (Kistl.Client.Presentables.WorkspaceModel)DataContext; }
             set { DataContext = value; }
         }
-
-        /// <summary>
-        /// Sets the model to display of this View.
-        /// </summary>
-        /// <param name="mdl">the model to display</param>
-        public void SetModel(Kistl.Client.Presentables.PresentableModel mdl)
-        {
-            Model = (Kistl.Client.Presentables.WorkspaceModel)mdl;
-        }
-
-        #endregion
-
-
     }
 }

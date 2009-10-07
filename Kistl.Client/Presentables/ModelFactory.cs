@@ -122,18 +122,15 @@ namespace Kistl.Client.Presentables
         /// Creates a default View for the given PresentableModel.
         /// </summary>
         /// <param name="mdl">the model to be viewed</param>
-        /// <param name="readOnly">a value indicating whether or not the view should be read only</param>
         /// <returns>the configured view</returns>
-        public IView CreateDefaultView(PresentableModel mdl)
+        public virtual object CreateDefaultView(PresentableModel mdl)
         {
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
                 .GetPresentableModelDescriptor();
 
             var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
             if (vDesc == null) return null;
-            IView view = CreateView(vDesc);
-            view.SetModel(mdl);
-            return view;
+            return CreateView(vDesc);
         }
 
         /// <summary>
@@ -141,9 +138,9 @@ namespace Kistl.Client.Presentables
         /// </summary>
         /// <param name="vDesc">the descriptor describing the view</param>
         /// <returns>a newly created view</returns>
-        protected virtual IView CreateView(ViewDescriptor vDesc)
+        protected virtual object CreateView(ViewDescriptor vDesc)
         {
-            return (IView)vDesc.ControlRef.Create();
+            return vDesc.ControlRef.Create();
         }
 
         /// <summary>
@@ -151,9 +148,8 @@ namespace Kistl.Client.Presentables
         /// </summary>
         /// <param name="mdl">the model to be viewed</param>
         /// <param name="kind">the kind of view to create</param>
-        /// <param name="readOnly">a value indicating whether or not the view should be read only</param>
         /// <returns>the configured view</returns>
-        public IView CreateSpecificView(PresentableModel mdl, ControlKind kind)
+        public virtual object CreateSpecificView(PresentableModel mdl, ControlKind kind)
         {
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
                 .GetPresentableModelDescriptor();
@@ -161,9 +157,7 @@ namespace Kistl.Client.Presentables
             var vDesc = pmd.GetViewDescriptor(Toolkit, kind);
             if (vDesc == null) return null;
 
-            IView view = CreateView(vDesc);
-            view.SetModel(mdl);
-            return view;
+            return CreateView(vDesc);
         }
 
         public void ShowModel(PresentableModel mdl, ControlKind kind, bool activate)
@@ -195,7 +189,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        protected abstract void ShowInView(PresentableModel mdl, IView view, bool activate);
+        protected abstract void ShowInView(PresentableModel mdl, object view, bool activate);
 
         #endregion
 

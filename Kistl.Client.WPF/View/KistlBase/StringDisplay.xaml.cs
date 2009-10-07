@@ -18,20 +18,11 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for StringDisplay.xaml
     /// </summary>
-    public partial class StringDisplay : PropertyView, IView
+    public partial class StringDisplay : PropertyView
     {
         public StringDisplay()
         {
             InitializeComponent();
         }
-
-        #region IView Members
-
-        public void SetModel(Kistl.Client.Presentables.PresentableModel mdl)
-        {
-            DataContext = mdl;
-        }
-
-        #endregion
     }
 }

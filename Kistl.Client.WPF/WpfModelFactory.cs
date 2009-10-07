@@ -29,7 +29,7 @@ namespace Kistl.Client.WPF
         }
 
         /// <inheritdoc/>
-        protected override void ShowInView(PresentableModel mdl, IView view, bool activate)
+        protected override void ShowInView(PresentableModel mdl, object view, bool activate)
         {
             AppContext.UiThread.Verify();
 
@@ -54,6 +54,20 @@ namespace Kistl.Client.WPF
             timer.Interval = tickLength;
             timer.Tick += (obj, args) => action();
             timer.Start();
+        }
+
+        public override object CreateDefaultView(PresentableModel mdl)
+        {
+            System.Windows.Controls.Control view = (System.Windows.Controls.Control)base.CreateDefaultView(mdl);
+            view.DataContext = mdl;
+            return view;
+        }
+
+        public override object CreateSpecificView(PresentableModel mdl, Kistl.App.GUI.ControlKind kind)
+        {
+            System.Windows.Controls.Control view = (System.Windows.Controls.Control)base.CreateSpecificView(mdl, kind);
+            view.DataContext = mdl;
+            return view;
         }
 
         /// <inheritdoc/>

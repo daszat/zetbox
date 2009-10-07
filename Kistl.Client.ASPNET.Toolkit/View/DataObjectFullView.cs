@@ -11,9 +11,8 @@ using Kistl.Client.GUI;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/DataObjectFullView.ascx")]
-    public abstract class DataObjectFullView : System.Web.UI.UserControl, IView
+    public abstract class DataObjectFullView : ModelUserControl<DataObjectModel>
     {
-        protected DataObjectModel Model { get; private set; }
         protected abstract Literal litTitleCtrl { get; }
         protected abstract Repeater repPropertiesCtrl { get; }
 
@@ -36,11 +35,6 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             Control divPlaceHolder = e.Item.FindControl("divPlaceHolder");
 
             GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, divPlaceHolder);
-        }
-
-        public void SetModel(PresentableModel mdl)
-        {
-            Model = (DataObjectModel)mdl;
         }
     }
 }

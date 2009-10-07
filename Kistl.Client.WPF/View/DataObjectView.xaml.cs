@@ -20,20 +20,11 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for DataObjectView.xaml
     /// </summary>
-    public partial class DataObjectView : UserControl, IView
+    public partial class DataObjectView : UserControl
     {
         public DataObjectView()
         {
             InitializeComponent();
-        }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = (DataObjectModel)mdl;
-        }
-
-        #endregion
+        }     
     }
 }

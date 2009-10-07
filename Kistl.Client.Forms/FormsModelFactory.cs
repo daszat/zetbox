@@ -42,7 +42,7 @@ namespace Kistl.Client.Forms
                 Application.Exit();
         }
 
-        protected override void ShowInView(PresentableModel mdl, IView view, bool activate)
+        protected override void ShowInView(PresentableModel mdl, object view, bool activate)
         {
             var control = (IFormsView)view;
             control.SetRenderer(_renderer);

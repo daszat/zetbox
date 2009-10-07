@@ -19,20 +19,11 @@ namespace Kistl.Client.WPF.View.TimeRecords
     /// <summary>
     /// Interaction logic for WorkEffortRecorderView.xaml
     /// </summary>
-    public partial class WorkEffortRecorderView : Window, IView
+    public partial class WorkEffortRecorderView : Window
     {
         public WorkEffortRecorderView()
         {
             InitializeComponent();
         }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = mdl;
-        }
-
-        #endregion
     }
 }

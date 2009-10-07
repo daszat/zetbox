@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.Client.GUI
+namespace Kistl.Client.ASPNET.Toolkit
 {
     public interface IView
     {

@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for EnumSelectionView.xaml
     /// </summary>
-    public partial class EnumSelectionView : PropertyView, IView
+    public partial class EnumSelectionView : PropertyView
     {
         public EnumSelectionView()
         {
@@ -31,15 +31,6 @@ namespace Kistl.Client.WPF.View
         {
             var mdl = (IClearableValue)DataContext;
             mdl.ClearValue();
-        }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = mdl;
-        }
-
-        #endregion
+        }        
     }
 }

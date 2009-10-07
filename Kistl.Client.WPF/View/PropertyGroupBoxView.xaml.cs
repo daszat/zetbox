@@ -20,20 +20,11 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for PropertyGroupBoxView.xaml
     /// </summary>
-    public partial class PropertyGroupBoxView : GroupBox, IView
+    public partial class PropertyGroupBoxView : GroupBox
     {
         public PropertyGroupBoxView()
         {
             InitializeComponent();
-        }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = mdl;
-        }
-
-        #endregion
+        }     
     }
 }

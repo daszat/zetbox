@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullablePropertyTextBoxView.xaml
     /// </summary>
-    public partial class NullablePropertyTextBoxView : PropertyView, IView
+    public partial class NullablePropertyTextBoxView : PropertyView
     {
         public NullablePropertyTextBoxView()
         {
@@ -31,15 +31,6 @@ namespace Kistl.Client.WPF.View
         {
             var mdl = (IClearableValue)DataContext;
             mdl.ClearValue();
-        }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = mdl;
-        }
-
-        #endregion
+        }  
     }
 }

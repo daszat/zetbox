@@ -16,14 +16,13 @@ using Kistl.Client.Presentables;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/DataObjectListView.ascx")]
-    public abstract class DataObjectListView : System.Web.UI.UserControl, IView, IScriptControl
+    public abstract class DataObjectListView : ModelUserControl<ObjectListModel>, IScriptControl
     {
         protected abstract HiddenField HdItemsControl { get; }
         protected abstract AjaxDataControls.DataList LstItemsControl { get; }
         protected abstract Control ContainerControl { get; }
         protected abstract Control LnkAddControl { get; }
         protected abstract Control LnkNewControl { get; }
-        protected ObjectListModel Model { get; private set; }
 
         public DataObjectListView()
         {
@@ -44,11 +43,6 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                 deleted.ForEach(d => Model.RemoveItem(d));
                 added.ForEach(a => Model.AddItem(a));
             }
-        }
-
-        public void SetModel(PresentableModel mdl)
-        {
-            Model = (ObjectListModel)mdl;
         }
 
         protected override void OnPreRender(EventArgs e)

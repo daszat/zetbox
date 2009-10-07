@@ -17,18 +17,12 @@ using Kistl.Client.Presentables;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/LauncherView.ascx")]
-    public abstract class LauchnerView : System.Web.UI.UserControl, IView, IScriptControl
+    public abstract class LauchnerView : ModelUserControl<WorkspaceModel>, IScriptControl
     {
-        protected WorkspaceModel Model { get; private set; }
         protected abstract AjaxDataControls.DataList listModulesCtrl { get; }
         protected abstract AjaxDataControls.DataList listObjectClassesCtrl { get; }
         protected abstract AjaxDataControls.DataList listInstancesCtrl { get; }
         protected abstract Control containerCtrl { get; }
-
-        public void SetModel(PresentableModel mdl)
-        {
-            Model = (WorkspaceModel)mdl;
-        }
 
         #region Render
         protected override void OnPreRender(EventArgs e)

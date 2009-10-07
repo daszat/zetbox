@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for DesktopView.xaml
     /// </summary>
-    public partial class WorkspaceView : Window, IView
+    public partial class WorkspaceView : Window
     {
 
         public WorkspaceView()
@@ -46,16 +46,6 @@ namespace Kistl.Client.WPF.View
                 workspaceModel.HistoryTouch(item);
             }
         }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            // check data type
-            DataContext = (WorkspaceModel)mdl;
-        }
-
-        #endregion
 
         //private void ModuleTreeSelectedItemChangedHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
         //{

@@ -13,8 +13,6 @@ namespace Kistl.Server
     internal class CustomActionsManagerServer
         : BaseCustomActionsManager
     {
-        private IKistlContext _ctx;
-
         internal CustomActionsManagerServer()
             : base(String.Empty, ApplicationContext.Current.ImplementationAssembly)
         {

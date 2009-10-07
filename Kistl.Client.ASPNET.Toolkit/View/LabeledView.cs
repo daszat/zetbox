@@ -11,40 +11,22 @@ using Kistl.Client.GUI;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/LabeledView.ascx")]
-    public abstract class LabeledView : System.Web.UI.UserControl, IView
+    public abstract class LabeledView : ModelUserControl<ILabeledViewModel>
     {
-        protected ILabeledViewModel Model { get; private set; }
         protected abstract Label lbCtrl { get; }
         protected abstract Control containerCtrl { get; }
 
-        private bool _initialized = false;
-
-        public LabeledView()
+        public override void SetModel(PresentableModel mdl)
         {
-            this.Init += new EventHandler(LabeledView_Init);
+            base.SetModel(mdl);
+            GuiApplicationContext.Current.Factory.CreateSpecificView(Model.Model, Model.RequestedKind, containerCtrl);
         }
 
-        public void SetModel(PresentableModel mdl)
+        protected override void OnPreRender(EventArgs e)
         {
-            Model = (ILabeledViewModel)mdl;
-            BindTo();
-        }
-
-        void LabeledView_Init(object sender, EventArgs e)
-        {
-            BindTo();
-        }
-
-        private void BindTo()
-        {
-            if (Model == null || _initialized) return;
-
-            _initialized = true;
-            
             lbCtrl.Text = Model.Label;
             lbCtrl.ToolTip = Model.ToolTip;
-
-            GuiApplicationContext.Current.Factory.CreateSpecificView(Model.Model, Model.RequestedKind, containerCtrl);
+            base.OnPreRender(e);
         }
     }
 }

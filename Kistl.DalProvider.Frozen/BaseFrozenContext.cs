@@ -74,6 +74,10 @@ namespace Kistl.DalProvider.Frozen
         #region GUID Cache
 
         private static IDictionary<Guid, IPersistenceObject> _guidCache;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objs"></param>
         protected static void InitialiseGuidCache(IEnumerable<IPersistenceObject> objs)
         {
             // Do the casting dance to do all the work on initialisation

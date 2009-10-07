@@ -18,9 +18,8 @@ using System.Web.UI.HtmlControls;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/WorkspaceView.ascx")]
-    public abstract class WorkspaceView : System.Web.UI.UserControl, IView, IScriptControl
+    public abstract class WorkspaceView : ModelUserControl<WorkspaceModel>, IScriptControl
     {
-        protected WorkspaceModel Model { get; private set; }
         protected abstract Control containerCtrl { get; }
         protected abstract HiddenField hdObjectsControl { get; }
         protected abstract Repeater repObjectsCtrl { get; }
@@ -52,9 +51,9 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             }
         }
 
-        public void SetModel(PresentableModel mdl)
+        public override void SetModel(PresentableModel mdl)
         {
-            Model = (WorkspaceModel)mdl;
+            base.SetModel(mdl);
             Model.RecentObjects.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(RecentObjects_CollectionChanged);
         }
 
@@ -120,7 +119,9 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                         InterfaceType ifType = new InterfaceType(Type.GetType(type + ", " + ApplicationContext.Current.InterfaceAssembly));
                         IDataObject obj = (IDataObject)KistlContextManagerModule.KistlContext.Find(ifType, id);
 
-                        _Objects.Add(GuiApplicationContext.Current.Factory.CreateSpecificModel<DataObjectModel>(KistlContextManagerModule.KistlContext, obj));
+                        var mdl = GuiApplicationContext.Current.Factory.CreateDefaultModel(KistlContextManagerModule.KistlContext, obj) as DataObjectModel;
+                        if (mdl == null) throw new InvalidOperationException(string.Format("Unable to create model for {0}({1})", type, id));
+                        _Objects.Add(mdl);
                     }
                     else
                     {

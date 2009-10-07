@@ -77,24 +77,25 @@ namespace Kistl.API.Utils
             /// <summary>
             /// Logger
             /// </summary>
-            protected ILog _log;
+            protected ILog log;
 
             /// <summary>
             /// Constructs a new TraceMethodCallContext - internal
             /// </summary>
+            /// <param name="log">Logger</param>
             /// <param name="method">Methodname</param>
             /// <param name="msg">Message</param>
             internal TraceMethodCallContext(ILog log, string method, string msg)
             {
-                _log = log;
-                if (_log.IsDebugEnabled)
+                this.log = log;
+                if (this.log.IsDebugEnabled)
                 {
                     this.Method = method;
                     this.Message = msg;
                     if (string.IsNullOrEmpty(Message))
-                        _log.InfoFormat(">> {0}", Method);
+                        this.log.InfoFormat(">> {0}", Method);
                     else
-                        _log.InfoFormat(">> {0}: {1}", Method, Message);
+                        this.log.InfoFormat(">> {0}: {1}", Method, Message);
                     watch.Start();
                 }
             }
@@ -104,13 +105,13 @@ namespace Kistl.API.Utils
             /// </summary>
             public void Dispose()
             {
-                if (_log.IsDebugEnabled)
+                if (log.IsDebugEnabled)
                 {
                     watch.Stop();
                     if (string.IsNullOrEmpty(Message))
-                        _log.InfoFormat("<< {0:n0}ms {1}", watch.ElapsedMilliseconds, Method);
+                        log.InfoFormat("<< {0:n0}ms {1}", watch.ElapsedMilliseconds, Method);
                     else
-                        _log.InfoFormat("<< {0:n0}ms {1}: {2}", watch.ElapsedMilliseconds, Method, Message);
+                        log.InfoFormat("<< {0:n0}ms {1}: {2}", watch.ElapsedMilliseconds, Method, Message);
                 }
             }
         }
@@ -162,6 +163,7 @@ namespace Kistl.API.Utils
         /// Traces a Methodcall Context with a Message.
         /// using(TraceHelper.TraceMethodCall("Message")) { ... }
         /// </summary>
+        /// <param name="log">Logger</param>
         /// <param name="msg">Message</param>
         /// <returns>TraceMethodCallContext</returns>
         public static TraceMethodCallContext TraceMethodCall(this ILog log, string msg)
@@ -187,6 +189,7 @@ namespace Kistl.API.Utils
         /// Traces a Methodcall Context with a Formatstring and Parameter.
         /// using(TraceHelper.TraceMethodCall("Message {0}", i)) { ... }
         /// </summary>
+        /// <param name="log">Logger</param>
         /// <param name="format">Formatstring</param>
         /// <param name="p">Formatstring Parameter</param>
         /// <returns>TraceMethodCallContext</returns>

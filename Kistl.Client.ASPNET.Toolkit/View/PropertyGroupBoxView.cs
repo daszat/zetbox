@@ -15,9 +15,8 @@ using Kistl.Client.Presentables;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/PropertyGroupBoxView.ascx")]
-    public abstract class PropertyGroupBoxView : System.Web.UI.UserControl, IView
+    public abstract class PropertyGroupBoxView : ModelUserControl<PropertyGroupModel>
     {
-        protected PropertyGroupModel Model { get; private set; }
         protected abstract Panel panelCtrl { get; }
         protected abstract Repeater repPropertiesCtrl { get; }
 
@@ -44,11 +43,5 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                 view.SetModel(data);
             }
         }
-
-        public void SetModel(PresentableModel mdl)
-        {
-            Model = (PropertyGroupModel)mdl;
-        }
-
     }
 }

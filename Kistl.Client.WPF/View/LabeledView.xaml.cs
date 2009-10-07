@@ -19,20 +19,11 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for LabeledView.xaml
     /// </summary>
-    public partial class LabeledView : UserControl, IView
+    public partial class LabeledView : UserControl
     {
         public LabeledView()
         {
             InitializeComponent();
         }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = (ILabeledViewModel)mdl;
-        }
-
-        #endregion
     }
 }

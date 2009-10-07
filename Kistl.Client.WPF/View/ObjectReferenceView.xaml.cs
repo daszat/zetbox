@@ -20,21 +20,11 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for ObjectReferenceView.xaml
     /// </summary>
-    public partial class ObjectReferenceView : PropertyView, IView
+    public partial class ObjectReferenceView : PropertyView
     {
         public ObjectReferenceView()
         {
             InitializeComponent();
         }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = (ObjectReferenceModel)mdl;
-        }
-
-        #endregion
-
     }
 }

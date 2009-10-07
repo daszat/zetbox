@@ -18,15 +18,14 @@ namespace Kistl.Client.WPF.View
     using Kistl.API.Utils;
 
     /// <summary>
-    /// A <see cref="DataTemplateSelector"/> to choose the appropriate
-    /// <see cref="IView"/> for a specified <see cref="PresentableModel"/>.
+    /// A <see cref="DataTemplateSelector"/> to choose the appropriate view for a specified <see cref="PresentableModel"/>.
     /// </summary>
     public class VisualTypeTemplateSelector
         : DataTemplateSelector
     {
         /// <summary>
         /// The core method of this class. Chooses the appropriate 
-        /// <see cref="IView"/> for a specified <see cref="PresentableModel"/> 
+        /// view for a specified <see cref="PresentableModel"/> 
         /// according to the specified parameters.
         /// </summary>
         /// <param name="mdl">the model to display</param>

@@ -10,22 +10,38 @@ namespace Kistl.DalProvider.Frozen
 
     using Kistl.API;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class BaseFrozenObject
         : IPersistenceObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         protected BaseFrozenObject()
         {
             throw new InvalidOperationException("BaseFrozenObject constructor without id called");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         protected BaseFrozenObject(int id)
         {
             this.ID = id;
             this.IsSealed = false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsSealed { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Seal()
         {
             if (IsSealed)
@@ -36,13 +52,21 @@ namespace Kistl.DalProvider.Frozen
         }
 
         #region IPersistenceObject Members
-
+        /// <summary>
+        /// 
+        /// </summary>
         public int ID { get; private set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public DataObjectState ObjectState { get { return DataObjectState.Unmodified; } }
 
         #region IStreamable Members
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sw"></param>
         public virtual void ToStream(BinaryWriter sw)
         {
             BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
@@ -50,47 +74,95 @@ namespace Kistl.DalProvider.Frozen
             BinarySerializer.ToStream((int)ObjectState, sw);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sw"></param>
+        /// <param name="auxObjects"></param>
         public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
         {
             ToStream(sw);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sr"></param>
         public virtual void FromStream(BinaryReader sr)
         {
             throw new InvalidOperationException("Cannot deserialize to a frozen Object");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xml"></param>
+        /// <param name="modules"></param>
         [Obsolete]
         public virtual void ToStream(System.Xml.XmlWriter xml, string[] modules)
         {
             if (xml == null) throw new ArgumentNullException("xml");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xml"></param>
         public virtual void ToStream(System.Xml.XmlWriter xml)
         {
             if (xml == null) throw new ArgumentNullException("xml");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xml"></param>
         public virtual void FromStream(System.Xml.XmlReader xml)
         {
             if (xml == null) throw new ArgumentNullException("xml");
         }
 
         // frozen objects are already connected
+        /// <summary>
+        /// 
+        /// </summary>
         public void ReloadReferences() { }
 
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
         public void NotifyPropertyChanging(string property, object oldValue, object newValue) { }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
         public void NotifyPropertyChanged(string property, object oldValue, object newValue) { }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IKistlContext Context { get { return FrozenContext.Single; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ctx"></param>
         public void AttachToContext(IKistlContext ctx)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ctx"></param>
         public void DetachFromContext(IKistlContext ctx)
         {
             throw new NotImplementedException();
@@ -105,33 +177,65 @@ namespace Kistl.DalProvider.Frozen
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsAttached { get { return true; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsReadonly { get { return IsSealed; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public abstract InterfaceType GetInterfaceType();
 
         #endregion
 
         #region INotifyPropertyChanged Members
 
+        /// <summary>
+        /// 
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged { add { } remove { } }
+        /// <summary>
+        /// 
+        /// </summary>
         public event PropertyChangingEventHandler PropertyChanging { add { } remove { } }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public event PropertyChangeWithValueEventHandler PropertyChangedWithValue { add { } remove { } }
+        /// <summary>
+        /// 
+        /// </summary>
         public event PropertyChangeWithValueEventHandler PropertyChangingWithValue { add { } remove { } }
 
         #endregion
 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class BaseFrozenDataObject : BaseFrozenObject, IDataObject
     {
+        /// <summary>
+        /// 
+        /// </summary>
         protected BaseFrozenDataObject()
         {
             throw new InvalidOperationException("BaseFrozenDataObject constructor without id called");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         protected BaseFrozenDataObject(int id)
             : base(id)
         {
@@ -167,8 +271,16 @@ namespace Kistl.DalProvider.Frozen
         /// <value>String.Empty</value> if there is nothing to report.</returns>
         protected virtual string GetPropertyError(string prop) { return String.Empty; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Error { get { return String.Empty; } }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
         public string this[string columnName] { get { return GetPropertyError(columnName); } }
 
         #endregion
@@ -176,25 +288,43 @@ namespace Kistl.DalProvider.Frozen
 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class BaseFrozenStruct
         : BaseFrozenObject, IStruct
     {
+        /// <summary>
+        /// 
+        /// </summary>
         protected BaseFrozenStruct()
         {
             throw new InvalidOperationException("BaseFrozenStruct constructor without id called");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         protected BaseFrozenStruct(int id)
             : base(id)
         {
         }
 
         #region IStruct Members
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="property"></param>
         public void AttachToObject(IPersistenceObject obj, string property)
         {
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="property"></param>
         public void DetachFromObject(IPersistenceObject obj, string property)
         {
         }
@@ -202,7 +332,10 @@ namespace Kistl.DalProvider.Frozen
         #endregion
 
         #region ICloneable Members
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public object Clone()
         {
             // since we are immutable, returning ourself is save

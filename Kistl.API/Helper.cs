@@ -143,9 +143,15 @@ namespace Kistl.API
         public static T GetPropertyValue<T>(this object obj, string propName)
         {
             if (obj == null) throw new ArgumentNullException("obj");
-            PropertyInfo pi = obj.GetType().GetProperty(propName);
-            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-            return (T)pi.GetValue(obj, null);
+            object result = obj;
+            foreach (string p in propName.Split('.'))
+            {
+                PropertyInfo pi = result.GetType().GetProperty(p);
+                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+                result = pi.GetValue(result, null);
+                if (result == null) return default(T);
+            }
+            return (T)result;
         }
 
         /// <summary>
@@ -215,15 +221,34 @@ namespace Kistl.API
         /// <returns>PropertyValue</returns>
         public static void SetPropertyValue<T>(this object obj, string propName, T val)
         {
-            PropertyInfo pi = obj.GetType().GetProperty(propName);
-            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-            pi.SetValue(obj, val, null);
+            if (obj == null) throw new ArgumentNullException("obj");
+            var propertylist = propName.Split('.');
+            object result = obj;
+            foreach (string p in propertylist.Take(propertylist.Count() - 1))
+            {
+                PropertyInfo pi = result.GetType().GetProperty(p);
+                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+                result = pi.GetValue(result, null);
+                if (result == null) throw new InvalidOperationException(string.Format("Unable to set Property {0}. The Path contains a NULL Object.", propName));
+            }
+
+            PropertyInfo set_pi = result.GetType().GetProperty(propertylist.Last());
+            if (set_pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+
+            set_pi.SetValue(result, val, null);
         }
 
         public static bool HasProperty(this object obj, string propName)
         {
-            PropertyInfo pi = obj.GetType().GetProperty(propName);
-            return pi != null;
+            if (obj == null) throw new ArgumentNullException("obj");
+            object loopObj = obj;
+            foreach (string p in propName.Split('.'))
+            {
+                PropertyInfo pi = loopObj.GetType().GetProperty(p);
+                if (pi == null) return false;
+                loopObj = pi.GetValue(loopObj, null);
+            }
+            return true;
         }
 
         public static void AddToCollectionQuick(this IDataObject obj, string propName, object val)
@@ -287,9 +312,17 @@ namespace Kistl.API
         /// <returns></returns>
         public static Type GetPropertyType(this object obj, string propName)
         {
-            PropertyInfo pi = obj.GetType().GetProperty(propName);
-            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-            return pi.PropertyType;
+            if (obj == null) throw new ArgumentNullException("obj");
+            Type result = null;
+            object loopObj = obj;
+            foreach (string p in propName.Split('.'))
+            {
+                PropertyInfo pi = loopObj.GetType().GetProperty(p);
+                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+                result = pi.PropertyType;
+                loopObj = pi.GetValue(loopObj, null);
+            }
+            return result;
         }
 
         /// <summary>

@@ -19,7 +19,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for SelectionDialog.xaml
     /// </summary>
-    public partial class SelectionDialog : Window, IView
+    public partial class SelectionDialog : Window
     {
         public SelectionDialog()
         {
@@ -53,15 +53,6 @@ namespace Kistl.Client.WPF.View
                 this.Close();
             }
         }
-
-        #region IView Members
-
-        public void SetModel(PresentableModel mdl)
-        {
-            DataContext = (DataObjectSelectionTaskModel)mdl;
-        }
-
-        #endregion
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {

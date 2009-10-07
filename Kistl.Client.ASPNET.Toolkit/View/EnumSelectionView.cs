@@ -9,9 +9,8 @@ using System.Web.UI.WebControls;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/EnumSelectionView.ascx")]
-    public abstract class EnumSelectionView: System.Web.UI.UserControl, IView
+    public abstract class EnumSelectionView: ModelUserControl<EnumerationPropertyModel>
     {
-        protected EnumerationPropertyModel Model { get; private set; }
         protected abstract ListControl listCtrl { get; }
 
         public EnumSelectionView()
@@ -26,11 +25,6 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             listCtrl.DataSource = Model.PossibleValues;
             listCtrl.DataBind();
             listCtrl.Items.Insert(0, new ListItem("", ""));
-        }
-
-        public void SetModel(PresentableModel mdl)
-        {
-            Model = (EnumerationPropertyModel)mdl;
         }
 
         protected override void OnPreRender(EventArgs e)
