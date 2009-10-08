@@ -31,6 +31,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
         public PresentableModel GetModel()
         {
+            if (ApplicationContext.Current == null) return null; // Designmode
             if (_Model == null && !string.IsNullOrEmpty(ModelPath))
             {
                 // Search in Parent
