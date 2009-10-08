@@ -119,7 +119,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 
         protected override void ApplyObjectReferencePropertyTemplate(ObjectReferenceProperty prop)
         {
-            var rel = RelationExtensions.Lookup(ctx, prop);
+            var rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
 
             // Navigator can be NULL
             // Debug.Assert(rel.A.Navigator.ID == prop.ID || rel.B.Navigator.ID == prop.ID);
@@ -160,7 +160,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         {
             // TODO: move debugging output into Templates
             this.WriteLine("    /*");
-            Implementation.RelationDebugTemplate.Call(Host, ctx, RelationExtensions.Lookup(ctx, prop));
+            Implementation.RelationDebugTemplate.Call(Host, ctx, Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop));
             this.WriteLine("    */");
 
             base.ApplyObjectReferenceListTemplate(prop);

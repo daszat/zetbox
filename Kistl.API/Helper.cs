@@ -81,6 +81,251 @@ namespace Kistl.API
     }
 
     /// <summary>
+    /// Extensions for accessing properties and fields generic
+    /// </summary>
+    public static class GetSetHasValueExtensions
+    {
+        #region Private
+        /// <summary>
+        /// Returns a _private_ Property Value from a given Object. Uses Reflection.
+        /// Throws a ArgumentOutOfRangeException if the Property is not found.
+        /// </summary>
+        /// <typeparam name="T">Type of the Property</typeparam>
+        /// <param name="obj">Object from where the Property Value is returned</param>
+        /// <param name="propName">Propertyname as string.</param>
+        /// <returns>PropertyValue</returns>
+        public static T GetPrivatePropertyValue<T>(this object obj, string propName)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            PropertyInfo pi = obj.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            return (T)pi.GetValue(obj, null);
+        }
+
+        /// <summary>
+        /// Returns a private Property Value from a given Object. Uses Reflection.
+        /// Throws a ArgumentOutOfRangeException if the Property is not found.
+        /// </summary>
+        /// <typeparam name="T">Type of the Property</typeparam>
+        /// <param name="obj">Object from where the Property Value is returned</param>
+        /// <param name="propName">Propertyname as string.</param>
+        /// <returns>PropertyValue</returns>
+        public static T GetPrivateFieldValue<T>(this object obj, string propName)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            Type t = obj.GetType();
+            FieldInfo fi = null;
+            while (fi == null && t != null)
+            {
+                fi = t.GetField(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                t = t.BaseType;
+            }
+            if (fi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Field {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            return (T)fi.GetValue(obj);
+        }
+        /// <summary>
+        /// Sets a _private_ Property Value from a given Object. Uses Reflection.
+        /// Throws a ArgumentOutOfRangeException if the Property is not found.
+        /// </summary>
+        /// <typeparam name="T">Type of the Property</typeparam>
+        /// <param name="obj">Object from where the Property Value is set</param>
+        /// <param name="propName">Propertyname as string.</param>
+        /// <param name="val">Value to set.</param>
+        /// <returns>PropertyValue</returns>
+        public static void SetPrivatePropertyValue<T>(this object obj, string propName, T val)
+        {
+            Type t = obj.GetType();
+            if (t.GetProperty(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) == null)
+                throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            t.InvokeMember(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.SetProperty | BindingFlags.Instance, null, obj, new object[] { val });
+        }
+
+        /// <summary>
+        /// Set a private Property Value on a given Object. Uses Reflection.
+        /// </summary>
+        /// <typeparam name="T">Type of the Property</typeparam>
+        /// <param name="obj">Object from where the Property Value is returned</param>
+        /// <param name="propName">Propertyname as string.</param>
+        /// <param name="val">the value to set</param>
+        /// <exception cref="ArgumentOutOfRangeException">if the Property is not found</exception>
+        public static void SetPrivateFieldValue<T>(this object obj, string propName, T val)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            Type t = obj.GetType();
+            FieldInfo fi = null;
+            while (fi == null && t != null)
+            {
+                fi = t.GetField(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                t = t.BaseType;
+            }
+            if (fi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Field {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            fi.SetValue(obj, val);
+        }
+        #endregion
+
+        #region Public
+        /// <summary>
+        /// Returns the Type of the named property's values
+        /// Uses Reflection.
+        /// Supports extended access syntax PropertyName.NeestedProperty[DictKey1].PropertyName2
+        /// </summary>
+        /// <param name="obj">Object where the type of a property should be checked</param>
+        /// <param name="propName">Propertyname as string.</param>
+        /// <returns></returns>
+        public static Type GetPropertyType(this object obj, string propName)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            Type result = null;
+            object loopObj = obj;
+            foreach (string it_p in propName.Split('.'))
+            {
+                string dictKey = string.Empty;
+                string p = it_p;
+                ExtractDictKey(ref dictKey, ref p);
+
+                PropertyInfo pi = loopObj.GetType().GetProperty(p);
+                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+                result = pi.PropertyType;
+                loopObj = pi.GetValue(loopObj, null);
+
+                if (!string.IsNullOrEmpty(dictKey))
+                {
+                    IDictionary dict = loopObj as IDictionary;
+                    if (dict != null)
+                    {
+                        loopObj = dict[dictKey];
+                        result = loopObj.GetType();
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} is not a Dictionary, it's a {1}", p, obj.GetType().FullName));
+                    }
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Checks if a Property exists.
+        /// Does not throw exceptions.
+        /// Uses Reflection.
+        /// Supports extended access syntax PropertyName.NeestedProperty[DictKey1].PropertyName2
+        /// </summary>
+        /// <param name="obj">Object where the existens of a property should be checked</param>
+        /// <param name="propName">Propertyname as string.</param>
+        /// <returns>true if the property exists or false if any property does not exists</returns>
+        public static bool HasProperty(this object obj, string propName)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            object loopObj = obj;
+            foreach (string it_p in propName.Split('.'))
+            {
+                string dictKey = string.Empty;
+                string p = it_p;
+                ExtractDictKey(ref dictKey, ref p);
+
+                PropertyInfo pi = loopObj.GetType().GetProperty(p);
+                if (pi == null) return false;
+
+                loopObj = pi.GetValue(loopObj, null);
+                if (!string.IsNullOrEmpty(dictKey) && loopObj != null)
+                {
+                    IDictionary dict = loopObj as IDictionary;
+                    if (dict != null)
+                    {
+                        loopObj = dict[dictKey];
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Sets a Property Value from a given Object. 
+        /// Uses Reflection.
+        /// Throws a ArgumentOutOfRangeException if the Property is not found.
+        /// </summary>
+        /// <typeparam name="T">Type of the Property</typeparam>
+        /// <param name="obj">Object from where the Property Value is set</param>
+        /// <param name="propName">Propertyname as string.</param>
+        /// <param name="val">Value to set.</param>
+        /// <returns>PropertyValue</returns>
+        public static void SetPropertyValue<T>(this object obj, string propName, T val)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            var propertylist = propName.Split('.');
+            object result = obj;
+            foreach (string p in propertylist.Take(propertylist.Count() - 1))
+            {
+                PropertyInfo pi = result.GetType().GetProperty(p);
+                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+                result = pi.GetValue(result, null);
+                if (result == null) throw new InvalidOperationException(string.Format("Unable to set Property {0}. The Path contains a NULL Object.", propName));
+            }
+
+            PropertyInfo set_pi = result.GetType().GetProperty(propertylist.Last());
+            if (set_pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+
+            set_pi.SetValue(result, val, null);
+        }
+
+        /// <summary>
+        /// Returns a Property Value from a given Object. Uses Reflection.
+        /// Throws a ArgumentOutOfRangeException if the Property is not found.
+        /// Supports extended access syntax PropertyName.NeestedProperty[DictKey1].PropertyName2
+        /// </summary>
+        /// <typeparam name="T">Type of the Property</typeparam>
+        /// <param name="obj">Object from where the Property Value is returned</param>
+        /// <param name="propName">Propertyname as string.</param>
+        /// <returns>PropertyValue</returns>
+        public static T GetPropertyValue<T>(this object obj, string propName)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            object result = obj;
+            foreach (string it_p in propName.Split('.'))
+            {
+                string dictKey = string.Empty;
+                string p = it_p;
+                ExtractDictKey(ref dictKey, ref p);
+
+                PropertyInfo pi = result.GetType().GetProperty(p);
+                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+                result = pi.GetValue(result, null);
+                if (result == null) return default(T);
+
+                if (!string.IsNullOrEmpty(dictKey))
+                {
+                    IDictionary dict = result as IDictionary;
+                    if (dict != null)
+                    {
+                        result = dict[dictKey];
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} is not a Dictionary, it's a {1}", p, obj.GetType().FullName));
+                    }
+                }
+            }
+            return (T)result;
+        }
+
+        private static void ExtractDictKey(ref string dictKey, ref string p)
+        {
+            if (p.Contains("[") && p.EndsWith("]"))
+            {
+                int idx = p.LastIndexOf("[");
+                dictKey = p.Substring(idx + 1, p.Length - idx - 2);
+                p = p.Substring(0, idx);
+            }
+        }
+        #endregion
+    }
+
+    /// <summary>
     /// C# Extensions
     /// </summary>
     public static class ExtensionHelpers
@@ -130,52 +375,16 @@ namespace Kistl.API
                 if (e.Equals(v)) return true;
             }
             return false;
-        }        
-
-        /// <summary>
-        /// Returns a _private_ Property Value from a given Object. Uses Reflection.
-        /// Throws a ArgumentOutOfRangeException if the Property is not found.
-        /// </summary>
-        /// <typeparam name="T">Type of the Property</typeparam>
-        /// <param name="obj">Object from where the Property Value is returned</param>
-        /// <param name="propName">Propertyname as string.</param>
-        /// <returns>PropertyValue</returns>
-        public static T GetPrivatePropertyValue<T>(this object obj, string propName)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            PropertyInfo pi = obj.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-            return (T)pi.GetValue(obj, null);
         }
 
-        /// <summary>
-        /// Returns a private Property Value from a given Object. Uses Reflection.
-        /// Throws a ArgumentOutOfRangeException if the Property is not found.
-        /// </summary>
-        /// <typeparam name="T">Type of the Property</typeparam>
-        /// <param name="obj">Object from where the Property Value is returned</param>
-        /// <param name="propName">Propertyname as string.</param>
-        /// <returns>PropertyValue</returns>
-        public static T GetPrivateFieldValue<T>(this object obj, string propName)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            Type t = obj.GetType();
-            FieldInfo fi = null;
-            while (fi == null && t != null)
-            {
-                fi = t.GetField(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                t = t.BaseType;
-            }
-            if (fi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Field {0} was not found in Type {1}", propName, obj.GetType().FullName));
-            return (T)fi.GetValue(obj);
-        }
+
 
         /// <summary>
-        /// 
+        /// Finds the first member of the given type or null if not found.
         /// </summary>
-        /// <param name="t"></param>
-        /// <param name="memberName"></param>
-        /// <returns></returns>
+        /// <param name="t">Type to search</param>
+        /// <param name="memberName">Membername to search</param>
+        /// <returns>MemberInfo or null if not found</returns>
         public static MemberInfo FindFirstOrDefaultMember(this Type t, string memberName)
         {
             if (t == null) throw new ArgumentNullException("t");
@@ -195,133 +404,47 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Sets a Property Value from a given Object. Uses Reflection.
-        /// Throws a ArgumentOutOfRangeException if the Property is not found.
+        /// Add a value to a collection.
         /// </summary>
-        /// <typeparam name="T">Type of the Property</typeparam>
-        /// <param name="obj">Object from where the Property Value is set</param>
-        /// <param name="propName">Propertyname as string.</param>
-        /// <param name="val">Value to set.</param>
-        /// <returns>PropertyValue</returns>
-        public static void SetPropertyValue<T>(this object obj, string propName, T val)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            var propertylist = propName.Split('.');
-            object result = obj;
-            foreach (string p in propertylist.Take(propertylist.Count() - 1))
-            {
-                PropertyInfo pi = result.GetType().GetProperty(p);
-                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-                result = pi.GetValue(result, null);
-                if (result == null) throw new InvalidOperationException(string.Format("Unable to set Property {0}. The Path contains a NULL Object.", propName));
-            }
-
-            PropertyInfo set_pi = result.GetType().GetProperty(propertylist.Last());
-            if (set_pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-
-            set_pi.SetValue(result, val, null);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="propName"></param>
-        /// <returns></returns>
-        public static bool HasProperty(this object obj, string propName)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            object loopObj = obj;
-            foreach (string it_p in propName.Split('.'))
-            {
-                string dictKey = string.Empty;
-                string p = it_p;
-                ExtractDictKey(ref dictKey, ref p);
-
-                PropertyInfo pi = loopObj.GetType().GetProperty(p);
-                if (pi == null) return false;
-
-                loopObj = pi.GetValue(loopObj, null);
-                if (!string.IsNullOrEmpty(dictKey) && loopObj != null)
-                {
-                    IDictionary dict = loopObj as IDictionary;
-                    if (dict != null)
-                    {
-                        loopObj = dict[dictKey];
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Returns a Property Value from a given Object. Uses Reflection.
-        /// Throws a ArgumentOutOfRangeException if the Property is not found.
-        /// </summary>
-        /// <typeparam name="T">Type of the Property</typeparam>
-        /// <param name="obj">Object from where the Property Value is returned</param>
-        /// <param name="propName">Propertyname as string.</param>
-        /// <returns>PropertyValue</returns>
-        public static T GetPropertyValue<T>(this object obj, string propName)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            object result = obj;
-            foreach (string it_p in propName.Split('.'))
-            {
-                string dictKey = string.Empty;
-                string p = it_p;
-                ExtractDictKey(ref dictKey, ref p);
-
-                PropertyInfo pi = result.GetType().GetProperty(p);
-                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-                result = pi.GetValue(result, null);
-                if (result == null) return default(T);
-
-                if (!string.IsNullOrEmpty(dictKey))
-                {
-                    IDictionary dict = result as IDictionary;
-                    if (dict != null)
-                    {
-                        result = dict[dictKey];
-                    }
-                    else
-                    {
-                        throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} is not a Dictionary, it's a {1}", p, obj.GetType().FullName));
-                    }
-                }
-            }
-            return (T)result;
-        }
-
-        private static void ExtractDictKey(ref string dictKey, ref string p)
-        {
-            if (p.Contains("[") && p.EndsWith("]"))
-            {
-                int idx = p.LastIndexOf("[");
-                dictKey = p.Substring(idx + 1, p.Length - idx - 2);
-                p = p.Substring(0, idx);
-            }
-        }
-
+        /// <param name="obj">Object holding the collection</param>
+        /// <param name="propName">Propertyname of the collection</param>
+        /// <param name="val">value to add</param>
         public static void AddToCollectionQuick(this IDataObject obj, string propName, object val)
         {
             MagicCollectionFactory.WrapAsCollection<object>(obj.GetPropertyValue<object>(propName)).Add(val);
         }
 
+        /// <summary>
+        /// Removes a value from a collection.
+        /// </summary>
+        /// <param name="obj">Object holding the collection</param>
+        /// <param name="propName">Propertyname of the collection</param>
+        /// <param name="val">value to remove</param>
         public static void RemoveFromCollectionQuick(this IDataObject obj, string propName, object val)
         {
             MagicCollectionFactory.WrapAsCollection<object>(obj.GetPropertyValue<object>(propName)).Remove(val);
         }
 
+        /// <summary>
+        /// Add a value to a collection.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj">Object holding the collection</param>
+        /// <param name="propName">Propertyname of the collection</param>
+        /// <param name="val">value to add</param>
         public static void AddToCollection<T>(this object obj, string propName, T val)
         {
             AddToCollection<T>(obj, propName, val, false);
         }
 
+        /// <summary>
+        /// Add a value to a collection.
+        /// </summary>
+        /// <typeparam name="T">Type of the value</typeparam>
+        /// <param name="obj">Object holding the collection</param>
+        /// <param name="propName">Propertyname of the collection</param>
+        /// <param name="val">value to add</param>
+        /// <param name="unique">if the value already exists nothing will be added.</param>
         public static void AddToCollection<T>(this object obj, string propName, T val, bool unique)
         {
             PropertyInfo pi = obj.GetType().GetProperty(propName);
@@ -345,6 +468,13 @@ namespace Kistl.API
             add.Invoke(collection, new object[] { val });
         }
 
+        /// <summary>
+        /// Removes a value from a collection.
+        /// </summary>
+        /// <typeparam name="T">Type of the value</typeparam>
+        /// <param name="obj">Object holding the collection</param>
+        /// <param name="propName">Propertyname of the collection</param>
+        /// <param name="val">value to remove</param>
         public static void RemoveFromCollection<T>(this object obj, string propName, T val)
         {
             PropertyInfo pi = obj.GetType().GetProperty(propName);
@@ -360,65 +490,7 @@ namespace Kistl.API
             add.Invoke(collection, new object[] { val });
         }
 
-        /// <summary>
-        /// returns the Type of the named property's values
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="propName"></param>
-        /// <returns></returns>
-        public static Type GetPropertyType(this object obj, string propName)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            Type result = null;
-            object loopObj = obj;
-            foreach (string p in propName.Split('.'))
-            {
-                PropertyInfo pi = loopObj.GetType().GetProperty(p);
-                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-                result = pi.PropertyType;
-                loopObj = pi.GetValue(loopObj, null);
-            }
-            return result;
-        }
 
-        /// <summary>
-        /// Sets a _private_ Property Value from a given Object. Uses Reflection.
-        /// Throws a ArgumentOutOfRangeException if the Property is not found.
-        /// </summary>
-        /// <typeparam name="T">Type of the Property</typeparam>
-        /// <param name="obj">Object from where the Property Value is set</param>
-        /// <param name="propName">Propertyname as string.</param>
-        /// <param name="val">Value to set.</param>
-        /// <returns>PropertyValue</returns>
-        public static void SetPrivatePropertyValue<T>(this object obj, string propName, T val)
-        {
-            Type t = obj.GetType();
-            if (t.GetProperty(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) == null)
-                throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-            t.InvokeMember(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.SetProperty | BindingFlags.Instance, null, obj, new object[] { val });
-        }
-
-        /// <summary>
-        /// Set a private Property Value on a given Object. Uses Reflection.
-        /// </summary>
-        /// <typeparam name="T">Type of the Property</typeparam>
-        /// <param name="obj">Object from where the Property Value is returned</param>
-        /// <param name="propName">Propertyname as string.</param>
-        /// <param name="val">the value to set</param>
-        /// <exception cref="ArgumentOutOfRangeException">if the Property is not found</exception>
-        public static void SetPrivateFieldValue<T>(this object obj, string propName, T val)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            Type t = obj.GetType();
-            FieldInfo fi = null;
-            while (fi == null && t != null)
-            {
-                fi = t.GetField(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                t = t.BaseType;
-            }
-            if (fi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Field {0} was not found in Type {1}", propName, obj.GetType().FullName));
-            fi.SetValue(obj, val);
-        }
 
         /// <summary>
         /// Calls a public method on the given object. Uses Reflection.
@@ -442,7 +514,13 @@ namespace Kistl.API
             return (TReturn)mi.Invoke(obj, new object[] { });
         }
 
-
+        /// <summary>
+        /// Finds a Method with the given method parameter.
+        /// </summary>
+        /// <param name="type">Type to search in</param>
+        /// <param name="methodName">Methodname to search for</param>
+        /// <param name="parameterTypes">parameter types to match</param>
+        /// <returns>MethodInfo or null if the method was not found</returns>
         public static MethodInfo FindMethod(this Type type, string methodName, Type[] parameterTypes)
         {
             if (parameterTypes == null)
@@ -493,6 +571,14 @@ namespace Kistl.API
             return null;
         }
 
+        /// <summary>
+        /// Finds a Method with the given method parameter.
+        /// </summary>
+        /// <param name="type">Type to search in</param>
+        /// <param name="methodName">Methodname to search for</param>
+        /// <param name="typeArguments">type arguments to match</param>
+        /// <param name="parameterTypes">parameter types to match</param>
+        /// <returns>MethodInfo or null if the method was not found</returns>
         public static MethodInfo FindGenericMethod(this Type type, string methodName, Type[] typeArguments, Type[] parameterTypes)
         {
             if (parameterTypes == null)
@@ -547,73 +633,6 @@ namespace Kistl.API
 
             return null;
         }
-
-        ///// <summary>
-        ///// Finds the return type of the first implemented IEnumerable
-        ///// </summary>
-        ///// <param name="seqType"></param>
-        ///// <returns></returns>
-        //[Obsolete("Use the array variant FindElementTypes instead")]
-        //public static Type GetCollectionElementType(this Type seqType)
-        //{
-        //    Type ienum = FindIEnumerable(seqType);
-        //    if (ienum == null) return seqType;
-        //    return ienum.GetGenericArguments()[0];
-        //}
-
-        ///// <summary>
-        ///// Finds the first implemented by seqType from this List:
-        ///// <list type="*">
-        ///// <item>IEnumerable&lt;X&gt;,</item>
-        ///// <item>IEnumerable,</item>
-        ///// <item>null</item>
-        ///// </list>
-        ///// </summary>
-        ///// <param name="seqType"></param>
-        ///// <returns></returns>
-        //[Obsolete("Use the array variant FindIEnumerables instead")]
-        //public static Type FindIEnumerable(this Type seqType)
-        //{
-        //    if (seqType == null || seqType == typeof(string))
-        //        return null;
-
-        //    if (seqType.IsArray)
-        //        return typeof(IEnumerable);
-
-        //    if (seqType == typeof(IEnumerable))
-        //        return seqType;
-
-        //    // quick shortcut: guess that generic arguments often end up in
-        //    // an IEnumerable<>, also handles coincidentally IEnumerable<>s
-        //    if (seqType.IsGenericType)
-        //    {
-        //        foreach (Type arg in seqType.GetGenericArguments())
-        //        {
-        //            Type ienum = typeof(IEnumerable<>).MakeGenericType(arg);
-        //            if (ienum.IsAssignableFrom(seqType))
-        //            {
-        //                return ienum;
-        //            }
-        //        }
-        //    }
-
-        //    Type[] ifaces = seqType.GetInterfaces();
-        //    if (ifaces != null && ifaces.Length > 0)
-        //    {
-        //        foreach (Type iface in ifaces)
-        //        {
-        //            Type ienum = FindIEnumerable(iface);
-        //            if (ienum != null) return ienum;
-        //        }
-        //    }
-
-        //    if (seqType.BaseType != null && seqType.BaseType != typeof(object))
-        //    {
-        //        return FindIEnumerable(seqType.BaseType);
-        //    }
-
-        //    return null;
-        //}
 
         /// <summary>
         /// Finds all implemented IEnumerables of the given Type
@@ -705,6 +724,12 @@ namespace Kistl.API
             }
         }
 
+        /// <summary>
+        /// Parse a GUID value.
+        /// Returns Guid.Empty if the str is null or empty or str couldn't be parsed
+        /// </summary>
+        /// <param name="str">String to parse</param>
+        /// <returns>Guid or Guid.Empty</returns>
         public static Guid ParseGuidValue(this string str)
         {
             if (string.IsNullOrEmpty(str)) return Guid.Empty;
@@ -728,5 +753,11 @@ namespace Kistl.API
         public T Data { get; set; }
     }
 
+    /// <summary>
+    /// GenericEventHandler
+    /// </summary>
+    /// <typeparam name="TEventArgs"></typeparam>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     public delegate void GenericEventHandler<TEventArgs>(object sender, GenericEventArgs<TEventArgs> e);
 }

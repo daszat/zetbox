@@ -40,7 +40,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 		if (p is ObjectReferenceProperty)
 		{
 		    var prop = p as ObjectReferenceProperty;
-		    var rel = RelationExtensions.Lookup(ctx, prop);
+		    var rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
 			var relEnd = rel.GetEnd(prop);
 			var otherEnd = rel.GetOtherEnd(relEnd);
 			

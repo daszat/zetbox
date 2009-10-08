@@ -92,7 +92,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void UpdateColumns(ObjectClass objClass, ICollection<Property> properties, string prefix)
         {
-            foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.HasStorage()))
+            foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => !p.IsList))
             {
                 if (Case.IsNewValueTypePropertyNullable(prop))
                 {
@@ -120,7 +120,7 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList && p.HasStorage()))
+            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList))
             {
                 UpdateColumns(objClass, sprop.StructDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
             }
@@ -144,7 +144,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void UpdateDeletedColumns(ObjectClass objClass, string prefix)
         {
-            foreach (ValueTypeProperty prop in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid && !p.IsList && p.HasStorage()))
+            foreach (ValueTypeProperty prop in Case.savedSchema.GetQuery<ValueTypeProperty>().Where(p => p.ObjectClass.ExportGuid == objClass.ExportGuid && !p.IsList))
             {
                 if (Case.IsDeleteValueTypeProperty(prop))
                 {

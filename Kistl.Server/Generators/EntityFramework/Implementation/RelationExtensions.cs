@@ -92,11 +92,5 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
                     throw new ArgumentOutOfRangeException("m");
             }
         }
-
-        [Obsolete]
-        internal static Relation Lookup(IKistlContext ctx, ObjectReferenceProperty prop)
-        {
-            return Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
-        }
     }
 }

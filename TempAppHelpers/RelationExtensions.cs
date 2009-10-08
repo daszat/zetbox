@@ -65,5 +65,21 @@ namespace Kistl.App.Extensions
                     throw new ArgumentOutOfRangeException("role", String.Format("unknown RelationEndRole '{0}'", role));
             }
         }
+
+        // Use after next commit
+        //public static bool HasStorage(this Relation rel, RelationEndRole role)
+        //{
+        //    if (rel.Storage == StorageType.Replicate)
+        //        throw new NotImplementedException();
+
+        //    RelationType type = rel.GetRelationType();
+        //    // n:m has no storage on A or B
+        //    return
+        //           (type == RelationType.one_n && rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
+        //        || (type == RelationType.one_n && rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B)
+        //        || (type == RelationType.one_one && rel.Storage == StorageType.Replicate)
+        //        || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
+        //        || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B);
+        //}
     }
 }

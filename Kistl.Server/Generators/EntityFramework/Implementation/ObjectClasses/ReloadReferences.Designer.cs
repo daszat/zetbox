@@ -51,7 +51,7 @@ foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
 		.OrderBy(orp => orp.ObjectClass.ClassName)
 		.ThenBy(orp => orp.PropertyName))
 	{
-		Relation rel = RelationExtensions.Lookup(ctx, prop);
+		Relation rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
 		RelationEnd relEnd = rel.GetEnd(prop);
         RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
         

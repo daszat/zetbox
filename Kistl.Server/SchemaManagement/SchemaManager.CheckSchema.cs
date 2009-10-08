@@ -97,9 +97,9 @@ namespace Kistl.Server.SchemaManagement
 
         private void GetExistingColumnNames(ObjectClass objClass, ICollection<Property> properties, string prefix, List<string> columns)
         {
-            columns.AddRange(properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && p.HasStorage()).Select(p => Construct.NestedColumnName(p, prefix)).ToArray());
+            columns.AddRange(properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).Select(p => Construct.NestedColumnName(p, prefix)).ToArray());
 
-            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList && p.HasStorage()))
+            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList))
             {
                 GetExistingColumnNames(objClass, sprop.StructDefinition.Properties, Construct.NestedColumnName(sprop, prefix), columns);
             }
@@ -468,7 +468,7 @@ namespace Kistl.Server.SchemaManagement
         {
             report.WriteLine("  Columns: ");
             foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>()
-                .Where(p => !p.IsList && p.HasStorage())
+                .Where(p => !p.IsList)
                 .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
             {
                 string tblName = objClass.TableName;
@@ -477,7 +477,7 @@ namespace Kistl.Server.SchemaManagement
                 CheckColumn(tblName, colName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, prop.IsNullable());
             }
 
-            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList && p.HasStorage()))
+            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList))
             {
                 CheckColumns(objClass, sprop.StructDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
             }

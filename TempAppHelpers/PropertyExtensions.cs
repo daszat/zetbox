@@ -10,19 +10,7 @@ namespace Kistl.App.Extensions
     public static class PropertyExtensions
     {
         [Obsolete("Storage of a Property is defined by the containing Relation")]
-        public static bool HasStorage(this Property bp)
-        {
-            if (bp is ObjectReferenceProperty)
-            {
-                return HasStorage((ObjectReferenceProperty)bp);
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        private static bool HasStorage(this ObjectReferenceProperty p)
+        public static bool HasStorage(this ObjectReferenceProperty p)
         {
             Relation rel = RelationExtensions.Lookup(p.Context, p);
             if (rel == null) return true;

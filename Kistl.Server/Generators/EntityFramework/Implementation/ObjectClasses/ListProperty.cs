@@ -27,7 +27,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                 // this is 1:N stuff
 
                 var orp = (ObjectReferenceProperty)this.property;
-                var rel = RelationExtensions.Lookup(ctx, orp);
+                var rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, orp);
                 var relEnd = rel.GetEnd(orp);
 
                 Implementation.ObjectClasses.EfListWrapper.Call(Host, ctx,
