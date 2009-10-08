@@ -34,7 +34,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         
         public JavaScriptObjectMoniker(IKistlContext ctx, IDataObject obj)
         {
-            DataObjectModel m = GuiApplicationContext.Current.Factory.CreateSpecificModel<DataObjectModel>(ctx, obj);
+            DataObjectModel m = (DataObjectModel)GuiApplicationContext.Current.Factory.CreateDefaultModel(ctx, obj);
             Init(m);
         }
 
@@ -59,7 +59,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 obj = (IDataObject)ctx.Find(Type.GetInterfaceType(), ID);
             }
 
-            return GuiApplicationContext.Current.Factory.CreateSpecificModel<DataObjectModel>(ctx, obj);
+            return (DataObjectModel)GuiApplicationContext.Current.Factory.CreateDefaultModel(ctx, obj);
         }
     }
 

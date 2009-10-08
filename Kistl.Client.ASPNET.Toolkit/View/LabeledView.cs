@@ -16,10 +16,30 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         protected abstract Label lbCtrl { get; }
         protected abstract Control containerCtrl { get; }
 
+        public LabeledView()
+        {
+            this.Init += new EventHandler(LabeledView_Init);
+        }
+
+        void LabeledView_Init(object sender, EventArgs e)
+        {
+            InititalizeView();
+        }
+
         public override void SetModel(PresentableModel mdl)
         {
             base.SetModel(mdl);
-            GuiApplicationContext.Current.Factory.CreateSpecificView(Model.Model, Model.RequestedKind, containerCtrl);
+            InititalizeView();
+        }
+
+        private bool _initialized = false;
+        private void InititalizeView()
+        {
+            if (!_initialized && Model != null)
+            {
+                GuiApplicationContext.Current.Factory.CreateSpecificView(Model.Model, Model.RequestedKind, containerCtrl);
+                _initialized = true;
+            }
         }
 
         protected override void OnPreRender(EventArgs e)

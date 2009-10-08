@@ -11,45 +11,52 @@ namespace Kistl.Client.ASPNET.Toolkit.View
     public abstract class ModelUserControl<T> : System.Web.UI.UserControl, IView
         where T : class
     {
-        private T _Model = null;
         public T Model 
         {
             get
             {
-                if (_Model == null && !string.IsNullOrEmpty(ModelPath))
-                {
-                    // Search in Parent
-                    Control ctrl = this.Parent;
-                    while (ctrl != null)
-                    {
-                        if (ctrl.HasProperty(ModelPath))
-                        {
-                            object mdl = ctrl.GetPropertyValue<object>(ModelPath);
-                            if (mdl is T)
-                            {
-                                _Model = (T)mdl;
-                                break;
-                            }
-                        }
-                        ctrl = ctrl.Parent;
-                    }
-
-                    if (_Model == null)
-                    {
-                        // Still null -> not found
-                        throw new ArgumentOutOfRangeException("ModelPath", string.Format("Unable to find Model with ModelPath {0}", ModelPath));
-                    }
-                }
-                return _Model;
+                return (T)(object)GetModel();
             }
         }
 
         public string ModelPath { get; set; }
 
+        private PresentableModel _Model = null;
+
         public virtual void SetModel(PresentableModel mdl)
         {
             if (!(mdl is T)) throw new ArgumentOutOfRangeException("Incompatible Model was set");
-            _Model = (T)(object)mdl;
+            _Model = mdl;
+        }
+
+        public PresentableModel GetModel()
+        {
+            if (_Model == null && !string.IsNullOrEmpty(ModelPath))
+            {
+                // Search in Parent
+                Control ctrl = this.Parent;
+                while (ctrl != null)
+                {
+                    IView view = ctrl as IView;
+                    if (view != null && view.GetModel().HasProperty(ModelPath))
+                    {
+                        object mdl = view.GetModel().GetPropertyValue<object>(ModelPath);
+                        if (mdl is T)
+                        {
+                            _Model = (PresentableModel)mdl;
+                            break;
+                        }
+                    }
+                    ctrl = ctrl.Parent;
+                }
+
+                if (_Model == null)
+                {
+                    // Still null -> not found
+                    throw new ArgumentOutOfRangeException("ModelPath", string.Format("Unable to find Model with ModelPath {0}", ModelPath));
+                }
+            }
+            return _Model;
         }
     }
 }

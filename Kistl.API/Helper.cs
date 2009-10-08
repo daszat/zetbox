@@ -130,29 +130,7 @@ namespace Kistl.API
                 if (e.Equals(v)) return true;
             }
             return false;
-        }
-
-        /// <summary>
-        /// Returns a Property Value from a given Object. Uses Reflection.
-        /// Throws a ArgumentOutOfRangeException if the Property is not found.
-        /// </summary>
-        /// <typeparam name="T">Type of the Property</typeparam>
-        /// <param name="obj">Object from where the Property Value is returned</param>
-        /// <param name="propName">Propertyname as string.</param>
-        /// <returns>PropertyValue</returns>
-        public static T GetPropertyValue<T>(this object obj, string propName)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            object result = obj;
-            foreach (string p in propName.Split('.'))
-            {
-                PropertyInfo pi = result.GetType().GetProperty(p);
-                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-                result = pi.GetValue(result, null);
-                if (result == null) return default(T);
-            }
-            return (T)result;
-        }
+        }        
 
         /// <summary>
         /// Returns a _private_ Property Value from a given Object. Uses Reflection.
@@ -192,6 +170,12 @@ namespace Kistl.API
             return (T)fi.GetValue(obj);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="memberName"></param>
+        /// <returns></returns>
         public static MemberInfo FindFirstOrDefaultMember(this Type t, string memberName)
         {
             if (t == null) throw new ArgumentNullException("t");
@@ -238,17 +222,89 @@ namespace Kistl.API
             set_pi.SetValue(result, val, null);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="propName"></param>
+        /// <returns></returns>
         public static bool HasProperty(this object obj, string propName)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             object loopObj = obj;
-            foreach (string p in propName.Split('.'))
+            foreach (string it_p in propName.Split('.'))
             {
+                string dictKey = string.Empty;
+                string p = it_p;
+                ExtractDictKey(ref dictKey, ref p);
+
                 PropertyInfo pi = loopObj.GetType().GetProperty(p);
                 if (pi == null) return false;
+
                 loopObj = pi.GetValue(loopObj, null);
+                if (!string.IsNullOrEmpty(dictKey) && loopObj != null)
+                {
+                    IDictionary dict = loopObj as IDictionary;
+                    if (dict != null)
+                    {
+                        loopObj = dict[dictKey];
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
             }
             return true;
+        }
+
+        /// <summary>
+        /// Returns a Property Value from a given Object. Uses Reflection.
+        /// Throws a ArgumentOutOfRangeException if the Property is not found.
+        /// </summary>
+        /// <typeparam name="T">Type of the Property</typeparam>
+        /// <param name="obj">Object from where the Property Value is returned</param>
+        /// <param name="propName">Propertyname as string.</param>
+        /// <returns>PropertyValue</returns>
+        public static T GetPropertyValue<T>(this object obj, string propName)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            object result = obj;
+            foreach (string it_p in propName.Split('.'))
+            {
+                string dictKey = string.Empty;
+                string p = it_p;
+                ExtractDictKey(ref dictKey, ref p);
+
+                PropertyInfo pi = result.GetType().GetProperty(p);
+                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+                result = pi.GetValue(result, null);
+                if (result == null) return default(T);
+
+                if (!string.IsNullOrEmpty(dictKey))
+                {
+                    IDictionary dict = result as IDictionary;
+                    if (dict != null)
+                    {
+                        result = dict[dictKey];
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} is not a Dictionary, it's a {1}", p, obj.GetType().FullName));
+                    }
+                }
+            }
+            return (T)result;
+        }
+
+        private static void ExtractDictKey(ref string dictKey, ref string p)
+        {
+            if (p.Contains("[") && p.EndsWith("]"))
+            {
+                int idx = p.LastIndexOf("[");
+                dictKey = p.Substring(idx + 1, p.Length - idx - 2);
+                p = p.Substring(0, idx);
+            }
         }
 
         public static void AddToCollectionQuick(this IDataObject obj, string propName, object val)

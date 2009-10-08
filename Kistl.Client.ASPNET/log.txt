@@ -581,3 +581,160 @@
 2009-10-07 19:49:56,094 [12] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Client.dll (from C:\Users\arthur\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-6-128994113910618000\bin\Kistl.Objects.Client.dll)
 2009-10-07 19:49:56,165 [12] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.ClientObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 2009-10-07 19:49:56,165 [12] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.ClientObjects.dll (from C:\Users\arthur\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-6-128994113910618000\bin\Kistl.DalProvider.ClientObjects.dll)
+2009-10-08 08:49:00,642 [4] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-1-128994581388300000\bin\
+2009-10-08 08:49:00,678 [4] WARN   [(null)] - Error when trying to load frozen context: Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen
+System.TypeLoadException: Could not load type 'Kistl.DalProvider.Frozen.FrozenContextImplementation' from assembly 'Kistl.Objects.Frozen'.
+   at System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
+   at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.Type.GetType(String typeName, Boolean throwOnError)
+   at Kistl.API.FrozenContext.TryInit() in p:\Kistl\Kistl.API\FrozenContext.cs:line 101
+2009-10-08 08:49:00,720 [4] WARN   [(null)] - Frozen.Single called without frozen context assembly or fallback.
+2009-10-08 08:49:00,721 [4] WARN   [(null)] - Falling back to direct database access. Expect poor performance.
+2009-10-08 08:49:30,118 [4] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-1-128994581694790000\bin\
+2009-10-08 08:49:30,152 [4] WARN   [(null)] - Error when trying to load frozen context: Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen
+System.TypeLoadException: Could not load type 'Kistl.DalProvider.Frozen.FrozenContextImplementation' from assembly 'Kistl.Objects.Frozen'.
+   at System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
+   at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.Type.GetType(String typeName, Boolean throwOnError)
+   at Kistl.API.FrozenContext.TryInit() in p:\Kistl\Kistl.API\FrozenContext.cs:line 101
+2009-10-08 08:49:30,158 [4] WARN   [(null)] - Frozen.Single called without frozen context assembly or fallback.
+2009-10-08 08:49:30,158 [4] WARN   [(null)] - Falling back to direct database access. Expect poor performance.
+2009-10-08 08:49:45,081 [4] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-1-128994581835210000\bin\
+2009-10-08 08:49:45,151 [4] WARN   [(null)] - Error when trying to load frozen context: Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen
+System.TypeLoadException: Could not load type 'Kistl.DalProvider.Frozen.FrozenContextImplementation' from assembly 'Kistl.Objects.Frozen'.
+   at System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
+   at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.Type.GetType(String typeName, Boolean throwOnError)
+   at Kistl.API.FrozenContext.TryInit() in p:\Kistl\Kistl.API\FrozenContext.cs:line 101
+2009-10-08 08:49:45,156 [4] WARN   [(null)] - Frozen.Single called without frozen context assembly or fallback.
+2009-10-08 08:49:45,156 [4] WARN   [(null)] - Falling back to direct database access. Expect poor performance.
+2009-10-08 08:50:08,425 [4] WARN   [(null)] - Frozen.Single called without frozen context assembly or fallback.
+2009-10-08 08:50:08,426 [4] WARN   [(null)] - Falling back to direct database access. Expect poor performance.
+2009-10-08 08:50:10,820 [4] WARN   [(null)] - Frozen.Single called without frozen context assembly or fallback.
+2009-10-08 08:50:10,820 [4] WARN   [(null)] - Falling back to direct database access. Expect poor performance.
+2009-10-08 08:50:14,947 [4] WARN   [(null)] - Frozen.Single called without frozen context assembly or fallback.
+2009-10-08 08:50:14,947 [4] WARN   [(null)] - Falling back to direct database access. Expect poor performance.
+2009-10-08 08:52:23,576 [4] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-1-128994583424840000\bin\
+2009-10-08 08:52:23,627 [4] WARN   [(null)] - Error when trying to load frozen context: Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen
+System.TypeLoadException: Could not load type 'Kistl.DalProvider.Frozen.FrozenContextImplementation' from assembly 'Kistl.Objects.Frozen'.
+   at System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
+   at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.Type.GetType(String typeName, Boolean throwOnError)
+   at Kistl.API.FrozenContext.TryInit() in p:\Kistl\Kistl.API\FrozenContext.cs:line 101
+2009-10-08 08:52:23,632 [4] WARN   [(null)] - Frozen.Single called without frozen context assembly or fallback.
+2009-10-08 08:52:23,633 [4] WARN   [(null)] - Falling back to direct database access. Expect poor performance.
+2009-10-08 08:59:09,797 [8] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-2-128994587484540000\bin\
+2009-10-08 08:59:09,828 [8] WARN   [(null)] - Error when trying to load frozen context: Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen
+System.TypeLoadException: Could not load type 'Kistl.DalProvider.Frozen.FrozenContextImplementation' from assembly 'Kistl.Objects.Frozen'.
+   at System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
+   at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.Type.GetType(String typeName, Boolean throwOnError)
+   at Kistl.API.FrozenContext.TryInit() in p:\Kistl\Kistl.API\FrozenContext.cs:line 101
+2009-10-08 08:59:09,855 [8] WARN   [(null)] - Frozen.Single called without frozen context assembly or fallback.
+2009-10-08 08:59:09,855 [8] WARN   [(null)] - Falling back to direct database access. Expect poor performance.
+2009-10-08 08:59:36,507 [4] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-1-128994587758900000\bin\
+2009-10-08 08:59:36,542 [4] WARN   [(null)] - Error when trying to load frozen context: Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen
+System.TypeLoadException: Could not load type 'Kistl.DalProvider.Frozen.FrozenContextImplementation' from assembly 'Kistl.Objects.Frozen'.
+   at System.RuntimeTypeHandle._GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark, Boolean loadTypeFromPartialName)
+   at System.RuntimeTypeHandle.GetTypeByName(String name, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.RuntimeType.PrivateGetType(String typeName, Boolean throwOnError, Boolean ignoreCase, Boolean reflectionOnly, StackCrawlMark& stackMark)
+   at System.Type.GetType(String typeName, Boolean throwOnError)
+   at Kistl.API.FrozenContext.TryInit() in p:\Kistl\Kistl.API\FrozenContext.cs:line 101
+2009-10-08 08:59:36,547 [4] WARN   [(null)] - Frozen.Single called without frozen context assembly or fallback.
+2009-10-08 08:59:36,547 [4] WARN   [(null)] - Falling back to direct database access. Expect poor performance.
+2009-10-08 09:02:27,751 [4] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-2-128994589464300000\bin\
+2009-10-08 09:02:27,788 [4] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Frozen
+2009-10-08 09:02:27,790 [4] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-2-128994589464300000\bin\Kistl.Objects.Frozen.dll)
+2009-10-08 09:02:27,874 [4] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.Frozen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:02:27,875 [4] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-2-128994589464300000\bin\Kistl.DalProvider.Frozen.dll)
+2009-10-08 09:02:30,592 [4] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:02:30,593 [4] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Common.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-2-128994589464300000\bin\Kistl.App.Projekte.Common.dll)
+2009-10-08 09:02:30,697 [4] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:02:30,698 [4] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-2-128994589464300000\bin\Kistl.App.Projekte.Client.dll)
+2009-10-08 09:02:30,946 [4] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Client
+2009-10-08 09:02:30,946 [4] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-2-128994589464300000\bin\Kistl.Objects.Client.dll)
+2009-10-08 09:02:31,009 [4] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.ClientObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:02:31,009 [4] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.ClientObjects.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-2-128994589464300000\bin\Kistl.DalProvider.ClientObjects.dll)
+2009-10-08 09:36:08,210 [13] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-3-128994609665160000\bin\
+2009-10-08 09:36:08,246 [13] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Frozen
+2009-10-08 09:36:08,249 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-3-128994609665160000\bin\Kistl.Objects.Frozen.dll)
+2009-10-08 09:36:08,365 [13] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.Frozen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:36:08,366 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-3-128994609665160000\bin\Kistl.DalProvider.Frozen.dll)
+2009-10-08 09:36:10,907 [13] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:36:10,908 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Common.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-3-128994609665160000\bin\Kistl.App.Projekte.Common.dll)
+2009-10-08 09:36:11,010 [13] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:36:11,012 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-3-128994609665160000\bin\Kistl.App.Projekte.Client.dll)
+2009-10-08 09:36:11,224 [13] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Client
+2009-10-08 09:36:11,224 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-3-128994609665160000\bin\Kistl.Objects.Client.dll)
+2009-10-08 09:36:11,387 [13] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.ClientObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:36:11,388 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.ClientObjects.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-3-128994609665160000\bin\Kistl.DalProvider.ClientObjects.dll)
+2009-10-08 09:43:41,474 [13] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-4-128994614198660000\bin\
+2009-10-08 09:43:41,511 [13] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Frozen
+2009-10-08 09:43:41,513 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-4-128994614198660000\bin\Kistl.Objects.Frozen.dll)
+2009-10-08 09:43:41,633 [13] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.Frozen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:43:41,634 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-4-128994614198660000\bin\Kistl.DalProvider.Frozen.dll)
+2009-10-08 09:43:44,215 [13] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:43:44,217 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Common.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-4-128994614198660000\bin\Kistl.App.Projekte.Common.dll)
+2009-10-08 09:43:44,322 [13] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:43:44,323 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-4-128994614198660000\bin\Kistl.App.Projekte.Client.dll)
+2009-10-08 09:43:44,536 [13] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Client
+2009-10-08 09:43:44,537 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-4-128994614198660000\bin\Kistl.Objects.Client.dll)
+2009-10-08 09:43:44,666 [13] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.ClientObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:43:44,667 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.ClientObjects.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-4-128994614198660000\bin\Kistl.DalProvider.ClientObjects.dll)
+2009-10-08 09:50:18,557 [13] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-5-128994618168700000\bin\
+2009-10-08 09:50:18,622 [13] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Frozen
+2009-10-08 09:50:18,625 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-5-128994618168700000\bin\Kistl.Objects.Frozen.dll)
+2009-10-08 09:50:18,760 [13] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.Frozen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:50:18,761 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-5-128994618168700000\bin\Kistl.DalProvider.Frozen.dll)
+2009-10-08 09:50:21,565 [13] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:50:21,566 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Common.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-5-128994618168700000\bin\Kistl.App.Projekte.Common.dll)
+2009-10-08 09:50:21,681 [13] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:50:21,682 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-5-128994618168700000\bin\Kistl.App.Projekte.Client.dll)
+2009-10-08 09:50:21,903 [13] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Client
+2009-10-08 09:50:21,904 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-5-128994618168700000\bin\Kistl.Objects.Client.dll)
+2009-10-08 09:50:22,022 [13] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.ClientObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 09:50:22,023 [13] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.ClientObjects.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-5-128994618168700000\bin\Kistl.DalProvider.ClientObjects.dll)
+2009-10-08 10:11:56,848 [8] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-6-128994631152330000\bin\
+2009-10-08 10:11:56,886 [8] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Frozen
+2009-10-08 10:11:56,889 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-6-128994631152330000\bin\Kistl.Objects.Frozen.dll)
+2009-10-08 10:11:56,965 [8] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.Frozen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:11:56,966 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-6-128994631152330000\bin\Kistl.DalProvider.Frozen.dll)
+2009-10-08 10:11:59,658 [8] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:11:59,659 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Common.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-6-128994631152330000\bin\Kistl.App.Projekte.Common.dll)
+2009-10-08 10:11:59,719 [8] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:11:59,721 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-6-128994631152330000\bin\Kistl.App.Projekte.Client.dll)
+2009-10-08 10:11:59,971 [8] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Client
+2009-10-08 10:11:59,977 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-6-128994631152330000\bin\Kistl.Objects.Client.dll)
+2009-10-08 10:12:00,103 [8] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.ClientObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:12:00,105 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.ClientObjects.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-6-128994631152330000\bin\Kistl.DalProvider.ClientObjects.dll)
+2009-10-08 10:18:44,361 [8] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-7-128994635230420000\bin\
+2009-10-08 10:18:44,393 [8] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Frozen
+2009-10-08 10:18:44,395 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-7-128994635230420000\bin\Kistl.Objects.Frozen.dll)
+2009-10-08 10:18:44,457 [8] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.Frozen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:18:44,458 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-7-128994635230420000\bin\Kistl.DalProvider.Frozen.dll)
+2009-10-08 10:18:46,985 [8] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:18:46,986 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Common.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-7-128994635230420000\bin\Kistl.App.Projekte.Common.dll)
+2009-10-08 10:18:47,040 [8] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:18:47,040 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-7-128994635230420000\bin\Kistl.App.Projekte.Client.dll)
+2009-10-08 10:18:47,250 [8] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Client
+2009-10-08 10:18:47,250 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-7-128994635230420000\bin\Kistl.Objects.Client.dll)
+2009-10-08 10:18:47,352 [8] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.ClientObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:18:47,352 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.ClientObjects.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-7-128994635230420000\bin\Kistl.DalProvider.ClientObjects.dll)
+2009-10-08 10:23:10,076 [8] INFO   [(null)] - Cleaned TargetAssemblyFolder C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-8-128994637888100000\bin\
+2009-10-08 10:23:10,106 [8] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Frozen
+2009-10-08 10:23:10,108 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-8-128994637888100000\bin\Kistl.Objects.Frozen.dll)
+2009-10-08 10:23:10,165 [8] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.Frozen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:23:10,165 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.Frozen.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-8-128994637888100000\bin\Kistl.DalProvider.Frozen.dll)
+2009-10-08 10:23:12,688 [8] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:23:12,688 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Common.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-8-128994637888100000\bin\Kistl.App.Projekte.Common.dll)
+2009-10-08 10:23:12,781 [8] DEBUG  [(null)] - Resolving Assembly Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:23:12,782 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.App.Projekte.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-8-128994637888100000\bin\Kistl.App.Projekte.Client.dll)
+2009-10-08 10:23:12,979 [8] DEBUG  [(null)] - Resolving Assembly Kistl.Objects.Client
+2009-10-08 10:23:12,980 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Client.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-8-128994637888100000\bin\Kistl.Objects.Client.dll)
+2009-10-08 10:23:13,077 [8] DEBUG  [(null)] - Resolving Assembly Kistl.DalProvider.ClientObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2009-10-08 10:23:13,077 [8] DEBUG  [(null)] - Loading C:\temp\KistlCodeGen\bin\Debug\Kistl.DalProvider.ClientObjects.dll (from C:\Users\arthur.DASZ\AppData\Local\dasz\Kistl\Default Web Configuration\1b6c3ad-8-128994637888100000\bin\Kistl.DalProvider.ClientObjects.dll)

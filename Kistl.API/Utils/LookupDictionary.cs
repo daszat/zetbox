@@ -14,7 +14,7 @@ namespace Kistl.API.Utils
     /// <typeparam name="TKey">the type of values used as lookup key</typeparam>
     /// <typeparam name="TValue">the type of stored objects</typeparam>
     public sealed class LookupDictionary<TKey, TValue>
-            : IDictionary<TKey, TValue>
+            : IDictionary<TKey, TValue>, System.Collections.IDictionary
     {
         /// <summary>
         /// The backing store of this ListDictionary. This list is searched when looking up stuff.
@@ -234,6 +234,94 @@ namespace Kistl.API.Utils
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        #endregion
+
+        #region IDictionary Members
+
+        void System.Collections.IDictionary.Add(object key, object value)
+        {
+            this.Add((TKey)key, (TValue)value);
+        }
+
+        void System.Collections.IDictionary.Clear()
+        {
+            this.Clear();
+        }
+
+        bool System.Collections.IDictionary.Contains(object key)
+        {
+            return this.ContainsKey((TKey)key);
+        }
+
+        System.Collections.IDictionaryEnumerator System.Collections.IDictionary.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        bool System.Collections.IDictionary.IsFixedSize
+        {
+            get { return false; }
+        }
+
+        bool System.Collections.IDictionary.IsReadOnly
+        {
+            get { return this.IsReadOnly; }
+        }
+
+        System.Collections.ICollection System.Collections.IDictionary.Keys
+        {
+            get { return this.Keys.ToList(); }
+        }
+
+        void System.Collections.IDictionary.Remove(object key)
+        {
+            this.Remove((TKey)key);
+        }
+
+        System.Collections.ICollection System.Collections.IDictionary.Values
+        {
+            get { return this.Values.ToList(); }
+        }
+
+        object System.Collections.IDictionary.this[object key]
+        {
+            get
+            {
+               return this[(TKey)key];
+            }
+            set
+            {
+                this[(TKey)key] = (TValue)value;
+            }
+        }
+
+        #endregion
+
+        #region ICollection Members
+
+        void System.Collections.ICollection.CopyTo(Array array, int index)
+        {
+            for (int i = 0; i < _list.Count; i++)
+            {
+                array.SetValue(new KeyValuePair<TKey, TValue>(_key(_list[i]), _list[i]), i + index);
+            }
+        }
+
+        int System.Collections.ICollection.Count
+        {
+            get { return this.Count; }
+        }
+
+        bool System.Collections.ICollection.IsSynchronized
+        {
+            get { return false; }
+        }
+
+        object System.Collections.ICollection.SyncRoot
+        {
+            get { return null; }
         }
 
         #endregion
