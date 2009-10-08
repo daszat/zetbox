@@ -9,6 +9,15 @@ namespace Kistl.App.Extensions
 {
     public static class PropertyExtensions
     {
+        /// <summary>
+        /// Returns the association name for the given ValueTypeProperty
+        /// </summary>
+        public static string GetAssociationName(this ValueTypeProperty prop)
+        {
+            if (!prop.IsList) throw new NotSupportedException("GetAssociationName is only valid for Lists");
+            return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.ClassName, "value", prop.PropertyName);
+        }
+
         [Obsolete("Storage of a Property is defined by the containing Relation")]
         public static bool HasStorage(this ObjectReferenceProperty p)
         {

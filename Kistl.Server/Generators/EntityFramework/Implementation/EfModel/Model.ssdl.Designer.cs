@@ -158,7 +158,7 @@ this.WriteObjects("    <Property Name=\"ID\" Type=\"int\" Nullable=\"false\" ", 
 ApplyEntityTypeColumnDefs(cls.Properties.OfType<ObjectReferenceProperty>()
 			.OrderBy(p => p.ObjectClass.ClassName)
 			.ThenBy(p => p.PropertyName)
-			.Where(p => !p.IsList() && p.HasStorage())
+			.Where(p => !p.IsList() && p.HasStorage()) // TODO: David: please change this!
 			.Cast<Property>());
 		ApplyEntityTypeColumnDefs(cls.Properties.OfType<ValueTypeProperty>()
 			.OrderBy(p => p.ObjectClass.ClassName)

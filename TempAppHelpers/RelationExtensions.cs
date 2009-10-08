@@ -26,6 +26,14 @@ namespace Kistl.App.Extensions
             return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.Type.ClassName, rel.Verb, rel.B.Type.ClassName, relEnd.RoleName);
         }
 
+        /// <summary>
+        /// Returns the association name for the given relation
+        /// </summary>
+        public static string GetAssociationName(this Relation rel)
+        {
+            return String.Format("FK_{0}_{1}_{2}", rel.A.Type.ClassName, rel.Verb, rel.B.Type.ClassName);
+        }
+
         public static RelationEndRole GetRole(this RelationEnd relEnd)
         {
             if (relEnd.AParent == null && relEnd.BParent == null)
@@ -66,20 +74,19 @@ namespace Kistl.App.Extensions
             }
         }
 
-        // Use after next commit
-        //public static bool HasStorage(this Relation rel, RelationEndRole role)
-        //{
-        //    if (rel.Storage == StorageType.Replicate)
-        //        throw new NotImplementedException();
+        public static bool HasStorage(this Relation rel, RelationEndRole role)
+        {
+            if (rel.Storage == StorageType.Replicate)
+                throw new NotImplementedException();
 
-        //    RelationType type = rel.GetRelationType();
-        //    // n:m has no storage on A or B
-        //    return
-        //           (type == RelationType.one_n && rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
-        //        || (type == RelationType.one_n && rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B)
-        //        || (type == RelationType.one_one && rel.Storage == StorageType.Replicate)
-        //        || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
-        //        || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B);
-        //}
+            RelationType type = rel.GetRelationType();
+            // n:m has no storage on A or B
+            return
+                   (type == RelationType.one_n && rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
+                || (type == RelationType.one_n && rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B)
+                || (type == RelationType.one_one && rel.Storage == StorageType.Replicate)
+                || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoA && role == RelationEndRole.A)
+                || (type == RelationType.one_one && rel.Storage == StorageType.MergeIntoB && role == RelationEndRole.B);
+        }
     }
 }

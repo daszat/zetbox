@@ -1,4 +1,4 @@
-rem @echo off
+@echo off
 
 rem remove old assemblies
 del /S /Q bin\ C:\temp\KistlCodeGen\*
@@ -49,10 +49,16 @@ rem rebuild with newly generated code
 C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Kistl.Complete.sln
 IF ERRORLEVEL 1 GOTO FAIL
 
-echo Success.
+echo ********************************************************************************
+echo ************************************ Success ***********************************
+echo ********************************************************************************
 GOTO EOF
 
 :FAIL
+echo ********************************************************************************
+echo ************************************* FAIL *************************************
+echo ********************************************************************************
 echo Aborting reset.
+
 :EOF
 pause

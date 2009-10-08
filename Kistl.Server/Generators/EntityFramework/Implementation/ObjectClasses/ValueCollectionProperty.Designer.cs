@@ -6,6 +6,7 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
+using Kistl.App.Extensions;
 
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
@@ -29,7 +30,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ValueCollectionProperty.cst"
+#line 19 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ValueCollectionProperty.cst"
 Debug.Assert(prop.IsList);
 
 
@@ -59,7 +60,7 @@ Debug.Assert(prop.IsList);
     AddSerialization(serializationList, efName);
 
 
-#line 47 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ValueCollectionProperty.cst"
+#line 48 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\ValueCollectionProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");

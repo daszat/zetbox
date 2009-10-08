@@ -13,28 +13,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
 
     public static class RelationExtensions
     {
-
-        /// <summary>
-        /// Returns the association name for the given relation
-        /// TODO: Move to Relation Generated Object
-        /// </summary>
-        public static string GetAssociationName(this Relation rel)
-        {
-            return String.Format("FK_{0}_{1}_{2}", rel.A.Type.ClassName, rel.Verb, rel.B.Type.ClassName);
-        }
-
-        /// <summary>
-        /// Returns the association name for the given ValueTypeProperty
-        /// TODO: Move to Relation Generated Object
-        /// </summary>
-        public static string GetAssociationName(this ValueTypeProperty prop)
-        {
-            // prop.GetPropertyTypeString().Split('.').Last()
-            // this does not work while creating a new Database - CustomAction Manager is not initialized
-            // due to lack of MethodInvocation information
-            return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.ClassName, "value", prop.PropertyName);
-        }
-
         /// <summary>
         /// maps from a RelationEnd.Multiplicity to EF's RelationshipMultiplicity as used in the CSDL part of EDMX
         /// </summary>

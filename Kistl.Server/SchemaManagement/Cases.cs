@@ -377,12 +377,12 @@ namespace Kistl.Server.SchemaManagement
 
             ObjectReferenceProperty nav = null;
             string tblName = "";
-            if (rel.A.Navigator != null && rel.A.Navigator.HasStorage())
+            if (rel.A.Navigator != null && rel.HasStorage(RelationEndRole.A))
             {
                 nav = rel.A.Navigator;
                 tblName = rel.A.Type.TableName;
             }
-            else if (rel.B.Navigator != null && rel.B.Navigator.HasStorage())
+            else if (rel.B.Navigator != null && rel.HasStorage(RelationEndRole.B))
             {
                 nav = rel.B.Navigator;
                 tblName = rel.B.Type.TableName;
@@ -507,14 +507,14 @@ namespace Kistl.Server.SchemaManagement
             string tblName = "";
             string refTblName = "";
             bool isIndexed = false;
-            if (rel.A.Navigator != null && rel.A.Navigator.HasStorage())
+            if (rel.A.Navigator != null && rel.HasStorage(RelationEndRole.A))
             {
                 nav = rel.A.Navigator;
                 tblName = rel.A.Type.TableName;
                 refTblName = rel.B.Type.TableName;
                 isIndexed = rel.NeedsPositionStorage(RelationEndRole.A);
             }
-            else if (rel.B.Navigator != null && rel.B.Navigator.HasStorage())
+            else if (rel.B.Navigator != null && rel.HasStorage(RelationEndRole.B))
             {
                 nav = rel.B.Navigator;
                 tblName = rel.B.Type.TableName;
@@ -696,12 +696,12 @@ namespace Kistl.Server.SchemaManagement
         {
             report.WriteLine("  Deleting 1:1 Relation: {0}", rel.GetAssociationName());
 
-            if (rel.A.Navigator.HasStorage())
+            if (rel.HasStorage(RelationEndRole.A))
             {
                 Delete_1_1_Relation_DropColumns(rel, rel.A, rel.B, RelationEndRole.A);
             }
             // Difference to 1:N. 1:1 may have storage 'Replicate'
-            if (rel.B.Navigator.HasStorage())
+            if (rel.HasStorage(RelationEndRole.B))
             {
                 Delete_1_1_Relation_DropColumns(rel, rel.B, rel.A, RelationEndRole.B);
             }

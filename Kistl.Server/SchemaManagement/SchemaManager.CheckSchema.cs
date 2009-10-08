@@ -139,9 +139,9 @@ namespace Kistl.Server.SchemaManagement
 
             foreach (var rel in relations.Where(r => r.GetRelationType() == RelationType.one_one))
             {
-                if (rel.A.Navigator != null && rel.A.Navigator.HasStorage())
+                if (rel.A.Navigator != null && rel.HasStorage(RelationEndRole.A))
                     relationNames.Add(rel.GetRelationAssociationName(RelationEndRole.A));
-                if (rel.B.Navigator != null && rel.B.Navigator.HasStorage())
+                if (rel.B.Navigator != null && rel.HasStorage(RelationEndRole.B))
                     relationNames.Add(rel.GetRelationAssociationName(RelationEndRole.B));
             }
 
@@ -194,7 +194,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void Check_1_1_RelationColumns(Relation rel, RelationEnd relEnd, RelationEndRole role)
         {
-            if (relEnd.Navigator != null && relEnd.Navigator.HasStorage())
+            if (relEnd.Navigator != null && rel.HasStorage(role))
             {
                 string tblName = relEnd.Type.TableName;
                 RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
