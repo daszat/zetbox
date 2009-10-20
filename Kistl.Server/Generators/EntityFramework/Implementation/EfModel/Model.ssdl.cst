@@ -126,22 +126,10 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" <%= (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : "" %>/>
 <%
-		ApplyEntityTypeColumnDefs(cls.Properties.OfType<ObjectReferenceProperty>()
-			.OrderBy(p => p.ObjectClass.ClassName)
-			.ThenBy(p => p.PropertyName)
-			.Where(p => !p.IsList() && p.HasStorage()) // TODO: David: please change this!
-			.Cast<Property>());
-		ApplyEntityTypeColumnDefs(cls.Properties.OfType<ValueTypeProperty>()
-			.OrderBy(p => p.ObjectClass.ClassName)
-			.ThenBy(p => p.PropertyName)
-			.Where(p => !p.IsList)
-			.Cast<Property>());
-		ApplyEntityTypeColumnDefs(cls.Properties.OfType<StructProperty>()
-			.OrderBy(p => p.ObjectClass.ClassName)
-			.ThenBy(p => p.PropertyName)
-			.Where(p => !p.IsList)
-			.Cast<Property>());
-%>
+		ApplyEntityTypeColumnDefs(RetrieveAndSortPropertiesOfType<ObjectReferenceProperty>(cls.Properties, p => !p.IsList() && HasStorage(p)));
+		ApplyEntityTypeColumnDefs(RetrieveAndSortPropertiesOfType<ValueTypeProperty>(cls.Properties, p => !p.IsList));
+		ApplyEntityTypeColumnDefs(RetrieveAndSortPropertiesOfType<StructProperty>(cls.Properties, p => !p.IsList));
+%> 
   </EntityType>
 <%	}
 %>
