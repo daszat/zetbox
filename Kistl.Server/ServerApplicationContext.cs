@@ -35,21 +35,21 @@ namespace Kistl.Server
             ServerApplicationContext.Current = this;
         }
 
-        internal void LoadDefaultActionsManager()
+        public void LoadDefaultActionsManager()
         {
             var cams = new CustomActionsManagerServer();
             cams.Init(FrozenContext.Single);
             this.SetCustomActionsManager(cams);
         }
 
-        internal void LoadActionsManager(IKistlContext ctx)
+        public void LoadActionsManager(IKistlContext ctx)
         {
             var cams = new CustomActionsManagerServer();
             cams.Init(ctx);
             this.SetCustomActionsManager(cams);
         }
 
-        internal void LoadNoopActionsManager()
+        public void LoadNoopActionsManager()
         {
             this.SetCustomActionsManager(new NoopActionsManager());
         }

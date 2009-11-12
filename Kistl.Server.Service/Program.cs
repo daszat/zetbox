@@ -1,18 +1,13 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.ServiceModel;
 using System.Text;
-using System.Threading;
-
 using Kistl.API.Configuration;
-using Kistl.API.Server;
-using Kistl.API;
 using Kistl.API.Utils;
+using Kistl.API;
+using Kistl.API.Server;
 
-namespace Kistl.Server
+namespace Kistl.Server.Service
 {
     /// <summary>
     /// Mainprogramm
@@ -145,7 +140,7 @@ namespace Kistl.Server
                         else
                         {
                             PrintHelp();
-                            return 1; 
+                            return 1;
                         }
                         actiondone = true;
                     }

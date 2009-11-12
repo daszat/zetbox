@@ -146,17 +146,17 @@ namespace Kistl.Server
             Generators.Generator.GenerateCode();
         }
 
-        internal void Export(string file, string[] namespaces)
+        public void Export(string file, string[] namespaces)
         {
             Packaging.Exporter.Export(file, namespaces);
         }
 
-        internal void Import(string file)
+        public void Import(string file)
         {
             Packaging.Importer.LoadFromXml(file);
         }
 
-        internal void Publish(string file, string[] namespaces)
+        public void Publish(string file, string[] namespaces)
         {
             Packaging.Exporter.Publish(file, namespaces);
         }
@@ -166,7 +166,7 @@ namespace Kistl.Server
             Packaging.Importer.Deploy(file);
         }
 
-        internal void CheckSchemaFromCurrentMetaData(bool withRepair)
+        public void CheckSchemaFromCurrentMetaData(bool withRepair)
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
@@ -196,7 +196,7 @@ namespace Kistl.Server
             }
         }
 
-        internal void CheckSchema(string file, bool withRepair)
+        public void CheckSchema(string file, bool withRepair)
         {
             using (IKistlContext ctx = new MemoryContext())
             {
@@ -261,7 +261,7 @@ namespace Kistl.Server
             }
         }
 
-        internal void RunFixes()
+        public void RunFixes()
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
