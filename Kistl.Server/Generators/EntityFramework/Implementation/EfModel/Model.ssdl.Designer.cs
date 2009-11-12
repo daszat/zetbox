@@ -155,9 +155,9 @@ this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("    </Key>\r\n");
 this.WriteObjects("    <Property Name=\"ID\" Type=\"int\" Nullable=\"false\" ",  (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : "" , "/>\r\n");
 #line 129 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
-ApplyEntityTypeColumnDefs(RetrieveAndSortPropertiesOfType<ObjectReferenceProperty>(cls.Properties, p => !p.IsList() && HasStorage(p)));
-		ApplyEntityTypeColumnDefs(RetrieveAndSortPropertiesOfType<ValueTypeProperty>(cls.Properties, p => !p.IsList));
-		ApplyEntityTypeColumnDefs(RetrieveAndSortPropertiesOfType<StructProperty>(cls.Properties, p => !p.IsList));
+ApplyEntityTypeColumnDefs(ModelSsdlHelper.RetrieveAndSortPropertiesOfType<ObjectReferenceProperty>(cls.Properties, p => !p.IsList() && HasStorage(p)));
+		ApplyEntityTypeColumnDefs(ModelSsdlHelper.RetrieveAndSortPropertiesOfType<ValueTypeProperty>(cls.Properties, p => !p.IsList));
+		ApplyEntityTypeColumnDefs(ModelSsdlHelper.RetrieveAndSortPropertiesOfType<StructProperty>(cls.Properties, p => !p.IsList));
 
 #line 132 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
 this.WriteObjects(" \r\n");

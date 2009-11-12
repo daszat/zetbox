@@ -81,20 +81,19 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void SetCustomActionsManagerNull()
+        public void SetCustomActionsManagerAcceptNull()
         {
             var testCtx = new CustomActionsTestApplicationContext(ConfigFile);
             testCtx.SetCustomActionsManager(null);
         }
 
         [Test]
-        public void SetCustomActionsManagerCallsInit()
+        public void SetCustomActionsManagerDoNotCallsInit()
         {
             using (var m = new Mockery())
             {
                 var mock = m.NewMock<ICustomActionsManager>();
-                Expect.Once.On(mock).Method("Init").WithNoArguments();
+                Expect.Never.On(mock).Method("Init").WithNoArguments();
                 var testCtx = new CustomActionsTestApplicationContext(ConfigFile);
                 testCtx.SetCustomActionsManager(mock);
                 Assert.AreSame(mock, testCtx.CustomActionsManager);
@@ -102,8 +101,7 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void SetCustomActionsManagerTwice()
+        public void SetCustomActionsManagerAcceptTwice()
         {
             using (var m = new Mockery())
             {

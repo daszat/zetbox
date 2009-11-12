@@ -68,7 +68,8 @@ namespace Kistl.API.AbstractConsumerTests
             try
             {
                 Trace.TraceInformation("Loading Schema");
-                initializer = AppDomain.CreateDomain("DatabaseResetup1", null, basePath, @"bin\Debug", true);
+                // initializer = AppDomain.CreateDomain("DatabaseResetup1", null, basePath, @"bin\Debug", true);
+                initializer = AppDomain.CreateDomain("DatabaseResetup1", null, AppDomain.CurrentDomain.SetupInformation);
                 var server = (Kistl.Server.Server)initializer.CreateInstanceAndUnwrap(typeof(Kistl.Server.Server).Assembly.FullName, typeof(Kistl.Server.Server).FullName);
                 server.Init(config);
                 server.UpdateSchema(basePath + @"\Database\Database.xml");
@@ -88,7 +89,8 @@ namespace Kistl.API.AbstractConsumerTests
             try
             {
                 Trace.TraceInformation("Loading Data");
-                domain = AppDomain.CreateDomain("DatabaseResetup2", null, basePath, @"bin\Debug", true);
+                //domain = AppDomain.CreateDomain("DatabaseResetup2", null, basePath, @"bin\Debug", true);
+                domain = AppDomain.CreateDomain("DatabaseResetup2", null, AppDomain.CurrentDomain.SetupInformation);
                 var server = (Kistl.Server.Server)domain.CreateInstanceAndUnwrap(typeof(Kistl.Server.Server).Assembly.FullName, typeof(Kistl.Server.Server).FullName);
                 server.Init(config);
                 server.Deploy(basePath + @"\Database\Database.xml");
@@ -110,7 +112,8 @@ namespace Kistl.API.AbstractConsumerTests
             try
             {
                 Trace.TraceInformation("Generating Source");
-                domain = AppDomain.CreateDomain("DatabaseResetup3", null, basePath, @"bin\Debug", true);
+                //domain = AppDomain.CreateDomain("DatabaseResetup3", null, basePath, @"bin\Debug", true);
+                domain = AppDomain.CreateDomain("DatabaseResetup3", null, AppDomain.CurrentDomain.SetupInformation);
                 var server = (Kistl.Server.Server)domain.CreateInstanceAndUnwrap(typeof(Kistl.Server.Server).Assembly.FullName, typeof(Kistl.Server.Server).FullName);
                 server.Init(config);
                 server.GenerateCode();

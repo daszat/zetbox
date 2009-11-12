@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <Address></Address>
   <ConfigName>Kistl.Client's Test Configuration</ConfigName>
   <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>

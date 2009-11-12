@@ -71,11 +71,8 @@ namespace Kistl.Server
             // re-use application context if available
             if (ServerApplicationContext.Current == null)
             {
-                using (var ctx = KistlContext.GetContext())
-                {
-                    appCtx = new ServerApplicationContext(config);
-                    appCtx.LoadDefaultActionsManager();
-                }
+                appCtx = new ServerApplicationContext(config);
+                appCtx.LoadDefaultActionsManager();
             }
             appCtx = ServerApplicationContext.Current;
         }

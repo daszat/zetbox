@@ -126,9 +126,9 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" <%= (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : "" %>/>
 <%
-		ApplyEntityTypeColumnDefs(RetrieveAndSortPropertiesOfType<ObjectReferenceProperty>(cls.Properties, p => !p.IsList() && HasStorage(p)));
-		ApplyEntityTypeColumnDefs(RetrieveAndSortPropertiesOfType<ValueTypeProperty>(cls.Properties, p => !p.IsList));
-		ApplyEntityTypeColumnDefs(RetrieveAndSortPropertiesOfType<StructProperty>(cls.Properties, p => !p.IsList));
+		ApplyEntityTypeColumnDefs(ModelSsdlHelper.RetrieveAndSortPropertiesOfType<ObjectReferenceProperty>(cls.Properties, p => !p.IsList() && HasStorage(p)));
+		ApplyEntityTypeColumnDefs(ModelSsdlHelper.RetrieveAndSortPropertiesOfType<ValueTypeProperty>(cls.Properties, p => !p.IsList));
+		ApplyEntityTypeColumnDefs(ModelSsdlHelper.RetrieveAndSortPropertiesOfType<StructProperty>(cls.Properties, p => !p.IsList));
 %> 
   </EntityType>
 <%	}
