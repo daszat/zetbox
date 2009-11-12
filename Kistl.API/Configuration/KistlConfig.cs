@@ -65,20 +65,6 @@ namespace Kistl.API.Configuration
         public string[] SourceFileLocation { get; set; }
 
         /// <summary>
-        /// Address of the WCF Service
-        /// </summary>
-        [XmlElement]
-        public string ServiceUrl;
-
-        /// <summary>
-        /// Address of the WCF Streams Service
-        /// </summary>
-        [XmlElement]
-        public string StreamsUrl;
-
-
-
-        /// <summary>
         /// Server Configuration
         /// </summary>
         [Serializable]

@@ -5,8 +5,6 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:MarshalByRefObject">
         <xs:sequence>
-          <xs:element minOccurs="0" maxOccurs="1" name="ServiceUrl" type="xs:string" />
-          <xs:element minOccurs="0" maxOccurs="1" name="StreamsUrl" type="xs:string" />
           <xs:element minOccurs="0" maxOccurs="1" name="ConfigName" type="xs:string" />
           <xs:element minOccurs="1" maxOccurs="1" name="Server" nillable="true" type="tns:ServerConfig" />
           <xs:element minOccurs="1" maxOccurs="1" name="Client" nillable="true" type="tns:ClientConfig" />
@@ -24,6 +22,7 @@
       <xs:element minOccurs="0" maxOccurs="1" name="KistlDataContextType" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="ServerObjectHandlerType" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="ServerObjectSetHandlerType" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ServerCollectionHandlerType" type="xs:string" />
     </xs:sequence>
     <xs:attribute name="StartServer" type="xs:boolean" use="required" />
   </xs:complexType>

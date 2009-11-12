@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <Address></Address>
   <ConfigName>Default Configuration</ConfigName>
   <Server StartServer="true">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
@@ -11,7 +10,7 @@
     <ServerObjectSetHandlerType>Kistl.DALProvider.EF.ServerObjectSetHandler, Kistl.DALProvider.EF</ServerObjectSetHandlerType>
     <ServerCollectionHandlerType>Kistl.DALProvider.EF.ServerCollectionHandler`4, Kistl.DALProvider.EF</ServerCollectionHandlerType>
   </Server>
-  <Client StartClient="false">
+  <Client StartClient="false" ThrowErrors="false">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>

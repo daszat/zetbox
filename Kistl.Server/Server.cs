@@ -29,11 +29,6 @@ namespace Kistl.Server
         private ServiceHost host = null;
 
         /// <summary>
-        /// WCF Streams Service Host
-        /// </summary>
-        private ServiceHost hostStreams = null;
-
-        /// <summary>
         /// WCF Service Thread
         /// </summary>
         private Thread serviceThread = null;
@@ -93,7 +88,6 @@ namespace Kistl.Server
             Logging.Log.Info("Stopping Server");
 
             host.Close();
-            hostStreams.Close();
 
             if (!serviceThread.Join(5000))
             {
@@ -106,19 +100,6 @@ namespace Kistl.Server
             Logging.Log.Info("Server stopped");
         }
 
-        private const string DefaultServiceUrl = "http://localhost:6666/KistlService";
-        private const string DefaultStreamsUrl = "http://localhost:6666/KistlServiceStreams";
-
-        public static string GetServiceUrl(KistlConfig cfg)
-        {
-            return String.IsNullOrEmpty(cfg.ServiceUrl) ? DefaultServiceUrl : cfg.ServiceUrl;
-        }
-
-        public static string GetStreamsUrl(KistlConfig cfg)
-        {
-            return String.IsNullOrEmpty(cfg.StreamsUrl) ? DefaultStreamsUrl : cfg.StreamsUrl;
-        }
-
         /// <summary>
         /// Führt den eigentlichen WCF Host start asynchron durch und 
         /// wartet bis er wieder gestopped wird.
@@ -129,20 +110,11 @@ namespace Kistl.Server
             {
                 using (Logging.Log.TraceMethodCall("Starting WCF Server"))
                 {
-                    host = new ServiceHost(typeof(KistlService),
-                        new Uri(GetServiceUrl(appCtx.Configuration)));
+                    host = new ServiceHost(typeof(KistlService));
                     host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
                     host.Faulted += new EventHandler(host_Faulted);
 
                     host.Open();
-
-                    hostStreams = new ServiceHost(typeof(KistlServiceStreams),
-                        new Uri(GetStreamsUrl(appCtx.Configuration)));
-                    hostStreams.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
-                    hostStreams.Faulted += new EventHandler(host_Faulted);
-
-                    hostStreams.Open();
-
                     serverStarted.Set();
                 }
 

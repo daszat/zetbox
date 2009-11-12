@@ -79,7 +79,6 @@
     <Compile Include="Tests\HelperTest.cs" />
     <Compile Include="Tests\ExpressionTreeVisitorTests.cs" />
     <Compile Include="Tests\KistlConfigTests.cs" />
-    <Compile Include="Tests\KistlServiceStreamsMessageTests.cs" />
     <Compile Include="Tests\ExpressionFilterTest.cs" />
     <Compile Include="Tests\ExtensionHelpersTest.cs" />
     <Compile Include="Tests\LinqExtensionsTests.cs" />

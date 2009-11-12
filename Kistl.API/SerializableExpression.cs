@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Kistl.API
 {
@@ -11,6 +12,16 @@ namespace Kistl.API
     /// Abstract Base Class for a serializable Expression
     /// </summary>
     [Serializable]
+    [DataContract]
+    [KnownType(typeof(SerializableBinaryExpression))]
+    [KnownType(typeof(SerializableConditionalExpression))]
+    [KnownType(typeof(SerializableConstantExpression))]
+    [KnownType(typeof(SerializableLambdaExpression))]
+    [KnownType(typeof(SerializableMemberExpression))]
+    [KnownType(typeof(SerializableMethodCallExpression))]
+    [KnownType(typeof(SerializableNewExpression))]
+    [KnownType(typeof(SerializableParameterExpression))]
+    [KnownType(typeof(SerializableUnaryExpression))]
     public abstract partial class SerializableExpression
     {
 
@@ -121,16 +132,22 @@ namespace Kistl.API
         /// <param name="ctx">Serialization Context</param>
         internal SerializableExpression(Expression e, SerializationContext ctx)
         {
-            _Type = new SerializableType(InterfaceType.Transform(e.Type));
+            SerializableType = new SerializableType(InterfaceType.Transform(e.Type));
             NodeType = e.NodeType;
         }
 
         /// <summary>
         /// Expression Node Type
         /// </summary>
-        public ExpressionType NodeType { get; private set; }
+        [DataMember]
+        public ExpressionType NodeType { get; set; }
 
-        private SerializableType _Type;
+        /// <summary>
+        /// SerializableType of this Expression
+        /// </summary>
+        [DataMember]
+        public SerializableType SerializableType { get; set; }
+
         /// <summary>
         /// CLR Type of this Expression
         /// </summary>
@@ -138,7 +155,7 @@ namespace Kistl.API
         {
             get
             {
-                return _Type.GetSystemType();
+                return SerializableType.GetSystemType();
             }
         }
 
@@ -160,25 +177,15 @@ namespace Kistl.API
         internal SerializableCompoundExpression(Expression e, SerializableExpression.SerializationContext ctx)
             : base(e, ctx)
         {
-            _children = new List<SerializableExpression>();
+            this.Children = new List<SerializableExpression>();
         }
 
 
-        private List<SerializableExpression> _children;
         /// <summary>
         /// Child Expressions
         /// </summary>
-        public List<SerializableExpression> Children
-        {
-            get
-            {
-                return _children;
-            }
-            set
-            {
-                _children = value;
-            }
-        }
+        [DataMember]
+        public List<SerializableExpression> Children { get; set; }
     }
     #endregion
 
@@ -244,6 +251,7 @@ namespace Kistl.API
         /// <summary>
         /// Value of this Constant
         /// </summary>
+        [DataMember]
         public object Value { get; set; }
     }
     #endregion
@@ -272,7 +280,8 @@ namespace Kistl.API
         /// <summary>
         /// Member Name
         /// </summary>
-        public string MemberName { get; private set; }
+        [DataMember]
+        public string MemberName { get; set; }
     }
     #endregion
 
@@ -289,7 +298,7 @@ namespace Kistl.API
             if (e.Object != null) ObjectExpression = SerializableExpression.FromExpression(e.Object, ctx);
 
             MethodName = e.Method.Name;
-            _Type = new SerializableType(new InterfaceType(e.Method.DeclaringType));
+            SerializableMethodType = new SerializableType(new InterfaceType(e.Method.DeclaringType));
             ParameterTypes = e.Method.GetParameters().Select(p => new SerializableType(new InterfaceType(p.ParameterType))).ToList();
             GenericArguments = e.Method.GetGenericArguments().Select(p => new SerializableType(new InterfaceType(p))).ToList();
 
@@ -302,19 +311,23 @@ namespace Kistl.API
         /// <summary>
         /// Method Name
         /// </summary>
-        public string MethodName { get; private set; }
+        [DataMember]
+        public string MethodName { get; set; }
 
         /// <summary>
         /// Parameter Types
         /// </summary>
-        public List<SerializableType> ParameterTypes { get; private set; }
+        [DataMember]
+        public List<SerializableType> ParameterTypes { get; set; }
 
         /// <summary>
         /// Generic Arguments
         /// </summary>
-        public List<SerializableType> GenericArguments { get; private set; }
+        [DataMember]
+        public List<SerializableType> GenericArguments { get; set; }
 
-        private SerializableType _Type;
+        [DataMember]
+        public SerializableType SerializableMethodType { get; set; }
         /// <summary>
         /// Type where this Method is implemented
         /// </summary>
@@ -322,7 +335,7 @@ namespace Kistl.API
         {
             get
             {
-                return _Type.GetSystemType();
+                return SerializableMethodType.GetSystemType();
             }
         }
 
@@ -393,7 +406,8 @@ namespace Kistl.API
         /// <summary>
         /// Object Expression
         /// </summary>
-        public SerializableExpression ObjectExpression { get; private set; }
+        [DataMember]
+        public SerializableExpression ObjectExpression { get; set; }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
@@ -440,20 +454,14 @@ namespace Kistl.API
         internal SerializableParameterExpression(ParameterExpression e, SerializationContext ctx)
             : base(e, ctx)
         {
-            name = e.Name;
+            this.Name = e.Name;
         }
 
-        private string name;
         /// <summary>
         /// Parameter Name
         /// </summary>
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-        }
+        [DataMember]
+        public string Name { get; set; }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
@@ -461,7 +469,7 @@ namespace Kistl.API
             {
                 if (!ctx.Parameter.ContainsKey(Name))
                 {
-                    ctx.Parameter[Name] = Expression.Parameter(Type, name);
+                    ctx.Parameter[Name] = Expression.Parameter(Type, Name);
                 }
                 return ctx.Parameter[Name];
             }
@@ -476,16 +484,19 @@ namespace Kistl.API
     [Serializable]
     public class SerializableNewExpression : SerializableCompoundExpression
     {
-        private ConstructorInfo constructor;
-        private List<MemberInfo> members;
+        [DataMember]
+        public ConstructorInfo Constructor { get; set; }
+
+        [DataMember]
+        public List<MemberInfo> Members;
 
         internal SerializableNewExpression(NewExpression source, SerializationContext ctx)
             : base(source, ctx)
         {
-            constructor = source.Constructor;
+            Constructor = source.Constructor;
             if (source.Members != null)
             {
-                members = source.Members.ToList();
+                Members = source.Members.ToList();
             }
 
             Children = source.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx)).ToList();
@@ -495,13 +506,13 @@ namespace Kistl.API
         {
             List<Expression> arguments = Children.Select(a => a.ToExpressionInternal(ctx)).ToList();
 
-            if (members != null)
+            if (Members != null)
             {
-                return Expression.New(constructor, arguments, members.ToArray());
+                return Expression.New(Constructor, arguments, Members.ToArray());
             }
             else
             {
-                return Expression.New(constructor, arguments);
+                return Expression.New(Constructor, arguments);
             }
         }
     }
@@ -513,23 +524,26 @@ namespace Kistl.API
     [Serializable]
     public class SerializableConditionalExpression : SerializableExpression
     {
-        SerializableExpression test;
-        SerializableExpression ifTrue;
-        SerializableExpression ifFalse;
+        [DataMember]
+        public SerializableExpression Test { get; set; }
+        [DataMember]
+        public SerializableExpression IfTrue { get; set; }
+        [DataMember]
+        public SerializableExpression IfFalse { get; set; }
 
         internal SerializableConditionalExpression(ConditionalExpression source, SerializationContext ctx)
             : base(source, ctx)
         {
-            test = SerializableExpression.FromExpression(source.Test, ctx);
-            ifTrue = SerializableExpression.FromExpression(source.IfTrue, ctx);
-            ifFalse = SerializableExpression.FromExpression(source.IfFalse, ctx);
+            Test = SerializableExpression.FromExpression(source.Test, ctx);
+            IfTrue = SerializableExpression.FromExpression(source.IfTrue, ctx);
+            IfFalse = SerializableExpression.FromExpression(source.IfFalse, ctx);
         }
 
         internal override Expression ToExpressionInternal(SerializableExpression.SerializationContext ctx)
         {
-            return Expression.Condition(test.ToExpressionInternal(ctx),
-                ifTrue.ToExpressionInternal(ctx),
-                ifFalse.ToExpressionInternal(ctx));
+            return Expression.Condition(Test.ToExpressionInternal(ctx),
+                IfTrue.ToExpressionInternal(ctx),
+                IfFalse.ToExpressionInternal(ctx));
         }
     }
 

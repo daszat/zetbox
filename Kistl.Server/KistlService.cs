@@ -1,92 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Linq;
-using System.Xml;
-using Kistl.API.Server;
-using Kistl.API;
-using System.Diagnostics;
-using System.ServiceModel.Dispatcher;
-using System.ServiceModel;
-using Kistl.API.Utils;
 
 namespace Kistl.Server
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.App.Base;
+    using Kistl.API.Utils;
+
     /// <summary>
-    /// Implementierung des KistlServices
-    /// Error are handled by the KistlServiceErrorHandler
+    /// Implements the main WCF interface.
     /// </summary>
-    [Obsolete]
     public class KistlService
         : IKistlService
     {
-        #region XmlSerializer
-        private interface IXmlSerializer
-        {
-            string XmlFromList(IEnumerable lst);
-            string XmlFromObject(IDataObject obj);
-            IDataObject ObjectFromXml(string xml);
-        }
-
-        private class XmlSerializer<XMLCOLLECTION, XMLOBJECT> : IXmlSerializer
-            where XMLCOLLECTION : IXmlObjectCollection, new()
-            where XMLOBJECT : IXmlObject, new()
-        {
-            public string XmlFromList(IEnumerable lst)
-            {
-                XMLCOLLECTION list = new XMLCOLLECTION();
-                list.Objects.AddRange(lst.OfType<object>());
-                return list.ToXmlString();
-            }
-
-            public string XmlFromObject(IDataObject obj)
-            {
-                XMLOBJECT result = new XMLOBJECT();
-                result.Object = obj;
-                return result.ToXmlString();
-            }
-
-            public IDataObject ObjectFromXml(string xml)
-            {
-                return xml.FromXmlString<XMLOBJECT>().Object as IDataObject;
-            }
-        }
-
-        private static IXmlSerializer _CurrentSerializer = null;
-        private static IXmlSerializer CurrentSerializer
-        {
-            get
-            {
-                if (_CurrentSerializer == null)
-                {
-                    Type t = typeof(XmlSerializer<,>);
-                    Type xmlCollection = Type.GetType("Kistl.API.XMLObjectCollection, Kistl.Objects.Server");
-                    Type xmlObj = Type.GetType("Kistl.API.XMLObject, Kistl.Objects.Server");
-
-                    Type result = t.MakeGenericType(xmlCollection, xmlObj);
-
-                    _CurrentSerializer = Activator.CreateInstance(result) as IXmlSerializer;
-                    if (_CurrentSerializer == null) throw new InvalidOperationException("Cannot create instance of KistlService.XmlSerializer");
-                }
-
-                return _CurrentSerializer;
-            }
-        }
-        #endregion
-
         /// <summary>
-        /// Implementierung der GetList Methode
-        /// Holt sich vom ObjektBroker das richtige Server BL Objekt &amp;
-        /// delegiert den Aufruf weiter
+        /// Gets a single object from the datastore.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="filter"></param>
-        /// <param name="maxListCount"></param>
-        /// <param name="orderBy"></param>
-        /// <returns></returns>
-        public string GetList(SerializableType type, int maxListCount, SerializableExpression filter, List<SerializableExpression> orderBy)
+        /// <param name="type">Type of Object</param>
+        /// <param name="ID">ID of Object</param>
+        /// <returns>a memory stream containing the serialized object, rewound to the beginning</returns>
+        /// <exception cref="ArgumentOutOfRangeException">when the specified object was not found</exception>
+        [Obsolete]
+        public MemoryStream GetObject(SerializableType type, int ID)
         {
             try
             {
@@ -94,11 +34,14 @@ namespace Kistl.Server
                 {
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType())
-                            .GetList(ctx, maxListCount,
-                            filter != null ? SerializableExpression.ToExpression(filter) : null,
-                            orderBy != null ? orderBy.Select(o => SerializableExpression.ToExpression(o)).ToList() : null);
-                        return CurrentSerializer.XmlFromList(lst);
+                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetInterfaceType().Type).GetObject(ctx, ID);
+                        if (obj == null)
+                            throw new ArgumentOutOfRangeException("ID", string.Format("Object with ID {0} not found", ID));
+
+                        MemoryStream result = new MemoryStream();
+                        BinaryWriter sw = new BinaryWriter(result);
+
+                        return SendObjects(new[] { obj }.AsEnumerable<IStreamable>());
                     }
                 }
             }
@@ -111,159 +54,205 @@ namespace Kistl.Server
         }
 
         /// <summary>
-        /// Implementierung der GetListOf Methode
-        /// Holt sich vom ObjektBroker das richtige Server BL Objekt &amp;
-        /// delegiert den Aufruf weiter
+        /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="ID"></param>
-        /// <param name="property"></param>
-        /// <returns></returns>
-        public string GetListOf(SerializableType type, int ID, string property)
+        /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
+        /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
+        public MemoryStream SetObjects(MemoryStream msg)
         {
             try
             {
-                if (type == null) throw new ArgumentNullException("type");
-                if (ID <= API.Helper.INVALIDID) throw new ArgumentOutOfRangeException("ID");
-                if (string.IsNullOrEmpty(property)) throw new ArgumentNullException("property");
-
-                using (Logging.Facade.TraceMethodCall("{0} [{1}].{2}", type, ID, property))
-                {
-                    using (IKistlContext ctx = KistlContext.GetContext())
-                    {
-                        IEnumerable lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType()).GetListOf(ctx, ID, property);
-                        return CurrentSerializer.XmlFromList(lst);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.HandleError(ex, true);
-                // Never called, Handle errors throws an Exception
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Implementierung der GetObject Methode
-        /// Holt sich vom ObjektBroker das richtige Server BL Objekt &amp;
-        /// delegiert den Aufruf weiter
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="ID"></param>
-        /// <returns></returns>
-        public string GetObject(SerializableType type, int ID)
-        {
-            try
-            {
-                if (type == null) throw new ArgumentNullException("type");
-                if (ID <= API.Helper.INVALIDID) throw new ArgumentOutOfRangeException("ID");
-
-                using (Logging.Facade.TraceMethodCall("{0} [{1}]", type, ID))
-                {
-                    using (IKistlContext ctx = KistlContext.GetContext())
-                    {
-                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType()).GetObject(ctx, ID);
-                        return CurrentSerializer.XmlFromObject(obj);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.HandleError(ex, true);
-                // Never called, Handle errors throws an Exception
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Implementierung der SetObject Methode
-        /// Holt sich vom ObjektBroker das richtige Server BL Objekt &amp;
-        /// delegiert den Aufruf weiter
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="xmlObj"></param>
-        /// <returns></returns>
-        public string SetObject(SerializableType type, string xmlObj)
-        {
-            try
-            {
-                if (type == null) throw new ArgumentNullException("type");
-                if (string.IsNullOrEmpty(xmlObj)) throw new ArgumentNullException("xmlObj");
-
-                using (Logging.Facade.TraceMethodCall("{0}", type))
-                {
-                    using (IKistlContext ctx = KistlContext.GetContext())
-                    {
-                        IDataObject obj = CurrentSerializer.ObjectFromXml(xmlObj);
-                        throw new NotImplementedException();
-                        //ServerObjectHandlerFactory.GetServerObjectHandler(type.GetSystemType()).SetObjects(obj);
-                        // return CurrentSerializer.XmlFromObject(obj);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.HandleError(ex, true);
-                // Never called, Handle errors throws an Exception
-                return null;
-            }
-        }
-
-        public string FetchRelation(SerializableType ceType, int role, Guid ID)
-        {
-            try
-            {
-                if (ceType == null) throw new ArgumentNullException("ceType");
-                if (role != 1 && role != 2) throw new ArgumentOutOfRangeException("role");
-
-                using (Logging.Facade.TraceMethodCall("{0}", ceType))
-                {
-                    using (IKistlContext ctx = KistlContext.GetContext())
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.HandleError(ex, true);
-                // Never called, Handle errors throws an Exception
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Implements the Generate Method
-        /// </summary>
-        public void Generate()
-        {
-            try
-            {
+                msg.Seek(0, SeekOrigin.Begin);
                 using (Logging.Facade.TraceMethodCall())
                 {
-                    Generators.Generator.GenerateCode();
-                    // Generators.Generator.GenerateDatabase();
+
+                    BinaryReader sr = new BinaryReader(msg);
+                    var objects = new List<IPersistenceObject>();
+                    bool @continue;
+                    BinarySerializer.FromStream(out @continue, sr);
+                    while (@continue)
+                    {
+                        // Deserialize
+                        long pos = msg.Position;
+                        SerializableType objType;
+                        BinarySerializer.FromStream(out objType, sr);
+
+                        msg.Seek(pos, SeekOrigin.Begin);
+
+                        var obj = (IPersistenceObject)objType.NewObject();
+                        obj.FromStream(sr);
+                        objects.Add(obj);
+                        BinarySerializer.FromStream(out @continue, sr);
+                    }
+
+                    using (IKistlContext ctx = KistlContext.GetContext())
+                    {
+                        // Set Operation
+                        var changedObjects = ServerObjectHandlerFactory
+                            .GetServerObjectSetHandler()
+                            .SetObjects(ctx, objects)
+                            .Cast<IStreamable>();
+                        return SendObjects(changedObjects);
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
             }
         }
 
         /// <summary>
-        /// Implementierung der HelloWorld Methode
+        /// Returns a list of objects from the datastore, matching the specified filters.
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public string HelloWorld(string name)
+        /// <param name="type">Type of Objects</param>
+        /// <param name="maxListCount">Max. ammount of objects</param>
+        /// <param name="filter">Serializable linq expression used a filter</param>
+        /// <param name="orderBy">List of derializable linq expressions used as orderby</param>
+        /// <returns>the found objects</returns>
+        public MemoryStream GetList(SerializableType type, int maxListCount, SerializableExpression filter, List<SerializableExpression> orderBy)
         {
             try
             {
-                using (Logging.Facade.TraceMethodCall(name))
+                using (Logging.Facade.TraceMethodCall(type.ToString()))
                 {
-                    return "Hello " + name;
+                    using (IKistlContext ctx = KistlContext.GetContext())
+                    {
+                        IEnumerable<IStreamable> lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetInterfaceType().Type)
+                            .GetList(ctx, maxListCount,
+                                filter != null ? SerializableExpression.ToExpression(filter) : null,
+                                orderBy != null ? orderBy.Select(o => SerializableExpression.ToExpression(o)).ToList() : null);
+
+                        return SendObjects(lst);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Sends a list of auxiliary objects to the specified BinaryWriter while avoiding to send objects twice.
+        /// </summary>
+        /// <param name="sw">the stream to write to</param>
+        /// <param name="auxObjects">a set of objects to send; will not be modified by this call</param>
+        /// <param name="sentObjects">a set objects already sent; receives all newly sent objects too</param>
+        private static void SendAuxiliaryObjects(BinaryWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects)
+        {
+            // clone auxObjects to avoid modification
+            auxObjects = new HashSet<IStreamable>(auxObjects);
+            auxObjects.ExceptWith(sentObjects);
+            // send all eagerly loaded objects
+            while (auxObjects.Count > 0)
+            {
+                HashSet<IStreamable> secondTierAuxObjects = new HashSet<IStreamable>();
+                foreach (var aux in auxObjects.Where(o => o != null))
+                {
+                    BinarySerializer.ToStream(true, sw);
+                    aux.ToStream(sw, secondTierAuxObjects);
+                    sentObjects.Add(aux);
+                }
+                // check whether new objects where eagerly loaded
+                secondTierAuxObjects.ExceptWith(sentObjects);
+                auxObjects = secondTierAuxObjects;
+            }
+            // finish list
+            BinarySerializer.ToStream(false, sw);
+        }
+
+        /// <summary>
+        /// Serializes a list of objects onto a <see cref="MemoryStream"/>.
+        /// </summary>
+        /// <param name="lst">the list of objects to send</param>
+        /// <returns>a memory stream containing all objects and all eagerly loaded auxiliary objects</returns>
+        private static MemoryStream SendObjects(IEnumerable<IStreamable> lst)
+        {
+            HashSet<IStreamable> sentObjects = new HashSet<IStreamable>();
+            HashSet<IStreamable> auxObjects = new HashSet<IStreamable>();
+
+            MemoryStream result = new MemoryStream();
+            BinaryWriter sw = new BinaryWriter(result);
+            foreach (IStreamable obj in lst)
+            {
+                BinarySerializer.ToStream(true, sw);
+                // don't check sentObjects here, because a list might contain items twice
+                obj.ToStream(sw, auxObjects);
+                sentObjects.Add(obj);
+            }
+            BinarySerializer.ToStream(false, sw);
+
+            SendAuxiliaryObjects(sw, auxObjects, sentObjects);
+
+            result.Seek(0, SeekOrigin.Begin);
+            return result;
+        }
+
+        /// <summary>
+        /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
+        /// </summary>
+        /// <param name="type">Type of Object</param>
+        /// <param name="ID">Object id</param>
+        /// <param name="property">Property</param>
+        /// <returns>the referenced objects</returns>
+        [Obsolete]
+        public MemoryStream GetListOf(SerializableType type, int ID, string property)
+        {
+            try
+            {
+                using (Logging.Facade.TraceMethodCall(type.ToString()))
+                {
+                    using (IKistlContext ctx = KistlContext.GetContext())
+                    {
+                        IEnumerable<IStreamable> lst = ServerObjectHandlerFactory
+                            .GetServerObjectHandler(type.GetInterfaceType().Type)
+                            .GetListOf(ctx, ID, property);
+                        return SendObjects(lst);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Fetches a list of CollectionEntry objects of the Relation 
+        /// <paramref name="relID"/> which are owned by the object with the 
+        /// ID <paramref name="ID"/> in the role <paramref name="role"/>.
+        /// </summary>
+        /// <param name="relId">the requested Relation</param>
+        /// <param name="serializableRole">the parent role (1 == A, 2 == B)</param>
+        /// <param name="parentObjID">the ID of the parent object</param>
+        /// <returns>the requested collection entries</returns>
+        public MemoryStream FetchRelation(Guid relId, int serializableRole, int parentObjID)
+        {
+            try
+            {
+                using (Logging.Facade.TraceMethodCall("relId = {0}, role = {1}, parentObjID = {2}", relId, serializableRole, parentObjID))
+                {
+                    using (IKistlContext ctx = KistlContext.GetContext())
+                    {
+                        var endRole = (RelationEndRole)serializableRole;
+                        Relation rel = ctx.FindPersistenceObject<Relation>(relId);
+
+                        var ifType = typeof(IRelationCollectionEntry<,>);
+                        var ceType = ifType.MakeGenericType(rel.A.Type.GetDataType(), rel.B.Type.GetDataType());
+
+                        var lst = ServerObjectHandlerFactory
+                            .GetServerCollectionHandler(rel.A.Type.GetDataType(), rel.B.Type.GetDataType(), endRole)
+                            .GetCollectionEntries(ctx, relId, endRole, parentObjID);
+
+                        return SendObjects(lst.Cast<IStreamable>());
+                    }
                 }
             }
             catch (Exception ex)

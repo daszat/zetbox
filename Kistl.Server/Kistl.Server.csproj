@@ -239,7 +239,6 @@
       <DependentUpon>NotifyingValueProperty.cst</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
-    <Compile Include="KistlServiceStreams.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KistlService.cs" />
