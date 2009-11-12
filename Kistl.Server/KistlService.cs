@@ -18,6 +18,11 @@ namespace Kistl.Server
     public class KistlService
         : IKistlService
     {
+        private static void DebugLogIdentity()
+        {
+            Logging.Facade.DebugFormat("Called IsAuthenticated = {0}, Identity = {1}", System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated, System.Threading.Thread.CurrentPrincipal.Identity.Name);
+        }
+
         /// <summary>
         /// Gets a single object from the datastore.
         /// </summary>
@@ -32,6 +37,7 @@ namespace Kistl.Server
             {
                 using (Logging.Facade.TraceMethodCall(type.ToString()))
                 {
+                    DebugLogIdentity();
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetInterfaceType().Type).GetObject(ctx, ID);
@@ -65,6 +71,7 @@ namespace Kistl.Server
                 msg.Seek(0, SeekOrigin.Begin);
                 using (Logging.Facade.TraceMethodCall())
                 {
+                    DebugLogIdentity();
 
                     BinaryReader sr = new BinaryReader(msg);
                     var objects = new List<IPersistenceObject>();
@@ -118,6 +125,8 @@ namespace Kistl.Server
             {
                 using (Logging.Facade.TraceMethodCall(type.ToString()))
                 {
+                    DebugLogIdentity();
+
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         IEnumerable<IStreamable> lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetInterfaceType().Type)
@@ -207,6 +216,8 @@ namespace Kistl.Server
             {
                 using (Logging.Facade.TraceMethodCall(type.ToString()))
                 {
+                    DebugLogIdentity();
+
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         IEnumerable<IStreamable> lst = ServerObjectHandlerFactory
@@ -239,6 +250,8 @@ namespace Kistl.Server
             {
                 using (Logging.Facade.TraceMethodCall("relId = {0}, role = {1}, parentObjID = {2}", relId, serializableRole, parentObjID))
                 {
+                    DebugLogIdentity();
+
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         var endRole = (RelationEndRole)serializableRole;
