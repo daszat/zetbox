@@ -323,6 +323,17 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Identity">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Identity)">
+	    <MappingFragment StoreEntitySet="Identity">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+<ScalarProperty Name="Password" ColumnName="Password" />
+<ScalarProperty Name="UserName" ColumnName="UserName" />
+<ScalarProperty Name="WCFAccount" ColumnName="WCFAccount" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Kunde">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde)">
 	    <MappingFragment StoreEntitySet="Kunde">

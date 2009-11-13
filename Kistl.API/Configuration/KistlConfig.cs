@@ -105,6 +105,9 @@ namespace Kistl.API.Configuration
 
             [XmlElement(IsNullable = false)]
             public string ServerCollectionHandlerType { get; set; }
+
+            [XmlElement(IsNullable = false)]
+            public string IdentityProviderType { get; set; }
         }
 
         /// <summary>

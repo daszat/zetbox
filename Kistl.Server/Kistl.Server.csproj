@@ -938,6 +938,7 @@
     <Compile Include="SchemaManagement\SchemaManager.CheckSchema.cs" />
     <Compile Include="SchemaManagement\SchemaManager.UpdateSchema.cs" />
     <Compile Include="Server.cs" />
+    <Compile Include="WCFIdentityProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

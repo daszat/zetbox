@@ -91,6 +91,7 @@
     <Compile Include="EnumerationSelectorKind.Server.Designer.cs" />
     <Compile Include="GuidProperty.Server.Designer.cs" />
     <Compile Include="Icon.Server.Designer.cs" />
+    <Compile Include="Identity.Server.Designer.cs" />
     <Compile Include="IntegerRangeConstraint.Server.Designer.cs" />
     <Compile Include="Interface.Server.Designer.cs" />
     <Compile Include="IntParameter.Server.Designer.cs" />

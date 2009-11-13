@@ -16,6 +16,7 @@
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.DefaultPropertyValue" />
     <EntitySet Name="EnumerationEntry" EntityType="Model.EnumerationEntry" />
     <EntitySet Name="Icon" EntityType="Model.Icon" />
+    <EntitySet Name="Identity" EntityType="Model.Identity" />
     <EntitySet Name="Kunde" EntityType="Model.Kunde" />
     <EntitySet Name="Method" EntityType="Model.Method" />
     <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
@@ -501,6 +502,16 @@
                         Relationship="Model.FK_Icon_has_Module"
                         FromRole="Icon"
                         ToRole="Module" />
+  </EntityType>
+  <EntityType Name="Identity">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="DisplayName" Type="String" Nullable="true" MaxLength="200" />
+    <Property Name="Password" Type="String" Nullable="true" MaxLength="100" />
+    <Property Name="UserName" Type="String" Nullable="true" MaxLength="100" />
+    <Property Name="WCFAccount" Type="String" Nullable="true" MaxLength="100" />
   </EntityType>
   <EntityType Name="Kunde">
     <Key>

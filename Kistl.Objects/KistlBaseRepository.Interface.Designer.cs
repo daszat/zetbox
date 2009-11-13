@@ -286,6 +286,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all Identity</summary>
+		/// Represents an Identity
+		public IQueryable<Identity> Identities
+		{ 
+			get
+			{
+				return Context.GetQuery<Identity>();
+			}
+		}
+		
 		/// <summary>List of all GuidProperty</summary>
 		/// Guid Property
 		public IQueryable<GuidProperty> GuidProperties

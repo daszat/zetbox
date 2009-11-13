@@ -327,5 +327,18 @@ namespace Kistl.API.Server
                 ObjectDeleted(this, new GenericEventArgs<IPersistenceObject>() { Data = obj });
             }
         }
+
+        private Kistl.App.Base.Identity _Identity = null;
+        protected Kistl.App.Base.Identity Identity
+        {
+            get
+            {
+                if (_Identity == null && System.Threading.Thread.CurrentPrincipal != null && System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated)
+                {
+                    _Identity = IdentityProvider.GetProvider().LoadIdentity(this.GetQuery<Kistl.App.Base.Identity>(), System.Threading.Thread.CurrentPrincipal.Identity);
+                }
+                return _Identity;
+            }
+        }
     }
 }
