@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-11-13T14:28:55.3624Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-11-13T14:49:22.5034Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
