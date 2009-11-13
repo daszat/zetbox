@@ -130,6 +130,14 @@
     </AssociationSet>
 
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
+    <AssociationSet Name="FK_Auftrag_ChangedBy_Identity" Association="Model.FK_Auftrag_ChangedBy_Identity" >
+      <End Role="Auftrag" EntitySet="Auftrag" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Auftrag_CreatedBy_Identity" Association="Model.FK_Auftrag_CreatedBy_Identity" >
+      <End Role="Auftrag" EntitySet="Auftrag" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Auftrag_has_Kunde" Association="Model.FK_Auftrag_has_Kunde" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Kunde" EntitySet="Kunde" />
@@ -371,6 +379,16 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Auftragsname" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="Auftragswert" Type="Double" Nullable="true" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_Auftrag_ChangedBy_Identity"
+                        FromRole="Auftrag"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_Auftrag_CreatedBy_Identity"
+                        FromRole="Auftrag"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="Kunde__Implementation__"
                         Relationship="Model.FK_Auftrag_has_Kunde"
                         FromRole="Auftrag"
@@ -1507,6 +1525,22 @@
   </Association>
 
   <!-- Associations for all object-object relations without CollectionEntrys -->
+  <Association Name="FK_Auftrag_ChangedBy_Identity" >
+    <End Role="Auftrag"
+         Type="Model.Auftrag" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Auftrag_CreatedBy_Identity" >
+    <End Role="Auftrag"
+         Type="Model.Auftrag" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Auftrag_has_Kunde" >
     <End Role="Auftrag"
          Type="Model.Auftrag" 

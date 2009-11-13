@@ -8,6 +8,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Auftrag_ChangedBy_Identity
+    A: ZeroOrMore Auftrag as Auftrag
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Auftrag_ChangedBy_Identity",
+    "Auftrag", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Auftrag__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Auftrag_CreatedBy_Identity
+    A: ZeroOrMore Auftrag as Auftrag
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Auftrag_CreatedBy_Identity",
+    "Auftrag", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Auftrag__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Auftrag_has_Kunde
     A: ZeroOrMore Auftrag as Auftrag
     B: ZeroOrOne Kunde as Kunde

@@ -296,18 +296,36 @@ namespace Kistl.App.Base
             foreach (var iface in objClass.ImplementsInterfaces)
             {
                 // TODO: implement structs and ObjectReferencePlaceholderProperties too
-                foreach (var prop in iface.Properties.OfType<ValueTypeProperty>())
+                foreach (var prop in iface.Properties)
                 {
                     if (!objClass.Properties.Select(p => p.PropertyName).Contains(prop.PropertyName))
                     {
                         // Add Property
-                        var newProp = (ValueTypeProperty)ctx.Create(prop.GetInterfaceType());
+                        Property newProp;
+                        if (prop is ValueTypeProperty)
+                        {
+                            newProp = (Property)ctx.Create(prop.GetInterfaceType());
+                        }
+                        else if (prop is ObjectReferencePlaceholderProperty)
+                        {
+                            newProp = ctx.Create<ObjectReferenceProperty>();
+                        }
+                        else
+                        {
+                            // TODO: Add structs
+                            continue;
+                        }
                         objClass.Properties.Add(newProp);
+
+                        // Default Values
                         newProp.PropertyName = prop.PropertyName;
                         newProp.CategoryTags = prop.CategoryTags;
                         newProp.Description = prop.Description;
-                        newProp.HasPersistentOrder = prop.HasPersistentOrder;
-                        newProp.IsList = prop.IsList;
+                        if (prop is ValueTypeProperty)
+                        {
+                            ((ValueTypeProperty)newProp).HasPersistentOrder = ((ValueTypeProperty)prop).HasPersistentOrder;
+                            ((ValueTypeProperty)newProp).IsList = ((ValueTypeProperty)prop).IsList;
+                        }
                         // put the new property into the module of the class
                         newProp.Module = objClass.Module;
                         newProp.ValueModelDescriptor = prop.ValueModelDescriptor;
@@ -326,6 +344,28 @@ namespace Kistl.App.Base
                             var dv = prop.DefaultValue;
                             var newDV = (DefaultPropertyValue)ctx.Create(dv.GetInterfaceType());
                             newProp.DefaultValue = newDV;
+                        }
+
+                        if (prop is ObjectReferencePlaceholderProperty)
+                        {
+                            var ph = (ObjectReferencePlaceholderProperty)prop;
+                            var objRef = (ObjectReferenceProperty)newProp;
+
+                            // Create Relation
+                            var rel = ctx.Create<Relation>();
+                            rel.Verb = "has"; // ph.PropertyName; TODO: Change when case #1169 is fixed
+                            rel.Module = objClass.Module;
+                            rel.Storage = ph.IsList ? StorageType.Separate : StorageType.MergeIntoA;
+
+                            rel.A.Navigator = objRef;
+                            rel.A.Type = objClass;
+                            rel.A.Multiplicity = Multiplicity.ZeroOrMore;
+                            rel.A.HasPersistentOrder = ph.HasPersistentOrder;
+                            rel.A.RoleName = ph.PropertyName; // objClass.ClassName; TODO: Change when case #1169 is fixed
+
+                            rel.B.Type = ph.ReferencedObjectClass;
+                            rel.B.Multiplicity = ph.IsList ?  Multiplicity.ZeroOrMore : Multiplicity.ZeroOrOne;
+                            rel.B.RoleName = ph.ReferencedObjectClass.ClassName;
                         }
                     }
                 }

@@ -34,6 +34,8 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Auftragsname" ColumnName="Auftragsname" />
 <ScalarProperty Name="Auftragswert" ColumnName="Auftragswert" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -979,6 +981,40 @@
 
 
     <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->
+    <!--
+    Relation: FK_Auftrag_ChangedBy_Identity
+    A: ZeroOrMore Auftrag as Auftrag
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Auftrag_ChangedBy_Identity"
+                           TypeName="Model.FK_Auftrag_ChangedBy_Identity"
+                           StoreEntitySet="Auftrag" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Auftrag">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Auftrag_CreatedBy_Identity
+    A: ZeroOrMore Auftrag as Auftrag
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Auftrag_CreatedBy_Identity"
+                           TypeName="Model.FK_Auftrag_CreatedBy_Identity"
+                           StoreEntitySet="Auftrag" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Auftrag">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
     <!--
     Relation: FK_Auftrag_has_Kunde
     A: ZeroOrMore Auftrag as Auftrag

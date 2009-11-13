@@ -160,6 +160,288 @@ namespace Kistl.App.Projekte
 		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_PostSetter;
         /// <summary>
+        /// Identity which changed this object
+        /// </summary>
+    /*
+    Relation: FK_Auftrag_ChangedBy_Identity
+    A: ZeroOrMore Auftrag as Auftrag
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Identity ChangedBy
+        {
+            get
+            {
+                return ChangedBy__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_ChangedBy;
+        private Guid? _fk_guid_ChangedBy = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_ChangedBy_Identity", "ChangedBy")]
+        public Kistl.App.Base.Identity__Implementation__ ChangedBy__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Identity__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Identity__Implementation__>(
+                        "Model.FK_Auftrag_ChangedBy_Identity",
+                        "ChangedBy");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnChangedBy_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Identity>(__value);
+					OnChangedBy_Getter(this, e);
+					__value = (Kistl.App.Base.Identity__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Identity__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Identity__Implementation__>(
+                        "Model.FK_Auftrag_ChangedBy_Identity",
+                        "ChangedBy");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Base.Identity __oldValue = (Kistl.App.Base.Identity)r.Value;
+                Kistl.App.Base.Identity __newValue = (Kistl.App.Base.Identity)value;
+
+                if(OnChangedBy_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+					OnChangedBy_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.Identity__Implementation__)__newValue;
+                if(OnChangedBy_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+					OnChangedBy_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnChangedBy_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+        /// <summary>
+        /// Date and time where this object was changed
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual DateTime? ChangedOn
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ChangedOn;
+                if (OnChangedOn_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime?>(__result);
+                    OnChangedOn_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ChangedOn != value)
+                {
+                    var __oldValue = _ChangedOn;
+                    var __newValue = value;
+                    if(OnChangedOn_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnChangedOn_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
+                    _ChangedOn = __newValue;
+                    NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
+                    if(OnChangedOn_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnChangedOn_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private DateTime? _ChangedOn;
+		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnChangedOn_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnChangedOn_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnChangedOn_PostSetter;
+        /// <summary>
+        /// Identity which created this object
+        /// </summary>
+    /*
+    Relation: FK_Auftrag_CreatedBy_Identity
+    A: ZeroOrMore Auftrag as Auftrag
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Identity CreatedBy
+        {
+            get
+            {
+                return CreatedBy__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_CreatedBy;
+        private Guid? _fk_guid_CreatedBy = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_CreatedBy_Identity", "CreatedBy")]
+        public Kistl.App.Base.Identity__Implementation__ CreatedBy__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Identity__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Identity__Implementation__>(
+                        "Model.FK_Auftrag_CreatedBy_Identity",
+                        "CreatedBy");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnCreatedBy_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Identity>(__value);
+					OnCreatedBy_Getter(this, e);
+					__value = (Kistl.App.Base.Identity__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Identity__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Identity__Implementation__>(
+                        "Model.FK_Auftrag_CreatedBy_Identity",
+                        "CreatedBy");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Base.Identity __oldValue = (Kistl.App.Base.Identity)r.Value;
+                Kistl.App.Base.Identity __newValue = (Kistl.App.Base.Identity)value;
+
+                if(OnCreatedBy_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+					OnCreatedBy_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.Identity__Implementation__)__newValue;
+                if(OnCreatedBy_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+					OnCreatedBy_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnCreatedBy_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+        /// <summary>
+        /// Date and time where this object was created
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual DateTime? CreatedOn
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _CreatedOn;
+                if (OnCreatedOn_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<DateTime?>(__result);
+                    OnCreatedOn_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_CreatedOn != value)
+                {
+                    var __oldValue = _CreatedOn;
+                    var __newValue = value;
+                    if(OnCreatedOn_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnCreatedOn_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
+                    _CreatedOn = __newValue;
+                    NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
+                    if(OnCreatedOn_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
+                        OnCreatedOn_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private DateTime? _CreatedOn;
+		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnCreatedOn_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnCreatedOn_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnCreatedOn_PostSetter;
+        /// <summary>
         /// Kunde des Projektes
         /// </summary>
     /*
@@ -464,6 +746,10 @@ namespace Kistl.App.Projekte
 
 			me.Auftragsname = other.Auftragsname;
 			me.Auftragswert = other.Auftragswert;
+			me.ChangedOn = other.ChangedOn;
+			me.CreatedOn = other.CreatedOn;
+			this._fk_ChangedBy = otherImpl._fk_ChangedBy;
+			this._fk_CreatedBy = otherImpl._fk_CreatedBy;
 			this._fk_Kunde = otherImpl._fk_Kunde;
 			this._fk_Mitarbeiter = otherImpl._fk_Mitarbeiter;
 			this._fk_Projekt = otherImpl._fk_Projekt;
@@ -541,6 +827,42 @@ namespace Kistl.App.Projekte
 					
 					return String.Join("; ", errors);
 				}
+				case "ChangedBy":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("d4f4c039-5e30-4ec4-a3b9-c0a7b1dbcf49")).Constraints
+						.Where(c => !c.IsValid(this, this.ChangedBy))
+						.Select(c => c.GetErrorText(this, this.ChangedBy))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "ChangedOn":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("555ea249-ed09-4b17-8a48-7f3bc3d682f8")).Constraints
+						.Where(c => !c.IsValid(this, this.ChangedOn))
+						.Select(c => c.GetErrorText(this, this.ChangedOn))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "CreatedBy":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("dc10da4b-f23f-4fad-8a44-a733f27bd21f")).Constraints
+						.Where(c => !c.IsValid(this, this.CreatedBy))
+						.Select(c => c.GetErrorText(this, this.CreatedBy))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "CreatedOn":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("95d413ad-0815-4fd0-89e4-455c6f6e0321")).Constraints
+						.Where(c => !c.IsValid(this, this.CreatedOn))
+						.Select(c => c.GetErrorText(this, this.CreatedOn))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "Kunde":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("57c977da-c113-4ce6-9484-3828f74c4193")).Constraints
@@ -580,6 +902,20 @@ namespace Kistl.App.Projekte
 			//if (this.ObjectState == DataObjectState.Deleted) return;
 			// fix direct object references
 
+			if (_fk_guid_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_ChangedBy.Value);
+			else if (_fk_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
+			else
+				ChangedBy__Implementation__ = null;
+
+			if (_fk_guid_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_CreatedBy.Value);
+			else if (_fk_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
+			else
+				CreatedBy__Implementation__ = null;
+
 			if (_fk_guid_Kunde.HasValue)
 				Kunde__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_guid_Kunde.Value);
 			else if (_fk_Kunde.HasValue)
@@ -610,6 +946,10 @@ namespace Kistl.App.Projekte
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._Auftragsname, binStream);
             BinarySerializer.ToStream(this._Auftragswert, binStream);
+            BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._ChangedOn, binStream);
+            BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._CreatedOn, binStream);
             BinarySerializer.ToStream(Kunde != null ? Kunde.ID : (int?)null, binStream);
             BinarySerializer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, binStream);
             BinarySerializer.ToStream(Projekt != null ? Projekt.ID : (int?)null, binStream);
@@ -621,6 +961,10 @@ namespace Kistl.App.Projekte
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Auftragsname, binStream);
             BinarySerializer.FromStream(out this._Auftragswert, binStream);
+            BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
+            BinarySerializer.FromStream(out this._ChangedOn, binStream);
+            BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
+            BinarySerializer.FromStream(out this._CreatedOn, binStream);
             BinarySerializer.FromStream(out this._fk_Kunde, binStream);
             BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
             BinarySerializer.FromStream(out this._fk_Projekt, binStream);
@@ -632,6 +976,10 @@ namespace Kistl.App.Projekte
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
             XmlStreamer.ToStream(Kunde != null ? Kunde.ID : (int?)null, xml, "Kunde", "Kistl.App.Projekte");
             XmlStreamer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, xml, "Mitarbeiter", "Kistl.App.Projekte");
             XmlStreamer.ToStream(Projekt != null ? Projekt.ID : (int?)null, xml, "Projekt", "Kistl.App.Projekte");
@@ -643,6 +991,10 @@ namespace Kistl.App.Projekte
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_Kunde, xml, "Kunde", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "Kistl.App.Projekte");

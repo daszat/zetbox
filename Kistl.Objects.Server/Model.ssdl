@@ -537,6 +537,14 @@
 
 
     <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->
+    <AssociationSet Name="FK_Auftrag_ChangedBy_Identity" Association="Model.Store.FK_Auftrag_ChangedBy_Identity" >
+      <End Role="Auftrag" EntitySet="Auftrag" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Auftrag_CreatedBy_Identity" Association="Model.Store.FK_Auftrag_CreatedBy_Identity" >
+      <End Role="Auftrag" EntitySet="Auftrag" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Auftrag_has_Kunde" Association="Model.Store.FK_Auftrag_has_Kunde" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Kunde" EntitySet="Kunde" />
@@ -797,11 +805,15 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Kunde" Type="int" />
     <Property Name="fk_Mitarbeiter" Type="int" />
     <Property Name="fk_Projekt" Type="int" />
     <Property Name="Auftragsname" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="Auftragswert" Type="float" Nullable="true" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
  
   </EntityType>
 	
@@ -1968,6 +1980,36 @@
 
 
   <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->
+
+  <Association Name="FK_Auftrag_ChangedBy_Identity">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Auftrag">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Auftrag_CreatedBy_Identity">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Auftrag">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
 
   <Association Name="FK_Auftrag_has_Kunde">
     <End Role="Kunde" Type="Model.Store.Kunde" Multiplicity="0..1" />

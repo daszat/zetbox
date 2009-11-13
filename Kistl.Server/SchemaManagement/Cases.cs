@@ -764,7 +764,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void CreateNotNullableColumn(RelationEnd otherEnd, string tblName, string colName)
         {
-            report.WriteLine("    Creating new 1:1 fk column '{0}.{1}'", tblName, colName);
+            report.WriteLine("    Creating new column '{0}.{1}'", tblName, colName);
 
             if (otherEnd.IsNullable() || !db.CheckTableContainsData(tblName))
             {
