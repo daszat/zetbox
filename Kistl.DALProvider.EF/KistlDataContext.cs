@@ -314,7 +314,7 @@ namespace Kistl.DALProvider.EF
                 .OfType<IDataObject>()
                 .ToList();
 
-            notifySaveList.ForEach(obj => obj.NotifyPreSave());
+            NotifyChanging(notifySaveList);
 
             int result = 0;
             try
@@ -327,7 +327,7 @@ namespace Kistl.DALProvider.EF
                 throw updex.InnerException;
             }
 
-            notifySaveList.ForEach(obj => obj.NotifyPostSave());
+            NotifyChanged(notifySaveList); 
 
             return result;
         }

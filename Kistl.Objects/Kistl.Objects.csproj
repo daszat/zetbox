@@ -130,6 +130,7 @@
     <Compile Include="WorkEffortAccount.Interface.Designer.cs" />
     <Compile Include="WorkspaceKind.Interface.Designer.cs" />
     <Compile Include="CollectionEntries.Interface.Designer.cs" />
+    <Compile Include="IChangedBy.Interface.Designer.cs" />
     <Compile Include="IExportable.Interface.Designer.cs" />
     <Compile Include="IInvocation.Interface.Designer.cs" />
     <Compile Include="IRenderer.Interface.Designer.cs" />

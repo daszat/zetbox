@@ -144,6 +144,34 @@ namespace Kistl.API.Server
         /// <returns>Number of affected Objects</returns>
         public abstract int SubmitChanges();
 
+        protected virtual void NotifyChanging(IEnumerable<IDataObject> changedOrAdded)
+        {
+            foreach (IDataObject obj in changedOrAdded)
+            {
+                if (obj is Kistl.App.Base.IChangedBy)
+                {
+                    var now = DateTime.Now;
+                    var cb = (Kistl.App.Base.IChangedBy)obj;
+                    if (obj.ObjectState == DataObjectState.New)
+                    {
+                        // If cb.CreatedOn where null if DataObjectState is Modified we do not update CreatedBy.
+                        // We dont have the information who was creating this object.
+                        cb.CreatedBy = this.Identity;
+                        cb.CreatedOn = now;
+                    }
+                    cb.ChangedBy = this.Identity;
+                    cb.ChangedOn = now;
+                }
+
+                obj.NotifyPreSave();
+            }
+        }
+
+        protected virtual void NotifyChanged(IEnumerable<IDataObject> changedOrAdded)
+        {
+            changedOrAdded.ForEach(obj => obj.NotifyPostSave());
+        }
+
         private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
             IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
