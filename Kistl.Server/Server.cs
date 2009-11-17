@@ -72,7 +72,16 @@ namespace Kistl.Server
             if (ServerApplicationContext.Current == null)
             {
                 appCtx = new ServerApplicationContext(config);
-                appCtx.LoadDefaultActionsManager();
+                if (FrozenContext.Single != null)
+                {
+                    appCtx.LoadDefaultActionsManager();
+                }
+                else
+                {
+                    // No Frozen Context -> start without a CustomAction Manager
+                    // TODO: Needs discussion
+                    appCtx.LoadNoopActionsManager();
+                }
             }
             appCtx = ServerApplicationContext.Current;
         }

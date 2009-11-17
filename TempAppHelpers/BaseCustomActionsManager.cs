@@ -232,6 +232,7 @@ namespace Kistl.App.Extensions
         public void InitializeCache(IKistlContext metaCtx, string extraSuffix, string assemblyName, Func<ObjectClass, bool> filter, StringBuilder warnings)
         {
             if (filter == null) { throw new ArgumentNullException("filter"); }
+            if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
             foreach (ObjectClass baseObjClass in metaCtx.GetQuery<ObjectClass>())
             {
