@@ -61,4 +61,5 @@ echo ***************************************************************************
 echo Aborting reset.
 
 :EOF
-pause
+rem ***** DO NOT PAUSE, CCNet! *****
+
