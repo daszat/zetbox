@@ -14428,7 +14428,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.Server.exe" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/Kistl.Server.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.server.exe" Analyze="True">
      <Namespaces>
