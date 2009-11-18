@@ -1,3 +1,3 @@
 @echo off
-!FullReset.cmd
+call !FullReset.cmd
 pause
