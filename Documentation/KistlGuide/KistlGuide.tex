@@ -5,6 +5,7 @@
 \usepackage{color}
 \usepackage{framed}
 \usepackage{listings}
+\usepackage{enumitem}
 
 \begin{document}
 
@@ -33,6 +34,16 @@
 
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+
+\newenvironment{descriptionBorder}
+{
+  \begin{framed}
+  \begin{description}[labelindent=3mm,leftmargin=*,topsep=0mm]
+}
+{
+  \end{description}
+  \end{framed}
+}
 
 \include{Introduction}
 % \include{Basics}

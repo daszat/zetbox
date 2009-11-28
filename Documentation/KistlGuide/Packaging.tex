@@ -18,14 +18,14 @@ A package can contain one or more modules. A package is a zip file that contains
 
 Schema contains all information needed by the SchemaManager \ref{} to create or update the database. Schema objects are:
 
-\begin{description}
+\begin{descriptionBorder}
 	\item[DataType] { All object classes and structs except enumerations and interfaces. \emph{To be implemented!} }
 	\item[Property] { All properties }
 	\item[Relation] { All relations }
 	\item[RelationEnd] { All relation ends }
 	\item[DefaultPropertyValue] { All known default property values (IntDefaultValue, \ldots) }
 	\item[Constraint] { All known constraints (NotNullable, \ldots) }
-\end{description}
+\end{descriptionBorder}
 
 \par
 Schema is a subset of meta data. See \ref{Packaging_Meta}. Currently there is no way to extract schema information without meta information.
@@ -36,7 +36,7 @@ Schema is a subset of meta data. See \ref{Packaging_Meta}. Currently there is no
 Meta data contains all information needed to describe a Module. That are \emph{ObjectClasses}, \emph{TypeRefs}, \emph{Module} informations, \emph{icons}, \emph{ViewDescriptors} and so on. 
 Meta data is a superset of schema data \ref{Packaging_Schema}. These objects are:
 
-\begin{description}
+\begin{descriptionBorder}
 	\item[Module] { The module object }
 	\item[ObjectClass\_implements\_Interface\_RelationEntry] { All object class interface relations }
 	\item[Method] { All Methods }
@@ -50,7 +50,7 @@ Meta data is a superset of schema data \ref{Packaging_Schema}. These objects are
 	\item[PresentableModelDescriptor] { All presentable model descriptors }
 	\item[ViewDescriptor] { All view descriptors }
 	\item[DAVID: ] { please add more GUI objects here. And please do it also in \emph{PackagingHelper.GetMetaObjects(\ldots)} }
-\end{description}
+\end{descriptionBorder}
 
 Additionally all unknown DefaultPropertyValues and Constraints belongs to meta data.
 Meta data can be extracted with the publish command \ref{Packaging_Publish}.
