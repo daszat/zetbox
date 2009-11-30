@@ -115,7 +115,6 @@ namespace Kistl.Server.Generators
 
         public void CallTemplate(string templateClass, params object[] parameters)
         {
-
             // Call template:
             this.CallTemplateToContext(templateClass, parameters);
         }
