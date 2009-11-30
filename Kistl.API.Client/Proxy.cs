@@ -71,17 +71,32 @@ namespace Kistl.API.Client
     internal class ProxyImplementation
         : IProxy
     {
+        private KistlServiceClient _service;
+
         /// <summary>
         /// WCF Proxy für das KistlService instanzieren.
         /// Konfiguration lt. app.config File
-        /// </summary>
-        private KistlServiceClient service = new KistlServiceClient();
+        /// </summary>        
+        private KistlServiceClient Service
+        {
+            get
+            {
+                lock(this)
+                {
+                    if (_service == null || _service.State != System.ServiceModel.CommunicationState.Opened)
+                    {
+                        _service = new KistlServiceClient();
+                    }
+                    return _service;
+                }
+            }
+        }
 
         public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
             using (Logging.Facade.TraceMethodCall(ifType.ToString()))
             {
-                MemoryStream s = service.GetList(
+                MemoryStream s = Service.GetList(
                     new SerializableType(ifType), 
                     maxListCount, 
                     filter != null ? SerializableExpression.FromExpression(filter) : null,
@@ -94,7 +109,7 @@ namespace Kistl.API.Client
         {
             using (Logging.Facade.TraceMethodCall("{0} [{1}].{2}", ifType, ID, property))
             {
-                MemoryStream s = service.GetListOf(new SerializableType(ifType), ID, property);
+                MemoryStream s = Service.GetListOf(new SerializableType(ifType), ID, property);
                 return ReceiveObjects(s, out auxObjects).Cast<IDataObject>();
             }
         }
@@ -113,7 +128,7 @@ namespace Kistl.API.Client
                 }
                 BinarySerializer.ToStream(false, sw);
 
-                MemoryStream s = service.SetObjects(ms);
+                MemoryStream s = Service.SetObjects(ms);
 
                 // merge auxiliary objects into primary set objects result
                 List<IStreamable> auxObjects;
@@ -166,7 +181,7 @@ namespace Kistl.API.Client
                     return new List<T>();
                 }
 
-                MemoryStream ms = service.FetchRelation(relationId, (int)role, parent.ID);
+                MemoryStream ms = Service.FetchRelation(relationId, (int)role, parent.ID);
 
                 return ReceiveObjects(ms, out auxObjects).Cast<T>();
             }
@@ -180,7 +195,7 @@ namespace Kistl.API.Client
             if (disposing)
             {
                 // dispose managed resources
-                service.Close();
+                Service.Close();
             }
             // free native resources
         }
