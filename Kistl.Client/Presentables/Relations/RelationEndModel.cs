@@ -30,6 +30,7 @@ namespace Kistl.Client.Presentables.Relations
                 return (PropertyModel<string>)this.PropertyModelsByName["RoleName"];
             }
         }
+
         public DataObjectModel Navigator { get; private set; }
 
         public ICommand CreateNavigatorCommand { get; private set; }

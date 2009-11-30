@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables.Relations
 {
@@ -46,6 +47,40 @@ namespace Kistl.Client.Presentables.Relations
             get
             {
                 return (PropertyModel<string>)this.PropertyModelsByName["Description"];
+            }
+        }
+
+        public string NavigatorADescription
+        {
+            get
+            {
+                if (!IsFullyDefined) return string.Empty;
+                return FormatNavigatorDescription(_relation.A.Navigator, _relation.B.Type);
+            }
+        }
+
+        public string NavigatorBDescription
+        {
+            get
+            {
+                if (!IsFullyDefined) return string.Empty;
+                return FormatNavigatorDescription(_relation.B.Navigator, _relation.A.Type);
+            }
+        }
+
+        private static string FormatNavigatorDescription(ObjectReferenceProperty prop, ObjectClass refType)
+        {
+            if (prop == null) return "Navigator is not defined";
+            if (prop.IsList()) return string.Format("Navigator {1}.{2} is a ICollection<{0}>", refType.ClassName, prop.ObjectClass.ClassName, prop.PropertyName);
+            if (prop.IsNullable()) return string.Format("Navigator {1}.{2} is a nullable reference to {0}", refType.ClassName, prop.ObjectClass.ClassName, prop.PropertyName);
+            return string.Format("Navigator {1}.{2} is a not nullable reference to {0}", refType.ClassName, prop.ObjectClass.ClassName, prop.PropertyName);
+        }
+
+        public bool IsFullyDefined
+        {
+            get
+            {
+                return _relation.A != null && _relation.B != null && _relation.A.Type != null && _relation.B.Type != null;
             }
         }
 

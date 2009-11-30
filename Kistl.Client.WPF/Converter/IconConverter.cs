@@ -15,6 +15,7 @@ namespace Kistl.Client.WPF.Converter
     {
         private string GetIconPath(string name)
         {
+            if (ApplicationContext.Current == null) return "";
             string result = ApplicationContext.Current.Configuration.Client.DocumentStore
                 + @"\GUI.Icons\"
                 + name;

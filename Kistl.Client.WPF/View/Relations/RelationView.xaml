@@ -27,7 +27,7 @@
             <DockPanel>
 
                 <GroupBox DockPanel.Dock="Top"
-                          Header="Summary"
+                          Header="Relation"
                           Margin="5">
                     <DockPanel>
                         <view:LabeledView DockPanel.Dock="Top"
@@ -48,7 +48,7 @@
                       Margin="5,0,5,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -87,6 +87,70 @@
                                           Grid.ColumnSpan="3"
                                           DataContext="{Binding B}" />
                 </Grid>
+
+                <GroupBox DockPanel.Dock="Top"
+                          Header="Summary"
+                          Margin="5">
+                    <Grid DockPanel.Dock="Top"
+                      Margin="5,0,5,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- A -->
+                        <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Text="{Binding A.RoleName.Value}"></TextBlock>
+                        <TextBlock Grid.Row="0"
+                             Grid.Column="1"
+                             Text="{Binding PropertyModelsByName[Verb].Value}" />
+                        <ContentPresenter Grid.Row="0"
+                                  Grid.Column="2"
+                                  view:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay}"
+                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                                  Content="{Binding B.PropertyModelsByName[Multiplicity]}" />
+                        <TextBlock Grid.Row="0"
+                               Grid.Column="3"
+                               Text="{Binding B.RoleName.Value}"></TextBlock>
+
+                        <!-- B -->
+                        <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               Text="{Binding B.RoleName.Value}"></TextBlock>
+                        <TextBlock Grid.Row="1"
+                             Grid.Column="1"
+                             Text="{Binding PropertyModelsByName[Verb].Value}" />
+                        <ContentPresenter Grid.Row="1"
+                                  Grid.Column="2"
+                                  view:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay}"
+                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                                  Content="{Binding A.PropertyModelsByName[Multiplicity]}" />
+                        <TextBlock Grid.Row="1"
+                               Grid.Column="3"
+                               Text="{Binding A.RoleName.Value}"></TextBlock>
+                        
+                        <!-- Navigator A -->
+                        <TextBlock Grid.Row="2"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="4"
+                               Text="{Binding NavigatorADescription}"></TextBlock>
+                    
+                        <!-- Navigator B -->
+                        <TextBlock Grid.Row="3"
+                               Grid.Column="0"
+                               Grid.ColumnSpan="4"
+                               Text="{Binding NavigatorBDescription}"></TextBlock>
+                    </Grid>
+                </GroupBox>
             </DockPanel>
         </ScrollViewer>
     </DockPanel>
