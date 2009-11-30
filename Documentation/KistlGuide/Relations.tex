@@ -11,7 +11,8 @@ An example of a \emph{Relation} is the relation between \emph{Project} and \emph
 \end{figure}
 
 
-\subsubsection{Modeling a Relation}
+% ----------------------------------------------------------------- Modeling relation -----------------------------------------------------------------
+\subsubsection{Modeling a relation}
 A Relation can be defined by creating an object of type \emph{Relation} and two \emph{RelationEnd} objects. This can be done by
 \begin{itemize}
 	\item creating an Relation Object. 
@@ -31,6 +32,7 @@ Relations are edited in the \emph{Relation Editor}. The \emph{Relation Editor} i
 	\end{center}
 \end{figure}
 
+% ----------------------------------------------------------------- Attributes of a relation -----------------------------------------------------------------
 \subsubsection{Attributes of a relation}
 
 \begin{figure}[ht]
@@ -93,7 +95,7 @@ A \emph{Project} can have zero or more \emph{Tasks}. A \emph{Task} may have one 
 
 The \emph{Relation} object would be:
 \begin{descriptionBorder}
-	\item[Storage] 		{ = MergeIntoA }
+	\item[Storage] 		{ = MergeIntoB }
 	\item[Verb] 		{ = has }
 \end{descriptionBorder}
 
@@ -222,3 +224,80 @@ The \emph{RelationEnd} B object would be:
 		\label{editing_relation_relationend_relation}
 	\end{center}
 \end{figure}
+
+% ----------------------------------------------------------------- Multiplicity summary -----------------------------------------------------------------
+\subsubsection{Multiplicity and StorageType summary}
+
+\begin{center}
+	\begin{tabular}{|p{5cm}|p{5cm}|}
+	\hline
+		\multicolumn{2}{|c|}{\textbf{1:n}} \\ 
+		\multicolumn{2}{|c|}{ Storage = MergeIntoB } \\
+	\hline
+		\multicolumn{1}{|c|}{\textbf{A}} & \multicolumn{1}{|c|}{\textbf{B}} \\
+	\hline
+		A.Nav is a collection & B.Nav is nullable \\
+		Multiplicity = ZeroOrOne & Multiplicity = ZeroOrMore \\
+	\hline
+		A.Nav is a collection & B.Nav is not nullable\\
+		Multiplicity = One  & Multiplicity = ZeroOrMore \\
+	\hline
+	\end{tabular}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{|p{5cm}|p{5cm}|}
+	\hline
+		\multicolumn{2}{|c|}{\textbf{n:1}} \\ 
+		\multicolumn{2}{|c|}{ Storage = MergeIntoA } \\
+	\hline
+		\multicolumn{1}{|c|}{\textbf{A}} & \multicolumn{1}{|c|}{\textbf{B}} \\
+	\hline
+		A.Nav is nullable & B.Nav is a collection \\
+		Multiplicity = ZeroOrMore & Multiplicity = ZeroOrOne\\
+	\hline
+		A.Nav is not nullable & B.Nav is a collection \\
+		Multiplicity = ZeroOrMore & Multiplicity = One \\
+	\hline
+	\end{tabular}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{|p{5cm}|p{5cm}|}
+	\hline
+		\multicolumn{2}{|c|}{\textbf{n:m}} \\ 
+		\multicolumn{2}{|c|}{ Storage = Seperate } \\
+	\hline
+		\multicolumn{1}{|c|}{\textbf{A}} & \multicolumn{1}{|c|}{\textbf{B}} \\
+	\hline
+		A.Nav is a collection & B.Nav is a collection \\
+		Multiplicity = ZeroOrMore & Multiplicity = ZeroOrMore \\
+	\hline
+	\end{tabular}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{|p{5cm}|p{5cm}|}
+	\hline
+		\multicolumn{2}{|c|}{\textbf{1:1}} \\ 
+		\multicolumn{2}{|c|}{ Storage = MergeIntoA } \\
+		\multicolumn{2}{|c|}{ Storage = MergeIntoB } \\
+		\multicolumn{2}{|c|}{ Storage = Replicate (Not supported yet) } \\
+	\hline
+		\multicolumn{1}{|c|}{\textbf{A}} & \multicolumn{1}{|c|}{\textbf{B}} \\
+	\hline
+		A.Nav is nullable & B.Nav is nullable \\
+		Multiplicity = ZeroOrOne & Multiplicity = ZeroOrOne \\
+	\hline
+		A.Nav is nullable & B.Nav is not nullable \\
+		Multiplicity = One & Multiplicity = ZeroOrOne \\
+	\hline
+		A.Nav is not nullable & B.Nav is nullable \\
+		Multiplicity = ZeroOrOne & Multiplicity = One \\
+	\hline
+		A.Nav is not nullable & B.Nav is not nullable \\
+		Multiplicity = One & Multiplicity = One \\
+	\hline
+	\end{tabular}
+\end{center}
+
