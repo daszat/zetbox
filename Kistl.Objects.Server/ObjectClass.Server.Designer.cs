@@ -462,6 +462,27 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PostSetter;
         /// <summary>
+        /// Creates, if needed, all default  Methods
+        /// </summary>
+		[EventBasedMethod("OnCreateDefaultMethods_ObjectClass")]
+		public virtual void CreateDefaultMethods() 
+		{
+            // base.CreateDefaultMethods();
+            if (OnCreateDefaultMethods_ObjectClass != null)
+            {
+				OnCreateDefaultMethods_ObjectClass(this);
+			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on ObjectClass.CreateDefaultMethods");
+			}
+        }
+		public delegate void CreateDefaultMethods_Handler<T>(T obj);
+		public event CreateDefaultMethods_Handler<ObjectClass> OnCreateDefaultMethods_ObjectClass;
+
+
+
+        /// <summary>
         /// Creates a new Method for this class
         /// </summary>
 		[EventBasedMethod("OnCreateMethod_ObjectClass")]

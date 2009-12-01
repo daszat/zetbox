@@ -81,6 +81,26 @@ namespace Kistl.App.GUI
 
 
         /// <summary>
+        /// Creates, if needed, all default  Methods
+        /// </summary>
+		[EventBasedMethod("OnCreateDefaultMethods_ControlKindClass")]
+		public override void CreateDefaultMethods() 
+		{
+            // base.CreateDefaultMethods();
+            if (OnCreateDefaultMethods_ControlKindClass != null)
+            {
+				OnCreateDefaultMethods_ControlKindClass(this);
+			}
+			else
+			{
+			    base.CreateDefaultMethods();
+			}
+        }
+		public event CreateDefaultMethods_Handler<ControlKindClass> OnCreateDefaultMethods_ControlKindClass;
+
+
+
+        /// <summary>
         /// Creates a new Method for this class
         /// </summary>
 		[EventBasedMethod("OnCreateMethod_ControlKindClass")]

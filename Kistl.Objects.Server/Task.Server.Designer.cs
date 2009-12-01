@@ -266,7 +266,7 @@ namespace Kistl.App.Projekte
         /// </summary>
     /*
     Relation: FK_Projekt_has_Task
-    A: ZeroOrOne Projekt as Projekt
+    A: One Projekt as Projekt
     B: ZeroOrMore Task as Tasks
     Preferred Storage: MergeIntoB
     */

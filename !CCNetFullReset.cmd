@@ -24,10 +24,6 @@ IF ERRORLEVEL 1 GOTO FAIL
 bin\debug\Kistl.Server.Service.exe -generate
 IF ERRORLEVEL 1 GOTO FAIL
 
-rem regenerate Database.xml to prove roundtrippability
-bin\debug\Kistl.Server.Service.exe -publish ..\Kistl.Server\Database\Database.xml *
-IF ERRORLEVEL 1 GOTO FAIL
-
 cd ..
 
 rem refresh local code

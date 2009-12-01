@@ -59,6 +59,10 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Creates, if needed, all default  Methods
+        /// </summary>
+		 void CreateDefaultMethods() ;
+        /// <summary>
         /// Creates a new Method for this class
         /// </summary>
 		 Kistl.App.Base.Method CreateMethod() ;

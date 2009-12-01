@@ -531,7 +531,7 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_Projekt_has_Task
-    A: ZeroOrOne Projekt as Projekt
+    A: One Projekt as Projekt
     B: ZeroOrMore Task as Tasks
     Preferred Storage: MergeIntoB
 	*/
