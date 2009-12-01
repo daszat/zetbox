@@ -188,6 +188,10 @@ namespace Kistl.App.Base
                 obj.Assembly);
         }
 
+        public void OnToString_Identity(Kistl.App.Base.Identity obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.DisplayName;
+        }
         #endregion
     }
 }

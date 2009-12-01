@@ -241,6 +241,7 @@
     <Compile Include="CustomControls\LoadingIndicator.xaml.cs">
       <DependentUpon>LoadingIndicator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\WorkaroundToolBar.cs" />
     <Compile Include="Dialogs\ChooseObjectDialog.xaml.cs">
       <DependentUpon>ChooseObjectDialog.xaml</DependentUpon>
     </Compile>

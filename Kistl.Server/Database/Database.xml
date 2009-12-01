@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-11-13T14:49:22.5034Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-12-01T10:47:20.4562Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -3046,6 +3046,12 @@
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</KistlBase:ObjectClass>
   </KistlBase:Method>
+  <KistlBase:Method ExportGuid="4f46e77f-d494-45a8-8bfe-e82a058dba57">
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <KistlBase:MethodName>ToString</KistlBase:MethodName>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:ObjectClass>31d8890a-67fc-4a78-9d35-9ff0b9e09b4c</KistlBase:ObjectClass>
+  </KistlBase:Method>
   <KistlBase:Method ExportGuid="5305b463-31bd-4ee4-af9a-c93d2cd7af31">
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <KistlBase:MethodName>GetCodeTemplate</KistlBase:MethodName>
@@ -3145,6 +3151,13 @@
     <KistlBase:MethodName>ToString</KistlBase:MethodName>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:ObjectClass>
+  </KistlBase:Method>
+  <KistlBase:Method ExportGuid="0dffc795-8ffe-423b-887e-f268602cb4a5">
+    <KistlBase:Description>Creates, if needed, all default  Methods</KistlBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <KistlBase:MethodName>CreateDefaultMethods</KistlBase:MethodName>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="babe68fe-d991-4fb8-8c75-fded8973484c">
     <KistlBase:Description>Creates a new Method for this class</KistlBase:Description>
@@ -3927,6 +3940,13 @@
     <KistlBase:Method>a9c1a6ff-ddb2-41a5-9ad0-460b8adea977</KistlBase:Method>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
   </KistlBase:MethodInvocation>
+  <KistlBase:MethodInvocation ExportGuid="05d1a1fe-37df-45ce-9842-684c90ff7471">
+    <KistlBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</KistlBase:Implementor>
+    <KistlBase:InvokeOnObjectClass>31d8890a-67fc-4a78-9d35-9ff0b9e09b4c</KistlBase:InvokeOnObjectClass>
+    <KistlBase:MemberName>OnToString_Identity</KistlBase:MemberName>
+    <KistlBase:Method>4f46e77f-d494-45a8-8bfe-e82a058dba57</KistlBase:Method>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+  </KistlBase:MethodInvocation>
   <KistlBase:MethodInvocation ExportGuid="dfd3862f-6a15-4e15-af17-03b2139d9799">
     <KistlBase:Implementor>e954023a-9460-4a90-8ca3-12c109bb2e41</KistlBase:Implementor>
     <KistlBase:InvokeOnObjectClass>31b03f62-b0d6-49ab-81e9-f912077d4e49</KistlBase:InvokeOnObjectClass>
@@ -4114,6 +4134,13 @@
     <KistlBase:InvokeOnObjectClass>8604ef0c-f933-4f66-b7df-21d27c9003b2</KistlBase:InvokeOnObjectClass>
     <KistlBase:MemberName>OnToString_NotNullableConstraint</KistlBase:MemberName>
     <KistlBase:Method>8be7722e-a164-4428-9940-546cb9006754</KistlBase:Method>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+  </KistlBase:MethodInvocation>
+  <KistlBase:MethodInvocation ExportGuid="e0651ae8-b1b5-4da1-baac-9431de3422dd">
+    <KistlBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</KistlBase:Implementor>
+    <KistlBase:InvokeOnObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:InvokeOnObjectClass>
+    <KistlBase:MemberName>OnCreateDefaultMethods_ObjectClass</KistlBase:MemberName>
+    <KistlBase:Method>0dffc795-8ffe-423b-887e-f268602cb4a5</KistlBase:Method>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
   </KistlBase:MethodInvocation>
   <KistlBase:MethodInvocation ExportGuid="2ae170ba-9012-4e97-88cb-029dd0172b2e">
@@ -5221,6 +5248,8 @@
     <GUI:PresentableModelRef>03338e3b-2317-4e88-9858-a6a165dd57f9</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="75aef030-0c25-4306-b6d2-ca8c7cd672dd">
+    <GUI:DefaultGridCellKind>194e5f9f-5586-41f8-bcfb-beb6b4016aa0</GUI:DefaultGridCellKind>
+    <GUI:DefaultKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultKind>
     <GUI:Description>A method returning a string</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>eda5fdba-d8e3-4a43-b69b-84d3617f105b</GUI:PresentableModelRef>
@@ -5418,6 +5447,12 @@
   <GUI:ViewDescriptor ExportGuid="c479b0e0-e199-4905-853a-a2361d38884b">
     <GUI:ControlRef>18c4efb5-c283-44f2-81bf-c0b70e97b79f</GUI:ControlRef>
     <GUI:Kind>6603c126-83ec-4861-b7d1-d692ec96cc5e</GUI:Kind>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="94917bbc-d32a-4c53-a4f6-904567576732">
+    <GUI:ControlRef>3e9153f9-1a71-4c1e-9022-948aa7db6e11</GUI:ControlRef>
+    <GUI:Kind>e39e18d2-c7a7-4ed6-9542-4d76177c7521</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -8937,6 +8972,8 @@
   <GUI:DataObjectSelectionTaskKind ExportGuid="18c0afa2-61bc-4ecb-b1e9-47b33b294573" />
   <GUI:DataObjectSummaryKind ExportGuid="c2b9dfc5-0744-430c-9373-bcd98f783180" />
   <GUI:EnumerationSelectorKind ExportGuid="9d414225-460a-4c54-8e36-e368804e387f" />
+  <GUI:LabelKind ExportGuid="194e5f9f-5586-41f8-bcfb-beb6b4016aa0" />
+  <GUI:LabelKind ExportGuid="a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70" />
   <GUI:LauncherKind ExportGuid="90d5ff7f-0c82-4278-bb8d-49c240f6bc2c" />
   <GUI:ObjectListKind ExportGuid="9731f312-8ce4-4c2d-8d95-1923256dc9b8" />
   <GUI:ObjectRefGridCellKind ExportGuid="d55c9558-4ced-47b0-8eda-81553340fb5b" />
@@ -9457,7 +9494,7 @@
   <KistlBase:RelationEnd ExportGuid="e8b582ca-641f-4457-963c-299d0df7cb96">
     <KistlBase:AParent>434dab4f-0dcd-4724-a62b-730540ce143a</KistlBase:AParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>f6ff71b0-ccaf-4c7d-8e2b-1210a9df4b0f</KistlBase:Navigator>
     <KistlBase:RoleName>Projekt</KistlBase:RoleName>
     <KistlBase:Type>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:Type>
@@ -9782,6 +9819,9 @@
     <KistlBase:MaxLength>100</KistlBase:MaxLength>
     <KistlBase:MinLength>0</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="fe995b91-9055-4e30-8668-cdc4fa2d4a82">
+    <KistlBase:ConstrainedProperty>5545ba8a-3e89-4b22-bd66-c12f3622ace0</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:Module ExportGuid="81e8ce31-65eb-46fe-ba86-de7452692d5b">
     <KistlBase:Description />
     <KistlBase:ModuleName>TestModule</KistlBase:ModuleName>

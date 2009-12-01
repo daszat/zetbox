@@ -17,10 +17,9 @@
     </UserControl.DataContext> -->
 
     <DockPanel>
-        <ToolBar DockPanel.Dock="Top"
+        <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                  ItemsSource="{Binding Actions}"
                  ItemTemplateSelector="{StaticResource defaultTemplateSelector}" />
-
         <DockPanel DockPanel.Dock="Top">
             <Image DockPanel.Dock="Left"
                    Source="{Binding Converter={StaticResource IconConverter}}"

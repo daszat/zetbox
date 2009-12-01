@@ -16,49 +16,61 @@ namespace Kistl.App.Base
     {
         #region ObjectClass
 
-        #region EnsureDefaultMethods
+        #region CreateDefaultMethods
         private void CheckDefaultMethod(ObjectClass obj, string methodName)
         {
-            //var m = obj.Methods.SingleOrDefault(i => i.MethodName == methodName);
-            //if (m == null && obj.BaseObjectClass == null)
-            //{
-            //    // Only for BaseClasses
-            //    m = obj.Context.Create<Method>();
-            //    m.MethodName = methodName;
-            //    m.Module = obj.Module;
-            //    obj.Methods.Add(m);
-            //}
-            //else if (m != null && obj.BaseObjectClass != null)
-            //{
-            //    // Delete if BaseClass is declared
-            //    // TODO: Move MethodInvocations to base class' method
-            //    // obj.Context.Delete(m);
-            //}
+            var m = obj.Methods.SingleOrDefault(i => i.MethodName == methodName);
+            if (m == null && obj.BaseObjectClass == null)
+            {
+                // Only for BaseClasses
+                m = obj.Context.Create<Method>();
+                m.MethodName = methodName;
+                m.Module = obj.Module;
+                obj.Methods.Add(m);
+            }
+            // Do not delete if BaseClass is declared
+            // deleting should be a user action
+            // TODO: Add Object Level Constraint
         }
 
-        private void EnsureDefaultMethods(ObjectClass obj)
+        public void OnCreateDefaultMethods_ObjectClass(Kistl.App.Base.ObjectClass obj)
         {
             CheckDefaultMethod(obj, "ToString");
             CheckDefaultMethod(obj, "NotifyPreSave");
             CheckDefaultMethod(obj, "NotifyPostSave");
             CheckDefaultMethod(obj, "NotifyCreated");
             CheckDefaultMethod(obj, "NotifyDeleting");
+
+            var toStr = obj.Methods.SingleOrDefault(i => i.MethodName == "ToString");
+            if (toStr != null && toStr.Parameter.Count == 0)
+            {
+                var p = obj.Context.Create<StringParameter>();
+                p.IsReturnParameter = true;
+                p.ParameterName = "retVal";
+                toStr.Parameter.Add(p);
+            }
         }
         #endregion
 
         public void OnPreSave_ObjectClass(Kistl.App.Base.ObjectClass obj)
         {
-            EnsureDefaultMethods(obj);
+            // Do not call CreateDefaultMethods
+            // during deploy these Methods are also invoked
+            // invoking CreateDefaultMethods leads to unexpected results
         }
 
         public void OnCreated_ObjectClass(Kistl.App.Base.ObjectClass obj)
         {
-            EnsureDefaultMethods(obj);
+            // Do not call CreateDefaultMethods
+            // during deploy these Methods are also invoked
+            // invoking CreateDefaultMethods leads to unexpected results
         }
 
         public void OnBaseObjectClass_PostSetter_ObjectClass(Kistl.App.Base.ObjectClass obj, PropertyPostSetterEventArgs<Kistl.App.Base.ObjectClass> e)
         {
-            EnsureDefaultMethods(obj);
+            // Do not call CreateDefaultMethods
+            // during deploy these Methods are also invoked
+            // invoking CreateDefaultMethods leads to unexpected results
         }
 
         public void OnCreateRelation_ObjectClass(ObjectClass obj, MethodReturnEventArgs<Relation> e)
