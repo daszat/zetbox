@@ -165,14 +165,14 @@ namespace Kistl.App.Test
         // enumeration property
    		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.EnumerationPropertyTemplate
         // implement the user-visible interface
-        public Kistl.App.Test.TestEnum? TestEnum
+        public Kistl.App.Test.TestEnum TestEnum
         {
             get
             {
 				var __value = _TestEnum;
 				if(OnTestEnum_Getter != null)
 				{
-					var e = new PropertyGetterEventArgs<Kistl.App.Test.TestEnum?>(__value);
+					var e = new PropertyGetterEventArgs<Kistl.App.Test.TestEnum>(__value);
 					OnTestEnum_Getter(this, e);
 					__value = e.Result;
 				}
@@ -187,7 +187,7 @@ namespace Kistl.App.Test
 					var __newValue = value;
                     if(OnTestEnum_PreSetter != null)
                     {
-						var e = new PropertyPreSetterEventArgs<Kistl.App.Test.TestEnum?>(__oldValue, __newValue);
+						var e = new PropertyPreSetterEventArgs<Kistl.App.Test.TestEnum>(__oldValue, __newValue);
 						OnTestEnum_PreSetter(this, e);
 						__newValue = e.Result;
                     }
@@ -197,7 +197,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanged("TestEnum", "TestEnum__Implementation__", __oldValue, __newValue);
                     if(OnTestEnum_PostSetter != null)
                     {
-						var e = new PropertyPostSetterEventArgs<Kistl.App.Test.TestEnum?>(__oldValue, __newValue);
+						var e = new PropertyPostSetterEventArgs<Kistl.App.Test.TestEnum>(__oldValue, __newValue);
 						OnTestEnum_PostSetter(this, e);
                     }
                     
@@ -206,7 +206,7 @@ namespace Kistl.App.Test
         }
         
         /// <summary>backing store for TestEnum</summary>
-        private Kistl.App.Test.TestEnum? _TestEnum;
+        private Kistl.App.Test.TestEnum _TestEnum;
         
         /// <summary>EF sees only this property, for TestEnum</summary>
         [XmlIgnore()]
@@ -219,13 +219,13 @@ namespace Kistl.App.Test
             }
             set
             {
-                this.TestEnum = (Kistl.App.Test.TestEnum?)value;
+                this.TestEnum = (Kistl.App.Test.TestEnum)value;
             }
         }
         
-		public event PropertyGetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum?> OnTestEnum_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum?> OnTestEnum_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum?> OnTestEnum_PostSetter;
+		public event PropertyGetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum> OnTestEnum_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum> OnTestEnum_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum> OnTestEnum_PostSetter;
         /// <summary>
         /// 
         /// </summary>

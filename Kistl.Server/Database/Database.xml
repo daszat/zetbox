@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-12-01T17:12:59.1032Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-12-01T18:07:54.4182Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -10446,6 +10446,10 @@
   </KistlBase:StringRangeConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="8e1b5a72-6331-43a2-a67c-15efea409bbf">
     <KistlBase:ConstrainedProperty>657b719f-dcda-4308-9587-4e2c10e7b60f</KistlBase:ConstrainedProperty>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="6cda932f-b132-4a77-a05c-4fbbcfd6d006">
+    <KistlBase:ConstrainedProperty>1a5484e4-4be0-4641-9c25-1aa30d1c0e7a</KistlBase:ConstrainedProperty>
+    <KistlBase:Reason>TestEnum cannot be null</KistlBase:Reason>
   </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="3beb0ce0-0d11-4632-9fc0-213b77c5a2fd">
     <KistlBase:ConstrainedProperty>bd501a1f-a0a3-4ddf-b6c2-8fdc9ffdfabd</KistlBase:ConstrainedProperty>

@@ -30,7 +30,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
-		Kistl.App.Test.TestEnum? TestEnum {
+		Kistl.App.Test.TestEnum TestEnum {
 			get;
 			set;
 		}

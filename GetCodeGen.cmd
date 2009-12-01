@@ -14,4 +14,4 @@ del /Q .\Kistl.Objects.Server\*.*
 
 xcopy /y C:\temp\KistlCodeGen\Kistl.Objects.Server\*.* .\Kistl.Objects.Server
 
-Pause
+
