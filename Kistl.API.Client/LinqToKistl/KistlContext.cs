@@ -151,7 +151,8 @@ namespace Kistl.API.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
         {
-            throw new NotSupportedException("A Query against IPersistenceObjects is not supported on the client");
+            CheckDisposed();
+            return new KistlContextQuery<T>(this, new InterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -162,7 +163,8 @@ namespace Kistl.API.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
-            throw new NotSupportedException("A Query against IPersistenceObjects is not supported on the client");
+            CheckDisposed();
+            return new KistlContextQuery<IPersistenceObject>(this, ifType);
         }
 
         /// <summary>
@@ -493,15 +495,14 @@ namespace Kistl.API.Client
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public IDataObject Find(InterfaceType ifType, int ID)
         {
-            // TODO: check "type" for being a IDataObject
             CheckDisposed();
 
             // TODO: should be able to pass "type" unmodified, like this
             // See Case 552
-            //return GetQuery(type).Single(o => o.ID == ID);
+            // return GetQuery(type).Single(o => o.ID == ID);
 
-            return (IDataObject)this.GetType().FindGenericMethod("Find", 
-                new Type[] { ifType.Type }, 
+            return (IDataObject)this.GetType().FindGenericMethod("Find",
+                new Type[] { ifType.Type },
                 new Type[] { typeof(int) })
                 .Invoke(this, new object[] { ID });
         }
@@ -534,7 +535,6 @@ namespace Kistl.API.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
         {
-            // TODO: check "type" for being a IDataObject
             CheckDisposed();
 
             // TODO: should be able to pass "type" unmodified, like this
@@ -557,7 +557,12 @@ namespace Kistl.API.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public T FindPersistenceObject<T>(int ID) where T : class, IPersistenceObject
         {
-            throw new NotSupportedException();
+            CheckDisposed();
+            IPersistenceObject cacheHit = _objects.Lookup(new InterfaceType(typeof(T)), ID);
+            if (cacheHit != null)
+                return (T)cacheHit;
+            else
+                return GetPersistenceObjectQuery<T>().Single(o => o.ID == ID);
         }
 
         /// <summary>
@@ -570,7 +575,14 @@ namespace Kistl.API.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
         {
-            throw new NotSupportedException();
+            // TODO: should be able to pass "type" unmodified, like this
+            // See Case 552
+            //return GetQuery(type).Single(o => o.ID == ID);
+
+            return (IPersistenceObject)this.GetType().FindGenericMethod("FindPersistenceObject",
+                new Type[] { ifType.Type },
+                new Type[] { typeof(Guid) })
+                .Invoke(this, new object[] { exportGuid });
         }
 
         /// <summary>
@@ -583,7 +595,7 @@ namespace Kistl.API.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
         {
-            throw new NotSupportedException();
+            return GetPersistenceObjectQuery<T>().Single(o => ((Kistl.App.Base.IExportable)o).ExportGuid == exportGuid);
         }
 
         /// <summary>
@@ -595,7 +607,14 @@ namespace Kistl.API.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
         {
-            throw new NotSupportedException();
+            // TODO: should be able to pass "type" unmodified, like this
+            // See Case 552
+            //return GetQuery(type).Single(o => o.ID == ID);
+
+            return (IEnumerable<IPersistenceObject>)this.GetType().FindGenericMethod("FindPersistenceObjects",
+                new Type[] { ifType.Type },
+                new Type[] { typeof(IEnumerable<Guid>) })
+                .Invoke(this, new object[] { exportGuids });
         }
         /// <summary>
         /// Find Persistence Objects of the given type by ExportGuids
@@ -606,10 +625,8 @@ namespace Kistl.API.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
         {
-            throw new NotSupportedException();
+            return GetPersistenceObjectQuery<T>().Where(o => exportGuids.Contains(((Kistl.App.Base.IExportable)o).ExportGuid));
         }
-
-
 
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 

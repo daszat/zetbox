@@ -56,21 +56,21 @@ namespace Kistl.App.Base
         {
             // Do not call CreateDefaultMethods
             // during deploy these Methods are also invoked
-            // invoking CreateDefaultMethods leads to unexpected results
+            // invoking CreateDefaultMethods leads to multiple instances and unexpected results
         }
 
         public void OnCreated_ObjectClass(Kistl.App.Base.ObjectClass obj)
         {
             // Do not call CreateDefaultMethods
             // during deploy these Methods are also invoked
-            // invoking CreateDefaultMethods leads to unexpected results
+            // invoking CreateDefaultMethods leads to multiple instances and unexpected results
         }
 
         public void OnBaseObjectClass_PostSetter_ObjectClass(Kistl.App.Base.ObjectClass obj, PropertyPostSetterEventArgs<Kistl.App.Base.ObjectClass> e)
         {
             // Do not call CreateDefaultMethods
             // during deploy these Methods are also invoked
-            // invoking CreateDefaultMethods leads to unexpected results
+            // invoking CreateDefaultMethods leads to multiple instances and unexpected results
         }
 
         public void OnCreateRelation_ObjectClass(ObjectClass obj, MethodReturnEventArgs<Relation> e)

@@ -28,7 +28,7 @@
                                   Margin="5,0,5,0"
                                   DataContext="{Binding PropertyModelsByName[Navigator]}" />
 
-                <ToolBar DockPanel.Dock="Top"
+                <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                          ItemsSource="{Binding Actions}"
                          ItemTemplateSelector="{StaticResource defaultTemplateSelector}" />
 

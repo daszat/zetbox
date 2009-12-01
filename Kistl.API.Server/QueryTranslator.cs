@@ -196,8 +196,13 @@ namespace Kistl.API.Server
 
         protected override Expression VisitUnary(UnaryExpression u)
         {
+            // ignore Converts for IExportable objects
+            if (u.NodeType == ExpressionType.Convert && (typeof(Kistl.App.Base.IExportable).IsAssignableFrom(u.Type) || typeof(IExportableInternal).IsAssignableFrom(u.Type)))
+            {
+                return base.Visit(u.Operand);
+            }
             // ignore Converts for persistence objects
-            if (u.NodeType == ExpressionType.Convert && typeof(IPersistenceObject).IsAssignableFrom(u.Type))
+            else if (u.NodeType == ExpressionType.Convert && typeof(IPersistenceObject).IsAssignableFrom(u.Type))
             {
                 return base.Visit(u.Operand);
             }
