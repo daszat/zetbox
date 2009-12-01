@@ -394,6 +394,10 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Muhblah)">
 	    <MappingFragment StoreEntitySet="Muhblah">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="TestBool" ColumnName="TestBool" />
+<ScalarProperty Name="TestDateTime" ColumnName="TestDateTime" />
+<ScalarProperty Name="TestEnum__Implementation__" ColumnName="TestEnum" />
+<ScalarProperty Name="TestString" ColumnName="TestString" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

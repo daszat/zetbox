@@ -1216,6 +1216,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TestBool" Type="bit" Nullable="true" />
+    <Property Name="TestDateTime" Type="datetime" Nullable="true" />
+    <Property Name="TestEnum" Type="int" Nullable="true" />
+    <Property Name="TestString" Type="nvarchar" MaxLength="4000" Nullable="true" />
  
   </EntityType>
 	

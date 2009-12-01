@@ -633,6 +633,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="TestBool" Type="Boolean" Nullable="true" />
+    <Property Name="TestDateTime" Type="DateTime" Nullable="true" />
+    <Property Name="TestEnum__Implementation__" Type="Int32" Nullable="true" />
+    <Property Name="TestString" Type="String" Nullable="true" MaxLength="4000" />
   </EntityType>
   <EntityType Name="PresenceRecord">
     <Key>

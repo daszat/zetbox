@@ -13,5 +13,33 @@ namespace Kistl.App.Test
     public interface Muhblah : IDataObject 
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
+		bool? TestBool {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		DateTime? TestDateTime {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Test.TestEnum? TestEnum {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		string TestString {
+			get;
+			set;
+		}
     }
 }
